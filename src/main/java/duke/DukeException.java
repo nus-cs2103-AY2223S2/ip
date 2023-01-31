@@ -1,3 +1,4 @@
+package duke;
 /**
  * Encapsulates specific errors that happen in the Duke chatbot.
  */

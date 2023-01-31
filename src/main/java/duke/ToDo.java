@@ -1,3 +1,4 @@
+package duke;
 class ToDo extends Task {
 
     public ToDo(String keyword, String message, Boolean completed) {

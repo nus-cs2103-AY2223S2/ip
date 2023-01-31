@@ -1,3 +1,4 @@
+package duke;
 class Event extends Task {
     public Event(String keyword, String message, Boolean status) {
         super(keyword, message, status);
