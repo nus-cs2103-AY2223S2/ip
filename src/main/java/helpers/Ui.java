@@ -1,3 +1,5 @@
+package helpers;
+
 import duke.exceptions.OutOfIndexException;
 import duke.exceptions.VagueInputException;
 import duke.exceptions.WrongBooleanException;

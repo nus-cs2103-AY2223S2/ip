@@ -1,3 +1,6 @@
+package task;
+import helpers.Ui;
+
 public class Task {
     protected boolean mark;
     protected String content;

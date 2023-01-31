@@ -1,12 +1,18 @@
+package helpers;
+
 import duke.exceptions.OutOfIndexException;
 import duke.exceptions.VagueInputException;
 import duke.exceptions.WrongBooleanException;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.Todo;
 
 import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class Parser {
-    static void handleInputs(Scanner sc, TaskList tasks, PrintWriter pw) {
+    public static void handleInputs(Scanner sc, TaskList tasks, PrintWriter pw) {
         String input = sc.nextLine();
         while (!input.equals("bye")) {
             String[] splitArr = input.split(" ");
@@ -36,7 +42,6 @@ public class Parser {
                                 "This is undone. You can't mark it undone again. :0 \n" +
                                 "try again.");
                     }
-                    System.out.println(Integer.parseInt(splitArr[1]));
                     tasks.mark(splitArr[0], (Integer.parseInt(splitArr[1]) - 1));
                 } else if (splitArr[0].equals("delete")) {
                     if ((Integer.parseInt(splitArr[1])) > tasks.getSize()) {

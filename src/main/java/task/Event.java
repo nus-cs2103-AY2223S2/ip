@@ -1,6 +1,7 @@
+package task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
 
 public class Event extends Task {
     private String eventSpan;
