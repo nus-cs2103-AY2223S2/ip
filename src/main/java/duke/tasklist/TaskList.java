@@ -9,6 +9,10 @@ import duke.task.Task;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a task list manager that aids in storing and manipulating the
+ * list of Tasks.
+ */
 public class TaskList {
 
     private static final String TASKS_FILE_PATH = "data/duke_tasks.txt";
