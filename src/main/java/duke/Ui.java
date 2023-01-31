@@ -1,11 +1,13 @@
 package duke;
 
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import duke.tasks.Task;
 import javafx.animation.PauseTransition;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 
 /**
@@ -29,7 +31,7 @@ public class Ui {
      */
 
     public static String welcomeMessage() {
-        String message ="\tHello! I'm Duke\n"
+        String message = "\tHello! I'm Duke\n"
                 + "\tWhat can I do for you?\n";
         return message;
     }
@@ -61,7 +63,7 @@ public class Ui {
      * @param task Task to be marked Undone.
      */
     public String showUnmark(Task task) {
-        String message ="\tOK, I've marked this task as not done yet:\n\t  " + task.toString();
+        String message = "\tOK, I've marked this task as not done yet:\n\t  " + task.toString();
         return message;
     }
 
@@ -85,7 +87,7 @@ public class Ui {
      * @param size Size of the tasklist.
      */
     public String showDelete(Task task, int size) {
-        String message ="\tNoted. I've removed this task:\n\t  "
+        String message = "\tNoted. I've removed this task:\n\t  "
                 + task.toString() + "\n\tNow you have "
                 + size + " task(s) in the list.";
         return message;

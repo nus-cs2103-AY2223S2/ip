@@ -1,6 +1,5 @@
 /**
  * Project Name: Duke
- * Duke is a Chatbot that helps to keep track of stuff to do.
  *
  * @author Darius Ng Teng Wee
  */
@@ -14,15 +13,15 @@ import duke.command.Command;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-
+/**
+ * Duke is a personal chatbot that tracks tasks to do.
+ */
 public class Duke {
     private Storage storage;
     private Ui ui;
-    private static boolean isExit;
-
     private TaskList tasks;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/User2.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/testDuke.png"));
 
     /**
      * A constructor for Duke.
