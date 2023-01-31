@@ -1,7 +1,6 @@
 package cbot;
 
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.time.format.DateTimeParseException;
 
 import cbot.io.BadInputException;
@@ -47,10 +46,21 @@ public class Cbot {
         return this.doBye;
     }
 
+    /**
+     * Returns true if the previous Command threw an exception.
+     *
+     * @return true if an exception was just thrown.
+     */
     public boolean isBad() {
         return this.prevBad;
     }
 
+    /**
+     * Returns Cbot's greeting.
+     *
+     * @return Cbot's greeting.
+     * @see UI#sayHi()
+     */
     public static String sayHi() {
         return UI.sayHi();
     }

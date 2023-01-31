@@ -54,10 +54,24 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Constructs a DialogBox representing the user.
+     *
+     * @param text The user's input.
+     * @param img The user's Image.
+     * @return A new DialogBox, for the user.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img, "/view/UserBox.fxml");
     }
 
+    /**
+     * Constructs a DialogBox representing Cbot.
+     *
+     * @param text Cbot's output.
+     * @param img Cbot's image.
+     * @return A new DialogBox, for Cbot.
+     */
     public static DialogBox getCbotDialog(String text, Image img) {
         var db = new DialogBox(text, img, "/view/CbotBox.fxml");
         db.flip();

@@ -10,10 +10,10 @@ import java.util.function.Predicate;
  * @see Task
  */
 public class TaskList {
-    private final ArrayList<Task> tdl;
-
     //private static final int GAPS = 3;
     private static final String GAP = "   ";
+
+    private final ArrayList<Task> tdl;
 
     /**
      * Constructs an empty list of tasks.

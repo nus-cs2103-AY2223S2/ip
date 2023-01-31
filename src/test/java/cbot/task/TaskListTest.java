@@ -95,7 +95,7 @@ public class TaskListTest {
         TaskList tl = new TaskList();
         tl.addTask(new Task("task"));
         assertEquals(tl.mark(1),
-                "Woohoo! You've completed:\n             [T][X] task");
+                "Woohoo! You've completed:\n   [T][X] task");
     }
     
     @Test
@@ -103,7 +103,7 @@ public class TaskListTest {
         TaskList tl = new TaskList();
         tl.addTask(new Task("done", true));
         assertEquals(tl.mark(1),
-                "You've already done:\n             [T][X] done");
+                "You've already done:\n   [T][X] done");
     }
     
     @Test
@@ -111,7 +111,7 @@ public class TaskListTest {
         TaskList tl = new TaskList();
         tl.addTask(new Task("done", true));
         assertEquals(tl.unmark(1),
-                "Aw, okay :( I've unmarked:\n             [T][ ] done");
+                "Aw, okay :( I've unmarked:\n   [T][ ] done");
     }
     
     @Test
@@ -119,7 +119,7 @@ public class TaskListTest {
         TaskList tl = new TaskList();
         tl.addTask(new Task("task"));
         assertEquals(tl.unmark(1),
-                "Hm, you haven't yet done:\n             [T][ ] task");
+                "Hm, you haven't yet done:\n   [T][ ] task");
     }
     
     @Test
@@ -127,7 +127,7 @@ public class TaskListTest {
         TaskList tl = new TaskList();
         tl.addTask(t);
         assertEquals(tl.delTask(1),
-                "Got it! Deleted:\n             [T][ ] task");
+                "Got it! Deleted:\n   [T][ ] task");
     }
     
     @Test

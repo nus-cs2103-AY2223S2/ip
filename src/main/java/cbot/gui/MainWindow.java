@@ -1,7 +1,7 @@
 package cbot.gui;
 
 import cbot.Cbot;
-
+import cbot.io.UI;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -15,6 +15,10 @@ import javafx.scene.layout.VBox;
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+    private static final Image USER_IMG = new Image(MainWindow.class.getResourceAsStream("/images/MyUser.png"));
+    private static final Image CBOT_IMG = new Image(MainWindow.class.getResourceAsStream("/images/MyCbot.png"));
+    private static final Image CBOT_BAD_IMG = new Image(MainWindow.class.getResourceAsStream("/images/MyCbotBad.png"));
+
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -25,19 +29,29 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
     private Cbot cbot;
 
-    private final Image USER_IMG = new Image(this.getClass().getResourceAsStream("/images/MyUser.png"));
-    private final Image CBOT_IMG = new Image(this.getClass().getResourceAsStream("/images/MyCbot.png"));
-    private final Image CBOT_BAD_IMG = new Image(this.getClass().getResourceAsStream("/images/MyCbotBad.png"));
-
+    /**
+     * Initializes the main window of the Cbot application.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Sets the active Cbot.
+     *
+     * @param c The Cbot instance to be assigned to this application.
+     */
     public void setCbot(Cbot c) {
         cbot = c;
     }
 
+    /**
+     * Displays Cbot's friendly greeting.
+     *
+     * @see Cbot#sayHi()
+     * @see UI#sayHi()
+     */
     public void greetUser() {
         dialogContainer.getChildren().add(DialogBox.getCbotDialog(Cbot.sayHi(), CBOT_IMG));
     }

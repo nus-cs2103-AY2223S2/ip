@@ -30,7 +30,7 @@ public class Parser {
         this.text = "";
 
         boolean matchFound = false;
-        
+
         if (input.contains(Task.SEP)) {
             throw new BadInputException("Please avoid using: \"" + Task.SEP + "\"");
         }
@@ -72,9 +72,9 @@ public class Parser {
      * outputs to print. The main bulk of Cbot's parsing is done here.
      *
      * @param tl The current list of tasks.
+     * @return The String response to the command.
      * @throws PoorInputException If the input text is improper or erroneous.
      * @throws DateTimeParseException If some provided datetime is not in a recognized format.
-     * @return The String response to the command.
      */
     public String respond(TaskList tl) throws PoorInputException, DateTimeParseException {
         String output;
@@ -104,7 +104,7 @@ public class Parser {
                 if (tl.notInRange(num)) {
                     throw new PoorInputException(tl.rangeError(num));
                 }
-                
+
                 output = UI.say(tl.mark(num));
 
             } catch (NumberFormatException e) {
@@ -134,7 +134,7 @@ public class Parser {
                 if (tl.notInRange(num)) {
                     throw new PoorInputException(tl.rangeError(num));
                 }
-                
+
                 output = UI.say(tl.delTask(num));
 
             } catch (NumberFormatException e) {

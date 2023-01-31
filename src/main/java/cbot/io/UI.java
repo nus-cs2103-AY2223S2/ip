@@ -1,9 +1,6 @@
 package cbot.io;
 
-import java.lang.StringBuilder;
 import java.util.ArrayList;
-
-import cbot.task.Task;
 
 /**
  * Manages printing to and receiving from the user, mainly via the Command Line Interface.
@@ -17,6 +14,8 @@ public class UI {
     private static final String INDENT    = " ~ ";
     private static final String WARNING   = "!! ";
     private static final String ERROR     = WARNING + "<Error> ";
+
+    //CHECKSTYLE.ONL SingleSpaceSeparator
 
     /**
      * Returns Cbot's friendly greeting :D
@@ -46,8 +45,8 @@ public class UI {
      * Returns a soft warning of the given exception.
      *
      * @param e The input exception.
-     * @see PoorInputException
      * @return A soft exception warning.
+     * @see PoorInputException
      */
     public static String warn(Exception e) {
         return WARNING + e.getMessage();
@@ -57,8 +56,8 @@ public class UI {
      * Returns a warning of the given exception.
      *
      * @param e The input exception.
-     * @see BadInputException
      * @return A hard exception warning.
+     * @see BadInputException
      */
     public static String warnBad(Exception e) {
         return ERROR + e.getMessage();
