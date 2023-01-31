@@ -1,12 +1,12 @@
-package helpers;
+package duke.helpers;
 
 import duke.exceptions.OutOfIndexException;
 import duke.exceptions.VagueInputException;
 import duke.exceptions.WrongBooleanException;
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.Todo;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.Todo;
 
 import java.io.PrintWriter;
 import java.util.Scanner;
@@ -70,10 +70,10 @@ public class Parser {
                     for (int i = 0; i < tasks.getSize(); i++) {
                         if (tasks.getTask(i).getContent().contains(searchTerm)) {
                             if (outputResults == "") {
-                                outputResults += i + tasks.getTask(i).toString();
+                                outputResults += (i + 1) + tasks.getTask(i).toString();
                                 hasFoundAnyTerms = true;
                             } else {
-                                outputResults += "\n" + i + tasks.getTask(i).toString();
+                                outputResults += "\n" + (i + 1) + tasks.getTask(i).toString();
                                 hasFoundAnyTerms = true;
                             }
                         }

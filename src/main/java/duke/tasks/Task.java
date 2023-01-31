@@ -1,5 +1,5 @@
-package task;
-import helpers.Ui;
+package duke.tasks;
+import duke.helpers.Ui;
 
 /**
  * Represents a Task object in TaskList, has 3 subclasses (Todo, Event, Deadline)
@@ -17,7 +17,7 @@ public class Task {
     }
 
     /**
-     * Constructs an object of the Task class. 
+     * Constructs an object of the Task class.
      *
      * @param alternative sets the boolean field mark into true/false to initialize the Task obj.
      */
