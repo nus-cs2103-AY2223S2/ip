@@ -1,4 +1,7 @@
-import java.util.*;
+import java.util.List;
+import java.util.Scanner;
+import exceptions.IncorrectArgumentException;
+import exceptions.CluckException;
 
 public class Duke {
     static private final String MAKE_DEADLINE = "deadline";
@@ -37,7 +40,7 @@ public class Duke {
         List<Task> toDoList = new LinkedList<>();
         Scanner sc = new Scanner(System.in);
 
-        while (loop) {
+        while (loop)    {
             String input = sc.nextLine();
             String[] words = input.split(" ");
 
