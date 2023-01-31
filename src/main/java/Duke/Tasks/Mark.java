@@ -21,9 +21,14 @@ public class Mark extends Task {
      * @param monitor the monitor
      */
     @Override
-    public void run(TaskTable table, Monitor monitor, Disk disk) {
+    public String run(TaskTable table, Monitor monitor, Disk disk) {
         table.mark(index);
         monitor.displayMark(table, index);
         disk.write(table.getTable());
+        String message = "    ____________________________________________________________\n" +
+                "    Nice! I've marked this task as done:\n    " +
+                table.get(index) + "\n" +
+                "    ____________________________________________________________\n";
+        return message;
     }
 }

@@ -204,8 +204,7 @@ public class Interpreter {
      * @throws EmptyCommandException
      * @throws InvalidCommandException
      */
-    public static Task interpret(String command, TaskTable table) throws InvalidTimeFormatException,
-            MissingDescriptionException, EmptyCommandException, InvalidCommandException {
+    public static Task interpret(String command, TaskTable table) {
         Operation op;
         try{
             try {
@@ -236,9 +235,10 @@ public class Interpreter {
                 default:
                     throw new InvalidCommandException();
             }
-        } catch (Exception e) {
+        } catch (InvalidCommandException | InvalidTimeFormatException |
+                MissingDescriptionException | EmptyCommandException | OutRangeException | NullPointerException e) {
             //e.printStackTrace();
-            System.out.println("    ____________________________________________________________");
+            System.out.println("    ____________________________________________________________\n");
             System.out.println(e.getMessage());
             System.out.println("    ____________________________________________________________\n");
             return null;

@@ -71,8 +71,8 @@ public class Task {
      * @param table the task table
      * @param monitor the monitor
      */
-    public void run(TaskTable table, Monitor monitor, Disk disk) {
-
+    public String run(TaskTable table, Monitor monitor, Disk disk) {
+        return "";
     };
 
     /**

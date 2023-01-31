@@ -22,9 +22,15 @@ public class Delete extends Task{
      * @param monitor the monitor
      */
     @Override
-    public void run(TaskTable table, Monitor monitor, Disk disk) {
+    public String run(TaskTable table, Monitor monitor, Disk disk) {
         Task removedJob = table.delete(i);
         monitor.displayDelete(table, removedJob);
         disk.write(table.getTable());
+        String message = "    ____________________________________________________________\n" +
+                "     Got it. I've added this task:\n" +
+                "       " + this.toString() + "\n" +
+                "     Now you have " + table.size() +  " task(s) in the list.\n" +
+                "    ____________________________________________________________\n";
+        return message;
     }
 }

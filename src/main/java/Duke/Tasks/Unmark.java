@@ -22,9 +22,14 @@ public class Unmark extends Task {
      * @param monitor the monitor
      */
     @Override
-    public void run(TaskTable table, Monitor monitor, Disk disk) {
+    public String run(TaskTable table, Monitor monitor, Disk disk) {
         table.unmark(index);
         monitor.displayUnmark(table, index);
         disk.write(table.getTable());
+        String message = "    ____________________________________________________________\n" +
+                "    Nice! I've marked this task as done:\n    " +
+                table.get(index) + "\n" +
+                "    ____________________________________________________________\n";
+        return message;
     }
 }

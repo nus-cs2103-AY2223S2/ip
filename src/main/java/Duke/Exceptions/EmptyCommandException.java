@@ -11,4 +11,9 @@ public class EmptyCommandException extends Exception {
         super(String.format("    OOPS!!! Stop making fun of me! Put something here as command now!\n"));
         //System.out.println("OOPS!!! Stop making fun of me! Put something here as command now!");
     }
+
+    @Override
+    public String getMessage() {
+        return "    OOPS!!! Stop making fun of me! Put something here as command now!\n";
+    }
 }

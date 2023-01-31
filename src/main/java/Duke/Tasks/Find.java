@@ -24,8 +24,17 @@ public class Find extends Task {
      * @param disk the disk
      */
     @Override
-    public void run(TaskTable table, Monitor monitor, Disk disk) {
+    public String run(TaskTable table, Monitor monitor, Disk disk) {
         monitor.displayFind(table, keyword);
+        String message = "    ____________________________________________________________\n" +
+                "     Here are the matching tasks in your list:\n";
+        for (int i = 0; i < table.size(); i++) {
+            if(table.getTable().get(i).showDesc().contains(keyword)) {
+                message = message.concat("    " + (i + 1) + "." + "    " + table.get(i) + "\n");
+            }
+        }
+        message = message.concat("    ____________________________________________________________\n");
+        return message;
     }
 
 }

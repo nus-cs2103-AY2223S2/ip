@@ -18,7 +18,23 @@ public class Table extends Task {
      * @param monitor the monitor
      */
     @Override
-    public void run(TaskTable table, Monitor monitor, Disk disk) {
+    public String run(TaskTable table, Monitor monitor, Disk disk) {
+
         monitor.showTable(table);
+        String message;
+        if (table.size() == 0) {
+            message = "    ____________________________________________________________\n" +
+                    "    Yo there is no task in your list, go get some rest!";
+        } else {
+            message = "    ____________________________________________________________\n" +
+                    "    Here are the task(s) in your list:\n";
+        }
+        //System.out.println(message);
+        for (int i = 0; i < table.size(); i ++) {
+            message = message.concat("    " + (i + 1) + "." + "    " + table.get(i) + "\n");
+        }
+        message = message.concat("    ____________________________________________________________\n");
+        return message;
+
     }
 }
