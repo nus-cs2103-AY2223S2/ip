@@ -1,8 +1,7 @@
 package duke;
 
 import javafx.application.Application;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+
 
 
 /**
@@ -10,6 +9,7 @@ import javafx.scene.image.ImageView;
  */
 public class Launcher {
     public static void main(String[] args) {
-        Application.launch(Duke.class, args);
+        Application.launch(Main.class, args);
     }
+
 }

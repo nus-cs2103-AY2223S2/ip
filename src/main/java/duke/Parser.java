@@ -93,31 +93,52 @@ public class Parser {
      * @return Description of task.
      * @throws DukeInvalidArgumentException If description input by user is empty.
      */
-    public String getDeadlineDescription() throws DukeInvalidArgumentException {
-        if (answer.substring(9, answer.length()).isEmpty()) {
-            throw new DukeInvalidArgumentException("Deadline cannot be empty");
-        }
-        return answer.substring(9, answer.length());
-    }
+    public String[] getDeadlineDescription() throws DukeInvalidArgumentException {
 
-    /**
-     * Returns the due date of deadline task the user inputs.
-     * @return Due date of task.
-     * @throws DukeInvalidArgumentException If description input by user is empty.
-     */
-    public LocalDateTime getDeadlineBy(String byString) throws DukeInvalidArgumentException {
-        if (byString.isEmpty()) {
-            throw new DukeInvalidArgumentException("By is empty, please input task again");
+        var arr = answer.substring(9, answer.length()).split("//");
+        if (answer.substring(9, answer.length()).isEmpty()) {
+            throw new DukeInvalidArgumentException("Deadline cannot be empty!");
+        }
+        if (arr.length != 2) {
+            throw new DukeInvalidArgumentException("Too many or little arguments");
+        }
+        if (arr[0].isEmpty()) {
+            throw new DukeInvalidArgumentException("No empty task allowed!");
+        }
+
+        if (arr[1].isEmpty()) {
+            throw new DukeInvalidArgumentException("No empty date allowed!");
         }
         LocalDateTime by;
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-            by = LocalDateTime.parse(byString, formatter);
+            by = LocalDateTime.parse(arr[1], formatter);
         } catch (DateTimeParseException e) {
             throw new DukeInvalidArgumentException("Wrong date/time format (correct: yyyy-MM-DD hh:mm), "
                     + "please input task again");
         }
-        return by;
+
+        return arr;
+
+    }
+
+
+
+    /**
+     * Returns the LocalDateTime of a string input.
+     * @return LocalDateTime of string.
+     * @throws DukeInvalidArgumentException If format of input is wrong.
+     */
+    public LocalDateTime getAsLocalDate(String s) throws DukeInvalidArgumentException {
+        LocalDateTime date;
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            date = LocalDateTime.parse(s, formatter);
+        } catch (DateTimeParseException e) {
+            throw new DukeInvalidArgumentException("Wrong date/time format (correct: yyyy-MM-DD hh:mm), "
+                    + "please input task again");
+        }
+        return date;
     }
 
 
@@ -126,57 +147,37 @@ public class Parser {
      * @return Description of task.
      * @throws DukeInvalidArgumentException If description input by user is empty.
      */
-    public String getEventDescription() throws DukeInvalidArgumentException {
+    public String[] getEventDescription() throws DukeInvalidArgumentException {
+        var arr = answer.substring(6, answer.length()).split("//");
         if (answer.substring(6, answer.length()).isEmpty()) {
-            throw new DukeInvalidArgumentException("Event cannot be empty");
+            throw new DukeInvalidArgumentException("Event cannot be empty!");
         }
-        return answer.substring(6, answer.length());
-    }
-
-
-    /**
-     * Returns the start date of event task the user inputs.
-     * @return Start date of task.
-     * @throws DukeInvalidArgumentException If description input by user is empty.
-     */
-    public LocalDateTime getEventFrom(String fromString) throws DukeInvalidArgumentException {
-        if (fromString.isEmpty()) {
-            throw new DukeInvalidArgumentException("From is empty, please input task again");
+        if (arr.length != 3) {
+            throw new DukeInvalidArgumentException("Too many or little arguments");
         }
-        LocalDateTime from;
+        if (arr[0].isEmpty()) {
+            throw new DukeInvalidArgumentException("No empty task allowed!");
+        }
+
+        if (arr[1].isEmpty() || arr[2].isEmpty()) {
+            throw new DukeInvalidArgumentException("No empty date allowed!");
+        }
+        LocalDateTime from, to;
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-            from = LocalDateTime.parse(fromString, formatter);
-
+            from = LocalDateTime.parse(arr[1], formatter);
+            to = LocalDateTime.parse(arr[2], formatter);
         } catch (DateTimeParseException e) {
             throw new DukeInvalidArgumentException("Wrong date/time format (correct: yyyy-MM-DD hh:mm), "
                     + "please input task again");
         }
-        return from;
+
+        return arr;
     }
 
-    /**
-     * Returns the end date of event task the user inputs.
-     * @return End date of task.
-     * @throws DukeInvalidArgumentException If description input by user is empty.
-     */
-    public LocalDateTime getEventTo(String toString) throws DukeInvalidArgumentException {
-        if (toString.isEmpty()) {
-            throw new DukeInvalidArgumentException("To is empty, please input task again");
-        }
 
-        LocalDateTime to;
 
-        try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-            to = LocalDateTime.parse(toString, formatter);
 
-        } catch (DateTimeParseException e) {
-            throw new DukeInvalidArgumentException("Wrong date/time format (correct: yyyy-MM-DD hh:mm), "
-                    + "please input task again");
-        }
-        return to;
-    }
 
     /**
      * Returns the keyword the user inputs.

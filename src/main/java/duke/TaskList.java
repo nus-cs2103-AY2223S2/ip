@@ -12,7 +12,7 @@ import duke.task.Todo;
 
 /**
  * TaskList class.
- * Handles tasks in a list.
+ * Handle tasks in a list.
  */
 public class TaskList {
 
@@ -63,7 +63,7 @@ public class TaskList {
      * @param keyword Keyword user inputs.
      * @throws DukeTaskNotFoundException If keyword cannot be found in task list.
      */
-    public void find(String keyword) throws DukeTaskNotFoundException {
+    public TaskList find(String keyword) throws DukeTaskNotFoundException {
         ArrayList<Task> temp = new ArrayList<>();
         for (int i = 0; i < arrayList.size(); i++) {
             if (arrayList.get(i).toString().indexOf(keyword) != -1) {
@@ -75,6 +75,7 @@ public class TaskList {
         }
         TaskList tempTaskList = new TaskList(temp);
         tempTaskList.list();
+        return tempTaskList;
     }
 
     /**
@@ -103,7 +104,7 @@ public class TaskList {
     }
 
     /**
-     * Adds a Event task in the list and returns it.
+     * Adds an Event task in the list and returns it.
      * @param description Description of event task.
      * @param from Date when event starts.
      * @param to Date when event ends.
