@@ -1,31 +1,31 @@
-package duke;
+package elise;
 
 import java.io.IOException;
 import java.util.Scanner;
 
 /**
- * Duke is a personal assistant chat bot that help to keep track of various stuff.
+ * Elise is a personal assistant chat-bot that help to keep track of various stuff.
  */
-public class Duke {
+public class Elise {
     // Attribute
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
 
     /**
-     * Constructor for Duke.
+     * Constructor for Elise.
      *
      * @param filePath Path of initial data file.
-     * @throws DukeException if filePath is invalid.
+     * @throws EliseException if filePath is invalid.
      */
-    public Duke(String filePath) throws DukeException {
+    public Elise(String filePath) throws EliseException {
         ui = new Ui();
         storage = new Storage(filePath);
         taskList = new TaskList(storage.load());
     }
 
     /**
-     * Runs Duke chat bot.
+     * Runs Elise chat-bot.
      *
      * @throws IOException Unexpected IOException
      */
@@ -39,7 +39,7 @@ public class Duke {
                 if (c.isExit()) {
                     return;
                 }
-            } catch (DukeException e) {
+            } catch (EliseException e) {
                 ui.showError(e);
             }
         }
@@ -49,11 +49,11 @@ public class Duke {
      * Driver function.
      *
      * @param args Command line arguments
-     * @throws DukeException If filePath is invalid
+     * @throws EliseException If filePath is invalid
      * @throws IOException Unexpected IOException
      */
-    public static void main(String[] args) throws DukeException, IOException {
-        Duke duke1 = new Duke("./data/list.txt");
-        duke1.run();
+    public static void main(String[] args) throws EliseException, IOException {
+        Elise elise1 = new Elise("./data/list.txt");
+        elise1.run();
     }
 }

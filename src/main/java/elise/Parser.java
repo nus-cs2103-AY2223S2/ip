@@ -1,4 +1,4 @@
-package duke;
+package elise;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -16,14 +16,14 @@ public class Parser {
      * @param sc Scanner for system input.
      * @return Command parsed.
      */
-    protected static Command read(Scanner sc) throws DukeException {
+    protected static Command read(Scanner sc) throws EliseException {
         int rank;
         String command = sc.next();
         String s = sc.nextLine().trim();
         String[] message;
 
         if (s.length() > 500) {
-            throw new DukeException("Message body is too long!");
+            throw new EliseException("Message body is too long!");
         }
         switch (command) {
         case "bye":
@@ -35,25 +35,25 @@ public class Parser {
                 rank = Integer.parseInt(s);
                 return new Command(2, rank - 1);
             } catch (NumberFormatException e) {
-                throw new DukeException("OOPS! mark must have an integer rank");
+                throw new EliseException("OOPS! mark must have an integer rank");
             }
         case "unmark":
             try {
                 rank = Integer.parseInt(s);
                 return new Command(3, rank - 1);
             } catch (NumberFormatException e) {
-                throw new DukeException("OOPS! unmark must have an integer rank");
+                throw new EliseException("OOPS! unmark must have an integer rank");
             }
         case "todo":
             if (s.isEmpty()) {
-                throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+                throw new EliseException("OOPS!!! The description of a todo cannot be empty.");
             }
             return new Command(4, new String[] {s});
         case "deadline":
             message = s.split("/by ");
             message = Arrays.stream(message).map(String::trim).toArray(String[]::new);
             if (message.length != 2 || message[0].isEmpty() || message[1].isEmpty()) {
-                throw new DukeException("OOPS!!! Command should be in the format 'deadline [D] /by [D]'\n"
+                throw new EliseException("OOPS!!! Command should be in the format 'deadline [D] /by [D]'\n"
                         + "The descriptions, [] cannot be empty.");
             }
             return new Command(5, message);
@@ -65,7 +65,7 @@ public class Parser {
             if (message.length != 3 || message[0].isEmpty()
                     || message[1].isEmpty() || message[2].isEmpty()
                     || indexFrom == -1 || indexTo == -1 || indexFrom >= indexTo) {
-                throw new DukeException("OOPS!!! Command should be in the format 'event [M] /from [D] /to [D]'\n"
+                throw new EliseException("OOPS!!! Command should be in the format 'event [M] /from [D] /to [D]'\n"
                         + "The descriptions, [] cannot be empty.");
             }
             return new Command(6, message);
@@ -74,17 +74,17 @@ public class Parser {
                 rank = Integer.parseInt(s);
                 return new Command(7, rank - 1);
             } catch (NumberFormatException e) {
-                throw new DukeException("OOPS! delete must have an integer rank.");
+                throw new EliseException("OOPS! delete must have an integer rank.");
             }
         case "find":
             if (s.isEmpty()) {
-                throw new DukeException("Specify a keyword.");
+                throw new EliseException("Specify a keyword.");
             }
             return new Command(8, s);
         case "help":
             return new Command(9);
         default:
-            throw new DukeException("Invalid input.");
+            throw new EliseException("Invalid input.");
         }
     }
 

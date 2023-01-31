@@ -1,4 +1,4 @@
-package duke;
+package elise;
 
 /**
  * User interface class to interact with the user.
@@ -33,9 +33,9 @@ public class Ui {
     /**
      * Prints error message.
      *
-     * @param e DukeException.
+     * @param e EliseException.
      */
-    protected void showError(DukeException e) {
+    protected void showError(EliseException e) {
         showLine();
         System.out.println(e.getMessage());
         showLine();

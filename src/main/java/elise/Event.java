@@ -1,4 +1,4 @@
-package duke;
+package elise;
 
 /**
  * Represents an event task.

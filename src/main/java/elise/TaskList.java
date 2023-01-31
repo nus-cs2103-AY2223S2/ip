@@ -1,4 +1,4 @@
-package duke;
+package elise;
 
 import java.util.List;
 
@@ -59,11 +59,11 @@ public class TaskList {
      *
      * @param index Index of the task.
      * @return The task at the index.
-     * @throws DukeException Invalid index.
+     * @throws EliseException Invalid index.
      */
-    protected Task markDone(int index) throws DukeException {
+    protected Task markDone(int index) throws EliseException {
         if (index < 0 || index >= tasks.size()) {
-            throw new DukeException("OOPS!!! Invalid index");
+            throw new EliseException("OOPS!!! Invalid index");
         }
 
         Task curr = tasks.get(index);
@@ -77,11 +77,11 @@ public class TaskList {
      *
      * @param index Index of the task.
      * @return The task at the index.
-     * @throws DukeException Invalid index.
+     * @throws EliseException Invalid index.
      */
-    protected Task markUndone(int index) throws DukeException {
+    protected Task markUndone(int index) throws EliseException {
         if (index < 0 || index >= tasks.size()) {
-            throw new DukeException("OOPS!!! Invalid index.");
+            throw new EliseException("OOPS!!! Invalid index.");
         }
 
         Task curr = tasks.get(index);
@@ -94,11 +94,11 @@ public class TaskList {
      *
      * @param index Index of the task.
      * @return The task at the index.
-     * @throws DukeException Invalid index.
+     * @throws EliseException Invalid index.
      */
-    protected Task delete(int index) throws DukeException {
+    protected Task delete(int index) throws EliseException {
         if (index < 0 || index >= tasks.size()) {
-            throw new DukeException("OOPS!!! Invalid index.");
+            throw new EliseException("OOPS!!! Invalid index.");
         }
         return tasks.remove(index);
     }
@@ -141,9 +141,9 @@ public class TaskList {
      * @param status Completed or not.
      * @param content Content of the task.
      * @return Task created.
-     * @throws DukeException Unsupported code.
+     * @throws EliseException Unsupported code.
      */
-    protected static Task getInstance(String code, boolean status, String[] content) throws DukeException {
+    protected static Task getInstance(String code, boolean status, String[] content) throws EliseException {
         if (code.equals("T")) {
             return new ToDo(status, content);
         } else if (code.equals("D")) {
@@ -151,7 +151,7 @@ public class TaskList {
         } else if (code.equals("E")) {
             return new Event(status, content);
         } else {
-            throw new DukeException("Unsupported code");
+            throw new EliseException("Unsupported code");
         }
     }
 }

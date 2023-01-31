@@ -1,4 +1,4 @@
-package duke;
+package elise;
 
 import java.io.IOException;
 
@@ -71,13 +71,13 @@ public class Command {
     /**
      * Executes command.
      *
-     * @param ui Ui object of Duke.
-     * @param taskList TaskList object of Duke.
-     * @param storage Storage object of Duke.
-     * @throws DukeException DukeException unique to Duke
+     * @param ui Ui object of Elise.
+     * @param taskList TaskList object of Elise.
+     * @param storage Storage object of Elise.
+     * @throws EliseException EliseException unique to Elise
      * @throws IOException Unexpected IOException
      */
-    protected void execute(Ui ui, TaskList taskList, Storage storage) throws DukeException, IOException {
+    protected void execute(Ui ui, TaskList taskList, Storage storage) throws EliseException, IOException {
         if (code == -1) {
             return;
         }
@@ -117,7 +117,7 @@ public class Command {
         } else if (code == 9) {
             ui.showHelp();
         } else {
-            throw new DukeException("Invalid code.");
+            throw new EliseException("Invalid code.");
         }
     }
 

@@ -1,4 +1,4 @@
-package duke;
+package elise;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -42,9 +42,9 @@ public class Storage {
      * Loads up the tasks saved in file and returns the list.
      *
      * @return List of initial tasks saved by data file.
-     * @throws DukeException Possibly corrupted data file.
+     * @throws EliseException Possibly corrupted data file.
      */
-    protected List<Task> load() throws DukeException {
+    protected List<Task> load() throws EliseException {
         List<Task> tasks = new ArrayList<>();
         try {
             Scanner sc = new Scanner(filePath.toFile());

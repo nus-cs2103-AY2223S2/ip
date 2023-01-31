@@ -1,4 +1,4 @@
-package duke;
+package elise;
 
 /**
  * Represents a task with modifiable status.
