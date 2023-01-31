@@ -3,9 +3,17 @@ public class Event extends Task {
     protected String to;
 
     public Event(String description, String from, String to) {
-        super(description, "event");
+        super(description);
         this.from = from;
         this.to = to;
+    }
+
+    public String getFrom() {
+        return from;
+    }
+
+    public String getTo() {
+        return to;
     }
 
     @Override
