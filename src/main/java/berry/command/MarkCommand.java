@@ -29,5 +29,6 @@ public class MarkCommand extends Command {
         } else {
             throw new IndexOutOfRangeException();
         }
+        storage.saveTasks(tasks);
     }
 }

@@ -29,5 +29,6 @@ public class DeleteCommand extends Command {
         } else {
             throw new IndexOutOfRangeException();
         }
+        storage.saveTasks(tasks);
     }
 }

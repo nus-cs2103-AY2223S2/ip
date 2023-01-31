@@ -29,5 +29,6 @@ public class UnmarkCommand extends Command {
         } else {
             throw new IndexOutOfRangeException();
         }
+        storage.saveTasks(tasks);
     }
 }
