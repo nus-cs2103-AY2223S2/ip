@@ -141,7 +141,7 @@ public class Task implements Comparable<Task> {
     @Override
     public int compareTo(Task other) {
         if (this.getTime().isEqual(other.getTime())) {
-            return getDesc().compareTo(other.getDesc());
+            return getDesc().toLowerCase().compareTo(other.getDesc().toLowerCase());
         }
 
         return getTime().compareTo(other.getTime());
