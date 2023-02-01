@@ -10,7 +10,7 @@ package exceptions;
 public class InvalidCommandException extends Exception {
 
     /**
-     * Returns an InvalidCommandException whenever a command called is invalid or unsupported by Duke
+     * Returns an InvalidCommandException object whenever a command called is invalid or unsupported by Duke
      *
      * @param str String message that is to be printed with the error.
      */
