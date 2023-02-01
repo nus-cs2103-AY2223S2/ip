@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import membot.utils.DateTimeParser;
 import org.junit.jupiter.api.Test;
 
 public class DateTimeParserTest {

@@ -7,6 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import membot.utils.InputValidator;
+import membot.utils.InvalidCommandException;
 import org.junit.jupiter.api.Test;
 
 public class InputValidatorTest {
