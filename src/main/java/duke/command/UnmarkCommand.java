@@ -22,7 +22,7 @@ public class UnmarkCommand extends Command {
         } catch (NumberFormatException e) {
             throw new DukeException("Index given is not an integer");
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("Index given is not in the list");
+            throw new DukeException("An index for a task was not given");
         }
     }
 

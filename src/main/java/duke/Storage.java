@@ -32,7 +32,7 @@ public class Storage {
         int index = filePath.lastIndexOf("/") - 1;
         if (index > 0) {
             this.directory = Paths.get(root,
-                    filePath.substring(0, index));
+                    filePath.substring(0, index + 1));
         }
     }
 

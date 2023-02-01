@@ -27,11 +27,10 @@ public class TaskList {
 
     public Task get(int index) throws DukeException {
         try {
-
+            return tasks.get(index);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Index is not in the list of task");
         }
-        return tasks.get(index);
     }
 
     /**
@@ -50,11 +49,10 @@ public class TaskList {
      */
     public Task delete(int index) throws DukeException {
         try {
-
+            return tasks.remove(index - 1);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Index of task to be removed is not in the list of task");
         }
-        return tasks.remove(index - 1);
     }
 
     /**
@@ -64,13 +62,12 @@ public class TaskList {
      */
     public Task mark(int index) throws DukeException {
         try {
-
+            Task task = tasks.get(index - 1);
+            task.mark();
+            return task;
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Index of task to be marked is not in the list of task");
         }
-        Task task = tasks.get(index - 1);
-        task.mark();
-        return task;
     }
 
     /**

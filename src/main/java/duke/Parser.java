@@ -16,7 +16,7 @@ import duke.task.Todo;
  */
 public class Parser {
 
-    protected enum COMMAND {BYE, LIST, TODO, DEADLINE, EVENT, MARK, UNMARK, DELETE};
+    protected enum COMMAND {BYE, LIST, TODO, DEADLINE, EVENT, MARK, UNMARK, DELETE}
 
     public Parser() {
 
@@ -45,10 +45,10 @@ public class Parser {
             case DELETE:
                 return new DeleteCommand(fullCommand);
             default:
-                throw new DukeException("");
+                throw new DukeException("I'm sorry, but I don't know what that means");
             }
         } catch (IllegalArgumentException e) {
-            throw new DukeException("");
+            throw new DukeException("I'm sorry, but I don't know what that means");
         }
     }
 }
