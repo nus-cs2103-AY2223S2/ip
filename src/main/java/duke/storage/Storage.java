@@ -1,12 +1,11 @@
 package duke.storage;
 
-import duke.task.Task;
-import duke.task.TaskList;
+import duke.task.*;
+//import duke.task.Task;
+//import duke.task.TaskList;
 
 import java.io.*;
 import java.util.ArrayList;
-
-// learned from https://www.youtube.com/watch?v=TkC3sZxW2wY
 
 /**
  * Stores and loads tasks from a text file.
@@ -64,6 +63,7 @@ public class Storage {
                             System.out.println("Object is not a task");
                         }
                     } catch (EOFException e) {
+                        System.out.println("what happened");
                         break;
                     }
                 }
@@ -75,7 +75,7 @@ public class Storage {
             try {
                 file.createNewFile();
             } catch (IOException e) {
-                System.out.println(e);
+                System.out.println("Unable to create new file");
             }
         }
         return tasks;

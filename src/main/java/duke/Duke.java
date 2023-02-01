@@ -23,11 +23,12 @@ public class Duke {
      */
     public Duke(String filePath) {
         ui = new Ui();
-        storage = new Storage(filePath);
+        this.storage = new Storage(filePath);
         try {
-            tasks = new TaskList(storage.load());
+            this.tasks = new TaskList(storage.load());
         } catch (IOException e) {
             e.printStackTrace();
+            this.tasks = new TaskList();
         }
     }
 
@@ -48,7 +49,7 @@ public class Duke {
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
             } catch (DukeException e) {
-                System.out.println(e.toString());
+                System.out.println(e);
             } finally {
                 ui.showLine();
             }

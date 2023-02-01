@@ -19,6 +19,13 @@ public class TaskList implements Serializable {
     }
 
     /**
+     * Constructor for TaskList object.
+     */
+    public TaskList() {
+        this.tasks = new ArrayList<Task>();
+    }
+
+    /**
      * Takes in an integer and outputs the task object at that index.
      *
      * @param index An ArrayList of task object.

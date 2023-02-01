@@ -145,10 +145,10 @@ public class Command {
 
         case FIND:
             int counter = 0;
+            System.out.println("Here are the matching tasks in your list:");
             for (int i = 0; i < tasks.size(); i++) {
                 Task findTask = tasks.get(i);
                 if (findTask.contains(taskName)) {
-                    System.out.println("Here are the matching tasks in your list:");
                     counter++;
                     System.out.print(counter + ". " + findTask + "\n");
                 }
