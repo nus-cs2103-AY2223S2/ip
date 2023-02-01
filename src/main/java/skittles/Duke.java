@@ -163,6 +163,32 @@ public class Duke {
                 "\nNow you have " + ListOfStuff.numOfThings() + " tasks in the list");
     }
 
+    /**
+     * Lists out all the Tasks that contains the input given by the user.
+     * @param userTyped Given by the user
+     * @throws SkittlesException No matches found error.
+     */
+    public void find(String userTyped) throws SkittlesException {
+        if (userTyped.split(" ", 2).length == 1) {
+            throw new SkittlesException("Hey man you're missing the keyword you wish to search!");
+        }
+        if (userTyped.split(" ", 2).length > 2) {
+            throw new SkittlesException("Hey man don't type multiple keywords!");
+        }
+        String[] information = userTyped.split(" ",2);
+        String output = "Here are the matching tasks in your list:\n";
+        String keyword = information[1];
+        ArrayList<Task> results = lstOfTasks.findInList(keyword);
+        for (int i = 1; i <= results.size(); i++) {
+            output = output.concat(i+ "." + results.get(i-1).toString() + "\n");
+        }
+        if (!results.isEmpty()) {
+            System.out.println(output);
+        } else {
+            System.out.println("You do not have such an item in your list currently!");
+        }
+    }
+
     /* Method that saves Tasks in the hard disk whenever called
     */
     public void save() {
@@ -251,6 +277,13 @@ public class Duke {
                     try {
                         ListOfStuff.delete(input);
                         ListOfStuff.refresh();
+                    } catch (SkittlesException e) {
+                        System.out.println(e.getMessage());
+                    }
+                    break;
+                case FIND:
+                    try {
+                        find(input);
                     } catch (SkittlesException e) {
                         System.out.println(e.getMessage());
                     }
