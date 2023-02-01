@@ -1,5 +1,6 @@
 package skittles;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class ListOfStuff {
 
@@ -111,6 +112,21 @@ public class ListOfStuff {
 
     public static void refresh() throws SkittlesException {
         Data.updateTaskInTxt(skittlesList);
+    }
+
+    /**
+     * Searches the entire dukeList for Tasks that contain the keyword.
+     * @param wordUserIsSearching User input that they wish to search for.
+     * @return An ArrayList of Tasks that contain the keyword.
+     */
+    public static ArrayList<Task> findInList(String wordUserIsSearching) {
+        ArrayList<Task> outcome = new ArrayList<>();
+        for (Task task : skittlesList) {
+            if (task.toString().toLowerCase().contains(wordUserIsSearching.toLowerCase())) {
+                outcome.add(task);
+            }
+        }
+        return outcome;
     }
 
     public static ArrayList<Task> getSkittlesList() {

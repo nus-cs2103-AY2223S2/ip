@@ -9,7 +9,8 @@ public enum Instruction {
     DEADLINE,
     EVENT,
     DELETE,
-    BYE;
+    BYE,
+    FIND;
 
     public static Instruction scanUserTyped(String userTyped) {
         String scannedWord = userTyped.toLowerCase();
@@ -35,6 +36,9 @@ public enum Instruction {
                 break;
             case "bye":
                 newInstruction = Instruction.BYE;
+                break;
+            case "find":
+                newInstruction = Instruction.FIND;
                 break;
             default:
                 newInstruction = Instruction.UNRECOGNISED;

@@ -1,0 +1,6 @@
+T | 0 | eat nutella
+
+T | 0 | drink nutella
+
+T | 0 | read a book
+
