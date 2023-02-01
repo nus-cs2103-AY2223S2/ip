@@ -55,19 +55,6 @@ public class Ui {
         return rawInputLine.trim().isEmpty();
     }
 
-    public String readCommand() {
-        showToUser(LINE_PREFIX + "Enter command: ");
-        String fullInputLine = in.nextLine();
-
-        // silently consume all ignored lines
-        while (shouldIgnore(fullInputLine)) {
-            fullInputLine = in.nextLine();
-        }
-
-        showToUser("[Command entered:" + fullInputLine + "]");
-        return fullInputLine;
-    }
-
     public void showGoodbyeMessage() {
         showToUser("Bye. Hope to see you again soon!");
     }
