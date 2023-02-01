@@ -143,7 +143,6 @@ public class Storage {
 
             writer.append(fileContents);
             writer.close();
-            System.out.println("updated hard drive!");
         }
         catch (Exception e) {
            throw new DukeException();

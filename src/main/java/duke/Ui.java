@@ -43,8 +43,9 @@ public class Ui {
      *  Displays a command error message to the user.
      */
     public void showCommandError() {
-        System.out.println("I'm sorry, your command was not valid. To see what constitutes a valid command,"
-            + " please type 'help'.");
+        System.out.println("I'm sorry! Either the command you used was not valid, or it was incorrectly formatted. "
+                + "To see what constitutes a valid command or format,"
+                + " please type 'help'.");
     }
 
     /**
