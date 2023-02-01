@@ -15,8 +15,6 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
         
-        
-
         while (startDuke) {
 
             String[] userInput = sc.nextLine().split(" ", 2);
@@ -24,6 +22,7 @@ public class Duke {
             switch (userInput[0]) {
                 case "bye":
                     System.out.println("Bye. Hope to see you again soon!");
+                    sc.close();
                     startDuke = false;
                     break;
 
@@ -61,12 +60,9 @@ public class Duke {
                     System.out.println("Got it. I've added this task:");
                     addTaskToList("event", userInput[1]);
                     break;
-
             }
         }
-        
     }
-
 
     public static void addTaskToList(String type, String userInput) {
         switch (type) {
@@ -95,7 +91,7 @@ public class Duke {
     }
 
     public static void markTask(int taskID) {
-        if (taskCount >= taskID - 1) {
+        if (taskCount > taskID && taskCount > 0) {
             System.out.println("Nice! I've marked this task as done:");
             Task currentTask = toDoList[taskID];
             currentTask.mark();
@@ -106,7 +102,7 @@ public class Duke {
     }
 
     public static void unmarkTask(int taskID) {
-        if (taskCount >= taskID - 1) {
+        if (taskCount > taskID && taskCount > 0) {
             System.out.println("OK, I've marked this task as not done yet:");
             Task currentTask = toDoList[taskID];
             currentTask.unmark();
