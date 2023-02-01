@@ -39,8 +39,8 @@ public class TaskList {
     }
 
     private void markUnmark(int taskNumber, boolean toMark) throws DukeException {
-        boolean isValidTaskNumber =
-                (taskNumber > 0 && taskNumber <= this.tasks.size());
+        boolean isValidTaskNumber = (taskNumber > 0
+                && taskNumber <= this.tasks.size());
 
         if (isValidTaskNumber) {
             if (toMark) {
@@ -104,8 +104,8 @@ public class TaskList {
      * @throws DukeException When the task number given is not valid.
      */
     public void deleteTask(int taskNumber) throws DukeException {
-        boolean isValidTaskNumber =
-                (taskNumber > 0 && taskNumber <= this.tasks.size());
+        boolean isValidTaskNumber = (taskNumber > 0
+                && taskNumber <= this.tasks.size());
 
         if (isValidTaskNumber) {
             Task removedTask = this.tasks.remove(taskNumber - 1);
