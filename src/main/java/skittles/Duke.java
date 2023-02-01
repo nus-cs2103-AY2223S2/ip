@@ -30,7 +30,7 @@ public class Duke {
 
     /**
      * Interpret what the user has entered as an input and categorises it into a Command.
-     * @param input User's input
+     * @param userTyped User's input
      * @return The correct command that is interpreted from the user input.
      */
     public static Instruction inputToInstruction(String userTyped) {
@@ -135,7 +135,7 @@ public class Duke {
 
     /**
      * Adds an Event to all Tasks that Skittles has stored.
-     * @param input The entire String that the user has input i.e. "event xxx /from yyy /to zzz".
+     * @param userTyped The entire String that the user has input i.e. "event xxx /from yyy /to zzz".
      * @throws SkittlesException If an incorrect input is entered.
      */
     public void addAnEvent(String userTyped) throws SkittlesException {
