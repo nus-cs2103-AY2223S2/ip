@@ -32,48 +32,48 @@ public class Storage {
                 Files.createFile(path);
             }
             File f = new File(path.toString());
-            ToDoList ls = new ToDoList();
+            ToDoList list = new ToDoList();
             Scanner sc = new Scanner(f);
             while (sc.hasNext()) {
-                String[] input = sc.nextLine().split(Pattern.quote("/+/"));
-                String command = input[0];
+                String[] inputs = sc.nextLine().split(Pattern.quote("/+/"));
+                String command = inputs[0];
                 Task task;
                 switch (command) {
                 case "TODO":
-                    task = new ToDoTask(input[2]);
-                    if (input[1].equals("DONE")) {
+                    task = new ToDoTask(inputs[2]);
+                    if (inputs[1].equals("DONE")) {
                         task.markDone();
                     }
-                    ls.add(task);
+                    list.add(task);
                     break;
                 case "DEADLINE":
-                    task = new DeadlineTask(input[2], input[3]);
-                    if (input[1].equals("DONE")) {
+                    task = new DeadlineTask(inputs[2], inputs[3]);
+                    if (inputs[1].equals("DONE")) {
                         task.markDone();
                     }
-                    ls.add(task);
+                    list.add(task);
                     break;
                 case "EVENT":
-                    task = new EventTask(input[2], input[3], input[4]);
-                    if (input[1].equals("DONE")) {
+                    task = new EventTask(inputs[2], inputs[3], inputs[4]);
+                    if (inputs[1].equals("DONE")) {
                         task.markDone();
                     }
-                    ls.add(task);
+                    list.add(task);
                     break;
                 }
             }
-            return ls;
+            return list;
         } catch (Exception e) {
             return new ToDoList();
         }
     }
 
-    public void save(ToDoList ls)  {
+    public void save(ToDoList list)  {
         try {
             FileWriter fw = new FileWriter(path.toString());
-            int count = ls.getToDoCount();
+            int count = list.getToDoCount();
             for (int i = 1; i <= count; i++) {
-                fw.write(ls.getTask(i).save());
+                fw.write(list.getTask(i).save());
             }
             fw.close();
         } catch (Exception e) {

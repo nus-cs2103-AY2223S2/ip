@@ -8,11 +8,11 @@ import java.util.ArrayList;
 
 
 public class ToDoList {
-    private ArrayList<Task> arr = new ArrayList<>(); //1-based index
+    private ArrayList<Task> tasks = new ArrayList<>();
     private int toDoCount;
 
     public ToDoList() {
-        arr.add(new ToDoTask("0index")); //1-based index
+        tasks.add(new ToDoTask("0index"));
         this.toDoCount = 0;
     }
 
@@ -21,44 +21,44 @@ public class ToDoList {
     }
 
     public Task getTask(int index) {
-        return this.arr.get(index);
+        return this.tasks.get(index);
     }
 
     public void add(Task task) {
         ++this.toDoCount;
-        arr.add(task);
+        tasks.add(task);
     }
 
-    public Task delete(int ind) throws IndexDukeException {
-        if (ind < 1 || ind > toDoCount) {
+    public Task delete(int index) throws IndexDukeException {
+        if (index < 1 || index > toDoCount) {
             throw new IndexDukeException();
         }
-        Task rm = arr.get(ind);
-        arr.remove(ind);
+        Task rm = tasks.get(index);
+        tasks.remove(index);
         --this.toDoCount;
         return rm;
     }
 
 
-    public void unmarkTask(int ind) throws IndexDukeException {
-        if (ind < 1 || ind > toDoCount) {
+    public void unmarkTask(int index) throws IndexDukeException {
+        if (index < 1 || index > toDoCount) {
             throw new IndexDukeException();
         }
-        arr.get(ind).markNotDone();
+        tasks.get(index).markNotDone();
     }
 
-    public void markTask(int ind) throws IndexDukeException {
-        if (ind < 1 || ind > toDoCount) {
+    public void markTask(int index) throws IndexDukeException {
+        if (index < 1 || index > toDoCount) {
             throw new IndexDukeException();
         }
-        arr.get(ind).markDone();
+        tasks.get(index).markDone();
     }
 
     @Override
     public String toString() {
         String output = "";
         for (int i = 1; i <= this.toDoCount; i++) {
-            output = output + i + "." + arr.get(i) + "\n";
+            output = output + i + "." + tasks.get(i) + "\n";
         }
         return output;
     }

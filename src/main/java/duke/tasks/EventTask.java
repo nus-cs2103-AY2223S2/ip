@@ -7,8 +7,8 @@ import java.time.format.DateTimeParseException;
 public class EventTask extends Task {
     private String from;
     private String to;
-    private LocalDate fromDate;
-    private LocalDate toDate;
+    private LocalDate fromDate = null;
+    private LocalDate toDate = null;
 
     public EventTask(String title, String from, String to) {
         super(title);

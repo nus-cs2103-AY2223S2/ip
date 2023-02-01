@@ -2,7 +2,7 @@ package duke;
 
 import duke.functions.Parser;
 import duke.functions.Storage;
-import duke.functions.UI;
+import duke.functions.Ui;
 
 import java.util.Scanner;
 
@@ -11,39 +11,39 @@ public class Duke {
         //init
         Storage storage = new Storage("./ip-data/Ip-data.txt");
         Scanner sc = new Scanner(System.in);
-        ToDoList ls;
+        ToDoList list;
 
-        ls = Duke.startUp(storage);
-        Duke.input(sc, ls);
-        Duke.shutDown(storage, ls);
+        list = Duke.startUp(storage);
+        Duke.input(sc, list);
+        Duke.shutDown(storage, list);
     }
 
     private static ToDoList startUp(Storage storage) {
         try {
-            UI.welcomeMsg();
+            Ui.welcomeMsg();
             return storage.load();
         } catch (Exception e) {
             return new ToDoList();
         }
     }
 
-    private static void shutDown(Storage storage, ToDoList ls) {
+    private static void shutDown(Storage storage, ToDoList list) {
         try {
-            storage.save(ls);
-            UI.exitMsg();
+            storage.save(list);
+            Ui.exitMsg();
         } catch (Exception e) {
 
         }
     }
 
-    private static void input(Scanner sc, ToDoList ls) {
-        boolean isDone = false;
-        while (!isDone) {
+    private static void input(Scanner sc, ToDoList list) {
+        boolean isProgramDone = false;
+        while (!isProgramDone) {
             try {
-                String[] input = Parser.inputHandler(sc.nextLine(), " ", 2, 1);
-                isDone = Parser.commandHandler(input, ls);
+                String[] inputs = Parser.handleInput(sc.nextLine(), " ", 2, 1);
+                isProgramDone = Parser.handleCommand(inputs, list);
             } catch (Exception e) {
-                UI.errorMsg(e.getMessage());
+                Ui.errorMsg(e.getMessage());
             }
         }
     }
