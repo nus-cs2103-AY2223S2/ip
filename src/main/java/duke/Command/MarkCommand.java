@@ -7,17 +7,17 @@ import duke.Tasks.Task;
 import duke.Tasks.TaskList;
 import duke.Ui;
 
-public class DeleteCommand extends Command{
+public class MarkCommand extends Command{
     private final int index;
 
-    public DeleteCommand(int inputIndex) {
+    public MarkCommand(int inputIndex) {
         this.index = inputIndex - 1;
     }
 
     @Override
     public String execute(TaskList tasks, Storage storage, Ui ui) throws DukeException {
         try {
-            Task task = tasks.remove(this.index);
+            Task task = tasks.markTask(this.index);
             ui.showDeleted(task);
             return task.toString();
         } catch (IndexOutOfBoundsException exception) {

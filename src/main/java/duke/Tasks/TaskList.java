@@ -12,7 +12,7 @@ public class TaskList extends ArrayList<Task> {
         super();
     }
 
-    public TaskList(BufferedReader br) throws CommandException, IOException, DescriptionException {
+    public TaskList(BufferedReader br) throws CommandException, IOException {
         super();
         String str;
         while ((str = br.readLine()) != null) {
@@ -35,5 +35,11 @@ public class TaskList extends ArrayList<Task> {
         } else {
             this.add(task);
         }
+    }
+
+    public Task markTask(int index) throws IndexOutOfBoundsException {
+        Task task = this.get(index);
+        task.markDone();
+        return task;
     }
 }
