@@ -4,7 +4,6 @@ import exception.CommandNotFoundException;
 import exception.InvalidCommandInputException;
 import exception.InvalidDateFormatException;
 
-import exception.InvalidTaskStringException;
 import helper.DateTimeHelper;
 
 import java.time.LocalDateTime;
@@ -136,6 +135,15 @@ public class TaskList {
     }
 
     /**
+     * Gets all tasks as a list.
+     *
+     * @return The task object to be returned.
+     */
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    /**
      * Returns the number of tasks in the list.
      *
      * @return The number of tasks.
@@ -150,28 +158,28 @@ public class TaskList {
      * @param input The date to check.
      * @throws InvalidDateFormatException If the date given does not follow the specified format.
      */
-    public void printTasksOnDate(String input) throws InvalidDateFormatException {
+    public TaskList findTasksOnDate(String input) throws InvalidDateFormatException {
         // Convert string to LocalDateTime object.
         LocalDateTime datetime = DateTimeHelper.parse(input);
 
-        int counter = 1;
+        TaskList result = new TaskList();
 
         // Find all valid tasks by iterating through them.
         for (Task t: tasks) {
             if (t instanceof Deadline) {
                 Deadline d = (Deadline) t;
                 if (d.occursOn(datetime)) {
-                    System.out.println(counter + ". " + d);
-                    counter++;
+                    result.addTask(t);
                 }
             } else if (t instanceof Event) {
                 Event e = (Event) t;
                 if (e.occursOn(datetime)) {
-                    System.out.println(counter + ". " + e);
-                    counter++;
+                    result.addTask(t);
                 }
             }
         }
+
+        return result;
     }
 
     /**
@@ -179,17 +187,17 @@ public class TaskList {
      *
      * @param word The word to check.
      */
-    public void findTasksWithWord(String word) {
+    public TaskList findTasksWithWord(String word) {
 
-        System.out.println("Here are the matching tasks in your list:");
-
-        int counter = 1;
+        TaskList result = new TaskList();
 
         for (Task t: tasks) {
             if (t.containsWord(word)) {
-                System.out.println(counter + "." + t);
+                result.addTask(t);
             }
         }
+
+        return result;
     }
 
     @Override

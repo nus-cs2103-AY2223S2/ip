@@ -1,5 +1,7 @@
 package command;
 
+import response.Response;
+
 import sys.Ui;
 import sys.Storage;
 
@@ -19,7 +21,7 @@ public class AddCommand extends Command {
      * @param input Input to parse.
      */
     public AddCommand(String input) {
-        super("");
+        super(".*");
         this.input = input;
     }
 
@@ -30,17 +32,19 @@ public class AddCommand extends Command {
      * @param ui the user interface running.
      * @param storage the storage location for the program.
      * @throws DukeException If an invalid input is given.
+     * @return Response object containing list of tasks and a message.
      */
     @Override
-    public void execute(TaskList tl, Ui ui, Storage storage) throws DukeException {
+    public Response execute(TaskList tl, Ui ui, Storage storage) throws DukeException {
         // Add and save task
         Task t = tl.addTask(input);
         storage.save(tl);
 
-        // Print statement
-        System.out.println("Got it. I've added this task:\n" + t
+        String message = "Got it. I've added this task:\n" + t
                 + "\nNow you have " + tl.numberOfTasks()
                 + (tl.numberOfTasks() > 1 ? " tasks" : " task")
-                + " in the list.");
+                + " in the list.";
+
+        return new Response(message, tl);
     }
 }

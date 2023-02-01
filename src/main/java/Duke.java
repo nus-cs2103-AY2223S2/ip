@@ -1,7 +1,11 @@
+import response.Response;
+
 import sys.Storage;
 import sys.Ui;
 
 import task.TaskList;
+
+import java.io.IOException;
 
 /**
  * Represents the whole Duke program.
@@ -12,21 +16,22 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
-    public Duke(String filePath) {
+    /**
+     * Initialise the Duke backend components.
+     */
+    public Duke() {
         this.ui = new Ui();
-        this.storage = new Storage(filePath);
+        this.storage = new Storage("tasks.txt");
         this.tasks = this.storage.load();
+        this.ui.setContext(this.storage, this.tasks);
     }
 
     /**
-     * Sets the context for the UI and start accepting input from the user.
+     * Receives input to send to the UI.
+     * @param input Input string send by the user.
+     * @return Response from the UI.
      */
-    public void run() {
-        this.ui.setContext(this.storage, this.tasks);
-        this.ui.acceptInput();
-    }
-
-    public static void main(String[] args) {
-        new Duke("./tasks.txt").run();
+    public Response getResponse(String input) {
+        return this.ui.send(input);
     }
 }

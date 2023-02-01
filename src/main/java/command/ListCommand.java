@@ -1,6 +1,7 @@
 package command;
 
-import exception.DukeException;
+import response.Response;
+
 import sys.Ui;
 import sys.Storage;
 
@@ -21,13 +22,17 @@ public class ListCommand extends Command {
     /**
      * Lists all tasks that exist in the task list.
      *
+     * @param
      * @param tl the current list of tasks
      * @param ui the user interface running.
      * @param storage the storage location for the program.
+     * @return Returns response containing task list.
      */
     @Override
-    public void execute(TaskList tl, Ui ui, Storage storage) {
-        // Print statement
-        System.out.println(tl.toString());
+    public Response execute(TaskList tl, Ui ui, Storage storage) {
+
+        String message = "Here are your tasks!";
+
+        return new Response(message, tl);
     }
 }

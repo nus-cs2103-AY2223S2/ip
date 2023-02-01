@@ -1,9 +1,10 @@
 package command;
 
-import exception.DukeException;
-import exception.InvalidDateFormatException;
+import response.Response;
+
 import sys.Storage;
 import sys.Ui;
+
 import task.TaskList;
 
 /**
@@ -27,13 +28,16 @@ public class FindCommand extends Command {
      * @param tl The task list to search through.
      * @param ui The UI used to interact with the user.
      * @param storage The storage used to persist the tasks.
+     * @return Returns response containing filtered tasks.
      */
     @Override
-    public void execute(TaskList tl, Ui ui, Storage storage) {
-        // Handle occurs
+    public Response execute(TaskList tl, Ui ui, Storage storage) {
+        // Handle find
         String word = this.input.substring(5);
 
-        // Print tasks that contain keyword
-        tl.findTasksWithWord(word);
+        String message = "Found tasks containing: " + word;
+        TaskList result = tl.findTasksWithWord(word);
+
+        return new Response(message, result);
     }
 }

@@ -1,5 +1,7 @@
 package command;
 
+import response.Response;
+
 import sys.Ui;
 import sys.Storage;
 
@@ -19,7 +21,7 @@ public class OccursCommand extends Command {
      * @param input Input to parse.
      */
     public OccursCommand(String input) {
-        super("occurs ");
+        super("occurs .*");
         this.input = input;
     }
 
@@ -30,17 +32,20 @@ public class OccursCommand extends Command {
      * @param ui the user interface running.
      * @param storage the storage location for the program.
      * @throws DukeException If an invalid input is given.
+     * @return Returns filtered tasks.
      */
     @Override
-    public void execute(TaskList tl, Ui ui, Storage storage) throws DukeException {
+    public Response execute(TaskList tl, Ui ui, Storage storage) throws DukeException {
         // Handle occurs
         String dateTime = this.input.substring(7);
 
-        // Print tasks that contain deadline
         try {
-            tl.printTasksOnDate(dateTime);
+            String message = "Found the following tasks: ";
+            TaskList tasks = tl.findTasksOnDate(dateTime);
+
+            return new Response(message, tasks);
         } catch (InvalidDateFormatException e) {
-            System.out.println(e.getMessage());
+            return new Response(e.getMessage(), tl);
         }
     }
 }
