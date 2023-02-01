@@ -9,17 +9,7 @@ import duke.command.MarkCommand;
 import duke.command.UnmarkCommand;
 import duke.exception.DukeException;
 
-/**
- * Parser that deals with making sense of the user command.
- */
 public class Parser {
-
-    /**
-     * Parses the user input.
-     * @param fullCommand the user input.
-     * @return Command that executes the required action according to the user input.
-     * @throws DukeException if the user input cannot be parsed.
-     */
     public static Command parse(String fullCommand) throws DukeException {
         String commandKeyword;
         String restOfCommand = "";

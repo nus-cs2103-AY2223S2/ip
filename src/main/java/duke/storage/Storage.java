@@ -1,33 +1,17 @@
 package duke.storage;
 
 import duke.exception.DukeException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.TaskList;
-import duke.task.ToDo;
+import duke.task.*;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-/**
- * Stores the user tasks.
- */
 public class Storage {
     protected String filePath;
     protected File file;
 
-    /**
-     * Constructor for the Storage class.
-     * @param filePath the pathname string of the file to keep track of user things.
-     * @throws DukeException If there was an error in finding or creating the file.
-     */
     public Storage(String filePath) throws DukeException {
         try {
             this.filePath = filePath;
@@ -38,11 +22,6 @@ public class Storage {
         }
     }
 
-    /**
-     * Loads the Tasks stored in the file to the TaskList class, to be used for the current Duke program.
-     * @return ArrayList containing the Tasks stored in the file.
-     * @throws DukeException If there was an error when attempting to read the file.
-     */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasksArrayList = new ArrayList<>();
         try {
@@ -63,11 +42,6 @@ public class Storage {
         return tasksArrayList;
     }
 
-    /**
-     * Converts a line of text in the file to a Task.
-     * @param currentLine the current line of text being parsed.
-     * @return the converted Task.
-     */
     public Task taskStringParser(String currentLine) {
         String taskType = currentLine.substring(0, 3);
         String marked = currentLine.substring(3, 6);
@@ -110,11 +84,6 @@ public class Storage {
         }
     }
 
-    /**
-     * Updates the file whenever there is a change in the TaskList.
-     * @param taskList containing the updated Tasks.
-     * @throws DukeException If there is an error when updating the file.
-     */
     public void update(TaskList taskList) throws DukeException {
         try {
             FileWriter fileWriter = new FileWriter(filePath);
