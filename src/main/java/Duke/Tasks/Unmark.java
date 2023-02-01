@@ -11,7 +11,7 @@ public class Unmark extends Task {
      * The constructor of Unmark
      * @param index the index of the task
      */
-    public Unmark(int index) {
+    public Unmark(int index, int... nums) {
         super(false, "Undone");
         this.index = index;
     }

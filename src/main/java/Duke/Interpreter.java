@@ -113,7 +113,6 @@ public class Interpreter {
      * @return Task
      * @throws InvalidTimeFormatException
      * @throws MissingDescriptionException
-     * @throws EmptyCommandException
      */
     public static Task addTask(String command, TaskTable table) throws InvalidTimeFormatException,
             MissingDescriptionException, InvalidCommandException {
@@ -141,11 +140,9 @@ public class Interpreter {
                     String deadlineAndTime = command.substring(9);
                     if (deadlineAndTime.split("/by").length != 2 || deadlineAndTime.split("/by")[0] == "")  {
                         // if after splitting by "by", the length is not 2; or "by" is not even in the command
-                        // System.out.println("wwowowoowowowowo");
                         throw new MissingDescriptionException("deadline");
                     } else {
                         try {
-                            // System.out.println("wwowowoowowowowo");
                             String deadlineName = (deadlineAndTime.split(" /by ")[0]);
                             LocalDateTime deadlineTime = LocalDateTime.parse(deadlineAndTime.split(" /by ")[1], format);
                             return new Deadline(deadlineName, deadlineTime, false);
