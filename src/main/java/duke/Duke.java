@@ -63,6 +63,9 @@ public class Duke {
                 } else if (input.startsWith("delete")) {
                     System.out.println(handler.deleteHandler(input));
                     storage.saveTasks();
+                } else if (input.startsWith("find")) {
+                    System.out.println(handler.findHandler(input));
+                    storage.saveTasks();
                 } else {
                     throw new UnknownInputException();
                 }

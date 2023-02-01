@@ -26,7 +26,7 @@ public class Parser {
     public static String[] extractArgsFromInput(String input) {
         String[] splitCommand = input.split(" ", 2);
         String type = splitCommand[0];
-        if (type.equals("todo")) {
+        if(type.equals("todo") || type.equals("find")) {
             return splitCommand;
         } else {
             String[] segments = splitCommand[1].split("/");

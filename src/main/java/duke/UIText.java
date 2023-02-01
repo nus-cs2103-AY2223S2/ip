@@ -1,5 +1,6 @@
 package duke;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class UIText {
@@ -33,5 +34,25 @@ public class UIText {
 
     public String separate() {
         return SEPARATOR + "\n";
+    }
+
+    /**
+     * Prints the list for the find method
+     * @param wordList
+     * @return string with a list of all tasks containing a given keyword
+     */
+    public static String printFind(List<Task> wordList) {
+        String heading = "Here are the matching tasks in your list: " + "\n";
+        String list = "";
+        if (wordList.size() == 0) {
+            return "No tasks found. ";
+        } else {
+            int indexCounter = 1;
+            for (Task task : wordList) {
+                list += indexCounter + ". " + task.toString() + "\n";
+                indexCounter++;
+            }
+        }
+        return heading + list;
     }
 }
