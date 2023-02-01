@@ -1,9 +1,13 @@
 package main.java;
 
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+    private static final String DATA_FILE_LOCATION = "data/duke.txt";
     private static final String FULL_LINE = "_______________________________________________\n";
     private static final String ADD_TASK_OUTPUT = "Got it. I've added this task:\n\t%s\nNow you have %d tasks in the list.";
     private static final String DELETE_TASK_OUTPUT = "Noted. I've removed this task:\n\t%s\nNow you have %d tasks in the list.";
@@ -11,10 +15,13 @@ public class Duke {
 
 
     public static void main(String[] args) {
+        System.out.println(new Todo("hi").getClass().getSimpleName());
         String welcomeString = "Hello I'm Duke, your personal task manager!";
         String byeString = "Bye. Hope to see you again soon!";
 
         printFormattedOutput(welcomeString);
+
+        taskList = loadTaskData();
 
         String input = "";
         Scanner sc = new Scanner(System.in);
@@ -55,39 +62,55 @@ public class Duke {
                     Task task = taskList.get(index - 1);
                     taskList.remove(index - 1);
                     output = String.format(DELETE_TASK_OUTPUT, task.toString(), taskList.size());
-                } else if (input.startsWith("todo")) {
-                    String desc = input.replace("todo", "").trim();
-                    if (desc.isBlank()) {
-                        throw new DukeException(ERROR.TODO_EMPTY.getMessage());
-                    }
-                    Todo task = new Todo(desc);
-                    taskList.add(task);
-                    output = String.format(ADD_TASK_OUTPUT, task.toString(), taskList.size());
-                } else if (input.startsWith("deadline")) {
-                    String desc = input.replace("deadline", "").trim();
-                    if (desc.isBlank()) {
-                        throw new DukeException(ERROR.DEADLINE_EMPTY.getMessage());
-                    }
-                    String[] params = desc.split(" /by ");
-                    Deadline task = new Deadline(params[0], params[1]);
-                    taskList.add(task);
-                    output = String.format(ADD_TASK_OUTPUT, task.toString(), taskList.size());
-                } else if (input.startsWith("event")) {
-                    String desc = input.replace("event", "").trim();
-                    if (desc.isBlank()) {
-                        throw new DukeException(ERROR.EVENT_EMPTY.getMessage());
-                    }
-                    String[] params = desc.split("( /from | /to )");
-                    Event task = new Event(params[0], params[1], params[2]);
+                } else if (input.startsWith("todo") || input.startsWith("deadline") || input.startsWith("event")) {
+                    Task task = Task.parseTaskFromInput(input);
                     taskList.add(task);
                     output = String.format(ADD_TASK_OUTPUT, task.toString(), taskList.size());
                 } else {
                     throw new DukeException(ERROR.INVALID_INPUT.getMessage());
                 }
+
                 printFormattedOutput(output);
+                saveTasksData();
+
             } catch (DukeException dukeException) {
                 printFormattedOutput(dukeException.getMessage());
             }
+        }
+    }
+
+    public static ArrayList<Task> loadTaskData() {
+        // TODO
+        ArrayList<Task> loadedTasks = new ArrayList<>();
+
+        try (BufferedReader br = new BufferedReader(new FileReader(DATA_FILE_LOCATION))) {
+            String line = null;
+            while ((line = br.readLine()) != null) {
+                loadedTasks.add(Task.parseTaskFromDB(line));
+            }
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+        return loadedTasks;
+    }
+
+    public static void saveTasksData() {
+        try {
+            // Create data dir if it doesn't exist
+            Files.createDirectories(Paths.get("data/"));
+
+            PrintWriter pw = new PrintWriter(DATA_FILE_LOCATION);
+            for (Task task: taskList) {
+                pw.println(task.toString());
+            }
+            pw.close();
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace();
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
     }
 
