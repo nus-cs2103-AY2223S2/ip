@@ -73,7 +73,8 @@ public class Parser {
                 if (input.trim().length() == 4) {
                     throw new EmptyDescriptionException("find", "description", "Missing task description");
                 }
-                return new FindCommand(input.substring(5)).execute(list, storage);
+
+                return new FindCommand(input.substring(5).split(",")).execute(list, storage);
             }
         } catch (IllegalArgumentException ex) {
             return new UnknownCommand(ex.getMessage()).execute(list, storage);

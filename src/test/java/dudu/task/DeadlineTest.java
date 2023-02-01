@@ -2,13 +2,14 @@ package dudu.task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import dudu.exception.InvalidCommandException;
 import org.junit.jupiter.api.Test;
 
 public class DeadlineTest {
     private static final String name = "deadline task";
     private static final String by = "2022-10-12";
     private Deadline task;
-    public DeadlineTest() {
+    public DeadlineTest() throws InvalidCommandException {
         this.task = new Deadline(name, by);
     }
 

@@ -1,7 +1,10 @@
 package dudu.task;
 
+import dudu.exception.InvalidCommandException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Task class for deadline
@@ -15,11 +18,10 @@ public class Deadline extends Task {
      * Constructor for deadline task.
      * @param desc Description of the task.
      * @param by The deadline date of the task.
+     * @throws InvalidCommandException If the format of the date is wrong
      */
-    public Deadline(String desc, String by) {
-        super(desc, false);
-        this.desc = desc;
-        this.by = LocalDate.parse(by);
+    public Deadline(String desc, String by) throws InvalidCommandException {
+        this(desc, by, false);
     }
 
     /**
@@ -28,10 +30,15 @@ public class Deadline extends Task {
      * @param by The deadline date of the task.
      * @param isDone The completion status of the task.
      */
-    public Deadline(String desc, String by, boolean isDone) {
+    public Deadline(String desc, String by, boolean isDone) throws InvalidCommandException {
         super(desc, isDone);
         this.desc = desc;
-        this.by = LocalDate.parse(by);
+        try {
+            this.by = LocalDate.parse(by);
+        } catch (DateTimeParseException ex) {
+            throw new InvalidCommandException(ex.getMessage(),
+                    "The date format Wrong! Please follow following format: yyyy-MM-dd");
+        }
     }
 
     @Override

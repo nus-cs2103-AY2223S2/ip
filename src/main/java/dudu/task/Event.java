@@ -1,7 +1,10 @@
 package dudu.task;
 
+import dudu.exception.InvalidCommandException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Task class for event type
@@ -18,11 +21,8 @@ public class Event extends Task {
      * @param from Starting date
      * @param to Ending date
      */
-    public Event(String desc, String from, String to) {
-        super(desc, false);
-        this.desc = desc;
-        this.from = LocalDate.parse(from);
-        this.to = LocalDate.parse(to);
+    public Event(String desc, String from, String to) throws InvalidCommandException {
+        this(desc, from, to, false);
     }
 
     /**
@@ -33,11 +33,16 @@ public class Event extends Task {
      * @param to Ending date
      * @param isDone Completing status of the task
      */
-    public Event(String desc, String from, String to, boolean isDone) {
+    public Event(String desc, String from, String to, boolean isDone) throws InvalidCommandException {
         super(desc, isDone);
         this.desc = desc;
-        this.from = LocalDate.parse(from);
-        this.to = LocalDate.parse(to);
+        try {
+            this.from = LocalDate.parse(from);
+            this.to = LocalDate.parse(to);
+        } catch (DateTimeParseException ex) {
+            throw new InvalidCommandException(ex.getMessage(),
+                    "The date format Wrong! Please follow following format: yyyy-MM-dd");
+        }
     }
 
     @Override

@@ -1,6 +1,7 @@
 package dudu.task;
 
 import dudu.exception.DuduException;
+import dudu.exception.InvalidCommandException;
 
 /**
  * Task class
@@ -94,7 +95,7 @@ public abstract class Task {
      * @param task String of task information; separate using ",".
      * @return Create a specific task using the String of task information.
      */
-    public static Task decode(String task) {
+    public static Task decode(String task) throws InvalidCommandException {
         String[] taskInfo = task.split(" \\| ");
         String type = taskInfo[0];
         boolean status = taskInfo[1].equals("1");

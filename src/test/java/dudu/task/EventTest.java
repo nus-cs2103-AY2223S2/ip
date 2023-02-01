@@ -2,6 +2,7 @@ package dudu.task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import dudu.exception.InvalidCommandException;
 import org.junit.jupiter.api.Test;
 
 public class EventTest {
@@ -9,7 +10,7 @@ public class EventTest {
     private static final String from = "2022-10-12";
     private static final String to = "2023-01-12";
     private Event task;
-    public EventTest() {
+    public EventTest() throws InvalidCommandException {
         this.task = new Event(name, from, to);
     }
 
