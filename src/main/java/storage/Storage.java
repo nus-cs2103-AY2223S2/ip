@@ -1,11 +1,8 @@
 package storage;
 
-import exceptions.DukeException;
-import tasks.Deadline;
-import tasks.Event;
-import tasks.TaskList;
-import tasks.ToDo;
-
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -13,15 +10,17 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.FileNotFoundException;
+import exceptions.DukeException;
+import tasks.Deadline;
+import tasks.Event;
+import tasks.TaskList;
+import tasks.ToDo;
 
 /**
  * Handles loading and saving of tasks to local storage.
  */
 public class Storage {
-    private final Path DUKE_DATA_DIR = Path.of(System.getProperty("user.dir") + "/data");
+    private final Path dukeDataDir = Path.of(System.getProperty("user.dir") + "/data");
     private File dataFile;
     private final TaskList tasks;
 
@@ -35,11 +34,11 @@ public class Storage {
      */
     public void load() throws IOException {
         try {
-            if (!Files.exists(DUKE_DATA_DIR)) {
-                Files.createDirectories(DUKE_DATA_DIR);
+            if (!Files.exists(dukeDataDir)) {
+                Files.createDirectories(dukeDataDir);
             }
 
-            this.dataFile = new File(this.DUKE_DATA_DIR + "/duke.txt");
+            this.dataFile = new File(this.dukeDataDir + "/duke.txt");
             boolean isCreated = true;
             if (!this.dataFile.exists()) {
                 isCreated = this.dataFile.createNewFile();
@@ -87,27 +86,27 @@ public class Storage {
         String taskName = inputList[1];
 
         switch (taskType) {
-            case "T": {
-                tasks.addTask(new ToDo(taskName));
-                break;
-            }
-            case "D": {
-                String by = inputList[2];
-                LocalDateTime deadline = LocalDateTime.parse(by, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));
-                tasks.addTask(new Deadline(taskName, deadline));
-                break;
-            }
-            case "E": {
-                String from = inputList[2];
-                String to = inputList[3];
-                LocalDateTime startDate = LocalDateTime.parse(from, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));
-                LocalDateTime endDate = LocalDateTime.parse(to, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));
-                tasks.addTask(new Event(taskName, startDate, endDate));
-                break;
-            }
-            default: {
-                throw new DukeException("Unable to parse this line: " + input);
-            }
+        case "T": {
+            tasks.addTask(new ToDo(taskName));
+            break;
+        }
+        case "D": {
+            String by = inputList[2];
+            LocalDateTime deadline = LocalDateTime.parse(by, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));
+            tasks.addTask(new Deadline(taskName, deadline));
+            break;
+        }
+        case "E": {
+            String from = inputList[2];
+            String to = inputList[3];
+            LocalDateTime startDate = LocalDateTime.parse(from, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));
+            LocalDateTime endDate = LocalDateTime.parse(to, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));
+            tasks.addTask(new Event(taskName, startDate, endDate));
+            break;
+        }
+        default: {
+            throw new DukeException("Unable to parse this line: " + input);
+        }
         }
     }
 }

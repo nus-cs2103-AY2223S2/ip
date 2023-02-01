@@ -6,7 +6,7 @@ import tasks.Task;
 import tasks.TaskList;
 import views.UI;
 
-public class FindCommand extends Command{
+public class FindCommand extends Command {
     private String searchTerm;
 
     public FindCommand(String searchTerm) {

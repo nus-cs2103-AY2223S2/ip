@@ -10,8 +10,8 @@ import views.UI;
  */
 public abstract class Command {
     /** The status of the command after execution. **/
-    String commandStatus;
-    boolean isExit = false;
+    protected String commandStatus;
+    protected boolean isExit = false;
 
     /**
      * Executes the respective command.

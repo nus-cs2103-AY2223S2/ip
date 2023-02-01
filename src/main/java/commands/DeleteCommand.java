@@ -2,14 +2,12 @@ package commands;
 
 import exceptions.DukeException;
 import storage.Storage;
-
 import tasks.Task;
 import tasks.TaskList;
-
 import views.UI;
 
-public class DeleteCommand extends Command{
-    int index;
+public class DeleteCommand extends Command {
+    private int index;
 
     public DeleteCommand(int index) {
         this.index = index;

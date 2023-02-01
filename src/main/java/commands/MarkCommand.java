@@ -1,15 +1,12 @@
 package commands;
 
 import exceptions.DukeException;
-
 import storage.Storage;
-
 import tasks.TaskList;
-
 import views.UI;
 
 public class MarkCommand extends Command {
-    int index;
+    private int index;
 
     public MarkCommand(int index) {
         this.index = index;

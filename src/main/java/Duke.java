@@ -1,7 +1,8 @@
-import commands.Command;
-import exceptions.DukeException;
 import java.io.IOException;
 import java.util.Scanner;
+
+import commands.Command;
+import exceptions.DukeException;
 import storage.Storage;
 import tasks.TaskList;
 import utils.Parser;
