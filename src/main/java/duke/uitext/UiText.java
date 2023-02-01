@@ -1,4 +1,4 @@
-package duke.uiText;
+package duke.uitext;
 
 /**
  * Class that deals with interactions with the user.

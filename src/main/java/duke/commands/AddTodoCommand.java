@@ -4,7 +4,7 @@ import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.ToDoTask;
-import duke.uiText.UiText;
+import duke.uitext.UiText;
 
 /**
  * Represents a command to add a Todo task to a tasklist.

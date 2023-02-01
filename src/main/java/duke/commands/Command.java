@@ -3,7 +3,7 @@ package duke.commands;
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.uiText.UiText;
+import duke.uitext.UiText;
 
 /**
  * Represents a command that can be executed by Duke.

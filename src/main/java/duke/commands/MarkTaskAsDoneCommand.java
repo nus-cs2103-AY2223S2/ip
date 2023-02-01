@@ -3,7 +3,7 @@ package duke.commands;
 import duke.exception.InvalidArgumentDukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.uiText.UiText;
+import duke.uitext.UiText;
 
 /**
  * Represents a command to mark a task as done.

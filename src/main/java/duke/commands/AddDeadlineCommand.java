@@ -6,7 +6,7 @@ import duke.storage.Storage;
 import duke.task.DeadlineTask;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.uiText.UiText;
+import duke.uitext.UiText;
 
 /**
  * Represents a command to add a deadline to a tasklist.

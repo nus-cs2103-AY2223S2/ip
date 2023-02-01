@@ -6,7 +6,7 @@ import duke.storage.Storage;
 import duke.task.EventTask;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.uiText.UiText;
+import duke.uitext.UiText;
 
 /**
  * Represents a command to add an event to a tasklist.
