@@ -30,93 +30,22 @@ public class Duke extends Application {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    TaskList mainTaskList;
+    Storage mainStorage;
+    Ui mainUi;
+
+    public Duke() {
+        mainTaskList = new TaskList();
+        mainStorage = new Storage(mainTaskList); // will load from file
+        mainUi = new Ui(mainTaskList);
+    }
+
     private static Task getTaskForMarking(String[] parsed, TaskList tempTaskList) {
         int completedIndex = Integer.parseInt(parsed[1]) - 1; // index of the task completed
         Task completedTask = tempTaskList.getTaskAtIndex(completedIndex); // actual task
         return completedTask;
     }
-    public static void main(String[] args) throws EmptyDescriptionException, IOException {
-        TaskList mainTaskList = new TaskList();
-        Storage mainStorage = new Storage(mainTaskList); // will load from file
 
-        Ui mainUi = new Ui(mainTaskList);
-
-        mainUi.greetUser();
-
-        label:
-        while (true) {
-            String command = mainUi.getNextTask();
-
-            String[] toFindFirstWord = Parser.parse(command, Parser.ParseFunctions.SPLIT_ALL); // take a comment
-
-            String first = toFindFirstWord[0];
-
-            switch (first) {
-            case "bye":
-                mainUi.printReply("bye");
-                break label;
-            case "mark":
-                Task completedTask = getTaskForMarking(toFindFirstWord, mainTaskList);
-                completedTask.setCompletion();
-                mainUi.printReply("mark", completedTask);
-
-                String[] parsed = Parser.parse(command, Parser.ParseFunctions.TODO);
-                mainStorage.changeTaskCompletion(Integer.parseInt(parsed[1]));
-                break;
-            case "unmark":
-                completedTask = getTaskForMarking(toFindFirstWord, mainTaskList);
-                completedTask.setCompletion();
-                mainUi.printReply("unmark", completedTask);
-
-                parsed = Parser.parse(command, Parser.ParseFunctions.TODO);
-                mainStorage.changeTaskCompletion(Integer.parseInt(parsed[1]));
-                break;
-
-            case "delete":
-                Task toDelete = getTaskForMarking(toFindFirstWord, mainTaskList);
-
-                parsed = Parser.parse(command, Parser.ParseFunctions.TODO);
-                mainStorage.deleteTask(Integer.parseInt(parsed[1]));
-
-                mainUi.printReply("delete", toDelete);
-                break;
-            case "deadline":
-                parsed = Parser.parse(command, Parser.ParseFunctions.DEADLINE);
-                Task newDeadline = new Deadline(parsed[1], LocalDate.parse(parsed[2]));
-                mainStorage.addTask(newDeadline);
-                mainUi.printReply("deadline", newDeadline);
-                break;
-            case "event":
-                parsed = Parser.parse(command, Parser.ParseFunctions.EVENT);
-                Task newEvent = new Event(parsed[1], LocalDate.parse(parsed[2]), LocalDate.parse(parsed[3]));
-                mainStorage.addTask(newEvent);
-                mainUi.printReply("event", newEvent);
-                break;
-            case "find":
-                parsed = Parser.parse(command, Parser.ParseFunctions.TODO);
-
-                // ask mainStorage to return an ArrayList of matching tasks
-                ArrayList<Task> matchingTasks = mainStorage.getMatchingTasks(parsed[1]);
-
-                // ask mainUi to print out each task one by one
-                mainUi.printMatchingTasks(matchingTasks);
-                break;
-            case "todo":
-                try {
-                    parsed = Parser.parse(command, Parser.ParseFunctions.TODO);
-                    ToDo newToDo = new ToDo(parsed[1]);
-                    mainStorage.addTask(newToDo);
-                    mainUi.printReply("todo", newToDo);
-                    break;
-                } catch (EmptyDescriptionException e) {
-                    System.out.println("  Add an argument");
-                }
-            default:
-                mainUi.printReply(first);
-                break;
-            }
-        }
-    }
     @Override
     public void start(Stage stage) {
         //Step 1. Setting up required components
@@ -184,12 +113,15 @@ public class Duke extends Application {
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput(TextField userInput, VBox dialogContainer) {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
-        );
+        try {
+            Label userText = new Label(userInput.getText());
+            Label dukeText = new Label(getResponse(userInput.getText()));
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(userText, new ImageView(user)),
+                    DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+            );
+        }
+        catch (Exception ignored) {}
         userInput.clear();
     }
 
@@ -197,9 +129,83 @@ public class Duke extends Application {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    String getResponse(String input) {
-        for (int i = 0; i < )
-        return "Duke heard: " + input;
+    public String getResponse(String command) throws EmptyDescriptionException, IOException {
+        String[] toFindFirstWord = Parser.parse(command, Parser.ParseFunctions.SPLIT_ALL); // take a comment
+
+        String first = toFindFirstWord[0];
+
+        ArrayList<String> reply = null;
+
+        switch (first) {
+        case "bye":
+            System.out.println(first);
+            reply = mainUi.printReply("bye");
+            break;
+        case "mark":
+            Task completedTask = getTaskForMarking(toFindFirstWord, mainTaskList);
+            completedTask.setCompletion();
+            reply = mainUi.printReply("mark", completedTask);
+
+            String[] parsed = Parser.parse(command, Parser.ParseFunctions.TODO);
+            mainStorage.changeTaskCompletion(Integer.parseInt(parsed[1]));
+            break;
+        case "unmark":
+            completedTask = getTaskForMarking(toFindFirstWord, mainTaskList);
+            completedTask.setCompletion();
+            reply = mainUi.printReply("unmark", completedTask);
+
+            parsed = Parser.parse(command, Parser.ParseFunctions.TODO);
+            mainStorage.changeTaskCompletion(Integer.parseInt(parsed[1]));
+            break;
+        case "delete":
+            Task toDelete = getTaskForMarking(toFindFirstWord, mainTaskList);
+
+            parsed = Parser.parse(command, Parser.ParseFunctions.TODO);
+            mainStorage.deleteTask(Integer.parseInt(parsed[1]));
+
+            reply = mainUi.printReply("delete", toDelete);
+            break;
+        case "deadline":
+            parsed = Parser.parse(command, Parser.ParseFunctions.DEADLINE);
+            Task newDeadline = new Deadline(parsed[1], LocalDate.parse(parsed[2]));
+            mainStorage.addTask(newDeadline);
+            reply = mainUi.printReply("deadline", newDeadline);
+            break;
+        case "event":
+            parsed = Parser.parse(command, Parser.ParseFunctions.EVENT);
+            Task newEvent = new Event(parsed[1], LocalDate.parse(parsed[2]), LocalDate.parse(parsed[3]));
+            mainStorage.addTask(newEvent);
+            reply = mainUi.printReply("event", newEvent);
+            break;
+        case "find":
+            parsed = Parser.parse(command, Parser.ParseFunctions.TODO);
+
+            // ask mainStorage to return an ArrayList of matching tasks
+            ArrayList<Task> matchingTasks = mainStorage.getMatchingTasks(parsed[1]);
+
+            // ask mainUi to print out each task one by one
+            reply = mainUi.printMatchingTasks(matchingTasks);
+            break;
+        case "todo":
+            try {
+                parsed = Parser.parse(command, Parser.ParseFunctions.TODO);
+                ToDo newToDo = new ToDo(parsed[1]);
+                mainStorage.addTask(newToDo);
+                reply = mainUi.printReply("todo", newToDo);
+                break;
+            } catch (EmptyDescriptionException e) {
+                reply.add("  Add an argument");
+            }
+        default:
+            reply = mainUi.printReply(first);
+            break;
+        }
+
+        StringBuilder finalString = new StringBuilder();
+        for (int i = 0; i < reply.size(); i++) {
+            finalString.append("Duke heard: ").append(reply.get(i)).append("\n");
+        }
+        return finalString.toString();
     }
 
 }

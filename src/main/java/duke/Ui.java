@@ -98,7 +98,7 @@ public class Ui {
         case "deadline":
         case "event":
         case "todo":
-            printNewTask(currTask);
+            temp = printNewTask(currTask);
             break;
         }
         return temp;
@@ -106,8 +106,8 @@ public class Ui {
 
     public ArrayList<String> printMatchingTasks(ArrayList<Task> matchingTasks) {
         ArrayList<String> temp = new ArrayList<>();
+        temp.add("You have " + String.valueOf(matchingTasks.size()) + " matching tasks");
         for (int i = 0; i < matchingTasks.size(); i++) {
-            temp.add("You have " + String.valueOf(matchingTasks.size()) + " matching tasks");
             temp.add("  " + matchingTasks.get(i));
         }
         return temp;
