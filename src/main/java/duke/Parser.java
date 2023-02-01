@@ -11,6 +11,11 @@ public class Parser {
         return displayDate;
     }
 
+    /**
+     * Changes the format of the date and time for display.
+     * @param str String object of the saved date and time.
+     * @return String object of the date and time used for display.
+     */
     public static String retrieveDate(String str) {
         LocalDateTime date = LocalDateTime.parse(str, DateTimeFormatter.ofPattern("MMM dd yyyy HHmm"));
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");

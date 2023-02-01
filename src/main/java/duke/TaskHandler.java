@@ -28,6 +28,11 @@ public class TaskHandler {
         }
     }
 
+    /**
+     * Marks a task as done.
+     * @param input User input.
+     * @return Display of task marked if it exists.
+     */
     public String markAsDone(String input) {
         int index = Parser.findIndex(input);
         int listIndex = index + 1;
@@ -38,7 +43,11 @@ public class TaskHandler {
             return "No such task.";
         }
     }
-
+    /**
+     * Marks a task as undone.
+     * @param input User input.
+     * @return Display of task marked if it exists.
+     */
     public String markAsUndone(String input) {
         int index = Parser.findIndex(input);
         int listIndex = index + 1;
@@ -54,6 +63,12 @@ public class TaskHandler {
         }
     }
 
+    /**
+     * Creates an event task.
+     * @param input User input.
+     * @return Display of event task created.
+     * @throws EmptyContentException
+     */
     public String eventHandler(String input) throws EmptyContentException {
         if (input.length() < 7) {
             throw new EmptyContentException("event");
@@ -70,7 +85,12 @@ public class TaskHandler {
         content.add(newEvent);
         return HEADER + "\n" + newEvent + "\n" + String.format("Now you have %d tasks in the list.", content.size()) + "\n";
     }
-
+    /**
+     * Creates a todo task.
+     * @param input User input.
+     * @return Display of event task created.
+     * @throws EmptyContentException
+     */
     public String todoHandler(String input) throws EmptyContentException {
         if (input.length() < 5) {
             throw new EmptyContentException("todo");
@@ -87,6 +107,12 @@ public class TaskHandler {
         return HEADER + "\n" + newTodo + "\n" + String.format("Now you have %d tasks in the list.", content.size()) + "\n";
 
     }
+    /**
+     * Creates a deadline task.
+     * @param input User input.
+     * @return Display of deadline task created.
+     * @throws EmptyContentException
+     */
     public String deadlineHandler(String input) throws EmptyContentException {
         if (input.length() < 9) {
             throw new EmptyContentException("deadline");
@@ -105,6 +131,13 @@ public class TaskHandler {
 
     }
 
+    /**
+     * Deletes a task from the list.
+     * @param input User input.
+     * @return Confirmation of task deleted if it exists.
+     * @throws EmptyContentException
+     * @throws InvalidTaskAccessException
+     */
     public String deleteHandler(String input) throws EmptyContentException, InvalidTaskAccessException {
         if (input.length() < 7) {
             throw new EmptyContentException("delete");

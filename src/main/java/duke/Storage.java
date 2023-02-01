@@ -9,6 +9,10 @@ public class Storage {
         this.path = path;
     }
 
+    /**
+     * Method to load content of the saved list and create the file for list storage if it does not exist.
+     * @throws IOException
+     */
     public void initialize() throws IOException {
         File newFile = new File(this.path);
 
@@ -20,6 +24,9 @@ public class Storage {
         loadTasks(newFile);
     }
 
+    /**
+     * Saves the current list into a text file.
+     */
     public void saveTasks() {
         try {
             FileWriter fileWriter = new FileWriter(path);

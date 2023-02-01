@@ -1,3 +1,2 @@
 deadline / undone / return book  / Dec 13 2000 1200
-todo / undone / sleep
-deadline / undone / do ps1  / Dec 03 2021 1200
+deadline / done / do ps1  / Dec 03 2021 1200
