@@ -1,5 +1,13 @@
 package duke.storage;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import duke.exception.InvalidDateTimeException;
 import duke.helper.Parser;
 import duke.helper.TaskList;
@@ -8,21 +16,18 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-
-import java.util.ArrayList;
-import java.util.Scanner;
-
 /**
  * FileSystem class that handles the saving and loading of tasks
  */
 public class FileSystem {
     private File file;
 
+    /**
+     * Constructor for FileSystem class
+     *
+     * @param relFilePath files's location
+     * @throws IOException If file cannot be created
+     */
     public FileSystem(String relFilePath) throws IOException {
         String dirPath = relFilePath.split("/")[0];
         File dir = new File(dirPath);
@@ -85,15 +90,23 @@ public class FileSystem {
                 String[] eventDesc = Parser.parseEventDesc(task.substring(7));
                 tasks.add(new Event(eventDesc[0], eventDesc[1], eventDesc[2], isMark));
                 break;
+            default:
+                if (isMark) {
+                    tasks.get(tasks.size() - 1).setIsDone(true);
+                }
             }
 
-            if (isMark) {
-                tasks.get(tasks.size() - 1).setIsDone(true);
-            }
+
         }
         return tasks;
     }
 
+    /**
+     * Adds task to the file storage
+     *
+     * @param textToAppend task to be added to file storage
+     * @throws IOException if file cannot be created or accessed
+     */
     public void appendToFile(String textToAppend) throws IOException {
         BufferedWriter fw = new BufferedWriter(new FileWriter(file, true));
         fw.write(textToAppend);

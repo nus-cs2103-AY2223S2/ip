@@ -1,9 +1,9 @@
 package duke.helper;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.task.Task;
 
 /**
  * Ui class that handles all the interactions with the users
@@ -90,12 +90,17 @@ public class Ui {
      * @param task task to be added
      * @param size the number of tasks after the task is added
      */
-    public void showTaskOutput(Task task, int size) {
+    public static void showTaskOutput(Task task, int size) {
         System.out.println("Got it. I've added this task:");
         System.out.println(task);
         System.out.println("Now you have " + size + " tasks in the list.");
     }
 
+    /**
+     * prints the message for searching a file
+     *
+     * @param taskList List of all the tasks
+     */
     public static void filter(ArrayList<Task> taskList) {
         System.out.println("Here are the matching tasks in your list:");
         for (Task task : taskList) {

@@ -1,8 +1,9 @@
 package duke.task;
 
+import java.time.LocalDateTime;
+
 import duke.exception.InvalidDateTimeException;
 import duke.helper.Parser;
-import java.time.LocalDateTime;
 
 /**
  * Subclass of task representing a deadline task
@@ -10,6 +11,14 @@ import java.time.LocalDateTime;
 public class Deadline extends Task {
     private LocalDateTime dueDateTime;
 
+    /**
+     * Constructor for Deadline Class
+     *
+     * @param description desc of the task
+     * @param by task's deadline
+     * @param isDone whether the task is done
+     * @throws InvalidDateTimeException If the dateTime input is invalid
+     */
     public Deadline(String description, String by, boolean isDone) throws InvalidDateTimeException {
         super(description, isDone, "D");
         this.dueDateTime = Parser.handleDateTime(by);
