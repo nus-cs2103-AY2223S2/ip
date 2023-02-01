@@ -1,9 +1,5 @@
 package duke;
 
-import duke.Deadline;
-import duke.DukeException;
-import duke.Event;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -17,6 +13,11 @@ public class Storage {
     private boolean filePresent = false;
     private File fileCreation;
 
+    /**
+     * Constructor to create a directory or file to store the tasklist locally on the user's computer.
+     * @param filePath location of where the file should be saved
+     * @throws IOException when input or output cannot be interpreted and when the program do not have access to create a new file.
+     */
     public Storage(String filePath) throws IOException {
         try {
             this.filePath = filePath;
@@ -46,6 +47,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the current tasklist locally on the user's computer.
+     * @param tasklist the current working tasklist that has been created by the user.
+     * @throws FileNotFoundException if the location to store the tasklist in is not available.
+     */
     public void saveToFile(Tasklist tasklist) throws FileNotFoundException {
         storeInFile = new PrintWriter(fileCreation);
         for (int i = 0; i < tasklist.getList().size(); i++) {
@@ -56,10 +62,19 @@ public class Storage {
         }
     }
 
+    /**
+     * Closes the directory or file once saving has been complete.
+     */
     public void storageClose() {
         storeInFile.close();
     }
 
+    /**
+     * Retrieves the saved tasklist that was previously created by the user.
+     * @return the arraylist containing all the previously saved tasks.
+     * @throws DukeException when the user input is incorrect or cannot be understood.
+     * @throws FileNotFoundException if the file where the old tasklist was stored at is not available.
+     */
     public ArrayList<Task> load() throws DukeException, FileNotFoundException {
         if (filePresent) {
             ArrayList<Task> storage = new ArrayList<Task>();

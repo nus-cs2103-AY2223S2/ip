@@ -1,22 +1,31 @@
 package duke;
 
-import duke.Deadline;
-import duke.Event;
-import duke.Task;
-
 import java.util.ArrayList;
 
 public class Tasklist {
     private ArrayList<Task> storage;
 
+    /**
+     * Constructor to create a brand new TaskList if there is non stored locally.
+     */
     public Tasklist() {
         storage = new ArrayList<Task>();
     }
 
+    /**
+     * Constructor that loads the TaskList that was previously stored locally in the harddisk.
+     * @param load the TaskList that was locally stored in the harddisk.
+     */
     public Tasklist(ArrayList<Task> load) {
         storage = load;
     }
 
+    /**
+     * Updates the status of the current task, where users get to mark a task when completed, unmark a task, or even delete a task if
+     * the task is no longer necessary to them.
+     * @param request the type of request that the user requested for.
+     * @param position position of the current task in the tasklist.
+     */
     public void updateTask(String request, int position) {
         switch(request) {
             case "mark":
@@ -32,6 +41,10 @@ public class Tasklist {
                 storage.remove(position);
         }
     }
+
+    /**
+     * Prints all the tasks that are available in the current Tasklist to console.
+     */
     public void printList() {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < storage.size(); i++) {
@@ -39,6 +52,11 @@ public class Tasklist {
         }
     }
 
+    /**
+     * Adds tasks to the Tasklist.
+     * @param type the type of task to be added.
+     * @param content the user input that they typed in the command line.
+     */
     public void addingActivities(String type, String content) {
         switch (type) {
             case "todo":
@@ -61,6 +79,11 @@ public class Tasklist {
                 break;
         }
     }
+
+    /**
+     * Returns an ArrayList that currently contains all the task that have been added or marked.
+     * @return The ArrayList containing all the tasks.
+     */
 
     public ArrayList<Task> getList() {
         return storage;

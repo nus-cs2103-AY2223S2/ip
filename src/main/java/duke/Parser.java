@@ -1,11 +1,18 @@
 package duke;
 
-import duke.DukeException;
-
 import java.io.FileNotFoundException;
 
 public class Parser {
 
+    /**
+     * Processes the user input and helps to run the user's commands.
+     * @param userInput instructions given by the user.
+     * @param tasklist the existing tasklist that has been created.
+     * @param ui user interface to handle interactions with user.
+     * @param storage current file to store the tasklist to.
+     * @throws DukeException if user command is not understood or incorrect.
+     * @throws FileNotFoundException if file to store the tasklist do not exist.
+     */
     public void parse(String userInput, Tasklist tasklist, Ui ui, Storage storage) throws DukeException, FileNotFoundException {
         if (userInput.equals("list")) {
             tasklist.printList();
