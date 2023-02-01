@@ -99,6 +99,10 @@ public abstract class Task {
     public DateFormat getWriteFormat() {
         return this.writeFormat;
     }
+    
+    public boolean match(String keyword) {
+        return this.description.contains(keyword);
+    }
 
     /**
      * Returns the string representation of the task.

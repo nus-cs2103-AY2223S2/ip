@@ -132,6 +132,17 @@ public class TaskList {
         return this.list.isEmpty();
     }
 
+    public TaskList find(String keyword) {
+        TaskList found = new TaskList();
+        for (int i = 0; i < this.list.size(); i++) {
+            Task task = this.list.get(i);
+            if (task.match(keyword)) {
+                found.add(task);
+            }
+        }
+        return found;
+    }
+
     /**
      * Overrides the toString() method to display the TaskList object in a formatted manner.
      *

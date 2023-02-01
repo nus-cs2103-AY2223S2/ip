@@ -210,10 +210,19 @@ public enum Command {
         }
     },
 
+    FIND("find") {
+        @Override
+        public void execute(String input) {
+            String keyword = input.substring(1);
+            TaskList found = list.find(keyword);
+            Ui.printListFound(found);
+        }
+    },
+
     /**
      * Exits the task management system.
      */
-    BYE("bye") {
+    BYE ("bye") {
         @Override
         public void execute(String input) throws SundayException {
             boolean didSave = list.save();
