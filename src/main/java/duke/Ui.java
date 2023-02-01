@@ -3,6 +3,8 @@ package duke;
  * Handles interactions with the user.
  */
 public class Ui {
+    static String TOP_DIVIDER = "~~~~~~~~~~~~~~~~o~~~~~~~~~~~~~~~~\n" + "Duke's Response: \n\n";
+    static String BOTTOM_DIVIDER = "\n~~~~~~~~~~~~~~~~o~~~~~~~~~~~~~~~~";
     private static String HELP_MESSAGE = "The available commands are: \n" +
             "1) list\n" +
             "2) bye\n" +
@@ -26,10 +28,9 @@ public class Ui {
      * @param message The response message to be delivered to the user.
      */
     public void respond(String message) {
-        String topDivider = "~~~~~~~~~~~~~~~~o~~~~~~~~~~~~~~~~\n" + "Duke's Response: \n";
-        String botDivider = "\n~~~~~~~~~~~~~~~~o~~~~~~~~~~~~~~~~";
-        System.out.println(topDivider + "\n" + message + botDivider);
+        System.out.println(TOP_DIVIDER + message + BOTTOM_DIVIDER);
     }
+
 
     /**
      * Displays a loading error message to the user.
@@ -52,6 +53,8 @@ public class Ui {
     public void showHelpMessage() {
         System.out.println(HELP_MESSAGE);
     }
+
+
 
 
 
