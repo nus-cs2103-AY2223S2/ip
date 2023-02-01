@@ -48,7 +48,7 @@ checkstyle {
 }
 
 application {
-    mainClassName = "jeo.JeoBot"
+    mainClassName = "Launcher"
 }
 
 shadowJar {
