@@ -1,6 +1,7 @@
 package util;
 
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 public interface Either<L, R> {
     default public boolean isLeft() {
@@ -18,6 +19,8 @@ public interface Either<L, R> {
     public <T> Either<T, R> map(Function<? super L, ? extends T> f);
 
     public <T> Either<T, R> flatMap(Function<? super L, ? extends Either<? extends T, ? extends R>> f);
+
+    public Either<L, R> filterOrElse(Predicate<? super L> tester, R failRes);
 
     public <T> T match(Function<? super L, ? extends T> l, Function<? super R, ? extends T> r);
 
@@ -59,6 +62,11 @@ public interface Either<L, R> {
             }
 
             @Override
+            public Either<L, R> filterOrElse(Predicate<? super L> tester, R failRes) {
+                return tester.test(this.left) ? this : Either.right(failRes);
+            }
+
+            @Override
             public <T> T match(Function<? super L, ? extends T> l, Function<? super R, ? extends T> r) {
                 return l.apply(this.left);
             }
@@ -97,6 +105,11 @@ public interface Either<L, R> {
             @Override
             public <T> Either<T, R> flatMap(Function<? super L, ? extends Either<? extends T, ? extends R>> f) {
                 return Either.<T, R>right(this.right);
+            }
+
+            @Override
+            public Either<L, R> filterOrElse(Predicate<? super L> tester, R failRes) {
+                return this; 
             }
 
             @Override
