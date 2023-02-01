@@ -1,9 +1,6 @@
 package duke.taskmanager;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,21 +48,39 @@ public class TaskList {
         return lst.size();
     }
 
-    public static void rewrite(TaskList lst) throws IOException {
+    public static void rewrite(TaskList lst) {
         //rewrite file when un/mark or un/mark specific line if possible
-        PrintWriter writer = new PrintWriter("duke/bot/data/tasks.txt");
+        PrintWriter writer = null;
+        try {
+            writer = new PrintWriter("duke/bot/data/tasks.txt");
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
         writer.close();
         List<Tasks> todos = lst.getList();
-        BufferedWriter bw = new BufferedWriter(new FileWriter("duke/bot/data/tasks.txt", true));
+        BufferedWriter bw = null;
+        try {
+            bw = new BufferedWriter(new FileWriter("duke/bot/data/tasks.txt", true));
+        } catch (IOException ignored) {
+
+        }
         for(Tasks i : todos) {
             try {
                 bw.newLine();
                 bw.append(i.icon()).append(" ∵ ").append(i.completed()).append(" ∵ ").append(i.desc.split(" ", 2)[1]);
             } catch (IOException io) {
-                throw new IOException(io.getMessage());
+                try {
+                    throw new IOException(io.getMessage());
+                } catch (IOException ignored) {
+
+                }
             }
         }
-        bw.close();
+        try {
+            bw.close();
+        } catch (IOException ignored) {
+
+        }
     }
 
 

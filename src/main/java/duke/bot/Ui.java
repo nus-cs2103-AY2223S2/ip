@@ -1,5 +1,8 @@
 package duke.bot;
 
+
+import javafx.application.Application;
+
 /**
  * UI class for displaying user interface.
  */
@@ -15,6 +18,7 @@ public class Ui {
         System.out.println("Hello from\n" + logo);
         Greet();
     }
+
 
     /*Code which prompts user input to start main driver code in Duke*/
     public static void Greet() {

@@ -14,10 +14,21 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+
     /*constructor for duke bot with its storage*/
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
+        }
+    }
+    public Duke() {
+        ui = new Ui();
+        storage = new Storage("duke/bot/data/tasks.txt");
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -31,12 +42,11 @@ public class Duke {
         Scanner instr = new Scanner(System.in);
         while (instr.hasNextLine()) {
             String str = instr.nextLine();
-            try {
-                Parser.parse(str, tasks);
-            } catch (IOException ignored) {
-
-            }
+            Parser.parse(str, tasks);
         }
+    }
+    public String getResponse(String input, TaskList tasks)  {
+        return "Duke: " + Parser.parse(input, tasks);
     }
 
     /*initialise duke bot with path of storage*/
@@ -45,4 +55,12 @@ public class Duke {
     }
 
 
+    public TaskList getTasks() {
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException ignored) {
+
+        }
+        return tasks;
+    }
 }
