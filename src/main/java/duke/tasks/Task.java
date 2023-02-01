@@ -36,6 +36,13 @@ abstract public class Task {
      */
     abstract public String save();
 
+    /**
+     * Returns a boolean indicating whether the title of the Task object
+     * contains the given keyword.
+     *
+     * @param keyword The keyword to check with the title.
+     * @return A boolean indicating if the title contains the keyword.
+     */
     public boolean contains(String keyword) {
         return this.title.contains(keyword);
     }

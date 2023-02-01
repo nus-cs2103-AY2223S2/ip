@@ -1,7 +1,7 @@
 package duke.functions;
 
 import duke.ToDoList;
-import duke.exceptions.DukeException;
+
 import duke.tasks.DeadlineTask;
 import duke.tasks.EventTask;
 import duke.tasks.Task;
@@ -10,9 +10,11 @@ import duke.tasks.ToDoTask;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.Path;
+
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -23,7 +25,7 @@ import java.util.regex.Pattern;
  * the specified directory path respectively.
  */
 public class Storage {
-    Path path;
+    private Path path;
 
     public Storage(String pathStr) {
         String home = System.getProperty("user.home");
@@ -58,37 +60,37 @@ public class Storage {
                 Files.createFile(path);
             }
             File f = new File(path.toString());
-            ToDoList ls = new ToDoList();
+            ToDoList list = new ToDoList();
             Scanner sc = new Scanner(f);
             while (sc.hasNext()) {
-                String[] input = sc.nextLine().split(Pattern.quote("/+/"));
-                String command = input[0];
+                String[] inputs = sc.nextLine().split(Pattern.quote("/+/"));
+                String command = inputs[0];
                 Task task;
                 switch (command) {
                 case "TODO":
-                    task = new ToDoTask(input[2]);
-                    if (input[1].equals("DONE")) {
+                    task = new ToDoTask(inputs[2]);
+                    if (inputs[1].equals("DONE")) {
                         task.markDone();
                     }
-                    ls.add(task);
+                    list.add(task);
                     break;
                 case "DEADLINE":
-                    task = new DeadlineTask(input[2], input[3]);
-                    if (input[1].equals("DONE")) {
+                    task = new DeadlineTask(inputs[2], inputs[3]);
+                    if (inputs[1].equals("DONE")) {
                         task.markDone();
                     }
-                    ls.add(task);
+                    list.add(task);
                     break;
                 case "EVENT":
-                    task = new EventTask(input[2], input[3], input[4]);
-                    if (input[1].equals("DONE")) {
+                    task = new EventTask(inputs[2], inputs[3], inputs[4]);
+                    if (inputs[1].equals("DONE")) {
                         task.markDone();
                     }
-                    ls.add(task);
+                    list.add(task);
                     break;
                 }
             }
-            return ls;
+            return list;
         } catch (Exception e) {
             return new ToDoList();
         }
@@ -98,14 +100,14 @@ public class Storage {
      * Saves the specific states of the different Task objects in the give ToDoList
      * to the file pointed to by the path stored in the Storage object.
      *
-     * @param ls The ToDoList that is to have its state saved.
+     * @param list The ToDoList that is to have its state saved.
      */
-    public void save(ToDoList ls)  {
+    public void save(ToDoList list)  {
         try {
             FileWriter fw = new FileWriter(path.toString());
-            int count = ls.getToDoCount();
+            int count = list.getToDoCount();
             for (int i = 1; i <= count; i++) {
-                fw.write(ls.getTask(i).save());
+                fw.write(list.getTask(i).save());
             }
             fw.close();
         } catch (Exception e) {
