@@ -1,4 +1,8 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+
+import static utils.FormatHelper.INPUTFORMAT;
 
 public class TaskList {
     private ArrayList<Task> tasks;
@@ -56,5 +60,76 @@ public class TaskList {
             response.append("Now you have ").append(this.size()).append(" tasks in the list.");
             return response.toString();
         }
+    }
+
+    public String mark(int index) throws DukeException {
+        if (index >= tasks.size() || index < 0) {
+            throw new DukeException("Task index out of bounds, please input a valid index");
+        } else {
+            Task curTask = tasks.get(index);
+            curTask.setCompleted(true);
+            String output;
+            output = "Nice! I've marked this task as done:\n";
+            return output + "  " + curTask.toString();
+        }
+    }
+
+    public String unmark(int index) throws DukeException {
+        if (index >= tasks.size() || index < 0) {
+            throw new DukeException("Task index out of bounds, please input a valid index");
+        } else {
+            Task curTask = tasks.get(index);
+            curTask.setCompleted(false);
+            String output;
+            output = "OK, I've marked this task as not done yet:\n";
+            return output + "  " + curTask.toString();
+        }
+    }
+
+    public String addTodo(String description) throws DukeException {
+        try {
+            StringBuilder response = new StringBuilder();
+            response.append("Got it. I've added this task:\n");
+            tasks.add(new Todo(description));
+            response.append(getAfterAddStatus());
+            return response.toString();
+
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Invalid Date and Time provided, use the format: dd/MM/yyyy HH:mm");
+        }
+    }
+
+    public String addDeadline(String description, LocalDateTime by) throws DukeException {
+        try {
+            StringBuilder response = new StringBuilder();
+            response.append("Got it. I've added this task:\n");
+            tasks.add(new Deadline(description, by));
+            response.append(getAfterAddStatus());
+            return response.toString();
+
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Invalid Date and Time provided, use the format: dd/MM/yyyy HH:mm");
+        }
+    }
+
+    public String addEvent(String description, LocalDateTime from, LocalDateTime to) throws DukeException {
+        try {
+            StringBuilder response = new StringBuilder();
+            response.append("Got it. I've added this task:\n");
+            tasks.add(new Event(description, from, to));
+            response.append(getAfterAddStatus());
+            return response.toString();
+
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Invalid Date and Time provided, use the format: dd/MM/yyyy HH:mm");
+        }
+    }
+
+    private String getAfterAddStatus() {
+        int count = tasks.size();
+        StringBuilder response = new StringBuilder();
+        response.append("  ").append(getTaskString(count - 1)).append("\n");
+        response.append("Now you have ").append(count).append(" tasks in the list.");
+        return response.toString();
     }
 }
