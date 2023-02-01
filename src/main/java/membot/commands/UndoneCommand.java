@@ -27,10 +27,9 @@ public class UndoneCommand extends Command {
             int taskId = Integer.parseInt(this.input.split(" ")[1]);
             try {
                 Task.setStatusNew(taskId);
-                this.ui.println(true,
+                this.ui.println(
                         "The task is now marked as not done yet:",
-                        String.format("%d. %s", taskId, Task.listOne(taskId)),
-                        ""
+                        String.format("%d. %s", taskId, Task.listOne(taskId))
                 );
                 this.ui.printSeparator();
                 new ListCommand(this.ui).execute();

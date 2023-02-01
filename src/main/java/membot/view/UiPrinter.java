@@ -10,41 +10,34 @@ public class UiPrinter implements Printable {
     }
 
     @Override
-    public void listPrint(String... args) {
-        StringBuilder s = new StringBuilder();
-        for (int i = 1; i <= args.length; ++i) {
-            s.append(String.format("%d. %s\n", i, args[i - 1]));
-        }
-        this.printer.accept(s.toString());
-    }
-
-    @Override
-    public void println(boolean isIndent, String... out) {
-        // isIndent is ignored
+    public void println(String... out) {
         if (out.length == 0) {
             return;
         }
 
-        StringBuilder sb = new StringBuilder();
-
-        for (String s : out) {
-            sb.append(String.format("%s\n", s));
-        }
-
-        printer.accept(sb.toString());
+        printer.accept(concat(out));
     }
 
     @Override
-    public void printlnError(String out) {
-        if (out.isEmpty()) {
+    public void printlnError(String... out) {
+        if (out.length == 0) {
             return;
         }
 
-        printer.accept(out);
+        printer.accept(String.format("*Error*\n%s", concat(out)));
     }
 
     @Override
     public void printSeparator() {
+        // Does nothing as UI does not need any separator.
+    }
 
+    private String concat(String[] in) {
+        StringBuilder sb = new StringBuilder();
+        for (String s : in) {
+            sb.append(String.format("%s\n", s));
+        }
+
+        return sb.toString();
     }
 }

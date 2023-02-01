@@ -27,7 +27,7 @@ public class DeleteCommand extends Command {
             int taskId = Integer.parseInt(input.split(" ")[1]);
             try {
                 Task deletedTask = Task.delete(taskId);
-                this.ui.println(true, "Deleted! The task has been deleted:", deletedTask.toString(), "");
+                this.ui.println("Deleted! The task has been deleted:", deletedTask.toString());
                 this.ui.printSeparator();
                 new ListCommand(this.ui).execute();
             } catch (IndexOutOfBoundsException e) {

@@ -28,7 +28,7 @@ public class DeadlineCommand extends Command {
         try {
             String[] normalised = InputValidator.normaliseDeadlineInput(input);
             Deadline task = new Deadline(normalised[1], normalised[2]);
-            this.ui.println(true, task.toString(), "");
+            this.ui.println(task.toString());
             this.ui.printSeparator();
             new ListCommand(this.ui).execute();
         } catch (IndexOutOfBoundsException | NoDeadlineFoundException | InvalidCommandException e) {

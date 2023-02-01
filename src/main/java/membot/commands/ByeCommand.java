@@ -25,7 +25,7 @@ public class ByeCommand extends Command {
      */
     @Override
     public void execute() {
-        this.ui.println(true, "Have a good day! Good bye!");
+        this.ui.println("Have a good day! Good bye!");
         this.ui.printSeparator();
         this.membot.exit();
     }

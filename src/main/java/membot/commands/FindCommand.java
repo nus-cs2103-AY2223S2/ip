@@ -22,7 +22,7 @@ public class FindCommand extends Command {
 
             ArrayList<Task> tasks = Task.find(keyword);
             if (tasks.isEmpty()) {
-                this.ui.println(true, "There are no tasks containing \"" + keyword + "\":");
+                this.ui.println("There are no tasks containing \"" + keyword + "\":");
                 this.ui.printSeparator();
                 return;
             }
@@ -33,7 +33,7 @@ public class FindCommand extends Command {
                 a[i] = String.format("%d. %s", i, tasks.get(i - 1).toString());
             }
 
-            this.ui.println(true, a);
+            this.ui.println(a);
         } else {
             this.ui.printlnError("Invalid Syntax - \"find [keyword]\" (e.g. \"find study\")");
         }

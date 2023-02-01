@@ -27,7 +27,7 @@ public class DoneCommand extends Command {
             int taskId = Integer.parseInt(this.input.split(" ")[1]);
             try {
                 Task.setStatusCompleted(taskId);
-                this.ui.println(true,
+                this.ui.println(
                         "Well done! The task is marked as completed:",
                         String.format("%d. %s", taskId, Task.listOne(taskId)),
                         ""

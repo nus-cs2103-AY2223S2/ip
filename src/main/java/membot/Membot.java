@@ -1,7 +1,6 @@
 package membot;
 
 import java.io.IOException;
-import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -11,7 +10,6 @@ import membot.storage.StorageManager;
 import membot.utils.EmptyInputException;
 import membot.utils.InvalidCommandException;
 import membot.view.Printable;
-import membot.view.Printer;
 
 /**
  * Main application class.
@@ -70,50 +68,4 @@ public class Membot {
         }, EXIT_DELAY);
 
     }
-
-//    /**
-//     * Main application loop.
-//     */
-//    private static void run() {
-//        Printable ui = new Printer();
-//        StorageManager manager = null;
-//        try {
-//            manager = new StorageManager(FILE_NAME);
-//            Task.load(manager.loadFromFile());
-//        } catch (IOException e) {
-//            ui.printlnError(e.toString());
-//        }
-//        ui.println(true, "Welcome to\n" + LOGO);
-//        ui.println(true, "How may I assist you today?");
-//        Scanner scanner = new Scanner(System.in);
-//
-//        while (scanner.hasNext()) {
-//            String input = scanner.nextLine().trim();
-//
-//            Command command;
-//
-//            try {
-//                command = Command.parse(input, ui);
-//            } catch (EmptyInputException | InvalidCommandException e) {
-//                ui.printlnError("Sorry I do not understand what to do!");
-//                continue;
-//            }
-//
-//            command.execute();
-//
-//            if (command.isExit()) {
-//                break;
-//            }
-//        }
-//
-//        scanner.close();
-//
-//        if (manager != null) {
-//            try {
-//                Task.save(manager);
-//            } catch (IOException e) {
-//                ui.printlnError(e.toString());
-//            }
-//        }
-//    }
 }

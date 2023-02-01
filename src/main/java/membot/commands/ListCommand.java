@@ -24,7 +24,7 @@ public class ListCommand extends Command {
     public void execute() {
         String[] tasks = Task.listAll();
         if (tasks.length == 0) {
-            this.ui.println(true,"Excellent! You do not have any tasks at hand!");
+            this.ui.println("Excellent! You do not have any tasks at hand!");
         } else {
             String[] allTasks = Task.listAll();
             String[] a = new String[allTasks.length + 1];
@@ -32,7 +32,7 @@ public class ListCommand extends Command {
             for (int i = 1; i <= allTasks.length; ++i) {
                 a[i] = String.format("%d. %s", i, allTasks[i - 1]);
             }
-            this.ui.println(true, a);
+            this.ui.println(a);
         }
     }
 }
