@@ -138,6 +138,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Finds tasks with the keyword in their description and returns them.
+     * @param keywords The keywords used to search the task description.
+     * @return A string containing all the tasks that contain the keywords.
+     * @throws DukeEmptyInputException
+     */
     public String find(String keywords) throws DukeEmptyInputException {
         if (keywords.trim().equals("")) {
             throw new DukeEmptyInputException();

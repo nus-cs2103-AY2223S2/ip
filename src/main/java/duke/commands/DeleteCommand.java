@@ -33,6 +33,7 @@ public class DeleteCommand extends Command {
             throw new DukeEmptyInputException();
         }
         String response = tasks.delete(input);
+        storage.saveState(tasks);
         ui.printResponse(response);
     }
 }

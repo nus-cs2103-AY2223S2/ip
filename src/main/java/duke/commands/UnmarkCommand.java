@@ -30,6 +30,7 @@ public class UnmarkCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeInvalidInputException, DukeEmptyInputException {
         String response = tasks.changeState(input, "unmark");
+        storage.saveState(tasks);
         ui.printResponse(response);
     }
 }
