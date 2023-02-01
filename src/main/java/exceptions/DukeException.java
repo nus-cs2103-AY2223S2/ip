@@ -6,7 +6,8 @@ import java.io.File;
 
 public class DukeException {
     private static int expectedArgs = 1;
-    public static void validate(boolean secondaryCheck, String command, String[] text) throws IncorrectNoOfArgumentException {
+    public static void validate(boolean secondaryCheck, String command,
+                                String[] text) throws IncorrectNoOfArgumentException {
         StringBuilder sb = new StringBuilder();
         if (secondaryCheck) {
             expectedArgs = 2;

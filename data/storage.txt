@@ -1,6 +1,0 @@
-[T][ ] borrow book
-[D][ ] Assignment 1 /by 2023-12-12 
-[D][X] Assignment 1 /by 2023-12-12 12:40
-[E][ ] Birthday /from 2023-05-29 12:30 /to 2024-04-23 13:00
-[T][X] sleep
-[T][ ] eat
