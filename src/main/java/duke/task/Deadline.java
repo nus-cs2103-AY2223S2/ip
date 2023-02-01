@@ -40,10 +40,10 @@ public class Deadline extends Task {
     private LocalDateTime parseDateTime(String deadline) {
         String[] dateAndTime = deadline.split(" ");
         String[] dayMonthYear = dateAndTime[0].split("/");
-        int hour = Integer.parseInt(dateAndTime[1])/100;
-        int minute = Integer.parseInt(dateAndTime[1])%100;
+        int hour = Integer.parseInt(dateAndTime[1]) / 100;
+        int minute = Integer.parseInt(dateAndTime[1]) % 100;
         int[] dateNumbers = new int[3];
-        for (int i = 0; i < dayMonthYear.length;i++) {
+        for (int i = 0; i < dayMonthYear.length; i++) {
             dateNumbers[i] = Integer.parseInt(dayMonthYear[i]);
         }
 

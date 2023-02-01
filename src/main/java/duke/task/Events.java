@@ -49,8 +49,8 @@ public class Events extends Task {
     private LocalDateTime parseDateTime(String period) {
         String[] dateAndTime = period.split(" ");
         String[] dayMonthYear = dateAndTime[0].split("/");
-        int hour = Integer.parseInt(dateAndTime[1])/100;
-        int minute = Integer.parseInt(dateAndTime[1])%100;
+        int hour = Integer.parseInt(dateAndTime[1]) / 100;
+        int minute = Integer.parseInt(dateAndTime[1]) % 100;
         int[] dateNumbers = new int[3];
         for (int i = 0; i < dayMonthYear.length; i++) {
             dateNumbers[i] = Integer.parseInt(dayMonthYear[i]);
