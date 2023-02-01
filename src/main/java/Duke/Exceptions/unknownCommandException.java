@@ -5,6 +5,7 @@ package Duke.Exceptions;
  * Contains a duke exception object when unknown command is imput by user
  */
 public class unknownCommandException extends DukeException {
+
     /**
      * Obtain the string representation of the exception.
      * @return string representation of the exception
