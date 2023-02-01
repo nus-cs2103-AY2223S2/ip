@@ -98,6 +98,8 @@ public class Duke extends Application {
 
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
+        greetUser(dialogContainer);
+
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput(userInput, dialogContainer);
         });
@@ -106,7 +108,12 @@ public class Duke extends Application {
             handleUserInput(userInput, dialogContainer);
         });
     }
-
+    private void greetUser(VBox dialogContainer) {
+        Label helloText = new Label("insert ingenious greeting here");
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(helloText, new ImageView(duke))
+        );
+    }
     /**
      * Iteration 2:
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
