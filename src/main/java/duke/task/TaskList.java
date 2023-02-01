@@ -79,9 +79,9 @@ public class TaskList {
      */
 
     public void addDeadline(LocalDate date, String desc) {
-        Deadline d = new Deadline(date, desc);
-        tasks.add(d);
-        System.out.println("    " + d);
+        Deadline deadline = new Deadline(date, desc);
+        tasks.add(deadline);
+        System.out.println("    " + deadline);
         printNumTasks();
     }
 

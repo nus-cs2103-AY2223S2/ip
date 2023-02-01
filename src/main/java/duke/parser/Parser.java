@@ -242,8 +242,8 @@ public class Parser {
 
     private static LocalDate parseArgsAsLocalDate(String time) throws DukeException {
         try {
-            LocalDate ld = LocalDate.parse(time);
-            return ld;
+            LocalDate localDate = LocalDate.parse(time);
+            return localDate;
         } catch (DateTimeParseException e) {
             throw new DukeException("Can't parse date/time");
         }

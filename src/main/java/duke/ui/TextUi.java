@@ -10,7 +10,7 @@ public class TextUi {
 
     private Duke duke;
     private final Scanner in;
-    private static int numberOfInput = 0;
+    private static int numberOfInputs = 0;
     private static String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
@@ -85,12 +85,12 @@ public class TextUi {
     }
 
     public String getUserCommand() {
-        if (numberOfInput == 0) {
+        if (numberOfInputs == 0) {
             System.out.println("What can I do for you?");
         } else {
             System.out.println("What else can I do for you?");
         }
-        numberOfInput++;
+        numberOfInputs++;
         String input = in.nextLine();
         return input;
     }

@@ -16,12 +16,12 @@ public class InvalidCommand extends Command {
      * @param result The message of this invalid command.
      */
     public InvalidCommand(String result) {
-        msg = result;
+        this.msg = result;
     }
 
     public InvalidCommand() {
-
     }
+
     @Override
     public boolean isExit() {
         return false;
