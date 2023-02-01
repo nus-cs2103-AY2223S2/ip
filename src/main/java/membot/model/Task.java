@@ -125,17 +125,17 @@ public abstract class Task {
      * @throws IOException If some sort of IO error occurs during the process of writing.
      */
     public static void save(Outputable out) throws IOException {
-        Base64.Encoder e = Base64.getEncoder();
+        Base64.Encoder encoder = Base64.getEncoder();
         StringBuilder sb = new StringBuilder();
         for (Task t : Task.tasks) {
 
             String s = String.format("%s | %s | %s | %s | %s | %s",
-                    e.encodeToString(t.getTaskType().toString().getBytes(StandardCharsets.UTF_8)),
-                    e.encodeToString(t.title.getBytes(StandardCharsets.UTF_8)),
-                    e.encodeToString(t.status.toString().getBytes(StandardCharsets.UTF_8)),
-                    e.encodeToString(t.getDeadline().getBytes(StandardCharsets.UTF_8)),
-                    e.encodeToString(t.getStartDateTime().getBytes(StandardCharsets.UTF_8)),
-                    e.encodeToString(t.getEndDateTime().getBytes(StandardCharsets.UTF_8)));
+                    encoder.encodeToString(t.getTaskType().toString().getBytes(StandardCharsets.UTF_8)),
+                    encoder.encodeToString(t.title.getBytes(StandardCharsets.UTF_8)),
+                    encoder.encodeToString(t.status.toString().getBytes(StandardCharsets.UTF_8)),
+                    encoder.encodeToString(t.getDeadline().getBytes(StandardCharsets.UTF_8)),
+                    encoder.encodeToString(t.getStartDateTime().getBytes(StandardCharsets.UTF_8)),
+                    encoder.encodeToString(t.getEndDateTime().getBytes(StandardCharsets.UTF_8)));
             sb.append(s).append("\n");
         }
 
@@ -148,16 +148,16 @@ public abstract class Task {
      * @param in The array of data to be loaded.
      */
     public static void load(ArrayList<String> in) {
-        Base64.Decoder d = Base64.getDecoder();
+        Base64.Decoder decoder = Base64.getDecoder();
         for (String s : in) {
             String[] split = s.split(" \\| ");
 
-            byte[] taskType = d.decode(split[0]);
-            byte[] title = d.decode(split[1]);
-            byte[] status = d.decode(split[2]);
-            byte[] deadline = d.decode(split[3]);
-            byte[] startDateTime = d.decode(split[4]);
-            byte[] endDateTime = d.decode(split[5]);
+            byte[] taskType = decoder.decode(split[0]);
+            byte[] title = decoder.decode(split[1]);
+            byte[] status = decoder.decode(split[2]);
+            byte[] deadline = decoder.decode(split[3]);
+            byte[] startDateTime = decoder.decode(split[4]);
+            byte[] endDateTime = decoder.decode(split[5]);
 
             Task restoredTask = null;
             switch (TaskType.valueOf(new String(taskType, StandardCharsets.UTF_8))) {
