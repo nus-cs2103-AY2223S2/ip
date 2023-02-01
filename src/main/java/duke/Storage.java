@@ -35,15 +35,11 @@ public class Storage {
      *
      * @param tasks TaskList used to update the log file
      */
-    public void update(LinkedList<Task> tasks) {
-        try {
-            FileWriter fw = new FileWriter(log);
-            for (Task item : tasks) {
-                fw.write(item.toLog(p) + "\n");
-            }
-            fw.close();
-        } catch (IOException e) {
-            System.out.println("Error: No permissions to read/write " + log.getAbsoluteFile());
+    public void update(LinkedList<Task> tasks) throws IOException {
+        FileWriter fw = new FileWriter(log);
+        for (Task item : tasks) {
+            fw.write(item.toLog(p) + "\n");
         }
+        fw.close();
     }
 }

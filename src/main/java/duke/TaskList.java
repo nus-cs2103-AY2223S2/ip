@@ -43,9 +43,9 @@ public class TaskList {
                 ));
             }
         } catch (IOException e) {
-            System.out.println("Error: unable to access " + storage.log.getAbsoluteFile());
+            ui.print("Error: unable to access " + storage.log.getAbsoluteFile());
         } catch (InvalidFormatException e) {
-            System.out.println("Error in logfile, please check or delete it");
+            ui.print("Error in logfile, please check or delete it");
         }
     }
 
@@ -75,7 +75,11 @@ public class TaskList {
      * @param t Prints out the name of the task
      */
     public void printStatus(String text, Task t) {
-        storage.update(tasks);
+        try {
+            storage.update(tasks);
+        } catch (IOException e) {
+            ui.print("Error: No permissions to read/write log file");
+        }
         String[] output = {text, t.toString(), String.format("Now you have %d task(s) in the list.", tasks.size())};
         ui.print(output);
     }
