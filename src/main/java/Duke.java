@@ -7,6 +7,7 @@ import items.ToDo;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -39,8 +40,10 @@ public class Duke {
         while (true) {
             input = usrInput.nextLine();
             try {
+
                 commandHandler.execute(input);
             } catch (IllegalInputException | IllegalCommandException e) {
+
                 System.out.println(e.toString());
             }
         }

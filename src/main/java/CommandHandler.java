@@ -5,6 +5,8 @@ import items.Event;
 import items.Task;
 import items.ToDo;
 
+import java.time.LocalDate;
+
 public class CommandHandler {
 
     private TaskList taskList;
@@ -50,7 +52,7 @@ public class CommandHandler {
                 }
             case "deadline":
                 String[] paramsDeadline = parsedCommand[1].split("/");
-                Task newDeadline = new Deadline(paramsDeadline[0], paramsDeadline[1]);
+                Task newDeadline = new Deadline(paramsDeadline[0], LocalDate.parse(paramsDeadline[1]));
                 this.taskList.addTask(newDeadline);
                 break;
             case "event":

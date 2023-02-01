@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -110,7 +111,7 @@ public class TaskList {
                     this.taskList.add(new ToDo(parsedInput[1], isDone));
                     break;
                 case "D":
-                    this.taskList.add(new Deadline(parsedInput[1], isDone, parsedInput[3]));
+                    this.taskList.add(new Deadline(parsedInput[1], isDone, LocalDate.parse(parsedInput[3])));
                     break;
                 case "E":
                     this.taskList.add(new Event(parsedInput[1], isDone, parsedInput[3], parsedInput[4]));
