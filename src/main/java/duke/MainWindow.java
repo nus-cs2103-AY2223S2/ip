@@ -41,9 +41,7 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     public void initialize() {
-
-        //scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-
+        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         ByteArrayOutputStream storeString = new ByteArrayOutputStream();
         PrintStream printStream = new PrintStream(storeString);
         PrintStream oldPrintStream = System.out;
@@ -69,67 +67,12 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response = duke.getResponse(input);
 
+        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
-
-
-
-        /*
-        stage.setScene(scene);
-        stage.show();
-
-        stage.setTitle("Duke");
-        stage.setResizable(false);
-        stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
-
-        mainLayout.setPrefSize(400.0, 600.0);
-        */
-
-        scrollPane.setPrefSize(385, 535);
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-
-        scrollPane.setVvalue(1.0);
-        scrollPane.setFitToWidth(true);
-
-        // You will need to import `javafx.scene.layout.Region` for this.
-        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
-
-        userInput.setPrefWidth(325.0);
-
-        sendButton.setPrefWidth(55.0);
-
-        AnchorPane.setTopAnchor(scrollPane, 1.0);
-
-        AnchorPane.setBottomAnchor(sendButton, 1.0);
-        AnchorPane.setRightAnchor(sendButton, 1.0);
-
-        AnchorPane.setLeftAnchor(userInput , 1.0);
-        AnchorPane.setBottomAnchor(userInput, 1.0);
-
-
-
-
-
-
-
-
-//        userText.getStyleClass().add("right-label");
-//        userText.setText(userInput.getText());
-//
-//        Label dukeText = new Label(getResponse(userInput.getText()));
-//        dukeText.getStyleClass().add("left-label");
-//
-//        dialogContainer.getChildren().addAll(
-//        DialogBox.getUserDialog(userText, new ImageView(user)),
-//        DialogBox.getDukeDialog(dukeText, new ImageView(duke))
-//        );
-//        userInput.clear();
-
-
     }
 }

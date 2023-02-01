@@ -71,7 +71,11 @@ class Storage {
     void writeToFile(String listOfTasks) {
         try {
             FileWriter fileWriter = new FileWriter(directory + "/dukeList.txt",false);
-            fileWriter.write(listOfTasks);
+            if (!listOfTasks.equals("")) {
+                fileWriter.write(listOfTasks);
+            } else {
+                fileWriter.write("");
+            }
             fileWriter.close();
         } catch (IOException e) {
             System.out.println("Exception");
@@ -86,24 +90,29 @@ class Storage {
      */
     void readFromFile() {
         try {
-          String path = System.getProperty("user.dir") + "/dukeList.txt";
-          Scanner scanner = new Scanner(new File(path));
-          String inputFromFile = scanner.useDelimiter("\\A").next();
-          String[] inputArr = inputFromFile.substring(1,inputFromFile.length()-1).split(",");
-          for (String task : inputArr) {
-            if (("" + task.charAt(0)).equals(" ")) {
-                task = task.substring(1);
+            String path = System.getProperty("user.dir") + "/dukeList.txt";
+            Scanner scanner = new Scanner(new File(path));
+            String inputFromFile = "";
+            String[] inputArr = {};
+            inputFromFile = scanner.useDelimiter("\\A").next();
+            inputArr = inputFromFile.substring(1, inputFromFile.length() - 1).split(",");
+            for (String task : inputArr) {
+                if (task.length() == 1 || task.length() == 0) {
+                    break;
+                }
+                if (("" + task.charAt(0)).equals(" ")) {
+                    task = task.substring(1);
+                }
+                if (isSymbol(task, Parser.MARK_SYMBOL) || isSymbol(task, " ")) {
+                    rephraseNoDate(task);
+                } else if (isSymbol(task, Parser.TODO_SYMBOL)) {
+                    rephraseToDo(task);
+                } else if (isSymbol(task, Parser.DEADLINE_SYMBOL)) {
+                    rephraseDeadline(task);
+                } else if (isSymbol(task, Parser.EVENT_SYMBOL)) {
+                    rephraseEvents(task);
+                }
             }
-            if (isSymbol(task, Parser.MARK_SYMBOL) || isSymbol(task, " ")) {
-                rephraseNoDate(task);
-            } else if (isSymbol(task, Parser.TODO_SYMBOL)) {
-                rephraseToDo(task);
-            } else if (isSymbol(task, Parser.DEADLINE_SYMBOL)) {
-                rephraseDeadline(task);
-            } else if (isSymbol(task, Parser.EVENT_SYMBOL)) {
-                rephraseEvents(task);
-            }
-          }
         } catch(IOException e) {
             this.createDirectory();
         }
