@@ -1,12 +1,19 @@
 package duke;
 
-import duke.exception.DukeException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
-import duke.tasklist.TaskList;
-import duke.ui.Ui;
+import duke.core.Core;
+import duke.gui.DialogBox;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 /**
  * <h1>Duke Task Management Application</h1>
@@ -14,97 +21,78 @@ import duke.ui.Ui;
  *
  * @author Stanley Neoh Jia Jun
  */
-public class Duke {
-    public static final String LOGO = "_____        _        \n"
-        + "|  _ \\ _   _| | _____ \n"
-        + "| | | | | | | |/ / _ \\\n"
-        + "| |_| | |_| |   <  __/\n"
-        + "|____/ \\__,_|_|\\_\\___|\n";
+public class Duke extends Application {
+    private Core core;
+    private ScrollPane scrollPane;
+    private VBox dialogContainer;
+    private TextField userInput;
+    private Button sendButton;
+    private Scene scene;
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/niko.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/giga.png"));
 
-    private TaskList tasks;
-    private Ui ui;
-    private boolean isListening;
-
-    /**
-     * Initialises a Duke application
-     */
-    public Duke() {
-        tasks = new TaskList();
-        ui = new Ui();
-        try {
-            tasks.load();
-        } catch (Exception e) {
-            ui.error(e);
-        }
+    private void userSays(String message) {
+        Label userText = new Label(message);
+        dialogContainer.getChildren().add(DialogBox.getUserDialog(userText, new ImageView(user)));
     }
 
-    private void handleCommand(String cmd) throws DukeException {
-        if (cmd.matches("^bye$")) {
-            ui.bye();
-            isListening = false;
-        } else if (cmd.matches("^list$")) {
-            ui.listTasks(tasks);
-        } else if (cmd.matches("^mark [0-9]*$")) {
-            int index = Integer.parseInt(cmd.substring(5)) - 1;
-            Task task = tasks.mark(index);
-            ui.markTask(task);
-        } else if (cmd.matches("^unmark [0-9]*$")) {
-            int index = Integer.parseInt(cmd.substring(5)) - 1;
-            Task task = tasks.unmark(index);
-            ui.unmarkTask(task);
-        } else if (cmd.matches("^todo .*$")) {
-            String taskName = cmd.substring(5);
-            Task task = new Todo(taskName, false);
-            tasks.add(task);
-            ui.addTask(task, tasks.length());
-        } else if (cmd.matches("^deadline .* /by .*$")) {
-            int byStart = cmd.indexOf("/by");
-            String taskName = cmd.substring(9, byStart - 1);
-            String by = cmd.substring(byStart + 4);
-            Task task = tasks.add(new Deadline(taskName, false, by));
-            ui.addTask(task, tasks.length());
-        } else if (cmd.matches("^event .* /from .* /to .*$")) {
-            int byStart = cmd.indexOf("/from");
-            int toStart = cmd.indexOf("/to");
-            String taskName = cmd.substring(6, byStart - 1);
-            String by = cmd.substring(byStart + 6, toStart - 1);
-            String to = cmd.substring(toStart + 4);
-            Task task = tasks.add(new Event(taskName, false, by, to));
-            ui.addTask(task, tasks.length());
-        } else if (cmd.matches("^delete [0-9]*$")) {
-            int index = Integer.parseInt(cmd.substring(7)) - 1;
-            Task task = tasks.delete(index);
-            ui.deleteTask(task, tasks.length());
-        } else if (cmd.matches("^find .*$")) {
-            String pattern = cmd.substring(5);
-            TaskList filteredTasks = tasks.matches(pattern);
-            ui.listMatchingTasks(filteredTasks);
-        } else {
-            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
-        }
+    private void dukeSays(String message) {
+        Label dukeText = new Label(message);
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(dukeText, new ImageView(duke)));
     }
 
-    private void start() {
-        ui.introduce(LOGO);
-        isListening = true;
-        while (isListening) {
-            String cmd = ui.ask();
-            try {
-                handleCommand(cmd);
-            } catch (DukeException e) {
-                ui.error(e);
-            }
-        }
+    private void handleUserInput() {
+        String cmd = userInput.getText();
+        String resp = core.respond(cmd);
+        userSays(cmd);
+        dukeSays(resp);
+        userInput.clear();
     }
 
-    /**
-     * Runs the duke application.
-     * This is the entry point for the application.
-     *
-     * @param args
-     */
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.start();
+    @Override
+    public void start(Stage stage) {
+        //Initialise
+        scrollPane = new ScrollPane();
+        dialogContainer = new VBox();
+        scrollPane.setContent(dialogContainer);
+        userInput = new TextField();
+        sendButton = new Button("Send");
+        AnchorPane mainLayout = new AnchorPane();
+        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
+        scene = new Scene(mainLayout);
+        stage.setScene(scene);
+        stage.show();
+        // Core initialise
+        core = new Core();
+        dukeSays(core.setup());
+
+        // Styling
+        stage.setTitle("Duke");
+        stage.setResizable(false);
+        stage.setMinHeight(600.0);
+        stage.setMinWidth(400.0);
+        mainLayout.setPrefSize(400.0, 600.0);
+        scrollPane.setPrefSize(385, 535);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        scrollPane.setVvalue(1.0);
+        scrollPane.setFitToWidth(true);
+        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+        userInput.setPrefWidth(325.0);
+        sendButton.setPrefWidth(55.0);
+        AnchorPane.setTopAnchor(scrollPane, 1.0);
+        AnchorPane.setBottomAnchor(sendButton, 1.0);
+        AnchorPane.setRightAnchor(sendButton, 1.0);
+        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setBottomAnchor(userInput, 1.0);
+
+        // Actions
+        sendButton.setOnMouseClicked((event) -> {
+            handleUserInput();
+        });
+        userInput.setOnAction((event) -> {
+            handleUserInput();
+        });
+        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
 }
