@@ -1,6 +1,6 @@
+import gui.JavaFxGuiOut;
 import javafx.application.Application;
 import services.Dispatcher;
-import gui.JavaFxGuiOut;
 import speakers.StdOut;
 import types.ISpeaker;
 import utilities.DispatcherProvider;
