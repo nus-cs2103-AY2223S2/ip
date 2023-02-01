@@ -12,6 +12,16 @@ public class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * A factory method that returns a Task based on logfile input
+     *
+     * @param type of Task
+     * @param done isDone boolean value
+     * @param text Description [Date] [Date] as String
+     * @param p Parser required to create task
+     * @return Todo, Event or Date
+     * @throws InvalidFormatException
+     */
     public static Task factory(char type, char done, String text, Parser p) throws InvalidFormatException {
         Task curr;
 
@@ -49,16 +59,31 @@ public class Task {
         return new InvalidFormatException("task name");
     }
 
+    /**
+     * Returns a basic task
+     *
+     * @param description of the task
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
         classIcon = "-";
     }
 
+    /**
+     * the the isDone value of the task
+     *
+     * @param isDone boolean value to set to
+     */
     public void setDone(boolean isDone) {
         this.isDone = isDone;
     }
 
+    /**
+     * Returns "X" if done, else " "
+     *
+     * @return "X" if done, else " "
+     */
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
@@ -72,6 +97,12 @@ public class Task {
         return String.format("[%s][%s] %s", classIcon, getStatusIcon(), description);
     }
 
+    /**
+     * Converting the task to String for writing to the logfile
+     *
+     * @param p
+     * @return String that can be read in logfile
+     */
     public String toLog(Parser p) {
         return toString();
     }
