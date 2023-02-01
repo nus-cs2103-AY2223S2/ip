@@ -33,6 +33,7 @@ public class TaskList {
     public Task removeTask(int i) {
         return listOfTasks.remove(i - 1);
     }
+
     /**
      * method to mark task as done in list of Tasks
      *
@@ -40,6 +41,7 @@ public class TaskList {
     public void markDone(int i) {
         listOfTasks.get(i - 1).markDone();
     }
+
     /**
      * method to unmark task as done in list of Tasks
      *
@@ -55,15 +57,14 @@ public class TaskList {
     public Task get(int i) {
         return listOfTasks.get(i - 1);
     }
+
     /**
      * method to get size of list of tasks
      *
      */
-
     public int size() {
         return listOfTasks.size();
     }
-
 
 
 }

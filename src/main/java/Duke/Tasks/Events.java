@@ -9,6 +9,7 @@ import java.time.LocalTime;
 public class Events extends Task {
     protected LocalDateTime from;
     protected LocalTime to;
+
     /**
      * The contructor for Events Task
      *
@@ -21,6 +22,7 @@ public class Events extends Task {
         this.from = start;
         this.to = end;
     }
+
     /**
      * Obtain the string representation of the event task.
      *
@@ -30,6 +32,7 @@ public class Events extends Task {
     public String toString() {
         return String.format("[E]%s (from:%s to:%s)", super.toString(), this.from.format(DateTimeFormatter.ofPattern("MMM dd yyyy HHmm a")), this.to.format(DateTimeFormatter.ofPattern("hhmm a")));
     }
+
     /**
      * The changeFormat method for change the format when  saving/Writing  tasks in data.txt file
      * @return String

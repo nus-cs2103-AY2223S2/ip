@@ -10,6 +10,7 @@ public class emptyDescriptionException extends DukeException {
      * Constructor for the emptyDescription Exception
      * @param command user inputted which require description as arugment
      */
+
     public emptyDescriptionException(String command) {
         this.command = command;
     }

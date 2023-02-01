@@ -12,7 +12,6 @@ public class Duke {
     private TaskList list;
     private Ui ui;
 
-
     /**
      * Constructor for Duke.
      *
@@ -23,7 +22,6 @@ public class Duke {
         this.ui = new Ui();
         list = new TaskList(storage.readnWriteData());
     }
-
 
     /**
      * The method of run
@@ -43,8 +41,6 @@ public class Duke {
                 e.printStackTrace();
             }
         }
-
-
     }
 
     /**
