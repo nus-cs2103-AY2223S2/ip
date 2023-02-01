@@ -48,7 +48,7 @@ public class Storage {
                     break;
                 case "D":
                     try {
-                        toInsert = new Deadline(keywords[2], Parser.getDateMMM(keywords[3]), isDone);
+                        toInsert = new Deadline(keywords[2], Parser.getDateMMM(keywords[3].trim()), isDone);
                     } catch (InvalidDateFormatException err) {
                         System.out.println(err.getMessage());
                     }

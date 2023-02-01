@@ -1,5 +1,6 @@
 package duke;
 
+
 import duke.exceptions.*;
 
 import java.time.LocalDate;
@@ -96,7 +97,9 @@ public class Parser {
      * @throws MissingTimeException If either of the starting or ending time is blank
      * @returns The task number
      */
-    public static String[] getDuration(String line) throws MissingArgumentsException, MissingTimeException, InvalidSyntaxException {
+    public static String[] getDuration(String line) throws MissingArgumentsException, 
+                                                            MissingTimeException, 
+                                                            InvalidSyntaxException {
         try {
             String[] arr = line.split("/");
             if (!arr[0].startsWith("from ")) {
@@ -169,7 +172,7 @@ public class Parser {
      */
     public static String getDateMMM(String str) {
         // Solve the exception here
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd YYYY");
-        return getString(LocalDate.parse(str, formatter));
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
+        return LocalDate.parse(str, formatter).toString();
     }
 }

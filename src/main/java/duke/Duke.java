@@ -1,8 +1,8 @@
 package duke;
 
 import duke.exceptions.InvalidCommandException;
-import duke.exceptions.InvalidDateFormatException;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -26,10 +26,26 @@ public class Duke {
      * @return A Duke instance
      * @throws FileNotFoundException
      */
-    public Duke(String filePath) throws FileNotFoundException {
-        ui = new Ui();
-        storage = new Storage(filePath);
-        tasks = new TaskList(storage.initialize());
+    public Duke(String filePath) {
+        try {
+            ui = new Ui();
+            storage = new Storage(filePath);
+            tasks = new TaskList(storage.initialize());
+        } catch (FileNotFoundException err) {
+            System.out.println(err.getMessage());
+        }
+
+    }
+
+    public Duke() {
+        try {
+            ui = new Ui();
+            storage = new Storage("data/duke.txt");
+            tasks = new TaskList(storage.initialize());
+        } catch (FileNotFoundException err) {
+            System.out.println(err.getMessage());
+        }
+
     }
 
     /**
@@ -68,6 +84,33 @@ public class Duke {
             }
         }
         ui.close();
+    }
+
+    public String getResponse(String command) throws IOException {
+        if (command.equals("bye")) {
+            tasks.close();
+            return ui.goodBye();
+        }
+        if (command.equalsIgnoreCase("list")) {
+            return ui.listCommand();
+        } else if (command.length() >= 5 && command.toLowerCase().startsWith("mark ")) {
+            return ui.markCommand(command, storage);
+        } else if (command.length() >= 6 && command.toLowerCase().startsWith("unmark ")) {
+            return ui.unmarkCommand(command, storage);
+        } else if (command.length() >= 5 && command.toLowerCase().startsWith("todo ")) {
+            return ui.todoCommand(command, storage);
+        } else if (command.length() >= 6 && command.toLowerCase().startsWith("event ")) {
+            return ui.eventCommand(command, storage);
+        } else if (command.length() >= 9 && command.toLowerCase().startsWith("deadline ")) {
+            return ui.deadlineCommand(command, storage);
+        } else if (command.length() >= 7 && command.toLowerCase().startsWith("delete ")) {
+            return ui.deleteCommand(command, storage);
+        } else if (command.length() >= 5 && command.toLowerCase().startsWith("find ")) {
+            return ui.findCommand(command);
+        } else {
+            System.out.println(new InvalidCommandException().getMessage());
+            return new InvalidCommandException().getMessage();
+        }
     }
 
 
