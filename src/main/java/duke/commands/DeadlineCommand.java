@@ -26,7 +26,7 @@ public class DeadlineCommand extends Command {
     /**
      * @inheritDoc
      */
-    public boolean execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             int indexBy = input.indexOf("/");
             if (indexBy - 1 < 9) {
@@ -43,20 +43,18 @@ public class DeadlineCommand extends Command {
 
             tasks.add(d);
             storage.saveTaskList(tasks);
-            System.out.println("    Got it. I've added this task:");
-            System.out.println("      " + d);
-            System.out.println("    Now you have "
+            return "    Got it. I've added this task:\n"
+                    + "      "
+                    + d + "\n"
+                    + "    Now you have "
                     + tasks.size()
-                    + " tasks in the list.");
-            return true;
+                    + " tasks in the list.";
         } catch (DukeException de) {
-            System.out.println(de.getMessage());
-            return false;
+            return de.getMessage();
         } catch (DateTimeParseException new_e) {
-            System.out.println("    Deadline must have a date of the following format:\n"
+            return "    Deadline must have a date of the following format:\n"
                     + "    1. yyyy-MM-dd\n"
-                    + "    2. yyyy-MM-dd HHmm");
-            return false;
+                    + "    2. yyyy-MM-dd HHmm";
         }
     }
 }

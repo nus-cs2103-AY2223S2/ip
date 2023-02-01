@@ -23,7 +23,7 @@ public class EventCommand extends Command {
     /**
      * @inheritDoc
      */
-    public boolean execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             int indexFrom = input.indexOf("/");
             int indexTo = input.lastIndexOf("/");
@@ -43,13 +43,13 @@ public class EventCommand extends Command {
                     input.substring(indexTo + 4, input.length()));
             tasks.add(e);
             storage.saveTaskList(tasks);
-            System.out.println("    Got it. I've added this task:");
-            System.out.println("      " + e);
-            System.out.println("    Now you have " + tasks.size() + " tasks in the list.");
-            return true;
+            return "    Got it. I've added this task:\n"
+                    + "      " + e
+                    + "    Now you have "
+                    + tasks.size()
+                    + " tasks in the list.";
         } catch (DukeException de) {
-            System.out.println(de.getMessage());
-            return false;
+            return de.getMessage();
         }
     }
 }

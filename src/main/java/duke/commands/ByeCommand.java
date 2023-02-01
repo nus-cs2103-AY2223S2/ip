@@ -21,10 +21,9 @@ public class ByeCommand extends Command {
     /**
      * @inheritDoc
      */
-    public boolean execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         storage.saveTaskList(tasks);
-        System.out.println("    " + "Bye. Hope to see you again soon!");
-        return true;
+        return "    " + "Bye. Hope to see you again soon!";
     }
 
     /**

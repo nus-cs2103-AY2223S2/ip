@@ -21,16 +21,16 @@ public class ListCommand extends Command {
     /**
      * @inheritDoc
      */
-    public boolean execute(TaskList tasks, Ui ui, Storage storage) {
-        System.out.println("    Here are the tasks in your list:");
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        String result = "    Here are the tasks in your list:\n";
         for (int i = 0; i < tasks.size(); i++) {
             int num = i + 1;
-            System.out.print("    "
+            result += "    "
                     + num
                     + ". "
                     + tasks.get(i)
-                    + "\n");
+                    + "\n";
         }
-        return true;
+        return result;
     }
 }

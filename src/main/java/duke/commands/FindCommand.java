@@ -22,23 +22,22 @@ public class FindCommand extends Command {
     /**
      * @inheritDoc
      */
-    public boolean execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             String keyword = this.input.substring(5, input.length());
             int counter = 0;
-            System.out.println("    Here are the matching tasks in your list:");
+            String result = "    Here are the matching tasks in your list:\n";
             for (int i = 0; i < tasks.size(); i++) {
                 Task t = tasks.get(i);
                 if (t.contains(keyword)) {
                     counter++;
-                    System.out.print("    " + counter + ". " + t + "\n");
+                    result += "    " + counter + ". " + t + "\n";
                 }
             }
-            return true;
+            return result;
 
         } catch (Exception e) {
-            e.getMessage();
-            return false;
+            return e.getMessage();
         }
     }
 }

@@ -23,7 +23,7 @@ public class TodoCommand extends Command {
     /**
      * @inheritDoc
      */
-    public boolean execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             if (5 > input.length()) {
                 throw new DukeException("    OOPS!!! The description of a todo cannot be empty.");
@@ -31,15 +31,13 @@ public class TodoCommand extends Command {
             Todo td = new Todo(input.substring(5, input.length()));
             tasks.add(td);
             storage.saveTaskList(tasks);
-            System.out.println("    Got it. I've added this task:\n"
+            return "    Got it. I've added this task:\n"
                     + "      " + td + "\n"
                     + "    Now you have "
                     + tasks.size()
-                    + " tasks in the list.");
-            return true;
+                    + " tasks in the list.";
         } catch (DukeException de) {
-            System.out.println(de.getMessage());
-            return false;
+            return de.getMessage();
         }
     }
 }

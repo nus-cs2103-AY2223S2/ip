@@ -17,7 +17,7 @@ public abstract class Command {
      * @param storage The Storage object used to save the edited TaskList.
      * @return True if the execution is successful, false if it's not.
      */
-    public abstract boolean execute(TaskList tasks, Ui ui, Storage storage);
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage);
 
     /**
      * Overridden by ByeCommand only.
