@@ -1,10 +1,11 @@
 package handlers;
 
-import containers.FileContainer;
-import org.junit.jupiter.api.Test;
-import services.TaskList;
-
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
+
+import containers.FileContainer;
+import services.TaskList;
 
 public class JMarkTaskTest {
     @Test

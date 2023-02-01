@@ -1,8 +1,5 @@
 package containers;
 
-import types.IContainer;
-import types.data.Task;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -12,6 +9,12 @@ import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.util.List;
 
+import types.IContainer;
+import types.data.Task;
+
+/**
+ * The Container class to store data into a file.
+ */
 public class FileContainer implements IContainer<Task> {
     private final BufferedWriter bw;
     private final File file;
@@ -21,6 +24,12 @@ public class FileContainer implements IContainer<Task> {
         this.bw = bw;
     }
 
+    /**
+     * Creates a new FileContainer instance at given location.
+     * @param candidateLocation Desired location to store file.
+     * @param isOverwrite Whether file content should be overwritten.
+     * @return instance of FileContainer
+     */
     public static FileContainer ofLocation(String candidateLocation, boolean isOverwrite) {
         Path candidatePath = Path.of(candidateLocation);
 
@@ -37,7 +46,9 @@ public class FileContainer implements IContainer<Task> {
         }
 
         try {
-            return new FileContainer(candidatePath.toFile(), new BufferedWriter(new FileWriter(candidatePath.toFile(), !isOverwrite)));
+            return new FileContainer(
+                    candidatePath.toFile(),
+                    new BufferedWriter(new FileWriter(candidatePath.toFile(), !isOverwrite)));
         } catch (IOException ignored) {
             return null;
         }

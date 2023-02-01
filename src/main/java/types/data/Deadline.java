@@ -1,9 +1,9 @@
 package types.data;
 
-import utilities.DateTimeParser;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import utilities.DateTimeParser;
 
 /**
  * Deadline data type.

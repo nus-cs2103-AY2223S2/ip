@@ -1,10 +1,10 @@
 package services;
 
-import types.IHandler;
-import utilities.CommandHelper;
-
 import java.util.ArrayList;
 import java.util.Objects;
+
+import types.IHandler;
+import utilities.CommandHelper;
 
 /**
  * A singleton class to execute all handlers.
@@ -72,16 +72,17 @@ public final class Dispatcher {
      * @param expr User input to consider.
      */
     public void handle(String expr) {
-        if (Objects.equals(expr, ""))
+        if (Objects.equals(expr, "")) {
             return;
+        }
 
         if (CommandHelper.checkAndRun(speakerRegistry, exitHandler, expr)) {
             toExit.run();
             return;
         }
 
-        if (CommandHelper.checkAndRun(speakerRegistry, handlerRegistry, expr) ||
-                CommandHelper.checkAndRun(speakerRegistry, errorRegistry, expr)) {
+        if (CommandHelper.checkAndRun(speakerRegistry, handlerRegistry, expr)
+                || CommandHelper.checkAndRun(speakerRegistry, errorRegistry, expr)) {
             return;
         }
 

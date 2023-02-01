@@ -1,12 +1,15 @@
 package handlers;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import services.TaskList;
 import types.IHandler;
 import types.data.Task;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
+/**
+ * Command to delete a task.
+ */
 public class JDeleteTask implements IHandler {
     private static final Pattern PATTERN = Pattern.compile("delete ([0-9]*)");
     private final TaskList ts;

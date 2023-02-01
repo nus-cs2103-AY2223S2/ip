@@ -1,13 +1,23 @@
+import java.util.Scanner;
+
 import containers.FileContainer;
-import handlers.*;
+import handlers.ETodoEmptyDescription;
+import handlers.JAddTask;
+import handlers.JBye;
+import handlers.JDeleteTask;
+import handlers.JFind;
+import handlers.JMarkTask;
+import handlers.JShowTaskList;
+import handlers.JThrowException;
 import services.Dispatcher;
 import services.SpeakerRegistry;
 import services.TaskList;
 import speakers.StdOut;
 import utilities.Prompt;
 
-import java.util.Scanner;
-
+/**
+ * The main class.
+ */
 public class Tach {
     private static final String logo = "___________             .__     \n"
             + "\\__    ___/____    ____ |  |__  \n"
@@ -48,6 +58,10 @@ public class Tach {
         sp.broadcast(Prompt.afterInput());
     }
 
+    /**
+     * The main method to launch the program.
+     * @param args Command line arguments.
+     */
     public static void main(String[] args) {
         initSpeaker();
         initDispatcher();

@@ -2,6 +2,9 @@ package handlers;
 
 import types.IHandler;
 
+/**
+ * Exception to throw when user input cannot be recognized.
+ */
 public class JThrowException implements IHandler {
     @Override
     public String take(String s) {
