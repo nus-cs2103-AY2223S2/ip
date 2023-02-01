@@ -99,7 +99,7 @@ public class YJ {
                         Event newEvent = new Event(result.get("description"), result.get("from"), result.get("to"));
                         tasks.addTask(newEvent);
                         ui.print("Ok! I've added this event!" + newEvent.toString());
-                        ui.print("You now have this many tasks: " + tasks.getNumberofTasks())
+                        ui.print("You now have this many tasks: " + tasks.getNumberofTasks());
                     } catch (ArrayIndexOutOfBoundsException e) {
                         ui.print("Crapadoodle! You need to specify an event in the correct format!");
                     }
@@ -109,6 +109,7 @@ public class YJ {
                     storage.save(tasks.getTasks());
                     ui.print("Byebye, YJ will miss you :(");
                     sc.close();
+                    System.exit(0);
                     break;
                 default:
                     ui.print("Crapdoodledy, I don't know what that means man");
