@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.HashMap;
-import java.util.Scanner;
 
 import jeo.database.Storage;
 import jeo.database.TaskList;
@@ -44,107 +43,104 @@ public class JeoBot {
         try {
             taskList = new TaskList(store.load());
         } catch (FileNotFoundException | IllegalStateException e) {
-            ui.showLoadingError();
             taskList = new TaskList();
+            ui.showLoadingErrorMessage();
         }
     }
 
     /**
-     * Executes commands which the user inputs and prints output message accordingly.
+     * Executes commands which the user inputs and returns output message accordingly.
+     * @param input String representing the input message.
+     * @return The output message.
      */
-    public void run() {
-        ui.showGreetingMessage();
-        boolean hasInput = true;
-        Scanner sc = new Scanner(System.in);
-        while (hasInput) {
-            String s = sc.nextLine();
-            try {
-                ui.showBodyDivider();
-                HashMap<String, String> hm = Parser.parseString(s);
-                Command command = Command.valueOf(hm.get("command").toUpperCase());
-                switch (command) {
-                case BYE:
-                    hasInput = false;
-                    ui.showExitMessage();
-                    break;
-                case LIST:
-                    ui.showAllTasks(taskList);
-                    break;
-                case MARK:
-                    int index = Integer.parseInt(hm.get("index"));
-                    Task task = taskList.getTaskAtIndex(index);
-                    taskList.markTask(index);
-                    ui.showTaskMarked(task);
-                    break;
-                case UNMARK:
-                    index = Integer.parseInt(hm.get("index"));
-                    task = taskList.getTaskAtIndex(index);
-                    taskList.unmarkTask(index);
-                    ui.showTaskUnmarked(task);
-                    break;
-                case DELETE:
-                    index = Integer.parseInt(hm.get("index"));
-                    task = taskList.getTaskAtIndex(index);
-                    taskList.deleteTask(index);
-                    ui.showTaskDeleted(task, taskList.getNumberOfTasks());
-                    break;
-                case TODO:
-                    String desc = hm.get("description");
-                    task = new ToDo(desc);
-                    taskList.addTask(task);
-                    ui.showTaskAdded(task, taskList.getNumberOfTasks());
-                    break;
-                case DEADLINE:
-                    desc = hm.get("description");
-                    String by = hm.get("by");
-                    task = new Deadline(desc, by);
-                    taskList.addTask(task);
-                    ui.showTaskAdded(task, taskList.getNumberOfTasks());
-                    break;
-                case EVENT:
-                    desc = hm.get("description");
-                    String from = hm.get("from");
-                    String to = hm.get("to");
-                    task = new Event(desc, from, to);
-                    taskList.addTask(task);
-                    ui.showTaskAdded(task, taskList.getNumberOfTasks());
-                    break;
-                case DUE:
-                    by = hm.get("by");
-                    DateTimeFormatter formatterParse = DateTimeFormatter.ofPattern(DATE_PARSE);
-                    LocalDate byDate = LocalDate.parse(by, formatterParse);
-                    ui.showTasksDue(byDate, taskList);
-                    break;
-                case FIND:
-                    String keyword = hm.get("key");
-                    ui.showTasksWithKeyword(keyword, taskList);
-                    break;
-                default:
-                    throw new IllegalStateException();
-                }
-                store.save(taskList.getTaskList());
-            } catch (IOException e) {
-                ui.showSavingError();
-            } catch (IllegalArgumentException | IllegalStateException e) {
-                ui.showInvalidCommand();
-            } catch (IndexOutOfBoundsException e) {
-                ui.showIndexingError();
-            } catch (DateTimeParseException e) {
-                ui.showDateTimeParsingError();
-            } catch (JeoException e) {
-                ui.showJeoErrorMessage(e.getMessage());
-            } finally {
-                ui.showBodyDivider();
+    public String run(String input) {
+        StringBuilder sb = new StringBuilder(ui.bodyDivider()).append("\n");
+        try {
+            HashMap<String, String> hm = Parser.parseString(input);
+            Command command = Command.valueOf(hm.get("command").toUpperCase());
+            switch (command) {
+            case BYE:
+                sb.append(ui.exitMessage());
+                break;
+            case LIST:
+                sb.append(ui.showAllTasks(taskList));
+                break;
+            case MARK:
+                int index = Integer.parseInt(hm.get("index"));
+                Task task = taskList.getTaskAtIndex(index);
+                taskList.markTask(index);
+                sb.append(ui.taskMarkedMessage(task));
+                break;
+            case UNMARK:
+                index = Integer.parseInt(hm.get("index"));
+                task = taskList.getTaskAtIndex(index);
+                taskList.unmarkTask(index);
+                sb.append(ui.taskUnmarkedMessage(task));
+                break;
+            case DELETE:
+                index = Integer.parseInt(hm.get("index"));
+                task = taskList.getTaskAtIndex(index);
+                taskList.deleteTask(index);
+                sb.append(ui.taskDeletedMessage(task, taskList.getNumberOfTasks()));
+                break;
+            case TODO:
+                String desc = hm.get("description");
+                task = new ToDo(desc);
+                taskList.addTask(task);
+                sb.append(ui.taskAddedMessage(task, taskList.getNumberOfTasks()));
+                break;
+            case DEADLINE:
+                desc = hm.get("description");
+                String by = hm.get("by");
+                task = new Deadline(desc, by);
+                taskList.addTask(task);
+                sb.append(ui.taskAddedMessage(task, taskList.getNumberOfTasks()));
+                break;
+            case EVENT:
+                desc = hm.get("description");
+                String from = hm.get("from");
+                String to = hm.get("to");
+                task = new Event(desc, from, to);
+                taskList.addTask(task);
+                sb.append(ui.taskAddedMessage(task, taskList.getNumberOfTasks()));
+                break;
+            case DUE:
+                by = hm.get("by");
+                DateTimeFormatter formatterParse = DateTimeFormatter.ofPattern(DATE_PARSE);
+                LocalDate byDate = LocalDate.parse(by, formatterParse);
+                sb.append(ui.showTasksDue(byDate, taskList));
+                break;
+            case FIND:
+                String keyword = hm.get("key");
+                sb.append(ui.showTasksWithKeyword(keyword, taskList));
+                break;
+            default:
+                throw new IllegalStateException();
             }
+            store.save(taskList.getTaskList());
+        } catch (IOException e) {
+            sb.append(ui.savingErrorMessage());
+        } catch (IllegalArgumentException | IllegalStateException e) {
+            sb.append(ui.invalidCommandMessage());
+        } catch (IndexOutOfBoundsException e) {
+            sb.append(ui.indexingErrorMessage());
+        } catch (DateTimeParseException e) {
+            sb.append(ui.dateTimeParsingErrorMessage());
+        } catch (JeoException e) {
+            sb.append(ui.jeoErrorMessage(e.getMessage()));
+        } finally {
+            sb.append("\n").append(ui.bodyDivider());
         }
-        sc.close();
+        return sb.toString();
     }
 
     /**
-     * Starts the bot running.
-     * @param args String representing the command line arguments.
+     * Returns the response from JeoBot.
+     *
+     * @param input The input from the user.
+     * @return The response of JeoBot.
      */
-    public static void main(String[] args) {
-        new JeoBot("./data.txt").run();
+    public String getResponse(String input) {
+        return "Jeo: \n" + run(input);
     }
 }

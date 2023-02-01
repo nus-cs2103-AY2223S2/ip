@@ -18,180 +18,183 @@ public class Ui {
     protected static final String DATE_TO_PRINT = "d MMM yyyy";
 
     /**
-     * Prints a divider for the greeting message.
+     * Returns a divider for the greeting message.
+     * @return a divider for the greeting message.
      */
-    public void showStartingDivider() {
-        System.out.println("-----------------------");
+    public String startingDivider() {
+        return "---------------------------";
     }
 
     /**
-     * Prints a divider for command response messages.
+     * Returns a divider for command response messages.
+     * @return a divider for command response messages.
      */
-    public void showBodyDivider() {
-        System.out.println("________________________________________________________________"
-                + "_________________________");
+    public String bodyDivider() {
+        return "__________________________________________________________";
     }
 
     /**
-     * Prints the greeting message.
+     * Returns the greeting message.
+     * @return the greeting message.
      */
-    public void showGreetingMessage() {
-        showStartingDivider();
-        System.out.println("Greetings from " + BOT_NAME + "!\n" + "How may I help you?");
-        showStartingDivider();
+    public String greetingMessage() {
+        return startingDivider() + "\nGreetings from " + BOT_NAME + "!\n" + "How may I help you?\n" + startingDivider();
     }
 
     /**
-     * Prints the exit message.
+     * Returns the exit message.
+     * @return the exit message.
      */
-    public void showExitMessage() {
-        System.out.println("Thank you for using " + BOT_NAME + ". Hope to see you again soon!");
+    public String exitMessage() {
+        return "Thank you for using " + BOT_NAME + ". Hope to see you again soon!";
     }
 
     /**
-     * Prints the error message for an invalid command.
+     * Returns the error message for an invalid command.
+     * @return the error message for an invalid command.
      */
-    public void showInvalidCommand() {
-        System.out.println("[Error] Sorry, I don't understand what you're saying :(");
+    public String invalidCommandMessage() {
+        return "[Error] Sorry, I don't understand what you're saying :(";
     }
 
     /**
-     * Prints the error message for an invalid task number.
+     * Returns the error message for an invalid task number.
+     * @return the error message for an invalid task number.
      */
-    public void showIndexingError() {
-        System.out.println("[Error] Task number cannot be negative, zero, or exceed the total number of tasks.");
+    public String indexingErrorMessage() {
+        return "[Error] Task number cannot be negative, zero, or exceed the total number of tasks.";
     }
 
     /**
-     * Prints the error message when unable to convert a string to a date-time object.
+     * Returns the error message when unable to convert a string to a date-time object.
+     * @return the error message when unable to convert a string to a date-time object.
      */
-    public void showDateTimeParsingError() {
-        System.out.println("[Error] Unable to parse date-time. "
-                + "Please input date in the format: \"yyyy-MM-dd HH:mm\".");
+    public String dateTimeParsingErrorMessage() {
+        return "[Error] Unable to parse date-time. "
+                + "Please input date in the format: \"yyyy-MM-dd HH:mm\".";
     }
 
     /**
-     * Prints the custom error message.
-     * @param msg String representing the custom error message.
+     * Returns the custom error message.
+     * @param message String representing the custom error message.
+     * @return the custom error message.
      */
-    public void showJeoErrorMessage(String msg) {
-        System.out.println(msg);
+    public String jeoErrorMessage(String message) {
+        return message;
     }
 
     /**
      * Prints the error message when unable to load tasks.
      */
-    public void showLoadingError() {
-        System.out.println("Error encountered when loading tasks :(\n");
-        System.out.println("Ignore this message if it is your first time using my service :>");
+    public void showLoadingErrorMessage() {
+        System.out.println("Error encountered when loading tasks :(\n"
+                + "Ignore this message if it is your first time using my service :>");
     }
 
     /**
-     * Prints the error message when unable to save tasks.
+     * Returns the error message when unable to save tasks.
+     * @return the error message when unable to save tasks.
      */
-    public void showSavingError() {
-        System.out.println("Error encountered when saving tasks :(");
+    public String savingErrorMessage() {
+        return "Error encountered when saving tasks :(";
     }
 
     /**
-     * Prints the message when a task is added.
+     * Returns the message when a task is added.
      * @param task Task which is just added.
      * @param taskListSize An integer representing the current number of tasks.
+     * @return the message when a task is added.
      */
-    public void showTaskAdded(Task task, int taskListSize) {
+    public String taskAddedMessage(Task task, int taskListSize) {
         String statement = "Got it! I've added this task:\n" + task + "\nNow you have ";
-        System.out.println(statement + taskListSize + " task(s) in the list.");
+        return statement + taskListSize + " task(s) in the list.";
     }
 
     /**
-     * Prints the message when a task is deleted.
+     * Returns the message when a task is deleted.
      * @param task Task which is just deleted.
      * @param taskListSize An integer representing the remaining number of tasks.
+     * @return the message when a task is deleted.
      */
-    public void showTaskDeleted(Task task, int taskListSize) {
+    public String taskDeletedMessage(Task task, int taskListSize) {
         String statement = "Got it! I've removed this task:\n" + task + "\nNow you have ";
-        System.out.println(statement + taskListSize + " task(s) in the list.");
+        return statement + taskListSize + " task(s) in the list.";
     }
 
     /**
-     * Prints the message when a task is marked.
+     * Returns the message when a task is marked.
      * @param task Task which is just marked.
+     * @return the message when a task is marked.
      */
-    public void showTaskMarked(Task task) {
-        System.out.println("Good job! I've marked this task as done:\n" + task);
+    public String taskMarkedMessage(Task task) {
+        return "Good job! I've marked this task as done:\n" + task;
     }
 
     /**
-     * Prints the message when a task is unmarked.
+     * Returns the message when a task is unmarked.
      * @param task Task which is just unmarked.
+     * @return the message when a task is unmarked.
      */
-    public void showTaskUnmarked(Task task) {
-        System.out.println("Okay, I've marked this task as not done yet:\n" + task);
+    public String taskUnmarkedMessage(Task task) {
+        return "Okay, I've marked this task as not done yet:\n" + task;
     }
 
     /**
-     * Prints the current list of tasks.
+     * Returns the string representation of the current list of tasks.
      * @param list TaskList representing the list of all tasks.
+     * @return the string representation of the current list of tasks.
      */
-    public void showAllTasks(TaskList list) {
-        System.out.println("Here are all the tasks in your list:");
+    public String showAllTasks(TaskList list) {
+        StringBuilder sb = new StringBuilder("Here are all the tasks in your list:");
         for (int i = 0; i < list.getNumberOfTasks(); i++) {
-            StringBuilder sb = new StringBuilder()
-                    .append(i + 1)
-                    .append(".")
-                    .append(list.getTaskAtIndex(i));
-            System.out.println(sb);
+            sb.append("\n").append(i + 1).append(".").append(list.getTaskAtIndex(i));
         }
+        return sb.toString();
     }
 
     /**
-     * Prints the tasks that are due on the specified date.
+     * Returns the string representation of tasks that are due on the specified date.
      * @param byDate LocalDate representing the due date.
      * @param list TaskList representing the list of all tasks.
+     * @return the string representation of tasks that are due on the specified date.
      */
-    public void showTasksDue(LocalDate byDate, TaskList list) {
+    public String showTasksDue(LocalDate byDate, TaskList list) {
         DateTimeFormatter formatterPrint = DateTimeFormatter.ofPattern(DATE_TO_PRINT);
         String formattedDueDate = byDate.format(formatterPrint);
         int j = 1;
-        System.out.println("Here are the task(s) due on " + formattedDueDate + " :");
+        StringBuilder sb = new StringBuilder("Here are the task(s) due on " + formattedDueDate + " :");
         for (int i = 0; i < list.getNumberOfTasks(); i++) {
             Task currTask = list.getTaskAtIndex(i);
-            StringBuilder sb = new StringBuilder()
-                    .append(j)
-                    .append(".");
             if (currTask instanceof Deadline) {
                 if (((Deadline) currTask).getDateTimeBy().toLocalDate().compareTo(byDate) == 0) {
-                    sb.append(currTask);
-                    System.out.println(sb);
+                    sb.append("\n").append(j).append(".").append(currTask);
                     j++;
                 }
             } else if (currTask instanceof Event) {
                 if (((Event) currTask).getDateTimeTo().toLocalDate().compareTo(byDate) == 0) {
-                    sb.append(currTask);
-                    System.out.println(sb);
+                    sb.append("\n").append(j).append(".").append(currTask).append("\n");
                     j++;
                 }
             }
         }
+        return sb.toString();
     }
 
     /**
-     * Prints the tasks that match the specified keyword.
+     * Returns the string representation of tasks that match the specified keyword.
      * @param keyword String representing the keyword.
      * @param list TaskList representing the list of all tasks.
+     * @return the string representation of tasks that match the specified keyword.
      */
-    public void showTasksWithKeyword(String keyword, TaskList list) {
-        System.out.println("Here are the matching tasks in your list:");
+    public String showTasksWithKeyword(String keyword, TaskList list) {
+        StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:");
         int j = 1;
         for (Task task: list.getTaskList()) {
             if (task.toString().contains(keyword)) {
-                StringBuilder sb = new StringBuilder()
-                        .append(j)
-                        .append(".")
-                        .append(task);
-                System.out.println(sb);
+                sb.append("\n").append(j).append(".").append(task);
                 j++;
             }
         }
+        return sb.toString();
     }
 }
