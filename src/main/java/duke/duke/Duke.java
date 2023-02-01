@@ -1,14 +1,10 @@
 package duke.duke;
 
 
-
-
-import javafx.application.Application;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.geometry.Pos;
-import javafx.scene.layout.HBox;
-import javafx.scene.Node;
+import duke.commands.Command;
+import duke.exceptions.DukeException;
+import duke.storage.Storage;
+import duke.storage.TaskList;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -16,15 +12,9 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
-import duke.commands.Command;
-import duke.exceptions.DukeException;
-import duke.storage.Storage;
-import duke.storage.TaskList;
+
 
 /**
  * The main class of the programme.
@@ -43,8 +33,10 @@ public class Duke {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpg"));
+    private Image user = new Image(
+            this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image duke = new Image(
+            this.getClass().getResourceAsStream("/images/DaDuke.jpg"));
 
     public Duke(String filePath) {
         this.ui = new Ui();
