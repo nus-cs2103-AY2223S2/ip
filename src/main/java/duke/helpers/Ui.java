@@ -1,12 +1,5 @@
 package duke.helpers;
 
-import duke.exceptions.OutOfIndexException;
-import duke.exceptions.VagueInputException;
-import duke.exceptions.WrongBooleanException;
-
-import java.io.PrintWriter;
-import java.util.Scanner;
-
 public class Ui {
 
     /**
