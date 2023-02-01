@@ -1,11 +1,8 @@
 package commands;
 
 import exceptions.DukeException;
-
 import storage.Storage;
-
 import tasks.TaskList;
-
 import views.UI;
 
 public class ListCommand extends Command {

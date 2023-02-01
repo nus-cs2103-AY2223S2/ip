@@ -5,7 +5,7 @@ package tasks;
  */
 public abstract class Task {
     /** The name or description of this task. **/
-    String name;
+    protected String name;
 
     /** Represents if the task is marked as done or not. **/
     private boolean isDone;

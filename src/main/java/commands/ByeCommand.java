@@ -1,14 +1,11 @@
 package commands;
 
-import exceptions.DukeException;
-
-import storage.Storage;
-
-import tasks.TaskList;
-
-import views.UI;
-
 import java.io.IOException;
+
+import exceptions.DukeException;
+import storage.Storage;
+import tasks.TaskList;
+import views.UI;
 
 public class ByeCommand extends Command {
     public ByeCommand() {

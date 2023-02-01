@@ -1,15 +1,12 @@
 package commands;
 
 import exceptions.DukeException;
-
 import storage.Storage;
-
 import tasks.TaskList;
-
 import views.UI;
 
 public class UnmarkCommand extends Command {
-    int index;
+    private int index;
 
     public UnmarkCommand(int index) {
         this.index = index;

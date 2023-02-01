@@ -1,12 +1,9 @@
 package commands;
 
 import exceptions.DukeException;
-
 import storage.Storage;
-
 import tasks.TaskList;
 import tasks.ToDo;
-
 import views.UI;
 
 public class ToDoCommand extends Command {
