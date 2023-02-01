@@ -1,14 +1,10 @@
-package Duke.Commands;
+package Nerd.Commands;
 
-import Duke.Ui.Ui;
-import Duke.entities.Task;
-import Duke.entities.TaskList;
+import Nerd.Ui.Ui;
+import Nerd.entities.Task;
+import Nerd.entities.TaskList;
 
 public class FindCommand extends Command{
-    @Override
-    public void processCommand() {
-        System.out.println("abstract method invoked");
-    }
 
     /**
      * Overloaded processCommand method from the abstract class Command.

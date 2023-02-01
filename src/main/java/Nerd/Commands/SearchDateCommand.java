@@ -1,22 +1,18 @@
-package Duke.Commands;
+package Nerd.Commands;
 
-import Duke.entities.Deadline;
-import Duke.entities.Event;
-import Duke.entities.Task;
-import Duke.entities.TaskList;
+import Nerd.entities.Deadline;
+import Nerd.entities.Event;
+import Nerd.entities.Task;
+import Nerd.entities.TaskList;
 
 import java.time.LocalDate;
 
-import Duke.Ui.Ui;
+import Nerd.Ui.Ui;
 
 /**
  * Represents the Duke.Commands.SearchCommand of the Chat bot.
  */
 public class SearchDateCommand extends Command {
-    @Override
-    public void processCommand() {
-        System.out.println("abstract method invoked");
-    }
 
     /**
      * Overloaded processCommand method from the abstract class Command.

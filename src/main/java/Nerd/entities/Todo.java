@@ -1,4 +1,4 @@
-package Duke.entities;
+package Nerd.entities;
 
 /**
  * Represents the Todo Task of the Chat bot.

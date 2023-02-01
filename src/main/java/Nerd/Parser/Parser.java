@@ -1,12 +1,12 @@
-package Duke.Parser;
+package Nerd.Parser;
 
-import Duke.Commands.*;
-import Duke.entities.Deadline;
-import Duke.entities.Event;
-import Duke.entities.Todo;
-import Duke.enums.CommandEnums;
-import Duke.exceptions.DukeException;
-import Duke.entities.TaskList;
+import Nerd.Commands.*;
+import Nerd.entities.Deadline;
+import Nerd.entities.Event;
+import Nerd.entities.Todo;
+import Nerd.enums.CommandEnums;
+import Nerd.exceptions.NerdException;
+import Nerd.entities.TaskList;
 
 /**
  * Represents the Parser of the Chat bot that parses the commands.
@@ -18,10 +18,10 @@ public class Parser {
      *
      * @param input The full line of the command and arguments.
      * @return The command of the input.
-     * @throws DukeException            if the input contains empty descriptions
+     * @throws NerdException            if the input contains empty descriptions
      * @throws IllegalArgumentException if the input contains an invalid command or arguments
      */
-    public Command parseCommand(String input) throws DukeException, IllegalArgumentException {
+    public Command parseCommand(String input) throws NerdException, IllegalArgumentException {
         String[] split = input.split(" ");
         CommandEnums type;
         try {
@@ -37,54 +37,54 @@ public class Parser {
             if (!isEmptyCommand(split)) {
                 return new MarkCommand();
             } else {
-                throw new DukeException("Sorry! you can't have empty descriptions!");
+                throw new NerdException("Sorry! you can't have empty descriptions!");
             }
         case UNMARK:
             if (!isEmptyCommand(split)) {
                 return new UnmarkCommand();
             } else {
-                throw new DukeException("Sorry! you can't have empty descriptions!");
+                throw new NerdException("Sorry! you can't have empty descriptions!");
             }
         case TODO:
             if (!isEmptyCommand(split)) {
                 return new TodoCommand();
             } else {
-                throw new DukeException("Sorry! you can't have empty descriptions!");
+                throw new NerdException("Sorry! you can't have empty descriptions!");
             }
         case DEADLINE:
             if (!isEmptyCommand(split)) {
                 return new DeadlineCommand();
             } else {
-                throw new DukeException("Sorry! you can't have empty descriptions!");
+                throw new NerdException("Sorry! you can't have empty descriptions!");
             }
         case EVENT:
             if (!isEmptyCommand(split)) {
                 return new EventCommand();
             } else {
-                throw new DukeException("Sorry! you can't have empty descriptions!");
+                throw new NerdException("Sorry! you can't have empty descriptions!");
             }
         case DELETE:
             if (!isEmptyCommand(split)) {
                 return new DeleteCommand();
             } else {
-                throw new DukeException("Sorry! you can't have empty descriptions!");
+                throw new NerdException("Sorry! you can't have empty descriptions!");
             }
         case DATE:
             if (!isEmptyCommand(split)) {
                 return new SearchDateCommand();
             } else {
-                throw new DukeException("Sorry! you can't have empty descriptions!");
+                throw new NerdException("Sorry! you can't have empty descriptions!");
             }
         case FIND:
             if (!isEmptyCommand(split)) {
                 return new FindCommand();
             } else {
-                throw new DukeException("Sorry! you can't have empty descriptions!");
+                throw new NerdException("Sorry! you can't have empty descriptions!");
             }
         case BYE:
             return new ExitCommand();
         default:
-            throw new DukeException("Sorry! I have no idea what that means ??? >:c");
+            throw new NerdException("Sorry! I have no idea what that means ??? >:c");
         }
     }
 
@@ -135,14 +135,14 @@ public class Parser {
      *
      * @param input The full line of the command and arguments.
      * @return the string representation of the description.
-     * @throws DukeException if the input is empty.
+     * @throws NerdException if the input is empty.
      */
-    public String parseDescription(String input) throws DukeException {
+    public String parseDescription(String input) throws NerdException {
         String[] split = input.split(" ");
         if (!isEmptyCommand(split)) {
             return split[1];
         } else {
-            throw new DukeException("Sorry! you can't have empty descriptions!");
+            throw new NerdException("Sorry! you can't have empty descriptions!");
         }
     }
 
@@ -151,9 +151,9 @@ public class Parser {
      *
      * @param input The full line of the command and arguments.
      * @return The index.
-     * @throws DukeException if the input is empty.
+     * @throws NerdException if the input is empty.
      */
-    public int parseIndex(String input) throws DukeException {
+    public int parseIndex(String input) throws NerdException {
         String[] split = input.split(" ");
         return Integer.parseInt(split[1]) - 1;
     }

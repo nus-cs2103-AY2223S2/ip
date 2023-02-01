@@ -3,5 +3,4 @@ D | 0 | return book | 2019-10-15
 D | 0 | project meeting | 2019-10-15
 T | 1 | join sports club
 T | 0 | buy book
-E | 0 | buybook | 2019-10-15 | 2019-10-15
-T | 0 | now
+E | 0 | book event | 2019-10-15 | 2019-10-15

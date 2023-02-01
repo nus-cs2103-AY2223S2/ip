@@ -1,4 +1,4 @@
-package Duke.enums;
+package Nerd.enums;
 
 /**
  * Represents the enumerated commands.

@@ -1,4 +1,4 @@
-package Duke.Ui;
+package Nerd.Ui;
 
 import java.util.Scanner;
 
@@ -12,13 +12,7 @@ public class Ui {
      * Prints the welcome message.
      */
     public void showWelcome() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("Hello! I'm Duke.Duke\nWhat can I do for you?");
+        System.out.println("Hello! I'm NerdBot\nWhat can I do for you?");
         printDivider();
     }
 
@@ -53,10 +47,6 @@ public class Ui {
 
     public String readCommand() {
         return this.sc.nextLine();
-    }
-
-    public boolean hasNextLine() {
-        return this.sc.hasNextLine();
     }
 
     public void printBye() {

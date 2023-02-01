@@ -1,4 +1,4 @@
-package Duke.storage;
+package Nerd.storage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -7,9 +7,9 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.nio.file.Path;
 
-import Duke.Parser.Parser;
-import Duke.entities.*;
-import Duke.exceptions.DukeException;
+import Nerd.Parser.Parser;
+import Nerd.entities.*;
+import Nerd.exceptions.NerdException;
 
 /**
  * Represents the Storage of the Chat bot.
@@ -32,11 +32,11 @@ public class Storage {
     /**
      * Connects and checks if the Chat bot is connected to the database.
      *
-     * @throws DukeException if file does not exist.
+     * @throws NerdException if file does not exist.
      */
-    public void connect() throws DukeException {
+    public void connect() throws NerdException {
         if (!file.exists()) {
-            throw new DukeException("An error occurred when connecting to the database!");
+            throw new NerdException("An error occurred when connecting to the database!");
         }
     }
 

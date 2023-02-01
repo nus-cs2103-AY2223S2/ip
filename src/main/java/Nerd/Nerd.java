@@ -1,18 +1,18 @@
-package Duke;
+package Nerd;
 
-import Duke.Parser.Parser;
-import Duke.Ui.Ui;
-import Duke.entities.TaskList;
-import Duke.exceptions.DukeException;
-import Duke.storage.Storage;
-import Duke.Commands.*;
+import Nerd.Parser.Parser;
+import Nerd.Ui.Ui;
+import Nerd.entities.TaskList;
+import Nerd.exceptions.NerdException;
+import Nerd.storage.Storage;
+import Nerd.Commands.*;
 
 /**
  * Represents the Duke.Duke Chat bot.
  * Running a duke object loads data from the specified file into memory,
  * and exiting the program writes data to the hard disk.
  */
-public class Duke {
+public class Nerd {
     private TaskList list;
     private Storage storage;
     private Ui ui;
@@ -23,7 +23,7 @@ public class Duke {
      *
      * @param filePath of the storage
      */
-    public Duke(String filePath) {
+    public Nerd(String filePath) {
         ui = new Ui();
         parser = new Parser();
         storage = new Storage(filePath);
@@ -42,8 +42,9 @@ public class Duke {
      * @param args arguments of the main function
      */
     public static void main(String[] args) {
-        new Duke("duke.txt").run();
+        new Nerd("duke.txt").run();
     }
+
 
     /**
      * Runs the Chat bot and processes the inputs given by user.
@@ -82,7 +83,7 @@ public class Duke {
                 } else if (command instanceof FindCommand) {
                     ((FindCommand) command).processCommand(list, parser.parseDescription(input), ui);
                 }
-            } catch (DukeException e) {
+            } catch (NerdException e) {
                 ui.printError(e.getMessage());
                 ui.printDivider();
             }

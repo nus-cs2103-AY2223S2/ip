@@ -1,17 +1,13 @@
-package Duke.Commands;
+package Nerd.Commands;
 
-import Duke.entities.Task;
-import Duke.entities.TaskList;
-import Duke.Ui.Ui;
+import Nerd.entities.Task;
+import Nerd.entities.TaskList;
+import Nerd.Ui.Ui;
 
 /**
  * Represents the Duke.Commands.DeleteCommand of the Chat bot.
  */
 public class DeleteCommand extends Command {
-    @Override
-    public void processCommand() {
-        System.out.println("abstract method invoked");
-    }
 
     /**
      * Overloaded processCommand method from the abstract class Command.
@@ -21,6 +17,7 @@ public class DeleteCommand extends Command {
      * @param index The position of the Task in the TaskList to be deleted.
      * @param ui    User interface of the Chat bot.
      */
+
     public void processCommand(TaskList list, int index, Ui ui) {
         Task t = list.getTask(index);
         list.deleteTask(index);

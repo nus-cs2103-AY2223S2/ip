@@ -1,17 +1,13 @@
-package Duke.Commands;
+package Nerd.Commands;
 
-import Duke.entities.TaskList;
-import Duke.entities.Todo;
-import Duke.Ui.Ui;
+import Nerd.entities.TaskList;
+import Nerd.entities.Todo;
+import Nerd.Ui.Ui;
 
 /**
  * Represents the Duke.Commands.TodoCommand of the Chat bot.
  */
 public class TodoCommand extends Command {
-    @Override
-    public void processCommand() {
-        System.out.println("abstract method invoked");
-    }
 
     /**
      * Overloaded processCommand method from the abstract class Command.

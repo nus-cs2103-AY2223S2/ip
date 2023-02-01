@@ -1,10 +1,10 @@
-package Duke.entities;
+package Nerd.entities;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
-import Duke.exceptions.DukeException;
-import Duke.storage.Storage;
+import Nerd.exceptions.NerdException;
+import Nerd.storage.Storage;
 
 /**
  * Represents the list of Tasks of the Chat bot.
@@ -18,10 +18,10 @@ public class TaskList {
      *
      * @param storage The storage object that contains the preload data.
      */
-    public TaskList(Storage storage) throws DukeException, FileNotFoundException {
+    public TaskList(Storage storage) throws NerdException, FileNotFoundException {
         this.storage = storage;
         if (!storage.load(this)) {
-            throw new DukeException("Sorry! I have detected weird inputs in the commands");
+            throw new NerdException("Sorry! I have detected weird inputs in the commands");
         }
     }
 

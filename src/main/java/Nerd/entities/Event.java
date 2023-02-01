@@ -1,4 +1,4 @@
-package Duke.entities;
+package Nerd.entities;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -14,13 +14,13 @@ public class Event extends Task {
      * Instantiates an Event Object that can be placed into the TaskList.
      *
      * @param description The description of the task.
-     * @param startdate   The start date of the event.
-     * @param enddate     The end date of the event.
+     * @param startDate   The start date of the event.
+     * @param endDate     The end date of the event.
      */
-    public Event(String description, String startdate, String enddate) {
+    public Event(String description, String startDate, String endDate) {
         super(description);
-        this.startDate = LocalDate.parse(startdate.trim());
-        this.endDate = LocalDate.parse(enddate.trim());
+        this.startDate = LocalDate.parse(startDate.trim());
+        this.endDate = LocalDate.parse(endDate.trim());
     }
 
     public LocalDate getStartDate() {

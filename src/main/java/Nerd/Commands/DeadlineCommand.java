@@ -1,17 +1,13 @@
-package Duke.Commands;
+package Nerd.Commands;
 
-import Duke.entities.Deadline;
-import Duke.entities.TaskList;
-import Duke.Ui.Ui;
+import Nerd.entities.Deadline;
+import Nerd.entities.TaskList;
+import Nerd.Ui.Ui;
 
 /**
  * Represents the Duke.Commands.DeadlineCommand of the Chat bot.
  */
 public class DeadlineCommand extends Command {
-    @Override
-    public void processCommand() {
-        System.out.println("abstract method invoked");
-    }
 
     /**
      * Overloaded processCommand method from the abstract class Command.
