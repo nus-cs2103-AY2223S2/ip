@@ -5,7 +5,7 @@ import dukeexception.DukeException;
 
 public class Parser {
     private enum CommandNames {
-        LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, BYE
+        LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, FIND, BYE
     }
     public static Command parse(String input) {
         String[] inputArr = input.split(" ", 2);
@@ -26,6 +26,8 @@ public class Parser {
                     return new AddDeadLineCommand(inputArr);
                 case DELETE:
                     return new DeleteTaskCommand(inputArr);
+                case FIND:
+                    return new FindTaskCommand(inputArr);
                 case BYE:
                     return new ExitDukeCommand(inputArr);
                 default:

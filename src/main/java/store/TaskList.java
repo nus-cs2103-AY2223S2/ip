@@ -61,4 +61,18 @@ public class TaskList {
         ui.printMarkTaskMsg(isMarked, task);
     }
 
+    public void findTask(String[] inputArr) throws DukeException {
+        if (inputArr.length < 2) {
+            throw new DukeException("Invalid format, please give search hint");
+        }
+        int number = 1;
+        for (Task stored : store) {
+            if (stored.getStr().equals(inputArr[1])) {
+                System.out.println(number + ". " + stored.toString());
+                number++;
+            }
+        }
+
+    }
+
 }
