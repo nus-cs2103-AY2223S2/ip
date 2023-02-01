@@ -43,6 +43,7 @@ public class Duke {
                 String userInput = ui.getCommand();
                 Command command = Parser.parseCommand(userInput, tasks);
                 command.execute(tasks, ui, storage);
+                isExit = command.isExit();
             } catch (Exception e) {
                 ui.showError(e.getMessage());
             }

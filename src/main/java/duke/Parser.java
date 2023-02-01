@@ -48,6 +48,7 @@ public class Parser {
                 return new DeadlineCommand(desc, byWhen);
             } catch (DukeException e) {
                 Ui.showError(e.getMessage());
+                break;
             }
         case EventCommand.COMMAND_WORD:
             try {
@@ -57,6 +58,7 @@ public class Parser {
                 return new EventCommand(desc,from,to);
             } catch (DukeException e) {
                 Ui.showError(e.getMessage());
+                break;
             }
         case FindCommand.COMMAND_WORD:
             try {
@@ -64,6 +66,7 @@ public class Parser {
                 return new FindCommand(keyword);
             } catch (DukeException e) {
                 Ui.showError(e.getMessage());
+                break;
             }
         default:
             return new UnknownCommand();
