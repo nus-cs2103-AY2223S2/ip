@@ -2,6 +2,8 @@ package duke.gui;
 
 import duke.Duke;
 
+import javafx.animation.PauseTransition;
+
 import javafx.fxml.FXML;
 
 import javafx.scene.control.Button;
@@ -12,6 +14,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 import javafx.stage.Stage;
+
+import javafx.util.Duration;
 
 /**
  * Class that handles the main window of the GUI.
@@ -71,7 +75,11 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
         if (this.duke.isExit()) {
-            this.stage.close();
+            userInput.setDisable(true);
+            sendButton.setDisable(true);
+            PauseTransition delay = new PauseTransition(Duration.seconds(5));
+            delay.setOnFinished( event -> this.stage.close() );
+            delay.play();
         }
     }
 
