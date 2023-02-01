@@ -98,9 +98,44 @@ public class TaskList {
         }
     }
 
+    /**
+     * This method removes the specified task.
+     * @param num serial number of task.
+     */
     public static void remove(int num) {
         taskList.remove(num);
     }
+
+    /**
+     * This method searches for keywords in tasks.
+     * @param keyword keyword to be searched
+     */
+    public static void search(String keyword) {
+        ListIterator<Task> li = taskList.listIterator();
+        if (!li.hasNext()) {
+            Ui.printFindNot();
+        } else {
+            int count = 1;
+            while (li.hasNext()) {
+                Task curr = li.next();
+                if (curr.hasKeyword(keyword)) {
+                    if (count == 1) {
+                        Ui.printFind();
+                    }
+                    Ui.print(count, curr.toString());
+                    count++;
+                }
+            }
+            if (count == 1) {
+                Ui.printFindNot();
+            }
+            Ui.printDivider();
+        }
+    }
+
+    /**
+     * This method writes the tasks to data file.
+     */
     public static void writeToFile() {
         if (!taskList.isEmpty()) {
             try (BufferedWriter writer = Files.newBufferedWriter(dataFile.toPath())) {

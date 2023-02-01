@@ -3,6 +3,7 @@ package duke;
 import command.EventCommand;
 import command.DeadlineCommand;
 import command.DeleteCommand;
+import command.FindCommand;
 import command.MarkCommand;
 import command.TodoCommand;
 import command.UnMarkCommand;
@@ -63,6 +64,9 @@ public class Duke {
                     break;
                 case "DELETE":
                     new DeleteCommand(splitCommand[1]).delete();
+                    break;
+                case "FIND" :
+                    new FindCommand(splitCommand).find();
                     break;
                 case "BYE" :
                     isExit = true;

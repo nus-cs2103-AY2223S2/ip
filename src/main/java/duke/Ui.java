@@ -2,6 +2,7 @@ package duke;
 
 import task.Task;
 
+import java.util.Dictionary;
 import java.util.Scanner;
 
 /**
@@ -22,6 +23,13 @@ public class Ui {
         return sc.nextLine();
     }
 
+    /**
+     * This method prints the task information.
+     * @param String to be printed.
+     */
+    public static void print(int num, String info) {
+        System.out.print(num + ". " + info);
+    }
     /**
      * This method prints the farewell message
      */
@@ -54,6 +62,25 @@ public class Ui {
      */
     public static void printDivider() {
         System.out.println(DIVIDER);
+    }
+
+    /**
+     * This method prints when user enters more than one word
+     * when using find function.
+     */
+    public static void printEnterKeyword() {
+        System.out.println("Please enter only one keyword:");
+    }
+
+    /**
+     * This method prints the message for found keywords.
+     */
+    public static void printFind() {
+        System.out.println(DIVIDER + "Aye this is what i found according to your keyword:\n");
+    }
+
+    public static void printFindNot() {
+        System.out.println(DIVIDER + "Hey cant find any task with that keyword man.");
     }
 
     /**

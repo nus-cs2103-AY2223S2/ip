@@ -2,6 +2,7 @@ package task;
 
 import java.io.File;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 
 /**
  * This class handles the common features of a Task object.
@@ -20,6 +21,24 @@ public abstract class Task {
         count++;
     }
 
+    /**
+     * This method checks if keyword is present in current task.
+     * @param keyword to be crosschecked.
+     * @return if present or not.
+     */
+    public boolean hasKeyword(String keyword) {
+        String[] keys = NAME.split(" ");
+        if (keys.length == 1) {
+            return keys[0].equalsIgnoreCase(keyword);
+        } else {
+            for (String key : keys) {
+                if (key.equalsIgnoreCase(keyword)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
     /**
      * This method handles the marking of task.
