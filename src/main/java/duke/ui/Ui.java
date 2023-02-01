@@ -96,7 +96,7 @@ public class Ui {
      * @throws DukeException on empty ToDo description.
      */
     public void addToDo(TaskList tasks, Parser parser) throws DukeException {
-        if (!parser.isValidToDo()) {
+        if (!parser.hasDescription()) {
             throw new DukeException("The description of a todo cannot be empty.");
         }
         String description = parser.parseToDoDescription();
@@ -166,6 +166,33 @@ public class Ui {
             System.out.printf("     %d.%s%n",
                     i + 1,
                     tasks.getTask(i).toString());
+        }
+    }
+
+    /**
+     * Lists tasks matching keyword.
+     *
+     * @param tasks List of current tasks.
+     * @param parser Parser object to get task number.
+     * @throws DukeException
+     */
+    public void findAndListTasks(TaskList tasks, Parser parser) throws DukeException {
+        if (!parser.hasDescription()) {
+            throw new DukeException("Please enter a keyword to serach for.");
+        }
+        String keyword = parser.parseFindKeyword();
+        if (keyword.isBlank()) {
+            throw new DukeException("Please enter a valid keyword.");
+        }
+        System.out.printf("     %s%n", "Here are the matching tasks in your list:");
+        int foundCount = 0;
+        for (int i = 0; i < tasks.getSize(); ++i) {
+            Task task = tasks.getTask(i);
+            if (task.getDescription().contains(keyword)) {
+                System.out.printf("     %d.%s%n",
+                        ++foundCount,
+                        task.toString());
+            }
         }
     }
 

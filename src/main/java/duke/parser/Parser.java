@@ -25,7 +25,7 @@ public class Parser {
         return Integer.parseInt(splitInput[1]);
     }
 
-    public boolean isValidToDo() {
+    public boolean hasDescription() {
         return input.length() > 5;
     }
 
@@ -57,5 +57,9 @@ public class Parser {
     public String parseEventTo() {
         int toIndex = input.indexOf("/to");
         return input.substring(toIndex + 4);
+    }
+
+    public String parseFindKeyword() {
+        return input.substring(5);
     }
 }

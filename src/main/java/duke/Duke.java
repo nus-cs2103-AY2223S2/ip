@@ -65,6 +65,9 @@ public class Duke {
                         case "delete":
                             ui.deleteTask(tasks, parser);
                             break;
+                        case "find":
+                            ui.findAndListTasks(tasks, parser);
+                            break;
                         default:
                             throw new DukeException("I'm sorry, but I don't know what that means :-(");
                         }
