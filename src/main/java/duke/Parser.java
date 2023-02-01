@@ -37,51 +37,51 @@ public class Parser {
         Matcher m;
 
         switch (argFrags[0]) {
-            case "bye":
-                ui.print("Goodbye. Shutting down.");
-                return false;
-                // Break not required as returns ends switch
-            case "list":
-                ui.print(tasks.toStringList());
-                break;
-            case "mark":
-                if (argFrags.length < 2) {
-                    throw new InvalidFormatException("mark index");
-                }
-                tasks.setDone(Integer.parseInt(argFrags[1]), true);
-                break;
-            case "unmark":
-                if (argFrags.length < 2) {
-                    throw new InvalidFormatException("unmark index");
-                }
-                tasks.setDone(Integer.parseInt(argFrags[1]), false);
-                break;
-            case "delete":
-                if (argFrags.length < 2) {
-                    throw new InvalidFormatException("delete index");
-                }
-                tasks.delete(Integer.parseInt(argFrags[1]));
-                break;
-            case "todo":
-                if (argFrags.length < 2) {
-                    throw Todo.getInvalidFormatException();
-                }
-                tasks.add(new Todo(argFrags[1]));
-                break;
-            case "deadline":
-                if (argFrags.length < 2) {
-                    throw Deadline.getInvalidFormatException();
-                }
-                tasks.add(new Deadline(argFrags[1], this));
-                break;
-            case "event":
-                if (argFrags.length < 2) {
-                    throw Event.getInvalidFormatException();
-                }
-                tasks.add(new Event(argFrags[1], this));
-                break;
-            default:
-                throw new UnrecognisedCommandException();
+        case "bye":
+            ui.print("Goodbye. Shutting down.");
+            return false;
+        // Break not required as returns ends switch
+        case "list":
+            ui.print(tasks.toStringList());
+            break;
+        case "mark":
+            if (argFrags.length < 2) {
+                throw new InvalidFormatException("mark index");
+            }
+            tasks.setDone(Integer.parseInt(argFrags[1]), true);
+            break;
+        case "unmark":
+            if (argFrags.length < 2) {
+                throw new InvalidFormatException("unmark index");
+            }
+            tasks.setDone(Integer.parseInt(argFrags[1]), false);
+            break;
+        case "delete":
+            if (argFrags.length < 2) {
+                throw new InvalidFormatException("delete index");
+            }
+            tasks.delete(Integer.parseInt(argFrags[1]));
+            break;
+        case "todo":
+            if (argFrags.length < 2) {
+                throw Todo.getInvalidFormatException();
+            }
+            tasks.add(new Todo(argFrags[1]));
+            break;
+        case "deadline":
+            if (argFrags.length < 2) {
+                throw Deadline.getInvalidFormatException();
+            }
+            tasks.add(new Deadline(argFrags[1], this));
+            break;
+        case "event":
+            if (argFrags.length < 2) {
+                throw Event.getInvalidFormatException();
+            }
+            tasks.add(new Event(argFrags[1], this));
+            break;
+        default:
+            throw new UnrecognisedCommandException();
         }
 
         return true;
