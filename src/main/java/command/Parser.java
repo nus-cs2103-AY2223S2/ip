@@ -15,6 +15,10 @@ public class Parser {
         this.list = list;
     }
 
+    /**
+     * Central hub for processing user input and determining which specific process command should be used.
+     * @param input the line of input that the user keyed in
+     */
     public void processInput(String input) {
         String[] inputAnalyzed = input.split(" ");
         if (input.contains("#")) {
@@ -59,6 +63,12 @@ public class Parser {
         }
 
     }
+
+    /**
+     * Processes user input when the starting command is bye, terminating the program.
+     * @param inputAnalyzed the split-up version of the user's input
+     * @throws InvalidInputException for when the user types anything more than bye
+     */
     private void byeOperation(String[] inputAnalyzed) throws InvalidInputException {
         //Check if there is anything other than bye
         if (inputAnalyzed.length > 1) {
@@ -68,6 +78,11 @@ public class Parser {
         }
     }
 
+    /**
+     * Processes user input when the starting command is list, displaying the details of the entries in the TaskList.
+     * @param inputAnalyzed the split-up version of the user's input
+     * @throws InvalidInputException for when the user types anything more than list
+     */
     private void listOperation(String[] inputAnalyzed) throws InvalidInputException {
         //Check if there is anything other than list
         if (inputAnalyzed.length > 1) {
@@ -77,6 +92,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Processes user input when the starting command is mark, marking the task at the index provided as completed.
+     * @param inputAnalyzed the split-up version of the user's input
+     * @throws InvalidInputException for when the user types the complete mark command incorrectly
+     * @throws IndexOutOfBoundsException for when the user inputs an invalid index
+     * @throws NumberFormatException for when the user doesn't input an integer in their input
+     */
     private void markOperation(String[] inputAnalyzed) throws InvalidInputException,
             IndexOutOfBoundsException, NumberFormatException {
         // Parse
@@ -91,6 +113,14 @@ public class Parser {
         ui.showMarkSuccess(list.get(index - 1));
     }
 
+    /**
+     * Processes user input when the starting command is unmark, marking the task at the index provided as not
+     * completed.
+     * @param inputAnalyzed the split-up version of the user's input
+     * @throws InvalidInputException for when the user types the complete unmark command incorrectly
+     * @throws IndexOutOfBoundsException for when the user inputs an invalid index
+     * @throws NumberFormatException for when the user doesn't input an integer in their input
+     */
     private void unmarkOperation(String[] inputAnalyzed) throws InvalidInputException, IndexOutOfBoundsException,
             NumberFormatException {
         if (inputAnalyzed.length != 2) {
@@ -102,6 +132,13 @@ public class Parser {
         ui.showUnmarkSuccess(list.get(index - 1));
     }
 
+    /**
+     * Processes user input when the starting command is delete, deleting the task at the provided index.
+     * @param inputAnalyzed the split-up version of the user's input
+     * @throws InvalidInputException for when the user types the complete delete command incorrectly
+     * @throws IndexOutOfBoundsException for when the user inputs an invalid index
+     * @throws NumberFormatException for when the user doesn't input an integer in their input
+     */
     private void deleteOperation(String[] inputAnalyzed) throws InvalidInputException, IndexOutOfBoundsException,
             NumberFormatException {
         if (inputAnalyzed.length != 2) {
@@ -114,7 +151,12 @@ public class Parser {
         ui.showDeleteSuccess(temp, list);
     }
 
-    private void ddlOperation(String input) throws IndexOutOfBoundsException, InvalidInputException {
+    /**
+     * Processes user input when the starting command is deadline, adding a new deadline task to the TaskList.
+     * @param input the user input
+     * @throws InvalidInputException for when the user inputs the deadline command in the incorrect format
+     */
+    private void ddlOperation(String input) throws InvalidInputException {
         String[] deadlineAnalyze = input.split("/by");
         String deadline;
         try {
@@ -131,6 +173,11 @@ public class Parser {
         ui.showAddTaskSuccess(newDead, list);
     }
 
+    /**
+     * Processes user input when the starting command is to-do, adding a new to-do task to the TaskList.
+     * @param input the user input
+     * @throws InvalidInputException for when the user inputs the to-do command in the incorrect format
+     */
     private void todoOperation(String input) throws InvalidInputException {
         //Possible Errors:
         //No descriptor
@@ -148,7 +195,12 @@ public class Parser {
         ui.showAddTaskSuccess(newTodo, list);
     }
 
-    private void eventOperation(String input) throws IndexOutOfBoundsException, InvalidInputException {
+    /**
+     * Processes user input when the starting command is event, adding a new event task to the TaskList.
+     * @param input the user input
+     * @throws InvalidInputException for when the user inputs the event command in the incorrect format
+     */
+    private void eventOperation(String input) throws InvalidInputException {
         //Analyze
         String[] eventAnalyze;
         String[] timeAnalyze;

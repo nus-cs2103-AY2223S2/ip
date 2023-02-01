@@ -13,6 +13,10 @@ public class Duke {
     private Ui ui;
     private Parser parser;
 
+    /**
+     * Constructs a new Duke object with the requisite Storage, TaskList, Ui and Parser objects.
+     * @param filePath the path where a potential preexisting list can be read into the TaskList.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -25,6 +29,9 @@ public class Duke {
         parser = new Parser(ui, tasks);
     }
 
+    /**
+     * Starts up Duke and accepts user inputs for processing until termination, where the end list is stored in a file.
+     */
     public void run() {
         ui.startMessage();
         while(ui.isOpenForInput()) {

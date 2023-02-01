@@ -11,6 +11,13 @@ public class Event extends Task {
     String endString = null;
     LocalDate startDate;
     LocalDate endDate;
+
+    /**
+     * Constructor for a new Event object. Also processes the dates provided if written in the correct format.
+     * @param details what the event is about
+     * @param start when the event starts
+     * @param end when the event ends
+     */
     public Event(String details, String start, String end) {
         super(details);
         try {
@@ -36,6 +43,11 @@ public class Event extends Task {
         return "[E] " + task + " (from: " + startString + " to: " + endString + ")";
     }
 
+    /**
+     * Returns the details of the deadline in a format that can be stored
+     *  in the file for easy loading later.
+     * @return the string to store in the file
+     */
     @Override
     public String toStorageString() {
         return "E#" + super.toStorageString() + "#" + startString + "#" + endString;

@@ -13,6 +13,11 @@ public class Todo extends Task {
         return "[T] " + task;
     }
 
+    /**
+     * Returns the details of the to-do in a format that can be stored
+     *  in the file for easy loading later.
+     * @return the string to store in the file
+     */
     @Override
     public String toStorageString() {
         return "T#" + super.toStorageString();
