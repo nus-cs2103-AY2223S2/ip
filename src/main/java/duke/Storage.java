@@ -26,10 +26,13 @@ import java.io.IOException;
 class Storage {
     //Dynamic directory
     private String directory = System.getProperty("user.dir");
+    static String FILENAME = "/dukeList.txt";
     //Full directory with dukeList.txt
-    private java.io.File path = new java.io.File(directory + "/dukeList.txt");
+    private java.io.File path = new java.io.File(directory + FILENAME);
     //New TaskList<Task> to read / write from/into
     private TaskList<Task> tasks = new TaskList<>();
+    static int SIZE_OF_BOX = 3;
+
     /**
     * Sole constructor. (For invocation by subclass
     * constructors, typically implicit)
@@ -70,7 +73,7 @@ class Storage {
      */
     void writeToFile(String listOfTasks) {
         try {
-            FileWriter fileWriter = new FileWriter(directory + "/dukeList.txt",false);
+            FileWriter fileWriter = new FileWriter(directory + FILENAME, false);
             if (!listOfTasks.equals("")) {
                 fileWriter.write(listOfTasks);
             } else {
@@ -90,17 +93,19 @@ class Storage {
      */
     void readFromFile() {
         try {
-            String path = System.getProperty("user.dir") + "/dukeList.txt";
+            String path = System.getProperty("user.dir") + FILENAME;
             Scanner scanner = new Scanner(new File(path));
             String inputFromFile = "";
             String[] inputArr = {};
             inputFromFile = scanner.useDelimiter("\\A").next();
             inputArr = inputFromFile.substring(1, inputFromFile.length() - 1).split(",");
             for (String task : inputArr) {
-                if (task.length() == 1 || task.length() == 0) {
+                boolean isInvalidTask = task.length() == 1 || task.length() == 0;
+                if (isInvalidTask) {
                     break;
                 }
-                if (("" + task.charAt(0)).equals(" ")) {
+                boolean isInitialWhiteSpace = ("" + task.charAt(0)).equals(" ");
+                if (isInitialWhiteSpace) {
                     task = task.substring(1);
                 }
                 if (isSymbol(task, Parser.MARK_SYMBOL) || isSymbol(task, " ")) {
@@ -137,8 +142,8 @@ class Storage {
      * Process the saved task to check if it is marked as done or undone.
      */
     void markTask(String task) {
-        boolean isMark = (("" + task.charAt(1)).equals(Parser.MARK_SYMBOL) ||
-                ("" + task.charAt(4)).equals(Parser.MARK_SYMBOL))? true : false;
+        boolean isMark = ("" + task.charAt(1)).equals(Parser.MARK_SYMBOL) ||
+                ("" + task.charAt(4)).equals(Parser.MARK_SYMBOL);
         if (isMark) {
             this.tasks = Parser.mark(this.tasks.numberOfTasks() - 1, this.tasks);
         }
@@ -165,7 +170,9 @@ class Storage {
      */
     void rephraseDeadline(String input) {
         int indexOfBracket = input.indexOf(" (");
-        this.tasks = Parser.deadline(input.substring(7, indexOfBracket), input.substring(indexOfBracket + 6, input.length() - 1), this.tasks);
+        String task = input.substring(7, indexOfBracket);
+        String deadlineDate = input.substring(indexOfBracket + (2* SIZE_OF_BOX), input.length() - 1);
+        this.tasks = Parser.deadline(task, deadlineDate, this.tasks);
         markTask(input);
     }
     /**
@@ -175,7 +182,10 @@ class Storage {
     void rephraseEvents(String input) {
         int indexOfFrom = input.indexOf("(from: ");
         int indexOfTo = input.indexOf("(to: ");
-        this.tasks = Parser.events(input.substring(8, indexOfFrom), input.substring(indexOfFrom + 6, indexOfTo - 1), input.substring(indexOfTo + 4, input.length() - 1), this.tasks);
+        String task = input.substring(8, indexOfFrom);
+        String fromDate = input.substring(indexOfFrom + (2 * SIZE_OF_BOX) , indexOfTo - 1);
+        String toDate =  input.substring(indexOfTo + SIZE_OF_BOX + 1, input.length() - 1);
+        this.tasks = Parser.events(task, fromDate, toDate, this.tasks);
         markTask(input);
     }
     /**
