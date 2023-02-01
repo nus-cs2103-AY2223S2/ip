@@ -87,4 +87,13 @@ public final class Dispatcher {
 
         speakerRegistry.broadcast(defaultHandler.take(expr));
     }
+
+    /**
+     * Broadcasts desired string with the speaker registry inside.
+     * Provided as a proxy method for convenience.
+     * @param s
+     */
+    public void broadcast(String s) {
+        speakerRegistry.broadcast(s);
+    }
 }

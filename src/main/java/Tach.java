@@ -1,9 +1,9 @@
-import containers.FileContainer;
-import handlers.*;
+import javafx.application.Application;
 import services.Dispatcher;
-import services.SpeakerRegistry;
-import services.TaskList;
+import gui.JavaFxGuiOut;
 import speakers.StdOut;
+import types.ISpeaker;
+import utilities.DispatcherProvider;
 import utilities.Prompt;
 
 import java.util.Scanner;
@@ -16,45 +16,26 @@ public class Tach {
             + "  |____|  (____  /\\___  >___|  /\n"
             + "               \\/     \\/     \\/ \n";
     private static final Scanner scanner = new Scanner(System.in);
-    private static final Dispatcher dispatcher = new Dispatcher();
-    private static final TaskList ts = new TaskList(FileContainer.ofLocation("./data/tasks.txt", true));
-    private static final SpeakerRegistry sp = new SpeakerRegistry();
-    private static Boolean shouldContinue = true;
+    private static final ISpeaker speaker = new StdOut();
+    private static final Dispatcher dispatcher = DispatcherProvider.getDefaultDispatcher(() -> System.exit(0), speaker);
 
     private static void hello() {
-        sp.broadcast("Yoooo from\n" + logo);
-    }
-
-    private static void initSpeaker() {
-        sp.registerSpeaker(new StdOut());
-    }
-
-    private static void initDispatcher() {
-        dispatcher.setSpeakerRegistry(sp);
-        dispatcher.setDefaultHandler(new JThrowException());
-        dispatcher.registerCommand(new JAddTask(ts));
-        dispatcher.registerCommand(new JFind(ts));
-        dispatcher.registerCommand(new JShowTaskList(ts));
-        dispatcher.registerCommand(new JMarkTask(ts));
-        dispatcher.registerCommand(new JDeleteTask(ts));
-        dispatcher.registerError(new ETodoEmptyDescription());
-        dispatcher.setExitHandler(new JBye());
-        dispatcher.setToExit(() -> shouldContinue = false);
+        dispatcher.broadcast("Yoooo from\n" + logo);
     }
 
     private static void takeInput() {
-        sp.broadcast(Prompt.beforeInput());
+        dispatcher.broadcast(Prompt.beforeInput());
         dispatcher.handle(scanner.nextLine());
-        sp.broadcast(Prompt.afterInput());
+        dispatcher.broadcast(Prompt.afterInput());
     }
 
     public static void main(String[] args) {
-        initSpeaker();
-        initDispatcher();
         hello();
+//
+//        while (shouldContinue) {
+//            takeInput();
+//        }
 
-        while (shouldContinue) {
-            takeInput();
-        }
+        Application.launch(JavaFxGuiOut.class, args);
     }
 }
