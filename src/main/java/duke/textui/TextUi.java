@@ -25,6 +25,8 @@ public class TextUi {
 
     /**
      * Displays the welcome message when the chatbot is started.
+     *
+     * @return The string being displayed
      */
     public String showWelcome() {
         String logo = " ____        _        \n"
@@ -41,6 +43,8 @@ public class TextUi {
 
     /**
      * Display a divider line.
+     *
+     * @return The string being displayed
      */
     public String showLine() {
         return showMsg(TextUi.LINE);
@@ -50,6 +54,7 @@ public class TextUi {
      * Display the message provided.
      *
      * @param msg The message to be displayed
+     * @return The string being displayed
      */
     public String showMsg(String msg) {
         System.out.println(msg);
@@ -60,6 +65,7 @@ public class TextUi {
      * Displays the error/hint message.
      *
      * @param errorMsg The error/hint message
+     * @return The string being displayed
      */
     public String showError(String errorMsg) {
         String output = concatMsgs(errorMsg, "Please try again!");
@@ -72,6 +78,7 @@ public class TextUi {
      *
      * @param taskString The string representation of the task being added
      * @param size       The number of tasks in the list of tasks
+     * @return The string being displayed
      */
     public String showAddTask(String taskString, int size) {
         String msgHeader = "I've added this task into the list:";
@@ -87,6 +94,7 @@ public class TextUi {
      *
      * @param taskString The string representation of the task being deleted
      * @param size       The number of tasks in the list of tasks
+     * @return The string being displayed
      */
     public String showDeleteTask(String taskString, int size) {
         String msgHeader = "I've deleted this task into the list:";
@@ -112,6 +120,12 @@ public class TextUi {
         SCANNER.close();
     }
 
+    /**
+     * Joins all the string messages into a single string separated by a new line.
+     *
+     * @param msgs All the messages to be joined together
+     * @return A joined single string of all the messaged
+     */
     public String concatMsgs(String... msgs) {
         return String.join("\n", msgs);
     }

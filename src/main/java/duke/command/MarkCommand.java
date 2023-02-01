@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
-import duke.textui.TextUi;
 import duke.task.Task;
+import duke.textui.TextUi;
 
 /**
  * A command that stores the command to mark a task as done. The action of marking the task as done when called.

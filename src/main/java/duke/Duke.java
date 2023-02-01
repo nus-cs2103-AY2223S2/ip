@@ -48,6 +48,7 @@ public class Duke {
      * take note of when keying in their next command. Finally, an exit message is shown at the termination of the
      * chatbot and the tasks data are stored.
      */
+    @Deprecated
     public void run() {
         UI.showWelcome();
         boolean isExit = false;
@@ -68,10 +69,21 @@ public class Duke {
         }
     }
 
+    /**
+     * Gets the welcome message by the chatbot.
+     *
+     * @return The welcome message by the chatbot
+     */
     public String getWelcome() {
         return UI.showWelcome();
     }
 
+    /**
+     * Gets the response for the user input in a string representation to be displayed out by the chatbot.
+     *
+     * @param input The command input by the user
+     * @return The string representation of the response based on the command
+     */
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
