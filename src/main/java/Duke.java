@@ -1,7 +1,7 @@
-import java.io.*;
-import java.nio.file.Path;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
@@ -18,7 +18,7 @@ public class Duke {
         try {
             Duke.output();
         } catch (DukeException e) {
-            System.out.println("DukeException occurred:" + e);
+            System.out.println(e);
         }
         writeData();
         System.out.println("Kay thanks bye!");
@@ -51,7 +51,7 @@ public class Duke {
             }
             writer.close();
         } catch (IOException e) {
-            System.out.println("IOException occurred:" + e);
+            System.out.println(e);
         }
 
     }
@@ -94,7 +94,7 @@ public class Duke {
                 }
             }
         } catch (IOException e) {
-            System.out.println("IOException occurred:" + e);
+            System.out.println(e);
         }
     }
 
@@ -104,7 +104,7 @@ public class Duke {
             File data = new File(filename);
             data.createNewFile();
         } catch (IOException e) {
-            System.out.println("IOException occurred:" + e);
+            System.out.println(e);
         }
     }
     public static void output() throws DukeException {
@@ -148,7 +148,7 @@ public class Duke {
                 } else {
                     throw new DukeException("Please input a task with either todo, deadline or event prefixed!");
                 }
-                System.out.println("Roger. This task has been added:\n" + "  " + task.toString());
+                System.out.println("Roger. This task has been added:\n" + "  " + task);
                 System.out.println("Now you have " + TaskList.size() + " tasks in your list.");
             }
         }
