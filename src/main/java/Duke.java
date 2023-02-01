@@ -1,7 +1,13 @@
 import java.util.Scanner;
 import java.util.ArrayList;;
 
+
 public class Duke {
+
+    enum Type {
+        TODO, DEADLINE, EVENT
+    }
+
     private static final ArrayList<Task> taskList = new ArrayList<>();
     private static int taskCount = 0;
     private static boolean startDuke = true;
@@ -17,10 +23,8 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         
         while (startDuke) {
-
-          
             String[] userInput = sc.nextLine().split(" ", 2);
-            
+    
             try {
                 switch (userInput[0]) {
                     case "bye":
@@ -53,7 +57,7 @@ public class Duke {
                         if (userInput.length < 2) {
                             throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
                         } else {
-                            addTaskToList("todo", userInput[1]);
+                            addTaskToList(Type.TODO, userInput[1]);
                         }
                         break;
     
@@ -61,7 +65,7 @@ public class Duke {
                         if (userInput.length < 2) {
                             throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
                         } else {
-                            addTaskToList("deadline", userInput[1]);
+                            addTaskToList(Type.DEADLINE, userInput[1]);
                         }
                         break;
     
@@ -69,7 +73,7 @@ public class Duke {
                         if (userInput.length < 2) {
                             throw new DukeException("OOPS!!! The description of a event cannot be empty.");
                         } else {
-                            addTaskToList("event", userInput[1]);
+                            addTaskToList(Type.EVENT, userInput[1]);
                         }
                         break;
 
@@ -90,9 +94,9 @@ public class Duke {
         }
     }
 
-    public static void addTaskToList(String type, String userInput) throws DukeException {
+    public static void addTaskToList(Type type, String userInput) throws DukeException {
         switch (type) {
-            case "todo":
+            case TODO:
                 Task newToDo = new Todo(userInput);
                 taskCount++;
                 taskList.add(newToDo);
@@ -100,7 +104,7 @@ public class Duke {
                 System.out.println(newToDo);
                 break;
 
-            case "deadline":
+            case DEADLINE:
                 String[] deadlineFormatter = userInput.split(" /by ");
                 if (deadlineFormatter.length < 2 ) {
                     throw new DukeException("Either the description or deadline of the task is missing");
@@ -114,7 +118,7 @@ public class Duke {
                 }
                 break;
 
-            case "event":
+            case EVENT:
                 String[] eventFormatter = userInput.split("/");
                 if (eventFormatter.length < 3 ) {
                     throw new DukeException("Either the description or dates (from/to) of the task is missing");
@@ -165,5 +169,4 @@ public class Duke {
             System.out.println("Invalid taskID entered!");
         }      
     }
-
 }
