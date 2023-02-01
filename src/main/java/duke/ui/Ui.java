@@ -50,10 +50,7 @@ public class Ui {
         responses.clear();
         return concatenatedResponse;
     }
-
-    private boolean shouldIgnore(String rawInputLine) {
-        return rawInputLine.trim().isEmpty();
-    }
+    
 
     public void showGoodbyeMessage() {
         showToUser("Bye. Hope to see you again soon!");
