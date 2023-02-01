@@ -6,6 +6,12 @@ public class DeadlineCommand extends Command {
     private String description;
     private String by;
 
+    /**
+     * Constructor for a Deadline command.
+     *
+     * @param description Description for the Deadline task.
+     * @param by Deadline for the task.
+     */
     public DeadlineCommand(String description, String by) {
         this.description = description;
         this.by = by;

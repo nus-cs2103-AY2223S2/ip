@@ -16,6 +16,12 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads task list from file.
+     *
+     * @return List of tasks loaded from file.
+     * @throws FileNotFoundException If file does not exist.
+     */
     public List<Task> load() throws FileNotFoundException {
         List<Task> tasks = new ArrayList<>();
 
@@ -54,6 +60,12 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves current list of tasks to file.
+     *
+     * @param taskList List of tasks to be saved to file.
+     * @throws IOException If I/O error occurs.
+     */
     public void save(List<Task> taskList) throws IOException {
         // check if directory exists
         File dir = new File("./data");

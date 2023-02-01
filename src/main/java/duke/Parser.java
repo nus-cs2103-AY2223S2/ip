@@ -1,6 +1,14 @@
 package duke;
 
 public class Parser {
+
+    /**
+     * Parses input by the user and returns the corresponding Command object.
+     *
+     * @param command String input by the user.
+     * @return Command object to be executed.
+     * @throws DukeException If command cannot be parsed into a known command.
+     */
     public static Command parse(String command) throws DukeException {
         if (command.equals("list")) {
             return new ListCommand();

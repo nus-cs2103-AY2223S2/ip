@@ -6,6 +6,11 @@ import java.util.List;
 public class DeleteCommand extends Command {
     private int taskNumber;
 
+    /**
+     * Constructor for a Delete command.
+     *
+     * @param taskNumber Task number of the task to be deleted from the task list.
+     */
     public DeleteCommand(int taskNumber) {
         this.taskNumber = taskNumber;
     }

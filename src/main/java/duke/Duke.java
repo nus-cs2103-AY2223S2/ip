@@ -11,6 +11,10 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Represents the Duke program.
+     * @param filePath File path of task list in storage.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -21,6 +25,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the Duke program.
+     */
     public void run() {
         Scanner sc = new Scanner(System.in);
         List<Task> taskList = tasks.getTasks();

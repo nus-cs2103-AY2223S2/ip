@@ -6,6 +6,11 @@ import java.util.List;
 public class MarkCommand extends Command {
     private int taskNumber;
 
+    /**
+     * Constructor for a Mark command.
+     *
+     * @param taskNumber Task number of the task in the task list to be marked as done.
+     */
     public MarkCommand(int taskNumber) {
         this.taskNumber = taskNumber;
     }

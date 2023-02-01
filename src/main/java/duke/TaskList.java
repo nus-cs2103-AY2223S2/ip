@@ -14,10 +14,20 @@ public class TaskList {
         this.tasks = tasks;
     }
 
+    /**
+     * Returns the list of tasks.
+     *
+     * @return List of tasks.
+     */
     public List<Task> getTasks() {
         return tasks;
     }
 
+    /**
+     * Adds a task into the list of tasks.
+     *
+     * @param task Task object to be added into task list.
+     */
     public void add(Task task) {
         tasks.add(task);
     }
