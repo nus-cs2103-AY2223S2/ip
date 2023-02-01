@@ -14,6 +14,7 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private Parser parser;
 
     /**
      * Instantiates Duke.
@@ -22,8 +23,9 @@ public class Duke {
      * @param fileName The name of the storage file.
      */
     public Duke(String dirPath, String fileName) {
-        storage = new Storage(dirPath, fileName);
-        ui = new Ui();
+        this.storage = new Storage(dirPath, fileName);
+        this.ui = new Ui();
+        this.parser = new Parser();
         try {
             tasks = new TaskList(storage.read());
         } catch (DukeException e) {
@@ -41,7 +43,7 @@ public class Duke {
         while (!isExit) {
             try {
                 String input = ui.readCommand();
-                Command cmd = Parser.parseCommand(input);
+                Command cmd = parser.parseCommand(input);
                 cmd.execute(tasks, storage, ui);
                 isExit = cmd.isExit();
             } catch (DukeException e) {

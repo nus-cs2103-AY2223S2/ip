@@ -10,7 +10,7 @@ public class DukeException extends Exception {
      * @param message The error message.
      */
     public DukeException(String message) {
-        super(message);
+        super("OPPS! " + message + "\nPlease try again.");
     }
 
     /**
@@ -20,6 +20,6 @@ public class DukeException extends Exception {
      */
     @Override
     public String toString() {
-        return ("OPPS! " + super.getMessage() + "\nPlease try again.");
+        return (super.getMessage());
     }
 }

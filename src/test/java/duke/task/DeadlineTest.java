@@ -11,6 +11,9 @@ import org.junit.jupiter.api.Test;
  * Test the behavior of Deadline class.
  */
 public class DeadlineTest {
+    /**
+     * Test the behaviour of toString().
+     */
     @Test
     public void testStringConversion() {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
@@ -19,6 +22,9 @@ public class DeadlineTest {
                 new Deadline("get food", ld).toString());
     }
 
+    /**
+     * Test the behaviour of formatForStorage().
+     */
     @Test
     public void testFormatStore() {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
