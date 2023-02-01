@@ -2,7 +2,9 @@ package duke.commands;
 
 import duke.exception.DukeException;
 import duke.storage.Storage;
+import duke.task.Task;
 import duke.task.TaskList;
+import duke.ui.TextUi;
 
 /**
  * Represents a delete command.
@@ -26,12 +28,16 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Storage storage) {
+    public String execute(TaskList taskList, Storage storage, TextUi ui) {
         try {
+            Task t = taskList.getTask(taskNumber - 1);
             taskList.deleteTask(taskNumber);
             storage.save(taskList);
+            return ui.printDeletedTask(t, taskList);
         } catch (DukeException e) {
-            System.out.println(e);
+            return ui.printError(e.getMessage());
+        } catch (IndexOutOfBoundsException e) {
+            return ui.printError("Huh... the task does not exist.");
         }
     }
 }

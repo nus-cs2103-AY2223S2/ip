@@ -2,7 +2,10 @@ package duke.commands;
 
 import duke.exception.DukeException;
 import duke.storage.Storage;
+import duke.task.Task;
 import duke.task.TaskList;
+import duke.ui.TextUi;
+import org.w3c.dom.Text;
 
 /**
  * Represents an unmark command.
@@ -26,12 +29,18 @@ public class UnmarkCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Storage storage) {
+    public String execute(TaskList taskList, Storage storage, TextUi ui) {
         try {
-            taskList.unmarkTask(taskNumber);
-            storage.save(taskList);
-        } catch (DukeException e) {
-            System.out.println(e);
+            Task t = taskList.getTask(taskNumber - 1);
+            if (!t.isMarked()) {
+                return ui.printError("Oops! This task has not been marked as done before.");
+            } else {
+                t.unMark();
+                storage.save(taskList);
+                return ui.printUnmarkedTask(t, taskList);
+            }
+        } catch (IndexOutOfBoundsException e) {
+            return ui.printError("Huh... the task does not exist.");
         }
     }
 

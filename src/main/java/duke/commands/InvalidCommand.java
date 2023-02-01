@@ -2,6 +2,7 @@ package duke.commands;
 
 import duke.storage.Storage;
 import duke.task.TaskList;
+import duke.ui.TextUi;
 
 /**
  * Represents an invalid command.
@@ -27,11 +28,11 @@ public class InvalidCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Storage storage) {
+    public String execute(TaskList taskList, Storage storage, TextUi ui) {
         if (msg != null) {
-            System.out.println(msg);
+            return msg;
         } else {
-            System.out.println(DEFAULT_MSG);
+            return DEFAULT_MSG;
         }
     }
 }

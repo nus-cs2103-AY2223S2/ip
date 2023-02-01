@@ -1,10 +1,15 @@
 package duke;
 
 import duke.commands.Command;
+import duke.commands.NextCommand;
+import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.TextUi;
+import javafx.application.Application;
+import javafx.scene.image.Image;
+import javafx.stage.Stage;
 
 /**
  * Represents a Duke object
@@ -22,6 +27,7 @@ public class Duke {
         this.ui = new TextUi();
         this.storage = new Storage();
         this.taskList = new TaskList(storage.loadData());
+
     }
 
     public void runCommandLoop() {
@@ -29,7 +35,7 @@ public class Duke {
         while (!isExit) {
             String userInput = ui.getUserCommand();
             Command command = new Parser().parseCommand(userInput);
-            command.execute(taskList, storage);
+            command.execute(taskList, storage, ui);
             isExit = command.isExit();
         }
     }
@@ -39,21 +45,15 @@ public class Duke {
         System.exit(0);
     }
 
+
     /**
      * Runs this Duke program.
      */
     public void run() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        ui.printGreetings();
         runCommandLoop();
         exit();
-
     }
-
 
     public static void main(String[] args) {
         new Duke().run();

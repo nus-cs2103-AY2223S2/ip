@@ -19,6 +19,10 @@ public class TaskList {
         this.tasks = tasks;
     }
 
+    public void addTask(Task t) {
+        this.tasks.add(t);
+    }
+
     /**
      * Returns true if all tasks in this TaskList are completed; returns false otherwise.
      */
@@ -105,8 +109,6 @@ public class TaskList {
         if (!doesTaskExist(taskNum)) {
             throw new DukeException("Huh... the task does not exist.");
         }
-        System.out.println("Okay, I've removed this task:");
-        System.out.println("    " + tasks.get(taskNum - 1));
         tasks.remove(taskNum - 1);
         printNumTasks();
     }
@@ -154,7 +156,7 @@ public class TaskList {
      *
      * @param keyword The string to search for.
      */
-    public void search(String keyword) throws DukeException {
+    public List<Task> search(String keyword) throws DukeException {
         List<Task> searched = new ArrayList<>();
         for (int i = 0; i < tasks.size(); i++) {
             String taskInString = tasks.get(i).toString();
@@ -164,11 +166,8 @@ public class TaskList {
         }
         if (searched.size() == 0) {
             throw new DukeException("Huh... I can't find any matching tasks.");
-        } else {
-            System.out.println("Here are the matching tasks in your list:");
-            TaskList searchedTaskList = new TaskList(searched);
-            System.out.println(searchedTaskList);
         }
+        return searched;
     }
 
     /**

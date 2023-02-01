@@ -1,7 +1,10 @@
 package duke.commands;
 
 import duke.storage.Storage;
+import duke.task.Task;
 import duke.task.TaskList;
+import duke.task.Todo;
+import duke.ui.TextUi;
 
 /**
  * Represents a todo command.
@@ -25,10 +28,11 @@ public class TodoCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Storage storage) {
-        System.out.println("Got it, I've added this task:");
-        taskList.addTodo(desc);
+    public String execute(TaskList taskList, Storage storage, TextUi ui) {
+        Task t = new Todo(desc);
+        taskList.addTask(t);
         storage.save(taskList);
+        return ui.printTaskAdded(t, taskList);
     }
 
 }

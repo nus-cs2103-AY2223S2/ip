@@ -32,7 +32,7 @@ public class Parser {
      * @param userInput The user input to be parsed.
      * @return A command to be executed.
      */
-    public Command parseCommand(String userInput) {
+    public static Command parseCommand(String userInput) {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             // incorrect command
@@ -75,7 +75,7 @@ public class Parser {
     }
 
 
-    private Command prepareDelete(String args) {
+    private static Command prepareDelete(String args) {
         try {
             final int targetIndex = parseArgsAsDisplayedIndex(args);
             return new DeleteCommand(targetIndex);
@@ -84,7 +84,7 @@ public class Parser {
         }
     }
 
-    private Command prepareMark(String args) {
+    private static Command prepareMark(String args) {
         try {
             final int targetIndex = parseArgsAsDisplayedIndex(args);
             return new MarkCommand(targetIndex);
@@ -93,7 +93,7 @@ public class Parser {
         }
     }
 
-    private Command prepareUnmark(String args) {
+    private static Command prepareUnmark(String args) {
         try {
             final int targetIndex = parseArgsAsDisplayedIndex(args);
             return new UnmarkCommand(targetIndex);
@@ -102,7 +102,7 @@ public class Parser {
         }
     }
 
-    private Command prepareEvent(String args) {
+    private static Command prepareEvent(String args) {
         try {
             Object[] descStartEnd = parseEvent(args);
             String desc = String.valueOf(descStartEnd[0]);
@@ -115,7 +115,7 @@ public class Parser {
         }
     }
 
-    private Command prepareDeadline(String args) {
+    private static Command prepareDeadline(String args) {
         try {
             Object[] descBy = parseDeadline(args);
             String desc = String.valueOf(descBy[0]);
@@ -126,7 +126,7 @@ public class Parser {
         }
     }
 
-    private Command prepareTodo(String args) {
+    private static Command prepareTodo(String args) {
         try {
             String desc = parseTodo(args);
             return new TodoCommand(desc);
@@ -135,7 +135,7 @@ public class Parser {
         }
     }
 
-    private Command prepareFind(String args) {
+    private static Command prepareFind(String args) {
         try {
             String keyword = parseFind(args);
             return new FindCommand(keyword);
@@ -144,7 +144,7 @@ public class Parser {
         }
     }
 
-    private Command prepareList(String args) {
+    private static Command prepareList(String args) {
         if (args.length() != 0) {
             return new InvalidCommand();
         } else {
@@ -152,7 +152,7 @@ public class Parser {
         }
     }
 
-    private String parseFind(String args) throws DukeException {
+    private static String parseFind(String args) throws DukeException {
         try {
             String keyword = parseDescription(args, "find");
             return keyword;
@@ -160,7 +160,7 @@ public class Parser {
             throw new DukeException(e.getMessage());
         }
     }
-    private String parseTodo(String args) throws DukeException {
+    private static String parseTodo(String args) throws DukeException {
         try {
             String desc = parseDescription(args, "todo");
             return desc;
@@ -169,7 +169,7 @@ public class Parser {
         }
     }
 
-    private Object[] parseDeadline(String args) throws DukeException {
+    private static Object[] parseDeadline(String args) throws DukeException {
         if (!args.contains("/by")) {
             throw new DukeException("Please specify the deadline.");
         } else {
@@ -184,7 +184,8 @@ public class Parser {
             }
         }
     }
-    private Object[] parseEvent(String args) throws DukeException {
+
+    private static Object[] parseEvent(String args) throws DukeException {
         if (!args.contains("/from") && !args.contains("/to")) {
             throw new DukeException("Please specify both the start and end times/dates.");
         } else {
@@ -202,7 +203,7 @@ public class Parser {
         }
     }
 
-    private String parseDescription(String args, String task) throws DukeException {
+    private static String parseDescription(String args, String task) throws DukeException {
         try {
             String desc = "";
             if (task == "event") {
@@ -226,7 +227,7 @@ public class Parser {
         }
     }
 
-    private int parseArgsAsDisplayedIndex(String args) throws DukeException {
+    private static int parseArgsAsDisplayedIndex(String args) throws DukeException {
         final Matcher matcher = TASK_INDEX_ARGS_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {
             throw new DukeException("Could not find index number to parse");
@@ -239,7 +240,7 @@ public class Parser {
         }
     }
 
-    private LocalDate parseArgsAsLocalDate(String time) throws DukeException {
+    private static LocalDate parseArgsAsLocalDate(String time) throws DukeException {
         try {
             LocalDate ld = LocalDate.parse(time);
             return ld;

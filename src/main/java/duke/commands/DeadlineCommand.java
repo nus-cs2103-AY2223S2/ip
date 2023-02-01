@@ -1,7 +1,10 @@
 package duke.commands;
 
 import duke.storage.Storage;
+import duke.task.Deadline;
+import duke.task.Task;
 import duke.task.TaskList;
+import duke.ui.TextUi;
 
 import java.time.LocalDate;
 
@@ -30,10 +33,11 @@ public class DeadlineCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Storage storage) {
-        System.out.println("Got it, I've added this task:");
-        taskList.addDeadline(by, desc);
+    public String execute(TaskList taskList, Storage storage, TextUi ui) {
+        Task t = new Deadline(by, desc);
+        taskList.addTask(t);
         storage.save(taskList);
+        return ui.printTaskAdded(t, taskList);
     }
 
 }

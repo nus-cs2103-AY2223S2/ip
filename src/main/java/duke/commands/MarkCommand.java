@@ -2,7 +2,10 @@ package duke.commands;
 
 import duke.exception.DukeException;
 import duke.storage.Storage;
+import duke.task.Task;
 import duke.task.TaskList;
+import duke.ui.TextUi;
+import org.w3c.dom.Text;
 
 /**
  * Represents a mark command.
@@ -26,13 +29,19 @@ public class MarkCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Storage storage) {
+    public String execute(TaskList taskList, Storage storage, TextUi ui) {
         try {
-            taskList.markTask(taskNumber);
-            storage.save(taskList);
-        } catch (DukeException e) {
-            System.out.println(e);
+            Task t = taskList.getTask(taskNumber - 1);
+            if (t.isMarked()) {
+                return ui.printError("Oops! This task has already been marked as done.");
+            } else {
+                t.mark();
+                storage.save(taskList);
+                return ui.printMarkedTask(t, taskList);
+            }
+        } catch (IndexOutOfBoundsException e) {
+            return ui.printError("Huh... the task does not exist.");
         }
-    }
 
+    }
 }

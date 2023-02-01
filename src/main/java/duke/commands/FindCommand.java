@@ -2,7 +2,11 @@ package duke.commands;
 
 import duke.exception.DukeException;
 import duke.storage.Storage;
+import duke.task.Task;
 import duke.task.TaskList;
+import duke.ui.TextUi;
+
+import java.util.List;
 
 /**
  * Represents a find command.
@@ -26,11 +30,13 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Storage storage) {
+    public String execute(TaskList taskList, Storage storage, TextUi ui) {
         try {
-            taskList.search(keyword);
+            List<Task> searched = taskList.search(keyword);
+            TaskList tl = new TaskList(searched);
+            return ui.printSearched(keyword, tl);
         } catch (DukeException e) {
-            System.out.println(e);
+            return ui.printError(e.getMessage());
         }
     }
 }

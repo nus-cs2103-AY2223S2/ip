@@ -2,6 +2,7 @@ package duke.commands;
 
 import duke.storage.Storage;
 import duke.task.TaskList;
+import duke.ui.TextUi;
 
 /**
  * Represents an executable command.
@@ -9,5 +10,5 @@ import duke.task.TaskList;
 public abstract class Command {
 
     public abstract boolean isExit();
-    public abstract void execute(TaskList taskList, Storage storage);
+    public abstract String execute(TaskList taskList, Storage storage, TextUi ui);
 }

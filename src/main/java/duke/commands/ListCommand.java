@@ -2,6 +2,7 @@ package duke.commands;
 
 import duke.storage.Storage;
 import duke.task.TaskList;
+import duke.ui.TextUi;
 
 /**
  * Represents a list command.
@@ -15,13 +16,8 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Storage storage) {
-        if (taskList.getNumTasks() == 0) {
-            System.out.println("You have no tasks in your list.");
-        } else {
-            System.out.println("Here are the tasks in your list:");
-            System.out.println(taskList);
-        }
+    public String execute(TaskList taskList, Storage storage, TextUi ui) {
         storage.save(taskList);
+        return ui.printTaskList(taskList);
     }
 }
