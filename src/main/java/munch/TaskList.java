@@ -43,8 +43,13 @@ public class TaskList {
         Ui.divider();
     }
 
-
-
+    /**
+     * Removes a task object from the arrayList.
+     * Prints a deleted message.
+     * Prints the remaining number of task in the arrayList.
+     * @param tasks arrayList to be deleted from.
+     * @param element Integer of the element in the arrayList to be deleted.
+     */
     public static void deleteTask(ArrayList<Task> tasks, int element) {
         Ui.deleteMessage();
         System.out.println(tasks.get(element));
