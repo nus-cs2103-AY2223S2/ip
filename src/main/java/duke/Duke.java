@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
@@ -56,6 +58,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("./data/data.txt").run();
+        new Duke("data/data.txt").run();
     }
 }

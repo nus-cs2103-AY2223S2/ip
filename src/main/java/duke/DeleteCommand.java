@@ -1,20 +1,21 @@
+package duke;
+
 import java.io.IOException;
 import java.util.List;
 
-public class UnmarkCommand extends Command {
+public class DeleteCommand extends Command {
     private int taskNumber;
 
-    public UnmarkCommand(int taskNumber) {
+    public DeleteCommand(int taskNumber) {
         this.taskNumber = taskNumber;
     }
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         List<Task> taskList = tasks.getTasks();
-        Task currTask = taskList.get(taskNumber - 1);
-
-        currTask.markAsNotDone();;
+        Task taskToDelete = taskList.get(taskNumber - 1);
+        taskList.remove(taskToDelete);
         storage.save(taskList);
-        ui.showTaskMarkUndone(currTask);
+        ui.showDeleteTask(taskToDelete, taskList);
     }
 }
