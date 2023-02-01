@@ -1,3 +1,5 @@
+package page.quest;
+
 public class Quest {
     private String description;
     private boolean isCompleted;

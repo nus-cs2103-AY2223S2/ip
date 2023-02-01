@@ -1,3 +1,7 @@
+package page;
+
+import page.quest.*;
+
 import java.util.ArrayList;
 
 public class QuestLog {

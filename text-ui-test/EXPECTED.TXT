@@ -1,4 +1,4 @@
-Greetings! 'Tis I, Page, thy medieval assistant.
+Greetings! 'Tis I, page, thy medieval assistant.
 Type 'help' for the list of available commands.
 My apologies, I cannot decipher your arcane incantations.
 Type 'help' for the list of commands I can understand.

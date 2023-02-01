@@ -1,3 +1,7 @@
+package page;
+
+import page.quest.Quest;
+
 import java.util.Scanner;
 
 public class Ui {

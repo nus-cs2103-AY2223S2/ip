@@ -1,3 +1,7 @@
+package page;
+
+import page.quest.*;
+
 public class Parser {
 
     public boolean parseExecute(String input, Ui ui, Storage storage, QuestLog questLog) throws PageException {

@@ -1,3 +1,7 @@
+package page;
+
+import page.quest.*;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;

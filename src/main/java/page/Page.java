@@ -1,3 +1,5 @@
+package page;
+
 public class Page {
 
     private Ui ui;

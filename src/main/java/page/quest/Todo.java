@@ -1,3 +1,5 @@
+package page.quest;
+
 public class Todo extends Quest {
     public Todo(String description) {
         super(description);
