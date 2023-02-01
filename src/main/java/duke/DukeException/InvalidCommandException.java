@@ -15,6 +15,11 @@ public class InvalidCommandException extends Exception {
                                                         + HELP;
     public String errorMessage;
     
+    /**
+     * Public constructor for InvalidCommandException
+     * 
+     * @param err Error message
+     */
     public InvalidCommandException(String err) {
         super(err);
         this.errorMessage = err;
