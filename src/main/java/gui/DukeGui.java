@@ -124,6 +124,9 @@ public class DukeGui extends Application {
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
+        if (duke.isExited()) {
+            Platform.exit();
+        }
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
@@ -131,15 +134,6 @@ public class DukeGui extends Application {
                 DialogBox.getDukeDialog(dukeText, new ImageView(dukeImage))
         );
         userInput.clear();
-
-        if (duke.isExited()) {
-            try {
-                TimeUnit.SECONDS.sleep(1);
-            } catch (InterruptedException e) {
-                Platform.exit();
-            }
-            Platform.exit();
-        }
     }
 
     /**
