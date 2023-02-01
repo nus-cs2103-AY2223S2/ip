@@ -1,10 +1,5 @@
 package duke;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -13,6 +8,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 /**
  * A utility class to save Task objects in the hard disk and persist them
@@ -31,9 +31,9 @@ public class Storage {
         if (tokens[0].equals("T")) {
             newtask = new ToDo(tokens[2], tokens[1] == "1");
         } else if (tokens[0].equals("D")) {
-            newtask = new Deadline(tokens[2], tokens[3],tokens[1] == "1");
+            newtask = new Deadline(tokens[2], tokens[3], tokens[1] == "1");
         } else {
-            newtask = new Event(tokens[2], tokens[3],tokens[4],tokens[1] == "1");
+            newtask = new Event(tokens[2], tokens[3], tokens[4], tokens[1] == "1");
         }
         return newtask;
     }
@@ -84,7 +84,7 @@ public class Storage {
             throw new RuntimeException(e);
         } finally {
             try {
-                if (bw!=null) {
+                if (bw != null) {
                     bw.close();
                 }
             } catch (IOException e) {

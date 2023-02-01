@@ -1,12 +1,12 @@
 package duke;
 
-import duke.exceptions.DukeException;
-import duke.exceptions.DukeUnknownCommandException;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import duke.exceptions.DukeException;
+import duke.exceptions.DukeUnknownCommandException;
 
 /**
  * A simple parser for user commands.
@@ -51,8 +51,8 @@ public class Parser {
             result.addAll(parseByRegex("^\\s*([^/]+)\\s+/by\\s+([^/]+)\\s*$", tokens[1]));
             break;
         case "event":
-            result.addAll(parseByRegex("^\\s*([^/]+?)\\s+/from\\s+([^/]+?)\\s+" +
-                    "/to\\s([^/]+)\\s*$", tokens[1]));
+            result.addAll(parseByRegex("^\\s*([^/]+?)\\s+/from\\s+([^/]+?)\\s+"
+                    + "/to\\s([^/]+)\\s*$", tokens[1]));
             break;
         case "delete":
             result.addAll(parseByRegex("^\\s+(\\d+?)\\s*$", tokens[1]));

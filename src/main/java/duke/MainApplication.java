@@ -1,13 +1,13 @@
 package duke;
 
+import java.util.List;
+
 import duke.exceptions.DukeException;
 import duke.exceptions.DukeUnknownCommandException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
-
-import java.util.List;
 
 /**
  * MainApplication is the main application of the Duke program. It serves as a
@@ -17,7 +17,10 @@ public class MainApplication {
     private TaskList taskApplication;
     private Parser parser;
     private Ui ui;
-    private String DELIMITER =  "\t---";
+
+    /**
+     * Constructs an instance of the main application.
+     */
     public MainApplication() {
         this.taskApplication = new TaskList();
         this.parser = new Parser();

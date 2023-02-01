@@ -10,11 +10,21 @@ import java.time.format.DateTimeParseException;
 public abstract class Task {
     private boolean isDone;
     private String title;
+
+    /**
+     * Constructs an unchecked Task object with a title.
+     * @param title Title of the Task object.
+     */
     public Task(String title) {
         this.title = title;
         this.isDone = false;
     };
 
+    /**
+     * Constructs a Task object with a title, and it is checked or unchecked depending on the value of isDone.
+     * @param title Title of Task object.
+     * @param isDone Boolean to indicate if the Deadline should be checked or not.
+     */
     public Task(String title, boolean isDone) {
         this.title = title;
         this.isDone = isDone;

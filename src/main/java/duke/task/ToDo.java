@@ -13,12 +13,13 @@ public class ToDo extends Task {
     }
 
     /**
-     * Constructs a ToDo with a title, and is checked or
-     * unchecked depending on the value of isDone.
+     * Constructs a ToDo with a title, and is checked or unchecked depending on the value of isDone.
      * @param title Title of ToDo task.
      * @param isDone Boolean to indicate if the Deadline should be checked or not.
      */
-    public ToDo(String title, boolean isDone) { super(title, isDone); }
+    public ToDo(String title, boolean isDone) {
+        super(title, isDone);
+    }
 
     /**
      * Returns the string format to be saved on disk.

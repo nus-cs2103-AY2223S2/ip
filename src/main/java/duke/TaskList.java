@@ -1,10 +1,10 @@
 package duke;
 
-import duke.exceptions.DukeInvalidArgumentException;
-import duke.task.Task;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.exceptions.DukeInvalidArgumentException;
+import duke.task.Task;
 
 /**
  * TaskList has the basic functionalities of a checklist.
@@ -33,8 +33,8 @@ public class TaskList {
     public void markTask(int index) throws DukeInvalidArgumentException {
         if (index < 0 || index > this.userTasks.size() - 1) {
             throw new DukeInvalidArgumentException(
-                    String.format("There are only %d tasks. There is no task" +
-                            "with index %d", this.userTasks.size(), index)
+                    String.format("There are only %d tasks. There is no task"
+                            + "with index %d", this.userTasks.size(), index)
             );
         }
         this.userTasks.get(index).setIsDone(true);
@@ -48,8 +48,8 @@ public class TaskList {
     public void unmarkTask(int index) throws DukeInvalidArgumentException {
         if (index < 0 || index > this.userTasks.size() - 1) {
             throw new DukeInvalidArgumentException(
-                    String.format("There are only %d tasks. There is no task" +
-                            "with index %d", this.userTasks.size(), index)
+                    String.format("There are only %d tasks. There is no task"
+                            + "with index %d", this.userTasks.size(), index)
             );
         }
         this.userTasks.get(index).setIsDone(false);
@@ -72,8 +72,8 @@ public class TaskList {
     public Task popTask(int index) throws DukeInvalidArgumentException {
         if (index < 0 || index > this.userTasks.size() - 1) {
             throw new DukeInvalidArgumentException(
-                    String.format("\tThere are only %d tasks. There is no task" +
-                            "with index %d\n", this.userTasks.size(), index)
+                    String.format("\tThere are only %d tasks. There is no task"
+                            + "with index %d\n", this.userTasks.size(), index)
             );
         }
         return this.userTasks.remove(index);
