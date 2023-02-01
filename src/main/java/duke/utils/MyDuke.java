@@ -14,7 +14,7 @@ import duke.Tasks.TaskList;
 import duke.Tasks.ToDo;
 
 public class MyDuke {
-    private static DukeIO dukeIo = new DukeIO();
+    private static DukeIo dukeIo = new DukeIo();
     private static TaskList allTasks;
     private static Map<String, Consumer<String[]>> cmdMap = new HashMap<>();
 

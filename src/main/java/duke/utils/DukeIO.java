@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import duke.Tasks.Task;
 import duke.Tasks.TaskList;
 
-public class DukeIO {
+public class DukeIo {
 
     private static final String INPUT_PROMPT = "MyDuke >    "; 
 
@@ -129,5 +129,4 @@ public class DukeIO {
     public void notifySave() {
         System.out.println(SAVE_SUCCESS);
     }
-    
 }

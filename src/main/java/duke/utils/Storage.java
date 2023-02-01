@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import duke.Tasks.Task;
 
 public class Storage {
-    private static DukeIO dukeIo = new DukeIO();
+    private static DukeIo dukeIo = new DukeIo();
     private ArrayList<Task> storedTasks;
     private FileInputStream fis;
     private ObjectInputStream ois;
