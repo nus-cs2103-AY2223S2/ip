@@ -1,8 +1,10 @@
+import java.time.LocalDate;
+
 public class Event extends Task{
 
-    private String startDate;
-    private String endDate;
-    public Event(String name, String inpString, String startDate, String endDate){
+    private LocalDate startDate;
+    private LocalDate endDate;
+    public Event(String name, String inpString, LocalDate startDate, LocalDate endDate){
         super(name, inpString);
         this.startDate = startDate;
         this.endDate = endDate;

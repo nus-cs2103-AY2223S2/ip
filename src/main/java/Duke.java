@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Scanner;
 
 class DukeException extends Exception {
@@ -15,6 +16,23 @@ class DukeException extends Exception {
 public class Duke {
 
     private static List<Task> toDoList = new ArrayList<>();
+
+    private static void startUp() {
+        String name = "todo bot";
+        System.out.println("Hello from " + name);
+        System.out.println("------------------------------------");
+        System.out.println("I can help you take care of your daily todos :)");
+        System.out.println("There are 3 types of tasks I can handle.");
+        System.out.println("------------------------------------");
+        System.out.println("1. normal todo, format: ");
+        System.out.println("   todo task");
+        System.out.println("2. deadline, format: ");
+        System.out.println("   deadline task /by yyyy-mm-dd");
+        System.out.println("3. event, format: ");
+        System.out.println("   event task /from yyyy-mm-dd /to yyyy-mm-dd");
+        System.out.println("------------------------------------");
+
+    }
     private static boolean talk() throws DukeException{
         Scanner myObj = new Scanner(System.in);
         String inp = myObj.nextLine();
@@ -49,11 +67,13 @@ public class Duke {
                 toDoList.add(newToDo);
             } else if (inpArr[0].equals("deadline")) { // need to handle exception
                 String[] processedString = stringProcessor(true, task.substring(9));
-                Deadline newDeadline = new Deadline(processedString[0], task, processedString[1]);
+                Deadline newDeadline = new Deadline(processedString[0], task,
+                        LocalDate.parse(processedString[1]));
                 toDoList.add(newDeadline);
             } else if (inpArr[0].equals("event")){ // need to handle exception
                 String[] processedString = stringProcessor(false, task.substring(6));
-                Event newEvent = new Event(processedString[0], task, processedString[1], processedString[2]);
+                Event newEvent = new Event(processedString[0], task, LocalDate.parse(processedString[1]),
+                        LocalDate.parse(processedString[2]));
                 toDoList.add(newEvent);
             } else if (inpArr[0].equals("delete")){ // need to handle exception
                 toDoList.remove(Integer.parseInt(inpArr[1])-1);
@@ -148,9 +168,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        String name = "chatty bot";
-        System.out.println("Hello from " + name);
-        System.out.println("talk to me :)");
+        startUp();
         boolean isRunning = true;
         listReader();
         while (isRunning) {

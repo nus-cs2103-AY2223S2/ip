@@ -1,7 +1,10 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task{
 
-    private String date;
-    public Deadline(String name, String inpString, String date){
+    private LocalDate date; // can do more with this
+    public Deadline(String name, String inpString, LocalDate date){
         super(name, inpString);
         this.date = date;
     }
@@ -10,6 +13,6 @@ public class Deadline extends Task{
     public void printTask(){
         System.out.print("[D]");
         super.printTask();
-        System.out.println("(by: " + date + ")");
+        System.out.println("(by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")");
     }
 }
