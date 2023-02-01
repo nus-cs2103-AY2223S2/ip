@@ -4,6 +4,10 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.time.format.DateTimeFormatter;
+
 public class Duke {
 
     private static void writeToFile(String filePath, String text) throws IOException {
@@ -49,7 +53,11 @@ public class Duke {
             description = arr[0];
             String time = arr[1].replace(")", "");
 
-            Task deadline = new Deadline(description, time);
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d MMM u");
+            LocalDate date = LocalDate.parse(time, dateFormatter);
+
+            Task deadline = new Deadline(description, date);
+
             if (taskIsDone) {
                 deadline.markAsDone();
             }
@@ -99,8 +107,8 @@ public class Duke {
             sn.close();
         } catch (FileNotFoundException e) {
             System.out.println("There are no tasks as of now!");
-        } catch (DukeException e) {
-            System.out.println(e.toString());
+        } catch (DukeException d) {
+            System.out.println(d.toString());
         }
 
         Scanner scn = new Scanner(System.in);
@@ -169,8 +177,9 @@ public class Duke {
                         if (description.equals("") || description.equals(" ")) {
                             throw new MissingDescriptionException();
                         } else {
-                            String date = command.split("/by")[1];
-                            Deadline deadline = new Deadline(description, date);
+                            String date = command.split("/by ")[1];
+                            LocalDate dateString = LocalDate.parse(date);
+                            Deadline deadline = new Deadline(description, dateString);
                             list.add(deadline);
                             System.out
                                     .println("Got it. I've added this task:\n" + deadline.toString() + "\nNow you have "
@@ -196,6 +205,8 @@ public class Duke {
                     }
                 } catch (DukeException e) {
                     System.out.println(e.toString());
+                } catch (DateTimeParseException e) {
+                    System.out.println("input date in YYYY-MM-DD format!");
                 }
             }
 
