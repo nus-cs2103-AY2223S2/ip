@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ParserTest {
     @Test
-    public void parseTodo_normal_parsedCorrectly() {
+    public void parseTodo_normalInput_returnTodo() {
         String input = "todo homework";
         try {
             Task expected = new Todo("homework");
@@ -19,7 +19,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parseTodo_error_throwsException() {
+    public void parseTodo_invalidInput_throwException() {
         String invalidInput = "todo";
         BobException e = assertThrows(BobException.class, () -> Parser.parseTodo(invalidInput));
         assertEquals("Invalid todo command!", e.getMessage());
