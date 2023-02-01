@@ -23,74 +23,79 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         
         while (startDuke) {
-            String[] userInput = sc.nextLine().split(" ", 2);
-    
-            try {
-                switch (userInput[0]) {
-                    case "bye":
-                        System.out.println("Bye. Hope to see you again soon!");
-                        sc.close();
-                        startDuke = false;
-                        break;
-    
-                    case "list":
-                        if (taskCount == 0) {
-                            System.out.println("You have no tasks");
-                        }
-                        else {
-                            System.out.println("Here are the tasks in your list");
-                            for (int i = 0; i < taskCount; i++) {
-                                System.out.printf("%d. %s \n", i + 1, taskList.get(i));
-                            }
-                        }
-                        break;
-                    
-                    case "mark":
-                        markTask(Integer.valueOf(userInput[1]) - 1);
-                        break;
-                    
-                    case "unmark":
-                        unmarkTask(Integer.valueOf(userInput[1]) - 1);
-                        break;
-    
-                    case "todo":
-                        if (userInput.length < 2) {
-                            throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
-                        } else {
-                            addTaskToList(Type.TODO, userInput[1]);
-                        }
-                        break;
-    
-                    case "deadline": 
-                        if (userInput.length < 2) {
-                            throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
-                        } else {
-                            addTaskToList(Type.DEADLINE, userInput[1]);
-                        }
-                        break;
-    
-                    case "event":
-                        if (userInput.length < 2) {
-                            throw new DukeException("OOPS!!! The description of a event cannot be empty.");
-                        } else {
-                            addTaskToList(Type.EVENT, userInput[1]);
-                        }
-                        break;
+           initDuke(sc);
+        }
+    }
 
-                    case "delete":
-                        if (userInput.length < 2) {
-                            throw new DukeException("Missing taskID!");
-                        } else {
-                            deleteTask(Integer.valueOf(userInput[1]) - 1);
+
+    public static void initDuke(Scanner sc) {
+        String[] userInput = sc.nextLine().split(" ", 2);
+    
+        try {
+            switch (userInput[0]) {
+                case "bye":
+                    System.out.println("Bye. Hope to see you again soon!");
+                    sc.close();
+                    startDuke = false;
+                    break;
+
+                case "list":
+                    if (taskCount == 0) {
+                        System.out.println("You have no tasks");
+                    }
+                    else {
+                        System.out.println("Here are the tasks in your list");
+                        for (int i = 0; i < taskCount; i++) {
+                            System.out.printf("%d. %s \n", i + 1, taskList.get(i));
                         }
-                        break;
-                        
-                    default:
-                        throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
-                } 
-            } catch (DukeException e) {
-                System.out.println(e);
-            }
+                    }
+                    break;
+                
+                case "mark":
+                    markTask(Integer.valueOf(userInput[1]) - 1);
+                    break;
+                
+                case "unmark":
+                    unmarkTask(Integer.valueOf(userInput[1]) - 1);
+                    break;
+
+                case "todo":
+                    if (userInput.length < 2) {
+                        throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+                    } else {
+                        addTaskToList(Type.TODO, userInput[1]);
+                    }
+                    break;
+
+                case "deadline": 
+                    if (userInput.length < 2) {
+                        throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
+                    } else {
+                        addTaskToList(Type.DEADLINE, userInput[1]);
+                    }
+                    break;
+
+                case "event":
+                    if (userInput.length < 2) {
+                        throw new DukeException("OOPS!!! The description of a event cannot be empty.");
+                    } else {
+                        addTaskToList(Type.EVENT, userInput[1]);
+                    }
+                    break;
+
+                case "delete":
+                    if (userInput.length < 2) {
+                        throw new DukeException("Missing taskID!");
+                    } else {
+                        deleteTask(Integer.valueOf(userInput[1]) - 1);
+                    }
+                    break;
+                    
+                default:
+                    throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+            } 
+        } catch (DukeException e) {
+            System.out.println(e);
         }
     }
 
