@@ -20,6 +20,6 @@ public class Event extends Tasks{
 
     @Override
     public String log() {
-        return "E" + super.log() + "| " + this.from + "- " + this.to +"\n";
+        return "E" + super.log() + " | " + this.from + " - " + this.to +"\n";
     }
 }

@@ -18,6 +18,6 @@ public class Deadline extends Tasks {
 
     @Override
     public String log() {
-        return "D" + super.log() + "| " + this.by + "\n";
+        return "D" + super.log() + " | " + this.by + "\n";
     }
 }
