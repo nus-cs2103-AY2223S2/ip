@@ -21,15 +21,33 @@ public class Event extends Task {
         this.to = LocalDateTime.parse(to, inputFormatter);
     }
 
-    // to write to file or other internal use
+    /**
+     * Returns string representation of event begin date (in input format).
+     * This method is to be used for internal use (not for output to user) such
+     * as to save to storage.
+     *
+     * @return Event begin date formatted for subsequent input.
+     */
     public String getFrom() {
         return this.from.format(inputFormatter);
     }
 
+    /**
+     * Returns string representation of event end date (in input format).
+     * This method is to be used for internal use (not for output to user) such
+     * as to save to storage.
+     *
+     * @return Event end date formatted for subsequent input.
+     */
     public String getTo() {
         return this.to.format(inputFormatter);
     }
 
+    /**
+     * @inheritDoc
+     *
+     * @return "E".
+     */
     @Override
     public String getType() {
         return "E";

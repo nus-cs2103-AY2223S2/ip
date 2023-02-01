@@ -9,6 +9,12 @@ public class ToDo extends Task {
         super(description);
     }
 
+
+    /**
+     * @inheritDoc
+     *
+     * @return "T".
+     */
     @Override
     public String getType() {
         return "T";

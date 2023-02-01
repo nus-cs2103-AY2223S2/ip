@@ -17,11 +17,22 @@ public class Deadline extends Task {
         this.by = LocalDateTime.parse(by, inputFormatter);
     }
 
-    // to write to file or other internal use
+    /**
+     * Returns string representation of deadline date (in input format).
+     * This method is to be used for internal use (not for output to user) such
+     * as to save to storage.
+     *
+     * @return Deadline date formatted for subsequent input.
+     */
     public String getBy() {
         return this.by.format(inputFormatter);
     }
 
+    /**
+     * @inheritDoc
+     *
+     * @return "D".
+     */
     @Override
     public String getType() {
         return "D";

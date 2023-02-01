@@ -8,12 +8,20 @@ import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Class to represent a Duke instance.
+ * Members include a Storage object for file I/O, a TaskList object to store
+ * current list of tasks and a Ui object for output to user.
+ */
 public class Duke {
 
     private static Storage storage;
     private static TaskList tasks;
     private static Ui ui;
 
+    /**
+     * Initializes new Duke instance with associated Storage, TaskList and Ui members.
+     */
     public Duke() {
         ui = new Ui();
         try {
@@ -26,11 +34,11 @@ public class Duke {
     }
 
     /**
-     * Replies to user inputs according to requirements.
-     * If user inputs "bye", return to exit duke.Duke.
+     * Performs ui operations according to parsed user inputs.
+     * If user inputs "bye", store list of tasks and exit.
      * If user inputs "list", print current tasks.
-     * If user inputs "mark NUMBER" or "unmark NUMBER", update the doneness of that duke.task number.
-     * If user inputs a duke.task, add to current tasks.
+     * If user inputs "mark NUMBER" or "unmark NUMBER", update the status of that task number.
+     * If user inputs a task, add to current tasks.
      */
     public void run() {
         try {
@@ -82,6 +90,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Begins running a new Duke instance.
+     *
+     * @param args Command-line arguments (ignored).
+     */
     public static void main(String[] args) {
         new Duke().run();
     }
