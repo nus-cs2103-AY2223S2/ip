@@ -3,9 +3,9 @@ package helper;
 import exception.InvalidDateFormatException;
 
 import java.time.DateTimeException;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.time.LocalDateTime;
 
 /**
  * Represents the helper class to abstract LocalDateTime logic in Duke.
@@ -57,7 +57,7 @@ public class DateTimeHelper {
      * @return The corresponding datetime object for the string.
      * @throws InvalidDateFormatException If the string does not follow the specified format.
      */
-    public static LocalDateTime parseFormattedDateTime(String dateTimeString) throws InvalidDateFormatException{
+    public static LocalDateTime parseFormattedDateTime(String dateTimeString) throws InvalidDateFormatException {
         // Check if string is in the correct format.
         if (!dateTimeString.matches(".{3} \\d{1,3} \\d{4} \\d{2}:\\d{2}")) {
             throw new InvalidDateFormatException("Incorrect date format!");

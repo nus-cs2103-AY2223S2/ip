@@ -1,14 +1,14 @@
 package command;
 
+import exception.DukeException;
+
 import response.Response;
 
-import sys.Ui;
 import sys.Storage;
+import sys.Ui;
 
-import task.TaskList;
 import task.Task;
-
-import exception.DukeException;
+import task.TaskList;
 
 /**
  * Represents a command to add a task to the task list.
@@ -17,7 +17,7 @@ public class AddCommand extends Command {
     private String input;
 
     /**
-     * Constructor for AddCommand
+     * Constructor for AddCommand.
      * @param input Input to parse.
      */
     public AddCommand(String input) {
@@ -31,8 +31,8 @@ public class AddCommand extends Command {
      * @param tl the current list of tasks
      * @param ui the user interface running.
      * @param storage the storage location for the program.
-     * @throws DukeException If an invalid input is given.
      * @return Response object containing list of tasks and a message.
+     * @throws DukeException If an invalid input is given.
      */
     @Override
     public Response execute(TaskList tl, Ui ui, Storage storage) throws DukeException {

@@ -1,14 +1,14 @@
 package command;
 
-import response.Response;
-
-import sys.Ui;
-import sys.Storage;
-
-import task.TaskList;
-
 import exception.DukeException;
 import exception.InvalidDateFormatException;
+
+import response.Response;
+
+import sys.Storage;
+import sys.Ui;
+
+import task.TaskList;
 
 /**
  * Represents the command to list all the tasks that occur within the given period.
@@ -31,13 +31,13 @@ public class OccursCommand extends Command {
      * @param tl the current list of tasks
      * @param ui the user interface running.
      * @param storage the storage location for the program.
-     * @throws DukeException If an invalid input is given.
      * @return Returns filtered tasks.
+     * @throws DukeException If an invalid input is given.
      */
     @Override
     public Response execute(TaskList tl, Ui ui, Storage storage) throws DukeException {
         // Handle occurs
-        String dateTime = this.input.substring(7);
+        String dateTime = input.substring(7);
 
         try {
             String message = "Found the following tasks: ";

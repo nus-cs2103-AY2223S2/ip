@@ -5,8 +5,6 @@ import sys.Ui;
 
 import task.TaskList;
 
-import java.io.IOException;
-
 /**
  * Represents the whole Duke program.
  */

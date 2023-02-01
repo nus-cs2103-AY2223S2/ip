@@ -47,7 +47,7 @@ public class TaskList {
 
             // Add new deadline task to the list.
             try {
-                this.tasks.add(new Deadline(content, arr[1]));
+                tasks.add(new Deadline(content, arr[1]));
             } catch (InvalidDateFormatException e) {
                 System.out.println(e.getMessage());
             }
@@ -64,7 +64,7 @@ public class TaskList {
 
             // Add new event task to the list.
             try {
-                this.tasks.add(new Event(content, startEnd[0], startEnd[1]));
+                tasks.add(new Event(content, startEnd[0], startEnd[1]));
             } catch (InvalidDateFormatException e) {
                 System.out.println(e.getMessage());
             }
@@ -75,7 +75,7 @@ public class TaskList {
             }
 
             // Add new todo task to the list.
-            this.tasks.add(new ToDo(input.substring(5, input.length())));
+            tasks.add(new ToDo(input.substring(5, input.length())));
         } else {
             throw new CommandNotFoundException("Duke command is invalid.", input);
         }
@@ -91,7 +91,7 @@ public class TaskList {
      */
     public void addTask(Task ... t) {
         for (Task task: t) {
-            this.tasks.add(task);
+            tasks.add(task);
         }
     }
 

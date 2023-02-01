@@ -6,8 +6,8 @@ import task.TaskList;
  * Represents a response for the application.
  */
 public class Response {
-    public String message;
-    public TaskList tasks;
+    private String message;
+    private TaskList tasks;
 
     /**
      * Constructor for Response object
@@ -22,5 +22,21 @@ public class Response {
     @Override
     public String toString() {
         return message + '\n' + tasks.toString();
+    }
+
+    /**
+     * Accessor method for message.
+     * @return Returns the message stored within the response.
+     */
+    public String getMessage() {
+        return message;
+    }
+
+    /**
+     * Accessor method for the returned task list.
+     * @return The list of tasks returned with the response.
+     */
+    public TaskList getTaskList() {
+        return tasks;
     }
 }

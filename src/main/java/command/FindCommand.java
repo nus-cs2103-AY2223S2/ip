@@ -33,7 +33,7 @@ public class FindCommand extends Command {
     @Override
     public Response execute(TaskList tl, Ui ui, Storage storage) {
         // Handle find
-        String word = this.input.substring(5);
+        String word = input.substring(5);
 
         String message = "Found tasks containing: " + word;
         TaskList result = tl.findTasksWithWord(word);

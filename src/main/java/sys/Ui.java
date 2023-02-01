@@ -1,7 +1,5 @@
 package sys;
 
-import javafx.scene.control.Label;
-
 import command.Command;
 
 import exception.DukeException;
@@ -9,8 +7,6 @@ import exception.DukeException;
 import response.Response;
 
 import task.TaskList;
-
-import java.util.Scanner;
 
 /**
  * Represents the interface system that the user interacts with.
@@ -53,7 +49,7 @@ public class Ui {
             Command c = parser.parse(input);
 
             // Execute the command.
-            Response output = c.execute(this.tasks, this, this.storage);
+            Response output = c.execute(tasks, this, storage);
 
             System.out.println(output);
 

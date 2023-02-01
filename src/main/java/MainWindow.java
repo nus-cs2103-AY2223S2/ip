@@ -1,9 +1,13 @@
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 import response.Response;
+
 import task.Task;
 
 /**
@@ -51,7 +55,7 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().clear();
 
         // Add new tasks to the container.
-        for (Task t: response.tasks.getTasks()) {
+        for (Task t: response.getTaskList().getTasks()) {
             dialogContainer.getChildren().add(new Label(t.toString()));
         }
 

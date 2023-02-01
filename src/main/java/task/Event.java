@@ -1,15 +1,15 @@
 package task;
 
-import helper.DateTimeHelper;
-
 import exception.InvalidDateFormatException;
+
+import helper.DateTimeHelper;
 
 import java.time.LocalDateTime;
 
 /**
  * Represents an event task that lasts between two time periods.
  */
-public class Event extends Task{
+public class Event extends Task {
     private LocalDateTime start;
     private LocalDateTime end;
 
@@ -27,19 +27,6 @@ public class Event extends Task{
     }
 
     /**
-     * Checks if the given datetime occurs within the event period.
-     *
-     * @param datetime the given datetime to check.
-     * @return Whether the given datetime occurs within the event period.
-     */
-    public boolean occursOn(LocalDateTime datetime) {
-        return datetime.equals(this.start)
-                || (datetime.isAfter(this.start) && datetime.isBefore(this.end))
-                || datetime.equals(this.end);
-    }
-
-    /**
-     *
      * Constructor for an Event task.
      * @param content The task to be done.
      * @param done Whether the task was completed.
@@ -51,6 +38,18 @@ public class Event extends Task{
         super(content, done);
         this.start = DateTimeHelper.parseFormattedDateTime(startString);
         this.end = DateTimeHelper.parseFormattedDateTime(endString);
+    }
+
+    /**
+     * Checks if the given datetime occurs within the event period.
+     *
+     * @param datetime the given datetime to check.
+     * @return Whether the given datetime occurs within the event period.
+     */
+    public boolean occursOn(LocalDateTime datetime) {
+        return datetime.equals(start)
+                || (datetime.isAfter(start) && datetime.isBefore(end))
+                || datetime.equals(end);
     }
 
     @Override

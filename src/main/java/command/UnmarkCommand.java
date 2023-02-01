@@ -1,14 +1,14 @@
 package command;
 
-import response.Response;
-
-import task.TaskList;
-
-import sys.Ui;
-import sys.Storage;
-
 import exception.DukeException;
 import exception.InvalidCommandInputException;
+
+import response.Response;
+
+import sys.Storage;
+import sys.Ui;
+
+import task.TaskList;
 
 /**
  * Represents the command to unmark a task and save the changes.
@@ -31,8 +31,8 @@ public class UnmarkCommand extends Command {
      * @param tl the current list of tasks
      * @param ui the user interface running.
      * @param storage the storage location for the program.
-     * @throws DukeException If an invalid input is given.
      * @return Returns remaining tasks.
+     * @throws DukeException If an invalid input is given.
      */
     @Override
     public Response execute(TaskList tl, Ui ui, Storage storage) throws DukeException {

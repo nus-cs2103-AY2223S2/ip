@@ -1,13 +1,14 @@
 package command;
 
+import exception.DukeException;
+
 import response.Response;
 
-import sys.Ui;
 import sys.Storage;
+import sys.Ui;
 
 import task.TaskList;
 
-import exception.DukeException;
 
 /**
  * Represents the command given by the user.
@@ -19,7 +20,7 @@ public abstract class Command {
      * Constructor for Command
      * @param regex Regex for command argument to match with.
      */
-    Command (String regex) {
+    Command(String regex) {
         this.regex = regex;
     }
 

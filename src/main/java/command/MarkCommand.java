@@ -1,14 +1,14 @@
 package command;
 
-import response.Response;
-
-import sys.Ui;
-import sys.Storage;
-
-import task.TaskList;
-
 import exception.DukeException;
 import exception.InvalidCommandInputException;
+
+import response.Response;
+
+import sys.Storage;
+import sys.Ui;
+
+import task.TaskList;
 
 /**
  * Represents the command to mark a task as completed and save the changes.
@@ -31,8 +31,8 @@ public class MarkCommand extends Command {
      * @param tl the current list of tasks
      * @param ui the user interface running.
      * @param storage the storage location for the program.
-     * @throws DukeException If an invalid input is given.
      * @return Returns response containing all tasks.
+     * @throws DukeException If an invalid input is given.
      */
     @Override
     public Response execute(TaskList tl, Ui ui, Storage storage) throws DukeException {

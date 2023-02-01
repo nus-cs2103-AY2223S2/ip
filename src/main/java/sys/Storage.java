@@ -1,5 +1,6 @@
 package sys;
 
+import exception.InvalidDateFormatException;
 import exception.InvalidTaskStringException;
 
 import task.Task;
@@ -36,7 +37,7 @@ public class Storage {
 
         try {
             // Read the specified path.
-            File f = new File(this.path);
+            File f = new File(path);
             Scanner s = new Scanner(f);
 
             while (s.hasNextLine()) {
@@ -45,7 +46,7 @@ public class Storage {
             }
         } catch (FileNotFoundException e) {
             System.out.println("tasks.txt not found, generating new task list...");
-        } catch (InvalidTaskStringException e) {
+        } catch (InvalidTaskStringException | InvalidDateFormatException e) {
             System.out.println(e.getMessage());
         }
 
@@ -60,7 +61,7 @@ public class Storage {
     public void save(TaskList tasks) {
         try {
             // Write to the specified path.
-            FileWriter fw = new FileWriter(this.path);
+            FileWriter fw = new FileWriter(path);
 
             // Remove enumeration.
             String[] lines = tasks.toString().split("\n");

@@ -1,15 +1,15 @@
 package command;
 
+import exception.DukeException;
+import exception.InvalidCommandInputException;
+
 import response.Response;
 
-import sys.Ui;
 import sys.Storage;
+import sys.Ui;
 
 import task.TaskList;
 import task.Task;
-
-import exception.DukeException;
-import exception.InvalidCommandInputException;
 
 /**
  * Represents a command to delete a task from the task list.
@@ -32,8 +32,8 @@ public class DeleteCommand extends Command {
      * @param tl the current list of tasks
      * @param ui the user interface running.
      * @param storage the storage location for the program.
-     * @throws DukeException If an invalid input is given.
      * @return Response containing remaining tasks.
+     * @throws DukeException If an invalid input is given.
      */
     @Override
     public Response execute(TaskList tl, Ui ui, Storage storage) throws DukeException {
