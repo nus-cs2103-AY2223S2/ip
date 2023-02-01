@@ -59,21 +59,21 @@ public class Parser {
         case "bye":
             return true;
         case "list":
-            UI.listMsg(ls.toString());
+            UI.listMsg(ls);
             break;
         case "mark":
             index = Integer.parseInt(input[1]);
-            ls.markTask(index); //numbersformatexception to be handled
+            ls.markTask(index);
             UI.taskMarking(ls, index, command);
             break;
         case "unmark":
             index = Integer.parseInt(input[1]);;
-            ls.unmarkTask(index); //numbersformatexception to be handled
+            ls.unmarkTask(index);
             UI.taskMarking(ls, index, command);
             break;
         case "delete":
             index = Integer.parseInt(input[1]);
-            Task removed = ls.delete(index); //numbersformatexception to be handled
+            Task removed = ls.delete(index);
             UI.taskAddDelete(ls, removed, command);
             break;
         case "todo":

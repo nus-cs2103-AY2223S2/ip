@@ -19,7 +19,7 @@ import java.util.regex.Pattern;
 /**
  * A class that can hold a specified directory path with respect
  * to the home directory of the user.
- * It can then load or save the state of the ToDoList to and from
+ * It can then save or load the state of the ToDoList to and from
  * the specified directory path respectively.
  */
 public class Storage {
@@ -30,6 +30,13 @@ public class Storage {
         this.path = Paths.get(home, pathStr);
     }
 
+    /**
+     * Creates the given directory if it does not exist.
+     *
+     * @param dir The directory path to be created if it does not exist.
+     * @throws IOException If the given directory path does not exist
+     *                     even after creating it in this method.
+     */
     public void createDirectory(Path dir) throws IOException {
         if (!Files.exists(dir)) {
             createDirectory(dir.getParent());
@@ -38,10 +45,11 @@ public class Storage {
     }
 
     /**
-     * Returns an instance of a ToDoList object that contains the specific Tasks in their correct state
-     * based on r
+     * Returns an instance of a ToDoList object that contains the specific tasks in their correct state
+     * based on the given path stored in the Storage object.
      *
-     *
+     * @return A ToDoList object with the Task objects in it based on the information given in the
+     *         file that the path in the Storage object points to.
      */
     public ToDoList load() {
         try {
@@ -86,6 +94,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the specific states of the different Task objects in the give ToDoList
+     * to the file pointed to by the path stored in the Storage object.
+     *
+     * @param ls The ToDoList that is to have its state saved.
+     */
     public void save(ToDoList ls)  {
         try {
             FileWriter fw = new FileWriter(path.toString());
