@@ -6,6 +6,7 @@ package duke.parser;
  * by spaces (String[]) and the command keyword (String).
  */
 public class Parser {
+
     private String input;
     private String[] splitInput;
     private String command;

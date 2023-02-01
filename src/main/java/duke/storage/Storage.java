@@ -21,6 +21,7 @@ import java.util.Scanner;
  * Stores file path and has methods to implement file I/O operations.
  */
 public class Storage {
+
     private final Path filePath;
     private final Path foldPath;
 
@@ -34,8 +35,10 @@ public class Storage {
         try {
             String fileSep = System.getProperty("file.separator");
             String userDir = System.getProperty("user.dir");
+
             foldPath = Paths.get( userDir + fileSep + "data");
             filePath = Paths.get(foldPath + fileSep + "duke.txt");
+
             if (!Files.isDirectory(foldPath)) {
                 Files.createDirectory(foldPath);
                 Files.createFile(filePath);
@@ -43,7 +46,7 @@ public class Storage {
                 Files.createFile(filePath);
             }
         } catch (IOException e) {
-            throw new DukeException("An error occurred while loading duke.storage.");
+            throw new DukeException("An error occurred while loading storage.");
         }
     }
 
@@ -58,10 +61,13 @@ public class Storage {
         try {
             File f = new File(String.valueOf(filePath));
             Scanner s = new Scanner(f);
+
             while (s.hasNextLine()) {
                 String taskData = s.nextLine();
                 String[] splitData = taskData.split("[|]", 5);
+
                 Task task;
+
                 switch (taskData.charAt(0)) {
                 case 'T':
                     task = new ToDo(splitData[2]);
@@ -73,11 +79,13 @@ public class Storage {
                     task = new Event(splitData[2], splitData[3], splitData[4]);
                     break;
                 default:
-                    throw new DukeException("Invalid duke.storage format.");
+                    throw new DukeException("Invalid storage format.");
                 }
+
                 if (splitData[1].equals("X")) {
                     task.markAsDone();
                 }
+
                 list.add(task);
             }
         } catch (FileNotFoundException e) {
@@ -97,10 +105,13 @@ public class Storage {
     public void store(TaskList tasks) throws DukeException {
         try {
             FileWriter fw = new FileWriter(filePath.toString());
+
             for (int i = 0; i < tasks.getSize(); ++i) {
                 Task task = tasks.getTask(i);
+
                 StringBuilder text = new StringBuilder();
                 text.append(task.getType() + "|" + task.getStatusIcon() + "|");
+
                 if (task instanceof ToDo) {
                     text.append(task.getDescription() + "\n");
                 } else {

@@ -4,6 +4,7 @@ package duke.task;
  * Class to store duke.task description along with completion status.
  */
 public abstract class Task {
+
     protected String description;
     protected boolean isDone;
 

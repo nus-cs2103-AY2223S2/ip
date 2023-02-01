@@ -29,7 +29,7 @@ public class Ui {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         printLine();
-        System.out.printf("     %s%n", "Hello! I'm duke.Duke");
+        System.out.printf("     %s%n", "Hello! I'm Duke");
         System.out.printf("     %s%n", "What can I do for you?");
         printLine();
     }
@@ -54,15 +54,15 @@ public class Ui {
         try {
             taskNumber = parser.getTaskNumber();
             tasks.getTask(taskNumber - 1).markAsDone();
-            System.out.printf("     %s%n", "Nice! I've marked this duke.task as done:");
+            System.out.printf("     %s%n", "Nice! I've marked this task as done:");
             System.out.printf("       %s%n", tasks.getTask(taskNumber - 1).toString());
         } catch (NumberFormatException|IndexOutOfBoundsException e) {
-            System.out.printf("     %s%n", "Please input valid duke.task number.");
+            System.out.printf("     %s%n", "Please input valid task number.");
         }
     }
 
     /**
-     * Unmark task (selected by position in list).
+     * Unmarks task (selected by position in list).
      *
      * @param tasks List of current tasks.
      * @param parser Parser object to get task number.
@@ -72,10 +72,10 @@ public class Ui {
         try {
             taskNumber = parser.getTaskNumber();
             tasks.getTask(taskNumber - 1).markAsNotDone();
-            System.out.printf("     %s%n", "OK, I've marked this duke.task as not done yet:");
+            System.out.printf("     %s%n", "OK, I've marked this task as not done yet:");
             System.out.printf("       %s%n", tasks.getTask(taskNumber - 1).toString());
         } catch (NumberFormatException|IndexOutOfBoundsException e) {
-            throw new DukeException("Input a valid duke.task number.");
+            throw new DukeException("Input a valid task number.");
         }
     }
 
@@ -86,13 +86,13 @@ public class Ui {
      * @param t Task to confirm addition of.
      */
     private void confirmAddition(TaskList tasks, Task t) {
-        System.out.printf("     %s%n", "Got it. I've added this duke.task:");
+        System.out.printf("     %s%n", "Got it. I've added this task:");
         System.out.printf("       %s%n", t.toString());
         System.out.printf("     %s%d%s%n", "Now you have ", tasks.getSize(), " tasks in the list.");
     }
 
     /**
-     * Add ToDo task to list.
+     * Adds ToDo task to list.
      *
      * @param tasks List of current tasks.
      * @param parser Parser object to get ToDo details from input.
@@ -112,7 +112,7 @@ public class Ui {
     }
 
     /**
-     * Add Deadline task to list.
+     * Adds Deadline task to list.
      *
      * @param tasks List of current tasks.
      * @param parser Parser object to get Deadline details from input.
@@ -125,7 +125,7 @@ public class Ui {
     }
 
     /**
-     * Add Event task to list.
+     * Adds Event task to list.
      *
      * @param tasks List of current tasks.
      * @param parser Parser object to get Event details from input.
@@ -138,7 +138,7 @@ public class Ui {
     }
 
     /**
-     * Delete task from list.
+     * Deletes task from list.
      *
      * @param tasks List of current tasks.
      * @param parser Parser object to get task number.
@@ -149,16 +149,16 @@ public class Ui {
         try {
             taskNumber = parser.getTaskNumber();
             Task t = tasks.removeTask(taskNumber - 1);
-            System.out.printf("     %s%n", "Noted. I've removed this duke.task:");
+            System.out.printf("     %s%n", "Noted. I've removed this task:");
             System.out.printf("       %s%n", t.toString());
             System.out.printf("     %s%d%s%n", "Now you have ", tasks.getSize(), " tasks in the list.");
         } catch (NumberFormatException|IndexOutOfBoundsException e) {
-            throw new DukeException("Input a valid duke.task number.");
+            throw new DukeException("Input a valid task number.");
         }
     }
 
     /**
-     * List tasks to user.
+     * Lists tasks to user.
      *
      * @param tasks List of current tasks.
      * @throws DukeException
