@@ -13,7 +13,7 @@ public abstract class Command {
         this.input = input;
     }
 
-    public abstract Command execute(TaskList list, Storage storage) throws DuduException;
+    public abstract String execute(TaskList list, Storage storage) throws DuduException;
 
 
 }

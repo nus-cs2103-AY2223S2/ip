@@ -36,9 +36,9 @@ public class TaskList {
      */
     public ArrayList<Task> addTask(Task task) {
         list.add(task);
-        System.out.println("Got it. I've added this task:");
-        System.out.println("  " + task);
-        System.out.println(getTotalTask());
+//        System.out.println("Got it. I've added this task:");
+//        System.out.println("  " + task);
+//        System.out.println(getTotalTask());
         return list;
     }
 
@@ -94,15 +94,17 @@ public class TaskList {
     /**
      * Prints all the tasks in the list using a format.
      */
-    public void printList() {
+    public String printList() {
+        StringBuilder sb = new StringBuilder();
         if (list.size() == 0) {
-            System.out.println("There is no task in your list");
+            sb.append("There is no task in your list");
         } else {
-            System.out.println("Here are the tasks in your list:");
+            sb.append("Here are the tasks in your list:\n");
             for (int i = 0; i < list.size(); i++) {
                 Task currTask = list.get(i);
-                System.out.println(i + 1 + "." + currTask);
+                sb.append(i + 1 + "." + currTask + "\n");
             }
         }
+        return sb.toString();
     }
 }

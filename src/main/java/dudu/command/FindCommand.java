@@ -21,16 +21,19 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public Command execute(TaskList list, Storage storage) throws DuduException {
+    public String execute(TaskList list, Storage storage) throws DuduException {
+        StringBuilder sb = new StringBuilder();
         int index = 0;
-        System.out.println("Here are the matching tasks in your list:");
+        sb.append("Here are the matching tasks in your list:\n");
+//        System.out.println("Here are the matching tasks in your list:");
         for (Task task: list.getList()) {
             if (task.getDescription().contains(input)) {
                 index += 1;
-                System.out.print(index + ".");
-                System.out.println(task);
+                sb.append(index + "." + task + "\n");
+//                System.out.print(index + ".");
+//                System.out.println(task);
             }
         }
-        return this;
+        return sb.toString();
     }
 }

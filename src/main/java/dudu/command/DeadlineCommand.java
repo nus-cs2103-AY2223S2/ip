@@ -22,12 +22,13 @@ public class DeadlineCommand extends Command {
     }
 
     @Override
-    public Command execute(TaskList list, Storage storage) throws DuduException {
+    public String execute(TaskList list, Storage storage) throws DuduException {
         if (!input.contains(" /by ")) {
             throw new EmptyDescriptionException("deadline", "date", "Missing end date");
         }
         String[] inputStr = input.split(" /by ");
-        storage.saveTask(list.addTask(new Deadline(inputStr[0], inputStr[1])));
-        return this;
+        Deadline deadline = new Deadline(inputStr[0], inputStr[1]);
+        storage.saveTask(list.addTask(deadline));
+        return "Got it. I've added this task:\n  " + deadline + "\n" + list.getTotalTask();
     }
 }

@@ -2,6 +2,7 @@ package dudu;
 
 import java.util.Scanner;
 
+import dudu.command.Command;
 import dudu.exception.DuduException;
 import dudu.exception.InvalidCommandException;
 import dudu.task.TaskList;
@@ -13,6 +14,7 @@ import dudu.util.Ui;
  * Dudu class
  */
 public class Dudu {
+
     private static boolean isExit = false;
     private TaskList list;
     private Scanner scanner;
@@ -62,8 +64,29 @@ public class Dudu {
             ui.showLine();
         }
     }
-    public static void main(String[] args) {
-        new Dudu("data/tasks.txt").run();
+
+//    public static void main(String[] args) {
+//        new Dudu("data/tasks.txt").run();
+//    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input)  {
+        if (input.isBlank()) {
+            return ">";
+        }
+        Command command;
+        try {
+            command = Parser.parse(input, list, storage);
+            return command.execute(list, storage);
+        } catch (InvalidCommandException ex) {
+            return ex.toString();
+        } catch (DuduException ex) {
+            return ex.toString();
+        }
+
     }
 
 }

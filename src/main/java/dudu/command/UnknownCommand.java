@@ -18,7 +18,7 @@ public class UnknownCommand extends Command {
     }
 
     @Override
-    public Command execute(TaskList list, Storage storage) throws DuduException {
+    public String execute(TaskList list, Storage storage) throws DuduException {
         throw new InvalidCommandException("Invalid Command");
     }
 }
