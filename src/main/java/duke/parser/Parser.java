@@ -59,7 +59,7 @@ public class Parser {
      *
      * @return True if input has a description and false otherwise.
      */
-    public boolean isValidToDo() {
+    public boolean hasDescription() {
         return input.length() > 5;
     }
 
@@ -121,5 +121,9 @@ public class Parser {
     public String parseEventTo() {
         int toIndex = input.indexOf("/to");
         return input.substring(toIndex + 4);
+    }
+
+    public String parseFindKeyword() {
+        return input.substring(5);
     }
 }
