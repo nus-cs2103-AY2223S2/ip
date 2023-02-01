@@ -97,4 +97,24 @@ public class TaskList {
             System.out.println("Text is formatted wrongly");
         }
     }
+
+    public String find(String keywords) throws DukeEmptyInputException {
+        if (keywords.trim().equals("")) {
+            throw new DukeEmptyInputException();
+        }
+
+        StringBuilder str = new StringBuilder();
+        int count = 1;
+        for (Task t : list) {
+            if (t.getName().contains(keywords)) {
+                str.append(String.format("%d. %s\n", count, t));
+                count++;
+            }
+        }
+        if (str.length() == 0) {
+            return "It appears that you have no matching tasks!";
+        }
+        str.deleteCharAt(str.length() - 1);
+        return "These are the matching tasks that I have found:\n" + str;
+    }
 }

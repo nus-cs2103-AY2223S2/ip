@@ -5,7 +5,6 @@ import duke.exceptions.DukeUnknownInputException;
 import duke.commands.*;
 
 public class Parser {
-
     public Parser() {}
 
     public Command parse(String fullCommand) throws DukeUnknownInputException {
@@ -32,8 +31,10 @@ public class Parser {
             return new EventCommand(params);
         case "delete":
             return new DeleteCommand(params);
-        case "bye":;
+        case "bye":
             return new ExitCommand(params);
+        case "find":
+            return new FindCommand(params);
         default:
             throw new DukeUnknownInputException();
         }

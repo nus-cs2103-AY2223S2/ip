@@ -5,8 +5,8 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class DateHandler {
-
     private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+
     public static String parse(String input) {
         try {
             LocalDate date = LocalDate.parse(input);
