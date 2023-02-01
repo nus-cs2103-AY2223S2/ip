@@ -1,15 +1,15 @@
 package duke;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
-import duke.Parser;
-import duke.command.Command;
-
 import java.io.FileNotFoundException;
 import java.time.format.DateTimeParseException;
 
+import duke.command.Command;
 
+/**
+ * Represents a Duke programme.
+ *
+ * @author Karen
+ */
 public class Duke {
     static final String STR = "------------------------------------------------------------";
 
@@ -17,24 +17,32 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Initialises new instance of Duke.
+     *
+     * @param filePath The file path in String of the file where memory is stored.
+     */
     private Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
-        try {
-            tasks = new TaskList(storage.loadData());
-            ui.successfulLoadResponse();
-        } catch (FileNotFoundException e) {
-            tasks = new TaskList();
-            ui.loadingErrorMessage();
-        }
     }
 
+    /**
+     * Runs Duke program when called.
+     */
     public void run() {
         // Introduction
+        Duke duke = new Duke("./data/duke.txt");
         ui.welcomeResponse();
 
         // Load data
-        Duke duke = new Duke("./data/duke.txt");
+        try {
+            this.tasks = new TaskList(storage.loadData());
+            ui.successfulLoadResponse();
+        } catch (FileNotFoundException e) {
+            this.tasks = new TaskList();
+            ui.loadingErrorMessage();
+        }
         ui.listTaskResponse(this.tasks);
 
         boolean isExit = false;

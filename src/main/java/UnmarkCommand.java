@@ -3,17 +3,21 @@ package duke.command;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.command.Command;
 
 /**
  * Represents a command from the user to unmark a task as undone.
  *
  * @author Karen
  */
-public class UnmarkCommand extends Command{
+public class UnmarkCommand extends Command {
 
     private int num;
 
+    /**
+     * Initialises new instance of UnmarkCommand.
+     *
+     * @param num The number of the task in the list to be unmarked.
+     */
     public UnmarkCommand(int num) {
         this.num = num;
     }
@@ -21,7 +25,7 @@ public class UnmarkCommand extends Command{
     /**
      * Checks if command is an exit command.
      *
-     * @return false. Unmark task command is not an exit command.
+     * @return false Unmark task command is not an exit command.
      */
     public boolean isExit() {
         return false;
@@ -31,9 +35,9 @@ public class UnmarkCommand extends Command{
      * Unmarks the selected task in the list as undone. Prints a message indicating to user that task successfully
      * unmarked.
      *
-     * @param tasks. A TaskList containing the set of task the user has.
-     * @param ui. An Ui which allows for interaction between Duke and user.
-     * @param storage. A Storage enabling Duke to store memory.
+     * @param tasks A TaskList containing the set of task the user has.
+     * @param ui An Ui which allows for interaction between Duke and user.
+     * @param storage A Storage enabling Duke to store memory.
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {

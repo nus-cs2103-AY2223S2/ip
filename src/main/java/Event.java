@@ -14,6 +14,14 @@ public class Event extends Task {
     protected LocalDateTime from;
     protected DateTimeFormatter format;
 
+    /**
+     * Initialises new instance of Event.
+     *
+     * @param description The name of the Task.
+     * @param from The starting date of the task in a String.
+     * @param to The ending date of the task in a String.
+     * @param format The datetime format for the given time in String.
+     */
     public Event(String description, String from, String to, DateTimeFormatter format) {
         super(description);
         this.from = LocalDateTime.parse(from, format);
@@ -21,8 +29,17 @@ public class Event extends Task {
         this.format = format;
     }
 
-    public Event(String description, boolean done, String from, String to, DateTimeFormatter format) {
-        super(description, done);
+    /**
+     * Initialises new instance of Event.
+     *
+     * @param description The name of the Task.
+     * @param isDone A boolean representing whether task has been completed.
+     * @param from The starting date of the task in a String.
+     * @param to The ending date of the task in a String.
+     * @param format The datetime format for the given time in String.
+     */
+    public Event(String description, boolean isDone, String from, String to, DateTimeFormatter format) {
+        super(description, isDone);
         this.from = LocalDateTime.parse(from, format);
         this.to = LocalDateTime.parse(to, format);
         this.format = format;
@@ -34,23 +51,6 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "E | " + super.toString() + " | from: " + from.format(format) + " | " + "to: " + to.format(format);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean equals(Object obj) {
-        if(this == obj) {
-            return true;
-        }
-        if(obj instanceof Event) {
-            Event x = (Event) obj;
-            if(this.name.equals(x.name)) {
-                return true;
-            }
-        }
-        return false;
     }
 
 }

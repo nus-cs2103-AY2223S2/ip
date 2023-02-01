@@ -3,7 +3,6 @@ package duke.command;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.command.Command;
 
 /**
  * Represents a command from the user to mark a task as done.
@@ -14,6 +13,11 @@ public class MarkCommand extends Command {
 
     private int num;
 
+    /**
+     * Initialises new instance of MarkCommand.
+     *
+     * @param num The number of the task in the list to be marked.
+     */
     public MarkCommand(int num) {
         this.num = num;
     }
@@ -21,7 +25,7 @@ public class MarkCommand extends Command {
     /**
      * Checks if command is an exit command.
      *
-     * @return false. Mark task command is not an exit command.
+     * @return false Mark task command is not an exit command.
      */
     public boolean isExit() {
         return false;
@@ -30,9 +34,9 @@ public class MarkCommand extends Command {
     /**
      * Marks the selected task in the list as done. Prints a message indicating to user that task successfully marked.
      *
-     * @param tasks. A TaskList containing the set of task the user has.
-     * @param ui. An Ui which allows for interaction between Duke and user.
-     * @param storage. A Storage enabling Duke to store memory.
+     * @param tasks A TaskList containing the set of task the user has.
+     * @param ui An Ui which allows for interaction between Duke and user.
+     * @param storage A Storage enabling Duke to store memory.
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {

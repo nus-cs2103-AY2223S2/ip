@@ -5,10 +5,4 @@ T | 0 | run
 T | 0 | eat
 E | 0 | see stars | from: 12 Aug 2023 11:00 | to: 11 Oct 2023 11:00
 D | 0 | buying food | by: 11 Aug 2023 11:20
-T | 0 | jump
-D | 0 | walk | by: 23 Oct 2023 13:00
-E | 0 | project meeting | from: 22 Jan 2023 14:00 | to: 23 Jan 2023 14:30
-D | 0 | do homework | by: 10 Jan 2023 14:00
-T | 0 | run
-D | 0 | eat | by: 20 Feb 2023 20:00
-E | 0 | run | from: 20 Feb 2023 13:00 | to: 20 Feb 2023 13:30
+D | 0 | assignment | by: 23 Oct 2023 10:00

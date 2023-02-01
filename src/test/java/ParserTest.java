@@ -1,13 +1,13 @@
 package duke;
 
-import duke.command.Command;
-import duke.command.AddTodoCommand;
-import duke.command.AddEventCommand;
-import duke.command.AddDeadlineCommand;
-import duke.Parser;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import duke.command.AddDeadlineCommand;
+import duke.command.AddEventCommand;
+import duke.command.AddTodoCommand;
+import duke.command.Command;
 
 public class ParserTest {
     @Test

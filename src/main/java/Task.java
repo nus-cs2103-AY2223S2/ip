@@ -1,18 +1,34 @@
 package duke.task;
 
+/**
+ * Represents a Task.
+ *
+ * @author Karen
+ */
 public class Task {
 
-    String name;
-    boolean isDone;
+    private String name;
+    private boolean isDone;
 
+    /**
+     * Initialises new instance of Task.
+     *
+     * @param name The name of the task.
+     */
     public Task(String name) {
         this.name = name;
         this.isDone = false;
     }
 
-    public Task(String name, boolean done) {
+    /**
+     * Initialises new instance of Task.
+     *
+     * @param name The name of the task.
+     * @param isDone A boolean representing whether task has been completed.
+     */
+    public Task(String name, boolean isDone) {
         this.name = name;
-        this.isDone = done;
+        this.isDone = isDone;
     }
 
     /**
@@ -30,12 +46,18 @@ public class Task {
     }
 
     /**
-     * {@inheritDoc}
+     * Checks if task name contains a certain word.
+     *
+     * @param word The word to check for.
+     * @return boolean The boolean value indicates if the word is present in the task name.
      */
-    public boolean isRelated(String name) {
-        return this.name.contains(name);
+    public boolean isRelated(String word) {
+        return this.name.contains(word);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         if (isDone) {
@@ -43,23 +65,6 @@ public class Task {
         } else {
             return "0" + " | " + this.name;
         }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean equals(Object obj) {
-        if(this == obj) {
-            return true;
-        }
-        if(obj instanceof Task) {
-            Task x = (Task) obj;
-            if(this.name.equals(x.name)) {
-                return true;
-            }
-        }
-        return false;
     }
 
 }

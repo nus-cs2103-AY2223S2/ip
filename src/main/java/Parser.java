@@ -1,9 +1,8 @@
 package duke;
 
-import duke.Ui;
-import duke.command.AddTodoCommand;
 import duke.command.AddDeadlineCommand;
 import duke.command.AddEventCommand;
+import duke.command.AddTodoCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.ExitCommand;
@@ -12,13 +11,18 @@ import duke.command.ListCommand;
 import duke.command.MarkCommand;
 import duke.command.UnmarkCommand;
 
+/**
+ * Parsers input from user.
+ *
+ * @author Karen
+ */
 public class Parser {
 
     /**
      * Returns a Command object corresponding to the command input by user.
      *
-     * @param input. A String command by the user.
-     * @return Command. A corresponding Command object.
+     * @param input A String command by the user.
+     * @return Command A corresponding Command object.
      * @throws IllegalArgumentException
      * @throws ArrayIndexOutOfBoundsException
      */
@@ -28,6 +32,7 @@ public class Parser {
         String instruction = arrStr[0];
 
         switch (instruction) {
+
         case "bye":
             return new ExitCommand();
 
@@ -41,7 +46,7 @@ public class Parser {
             return new MarkCommand(Integer.parseInt(arrStr[1]));
 
         case "unmark":
-             return new UnmarkCommand(Integer.parseInt(arrStr[1]));
+            return new UnmarkCommand(Integer.parseInt(arrStr[1]));
 
         case "delete":
             return new DeleteCommand(Integer.parseInt(arrStr[1]));
