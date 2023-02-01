@@ -28,7 +28,8 @@ public class Ui {
     }
 
     public void greet() {
-        printInBanner("Greetings humans~\n'Tis I! Nakiri Ayame!\nWhat can I do for you?");
+        printLogo();
+        printInBanner("Greetings humans~", "Tis I! Nakiri Ayame!", "What can I do for you?");
     }
 
     public String readCommand() {

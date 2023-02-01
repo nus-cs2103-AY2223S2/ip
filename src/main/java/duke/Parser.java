@@ -17,6 +17,11 @@ public class Parser {
     private static final Set<String> DELIMITERS = new HashSet<>(Arrays.asList("/from", "/to", "/by"));
 
     public static Command parse(String fullCommand) throws DukeException {
+        if (fullCommand.contains("|")) {
+            System.out.println("Neeeee fuzakenjaNEYOO\nDon't use the | character da yo");
+            throw new DukeException();
+        }
+
         Iterator<String> args = Arrays.stream(fullCommand.split(" ")).iterator();
         if (!args.hasNext()) {
             return Command.none();

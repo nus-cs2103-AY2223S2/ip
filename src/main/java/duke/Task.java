@@ -1,14 +1,7 @@
 package duke;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import java.io.Serializable;
-
-public abstract class Task implements Serializable {
-    @JsonProperty("description")
+public abstract class Task {
     protected String description;
-    @JsonProperty("isDone")
     protected boolean isDone;
 
     public Task(String description) {
@@ -16,11 +9,8 @@ public abstract class Task implements Serializable {
         this.isDone = false;
     }
 
-    public Task() {}
-
-    @JsonIgnore
     public String getStatusIcon() {
-        return (isDone ? "X" : " ");
+        return (this.isDone ? "X" : " ");
     }
 
     public void markAsDone() {

@@ -13,13 +13,13 @@ public class Duke {
     private final Ui ui;
 
     public Duke(String filePath) {
-        ui = new Ui();
-        storage = new Storage(filePath);
+        this.ui = new Ui();
+        this.storage = new Storage(filePath);
         try {
-            tasks = new TaskList(storage.loadTasklistFromFile());
+            this.tasks = new TaskList(this.storage.loadTasklistFromFile());
         } catch (DukeException e) {
             // ui.showLoadingError();
-            tasks = new TaskList();
+            this.tasks = new TaskList();
         }
     }
 
@@ -29,6 +29,7 @@ public class Duke {
     }
 
     public void run() {
+        this.ui.greet();
         commandLoop();
     }
 
