@@ -6,11 +6,13 @@ import duke.tasks.ToDoTask;
 
 import java.util.ArrayList;
 
-
 public class ToDoList {
     private ArrayList<Task> arr = new ArrayList<>(); //1-based index
     private int toDoCount;
 
+    /**
+     * Creates an instance of a ToDoList which holds Task objects.
+     */
     public ToDoList() {
         arr.add(new ToDoTask("0index")); //1-based index
         this.toDoCount = 0;
@@ -20,15 +22,37 @@ public class ToDoList {
         return this.toDoCount;
     }
 
-    public Task getTask(int index) {
-        return this.arr.get(index);
+    /**
+     * Returns the Task object stored at the specified position on the ToDoList.
+     *
+     * @param ind The position of the desired Task Object on the ToDoList.
+     * @return The Task Object located on the given position.
+     * @throws IndexDukeException If the index is out of range (index < 1 || index >= this.toDoCount).
+     */
+    public Task getTask(int ind) throws IndexDukeException {
+        if (ind < 1 || ind > toDoCount) {
+            throw new IndexDukeException();
+        }
+        return this.arr.get(ind);
     }
 
+    /**
+     * Adds the given Task object to the back of the ToDoList
+     *
+     * @param task The Task object to be added into the ToDoList.
+     */
     public void add(Task task) {
         ++this.toDoCount;
         arr.add(task);
     }
 
+    /**
+     * Removes and return the Task object at the specified position on the ToDoList.
+     *
+     * @param ind The position of the Task Object to be removed on the ToDoList.
+     * @return The Task object removed from the ToDoList.
+     * @throws IndexDukeException If the index is out of range (index < 1 || index >= this.toDoCount).
+     */
     public Task delete(int ind) throws IndexDukeException {
         if (ind < 1 || ind > toDoCount) {
             throw new IndexDukeException();
