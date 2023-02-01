@@ -11,7 +11,7 @@ import java.time.format.DateTimeParseException;
  */
 public class DateTimeUtils {
     /**
-     * Static method to format user input for date.
+     * Formats user input for date.
      *
      * @param date String that stores date.
      * @return String date that is formatted.

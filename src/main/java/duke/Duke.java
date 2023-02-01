@@ -9,7 +9,7 @@ import userinteraction.Ui;
 import utils.DateTimeUtils;
 
 /**
- * The main class which runs the whole application for users to store and track tasks.
+ * Runs the whole application for users to store and track tasks.
  */
 public class Duke {
     private final static String FILE_PATH = "src/data/tasks.txt";
@@ -18,7 +18,7 @@ public class Duke {
     private final Storage storage;
 
     /**
-     * The public constructor for Duke.
+     * Public constructor for Duke.
      */
     public Duke() {
         ui = new Ui();
@@ -27,7 +27,7 @@ public class Duke {
     }
 
     /**
-     * Function to run entire program
+     * Runs entire program
      */
     public void run() {
         ui.printWelcomeMsg();

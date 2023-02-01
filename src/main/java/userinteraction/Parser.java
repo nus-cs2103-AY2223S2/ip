@@ -8,7 +8,7 @@ import dukeexception.DukeException;
  */
 public class Parser {
     /**
-     * All possible commands by user.
+     * Commands usable by user.
      */
     private enum CommandNames {
         LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, BYE
