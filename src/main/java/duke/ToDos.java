@@ -1,4 +1,4 @@
-package classes;
+package duke;
 
 /**
  * Represents a task that is of type "todos" and extends from Task class.

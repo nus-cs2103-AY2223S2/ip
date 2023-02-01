@@ -1,4 +1,4 @@
-package classes;
+package duke;
 
 import java.io.BufferedReader;
 import java.io.PrintWriter;

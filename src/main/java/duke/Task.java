@@ -1,4 +1,4 @@
-package classes;
+package duke;
 
 /**
  * Represents a task (that can be of type "event", "todos" and "deadline")

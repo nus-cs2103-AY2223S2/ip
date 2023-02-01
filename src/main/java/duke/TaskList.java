@@ -1,4 +1,4 @@
-package classes;
+package duke;
 
 import exceptions.IncorrectNoOfArgumentException;
 
