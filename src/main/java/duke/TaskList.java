@@ -1,4 +1,5 @@
 package duke;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -21,23 +22,16 @@ class TaskList {
         this.tasks = tasks;
     }
 
-    /**
-     * Lists all the tasks stored.
-     */
-    public void listTasks() {
-        String topDivider = "~~~~~~~~~~~~~~~~o~~~~~~~~~~~~~~~~\n" + "Duke's Response: \n"
-                    + "Here are the tasks in your list: \n";
-        String botDivider = "~~~~~~~~~~~~~~~~o~~~~~~~~~~~~~~~~";
-        System.out.println(topDivider);
-
+    public ArrayList<Task> findTask(String searchWord) {
+        ArrayList<Task> matchingTasks = new ArrayList<>();
         for (int i = 0; i < this.tasks.size(); i++) {
-            String output = this.tasks.get(i).provideDetails();
-            System.out.println((i + 1) + "." + output);
+            Task task = tasks.get(i);
+            if (task.provideDetails().contains(searchWord)) {
+                matchingTasks.add(task);
+            }
         }
-
-        System.out.println(botDivider);
+        return matchingTasks;
     }
-
 
     /**
      * Stores a new task.
