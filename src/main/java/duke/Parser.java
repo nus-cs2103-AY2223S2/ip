@@ -58,6 +58,13 @@ public class Parser {
             } catch (DukeException e) {
                 Ui.showError(e.getMessage());
             }
+        case FindCommand.COMMAND_WORD:
+            try {
+                String keyword = getKeyword(userInput);
+                return new FindCommand(keyword);
+            } catch (DukeException e) {
+                Ui.showError(e.getMessage());
+            }
         default:
             return new UnknownCommand();
         }
@@ -189,14 +196,27 @@ public class Parser {
      * @return end date of task
      * @throws DateTimeParseException
      */
-    public static LocalDate getTo(String userInput) throws DateTimeParseException {
+    public static LocalDate getTo(String userInput) throws DukeException {
         String[] arrOfStr = userInput.split("/from")[1].split(" ");
         try {
             LocalDate to = LocalDate.parse((arrOfStr[3]));
             return to;
         } catch (DateTimeParseException e) {
-            System.out.println("INVALID 'To' DATE!!! Please enter date in YYYY/MM/DD format");
-            throw e;
+            throw new DukeException("INVALID 'To' DATE!!! Please enter date in YYYY/MM/DD format");
+        }
+    }
+
+    /**
+     * Gets keyword from full user input.
+     * @param userInput full user input string.
+     * @return
+     */
+    public static String getKeyword(String userInput) throws DukeException {
+        try {
+            String keyword = userInput.substring(5);
+            return keyword;
+        } catch (Exception e){
+            throw new DukeException(e.getMessage());
         }
     }
 }

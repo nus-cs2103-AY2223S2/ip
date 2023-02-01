@@ -86,4 +86,23 @@ public class TaskList {
 
     }
 
+    /**
+     * Finds and prints tasks in task list that matches keyword.
+     * @param keyword
+     */
+    public void findKeywordMatches(String keyword) {
+        int numMatch = 0;
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 0; i < tasks.size(); i++) {
+            String taskDesc = tasks.get(i).getDesc();
+            if (taskDesc.contains(keyword)) {
+                numMatch++;
+                System.out.println(String.format("%d. %s",numMatch,tasks.get(i)));
+            }
+        }
+        if (numMatch == 0) {
+            System.out.println("There are no matches!!");
+        }
+    }
+
 }

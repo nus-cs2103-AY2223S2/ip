@@ -17,7 +17,7 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Executes listing of tasks in tasklist.
+     * Executes listing of tasks in task list.
      * @param tasks
      * @param ui
      * @param storage
