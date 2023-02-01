@@ -1,25 +1,18 @@
 package commands;
 
-import java.util.Scanner;
-
-import features.TaskList;
-import features.Ui;
+import features.DukeException;
 
 /**
  * Handles 'bye' command.
  */
 public class CommandBye extends Command {
-
     /**
-     * Prints goodbye message.
+     * Returns a goodbye message.
+     * @param userInput The user's String input in array form. Redundant.
+     * @throws DukeException Thrown if an error occurs. Redundant.
      */
-    public void print() {
-        Ui ui = new Ui();
-        ui.print("Goodbye, then!");
-    }
-
     @Override
-    public TaskList handle(Scanner userScan, TaskList taskList) {
-        return new TaskList();
+    public String handle(String[] userInput) throws DukeException {
+        return ("Goodbye, then!");
     }
 }

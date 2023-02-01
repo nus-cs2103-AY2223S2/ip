@@ -1,8 +1,7 @@
 package commands;
 
-import java.util.Scanner;
-
 import features.DukeException;
+import features.Storage;
 import features.TaskList;
 import features.Ui;
 import tasks.Event;
@@ -12,11 +11,17 @@ import tasks.Task;
  * Handles 'event' command.
  */
 public class CommandEvent extends Command {
+    /**
+     * Adds an Event task to the taskList and returns a String form of the action.
+     * @param userInput The user's String input in array form.
+     * @throws DukeException Thrown if an error occurs.
+     */
     @Override
-    public TaskList handle(Scanner userScan, TaskList taskList) throws DukeException {
+    public String handle(String[] userInput) throws DukeException {
         Ui ui = new Ui();
+        TaskList taskList = new Storage().loadTaskList();
         try {
-            String eventSentence = userScan.nextLine();
+            String eventSentence = userInput[1];
             String eventName = eventSentence.substring(0, eventSentence.indexOf(" /from"));
             // ERROR: event description is blank.
             if (eventName.strip().length() == 0) {
@@ -35,12 +40,12 @@ public class CommandEvent extends Command {
             }
             Task eventToAdd = new Event(eventName, fromDate, toDate);
             taskList.add(eventToAdd);
-            ui.print("Task added:\n " + eventToAdd + "\n" + "There are now " + taskList.size()
+            autoSave(taskList);
+            return ("Task added:\n " + eventToAdd + "\n" + "There are now " + taskList.size()
                     + " task(s) in your list.");
-            return taskList;
-        } catch (StringIndexOutOfBoundsException err) {
+        } catch (StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException err) {
             throw new DukeException(ui.formatCommandError("event",
-                    "event /from <insert from field> "
+                    "event <insert description> /from <insert from field> "
                             + "/to <insert to field>"));
         }
     }

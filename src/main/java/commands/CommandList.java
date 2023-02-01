@@ -1,8 +1,7 @@
 package commands;
 
-import java.util.Scanner;
-
 import features.DukeException;
+import features.Storage;
 import features.TaskList;
 import features.Ui;
 
@@ -10,22 +9,22 @@ import features.Ui;
  * Handles 'list' command.
  */
 public class CommandList extends Command {
-
     /**
-     * Prints and labels content of TaskList.
-     * @param userScan Scanner object containing user input.
-     * @param taskList List of tasks.
-     * @throws DukeException  If format of 'list' input is wrong.
+     * Finds and returns all tasks in the taskList in String form.
+     * @param userInput The user's String input in array form.
+     * @throws DukeException Thrown if an error occurs.
      */
-    public void print(Scanner userScan, TaskList taskList) throws DukeException {
-        // ERROR: list format is anything other than [ list ]
+    @Override
+    public String handle(String[] userInput) throws DukeException {
+        // ERROR: list format is anything other than [ list ]s
         Ui ui = new Ui();
-        if (userScan.nextLine().length() > 0) {
+        TaskList taskList = new Storage().loadTaskList();
+        if (userInput.length > 1) {
             throw new DukeException(ui.formatCommandError("list",
                     "list"));
         }
         if (taskList.size() == 0) {
-            ui.print("You don't have anything to do right now!");
+            return ("You don't have anything to do right now!");
         } else {
             StringBuilder toPrint = new StringBuilder();
             for (int i = 1; i < taskList.size() + 1; i++) {
@@ -34,12 +33,7 @@ public class CommandList extends Command {
                     toPrint.append("\n");
                 }
             }
-            ui.print("Here are your tasks:\n" + toPrint);
+            return ("Here are your tasks:\n" + toPrint);
         }
-    }
-
-    @Override
-    public TaskList handle(Scanner userScan, TaskList taskList) throws DukeException {
-        return new TaskList();
     }
 }

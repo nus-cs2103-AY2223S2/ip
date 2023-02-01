@@ -1,23 +1,27 @@
 package commands;
 
-import java.util.Scanner;
-
 import features.DukeException;
+import features.Storage;
 import features.TaskList;
 import features.Ui;
 import tasks.Deadline;
 import tasks.Task;
 
-
 /**
  * Handles 'deadline' command.
  */
 public class CommandDeadline extends Command {
+    /**
+     * Adds a Deadline task to the taskList and returns a String form of the action.
+     * @param userInput The user's String input in array form.
+     * @throws DukeException Thrown if an error occurs.
+     */
     @Override
-    public TaskList handle(Scanner userScan, TaskList taskList) throws DukeException {
+    public String handle(String[] userInput) throws DukeException {
         Ui ui = new Ui();
+        TaskList taskList = new Storage().loadTaskList();
         try {
-            String deadlineSentence = userScan.nextLine();
+            String deadlineSentence = userInput[1];
             String deadlineName = deadlineSentence.substring(0, deadlineSentence.indexOf(" /by"));
             // ERROR: deadline description is blank.
             if (deadlineName.strip().length() == 0) {
@@ -30,10 +34,10 @@ public class CommandDeadline extends Command {
             }
             Task deadlineToAdd = new Deadline(deadlineName, deadlineDate);
             taskList.add(deadlineToAdd);
-            ui.print("Task added:\n " + deadlineToAdd + "\n" + "There are now " + taskList.size()
+            autoSave(taskList);
+            return ("Task added:\n " + deadlineToAdd + "\n" + "There are now " + taskList.size()
                     + " task(s) in your list.");
-            return taskList;
-        } catch (StringIndexOutOfBoundsException err) {
+        } catch (StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException err) {
             throw new DukeException(ui.formatCommandError("deadline",
                     "deadline <insert description> " + "/by <insert deadline>"));
         }

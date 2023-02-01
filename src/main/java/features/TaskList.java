@@ -8,7 +8,6 @@ import tasks.Task;
  * Contains and modifies tasks entered by the user.
  */
 public class TaskList {
-
     protected ArrayList<Task> list;
 
     public TaskList() {
@@ -29,22 +28,5 @@ public class TaskList {
 
     public void remove(int index) {
         this.list.remove(index);
-    }
-
-    /**
-     * Clones contents of cloneFrom into the current TaskList.
-     * @param cloneFrom The TaskList to clone from.
-     */
-    public void clone(TaskList cloneFrom) {
-        TaskList tempList = new TaskList();
-        for (int i = 0; i < cloneFrom.size(); i++) {
-            tempList.add(cloneFrom.get(i));
-        }
-        while (this.list.size() > 0) {
-            this.list.remove(0);
-        }
-        for (int i = 0; i < tempList.size(); i++) {
-            this.list.add(tempList.get(i));
-        }
     }
 }

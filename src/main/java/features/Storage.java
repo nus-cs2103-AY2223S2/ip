@@ -28,16 +28,16 @@ public class Storage {
         try {
             if (!dukePath.exists()) {
                 if (dukePath.mkdirs()) {
-                    new Ui().print("No save files detected. Creating new save file...");
+                    System.out.println("No save files detected. Creating new save file...");
                 }
                 if (!dukeSave.exists()) {
                     if (dukeSave.createNewFile()) {
-                        new Ui().print("New save file created!");
+                        System.out.println("New save file created!");
                     }
                 }
             }
         } catch (IOException err) {
-            new Ui().print("Sorry, could not save that.");
+            System.out.println("Sorry, could not save that.");
         }
 
         try {

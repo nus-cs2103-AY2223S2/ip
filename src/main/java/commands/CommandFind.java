@@ -1,30 +1,30 @@
 package commands;
 
-import java.util.Scanner;
-
 import features.DukeException;
+import features.Storage;
 import features.TaskList;
 import features.Ui;
 
 /**
- * Finds and prints tasks that match user input.
+ * Finds and returns tasks that match user input in String form.
  */
 public class CommandFind extends Command {
-
     /**
-     * Prints tasks that match user input.
-     * @param userScan Scanner object containing user input.
-     * @param taskList List of existing tasks.
-     * @throws DukeException  If the find format is wrong.
+     * Finds and returns tasks in String form that match the user input query.
+     * @param userInput The user's String input in array form.
+     * @throws DukeException Thrown if an error occurs.
      */
-    public void print(Scanner userScan, TaskList taskList) throws DukeException {
+    @Override
+    public String handle(String[] userInput) throws DukeException {
         // ERROR: find format is anything other than [ find <insert query> ]
         Ui ui = new Ui();
+        TaskList taskList = new Storage().loadTaskList();
         boolean isEmpty = true;
-        String query = userScan.nextLine().strip();
-        if (query.length() == 0) {
-            throw new DukeException(ui.formatLogicError("search query cannot be empty."));
-        } else {
+        try {
+            String query = userInput[1].strip();
+            if (userInput.length != 2) {
+                throw new DukeException(ui.formatLogicError("search query cannot be empty."));
+            }
             StringBuilder toPrint = new StringBuilder();
             for (int i = 0; i < taskList.size(); i++) {
                 if (taskList.get(i).getName().toLowerCase().contains(query.toLowerCase())) {
@@ -36,15 +36,12 @@ public class CommandFind extends Command {
                 }
             }
             if (!isEmpty) {
-                ui.print("Here are the tasks that matched your query:\n" + toPrint);
+                return ("Here are the tasks that matched your query:\n" + toPrint);
             } else {
-                ui.print("Sorry, nothing matches your search query!");
+                return ("Sorry, nothing matches your search query!");
             }
+        } catch (ArrayIndexOutOfBoundsException err) {
+            throw new DukeException(ui.formatLogicError("search query cannot be empty."));
         }
-    }
-
-    @Override
-    public TaskList handle(Scanner userScan, TaskList taskList) throws DukeException {
-        return new TaskList();
     }
 }

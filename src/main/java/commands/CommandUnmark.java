@@ -1,9 +1,9 @@
 package commands;
 
 import java.util.InputMismatchException;
-import java.util.Scanner;
 
 import features.DukeException;
+import features.Storage;
 import features.TaskList;
 import features.Ui;
 
@@ -11,28 +11,35 @@ import features.Ui;
  * Handles 'unmark' command.
  */
 public class CommandUnmark extends Command {
+    /**
+     * Unmarks a specified Task at the position in the taskList specified by the user and returns
+     * a String form of the action.
+     * @param userInput The user's String input in array form.
+     * @throws DukeException Thrown if an error occurs.
+     */
     @Override
-    public TaskList handle(Scanner userScan, TaskList taskList) throws DukeException {
+    public String handle(String[] userInput) throws DukeException {
         Ui ui = new Ui();
+        TaskList taskList = new Storage().loadTaskList();
         try {
-            String unmarkString = userScan.nextLine().strip();
             // ERROR: unmark format is anything other than [ unmark <insert integer> ]
-            if (unmarkString.length() == 0) {
+            if (userInput.length != 2) {
                 throw new DukeException(ui.formatCommandError("unmark",
                         "unmark <insert INTEGER>"));
             }
+            String unmarkString = userInput[1].strip();
             int unmarkInput = Integer.parseInt(unmarkString) - 1;
             taskList.get(unmarkInput).markNotDone();
-            ui.print("Okay, the following task is marked as NOT done!\n"
+            autoSave(taskList);
+            return ("Okay, the following task is marked as NOT done!\n"
                     + (unmarkInput + 1 + ". ")
                     + taskList.get(unmarkInput).toString());
-            return taskList;
         } catch (NumberFormatException | InputMismatchException err) {
             throw new DukeException(ui.formatLogicError("unmark can only be used with an INTEGER. "
                     + "(e.g. 1, 2...)"));
         } catch (IndexOutOfBoundsException err) {
-            throw new DukeException(ui.formatLogicError("you can only unmark task numbers that exist."
-                    + "\nYou have "
+            throw new DukeException(ui.formatLogicError("you can only unmark task numbers that exist.\n"
+                    + "You have "
                     + taskList.size()
                     + " task(s) in your list."));
         }
