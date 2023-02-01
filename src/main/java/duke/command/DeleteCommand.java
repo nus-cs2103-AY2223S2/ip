@@ -30,7 +30,7 @@ public class DeleteCommand extends Command {
      * @throws DukeBadInstructionFormatException If user input is wrong
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage)
+    public void execute(TaskList tasks, Ui ui, Storage storage)
             throws DukeBadInstructionFormatException {
         int index = Command.getMarkIndex(this.fullCommand) - 1;
 
@@ -40,7 +40,7 @@ public class DeleteCommand extends Command {
         }
         storage.fileDeleteTask(index);
         Task removed = tasks.delete(index);
-        return ui.showDeletedTask(removed, tasks);
+        ui.showDeletedTask(removed, tasks);
 
     }
     /**

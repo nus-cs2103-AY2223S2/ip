@@ -29,7 +29,7 @@ public class ClearCommand extends Command {
      * @throws DukeBadInstructionFormatException If user input is not 'clear'
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage)
+    public void execute(TaskList tasks, Ui ui, Storage storage)
             throws DukeBadInstructionFormatException {
         String[] splitted = this.fullCommand.split(" ");
         if (splitted.length != 1) {
@@ -38,7 +38,7 @@ public class ClearCommand extends Command {
         }
         tasks.clearAllTasks();
         storage.clearAllTasks();
-        return ui.showClearTasksMessage();
+        ui.showClearTasksMessage();
     }
     /**
      * Returns true if <code>Command</code> is <code>ByeCommand</code>.

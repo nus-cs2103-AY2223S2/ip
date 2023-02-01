@@ -29,13 +29,13 @@ public class ByeCommand extends Command {
      * @throws DukeBadInstructionFormatException If user input is not 'bye'
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage)
+    public void execute(TaskList tasks, Ui ui, Storage storage)
             throws DukeBadInstructionFormatException {
         String[] splitted = this.fullCommand.split(" ");
         if (splitted.length != 1) {
             throw new DukeBadInstructionFormatException("To exit, type *bye*");
         }
-        return ui.showByeMessage();
+        ui.showByeMessage();
     }
     /**
      * Returns true if <code>Command</code> is <code>ByeCommand</code>.

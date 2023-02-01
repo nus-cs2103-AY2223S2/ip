@@ -28,7 +28,7 @@ public class MarkCommand extends Command {
      * @throws DukeBadInstructionFormatException If user input is wrong.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage)
+    public void execute(TaskList tasks, Ui ui, Storage storage)
             throws DukeBadInstructionFormatException {
         int index = Command.getMarkIndex(this.fullCommand) - 1;
         if (index >= tasks.getLength()) {
@@ -38,7 +38,7 @@ public class MarkCommand extends Command {
         storage.fileMarkTask(index);
         tasks.markTask(index);
         String taskDescription = tasks.taskToString(index);
-        return ui.showMarkedTask(taskDescription);
+        ui.showMarkedTask(taskDescription);
     }
     /**
      * Returns true if <code>Command</code> is <code>ByeCommand</code>.

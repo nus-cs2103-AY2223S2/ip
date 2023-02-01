@@ -57,12 +57,13 @@ public class TaskList {
     /**
      * Prints out all <code>Task</code>s for the "list" command.
      */
-    public ArrayList<Task> list() {
-        ArrayList<Task> copy = new ArrayList<>();
+    public void list() {
+        int index = 1;
         for (Task t : taskList) {
-            copy.add(t);
+            String curIndex = Integer.toString(index);
+            System.out.println("\t" + curIndex + ". " + t.toString());
+            index++;
         }
-        return copy;
     }
     /**
      * Marks given <code>Task</code> as done for the "mark" command.
@@ -107,16 +108,15 @@ public class TaskList {
      * <code>keyword</code>.
      * @param keyword Keyword to check all <code>Task</code>s for.
      */
-    public ArrayList<Task> findInTaskList(String keyword) {
+    public void findInTaskList(String keyword) {
         ArrayList<Task> foundList = new ArrayList<>();
         for (int i = 0; i < this.getLength(); i++) {
             Task curTask = this.getTask(i);
             String cur = curTask.toString();
             if (cur.contains(keyword)) {
-                foundList.add(curTask);
+                System.out.println("\t" + (i + 1) + ". " + curTask);
             }
         }
-        return foundList;
     }
     /**
      * Removes all <code>Task</code> from arraylist.

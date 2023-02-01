@@ -1,6 +1,5 @@
 package duke.ui;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 import duke.task.Task;
@@ -63,76 +62,51 @@ public class Ui {
     }
     /**
      * Prints <code>Duke</code>'s marked-task message.
-     * @return
      */
-    public String showMarkedTask(String taskDescription) {
+    public void showMarkedTask(String taskDescription) {
         System.out.println("\tNice! I've marked this task as done:\n\t  "
                 + taskDescription);
-        return "\tNice! I've marked this task as done:\n\t  "
-                + taskDescription;
     }
     /**
      * Prints <code>Duke</code>'s unmarked-task message.
      */
-    public String showUnmarkedTask(String taskDescription) {
+    public void showUnmarkedTask(String taskDescription) {
         System.out.println("\tOK, I've marked this task as not done yet:\n\t  "
                 + taskDescription);
-        return "\tOK, I've marked this task as not done yet:\n\t  "
-                + taskDescription;
     }
     /**
      * Prints <code>Duke</code>'s added-task message.
      */
-    public String showAddedTask(Task t, TaskList tl) {
-//        System.out.println("\tGot it. I've added this task:\n\t  " + t
-//                + "\n\t" + String.format("Now you have %d tasks in the list.",
-//                tl.getLength()));
-        return "\tGot it. I've added this task:\n\t  " + t
+    public void showAddedTask(Task t, TaskList tl) {
+        System.out.println("\tGot it. I've added this task:\n\t  " + t
                 + "\n\t" + String.format("Now you have %d tasks in the list.",
-                tl.getLength());
+                tl.getLength()));
     }
     /**
      * Prints <code>Duke</code>'s deleted-task message.
      */
-    public String showDeletedTask(Task t, TaskList tl) {
+    public void showDeletedTask(Task t, TaskList tl) {
         System.out.println("\tNoted. I've removed this task:\n\t  "
                 + t.toString() + String.format("\n\tNow you have %d tasks in the list.",
                 tl.getLength()));
-        return "\tNoted. I've removed this task:\n\t  "
-                + t.toString() + String.format("\n\tNow you have %d tasks in the list.",
-                tl.getLength());
     }
     /**
      * Prints <code>Duke</code>'s cleared-tasks message.
      */
-    public String showClearTasksMessage() {
+    public void showClearTasksMessage() {
         System.out.println("\tI have cleared the task list.");
-        return "\tI have cleared the task list.";
     }
     /**
      * Prints <code>Duke</code>'s goodbye message.
      */
-    public String showByeMessage() {
+    public void showByeMessage() {
         System.out.println("\tBye. Hope to see you again soon!");
-        return "\tBye. Hope to see you again soon!";
     }
-    public String showTaskListPretty(ArrayList<Task> tasks) {
-        String toPrint = "";
-        int i = 1;
-        for (Task t : tasks) {
-            toPrint += "\t" + (i) + ". " + t.toString() + "\n";
-            i++;
-        }
-        System.out.println((toPrint));
-        return toPrint;
-    }
-
     /**
      * Prints <code>Duke</code>'s error response message.
      */
-    public String showError(String e) {
+    public void showError(String e) {
         System.out.println(e);
-        return e;
     }
 
     /**
