@@ -1,11 +1,17 @@
-import exception.*;
-import java.time.*;
-import java.util.*;
+package babe;
+
+import babe.exception.NoDescriptionException;
+import babe.exception.NonsenseInputException;
+import babe.exception.WrongDateFormatException;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * This class deals with making sense of the user command.
  */
-public class Parser {
+class Parser {
 
     /**
      * A string input from user.
@@ -22,7 +28,7 @@ public class Parser {
      * A helper function to recover the original user input from userInput starting from the startingIndex
      * to the ending index (not inclusive).
      */
-    public static String rebuildUserInput(int startingIndex, int endingIndex) {
+    private static String rebuildUserInput(int startingIndex, int endingIndex) {
         String result = "";
         for (int i = startingIndex; i < endingIndex; i++) {
             result += userInput.get(i);
@@ -37,7 +43,7 @@ public class Parser {
      * @return An integer that is the index of command argument.
      * @args pattern A String pattern that precedes the input of command argument
      */
-    public static int findArgument(String pattern) {
+    private static int findArgument(String pattern) {
 
         int argIndex = -1;
 
@@ -59,7 +65,7 @@ public class Parser {
      * @param dateAndTime A String that contains date and time specified by the user.
      * @return A String containing the formatted date and original specified time.
      */
-    public static String formatDate(String dateAndTime) {
+    private static String formatDate(String dateAndTime) {
         String[] words = dateAndTime.split(" ");
 
         LocalDate d1 = LocalDate.parse(words[0]);
@@ -72,7 +78,7 @@ public class Parser {
     }
 
 
-    public static ArrayList<String> parse(String input)
+    protected static ArrayList<String> parse(String input)
             throws NoDescriptionException, NonsenseInputException, WrongDateFormatException {
 
         userInput = new ArrayList<>(Arrays.asList(input.split(" ")));

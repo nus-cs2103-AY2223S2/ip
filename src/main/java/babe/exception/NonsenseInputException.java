@@ -1,4 +1,4 @@
-package exception;
+package babe.exception;
 
 /**
  * This exception is thrown when the user input cannot be recognized by Babe.

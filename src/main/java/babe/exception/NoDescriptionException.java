@@ -1,4 +1,4 @@
-package exception;
+package babe.exception;
 
 /**
  * This exception is thrown when an instruction to add a Task is not followed by a description.

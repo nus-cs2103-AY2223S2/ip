@@ -1,10 +1,9 @@
-import java.time.LocalDate;
+package babe;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
-import exception.NoDescriptionException;
-import exception.NonsenseInputException;
+import babe.exception.NonsenseInputException;
 
 /**
  * <h1> Hi Babe! </h1>

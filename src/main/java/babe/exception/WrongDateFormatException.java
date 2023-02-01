@@ -1,4 +1,4 @@
-package exception;
+package babe.exception;
 
 /**
  * This exception is thrown when the user inputs date format not as specified for deadline or event commands.

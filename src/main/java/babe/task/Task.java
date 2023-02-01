@@ -1,4 +1,4 @@
-package task;
+package babe.task;
 
 /**
  * Interface for list items in Babe,
