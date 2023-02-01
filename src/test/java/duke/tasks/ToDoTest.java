@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ToDoTest {
 
     //test setup
-    ToDo td = new ToDo(1, "run");
+    ToDo td = new ToDo("run");
 
     @Test
     public void toFile_format_returnFormatted() {
@@ -17,7 +17,7 @@ public class ToDoTest {
 
     @Test
     public void toString_format_returnFormatted() {
-        String expected = "1. [T][ ] run";
+        String expected = "[T][ ] run";
         assertEquals(expected, td.toString());
     }
 }

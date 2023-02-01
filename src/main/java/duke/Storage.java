@@ -21,7 +21,6 @@ public class Storage {
 
     /**
      * Creates data directory if it doesn't exist
-     * @throws IOException if directory cannot be created
      */
     public static void createDataDir() {
         try {
@@ -37,7 +36,6 @@ public class Storage {
     /**
      * Creates duke.txt if it doesn't exist. Reads data from duke.txt otherwise
      * @return ArrayList of all Tasks in duke.txt
-     * @throws IOException if duke.txt cannot be created
      */
     public static ArrayList<Task> load() {
         //Create duke.Duke.txt inside data dir if it doesn't exist
@@ -87,7 +85,6 @@ public class Storage {
     /**
      * Writes into duke.txt
      * @param allData is an ArrayList containing all Tasks
-     * @throws IOException if error in writing
      */
     public static void upload(ArrayList<Task> allData) {
         ArrayList<String> writing = new ArrayList<>();

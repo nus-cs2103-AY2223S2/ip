@@ -2,6 +2,7 @@ package duke.tasks;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+import java.util.Date;
 
 public class Event extends Task {
     protected LocalDateTime start;
@@ -24,8 +25,9 @@ public class Event extends Task {
     @Override
     public String toString() {
         String statusIcon = this.getStatusIcon();
-        String startDnT = DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL).format(start);
-        String endDnT = DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL).format(end);
+        DateTimeFormatter customFormat = DateTimeFormatter.ofPattern("eeee MMMM d HH:mm");
+        String startDnT = start.format(customFormat);
+        String endDnT = end.format(customFormat);
         return "[E][" + statusIcon + "] " + this.desc + "(from: " + startDnT + " to: " + endDnT + ")";
     }
 }

@@ -72,75 +72,17 @@ public class TaskList {
     }
 
     private void handleToDo(String input) {
-        ToDo processed = Parser.parseToDo(tasks.size(), input);
+        ToDo processed = Parser.parseToDo(input);
         addTask(processed);
     }
 
     private void handleDeadline(String input) {
-        Deadline dl = Parser.parseDeadline(tasks.size(), input);
-        try { //catching no desc and no deadline
-            if (input.substring(9).equals("")) {
-                throw new DukeExceptions("Input cannot be empty!");
-            }
-        } catch (DukeExceptions e) {
-            System.out.println("Input cannot be empty!");
-        }
-        String[] inp = input.split("/");
-        try { //catching no deadline
-            String deadline = inp[1].substring(3);
-            LocalDate date = LocalDate.parse(deadline);
-            try { //catching no description
-                String undesc = inp[0];
-                String desc = undesc.substring(9);
-                if (desc.equals("")) {
-                    throw new DukeExceptions("Input cannot be empty!");
-                }
-                addTask(new Deadline(desc, date));
-            } catch (DukeExceptions e){
-                System.out.println("Description cannot be empty!");
-            }
-        } catch (Exception e) {
-            System.out.println(e);
-            System.out.println("Please input a deadline!");
-        }
+        Deadline dl = Parser.parseDeadline(input);
+        addTask(dl);
     }
 
     private void handleEvent(String input) {
-        try { //catching no desc and no deadline
-            if (input.substring(6).equals("")) {
-                throw new DukeExceptions("Input cannot be empty!");
-            }
-        } catch (DukeExceptions e) {
-            System.out.println("Input cannot be empty!");
-        }
-        String[] inp = input.split("/");
-        try { //Catching for input format error
-            if (inp.length != 3) {
-                throw new DukeExceptions("Format is task, start, end!");
-            }
-        } catch (DukeExceptions de) {
-            System.out.println("Format is task, /start, /end!");
-        }
-        String start = inp[1].substring(5);
-        String[] DnT = start.split(" "); //[2000-10-23,10:15]
-        String startDate = DnT[0];
-        String startTime = DnT[1];
-        LocalDateTime startDnT = LocalDateTime.parse(String.join("T", startDate, startTime));
-        String end = inp[2].substring(3);
-        String[] DateAndTime = end.split(" ");
-        String endDate = DateAndTime[0];
-        String endTime = DateAndTime[1];
-        LocalDateTime endDnT = LocalDateTime.parse(String.join("T", endDate, endTime));
-        String undesc = inp[0];
-        String desc = undesc.substring(6);
-        try { //catching for empty description
-            if (desc.equals("")) {
-                throw new DukeExceptions("Description cannot be empty!");
-            }
-        } catch (DukeExceptions e) {
-            System.out.println("Description cannot be empty!");
-        }
-        Event ev = new Event(desc, startDnT, endDnT);
+        Event ev = Parser.parseEvent(input);
         addTask(ev);
     }
 
@@ -176,8 +118,6 @@ public class TaskList {
     /**
      * Processes all input commands
      * @param input is user's input
-     * @throws DukeExceptions if input format is wrong
-     * @throws Exception if input is invalid
      */
     public void handleInput(String input) {
         if (input.equals("list")) {
