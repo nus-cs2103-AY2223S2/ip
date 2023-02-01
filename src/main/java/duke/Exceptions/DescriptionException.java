@@ -1,6 +1,6 @@
 package duke.Exceptions;
 
-public class DescriptionException extends DukeException {
+public class DescriptionException extends CommandException {
     public DescriptionException() {
     }
 

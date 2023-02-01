@@ -2,7 +2,6 @@ package duke;
 
 import duke.Command.Commands;
 import duke.Exceptions.CommandException;
-import duke.Exceptions.DescriptionException;
 import duke.Tasks.Task;
 import duke.Tasks.TaskList;
 
@@ -30,10 +29,11 @@ public class Duke {
     }
 
     public void run() {
+        this.ui.showWelcome();
         Scanner scanner = new Scanner(System.in);
         String word = scanner.nextLine();
         while (!word.equals(Commands.bye.name())) {
-            System.out.println("-".repeat(20));
+            this.ui.showLine();
             if (word.equals(Commands.list.name())) {
                 int count = 1;
                 for (Task words: this.tasks) {
@@ -47,7 +47,7 @@ public class Duke {
                     this.ui.showMarked(task);
                 } catch (NumberFormatException | IndexOutOfBoundsException e) {
                     // incorrect syntax
-                    this.ui.showCommandError(word);
+                    this.ui.showCommandError(word, new CommandException(e));
                 }
             } else if (word.startsWith(Commands.delete.name())) {
                 try {
@@ -55,20 +55,18 @@ public class Duke {
                     this.ui.showDeleted(this.tasks.remove(--index));
                 } catch (NumberFormatException | IndexOutOfBoundsException e) {
                     // incorrect syntax
-                    this.ui.showCommandError(word);
+                    this.ui.showCommandError(word, new CommandException(e));
                 }
             } else {
                 try {
                     Task task = Task.commandToTask(word);
                     this.tasks.addingTask(task);
                     ui.showTaskAdded(task, this.tasks);
-                } catch (CommandException commandException) {
-                    ui.showCommandError(word);
-                } catch (DescriptionException | StringIndexOutOfBoundsException descriptionException) {
-                    ui.showDescriptionError(word);
+                } catch (CommandException | StringIndexOutOfBoundsException commandException) {
+                    ui.showCommandError(word, commandException);
                 }
             }
-            System.out.println("-".repeat(20));
+            this.ui.showLine();
             word = scanner.nextLine();
         }
         try {

@@ -5,6 +5,9 @@ import duke.Tasks.TaskList;
 
 public class Ui {
     public Ui() {
+    }
+
+    public void showWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -14,14 +17,13 @@ public class Ui {
         System.out.println("What can I do for you?");
     }
 
+    public void showLine() {
+        System.out.println("-".repeat(20));
+    }
     public void showLoadingError() {
         System.out.println("☹ OOPS!!! I'm sorry, but I cannot find the directory!");
     }
 
-    public void showCommandError(String word) {
-        System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-        System.out.println("duke.Command: " + word);
-    }
 
     public void showMarked(Task task) {
         System.out.println("Nice! I've marked this task as done:");
@@ -43,8 +45,8 @@ public class Ui {
         System.out.println(task);
     }
 
-    public void showDescriptionError(String word) {
-        System.out.println("Description is written incorrectly!");
+    public void showCommandError(String word, Exception exception) {
+        System.out.println(exception.toString());
         System.out.println("duke.Command: " + word);
     }
 
