@@ -14,7 +14,7 @@ public class IncorrectNoOfArgumentException extends Exception {
      *
      * @param str String message that is to be printed with the error.
      */
-    public IncorrectNoOfArgumentException (String str) {
+    public IncorrectNoOfArgumentException(String str) {
         super(str);
     }
 }

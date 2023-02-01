@@ -1,19 +1,17 @@
 package duke;
 
-import exceptions.DukeException;
-import exceptions.FolderNotFoundException;
-
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.FileNotFoundException;
-
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
 import java.util.ArrayList;
+
+import exceptions.DukeException;
+import exceptions.FolderNotFoundException;
 
 /**
  * Represents a storage system, in this case a place where extraction and supplying of information to and from the
@@ -23,7 +21,8 @@ import java.util.ArrayList;
  * @since 2023-02-01
  */
 public class Storage {
-    private String filePath, folderPath;
+    private String filePath;
+    private String folderPath;
 
     private StringBuilder sb;
 
@@ -84,12 +83,12 @@ public class Storage {
      */
     public ArrayList<String> getFileContents() throws IOException, FolderNotFoundException {
         ArrayList<String> fileElements = new ArrayList<>();
-        DukeException.folderCheck(this.folderPath);  // Checks if the folder exists
+        DukeException.folderCheck(this.folderPath); // Checks if the folder exists
         BufferedReader fr = new BufferedReader(new FileReader(this.filePath));
         // Checks if the storage file is in the right folder
         String currLine;
-        while ( (currLine = fr.readLine()) != null) {
-            fileElements.add(currLine);  // Copy tasks from file over
+        while ((currLine = fr.readLine()) != null) {
+            fileElements.add(currLine); // Copy tasks from file over
         }
         fr.close();
         return fileElements;
@@ -111,9 +110,9 @@ public class Storage {
             System.out.println("An unexpected error has occurred: " + e.getMessage());
         } finally {
             FileWriter fw = new FileWriter(this.filePath, true);
-            if (fileTasks.size() != 0) {    // file has information inside
+            if (fileTasks.size() != 0) { // file has information inside
                 fw.write(taskInfo);
-            } else {    // file is empty
+            } else { // file is empty
                 for (int i = 0; i < taskList.size(); i++) {
                     fw.write(taskList.get(i).getTaskInfo() + "\n");
                 }
@@ -135,7 +134,7 @@ public class Storage {
      * @see IOException
      */
     public void writeToFile(String currTaskInfo, String newTaskInfo, int taskNumber,
-                                    ArrayList<Task> taskList) throws IOException {
+                            ArrayList<Task> taskList) throws IOException {
         ArrayList<String> fileTasks = new ArrayList<>();
         try {
             fileTasks = load();
@@ -143,9 +142,9 @@ public class Storage {
             System.out.println("An unexpected error has occurred: " + e.getMessage());
         } finally {
             FileWriter fw = new FileWriter("data/storage.txt");
-            if (fileTasks.size() != 0) {    // file not empty
+            if (fileTasks.size() != 0) { // file not empty
                 for (int i = 0; i < fileTasks.size(); i++) {
-                    if ( (fileTasks.get(i).equals(currTaskInfo)) && (i == taskNumber) ) {
+                    if ((fileTasks.get(i).equals(currTaskInfo)) && (i == taskNumber)) {
                         if (!newTaskInfo.equals("")) {
                             fw.write(newTaskInfo + "\n");
                         }
@@ -153,7 +152,7 @@ public class Storage {
                     }
                     fw.write(fileTasks.get(i) + "\n");
                 }
-            } else {    // file is empty
+            } else { // file is empty
                 for (int i = 0; i < taskList.size(); i++) {
                     if (i == taskNumber) {
                         if (newTaskInfo.equals("")) {

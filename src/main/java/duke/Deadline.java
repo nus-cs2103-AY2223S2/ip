@@ -12,7 +12,10 @@ import java.time.format.FormatStyle;
  * @since 2023-02-01
  */
 public class Deadline extends Task {
-    protected String formatDate, formatTime, originalDate, originalTime;
+    protected String formatDate;
+    protected String formatTime;
+    protected String originalDate;
+    protected String originalTime;
     protected LocalDate date;
 
     protected LocalTime time;

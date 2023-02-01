@@ -1,11 +1,11 @@
 package duke;
 
 import java.io.BufferedReader;
-import java.io.PrintWriter;
 import java.io.BufferedWriter;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  * Represents the user interface (UI) that deals with the user inputs and outputs the corresponding texts and messages
@@ -46,7 +46,7 @@ public class Ui {
                 .append("    ____________________________________________________________\n");
         pw.println(sb.toString());
         pw.flush(); // Flush the message out and print to user
-        sb.setLength(0);    // Clear string stored in StringBuilder
+        sb.setLength(0); // Clear string stored in StringBuilder
     }
 
     /**

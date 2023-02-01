@@ -13,7 +13,7 @@ public class FolderNotFoundException extends Exception {
      *
      * @param str String message that is to be printed with the error.
      */
-    public FolderNotFoundException (String str) {
+    public FolderNotFoundException(String str) {
         super(str);
     }
 }

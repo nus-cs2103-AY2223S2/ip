@@ -1,12 +1,10 @@
 package duke;
 
-import exceptions.IncorrectNoOfArgumentException;
-
 import java.io.IOException;
-
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
-import java.time.format.DateTimeParseException;
+import exceptions.IncorrectNoOfArgumentException;
 
 /**
  * Represents the Duke application, capable of storing 3 types of Tasks ("ToDos", "Deadline" & "Event")

@@ -12,12 +12,20 @@ import java.time.format.FormatStyle;
  * @since 2023-02-01
  */
 public class Event extends Task {
-    protected String formatStartDate, formatEndDate, formatStartTime, formatEndTime,
-            originalStartDate, originalEndDate, originalStartTime, originalEndTime;
+    protected String formatStartDate;
+    protected String formatEndDate;
+    protected String formatStartTime;
+    protected String formatEndTime;
+    protected String originalStartDate;
+    protected String originalEndDate;
+    protected String originalStartTime;
+    protected String originalEndTime;
 
-    protected LocalTime startTime, endTime;
+    protected LocalTime startTime;
+    protected LocalTime endTime;
 
-    protected LocalDate startDate, endDate;
+    protected LocalDate startDate;
+    protected LocalDate endDate;
 
     /**
      * Returns an Event task object that stores information about the task: task description, start date,
@@ -31,8 +39,8 @@ public class Event extends Task {
      * @param stringStartTime Start time of the Event.
      * @param stringEndTime End time of the Event.
      */
-    public Event(String taskInfo, String stringStartDate, String stringEndDate, String stringStartTime
-            , String stringEndTime) {
+    public Event(String taskInfo, String stringStartDate, String stringEndDate,
+                 String stringStartTime, String stringEndTime) {
         super(taskInfo);
         this.originalStartDate = stringStartDate;
         this.originalEndDate = stringEndDate;
@@ -45,7 +53,7 @@ public class Event extends Task {
         this.formatEndDate = DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)
                 .format(endDate);
 
-        if (stringStartTime.equals("")) {   // no startTime provided
+        if (stringStartTime.equals("")) { // no startTime provided
             this.startTime = null;
             this.formatStartTime = "";
             this.originalStartTime = "";

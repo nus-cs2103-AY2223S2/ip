@@ -14,7 +14,7 @@ public class InvalidCommandException extends Exception {
      *
      * @param str String message that is to be printed with the error.
      */
-    public InvalidCommandException (String str) {
+    public InvalidCommandException(String str) {
         super(str);
     }
 }

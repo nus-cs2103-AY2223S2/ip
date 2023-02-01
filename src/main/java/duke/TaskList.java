@@ -1,10 +1,9 @@
 package duke;
 
-import exceptions.IncorrectNoOfArgumentException;
-
 import java.io.IOException;
-
 import java.util.ArrayList;
+
+import exceptions.IncorrectNoOfArgumentException;
 
 /**
  * Represents a list used for storing all task information on Duke.
@@ -41,7 +40,7 @@ public class TaskList {
      * @param file Duke's Storage object to allow file access.
      * @return String message of the new task's description and status.
      */
-    public String addTask(ArrayList<String> parsedInfoList, Storage file) {   // returns message that needs to be printed to user
+    public String addTask(ArrayList<String> parsedInfoList, Storage file) { // returns message to be printed to user
         Task newTask = null;
         boolean hasIssue = false;
         switch (parsedInfoList.size()) {
@@ -218,7 +217,7 @@ public class TaskList {
      *
      * @param subString String that is to be checked with all tasks and find tasks with this string.
      * @return String message of all tasks' descriptions and statuses in the taskList that have the corresponding
-     * substring in its task information.
+     *     substring in its task information.
      */
     public String find(String subString) {
         int taskIndex = 1;
@@ -239,8 +238,8 @@ public class TaskList {
             for (String word: words) {
                 for (int i = 0; i < this.taskList.size(); i++) {
                     if (this.taskList.get(i).getTaskInfo().toLowerCase().contains(word)) {
-                        sb.append("    ").append(taskIndex++).append(".").append(this.taskList.get(i).getTaskInfoStatus())
-                                .append("\n");
+                        sb.append("    ").append(taskIndex++).append(".").append(this.taskList.get(i)
+                                .getTaskInfoStatus()).append("\n");
                     }
                 }
             }

@@ -1,7 +1,5 @@
 package exceptions;
 
-import java.lang.StringBuilder;
-
 import java.io.File;
 
 /**
@@ -54,7 +52,7 @@ public class DukeException {
     public static void validate(String testText, String command) throws IncorrectNoOfArgumentException {
         // Checking for blank spaces
         StringBuilder sb = new StringBuilder();
-        if ( (testText.equals("")) || (testText.isBlank()) ) {
+        if ((testText.equals("")) || (testText.isBlank())) {
             sb.append("\n    ____________________________________________________________\n")
                     .append("     ☹ OOPS!!! You have provided incorrect number of arguments for the command '")
                     .append(command).append("'.\n     Please try again after checking!\n")
@@ -89,7 +87,7 @@ public class DukeException {
      */
     public static void folderCheck(String directory) throws FolderNotFoundException {
         File tempFolder = new File(directory);
-        if ( (!tempFolder.isDirectory()) || (!tempFolder.exists()) ) {
+        if ((!tempFolder.isDirectory()) || (!tempFolder.exists())) {
             StringBuilder sb = new StringBuilder();
             sb.append("\n    ____________________________________________________________\n")
                     .append("     Folder '").append(directory).append("' cannot be found.\n")

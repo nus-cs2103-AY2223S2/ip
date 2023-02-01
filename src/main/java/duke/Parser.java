@@ -1,10 +1,10 @@
 package duke;
 
+import java.util.ArrayList;
+
 import exceptions.DukeException;
 import exceptions.IncorrectNoOfArgumentException;
 import exceptions.InvalidCommandException;
-
-import java.util.ArrayList;
 
 /**
  * Represents a Parser that takes in user input and process it into the necessary format for Duke application
@@ -27,12 +27,12 @@ public class Parser {
      * @see ArrayList
      */
     protected static ArrayList<String> parse(String taskInfo) throws IncorrectNoOfArgumentException {
-        ArrayList<String> parseInfoList = new ArrayList<>();    // stores in the format "command" followed by "arguments"
-        boolean isFnAvailable = false;  // indicates whether user is calling a supported function provided by Duke
-        String tempCmd;    // stores function call by user (eg todos, mark, etc)
+        ArrayList<String> parseInfoList = new ArrayList<>(); // stores in the format "command" followed by "args"
+        boolean isFnAvailable = false; // indicates whether user is calling a supported function provided by Duke
+        String tempCmd; // stores function call by user (eg todos, mark, etc)
         String[] tempTaskInfo = taskInfo.split("] ");
 
-        if (tempTaskInfo.length != 1) {   // retrieving info from file and processing it
+        if (tempTaskInfo.length != 1) { // retrieving info from file and processing it
             switch (tempTaskInfo[0]) {
             case "[D][ ":
                 tempCmd = "deadline";
@@ -59,18 +59,17 @@ public class Parser {
                 tempCmd = "";
                 break;
             }
-        } else {    // adding new task that is not from file and processing it
+        } else { // adding new task that is not from file and processing it
             tempTaskInfo = taskInfo.split(" ", 2);
             tempCmd = tempTaskInfo[0].toLowerCase();
         }
-
-        if ( (tempCmd.equals("mark")) || (tempCmd.equals("unmark")) || (tempCmd.equals("delete")) ||
-                (tempCmd.equals("todo")) || (tempCmd.equals("deadline")) || (tempCmd.equals("event")) ||
-                (tempCmd.equals("find"))) {
+        if ((tempCmd.equals("mark")) || (tempCmd.equals("unmark")) || (tempCmd.equals("delete")) || (tempCmd
+                .equals("todo")) || (tempCmd.equals("deadline")) || (tempCmd.equals("event")) || (tempCmd
+                .equals("find"))) {
             isFnAvailable = true;
         }
 
-        try {   // determine function called by the user has required arguments and does not have blank spaces
+        try { // determine function called by the user has required arguments and does not have blank spaces
             DukeException.validate(isFnAvailable, tempCmd, tempTaskInfo);
             parseInfoList.add(tempCmd); // save function call (command) into parseInfo
         } catch (IncorrectNoOfArgumentException ex) {
@@ -79,29 +78,29 @@ public class Parser {
             return parseInfoList;
         }
 
-        switch (tempCmd) {  // retrieving arguments required by the commands
-        case "bye":     // format: bye
+        switch (tempCmd) { // retrieving arguments required by the commands
+        case "bye": // format: bye
             break;
-        case "list":    // format: list
+        case "list": // format: list
             break;
         case "find":
             parseInfoList.add(tempTaskInfo[1].toLowerCase());
             break;
-        case "mark":    // format: mark | index
+        case "mark": // format: mark | index
             parseInfoList.add(tempTaskInfo[1]);
             break;
-        case "unmark":  // format: unmark | index
+        case "unmark": // format: unmark | index
             parseInfoList.add(tempTaskInfo[1]); // index
             break;
-        case "delete":  // format: delete | index
+        case "delete": // format: delete | index
             parseInfoList.add(tempTaskInfo[1]); // index
             break;
-        case "todo":    // format: done (optional) | String.toString(to+do) | taskInfo
+        case "todo": // format: done (optional) | String.toString(to+do) | taskInfo
             parseInfoList.add(tempTaskInfo[1]); // taskInfo
             break;
-        case "deadline":    // format: done (optional) | deadline | taskInfo | date | time
+        case "deadline": // format: done (optional) | deadline | taskInfo | date | time
             String[] tempTaskInfo2 = tempTaskInfo[1].split("/by", 2);
-            try {   // checking the element "cccc" in ".../by cccc"
+            try { // checking the element "cccc" in ".../by cccc"
                 DukeException.validate(true, tempCmd, tempTaskInfo2);
             } catch (IncorrectNoOfArgumentException ex) {
                 System.out.println(ex);
@@ -117,13 +116,13 @@ public class Parser {
                 time = dateTime[2];
             }
 
-            parseInfoList.add(tempTaskInfo2[0]);    // taskInfo
+            parseInfoList.add(tempTaskInfo2[0]); // taskInfo
             parseInfoList.add(dateTime[1]); // date
-            parseInfoList.add(time);    // time
+            parseInfoList.add(time); // time
             break;
-        case "event":   // format: done (optional) | event | taskInfo | startDate | startTime | endDate | endTime
+        case "event": // format: done (optional) | event | taskInfo | startDate | startTime | endDate | endTime
             String[] tempTaskInfo3 = tempTaskInfo[1].split("/from", 2);
-            try {   // checking the element "bbbb" in ".../from bbbb /to aaaa"
+            try { // checking the element "bbbb" in ".../from bbbb /to aaaa"
                 DukeException.validate(true, tempCmd, tempTaskInfo3);
             } catch (IncorrectNoOfArgumentException ex) {
                 System.out.println(ex);
@@ -144,7 +143,7 @@ public class Parser {
             }
 
             String[] testPortion = tempTaskInfo3[1].split("/to", 2);
-            try {   // checking the element "aaaa" in ".../to aaaa"
+            try { // checking the element "aaaa" in ".../to aaaa"
                 DukeException.validate(true, tempCmd, testPortion);
             } catch (IncorrectNoOfArgumentException ex) {
                 System.out.println(ex);
@@ -154,7 +153,7 @@ public class Parser {
 
             String endTime;
             String[] endDateTime = testPortion[1].split(" ");
-            if (endDateTime.length > 1) {   // check if given a endDate
+            if (endDateTime.length > 1) { // check if given a endDate
                 if (endDateTime.length != 3) {
                     endTime = "";
                 } else {
@@ -165,13 +164,13 @@ public class Parser {
                 break;
             }
 
-            parseInfoList.add(tempTaskInfo3[0]);    // taskInfo
-            parseInfoList.add(startDateTime[1]);    // startDate
-            parseInfoList.add(startTime);   // startTime
-            parseInfoList.add(endDateTime[1]);  // endDate
+            parseInfoList.add(tempTaskInfo3[0]); // taskInfo
+            parseInfoList.add(startDateTime[1]); // startDate
+            parseInfoList.add(startTime); // startTime
+            parseInfoList.add(endDateTime[1]); // endDate
             parseInfoList.add(endTime); // endTime
             break;
-        default:    // throw an error as the user is trying to call a function that does not exist
+        default: // throw an error as the user is trying to call a function that does not exist
             try {
                 DukeException.validate2();
             } catch (InvalidCommandException ex) {
