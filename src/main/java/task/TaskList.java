@@ -4,13 +4,11 @@ import exception.CommandNotFoundException;
 import exception.InvalidCommandInputException;
 import exception.InvalidDateFormatException;
 
-import exception.InvalidTaskStringException;
 import helper.DateTimeHelper;
 
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.ArrayList;
 
 /**
  * Represents the list of tasks used by the UI.

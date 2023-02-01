@@ -2,27 +2,15 @@ package sys;
 
 import command.*;
 
-import task.TaskList;
-
 /**
  * Represents a parser used to decode user input.
  */
 public class Parser {
-    private TaskList tasks;
-    private Storage storage;
-    private Ui ui;
 
     /**
      * Constructor for Parser.
-     * @param tasks The tasks to be parsed.
-     * @param storage The storage used to load and save the tasks.
-     * @param ui The UI used to interact with the user.
      */
-    Parser(TaskList tasks, Storage storage, Ui ui) {
-        this.tasks = tasks;
-        this.storage = storage;
-        this.ui = ui;
-    };
+    Parser() {};
 
     /**
      * Converts a user input into a Command object.

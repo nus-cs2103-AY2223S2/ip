@@ -1,7 +1,6 @@
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import response.Response;
@@ -13,26 +12,36 @@ import task.Task;
 public class MainWindow extends AnchorPane {
     @FXML
     private ScrollPane scrollPane;
+
     @FXML
     private VBox dialogContainer;
+
     @FXML
     private TextField userInput;
+
     @FXML
     private Button sendButton;
 
     private Duke duke;
 
+    /**
+     * Bind the scrollPane height to the dialog container's height.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Set the current duke application as an attribute for the controller.
+     * @param d The duke application used.
+     */
     public void setDuke(Duke d) {
         duke = d;
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then adds them to
      * the dialog container. Clears the user input after processing.
      */
     @FXML
@@ -41,6 +50,7 @@ public class MainWindow extends AnchorPane {
         Response response = duke.getResponse(input);
         dialogContainer.getChildren().clear();
 
+        // Add new tasks to the container.
         for (Task t: response.tasks.getTasks()) {
             dialogContainer.getChildren().add(new Label(t.toString()));
         }

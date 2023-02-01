@@ -1,6 +1,7 @@
 package command;
 
 import response.Response;
+
 import sys.Ui;
 import sys.Storage;
 
@@ -20,7 +21,7 @@ public class AddCommand extends Command {
      * @param input Input to parse.
      */
     public AddCommand(String input) {
-        super("");
+        super(".*");
         this.input = input;
     }
 

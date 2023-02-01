@@ -1,6 +1,7 @@
 package command;
 
 import response.Response;
+
 import sys.Ui;
 import sys.Storage;
 
@@ -20,7 +21,7 @@ public class OccursCommand extends Command {
      * @param input Input to parse.
      */
     public OccursCommand(String input) {
-        super("occurs ");
+        super("occurs .*");
         this.input = input;
     }
 

@@ -7,6 +7,7 @@ import command.Command;
 import exception.DukeException;
 
 import response.Response;
+
 import task.TaskList;
 
 import java.util.Scanner;
@@ -34,7 +35,7 @@ public class Ui {
     public void setContext(Storage storage, TaskList tasks) {
         this.storage = storage;
         this.tasks = tasks;
-        this.parser = new Parser(tasks, storage, this);
+        this.parser = new Parser();
     }
 
     /**
@@ -64,29 +65,7 @@ public class Ui {
     }
 
     /**
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
-    }
-
-    /**
-     * Prints the given error message.
-     *
-     * @param e The error message.
-     */
-    public void showError(String e) {
-        System.out.println("ERROR: " + e);
-    }
-
-    /**
-     * Prints a horizontal line to partition the application inputs and outputs.
+     * Prints a horizontal line on CLI.
      */
     public void showLine() {
         System.out.println("__________________________________");
