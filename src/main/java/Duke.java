@@ -1,11 +1,27 @@
+import java.nio.file.FileAlreadyExistsException;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Paths;
+import java.nio.file.Files;
 public class Duke {
     public static void main(String[] args) {
 
 
         Scanner scanner = new Scanner(System.in);
         TaskList list = new TaskList();
+        String home = System.getProperty("user.home");
+        File Task_Data = new File("Task Data.txt");
+        try {
+          Task_Data.createNewFile();
+          list.loadTaskData(Task_Data);
+        } catch (FileAlreadyExistsException e){ // nothing should be done if the file already exists
+            System.out.println("The file already exists");
+        } catch (IOException e) {
+            System.out.println("File creation was unsuccessful");
+
+        }
 
 
 
@@ -37,6 +53,7 @@ public class Duke {
                         list.getTaskDetails();
                         horizontalLine();
                         userInput = scanner.nextLine();
+                        logTaskData(list);
                         continue;
                     }
 
@@ -47,6 +64,7 @@ public class Duke {
                         list.getTaskDetails();
                         horizontalLine();
                         userInput = scanner.nextLine();
+                        logTaskData(list);
                         continue;
                     }
 
@@ -57,6 +75,7 @@ public class Duke {
                         list.getTaskDetails();
                         horizontalLine();
                         userInput = scanner.nextLine();
+                        logTaskData(list);
                         continue;
 
                     }
@@ -67,7 +86,9 @@ public class Duke {
                             list.addTask(new ToDo(userInput.substring(5)));
                             list.getTaskDetails();
                             horizontalLine();
+                            logTaskData(list);
                             userInput = scanner.nextLine();
+
                             continue;
                         } catch (StringIndexOutOfBoundsException e) {
                             System.out.println("The description of todo cannot be empty!");
@@ -83,7 +104,9 @@ public class Duke {
                         list.addTask(new Deadline(description, deadline));
                         list.getTaskDetails();
                         horizontalLine();
+                        logTaskData(list);
                         userInput = scanner.nextLine();
+
                         continue;
                     }
                     case EVENT: {
@@ -95,7 +118,9 @@ public class Duke {
                         list.addTask(new Event(startDayTime, endDayTime, description));
                         list.getTaskDetails();
                         horizontalLine();
+                        logTaskData(list);
                         userInput = scanner.nextLine();
+
                         continue;
                     }
 
@@ -103,17 +128,21 @@ public class Duke {
                         horizontalLine();
                         list.deleteTask(Integer.parseInt(userInputComponents[1]));
                         horizontalLine();
+                        logTaskData(list);
                         userInput = scanner.nextLine();
+
                         continue;
                     }
                     default: {
                         System.out.println("You may have accidentally entered in an invalid command. Please re-enter!");
                         userInput = scanner.nextLine();
                     }
+
                 }
             } catch (DukeException e){
                 System.out.println("Invalid Duke Request; please re-enter your request!");
             }
+
 
 
             /*if (userInput.equals("list")) {
@@ -206,4 +235,17 @@ public class Duke {
         System.out.print("\n");
 
     }
+
+    public static void logTaskData(TaskList list) {
+        try {
+            list.updateTasksInFile();
+
+        } catch (IOException e) {
+            System.out.println("File does not exist");
+        }
+    }
+
+
+
+
 }

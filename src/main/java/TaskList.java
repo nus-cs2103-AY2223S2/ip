@@ -1,4 +1,9 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.io.PrintWriter;
+import java.io.IOException;
+import java.util.Scanner;
 
 public class TaskList {
     private ArrayList<Task> list = new ArrayList<Task>();
@@ -39,11 +44,26 @@ public class TaskList {
     }
 
     public void printItems () {
-        int numOfRequests = this.list.size();
+        int numOfTasks = this.list.size();
         System.out.println("These are the tasks you have left to complete: ");
-        for (int i = 0; i < numOfRequests; i++) {
+        for (int i = 0; i < numOfTasks; i++) {
             System.out.println(i + 1 + "." + list.get(i).toString());
         }
+    }
+
+    public void getTaskDetails() {
+        System.out.println("You now have " + numberOfTasks + " tasks in the list");
+        System.out.println("Number of tasks completed: " + numberDone);
+        System.out.println("Number of tasks yet to be completed: " + numberUndone);
+
+    }
+
+    public void updateTasksInFile () throws IOException {
+        PrintWriter logger = new PrintWriter("Task Data.txt");
+        for (int i = 0; i < this.list.size(); i++) {
+            logger.write(this.list.get(i) + "\n");
+        }
+        logger.close();
     }
 
     public void deleteTask(int taskNumber) {
@@ -53,12 +73,60 @@ public class TaskList {
 
     }
 
-    public void getTaskDetails() {
-        System.out.println("You now have " + numberOfTasks + " tasks in the list");
-        System.out.println("Number of tasks completed: " + numberDone);
-        System.out.println("Number of tasks yet to be completed: " + numberUndone);
+    public void loadTaskData (File taskDataFile) {
+        try {
+            Scanner scanner = new Scanner(taskDataFile);
 
+            while (scanner.hasNextLine()) {
+                String task = scanner.nextLine();
+                String taskDescription = task.substring(7);
+                boolean isMarked = (task.charAt(4) == 'X');
+                char taskIdentifier = task.charAt(1);
+                if (taskIdentifier == 'T') {
+                    this.list.add(new ToDo(taskDescription));
+                    this.numberOfTasks++;
+                    if (isMarked) {
+                        this.list.get(this.list.size() - 1).mark();
+                        this.numberDone++;
+                    } else {
+                        this.numberUndone++;
+                    }
+
+                } else if (taskIdentifier == 'E') {
+                    String[] splitTimes = taskDescription.split(":");
+                    String description = taskDescription.split(".")[0].substring(8);
+                    String startDayTime = splitTimes[1];
+                    String endDayTime = splitTimes[2];
+                    this.list.add(new Event(description, startDayTime, endDayTime));
+                    this.numberOfTasks++;
+                    if (isMarked) {
+                        this.list.get(this.list.size() - 1).mark();
+                        this.numberDone++;
+
+                    } else {
+                        this.numberUndone++;
+                    }
+
+                } else {
+                    String[] splitDeadline = taskDescription.split(".");
+                    String description = splitDeadline[0].substring(8);
+                    String deadline = splitDeadline[1].split(":")[1];
+                    this.list.add(new Deadline(description, deadline));
+                    this.numberOfTasks++;
+                    if (isMarked) {
+                        this.list.get(this.list.size() - 1).mark();
+                        this.numberDone++;
+                    } else {
+                        this.numberUndone++;
+                    }
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("The file was not found");
+        }
     }
+
+
 
 
 
