@@ -95,16 +95,16 @@ public class TaskList {
     public String[] add(String[] arguments) {
         Task newTask;
         switch (arguments[0]) {
-            case "/todo" -> newTask = new ToDo(arguments[1]);
-            case "/deadline" -> {
-                String[] deadlineArgs = Parser.parseArgs(arguments[1], new String[]{ " /by " });
-                newTask = new Deadline(deadlineArgs[0], deadlineArgs[1]);
-            }
-            case "/event" -> {
-                String[] eventArgs = Parser.parseArgs(arguments[1], new String[]{ " /from ", " /to " });
-                newTask = new Event(eventArgs[0], eventArgs[1], eventArgs[2]);
-            }
-            default -> throw new IllegalArgumentException("Invalid task type: " + arguments[0]);
+        case "/todo" -> newTask = new ToDo(arguments[1]);
+        case "/deadline" -> {
+            String[] deadlineArgs = Parser.parseArgs(arguments[1], new String[]{ " /by " });
+            newTask = new Deadline(deadlineArgs[0], deadlineArgs[1]);
+        }
+        case "/event" -> {
+            String[] eventArgs = Parser.parseArgs(arguments[1], new String[]{ " /from ", " /to " });
+            newTask = new Event(eventArgs[0], eventArgs[1], eventArgs[2]);
+        }
+        default -> throw new IllegalArgumentException("Invalid task type: " + arguments[0]);
         }
         this.tasks.add(newTask);
         this.save();
