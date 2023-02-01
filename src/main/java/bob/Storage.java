@@ -11,6 +11,10 @@ import java.time.LocalDate;
 public class Storage {
     private Path filePath;
 
+    /**
+     * Returns a Storage object which can read and write tasks to a .txt file
+     * @param filePath String file path of the input/output file
+     */
     public Storage(String filePath) {
         this.filePath = Paths.get(filePath);
     }
@@ -59,6 +63,11 @@ public class Storage {
         return encode.toString();
     }
 
+    /**
+     * Reads the existing file (if any) and loads the decoded Task objects into the given TaskList object.
+     * @param taskList TaskList object that stores the tasks
+     * @throws BobException If there was an error in reading the file
+     */
     public void load(TaskList taskList) throws BobException {
         if (Files.exists(this.filePath)) {
             try {
@@ -75,6 +84,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Read tasks from a taskList object and writes it to the given file.
+     * @param taskList TaskList object that has the tasks
+     * @throws BobException If there was an error in writing to the file
+     */
     public void save(TaskList taskList) throws BobException {
         try {
             // Make all necessary directories
@@ -88,7 +102,6 @@ public class Storage {
             }
             writer.flush(); // Write to file
         } catch (Exception e) {
-            System.out.println(e.getMessage());
             throw new BobException("Error while saving tasks :(");
         } 
     }

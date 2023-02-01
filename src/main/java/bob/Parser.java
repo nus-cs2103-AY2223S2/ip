@@ -106,6 +106,13 @@ public class Parser {
         return index;
     }
 
+    /**
+     * Validates and parses a given string,
+     * and returns a Todo object if the string is valid.
+     * @param s String to be validated and parsed
+     * @return Todo object
+     * @throws BobException If string is not a valid todo command
+     */
     public static Todo parseTodo(String s) throws BobException {
         if (!isTodo(s)) {
             throw new BobException("Invalid todo command!");
@@ -117,6 +124,13 @@ public class Parser {
         return t;
     }
 
+    /**
+     * Validates and parses a given string,
+     * and returns an Event object if the string is valid.
+     * @param s String to be validated and parsed
+     * @return Event object
+     * @throws BobException If string is not a valid Event command
+     */
     public static Event parseEvent(String s) throws BobException {
         if (!isEvent(s)) {
             throw new BobException("Invalid event command!");
@@ -132,6 +146,13 @@ public class Parser {
         return e;
     }
 
+    /**
+     * Validates and parses a given string,
+     * and returns a Deadline object if the string is valid.
+     * @param s String to be validated and parsed
+     * @return Deadline object
+     * @throws BobException If string is not a valid Deadline command
+     */
     public static Deadline parseDeadline(String s) throws BobException {
         if (!isDeadline(s)) {
             throw new BobException("Invalid deadline command!");
