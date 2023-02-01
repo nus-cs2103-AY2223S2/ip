@@ -53,15 +53,15 @@ public class Duke {
         ui.showWelcome();
         boolean isExit = false;
         while (!isExit) {
-            ArrayList<String> commandInfo;
+            ArrayList<String> commandInfoList;
             try {
-                commandInfo = Parser.parse(ui.readCommand());
+                commandInfoList = Parser.parse(ui.readCommand());
             } catch (IncorrectNoOfArgumentException e) {
                 System.out.println(e);
                 continue;
             }
-            if (commandInfo.size() != 0) {
-                switch (commandInfo.get(0)) {
+            if (commandInfoList.size() != 0) {
+                switch (commandInfoList.get(0)) {
                 case "bye":
                     isExit = true;
                     ui.showFarewellMessage();
@@ -70,19 +70,19 @@ public class Duke {
                     ui.printCommand(tasks.list());
                     break;
                 case "mark":
-                    ui.printCommand(tasks.markTask(commandInfo, this.storage));
+                    ui.printCommand(tasks.markTask(commandInfoList, this.storage));
                     break;
                 case "unmark":
-                    ui.printCommand(tasks.unmarkTask(commandInfo, this.storage));
+                    ui.printCommand(tasks.unmarkTask(commandInfoList, this.storage));
                     break;
                 case "delete":
-                    ui.printCommand(tasks.deleteTask(commandInfo, this.storage));
+                    ui.printCommand(tasks.deleteTask(commandInfoList, this.storage));
                     break;
                 case "error":
                     break;
                 default:
                     try {
-                        ui.printCommand(tasks.addTask(commandInfo, this.storage));
+                        ui.printCommand(tasks.addTask(commandInfoList, this.storage));
                     } catch (DateTimeParseException e) {
                         System.out.println("Invalid inputs!\n");
                         System.out.println("Please enter your date & time in the format: YYYY-MM-DD HH:MM \n");

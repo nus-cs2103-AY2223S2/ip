@@ -12,8 +12,8 @@ import java.time.format.FormatStyle;
  * @since 2023-02-01
  */
 public class Event extends Task {
-    protected String newStartDate, newEndDate, newStartTime, newEndTime,
-            oldStartDate, oldEndDate, oldStartTime, oldEndTime;
+    protected String formatStartDate, formatEndDate, formatStartTime, formatEndTime,
+            originalStartDate, originalEndDate, originalStartTime, originalEndTime;
 
     protected LocalTime startTime, endTime;
 
@@ -34,34 +34,34 @@ public class Event extends Task {
     public Event(String taskInfo, String stringStartDate, String stringEndDate, String stringStartTime
             , String stringEndTime) {
         super(taskInfo);
-        this.oldStartDate = stringStartDate;
-        this.oldEndDate = stringEndDate;
-        this.oldStartTime = " " + stringStartTime;
-        this.oldEndTime = " " + stringEndTime;
+        this.originalStartDate = stringStartDate;
+        this.originalEndDate = stringEndDate;
+        this.originalStartTime = " " + stringStartTime;
+        this.originalEndTime = " " + stringEndTime;
         this.startDate = LocalDate.parse(stringStartDate);
-        this.newStartDate = DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)
+        this.formatStartDate = DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)
                 .format(startDate);
         this.endDate = LocalDate.parse(stringEndDate);
-        this.newEndDate = DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)
+        this.formatEndDate = DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)
                 .format(endDate);
 
-        if (stringStartTime.equals("")) {
+        if (stringStartTime.equals("")) {   // no startTime provided
             this.startTime = null;
-            this.newStartTime = "";
-            this.oldStartTime = "";
+            this.formatStartTime = "";
+            this.originalStartTime = "";
         } else {
             this.startTime = LocalTime.parse(stringStartTime);
-            this.newStartTime = " | " + DateTimeFormatter.ofLocalizedTime(FormatStyle.MEDIUM)
+            this.formatStartTime = " | " + DateTimeFormatter.ofLocalizedTime(FormatStyle.MEDIUM)
                     .format(startTime);
         }
 
-        if (stringEndTime.equals("")) {
+        if (stringEndTime.equals("")) { // no endTime provided
             this.endTime = null;
-            this.newEndTime = "";
-            this.oldEndTime = "";
+            this.formatEndTime = "";
+            this.originalEndTime = "";
         } else {
             this.endTime = LocalTime.parse(stringEndTime);
-            this.newEndTime = " | " + DateTimeFormatter.ofLocalizedTime(FormatStyle.MEDIUM)
+            this.formatEndTime = " | " + DateTimeFormatter.ofLocalizedTime(FormatStyle.MEDIUM)
                     .format(endTime);
         }
     }
@@ -73,8 +73,8 @@ public class Event extends Task {
      */
     @Override
     public String getTaskInfoStatus() {
-        return "[E]" + super.getTaskInfoStatus() + "(from: " + this.newStartDate + this.newStartTime + " to: "
-                + this.newEndDate + this.newEndTime + ")";
+        return "[E]" + super.getTaskInfoStatus() + "(from: " + this.formatStartDate + this.formatStartTime + " to: "
+                + this.formatEndDate + this.formatEndTime + ")";
     }
 
     /**
@@ -84,7 +84,7 @@ public class Event extends Task {
      */
     @Override
     public String getTaskInfo() {
-        return "[E]" + super.getTaskInfoStatus() + "/from " + this.oldStartDate + this.oldStartTime + " /to "
-                + this.oldEndDate + this.oldEndTime;
+        return "[E]" + super.getTaskInfoStatus() + "/from " + this.originalStartDate + this.originalStartTime + " /to "
+                + this.originalEndDate + this.originalEndTime;
     }
 }
