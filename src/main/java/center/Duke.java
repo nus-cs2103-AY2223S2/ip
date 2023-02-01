@@ -1,11 +1,11 @@
+package center;
+
 import command.Parser;
 import command.Storage;
 import command.Ui;
 import task.TaskList;
 
 import java.io.IOException;
-
-import static java.lang.Integer.parseInt;
 
 public class Duke {
     private Storage storage;

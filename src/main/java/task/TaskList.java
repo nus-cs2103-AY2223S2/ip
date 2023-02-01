@@ -16,29 +16,30 @@ public class TaskList extends ArrayList<Task> {
             // process the line
             String[] lineSplit = line.split("#");
             switch (lineSplit[0]) {
-                case "T":
-                    // To-do entry
-                    Task todo = new Todo(lineSplit[2]);
-                    if (parseInt(lineSplit[1]) == 1) {
-                        todo.setChecked(true);
-                    }
-                    this.add(todo);
-                    break;
-                case "D":
-                    // task.Deadline
-                    Task dead = new Deadline(lineSplit[2], lineSplit[3]);
-                    if (parseInt(lineSplit[1]) == 1) {
-                        dead.setChecked(true);
-                    }
-                    this.add(dead);
-                    break;
-                case "E":
-                    // task.Event
-                    Task event = new Event(lineSplit[2], lineSplit[3], lineSplit[4]);
-                    if (parseInt(lineSplit[1]) == 1) {
-                        event.setChecked(true);
-                    }
-                    this.add(event);
+            case "T":
+                // To-do entry
+                Task todo = new Todo(lineSplit[2]);
+                if (parseInt(lineSplit[1]) == 1) {
+                    todo.setChecked(true);
+                }
+                this.add(todo);
+                break;
+            case "D":
+                // task.Deadline
+                Task dead = new Deadline(lineSplit[2], lineSplit[3]);
+                if (parseInt(lineSplit[1]) == 1) {
+                    dead.setChecked(true);
+                }
+                this.add(dead);
+                break;
+            case "E":
+                // task.Event
+                Task event = new Event(lineSplit[2], lineSplit[3], lineSplit[4]);
+                if (parseInt(lineSplit[1]) == 1) {
+                    event.setChecked(true);
+                }
+                this.add(event);
+                //Fallthrough
             }
         }
     }
