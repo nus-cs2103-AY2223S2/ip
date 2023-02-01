@@ -1,3 +1,5 @@
 E|project week | |2019-11-15|2019-11-25
 T|borrow book|X
 D|return book | |2019-10-15
+T|homework| 
+E|halloween |X|2019-11-15|2019-12-01
