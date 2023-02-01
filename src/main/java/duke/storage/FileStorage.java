@@ -1,12 +1,5 @@
 package duke.storage;
 
-import duke.exception.DukeException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
-import duke.util.DateTimeUtils;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -16,10 +9,26 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+import duke.util.DateTimeUtils;
+
+/**
+ * File storage implementation.
+ */
 public class FileStorage implements Storage {
     private final String directoryPath;
     private final String fileName;
 
+    /**
+     * Initialize storage using file.
+     *
+     * @param directoryPath The directory of where the file is stored.
+     * @param fileName The name of the file.
+     */
     public FileStorage(String directoryPath, String fileName) {
         this.directoryPath = directoryPath;
         this.fileName = fileName;
@@ -112,6 +121,7 @@ public class FileStorage implements Storage {
                             event.getTo().format(DateTimeUtils.DATE_TIME_FORMAT_INPUT)));
 
                     break;
+                default:
                 }
             }
             fileWriter.close();

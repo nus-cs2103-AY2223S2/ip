@@ -1,14 +1,16 @@
 package duke.command;
 
+import java.util.List;
+
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
-import java.util.ArrayList;
-import java.util.List;
-
+/**
+ * Command to find task(s).
+ */
 public class FindCommand implements Command {
     @Override
     public String getCommandName() {

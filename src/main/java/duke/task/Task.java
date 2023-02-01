@@ -1,10 +1,19 @@
 package duke.task;
 
+/**
+ * Abstract class for task representation.
+ */
 public abstract class Task {
     private String description;
     private TaskType taskType;
     private boolean isDone;
 
+    /**
+     * Creates a task.
+     *
+     * @param description The description of the task.
+     * @param taskType The type of task.
+     */
     public Task(String description, TaskType taskType) {
         this.description = description;
         this.taskType = taskType;

@@ -1,15 +1,18 @@
 package duke.command;
 
-import duke.ui.Ui;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
+
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.Event;
 import duke.task.TaskList;
+import duke.ui.Ui;
 import duke.util.DateTimeUtils;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
-
+/**
+ * Command to add an event.
+ */
 public class EventCommand extends AddTaskCommand {
     @Override
     public String getCommandName() {

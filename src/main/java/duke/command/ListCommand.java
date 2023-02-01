@@ -1,10 +1,12 @@
 package duke.command;
 
-import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Command to list all tasks.
+ */
 public class ListCommand implements Command {
     @Override
     public String getCommandName() {

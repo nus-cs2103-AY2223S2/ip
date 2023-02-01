@@ -1,10 +1,13 @@
 package duke.storage;
 
+import java.util.List;
+
 import duke.exception.DukeException;
 import duke.task.Task;
 
-import java.util.List;
-
+/**
+ * Interface for storage of tasks.
+ */
 public interface Storage {
     List<Task> load();
 

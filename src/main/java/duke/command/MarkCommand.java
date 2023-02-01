@@ -1,11 +1,14 @@
 package duke.command;
 
-import duke.ui.Ui;
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
+import duke.ui.Ui;
 
+/**
+ * Command to mark a task as done.
+ */
 public class MarkCommand implements Command {
     @Override
     public String getCommandName() {

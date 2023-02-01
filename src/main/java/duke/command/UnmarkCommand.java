@@ -1,11 +1,14 @@
 package duke.command;
 
-import duke.ui.Ui;
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
+import duke.ui.Ui;
 
+/**
+ * Command to unmark a task (i.e mark task as not done).
+ */
 public class UnmarkCommand implements Command {
     @Override
     public String getCommandName() {
