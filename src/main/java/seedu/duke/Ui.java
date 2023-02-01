@@ -7,9 +7,8 @@ public class Ui {
     /**
      * Prints out greetings for user to see
      */
-    public void sayGreetings() {
-        System.out.println("TOP OF THE MORNING TO YOU LADDIES!");
-        System.out.println("What can I do for you? :)");
+    public String sayGreetings() {
+        return "TOP OF THE MORNING TO YOU LADDIES!\nWhat can I do for you? :)";
     }
 
     /**
@@ -17,12 +16,14 @@ public class Ui {
      *
      * @param taskList current Task List
      */
-    public void showList(TaskList taskList) {
-        System.out.println("Here are the tasks in your list:");
+    public String showList(TaskList taskList) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Here are the tasks in your list:\n");
         for (int i = 0; i < taskList.getSize(); i++) {
             Task task = taskList.get(i);
-            System.out.printf("%d.%s%n", i + 1, task);
+            stringBuilder.append(String.format("%d.%s\n", i + 1, task));
         }
+        return stringBuilder.toString();
     }
 
     /**
@@ -31,10 +32,9 @@ public class Ui {
      * @param newTask Task that has been added
      * @param updatedList updated Task List
      */
-    public void sayAddedTask(Task newTask, TaskList updatedList) {
-        System.out.println("Got it, I've added this task:");
-        System.out.println(newTask);
-        System.out.printf("Now you have %d tasks in the list.%n", updatedList.getSize());
+    public String sayAddedTask(Task newTask, TaskList updatedList) {
+        return String.format("Got it, I've added this task:\n%s\nNow you have %d tasks in the list.%n",
+                newTask, updatedList.getSize());
     }
 
     /**
@@ -43,10 +43,9 @@ public class Ui {
      * @param deletedTask Task that has been deleted
      * @param updatedList updated Task List
      */
-    public void sayDeletedTask(Task deletedTask, TaskList updatedList) {
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(deletedTask);
-        System.out.printf("Now you have %d tasks in the list.%n", updatedList.getSize());
+    public String sayDeletedTask(Task deletedTask, TaskList updatedList) {
+        return String.format("Noted. I've removed this task:\n%s\nNow you have %d tasks in the list.%n",
+                deletedTask, updatedList.getSize());
     }
 
     /**
@@ -54,9 +53,8 @@ public class Ui {
      *
      * @param markedTask Task that has been marked
      */
-    public void sayMarkedTask(Task markedTask) {
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(markedTask);
+    public String sayMarkedTask(Task markedTask) {
+        return String.format("Nice! I've marked this task as done:\n%s", markedTask);
     }
 
     /**
@@ -64,9 +62,8 @@ public class Ui {
      *
      * @param unmarkedTask Task that has been unmarked
      */
-    public void sayUnmarkedTask(Task unmarkedTask) {
-        System.out.println("Ok, I've marked this task as not done yet:");
-        System.out.println(unmarkedTask);
+    public String sayUnmarkedTask(Task unmarkedTask) {
+        return String.format("Ok, I've marked this task as not done yet:\n%s", unmarkedTask);
     }
 
     /**
@@ -74,24 +71,26 @@ public class Ui {
      *
      * @param matchingTasks Tasks that match the keyword provided by user
      */
-    public void sayMatchingTasks(TaskList matchingTasks) {
-        System.out.println("Here are the matching tasks in your list:");
+    public String sayMatchingTasks(TaskList matchingTasks) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Here are the matching tasks in your list:\n");
         for (int i = 0; i < matchingTasks.getSize(); i++) {
-            System.out.printf("%d: %s\n", i + 1, matchingTasks.get(i));
+            stringBuilder.append(String.format("%d: %s\n", i + 1, matchingTasks.get(i)));
         }
+        return stringBuilder.toString();
     }
 
     /**
      * Prints out line if there is an error loading for user to see
      */
-    public void showLoadingError(){
-        System.out.println(("Unable to load!"));
+    public String showLoadingError(){
+        return "Unable to load!";
     }
 
     /**
      * Prints out goodbye line for user to see
      */
-    public void sayGoodbye() {
-        System.out.println("Goodbye!!!! Hope I don't see you again!");
+    public String sayGoodbye() {
+        return "Goodbye!!!! Hope I don't see you again!";
     }
 }

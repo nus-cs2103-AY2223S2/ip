@@ -167,10 +167,11 @@ public class Parser {
      *  @param ui Ui to print lines for user to see and interact with
      *  @return Enum Command of the input given
      */
-    public Duke.Commands executeCommand(String[] inputStrings, String[] listOfCommands, TaskList taskList,
+    public String executeCommand(String[] inputStrings, String[] listOfCommands, TaskList taskList,
                                         Storage storage, Ui ui) throws DukeException {
         String commandStr = inputStrings[0];
         Duke.Commands command = Duke.Commands.valueOf(checkCommand(commandStr, listOfCommands));
+        String output = "";
         try {
             String description;
             String taskNumber;
@@ -179,10 +180,10 @@ public class Parser {
             int index;
             switch (command) {
             case list:
-                ui.showList(taskList);
+                output = ui.showList(taskList);
                 break;
             case bye:
-                ui.sayGoodbye();
+                output = ui.sayGoodbye();
                 break;
             case todo:
                 description = String.join(" ", Arrays.copyOfRange(inputStrings, 1, inputStrings.length));
@@ -190,7 +191,7 @@ public class Parser {
                 newTask = new Todo(description);
                 updatedList = taskList.addTask(newTask);
                 storage.writeFile(updatedList);
-                ui.sayAddedTask(newTask, updatedList);
+                output = ui.sayAddedTask(newTask, updatedList);
                 break;
             case deadline:
                 int byIndex = checkDeadline(inputStrings);
@@ -202,7 +203,7 @@ public class Parser {
                 newTask = new Deadline(description, formattedDeadline);
                 updatedList = taskList.addTask(newTask);
                 storage.writeFile(updatedList);
-                ui.sayAddedTask(newTask, updatedList);
+                output = ui.sayAddedTask(newTask, updatedList);
                 break;
             case event:
                 int fromIndex = checkStarting(inputStrings);
@@ -218,7 +219,7 @@ public class Parser {
                 newTask = new Event(description, formattedFrom, formattedTo);
                 updatedList = taskList.addTask(newTask);
                 storage.writeFile(updatedList);
-                ui.sayAddedTask(newTask, updatedList);
+                output = ui.sayAddedTask(newTask, updatedList);
                 break;
             case mark:
                 // taskNumber in 1-indexing
@@ -228,14 +229,14 @@ public class Parser {
                 updatedList = taskList.markTask(index);
                 newTask = updatedList.get(index);
                 storage.writeFile(updatedList);
-                ui.sayMarkedTask(newTask);
+                output = ui.sayMarkedTask(newTask);
                 break;
             case unmark:
                 taskNumber = getTaskNumber(inputStrings);
                 index = checkTaskNumber(taskList, taskNumber);
                 updatedList = taskList.unmarkTask(index);
                 newTask = updatedList.get(index);
-                ui.sayUnmarkedTask(newTask);
+                output = ui.sayUnmarkedTask(newTask);
                 break;
             case delete:
                 // taskNumber in 1-indexing
@@ -245,17 +246,17 @@ public class Parser {
                 Task deletedTask = taskList.get(index);
                 updatedList = taskList.deleteTask(index);
                 storage.writeFile(updatedList);
-                ui.sayDeletedTask(deletedTask, updatedList);
+                output = ui.sayDeletedTask(deletedTask, updatedList);
                 break;
             case find:
                 String keywords = getKeywords(inputStrings);
                 TaskList matchingTasks = taskList.findTask(keywords);
-                ui.sayMatchingTasks(matchingTasks);
+                output = ui.sayMatchingTasks(matchingTasks);
                 break;
             }
         } catch (DukeException err) {
-            System.out.println(err.getErrorMessage());
+            output = err.getErrorMessage();
         }
-        return command;
+        return output;
     }
 }
