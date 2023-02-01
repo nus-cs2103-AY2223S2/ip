@@ -43,6 +43,9 @@ public class Duke {
         this.taskList = storage.getTasks();
         storage.createDirectory();
 
+        TaskScheduler taskScheduler = new TaskScheduler(1);
+        taskScheduler.addRecurringEvent();
+
         ByteArrayOutputStream storeString = new ByteArrayOutputStream();
         PrintStream printStream = new PrintStream(storeString);
         PrintStream oldPrintStream = System.out;

@@ -33,7 +33,6 @@ public class MainWindow extends AnchorPane {
     @FXML
     private TextField userInput;
     @FXML
-    private Button sendButton;
 
     private Duke duke;
 

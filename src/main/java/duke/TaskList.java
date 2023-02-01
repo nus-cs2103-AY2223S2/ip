@@ -1,6 +1,10 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.concurrent.atomic.AtomicLong;
+import java.util.stream.IntStream;
+
 /**
  * TaskList is the class to store all the tasks keyed in by the user during
  * the session. It has a generic type of Task, which means the type of data
@@ -53,19 +57,30 @@ class TaskList<T> {
      *
      */
     TaskList<T> listAllTasks() {
+        AtomicLong counter = new AtomicLong();
+        tasks.stream().forEach(task ->
+                System.out.println(counter.incrementAndGet() + "." + task));
+        /*
         for (int i=0; i < numberOfTasks(); i++) {
             System.out.println(i + INCREMENT + "." + get(i));
         }
+        */
         return new TaskList<T>(tasks);
     }
 
     <T extends Task> TaskList<T> listFindTasks(String find, TaskList<T> list) {
+        AtomicLong counter = new AtomicLong();
+        tasks.stream().filter(task ->
+                task.getDescription().contains(find.substring(1))).forEach(task ->
+                        System.out.println(counter.incrementAndGet() + "." + task));
+        /*
         for (int i=0; i < numberOfTasks(); i++) {
             Task currTask = (Task)get(i);
             if (currTask.getDescription().contains(find.substring(1))) {
                 System.out.println(i + INCREMENT + "." + currTask);
             }
         }
+        */
         return new TaskList<T>(tasks);
     }
 
@@ -92,10 +107,16 @@ class TaskList<T> {
 
     TaskList<T> addMultipleTasks(Task... newTask) {
         TaskList<T> newTasks = new TaskList<T>(tasks);
+        Arrays.stream(newTask).forEach(task -> {
+            newTasks.tasks.add(task);
+            System.out.println("SUI I have added this task!: " + task);
+        });
+        /*
         for (Task task: newTask) {
             newTasks.tasks.add(task);
             System.out.println("SUI I have added this task!: " + task);
         }
+        */
         return newTasks;
     }
 
@@ -129,9 +150,12 @@ class TaskList<T> {
 
     TaskList<T> removeMultipleTasks(int... index) {
         TaskList<T> newTasks = new TaskList<T>(tasks);
+        Arrays.stream(index).forEach(newTasks.tasks::remove);
+        /*
         for (int i : index) {
             newTasks.tasks.remove(i);
         }
+        */
         return newTasks;
     }
 
