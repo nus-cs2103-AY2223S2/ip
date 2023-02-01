@@ -12,7 +12,7 @@ public class Event extends Task {
 
     /**
      * Constructor to create a new event
-     * @param task Event duke.task
+     * @param task Event task
      * @param from start time of the event
      * @param to end time of the event
      */
@@ -22,13 +22,10 @@ public class Event extends Task {
         this.to = to;
     }
 
-    /**
-     * Convert the Event duke.task into data from for duke.storage into file.
-     * @return String representation of the data.
-     */
+    @Override
     public String toData() {
         String status = this.completed ? "1" : "0";
-        return "E | " + status + " |" + this.task + "| " + this.from + " | " + this.to;
+        return "E | " + status + " | " + this.task + " | " + this.from + " | " + this.to;
     }
 
     @Override

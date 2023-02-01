@@ -7,7 +7,7 @@ import duke.storage.TaskList;
 import duke.task.Task;
 
 /**
- * Command to search duke.task with specific keyword.
+ * Command to search task with specific keyword.
  */
 public class FindCommand extends Command {
 
@@ -23,19 +23,26 @@ public class FindCommand extends Command {
 
     @Override
     public String execute(TaskList tasks) {
+
         String[] inquiry = request.trim().split("find");
+
+        // check missing enquiry
         if (inquiry.length == 0) {
             throw new MissingArgumentException("What do you wish to find?");
         }
 
         ArrayList<Task> result = tasks.find(inquiry[1].strip());
+
+        // no task with enquired keyword in the task list
         if (result.size() == 0) {
             return "Sorry, I couldn't find what you want. :(";
         }
+
         StringBuilder list = new StringBuilder();
         for (Task task : result) {
             list.append(task.toString()).append("\n");
         }
+
         return list.toString();
     }
 }

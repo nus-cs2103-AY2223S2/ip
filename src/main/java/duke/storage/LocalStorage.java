@@ -17,13 +17,13 @@ import duke.task.Task;
 import duke.task.Todo;
 
 /**
- * Local duke.storage to store the data from local file.
+ * Local storage to store the data from local file.
  */
 public class LocalStorage {
     private File file;
 
     /**
-     * Constructor to create a local duke.storage using the data from local file.
+     * Constructor to create a local storage using the data from local file.
      * @param path
      */
     public LocalStorage(String path) {
@@ -34,7 +34,7 @@ public class LocalStorage {
     /**
      * Read from file in local duke.storage.
      * @param path Path to the file in the local duke.storage.
-     * @return File obtained from local duke.storage
+     * @return File obtained from local storage
      */
     public static File readFile(String path) {
         File file = new File(path);
@@ -125,7 +125,7 @@ public class LocalStorage {
     }
 
     /**
-     * Save tasks in the list into local duke.storage before leaving the program.
+     * Save tasks in the list into local storage before leaving the program.
      * @param tasks list to be saved into the file in local duke.storage.
      */
     public void saveFile(TaskList tasks) {

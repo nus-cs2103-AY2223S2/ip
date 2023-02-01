@@ -7,7 +7,7 @@ public class DukeException extends RuntimeException {
 
     /**
      * Constructor to create duke.Duke Exception
-     * @param message error message of the duke.exception
+     * @param message error message of the exception
      */
     public DukeException(String message) {
         super(message);

@@ -11,22 +11,20 @@ public class Deadline extends Task {
 
     /**
      * Constructor method for Deadline
-     * @param task new duke.task to be added
-     * @param dueDate deadline of the duke.task
+     * @param task new task to be added
+     * @param dueDate deadline of the task
      */
     public Deadline(String task, LocalDate dueDate) {
         super(task);
         this.dueDate = dueDate;
     }
 
-    /**
-     * Convert the Deadline duke.task into data from for duke.storage into file.
-     * @return String representation of the data.
-     */
+    @Override
     public String toData() {
         String status = this.completed ? "1" : "0";
         return "D | " + status + " | " + this.task + " | " + this.dueDate;
     }
+
     @Override
     public String toString() {
         String statusIcon = this.completed ? "X" : " ";

@@ -3,13 +3,13 @@ package duke.task;
 /**
  * General duke.task.
  */
-public class Task {
+public abstract class Task {
 
     protected String task;
     protected boolean completed;
 
     /**
-     * Constructor to create new duke.task
+     * Constructor to create new task
      * @param task
      */
     public Task(String task) {
@@ -18,25 +18,17 @@ public class Task {
     }
 
     /**
-     * Mark the duke.task as complete
+     * Mark the task as complete
      */
     public void markComplete() {
         this.completed = true;
     }
 
     /**
-     * Unmark the duke.task to be incomplete
+     * Unmark the task to be incomplete
      */
     public void unmarkComplete() {
         this.completed = false;
-    }
-
-    /**
-     * Placeholder for toData function for Task.
-     * @return Empty String
-     */
-    public String toData() {
-        return "";
     }
 
     @Override
@@ -44,4 +36,11 @@ public class Task {
         String statusIcon = completed ? "X" : " ";
         return "[" + statusIcon + "] " + this.task;
     }
+
+    /**
+     * Abstract method for toData function for Task.
+     * @return Empty String
+     */
+    public abstract String toData();
+
 }

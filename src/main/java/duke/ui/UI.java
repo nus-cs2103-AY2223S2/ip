@@ -1,9 +1,9 @@
-package duke;
+package duke.ui;
 
 import java.util.Scanner;
 
 /**
- * duke.UI to print the response after performing action.
+ * duke.ui.UI to print the response after performing action.
  */
 public class UI {
 
@@ -54,5 +54,9 @@ public class UI {
     public static void exit() {
         String outro = "bella ciao";
         printRes(outro);
+    }
+
+    public static String showWelcomeMsg() {
+        return "Hola! Soy Dora";
     }
 }
