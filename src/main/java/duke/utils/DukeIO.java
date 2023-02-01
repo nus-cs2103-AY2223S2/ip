@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import duke.Tasks.Task;
 import duke.Tasks.TaskList;
 
+/**
+ * Formatter class to format outputs to text-based terminal.
+ */
 public class DukeIO {
 
     private static final String INPUT_PROMPT = "MyDuke >    "; 
@@ -44,47 +47,89 @@ public class DukeIO {
                                     + REPLY + "See you soon!\n"
                                     + SEPERATOR;
     
+    /**
+     * Displays message on screen, writes each String as a newline to standard output.
+     * 
+     * @param message String message to output
+     */
     public void echoMessage(String message) {
         System.out.println(message);
     }
     
+    /**
+     * Displays greeting message for Duke.
+     */
     public void printHello() {
         System.out.print(HELLO);
     }
 
+    /**
+     * Displays exit message upon quit.
+     */
     public void printQuit() {
         System.out.print(QUIT);
     }
 
+    /**
+     * Displays indicator to prompt users input.
+     */
     public void showPrompt() {
         System.out.print(INPUT_PROMPT);
     }
 
+    /**
+     * Displays a success toast when new Task is successfully added to TaskList.
+     * 
+     * @param t Task object that is being added to TaskList.
+     */
     public void notifySuccessAdd(Task t) {
         System.out.println(SEPERATOR
                 + REPLY + "Successfully added: " + t.toString());
     }
 
+    /**
+     * Displays a success toast upon updating the state of Task to Completed.
+     * 
+     * @param t Finished Task object.
+     */
     public void notifySuccessComplete(Task t) {
         System.out.println(SEPERATOR
                 + REPLY + "Successfully completed: " + t.toString());
     }
 
+    /**
+     * Displays a success toast upon updating the state of Task to Incomplete.
+     * 
+     * @param t Unfinished Task object.
+     */
     public void notifyUnmark(Task t) {
         System.out.println(SEPERATOR
                 + REPLY + "Unmarked task: " + t.toString());
     }
 
+    /**
+     * Displays error toast when user tries to mark an already marked Task.
+     * 
+     * @param t Marked Task.
+     */
     public void nofifyMarkFail(Task t) {
         System.out.println(SEPERATOR
             + REPLY + "Cannot mark completed task: " + t.toString());
     }
 
+    /**
+     * Displays error toast when user tries to unmark an already unmarked Task.
+     * 
+     * @param t Unmarked Task.
+     */
     public void notifyUnmarkFail(Task t) {
         System.out.println(SEPERATOR 
             + REPLY + "Cannot unmark incomplete task: " + t.toString());
     }
 
+    /**
+     * Displays the number of existing tasks in the TaskList.
+     */
     public void showCount() {
         String isare;
         String s;
@@ -100,6 +145,9 @@ public class DukeIO {
                             + s + " in the list.\n" + SEPERATOR);
     }
 
+    /**
+     * Displays an indexed list of all existing tasks in the TaskList.
+     */
     public void showAll() {
         int taskCount = TaskList.taskCount;
         ArrayList<Task> allTasks = new ArrayList<>(TaskList.allTasks);
@@ -112,20 +160,35 @@ public class DukeIO {
         System.out.println(SEPERATOR);
     }
 
+    /**
+     * Displays an error toast when user inputs an Invalid command.
+     * A section of valid commands guide is displayed in a new line.
+     */
     public void showInvalidCommand() {
         System.out.println(SEPERATOR
                         + REPLY + "Invalid Command!\n"
                         + CMD_LIST);
     }
 
+    /**
+     * Displays error toast when Exception is thrown
+     * 
+     * @param e Thrown exception
+     */
     public void showError(Exception e) {
         System.out.println(SEPERATOR + e.getMessage() + "\n" + SEPERATOR);
     }
 
+    /**
+     * Displays success toast after loading TaskList from saved .txt file
+     */
     public void notifyLoad() {
         System.out.println("Loaded successfully from previous session.");
     }
 
+    /**
+     * Displays success toast after saving TaskList upon quit.
+     */
     public void notifySave() {
         System.out.println(SAVE_SUCCESS);
     }

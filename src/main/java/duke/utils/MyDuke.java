@@ -13,20 +13,39 @@ import duke.Tasks.Task;
 import duke.Tasks.TaskList;
 import duke.Tasks.ToDo;
 
+/**
+ * Base handler class that accepts the chain of responsibility from Duke client requests.
+ * MyDuke proccesses the input commands or passes the responsibility to other classes.
+ */
 public class MyDuke {
     private static DukeIO dukeIo = new DukeIO();
     private static TaskList allTasks;
     private static Map<String, Consumer<String[]>> cmdMap = new HashMap<>();
 
+    /**
+     * Passes the chain of responsibility to DukeIo to display welcome message.
+     * Populates a HashMap of valid commands to be accepted.
+     */
     public void init() {
         dukeIo.printHello();
         populateCommands();
     }
 
+    /**
+     * Passes the chain of responsibility to DukeIo to display exit message upon quit.
+     */
     public void quit() {
         dukeIo.printQuit();
     }
 
+    /**
+     * Accepts the chain of responsibility from Main and run the commands.
+     * 
+     * @param tokens Array of String from user inputs
+     * @param taskList TaskList object where all tasks are operated upon.
+     * 
+     * @throws InvalidCommandException
+     */
     public void exec(String[] tokens, TaskList taskList) throws InvalidCommandException {
         allTasks = taskList;
         try {
