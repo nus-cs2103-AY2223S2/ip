@@ -1,4 +1,4 @@
-package Task;
+package task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -23,7 +23,7 @@ public class Deadline extends Task {
     }
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(by: " + formatOfDate.format(endDate) + ")";
+        return "[D]" + super.toString() + " (by: " + formatOfDate.format(endDate) + ")";
     }
 
 

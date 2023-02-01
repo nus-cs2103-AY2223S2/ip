@@ -1,10 +1,9 @@
-package Command;
+package command;
 
-import Main.TaskList;
-import Main.Storage;
-import Main.DukeException;
-import Main.Ui;
-
+import main.DukeException;
+import main.Storage;
+import main.TaskList;
+import main.Ui;
 public abstract class Command {
 
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {};

@@ -1,15 +1,15 @@
-package Command;
+package command;
 
 import java.time.LocalDate;
 
-import Main.TaskList;
-import Main.Storage;
-import Main.DukeException;
-import Main.Ui;
-import Task.Task;
-import Task.Event;
+import main.TaskList;
+import main.Storage;
+import main.DukeException;
+import main.Ui;
+import task.Task;
+import task.Event;
 
-public class EventCommand extends Command{
+public class EventCommand extends Command {
     String description;
     LocalDate endDate;
     LocalDate startDate;

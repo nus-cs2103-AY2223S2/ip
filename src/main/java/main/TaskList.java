@@ -1,6 +1,6 @@
-package Main;
+package main;
 
-import Task.Task;
+import task.Task;
 
 import java.io.FileWriter;
 import java.io.IOException;

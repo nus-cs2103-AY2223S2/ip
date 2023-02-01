@@ -1,6 +1,6 @@
-package Main;
+package main;
 
-import Command.*;
+import command.*;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
@@ -23,26 +23,23 @@ public class Parser {
                 return new TodoCommand(command.substring(5));
             } else if (command.startsWith("deadline")) {
                 String[] str1 = command.substring(9).split("/");
-                return new DeadlineCommand(str1[0], convertStringToDate(str1[1].substring(3, 13)));
+                try {
+                    return new DeadlineCommand(str1[0], LocalDate.parse(str1[1].substring(3, 13)));
+                } catch (DateTimeException e) {
+                    throw new DukeException("Please enter a valid date in the form YYYY-MM-DD");
+                }
             } else if (command.startsWith("event")) {
                 String[] str2 = command.substring(6).split("/");
-                return new EventCommand(str2[0], convertStringToDate(str2[1].substring(5, 15)), convertStringToDate(str2[2].substring(3, 13)));
+                try {
+                    return new EventCommand(str2[0], LocalDate.parse(str2[1].substring(5, 15)), LocalDate.parse(str2[2].substring(3, 13)));
+                } catch (DateTimeException e) {
+                    throw new DukeException("Please enter a valid date in the form YYYY-MM-DD");
+                }
             } else {
                 throw new DukeException("Please input a valid command");
             }
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Please input the description");
         }
-
     }
-
-    private static LocalDate convertStringToDate(String date) throws DukeException {
-        try {
-            String[] arr = date.split("-");
-            return LocalDate.of(Integer.parseInt(arr[0]), Integer.parseInt(arr[1]), Integer.parseInt(arr[2]));
-        } catch (DateTimeException e) {
-            throw new DukeException("Please enter a valid date in the form YYYY-MM-DD");
-        }
-    }
-
 }

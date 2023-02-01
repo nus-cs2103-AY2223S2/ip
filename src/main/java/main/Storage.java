@@ -1,4 +1,4 @@
-package Main;
+package main;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -7,10 +7,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import Task.Task;
-import Task.Event;
-import Task.Deadline;
-import Task.Todo;
+import task.Task;
+import task.Event;
+import task.Deadline;
+import task.Todo;
 
 public class Storage {
     private String filePath;

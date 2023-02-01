@@ -1,16 +1,16 @@
-package Command;
+package command;
 
 import java.time.LocalDate;
 
-import Main.TaskList;
-import Main.Storage;
-import Main.DukeException;
-import Main.Ui;
-import Task.Deadline;
-import Task.Task;
+import main.TaskList;
+import main.Storage;
+import main.DukeException;
+import main.Ui;
+import task.Deadline;
+import task.Task;
 
 public class DeadlineCommand extends Command {
-    String description;
+    private String description;
     LocalDate endDate;
 
     public DeadlineCommand(String description, LocalDate endDate) {

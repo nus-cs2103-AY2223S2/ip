@@ -1,6 +1,6 @@
-package Main;
+package main;
 
-import Command.Command;
+import command.Command;
 public class Duke {
 
     private Storage storage;

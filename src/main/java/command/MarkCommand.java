@@ -1,10 +1,10 @@
-package Command;
+package command;
 
-import Main.TaskList;
-import Main.Storage;
-import Main.DukeException;
-import Main.Ui;
-import Task.Task;
+import main.TaskList;
+import main.Storage;
+import main.DukeException;
+import main.Ui;
+import task.Task;
 
 public class MarkCommand extends Command {
     int index;

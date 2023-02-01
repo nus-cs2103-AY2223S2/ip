@@ -1,11 +1,11 @@
-package Command;
+package command;
 
-import Main.TaskList;
-import Main.Storage;
-import Main.DukeException;
-import Main.Ui;
-import Task.Task;
-import Task.Todo;
+import main.TaskList;
+import main.Storage;
+import main.DukeException;
+import main.Ui;
+import task.Task;
+import task.Todo;
 
 public class TodoCommand extends Command{
     String description;
