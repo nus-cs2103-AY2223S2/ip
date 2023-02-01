@@ -57,6 +57,23 @@ public class TaskCommand extends Command {
         }
     }
 
+    @Override
+    public String execute(TaskList taskList) throws DukeException {
+        String content = getCommandContent(command);
+
+        try {
+            Class<?> c = Class.forName("task." + commandName);
+            Constructor<?> cons = c.getConstructor(String.class);
+            Object object = cons.newInstance(content);
+            return handleTask((Task) object, taskList);
+        } catch (ClassNotFoundException | NoSuchMethodException | InstantiationException | IllegalAccessException e) {
+            throw new DukeException(e.toString());
+        } catch (InvocationTargetException e) {
+            Throwable t = e.getTargetException();
+            throw new DukeException(t.toString());
+        }
+    }
+
     /**
      * Handles the task, a subroutine of execute
      * @param task the task to execute
@@ -70,6 +87,15 @@ public class TaskCommand extends Command {
                 task,
                 taskList.size());
         uiPrint(ui, toPrint);
+    }
+
+    public String handleTask(Task task, TaskList taskList) {
+        taskList.add(task);
+        String toPrint = String.format("Got it. I've added this task:\n  %s\n"
+                        + "Now you have %d tasks in the list.",
+                task,
+                taskList.size());
+        return toPrint;
     }
 
     /**

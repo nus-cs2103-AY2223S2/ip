@@ -33,6 +33,8 @@ public abstract class Command {
      */
     public abstract void execute(TaskList taskList, TextUi ui) throws DukeException;
 
+    public abstract String execute(TaskList taskList) throws DukeException;
+
     protected void uiPrint(TextUi ui, String toPrint) {
         if (doesPrint) {
             ui.printStructuredString(toPrint);

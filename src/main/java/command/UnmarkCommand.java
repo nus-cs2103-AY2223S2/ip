@@ -38,4 +38,18 @@ public class UnmarkCommand extends Command {
             throw new NumberFormatDukeException();
         }
     }
+
+    @Override
+    public String execute(TaskList taskList) throws DukeException {
+        try {
+            int idx = Integer.parseInt(command.substring(7)) - 1;
+            Task task = taskList.get(idx);
+            task.unmarkDone();
+            return String.format("OK, I've marked this task as not done yet:\n  %s", task);
+        } catch (IndexOutOfBoundsException e) {
+            throw new IndexOutOfBoundsDukeException();
+        } catch (NumberFormatException e) {
+            throw new NumberFormatDukeException();
+        }
+    }
 }

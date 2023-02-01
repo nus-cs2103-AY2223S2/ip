@@ -28,4 +28,8 @@ public class ExitCommand extends Command {
     public void execute(TaskList taskList, TextUi ui) throws DukeException {
         ui.sayGoodbye();
     }
+
+    public String execute(TaskList taskList) throws DukeException {
+        return "Bye. Hope to see you again soon!";
+    }
 }

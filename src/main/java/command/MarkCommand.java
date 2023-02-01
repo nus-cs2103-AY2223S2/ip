@@ -40,4 +40,18 @@ public class MarkCommand extends Command {
             throw new NumberFormatDukeException();
         }
     }
+
+    @Override
+    public String execute(TaskList taskList) throws DukeException {
+        try {
+            int idx = Integer.parseInt(command.substring(5)) - 1;
+            Task t = taskList.get(idx);
+            t.markDone();
+            return String.format("Nice! I've marked this task as done:\n  %s", t);
+        } catch (IndexOutOfBoundsException e) {
+            throw new IndexOutOfBoundsDukeException();
+        } catch (NumberFormatException e) {
+            throw new NumberFormatDukeException();
+        }
+    }
 }

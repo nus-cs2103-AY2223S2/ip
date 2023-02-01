@@ -24,4 +24,12 @@ public class FindCommand extends TaskCommand {
                 + taskList.getTaskNameContains(stringToSearch).getTaskListString(true);
         uiPrint(ui, taskListString);
     }
+
+    @Override
+    public String execute(TaskList taskList) throws DukeException {
+        String stringToSearch = getCommandContent(command);
+        String taskListString = "Here are the matching tasks in your list:\n"
+                + taskList.getTaskNameContains(stringToSearch).getTaskListString(true);
+        return taskListString;
+    }
 }

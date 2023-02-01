@@ -29,4 +29,10 @@ public class ListCommand extends Command {
                 + taskList.getTaskListString(true);
         uiPrint(ui, taskListString);
     }
+
+    public String execute(TaskList taskList) {
+        String taskListString = "Here are the tasks in your list:\n"
+                + taskList.getTaskListString(true);
+        return taskListString;
+    }
 }
