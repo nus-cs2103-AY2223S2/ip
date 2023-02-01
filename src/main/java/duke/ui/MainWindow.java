@@ -2,6 +2,8 @@ package duke.ui;
 
 import duke.Duke;
 import duke.ui.DialogBox;
+import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -42,14 +44,15 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
-        duke = new Duke();
-
         String userText = userInput.getText();
-        String dukeText = getResponse(userInput.getText());
+        String dukeText = duke.getResponse(userText);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, user),
-                DialogBox.getDukeDialog(userText, user)
+                DialogBox.getDukeDialog(dukeText, user)
         );
+        if (userText.toLowerCase().equals("bye")) {
+            Platform.exit();
+        }
         userInput.clear();
     }
 

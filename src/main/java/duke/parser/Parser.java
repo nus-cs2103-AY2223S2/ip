@@ -4,6 +4,7 @@ import duke.command.AddDeadlineCommand;
 import duke.command.AddEventCommand;
 import duke.command.AddTodoCommand;
 import duke.command.Command;
+import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
@@ -55,6 +56,8 @@ public class Parser {
             return new RemoveCommand(this.request);
         case "find":
             return new FindCommand(this.request);
+        case "bye":
+            return new ExitCommand();
         default:
             throw new UnknownCommandException();
         }

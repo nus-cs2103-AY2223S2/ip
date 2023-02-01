@@ -61,6 +61,15 @@ public class Duke {
         UI.exit();
     }
 
+    public String getResponse(String request) {
+        try {
+            Command com = new Parser(request, tasks).processRequest();
+            String response = com.execute(tasks);
+            return response;
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
+    }
     /**
      * Function to handle the user's request
      */
