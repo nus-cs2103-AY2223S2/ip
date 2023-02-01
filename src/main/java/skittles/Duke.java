@@ -19,14 +19,14 @@ public class Duke {
 
     private static final ListOfStuff lstOfTasks = new ListOfStuff(Data.loadUpInfo());
 
-        //method to greet
-        public void hello() {
-            System.out.print(greetingsFromSkittles);
-        }
+    //method to greet
+    public void hello() {
+        System.out.print(greetingsFromSkittles);
+    }
 
-        public static void adios() {
-            System.out.print(adiosFromSkittles);
-        }
+    public static void adios() {
+        System.out.print(adiosFromSkittles);
+    }
 
     /**
      * Interpret what the user has entered as an input and categorises it into a Command.
@@ -37,13 +37,13 @@ public class Duke {
         String[] typed = userTyped.split(" ", 2);
         return Instruction.scanUserTyped(typed[0]);
     }
-/*
-        public static void addStufftoLst(String xx) {
-            lstOfTasks.add(new Task(xx));
-            numOfThings += 1;
-            System.out.println("added: " + xx);
-        }
-*/
+    /*
+            public static void addStufftoLst(String xx) {
+                lstOfTasks.add(new Task(xx));
+                numOfThings += 1;
+                System.out.println("added: " + xx);
+            }
+    */
 /*
         //basically print out the list. must be numbered.
         public static void displayLst() {
@@ -77,7 +77,6 @@ public class Duke {
             }
             System.out.println(txt);
         }
-
         public static void undoCompleteTask(String xx) {
             int taskNum = Integer.parseInt(xx);
             String txt = "Try again!";
@@ -107,7 +106,7 @@ public class Duke {
         lstOfTasks.add(mustDo);
         Data.addInsideFile(mustDo);
         System.out.println("Got it. I've added this task:\n" + mustDo.toString() +
-                            "\nNow you have " + ListOfStuff.numOfThings() + " tasks in the list.");
+                "\nNow you have " + ListOfStuff.numOfThings() + " tasks in the list.");
     }
 
     /**
@@ -164,7 +163,7 @@ public class Duke {
     }
 
     /* Method that saves Tasks in the hard disk whenever called
-    */
+     */
     public void save() {
         try {
             FileWriter info = new FileWriter("./data/data.txt");
@@ -188,7 +187,6 @@ public class Duke {
             //making sure every task after point of deletion has its rank updated to -1
             /* for (int i = taskToDeleteInt; i < numOfThings; i++) {
                 int updatedRank = lstOfTasks.get(i).getRank() - 1;
-
             }
             System.out.println("Noted. I've removed this task.\n" + deleted.toString()
                     + "\nNow you have " + numOfThings + " tasks in the list.");
@@ -257,17 +255,16 @@ public class Duke {
                     break;
                 default:
                     System.out.println("Try again fat fingers!");
-                }
+            }
             if (repeatStatus) {
                 input = takingInput.nextLine();
                 instruction = inputToInstruction(input);
             }
-            }
-        }
-
-        public static void main(String[] args) {
-            Duke skittles = new Duke();
-            skittles.begin();
         }
     }
 
+    public static void main(String[] args) {
+        Duke skittles = new Duke();
+        skittles.begin();
+    }
+}
