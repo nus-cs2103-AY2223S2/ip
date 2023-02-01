@@ -17,6 +17,16 @@ public class Event extends Task {
     }
 
     @Override
+    public String getTaskType() {
+        return "E";
+    }
+    
+    @Override 
+    public String getTimeline() {
+        return this.from.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + "," + this.to.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    }
+
+    @Override
     public String toString() {
         return String.format("[E]%s (from: %s to: %s)", super.toString(), this.from.format(DateTimeFormatter.ofPattern("MMM dd yyyy")), this.to.format(DateTimeFormatter.ofPattern("MMM dd yyyy")));
     }
