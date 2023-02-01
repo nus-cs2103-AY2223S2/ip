@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 public class ParserTest {
 
     @Test
-    public void parser_UnknownCommandException_thrown() throws DukeException {
+    public void parser_randomCommand_exceptionThrown() {
         try {
             assertEquals(new AddToDoCommand(""),
                     new Parser().parse("This is a test to bring about a better work", 1));

@@ -5,7 +5,7 @@ import java.util.Objects;
 
 public class ToDo extends Task {
 
-    private static final String typeToString = "T";
+    private static final String TYPE_TO_STRING = "T";
 
     public ToDo(String task) {
         super(task);
@@ -21,13 +21,13 @@ public class ToDo extends Task {
     @Override
     public String status() {
         String status = this.completed ? "[X] " : "[ ] ";
-        return "[" + typeToString + "]" + status + " " + this.details;
+        return "[" + TYPE_TO_STRING + "]" + status + " " + this.details;
     }
 
     @Override
     public ArrayList<String> data() {
         ArrayList<String> data = new ArrayList<>();
-        data.add(typeToString);
+        data.add(TYPE_TO_STRING);
         data.add(this.completed ? "X" : " ");
         data.add(this.details);
         return data;

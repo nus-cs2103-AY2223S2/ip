@@ -8,23 +8,23 @@ import java.util.ArrayList;
 
 public class TaskList {
 
-    ArrayList<Task> taskList;
+    ArrayList<Task> tasks;
 
     public TaskList(ArrayList<Task> tasks) {
-        this.taskList = tasks;
+        this.tasks = tasks;
     }
 
     public TaskList() {
-        this.taskList = new ArrayList<>();
+        this.tasks = new ArrayList<>();
     }
 
     public int length() {
-        return this.taskList.size();
+        return this.tasks.size();
     }
 
     public Task getTask(int taskNumber) throws TaskNumberNotFoundException {
         try {
-            return this.taskList.get(taskNumber - 1);
+            return this.tasks.get(taskNumber - 1);
         } catch (IndexOutOfBoundsException e) {
             throw new TaskNumberNotFoundException();
         }
@@ -32,18 +32,18 @@ public class TaskList {
 
     public void deleteTask(int taskNumber) throws TaskNumberNotFoundException {
         try {
-            this.taskList.remove(taskNumber - 1);
+            this.tasks.remove(taskNumber - 1);
         } catch (IndexOutOfBoundsException e) {
             throw new TaskNumberNotFoundException();
         }
     }
 
     public void addTask(Task task) {
-        this.taskList.add(task);
+        this.tasks.add(task);
     }
 
-    public ArrayList<Task> getTaskList() {
-        return this.taskList;
+    public ArrayList<Task> getTasks() {
+        return this.tasks;
     }
 
 }

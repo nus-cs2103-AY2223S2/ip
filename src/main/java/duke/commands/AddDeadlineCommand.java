@@ -24,20 +24,20 @@ public class AddDeadlineCommand extends Command {
     public void execute(TaskList taskList, Ui ui, Database database) throws IncludeByException, BlankFieldDeadlineException, InvalidDateException {
         // Extract deadline date and duke.task item.
         String[] lines = this.commandBody.split(" ");
-        boolean by = false;
+        boolean hasBy = false;
         StringBuilder task = new StringBuilder();
         StringBuilder deadline = new StringBuilder();
         for (String line : lines) {
             if (Objects.equals(line, "/by")) {
-                by = true;
-            } else if (!by) {
+                hasBy = true;
+            } else if (!hasBy) {
                 task.append(" ").append(line);
             } else {
                 deadline.append(" ").append(line);
             }
         }
 
-        if (!by) {
+        if (!hasBy) {
             throw new IncludeByException();
         }
         if (task.toString().trim().isEmpty() || deadline.toString().trim().isEmpty()) {
