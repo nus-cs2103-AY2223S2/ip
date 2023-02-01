@@ -25,7 +25,7 @@ public class Duke {
 
     /**
      * Constructor to instantiate duke.Duke bot.
-     * @param filePath path of local duke.storage file.
+     * @param filePath path of local storage file.
      */
     public Duke(String filePath) {
         TaskList tasks = new TaskList();

@@ -2,6 +2,8 @@ package duke.ui;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -11,32 +13,37 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
+import java.io.IOException;
+
 /**
  * Dialog Box to show the user's conversation with Duke Bot
  */
 public class DialogBox extends HBox {
+    @FXML
     private Label text;
-    private Image img;
+    @FXML
+    private Circle icon;
 
     /**
      * Constructor class to instantiate new Dialog Box
-     * @param text Response to be printed
+     * @param message Response to be printed
      * @param img image of the user or duke bot
      */
-    public DialogBox(Label text, Image img) {
-        this.text = text;
-        img = img;
-
-        Circle imgShape = new Circle(50);
-        ImagePattern imgPattern = new ImagePattern(img);
-        imgShape.setFill(imgPattern);
-        this.setPadding(new Insets(20, 0, 20, 0));
-        this.setAlignment(Pos.TOP_RIGHT);
-        this.getChildren().addAll(text, imgShape);
+    public DialogBox(String message, Image img) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+            fxmlLoader.setController(this);
+            fxmlLoader.setRoot(this);
+            fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        text.setText(message);
+        icon.setFill(new ImagePattern(img));
     }
 
     /**
-     * Flips the dialog box such that the ImageView is on the left and text on the right.
+     * Flips the dialog box for Duke's response
      */
     private void flip() {
         this.setAlignment(Pos.TOP_LEFT);
@@ -45,13 +52,25 @@ public class DialogBox extends HBox {
         this.getChildren().setAll(tmp);
     }
 
-    public static DialogBox getUserDialog(Label l, Image img) {
-        return new DialogBox(l, img);
+    /**
+     * Display user dialog on GUI
+     * @param text user's message
+     * @param img user's image
+     * @return dialog box node to display message
+     */
+    public static DialogBox getUserDialog(String text, Image img) {
+        return new DialogBox("You: " + text, img);
     }
 
-    public static DialogBox getDukeDialog(Label l, Image img) {
-        var db = new DialogBox(l, img);
-        db.flip();
-        return db;
+    /**
+     * Display Duke's response
+     * @param text duke's message
+     * @param img duke's image
+     * @return dialog box to display duke's message
+     */
+    public static DialogBox getDukeDialog(String text, Image img) {
+        DialogBox dialogBox =  new DialogBox("Duke: " + text, img);
+        dialogBox.flip();
+        return dialogBox;
     }
 }

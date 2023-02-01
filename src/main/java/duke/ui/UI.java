@@ -55,4 +55,8 @@ public class UI {
         String outro = "bella ciao";
         printRes(outro);
     }
+
+    public static String showWelcomeMsg() {
+        return "Hola! Soy Dora";
+    }
 }
