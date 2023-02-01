@@ -34,28 +34,24 @@ public class Munch {
      * Continues the program while taking in commands from the user.
      * Exits the program when user types in "bye".
      * Prints a goodbye message and close thr program.
-     * @param args
-     * @throws MunchException
+     * @param args String array input
      */
-    public static void main(String[] args) throws MunchException {
+    public static void main(String[] args) {
 
         ui.welcomeMessage();
         String filePath = "src/main/java/data/SavedTaskList.txt";
         new Munch(filePath);
-
         Boolean exit = true;
         while (exit) {
             try {
                 String word = ui.readCommand();
                 String[] words = word.split(" ");
-
                 if (word.equals("bye")) {
                     ui.exitMessage();
                     exit = false;
                 } else {
                     TaskList.run(tasks, word, words);
                 }
-
                 Storage.save(tasks, filePath);
             } catch (IncompleteInputException | InvalidInputException e) {
                 System.out.println(e.getMessage());

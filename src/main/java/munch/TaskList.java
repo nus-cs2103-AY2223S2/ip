@@ -22,21 +22,16 @@ public class TaskList {
             }
         } else if (words[0].equals("mark") || words[0].equals("unmark")) {
             int i = Integer.parseInt(words[1]) - 1;
-            tasks.get(i).wording(words[0]);
-
+            tasks.get(i).marking(words[0]);
         } else if (words[0].equals("delete")) {
             int i = Integer.parseInt(words[1]) - 1;
             TaskList.deleteTask(tasks, i);
-
         } else if (words[0].equals("todo")) {
             TaskList.addTodoTask(tasks, word);
-
         } else if (words[0].equals("deadline")) {
             TaskList.addDeadlineTask(tasks, word);
-
         } else if (words[0].equals("event")) {
             TaskList.addEventTask(tasks, word);
-
         } else {
             throw new InvalidInputException();
         }
@@ -90,14 +85,13 @@ public class TaskList {
             } catch (DateTimeParseException e) {
                 Ui.wrongDateFormatMessage();
             }
-
         } else {
             throw new IncompleteInputException();
         }
     }
 
     public static void addEventTask(ArrayList<Task> tasks, String word) throws IncompleteInputException {
-        if (word.contains("event") && word.contains("/from") && word.contains("/to")){
+        if (word.contains("event") && word.contains("/from") && word.contains("/to")) {
             String separator1 = "event";
             String separator2 = "/from";
             String separator3 = "/to";
@@ -118,7 +112,6 @@ public class TaskList {
             } catch (DateTimeParseException e) {
                 Ui.wrongDateFormatMessage();
             }
-
         } else {
             throw new IncompleteInputException();
         }

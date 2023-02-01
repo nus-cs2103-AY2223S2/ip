@@ -44,7 +44,7 @@ public class Task {
      * Changes the task object's value of isDone according to the string input.
      * @param str The String word to be read from.
      */
-    public void wording(String str) {
+    public void marking(String str) {
         // converting string to integer
         if (str.equals("mark")) {
             this.markAsDone();
