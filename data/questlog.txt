@@ -1,6 +1,5 @@
-[T] [_] hi
-[D] [X] hii by: 1
-[E] [X] hii from: 1 to: 2
-[T] [X] hiii
-[T] [_] hiiii
-[T] [_] hiiiii
+1: [T] [_] hii
+2: [T] [_] iiiii
+3: [T] [_] hiiii
+4: [D] [_] hiiiiiiiii by: 02 Feb 2002 12:34PM
+5: [D] [_] ddddddd by: 02 Feb 2002 12:34PM

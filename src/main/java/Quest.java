@@ -16,19 +16,11 @@ public class Quest {
     }
 
     public void markComplete() {
-        if (isCompleted) {
-            // System.out.println("Quest is already complete!\n" + toString());
-        } else {
-            isCompleted = true;
-        }
+        isCompleted = true;
     }
 
     public void markIncomplete() {
-        if (isCompleted) {
-            isCompleted = false;
-        } else {
-            // System.out.println("Quest is already incomplete...\n" + toString());
-        }
+        isCompleted = false;
     }
 
     @Override
