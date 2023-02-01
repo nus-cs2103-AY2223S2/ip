@@ -1,8 +1,8 @@
 package duke.task;
 
-import duke.exception.DukeException;
-
 import java.util.ArrayList;
+
+import duke.exception.DukeException;
 
 /**
  * Represents the list of task in the current session.
@@ -55,7 +55,6 @@ public class TaskList {
      * Marks a task as done given the task number.
      *
      * @param taskNum Task number of task to mark.
-     * @return Success message.
      * @throws DukeException If the task number is invalid.
      */
     public void markTask(int taskNum) throws DukeException {
@@ -69,7 +68,6 @@ public class TaskList {
      * Marks a task as undone given the task number.
      *
      * @param taskNum Task number of task to mark.
-     * @return Success message.
      * @throws DukeException If the task number is invalid.
      */
     public void unmarkTask(int taskNum) throws DukeException {

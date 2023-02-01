@@ -1,8 +1,8 @@
 package duke.ui;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
+
+import duke.task.Task;
 
 /**
  * A UI class handling all user interaction.
@@ -39,11 +39,14 @@ public class UI {
      * Prints a task message.
      */
     public void printTaskMessage(String message, Task task, int numOfTasks) {
-        printMessage(message + "\n" +
-                indent + indent + task.toString() + "\n" +
-                indent + "Now you have " + numOfTasks + " task(s) in the list.");
+        printMessage(message + "\n"
+                + indent + indent + task.toString() + "\n"
+                + indent + "Now you have " + numOfTasks + " task(s) in the list.");
     }
 
+    /**
+     * Prints the result of a find command.
+     */
     public void printFindResult(ArrayList<Task> tasks) {
         if (tasks.isEmpty()) {
             printMessage("No corresponding task found!");

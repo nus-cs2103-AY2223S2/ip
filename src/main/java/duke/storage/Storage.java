@@ -1,12 +1,17 @@
 package duke.storage;
 
-import duke.exception.DukeException;
-import duke.task.*;
 
-import java.util.Scanner;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Scanner;
+
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
 
 /**
  * Storage handles all the interaction with the memory.
@@ -67,18 +72,19 @@ public class Storage {
             String[] taskData = data.split("\\$\\$\\$");
 
             switch (taskData[0]) {
-                case "T":
-                    taskList.getTasks().add(new Todo(taskData[1]));
-                    break;
-                case "D":
-                    taskList.getTasks().add(new Deadline(taskData[1], taskData[3]));
-                    break;
-                case "E":
-                    taskList.getTasks().add(new Event(taskData[1], taskData[3], taskData[4]));
-                    break;
-                default:
-                    throw new DukeException("Error loading tasks from file!");
+            case "T":
+                taskList.getTasks().add(new Todo(taskData[1]));
+                break;
+            case "D":
+                taskList.getTasks().add(new Deadline(taskData[1], taskData[3]));
+                break;
+            case "E":
+                taskList.getTasks().add(new Event(taskData[1], taskData[3], taskData[4]));
+                break;
+            default:
+                throw new DukeException("Error loading tasks from file!");
             }
+
             if (taskData[2].equals("T")) {
                 taskList.getTasks().get(taskList.getTasks().size() - 1).mark();
             }

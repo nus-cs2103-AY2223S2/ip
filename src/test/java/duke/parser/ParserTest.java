@@ -1,15 +1,17 @@
 package duke.parser;
 
-import duke.exception.DukeException;
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
+
+import duke.exception.DukeException;
 
 public class ParserTest {
     private Parser parser = new Parser();
 
     @Test
-    public void getTaskNum_validTaskNum_taskNumReturned(){
+    public void getTaskNum_validTaskNum_taskNumReturned() {
         String[] command = new String[] { "mark", "5" };
         try {
             assertEquals(parser.getTaskNum(command), 4);
@@ -19,7 +21,7 @@ public class ParserTest {
     }
 
     @Test
-    public void getTaskNum_noTaskNum_exceptionThrown(){
+    public void getTaskNum_noTaskNum_exceptionThrown() {
         String[] command = new String[] { "mark" };
         try {
             parser.getTaskNum(command);
@@ -29,7 +31,7 @@ public class ParserTest {
     }
 
     @Test
-    public void getTaskToAdd_validDeadline_deadlineObjectReturned(){
+    public void getTaskToAdd_validDeadline_deadlineObjectReturned() {
         String[] command = new String[] { "deadline", "project 2 /by 2023-01-03 12:00" };
         try {
             assertEquals(parser.getTaskToAdd(command).toString(),
@@ -40,7 +42,7 @@ public class ParserTest {
     }
 
     @Test
-    public void getTaskToAdd_invalidEvent_exceptionThrown(){
+    public void getTaskToAdd_invalidEvent_exceptionThrown() {
         String[] command = new String[] { "event", "meeting /by 2023-01-03 12:00" };
         try {
             parser.getTaskToAdd(command);
