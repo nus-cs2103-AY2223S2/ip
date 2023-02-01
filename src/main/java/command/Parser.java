@@ -55,6 +55,9 @@ public class Parser {
             case "delete":
                 processDeleteOperation(inputAnalyzed);
                 break;
+            case "find":
+                processFindOperation(input);
+                break;
             default:
                 ui.unknownCommand();
                 //Fallthrough
@@ -118,6 +121,7 @@ public class Parser {
         ui.showMarkSuccess(list.get(index - 1));
     }
 
+
     /**
      * Processes user input when the starting command is unmark, marking the task at the index provided as not
      * completed.
@@ -126,6 +130,7 @@ public class Parser {
      * @throws IndexOutOfBoundsException for when the user inputs an invalid index
      * @throws NumberFormatException for when the user doesn't input an integer in their input
      */
+
     private void processUnmarkOperation(String[] inputAnalyzed) throws InvalidInputException, IndexOutOfBoundsException,
             NumberFormatException {
         if (inputAnalyzed.length != 2) {
@@ -137,6 +142,7 @@ public class Parser {
         ui.showUnmarkSuccess(list.get(index - 1));
     }
 
+
     /**
      * Processes user input when the starting command is delete, deleting the task at the provided index.
      * @param inputAnalyzed the split-up version of the user's input
@@ -144,6 +150,7 @@ public class Parser {
      * @throws IndexOutOfBoundsException for when the user inputs an invalid index
      * @throws NumberFormatException for when the user doesn't input an integer in their input
      */
+
     private void processDeleteOperation(String[] inputAnalyzed) throws InvalidInputException, IndexOutOfBoundsException,
             NumberFormatException {
         if (inputAnalyzed.length != 2) {
@@ -156,11 +163,13 @@ public class Parser {
         ui.showDeleteSuccess(temp, list);
     }
 
+
     /**
      * Processes user input when the starting command is deadline, adding a new deadline task to the TaskList.
      * @param input the user input
      * @throws InvalidInputException for when the user inputs the deadline command in the incorrect format
      */
+
     private void processDeadlineOperation(String input) throws IndexOutOfBoundsException, InvalidInputException {
         String[] deadlineAnalyze = input.split("/by");
         String date;
@@ -180,11 +189,13 @@ public class Parser {
         ui.showAddTaskSuccess(newDead, list);
     }
 
+
     /**
      * Processes user input when the starting command is to-do, adding a new to-do task to the TaskList.
      * @param input the user input
      * @throws InvalidInputException for when the user inputs the to-do command in the incorrect format
      */
+
     private void processTodoOperation(String input) throws InvalidInputException {
         //Possible Errors:
         //No descriptor
@@ -202,11 +213,13 @@ public class Parser {
         ui.showAddTaskSuccess(newTodo, list);
     }
 
+
     /**
      * Processes user input when the starting command is event, adding a new event task to the TaskList.
      * @param input the user input
      * @throws InvalidInputException for when the user inputs the event command in the incorrect format
      */
+
     private void processEventOperation(String input) throws IndexOutOfBoundsException, InvalidInputException {
         //Analyze
         String[] eventAnalyze;
@@ -230,5 +243,28 @@ public class Parser {
         list.add(newEvent);
         //command.Ui Section
         ui.showAddTaskSuccess(newEvent, list);
+    }
+
+    /**
+     * Returns a list of all the tasks in the TaskList containing the provided keyword.
+     * @param input the user's input
+     * @throws InvalidInputException when the user does not input anything for a keyword
+     */
+    private void processFindOperation(String input) throws InvalidInputException {
+        String[] inputAnalyzed = input.split("find ");
+        String keyword;
+        try {
+            keyword = inputAnalyzed[1];
+        } catch (IndexOutOfBoundsException e) {
+            throw new InvalidInputException("Missing keyword.");
+        }
+
+        TaskList foundItems = new TaskList();
+        for (Task task : list) {
+            if (task.toString().contains(keyword)) {
+                foundItems.add(task);
+            }
+        }
+        ui.showFindListState(foundItems,keyword);
     }
 }

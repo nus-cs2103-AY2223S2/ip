@@ -168,4 +168,13 @@ public class Ui {
         System.out.println("You have " + list.size() + " tasks left. Anything else?");
     }
 
+    public void showFindListState(TaskList list, String keyword) {
+        dashedLine();
+        System.out.println("Righto, here are the tasks that contain the word \""
+                                                                + keyword + "\":");
+        for (int i = 1; i <= list.size(); i++){
+            System.out.println(i + ". " + list.get(i-1));
+        }
+        dashedLine();
+    }
 }
