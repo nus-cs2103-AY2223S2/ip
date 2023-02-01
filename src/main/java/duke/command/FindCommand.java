@@ -1,19 +1,28 @@
 package duke.command;
 
 import duke.exception.DukeException;
-import duke.task.Deadline;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.util.Ui;
 
-import java.time.format.DateTimeParseException;
-
+/**
+ * Executable command to find task based on given keyword.
+ *
+ * @author Guo-KeCheng
+ */
 public class FindCommand extends Command {
 
     private final String keyword;
     private final TaskList taskList;
     private final Ui ui;
 
+    /**
+     * FindCommand constructor
+     *
+     * @param command Entire line of user input
+     * @param taskList Existing taskList
+     * @param ui Shared Ui object
+     */
     public FindCommand(String command, TaskList taskList, Ui ui) throws DukeException {
         this.keyword = getKeyword(command);
         this.taskList = taskList;

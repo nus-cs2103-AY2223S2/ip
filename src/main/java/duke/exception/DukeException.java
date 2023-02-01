@@ -1,6 +1,11 @@
 package duke.exception;
 
-public class DukeException extends Exception{
+/**
+ * Custom exception for errors that occur during execution
+ *
+ * @author Guo-KeCheng
+ */
+public class DukeException extends Exception {
     private String message;
 
     /**

@@ -1,7 +1,12 @@
 package duke.command;
 
-import duke.exception.*;
+import duke.exception.DukeException;
 
+/**
+ * Executable commands based on user input
+ *
+ * @author Guo-KeCheng
+ */
 public abstract class Command {
 
     /*

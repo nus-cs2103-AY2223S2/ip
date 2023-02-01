@@ -1,12 +1,18 @@
 package duke.util;
 
-import duke.exception.DukeException;
-import duke.task.*;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import duke.exception.DukeException;
+import duke.task.Task;
+import duke.task.TaskList;
+
+/**
+ * Ui handles everything that is shown to user
+ *
+ * @author Guo-KeCheng
+ */
 public class Ui {
     private static final String line = "    ----------------------------------------";
     private static final String logo = "____    ____  __    __   __    __  \n"

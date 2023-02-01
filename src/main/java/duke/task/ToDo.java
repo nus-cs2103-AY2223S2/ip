@@ -1,5 +1,11 @@
 package duke.task;
-public class ToDo extends Task{
+
+/**
+ * ToDo: subclass of Task
+ *
+ * author Guo-KeCheng
+ */
+public class ToDo extends Task {
 
     /**
      * ToDo class constructor
