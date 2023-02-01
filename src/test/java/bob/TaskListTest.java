@@ -17,7 +17,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void mark_error_throwsException() {
+    public void mark_invalidIndex_throwException() {
         int invalidIndex = 2;
         BobException e = assertThrows(BobException.class, () -> tasks.mark(invalidIndex));
         assertEquals("Index given should be in range [1-1]", e.getMessage());
