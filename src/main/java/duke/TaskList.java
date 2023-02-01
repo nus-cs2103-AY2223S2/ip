@@ -16,9 +16,6 @@ public class TaskList {
     /** Array list of tasks */
     private ArrayList<Task> listOfTasks;
 
-    /** Deals with interactions with the user */
-    private final Ui ui = new Ui();
-
     /**
      * Initializes the list of tasks.
      *
@@ -36,30 +33,33 @@ public class TaskList {
      * Saves the task to the list of tasks
      * and prints it.
      *
+     * @param ui User interface to interact with the user.
      * @param description Description of the todo task.
      */
-    public void saveTask(String description) {
+    public void saveTask(Ui ui, String description) {
         Task task = new Todo(description);
         listOfTasks.add(task);
         ui.printSaveTask(task, listOfTasks);
     }
 
     /**
+     * @param ui User interface to interact with the user.
      * @param description Description of the deadline task.
      * @param by Deadline of the task.
      */
-    public void saveTask(String description, LocalDateTime by) {
+    public void saveTask(Ui ui, String description, LocalDateTime by) {
         Task task = new Deadline(description, by);
         listOfTasks.add(task);
         ui.printSaveTask(task, listOfTasks);
     }
 
     /**
+     * @param ui User interface to interact with the user.
      * @param description Description of the event task.
      * @param from Start date time of the event.
      * @param to End date time of the event.
      */
-    public void saveTask(String description, LocalDateTime from, LocalDateTime to) {
+    public void saveTask(Ui ui, String description, LocalDateTime from, LocalDateTime to) {
         Task task = new Event(description, from, to);
         listOfTasks.add(task);
         ui.printSaveTask(task, listOfTasks);
@@ -68,56 +68,62 @@ public class TaskList {
     /**
      * Marks the task as done and prints it.
      *
+     * @param ui User interface to interact with the user.
      * @param index Index of the array list of tasks.
-     * @throws DukeException If index of the list of tasks is out of bounds.
      */
-    public void markTask(int index) throws DukeException {
+    public void markTask(Ui ui, int index) {
         try {
             Task task = listOfTasks.get(index - 1);
             task.markAsDone();
             ui.printMarkTask(task);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException(index);
+            ui.showIndexError(index);
         }
     }
 
     /**
      * Marks the task as undone and prints it.
      *
+     * @param ui User interface to interact with the user.
      * @param index Index of the array list of tasks.
-     * @throws DukeException If index of the list of tasks is out of bounds.
      */
-    public void unmarkTask(int index) throws DukeException {
+    public void unmarkTask(Ui ui, int index) {
         try {
             Task task = listOfTasks.get(index - 1);
             task.markAsUndone();
             ui.printUnmarkTask(task);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException(index);
+            ui.showIndexError(index);
         }
     }
 
     /**
      * Deletes the task and prints it.
      *
+     * @param ui User interface to interact with the user.
      * @param index Index of the array list of tasks.
-     * @throws DukeException If index of the list of tasks is out of bounds.
      */
-    public void deleteTask(int index) throws DukeException {
+    public void deleteTask(Ui ui, int index) {
         try {
             Task task = listOfTasks.get(index - 1);
             listOfTasks.remove(index - 1);
             ui.printDeleteTask(task, listOfTasks);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException(index);
+            ui.showIndexError(index);
         }
     }
 
-    public void findTask(String description) {
+    /**
+     * Finds and prints the tasks with the matching keyword.
+     *
+     * @param ui User interface to interact with the user.
+     * @param keyword Keyword of the task.
+     */
+    public void findTask(Ui ui, String keyword) {
         ArrayList<Task> matchedListOfTasks = new ArrayList<>();
         for (int i = 0; i < listOfTasks.size(); i++) {
             Task task = listOfTasks.get(i);
-            if (task.toString().indexOf(description) > 0) {
+            if (task.toString().indexOf(keyword) > 0) {
                 matchedListOfTasks.add(task);
             }
         }

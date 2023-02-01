@@ -22,10 +22,11 @@ public class TaskListTest {
         Task task2 = new Deadline("assignment", by);
         Task task3 = new Event("project meeting", from, to);
         TaskList tasks = new TaskList();
+        Ui ui = new Ui();
 
-        tasks.saveTask("return book");
-        tasks.saveTask("assignment", by);
-        tasks.saveTask("project meeting", from, to);
+        tasks.saveTask(ui, "return book");
+        tasks.saveTask(ui, "assignment", by);
+        tasks.saveTask(ui, "project meeting", from, to);
 
         assertEquals(task1.toString(), tasks.getListOfTasks().get(0).toString());
         assertEquals(task2.toString(), tasks.getListOfTasks().get(1).toString());
@@ -39,8 +40,9 @@ public class TaskListTest {
         LocalDateTime to = LocalDateTime.parse("19/02/2023 1200", format);
         Task task = new Event("project meeting", from, to);
         TaskList tasks = new TaskList();
-        tasks.saveTask("project meeting", from, to);
-        tasks.markTask(1);
+        Ui ui = new Ui();
+        tasks.saveTask(ui, "project meeting", from, to);
+        tasks.markTask(ui, 1);
 
         assertEquals(tasks.getListOfTasks().get(0).getStatusIcon(), "X");
         task.markAsDone();

@@ -4,6 +4,7 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -70,7 +71,7 @@ public class Storage {
      * Returns the tasks from the task file.
      *
      * @return Array list of tasks.
-     * @throws DukeException If the file could not be found or has incorrect date time format.
+     * @throws DukeException If the file was not found or has incorrect date time format or has unrecognized tasks.
      */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> listOfTasks = new ArrayList<>(100);
@@ -84,29 +85,37 @@ public class Storage {
             while (s.hasNext()) {
                 str = s.nextLine();
                 taskInfo = str.substring(8);
-                if (str.startsWith("T")) {
+                switch (str.charAt(0)) {
+                case 'T':
                     description = taskInfo;
                     task = new Todo(description);
-                } else if (str.startsWith("D")) {
+                    break;
+                case 'D':
                     int byIdx = taskInfo.indexOf("|");
                     description = taskInfo.substring(0, byIdx - 1);
                     LocalDateTime by = LocalDateTime.parse(taskInfo.substring(byIdx + 2), format);
                     task = new Deadline(description, by);
-                } else {
+                    break;
+                case 'E':
                     int fromIdx = taskInfo.indexOf("|");
                     int toIdx = taskInfo.indexOf("-");
                     description = taskInfo.substring(0, fromIdx - 1);
                     LocalDateTime from = LocalDateTime.parse(taskInfo.substring(fromIdx + 2, toIdx - 1), format);
                     LocalDateTime to = LocalDateTime.parse(taskInfo.substring(toIdx + 2), format);
                     task = new Event(description, from, to);
+                    break;
+                default:
+                    throw new DukeException(str);
                 }
                 if (str.charAt(4) == '1') {
                     task.markAsDone();
                 }
                 listOfTasks.add(task);
             }
-        } catch (FileNotFoundException | DateTimeParseException e) {
-            throw new DukeException();
+        } catch (FileNotFoundException e) {
+            throw new DukeException(e);
+        } catch (DateTimeParseException e) {
+            throw new DukeException(e);
         }
         return listOfTasks;
     }

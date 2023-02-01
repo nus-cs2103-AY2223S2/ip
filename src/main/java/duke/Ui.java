@@ -1,6 +1,7 @@
 package duke;
 
 import duke.task.Task;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -56,6 +57,11 @@ public class Ui {
         printLine();
     }
 
+    /**
+     * Prints the list of matching tasks.
+     *
+     * @param listOfTasks Array list of matching tasks.
+     */
     public void printMatchingTasks(ArrayList<Task> listOfTasks) {
         Task task;
         printLine();
@@ -135,9 +141,10 @@ public class Ui {
      * not be loaded.
      */
     public void showLoadingError() {
-        System.out.print("Could not load data from file either due to ");
-        System.out.println("incorrect date time format or the file could not be found.");
-        System.out.println("Format of the date should be (MMM dd yyyy h:mm a).");
+        System.out.println("Creating new file to store tasks due to the above mentioned loading error ...");
+        System.out.print("WARNING!!! Adding a new task will reset the contents of ");
+        System.out.println("the original file (if it exists).");
+        System.out.println("Exit the program if you do not wish to continue (enter 'bye')");
     }
 
     /**
@@ -146,5 +153,33 @@ public class Ui {
      */
     public void showFileError() {
         System.out.println("Error occurred when creating the folder/file.");
+    }
+
+    /**
+     * Prints error message for unknown command.
+     */
+    public void showUnknownError() {
+        System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+    }
+
+    /**
+     * Prints error message for empty task description.
+     */
+    public void showDescriptionError(String task) {
+        System.out.println("☹ OOPS!!! The description of " + task + " task cannot be empty.");
+    }
+
+    /**
+     * Prints error message for out of bounds index.
+     */
+    public void showIndexError(int index) {
+        System.out.println("☹ OOPS!!! The index " + index + " for the list of tasks is out of bounds.");
+    }
+
+    /**
+     * Prints error message for incorrect date time format.
+     */
+    public void showDateTimeError() {
+        System.out.println("☹ OOPS!!! Incorrect date time format. Use dd/mm/yyyy HHmm instead.");
     }
 }

@@ -11,13 +11,13 @@ import java.nio.file.Paths;
  */
 public class Duke {
     /** Deals with loading tasks from the file and saving tasks in the file */
-    private Storage storage;
+    private final Storage storage;
 
     /** Contains the task list */
     private TaskList tasks;
 
     /** Deals with interactions with the user */
-    private Ui ui;
+    private final Ui ui;
 
     /**
      * Initializes the Ui, Storage and TaskList classes.
