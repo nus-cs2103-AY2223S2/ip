@@ -6,6 +6,6 @@ package exception;
 public class NonsenseInputException extends Exception {
 
     public NonsenseInputException() {
-        super("User input makes no sense.");
+        super("I do not know how to read this. SORRRYY </3");
     }
 }

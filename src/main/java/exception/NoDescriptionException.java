@@ -6,6 +6,6 @@ package exception;
 public class NoDescriptionException extends Exception {
 
     public NoDescriptionException() {
-        super("Need a description for your task.");
+        super("I need to know what is the description of your task, bestie!");
     }
 }
