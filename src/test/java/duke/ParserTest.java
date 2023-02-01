@@ -3,17 +3,19 @@ package duke;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
-class ParserTest {
+public class ParserTest {
+
 
     @Test
-    void testGetDate() {
-        String[] testString = { "event", "test", "/by", "2019-10-15" };
-
-        LocalDate localDate = Parser.getDate(testString);
-
-        assertEquals(localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")), "Oct 15 2019");
+    void parseTest() {
+        Parser parser = new Parser();
+        String output;
+        try{
+            output = parser.parseInput("deadline hello /by 2019-10-15", new TaskList());
+        }catch(DukeException e){
+            output = e.getMessage();
+        }
+        assertEquals(output, " Got it. I've added this task:\n  [D][ ] hello by Oct 15 2019\nNow you have 1 tasks on the list.\n");
     }
 }

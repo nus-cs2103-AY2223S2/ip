@@ -6,14 +6,14 @@ import java.util.ArrayList;
  * Represents the list of tasks
  */
 public class TaskList {
-    private ArrayList<Task> toDoList;
+    private ArrayList<Task> tasks;
 
     public TaskList() {
-        this.toDoList = new ArrayList<Task>();
+        this.tasks = new ArrayList<Task>();
     }
 
     public TaskList(ArrayList<Task> toDoList) {
-        this.toDoList = toDoList;
+        this.tasks = toDoList;
     }
 
     /**
@@ -22,7 +22,7 @@ public class TaskList {
      * @return size of TaskList
      */
     public int size() {
-        return this.toDoList.size();
+        return this.tasks.size();
     }
 
     /**
@@ -32,7 +32,7 @@ public class TaskList {
      * @return Task at the index
      */
     public Task get(int index) {
-        return this.toDoList.get(index);
+        return this.tasks.get(index);
     }
 
     /**
@@ -41,7 +41,7 @@ public class TaskList {
      * @param task task to add to TaskList
      */
     public void add(Task task) {
-        this.toDoList.add(task);
+        this.tasks.add(task);
     }
 
     /**
@@ -50,15 +50,15 @@ public class TaskList {
      * @param index index of task to remove
      */
     public void remove(int index) {
-        this.toDoList.remove(index);
+        this.tasks.remove(index);
     }
 
     public ArrayList<Task> search(String searchString) {
         ArrayList<Task> foundTasks = new ArrayList<Task>();
         
-        for (int i = 0; i < this.toDoList.size(); i++) {
-            if(toDoList.get(i).contains(searchString)){
-                foundTasks.add(toDoList.get(i));
+        for (int i = 0; i < this.tasks.size(); i++) {
+            if(tasks.get(i).contains(searchString)){
+                foundTasks.add(tasks.get(i));
             }
         }
 
