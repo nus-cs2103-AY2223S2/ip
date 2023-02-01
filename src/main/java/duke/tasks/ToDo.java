@@ -1,6 +1,5 @@
 package duke.tasks;
 
-import duke.exceptions.InvalidDateException;
 
 /**
  * ToDo is a task without a specified date/time.

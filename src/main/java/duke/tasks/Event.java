@@ -1,21 +1,22 @@
 package duke.tasks;
 
-import duke.exceptions.InvalidDateException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.exceptions.InvalidDateException;
+
+
 
 /**
  * Event is a task that happens from a start date/time to an end period.
  */
 public class Event extends Task {
 
-    private final LocalDate start;
-    private final LocalDate end;
-
     private static final DateTimeFormatter formatter =
             DateTimeFormatter.ofPattern("MMM dd yyyy");
+    private final LocalDate start;
+    private final LocalDate end;
 
     /**
      * Constructor for Event.
@@ -44,8 +45,8 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + start.format(formatter) +
-                " to: " + end.format(formatter) + ")";
+        return "[E]" + super.toString() + " (from: " + start.format(formatter)
+                + " to: " + end.format(formatter) + ")";
     }
 
 

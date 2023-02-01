@@ -1,17 +1,24 @@
 package duke;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.io.File;
+
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+
 import duke.commands.ByeCommand;
-import duke.exceptions.*;
+import duke.exceptions.EmptyCommandException;
+import duke.exceptions.InvalidCmdValueException;
+import duke.exceptions.InvalidDateException;
+import duke.exceptions.InvalidTaskTypeException;
+import duke.exceptions.InvalidTimeException;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 import duke.utils.Parser;
 import duke.utils.Storage;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
 
-import java.io.File;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ParserTest {
 

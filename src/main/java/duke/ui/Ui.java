@@ -1,8 +1,9 @@
 package duke.ui;
 
+import java.util.List;
+
 import duke.tasks.Task;
 import duke.tasks.TaskList;
-import java.util.List;
 
 /**
  * Ui handles user interaction.
@@ -51,9 +52,9 @@ public class Ui {
      * Prints a response to Delete command to the user.
      */
     public void deleteResponse(Task task, TaskList taskList) {
-        System.out.println(HORIZONTAL_LINE + "\n" +
-                "Noted. I've removed this task:" + "\n" +
-                task + "\n" + "Now you have " + taskList.getSize()
+        System.out.println(HORIZONTAL_LINE + "\n"
+                + "Noted. I've removed this task:" + "\n"
+                + task + "\n" + "Now you have " + taskList.getSize()
                 + " tasks in the list." + "\n" + HORIZONTAL_LINE);
     }
 
@@ -61,8 +62,8 @@ public class Ui {
      * Prints a response to Mark command to the user.
      */
     public void markResponse(Task task) {
-        System.out.println(HORIZONTAL_LINE + "\n" +
-                "Nice! I've marked this task as done:"
+        System.out.println(HORIZONTAL_LINE + "\n"
+                + "Nice! I've marked this task as done:"
                 + "\n" + task + "\n" + HORIZONTAL_LINE);
     }
 
@@ -70,13 +71,15 @@ public class Ui {
      * Prints a response to Unmark command to the user.
      */
     public void unmarkResponse(Task task) {
-        System.out.println(HORIZONTAL_LINE + "\n" +
-                "OK, I've marked this task as not done yet:"
+        System.out.println(HORIZONTAL_LINE + "\n"
+                + "OK, I've marked this task as not done yet:"
                 + "\n" + task + "\n" + HORIZONTAL_LINE);
     }
 
     /**
      * Prints a response to Todo, Event or Deadline command to the user.
+     * @param task The task added.
+     * @param taskList The task list the task is added to.
      */
     public void addResponse(Task task, TaskList taskList) {
         System.out.println(HORIZONTAL_LINE + "\n" + "Got it. I've added this task:"
@@ -84,6 +87,10 @@ public class Ui {
                 + " tasks in the list." + "\n" + HORIZONTAL_LINE);
     }
 
+    /**
+     * Prints a response to Find command to the user.
+     * @param taskList The filtered task list
+     */
     public void findResponse(List<Task> taskList) {
         StringBuilder sb = new StringBuilder();
         sb.append("Here are the matching tasks in your list:\n");
@@ -92,7 +99,7 @@ public class Ui {
             sb.append(String.format("%d.%s\n", i, task.toString()));
             ++i;
         }
-        System.out.print(HORIZONTAL_LINE+ "\n" + sb + HORIZONTAL_LINE + "\n");
+        System.out.print(HORIZONTAL_LINE + "\n" + sb + HORIZONTAL_LINE + "\n");
     }
 
 }

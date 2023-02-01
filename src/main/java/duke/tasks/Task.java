@@ -38,20 +38,20 @@ public abstract class Task {
         }
 
         switch(dataArray[0]) {
-            case "[T]":
-                task = new ToDo(dataArray[2]);
-                break;
-            case "[D]":
-                task = new Deadline(dataArray[2], dataArray[3]);
-                break;
-            case "[E]":
-                task = new Event(dataArray[2], dataArray[3], dataArray[4]);
-                break;
-            default:
-                throw new InvalidTaskTypeException();
+        case "[T]":
+            task = new ToDo(dataArray[2]);
+            break;
+        case "[D]":
+            task = new Deadline(dataArray[2], dataArray[3]);
+            break;
+        case "[E]":
+            task = new Event(dataArray[2], dataArray[3], dataArray[4]);
+            break;
+        default:
+            throw new InvalidTaskTypeException();
         }
 
-        if(dataArray[1].equals("1")) {
+        if (dataArray[1].equals("1")) {
             task.mark();
         }
 
@@ -94,7 +94,7 @@ public abstract class Task {
      * @return string representation of the task.
      */
     @Override
-    public String toString(){
+    public String toString() {
         String checkbox = "[" + (done ? "X" : " ") + "]";
         return checkbox + " " + this.task;
     }

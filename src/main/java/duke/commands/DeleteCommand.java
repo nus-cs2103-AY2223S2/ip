@@ -1,12 +1,13 @@
 package duke.commands;
 
+import java.io.File;
+
 import duke.exceptions.InvalidCmdValueException;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 import duke.utils.Storage;
 
-import java.io.File;
 
 /**
  * DeleteCommand represents a command to delete a task from the TaskList.

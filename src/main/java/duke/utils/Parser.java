@@ -1,10 +1,27 @@
 package duke.utils;
 
-import duke.commands.*;
-import duke.exceptions.*;
-import duke.tasks.*;
-import duke.ui.Ui;
 import java.io.File;
+
+import duke.commands.AddCommand;
+import duke.commands.ByeCommand;
+import duke.commands.Command;
+import duke.commands.DeleteCommand;
+import duke.commands.FindCommand;
+import duke.commands.ListCommand;
+import duke.commands.MarkCommand;
+import duke.commands.UnmarkCommand;
+import duke.exceptions.EmptyCommandException;
+import duke.exceptions.InvalidCmdValueException;
+import duke.exceptions.InvalidDateException;
+import duke.exceptions.InvalidTaskTypeException;
+import duke.exceptions.InvalidTimeException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.tasks.TaskTypes;
+import duke.tasks.ToDo;
+import duke.ui.Ui;
 
 /**
  * Parser to convert user inputs to executable commands.
@@ -22,7 +39,7 @@ public class Parser {
      * @return The command corresponding to the user input.
      * @throws InvalidCmdValueException If a delete, mark or unmark command specify a wrong index.
      * @throws InvalidTaskTypeException If no such task type exists.
-     * @throws EmptyCommandException If the existing command is empty
+     * @throws EmptyCommandException If the existing command is empty.
      * @throws InvalidTimeException If the format of event or deadline is unrecognised.
      * @throws InvalidDateException If the date entered for event or deadline is unrecognised.
      */

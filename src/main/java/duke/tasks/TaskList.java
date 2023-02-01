@@ -21,7 +21,6 @@ public class TaskList {
     /**
      * Edit a list of tasks.
      * @param taskList New list of the tasks.
-     * @return Edited list of tasks.
      */
     public void setTaskList(List<Task> taskList) {
         this.taskList = taskList;
@@ -86,6 +85,12 @@ public class TaskList {
         return task;
     }
 
+    /**
+     * Find the Task with same wording as given string.
+     *
+     * @param s The given string.
+     * @return A list of filtered task.
+     */
     public List<Task> findTask(String s) {
         return taskList.stream()
                 .filter(task -> task.getTask().contains(s))

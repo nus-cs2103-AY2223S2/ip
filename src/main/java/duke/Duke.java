@@ -1,38 +1,48 @@
 package duke;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Scanner;
+
 import duke.commands.Command;
-import duke.exceptions.*;
+import duke.exceptions.EmptyCommandException;
+import duke.exceptions.InvalidCmdValueException;
+import duke.exceptions.InvalidDateException;
+import duke.exceptions.InvalidTaskTypeException;
+import duke.exceptions.InvalidTimeException;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 import duke.utils.Parser;
 import duke.utils.Storage;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.Scanner;
 
 /**
- * Duke is the class that represents the chat bot.
+ * Duke is the class that represents the chat-bot.
  */
 public class Duke {
+
+    private static final File savedFile = new File("savedFile.txt");
+    private Parser parser;
+    private Storage storage;
     private TaskList commandList;
     private Ui ui;
-    private Storage storage;
-    private Parser parser;
-    private static final File savedFile = new File("savedFile.txt");
-
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.run();
-    }
 
     /**
      * Before setup for Duke
      */
     public Duke() {
-        ui = new Ui();
-        commandList = new TaskList();
         parser = new Parser();
+        commandList = new TaskList();
+        ui = new Ui();
+    }
+
+    /**
+     * Main function to run duke
+     * @param args No need to pass in any arguments
+     */
+    public static void main(String[] args) {
+        Duke duke = new Duke();
+        duke.run();
     }
 
     /**
@@ -61,9 +71,11 @@ public class Duke {
             try {
                 command = parser.parse(userCommands, commandList, storage, ui, savedFile);
                 command.action();
-            } catch (InvalidCmdValueException | InvalidTaskTypeException |
-                     EmptyCommandException | InvalidTimeException | InvalidDateException e) {
-                System.out.println(Ui.HORIZONTAL_LINE + "\n" + e.getMessage() + "\n" + Ui.HORIZONTAL_LINE);
+            } catch (InvalidCmdValueException | InvalidTaskTypeException
+                     | EmptyCommandException | InvalidTimeException
+                     | InvalidDateException e) {
+                System.out.println(Ui.HORIZONTAL_LINE + "\n" + e.getMessage()
+                        + "\n" + Ui.HORIZONTAL_LINE);
             }
         }
     }

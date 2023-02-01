@@ -1,13 +1,20 @@
 package duke.utils;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import duke.exceptions.InvalidDateException;
 import duke.exceptions.InvalidTaskTypeException;
 import duke.tasks.Task;
 import duke.ui.Ui;
 
-import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Storage handles loading data from and saving data to files.
@@ -52,8 +59,8 @@ public class Storage {
                 try {
                     taskList.add(Task.dataToTask(line));
                 } catch (InvalidTaskTypeException | InvalidDateException e) {
-                    System.out.println(Ui.HORIZONTAL_LINE + "\n" + e.getMessage() +
-                            "\n" + Ui.HORIZONTAL_LINE);
+                    System.out.println(Ui.HORIZONTAL_LINE + "\n" + e.getMessage()
+                            + "\n" + Ui.HORIZONTAL_LINE);
                 }
                 line = bufReader.readLine();
             }

@@ -1,18 +1,19 @@
 package duke.tasks;
 
-import duke.exceptions.InvalidDateException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.exceptions.InvalidDateException;
 
 /**
  * Deadline is a task that is due by a specific date/time.
  */
 public class Deadline extends Task {
-    private LocalDate deadline;
+
     private static final DateTimeFormatter formatter =
             DateTimeFormatter.ofPattern("MMM dd yyyy");
+    private LocalDate deadline;
 
     /**
      * Constructor for Deadline.
