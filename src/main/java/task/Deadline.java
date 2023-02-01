@@ -8,8 +8,9 @@ import java.time.format.DateTimeFormatter;
  * Deadline class that inherits from Task.
  */
 public class Deadline extends Task {
-    private final LocalDate endDate;
+
     private static final DateTimeFormatter formatOfDate = DateTimeFormatter.ofPattern("MMM-dd-yyyy");
+    private final LocalDate endDate;
 
     /**
      * Constructs Deadline.
@@ -27,7 +28,7 @@ public class Deadline extends Task {
      *
      * @return Details of deadline task.
      */
-    public  String toText() {
+    public String toText() {
 
         return "D" + "|" + getNameOfTask() + "|" + (isDone() ? 1 : 0) + "|" + endDate;
     }
@@ -41,6 +42,4 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString() + " (by: " + formatOfDate.format(endDate) + ")";
     }
-
-
 }

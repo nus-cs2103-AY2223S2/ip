@@ -1,8 +1,8 @@
 package command;
 
-import main.TaskList;
-import main.Storage;
 import main.DukeException;
+import main.Storage;
+import main.TaskList;
 import main.Ui;
 import task.Task;
 import task.Todo;
@@ -10,7 +10,7 @@ import task.Todo;
 /**
  * Adds todo tasks.
  */
-public class AddTodoCommand extends Command{
+public class AddTodoCommand extends Command {
     private final String description;
 
     /**
@@ -22,7 +22,8 @@ public class AddTodoCommand extends Command{
         this.description = description;
     }
 
-    /** Adds a todo task to the list of task, outputs message to user and updates the file.
+    /**
+     * Adds a todo task to the list of task, outputs message to user and updates the file.
      *
      * @param taskList List of task.
      * @param ui Ui.

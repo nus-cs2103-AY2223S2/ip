@@ -7,9 +7,10 @@ import java.time.format.DateTimeFormatter;
  * Event class that inherits from Task.
  */
 public class Event extends Task {
+
+    private static final DateTimeFormatter formatOfDate = DateTimeFormatter.ofPattern("MMM-dd-yyyy");
     private final LocalDate startDate;
     private final LocalDate endDate;
-    private static final DateTimeFormatter formatOfDate = DateTimeFormatter.ofPattern("MMM-dd-yyyy");
 
     /**
      * Construct Event.

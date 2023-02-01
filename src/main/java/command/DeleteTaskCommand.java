@@ -1,14 +1,15 @@
 package command;
-import main.TaskList;
-import main.Storage;
+
 import main.DukeException;
+import main.Storage;
+import main.TaskList;
 import main.Ui;
 import task.Task;
 
 /**
  * Deletes a task.
  */
-public class DeleteTaskCommand extends Command{
+public class DeleteTaskCommand extends Command {
 
     private final int index;
 
@@ -22,7 +23,8 @@ public class DeleteTaskCommand extends Command{
         this.index = index - 1;
     }
 
-    /** Deletes a task by index, outputs message to user and updates the file.
+    /**
+     * Deletes a task by index, outputs message to user and updates the file.
      *
      * @param taskList List of task.
      * @param ui Ui.

@@ -96,7 +96,7 @@ public class Ui {
      */
     public void outputListTask(TaskList taskList) {
         System.out.println(indentation + "You have " + taskList.getTotalNumberOfTask() + " tasks in the list.");
-        for (int i = 0; i < taskList.getTotalNumberOfTask(); i++ ) {
+        for (int i = 0; i < taskList.getTotalNumberOfTask(); i++) {
             System.out.println(indentation + (i + 1) + "." + taskList.getTaskAtIndex(i));
         }
     }
