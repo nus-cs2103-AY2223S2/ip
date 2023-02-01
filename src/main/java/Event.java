@@ -1,6 +1,6 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Optional;
+import java.util.*;
 	
 public class Event extends Task {
 	protected Optional<LocalDate> to;
@@ -44,9 +44,9 @@ public class Event extends Task {
 			DateTimeFormatter date = DateTimeFormatter.ofPattern("MMM dd yyyy");
 			String formattedFrom = this.from.get().format(date);
 			String formattedTo = this.to.get().format(date);
-			return " (from: " + formattedFrom + " to: " + formattedTo + ")";
+			return formattedFrom+"|"+formattedTo;
 		}
-		return " (from: " + strFrom + " to: " + strTo + ")";
+		return strFrom + "|" + strTo;
 	}
 
 	public String getTag() {
@@ -55,6 +55,9 @@ public class Event extends Task {
 
 	@Override
 	public String toString() {
-		return this.getTag() + super.toString() + this.getDate();
+		String line = this.getDate();
+		String[] parmArr = line.split("\\|");
+		List<String> parm = Arrays.asList(parmArr);
+		return this.getTag() + super.toString() + " (from:" + parm.get(0) + " to:" + parm.get(1) + ")";
     	}
 }
