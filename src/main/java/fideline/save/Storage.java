@@ -56,7 +56,7 @@ public class Storage {
 
     public void deleteLine(int lineNum) throws DataFileInteractionException {
         try {
-            int lineCounter = 0;
+            int lineCounter = 1;
             Scanner fileScan = new Scanner(dataFile);
             String dataString = "";
             while (fileScan.hasNext()) {
@@ -68,7 +68,8 @@ public class Storage {
                 }
                 lineCounter++;
             }
-            dataString = dataString.substring(0, dataString.length() - 1);
+            dataString = dataString.length() == 0 ? dataString
+                    : dataString.substring(0, dataString.length() - 1);
             FileWriter fw = new FileWriter(dataFile);
             PrintWriter pw = new PrintWriter(fw);
             pw.println(dataString);

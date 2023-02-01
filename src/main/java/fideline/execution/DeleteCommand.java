@@ -24,7 +24,7 @@ public class DeleteCommand extends Command {
             throws DataFileInteractionException, InvalidArgumentException {
         if (taskManager.checkTask(taskNum)) {
             String s = taskManager.deleteTask(taskNum);
-            storage.deleteLine(taskNum - 1);
+            storage.deleteLine(taskNum);
             ui.deleteMsg(s, taskManager.getTaskCount());
         } else {
             throw new InvalidArgumentException("task! (the one given does not exist!)");
