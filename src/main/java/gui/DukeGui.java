@@ -1,14 +1,11 @@
 package gui;
 
-import duke.Duke;
-
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
+import duke.Duke;
 import javafx.application.Application;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.geometry.Pos;
-import javafx.scene.Node;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -17,19 +14,18 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.application.Platform;
-
-import java.util.concurrent.TimeUnit;
 
 
+/**
+ * The class that starts the GUI application and interacts with the user.
+ */
 public class DukeGui extends Application {
-    private Image userImage = new Image(Objects.requireNonNull(
+    private final Image userImage = new Image(Objects.requireNonNull(
             this.getClass().getResourceAsStream("/images/DaUser.png")));
-    private Image dukeImage = new Image(Objects.requireNonNull(
+    private final Image dukeImage = new Image(Objects.requireNonNull(
             this.getClass().getResourceAsStream("/images/DaDuke.png")));
     private TextField userInput;
     private VBox dialogContainer;
@@ -48,8 +44,8 @@ public class DukeGui extends Application {
         ScrollPane scrollPane = new ScrollPane();
         VBox dialogContainer = new VBox();
         this.dialogContainer = dialogContainer;
-        scrollPane.setContent(dialogContainer);
 
+        scrollPane.setContent(dialogContainer);
         TextField userInput = new TextField();
         this.userInput = userInput;
 
@@ -154,6 +150,10 @@ public class DukeGui extends Application {
         return duke.handleCommandWithException(input);
     }
 
+    /**
+     * Prints to GUI interface
+     * @param string the string to be printed out
+     */
     public void guiPrint(String string) {
         Label dukeText = new Label(string);
         dialogContainer.getChildren().addAll(
@@ -162,7 +162,10 @@ public class DukeGui extends Application {
         userInput.clear();
     }
 
+    /**
+     * Prints welcome message
+     */
     public void showWelcome() {
-        guiPrint(String.format("Hello! I'm %s\nWhat can I do for you?", name));
+        guiPrint(duke.getWelcomeMessage());
     }
 }

@@ -52,7 +52,7 @@ public class Duke {
         while (isRunning) {
             String inMsg = ui.getUserInput();
             try {
-                isRunning = handleCommand(inMsg, false);
+                isRunning = handleCommandReturnStatus(inMsg, false);
                 if (isRunning) {
                     commandList.add(inMsg);
                 }
@@ -66,13 +66,17 @@ public class Duke {
         storage.saveToFile(getCommandListString());
     }
 
+    /**
+     * Runs command and handles exceptions
+     * @param inMsg the user-input command
+     * @return the response message to print out
+     */
     public String handleCommandWithException(String inMsg) {
         String response = "";
 
         try {
-            response = handleCommand(inMsg);
-            boolean isRunning = response.equals("Bye. Hope to see you again soon!");
-            isRunning = !inMsg.equals("bye");
+            response = handleCommandReturnResponse(inMsg);
+            boolean isRunning = !inMsg.equalsIgnoreCase("bye"); // hardcode, not ideal
 
             if (isRunning) {
                 commandList.add(inMsg);
@@ -113,7 +117,7 @@ public class Duke {
         storage.loadRecordIfExists(commandList);
         for (String s : commandList) {
             try {
-                handleCommand(s, true);
+                handleCommandReturnStatus(s, true);
             } catch (DukeException e) {
                 System.out.println(e.toString());
             }
@@ -132,13 +136,19 @@ public class Duke {
      * @return whether the program continues or not
      * @throws DukeException when the command is unknown
      */
-    public boolean handleCommand(String inMsg, boolean suppressPrint) throws DukeException {
+    public boolean handleCommandReturnStatus(String inMsg, boolean suppressPrint) throws DukeException {
         Command command = Parser.parseCommand(inMsg, suppressPrint);
         command.execute(taskList, ui);
         return !command.isExit();
     }
 
-    public String handleCommand(String inMsg) throws DukeException {
+    /**
+     * Handles a string command
+     * @param inMsg the user-input command
+     * @return the response from Duke
+     * @throws DukeException when the command is unknown or incomplete
+     */
+    public String handleCommandReturnResponse(String inMsg) throws DukeException {
         Command command = Parser.parseCommand(inMsg, true);
         return command.execute(taskList);
     }
@@ -155,5 +165,13 @@ public class Duke {
             string = string + s + "\n";
         }
         return string;
+    }
+
+    /**
+     * Returns welcome message at startup
+     * @return welcome message
+     */
+    public String getWelcomeMessage() {
+        return String.format("Hello! I'm %s\nWhat can I do for you?", myName);
     }
 }
