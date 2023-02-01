@@ -1,11 +1,11 @@
-package command;
+package duke.command;
 
-import dukeexception.CommandException;
-import dukeexception.UnmarkIndexDoesNotExistException;
-import storage.Storage;
-import tasklist.TaskList;
-import tasks.Task;
-import ui.Ui;
+import duke.dukeexception.CommandException;
+import duke.dukeexception.UnmarkIndexDoesNotExistException;
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.tasks.Task;
+import duke.ui.Ui;
 
 /**
  * UnMarkCommand class extends Command

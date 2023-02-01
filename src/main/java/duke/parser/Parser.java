@@ -1,17 +1,17 @@
-package parser;
+package duke.parser;
 
-import command.Command;
-import command.Command.Commands;
-import command.DeadlineCommand;
-import command.DeleteCommand;
-import command.DoesNotExistCommand;
-import command.EventCommand;
-import command.ExitCommand;
-import command.FindCommand;
-import command.ListCommand;
-import command.MarkCommand;
-import command.ToDoCommand;
-import command.UnMarkComamnd;
+import duke.command.Command;
+import duke.command.Command.Commands;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoesNotExistCommand;
+import duke.command.EventCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
+import duke.command.ToDoCommand;
+import duke.command.UnMarkComamnd;
 
 /**
  * An abstract class to make sense of the user command.

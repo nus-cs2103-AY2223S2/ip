@@ -1,4 +1,4 @@
-package tasks;
+package duke.tasks;
 
 /**
  * Event class extends the Task class.

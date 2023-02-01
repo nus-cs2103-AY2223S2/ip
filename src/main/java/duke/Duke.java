@@ -1,8 +1,10 @@
-import command.Command;
-import parser.Parser;
-import storage.Storage;
-import tasklist.TaskList;
-import ui.Ui;
+package duke;
+
+import duke.command.Command;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
 
 /**
  * <h1>Duke Task Manager</h1>

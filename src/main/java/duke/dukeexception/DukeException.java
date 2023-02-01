@@ -1,4 +1,4 @@
-package dukeexception;
+package duke.dukeexception;
 
 /**
  * DukeException class extends Exception class.

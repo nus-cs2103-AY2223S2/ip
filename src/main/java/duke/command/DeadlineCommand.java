@@ -1,14 +1,14 @@
-package command;
+package duke.command;
 
 import java.util.Arrays;
 
-import dukeexception.CommandException;
-import parser.DateTimeParser;
-import storage.Storage;
-import tasklist.TaskList;
-import tasks.Deadline;
-import tasks.Task;
-import ui.Ui;
+import duke.dukeexception.CommandException;
+import duke.parser.DateTimeParser;
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.tasks.Deadline;
+import duke.tasks.Task;
+import duke.ui.Ui;
 
 /**
  * DeadlineCommand class extends from Command class.

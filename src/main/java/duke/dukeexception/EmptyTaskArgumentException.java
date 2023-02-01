@@ -1,4 +1,4 @@
-package dukeexception;
+package duke.dukeexception;
 
 /**
  * EmptyTaskArgumentException class extends DukeException class.

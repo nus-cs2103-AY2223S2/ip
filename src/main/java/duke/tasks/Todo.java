@@ -1,4 +1,4 @@
-package tasks;
+package duke.tasks;
 
 /**
  * Todo class extends the Task class.

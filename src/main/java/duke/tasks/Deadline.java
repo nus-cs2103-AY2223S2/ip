@@ -1,4 +1,4 @@
-package tasks;
+package duke.tasks;
 
 /**
  * Deadline class extends the Task class.

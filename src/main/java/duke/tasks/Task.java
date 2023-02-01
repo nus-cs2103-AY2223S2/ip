@@ -1,4 +1,4 @@
-package tasks;
+package duke.tasks;
 
 /**
  * Task is the abstract base class for all tasks

@@ -1,11 +1,11 @@
-package command;
+package duke.command;
 
 import java.util.List;
 
-import storage.Storage;
-import tasklist.TaskList;
-import tasks.Task;
-import ui.Ui;
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.tasks.Task;
+import duke.ui.Ui;
 
 /**
  * ListCommand class extends from Command class.

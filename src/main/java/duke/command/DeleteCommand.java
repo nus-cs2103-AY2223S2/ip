@@ -1,11 +1,11 @@
-package command;
+package duke.command;
 
-import dukeexception.CommandException;
-import dukeexception.StorageException;
-import storage.Storage;
-import tasklist.TaskList;
-import tasks.Task;
-import ui.Ui;
+import duke.dukeexception.CommandException;
+import duke.dukeexception.StorageException;
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.tasks.Task;
+import duke.ui.Ui;
 
 /**
  * DeleteCommand class extends from Command class.

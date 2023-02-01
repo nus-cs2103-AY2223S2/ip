@@ -1,14 +1,14 @@
-package command;
+package duke.command;
 
 import java.util.Arrays;
 
-import dukeexception.CommandException;
-import parser.DateTimeParser;
-import storage.Storage;
-import tasklist.TaskList;
-import tasks.Event;
-import tasks.Task;
-import ui.Ui;
+import duke.dukeexception.CommandException;
+import duke.parser.DateTimeParser;
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.ui.Ui;
 
 /**
  * EventCommand extends from Command.

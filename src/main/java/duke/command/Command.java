@@ -1,11 +1,11 @@
-package command;
+package duke.command;
 
 import java.util.Arrays;
 
-import dukeexception.CommandException;
-import storage.Storage;
-import tasklist.TaskList;
-import ui.Ui;
+import duke.dukeexception.CommandException;
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
 
 /**
  * Command is a base abstract class for all commands.

@@ -1,11 +1,11 @@
-package tasklist;
+package duke.tasklist;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import dukeexception.StorageException;
-import tasks.Task;
+import duke.dukeexception.StorageException;
+import duke.tasks.Task;
 
 /**
  * TaskList class extends from {@link ArrayList} of {@link Task} class.

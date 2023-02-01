@@ -1,4 +1,4 @@
-package dukeexception;
+package duke.dukeexception;
 
 /**
  * StorageException class exends from DukeException class.

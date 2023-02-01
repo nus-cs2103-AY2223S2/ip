@@ -1,11 +1,11 @@
-package command;
+package duke.command;
 
-import dukeexception.CommandException;
-import dukeexception.MarkIndexDoesNotExistException;
-import storage.Storage;
-import tasklist.TaskList;
-import tasks.Task;
-import ui.Ui;
+import duke.dukeexception.CommandException;
+import duke.dukeexception.MarkIndexDoesNotExistException;
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.tasks.Task;
+import duke.ui.Ui;
 
 /**
  * MarkCommand class extends from Command class.

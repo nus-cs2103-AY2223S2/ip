@@ -1,11 +1,11 @@
-package ui;
+package duke.ui;
 
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.IntStream;
 
-import dukeexception.DukeException;
-import tasks.Task;
+import duke.dukeexception.DukeException;
+import duke.tasks.Task;
 
 /**
  * The Ui class handles all the UI related operations, such as printing

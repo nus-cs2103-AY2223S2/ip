@@ -1,4 +1,4 @@
-package dukeexception;
+package duke.dukeexception;
 
 /**
  * MarkIndexDoesNotExistException class extends DukeException class.

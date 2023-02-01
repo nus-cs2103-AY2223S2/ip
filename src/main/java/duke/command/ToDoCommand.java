@@ -1,11 +1,11 @@
-package command;
+package duke.command;
 
-import dukeexception.CommandException;
-import storage.Storage;
-import tasklist.TaskList;
-import tasks.Task;
-import tasks.Todo;
-import ui.Ui;
+import duke.dukeexception.CommandException;
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.tasks.Task;
+import duke.tasks.Todo;
+import duke.ui.Ui;
 
 /**
  * ToDoCommand class extends from Command class.
