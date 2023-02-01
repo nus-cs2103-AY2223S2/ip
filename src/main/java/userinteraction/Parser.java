@@ -25,24 +25,24 @@ public class Parser {
         try {
             CommandNames commandNames = CommandNames.valueOf(inputArr[0].toUpperCase());
             switch (commandNames) {
-                case LIST:
-                    return new ListCommand(inputArr);
-                case MARK:
-                    return new MarkTaskCommand(inputArr, true);
-                case UNMARK:
-                    return new MarkTaskCommand(inputArr, false);
-                case TODO:
-                    return new AddToDoCommand(inputArr);
-                case EVENT:
-                    return new AddEventCommand(inputArr);
-                case DEADLINE:
-                    return new AddDeadLineCommand(inputArr);
-                case DELETE:
-                    return new DeleteTaskCommand(inputArr);
-                case BYE:
-                    return new ExitDukeCommand(inputArr);
-                default:
-                    throw new DukeException("Unknown format");
+            case LIST:
+                return new ListCommand(inputArr);
+            case MARK:
+                return new MarkTaskCommand(inputArr, true);
+            case UNMARK:
+                return new MarkTaskCommand(inputArr, false);
+            case TODO:
+                return new AddToDoCommand(inputArr);
+            case EVENT:
+                return new AddEventCommand(inputArr);
+            case DEADLINE:
+                return new AddDeadLineCommand(inputArr);
+            case DELETE:
+                return new DeleteTaskCommand(inputArr);
+            case BYE:
+                return new ExitDukeCommand(inputArr);
+            default:
+                throw new DukeException("Unknown format");
             }
         } catch (DukeException e) {
             System.out.println(e.getMessage());

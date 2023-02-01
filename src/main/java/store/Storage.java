@@ -95,7 +95,7 @@ public class Storage {
     public void writeData(TaskList taskList) {
         try {
             FileWriter fileWriter = new FileWriter(filePath);
-            ArrayList<Task> arrayList = taskList.getStore();
+            ArrayList<Task> arrayList = taskList.getTasks();
             for (Task task : arrayList) {
                 fileWriter.write(task.getStoreTaskString() + "\n");
             }
