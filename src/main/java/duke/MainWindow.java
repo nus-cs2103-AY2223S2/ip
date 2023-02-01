@@ -10,6 +10,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
@@ -34,6 +39,11 @@ public class MainWindow extends AnchorPane {
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Khabib.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Ronaldo.png"));
+
+    Image image = new Image(this.getClass().getResourceAsStream("/images/Wallpaper.png"));
+    BackgroundSize backgroundSize = new BackgroundSize(1, 1, false, false, false, false);
+    BackgroundImage backgroundImage = new BackgroundImage(image, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, backgroundSize);
+    Background background = new Background(backgroundImage);
 
     /**
      * Initialize is ran at the start of the javafx lifecycle.
@@ -73,6 +83,7 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
+        dialogContainer.setBackground(background);
         userInput.clear();
     }
 }

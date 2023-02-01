@@ -74,6 +74,7 @@ class Ui {
         return this.tasks;
     }
 
+    /*
     TaskList<Task> execute(TaskList<Task> tasks, String description) {
         if (description.equals(Parser.SHOW_TASKS)) {
             this.tasks = tasks.listAllTasks();
@@ -98,6 +99,7 @@ class Ui {
         }
         return this.tasks;
     }
+     */
 
     /**
      * Checks the user input against a list of invalid commands
@@ -121,7 +123,7 @@ class Ui {
                 return this.tasks;
             }
         } catch (DukeUnknownException e) {
-            System.out.println(Printable.ILLEGAL_COMMAND);
+            System.out.println(Parser.ILLEGAL_COMMAND);
         }
         return tasks;
     }
