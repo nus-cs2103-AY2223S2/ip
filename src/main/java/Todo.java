@@ -5,8 +5,6 @@
  */
 public class Todo extends Task {
 
-    private static final String TASK_TYPE = "T";
-
     /**
      * Creates a todo object
      *
@@ -26,45 +24,24 @@ public class Todo extends Task {
         super(description, isDone);
     }
 
-    /**
-     * Creates a todo object from user input
-     * Handles exceptions
-     *
-     * @param input Input from user
-     * @return ToDo Task object
-     * @throws DukeException If description of the task is empty
-     */
     public static Todo generate(String input) throws DukeException {
-        DukeException.ErrorType errType = DukeException.ErrorType.TODO;
-
-        // Cleans input command
-        input = input.trim();
-
-        // Checks format of input command
-        int index = input.indexOf(" ");
-        if (index < 0) {
-            throw new DukeException(errType, "Empty description");
+        // Cleans input and checks for description
+        try {
+            String description = input.trim()
+                    .substring(5);
+            return new Todo(description);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Todo missing description");
         }
-
-        // Cleans and checks variables
-        String description = input.substring(index + 1).trim();
-        if (description.equals("")) {
-            throw new DukeException(errType, "Empty description");
-        }
-
-        return new Todo(description);
     }
 
-    /**
-     * Returns todo task from save string
-     *
-     * @param description Description of the todo task
-     * @param status Completion status of the todo task
-     * @return Todo task in save string format
-     */
-    public static Todo load(String description, String status) {
-        boolean isDone = status.equals("X");
-        return new Todo(description, isDone);
+    public static Todo load(String input, boolean isDone) throws DukeException {
+        // Cleans input and checks for description
+        input = input.trim();
+        if (input.equals("")) {
+            throw new DukeException("Todo missing description");
+        }
+        return new Todo(input, isDone);
     }
 
     /**
@@ -77,16 +54,9 @@ public class Todo extends Task {
         return "[T]" + super.toString();
     }
 
-    /**
-     * Returns todo task in save string format
-     *
-     * @param divider Divider used to separate fields
-     * @return Task in save string format
-     */
     @Override
-    public String toSave(String divider) {
-        return TASK_TYPE
-                + divider + getStatusIcon()
-                + divider + description;
+    public String save() {
+        return "T | " + getStatusIcon()
+                + " | " + description;
     }
 }

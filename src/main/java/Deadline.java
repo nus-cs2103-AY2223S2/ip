@@ -8,7 +8,6 @@ import java.time.format.DateTimeParseException;
  */
 public class Deadline extends Task {
 
-    private static final String TASK_TYPE = "D";
     protected LocalDate by;
 
     /**
@@ -19,89 +18,74 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String by) throws DukeException {
         super(description);
-        DukeException.ErrorType errType = DukeException.ErrorType.TIME;
         try {
             this.by = LocalDate.parse(by);
-            if (LocalDate.now().isAfter(this.by)) {
-                throw new DukeException(errType, "Deadline reached");
-            }
         } catch (DateTimeParseException e) {
-            throw new DukeException(errType, "DateTime Parse Exception");
+            throw new DukeException("Deadline could not be parsed to datetime");
         }
     }
 
     /**
      * Creates a deadline object
      *
-     * @param description Description of the deadline task
-     * @param isDone Completion status of the deadline task
+     * @param description The description of the deadline
      * @param by Deadline time of the deadline
      */
-    public Deadline(String description, boolean isDone, String by) throws DukeException {
+    public Deadline(String description, String by, boolean isDone) throws DukeException {
         super(description, isDone);
-        DukeException.ErrorType errType = DukeException.ErrorType.TIME;
-        try {
-            this.by = LocalDate.parse(by);
-            if (LocalDate.now().isAfter(this.by)) {
-                throw new DukeException(errType, "Deadline reached");
-            }
-        } catch (DateTimeParseException e) {
-            throw new DukeException(errType, "DateTime Parse Exception");
-        }
+        this.by = LocalDate.parse(by);
     }
 
-    /**
-     * Creates a deadline object from user input
-     * Handles exceptions
-     *
-     * @param input Input from user
-     * @return Deadline Task object
-     * @throws DukeException If description of the deadline is empty
-     * @throws DukeException If deadline of the deadline is empty
-     */
     public static Deadline generate(String input) throws DukeException {
-        DukeException.ErrorType errType = DukeException.ErrorType.DEADLINE;
-
-        // Cleans input command
-        input = input.trim();
-
-        // Checks format of input command
-        int indexDesc = input.indexOf(" ");
-        int indexTime = input.indexOf(" /by ");
-        if (indexDesc < 0) {
-            throw new DukeException(errType, "Empty description");
-        } else if (indexTime < 0) {
-            throw new DukeException(errType, "Empty deadline");
+        // Cleans input and checks for description and deadline
+        try {
+            input = input.trim()
+                    .substring(9)
+                    .trim();
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Deadline missing description and deadline");
         }
 
-        // Cleans and checks variables
-        String description = input.substring(indexDesc + 1, indexTime).trim();
-        String deadline = input.substring(indexTime + 5).trim();
-        if (description.equals("")) {
-            throw new DukeException(errType, "Empty description");
-        } else if (deadline.equals("")) {
-            throw new DukeException(errType, "Empty deadline");
+        try {
+            int index = input.indexOf("/by");
+            if (index < 0) {
+                throw new DukeException("Deadline missing deadline");
+            } else if (index == 0) {
+                throw new DukeException("Deadline missing description");
+            }
+
+            // Generates Deadline task
+            String description = input.substring(0, index - 1);
+            String by = input.substring(index + 4);
+            return new Deadline(description, by);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Deadline missing deadline");
         }
 
-        return new Deadline(description, deadline);
     }
 
-    /**
-     * Returns deadline task from save string
-     *
-     * @param details details of the deadline task
-     * @param status Completion status of the deadline task
-     * @return Task in save string format
-     */
-    public static Deadline load(String details, String status, String divider) throws DukeException {
+    public static Deadline load(String input, boolean isDone) throws DukeException {
         try {
-            boolean isDone = status.equals("X");
-            String[] data = details.split(divider, 2);
-            String description = data[0];
-            String deadline = data[1];
-            return new Deadline(description, isDone, deadline);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException(DukeException.ErrorType.FILE, "Incorrect Save Format");
+            // Cleans input and checks if fields are empty
+            input = input.trim();
+            if (input.equals("")) {
+                throw new DukeException("Deadline missing description and deadline");
+            }
+
+            // Checks for separator
+            int index = input.lastIndexOf("|");
+            if (index < 0) {
+                throw new DukeException("Deadline missing deadline");
+            } else if (index == 0) {
+                throw new DukeException("Deadline missing description");
+            }
+
+            // Generates Deadline task
+            String description = input.substring(0, index - 1);
+            String by = input.substring(index + 2);
+            return new Deadline(description, by, isDone);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Deadline missing deadline");
         }
     }
 
@@ -120,17 +104,10 @@ public class Deadline extends Task {
                 + ")";
     }
 
-    /**
-     * Returns deadline task in save string format
-     *
-     * @param divider Divider used to separate fields
-     * @return Task in save string format
-     */
     @Override
-    public String toSave(String divider) {
-        return TASK_TYPE
-                + divider + getStatusIcon()
-                + divider + description
-                + divider + by;
+    public String save() {
+        return "D | " + getStatusIcon()
+                + " | " + description
+                + " | " + by;
     }
 }

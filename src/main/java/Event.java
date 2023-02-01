@@ -11,7 +11,6 @@ import java.time.format.DateTimeParseException;
  */
 public class Event extends Task {
 
-    private static final String TASK_TYPE = "E";
     protected LocalDate from;
     protected LocalDate to;
 
@@ -22,115 +21,62 @@ public class Event extends Task {
      * @param from Starting time of the event
      * @param to Ending time of the event
      */
+
     public Event(String description, String from, String to) throws DukeException {
         super(description);
-        DukeException.ErrorType errType = DukeException.ErrorType.TIME;
         try {
             this.from = LocalDate.parse(from);
-            this.to = LocalDate.parse(to);
-            if (LocalDate.now().isAfter(this.to)) {
-                throw new DukeException(errType, "Event Ended");
-            } else if (this.to.isBefore(this.from)) {
-                throw new DukeException(errType, "Invalid Event Duration");
-            }
         } catch (DateTimeParseException e) {
-            throw new DukeException(errType, "DateTime Parse Exception");
+            throw new DukeException("Starting time could not be parsed to datetime");
+        }
+        try {
+            this.to = LocalDate.parse(to);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Ending time could not be parsed to datetime");
         }
     }
 
-    /**
-     * Creates a deadline object
-     *
-     * @param description Description of the deadline task
-     * @param isDone Completion status of the deadline task
-     * @param from Starting time of the event
-     * @param to Ending time of the event
-     */
-    public Event(String description, boolean isDone, String from, String to) throws DukeException {
+    public Event(String description, String from, String to, boolean isDone) throws DukeException {
         super(description, isDone);
-        DukeException.ErrorType errType = DukeException.ErrorType.TIME;
         try {
             this.from = LocalDate.parse(from);
-            this.to = LocalDate.parse(to);
-            if (LocalDate.now().isAfter(this.to)) {
-                throw new DukeException(errType, "Event Ended");
-            } else if (this.to.isBefore(this.from)) {
-                throw new DukeException(errType, "Invalid Event Duration");
-            }
         } catch (DateTimeParseException e) {
-            throw new DukeException(errType, "DateTime Parse Exception");
+            throw new DukeException("Starting time could not be parsed to datetime");
         }
-    }
-
-    /**
-     * Creates a deadline object from user input
-     * Handles exceptions
-     *
-     * @param input Input from user
-     * @return Deadline Task object
-     * @throws DukeException If description of the event is empty
-     * @throws DukeException If start time of the event is empty
-     * @throws DukeException If end time of the event is empty
-     */
-    public static Event generate(String input) throws DukeException {
-        DukeException.ErrorType errType = DukeException.ErrorType.EVENT;
-
-        // Cleans input command
-        input = input.trim();
-
-        // Checks format of input command
-        int indexDesc = input.indexOf(" ");
-        int indexFrom = input.indexOf(" /from ");
-        int indexTime = input.indexOf(" /to ");
-        if (indexDesc < 0) {
-            throw new DukeException(errType, "Empty description");
-        } else if (indexFrom < 0) {
-            throw new DukeException(errType, "Empty From Time");
-        } else if (indexTime < 0) {
-            throw new DukeException(errType, "Empty To Time");
-        }
-
-        // Cleans and checks variables
-        String description = input.substring(indexDesc + 1, indexFrom).trim();
-        String timeFrom = input.substring(indexFrom + 7, indexTime).trim();
-        String timeTo = input.substring(indexTime + 5).trim();
-        if (description.equals("")) {
-            throw new DukeException(errType, "Empty description");
-        } else if (timeFrom.equals("")) {
-            throw new DukeException(errType, "Empty From Time");
-        } else if (timeTo.equals("")) {
-            throw new DukeException(errType, "Empty To Time");
-        }
-
-        return new Event(description, timeFrom, timeTo);
-    }
-
-    /**
-     * Returns deadline task from save string
-     *
-     * @param details details of the deadline task
-     * @param status Completion status of the deadline task
-     * @return Task in save string format
-     */
-    public static Event load(String details, String status, String divider) throws DukeException {
         try {
-            boolean isDone = status.equals("X");
-            String[] data = details.split(divider, 2);
-            String description = data[0];
-            String[] duration = data[1].split(" - ", 2);
-            return new Event(description, isDone, duration[0], duration[1]);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException(DukeException.ErrorType.FILE, "Incorrect Save Format");
+            this.to = LocalDate.parse(to);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Ending time could not be parsed to datetime");
         }
     }
 
-    /**
-     * Returns the start time to end time of event
-     *
-     * @return Duration of event
-     */
-    public String getDuration() {
-        return from + " - " + to;
+    public static Event generate(String input) throws DukeException {
+        // Cleans input and checks for description and duration
+        try {
+            input = input.trim()
+                    .substring(6)
+                    .trim();
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Event missing description and event duration");
+        }
+
+        // Generates Event task
+        try {
+            String[] data = input.split(" /from | /to ");
+            return new Event(data[0], data[1], data[2]);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Deadline missing fields");
+        }
+    }
+
+    public static Event load(String input, boolean isDone) throws DukeException {
+        try {
+            String[] data = input.split(" \\| ");
+            String[] time = data[1].split(" - ");
+            return new Event(data[0], time[0], time[1]);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Deadline missing fields");
+        }
     }
 
     /**
@@ -152,18 +98,11 @@ public class Event extends Task {
                 + ")";
     }
 
-    /**
-     * Returns event task in save string format
-     *
-     * @param divider Divider used to separate fields
-     * @return Task in save string format
-     */
     @Override
-    public String toSave(String divider) {
-        String duration = getDuration();
-        return TASK_TYPE
-                + divider + getStatusIcon()
-                + divider + description
-                + divider + duration;
+    public String save() {
+        return "E | " + getStatusIcon()
+                + " | " + description
+                + " | " + from
+                + " - " + to;
     }
 }
