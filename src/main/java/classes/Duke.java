@@ -69,6 +69,9 @@ public class Duke {
                 case "list":
                     ui.printCommand(tasks.list());
                     break;
+                case "find":
+                    ui.printCommand(tasks.find(commandInfoList.get(1)));
+                    break;
                 case "mark":
                     ui.printCommand(tasks.markTask(commandInfoList, this.storage));
                     break;

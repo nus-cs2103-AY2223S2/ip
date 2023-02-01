@@ -65,11 +65,12 @@ public class Parser {
         }
 
         if ( (tempCmd.equals("mark")) || (tempCmd.equals("unmark")) || (tempCmd.equals("delete")) ||
-                (tempCmd.equals("todo")) || (tempCmd.equals("deadline")) || (tempCmd.equals("event")) ) {
+                (tempCmd.equals("todo")) || (tempCmd.equals("deadline")) || (tempCmd.equals("event")) ||
+                (tempCmd.equals("find"))) {
             isFnAvailable = true;
         }
 
-        try {   // determine function called by the user has required arguments and if its valid
+        try {   // determine function called by the user has required arguments and does not have blank spaces
             DukeException.validate(isFnAvailable, tempCmd, tempTaskInfo);
             parseInfoList.add(tempCmd); // save function call (command) into parseInfo
         } catch (IncorrectNoOfArgumentException ex) {
@@ -82,6 +83,9 @@ public class Parser {
         case "bye":     // format: bye
             break;
         case "list":    // format: list
+            break;
+        case "find":
+            parseInfoList.add(tempTaskInfo[1].toLowerCase());
             break;
         case "mark":    // format: mark | index
             parseInfoList.add(tempTaskInfo[1]);

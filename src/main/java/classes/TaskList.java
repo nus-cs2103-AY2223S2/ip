@@ -198,9 +198,9 @@ public class TaskList {
     /**
      * Returns a string message of all the tasks stored in the taskList.
      *
-     * @return String message of all the tasks' description and statuses in the taskList.
+     * @return String message of all the tasks' descriptions and statuses in the taskList.
      */
-    public String list() {  // returns message that needs to be printed to user
+    public String list() {
         sb.append("    ____________________________________________________________\n")
                 .append("    Here are the tasks in your list:\n");
         for (int i = 0; i < this.taskList.size(); i++) {
@@ -214,13 +214,36 @@ public class TaskList {
     }
 
     /**
+     * Returns a string message of all the tasks that have the corresponding substring as requested.
+     *
+     * @param subString String that is to be checked with all tasks and find tasks with this string.
+     * @return String message of all task' descriptions and statuses in the taskList that have the corresponding
+     * substring in its task information.
+     */
+    public String find(String subString) {
+        int taskIndex = 1;
+        sb.append("    ____________________________________________________________\n")
+                .append("    Here are the matching tasks in your list:\n");
+        for (int i = 0; i < this.taskList.size(); i++) {
+            if (this.taskList.get(i).getTaskInfo().toLowerCase().contains(subString)) {
+                sb.append("    ").append(taskIndex++).append(".").append(this.taskList.get(i).getTaskInfoStatus())
+                        .append("\n");
+            }
+        }
+        sb.append("    ____________________________________________________________\n");
+        this.message = sb.toString();
+        sb.setLength(0);
+        return this.message;
+    }
+
+    /**
      * Returns a string message of all the tasks that got added into the taskList from the hard disk.
      * <p></p>
      * This method <b>must</b> only be called during Duke's boot up.
      *
-     * @param fileTasks ArrayList of String type that stores all tasks' description and statuses obtained from the
+     * @param fileTasks ArrayList of String type that stores all tasks' descriptions and statuses obtained from the
      *                  hard disk.
-     * @return String message of all tasks' description and statues that got added into taskList from hard disk.
+     * @return String message of all tasks' descriptions and statues that got added into taskList from hard disk.
      */
     private static ArrayList<Task> addAll(ArrayList<String> fileTasks) {
         String taskInfo;
