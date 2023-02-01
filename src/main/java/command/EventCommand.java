@@ -1,6 +1,7 @@
 package command;
 
 import duke.Ui;
+
 import task.Event;
 import task.TaskList;
 
@@ -28,7 +29,7 @@ public class EventCommand {
         boolean isName = true;
         boolean isStart = false;
         boolean isEnd = false;
-        String n = " ", s = " ", e = " ";
+        String name = " ", start = " ", end = " ";
         for (int i = 1; i < inputs.length; i++) {
             if (isName) {
                 if (!inputs[i + 1].equalsIgnoreCase("/from")) {
@@ -37,7 +38,7 @@ public class EventCommand {
                 } else {
                     isStart = true;
                     strBuild.append(inputs[i]);
-                    n = strBuild.toString();
+                    name = strBuild.toString();
                     strBuild.setLength(0);
                     isName = false;
                     i++;
@@ -49,7 +50,7 @@ public class EventCommand {
                 } else {
                     isEnd = true;
                     strBuild.append(inputs[i]);
-                    s = strBuild.toString();
+                    start = strBuild.toString();
                     strBuild.setLength(0);
                     isStart = false;
                     i++;
@@ -61,9 +62,9 @@ public class EventCommand {
                 }
             }
         }
-        e = strBuild.toString();
+        end = strBuild.toString();
         strBuild.setLength(0);
-        Event event = new Event(n, s, e, false);
+        Event event = new Event(name, start, end, false);
         TaskList.addToList(event);
         Ui.printDefault(event);
     }

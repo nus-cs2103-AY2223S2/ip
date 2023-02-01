@@ -6,6 +6,7 @@ import command.DeleteCommand;
 import command.MarkCommand;
 import command.TodoCommand;
 import command.UnMarkCommand;
+
 import task.TaskList;
 
 /**
@@ -29,7 +30,6 @@ public class Duke {
         ui = new Ui();
         storage = new Storage(dirPath, filePath);
         parser = new Parser();
-
     }
 
     /**
@@ -39,7 +39,6 @@ public class Duke {
      */
     public void run() {
         boolean isExit = false;
-
         while(!isExit) {
             String command = Ui.readCommand();
             String[] splitCommand = parser.parse(command);
@@ -80,7 +79,7 @@ public class Duke {
     /**
      * This method invokes the run method to get the
      * main program from running.
-     * @param args
+     * @param args command input
      * @throws Exception
      */
     public static void main(String[] args) throws Exception {

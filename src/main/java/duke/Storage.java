@@ -1,5 +1,7 @@
 package duke;
+
 import task.TaskList;
+
 import java.io.File;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
@@ -29,7 +31,7 @@ public class Storage {
      * by default, exception will throw if it already exists.
      * Exception caught will then just load the file into File object
      * for future reference.
-     * @throws Exception
+     * @throws Exception when file already exist.
      */
     private void init() throws Exception {
         try {

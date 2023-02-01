@@ -1,6 +1,7 @@
 package command;
 
 import duke.Ui;
+
 import task.TaskList;
 import task.Todo;
 
@@ -28,8 +29,8 @@ public class TodoCommand {
     public void create() {
         if (inputs.length == 1) {
             Ui.printTodoError();
-            String s = Ui.readCommand();
-            Todo t = new Todo(s, false);
+            String name = Ui.readCommand();
+            Todo t = new Todo(name, false);
             strBuild.setLength(0);
             TaskList.addToList(t);
             Ui.printDefault(t);

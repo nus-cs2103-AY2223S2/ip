@@ -1,6 +1,7 @@
 package command;
 
 import duke.Ui;
+
 import task.Deadline;
 import task.TaskList;
 
@@ -23,11 +24,10 @@ public class DeadlineCommand {
     /**
      * This method is used to create the Deadline command.
      * Parsing as well as creation of Deadline object is done here.
-     *
      */
     public void create() {
         boolean isName = true;
-        String n = " ", e = " ";
+        String name = " ", end = " ";
         for (int i = 1; i < inputs.length; i++) {
             if (isName) {
                 if (!inputs[i + 1].equalsIgnoreCase("/by")) {
@@ -35,7 +35,7 @@ public class DeadlineCommand {
                     strBuild.append(" ");
                 } else {
                     strBuild.append(inputs[i]);
-                    n = strBuild.toString();
+                    name = strBuild.toString();
                     strBuild.setLength(0);
                     isName = false;
                     i++;
@@ -47,9 +47,9 @@ public class DeadlineCommand {
                 }
             }
         }
-        e = strBuild.toString();
+        end = strBuild.toString();
         strBuild.setLength(0);
-        Deadline d = new Deadline(n, e, false);
+        Deadline d = new Deadline(name, end, false);
         TaskList.addToList(d);
         Ui.printDefault(d);
     }
