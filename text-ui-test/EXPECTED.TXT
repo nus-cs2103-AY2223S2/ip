@@ -17,7 +17,7 @@ Now you have 1 tasks in the list:D
 ---------------------------------------------------------------
 ---------------------------------------------------------------
 Got it. I've added this task:
- [D][ ] return book (by: Sunday)
+ [D][ ] return book (by: 10月 15 2019)
 Now you have 2 tasks in the list:D
 ---------------------------------------------------------------
 ---------------------------------------------------------------
@@ -34,7 +34,7 @@ OOPS!!! The description of a todo cannot be empty.
 ---------------------------------------------------------------
 Here are the tasks in your list:
 1. [T][ ] todo borrow book
-2. [D][ ] return book (by: Sunday)
+2. [D][ ] return book (by: 10月 15 2019)
 3. [E][ ] project meeting (from: Mon 2pm to: 4pm)
 ---------------------------------------------------------------
 ---------------------------------------------------------------
@@ -44,7 +44,7 @@ Nice! I've marked this task as done:
 ---------------------------------------------------------------
 Here are the tasks in your list:
 1. [T][X] todo borrow book
-2. [D][ ] return book (by: Sunday)
+2. [D][ ] return book (by: 10月 15 2019)
 3. [E][ ] project meeting (from: Mon 2pm to: 4pm)
 ---------------------------------------------------------------
 ---------------------------------------------------------------
@@ -54,7 +54,7 @@ OK, I've marked this task as not done yet:
 ---------------------------------------------------------------
 Here are the tasks in your list:
 1. [T][ ] todo borrow book
-2. [D][ ] return book (by: Sunday)
+2. [D][ ] return book (by: 10月 15 2019)
 3. [E][ ] project meeting (from: Mon 2pm to: 4pm)
 ---------------------------------------------------------------
 ---------------------------------------------------------------
@@ -64,7 +64,7 @@ Now you have 2 tasks in the list.
 ---------------------------------------------------------------
 ---------------------------------------------------------------
 Here are the tasks in your list:
-1. [D][ ] return book (by: Sunday)
+1. [D][ ] return book (by: 10月 15 2019)
 2. [E][ ] project meeting (from: Mon 2pm to: 4pm)
 ---------------------------------------------------------------
 ---------------------------------------------------------------

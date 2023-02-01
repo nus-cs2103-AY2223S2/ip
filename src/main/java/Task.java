@@ -14,6 +14,7 @@ public class Task {
     public void unmark() {
         this.isMarked = false;
     }
+    @Override
     public String toString() {
         if (this.isMarked == true) {
             return "[X] " + this.name;
