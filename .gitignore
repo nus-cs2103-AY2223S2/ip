@@ -15,5 +15,5 @@ bin/
 
 /text-ui-test/ACTUAL.TXT
 text-ui-test/EXPECTED-UNIX.TXT
-dukeList.txt
+./dukeList.txt
 /src/main/java/dukeList.txt
