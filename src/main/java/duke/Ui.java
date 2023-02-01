@@ -1,4 +1,6 @@
-import utils.FormatHelper;
+package duke;
+
+import duke.utils.FormatHelper;
 
 import java.io.PrintStream;
 import java.util.Scanner;

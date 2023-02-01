@@ -1,4 +1,4 @@
-package utils;
+package duke.utils;
 
 import java.time.format.DateTimeFormatter;
 import java.util.stream.Collectors;

@@ -1,7 +1,8 @@
-import java.io.PrintStream;
+package duke;
+
 import java.time.LocalDateTime;
-import static utils.FormatHelper.INPUTFORMAT;
-import static utils.FormatHelper.PRINTFORMAT;
+import static duke.utils.FormatHelper.INPUTFORMAT;
+import static duke.utils.FormatHelper.PRINTFORMAT;
 
 
 public class Deadline extends Task {

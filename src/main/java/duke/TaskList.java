@@ -1,8 +1,8 @@
+package duke;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-
-import static utils.FormatHelper.INPUTFORMAT;
 
 public class TaskList {
     private ArrayList<Task> tasks;

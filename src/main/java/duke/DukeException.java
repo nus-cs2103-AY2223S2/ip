@@ -1,3 +1,5 @@
+package duke;
+
 public class DukeException extends Exception{
     DukeException(String error) {
         super(error);
@@ -5,6 +7,6 @@ public class DukeException extends Exception{
 
     @Override
     public String toString() {
-        return super.toString();
+        return "DukeException: " + super.getMessage();
     }
 }

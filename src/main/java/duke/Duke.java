@@ -1,7 +1,9 @@
+package duke;
+
+import static duke.utils.FormatHelper.INPUTFORMAT;
+
 import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
 import java.util.Scanner;
-import static utils.FormatHelper.INPUTFORMAT;
 
 
 public class Duke {

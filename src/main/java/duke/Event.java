@@ -1,7 +1,9 @@
+package duke;
+
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import static utils.FormatHelper.PRINTFORMAT;
-import static utils.FormatHelper.INPUTFORMAT;
+
+import static duke.utils.FormatHelper.PRINTFORMAT;
+import static duke.utils.FormatHelper.INPUTFORMAT;
 
 public class Event extends Task {
     protected LocalDateTime from;

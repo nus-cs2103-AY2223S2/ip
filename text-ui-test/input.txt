@@ -1,4 +1,4 @@
-wrong command
+wrong duke.command
 todo Borrow book
 deadline return book /by 23/01/2023 03:22
 
