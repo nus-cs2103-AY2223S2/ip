@@ -9,6 +9,12 @@ public class Task {
         this.taskType = taskType;
     }
 
+    public Task(String name, String taskType, boolean isDone) {
+        this.name = name;
+        this.taskType = taskType;
+        this.isDone = isDone;
+    }
+
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
@@ -31,5 +37,12 @@ public class Task {
 
     public String description() {
         return String.format("[%s][%s] %s", this.taskType, this.getStatusIcon(), this.name);
+    }
+
+    public String formattedDescription() {
+        String status = isDone ? "1" : "0";
+        String description = String.format("%s | %s | %s", this.taskType,
+                status, this.name);
+        return description;
     }
 }

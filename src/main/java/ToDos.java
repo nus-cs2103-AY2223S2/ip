@@ -3,4 +3,8 @@ public class ToDos extends Task {
         super(name, "T");
     }
 
+    public ToDos(String name, boolean isDone) {
+        super(name, "T", isDone);
+    }
+
 }

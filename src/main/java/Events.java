@@ -10,10 +10,23 @@ public class Events extends Task {
         this.endDate = LocalDate.parse(endDate);
     }
 
+    public Events(String name, String startDate, String endDate, boolean isDone) {
+        super(name, "E", isDone);
+        this.startDate = LocalDate.parse(startDate);
+        this.endDate = LocalDate.parse(endDate);
+    }
+
     @Override
     public String description() {
         return String.format("%s (from: %s to: %s)", super.description(),
                 this.startDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")),
                 this.endDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+    }
+
+    @Override
+    public String formattedDescription() {
+        return super.formattedDescription()
+                + String.format(" | %s | %s", startDate.toString(),
+                endDate.toString());
     }
 }
