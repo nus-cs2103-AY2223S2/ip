@@ -20,6 +20,8 @@ delete 5
 list
 deadline delete /by 5/5/2023
 list
+find tes
+find e
 delete 3
 mark 3
 list

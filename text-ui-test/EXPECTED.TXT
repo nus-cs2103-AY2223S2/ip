@@ -133,6 +133,27 @@ TO DO LIST:
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+The keyword given is:
+
+"tes"
+
+The Duke has found the following tasks:
+1.[T][ ] test
+3.[E][x] tryout test (from: 29 Jun 2023 to: 01 Oct 2024)
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+The keyword given is:
+
+"e"
+
+The Duke has found the following tasks:
+1.[T][ ] test
+3.[E][x] tryout test (from: 29 Jun 2023 to: 01 Oct 2024)
+4.[D][ ] delete (by: 05 May 2023)
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 The Duke has delete the following task:
  - [E][x] tryout test (from: 29 Jun 2023 to: 01 Oct 2024)
 You now have 3 task!
