@@ -5,8 +5,8 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ToDosTest {
-    Task tempTask = new ToDos("borrow book");
+public class ToDoTest {
+    Task tempTask = new ToDo("borrow book");
 
     @Test
     public void getTaskInfoStatus() {

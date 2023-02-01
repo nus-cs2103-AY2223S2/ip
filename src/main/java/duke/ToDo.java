@@ -6,14 +6,14 @@ package duke;
  * @author MrTwit99
  * @since 2023-02-01
  */
-public class ToDos extends Task {
+public class ToDo extends Task {
 
     /**
      * Returns a ToDos task object that stores information about the task description.
      *
      * @param taskInfo Task Description
      */
-    public ToDos(String taskInfo) {
+    public ToDo(String taskInfo) {
         super(taskInfo);
     }
 

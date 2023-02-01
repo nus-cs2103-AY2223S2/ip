@@ -46,10 +46,10 @@ public class TaskList {
         boolean hasIssue = false;
         switch (parsedInfoList.size()) {
         case 2: // new ToDos task
-            newTask = new ToDos(parsedInfoList.get(1));
+            newTask = new ToDo(parsedInfoList.get(1));
             break;
         case 3: // new ToDos (COMPLETED) task
-            newTask = new ToDos(parsedInfoList.get(2));
+            newTask = new ToDo(parsedInfoList.get(2));
             newTask.setDone();
             break;
         case 4: // new Deadline task
@@ -278,10 +278,10 @@ public class TaskList {
             }
             switch (parsedInfoList.size()) {
             case 2: // new ToDos task
-                newTask = new ToDos(parsedInfoList.get(1));
+                newTask = new ToDo(parsedInfoList.get(1));
                 break;
             case 3: // new ToDos (COMPLETED) task
-                newTask = new ToDos(parsedInfoList.get(2));
+                newTask = new ToDo(parsedInfoList.get(2));
                 newTask.setDone();
                 break;
             case 4: // new Deadline task
