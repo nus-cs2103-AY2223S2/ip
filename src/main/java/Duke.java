@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.io.File;
 import java.io.IOException;
 import java.io.FileWriter;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Duke {
     public static void addTaskToFile(String fileName, String task) {
@@ -63,7 +65,8 @@ public class Duke {
                         "\nNow you have " + taskList.size() + " tasks in the list.");
 
             } else if(input.length() > 8 &&(input.substring(0, 8)).equals("deadline")) {
-                Deadline task = new Deadline(input);
+                LocalDate deadline = LocalDate.parse(input.substring(input.indexOf("/") + 4));
+                Deadline task = new Deadline(input, deadline);
                 taskList.add(task);
                 addTaskToFile("C:/Users/linwe/Documents/TaskSaved.txt", task.getTaskType() + " | "
                         + task.currentTaskStatus()  + " | " + task.getTask() + " | " + task.getDeadline() + "\n");
@@ -72,7 +75,9 @@ public class Duke {
                         "\nNow you have " + taskList.size() + " tasks in the list.");
 
             } else if(input.length() > 5 && (input.substring(0, 5)).equals("event")) {
-                Event task = new Event(input);
+                LocalDate startDate = LocalDate.parse(input.substring(input.indexOf("/") + 6, input.lastIndexOf("/") - 1));
+                LocalDate endDate = LocalDate.parse(input.substring(input.lastIndexOf("/") + 4));
+                Event task = new Event(input, startDate, endDate);
                 taskList.add(task);
                 addTaskToFile("C:/Users/linwe/Documents/TaskSaved.txt", task.getTaskType() + " | "
                         + task.currentTaskStatus()  + " | " + task.getTask() + " | " + task.getTimeline() + "\n");

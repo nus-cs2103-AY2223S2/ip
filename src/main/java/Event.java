@@ -1,16 +1,17 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task{
     String taskDescription;
-    String startDate;
-    String endDate;
+    LocalDate startDate;
+    LocalDate endDate;
 
-    public Event(String taskString) {
-        super(taskString.substring(6, taskString.indexOf("/") - 1) + " (from: " +
-                taskString.substring(taskString.indexOf("/") + 6, taskString.lastIndexOf("/") - 1) +
-                " to: " + taskString.substring(taskString.lastIndexOf("/") + 4) + ")");
+    public Event(String taskString, LocalDate startDateInput, LocalDate endDateInput) {
+        super(taskString.substring(6, taskString.indexOf("/") - 1));
 
         taskDescription = taskString.substring(6, taskString.indexOf("/") - 1);
-        startDate = taskString.substring(taskString.indexOf("/") + 6, taskString.lastIndexOf("/") - 1);
-        endDate = taskString.substring(taskString.lastIndexOf("/") + 4);
+        startDate = startDateInput;
+        endDate = endDateInput;
     }
 
     @Override
@@ -19,11 +20,11 @@ public class Event extends Task{
     }
 
     public String getTimeline() {
-        return this.startDate + " - " + this.endDate;
+        return this.startDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " to " + this.endDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString();
+        return "[E]" + super.toString() + " (" + this.getTimeline() + ")";
     }
 }

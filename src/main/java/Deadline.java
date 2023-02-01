@@ -1,14 +1,16 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task{
 
     String taskDescription;
-    String deadline;
+    LocalDate deadLine;
 
-    public Deadline(String taskString) {
-        super (taskString.substring(9, taskString.indexOf("/") - 1)
-                + " (by: " + taskString.substring(taskString.indexOf("/") + 4) + ")");
+    public Deadline(String taskString, LocalDate deadline) {
+        super (taskString.substring(9, taskString.indexOf("/") - 1));
 
         taskDescription = taskString.substring(9, taskString.indexOf("/") - 1);
-        deadline = taskString.substring(taskString.indexOf("/") + 4);
+        deadLine = deadline;
     }
     @Override
     public String getTask() {
@@ -16,11 +18,11 @@ public class Deadline extends Task{
     }
 
     public String getDeadline() {
-        return this.deadline;
+        return this.deadLine.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString();
+        return "[D]" + super.toString() + " ( by: " + this.getDeadline() + " )" ;
     }
 }
