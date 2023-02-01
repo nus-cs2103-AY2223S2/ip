@@ -50,6 +50,9 @@ public class Parser {
         case "deadline":
             Parser.taskCommandHandler(input, ls);
             break;
+        case "find":
+            UI.findResultMsg(ls.find(input[1]), input[1]);
+            break;
         default:
             throw new DukeException("The Duke does not understand your words!");
         }

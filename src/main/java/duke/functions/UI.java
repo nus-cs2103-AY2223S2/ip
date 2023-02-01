@@ -41,6 +41,11 @@ public class UI {
         System.out.println(mainDivider + "TO DO LIST:\n" + msg + mainDivider);
     }
 
+    public static void findResultMsg(String msg, String keyword) {
+        System.out.println(mainDivider + "The keyword given is:\n\n\"" + keyword
+                + "\"\n\nThe Duke has found the following tasks:\n" + msg + mainDivider);
+    }
+
     public static void errorMsg(String msg) {
         System.out.println("!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!\n"
                 + msg + "\n"

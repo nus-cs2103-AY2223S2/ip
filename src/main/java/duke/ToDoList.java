@@ -54,6 +54,16 @@ public class ToDoList {
         arr.get(ind).markDone();
     }
 
+    public String find(String keyword) {
+        String output = "";
+        for (int i = 1; i <= this.toDoCount; i++) {
+            if (arr.get(i).contains(keyword)) {
+                output = output + i + "." + arr.get(i) + "\n";
+            }
+        }
+        return output;
+    }
+
     @Override
     public String toString() {
         String output = "";
