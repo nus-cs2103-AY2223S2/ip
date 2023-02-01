@@ -7,11 +7,18 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * A Personal Assistant Chatbot named Duke that helps the user keep track of various things.
+ */
 public class Duke {
-    private Storage storage;
+    private final Storage storage;
     private TaskList tasks;
-    private Ui ui;
+    private final Ui ui;
 
+    /**
+     * Constructor for class Duke.
+     * @param filePath the pathname string of the file to keep track of user things.
+     */
     public Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
