@@ -1,5 +1,7 @@
 package duke;
 
+import duke.Task;
+
 public class Todo extends Task {
     public Todo(String description, String fullDescription) {
         super(description, fullDescription);
