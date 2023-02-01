@@ -49,7 +49,8 @@ public class Event extends Task {
         if (dateTime.length < 2) {
             throw new DukeException("Missing End Time");
         }
-        return new Event(startEndTime[0], false, DateTimeUtils.dateFormatter(dateTime[0]), DateTimeUtils.dateFormatter(dateTime[1]));
+        return new Event(startEndTime[0], false,
+                DateTimeUtils.dateFormatter(dateTime[0]), DateTimeUtils.dateFormatter(dateTime[1]));
     }
 
     /**
@@ -77,7 +78,8 @@ public class Event extends Task {
 
     @Override
     public String getStoreTaskString() {
-        return this.getTaskType() + " | " + this.getCheckedString() + " | " + this.getStr() + " | " + this.getStart() + " | " + this.getEnd();
+        return this.getTaskType() + " | " + this.getCheckedString() + " | "
+                + this.getStr() + " | " + this.getStart() + " | " + this.getEnd();
     }
 
 
@@ -88,11 +90,11 @@ public class Event extends Task {
         String startTime = this.getStart();
         String endTime = this.getEnd();
         if (checked) {
-            return "[E][X] " + str + " (from: " + startTime +
-                    " to: " + endTime + ")";
+            return "[E][X] " + str + " (from: " + startTime
+                    + " to: " + endTime + ")";
         } else {
-            return "[E][ ] " + str + " (from: " + startTime +
-                    " to: " + endTime + ")";
+            return "[E][ ] " + str + " (from: " + startTime
+                    + " to: " + endTime + ")";
         }
     }
 }

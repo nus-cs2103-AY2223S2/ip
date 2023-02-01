@@ -29,7 +29,7 @@ public class DeleteTaskCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        taskList.deleteTask(inputArr, ui);
+        taskList.deleteTask(this.getInputArr(), ui);
         storage.writeData(taskList);
     }
 

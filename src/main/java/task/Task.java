@@ -3,7 +3,7 @@ package task;
 /**
  * Abstract class for task.
  */
-abstract public class Task {
+public abstract class Task {
     /**
      * Task name.
      */
@@ -39,6 +39,6 @@ abstract public class Task {
         this.checked = checked;
     }
 
-    abstract public String getStoreTaskString();
-    abstract public String getTaskType();
+    public abstract String getStoreTaskString();
+    public abstract String getTaskType();
 }

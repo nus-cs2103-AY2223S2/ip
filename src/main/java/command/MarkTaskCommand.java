@@ -35,7 +35,7 @@ public class MarkTaskCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        taskList.markTask(isMarked, inputArr, ui);
+        taskList.markTask(isMarked, this.getInputArr(), ui);
         storage.writeData(taskList);
     }
 

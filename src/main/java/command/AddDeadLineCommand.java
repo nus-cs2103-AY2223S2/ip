@@ -29,7 +29,7 @@ public class AddDeadLineCommand extends AddTaskCommand {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        DeadLine deadLine = DeadLine.generate(inputArr);
+        DeadLine deadLine = DeadLine.generate(this.getInputArr());
         taskList.addTask(deadLine);
         storage.writeData(taskList);
         ui.printAddTaskMsg(taskList, deadLine);

@@ -29,7 +29,7 @@ public class AddEventCommand extends AddTaskCommand {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        Event event = Event.generate(inputArr);
+        Event event = Event.generate(this.getInputArr());
         taskList.addTask(event);
         storage.writeData(taskList);
         ui.printAddTaskMsg(taskList, event);

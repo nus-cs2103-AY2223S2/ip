@@ -12,8 +12,8 @@ import utils.DateTimeUtils;
  * Runs the whole application for users to store and track tasks.
  */
 public class Duke {
-    private final static String FILE_PATH = "src/data/tasks.txt";
-    private final static String DIRECTORY_PATH = "src/data";
+    private static final String FILE_PATH = "src/data/tasks.txt";
+    private static final String DIRECTORY_PATH = "src/data";
     private final Ui ui;
     private final Storage storage;
 

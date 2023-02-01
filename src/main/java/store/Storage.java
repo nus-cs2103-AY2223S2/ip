@@ -1,16 +1,17 @@
 package store;
 
-import task.DeadLine;
-import task.Event;
-import task.Task;
-import task.ToDo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import dukeexception.DukeException;
+import task.DeadLine;
+import task.Event;
+import task.Task;
+import task.ToDo;
 
 /**
  * Storage class to save data to file.
@@ -70,19 +71,23 @@ public class Storage {
                 String nextLine = scanner.nextLine();
                 String[] taskLine = nextLine.trim().split(" \\| ");
                 switch (taskLine[0]) {
-                    case "T":
-                        arrayList.add(ToDo.generateTask(taskLine));
-                        break;
-                    case "E":
-                        arrayList.add(Event.generateTask(taskLine));
-                        break;
-                    case "D":
-                        arrayList.add(DeadLine.generateTask(taskLine));
-                        break;
+                case "T":
+                    arrayList.add(ToDo.generateTask(taskLine));
+                    break;
+                case "E":
+                    arrayList.add(Event.generateTask(taskLine));
+                    break;
+                case "D":
+                    arrayList.add(DeadLine.generateTask(taskLine));
+                    break;
+                default:
+                    throw new DukeException("Invalid data!");
                 }
             }
         } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+            System.out.println("File not found");
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
         }
         return new TaskList(arrayList);
     }
@@ -90,12 +95,12 @@ public class Storage {
     /**
      * Writes data of tasks to file.
      *
-     * @param taskList To write data to file.
+     * @param tasks To write data to file.
      */
-    public void writeData(TaskList taskList) {
+    public void writeData(TaskList tasks) {
         try {
             FileWriter fileWriter = new FileWriter(filePath);
-            ArrayList<Task> arrayList = taskList.getTasks();
+            ArrayList<Task> arrayList = tasks.getTasks();
             for (Task task : arrayList) {
                 fileWriter.write(task.getStoreTaskString() + "\n");
             }

@@ -54,7 +54,7 @@ public class ToDo extends Task {
         String str = this.getStr();
         if (checked) {
             return "[T][X] " + str;
-        } else{
+        } else {
             return "[T][ ] " + str;
         }
     }

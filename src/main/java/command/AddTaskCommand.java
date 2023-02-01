@@ -8,7 +8,7 @@ import userinteraction.Ui;
 /**
  * Abstract command class for adding tasks.
  */
-abstract public class AddTaskCommand extends Command {
+abstract class AddTaskCommand extends Command {
     /**
      * Public constructor.
      *

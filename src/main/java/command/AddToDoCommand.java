@@ -29,7 +29,7 @@ public class AddToDoCommand extends AddTaskCommand {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        ToDo toDo = ToDo.generate(inputArr);
+        ToDo toDo = ToDo.generate(this.getInputArr());
         taskList.addTask(toDo);
         storage.writeData(taskList);
         ui.printAddTaskMsg(taskList, toDo);
