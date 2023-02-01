@@ -1,4 +1,6 @@
-public class Todo extends Task{ //type T
+package duke.task;
+
+public class Todo extends Task { //type T
     public Todo(String desc) {
         super(desc,"T");
     }

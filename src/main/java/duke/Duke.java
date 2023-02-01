@@ -1,3 +1,5 @@
+package duke;
+import duke.command.Command;
 public class Duke {
     private Storage storage;
     private TaskList tasks;

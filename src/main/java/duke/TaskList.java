@@ -1,3 +1,7 @@
+package duke;
+
+import duke.task.Task;
+
 import java.util.ArrayList;
 
 public class TaskList {
@@ -28,24 +32,24 @@ public class TaskList {
 
     public void markTask(int taskIndex) {
         tasks.get(taskIndex).markAsDone();
-        System.out.println("Nice! I've marked this task as done:\n " + tasks.get(taskIndex).toString());
+        System.out.println("Nice! I've marked this duke.task as done:\n " + tasks.get(taskIndex).toString());
     }
 
     public void unmarkTask(int taskIndex) {
         tasks.get(taskIndex).markUndone();
-        System.out.println("OK, I've marked this task as not done yet:\n " + tasks.get(taskIndex).toString());
+        System.out.println("OK, I've marked this duke.task as not done yet:\n " + tasks.get(taskIndex).toString());
     }
 
     public void deleteTask(int taskIndex) {
         Task taskRemoved = tasks.remove(taskIndex);
-        System.out.println("Noted. I've removed this task: \n" + taskRemoved +
+        System.out.println("Noted. I've removed this duke.task: \n" + taskRemoved +
                 String.format("\n Now you have %d tasks in the list.",tasks.size()));
     }
 
     public void addTask(Task newTask) {
         tasks.add(newTask);
         System.out.println(newTask);
-        System.out.println(String.format("Now you have %d task(s) in the list.", tasks.size()));
+        System.out.println(String.format("Now you have %d duke.task(s) in the list.", tasks.size()));
 
     }
 

@@ -1,4 +1,6 @@
-//addapted from partial solution provided in lecture notes
+package duke.task;
+
+//adapted from partial solution provided in lecture notes
 //https://nus-cs2103-ay2223s2.github.io/website/admin/ip-w2.html
 public class Task {
     String desc;

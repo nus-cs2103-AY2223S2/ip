@@ -1,7 +1,9 @@
+package duke;
+
 import java.util.Scanner;
 
 /**
- * UI of Duke Application
+ * UI of duke.Duke Application
  */
 public class Ui {
 
@@ -24,8 +26,8 @@ public class Ui {
     }
 
     /**
-     * Prompts user for the command and reads the text entered by the user.
-     * @return (full line) command.
+     * Prompts user for the duke.command and reads the text entered by the user.
+     * @return (full line) duke.command.
      */
     public String getCommand() {
         System.out.println("Enter your command: ");

@@ -1,8 +1,12 @@
+package duke;
+
+import duke.command.*;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 public class Parser {
-    public static Command parseCommand(String userInput,TaskList tasklist) {
+    public static Command parseCommand(String userInput, TaskList tasklist) {
         String[] arrOfStr = userInput.split(" ");
         String commandWord = arrOfStr[0];
         int taskIndex;
