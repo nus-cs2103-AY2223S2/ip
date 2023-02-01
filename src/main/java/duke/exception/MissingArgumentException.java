@@ -6,7 +6,7 @@ package duke.exception;
 public class MissingArgumentException extends DukeException {
 
     /**
-     * Constructor to create an duke.exception for Missing argument.
+     * Constructor to create an exception for Missing argument.
      * @param message error message for the missing argument duke.exception.
      */
     public MissingArgumentException(String message) {

@@ -29,7 +29,6 @@ public class Parser {
     public Parser(String request, TaskList tasks) {
         this.request = request;
         this.tasks = tasks;
-        processRequest();
     }
 
     /**
@@ -51,11 +50,11 @@ public class Parser {
         case "deadline":
             return new AddDeadlineCommand(this.request);
         case "event":
-            return new AddEventCommand(request);
+            return new AddEventCommand(this.request);
         case "delete":
-            return new RemoveCommand(request);
+            return new RemoveCommand(this.request);
         case "find":
-            return new FindCommand(request);
+            return new FindCommand(this.request);
         default:
             throw new UnknownCommandException();
         }

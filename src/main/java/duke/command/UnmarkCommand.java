@@ -21,15 +21,23 @@ public class UnmarkCommand extends Command {
 
     @Override
     public String execute(TaskList tasks) throws IndexOutOfBoundException {
+
         String[] req = this.request.split("unmark ");
+
+        // check missing index
         if (req.length < 2) {
             throw new MissingArgumentException("Missing index!");
         }
+
         Integer idx = Integer.parseInt(req[1]) - 1;
+
+        // check valid index
         if (idx >= tasks.numOfTask()) {
             throw new IndexOutOfBoundException();
         }
+
         tasks.getTask(idx).unmarkComplete();
-        return "Aww! One more duke.task on the list \n" + tasks.getTask(idx);
+
+        return "Aww! One more task on the list \n" + tasks.getTask(idx);
     }
 }

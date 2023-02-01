@@ -14,13 +14,10 @@ public class Todo extends Task {
         super(task);
     }
 
-    /**
-     * Convert the Todo duke.task into data from for duke.storage into file.
-     * @return String representation of the data.
-     */
+    @Override
     public String toData() {
         String status = this.completed ? "1" : "0";
-        return "T | " + status + " |" + this.task;
+        return "T | " + status + " | " + this.task;
     }
 
     @Override

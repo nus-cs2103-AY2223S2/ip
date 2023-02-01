@@ -18,14 +18,14 @@ public class TaskList {
     private File file;
 
     /**
-     * Constructor to create new Task.Task List
+     * Constructor to create new Task List
      */
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
     /**
-     * Constructor to instantiate new duke.task list with data from local file prepended.
+     * Constructor to instantiate new task list with data from local file prepended.
      * @param file
      */
     public TaskList(File file) {
@@ -34,8 +34,8 @@ public class TaskList {
     }
 
     /**
-     * Return the duke.task array list.
-     * @return the duke.task list.
+     * Return the task array list.
+     * @return the task list.
      */
     public ArrayList<Task> getTasks() {
         return this.tasks;
@@ -43,7 +43,7 @@ public class TaskList {
 
     /**
      * Add new duke.task to current duke.task list
-     * @param task new duke.task to be added into the duke.task list
+     * @param task new task to be added into the duke.task list
      */
     public void add(Task task) {
         this.tasks.add(task);
@@ -61,9 +61,9 @@ public class TaskList {
     }
 
     /**
-     * Add new deadline to current duke.task list
+     * Add new deadline to current task list
      * @param task new duke.task to be added
-     * @param dueDate the deadline of the duke.task
+     * @param dueDate the deadline of the task
      * @return the added Deadline
      */
     public Deadline addDeadline(String task, LocalDate dueDate) {
@@ -73,8 +73,8 @@ public class TaskList {
     }
 
     /**
-     * Add new event to current duke.task list
-     * @param task event duke.task to be added
+     * Add new event to current task list
+     * @param task event task to be added
      * @param from start time of the event
      * @param to end time of the event
      * @return the added Event
@@ -86,25 +86,25 @@ public class TaskList {
     }
 
     /**
-     * Get the specific duke.task at given index, idx
-     * @param idx Given index of the duke.task in the list
-     * @return Task.Task at index, idx
+     * Get the specific task at given index, idx
+     * @param idx Given index of the task in the list
+     * @return Task at index, idx
      */
     public Task getTask(Integer idx) {
         return tasks.get(idx);
     }
 
     /**
-     * Delete duke.task at specific index, idx
-     * @param idx index of the duke.task in the array to be deleted
+     * Delete task at specific index, idx
+     * @param idx index of the task in the array to be deleted
      */
     public void deleteTask(Integer idx) {
         this.tasks.remove(idx.intValue());
     }
 
     /**
-     * Getter method to get the duke.task list
-     * @return duke.task list
+     * Getter method to get the task list
+     * @return task list
      */
     public String getTaskList() {
         StringBuilder taskList = new StringBuilder();
@@ -122,7 +122,7 @@ public class TaskList {
 
     /**
      * Function to find tasks using keyword.
-     * @param keyword keyword the user wish to find the duke.task
+     * @param keyword keyword the user wish to find the task
      * @return list of tasks that contain the keyword.
      */
     public ArrayList<Task> find(String keyword) {

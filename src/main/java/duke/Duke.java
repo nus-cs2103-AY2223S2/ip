@@ -4,20 +4,7 @@ import java.util.Scanner;
 
 import duke.command.Command;
 import duke.exception.DukeException;
-import duke.ui.DialogBox;
 import duke.ui.UI;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import duke.parser.Parser;
 import duke.storage.LocalStorage;
 import duke.storage.TaskList;
@@ -51,9 +38,12 @@ public class Duke {
      * Function to run duke.Duke bot.
      */
     public void run() {
+
         UI.greet();
+
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
+
         while (!input.equalsIgnoreCase("bye")) {
             try {
                 Command com = new Parser(input, tasks).processRequest();
@@ -64,8 +54,10 @@ public class Duke {
             }
             input = sc.nextLine();
         }
+
         localStorage.saveFile(tasks);
         sc.close();
+
         UI.exit();
     }
 
@@ -73,15 +65,19 @@ public class Duke {
      * Function to handle the user's request
      */
     public static void handleRequest() {
+
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
+
         TaskList tasks = new TaskList();
+
         while (!input.equalsIgnoreCase("bye")) {
             Command com = new Parser(input, tasks).processRequest();
             String response = com.execute(tasks);
             UI.printRes(response);
             input = sc.nextLine();
         }
+
         sc.close();
     }
 

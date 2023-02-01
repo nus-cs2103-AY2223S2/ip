@@ -10,14 +10,14 @@ import duke.task.Deadline;
 
 /**
  * Class use to handle command: add deadline.
- * Allows user to add deadline into the duke.task list.
+ * Allows user to add deadline into the task list.
  */
 public class AddDeadlineCommand extends Command {
 
     private String request;
 
     /**
-     * Constructor to create deadline duke.task according user's request.
+     * Constructor to create deadline task according user's request.
      * @param request user's request to be processed into deadline duke.task.
      */
     public AddDeadlineCommand(String request) {
@@ -26,14 +26,19 @@ public class AddDeadlineCommand extends Command {
 
     @Override
     public String execute(TaskList tasks) throws MissingArgumentException, InvalidArgumentException {
+
         String[] req = request.split("deadline ");
+
+        // check presence of task description
         if (req.length < 2) {
-            throw new MissingArgumentException("☹ OOPS!!! You're missing the duke.task description");
+            throw new MissingArgumentException("☹ OOPS!!! You're missing the task description");
         }
+
         req = req[1].split("/by ");
 
+        // check presence of argument
         if (req.length < 2) {
-            throw new MissingArgumentException("☹ OOPS!!! You're missing the duke.task deadline");
+            throw new MissingArgumentException("☹ OOPS!!! You're missing the task deadline");
         }
 
         String task = req[0].strip();
@@ -42,12 +47,13 @@ public class AddDeadlineCommand extends Command {
         try {
             LocalDate dueDate = LocalDate.parse(deadline);
             Deadline newDeadline = tasks.addDeadline(task, dueDate);
-            return "Great! I've added this duke.task for you \n" + newDeadline
+            return "Great! I've added this task for you \n" + newDeadline
                     + "\nYou have " + tasks.numOfTask() + " tasks in the list";
 
         } catch (DateTimeException error) {
             throw new InvalidArgumentException("Please insert your date using the format, "
                     + "YYYY-MM-DD (e.g. 2000-01-01)");
         }
+
     }
 }
