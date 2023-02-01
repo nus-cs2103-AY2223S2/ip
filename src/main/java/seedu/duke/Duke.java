@@ -7,7 +7,7 @@ public class Duke {
     private final Ui ui;
     private TaskList tasks;
 
-    private final static String[] LIST_OF_COMMANDS =
+    private static final String[] LIST_OF_COMMANDS =
             new String[]{"list", "bye", "todo", "mark", "unmark", "event", "deadline", "delete", "find"};
 
     enum Commands {

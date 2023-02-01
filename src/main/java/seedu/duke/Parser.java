@@ -167,7 +167,7 @@ public class Parser {
      *  @param ui Ui to print lines for user to see and interact with
      *  @return Enum Command of the input given
      */
-    public Duke.Commands executeCommand(String[] inputStrings, String[] listOfCommands,TaskList taskList,
+    public Duke.Commands executeCommand(String[] inputStrings, String[] listOfCommands, TaskList taskList,
                                         Storage storage, Ui ui) throws DukeException {
         String commandStr = inputStrings[0];
         Duke.Commands command = Duke.Commands.valueOf(checkCommand(commandStr, listOfCommands));
