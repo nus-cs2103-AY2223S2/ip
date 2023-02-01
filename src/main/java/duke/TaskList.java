@@ -120,6 +120,10 @@ public class TaskList {
         return this.tasks.get(index);
     }
 
+    public boolean containsTask(Task task) {
+        return this.tasks.contains(task);
+    }
+
     /**
      * Finds all tasks in the list that contains the given
      * keyword and returns a new TaskList containing only
@@ -128,11 +132,13 @@ public class TaskList {
      * @param keyword The given keyword that tasks must contain.
      * @return New TaskList containing only matching tasks.
      */
-    public TaskList findTasksByKeyword(String keyword) {
+    public TaskList findTasksByKeyword(String ... keywords) {
         TaskList filteredTaskList = new TaskList();
-        for (Task t : this.tasks) {
-            if (t.nameContainsKeyword(keyword)) {
-                filteredTaskList.addTask(t);
+        for (String keyword : keywords) {
+            for (Task t : this.tasks) {
+                if (t.nameContainsKeyword(keyword) && ! filteredTaskList.containsTask(t)) {
+                    filteredTaskList.addTask(t);
+                }
             }
         }
         return filteredTaskList;

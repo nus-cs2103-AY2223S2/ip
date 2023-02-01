@@ -200,8 +200,8 @@ public class Parser {
      */
     private static Command processFind(String command, String line) throws DukeException {
         try {
-            String keyword = line.split(command)[1].trim();
-            return new FindCommand(keyword);
+            String[] keywords = line.split(command)[1].trim().split(" ");
+            return new FindCommand(keywords);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException(GuiText.generateMissingKeywordErrorMessage());
         }

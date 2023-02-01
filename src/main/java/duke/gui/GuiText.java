@@ -125,7 +125,7 @@ public class GuiText {
      * @return Error message.
      */
     public static String generateMissingKeywordErrorMessage() {
-        return "I'm lost. You need to give me a keyword to look for!";
+        return "I'm lost. You need to give me at least one keyword to look for!";
     }
 
     /**
@@ -208,8 +208,10 @@ public class GuiText {
      */
     public String showFind(TaskList tasks) {
         if (tasks.getSize() == 0) {
-            return "There are no matching tasks.";
+            MainWindow.changeSpriteExpression(SpriteEmotion.NEUTRAL);
+            return "There are no tasks matching any of your keywords.";
         } else {
+            MainWindow.changeSpriteExpression(SpriteEmotion.HAPPY);
             return "Here are all the matching tasks in your list:\n"
                     + tasks;
         }

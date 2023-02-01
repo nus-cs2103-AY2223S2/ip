@@ -3,22 +3,19 @@ package duke.command;
 import duke.Storage;
 import duke.TaskList;
 import duke.gui.GuiText;
-import duke.gui.MainWindow;
-import duke.gui.SpriteEmotion;
 
 public class FindCommand extends Command {
 
-    private String keyword;
+    private String[] keywords;
 
-    public FindCommand(String keyword) {
+    public FindCommand(String ... keywords) {
         super(false);
-        this.keyword = keyword;
+        this.keywords = keywords;
     }
 
     @Override
     public String execute(TaskList tasks, GuiText guiText, Storage storage) {
-        MainWindow.changeSpriteExpression(SpriteEmotion.HAPPY);
-        return guiText.showFind(tasks.findTasksByKeyword(this.keyword));
+        return guiText.showFind(tasks.findTasksByKeyword(this.keywords));
     }
 
 }
