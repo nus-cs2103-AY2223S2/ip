@@ -65,7 +65,7 @@ public class UI {
 
     /**
      * Prints a message that shows the list of Task objects and their state
-     * (whether marked or unmarked) in a ToDoList object.
+     * (whether marked or unmarked) in the given ToDoList object.
      *
      * @param ls The ToDoList object that the list is to be printed from.
      */
@@ -73,6 +73,11 @@ public class UI {
         System.out.println(mainDivider + "TO DO LIST:\n" + ls + mainDivider);
     }
 
+    /**
+     * Prints a message that is enclosed in error dividers.
+     *
+     * @param msg The message that is to be enclosed with error dividers.
+     */
     public static void errorMsg(String msg) {
         System.out.println("!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!\n"
                 + msg + "\n"
