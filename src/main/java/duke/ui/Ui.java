@@ -2,6 +2,7 @@ package duke.ui;
 
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
@@ -12,6 +13,7 @@ public class Ui {
 
     private final Scanner in;
     private final PrintStream out;
+    private ArrayList<String> responses;
 
     public Ui() {
         this(System.in, System.out);
@@ -20,6 +22,7 @@ public class Ui {
     public Ui(InputStream in, PrintStream out) {
         this.in = new Scanner(in);
         this.out = out;
+        responses = new ArrayList<>();
     }
 
     public void showWelcome() {
@@ -34,8 +37,18 @@ public class Ui {
 
     public void showToUser(String... message) {
         for (String m : message) {
-            out.println(LINE_PREFIX + m.replace("\n", LS + LINE_PREFIX));
+            responses.add(m.replace("\n", LS));
         }
+    }
+
+    public String getResponses() {
+        String concatenatedResponse = "";
+        for (String r : responses) {
+            concatenatedResponse += r + "\n";
+            System.out.println(r);
+        }
+        responses.clear();
+        return concatenatedResponse;
     }
 
     private boolean shouldIgnore(String rawInputLine) {
@@ -43,7 +56,7 @@ public class Ui {
     }
 
     public String readCommand() {
-        out.print(LINE_PREFIX + "Enter command: ");
+        showToUser(LINE_PREFIX + "Enter command: ");
         String fullInputLine = in.nextLine();
 
         // silently consume all ignored lines

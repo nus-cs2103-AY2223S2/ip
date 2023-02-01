@@ -32,6 +32,6 @@ public class DeleteCommand extends Command{
         } catch(IOException e) {
             throw new DukeException("Error deleting");
         }
-        ui.showToUser("Now you have " + tasks.getSize() + " duke.tasks in the list.");
+        ui.showToUser("Now you have " + tasks.getSize() + " tasks in the list.");
     }
 }
