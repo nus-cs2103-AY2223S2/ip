@@ -1,16 +1,21 @@
 package duke;
 
-import duke.Tasks.*;
-
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.Todo;
+
+/**
+ * Represents commands from user input
+ */
 public class Parser {
-    private Ui ui;
     private static final String Indentation = " ";
     private static final String Horizontal = "____________________________________________________________";
+    private Ui ui;
 
     /**
      * Parser constructor
@@ -63,14 +68,14 @@ public class Parser {
                     System.out.println(Indentation + Horizontal);
                 }
 
-            } else if (words[0].equals("find") ) {
+            } else if (words[0].equals("find")) {
                 try {
                     info = command.substring(command.indexOf(" ") + 1);
                     //System.out.println(info);
 
                     for (int i = 0; i < tasks.size(); i++) {
                         //if the existed task name contain info
-                        if(tasks.get(i).getDescription().contains(info)) {
+                        if (tasks.get(i).getDescription().contains(info)) {
                             System.out.println(Indentation + Horizontal);
                             System.out.println(Indentation + "Here are the matching tasks in your list:");
                             System.out.println(Indentation + (i + 1) + "." + tasks.get(i).toString());

@@ -1,9 +1,12 @@
 package duke;
 
-import duke.Tasks.Task;
-
 import java.util.ArrayList;
 
+import duke.tasks.Task;
+
+/**
+ * Represents the task list
+ */
 public class TaskList {
     private static ArrayList<Task> task;
     private int taskCounter;

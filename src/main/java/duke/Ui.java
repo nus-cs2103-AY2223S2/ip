@@ -1,9 +1,12 @@
 package duke;
 
-import duke.Tasks.Task;
-
 import java.util.Scanner;
 
+import duke.tasks.Task;
+
+/**
+ * Represents all methods such as showLogo, showWelcome...
+ */
 public class Ui {
     private static final String Indentation = " ";
     private static final String Horizontal = "____________________________________________________________";
@@ -63,7 +66,6 @@ public class Ui {
         System.out.println(Indentation + Horizontal);
     }
 
-
     /**
      * reads user's input
      * @return command
@@ -78,8 +80,9 @@ public class Ui {
      * @param num
      * @param tasks
      */
-    public static void done (String num, TaskList tasks) {
+    public static void done(String num, TaskList tasks) {
         int number = Integer.parseInt(num) - 1;
+        //tasks.get(number).isDone = true;
         tasks.get(number).isDone = true;
 
         System.out.println(Indentation + Horizontal);
@@ -110,7 +113,7 @@ public class Ui {
      */
     public static void delete(String num, TaskList tasks) {
         int index = Integer.parseInt(num) - 1;
-        try{
+        try {
             if (!(tasks.get(index)).equals(null)) {
                 System.out.println(Indentation + Horizontal);
                 System.out.println(Indentation + "Noted. I've removed this task:");

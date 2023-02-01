@@ -1,6 +1,10 @@
 package duke;
 
 import java.io.IOException;
+
+/**
+ * Represents Main class
+ */
 public class Duke {
 
     private Storage storage;

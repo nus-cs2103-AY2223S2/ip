@@ -1,21 +1,22 @@
-package duke.Tasks;
+package duke.tasks;
 
+/**
+ * Represents Task class
+ */
 public class Task {
-    protected String description;
+    public static int taskNum;
+    private String description;
     public boolean isDone;
 
-    public static int taskNum;
-    public boolean isExit;
 
     /**
      * Task constructor
      * @param description
      */
-    public Task (String description) {
+    public Task(String description) {
         this.description = description;
         this.isDone = false;
         taskNum++;
-        this.isExit = false;
     }
 
     /**
@@ -48,7 +49,7 @@ public class Task {
      * @return String
      */
     public String file() {
-        String status = isDone? "1" : "0";
+        String status = isDone ? "1" : "0";
         return " | " + status + " | " + getDescription();
     }
 }

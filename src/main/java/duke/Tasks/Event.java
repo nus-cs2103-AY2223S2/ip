@@ -1,6 +1,9 @@
-package duke.Tasks;
+package duke.tasks;
 
-public class Event extends Task{
+/**
+ * Represents event tasks
+ */
+public class Event extends Task {
     protected String from;
 
     protected String to;
@@ -33,7 +36,7 @@ public class Event extends Task{
     @Override
     public String toString() {
         return "[E]" + "[" + getStatusIcon() + "] " + getDescription()
-                + " (" + "from: " + this.from + " " + "to: " + this.to+ ")";
+                + " (" + "from: " + this.from + " " + "to: " + this.to + ")";
     }
 
     /**
@@ -42,7 +45,7 @@ public class Event extends Task{
      */
     @Override
     public String file() {
-        String status = isDone? "1" : "0";
+        String status = isDone ? "1" : "0";
         return "E | " + status + " | " + getDescription() + " | " + this.from + " | " + this.to;
     }
 }

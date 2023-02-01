@@ -1,16 +1,19 @@
 package duke;
 
-import duke.Tasks.Deadline;
-import duke.Tasks.Event;
-import duke.Tasks.Task;
-import duke.Tasks.Todo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.Todo;
+
+/**
+ * Represents loading data from file and updating data to file
+ */
 public class Storage {
     private final String filePath;
 
@@ -50,7 +53,7 @@ public class Storage {
                     task.isDone = isDoneInFile;
                     tasks.add(task);
                 }
-                if(task != null) {
+                if (task != null) {
                     task.isDone = isDoneInFile;
                 }
             }
@@ -70,7 +73,7 @@ public class Storage {
         FileWriter fw = new FileWriter(filePath);
         fw.write("");
         fw.close();
-        if(t.getTaskCounter() > 0) {
+        if (t.getTaskCounter() > 0) {
             for (int i = 0; i < t.getTaskCounter(); i++) {
                 appendToFile(t.get(i).file());
             }
