@@ -1,15 +1,22 @@
+package duke.Tasks;
+
+import duke.Command.Commands;
+import duke.Exceptions.CommandException;
+import duke.Exceptions.DescriptionException;
+import duke.DateTimeFormat;
+
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-abstract class Task {
+public abstract class Task {
     protected String description;
 
     protected boolean isDone;
 
-    public Task(String description) throws DescriptionException{
+    public Task(String description) throws DescriptionException {
         this.description = description;
         this.isDone = false;
         if (this.isEmpty()) {
@@ -27,10 +34,6 @@ abstract class Task {
 
     public void markDone() {
         this.isDone = true;
-    }
-
-    public void markUndone() {
-        this.isDone = false;
     }
 
     @Override

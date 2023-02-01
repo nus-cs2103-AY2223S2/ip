@@ -1,3 +1,7 @@
+package duke.Tasks;
+
+import duke.DateTimeFormat;
+import duke.Exceptions.DescriptionException;
 import java.time.LocalDateTime;
 
 /**
@@ -10,7 +14,7 @@ public class Event extends Task {
     protected String strBy;
     protected String strTo;
 
-    public Event(String description, String by, String to) throws DescriptionException{
+    public Event(String description, String by, String to) throws DescriptionException {
         super(description);
         this.strBy = by;
         this.strTo = to;

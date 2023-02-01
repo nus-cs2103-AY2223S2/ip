@@ -1,3 +1,5 @@
+package duke;
+
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -14,7 +16,7 @@ public enum DateTimeFormat {
     defaultOutput("MMM dd yyyy HHmma");
 
 
-    final DateTimeFormatter formatter;
+    public final DateTimeFormatter formatter;
     DateTimeFormat(String pattern) {
         this.formatter = DateTimeFormatter.ofPattern(pattern);
     }

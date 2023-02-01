@@ -1,3 +1,5 @@
+package duke.Exceptions;
+
 public class FIleException extends DukeException {
     public FIleException() {
     }

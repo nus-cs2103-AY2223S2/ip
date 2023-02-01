@@ -1,3 +1,5 @@
+package duke.Exceptions;
+
 public class DescriptionException extends DukeException {
     public DescriptionException() {
     }

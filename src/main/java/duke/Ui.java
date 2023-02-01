@@ -1,3 +1,8 @@
+package duke;
+
+import duke.Tasks.Task;
+import duke.Tasks.TaskList;
+
 public class Ui {
     public Ui() {
         String logo = " ____        _        \n"
@@ -15,7 +20,7 @@ public class Ui {
 
     public void showCommandError(String word) {
         System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-        System.out.println("Command: " + word);
+        System.out.println("duke.Command: " + word);
     }
 
     public void showMarked(Task task) {
@@ -40,7 +45,7 @@ public class Ui {
 
     public void showDescriptionError(String word) {
         System.out.println("Description is written incorrectly!");
-        System.out.println("Command: " + word);
+        System.out.println("duke.Command: " + word);
     }
 
     public void goodbye() {

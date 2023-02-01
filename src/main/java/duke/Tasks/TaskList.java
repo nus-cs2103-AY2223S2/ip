@@ -1,3 +1,8 @@
+package duke.Tasks;
+
+import duke.Exceptions.CommandException;
+import duke.Exceptions.DescriptionException;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,11 +22,11 @@ public class TaskList extends ArrayList<Task> {
 
     @Override
     public String toString() {
-        String result = "";
+        StringBuilder result = new StringBuilder();
         for (Task task : this) {
-            result += task + "\n";
+            result.append(task).append("\n");
         }
-        return result;
+        return result.toString();
     }
 
     public void addingTask(Task task) throws DescriptionException {

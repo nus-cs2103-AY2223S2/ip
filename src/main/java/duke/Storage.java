@@ -1,3 +1,8 @@
+package duke;
+
+import duke.Tasks.Task;
+import duke.Tasks.TaskList;
+
 import java.io.*;
 
 public class Storage {
@@ -25,6 +30,7 @@ public class Storage {
     }
 
     public void store(TaskList tasks) throws IOException {
+        //noinspection ResultOfMethodCallIgnored
         this.file.createNewFile();
         FileWriter writer = new FileWriter(this.filepath);
         for (Task task: tasks) {

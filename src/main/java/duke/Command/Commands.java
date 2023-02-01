@@ -1,3 +1,5 @@
+package duke.Command;
+
 public enum Commands {
     bye("bye"),
     mark("mark"),
@@ -8,8 +10,8 @@ public enum Commands {
     event("event ");
 
 
-    String label;
-    private Commands(String label) {
+    public final String label;
+    Commands(String label) {
         this.label = label;
     }
 }
