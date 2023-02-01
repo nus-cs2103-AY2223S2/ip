@@ -17,6 +17,11 @@ public class Task implements Serializable {
         return (isDone ? "X" : " ");
     }
 
+    /**
+     * Returns void.
+     * <p>
+     * Marks the task with a "X" and changes the status of isDone to True
+     */
     public void mark() {
         if (this.isDone == false) {
             this.isDone = true;
@@ -24,6 +29,11 @@ public class Task implements Serializable {
         }
     }
 
+    /**
+     * Returns void.
+     * <p>
+     * Marks the task with a " " and changes the status of isDone to False
+     */
     public void unmark() {
         if (this.isDone == true) {
             this.isDone = false;

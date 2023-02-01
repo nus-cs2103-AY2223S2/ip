@@ -20,6 +20,11 @@ public class FileManager {
         this.ui = new Ui();
     }
 
+    /**
+     * Returns TaskList object containing the saved ArrayList file,
+     * else return a new TaskList object with a new ArrayList.
+     * @return TaskList Object
+     */
     public TaskList getFile() {
         try {
             FileInputStream fis = new FileInputStream(this.filePath);
@@ -41,6 +46,14 @@ public class FileManager {
         }
     }
 
+    /**
+     * Returns void.
+     * <p>
+     * Takes in an ArrayList of Task and save it in the specified file path.
+     * <p>
+     * File type should be specified in the filepath.
+     * @param toDoList
+     */
     public void saveFile(ArrayList<Task> toDoList) {
         try {
             FileOutputStream fos = new FileOutputStream(this.filePath);

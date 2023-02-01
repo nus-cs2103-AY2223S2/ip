@@ -16,6 +16,20 @@ public class Parser {
         this.fileManager = fileManager;
         this.taskList = taskList;
     }
+
+    /**
+     * Returns void.
+     * <p>
+     * The userMessage argument must be of a certain format depending on the task to be added.
+     * Examples showned below:
+     * <p></p>
+     * todo [Event description]
+     * <p></p>
+     * deadline [Event description] /by [Date in YYYY-MM-DD format]
+     * <p></p>
+     * event [Event description] /from [Date in YYYY-MM-DD format] /to [Date in YYYY-MM-DD format]
+     * @param userMessage String input from the user
+     */
     public void parse(String userMessage) {
         String [] parts = userMessage.split(" ", 2);
 
