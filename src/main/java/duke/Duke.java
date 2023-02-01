@@ -2,9 +2,9 @@ package duke;
 
 import duke.command.Command;
 
-import java.util.ArrayList;
-import java.util.List;
-
+/**
+ * Driver code for the Duke project.
+ */
 public class Duke {
     private static final String SAVE_PATH = "./tasklist.txt";
 
@@ -12,6 +12,11 @@ public class Duke {
     private TaskList tasks;
     private final Ui ui;
 
+    /**
+     * Constructor for Duke object.
+     *
+     * @param filePath Relative path to saved TaskList file.
+     */
     public Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
@@ -28,11 +33,18 @@ public class Duke {
         duke.run();
     }
 
+    /**
+     * Runs the Duke instance and begins the command loop.
+     */
     public void run() {
         this.ui.greet();
         commandLoop();
     }
 
+    /**
+     * Takes commands repeatedly and executes them until
+     * "bye" is supplied.
+     */
     public void commandLoop() {
         boolean isExit = false;
         while (!isExit) {
