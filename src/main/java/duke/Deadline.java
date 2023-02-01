@@ -5,16 +5,22 @@ public class Deadline extends Task {
     protected Times ddline;
     protected String type = "[D]";
 
+    /**
+     * Constructor for Deadline
+     * @param description -> Task description
+     * @param by -> String format of time deadline
+     */
     public Deadline(String description, String by) {
         super(description);
         ddline = new Times(by);
     }
 
     /**
-     * Adds new deadline task
+     * Adds new deadline task.
+     * Format: "deadline {description} /by {time}
+     * example: deadline return book /by 2019-10-15 1530
      * @param input Input Chat which starts with "deadline"
-     *              Format: "deadline {description} /by {time}
-     *              example: deadline return book /by 2019-10-15 1530
+     * @throws DukeException if format of deadline task is wrong.
      */
     public static Deadline createDeadline(String input) throws DukeException {
         int ddlineIndex = input.indexOf("/");

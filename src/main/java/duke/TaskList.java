@@ -23,6 +23,12 @@ public class TaskList {
     public void end() {
         ui.sayBye();
     }
+
+    /**
+     * Mark ith task as done
+     * @param i
+     * @throws DukeException if ith task doesn't exist
+     */
     public void mark(int i) throws DukeException {
         try {
             list.get(i).markAsDone();
@@ -31,8 +37,13 @@ public class TaskList {
         } catch (IndexOutOfBoundsException IOBE) {
             throw new DukeException(ExceptionType.TASK_NOT_EXIST);
         }
-
     }
+
+    /**
+     * Unmark ith task as not done
+     * @param i
+     * @throws DukeException if ith task doesn't exist
+     */
     public void unmark(int i) throws DukeException {
         try {
             list.get(i).markAsNotDone();
@@ -45,11 +56,22 @@ public class TaskList {
     public void list() {
         ui.showList(list);
     }
+
+    /**
+     * Adds task to list
+     * @param t
+     */
     public void add(Task t) {
         list.add(t);
         s.write(t);
         ui.showAddTask(list);
     }
+
+    /**
+     * Deletes ith task from list
+     * @param deleteIndex
+     * @throws DukeException if ith task doesn't exist
+     */
     public void delete(int deleteIndex) throws DukeException {
         try {
             Task temp = list.remove(deleteIndex);

@@ -29,6 +29,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Write task to hard copy
+     * @param t
+     */
     public void write(Task t) {
         int isDone = 0;
         if(t.getIsDone())
@@ -41,6 +45,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Update hard copy by rewriting everything
+     * Only happen when a task is marked/unmarked/deleted.
+     * @param list
+     */
     public void update(ArrayList<Task> list) {
         file.delete();
         try {

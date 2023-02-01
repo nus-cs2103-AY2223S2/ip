@@ -20,6 +20,17 @@ public class Duke {
         a.start();
     }
 
+    /**
+     * Starts chat with user
+     * Format for tasks:
+     *      1. todo {description}
+     *          eg. todo buy lunch
+     *      2. deadline {description} /by {time}
+     *          eg. deadline return book /by 2019-10-15 1530
+     *      3. event {description} /from {time} /to {time}
+     *          eg. event read book /from 2019-10-15 1530 /to 2020-12-11 1200
+     * @throws DukeException
+     */
     public void start() throws DukeException {
         Scanner sc = new Scanner(System.in);
         ui.sayHello();
@@ -33,6 +44,8 @@ public class Duke {
                     return;
                 }
             } catch (DukeException e) {
+                continue;
+            } catch (NullPointerException e) {
                 continue;
             }
         }

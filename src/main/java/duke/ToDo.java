@@ -7,6 +7,11 @@ public class ToDo extends Task {
         super(description);
     }
 
+    /**
+     * Create todo task
+     * @param input
+     * @return todo object
+     */
     public static ToDo createToDo(String input) {
         String description = input.substring(5);
         ToDo temp = new ToDo((description));
