@@ -15,8 +15,7 @@ public class ListCommand extends Command {
         super(null);
     }
     @Override
-    public Command execute(TaskList list, Storage storage) throws DuduException {
-        list.printList();
-        return this;
+    public String execute(TaskList list, Storage storage) throws DuduException {
+        return list.printList();
     }
 }

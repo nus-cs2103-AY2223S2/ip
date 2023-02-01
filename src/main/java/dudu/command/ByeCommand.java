@@ -14,9 +14,9 @@ public class ByeCommand extends Command {
     }
 
     @Override
-    public Command execute(TaskList list, Storage storage) throws DuduException {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String execute(TaskList list, Storage storage) throws DuduException {
+//        System.out.println("Bye. Hope to see you again soon!");
         Dudu.exit();
-        return this;
+        return "Bye. Hope to see you again soon!";
     }
 }

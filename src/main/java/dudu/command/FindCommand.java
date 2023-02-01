@@ -25,20 +25,20 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public Command execute(TaskList list, Storage storage) throws DuduException {
+    public String execute(TaskList list, Storage storage) throws DuduException {
+        StringBuilder sb = new StringBuilder();
         int index = 0;
         ArrayList<Task> visited = new ArrayList<>();
-        System.out.println("Here are the matching tasks in your list:");
+        sb.append("Here are the matching tasks in your list:\n");
         for (Task task: list.getList()) {
             for (String input: inputArr) {
                 if (task.getDescription().contains(input.strip()) && !visited.contains(task)) {
                     visited.add(task);
                     index += 1;
-                    System.out.print(index + ".");
-                    System.out.println(task);
+                    sb.append(index + "." + task + "\n");
                 }
             }
         }
-        return this;
+        return sb.toString();
     }
 }

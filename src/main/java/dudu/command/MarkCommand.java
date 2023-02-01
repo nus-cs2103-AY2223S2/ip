@@ -22,18 +22,17 @@ public class MarkCommand extends Command {
     }
 
     @Override
-    public Command execute(TaskList list, Storage storage) throws DuduException {
+    public String execute(TaskList list, Storage storage) throws DuduException {
         try {
             Task currTask = list.getTask(index);
             currTask.markAsDone();
             storage.saveTask(list.getList());
-            System.out.println("Nice! I've marked this task as done:");
-            System.out.println("  " + currTask);
+            return "Nice! I've marked this task as done:\n  " + currTask;
+//            System.out.println("  " + currTask);
         } catch (TaskNumRangeException ex) {
-            System.out.println(ex);
+            return ex.toString();
         } catch (DuduException ex) {
-            System.out.println(ex);
+            return ex.toString();
         }
-        return this;
     }
 }

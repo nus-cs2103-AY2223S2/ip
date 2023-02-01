@@ -22,13 +22,14 @@ public class EventCommand extends Command {
     }
 
     @Override
-    public Command execute(TaskList list, Storage storage) throws DuduException {
+    public String execute(TaskList list, Storage storage) throws DuduException {
         if (!input.contains(" /from ") || !input.contains(" /to ")) {
             throw new EmptyDescriptionException("event", "date" , "Missing date");
         }
         String[] inputStr = input.split(" /from ");
         String[] dateStr = inputStr[1].split(" /to ");
-        storage.saveTask(list.addTask(new Event(inputStr[0], dateStr[0], dateStr[1])));
-        return this;
+        Event event = new Event(inputStr[0], dateStr[0], dateStr[1]);
+        storage.saveTask(list.addTask(event));
+        return "Got it. I've added this task:\n  " + event + "\n" + list.getTotalTask();
     }
 }

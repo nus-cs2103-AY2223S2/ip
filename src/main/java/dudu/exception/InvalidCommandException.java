@@ -21,6 +21,6 @@ public class InvalidCommandException extends DuduException {
 
     @Override
     public String toString() {
-        return "OOPS!!! I'm sorry, but I don't know what that means :-(" + detail;
+        return "OOPS!!!\n I'm sorry, but I don't know what that means :-(";
     }
 }

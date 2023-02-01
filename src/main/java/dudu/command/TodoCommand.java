@@ -21,8 +21,9 @@ public class TodoCommand extends Command {
     }
 
     @Override
-    public Command execute(TaskList list, Storage storage) throws DuduException {
-        storage.saveTask(list.addTask(new Todo(desc)));
-        return this;
+    public String execute(TaskList list, Storage storage) throws DuduException {
+        Todo todo = new Todo(desc);
+        storage.saveTask(list.addTask(todo));
+        return "Got it. I've added this task:\n  " + todo + "\n" + list.getTotalTask();
     }
 }

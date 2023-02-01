@@ -22,18 +22,17 @@ public class UnMarkCommand extends Command {
     }
 
     @Override
-    public Command execute(TaskList list, Storage storage) throws DuduException {
+    public String execute(TaskList list, Storage storage) throws DuduException {
         try {
             Task currTask = list.getTask(index);
             currTask.markAsUndone();
             storage.saveTask(list.getList());
-            System.out.println("OK, I've marked this task as not done yet:");
-            System.out.println("  " + currTask);
+            return "OK, I've marked this task as not done yet:\n  " + currTask;
+//            System.out.println("  " + currTask);
         } catch (TaskNumRangeException ex) {
-            System.out.println(ex);
+            return ex.toString();
         } catch (DuduException ex) {
-            System.out.println(ex);
+            return ex.toString();
         }
-        return this;
     }
 }

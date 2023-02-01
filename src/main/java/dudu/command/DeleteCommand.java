@@ -29,16 +29,16 @@ public class DeleteCommand extends Command {
      * @throws DuduException
      */
     @Override
-    public Command execute(TaskList list, Storage storage) throws DuduException {
+    public String execute(TaskList list, Storage storage) throws DuduException {
         try {
             Task currTask = list.getTask(index);
             storage.updateTask(list.delete(index));
-            System.out.println("Noted. I've removed this task:");
-            System.out.println("  " + currTask);
-            System.out.println(list.getTotalTask());
+            return "Noted. I've removed this task:\n  " + currTask + list.getTotalTask();
+//            System.out.println("Noted. I've removed this task:");
+//            System.out.println("  " + currTask);
+//            System.out.println(list.getTotalTask());
         } catch (TaskNumRangeException ex) {
-            System.out.println(ex);
+            return ex.toString();
         }
-        return this;
     }
 }
