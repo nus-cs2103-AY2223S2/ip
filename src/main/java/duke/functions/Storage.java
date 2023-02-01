@@ -1,6 +1,7 @@
 package duke.functions;
 
 import duke.ToDoList;
+import duke.exceptions.DukeException;
 import duke.tasks.DeadlineTask;
 import duke.tasks.EventTask;
 import duke.tasks.Task;
@@ -8,27 +9,44 @@ import duke.tasks.ToDoTask;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.Path;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
+/**
+ * A class that can hold a specified directory path with respect
+ * to the home directory of the user.
+ * It can then load or save the state of the ToDoList to and from
+ * the specified directory path respectively.
+ */
 public class Storage {
     Path path;
 
     public Storage(String pathStr) {
-        String home = System.getProperty("user.dir");
+        String home = System.getProperty("user.home");
         this.path = Paths.get(home, pathStr);
     }
 
+    public void createDirectory(Path dir) throws IOException {
+        if (!Files.exists(dir)) {
+            createDirectory(dir.getParent());
+        }
+        Files.createDirectories(dir);
+    }
+
+    /**
+     * Returns an instance of a ToDoList object that contains the specific Tasks in their correct state
+     * based on r
+     *
+     *
+     */
     public ToDoList load() {
         try {
-            //assume its ./iP-data/data,txt only
             if (!Files.exists(path)) {
-                if (!Files.exists(path.getParent())) {
-                    Files.createDirectories(path.getParent());
-                }
+                createDirectory(path.getParent());
                 Files.createFile(path);
             }
             File f = new File(path.toString());

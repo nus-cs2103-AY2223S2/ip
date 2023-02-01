@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a task that has a deadline.
+ */
 public class DeadlineTask extends Task {
     private String by;
     private LocalDate byDate;
@@ -25,6 +28,13 @@ public class DeadlineTask extends Task {
         }
     }
 
+    /**
+     * Returns a String that contains information
+     * on the DeadlineTask object that is used for loading
+     * the task into the ToDoList on Duke startup.
+     *
+     * @return A String that is used for loading the task into Duke on startup.
+     */
     public String save() {
         String status = this.isDone ? "DONE/+/" : "NOTDONE/+/";
         return "DEADLINE/+/" + status + this.title + "/+/" + this.by + "\n";

@@ -6,10 +6,14 @@ import duke.functions.UI;
 
 import java.util.Scanner;
 
+/**
+ * The main class that the Duke program will run on.
+ * It includes the operation for starting up, receiving
+ * and decoding user inputs and shut down.
+ */
 public class Duke {
     public static void main(String[] args) {
-        //init
-        Storage storage = new Storage("./ip-data/Ip-data.txt");
+        Storage storage = new Storage("./ip-data/ip-data.txt");
         Scanner sc = new Scanner(System.in);
         ToDoList ls;
 

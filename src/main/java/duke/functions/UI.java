@@ -1,6 +1,7 @@
 package duke.functions;
 
 import duke.ToDoList;
+import duke.exceptions.IndexDukeException;
 import duke.tasks.Task;
 
 public class UI {
@@ -32,7 +33,7 @@ public class UI {
                 + "You now have " + ls.getToDoCount() + " task!\n" + mainDivider);
     }
 
-    public static void taskMarking(ToDoList ls, int index, String command) {
+    public static void taskMarking(ToDoList ls, int index, String command) throws IndexDukeException {
         System.out.println(mainDivider + "The Duke has " + command + " the following task:\n"
                 + " - " + ls.getTask(index) + "\n" + mainDivider);
     }

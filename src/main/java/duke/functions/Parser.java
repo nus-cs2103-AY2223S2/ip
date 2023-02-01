@@ -8,10 +8,27 @@ import duke.tasks.EventTask;
 import duke.tasks.Task;
 import duke.tasks.ToDoTask;
 
+/**
+ * A class that contains different static methods to deal with user's input.
+ */
 public class Parser {
     private  Parser() {
     }
 
+    /**
+     * Returns an array of String after splitting the given String input by the given regex.
+     * The maximum number of Strings to be split must be indicated by the user and should the
+     * number of Strings obtained after splitting be less than the indicated minimum number
+     * of Strings, the method will throw a DukeException instead.
+     *
+     * @param input The String to be split.
+     * @param regex The delimiting regular expression.
+     * @param limit The maximum number of Strings obtained from splitting.
+     * @param minSize The minimum number of Strings to be obtained from splitting.
+     * @return The array of String after splitting.
+     * @throws DukeException  If the number of String obtained after
+     *                        splitting is less than minimum number of String.
+     */
     public static String[] inputHandler(String input, String regex, int limit, int minSize) throws DukeException {
         String[] sub = input.split(regex, limit);
         if (sub.length < minSize) {
@@ -20,6 +37,20 @@ public class Parser {
         return sub;
     }
 
+    /**
+     * The method reads an array of String input and uses the first value of the array
+     * to determine which operations shall be performed on the ToDoList object.
+     * Returns a boolean value indicating if the main program should shut down
+     * or continue running.
+     *
+     * @param input The Array of String containing the operation to be performed
+     *              and its additional parameters. The first value of the array
+     *              should contain the type of operation to be carried out.
+     * @param ls The ToDoList object that the operations should be performed on.
+     * @return A boolean value indicating if the program should end or continue.
+     * @throws Exception If the given array of String contains insufficient or wrong
+     *                   parameters or values not part of the possible commands.
+     */
     public static boolean commandHandler(String[] input, ToDoList ls) throws Exception {
         String command = input[0];
         int index;
@@ -56,6 +87,17 @@ public class Parser {
         return false;
     }
 
+    /**
+     * The method reads an array of String input and uses the first value of the array
+     * to determine which type of Task object should be added to the given ToDoList object.
+     *
+     * @param input The Array of String containing the operation to be performed
+     *              and its additional parameters. The first value of the array should
+     *              contain the type of Task object to be added to the ToDoList object.
+     * @param ls The ToDoList object that the newly created Task object should be added to.
+     * @throws DukeException If the given array of String contains insufficient or wrong
+     *                       parameters or values not part of the possible commands.
+     */
     public static void taskCommandHandler(String[] input, ToDoList ls) throws DukeException {
         String command = input[0];
 

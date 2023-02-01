@@ -6,15 +6,17 @@ import duke.tasks.ToDoTask;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a list of Task objects.
+ * Includes different methods for user to keep track of his task progress.
+ */
 public class ToDoList {
-    private ArrayList<Task> arr = new ArrayList<>(); //1-based index
+    private ArrayList<Task> arr = new ArrayList<>();
     private int toDoCount;
 
-    /**
-     * Creates an instance of a ToDoList which holds Task objects.
-     */
     public ToDoList() {
-        arr.add(new ToDoTask("0index")); //1-based index
+        //arr uses 1-indexing, 0 position placed with a dummy Task
+        arr.add(new ToDoTask("0index"));
         this.toDoCount = 0;
     }
 
@@ -64,6 +66,12 @@ public class ToDoList {
     }
 
 
+    /**
+     * Unmarks the Task Object at the specified position on the ToDoList.
+     *
+     * @param ind The position of the Task Object to be unmarked on the ToDoList.
+     * @throws IndexDukeException If the index is out of range (index < 1 || index >= this.toDoCount).
+     */
     public void unmarkTask(int ind) throws IndexDukeException {
         if (ind < 1 || ind > toDoCount) {
             throw new IndexDukeException();
@@ -71,6 +79,12 @@ public class ToDoList {
         arr.get(ind).markNotDone();
     }
 
+    /**
+     * Marks the Task Object at the specified position on the ToDoList.
+     *
+     * @param ind The position of the Task Object to be unmarked on the ToDoList.
+     * @throws IndexDukeException If the index is out of range (index < 1 || index >= this.toDoCount).
+     */
     public void markTask(int ind) throws IndexDukeException {
         if (ind < 1 || ind > toDoCount) {
             throw new IndexDukeException();
