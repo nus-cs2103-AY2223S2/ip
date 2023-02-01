@@ -1,16 +1,23 @@
+import java.time.format.DateTimeFormatter;
+import java.time.DateTimeException;
+import java.time.LocalDate;
 public class Event extends Task {
 
-    protected String from;
-    protected String to;
+    protected LocalDate from;
+    protected LocalDate to;
 
     public Event (String description, String from, String to) {
         super(description);
-        this.from = from;
-        this.to = to;
+        try {
+            this.from = LocalDate.parse(from);
+            this.to = LocalDate.parse(to);
+        } catch (DateTimeException e) {
+            throw new DateTimeException("Make sure the deadline in yyyy-mm-dd");
+        }
     }
 
     @Override
     public String toString() {
-        return String.format("[E]%s (from: %s to: %s)", super.toString(), this.from, this.to);
+        return String.format("[E]%s (from: %s to: %s)", super.toString(), this.from.format(DateTimeFormatter.ofPattern("MMM dd yyyy")), this.to.format(DateTimeFormatter.ofPattern("MMM dd yyyy")));
     }
 }

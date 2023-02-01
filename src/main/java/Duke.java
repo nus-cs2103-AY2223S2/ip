@@ -1,3 +1,4 @@
+import java.time.DateTimeException;
 import java.util.*;
 public class Duke {
     // Constants
@@ -88,11 +89,18 @@ public class Duke {
         current_input_array = current_input_array[1].split(" /by ", 2);
         String description = current_input_array[0];
         String by = current_input_array[1];
-        Task current_task = new Deadline(description, by);
+        Task current_task;
+        try {
+            current_task = new Deadline(description, by);
+        } catch (DateTimeException e) {
+            System.out.println(e);
+            return;
+        }
         current_list.add(current_task);
         System.out.println("Got it. I've added this task:");
         System.out.println("  " + current_task.toString());
         System.out.println(String.format("Now you have %d tasks in the list.", current_list.size()));
+        
     }
     public static void main(String[] args) {
 
