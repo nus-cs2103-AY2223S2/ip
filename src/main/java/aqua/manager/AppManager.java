@@ -7,11 +7,14 @@ import aqua.logic.CommandLineInput;
 import aqua.logic.ExecutionService;
 import aqua.logic.command.ListCommand;
 import aqua.logic.parser.ParserService;
+import javafx.application.Platform;
 import javafx.concurrent.Service;
 
 
 /** Manager of the application's processes. */
 public class AppManager {
+    private static final int REPLY_TIME = 500;
+
     private final LogicManager logicManager;
     private final IoManager ioManager;
 
@@ -112,10 +115,19 @@ public class AppManager {
      * @param service - the service whose task succeeded.
      */
     private void handleExecutionSuccess(ExecutionService service) {
-        ioManager.reply(service.getValue());
-        service.followUpDispatcher().ifPresentOrElse(
-                this::startExecution,
-                this::completeService);
+        new Thread(() -> {
+            try {
+                Thread.sleep(REPLY_TIME);
+            } catch (InterruptedException interEx) {
+                // just display
+            }
+            Platform.runLater(() -> {
+                ioManager.reply(service.getValue());
+                service.followUpDispatcher().ifPresentOrElse(
+                        this::startExecution,
+                        this::completeService);
+            });
+        }).start();
     }
 
 
@@ -128,8 +140,17 @@ public class AppManager {
      * @param service - the service whose task failed.
      */
     private void handleExecutionFailure(Service<?> service) {
-        ioManager.replyException(service.getException());
-        completeService();
+        new Thread(() -> {
+            try {
+                Thread.sleep(REPLY_TIME);
+            } catch (InterruptedException interEx) {
+                // just display
+            }
+            Platform.runLater(() -> {
+                ioManager.replyException(service.getException());
+                completeService();
+            });
+        }).start();
     }
 
 
