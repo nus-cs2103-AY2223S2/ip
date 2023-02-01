@@ -8,12 +8,13 @@ import duke.util.TaskList;
 import duke.util.Ui;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class DeadlineCommand extends Command {
     private final Deadline task;
-
-    public DeadlineCommand(String taskName, String by) {
-        this.task = new Deadline(taskName, by);
+    public DeadlineCommand(String taskName, LocalDateTime byTime) {
+        this.task = new Deadline(taskName, byTime);
     }
 
     @Override

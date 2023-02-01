@@ -8,13 +8,14 @@ import duke.util.TaskList;
 import duke.util.Ui;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 public class EventCommand extends Command {
 
     private final Event task;
 
-    public EventCommand(String description, String from, String to) {
-        this.task = new Event(description, from, to);
+    public EventCommand(String description, LocalDateTime fromTime, LocalDateTime toTime) {
+        this.task = new Event(description, fromTime, toTime);
     }
 
     @Override

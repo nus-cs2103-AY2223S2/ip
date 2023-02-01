@@ -12,11 +12,14 @@ import java.io.FileWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 
 public class Storage {
     private final File file;
     private final String filePath;
+    private static final DateTimeFormatter DATETIME_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
 
     public Storage(String filePath) {
         this.file = new File(filePath);
@@ -66,7 +69,9 @@ public class Storage {
                         }
                         description = encodeSplit.get(3);
                         String by = encodeSplit.get(4);
-                        tl.add(new Deadline(description, by, isDone));
+                        LocalDateTime byTime = LocalDateTime.parse(by, DATETIME_FORMAT);
+                        tl.add(new Deadline(description, byTime, isDone));
+                        break;
                     case "E":
                         if (encodeSplit.size() != 6) {
                             throw new DukeException("Error with Deadline load");
@@ -74,7 +79,10 @@ public class Storage {
                         description = encodeSplit.get(3);
                         String from = encodeSplit.get(4);
                         String to = encodeSplit.get(5);
-                        tl.add(new Event(description, from, to, isDone));
+                        LocalDateTime fromTime = LocalDateTime.parse(from, DATETIME_FORMAT);
+                        LocalDateTime toTime = LocalDateTime.parse(to, DATETIME_FORMAT);
+                        tl.add(new Event(description, fromTime, toTime, isDone));
+                        break;
                     default:
                         throw new DukeException("Loading got problem");
                 }
