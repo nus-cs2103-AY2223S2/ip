@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
 import duke.task.Task;
+import duke.textui.TextUi;
 
 
 /**
@@ -39,13 +39,13 @@ public class DeleteCommand extends Command {
      * @param storage  Storage to deal with input and output of data
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, TextUi ui, Storage storage) throws DukeException {
         ArrayList<Task> tasks = taskList.getTasks();
         int index = isValidIndex(INDEX_STRING, tasks);
 
         Task task = tasks.get(index);
         tasks.remove(index);
 
-        ui.showDeleteTask(task.toString(), tasks.size());
+        return ui.showDeleteTask(task.toString(), tasks.size());
     }
 }

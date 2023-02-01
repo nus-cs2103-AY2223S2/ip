@@ -1,11 +1,11 @@
-package duke;
+package duke.textui;
 
 import java.util.Scanner;
 
 /**
  * UI that deals with the display of data for the user once the chatbot is started up.
  */
-public class Ui {
+public class TextUi {
 
     /**
      * Divider line.
@@ -19,33 +19,31 @@ public class Ui {
     /**
      * Constructor for a new UI with a scanner.
      */
-    public Ui() {
+    public TextUi() {
         SCANNER = new Scanner(System.in);
     }
 
     /**
      * Displays the welcome message when the chatbot is started.
      */
-    public void showWelcome() {
+    public String showWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
 
-        String introMsg = "Hello! I'm Duke.\n What can I do for you today?";
+        String introMsg = "Hello! I'm Duke.\nWhat can I do for you today?";
 
-        showLine();
-        showMsg(logo);
-        showMsg(introMsg);
-        showLine();
+        String output = concatMsgs(LINE, logo, introMsg, LINE, "\n");
+        return showMsg(output);
     }
 
     /**
      * Display a divider line.
      */
-    public void showLine() {
-        showMsg(Ui.LINE);
+    public String showLine() {
+        return showMsg(TextUi.LINE);
     }
 
     /**
@@ -53,8 +51,9 @@ public class Ui {
      *
      * @param msg The message to be displayed
      */
-    public void showMsg(String msg) {
+    public String showMsg(String msg) {
         System.out.println(msg);
+        return msg;
     }
 
     /**
@@ -62,9 +61,9 @@ public class Ui {
      *
      * @param errorMsg The error/hint message
      */
-    public void showError(String errorMsg) {
-        showMsg(errorMsg);
-        showMsg("Please try again!");
+    public String showError(String errorMsg) {
+        String output = concatMsgs(errorMsg, "Please try again!");
+        return showMsg(output);
     }
 
     /**
@@ -74,13 +73,12 @@ public class Ui {
      * @param taskString The string representation of the task being added
      * @param size       The number of tasks in the list of tasks
      */
-    public void showAddTask(String taskString, int size) {
+    public String showAddTask(String taskString, int size) {
         String msgHeader = "I've added this task into the list:";
         String msgFooter = String.format("Now you have a total of %s tasks in the list", size);
 
-        showMsg(msgHeader);
-        showMsg(taskString);
-        showMsg(msgFooter);
+        String output = concatMsgs(msgHeader, taskString, msgFooter);
+        return showMsg(output);
     }
 
     /**
@@ -90,13 +88,12 @@ public class Ui {
      * @param taskString The string representation of the task being deleted
      * @param size       The number of tasks in the list of tasks
      */
-    public void showDeleteTask(String taskString, int size) {
+    public String showDeleteTask(String taskString, int size) {
         String msgHeader = "I've deleted this task into the list:";
         String msgFooter = String.format("Now you have a total of %s tasks in the list", size);
 
-        showMsg(msgHeader);
-        showMsg(taskString);
-        showMsg(msgFooter);
+        String output = concatMsgs(msgHeader, taskString, msgFooter);
+        return showMsg(output);
     }
 
     /**
@@ -113,5 +110,14 @@ public class Ui {
      */
     public void close() {
         SCANNER.close();
+    }
+
+    public String concatMsgs(String... msgs) {
+        String output = "";
+        for (String msg : msgs) {
+            output += msg;
+            output += "\n";
+        }
+        return output;
     }
 }

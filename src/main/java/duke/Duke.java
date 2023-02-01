@@ -1,8 +1,7 @@
 package duke;
 
-import java.io.File;
-
 import duke.command.Command;
+import duke.textui.TextUi;
 
 /**
  * A chatbot named duke that can process the commands in command line format. The chatbot allows for the adding of
@@ -19,12 +18,11 @@ public class Duke {
     /**
      * The list of tasks that is being tracked by the chatbot.
      */
-    private TaskList tasks;
+    private TaskList taskList;
     /**
      * Sends out the display of the respective tasks.
      */
-    private TaskList taskList;
-    private final Ui UI;
+    private final TextUi UI;
 
     /**
      * Load a new chatbot with a new ui and storage. It obtains the data of the tasks stored if they are present. If
@@ -33,7 +31,7 @@ public class Duke {
      * @param filePath The file path of where the tasks are stored
      */
     public Duke(String filePath) {
-        UI = new Ui();
+        UI = new TextUi();
         STORAGE = new Storage(filePath);
         try {
             taskList = new TaskList(STORAGE.load());
@@ -41,15 +39,6 @@ public class Duke {
             UI.showError(e.getMessage());
             taskList = new TaskList();
         }
-    }
-
-    /**
-     * Start of the chatbot with the provided file path of the tasks.
-     *
-     * @param args Arguments
-     */
-    public static void main(String[] args) {
-        new Duke("data" + File.separator + "tasks.txt").run();
     }
 
     /**
@@ -76,6 +65,22 @@ public class Duke {
             } finally {
                 UI.showLine();
             }
+        }
+    }
+
+    public String getWelcome() {
+        return UI.showWelcome();
+    }
+
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            String output = c.execute(taskList, UI, STORAGE);
+            return output;
+        } catch (DukeException e) {
+            return e.getMessage();
+        } catch (Exception e) {
+            return "Unknown command/error not caught!\n Please try again!";
         }
     }
 }
