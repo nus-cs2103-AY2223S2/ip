@@ -1,3 +1,5 @@
+package util;
+
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -49,11 +51,9 @@ public class Result<T> {
     // return this.result.fromRight(null);
     // }
 
-    public <U> U match(Function<? super Pair<? extends T, String>, ? extends U> okFunction,
+    public <U> U match(Function<? super Pair<? extends T, ? extends String>, ? extends U> okFunction,
             Function<? super String, ? extends U> errorFunction) {
-        return this.result.match(
-                pr -> okFunction.apply(pr),
-                msg -> errorFunction.apply(msg));
+        return this.result.match(okFunction, errorFunction);
     }
 
     public <U> Result<U> map(Function<? super T, ? extends U> f) {

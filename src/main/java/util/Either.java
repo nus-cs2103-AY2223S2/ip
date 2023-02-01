@@ -1,9 +1,15 @@
+package util;
+
 import java.util.function.Function;
 
 public interface Either<L, R> {
-    public boolean isLeft();
+    default public boolean isLeft() {
+        return !isRight();
+    }
 
-    public boolean isRight();
+    default public boolean isRight() {
+        return !isLeft();
+    };
 
     public L fromLeft(L def);
 
@@ -11,7 +17,7 @@ public interface Either<L, R> {
 
     public <T> Either<T, R> map(Function<? super L, ? extends T> f);
 
-    public <T> Either<T, R> flatMap(Function<? super L, ? extends Either<? extends T, R>> f);
+    public <T> Either<T, R> flatMap(Function<? super L, ? extends Either<? extends T, ? extends R>> f);
 
     public <T> T match(Function<? super L, ? extends T> l, Function<? super R, ? extends T> r);
 
@@ -30,11 +36,6 @@ public interface Either<L, R> {
             }
 
             @Override
-            public boolean isRight() {
-                return false;
-            }
-
-            @Override
             public L fromLeft(L def) {
                 return this.left;
             }
@@ -50,12 +51,11 @@ public interface Either<L, R> {
             }
 
             @Override
-            public <T> Either<T, R> flatMap(Function<? super L, ? extends Either<? extends T, R>> f) {
-                Either<? extends T, R> temp = f.apply(this.left);
-                if (temp.isLeft()) {
-                    return Either.left(temp.fromLeft(null));
-                }
-                return Either.right(temp.fromRight(null));
+            public <T> Either<T, R> flatMap(Function<? super L, ? extends Either<? extends T, ? extends R>> f) {
+                return f.apply(this.left).match(
+                    left -> Either.left(left),
+                    right -> Either.right(right)
+                );
             }
 
             @Override
@@ -72,11 +72,6 @@ public interface Either<L, R> {
             @Override
             public String toString() {
                 return String.format("Right(%s)", this.right.toString());
-            }
-
-            @Override
-            public boolean isLeft() {
-                return false;
             }
 
             @Override
@@ -100,7 +95,7 @@ public interface Either<L, R> {
             }
 
             @Override
-            public <T> Either<T, R> flatMap(Function<? super L, ? extends Either<? extends T, R>> f) {
+            public <T> Either<T, R> flatMap(Function<? super L, ? extends Either<? extends T, ? extends R>> f) {
                 return Either.<T, R>right(this.right);
             }
 

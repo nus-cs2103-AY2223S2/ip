@@ -1,5 +1,7 @@
-import java.time.LocalDate;
+package task;
+
 import java.io.Serializable;
+import java.time.LocalDate;
 
 public abstract class Task implements Serializable {
 

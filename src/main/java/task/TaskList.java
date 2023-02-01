@@ -1,5 +1,7 @@
-import java.time.LocalDate;
+package task;
+
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -21,7 +23,7 @@ public class TaskList implements Serializable {
 
     public String get(int number) {
         int index = number - 1;
-        return String.format("\n\t%d) %s\n", number, this.lst.get(index));
+        return String.format("\n\t%d) %s", number, this.lst.get(index));
     }
 
     public String getLast() {
@@ -53,19 +55,19 @@ public class TaskList implements Serializable {
                 .mapToObj(i -> String.format("\n\t%d) %s", i + 1, this.lst.get(i)))
                 .reduce("", (a, b) -> a + b);
         if (res.isEmpty()) {
-            return "No tasks found.\n";
+            return "No tasks found.";
         }
-        return res + '\n';
+        return res;
     }
-    
+
     @Override
     public String toString() {
         if (this.lst.isEmpty()) {
-            return "You have no tasks\n";
+            return "You have no tasks.";
         }
 
         return IntStream.range(0, this.size())
                 .mapToObj(i -> String.format("\n\t%d) %s", i + 1, this.lst.get(i)))
-                .reduce("", (a, b) -> a + b) + '\n';
+                .reduce("", (a, b) -> a + b);
     }
 }
