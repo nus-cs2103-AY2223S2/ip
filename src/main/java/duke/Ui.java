@@ -3,39 +3,61 @@ package duke;
 import java.util.Scanner;
 
 /**
- * Class that contains user interaction functionality. User interaction is done via the command line.
+ * Class responsible for Duke's response messages.
  */
 public class Ui {
-    private Scanner inputReader = new Scanner(System.in);
-    private String wrapTop = "________________________________\n";
-    private String wrapBottom = "\n________________________________";
-
-    public String readInput() {
-        return inputReader.nextLine();
-    }
 
     /**
-     * Shows the application's welcome message.
+     * get Duke's welcome message that plays on startup.
      */
-    public void showWelcome() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        this.showMessage("Hello! I'm Duke What can I do for you?");
+    public static String genWelcomeMsg() {
+        return "What's up? \uD83D\uDE00";
     }
 
-    /**
-     * Wraps messages before displaying them to the terminal.
-     *
-     * @param msg the message to be displayed
-     */
-    public void showMessage(String msg) {
+    public static String genUnknownCommandMsg() {
+        return "Unknown command.";
+    }
 
-        String wrapTop = "__________________________\n";
-        String wrapBottom = "\n__________________________";
-        System.out.println(wrapTop + msg.toString() + wrapBottom);
+    public static String genGoodbyeMsg() {
+        return "Goodbye.";
+    }
+
+    public static String genShowTaskListMsg(String taskListString) {
+        return taskListString;
+    }
+
+    public static String genMarkTaskMsg(boolean isMark) {
+        return (isMark) ? "Marked this task" : "Unmarked this task";
+    }
+    public static String genDeleteTaskMsg() {
+        return "Deleted this task.";
+    }
+
+    public static String genMissingTaskNumberMsg() {
+        return "Task number missing.";
+    }
+
+    public static String genTaskDoesNotExistMsg() {
+        return "Task doesn't exist.";
+    }
+
+    public static String genAddTaskMsg(String msg) {
+        return msg;
+    }
+
+    public static String genMissingDateFieldMsg() {
+        return "You're missing a date.";
+    }
+
+    public static String genDateParseFailureMsg() {
+        return "Couldn't parse the date.";
+    }
+
+    public static String genMissingKeywordMsg() {
+        return "You're missing a keyword.";
+    }
+
+    public static String genFoundTasksMsg(String foundTasksString) {
+        return foundTasksString;
     }
 }
