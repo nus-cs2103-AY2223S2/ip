@@ -5,6 +5,12 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
+/**
+ * Represents a task that is of type "event" and extends from Task class.
+ *
+ * @author MrTwit99
+ * @since 2023-02-01
+ */
 public class Event extends Task {
     protected String newStartDate, newEndDate, newStartTime, newEndTime,
             oldStartDate, oldEndDate, oldStartTime, oldEndTime;
@@ -13,6 +19,18 @@ public class Event extends Task {
 
     protected LocalDate startDate, endDate;
 
+    /**
+     * Returns an Event task object that stores information about the task: task description, start date,
+     * start time, end date and endTime.
+     * <p></p>
+     * Whenever start time and end time not given, set them to be empty.
+     *
+     * @param taskInfo Task description.
+     * @param stringStartDate Date that the Event begins.
+     * @param stringEndDate Date that the Event ends.
+     * @param stringStartTime Start time of the Event.
+     * @param stringEndTime End time of the Event.
+     */
     public Event(String taskInfo, String stringStartDate, String stringEndDate, String stringStartTime
             , String stringEndTime) {
         super(taskInfo);
@@ -48,12 +66,22 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Returns a string on the information about the Event task that is to be added to the ongoing taskList.
+     *
+     * @return String message of the Event task description and status.
+     */
     @Override
     public String getTaskInfoStatus() {
         return "[E]" + super.getTaskInfoStatus() + "(from: " + this.newStartDate + this.newStartTime + " to: "
                 + this.newEndDate + this.newEndTime + ")";
     }
 
+    /**
+     * Returns a string on the information about the Event task that is to be saved to the file allocated by Storage.
+     *
+     * @return String message of the Event task description and status.
+     */
     @Override
     public String getTaskInfo() {
         return "[E]" + super.getTaskInfoStatus() + "/from " + this.oldStartDate + this.oldStartTime + " /to "

@@ -4,8 +4,26 @@ import java.lang.StringBuilder;
 
 import java.io.File;
 
+/**
+ * Represents the Exception class unique and created for Duke to handle certain unexpected and unwanted situations.
+ *
+ * @author MrTwit99
+ * @since 2023-02-02
+ */
 public class DukeException {
     private static int expectedArgs = 1;
+
+    /**
+     * This method helps to check if a certain command to run has the necessary arguments supplied to it.
+     * <p></p>
+     * This method is also able to prompt for a secondary check for cases where blank spaces or blank texts
+     * may cause an issue.
+     *
+     * @param secondaryCheck Boolean value that indicates whether there's a need for secondary check.
+     * @param command String message of the command / action input by users via CLI.
+     * @param text String array of the affected portion of the command that needs to be checked.
+     * @throws IncorrectNoOfArgumentException When arguments supplied are insufficient.
+     */
     public static void validate(boolean secondaryCheck, String command,
                                 String[] text) throws IncorrectNoOfArgumentException {
         StringBuilder sb = new StringBuilder();
@@ -26,6 +44,13 @@ public class DukeException {
         }
     }
 
+    /**
+     * This method helps to check if a certain command has blank spaces or blank texts as arguments supplied to it.
+     *
+     * @param text String array of the affected portion of the command that needs to be checked.
+     * @param command String message of the command / action input by users via CLI.
+     * @throws IncorrectNoOfArgumentException When arguments supplied are insufficient due to blank text / blank space.
+     */
     public static void validate(String text, String command) throws IncorrectNoOfArgumentException {
         // Checking for blank spaces
         StringBuilder sb = new StringBuilder();
@@ -38,6 +63,12 @@ public class DukeException {
         }
     }
 
+    /**
+     * This method is used to throw the InvalidCommandException whenever a command input by user via CLI is invalid
+     * or unsupported by Duke.
+     *
+     * @throws InvalidCommandException When command called by user is invalid or unsupported by Duke.
+     */
     public static void validate2() throws InvalidCommandException {
         StringBuilder sb = new StringBuilder();
         sb.append("\n    ____________________________________________________________\n")
@@ -47,13 +78,22 @@ public class DukeException {
         throw new InvalidCommandException(sb.toString());
     }
 
-    public static void folderCheck(String str) throws FolderNotFoundException {
-        File tempFolder = new File(str);
+    /**
+     * This method helps to check if the directory for the file could be located.
+     * <p></p>
+     * If it cannot be found, this method will throw a FolderNotFoundException to aid in the creation of the directory
+     * and the file.
+     *
+     * @param directory String message of the relative path to check if the directory exists
+     * @throws FolderNotFoundException When the directory cannot be located.
+     */
+    public static void folderCheck(String directory) throws FolderNotFoundException {
+        File tempFolder = new File(directory);
         if ( (!tempFolder.isDirectory()) || (!tempFolder.exists()) ) {
             StringBuilder sb = new StringBuilder();
             sb.append("\n    ____________________________________________________________\n")
-                    .append("     Folder '").append(str).append("' cannot be found.\n")
-                    .append("     A new folder '").append(str).append("' has been created for you!\n")
+                    .append("     Folder '").append(directory).append("' cannot be found.\n")
+                    .append("     A new folder '").append(directory).append("' has been created for you!\n")
                     .append("     A new file 'storage' for storing the tasks has been created for you as well!\n")
                     .append("    ____________________________________________________________\n");
             throw new FolderNotFoundException(sb.toString());

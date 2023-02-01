@@ -6,8 +6,26 @@ import exceptions.InvalidCommandException;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a Parser that takes in user input and process it into the necessary format for Duke application
+ * to use.
+ *
+ * @author MrTwit99
+ * @since 2023-02-01
+ */
 public class Parser {
 
+    /**
+     * Returns an ArrayList of String type that contains the processed command information,
+     * derived from the user input via the CLI.
+     * <p></p>
+     * This method aids in processing user input.
+     *
+     * @param taskInfo Command information obtained from user's input via the CLI.
+     * @return ArrayList of String type, containing processed command information.
+     * @throws IncorrectNoOfArgumentException When there is insufficient arguments provided by the user.
+     * @see ArrayList
+     */
     protected static ArrayList<String> parse(String taskInfo) throws IncorrectNoOfArgumentException {
         ArrayList<String> parseInfo = new ArrayList<>();    // stores in the format "command" followed by "arguments"
         boolean isFnAvailable = false;  // indicates whether user is calling a supported function provided by Duke

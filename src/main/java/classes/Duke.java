@@ -8,12 +8,28 @@ import java.util.ArrayList;
 
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents the Duke application, capable of storing 3 types of Tasks ("ToDos", "Deadline" & "Event")
+ * in the hard disk for users to refer to at any point of time.
+ * <p></p>
+ * Acts as a form of reminder / tracker and supports the following functions:
+ * add, remove, mark, unmark and display list.
+ * @author MrTwit99
+ * @since 2023-02-01
+ */
 public class Duke {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Returns a Duke object that requires the filePath and folderPath to initialize the application,
+     * retrieving tasks stored in the hard disk.
+     *
+     * @param filePath  Relative path to locate the file with the stored tasks.
+     * @param folderPath Relative path to locate the directory storing the file.
+     */
     public Duke(String filePath, String folderPath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath, folderPath);
@@ -25,6 +41,14 @@ public class Duke {
         }
     }
 
+    /**
+     * Executes the Duke application, requires user input to perform necessary actions and stops the Duke application
+     * when user inputs the given command to end.
+     * <p></p>
+     * Functions currently supported by Duke: add Task, remove Task, mark Task, unmark Task, delete Task, list, bye.
+     * @throws IOException On input error.
+     * @see IOException
+     */
     public void run() throws IOException {
         ui.showWelcome();
         boolean isExit = false;
@@ -71,6 +95,13 @@ public class Duke {
         }
     }
 
+    /**
+     * This is the main method that creates the Duke object and boots the application up via run() method.
+     *
+     * @param args Input given by users via the CLI
+     * @throws IOException On input error.
+     * @see IOException
+     */
     public static void main(String[] args) throws IOException {
         new Duke("data/storage.txt", "data").run();
     }

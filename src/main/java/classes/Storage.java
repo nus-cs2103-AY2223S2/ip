@@ -12,20 +12,44 @@ import java.io.FileNotFoundException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
 import java.util.ArrayList;
 
+/**
+ * Represents a storage system, in this case a place where extraction and supplying of information to and from the
+ * hard disk occurs.
+ *
+ * @author MrTwit99
+ * @since 2023-02-01
+ */
 public class Storage {
-
     private String filePath, folderPath;
 
     private StringBuilder sb;
 
+    /**
+     * Returns a Storage object that retrieves and supplies information about the tasks to and from the file.
+     *
+     * @param filePath Relative path to locate the file with the stored tasks.
+     * @param folderPath Relative path to locate the directory storing the file.
+     */
     public Storage(String filePath, String folderPath) {
         this.filePath = filePath;
         this.folderPath = folderPath;
         this.sb = new StringBuilder();
     }
 
+    /**
+     * Returns an ArrayList of String type that contains information about the task loaded from the file with the aid
+     * of getFileContent().
+     * <p></p>
+     * This method helps to catch any unexpected <b>exceptions</b> caused by getFileContent() and resolve them.
+     *
+     * @return ArrayList of String type, containing task information.
+     * @throws IOException On input error.
+     * @see IOException
+     * @see ArrayList
+     */
     public ArrayList<String> load() throws IOException {
         ArrayList<String> fileElements = new ArrayList<>();
         try {
@@ -50,6 +74,14 @@ public class Storage {
         }
     }
 
+    /**
+     * Returns an ArrayList of String type that contains information about the task retrieved from the file.
+     *
+     * @return ArrayList of String type, containing task information.
+     * @throws IOException On input error.
+     * @throws FolderNotFoundException When the directory storing the file could not be located.
+     * @see IOException
+     */
     public ArrayList<String> getFileContents() throws IOException, FolderNotFoundException {
         ArrayList<String> fileElements = new ArrayList<>();
         DukeException.folderCheck(this.folderPath);  // Checks if the folder exists
@@ -63,7 +95,15 @@ public class Storage {
         return fileElements;
     }
 
-    public void writeToFile(String textToAdd, ArrayList<Task> taskList) throws IOException {
+    /**
+     * Writes to file allocated for storing task information whenever a new task has been created by the user.
+     *
+     * @param taskInfo String message of the task description and status.
+     * @param taskList ArrayList of Task type, containing all the tasks available on Duke.
+     * @throws IOException On input error.
+     * @see IOException
+     */
+    public void writeToFile(String taskInfo, ArrayList<Task> taskList) throws IOException {
         ArrayList<String> fileTasks = new ArrayList<>();
         try {
             fileTasks = load();
@@ -72,7 +112,7 @@ public class Storage {
         } finally {
             FileWriter fw = new FileWriter(this.filePath, true);
             if (fileTasks.size() != 0) {    // file has information inside
-                fw.write(textToAdd);
+                fw.write(taskInfo);
             } else {    // file is empty
                 for (int i = 0; i < taskList.size(); i++) {
                     fw.write(taskList.get(i).getTaskInfo() + "\n");
@@ -82,6 +122,18 @@ public class Storage {
         }
     }
 
+    /**
+     * Overwrites the file allocated for storing task information whenever there is a modification to a task.
+     * <p></p>
+     * Example of modifications include deletion
+     *
+     * @param oldText Current task description and status of the task.
+     * @param newText Modified task description and status of the task.
+     * @param oldTextIndex Current index of the task in the taskList.
+     * @param taskList ArrayList of Task type, containing all the tasks available on Duke.
+     * @throws IOException On input error.
+     * @see IOException
+     */
     public void writeToFile(String oldText, String newText, int oldTextIndex,
                                     ArrayList<Task> taskList) throws IOException {
         ArrayList<String> fileTasks = new ArrayList<>();
