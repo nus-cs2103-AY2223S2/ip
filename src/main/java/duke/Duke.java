@@ -12,15 +12,7 @@ import java.io.IOException;
  */
 public class Duke {
     public static void main(String[] args) throws IOException {
-
-        String logo = " _______   _______    _______   ___     __   \n" 
-                + "|   ____| |   __  \\  |   ____| |   \\   |  |\n" 
-                + "|  |____  |  |  \\  | |  |____  |    \\  |  |\n"
-                + "|  _____| |  |__/ /  |  _____| |  |\\ \\ |  |\n"
-                + "|  |____  |  | |  \\  |  |____  |  | \\ \\|  |\n"
-                + "|_______| |__| |___\\ |_______| |__|  \\____|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("Hello! I'm Eren\nWhat can I do for you?");
+        printDukeIntro();
         boolean hasEnded;
         Storage storage = new Storage();
         TaskList tasks = new TaskList(storage.loadFile());
@@ -33,5 +25,17 @@ public class Duke {
                 break;
             }
         }
+    }
+
+    public static void printDukeIntro(){
+        String logo = " _______   _______    _______   ___     __   \n" 
+        + "|   ____| |   __  \\  |   ____| |   \\   |  |\n" 
+        + "|  |____  |  |  \\  | |  |____  |    \\  |  |\n"
+        + "|  _____| |  |__/ /  |  _____| |  |\\ \\ |  |\n"
+        + "|  |____  |  | |  \\  |  |____  |  | \\ \\|  |\n"
+        + "|_______| |__| |___\\ |_______| |__|  \\____|\n";
+        System.out.println("Hello from\n" + logo);
+        System.out.println("Hello! I'm Eren\nWhat can I do for you?");
+
     }
 }
