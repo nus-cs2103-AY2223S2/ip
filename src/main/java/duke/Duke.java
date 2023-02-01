@@ -32,6 +32,7 @@ public class Duke {
      * Opens up the Task Manager to taking in input and executing commands.
      *
      */
+    /*
     public void run() {
         ui.showWelcomeMessage();
         Scanner scanner = new Scanner(System.in);
@@ -108,7 +109,82 @@ public class Duke {
 
     }
 
+     */
+
+    public String getResponse(String input) {
+        Task chosen;
+        Task created;
+        String response = null;
+        try {
+            Parser.parseUserResponse(input);
+            switch (Parser.getCommand()) {
+            case BYE: {
+                storage.saveToFile(tasks);
+                response = ui.showGoodbyeMessage();
+                break;
+            }
+            case FIND: {
+                String keyword = Parser.getArgs()[1];
+                response = ui.showMatchingTasksMessage(tasks.getMatchingTasksString(keyword));
+                break;
+            }
+            case LIST: {
+                response = ui.showTasksMessage(tasks);
+                break;
+            }
+            case MARK: {
+                int id = Parser.parseTask(Parser.getArgs());
+                chosen = tasks.getTask(id);
+                chosen.mark();
+                response = ui.markTaskMessage(chosen);
+                break;
+            }
+            case UNMARK: {
+                int id = Parser.parseTask(Parser.getArgs());
+                chosen = tasks.getTask(id);
+                chosen.unmark();
+                response = ui.unmarkTaskMessage(chosen);
+                break;
+            }
+            case DELETE: {
+                int id = Parser.parseTask(Parser.getArgs());
+                chosen = tasks.getTask(id);
+                tasks.deleteTask(chosen);
+                response = ui.deleteTaskMessage(chosen, tasks);
+                break;
+            }
+            case TODO: {
+                created = Parser.parseTodo(Parser.getArgs());
+                tasks.addTask(created);
+                response = ui.addedTaskMessage(created, tasks);
+                break;
+            }
+            case DEADLINE: {
+                created = Parser.parseDeadline(Parser.getArgs());
+                tasks.addTask(created);
+                response = ui.addedTaskMessage(created, tasks);
+                break;
+            }
+            case EVENT: {
+                created = Parser.parseEvent(Parser.getArgs());
+                tasks.addTask(created);
+                response = ui.addedTaskMessage(created, tasks);
+                break;
+            }
+            default:
+                break;
+            }
+        } catch (DukeException e) {
+            response = ui.showErrorMessage(e.getMessage());
+        } finally {
+            return response;
+        }
+    }
+
+    /*
     public static void main(String[] args) {
         new Duke("/duke.txt").run();
     }
+    */
+
 }

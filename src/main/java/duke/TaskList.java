@@ -63,18 +63,14 @@ public class TaskList {
         for (Task task: tasks) {
             if (task.toString().contains(keyword)) {
                 int idx = tasks.indexOf(task) + 1;
-                res += String.format("%d.%s\n", idx, task);
+                res += String.format("%d.%s", idx, task);
             }
         }
         if (res.equals("")) {
             return "There are no matching tasks currently!";
         } else {
-            return res;
+            return "Here are the matching tasks in your list:\n" + res;
         }
-    }
-
-    public ArrayList<Task> getTaskList() {
-        return tasks;
     }
 
     public int size() {
@@ -86,7 +82,7 @@ public class TaskList {
         String result = "";
         int idx = 1;
         for (Task task : tasks) {
-            result += String.format("%d.%s\n", idx, task);
+            result += String.format("%d.%s", idx, task);
             idx++;
         }
         return result;
