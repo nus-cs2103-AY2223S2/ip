@@ -1,10 +1,6 @@
-package Duke;
+package duke;
 
 public class Parser {
-
-    public Parser() {
-
-    }
 
     public Command parseInput(String input) throws DukeException {
         if (input.equals("bye")) {

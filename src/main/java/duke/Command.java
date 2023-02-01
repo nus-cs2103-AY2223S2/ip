@@ -1,4 +1,4 @@
-package Duke;
+package duke;
 
 public class Command {
 
@@ -62,7 +62,13 @@ public class Command {
         }
     }
 
+    public String getType() {
+        return type;
+    }
 
+    public String[] getData() {
+        return data;
+    }
 
     public boolean getExit() {
         return isExit;
