@@ -1,5 +1,6 @@
 package kuromi;
 
+import javafx.stage.Stage;
 import kuromi.command.Command;
 import kuromi.task.TaskList;
 
@@ -15,18 +16,17 @@ public class Kuromi {
     /** UI of the application **/
     private Ui ui;
 
-    boolean isExit;
+    private Stage stage;
 
     /**
-     * Main constructor (for invocation by main method).
+     * kuromi.MainWindow.kuromi.KuromiException.Main constructor (for invocation by main method).
      * Get stored data from previous session.
      *
      * @param filePath The file path to the file stored with data from previous Duke session.
      */
-    public Kuromi(java.nio.file.Path filePath) {
-        ui = new Ui();
+    public Kuromi(java.nio.file.Path filePath, Stage stage) {
+        ui = new Ui(stage);
         storage = new Storage(filePath);
-        isExit = false;
         try {
             tasks = new TaskList(storage.load());
         } catch (KuromiException e) {
@@ -63,9 +63,5 @@ public class Kuromi {
         } catch (KuromiException e) {
            return e.getMessage();
         }
-    }
-
-    boolean getExitStatus() {
-        return this.isExit;
     }
 }

@@ -1,5 +1,9 @@
 package kuromi;
 
+import javafx.animation.PauseTransition;
+import javafx.stage.Stage;
+import javafx.util.Duration;
+
 import java.util.Scanner;
 
 /**
@@ -7,6 +11,12 @@ import java.util.Scanner;
  */
 public class Ui {
     private String lines = "____________________________________________________________";
+
+    private Stage stage;
+
+    public Ui(Stage stage) {
+        this.stage = stage;
+    }
 
     /**
      * Read user's inputs.
@@ -58,6 +68,13 @@ public class Ui {
      * @param msg Message to be shown.
      */
     public String show(String msg) {
+        return (msg);
+    }
+
+    public String showBye(String msg) {
+        PauseTransition delay = new PauseTransition(Duration.seconds(1.5));
+        delay.setOnFinished(event -> stage.close());
+        delay.play();
         return (msg);
     }
 }

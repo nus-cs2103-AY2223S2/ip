@@ -10,7 +10,7 @@ public class Event extends Task {
     protected String from;
 
     /**
-     * Main constructor (for invocation by most classes)
+     * kuromi.MainWindow.kuromi.KuromiException.Main constructor (for invocation by most classes)
      * @param description The description of an event.
      * @param by The end date of an event.
      * @param from The start date of an event.

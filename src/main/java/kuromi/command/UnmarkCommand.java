@@ -13,7 +13,7 @@ public class UnmarkCommand extends Command {
     private int idx;
 
     /**
-     * Main constructor.
+     * kuromi.MainWindow.kuromi.KuromiException.Main constructor.
      *
      * @param idx Index of the task to be unmarked.
      */

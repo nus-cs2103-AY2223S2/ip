@@ -12,7 +12,7 @@ public class FindCommand extends Command {
     private String keyword;
 
     /**
-     * Main constructor
+     * kuromi.MainWindow.kuromi.KuromiException.Main constructor
      * @param keyword The keyword to be searched.
      */
     public FindCommand(String keyword) {

@@ -11,7 +11,7 @@ public class ExitCommand extends Command {
     private CommandType command;
 
     /**
-     * Main constructor.
+     * kuromi.MainWindow.kuromi.KuromiException.Main constructor.
      */
     public ExitCommand() {
         this.command = CommandType.bye;
@@ -29,6 +29,6 @@ public class ExitCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         String msg = "Bye. Hope to see you again soon!\n";
         super.setExit();
-        return ui.show(msg);
+        return ui.showBye(msg);
     }
 }

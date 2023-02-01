@@ -13,7 +13,7 @@ public class AddCommand extends Command {
     private Task task;
 
     /**
-     * Main constructor
+     * kuromi.MainWindow.kuromi.KuromiException.Main constructor
      *
      * @param task Task to be added.
      */
