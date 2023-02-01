@@ -42,10 +42,10 @@ public class FindTaskWithTextCommand extends Command {
 
             for (int i = 1; i <= size; i++) {
                 Task task = taskList.getTask(i);
+                count++;
 
                 if (task.hasSubstring(searchString)) {
-                    reply.append("\n  ").append(task);
-                    count++;
+                    reply.append("\n").append(count).append(". ").append(task);
                 }
             }
             return count == 0 ? "No matches found." : reply.toString();

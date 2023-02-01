@@ -37,10 +37,12 @@ public class ListTasksCommand extends Command {
             return "No task stored.";
         } else {
             StringBuilder reply = new StringBuilder("Total tasks: " + taskList.getSize());
+            int count = 0;
 
             for (int i = 1; i <= size; i++) {
+                count++;
                 Task task = taskList.getTask(i);
-                reply.append("\n  ").append(task);
+                reply.append("\n").append(count).append(". ").append(task);
             }
 
             return reply.toString();
