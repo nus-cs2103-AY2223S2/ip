@@ -3,9 +3,9 @@ package duke.command;
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
 import duke.task.Event;
 import duke.task.Task;
+import duke.textui.TextUi;
 
 /**
  * A command that stores the command to add a new event task. The action of adding the task can be carried out when
@@ -38,7 +38,7 @@ public class AddEventCommand extends Command {
      * @param storage  Storage to deal with input and output of data
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, TextUi ui, Storage storage) throws DukeException {
         String[] splitData1 = DATA.split(" /from ", 2);
         if (splitData1.length < 2) {
             throw new DukeException("Event command format error. Missing /from");
@@ -52,6 +52,6 @@ public class AddEventCommand extends Command {
         Task event = new Event(splitData1[0], splitData2[0], splitData2[1]);
         taskList.addTask(event);
 
-        ui.showAddTask(event.toString(), taskList.size());
+        return ui.showAddTask(event.toString(), taskList.size());
     }
 }

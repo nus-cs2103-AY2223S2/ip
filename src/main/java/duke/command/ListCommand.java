@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
 import duke.task.Task;
+import duke.textui.TextUi;
 
 /**
  * A command that stores the command to list the tasks in the task list. The action of listing the task can be carried
@@ -30,14 +30,17 @@ public class ListCommand extends Command {
      * @param storage  Storage to deal with input and output of data
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, TextUi ui, Storage storage) throws DukeException {
         String msgHeader = "Current data in the list are:";
-        ui.showMsg(msgHeader);
+        String output = ui.showMsg(msgHeader);
 
         ArrayList<Task> tasks = taskList.getTasks();
         for (int i = 0; i < tasks.size(); i++) {
-            String output = String.format("%d. %s", i + 1, tasks.get(i));
-            ui.showMsg(output);
+            String msg = String.format("%d. %s", i + 1, tasks.get(i));
+            output += "\n";
+            output += ui.showMsg(msg);
         }
+
+        return output;
     }
 }

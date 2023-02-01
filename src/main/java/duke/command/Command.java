@@ -6,8 +6,8 @@ import java.util.regex.Pattern;
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
 import duke.task.Task;
+import duke.textui.TextUi;
 
 
 /**
@@ -58,8 +58,8 @@ public class Command {
      * @param ui       UI to deal with the visual output
      * @param storage  Storage to deal with input and output of data
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        ui.showError(String.format("Error processing %s command", COMMAND_STRING));
+    public String execute(TaskList taskList, TextUi ui, Storage storage) throws DukeException {
+        return ui.showError(String.format("Error processing %s command", COMMAND_STRING));
     }
 
     /**

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
+import duke.textui.TextUi;
 import duke.task.Task;
 
 /**
@@ -38,7 +38,7 @@ public class MarkCommand extends Command {
      * @param storage  Storage to deal with input and output of data
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, TextUi ui, Storage storage) throws DukeException {
         ArrayList<Task> tasks = taskList.getTasks();
         int index = isValidIndex(INDEX_STRING, tasks);
 
@@ -46,7 +46,10 @@ public class MarkCommand extends Command {
 
         String msgHeader = "I've marked this task as done:";
 
-        ui.showMsg(msgHeader);
-        ui.showMsg(tasks.get(index).toString());
+        String output = ui.showMsg(msgHeader);
+        output += "\n";
+        output += ui.showMsg(tasks.get(index).toString());
+
+        return output;
     }
 }

@@ -3,9 +3,9 @@ package duke.command;
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
 import duke.task.Deadline;
 import duke.task.Task;
+import duke.textui.TextUi;
 
 /**
  * A command that stores the command to add a new deadline task. The action of adding the task can be carried out
@@ -38,7 +38,7 @@ public class AddDeadlineCommand extends Command {
      * @param storage  Storage to deal with input and output of data
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, TextUi ui, Storage storage) throws DukeException {
         String[] splitData = DATA.split(" /by ", 2);
         if (splitData.length < 2) {
             throw new DukeException("Deadline command format error. Missing /by");
@@ -47,6 +47,6 @@ public class AddDeadlineCommand extends Command {
         Task deadline = new Deadline(splitData[0], splitData[1]);
         taskList.addTask(deadline);
 
-        ui.showAddTask(deadline.toString(), taskList.size());
+        return ui.showAddTask(deadline.toString(), taskList.size());
     }
 }

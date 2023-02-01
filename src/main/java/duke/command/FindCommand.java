@@ -2,8 +2,8 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
 import duke.task.Task;
+import duke.textui.TextUi;
 
 /**
  * A command that stores the command to find all tasks that match the specific term as a substring. The action of
@@ -19,7 +19,7 @@ public class FindCommand extends Command {
      * Constructor for a command to find all tasks that match the specific term as a substring.
      *
      * @param commandString The find command in string representation
-     * @param term The finding term
+     * @param term          The finding term
      */
     public FindCommand(String commandString, String term) {
         super(AvailableCommands.FIND, commandString);
@@ -34,16 +34,18 @@ public class FindCommand extends Command {
      * @param storage  Storage to deal with input and output of data
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, TextUi ui, Storage storage) {
         String msgHeader = "These are the tasks with matching descriptions in them:";
-        ui.showMsg(msgHeader);
+        String output = ui.showMsg(msgHeader);
 
         int counter = 1;
         for (Task task : taskList.getTasks()) {
             if (task.isInDescription(TERM)) {
-                String output = String.format("%d. %s", counter++, task);
-                ui.showMsg(output);
+                String msg = String.format("%d. %s", counter++, task);
+                output += "\n";
+                output += ui.showMsg(msg);
             }
         }
+        return output;
     }
 }
