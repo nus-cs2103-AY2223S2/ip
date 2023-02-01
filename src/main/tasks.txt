@@ -1,0 +1,3 @@
+T,X,CS2103,
+D,X,CS3230,Friday 2359
+E, ,IHG,2pm,Sat 4pm

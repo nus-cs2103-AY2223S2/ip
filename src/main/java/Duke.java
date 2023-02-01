@@ -1,3 +1,9 @@
+import java.io.IOException;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.Files;
 import java.util.*;
 public class Duke {
     // Constants
@@ -13,7 +19,8 @@ public class Duke {
 
     // Fields
     private static List<Task> current_list = new ArrayList<>();
-
+    private static Path path;
+    private static File fileToRead;
     // Methods
     private static void checkInput(String[] current_input_array) throws EmptyDescriptionException {
         if (current_input_array.length < 2) {
@@ -22,6 +29,7 @@ public class Duke {
     }
     private static void handleExit() {
         System.out.println("Bye. Hope to see you again soon!");
+        Duke.writeToFile();
     }
 
     private static void handleList() {
@@ -94,7 +102,70 @@ public class Duke {
         System.out.println("  " + current_task.toString());
         System.out.println(String.format("Now you have %d tasks in the list.", current_list.size()));
     }
+
+    public static void writeToFile() {
+        try {
+            List<String> commandsToWrite = new ArrayList<>();
+            for (Task task : current_list) {
+                String command = task.getTaskType() + "," + task.getStatusIcon() + "," + task.getDescription() + "," + task.getTimeline();
+                commandsToWrite.add(command);
+            }
+            Files.write(path, commandsToWrite);
+        } catch (IOException e) {
+            System.out.println("There is an error when writing to the file");
+        }
+    }
+
+    public static void loadFile() throws InvalidCommandException {
+        path = Paths.get(System.getProperty("user.dir"), "src", "main", "tasks.txt");
+        fileToRead = new File(path.toUri());
+
+        if (!fileToRead.exists()) {
+            try {
+                fileToRead.createNewFile();
+            } catch (IOException e) {
+                System.out.println("Can't create tasks.txt file.");
+            }
+        }
+
+        try {
+            Scanner sc = new Scanner(fileToRead);
+            while (sc.hasNext()) {
+                String[] command = sc.nextLine().split(",");
+                Task newTask;
+                switch (command[0]) {
+                    case "T":
+                        newTask = new Todo(command[2]);
+                        break;
+                    case "D":
+                        newTask = new Deadline(command[2], command[3]);
+                        break;
+                    case "E":
+                        newTask = new Event(command[2], command[3], command[4]);
+                        break;
+                    default:
+                        throw new InvalidCommandException("");
+                }
+                if (command[1].equals("X")) {
+                    newTask.markAsDone();
+                }
+                current_list.add(newTask);
+            }
+            sc.close();
+        } catch (FileNotFoundException e) {
+            System.out.println(e.toString());
+        }
+
+        
+    }
     public static void main(String[] args) {
+
+        try {
+            Duke.loadFile();
+        } catch (Exception e) {
+            System.out.println(e);
+            return;
+        }
 
         Scanner user_input = new Scanner(System.in);
 
@@ -109,11 +180,10 @@ public class Duke {
                 String[] current_input_array = current_input.split(" ", 2);
                 String input_command = current_input_array[0];
 
-                // Partition in UI
-
                 // Handling Various Commnds
                 if (input_command.equals(EXIT_COMMAND)) {
                     handleExit();
+                    System.out.println(PARTITION);
                     break;
                 } else if (input_command.equals(LIST_COMMAND)) {
                     handleList();
