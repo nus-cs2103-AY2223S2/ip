@@ -28,7 +28,7 @@ public class UnknownCommand extends Command {
      * @throws DukeUnknownInputException
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage)
+    public String execute(TaskList tasks, Ui ui, Storage storage)
             throws DukeUnknownInputException {
         throw new DukeUnknownInputException("Unknown input.");
 
