@@ -1,7 +1,5 @@
 package duke;
 
-import duke.Command;
-
 public class DeleteCommand implements Command {
     private int deleteIndex;
     DeleteCommand(int i) {
