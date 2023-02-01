@@ -116,7 +116,7 @@ public class Interpreter {
      * @throws EmptyCommandException
      */
     public static Task addTask(String command, TaskTable table) throws InvalidTimeFormatException,
-            MissingDescriptionException, EmptyCommandException {
+            MissingDescriptionException, InvalidCommandException {
         int size = table.size(); // get the current size of TaskTable
         // get the kind of operation
         Interpreter.Operation op = Interpreter.Operation.valueOf(command.toLowerCase().split(" ")[0]);
@@ -131,7 +131,7 @@ public class Interpreter {
                     throw new MissingDescriptionException(op.name());
                 default:
                     // when the input is ""
-                    throw new EmptyCommandException();
+                    throw new InvalidCommandException();
             }
 
         } else {
@@ -178,7 +178,6 @@ public class Interpreter {
                             throw new InvalidTimeFormatException();
                         }
                     }
-
             }
 
         }
@@ -201,40 +200,40 @@ public class Interpreter {
      * @return Task
      * @throws InvalidTimeFormatException
      * @throws MissingDescriptionException
-     * @throws EmptyCommandException
      * @throws InvalidCommandException
      */
-    public static Task interpret(String command, TaskTable table) {
+    public static Task interpret(String command, TaskTable table) throws InvalidCommandException, InvalidTimeFormatException,
+            MissingDescriptionException, OutRangeException, NullPointerException {
         Operation op;
-        try{
-            try {
-                op = Interpreter.Operation.valueOf(command.toLowerCase().split(" ")[0]);
-            } catch (Exception e) {
+        try {
+            op = Interpreter.Operation.valueOf(command.toLowerCase().split(" ")[0]);
+        } catch (Exception e) {
+            throw new InvalidCommandException();
+        }
+        // System.out.println(op);
+        switch (op) {
+            case mark:
+                return mark(command, table);
+            case unmark:
+                return unmark(command, table);
+            case todo:
+                return addTask(command, table);
+            case deadline:
+                return addTask(command, table);
+            case event:
+                return addTask(command, table);
+            case bye:
+                return new Exit();
+            case delete:
+                return delete(command, table);
+            case list:
+                return new Table();
+            case find:
+                return find(command, table);
+            default:
                 throw new InvalidCommandException();
-            }
-            // System.out.println(op);
-            switch (op) {
-                case mark:
-                    return mark(command, table);
-                case unmark:
-                    return unmark(command, table);
-                case todo:
-                    return addTask(command, table);
-                case deadline:
-                    return addTask(command, table);
-                case event:
-                    return addTask(command, table);
-                case bye:
-                    return new Exit();
-                case delete:
-                    return delete(command, table);
-                case list:
-                    return new Table();
-                case find:
-                    return find(command, table);
-                default:
-                    throw new InvalidCommandException();
-            }
+        }
+        /*
         } catch (InvalidCommandException | InvalidTimeFormatException |
                 MissingDescriptionException | EmptyCommandException | OutRangeException | NullPointerException e) {
             //e.printStackTrace();
@@ -243,5 +242,6 @@ public class Interpreter {
             System.out.println("    ____________________________________________________________\n");
             return null;
         }
+         */
     }
 }

@@ -2,10 +2,6 @@ package Duke;
 
 import java.io.IOException;
 
-import Duke.Exceptions.EmptyCommandException;
-import Duke.Exceptions.InvalidCommandException;
-import Duke.Exceptions.InvalidTimeFormatException;
-import Duke.Exceptions.MissingDescriptionException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

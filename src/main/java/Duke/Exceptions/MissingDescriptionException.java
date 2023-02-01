@@ -11,6 +11,11 @@ public class MissingDescriptionException extends Exception {
     public MissingDescriptionException(String e) {
         super(String.format("    OOPS!!! The description of a " + e + " cannot be empty. " +
                 "You better put something there."));
+    }
 
+    @Override
+    public String getMessage() {
+        return "    OOPS!!! The description cannot be empty. " +
+                "You better put something there.";
     }
 }

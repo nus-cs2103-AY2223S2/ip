@@ -23,7 +23,6 @@ public class Duke {
 
     /**
      * Constructor of Duke.Duke
-     * @throws EmptyCommandException
      * @throws InvalidTimeFormatException
      * @throws InvalidCommandException
      * @throws MissingDescriptionException
@@ -54,7 +53,8 @@ public class Duke {
                 Task newTask = Interpreter.interpret(command, table);
                 newTask.run(table, monitor, disk);
                 running = !newTask.exited; // if newTask exits stop running
-            } catch (NullPointerException e) {
+            } catch (InvalidCommandException | InvalidTimeFormatException |
+                     MissingDescriptionException | OutRangeException | NullPointerException e) {
                 continue;
             }
         }
@@ -64,21 +64,18 @@ public class Duke {
     /**
      * The main method
      * @param args the args
-     * @throws EmptyCommandException
      * @throws InvalidTimeFormatException
      * @throws InvalidCommandException
      * @throws MissingDescriptionException
      */
     public static void main(String[] args) {
-        Exception e = new EmptyCommandException();
-        System.out.println(e.getMessage());
         new Duke("data/tasks.txt");
     }
 
     public String getResponse(String input) {
-        Task t = Interpreter.interpret(input, table);
         String message;
         try {
+            Task t = Interpreter.interpret(input, table);
             message = t.run(table, monitor, disk);
         } catch (Exception e) {
             System.out.println(e.getMessage());

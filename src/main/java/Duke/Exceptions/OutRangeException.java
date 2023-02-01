@@ -11,4 +11,9 @@ public class OutRangeException extends Exception {
         super(String.format("    OOPS!!! The number you entered is out of range!"));
     }
 
+    @Override
+    public String getMessage() {
+        return "    OOPS!!! The number you entered is out of range!";
+    }
+
 }

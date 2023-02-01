@@ -27,8 +27,8 @@ public class Delete extends Task{
         monitor.displayDelete(table, removedJob);
         disk.write(table.getTable());
         String message = "    ____________________________________________________________\n" +
-                "     Got it. I've added this task:\n" +
-                "       " + this.toString() + "\n" +
+                "     Noted. I've removed this task:\n" +
+                "       " + removedJob + "\n" +
                 "     Now you have " + table.size() +  " task(s) in the list.\n" +
                 "    ____________________________________________________________\n";
         return message;
