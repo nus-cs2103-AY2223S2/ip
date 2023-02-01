@@ -4,6 +4,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a task that is an event.
+ * An event will have a start date and end date.
+ */
 public class EventTask extends Task {
     private String from;
     private String to;
@@ -28,6 +32,13 @@ public class EventTask extends Task {
         }
     }
 
+    /**
+     * Returns a String that contains information
+     * on the EventTask object that is used for loading
+     * the task into the ToDoList on Duke startup.
+     *
+     * @return A String that is used for loading the task into Duke on startup.
+     */
     public String save() {
         String status = this.isDone ? "DONE/+/" : "NOTDONE/+/";
         return "EVENT/+/" + status + this.title + "/+/" + this.from + "/+/" + this.to + "\n";
