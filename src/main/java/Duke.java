@@ -5,6 +5,7 @@ import items.Event;
 import items.Task;
 import items.ToDo;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -62,7 +63,7 @@ public class Duke {
                         }
                     case "deadline":
                         String[] parsedCommand = parsedInput[1].split("/");
-                        Task newDeadline = new Deadline(parsedCommand[0], parsedCommand[1]);
+                        Task newDeadline = new Deadline(parsedCommand[0], LocalDate.parse(parsedCommand[1]));
                         System.out.println("added:\n" + newDeadline.toString());
                         lst.add(newDeadline);
                         break;
