@@ -12,7 +12,7 @@ public class Find extends Command {
         this.cmdLine = cmdLine;
     }
 
-    public void operate(TaskList lst, Ui ui, Storage storage) {
+    public String operate(TaskList lst, Ui ui, Storage storage) {
         try {
             if (lst.size() == 0) throw new DukeException("Roarrrrrrrrrrrrrrrrr! You did not add anything in the list!");
             if (cmdLine.length() <= 5) throw new DukeException("Roarrrrrrrrrrrrrrrrr! Do you want to search for any task or not?");
@@ -25,15 +25,17 @@ public class Find extends Command {
             }
 
             if (findResult.size() == 0) {
-                System.out.println("Roarrrrrrrrrrrrrrrrrr! I did not find any task related to what you said!");
+                return "Roarrrrrrrrrrrrrrrrrr! I did not find any task related to what you said!";
             } else {
-                System.out.println("Roarrrrrrrrrrrrrrrrrr! Are you searching for these tasks?");
+                String response = "";
+                response += "Roarrrrrrrrrrrrrrrrrr! Are you searching for these tasks?\n";
                 for (int i = 1; i <= findResult.size(); ++i) {
-                    System.out.println(i + "." + findResult.get(i-1).toString());
+                    response += i + "." + findResult.get(i-1).toString() + "\n";
                 }
+                return response;
             }
         } catch (DukeException e) {
-            System.out.println(e.getMessage());
+            return e.getMessage();
         }
     }
 }

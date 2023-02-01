@@ -12,21 +12,23 @@ public class Delete extends Command {
         this.cmdLine = cmdLine;
     }
 
-    public void operate(TaskList lst, Ui ui, Storage storage) {
+    public String operate(TaskList lst, Ui ui, Storage storage) {
         try {
             if (cmdLine.length() <= 7) throw new DukeException("Roarrrrrrrrrrrrrrrrrrr! Do you want to delete any task or not?");
             int i = Integer.parseInt(cmdLine.substring(7));
-            System.out.println("Fine! This task is deleted. Roarrrrrrrrrrrrrr!");
-            System.out.println("  " + lst.get(i - 1).toString());
+            String response = "";
+            response += "Fine! This task is deleted. Roarrrrrrrrrrrrrr!\n";
+            response += "  " + lst.get(i - 1).toString() + "\n";
             lst.remove(i - 1);
-            System.out.println("You save " + lst.size() + " tasks in the list. Roarrrrrrrrrrrrrrrrrrrr!");
+            response += "You save " + lst.size() + " tasks in the list. Roarrrrrrrrrrrrrrrrrrrr!\n";
             storage.save(lst);
+            return response;
         } catch (DukeException e) {
-            System.out.println(e.getMessage());
+            return e.getMessage();
         } catch (NumberFormatException e) {
-            System.out.println("Roarrrrrrrrrrrrrrrrrrrr! I cannot identify that task as it is not an integer!");
+            return "Roarrrrrrrrrrrrrrrrrrrr! I cannot identify that task as it is not an integer!";
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Roarrrrrrrrrrrrrrrrrrrr! You did not add that many tasks in the list!");
+            return "Roarrrrrrrrrrrrrrrrrrrr! You did not add that many tasks in the list!";
         }
     }
 }

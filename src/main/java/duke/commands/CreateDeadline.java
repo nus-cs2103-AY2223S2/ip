@@ -13,7 +13,7 @@ public class CreateDeadline extends Command {
         this.cmdLine = cmdLine;
     }
 
-    public void operate(TaskList lst, Ui ui, Storage storage) {
+    public String operate(TaskList lst, Ui ui, Storage storage) {
         try {
             if (cmdLine.length()<=9) throw new DukeException("Roarrrrrrrrrrrrrrrrr! Do you really have this Deadline task or not?");
             String task = cmdLine.substring(9);
@@ -24,14 +24,16 @@ public class CreateDeadline extends Command {
             if (task.isEmpty()) throw new DukeException("Roarrrrrrrrrrrrrrrrr! Do you really have this Deadline task or not?");
             if (time.isEmpty()) throw new DukeException("Roarrrrrrrrrrrrrrrrr! Do you have a deadline for this task or not?");
             lst.add(new Deadline(task, time));
-            System.out.println("New Deadline task is added. Roarrrrrrrrrrrrrrrrrrrrrrrrr!");
-            System.out.println("  " + lst.get(lst.size() - 1).toString());
-            System.out.println("You save " + lst.size() + " tasks in the list. Roarrrrrrrrrrrrrrrrrrrr!");
+            String response = "";
+            response += "New Deadline task is added. Roarrrrrrrrrrrrrrrrrrrrrrrrr!\n";
+            response += "  " + lst.get(lst.size() - 1).toString() + "\n";
+            response += "You save " + lst.size() + " tasks in the list. Roarrrrrrrrrrrrrrrrrrrr!";
             storage.save(lst);
+            return response;
         } catch (DukeException e) {
-            System.out.println(e.getMessage());
+            return e.getMessage();
         } catch (StringIndexOutOfBoundsException e) {
-            System.out.println("Roarrrrrrrrrrrrrrrr! I cannot add this Deadline task! Check your input format!");
+            return "Roarrrrrrrrrrrrrrrr! I cannot add this Deadline task! Check your input format!";
         }
     }
 }

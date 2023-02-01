@@ -9,15 +9,17 @@ public class List extends Command {
     public List() {
     }
 
-    public void operate(TaskList lst, Ui ui, Storage storage) {
+    public String operate(TaskList lst, Ui ui, Storage storage) {
         try {
             if (lst.size() == 0) throw new DukeException("Roarrrrrrrrrrrrrrrrr! You did not add anything in the list!");
-            System.out.println("Roarrrrrrrrrrrrrrr! Task list shown below!");
+            String response = "";
+            response += "Roarrrrrrrrrrrrrrr! Task list shown below!\n";
             for (int i = 1; i <= lst.size(); ++i) {
-                System.out.println(i + "." + lst.get(i-1).toString());
+                response += i + "." + lst.get(i-1).toString() + "\n";
             }
+            return response;
         } catch (DukeException e) {
-            System.out.println(e.getMessage());
+            return e.getMessage();
         }
     }
 }
