@@ -4,7 +4,6 @@ public class Event extends Task {
     protected Times from;
     protected Times to;
     protected String type = "[E]";
-
     /**
      * Constructor for Event
      * @param description -> Task description
