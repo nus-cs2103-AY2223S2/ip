@@ -2,7 +2,7 @@ package command;
 
 import duke.DukeException;
 import task.TaskList;
-import ui.TextUi;
+
 
 /**
  * A command for finding a class
@@ -17,14 +17,12 @@ public class FindCommand extends TaskCommand {
         super(command, doesPrint, 2);
     }
 
-    @Override
-    public void execute(TaskList taskList, TextUi ui) throws DukeException {
-        String stringToSearch = getCommandContent(command);
-        String taskListString = "Here are the matching tasks in your list:\n"
-                + taskList.getTaskNameContains(stringToSearch).getTaskListString(true);
-        uiPrint(ui, taskListString);
-    }
-
+    /**
+     * Execute the find task
+     * @param taskList the list of tasks
+     * @return the string representation of tasks match the requirement
+     * @throws DukeException when the task cannot be found or the command is incomplete
+     */
     @Override
     public String execute(TaskList taskList) throws DukeException {
         String stringToSearch = getCommandContent(command);

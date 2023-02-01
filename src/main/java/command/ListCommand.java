@@ -1,9 +1,7 @@
 package command;
 
-import duke.Duke;
 import duke.DukeException;
 import task.TaskList;
-import ui.TextUi;
 
 /**
  * List commands
@@ -20,16 +18,11 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Execute the task
+     * Lists all tasks
      * @param taskList the list of tasks
-     * @param ui       a text UI
+     * @return string representation of the task list
      */
-    public void execute(TaskList taskList, TextUi ui) {
-        String taskListString = "Here are the tasks in your list:\n"
-                + taskList.getTaskListString(true);
-        uiPrint(ui, taskListString);
-    }
-
+    @ Override
     public String execute(TaskList taskList) {
         String taskListString = "Here are the tasks in your list:\n"
                 + taskList.getTaskListString(true);

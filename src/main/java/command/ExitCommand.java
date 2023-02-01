@@ -2,7 +2,6 @@ package command;
 
 import duke.DukeException;
 import task.TaskList;
-import ui.TextUi;
 
 /**
  * Command for exiting from the program
@@ -22,13 +21,9 @@ public class ExitCommand extends Command {
     /**
      * Execute the command
      * @param taskList the list of tasks
-     * @param ui       a text UI
      * @throws DukeException
      */
-    public void execute(TaskList taskList, TextUi ui) throws DukeException {
-        ui.sayGoodbye();
-    }
-
+    @Override
     public String execute(TaskList taskList) throws DukeException {
         return "Bye. Hope to see you again soon!";
     }

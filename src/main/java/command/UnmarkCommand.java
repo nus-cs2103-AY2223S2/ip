@@ -1,11 +1,10 @@
 package command;
 
 import duke.DukeException;
-import duke.NumberFormatDukeException;
 import duke.IndexOutOfBoundsDukeException;
+import duke.NumberFormatDukeException;
 import task.Task;
 import task.TaskList;
-import ui.TextUi;
 
 /**
  * Mark a task as undone
@@ -21,24 +20,11 @@ public class UnmarkCommand extends Command {
     }
 
     /**
-     * Execute the task
+     * Unmarks a task
      * @param taskList the list of tasks
-     * @param ui       a text UI
+     * @return the string reprepsentation of the reply
+     * @throws DukeException when the index or command format is incorrect
      */
-    @Override
-    public void execute(TaskList taskList, TextUi ui) throws DukeException {
-        try {
-            int idx = Integer.parseInt(command.substring(7)) - 1;
-            Task task = taskList.get(idx);
-            task.unmarkDone();
-            uiPrint(ui, String.format("OK, I've marked this task as not done yet:\n  %s", task));
-        } catch (IndexOutOfBoundsException e) {
-            throw new IndexOutOfBoundsDukeException();
-        } catch (NumberFormatException e) {
-            throw new NumberFormatDukeException();
-        }
-    }
-
     @Override
     public String execute(TaskList taskList) throws DukeException {
         try {

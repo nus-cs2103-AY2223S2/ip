@@ -6,7 +6,6 @@ import java.lang.reflect.InvocationTargetException;
 import duke.DukeException;
 import task.Task;
 import task.TaskList;
-import ui.TextUi;
 
 /**
  * A class for many tasks
@@ -37,26 +36,8 @@ public class TaskCommand extends Command {
     /**
      * Execute the task
      * @param taskList the list of tasks
-     * @param ui       a text UI
-     * @throws DukeException
+     * @throws DukeException when class name invalid
      */
-    @Override
-    public void execute(TaskList taskList, TextUi ui) throws DukeException {
-        String content = getCommandContent(command);
-
-        try {
-            Class<?> c = Class.forName("task." + commandName);
-            Constructor<?> cons = c.getConstructor(String.class);
-            Object object = cons.newInstance(content);
-            handleTask((Task) object, taskList, ui);
-        } catch (ClassNotFoundException | NoSuchMethodException | InstantiationException | IllegalAccessException e) {
-            throw new DukeException(e.toString());
-        } catch (InvocationTargetException e) {
-            Throwable t = e.getTargetException();
-            throw new DukeException(t.toString());
-        }
-    }
-
     @Override
     public String execute(TaskList taskList) throws DukeException {
         String content = getCommandContent(command);
@@ -78,17 +59,7 @@ public class TaskCommand extends Command {
      * Handles the task, a subroutine of execute
      * @param task the task to execute
      * @param taskList the task list
-     * @param ui Text UI interface
      */
-    public void handleTask(Task task, TaskList taskList, TextUi ui) {
-        taskList.add(task);
-        String toPrint = String.format("Got it. I've added this task:\n  %s\n"
-                        + "Now you have %d tasks in the list.",
-                task,
-                taskList.size());
-        uiPrint(ui, toPrint);
-    }
-
     public String handleTask(Task task, TaskList taskList) {
         taskList.add(task);
         String toPrint = String.format("Got it. I've added this task:\n  %s\n"

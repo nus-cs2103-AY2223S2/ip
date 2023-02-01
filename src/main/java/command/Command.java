@@ -30,17 +30,35 @@ public abstract class Command {
      *
      * @param taskList the list of tasks
      * @param ui       a text UI
+     * @throws DukeException when command invalid
      */
-    public abstract void execute(TaskList taskList, TextUi ui) throws DukeException;
+    public void execute(TaskList taskList, TextUi ui) throws DukeException {
+        uiPrint(ui, execute(taskList));
+    }
 
+    /**
+     * Executes a command and returns the message
+     * @param taskList the list of tasks
+     * @return the reply message from Duke
+     * @throws DukeException when command invalid
+     */
     public abstract String execute(TaskList taskList) throws DukeException;
 
+    /**
+     * Prints to TextUI if print is not suppressed
+     * @param ui the Text UI to print to
+     * @param toPrint the message to print out
+     */
     protected void uiPrint(TextUi ui, String toPrint) {
         if (doesPrint) {
             ui.printStructuredString(toPrint);
         }
     }
 
+    /**
+     * Returns whether this is an exit command
+     * @return a boolean value indicating status
+     */
     public boolean isExit() {
         return isExit;
     }
