@@ -29,7 +29,6 @@ import javafx.fxml.FXML;
  * @since 11
  */
 public class Duke {
-    private Tasks<Task> tasks = new Tasks<Task>();
     private TaskList<Task> taskList = new TaskList<Task>();
     private Storage storage;
     private Ui ui;
