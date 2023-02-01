@@ -1,7 +1,7 @@
 package duke.exception;
 
 /**
- * Custom Excception for duke chatbot to display custom error messages.
+ * Custom Exception for duke chatbot to display custom error messages.
  */
 public class DukeException extends Exception {
 

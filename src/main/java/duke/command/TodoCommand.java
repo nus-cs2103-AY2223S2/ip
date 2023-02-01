@@ -12,6 +12,8 @@ public class TodoCommand extends Command {
     private String message;
 
     /**
+     * Constructor for the todo command.
+     *
      * @param fullCommand
      */
     public TodoCommand(String fullCommand) {
@@ -20,10 +22,12 @@ public class TodoCommand extends Command {
     }
 
     /**
+     * Method to execute the todo command.
+     *
      * @param tasks   - task list of the current tasks.
      * @param ui      - interface of the command.
      * @param storage - database of the history of commands.
-     * @return String
+     * @return String Output of the todo command when executed.
      */
     public String execute(TaskList tasks, Ui ui, StorageList storage) {
         Todo t = new Todo(message);

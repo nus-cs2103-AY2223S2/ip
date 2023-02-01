@@ -11,9 +11,12 @@ public class Task {
     protected String doneStr;
 
     /**
-     * @param description
-     * @param typeOfTask
-     * @param doneStr
+     * Constructor for the task class with description,
+     * type of task and done indicator.
+     *
+     * @param description String representing the task and its instructions.
+     * @param typeOfTask  Type of task indicated.
+     * @param doneStr     Tasks is marked complete.
      */
     public Task(String description, String typeOfTask, String doneStr) {
         this.description = description;
@@ -24,7 +27,9 @@ public class Task {
     }
 
     /**
-     * @param description
+     * Constructor for task class with description only.
+     *
+     * @param description String representing the task and its instructions.
      */
     public Task(String description) {
         this.description = description;
@@ -59,7 +64,6 @@ public class Task {
      */
     public void markAsDone() {
         this.isDone = true;
-       // System.out.println("Nice! I've marked this task as done:\n");
     }
 
     /**
@@ -67,11 +71,12 @@ public class Task {
      */
     public void markAsUndone() {
         this.isDone = false;
-       // System.out.println("OK, I've marked this task as not done yet:\n");
     }
 
     /**
-     * @return String
+     * Methods which outputs the task object to a string.
+     *
+     * @return String Description with type of task and done indicator and task description.
      */
     public String toString() {
         if (typeofTask.equals("")) {

@@ -3,7 +3,7 @@ package duke.ui;
 import java.util.Scanner;
 
 /**
- * User interface class to display outputs and inputs
+ * User interface class to display outputs and inputs.
  */
 public class Ui {
 
@@ -29,7 +29,8 @@ public class Ui {
 
     /**
      * Reads the next line which is the command.
-     * @return String Command that is inputted
+     *
+     * @return String Command that is inputted.
      */
     public String readCommand() {
         Scanner sc = new Scanner(System.in);
@@ -38,7 +39,8 @@ public class Ui {
 
     /**
      * Shows the error which causes the data to be unable to be loaded.
-     * @param e Error message to be outputed
+     *
+     * @param e Error message to be outputed.
      */
     public void showLoadingError(String e) {
         System.out.println("Cannot load data from storage due to: " + e);

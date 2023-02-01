@@ -18,8 +18,10 @@ public class Deadline extends Task {
     protected boolean haveFormatErr;
 
     /**
-     * @param description
-     * @param by
+     * Constructor for the deadline class.
+     *
+     * @param description task description in string.
+     * @param by          deadline of the task to be completed.
      */
     public Deadline(String description, String by) {
         super(description);
@@ -47,6 +49,11 @@ public class Deadline extends Task {
         return this.haveFormatErr;
     }
 
+    /**
+     * Method that returns a string of the formmated deadline task.
+     *
+     * @return String Output of the date line object formatted.
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + "(by: " + this.bydate + " " + result + ")";

@@ -17,6 +17,11 @@ public class Main extends Application {
 
     private Duke duke = new Duke("data/duke.txt");
 
+    /**
+     * This method runs the ui and scene for the bot.
+     *
+     * @param stage Sets the ui for the bot.
+     */
     @Override
     public void start(Stage stage) {
         try {

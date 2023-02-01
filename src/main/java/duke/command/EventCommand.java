@@ -14,6 +14,8 @@ public class EventCommand extends Command {
     private String to;
 
     /**
+     * Constructor for the event command.
+     *
      * @param input
      */
     public EventCommand(String input) {
@@ -27,10 +29,12 @@ public class EventCommand extends Command {
     }
 
     /**
+     * Method to execute the event task, which marks the from and to timings.
+     *
      * @param tasks   - task list of the current tasks.
      * @param ui      - interface of the command.
      * @param storage - database of the history of commands.
-     * @return String returns the message that
+     * @return String Output when the event command is executed.
      */
     public String execute(TaskList tasks, Ui ui, StorageList storage) {
         Event t = new Event(message, from, to);

@@ -14,7 +14,9 @@ public class FindCommand extends Command {
     private String message;
 
     /**
-     * @param fullCommand
+     * Constructor for find command.
+     *
+     * @param fullCommand Input for command to be found in task list.
      */
     public FindCommand(String fullCommand) {
         String[] checker = fullCommand.split("find ");
@@ -22,6 +24,8 @@ public class FindCommand extends Command {
     }
 
     /**
+     * Method to execute the finding of tasks in the task list.
+     *
      * @param tasks   - task list of the current tasks.
      * @param ui      - interface of the command.
      * @param storage - database of the history of commands.
@@ -31,10 +35,10 @@ public class FindCommand extends Command {
         ArrayList<Task> arrList = tasks.find(message);
         String output = "";
         for (Task t : arrList) {
-            output+=t+"\n";
+            output += t + "\n";
         }
 
-        return "Here are the matching tasks in your list: " + output ;
+        return "Here are the matching tasks in your list: " + output;
     }
 
 }

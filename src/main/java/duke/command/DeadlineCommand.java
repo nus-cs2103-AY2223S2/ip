@@ -14,6 +14,7 @@ public class DeadlineCommand extends Command {
 
     /**
      * Constructor for deadline command
+     *
      * @param fullCommand Command for the deadline task
      */
     public DeadlineCommand(String fullCommand) {
@@ -26,6 +27,7 @@ public class DeadlineCommand extends Command {
     /**
      * Execute method for deadline command to display message for deadline and warn users
      * of formatting.
+     *
      * @param tasks   - task list of the current tasks.
      * @param ui      - interface of the command.
      * @param storage - database of the history of commands.

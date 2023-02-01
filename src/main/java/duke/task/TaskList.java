@@ -1,7 +1,9 @@
 package duke.task;
 
-import duke.exception.DukeException;
 import java.util.ArrayList;
+
+import duke.exception.DukeException;
+
 
 /**
  * Keeps the list of tasks using an arraylist.
@@ -25,8 +27,7 @@ public class TaskList {
     public void markTask(int taskno) throws DukeException {
         try {
             list.get(taskno).markAsDone();
-        }
-        catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Task number not in list, please fill again");
         }
     }
@@ -96,8 +97,10 @@ public class TaskList {
     }
 
     /**
-     * @param message
-     * @return
+     * Method which finds the tasks which matches the inputted string.
+     *
+     * @param message String that the user wants to find.
+     * @return List List of tasks which matches the input string.
      */
     public ArrayList<Task> find(String message) {
         ArrayList<Task> arrStr = new ArrayList<>();

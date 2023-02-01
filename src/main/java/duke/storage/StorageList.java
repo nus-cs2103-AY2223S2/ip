@@ -19,7 +19,9 @@ public class StorageList {
     private String path;
 
     /**
-     * @param path
+     * Constructor for the storagelist class.
+     *
+     * @param path url for the storage list text file.
      */
     public StorageList(String path) {
         this.list = new ArrayList<>();
@@ -53,7 +55,7 @@ public class StorageList {
 
 
     /**
-     * This method will allow the textfile to be updated according to the current arraylist and ensure that textfile
+     * This method will allow the text file to be updated according to the current arraylist and ensure that textfile
      * will contain the most updated data.
      */
     public void updateStorage() {
@@ -72,6 +74,4 @@ public class StorageList {
             e.printStackTrace();
         }
     }
-
-
 }

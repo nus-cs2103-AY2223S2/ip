@@ -9,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -30,17 +31,25 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * Initialise and starts the ui for the bot.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Method to set the local variable d as the intended duke object.
+     *
+     * @param d duke object to be set.
+     */
     public void setDuke(Duke d) {
         duke = d;
     }
 
     /**
-     * Sends welcome message to user.
+     * Method to display welcome message to user.
      */
     public void sendStart() {
         dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(START, dukeImage));
@@ -61,4 +70,5 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
     }
+
 }
