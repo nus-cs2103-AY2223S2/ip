@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * A task subclass to represent a Deadline (due date).
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
     /** Due-date of the task. */
     private LocalDate dueDate;
 

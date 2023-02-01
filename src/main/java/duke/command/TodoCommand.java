@@ -1,16 +1,16 @@
 package duke.command;
 
 import duke.DukeException;
-import duke.task.Task;
 import duke.TaskList;
-import duke.task.ToDo;
 import duke.Ui;
 import duke.Values;
+import duke.task.Task;
+import duke.task.ToDo;
 
 /**
  * A Command subclass for the todo command.
  */
-public class TodoCommand extends Command{
+public class TodoCommand extends Command {
     @Override
     public void execute(Ui ui, TaskList list, String command) throws DukeException {
         String[] parts = command.split(Values.SPACEX);
@@ -27,8 +27,8 @@ public class TodoCommand extends Command{
 
         Task task = new ToDo(taskName.toString());
         list.addTask(task);
-        ui.pixlPrint("Added new todo!\n" +
-                "\t" + task.formatTask() +
-                "\nYou now have " + list.getSize() + " task(s) in the list.");
+        ui.pixlPrint("Added new todo!\n"
+                + "\t" + task.formatTask()
+                + "\nYou now have " + list.getSize() + " task(s) in the list.");
     }
 }

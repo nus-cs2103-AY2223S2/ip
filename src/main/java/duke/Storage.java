@@ -1,14 +1,14 @@
 package duke;
 
-import duke.task.Task;
-
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
 import java.io.FileInputStream;
-import java.io.ObjectInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+
+import duke.task.Task;
 
 /**
  * A class to handle storing and loading of task list data.
@@ -21,7 +21,7 @@ public class Storage {
      * Constructor for Storage class.
      * @param filePath Path to file to store list data (no extension).
      */
-    public Storage(String filePath){
+    public Storage(String filePath) {
         this.filePath = filePath;
     }
 
