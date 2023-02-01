@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.format.FormatStyle;
 import java.util.Scanner;
@@ -10,6 +11,7 @@ import java.util.List;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.lang.Exception;
 
 public class Jane {
     public static class Task {
@@ -102,168 +104,247 @@ public class Jane {
         }
 
     }
-    public static void main(String[] args) {
-        ArrayList<Task> tasks = new ArrayList<Task>();
-        String currentD = Paths.get("").toAbsolutePath().toString();;
-        Path dirPath = Paths.get(currentD, "data");
-        Path filePath = Paths.get(currentD, "data", "JaneList.txt");
-        //check if data directory exists, and if it doesnt create one
-        try {
-            if (Files.notExists(dirPath)){
-                Files.createDirectory(dirPath);
-            }
-        } catch (IOException err) {
-            System.out.println("Unable to create directory");
-            err.printStackTrace();
-        //Check if the janelist exist inside the folder we have made and if it doesnt, create, if not read it
-        } try {
-            if (Files.notExists(filePath)) {
-                Files.createFile(filePath);
-            } else {
-                List<String> lines = Files.readAllLines(filePath);
-                for (String s:lines) {
-                    //to separate each portion of the task eg D | taskname | deadline to easily see which type of task and deadline
-                    String[] line = s.split("\\|");
-                    int i = Integer.parseInt(line[1]);
-                    boolean b = (i==1);
-                    if (line[0].equals("T")) {
-                        Todo T = new Todo(tasks.size() + 1, line[2]);
-                        T.changeState(b);
-                        tasks.add(T);
-                    } else if (line[0].equals("D")) {
-                        Deadline D = new Deadline(tasks.size() + 1, line[2], LocalDateTime.parse(line[3]));
-                        D.changeState(b);
-                        tasks.add(D);
-                    } else if (line[0].equals("E")) {
-                        Event E = new Event(tasks.size()+1, line[2], LocalDateTime.parse(line[3]), LocalDateTime.parse(line[4]));
-                        E.changeState(b);
-                        tasks.add(E);
-                    }
 
+    public static class JaneException extends Exception {
+        public JaneException(String err) {
+            super(err);
+        }
+    }
+
+    public static class Ui {
+        public static void start() {
+            String logo = " ____        _        \n"
+                    + "|  _ \\ _   _| | _____ \n"
+                    + "| | | | | | | |/ / _ \\\n"
+                    + "| |_| | |_| |   <  __/\n"
+                    + "|____/ \\__,_|_|\\_\\___|\n";
+            System.out.println("Hello from\n" + logo);
+        }
+
+    }
+
+    public static class Storage {
+        private static final String currentD = Paths.get("").toAbsolutePath().toString();
+        private static final Path dirPath = Paths.get(currentD, "data");
+        private static final Path filePath = Paths.get(currentD, "data", "JaneList.txt");
+
+        public static void createDir() {
+            try {
+                if (Files.notExists(dirPath)) {
+                    Files.createDirectory(dirPath);
+                }
+            } catch (IOException err) {
+                System.out.println("Unable to create directory");
+                err.printStackTrace();
+            }
+
+        }
+
+        public static ArrayList<Task> loadList() {
+            if (Files.notExists(filePath)) {
+                try {
+                    Files.createFile(filePath);
+                } catch (IOException err) {
+                    System.out.println("unable to create list");
+                    err.printStackTrace();
+                }
+            }
+            List<String> lines = null;
+            try {
+                lines = Files.readAllLines(filePath);
+            } catch (IOException err) {
+                System.out.println("cannot read the list");
+                assert lines != null;
+            }
+            ArrayList<Task> tasks = new ArrayList<Task>();
+            for (String s : lines) {
+                //to separate each portion of the task eg D | taskname | deadline to easily see which type of task and deadline
+                String[] line = s.split("\\|");
+                int i = Integer.parseInt(line[1]);
+                boolean b = (i == 1);
+                if (line[0].equals("T")) {
+                    Todo T = new Todo(tasks.size() + 1, line[2]);
+                    T.changeState(b);
+                    tasks.add(T);
+                } else if (line[0].equals("D")) {
+                    Deadline D = new Deadline(tasks.size() + 1, line[2], LocalDateTime.parse(line[3]));
+                    D.changeState(b);
+                    tasks.add(D);
+                } else if (line[0].equals("E")) {
+                    Event E = new Event(tasks.size() + 1, line[2], LocalDateTime.parse(line[3]), LocalDateTime.parse(line[4]));
+                    E.changeState(b);
+                    tasks.add(E);
                 }
 
+            }
+            return tasks;
+        }
+
+        public static void updateList(ArrayList<Task> tasks) {
+            ArrayList<String> list = new ArrayList<String>();
+            for (Task t : tasks) {
+                list.add(t.save());
+            }
+            try {
+                Files.write(filePath, list);
+            } catch (IOException err) {
+                System.out.println("cannot save list");
+                err.printStackTrace();
+            }
+        }
+    }
+
+    public static class Parser {
+        public static Todo parserT(String output, int count) {
+            String des = output.substring(5);
+            Todo todo = new Todo(count+1, des);
+            return todo;
+        }
+
+        public static Deadline parserD(String output, int count) {
+            String des = output.substring(9);
+            String[] s = des.split("/");
+            try {
+                if (s.length == 1) {
+                    throw new JaneException("Please specify when the deadline is :(((");
+                }
+            } catch(JaneException err) {
+                System.out.println("Please specify when the deadline is :(((");
 
             }
-
-        } catch (IOException err) {
-            System.out.println("Unable to create File");
-            err.printStackTrace();
+            Deadline d = new Deadline(count +1, s[0], LocalDateTime.parse(s[1].substring(3)));
+            return d;
         }
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        Scanner in = new Scanner(System.in);
-        int count = 0;
-        while (in.hasNext()) {
-            String output = in.nextLine();
+
+        public static Event parserE(String output, int count) {
+            String des = output.substring(6);
+            String[] s = des.split("/");
+            try {
+                if (s.length == 1) {
+                    throw new JaneException("Please specify when the event is :(((");
+                }
+            } catch (JaneException err){
+                System.out.println("Please specify when event is");
+
+            }
+            String[] start = s[1].substring(5).split(" ");
+            LocalDateTime startE = LocalDateTime.parse(String.format("%sT%s", start[0], start[1]));
+            //here i am assuming an event only lasts 1 day since the day it starts is the day it ends
+            LocalDateTime end = LocalDateTime.parse(String.format("%sT%s", start[0], s[2]));
+            Event e = new Event(count +1, s[0], startE, end);
+            return e;
+        }
+
+    }
+
+
+
+    public static class TaskList {
+        protected static ArrayList<Task> tasks;
+
+        TaskList(ArrayList<Task> tasks) {
+            this.tasks = tasks;
+        }
+
+        public static void useCommand(String output) {
             if (output.equals("bye")) {
                 List<String> currentList = new ArrayList<>();
                 for (Task t : tasks) {
                     currentList.add(t.save());
                 }
                 try {
-                    Files.write(filePath, currentList);
-                }
-                catch (IOException err)  {
+                    Storage.updateList(tasks);
+                } catch (Exception err) {
                     System.out.println("cannot save list");
                     err.printStackTrace();
                 }
-                break;
-            }
-            else if(output.startsWith("mark")) {
+
+            } else if (output.startsWith("mark")) {
                 String[] s = output.split(" ");
                 int num = Integer.parseInt(s[1]);
-                if (num < count+1) {
+                try {
                     System.out.println("Nice! I've marked this task as done");
-                    Task n = tasks.get(num-1);
+                    Task n = tasks.get(num - 1);
                     n.changeState(true);
                     System.out.println(n.toString());
-                } else {
+                } catch (Exception err) {
+                    err.printStackTrace();
                     System.out.println("Number out of index");
                 }
 
-            }
-            else if (output.equals("todo")||output.equals("deadline") ||output.equals("event")){
+            } else if (output.equals("todo") || output.equals("deadline") || output.equals("event")) {
                 System.out.println("Please specify the task to be done :(((");
-                continue;
-            }
-            else if (output.startsWith("todo")) {
-                String des = output.substring(5);
-                count+=1;
-                Todo todo = new Todo(count, des);
+            } else if (output.startsWith("todo")) {
+                Todo todo = Parser.parserT(output, tasks.size());
                 tasks.add(todo);
                 System.out.println(todo.toString());
-            }
-            else if (output.startsWith("deadline")) {
-                String des = output.substring(9);
-                String[] s = des.split("/");
-                if (s.length == 1) {
-                    System.out.println("Please specify when the deadline is :(((");
-                    continue;
-                }
-                count+=1;
-                Deadline d = new Deadline(count, s[0], LocalDateTime.parse(s[1].substring(3)));
+            } else if (output.startsWith("deadline")) {
+                Deadline d = Parser.parserD(output,tasks.size() +1);
                 tasks.add(d);
                 System.out.println(d.toString());
-            }
-            else if(output.startsWith("event")) {
+            } else if (output.startsWith("event")) {
                 String des = output.substring(6);
                 String[] s = des.split("/");
                 if (s.length == 1) {
                     System.out.println("Please specify when the event is :(((");
-                    continue;
+
                 }
                 String[] start = s[1].substring(5).split(" ");
                 LocalDateTime startE = LocalDateTime.parse(String.format("%sT%s", start[0], start[1]));
+                //here i am assuming an event only lasts 1 day since the day it starts is the day it ends
                 LocalDateTime end = LocalDateTime.parse(String.format("%sT%s", start[0], s[2]));
-                count+=1;
-                Event e = new Event(count, s[0], startE, end);
+                Event e = new Event(tasks.size() +1, s[0], startE, end);
                 tasks.add(e);
                 System.out.println(e.toString());
-            }
-            else if(output.startsWith("unmark")) {
+            } else if (output.startsWith("unmark")) {
                 String[] s = output.split(" ");
                 int num = Integer.parseInt(s[1]);
-                if (num < count + 1) {
+                try {
                     System.out.println("OK, I've marked this task as not done yet");
-                    Task n = tasks.get(num-1);
+                    Task n = tasks.get(num - 1);
                     n.changeState(false);
                     System.out.println(n.toString());
-                } else {
+                } catch (Exception err) {
                     System.out.println("Number out of index");
+                    err.printStackTrace();
                 }
-            }
-            else if (output.startsWith("delete")) {
+            } else if (output.startsWith("delete")) {
                 String[] s = output.split(" ");
                 int num = Integer.parseInt(s[1]);
-                if (num < count+1) {
+                try {
                     System.out.println("Noted. I've removed this task:");
-                    Task n = tasks.get(num-1);
+                    Task n = tasks.get(num - 1);
                     System.out.println(n.toString());
-                    for (int j = num; j <count;j++) {
+                    for (int j = num; j < tasks.size(); j++) {
                         Task t = tasks.get(j);
                         t.changeNum();
                     }
-                    count -=1;
+
                     tasks.remove(n);
-                    System.out.println("You now have " + count + " tasks");
-                } else {
+                    System.out.println("You now have " + tasks.size() + " tasks");
+                } catch (Exception err) {
                     System.out.println("Number out of index");
+                    err.printStackTrace();
                 }
-            }
-            else if (!output.equals("list") ) {
+            } else if (!output.equals("list")) {
                 System.out.println("Im sorry I don't understand what you mean :((");
-                continue;
             } else {
                 for (int i = 0; i < tasks.size(); i++) {
                     System.out.println(tasks.get(i).toString());
                 }
             }
         }
-        System.out.println("Bye! Hope to see you again soon!");
     }
 
+
+    public static void main(String[] args) throws JaneException {
+        Ui.start();
+        Storage.createDir();
+        Scanner in = new Scanner(System.in);
+        TaskList tasks = new TaskList(Storage.loadList());
+        while (in.hasNext()) {
+            String output = in.nextLine();
+            tasks.useCommand(output);
+        }
+    }
 }
