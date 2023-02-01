@@ -11,13 +11,13 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-    private static boolean isExit = false;
     private final String FILE_PATH = ("./data/Duke.txt");
+    private static boolean isExit = false;
 
     /**
      * Constructor for Duke Class. If log file does not exist, create a new log file
      */
-    public Duke() {
+    public Duke() throws DukeException {
         Storage.logFileExists(FILE_PATH);
         ui = new Ui();
         storage = new Storage(FILE_PATH);

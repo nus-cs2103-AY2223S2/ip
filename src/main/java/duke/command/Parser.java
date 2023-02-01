@@ -5,7 +5,6 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -47,7 +46,7 @@ public final class Parser {
      * @param taskLog Task log to be translated
      * @return Task which was represented by its task log format
      */
-    public static Task translateTaskLogToTask(String taskLog) {
+    public static Task translateTaskLogToTask(String taskLog) throws DukeException {
         Task taskToReturn = new Task();
         String[] taskLogCommands = taskLog.split(" \\| ");
         String taskType = taskLogCommands[0];
@@ -70,6 +69,8 @@ public final class Parser {
             LocalDateTime formattedEndTime = Parser.dateFormatter(endTime);
             taskToReturn = new Event(taskName, formattedStartTime, formattedEndTime);
             break;
+        default:
+            throw new DukeException("Invalid task log type");
         }
         if (taskStatus.equals("1")) {
             taskToReturn.markTask();
@@ -82,7 +83,7 @@ public final class Parser {
      * @param commandLine User input
      * @return Task according to user input
      */
-    public static Task translateUserInputToTask(String commandLine) {
+    public static Task translateUserInputToTask(String commandLine) throws DukeException {
         boolean isAbleToReturn = true;
         Task taskToReturn = new Task();
         String taskType = commandLine.split(" ")[0];
@@ -121,8 +122,10 @@ public final class Parser {
             } catch (DateTimeParseException e) {
                 System.out.println("Oops! Please enter deadline according to a valid 'DD/MM/YYYY HH:mm' format.\n");
                 isAbleToReturn = false;
-                break;
             }
+            break;
+        default:
+            throw new DukeException("Invalid task type");
         }
         if (isAbleToReturn) {
             return taskToReturn;

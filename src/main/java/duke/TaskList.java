@@ -73,7 +73,7 @@ public class TaskList {
         ArrayList<Task> filteredTasks = new ArrayList<>();
         for (int i = 0; i < tasks.size(); i++) {
             String currentTaskName = tasks.get(i).getName();
-            if(currentTaskName.contains(keyword)) {
+            if (currentTaskName.contains(keyword)) {
                 filteredTasks.add(tasks.get(i));
             }
         }

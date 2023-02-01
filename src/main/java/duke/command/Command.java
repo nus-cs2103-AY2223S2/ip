@@ -1,6 +1,8 @@
 package duke.command;
 
-import duke.*;
+import duke.TaskList;
+import duke.Ui;
+import duke.exception.DukeException;
 
 public abstract class Command {
     protected String userInput;
@@ -11,7 +13,7 @@ public abstract class Command {
         this.isExit = false;
     }
 
-    public abstract void execute(TaskList tasks, Ui ui);
+    public abstract void execute(TaskList tasks, Ui ui) throws DukeException;
 
     public boolean getExitStatus() {
         return isExit;

@@ -54,7 +54,7 @@ public class Task {
         if (this.isMarked) {
             return (" | 1 | " + this.taskName);
         } else {
-            return(" | 0 | " + this.taskName);
+            return (" | 0 | " + this.taskName);
         }
     }
 

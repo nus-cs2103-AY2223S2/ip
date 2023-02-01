@@ -68,7 +68,7 @@ public class Ui {
      * @param size Size of new task list
      */
     public static void informTaskIsAdded(Task task, int size) {
-        if(Objects.isNull(task)) {
+        if (Objects.isNull(task)) {
             return;
         }
         String taskCount = (size == 1) ? "task" : "tasks";

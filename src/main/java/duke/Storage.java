@@ -1,6 +1,7 @@
 package duke;
 
 import duke.command.Parser;
+import duke.exception.DukeException;
 import duke.task.Task;
 
 import java.io.File;
@@ -28,7 +29,7 @@ public class Storage {
      * Loads tasks from task log file
      * @return An ArrayList of Tasks from task log
      */
-    public ArrayList<Task> loadTasksFromTaskLog() {
+    public ArrayList<Task> loadTasksFromTaskLog() throws DukeException {
         File taskLog = new File(filePath);
         Scanner taskLogScanner = null;
         try {
