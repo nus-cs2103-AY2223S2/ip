@@ -8,8 +8,8 @@ import java.io.IOException;
 import java.util.LinkedList;
 
 public class Storage {
-    public File log;
-    public Parser p;
+    protected File log;
+    protected Parser p;
 
     /**
      * Creates a storage - an abstraction to maintain the logfile

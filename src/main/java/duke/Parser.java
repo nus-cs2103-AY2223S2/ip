@@ -13,8 +13,8 @@ import java.time.LocalDate;
 public class Parser {
     private final Ui ui;
     private final TaskList tasks;
-    public final DateTimeFormatter inputFormat;
-    public final DateTimeFormatter outputFormat;
+    protected final DateTimeFormatter inputFormat;
+    protected final DateTimeFormatter outputFormat;
 
     /**
      * Creates an abstraction of a parser to parse all kinds of text strings
@@ -100,5 +100,13 @@ public class Parser {
 
     public String convertDateToOutputFormat(LocalDate foo) {
         return foo.format(outputFormat);
+    }
+
+    public DateTimeFormatter getInputFormat() {
+        return inputFormat;
+    }
+
+    public DateTimeFormatter getOutputFormat() {
+        return outputFormat;
     }
 }

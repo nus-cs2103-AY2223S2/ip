@@ -18,8 +18,8 @@ public class Event extends Task {
 
     public Event(String description, String preFrom, String preTo, Parser p) {
         super(description);
-        this.from = LocalDate.parse(preFrom, p.inputFormat);
-        this.to = LocalDate.parse(preTo, p.inputFormat);
+        this.from = LocalDate.parse(preFrom, p.getInputFormat());
+        this.to = LocalDate.parse(preTo, p.getInputFormat());
         classIcon = "E";
     }
 
@@ -30,8 +30,8 @@ public class Event extends Task {
             throw getInvalidFormatException();
         }
         this.description = m.group(1);
-        this.to = LocalDate.parse(m.group(2), p.inputFormat);
-        this.from = LocalDate.parse(m.group(3), p.inputFormat);
+        this.to = LocalDate.parse(m.group(2), p.getInputFormat());
+        this.from = LocalDate.parse(m.group(3), p.getInputFormat());
         classIcon = "E";
     }
 

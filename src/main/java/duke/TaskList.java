@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class TaskList {
     private final Ui ui;
     private final Storage storage;
-    public static LinkedList<Task> tasks;
+    protected static LinkedList<Task> tasks;
 
     /**
      * An abstraction of the list of tasks

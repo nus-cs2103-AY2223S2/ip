@@ -17,7 +17,7 @@ public class Deadline extends Task {
 
     public Deadline(String description, String preBy, Parser p) {
         super(description);
-        this.by = LocalDate.parse(preBy, p.inputFormat);
+        this.by = LocalDate.parse(preBy, p.getInputFormat());
         classIcon = "D";
     }
 
@@ -28,7 +28,7 @@ public class Deadline extends Task {
             throw getInvalidFormatException();
         }
         this.description = m.group(1);
-        this.by = LocalDate.parse(m.group(2), p.inputFormat);
+        this.by = LocalDate.parse(m.group(2), p.getInputFormat());
         classIcon = "D";
     }
 
