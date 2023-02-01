@@ -13,6 +13,8 @@ import util.Util;
 public class Add implements Command {
     private final Task task;
 
+    private static final String SUCCESS = "Task added: %s";
+
     private static final String TODO_FORMAT = "todo 'description'";
 
     private static final String DEADLINE_FORMAT = "deadline 'description' /by 'YYYY-MM-DD'";
@@ -26,7 +28,7 @@ public class Add implements Command {
     @Override
     public void execute(TaskList taskList, Storage<TaskList> storage) {
         taskList.addTask(this.task);
-        Ui.showReply(taskList.getLast());
+        Ui.showReply(String.format(SUCCESS, taskList.getLast()));
     }
 
     private static Parser<Task> todoParser() {

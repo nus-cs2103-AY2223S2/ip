@@ -28,18 +28,6 @@ public class Util {
         return res;
     }
 
-    public static Pair<String, String> parseNextString(String str) {
-        int start = 0;
-        while (start < str.length() && WS.contains(str.charAt(start))) {
-            ++start;
-        }
-        int end = start;
-        while (end < str.length() && !WS.contains(str.charAt(end))) {
-            ++end;
-        }
-        return new Pair<>(str.substring(start, end), str.substring(end, str.length()));
-    }
-
     public static String cleanup(String str) {
         int start = 0;
         int end = str.length();
