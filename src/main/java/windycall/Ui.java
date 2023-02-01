@@ -30,7 +30,7 @@ public class Ui {
         if (tasks.size() == 0) {
             Ui.space();
             System.out.println("Seems like there is no task in your list.");
-            return ;
+            return;
         }
         Ui.space();
         System.out.println("Here are all of your tasks:");

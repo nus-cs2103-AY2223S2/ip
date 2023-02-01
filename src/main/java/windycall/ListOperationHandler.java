@@ -1,7 +1,7 @@
 package windycall;
 import java.util.List;
 
-public class ListOperationHandler extends OperationHandler{
+public class ListOperationHandler extends OperationHandler {
 
     @Override
     public void handle(String userCommand) {

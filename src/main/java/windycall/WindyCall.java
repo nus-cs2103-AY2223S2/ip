@@ -1,19 +1,18 @@
 package windycall;
 
-import java.util.Scanner;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 /**
  * Serves as a trigger of the whole WindyCall chatBox application.
  * Stores some important helper classes instance.
  */
 public class WindyCall {
-
-      private List<Task> tasks;
-      private Storage storage;
-      private Ui ui;
-      private Parser parser;
+    private List<Task> tasks;
+    private Storage storage;
+    private Ui ui;
+    private Parser parser;
 
 
     public WindyCall() {
@@ -32,7 +31,7 @@ public class WindyCall {
     public void run() {
         Scanner scan = new Scanner(System.in);
         ui.greeting();
-        while(true) {
+        while (true) {
             String userCommand = scan.nextLine();
             if (userCommand.equals("bye")) {
                 ui.byeWords();
@@ -60,8 +59,7 @@ public class WindyCall {
             default:
                 try {
                     AddTaskHandler.addTask(userCommand, tasks, storage);
-                }
-                catch (WindyCallException e) {
+                } catch (WindyCallException e) {
                     System.out.println(e.getMessage());
                 }
                 break;

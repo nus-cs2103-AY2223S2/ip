@@ -1,10 +1,8 @@
 package windycall;
 
-
 /**
  * Serves as an abstraction of different types of tasks
  */
-
 public abstract class Task {
     protected String description;
     protected boolean isDone;

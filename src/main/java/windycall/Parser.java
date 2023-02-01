@@ -20,7 +20,9 @@ public class Parser {
      * @return a enumeration type representing a specific operation
      */
     public OperationType getOperationType(String command) {
-        if (command.equals("list")) return OperationType.LIST;
+        if (command.equals("list")) {
+            return OperationType.LIST;
+        }
         String[] parts = command.split(" ");
         switch (parts[0]) {
         case "mark":

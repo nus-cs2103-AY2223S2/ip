@@ -4,8 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Scanner;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * Deals with loading tasks from the file and handle tasks change
@@ -26,15 +26,15 @@ public class Storage {
     public void handleLoad(List<Task> tasks) {
         //check if "./data" directory exist
         File file = new File("./data");
-        File task_file = new File("./data/WindyCall.txt");;
+        File taskFile = new File("./data/WindyCall.txt");;
         // if data file exists
         if (!file.isDirectory()) {
             file.mkdir();
         }
         try {
-            if (task_file.createNewFile()) {
+            if (taskFile.createNewFile()) {
                 Ui.space();
-                System.out.println("File created: " + task_file.getName());
+                System.out.println("File created: " + taskFile.getName());
             }
         } catch (IOException e) {
             System.out.println("An error occurred. Can not load your tasks");
@@ -43,7 +43,7 @@ public class Storage {
 
         // load data in task_file into this.tasks
         try {
-            Scanner myReader = new Scanner(task_file);
+            Scanner myReader = new Scanner(taskFile);
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
                 if (data.charAt(0) == 'T') {
@@ -87,7 +87,6 @@ public class Storage {
             for (Task task : tasks) {
                 myWriter.write(task.getFileFormat());
             }
-//            myWriter.write("Files in Java might be tricky, but it is fun enough!");
             myWriter.close();
             Ui.space();
             System.out.println("Successfully wrote to the file.");

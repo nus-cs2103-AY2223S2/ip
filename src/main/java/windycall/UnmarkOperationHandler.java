@@ -2,7 +2,7 @@ package windycall;
 
 import java.util.List;
 
-public class UnmarkOperationHandler extends OperationHandler{
+public class UnmarkOperationHandler extends OperationHandler {
     @Override
     public void handle(String userCommand) {
 
@@ -16,7 +16,7 @@ public class UnmarkOperationHandler extends OperationHandler{
             Ui.space();
             System.out.println(tasks.get(idx - 1));
             storage.handleTaskChange(tasks);
-        } else if (idx != -1){
+        } else if (idx != -1) {
             System.out.println("     Sorry, your index is out of range");
         }
     }

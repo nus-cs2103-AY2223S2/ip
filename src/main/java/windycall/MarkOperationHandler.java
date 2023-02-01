@@ -2,7 +2,7 @@ package windycall;
 
 import java.util.List;
 
-public class MarkOperationHandler extends OperationHandler{
+public class MarkOperationHandler extends OperationHandler {
 
     @Override
     public void handle(String userCommand) {

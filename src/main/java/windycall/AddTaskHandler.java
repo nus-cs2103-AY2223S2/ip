@@ -18,11 +18,9 @@ public abstract class AddTaskHandler extends OperationHandler {
         Task newTask;
         if (parts[0].equals("todo")) {
             newTask = AddTodoHandler.handleAddTodo(message);
-        }
-        else if (parts[0].equals("deadline")) {
+        } else if (parts[0].equals("deadline")) {
             newTask = AddDeadlineHandler.handleAddDeadline(message);
-        }
-        else if (parts[0].equals("event")) {
+        } else if (parts[0].equals("event")) {
             newTask = AddEventHandler.handleAddEvent(message);
         } else {
             throw new WindyCallException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");

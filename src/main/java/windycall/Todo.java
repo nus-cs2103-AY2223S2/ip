@@ -1,6 +1,6 @@
 package windycall;
 
-public class Todo extends Task{
+public class Todo extends Task {
 
     public Todo(String description, boolean status) {
         super(description, status);
