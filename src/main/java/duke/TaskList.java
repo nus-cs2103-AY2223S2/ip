@@ -192,7 +192,7 @@ public class TaskList {
      * @param argument key word or key phrase to find
      * @return list of strings that contains key word or key phrase
      */
-    public List<String> getDescMatches(String argument) {
+    public List<String> getMatchingDesc(String argument) {
         List<String> descriptions = new ArrayList<>(100);
         for (Task task: this.storage) {
             if (task.toString().contains(argument)) {
