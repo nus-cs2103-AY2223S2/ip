@@ -23,15 +23,12 @@ public class TodoCommand extends Command {
      * @param tasks   - task list of the current tasks.
      * @param ui      - interface of the command.
      * @param storage - database of the history of commands.
-     * @return
+     * @return String
      */
-    public boolean execute(TaskList tasks, Ui ui, StorageList storage) {
+    public String execute(TaskList tasks, Ui ui, StorageList storage) {
         Todo t = new Todo(message);
         tasks.addToList(t);
-        System.out.println("Got it, I've added this task:");
-        System.out.println(t);
-        tasks.statement();
-        return true;
+        return "Got it, I've added this task:\n" + t + "\n" + tasks.statement();
     }
 
 }

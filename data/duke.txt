@@ -1,3 +1,7 @@
+[T][X] eat and sleep
+[T][X] bye
+[T][X] work
 [T][ ] bye
-[T][ ] eat and sleep
+[D][ ] eat chicken (by: Jan 12 2012 06:00 PM)
+[T][ ] bye
 [T][ ] bye

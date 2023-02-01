@@ -1,5 +1,7 @@
 package duke.command;
 
+import duke.Duke;
+import duke.exception.DukeException;
 import duke.storage.StorageList;
 import duke.task.TaskList;
 import duke.ui.Ui;
@@ -19,14 +21,15 @@ public class DeleteCommand extends Command {
     }
 
     /**
+     * Execute method which displays the message number that has been deleted.
      * @param tasks   - task list of the current tasks.
      * @param ui      - interface of the command.
      * @param storage - database of the history of commands.
-     * @return
+     * @return String displays the task number and message which is deleted.
      */
-    public boolean execute(TaskList tasks, Ui ui, StorageList storage) {
+    public String execute(TaskList tasks, Ui ui, StorageList storage) throws DukeException {
         tasks.deleteTask(listNum);
-        return true;
+        return "Task " + (listNum+1) + " has been deleted from the list\n" + tasks.statement();
     }
 
 }

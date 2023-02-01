@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.exception.DukeException;
 import duke.storage.StorageList;
 import duke.task.TaskList;
 import duke.ui.Ui;
@@ -22,11 +23,10 @@ public class MarkCommand extends Command {
      * @param tasks   - task list of the current tasks.
      * @param ui      - interface of the command.
      * @param storage - database of the history of commands.
-     * @return
+     * @return String
      */
-    public boolean execute(TaskList tasks, Ui ui, StorageList storage) {
+    public String execute(TaskList tasks, Ui ui, StorageList storage) throws DukeException {
         tasks.markTask(listNum);
-        return true;
+        return "Task " + (listNum+1) + " has been marked as done.\n" + tasks.statement();
     }
-
 }

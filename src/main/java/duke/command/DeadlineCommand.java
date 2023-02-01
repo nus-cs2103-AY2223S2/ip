@@ -24,22 +24,21 @@ public class DeadlineCommand extends Command {
     }
 
     /**
+     * Execute method for deadline command to display message for deadline and warn users
+     * of formatting.
      * @param tasks   - task list of the current tasks.
      * @param ui      - interface of the command.
      * @param storage - database of the history of commands.
-     * @return boolean
+     * @return String
      */
-    public boolean execute(TaskList tasks, Ui ui, StorageList storage) {
+    public String execute(TaskList tasks, Ui ui, StorageList storage) {
         Deadline taskDeadline = new Deadline(message, timing);
         if (!taskDeadline.checkFormat()) {
             tasks.addToList(taskDeadline);
-            System.out.println("Got it, I've added this task:");
-            System.out.println(taskDeadline);
+            return "Got it, I've added this task:\n" + taskDeadline + tasks.statement();
         } else {
-            System.out.println("Wrong Format, Please fill in with the following format: YYYY-MM-DD h:mm");
+            return "Wrong Format, Please fill in with the following format: YYYY-MM-DD h:mm";
         }
-        tasks.statement();
-        return true;
     }
 
 }

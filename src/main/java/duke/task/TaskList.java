@@ -1,5 +1,6 @@
 package duke.task;
 
+import duke.exception.DukeException;
 import java.util.ArrayList;
 
 /**
@@ -21,10 +22,13 @@ public class TaskList {
      *
      * @param taskno - Number for the task on the list.
      */
-    public void markTask(int taskno) {
-        list.get(taskno).markAsDone();
-        System.out.println(list.get(taskno));
-        statement();
+    public void markTask(int taskno) throws DukeException {
+        try {
+            list.get(taskno).markAsDone();
+        }
+        catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Task number not in list, please fill again");
+        }
     }
 
     /**
@@ -32,22 +36,24 @@ public class TaskList {
      *
      * @param taskno Number for the task on the list.
      */
-    public void unmarkTask(int taskno) {
-        list.get(taskno).markAsUndone();
-        System.out.println(list.get(taskno));
-        statement();
+    public void unmarkTask(int taskno) throws DukeException {
+        try {
+            list.get(taskno).markAsUndone();
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Task number not in list, please fill again");
+        }
     }
 
     /**
      * Prints the current list of tasks.
      */
-    public void printList() {
-        System.out.println("Here are the tasks in your list: ");
+    public String printList() {
+        String output = "";
         for (int x = 0; x < list.size(); x++) {
-            System.out.println((x + 1) + "." + list.get(x));
+            output += String.valueOf(x + 1) + "." + list.get(x) + "\n";
         }
-        System.out.println("----------------------------------------------------");
-        statement();
+        return "Here are the tasks in your list:\n" + output
+                + "\n" + statement();
     }
 
     /**
@@ -65,11 +71,12 @@ public class TaskList {
      *
      * @param taskno Number for the task on the list.
      */
-    public void deleteTask(int taskno) {
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(list.get(taskno));
-        list.remove(taskno);
-        statement();
+    public void deleteTask(int taskno) throws DukeException {
+        try {
+            list.remove(taskno);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Task number not in list, please fill again");
+        }
     }
 
     /**
@@ -84,8 +91,8 @@ public class TaskList {
     /**
      * Output the statement for the number of tasks in the list.
      */
-    public void statement() {
-        System.out.print("Now you have " + this.lengthOflist() + " tasks in your list.\n");
+    public String statement() {
+        return "Now you have " + this.lengthOflist() + " tasks in your list.\n";
     }
 
     /**
@@ -94,7 +101,7 @@ public class TaskList {
      */
     public ArrayList<Task> find(String message) {
         ArrayList<Task> arrStr = new ArrayList<>();
-        for (Task t: list) {
+        for (Task t : list) {
             if (t.toString().contains(message)) {
                 arrStr.add(t);
             }

@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.exception.DukeException;
 import duke.storage.StorageList;
 import duke.task.TaskList;
 import duke.ui.Ui;
@@ -16,7 +17,7 @@ public abstract class Command {
      * @param storage - database of the history of commands.
      * @return boolean - true or false when the prog fails.
      */
-    public abstract boolean execute(TaskList tasks, Ui ui, StorageList storage);
+    public abstract String execute(TaskList tasks, Ui ui, StorageList storage) throws DukeException;
 
     /**
      * Check if program is to be exited upon bye command.

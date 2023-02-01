@@ -10,14 +10,14 @@ import duke.ui.Ui;
 public class ByeCommand extends Command {
 
     /**
+     * Execute method for Bye Command to display message.
      * @param tasks   - task list of the current tasks.
      * @param ui      - interface of the command.
      * @param storage - database of the history of commands.
-     * @return boolean
+     * @return String Display bye message when done.
      */
-    public boolean execute(TaskList tasks, Ui ui, StorageList storage) {
-        System.out.println("See you soon!");
-        return true;
+    public String execute(TaskList tasks, Ui ui, StorageList storage) {
+        return "See you soon!";
     }
 
     @Override

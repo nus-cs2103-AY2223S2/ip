@@ -13,11 +13,10 @@ public class ListCommand extends Command {
      * @param tasks   - task list of the current tasks.
      * @param ui      - interface of the command.
      * @param storage - database of the history of commands.
-     * @return
+     * @return String
      */
-    public boolean execute(TaskList tasks, Ui ui, StorageList storage) {
-        tasks.printList();
-        return true;
+    public String execute(TaskList tasks, Ui ui, StorageList storage) {
+        return tasks.printList();
     }
 
 }
