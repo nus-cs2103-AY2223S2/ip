@@ -12,20 +12,23 @@ import kira.task.Task;
  */
 public class Ui {
 
+    private String message;
+
     /**
      * Formats and prints the initial message of the bot.
      */
     public void startMsg() {
-        String startMsg = "Hi! I am KiraBot~\n"
+        this.message = "Hi! I am KiraBot~\n"
                 + "How may I help you today?";
-        Printer.printFormatReplyMsg(startMsg);
+        Printer.printFormatReplyMsg(this.message);
     }
 
     /**
      * Formats and prints the last message of the bot.
      */
     public void endMsg() {
-        Printer.printFormatReplyMsg("Goodbye! Have a nice day~");
+        this.message = "Goodbye! Have a nice day~";
+        Printer.printFormatReplyMsg(this.message);
     }
 
     /**
@@ -34,6 +37,7 @@ public class Ui {
      * @param msg Error message for the output.
      */
     public void errMsg(String msg) {
+        this.message = msg;
         Printer.printFormatErrorMsg(msg);
     }
 
@@ -43,8 +47,9 @@ public class Ui {
      * @param taskList
      */
     public void listMsg(List<Task> taskList) {
-        Printer.printFormatReplyMsg("Here are all the items stored~"
-                + listOfTasks(taskList));
+        this.message = "Here are all the items stored~"
+                + listOfTasks(taskList);
+        Printer.printFormatReplyMsg(this.message);
     }
 
     /**
@@ -53,10 +58,11 @@ public class Ui {
      * @param taskList
      */
     public void findMsg(List<Task> taskList, String keyword) {
-        Printer.printFormatReplyMsg("Here are all the tasks matching "
+        this.message = "Here are all the tasks matching "
                 + keyword
                 + "~"
-                + listOfTasks(taskList));
+                + listOfTasks(taskList);
+        Printer.printFormatReplyMsg(this.message);
     }
 
     /**
@@ -65,8 +71,9 @@ public class Ui {
      * @param taskList
      */
     public void todayMsg(List<Task> taskList) {
-        Printer.printFormatReplyMsg("Here are your tasks for today~"
-                + listOfTasks(taskList));
+        this.message = "Here are your tasks for today~"
+                + listOfTasks(taskList);
+        Printer.printFormatReplyMsg(this.message);
     }
 
     private String listOfTasks(List<Task> taskList) {
@@ -92,7 +99,8 @@ public class Ui {
                 .append(task.toString())
                 .append("\nYou currently have ")
                 .append(size + " Tasks");
-        Printer.printFormatReplyMsg(msg.toString());
+        this.message = msg.toString();
+        Printer.printFormatReplyMsg(this.message);
     }
 
     /**
@@ -101,8 +109,9 @@ public class Ui {
      * @param task
      */
     public void deleteMsg(Task task) {
-        Printer.printFormatReplyMsg("This task has been deleted~\n"
-                + task.toString());
+        this.message = "This task has been deleted~\n"
+                + task.toString();
+        Printer.printFormatReplyMsg(this.message);
     }
 
     /**
@@ -111,8 +120,9 @@ public class Ui {
      * @param task
      */
     public void markMsg(Task task) {
-        Printer.printFormatReplyMsg("This task has been marked as completed~\n"
-                + task.toString());
+        this.message = "This task has been marked as completed~\n"
+                + task.toString();
+        Printer.printFormatReplyMsg(this.message);
     }
 
     /**
@@ -121,8 +131,13 @@ public class Ui {
      * @param task
      */
     public void unmarkMsg(Task task) {
-        Printer.printFormatReplyMsg("This task has been reverted to incomplete~\n"
-                + task.toString());
+        this.message = "This task has been reverted to incomplete~\n"
+                + task.toString();
+        Printer.printFormatReplyMsg(this.message);
+    }
+
+    public String getMessage() {
+        return this.message;
     }
 
 }

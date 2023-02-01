@@ -30,9 +30,9 @@ _5 Simple Steps_
 Sure you do. If you Java programmer, you can use it to practice Java too. Here's the `main` method:
 
 ```
-public class Main {
+public class KiraLauncher {
     public static void main(String[] args) {
-        KiraBot.main(args);
+        Application.launch(KiraApp.class, args);
     }
 }
 ```

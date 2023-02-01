@@ -17,6 +17,7 @@ public class ByeCommand extends Command {
 
     @Override
     public boolean execute(Ui ui, TaskList tasklist) {
+        ui.endMsg();
         return false;
     }
 

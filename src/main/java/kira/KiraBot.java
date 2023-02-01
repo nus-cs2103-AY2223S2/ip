@@ -33,7 +33,6 @@ public class KiraBot {
             this.taskList = new TaskList();
         } finally {
             listenForCommand();
-            UI.endMsg();
         }
     }
 
@@ -51,6 +50,30 @@ public class KiraBot {
             }
         }
         scanner.close();
+    }
+
+    public String setup() {
+        UI.startMsg();
+
+        try {
+            this.taskList = new TaskList(SaveLoad.load(FILEPATH));
+        } catch (KiraException e) {
+            UI.errMsg(e.getMessage());
+            this.taskList = new TaskList();
+        }
+
+        return UI.getMessage();
+    }
+
+    public String getResponse(String input) {
+        try {
+            Command command = Parser.parse(input);
+            command.execute(UI, taskList);
+            SaveLoad.save(taskList.getList(), FILEPATH);
+        } catch (KiraException e) {
+            UI.errMsg(e.getMessage());
+        }
+        return UI.getMessage();
     }
 
     /**
