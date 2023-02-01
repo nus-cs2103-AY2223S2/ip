@@ -27,7 +27,7 @@ public abstract class Task {
      *
      * @return String message that indicates the completion of a Task.
      */
-    public String markAsDone() {
+    public String setDone() {
         this.hasCompleted = true;
         return "     Nice! I've marked this task as done:\n       " + this.getTaskInfoStatus();
     }
@@ -37,7 +37,7 @@ public abstract class Task {
      *
      * @return String message that indicates the Task is yet to complete.
      */
-    public String markAsIncomplete() {
+    public String setIncomplete() {
         this.hasCompleted = false;
         return "     Alright, I've marked this task as not done yet:\n       " + this.getTaskInfoStatus();
     }

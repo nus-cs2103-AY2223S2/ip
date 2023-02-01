@@ -127,14 +127,14 @@ public class Storage {
      * <p></p>
      * Example of modifications include deletion
      *
-     * @param oldText Current task description and status of the task.
-     * @param newText Modified task description and status of the task.
-     * @param oldTextIndex Current index of the task in the taskList.
+     * @param currTaskInfo Current task description and status of the task.
+     * @param newTaskInfo Modified task description and status of the task.
+     * @param taskNumber Current index of the task in the taskList.
      * @param taskList ArrayList of Task type, containing all the tasks available on Duke.
      * @throws IOException On input error.
      * @see IOException
      */
-    public void writeToFile(String oldText, String newText, int oldTextIndex,
+    public void writeToFile(String currTaskInfo, String newTaskInfo, int taskNumber,
                                     ArrayList<Task> taskList) throws IOException {
         ArrayList<String> fileTasks = new ArrayList<>();
         try {
@@ -145,9 +145,9 @@ public class Storage {
             FileWriter fw = new FileWriter("data/storage.txt");
             if (fileTasks.size() != 0) {    // file not empty
                 for (int i = 0; i < fileTasks.size(); i++) {
-                    if ( (fileTasks.get(i).equals(oldText)) && (i == oldTextIndex) ) {
-                        if (!newText.equals("")) {
-                            fw.write(newText + "\n");
+                    if ( (fileTasks.get(i).equals(currTaskInfo)) && (i == taskNumber) ) {
+                        if (!newTaskInfo.equals("")) {
+                            fw.write(newTaskInfo + "\n");
                         }
                         continue;
                     }
@@ -155,11 +155,11 @@ public class Storage {
                 }
             } else {    // file is empty
                 for (int i = 0; i < taskList.size(); i++) {
-                    if (i == oldTextIndex) {
-                        if (newText.equals("")) {
+                    if (i == taskNumber) {
+                        if (newTaskInfo.equals("")) {
                             continue;
                         }
-                        fw.write(newText + "\n");
+                        fw.write(newTaskInfo + "\n");
                         continue;
                     }
                     fw.write(taskList.get(i).getTaskInfo() + "\n");
