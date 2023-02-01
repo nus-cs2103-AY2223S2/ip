@@ -13,7 +13,7 @@ public class FindCommand extends Command {
     /**
      * The finding term.
      */
-    private final String TERM;
+    private final String KEYWORD;
 
     /**
      * Constructor for a command to find all tasks that match the specific term as a substring.
@@ -23,7 +23,7 @@ public class FindCommand extends Command {
      */
     public FindCommand(String commandString, String term) {
         super(AvailableCommands.FIND, commandString);
-        TERM = term;
+        KEYWORD = term;
     }
 
     /**
@@ -40,7 +40,7 @@ public class FindCommand extends Command {
 
         int counter = 1;
         for (Task task : taskList.getTasks()) {
-            if (task.isInDescription(TERM)) {
+            if (task.isInDescription(KEYWORD)) {
                 String msg = String.format("%d. %s", counter++, task);
                 output += "\n";
                 output += ui.showMsg(msg);
