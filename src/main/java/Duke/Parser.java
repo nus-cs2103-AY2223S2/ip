@@ -18,17 +18,20 @@ public class Parser {
     private final static DateTimeFormatter  timeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
     private final static DateTimeFormatter  HrFormat = DateTimeFormatter.ofPattern("HHmm");
 
+    private static boolean flag = true;
+
 
     /**
      * The method for addTodo
      * @param description the description of task to do
      * @param listOfTasks the TasklistOfTasks where tasks are stored in
      */
-    private static void addTodo(String description, TaskList listOfTasks) {
+    private static String addTodo(String description, TaskList listOfTasks) {
         ToDo tdItem = new ToDo(description);
         listOfTasks.addTask(tdItem);
-        System.out.println("\tGot it. I have added this task:\n" + "\t" + tdItem.toString());
-        System.out.printf("\tNow you have %d tasks in the listOfTasks.\n", listOfTasks.size());
+        return String.format("\tGot it. I have added this task:\n"
+                             + "\t%s\n"
+                             + "\tNow you have %d tasks in the list.\n",tdItem.toString(), listOfTasks.size());
     }
 
     /**
@@ -38,11 +41,13 @@ public class Parser {
      * @param start the starting time of the event
      * @param end the ending time of the event
      */
-    private static void addEvents(String description, TaskList listOfTasks, LocalDateTime start, LocalTime end) {
+    private static String addEvents(String description, TaskList listOfTasks, LocalDateTime start, LocalTime end) {
         Events evItem = new Events(description, start, end);
         listOfTasks.addTask(evItem);
-        System.out.println("\tGot it. I have added this task:\n " + "\t" + evItem.toString());
-        System.out.printf("\tNow you have %d tasks in the listOfTasks.\n", listOfTasks.size());
+        return String.format("\tGot it. I have added this task:\n "
+                             + "\t%s\n"
+                             + "\tNow you have %d tasks in the listOfTasks.\n", evItem.toString(), listOfTasks.size());
+
     }
 
     /**
@@ -52,11 +57,12 @@ public class Parser {
      * @param doneBy the time of deadline task
      */
 
-    private static void addDeadline(String description, TaskList listOfTasks, LocalDateTime doneBy) {
+    private static String addDeadline(String description, TaskList listOfTasks, LocalDateTime doneBy) {
         Deadline dlItem = new Deadline(description, doneBy);
         listOfTasks.addTask(dlItem);
-        System.out.println("\tGot it. I have added this task:\n " + "\t" + dlItem.toString());
-        System.out.printf("\tYou have %d tasks in the listOfTasks.\n\n", listOfTasks.size());
+        return String.format("\tGot it. I have added this task:\n "
+                             + "\t%s\n"
+                             + "\tYou have %d tasks in the listOfTasks.\n", dlItem.toString(), listOfTasks.size());
     }
 
     /**
@@ -64,17 +70,19 @@ public class Parser {
      * @param number the
      * @param listOfTasks
      */
-    public static void delete(String number, TaskList listOfTasks) {
+    public static String delete(String number, TaskList listOfTasks) {
         Task removed = listOfTasks.get(Integer.parseInt(number.split(" ")[1]) );
         int nummbering = Integer.parseInt(number.split(" ")[1]);
         listOfTasks.removeTask(nummbering);
         Ui.Underline();
-        Ui.showDeleteMessage();
-        System.out.println(String.format("\t%s removed", removed.toString()));
-        System.out.println("\tNow you have " + listOfTasks.size() + " tasks in the listOfTasks.");
+        return String.format("%s\n"
+                             + "\t%s removed\n"
+                             + "\tNow you have %d tasks in the listOfTasks.\n" , Ui.showDeleteMessage(), removed.toString(), listOfTasks.size());
+
     }
-    public static void findTask(TaskList listOfTasks, String wantedTask) {
+    public static String findTask(TaskList listOfTasks, String wantedTask) {
         ArrayList<Task> containingList = new ArrayList<>();
+        String filteredTasks = "";
         for (int i = 1; i <= listOfTasks.size(); i++) {
             Task task = listOfTasks.get(i);
             if (task.contains(wantedTask)) {
@@ -82,17 +90,18 @@ public class Parser {
             }
         }
         if (containingList.size() == 0) {
-            System.out.println("\tSorry you have no matching tasks.\n");
-            return;
+            return String.format("\tSorry you have no matching tasks.\n");
+
         }
-        System.out.println("\tHere are the matching tasks in your listOfTasks:");
+
         for (int i = 1; i <= containingList.size(); i++) {
-            System.out.println("\t" + i + "." + containingList.get(i - 1));
-
-
+            filteredTasks += String.format("\t" + i + ".%s" ,containingList.get(i - 1));
         }
-        System.out.println();
+        return String.format("\tHere are the matching tasks in your listOfTasks:\n" + filteredTasks);
 
+    }
+    public static boolean getFlag() {
+        return flag;
     }
 
 
@@ -102,44 +111,42 @@ public class Parser {
      * @param listOfTasks TasklistOfTasks  which actions are to be performed on
      * @return int of -1 if bye instruct is parsed else 1 is return to signal program to continue running
      */
-    public static int parse(String instct, TaskList listOfTasks) throws  IOException  {
-        String cmd = instct.split(" ")[0];
+    public static String parse(String instct, TaskList listOfTasks) throws IOException  {
+
         try {
-            if (instct.split(" ")[0].equals("listOfTasks") ) {
+            if (instct.split(" ")[0].equals("list") ) {
                 Ui.Underline();
-                Ui.listMsg();
+                String listString = "";
                 for (int i = 0; i < listOfTasks.size(); i++) {
-                    System.out.println("\t" + (i + 1) + "." + listOfTasks.get(i+1).toString());
+                    listString += String.format("\t" + (i + 1) + ".%s\n", listOfTasks.get(i + 1).toString());
                 }
-                Ui.Underline();
+                return String.format(Ui.listMsg() + "\n" + "%s\n", listString);
+
 
             }
             else if (instct.split(" ")[0].equals("bye")) {
-                Ui.sayBye();
-                return -1;
+                flag = false;
+                return Ui.sayBye();
             }
             else if ((instct.split(" ").length) > 1 && !instct.split(" ")[0].equals("listOfTasks")) {
                 if (instct.split(" ")[0].equals("mark")) {
                     int numbering = Integer.parseInt(instct.split(" ")[1]) ;
-                    Ui.Underline();
-                    Ui.markedMessage();
                     listOfTasks.markDone(numbering);
-                    System.out.println("\t" + listOfTasks.get(numbering).toString());
-                    Ui.Underline();
+                    return String.format("%s\n" + "\t%s", Ui.markedMessage(),listOfTasks.get(numbering).toString());
+
 
                 } else if (instct.split(" ")[0].equals("unmark")) {
                     int numbering = Integer.parseInt(instct.split(" ")[1]);
-                    Ui.Underline();
-                    Ui.unMarkedMessage();
                     listOfTasks.markNotDone(numbering);
-                    System.out.println("\t" + listOfTasks.get(numbering).toString());
-                    Ui.Underline();
+
+                    return String.format("%s\n" + "\t%s", Ui.unMarkedMessage(),listOfTasks.get(numbering).toString());
+
 
                 } else if (instct.split(" ")[0].equals("todo")) {
                     Ui.Underline();
                     String description = instct.split(" ")[1];
-                    addTodo(description, listOfTasks);
-                    Ui.Underline();
+                    return addTodo(description, listOfTasks);
+
 
 
                 } else if (instct.split(" ")[0].equals("deadline")) {
@@ -147,8 +154,8 @@ public class Parser {
                     String description = instct.split(" ")[1];
                     String temp = instct.split(" /by ")[1];
                     LocalDateTime doneBy = LocalDateTime.parse(temp, timeFormat);
-                    addDeadline(description, listOfTasks, doneBy);
-                    Ui.Underline();
+                    return addDeadline(description, listOfTasks, doneBy);
+
 
 
                 } else if (instct.split(" ")[0].equals("event")) {
@@ -157,39 +164,33 @@ public class Parser {
                     String[] temp = instct.split("/from | /to ");
                     LocalDateTime from = LocalDateTime.parse(temp[1], timeFormat);
                     LocalTime to = LocalTime.parse(temp[2], HrFormat);
-                    addEvents(description, listOfTasks, from, to);
-                    Ui.Underline();
+                    return addEvents(description, listOfTasks, from, to);
+
 
 
                 } else if (instct.split(" ")[0].equals("delete")) {
+                    return delete(instct, listOfTasks);
 
-                    delete(instct, listOfTasks);
-                    Ui.Underline();
 
 
                 } else if (instct.split(" ")[0].equals("find")) {
                     Ui.Underline();
                     String wantedTask = instct.split(" ")[1];
-                    findTask(listOfTasks, wantedTask);
-                    Ui.Underline();
+                    return findTask(listOfTasks, wantedTask);
+
 
                 } else {
                     throw new unknownCommandException();
                 }
-
-
-            } else {
-                throw new emptyDescriptionException(instct.split(" ")[0]);
-
-
             }
-
-
-        } catch (DukeException | DateTimeParseException ex) {
-            System.out.printf("%s\n", ex);
-            Ui.Underline();
+            else {
+                throw new emptyDescriptionException(instct.split(" ")[0]);
+            }
         }
-        return 1;
+        catch (DukeException | DateTimeParseException ex) {
+            return String.format("%s\n", ex);
+        }
+
     }
 
 }

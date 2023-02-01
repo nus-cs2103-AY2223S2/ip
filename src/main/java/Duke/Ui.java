@@ -45,30 +45,30 @@ public class Ui {
     /**
      * The method of sayBye when exiting program
      */
-    public static void sayBye() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public static String sayBye() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
      * The method of markedMessage()
      */
-    public static void markedMessage() {
-        System.out.println("\tNice! I've marked this task as done:");
+    public static String markedMessage() {
+        return"\tNice! I've marked this task as done:";
 
     }
 
     /**
      * The method of unMarkedMessage()
      */
-    public static void unMarkedMessage() {
-        System.out.println("\tOK, I've marked this task as not done yet:");
+    public static String unMarkedMessage() {
+        return"\tOK, I've marked this task as not done yet:";
     }
 
     /**
      * The method of showDeleteMessage()
      */
-    public static void showDeleteMessage() {
-        System.out.println("\tNoted. I've removed this task:");
+    public static String showDeleteMessage() {
+        return "\tNoted. I've removed this task:";
     }
 
     /**
@@ -81,8 +81,8 @@ public class Ui {
     /**
      * The method of listMsg()
      */
-    public static void listMsg() {
-        System.out.println("\tHere are the tasks in your list:");
+    public static String listMsg() {
+        return "\tHere are the tasks in your list:";
 
     }
 

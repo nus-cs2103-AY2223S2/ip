@@ -94,7 +94,7 @@ public class Storage {
      * @param listOfTasks
      */
 
-    public  void saveData(TaskList listOfTasks) throws  IOException{
+    public void saveData(TaskList listOfTasks) throws  IOException{
         FileWriter fwrite = new FileWriter("database/data.txt", false);
         for (int i = 0; i < listOfTasks.size(); i++) {
             fwrite.write(listOfTasks.get(i+1).changeFormat() + "\n");
