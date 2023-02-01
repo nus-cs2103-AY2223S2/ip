@@ -15,7 +15,7 @@ import duke.Tasks.Task;
  * A utility class that loads from an existing storage or creates a new storage file.
  */
 public class Storage {
-    private static DukeIO dukeIo = new DukeIO();
+    private static DukeIo dukeIo = new DukeIo();
     private ArrayList<Task> storedTasks;
     private FileInputStream fis;
     private ObjectInputStream ois;

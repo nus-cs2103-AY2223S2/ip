@@ -18,7 +18,7 @@ import duke.Tasks.ToDo;
  * MyDuke proccesses the input commands or passes the responsibility to other classes.
  */
 public class MyDuke {
-    private static DukeIO dukeIo = new DukeIO();
+    private static DukeIo dukeIo = new DukeIo();
     private static TaskList allTasks;
     private static Map<String, Consumer<String[]>> cmdMap = new HashMap<>();
 
