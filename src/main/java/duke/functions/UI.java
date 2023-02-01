@@ -18,22 +18,22 @@ public class UI {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        System.out.println(startEndDivider + "What can the duke.Duke help you with today?\n" + startEndDivider);
+        System.out.println(startEndDivider + "What can the Duke help you with today?\n" + startEndDivider);
     }
 
     public static void exitMsg() {
-        System.out.println(startEndDivider + "Goodbye, feel free to call the duke.Duke again whenever you need.\n"
+        System.out.println(startEndDivider + "Goodbye, feel free to call the Duke again whenever you need.\n"
                 + startEndDivider);
     }
 
     public static void taskAddDelete(ToDoList ls, Task task, String command) {
-        System.out.println(mainDivider + "The duke.Duke has " + command + " the following task:\n"
+        System.out.println(mainDivider + "The Duke has " + command + " the following task:\n"
                 + " - " + task + "\n"
                 + "You now have " + ls.getToDoCount() + " task!\n" + mainDivider);
     }
 
     public static void taskMarking(ToDoList ls, int index, String command) {
-        System.out.println(mainDivider + "The duke.Duke has " + command + " the following task:\n"
+        System.out.println(mainDivider + "The Duke has " + command + " the following task:\n"
                 + " - " + ls.getTask(index) + "\n" + mainDivider);
     }
 

@@ -6,7 +6,7 @@ Hello from
 |____/ \__,_|_|\_\___|
 
 ____________________________________________________________
-What can the duke.Duke help you with today?
+What can the Duke help you with today?
 ____________________________________________________________
 
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
@@ -16,7 +16,7 @@ TO DO LIST:
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
-The duke.Duke has add the following task:
+The Duke has add the following task:
  - [E][ ] tryout test (from: 29 Jun 2023 to: 01 Oct 2024)
 You now have 3 task!
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
@@ -30,17 +30,17 @@ TO DO LIST:
 
 !!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
 Not enough details are given!
- The duke.Duke expects more information!
+The Duke expects more information!
 !!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
 
 !!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
 Not enough details are given!
- The duke.Duke expects more information!
+The Duke expects more information!
 !!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
 
 !!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
 Not enough details are given!
- The duke.Duke expects more information!
+The Duke expects more information!
 !!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
 
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
@@ -52,22 +52,22 @@ TO DO LIST:
 
 !!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
 Not enough details are given!
- The duke.Duke expects more information!
+The Duke expects more information!
 !!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
 
 !!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
 Not enough details are given!
- The duke.Duke expects more information!
+The Duke expects more information!
 !!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
 
 !!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
 Not enough details are given!
- The duke.Duke expects more information!
+The Duke expects more information!
 !!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
 
 !!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
 Not enough details are given!
- The duke.Duke expects more information!
+The Duke expects more information!
 !!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
 
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
@@ -78,17 +78,17 @@ TO DO LIST:
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
-The duke.Duke has mark the following task:
+The Duke has mark the following task:
  - [D][x] gaming (by: 29th april 2023)
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
-The duke.Duke has mark the following task:
+The Duke has mark the following task:
  - [E][x] tryout test (from: 29 Jun 2023 to: 01 Oct 2024)
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
-The duke.Duke has unmark the following task:
+The Duke has unmark the following task:
  - [T][ ] test
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 
@@ -119,7 +119,7 @@ TO DO LIST:
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
-The duke.Duke has add the following task:
+The Duke has add the following task:
  - [D][ ] delete (by: 05 May 2023)
 You now have 4 task!
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
@@ -133,13 +133,13 @@ TO DO LIST:
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
-The duke.Duke has delete the following task:
+The Duke has delete the following task:
  - [E][x] tryout test (from: 29 Jun 2023 to: 01 Oct 2024)
 You now have 3 task!
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
-The duke.Duke has mark the following task:
+The Duke has mark the following task:
  - [D][x] delete (by: 05 May 2023)
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 
@@ -151,18 +151,18 @@ TO DO LIST:
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
-The duke.Duke has delete the following task:
+The Duke has delete the following task:
  - [D][x] delete (by: 05 May 2023)
 You now have 2 task!
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
-The duke.Duke has mark the following task:
+The Duke has mark the following task:
  - [T][x] test
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
-The duke.Duke has unmark the following task:
+The Duke has unmark the following task:
  - [D][ ] gaming (by: 29th april 2023)
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 
@@ -173,6 +173,6 @@ TO DO LIST:
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 
 ____________________________________________________________
-Goodbye, feel free to call the duke.Duke again whenever you need.
+Goodbye, feel free to call the Duke again whenever you need.
 ____________________________________________________________
 

@@ -51,7 +51,7 @@ public class Parser {
             Parser.taskCommandHandler(input, ls);
             break;
         default:
-            throw new DukeException("The duke.Duke does not understand your words!");
+            throw new DukeException("The Duke does not understand your words!");
         }
         return false;
     }
