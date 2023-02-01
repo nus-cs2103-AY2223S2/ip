@@ -5,8 +5,10 @@ public class Deadline extends Task {
 	
 	protected Optional<LocalDate> by;
 	protected String strBy;
+	protected String tag;
 	public Deadline(String description, String strDate) {
 		super(description);
+		this.tag = "[D]";
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		try { 
 			this.by = Optional.of(LocalDate.parse(strDate, formatter));
@@ -16,7 +18,7 @@ public class Deadline extends Task {
 		
 	}
 	
-	public String getDateMMMddyyyy() {
+	public String getDate() {
 		if (strBy == null ) {
 			DateTimeFormatter date = DateTimeFormatter.ofPattern("MMM dd yyyy");
 			String formattedDate = this.by.get().format(date);
@@ -25,8 +27,25 @@ public class Deadline extends Task {
 		return strBy;
 	}
 
+	public Deadline(String description, String strDate, boolean isMark) {
+		super(description);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		try { 
+			this.by = Optional.of(LocalDate.parse(strDate, formatter));
+		} catch (Exception e) {
+			this.strBy = strDate;	
+		}
+		this.tag = "[D]";
+		super.markTask(isMark);
+	}
+	public String getTag() {
+		return this.tag;
+	}
+	
+
+
 	@Override
 	public String toString() {
-		return "[D]" + super.toString() + " (by: " + this.getDateMMMddyyyy()+ ")";
+		return this.tag + super.toString() + " (by: " + this.getDate() + ")";
     	}
 }
