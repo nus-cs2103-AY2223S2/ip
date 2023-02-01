@@ -17,7 +17,7 @@ public class Deadline extends Task {
     /**
      * The due date of the deadline task.
      */
-    protected LocalDate by;
+    private LocalDate by;
 
     /**
      * Constructor for a deadline task with the given description and due date. It checks on whether the due date is

@@ -17,11 +17,11 @@ public class Event extends Task {
     /**
      * The start date of the event.
      */
-    protected LocalDate from;
+    private LocalDate from;
     /**
      * The end date of the event.
      */
-    protected LocalDate to;
+    private LocalDate to;
 
     /**
      * Constructor for an event task with the given description, start and end date. It checks on whether the start
