@@ -9,7 +9,7 @@ import duke.ui.Ui;
 import java.io.IOException;
 import java.time.LocalDate;
 
-public class AddDeadlineCommand extends Command{
+public class AddDeadlineCommand extends Command {
 
     private String userInput;
 
@@ -32,7 +32,7 @@ public class AddDeadlineCommand extends Command{
      * @param storage Storage for storing the newly created task.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException{
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String[] inputs = userInput.split(" ");
         if (inputs.length < 2) {
             throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
@@ -47,7 +47,7 @@ public class AddDeadlineCommand extends Command{
         tasks.addTask(userTask);
         try {
             storage.appendToFile(storage.getFilePath(), "D | 0 | " + taskName + " | " + deadline + "\n");
-        } catch(IOException e) {
+        } catch (IOException e) {
             throw new DukeException("Error writing to file");
         }
         ui.showToUser("Got it. I've added this task: \n    " + userTask + "\nNow you have " + tasks.getSize() + " duke.tasks in the list.");

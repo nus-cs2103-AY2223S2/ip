@@ -5,10 +5,10 @@ import duke.storage.Storage;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
-public class FindCommand extends Command{
+public class FindKeywordCommand extends Command {
     private String keyword;
 
-    public FindCommand(String keyword) {
+    public FindKeywordCommand(String keyword) {
         this.keyword = keyword;
     }
 

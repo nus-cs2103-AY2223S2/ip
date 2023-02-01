@@ -1,5 +1,8 @@
 package duke.tasks;
 
+import duke.exceptions.DukeException;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -14,6 +17,17 @@ public class TaskList {
 
     public ArrayList<Task> getTasks() {
         return tasks;
+    }
+
+    public ArrayList<Task> getDeadlineBefore(LocalDate by) throws DukeException {
+        ArrayList<Task> deadlines = new ArrayList<>();
+
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).isDeadline() && tasks.get(i).getDeadline().isBefore(by)) {
+                deadlines.add(tasks.get(i));
+            }
+        }
+        return deadlines;
     }
 
     public String printDescription(int idx) {
@@ -32,9 +46,13 @@ public class TaskList {
         return tasks.get(idx).toString();
     }
 
-    public void deleteTask(int idx) {tasks.remove(idx); };
+    public void deleteTask(int idx) {
+        tasks.remove(idx);
+    }
 
-    public int getSize() {return tasks.size(); };
+    public int getSize() {
+        return tasks.size();
+    }
 
     public void addTask(Task task) {
         tasks.add(task);

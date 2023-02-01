@@ -1,9 +1,9 @@
 package duke.parser;
 
-import duke.commands.*;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import duke.commands.*;
 
 public class Parser {
 
@@ -19,10 +19,12 @@ public class Parser {
         Pattern unmark = Pattern.compile("unmark [0-9]+");
         Pattern delete = Pattern.compile("delete [0-9]+");
         Pattern find = Pattern.compile("find .*");
+        Pattern findBy = Pattern.compile("findBy .*");
         Matcher matchMark = mark.matcher(userInput);
         Matcher matchUnmark = unmark.matcher(userInput);
         Matcher matchDelete = delete.matcher(userInput);
         Matcher matchFind = find.matcher(userInput);
+        Matcher matchFindBy = findBy.matcher(userInput);
 
         if (userInput.equals("list")) {
             return new ListCommand();
@@ -39,7 +41,10 @@ public class Parser {
             return new DeleteCommand(idx);
         } else if (matchFind.matches()) {
             String keyword = userInput.split(" ")[1];
-            return new FindCommand(keyword);
+            return new FindKeywordCommand(keyword);
+        } else if (matchFindBy.matches()) {
+            String by = userInput.split(" ")[1];
+            return new FindDeadlineCommand(by);
         } else {
             String[] inputs = userInput.split(" ");
             String taskType = inputs[0];
