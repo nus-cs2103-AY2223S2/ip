@@ -5,7 +5,6 @@ import duke.exceptions.DukeUnknownInputException;
 import duke.commands.*;
 
 public class Parser {
-
     public Parser() {}
 
     public Command parse(String fullCommand) throws DukeUnknownInputException {

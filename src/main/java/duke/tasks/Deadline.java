@@ -4,9 +4,7 @@ import duke.DateHandler;
 import duke.exceptions.DukeInvalidInputException;
 import duke.exceptions.DukeEmptyInputException;
 
-
 public class Deadline extends Task {
-
     protected String by;
 
     private Deadline(String description, String by) {

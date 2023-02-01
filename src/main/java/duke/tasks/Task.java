@@ -48,18 +48,18 @@ public class Task {
         Task newTask;
 
         switch(type) {
-            case "T":
-                newTask = Todo.createTodo(params[2]);
-                break;
-            case "D":
-                newTask = Deadline.createDeadline(params[2]);
-                break;
-            case "E":
-                newTask = Event.createEvent(params[2]);
-                break;
-            default:
-                System.out.println("Incorrect format");
-                return null;
+        case "T":
+            newTask = Todo.createTodo(params[2]);
+            break;
+        case "D":
+            newTask = Deadline.createDeadline(params[2]);
+            break;
+        case "E":
+            newTask = Event.createEvent(params[2]);
+            break;
+        default:
+            System.out.println("Incorrect format");
+            return null;
         }
         if (status.equals("1")) {
             newTask.isDone = true;
