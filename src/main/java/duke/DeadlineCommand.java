@@ -1,7 +1,8 @@
 package duke;
 
-import duke.Command;
-
+/**
+ * Command class for Deadline object
+ */
 public class DeadlineCommand implements Command {
     private Task newDeadline;
 

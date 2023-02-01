@@ -1,7 +1,9 @@
 package duke;
 
-import duke.*;
-
+/**
+ * Object class for Parser
+ * Parser acts like a compiler which translates user input into command
+ */
 public class Parser {
     private static final int TODO_LENGTH = 4;
     Parser() {}

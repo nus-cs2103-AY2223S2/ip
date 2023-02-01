@@ -1,7 +1,8 @@
 package duke;
 
-import duke.Command;
-
+/**
+ * Command class for listing out
+ */
 public class ListCommand implements Command {
     ListCommand() {}
     @Override

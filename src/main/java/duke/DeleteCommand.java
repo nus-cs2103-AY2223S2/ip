@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Command class for delete
+ */
 public class DeleteCommand implements Command {
     private int deleteIndex;
     DeleteCommand(int i) {

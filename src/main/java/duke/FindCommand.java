@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Command class for find
+ */
 public class FindCommand implements Command {
     private String keywords;
     FindCommand(String s) {

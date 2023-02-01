@@ -1,5 +1,9 @@
 package duke;
 
+/**
+ * Object class of Deadline
+ * Deadline has and only has one time attribute
+ */
 public class Deadline extends Task {
 
     protected Times ddline;
@@ -29,8 +33,7 @@ public class Deadline extends Task {
         }
         String description = input.substring(9, ddlineIndex - 1);
         String by = input.substring(ddlineIndex + 4);
-        Deadline temp = new Deadline(description, by);
-        return temp;
+        return new Deadline(description, by);
     }
     @Override
     public String toString() {

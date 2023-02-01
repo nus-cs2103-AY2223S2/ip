@@ -1,5 +1,9 @@
 package duke;
 
+/**
+ * Object class of Event
+ * Event must have two time attribute
+ */
 public class Event extends Task {
     protected Times from;
     protected Times to;

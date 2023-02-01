@@ -1,9 +1,9 @@
 package duke;
-
-import duke.Task;
-
 import java.util.ArrayList;
 
+/**
+ * Class that display messages (except error messages) to user
+ */
 public class Ui {
     Ui() {}
 

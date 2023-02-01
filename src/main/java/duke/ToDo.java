@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Object class of ToDo
+ */
 public class ToDo extends Task {
     protected String type = "[T]";
 

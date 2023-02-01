@@ -1,12 +1,13 @@
 package duke;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-
-
+/**
+ * Object class for time
+ * Input of time will be formatted to MMM d yyyy hh:mm
+ */
 public class Times {
-    final static DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+    static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
     protected LocalDateTime d;
 
     /**
@@ -20,11 +21,6 @@ public class Times {
         } catch (DateTimeParseException e) {
             System.out.println("Input String is not correct format for time");
         }
-    }
-
-    public static void main(String[] args) {
-        Times a = new Times("2019-10-15 1530");
-        System.out.println(a);
     }
 
     @Override

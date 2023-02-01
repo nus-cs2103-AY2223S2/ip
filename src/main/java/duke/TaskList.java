@@ -1,9 +1,11 @@
 package duke;
-
-
 import java.util.ArrayList;
 import java.util.Iterator;
 
+/**
+ * Class which stores a list of tasks
+ * Most operations are done in this class
+ */
 public class TaskList {
     /**
      * Here we assume all input is in correct format
@@ -32,7 +34,7 @@ public class TaskList {
             list.get(i).markAsDone();
             s.update(list);
             ui.showMark(list.get(i));
-        } catch (IndexOutOfBoundsException IOBE) {
+        } catch (IndexOutOfBoundsException e) {
             throw new DukeException(ExceptionType.TASK_NOT_EXIST);
         }
     }
@@ -47,7 +49,7 @@ public class TaskList {
             list.get(i).markAsNotDone();
             s.update(list);
             ui.showMarkNotDone(list.get(i));
-        } catch (IndexOutOfBoundsException IOBE) {
+        } catch (IndexOutOfBoundsException e) {
             throw new DukeException(ExceptionType.TASK_NOT_EXIST);
         }
     }
@@ -76,7 +78,7 @@ public class TaskList {
             Task temp = list.remove(deleteIndex);
             s.update(list);
             ui.showDelete(temp, list);
-        } catch (IndexOutOfBoundsException IOBE) {
+        } catch (IndexOutOfBoundsException e) {
             throw new DukeException(ExceptionType.TASK_NOT_EXIST);
         }
     }

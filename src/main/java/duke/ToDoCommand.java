@@ -1,9 +1,8 @@
 package duke;
 
-import duke.Command;
-import duke.Task;
-import duke.TaskList;
-
+/**
+ * Command class for ToDo
+ */
 public class ToDoCommand implements Command {
     private Task newToDo;
     ToDoCommand(Task t) {

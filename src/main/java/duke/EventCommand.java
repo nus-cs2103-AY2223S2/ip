@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Command class for event
+ */
 public class EventCommand implements Command {
     private Task newEvent;
     EventCommand(Task t) {
