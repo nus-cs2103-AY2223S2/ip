@@ -16,6 +16,8 @@ public class MainWindow extends UiComponent<VBox> {
     /** String path to FXML file relative to the FXML directory. */
     private static final String PATH_FXML_FILE = "MainWindow.fxml";
 
+    private static final int MESSAGE_LIMIT = 100;
+
     private final AppManager manager;
 
     @FXML private ScrollPane textScrollPane;
@@ -99,7 +101,7 @@ public class MainWindow extends UiComponent<VBox> {
     private void displayReply(String reply) {
         SpeechBubble bubble = new SpeechBubble(false);
         bubble.setText(reply);
-        displaySpeechBubble(bubble);
+        Platform.runLater(() -> displaySpeechBubble(bubble));
     }
 
 
@@ -110,7 +112,10 @@ public class MainWindow extends UiComponent<VBox> {
      * @param bubble - the SpeechBubble to display.
      */
     private void displaySpeechBubble(SpeechBubble bubble) {
-        Platform.runLater(() -> textDisplayArea.getChildren().add(bubble.getRoot()));
+        textDisplayArea.getChildren().add(bubble.getRoot());
+        if (textDisplayArea.getChildren().size() > MESSAGE_LIMIT) {
+            textDisplayArea.getChildren().remove(0);
+        }
     }
 
 
