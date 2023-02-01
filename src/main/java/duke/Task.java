@@ -54,6 +54,10 @@ public class Task {
         return isDone;
     }
 
+    public String getDescription() {
+        return  description;
+    }
+
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;

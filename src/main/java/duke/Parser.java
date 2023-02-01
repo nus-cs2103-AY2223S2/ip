@@ -44,6 +44,12 @@ public class Parser {
             } else {
                 tasklist.addingActivities("event", userInput);
             }
+        } else if (userInput.contains("find") && userInput.substring(0, 4).equals("find")) {
+            if (userInput.substring(5).equals("")) {
+                throw new DukeException("☹ OOPS!!! The description of find cannot be empty.");
+            } else {
+                tasklist.findingActivities(userInput.substring(5));
+            }
         } else if (userInput.equals("bye")) {
             ui.bye();
             storage.saveToFile(tasklist);
