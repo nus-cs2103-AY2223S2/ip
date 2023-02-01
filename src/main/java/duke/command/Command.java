@@ -31,7 +31,7 @@ public abstract class Command {
      * @param storage The <code>Storage</code> associated with Duke
      * @throws DukeException If user input is wrong.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage)
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage)
             throws DukeException;
     /**
      * Returns true if <code>Command</code> is <code>ByeCommand</code>.
