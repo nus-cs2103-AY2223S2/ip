@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 public abstract class Task {
     private boolean completed;
