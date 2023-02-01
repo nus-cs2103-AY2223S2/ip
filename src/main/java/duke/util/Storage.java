@@ -1,13 +1,23 @@
 package duke.util;
 
-import duke.task.*;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.ToDo;
+
+/**
+ * Storage solely handles any activities related to storage
+ * including loading and saving data to a file
+ *
+ * @author Guo-KeCheng
+ */
 public class Storage {
 
     private final String filePath;
@@ -19,11 +29,23 @@ public class Storage {
         EVENT
     }
 
+    /**
+     * Storage constructor
+     *
+     * @param filePath String representation of a filepath
+     * @param ui Shared Ui Object
+     */
     public Storage(String filePath, Ui ui) {
         this.filePath = filePath;
         this.ui = ui;
     }
 
+    /**
+     * Saves Task in TaskList to a file
+     *
+     * @param taskList Existing TaskList
+     * @throws IOException if file does not exist and cannot be created
+     */
     public void save(TaskList taskList) throws IOException {
         File file = new File(filePath);
         File parentFile = file.getParentFile();
@@ -47,6 +69,13 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * Load data into a TaskList from a file
+     *
+     * @param filePath String representation of filepath to load from
+     * @return TaskList with previously saved data
+     * @throws FileNotFoundException If source is not found
+     */
     public TaskList load(String filePath) throws FileNotFoundException {
         File file = new File(filePath); // create a File for the given file path
         TaskList taskList = new TaskList();

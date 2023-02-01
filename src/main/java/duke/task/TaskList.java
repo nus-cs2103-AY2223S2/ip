@@ -3,6 +3,11 @@ package duke.task;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+/**
+ * A list of Tasks
+ *
+ * author Guo-KeCheng
+ */
 public class TaskList implements Iterable<Task> {
 
     private final ArrayList<Task> taskList;

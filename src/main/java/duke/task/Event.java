@@ -4,7 +4,12 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class Event extends Task{
+/**
+ * Event: subclass of Task that tracks startDate and endDate
+ *
+ * author Guo-KeCheng
+ */
+public class Event extends Task {
     private LocalDate startDate;
     private LocalDate endDate;
 
@@ -17,7 +22,7 @@ public class Event extends Task{
      * @param endDate End date as String
      * @throws DateTimeParseException When endDate is in the wrong format
      */
-    public Event(String task,String startDate, String endDate) throws DateTimeParseException {
+    public Event(String task, String startDate, String endDate) throws DateTimeParseException {
         super(task, false);
         this.endDate = LocalDate.parse(endDate);
         this.startDate = LocalDate.parse(startDate);
@@ -66,7 +71,7 @@ public class Event extends Task{
      */
     @Override
     public String getDescription() {
-        return getTask()+ " | " + startDate + " | " + endDate;
+        return getTask() + " | " + startDate + " | " + endDate;
     }
 
     /**

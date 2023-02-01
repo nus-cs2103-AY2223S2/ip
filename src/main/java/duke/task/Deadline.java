@@ -4,7 +4,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * Deadline class: Instantiate when user creates a deadline
+ * Deadline: subclass of Task that tracks endDate
+ *
+ * author Guo-KeCheng
  */
 public class Deadline extends Task {
 

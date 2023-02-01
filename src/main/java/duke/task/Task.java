@@ -1,9 +1,20 @@
 package duke.task;
 
+/**
+ * Task that tracks general info and completion status
+ *
+ * author Guo-KeCheng
+ */
 public abstract class Task {
     private boolean isCompleted; //by default the task should not be completed
     private final String task;
 
+    /**
+     * Task constructor
+     *
+     * @param task Description of task
+     * @param isCompleted Completion status
+     */
     public Task(String task, boolean isCompleted) {
         this.task = task;
         this.isCompleted = isCompleted;
