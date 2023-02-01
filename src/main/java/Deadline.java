@@ -1,14 +1,21 @@
+import java.time.LocalDateTime;
+
 public class Deadline extends Task {
 
-    protected String by;
+    protected LocalDateTime by;
+    protected String strBy;
 
     public Deadline(String description, String by) throws DescriptionException{
         super(description);
-        this.by = by;
+        this.strBy = by;
+        this.by = getLocalDateTime(this.strBy);
+        if (this.by != null) {
+            this.strBy = this.by.format(DateTimeFormat.defaultOutput.formatter);
+        }
     }
 
     @Override
     public String toString() {
-        return "D | " + super.toString() + " | " + by;
+        return "D | " + super.toString() + " | " + this.strBy;
     }
 }

@@ -66,9 +66,8 @@ public class Duke {
         try {
             this.storage.store(this.tasks);
             this.ui.showStored(this.tasks);
-        } catch (IOException ioException) {
-            System.out.println(ioException);
+        } catch (IOException ignored) {
         }
-        System.out.println("Bye. Hope to see you again soon!");
+        this.ui.goodbye();
     }
 }

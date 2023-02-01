@@ -42,4 +42,8 @@ public class Ui {
         System.out.println("Description is written incorrectly!");
         System.out.println("Command: " + word);
     }
+
+    public void goodbye() {
+        System.out.println("Bye. Hope to see you again soon!");
+    }
 }

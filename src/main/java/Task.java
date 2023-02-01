@@ -1,3 +1,9 @@
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 abstract class Task {
     protected String description;
 
@@ -34,18 +40,19 @@ abstract class Task {
 
     public static Task commandToTask(String strTask) throws CommandException, StringIndexOutOfBoundsException, DescriptionException {
         if (strTask.startsWith(Commands.deadline.label)) {
-            String[] words = strTask.split(" /", 2);
-            if (words.length == 2 && words[1].startsWith("by ")){
-                return new Deadline(words[0].substring(9), words[1].substring(3));
+            Pattern pattern = Pattern.compile("deadline (.+) /by (.+)");
+            Matcher matcher = pattern.matcher(strTask);
+            if (matcher.find()) {
+                return new Deadline(matcher.group(1), matcher.group(2));
             }
-
         } else if (strTask.startsWith(Commands.todo.label)) {
             return new ToDo(strTask.substring(5));
 
         } else if (strTask.startsWith(Commands.event.label)) {
-            String[] words = strTask.split(" /", 3);
-            if (words.length == 3 && words[1].startsWith("from ") && words[2].startsWith("to ")) {
-                return new Event(words[0].substring(6), words[1].substring(5), words[2].substring(3));
+            Pattern pattern = Pattern.compile("event (.+) /from (.+) /to (.+)");
+            Matcher matcher = pattern.matcher(strTask);
+            if (matcher.find()) {
+                return new Event(matcher.group(1), matcher.group(2), matcher.group(3));
             }
         }
         throw new CommandException();
@@ -72,5 +79,20 @@ abstract class Task {
         } catch (Exception e) {
             throw new CommandException();
         }
+    }
+
+    protected static LocalDateTime getLocalDateTime(String strDate) {
+        for (DateTimeFormat format : DateTimeFormat.values()) {
+            try {
+                return LocalDateTime.parse(strDate, format.formatter);
+            } catch (DateTimeException dateTimeException) {
+                // no time given
+                try {
+                    return LocalDate.parse(strDate, format.formatter).atStartOfDay();
+                } catch (DateTimeException ignored) {}
+            }
+        }
+        System.out.println("invalid!");
+        return null;
     }
 }
