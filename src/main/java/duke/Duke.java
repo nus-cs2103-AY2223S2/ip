@@ -2,12 +2,6 @@ package duke;
 
 import duke.exception.InvalidFormatException;
 import duke.exception.UnrecognisedCommandException;
-
-import duke.Parser;
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
-
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
