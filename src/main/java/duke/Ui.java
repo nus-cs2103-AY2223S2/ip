@@ -1,3 +1,7 @@
+package duke;
+
+import duke.task.Task;
+
 import java.util.Scanner;
 
 /**
@@ -66,7 +70,7 @@ public class Ui {
                 + " tasks in the list.");
     }
 
-    public void showTasks(TaskList tasks) {
+    public void showTasks(TaskList tasks) throws DukeException {
         StringBuilder message = new StringBuilder("Here are the tasks in your list:");
         for (int i = 0; i < tasks.size(); i++) {
             message.append("\n")

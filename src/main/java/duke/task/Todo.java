@@ -1,3 +1,6 @@
+package duke.task;
+
+import duke.DukeException;
 
 /**
  * Contains information of a todo
@@ -31,7 +34,7 @@ public class Todo extends Task {
                     .substring(5);
             return new Todo(description);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Todo missing description");
+            throw new DukeException("duke.task.Todo missing description");
         }
     }
 
@@ -39,7 +42,7 @@ public class Todo extends Task {
         // Cleans input and checks for description
         input = input.trim();
         if (input.equals("")) {
-            throw new DukeException("Todo missing description");
+            throw new DukeException("duke.task.Todo missing description");
         }
         return new Todo(input, isDone);
     }

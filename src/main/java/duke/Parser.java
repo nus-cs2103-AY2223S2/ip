@@ -1,3 +1,15 @@
+package duke;
+
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
+import duke.command.UnmarkCommand;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Todo;
 
 /**
  * Deals with making sense of the user command
@@ -17,21 +29,21 @@ public class Parser {
 
             switch (cmd) {
             case BYE:
-                return new exitCommand();
+                return new ExitCommand();
             case LIST:
-                return new listCommand();
+                return new ListCommand();
             case TODO:
-                return new addCommand(Todo.generate(fullCommand));
+                return new AddCommand(Todo.generate(fullCommand));
             case DEADLINE:
-                return new addCommand(Deadline.generate(fullCommand));
+                return new AddCommand(Deadline.generate(fullCommand));
             case EVENT:
-                return new addCommand(Event.generate(fullCommand));
+                return new AddCommand(Event.generate(fullCommand));
             case MARK:
-                return new markCommand(fullCommand);
+                return new MarkCommand(fullCommand);
             case UNMARK:
-                return new unmarkCommand(fullCommand);
+                return new UnmarkCommand(fullCommand);
             case DELETE:
-                return new deleteCommand(fullCommand);
+                return new DeleteCommand(fullCommand);
             default:
                 throw new DukeException("");
             }

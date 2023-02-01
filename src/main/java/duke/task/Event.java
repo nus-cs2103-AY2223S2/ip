@@ -1,8 +1,9 @@
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
+package duke.task;
+
+import duke.DukeException;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
@@ -57,15 +58,15 @@ public class Event extends Task {
                     .substring(6)
                     .trim();
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Event missing description and event duration");
+            throw new DukeException("duke.task.Event missing description and event duration");
         }
 
-        // Generates Event task
+        // Generates duke.task.Event task
         try {
             String[] data = input.split(" /from | /to ");
             return new Event(data[0], data[1], data[2]);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Deadline missing fields");
+            throw new DukeException("duke.task.Deadline missing fields");
         }
     }
 
@@ -75,7 +76,7 @@ public class Event extends Task {
             String[] time = data[1].split(" - ");
             return new Event(data[0], time[0], time[1]);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Deadline missing fields");
+            throw new DukeException("duke.task.Deadline missing fields");
         }
     }
 

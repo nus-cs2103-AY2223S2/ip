@@ -1,3 +1,4 @@
+package duke.task;
 
 /**
  * Contains information of a task

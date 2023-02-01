@@ -1,4 +1,8 @@
 
+package duke;
+
+import duke.command.Command;
+
 /**
  *
  */

@@ -1,11 +1,20 @@
-public class deleteCommand extends Command {
+package duke.command;
+
+import duke.DukeException;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+
+import duke.task.Task;
+
+public class DeleteCommand extends Command {
     private final int index;
 
-    public deleteCommand(int index) {
+    public DeleteCommand(int index) {
         this.index = index;
     }
 
-    public deleteCommand(String fullCommand) throws DukeException {
+    public DeleteCommand(String fullCommand) throws DukeException {
         try {
             index = Integer.parseInt(fullCommand
                     .split("delete")[1]

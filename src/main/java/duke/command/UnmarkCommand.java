@@ -1,14 +1,23 @@
-public class markCommand extends Command {
+package duke.command;
+
+import duke.DukeException;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+
+import duke.task.Task;
+
+public class UnmarkCommand extends Command {
     private final int index;
 
-    public markCommand(int index) {
+    public UnmarkCommand(int index) {
         this.index = index;
     }
 
-    public markCommand(String fullCommand) throws DukeException {
+    public UnmarkCommand(String fullCommand) throws DukeException {
         try {
             index = Integer.parseInt(fullCommand
-                    .split("mark")[1]
+                    .split("unmark")[1]
                     .trim());
         } catch (NumberFormatException e) {
             throw new DukeException("Index given is not an integer");
@@ -19,8 +28,8 @@ public class markCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        Task task = tasks.mark(index);
-        ui.echo("Nice! I've marked this task as done:");
+        Task task = tasks.unmark(index);
+        ui.echo("OK, I've marked this task as not done yet:");
         ui.showTask(task);
         storage.save(tasks);
     }

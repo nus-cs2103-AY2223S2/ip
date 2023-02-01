@@ -1,7 +1,16 @@
-public class addCommand extends Command {
+package duke.command;
+
+import duke.DukeException;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+
+import duke.task.Task;
+
+public class AddCommand extends Command {
     private final Task task;
 
-    public addCommand(Task task) {
+    public AddCommand(Task task) {
         this.task = task;
     }
 

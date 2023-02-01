@@ -1,3 +1,7 @@
+package duke;
+
+import duke.task.Task;
+
 import java.util.ArrayList;
 
 /**
@@ -21,14 +25,19 @@ public class TaskList {
         return tasks.size();
     }
 
-    public Task get(int index) {
+    public Task get(int index) throws DukeException {
+        try {
+
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Index is not in the list of task");
+        }
         return tasks.get(index);
     }
 
     /**
      * Adds specified task to list of tasks
      *
-     * @param task Task to be added
+     * @param task duke.task.Task to be added
      */
     public void add(Task task) {
         tasks.add(task);
@@ -39,7 +48,12 @@ public class TaskList {
      *
      * @param index Index of task to be removed
      */
-    public Task delete(int index) {
+    public Task delete(int index) throws DukeException {
+        try {
+
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Index of task to be removed is not in the list of task");
+        }
         return tasks.remove(index - 1);
     }
 
@@ -48,7 +62,12 @@ public class TaskList {
      *
      * @param index Index of specified task
      */
-    public Task mark(int index) {
+    public Task mark(int index) throws DukeException {
+        try {
+
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Index of task to be marked is not in the list of task");
+        }
         Task task = tasks.get(index - 1);
         task.mark();
         return task;
@@ -59,10 +78,14 @@ public class TaskList {
      *
      * @param index Index of specified task
      */
-    public Task unmark(int index) {
-        Task task = tasks.get(index - 1);
-        task.unmark();
-        return task;
+    public Task unmark(int index) throws DukeException {
+        try {
+            Task task = tasks.get(index - 1);
+            task.unmark();
+            return task;
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Index of task to be unmarked is not in the list of task");
+        }
     }
 
     /**

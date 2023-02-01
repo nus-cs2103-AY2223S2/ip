@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.DukeException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -14,14 +18,14 @@ public class Deadline extends Task {
      * Creates a deadline object
      *
      * @param description The description of the deadline
-     * @param by Deadline time of the deadline
+     * @param by duke.task.Deadline time of the deadline
      */
     public Deadline(String description, String by) throws DukeException {
         super(description);
         try {
             this.by = LocalDate.parse(by);
         } catch (DateTimeParseException e) {
-            throw new DukeException("Deadline could not be parsed to datetime");
+            throw new DukeException("duke.task.Deadline could not be parsed to datetime");
         }
     }
 
@@ -29,7 +33,7 @@ public class Deadline extends Task {
      * Creates a deadline object
      *
      * @param description The description of the deadline
-     * @param by Deadline time of the deadline
+     * @param by duke.task.Deadline time of the deadline
      */
     public Deadline(String description, String by, boolean isDone) throws DukeException {
         super(description, isDone);
@@ -43,23 +47,23 @@ public class Deadline extends Task {
                     .substring(9)
                     .trim();
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Deadline missing description and deadline");
+            throw new DukeException("duke.task.Deadline missing description and deadline");
         }
 
         try {
             int index = input.indexOf("/by");
             if (index < 0) {
-                throw new DukeException("Deadline missing deadline");
+                throw new DukeException("duke.task.Deadline missing deadline");
             } else if (index == 0) {
-                throw new DukeException("Deadline missing description");
+                throw new DukeException("duke.task.Deadline missing description");
             }
 
-            // Generates Deadline task
+            // Generates duke.task.Deadline task
             String description = input.substring(0, index - 1);
             String by = input.substring(index + 4);
             return new Deadline(description, by);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Deadline missing deadline");
+            throw new DukeException("duke.task.Deadline missing deadline");
         }
 
     }
@@ -69,23 +73,23 @@ public class Deadline extends Task {
             // Cleans input and checks if fields are empty
             input = input.trim();
             if (input.equals("")) {
-                throw new DukeException("Deadline missing description and deadline");
+                throw new DukeException("duke.task.Deadline missing description and deadline");
             }
 
             // Checks for separator
             int index = input.lastIndexOf("|");
             if (index < 0) {
-                throw new DukeException("Deadline missing deadline");
+                throw new DukeException("duke.task.Deadline missing deadline");
             } else if (index == 0) {
-                throw new DukeException("Deadline missing description");
+                throw new DukeException("duke.task.Deadline missing description");
             }
 
-            // Generates Deadline task
+            // Generates duke.task.Deadline task
             String description = input.substring(0, index - 1);
             String by = input.substring(index + 2);
             return new Deadline(description, by, isDone);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Deadline missing deadline");
+            throw new DukeException("duke.task.Deadline missing deadline");
         }
     }
 
