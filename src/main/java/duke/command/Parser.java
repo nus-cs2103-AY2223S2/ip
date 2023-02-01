@@ -1,9 +1,16 @@
 package duke.command;
-
 import duke.exception.MissingContentException;
-import duke.exception.DukeException;
 
+/**
+ * Makes sense of what users say
+ */
 public class Parser {
+
+    /**
+     * Makes sense of adding to do command from users
+     * @param arr array of original array
+     * @return full string command for users
+     */
     public String toDo(String[] arr) {
         String remaining = "";
         for (int j = 1; j < arr.length; j++) {
@@ -47,20 +54,20 @@ public class Parser {
      * @throws duke.MissingContentException if arr is empty.
      */
     public int deadlineTimeIndex(String[] arr) throws MissingContentException {
-            if (arr.length <= 1) {
-                throw new MissingContentException();
+        if (arr.length <= 1) {
+            throw new MissingContentException();
+        }
+        int pointer = 0;
+        for (int j = 1; j < arr.length; j++) {
+            if (String.valueOf(arr[j]).equals("/by")) {
+                pointer = j + 1;
+                break;
             }
-            int pointer = 0;
-            for (int j = 1; j < arr.length; j++) {
-                if (String.valueOf(arr[j]).equals("/by")) {
-                    pointer = j + 1;
-                    break;
-                }
-            }
-            if (pointer == 0) {
-                throw new MissingContentException();
-            }
-            return pointer;
+        }
+        if (pointer == 0) {
+            throw new MissingContentException();
+        }
+        return pointer;
     }
 
     /**
@@ -72,17 +79,17 @@ public class Parser {
      * @throws duke.MissingContentException if arr is empty.
      */
     public int getEventStartTimeIndex(String[] arr) throws MissingContentException {
-            int startIndex = 0;
-            for (int j = 1; j < arr.length; j++) {
-                if (String.valueOf(arr[j]).equals("/from")) {
-                    startIndex = j + 1;
-                    break;
-                }
+        int startIndex = 0;
+        for (int j = 1; j < arr.length; j++) {
+            if (String.valueOf(arr[j]).equals("/from")) {
+                startIndex = j + 1;
+                break;
             }
-            if (startIndex == 0) {
-                throw new MissingContentException();
-            }
-            return startIndex;
+        }
+        if (startIndex == 0) {
+            throw new MissingContentException();
+        }
+        return startIndex;
     }
 
     /**
@@ -94,18 +101,18 @@ public class Parser {
      * @throws duke.MissingContentException if arr is empty.
      */
     public String getEventDetail(String[] arr) throws MissingContentException {
-            if (arr.length <= 1) {
-                throw new MissingContentException();
+        if (arr.length <= 1) {
+            throw new MissingContentException();
+        }
+        String detail = "";
+        for (int j = 1; j < arr.length; j++) {
+            if (String.valueOf(arr[j]).equals("/from")) {
+                break;
             }
-            String detail = "";
-            for (int j = 1; j < arr.length; j++) {
-                if (String.valueOf(arr[j]).equals("/from")) {
-                    break;
-                }
-                detail += arr[j];
-                detail += " ";
-            }
-            return detail;
+            detail += arr[j];
+            detail += " ";
+        }
+        return detail;
     }
 
     /**
@@ -118,7 +125,7 @@ public class Parser {
      */
     public int getEventEndTimeIndex(String[] arr, int startIndex) throws MissingContentException {
         int endIndex = 0;
-        for (int j = startIndex; j < arr.length; j++){
+        for (int j = startIndex; j < arr.length; j++) {
             if (String.valueOf(arr[j]).equals("/to")) {
                 endIndex = j + 1;
                 break;

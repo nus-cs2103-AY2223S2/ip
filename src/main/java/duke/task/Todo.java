@@ -1,13 +1,22 @@
 package duke.task;
 
-import duke.task.Task;
-
+/**
+ * Represent a Todo class
+ * Handles with todo commands
+ */
 public class Todo extends Task {
-    public Todo(String type, String detail, boolean marked){
+
+    /**
+     * Initializes a new Todo object
+     * @param type of task
+     * @param detail of Todo
+     * @param marked wheter Todo is marked or not
+     */
+    public Todo(String type, String detail, boolean marked) {
         super(type, detail, marked);
     }
 
-    public Todo(String type, String detail){
+    public Todo(String type, String detail) {
         super(type, detail);
     }
 
@@ -18,7 +27,7 @@ public class Todo extends Task {
      * @return todo in full details.
      */
     @Override
-    public String toString(){
+    public String toString() {
         if (marked) {
             return "[T][X] " + super.detail;
         } else {

@@ -1,10 +1,14 @@
 package duke.command;
 
-import duke.exception.MissingContentException;
-import duke.exception.InvalidIndexException;
-import duke.task.Task;
 import java.io.IOException;
 
+import duke.exception.InvalidIndexException;
+import duke.exception.MissingContentException;
+import duke.task.Task;
+
+/**
+ * Handles data and formats into tasklist
+ */
 public class TaskList {
     private String[] arr;
 
@@ -12,10 +16,19 @@ public class TaskList {
         arr = new String[100];
     }
 
+    /**
+     * Initialize a new TaskList object
+     * @param arr
+     */
     public TaskList(String[] arr) {
         this.arr = arr;
     }
 
+    /**
+     * Returns the tasklist in array
+     * @return the tasklist in array
+     * @throws IOException if array does not exist
+     */
     public String[] readTaskList() throws IOException {
         try {
             try {
@@ -24,7 +37,7 @@ public class TaskList {
                 throw new MissingContentException();
             }
         } catch (MissingContentException e) {
-             System.out.println(e.getMessage());
+            System.out.println(e.getMessage());
         }
         return this.arr;
     }
@@ -88,7 +101,7 @@ public class TaskList {
      * Returns new task list.
      * Unmarks task at given index as done.
      *
-     * @param num index at which task need to be marked as undone.
+     * @param num1 index at which task need to be marked as undone.
      * @return new task list with task unmarked.
      * @throw InvalidIndexException if array at specific index is null
      */
@@ -117,7 +130,7 @@ public class TaskList {
     /**
      * Checks if element at given index of array is valid or not.
      *
-     * @param num index at which content need to be checked.
+     * @param index at which content need to be checked.
      * @return boolean for content validity.
      * @throw InvalidIndexException if array at specific index is null
      */
@@ -131,7 +144,7 @@ public class TaskList {
      *
      * @param num1 index at which task need to be deleted.
      * @return new task list with task deleted.
-     *  @throw InvalidIndexException if array at specific index is null if array at specific index is null
+     * @throw InvalidIndexException if array at specific index is null if array at specific index is null
      */
     public TaskList delete(int num1) throws IOException {
         try {
@@ -159,10 +172,10 @@ public class TaskList {
                 throw new InvalidIndexException();
             }
         } catch (InvalidIndexException e) {
-                System.out.println(e.getMessage());
-            }
-        return this;
+            System.out.println(e.getMessage());
         }
+        return this;
+    }
 
 
     /**

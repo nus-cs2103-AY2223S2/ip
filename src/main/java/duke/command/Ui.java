@@ -1,10 +1,13 @@
 package duke.command;
 
-import duke.exception.MissingContentException;
 import duke.exception.DukeException;
 
+/**
+ * Deals with interaction with users
+ */
 public class Ui {
-    public Ui(){}
+    public Ui() {
+    }
 
     /**
      * Shows logo and welcome.

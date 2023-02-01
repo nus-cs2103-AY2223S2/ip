@@ -1,26 +1,36 @@
 package duke.task;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
+/**
+ * Represent tasks
+ */
 public class Task {
     protected String type;
     protected String detail;
     protected boolean marked;
 
+    /**
+     * Intializes a new Task object
+     * @param type of task
+     * @param detail of task
+     */
     public Task(String type, String detail) {
-        this.type =type;
-        this.detail =detail;
-        this.marked =false;
+        this.type = type;
+        this.detail = detail;
+        this.marked = false;
     }
 
+    /**
+     * Initialize a Task object with given value
+     *
+     * @param type   type of task
+     * @param detail content of task
+     * @param marked
+     */
     public Task(String type, String detail, boolean marked) {
-        this.type =type;
-        this.detail =detail;
-        this.marked =marked;
+        this.type = type;
+        this.detail = detail;
+        this.marked = marked;
     }
-
 
 
     /**
@@ -42,7 +52,7 @@ public class Task {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         if (marked) {
             return "[" + this.type + "][X] " + this.detail;
         } else {
