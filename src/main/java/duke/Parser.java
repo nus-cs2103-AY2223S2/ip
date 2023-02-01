@@ -31,10 +31,16 @@ public class Parser {
                 tasklist.addingActivities("deadline", userInput);
             }
         } else if (userInput.contains("event") && userInput.substring(0,5).equals("event")) {
-            if (userInput.substring(6).equals("")){
+            if (userInput.substring(6).equals("")) {
                 throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
             } else {
                 tasklist.addingActivities("event", userInput);
+            }
+        } else if (userInput.contains("find") && userInput.substring(0,4).equals("find")){
+            if (userInput.substring(5).equals("")){
+                throw new DukeException("☹ OOPS!!! The description of find cannot be empty.");
+            } else {
+                tasklist.findingActivities(userInput.substring(5));
             }
         } else if (userInput.equals("bye")) {
                 ui.bye();

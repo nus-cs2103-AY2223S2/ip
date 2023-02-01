@@ -4,6 +4,7 @@ import duke.Deadline;
 import duke.Event;
 import duke.Task;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 public class Tasklist {
@@ -59,6 +60,26 @@ public class Tasklist {
                 storage.add(eventTask);
                 System.out.println("Got it. I've added this task:\n  " + eventTask.toString() + "\nNow you have " + storage.size() + " tasks in the list");
                 break;
+        }
+    }
+
+    public void findingActivities (String content) {
+        int index = 1;
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 0; i < storage.size(); i++) {
+            Task taskObtained = storage.get(i);
+            if (taskObtained.getDescription().contains(content)) {
+                if (taskObtained instanceof Todo) {
+                    System.out.println(index + "." + ((Todo)taskObtained).toString());
+                    index++;
+                } else if (taskObtained instanceof Deadline) {
+                    System.out.println(index + "." + ((Deadline)taskObtained).toString());
+                    index++;
+                } else {
+                    System.out.println(index + "." + ((Event)taskObtained).toString());
+                    index++;
+                }
+            }
         }
     }
 
