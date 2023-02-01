@@ -6,6 +6,8 @@ import aqua.exception.LoadException;
 import aqua.logic.CommandLineInput;
 import aqua.logic.ExecutionService;
 import aqua.logic.command.ListCommand;
+import aqua.logic.parser.ParserService;
+import javafx.concurrent.Service;
 
 
 /** Manager of the application's processes. */
@@ -14,10 +16,10 @@ public class AppManager {
     private final IoManager ioManager;
 
     /** Queue of {@code ExecutionService} waiting to be executed. */
-    private final ArrayDeque<ExecutionService> executionQueue = new ArrayDeque<>();
+    private final ArrayDeque<ParserService<CommandLineInput>> executionQueue = new ArrayDeque<>();
 
     /** The currently running {@code ExecutionService} */
-    private ExecutionService runningService = null;
+    private Service<?> runningService = null;
 
 
     /**
@@ -42,7 +44,7 @@ public class AppManager {
         try {
             logicManager.load();
             ioManager.replyLoadSuccess();
-            initiateService(new ListCommand().getService(null, logicManager));
+            startExecution(new ListCommand().getService(null, logicManager));
         } catch (LoadException loadException) {
             ioManager.replyException(loadException);
         }
@@ -53,20 +55,7 @@ public class AppManager {
      * Processes and executes the user's input and queues the service created.
      */
     public void processInput() {
-        // get input string
-        String input = ioManager.readLine();
-
-        // form command input
-        CommandLineInput commandInput;
-        try {
-            commandInput = logicManager.getInputParser().parse(input);
-        } catch (Throwable ex) {
-            ioManager.replyException(ex);
-            return;
-        }
-
-        // start service
-        queue(commandInput.getService(logicManager));
+        queue(ioManager.readLine());
     }
 
 
@@ -75,8 +64,8 @@ public class AppManager {
      *
      * @param service - the service to queue.
      */
-    private synchronized void queue(ExecutionService service) {
-        executionQueue.add(service);
+    private synchronized void queue(String input) {
+        executionQueue.add(new ParserService<>(logicManager.getInputParser(), input));
         executeNext();
     }
 
@@ -89,8 +78,14 @@ public class AppManager {
         if (runningService != null || executionQueue.isEmpty()) {
             return;
         }
-        runningService = executionQueue.poll();
-        initiateService(runningService);
+        startParser(executionQueue.poll());
+    }
+
+
+    private void startParser(ParserService<CommandLineInput> service) {
+        service.setOnSucceeded(s -> startExecution(service.getValue().getService(logicManager)));
+        service.setOnFailed(f -> handleExecutionFailure(service));
+        service.start();
     }
 
 
@@ -99,7 +94,7 @@ public class AppManager {
      *
      * @param service - the service to start.
      */
-    private void initiateService(ExecutionService service) {
+    private void startExecution(ExecutionService service) {
         runningService = service;
         service.setOnSucceeded(s -> handleExecutionSuccess(service));
         service.setOnFailed(f -> handleExecutionFailure(service));
@@ -119,7 +114,7 @@ public class AppManager {
     private void handleExecutionSuccess(ExecutionService service) {
         ioManager.reply(service.getValue());
         service.followUpDispatcher().ifPresentOrElse(
-                this::initiateService,
+                this::startExecution,
                 this::completeService);
     }
 
@@ -132,7 +127,7 @@ public class AppManager {
      *
      * @param service - the service whose task failed.
      */
-    private void handleExecutionFailure(ExecutionService service) {
+    private void handleExecutionFailure(Service<?> service) {
         ioManager.replyException(service.getException());
         completeService();
     }
