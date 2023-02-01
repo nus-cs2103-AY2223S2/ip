@@ -3,15 +3,14 @@ package duke.utils;
 import java.util.Scanner;
 
 /**
- * Interpreter class to format user input into tokens.
+ * Interpreter class to format user input into tokens
  */
 public class Parser {
     private static Scanner sc = new Scanner(System.in);
     private String[] tokens;
 
     /**
-     * Formats user inputs from standard input into String array.
-     * 
+     * Formats user input from standard input to String array
      * @return String array of tokens
      */
     public String[] tokenise() {

@@ -1,16 +1,22 @@
 package duke.Tasks;
 
 /**
- * The class representing a ToDo task.
+ * The class representing a ToDo task
  */
 public class ToDo extends Task {
     private static final String FORMAT = "todo {task name}";
+
+    /**
+     * The constructor to initialise a ToDo task object with the given description.
+     * 
+     * @param desc Description of the task.
+     */
     public ToDo(String desc) {
         super(desc);
     }
     
     /**
-     * User friendly guide to help users if InvalidCommandException is thrown.
+     * User friendly guide to help users in case of InvalidCommandException
      * 
      * @return String format of a valid ToDo command.
      */

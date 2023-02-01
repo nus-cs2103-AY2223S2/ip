@@ -3,7 +3,7 @@ package duke.Tasks;
 import java.io.Serializable;
 
 /**
- * Parent Task class which implements Serializable.
+ * Parent Task class which implements Serializable. 
  */
 public class Task implements Serializable {
     protected String desc;
@@ -11,8 +11,9 @@ public class Task implements Serializable {
 
     /**
      * Public constructor that takes in String to create a Task object.
-     * Boolean isDone is initialised as fale.
-     * @param desc String description of the task to be created.
+     * Boolen isDone is initialised as false.
+     * 
+     * @param desc description of the task.
      */
     public Task(String desc) {
         this.desc = desc;
@@ -20,9 +21,9 @@ public class Task implements Serializable {
     }
 
     /**
-     * Getter method to acces Task description only.
+     * Getter method to access Task description only.
      * 
-     * @return String description of the task.
+     * @return desc description of the task.
      */
     public String getDescription() {
         return this.desc;
@@ -38,18 +39,18 @@ public class Task implements Serializable {
         this.isDone = done;
     }
 
-    /** 
-     * Getter method to check if task is done or not.
+    /**
+     * Check if task is done or not.
      * True if done, false otherwise.
      * 
-     * @return
+     * @return boolean
      */
     public boolean isDone() {   
         return this.isDone;   
     }
 
     /**
-     * Toggles done status of task.
+     * Indicate done if task is not done and vice-versa.
      */
     public void toggleDoneOrNot() {
         if (this.isDone()) {
@@ -60,10 +61,11 @@ public class Task implements Serializable {
     }
 
     /**
-     * User friendly interpretaion of Task
+     * Human friendly interpretation of Task.
      * 
      * @return Task interpretation showing isDone status and description.
      */
+
     @Override
     public String toString() {
         String icon = isDone ? "[X]" : "[ ]";

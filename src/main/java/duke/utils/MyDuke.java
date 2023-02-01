@@ -1,11 +1,11 @@
 package duke.utils;
 
 import java.util.List;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
-import java.io.IOException;
 
 import duke.DukeException.InvalidCommandException;
 import duke.Tasks.Deadline;
@@ -14,20 +14,29 @@ import duke.Tasks.Task;
 import duke.Tasks.TaskList;
 import duke.Tasks.ToDo;
 
+/**
+ * Base handler class that accepts the chain of responsibility from Duke client requests.
+ * MyDuke processes the input commands or passes on the responsibility to
+ * other classes in duke.utils or duke.DukeException.
+ */
 public class MyDuke {
-    private static DukeIO dukeIo = new DukeIO();
-    private static TaskList allTasks;
-    private static Map<String, Consumer<String[]>> cmdMap = new HashMap<>();
+    private static DukeIo dukeIo = new DukeIo();
     private static Storage storage = new Storage();
+    private static TaskList allTasks = TaskList.ofNull();
+    private static Map<String, Consumer<String[]>> cmdMap = new HashMap<>();
 
+    /**
+     * Passes the chain of responsibility to DukeIo to display welcome message and
+     * populates the commands.
+     */
     public void init() {
         dukeIo.printHello();
         populateCommands();
     }
 
     /**
-     * Passes the chain of responsibility to DukeIo to display quit message.
-     * Passes the chain of responsibility to Storage to save on quit.
+     * Passes the chain of responsibility to DukeIo to display message upon quit.
+     * Storage accepts the chain of responsibility to save on quit.
      */
     public void quit() throws IOException {
         if (allTasks.getTaskCount() > 0) {
@@ -40,16 +49,27 @@ public class MyDuke {
         dukeIo.printQuit();
     }
 
+    /**
+     * Accepts the chain of responsibility and run the commands.
+     * 
+     * @param tokens Array of String from user inputs
+     * @param taskList TaskList object where all tasks are operated upon.
+     * @throws InvalidCommandException
+     */
     public void exec(String[] tokens, TaskList taskList) throws InvalidCommandException {
         allTasks = taskList;
         try {
             cmdMap.get(tokens[0]).accept(tokens);
         } catch (NullPointerException n) {
+            // Displays failure toast when unrecognised for invalid commands
             dukeIo.showInvalidCommand();
             return;
         }
     }
 
+    /**
+     * Maps command String to the method that handles the command.
+     */
     private void populateCommands() {
         cmdMap.put("list", (tokens) -> dukeIo.showAll());
         cmdMap.put("todo", (tokens) -> addTodo(tokens));
@@ -219,12 +239,13 @@ public class MyDuke {
 
     private void find(String[] tokens) {
         String searchString = "";
-        for (String s : tokens) {
-            if (s.equals("find")) {
+        for (String string : tokens) {
+            if (string.equals("find")) {
                 continue;
             }
-            searchString += s;
+            searchString += string;
         }
+
         allTasks.showFilteredTasks(searchString);
     }
 }
