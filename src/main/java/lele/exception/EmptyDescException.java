@@ -5,7 +5,7 @@ package lele.exception;
  * contain a description.
  */
 public class EmptyDescException extends LeleException {
-    String taskType;
+    private String taskType;
     public EmptyDescException(String message) {
         super(message);
     }

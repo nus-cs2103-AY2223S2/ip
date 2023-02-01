@@ -33,7 +33,7 @@ public class TaskList {
      */
     public void printList() {
         for (int i = 0; i < this.list.size(); i++) {
-            System.out.println((i+1) + "." + this.list.get(i));
+            System.out.println((i + 1) + "." + this.list.get(i));
         }
     }
 

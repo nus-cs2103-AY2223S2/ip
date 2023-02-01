@@ -2,7 +2,6 @@ package lele.ui;
 
 import lele.task.Task;
 import lele.task.TaskList;
-
 import java.util.Scanner;
 
 /**
@@ -18,7 +17,7 @@ public class Ui {
      * and a Scanner instance to receive inputs.
      *
      */
-    public Ui () {
+    public Ui() {
         this.separator = "____________________________________________________________";
         this.sc = new Scanner(System.in);
     }
@@ -51,8 +50,7 @@ public class Ui {
      * Ignores empty lines inputted by the user.
      *
      * @param inputLine Line that the user has inputted.
-     * @return Returns a boolean indicating whether the line
-     * is empty.
+     * @return Returns a boolean indicating whether the line is empty.
      */
     private boolean shouldIgnore(String inputLine) {
         return inputLine.trim().isEmpty();
@@ -168,6 +166,13 @@ public class Ui {
         System.out.println("Now you have " + taskList.listSize() + " in the list!");
     }
 
+    /**
+     * Prints the response to the command line when user inputs
+     * a find command, with the tasks matching the regex.
+     *
+     * @param taskList Current task list created by the user.
+     * @param regex Regex queried by the user.
+     */
     public void printFind(TaskList taskList, String regex) {
         System.out.println("Here are the matching tasks in your list:");
         taskList.findTasks(regex);

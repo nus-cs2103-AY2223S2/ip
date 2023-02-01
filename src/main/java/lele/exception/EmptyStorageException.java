@@ -5,7 +5,7 @@ package lele.exception;
  */
 public class EmptyStorageException extends LeleException {
 
-    public EmptyStorageException (String message) {
+    public EmptyStorageException(String message) {
         super(message);
     }
 
