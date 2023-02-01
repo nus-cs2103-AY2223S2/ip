@@ -31,4 +31,8 @@ public class Ui {
     public void signOff() {
         reply("Bye. Hope to see you again!");
     }
+
+    public String readCommand() {
+        return input.nextLine();
+    }
 }
