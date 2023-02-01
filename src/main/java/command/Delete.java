@@ -9,7 +9,7 @@ public class Delete implements Command {
     private final int taskNum;
 
     private static final String ERROR = "Task not in list.";
-    private static final String SUCCESS = "Task has been deleted: %d\nTasks remaining: %s";
+    private static final String SUCCESS = "Task %d has been deleted.\nTasks remaining: %s";
     private static final String FORMAT = "delete 'task number'";
 
     private Delete(int taskNum) {
@@ -18,8 +18,9 @@ public class Delete implements Command {
 
     @Override
     public void execute(TaskList taskList, Storage<TaskList> storage) {
-        if (this.taskNum > taskList.size()) {
+        if (this.taskNum < 1 || this.taskNum > taskList.size()) {
             Ui.showReply(ERROR);
+            return;
         }
         taskList.deleteTask(this.taskNum);
         Ui.showReply(String.format(SUCCESS, this.taskNum, taskList.toString()));

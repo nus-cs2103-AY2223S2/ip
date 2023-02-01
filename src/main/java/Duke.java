@@ -1,19 +1,13 @@
+import command.Command;
+import command.Error;
 import io.Storage;
 import io.Ui;
 import task.TaskList;
 
 public class Duke {
-
-    private static final String LOGO = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
-
-    private static final Engine ENGINE = new Engine();
-
     private final Storage<TaskList> storage;
     private final TaskList taskList;
+    private boolean isExit;
 
     public Duke(String filename) {
         this.storage = Storage.of(TaskList.class, filename);
@@ -31,14 +25,25 @@ public class Duke {
                             return new TaskList();
                     }
                 });
-        Ui.showReply("Current Tasks:\n" + this.taskList.toString());
+        this.isExit = false;
+        Ui.showReply("Current Tasks: " + this.taskList.toString());
+    }
+
+    private void run() {
+        while (!this.isExit) {
+            String input = Ui.getInput();
+            Command command = Command.parser().parse(input).match(
+                pr -> pr.first(),
+                msg -> Error.of(msg)
+            );
+            command.execute(this.taskList, this.storage);
+            this.isExit = command.isExit();
+        } 
     }
 
     public static void main(String[] args) {
-        System.out.println(LOGO + "\nHello.\n");
-        while (true) {
-            if (!ENGINE.run())
-                break;
-        }
+        Ui.showWelcome();
+        Duke duke = new Duke("taskList.ser");
+        duke.run();
     }
 }

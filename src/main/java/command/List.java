@@ -6,10 +6,10 @@ import task.TaskList;
 import util.Parser;
 
 public class List implements Command {
-    private static final String FORMAT = "LIST";
+    private static final String FORMAT = "list";
 
     public void execute(TaskList taskList, Storage<TaskList> storage) {
-        Ui.showReply("Tasks:" + taskList.toString());
+        Ui.showReply("Tasks: " + taskList.toString());
     }
 
     public static Parser<Command> parser() {

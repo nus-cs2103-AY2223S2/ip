@@ -17,8 +17,9 @@ public class Unmark implements Command {
 
     @Override
     public void execute(TaskList taskList, Storage<TaskList> storage) {
-        if (this.taskNum > taskList.size()) {
+        if (this.taskNum < 1 || this.taskNum > taskList.size()) {
             Ui.showReply(ERROR);
+            return;
         }
         taskList.unmarkTask(this.taskNum);
         Ui.showReply(SUCCESS + taskList.get(this.taskNum));

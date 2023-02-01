@@ -55,7 +55,7 @@ public class TaskList implements Serializable {
                 .mapToObj(i -> String.format("\n\t%d) %s", i + 1, this.lst.get(i)))
                 .reduce("", (a, b) -> a + b);
         if (res.isEmpty()) {
-            return "No tasks found.\n";
+            return "No tasks found.";
         }
         return res;
     }
@@ -63,7 +63,7 @@ public class TaskList implements Serializable {
     @Override
     public String toString() {
         if (this.lst.isEmpty()) {
-            return "You have no tasks\n";
+            return "You have no tasks.";
         }
 
         return IntStream.range(0, this.size())
