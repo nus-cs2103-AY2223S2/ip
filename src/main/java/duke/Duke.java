@@ -2,9 +2,7 @@ package duke;
 
 import duke.task.TaskList;
 
-import java.time.format.DateTimeParseException;
 import java.util.Scanner;
-import java.time.LocalDate;
 
 public class Duke {
     private FileManager fileManager;
@@ -31,6 +29,7 @@ public class Duke {
             parser.parse(userMessage);
         }
     }
+
     public static void main(String[] args) {
         new Duke("data\\pandora.txt").run();
     }

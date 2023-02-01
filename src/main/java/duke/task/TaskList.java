@@ -1,6 +1,7 @@
 package duke.task;
 
 import java.util.ArrayList;
+
 public class TaskList {
     private ArrayList<Task> taskList;
 
@@ -69,5 +70,4 @@ public class TaskList {
     public ArrayList<Task> getList() {
         return this.taskList;
     }
-
 }

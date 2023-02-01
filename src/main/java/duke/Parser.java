@@ -20,32 +20,15 @@ public class Parser {
         String [] parts = userMessage.split(" ", 2);
 
         if (parts[0].equals("bye")) {
-            this.fileManager.saveFile(this.taskList.getList());
-            System.out.print("  Cya~ Till next time!");
+            bye();
         } else if (parts[0].equals("list")) {
-            System.out.println("    Here are the tasks in your list:");
-            this.taskList.list();
+            list();
         } else if (parts[0].equals("mark")) {
-            try {
-                int taskNumber = Integer.parseInt(parts[1]);
-                this.taskList.mark(taskNumber);
-            } catch (IndexOutOfBoundsException e) {
-                System.out.println("    Please specify which task to mark~  >:(");
-            }
+            mark(userMessage);
         } else if (parts[0].equals("unmark")) {
-            try {
-                int taskNumber = Integer.parseInt(parts[1]);
-                this.taskList.unmark(taskNumber);
-            } catch (IndexOutOfBoundsException e) {
-                System.out.println("    Please specify which task to unmark~  >:(");
-            }
+            unmark(userMessage);
         } else if (parts[0].equals("delete")) {
-            try {
-                int taskNumber = Integer.parseInt(parts[1]);
-                this.taskList.remove(taskNumber);
-            } catch (IndexOutOfBoundsException e) {
-                System.out.println("    Please specify which task to delete~ >:(");
-            }
+            delete(userMessage);
         } else if (parts[0].equals("todo")) {
             try {
                 Todo newToDo = new Todo(parts[1]);
@@ -90,6 +73,45 @@ public class Parser {
         }else {
             System.out.println("    OOPS!!! I'm sorry, but I don't know what that means :<");
         }
+    }
 
+    private void bye() {
+        this.fileManager.saveFile(this.taskList.getList());
+        System.out.print("  Cya~ Till next time!");
+    }
+
+    private void list() {
+        System.out.println("    Here are the tasks in your list:");
+        this.taskList.list();
+    }
+
+    private void mark(String userMessage) {
+        String [] messageParts = userMessage.split(" ", 2);
+        try {
+            int taskNumber = Integer.parseInt(messageParts[1]);
+            this.taskList.mark(taskNumber);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("    Please specify which task to mark~  >:(");
+        }
+    }
+
+    private void unmark(String userMessage) {
+        String [] messageParts = userMessage.split(" ", 2);
+        try {
+            int taskNumber = Integer.parseInt(messageParts[1]);
+            this.taskList.unmark(taskNumber);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("    Please specify which task to unmark~  >:(");
+        }
+    }
+
+    private void delete(String userMessage) {
+        String [] messageParts = userMessage.split(" ", 2);
+        try {
+            int taskNumber = Integer.parseInt(messageParts[1]);
+            this.taskList.remove(taskNumber);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("    Please specify which task to delete~  >:(");
+        }
     }
 }
