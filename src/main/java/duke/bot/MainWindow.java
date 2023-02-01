@@ -11,6 +11,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
+import java.nio.file.Paths;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -48,8 +49,9 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
+        tasks = new TaskList();
 
-        String response = duke.getResponse(input, tasks);
+        String response = duke.getResponse(input);
 
         if (input == "bye") {
             Platform.exit();

@@ -92,15 +92,13 @@ public class Parser {
                     int index = Integer.parseInt(str.substring(5));
                     Tasks t = todoList.get(index - 1);
                     t.mark();
+                    TaskList.rewrite(todoList);
+                    res.append("Nice! I've marked this task as done: \n"
+                            + t.completed() + " " + t.getDesc());
+                    System.out.println("Nice! I've marked this task as done: \n"
+                            + t.completed() + " " + t.getDesc());
                     return res.toString();
                 }
-//                    TaskList.rewrite(todoList);
-//                    res.append("Nice! I've marked this task as done: \n"
-//                            + t.completed() + " " + t.getDesc());
-//                    System.out.println("Nice! I've marked this task as done: \n"
-//                            + t.completed() + " " + t.getDesc());
-//                    return res.toString();
-//                }
 
             } else {
                 String type = str.split(" ", 2)[0];
@@ -165,7 +163,7 @@ public class Parser {
                         return res.toString();
                     }
                 } catch (Exception ignored) {
-                    return " ";
+                    return "OOps something went wrong!";
                 }
             }
         }
