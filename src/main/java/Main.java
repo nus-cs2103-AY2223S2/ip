@@ -7,12 +7,18 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
- * A GUI for Jeo using FXML.
+ * Represents a GUI for Jeo using FXML.
+ * @author Goh Jun How
+ * @version 0.1
  */
 public class Main extends Application {
     private static final String PATH = "./data.txt";
     private final JeoBot jeo = new JeoBot(PATH);
 
+    /**
+     * Starts the GUI.
+     * @param stage Stage that JavaFX provides.
+     */
     @Override
     public void start(Stage stage) {
         try {

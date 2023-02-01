@@ -13,9 +13,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
 /**
- * An example of a custom control using FXML.
+ * Represents an example of a custom control using FXML.
  * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
  * containing text from the speaker.
+ * @author Goh Jun How
+ * @version 0.1
  */
 public class DialogBox extends HBox {
     @FXML

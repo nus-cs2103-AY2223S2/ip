@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,10 +12,10 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import jeo.ui.Ui;
 
-import java.util.Objects;
-
 /**
- * Controller for MainWindow. Provides the layout for the other controls.
+ * Represents the controller for MainWindow. Provides the layout for the other controls.
+ * @author Goh Jun How
+ * @version 0.1
  */
 public class MainWindow extends AnchorPane {
     @FXML
@@ -28,9 +30,14 @@ public class MainWindow extends AnchorPane {
     private JeoBot jeo;
     private final Ui ui = new Ui();
 
-    private final Image userImage = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/DaUser.png")));
-    private final Image jeoImage = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/DaJeo.png")));
+    private final Image userImage = new Image(Objects.requireNonNull(
+            this.getClass().getResourceAsStream("/images/DaUser.png")));
+    private final Image jeoImage = new Image(Objects.requireNonNull(
+            this.getClass().getResourceAsStream("/images/DaJeo.png")));
 
+    /**
+     * Initialize the start GUI screen.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
