@@ -68,7 +68,7 @@ public class Data {
 
     /**
      * Converts text String into a Task object.
-     * @param text i.e. the String that is read from the txt file.
+     * @param txt i.e. the String that is read from the txt file.
      * @return a new Task interpreted from the text file.
      */
     public static Task convertTextToTasks(String txt) {
