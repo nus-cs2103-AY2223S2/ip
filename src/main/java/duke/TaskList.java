@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
-    private final List<Task> taskList;
+    private final ArrayList<Task> taskList;
 
-    public TaskList(List<Task> existing) {
+    public TaskList(ArrayList<Task> existing) {
         this.taskList = existing;
     }
 
@@ -34,5 +34,9 @@ public class TaskList {
     public int getSize() {
         return this.taskList.size();
         // return "\nNow you have " + taskList.size() + " items on your list.";
+    }
+
+    public ArrayList<Task> getTaskList() {
+        return this.taskList;
     }
 }

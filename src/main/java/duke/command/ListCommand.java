@@ -11,6 +11,7 @@ public class ListCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         StringBuilder toPrint = new StringBuilder();
+        System.out.println(tasks.getTaskList());
         for (int i = 0; i < tasks.getSize(); i++) {
             if (i != 0) {
                 toPrint.append("\n");

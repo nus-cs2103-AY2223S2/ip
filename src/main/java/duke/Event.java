@@ -11,9 +11,9 @@ public class Event extends Task {
     }
 
     public String getFileRepresentation() {
-        return "event " + this.isDone + " " + this.description
-                + " /from " + this.from.asFileDate()
-                + " /to " + this.to.asFileDate();
+        return "event|" + super.getFileRepresentation()
+                + "|" + this.from.asFileDate()
+                + "|" + this.to.asFileDate();
     }
 
     @Override

@@ -8,9 +8,9 @@ import java.util.List;
 public class Duke {
     private static final String SAVE_PATH = "./tasklist.txt";
 
-    private Storage storage;
+    private final Storage storage;
     private TaskList tasks;
-    private Ui ui;
+    private final Ui ui;
 
     public Duke(String filePath) {
         ui = new Ui();
@@ -37,17 +37,17 @@ public class Duke {
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
+                // ui.showLine(); // show the divider line ("_______")
                 Command c = Parser.parse(fullCommand);
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
             } catch (DukeException e) {
-                ui.showError(e.getMessage());
+                // ui.showError(e.getMessage());
             } finally {
-                ui.showLine();
+                // ui.showLine();
             }
         }
 
-        printInBanner("Otsunakiri~", "Byebye!~");
+        // printInBanner("Otsunakiri~", "Byebye!~");
     }
 }

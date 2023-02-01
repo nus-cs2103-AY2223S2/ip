@@ -10,7 +10,7 @@ public class MarkCommand extends Command {
 
     public MarkCommand(boolean isMarked, int idx) {
         this.isMarked = isMarked;
-        this.idx = idx;
+        this.idx = idx - 1;
     }
 
     @Override
@@ -23,6 +23,6 @@ public class MarkCommand extends Command {
             ui.printInBanner("Neee! Are you kidding me?", tasks.get(this.idx).toString());
         }
 
-        storage.saveTasklistToFile();
+        storage.saveTasklistToFile(tasks);
     }
 }

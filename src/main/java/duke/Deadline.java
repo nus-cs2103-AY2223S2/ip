@@ -9,8 +9,7 @@ public class Deadline extends Task {
     }
 
     public String getFileRepresentation() {
-        return "deadline " + this.isDone + " " + this.description + " /by "
-                + this.by.asFileDate();
+        return "deadline|" + super.getFileRepresentation() + "|" + this.by.asFileDate();
     }
 
     @Override

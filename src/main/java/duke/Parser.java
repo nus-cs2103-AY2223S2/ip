@@ -92,8 +92,11 @@ public class Parser {
 
         List<String> words = new ArrayList<>();
         String curWord = "";
-        while (args.hasNext() && !curWord.equals(delimiter)) {
+        while (args.hasNext()) {
             curWord = args.next();
+            if (curWord.equals(delimiter)) {
+                break;
+            }
             words.add(curWord);
         }
         return String.join(" ", words);
@@ -127,11 +130,11 @@ public class Parser {
         }
     }
 
-    private static Date parseDate(String arg) throws IllegalArgumentException {
+    public static Date parseDate(String arg) throws IllegalArgumentException {
         if (isDateTime(arg)) {
-            return new Date(LocalDateTime.parse(arg));
+            return new Date(LocalDateTime.parse(arg, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
         } else if (isDate(arg)) {
-            return new Date(LocalDate.parse(arg));
+            return new Date(LocalDate.parse(arg, DateTimeFormatter.ofPattern("yyyy-MM-dd")));
         } else {
             throw new IllegalArgumentException();
         }

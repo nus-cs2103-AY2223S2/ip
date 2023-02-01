@@ -1,10 +1,11 @@
 package duke;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Date {
+public class Date implements Serializable {
     private LocalDate localDate;
     private LocalDateTime localDateTime;
 

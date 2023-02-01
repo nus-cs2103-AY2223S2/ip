@@ -6,7 +6,7 @@ public class Todo extends Task {
     }
 
     public String getFileRepresentation() {
-        return "todo " + this.isDone + " " + this.description;
+        return "todo|" + super.getFileRepresentation();
     }
 
     @Override
