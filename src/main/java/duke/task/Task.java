@@ -30,6 +30,7 @@ public class Task implements Serializable {
             this.status = toggleStatus();
         }
     }
+
     public String getStatus() {
         return "[" + this.status + "] " + this.description;
     }
