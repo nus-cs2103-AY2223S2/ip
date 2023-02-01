@@ -1,8 +1,10 @@
 package duke;
 import java.util.Scanner;
+
 import java.io.IOException;
 import java.io.File;
 import java.io.FileWriter;
+
 import java.time.LocalDate
         ;
 /** Encapsulates the Duke chat bot.
@@ -32,7 +34,6 @@ public class Duke {
             tasks = new TaskList();
         }
     }
-
     /**
      * Runs the Duke bot.
      */
@@ -44,11 +45,9 @@ public class Duke {
             Parser.parse(ui, tasks, storage, userInput);
         }
     }
-
     public static void main(String[] args) {
         new Duke("duke.txt").run();
     }
-
 }
 
 

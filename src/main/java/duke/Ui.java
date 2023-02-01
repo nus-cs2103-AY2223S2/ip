@@ -3,8 +3,13 @@ package duke;
  * Handles interactions with the user.
  */
 public class Ui {
+    /** The top part of Duke's reply message. */
     static String TOP_DIVIDER = "~~~~~~~~~~~~~~~~o~~~~~~~~~~~~~~~~\n" + "Duke's Response: \n\n";
+
+    /** The bottom part of Duke's reply message. */
     static String BOTTOM_DIVIDER = "\n~~~~~~~~~~~~~~~~o~~~~~~~~~~~~~~~~";
+
+    /** Duke's help message */
     private static String HELP_MESSAGE = "The available commands are: \n" +
             "1) list\n" +
             "2) bye\n" +
@@ -14,7 +19,6 @@ public class Ui {
             "6) unmark ____\n" +
             "7) mark ______ \n" +
             "8) help\n";
-
 
     /**
      * Greets the user.
@@ -30,7 +34,6 @@ public class Ui {
     public void respond(String message) {
         System.out.println(TOP_DIVIDER + message + BOTTOM_DIVIDER);
     }
-
 
     /**
      * Displays a loading error message to the user.

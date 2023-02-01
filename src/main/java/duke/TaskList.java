@@ -29,12 +29,10 @@ class TaskList {
                     + "Here are the tasks in your list: \n";
         String botDivider = "~~~~~~~~~~~~~~~~o~~~~~~~~~~~~~~~~";
         System.out.println(topDivider);
-
         for (int i = 0; i < this.tasks.size(); i++) {
             String output = this.tasks.get(i).provideDetails();
             System.out.println((i + 1) + "." + output);
         }
-
         System.out.println(botDivider);
     }
 

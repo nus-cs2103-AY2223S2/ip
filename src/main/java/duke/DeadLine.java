@@ -14,15 +14,11 @@ class DeadLine extends Task {
 
     @Override
     public String provideDetails() {
-
         String[] separateText = this.description.split(" /by ");
-
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
         String date = localDate.format(formatter);
-
         return this.completed ? "[D]" + "[x] " + separateText[0] + " (by: " + date + ")"
                 : "[D]" + "[ ] " + separateText[0] + " (by: " + date + ")";
     }
-
 }
 
