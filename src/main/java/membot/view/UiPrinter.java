@@ -2,6 +2,9 @@ package membot.view;
 
 import java.util.function.Consumer;
 
+/**
+ * Printer for JavaFX view interface.
+ */
 public class UiPrinter implements Printable {
     private final Consumer<String> printer;
 

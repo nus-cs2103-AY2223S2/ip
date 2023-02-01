@@ -17,16 +17,15 @@ import membot.view.Printable;
 public class Membot {
     private static final String FILE_NAME = "./data/tasks.txt";
     private static final int EXIT_DELAY = 800;
-    private static final String LOGO =
-              "                             _             _   \n"
-            + " _ __ ___    ___  _ __ ___  | |__    ___  | |_ \n"
-            + "| '_ ` _ \\  / _ \\| '_ ` _ \\ | '_ \\  / _ \\ | __|\n"
-            + "| | | | | ||  __/| | | | | || |_) || (_) || |_ \n"
-            + "|_| |_| |_| \\___||_| |_| |_||_.__/  \\___/  \\__|\n";
-
     private final Printable ui;
     private StorageManager manager;
 
+    /**
+     * Generates an instance of Membot to run. Multiple instances can be
+     * used if there are multiple types of views to render (e.g. CLI and GUI).
+     *
+     * @param ui The engine for displaying data to a user view.
+     */
     public Membot(Printable ui) {
         this.ui = ui;
 
@@ -39,6 +38,11 @@ public class Membot {
         }
     }
 
+    /**
+     * Executes the command that corresponds to the input string.
+     *
+     * @param input A <code>String</code> command input.
+     */
     public void execute(String input) {
         String s = input.trim();
         Command command;
@@ -51,6 +55,9 @@ public class Membot {
         }
     }
 
+    /**
+     * Cleans up Membot and exits.
+     */
     public void exit() {
         if (this.manager != null) {
             try {
@@ -66,6 +73,5 @@ public class Membot {
                 System.exit(0);
             }
         }, EXIT_DELAY);
-
     }
 }

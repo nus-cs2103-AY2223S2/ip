@@ -1,5 +1,7 @@
 package membot.ui;
 
+import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -9,8 +11,9 @@ import membot.Membot;
 import membot.ui.controller.MainWindow;
 import membot.view.UiPrinter;
 
-import java.io.IOException;
-
+/**
+ * The main driver class for initialising JavaFX GUI for Membot.
+ */
 public class Gui extends Application {
     @Override
     public void start(Stage stage) {
@@ -21,7 +24,8 @@ public class Gui extends Application {
             stage.setTitle("Membot");
             stage.setResizable(false);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setMembot(new Membot(new UiPrinter(fxmlLoader.<MainWindow>getController().getPrinter())));
+            fxmlLoader.<MainWindow>getController().setMembot(
+                    new Membot(new UiPrinter(fxmlLoader.<MainWindow>getController().getPrinter())));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
