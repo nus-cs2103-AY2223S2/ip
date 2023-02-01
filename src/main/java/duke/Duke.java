@@ -2,6 +2,7 @@ package duke;
 
 import duke.taskType.TaskList;
 import duke.commands.*;
+import javafx.application.Platform;
 
 /**
  * The main class of this task list management bot.
@@ -10,6 +11,9 @@ public class Duke {
     private TaskList lst;
     private Ui ui;
     private Storage storage;
+
+    public Duke() {
+    }
 
     /**
      * The default and only constructor of Duke class.
@@ -23,29 +27,15 @@ public class Duke {
         this.lst = storage.load();
     }
 
-    /**
-     * The main method to run the bot.
-     */
-    public void run() {
-        ui.hello();
-
-        while (true) {
-            String cmd = ui.readCMD();
-            ui.printLine();
-            Command command = Parser.parse(cmd);
-            command.operate(lst, ui, storage);
-            ui.printLine();
-            System.out.println();
-            if (command.isBye()) break;
+    public String dealWithCommand(String cmd) {
+        Command command = Parser.parse(cmd);
+        if (command.isBye()) {
+            Platform.exit();
         }
+        return command.operate(lst, ui, storage);
     }
 
-    /**
-     * The main() method.
-     *
-     * @param args
-     */
-    public static void main(String[] args) {
-        new Duke("tasklist.txt").run();
+    public String getResponse(String input) {
+        return dealWithCommand(input);
     }
 }

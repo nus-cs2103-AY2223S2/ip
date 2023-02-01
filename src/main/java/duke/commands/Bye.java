@@ -21,9 +21,9 @@ public class Bye extends Command {
      * @param ui the UI object the program is using
      * @param storage the Storage object the program is using
      */
-    public void operate(TaskList lst, Ui ui, Storage storage) {
+    public String operate(TaskList lst, Ui ui, Storage storage) {
         storage.save(lst);
-        System.out.println("See you! Roarrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr!");
+        return "I see you soon amigo I think! Roarrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr!";
     }
 
     /**

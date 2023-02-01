@@ -13,7 +13,7 @@ public class CreateEvent extends Command {
         this.cmdLine = cmdLine;
     }
 
-    public void operate(TaskList lst, Ui ui, Storage storage) {
+    public String operate(TaskList lst, Ui ui, Storage storage) {
         try {
             if (cmdLine.length() <= 6) throw new DukeException("Roarrrrrrrrrrrrrrrrr! Do you really have this Event task or not?");
             String task = cmdLine.substring(6);
@@ -29,14 +29,16 @@ public class CreateEvent extends Command {
             if (time1.isEmpty()) throw new DukeException("Roarrrrrrrrrrrrrrrrr! Do you have a start time for this task or not?");
             if (time2.isEmpty()) throw new DukeException("Roarrrrrrrrrrrrrrrrr! Do you have a end time for this task or not?");
             lst.add(new Event(task, time1, time2));
-            System.out.println("New Event task is added. Roarrrrrrrrrrrrrrrrrrrrrrrrr!");
-            System.out.println("  " + lst.get(lst.size() - 1).toString());
-            System.out.println("You save " + lst.size() + " tasks in the list. Roarrrrrrrrrrrrrrrrrrrr!");
+            String response = "";
+            response += "New Event task is added. Roarrrrrrrrrrrrrrrrrrrrrrrrr!\n";
+            response += "  " + lst.get(lst.size() - 1).toString() + "\n";
+            response += "You save " + lst.size() + " tasks in the list. Roarrrrrrrrrrrrrrrrrrrr!";
             storage.save(lst);
+            return response;
         } catch (DukeException e) {
-            System.out.println(e.getMessage());
+            return e.getMessage();
         } catch (StringIndexOutOfBoundsException e) {
-            System.out.println("Roarrrrrrrrrrrrrrrr! I cannot add this Event task! Check your input format!");
+            return "Roarrrrrrrrrrrrrrrr! I cannot add this Event task! Check your input format!";
         }
     }
 }

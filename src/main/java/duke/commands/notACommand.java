@@ -21,7 +21,7 @@ public class notACommand extends Command {
      * @param ui the UI object the program is using
      * @param storage the Storage object the program is using
      */
-    public void operate(TaskList lst, Ui ui, Storage storage) {
-        System.out.println("Roarrrrrrrrrrrrrrrrr! What on earth are you talking about?");
+    public String operate(TaskList lst, Ui ui, Storage storage) {
+        return "Roarrrrrrrrrrrrrrrrr! What on earth are you talking about?";
     }
 }

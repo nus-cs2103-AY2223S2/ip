@@ -30,9 +30,7 @@ public class Storage {
             oos.writeObject(lst);
             oos.close();
             fos.close();
-            System.out.println("Your tasks are saved in the local disk! Roarrrrrrrrrrrrrrrrrr!");
         } catch (Exception e) {
-            System.out.println("Roarrrrrrrrrrrrrrrrr! I cannot save your tasks in the local disk!");
             e.printStackTrace();
         }
     }
@@ -53,17 +51,13 @@ public class Storage {
                 ois.close();
                 fis.close();
             } catch (Exception e) {
-                System.out.println("Roarrrrrrrrrrrrrrrrrrrr! I cannot load your tasks in the local disk!");
                 e.printStackTrace();
             }
             return lst;
         } else {
-            System.out.println("Roarrrrrrrrrrrrrrr! You do not have a task list saved in the local disk!");
-            System.out.println("Never mind! I will create one for you immediately. Roarrrrrrrrrrrrrrrrrrr!");
             try {
                 f.createNewFile();
             } catch (IOException e) {
-                System.out.println("Roarrrrrrrrrrrrrrrrrr! I cannot create the task list file!");
             }
             return new TaskList();
         }
