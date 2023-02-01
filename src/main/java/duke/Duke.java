@@ -1,6 +1,7 @@
 package duke;
 
 import command.Command;
+
 import storage.Storage;
 
 import task.TaskList;
@@ -23,8 +24,9 @@ public class Duke {
     protected final ArrayList<String> commandList;
     protected final String RECORD_DIR = "./data";
     protected final String RECORD_NAME = "/duke.txt";
-    private final Storage storage;
-    private final Parser parser;
+    protected final Storage storage;
+    protected boolean hasExited;
+
 
     /**
      * Constructor
@@ -34,15 +36,15 @@ public class Duke {
         this.ui = new TextUi(myName);
         this.taskList = new TaskList();
         this.storage = new Storage(RECORD_DIR, RECORD_NAME);
-        this.parser = new Parser();
         this.commandList = new ArrayList<>();
+        this.hasExited = false;
         loadRecord();
     }
 
     /**
      * The process that interacts with user
      */
-    public void run() {
+    public void runWithTextUi() {
         ui.showWelcome();
 
         boolean isRunning = true;
@@ -62,6 +64,37 @@ public class Duke {
         }
 
         storage.saveToFile(getCommandListString());
+    }
+
+    public String handleCommandWithException(String inMsg) {
+        String response = "";
+
+        try {
+            response = handleCommand(inMsg);
+            boolean isRunning = response.equals("Bye. Hope to see you again soon!");
+            isRunning = !inMsg.equals("bye");
+
+            if (isRunning) {
+                commandList.add(inMsg);
+            } else {
+                hasExited = true;
+                storage.saveToFile(getCommandListString());
+            }
+        } catch (DukeException e) {
+            response = e.toString();
+        } catch (NumberFormatException e) {
+            response = "Please specify the index.";
+        }
+
+        return response;
+    }
+
+    /**
+     * Returns whether the program has exited.
+     * @return whether the program has exited.
+     */
+    public boolean isExited() {
+        return hasExited;
     }
 
     /**
@@ -103,6 +136,11 @@ public class Duke {
         Command command = Parser.parseCommand(inMsg, suppressPrint);
         command.execute(taskList, ui);
         return !command.isExit();
+    }
+
+    public String handleCommand(String inMsg) throws DukeException {
+        Command command = Parser.parseCommand(inMsg, true);
+        return command.execute(taskList);
     }
 
     /**
