@@ -13,16 +13,17 @@ public class Task {
 
     public void markAsDone() {
         this.isDone = true;
-        System.out.println("Task Marked as done");
     }
 
     public void markAsNotDone() {
         this.isDone = false;
-        System.out.println("Task marked as not done");
     }
 
-    @Override
-    public String toString() {
-       return "[" + this.getStatusIcon() + "] " + this.description;
+    public void markAsDoneMessage() {
+        System.out.println("Task Marked as done");
+    }
+
+    public void markAsNotDoneMessage() {
+        System.out.println("Task marked as not done");
     }
 }
