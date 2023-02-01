@@ -33,4 +33,8 @@ public class Task implements Serializable {
     public String getStatus() {
         return "[" + this.status + "] " + this.description;
     }
+
+    public String getDescription() {
+        return this.description;
+    }
 }

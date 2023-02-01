@@ -49,6 +49,19 @@ public class TaskList {
         }
     }
 
+    public void find(String keyword) {
+        ArrayList<Task> searchResult = new ArrayList<Task>();
+        for (int i = 0; i < this.taskList.size(); i++) {
+            if(taskList.get(i).getDescription().contains(keyword) == true) {
+                searchResult.add(taskList.get(i));
+            }
+        }
+        for (int j = 0; j < searchResult.size(); j++) {
+            int numbering = j + 1;
+            System.out.println("    " + numbering + "." + searchResult.get(j).toString());
+        }
+    }
+
     public Task getTask(int taskIndex) {
         return this.taskList.get(taskIndex);
     }

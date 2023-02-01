@@ -79,7 +79,15 @@ public class Parser {
             } catch (DateTimeParseException e) {
                 System.out.println("    Incorrect date format, please try again~");
             }
-        } else {
+        } else if (parts[0].equals("find")) {
+            try {
+                String keyword = parts[1];
+                System.out.println("    MATCHY Matchyyy!~ Here are the matching tasks:");
+                this.taskList.find(keyword);
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("    OOPS!!! You gotta tell me what to search for :<");
+            }
+        }else {
             System.out.println("    OOPS!!! I'm sorry, but I don't know what that means :<");
         }
 
