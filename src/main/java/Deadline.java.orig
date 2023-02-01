@@ -12,7 +12,10 @@ public class Deadline extends Task {
 
     public Deadline(String description, String deadline) {
         super(description);
+<<<<<<< HEAD
+=======
         // Checks if the deadline provided is a valid date
+>>>>>>> branch-level-8
         try {
             this.date = LocalDate.parse(deadline);
             this.isDate = true;
