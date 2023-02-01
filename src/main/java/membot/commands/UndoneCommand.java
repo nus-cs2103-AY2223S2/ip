@@ -37,7 +37,11 @@ public class UndoneCommand extends Command {
                 this.ui.printlnError("Invalid Task ID!");
             }
         } else {
-            this.ui.printlnError("Invalid Syntax - \"undone [Task ID]\" (e.g. \"undone 3\")");
+            this.ui.printlnError(
+                    "Invalid Syntax: \"undone [Task ID]\"",
+                    "",
+                    "Example: \"undone 3\""
+            );
         }
     }
 }

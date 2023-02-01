@@ -37,8 +37,10 @@ public class EventCommand extends Command {
             new ListCommand(this.ui).execute();
         } catch (IndexOutOfBoundsException | InvalidCommandException | NoStartDateTimeFoundException
                  | NoEndDateTimeFoundException e) {
-            this.ui.printlnError("Invalid Syntax - \"event [title] /from [start] /to [end]\""
-                    + "(e.g. \"event piano concert /from tomorrow 3pm /to tomorrow 6pm\")");
+            this.ui.printlnError(
+                    "Invalid Syntax: \"event [title] /from [start] /to [end]\"",
+                    "",
+                    "Example: \"event piano concert /from tomorrow 3pm /to tomorrow 6pm\"");
         } catch (DateTimeException e) {
             Task.deleteLast();
             this.ui.printlnError(e.getMessage());

@@ -31,7 +31,11 @@ public class TodoCommand extends Command {
             this.ui.printSeparator();
             new ListCommand(this.ui).execute();
         } catch (InvalidCommandException e) {
-            this.ui.printlnError("Invalid Syntax - \"todo [title]\" (e.g. \"todo math homework\")");
+            this.ui.printlnError(
+                    "Invalid Syntax: \"todo [title]\"",
+                    "",
+                    "Example: \"todo math homework\""
+            );
         }
     }
 }

@@ -35,7 +35,11 @@ public class FindCommand extends Command {
 
             this.ui.println(a);
         } else {
-            this.ui.printlnError("Invalid Syntax - \"find [keyword]\" (e.g. \"find study\")");
+            this.ui.printlnError(
+                    "Invalid Syntax: \"find [keyword]\"",
+                    "",
+                    "Example: \"find study\""
+            );
         }
     }
 }

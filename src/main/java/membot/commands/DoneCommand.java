@@ -38,7 +38,11 @@ public class DoneCommand extends Command {
                 this.ui.printlnError("Invalid Task ID!");
             }
         } else {
-            this.ui.printlnError("Invalid Syntax - \"done [Task ID]\" (e.g. \"done 4\")");
+            this.ui.printlnError(
+                    "Invalid Syntax: \"done [Task ID]\"",
+                    "",
+                    "Example: \"done 4\""
+            );
         }
     }
 }

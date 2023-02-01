@@ -7,7 +7,7 @@ import membot.view.Printable;
  * Represents a command that will exit the application. It has <code>isExit</code> set to true.
  */
 public class ByeCommand extends Command {
-    private Membot membot;
+    private final Membot membot;
     /**
      * Generates a <code>ByeCommand</code> object.
      *

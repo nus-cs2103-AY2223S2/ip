@@ -27,14 +27,21 @@ public class DeleteCommand extends Command {
             int taskId = Integer.parseInt(input.split(" ")[1]);
             try {
                 Task deletedTask = Task.delete(taskId);
-                this.ui.println("Deleted! The task has been deleted:", deletedTask.toString());
+                this.ui.println(
+                        "Deleted! The task has been deleted:",
+                        String.format("%d. %s", taskId, deletedTask.toString())
+                );
                 this.ui.printSeparator();
                 new ListCommand(this.ui).execute();
             } catch (IndexOutOfBoundsException e) {
                 this.ui.printlnError("Invalid Task ID!");
             }
         } else {
-            this.ui.printlnError("Invalid Syntax - \"delete [Task ID]\" (e.g. \"delete 1\")");
+            this.ui.printlnError(
+                    "Invalid Syntax: \"delete [Task ID]\"",
+                    "",
+                    "Example: \"delete 1\""
+            );
         }
     }
 }
