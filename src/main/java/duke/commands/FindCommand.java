@@ -38,8 +38,8 @@ public class FindCommand extends Command {
      * @param storage the Storage responsible for reading and writing data
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        taskList.findTask(this.keyword);
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        return taskList.findTask(this.keyword);
     }
 
     /**

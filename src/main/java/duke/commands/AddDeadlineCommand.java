@@ -35,13 +35,14 @@ public class AddDeadlineCommand extends AddCommand {
      * @param storage the Storage responsible for reading/writing data
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        taskList.addNewDeadline(this.description, this.by);
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        String response = taskList.addNewDeadline(this.description, this.by);
         try {
             storage.saveData(taskList);
         } catch (IOException e) {
-            Ui.showFatalError("Error in saving data.\nReboot Duke and try again");
+            return Ui.showFatalError("Error in saving data.\nReboot Duke and try again");
         }
+        return response;
     }
 
     /**

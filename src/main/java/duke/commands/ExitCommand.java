@@ -34,8 +34,8 @@ public class ExitCommand extends Command {
      * @param storage the Storage responsible for reading/writing data
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        Ui.showExit();
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        return Ui.showExit();
     }
 
     /**

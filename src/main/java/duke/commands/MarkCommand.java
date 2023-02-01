@@ -4,14 +4,11 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
-<<<<<<< Updated upstream
 /**
  * This is a command that handles the marking and unmarking of a task
  */
-=======
 import java.io.IOException;
 
->>>>>>> Stashed changes
 public class MarkCommand extends Command {
     private int taskNumber;
     private boolean isMarkingTask;
@@ -46,17 +43,19 @@ public class MarkCommand extends Command {
      * @param storage the Storage responsible for reading/writing data
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        String response;
         if (isMarkingTask) {
-            taskList.markTask(this.taskNumber);
+            response = taskList.markTask(this.taskNumber);
         } else {
-            taskList.unmarkTask(this.taskNumber);
+            response = taskList.unmarkTask(this.taskNumber);
         }
         try {
             storage.saveData(taskList);
         } catch (IOException e) {
-            Ui.showFatalError("Error in saving data.\nReboot Duke and try again");
+            return Ui.showFatalError("Error in saving data.\nReboot Duke and try again");
         }
+        return response;
     }
 
     /**

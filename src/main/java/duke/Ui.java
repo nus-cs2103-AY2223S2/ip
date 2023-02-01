@@ -12,61 +12,59 @@ public class Ui {
         this.sc = new Scanner(System.in);
     }
 
-    public static void showWelcome() {
-        showLine();
-        System.out.println("Hello I'm Duke");
-        System.out.println("What can I do for you?");
-        showLine();
+    public static String showWelcome() {
+        return "Hello I'm Duke\nWhat can I do for you?";
     }
 
-    public static void showExit() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public static String showExit() {
+        return "Bye. Hope to see you again soon!";
     }
 
-    public static void showError(String errorMessage) {
-        System.out.println(errorMessage);
+    public static String showError(String errorMessage) {
+        return (errorMessage);
     }
 
-    public static void showFatalError(String errorMessage) {
-        System.out.println(errorMessage);
-        System.exit(1);
+    public static String showFatalError(String errorMessage) {
+        return (errorMessage);
     }
 
-    public static void showLine() {
-        System.out.println(DIVIDER);
+    public static String showLine() {
+        return(DIVIDER);
     }
 
-    public static void showTaskAdded(Task task, int counter) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println("    " + task);
-        System.out.println("Now you have " + counter + " task in the list");
+    public static String showTaskAdded(Task task, int counter) {
+        return "Got it. I've added this task:\n" +
+                "    " + task +
+                "\nNow you have " + counter + " task in the list";
     }
 
-    public static void showTaskMarked(Task task, boolean isMarked) {
+    public static String showTaskMarked(Task task, boolean isMarked) {
         if (isMarked) {
-            System.out.println("Nice! I've marked this task as done:");
-            System.out.println("    " + task);
+            return "Nice! I've marked this task as done:\n" +
+                    "    " + task;
         } else {
-            System.out.println("OK, I've marked this task as not done yet:");
-            System.out.println("    " + task);
+            return "OK, I've marked this task as not done yet:\n" +
+                    "    " + task;
         }
     }
 
-    public static void showTaskDeleted(Task task, int counter) {
-        System.out.println("Noted. I've removed this task:");
-        System.out.println("    " + task);
-        System.out.println("Now you have " + counter + " tasks in the list.");
+    public static String showTaskDeleted(Task task, int counter) {
+        return "Got it. I've removed this task:\n" +
+                "    " + task +
+                "\nNow you have " + counter + " task in the list";
     }
 
-    public static void showTaskList(ArrayList<Task> tasks) {
+    public static String showTaskList(ArrayList<Task> tasks) {
+        String result = "";
         for (int i = 0; i < tasks.size(); i++) {
             int label = i + 1;
-            System.out.println("    " + label + ". " + tasks.get(i).toString());
+            result += "    " + label + ". " + tasks.get(i).toString() + "\n";
         }
+        return result;
     }
 
-    public static void showInvalidCommand() {
-        System.out.println("The command entered is invalid.");
+    public static String showInvalidCommand() {
+        return "The command entered is invalid.";
     }
 
     public String readCommand() {

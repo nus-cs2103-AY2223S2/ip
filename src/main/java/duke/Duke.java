@@ -6,7 +6,7 @@ import duke.exceptions.DukeException;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 
-public class Duke {
+public class Duke{
     private TaskList taskList;
     private Ui ui;
     private Storage storage;
@@ -23,27 +23,14 @@ public class Duke {
         }
     }
 
-    public void run() {
-        Ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Ui.showLine();
-                Command c = Parser.parse(fullCommand);
-                c.execute(this.taskList, this.ui, this.storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                Ui.showError(e.getMessage());
-            } catch (DateTimeParseException e) {
-                Ui.showError("Date must be in the format dd/MM/yyyy");
-            } finally {
-                Ui.showLine();
-            }
+    protected String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(taskList, ui, storage);
+        } catch (DukeException e) {
+            return e.getMessage();
+        } catch (DateTimeParseException e) {
+            return "Date must be in the format dd/MM/yyyy";
         }
-    }
-
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
     }
 }

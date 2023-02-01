@@ -65,7 +65,7 @@ public class Parser {
     private static AddTodoCommand parseTodoCommand(String fullCommand) throws TaskNoDescriptionException {
         String info = fullCommand.substring(4).trim();
         if (info.isEmpty()) {
-            throw (new TaskNoDescriptionException("☹ OOPS!!! The description of a todo cannot be empty."));
+            throw (new TaskNoDescriptionException("OOPS!!! The description of a todo cannot be empty."));
         }
 
         return new AddTodoCommand(info);
@@ -75,7 +75,7 @@ public class Parser {
         throws TaskNoDescriptionException, NotEnoughArgumentsException, DateTimeParseException {
         String info = fullCommand.substring(8).trim();
         if (info.isEmpty()) {
-            throw(new TaskNoDescriptionException("☹ OOPS!!! The description of a deadline cannot be empty."));
+            throw(new TaskNoDescriptionException("OOPS!!! The description of a deadline cannot be empty."));
         }
 
         try {
@@ -84,7 +84,7 @@ public class Parser {
             LocalDate byDate = LocalDate.parse(by, DateTimeFormatter.ofPattern("d/MM/yyyy"));
             return new AddDeadlineCommand(description, byDate);
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw(new NotEnoughArgumentsException("☹ OOPS!!! Deadline requires a date after the description."));
+            throw(new NotEnoughArgumentsException("OOPS!!! Deadline requires a date after the description."));
         }
     }
 
@@ -93,7 +93,7 @@ public class Parser {
             DateNotInSequenceException, DateTimeParseException {
         String info = fullCommand.substring(5).trim();
         if (info.isEmpty()) {
-            throw (new TaskNoDescriptionException("☹ OOPS!!! The description of an event cannot be empty."));
+            throw (new TaskNoDescriptionException("OOPS!!! The description of an event cannot be empty."));
         }
 
         try {
@@ -108,7 +108,7 @@ public class Parser {
             }
             return new AddEventCommand(description, fromDate, toDate);
         } catch(ArrayIndexOutOfBoundsException e) {
-            throw (new NotEnoughArgumentsException("☹ OOPS!!! Event requires a start time and an end time."));
+            throw (new NotEnoughArgumentsException("OOPS!!! Event requires a start time and an end time."));
         }
     }
 

@@ -37,13 +37,14 @@ public class AddEventCommand extends AddCommand {
      * @param storage the Storage responsible for reading/writing data
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        taskList.addNewEvent(this.description, this.from, this.to);
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        String response = taskList.addNewEvent(this.description, this.from, this.to);
         try {
             storage.saveData(taskList);
         } catch (IOException e) {
-            Ui.showFatalError("Error in saving data.\nReboot Duke and try again");
+            return Ui.showFatalError("Error in saving data.\nReboot Duke and try again");
         }
+        return response;
     }
 
     /**

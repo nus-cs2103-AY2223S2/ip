@@ -42,13 +42,14 @@ public class DeleteCommand extends Command {
      * @param storage the Storage responsible for reading/writing data
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        taskList.deleteTask(this.taskNumber);
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        String response = taskList.deleteTask(this.taskNumber);
         try {
             storage.saveData(taskList);
         } catch (IOException e) {
-            Ui.showFatalError("Error in saving data.\nReboot Duke and try again");
+            return Ui.showFatalError("Error in saving data.\nReboot Duke and try again");
         }
+        return response;
     }
 
     /**

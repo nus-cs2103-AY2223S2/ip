@@ -30,13 +30,14 @@ public class AddTodoCommand extends AddCommand {
      * @param storage the Storage responsible for reading/writing data
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        taskList.addNewTodo(this.description);
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        String response = taskList.addNewTodo(this.description);
         try {
             storage.saveData(taskList);
         } catch (IOException e) {
-            Ui.showFatalError("Error in saving data.\nReboot Duke and try again");
+            return Ui.showFatalError("Error in saving data.\nReboot Duke and try again");
         }
+        return response;
     }
 
     /**

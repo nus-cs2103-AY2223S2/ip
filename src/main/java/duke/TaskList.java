@@ -29,11 +29,11 @@ public class TaskList {
      *
      * @param description description of the Todo
      */
-    public void addNewTodo(String description) {
+    public String addNewTodo(String description) {
         Todo todo = new Todo(description);
         tasks.add(todo);
         this.counter++;
-        Ui.showTaskAdded(todo, counter);
+        return Ui.showTaskAdded(todo, counter);
     }
 
     /**
@@ -42,11 +42,11 @@ public class TaskList {
      * @param description description of the Deadline
      * @param by date of the Deadline
      */
-    public void addNewDeadline(String description, LocalDate by) {
+    public String addNewDeadline(String description, LocalDate by) {
         Deadline deadline = new Deadline(description, by);
         tasks.add(deadline);
         this.counter++;
-        Ui.showTaskAdded(deadline, counter);
+        return Ui.showTaskAdded(deadline, counter);
     }
 
     /**
@@ -56,18 +56,18 @@ public class TaskList {
      * @param from start date of Event
      * @param to end date of Event
      */
-    public void addNewEvent(String description, LocalDate from, LocalDate to) {
+    public String addNewEvent(String description, LocalDate from, LocalDate to) {
         Event event = new Event(description, from, to);
         tasks.add(event);
         this.counter++;
-        Ui.showTaskAdded(event, counter);
+        return Ui.showTaskAdded(event, counter);
     }
 
     /**
      * Lists out everything in tasks
      */
-    public void showTaskList() {
-        Ui.showTaskList(this.tasks);
+    public String showTaskList() {
+        return Ui.showTaskList(this.tasks);
     }
 
     /**
@@ -76,13 +76,13 @@ public class TaskList {
      * @param taskNumber the number representing the task being deleted
      * @throws TaskNotFoundException when taskNumber exceeds the total number of tasks available
      */
-    public void deleteTask(int taskNumber) throws TaskNotFoundException {
+    public String deleteTask(int taskNumber) throws TaskNotFoundException {
         if (taskNumber > this.counter) {
             throw(new TaskNotFoundException("Task " + taskNumber +" does not exist"));
         }
         Task removedTask = tasks.remove(taskNumber - 1);
         counter--;
-        Ui.showTaskDeleted(removedTask, this.counter);
+        return Ui.showTaskDeleted(removedTask, this.counter);
     }
 
     /**
@@ -91,13 +91,13 @@ public class TaskList {
      * @param taskNumber the number representing the task being deleted
      * @throws TaskNotFoundException when taskNumber exceeds the total number of tasks available
      */
-    public void markTask(int taskNumber) throws TaskNotFoundException {
+    public String markTask(int taskNumber) throws TaskNotFoundException {
         if (taskNumber > this.counter) {
             throw(new TaskNotFoundException("Task " + taskNumber +" does not exist"));
         }
         Task task = tasks.get(taskNumber - 1);
         task.setDone(true);
-        Ui.showTaskMarked(task, true);
+        return Ui.showTaskMarked(task, true);
     }
 
     /**
@@ -106,13 +106,13 @@ public class TaskList {
      * @param taskNumber the number representing the task being deleted
      * @throws TaskNotFoundException when taskNumber exceeds the total number of tasks available
      */
-    public void unmarkTask(int taskNumber) throws TaskNotFoundException {
+    public String unmarkTask(int taskNumber) throws TaskNotFoundException {
         if (taskNumber > this.counter) {
             throw(new TaskNotFoundException("Task " + taskNumber +" does not exist"));
         }
         Task task = tasks.get(taskNumber - 1);
         task.setDone(false);
-        Ui.showTaskMarked(task, false);
+        return Ui.showTaskMarked(task, false);
     }
 
     /**
@@ -120,13 +120,13 @@ public class TaskList {
      *
      * @param keyword the word used for filtering tasks
      */
-    public void findTask(String keyword) {
+    public String findTask(String keyword) {
         ArrayList<Task> filteredTasks = new ArrayList<>();
         for (Task task: tasks) {
             if (task.toString().contains(keyword)) {
                 filteredTasks.add(task);
             }
         }
-        Ui.showTaskList(filteredTasks);
+        return Ui.showTaskList(filteredTasks);
     }
 }
