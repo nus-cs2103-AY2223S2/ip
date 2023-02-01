@@ -68,8 +68,8 @@ public class Storage {
                         Task t = new ToDoTask(description);
                         if (completion == 'X') {
                             t.mark();
-                            taskList.add(t);
                         }
+                        taskList.add(t);
                     } else {
                         String[] temp = description.split("\\|");
                         String taskDescription = temp[0].strip();
@@ -79,16 +79,16 @@ public class Storage {
                             Task t = new DeadlineTask(taskDescription, dt);
                             if (completion == 'X') {
                                 t.mark();
-                                taskList.add(t);
                             }
+                            taskList.add(t);
                         } else if (taskType == 'E') {
                             String to = temp[2].strip();
                             LocalDateTime dtTo = convertString(to);
                             Task t = new EventTask(taskDescription, dt, dtTo);
                             if (completion == 'X') {
                                 t.mark();
-                                taskList.add(t);
                             }
+                            taskList.add(t);
                         }
                     }
                 } catch (LeoException e) {
