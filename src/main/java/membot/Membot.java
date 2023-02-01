@@ -16,7 +16,7 @@ import membot.view.Printable;
  */
 public class Membot {
     private static final String FILE_NAME = "./data/tasks.txt";
-    private static final int EXIT_DELAY = 800;
+    private static final int EXIT_DELAY = 500;
     private final Printable ui;
     private StorageManager manager;
 
