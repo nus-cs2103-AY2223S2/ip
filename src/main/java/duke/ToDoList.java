@@ -1,10 +1,11 @@
 package duke;
 
-import duke.exceptions.IndexDukeException;
+import java.util.ArrayList;
+
 import duke.tasks.Task;
 import duke.tasks.ToDoTask;
 
-import java.util.ArrayList;
+import duke.exceptions.IndexDukeException;
 
 
 public class ToDoList {

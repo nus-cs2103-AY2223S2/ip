@@ -1,6 +1,7 @@
 package duke.functions;
 
 import duke.ToDoList;
+
 import duke.tasks.DeadlineTask;
 import duke.tasks.EventTask;
 import duke.tasks.Task;
@@ -8,14 +9,16 @@ import duke.tasks.ToDoTask;
 
 import java.io.File;
 import java.io.FileWriter;
+
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.Path;
+
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class Storage {
-    Path path;
+    private Path path;
 
     public Storage(String pathStr) {
         String home = System.getProperty("user.dir");
@@ -24,7 +27,6 @@ public class Storage {
 
     public ToDoList load() {
         try {
-            //assume its ./iP-data/data,txt only
             if (!Files.exists(path)) {
                 if (!Files.exists(path.getParent())) {
                     Files.createDirectories(path.getParent());

@@ -1,15 +1,17 @@
 package duke.functions;
 
 import duke.ToDoList;
+
 import duke.exceptions.DukeException;
 import duke.exceptions.InputDukeException;
+
 import duke.tasks.DeadlineTask;
 import duke.tasks.EventTask;
 import duke.tasks.Task;
 import duke.tasks.ToDoTask;
 
 public class Parser {
-    private  Parser() {
+    private Parser() {
     }
 
     public static String[] handleInput(
@@ -33,17 +35,17 @@ public class Parser {
             break;
         case "mark":
             index = Integer.parseInt(inputs[1]);
-            list.markTask(index); //numbersformatexception to be handled
+            list.markTask(index);
             Ui.taskMarking(list, index, command);
             break;
         case "unmark":
             index = Integer.parseInt(inputs[1]);
-            list.unmarkTask(index); //numbersformatexception to be handled
+            list.unmarkTask(index);
             Ui.taskMarking(list, index, command);
             break;
         case "delete":
             index = Integer.parseInt(inputs[1]);
-            Task removed = list.delete(index); //numbersformatexception to be handled
+            Task removed = list.delete(index);
             Ui.taskAddDelete(list, removed, command);
             break;
         case "todo":
