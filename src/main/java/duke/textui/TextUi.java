@@ -35,7 +35,7 @@ public class TextUi {
 
         String introMsg = "Hello! I'm Duke.\nWhat can I do for you today?";
 
-        String output = concatMsgs(LINE, logo, introMsg, LINE, "\n");
+        String output = concatMsgs(LINE, logo, introMsg, LINE);
         return showMsg(output);
     }
 
@@ -113,11 +113,6 @@ public class TextUi {
     }
 
     public String concatMsgs(String... msgs) {
-        String output = "";
-        for (String msg : msgs) {
-            output += msg;
-            output += "\n";
-        }
-        return output;
+        return String.join("\n", msgs);
     }
 }
