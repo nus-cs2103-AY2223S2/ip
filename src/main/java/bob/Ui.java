@@ -23,6 +23,15 @@ public class Ui {
         return String.format("[%s][%s] %s", t.getTaskType(), t.getStatusIcon(), t);
     }
 
+    private void printList(ArrayList<Task> list) {
+        // Iterate through list items sequentially
+        for (int i = 0, n = list.size(); i < n; i++) {
+            Task t = list.get(i);
+            String s = String.format("%d. %s", i + 1, getTaskDescription(t));
+            System.out.println(padLeft(s));
+        }
+    }
+
     public String readCommand() {
         return scanner.nextLine();
     }
@@ -42,42 +51,44 @@ public class Ui {
         System.out.println(wrapper);
     }
 
-    public void printList(TaskList taskList) {
+    public void printFilteredTasks(ArrayList<Task> list) {
+        System.out.println(wrapper);
+        System.out.println(padLeft("Here are the matching tasks: "));
+
+        // Iterate through list items sequentially
+        printList(list);
+        System.out.println(wrapper);
+    }
+
+    public void printTasks(ArrayList<Task> list) {
         System.out.println(wrapper);
         System.out.println(padLeft("Current task list: "));
-
-        ArrayList<Task> list = taskList.getList();
-        // Iterate through list items sequentially
-        for (int i = 0, n = list.size(); i < n; i++) {
-            Task t = list.get(i);
-            String s = String.format("%d. %s", i + 1, getTaskDescription(t));
-            System.out.println(padLeft(s));
-        }
+        printList(list);
         System.out.println(wrapper);
     }
 
     public void printIntroduction() {
-        formattedPrint("Hi, my name is Bob :)\n" +
-        "How may I help you?");
+        formattedPrint("Hi, my name is Bob :)\n"
+                + "How may I help you?");
     }
 
     public void printTaskAdded(Task t) {
-        formattedPrint("Successfully added a new task :)\n" +
-                getTaskDescription(t));
+        formattedPrint("Successfully added a new task :)\n"
+                + getTaskDescription(t));
     }
 
     public void printMarkTask(Task t) {
-        formattedPrint("Successfully marked a task :)\n" +
-                getTaskDescription(t));
+        formattedPrint("Successfully marked a task :)\n"
+                + getTaskDescription(t));
     }
 
     public void printUnmarkTask(Task t) {
-        formattedPrint("Successfully unmarked a task :)\n" +
-                getTaskDescription(t));
+        formattedPrint("Successfully unmarked a task :)\n"
+                + getTaskDescription(t));
     }
     public void printDeleteTask(Task t) {
-        formattedPrint("Successfully deleted a task :)\n" +
-                getTaskDescription(t));
+        formattedPrint("Successfully deleted a task :)\n"
+                + getTaskDescription(t));
     }
     public void printGoodbye() {
         formattedPrint("Goodbye :)");

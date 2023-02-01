@@ -95,6 +95,11 @@ public class Parser {
         return command.length == 2 && command[0].equals("delete") && isInt(command[1]);
     }
 
+    private static boolean isFind(String input) {
+        String[] command = input.split(" ", 2);
+        return command.length == 2 && command[0].equals("find");
+    }
+
     // Return the index from a mark/unmark/delete command
     public static int parseIndex(String s) throws BobException {
         if (!isMark(s) && !isUnmark(s) && !isDelete(s)) {
@@ -165,5 +170,14 @@ public class Parser {
         
         Deadline d = new Deadline(description, deadline);
         return d;
+    }
+
+    public static String parseFind(String s) throws BobException {
+        if (!isFind(s)) {
+            throw new BobException("Invalid find command!");
+        }
+
+        String[] command = s.split(" ", 2);
+        return command[1];
     }
 }

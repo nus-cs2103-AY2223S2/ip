@@ -86,6 +86,19 @@ public class TaskList {
         return list.get(index - 1);
     }
 
+    public ArrayList<Task> find(String keyword) {
+        ArrayList<Task> filteredTasks = new ArrayList<>();
+
+        for (Task t : list) {
+            // Check if task description contains keyword
+            if (t.description.contains(keyword)) {
+                filteredTasks.add(t);
+            }
+        }
+
+        return filteredTasks;
+    }
+
     public ArrayList<Task> getList() {
         return this.list;
     }

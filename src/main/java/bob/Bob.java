@@ -19,7 +19,7 @@ public class Bob {
                 Task t;
 
                 if (command.equals("list")) {
-                    ui.printList(tasks);
+                    ui.printTasks(tasks.getList());
                 } else if (command.startsWith("todo")) {
                     t = Parser.parseTodo(command);
                     tasks.add(t);
@@ -42,6 +42,9 @@ public class Bob {
                 } else if (command.startsWith("delete")) {
                     index = Parser.parseIndex(command);
                     ui.printDeleteTask(tasks.delete(index));
+                } else if (command.startsWith("find")) {
+                    String keyword = Parser.parseFind(command);
+                    ui.printFilteredTasks(tasks.find(keyword));
                 } else { // Invalid command
                     throw new BobException("Sorry :( no valid command was entered");
                 }
