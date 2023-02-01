@@ -61,7 +61,8 @@ public class SerializableTask implements ISerializable<String, Task> {
         case EVENT:
             task = new Event(description, flags.split(" to "));
             break;
-        default: task = null;
+        default:
+            task = null;
         }
         if (isDone && task != null) {
             task.markTask();

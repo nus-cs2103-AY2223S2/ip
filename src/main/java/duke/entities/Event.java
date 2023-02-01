@@ -55,7 +55,7 @@ public class Event extends Task {
     }
 
     @Override
-    public boolean activeOn(LocalDate date) {
+    public boolean isActiveOn(LocalDate date) {
         return date.isAfter(from) && date.isBefore(to) || date.isEqual(from) || date.equals(to);
     }
 

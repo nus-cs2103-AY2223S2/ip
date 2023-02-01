@@ -38,7 +38,7 @@ public class DateCommand extends Command {
         TaskList store = taskList.get();
         boolean valid = CustomValidator.validate(args.strip(), input -> VALID_DATE.matcher(input).find());
         if (valid) {
-            return store.filter(task -> task.activeOn(LocalDate.parse(args.split(" ")[1])),
+            return store.filter(task -> task.isActiveOn(LocalDate.parse(args.split(" ")[1])),
                     "There are no active tasks on this date!");
         } else {
             String dateFormatError = INVALID_FORMAT_ERROR + " " + "Please follow: date [yyyy-mm-dd].";

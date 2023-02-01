@@ -51,7 +51,7 @@ public abstract class Task {
      * @return SerializableTask
      */
     public abstract SerializableTask serialize();
-    public abstract boolean activeOn(LocalDate date);
+    public abstract boolean isActiveOn(LocalDate date);
 
     /**
      * Filters a task based on the matched string.

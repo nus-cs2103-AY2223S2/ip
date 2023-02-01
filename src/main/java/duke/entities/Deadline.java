@@ -50,7 +50,7 @@ public class Deadline extends Task {
     }
 
     @Override
-    public boolean activeOn(LocalDate date) {
+    public boolean isActiveOn(LocalDate date) {
         return by.equals(date);
     }
 
