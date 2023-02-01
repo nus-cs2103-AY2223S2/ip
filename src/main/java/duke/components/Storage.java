@@ -1,6 +1,6 @@
-package components;
+package duke.components;
 
-import exceptions.DukeException;
+import duke.exceptions.DukeException;
 
 import java.io.*;
 

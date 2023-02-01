@@ -1,11 +1,9 @@
-package commands;
-import exceptions.DukeException;
-import tasks.Task;
-import components.TaskList;
-import components.Ui;
-import components.Storage;
-
-import org.w3c.dom.ls.LSOutput;
+package duke.commands;
+import duke.exceptions.DukeException;
+import duke.tasks.Task;
+import duke.components.TaskList;
+import duke.components.Ui;
+import duke.components.Storage;
 
 import java.util.ArrayList;
 

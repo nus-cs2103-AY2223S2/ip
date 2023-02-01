@@ -1,11 +1,10 @@
-package commands;
+package duke.commands;
 
-import commands.Command;
-import components.Storage;
-import components.TaskList;
-import components.Ui;
-import exceptions.DukeException;
-import tasks.Task;
+import duke.components.Storage;
+import duke.components.TaskList;
+import duke.components.Ui;
+import duke.exceptions.DukeException;
+import duke.tasks.Task;
 
 import java.util.ArrayList;
 

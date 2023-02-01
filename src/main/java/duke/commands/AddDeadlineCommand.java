@@ -1,7 +1,7 @@
-package commands;
+package duke.commands;
 
-import exceptions.DukeException;
-import tasks.Deadline;
+import duke.exceptions.DukeException;
+import duke.tasks.Deadline;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;

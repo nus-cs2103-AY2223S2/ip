@@ -1,9 +1,11 @@
-import commands.Command;
-import components.Parser;
-import components.Storage;
-import components.TaskList;
-import components.Ui;
-import exceptions.DukeException;
+package duke;
+
+import duke.commands.Command;
+import duke.components.Parser;
+import duke.components.Storage;
+import duke.components.TaskList;
+import duke.components.Ui;
+import duke.exceptions.DukeException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;

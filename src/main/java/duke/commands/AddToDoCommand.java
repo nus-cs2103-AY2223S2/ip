@@ -1,8 +1,7 @@
-package commands;
+package duke.commands;
 
-import commands.AddCommand;
-import exceptions.DukeException;
-import tasks.ToDo;
+import duke.exceptions.DukeException;
+import duke.tasks.ToDo;
 
 import java.util.ArrayList;
 

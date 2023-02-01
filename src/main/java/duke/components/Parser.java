@@ -1,7 +1,7 @@
-package components;
+package duke.components;
 
-import commands.*;
-import exceptions.DukeException;
+import duke.commands.*;
+import duke.exceptions.DukeException;
 
 import java.time.DateTimeException;
 import java.util.ArrayList;

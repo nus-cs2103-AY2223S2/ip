@@ -1,6 +1,6 @@
-package components;
+package duke.components;
 
-import tasks.Task;
+import duke.tasks.Task;
 
 import java.io.Serializable;
 import java.util.ArrayList;

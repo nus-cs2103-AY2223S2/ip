@@ -1,12 +1,11 @@
-package components;
+package duke.components;
 
-import commands.AddCommand;
-import commands.DeleteCommand;
-import commands.MarkCommand;
-import commands.UnmarkCommand;
-import components.TaskList;
-import exceptions.DukeException;
-import tasks.Task;
+import duke.commands.AddCommand;
+import duke.commands.DeleteCommand;
+import duke.commands.MarkCommand;
+import duke.commands.UnmarkCommand;
+import duke.exceptions.DukeException;
+import duke.tasks.Task;
 
 import java.util.Scanner;
 
