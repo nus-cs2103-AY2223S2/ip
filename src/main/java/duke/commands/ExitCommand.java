@@ -4,10 +4,10 @@ import duke.storage.Storage;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
-public class ExitCommand extends Command{
+public class ExitCommand extends Command {
 
     /**
-     * Indicates the command is exit
+     * Indicates that the command is exit command.
      */
     @Override
     public boolean isExit() {

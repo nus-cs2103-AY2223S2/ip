@@ -1,10 +1,10 @@
 package duke.commands;
 
-import duke.ui.Ui;
-import duke.storage.*;
-import duke.tasks.*;
-
 import duke.exceptions.DukeException;
+import duke.storage.Storage;
+import duke.tasks.TaskList;
+import duke.ui.Ui;
+
 public class Command {
 
     /**
