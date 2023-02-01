@@ -37,9 +37,12 @@ public class Duke {
                 new BasicCommand("help", "show this help message", ui::getHelpMsg),
                 new BasicCommand("list", "list tasks", taskList::stringify),
                 new ArgCommand("add", "add task", new String[]{ "\\s" }, taskList::add),
+                new ArgCommand("find", "find tasks containing text fragment", new String[]{}, taskList::find),
+
+                // The following commands can take any number of space-delimited unnamed integer arguments (dang that
+                // was a mouthful). See implementation details in TaskList.java.
                 new ArgCommand("mark", "mark/unmark task as done", new String[]{}, taskList::mark),
                 new ArgCommand("delete", "delete task", new String[]{}, taskList::delete),
-                new ArgCommand("find", "find tasks containing text fragment", new String[]{}, taskList::find)
         };
         ui.setCommands(commands);
         this.parser = new Parser(commands);
