@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Task {
 
     private static ArrayList<Task> tasks = new ArrayList<>();
-    protected String description;
+    public String description;
     protected boolean isDone;
 
     /**

@@ -8,6 +8,7 @@ import Exceptions.IncompleteInputException;
 import Exceptions.InvalidInputException;
 import munch.Parser;
 
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -25,13 +26,18 @@ public class TaskList {
             tasks.get(i).marking(words[0]);
         } else if (words[0].equals("delete")) {
             int i = Integer.parseInt(words[1]) - 1;
-            TaskList.deleteTask(tasks, i);
+            deleteTask(tasks, i);
         } else if (words[0].equals("todo")) {
-            TaskList.addTodoTask(tasks, word);
+            addTodoTask(tasks, word);
         } else if (words[0].equals("deadline")) {
-            TaskList.addDeadlineTask(tasks, word);
+            addDeadlineTask(tasks, word);
         } else if (words[0].equals("event")) {
-            TaskList.addEventTask(tasks, word);
+            addEventTask(tasks, word);
+        } else if (words[0].equals("find")) {
+            ArrayList<Task> keywordList = findMatchingTasks(tasks, word);
+            for (int i = 0; i < keywordList.size(); i++) {
+                System.out.println((i + 1) + "." + keywordList.get(i).toString());
+            }
         } else {
             throw new InvalidInputException();
         }
@@ -115,5 +121,22 @@ public class TaskList {
         } else {
             throw new IncompleteInputException();
         }
+    }
+
+    public static ArrayList<Task> findMatchingTasks(ArrayList<Task> tasks, String word) throws IncompleteInputException {
+        ArrayList<Task> keywordList = new ArrayList<>();
+        if (word.contains("find")) {
+            String separator = "find";
+            int sepPos = word.indexOf(separator);
+            String keyword = word.substring(sepPos + separator.length() + 1);
+            for (int i = 0; i < tasks.size(); i++) {
+                if (tasks.get(i).description.contains(keyword)) {
+                    keywordList.add(tasks.get(i));
+                }
+            }
+        } else {
+            throw new IncompleteInputException();
+        }
+        return keywordList;
     }
 }
