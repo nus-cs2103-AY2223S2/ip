@@ -6,12 +6,25 @@ import duke.task.Task;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
+/** Represents a command to view the list of all items in the taskList of Duke. */
 public class ListCommand extends Command {
 
+    /**
+     * Represents a command to view the list of all items in the taskList of Duke.
+     */
     public ListCommand() {
         super();
     }
 
+    /**
+     * Executes the generated ListCommand by generating the list of tasks in Duke as a String and
+     * giving it as a response to the Ui.
+     *
+     * @param taskList taskList of Duke.
+     * @param ui user interface object of Duke.
+     * @param database database of Duke.
+     * @throws DukeException
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Database database) throws DukeException {
         StringBuilder res = new StringBuilder(FRAME);

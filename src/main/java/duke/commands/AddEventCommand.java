@@ -1,6 +1,8 @@
 package duke.commands;
 
 import duke.database.Database;
+import duke.exception.blankfieldexceptions.BlankFieldDeadlineException;
+import duke.exception.includeexceptions.IncludeByException;
 import duke.task.Event;
 import duke.exception.blankfieldexceptions.BlankFieldEventException;
 import duke.exception.includeexceptions.IncludeToAndFromException;
@@ -10,19 +12,37 @@ import duke.ui.Ui;
 
 import java.time.format.DateTimeParseException;
 import java.util.Objects;
-
-public class AddEventCommand extends Command {
+/** Represents a command to add an event task to the TaskList. */
+ public class AddEventCommand extends Command {
 
 
     private final String commandBody;
 
+    /**
+     * Represents a command to add an event task to the TaskList.
+     *
+     * @param commandBody Parameters of the command, pre-parsed.
+     */
     public AddEventCommand(String commandBody) {
         super();
         this.commandBody = commandBody;
     }
 
+
+    /**
+     * Executes the generated AddEventCommand by adding a new Event task into the TaskList and gives a response
+     * to the Ui.
+     *
+     * @param taskList taskList of Duke.
+     * @param ui user interface object of Duke.
+     * @param database database of Duke.
+     * @throws IncludeToAndFromException /to and/or /from was not included in the command.
+     * @throws BlankFieldEventException No task, from date and/or to date was included in the command.
+     * @throws InvalidDateException Date given in the command is invalid.
+     */
     @Override
-    public void execute(TaskList taskList, Ui ui, Database database) throws IncludeToAndFromException, BlankFieldEventException, InvalidDateException {
+    public void execute(TaskList taskList, Ui ui, Database database) throws IncludeToAndFromException,
+            BlankFieldEventException, InvalidDateException {
         // Extract event's start date and end date
         String[] lines = this.commandBody.split(" ");
         // State = 0 if extracting duke.task item

@@ -3,32 +3,50 @@ package duke.task;
 import java.util.ArrayList;
 import java.util.Objects;
 
+/**
+ * Represents a ToDo task in Duke.
+ */
 public class ToDo extends Task {
 
     private static final String typeToString = "T";
 
+    /**
+     * Represents a ToDo task in Duke.
+     * @param task the task details.
+     */
     public ToDo(String task) {
         super(task);
         this.type = Types.TODO;
     }
 
+    /**
+     * Represents a ToDo task in Duke.
+     *
+     * @param data an array of Strings with relevant information typically obtained from the database in Duke.
+     */
     public ToDo(String[] data) {
         super(data[2]);
-        this.completed = Objects.equals(data[1], "X");
+        this.isCompleted = Objects.equals(data[1], "X");
         this.details = data[2];
     }
 
+    /**
+     * Returns the status of the ToDo task.
+     */
     @Override
     public String status() {
-        String status = this.completed ? "[X] " : "[ ] ";
+        String status = this.isCompleted ? "[X] " : "[ ] ";
         return "[" + typeToString + "]" + status + " " + this.details;
     }
 
+    /**
+     * @return Returns all relevant information of the task in an ArrayList of Strings to be saved into the Database.
+     */
     @Override
     public ArrayList<String> data() {
         ArrayList<String> data = new ArrayList<>();
         data.add(typeToString);
-        data.add(this.completed ? "X" : " ");
+        data.add(this.isCompleted ? "X" : " ");
         data.add(this.details);
         return data;
     }
