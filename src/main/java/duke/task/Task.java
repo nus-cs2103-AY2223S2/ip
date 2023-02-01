@@ -38,7 +38,8 @@ public abstract class Task {
         }
     }
 
-     /** Get description of task.
+    /**
+     * Get description of task.
      * @return Description of task.
      */
     public String getDescription() {

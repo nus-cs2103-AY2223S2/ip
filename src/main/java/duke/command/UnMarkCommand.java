@@ -5,6 +5,9 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
+/**
+ * Command to mark tasks as undone.
+ */
 public class UnMarkCommand extends Command {
     private int index;
 

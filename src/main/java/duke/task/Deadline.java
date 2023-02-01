@@ -1,10 +1,10 @@
 package duke.task;
 
-import duke.TaskType;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.TaskType;
 
 /**
  * Tasks that have to be done by a certain deadline.
@@ -27,14 +27,13 @@ public class Deadline extends Task {
     public static Deadline to(String str) {
         String target = " /by ";
         LocalDateTime dateTime;
-        String description, deadline, day, month;
         int index = str.indexOf(target);
-        description = str.substring(0, index);
-        deadline = str.substring(index + 5);
+        String description = str.substring(0, index);
+        String deadline = str.substring(index + 5);
         int firstSlash = deadline.indexOf("/");
         int secondSlash = deadline.indexOf("/", firstSlash + 1);
-        day = firstSlash == 1 ? "d" : "dd";
-        month = secondSlash - firstSlash == 2 ? "M" : "MM";
+        String day = firstSlash == 1 ? "d" : "dd";
+        String month = secondSlash - firstSlash == 2 ? "M" : "MM";
         DateTimeFormatter inFormatter = DateTimeFormatter.ofPattern(day + "/" + month + "/yyyy HHmm");
         try {
             dateTime = LocalDateTime.parse(deadline, inFormatter);

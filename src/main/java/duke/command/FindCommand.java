@@ -4,6 +4,9 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
+/**
+ * Command to find tasks with given keyword.
+ */
 public class FindCommand extends Command {
     private String keyword;
 

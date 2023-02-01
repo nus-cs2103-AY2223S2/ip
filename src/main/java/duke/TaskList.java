@@ -61,7 +61,7 @@ public class TaskList {
         this.index--;
         String sp = this.index == 1 ? "task" : "tasks";
         str += "You now have " + this.index + " " + sp + " in the list.";
-        for (int i = index ; i < 99 ; i++) {
+        for (int i = index; i < 99; i++) {
             this.tasks[i] = this.tasks[i + 1];
         }
         this.tasks[99] = null;
@@ -129,7 +129,7 @@ public class TaskList {
      */
     public String taskListToSavedForm() {
         String str = "";
-        for (int i = 0; i < this.index; i ++) {
+        for (int i = 0; i < this.index; i++) {
             str += tasks[i].taskToSavedForm() + "\n";
         }
         return str;
@@ -145,8 +145,7 @@ public class TaskList {
         for (int i = 0; i < this.index; i++) {
             if (i == this.index - 1) {
                 str += (i + 1) + ". " + this.printTask(i);
-            }
-            else {
+            } else {
                 str += (i + 1) + ". " + this.printTask(i) + "\n";
             }
         }

@@ -1,6 +1,13 @@
 package duke;
 
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
+import duke.command.UnMarkCommand;
 
 /**
  * Makes sense of the user's commands.
@@ -10,21 +17,20 @@ public class Parser {
      * Returns corresponding command objects from user commands given in strings.
      * @param str User command
      * @return Command object corresponding to the user command.
-     * @throws RuntimeException If user commands don't make sense or conform to the various command formats and standards.
+     * @throws RuntimeException If user commands don't make sense.
      */
     public static Command parse(String str) {
         Command command;
-        boolean todoCheck, deadlineCheck, eventCheck, deleteCheck, markCheck, unMarkCheck, listCheck, findCheck, exitCheck, nothingCheck;
-        todoCheck = str.startsWith("todo ");
-        deadlineCheck = str.startsWith("deadline ");
-        eventCheck = str.startsWith("event ");
-        deleteCheck = str.startsWith("delete ");
-        markCheck = str.startsWith("mark ");
-        unMarkCheck = str.startsWith("unmark ");
-        listCheck = str.equals("list");
-        findCheck = str.startsWith("find ");
-        exitCheck = str.equals("bye");
-        nothingCheck = str.equals("");
+        boolean todoCheck = str.startsWith("todo ");
+        boolean deadlineCheck = str.startsWith("deadline ");
+        boolean eventCheck = str.startsWith("event ");
+        boolean deleteCheck = str.startsWith("delete ");
+        boolean markCheck = str.startsWith("mark ");
+        boolean unMarkCheck = str.startsWith("unmark ");
+        boolean listCheck = str.equals("list");
+        boolean findCheck = str.startsWith("find ");
+        boolean exitCheck = str.equals("bye");
+        boolean nothingCheck = str.equals("");
         if (str.equals("todo") || str.equals("deadline") || str.equals("event") || str.equals("delete")
                 || str.equals("mark") || str.equals("unmark") || str.equals("find")) {
             throw new RuntimeException("This command's field cannot be left blank!");
@@ -37,19 +43,20 @@ public class Parser {
                 int index = str.indexOf(target);
                 String description = str.substring(0, index);
                 if (description.equals("")) {
-                    throw new RuntimeException("Unable to create Deadline! Description for deadline cannot be left blank!");
+                    throw new RuntimeException("Unable to create Deadline! "
+                            + "Description for deadline cannot be left blank!");
                 }
                 String deadline = str.substring(index + 5);
                 int dateTimeLength = deadline.length();
                 if (!(dateTimeLength > 12 && dateTimeLength < 16)) {
-                    throw new RuntimeException("Unable to create Deadline! " +
-                            "Check your date and time. They have to be in the format of dd/mm/yyyy hhmm");
+                    throw new RuntimeException("Unable to create Deadline! "
+                            + "Check your date and time. They have to be in the format of dd/mm/yyyy hhmm");
                 }
                 int firstSlash = deadline.indexOf("/");
                 int secondSlash = deadline.indexOf("/", firstSlash + 1);
                 if (firstSlash == -1 || secondSlash == -1) {
-                    throw new RuntimeException("Unable to create Deadline! " +
-                            "Check your date format. Use / to separate day, month and year.");
+                    throw new RuntimeException("Unable to create Deadline! "
+                            + "Check your date format. Use / to separate day, month and year.");
                 }
             } else if (eventCheck) {
                 String target1 = " /from ";
@@ -60,8 +67,8 @@ public class Parser {
                 int index1 = str.indexOf(target1);
                 int index2 = str.indexOf(target2);
                 if (index2 - index1 < 0) {
-                    throw new RuntimeException("Unable to create event! " +
-                            "The /from field has to be before the /to field.");
+                    throw new RuntimeException("Unable to create event! "
+                            + "The /from field has to be before the /to field.");
                 } else if (index2 - index1 < 20) {
                     throw new RuntimeException("Unable to create event! Please enter a valid /from field.");
                 }
@@ -82,24 +89,24 @@ public class Parser {
             command = new AddCommand(str);
         } else if (deleteCheck) {
             try {
-                String deleted_index = str.substring(7);
-                int index = Integer.parseInt(deleted_index) - 1;
+                String deletedIndex = str.substring(7);
+                int index = Integer.parseInt(deletedIndex) - 1;
                 command = new DeleteCommand(index);
             } catch (NumberFormatException e) {
                 throw new RuntimeException("Target was not a number!");
             }
         } else if (markCheck) {
             try {
-                String marked_index = str.substring(5);
-                int index = Integer.parseInt(marked_index) - 1;
+                String markedIndex = str.substring(5);
+                int index = Integer.parseInt(markedIndex) - 1;
                 command = new MarkCommand(index);
             } catch (NumberFormatException e) {
                 throw new RuntimeException("Target was not a number!");
             }
         } else if (unMarkCheck) {
             try {
-                String unmarked_index = str.substring(7);
-                int index = Integer.parseInt(unmarked_index) - 1;
+                String unmarkedIndex = str.substring(7);
+                int index = Integer.parseInt(unmarkedIndex) - 1;
                 command = new UnMarkCommand(index);
             } catch (NumberFormatException e) {
                 throw new RuntimeException("Target was not a number!");
