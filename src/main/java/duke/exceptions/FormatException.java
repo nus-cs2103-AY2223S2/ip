@@ -5,12 +5,12 @@ package duke.exceptions;
  */
 public class FormatException extends DukeException {
     public FormatException(String format) {
-        super("☹ OOPS!!! I'm sorry, I don't understand your format! Try " + format + "!");
+        super("OOPS!!! I'm sorry, I don't understand your format! Try " + format + "!");
     }
 
     public FormatException(String format, String customMsg) {
         super(
-                "☹ OOPS!!! I'm sorry, I don't understand your format! Try "
+                "OOPS!!! I'm sorry, I don't understand your format! Try "
                         + format + "!\n" + customMsg);
     }
 

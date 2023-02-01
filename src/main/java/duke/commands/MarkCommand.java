@@ -27,15 +27,18 @@ public class MarkCommand extends Command {
      * @param storage
      * @throws DukeException
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        String message;
         if (isMarking) {
             tasks.markTask(num);
-            ui.display(String.format(
-                    "Nice! I've marked this task as done:\n %s", tasks.get(num)));
+            message = String.format(
+                    "Nice! I've marked this task as done:\n %s", tasks.get(num));
+            ui.display(message);
         } else {
             tasks.unmarkTask(num);
-            ui.display(String.format(
-                    "Saddd! I've unmarked this task as done:\n %s", tasks.get(num)));
+            message = String.format(
+                    "Saddd! I've unmarked this task as done:\n %s", tasks.get(num));
+            ui.display(message);
         }
 
         try {
@@ -43,5 +46,7 @@ public class MarkCommand extends Command {
         } catch (IOException err) {
             throw new DukeException("IO Exception occurred!");
         }
+
+        return message;
     }
 }

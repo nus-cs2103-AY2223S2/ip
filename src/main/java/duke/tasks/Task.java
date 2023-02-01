@@ -13,8 +13,8 @@ public abstract class Task {
     /**
      * A formatter to dump into storage.
      */
-    protected static final DateTimeFormatter PRINTFORMATTER =
-            DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+    protected static final DateTimeFormatter PRINT_FORMATTER =
+            DateTimeFormatter.ofPattern("dd/MM/yy-HH:mm");
     protected String description;
     protected boolean isDone;
 

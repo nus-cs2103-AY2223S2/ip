@@ -36,8 +36,8 @@ public class Events extends Task {
     }
     @Override
     public String toString() {
-        return "[E]" + super.toString() + String.format(" (from: %s to: %s)", this.start.format(Task.FORMATTER),
-                this.end.format(Task.PRINTFORMATTER));
+        return "[E]" + super.toString() + String.format(" (from: %s to: %s)", this.start.format(Task.PRINT_FORMATTER),
+                this.end.format(Task.PRINT_FORMATTER));
     }
 
     /**

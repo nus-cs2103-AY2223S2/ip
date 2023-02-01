@@ -4,6 +4,6 @@ package duke.exceptions;
  */
 public class UnrecognisableException extends DukeException {
     public UnrecognisableException() {
-        super("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        super("OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 }

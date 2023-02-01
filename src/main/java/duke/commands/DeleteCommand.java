@@ -29,22 +29,22 @@ public class DeleteCommand extends Command {
      * @param storage
      * @throws DukeException
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
 
         if (tasks.size() == 0) {
             throw new StorerEmptyException();
         } else {
 
             Task e = tasks.remove(this.num);
-            String speech = "Noted. I've removed this task:\n"
+            String message = "Noted. I've removed this task:\n"
                     + e + "\n Now you have " + tasks.size() + " tasks in the list.";
-            ui.display(speech);
+            ui.display(message);
             try {
                 storage.dumpFile(tasks);
             } catch (IOException err) {
                 throw new DukeException("IO Exception occurred!");
             }
-
+            return message;
         }
     }
 }

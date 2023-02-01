@@ -16,7 +16,9 @@ public class ListCommand extends Command {
      * @param storage
      * @throws StorerEmptyException
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws StorerEmptyException {
-        ui.display(tasks.getTaskStrings());
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws StorerEmptyException {
+        String message = tasks.getTaskStrings();
+        ui.display(message);
+        return message;
     }
 }

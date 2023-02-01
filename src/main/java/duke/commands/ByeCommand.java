@@ -9,8 +9,10 @@ import duke.storage.TaskList;
  * A command to quit the programme.
  */
 public class ByeCommand extends Command {
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws StorerEmptyException {
-        ui.display("BYE! Hope to see you again soon!");
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws StorerEmptyException {
+        String message = "BYE! Hope to see you again soon!";
+        ui.display(message);
+        return message;
     }
 
     /**

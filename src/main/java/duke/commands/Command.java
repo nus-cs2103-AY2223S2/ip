@@ -1,6 +1,7 @@
 package duke.commands;
 
 import duke.duke.Ui;
+import duke.exceptions.DukeException;
 import duke.storage.Storage;
 import duke.storage.TaskList;
 
@@ -18,7 +19,7 @@ public abstract class Command {
      * @param storage
      * @throws Exception
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws Exception;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
     public boolean isBye() {
         return false;

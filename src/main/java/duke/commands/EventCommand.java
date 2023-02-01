@@ -24,15 +24,17 @@ public class EventCommand extends Command {
      * @param storage
      * @throws DukeException
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.add(this.event);
-        ui.display("Got it. I've added this task:\n" + this.event +
-                String.format("\nNow you have %s tasks in the list.", tasks.size()));
+        String message = "Got it. I've added this task:\n" + this.event
+                + String.format("\nNow you have %s tasks in the list.", tasks.size());
+        ui.display(message);
         try {
             storage.dumpFile(tasks);
         } catch (IOException err) {
             throw new DukeException("IO Exception occurred!");
         }
+        return message;
 
     }
 }
