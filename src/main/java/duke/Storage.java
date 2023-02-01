@@ -76,7 +76,6 @@ public class Storage {
                 }
                 sb.append(t.toSaveFormat());
             }
-
             FileWriter fw = new FileWriter(storageFile);
             fw.write(sb.toString());
             fw.close();

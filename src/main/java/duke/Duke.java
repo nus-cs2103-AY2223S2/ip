@@ -68,7 +68,11 @@ public class Duke {
                     }
                     memory.saveState(taskList);
                 } else if (currentInput.matches("^delete \\d+")) {
-                    ui.reply(taskList.deleteTask(currentInput));
+                    int index = Integer.parseInt(currentInput.substring(7)) - 1;
+                    if (index < 0 || index >= taskList.size()) {
+                        throw new DukeException("Error: Please input a valid task index!");
+                    }
+                    ui.reply(taskList.deleteTask(index));
                     memory.saveState(taskList);
                 } else {
                     ui.reply("Unknown command, please try again");

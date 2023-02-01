@@ -48,18 +48,13 @@ public class TaskList {
         this.tasks.add(t);
     }
 
-    public String deleteTask(String command) throws DukeException {
-        int index = Integer.parseInt(command.substring(7)) - 1;
-        if (index < 0 || index >= tasks.size()) {
-            throw new DukeException("Error: Please input a valid task index!");
-        } else {
-            StringBuilder response = new StringBuilder();
-            response.append("Noted. I've removed this task:\n");
-            response.append("  ").append(this.getTaskString(index)).append("\n");
-            tasks.remove(index);
-            response.append("Now you have ").append(this.size()).append(" tasks in the list.");
-            return response.toString();
-        }
+    public String deleteTask(int index) throws DukeException {
+        StringBuilder response = new StringBuilder();
+        response.append("Noted. I've removed this task:\n");
+        response.append("  ").append(this.getTaskString(index)).append("\n");
+        tasks.remove(index);
+        response.append("Now you have ").append(this.size()).append(" tasks in the list.");
+        return response.toString();
     }
 
     public String mark(int index) throws DukeException {
