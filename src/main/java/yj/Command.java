@@ -1,3 +1,5 @@
+package yj;
+
 public enum Command {
     BYE,
     LIST,

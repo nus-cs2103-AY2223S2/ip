@@ -1,3 +1,5 @@
+package yj;
+
 public class Ui {
     public void print(String message) {
         System.out.println(message);
