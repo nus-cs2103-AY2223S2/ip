@@ -12,13 +12,27 @@ import task.Event;
 import task.Deadline;
 import task.Todo;
 
+/**
+ * Class that reads from file at the start and updates file when changes are made.
+ */
 public class Storage {
-    private String filePath;
+    private final String filePath;
 
+    /**
+     * Constructs Storage.
+     *
+     * @param filePath Path of where file should be located.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Creates a file is file does not exist. Otherwise, read from file to restore list of tasks.
+     *
+     * @return List of tasks that is read from file.
+     * @throws DukeException Throws exception when there is error reading from file.
+     */
     public ArrayList<Task> load() throws DukeException {
         try {
             File f = new File(filePath);
@@ -45,10 +59,17 @@ public class Storage {
             throw new DukeException("Cannot open file");
         }
     }
-    public void writeFile(TaskList t) throws DukeException {
+
+    /**
+     * Update file whenever changes are made to list of tasks.
+     *
+     * @param taskList TaskList class that will write to file.
+     * @throws DukeException Throws exception when there is error writing from file.
+     */
+    public void writeFile(TaskList taskList) throws DukeException {
         try {
             FileWriter fw = new FileWriter(filePath);
-            t.writeToFile(fw);
+            taskList.writeToFile(fw);
             fw.close();
         } catch (IOException e) {
             throw new DukeException("Cannot write to file");

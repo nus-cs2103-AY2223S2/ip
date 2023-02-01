@@ -1,6 +1,10 @@
 package main;
 
 import command.Command;
+
+/**
+ * Runs the application.
+ */
 public class Duke {
 
     private Storage storage;
@@ -8,6 +12,9 @@ public class Duke {
     private Ui ui;
 
 
+    /**
+     * Constructs Duke task manager.
+     */
     private Duke(String filePath) {
         try {
             ui = new Ui();
@@ -18,6 +25,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Takes in user input and runs task manager until exit is called.
+     */
     private void run() {
         Ui.greet();
         boolean isExit = false;

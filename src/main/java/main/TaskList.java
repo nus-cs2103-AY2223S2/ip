@@ -4,54 +4,94 @@ import task.Task;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * Class that stores the list of all tasks.
+ */
 public class TaskList {
 
-    private ArrayList<Task> arrOfTask;
+    private final ArrayList<Task> arrOfTask;
 
+    /**
+     * Constructs TaskList
+     *
+     * @param arrOfTask Task already in the list.
+     */
     public TaskList(ArrayList<Task> arrOfTask) {
         this.arrOfTask = arrOfTask;
     }
 
-    public void getTaskForToday() {
-        for (Task t: arrOfTask) {
-            if (t.getDate().equals(LocalDate.now())) {
-                System.out.println(t);
-            }
-        }
-    }
-
+    /**
+     * Returns total number of tasks.
+     *
+     * @return Total number of tasks.
+     */
     public int getTotalNumberOfTask() {
         return arrOfTask.size();
     }
+
+    /**
+     * Adds a new task to the list.
+     *
+     * @param t New task to be added.
+     */
     public void addTask(Task t) {
         arrOfTask.add(t);
     }
 
+    /**
+     * Sets task to be done by index.
+     *
+     * @param index Index of task to be set as done.
+     * @return Task that is set as done.
+     */
     public Task taskDone(int index) {
         Task t = arrOfTask.get(index);
         t.taskDone();
         return t;
     }
 
+    /**
+     * Sets task to be not done by index.
+     *
+     * @param index Index of task to be set as not done.
+     * @return Task that is set as not done.
+     */
     public Task taskNotDone(int index) {
         Task t = arrOfTask.get(index);
         t.taskNotDone();
         return t;
     }
 
+    /**
+     * Deletes task by index.
+     *
+     * @param index Index of task to be deleted.
+     * @return Task that is deleted.
+     */
     public Task deleteTask(int index) {
         Task t = arrOfTask.get(index);
         arrOfTask.remove(index);
         return t;
     }
 
+    /**
+     * Returns task by index.
+     *
+     * @param index Index of task to be returned.
+     * @return Task at index.
+     */
     public Task getTaskAtIndex(int index) {
         return arrOfTask.get(index);
     }
 
+    /**
+     * Writes details of all task to file.
+     *
+     * @param fw Used when writing to class.
+     * @throws IOException Throws Exception when there is error writing to the file.
+     */
     public void writeToFile(FileWriter fw) throws IOException {
         for (Task t : arrOfTask) {
             fw.write(t.toText() + "\n");

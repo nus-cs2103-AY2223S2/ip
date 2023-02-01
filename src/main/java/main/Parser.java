@@ -5,8 +5,18 @@ import command.*;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 
+/**
+ * Class that makes sense of user input.
+ */
 public class Parser {
 
+    /**
+     * Extracts the message of input and calls the corresponding commands from input.
+     *
+     * @param command Message that user input.
+     * @return Corresponding command.
+     * @throws DukeException Throws exception when user input invalid command.
+     */
     public static Command parse(String command) throws DukeException {
         try {
             if (command.equals("bye")) {
@@ -14,24 +24,24 @@ public class Parser {
             } else if (command.equals("list")) {
                 return new ListCommand();
             } else if (command.startsWith("mark")) {
-                return new MarkCommand(Integer.parseInt(command.substring(5)));
+                return new MarkDoneCommand(Integer.parseInt(command.substring(5)));
             } else if (command.startsWith("unmark")) {
-                return new UnmarkCommand(Integer.parseInt(command.substring(7)));
+                return new MarkNotDoneCommand(Integer.parseInt(command.substring(7)));
             } else if (command.startsWith("delete")) {
-                return new DeleteCommand(Integer.parseInt(command.substring(7)));
+                return new DeleteTaskCommand(Integer.parseInt(command.substring(7)));
             } else if (command.startsWith("todo")) {
-                return new TodoCommand(command.substring(5));
+                return new AddTodoCommand(command.substring(5));
             } else if (command.startsWith("deadline")) {
                 String[] str1 = command.substring(9).split("/");
                 try {
-                    return new DeadlineCommand(str1[0], LocalDate.parse(str1[1].substring(3, 13)));
+                    return new AddDeadlineCommand(str1[0], LocalDate.parse(str1[1].substring(3, 13)));
                 } catch (DateTimeException e) {
                     throw new DukeException("Please enter a valid date in the form YYYY-MM-DD");
                 }
             } else if (command.startsWith("event")) {
                 String[] str2 = command.substring(6).split("/");
                 try {
-                    return new EventCommand(str2[0], LocalDate.parse(str2[1].substring(5, 15)), LocalDate.parse(str2[2].substring(3, 13)));
+                    return new AddEventCommand(str2[0], LocalDate.parse(str2[1].substring(5, 15)), LocalDate.parse(str2[2].substring(3, 13)));
                 } catch (DateTimeException e) {
                     throw new DukeException("Please enter a valid date in the form YYYY-MM-DD");
                 }

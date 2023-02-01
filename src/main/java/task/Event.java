@@ -3,24 +3,41 @@ package task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Event class that inherits from Task.
+ */
 public class Event extends Task {
-    private LocalDate startDate;
-    private LocalDate endDate;
+    private final LocalDate startDate;
+    private final LocalDate endDate;
     private static final DateTimeFormatter formatOfDate = DateTimeFormatter.ofPattern("MMM-dd-yyyy");
 
+    /**
+     * Construct Event.
+     *
+     * @param name Description of the task.
+     * @param startDate Date that the event starts.
+     * @param endDate Date that the event ends.
+     */
     public Event(String name, LocalDate startDate, LocalDate endDate) {
         super(name);
         this.startDate = startDate;
         this.endDate = endDate;
     }
 
+    /**
+     * Returns the details of the event task to be written in file.
+     *
+     * @return Details of event task.
+     */
     public String toText() {
         return "E" + "|" + getNameOfTask() + "|" + (isDone() ? 1 : 0) + "|" + startDate + "|" + endDate;
     }
 
-    public LocalDate getDate() {
-        return startDate;
-    }
+    /**
+     * Returns the details of the event task to be output to user.
+     *
+     * @return Details of event task.
+     */
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (from: "

@@ -5,15 +5,30 @@ import main.DukeException;
 import main.Ui;
 import task.Task;
 
-public class DeleteCommand extends Command{
+/**
+ * Deletes a task.
+ */
+public class DeleteTaskCommand extends Command{
 
-    int index;
+    private final int index;
 
-    public DeleteCommand(int index) {
+    /**
+     * Constructs a DeleteTaskCommand.
+     *
+     * @param index Index of task to be deleted.
+     */
+    public DeleteTaskCommand(int index) {
 
         this.index = index - 1;
     }
 
+    /** Deletes a task by index, outputs message to user and updates the file.
+     *
+     * @param taskList List of task.
+     * @param ui Ui.
+     * @param storage Storage.
+     * @throws DukeException Throws exception if user input is invalid.
+     */
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         if (index > taskList.getTotalNumberOfTask()) {
             throw new DukeException("Index too large");
