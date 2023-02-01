@@ -37,9 +37,7 @@ public class Ui {
      */
     public void printBlock(String string) {
         System.out.println("\t---");
-        System.out.println("\t" +
-                string.replace("\n", "\n\t")
-                        .replaceAll("\\t$", ""));
+        System.out.println("\t" + string.replace("\n", "\n\t").replaceAll("\\t$", ""));
         System.out.println("\t---");
     }
 
