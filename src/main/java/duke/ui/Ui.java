@@ -12,14 +12,14 @@ public class Ui {
 
     /**
      * Prints a line 4 spaces away from the left edge of the screen to visually
-     * separate duke.Duke's replies from user input.
+     * separate Duke's replies from user input.
      */
     public void printLine() {
         System.out.printf("%64s%n", "    ____________________________________________________________");
     }
 
     /**
-     * Prints duke.Duke's greeting message (bounded by lines above and below).
+     * Prints Duke's greeting message (bounded by lines above and below).
      */
     public void greet() {
         String logo = " ____        _        \n"
@@ -29,7 +29,7 @@ public class Ui {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         printLine();
-        System.out.printf("     %s%n", "Hello! I'm duke.Duke");
+        System.out.printf("     %s%n", "Hello! I'm Duke");
         System.out.printf("     %s%n", "What can I do for you?");
         printLine();
     }
@@ -41,55 +41,55 @@ public class Ui {
     }
 
     /**
-     * Mark duke.task (selected by position in list).
+     * Mark task (selected by position in list).
      *
      * @param tasks List of current tasks.
-     * @param parser Parser object to get duke.task number.
+     * @param parser Parser object to get task number.
      */
     public void markTask(TaskList tasks, Parser parser) throws DukeException {
         int taskNumber;
         try {
             taskNumber = parser.getTaskNumber();
             tasks.getTask(taskNumber - 1).markAsDone();
-            System.out.printf("     %s%n", "Nice! I've marked this duke.task as done:");
+            System.out.printf("     %s%n", "Nice! I've marked this task as done:");
             System.out.printf("       %s%n", tasks.getTask(taskNumber - 1).toString());
         } catch (NumberFormatException|IndexOutOfBoundsException e) {
-            System.out.printf("     %s%n", "Please input valid duke.task number.");
+            System.out.printf("     %s%n", "Please input valid task number.");
         }
     }
 
     /**
-     * Unmark duke.task (selected by position in list).
+     * Unmark task (selected by position in list).
      *
      * @param tasks List of current tasks.
-     * @param parser Parser object to get duke.task number.
+     * @param parser Parser object to get task number.
      */
     public void unmarkTask(TaskList tasks, Parser parser) throws DukeException {
         int taskNumber;
         try {
             taskNumber = parser.getTaskNumber();
             tasks.getTask(taskNumber - 1).markAsNotDone();
-            System.out.printf("     %s%n", "OK, I've marked this duke.task as not done yet:");
+            System.out.printf("     %s%n", "OK, I've marked this task as not done yet:");
             System.out.printf("       %s%n", tasks.getTask(taskNumber - 1).toString());
         } catch (NumberFormatException|IndexOutOfBoundsException e) {
-            throw new DukeException("Input a valid duke.task number.");
+            throw new DukeException("Input a valid task number.");
         }
     }
 
     /**
-     * Prints confirmation of added duke.task and number of tasks currently in list.
+     * Prints confirmation of added task and number of tasks currently in list.
      *
      * @param tasks List of current tasks.
      * @param t Task to confirm addition of.
      */
     private void confirmAddition(TaskList tasks, Task t) {
-        System.out.printf("     %s%n", "Got it. I've added this duke.task:");
+        System.out.printf("     %s%n", "Got it. I've added this task:");
         System.out.printf("       %s%n", t.toString());
         System.out.printf("     %s%d%s%n", "Now you have ", tasks.getSize(), " tasks in the list.");
     }
 
     /**
-     * Add ToDo duke.task to list.
+     * Add ToDo task to list.
      *
      * @param tasks List of current tasks.
      * @param parser Parser object to get ToDo details from input.
@@ -109,7 +109,7 @@ public class Ui {
     }
 
     /**
-     * Add Deadline duke.task to list.
+     * Add Deadline task to list.
      *
      * @param tasks List of current tasks.
      * @param parser Parser object to get Deadline details from input.
@@ -122,7 +122,7 @@ public class Ui {
     }
 
     /**
-     * Add Event duke.task to list.
+     * Add Event task to list.
      *
      * @param tasks List of current tasks.
      * @param parser Parser object to get Event details from input.
@@ -135,10 +135,10 @@ public class Ui {
     }
 
     /**
-     * Delete duke.task from list.
+     * Delete task from list.
      *
      * @param tasks List of current tasks.
-     * @param parser Parser object to get duke.task number.
+     * @param parser Parser object to get task number.
      * @throws DukeException
      */
     public void deleteTask(TaskList tasks, Parser parser) throws DukeException {
@@ -146,11 +146,11 @@ public class Ui {
         try {
             taskNumber = parser.getTaskNumber();
             Task t = tasks.removeTask(taskNumber - 1);
-            System.out.printf("     %s%n", "Noted. I've removed this duke.task:");
+            System.out.printf("     %s%n", "Noted. I've removed this task:");
             System.out.printf("       %s%n", t.toString());
             System.out.printf("     %s%d%s%n", "Now you have ", tasks.getSize(), " tasks in the list.");
         } catch (NumberFormatException|IndexOutOfBoundsException e) {
-            throw new DukeException("Input a valid duke.task number.");
+            throw new DukeException("Input a valid task number.");
         }
     }
 
@@ -171,6 +171,6 @@ public class Ui {
 
     public void showLoadingError() {
         System.out.println("Unable to load saved data.");
-        System.out.println("Creating empty duke.task list...");
+        System.out.println("Creating empty task list...");
     }
 }

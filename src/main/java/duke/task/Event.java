@@ -9,25 +9,26 @@ import java.time.format.DateTimeFormatter;
  * date/time.
  */
 public class Event extends Task {
+
     protected LocalDateTime from;
     protected LocalDateTime to;
-    private static final DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-    private static final DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
+    private static final DateTimeFormatter INPUT_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    private static final DateTimeFormatter OUTPUT_FORMATTER = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
 
 
     public Event(String description, String from, String to) {
         super(description);
-        this.from = LocalDateTime.parse(from, inputFormatter);
-        this.to = LocalDateTime.parse(to, inputFormatter);
+        this.from = LocalDateTime.parse(from, INPUT_FORMATTER);
+        this.to = LocalDateTime.parse(to, INPUT_FORMATTER);
     }
 
     // to write to file or other internal use
     public String getFrom() {
-        return this.from.format(inputFormatter);
+        return this.from.format(INPUT_FORMATTER);
     }
 
     public String getTo() {
-        return this.to.format(inputFormatter);
+        return this.to.format(INPUT_FORMATTER);
     }
 
     @Override
@@ -38,6 +39,6 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + "[" + super.getStatusIcon() + "] " + super.toString() +
-                " (from: " + from.format(outputFormatter) + " to: " + to.format(outputFormatter) + ")";
+                " (from: " + from.format(OUTPUT_FORMATTER) + " to: " + to.format(OUTPUT_FORMATTER) + ")";
     }
 }

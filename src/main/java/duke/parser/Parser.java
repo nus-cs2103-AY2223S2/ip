@@ -1,6 +1,7 @@
 package duke.parser;
 
 public class Parser {
+
     private String input;
     private String[] splitInput;
     private String command;
