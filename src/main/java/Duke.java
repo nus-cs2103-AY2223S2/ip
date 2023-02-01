@@ -1,5 +1,8 @@
 import java.util.Scanner;
-import java.util.ArrayList;;
+import java.util.ArrayList;
+import java.io.File;
+import java.io.FileNotFoundException;
+
 
 
 public class Duke {
@@ -8,8 +11,7 @@ public class Duke {
         TODO, DEADLINE, EVENT
     }
 
-    private static final ArrayList<Task> taskList = new ArrayList<>();
-    private static int taskCount = 0;
+    private static ArrayList<Task> taskList = new ArrayList<>();
     private static boolean startDuke = true;
 
     public static void main(String[] args) {
@@ -22,10 +24,26 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
         
+        loadFile();
+
         while (startDuke) {
            initDuke(sc);
         }
-        
+    }
+
+    public static void loadFile() {
+        try {
+            taskList = DukeFile.loadFile();
+            for (Task t : taskList) {
+                System.out.println(t);
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println(e);
+        }
+    }
+
+    public static void saveFile(ArrayList<Task> taskList) {
+        DukeFile.saveData(taskList);
     }
 
     public static void initDuke(Scanner sc) {
@@ -40,12 +58,12 @@ public class Duke {
                     break;
 
                 case "list":
-                    if (taskCount == 0) {
+                    if (Task.taskCount == 0) {
                         System.out.println("You have no tasks");
                     }
                     else {
                         System.out.println("Here are the tasks in your list");
-                        for (int i = 0; i < taskCount; i++) {
+                        for (int i = 0; i < Task.taskCount; i++) {
                             System.out.printf("%d. %s \n", i + 1, taskList.get(i));
                         }
                     }
@@ -103,8 +121,9 @@ public class Duke {
         switch (type) {
             case TODO:
                 Task newToDo = new Todo(userInput);
-                taskCount++;
                 taskList.add(newToDo);
+                saveFile(taskList);
+                Task.incrementTaskCount();
                 System.out.println("Got it. I've added this task:");
                 System.out.println(newToDo);
                 break;
@@ -116,8 +135,9 @@ public class Duke {
                 }
                 else {
                     Task newDeadLineTask = new Deadline(deadlineFormatter[0], deadlineFormatter[1]);
-                    taskCount++;
                     taskList.add(newDeadLineTask);
+                    saveFile(taskList);
+                    Task.incrementTaskCount();
                     System.out.println("Got it. I've added this task:");
                     System.out.println(newDeadLineTask);
                 }
@@ -130,21 +150,23 @@ public class Duke {
                 }
                 else {
                     Task newEventTask = new Event(eventFormatter[0], eventFormatter[1], eventFormatter[2]);
-                    taskCount++;
                     taskList.add(newEventTask);
+                    saveFile(taskList);
+                    Task.incrementTaskCount();
                     System.out.println("Got it. I've added this task:");
                     System.out.println(newEventTask);
                 }
                 break;
         }
-        System.out.printf("Now you have %d tasks in the list.\n", taskCount);
+        System.out.printf("Now you have %d tasks in the list.\n", Task.taskCount);
     }
 
     public static void markTask(int taskID) {
-        if (taskCount > taskID && taskCount > 0) {
+        if (Task.taskCount > taskID && Task.taskCount > 0) {
             System.out.println("Nice! I've marked this task as done:");
             Task currentTask = taskList.get(taskID);
             currentTask.mark();
+            saveFile(taskList);
             System.out.println(currentTask);
         } else {
             System.out.println("Invalid taskID entered!");
@@ -152,10 +174,11 @@ public class Duke {
     }
 
     public static void unmarkTask(int taskID) {
-        if (taskCount > taskID && taskCount > 0) {
+        if (Task.taskCount > taskID && Task.taskCount > 0) {
             System.out.println("OK, I've marked this task as not done yet:");
             Task currentTask = taskList.get(taskID);
             currentTask.unmark();
+            saveFile(taskList);
             System.out.println(currentTask);
         } else {
             System.out.println("Invalid taskID entered!");
@@ -163,13 +186,14 @@ public class Duke {
     }
 
     public static void deleteTask(int taskID) {
-        if (taskCount > taskID && taskCount > 0) {
+        if (Task.taskCount > taskID && Task.taskCount > 0) {
             System.out.println("Noted. I've removed this task:");
             Task currentTask = taskList.get(taskID);
             taskList.remove(taskID);
-            taskCount--;
+            Task.decrementTaskCount();
+            saveFile(taskList);
             System.out.println(currentTask);
-            System.out.printf("Now you have %d tasks in the list.\n", taskCount);
+            System.out.printf("Now you have %d tasks in the list.\n", Task.taskCount);
         } else {
             System.out.println("Invalid taskID entered!");
         }      
