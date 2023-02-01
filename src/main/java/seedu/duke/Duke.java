@@ -13,6 +13,7 @@ import seedu.duke.task.Task;
 public class Duke {
 
     private static boolean isFind = false;
+    private static boolean isDisplayList = false;
     private static TaskList tempTasks;
     private static TaskList tasks;
 
@@ -72,11 +73,16 @@ public class Duke {
                 storage.write(tasks);
                 break;
             case mark:
+                if (!isDisplayList) {
+                    isDisplayList = true;
+                    ui.noListError(tasks);
+                }
+                int userIndex = Integer.parseInt(userParse.inputArr[1]) - 1;
                 if (isFind) {
                     TaskList marked = tempTasks.mark(userParse);
                     dukeText += ui.markDisplay(marked, userParse);
                     for (int i = 0; i < tasks.tasksCounter; i++) {
-                        if (marked.tasksList.get(Integer.parseInt(userParse.inputArr[1]) - 1)
+                        if (marked.tasksList.get(userIndex)
                                 == tasks.tasksList.get(i)) {
                             tasks.tasksList.get(i).mark();
                             System.out.println("test");
@@ -88,11 +94,16 @@ public class Duke {
                 storage.write(tasks);
                 break;
             case unmark:
+                if (!isDisplayList) {
+                    isDisplayList = true;
+                    ui.noListError(tasks);
+                }
+                userIndex = Integer.parseInt(userParse.inputArr[1]) - 1;
                 if (isFind) {
                     TaskList unmarked = tempTasks.unmark(userParse);
                     dukeText += ui.unmarkDisplay(unmarked, userParse);
                     for (int i = 0; i < tasks.tasksCounter; i++) {
-                        if (unmarked.tasksList.get(Integer.parseInt(userParse.inputArr[1]) - 1)
+                        if (unmarked.tasksList.get(userIndex)
                                 == tasks.tasksList.get(i)) {
                             tasks.tasksList.get(i).unmark();
                         }
@@ -103,6 +114,7 @@ public class Duke {
                 storage.write(tasks);
                 break;
             case list:
+                isDisplayList = true;
                 if (isFind) {
                     dukeText += "Here are the list of found tasks:\n";
                     dukeText += ui.list(tempTasks);
@@ -142,6 +154,10 @@ public class Duke {
                 storage.write(tasks);
                 break;
             case delete:
+                if (!isDisplayList) {
+                    isDisplayList = true;
+                    ui.noListError(tasks);
+                }
                 if (isFind) {
                     Task deleted = tempTasks.delete(userParse);
                     dukeText += ui.deleteMessage(tempTasks, deleted);
@@ -157,6 +173,7 @@ public class Duke {
                 storage.write(tasks);
                 break;
             case find:
+                isDisplayList = true;
                 isFind = true;
                 tempTasks = tasks.find(userParse);
                 dukeText += ui.findMessage(tempTasks);

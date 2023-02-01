@@ -165,4 +165,17 @@ public class Ui {
         }
         return uiText;
     }
+
+    /**
+     * Throws a DukeException when there is no list or find command used yet.
+     *
+     * @param tasks The list of tasks.
+     * @throws DukeException if there is no list or find command used.
+     */
+    public void noListError(TaskList tasks) throws DukeException {
+        String message = "You have not used the list or find command yet!\n Here is the list of tasks:\n";
+        message += list(tasks);
+        message += "Enter your command again. :)\n";
+        throw new DukeException(message);
+    }
 }

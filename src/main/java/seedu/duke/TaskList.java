@@ -57,9 +57,15 @@ public class TaskList {
      * @param userParse The input from the user.
      * @return The TaskList with the specified marked task.
      */
-    public TaskList mark(Parser userParse) {
-        tasksList.get(Integer.parseInt(userParse.inputArr[1]) - 1).mark();
-        return this;
+    public TaskList mark(Parser userParse) throws DukeException {
+        int userIndex = Integer.parseInt(userParse.inputArr[1]) - 1;
+        if (userIndex >= tasksCounter) {
+            String message = "There is no such index.\n Please try again with the correct indexing.\n";
+            throw new DukeException(message);
+        } else {
+            tasksList.get(Integer.parseInt(userParse.inputArr[1]) - 1).mark();
+            return this;
+        }
     }
 
     /**
@@ -68,9 +74,15 @@ public class TaskList {
      * @param userParse The input from the user.
      * @return The TaskList with the specified unmarked task.
      */
-    public TaskList unmark(Parser userParse) {
-        tasksList.get(Integer.parseInt(userParse.inputArr[1]) - 1).unmark();
-        return this;
+    public TaskList unmark(Parser userParse) throws DukeException {
+        int userIndex = Integer.parseInt(userParse.inputArr[1]) - 1;
+        if (userIndex >= tasksCounter) {
+            String message = "There is no such index.\n Please try again with the correct indexing.\n";
+            throw new DukeException(message);
+        } else {
+            tasksList.get(Integer.parseInt(userParse.inputArr[1]) - 1).unmark();
+            return this;
+        }
     }
 
     /**
@@ -181,11 +193,17 @@ public class TaskList {
      * @param userParse The input from the user.
      * @return The Task deleted.
      */
-    public Task delete(Parser userParse) {
-        String[] inputArr = userParse.inputArr;
-        Task deleted = tasksList.remove(Integer.parseInt(inputArr[1]) - 1);
-        tasksCounter--;
-        return deleted;
+    public Task delete(Parser userParse) throws DukeException {
+        int userIndex = Integer.parseInt(userParse.inputArr[1]) - 1;
+        if (userIndex >= tasksCounter) {
+            String message = "There is no such index.\n Please try again with the correct indexing.\n";
+            throw new DukeException(message);
+        } else {
+            String[] inputArr = userParse.inputArr;
+            Task deleted = tasksList.remove(Integer.parseInt(inputArr[1]) - 1);
+            tasksCounter--;
+            return deleted;
+        }
     }
 
     /**
