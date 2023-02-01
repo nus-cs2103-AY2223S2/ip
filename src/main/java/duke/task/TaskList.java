@@ -15,6 +15,14 @@ public class TaskList {
         System.out.println("    Now you have " + this.taskList.size() + " tasks in the list");
     }
 
+    /**
+     * Takes in the selection made by the user as "taskNumber" and
+     * <p>
+     * removes that task from the list.
+     * <p>
+     * Argument must be the task number and not index of the task in the list.
+     * @param taskNumber
+     */
     public void remove(int taskNumber) {
         try {
             int taskIndex = taskNumber - 1;
@@ -28,6 +36,14 @@ public class TaskList {
         }
     }
 
+    /**
+     * Takes in the selection made by the user as "taskNumber" and
+     * <p>
+     * marks that task from the list with an "X".
+     * <p>
+     * Argument must be the task number and not index of the task in the list.
+     * @param taskNumber
+     */
     public void mark(int taskNumber) {
         int taskIndex = taskNumber - 1;
         this.taskList.get(taskIndex).mark();
@@ -35,6 +51,12 @@ public class TaskList {
         System.out.println("     " + this.taskList.get(taskIndex).toString());
     }
 
+    /**
+     * Takes in the selection made by the user as "taskNumber" and
+     * <p>
+     * marks that task from the list with an " ".
+     * @param taskNumber number label and not the index of the task in the list
+     */
     public void unmark(int taskNumber) {
         int taskIndex = taskNumber - 1;
         this.taskList.get(taskIndex).unmark();
@@ -42,6 +64,9 @@ public class TaskList {
         System.out.println("     " + this.taskList.get(taskIndex).toString());
     }
 
+    /**
+     * Iterates through the list and prints every task description with a number label next to it.
+     */
     public void list() {
         for (int i = 0; i < this.taskList.size(); i++) {
             int numbering = i + 1;
@@ -49,10 +74,18 @@ public class TaskList {
         }
     }
 
+    /**
+     * Returns the Task using the index specified
+     * @param taskIndex index of the task in the list
+     */
     public Task getTask(int taskIndex) {
         return this.taskList.get(taskIndex);
     }
 
+    /**
+     * Returns the list of task as an ArrayList
+     * @return ArrayList of Task
+     */
     public ArrayList<Task> getList() {
         return this.taskList;
     }

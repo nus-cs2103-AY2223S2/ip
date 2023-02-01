@@ -17,6 +17,11 @@ public class Duke {
         this.parser =  new Parser(this.fileManager, this.taskList);
     }
 
+    /**
+     * Returns void.
+     * <p>
+     * Runs the Pandora bot
+     */
     public void run() {
         String greetings = "Heyyo, Pandora at your service \n"
                 + "What can I do for you?";
