@@ -8,7 +8,7 @@ public class UiText {
     /**
      * Prints a greeting.
      */
-    public String getGreeting() {
+    public static String getGreeting() {
         return "Hello, I am Duke.\n"
                 + "What can I do for you?";
     }
@@ -16,7 +16,7 @@ public class UiText {
     /**
      * Prints a goodbye.
      */
-    public String sayGoodbye() {
+    public static String sayGoodbye() {
         return "Goodbye. I hope to see you again.";
     }
 }
