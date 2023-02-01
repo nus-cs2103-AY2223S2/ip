@@ -12,7 +12,7 @@ public class DateHandler {
     private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
 
     /**
-     *
+     * Parses a user entered string into a date.
      * @param input The time frame entered by the user.
      * @return A String representing the date if a date was entered;
      *         the original input otherwise.

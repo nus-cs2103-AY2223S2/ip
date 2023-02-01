@@ -18,8 +18,7 @@ public class Duke {
     private final Parser parser;
 
     /**
-     * Constructor for the Duke object.
-     * Initialises all required components and loads the save file in.
+     * Initialises the Duke object by initialising all required components and loading the save file in.
      */
     public Duke() {
         ui = new Ui();
