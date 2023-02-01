@@ -77,8 +77,13 @@ public abstract class Task {
      *
      * @return Boolean if Task contains keyword
      */
-    public boolean contains(String keyword) {
-        return this.description.toLowerCase().contains(keyword.toLowerCase());
+    public boolean contains(String[] keywords) {
+        for (String keyword : keywords) {
+            if (this.description.toLowerCase().contains(keyword.toLowerCase())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
