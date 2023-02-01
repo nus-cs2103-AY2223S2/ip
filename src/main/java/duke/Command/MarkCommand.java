@@ -18,7 +18,7 @@ public class MarkCommand extends Command{
     public String execute(TaskList tasks, Storage storage, Ui ui) throws DukeException {
         try {
             Task task = tasks.markTask(this.index);
-            ui.showDeleted(task);
+            ui.showMarked(task);
             return task.toString();
         } catch (IndexOutOfBoundsException exception) {
             throw new TaskIndexException(1 + tasks.size());

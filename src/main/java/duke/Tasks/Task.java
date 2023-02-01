@@ -1,5 +1,9 @@
 package duke.Tasks;
 
+import duke.Command.AddDeadlineCommand;
+import duke.Command.AddTodoCommand;
+import duke.Command.AddEventCommand;
+import duke.Command.Command;
 import duke.Command.Commands;
 import duke.Exceptions.CommandException;
 import duke.Exceptions.DescriptionException;
@@ -41,27 +45,30 @@ public abstract class Task {
         return this.getStatusIcon() + " | " + this.description;
     }
 
-    public static Task commandToTask(String strTask) throws CommandException, StringIndexOutOfBoundsException, DescriptionException {
+    public static Command taskToCommand(String strTask) throws CommandException {
         if (strTask.startsWith(Commands.deadline.label)) {
             Pattern pattern = Pattern.compile("deadline (.+) /by (.+)");
             Matcher matcher = pattern.matcher(strTask);
             if (matcher.find()) {
-                return new Deadline(matcher.group(1), matcher.group(2));
+                return new AddDeadlineCommand(matcher.group(1), matcher.group(2));
             }
         } else if (strTask.startsWith(Commands.todo.label)) {
-            return new ToDo(strTask.substring(5));
-
+            Pattern pattern = Pattern.compile("todo (.+)");
+            Matcher matcher = pattern.matcher(strTask);
+            if (matcher.find()) {
+                return new AddTodoCommand(matcher.group(1));
+            }
         } else if (strTask.startsWith(Commands.event.label)) {
             Pattern pattern = Pattern.compile("event (.+) /from (.+) /to (.+)");
             Matcher matcher = pattern.matcher(strTask);
             if (matcher.find()) {
-                return new Event(matcher.group(1), matcher.group(2), matcher.group(3));
+                return new AddEventCommand(matcher.group(1), matcher.group(2), matcher.group(3));
             }
         }
         throw new CommandException();
     }
 
-    public static Task strToTask(String strTask) throws CommandException, DescriptionException {
+    public static Task strToTask(String strTask) throws CommandException {
         Task result;
         String[] separatedStr = strTask.split(" \\| ");
         if (strTask.startsWith("T")) {

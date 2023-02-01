@@ -3,8 +3,16 @@ package duke;
 import duke.Tasks.Task;
 import duke.Tasks.TaskList;
 
+import java.util.Scanner;
+
 public class Ui {
+    private final Scanner scanner;
     public Ui() {
+        this.scanner = new Scanner(System.in);
+    }
+
+    public String readCommand() {
+        return this.scanner.nextLine();
     }
 
     public void showWelcome() {
@@ -52,5 +60,9 @@ public class Ui {
 
     public void goodbye() {
         System.out.println("Bye. Hope to see you again soon!");
+    }
+
+    public void listAll(TaskList tasks) {
+        System.out.println(tasks.toFormattedString());
     }
 }

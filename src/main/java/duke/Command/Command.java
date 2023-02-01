@@ -6,7 +6,7 @@ import duke.Tasks.TaskList;
 import duke.Ui;
 
 public abstract class Command {
-    protected boolean exit;
+    protected boolean exit = false;
 
     public boolean isExit() {
         return exit;

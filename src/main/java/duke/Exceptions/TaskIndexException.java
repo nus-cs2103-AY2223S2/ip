@@ -27,6 +27,10 @@ public class TaskIndexException extends DukeException {
 
     @Override
     public String toString() {
-        return "Sorry! Index is out of bounds...\nMaximum value: " + this.max;
+        String result = "Sorry! Index is out of bounds...";
+        if (this.max != 0) {
+            result += "\nMaximum value: " + this.max;
+        }
+        return result;
     }
 }

@@ -29,6 +29,18 @@ public class TaskList extends ArrayList<Task> {
         return result.toString();
     }
 
+    public String toFormattedString() {
+        int count = 1;
+        StringBuilder result = new StringBuilder();
+        for (Task task : this) {
+            result.append(count++)
+                    .append(". ")
+                    .append(task)
+                    .append("\n");
+        }
+        return result.toString();
+    }
+
     public void addingTask(Task task) throws DescriptionException {
         if (task.isEmpty()) {
             throw new DescriptionException();
