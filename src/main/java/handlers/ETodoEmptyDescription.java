@@ -1,9 +1,12 @@
 package handlers;
 
-import types.IHandler;
-
 import java.util.regex.Pattern;
 
+import types.IHandler;
+
+/**
+ * Exception class for empty description..
+ */
 public class ETodoEmptyDescription implements IHandler {
     private static final Pattern PATTERN = Pattern.compile("todo");
 

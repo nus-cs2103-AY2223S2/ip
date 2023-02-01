@@ -1,11 +1,14 @@
 package handlers;
 
+import java.util.regex.Pattern;
+
 import services.TaskList;
 import types.IHandler;
 import types.data.Task;
 
-import java.util.regex.Pattern;
-
+/**
+ * Command to show all tasks.
+ */
 public final class JShowTaskList implements IHandler {
     private static final Pattern PATTERN = Pattern.compile("list");
     private final TaskList ts;

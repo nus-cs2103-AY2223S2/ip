@@ -1,10 +1,10 @@
 package types.data;
 
-import utilities.DateTimeParser;
+import static types.data.Deadline.DATE_TIME_FORMATTER;
 
 import java.time.LocalDateTime;
 
-import static types.data.Deadline.DATE_TIME_FORMATTER;
+import utilities.DateTimeParser;
 
 /**
  * Event data type.
@@ -35,6 +35,9 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return String.format("%s (from: %s, to: %s)", super.toString(), start.format(DATE_TIME_FORMATTER), end.format(DATE_TIME_FORMATTER));
+        return String.format("%s (from: %s, to: %s)",
+                super.toString(),
+                start.format(DATE_TIME_FORMATTER),
+                end.format(DATE_TIME_FORMATTER));
     }
 }

@@ -1,14 +1,17 @@
 package handlers;
 
-import services.TaskList;
-import types.IHandler;
-import types.data.Task;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import services.TaskList;
+import types.IHandler;
+import types.data.Task;
+
+/**
+ * Command to find a task.
+ */
 public class JFind implements IHandler {
     private static final Pattern PATTERN = Pattern.compile("find (.*)");
     private final TaskList ts;

@@ -1,8 +1,8 @@
 package services;
 
-import types.ISpeaker;
-
 import java.util.ArrayList;
+
+import types.ISpeaker;
 
 /**
  * A singleton class to hold all possible output locations.

@@ -1,12 +1,15 @@
 package handlers;
 
-import services.TaskList;
-import types.IHandler;
-
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import services.TaskList;
+import types.IHandler;
+
+/**
+ * Command to mark a task as completed.
+ */
 public final class JMarkTask implements IHandler {
     private static final Pattern PATTERN = Pattern.compile("(un)?mark ([0-9]*)");
     private final TaskList ts;

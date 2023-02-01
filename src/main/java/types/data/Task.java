@@ -20,12 +20,13 @@ public abstract class Task {
      */
     public String getDoneMark() {
         switch (status) {
-            case COMPLETED:
-                return "X";
-            case INCOMPLETE:
-                return " ";
+        case COMPLETED:
+            return "X";
+        case INCOMPLETE:
+            return " ";
+        default:
+            return "ERROR";
         }
-        return "ERROR";
     }
 
     /**

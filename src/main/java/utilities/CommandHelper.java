@@ -1,9 +1,10 @@
 package utilities;
 
+import java.util.List;
+
 import services.SpeakerRegistry;
 import types.IHandler;
 
-import java.util.List;
 
 /**
  * A helper class to deal with Handlers.

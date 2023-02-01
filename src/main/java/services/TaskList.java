@@ -1,11 +1,11 @@
 package services;
 
-import types.IContainer;
-import types.data.Task;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import types.IContainer;
+import types.data.Task;
 
 /**
  * A singleton class to host tasks instance-wide.

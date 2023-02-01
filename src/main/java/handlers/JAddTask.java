@@ -1,5 +1,8 @@
 package handlers;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import services.TaskList;
 import types.IHandler;
 import types.data.Deadline;
@@ -7,9 +10,9 @@ import types.data.Event;
 import types.data.Task;
 import types.data.Todo;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
+/**
+ * Command to add new task.
+ */
 public final class JAddTask implements IHandler {
     private static final Pattern TODO_PATTERN = Pattern.compile("(todo) (.*)");
     private static final Pattern EVENT_PATTERN = Pattern.compile("(event) (.*) /from (.*) /to (.*)");
