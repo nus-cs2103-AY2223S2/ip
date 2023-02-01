@@ -1,9 +1,17 @@
 package main;
 
-import command.*;
-
 import java.time.DateTimeException;
 import java.time.LocalDate;
+
+import command.AddDeadlineCommand;
+import command.AddEventCommand;
+import command.AddTodoCommand;
+import command.Command;
+import command.DeleteTaskCommand;
+import command.ExitCommand;
+import command.ListCommand;
+import command.MarkDoneCommand;
+import command.MarkNotDoneCommand;
 
 /**
  * Class that makes sense of user input.
@@ -34,14 +42,16 @@ public class Parser {
             } else if (command.startsWith("deadline")) {
                 String[] str1 = command.substring(9).split("/");
                 try {
-                    return new AddDeadlineCommand(str1[0], LocalDate.parse(str1[1].substring(3, 13)));
+                    return new AddDeadlineCommand(str1[0],
+                            LocalDate.parse(str1[1].substring(3, 13)));
                 } catch (DateTimeException e) {
                     throw new DukeException("Please enter a valid date in the form YYYY-MM-DD");
                 }
             } else if (command.startsWith("event")) {
                 String[] str2 = command.substring(6).split("/");
                 try {
-                    return new AddEventCommand(str2[0], LocalDate.parse(str2[1].substring(5, 15)), LocalDate.parse(str2[2].substring(3, 13)));
+                    return new AddEventCommand(str2[0],
+                            LocalDate.parse(str2[1].substring(5, 15)), LocalDate.parse(str2[2].substring(3, 13)));
                 } catch (DateTimeException e) {
                     throw new DukeException("Please enter a valid date in the form YYYY-MM-DD");
                 }

@@ -3,7 +3,7 @@ package main;
 /**
  * Class that takes in all exceptions from invalid user input.
  */
-public class DukeException extends Exception{
+public class DukeException extends Exception {
     private final String message;
 
     /**

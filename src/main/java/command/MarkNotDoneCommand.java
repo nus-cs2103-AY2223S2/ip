@@ -1,15 +1,15 @@
 package command;
 
-import main.TaskList;
-import main.Storage;
 import main.DukeException;
+import main.Storage;
+import main.TaskList;
 import main.Ui;
 import task.Task;
 
 /**
  * Marks a task as not done.
  */
-public class MarkNotDoneCommand extends Command{
+public class MarkNotDoneCommand extends Command {
 
     private final int index;
 
@@ -19,7 +19,7 @@ public class MarkNotDoneCommand extends Command{
      * @param index Index of task to be marked as not done.
      */
     public MarkNotDoneCommand(int index) {
-            this.index = index - 1;
+        this.index = index - 1;
     }
 
     /**

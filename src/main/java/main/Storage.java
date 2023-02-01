@@ -7,9 +7,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import task.Task;
-import task.Event;
 import task.Deadline;
+import task.Event;
+import task.Task;
 import task.Todo;
 
 /**
