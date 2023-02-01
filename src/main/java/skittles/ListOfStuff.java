@@ -55,7 +55,7 @@ public class ListOfStuff {
 
     /**
      * Updates the marking of a certain Task as 'done'.
-     * @param input The entire String that the user has input i.e. "mark 2".
+     * @param userTyped The entire String that the user has input i.e. "mark 2".
      * @throws SkittlesException If an incorrect input is entered.
      */
     public static void completeTask(String userTyped) throws SkittlesException {
