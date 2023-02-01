@@ -1,7 +1,7 @@
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
+import static utils.FormatHelper.INPUTFORMAT;
 
 
 public class Duke {
@@ -9,7 +9,6 @@ public class Duke {
     private static String currentInput;
     private static TaskList taskList;
     private static Storage memory = new Storage("/duke.txt");
-    private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
     private static Ui ui = new Ui();
 
     public static String mark(boolean toMark) throws DukeException {
@@ -45,7 +44,7 @@ public class Duke {
                 }
                 String description = currentInput.substring(9, byPos);
                 String by = currentInput.substring(byPos + 5);
-                LocalDateTime convertedBy = LocalDateTime.parse(by, formatter);
+                LocalDateTime convertedBy = LocalDateTime.parse(by, INPUTFORMAT);
                 taskList.add(new Deadline(description, convertedBy));
             } else {
                 //Adding an Event
@@ -63,8 +62,8 @@ public class Duke {
                 String description = currentInput.substring(6, fromPos);
                 String from = currentInput.substring(fromPos + 7, toPos);
                 String to = currentInput.substring(toPos+ 5);
-                LocalDateTime convertedFrom = LocalDateTime.parse(from, formatter);
-                LocalDateTime convertedTo = LocalDateTime.parse(to, formatter);
+                LocalDateTime convertedFrom = LocalDateTime.parse(from, INPUTFORMAT);
+                LocalDateTime convertedTo = LocalDateTime.parse(to, INPUTFORMAT);
                 taskList.add(new Event(description, convertedFrom, convertedTo));
             }
             int count = taskList.size();
@@ -77,16 +76,6 @@ public class Duke {
         }
     }
 
-    public static String deleteTask(String command) throws DukeException {
-        int index = Integer.parseInt(command.substring(7)) - 1;
-        if (index < 0 || index >= taskList.size()) {
-            throw new DukeException("Error: Please input a valid task index!");
-        } else {
-            String output = taskList.removeTask(index);
-            memory.saveState(taskList);
-            return output;
-        }
-    }
 
     public static void main(String[] args) {
 
@@ -107,7 +96,8 @@ public class Duke {
                 } else if (currentInput.matches("^(todo|deadline|event) .*")) {
                     ui.reply(addTask());
                 } else if (currentInput.matches("^delete \\d+")) {
-                    ui.reply(deleteTask(currentInput));
+                    ui.reply(taskList.deleteTask(currentInput));
+                    memory.saveState(taskList);
                 } else {
                     ui.reply("Unknown command, please try again");
                 }

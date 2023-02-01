@@ -1,10 +1,11 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import static utils.FormatHelper.PRINTFORMAT;
+import static utils.FormatHelper.INPUTFORMAT;
 
 public class Event extends Task {
     protected LocalDateTime from;
     protected LocalDateTime to;
-    protected static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm");
 
     Event (String description, LocalDateTime from, LocalDateTime to) {
         super(description);
@@ -14,19 +15,19 @@ public class Event extends Task {
 
     @Override
     public String toSaveFormat() {
-        return "E||" + super.toSaveFormat() + "||" + this.from + "||" + this.to;
+        return "E||" + super.toSaveFormat() + "||" + this.from.format(INPUTFORMAT) + "||" + this.to.format(INPUTFORMAT);
     }
 
     @Override
     public String toString() {
         return "[E]" + super.toString()
-                + " (from: " + this.from.format(formatter) + ", to: " + this.to.format(formatter) + ")";
+                + " (from: " + this.from.format(PRINTFORMAT) + ", to: " + this.to.format(PRINTFORMAT) + ")";
     }
 
     public static Event fromSaveFormat(String savedData) {
         String[] inputs = savedData.split("\\|\\|");
-        LocalDateTime parseFrom = LocalDateTime.parse(inputs[3], formatter);
-        LocalDateTime parseTo = LocalDateTime.parse(inputs[4], formatter);
+        LocalDateTime parseFrom = LocalDateTime.parse(inputs[3], INPUTFORMAT);
+        LocalDateTime parseTo = LocalDateTime.parse(inputs[4], INPUTFORMAT);
         Event generatedEvent = new Event(inputs[2], parseFrom, parseTo);
         if (inputs[1].equals("1")) {
             generatedEvent.setCompleted(true);

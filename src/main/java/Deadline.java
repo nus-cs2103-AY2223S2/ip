@@ -1,9 +1,10 @@
+import java.io.PrintStream;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import static utils.FormatHelper.INPUTFORMAT;
+import static utils.FormatHelper.PRINTFORMAT;
 
-public class Deadline extends Task{
 
-    protected static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm");
+public class Deadline extends Task {
     protected LocalDateTime by;
 
     Deadline(String description, LocalDateTime by) throws IllegalArgumentException {
@@ -13,17 +14,17 @@ public class Deadline extends Task{
 
     @Override
     public String toSaveFormat() {
-        return "D||" + super.toSaveFormat() + "||" + by.format(formatter);
+        return "D||" + super.toSaveFormat() + "||" + by.format(INPUTFORMAT);
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by.format(formatter) + ")";
+        return "[D]" + super.toString() + " (by: " + by.format(PRINTFORMAT) + ")";
     }
 
     public static Deadline fromSaveFormat(String savedData) {
         String[] inputs = savedData.split("\\|\\|");
-        Deadline generatedDeadline = new Deadline(inputs[2], LocalDateTime.parse(inputs[3], formatter));
+        Deadline generatedDeadline = new Deadline(inputs[2], LocalDateTime.parse(inputs[3], INPUTFORMAT));
         if (inputs[1].equals("1")) {
             generatedDeadline.setCompleted(true);
         }

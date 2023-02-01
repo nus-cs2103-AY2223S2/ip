@@ -1,5 +1,6 @@
 package utils;
 
+import java.time.format.DateTimeFormatter;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -7,6 +8,9 @@ import java.util.stream.Stream;
  * A utility class containing formatting methods
  */
 public final class FormatHelper {
+    public static final DateTimeFormatter PRINTFORMAT = DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm");
+    public static final DateTimeFormatter INPUTFORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+
     /**
      * Adds indentations of n spaces to each new line in the input string.
      * @param n Number of spaces to add to each new line.
@@ -19,4 +23,6 @@ public final class FormatHelper {
         stream = stream.map(sentence -> spaces + sentence);
         return stream.collect(Collectors.joining("\n"));
     }
+
+
 }
