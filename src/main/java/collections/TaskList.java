@@ -55,6 +55,16 @@ public class TaskList {
     public boolean isEmpty() {
         return this.list.isEmpty();
     }
+    public TaskList find(String keyword) {
+        TaskList found = new TaskList();
+        for (int i = 0; i < this.list.size(); i++) {
+            Task task = this.list.get(i);
+            if (task.match(keyword)) {
+                found.add(task);
+            }
+        }
+        return found;
+    }
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

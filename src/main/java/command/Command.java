@@ -168,6 +168,14 @@ public enum Command {
             }
         }
     },
+    FIND("find") {
+        @Override
+        public void execute(String input) {
+            String keyword = input.substring(1);
+            TaskList found = list.find(keyword);
+            Ui.printListFound(found);
+        }
+    },
     BYE ("bye") {
         @Override
         public void execute(String input) throws SundayException {

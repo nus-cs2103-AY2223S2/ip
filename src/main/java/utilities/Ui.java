@@ -123,4 +123,17 @@ public class Ui {
         printText("Tell me what to note down and I'll remember it accordingly!");
         printBar();
     }
+    public static void printListFound(TaskList taskList) {
+        printBar();
+        if (taskList.isEmpty()) {
+            printText("Looks like you don't have any tasks matching that description.");
+        } else {
+            Ui.printText("Here are the task(s) I've found:");
+            String[] strArr = taskList.toString().split("\n");
+            for (int i = 0; i < strArr.length; i++) {
+                printText(indent + (i+1) + ". " + strArr[i]);
+            }
+        }
+        printBar();
+    }
 }

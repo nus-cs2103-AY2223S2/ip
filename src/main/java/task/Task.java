@@ -24,6 +24,9 @@ public abstract class Task {
         this.isComplete = false;
     }
     public abstract String save();
+    public boolean match(String keyword) {
+        return this.description.contains(keyword);
+    }
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
