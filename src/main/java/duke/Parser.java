@@ -82,7 +82,7 @@ public class Parser {
             break;
         case "find":
             if (argFrags.length < 2) {
-                throw Event.getInvalidFormatException();
+                throw new InvalidFormatException();
             }
             tasks.find(argFrags[1], this);
             break;
