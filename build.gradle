@@ -44,3 +44,7 @@ run {
 checkstyle {
     toolVersion = '10.2'
 }
+
+clean {
+    delete 'data'
+}

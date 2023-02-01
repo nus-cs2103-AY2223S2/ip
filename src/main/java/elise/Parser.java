@@ -10,6 +10,11 @@ import java.util.Scanner;
  * Parser class to parse user inputs.
  */
 public class Parser {
+    // Word enum for commands
+    private enum Word {
+        BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, FIND, HELP
+    }
+
     /**
      * Parses user input into command.
      *
@@ -18,7 +23,12 @@ public class Parser {
      */
     protected static Command read(Scanner sc) throws EliseException {
         int rank;
-        String command = sc.next();
+        Word command;
+        try {
+            command = Word.valueOf(sc.next().toUpperCase());
+        } catch (IllegalArgumentException e) {
+            throw new EliseException("Invalid input.");
+        }
         String s = sc.nextLine().trim();
         String[] message;
 
@@ -26,30 +36,30 @@ public class Parser {
             throw new EliseException("Message body is too long!");
         }
         switch (command) {
-        case "bye":
+        case BYE:
             return new Command(0);
-        case "list":
+        case LIST:
             return new Command(1);
-        case "mark":
+        case MARK:
             try {
                 rank = Integer.parseInt(s);
                 return new Command(2, rank - 1);
             } catch (NumberFormatException e) {
                 throw new EliseException("OOPS! mark must have an integer rank");
             }
-        case "unmark":
+        case UNMARK:
             try {
                 rank = Integer.parseInt(s);
                 return new Command(3, rank - 1);
             } catch (NumberFormatException e) {
                 throw new EliseException("OOPS! unmark must have an integer rank");
             }
-        case "todo":
+        case TODO:
             if (s.isEmpty()) {
                 throw new EliseException("OOPS!!! The description of a todo cannot be empty.");
             }
             return new Command(4, new String[] {s});
-        case "deadline":
+        case DEADLINE:
             message = s.split("/by ");
             message = Arrays.stream(message).map(String::trim).toArray(String[]::new);
             if (message.length != 2 || message[0].isEmpty() || message[1].isEmpty()) {
@@ -57,7 +67,7 @@ public class Parser {
                         + "The descriptions, [] cannot be empty.");
             }
             return new Command(5, message);
-        case "event":
+        case EVENT:
             int indexFrom = s.indexOf("/from");
             int indexTo = s.indexOf("/to");
             message = s.split("/from |/to ");
@@ -69,23 +79,25 @@ public class Parser {
                         + "The descriptions, [] cannot be empty.");
             }
             return new Command(6, message);
-        case "delete":
+        case DELETE:
             try {
                 rank = Integer.parseInt(s);
                 return new Command(7, rank - 1);
             } catch (NumberFormatException e) {
                 throw new EliseException("OOPS! delete must have an integer rank.");
             }
-        case "find":
+        case FIND:
             if (s.isEmpty()) {
                 throw new EliseException("Specify a keyword.");
             }
             return new Command(8, s);
-        case "help":
+        case HELP:
             return new Command(9);
         default:
-            throw new EliseException("Invalid input.");
+            // Unreachable
+            return null;
         }
+
     }
 
     private static final DateTimeFormatter INPUT_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
