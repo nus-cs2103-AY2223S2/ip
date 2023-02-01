@@ -11,7 +11,7 @@ import lele.ui.Ui;
 import java.io.IOException;
 
 /**
- * The main class that represents the chatbot, Duke, which helps
+ * The main class that represents the chatbot, Lele, which helps
  * to build a checklist consisting of todos, deadlines, events.
  */
 public class Lele {
@@ -20,7 +20,7 @@ public class Lele {
     private final Ui ui;
 
     /**
-     * Constructor for Duke.
+     * Constructor for Lele.
      *
      * @param filePath For Duke to find the path to an existing data.
      */
@@ -37,7 +37,7 @@ public class Lele {
 
     /**
      * The function that handles the parsing, storage
-     * and ui of Duke. Also handles the exceptions coming
+     * and ui of Lele. Also handles the exceptions coming
      * from Command.
      */
     public void run() {
@@ -59,14 +59,13 @@ public class Lele {
     }
 
     /**
-     * The main method. Initialises a Duke instance and
+     * The main method. Initialises a Lele instance and
      * starts up the cogwheel.
      *
      * @param args Takes in the command line argument.
      */
     public static void main(String[] args) {
         new Lele("./data/lele.txt").run();
-
     }
 
 
