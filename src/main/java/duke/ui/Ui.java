@@ -1,7 +1,5 @@
 package duke.ui;
 
-import java.util.Scanner;
-
 import duke.task.Task;
 import duke.tasklist.TaskList;
 
@@ -9,50 +7,43 @@ import duke.tasklist.TaskList;
  * The component that interfaces with the users, handling user commands and printing the application response.
  */
 public class Ui {
-    private Scanner sc;
+    private StringBuilder sb;
 
     public Ui() {
-        sc = new Scanner(System.in);
+        sb = new StringBuilder();
     }
 
     /**
-     * Prints a sequence of strings in a pretty way.
+     * Prints a sequence of strings in a pretty way into buffer.
      *
      * @param chunks sequence of strings to be printed.
      */
     public void respond(String... chunks) {
-        System.out.println("    ------------------------------DUKE------------------------------");
         for (String lines : chunks) {
             for (String line: lines.split("\n")) {
-                System.out.print("        ");
-                System.out.println(line);
+                sb.append(line);
+                sb.append("\n");
             }
         }
-        System.out.println("    ------------------------------DUKE------------------------------");
     }
 
     /**
-     * Prints an exception.
+     * Prints an exception into buffer
      *
      * @param e Exception to be printed.
      */
     public void error(Exception e) {
-        System.out.println("    --------------------ERROR-----DUKE-----ERROR--------------------");
-        System.out.print("        ");
-        System.out.println(e.getMessage());
-        System.out.println("    --------------------ERROR-----DUKE-----ERROR--------------------");
+        sb.append("Oh No!\n\n");
+        sb.append(e.getMessage());
+        sb.append("\n");
     }
 
     /**
      * Prints a introduction message to the user.
-     *
-     * @param logo Logo of to be printed with the introduction.
      */
-    public void introduce(String logo) {
+    public void introduce() {
         respond(
-            "Hello I am",
-            logo,
-            "",
+            "Hello I am Duke!",
             "What can I do for you?"
         );
     }
@@ -62,7 +53,6 @@ public class Ui {
      */
     public void bye() {
         respond("Bye. Hope to see you again soon!");
-        sc.close();
     }
 
     /**
@@ -144,15 +134,13 @@ public class Ui {
     }
 
     /**
-     * Waits and retrieves a command from the user.
+     * Clears the buffer and returns the string that was stored.
      *
-     * @return The command of the user.
+     * @return String that was stored in the buffer.
      */
-    public String ask() {
-        System.out.print(">>> ");
-        String cmd = sc.nextLine();
-        System.out.println();
-        return cmd;
+    public String flush() {
+        String s = sb.toString();
+        sb.setLength(0);
+        return s;
     }
-
 }
