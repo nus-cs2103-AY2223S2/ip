@@ -70,7 +70,7 @@ public class Parser {
         case DELETE:
             return new DeleteCommand(Integer.parseInt(cmd[1]));
         case FIND:
-            return new FindCommand(cmd[1]);
+            return new FindCommand(cmd[1].split(" "));
         default:
             throw new DudeException("Uhh... You give me wrong command leh");
         }

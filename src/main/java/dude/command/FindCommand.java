@@ -12,10 +12,10 @@ import dude.ui.Ui;
  * Command to find Tasks with same keyword
  */
 public class FindCommand extends Command {
-    private String keyword;
+    private String[] keywords;
 
-    public FindCommand(String keyword) {
-        this.keyword = keyword;
+    public FindCommand(String[] keywords) {
+        this.keywords = keywords;
     }
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
@@ -23,7 +23,7 @@ public class FindCommand extends Command {
         int taskCount = Task.getTaskCount();
         for (int i = 1; i <= taskCount; i++) {
             Task currentTask = tasks.getTask(i);
-            if (currentTask.contains(keyword)) {
+            if (currentTask.contains(keywords)) {
                 filteredTasks.add(currentTask);
             }
         }

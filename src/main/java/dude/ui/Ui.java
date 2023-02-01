@@ -81,7 +81,7 @@ public class Ui {
     public String showFind(List<Task> tasks) {
         StringBuilder result = new StringBuilder();
         if (tasks.size() != 0) {
-            System.out.println("Okay come, here are the task I found containing your keyword: ");
+            result.append("Okay come, here are the task I found containing your keyword: ");
             for (int i = 0; i < tasks.size(); i++) {
                 result.append(i + 1).append(".").append(tasks.get(i).toString()).append("\n");
             }
