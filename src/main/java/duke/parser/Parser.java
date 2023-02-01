@@ -83,7 +83,6 @@ public class Parser {
         case "delete":
 
 
-
             try {
                 int taskNumber = Integer.parseInt(words[1]);
                 if (taskNumber > lengthOfList || taskNumber <= 0 || words[1].trim().isEmpty()) {
@@ -93,8 +92,9 @@ public class Parser {
             } catch (NumberFormatException e) {
                 throw new TaskNumberNotFoundException();
             }
+        case "find":
+            return new FindCommand(commandBody);
         }
-
         throw new UnknownCommandError("\n" + FRAME + "\n" +
                 "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(" + "\n" +
                 FRAME);
