@@ -102,6 +102,17 @@ public class Ui {
         printLine();
     }
 
+    public void printFoundTasks(ArrayList<Task> foundTasks) throws DukeException {
+        if (foundTasks.isEmpty()) {
+            throw new DukeException("☹ OOPS!!! There are no tasks matching that keyword.");
+        }
+        printLine();
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 1; i <= foundTasks.size(); i++) {
+            System.out.println(i + ". " + foundTasks.get(i - 1).toString() );
+        }
+        printLine();
+    }
     /**
      * method that prints a line to divide messages
      */

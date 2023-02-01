@@ -60,4 +60,15 @@ public class Tasklist {
     public void markUndone(int taskNum) {
         tasks.get(taskNum).markUndone();
     }
+
+    public ArrayList<Task> findTask(String keyword) {
+        ArrayList<Task> foundTasks = new ArrayList<>();
+        for (Task task : this.tasks) {
+            String taskDescription = task.getDescription();
+            if (taskDescription.contains(keyword)) {
+                foundTasks.add(task);
+            }
+        }
+        return foundTasks;
+    }
 }

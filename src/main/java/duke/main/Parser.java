@@ -62,7 +62,7 @@ public class Parser {
             } catch (DateTimeParseException e) {
                 throw new DukeException("☹ OOPS!!! Invalid date time format. Please use DD/MM/YYYY HHMM format");
             }
-        //Fallthrough
+            //Fallthrough
         case ("deadline"):
             if (splits.length == 1) {
                 throw new DukeException(" ☹ OOPS!!! The description of a deadline cannot be empty.");
@@ -84,7 +84,7 @@ public class Parser {
             } catch (DateTimeParseException e) {
                 throw new DukeException("☹ OOPS!!! Invalid date time format. Please use <DD/MM/YYYY HHMM> format");
             }
-        //Fallthrough
+            //Fallthrough
         case ("mark"):
             return new MarkCommand(Integer.parseInt(splits[1]));
         //Fallthrough
@@ -94,9 +94,18 @@ public class Parser {
         case ("delete"):
             return new DeleteCommand(Integer.parseInt(splits[1]));
         //Fallthrough
+        case("find"):
+            if (splits.length == 1) {
+                throw new DukeException("☹ OOPS!!! The keyword for the find cannot be empty.");
+            }
+            if (splits[1].isBlank()) {
+                throw new DukeException("☹ OOPS!!! The keyword for the find cannot be empty.");
+            }
+            return new FindCommand(splits[1]);
+        //Fallthrough
         default:
             throw new DukeException("☹ OOPS!!! Unknown command received. Please enter valid command");
-        //Fallthrough
+            //Fallthrough
         }
     }
 }
