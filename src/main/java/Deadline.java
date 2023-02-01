@@ -5,8 +5,6 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * Represents a Task with a deadline.
- *
- * @author Karen
  */
 public class Deadline extends Task {
 

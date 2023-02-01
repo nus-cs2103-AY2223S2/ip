@@ -8,8 +8,6 @@ import duke.Ui;
 
 /**
  * Represents a command by user to Duke to add a Deadline task
- *
- * @author Karen
  */
 public class AddDeadlineCommand extends Command {
     private String name;
@@ -42,16 +40,17 @@ public class AddDeadlineCommand extends Command {
      * @param tasks A TaskList containing the set of task the user has.
      * @param ui An Ui which allows for interaction between Duke and user.
      * @param storage A Storage enabling Duke to store memory.
+     * @return String The String message indicating status of action.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
-            ui.addTaskResponse(tasks.addDeadline(name, by), tasks);
+            return ui.addTaskResponse(tasks.addDeadline(name, by), tasks);
         } catch (DateTimeParseException e1) {
-            ui.invalidTiming();
+            return ui.invalidTiming();
         } catch (IllegalArgumentException e2) {
-            ui.incompleteCommandErrorMessage();
+            return ui.incompleteCommandErrorMessage();
         } catch (ArrayIndexOutOfBoundsException e3) {
-            ui.incompleteCommandErrorMessage();
+            return ui.incompleteCommandErrorMessage();
         }
     }
 }

@@ -13,8 +13,6 @@ import duke.command.UnmarkCommand;
 
 /**
  * Parsers input from user.
- *
- * @author Karen
  */
 public class Parser {
 

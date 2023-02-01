@@ -2,8 +2,6 @@ package duke.task;
 
 /**
  * Represents a Task without deadline or duration.
- *
- * @author Karen
  */
 public class Todo extends Task {
 

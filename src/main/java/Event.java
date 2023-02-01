@@ -5,8 +5,6 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * Represents a Task with a duration.
- *
- * @author Karen
  */
 public class Event extends Task {
 

@@ -7,181 +7,175 @@ import duke.task.Task;
 
 /**
  * Represents Duke's interaction with user.
- *
- * @author Karen
  */
 public class Ui {
 
-    private static final String STR = "------------------------------------------------------------";
     private static final DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("dd MMM uuuu kk:mm");
-    private static final String LOGO = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
     private Scanner sc;
 
     /**
-     * Initialises new instance of Ui.
+     * Returns a welcome message.
+     *
+     * @return String The welcome message
      */
-    public Ui() {
-        sc = new Scanner(System.in);
+    public String welcomeResponse() {
+        return "Hello! Nice to meet you! I'm Duke\n";
     }
 
     /**
-     * Returns the next command input by user.
+     * Returns a message indicating load from memory was successful.
+     *
+     * @return String The message indicating load from memory was successful.
      */
-    public String nextInput() {
-        return this.sc.nextLine();
+    public String successfulLoadResponse() {
+        return "I've successfully retrieved your past task list!";
     }
 
     /**
-     * Prints a welcome message.
+     * Returns a message asking user for a Task.
+     *
+     * @return String The message asking user for a Task.
      */
-    public void welcomeResponse() {
-        System.out.println(LOGO + "Hello! I'm Duke\n");
+    public String askForTaskResponse() {
+        return "What can I do for you today?";
     }
 
     /**
-     * Prints a message indicating load from memory was successful.
-     */
-    public void successfulLoadResponse() {
-        System.out.println("I've successfully retrieved your past task list!");
-    }
-
-    /**
-     * Prints a message asking user for a Task.
-     */
-    public void askForTaskResponse() {
-        System.out.println("What can I do for you today?");
-    }
-
-    /**
-     * Prints the list of Tasks.
+     * Returns the list of Tasks.
      *
      * @param tasks The array of tasks.
+     * @return String The list of Tasks.
      */
-    public void listTaskResponse(TaskList tasks) {
+    public String listTaskResponse(TaskList tasks) {
         if (tasks.getSize() == 0) {
-            printResponse("You have 0 task to complete at the moment!");
+            return "You have 0 task to complete at the moment!";
         } else {
-            printResponse("Here are the task in your list: \n" + tasks.toStringList() + "\nYou have " + tasks.getSize()
-                    + " tasks in the list.");
+            return "Here are the task in your list: \n\n" + tasks.toStringList() + "\n\nYou have " + tasks.getSize()
+                    + " tasks in the list.";
         }
     }
 
     /**
-     * Prints the sublist of Tasks.
+     * Returns the sublist of Tasks.
      *
      * @param tasks The array of tasks.
+     * @return String The sublist of Tasks.
      */
-    public void subListTaskResponse(TaskList tasks) {
+    public String subListTaskResponse(TaskList tasks) {
         if (tasks.getSize() == 0) {
-            printResponse("You have 0 matching task!");
+            return "You have 0 matching task!";
         } else {
-            printResponse("Here are the matching tasks in your list: \n" + tasks.toStringList() + "\nYou have "
-                    + tasks.getSize() + " matching tasks in the list.");
+            return "Here are the matching tasks in your list: \n\n" + tasks.toStringList() + "\n\nYou have "
+                    + tasks.getSize() + " matching tasks in the list.";
         }
     }
 
     /**
-     * Prints a message indicating to user selected task was successfully marked.
+     * Returns a message indicating to user selected task was successfully marked.
      *
      * @param t The selected task.
+     * @return String The message indicating to user selected task was successfully marked.
      */
-    public void markTaskResponse(Task t) {
-        printResponse("Nice! I've marked this task as done: \n " + t);
+    public String markTaskResponse(Task t) {
+        return "Nice! I've marked this task as done: \n\n " + t;
     }
 
     /**
-     * Prints a message indicating to user selected task was successfully unmarked.
+     * Returns a message indicating to user selected task was successfully unmarked.
      *
      * @param t The selected task.
      */
-    public void unmarkTaskResponse(Task t) {
-        printResponse("OK, I've marked this task as not done yet \n" + t);
+    public String unmarkTaskResponse(Task t) {
+        return "OK, I've marked this task as not done yet \n\n" + t;
     }
 
     /**
-     * Prints a message indicating to user selected task was successfully deleted.
+     * Returns a message indicating to user selected task was successfully deleted.
      *
      * @param t The selected task.
      * @param lst The array of tasks.
+     * @return String The message indicating to user selected task was successfully deleted.
      */
-    public void deleteTaskResponse(Task t, TaskList lst) {
-        printResponse("Noted. I've removed this task: \n" + t + "\nNow you have " + lst.getSize() + " "
-                + "tasks in the list.");
+    public String deleteTaskResponse(Task t, TaskList lst) {
+        return "Noted. I've removed this task: \n\n" + t + "\n\nNow you have " + lst.getSize() + " "
+                + "tasks in the list.";
     }
 
     /**
-     * Prints a message indicating to user the new task was successfully added.
+     * Returns a message indicating to user the new task was successfully added.
      *
      * @param t The new task.
      * @param lst The array of tasks.
+     * @return String The message indicating to user the new task was successfully added.
      */
-    public void addTaskResponse(Task t, TaskList lst) {
-        printResponse("Got it. I've added this task: \n" + t + "\nNow you have " + lst.getSize()
-                + " tasks in the list.");
+    public String addTaskResponse(Task t, TaskList lst) {
+        return "Got it. I've added this task: \n\n" + t + "\n\nNow you have " + lst.getSize()
+                + " tasks in the list.";
     }
 
     /**
-     * Prints a message indicating to user that Duke has exited program.
+     * Returns a message indicating to user that Duke has exited program.
+     *
+     * @return String The message indicating to user that Duke has exited program.
      */
-    public void exitResponse() {
-        printResponse("Bye. Hope to see you again soon!");
+    public String exitResponse() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
-     * Prints a message indicating to user that a task has not been selected.
+     * Returns a message indicating to user that a task has not been selected.
+     *
+     * @return String The message indicating to user that a task has not been selected.
      */
-    public void taskNotChosenErrorMessage() {
-        printResponse("OPPS! You have not selected a task.");
+    public String taskNotChosenErrorMessage() {
+        return "OPPS! You have not selected a task.";
     }
 
     /**
-     * Prints a message indicating to user that list of tasks could not be saved to file. This is likely due to an
+     * Returns a message indicating to user that list of tasks could not be saved to file. This is likely due to an
      * incorrect file path.
+     *
+     * @return String The message indicating to user that list of tasks could not be saved to file.
      */
-    public void unableToSaveErrorMessage() {
-        printResponse("Sorry, memory cannot be saved!");
+    public String unableToSaveErrorMessage() {
+        return "Sorry, memory cannot be saved!";
     }
 
     /**
-     * Prints a message indicating to user that commandline input is invalid.
+     * Returns a message indicating to user that commandline input is invalid.
+     *
+     * @return String The message indicating to user that commandline input is invalid.
      */
-    public void unreadableCommandErrorMessage() {
-        printResponse("I'm sorry, but I don't understand what that means! Try re-typing your instruction!");
+    public String unreadableCommandErrorMessage() {
+        return "I'm sorry, but I don't understand what that means! Try re-typing your instruction!";
     }
 
     /**
-     * Prints a message indicating to user that list of tasks could not be loaded from file. This is likely due to an
+     * Returns a message indicating to user that list of tasks could not be loaded from file. This is likely due to an
      * incorrect file path.
+     *
+     * @return String The message indicating to user that list of tasks could not be loaded from file.
      */
-    public void loadingErrorMessage() {
-        System.out.println("Sorry! I was unable to load your task list from memory!");
+    public String loadingErrorMessage() {
+        return "Sorry! I was unable to load your task list from memory!";
     }
 
     /**
-     * Prints a message indicating to user that commandline input is incomplete.
+     * Returns a message indicating to user that commandline input is incomplete.
+     *
+     * @return String The message indicating to user that commandline input is incomplete.
      */
-    public void incompleteCommandErrorMessage() {
-        printResponse("OOPS!!! The description of this task is incomplete.");
+    public String incompleteCommandErrorMessage() {
+        return "OOPS!!! The description of this task is incomplete.";
     }
 
     /**
-     * Prints a message indicating to user that date entered as commandline input is not in correct format.
+     * Returns a message indicating to user that date entered as commandline input is not in correct format.
+     *
+     * @return String The message indicating to user that date entered as commandline input is not in correct format.
      */
-    public void invalidTiming() {
-        printResponse("OOPS!!! You have key in an invalid date. (Format Example: 14 Oct 2023 23:00");
-    }
-
-    /**
-     * Prints the given message, with a line above and below.
-     */
-    private static void printResponse(String response) {
-        System.out.println(STR);
-        System.out.println(response);
-        System.out.println(STR);
+    public String invalidTiming() {
+        return "OOPS!!! You have key in an invalid date. (Format Example: 14 Oct 2023 23:00";
     }
 
 }

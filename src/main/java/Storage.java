@@ -18,8 +18,6 @@ import duke.task.Todo;
 /**
  * Represents memory of Duke. Contains methods that help Duke recover previously save task list and save task list
  * before closing programme.
- *
- * @author Karen
  */
 public class Storage {
 

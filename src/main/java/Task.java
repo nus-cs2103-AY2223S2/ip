@@ -2,8 +2,6 @@ package duke.task;
 
 /**
  * Represents a Task.
- *
- * @author Karen
  */
 public class Task {
 

@@ -11,8 +11,6 @@ import duke.task.Todo;
 
 /**
  * Represents a List of Tasks.
- *
- * @author Karen
  */
 public class TaskList {
 
