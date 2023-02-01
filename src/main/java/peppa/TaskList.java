@@ -1,6 +1,7 @@
 package peppa;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Represents a list of tasks and handles all task-related logic.
@@ -36,17 +37,21 @@ public class TaskList {
     /**
      * Searches for tasks in the list which contain the specified keyword.
      *
-     * @param keyword The keyword that the user is searching for.
-     * @return Subset of tasks in the master list that match the given keyword.
+     * @param keywords Keywords that the user is searching for.
+     * @return Subset of tasks in the master list that match the given keyword(s).
      */
-    public ArrayList<Task> findTasks(String keyword) {
-        ArrayList<Task> matchedTasks = new ArrayList<>();
-        for (Task task : taskList) {
-            if (task.name.contains(keyword)) {
-                matchedTasks.add(task);
+    public HashMap<String, ArrayList<Task>> findTasks(String[] keywords) {
+        HashMap<String, ArrayList<Task>> map = new HashMap<>();
+        for (String keyword : keywords) {
+            ArrayList<Task> matchedTasks = new ArrayList<>();
+            for (Task task : taskList) {
+                if (task.name.contains(keyword)) {
+                    matchedTasks.add(task);
+                }
             }
+            map.put(keyword, matchedTasks);
         }
-        return matchedTasks;
+        return map;
     }
 
     /**

@@ -28,7 +28,7 @@ public class Deadline extends Task {
 
     @Override
     public String toFormatString() {
-        return "D | " + (super.done ? "1" : "0") + " | " + super.name + " | "
+        return "D | " + (super.isDone ? "1" : "0") + " | " + super.name + " | "
                 + this.dueDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy',' hh'.'mma"));
     }
 }

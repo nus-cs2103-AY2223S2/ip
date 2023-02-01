@@ -1,16 +1,11 @@
 package peppa;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
-import peppa.commands.DeadlineCommand;
-import peppa.commands.DeleteCommand;
-import peppa.commands.EventCommand;
-import peppa.commands.ExitCommand;
-import peppa.commands.ListCommand;
-import peppa.commands.MarkCommand;
-import peppa.commands.TodoCommand;
-import peppa.commands.UnmarkCommand;
+import peppa.commands.*;
 
 /**
  * Represents a user interface screen for reading in user inputs and displaying messages in terminal.
@@ -30,6 +25,7 @@ public class Ui {
      * Returns custom message upon a successful add task operation.
      *
      * @param task Task that was added.
+     * @return Add task message.
      */
     public static String getAddTaskMessage(Task task) {
         return "Oink! I've added the following task:\n" + "> " + task.toString() + "\n";
@@ -37,11 +33,14 @@ public class Ui {
 
     /**
      * Returns a list of commands that the chatbot currently supports.
+     *
+     * @return List of available commands.
      */
     public static String getCommands() {
         return "> " + ListCommand.COMMAND_WORD + "\n"
                 + "> " + MarkCommand.COMMAND_WORD + "\n"
                 + "> " + UnmarkCommand.COMMAND_WORD + "\n"
+                + "> " + FindCommand.COMMAND_WORD + "\n"
                 + "> " + TodoCommand.COMMAND_WORD + "\n"
                 + "> " + DeadlineCommand.COMMAND_WORD + "\n"
                 + "> " + EventCommand.COMMAND_WORD + "\n"
@@ -53,6 +52,7 @@ public class Ui {
      * Returns custom message upon a successful delete task operation.
      *
      * @param task Task that was deleted.
+     * @return Delete task message.
      */
     public static String getDeleteTaskMessage(Task task) {
         return "Oink! I've removed the following task:\n" + "> " + task.toString() + "\n";
@@ -72,15 +72,32 @@ public class Ui {
      * Returns custom message upon a successful mark task as done operation.
      *
      * @param task Task that was marked as done.
+     * @return Mark done message.
      */
     public static String getMarkDoneMessage(Task task) {
         return "Oink! I've marked this task as done:\n" + "> " + task.toString() + "\n";
     }
 
-    public static String getMatchingTasks(ArrayList<Task> tasks) {
-        StringBuilder response = new StringBuilder("Oink! Here are the matching tasks in your list:\n");
-        for (int i = 0; i < tasks.size(); i++) {
-            response.append((i + 1) + ". " + tasks.get(i) + "\n");
+    /**
+     * Returns custom message upon execution of a find command.
+     *
+     * @param map Hashmap that associates a keyword with the list of matching tasks.
+     * @return Find task message describing matching tasks.
+     */
+    public static String getMatchingTasks(HashMap<String, ArrayList<Task>> map) {
+        StringBuilder response = new StringBuilder("Oink! ");
+        for (String keyword : map.keySet()) {
+            ArrayList<Task> matchingTasks = map.get(keyword);
+            if (matchingTasks.size() == 0) {
+                response.append("No tasks found which match \"" + keyword + "\".\n\n");
+            } else {
+                response.append("Peppa found " + matchingTasks.size()
+                        + " tasks that match \"" + keyword + "\":\n");
+                for (int i = 0; i < matchingTasks.size(); i++) {
+                    response.append((i + 1) + ". " + matchingTasks.get(i) + "\n");
+                }
+                response.append("\n");
+            }
         }
         return response.toString();
     }
@@ -89,6 +106,7 @@ public class Ui {
      * Returns the current tasklist, including the details of each task (e.g. id and description).
      *
      * @param tasks List of tasks.
+     * @return Tasklist.
      */
     public static String getTaskList(TaskList tasks) {
         StringBuilder response = new StringBuilder("Oink! Here are the tasks in your list currently:\n");
@@ -102,6 +120,7 @@ public class Ui {
      * Returns the number of tasks in the list currently.
      *
      * @param tasks List of tasks.
+     * @return Tasklist summary message describing number of tasks in the list.
      */
     public static String getTaskSummary(TaskList tasks) {
         return "You now have " + tasks.getLength() + " tasks in the list.";
@@ -111,6 +130,7 @@ public class Ui {
      * Returns custom message upon a successful unmark task as done operation.
      *
      * @param task Task that was unmarked as done.
+     * @return Unmark done message.
      */
     public static String getUnmarkDoneMessage(Task task) {
         return "Oink! I've marked this task as undone:\n" + "> " + task.toString() + "\n";
@@ -146,6 +166,8 @@ public class Ui {
 
     /**
      * Returns farewell message upon leaving the chatbot.
+     *
+     * @return Farewell message.
      */
     public String terminateSession() {
         this.sc.close();

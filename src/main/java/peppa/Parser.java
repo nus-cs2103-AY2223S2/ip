@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Arrays;
 
 import peppa.commands.Command;
 import peppa.commands.DeadlineCommand;
@@ -46,7 +47,7 @@ public class Parser {
         case DeleteCommand.COMMAND_WORD:
             return parseDeleteCommand(args);
         case FindCommand.COMMAND_WORD:
-            return new FindCommand(args[1]);
+            return parseFindCommand(args);
         case TodoCommand.COMMAND_WORD:
             return parseTodoCommand(fullCommand);
         case DeadlineCommand.COMMAND_WORD:
@@ -161,6 +162,22 @@ public class Parser {
         if (done.equals("1")) {
             int idx = tasks.getLength() - 1;
             tasks.retrieveTask(idx).setDone(true);
+        }
+    }
+
+    /**
+     * Parses a find task request into a FindCommand object.
+     *
+     * @param args Array of arguments obtained from splitting the given command around a whitespace character.
+     * @return FindCommand object if command was parsed successfully, and IncorrectCommand object otherwise.
+     */
+    public static Command parseFindCommand(String[] args) {
+        if (args.length == 1) {
+            return new IncorrectCommand("Boink! Peppa could not process the request. "
+                    + "Please enter at least 1 keyword to search for.");
+        } else {
+            String[] keywords = Arrays.copyOfRange(args, 1, args.length);
+            return new FindCommand(keywords);
         }
     }
 

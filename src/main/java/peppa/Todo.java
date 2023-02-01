@@ -21,6 +21,6 @@ public class Todo extends Task {
 
     @Override
     public String toFormatString() {
-        return "T | " + (super.done ? "1" : "0") + " | " + super.name;
+        return "T | " + (super.isDone ? "1" : "0") + " | " + super.name;
     }
 }
