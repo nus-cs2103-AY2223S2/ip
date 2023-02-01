@@ -9,9 +9,9 @@ import duke.ui.Ui;
 
 public class Duke {
 
-    private Database database;
+    private final Database database;
     private TaskList tasks;
-    private Ui ui;
+    private final Ui ui;
     private static final String FRAME = "    ____________________________________________________________\n";
     private boolean isActive;
     private final Parser parser;

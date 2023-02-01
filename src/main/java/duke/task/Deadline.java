@@ -11,7 +11,7 @@ import java.util.Objects;
 
 public class Deadline extends Task {
 
-    private static final String typeToString = "D";
+    private static final String TYPE_TO_STRING = "D";
     private final LocalDateTime deadline;
 
 
@@ -31,7 +31,7 @@ public class Deadline extends Task {
     @Override
     public String status() {
         String status = this.completed ? "[X] " : "[ ] ";
-        return "[" + typeToString + "]" + status + this.details + " (by: " +
+        return "[" + TYPE_TO_STRING + "]" + status + this.details + " (by: " +
                 this.deadline.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)) + " [" +
                 this.deadline.format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT)) + "]" + ")";
     }
@@ -39,7 +39,7 @@ public class Deadline extends Task {
     @Override
     public ArrayList<String> data() {
         ArrayList<String> data = new ArrayList<>();
-        data.add(typeToString);
+        data.add(TYPE_TO_STRING);
         data.add(this.completed ? "X" : " ");
         data.add(this.details);
         data.add(this.deadline.toString());

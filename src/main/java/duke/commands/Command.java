@@ -8,7 +8,7 @@ public abstract class Command {
 
     public boolean isActive;
 
-    public static final String FRAME = "    ____________________________________________________________\n";
+    private static final String FRAME = "    ____________________________________________________________\n";
 
     public Command() {
         this.isActive = true;

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class Event extends Task {
-    private static final String typeToString = "E";
+    private static final String TYPE_TO_STRING = "E";
     private final LocalDateTime startDateTime;
     private final LocalDateTime endDateTime;
     private final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
@@ -32,7 +32,7 @@ public class Event extends Task {
     @Override
     public String status() {
         String status = this.completed ? "[X] " : "[ ] ";
-        return "[" + typeToString + "]" + status + this.details +
+        return "[" + TYPE_TO_STRING + "]" + status + this.details +
                 " (from: " + this.startDateTime.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)) + " [" +
                 this.startDateTime.format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT)) + "]" + ")" + " to: " +
                 this.endDateTime.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)) + " [" +
@@ -42,7 +42,7 @@ public class Event extends Task {
     @Override
     public ArrayList<String> data() {
         ArrayList<String> data = new ArrayList<>();
-        data.add(typeToString);
+        data.add(TYPE_TO_STRING);
         data.add(this.completed ? "X" : " ");
         data.add(this.details);
         data.add(this.startDateTime.toString());
