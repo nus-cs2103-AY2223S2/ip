@@ -23,7 +23,4 @@ public class ToDo extends Task {
         return String.format("[T]%s", super.toString());
     }
 
-    public String toTextString() {
-        return String.format("T | %s | %s", super.status ? "1" : "0", super.name);
-    }
 }

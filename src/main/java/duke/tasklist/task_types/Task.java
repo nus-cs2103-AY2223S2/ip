@@ -40,5 +40,4 @@ public abstract class Task implements Serializable {
         return String.format("[%s] %s", this.status ? "X" : " ", this.name);
     }
 
-    public abstract String toTextString();
 }
