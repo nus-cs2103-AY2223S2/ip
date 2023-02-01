@@ -1,7 +1,5 @@
 package Exceptions;
 
-import Exceptions.MunchException;
-
 public class InvalidInputException extends MunchException {
 
     public InvalidInputException() {
