@@ -1,6 +1,12 @@
-package command;
+package duke.command;
 
-import duke.*;
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.TaskList;
+import duke.task.ToDo;
+import duke.ui.Ui;
 
 import java.time.DateTimeException;
 

@@ -1,12 +1,13 @@
-package duke;
+package duke.parser;
 
-import command.AddCommand;
-import command.ByeCommand;
-import command.Command;
-import command.DeleteCommand;
-import command.ListCommand;
-import command.MarkCommand;
-import command.UnmarkCommand;
+import duke.command.AddCommand;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
+import duke.command.UnmarkCommand;
+import duke.exception.DukeException;
 
 public class Parser {
     public static Command parse(String fullCommand) throws DukeException {
