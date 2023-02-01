@@ -2,56 +2,27 @@ package duke.Tasks;
 
 import java.io.Serializable;
 
-/**
- * Parent Task class which implements Serializable. 
- */
 public class Task implements Serializable {
     protected String desc;
     protected boolean isDone;
 
-    /**
-     * Public constructor that takes in String to create a Task object.
-     * Boolen isDone is initialised as false.
-     * 
-     * @param desc description of the task.
-     */
     public Task(String desc) {
         this.desc = desc;
         setDone(false);
     }
 
-    /**
-     * Getter method to access Task description only.
-     * 
-     * @return desc description of the task.
-     */
     public String getDescription() {
         return this.desc;
     }
 
-    /**
-     * Indicate whether task is done or not.
-     * True if done, false otherwise.
-     * 
-     * @param done
-     */
     public void setDone(boolean done) {
         this.isDone = done;
     }
 
-    /**
-     * Check if task is done or not.
-     * True if done, false otherwise.
-     * 
-     * @return boolean
-     */
     public boolean isDone() {   
         return this.isDone;   
     }
 
-    /**
-     * Indicate done if task is not done and vice-versa.
-     */
     public void toggleDoneOrNot() {
         if (this.isDone()) {
             setDone(false);
@@ -59,12 +30,6 @@ public class Task implements Serializable {
             setDone(true);
         }
     }
-
-    /**
-     * Human friendly interpretation of Task.
-     * 
-     * @return Task interpretation showing isDone status and description.
-     */
 
     @Override
     public String toString() {

@@ -11,25 +11,14 @@ import java.util.ArrayList;
 
 import duke.Tasks.Task;
 
-/**
- * A utility class that loads from an existing storage or creates a new .txt
- * file to store user's session.
- */
 public class Storage {
-    private static DukeIo dukeIo = new DukeIo();
+    private static DukeIO dukeIo = new DukeIO();
     private ArrayList<Task> storedTasks;
     private FileInputStream fis;
     private ObjectInputStream ois;
     private FileOutputStream fos;
     private ObjectOutputStream o;
 
-    /**
-     * Reads byte stream from pre-existing .txt file.
-     * 
-     * @return storedTasks ArrayList that is loaded from existing storage
-     * @throws IOException
-     * @throws ClassNotFoundException
-     */
     @SuppressWarnings("unchecked")
     public ArrayList<Task> load() throws IOException, ClassNotFoundException {
         fis = new FileInputStream("./data/duke.txt");
@@ -41,27 +30,10 @@ public class Storage {
         return storedTasks; 
     }    
 
-    /**
-     * Writes ArrayList of tasks as a Serialized byte stream into a .txt file.
-     * If .txt file exists, changes are overwritten.
-     * If the directory or .txt file does not exist, the directory and a new .txt file is created.
-     * 
-     * @param tasks
-     * @throws IOException
-     */
     public void saveFrom(ArrayList<Task> tasks) throws IOException {
-        // Only save if there are tasks in the ArrayList task
+
         if (tasks.size() > 0) {
-            /*
-             * Creates 'data' directory by creating all parent directories first
-             * if it does not exist.
-             */
             Files.createDirectories(Paths.get("./data/"));
-            /*
-             * Creates a file output stream with the specified name if it exists or
-             * creates a regular file if it does not exist.
-             * Data is written from 0 offset, thereby overwritting previous saves. 
-             */
             fos = new FileOutputStream("./data/duke.txt");
             o = new ObjectOutputStream(fos);
             o.writeObject(tasks);
