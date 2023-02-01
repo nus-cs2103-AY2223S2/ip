@@ -7,15 +7,15 @@ import userinteraction.Ui;
 import java.util.ArrayList;
 
 public class TaskList {
-    private final ArrayList<Task> store;
-    public TaskList(ArrayList<Task> store) {
-        this.store = store;
+    private final ArrayList<Task> tasks;
+    public TaskList(ArrayList<Task> tasks) {
+        this.tasks = tasks;
     }
     public int getSize() {
-        return store.size();
+        return tasks.size();
     }
-    public ArrayList<Task> getStore() {
-        return store;
+    public ArrayList<Task> getTasks() {
+        return tasks;
     }
 
     public void listTask(String[] inputLine) throws DukeException {
@@ -23,14 +23,14 @@ public class TaskList {
             throw new DukeException("Invalid format");
         }
         int number = 1;
-        for (Task stored : store) {
+        for (Task stored : tasks) {
             System.out.println(number + ". " + stored.toString());
             number++;
         }
     }
 
     public void addTask(Task task) {
-        store.add(task);
+        tasks.add(task);
     }
 
     public void deleteTask(String[] inputArr, Ui ui) throws DukeException {
@@ -42,9 +42,9 @@ public class TaskList {
         if (index >= size | index < 0) {
             throw new DukeException("Index out of bounds");
         }
-        Task task = store.get(index);
+        Task task = tasks.get(index);
         ui.printDeleteTaskMsg(task, size - 1);
-        store.remove(index);
+        tasks.remove(index);
     }
 
     public void markTask(boolean isMarked, String[] input, Ui ui) throws DukeException {
@@ -52,11 +52,11 @@ public class TaskList {
             throw new DukeException("Invalid format, please give numbers");
         }
         int index = Integer.parseInt(input[1]) - 1;
-        int size = store.size();
+        int size = tasks.size();
         if (index >= size | index < 0) {
             throw new DukeException("Index out of bounds");
         }
-        Task task = store.get(index);
+        Task task = tasks.get(index);
         task.setChecked(isMarked);
         ui.printMarkTaskMsg(isMarked, task);
     }
