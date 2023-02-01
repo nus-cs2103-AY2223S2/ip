@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
+import java.io.IOException;
 
 import duke.DukeException.InvalidCommandException;
 import duke.Tasks.Deadline;
@@ -17,13 +18,25 @@ public class MyDuke {
     private static DukeIO dukeIo = new DukeIO();
     private static TaskList allTasks;
     private static Map<String, Consumer<String[]>> cmdMap = new HashMap<>();
+    private static Storage storage = new Storage();
 
     public void init() {
         dukeIo.printHello();
         populateCommands();
     }
 
-    public void quit() {
+    /**
+     * Passes the chain of responsibility to DukeIo to display quit message.
+     * Passes the chain of responsibility to Storage to save on quit.
+     */
+    public void quit() throws IOException {
+        if (allTasks.getTaskCount() > 0) {
+            try {
+                storage.saveFrom(allTasks.getAllTasks());
+            } catch (IOException i) {
+                dukeIo.notifySaveFailure();
+            }
+        }
         dukeIo.printQuit();
     }
 
@@ -45,6 +58,7 @@ public class MyDuke {
         cmdMap.put("mark", (tokens) -> toggle(tokens));
         cmdMap.put("unmark", (tokens) -> toggle(tokens));
         cmdMap.put("delete", (tokens) -> delete(tokens));
+        cmdMap.put("find", (tokens) -> find(tokens));
     }
 
     private void toggle(String[] tokens) {
@@ -201,5 +215,16 @@ public class MyDuke {
         System.out.println(allTasks.getTask(taskIndex-1).toString() + " deleted.");
         allTasks.deleteTask(taskIndex-1);
         dukeIo.showCount();
+    }
+
+    private void find(String[] tokens) {
+        String searchString = "";
+        for (String s : tokens) {
+            if (s.equals("find")) {
+                continue;
+            }
+            searchString += s;
+        }
+        allTasks.showFilteredTasks(searchString);
     }
 }

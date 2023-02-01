@@ -43,10 +43,10 @@ public class Duke {
                 dukeIo.showPrompt();
             }
         }
-        storage.saveFrom(taskList.getAllTasks());
     }
 
-    private static boolean handle(String[] tokens, TaskList taskList) throws InvalidCommandException {
+    private static boolean handle(String[] tokens, TaskList taskList) 
+        throws InvalidCommandException, IOException {
         String cmd = tokens[0];
         if (cmd.length()==0) {  
             return false;    

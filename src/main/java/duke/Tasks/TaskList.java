@@ -42,4 +42,28 @@ public class TaskList {
         allTasks.remove(taskIndex);
         taskCount--;
     }
+
+    /**
+     * Filters from list of all tasks to return a new list of tasks containing the search term.
+     * @param serachString Keyword to search
+     * @return void Displays the filtered tasks
+     */
+    public void showFilteredTasks(String searchString) {
+        // early return if there are no tasks initially
+        if (allTasks.size() == 0) {
+            dukeIo.notifyZeroHits();
+            return;
+        }
+
+        List<Task> searchResults = allTasks.stream()
+                                            .filter(t -> t.toString().contains(searchString))
+                                            .collect(Collectors.toList());
+        if (searchResults.size() == 0) {
+            dukeIo.notifyZeroHits();
+            return;
+        } else {
+            dukeIo.showFiltered(searchResults);
+            return;
+        }
+    }
 }
