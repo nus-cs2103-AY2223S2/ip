@@ -27,7 +27,7 @@ class TaskList {
      * Calls the ToDo constructor and inserts created ToDo into this Babe's memory.
      * @param content The description of the ToDo item.
      */
-    protected Task addToDo(String content, boolean toNotify) {
+    public Task addToDo(String content, boolean toNotify) {
         ToDo item = new ToDo(content);
         tasks.add(taskCount++, item);
         if (toNotify) {
@@ -42,7 +42,7 @@ class TaskList {
      * @param content The content of the Deadline item.
      * @param date The date of the deadline. May include time too.
      */
-    protected Task addDeadline(String content, String date, boolean toNotify) {
+    public Task addDeadline(String content, String date, boolean toNotify) {
         Deadline item = new Deadline(content, date);
         tasks.add(taskCount++, item);
         if (toNotify) {
@@ -58,7 +58,7 @@ class TaskList {
      * @param startDate The start date of the Event. May include time too.
      * @param endDate The end date of the Event. May include time too.
      */
-    protected Task addEvent(String content, String startDate, String endDate, boolean toNotify) {
+    public Task addEvent(String content, String startDate, String endDate, boolean toNotify) {
         Event item = new Event(content, startDate, endDate);
         tasks.add(taskCount++, item);
         if (toNotify) {
@@ -72,7 +72,7 @@ class TaskList {
      *
      * @param index An integer that represents the index of the Task to be removed from memory.
      */
-    protected void deleteTask(int index) {
+    public void deleteTask(int index) {
         Task removedTask = this.tasks.remove(index - 1);
         Ui.notifyDelete(removedTask, --taskCount);
     }
@@ -82,7 +82,7 @@ class TaskList {
      * If user keys in "mark", this function will extract the index to be marked and sets the index to True in
      * doneStatus. Sets the index to False if "unmark"is keyed in.
      */
-    protected void changeStatus(boolean toMark, int index) {
+    public void changeStatus(boolean toMark, int index) {
         Task itemAtIndex = tasks.get(index - 1);
         if (toMark) {
             itemAtIndex.mark();

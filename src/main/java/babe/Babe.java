@@ -19,7 +19,7 @@ public class Babe {
     /**
      * A TaskList object for this Babe.
      */
-    public TaskList taskList = new TaskList();
+    private TaskList taskList = new TaskList();
 
     public static void main(String[] args) {
 

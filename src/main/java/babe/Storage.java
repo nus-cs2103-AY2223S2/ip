@@ -81,6 +81,19 @@ class Storage {
     }
 
     /**
+     * Deletes the save file.
+     */
+    public static void deleteSaveFile() {
+
+        try {
+            Files.deleteIfExists(Paths.get(FILE_PATH));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    /**
      * Saves Tasks stored in Babe's memory to a file specified by fileAddress.
      */
     protected static void save(TaskList taskList) {

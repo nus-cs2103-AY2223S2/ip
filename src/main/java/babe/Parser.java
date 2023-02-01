@@ -78,7 +78,7 @@ class Parser {
     }
 
 
-    protected static ArrayList<String> parse(String input)
+    public static ArrayList<String> parse(String input)
             throws NoDescriptionException, NonsenseInputException, WrongDateFormatException {
 
         userInput = new ArrayList<>(Arrays.asList(input.split(" ")));
