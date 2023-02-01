@@ -1,5 +1,8 @@
 package windycall;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 /**
  * Deals with making sense of the user command by splitting
  * user command and translation
@@ -88,6 +91,27 @@ public class Parser {
             System.out.println("☹ OOPS!!! You should input a number");
         }
         return num;
+    }
+
+    /**
+     * Return formatted LocalDate by translating user input String deadline
+     *
+     * @param deadline String representation of date input by user
+     * @return formatted LocalDate
+     */
+    public static LocalDate processDate(String deadline) {
+        deadline = deadline.trim();
+        LocalDate dateTime;
+        try {
+            dateTime = LocalDate.parse(deadline);
+        } catch (DateTimeParseException e) {
+            String[] parts = deadline.split("/");
+            int day = Integer.parseInt(parts[0]);
+            int month = Integer.parseInt(parts[1]);
+            int year = Integer.parseInt(parts[2]);
+            dateTime = LocalDate.of(year, month, day);
+        }
+        return dateTime;
     }
 
     /*

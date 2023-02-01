@@ -13,31 +13,8 @@ public class Event extends Task {
 
     public Event(String description, boolean status, String from, String to) {
         super(description, status);
-        this.from = processDate(from);
-        this.to = processDate(to);
-    }
-
-    /**
-     * Return formatted LocalDate by translating user input String deadline
-     *
-     * @param deadline String representation of date input by user
-     * @return formatted LocalDate
-     */
-    private LocalDate processDate(String deadline) {
-        // now assume date is in the form
-        // dd/mm/yy or yy-mm-dd
-        // in later versions, more form of date and time will be resolved
-        LocalDate dateTime;
-        try {
-            dateTime = LocalDate.parse(deadline);
-        } catch (DateTimeParseException e) {
-            String[] parts = deadline.split("/");
-            int day = Integer.parseInt(parts[0]);
-            int month = Integer.parseInt(parts[1]);
-            int year = Integer.parseInt(parts[2]);
-            dateTime = LocalDate.of(year, month, day);
-        }
-        return dateTime;
+        this.from = Parser.processDate(from);
+        this.to = Parser.processDate(to);
     }
 
     @Override
@@ -50,12 +27,12 @@ public class Event extends Task {
     public String getFileFormat() {
         return "E | " + getStatusIcon() + " | " + description + " | " + from + " | " + to + "\n";
     }
-    private String getDeadlineFormat(LocalDate date) {
+    private String changeDateTimeFormat(LocalDate date) {
         return date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
     }
 
     private String getEventInterval() {
-        return " (from: " + getDeadlineFormat(from) + " to: " + getDeadlineFormat(to) + ")";
+        return " (from: " + changeDateTimeFormat(from) + " to: " + changeDateTimeFormat(to) + ")";
     }
 
     @Override

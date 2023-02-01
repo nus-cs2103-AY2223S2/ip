@@ -27,6 +27,11 @@ public class Ui {
      * @param tasks tasks to be displayed
      */
     public void displayTasks(List<Task> tasks) {
+        if (tasks.size() == 0) {
+            Ui.space();
+            System.out.println("Seems like there is no task in your list.");
+            return ;
+        }
         Ui.space();
         System.out.println("Here are all of your tasks:");
         for (int i = 0; i < tasks.size(); i++) {
@@ -36,12 +41,24 @@ public class Ui {
     }
 
     public void displayTasks(List<Task> tasks, String filterWord) {
-        Ui.space();
-        System.out.println("Here are all matching tasks in your list:");
+
+        int cntValidTask = 0;
         for (int i = 0; i < tasks.size(); i++) {
             if (tasks.get(i).matchFilterWord(filterWord)) {
-                Ui.space();
-                System.out.println((i + 1) + "." + tasks.get(i));
+                cntValidTask++;
+            }
+        }
+        if (cntValidTask == 0) {
+            Ui.space();
+            System.out.println("Oh! There is no matching task found. Try input another key word");
+        } else {
+            Ui.space();
+            System.out.println("Here are all matching tasks in your list:");
+            for (int i = 0; i < tasks.size(); i++) {
+                if (tasks.get(i).matchFilterWord(filterWord)) {
+                    Ui.space();
+                    System.out.println((i + 1) + "." + tasks.get(i));
+                }
             }
         }
     }
