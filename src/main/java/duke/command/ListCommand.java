@@ -12,8 +12,7 @@ import java.util.ArrayList;
  */
 public class ListCommand extends Command {
 
-    public boolean execute(TaskList tasks, Ui ui, StorageList storage) {
-        tasks.printList();
-        return true;
+    public String execute(TaskList tasks, Ui ui, StorageList storage) {
+        return tasks.printList();
     }
 }

@@ -15,13 +15,13 @@ public class FindCommand extends Command {
         this.message = checker[1];
     }
 
-    public boolean execute(TaskList tasks, Ui ui, StorageList storage) {
-        System.out.println("Here are the matching tasks in your list:");
+    public String execute(TaskList tasks, Ui ui, StorageList storage) {
         ArrayList<Task> arrList = tasks.find(message);
+        String output = "";
         for (Task t : arrList) {
-            System.out.println(t);
+            output+=t+"\n";
         }
 
-        return true;
+        return "Here are the matching tasks in your list: " + output ;
     }
 }

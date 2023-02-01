@@ -24,12 +24,9 @@ public class EventCommand extends Command {
         this.to = checkerTo[1];
     }
 
-    public boolean execute(TaskList tasks, Ui ui, StorageList storage) {
+    public String execute(TaskList tasks, Ui ui, StorageList storage) {
         Event t = new Event(message, from, to);
         tasks.addToList(t);
-        System.out.println("Got it, I've added this task:");
-        System.out.println(t);
-        tasks.statement();
-        return true;
+        return "Got it, I've added this task:" + t + tasks.statement();
     }
 }

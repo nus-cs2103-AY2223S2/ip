@@ -16,12 +16,9 @@ public class TodoCommand extends Command {
         this.message = checker[1];
     }
 
-    public boolean execute(TaskList tasks, Ui ui, StorageList storage) {
+    public String execute(TaskList tasks, Ui ui, StorageList storage) {
         Todo t = new Todo(message);
         tasks.addToList(t);
-        System.out.println("Got it, I've added this task:");
-        System.out.println(t);
-        tasks.statement();
-        return true;
+        return "Got it, I've added this task:\n" + t + "\n" + tasks.statement();
     }
 }

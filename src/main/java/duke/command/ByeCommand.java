@@ -9,9 +9,8 @@ import duke.ui.Ui;
  **/
 public class ByeCommand extends Command {
 
-    public boolean execute(TaskList tasks, Ui ui, StorageList storage) {
-        System.out.println("See you soon!");
-        return true;
+    public String execute(TaskList tasks, Ui ui, StorageList storage) {
+        return "See you soon!";
     }
 
     @Override

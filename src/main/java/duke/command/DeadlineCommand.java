@@ -19,16 +19,13 @@ public class DeadlineCommand extends Command {
         this.timing = checker[1];
     }
 
-    public boolean execute(TaskList tasks, Ui ui, StorageList storage) {
+    public String execute(TaskList tasks, Ui ui, StorageList storage) {
         Deadline taskDeadline = new Deadline(message, timing);
         if (!taskDeadline.checkFormat()) {
             tasks.addToList(taskDeadline);
-            System.out.println("Got it, I've added this task:");
-            System.out.println(taskDeadline);
+            return "Got it, I've added this task:\n" + taskDeadline + tasks.statement();
         } else {
-            System.out.println("Wrong Format, Please fill in with the following format: YYYY-MM-DD h:mm");
+            return "Wrong Format, Please fill in with the following format: YYYY-MM-DD h:mm";
         }
-        tasks.statement();
-        return true;
     }
 }
