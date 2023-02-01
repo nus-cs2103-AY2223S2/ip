@@ -161,15 +161,15 @@ public class Duke {
                         continue;
                     case "FIND":
                         String[] find_input_arr = input.split(" ");
-                        if (arrayList.size() == 0){
+                        if (task_list.size() == 0){
                             String err_msg = "You have not upload any task yet";
                             throw new DukeException(err_msg);
                         }
                         System.out.println("Here are the matching tasks in your list:");
                         i = 1;
-                        for (Task task : arrayList) {
+                        for (Task task : task_list) {
                             if (task.description.contains(find_input_arr[1])){
-                                System.out.println(i + ". " + task.toString());
+                                System.out.println(i + ". " + task);
                                 i++;
                             }
                         }
