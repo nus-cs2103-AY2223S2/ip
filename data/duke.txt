@@ -1,4 +1,5 @@
-T | 1 | Assignment
 E | 0 | Halloween Horror Night | 29/10/2023 | 31/10/2023
 D | 0 | Assignment | 30/1/2023 2359
-T | 0 | New Task
+D | 1 | CS3230 Assignment 1 | 1/2/2023 2359
+T | 1 | Homework
+D | 0 | Assigment | 3/3/2023 2359

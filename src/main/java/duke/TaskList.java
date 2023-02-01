@@ -110,7 +110,7 @@ public class TaskList {
         StringBuilder listOutput = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
             listOutput.append(String.format(
-                    "\t%d. %s",
+                    "%d. %s",
                     i + 1,
                     tasks.get(i)
             ));
