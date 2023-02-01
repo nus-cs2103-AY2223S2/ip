@@ -115,4 +115,15 @@ public class TaskList {
         Task t = tasks.remove(index - 1);
         printStatus("Noted. I've removed this task:", t);
     }
+
+    public void find(String keyword, Parser p) {
+        String tmp = "Here are the matching tasks in your list:";
+        for (Task curr : tasks) {
+            if (curr.getDescription().contains(keyword)) {
+                tmp = tmp + "\n" + curr.toString(p);
+            }
+
+        }
+        ui.print(tmp);
+    }
 }

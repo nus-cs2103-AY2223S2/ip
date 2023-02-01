@@ -39,8 +39,8 @@ public class Parser {
         switch (argFrags[0]) {
         case "bye":
             ui.print("Goodbye. Shutting down.");
+            // Break not required as returns ends switch
             return false;
-        // Break not required as returns ends switch
         case "list":
             ui.print(tasks.toStringList());
             break;
@@ -79,6 +79,12 @@ public class Parser {
                 throw Event.getInvalidFormatException();
             }
             tasks.add(new Event(argFrags[1], this));
+            break;
+        case "find":
+            if (argFrags.length < 2) {
+                throw Event.getInvalidFormatException();
+            }
+            tasks.find(argFrags[1], this);
             break;
         default:
             throw new UnrecognisedCommandException();
