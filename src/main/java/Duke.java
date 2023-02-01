@@ -1,10 +1,7 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 import java.util.Scanner;
-
-import static utils.UI.*;
 
 
 public class Duke {
@@ -13,8 +10,9 @@ public class Duke {
     private static TaskList taskList;
     private static Storage memory = new Storage("/duke.txt");
     private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+    private static Ui ui = new Ui();
 
-    public static String mark(boolean toMark) throws DukeException{
+    public static String mark(boolean toMark) throws DukeException {
         int index = Integer.parseInt(toMark ? currentInput.substring(5) : currentInput.substring(7)) - 1;
         if (index >= taskList.size() || index < 0) {
             throw new DukeException("Task index out of bounds, please input a valid index");
@@ -94,32 +92,32 @@ public class Duke {
 
         taskList = new TaskList(memory.load());
         //Introduction
-        greet();
+        ui.greet();
         currentInput = sc.nextLine();
         while (!currentInput.equalsIgnoreCase("bye")) {
-            try{
+            try {
                 //when there is no input
                 if (currentInput.equals("")) {
-                    reply("Please input a command");
+                    ui.reply("Please input a command");
                 } else if (currentInput.equalsIgnoreCase("list")) {
-                    reply(taskList.toString());
+                    ui.reply(taskList.toString());
                 } else if (currentInput.matches("mark \\d+") || currentInput.matches("unmark \\d+")) {
                     boolean toMark = currentInput.matches("mark \\d+");
-                    reply(mark(toMark));
+                    ui.reply(mark(toMark));
                 } else if (currentInput.matches("^(todo|deadline|event) .*")) {
-                    reply(addTask());
+                    ui.reply(addTask());
                 } else if (currentInput.matches("^delete \\d+")) {
-                    reply(deleteTask(currentInput));
+                    ui.reply(deleteTask(currentInput));
                 } else {
-                    reply("Unknown command, please try again");
+                    ui.reply("Unknown command, please try again");
                 }
             } catch (DukeException e) {
-                reply(e.toString());
+                ui.reply(e.toString());
             }
 
             currentInput = sc.nextLine();
         }
         //Signing off
-        signOff();
+        ui.signOff();
     }
 }
