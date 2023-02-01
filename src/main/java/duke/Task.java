@@ -4,7 +4,7 @@ public abstract class Task {
     private boolean completed;
     private String description;
 
-    Task (String description) {
+    public Task (String description) {
         this.description = description;
         this.completed = false;
     }

@@ -1,7 +1,7 @@
 package duke;
 
 public class DukeException extends Exception {
-    DukeException(String error) {
+    public DukeException(String error) {
         super(error);
     }
 

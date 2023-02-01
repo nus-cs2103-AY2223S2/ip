@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class Storage {
     private File storageFile;
 
-    Storage(String file) {
+    public Storage(String file) {
         try {
             String innerPath = System.getProperty("user.dir");
             Path path = Paths.get(innerPath, "src", "main", "java", "data");

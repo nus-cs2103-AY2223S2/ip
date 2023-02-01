@@ -8,7 +8,7 @@ import duke.Ui;
 public class MarkCommand extends Command {
     private int index;
 
-    MarkCommand(int index) {
+    public MarkCommand(int index) {
         this.index = index;
     }
 

@@ -11,7 +11,7 @@ public class TaskList {
         this.tasks = new ArrayList<Task>();
     }
 
-    TaskList (ArrayList<Task> existingTasks) {
+    public TaskList (ArrayList<Task> existingTasks) {
         this.tasks = existingTasks;
     }
 
@@ -49,6 +49,9 @@ public class TaskList {
     }
 
     public String deleteTask(int index) throws DukeException {
+        if (index < 0 || index >= tasks.size()) {
+            throw new DukeException("Error: Please input a valid task index!");
+        }
         StringBuilder response = new StringBuilder();
         response.append("Noted. I've removed this task:\n");
         response.append("  ").append(this.getTaskString(index)).append("\n");
@@ -88,7 +91,6 @@ public class TaskList {
             tasks.add(new Todo(description));
             response.append(getAfterAddStatus());
             return response.toString();
-
         } catch (DateTimeParseException e) {
             throw new DukeException("Invalid Date and Time provided, use the format: dd/MM/yyyy HH:mm");
         }

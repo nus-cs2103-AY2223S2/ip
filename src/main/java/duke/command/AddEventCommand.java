@@ -11,7 +11,7 @@ public class AddEventCommand extends Command {
     private LocalDateTime from;
     private LocalDateTime to;
 
-    AddEventCommand(String description, LocalDateTime from, LocalDateTime to) {
+    public AddEventCommand(String description, LocalDateTime from, LocalDateTime to) {
         this.description = description;
         this.from = from;
         this.to = to;

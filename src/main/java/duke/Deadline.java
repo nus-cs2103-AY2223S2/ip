@@ -8,7 +8,7 @@ import static duke.utils.FormatHelper.PRINTFORMAT;
 public class Deadline extends Task {
     protected LocalDateTime by;
 
-    Deadline(String description, LocalDateTime by) throws IllegalArgumentException {
+    public Deadline(String description, LocalDateTime by) throws IllegalArgumentException {
         super(description);
         this.by = by;
     }

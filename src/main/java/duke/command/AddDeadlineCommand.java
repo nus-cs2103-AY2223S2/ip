@@ -10,7 +10,7 @@ public class AddDeadlineCommand extends Command {
     private String description;
     private LocalDateTime by;
 
-    AddDeadlineCommand(String description, LocalDateTime by) {
+    public AddDeadlineCommand(String description, LocalDateTime by) {
         this.description = description;
         this.by = by;
     }
