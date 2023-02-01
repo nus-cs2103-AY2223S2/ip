@@ -11,7 +11,7 @@ public class DeadlineTest {
         String date = "2023-01-26";
         Deadline deadlineTask = new Deadline(description, false, date);
         String expectedFormat = "2023-01-26";
-        assertEquals(expectedFormat, deadlineTask.processDateTime(expectedFormat).toString());
+        assertEquals(expectedFormat, Parser.processDate(expectedFormat).toString());
     }
 
     @Test
@@ -20,6 +20,6 @@ public class DeadlineTest {
         String date = "26/1/2023";
         Deadline deadlineTask = new Deadline(description, false, date);
         String expectedFormat = "2023-01-26";
-        assertEquals(expectedFormat, deadlineTask.processDateTime(expectedFormat).toString());
+        assertEquals(expectedFormat, Parser.processDate(expectedFormat).toString());
     }
 }
