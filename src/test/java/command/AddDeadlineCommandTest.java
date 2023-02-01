@@ -2,10 +2,12 @@ package command;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import duke.command.AddDeadlineCommand;
+import duke.command.Command;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import storage.TaskList;
+import duke.storage.TaskList;
 
 public class AddDeadlineCommandTest {
 

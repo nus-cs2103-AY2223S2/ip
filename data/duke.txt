@@ -6,3 +6,4 @@ T | 0 |test
 T | 0 |nth
 T | 0 |what
 T | 0 |nth
+T | 0 |hi
