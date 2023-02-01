@@ -25,8 +25,8 @@ public class Duke {
         while (startDuke) {
            initDuke(sc);
         }
+        
     }
-
 
     public static void initDuke(Scanner sc) {
         String[] userInput = sc.nextLine().split(" ", 2);
