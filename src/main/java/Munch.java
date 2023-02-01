@@ -9,18 +9,34 @@ import java.util.ArrayList;
 import java.util.*;
 
 
+/**
+ * Main class of Munch.
+ */
 public class Munch {
 
     private static Ui ui;
     private Storage storage;
     static ArrayList<Task> tasks = new ArrayList<>();
 
+    /**
+     * Constructor for Munch object
+     * @param filePath Path of the object file where the task objects are stored in.
+     */
     public Munch(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         this.tasks = Storage.load(tasks, filePath);
     }
 
+    /**
+     * Runs the program flow.
+     * Prints a welcome message when the user starts the chat.
+     * Continues the program while taking in commands from the user.
+     * Exits the program when user types in "bye".
+     * Prints a goodbye message and close thr program.
+     * @param args
+     * @throws MunchException
+     */
     public static void main(String[] args) throws MunchException {
 
         ui.welcomeMessage();
@@ -28,50 +44,22 @@ public class Munch {
         new Munch(filePath);
 
         Boolean exit = true;
-        Scanner text = new Scanner(System.in);
         while (exit) {
             try {
-                String word = text.nextLine();
+                String word = ui.readCommand();
                 String[] words = word.split(" ");
 
                 if (word.equals("bye")) {
-                    Ui.exitMessage();
-                    Storage.save(tasks, filePath);
+                    ui.exitMessage();
                     exit = false;
-
-                } else if (word.equals("list")) {
-                    ui.listMessage();
-                    for (int i = 0; i < tasks.size(); i++) {
-                        System.out.println((i + 1) + "." + tasks.get(i).toString());
-                    }
-                } else if (words[0].equals("mark") || words[0].equals("unmark")) {
-                    int i = Integer.parseInt(words[1]) - 1;
-                    tasks.get(i).wording(words[0]);
-
-                } else if (words[0].equals("delete")) {
-                    int i = Integer.parseInt(words[1]) - 1;
-                    TaskList.deleteTask(tasks, i);
-
-                } else if (words[0].equals("todo")) {
-                    TaskList.addTodoTask(tasks, word);
-
-                } else if (words[0].equals("deadline")) {
-                    TaskList.addDeadlineTask(tasks, word);
-
-                } else if (words[0].equals("event")) {
-                    TaskList.addEventTask(tasks, word);
-
                 } else {
-                    throw new InvalidInputException();
+                    TaskList.run(tasks, word, words);
                 }
-                ui.divider();
+
                 Storage.save(tasks, filePath);
             } catch (IncompleteInputException | InvalidInputException e) {
                 System.out.println(e.getMessage());
             }
         }
-        text.close();
     }
-
-
 }

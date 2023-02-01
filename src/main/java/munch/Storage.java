@@ -4,16 +4,25 @@ import AddTasks.Task;
 import java.io.*;
 import java.util.ArrayList;
 
-
 public class Storage {
 
     private String path;
 
+    /**
+     * Constructor for Storage object.
+     * @param path The path of the object file where the task objects are stored in.
+     */
     public Storage(String path) {
         this.path = path;
     }
 
-
+    /**
+     * Loads the task objects stored in a file and store it in an ArrayList.
+     * If file has not been created, creates a new file.
+     * @param tasks Stores all the task objects obtained from the file into the arrayList tasks.
+     * @param paths The path of the object file where the task objects are stored in.
+     * @return An arrayList consisting of all the task objects previously stored in a file.
+     */
     public static ArrayList<Task> load(ArrayList<Task> tasks, String paths) {
         try {
             File storageFile = new File(paths);
@@ -37,6 +46,13 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Stores the task objects in an arrayList into a file.
+     * If file has not been created, creates a new file.
+     * @param tasks Stores all the task objects in tasks into a file.
+     * @param paths The path of the object file where the task objects are stored in.
+     */
+
     public static void save(ArrayList<Task> tasks, String paths) {
         try {
             File storageFile = new File(paths);
@@ -57,5 +73,4 @@ public class Storage {
             System.out.println("Apologies, file cannot be read!");
         }
     }
-
 }

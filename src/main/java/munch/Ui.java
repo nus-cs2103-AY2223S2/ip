@@ -1,8 +1,15 @@
 package munch;
 
+import java.util.Scanner;
+
 public class Ui {
 
     public Ui() {}
+
+    public String readCommand() {
+        Scanner sc = new Scanner(System.in);
+        return sc.nextLine();
+    }
 
     public static void welcomeMessage() {
         System.out.println("Hello! I am Munch! :)");

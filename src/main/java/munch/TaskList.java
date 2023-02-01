@@ -5,6 +5,7 @@ import AddTasks.Events;
 import AddTasks.Task;
 import AddTasks.Todo;
 import Exceptions.IncompleteInputException;
+import Exceptions.InvalidInputException;
 import munch.Parser;
 
 import java.time.LocalDate;
@@ -12,6 +13,37 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class TaskList {
+
+    public static void run(ArrayList<Task> tasks, String word, String[] words) throws IncompleteInputException, InvalidInputException {
+        if (word.equals("list")) {
+            Ui.listMessage();
+            for (int i = 0; i < tasks.size(); i++) {
+                System.out.println((i + 1) + "." + tasks.get(i).toString());
+            }
+        } else if (words[0].equals("mark") || words[0].equals("unmark")) {
+            int i = Integer.parseInt(words[1]) - 1;
+            tasks.get(i).wording(words[0]);
+
+        } else if (words[0].equals("delete")) {
+            int i = Integer.parseInt(words[1]) - 1;
+            TaskList.deleteTask(tasks, i);
+
+        } else if (words[0].equals("todo")) {
+            TaskList.addTodoTask(tasks, word);
+
+        } else if (words[0].equals("deadline")) {
+            TaskList.addDeadlineTask(tasks, word);
+
+        } else if (words[0].equals("event")) {
+            TaskList.addEventTask(tasks, word);
+
+        } else {
+            throw new InvalidInputException();
+        }
+        Ui.divider();
+    }
+
+
 
     public static void deleteTask(ArrayList<Task> tasks, int element) {
         Ui.deleteMessage();
