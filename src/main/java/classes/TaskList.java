@@ -217,7 +217,7 @@ public class TaskList {
      * Returns a string message of all the tasks that have the corresponding substring as requested.
      *
      * @param subString String that is to be checked with all tasks and find tasks with this string.
-     * @return String message of all task' descriptions and statuses in the taskList that have the corresponding
+     * @return String message of all tasks' descriptions and statuses in the taskList that have the corresponding
      * substring in its task information.
      */
     public String find(String subString) {
