@@ -86,12 +86,14 @@ public class TaskList {
     }
 
     /**
-     * Adds a given task object to the task list.
+     * Adds a variable number of task objects to the task list.
      *
      * @param t The task object to be added.
      */
-    public void addTask(Task t) {
-        this.tasks.add(t);
+    public void addTask(Task ... t) {
+        for (Task task: t) {
+            this.tasks.add(task);
+        }
     }
 
     /**
