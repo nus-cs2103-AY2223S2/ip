@@ -4,11 +4,13 @@ import duke.command.Command;
 
 import java.io.FileNotFoundException;
 
-public class Duke {
+public class Duke { // a guy who receives user input, and gives duke reply
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+
+    private String welcomeMsg;
 
     public Duke(String filePath) {
         ui = new Ui();
@@ -16,31 +18,25 @@ public class Duke {
         try {
             tasks = storage.load();
         } catch (FileNotFoundException e) {
-            ui.showLoadingError();
+            this.welcomeMsg = ui.showLoadingError(); // prolly wont run!!!!
             tasks = new TaskList();
         }
+        this.welcomeMsg = ui.showWelcome();
     }
 
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (Exception e) {
-                ui.showError(e); // or e.getMessage()
-            } finally {
-                ui.showLine();
-            }
+    public String getWelcomeMsg() {
+        return welcomeMsg;
+    }
+
+    public String process(String fullCommand) {
+        try {
+            Command c = Parser.parse(fullCommand);
+            return c.execute(tasks, ui, storage);
+//            isExit = c.isExit();
+        } catch (Exception e) {
+            return ui.showError(e); // or e.getMessage()
+        } finally {
         }
-    }
-
-    public static void main(String[] args) {
-        new Duke("tasks.txt").run();
     }
 
 }

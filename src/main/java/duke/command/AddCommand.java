@@ -40,7 +40,7 @@ public class AddCommand extends Command{
         this.eventTo = eventTo;
     }
 
-    public void execute(TaskList l, Ui ui, Storage s) {
+    public String execute(TaskList l, Ui ui, Storage s) {
         if (t == TaskType.ToDo) {
             l.add(new ToDo(desc, isDone));
         } else if (t == TaskType.Deadline) {
@@ -48,7 +48,7 @@ public class AddCommand extends Command{
         } else if (t == TaskType.Event) {
             l.add(new Event(desc, isDone, eventFrom, eventTo));
         }
-        ui.showAdded(l);
+        return ui.showAdded(l);
     }
 
 }

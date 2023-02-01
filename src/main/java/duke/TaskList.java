@@ -6,13 +6,13 @@ import java.util.ArrayList;
 
 public class TaskList extends ArrayList<Task>{
 
-    public void find(String keyword, Ui ui) {
+    public String find(String keyword, Ui ui) {
         TaskList l = new TaskList();
         for (Task t : this) {
             if (t.isAMatch(keyword)) {
                 l.add(t);
             }
         }
-        ui.showMatchingList(l);
+        return ui.showMatchingList(l);
     }
 }
