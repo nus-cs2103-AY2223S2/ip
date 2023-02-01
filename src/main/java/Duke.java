@@ -16,7 +16,27 @@ public class Duke {
     Scanner fileSc;
     try {
       fileSc = new Scanner(prevTasks);
-
+      while(fileSc.hasNextLine()) {
+        String[] savedData = fileSc.nextLine().split(" \\| ");
+        Task t = new Task("");
+        switch (savedData[0]) {
+        case "T":
+          t = new Todo(savedData[2]);
+          break;
+        case "D":
+          t = new Deadline(savedData[2], savedData[3]);
+          break;
+        case "E":
+          t = new Event(savedData[2], savedData[3], savedData[4]);
+          break;
+        }
+        if (savedData[1].equals("0")) {
+          t.unmark();
+        } else {
+          t.mark();
+        }
+      }
+      fileSc.close();
     } catch (FileNotFoundException fnfe) {
       prevTasks.createNewFile();                      //Previous task file doesn't exist,
     }                                                 //create new prevTask file.
