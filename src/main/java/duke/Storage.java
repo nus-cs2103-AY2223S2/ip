@@ -17,7 +17,7 @@ public class Storage {
         if (! newFile.exists()) {
             newFile.createNewFile();
         }
-        getTasks(newFile);
+        loadTasks(newFile);
     }
 
     public void saveTasks() {
@@ -26,7 +26,7 @@ public class Storage {
             BufferedWriter bufferWriter = new BufferedWriter(fileWriter);
             String tasks = "";
             for (Task task : TaskList.getContent()) {
-                tasks += task.saveString() + "\n";
+                tasks += task.getSaveString() + "\n";
             }
             bufferWriter.write(tasks);
             bufferWriter.close();
@@ -36,7 +36,7 @@ public class Storage {
         }
     }
 
-    public void getTasks(File file) {
+    public void loadTasks(File file) {
         try {
             Scanner sc = new Scanner(file);
             while(sc.hasNext()) {
@@ -61,7 +61,7 @@ public class Storage {
                 }
                 TaskList.getContent().add(currentTask);
             }
-        } catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             System.out.println(e);
         }
     }

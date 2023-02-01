@@ -58,7 +58,7 @@ public class TaskHandler {
         if (input.length() < 7) {
             throw new EmptyContentException("event");
         }
-        String[] segments = Parser.parseTask(input);
+        String[] segments = Parser.extractArgsFromInput(input);
         String item = segments[0];
         String startTime = segments[1];
         String endTime = segments[2];
@@ -75,7 +75,7 @@ public class TaskHandler {
         if (input.length() < 5) {
             throw new EmptyContentException("todo");
         }
-        String[] segments = Parser.parseTask(input);
+        String[] segments = Parser.extractArgsFromInput(input);
         String item = segments[1];
 
         if (item.isEmpty()) {
@@ -91,7 +91,7 @@ public class TaskHandler {
         if (input.length() < 9) {
             throw new EmptyContentException("deadline");
         }
-        String[] segments = Parser.parseTask(input);
+        String[] segments = Parser.extractArgsFromInput(input);
         String item = segments[0];
         String deadline = segments[1];
 

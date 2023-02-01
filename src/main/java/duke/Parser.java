@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Parser {
-    public static String parseDate(String str) {
+    public static String formatDateString(String str) {
         LocalDateTime date = LocalDateTime.parse(str, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MMM dd yyyy HHmm");
         String displayDate = date.format(dateFormat);
@@ -18,10 +18,10 @@ public class Parser {
         return displayDate;
     }
 
-    public static String[] parseTask(String input) {
+    public static String[] extractArgsFromInput(String input) {
         String[] splitCommand = input.split(" ", 2);
         String type = splitCommand[0];
-        if(type.equals("todo")) {
+        if (type.equals("todo")) {
             return splitCommand;
         } else {
             String[] segments = splitCommand[1].split("/");

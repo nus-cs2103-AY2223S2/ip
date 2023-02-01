@@ -1,16 +1,17 @@
 package duke;
 
 public class Deadline extends Task {
-    String deadlineTime;
+    String deadlineTimeString;
     public Deadline(String description, String deadlineTime) {
         super(description);
-        this.deadlineTime = Parser.parseDate(deadlineTime);
+        this.deadlineTimeString = Parser.formatDateString(deadlineTime);
     }
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(" + deadlineTime + "hrs" + ")";
+
+        return "[D]" + super.toString() + "(" + deadlineTimeString + "hrs" + ")";
     }
-    public String saveString() {
-        return String.format("deadline / %s / %s / %s", super.saveString(), this.getDescription(), deadlineTime);
+    public String getSaveString() {
+        return String.format("deadline / %s / %s / %s", super.getSaveString(), this.getDescription(), deadlineTimeString);
     }
 }

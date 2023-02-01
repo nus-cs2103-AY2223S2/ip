@@ -13,26 +13,30 @@ public class Task {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
-    public String status() {
+    public String statusToString() {
+
         return "[" + getStatusIcon() + "] ";
     }
 
     public void setDone() {
+
         this.isDone = true;
     }
 
     public void setUndone() {
+
         this.isDone = false;
     }
 
     public String getDescription() {
+
         return this.description;
     }
 
     public String toString() {
-        return this.status() + this.getDescription();
+        return this.statusToString() + this.getDescription();
     }
-    public String saveString() {
+    public String getSaveString() {
         if (isDone) {
             return "done";
         } else {

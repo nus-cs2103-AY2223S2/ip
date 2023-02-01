@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
-    private static List<Task> taskList;
+    private static List<Task> tasks;
     public TaskList() {
-        this.taskList = new ArrayList<>();
+        this.tasks = new ArrayList<>();
     }
 
 
     public static List<Task> getContent() {
-        return taskList;
+        return tasks;
     }
 }

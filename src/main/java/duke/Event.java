@@ -5,8 +5,8 @@ public class Event extends Task {
     String endTime;
     public Event(String description, String startTime, String endTime) {
         super(description);
-        this.startTime = Parser.parseDate(startTime);
-        this.endTime = Parser.parseDate(endTime);
+        this.startTime = Parser.formatDateString(startTime);
+        this.endTime = Parser.formatDateString(endTime);
     }
 
     @Override
@@ -14,7 +14,7 @@ public class Event extends Task {
         return "[E]" + super.toString() + "(From: " + startTime + "hrs" + " To: " +  endTime + "hrs" + ")";
     }
 
-    public String saveString() {
-        return String.format("event / %s / %s / %s / %s", super.saveString(), this.getDescription(), startTime, endTime);
+    public String getSaveString() {
+        return String.format("event / %s / %s / %s / %s", super.getSaveString(), this.getDescription(), startTime, endTime);
     }
 }
