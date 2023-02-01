@@ -3,6 +3,7 @@ package duke;
 public class Event extends Task {
     protected Times from, to;
     protected String type = "[E]";
+
     public Event(String description, String from, String to) {
         super(description);
         this.from = new Times(from);
@@ -15,10 +16,10 @@ public class Event extends Task {
         if (index1 == -1 || index2 == -1) {
             throw new DukeException(ExceptionType.TASK_FORMAT_ERROR);
         }
-        String description = input.substring(6,index1 - 1);
+        String description = input.substring(6, index1 - 1);
         String from = input.substring(index1 + 6, index2 - 1);
         String to = input.substring(index2 + 4);
-        Event temp = new Event(description,from,to);
+        Event temp = new Event(description, from, to);
         return temp;
     }
 
