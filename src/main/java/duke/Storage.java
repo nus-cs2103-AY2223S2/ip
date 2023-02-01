@@ -58,6 +58,7 @@ public class Storage {
                     break;
                 case ("E"):
                     curr = new Events(text[2], text[3], text[4]);
+                    break;
                 default:
                     System.out.println("Error while Loading up the file");
                     break;

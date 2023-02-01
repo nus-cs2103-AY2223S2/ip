@@ -2,17 +2,29 @@ package duke.tasks;
 
 import duke.Parser;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Events extends Task {
-    protected LocalDate startDate;
-    protected LocalDate endDate;
+
+    static protected String DEFAULT_TIME = "2359";
+
+    protected LocalDateTime startDate;
+    protected LocalDateTime endDate;
 
     public Events(String description, String startDate, String endDate) {
         super(description);
-        this.startDate = Parser.stringToDate(startDate);
-        this.endDate = Parser.stringToDate(endDate);
+        this.startDate = Parser.stringToDateTime(startDate);
+        this.endDate = Parser.stringToDateTime(endDate);
     }
+
+    public String getStart() {
+        return Parser.dateTimeToString(startDate);
+    }
+
+    public String getEnd() {
+        return Parser.dateTimeToString(endDate);
+    }
+
 
     @Override
     public String getStatusIcon() {
@@ -21,13 +33,21 @@ public class Events extends Task {
 
     @Override
     public String getDescription() {
-        return super.getDescription() + " (from: " + this.startDate +
-                " to: " + this.endDate + ")";
+        return super.getDescription() + " (from: " + this.getStart() +
+                " to: " + this.getEnd() + ")";
+    }
+
+    public String parseStartSaving() {
+        return Parser.dateTimeSaving(startDate);
+    }
+
+    public String parseEndSaving() {
+        return Parser.dateTimeSaving(startDate);
     }
 
     @Override
     public String saveString() {
         return String.format("E|%s|%s|%s|%s", super.saveString(), super.description,
-                this.startDate, this.endDate);
+                this.parseStartSaving(), this.parseEndSaving());
     }
 }
