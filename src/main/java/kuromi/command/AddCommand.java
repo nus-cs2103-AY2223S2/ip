@@ -30,12 +30,12 @@ public class AddCommand extends Command {
      * @param storage Storage to update when there is an update with the task list.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task cur = tasks.add(task);
         storage.refresh(tasks);
         String msg = "Got it. I've added this task:\n";
         msg += cur + "\n";
-        msg += "Now you have " + tasks.size() + " tasks in the list.";
-        ui.show(msg);
+        msg += "Now you have " + tasks.size() + " tasks in the list.\n";
+        return ui.show(msg);
     }
 }

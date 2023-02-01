@@ -20,7 +20,7 @@ public abstract class Command {
      * @param ui UI of the application to interact with users.
      * @param storage Storage to update when there is an update with the task list.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage);
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage);
 
     /**
      * Determines whether the program should be terminated.

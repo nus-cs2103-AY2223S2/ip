@@ -15,6 +15,8 @@ public class Kuromi {
     /** UI of the application **/
     private Ui ui;
 
+    boolean isExit;
+
     /**
      * Main constructor (for invocation by main method).
      * Get stored data from previous session.
@@ -24,6 +26,7 @@ public class Kuromi {
     public Kuromi(java.nio.file.Path filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
+        isExit = false;
         try {
             tasks = new TaskList(storage.load());
         } catch (KuromiException e) {
@@ -53,15 +56,16 @@ public class Kuromi {
         }
     }
 
-    /**
-     * Main method of Duke class.
-     * When Duke is created, the compilation starts from the main method.
-     *
-     * @param args The command line arguments for the application.
-     */
-    public static void main(String[] args) {
-        String home = System.getProperty("user.home");
-        java.nio.file.Path path = java.nio.file.Paths.get(home, "Documents", "duke.txt");
-        new Kuromi(path).run();
+    String getResponse(String inp) {
+        try {
+            Command c = Parser.parse(inp, ui, tasks);
+            return c.execute(tasks, ui, storage);
+        } catch (KuromiException e) {
+           return e.getMessage();
+        }
+    }
+
+    boolean getExitStatus() {
+        return this.isExit;
     }
 }

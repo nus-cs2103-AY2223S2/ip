@@ -21,46 +21,43 @@ public class Ui {
      * Show errors occurred to the user.
      * @param msg Error message to be shown.
      */
-    public void showError(String msg) {
-        System.out.println(msg);
+    public String showError(String msg) {
+        return (msg);
     }
 
     /**
      * Show the lines for separation.
      */
-    public void showLine() {
-        System.out.println(this.lines);
+    public String showLine() {
+        return (this.lines);
     }
 
     /**
      * Show new line.
      */
-    public void showEnter() {
-        System.out.println();
+    public String showEnter() {
+        return "\n";
     }
 
     /**
      * Show error if cannot load the file that is in the hard disk.
      */
-    public void showLoadingError() {
-        System.out.println("Cannot load file. :(\n");
+    public String showLoadingError() {
+        return ("Cannot load file. :(\n");
     }
 
     /**
      * Show welcome message.
      */
-    public void showWelcome() {
-        this.showLine();
-        System.out.println("Hello! I'm Kuromi\nWhat can I do for you?");
-        this.showLine();
-        this.showEnter();
+    public String showWelcome() {
+        return ("Hello! I'm Kuromi\nWhat can I do for you?\n");
     }
 
     /**
      * Show a message to the user.
      * @param msg Message to be shown.
      */
-    public void show(String msg) {
-        System.out.println(msg);
+    public String show(String msg) {
+        return (msg);
     }
 }
