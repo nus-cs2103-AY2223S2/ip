@@ -1,4 +1,4 @@
-package classes;
+package duke;
 
 import exceptions.IncorrectNoOfArgumentException;
 import org.junit.jupiter.api.Test;
@@ -13,35 +13,35 @@ public class EventTest {
 
     @Test
     public void getTaskInfoStatus() {
-        tempTask.markAsDone();
+        tempTask.setDone();
         assertEquals("[E][X] Birthday(from: February 5, 2023 | 12:00:00 AM to: February 5, 2023 | 11:59:00 PM)",
                 tempTask.getTaskInfoStatus());
         System.out.println("Passed 1/4 checks of marking tasks: Event.getTaskInfoStatus()");
-        tempTask2.markAsDone();
+        tempTask2.setDone();
         assertEquals("[E][X] Birthday(from: February 5, 2023 to: February 5, 2023 | 11:59:00 PM)",
                 tempTask2.getTaskInfoStatus());
         System.out.println("Passed 2/4 checks of marking tasks: Event.getTaskInfoStatus()");
-        tempTask3.markAsDone();
+        tempTask3.setDone();
         assertEquals("[E][X] Birthday(from: February 5, 2023 | 12:00:00 AM to: February 5, 2023)",
                 tempTask3.getTaskInfoStatus());
         System.out.println("Passed 3/4 checks of marking tasks: Event.getTaskInfoStatus()");
-        tempTask4.markAsDone();
+        tempTask4.setDone();
         assertEquals("[E][X] Birthday(from: February 5, 2023 to: February 5, 2023)",
                 tempTask4.getTaskInfoStatus());
         System.out.println("Passed 4/4 checks of marking tasks: Event.getTaskInfoStatus()");
-        tempTask.markAsIncomplete();
+        tempTask.setIncomplete();
         assertEquals("[E][ ] Birthday(from: February 5, 2023 | 12:00:00 AM to: February 5, 2023 | 11:59:00 PM)",
                 tempTask.getTaskInfoStatus());
         System.out.println("Passed 1/4 checks of unmarking tasks: Event.getTaskInfoStatus()");
-        tempTask2.markAsIncomplete();
+        tempTask2.setIncomplete();
         assertEquals("[E][ ] Birthday(from: February 5, 2023 to: February 5, 2023 | 11:59:00 PM)",
                 tempTask2.getTaskInfoStatus());
         System.out.println("Passed 2/4 checks of unmarking tasks: Event.getTaskInfoStatus()");
-        tempTask3.markAsIncomplete();
+        tempTask3.setIncomplete();
         assertEquals("[E][ ] Birthday(from: February 5, 2023 | 12:00:00 AM to: February 5, 2023)",
                 tempTask3.getTaskInfoStatus());
         System.out.println("Passed 3/4 checks of unmarking tasks: Event.getTaskInfoStatus()");
-        tempTask4.markAsIncomplete();
+        tempTask4.setIncomplete();
         assertEquals("[E][ ] Birthday(from: February 5, 2023 to: February 5, 2023)",
                 tempTask4.getTaskInfoStatus());
         System.out.println("Passed 4/4 checks of unmarking tasks: Event.getTaskInfoStatus()");
@@ -49,35 +49,35 @@ public class EventTest {
 
     @Test
     public void getTaskInfo() {
-        tempTask.markAsDone();
+        tempTask.setDone();
         assertEquals("[E][X] Birthday/from 2023-02-05 00:00 /to 2023-02-05 23:59",
                 tempTask.getTaskInfo());
         System.out.println("Passed 1/4 checks of marking tasks: Event.getTaskInfo()");
-        tempTask2.markAsDone();
+        tempTask2.setDone();
         assertEquals("[E][X] Birthday/from 2023-02-05 /to 2023-02-05 23:59",
                 tempTask2.getTaskInfo());
         System.out.println("Passed 2/4 checks of marking tasks: Event.getTaskInfo()");
-        tempTask3.markAsDone();
+        tempTask3.setDone();
         assertEquals("[E][X] Birthday/from 2023-02-05 00:00 /to 2023-02-05",
                 tempTask3.getTaskInfo());
         System.out.println("Passed 3/4 checks of marking tasks: Event.getTaskInfo()");
-        tempTask4.markAsDone();
+        tempTask4.setDone();
         assertEquals("[E][X] Birthday/from 2023-02-05 /to 2023-02-05",
                 tempTask4.getTaskInfo());
         System.out.println("Passed 4/4 checks of marking tasks: Event.getTaskInfo()");
-        tempTask.markAsIncomplete();
+        tempTask.setIncomplete();
         assertEquals("[E][ ] Birthday/from 2023-02-05 00:00 /to 2023-02-05 23:59",
                 tempTask.getTaskInfo());
         System.out.println("Passed 1/4 checks of unmarking tasks: Event.getTaskInfo()");
-        tempTask2.markAsIncomplete();
+        tempTask2.setIncomplete();
         assertEquals("[E][ ] Birthday/from 2023-02-05 /to 2023-02-05 23:59",
                 tempTask2.getTaskInfo());
         System.out.println("Passed 2/4 checks of unmarking tasks: Event.getTaskInfo()");
-        tempTask3.markAsIncomplete();
+        tempTask3.setIncomplete();
         assertEquals("[E][ ] Birthday/from 2023-02-05 00:00 /to 2023-02-05",
                 tempTask3.getTaskInfo());
         System.out.println("Passed 3/4 checks of unmarking tasks: Event.getTaskInfo()");
-        tempTask4.markAsIncomplete();
+        tempTask4.setIncomplete();
         assertEquals("[E][ ] Birthday/from 2023-02-05 /to 2023-02-05",
                 tempTask4.getTaskInfo());
         System.out.println("Passed 4/4 checks of unmarking tasks: Event.getTaskInfo()");

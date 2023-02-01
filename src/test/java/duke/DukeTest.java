@@ -1,4 +1,4 @@
-package classes;
+package duke;
 
 import exceptions.IncorrectNoOfArgumentException;
 
@@ -18,7 +18,7 @@ public class DukeTest {
     }
 
     @Test
-    public void run() throws IOException {
+    public void run() throws IOException, IncorrectNoOfArgumentException {
         ArrayList<String> actualCommandInfo = Parser.parse("event Birthday /from 2012-12-22 /to 2012-12-23");
         ArrayList<String> expectedCommandInfo = new ArrayList<>();
         expectedCommandInfo.add("event");
