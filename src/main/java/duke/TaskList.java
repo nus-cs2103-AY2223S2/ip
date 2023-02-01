@@ -1,11 +1,8 @@
 package duke;
 
-import duke.DukeException;
-import duke.ExceptionType;
-import duke.Storage;
-import duke.Task;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class TaskList {
     /**
@@ -16,6 +13,7 @@ public class TaskList {
     private ArrayList<Task> list;
     private Ui ui = new Ui();
     private Storage s = new Storage();
+
     public TaskList() {
         this.list = new ArrayList<>();
     }
@@ -53,6 +51,7 @@ public class TaskList {
             throw new DukeException(ExceptionType.TASK_NOT_EXIST);
         }
     }
+
     public void list() {
         ui.showList(list);
     }
@@ -80,5 +79,21 @@ public class TaskList {
         } catch (IndexOutOfBoundsException IOBE) {
             throw new DukeException(ExceptionType.TASK_NOT_EXIST);
         }
+    }
+
+    /**
+     * List out the tasks which contain keywords
+     * @param keywords
+     */
+    public void find(String keywords) {
+        ArrayList<Task> matches = new ArrayList<>();
+        Iterator<Task> it = list.iterator();
+        while (it.hasNext()) {
+            Task t = it.next();
+            if (t.getDescriptionAndTime().contains(keywords)) {
+                matches.add(t);
+            }
+        }
+        ui.showFind(matches);
     }
 }

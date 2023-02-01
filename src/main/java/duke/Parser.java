@@ -76,6 +76,10 @@ public class Parser {
                 throw new DukeException(ExceptionType.NO_NUMBER);
             }
         }
+        if (header.equals("find")) {
+            String keywords = input.substring(5);
+            return new FindCommand(keywords);
+        }
         throw new DukeException(ExceptionType.UNCLEAR_COMMAND);
     }
 }
