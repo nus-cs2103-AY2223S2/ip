@@ -25,18 +25,6 @@ public class WindyCall {
         this.storage.handleLoad(this.tasks);
     }
 
-
-    /**
-     * Adds a new type of task to tasks ArrayList while possible throwing
-     * errors from user invalid input.
-     *
-     * @param message message input by users
-     * @throws WindyCallException If user input command is invalid
-     */
-    private void addTask(String message) throws WindyCallException{
-
-    }
-
     /**
      * Serves as a runner of the application.
      * Requires parser to translate user command and handle different commands accordingly.
