@@ -1,9 +1,9 @@
 package duke.task;
 
+import java.time.LocalDateTime;
+
 import duke.exception.InvalidDateTimeException;
 import duke.helper.Parser;
-
-import java.time.LocalDateTime;
 
 /**
  * Subclass of tasks representing an event task
@@ -12,6 +12,15 @@ public class Event extends Task {
     private LocalDateTime startDateTime;
     private LocalDateTime dueDateTime;
 
+    /**
+     * Constructor for the Event class
+     *
+     * @param description task's desc
+     * @param from starting date and time of event
+     * @param to ending date and time of event
+     * @param isDone whether the task is done
+     * @throws InvalidDateTimeException If the dateTime input is invalid
+     */
     public Event(String description, String from, String to, boolean isDone) throws InvalidDateTimeException {
         super(description, isDone, "E");
 

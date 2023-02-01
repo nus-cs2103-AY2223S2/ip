@@ -1,20 +1,24 @@
 package duke.helper;
 
-import duke.task.Task;
-
-import java.io.IOException;
 import java.util.ArrayList;
+
+import duke.task.Task;
 
 /**
  * TaskList class that handles all the tasks
  */
 public class TaskList {
     private ArrayList<Task> tasks;
-    private Ui Ui;
+    private Ui ui;
 
-    public TaskList(ArrayList<Task> tasks) throws IOException {
+    /**
+     * Constructor of the TaskList class
+     *
+     * @param tasks tasks to be stored
+     */
+    public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
-        this.Ui = new Ui();
+        this.ui = new Ui();
     }
 
     /**
@@ -45,20 +49,21 @@ public class TaskList {
     public Task deleteTask(int taskNo) {
         Task task = tasks.get(taskNo);
         tasks.remove(taskNo);
-        Ui.showDelete(task, tasks.size());
+        ui.showDelete(task, tasks.size());
         return task;
     }
 
+    /**
+     * Mark or unmark a task
+     *
+     * @param isDone whether the task is done
+     * @param taskId id of the task
+     */
     public void mark(boolean isDone, String taskId) {
         int taskNo = Integer.parseInt(taskId) - 1;
         Task taskToMark = tasks.get(taskNo);
         taskToMark.setIsDone(isDone);
-        Ui.showMark(isDone, taskToMark);
-    }
-
-    public void handleTaskOutput() {
-        Task task = tasks.get(tasks.size() - 1);
-        Ui.showTaskOutput(task, tasks.size());
+        ui.showMark(isDone, taskToMark);
     }
 
     /**

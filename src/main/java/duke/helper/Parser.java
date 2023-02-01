@@ -1,18 +1,18 @@
 package duke.helper;
 
+import java.io.IOException;
+import java.time.DateTimeException;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+
 import duke.exception.DukeException;
 import duke.exception.EmptyTaskException;
 import duke.exception.InvalidDateTimeException;
 import duke.exception.InvalidTaskException;
 import duke.task.Deadline;
 import duke.task.Event;
-import duke.task.ToDo;
 import duke.task.Task;
-
-import java.io.IOException;
-import java.time.DateTimeException;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
+import duke.task.ToDo;
 
 /**
  * Parser class to parse inputs
@@ -45,22 +45,25 @@ public class Parser {
 
         case "todo":
             checkTaskDesc(inputs);
-            tasks.addToTasks(new ToDo(inputs[1], false));
-            tasks.handleTaskOutput();
+            Task toDoTask = new ToDo(inputs[1], false);
+            tasks.addToTasks(toDoTask);
+            Ui.showTaskOutput(toDoTask, tasks.getTasks().size());
             break;
 
         case "deadline":
             checkTaskDesc(inputs);
             String[] deadlineDesc = inputs[1].split(" /by ");
-            tasks.addToTasks(new Deadline(deadlineDesc[0], deadlineDesc[1], false));
-            tasks.handleTaskOutput();
+            Task deadlineTask = new Deadline(deadlineDesc[0], deadlineDesc[1], false);
+            tasks.addToTasks(deadlineTask);
+            Ui.showTaskOutput(deadlineTask, tasks.getTasks().size());
             break;
 
         case "event":
             checkTaskDesc(inputs);
             String[] eventDesc = parseEventDesc(inputs[1]);
-            tasks.addToTasks(new Event(eventDesc[0], eventDesc[1], eventDesc[2], false));
-            tasks.handleTaskOutput();
+            Task eventTask = new Event(eventDesc[0], eventDesc[1], eventDesc[2], false);
+            tasks.addToTasks(eventTask);
+            Ui.showTaskOutput(eventTask, tasks.getTasks().size());
             break;
 
         case "delete":
@@ -84,6 +87,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks if the task desc is not empty
+     *
+     * @param taskDesc Desc of the task
+     * @return true if the task desc is not empty
+     * @throws EmptyTaskException If task desc is empty
+     */
     public static boolean checkTaskDesc(String[] taskDesc) throws EmptyTaskException {
         if (taskDesc.length == 1) {
             throw new EmptyTaskException(taskDesc[0]);

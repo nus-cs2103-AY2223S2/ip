@@ -1,12 +1,12 @@
 package duke;
 
+import java.io.IOException;
+
 import duke.exception.DukeException;
 import duke.helper.Parser;
 import duke.helper.TaskList;
 import duke.helper.Ui;
 import duke.storage.FileSystem;
-
-import java.io.IOException;
 
 /**
  * Main class of the project
@@ -17,6 +17,11 @@ public class Duke {
     private FileSystem db;
     private TaskList tasks;
 
+    /**
+     * Constructor for Duke class
+     *
+     * @param filePath path of the storage file
+     */
     public Duke(String filePath) {
         this.ui = new Ui();
 

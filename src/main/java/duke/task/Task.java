@@ -8,6 +8,13 @@ public class Task {
     private boolean isDone;
     private String type;
 
+    /**
+     * Constructor for Task class
+     *
+     * @param description desc of the task
+     * @param isDone whether a task is done
+     * @param type type of the task
+     */
     public Task(String description, boolean isDone, String type) {
         this.description = description;
         this.isDone = isDone;
