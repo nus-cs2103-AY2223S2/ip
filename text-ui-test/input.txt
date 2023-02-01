@@ -12,4 +12,7 @@ mark 4
 unmark 1
 unmark 4
 list
+delete 1
+delete 2
+delete 3
 bye

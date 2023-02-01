@@ -18,6 +18,12 @@ public class Event extends Task {
         this.to = LocalDateTime.parse(to, formatter);
     }
 
+    /**
+     * @return the string representation of the task to be stored in the hard disk.
+     */
+    public String toStorageString() {
+        return "E | " + (isDone ? "1" : "0") + " | " + description + " | " + from + " | " + to;
+    }
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
