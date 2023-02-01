@@ -222,14 +222,31 @@ public class TaskList {
      */
     public String find(String subString) {
         int taskIndex = 1;
+        String[] words = subString.split(" ");
         sb.append("    ____________________________________________________________\n")
                 .append("    Here are the matching tasks in your list:\n");
-        for (int i = 0; i < this.taskList.size(); i++) {
-            if (this.taskList.get(i).getTaskInfo().toLowerCase().contains(subString)) {
-                sb.append("    ").append(taskIndex++).append(".").append(this.taskList.get(i).getTaskInfoStatus())
-                        .append("\n");
+
+        switch (words.length) {
+        case 1:
+            for (int i = 0; i < this.taskList.size(); i++) {
+                if (this.taskList.get(i).getTaskInfo().toLowerCase().contains(subString)) {
+                    sb.append("    ").append(taskIndex++).append(".").append(this.taskList.get(i).getTaskInfoStatus())
+                            .append("\n");
+                }
             }
+            break;
+        default:
+            for (String word: words) {
+                for (int i = 0; i < this.taskList.size(); i++) {
+                    if (this.taskList.get(i).getTaskInfo().toLowerCase().contains(word)) {
+                        sb.append("    ").append(taskIndex++).append(".").append(this.taskList.get(i).getTaskInfoStatus())
+                                .append("\n");
+                    }
+                }
+            }
+            break;
         }
+
         sb.append("    ____________________________________________________________\n");
         this.message = sb.toString();
         sb.setLength(0);
