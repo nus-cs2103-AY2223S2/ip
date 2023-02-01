@@ -1,5 +1,17 @@
 package duke;
-import duke.command.*;
+import duke.command.Command;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.EndCommand;
+import duke.command.EventCommand;
+import duke.command.FindCommand;
+import duke.command.GuideCommand;
+import duke.command.MarkCommand;
+import duke.command.PrintListCommand;
+import duke.command.TodoCommand;
+import duke.command.UnknownCommand;
+import duke.command.UnmarkCommand;
+
 
 /**
  * Parses a Command based on the string input.

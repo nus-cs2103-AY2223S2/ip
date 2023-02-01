@@ -114,6 +114,10 @@ public class TaskList {
         return this.list.get(index);
     }
 
+    /**
+     * Finds tasks that contains the target string.
+     * @param target the target string to find
+     */
     public void find(String target) {
         ArrayList<Task> foundTasks = new ArrayList<>();
         foundTasks.add(new ToDo("zeroth"));

@@ -17,5 +17,4 @@ public class PrintListCommand extends Command {
     public boolean isExit() {
         return false;
     }
-    
 }

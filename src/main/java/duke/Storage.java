@@ -34,7 +34,6 @@ public class Storage {
             rawData.add(sc.nextLine());
         }
         if (rawData.isEmpty()) {
-            System.out.println("There is no task in the list!\n");
             sc.close();
             return tasks;
         }
@@ -72,7 +71,10 @@ public class Storage {
                     System.out.println(e);
                 }
                 break;
+            default:
+                break;
             }
+
         }
         sc.close();
         return tasks;
