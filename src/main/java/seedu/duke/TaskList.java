@@ -56,6 +56,7 @@ public class TaskList {
      *
      * @param userParse The input from the user.
      * @return The TaskList with the specified marked task.
+     * @throws DukeException if user index is more than the list.
      */
     public TaskList mark(Parser userParse) throws DukeException {
         int userIndex = Integer.parseInt(userParse.inputArr[1]) - 1;
@@ -73,6 +74,7 @@ public class TaskList {
      *
      * @param userParse The input from the user.
      * @return The TaskList with the specified unmarked task.
+     * @throws DukeException if user index is more than the list.
      */
     public TaskList unmark(Parser userParse) throws DukeException {
         int userIndex = Integer.parseInt(userParse.inputArr[1]) - 1;
@@ -192,6 +194,7 @@ public class TaskList {
      *
      * @param userParse The input from the user.
      * @return The Task deleted.
+     * @throws DukeException if user index is more than the list.
      */
     public Task delete(Parser userParse) throws DukeException {
         int userIndex = Integer.parseInt(userParse.inputArr[1]) - 1;
