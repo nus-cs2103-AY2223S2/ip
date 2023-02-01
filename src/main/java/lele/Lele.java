@@ -12,7 +12,6 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-
 /**
  * The main class that represents the chatbot, Lele, which helps
  * to build a checklist consisting of todos, deadlines, events.
