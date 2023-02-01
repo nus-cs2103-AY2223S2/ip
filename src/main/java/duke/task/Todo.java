@@ -1,6 +1,13 @@
 package duke.task;
 
-public class Todo extends Task { //type T
+/**
+ * Todo tasks that has description.
+ */
+public class Todo extends Task {
+    /**
+     * Constructor for Todo.
+     * @param desc
+     */
     public Todo(String desc) {
         super(desc,"T");
     }

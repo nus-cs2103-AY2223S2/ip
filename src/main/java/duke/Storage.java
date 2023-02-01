@@ -13,18 +13,26 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Storage deals with loading tasks from the file and saving tasks to the file.
+ */
 public class Storage {
     private String filePath;
 
+    /**
+     * Constructor for Storage.
+     * @param filePath
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
+
+    /**
+     * Loads tasks in file to an arraylist of tasks.
+     * @return arraylist of tasks
+     * @throws FileNotFoundException
+     */
     public ArrayList<Task> loadContents() throws FileNotFoundException {
-//        File folder = new File("data");
-//        if (!folder.exists()) {
-//            throw new FileNotFoundException("Folder does not exist!");
-//        }
-//        File f = new File("data/duke.txt");
         File f = new File(this.filePath);
         if (!f.exists()) {
             throw new FileNotFoundException("File does not exist!");
@@ -61,6 +69,10 @@ public class Storage {
         return storeTasks;
     }
 
+    /**
+     * Saves tasks to file.
+     * @param storeTasks current arraylist of tasks
+     */
     public void saveTasks(ArrayList<Task> storeTasks) {
         try {
 //            FileWriter fw = new FileWriter("data/duke.txt");
@@ -78,7 +90,7 @@ public class Storage {
                         break;
                     case "D": //D|desc|X|from
                         Deadline deadlineTask = (Deadline) t;
-                        content = String.format("%s|%s|%s|%s",t.getType(),t.getDesc(),t.getStatusIcon(),deadlineTask.getByWhen());
+                        content = String.format("%s|%s|%s|%s",t.getType(),t.getDesc(),t.getStatusIcon(),deadlineTask.getDeadline());
                         break;
                     case "E": //D|desc|X|from|to
                         Event eventTask = (Event) t;

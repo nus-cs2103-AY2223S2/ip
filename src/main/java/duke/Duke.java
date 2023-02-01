@@ -1,10 +1,18 @@
 package duke;
 import duke.command.Command;
+
+/**
+ * Duke class with storage,tasks and ui.
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor for Duke.
+     * @param filePath
+     */
     public Duke(String filePath) {
         this.storage = new Storage(filePath);
         this.ui = new Ui();
@@ -16,10 +24,17 @@ public class Duke {
         }
     }
 
+    /**
+     * Launches Duke app.
+     * @param args
+     */
     public static void main(String[] args) {
         new Duke("data/duke.txt").run();
     }
 
+    /**
+     * Runs Duke app.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

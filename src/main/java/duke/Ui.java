@@ -3,14 +3,9 @@ package duke;
 import java.util.Scanner;
 
 /**
- * UI of duke.Duke Application
+ * UI of Duke Application
  */
 public class Ui {
-
-
-
-
-
     private final Scanner sc;
 
     public Ui() {
@@ -26,8 +21,8 @@ public class Ui {
     }
 
     /**
-     * Prompts user for the duke.command and reads the text entered by the user.
-     * @return (full line) duke.command.
+     * Prompts user for the command and reads the text entered by the user.
+     * @return (full line) string command
      */
     public String getCommand() {
         System.out.println("Enter your command: ");
@@ -35,16 +30,19 @@ public class Ui {
         return inputLine;
     }
 
+    /**
+     * Prints exception message
+     * @param exceptionMessage
+     */
     public static void showError(String exceptionMessage) {
         System.out.println(exceptionMessage);
     }
 
+    /**
+     * Prints goodbye.
+     */
     public void showGoodBye() {
         System.out.println("Bye. Hope to see you again soon!");
-    }
-
-    public static void showOutput(String message) {
-        System.out.println(message);
     }
 
 }
