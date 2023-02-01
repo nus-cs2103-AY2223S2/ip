@@ -57,7 +57,7 @@ public class TaskList implements Serializable {
         if (res.isEmpty()) {
             return "No tasks found.\n";
         }
-        return res + '\n';
+        return res;
     }
 
     @Override

@@ -30,7 +30,7 @@ public class Ui {
         }
 
         public static void showWelcome() {
-                showReply(LOGO);
+                System.out.println(LOGO);
         }
 
         private static Stream<String> split(String line) {
