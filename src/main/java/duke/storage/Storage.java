@@ -18,12 +18,18 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Stores file path and has methods to implement file I/O operations
+ * Stores file path and has methods to implement file I/O operations.
  */
 public class Storage {
     private final Path filePath;
     private final Path foldPath;
 
+    /**
+     * Initializes a storage object by creating file data/duke.txt if
+     * it does not already exist.
+     *
+     * @throws DukeException
+     */
     public Storage() throws DukeException {
         try {
             String fileSep = System.getProperty("file.separator");
@@ -41,6 +47,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads and returns list of tasks from storage.
+     *
+     * @return ArrayList of tasks stored in data/duke.txt.
+     * @throws DukeException
+     */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> list = new ArrayList<>();
         try {
@@ -76,6 +88,12 @@ public class Storage {
         return list;
     }
 
+    /**
+     * Writes list of tasks into storage.
+     *
+     * @param tasks TaskList of current tasks to write to data/duke.txt.
+     * @throws DukeException
+     */
     public void store(TaskList tasks) throws DukeException {
         try {
             FileWriter fw = new FileWriter(filePath.toString());

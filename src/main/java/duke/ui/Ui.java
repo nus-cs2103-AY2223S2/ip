@@ -12,14 +12,14 @@ public class Ui {
 
     /**
      * Prints a line 4 spaces away from the left edge of the screen to visually
-     * separate duke.Duke's replies from user input.
+     * separate Duke's replies from user input.
      */
     public void printLine() {
         System.out.printf("%64s%n", "    ____________________________________________________________");
     }
 
     /**
-     * Prints duke.Duke's greeting message (bounded by lines above and below).
+     * Prints Duke's greeting message (bounded by lines above and below).
      */
     public void greet() {
         String logo = " ____        _        \n"
@@ -34,6 +34,9 @@ public class Ui {
         printLine();
     }
 
+    /**
+     * Prints Duke's farewell message (bounded by lines above and below).
+     */
     public void farewell() {
         printLine();
         System.out.printf("     %s%n", "Bye. Hope to see you again soon!");
@@ -41,10 +44,10 @@ public class Ui {
     }
 
     /**
-     * Mark duke.task (selected by position in list).
+     * Marks task (selected by position in list).
      *
      * @param tasks List of current tasks.
-     * @param parser Parser object to get duke.task number.
+     * @param parser Parser object to get task number.
      */
     public void markTask(TaskList tasks, Parser parser) throws DukeException {
         int taskNumber;
@@ -59,10 +62,10 @@ public class Ui {
     }
 
     /**
-     * Unmark duke.task (selected by position in list).
+     * Unmark task (selected by position in list).
      *
      * @param tasks List of current tasks.
-     * @param parser Parser object to get duke.task number.
+     * @param parser Parser object to get task number.
      */
     public void unmarkTask(TaskList tasks, Parser parser) throws DukeException {
         int taskNumber;
@@ -77,7 +80,7 @@ public class Ui {
     }
 
     /**
-     * Prints confirmation of added duke.task and number of tasks currently in list.
+     * Prints confirmation of added task and number of tasks currently in list.
      *
      * @param tasks List of current tasks.
      * @param t Task to confirm addition of.
@@ -89,7 +92,7 @@ public class Ui {
     }
 
     /**
-     * Add ToDo duke.task to list.
+     * Add ToDo task to list.
      *
      * @param tasks List of current tasks.
      * @param parser Parser object to get ToDo details from input.
@@ -109,7 +112,7 @@ public class Ui {
     }
 
     /**
-     * Add Deadline duke.task to list.
+     * Add Deadline task to list.
      *
      * @param tasks List of current tasks.
      * @param parser Parser object to get Deadline details from input.
@@ -122,7 +125,7 @@ public class Ui {
     }
 
     /**
-     * Add Event duke.task to list.
+     * Add Event task to list.
      *
      * @param tasks List of current tasks.
      * @param parser Parser object to get Event details from input.
@@ -135,10 +138,10 @@ public class Ui {
     }
 
     /**
-     * Delete duke.task from list.
+     * Delete task from list.
      *
      * @param tasks List of current tasks.
-     * @param parser Parser object to get duke.task number.
+     * @param parser Parser object to get task number.
      * @throws DukeException
      */
     public void deleteTask(TaskList tasks, Parser parser) throws DukeException {
@@ -169,8 +172,12 @@ public class Ui {
         }
     }
 
+    /**
+     * Prints message to user indicating that loading from storage failed,
+     * and that new empty task list will be created.
+     */
     public void showLoadingError() {
         System.out.println("Unable to load saved data.");
-        System.out.println("Creating empty duke.task list...");
+        System.out.println("Creating empty task list...");
     }
 }
