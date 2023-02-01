@@ -72,10 +72,6 @@ public class Ui {
         showToUser("Bye. Hope to see you again soon!");
     }
 
-    public void showLine() {
-        showToUser(DIVIDER);
-    }
-
     public void showError(String e) {
         showToUser(e);
     }
