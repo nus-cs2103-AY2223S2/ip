@@ -1,8 +1,24 @@
 package task;
 
+/**
+ * Abstract class for task.
+ */
 abstract public class Task {
+    /**
+     * Task name.
+     */
     private final String str;
+    /**
+     * Boolean for whether current task is marked.
+     */
     private boolean checked;
+
+    /**
+     * Public constructor.
+     *
+     * @param str Task name.
+     * @param checked Boolean for whether current task is marked.
+     */
     public Task(String str, boolean checked) {
         this.str = str;
         this.checked = checked;

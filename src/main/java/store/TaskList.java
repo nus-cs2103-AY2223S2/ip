@@ -6,8 +6,20 @@ import userinteraction.Ui;
 
 import java.util.ArrayList;
 
+/**
+ * Stores all tasks in an arrayList.
+ */
 public class TaskList {
+    /**
+     * ArrayList that stores all tasks.
+     */
     private final ArrayList<Task> store;
+
+    /**
+     * Public constructor.
+     *
+     * @param store ArrayList that stores all tasks.
+     */
     public TaskList(ArrayList<Task> store) {
         this.store = store;
     }
@@ -18,6 +30,12 @@ public class TaskList {
         return store;
     }
 
+    /**
+     * Lists all tasks in the arrayList.
+     *
+     * @param inputLine User input.
+     * @throws DukeException Checks valid input from user.
+     */
     public void listTask(String[] inputLine) throws DukeException {
         if (inputLine.length > 1) {
             throw new DukeException("Invalid format");
@@ -29,10 +47,22 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds task to arrayList.
+     *
+     * @param task Task from user.
+     */
     public void addTask(Task task) {
         store.add(task);
     }
 
+    /**
+     * Deletes task from arrayList.
+     *
+     * @param inputArr Input from user.
+     * @param ui Handles all user interaction.
+     * @throws DukeException Checks valid input from user.
+     */
     public void deleteTask(String[] inputArr, Ui ui) throws DukeException {
         if (inputArr.length < 2) {
             throw new DukeException("Invalid format, please give numbers");
@@ -47,6 +77,14 @@ public class TaskList {
         store.remove(index);
     }
 
+    /**
+     * Marks or unmarks task specified by user.
+     *
+     * @param isMarked Boolean to mark or unmark task.
+     * @param input Input from user.
+     * @param ui Handles all user interaction.
+     * @throws DukeException Checks valid input from user.
+     */
     public void markTask(boolean isMarked, String[] input, Ui ui) throws DukeException {
         if (input.length < 2) {
             throw new DukeException("Invalid format, please give numbers");

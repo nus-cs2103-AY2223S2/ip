@@ -12,15 +12,34 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Storage class to save data to file.
+ */
 public class Storage {
+    /**
+     * Path to file for saving.
+     */
     private final String filePath;
+    /**
+     * Path to directory that contains file for saving.
+     */
     private final String directoryPath;
+
+    /**
+     * Public Constructor.
+     *
+     * @param filePath String path to file for saving.
+     * @param directoryPath String path to directory that contains file for saving.
+     */
     public Storage(String filePath, String directoryPath) {
         this.filePath = filePath;
         this.directoryPath = directoryPath;
         createFile();
     }
 
+    /**
+     * Creates file for saving if it does not exist.
+     */
     private void createFile() {
         try {
             File directory = new File(directoryPath);
@@ -36,6 +55,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads data from file and generates a TaskList.
+     *
+     * @return TaskList that is generated from data saved in file.
+     */
     public TaskList readData() {
         ArrayList<Task> arrayList = new ArrayList<>();
         File file = new File(filePath);
@@ -63,6 +87,11 @@ public class Storage {
         return new TaskList(arrayList);
     }
 
+    /**
+     * Writes data of tasks to file.
+     *
+     * @param taskList To write data to file.
+     */
     public void writeData(TaskList taskList) {
         try {
             FileWriter fileWriter = new FileWriter(filePath);

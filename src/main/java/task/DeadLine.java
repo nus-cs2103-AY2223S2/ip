@@ -3,13 +3,34 @@ package task;
 import dukeexception.DukeException;
 import utils.DateTimeUtils;
 
+/**
+ *  Handles all deadLines.
+ */
 public class DeadLine extends Task {
+    /**
+     * Store for deadLine date.
+     */
     private String dateTime;
+
+    /**
+     * Private constructor.
+     *
+     * @param str Task name.
+     * @param checked Boolean for whether current task is marked.
+     * @param dateTime DeadLine date.
+     */
     private DeadLine(String str, boolean checked, String dateTime) {
         super(str, checked);
         this.dateTime = dateTime;
     }
 
+    /**
+     * Factory method that returns deadLine task from user input.
+     *
+     * @param inputLine Input from user.
+     * @return DeadLine Task.
+     * @throws DukeException Checks valid input from user.
+     */
     public static DeadLine generate(String[] inputLine) throws DukeException {
         if (inputLine.length < 2) {
             throw new DukeException("Missing description");
@@ -20,6 +41,13 @@ public class DeadLine extends Task {
         }
         return new DeadLine(toPrintSplit[0], false, DateTimeUtils.dateFormatter(toPrintSplit[1]));
     }
+
+    /**
+     * Factory method that returns deadLine task from saved file.
+     *
+     * @param taskLine Input from saved file.
+     * @return DeadLine Task.
+     */
     public static DeadLine generateTask(String[] taskLine) {
         boolean check = taskLine[1].equals("1");
         return new DeadLine(taskLine[2], check, taskLine[3]);

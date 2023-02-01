@@ -3,10 +3,23 @@ package userinteraction;
 import command.*;
 import dukeexception.DukeException;
 
+/**
+ * Handles making sense of user command.
+ */
 public class Parser {
+    /**
+     * All possible commands by user.
+     */
     private enum CommandNames {
         LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, BYE
     }
+
+    /**
+     * Takes user input and returns command.
+     *
+     * @param input User input.
+     * @return Command.
+     */
     public static Command parse(String input) {
         String[] inputArr = input.split(" ", 2);
         try {
