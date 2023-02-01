@@ -1,3 +1,5 @@
+package duke;
+
 public class Ui {
     public void sayHello() {
         System.out.println("Sup, I'm Dupe. How can I help you?");
