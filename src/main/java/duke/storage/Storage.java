@@ -25,9 +25,9 @@ import duke.task.Task;
 import duke.task.Todo;
 
 public class Storage {
-    private static final String TODO = "todo";
-    private static final String DEADLINE = "deadline";
-    private static final String EVENT = "event";
+    private static final String TODO = "T";
+    private static final String DEADLINE = "D";
+    private static final String EVENT = "E";
 
     private String filePath;
     private FileWriter writer;
@@ -53,6 +53,7 @@ public class Storage {
     private Task convertStrToTask(String str) {
         String getTaskType = str.substring(0, 1);
         String getStatus = str.substring(4, 5);
+        System.out.println(getTaskType);
         switch (getTaskType) {
         case TODO:
             task = new Todo(str.substring(8));
@@ -85,6 +86,7 @@ public class Storage {
         } else if (getStatus.equals("1")) {
             task.markAsDone();
         }
+        System.out.println(task);
         return task;
     }
 
@@ -102,6 +104,7 @@ public class Storage {
             while (line != null) {
                 Task addTask = convertStrToTask(line);
                 taskList.add(addTask);
+
                 line = bufReader.readLine();
             }
             bufReader.close();
@@ -142,5 +145,37 @@ public class Storage {
         finalTasks = finalTasks + taskInfo + "\n";
         writer.write(finalTasks);
         writer.close();
+    }
+
+    public void delete(int taskNum) {
+        try {
+            Path tempFile = Paths.get("ip/data/tempTasks.txt");
+            Files.createFile(tempFile);
+            BufferedReader bufReader = new BufferedReader(new FileReader(filePath));
+            FileWriter writerToTempFile = new FileWriter("ip/data/tempTasks.txt", true);
+
+            int currLine = 1;
+            String line = bufReader.readLine();
+
+            while (line != null) {
+                if (currLine == taskNum) {
+                    line = bufReader.readLine();
+                    currLine++;
+                    continue;
+                } else {
+                    System.out.println(line);
+                    writerToTempFile.write(line + "\n");
+                    line = bufReader.readLine();
+                    currLine++;
+                }
+            }
+            bufReader.close();
+            writerToTempFile.close();
+            Files.delete(Paths.get("ip/data/tasks.txt"));
+            Files.move(tempFile, tempFile.resolveSibling(
+                    "tasks.txt"));
+        } catch (IOException e) {
+            System.out.println("operation failed");
+        }
     }
 }
