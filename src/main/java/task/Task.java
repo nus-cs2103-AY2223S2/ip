@@ -1,7 +1,7 @@
 package task;
 
 public class Task {
-    private boolean checked;
+    private boolean isChecked;
     private String details;
 
     /**
@@ -9,18 +9,18 @@ public class Task {
      * @param details the specifics of what the task is
      */
     public Task(String details) {
-        checked = false;
+        isChecked = false;
         this.details = details;
     }
 
     public void setChecked(Boolean checked) {
-        this.checked = checked;
+        this.isChecked = checked;
     }
 
     @Override
     public String toString(){
         String checkSymbol = " ";
-        if (checked) {
+        if (isChecked) {
             checkSymbol = "X";
         }
         return "[" + checkSymbol + "] " + details;
@@ -32,7 +32,7 @@ public class Task {
      */
     public String toStorageString() {
         String checkSymbol = "0";
-        if (checked) {
+        if (isChecked) {
             checkSymbol = "1";
         }
         return checkSymbol + "#" + details;
