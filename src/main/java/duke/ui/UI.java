@@ -1,9 +1,9 @@
-package duke;
+package duke.ui;
 
 import java.util.Scanner;
 
 /**
- * duke.UI to print the response after performing action.
+ * duke.ui.UI to print the response after performing action.
  */
 public class UI {
 
