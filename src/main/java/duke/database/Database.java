@@ -1,5 +1,6 @@
 package duke.database;
 
+import duke.exception.databaseexceptions.DatabaseNotUpdatingException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.exception.databaseexceptions.DatabaseNotLoadingException;
@@ -12,6 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/** Represents the database storage for Duke using a basic text file. */
 public class Database {
 
     //ASCII 31 is known as the "Unit Seperator"
@@ -20,10 +22,21 @@ public class Database {
     private final String delimiter = Character.toString((char) 31);
     private final String filePath;
 
+    /**
+     * Represents the database storage for Duke using a basic text file.
+     *
+     * @param filePath the path for which the database text file is stored in
+     */
     public Database(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads Duke's taskList with the relevant saved tasks stored in the database. Usually run on startup of Duke.
+     *
+     * @return an ArrayList of Task objects that was saved in the database
+     * @throws DatabaseNotLoadingException thrown when there is an error with loading the database file.
+     */
     public ArrayList<Task> load() throws DatabaseNotLoadingException {
         try {
 
@@ -55,16 +68,27 @@ public class Database {
         }
     }
 
-    public void update(ArrayList<Task> tasks) throws IOException {
-        FileWriter writer = new FileWriter(this.filePath, false);
-        StringBuilder data = new StringBuilder("");
-        for (Task task: tasks) {
-            ArrayList<String> taskData = task.data();
-            data.append(String.join(this.delimiter, taskData));
-            data.append("\n");
+    /**
+     * Updates the database on shutting down of Duke with the new taskList
+     *
+     * @param tasks the tasks originally stored in the taskList for Duke
+     * @throws DatabaseNotUpdatingException thrown when there is an error with updating the database file.
+     */
+    public void update(ArrayList<Task> tasks) throws DatabaseNotUpdatingException {
+        try {
+            FileWriter writer = new FileWriter(this.filePath, false);
+            StringBuilder data = new StringBuilder("");
+            for (Task task: tasks) {
+                ArrayList<String> taskData = task.data();
+                data.append(String.join(this.delimiter, taskData));
+                data.append("\n");
+            }
+            writer.write(data.toString());
+            writer.close();
+        } catch (IOException e) {
+            throw new DatabaseNotUpdatingException();
         }
-        writer.write(data.toString());
-        writer.close();
+
     }
 
 }

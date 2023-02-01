@@ -1,34 +1,38 @@
 package duke.parser;
 
-import duke.commands.ByeCommand;
-import duke.commands.Command;
-import duke.commands.ListCommand;
-import duke.commands.MarkCommand;
-import duke.commands.UnmarkCommand;
-import duke.commands.DeleteCommand;
-import duke.commands.AddToDoCommand;
-import duke.commands.AddDeadlineCommand;
-import duke.commands.AddEventCommand;
+import duke.commands.*;
 
 import duke.exception.blankfieldexceptions.BlankFieldDeadlineException;
 import duke.exception.blankfieldexceptions.BlankFieldEventException;
 import duke.exception.blankfieldexceptions.BlankFieldTodoException;
-import duke.exception.DukeException;
 import duke.exception.TaskNumberNotFoundException;
-import duke.exception.UnknownCommandError;
-import duke.exception.parserexceptions.ParserException;
+import duke.exception.parserexceptions.NoCommandBodyException;
+import duke.exception.parserexceptions.UnknownCommandError;
 
 import java.util.Objects;
 
+/**
+ * Represents the wrapper for the parsing logic for commands for Duke.
+ */
 public class Parser {
 
-    private static final String FRAME = "    ____________________________________________________________\n";
 
-    public Parser() {
-
-    }
-
-    public Command parse(String command, int lengthOfList) throws DukeException {
+    /**
+     * Parses the command text given and returns the Command object associated with the command text.
+     *
+     * @param command the command text given.
+     * @param lengthOfList the length of taskList currently
+     * @return Command object associated with the command text.
+     * @throws NoCommandBodyException thrown when there is no command body
+     * @throws TaskNumberNotFoundException thrown when there is no task identifier found for mark,
+     * unmark, delete commands.
+     * @throws BlankFieldTodoException thrown when there is a blank field for the addToDoCommand.
+     * @throws BlankFieldDeadlineException thrown when there is a blank field for the addDeadlineCommand.
+     * @throws BlankFieldEventException thrown when there is a blank field for the addEventCommand.
+     * @throws UnknownCommandError thrown when the command's keyword does not match any of the ones known.
+     */
+    public Command parse(String command, int lengthOfList) throws TaskNumberNotFoundException, BlankFieldTodoException,
+            BlankFieldDeadlineException, BlankFieldEventException, UnknownCommandError, NoCommandBodyException {
         if (Objects.equals(command, "list")) {
             return new ListCommand();
         } else if (Objects.equals(command, "bye")) {
@@ -39,7 +43,7 @@ public class Parser {
         String[] words = command.split(" ", 2);
 
         if (words.length <= 1) {
-            throw new ParserException();
+            throw new NoCommandBodyException();
         }
 
         String keyWord = words[0];
@@ -104,9 +108,8 @@ public class Parser {
         case "find":
             return new FindCommand(commandBody);
         }
-        throw new UnknownCommandError("\n" + FRAME + "\n" +
-                "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(" + "\n" +
-                FRAME);
+
+        throw new UnknownCommandError();
     }
 
 }

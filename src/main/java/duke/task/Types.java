@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * Represents the Types identifier for each task.
+ */
 public enum Types {
     TODO("T"),
     DEADLINE("D"),

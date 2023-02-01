@@ -11,17 +11,37 @@ import duke.ui.Ui;
 import java.time.format.DateTimeParseException;
 import java.util.Objects;
 
+/**
+ * Represents a command to add a deadline task to the TaskList.
+ */
 public class AddDeadlineCommand extends Command {
 
     private final String commandBody;
 
+    /**
+     * Represents a command to add a deadline task to the TaskList.
+     *
+     * @param commandBody Parameters of the command, pre-parsed.
+     */
     public AddDeadlineCommand(String commandBody) {
         super();
         this.commandBody = commandBody;
     }
 
+    /**
+     * Executes the generated AddDeadlineCommand by adding a new Deadline task into the TaskList and gives a response
+     * to the Ui.
+     *
+     * @param taskList taskList of Duke.
+     * @param ui user interface object of Duke.
+     * @param database database of Duke.
+     * @throws IncludeByException /by was not included in the command.
+     * @throws BlankFieldDeadlineException No task and/or date was included in the command.
+     * @throws InvalidDateException Date given in the command is invalid.
+     */
     @Override
-    public void execute(TaskList taskList, Ui ui, Database database) throws IncludeByException, BlankFieldDeadlineException, InvalidDateException {
+    public void execute(TaskList taskList, Ui ui, Database database) throws IncludeByException,
+            BlankFieldDeadlineException, InvalidDateException {
         // Extract deadline date and duke.task item.
         String[] lines = this.commandBody.split(" ");
         boolean hasBy = false;

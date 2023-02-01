@@ -16,6 +16,13 @@ public class Duke {
     private boolean isActive;
     private final Parser parser;
 
+
+    /**
+     * Represents the Duke chatbot wrapped with all its necessary dependencies such as
+     * Ui, Database, TaskList and Parser.
+     *
+     * @param filePath path of the database file.
+     */
     public Duke(String filePath) {
         this.ui = new Ui();
         this.database = new Database(filePath);
@@ -28,6 +35,10 @@ public class Duke {
         }
     }
 
+
+    /**
+     * Runs the Duke chatbot and activates the UI to receive and display information
+     */
     public void run() {
         System.out.println(FRAME +
                 "     Hello! I'm Duke\n" +
