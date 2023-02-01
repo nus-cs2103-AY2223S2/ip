@@ -28,16 +28,6 @@ public class Duke {
     private TaskList list;
 
 
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
-    private Image user = new Image(
-            this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(
-            this.getClass().getResourceAsStream("/images/DaDuke.jpg"));
-
     public Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
@@ -109,15 +99,7 @@ public class Duke {
 
 
 
-    private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
-        );
-        userInput.clear();
-    }
+
 
 
 
