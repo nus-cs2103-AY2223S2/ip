@@ -32,7 +32,7 @@ public class Events extends Task {
             convertTo = to.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         } catch (NullPointerException e) {
         }
-        return " " + "[E]" + "[" + super.getStatusIcon() + "]" + super.toString() + "(From: " + convertFrom + " | To: " + convertTo + ")";
+        return " " + "[E]" + "[" + super.getStatusIcon() + "] " + super.toString() + " (From: " + convertFrom + " | To: " + convertTo + ")";
     }
 }
 

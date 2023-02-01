@@ -29,6 +29,6 @@ public class Deadlines extends Task {
             convert = by.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         } catch (NullPointerException e) {
         }
-        return " " + "[D]" + "[" + super.getStatusIcon() + "]" + super.toString() + "(By: " + convert + ")";
+        return " " + "[D]" + "[" + super.getStatusIcon() + "] " + super.toString() + " (By: " + convert + ")";
     }
 }

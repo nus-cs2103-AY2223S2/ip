@@ -55,7 +55,7 @@ public class TaskList {
     public static void addTodoTask(ArrayList<Task> tasks, String word) throws IncompleteInputException {
         String separator = "todo";
         int sepPos = word.indexOf(separator);
-        String str = word.substring(sepPos + separator.length());
+        String str = word.substring(sepPos + separator.length() + 1);
         if (str.length() != 0) {
             Todo todos = new Todo(str);
             tasks.add(todos);
@@ -73,7 +73,7 @@ public class TaskList {
             String separator2 = "/by";
             int sepPos1 = word.indexOf(separator1);
             int sepPos2 = word.indexOf(separator2);
-            String str = word.substring(sepPos1 + separator1.length(), sepPos2);
+            String str = word.substring(sepPos1 + separator1.length() + 1, sepPos2 - 1);
             String date = word.substring(sepPos2 + 1 + separator2.length());
             try {
                 LocalDate convertDate = Parser.convertToDate(date);
@@ -99,7 +99,7 @@ public class TaskList {
             int sepPos1 = word.indexOf(separator1);
             int sepPos2 = word.indexOf(separator2);
             int sepPos3 = word.indexOf(separator3);
-            String str = word.substring(sepPos1 + separator1.length(), sepPos2);
+            String str = word.substring(sepPos1 + separator1.length() + 1, sepPos2 - 1);
             String from = word.substring(sepPos2 + 1 + separator2.length(), sepPos3 - 1);
             String to = word.substring(sepPos3 + 1 + separator3.length());
             try {
