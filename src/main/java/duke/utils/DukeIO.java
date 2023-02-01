@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import duke.Tasks.Task;
 import duke.Tasks.TaskList;
 
-public class DukeIo {
+public class DukeIO {
 
     private static final String INPUT_PROMPT = "MyDuke >    "; 
 
@@ -38,6 +38,8 @@ public class DukeIo {
                                         + SEPERATOR;
 
     private static final String SAVE_SUCCESS = "Successfully saved all tasks\n";
+    
+    private static final String SAVE_FAILURE = "FAILED TO SAVE ALL TASKS\n"
     
     private static final String QUIT = SEPERATOR 
                                     + REPLY + "Quitting Duke...\n"
@@ -112,6 +114,17 @@ public class DukeIo {
         System.out.println(SEPERATOR);
     }
 
+    public void showFiltered(List<Task> filteredTasks) {
+        int taskCount = filteredTasks.size();
+        System.out.println(SEPERATOR + "Search results: ")
+        for (Integer i = 0; i < taskCount; i++) {
+            String showString = "   " + Integer.toString(i+1) + ": "
+                            + filteredTasks.get(i).toString();
+            System.out.println(showString);
+        }
+        System.out.println(SEPERATOR);
+    }
+
     public void showInvalidCommand() {
         System.out.println(SEPERATOR
                         + REPLY + "Invalid Command!\n"
@@ -128,5 +141,21 @@ public class DukeIo {
 
     public void notifySave() {
         System.out.println(SAVE_SUCCESS);
+    }
+
+    /**
+     * Displays failure toast upon save failure
+     */
+    public void notifySavaeFailure() {
+        System.out.println(SAVE_FAILURE);
+    }
+
+    /**
+     * Displays failure toast upon no search results
+     */
+    public void notifyZeroHits() {
+        System.out.println(SEPERATOR
+                        + "Returned 0 search results.\n"
+                        + SEPERATOR);
     }
 }

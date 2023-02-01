@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
+import java.io.IOException;
 
 import duke.DukeException.InvalidCommandException;
 import duke.Tasks.Deadline;
@@ -13,39 +14,32 @@ import duke.Tasks.Task;
 import duke.Tasks.TaskList;
 import duke.Tasks.ToDo;
 
-/**
- * Base handler class that accepts the chain of responsibility from Duke client requests.
- * MyDuke proccesses the input commands or passes the responsibility to other classes.
- */
 public class MyDuke {
-    private static DukeIo dukeIo = new DukeIo();
+    private static DukeIO dukeIo = new DukeIO();
     private static TaskList allTasks;
     private static Map<String, Consumer<String[]>> cmdMap = new HashMap<>();
+    private static Storage storage = new Storage();
 
-    /**
-     * Passes the chain of responsibility to DukeIo to display welcome message.
-     * Populates a HashMap of valid commands to be accepted.
-     */
     public void init() {
         dukeIo.printHello();
         populateCommands();
     }
 
     /**
-     * Passes the chain of responsibility to DukeIo to display exit message upon quit.
+     * Passes the chain of responsibility to DukeIo to display quit message.
+     * Passes the chain of responsibility to Storage to save on quit.
      */
-    public void quit() {
+    public void quit() throws IOException {
+        if (allTasks.getTaskCount() > 0) {
+            try {
+                storage.saveFrom(allTasks.getAllTasks());
+            } catch (IOException i) {
+                dukeIo.notifySaveFailure();
+            }
+        }
         dukeIo.printQuit();
     }
 
-    /**
-     * Accepts the chain of responsibility from Main and run the commands.
-     * 
-     * @param tokens Array of String from user inputs
-     * @param taskList TaskList object where all tasks are operated upon.
-     * 
-     * @throws InvalidCommandException
-     */
     public void exec(String[] tokens, TaskList taskList) throws InvalidCommandException {
         allTasks = taskList;
         try {
@@ -64,6 +58,7 @@ public class MyDuke {
         cmdMap.put("mark", (tokens) -> toggle(tokens));
         cmdMap.put("unmark", (tokens) -> toggle(tokens));
         cmdMap.put("delete", (tokens) -> delete(tokens));
+        cmdMap.put("find", (tokens) -> find(tokens));
     }
 
     private void toggle(String[] tokens) {
@@ -220,5 +215,16 @@ public class MyDuke {
         System.out.println(allTasks.getTask(taskIndex-1).toString() + " deleted.");
         allTasks.deleteTask(taskIndex-1);
         dukeIo.showCount();
+    }
+
+    private void find(String[] tokens) {
+        String searchString = "";
+        for (String s : tokens) {
+            if (s.equals("find")) {
+                continue;
+            }
+            searchString += s;
+        }
+        allTasks.showFilteredTasks(searchString);
     }
 }
