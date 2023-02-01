@@ -73,17 +73,13 @@ public class TaskList {
         this.tasks.add(task);
     }
 
-<<<<<<< HEAD
-    public ArrayList<Task> getTasks() {
-        return this.tasks;
-=======
+
     /**
      * Getter for the ArrayList of tasks stored in TaskList. Typically only used when storing the tasks in the database
      * @return Arraylist of tasks in the Tasklist.
      */
-    public ArrayList<Task> getTaskList() {
-        return this.taskList;
->>>>>>> branch-A-JavaDoc
+    public ArrayList<Task> getTasks() {
+        return this.tasks;
     }
 
 }

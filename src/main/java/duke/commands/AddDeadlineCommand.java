@@ -1,15 +1,16 @@
 package duke.commands;
 
+import java.time.format.DateTimeParseException;
+import java.util.Objects;
+
 import duke.database.Database;
-import duke.task.Deadline;
+import duke.exception.InvalidDateException;
 import duke.exception.blankfieldexceptions.BlankFieldDeadlineException;
 import duke.exception.includeexceptions.IncludeByException;
-import duke.exception.InvalidDateException;
+import duke.task.Deadline;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
-import java.time.format.DateTimeParseException;
-import java.util.Objects;
 
 /**
  * Represents a command to add a deadline task to the TaskList.
@@ -67,11 +68,11 @@ public class AddDeadlineCommand extends Command {
         try {
             Deadline newDeadline = new Deadline(task.toString(), deadline.toString().stripLeading());
             taskList.addTask(newDeadline);
-            ui.response(FRAME + "\n" +
-                    "     Got it. I've added this task:" + "\n" +
-                    "     " + newDeadline.status() + "\n" +
-                    "     Now you have " + taskList.length() + " tasks in the list" + "\n" +
-                    FRAME);
+            ui.response(FRAME + "\n"
+                    + "     Got it. I've added this task:" + "\n"
+                    + "     " + newDeadline.status() + "\n"
+                    + "     Now you have " + taskList.length() + " tasks in the list" + "\n"
+                    + FRAME);
         } catch (DateTimeParseException e) {
             throw new InvalidDateException();
         }
