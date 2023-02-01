@@ -4,10 +4,10 @@ import java.util.Scanner;
 
 import duke.command.Command;
 import duke.exception.DukeException;
-import duke.ui.UI;
 import duke.parser.Parser;
 import duke.storage.LocalStorage;
 import duke.storage.TaskList;
+import duke.ui.UI;
 
 /**
  * duke.Duke Chat Bot!

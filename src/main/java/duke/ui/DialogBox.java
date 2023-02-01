@@ -1,10 +1,11 @@
 package duke.ui;
 
+import java.io.IOException;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -12,8 +13,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
-
-import java.io.IOException;
 
 /**
  * Dialog Box to show the user's conversation with Duke Bot
@@ -69,7 +68,7 @@ public class DialogBox extends HBox {
      * @return dialog box to display duke's message
      */
     public static DialogBox getDukeDialog(String text, Image img) {
-        DialogBox dialogBox =  new DialogBox("Duke: " + text, img);
+        DialogBox dialogBox = new DialogBox("Duke: " + text, img);
         dialogBox.flip();
         return dialogBox;
     }

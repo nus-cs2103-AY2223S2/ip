@@ -1,12 +1,9 @@
 package duke.ui;
 
 import duke.Duke;
-import duke.ui.DialogBox;
-import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -29,6 +26,9 @@ public class MainWindow extends AnchorPane {
 
     private Image user = new Image(this.getClass().getResourceAsStream("/images/meme.jpg"));
 
+    /**
+     * Initialise scroll pane and display welcome message
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -38,9 +38,11 @@ public class MainWindow extends AnchorPane {
     public void setDuke(Duke d) {
         this.duke = d;
     }
+
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Creates two dialog boxes, one echoing user input and the other containing Duke's response after performing
+     * desired task and then appends them to the dialog container.
+     * Clears the user input after processing and display.
      */
     @FXML
     private void handleUserInput() {
