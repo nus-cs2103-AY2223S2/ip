@@ -25,6 +25,7 @@ public class Storage {
     public Storage(String filepath) throws DukeException, IOException {
         String[] splits = filepath.split("/");
         File dir = new File(splits[0]);
+
         if (!dir.exists()) {
             if (!dir.mkdir()) {
                 throw new DukeException("Error while creating ./data folder.");
@@ -47,6 +48,7 @@ public class Storage {
     public void update(Tasklist tasklist) throws IOException {
         StringBuilder strings = new StringBuilder();
         FileWriter fw = new FileWriter(this.file);
+
         for (Task curr : tasklist.getTasks()) {
             if (curr instanceof Todo) {
                 strings.append("T ")
@@ -90,11 +92,13 @@ public class Storage {
     public ArrayList<Task> load() throws DukeException, FileNotFoundException {
             Scanner scan = new Scanner(this.file);
             ArrayList<Task> tasks = new ArrayList<>();
+
             while (scan.hasNext()) {
                 String[] task = scan.nextLine().split(" \\| ");
                 switch (task[0]) {
                     case "T":
                         Task todo = new Todo(task[2]);
+
                         if (task[1].equals("1")) {
                             todo.markDone();
                         }
@@ -102,6 +106,7 @@ public class Storage {
                         break;
                     case "D":
                         Task deadline = new Deadline(task[2], LocalDateTime.parse(task[3]));
+
                         if (task[1].equals("1")) {
                             deadline.markDone();
                         }
@@ -109,6 +114,7 @@ public class Storage {
                         break;
                     case "E":
                         Task event = new Event(task[2], LocalDateTime.parse(task[3]), LocalDateTime.parse(task[4]));
+
                         if (task[1].equals("1")) {
                             event.markDone();
                         }

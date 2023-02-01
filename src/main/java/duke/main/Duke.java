@@ -12,8 +12,13 @@ public class Duke {
     private Tasklist tasks;
     private Storage storage;
 
+    /**
+     * Duke constructor to initialise Ui, storage and tasklist
+     * @param path filepath to retrieve data from
+     */
     public Duke(String path) {
         ui = new Ui();
+
         try {
             storage = new Storage(path);
             tasks = new Tasklist(storage.load());
@@ -31,13 +36,15 @@ public class Duke {
      */
     public void run() {
         ui.printGreeting();
-        boolean isExit = false;
-        while(!isExit) {
+
+        boolean shouldExit = false;
+
+        while (!shouldExit) {
             try {
                 String stringCommand = ui.readCommand();
                 Command command = Parser.parseCommand(stringCommand);
                 command.execute(tasks, ui, storage);
-                isExit = command.isExit();
+                shouldExit = command.isExit();
             } catch (DukeException de) {
                 ui.printDukeException(de);
             } catch (IOException ie) {

@@ -7,12 +7,15 @@ import duke.main.Ui;
 import java.io.IOException;
 
 public abstract class Command {
-    private boolean exitCondition = false;
+    private boolean shouldExit = false;
+
     public abstract void execute(Tasklist taskList, Ui ui, Storage storage) throws IOException;
+
     public void switchExitCondition() {
-        this.exitCondition = !(this.exitCondition);
+        this.shouldExit = !(this.shouldExit);
     }
+
     public boolean isExit() {
-        return this.exitCondition;
+        return this.shouldExit;
     }
 }
