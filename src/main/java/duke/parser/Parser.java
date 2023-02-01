@@ -1,12 +1,7 @@
 package duke.parser;
 
-import duke.command.AddCommand;
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.ExitCommand;
-import duke.command.ListCommand;
-import duke.command.MarkCommand;
-import duke.command.UnmarkCommand;
+import duke.Duke;
+import duke.command.*;
 
 import duke.exception.DukeException;
 import duke.exception.DukeInvalidArgumentException;
@@ -216,6 +211,17 @@ public class Parser {
 
     }
 
+    private static Command parseFind(String[] commandParts) throws DukeException {
+
+        if (commandParts.length != 2) {
+            throw new DukeInvalidCommandException(
+                    "Sorry... The correct format for find command is 'find <keyword>'.");
+        }
+
+        return new FindCommand(commandParts[1]);
+
+    }
+
     /**
      * Parses the user's text input into an executable command.
      *
@@ -254,6 +260,9 @@ public class Parser {
 
         } else if (commandHeader.equals("event")) {
             return parseEvent(commandParts);
+
+        } else if (commandHeader.equals("find")) {
+            return parseFind(commandParts);
 
         } else {
             throw new DukeInvalidCommandException("Sorry... I did not understand that :/");

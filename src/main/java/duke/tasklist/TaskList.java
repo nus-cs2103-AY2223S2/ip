@@ -120,4 +120,40 @@ public class TaskList {
 
     }
 
+    /**
+     * Displays all the Tasks in the list of Tasks, that have the given keyword.
+     *
+     * @param keyword The keyword to search for, in the list of Tasks.
+     */
+    public void findKeywordInTasks(String keyword) {
+        ArrayList<Task> tasksWithKeyword = new ArrayList<>();
+
+        for (int i = 0; i < this.tasks.size(); i++) {
+            Task task = this.tasks.get(i);
+            String taskDescription = task.getDescription().toLowerCase();
+
+            int findIndex = taskDescription.indexOf(keyword.toLowerCase());
+
+            if (findIndex != -1) {
+                tasksWithKeyword.add(task);
+            }
+
+        }
+
+        if (tasksWithKeyword.size() == 0) {
+            System.out.println("I could not find any tasks with the keyword '"
+                    + keyword + "' :/");
+
+        } else {
+            System.out.println("Listing all tasks with the keyword '"
+                    + keyword + "'...");
+            for (int i = 0; i < tasksWithKeyword.size(); i++) {
+                System.out.println((i + 1) + ") " + tasksWithKeyword.get(i));
+            }
+
+        }
+
+
+    }
+
 }
