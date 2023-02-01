@@ -72,6 +72,20 @@ public class Ui {
         System.out.println("Now you have " + list.size() + " tasks in the list.");
     }
 
-
+    /**
+     * Output the tasks which matches keywords
+     * @param matches
+     */
+    public void showFind(ArrayList<Task> matches) {
+        if (matches.size() == 0) {
+            System.out.println("Sorry, I can't find any tasks that matches your keywords.");
+            return;
+        }
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 0; i < matches.size(); i++) {
+            Task temp = matches.get(i);
+            System.out.println((i + 1) + ". " + temp);
+        }
+    }
 
 }

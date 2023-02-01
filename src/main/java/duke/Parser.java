@@ -21,7 +21,7 @@ public class Parser {
         int firstBlank = input.indexOf(" ");
         // No description of task
         if (firstBlank == -1) {
-                throw new DukeException(ExceptionType.DESCRIPTION_EMPTY);
+            throw new DukeException(ExceptionType.DESCRIPTION_EMPTY);
         }
         String header = input.substring(0, firstBlank);
 
@@ -62,6 +62,10 @@ public class Parser {
             } catch (NumberFormatException e) {
                 throw new DukeException(ExceptionType.NO_NUMBER);
             }
+        }
+        if (header.equals("find")) {
+            String keywords = input.substring(5);
+            return new FindCommand(keywords);
         }
         throw new DukeException(ExceptionType.UNCLEAR_COMMAND);
     }
