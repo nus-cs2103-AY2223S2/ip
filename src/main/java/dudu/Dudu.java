@@ -1,23 +1,28 @@
 package dudu;
 
-import dudu.command.*;
-import dudu.exception.*;
-import dudu.task.Event;
-import dudu.task.Task;
+import java.util.Scanner;
+
+import dudu.exception.DuduException;
+import dudu.exception.InvalidCommandException;
 import dudu.task.TaskList;
 import dudu.util.Parser;
 import dudu.util.Storage;
 import dudu.util.Ui;
-import dudu.exception.DuduException;
 
-import java.util.Scanner;
+/**
+ * Dudu class
+ */
 public class Dudu {
+    private static boolean isExit = false;
     private TaskList list;
     private Scanner scanner;
     private Storage storage;
     private Ui ui;
-    private static boolean isExit = false;
 
+    /**
+     * Constructor for Dudu
+     * @param filePath Path to save the data file
+     */
     public Dudu(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -49,7 +54,7 @@ public class Dudu {
             }
             try {
                 Parser.parse(input, list, storage);
-            } catch (InvalidCommandException ex){
+            } catch (InvalidCommandException ex) {
                 System.out.println(ex);
             } catch (DuduException ex) {
                 System.out.println(ex);

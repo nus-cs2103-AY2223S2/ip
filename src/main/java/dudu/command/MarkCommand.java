@@ -6,8 +6,16 @@ import dudu.task.Task;
 import dudu.task.TaskList;
 import dudu.util.Storage;
 
+/**
+ * Command class for marking task as done.
+ */
 public class MarkCommand extends Command {
     private int index;
+
+    /**
+     * Constructor for mark command.
+     * @param index The index of task in the list to be mark as done
+     */
     public MarkCommand(String index) {
         super(index);
         this.index = Integer.parseInt(index) - 1;

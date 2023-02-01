@@ -5,8 +5,16 @@ import dudu.task.Task;
 import dudu.task.TaskList;
 import dudu.util.Storage;
 
+/**
+ * Command class for finding task
+ */
 public class FindCommand extends Command {
     private String input;
+
+    /**
+     * Constructor of find command
+     * @param input The task name to be found
+     */
     public FindCommand(String input) {
         super(input);
         this.input = input;

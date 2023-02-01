@@ -2,21 +2,25 @@ package dudu.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-public class Event extends Task{
+
+/**
+ * Task class for event type
+ */
+public class Event extends Task {
     private LocalDate from;
     private LocalDate to;
-    private String name;
+    private String desc;
 
     /**
      * Constructor for event task, marked as undone.
      *
-     * @param name Name of the event task
+     * @param desc Description of the event task
      * @param from Starting date
      * @param to Ending date
      */
-    public Event(String name, String from, String to) {
-        super(name, false);
-        this.name = name;
+    public Event(String desc, String from, String to) {
+        super(desc, false);
+        this.desc = desc;
         this.from = LocalDate.parse(from);
         this.to = LocalDate.parse(to);
     }
@@ -24,14 +28,14 @@ public class Event extends Task{
     /**
      * Constructor for event task.
      *
-     * @param name Name of the event task
+     * @param desc Description of the event task
      * @param from Starting date
      * @param to Ending date
      * @param isDone Completing status of the task
      */
-    public Event(String name, String from, String to, boolean isDone) {
-        super(name, isDone);
-        this.name = name;
+    public Event(String desc, String from, String to, boolean isDone) {
+        super(desc, isDone);
+        this.desc = desc;
         this.from = LocalDate.parse(from);
         this.to = LocalDate.parse(to);
     }
@@ -48,7 +52,7 @@ public class Event extends Task{
 
     @Override
     public String getDescription() {
-        return name + " | " + from + " | " + to;
+        return desc + " | " + from + " | " + to;
     }
     @Override
     public String toString() {

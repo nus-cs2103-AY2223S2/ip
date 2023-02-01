@@ -6,8 +6,16 @@ import dudu.task.Event;
 import dudu.task.TaskList;
 import dudu.util.Storage;
 
+/**
+ * Command class for event task
+ */
 public class EventCommand extends Command {
     private String input;
+
+    /**
+     * Constructor for event command.
+     * @param input name, from & to date of the event task.
+     */
     public EventCommand(String input) {
         super(input);
         this.input = input;

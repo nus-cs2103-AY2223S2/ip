@@ -1,10 +1,18 @@
 package dudu.exception;
 
-import dudu.exception.DuduException;
-
+/**
+ * Exception class for empty description in the command
+ */
 public class EmptyDescriptionException extends DuduException {
     private String type;
     private String error;
+
+    /**
+     * Constructor for empty description exception.
+     * @param type Type of task.
+     * @param error The error of the task.
+     * @param msg Error message.
+     */
     public EmptyDescriptionException(String type, String error, String msg) {
         super(msg);
         this.type = type;

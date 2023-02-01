@@ -6,8 +6,16 @@ import dudu.task.Task;
 import dudu.task.TaskList;
 import dudu.util.Storage;
 
+/**
+ * Command class for marking task as undone.
+ */
 public class UnMarkCommand extends Command {
     private int index;
+
+    /**
+     * Constructor for unmark command.
+     * @param index Index of the task which will be mark as undone.
+     */
     public UnMarkCommand(String index) {
         super(index);
         this.index = Integer.parseInt(index) - 1;

@@ -1,10 +1,13 @@
 package dudu.task;
 
+import java.util.ArrayList;
+
 import dudu.exception.DuduException;
 import dudu.exception.TaskNumRangeException;
 
-import java.util.ArrayList;
-
+/**
+ * Task list class for storing tasks
+ */
 public class TaskList {
     private final ArrayList<Task> list;
 

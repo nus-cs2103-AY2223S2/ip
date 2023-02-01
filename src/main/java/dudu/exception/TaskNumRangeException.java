@@ -1,8 +1,13 @@
 package dudu.exception;
 
-import dudu.exception.DuduException;
-
+/**
+ * Exception class on task index out of range.
+ */
 public class TaskNumRangeException extends DuduException {
+    /**
+     * Constructor for task index out of range exception.
+     * @param msg Error message.
+     */
     public TaskNumRangeException(String msg) {
         super(msg);
     }

@@ -6,6 +6,9 @@ import dudu.task.Task;
 import dudu.task.TaskList;
 import dudu.util.Storage;
 
+/**
+ * Command class for deletion of task
+ */
 public class DeleteCommand extends Command {
     private int index;
 

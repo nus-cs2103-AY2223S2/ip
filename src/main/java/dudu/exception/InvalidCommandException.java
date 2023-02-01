@@ -1,8 +1,13 @@
 package dudu.exception;
 
-import dudu.exception.DuduException;
-
+/**
+ * Exception class on invalid command.
+ */
 public class InvalidCommandException extends DuduException {
+    /**
+     * Constructor for invalid command exception.
+     * @param msg Error message.
+     */
     public InvalidCommandException(String msg) {
         super(msg);
     }

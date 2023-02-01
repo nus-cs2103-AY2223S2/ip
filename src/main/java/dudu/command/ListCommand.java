@@ -4,7 +4,13 @@ import dudu.exception.DuduException;
 import dudu.task.TaskList;
 import dudu.util.Storage;
 
+/**
+ * Command class for list down all the tasks
+ */
 public class ListCommand extends Command {
+    /**
+     * Constructor for list command.
+     */
     public ListCommand() {
         super(null);
     }

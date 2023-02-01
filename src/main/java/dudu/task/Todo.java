@@ -1,6 +1,9 @@
 package dudu.task;
 
-public class Todo extends Task{
+/**
+ * Task class for todo type
+ */
+public class Todo extends Task {
     private String name;
 
     /**

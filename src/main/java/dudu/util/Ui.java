@@ -1,5 +1,8 @@
 package dudu.util;
 
+/**
+ * Ui class for Dudu to display the interface
+ */
 public class Ui {
     private static final String LOGO =
             " ____   _   _  ____   _   _\n"

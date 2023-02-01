@@ -1,8 +1,5 @@
 package dudu.util;
 
-import dudu.exception.TaskIOException;
-import dudu.task.Task;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -10,6 +7,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import dudu.exception.TaskIoException;
+import dudu.task.Task;
+
+/**
+ * Storage class to handle local storage of tasks
+ */
 public class Storage {
     private String filePath;
 
@@ -26,9 +29,9 @@ public class Storage {
      * Save task into the file.
      *
      * @param list List of tasks to be stored.
-     * @throws TaskIOException If the data cannot be saved
+     * @throws TaskIoException If the data cannot be saved
      */
-    public void saveTask(ArrayList<Task> list) throws TaskIOException {
+    public void saveTask(ArrayList<Task> list) throws TaskIoException {
         try {
             FileWriter fileWriter = new FileWriter(this.getFile());
             for (Task task : list) {
@@ -36,7 +39,7 @@ public class Storage {
             }
             fileWriter.close();
         } catch (IOException ex) {
-            throw new TaskIOException("Cannot save task");
+            throw new TaskIoException("Cannot save task");
         }
     }
 
@@ -44,9 +47,9 @@ public class Storage {
      * Update the data file.
      *
      * @param list Updated list of tasks.
-     * @throws TaskIOException If the data cannot be saved
+     * @throws TaskIoException If the data cannot be saved
      */
-    public void updateTask(ArrayList<Task> list) throws TaskIOException {
+    public void updateTask(ArrayList<Task> list) throws TaskIoException {
         saveTask(list);
     }
 
@@ -62,7 +65,7 @@ public class Storage {
             while (scanner.hasNextLine()) {
                 list.add(Task.decode(scanner.nextLine()));
             }
-        } catch (TaskIOException | FileNotFoundException ex) {
+        } catch (TaskIoException | FileNotFoundException ex) {
             System.out.println(ex);
         }
         return list;
@@ -72,16 +75,16 @@ public class Storage {
      * Gets the file.
      *
      * @return Returns the file containing task list.
-     * @throws TaskIOException If the file cannot be accessed.
+     * @throws TaskIoException If the file cannot be accessed.
      */
-    public File getFile() throws TaskIOException {
+    public File getFile() throws TaskIoException {
         File file = new File(filePath);
         File parentFile = file.getParentFile();
         try {
             parentFile.mkdir();
             file.createNewFile();
         } catch (IOException ex) {
-            throw new TaskIOException("cannot create file");
+            throw new TaskIoException("cannot create file");
         }
         return file;
     }

@@ -4,6 +4,9 @@ import dudu.exception.DuduException;
 import dudu.task.TaskList;
 import dudu.util.Storage;
 
+/**
+ * Command class
+ */
 public abstract class Command {
     private String input;
     public Command(String input) {

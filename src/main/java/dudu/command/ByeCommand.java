@@ -5,7 +5,10 @@ import dudu.exception.DuduException;
 import dudu.task.TaskList;
 import dudu.util.Storage;
 
-public class ByeCommand extends Command{
+/**
+ * Command class to exit the bot.
+ */
+public class ByeCommand extends Command {
     public ByeCommand() {
         super(null);
     }

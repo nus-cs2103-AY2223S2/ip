@@ -2,8 +2,9 @@ package dudu.task;
 
 import dudu.exception.DuduException;
 
-import java.util.Objects;
-
+/**
+ * Task class
+ */
 public abstract class Task {
     private String desc;
     private boolean isDone;
@@ -14,7 +15,7 @@ public abstract class Task {
      * @param desc Description of the task.
      * @param isDone The completion status of the task.
      */
-    public Task (String desc, boolean isDone) {
+    public Task(String desc, boolean isDone) {
         this.desc = desc.strip();
         this.isDone = isDone;
     }
