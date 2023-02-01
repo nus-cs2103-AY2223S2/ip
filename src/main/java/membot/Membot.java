@@ -32,6 +32,7 @@ public class Membot {
         try {
             this.manager = new StorageManager(FILE_NAME);
             Task.load(manager.loadFromFile());
+            this.execute("help");
         } catch (IOException e) {
             ui.printlnError(e.toString());
             exit();

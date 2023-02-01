@@ -53,6 +53,8 @@ public abstract class Command {
 
         try {
             switch (CommandType.valueOf(inputArr[0].toUpperCase())) {
+            case HELP:
+                return new HelpCommand(ui);
             case LIST:
                 return new ListCommand(ui);
             case BYE:
@@ -99,6 +101,7 @@ public abstract class Command {
  * Valid commands that is recognised by membot.Membot.
  */
 enum CommandType {
+    HELP,
     LIST,
     DONE,
     UNDONE,
