@@ -2,9 +2,16 @@ package duke;
 
 import duke.task.Task;
 
+/**
+ * Stub created so that TaskList class can be tested in isolation.
+ */
 public class EventStub extends Task {
     private boolean isDone;
 
+    /**
+     * Constructor for EventStub
+     * @param description Description for EventStub
+     */
     public EventStub(String description) {
         super(TaskType.EVENT, description);
         isDone = false;

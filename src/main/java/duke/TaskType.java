@@ -13,13 +13,14 @@ public enum TaskType {
     @Override
     public String toString() {
         switch (this) {
-            case TODO:
-                return "T";
-            case DEADLINE:
-                return "D";
-            case EVENT:
-                return "E";
+        case TODO:
+            return "T";
+        case DEADLINE:
+            return "D";
+        case EVENT:
+            return "E";
+        default:
+            return "";
         }
-        return "";
     }
 }

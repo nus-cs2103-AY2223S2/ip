@@ -1,12 +1,12 @@
 package duke;
 
-import duke.task.Task;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
+
+import duke.task.Task;
 
 /**
  * Used to store data from past lists and save new data inputted by user.
@@ -19,7 +19,7 @@ public class Storage {
     /**
      * Constructor for Storage class.
      * @param filepath Relative filepath to load past data and save new data.
-     * @throws DukeException The custom exception when user commands don't make sense or conform to formats and standards.
+     * @throws DukeException The custom exception when user commands don't make sense.
      */
     public Storage(String filepath) throws DukeException {
         this.filepath = filepath;

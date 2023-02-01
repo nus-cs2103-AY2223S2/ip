@@ -1,7 +1,8 @@
 package duke;
 
 /**
- * A custom checked exception Duke objects can throw when user commands do not make sense or conform to formats and standards.
+ * A custom checked exception Duke objects can throw when user commands do not make sense or conform to formats and
+ * standards.
  */
 public class DukeException extends Exception {
     private String message;
