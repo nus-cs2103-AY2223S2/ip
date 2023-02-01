@@ -45,7 +45,7 @@ public class Storage {
 
             while (scanner.hasNextLine()) {
                 String data = scanner.nextLine();
-                Task task = fromData(data);
+                Task task = readFromData(data);
                 if (!task.isEmpty()) {
                     tasks.add(task);
                 }
@@ -107,15 +107,15 @@ public class Storage {
      * @return A corresponding task to the provided data
      * @throws DukeException If the string representation does not match any format of tasks
      */
-    private Task fromData(String data) throws DukeException {
+    private Task readFromData(String data) throws DukeException {
         String[] typeSplit = data.split(" \\| ", 2);
         switch (typeSplit[0]) {
         case "Todo":
-            return Todo.fromData(typeSplit[1]);
+            return Todo.readFromData(typeSplit[1]);
         case "Deadline":
-            return Deadline.fromData(typeSplit[1]);
+            return Deadline.readFromData(typeSplit[1]);
         case "Event":
-            return Event.fromData(typeSplit[1]);
+            return Event.readFromData(typeSplit[1]);
         default:
             throw new DukeException("Unknown entry in data file");
         }

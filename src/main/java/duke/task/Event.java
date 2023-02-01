@@ -81,7 +81,7 @@ public class Event extends Task {
      * @param data String representation of a event task
      * @return An event task object that describes the given data of the task
      */
-    public static Task fromData(String data) {
+    public static Task readFromData(String data) {
         Pattern pattern = Pattern.compile("(marked:) (.*) ; (description:) (.*) ; (from:) (.*) ; (to:) (.*)");
         Matcher matcher = pattern.matcher(data);
         if (matcher.matches()) {

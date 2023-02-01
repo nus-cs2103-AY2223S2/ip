@@ -110,7 +110,7 @@ public class Task {
      * @param data String representation of a task
      * @return A task object that describes the given data of the task
      */
-    public static Task fromData(String data) {
+    public static Task readFromData(String data) {
         Pattern pattern = Pattern.compile("(marked:) (.*) ; (description:) (.*)");
         Matcher matcher = pattern.matcher(data);
         if (matcher.matches()) {
