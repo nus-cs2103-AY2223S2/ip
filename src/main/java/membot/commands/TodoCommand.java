@@ -27,9 +27,8 @@ public class TodoCommand extends Command {
         try {
             String[] normalised = InputValidator.normaliseTodoInput(this.input);
             ToDo task = new ToDo(normalised[1]);
-            this.ui.printIndent(task.toString());
-
-            this.ui.printIndent("");
+            this.ui.println(true, task.toString(), "");
+            this.ui.printSeparator();
             new ListCommand(this.ui).execute();
         } catch (InvalidCommandException e) {
             this.ui.printlnError("Invalid Syntax - \"todo [title]\" (e.g. \"todo math homework\")");

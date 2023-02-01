@@ -19,21 +19,19 @@ public class UiPrinter implements Printable {
     }
 
     @Override
-    public void println(String out) {
-        if (out.isEmpty()) {
+    public void println(boolean isIndent, String... out) {
+        // isIndent is ignored
+        if (out.length == 0) {
             return;
         }
 
-        printer.accept(out);
-    }
+        StringBuilder sb = new StringBuilder();
 
-    @Override
-    public void printlnIndent(String out) {
-        if (out.isEmpty()) {
-            return;
+        for (String s : out) {
+            sb.append(String.format("%s\n", s));
         }
 
-        printer.accept(out);
+        printer.accept(sb.toString());
     }
 
     @Override
@@ -46,11 +44,7 @@ public class UiPrinter implements Printable {
     }
 
     @Override
-    public void printIndent(String out) {
-        if (out.isEmpty()) {
-            return;
-        }
+    public void printSeparator() {
 
-        printer.accept(out);
     }
 }

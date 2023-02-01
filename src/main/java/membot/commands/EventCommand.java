@@ -32,9 +32,8 @@ public class EventCommand extends Command {
         try {
             String[] normalised = InputValidator.normaliseEventInput(input);
             Event task = new Event(normalised[1], normalised[2], normalised[3]);
-            this.ui.printIndent(task.toString());
-
-            this.ui.printIndent("");
+            this.ui.println(true, task.toString(), "");
+            this.ui.printSeparator();
             new ListCommand(this.ui).execute();
         } catch (IndexOutOfBoundsException | InvalidCommandException | NoStartDateTimeFoundException
                  | NoEndDateTimeFoundException e) {

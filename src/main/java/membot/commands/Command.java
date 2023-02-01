@@ -1,5 +1,6 @@
 package membot.commands;
 
+import membot.Membot;
 import membot.utils.EmptyInputException;
 import membot.utils.InvalidCommandException;
 import membot.view.Printable;
@@ -42,7 +43,8 @@ public abstract class Command {
      * @throws EmptyInputException If the user input is empty.
      * @throws InvalidCommandException If the user input does not correspond to any valid <code>Command</code>.
      */
-    public static Command parse(String input, Printable ui) throws EmptyInputException, InvalidCommandException {
+    public static Command parse(String input, Printable ui, Membot membot)
+            throws EmptyInputException, InvalidCommandException {
         if (input.isEmpty()) {
             throw new EmptyInputException("Input cannot be empty");
         }
@@ -54,7 +56,7 @@ public abstract class Command {
             case LIST:
                 return new ListCommand(ui);
             case BYE:
-                return new ByeCommand(ui);
+                return new ByeCommand(ui, membot);
             case DONE:
                 return new DoneCommand(input, ui);
             case UNDONE:

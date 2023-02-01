@@ -16,6 +16,7 @@ public class Printer implements Printable {
      * @param args Array of data to be printed out.
      */
     @Override
+    @Deprecated
     public void listPrint(String... args) {
         for (int i = 1; i <= args.length; ++i) {
             System.out.printf("\t%d. %s\n", i, args[i - 1]);
@@ -29,28 +30,18 @@ public class Printer implements Printable {
      * @param out Data to be printed.
      */
     @Override
-    public void println(String out) {
-        System.out.printf(out + "\n%s\n", SEPARATOR);
-    }
+    public void println(boolean isIndent, String... out) {
+        StringBuilder sb = new StringBuilder();
 
-    /**
-     * Prints data to <code>stdout</code> with indent, followed by a new line.
-     *
-     * @param out Data to be printed.
-     */
-    @Override
-    public void printlnIndent(String out) {
-        System.out.printf("\t%s\n%s\n", out, SEPARATOR);
-    }
+        for (String s : out) {
+            if (isIndent) {
+                sb.append(String.format("\t%s\n", s));
+            } else {
+                sb.append(String.format("%s\n", s));
+            }
+        }
 
-    /**
-     * Prints data to <code>stdout</code> indented.
-     *
-     * @param out Data to be printed.
-     */
-    @Override
-    public void printIndent(String out) {
-        System.out.printf("\t%s\n", out);
+        System.out.println(sb);
     }
 
     /**
@@ -61,5 +52,10 @@ public class Printer implements Printable {
     @Override
     public void printlnError(String out) {
         System.out.printf("\t*Error* %s\n%s\n", out, SEPARATOR);
+    }
+
+    @Override
+    public void printSeparator() {
+        System.out.println(SEPARATOR);
     }
 }

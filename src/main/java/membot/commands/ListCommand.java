@@ -2,7 +2,6 @@ package membot.commands;
 
 import membot.model.Task;
 import membot.view.Printable;
-import membot.view.Printer;
 
 /**
  * Represents a command which lists out all created <code>Task</code> and their
@@ -25,10 +24,15 @@ public class ListCommand extends Command {
     public void execute() {
         String[] tasks = Task.listAll();
         if (tasks.length == 0) {
-            this.ui.printlnIndent("Excellent! You do not have any tasks at hand!");
+            this.ui.println(true,"Excellent! You do not have any tasks at hand!");
         } else {
-            this.ui.printIndent("Here are your updated tasks:");
-            this.ui.listPrint(Task.listAll());
+            String[] allTasks = Task.listAll();
+            String[] a = new String[allTasks.length + 1];
+            a[0] = "Here are your updated tasks:";
+            for (int i = 1; i <= allTasks.length; ++i) {
+                a[i] = String.format("%d. %s", i, allTasks[i - 1]);
+            }
+            this.ui.println(true, a);
         }
     }
 }

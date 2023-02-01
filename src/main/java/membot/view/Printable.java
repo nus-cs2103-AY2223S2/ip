@@ -20,14 +20,7 @@ public interface Printable {
      *
      * @param out Data to be printed.
      */
-    void println(String out);
-
-    /**
-     * Prints data to with indent, followed by a new line.
-     *
-     * @param out Data to be printed.
-     */
-    void printlnIndent(String out);
+    void println(boolean isIndent, String... out);
 
     /**
      * Prints error message followed by a new line.
@@ -36,10 +29,5 @@ public interface Printable {
      */
     void printlnError(String out);
 
-    /**
-     * Prints data to indented.
-     *
-     * @param out Data to be printed.
-     */
-    void printIndent(String out);
+    void printSeparator();
 }

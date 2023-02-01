@@ -2,6 +2,8 @@ package membot;
 
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import membot.commands.Command;
 import membot.model.Task;
@@ -16,6 +18,7 @@ import membot.view.Printer;
  */
 public class Membot {
     private static final String FILE_NAME = "./data/tasks.txt";
+    private static final int EXIT_DELAY = 800;
     private static final String LOGO =
               "                             _             _   \n"
             + " _ __ ___    ___  _ __ ___  | |__    ___  | |_ \n"
@@ -43,7 +46,7 @@ public class Membot {
         Command command;
 
         try {
-            command = Command.parse(s, ui);
+            command = Command.parse(s, ui, this);
             command.execute();
         } catch (EmptyInputException | InvalidCommandException e) {
             this.ui.printlnError("Sorry I do not understand what to do!");
@@ -59,52 +62,58 @@ public class Membot {
             }
         }
 
-        System.exit(0);
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                System.exit(0);
+            }
+        }, EXIT_DELAY);
+
     }
 
-    /**
-     * Main application loop.
-     */
-    private static void run() {
-        Printable ui = new Printer();
-        StorageManager manager = null;
-        try {
-            manager = new StorageManager(FILE_NAME);
-            Task.load(manager.loadFromFile());
-        } catch (IOException e) {
-            ui.printlnError(e.toString());
-        }
-        ui.println("Welcome to\n" + LOGO);
-        ui.println("How may I assist you today?");
-        Scanner scanner = new Scanner(System.in);
-
-        while (scanner.hasNext()) {
-            String input = scanner.nextLine().trim();
-
-            Command command;
-
-            try {
-                command = Command.parse(input, ui);
-            } catch (EmptyInputException | InvalidCommandException e) {
-                ui.printlnError("Sorry I do not understand what to do!");
-                continue;
-            }
-
-            command.execute();
-
-            if (command.isExit()) {
-                break;
-            }
-        }
-
-        scanner.close();
-
-        if (manager != null) {
-            try {
-                Task.save(manager);
-            } catch (IOException e) {
-                ui.printlnError(e.toString());
-            }
-        }
-    }
+//    /**
+//     * Main application loop.
+//     */
+//    private static void run() {
+//        Printable ui = new Printer();
+//        StorageManager manager = null;
+//        try {
+//            manager = new StorageManager(FILE_NAME);
+//            Task.load(manager.loadFromFile());
+//        } catch (IOException e) {
+//            ui.printlnError(e.toString());
+//        }
+//        ui.println(true, "Welcome to\n" + LOGO);
+//        ui.println(true, "How may I assist you today?");
+//        Scanner scanner = new Scanner(System.in);
+//
+//        while (scanner.hasNext()) {
+//            String input = scanner.nextLine().trim();
+//
+//            Command command;
+//
+//            try {
+//                command = Command.parse(input, ui);
+//            } catch (EmptyInputException | InvalidCommandException e) {
+//                ui.printlnError("Sorry I do not understand what to do!");
+//                continue;
+//            }
+//
+//            command.execute();
+//
+//            if (command.isExit()) {
+//                break;
+//            }
+//        }
+//
+//        scanner.close();
+//
+//        if (manager != null) {
+//            try {
+//                Task.save(manager);
+//            } catch (IOException e) {
+//                ui.printlnError(e.toString());
+//            }
+//        }
+//    }
 }

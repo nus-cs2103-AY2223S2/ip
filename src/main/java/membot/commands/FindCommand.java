@@ -22,17 +22,18 @@ public class FindCommand extends Command {
 
             ArrayList<Task> tasks = Task.find(keyword);
             if (tasks.isEmpty()) {
-                this.ui.printlnIndent("There are no tasks containing \"" + keyword + "\":");
+                this.ui.println(true, "There are no tasks containing \"" + keyword + "\":");
+                this.ui.printSeparator();
                 return;
             }
 
-            this.ui.printIndent("Here are the tasks containing \"" + keyword + "\":");
-
-            String[] sTasks = new String[tasks.size()];
-            for (int i = 0; i < tasks.size(); ++i) {
-                sTasks[i] = tasks.get(i).toString();
+            String[] a = new String[tasks.size() + 1];
+            a[0] = String.format("Here are the tasks containing \"%s\":", keyword);
+            for (int i = 1; i <= tasks.size(); ++i) {
+                a[i] = String.format("%d. %s", i, tasks.get(i - 1).toString());
             }
-            this.ui.listPrint(sTasks);
+
+            this.ui.println(true, a);
         } else {
             this.ui.printlnError("Invalid Syntax - \"find [keyword]\" (e.g. \"find study\")");
         }

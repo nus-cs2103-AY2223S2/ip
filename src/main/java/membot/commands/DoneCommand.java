@@ -27,10 +27,12 @@ public class DoneCommand extends Command {
             int taskId = Integer.parseInt(this.input.split(" ")[1]);
             try {
                 Task.setStatusCompleted(taskId);
-                this.ui.printIndent("Well done! The task is marked as completed:");
-                this.ui.printIndent(Task.listOne(taskId));
-
-                this.ui.printIndent("");
+                this.ui.println(true,
+                        "Well done! The task is marked as completed:",
+                        String.format("%d. %s", taskId, Task.listOne(taskId)),
+                        ""
+                );
+                this.ui.printSeparator();
                 new ListCommand(this.ui).execute();
             } catch (IndexOutOfBoundsException e) {
                 this.ui.printlnError("Invalid Task ID!");
