@@ -1,5 +1,6 @@
 package command;
 
+import task.TaskManager;
 import util.DukeException;
 import util.Parser;
 
@@ -22,10 +23,14 @@ public abstract class Command {
         return Integer.parseInt(string);
     }
 
+    public boolean isExit() {
+        return true;
+    }
+
     /**
      * Abstract method to execute the command.
      *
      * @throws DukeException
      */
-    public abstract void executeCommand() throws DukeException;
+    public abstract void executeCommand(TaskManager taskManager) throws DukeException;
 }

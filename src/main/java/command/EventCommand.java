@@ -9,11 +9,16 @@ import util.DukeException;
  * Executes add event task command.
  */
 public class EventCommand extends Command {
-    private final TaskManager taskManager;
+    //private final TaskManager taskManager;
     private final String description;
-    public EventCommand(TaskManager taskManager, String description) {
-        this.taskManager = taskManager;
+    public EventCommand(String description) {
+        //this.taskManager = taskManager;
         this.description = description;
+    }
+
+    @Override
+    public boolean isExit() {
+        return false;
     }
 
     /**
@@ -25,7 +30,7 @@ public class EventCommand extends Command {
      * @throws DukeException
      */
     @Override
-    public void executeCommand() throws DukeException {
+    public void executeCommand(TaskManager taskManager) throws DukeException {
         try {
             String[] arr = this.description.split(" /from ");
             String[] time = arr[1].split(" /to ");

@@ -9,12 +9,17 @@ import util.DukeException;
  * Executes add todo task command.
  */
 public class TodoCommand extends Command {
-    private final TaskManager taskManager;
+    //private final TaskManager taskManager;
     private final String description;
 
-    public TodoCommand(TaskManager taskManager, String description) {
-        this.taskManager = taskManager;
+    public TodoCommand(String description) {
+        //this.taskManager = taskManager;
         this.description = description;
+    }
+
+    @Override
+    public boolean isExit() {
+        return false;
     }
 
     /**
@@ -23,7 +28,7 @@ public class TodoCommand extends Command {
      * @throws DukeException
      */
     @Override
-    public void executeCommand() throws DukeException {
+    public void executeCommand(TaskManager taskManager) throws DukeException {
         ToDo todo = new ToDo(this.description, false);
         taskManager.addTaskToList(todo);
     }

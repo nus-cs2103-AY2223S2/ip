@@ -8,7 +8,7 @@ import util.DukeException;
  * Executes check task in list command.
  */
 public class CheckCommand extends Command {
-    private final TaskManager taskManager;
+    // private final TaskManager taskManager;
     private final int index;
 
     /**
@@ -18,9 +18,14 @@ public class CheckCommand extends Command {
      * @param taskManager
      * @param input
      */
-    public CheckCommand(TaskManager taskManager, String input) {
-        this.taskManager = taskManager;
+    public CheckCommand(String input) {
+        //this.taskManager = taskManager;
         this.index = super.extractIndex(input) - 1;
+    }
+
+    @Override
+    public boolean isExit() {
+        return false;
     }
 
     /**
@@ -29,7 +34,7 @@ public class CheckCommand extends Command {
      * @throws DukeException
      */
     @Override
-    public void executeCommand() throws DukeException {
+    public void executeCommand(TaskManager taskManager) throws DukeException {
         try {
             taskManager.checkTask(this.index);
         } catch (IndexOutOfBoundsException e) {

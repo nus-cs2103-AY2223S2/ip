@@ -8,7 +8,7 @@ import util.DukeException;
  * Executes delete task command.
  */
 public class DeleteCommand extends Command {
-    private final TaskManager taskManager;
+    //private final TaskManager taskManager;
     private final int index;
 
     /**
@@ -18,9 +18,14 @@ public class DeleteCommand extends Command {
      * @param taskManager
      * @param input
      */
-    public DeleteCommand(TaskManager taskManager, String input) {
-        this.taskManager = taskManager;
+    public DeleteCommand(String input) {
+        //this.taskManager = taskManager;
         this.index = super.extractIndex(input) - 1;
+    }
+
+    @Override
+    public boolean isExit() {
+        return false;
     }
 
     /**
@@ -32,7 +37,7 @@ public class DeleteCommand extends Command {
      * @throws DukeException
      */
     @Override
-    public void executeCommand() throws DukeException {
+    public void executeCommand(TaskManager taskManager) throws DukeException {
         try {
             taskManager.deleteTask(this.index);
         } catch (IndexOutOfBoundsException e) {

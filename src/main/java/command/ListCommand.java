@@ -8,10 +8,16 @@ import util.DukeException;
  * Executes display task list command.
  */
 public class ListCommand extends Command {
-    private final TaskManager taskManager;
+    //private final TaskManager taskManager;
 
-    public ListCommand(TaskManager taskManager) {
-        this.taskManager = taskManager;
+    public ListCommand() {
+
+        //this.taskManager = taskManager;
+    }
+
+    @Override
+    public boolean isExit() {
+        return false;
     }
 
     /**
@@ -20,7 +26,7 @@ public class ListCommand extends Command {
      * @throws DukeException
      */
     @Override
-    public void executeCommand() throws DukeException {
+    public void executeCommand(TaskManager taskManager) throws DukeException {
         taskManager.displayList();
     }
 }

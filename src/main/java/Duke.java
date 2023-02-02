@@ -11,6 +11,8 @@ import ui.WelcomeUI;
 
 public class Duke extends Application {
 
+    private Duke duke = new Duke();
+    private ChatBot chatBot;
     /**
      * Main driver method which initialises the chatbot with
      * a Scanner, Welcome UI and runs it.

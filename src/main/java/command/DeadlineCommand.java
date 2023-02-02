@@ -9,11 +9,16 @@ import util.DukeException;
  * Executes add deadline task command.
  */
 public class DeadlineCommand extends Command {
-    private final TaskManager taskManager;
+    //private final TaskManager taskManager;
     private final String description;
-    public DeadlineCommand(TaskManager taskManager, String description) {
-        this.taskManager = taskManager;
+    public DeadlineCommand(String description) {
+        //this.taskManager = taskManager;
         this.description = description;
+    }
+
+    @Override
+    public boolean isExit() {
+        return false;
     }
 
     /**
@@ -25,7 +30,7 @@ public class DeadlineCommand extends Command {
      * @throws DukeException
      */
     @Override
-    public void executeCommand() throws DukeException {
+    public void executeCommand(TaskManager taskManager) throws DukeException {
         try {
             String[] tmp = this.description.split(" /by ");
             Deadline deadline = new Deadline(tmp[0], false, tmp[1]);
