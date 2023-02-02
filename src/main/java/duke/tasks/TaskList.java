@@ -151,6 +151,16 @@ public class TaskList {
         System.out.println(Ui.format("Noted. I've removed this task:\n" + t.toString()));
     }
 
+    public ArrayList<Task> findMatchingTasks(String keyword) {
+        ArrayList<Task> selected = new ArrayList<>();
+        for (Task task: records) {
+            if (task.toString().contains(keyword)) {
+                selected.add(task);
+            }
+        }
+        return selected;
+    }
+
     @Override
     public String toString() {
         String output = "";

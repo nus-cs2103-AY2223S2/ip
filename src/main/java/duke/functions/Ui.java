@@ -13,7 +13,7 @@ import java.util.zip.DataFormatException;
 
 public class Ui {
     public static ArrayList<String> commandList = new ArrayList<>(Arrays.asList
-            ("todo", "deadline", "event", "mark", "unmark", "list", "bye", "delete"));
+            ("todo", "deadline", "event", "mark", "unmark", "list", "bye", "delete", "find"));
     public void run(TaskList records) {
         greet();
         Scanner userInput = new Scanner(System.in);
