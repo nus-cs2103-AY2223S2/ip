@@ -5,9 +5,6 @@ import duke.Ui;
 import exceptions.DukeException;
 import javafx.application.Platform;
 import tasks.TaskList;
-
-
-
 import java.util.Timer;
 import java.util.TimerTask;
 
