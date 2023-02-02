@@ -69,7 +69,9 @@ public class Duke {
      * @throws MissingDescriptionException
      */
     public static void main(String[] args) {
-        new Duke("data/tasks.txt");
+        Duke d = new Duke("data/tasks.txt");
+        d.execute();
+
     }
 
     public String getResponse(String input) {
