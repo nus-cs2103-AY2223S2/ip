@@ -1,32 +1,27 @@
 package fideline.user;
 
-import fideline.exception.FidelineException;
-import fideline.exception.EmptyParamException;
-import fideline.exception.InvalidArgumentException;
-import fideline.exception.UnknownCommandException;
-import fideline.exception.WrongFormatException;
 
-import fideline.execution.Command;
-import fideline.execution.ExitCommand;
-import fideline.execution.ListCommand;
-import fideline.execution.CreateTodoCommand;
-import fideline.execution.CreateDeadlineCommand;
-import fideline.execution.CreateEventCommand;
-import fideline.execution.MarkCommand;
-import fideline.execution.UnmarkCommand;
-import fideline.execution.DeleteCommand;
-
-
+import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.time.LocalDate;
+
+
+import fideline.exception.EmptyParamException;
+import fideline.exception.FidelineException;
+import fideline.exception.InvalidArgumentException;
+import fideline.exception.UnknownCommandException;
+import fideline.exception.WrongFormatException;
+import fideline.execution.*;
+
 
 public class Parser {
 
-    private final static String[] possibleCommandsArr = {
-            "bye", "list", "todo", "deadline", "event", "mark", "unmark", "delete"
+
+    private static final String[] possibleCommandsArr = {
+            "bye", "list", "todo", "deadline", "event", "mark", "unmark", "delete", "find"
     };
+
 
     public static Command getCommand(String userInput) throws FidelineException {
         ArrayList<String> possibleCommandsList = new ArrayList<>();
@@ -44,11 +39,11 @@ public class Parser {
                 // error for unknown command
                 throw new UnknownCommandException();
             }
-        // below handles commands with arguments
+            // below handles commands with arguments
         } else if (userInput.startsWith("todo ")) {
             return new CreateTodoCommand(userInput.substring(5, userInput.length()));
         } else if (userInput.startsWith("deadline ")) {
-            String argString = userInput.substring(9,userInput.length());
+            String argString = userInput.substring(9, userInput.length());
             if (argString.contains(" /by ")) {
                 String[] inputArguments = argString.split(" /by ", 2);
                 String description = inputArguments[0];
@@ -58,8 +53,8 @@ public class Parser {
                     if (timeComponents[0].length() > 2
                             || timeComponents[1].length() > 2
                             || timeComponents[2].length() != 4) {
-                        throw new WrongFormatException("date should follow the format:\n" +
-                                "  dd/mm/yyyy");
+                        throw new WrongFormatException("date should follow the format:\n"
+                                + "  dd/mm/yyyy");
                     }
                     if (timeComponents[0].length() == 1) {
                         timeComponents[0] = "0" + timeComponents[0];
@@ -78,8 +73,8 @@ public class Parser {
                 }
                 return new CreateDeadlineCommand(description, deadline);
             } else {
-                throw new WrongFormatException("command should follow the format:\n" +
-                        "  deadline *description* /by *timing*");
+                throw new WrongFormatException("command should follow the format:\n"
+                        + "  deadline *description* /by *timing*");
             }
         } else if (userInput.startsWith("event ")) {
             String argString = userInput.substring(6, userInput.length());
@@ -88,32 +83,35 @@ public class Parser {
                 String[] tempArr2 = tempArr[1].split(" /to ");
                 return new CreateEventCommand(tempArr[0], tempArr2[0], tempArr2[1]);
             } else {
-                throw new WrongFormatException("command should follow the format:\n" +
-                        "  event *description* /from *start time* /to *end time*");
+                throw new WrongFormatException("command should follow the format:\n"
+                        + "  event *description* /from *start time* /to *end time*");
             }
         } else if (userInput.startsWith("mark ")) {
             try {
-                int taskNum = Integer.valueOf(userInput.substring(5, userInput.length()));
+                int taskNum = Integer.parseInt(userInput.substring(5, userInput.length()));
                 return new MarkCommand(taskNum);
             } catch (NumberFormatException nfe) {
                 throw new InvalidArgumentException("integer (e.g: mark 2)");
             }
         } else if (userInput.startsWith("unmark ")) {
             try {
-                int taskNum = Integer.valueOf(userInput.substring(7, userInput.length()));
+                int taskNum = Integer.parseInt(userInput.substring(7, userInput.length()));
                 return new UnmarkCommand(taskNum);
             } catch (NumberFormatException nfe) {
                 throw new InvalidArgumentException("integer (e.g: unmark 2)");
             }
         } else if (userInput.startsWith("delete ")) {
             try {
-                int taskNum = Integer.valueOf(userInput.substring(7, userInput.length()));
+                int taskNum = Integer.parseInt(userInput.substring(7, userInput.length()));
                 return new DeleteCommand(taskNum);
             } catch (NumberFormatException nfe) {
                 throw new InvalidArgumentException("integer! (e.g: delete 2");
             }
+        } else if (userInput.startsWith("find ")) {
+            return new FindCommand(userInput.substring(5, userInput.length()));
         }
         throw new UnknownCommandException();
     }
+
 
 }

@@ -1,8 +1,11 @@
 package fideline.task;
 
-import fideline.exception.CorruptedDataFileException;
 
 import java.util.ArrayList;
+
+
+import fideline.exception.CorruptedDataFileException;
+
 
 /**
  * Manager of new and existing tasks. Handles creating, deletion and
@@ -12,9 +15,12 @@ import java.util.ArrayList;
  */
 
 
+
+
 // rewrite taskManager to also store the tasks.
 // has to parse and read storage at the start using parser
 // maybe rewrite the command with the mark input
+
 
 public class TaskManager {
     private ArrayList<Task> taskList;
@@ -39,9 +45,11 @@ public class TaskManager {
         }
     }
 
+
     public TaskManager() {
         taskList = new ArrayList<Task>();
     }
+
 
     public String addTodo(String taskName) {
         Todo newTodo = new Todo(taskName);
@@ -49,11 +57,13 @@ public class TaskManager {
         return newTodo.toString();
     }
 
+
     public String addDeadline(String taskName, String deadlineTiming) {
         Deadline newDeadline = new Deadline(taskName, deadlineTiming);
         taskList.add(newDeadline);
         return newDeadline.toString();
     }
+
 
     public String addEvent(String taskName, String startTime, String endTime) {
         Event newEvent = new Event(taskName, startTime, endTime);
@@ -61,15 +71,18 @@ public class TaskManager {
         return newEvent.toString();
     }
 
+
     // checks if task exists at given index
     public boolean checkTask(int taskNumber) {
         return taskNumber <= taskList.size();
     }
 
+
     // get the name of the task at a given index
     public String getTaskString(int taskNumber) {
         return taskList.get(taskNumber - 1).toString();
     }
+
 
     // changes Task at given index to marked.
     public String markTask(int taskNumber) {
@@ -77,11 +90,13 @@ public class TaskManager {
         return taskList.get(taskNumber - 1).toString();
     }
 
+
     // changes Task at given index to unmarked.
     public String unmarkTask(int taskNumber) {
         taskList.get(taskNumber - 1).unmark();
         return taskList.get(taskNumber - 1).toString();
     }
+
 
     // delete Task at given index.
     public String deleteTask(int taskNumber) {
@@ -91,17 +106,36 @@ public class TaskManager {
     }
 
 
+
+
     // formats and returns the list of tasks
     public String getTaskListString() {
         String listString = "";
         for (int i = 1; i <= taskList.size(); i++) {
-                listString += "\n" + i + ". "
-                        + getTaskString(i);
-            }
+            listString += "\n" + i + ". "
+                    + getTaskString(i);
+        }
         return listString;
     }
 
+
     public int getTaskCount() {
         return taskList.size();
+    }
+
+
+    public String findTask(String findString) {
+        ArrayList<Task> list = new ArrayList<>();
+        taskList.forEach(x -> {
+            if (x.getDescription().contains(findString)) {
+                list.add(x);
+            }
+        });
+        String output = "";
+        for (int i = 1; i <= list.size(); i ++) {
+            output += "\n" + i + ". "
+                    + list.get(i - 1).toString();
+        }
+        return output;
     }
 }
