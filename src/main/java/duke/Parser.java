@@ -18,9 +18,13 @@ public class Parser {
             if (userInput.equals("bye")) {
                 ui.respond("Goodbye! Have a nice day ahead.\n");
             } else if (userInput.equals("list")) {
-                tasks.listTasks();
+                ui.listTasks(tasks);
             } else if (userInput.equals("help")) {
                 ui.showHelpMessage();
+            } else if (firstWord.equals("find")) {
+                //Body message should be a keyword to search for a task
+                String secondWord = userInput.split(" ", 2)[1];
+                ui.findTasks(tasks.findTask(secondWord));
             } else if (firstWord.equals("mark")) {
                 //Second word should be an integer dictating which Task to mark.
                 String secondWord = userInput.split(" ", 2)[1];
@@ -76,15 +80,6 @@ public class Parser {
             } else {
                 ui.respond("Oops! I don't know what this means.");
             }
-        } catch (ArrayIndexOutOfBoundsException e) {
-            //only one word was given when two words were expected.
-            ui.showCommandError();
-        } catch (NumberFormatException e) {
-            //Second word was not a number.
-            ui.showCommandError();
-        } catch (IndexOutOfBoundsException e) {
-            //Attempted to unmark/mark a task that does not exist.
-            ui.showCommandError();
         } catch (DukeException e) {
             ui.showCommandError();
         } catch (Exception e) {

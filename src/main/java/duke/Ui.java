@@ -1,11 +1,13 @@
 package duke;
+
+import java.util.ArrayList;
+
 /**
  * Handles interactions with the user.
  */
 public class Ui {
     /** The top part of Duke's reply message. */
-    static String TOP_DIVIDER = "~~~~~~~~~~~~~~~~o~~~~~~~~~~~~~~~~\n" + "Duke's Response: \n\n";
-
+    static String TOP_DIVIDER = "~~~~~~~~~~~~~~~~o~~~~~~~~~~~~~~~~\n" + "Duke's Response: \n";
     /** The bottom part of Duke's reply message. */
     static String BOTTOM_DIVIDER = "\n~~~~~~~~~~~~~~~~o~~~~~~~~~~~~~~~~";
 
@@ -18,7 +20,28 @@ public class Ui {
             "5) event ________ /from _______  /to _________\n" +
             "6) unmark ____\n" +
             "7) mark ______ \n" +
-            "8) help\n";
+            "8) help\n" +
+            "9) find ______ \n";
+
+    public void listTasks(TaskList tasks) {
+        System.out.println(TOP_DIVIDER);
+        System.out.println("These are the current tasks: ");
+        for (int i = 1; i < tasks.getTaskCount() + 1; i++) {
+            Task task = tasks.getTask(i);
+            System.out.println(task.provideDetails());
+        }
+        System.out.println(BOTTOM_DIVIDER);
+    }
+
+    public void findTasks(ArrayList<Task> matchingTasks) {
+        System.out.println(TOP_DIVIDER);
+        System.out.println("These are the matching tasks: ");
+        for (int i = 0; i < matchingTasks.size(); i++) {
+            Task task = matchingTasks.get(i);
+            System.out.println(task.provideDetails() + "\n");
+        }
+        System.out.println(BOTTOM_DIVIDER);
+    }
 
     /**
      * Greets the user.
