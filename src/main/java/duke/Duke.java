@@ -8,6 +8,10 @@ public class Duke {
     private static TaskList listOfTasks = new TaskList();
     private Ui ui;
 
+    /**
+     * Runs the Duke bot.
+     * @param args
+     */
     public void run() {
         this.ui = new Ui();
         storage = new Storage("src/main/tasks.txt");

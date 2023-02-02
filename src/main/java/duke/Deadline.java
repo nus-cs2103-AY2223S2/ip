@@ -4,10 +4,19 @@ import java.time.DateTimeException;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
 
+/**
+ * Encapsulates the Deadline class which is a sub-class of the Task class.
+ */
 public class Deadline extends Task {
 
     private LocalDate by;
 
+    /**
+     * Initialises the by field in LocalDate type.
+     * @param description
+     * @param by
+     * @throws DateTimeException
+     */
     public Deadline(String description, String by) throws DateTimeException {
         super(description);
         try {

@@ -4,11 +4,21 @@ import java.time.DateTimeException;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
 
+/**
+ * Encapsulates the Event class which is a sub-class of the Task class.
+ */
 public class Event extends Task {
 
     protected LocalDate from;
     protected LocalDate to;
 
+    /**
+     * Initialises the from and to field in LocalDate type.
+     * 
+     * @param description
+     * @param by
+     * @throws DateTimeException
+     */
     public Event (String description, String from, String to) {
         super(description);
         try {
