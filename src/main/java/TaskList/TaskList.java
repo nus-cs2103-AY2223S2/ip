@@ -50,4 +50,14 @@ public class TaskList {
         Ui.showUnmarkedMessage(this.get(index));
     }
 
+    public ArrayList<Task> findArray(String find) {
+        ArrayList<Task> list = new ArrayList<Task>();
+        for (int i = 0; i < this.size(); i++) {
+            String temp = this.get(i).getCommand();
+            if (temp.contains(find)) {
+                list.add(this.get(i));
+            }
+        }
+        return list;
+    }
 }
