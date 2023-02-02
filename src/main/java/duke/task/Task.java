@@ -22,6 +22,10 @@ public abstract class Task {
         return status + "||" + description;
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
