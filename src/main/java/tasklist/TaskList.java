@@ -61,7 +61,7 @@ public class TaskList {
 			} else {
 				task.markAsUndone();
 			}
-			ui.printMarkedTask(task, isMark, storage, dialogContainer);
+			ui.printMarkedTask(task, isMark, dialogContainer, storage);
 			storage.markSavedTask(idx, isMark, ui);
 		} catch (IndexOutOfBoundsException ex) {
 			String errorMessage = String.format(

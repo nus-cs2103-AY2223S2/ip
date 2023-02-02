@@ -38,7 +38,7 @@ public class AddCommand extends Command {
 	/**
 	 * Set task type from user input.
 	 * 
-	 * @param message
+	 * @param message User input text.
 	 */
 	private void setTaskType(String message) {
 		String commandLower = message.toLowerCase();
@@ -52,11 +52,11 @@ public class AddCommand extends Command {
 	/**
 	 * Set task from task type.
 	 * 
-	 * @param inputArr
-	 * @param ui
-	 * @param parser
-	 * @param storage
-	 * @param dialogContainer
+	 * @param inputArr        An array of strings from user text input.
+	 * @param ui              A service to render the page of GUI.
+	 * @param parser          A service to parse text input.
+	 * @param storage         A store that represents the data access object (DAO).
+	 * @param dialogContainer A container that holds all the rows of labels.
 	 * @return boolean
 	 */
 	private boolean setTask(String[] inputArr, Ui ui, Parser parser, Storage storage, VBox dialogContainer) {

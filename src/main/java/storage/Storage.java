@@ -66,11 +66,11 @@ public class Storage {
 	/**
 	 * Read and parse saved file contents.
 	 * 
-	 * @param tasklist
-	 * @param parser
-	 * @param ui
-	 * @param storage
-	 * @param dialogContainer
+	 * @param tasklist        All the tasks that are recorded.
+	 * @param parser          A service to parse text input.
+	 * @param ui              A service to render the page of GUI.
+	 * @param storage         A store that represents the data access object (DAO).
+	 * @param dialogContainer A container that holds all the rows of labels.
 	 */
 	public void getFile(TaskList tasklist, Parser parser, Ui ui, Storage storage, VBox dialogContainer) {
 		try {
@@ -87,7 +87,7 @@ public class Storage {
 	/**
 	 * Create new file if it does not exists.
 	 * 
-	 * @param ui
+	 * @param ui A service to render the page of GUI.
 	 */
 	private void createFile(Ui ui) {
 		try {
@@ -101,8 +101,8 @@ public class Storage {
 	/**
 	 * Add new task into file.
 	 * 
-	 * @param task
-	 * @param ui
+	 * @param task New task that was just added.
+	 * @param ui   A service to render the page of GUI.
 	 */
 	public <T extends Task> void saveNewData(T task, Ui ui) {
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter(dataFilePath, true))) {
@@ -116,9 +116,10 @@ public class Storage {
 	/**
 	 * Mark or unmark task in file.
 	 * 
-	 * @param idx
+	 * @param idx    An index of the task in the tasklist which is also the row
+	 *               where the task is in the file.
 	 * @param isMark
-	 * @param ui
+	 * @param ui     A service to render the page of GUI.
 	 */
 	public void markSavedTask(int idx, boolean isMark, Ui ui) {
 		try (Stream<String> lines = Files.lines(Paths.get(dataFilePath))) {
@@ -133,9 +134,9 @@ public class Storage {
 	/**
 	 * Update content in file by line number.
 	 * 
-	 * @param lineNum
-	 * @param newLine
-	 * @param ui
+	 * @param lineNum A row number of the task in file.
+	 * @param newLine The new line of contents to replace the old line with.
+	 * @param ui      A service to render the page of GUI.
 	 */
 	private void modifyLineFile(int lineNum, String newLine, Ui ui) {
 		String content = "";
@@ -164,8 +165,8 @@ public class Storage {
 	/**
 	 * Delete content in file by line number.
 	 * 
-	 * @param lineNum
-	 * @param ui
+	 * @param lineNum A row number of the task in file.
+	 * @param ui      A service to render the page of GUI.
 	 */
 	public void deleteLineFile(int lineNum, Ui ui) {
 		String content = "";

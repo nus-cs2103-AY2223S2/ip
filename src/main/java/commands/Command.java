@@ -28,7 +28,8 @@ public class Command {
 	/**
 	 * Execute the command and print a response.
 	 * 
-	 * @param args
+	 * @param args An array of size 5 with items [ui, parser, storage, tasklist,
+	 *             dialogContainer]
 	 */
 	public void execute(Object... args) {
 		Ui ui = (Ui) args[0];

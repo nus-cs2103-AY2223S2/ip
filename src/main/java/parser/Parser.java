@@ -69,11 +69,11 @@ public class Parser {
 	/**
 	 * Create task from record in saved file and add it to tasklist.
 	 * 
-	 * @param input
-	 * @param tasklist
-	 * @param ui
-	 * @param storage
-	 * @param dialogContainer
+	 * @param input           User text input.
+	 * @param tasklist        All the tasks that are recorded.
+	 * @param ui              A service to render the page of GUI.
+	 * @param storage         A store that represents the data access object (DAO).
+	 * @param dialogContainer A container that holds all the rows of labels.
 	 */
 	public void parseAndSetData(String input, TaskList tasklist, Ui ui, Storage storage, VBox dialogContainer) {
 		String inputLower = input.toLowerCase();
@@ -115,10 +115,10 @@ public class Parser {
 	/**
 	 * Convert String datetime to LocalDateTime object.
 	 * 
-	 * @param dateTimeStr
-	 * @param ui
-	 * @param storage
-	 * @param dialogContainer
+	 * @param dateTimeStr     Date time in string format.
+	 * @param ui              A service to render the page of GUI.
+	 * @param storage         A store that represents the data access object (DAO).
+	 * @param dialogContainer A container that holds all the rows of labels.
 	 * @return LocalDateTime
 	 */
 	public LocalDateTime parseDateTimeStr(String dateTimeStr, Ui ui, Storage storage, VBox dialogContainer) {
@@ -163,10 +163,10 @@ public class Parser {
 	/**
 	 * Get a datetime object from deadline tasks.
 	 * 
-	 * @param inputArr
-	 * @param ui
-	 * @param storage
-	 * @param dialogContainer
+	 * @param inputArr        An array of string that is split from user text input.
+	 * @param ui              A service to render the page of GUI.
+	 * @param storage         A store that represents the data access object (DAO).
+	 * @param dialogContainer A container that holds all the rows of labels.
 	 * @return LocalDateTime
 	 */
 	public LocalDateTime getBy(String[] inputArr, Ui ui, Storage storage, VBox dialogContainer) {
@@ -184,10 +184,10 @@ public class Parser {
 	/**
 	 * Get a datetime array object from event tasks.
 	 * 
-	 * @param inputArr
-	 * @param ui
-	 * @param storage
-	 * @param dialogContainer
+	 * @param inputArr        An array of string that is split from user text input.
+	 * @param ui              A service to render the page of GUI.
+	 * @param storage         A store that represents the data access object (DAO).
+	 * @param dialogContainer A container that holds all the rows of labels.
 	 * @return LocalDateTime[]
 	 */
 	public LocalDateTime[] getFromTo(String[] inputArr, Ui ui, Storage storage, VBox dialogContainer) {
@@ -219,7 +219,7 @@ public class Parser {
 	/**
 	 * Remove the datetime string from an input string.
 	 * 
-	 * @param input
+	 * @param input User text input.
 	 * @return String
 	 */
 	public String trimDate(String input) {

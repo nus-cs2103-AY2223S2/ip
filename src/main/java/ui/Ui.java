@@ -26,7 +26,7 @@ public class Ui {
 	/**
 	 * Create a wrapped label.
 	 * 
-	 * @param message
+	 * @param message A string to be displayed in a label.
 	 * @return Label
 	 */
 	public Label createLabel(String message) {
@@ -38,8 +38,8 @@ public class Ui {
 	/**
 	 * A welcome message.
 	 * 
-	 * @param dialogContainer
-	 * @param storage
+	 * @param dialogContainer A container that holds all the rows of labels.
+	 * @param storage         A store that represents the data access object (DAO).
 	 */
 	public void greetUser(VBox dialogContainer, Storage storage) {
 		String s1 = "Hi There! I'm Shao";
@@ -52,9 +52,9 @@ public class Ui {
 	/**
 	 * Print a response from the bot.
 	 * 
-	 * @param dialogContainer
-	 * @param storage
-	 * @param messages
+	 * @param dialogContainer A container that holds all the rows of labels.
+	 * @param storage         A store that represents the data access object (DAO).
+	 * @param messages        A node component wrapped with label messages.
 	 */
 	public void sendResponse(VBox dialogContainer, Storage storage, Node messages) {
 		HBox rowContainer = new HBox();
@@ -68,9 +68,9 @@ public class Ui {
 	/**
 	 * Print a request from the user.
 	 * 
-	 * @param dialogContainer
-	 * @param storage
-	 * @param message
+	 * @param dialogContainer A container that holds all the rows of labels.
+	 * @param storage         A store that represents the data access object (DAO).
+	 * @param message         User input text.
 	 */
 	public void sendInput(VBox dialogContainer, Storage storage, String message) {
 		HBox rowContainer = new HBox();
@@ -93,19 +93,19 @@ public class Ui {
 	/**
 	 * Print line of a provided string.
 	 * 
-	 * @param s
+	 * @param str
 	 */
-	private void println(String s) {
-		System.out.println("\t" + s);
+	private void println(String str) {
+		System.out.println("\t" + str);
 	}
 
 	/**
 	 * Print a response when a new task is added.
 	 * 
-	 * @param task
-	 * @param tasksCnt
-	 * @param dialogContainer
-	 * @param storage
+	 * @param task            New task that was just added.
+	 * @param tasksCnt        Total number of tasks recorded.
+	 * @param dialogContainer A container that holds all the rows of labels.
+	 * @param storage         A store that represents the data access object (DAO).
 	 */
 	public void printAddedTask(Task task, int tasksCnt, VBox dialogContainer, Storage storage) {
 		String msg1 = "Noted. I've added this task:";
@@ -121,12 +121,12 @@ public class Ui {
 	/**
 	 * Print a response when a new task is marked or unmarked.
 	 * 
-	 * @param task
+	 * @param task            Task that was just marked/unmarked.
 	 * @param isMark
-	 * @param storage
-	 * @param dialogContainer
+	 * @param dialogContainer A container that holds all the rows of labels.
+	 * @param storage         A store that represents the data access object (DAO).
 	 */
-	public void printMarkedTask(Task task, boolean isMark, Storage storage, VBox dialogContainer) {
+	public void printMarkedTask(Task task, boolean isMark, VBox dialogContainer, Storage storage) {
 		String body = isMark
 				? "Nice! I've marked this task as done:"
 				: "OK, I've marked this task as not done yet:";
@@ -138,10 +138,10 @@ public class Ui {
 	/**
 	 * Print a response when an existing task is deleted.
 	 * 
-	 * @param task
-	 * @param tasksCnt
-	 * @param dialogContainer
-	 * @param storage
+	 * @param task            New task that was just deleted.
+	 * @param tasksCnt        Total number of tasks recorded.
+	 * @param dialogContainer A container that holds all the rows of labels.
+	 * @param storage         A store that represents the data access object (DAO).
 	 */
 	public void printDeletedTask(Task task, int tasksCnt, VBox dialogContainer, Storage storage) {
 		String header = "Sure, I've removed this task:";
@@ -157,11 +157,11 @@ public class Ui {
 	/**
 	 * Print the set of recorded tasks.
 	 * 
-	 * @param tasklist
-	 * @param storage
-	 * @param dialogContainer
+	 * @param tasklist        All the tasks that are recorded.
+	 * @param dialogContainer A container that holds all the rows of labels.
+	 * @param storage         A store that represents the data access object (DAO).
 	 */
-	public void printList(TaskList tasklist, Storage storage, VBox dialogContainer) {
+	public void printList(TaskList tasklist, VBox dialogContainer, Storage storage) {
 		int numItems = tasklist.size();
 		String header = numItems == 0 ? "There are no tasks in your list. Please add one."
 				: "Here are the tasks in your list: ";
@@ -180,11 +180,11 @@ public class Ui {
 	/**
 	 * Print the events and deadlines which falls on the specified datetime.
 	 * 
-	 * @param tasklist
-	 * @param storage
-	 * @param parser
-	 * @param dialogContainer
-	 * @param dateTimeStr
+	 * @param tasklist        All the tasks that are recorded.
+	 * @param storage         A store that represents the data access object (DAO).
+	 * @param parser          A service to parse text input.
+	 * @param dialogContainer A container that holds all the rows of labels.
+	 * @param dateTimeStr     A datetime in string format.
 	 */
 	public void printDeadlineEventOnDatetime(TaskList tasklist, Storage storage,
 			Parser parser, VBox dialogContainer, String dateTimeStr) {
@@ -233,9 +233,9 @@ public class Ui {
 	/**
 	 * Print the tasks that matches the search keyword.
 	 * 
-	 * @param tasklist
-	 * @param storage
-	 * @param dialogContainer
+	 * @param tasklist        All the tasks that are recorded.
+	 * @param dialogContainer A container that holds all the rows of labels.
+	 * @param storage         A store that represents the data access object (DAO).
 	 * @param keyword
 	 */
 	public void printMatchedTasks(TaskList tasklist, Storage storage, VBox dialogContainer, String keyword) {

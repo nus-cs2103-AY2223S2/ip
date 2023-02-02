@@ -12,11 +12,8 @@ abstract public class Task {
 		this.isDone = false;
 	}
 
-	/**
-	 * @return String
-	 */
 	public String getDescription() {
-		return this.description;
+		return description;
 	}
 
 	/**

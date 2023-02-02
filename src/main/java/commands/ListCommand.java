@@ -19,7 +19,7 @@ public class ListCommand extends Command {
 		Storage storage = (Storage) args[2];
 		TaskList tasklist = (TaskList) args[3];
 		VBox dialogContainer = (VBox) args[4];
-		ui.printList(tasklist, storage, dialogContainer);
+		ui.printList(tasklist, dialogContainer, storage);
 	}
 
 }
