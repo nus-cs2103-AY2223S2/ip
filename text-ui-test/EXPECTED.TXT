@@ -5,3 +5,81 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+	---
+	Got it. I've added this task:
+	[ ][T] borrow book
+	Now you have 1 tasks in the list.
+	---
+	---
+	Here are the tasks in your list:
+	1.[ ][T] borrow book
+	---
+	---
+	Got it. I've added this task:
+	[ ][D] return book (by: 04 Aug 2015, 10.11 AM)
+	Now you have 2 tasks in the list.
+	---
+	---
+	Here are the tasks in your list:
+	1.[ ][T] borrow book
+	2.[ ][D] return book (by: 04 Aug 2015, 10.11 AM)
+	---
+	---
+	Here are the tasks in your list:
+	1.[ ][T] borrow book
+	2.[ ][D] return book (by: 04 Aug 2015, 10.11 AM)
+	---
+	---
+	Got it. I've added this task:
+	[ ][E] project meeting (from: 04 Aug 2015, 10.11 AM to 04 Aug 2015, 10.11 AM)
+	Now you have 3 tasks in the list.
+	---
+	---
+	Here are the tasks in your list:
+	1.[ ][T] borrow book
+	2.[ ][D] return book (by: 04 Aug 2015, 10.11 AM)
+	3.[ ][E] project meeting (from: 04 Aug 2015, 10.11 AM to 04 Aug 2015, 10.11 AM)
+	---
+	---
+	Nice! I've marked this task as done:
+	[X][T] borrow book
+	---
+	---
+	Here are the tasks in your list:
+	1.[X][T] borrow book
+	2.[ ][D] return book (by: 04 Aug 2015, 10.11 AM)
+	3.[ ][E] project meeting (from: 04 Aug 2015, 10.11 AM to 04 Aug 2015, 10.11 AM)
+	---
+	---
+	Nice! I've marked this task as done:
+	[X][D] return book (by: 04 Aug 2015, 10.11 AM)
+	---
+	---
+	Here are the tasks in your list:
+	1.[X][T] borrow book
+	2.[X][D] return book (by: 04 Aug 2015, 10.11 AM)
+	3.[ ][E] project meeting (from: 04 Aug 2015, 10.11 AM to 04 Aug 2015, 10.11 AM)
+	---
+	---
+	OK, I've marked this task as not done yet:
+	[ ][T] borrow book
+	---
+	---
+	Here are the tasks in your list:
+	1.[ ][T] borrow book
+	2.[X][D] return book (by: 04 Aug 2015, 10.11 AM)
+	3.[ ][E] project meeting (from: 04 Aug 2015, 10.11 AM to 04 Aug 2015, 10.11 AM)
+	---
+	---
+	OK, I've marked this task as not done yet:
+	[ ][D] return book (by: 04 Aug 2015, 10.11 AM)
+	---
+	---
+	Here are the tasks in your list:
+	1.[ ][T] borrow book
+	2.[ ][D] return book (by: 04 Aug 2015, 10.11 AM)
+	3.[ ][E] project meeting (from: 04 Aug 2015, 10.11 AM to 04 Aug 2015, 10.11 AM)
+	---
+	---
+	Bye. Hope to see you again soon!
+	---
