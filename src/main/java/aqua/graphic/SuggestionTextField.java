@@ -89,6 +89,8 @@ public class SuggestionTextField extends TextField {
         String message = command.name();
         if (isComplete) {
             message += " " + command.getSyntax();
+        } else {
+            message += " - " + command.getDescription();
         }
         return message.strip();
     }
