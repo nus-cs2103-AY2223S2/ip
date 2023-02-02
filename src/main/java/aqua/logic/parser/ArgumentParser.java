@@ -8,9 +8,7 @@ import aqua.exception.IllegalSyntaxException;
 import aqua.logic.ArgumentMap;
 
 
-/**
- * A parser to parse String input into an ArgumentMap.
- */
+/** A parser to parse a String into a {@code ArgumentMap}. */
 public class ArgumentParser implements Parser<ArgumentMap> {
     @Override
     public ArgumentMap parse(String input) throws IllegalSyntaxException {
@@ -23,7 +21,6 @@ public class ArgumentParser implements Parser<ArgumentMap> {
         }
 
         // format main input to fit argument parsing syntax
-        // extra space so that last empty '/'
         input = input.strip() + " ";
         if (!input.startsWith("/" + ArgumentMap.TAG_MAIN_INPUT)) {
             input = String.format("/%s %s", ArgumentMap.TAG_MAIN_INPUT, input);

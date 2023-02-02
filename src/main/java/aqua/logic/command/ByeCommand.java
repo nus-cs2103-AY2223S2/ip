@@ -7,8 +7,7 @@ import aqua.manager.LogicManager;
 
 
 /**
- * An implementation of Command to produce an ExecutionService that will
- * exit the application.
+ * An implementation of CommandController to say bye.
  */
 public class ByeCommand extends CommandController {
     @Override

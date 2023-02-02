@@ -7,10 +7,7 @@ import aqua.manager.LogicManager;
 import aqua.manager.TaskManager;
 
 
-/**
- * An implementation of Command that will produce an ExecutionService that
- * will display the state the task manager.
- */
+/** A {@code CommandController} to list {@code AquaTask}. */
 public class ListCommand extends CommandController {
     @Override
     public ExecutionService getService(ArgumentMap args, LogicManager manager, boolean isLoading) {

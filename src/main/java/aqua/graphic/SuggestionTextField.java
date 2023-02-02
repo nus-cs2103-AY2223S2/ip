@@ -25,6 +25,9 @@ public class SuggestionTextField extends TextField {
     private final ObjectProperty<UserCommand> userCommand = new SimpleObjectProperty<>();
 
 
+    /**
+     * Constructs a SuggestionTextField.
+     */
     public SuggestionTextField() {
         initialiseSuggestionMenu();
         initialiseSuggestor();

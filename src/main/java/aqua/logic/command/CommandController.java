@@ -5,7 +5,7 @@ import aqua.logic.ExecutionService;
 import aqua.manager.LogicManager;
 
 
-/** A provider of ExecutionService when given an ArgumentMap and LogicManager. */
+/** The controller of a command. */
 public abstract class CommandController {
     /**
      * Produces an ExecutionService from the given argument and manager.
@@ -31,9 +31,9 @@ public abstract class CommandController {
 
 
     /**
-     * Returns the syntax of the command.
+     * Return the syntax of the command.
      *
-     * @return the syntax of the command.
+     * @returnt he syntax of the command.
      */
     public String getSyntax() {
         return "";
@@ -41,9 +41,9 @@ public abstract class CommandController {
 
 
     /**
-     * Returns teh description of what the command does.
+     * Returns the description of the command.
      *
-     * @return the description of what the command does.
+     * @return the description of the command.
      */
     public String getDescription() {
         return "";

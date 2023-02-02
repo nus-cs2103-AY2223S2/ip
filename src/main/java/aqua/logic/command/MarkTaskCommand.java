@@ -8,11 +8,7 @@ import aqua.logic.ExecutionService;
 import aqua.logic.ExecutionTask;
 import aqua.manager.LogicManager;
 
-/**
- * An implementation of Command that will produce an ExecutionService that
- * will mark an AquaTask in the task manager and then save the state of the
- * task manager to hard disk.
- */
+/** A {@code CommandController} to mark {@code AquaTask} as complete. */
 public class MarkTaskCommand extends CommandController {
     /** Value to pass {@link AquaTask#mark(boolean)} when marking a task. */
     private boolean isCompletedMarker;

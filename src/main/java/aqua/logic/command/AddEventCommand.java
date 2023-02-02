@@ -8,16 +8,12 @@ import aqua.logic.ArgumentMap;
 import aqua.util.DateUtils;
 
 
-/**
- * A full implementation of AddTaskCommand that creates and adds AquaEvents.
- */
+/** An {@code AddTaskCommand} to add {@code AquaEvent}. */
 public class AddEventCommand extends AddTaskCommand {
     /**
      * {@inheritDoc}
      * <p>
-     * Specifically, an AquaEvent.
-     *
-     * @return an AquaEvent created from the given arguments.
+     * Specifically, an {@code AquaEvent}.
      */
     @Override
     public AquaEvent createTask(ArgumentMap args) throws IllegalSyntaxException {

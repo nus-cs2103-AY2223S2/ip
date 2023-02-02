@@ -8,10 +8,7 @@ import aqua.logic.ExecutionTask;
 import aqua.manager.LogicManager;
 
 
-/**
- * An implementation of Command that will produce an ExecutionService that
- * will save the state of the task manager to hard disk.
- */
+/** A {@code CommandController} to save {@code AquaTask} state. */
 public class WriteTaskCommand extends CommandController {
     @Override
     public ExecutionService getService(ArgumentMap args, LogicManager manager, boolean isLoading) {

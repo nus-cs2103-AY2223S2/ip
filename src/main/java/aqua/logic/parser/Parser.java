@@ -4,7 +4,7 @@ import aqua.exception.IllegalSyntaxException;
 
 
 /**
- * A parser to parse data contained in a String into its object representation.
+ * A parser to parse a String into its object representation.
  *
  * @param <R> the return object type.
  */

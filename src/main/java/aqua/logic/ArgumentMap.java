@@ -5,7 +5,7 @@ import java.util.Optional;
 
 
 /**
- * An encapsulation of a {@code HashMap<String, String>} to store arguemnt tags
+ * An encapsulation of a {@code HashMap<String, String>} to store argument tags
  * and their associated value.
  */
 public class ArgumentMap {

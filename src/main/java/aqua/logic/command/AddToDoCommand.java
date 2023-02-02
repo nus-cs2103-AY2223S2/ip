@@ -5,16 +5,12 @@ import aqua.exception.IllegalSyntaxException;
 import aqua.logic.ArgumentMap;
 
 
-/**
- * A full implementation of AddTaskCommand that creates and adds AquaToDos.
- */
+/** An {@code AddTaskCommand} to add {@code AquaToDo}. */
 public class AddToDoCommand extends AddTaskCommand {
     /**
      * {@inheritDoc}
      * <p>
-     * Specifically, an AquaToDo.
-     *
-     * @return an AquaToDo created from the given arguments.
+     * Specifically, an {@code AquaToDo}.
      */
     @Override
     public AquaToDo createTask(ArgumentMap args) throws IllegalSyntaxException {

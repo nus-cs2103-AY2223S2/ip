@@ -8,16 +8,12 @@ import aqua.logic.ArgumentMap;
 import aqua.util.DateUtils;
 
 
-/**
- * A full implementation of AddTaskCommand that creates and adds AquaDeadlines.
- */
+/** An {@code AddTaskCommand} to add {@code AquaDeadline}. */
 public class AddDeadlineCommand extends AddTaskCommand {
     /**
      * {@inheritDoc}
      * <p>
-     * Specifically, an AquaDeadline.
-     *
-     * @return an AquaDeadline created from the given arguments.
+     * Specifically, an {@code AquaDeadline}.
      */
     @Override
     public AquaDeadline createTask(ArgumentMap args) throws IllegalSyntaxException {

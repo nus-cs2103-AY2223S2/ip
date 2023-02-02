@@ -7,9 +7,7 @@ import aqua.logic.CommandLineInput;
 import aqua.logic.command.Command;
 
 
-/**
- * A parser to parse an input String into a CommandLineInput.
- */
+/** A parser to parse a String into a {@code CommandLineInput}. */
 public class CommandLineInputParser implements Parser<CommandLineInput> {
     /** The argument parser to parse argument input. */
     private final ArgumentParser argumentParser;

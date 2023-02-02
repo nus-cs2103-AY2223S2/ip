@@ -10,9 +10,7 @@ import aqua.manager.LogicManager;
 
 
 /**
- * An implementation of Command that will produce an ExecutionService that
- * will delete an AquaTask from the task manager and then save the state of the
- * task manager to hard disk.
+ * An implementation of CommandController to delete an AquaTask.
  */
 public class DeleteCommand extends CommandController {
     @Override
