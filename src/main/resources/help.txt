@@ -1,12 +1,16 @@
-Available commands:
-todo [M] - Adds todo task, replace [M] with message.
-deadline [M] /by [D] - Adds deadline task, replace [M] with message and [D] with date/time.
-event [M] /from [D] /to [D] - Adds event task, replace [M] with message and [D] with date/time.
-Intended date/time should be in format dd-MM-yyyy HHmm or dd-MM-yyyy.
-Otherwise, the date/time will be treated as plain text.
+'Add' Commands - Records associated task
+
+todo [M] - replace [M] with message.
+deadline [M] /by [D] - replace [M] with message and [D] with date/time.
+event [M] /from [D] /to [D] - replace [M] with message and [D] with date/time.
+
+Intended date/time should be in format:
+dd-MM-yyyy HHmm or dd-MM-yyyy.
+Otherwise, the time will be treated as plain text.
 
 list - Lists all tasks.
 mark [R] - Marks task as done, replace [R] with rank of task.
 unmark [R] - Marks task as not done, replace [R] with rank of task.
 find [K] - Lists all matching task, replace [K] with keyword.
+
 bye - Exits the chat bot.

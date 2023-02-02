@@ -110,14 +110,12 @@ public class Command {
             storage.write();
             return ui.deleteMessage(t, taskList);
         } else if (code == 8) {
-            Ui.wrapText(taskList.find(keyword));
+            return Ui.wrapText(taskList.find(keyword));
         } else if (code == 9) {
             return ui.showHelp();
         } else {
             throw new EliseException("Invalid code.");
         }
-        // Unreachable.
-        return "";
     }
 
     /**

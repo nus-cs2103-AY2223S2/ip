@@ -32,6 +32,7 @@ public class MainWindow extends AnchorPane {
 
     public void setElise(Elise e) {
         elise = e;
+        dialogContainer.getChildren().add(DialogBox.getEliseDialog(e.getWelcome(), eliseImage));
     }
 
     /**

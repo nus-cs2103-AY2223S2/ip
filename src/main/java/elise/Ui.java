@@ -14,7 +14,7 @@ public class Ui {
      * Prints welcome message.
      */
     protected String showWelcome() {
-        String logo = "           " + "█▀▀ █░░ █ █▀ █▀▀\n"
+        String logo = "                      " + "█▀▀ █░░ █ █▀ █▀▀\n"
                 + "Hello from" + " ██▄ █▄▄ █ ▄█ ██▄\n";
         logo += "I am a personal Chatbot who keep track of various things!\nEnter help to view commands!";
         return wrapText(logo);
@@ -100,7 +100,6 @@ public class Ui {
             return wrapText(Files.readString(Paths.get(System.getProperty("user.dir")
                     + "/src/main/resources/help.txt")));
         } catch (IOException e) {
-            System.out.println(e.toString());
             return e.getMessage();
         }
 

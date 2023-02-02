@@ -23,13 +23,13 @@ public class Parser {
     protected static Command read(String sCommand) throws EliseException {
         int rank;
         Word command;
-        String[] vals = sCommand.split(" ", 2);
+        String[] val = sCommand.split(" ", 2);
         try {
-            command = Word.valueOf(vals[0].toUpperCase());
+            command = Word.valueOf(val[0].toUpperCase());
         } catch (IllegalArgumentException e) {
             throw new EliseException("Invalid input.");
         }
-        String s = vals.length > 1 ? vals[1].trim() : "";
+        String s = val.length > 1 ? val[1].trim() : "";
         String[] message;
 
         if (s.length() > 500) {

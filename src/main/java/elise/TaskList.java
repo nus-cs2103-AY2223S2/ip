@@ -44,7 +44,6 @@ public class TaskList {
         // Matches exact keyword. Do not match part of word.
         String regex = ".*\\b" + keyword + "\\b.*";
         String out = "";
-        System.out.println("Looking for matching tasks in your list...");
         for (Task t : tasks) {
             if (t.toString().matches(regex)) {
                 out += rank + "." + t.fullMessage() + "\n";
