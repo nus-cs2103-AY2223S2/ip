@@ -5,14 +5,12 @@ import java.time.format.DateTimeFormatter;
 
 import duke.exceptions.DukeException;
 import duke.exceptions.InvalidIndexException;
-
-import duke.ui.Span;
-
 import duke.task.Deadline;
 import duke.task.ToDo;
 import duke.task.TaskList;
 import duke.task.Event;
 import duke.task.Task;
+import duke.ui.Span;
 
 /**
  * Parser to parse the command and process the necessary actions associated with the command.
@@ -32,11 +30,11 @@ public class Parser {
     }
 
     /**
-     *
+     * Parses the user's input and execute the necessary actions associated with the command
      * @param command
      * @param echo The user input to be parsed to be used in the execution of its associated command.
      * @return a boolean value that determines whether the program will continue or halt.
-     * @throws DukeException DukeException thrown if there is missing required information in the user's input.
+     * @throws DukeException if there is missing required information in the user's input.
      */
     public boolean execute(Command command, String echo) throws DukeException {
         // to be converted into the right (sub) task below

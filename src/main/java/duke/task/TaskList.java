@@ -25,7 +25,7 @@ public class TaskList {
      * Constructor for the creation of a TaskList object.
      * @param tasks List of tasks to be included in TaskList after creation.
      */
-    public TaskList(List<Task> tasks) {this.tasks = tasks; }
+    public TaskList(List<Task> tasks) { this.tasks = tasks; }
 
     /**
      * Gets the list of tasks.
@@ -57,7 +57,7 @@ public class TaskList {
      * @return The deleted task.
      */
     public Task delete(int taskNum) {
-        return this.tasks.remove(taskNum-1);
+        return this.tasks.remove(taskNum - 1);
     }
 
     /**
@@ -66,7 +66,7 @@ public class TaskList {
      * @return Information of the task in string representation.
      */
     public String toggleMark(int taskNum) {
-        Task task = tasks.get(taskNum-1);
+        Task task = tasks.get(taskNum - 1);
         task.markTask();
         return task.getStatusIcon();
     }
@@ -77,7 +77,7 @@ public class TaskList {
      * @return Information of the task in string representation.
      */
     public String toggleUnmark(int taskNum) {
-        Task task = tasks.get(taskNum-1);
+        Task task = tasks.get(taskNum - 1);
         task.unmarkTask();
         return task.getStatusIcon();
     }
@@ -90,8 +90,8 @@ public class TaskList {
         StringBuilder display = new StringBuilder();
         for (int i = 0; i < this.tasks.size(); i++) {
             Task curr = this.tasks.get(i);
-            display.append((i+1) + ". " + curr.getStatusIcon());
-            if (i < this.tasks.size()-1) {
+            display.append((i + 1) + ". " + curr.getStatusIcon());
+            if (i < this.tasks.size() - 1) {
                 display.append("\n");
             }
         }

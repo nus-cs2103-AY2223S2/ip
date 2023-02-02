@@ -34,7 +34,7 @@ public enum Command {
      * Gets the command that correspond with the given name.
      * @param name Name of the command.
      * @return The corresponding command if valid.
-     * @throws UnknownCommandException Throws UnknownCommandException if the name provided is not associated with any command.
+     * @throws UnknownCommandException if the name provided is not associated with any command.
      */
     public static Command get(String name) throws UnknownCommandException {
         for (Command c : values()) {
