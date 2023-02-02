@@ -16,45 +16,31 @@ public class Ui {
         this.scanner = new Scanner(System.in);
     }
 
-    public static void showErrorMsg(String type) {
-        System.out.println(String.format("%s commands need to be followed by an integer!", type));
+    public static String showErrorMsg(String desc) {
+        return String.format("%s commands need to be followed by an integer!\n", desc.split(" ")[0]);
     }
 
-    public static void showErrorMsg(int size) {
-        System.out.println(String.format("Sorry but there are only %d tasks stored!", size));
+    public static String showErrorMsg(int size) {
+        return String.format("Sorry but there are only %d tasks stored!\n", size);
     }
 
-    public String[] getNextLine() {
-        showLine();
-        String input = scanner.nextLine();
-        String[] splitStr = input.split(" ", 2);
-        showLine();
-        return splitStr;
+    public String getNextLine() {
+        return line + scanner.nextLine() + line;
     }
 
     /**
      * Prints the welcome message when the program starts running
      */
-    public void showWelcome() {
-        showLine();
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
-    }
-
-    /**
-     * Prints a horizontal line
-     */
-    public void showLine() {
-        System.out.println(line);
+    public String showWelcome() {
+        return line + "Hello! I'm Duke\n" + "What can I do for you?";
     }
 
     /**
      * Prints the exit message and close the scanner
      */
-    public void showExit() {
+    public String showExit() {
         scanner.close();
-        System.out.println("Bye. Hope to see you again soon!");
-        this.showLine();
+        return "Bye. Hope to see you again soon!\n";
     }
 
     /**
@@ -63,10 +49,10 @@ public class Ui {
      * @param task task to be removed
      * @param size number of remaining tasks
      */
-    public static void showDelete(Task task, int size) {
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(task);
-        System.out.println(String.format("Now you have %d tasks in the list.", size));
+    public static String showDelete(Task task, int size) {
+        return "Noted. I've removed this task:\n" +
+                task +
+                String.format("\nNow you have %d tasks in the list.", size);
     }
 
     /**
@@ -75,13 +61,14 @@ public class Ui {
      * @param isDone whether a task will be marked or unmarked
      * @param taskToMark task to be marked or unmarked
      */
-    public void showMark(boolean isDone, Task taskToMark) {
+    public String showMark(boolean isDone, Task taskToMark) {
+        String output = "";
         if (isDone) {
-            System.out.println("Nice! I've marked this task as done:");
+            output = "Nice! I've marked this task as done:\n";
         } else {
-            System.out.println("OK, I've marked this task as not done yet:");
+            output = "OK, I've marked this task as not done yet:\n";
         }
-        System.out.println(taskToMark);
+        return output + taskToMark;
     }
 
     /**
@@ -90,10 +77,10 @@ public class Ui {
      * @param task task to be added
      * @param size the number of tasks after the task is added
      */
-    public static void showTaskOutput(Task task, int size) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task);
-        System.out.println("Now you have " + size + " tasks in the list.");
+    public static String showTaskOutput(Task task, int size) {
+        return "Got it. I've added this task:\n" +
+                task +
+                "\nNow you have " + size + " tasks in the list.";
     }
 
     /**
@@ -101,10 +88,11 @@ public class Ui {
      *
      * @param taskList List of all the tasks
      */
-    public static void filter(ArrayList<Task> taskList) {
-        System.out.println("Here are the matching tasks in your list:");
+    public static String filter(ArrayList<Task> taskList) {
+        String output = "Here are the matching tasks in your list:\n";
         for (Task task : taskList) {
-            System.out.println(task);
+            output += task + "\n";
         }
+        return output;
     }
 }

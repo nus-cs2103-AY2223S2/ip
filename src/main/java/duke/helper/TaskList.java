@@ -33,11 +33,12 @@ public class TaskList {
     /**
      * Prints all the tasks stored in the list
      */
-    public void outputList() {
-        System.out.println("Here are the tasks in your list:");
+    public String outputList() {
+        String output = "Here are the tasks in your list:\n";
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println((i + 1) + "." + tasks.get(i));
+            output += (i + 1) + "." + tasks.get(i) + "\n";
         }
+        return output;
     }
 
     /**
@@ -59,11 +60,11 @@ public class TaskList {
      * @param isDone whether the task is done
      * @param taskId id of the task
      */
-    public void mark(boolean isDone, String taskId) {
+    public String mark(boolean isDone, String taskId) {
         int taskNo = Integer.parseInt(taskId) - 1;
         Task taskToMark = tasks.get(taskNo);
         taskToMark.setIsDone(isDone);
-        ui.showMark(isDone, taskToMark);
+        return ui.showMark(isDone, taskToMark);
     }
 
     /**

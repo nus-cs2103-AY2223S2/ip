@@ -1,5 +1,6 @@
 package duke.helper;
 
+import java.io.File;
 import java.io.IOException;
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
@@ -9,6 +10,7 @@ import duke.exception.DukeException;
 import duke.exception.EmptyTaskException;
 import duke.exception.InvalidDateTimeException;
 import duke.exception.InvalidTaskException;
+import duke.storage.FileSystem;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -19,57 +21,55 @@ import duke.task.ToDo;
  */
 public class Parser {
     private TaskList tasks;
+    private Ui ui;
+    private FileSystem fileSystem;
 
-    public Parser(TaskList tasks) {
+    public Parser(TaskList tasks, Ui ui, FileSystem fileSystem) {
         this.tasks = tasks;
+        this.ui = ui;
+        this.fileSystem = fileSystem;
     }
 
     /**
      * Handles the input according to the type of the task
      */
-    public void parseInputs(String[] inputs) throws DukeException, IOException {
+    public String parseInputs(String desc) throws DukeException, IOException {
+        String[] inputs = desc.split(" ", 2);
         String type = inputs[0];
 
         switch (type) {
         case "list":
-            tasks.outputList();
-            break;
+            return tasks.outputList();
 
         case "mark":
-            tasks.mark(true, inputs[1]);
-            break;
+            return tasks.mark(true, inputs[1]);
 
         case "unmark":
-            tasks.mark(false, inputs[1]);
-            break;
+            return tasks.mark(false, inputs[1]);
 
         case "todo":
             checkTaskDesc(inputs);
             Task toDoTask = new ToDo(inputs[1], false);
             tasks.addToTasks(toDoTask);
-            Ui.showTaskOutput(toDoTask, tasks.getTasks().size());
-            break;
+            return Ui.showTaskOutput(toDoTask, tasks.getTasks().size());
 
         case "deadline":
             checkTaskDesc(inputs);
             String[] deadlineDesc = inputs[1].split(" /by ");
-            Task deadlineTask = new Deadline(deadlineDesc[0], deadlineDesc[1], false);
+            Task deadlineTask = new Deadline(deadlineDesc[0], deadlineDesc[1]);
             tasks.addToTasks(deadlineTask);
-            Ui.showTaskOutput(deadlineTask, tasks.getTasks().size());
-            break;
+            return Ui.showTaskOutput(deadlineTask, tasks.getTasks().size());
 
         case "event":
             checkTaskDesc(inputs);
             String[] eventDesc = parseEventDesc(inputs[1]);
-            Task eventTask = new Event(eventDesc[0], eventDesc[1], eventDesc[2], false);
+            Task eventTask = new Event(eventDesc[0], eventDesc[1], eventDesc[2]);
             tasks.addToTasks(eventTask);
-            Ui.showTaskOutput(eventTask, tasks.getTasks().size());
-            break;
+            return Ui.showTaskOutput(eventTask, tasks.getTasks().size());
 
         case "delete":
             int taskNo = Integer.parseInt(inputs[1]) - 1;
-            tasks.deleteTask(taskNo);
-            break;
+            return tasks.deleteTask(taskNo).toString();
 
         case "find":
             ArrayList<Task> taskList = tasks.getTasks();
@@ -79,11 +79,14 @@ public class Parser {
                     output.add(task);
                 }
             }
-            Ui.filter(output);
-            break;
+            return Ui.filter(output);
+
+        case "bye":
+            fileSystem.updateFile(tasks);
+            return ui.showExit();
 
         default:
-            throw new InvalidTaskException();
+        throw new InvalidTaskException();
         }
     }
 

@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -59,7 +60,6 @@ public class FileSystem {
         } catch (IOException e) {
             e.toString();
         }
-
     }
 
     /**
@@ -83,20 +83,23 @@ public class FileSystem {
                 tasks.add(new ToDo(task.substring(7), isMark));
                 break;
             case 'D':
-                String[] deadlineDesc = task.substring(7).split(" /by ");
-                tasks.add(new Deadline(deadlineDesc[0], deadlineDesc[1], isMark));
+                String[] deadlineDesc = task.substring(7).split("by: ");
+                String desc = deadlineDesc[0].substring(0, deadlineDesc[0].length() - 2);
+                String dateTime = deadlineDesc[1].substring(0, 16);
+                tasks.add(new Deadline(desc, dateTime, isMark));
                 break;
             case 'E':
-                String[] eventDesc = Parser.parseEventDesc(task.substring(7));
-                tasks.add(new Event(eventDesc[0], eventDesc[1], eventDesc[2], isMark));
+                String[] eventDesc = task.substring(7).split("from: ");
+                String[] dateTimeArr = eventDesc[1].split(" to: ");
+                String event = eventDesc[0].substring(0, eventDesc[0].length() - 2);
+                String to = dateTimeArr[1].substring(0, 16);
+                tasks.add(new Event(event, dateTimeArr[0], to, isMark));
                 break;
             default:
                 if (isMark) {
                     tasks.get(tasks.size() - 1).setIsDone(true);
                 }
             }
-
-
         }
         return tasks;
     }
