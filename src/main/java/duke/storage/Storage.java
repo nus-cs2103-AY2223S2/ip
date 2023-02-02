@@ -98,15 +98,13 @@ public class Storage {
     /**
      * Updates the storage file in hard disk with the given list of tasks.
      *
-     * @param tasks The list of tasks.
+     * @param tasks Varargs of tasks.
      */
-    public void write(ArrayList<Task> tasks) {
+    public void write(Task... tasks) {
         try {
             FileWriter fileWriter = new FileWriter(this.filePath);
-            int size = tasks.size();
-            for (int i = 0; i < size; i++) {
-                Task task = tasks.get(i);
-                fileWriter.write(task.formatForStorage());
+            for (Task t:tasks) {
+                fileWriter.write(t.formatForStorage());
                 fileWriter.write("\n");
             }
             fileWriter.close();

@@ -1,5 +1,7 @@
 package duke;
 
+import duke.task.Task;
+import duke.task.ToDo;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -19,6 +21,8 @@ import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
+
+import java.util.ArrayList;
 
 /**
  * Encapsulates the related fields and behavior of Duke.
@@ -59,7 +63,8 @@ public class Duke extends Application {
      * Stores the tasks in a file in hard drive.
      */
     public void store() {
-        this.storage.write(this.tasks.getTaskList());
+        Task[] t = {new ToDo("a")};
+        this.storage.write(this.tasks.getTaskList().toArray(t));
     }
 
     /**
@@ -137,8 +142,6 @@ public class Duke extends Application {
      * Clears the user input after processing.
      */
     private void handleUserInput() {
-        //Label userText = new Label(input);
-        //Label dukeText = new Label(getResponse(input));
         String userText = this.userInput.getText();
         String dukeText = getResponse(userText);
         this.dialogContainer.getChildren().addAll(
