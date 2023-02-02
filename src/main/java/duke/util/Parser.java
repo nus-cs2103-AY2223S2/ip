@@ -111,6 +111,12 @@ public class Parser {
 
             case "delete":
                 return new DeleteCommand(this.queryInteger(userCommand));
+            case "find":
+                if (userCommand.length == 1) {
+                    throw new DukeException("error no arguments");
+                }
+                String keyword = userCommand[1];
+                return new FindCommand(keyword);
         }
         throw new DukeException("Cannot recognise command!");
     }

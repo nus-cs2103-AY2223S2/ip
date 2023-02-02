@@ -39,6 +39,14 @@ public abstract class Task {
         }
     }
 
+    /**
+     * Gets the task name which is a string
+     * @return String task name
+     */
+    public String getTaskName() {
+        return this.taskName;
+    }
+
     /*
      * Marks the task as undone.
      * 
