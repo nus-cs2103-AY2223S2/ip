@@ -9,7 +9,7 @@ package duke.tasks;
 import java.time.LocalDateTime;
 
 public class TaskDeadline extends Task {
-    protected LocalDateTime time;
+    private LocalDateTime time;
     /**
      * Given a task and a deadline, constructs a TaskDeadline task.
      *

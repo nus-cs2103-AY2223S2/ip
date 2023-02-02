@@ -10,8 +10,8 @@ import java.time.LocalDateTime;
  */
 
 public class TaskEvent extends Task{
-    protected LocalDateTime from;
-    protected LocalDateTime to;
+    private LocalDateTime from;
+    private LocalDateTime to;
 
     public TaskEvent(String task, LocalDateTime from, LocalDateTime to) {
         super(task);
