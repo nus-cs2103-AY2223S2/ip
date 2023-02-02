@@ -9,7 +9,6 @@ import duke.task.Task;
 /** A representation of the "event" command in Duke. */
 public class EventCommand extends Command {
 
-    private final String NAME = "event";
     private String title;
     private String from;
     private String to;

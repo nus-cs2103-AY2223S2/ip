@@ -5,15 +5,15 @@ import java.util.Scanner;
 /** Handles input/output for Duke. */
 public class Ui {
 
+    // commonly-displayed elements
+    public static final String DIVIDER = "____________________________________________________________";
+    public static final String LOGO = " ____        _        \n" + "|  _ \\ _   _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n" + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
+    public static final String NEWL = "\n";
+
     private Scanner scanner;
     private StringBuilder message;
     private boolean doPromptUserInput;
-
-    // commonly-displayed elements
-    public static final String DIVIDER = "____________________________________________________________";
-    public static final String NEWL = "\n";
-    public static final String LOGO = " ____        _        \n" + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n" + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
 
     /**
      * Initializes a Ui object.
@@ -24,6 +24,7 @@ public class Ui {
         this.doPromptUserInput = true;
     }
 
+    /** Prints a welcome message. */
     public void showWelcome() {
         this.addToMessage("Hello from");
         this.addToMessage(LOGO);

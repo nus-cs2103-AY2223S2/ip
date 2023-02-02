@@ -7,7 +7,6 @@ import duke.exception.DukeException;
 /** A representation of the "mark" command in Duke. */
 public class MarkCommand extends Command {
 
-    private final String NAME = "mark";
     private int index;
 
     /**

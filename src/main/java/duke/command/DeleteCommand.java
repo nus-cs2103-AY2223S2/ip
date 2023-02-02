@@ -7,7 +7,6 @@ import duke.exception.DukeException;
 /** A representation of the "delete" command in Duke. */
 public class DeleteCommand extends Command {
 
-    private final String NAME = "delete";
     private int index;
 
     /**
