@@ -46,6 +46,13 @@ public class Ui {
             System.out.println(String.format("%d.%s", i + 1, currentTask.toString()));
         }
     }
+    public void showFind(TaskList filteredList) {
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 0; i < filteredList.size(); i++) {
+            Task currentTask = filteredList.get(i);
+            System.out.println(String.format("%d.%s", i + 1, currentTask.toString()));
+        }
+    }
 
     public void showAdd(TaskList listOfTasks, String taskName) {
         System.out.println("Got it. I've added this task:");

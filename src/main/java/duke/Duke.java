@@ -27,6 +27,7 @@ public class Duke {
             try {
                 String[] currentInputArray = ui.readLine();
                 Command currentCommand = parser.parse(currentInputArray[0], currentInputArray);    
+                ui.showPartition();
                 currentCommand.handleCommand(ui);
                 isExit = currentCommand.isExit();
                 ui.showPartition();

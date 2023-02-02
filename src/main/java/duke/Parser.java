@@ -11,6 +11,7 @@ public class Parser {
     final static String TODO_COMMAND = "todo";
     final static String EVENT_COMMAND = "event";
     final static String DEADLINE_COMMAND = "deadline";
+    final static String FIND_COMMAND = "find";
 
     private TaskList listOfTasks;
     
@@ -36,6 +37,8 @@ public class Parser {
             return new EventCommand(currentInputArray, this.listOfTasks);
         case DEADLINE_COMMAND:
             return new DeadlineCommand(currentInputArray, this.listOfTasks);
+        case FIND_COMMAND:
+            return new FindCommand(currentInputArray, this.listOfTasks);
         default:
             throw new InvalidCommandException("");
         }
