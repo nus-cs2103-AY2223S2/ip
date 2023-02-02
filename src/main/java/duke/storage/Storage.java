@@ -1,15 +1,29 @@
+package duke.storage;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.Deadline;
+import duke.Event;
+import duke.Task;
+import duke.Todo;
+import duke.TaskList;
+
 import java.io.IOException;
 import java.io.FileNotFoundException;
 
-public class DukeFile {
-    
+public class Storage {
+    private String filePath;
 
-    private static void checkFile() {
-        File file = new File("duke.txt");
+    public Storage(String filePath) {
+        this.filePath = filePath;
+        checkFile(filePath);
+    }
+    
+    private  void checkFile(String filePath) {
+        File file = new File(filePath);
         if (!file.isFile()) {
             try {
                 file.createNewFile();
@@ -20,9 +34,9 @@ public class DukeFile {
         }
     }
 
-    public static void saveData(ArrayList<Task> taskList) {
+    public  void saveData(TaskList taskList) {
         try {
-            FileWriter fileWriter = new FileWriter("duke.txt");
+            FileWriter fileWriter = new FileWriter(filePath);
             for (Task t : taskList) {
                 fileWriter.write(t.formatForFile());
             }
@@ -32,9 +46,9 @@ public class DukeFile {
         }
     }
 
-    public static ArrayList<Task> loadFile() throws FileNotFoundException {
+    public ArrayList<Task> loadFile() throws FileNotFoundException {
         ArrayList<Task> taskList = new ArrayList<>();
-        File file = new File("duke.txt");
+        File file = new File(filePath);
         if (file.isFile()) {
             Scanner sc = new Scanner(file);
             while (sc.hasNext()) {
@@ -57,7 +71,6 @@ public class DukeFile {
                 }
 
                 taskList.add(task);
-                Task.incrementTaskCount();
             }
         }
 
