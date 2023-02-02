@@ -1,19 +1,18 @@
+package duke;
+
 import duke.command.Command;
 import duke.command.Parser;
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.Gui;
 import duke.ui.Ui;
-import javafx.application.Application;
-import javafx.stage.Stage;
 
 /**
  * The Duke class represents a CLI chatbot that performs operations based on CLI user input.
  * <p>
  * Currently, Duke accepts the commands: {@code echo, list, mark, unmark, todo, deadline, event, bye}
  */
-public class Duke extends Application {
+public class Duke {
     private TaskList tasks;
     private Ui ui;
     private Storage store;
@@ -60,12 +59,8 @@ public class Duke extends Application {
         }
     }
 
-    // GUI setup
-    @Override
-    public void start(Stage stage) {
-        //The container for the content of the chat to scroll.
-        Gui graphicGui = new Gui();
-        graphicGui.start(stage);
+    public String getResponse(String input) {
+        return "Hello!";
     }
 
 }
