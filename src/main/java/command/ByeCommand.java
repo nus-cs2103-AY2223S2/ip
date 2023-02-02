@@ -24,7 +24,7 @@ public class ByeCommand extends Command {
         super();
     }
 
-    /***
+    /**
      * Exits the program
      * @param taskList
      * @param ui

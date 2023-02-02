@@ -2,7 +2,9 @@ package tasks;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
+/**
+ * A Event class that is a blueprint for an event
+ */
 public class Event extends Task {
 
     protected String from;
@@ -26,7 +28,7 @@ public class Event extends Task {
      * gets the time from and to appended
      * @return String
      */
-    public String getTime(){
+    public String getTime() {
         return from + " - " + to;
     }
 
@@ -35,7 +37,7 @@ public class Event extends Task {
      * @param str in the format of dd/MM/yyyy  HHmm eg. 02/12/2022 1800
      * @return a string formatted eg. 2nd December 2022 6:00 PM
      */
-    public String dateCovert(String str){
+    public String dateCovert(String str) {
         // String to LocalDate
         DateTimeFormatter format1 = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
         LocalDateTime date = LocalDateTime.parse(str, format1);

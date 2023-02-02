@@ -1,6 +1,15 @@
 package duke;
 
-import command.*;
+import command.ByeCommand;
+import command.Command;
+import command.DeadlineCommand;
+import command.DeleteCommand;
+import command.EventCommand;
+import command.FindCommand;
+import command.ListCommand;
+import command.MarkCommand;
+import command.TodoCommand;
+import command.UnmarkCommand;
 import exceptions.BlankException;
 import exceptions.DukeException;
 import exceptions.InvalidInstructionException;
@@ -42,7 +51,7 @@ public class Parser {
     public static Command parse(String command) throws DukeException {
         String[] c = command.split(" ", 2);
         String instruction = c[0];
-        Command com = null;
+        Command com;
         try {
             switch (instruction) {
                 case ("list"):

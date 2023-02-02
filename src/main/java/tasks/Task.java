@@ -1,5 +1,8 @@
 package tasks;
 
+/**
+ * Task class
+ */
 public class Task {
 
     private String name;
@@ -8,18 +11,13 @@ public class Task {
     /**
      * Constructor to create task object
      */
-    public Task(String name){
+    public Task(String name) {
         this.name = name;
     }
-
-//    public boolean getStatus(){
-//        return this.isDone;
-//    }
-
     /**
      * sets task as marked
      */
-    public void setAsMarked(){
+    public void setAsMarked() {
         isDone = true;
     }
 
@@ -27,7 +25,7 @@ public class Task {
      * gets description of task
      * @return
      */
-    public String getDescription(){
+    public String getDescription() {
         return this.name;
     }
 
@@ -42,7 +40,7 @@ public class Task {
     /**
      * set task as not done
      */
-    public void setAsUnmarked(){
+    public void setAsUnmarked() {
         isDone = false;
     }
 
@@ -52,10 +50,11 @@ public class Task {
      * @return the string listing the elements in tasks.TaskList
      */
     @Override
-    public String toString(){
-        if(isDone)
+    public String toString() {
+        if (isDone) {
             return "[X] " + name;
-        else
+        } else {
             return "[ ] " + name;
+        }
     }
 }

@@ -3,7 +3,9 @@ package tasks;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-
+/**
+ * A deadline class that mimic a deadline
+ */
 public class Deadline extends Task {
 
     protected String by;
@@ -23,7 +25,7 @@ public class Deadline extends Task {
      * gets the time the deadline has to finish by
      * @return String
      */
-    public String getBy(){
+    public String getBy() {
         return by;
     }
     /**
@@ -31,7 +33,7 @@ public class Deadline extends Task {
      * @param str with the exact format day/month/year time(24 hour format)
      */
 
-    public String dateConvert(String str){
+    public String dateConvert(String str) {
         // String to LocalDate
         DateTimeFormatter format1 = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
         LocalDateTime date = LocalDateTime.parse(str, format1);
