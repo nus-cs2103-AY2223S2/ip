@@ -1,4 +1,7 @@
-package main.java;
+package duke.task;
+
+import duke.exception.DukeException;
+import duke.exception.ERROR;
 
 public abstract class Task {
     private String description;

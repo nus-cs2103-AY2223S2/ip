@@ -1,6 +1,11 @@
-package main.java;
+package duke.util;
 
-import java.util.ArrayList;
+import duke.exception.DukeException;
+import duke.exception.ERROR;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.util.Storage;
+import duke.util.UI;
 
 public class Command {
     public enum CommandType {

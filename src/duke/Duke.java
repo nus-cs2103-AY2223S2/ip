@@ -1,10 +1,11 @@
-package main.java;
+package duke;
 
-import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Scanner;
+import duke.exception.DukeException;
+import duke.task.TaskList;
+import duke.util.Command;
+import duke.util.Parser;
+import duke.util.Storage;
+import duke.util.UI;
 
 public class Duke {
     private UI ui;

@@ -1,6 +1,7 @@
-package main.java;
+package duke.util;
 
-import main.java.Command.CommandType;
+import duke.task.TaskList;
+
 import java.util.Scanner;
 
 public class UI {

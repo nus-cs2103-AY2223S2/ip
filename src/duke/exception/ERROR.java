@@ -1,4 +1,4 @@
-package main.java;
+package duke.exception;
 
 public enum ERROR {
     TODO_EMPTY("☹ OOPS!!! The description of a todo cannot be empty."),

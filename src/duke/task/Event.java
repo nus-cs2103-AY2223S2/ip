@@ -1,4 +1,4 @@
-package main.java;
+package duke.task;
 
 public class Event extends Task {
     private String startDate;

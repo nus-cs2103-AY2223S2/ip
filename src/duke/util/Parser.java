@@ -1,8 +1,6 @@
-package main.java;
+package duke.util;
 
-import main.java.Command.CommandType;
-
-import java.util.ArrayList;
+import duke.util.Command.CommandType;
 
 public class Parser {
 
