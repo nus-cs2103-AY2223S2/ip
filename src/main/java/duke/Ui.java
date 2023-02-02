@@ -2,6 +2,13 @@ package duke;
 
 import java.util.Scanner;
 
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+
 /** Handles input/output for Duke. */
 public class Ui {
 
@@ -11,9 +18,17 @@ public class Ui {
             + "| | | | | | | |/ / _ \\\n" + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
     public static final String NEWL = "\n";
 
+    // duke components
     private Scanner scanner;
     private StringBuilder message;
     private boolean doPromptUserInput;
+
+    // javafx ui components
+    private ScrollPane scrollPane;
+    private VBox dialogContainer;
+    private TextField userInput;
+    private Button sendButton;
+    private Scene scene;
 
     /**
      * Initializes a Ui object.
@@ -22,6 +37,24 @@ public class Ui {
         this.scanner = new Scanner(System.in);
         this.message = new StringBuilder();
         this.doPromptUserInput = true;
+    }
+
+    /**
+     * Initializes the main Scene to be displayed on the Stage.
+     */
+    public Scene initializeScene() {
+        scrollPane = new ScrollPane();
+        dialogContainer = new VBox();
+        userInput = new TextField();
+        sendButton = new Button("Send");
+        AnchorPane mainLayout = new AnchorPane();
+
+        scrollPane.setContent(dialogContainer);
+        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
+
+        this.scene = new Scene(mainLayout);
+
+        return this.scene;
     }
 
     /** Prints a welcome message. */
