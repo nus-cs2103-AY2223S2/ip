@@ -1,3 +1,4 @@
-E | 0 | play | 2022-10-20 18:00 | 2023-11-22 19:00
+E | 1 | play | 2022-10-20 18:00 | 2023-11-22 19:00
 T | 0 | hangout
-T | 0 | slep
+T | 0 | meet friend
+T | 0 | meet teacher
