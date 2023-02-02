@@ -1,9 +1,7 @@
 package panav.command;
 
 import panav.storage.Storage;
-
 import panav.task.TaskList;
-
 import panav.ui.Ui;
 
 /**
@@ -13,10 +11,10 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    String keyWord;
+    private String keyword;
 
     public FindCommand(String keyWord) {
-        this.keyWord = keyWord;
+        this.keyword = keyword;
     }
 
     /**
@@ -29,7 +27,7 @@ public class FindCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.showLine();
         System.out.println("Here are the matching tasks in your list:");
-        tasks.printTasksContainingKeyword(this.keyWord);
+        tasks.printTasksContainingKeyword(this.keyword);
         ui.showLine();
     }
 

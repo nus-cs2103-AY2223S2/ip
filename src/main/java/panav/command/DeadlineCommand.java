@@ -1,17 +1,16 @@
 package panav.command;
 
-import panav.exception.DukeException;
-import panav.storage.Storage;
-
-import panav.task.Deadline;
-import panav.task.Task;
-import panav.task.TaskList;
-
-import panav.ui.Ui;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import panav.storage.Storage;
+import panav.task.Deadline;
+import panav.task.Task;
+import panav.task.TaskList;
+import panav.ui.Ui;
+
+
 
 /**
  * Class to encapsulate a 'deadline' command, extends from Command.
@@ -21,6 +20,12 @@ public class DeadlineCommand extends Command {
     public static final String COMMAND_WORD = "deadline";
     private String deadlineMessage;
     private String deadline;
+
+    /**
+     * Constructor to initialise attributes.
+     * @param deadlineMessage
+     * @param deadline
+     */
     public DeadlineCommand(String deadlineMessage, String deadline) {
         this.deadlineMessage = deadlineMessage;
         this.deadline = deadline;
@@ -56,7 +61,7 @@ public class DeadlineCommand extends Command {
         try {
             d = LocalDate.parse(dateString);
             result = d.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        } catch (DateTimeParseException e){
+        } catch (DateTimeParseException e) {
             return result;
         }
         return result;

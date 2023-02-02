@@ -2,11 +2,8 @@ package panav.command;
 
 import panav.exception.DukeException;
 import panav.exception.InvalidNumberException;
-
 import panav.storage.Storage;
-
 import panav.task.TaskList;
-
 import panav.ui.Ui;
 
 /**
@@ -16,6 +13,12 @@ public class EditCommand extends Command {
 
     private String fullCommand;
     private boolean isMark;
+
+    /**
+     * Constructor to initialise attributes.
+     * @param fullCommand
+     * @param isMark
+     */
     public EditCommand(String fullCommand, boolean isMark) {
         this.fullCommand = fullCommand;
         this.isMark = isMark;
@@ -35,7 +38,7 @@ public class EditCommand extends Command {
         try {
             int num = readNumber(fullCommand, tasks.getLength());
             if (isMark) {
-                tasks.markTask(num -  1);
+                tasks.markTask(num - 1);
             } else {
                 tasks.unmarkTask(num - 1);
             }

@@ -1,21 +1,18 @@
 package panav;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import panav.command.Command;
 import panav.command.ExitCommand;
 import panav.command.ListCommand;
-
 import panav.exception.DukeException;
-
 import panav.parser.Parser;
-
 import panav.storage.Storage;
-
 import panav.task.TaskList;
-
 import panav.ui.Ui;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
+
 
 /**
  * The class where Panav starts. It contains the main() and all functionality starts here.
@@ -25,6 +22,10 @@ public class Panav {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor to initialise the various classes in program.
+     * @param filePath the path of the file to be read from.
+     */
     public Panav(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -51,13 +52,13 @@ public class Panav {
                 ui.showLine(); // show the divider line ("_______")
                 Command c = Parser.parse(fullCommand);
                 c.execute(tasks, ui, storage);
-                if(c.toString().compareTo(ListCommand.COMMAND_WORD) != 0 ||
-                        c.toString().compareTo(ExitCommand.COMMAND_WORD) != 0) {
+                if (c.toString().compareTo(ListCommand.COMMAND_WORD) != 0
+                        || c.toString().compareTo(ExitCommand.COMMAND_WORD) != 0) {
                     storage.write(tasks);
                 }
                 isExit = c.isExit();
             } catch (DukeException e) {
-               System.out.println(e.getMessage());
+                System.out.println(e.getMessage());
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } catch (NullPointerException e) {

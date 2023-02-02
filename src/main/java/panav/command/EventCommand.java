@@ -1,11 +1,9 @@
 package panav.command;
 
 import panav.storage.Storage;
-
 import panav.task.Event;
 import panav.task.Task;
 import panav.task.TaskList;
-
 import panav.ui.Ui;
 
 /**
@@ -17,6 +15,14 @@ public class EventCommand extends Command {
     private String eventMessage;
     private String from;
     private String to;
+
+    /**
+     * Constructor to initialise attributes.
+     *
+     * @param eventMessage
+     * @param from
+     * @param to
+     */
     public EventCommand(String eventMessage, String from, String to) {
         this.eventMessage = eventMessage;
         this.from = from;
