@@ -1,5 +1,8 @@
 package aqua.logic.command;
 
+import aqua.logic.ArgumentMap;
+import aqua.logic.ExecutionService;
+import aqua.manager.LogicManager;
 
 /** Enumeration of commands. */
 public enum Command {
@@ -14,20 +17,20 @@ public enum Command {
     BYE(new ByeCommand());
 
 
-    private final ServiceProvider serviceProvider;
+    private final CommandController controller;
 
 
-    Command(ServiceProvider serviceProvider) {
-        this.serviceProvider = serviceProvider;
+    Command(CommandController controller) {
+        this.controller = controller;
     }
 
 
-    /**
-     * Returns the ServiceProvider of the command.
-     *
-     * @return the ServiceProvider of the command.
-     */
-    public ServiceProvider getServiceProvider() {
-        return serviceProvider;
+    public ExecutionService getService(ArgumentMap args, LogicManager manager) {
+        return controller.getService(args, manager, false);
+    }
+
+
+    public ExecutionService getService(ArgumentMap args, LogicManager manager, boolean isLoading) {
+        return controller.getService(args, manager, isLoading);
     }
 }

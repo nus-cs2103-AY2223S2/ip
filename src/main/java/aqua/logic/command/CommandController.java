@@ -6,7 +6,7 @@ import aqua.manager.LogicManager;
 
 
 /** A provider of ExecutionService when given an ArgumentMap and LogicManager. */
-public abstract class ServiceProvider {
+public abstract class CommandController {
     /**
      * Produces an ExecutionService from the given argument and manager.
      * {@code isLoading} parameter is set to {@code false}.
@@ -28,4 +28,14 @@ public abstract class ServiceProvider {
      * @return an ExecutionService to execute the command.
      */
     public abstract ExecutionService getService(ArgumentMap args, LogicManager manager, boolean isLoading);
+
+
+    /**
+     * Returns the syntax of the command.
+     *
+     * @return the syntax of the command.
+     */
+    public String getSyntax() {
+        return "";
+    }
 }

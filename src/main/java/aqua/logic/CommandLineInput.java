@@ -33,7 +33,7 @@ public class CommandLineInput {
      * @return the ExecutionService of the command.
      */
     public ExecutionService getService(LogicManager manager) {
-        return command.getServiceProvider().getService(args, manager);
+        return command.getService(args, manager);
     }
 
 
@@ -45,6 +45,6 @@ public class CommandLineInput {
      * @return the ExecutionService of the command.
      */
     public ExecutionService getService(LogicManager manager, boolean isLoading) {
-        return command.getServiceProvider().getService(args, manager, isLoading);
+        return command.getService(args, manager, isLoading);
     }
 }

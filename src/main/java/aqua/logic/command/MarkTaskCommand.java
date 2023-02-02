@@ -13,7 +13,7 @@ import aqua.manager.LogicManager;
  * will mark an AquaTask in the task manager and then save the state of the
  * task manager to hard disk.
  */
-public class MarkTaskCommand extends ServiceProvider {
+public class MarkTaskCommand extends CommandController {
     /** Value to pass {@link AquaTask#mark(boolean)} when marking a task. */
     private boolean isCompletedMarker;
 
