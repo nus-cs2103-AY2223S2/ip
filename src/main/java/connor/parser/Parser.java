@@ -1,6 +1,7 @@
 package connor.parser;
 
 import connor.Connor;
+import connor.parser.Commands;
 import connor.task.Deadline;
 import connor.task.Event;
 import connor.task.InvalidTaskException;
@@ -79,7 +80,7 @@ public class Parser {
      * @throws InvalidTaskException if taskName is blank spaces.
      */
     public Task parseCommand(String command, String information) throws InvalidTaskException {
-        switch (command) {
+        switch (Commands.valueOf(command).toString()) {
         case "TODO":
             validateName(information);
             return new Todo(information);
@@ -135,59 +136,49 @@ public class Parser {
      * @param ui UI to print messages.
      * @return true if valid command, false otherwise.
      */
-    public boolean parse(String input, TaskList tasks, Ui ui) {
+    public String parse(String input, TaskList tasks, Ui ui) {
         String command = getCommand(input).trim();
         try {
-            switch (Connor.Commands.valueOf(command)) {
+            switch (Commands.valueOf(command)) {
             case HI:
-                ui.greetings("HI");
-                break;
+                return ui.greetings("HI");
 
             case BYE:
-                ui.greetings("BYE");
-                return true;
+                return ui.greetings("BYE");
 
             case LIST:
-                System.out.println(tasks.toString());
-                break;
+                return tasks.toString();
 
             case MARK:
-                tasks.markDone(Integer.parseInt(getTask(input)), ui);
-                break;
+                return tasks.markDone(Integer.parseInt(getTask(input)), ui);
 
             case UNMARK:
-                tasks.markUndone(Integer.parseInt(getTask(input)), ui);
-                break;
+                return tasks.markUndone(Integer.parseInt(getTask(input)), ui);
 
             case TODO:
             case DEADLINE:
             case EVENT:
                 Task task = parseCommand(command, getTask(input));
                 tasks.addTask(task);
-                ui.addTaskMessage(task, tasks.getSize());
-                break;
+                return ui.addTaskMessage(task, tasks.getSize());
 
             case DELETE:
-                tasks.deleteTask(getTask(input), ui);
-                break;
+                return tasks.deleteTask(getTask(input), ui);
 
             case DELETEALL:
                 tasks.deleteAllTask();
-                ui.deleteAllMessage();
-                break;
+                return ui.deleteAllMessage();
 
             case FIND:
-                System.out.println(tasks.find(getTask(input)));
-                break;
+                return tasks.find(getTask(input));
 
             default:
-                Ui.printMessage("INVALID COMMAND");
+                return ("INVALID COMMAND");
             }
         } catch (IllegalArgumentException e) {
-            Ui.printMessage("INVALID COMMAND");
+            return ("INVALID COMMAND");
         } catch (InvalidTaskException e) {
-            Ui.printMessage(e.getMessage());
+            return (e.getMessage());
         }
-        return false;
     }
 }

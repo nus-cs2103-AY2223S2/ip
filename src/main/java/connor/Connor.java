@@ -6,7 +6,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.LinkedList;
-import java.util.Scanner;
 
 import connor.gui.DialogBox;
 import connor.parser.Parser;
@@ -39,23 +38,7 @@ public class Connor extends Application {
     private Button sendButton;
     private Scene scene;
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-    /**
-     * Valid commands that are allowed to be inputted by the user.
-     */
-    public enum Commands {
-        HI,
-        BYE,
-        MARK,
-        UNMARK,
-        LIST,
-        TODO,
-        DEADLINE,
-        EVENT,
-        DELETE,
-        DELETEALL,
-        FIND
-    }
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/Connor.png"));
 
     /** Storage variable for this instance */
     private Storage storage;
@@ -112,43 +95,17 @@ public class Connor extends Application {
         return new File("data/connor.Connor.txt");
     }
 
-    /**
-     * Scans in user input and parses it.
-     * Stores the output in the file.
-     */
-    public void run() {
-        Scanner sc = new Scanner(System.in);
-        boolean isOver = false;
-        while (!isOver && sc.hasNextLine()) {
-            String input = sc.nextLine().trim();
-            isOver = this.parser.parse(input, this.tasks, this.ui);
-            this.storage.updateFile(tasks.getList());
-        }
-        sc.close();
-    }
-
-    /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
     private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);
-
         return textToAdd;
     }
 
-    /**
-     * Iteration 2:
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
-     */
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
+        String response = this.parser.parse(userInput.getText().trim(), this.tasks, this.ui);
+        this.storage.updateFile(tasks.getList());
+        Label dukeText = new Label(response);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
@@ -156,17 +113,15 @@ public class Connor extends Application {
         userInput.clear();
     }
 
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
-    private String getResponse(String input) {
-        return "Connor heard: " + input;
+    private void initialGreet() {
+        Label dukeText = new Label(ui.greet());
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+        );
     }
 
     @Override
     public void start(Stage stage) {
-        //Step 1. Setting up required components
 
         //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
@@ -198,7 +153,6 @@ public class Connor extends Application {
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
 
-        // You will need to import `javafx.scene.layout.Region` for this.
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
         userInput.setPrefWidth(325.0);
@@ -226,6 +180,8 @@ public class Connor extends Application {
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
+        initialGreet();
+
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
         });
@@ -234,10 +190,8 @@ public class Connor extends Application {
             handleUserInput();
         });
 
-        // more code to be added here later
     }
 
     public static void main(String[] args) {
-        new Connor().run();
     }
 }

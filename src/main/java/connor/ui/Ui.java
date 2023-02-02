@@ -3,56 +3,58 @@ package connor.ui;
 import connor.task.Task;
 
 public class Ui {
-    public static final String LINE = "        ________________________________________________________\n";
 
-    public static void printMessage(String response) {
-        System.out.println(LINE + "        " + response);
+//    public static final String LINE = "        ________________________________________________________\n";
+
+    public static String printMessage(String response) {
+        return response;
     }
 
-    public void greet() {
-        printMessage("Hello! I'm Connor, the android sent by Cyberlife.\n"
+    public String greet() {
+        return ("Hello! I'm Connor, the android sent by Cyberlife.\n"
                 + "        Please type in your command below.");
     }
 
-    public void greetings(String responseType) {
+    public String greetings(String responseType) {
         switch (responseType) {
-            case "HI":
-                printMessage("Hi, I hope that you are having a nice day.");
-                break;
+        case "HI":
+            return "Hi, I hope that you are having a nice day.";
 
-            case "BYE":
-                printMessage("It was a good session Hank, Bye.");
-                break;
+        case "BYE":
+            return "It was a good session Hank, Bye.";
+
+        default:
+            return "";
         }
     }
 
-    public void addTaskMessage(Task task, int size) {
+    public String addTaskMessage(Task task, int size) {
         String message = "I have added " + task.getTaskName() + " to my memory\n";
-        message = message + "          " + task.toString() + "\n";
-        message = message + "        You have " + size + " tasks in the list";
-        printMessage(message);
+        message = message + "  " + task.toString() + "\n";
+        message = message + "You have " + size + " tasks in the list";
+        return message;
     }
 
-    public void deleteAllMessage() {
-        printMessage("All tasks on the list have been cleared");
+    public String deleteAllMessage() {
+        return "All tasks on the list have been cleared";
     }
 
-    public void deleteTaskMessage(Task task, int size) {
+    public String deleteTaskMessage(Task task, int size) {
         String message = "I have removed " + task.getTaskName() + " from my memory\n";
-        message = message + "          " + task.toString() + "\n";
-        message = message + "        You have " + size + " tasks in the list";
-        printMessage(message);
+        message = message + "  " + task.toString() + "\n";
+        message = message + "You have " + size + " tasks in the list";
+        return message;
     }
 
-    public void markDoneMessage(String message) {
-        printMessage("Understood, I have marked the task as done:\n"
-                + "        "
-                + message);
+    public String markDoneMessage(String message) {
+        return "Understood, I have marked the task as done:\n"
+                + "  "
+                + message;
     }
 
-    public void markUndoneMessage(String message) {
-        printMessage("Understood, I have marked the task as undone:\n"
-                + "        "
-                + message);
+    public String markUndoneMessage(String message) {
+        return "Understood, I have marked the task as undone:\n"
+                + "  "
+                + message;
     }
 }
