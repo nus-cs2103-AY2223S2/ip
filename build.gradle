@@ -7,8 +7,8 @@ plugins {
 
 checkstyle {
     toolVersion = '10.2'
-    checkstyleMain.enabled = false
-    checkstyleTest.enabled = false
+//    checkstyleMain.enabled = false
+//    checkstyleTest.enabled = false
 
 }
 

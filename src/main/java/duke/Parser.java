@@ -1,7 +1,8 @@
 package duke;
 
-
+//CHECKSTYLE:OFF
 import duke.exceptions.*;
+//CHECKSTYLE:ON
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

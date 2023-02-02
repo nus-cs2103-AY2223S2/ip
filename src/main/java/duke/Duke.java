@@ -2,7 +2,6 @@ package duke;
 
 import duke.exceptions.InvalidCommandException;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
