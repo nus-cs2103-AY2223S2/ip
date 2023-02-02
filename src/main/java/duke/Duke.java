@@ -3,7 +3,6 @@ package duke;
 import duke.command.Command;
 
 public class Duke {
-    private static String currentInput;
     private static TaskList tasks;
     private static Storage storage;
     private static Ui ui;
