@@ -30,7 +30,7 @@ public class Duke {
     public static void loadFile(Path dir) throws IOException {
         Path path = Paths.get(String.valueOf(dir), "data.txt");
         if (!Files.exists(path)) {
-            path = Files.createFile(path);
+            Files.createFile(path);
         }
         data = path;
         List<String> readFile = Files.readAllLines(path);
