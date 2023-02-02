@@ -2,7 +2,6 @@ package duke;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Scanner;
 
 import duke.exception.DukeException;
 import duke.parser.Parser;
@@ -33,6 +32,9 @@ public class Duke {
         parser = new Parser();
     }
 
+    /**
+     * Loads tasks from data file and print success/error message.
+     */
     public void loadTasksFromFile() {
         try {
             storage.loadTasks(taskList);
@@ -44,6 +46,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Saves tasks to data file and print success/error message.
+     */
     public void saveTasksToFile() {
         try {
             storage.saveTasks(taskList);

@@ -7,6 +7,9 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+/**
+ * A class to start Duke.
+ */
 public class DukeMain extends Application {
     private Duke duke = new Duke("./data", "./data/duke.txt");
 
