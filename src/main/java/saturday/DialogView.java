@@ -21,7 +21,7 @@ import javafx.scene.shape.Circle;
  * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
  * containing text from the speaker.
  */
-public class DialogBox extends HBox {
+public class DialogView extends HBox {
     @FXML
     private Label dialog;
     @FXML
@@ -29,9 +29,9 @@ public class DialogBox extends HBox {
     @FXML
     private Circle displayCircle;
 
-    private DialogBox(String text, Image img) {
+    private DialogView(String text, Image img) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(MainView.class.getResource("/view/Dialog.fxml"));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
@@ -53,12 +53,12 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
-    public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+    public static DialogView getUserDialog(String text, Image img) {
+        return new DialogView(text, img);
     }
 
-    public static DialogBox getSaturdayDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+    public static DialogView getSaturdayDialog(String text, Image img) {
+        var db = new DialogView(text, img);
         db.flip();
         return db;
     }

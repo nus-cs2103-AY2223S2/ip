@@ -21,3 +21,7 @@
 .radius {
     -fx-background-radius: 25px
 }
+
+.rcorners1 {
+    -fx-background-radius: 25px 25px 25px 5px;
+}

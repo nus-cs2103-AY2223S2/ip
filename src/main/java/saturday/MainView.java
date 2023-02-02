@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
-public class MainWindow extends AnchorPane {
+public class MainView extends AnchorPane {
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -47,8 +47,8 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response = saturday.getResponse(input);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getSaturdayDialog(response, saturdayImage)
+                DialogView.getUserDialog(input, userImage),
+                DialogView.getSaturdayDialog(response, saturdayImage)
         );
         userInput.clear();
     }

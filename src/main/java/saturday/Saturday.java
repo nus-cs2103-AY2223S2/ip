@@ -89,4 +89,8 @@ public class Saturday {
         }
         return output;
     }
+
+    public TaskList getTaskList() {
+        return this.taskList;
+    }
 }

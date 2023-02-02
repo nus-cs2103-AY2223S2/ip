@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @version 0.1
  */
 public class Task implements Serializable {
-    private boolean done;
+    private boolean isDone;
     private String description;
 
     /**
@@ -18,7 +18,7 @@ public class Task implements Serializable {
      * @param description the description of the task
      */
     public Task(String description) {
-        this.done = false;
+        this.isDone = false;
         this.description = description;
     }
 
@@ -32,26 +32,26 @@ public class Task implements Serializable {
     }
 
     /**
-     * Returns whether the task is done or not.
+     * Returns whether the task is isDone or not.
      *
-     * @return true if the task is done, false otherwise
+     * @return true if the task is isDone, false otherwise
      */
     public boolean isDone() {
-        return this.done;
+        return this.isDone;
     }
 
     /**
-     * Mark the task as done.
+     * Mark the task as isDone.
      */
     public void mark() {
-        this.done = true;
+        this.isDone = true;
     }
 
     /**
      * unMark the task
      */
     public void unMark() {
-        this.done = false;
+        this.isDone = false;
     }
 
 
@@ -60,14 +60,14 @@ public class Task implements Serializable {
     }
 
     /**
-     * Returns a string representation of the task. The format of the returned string is "[X] " if the task is done
-     * or "[ ] " if the task is not done, followed by the task description.
+     * Returns a string representation of the task. The format of the returned string is "[X] " if the task is isDone
+     * or "[ ] " if the task is not isDone, followed by the task description.
      *
      * @return a string representation of the task.
      */
     @Override
     public String toString() {
-        String checkbox = done ? "[X] " : "[ ] ";
+        String checkbox = isDone ? "[X] " : "[ ] ";
         return checkbox + description;
     }
 }
