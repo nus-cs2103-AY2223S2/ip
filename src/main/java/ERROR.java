@@ -5,7 +5,8 @@ public enum ERROR {
     DEADLINE_EMPTY("☹ OOPS!!! The description of a deadline cannot be empty."),
     EVENT_EMPTY("☹ OOPS!!! The description of an event cannot be empty."),
     INVALID_INPUT("☹ OOPS!!! I'm sorry, but I don't know what that means :-("),
-    INVALID_INDEX("Invalid index!\nThere are only %d tasks in the list.");
+    INVALID_INDEX("Invalid index!\nThere are only %d tasks in the list."),
+    CORRUPTED_TASK_DATA("The task data file may have been corrupted.");
 
     private final String message;
 

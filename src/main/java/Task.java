@@ -38,7 +38,7 @@ public abstract class Task {
         return task;
     }
 
-    public static Task parseTaskFromDB(String s) {
+    public static Task parseTaskFromDB(String s) throws DukeException {
         s = s.trim();
         Task task = null;
 
@@ -53,6 +53,8 @@ public abstract class Task {
             String desc = s.substring(7);
             String[] params = desc.split("( \\(from: | to: |\\))");
             task = new Event(params[0], params[1], params[2]);
+        } else {
+            throw new DukeException(ERROR.CORRUPTED_TASK_DATA.getMessage());
         }
 
         if (s.charAt(4) == 'X') {
