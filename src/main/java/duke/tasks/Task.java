@@ -60,6 +60,16 @@ public class Task {
     }
 
     /**
+     * Checks if a tasks name has a word in it
+     *
+     * @param string The word to be searched.
+     * @return True if the task contains the word. False otherwise.
+     */
+    public boolean hasString(String string) {
+        return name.contains(string);
+    }
+
+    /**
      * Converts the user's tasks to its string representation
      *
      * @return A string representation of the user's task.
