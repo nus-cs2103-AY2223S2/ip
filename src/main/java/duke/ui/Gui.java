@@ -87,14 +87,15 @@ public class Gui extends Application {
     }
 
     /**
-     * Iteration 2: Creates two dialog boxes, one echoing user input and the other containing Duke's reply and
-     * then appends them to the dialog container. Clears the user input after processing.
+     * Iteration 3: Creates two dialog boxes, one echoing user input and the other containing Duke's reply and
+     * then appends them to the dialog container. User dialog is on the right and Duke dialog is on the left.
+     * Clears the user input after processing.
      */
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
-        dialogContainer.getChildren().addAll(new DialogBox(userText, new ImageView(user)),
-                new DialogBox(dukeText, new ImageView(duke)));
+        dialogContainer.getChildren().addAll(DialogBox.getUserDialog(userText, new ImageView(user)),
+                DialogBox.getDukeDialog(dukeText, new ImageView(duke)));
         userInput.clear();
     }
 
