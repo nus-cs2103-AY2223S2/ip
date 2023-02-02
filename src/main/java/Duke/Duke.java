@@ -52,7 +52,7 @@ public class Duke {
                 newTask.run(table, monitor, disk);
                 running = !newTask.exited; // if newTask exits stop running
             } catch (InvalidCommandException | InvalidTimeFormatException |
-                     MissingDescriptionException | OutRangeException | NullPointerException e) {
+                     MissingDescriptionException | OutRangeException | NullPointerException | DuplicateException e) {
                 continue;
             }
         }

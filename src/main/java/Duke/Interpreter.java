@@ -6,7 +6,6 @@ import java.lang.String;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-// format the time in the form of 11/10/2019 5pm
 
 /**
  * The Duke.Interpreter interpreters the users' input
@@ -117,7 +116,7 @@ public class Interpreter {
      * @throws MissingDescriptionException
      */
     public static Task addTask(String command, TaskTable table) throws InvalidTimeFormatException,
-            MissingDescriptionException, InvalidCommandException {
+            MissingDescriptionException, InvalidCommandException, DuplicateException {
         int size = table.size(); // get the current size of TaskTable
         // get the kind of operation
         Interpreter.Operation op = Interpreter.Operation.valueOf(command.toLowerCase().split(" ")[0]);
@@ -146,11 +145,20 @@ public class Interpreter {
                     } else {
                         try {
                             String deadlineName = (deadlineAndTime.split(" /by ")[0]);
+                            for (int i = 0; i < table.size(); i++) {
+                                if(table.getTable().get(i).showDesc().equals(deadlineName)) {
+                                    throw new DuplicateException();
+                                }
+                            }
                             LocalDateTime deadlineTime = LocalDateTime.parse(deadlineAndTime.split(" /by ")[1], format);
                             return new Deadline(deadlineName, deadlineTime, false);
                         } catch (Exception e) {
                             e.printStackTrace();
-                            throw new InvalidTimeFormatException();
+                            if (e instanceof DuplicateException) {
+                                throw new DuplicateException();
+                            } else {
+                                throw new InvalidTimeFormatException();
+                            }
                         }
                     }
                 case todo:
@@ -158,7 +166,13 @@ public class Interpreter {
                         // if the input is normal
                         throw new MissingDescriptionException(op.name());
                     } else {
-                        return new Todo(command.substring(5), false);
+                        String todoName = command.substring(5);
+                        for (int i = 0; i < table.size(); i++) {
+                            if(table.getTable().get(i).showDesc().equals(todoName)) {
+                                throw new DuplicateException();
+                            }
+                        }
+                        return new Todo(todoName, false);
                     }
                 case event:
                     String eventAndTime = command.substring(6);
@@ -170,11 +184,20 @@ public class Interpreter {
                             String eventTime = eventAndTime.split(" /from ")[1];
                             LocalDateTime startTime = LocalDateTime.parse(eventTime.split(" /to ")[0], format);
                             LocalDateTime endTime = LocalDateTime.parse(eventTime.split(" /to ")[1], format);
+                            for (int i = 0; i < table.size(); i++) {
+                                if(table.getTable().get(i).showDesc().equals(eventName)) {
+                                    throw new DuplicateException();
+                                }
+                            }
                             return new Event(
                                     eventName, startTime, endTime, false);
                         } catch (Exception e) {
                             e.printStackTrace();
-                            throw new InvalidTimeFormatException();
+                            if (e instanceof DuplicateException) {
+                                throw new DuplicateException();
+                            } else {
+                                throw new InvalidTimeFormatException();
+                            }
                         }
                     }
             }
@@ -202,7 +225,7 @@ public class Interpreter {
      * @throws InvalidCommandException
      */
     public static Task interpret(String command, TaskTable table) throws InvalidCommandException, InvalidTimeFormatException,
-            MissingDescriptionException, OutRangeException, NullPointerException {
+            MissingDescriptionException, OutRangeException, NullPointerException, DuplicateException {
         Operation op;
         try {
             op = Interpreter.Operation.valueOf(command.toLowerCase().split(" ")[0]);
