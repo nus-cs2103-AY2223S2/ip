@@ -1,9 +1,9 @@
 package duke.command;
 
-import duke.TaskList;
-import duke.Ui;
 import duke.Deadline;
 import duke.Task;
+import duke.TaskList;
+import duke.Ui;
 import java.time.DateTimeException;
 
 public class DeadlineCommand extends Command {

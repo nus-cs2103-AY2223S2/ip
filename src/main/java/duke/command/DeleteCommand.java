@@ -1,8 +1,8 @@
 package duke.command;
 
+import duke.Task;
 import duke.TaskList;
 import duke.Ui;
-import duke.Task;
 
 public class DeleteCommand extends Command {
     private String[] currentInputArray;

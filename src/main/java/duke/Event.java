@@ -1,7 +1,9 @@
 package duke;
-import java.time.format.DateTimeFormatter;
+
 import java.time.DateTimeException;
+import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
+
 public class Event extends Task {
 
     protected LocalDate from;

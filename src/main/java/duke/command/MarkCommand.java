@@ -1,8 +1,8 @@
 package duke.command;
 
+import duke.Task;
 import duke.TaskList;
 import duke.Ui;
-import duke.Task;
 
 public class MarkCommand extends Command {
     private String[] currentInputArray;
