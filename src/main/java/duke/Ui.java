@@ -8,57 +8,40 @@ package duke;
 public class Ui {
 
     /**
-     * Displays welcome message to user when Duke is first booted.
-     *
+     * Returns error message to be displayed to user when error occurs while using Duke.
+     * @param error exception caught.
+     * @return the message string of the thrown exception.
      */
-    public String showWelcomeMessage() {
-        return "Hello! I'm Duke\nWhat can I do for you?";
-    }
-
-
-    /**
-     * Displays error message to user.
-     *
-     */
-    public String showErrorMessage(String error) {
-        return error;
+    public String showErrorMessage(Exception error) {
+        return error.getMessage();
     }
 
     /**
-     * Displays all tasks in TaskList to user.
-     *
+     * Returns the string representation of Task List to be shown to user.
+     * @param tasks Task List
+     * @return string representation of the Task List
      */
     public String showTasksMessage(TaskList tasks) {
-        String result = "";
         if (tasks.size() != 0) {
-            result += "Here are the tasks in your list:\n";
-            result += tasks;
+            return tasks.toString();
         } else {
-            result = "There are no tasks currently!";
+            return "There are no tasks currently!";
         }
-        return result;
-
     }
 
     /**
-     * Displays all matching tasks in TaskList to user.
-     *
-     */
-    public String showMatchingTasksMessage(String tasksString) {
-        return tasksString;
-    }
-
-    /**
-     * Displays goodbye message to user upon bye command.
-     *
+     * Returns the goodbye message when user triggers the bye command.
+     * @return goodbye message.
      */
     public String showGoodbyeMessage() {
         return "Bye. Hope to see you again soon!";
     }
 
     /**
-     * Displays message to user upon successfully adding the task to the TaskList.
-     *
+     * Returns the message when user successfully adds a task to the Task List.
+     * @param task Task added.
+     * @param tasks Task List.
+     * @return added Task success message.
      */
     public String addedTaskMessage(Task task, TaskList tasks) {
         String result = "";
@@ -68,16 +51,18 @@ public class Ui {
     }
 
     /**
-     * Displays message to user upon successfully marking the task as done.
-     *
+     * Returns the message when user successfully marks a task in the Task List.
+     * @param task Task marked.
+     * @return mark Task success message.
      */
     public String markTaskMessage(Task task) {
         return String.format("Nice! I've marked this task as done:\n" + task);
     }
 
     /**
-     * Displays message to user upon successfully unmarking the task.
-     *
+     * Returns the message when user successfully unmarks a task in the Task List.
+     * @param task Task unmarked.
+     * @return unmark Task success message.
      */
     public String unmarkTaskMessage(Task task) {
         return String.format("OK, I've marked this task as not done yet:\n" + task);
@@ -85,8 +70,10 @@ public class Ui {
 
 
     /**
-     * Displays message to user upon successfully deleting the task.
-     *
+     * Returns the message when user successfully deletes a task from the Task List.
+     * @param task Task deleted.
+     * @param tasks Task List.
+     * @return delete Task success message.
      */
     public String deleteTaskMessage(Task task, TaskList tasks) {
         String result = "";

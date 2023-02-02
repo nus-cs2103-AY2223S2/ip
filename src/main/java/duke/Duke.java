@@ -1,7 +1,5 @@
 package duke;
 
-import java.util.Scanner;
-
 /**
  * Encapsulates a Command Line Application which acts as a Task Manager.
  *
@@ -23,92 +21,17 @@ public class Duke {
         try {
             tasks = storage.load();
         } catch (DukeException e) {
-            ui.showErrorMessage(e.getMessage());
+            ui.showErrorMessage(e);
             tasks = new TaskList();
         }
     }
 
     /**
-     * Opens up the Task Manager to taking in input and executing commands.
+     * Returns the result string to be shown to user in GUI
+     * based on user's input
      *
-     */
-    /*
-    public void run() {
-        ui.showWelcomeMessage();
-        Scanner scanner = new Scanner(System.in);
-        Task chosen;
-        Task created;
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String userInput = scanner.nextLine();
-                Parser.parseUserResponse(userInput);
-                switch(Parser.getCommand()) {
-                case BYE: {
-                    storage.saveToFile(tasks);
-                    ui.showGoodbyeMessage();
-                    isExit = true;
-                    break;
-                }
-                case FIND: {
-                    String keyword = Parser.getArgs()[1];
-                    ui.showMatchingTasksMessage(tasks.getMatchingTasksString(keyword));
-                    break;
-                }
-                case LIST: {
-                    ui.showTasksMessage(tasks);
-                    break;
-                }
-                case MARK: {
-                    int id = Parser.parseTask(Parser.getArgs());
-                    chosen = tasks.getTask(id);
-                    chosen.mark();
-                    ui.markTaskMessage(chosen);
-                    break;
-                }
-                case UNMARK: {
-                    int id = Parser.parseTask(Parser.getArgs());
-                    chosen = tasks.getTask(id);
-                    chosen.unmark();
-                    ui.unmarkTaskMessage(chosen);
-                    break;
-                }
-                case DELETE: {
-                    int id = Parser.parseTask(Parser.getArgs());
-                    chosen = tasks.getTask(id);
-                    tasks.deleteTask(chosen);
-                    ui.deleteTaskMessage(chosen, tasks);
-                    break;
-                }
-                case TODO: {
-                    created = Parser.parseTodo(Parser.getArgs());
-                    tasks.addTask(created);
-                    ui.addedTaskMessage(created, tasks);
-                    break;
-                }
-                case DEADLINE: {
-                    created = Parser.parseDeadline(Parser.getArgs());
-                    tasks.addTask(created);
-                    ui.addedTaskMessage(created, tasks);
-                    break;
-                }
-                case EVENT: {
-                    created = Parser.parseEvent(Parser.getArgs());
-                    tasks.addTask(created);
-                    ui.addedTaskMessage(created, tasks);
-                    break;
-                }
-                default:
-                    // Switch will not reach here
-                    break;
-                }
-            } catch (DukeException e) {
-                ui.showErrorMessage(e.getMessage());
-            }
-        }
-
-    }
-
+     * @param input text that user enters into GUI.
+     * @return string to be displayed to user.
      */
 
     public String getResponse(String input) {
@@ -125,7 +48,7 @@ public class Duke {
             }
             case FIND: {
                 String keyword = Parser.getArgs()[1];
-                response = ui.showMatchingTasksMessage(tasks.getMatchingTasksString(keyword));
+                response = tasks.getMatchingTasksString(keyword);
                 break;
             }
             case LIST: {
@@ -175,16 +98,8 @@ public class Duke {
                 break;
             }
         } catch (DukeException e) {
-            response = ui.showErrorMessage(e.getMessage());
-        } finally {
-            return response;
+            response = ui.showErrorMessage(e);
         }
+        return response;
     }
-
-    /*
-    public static void main(String[] args) {
-        new Duke("/duke.txt").run();
-    }
-    */
-
 }

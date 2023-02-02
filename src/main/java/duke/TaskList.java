@@ -59,14 +59,14 @@ public class TaskList {
      * @return list of tasks matching the keyword
      */
     public String getMatchingTasksString(String keyword) {
-        String res = "";
+        StringBuilder res = new StringBuilder();
         for (Task task: tasks) {
             if (task.toString().contains(keyword)) {
                 int idx = tasks.indexOf(task) + 1;
-                res += String.format("%d.%s", idx, task);
+                res.append(String.format("%d.%s", idx, task));
             }
         }
-        if (res.equals("")) {
+        if (res.toString().equals("")) {
             return "There are no matching tasks currently!";
         } else {
             return "Here are the matching tasks in your list:\n" + res;
@@ -79,21 +79,26 @@ public class TaskList {
 
     @Override
     public String toString() {
-        String result = "";
+        StringBuilder result = new StringBuilder();
         int idx = 1;
         for (Task task : tasks) {
-            result += String.format("%d.%s", idx, task);
+            result.append(String.format("%d.%s", idx, task));
             idx++;
         }
-        return result;
+        return result.toString();
     }
 
+    /**
+     * Returns representation of task list to be stored into txt file
+     *
+     * @return string representation of task list.
+     */
     public String saveString() {
-        String result = "";
+        StringBuilder result = new StringBuilder();
         for (Task task: tasks) {
-            result += task.getText();
-            result += "\n";
+            result.append(task.getText());
+            result.append("\n");
         }
-        return result;
+        return result.toString();
     }
 }
