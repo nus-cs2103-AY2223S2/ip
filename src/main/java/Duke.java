@@ -3,10 +3,9 @@ import duke.command.Parser;
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
+import duke.ui.Gui;
 import duke.ui.Ui;
 import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 /**
@@ -43,15 +42,6 @@ public class Duke extends Application {
         new Duke().run();
     }
 
-    @Override
-    public void start(Stage stage) {
-        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
-        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
-
-        stage.setScene(scene); // Setting the stage to show our screen
-        stage.show(); // Render the stage.
-    }
-
     /**
      * Runs Duke as a CLI chatbot.
      */
@@ -68,6 +58,14 @@ public class Duke extends Application {
                 ui.printException(e.getMessage());
             }
         }
+    }
+
+    // GUI setup
+    @Override
+    public void start(Stage stage) {
+        //The container for the content of the chat to scroll.
+        Gui graphicGui = new Gui();
+        graphicGui.start(stage);
     }
 
 }
