@@ -7,23 +7,24 @@ import lulu.Storage;
 import java.util.ArrayList;
 
 public class ByeCommand extends Command {
-    public ByeCommand() {}
+    public ByeCommand() {
+    }
 
     /**
      * This method closes the chatbot upon execution.
      *
-     * @param tasks the TaskList to be saved
-     * @param ui the UI that displays messages
+     * @param tasks   the TaskList to be saved
+     * @param ui      the UI that displays messages
      * @param storage the Storage that writes data in tasks to the specified file location
      */
-    public void execute(TaskList tasks, UI ui, Storage storage) {
+    public String execute(TaskList tasks, UI ui, Storage storage) {
         ArrayList<String> toWrite = new ArrayList<>();
         int size = tasks.getSize();
-        for (int i = 0; i < size; i ++) {
+        for (int i = 0; i < size; i++) {
             toWrite.add(tasks.get(i).toMemory());
         }
         storage.writeSave(toWrite);
-        ui.showExitText();
+        return ui.showContainer(ui.showExitText());
     }
 
     @Override

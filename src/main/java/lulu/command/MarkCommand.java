@@ -5,8 +5,10 @@ import lulu.UI;
 import lulu.Storage;
 
 import lulu.exception.InvalidCommandException;
+
 public class MarkCommand extends Command {
     private int taskNumber;
+
     public MarkCommand(String rest) throws InvalidCommandException {
         if (rest.isEmpty()) {
             throw new InvalidCommandException();
@@ -25,12 +27,12 @@ public class MarkCommand extends Command {
     /**
      * This method marks the specified task upon execution.
      *
-     * @param tasks the TaskList with the task to be marked.
-     * @param ui the UI that displays messages
+     * @param tasks   the TaskList with the task to be marked.
+     * @param ui      the UI that displays messages
      * @param storage the storage is not relevant in this command
      */
-    public void execute(TaskList tasks, UI ui, Storage storage) {
+    public String execute(TaskList tasks, UI ui, Storage storage) {
         tasks.markTask(taskNumber);
-        ui.showMarkText(tasks.getTaskDescription(taskNumber));
+        return ui.showContainer(ui.showMarkText(tasks.getTaskDescription(taskNumber)));
     }
 }

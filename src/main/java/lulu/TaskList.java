@@ -56,6 +56,12 @@ public class TaskList {
         return tasks;
     }
 
+    public String printList() {
+        return this.list.stream()
+                .map(task -> String.format("\n%d. %s", list.indexOf(task) + 1, task.toString()))
+                .reduce("", String::concat);
+    }
+
     /** this method may be in the wrong spot but will be left here for now */
     /**
      * This method loads tasks into the TaskList, provided it follows a given convention.
