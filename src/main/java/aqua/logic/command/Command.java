@@ -33,4 +33,9 @@ public enum Command {
     public ExecutionService getService(ArgumentMap args, LogicManager manager, boolean isLoading) {
         return controller.getService(args, manager, isLoading);
     }
+
+
+    public String getSyntax() {
+        return controller.getSyntax();
+    }
 }
