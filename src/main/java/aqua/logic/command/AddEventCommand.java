@@ -49,4 +49,10 @@ public class AddEventCommand extends AddTaskCommand {
     public String getSyntax() {
         return "<literal:name> /from <date:from> /to <date:to>";
     }
+
+
+    @Override
+    public String getDescription() {
+        return "Adds an EVENT";
+    }
 }

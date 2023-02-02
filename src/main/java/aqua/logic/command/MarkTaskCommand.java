@@ -43,6 +43,15 @@ public class MarkTaskCommand extends CommandController {
     }
 
 
+    @Override
+    public String getDescription() {
+        if (isCompletedMarker) {
+            return "Mark a task";
+        }
+        return "Unmark a task";
+    }
+
+
 
 
 

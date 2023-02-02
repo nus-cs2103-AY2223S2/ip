@@ -38,4 +38,9 @@ public enum Command {
     public String getSyntax() {
         return controller.getSyntax();
     }
+
+
+    public String getDescription() {
+        return controller.getDescription();
+    }
 }

@@ -38,4 +38,14 @@ public abstract class CommandController {
     public String getSyntax() {
         return "";
     }
+
+
+    /**
+     * Returns teh description of what the command does.
+     *
+     * @return the description of what the command does.
+     */
+    public String getDescription() {
+        return "";
+    }
 }

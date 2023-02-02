@@ -26,4 +26,10 @@ public class ByeCommand extends CommandController {
             }
         });
     }
+
+
+    @Override
+    public String getDescription() {
+        return "Does absolutely nothing";
+    }
 }

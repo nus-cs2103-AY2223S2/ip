@@ -38,4 +38,10 @@ public class ListCommand extends CommandController {
         }
         return "Nothing!! - ̗̀ ( ˶'ᵕ'˶) ̖́-";
     }
+
+
+    @Override
+    public String getDescription() {
+        return "Displayes a view of your task list";
+    }
 }

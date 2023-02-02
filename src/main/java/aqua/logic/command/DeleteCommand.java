@@ -28,6 +28,12 @@ public class DeleteCommand extends CommandController {
     }
 
 
+    @Override
+    public String getDescription() {
+        return "Deletes a task";
+    }
+
+
 
 
 

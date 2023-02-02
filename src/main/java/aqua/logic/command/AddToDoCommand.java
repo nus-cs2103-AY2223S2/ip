@@ -37,4 +37,10 @@ public class AddToDoCommand extends AddTaskCommand {
     public String getSyntax() {
         return "<literal:name>";
     }
+
+
+    @Override
+    public String getDescription() {
+        return "Adds a TODO";
+    }
 }

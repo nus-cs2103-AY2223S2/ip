@@ -45,4 +45,10 @@ public class AddDeadlineCommand extends AddTaskCommand {
     public String getSyntax() {
         return "<literal:name> /by <date:by>";
     }
+
+
+    @Override
+    public String getDescription() {
+        return "Adds a DEADLINE";
+    }
 }
