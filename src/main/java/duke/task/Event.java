@@ -16,23 +16,23 @@ public class Event extends Task {
         return new InvalidFormatException("deadline name /from yyyy-MM-dd /to yyyy-MM-dd");
     }
 
-    public Event(String description, String preFrom, String preTo, Parser p) {
-        super(description);
-        this.from = LocalDate.parse(preFrom, p.getInputFormat());
-        this.to = LocalDate.parse(preTo, p.getInputFormat());
-        classIcon = "E";
-    }
-
-    public Event(String input, Parser p) throws InvalidFormatException{
-        super(null);
+    public static Event factoryMethod(String input, Parser parser, boolean isDone) throws InvalidFormatException{
         Matcher m = pattern.matcher(input);
         if (!m.find()) {
             throw getInvalidFormatException();
         }
-        this.description = m.group(1);
-        this.to = LocalDate.parse(m.group(2), p.getInputFormat());
-        this.from = LocalDate.parse(m.group(3), p.getInputFormat());
+        return new Event(m.group(1), m.group(2), m.group(3), parser, isDone);
+    }
+
+    public Event(String description, String from, String to, Parser parser, boolean isDone) {
+        super(description, isDone);
+        this.from = parser.parseDate(from);
+        this.to = parser.parseDate(to);
         classIcon = "E";
+    }
+
+    public Event(String description, String from, String to, Parser parser) {
+        this(description, from, to, parser,false);
     }
 
     @Override
@@ -42,18 +42,10 @@ public class Event extends Task {
     }
 
     @Override
-    public String toString(Parser p) {
-        return String.format("%s /from %s /to %s",
-                super.toString(),
-                p.convertDateToOutputFormat(to),
-                p.convertDateToOutputFormat(from));
-    }
-
-    @Override
-    public String toLog(Parser p) {
+    public String toString(Parser parser) {
         return String.format("%s %s %s",
                 super.toString(),
-                p.convertDateToInputFormat(to),
-                p.convertDateToInputFormat(from));
+                parser.dateToLogFormat(to),
+                parser.dateToLogFormat(from));
     }
 }

@@ -15,21 +15,31 @@ public class Deadline extends Task {
         return new InvalidFormatException("deadline name /by yyyy-MM-dd");
     }
 
-    public Deadline(String description, String preBy, Parser p) {
-        super(description);
-        this.by = LocalDate.parse(preBy, p.getInputFormat());
-        classIcon = "D";
-    }
-
-    public Deadline(String input, Parser p) throws InvalidFormatException{
-        super(null);
+    /**
+     * Creates a Deadline object using only 1 String argument
+     *
+     * @param input String formatted in log file format
+     * @param parser To read the date
+     * @param isDone To mark if task is done
+     * @return a Deadline object
+     * @throws InvalidFormatException if the input cannot be parsed
+     */
+    public static Deadline factoryMethod(String input, Parser parser, boolean isDone) throws InvalidFormatException{
         Matcher m = pattern.matcher(input);
         if (!m.find()) {
             throw getInvalidFormatException();
         }
-        this.description = m.group(1);
-        this.by = LocalDate.parse(m.group(2), p.getInputFormat());
+        return new Deadline(m.group(1), m.group(2), parser, isDone);
+    }
+
+    public Deadline(String description, String by, Parser parser, boolean isDone) {
+        super(description, isDone);
+        this.by = parser.parseDate(by);
         classIcon = "D";
+    }
+
+    public Deadline(String description, String by, Parser parser) {
+        this(description, by, parser, false);
     }
 
     @Override
@@ -38,13 +48,7 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String toString(Parser p) {
-        return String.format("%s By: %s", super.toString(), p.convertDateToOutputFormat(by));
+    public String toString(Parser parser) {
+        return String.format("%s %s", super.toString(), parser.dateToLogFormat(by));
     }
-
-    @Override
-    public String toLog(Parser p) {
-        return String.format("%s %s", super.toString(), p.convertDateToInputFormat(by));
-    }
-
 }

@@ -8,8 +8,12 @@ public class Todo extends Task {
         return new InvalidFormatException("todo name");
     }
 
-    public Todo(String description) {
-        super(description);
+    public Todo(String description, boolean isDone) {
+        super(description, isDone);
         classIcon = "T";
+    }
+
+    public Todo(String description) {
+        this(description, false);
     }
 }

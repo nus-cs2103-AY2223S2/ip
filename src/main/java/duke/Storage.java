@@ -3,13 +3,14 @@ package duke;
 import duke.task.Task;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.LinkedList;
+import java.util.Scanner;
 
 public class Storage {
-    protected File log;
-    protected Parser p;
+    protected File logFile;
 
     /**
      * Creates a storage - an abstraction to maintain the logfile
@@ -17,17 +18,27 @@ public class Storage {
      * @param parent The location of the direction of the child file
      * @param child The name of the child file
      */
-    public Storage (String parent, String child) {
-        log = new File(parent, child);
-        if (!log.exists()) {
-            try {
-                File parentFolder = new File(parent);
-                parentFolder.mkdirs();
-                log.createNewFile();
-            } catch (IOException e) {
-                System.out.println(String.format("Error: Unable to create %s file in %s directory", child, parent));
-            }
+    public Storage (String parent, String child) throws IOException {
+        logFile = new File(parent, child);
+        if (!logFile.exists()) {
+            File parentFolder = new File(parent);
+            parentFolder.mkdirs();
+            logFile.createNewFile();
         }
+    }
+
+    /**
+     * Retrieves the contents of the log file
+     *
+     * @return A Linked list containing the contents of the log file
+     */
+    public LinkedList<String> retrieveContents() throws FileNotFoundException {
+        LinkedList<String> contents = new LinkedList<>();
+        Scanner sc = new Scanner(logFile);
+        while (sc.hasNext()) {
+            contents.add(sc.nextLine());
+        }
+        return contents;
     }
 
     /**
@@ -36,9 +47,9 @@ public class Storage {
      * @param tasks TaskList used to update the log file
      */
     public void update(LinkedList<Task> tasks) throws IOException {
-        FileWriter fw = new FileWriter(log);
+        FileWriter fw = new FileWriter(logFile);
         for (Task item : tasks) {
-            fw.write(item.toLog(p) + "\n");
+            fw.write(item.toString() + "\n");
         }
         fw.close();
     }

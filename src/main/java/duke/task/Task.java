@@ -6,8 +6,7 @@ import duke.exception.InvalidFormatException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Task {
-    public static final Pattern p = null;
+public abstract class Task {
     protected String classIcon;
     protected String description;
     protected boolean isDone;
@@ -22,37 +21,20 @@ public class Task {
      * @return Todo, Event or Date
      * @throws InvalidFormatException
      */
-    public static Task factory(char type, char done, String text, Parser p) throws InvalidFormatException {
-        Task curr;
+    public static Task factoryMethod(char type, char done, String text, Parser parser) throws InvalidFormatException {
+        boolean isDone = done == 'X';
 
         Matcher m;
         switch (type) {
             case 'T':
-                curr = new Todo(text);
-                break;
+                return new Todo(text, isDone);
             case 'D':
-                m = Pattern.compile("(.+) (.+)$").matcher(text);
-                if (!m.find()) {
-                    throw new InvalidFormatException();
-                }
-                curr = new Deadline(m.group(1), m.group(2), p);
-                break;
+                return Deadline.factoryMethod(text, parser, isDone);
             case 'E':
-                m = Pattern.compile("(.+) (.+) (.+)$").matcher(text);
-                if (!m.find()) {
-                    throw new InvalidFormatException();
-                }
-                curr = new Event(m.group(1), m.group(2), m.group(3), p);
-                break;
+                return Event.factoryMethod(text, parser, isDone);
             default:
                 throw new InvalidFormatException();
         }
-
-        if (done == 'X') {
-            curr.setDone(true);
-        }
-
-        return curr;
     }
 
     public static InvalidFormatException getInvalidFormatException() {
@@ -60,18 +42,18 @@ public class Task {
     }
 
     /**
-     * Returns a basic task
+     * Returns a task
      *
      * @param description of the task
+     * @param isDone if the task marked as done
      */
-    public Task(String description) {
+    public Task(String description, boolean isDone) {
         this.description = description;
-        this.isDone = false;
-        classIcon = "-";
+        this.isDone = isDone;
     }
 
     /**
-     * the the isDone value of the task
+     * Sets the isDone value of the task
      *
      * @param isDone boolean value to set to
      */
@@ -79,35 +61,27 @@ public class Task {
         this.isDone = isDone;
     }
 
-    /**
-     * Returns "X" if done, else " "
-     *
-     * @return "X" if done, else " "
-     */
-    public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
-    }
-
     @Override
     public String toString() {
         return String.format("[%s][%s] %s", classIcon, getStatusIcon(), description);
     }
 
-    public String toString(Parser p) {
+    /**
+     * The string representation of a task. Any dates are modified by the Parser
+     *
+     * @param parser to reformat dates
+     * @return String representation of Task
+     */
+    public String toString(Parser parser) {
         return String.format("[%s][%s] %s", classIcon, getStatusIcon(), description);
     }
 
     /**
-     * Converting the task to String for writing to the logfile
+     * Returns a character to show if task is done.
      *
-     * @param p
-     * @return String that can be read in logfile
+     * @return "X" if done, else " "
      */
-    public String toLog(Parser p) {
-        return toString();
-    }
-
-    public String getDescription() {
-        return this.description;
+    private String getStatusIcon() {
+        return (isDone ? "X" : " "); // mark done task with X
     }
 }
