@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Ui {
 
     private Scanner scanner;
-    private StringBuilder msg;
+    private StringBuilder message;
     private boolean doPromptUserInput;
 
     // commonly-displayed elements
@@ -20,7 +20,7 @@ public class Ui {
      */
     public Ui() {
         this.scanner = new Scanner(System.in);
-        this.msg = new StringBuilder();
+        this.message = new StringBuilder();
         this.doPromptUserInput = true;
     }
 
@@ -36,7 +36,7 @@ public class Ui {
      * Prints the stored message to the user.
      */
     public void displayMessage() {
-        Ui.prettyPrint(this.msg.toString());
+        Ui.prettyPrint(this.message.toString());
         this.clearMessage();
         if (this.doPromptUserInput) {
             System.out.print("> ");
@@ -47,7 +47,7 @@ public class Ui {
 
     /** Clears the stored message. */
     public void clearMessage() {
-        this.msg.setLength(0);
+        this.message.setLength(0);
     }
 
     /**
@@ -56,8 +56,8 @@ public class Ui {
      * @param toAdd The string to be appended to the stored message.
      */
     public void addToMessage(String toAdd) {
-        this.msg.append(toAdd);
-        this.msg.append(NEWL);
+        this.message.append(toAdd);
+        this.message.append(NEWL);
     }
 
     /**
