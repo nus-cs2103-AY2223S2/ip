@@ -11,7 +11,7 @@ public class Event extends Task {
     private String dueDateTime;
 
     /**
-     * Constructor for the Event class
+     * Constructor for creating an Event task stored in the storage
      *
      * @param description task's desc
      * @param from starting date and time of event
@@ -26,6 +26,14 @@ public class Event extends Task {
         this.dueDateTime = to;
     }
 
+    /**
+     * Constructor for creating a new Event task
+     *
+     * @param description task's desc
+     * @param from starting date and time of event
+     * @param to ending date and time of event
+     * @throws InvalidDateTimeException If the dateTime input is invalid
+     */
     public Event(String description, String from, String to) throws InvalidDateTimeException {
         super(description, false, "E");
 

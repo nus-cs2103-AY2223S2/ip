@@ -1,6 +1,5 @@
 package duke.helper;
 
-import java.io.File;
 import java.io.IOException;
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
@@ -24,6 +23,13 @@ public class Parser {
     private Ui ui;
     private FileSystem fileSystem;
 
+    /**
+     * Constructor for Parser class
+     *
+     * @param tasks list of all tasks
+     * @param ui class that handles user interaction
+     * @param fileSystem class that stores the tasks
+     */
     public Parser(TaskList tasks, Ui ui, FileSystem fileSystem) {
         this.tasks = tasks;
         this.ui = ui;
@@ -86,7 +92,7 @@ public class Parser {
             return ui.showExit();
 
         default:
-        throw new InvalidTaskException();
+            throw new InvalidTaskException();
         }
     }
 

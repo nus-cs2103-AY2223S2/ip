@@ -5,12 +5,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import duke.exception.InvalidDateTimeException;
-import duke.helper.Parser;
 import duke.helper.TaskList;
 import duke.task.Deadline;
 import duke.task.Event;
