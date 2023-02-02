@@ -3,7 +3,7 @@ package meggy;
 /** Class that stores all customizable data statically. Works like a 'resource pack' */
 public final class Resource {
     /** Prefix of all error messages. */
-    public static final String ERR_BASE = " OOPS!!! ";
+    public static final String ERR_BASE = "OOPS!!! ";
     /** Error message if no argument is provided to a command that needs argument(s). */
     public static final String ERR_NO_ARGS = "Description of this command cannot be empty.\n";
     /** Error message if an error prevents writing to a file. */
@@ -39,31 +39,27 @@ public final class Resource {
     /** 'End time' keyword of 'event' command. */
     public static final String KW_END = "to";
     /** Notification message after 'todo/deadline/event' command. */
-    public static final String NOTIF_ADD = " Got it. Added this task:\n";
+    public static final String NOTIF_ADD = "Got it. Added this task:\n";
     /** Notification message after 'list' command. */
-    public static final String NOTIF_LIST = " Here are the tasks in your list:\n";
+    public static final String NOTIF_LIST = "Here are the tasks in your list:\n";
     /** Notification message after 'mark' command. */
-    public static final String NOTIF_MARK = " Booyah! Marked this task as done:\n";
+    public static final String NOTIF_MARK = "Booyah! Marked this task as done:\n";
     /** Notification message after 'unmark' command. */
-    public static final String NOTIF_UNMK = " OK. Marked this task as not done:\n";
+    public static final String NOTIF_UNMK = "OK. Marked this task as not done:\n";
     /** Notification message after syntax error. */
-    public static final String NOTIF_USAGE = " Usage: ";
+    public static final String NOTIF_USAGE = "Usage: ";
     /** Notification message after 'delete' command. */
-    public static final String NOTIF_DEL = " OK. Removed this task:\n";
+    public static final String NOTIF_DEL = "OK. Removed this task:\n";
     /** Notification message after 'find' command. */
-    public static final String NOTIF_FIND = " Here are the matching tasks in your list:\n";
+    public static final String NOTIF_FIND = "Here are the matching tasks in your list:\n";
     /** Front page wallpaper. */
     public static final String MEGGY_LOGO = " __  __\n|  \\/  |\n| \\  / | ___  __ _  __ _ _   _\n| |\\/| |/ _ \\/ _` |"
             + "/ _` | | | |\n| |  | |  __/ (_| | (_| | |_| |\n|_|  |_|\\___|\\__, |\\__, |\\__, |\n              __/ | "
             + "__/ | __/ |\n             |___/ |___/ |___/\n";
-    /** Message header. */
-    public static final String MSG_HD = "------------------------------------------------------------\n";
-    /** Message tail. */
-    public static final String MSG_TL = MSG_HD + "\n>";
     /** Front page greetings. */
-    public static final String GREETINGS = " Wommy! Get REKT by the upcoming star of Inkopolis, Meggy!\n";
+    public static final String GREETINGS = "Wommy! Get REKT by the upcoming star of Inkopolis, Meggy!\n";
     /** Notification message after 'bye' command. */
-    public static final String FAREWELL = " OK gotta go play more Turf Wars. Have a nice day!\n";
+    public static final String FAREWELL = "OK gotta go play more Turf Wars. Have a nice day!\n";
     /** Icon for tasks marked 'done'. */
     public static final char DONE_MK = 'X';
 
@@ -86,7 +82,7 @@ public final class Resource {
      * @return Message about task list size.
      */
     public static String nTaskFmt(int nTask) {
-        return " Now you have " + nTask + " task(s) in the list.\n";
+        return "Now you have " + nTask + " task(s) in the list.\n";
     }
 
     /**
