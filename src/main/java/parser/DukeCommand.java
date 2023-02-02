@@ -1,3 +1,6 @@
+package parser;
+
+
 public enum DukeCommand {
     BYE("bye"), MARK("mark"), UNMARK("unmark"), LIST("list"), TODO("todo"), DEADLINE(
             "deadline"), EVENT("event");

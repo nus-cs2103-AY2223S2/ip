@@ -1,6 +1,10 @@
 package tasks;
 
-public class TaskList {
+import java.io.Serializable;
+import storage.Storage;
+
+public class TaskList implements Serializable {
+    private static final long serialVersionUID = 8098680977751428278L;
     private int numTasks = 0;
     private Task[] tasksArray = new Task[100];
 
@@ -22,15 +26,21 @@ public class TaskList {
     public void addTask(Task task) {
         this.tasksArray[numTasks] = task;
         numTasks++;
+        // new Storage().writeTaskList(this);
+        Storage.writeTaskList(this);
     }
 
     public String markTask(int taskIndex) {
         this.tasksArray[taskIndex - 1].mark();
+        // new Storage().writeTaskList(this);
+        Storage.writeTaskList(this);
         return this.tasksArray[taskIndex - 1].toString();
     }
 
     public String unmarkTask(int taskIndex) {
         this.tasksArray[taskIndex - 1].unmark();
+        // new Storage().writeTaskList(this);
+        Storage.writeTaskList(this);
         return this.tasksArray[taskIndex - 1].toString();
     }
 }

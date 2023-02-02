@@ -1,6 +1,9 @@
 package tasks;
 
-public class Task {
+import java.io.Serializable;
+
+public class Task implements Serializable {
+    private static final long serialVersionUID = 4048021127880559361L;
     boolean isDone = false;
     String description;
 

@@ -1,6 +1,7 @@
 package tasks;
 
 public class Event extends Task {
+    private static final long serialVersionUID = 7664438936982546960L;
     String from;
     String to;
 
