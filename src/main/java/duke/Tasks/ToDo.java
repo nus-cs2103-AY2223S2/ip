@@ -1,4 +1,4 @@
-package duke.Tasks;
+package duke.tasks;
 
 /**
  * The class representing a ToDo task
@@ -8,16 +8,14 @@ public class ToDo extends Task {
 
     /**
      * The constructor to initialise a ToDo task object with the given description.
-     * 
      * @param desc Description of the task.
      */
     public ToDo(String desc) {
         super(desc);
     }
-    
+
     /**
      * User friendly guide to help users in case of InvalidCommandException
-     * 
      * @return String format of a valid ToDo command.
      */
     public static String showFormat() {
@@ -27,6 +25,7 @@ public class ToDo extends Task {
     /**
      * User friendly interpretation of ToDo task object.
      * Displays Task type, isDone status and description.
+     * @return String representation of ToDo task.
      */
     @Override
     public String toString() {

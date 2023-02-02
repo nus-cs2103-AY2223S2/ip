@@ -1,23 +1,20 @@
 package duke;
 
-import duke.DukeException.InvalidCommandException;
-import duke.Tasks.TaskList;
+import java.io.EOFException;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+import duke.exception.InvalidCommandException;
+import duke.tasks.TaskList;
 import duke.utils.DukeIo;
 import duke.utils.MyDuke;
 import duke.utils.Parser;
 import duke.utils.Storage;
 
-import java.io.IOException;
-import java.io.EOFException;
-import java.io.FileNotFoundException;
-
-/** 
+/**
  * The main class to run the Duke To-do application.
- * 
  */
-
 public class Duke {
-
     /** Initialises the runner MyDuke */
     private static MyDuke duke = new MyDuke();
     /** Initialises DukeIO to handle user inputs and outputs */
@@ -33,17 +30,14 @@ public class Duke {
      * The Main method that starts Duke.
      * Upon boot, TaskList is loaded form save file.
      * Outputs "Nothing to Load" if save file does not exist.
-     * 
      * @param args The command line arguments. Currently, no arguments accepted.
-     * @throws InvalidCommandException
-     * @throws IOException
-     * @throws ClassNotFoundException
+     * @throws InvalidCommandException Occurs when user enters an InvalidCommand.
+     * @throws IOException Runtime Exception due to issues with standadrd input and/or standard output.
+     * @throws ClassNotFoundException Occurs when Task class is not loaded by Java.
      */
-    public static void main(String[] args) 
+    public static void main(String[] args)
             throws InvalidCommandException, IOException, ClassNotFoundException {
-        
         duke.init();
-
         try {
             taskList.loadFrom(storage.load());
         } catch (FileNotFoundException p) {
@@ -53,19 +47,15 @@ public class Duke {
             // save file is corrupted or does not work
             dukeIo.echoMessage("Unable to load from save file.");
         }
-
-        runCommands();        
+        runCommands();
     }
 
     /**
      * Restricted method that accepts user inputs until the application is quit.
      * Saves TaskList to a .txt file upon quit.
-     * 
-     * @throws InvalidCommandException
-     * @throws IOException
+     * @throws InvalidCommandException Occurs when user enters an unrecognised command.
      */
-    private static void runCommands() 
-            throws InvalidCommandException, IOException {
+    private static void runCommands() throws InvalidCommandException {
         boolean isBye = false;
         dukeIo.showPrompt();
         while (!isBye) {
@@ -79,23 +69,21 @@ public class Duke {
 
     /**
      * Returns true if "bye" command is entered.
-     * 
-     * @param tokens
-     * @param taskList
+     * @param tokens tokens entered into the Command Line Interface
+     * @param taskList List of tasks which commands are operated on.
      * @return true if user inputs "bye"
      * @throws InvalidCommandException
      */
-    private static boolean handle(String[] tokens, TaskList taskList) 
-        throws InvalidCommandException, IOException {
+    private static boolean handle(String[] tokens, TaskList taskList) throws InvalidCommandException {
         String cmd = tokens[0];
         // Allows user to press "Enter" continuously
-        if (cmd.length() == 0) {  
-            return false;    
-        } else if (cmd.equals("bye")) {  
-            duke.quit(); 
-            return true; 
-        } else {   
-            duke.exec(tokens, taskList); 
+        if (cmd.length() == 0) {
+            return false;
+        } else if (cmd.equals("bye")) {
+            duke.quit();
+            return true;
+        } else {
+            duke.exec(tokens, taskList);
         }
         return false;
     }

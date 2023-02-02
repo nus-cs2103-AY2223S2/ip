@@ -1,4 +1,4 @@
-package duke.Tasks;
+package duke.tasks;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -8,24 +8,21 @@ import java.time.format.DateTimeParseException;
  * The class representing an Event task.
  */
 public class Event extends Task {
+    /** Format of DateTime accepted to create an Event object.  */
+    private static final DateTimeFormatter IN_FORMAT = DateTimeFormatter
+                                                        .ofPattern("dd/MM/yyyy HHmm");
+    /** User friendly format of DateTime which is displayed to the user.  */
+    private static final DateTimeFormatter OUT_FORMAT = DateTimeFormatter
+                                                        .ofPattern("dd LLL, h:mma");
     private static final String FORMAT = "event {task name}"
                                         + "/from {dd/mm/yyyy HHmm}"
                                         + "/to {dd/mm/yyyy HHmm}";
-    private LocalDateTime from;
     private LocalDateTime to;
-
-    /** Format of DateTime accepted to create an Event object.  */
-    private static final DateTimeFormatter IN_FORMAT = DateTimeFormatter.
-                                                        ofPattern("dd/MM/yyyy HHmm");
-    /** User friendly format of DateTime which is displayed to the user.  */
-    private static final DateTimeFormatter OUT_FORMAT = DateTimeFormatter.
-                                                        ofPattern("dd LLL, h:mma");
-
+    private LocalDateTime from;
 
     /**
      * The constructor that initialises an Event task.
      * Event task is created with a given description, start time and end time.
-     * 
      * @param desc Description of the Event task.
      * @param from Start DateTime of the Event task.
      * @param to End DateTime of the Event task.
@@ -35,7 +32,6 @@ public class Event extends Task {
         setFrom(from);
         setTo(to);
     }
-
 
     private void setFrom(String from) {
         try {
@@ -76,5 +72,4 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.toString() + this.duration();
     }
-    
 }

@@ -17,5 +17,4 @@ public class Parser {
         this.tokens = Parser.sc.nextLine().split(" ");
         return this.tokens;
     }
-    
 }

@@ -1,22 +1,23 @@
 package duke;
 
-import org.junit.jupiter.api.Test;
-
-import duke.Tasks.Deadline;
-import duke.Tasks.Event;
-import duke.Tasks.Task;
-import duke.Tasks.TaskList;
-import duke.Tasks.ToDo;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.tasks.ToDo;
+
+
 
 /**
  * Tests all public methods in TaskList
  */
-
 public class TaskListTest {
     /**
      * Tests the creation of an empty task list with constructor.
@@ -24,9 +25,9 @@ public class TaskListTest {
     @Test
     public void nullTaskLsitTest() {
         TaskList emptyTaskList = TaskList.ofNull();
-        ArrayList<Task> actualTaskList = emptyTaskList.getAllTasks();
+        ArrayList<Task> actualTaskList = TaskList.getAllTasks();
         ArrayList<Task> expectedTaskList = new ArrayList<>();
-        assertEquals(expectedTaskList, actualTaskList);        
+        assertEquals(expectedTaskList, actualTaskList);
     }
 
     /**
@@ -41,7 +42,7 @@ public class TaskListTest {
 
         testedTaskList.loadFrom(Arrays.asList(t1, d1, e1));
 
-        assertEquals(3, testedTaskList.getTaskCount());
+        assertEquals(3, TaskList.getTaskCount());
         assertEquals(t1, testedTaskList.getTask(0));
         assertEquals(d1, testedTaskList.getTask(1));
         assertEquals(e1 , testedTaskList.getTask(2));
@@ -57,7 +58,7 @@ public class TaskListTest {
         Deadline d1 = new Deadline("valid deadline", "23/07/2023 1200");
         Event e1 = new Event("valid Event", "02/03/2023 1100", "02/03/1300");
 
-        assertEquals(0, testedTaskList.getTaskCount());
+        assertEquals(0, TaskList.getTaskCount());
         testedTaskList.addTask(t1);
         assertEquals(t1, testedTaskList.getTask(0));
         testedTaskList.addTask(d1);
@@ -79,7 +80,6 @@ public class TaskListTest {
         testedTaskList.addTask(d1);
         testedTaskList.addTask(e1);
         testedTaskList.deleteTask(0);
-
-        assertEquals(false, TaskList.allTasks.contains(t1));
-    }    
+        assertEquals(false, TaskList.getAllTasks().contains(t1));
+    }
 }

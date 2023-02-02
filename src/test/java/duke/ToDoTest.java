@@ -1,16 +1,17 @@
 package duke;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import duke.Tasks.ToDo;
+import duke.tasks.ToDo;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Tests all public methods to create a ToDo task object
  */
-
 public class ToDoTest {
+    //CHECKSTYLE.OFF: SingleSpaceSeparator
     /**
      * Tests a valid ToDo object creation with public constructor
      */
@@ -21,4 +22,5 @@ public class ToDoTest {
         String expectedUi =  "[T][ ] val";
         assertEquals(expectedUi, actualUi);
     }
+    //CHECKSTYLE.ON: SingleSpaceSeparator
 }

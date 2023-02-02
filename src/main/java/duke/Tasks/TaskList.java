@@ -1,8 +1,8 @@
-package duke.Tasks;
+package duke.tasks;
 
-import java.util.stream.Collectors;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import duke.utils.DukeIo;
 
@@ -10,13 +10,13 @@ import duke.utils.DukeIo;
  * Iterator class that maintains a List of all tasks
  */
 public class TaskList {
-    public static List<Task> allTasks;
-    public static int taskCount = 0;
+    private static List<Task> allTasks;
+    private static int taskCount = 0;
     private static DukeIo dukeIo = new DukeIo();
 
     /**
      * Restricted constructor that initalises the TaskList object.
-     * @param tasks
+     * @param tasks List of tasks.
      */
     private TaskList(List<Task> tasks) {
         allTasks = tasks;
@@ -25,6 +25,7 @@ public class TaskList {
 
     /**
      * Factory method to create a TaskList object with emty List of tasks.
+     * @return An empty TaskList.
      */
     public static TaskList ofNull() {
         return new TaskList(new ArrayList<Task>());
@@ -32,8 +33,7 @@ public class TaskList {
 
     /**
      * Initialises static variables from pre-existing list of tasks.
-     * 
-     * @param tasks
+     * @param tasks List of tasks to be loaded from.
      */
     public void loadFrom(List<Task> tasks) {
         allTasks = tasks;
@@ -42,47 +42,42 @@ public class TaskList {
 
     /**
      * Indicates the number of existing tasks in the TaskList
-     * 
      * @return taskCount int number of tasks
      */
-    public int getTaskCount() {
+    public static int getTaskCount() {
         return taskCount;
     }
 
     /**
      * Retreives the task from the TaskList given the index of the task.
-     * 
      * @param taskIndex
      * @return Task object
      */
     public Task getTask(int taskIndex) {
         return allTasks.get(taskIndex);
-    } 
+    }
 
     /**
      * Retrieves all tasks in the TaskList.
-     * 
      * @return ArrayList of tasks
      */
-    public ArrayList<Task> getAllTasks() {
+    public static ArrayList<Task> getAllTasks() {
         return new ArrayList<>(allTasks);
     }
 
     /**
      * Adds a task to TaskList.
      * Increments the number of task count by 1.
-     * 
      * @param task Task object added to the TaskList.
      */
     public void addTask(Task task) {
         allTasks.add(task);
         taskCount++;
-    }    
+    }
 
     /**
      * Removes a task from the TaskList given the index of the task.
      * Decrements the number of task count by 1.
-     * 
      * @param taskIndex int index of taks to be deleted.
      */
     public void deleteTask(int taskIndex) {
@@ -92,9 +87,7 @@ public class TaskList {
 
     /**
      * Filters all tasks to display a list of tasks containing user input keywords.
-     * 
      * @param searchString Keyword to search
-     * @return String Displays the filtered tasks
      */
     public void showFilteredTasks(String searchString) {
         // early return if there are no tasks initially
@@ -102,11 +95,9 @@ public class TaskList {
             dukeIo.notifyZeroHits();
             return;
         }
-
         List<Task> searchResults = allTasks.stream()
                                             .filter(t -> t.toString().contains(searchString))
-                                            .collect(Collectors.toList());  
-
+                                            .collect(Collectors.toList());
         if (searchResults.size() == 0) {
             dukeIo.notifyZeroHits();
             return;
