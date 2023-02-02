@@ -25,10 +25,10 @@ import duke.ui.Ui;
 public class Storage {
     //CHECKSTYLE.OFF: Checker
     /** Absolute file path where the folder containing the data file is stored in. */
-    private String data_file_folder_path;
+    private String dataFileFolderPath;
 
     /** Absolute file path where the data file should be stored in. **/
-    private String data_file_path;
+    private String dataFilePath;
     //CHECKSTYLE.ON: Checker
 
     /**
@@ -38,8 +38,8 @@ public class Storage {
      * @param fileName Name of the data file to be created.
      */
     public Storage(String folderName, String fileName) {
-        data_file_folder_path = Paths.get(System.getProperty("user.dir"), folderName).toString();
-        data_file_path = Paths.get(System.getProperty("user.dir"), folderName, fileName).toString();
+        dataFileFolderPath = Paths.get(System.getProperty("user.dir"), folderName).toString();
+        dataFilePath = Paths.get(System.getProperty("user.dir"), folderName, fileName).toString();
     }
 
     /**
@@ -49,7 +49,7 @@ public class Storage {
      */
     public boolean prepareFile() {
         //Make the directory
-        File directory = new File(data_file_folder_path);
+        File directory = new File(dataFileFolderPath);
         if (!directory.exists()) {
             boolean makeDirectoryStatus = directory.mkdir();
             if (!makeDirectoryStatus) {
@@ -61,7 +61,7 @@ public class Storage {
         }
 
         //Create the file
-        File dataFile = new File(data_file_path);
+        File dataFile = new File(dataFilePath);
         try {
             dataFile.createNewFile();
         } catch (IOException ioException) {
@@ -83,7 +83,7 @@ public class Storage {
      */
     public boolean loadTasksFromFile(TaskList tasks) {
         try {
-            File dataFile = new File(data_file_path);
+            File dataFile = new File(dataFilePath);
             Scanner s = new Scanner(dataFile);
 
             //Iterate through line by line
@@ -167,12 +167,12 @@ public class Storage {
      */
     public boolean saveTasks(TaskList tasks) {
         try {
-            File dataFile = new File(data_file_path);
-            FileWriter fw = new FileWriter(data_file_path);
+            File dataFile = new File(dataFilePath);
+            FileWriter fw = new FileWriter(dataFilePath);
             //Reset content of file
             fw.write("");
             fw.flush();
-            fw = new FileWriter(data_file_path, true);
+            fw = new FileWriter(dataFilePath, true);
             //Append new content into file
             for (int i = 0; i < tasks.getSizeOfTaskList(); i = i + 1) {
                 Task currentTask = tasks.getTask(i);

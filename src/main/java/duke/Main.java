@@ -26,7 +26,7 @@ public class Main extends Application {
 
             stage.setTitle("Boo");
             stage.setResizable(false);
-            stage.setMinHeight(700.0);
+            stage.setMinHeight(600.0);
             stage.setMinWidth(800.0);
 
         } catch (IOException e) {

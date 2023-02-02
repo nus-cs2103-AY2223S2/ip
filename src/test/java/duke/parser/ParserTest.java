@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 import duke.tasklist.TaskListStub;
-import duke.ui.Ui;
 
 public class ParserTest {
     @Test

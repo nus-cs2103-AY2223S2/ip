@@ -8,7 +8,7 @@ public class TaskListStub extends TaskList {
 
 
     /**
-     * Return the value 3.
+     * Returns the value 3.
      *
      * @return 3.
      */
