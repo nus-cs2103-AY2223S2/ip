@@ -6,7 +6,7 @@ package duke.task;
  * extended by other classes to implement additional features.
  */
 public abstract class Task {
-    private boolean completed;
+    private boolean isCompleted;
     private String description;
 
     /**
@@ -15,7 +15,7 @@ public abstract class Task {
      */
     public Task(String description) {
         this.description = description;
-        this.completed = false;
+        this.isCompleted = false;
     }
 
     /**
@@ -23,7 +23,7 @@ public abstract class Task {
      * @return "X" if task is completed and " " otherwise.
      */
     public String getStatusIcon() {
-        return this.completed ? "X" : " ";
+        return this.isCompleted ? "X" : " ";
     }
 
     /**
@@ -31,7 +31,7 @@ public abstract class Task {
      * @param completed Task status.
      */
     public void setCompleted(boolean completed) {
-        this.completed = completed;
+        this.isCompleted = completed;
     }
 
     /**
@@ -39,7 +39,7 @@ public abstract class Task {
      * @return String containing data in Task.
      */
     public String toSaveFormat() {
-        String status = completed ? "1" : "0";
+        String status = isCompleted ? "1" : "0";
         return status + "||" + description;
     }
 

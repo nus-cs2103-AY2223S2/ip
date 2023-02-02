@@ -1,8 +1,9 @@
 package duke.task;
 
-import java.time.LocalDateTime;
 import static duke.utils.FormatHelper.INPUTFORMAT;
 import static duke.utils.FormatHelper.PRINTFORMAT;
+
+import java.time.LocalDateTime;
 
 /**
  * Task with a deadline.

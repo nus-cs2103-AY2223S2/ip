@@ -1,9 +1,9 @@
 package duke.task;
 
-import java.time.LocalDateTime;
-
-import static duke.utils.FormatHelper.PRINTFORMAT;
 import static duke.utils.FormatHelper.INPUTFORMAT;
+import static duke.utils.FormatHelper.PRINTFORMAT;
+
+import java.time.LocalDateTime;
 
 /**
  * Task with to date and a from date.
@@ -18,7 +18,7 @@ public class Event extends Task {
      * @param from Start date and time of the Event.
      * @param to End date and time of the Event.
      */
-    public Event (String description, LocalDateTime from, LocalDateTime to) {
+    public Event(String description, LocalDateTime from, LocalDateTime to) {
         super(description);
         this.from = from;
         this.to = to;

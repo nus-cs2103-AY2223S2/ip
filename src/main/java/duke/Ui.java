@@ -1,9 +1,9 @@
 package duke;
 
-import duke.utils.FormatHelper;
-
 import java.io.PrintStream;
 import java.util.Scanner;
+
+import duke.utils.FormatHelper;
 
 /**
  * Class for methods relating to user interface input and output.

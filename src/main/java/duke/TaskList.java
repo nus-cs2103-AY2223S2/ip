@@ -1,13 +1,12 @@
 package duke;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 
 /**
  * A list of tasks that a user can add, modify, view and delete.
@@ -19,7 +18,7 @@ public class TaskList {
         this.tasks = new ArrayList<Task>();
     }
 
-    public TaskList (ArrayList<Task> existingTasks) {
+    public TaskList(ArrayList<Task> existingTasks) {
         this.tasks = existingTasks;
     }
 
