@@ -1,14 +1,18 @@
 package duke.task;
 
+import duke.exception.InvalidEventDateTimeException;
+
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Represents Event class
  */
 public class Event extends Task {
-    private LocalDate start;
-    private LocalDate end;
+    private LocalDateTime start;
+    private LocalDateTime end;
 
     /**
      * Initializes a new Event object
@@ -18,10 +22,14 @@ public class Event extends Task {
      * @param start starting day of event
      * @param end ending day of event
      */
-    public Event(String type, String detail, boolean marked, String start, String end) {
+    public Event(String type, String detail, boolean marked, String start, String end) throws InvalidEventDateTimeException {
         super(type, detail, marked);
-        this.start = LocalDate.parse(start);
-        this.end = LocalDate.parse(end);
+        try {
+            this.start = LocalDateTime.parse(start);
+            this.end = LocalDateTime.parse(end);
+        } catch (DateTimeParseException e) {
+            throw new InvalidEventDateTimeException();
+        }
     }
 
     /**
@@ -31,10 +39,14 @@ public class Event extends Task {
      * @param start starting day of event
      * @param end ending day of event
      */
-    public Event(String type, String detail, String start, String end) {
+    public Event(String type, String detail, String start, String end) throws InvalidEventDateTimeException {
         super(type, detail);
-        this.start = LocalDate.parse(start);
-        this.end = LocalDate.parse(end);
+        try {
+            this.start = LocalDateTime.parse(start);
+            this.end = LocalDateTime.parse(end);
+        } catch (DateTimeParseException e) {
+            throw new InvalidEventDateTimeException();
+        }
     }
 
 
@@ -48,15 +60,15 @@ public class Event extends Task {
         if (marked) {
             return "[E][X] " + super.detail + " (from: "
                     + this.start.format(DateTimeFormatter
-                    .ofPattern("MMM dd yyyy"))
+                    .ofPattern("MMM dd yyyy hh:mm a"))
                     + " to: " + this.end.format(DateTimeFormatter
-                    .ofPattern("MMM dd yyyy")) + ")";
+                    .ofPattern("MMM dd yyyy hh:mm a")) + ")";
         } else {
             return "[E][ ] " + super.detail + " (from: "
                     + this.start.format(DateTimeFormatter
-                    .ofPattern("MMM dd yyyy"))
+                    .ofPattern("MMM dd yyyy hh:mm a"))
                     + " to: " + this.end.format(DateTimeFormatter
-                    .ofPattern("MMM dd yyyy")) + ")";
+                    .ofPattern("MMM dd yyyy hh:mm a")) + ")";
         }
     }
 }

@@ -1,0 +1,9 @@
+[T][X] cleanthe house 
+[T][X] cleanthe house 
+[T][ ] clean the beach 
+[E][X] clean house  (from: Oct 10 2020 11:00 AM to: Oct 10 2020 12:00 PM)
+[T][ ] go 
+[T][ ] go to bed 
+[T][ ] wash your face 
+[T][ ] go Hanoi 
+[T][ ] buy food 

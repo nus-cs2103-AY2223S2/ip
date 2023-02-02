@@ -1,5 +1,11 @@
 package duke.command;
+
+import duke.exception.DukeException;
+import duke.exception.InvalidEventDateTimeException;
+import duke.exception.InvalidIndexException;
 import duke.exception.MissingContentException;
+import duke.task.Deadline;
+import duke.task.Task;
 
 /**
  * Makes sense of what users say
@@ -11,14 +17,46 @@ public class Parser {
      * @param arr array of original array
      * @return full string command for users
      */
-    public String toDo(String[] arr) {
+    public static String toDo(String[] arr) {
         String remaining = "";
-        for (int j = 1; j < arr.length; j++) {
-            //remaining += " ";
-            remaining += arr[j];
-            remaining += " ";
+        try {
+            try {
+                remaining = arr[1];
+                remaining += " ";
+                for (int j = 2; j < arr.length; j++) {
+                    remaining += arr[j];
+                    remaining += " ";
+                }
+            } catch (IndexOutOfBoundsException | NullPointerException e) {
+                throw new MissingContentException();
+            }
+        } catch (MissingContentException e) {
+            System.out.println(e.getMessage());
         }
         return remaining;
+    }
+
+    /**
+     * Gets index at which task should perform on task list
+     * @param listOfAction original task list
+     * @param command user's command input
+     * @return index of tasklist
+     * @throws MissingContentException if command does not specify index
+     * @throws InvalidIndexException if task list does not have such index
+     */
+    public static int getTaskIndex(TaskList listOfAction, String[] command) throws MissingContentException, InvalidIndexException {
+        int taskIndex;
+        try {
+            taskIndex = Integer.parseInt(command[1]);
+        } catch (NullPointerException e) {
+            throw new MissingContentException();
+        }
+        if (!listOfAction.checkValidIndex(taskIndex)) {
+            throw new InvalidIndexException();
+        } else if (taskIndex < 0) {
+            throw new InvalidIndexException();
+        }
+        return taskIndex;
     }
 
     /**
@@ -27,7 +65,7 @@ public class Parser {
      *
      * @param arr an array of the input.
      * @return the String detail.
-     * @throws duke.MissingContentException if arr is empty.
+     * @throws MissingContentException if arr is empty.
      */
     public String deadlineDetail(String[] arr) throws MissingContentException {
         String detail = "";
@@ -51,7 +89,7 @@ public class Parser {
      *
      * @param arr an array of the input.
      * @return the index of deadline time.
-     * @throws duke.MissingContentException if arr is empty.
+     * @throws MissingContentException if arr is empty.
      */
     public int deadlineTimeIndex(String[] arr) throws MissingContentException {
         if (arr.length <= 1) {
@@ -71,12 +109,38 @@ public class Parser {
     }
 
     /**
+     * Gets full deadline detail and date from user command
+     * @param command user input
+     * @return deadline in full detail and date
+     */
+    public String getDeadlineFull(String[] command) {
+        String remaining = "";
+        try {
+            String detail = this.deadlineDetail(command);
+            int pointer = this.deadlineTimeIndex(command);
+            for (int j = pointer; j < command.length; j++) {
+                if (String.valueOf(command[j]).equals("/")) {
+                    remaining += "-";
+                } else {
+                    remaining += command[j];
+                }
+                if (j != command.length - 1) {
+                    remaining += " ";
+                }
+            }
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+        }
+        return remaining;
+    }
+
+    /**
      * Returns index of the input array where indicates starting time of the event.
      * Given that the arr is not empty.
      *
      * @param arr an array of the input.
      * @return the index of starting time.
-     * @throws duke.MissingContentException if arr is empty.
+     * @throws MissingContentException if arr is empty.
      */
     public int getEventStartTimeIndex(String[] arr) throws MissingContentException {
         int startIndex = 0;
@@ -98,7 +162,7 @@ public class Parser {
      *
      * @param arr an array of the input.
      * @return event detail.
-     * @throws duke.MissingContentException if arr is empty.
+     * @throws MissingContentException if arr is empty.
      */
     public String getEventDetail(String[] arr) throws MissingContentException {
         if (arr.length <= 1) {
@@ -147,7 +211,7 @@ public class Parser {
      * @return an array consists of event start time and event ent time specifically in String.
      */
     public String[] getEventTime(String[] arr, int startIndex, int endIndex) {
-        String[] eventTime = new String[2];
+        String[] eventTime = new String[4];
         String start = "";
         String end = "";
         for (int j = startIndex; j < endIndex - 1; j++) {
@@ -170,8 +234,28 @@ public class Parser {
                 end += " ";
             }
         }
-        eventTime[0] = start;
-        eventTime[1] = end;
+        eventTime[0] = Parser.getTime(start);
+        eventTime[1] = Parser.getTime(end);
         return eventTime;
+    }
+
+    private static String getTime(String s) throws IndexOutOfBoundsException {
+        //String res = "";
+        //try {
+            String track = String.valueOf(s.charAt(0));
+            int tracker = 0;
+            while (!track.equals(" ")) {
+                tracker++;
+                track = String.valueOf(s.charAt(tracker));
+            }
+            String date = String.valueOf(s.substring(0, tracker));
+            String time = String.valueOf(s.substring(tracker + 1));
+            String timeFormatted = "";
+            for (int i = 0; i < time.length(); i += 2) {
+                timeFormatted += String.valueOf(time.substring(i, i + 2));
+                timeFormatted += ":";
+            }
+            timeFormatted += "00";
+        return date + "T" + timeFormatted;
     }
 }

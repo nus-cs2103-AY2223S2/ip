@@ -1,7 +1,10 @@
 package duke.task;
 
+import duke.exception.InvalidDeadlineDateException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Represents deadlines
@@ -27,9 +30,13 @@ public class Deadline extends Task {
      * @param detail of deadline
      * @param day of deadline
      */
-    public Deadline(String type, String detail, String day) {
+    public Deadline(String type, String detail, String day) throws InvalidDeadlineDateException {
         super(type, detail);
-        this.day = LocalDate.parse(day);
+        try {
+            this.day = LocalDate.parse(day);
+        } catch (DateTimeParseException e) {
+            throw new InvalidDeadlineDateException();
+        }
     }
 
     /**
