@@ -7,16 +7,12 @@ import duke.exception.DukeException;
 import duke.storage.FileStorage;
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.CommandLineUi;
 import duke.ui.Ui;
 
 /**
  * Duke chat bot.
  */
 public class Duke {
-    private static final String SAVE_DATA_FILE_PATH = "saveData.txt";
-    private static final String SAVE_DATA_DIR_PATH = "./data";
-
     private Ui ui;
 
     private Storage storage;
@@ -30,36 +26,32 @@ public class Duke {
      *
      * @param saveDataDirPath The directory where the save data file should be located.
      * @param saveDataFilePath The save data file name.
+     * @param ui The user interface to display responses.
      */
-    public Duke(String saveDataDirPath, String saveDataFilePath) {
-        ui = new CommandLineUi();
-        storage = new FileStorage(saveDataDirPath, saveDataFilePath);
-        taskList = new TaskList(storage.load());
-        commandParser = new CommandParser();
+    public Duke(String saveDataDirPath, String saveDataFilePath, Ui ui) {
+        this.ui = ui;
+        this.storage = new FileStorage(saveDataDirPath, saveDataFilePath);
+        this.taskList = new TaskList(storage.load());
+        this.commandParser = new CommandParser();
     }
 
     /**
-     * Runs the chatbot by listening to input and executing commands.
+     * Start the chatbot.
      */
-    public void run() {
+    public void start() {
         ui.showStartup();
-
-        Scanner scanner = new Scanner(System.in);
-        while (!commandParser.hasUserQuit()) {
-            String input = scanner.nextLine();
-
-            // Try executing command from input
-            try {
-                commandParser.parseInputAndExecuteCommand(input, ui, taskList, storage);
-            } catch (DukeException exception) {
-                ui.showLine();
-                ui.showText(exception.getMessage());
-                ui.showLine();
-            }
-        }
     }
 
-    public static void main(String[] args) {
-        new Duke(SAVE_DATA_DIR_PATH, SAVE_DATA_FILE_PATH).run();
+    /**
+     * Passes input for handling by command parser.
+     */
+    public void handleInput(String input) {
+        try {
+            commandParser.parseInputAndExecuteCommand(input, ui, taskList, storage);
+        } catch (DukeException exception) {
+            ui.showLine();
+            ui.showText(exception.getMessage());
+            ui.showLine();
+        }
     }
 }
