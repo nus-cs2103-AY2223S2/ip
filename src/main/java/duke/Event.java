@@ -1,7 +1,18 @@
 package duke;
+
+/**
+ * A task which lasts for a time period, with a start time and end time.
+ */
 class Event extends Task {
-    public Event(String keyword, String message, Boolean status) {
-        super(keyword, message, status);
+
+    /**
+     * Constructs a new Event.
+     * @param keyword The keyword command to create a new Event task.
+     * @param message The description of the task.
+     * @param completed The completion status of the task.
+     */
+    public Event(String keyword, String message, Boolean completed) {
+        super(keyword, message, completed);
     }
 
     @Override

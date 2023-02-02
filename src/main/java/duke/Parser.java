@@ -1,6 +1,18 @@
 package duke;
 
+
+/**
+ * Makes sense of user input and reacts accordingly.
+ */
 public class Parser {
+
+    /**
+     * Main method for parsing user input.
+     * @param ui The class that interacts with user.
+     * @param tasks The class that stores the task in the current session.
+     * @param storage The class that loads and stores the tasks in the hard drive.
+     * @param userInput The user input.
+     */
     public static void parse(Ui ui, TaskList tasks, Storage storage, String userInput) {
         try {
             String firstWord = userInput.split(" ", 2)[0];

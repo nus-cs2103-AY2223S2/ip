@@ -1,6 +1,6 @@
 package duke;
 /**
- * Encapsulates a description.
+ * Encapsulates a task
  */
 class Task {
     /**
@@ -35,17 +35,24 @@ class Task {
     }
 
     /**
-     * Flips the completed of the description.
+     * Marks the task as uncompleted.
      */
     public void unmark() {
         this.completed = false;
     }
 
+    /**
+     * Marks the task as completed/
+     */
     public void mark() {
         this.completed = true;
     }
 
 
+    /**
+     * Gets the data that describes the task which will be stored in the hard drive.
+     * @return A String that describes how the task is stored in the hard drive.
+     */
     public String getStorageLine() {
         return this.completed ? "1 " + storedData
                               : "0 " + storedData;
