@@ -25,8 +25,8 @@ public class FindCommand extends Command {
      * @param storage Storage object that handles all Storage actions.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         ArrayList<Task> foundTasks = tasks.findTask(this.KEYWORD);
-        ui.showFind(foundTasks);
+        return ui.getFindOutput(foundTasks);
     }
 }

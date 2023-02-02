@@ -57,7 +57,8 @@ public class Parser {
         try {
             action = Action.valueOf(splitInputs[0]);
         } catch (IllegalArgumentException e) {
-            throw new DukeException("☹ I'm sorry, but Fake Duke doesn't know what that means :-(");
+//            return new ListCommand();
+            throw new DukeException("I'm sorry, but Fake Duke doesn't know what that means :-(");
         }
 
         switch (action) {
@@ -127,7 +128,7 @@ public class Parser {
         try {
             taskType = TaskType.valueOf(splitInputs[0]);
         } catch (IllegalArgumentException e) {
-            throw new DukeException("☹ I'm sorry, but Fake Duke doesn't know what that means :-(");
+            throw new DukeException("I'm sorry, but Fake Duke doesn't know what that means :-(");
         }
 
         switch (taskType) {

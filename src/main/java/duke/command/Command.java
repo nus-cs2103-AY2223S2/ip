@@ -11,8 +11,8 @@ import duke.ui.Ui;
 public class Command {
     protected boolean isExit;
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        System.out.println("You did not specify your command.");
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        return "You did not specify your command.";
     }
 
     public boolean isExit() {

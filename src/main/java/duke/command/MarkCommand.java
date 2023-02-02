@@ -24,9 +24,9 @@ public class MarkCommand extends Command {
      * @throws DukeException Throws exception from the methods called in this method.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String taskString = tasks.markTask(this.TASK_INDEX - 1);
         storage.saveTasks(tasks);
-        ui.showMark(taskString);
+        return ui.showMark(taskString);
     }
 }

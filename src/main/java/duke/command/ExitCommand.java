@@ -16,8 +16,8 @@ public class ExitCommand extends Command {
      * @param storage Storage object that handles all Storage actions.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         super.isExit = true;
-        ui.showExit();
+        return ui.getExitOutput();
     }
 }

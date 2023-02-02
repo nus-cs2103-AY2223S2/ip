@@ -15,17 +15,9 @@ import java.util.Scanner;
 public class Ui {
     private final Scanner SCANNER = new Scanner(System.in);
 
-    public String showLine() {
-        return "________________________________________________________________\n";
-    }
-
-    public String readCommand() throws DukeException {
-        String command = "";
-        if (SCANNER.hasNextLine()) {
-            command = SCANNER.nextLine();
-            if (command.contains("~")) {
-                throw new DukeException("Fake Duke doesn't like it when the input has the symbol ~.");
-            }
+    public String readCommand(String command) throws DukeException {
+        if (command.contains("~")) {
+            throw new DukeException("Fake Duke doesn't like it when the input has the symbol ~.");
         }
         return command;
     }
@@ -33,10 +25,8 @@ public class Ui {
     /**
      * Prints out the greeting for Fake Duke.
      */
-    public void showWelcome() {
-       System.out.println(this.showLine()
-                + "Hello!~ I'm the one and only ✨ FAKE DUKE ✨\nWhat can I do for you?\n"
-                + this.showLine());
+    public String showWelcome() {
+       return "Hello!~ I'm the one and only ✨ FAKE DUKE ✨\nWhat can I do for you?\n";
     }
 
     /**
@@ -45,14 +35,9 @@ public class Ui {
      * @param task Task that is added into the task list.
      * @param taskList List of tasks.
      */
-    public void showAdd(Task task, TaskList taskList) {
-        System.out.println(this.showLine()
-                + "Got it. I've added this task:\n"
-                + task.toString()
-                + "\nNow you have "
-                + taskList.getSize()
-                + " tasks in the list.\n"
-                + this.showLine());
+    public String getAddOutput(Task task, TaskList taskList) {
+        return String.format("Got it. I've added this task:\n%s)\nNow you have %d tasks in the list.",
+                task.toString(), taskList.getSize());
     }
 
     /**
@@ -61,14 +46,9 @@ public class Ui {
      * @param taskString Description of task that has been deleted from the list of tasks.
      * @param taskList List of tasks.
      */
-    public void showDelete(String taskString, TaskList taskList) {
-        System.out.println(this.showLine()
-                + "Noted. I've removed this task:\n"
-                + taskString
-                + "\nNow you have "
-                + taskList.getSize()
-                + " tasks in the list.\n"
-                + this.showLine());
+    public String getDeleteOutput(String taskString, TaskList taskList) {
+        return String.format("Noted. I've removed this task:\n%sNow you have %d tasks in the list.",
+                taskString, taskList.getSize());
     }
 
     /**
@@ -76,12 +56,8 @@ public class Ui {
      *
      * @param taskString Task in String that has been marked as done.
      */
-    public void showMark(String taskString) {
-        System.out.println(this.showLine()
-                + "Nice! I've marked this task as done:\n"
-                + taskString
-                + "\n"
-                + this.showLine());
+    public String getMarkOutput(String taskString) {
+        return String.format("Nice! I've marked this task as done:\n%s", taskString);
     }
 
     /**
@@ -89,12 +65,8 @@ public class Ui {
      *
      * @param taskString Task in String that has been unmarked as undone.
      */
-    public void showUnmark(String taskString) {
-        System.out.println(this.showLine()
-                + "OK, I've marked this task as not done yet:\n"
-                + taskString
-                + "\n"
-                + this.showLine());
+    public String getUnmarkOutput(String taskString) {
+        return String.format("OK, I've marked this task as not done yet:\n%s", taskString);
     }
 
     /**
@@ -103,33 +75,20 @@ public class Ui {
      * @param taskList List of tasks.
      * @throws DukeException Throws exception if unable to get task.
      */
-    public void showList(TaskList taskList) throws DukeException {
-        System.out.println(this.showLine()
-                + "Here are the tasks in your list:");
+    public String getListOutput(TaskList taskList) throws DukeException {
+        String str = String.format("Here are the tasks in your list:\n");
         for (int i = 1; i <= taskList.getSize(); i++) {
-            System.out.println(i + "." + taskList.getTask(i - 1).toString());
+            str = String.format("%s%d.%s\n", str, i, taskList.getTask(i - 1).toString());
         }
-        System.out.println(this.showLine());
+        return str;
     }
 
 
     /**
      * Prints an exit message.
      */
-    public void showExit() {
-        System.out.println(this.showLine()
-                + "Hope I have been useful to you.\n"
-                + "See you again soon. Bye!~\n"
-                + this.showLine());
-    }
-
-    /**
-     * Prints error message.
-     *
-     * @param error Error message.
-     */
-    public void showError(String error) {
-        System.out.println(this.showLine() + error + this.showLine());
+    public String getExitOutput() {
+        return "Hope I have been useful to you.\nSee you again soon. Bye!~";
     }
 
     /**
@@ -137,12 +96,12 @@ public class Ui {
      *
      * @param foundTasks Subset list of tasks.
      */
-    public void showFind(ArrayList<Task> foundTasks) {
-        System.out.println(this.showLine() + "Here are the matching tasks in your list:");
+    public String getFindOutput(ArrayList<Task> foundTasks) {
+        String str = String.format("Here are the matching tasks in your list:\n");
         for (int i = 1; i <= foundTasks.size(); i++) {
-            System.out.println(i + "." + foundTasks.get(i - 1));
+            str = String.format("%s%d.%s\n", str, i, foundTasks.get(i - 1));
         }
-        System.out.println(this.showLine());
+        return str;
     }
 
     /**
