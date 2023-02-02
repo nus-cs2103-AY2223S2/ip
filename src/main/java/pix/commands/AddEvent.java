@@ -28,10 +28,10 @@ public class AddEvent extends Command {
      * @param data Data storing the tasks.
      * @param ui Ui object which handles interaction with user.
      */
-    public void execute(MyData data, Ui ui) {
+    public String execute(MyData data, Ui ui) {
         data.setData(event);
         data.saveToFile();
-        ui.add(event.toString(), data.len());
+        return ui.add(event.toString(), data.len());
     }
 }
 

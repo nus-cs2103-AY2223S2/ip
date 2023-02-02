@@ -25,9 +25,9 @@ public class Mark extends Command {
      * @param data Data storing the tasks.
      * @param ui Ui object which handles interaction with user.
      */
-    public void execute(MyData data, Ui ui) {
+    public String execute(MyData data, Ui ui) {
         data.markDone(this.id);
         data.saveToFile();
-        ui.mark(data.getData(this.id));
+        return ui.mark(data.getData(this.id));
     }
 }

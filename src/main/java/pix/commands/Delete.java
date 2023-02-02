@@ -25,10 +25,11 @@ public class Delete extends Command {
      * @param data Data storing the tasks.
      * @param ui Ui object which handles interaction with user.
      */
-    public void execute(MyData data, Ui ui) {
+    public String execute(MyData data, Ui ui) {
         int itemCount = data.len() - 1;
-        ui.delete(data.getData(this.id), itemCount);
+        String deleteStringToDisplay = ui.delete(data.getData(this.id), itemCount);
         data.deleteData(id);
         data.saveToFile();
+        return deleteStringToDisplay;
     }
 }

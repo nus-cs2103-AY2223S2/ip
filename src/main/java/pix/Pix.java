@@ -1,8 +1,8 @@
 package pix;
 
 import java.io.IOException;
-import java.util.Scanner;
 
+import javafx.application.Platform;
 import pix.commands.Command;
 import pix.data.MyData;
 import pix.exceptions.PixException;
@@ -14,36 +14,30 @@ import pix.ui.Ui;
  */
 public class Pix {
     /**
-     * Main function which runs Pix's logic.
-     *
-     * @param args Arguments provided.
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
      */
-    public static void main(String[] args) {
+    public String getResponse(String input) {
         MyData data = new MyData();
         Ui ui = new Ui();
+        Parser parser = new Parser(data);
+
+        if (input.equals("bye")) {
+            Platform.exit();
+        }
+
         try {
             data.loadData();
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
-        Parser parser = new Parser(data);
-        Ui.display();
 
-        Scanner sc = new Scanner(System.in);
-
-        while (sc.hasNextLine()) {
-            String command = sc.nextLine();
-            try {
-                Command parsed = parser.parse(command);
-                parsed.execute(data, ui);
-            } catch (PixException e) {
-                System.out.println(e.getMessage());
-            }
-            if (command.equals("bye")) {
-                break;
-            }
+        try {
+            Command parsed = parser.parse(input);
+            return parsed.execute(data, ui);
+        } catch (PixException e) {
+            return e.getMessage();
         }
-        sc.close();
     }
 }
 

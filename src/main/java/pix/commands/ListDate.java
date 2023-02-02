@@ -21,7 +21,7 @@ public class ListDate extends Command {
         this.date = date;
     }
 
-    public void execute(MyData data, Ui ui) {
-        ui.listDate(data, this.date);
+    public String execute(MyData data, Ui ui) {
+        return ui.listDate(data, this.date);
     }
 }

@@ -27,10 +27,10 @@ public class AddDeadline extends Command {
      * @param data Data storing the tasks.
      * @param ui Ui object which handles interaction with user.
      */
-    public void execute(MyData data, Ui ui) {
+    public String execute(MyData data, Ui ui) {
         data.setData(deadline);
         data.saveToFile();
-        ui.add(deadline.toString(), data.len());
+        return ui.add(deadline.toString(), data.len());
     }
 }
 

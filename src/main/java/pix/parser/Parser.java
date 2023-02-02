@@ -34,7 +34,7 @@ public class Parser {
     public Parser(MyData data) {
         this.data = data;
     }
-
+    
     /**
      * Parses bye command.
      *
@@ -62,13 +62,13 @@ public class Parser {
      */
     public Command parseListDate(String[] commandArr) throws PixException {
         if (commandArr.length <= 1) {
-            throw new PixException(Ui.wrapLines("Please enter a date e.g. listdate 'yyyy-MM-dd'"));
+            throw new PixException("Please enter a date.\n\n e.g. listdate 'yyyy-MM-dd'");
         }
         try {
             LocalDate date = LocalDate.parse(commandArr[1]);
             return new ListDate(date);
         } catch (DateTimeParseException e) {
-            throw new PixException(Ui.wrapLines("Please enter a date e.g. listdate 'yyyy-MM-dd'"));
+            throw new PixException("Please enter a date.\n\n e.g. listdate 'yyyy-MM-dd'");
         }
     }
 
@@ -81,13 +81,17 @@ public class Parser {
      */
     public Command parseMark(String[] commandArr) throws PixException {
         if (commandArr.length <= 1) {
-            throw new PixException(Ui.wrapLines("Please enter a index to mark."));
+            throw new PixException("Please enter an index to mark.");
         }
-        int id = Integer.parseInt(commandArr[1]);
-        if (id > data.len() || id < 0) {
-            throw new PixException(Ui.wrapLines("Please enter a valid number."));
+        try {
+            int id = Integer.parseInt(commandArr[1]);
+            if (id > data.len() || id < 0) {
+                throw new PixException("Please enter a valid number.");
+            }
+            return new Mark(id - 1);
+        } catch (NumberFormatException e) {
+            throw new PixException(("Please enter an index to mark."));
         }
-        return new Mark(id - 1);
     }
 
     /**
@@ -99,13 +103,17 @@ public class Parser {
      */
     public Command parseUnmark(String[] commandArr) throws PixException {
         if (commandArr.length <= 1) {
-            throw new PixException(Ui.wrapLines("Please enter a index to unmark."));
+            throw new PixException("Please enter a index to unmark.");
         }
-        int id = Integer.parseInt(commandArr[1]);
-        if (id > data.len() || id < 0) {
-            throw new PixException(Ui.wrapLines("Please enter a valid number."));
+        try {
+            int id = Integer.parseInt(commandArr[1]);
+            if (id > data.len() || id < 0) {
+                throw new PixException("Please enter a valid number.");
+            }
+            return new Unmark(id - 1);
+        } catch (NumberFormatException e) {
+            throw new PixException(("Please enter an index to mark."));
         }
-        return new Unmark(id - 1);
     }
 
     /**
@@ -118,7 +126,7 @@ public class Parser {
     public Command parseTodo(String command) throws PixException {
         String description = removeCommand(command);
         if (description.isEmpty()) {
-            throw new PixException(Ui.wrapLines("Cannot have an empty task."));
+            throw new PixException("Cannot have an empty task.");
         }
         return new AddToDo(description);
     }
@@ -132,14 +140,14 @@ public class Parser {
      */
     public Command parseDeadline(String[] slashed) throws PixException {
         if (slashed.length != 2 || removeCommand(slashed[0]).isEmpty() || removeCommand(slashed[1]).isEmpty()) {
-            throw new PixException(Ui.wrapLines("Invalid format.\n    "
-                    + "e.g. deadline 'description' / 'yyyy-MM-dd HH-mm'"));
+            throw new PixException("Invalid format.\n\n"
+                    + "e.g. deadline 'description' / 'yyyy-MM-dd HH-mm'");
         }
         try {
             return new AddDeadline(removeCommand(slashed[0]), removeCommand(slashed[1]));
         } catch (DateTimeParseException e) {
-            throw new PixException(Ui.wrapLines("Invalid format.\n    "
-                    + "e.g. deadline 'description' / 'yyyy-MM-dd HH-mm'"));
+            throw new PixException("Invalid format.\n\n"
+                    + "e.g. deadline 'description' / 'yyyy-MM-dd HH-mm'");
         }
     }
 
@@ -155,16 +163,16 @@ public class Parser {
                 || removeCommand(slashed[0]).isEmpty()
                 || removeCommand(slashed[1]).isEmpty()
                 || removeCommand(slashed[2]).isEmpty()) {
-            throw new PixException(Ui.wrapLines("Invalid format. From and To formatted as 'yyyy-MM-dd HH-mm'"
-                    + "\n    e.g. event 'description' / 'From' / 'To'"));
+            throw new PixException("Invalid format.\n\nFrom and To formatted as 'yyyy-MM-dd HH-mm'"
+                    + "\n\ne.g. event 'description' / 'From' / 'To'");
         }
         try {
             return new AddEvent(removeCommand(slashed[0]),
                     removeCommand(slashed[1]),
                     removeCommand(slashed[2]));
         } catch (DateTimeParseException e) {
-            throw new PixException(Ui.wrapLines("Invalid format. From and To formatted as 'yyyy-MM-dd HH-mm'"
-                    + "\n    e.g. event 'description' / 'From' / 'To'"));
+            throw new PixException("Invalid format.\n\nFrom and To formatted as 'yyyy-MM-dd HH-mm'"
+                    + "\n\ne.g. event 'description' / 'From' / 'To'");
         }
 
     }
@@ -178,11 +186,11 @@ public class Parser {
      */
     public Command parseDelete(String[] commandArr) throws PixException {
         if (commandArr.length <= 1) {
-            throw new PixException(Ui.wrapLines("Please enter a index to delete."));
+            throw new PixException("Please enter an index to delete.");
         }
         int id = Integer.parseInt(commandArr[1]);
         if (id > data.len() || id < 0) {
-            throw new PixException(Ui.wrapLines("Please enter a valid number."));
+            throw new PixException("Please enter a valid number.");
         }
         return new Delete(id - 1);
     }
@@ -196,7 +204,7 @@ public class Parser {
      */
     public Command parseFind(String[] commandArr) throws PixException {
         if (commandArr.length <= 1) {
-            throw new PixException(Ui.wrapLines("Please enter a keyword"));
+            throw new PixException("Please enter a keyword");
         }
         String keyword = commandArr[1];
         return new Find(keyword);
@@ -246,7 +254,7 @@ public class Parser {
         case "find":
             return parseFind(commandArr);
         default:
-            throw new PixException(Ui.wrapLines("I am not sure what that means."));
+            throw new PixException("I am not sure what that means.");
         }
     }
 }

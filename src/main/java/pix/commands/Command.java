@@ -13,5 +13,5 @@ public abstract class Command {
      * @param data Data storing the tasks.
      * @param ui Ui object which handles interaction with user.
      */
-    public abstract void execute(MyData data, Ui ui);
+    public abstract String execute(MyData data, Ui ui);
 }

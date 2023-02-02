@@ -25,9 +25,9 @@ public class Unmark extends Command {
      * @param data Data storing the tasks.
      * @param ui Ui object which handles interaction with user.
      */
-    public void execute(MyData data, Ui ui) {
+    public String execute(MyData data, Ui ui) {
         data.markUndone(this.id);
         data.saveToFile();
-        ui.unmark(data.getData(this.id));
+        return ui.unmark(data.getData(this.id));
     }
 }

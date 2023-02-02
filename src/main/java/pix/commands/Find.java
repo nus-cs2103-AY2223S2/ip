@@ -19,7 +19,7 @@ public class Find extends Command {
         this.keyword = keyword;
     }
 
-    public void execute(MyData data, Ui ui) {
-        ui.find(data, keyword);
+    public String execute(MyData data, Ui ui) {
+        return ui.find(data, keyword);
     }
 }

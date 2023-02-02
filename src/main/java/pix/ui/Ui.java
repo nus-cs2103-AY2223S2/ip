@@ -57,118 +57,117 @@ public class Ui {
     }
 
     /**
-     * Prints bye.
+     * Returns bye string to be displayed.
+     *
+     * @return Bye string to be displayed.
      */
-    public void bye() {
-        System.out.print(Ui.line()
-                + "     Bye. Hope to see you again soon!\n"
-                + Ui.line());
+    public String bye() {
+        return "Bye. Hope to see you again soon!\n\n";
     }
 
     /**
-     * Prints task added and number of tasks.
+     * Returns add string to be displayed.
      *
      * @param description Description of task added.
-     * @param listLen Number of tasks after adding tasks.
+     * @param listLen String of added tasks and number of tasks
+     * @return String of added tasks and number of tasks in the list.
      */
-    public void add(String description, int listLen) {
-        System.out.print(Ui.line()
-                + "     Okay! I've added this task:\n"
-                + "       " + description + "\n"
-                + "     Now you have " + listLen + " tasks in the list.\n"
-                + Ui.line());
+    public String add(String description, int listLen) {
+        return "Okay! I've added this task:\n\n"
+                + description + "\n\n"
+                + "Now you have " + listLen + " tasks in the list.\n";
     }
 
     /**
-     * Prints tasks deleted and number of tasks after deletion.
+     * Returns string of task deleted and number of tasks after deletion.
      *
      * @param task Task to be deleted.
      * @param listLen Number of tasks after deleting task.
+     * @return String of deleted task and number of tasks after deletion.
      */
-    public void delete(Task task, int listLen) {
-        System.out.print(Ui.line()
-                + "     Understood! The following task is now gone:\n"
-                + "       " + task + "\n"
-                + "     Now you have " + listLen + " tasks in the list.\n"
-                + Ui.line());
+    public String delete(Task task, int listLen) {
+        return "Understood! The following task is now gone:\n\n"
+                + task + "\n\n"
+                + "Now you have " + listLen + " tasks in the list.\n";
     }
 
     /**
-     * Lists all tasks.
+     * Returns a string of all the tasks.
      *
      * @param data Data containing ArrayList of tasks.
+     * @return String of all the tasks.
      */
-    public void list(MyData data) {
-        System.out.print(Ui.line());
+    public String list(MyData data) {
+        StringBuilder listStringToDisplay = new StringBuilder();
+        listStringToDisplay.append("Here are your tasks:\n\n");
         for (int i = 0; i < data.len(); i++) {
-            System.out.printf("     %d. %s%n", i + 1, data.getData(i));
+            listStringToDisplay.append(i + 1).append(". ").append(data.getData(i)).append("\n");
         }
-        System.out.print(Ui.line());
+        return listStringToDisplay.toString();
     }
 
     /**
-     * Lists tasks that occur or is active during the given date.
+     * Returns string of lists tasks that occur or is
+     * active during the given date.
      *
      * @param data Data containing ArrayList of tasks.
      * @param date Date of tasks to list.
      */
-    public void listDate(MyData data, LocalDate date) {
-        System.out.print(Ui.line());
+    public String listDate(MyData data, LocalDate date) {
+        String listDateStringToDisplay = "";
         for (int i = 0; i < data.len(); i++) {
             Task task = data.getData(i);
             if (task instanceof Deadline) {
                 if (((Deadline) task).getDate().equals(date)) {
-                    System.out.printf("     %d. %s%n", i + 1, data.getData(i));
+                    listDateStringToDisplay += (i + 1) + ". " + data.getData(i) + "\n";
                 }
             }
             if (task instanceof Event) {
                 Event taskEvent = (Event) task;
                 if (date.isAfter(taskEvent.getFromDate()) && date.isBefore(taskEvent.getToDate())) {
-                    System.out.printf("     %d. %s%n", i + 1, data.getData(i));
+                    listDateStringToDisplay += (i + 1) + ". " + data.getData(i) + "\n";
                 }
             }
         }
-        System.out.print(Ui.line());
+        return listDateStringToDisplay;
     }
 
     /**
-     * Prints that task is marked.
+     * Return string of task that is marked.
      *
      * @param task Task to be marked.
+     * @return String of task that is marked.
      */
-    public void mark(Task task) {
-        System.out.print(Ui.line()
-                + "     Well done! You have completed the following task:\n"
-                + "     " + task + "\n"
-                + Ui.line());
+    public String mark(Task task) {
+        return "Well done! You have completed the following task:\n\n" + task;
     }
 
     /**
-     * Prints that task is unmarked.
+     * Return string of task that is unmarked.
      *
      * @param task Task to un-mark.
+     * @return String of task that is unmarked.
      */
-    public void unmark(Task task) {
-        System.out.print(Ui.line()
-                + "     Stop procrastinating and complete the following task:\n"
-                + "     " + task + "\n"
-                + Ui.line());
+    public String unmark(Task task) {
+        return "Stop procrastinating and complete the following task:\n\n" + task + "\n";
     }
 
 
     /**
-     * Finds tasks that contain the keyword.
+     * Return tasks that contains the keyword.
      *
      * @param data Data containing ArrayList of tasks.
      * @param keyword Keyword to search tasks by.
+     * @return String of tasks that contains the keyword.
      */
-    public void find(MyData data, String keyword) {
-        System.out.print(Ui.line());
+    public String find(MyData data, String keyword) {
+        StringBuilder findStringToDisplay = new StringBuilder();
+        findStringToDisplay.append("Here are tasks containing the keyword '").append(keyword).append("'\n\n");
         for (int i = 0; i < data.len(); i++) {
             if (data.getData(i).inDescription(keyword)) {
-                System.out.printf("     %d. %s%n", i + 1, data.getData(i));
+                findStringToDisplay.append(i + 1).append(". ").append(data.getData(i)).append("\n");
             }
         }
-        System.out.print(Ui.line());
+        return findStringToDisplay.toString();
     }
 }
