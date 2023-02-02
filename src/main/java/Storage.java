@@ -1,0 +1,78 @@
+import exceptions.BaymaxException;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class Storage {
+    // deals with loading tasks from the file and saving tasks in the file
+
+    protected String filepath;
+    public Storage(String filepath) {
+        this.filepath = filepath;
+    }
+    //
+    public ArrayList<Task> load() throws BaymaxException {
+        ArrayList<Task> myList = new ArrayList<>();
+        try {
+            File file = new File(filepath);
+            if (!file.isFile()) {
+                throw new BaymaxException("File not found");
+            }
+            Scanner fileReader = new Scanner(file);
+            while (fileReader.hasNextLine()) {
+                String data = fileReader.nextLine();
+                if (data.charAt(1) == "T".charAt(0)) {
+                    Task todo = new Todo(data.substring(7));
+                    if (data.charAt(4) == "X".charAt(0)) {
+                        todo.markAsDone();
+                    }
+                    myList.add(todo);
+                }
+                if (data.charAt(1) == "D".charAt(0)) {
+                    String one = data.split(" " + "[(]" + "by: ")[0].substring(7);
+                    String two = data.split(" " + "[(]" + "by: ")[1];
+                    int l = two.length();
+                    two = two.substring(0, l - 2);
+                    Task deadline = new Deadline(one, two);
+                    if (data.charAt(4) == "X".charAt(0)) {
+                        deadline.markAsDone();
+                    }
+                    myList.add(deadline);
+                }
+                if (data.charAt(1) == "E".charAt(0)) {
+                    String one = data.split(" " + "[(]" + "from: ")[0].substring(7);
+                    String two = data.split(" " + "[(]" + "from: ")[1].split(" to: ")[0];
+                    String three = data.split(" " + "[(]" + "from: ")[1].split(" to: ")[1];
+                    int l = three.length();
+                    three = three.substring(0, l - 2);
+                    Task even = new Event(one, two, three);
+                    if (data.charAt(4) == "X".charAt(0)) {
+                        even.markAsDone();
+                    }
+                    myList.add(even);
+                }
+
+            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return myList;
+    }
+
+    public void store(ArrayList<Task> myList) {
+        try {
+            FileWriter writer = new FileWriter(filepath);
+            for(Task task: myList) {
+                writer.write(task.toString() + "\n");
+            }
+            writer.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+}
