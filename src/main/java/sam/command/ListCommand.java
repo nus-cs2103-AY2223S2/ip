@@ -17,11 +17,11 @@ public class ListCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         if (tasks.count() == 0) {
-            ui.talk("Your list is empty!");
+            ui.respond("Your list is empty!");
         } else {
             List<String> list = tasks.getTasks();
             list.add(0, "Here is your list:");
-            ui.talk(list.toArray(new String[0]));
+            ui.respond(list.toArray(new String[0]));
         }
     }
 }

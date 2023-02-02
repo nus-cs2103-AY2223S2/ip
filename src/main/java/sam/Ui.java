@@ -2,66 +2,152 @@ package sam;
 
 import java.util.Scanner;
 
+import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import sam.command.Command;
+import sam.parser.Parser;
+
 /**
  * Handles user interaction.
  */
 public class Ui {
     private static final String LOGO =
-              "\t  ██████╗ █████╗ ███╗   ███╗\n"
-            + "\t ██╔════╝██╔══██╗████╗ ████║\n"
-            + "\t ╚█████╗ ███████║██╔████╔██║\n"
-            + "\t  ╚═══██╗██╔══██║██║╚██╔╝██║\n"
-            + "\t ██████╔╝██║  ██║██║ ╚═╝ ██║\n"
-            + "\t ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝";
+              " ██████╗ █████╗ ███╗   ███╗\n"
+            + "██╔════╝██╔══██╗████╗ ████║\n"
+            + "╚█████╗ ███████║██╔████╔██║\n"
+            + " ╚═══██╗██╔══██║██║╚██╔╝██║\n"
+            + "██████╔╝██║  ██║██║ ╚═╝ ██║\n"
+            + "╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝";
     private static final String USER =
-              "  ███████\n"
-            + " ████▀██▀█\n"
-            + " ████▄██▄█\n"
-            + "  ▀▀▀▀▀▀▀";
+              " ███████\n"
+            + "████▀██▀█\n"
+            + "████▄██▄█\n"
+            + " ▀▀▀▀▀▀▀";
     private static final String SAM =
-              "\t\t\t\t        ▄\n"
-            + "\t\t\t\t ▒▒██▒▒▓▓▀\n"
-            + "\t\t\t\t▒▒▀██▀▒▒▓▓\n"
-            + "\t\t\t\t █▄██▄███▓▓\n"
-            + "\t\t\t\t  ▀▀▀▀▀▀ ▓";
+              "        ▄\n"
+            + " ▒▒██▒▒▓▓▀\n"
+            + "▒▒▀██▀▒▒▓▓\n"
+            + " █▄██▄███▓▓\n"
+            + "  ▀▀▀▀▀▀ ▓";
 
-    // A private variable that is used to read user input.
-    private Scanner scanner;
+    private ScrollPane scrollPane;
+    private VBox dialogContainer;
+    private TextField userInput;
+    private Button sendButton;
+    private Scene scene;
 
     public Ui() {
-        scanner = new Scanner(System.in);
+        scrollPane = new ScrollPane();
+        dialogContainer = new VBox();
+        scrollPane.setContent(dialogContainer);
+        userInput = new TextField();
+        sendButton = new Button("Send");
+    }
+
+    /**
+     * Sets up the application's stage.
+     * 
+     * @param stage The stage to set up.
+     */
+    public void setStage(Stage stage) {
+        AnchorPane mainLayout = new AnchorPane();
+        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
+
+        scene = new Scene(mainLayout);
+        stage.setScene(scene);
+        
+        // formatting
+
+        stage.setTitle("Sam");
+        stage.setResizable(false);
+        stage.setMinHeight(600.0);
+        stage.setMinWidth(400.0);
+
+        mainLayout.setPrefSize(400.0, 600.0);
+
+        scrollPane.setPrefSize(400.0, 540.0);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+
+        scrollPane.setVvalue(1.0);
+        scrollPane.setFitToWidth(true);
+
+        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+        dialogContainer.setPadding(new Insets(16));
+
+        userInput.setPrefWidth(340.0);
+        userInput.setPrefHeight(60.0);
+        sendButton.setPrefWidth(60.0);
+        sendButton.setPrefHeight(60.0);
+
+        AnchorPane.setTopAnchor(scrollPane, 1.0);
+        AnchorPane.setBottomAnchor(sendButton, 1.0);
+        AnchorPane.setRightAnchor(sendButton, 1.0);
+        AnchorPane.setLeftAnchor(userInput, 1.0);
+        AnchorPane.setBottomAnchor(userInput, 1.0);
+
+        // handle user input
+
+        sendButton.setOnMouseClicked(event -> handleUserInput());
+        userInput.setOnAction(event -> handleUserInput());
+
+        dialogContainer.heightProperty().addListener(observable -> scrollPane.setVvalue(1.0));
+
+        showLogo();
+        respond("Hello, I am Sam!");
+    }
+
+    /**
+     * Reads the user input and issues a command to Sam.
+     */
+    private void handleUserInput() {
+        Label userText = new Label(userInput.getText());
+        Label userChar = new Label(USER);
+        dialogContainer.getChildren().add(DialogBox.getUserDialog(userText, userChar));
+        
+        Sam.getSamInstance().issueCommand(userInput.getText());
+        userInput.clear();
     }
 
     /**
      * Displays the logo of the app.
      */
     public void showLogo() {
-        System.out.println(LOGO);
+        Label logo = new Label(LOGO);
+        logo.setStyle("-fx-font-family: 'monospaced';");
+        dialogContainer.getChildren().add(logo);
     }
 
     /**
-     * Prints the user's avatar and waits for user input.
-     *
-     * @return the input string.
-     */
-    public String acceptInput() {
-        System.out.println();
-        System.out.println(USER);
-        System.out.print("> ");
-        return scanner.nextLine().strip();
-    }
-
-    /**
-     * Prints Sam's avatar and a dialogue formed by the given strings.
-     *
+     * Adds a dialogue from Sam formed by the given strings.
+     * 
      * @param messages A list of strings representing lines of dialogue.
      */
-    public void talk(String... messages) {
-        System.out.println(SAM);
-        System.out.println("┌───────────────────────────────────────────┐");
+    public void respond(String... messages) {
+        StringBuilder str = new StringBuilder();
         for (String message : messages) {
-            System.out.println("  " + message);
+            str.append(message + "\n");
         }
-        System.out.println("└───────────────────────────────────────────┘");
+        Label samChar = new Label(SAM);
+        Label samText = new Label(str.toString());
+        dialogContainer.getChildren().add(DialogBox.getSamDialog(samText, samChar));
+    }
+
+    /**
+     * Disables the input field and send button
+     */
+    public void disable() {
+        userInput.setDisable(true);
+        sendButton.setDisable(true);
     }
 }
