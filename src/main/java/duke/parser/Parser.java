@@ -12,7 +12,18 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 
 
+/**
+ * Represents a parser that reads in user commands/ input and processes them.
+ */
 public class Parser {
+    /**
+     * Returns a LocalDateTime object representing the date and time specified.
+     *
+     * @param dateTime The string containing the date and time.
+     * @return A LocalDateTime object.
+     * @throws DukeException If the given date and time are in an invalid format
+     * according to the specified patter.
+     */
     public static LocalDateTime parseDateTime(String dateTime) throws DukeException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
 
@@ -23,6 +34,15 @@ public class Parser {
         }
     }
 
+    /**
+     * Processes the given user command and performs actions on the TaskList.
+     *
+     * @param userCommand The user command.
+     * @param storage The storage object to store the updated TaskList.
+     * @param tasks The TaskList to perform actions on.
+     * @throws DukeException If the user's command is invalid or an error occurs
+     * while processing the task list
+     */
     public static void processCommand(String userCommand, Storage storage, TaskList tasks) throws DukeException {
 
         if (userCommand.isEmpty()) {

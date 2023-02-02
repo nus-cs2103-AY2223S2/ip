@@ -7,13 +7,27 @@ import duke.exception.DukeException;
 import duke.exception.DukeInvalidArgumentException;
 import duke.parser.Parser;
 
+/**
+ * Represents a TaskList that can hold {@link Task} objects.
+ */
 public class TaskList {
     private final ArrayList<Task> TASK_LIST;
 
+    /**
+     * Creates a task-list object with the given list of Task objects.
+     *
+     * @param taskList The list of Task objects to be contained in the TaskList.
+     */
     public TaskList(ArrayList<Task> taskList) {
         TASK_LIST = taskList;
     }
 
+    /**
+     * Adds a to-do task from the given user command to the TaskList.
+     *
+     * @param userCommand The user command that contains the task description.
+     * @throws DukeException If the task description is missing.
+     */
     public void addToDo(String userCommand) throws DukeException {
 
         String[] userCommandParts = userCommand.split(" ", 2);
@@ -28,6 +42,13 @@ public class TaskList {
                 + "\nNow you have " + TASK_LIST.size() + " task(s) in the list.");
     }
 
+    /**
+     * Adds a deadline task from the given user command to the TaskList.
+     *
+     * @param userCommand The user command that contains the task description
+     *                    and the due-date.
+     * @throws DukeException If the command has an invalid format.
+     */
     public void addDeadline(String userCommand) throws DukeException {
 
         String[] userCommandParts = userCommand.split(" /by", 2);
@@ -54,6 +75,13 @@ public class TaskList {
                 + "\nNow you have " + TASK_LIST.size() + " task(s) in the list.");
     }
 
+    /**
+     * Adds an event task from the given user command to the TaskList.
+     *
+     * @param userCommand The user command that contains the task description,
+     *                    the start date-time, and the end date-time.
+     * @throws DukeException If the command has an invalid format.
+     */
     public void addEvent(String userCommand) throws DukeException {
 
         String[] userCommandParts = userCommand.split(" /from", 2);
@@ -92,6 +120,10 @@ public class TaskList {
                 + "\nNow you have " + TASK_LIST.size() + " task(s) in the list.");
     }
 
+    /**
+     * Prints the tasks in the TaskList according to
+     * their string representation in an ordered list.
+     */
     public void printTaskList() {
         if (TASK_LIST.size() == 0) {
             System.out.println("There are no tasks in your Task List!");
@@ -103,6 +135,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Marks the task specified in the user command as done in the TaskList.
+     *
+     * @param userCommand The user command that contains the index (1-indexed)
+     *                    of the task in the TaskList to be marked as done.
+     * @throws DukeException If the given index is out of bounds or invalid.
+     */
     public void markTask(String userCommand) throws DukeException {
         try {
             String[] userCommandParts = userCommand.split(" ");
@@ -131,6 +170,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Marks the task specified in the user command as not done in the TaskList.
+     *
+     * @param userCommand The user command that contains the index (1-indexed)
+     *                    of the task in the TaskList to be marked as not done.
+     * @throws DukeException If the given index is out of bounds or invalid.
+     */
     public void unmarkTask(String userCommand) throws DukeException {
         try {
             String[] userCommandParts = userCommand.split(" ");
@@ -159,6 +205,14 @@ public class TaskList {
         }
 
     }
+
+    /**
+     * Deletes the task specified in the user command from the TaskList.
+     *
+     * @param userCommand The user command that contains the index (1-indexed)
+     *                    of the task in the TaskList to be deleted.
+     * @throws DukeException If the given index is out of bounds or invalid.
+     */
     public void deleteTask(String userCommand) throws DukeException {
         try {
             String[] userCommandParts = userCommand.split(" ");
@@ -187,6 +241,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Returns the TaskList in its current state.
+     *
+     * @return The TaskList containing the Task objects
+     */
     public ArrayList<Task> getTaskList() {
         return TASK_LIST;
     }
