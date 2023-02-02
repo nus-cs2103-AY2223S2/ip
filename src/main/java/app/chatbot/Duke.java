@@ -17,13 +17,20 @@ public class Duke {
     private Ui ui;
 
 
-    Duke(Path path) {
+    public Duke() {
         this.ui = new Ui();
         try {
-            this.storage = new Storage(path);
+            this.storage = new Storage(this.STORAGE_LOCATION);
             this.taskList = new TaskList();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+
+        Command loadCommand = new LoadCommand();
+        try {
+            loadCommand.execute(taskList, ui, storage);
+        } catch (Exception e) {
+            ui.showError(e.getMessage());
         }
     }
 
@@ -34,16 +41,6 @@ public class Duke {
      */
     public void run() {
         ui.showWelcome();
-
-        // load in saved data
-        Command loadCommand = new LoadCommand();
-        try {
-            loadCommand.execute(taskList, ui, storage);
-        } catch (Exception e) {
-            ui.showError(e.getMessage());
-        }
-        ui.showLine();
-
         boolean isExit = false;
         while (!isExit) {
             try {
@@ -68,7 +65,15 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        Duke duke = new Duke(STORAGE_LOCATION);
+        Duke duke = new Duke();
         duke.run();
+    }
+
+
+    public String getResponse(String input) {
+        StringBuilder response = new StringBuilder("i eat duck and chicken");
+
+        return response.toString();
+
     }
 }
