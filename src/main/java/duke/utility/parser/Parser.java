@@ -9,10 +9,14 @@ import duke.tasklist.task_types.ToDo;
 import duke.utility.ui.UiMessage;
 
 public class Parser {
-    private static DukeException wrongNumberParam = new DukeException("Wrong number of parameters inserted.");
-    private static DukeException noParamCommand = new DukeException("Command cannot have any parameters");
-    private static DukeException noNumericParam = new DukeException("Parameter is not a numerical value.");
-    private static DukeException noSpecialParam = new DukeException("Missing special param e.g /by, /from, /to");
+    private static DukeException wrongNumberParam =
+            new DukeException("Wrong number of parameters inserted.");
+    private static DukeException noParamCommand =
+            new DukeException("Command cannot have any parameters");
+    private static DukeException noNumericParam =
+            new DukeException("Parameter is not a numerical value.");
+    private static DukeException noSpecialParam =
+            new DukeException("Missing special param e.g /by, /from, /to");
     private static DukeException emptyParam = new DukeException("Empty parameter inserted.");
 
     private static UiMessage printTasks(String[] command, TaskList list) throws DukeException {
@@ -112,6 +116,21 @@ public class Parser {
         return new UiMessage(CommandMap.event, eventObj);
     }
 
+    private static UiMessage findTasks(String[] command, TaskList list) throws DukeException {
+        if (command.length > 2) {
+            throw wrongNumberParam;
+        }
+
+        if (command.length == 1) {
+            throw emptyParam;
+        }
+
+        String keyword = command[1];
+
+
+        return new UiMessage(CommandMap.find, new Task(keyword));
+    }
+
     public static UiMessage readCommand(String input, TaskList list) throws DukeException {
         String[] command = input.trim().split(" ");
 
@@ -131,6 +150,8 @@ public class Parser {
                     return createDeadline(command, list);
                 case event:
                     return createEvent(command, list);
+                case find:
+                    return findTasks(command, list);
                 default:
                     return createToDo(command, list);
             }

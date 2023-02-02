@@ -2,13 +2,23 @@ package duke.tasklist;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import duke.duke_exception.DukeException;
 import duke.tasklist.task_types.Task;
 
 public class TaskList implements Serializable {
     private static DukeException invalidIndex = new DukeException("Invalid index keyed.");
-    private ArrayList<Task> list = new ArrayList<>();
+    private ArrayList<Task> list;
+
+    public TaskList() {
+        list = new ArrayList<>();
+    }
+
+    public TaskList(List<Task> list) {
+        this.list = new ArrayList<Task>(list);
+    }
 
     public void addTask(Task task) {
         list.add(task);
@@ -54,6 +64,12 @@ public class TaskList implements Serializable {
 
     public int getSize() {
         return list.size();
+    }
+
+    public TaskList filter(String name) {
+        Stream<Task> taskStream = this.list.stream();
+        return new TaskList(taskStream.filter(task -> task.getName().contains(name))
+                .collect(Collectors.toList()));
     }
 
     @Override
