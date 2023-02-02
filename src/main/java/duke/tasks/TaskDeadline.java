@@ -1,36 +1,44 @@
-/**
- * The class representing a TaskDeadline task.
- *
- * @author JamesLiuZX
- * AY2223-S2 CS2103T
- */
 package duke.tasks;
 
 import java.time.LocalDateTime;
 
+/**
+ * Encapsulates a task which has a specific deadline denoted by /by.
+ *
+ * @author JamesLiuZX
+ * AY2223-S2 CS2103T
+ */
 public class TaskDeadline extends Task {
     private LocalDateTime time;
+
     /**
-     * Given a task and a deadline, constructs a TaskDeadline task.
+     * Constructor for creating a TaskDeadline object.
      *
-     * @param task     The task to be completed.
+     * @param task     The task name to be completed.
      * @param time     The task's deadline.
      *
-     * @author JamesLiuZX
-     * AY2223-S2 CS2103T
      */
-
     public TaskDeadline(String task, LocalDateTime time) {
         super(task);
         this.time = time;
     }
 
+    /**
+     * Returns string representation of a Deadline object which users can see in the command line.
+     *
+     * @return String representation of deadline.
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString()
                 + String.format(" (%s) ", time);
     }
 
+    /**
+     * Returns string representation of a TaskDeadline object that is stored in the Duke.txt file.
+     *
+     * @return String representation of TaskDeadline.
+     */
     @Override
     public String toStringDb() {
         return String.format(

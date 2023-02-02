@@ -1,18 +1,28 @@
 package duke.functions;
 
-import duke.tasks.TaskList;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import duke.tasks.TaskList;
 import java.util.Scanner;
 
+/**
+ * Main storage class that controls the initialisation and reading of database, and the population of TaskList.
+ *
+ * @author JamesLiuZX
+ * AY2223-S2 CS2103T
+ */
 public class Storage {
     private String filePath;
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Reads duke.txt and populates existing TaskList in the appropriate format.
+     *
+     * @param dl TaskList passed down from Duke main class.
+     */
     public void readDatabase(TaskList dl) {
         File f = new File(filePath);
         try {
@@ -26,7 +36,10 @@ public class Storage {
         }
     }
 
-
+    /**
+     * Creates duke.txt in filePath specified if not already existing.
+     *
+     */
     private void initialiseDatabase() {
         File f = new File(filePath);
         File dir = new File("duke.txt");
