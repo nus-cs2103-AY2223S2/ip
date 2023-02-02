@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.task.Deadline;
-import duke.task.Todo;
 import duke.util.DukeException;
 import duke.util.Storage;
 import duke.util.TaskList;
@@ -9,6 +8,9 @@ import duke.util.Ui;
 
 import java.io.IOException;
 
+/**
+ * Represents a command that adds a deadline to the task list.
+ */
 public class DeadlineCommand extends Command {
     private final Deadline task;
 
@@ -16,6 +18,13 @@ public class DeadlineCommand extends Command {
         this.task = new Deadline(taskName, by);
     }
 
+    /*
+     * Executes the command and adds a deadline to the task list.
+     * @param tl TaskList which the Duke will modify.
+     * @param ui Ui to be used to facilitate interactions between user and the CLI.
+     * @param storage Storage to be used to handle interactions with the save file.
+     * @throws DukeException If there is an error in executing the command.
+     */
     @Override
     public void execute(TaskList tl, Ui ui, Storage storage) throws DukeException {
         tl.add(task);

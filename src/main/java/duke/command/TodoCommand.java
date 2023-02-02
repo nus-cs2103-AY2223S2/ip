@@ -8,12 +8,22 @@ import duke.util.Ui;
 
 import java.io.IOException;
 
+/*
+ * Represents a command that adds a todo to the task list.
+ */
 public class TodoCommand extends Command {
     private final Todo task;
     public TodoCommand(String taskName) {
         this.task = new Todo(taskName);
     }
 
+    /*
+     * Executes the command and adds a todo to the task list.
+     * @param tl TaskList which the Duke will modify.
+     * @param ui Ui to be used to facilitate interactions between user and the CLI.
+     * @param storage Storage to be used to handle interactions with the save file.
+     * @throws DukeException If there is an error in executing the command.
+     */
     @Override
     public void execute(TaskList tl, Ui ui, Storage storage) throws DukeException {
         tl.add(task);

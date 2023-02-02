@@ -7,6 +7,9 @@ import duke.util.Ui;
 
 import java.io.IOException;
 
+/*
+ * Represents a command that marks or unmarks a task in the task list.
+ */
 public class MarkCommand extends Command {
     private final int markNumber;
     private final boolean isMark;
@@ -16,6 +19,13 @@ public class MarkCommand extends Command {
         this.isMark = isMark;
     }
 
+    /*
+     * Executes the command and marks or unmarks a task in the task list.
+     * @param tl TaskList which the Duke will modify.
+     * @param ui Ui to be used to facilitate interactions between user and the CLI.
+     * @param storage Storage to be used to handle interactions with the save file.
+     * @throws DukeException If there is an error in executing the command.
+     */
     @Override
     public void execute(TaskList tl, Ui ui, Storage storage) throws DukeException {
         if (tl.isEmpty()) {
