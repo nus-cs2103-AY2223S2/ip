@@ -1,9 +1,11 @@
 package duke.tasks;
 
-import duke.exceptions.InvalidTaskDescriptionException;
-
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import duke.exceptions.InvalidTaskDescriptionException;
+
+
 
 /**
  * Encapsulates the list of tasks that the user has to complete.
@@ -12,8 +14,8 @@ import java.util.Arrays;
  * @version CS2103 AY22/23 Semester 2
  */
 public class TaskList {
-    ArrayList<Task> tasks;
-    int size;
+    private ArrayList<Task> tasks;
+    private int size;
 
 
     /**
@@ -67,8 +69,8 @@ public class TaskList {
         }
         tasks.add(new Todo(newInput[1]));
         System.out.println("Gotchu fam");
-        System.out.printf("I've added\n" + tasks.get(this.getCurrentSize()-1).toString() +
-                "\nto all the shit u need to do\n");
+        System.out.printf("I've added\n" + tasks.get(this.getCurrentSize() - 1).toString()
+                + "\nto all the shit u need to do\n");
         System.out.printf("shag bro now u got %d tasks\n", this.getCurrentSize());
     }
 
@@ -80,7 +82,7 @@ public class TaskList {
      * @param input User input which describes the event, including its start and end time.
      * @throws InvalidTaskDescriptionException If description of the event does not match specified format.
      */
-    public void addEvent(String input) throws InvalidTaskDescriptionException{
+    public void addEvent(String input) throws InvalidTaskDescriptionException {
         String[] nInput = input.split("/");
         if (nInput.length < 2) {
             throw new InvalidTaskDescriptionException("brother wake up and put a legit description can");
@@ -88,8 +90,8 @@ public class TaskList {
         String[] newInput = input.split("/");
         tasks.add(this.getCurrentSize(), new Event(newInput[0], newInput[1], newInput[2]));
         System.out.println("Gotchu fam");
-        System.out.printf("I've added\n" + tasks.get(this.getCurrentSize()-1).toString() +
-                "\nto all the shit u need to do\n");
+        System.out.printf("I've added\n" + tasks.get(this.getCurrentSize() - 1).toString()
+                + "\nto all the shit u need to do\n");
         System.out.printf("shag bro now u got %d tasks\n", this.getCurrentSize());
     }
 
@@ -101,7 +103,7 @@ public class TaskList {
      * @param input User input which describes the deadline including its time to be completed.
      * @throws InvalidTaskDescriptionException If description of the deadline does not match specified format.
      */
-    public void addDeadline(String input) throws InvalidTaskDescriptionException{
+    public void addDeadline(String input) throws InvalidTaskDescriptionException {
         String[] nInput = input.split("/");
         if (nInput.length < 2) {
             throw new InvalidTaskDescriptionException("brother wake up and put a legit description can");
@@ -111,8 +113,8 @@ public class TaskList {
         System.out.println(newInput[1]);
         tasks.add(this.getCurrentSize(), new Deadline(newInput[0], newInput[1]));
         System.out.println("Gotchu fam");
-        System.out.printf("I've added\n" + tasks.get(this.getCurrentSize()-1).toString() +
-                "\nto all the shit u need to do\n");
+        System.out.printf("I've added\n" + tasks.get(this.getCurrentSize() - 1).toString()
+                + "\nto all the shit u need to do\n");
         System.out.printf("shag bro now u got %d tasks\n", this.getCurrentSize());
     }
 
@@ -131,8 +133,8 @@ public class TaskList {
             Task temp = tasks.get(taskPointer);
             tasks.remove(taskPointer);
             System.out.println("Ok bro I've removed this : ");
-            System.out.printf(temp.toString() +
-                    "\nfrom all the shit u need to do\n");
+            System.out.printf(temp.toString()
+                    + "\nfrom all the shit u need to do\n");
             System.out.println("Hope you have a better life now");
         } catch (IndexOutOfBoundsException e) {
             System.out.println("brother look at how long ur list is first then delete lah");
@@ -166,7 +168,7 @@ public class TaskList {
         int taskPointer = Integer.parseInt(command[1]) - 1;
         try {
             tasks.get(taskPointer).undoTask();
-        } catch (IndexOutOfBoundsException e ) {
+        } catch (IndexOutOfBoundsException e) {
             System.out.println("Wake up and choose a better task to unmark brother");
         }
     }
@@ -187,7 +189,7 @@ public class TaskList {
             if (this.tasks.get(i) == null) {
                 break;
             }
-            System.out.printf("%d." + tasks.get(i).toString() + "\n", i+1);
+            System.out.printf("%d." + tasks.get(i).toString() + "\n", i + 1);
         }
 
     }

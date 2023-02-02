@@ -1,8 +1,8 @@
 package duke.tasks;
 
-import duke.helper.DateTimeParser;
-
 import java.time.LocalDate;
+
+import duke.helper.DateTimeParser;
 
 /**
  * A class that encapsulates an event a user has to participate in.
@@ -12,30 +12,13 @@ import java.time.LocalDate;
  */
 public class Event extends Task {
 
-
+    private static final String type = "E";
     protected LocalDate startTime;
-
-
-    static final String type  = "E";
-
 
     protected LocalDate endTime;
 
 
     //getter for type
-    public static String getType() {
-        return type;
-    }
-
-    //getter for starttime
-    public LocalDate getStartTime() {
-        return this.startTime;
-    }
-
-    //getter for endtime
-    public LocalDate getEndTime() {
-        return this.endTime;
-    }
 
     /**
      * Constructor to create event object associated with user's event.
@@ -48,6 +31,20 @@ public class Event extends Task {
         super(name);
         this.startTime = DateTimeParser.parse(startTime);
         this.endTime = DateTimeParser.parse(endTime);
+    }
+
+    public static String getType() {
+        return type;
+    }
+
+    //getter for starttime
+    public LocalDate getStartTime() {
+        return this.startTime;
+    }
+
+    //getter for endtime
+    public LocalDate getEndTime() {
+        return this.endTime;
     }
 
     /**

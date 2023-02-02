@@ -9,7 +9,7 @@ import java.util.Scanner;
  * @version CS2103 AY22/23 Semester 2
  */
 public class Ui {
-    Scanner sc;
+    private Scanner sc;
 
     /**
      * Constructs the user interface of ChadGPT.

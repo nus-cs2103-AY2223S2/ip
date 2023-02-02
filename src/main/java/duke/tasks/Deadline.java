@@ -1,8 +1,10 @@
 package duke.tasks;
 
+import java.time.LocalDate;
+
 import duke.helper.DateTimeParser;
 
-import java.time.LocalDate;
+
 
 //solution adapted from 2103 website
 
@@ -14,17 +16,16 @@ import java.time.LocalDate;
  */
 public class Deadline extends Task {
 
+
+    private static final String type = "D";
+
     protected LocalDate endTime;
 
-    static final String type  = "D";
 
-    public static String getType() {
-        return type;
-    }
 
-    public LocalDate getEndTime() {
-        return this.endTime;
-    }
+
+
+
 
     /**
      * Constructor to create deadline object based on user input.
@@ -36,6 +37,14 @@ public class Deadline extends Task {
     public Deadline(String name, String endTime) {
         super(name);
         this.endTime = DateTimeParser.parse(endTime);
+    }
+
+    public static String getType() {
+        return type;
+    }
+
+    public LocalDate getEndTime() {
+        return this.endTime;
     }
 
 
