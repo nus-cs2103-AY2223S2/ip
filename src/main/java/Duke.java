@@ -22,6 +22,7 @@ idea:
  */
 public class Duke {
     private TaskList taskList = new TaskList();
+    private Parser parser = new Parser();
 
     private void reply(String s) {
         System.out.println("\t"
@@ -50,65 +51,6 @@ public class Duke {
         reply("Bye! Hope to see you again soon!");
     }
 
-    private String[] parseTodo(String command) throws ZeroLengthDescriptionException {
-        String[] split_command = command.split(" ");
-        checkCommandLength(split_command);
-        String[] taskNameSplit = Arrays.copyOfRange(split_command, 1, split_command.length);
-        String taskName = String.join(" ", taskNameSplit);
-        String[] parsedCommand = new String[] {split_command[0], taskName};
-        return parsedCommand;
-    }
-
-    private String[] parseDeadline(String command) throws ZeroLengthDescriptionException {
-        String[] split_command = command.split("/");
-        String by = split_command[1];
-        //need to split task type and name
-        String[] taskAndName = split_command[0].split(" ");
-        checkCommandLength(taskAndName);
-        String[] taskNameSplit = Arrays.copyOfRange(taskAndName, 1, taskAndName.length);
-        String taskName = String.join(" ", taskNameSplit);
-        String[] parsedCommand = new String[] {taskAndName[0], taskName, by};
-        return parsedCommand;
-    }
-
-    private String[] parseEvent(String command) throws ZeroLengthDescriptionException {
-        String[] split_command = command.split("/");
-        String from = split_command[1];
-        String to = split_command[2];
-        //need to split task type and name
-        String[] taskAndName = split_command[0].split(" ");
-        checkCommandLength(taskAndName);
-        String[] taskNameSplit = Arrays.copyOfRange(taskAndName, 1, taskAndName.length);
-        String taskName = String.join(" ", taskNameSplit);
-        String[] parsedCommand = new String[] {taskAndName[0], taskName, from, to};
-        return parsedCommand;
-    }
-
-    private String[] parseCommand(String command) throws ZeroLengthDescriptionException {
-        String[] splitCommand = command.split(" ");
-        String[] parsedCommand;
-        switch (splitCommand[0]) {
-        case "todo":
-            parsedCommand = parseTodo(command);
-            break;
-        case "deadline":
-            parsedCommand = parseDeadline(command);
-            break;
-        case "event":
-            parsedCommand = parseEvent(command);
-            break;
-        default:
-            return splitCommand;
-        }
-        return parsedCommand;
-    }
-
-    private void checkCommandLength(String[] strArray) throws ZeroLengthDescriptionException {
-        if (strArray.length <= 1) {
-            throw new ZeroLengthDescriptionException();
-        }
-    }
-
     private String formatAddTaskReply(TaskList taskList, Task task) {
         String formattedReply;
         formattedReply = String.format(
@@ -129,24 +71,24 @@ public class Duke {
         while (true) {
             String userInput = sc.nextLine().toLowerCase();
             try {
-                parsedCommand = parseCommand(userInput);
+                parsedCommand = parser.parseCommand(userInput);
                 switch (parsedCommand[0]) {
                 case "todo":
-                    checkCommandLength(parsedCommand);
+                    //checkCommandLength(parsedCommand);
                     Task newTodo = new Todo(parsedCommand[1]);
                     taskList.addTask(newTodo);
                     formattedReply = formatAddTaskReply(taskList, newTodo);
                     reply(formattedReply);
                     break;
                 case "deadline":
-                    checkCommandLength(parsedCommand);
+                    //checkCommandLength(parsedCommand);
                     Task newDeadline = new Deadline(parsedCommand[1], parsedCommand[2]);
                     taskList.addTask(newDeadline);
                     formattedReply = formatAddTaskReply(taskList, newDeadline);
                     reply(formattedReply);
                     break;
                 case "event":
-                    checkCommandLength(parsedCommand);
+                    //checkCommandLength(parsedCommand);
                     Task newEvent = new Event(parsedCommand[1], parsedCommand[2], parsedCommand[3]);
                     taskList.addTask(newEvent);
                     formattedReply = formatAddTaskReply(taskList, newEvent);
