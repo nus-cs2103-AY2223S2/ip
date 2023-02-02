@@ -10,6 +10,8 @@ import Exception.invalidInputException;
 import Exception.dukeException;
 import Ui.Ui;
 
+import java.util.ArrayList;
+
 public class Parser {
 
 
@@ -62,10 +64,7 @@ public class Parser {
     public static boolean parseCommands(String echo, TaskList tasks, Ui ui) {
         if (echo.equals("list")) {
             System.out.println("    OK, Here are the items in your list: ");
-            for (int i = 0; i < tasks.size(); i++) {
-                System.out.println("    " + (i + 1) + ". "
-                        + tasks.get(i).toString());
-            }
+            Ui.printArrayList(tasks.getList());
             // put in loop to read the list
             return true;
         }
@@ -98,6 +97,18 @@ public class Parser {
             } catch (Exception e) {
                 // TODO: handle exception
             }
+            return true;
+        }
+
+        if (echo.startsWith("find")) {
+            String taskToFind = echo.substring(4).trim();
+            if (taskToFind.isEmpty()) {
+                System.out.println("    OPPS!! You can't find nothing");
+                return true;
+            }
+            ArrayList<Task> foundList = tasks.findArray(taskToFind);
+            System.out.println("    Here are the matching tasks in your list:");
+            Ui.printArrayList(foundList);
             return true;
         }
 

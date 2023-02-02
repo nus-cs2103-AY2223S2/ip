@@ -65,4 +65,11 @@ public class Ui {
     public void showSavingMessage() {
         System.out.println("    Saving:");
     }
+
+    public static void printArrayList(ArrayList<Task> list) {
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println("    " + (i + 1) + ". "
+                    + list.get(i).toString());
+        }
+    }
 }
