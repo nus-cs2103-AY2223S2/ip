@@ -1,10 +1,12 @@
 package command;
 
 import duke.Storage;
-import tasks.TaskList;
 import duke.Ui;
 import exceptions.DukeException;
 import exceptions.InvalidNumberException;
+import tasks.TaskList;
+
+
 
 /**
  * This class handles marking a task as complete
@@ -32,8 +34,9 @@ public class MarkCommand extends Command {
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         int taskNumMinusOne = index - 1;
-        if (taskNumMinusOne < 0 || taskNumMinusOne > taskList.size() - 1)
+        if (taskNumMinusOne < 0 || taskNumMinusOne > taskList.size() - 1) {
             throw new InvalidNumberException();
+        }
         taskList.markTask(index);
         storage.writeFile(taskList);
         return ui.printMark(index, taskList.get(taskNumMinusOne));

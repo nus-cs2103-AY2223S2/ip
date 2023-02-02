@@ -22,3 +22,5 @@ sourceSets {
     }
 }
 
+cltrl + alt + o to optimise and rearrange imports
+

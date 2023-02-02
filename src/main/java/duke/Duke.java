@@ -1,11 +1,11 @@
 package duke;
 
-import java.io.File;
-import java.io.IOException;
-
+import command.Command;
 import exceptions.DukeException;
 import tasks.TaskList;
-import command.Command;
+
+import java.io.File;
+import java.io.IOException;
 
 
 /***
