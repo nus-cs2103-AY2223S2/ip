@@ -9,6 +9,9 @@ import java.util.List;
 
 import leo.ui.Ui;
 
+/**
+ * Represents a task.
+ */
 public class Task implements Serializable {
     private static final long serialVersionUID = 1L;
     
@@ -20,10 +23,10 @@ public class Task implements Serializable {
     private boolean isDone = false;
     private Type type;
     final static List<String> descCommands = Arrays
-            .asList(new String[] { "todo", "deadline", "event", "mark", "unmark", "delete" });
+            .asList("todo", "deadline", "event", "mark", "unmark", "delete");
 
     final static List<String> commands = Arrays
-            .asList(new String[] { "list", "bye", "todo", "deadline", "event", "mark", "unmark", "delete" });
+            .asList("list", "bye", "todo", "deadline", "event", "mark", "unmark", "delete");
 
     private Task(String taskDesc, String cmd) {
         this.taskDesc = taskDesc;

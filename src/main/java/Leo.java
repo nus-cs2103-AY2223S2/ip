@@ -12,7 +12,9 @@ import leo.task.LeoTaskException;
 import leo.task.TaskList;
 import leo.ui.Ui;
 
-
+/**
+ * Main class for Leo.
+ */
 public class Leo {
 
     private Parser parser = new Parser();
@@ -27,6 +29,10 @@ public class Leo {
         new Leo().start();
     }
 
+    /**
+     * Starts the Leo program.
+     * @throws LeoTaskException
+     */
     public void start() throws LeoTaskException {
         //Get saved state
         ui.greetUser();
@@ -46,6 +52,10 @@ public class Leo {
         ui.printExit();
         parser.close();
     }
+
+    /**
+     * Reads the saved state of the task list from the file.
+     */
 
     private void readFile() {
         try {
