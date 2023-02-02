@@ -22,7 +22,7 @@ public class DukeUtils {
             DateTimeFormatter.ofPattern(OUTPUT_FORMAT_STRING);
 
     /**
-     * Converts a {@code LocalDate} instance to a {@code String}, using MMM dd yyyy format.
+     * Converts a {@code LocalDate} instance to a string, using {@code MMM dd yyyy} format.
      *
      * @param date the {@code LocalDate} instance to be converted
      * @return a string, representing the {@code LocalDate} instance

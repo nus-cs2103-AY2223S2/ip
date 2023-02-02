@@ -119,6 +119,13 @@ public class TaskList implements Serializable {
         return listTasksFrom(tasks.stream());
     }
 
+    /**
+     * Lists all stored tasks that contain the given keyword, with indicies. Indicies start from
+     * {@code 1}.
+     * 
+     * @param keyword the given keyword to search for
+     * @return a string showing the contents of all tasks that contain the keyword, with indicies
+     */
     public String listTasksContainKeyword(String keyword) {
         return listTasksFrom(tasks.stream().filter(task -> task.contains(keyword)));
     }
