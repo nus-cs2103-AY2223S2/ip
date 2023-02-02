@@ -18,10 +18,14 @@ public class Elise {
      * @param filePath Path of initial data file.
      * @throws EliseException if filePath is invalid.
      */
-    public Elise(String filePath) throws EliseException {
-        ui = new Ui();
-        storage = new Storage(filePath);
-        taskList = new TaskList(storage.load());
+    public Elise(String filePath) {
+        try {
+            ui = new Ui();
+            storage = new Storage(filePath);
+            taskList = new TaskList(storage.load());
+        } catch (EliseException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -29,20 +33,38 @@ public class Elise {
      *
      * @throws IOException Unexpected IOException
      */
-    public void run() throws IOException {
+    public void run() {
         ui.showWelcome();
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
             try {
                 Command c = Parser.read(sc);
-                c.execute(ui, taskList, storage);
+                System.out.println(c.execute(ui, taskList, storage));
                 if (c.isExit()) {
                     return;
                 }
             } catch (EliseException e) {
                 ui.showError(e);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
+    }
+
+    public String getResponse(String input) {
+        Scanner sc = new Scanner(input);
+        try {
+            Command c = Parser.read(sc);
+            c.execute(ui, taskList, storage);
+            if (c.isExit()) {
+                return "Bye";
+            }
+        } catch (EliseException e) {
+            return e.toString();
+        } catch (IOException e) {
+            return e.toString();
+        }
+        return "";
     }
 
     /**
