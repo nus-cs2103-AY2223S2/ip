@@ -41,23 +41,22 @@ public class Ui {
     }
 
     public void printMarkTask(Task markedTask) {
-        System.out.println("Nice! I have marked this task as Done:\n" + "[X] " +
-                markedTask.getDescription() + "\n");
+        System.out.println("Nice! I have marked this task as Done:\n" + markedTask.toString() + "\n");
     }
 
     public void printAddTask(Task to_add, Integer num_tasks) {
-        System.out.println("Got it fam! I've added this task:\n " + to_add.getDescription());
+        System.out.println("Got it fam! I've added this task:\n " + to_add.toString());
         System.out.println("You currently have " + num_tasks + " tasks in this list!\n");
     }
 
     public void printUnmarkTask(Task unmarkedTask) {
         System.out.println("Ok! I have marked this task as not done yet:\n" +
-                "[ ] " + unmarkedTask.getDescription() + "\n");
+                unmarkedTask.toString() + "\n");
     }
 
     public void printDeleteTask(Task removedTask, Integer num_tasks) {
         System.out.println("Noted!I have deleted the task for you:\n " +
-                removedTask.getDescription() + "\nyou currently have " + num_tasks +
+                removedTask.toString() + "\nyou currently have " + num_tasks +
                 " tasks in this list!\n");
     }
 }

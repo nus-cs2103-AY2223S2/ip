@@ -58,7 +58,7 @@ public class TaskList {
         }
         for (int i = 0; i < num_tasks; i++) {
             Task ref = tasks.get(i);
-            System.out.println((i + 1) + "." + ref.getStatusIcon() + " " + ref.getDescription());
+            System.out.println((i + 1) + "." + ref.toString());
         }
     }
 }

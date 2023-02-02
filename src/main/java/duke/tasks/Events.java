@@ -28,13 +28,12 @@ public class Events extends Task {
 
     @Override
     public String getStatusIcon() {
-        return "[E]" + super.getStatusIcon();
+        return super.getStatusIcon();
     }
 
     @Override
     public String getDescription() {
-        return super.getDescription() + " (from: " + this.getStart() +
-                " to: " + this.getEnd() + ")";
+        return super.getDescription();
     }
 
     public String parseStartSaving() {
@@ -49,5 +48,9 @@ public class Events extends Task {
     public String saveString() {
         return String.format("E|%s|%s|%s|%s", super.saveString(), super.description,
                 this.parseStartSaving(), this.parseEndSaving());
+    }
+
+    public String toString() {
+        return String.format("[E]%s (from: %s to: %s)", super.toString(), this.getStart(), this.getEnd());
     }
 }

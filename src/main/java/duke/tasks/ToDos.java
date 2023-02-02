@@ -8,11 +8,16 @@ public class ToDos extends Task {
 
     @Override
     public String getStatusIcon() {
-        return "[T]" + super.getStatusIcon();
+        return super.getStatusIcon();
     }
 
     @Override
     public String saveString() {
         return String.format("T|%s|%s", super.saveString(), super.description);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("[T]%s", super.toString());
     }
 }

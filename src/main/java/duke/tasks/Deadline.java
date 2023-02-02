@@ -16,7 +16,7 @@ public class Deadline extends Task {
 
     @Override
     public String getStatusIcon() {
-        return "[D]" + super.getStatusIcon();
+        return super.getStatusIcon();
     }
 
     public String getBy() {
@@ -25,7 +25,7 @@ public class Deadline extends Task {
 
     @Override
     public String getDescription() {
-        return super.getDescription() + " (by: " + this.getBy() + ")";
+        return super.getDescription();
     }
 
     public String parseBySaving() {
@@ -35,5 +35,10 @@ public class Deadline extends Task {
     @Override
     public String saveString() {
         return String.format("D|%s|%s|%s", super.saveString(), super.description, this.parseBySaving());
+    }
+
+    @Override
+    public String toString() {
+        return String.format("[D]%s (by: %s)", super.toString(), this.getBy());
     }
 }
