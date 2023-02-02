@@ -20,7 +20,7 @@ public class MarkCommand extends Command {
         List<Task> taskList = tasks.getTasks();
         Task currTask = taskList.get(taskNumber - 1);
 
-        currTask.markAsDone();
+        currTask.setDone(true);
         storage.save(taskList);
         ui.showTaskMarkDone(currTask);
     }

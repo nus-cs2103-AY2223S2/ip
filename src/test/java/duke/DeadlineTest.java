@@ -27,7 +27,7 @@ public class DeadlineTest {
     @Test
     public void doneStatusIconTest() {
         Deadline deadline = new Deadline("Eat lunch", "2023-02-04 14:00");
-        deadline.markAsDone();
+        deadline.setDone(true);
         assertEquals("X", deadline.getStatusIcon());
     }
 }

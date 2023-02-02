@@ -25,9 +25,9 @@ public class Ui {
     public void showGreeting() {
         printHorizontalLine();
         System.out.println(
-            "Karen:\n" +
-            "Can I speak to your manager?\n" +
-            "Just kidding, this is Karen. How can I help you today?"
+            "Karen:\n"
+            + "Can I speak to your manager?\n"
+            + "Just kidding, this is Karen. How can I help you today?"
         );
         printHorizontalLine();
     }

@@ -6,7 +6,7 @@ public class Task {
 
     public Task(String description) {
         this.description = description;
-        this.isDone = false;
+        isDone = false;
     }
 
     /**
@@ -37,17 +37,12 @@ public class Task {
     }
 
     /**
-     * Mark task as done.
+     * Set task as done or not done.
+     *
+     * @param isDone Status of the task to be set.
      */
-    public void markAsDone() {
-        isDone = true;
-    }
-
-    /**
-     * Mark task as not done.
-     */
-    public void markAsNotDone() {
-        isDone = false;
+    public void setDone(boolean isDone) {
+        this.isDone = isDone;
     }
 
     @Override
