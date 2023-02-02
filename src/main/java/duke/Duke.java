@@ -33,64 +33,64 @@ public class Duke {
         parser = new Parser();
     }
 
-    public static void main(String[] args) {
-        new Duke("./data", "./data/duke.txt").run();
+    public void loadTasksFromFile() {
+        try {
+            storage.loadTasks(taskList);
+            System.out.println("Successfully loaded from data file");
+        } catch (FileNotFoundException e) {
+            System.out.println("No save data found, starting with empty list");
+        } catch (IOException | DukeException e) {
+            System.out.println("Error loading save data, starting with empty list");
+        }
+    }
+
+    public void saveTasksToFile() {
+        try {
+            storage.saveTasks(taskList);
+            System.out.println("Successfully saved data to file");
+        } catch (IOException e) {
+            System.out.println("Error save data, data not saved!");
+        }
     }
 
     /**
-     * Runs Duke according to commands from user.
+     * Get response from Duke according to commands from user.
+     *
+     * @param input Command from the user
+     * @return Response from Duke
      */
-    public void run() {
-        Scanner sc = new Scanner(System.in);
-        ui.printWelcomeMessage();
-
+    public String getResponse(String input) {
+        String[] command = input.split(" ", 2);
         try {
-            storage.loadTasks(taskList);
-        } catch (FileNotFoundException e) {
-            ui.printMessage("No save data found!");
-        } catch (IOException | DukeException e) {
-            ui.printMessage("Error loading save data");
-        }
-
-        while (true) {
-            try {
-                String[] command = sc.nextLine().split(" ", 2);
-                if (command[0].equals("bye")) {
-                    storage.saveTasks(taskList);
-                    ui.printMessage("Bye. Hope to see you again soon!");
-                    break;
-                } else if (command[0].equals("list")) {
-                    ui.printMessage(taskList.listTasks());
-                } else if (command[0].equals("mark")) {
-                    int taskNum = parser.getTaskNum(command);
-                    taskList.markTask(parser.getTaskNum(command));
-                    ui.printSuccessMessage("Nice! I've marked this task as done:",
-                            taskList.getTask(taskNum));
-                } else if (command[0].equals("unmark")) {
-                    int taskNum = parser.getTaskNum(command);
-                    taskList.unmarkTask(taskNum);
-                    ui.printSuccessMessage("OK, I've marked this task as not done yet:",
-                            taskList.getTask(taskNum));
-                } else if (command[0].equals("delete")) {
-                    int taskNum = parser.getTaskNum(command);
-                    Task removedTask = taskList.deleteTask(taskNum);
-                    ui.printTaskMessage("Noted. I've removed this task:",
-                            removedTask, taskList.getSize());
-                } else if (command[0].equals("find")) {
-                    String keyword = parser.getKeyword(command);
-                    ui.printFindResult(taskList.getTasksWithKeyword(keyword));
-                } else {
-                    taskList.addTask(parser.getTaskToAdd(command));
-                    ui.printTaskMessage("Got it. I've added this task:",
-                            taskList.getLatestTask(), taskList.getSize());
-                }
-            } catch (DukeException e) {
-                ui.printMessage(e.getMessage());
-            } catch (NumberFormatException e) {
-                ui.printMessage("Valid task number required");
-            } catch (IOException e) {
-                ui.printMessage(e.getMessage());
+            if (command[0].equals("bye")) {
+                saveTasksToFile();
+                return "";
+            } else if (command[0].equals("list")) {
+                return taskList.listTasks();
+            } else if (command[0].equals("mark")) {
+                int taskNum = parser.getTaskNum(command);
+                taskList.markTask(parser.getTaskNum(command));
+                return ui.formatSuccessMessage("Nice! I've marked this task as done:", taskList.getTask(taskNum));
+            } else if (command[0].equals("unmark")) {
+                int taskNum = parser.getTaskNum(command);
+                taskList.unmarkTask(taskNum);
+                return ui.formatSuccessMessage("OK, I've marked this task as not done yet:", taskList.getTask(taskNum));
+            } else if (command[0].equals("delete")) {
+                int taskNum = parser.getTaskNum(command);
+                Task removedTask = taskList.deleteTask(taskNum);
+                return ui.formatTaskMessage("Noted. I've removed this task:", removedTask, taskList.getSize());
+            } else if (command[0].equals("find")) {
+                String keyword = parser.getKeyword(command);
+                return ui.formatFindResult(taskList.getTasksWithKeyword(keyword));
+            } else {
+                taskList.addTask(parser.getTaskToAdd(command));
+                return ui.formatTaskMessage("Got it. I've added this task:",
+                        taskList.getLatestTask(), taskList.getSize());
             }
+        } catch (DukeException e) {
+            return e.getMessage();
+        } catch (NumberFormatException e) {
+            return "Valid task number required";
         }
     }
 }
