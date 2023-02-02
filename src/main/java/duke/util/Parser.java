@@ -177,9 +177,9 @@ public class Parser {
 
             case find:
                 validateNotEmptyArgs(cmd);
-                String keyword = cmd.substring(5);
+                String keywords = cmd.substring(5);
 
-                command = new FindCommand(taskList, keyword);
+                command = new FindCommand(taskList, keywords.split(" "));
                 break;
 
             default:
