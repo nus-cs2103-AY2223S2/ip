@@ -4,7 +4,12 @@ import duke.Duke;
 import duke.command.*;
 import duke.task.Event;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Parser {
+
+    private static final DateTimeFormatter DATETIME_FORMAT = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
 
     private String readCommand(String[] userCommand) {
         return userCommand[0];
@@ -64,7 +69,8 @@ public class Parser {
                 }
                 name = splitBy[0];
                 String by = splitBy[1];
-                return new DeadlineCommand(name, by);
+                LocalDateTime byTime = LocalDateTime.parse(by, DATETIME_FORMAT);
+                return new DeadlineCommand(name, byTime);
 
             case "event":
                 if (userCommand.length == 1) {
@@ -74,14 +80,16 @@ public class Parser {
                 if (splitFrom.length != 2) {
                     throw new DukeException("error Invalid formatting for commands");
                 }
-                String[] splitTo = splitFrom[1].split(" /by ", 2);
+                String[] splitTo = splitFrom[1].split(" /to ", 2);
                 if (splitTo.length != 2) {
                     throw new DukeException("error Invalid formatting for commands");
                 }
                 name = splitFrom[0];
                 String from = splitTo[0];
                 String to = splitTo[1];
-                return new EventCommand(name, from, to);
+                LocalDateTime fromTime = LocalDateTime.parse(from, DATETIME_FORMAT);
+                LocalDateTime toTime = LocalDateTime.parse(to, DATETIME_FORMAT);
+                return new EventCommand(name, fromTime, toTime);
 
             case "mark":
                 return new MarkCommand(this.queryInteger(userCommand), true);
