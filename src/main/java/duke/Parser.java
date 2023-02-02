@@ -3,6 +3,7 @@ package duke;
 import duke.command.*;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 
 import static duke.utils.FormatHelper.INPUTFORMAT;
 
@@ -39,7 +40,12 @@ public class Parser {
             }
             String description = userInput.substring(9, byPos);
             String by = userInput.substring(byPos + 5);
-            LocalDateTime convertedBy = LocalDateTime.parse(by, INPUTFORMAT);
+            LocalDateTime convertedBy;
+            try {
+                convertedBy = LocalDateTime.parse(by, INPUTFORMAT);
+            } catch (DateTimeParseException e) {
+                throw new DukeException("Invalid Date and Time provided, use the format: dd/MM/yyyy HH:mm");
+            }
             return new AddDeadlineCommand(description, convertedBy);
         } else if (userInput.matches("^event .*")) {
             int fromPos = userInput.indexOf(" /from ");
@@ -56,8 +62,14 @@ public class Parser {
             String description = userInput.substring(6, fromPos);
             String from = userInput.substring(fromPos + 7, toPos);
             String to = userInput.substring(toPos + 5);
-            LocalDateTime convertedFrom = LocalDateTime.parse(from, INPUTFORMAT);
-            LocalDateTime convertedTo = LocalDateTime.parse(to, INPUTFORMAT);
+            LocalDateTime convertedFrom;
+            LocalDateTime convertedTo;
+            try {
+                convertedFrom = LocalDateTime.parse(from, INPUTFORMAT);
+                convertedTo = LocalDateTime.parse(to, INPUTFORMAT);
+            } catch (DateTimeParseException e) {
+                throw new DukeException("Invalid Date and Time provided, use the format: dd/MM/yyyy HH:mm");
+            }
             return new AddEventCommand(description, convertedFrom, convertedTo);
         } else if (userInput.matches("^delete \\d+")) {
             int index = Integer.parseInt(userInput.substring(7)) - 1;
