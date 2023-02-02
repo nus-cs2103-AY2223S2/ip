@@ -1,16 +1,23 @@
 package duke.exception;
 import duke.data.TypeOfTask;
 
+/**
+ * Duke Exception is a custom class that will handle common predictable errors made by the user.
+ * Error Codes ranges from 0 to n, where n will be specified further in the future.
+ *
+ * @author Haiqel Bin Hanaffi (Acerizm)
+ */
 public class DukeException extends Exception {
 
-    /*
-        Error Codes ranges from 0 to n, where n will be specified further in the future
-     */
     String message;
     TypeOfTask errorTask;
     int errorCode;
 
-    //default constructor
+    /**
+     * Default constructor that will determine which messages will the exception print when error occurs.
+     * @param task Type of task
+     * @param errorCode Error code
+     */
     public DukeException(TypeOfTask task, int errorCode){
         super();
         this.errorCode = errorCode;
@@ -131,20 +138,34 @@ public class DukeException extends Exception {
         }
     }
 
-    // for actions/commands that does not belong in the enum types
+    /**
+     * Constructor for if a generic exception is thrown
+     */
     public DukeException(){
         super();
         this.message = "Oops! I don't understand what it means!";
     }
 
+    /**
+     * Returns the error code for the specific error based on the type of task
+     * @return error code
+     */
     public int getErrorCode() {
         return this.errorCode;
     }
 
+    /**
+     * Get the type of task that the command belongs to when error occurs
+     * @return type of task
+     */
     public TypeOfTask getErrorTask() {
         return this.errorTask;
     }
 
+    /**
+     * Returns the specific error message
+     * @return error message
+     */
     @Override
     public String getMessage(){
         return this.message;

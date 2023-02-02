@@ -18,12 +18,27 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Parser class that handles all conversion and parsing of the user inputs.
+ *
+ * @author Haiqel Bin Hanaffi
+ */
 public class Parser implements Serializable {
-
+    /**
+     * Default constructor
+     */
     public Parser() {
 
     }
 
+    /**
+     * Converts the user input into descriptions to store in the Task instance.
+     * @param input Input from user as an array of Strings
+     * @param action Type of task
+     * @param limiter Delimitter specified. Example: " ", "/by", "/from", "/to"
+     * @return the contents of the user inputs
+     * @throws DukeException when an error occurs during execution depending on the type of task
+     */
     public String convertToUserInput(String[] input, TypeOfTask action,String limiter ) throws DukeException{
         switch(action){
             case todo: {
@@ -114,6 +129,12 @@ public class Parser implements Serializable {
         }
     }
 
+    /**
+     * Returns the local date in another format
+     * @param date Date
+     * @return Date
+     * @throws DukeException when error occurs during conversion
+     */
     public LocalDate covertToLocalDate(String date) throws DukeException {
         String[] dateFormats = {"dd/MM/yyyy", "yyyy-MM-dd", "MM-dd-yyyy","d/MM/yyyy","d/M/yyyy"};
         LocalDate localDate;
@@ -130,6 +151,12 @@ public class Parser implements Serializable {
         throw new DukeException(TypeOfTask.parser,0);
     }
 
+    /**
+     * Returns the local time
+     * @param time Time
+     * @return local time
+     * @throws DukeException when error occurs during execution
+     */
     public LocalTime convertToLocalTime(String time) throws DukeException{
         String[] timeFormats = {"h:mm a", "HH:mm", "hh:mm a", "HH:mm:ss","HHmm","h:mma","hh:mma","h:a"};
         LocalTime localTime;
@@ -146,8 +173,11 @@ public class Parser implements Serializable {
         throw new DukeException(TypeOfTask.parser,1);
     }
 
-    /*
-        convert the beginning of the user's input into a TypeOfTask enum type
+    /**
+     * converts the beginning of the user's input into a TypeOfTask enum type
+     * @param command Command given by the user
+     * @return Command instance
+     * @throws DukeException when error occurs when creating the Command instance
      */
     public Command parse(String command) throws DukeException {
         String[] input = command.split(" ");

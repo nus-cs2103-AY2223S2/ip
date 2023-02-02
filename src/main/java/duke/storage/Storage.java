@@ -10,11 +10,16 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Storage class that manages the loading and saving of the data before and after the program's execution.
+ *
+ * @author Haiqel Bin Hanaffi (Acerizm)
+ */
 public class Storage {
     String filePath;
-    
-    /*
-     * default Constructor
+
+    /**
+     * Default constructor. Constructor specifies hard codded file using relative path.
      */
     public Storage(){
         this.filePath = "src" + File.separator + "main" + File.separator 
@@ -22,15 +27,18 @@ public class Storage {
                 + "data" + File.separator + "duke.txt";
     }
 
-    /*
-     *  constructor that accepts a custom and different filepath
+    /**
+     * constructor that accepts a custom and different filepath
+     * @param filePath File path of the data
      */
     public Storage(String filePath){
         this.filePath = filePath;
     }
 
-    /*
-     * load data from disk to list of tasks as deserialized objects
+    /**
+     * Returns deserialized list of tasks after loading stored data from the disk .
+     * @return List of tasks
+     * @throws DukeException when file is not found or data is corrupted
      */
     public List<Task> loadTasks() throws DukeException {
         List<Task> taskList = new ArrayList<>();
@@ -46,8 +54,10 @@ public class Storage {
         }
     }
 
-    /*
-     * save data to disk from program as serialized objects
+    /**
+     * saves data to disk from program as serialized objects
+     * @param taskList List of tasks
+     * @throws DukeException when error occurs during saving
      */
     public void saveTasks(List<Task> taskList) throws DukeException {
         try (ObjectOutputStream save = new ObjectOutputStream(new FileOutputStream(this.filePath))) {

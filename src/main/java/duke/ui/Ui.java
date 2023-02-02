@@ -4,17 +4,25 @@ import duke.data.TaskList;
 import duke.data.TypeOfTask;
 import duke.action.Task;
 
-/*
+/**
  * User Interface Class for handling user's interactions
+ *
+ * @author Haiqel Bin Hanaffi (Acerizm)
  */
 public class Ui {
 
     private Scanner scanner;
-    
+
+    /**
+     * Default constructor
+     */
     public Ui(){
         this.scanner = new Scanner(System.in);
     }
 
+    /**
+     * Displays the welcome message with customized logo
+     */
     public void displayWelcome() {
         String personal_logo = "                      - \n"
                              + "    /                (_) \n"
@@ -29,14 +37,26 @@ public class Ui {
         this.showLine();
     }
 
+    /**
+     * Closes the scanner instance
+     */
     public void close() {
         this.scanner.close();
     }
 
+    /**
+     * Shows the long repeated lines for UI
+     */
     public void showLine() {
         System.out.println("*-".repeat(100));
     }
 
+    /**
+     * Displays the result of the commands given by the user
+     * @param type Type of task
+     * @param task Task instance
+     * @param taskList List of tasks
+     */
     public void displayResult(TypeOfTask type,Task task, TaskList taskList) {
         if(type == TypeOfTask.bye) {
             System.out.println("Bye. Hope to see you again soon!");
@@ -87,6 +107,11 @@ public class Ui {
 
     }
 
+    /**
+     * Reads the command from the user's inputs
+     * @return the user's inputs
+     * @throws Exception when user does not type anything and immediately enters an empty response or command.
+     */
     public String readCommand() throws Exception {
         // this is what I want
         return this.scanner.nextLine();

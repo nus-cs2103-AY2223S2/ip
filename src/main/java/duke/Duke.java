@@ -7,12 +7,19 @@ import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.ui.Ui;
 
+/**
+ * Main program for iP
+ */
 public class Duke {
     private Storage storage;
     private Ui ui;
     private TaskList taskList;
     private Parser parser;
 
+    /**
+     * Default constructor
+     * @throws Exception
+     */
     public Duke() throws Exception{
         this.ui = new Ui();
         this.storage = new Storage();
@@ -30,6 +37,11 @@ public class Duke {
 
         }
     }
+
+    /**
+     * Runs the program in a loop while waiting for the user's inputs.
+     * @throws Exception when user inputs are not legal
+     */
     public void run() throws Exception {
         ui.displayWelcome();
         boolean isExit = false;
@@ -46,6 +58,12 @@ public class Duke {
             }
         }
     }
+
+    /**
+     * Main method for Duke class
+     * @param args
+     * @throws Exception when unforseen error occurs.
+     */
     public static void main(String[] args) throws Exception {
         new Duke().run();
     }

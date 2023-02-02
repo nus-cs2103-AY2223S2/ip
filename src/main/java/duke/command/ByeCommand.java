@@ -18,11 +18,18 @@ public class ByeCommand extends Command {
     public ByeCommand() {
         super(null,true);
     }
-    
-    public void execute(TaskList tasklist, Ui ui, Storage storage) throws DukeException {
+
+    /**
+     * Saves the task to the memory and displays the result
+     * @param taskList List of tasks
+     * @param ui Ui object
+     * @param storage Storage object
+     * @throws DukeException When saving of task is not possible due to unforseen errors
+     */
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         // need to save the updated taskList to the storage
         // the ui will be responsible in displaying whatever needs to be displayed -> not the responsibility of the command classes
         ui.displayResult(TypeOfTask.bye,null,null);
-        storage.saveTasks(tasklist.getTasks());
+        storage.saveTasks(taskList.getTasks());
     }
 }
