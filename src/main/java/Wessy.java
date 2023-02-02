@@ -7,6 +7,9 @@ import Exceptions.WessyException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Wessy {
     static String OPENING_LINE = "    -Wessy------------------------------" +
@@ -16,19 +19,19 @@ public class Wessy {
     static List<Task> tasks = new ArrayList<Task>();
 
     public static void main(String[] args) {
-        System.out.println(OPENING_LINE);
-        println("Hi, I am Wessy, your personal assistant chatbot.");
-        println("Please type something to interact with me.");
-        System.out.println(CLOSING_LINE);
-
+        startsUp();
         Scanner sc = new Scanner(System.in);
         while (sc.hasNextLine()) {
             String userInput = sc.nextLine();
             if (checkCmd(userInput, CmdType.BYE)) {
-                printNormal("Bye. Hope to see you again soon!");
+                printMessage("Bye. Hope to see you again soon!");
                 break;
             } else if (checkCmd(userInput, CmdType.LIST)) {
-                printList();
+                printListMessage();
+            } else if (checkCmd(userInput, CmdType.CLEAR)) {
+                tasks.clear();
+                saveTasks();
+                printMessage("Your task list has just been cleared. It is now empty.");
             } else {
                 try {
                     if (checkCmd(userInput, CmdType.MARK)) {
@@ -36,27 +39,58 @@ public class Wessy {
                     } else if (checkCmd(userInput,CmdType.UNMARK)) {
                         markOrUnmark(userInput, false);
                     } else if (checkCmd(userInput, CmdType.DELETE)) {
-                        delete(userInput);
+                        deleteTask(userInput);
                     } else if (checkCmd(userInput, CmdType.TODO)) {
-                        printAdded(add(parse(userInput, CmdType.TODO)));
+                        printAddedMessage(addTask(parse(userInput, CmdType.TODO)));
                     } else if (checkCmd(userInput, CmdType.DEADLINE)) {
-                        printAdded(add(parse(userInput, CmdType.DEADLINE)));
+                        printAddedMessage(addTask(parse(userInput, CmdType.DEADLINE)));
                     } else if (checkCmd(userInput, CmdType.EVENT)) {
-                        printAdded(add(parse(userInput, CmdType.EVENT)));
+                        printAddedMessage(addTask(parse(userInput, CmdType.EVENT)));
                     } else {
                         throw new CommandNotFoundException();
                     }
                 } catch (WessyException wessyEx) {
-                    printNormal(String.valueOf(wessyEx));
+                    printMessage(String.valueOf(wessyEx));
                 } catch (NumberFormatException nfe) {
-                    printNormal("☹ OOPS!!! It is not a number." +
+                    printMessage("☹ OOPS!!! It is not a number." +
                             " Please enter a number.");
                 } catch (ArrayIndexOutOfBoundsException ex) {
-                    printNormal("☹ OOPS!!! Please enter a " +
+                    printMessage("☹ OOPS!!! Please enter a " +
                             "valid task number.");
                 }
             }
         }
+    }
+
+    static void startsUp() {
+        System.out.println(OPENING_LINE);
+        println("Hi, I am Wessy, your personal assistant chatbot.");
+        File savedFile = new File("data/Wessy.txt");
+        if (savedFile.exists()) {
+            try {
+                Scanner sc = new Scanner(savedFile);
+                while (sc.hasNextLine()) {
+                    String[] taskComponents = sc.nextLine().split("~%~");
+                    boolean isDone = taskComponents[1].charAt(0) == '1' ? true : false;
+                    switch (taskComponents[0].charAt(0)) {
+                        case 'T':
+                            tasks.add(new ToDo(taskComponents[2], isDone));
+                            break;
+                        case 'D':
+                            tasks.add(new Deadline(taskComponents[2], taskComponents[3], isDone));
+                            break;
+                        case 'E':
+                            tasks.add(new Event(taskComponents[2], taskComponents[3], taskComponents[4], isDone));
+                            break;
+                    }
+                }
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+        println("");
+        printList();
+        System.out.println(CLOSING_LINE);
     }
 
     static String[] parse(String description, CmdType type) throws
@@ -150,7 +184,6 @@ public class Wessy {
                 throw new UnspecifiedTimeException("/to");
             }
         }
-
     }
 
     static void checkForTimeKeywordEx(String userInput, String keyword) throws
@@ -174,7 +207,7 @@ public class Wessy {
         }
     }
 
-    static void printNormal(String... linesOfString) {
+    static void printMessage(String... linesOfString) {
         System.out.println(OPENING_LINE);
         for (String line : linesOfString) {
             println(line);
@@ -182,13 +215,13 @@ public class Wessy {
         System.out.println(CLOSING_LINE);
     }
 
-    static void printAdded(Task task) {
+    static void printAddedMessage(Task task) {
         int size = tasks.size();
         String numOfTasks = " " + size + " task";
         if (size > 1) {
             numOfTasks += "s";
         }
-        printNormal("Got it. I've added this task:",
+        printMessage("Got it. I've added this task:",
                 "  " + task, "Now you have" + numOfTasks + " in the list.");
     }
 
@@ -202,7 +235,7 @@ public class Wessy {
         System.out.println(message);
     }
 
-    static Task add(String[] strings) {
+    static Task addTask(String[] strings) {
         int len = strings.length;
         if (len == 1) {
             tasks.add(new ToDo(strings[0]));
@@ -211,12 +244,18 @@ public class Wessy {
         } else if (len == 3) {
             tasks.add(new Event(strings[0], strings[1], strings[2]));
         }
+        saveTasks();
         return tasks.get(tasks.size() - 1);
+    }
+
+    static void printListMessage() {
+        System.out.println(OPENING_LINE);
+        printList();
+        System.out.println(CLOSING_LINE);
     }
 
     static void printList() {
         int size = tasks.size();
-        System.out.println(OPENING_LINE);
         if (size == 0) {
             println("WOOHOO! You do not have any task on the list.");
         } else {
@@ -225,7 +264,6 @@ public class Wessy {
                 println((i + 1) + "." + tasks.get(i));
             }
         }
-        System.out.println(CLOSING_LINE);
     }
 
     static int parseInt(String userInput, CmdType type) throws
@@ -259,21 +297,48 @@ public class Wessy {
             tasks.get(idx).unmark();
         }
         String end = isMark ? "done:" : "not done yet:";
-        printNormal(start + " marked this task as " + end, "  " +
+        printMessage(start + " marked this task as " + end, "  " +
                 tasks.get(idx));
+        saveTasks();
     }
 
-    static void delete(String userInput) throws EmptyListException,
+    static void deleteTask(String userInput) throws EmptyListException,
             MissingInputException, MissingSpacingException,
             NumberFormatException, ArrayIndexOutOfBoundsException,
             UnspecifiedTimeException {
         int idx = parseInt(userInput, CmdType.DELETE);
         Task removedTask = tasks.get(idx);
         tasks.remove(idx);
+        saveTasks();
         int size = tasks.size();
-        printNormal("Noted. I've removed this task:", "  " +
+        printMessage("Noted. I've removed this task:", "  " +
                 removedTask, String.format(
                         "Now you have %d task%s in the list.", size,
                         size == 1 ? "" : "s"));
+    }
+
+    static void saveTasks() {
+        String tasksStr = "";
+        int n = tasks.size();
+        for (int i = 0; i < n; i++) {
+            tasksStr += tasks.get(i).saveAsStr() + "\n";
+        }
+        File dir = new File("data");
+        // If folder doesn't exist, create it
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+        try {
+            // CREATE FILE
+            String path = "data/Wessy.txt";
+            File file = new File(path);
+            file.createNewFile();
+            // WRITE FILE
+            FileWriter fw = new FileWriter(path);
+            fw.write(tasksStr);
+            fw.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 }
