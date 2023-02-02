@@ -166,4 +166,21 @@ public class TaskList {
         response.append("Now you have ").append(count).append(" tasks in the list.");
         return response.toString();
     }
+
+    public String find(String keyword) {
+        StringBuilder response = new StringBuilder();
+        response.append("Here are the matching tasks in your list\n");
+        int taskCount = 1;
+        for (int i = 0; i < tasks.size(); i++) {
+            Task currentTask = tasks.get(i);
+            if (currentTask.getDescription().contains(keyword)) {
+                response.append(String.format("%d. %s\n", taskCount, currentTask.toString()));
+                taskCount++;
+            }
+        }
+        if (taskCount == 1) {
+            response.append("No task matching description");
+        }
+        return response.toString();
+    }
 }

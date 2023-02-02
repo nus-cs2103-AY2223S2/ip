@@ -74,6 +74,9 @@ public class Parser {
         } else if (userInput.matches("^delete \\d+")) {
             int index = Integer.parseInt(userInput.substring(7)) - 1;
             return new DeleteCommand(index);
+        } else if (userInput.matches("^find .*")) {
+            String keyword = userInput.substring(5);
+            return new FindCommand(keyword);
         } else {
             return new UnknownCommand();
         }
