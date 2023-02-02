@@ -57,6 +57,9 @@ public class Parser {
             case "delete":
                 tasks.deleteTask(userCommand);
                 break;
+            case "find":
+                tasks.findTask(userCommand);
+                break;
             default:
                 throw new DukeInvalidCommandException("beep...boop... unrecognized command!");
         }
