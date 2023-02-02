@@ -1,15 +1,15 @@
 package duke.task;
 
-import java.time.LocalDateTime;
-
-import static duke.utils.FormatHelper.PRINTFORMAT;
 import static duke.utils.FormatHelper.INPUTFORMAT;
+import static duke.utils.FormatHelper.PRINTFORMAT;
+
+import java.time.LocalDateTime;
 
 public class Event extends Task {
     protected LocalDateTime from;
     protected LocalDateTime to;
 
-    public Event (String description, LocalDateTime from, LocalDateTime to) {
+    public Event(String description, LocalDateTime from, LocalDateTime to) {
         super(description);
         this.from = from;
         this.to = to;

@@ -1,24 +1,24 @@
 package duke.task;
 
 public abstract class Task {
-    private boolean completed;
+    private boolean isCompleted;
     private String description;
 
     public Task(String description) {
         this.description = description;
-        this.completed = false;
+        this.isCompleted = false;
     }
 
     public String getStatusIcon() {
-        return this.completed ? "X" : " ";
+        return this.isCompleted ? "X" : " ";
     }
 
     public void setCompleted(boolean completed) {
-        this.completed = completed;
+        this.isCompleted = completed;
     }
 
     public String toSaveFormat() {
-        String status = completed ? "1" : "0";
+        String status = isCompleted ? "1" : "0";
         return status + "||" + description;
     }
 
