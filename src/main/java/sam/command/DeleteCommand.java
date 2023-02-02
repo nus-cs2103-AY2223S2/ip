@@ -30,7 +30,7 @@ public class DeleteCommand extends Command {
         if (task == null) {
             throw new SamInvalidTaskException();
         }
-        ui.talk("Ok, I'll remove the task from your list:",
+        ui.respond("Ok, I'll remove the task from your list:",
                 task.toString());
         storage.save(tasks);
     }

@@ -2,6 +2,12 @@ package sam;
 
 import java.nio.file.Path;
 
+import javafx.animation.PauseTransition;
+import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.stage.Stage;
+import javafx.util.Duration;
+
 import sam.command.Command;
 import sam.command.ExitCommand;
 import sam.parser.Parser;
@@ -10,57 +16,64 @@ import sam.storage.Storage;
 import sam.task.TaskList;
 
 /**
- * Represents the main Sam program
+ * Represents the main Sam program.
  */
-public class Sam {
+public class Sam extends Application {
+    private static Sam samInstance;
+
+    public static Sam getSamInstance() {
+        return samInstance;
+    }
+
     private Ui ui;
     private Storage storage;
     private TaskList tasks;
-    private boolean isLive;
 
     /**
-     * Constructs a new Sam instance with the given save path.
-     *
-     * @param savePath The path to the save file.
+     * Constructs a new Sam instance.
      */
-    public Sam(Path savePath) {
+    public Sam() {
+        Path savePath = Path.of("data", "sam.txt");
+
         ui = new Ui();
         storage = new Storage(savePath);
         tasks = new TaskList();
-        isLive = false;
-    }
 
-    /**
-     * Begins executing Sam.
-     */
-    public void run() {
-        isLive = true;
-        ui.showLogo();
-        ui.talk("Hello, I am Sam!");
         try {
             storage.load(tasks);
         } catch (SamLoadFailedException e) {
-            ui.talk(e.getMessage());
-        }
-        while (isLive) {
-            String input = ui.acceptInput();
-            try {
-                Command c = Parser.parseCommand(input);
-                c.execute(tasks, ui, storage);
-                isLive = !(c instanceof ExitCommand);
-            } catch (SamException e) {
-                ui.talk(e.getMessage());
-            }
+            ui.respond(e.getMessage());
         }
     }
 
     /**
-     * The main method of the program.
-     *
-     * @param args
+     * Parses the input into a command and executes it.
+     * 
+     * @param input The command to execute.
      */
-    public static void main(String[] args) {
-        Path savePath = Path.of("data", "sam.txt");
-        new Sam(savePath).run();
+    public void issueCommand(String input) {
+        try {
+            Command c = Parser.parseCommand(input);
+            c.execute(tasks, ui, storage);
+            if (c instanceof ExitCommand) {
+                ui.disable();
+                PauseTransition delay = new PauseTransition(Duration.seconds(2));
+                delay.setOnFinished(event -> Platform.exit());
+                delay.play();
+            }
+        } catch (SamException e) {
+            ui.respond(e.getMessage());
+        }
+    }
+
+    @Override
+    public void init() {
+        samInstance = this;
+    }
+
+    @Override
+    public void start(Stage stage) throws Exception {
+        ui.setStage(stage);
+        stage.show();
     }
 }

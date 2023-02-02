@@ -69,7 +69,7 @@ public class AddCommand extends Command {
 
         tasks.addTask(task);
 
-        ui.talk("Gotcha, I'll add the task to your list:",
+        ui.respond("Gotcha, I'll add the task to your list:",
                 task.toString(),
                 String.format("Now you have %d tasks in the list", tasks.count()));
 

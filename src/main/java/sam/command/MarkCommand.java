@@ -41,7 +41,7 @@ public class MarkCommand extends Command {
         String message = isDone
                 ? "Great! I'll check the task:"
                 : "Okay, I'll uncheck the task:";
-        ui.talk(message,
+        ui.respond(message,
                 tasks.getTask(id).toString());
         storage.save(tasks);
     }

@@ -18,10 +18,10 @@ public class FindCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         List<String> list = tasks.findTasks(args);
         if (list.size() == 0) {
-            ui.talk("None of your tasks match!");
+            ui.respond("None of your tasks match!");
         } else {
             list.add(0, String.format("I found %d matching tasks:", list.size()));
-            ui.talk(list.toArray(new String[0]));
+            ui.respond(list.toArray(new String[0]));
         }
     }
 }
