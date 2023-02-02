@@ -65,20 +65,18 @@ public class AddCommand extends Command{
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         switch (this.type) {
             case "E":
                 tasks.addEvent(description, from, to);
-                ui.showTask(new Event(description, from, to), tasks.size());
-                break;
+                return ui.showTask(new Event(description, from, to), tasks.size());
             case "D":
                 tasks.addDeadline(description, by);
-                ui.showTask(new Deadline(description, LocalDate.parse(by)), tasks.size());
-                break;
+                return ui.showTask(new Deadline(description, LocalDate.parse(by)), tasks.size());
             case "T":
                 tasks.addTodo(description);
-                ui.showTask(new Todo(description), tasks.size());
-                break;
+                return ui.showTask(new Todo(description), tasks.size());
         }
+        throw new DukeException("could not add task");
     }
 }

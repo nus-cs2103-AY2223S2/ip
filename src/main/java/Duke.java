@@ -5,6 +5,12 @@ import duke.DukeException;
 import duke.command.Parser;
 import duke.command.Command;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+
 /**
  * The type Duke.
  */
@@ -41,7 +47,8 @@ public class Duke {
                 String fullCommand = ui.readCommand();
                 ui.showLine(); // show the divider line ("_______")
                 Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
+                String s = c.execute(tasks, ui, storage);
+                System.out.println(s);
                 isExit = c.isExit();
             } catch (DukeException e) {
                 ui.showError(e.getMessage());
@@ -50,6 +57,7 @@ public class Duke {
             }
         }
     }
+
 
     /**
      * The entry point of application.
