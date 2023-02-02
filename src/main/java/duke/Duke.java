@@ -17,7 +17,6 @@ public class Duke {
 
     /**
      * Constructs a new chatbot.
-     *
      * @param dataFilePath Path to store the task list text file.
      */
     public Duke(String dataFilePath) {
@@ -26,83 +25,70 @@ public class Duke {
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            ui.showLoadingError();
+            System.out.println(ui.getLoadingError());
             tasks = new TaskList();
         }
     }
 
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
-    }
-
     /**
-     * Runs the main input loop for the chatbot.
+     * Respond to a given input message.
+     * @param input The input message.
+     * @return An appropriate response.
      */
-    public void run() {
-        ui.showGreeting();
-
+    public String getResponse(String input) {
         Task task;
         int taskNumber;
-
-        label:
-        while (true) {
+        try {
+            String[] parsedCommand = Parser.parseCommand(input);
+            String command = parsedCommand[0];
+            switch (command) {
+            case "bye":
+                return ui.getGoodbyeMessage();
+            case "list":
+                return tasks.toString();
+            case "mark":
+                taskNumber = Integer.parseInt(parsedCommand[1]);
+                tasks.setDone(taskNumber, true);
+                task = tasks.getTask(taskNumber);
+                return ui.getMarkTaskMessage(task);
+            case "unmark":
+                taskNumber = Integer.parseInt(parsedCommand[1]);
+                tasks.setDone(taskNumber, false);
+                task = tasks.getTask(taskNumber);
+                return ui.getUnmarkTaskMessage(task);
+            case "delete":
+                taskNumber = Integer.parseInt(parsedCommand[1]);
+                task = tasks.getTask(taskNumber);
+                tasks.deleteTask(taskNumber);
+                return ui.getDeleteTaskMessage(task, tasks);
+            case "find":
+                return ui.getFindTaskMessage(tasks.findTasks(parsedCommand[1]));
+            case "todo":
+                task = new ToDo(parsedCommand[1]);
+                tasks.addTask(task);
+                return ui.getAddTaskMessage(task, tasks);
+            case "deadline":
+                task = new Deadline(parsedCommand[1], Parser.parseDate(parsedCommand[2], false));
+                tasks.addTask(task);
+                return ui.getAddTaskMessage(task, tasks);
+            case "event":
+                task = new Event(parsedCommand[1], Parser.parseDate(parsedCommand[2], false),
+                    Parser.parseDate(parsedCommand[3], false));
+                tasks.addTask(task);
+                return ui.getAddTaskMessage(task, tasks);
+            default:
+                throw new UnknownCommandException();
+            }
+        } catch (DukeException e) {
+            return ui.getErrorMessage(e.getMessage());
+        } catch (Exception e) {
+            return ui.getErrorMessage(e.toString());
+        } finally {
             try {
-                String[] parsedCommand = Parser.parseCommand(ui.readCommand());
-                String command = parsedCommand[0];
-                switch (command) {
-                case "bye":
-                    ui.showGoodbye();
-                    break label;
-                case "list":
-                    ui.showTextWithLines(tasks.toString());
-                    break;
-                case "mark":
-                    taskNumber = Integer.parseInt(parsedCommand[1]);
-                    tasks.setDone(taskNumber, true);
-                    task = tasks.getTask(taskNumber);
-                    ui.showMarkTaskMessage(task);
-                    break;
-                case "unmark":
-                    taskNumber = Integer.parseInt(parsedCommand[1]);
-                    tasks.setDone(taskNumber, false);
-                    task = tasks.getTask(taskNumber);
-                    ui.showUnmarkTaskMessage(task);
-                    break;
-                case "delete":
-                    taskNumber = Integer.parseInt(parsedCommand[1]);
-                    task = tasks.getTask(taskNumber);
-                    tasks.deleteTask(taskNumber);
-                    ui.showDeleteTaskMessage(task, tasks);
-                    break;
-                case "find":
-                    ui.showFindTaskMessage(tasks.findTasks(parsedCommand[1]));
-                    break;
-                case "todo":
-                    task = new ToDo(parsedCommand[1]);
-                    tasks.addTask(task);
-                    ui.showAddTaskMessage(task, tasks);
-                    break;
-                case "deadline":
-                    task = new Deadline(parsedCommand[1], Parser.parseDate(parsedCommand[2], false));
-                    tasks.addTask(task);
-                    ui.showAddTaskMessage(task, tasks);
-                    break;
-                case "event":
-                    task = new Event(parsedCommand[1], Parser.parseDate(parsedCommand[2], false),
-                        Parser.parseDate(parsedCommand[3], false));
-                    tasks.addTask(task);
-                    ui.showAddTaskMessage(task, tasks);
-                    break;
-                default:
-                    throw new UnknownCommandException();
-                }
-
                 // After each command, save the current task list to the file
                 storage.saveTasks(tasks);
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
             } catch (Exception e) {
-                ui.showError(e.toString());
+                System.out.println(ui.getErrorMessage(e.toString()));
             }
         }
     }

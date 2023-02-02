@@ -51,9 +51,8 @@ public class Storage {
      * Parses and separates the data file into an ArrayList of each line.
      *
      * @return ArrayList of parsed commands.
-     * @throws DukeException if the command given is invalid or is not a command known by the chatbot.
      */
-    public ArrayList<String[]> load() throws DukeException {
+    public ArrayList<String[]> load() {
         File targetFile = new File(dataFilePath);
         ArrayList<String[]> fileCommands = new ArrayList<>();
 
@@ -65,7 +64,7 @@ public class Storage {
                 }
             }
         } catch (Exception e) {
-            System.out.println(e.toString());
+            System.out.println(e);
         }
 
         return fileCommands;

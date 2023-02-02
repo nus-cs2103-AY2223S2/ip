@@ -10,6 +10,6 @@ public class InvalidCommandException extends DukeException {
      * @param description Description of the problem.
      */
     public InvalidCommandException(String description) {
-        super("☹ OOPS!!! " + description);
+        super("OOPS!!! " + description);
     }
 }

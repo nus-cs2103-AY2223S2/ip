@@ -9,75 +9,63 @@ import tasks.Task;
  * Handles interaction with the user and prints information about the program.
  */
 public class Ui {
-    private final Scanner scanner = new Scanner(System.in);
-
     /**
-     * Reads an input command from the user.
-     *
-     * @return The input command by the user.
+     * The message to be shown before quitting the application.
+     * @return The goodbye message.
      */
-    public String readCommand() {
-        return this.scanner.nextLine();
+    public String getGoodbyeMessage() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
-     * Prints a greeting message.
-     */
-    public void showGreeting() {
-        showTextWithLines("Hello! I'm Duke.\nWhat can I do for you?");
-    }
-
-    /**
-     * Prints a goodbye message.
-     */
-    public void showGoodbye() {
-        showTextWithLines("Bye. Hope to see you again soon!");
-    }
-
-    /**
-     * Prints information about the task list after adding a task.
+     * Human readable information about the task list after adding a task.
      *
      * @param task  Task that was added.
      * @param tasks Task list that task was added to.
+     * @return The relevant information about the task list.
      */
-    public void showAddTaskMessage(Task task, TaskList tasks) {
-        showTextWithLines("Got it. I've added this task:\n  " + task + "\n" + tasks.describeLength());
+    public String getAddTaskMessage(Task task, TaskList tasks) {
+        return "Got it. I've added this task:\n  " + task + "\n" + tasks.describeLength();
     }
 
     /**
-     * Prints information about the task list after deleting a task.
+     * Human readable information about the task list after deleting a task.
      *
      * @param task  Task that was deleted.
      * @param tasks Task list that task was deleted from.
+     * @return The relevant information about the task list.
      */
-    public void showDeleteTaskMessage(Task task, TaskList tasks) {
-        showTextWithLines("Noted. I've removed this task:\n  " + task + "\n" + tasks.describeLength());
+    public String getDeleteTaskMessage(Task task, TaskList tasks) {
+        return "Noted. I've removed this task:\n  " + task + "\n" + tasks.describeLength();
     }
 
     /**
-     * Prints information about the task list after marking a task as complete.
+     * Human readable information about the task list after marking a task as complete.
      *
      * @param task Task that was marked as complete.
+     * @return The relevant information about the task list.
      */
-    public void showMarkTaskMessage(Task task) {
-        showTextWithLines("Nice! I've marked this task as done:\n  " + task);
+    public String getMarkTaskMessage(Task task) {
+        return "Nice! I've marked this task as done:\n  " + task;
     }
 
     /**
-     * Prints information about the task list after marking a task as uncomplete.
+     * Human readable information about the task list after marking a task as uncomplete.
      *
      * @param task Task that was marked as uncomplete.
+     * @return The relevant information about the task list.
      */
-    public void showUnmarkTaskMessage(Task task) {
-        showTextWithLines("OK, I've marked this task as not done yet:\n  " + task);
+    public String getUnmarkTaskMessage(Task task) {
+        return "OK, I've marked this task as not done yet:\n  " + task;
     }
 
     /**
-     * Prints information about the tasks found with the search string.
+     * Human readable information about the tasks found with the search string.
      *
      * @param tasks List of tasks that were found by the search string.
+     * @return The relevant information about the tasks.
      */
-    public void showFindTaskMessage(ArrayList<Task> tasks) {
+    public String getFindTaskMessage(ArrayList<Task> tasks) {
         StringBuilder tasksStr = new StringBuilder();
         tasksStr.append("Here are the matching tasks in your list:\n");
         for (int i = 0; i < tasks.size(); i++) {
@@ -86,41 +74,24 @@ public class Ui {
         if (tasksStr.length() > 0) {
             tasksStr.deleteCharAt(tasksStr.length() - 1);
         }
-        showTextWithLines(tasksStr.toString());
+        return tasksStr.toString();
     }
 
     /**
-     * Prints information about an error message.
+     * Human readable information about an error message.
      *
      * @param errorMessage Error message describing the error.
+     * @return Human readable information about the error message.
      */
-    public void showError(String errorMessage) {
-        showTextWithLines("Something went wrong:\n" + errorMessage);
+    public String getErrorMessage(String errorMessage) {
+        return "Something went wrong:\n" + errorMessage;
     }
 
     /**
-     * Prints an error message for unexpected errors.
+     * An error message for unexpected errors.
+     * @return The error message.
      */
-    public void showLoadingError() {
-        showTextWithLines("Something went wrong while loading Duke.");
-    }
-
-    /**
-     * Prints text in a pretty format.
-     *
-     * @param text Text to be printed.
-     */
-    public void showTextWithLines(String text) {
-        showLineBreak();
-        System.out.println(text);
-        showLineBreak();
-        System.out.println();
-    }
-
-    /**
-     * Prints a line break using underscores.
-     */
-    public void showLineBreak() {
-        System.out.println("_________________________________________________________________");
+    public String getLoadingError() {
+        return "Something went wrong while loading Duke.";
     }
 }

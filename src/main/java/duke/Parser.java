@@ -15,6 +15,14 @@ import tasks.Task;
  */
 public class Parser {
     /**
+     * Get the input corresponding to the input required to request to close the application.
+     * @return The input that will close the application.
+     */
+    public static String getByeInput() {
+        return "bye";
+    }
+
+    /**
      * Parses a string input by the user into an array of each segment of the command.
      *
      * @param toParse String input by the user.
@@ -22,7 +30,7 @@ public class Parser {
      * @throws DukeException if the command given is invalid or not a command known by the chatbot.
      */
     public static String[] parseCommand(String toParse) throws DukeException {
-        if (toParse.equals("bye")) {
+        if (toParse.equals(Parser.getByeInput())) {
             return new String[] {"bye"};
         } else if (toParse.equals("list")) {
             return new String[] {"list"};
