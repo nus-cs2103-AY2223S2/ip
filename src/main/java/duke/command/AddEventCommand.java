@@ -1,11 +1,13 @@
 package duke.command;
 
-import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import java.time.LocalDateTime;
 
+/**
+ * Command that adds an Event Task to the list.
+ */
 public class AddEventCommand extends Command {
     private String description;
     private LocalDateTime from;
@@ -17,13 +19,15 @@ public class AddEventCommand extends Command {
         this.to = to;
     }
 
+    /**
+     * Execute adding Event Task to list and storing it in Storage.
+     * @param taskList Tasklist containing current tasks.
+     * @param ui Ui Component for input and output.
+     * @param storage Storage component for persistent storage of Tasks.
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        try {
-            ui.reply(taskList.addEvent(description, from, to));
-            storage.saveState(taskList);
-        } catch (DukeException e) {
-            ui.reply(e.toString());
-        }
+        ui.reply(taskList.addEvent(description, from, to));
+        storage.saveState(taskList);
     }
 }

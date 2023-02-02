@@ -9,6 +9,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
+/**
+ * A list of tasks that a user can add, modify, view and delete.
+ */
 public class TaskList {
     private ArrayList<Task> tasks;
 
@@ -20,6 +23,10 @@ public class TaskList {
         this.tasks = existingTasks;
     }
 
+    /**
+     * Formats to string all the Tasks stored in TaskList.
+     * @return String representation of all Tasks in TaskList.
+     */
     @Override
     public String toString() {
         if (tasks.size() == 0) {
@@ -53,6 +60,12 @@ public class TaskList {
         this.tasks.add(t);
     }
 
+    /**
+     * Deletes a task from the TaskList based on its index.
+     * @param index Index of task to be deleted.
+     * @return Output string containing details of deleted Task.
+     * @throws DukeException If index out of bounds.
+     */
     public String deleteTask(int index) throws DukeException {
         if (index < 0 || index >= tasks.size()) {
             throw new DukeException("Error: Please input a valid task index!");
@@ -65,6 +78,12 @@ public class TaskList {
         return response.toString();
     }
 
+    /**
+     * Marks a Task as completed.
+     * @param index Index of task to mark as completed.
+     * @return String containing details Task marked.
+     * @throws DukeException If index out of bounds.
+     */
     public String mark(int index) throws DukeException {
         if (index >= tasks.size() || index < 0) {
             throw new DukeException("Task index out of bounds, please input a valid index");
@@ -77,6 +96,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Marks a Task as not completed.
+     * @param index Index of task to mark as not completed.
+     * @return String containing details Task unmarked.
+     * @throws DukeException If index out of bounds.
+     */
     public String unmark(int index) throws DukeException {
         if (index >= tasks.size() || index < 0) {
             throw new DukeException("Task index out of bounds, please input a valid index");
@@ -89,44 +114,52 @@ public class TaskList {
         }
     }
 
-    public String addTodo(String description) throws DukeException {
-        try {
-            StringBuilder response = new StringBuilder();
-            response.append("Got it. I've added this task:\n");
-            tasks.add(new Todo(description));
-            response.append(getAfterAddStatus());
-            return response.toString();
-        } catch (DateTimeParseException e) {
-            throw new DukeException("Invalid Date and Time provided, use the format: dd/MM/yyyy HH:mm");
-        }
+    /**
+     * Adds a Todo Task to the list.
+     * @param description Description of Todo Task.
+     * @return String with details of Todo Task added.
+     */
+    public String addTodo(String description) {
+        StringBuilder response = new StringBuilder();
+        response.append("Got it. I've added this task:\n");
+        tasks.add(new Todo(description));
+        response.append(getAfterAddStatus());
+        return response.toString();
     }
 
-    public String addDeadline(String description, LocalDateTime by) throws DukeException {
-        try {
-            StringBuilder response = new StringBuilder();
-            response.append("Got it. I've added this task:\n");
-            tasks.add(new Deadline(description, by));
-            response.append(getAfterAddStatus());
-            return response.toString();
-
-        } catch (DateTimeParseException e) {
-            throw new DukeException("Invalid Date and Time provided, use the format: dd/MM/yyyy HH:mm");
-        }
+    /**
+     * Adds a Deadline Task to the list.
+     * @param description Description of Deadline Task.
+     * @param by Deadline date and time.
+     * @return String with details of Deadline Task added.
+     */
+    public String addDeadline(String description, LocalDateTime by) {
+        StringBuilder response = new StringBuilder();
+        response.append("Got it. I've added this task:\n");
+        tasks.add(new Deadline(description, by));
+        response.append(getAfterAddStatus());
+        return response.toString();
     }
 
-    public String addEvent(String description, LocalDateTime from, LocalDateTime to) throws DukeException {
-        try {
-            StringBuilder response = new StringBuilder();
-            response.append("Got it. I've added this task:\n");
-            tasks.add(new Event(description, from, to));
-            response.append(getAfterAddStatus());
-            return response.toString();
-
-        } catch (DateTimeParseException e) {
-            throw new DukeException("Invalid Date and Time provided, use the format: dd/MM/yyyy HH:mm");
-        }
+    /**
+     * Adds an Event Task to the list
+     * @param description Description of Event Task.
+     * @param from Start date and time of Event.
+     * @param to End date and time of Event.
+     * @return String with details of Event added.
+     */
+    public String addEvent(String description, LocalDateTime from, LocalDateTime to) {
+        StringBuilder response = new StringBuilder();
+        response.append("Got it. I've added this task:\n");
+        tasks.add(new Event(description, from, to));
+        response.append(getAfterAddStatus());
+        return response.toString();
     }
 
+    /**
+     * Generates string with number of Tasks in the list and added Task details.
+     * @return String with number of Task and details of added Task.
+     */
     private String getAfterAddStatus() {
         int count = tasks.size();
         StringBuilder response = new StringBuilder();
