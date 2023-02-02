@@ -1,5 +1,7 @@
 package parser;
 
+import java.util.ArrayList;
+
 import exception.DukeException;
 import exception.InvalidInputException;
 import exception.NoTaskDescriptionException;
@@ -9,8 +11,6 @@ import task.Task;
 import task.Todo;
 import tasklist.TaskList;
 import ui.Ui;
-
-import java.util.ArrayList;
 
 public class Parser {
 
