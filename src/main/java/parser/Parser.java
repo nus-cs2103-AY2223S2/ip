@@ -80,6 +80,8 @@ public class Parser {
 		if (inputLower.isBlank()) {
 			return;
 		}
+		assert inputLower.contains("\\|") : "Need to contain |";
+
 		String[] inputArr = inputLower.split("\\|");
 		TaskType operationType = inputLower.startsWith("t")
 				? TaskType.TODO
@@ -93,17 +95,14 @@ public class Parser {
 			case TODO:
 				newTask = new Todo(inputArr[2]);
 				break;
-
 			case DEADLINE:
 				newTask = new Deadline(inputArr[2], parseDateTimeStr(inputArr[3], ui, storage, dialogContainer));
 				break;
-
 			case EVENT:
 				newTask = new Event(inputArr[2],
 						new LocalDateTime[] { parseDateTimeStr(inputArr[3], ui, storage, dialogContainer),
 								parseDateTimeStr(inputArr[4], ui, storage, dialogContainer) });
 				break;
-
 			default:
 				break;
 		}
@@ -129,6 +128,8 @@ public class Parser {
 		LocalTime time = LocalTime.MIN;
 		Integer[] dateArr;
 		String errorMessage = "Oops! Datetime format needs to be specified in proper form.";
+
+		assert dateTimeArr.length > 0 : "Datetime must not be empty";
 		if (dateTimeArr.length > 1) {
 			try {
 				int hr = Integer.parseInt(dateTimeArr[1].substring(0, 2));
