@@ -24,7 +24,7 @@ public class DeleteCommand extends CommandController {
 
     @Override
     public String getSyntax() {
-        return "<task number>";
+        return "<integer:taskNum>";
     }
 
 

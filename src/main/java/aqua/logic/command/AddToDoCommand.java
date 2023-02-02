@@ -31,4 +31,10 @@ public class AddToDoCommand extends AddTaskCommand {
         // return formed todo task
         return new AquaToDo(name, isComplete);
     }
+
+
+    @Override
+    public String getSyntax() {
+        return "<literal:name>";
+    }
 }

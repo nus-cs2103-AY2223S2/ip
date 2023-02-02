@@ -37,6 +37,12 @@ public class MarkTaskCommand extends CommandController {
     }
 
 
+    @Override
+    public String getSyntax() {
+        return "<integer:taskNum>";
+    }
+
+
 
 
 

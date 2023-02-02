@@ -40,4 +40,10 @@ public class FilterCommand extends CommandController {
         }
         return builder.toString().strip();
     }
+
+
+    @Override
+    public String getSyntax() {
+        return "<literal:pattern>";
+    }
 }
