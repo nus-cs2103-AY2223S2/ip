@@ -118,9 +118,8 @@ public class TaskList {
      * Adds a Todo Task to the list.
      * @param description Description of Todo Task.
      * @return String with details of Todo Task added.
-     * @throws DukeException If input
      */
-    public String addTodo(String description) throws DukeException {
+    public String addTodo(String description) {
         StringBuilder response = new StringBuilder();
         response.append("Got it. I've added this task:\n");
         tasks.add(new Todo(description));
@@ -128,7 +127,13 @@ public class TaskList {
         return response.toString();
     }
 
-    public String addDeadline(String description, LocalDateTime by) throws DukeException {
+    /**
+     * Adds a Deadline Task to the list.
+     * @param description Description of Deadline Task.
+     * @param by Deadline date and time.
+     * @return String with details of Deadline Task added.
+     */
+    public String addDeadline(String description, LocalDateTime by) {
         StringBuilder response = new StringBuilder();
         response.append("Got it. I've added this task:\n");
         tasks.add(new Deadline(description, by));
@@ -136,7 +141,14 @@ public class TaskList {
         return response.toString();
     }
 
-    public String addEvent(String description, LocalDateTime from, LocalDateTime to) throws DukeException {
+    /**
+     * Adds an Event Task to the list
+     * @param description Description of Event Task.
+     * @param from Start date and time of Event.
+     * @param to End date and time of Event.
+     * @return String with details of Event added.
+     */
+    public String addEvent(String description, LocalDateTime from, LocalDateTime to) {
         StringBuilder response = new StringBuilder();
         response.append("Got it. I've added this task:\n");
         tasks.add(new Event(description, from, to));
@@ -144,6 +156,10 @@ public class TaskList {
         return response.toString();
     }
 
+    /**
+     * Generates string with number of Tasks in the list and added Task details.
+     * @return String with number of Task and details of added Task.
+     */
     private String getAfterAddStatus() {
         int count = tasks.size();
         StringBuilder response = new StringBuilder();
