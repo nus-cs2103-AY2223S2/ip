@@ -1,9 +1,9 @@
 package command;
 
 import duke.Storage;
-import tasks.TaskList;
 import duke.Ui;
-import exceptions.*;
+import exceptions.DukeException;
+import tasks.TaskList;
 
 /***
  * Serves as a blueprint for the other commands to follow

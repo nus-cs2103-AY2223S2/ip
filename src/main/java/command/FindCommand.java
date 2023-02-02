@@ -1,18 +1,20 @@
 package command;
 // alphabetical
 //todo
-import tasks.TaskList;
-import exceptions.DukeException;
+
 import duke.Storage;
 import duke.Ui;
+import exceptions.DukeException;
 import tasks.Task;
+import tasks.TaskList;
 
 import java.util.ArrayList;
+
 
 /***
  * Give users a way to find a task by searching for a keyword.
  */
-public class FindCommand extends Command{
+public class FindCommand extends Command {
 
     private String keyword;
 
@@ -20,7 +22,7 @@ public class FindCommand extends Command{
      * Constructor for find Command
      * @param keyword
      */
-    public FindCommand(String keyword){
+    public FindCommand(String keyword) {
         super();
         this.keyword = keyword;
     }
@@ -35,7 +37,7 @@ public class FindCommand extends Command{
 
     // a space before the for loop todo
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException{
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         ArrayList<Task> res = new ArrayList<>();
         for (int i = 0; i < taskList.size(); i++) {
             Task t = taskList.get(i);

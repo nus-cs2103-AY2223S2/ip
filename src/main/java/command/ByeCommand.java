@@ -1,10 +1,12 @@
 package command;
 
 import duke.Storage;
-import javafx.application.Platform;
-import tasks.TaskList;
 import duke.Ui;
 import exceptions.DukeException;
+import javafx.application.Platform;
+import tasks.TaskList;
+
+
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -31,10 +33,10 @@ public class ByeCommand extends Command {
      * // reused from github: https://github.com/nus-cs2103-AY2223S1/forum/issues/287
      */
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        try{
+        try {
             setExitTrue();
             return ui.exit();
-        }finally{
+        } finally {
             new Timer().schedule(new TimerTask() {
                 @Override
                 public void run() {

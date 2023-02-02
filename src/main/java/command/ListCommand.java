@@ -1,8 +1,8 @@
 package command;
 
 import duke.Storage;
-import tasks.TaskList;
 import duke.Ui;
+import tasks.TaskList;
 
 /**
  * This class handles listing the entire tasks.TaskList

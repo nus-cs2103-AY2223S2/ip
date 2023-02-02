@@ -1,10 +1,10 @@
 package command;
 
 import duke.Storage;
-import tasks.TaskList;
 import duke.Ui;
 import exceptions.DukeException;
 import exceptions.InvalidNumberException;
+import tasks.TaskList;
 
 /**
  * This class handles unmarking a task as incomplete

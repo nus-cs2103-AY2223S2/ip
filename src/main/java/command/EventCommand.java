@@ -1,11 +1,11 @@
 package command;
 
 import duke.Storage;
-import tasks.TaskList;
 import duke.Ui;
 import exceptions.DukeException;
 import tasks.Event;
 import tasks.Task;
+import tasks.TaskList;
 
 /**
  * A class that handles the creation of an Event command
@@ -14,6 +14,10 @@ public class EventCommand extends Command {
 
     private String input;
 
+    /**
+     * constructor for eventCommand
+     * @param input
+     */
     public EventCommand(String input) {
         super();
         this.input = input;
