@@ -16,6 +16,9 @@ import duke.task.Event;
 import duke.exception.DukeStorageException;
 
 
+/**
+ * Provides functionality to store and load tasks from "/data/duke.txt"
+ */
 public class Storage {
     private static final Path dataPath = Paths.get("data");
     private static final Path taskListPath = Paths.get("data", "duke.txt");
