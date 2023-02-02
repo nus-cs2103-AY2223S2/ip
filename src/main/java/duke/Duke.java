@@ -1,8 +1,9 @@
+package duke;
 import java.io.FileNotFoundException;
 
 public class Duke {
-    private Storage storage;
-    private Ui ui;
+    private final Storage storage;
+    private final Ui ui;
     private TaskList tasks;
 
     public Duke(String filePath) throws DukeException {
@@ -18,7 +19,7 @@ public class Duke {
         }
     }
 
-    public void run() throws DukeException{
+    public void run(){
         ui.showWelcome();
         String cmd = ui.readCommand();
         boolean isTerminated = false;
@@ -28,7 +29,7 @@ public class Duke {
                     Parser.parse(cmd, tasks);
                     cmd = ui.readCommand();
                 } catch (DukeException e) {
-                    System.out.println(e.toString());
+                    System.out.println("something went wrong.");
                 }
             } else {
                 isTerminated = true;

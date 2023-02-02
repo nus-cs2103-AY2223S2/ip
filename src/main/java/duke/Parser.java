@@ -1,5 +1,6 @@
+package duke;
 public class Parser {
-    private static Ui ui = new Ui();
+    private static final Ui ui = new Ui();
     public static void parse(String cmd, TaskList list) throws DukeException {
         if (cmd.equals("list")) {
             ui.showTaskList(list);
