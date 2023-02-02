@@ -57,6 +57,12 @@ public class Parser {
         return parsedCommand;
     }
 
+    private String[] parseFind(String command) throws ZeroLengthDescriptionException {
+        String[] split_command = command.split(" ");
+        checkCommandLength(split_command);
+        return split_command;
+    }
+
     /**
      * Parses the command input by the user, and returns the key entities
      * in the command.
@@ -76,6 +82,9 @@ public class Parser {
                 break;
             case "event":
                 parsedCommand = parseEvent(command);
+                break;
+            case "find":
+                parsedCommand = parseFind(command);
                 break;
             default:
                 return splitCommand;

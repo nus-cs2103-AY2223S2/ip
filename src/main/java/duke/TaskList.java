@@ -11,10 +11,6 @@ public class TaskList {
     }
 
     public Task getTask(int taskIndex) {
-        /*
-        System.out.println(taskIndex);
-        System.out.println(this.taskList);
-        */
         return this.taskList.get(taskIndex);
     }
 
@@ -49,6 +45,26 @@ public class TaskList {
             taskIndex = i + 1;
             taskName = taskList.get(i).toString();
             sb.append(String.format("%d. %s\n", taskIndex, taskName));
+        }
+        return sb.toString();
+    }
+
+    /**
+     * Returns the formatted list of tasks containing the keyword.
+     * @param keyword The keyword given by the user.
+     * @return String of list of tasks matching keyword.
+     */
+    public String findTasks(String keyword) {
+        StringBuilder sb = new StringBuilder();
+        int taskIndex;
+        String taskName;
+
+        for (int i = 0; i < taskList.size(); i++) {
+            taskIndex = i + 1;
+            taskName = taskList.get(i).toString();
+            if (taskName.contains(keyword)) {
+                sb.append(String.format("%d. %s\n", taskIndex, taskName));
+            }
         }
         return sb.toString();
     }

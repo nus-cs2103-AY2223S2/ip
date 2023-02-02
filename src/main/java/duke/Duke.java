@@ -30,21 +30,18 @@ public class Duke {
                 parsedCommand = parser.parseCommand(userInput);
                 switch (parsedCommand[0]) {
                 case "todo":
-                    //checkCommandLength(parsedCommand);
                     Task newTodo = new Todo(parsedCommand[1]);
                     taskList.addTask(newTodo);
                     formattedReply = ui.formatAddTaskReply(taskList, newTodo);
                     ui.reply(formattedReply);
                     break;
                 case "deadline":
-                    //checkCommandLength(parsedCommand);
                     Task newDeadline = new Deadline(parsedCommand[1], parsedCommand[2]);
                     taskList.addTask(newDeadline);
                     formattedReply = ui.formatAddTaskReply(taskList, newDeadline);
                     ui.reply(formattedReply);
                     break;
                 case "event":
-                    //checkCommandLength(parsedCommand);
                     Task newEvent = new Event(parsedCommand[1], parsedCommand[2], parsedCommand[3]);
                     taskList.addTask(newEvent);
                     formattedReply = ui.formatAddTaskReply(taskList, newEvent);
@@ -71,6 +68,12 @@ public class Duke {
                     taskList.unmarkTask(taskIndex - 1);
                     formattedReply = String.format(
                             "OK, I've marked this task as not done yet:\n%s", taskList.getTask(taskIndex - 1));
+                    ui.reply(formattedReply);
+                    break;
+                case "find":
+                    formattedReply = String.format(
+                            "Here are the matching tasks in your list:\n%s",
+                            taskList.findTasks(parsedCommand[1]));
                     ui.reply(formattedReply);
                     break;
                 case "bye":
