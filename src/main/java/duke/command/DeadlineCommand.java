@@ -15,7 +15,7 @@ public class DeadlineCommand extends Command {
 
     /**
      * Initializes a deadline command with a given title and deadline.
-     * 
+     *
      * @param title    The title of the Deadline to be created
      * @param deadline The deadline of the Deadline to be created
      */

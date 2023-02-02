@@ -16,7 +16,7 @@ public class EventCommand extends Command {
 
     /**
      * Initializes an event command with a given title, start date, and end date.
-     * 
+     *
      * @param title The title of the Event to be created
      * @param from  The start date of the Event to be created
      * @param to    The end date of the Event to be created

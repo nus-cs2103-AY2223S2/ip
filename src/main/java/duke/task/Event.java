@@ -16,7 +16,7 @@ public class Event extends Task {
     /**
      * Creates a Event object with a given name, completion status, start date, and
      * end date.
-     * 
+     *
      * @param name   The name of the object to be created
      * @param isDone The completion status of the object to be created
      * @param start  A string representation of the task's start date
@@ -34,7 +34,7 @@ public class Event extends Task {
 
     /**
      * Creates a Event object with a given name, start date, and end date.
-     * 
+     *
      * @param name  The name of the object to be created
      * @param start A string representation of the task's start date
      * @param start A string representation of the task's end date

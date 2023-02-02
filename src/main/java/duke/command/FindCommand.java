@@ -12,7 +12,7 @@ public class FindCommand extends Command {
 
     /**
      * Initializes a find command with a given keyword.
-     * 
+     *
      * @param keyword The keyword to find tasks with
      */
     public FindCommand(String keyword) {

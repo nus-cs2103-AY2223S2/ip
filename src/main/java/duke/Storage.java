@@ -23,7 +23,7 @@ public class Storage {
 
     /**
      * Initializes a Storage object for the current session.
-     * 
+     *
      * @param path Path to the saved data
      * @param ui   Ui object for the current session
      */
@@ -46,7 +46,7 @@ public class Storage {
 
     /**
      * Reads tasks from the save file and store them in the given TaskList.
-     * 
+     *
      * @param taskList TaskList to store saved tasks in
      */
     public void readToTaskList(TaskList taskList) {
@@ -85,7 +85,7 @@ public class Storage {
 
     /**
      * Saves tasks from a given TaskList to the save file.
-     * 
+     *
      * @param taskList TaskList containing the tasks to be saved
      */
     public void saveToFile(TaskList taskList) {

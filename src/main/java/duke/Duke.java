@@ -16,7 +16,7 @@ public class Duke {
     /**
      * Constructor for Duke. Initializes a Ui, TaskList, and Storage object for use
      * within that session.
-     * 
+     *
      * @param path Path to the saved data
      */
     public Duke(String path) {
@@ -27,7 +27,7 @@ public class Duke {
 
     /**
      * Initializes and runs Duke.
-     * 
+     *
      * @param args Ignored
      */
     public static void main(String[] args) {

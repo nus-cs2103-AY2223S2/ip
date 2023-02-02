@@ -7,7 +7,7 @@ public class InvalidDateException extends DukeException {
 
     /**
      * Initializes an InvalidDateException that was caused by an unparseable string.
-     * 
+     *
      * @param date The unparseable string that resulted in the exception
      */
     public InvalidDateException(String date) {

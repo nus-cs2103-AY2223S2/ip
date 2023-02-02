@@ -52,7 +52,7 @@ public class Ui {
 
     /**
      * Appends a string to the stored message.
-     * 
+     *
      * @param toAdd The string to be appended to the stored message.
      */
     public void addToMessage(String toAdd) {
@@ -62,7 +62,7 @@ public class Ui {
 
     /**
      * Appends a string to the stored message.
-     * 
+     *
      * @param toAdd             The string to be appended to the stored message.
      * @param doPromptUserInput Indicates whether the user should be prompted for
      *                          input after this message.
@@ -79,7 +79,7 @@ public class Ui {
 
     /**
      * Pretty prints a given string.
-     * 
+     *
      * @param text The string to be pretty-printed.
      */
     public static void prettyPrint(String text) {

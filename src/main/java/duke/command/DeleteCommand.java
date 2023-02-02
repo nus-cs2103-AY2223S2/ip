@@ -12,7 +12,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Initializes a unmark command with a given index.
-     * 
+     *
      * @param index The index of the task to be marked as not done yet
      */
     public DeleteCommand(int index) {

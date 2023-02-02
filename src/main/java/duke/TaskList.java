@@ -11,7 +11,7 @@ public class TaskList {
 
     /**
      * Initializes a TaskList.
-     * 
+     *
      * @param ui Ui object for the current session.
      */
     public TaskList(Ui ui) {
@@ -21,7 +21,7 @@ public class TaskList {
 
     /**
      * Marks the task at the given index as done.
-     * 
+     *
      * @param index Index of task to be marked as done.
      */
     public void markTaskAsDone(int index) {
@@ -33,7 +33,7 @@ public class TaskList {
 
     /**
      * Marks the task at the given index as undone.
-     * 
+     *
      * @param index Index of task to be marked as undone.
      */
     public void markTaskAsUndone(int index) {
@@ -45,7 +45,7 @@ public class TaskList {
 
     /**
      * Adds a task to the task list.
-     * 
+     *
      * @param task Task to be added to the task list
      */
     public void addTask(Task task) {
@@ -57,7 +57,7 @@ public class TaskList {
 
     /**
      * Deletes a task from the task list.
-     * 
+     *
      * @param index Task to be deleted from the task list.
      */
     public void deleteTask(int index) {
@@ -69,7 +69,7 @@ public class TaskList {
 
     /**
      * Find all tasks that contain the given keyword.
-     * 
+     *
      * @param keyword The keyword to find tasks with
      */
     public void findTasks(String keyword) {
@@ -103,7 +103,7 @@ public class TaskList {
 
     /**
      * Serializes all the tasks in the task list.
-     * 
+     *
      * @return A string containing the serialized tasks. Each line is the string
      *         representation of a task in the task list
      */

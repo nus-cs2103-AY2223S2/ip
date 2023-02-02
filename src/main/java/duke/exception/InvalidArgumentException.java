@@ -7,7 +7,7 @@ public class InvalidArgumentException extends DukeException {
 
     /**
      * Initializes an InvalidArgumentException that was caused by a command.
-     * 
+     *
      * @param command The command causing the InvalidArgumentException
      */
     public InvalidArgumentException(String command) {

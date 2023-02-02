@@ -22,7 +22,7 @@ public class Parser {
 
     /**
      * Parses a raw command from the user.
-     * 
+     *
      * @param rawCommand The raw command string to parse
      * @return A {@link duke.command.Command} object corresponding to the parsed
      *         command
@@ -93,7 +93,7 @@ public class Parser {
     /**
      * Parses an argument string into an array of arguments, splitting by space ("
      * ").
-     * 
+     *
      * @param commandName The name of the current command
      * @param argString   The argument string to be parsed
      * @param numArgs     The number of arguments to be parsed
@@ -114,7 +114,7 @@ public class Parser {
     /**
      * Parses an argument string into an array of arguments, splitting by the
      * respective delimiters in flags.
-     * 
+     *
      * @param commandName The name of the current command
      * @param argString   The argument string to be parsed
      * @param numArgs     The number of arguments to be parsed

@@ -14,7 +14,7 @@ public class ToDoCommand extends Command {
 
     /**
      * Initializes a todo command with a given title.
-     * 
+     *
      * @param title The title of the Event to be created
      */
     public ToDoCommand(String title) {
