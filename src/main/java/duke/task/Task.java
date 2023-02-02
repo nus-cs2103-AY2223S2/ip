@@ -21,6 +21,15 @@ public class Task {
     }
 
     /**
+     * Marks the status of this task according to the argument.
+     *
+     * @param isDone Status of the task to be set.
+     */
+    public void markStatus(boolean isDone) {
+        this.isDone = isDone;
+    }
+
+    /**
      * Mark a task status as done.
      */
     public void markAsDone() {

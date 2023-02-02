@@ -72,29 +72,17 @@ public class TaskList {
     }
 
     /**
-     * Mark the task with the given index as done.
+     * Mark the task with the given index as either done or undone.
      * Task are 0-indexed.
      *
      * @param idx Index of the task to be marked.
+     * @param isDone Status of the task to be marked.
      * @throws DukeException If index is out of bounds.
      */
-    public void markTask(int idx) throws DukeException {
+    public void markTask(int idx, boolean isDone) throws DukeException {
         checkIndex(idx);
         Task t = indexToTask.get(idx);
-        t.markAsDone();
-    }
-
-    /**
-     * Mark the task with the given index as undone.
-     * Task are 0-indexed.
-     *
-     * @param idx Index of the task to be marked.
-     * @throws DukeException If index is out of bounds.
-     */
-    public void unmarkTask(int idx) throws DukeException {
-        checkIndex(idx);
-        Task t = indexToTask.get(idx);
-        t.markAsUndone();
+        t.markStatus(isDone);
     }
 
     /**
