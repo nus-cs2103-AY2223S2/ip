@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class TaskList {
 
     private int numOfTasks;
-    private ArrayList<Task> tasks;
+    protected ArrayList<Task> tasks;
 
     public TaskList(ArrayList<Task> loadedTasks) {
         this.numOfTasks = loadedTasks.size();
@@ -13,6 +13,13 @@ public class TaskList {
     public TaskList() {
         this.numOfTasks = 0;
         this.tasks = new ArrayList<>();
+    }
+
+    public void printList() {
+        System.out.println("Here are the tasks in your list:");
+        for (int i = 0; i < numOfTasks; i++) {
+            System.out.println((i + 1) + ". " + tasks.get(i));
+        }
     }
 
     public void markTask(String arg) throws DukeException {

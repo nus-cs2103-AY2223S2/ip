@@ -1,3 +1,4 @@
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -10,9 +11,8 @@ public class Storage {
     private Path homeDir;
     private Path dataFile;
 
-    public Storage(String filePath) {
-        String home = System.getProperty("user.home");
-        Path dir = Paths.get(home, "data");
+    public Storage(String homeDir) {
+        Path dir = Paths.get(homeDir, "data");
         if (!Files.exists(dir)) {
             System.out.println("Default data directory not found! Creating new directory...");
             try {
@@ -64,6 +64,20 @@ public class Storage {
             }
         }
         return loadedTasks;
+    }
+
+    public void save(ArrayList<Task> tasks) {
+        try {
+            FileWriter saveWriter = new FileWriter(dataFile.toFile(), false);
+            for (int i = 0; i < tasks.size(); i++) {
+                Task task = tasks.get(i);
+                saveWriter.write(task.toData() + System.lineSeparator());
+            }
+            saveWriter.close();
+        } catch (IOException e) {
+            System.out.println("Error occurred while saving data!");
+            e.printStackTrace();
+        }
     }
 
 }
