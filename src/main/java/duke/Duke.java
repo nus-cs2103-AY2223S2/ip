@@ -46,6 +46,7 @@ public class Duke {
         }
         s.close();
     }
+
     public static void main(String[] args) {
         new Duke("data/data.txt").run();
     }
