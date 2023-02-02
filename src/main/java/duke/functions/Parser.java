@@ -2,17 +2,31 @@ package duke.functions;
 
 import duke.exceptions.*;
 import duke.tasks.TaskList;
-
-import java.io.File;
 import java.util.Scanner;
 
+/**
+ * The main class for parsing commands via the command line.
+ * @author JamesLiuZX
+ * AY2223-S2 CS2103T
+ */
 public class Parser {
     private TaskList list;
 
+    /**
+     * Default constructor for a parser object.
+     *
+     * @param list The main list initialised in Ui.java.
+     */
     public Parser(TaskList list) {
         this.list = list;
     }
 
+    /**
+     * Main method to handle logic for input from command line
+     *
+     * @param input String input written in the command line.
+     * @throws InvalidCommandException Error from an invalid command.
+     */
     public void handleInput(String input) throws InvalidCommandException {
         String[] split = input.split(" ", 2);
         String cmd = split[0];
@@ -46,6 +60,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Main method to parse database Duke.txt to populate current TaskList.
+     *
+     * @param fileReader
+     * @param dl TaskList from
+     * @throws InvalidCommandException Error from an invalid command.
+     */
     public void parseDatabase(Scanner fileReader, TaskList dl) {
         int index = -1;
         while (fileReader.hasNextLine()) {

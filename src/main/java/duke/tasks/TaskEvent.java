@@ -8,23 +8,39 @@ import java.time.LocalDateTime;
  * @author JamesLiuZX
  * AY2223-S2 CS2103T
  */
-
 public class TaskEvent extends Task{
     protected LocalDateTime from;
     protected LocalDateTime to;
 
+    /**
+     * Constructor for creating a TaskEvent object.
+     *
+     * @param task     The task name to be completed.
+     * @param from     The task's start date and time.
+     * @param to       The task's end date and time.
+     */
     public TaskEvent(String task, LocalDateTime from, LocalDateTime to) {
         super(task);
         this.from = from;
         this.to = to;
     }
 
+    /**
+     * Returns string representation of a TaskEvent object which users can see in the command line.
+     *
+     * @return String representation of TaskEvent.
+     */
     @Override
     public String toString() {
         return "[E]" + super.toString()
                 + String.format(" (%s%s)", this.from, this.to);
     }
 
+    /**
+     * Returns string representation of a TaskEvent object that is stored in the Duke.txt file.
+     *
+     * @return String representation of TaskEvent.
+     */
     @Override
     public String toStringDb() {
         return String.format(

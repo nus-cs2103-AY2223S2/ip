@@ -4,7 +4,6 @@ import duke.functions.Ui;
 
 public class Duke {
     protected static final String filePath = "./data/duke.txt";
-    protected static final String database = "duke.txt";
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
