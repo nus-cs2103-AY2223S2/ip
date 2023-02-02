@@ -1,7 +1,5 @@
 package duke.task;
 
-import duke.task.Task;
-
 /*
  * Represents a task called todo.
  * A todo is a task without any date/time attached to it.

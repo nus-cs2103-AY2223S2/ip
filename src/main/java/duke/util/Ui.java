@@ -2,12 +2,14 @@ package duke.util;
 
 import duke.task.Task;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
+/*
+ * Represents the user interface of the program.
+ * The Ui object is responsible for printing messages to the user.
+ */
 public class Ui {
     private final Scanner sc;
-
     private static final String DASHED_LINE = "____________________________________________________________";
     private static final String LS = System.lineSeparator();
     private static final String LINE_PREFIX = "    ";
@@ -57,6 +59,10 @@ public class Ui {
             ".                      `d#######BQ}                      .\n" +
             ".                        !lG0$0GV,                       .";
 
+    /*
+     * Constructor to create a new Ui object. 
+     * Scanner is used to read user input and is initialised here.
+     */
     public Ui() {
         this.sc = new Scanner(System.in);
     }
@@ -65,6 +71,11 @@ public class Ui {
         return rawInputLine.trim().isEmpty();
     }
 
+    /*
+     * Reads the user input and returns the words as a string array split by spaces.
+     * 
+     * @return String array of user input.
+     */
     public String[] getUserCommand() {
         showToUser("Meowww... enter command:");
         String fullInputLine = sc.nextLine();
@@ -75,6 +86,9 @@ public class Ui {
         return fullInputLine.split(" ", 2);
     }
 
+    /*
+     * Prints the welcome message.
+     */
     public void showWelcomeMessage() {
         showToUser(DASHED_LINE,
                 LOGO,
@@ -82,18 +96,34 @@ public class Ui {
                 DASHED_LINE);
     }
 
+    /*
+     * Prints the goodbye message.
+     */
     public void showGoodbyeMessage() {
         showToUser(DASHED_LINE,
                 MESSAGE_GOODBYE,
                 DASHED_LINE);
     }
 
+    /*
+     * Prints the message to the user with the given prefix.
+     * Each windows separator is replaced with a line separator.
+     * 
+     * @param message Message to be printed.
+     */
     public void showToUser(String... message) {
         for (String m : message) {
             System.out.println(LINE_PREFIX + m.replace("\n", LS + LINE_PREFIX));
         }
     }
 
+    /*
+     * Formats the message to be printed to the user with the given prefix.
+     * Each windows separator is replaced with a line separator.
+     * 
+     * @param Strings of Messages to be printed.
+     * @return Formatted message as a string.
+     */
     public String formatMessage(String... message) {
         String formattedMessage = "";
         for (String m : message) {
@@ -102,15 +132,12 @@ public class Ui {
         return formattedMessage;
     }
 
-    public void showError(String errorMessage, String errorType) {
-        showToUser(DASHED_LINE,
-                "ERROR! ERROR!",
-                "The error type is: " + errorType,
-                errorMessage,
-                "Please try again! Tohtoro out",
-                DASHED_LINE);
-    }
-
+    /*
+     * Prints the list of tasks to the user.
+     * 
+     * @param tl TaskList object containing the list of tasks.
+     * @return Formatted message as a string.
+     */
     public void showToUserList(TaskList tl) {
         if (tl.isEmpty()) {
             showToUser("There does not seem to be any tasks meow, would you care to add some?");
@@ -127,6 +154,12 @@ public class Ui {
         }
     }
 
+    /*
+     * Prints the string of remaining tasks the user has in the list.
+     * 
+     * @param tl TaskList object containing the list of tasks.
+     * @return Formatted message as a string.
+     */
     public String stringOfTaskNumbers(TaskList tl) {
         String toShow = String.format("Now you have %d tasks in your list", tl.size());
         return toShow;

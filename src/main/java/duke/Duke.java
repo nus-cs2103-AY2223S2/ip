@@ -5,6 +5,9 @@ import duke.util.*;
 
 import java.io.IOException;
 
+/*
+ * Represents the Duke program, a chatbot that helps you keep track of your tasks.
+ */
 public class Duke {
     private Ui ui;
     private final Storage storage;
@@ -22,12 +25,19 @@ public class Duke {
         }
     }
 
-
+    /*
+     * Main method to run the Duke program.
+     * 
+     * @param args Command line arguments.
+     */
     public static void main(String[] args) {
         String txtDir = "./save.txt";
         new Duke(txtDir).run();
     }
 
+    /*
+     * Runs the Duke program.
+     */
     public void run() {
         ui.showWelcomeMessage();
         while (!this.isExit) {

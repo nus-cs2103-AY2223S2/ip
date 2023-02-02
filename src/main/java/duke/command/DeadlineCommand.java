@@ -8,7 +8,6 @@ import duke.util.Ui;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 /**
  * Represents a command that adds a deadline to the task list.

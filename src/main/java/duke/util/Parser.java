@@ -7,6 +7,9 @@ import duke.task.Event;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a parser that parses user input into commands.
+ */
 public class Parser {
 
     private static final DateTimeFormatter DATETIME_FORMAT = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
@@ -49,6 +52,13 @@ public class Parser {
         return true;
     }
 
+    /*
+     * Parses the user input into a command.
+     * 
+     * @param userCommand User input.
+     * @return Command to be executed.
+     * @throws DukeException If there is an error in parsing the user input.
+     */
     public Command parse(String[] userCommand) throws DukeException {
         String name;
         switch(this.readCommand(userCommand)) {
