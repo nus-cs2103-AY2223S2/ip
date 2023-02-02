@@ -15,7 +15,7 @@ public class UnmarkCommand extends Command {
         List<Task> taskList = tasks.getTasks();
         Task currTask = taskList.get(taskNumber - 1);
 
-        currTask.markAsNotDone();;
+        currTask.setDone(false);
         storage.save(taskList);
         ui.showTaskMarkUndone(currTask);
     }

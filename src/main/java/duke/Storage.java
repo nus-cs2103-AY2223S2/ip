@@ -44,7 +44,7 @@ public class Storage {
                 }
 
                 if (Integer.parseInt(taskSplit[1]) == 1) {
-                    task.markAsDone();
+                    task.setDone(true);
                 }
 
                 tasks.add(task);
@@ -74,9 +74,16 @@ public class Storage {
             if (task instanceof Todo) {
                 output.printf("T | %d | %s%n", task.getStatusIconInt(), task.getDescription());
             } else if (task instanceof Deadline) {
-                output.printf("D | %d | %s | %s%n", task.getStatusIconInt(), task.getDescription(), ((Deadline) task).getBy());
+                output.printf("D | %d | %s | %s%n",
+                        task.getStatusIconInt(),
+                        task.getDescription(),
+                        ((Deadline) task).getBy());
             } else if (task instanceof Event) {
-                output.printf("E | %d | %s | %s - %s%n", task.getStatusIconInt(), task.getDescription(), ((Event) task).getFrom(), ((Event) task).getTo());
+                output.printf("E | %d | %s | %s - %s%n",
+                        task.getStatusIconInt(),
+                        task.getDescription(),
+                        ((Event) task).getFrom(),
+                        ((Event) task).getTo());
             }
         }
 

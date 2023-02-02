@@ -2,7 +2,9 @@ package duke;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+
 import java.time.format.DateTimeParseException;
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -14,6 +16,7 @@ public class Duke {
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
+
         try {
             tasks = new TaskList(storage.load());
         } catch (FileNotFoundException e) {

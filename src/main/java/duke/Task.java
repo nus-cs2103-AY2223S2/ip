@@ -6,7 +6,7 @@ public class Task {
 
     public Task(String description) {
         this.description = description;
-        this.isDone = false;
+        isDone = false;
     }
 
     public String getStatusIcon() {
@@ -21,12 +21,8 @@ public class Task {
         return description;
     }
 
-    public void markAsDone() {
-        isDone = true;
-    }
-
-    public void markAsNotDone() {
-        isDone = false;
+    public void setDone(boolean isDone) {
+        this.isDone = isDone;
     }
 
     @Override
