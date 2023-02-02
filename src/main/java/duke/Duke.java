@@ -2,22 +2,8 @@ package duke;
 import java.io.*;
 import java.util.Scanner;
 
-/*
-Level-1
-idea:
-- design a "reply" method to format the duke reply text
-- print hello statement
-- scanf input
-    - print indented horizontal line
-    - print input
-    - print indented horizontal line
-
-Level-2
-idea:
-- addTask method to add to static array of strings
-- formatTaskList to take task array and output string
-    in list form
-- if list command, reply(formatTaskList(taskArray))
+/**
+ * Duke object which runs the chatbot.
  */
 public class Duke {
     private TaskList taskList = new TaskList();
@@ -26,6 +12,10 @@ public class Duke {
     private Ui ui = new Ui();
     private Task task;
 
+    /**
+     * Runs Duke chatbot
+     * @throws IOException Thrown when an invalid commmand is input.
+     */
     public void runDuke() throws IOException {
         Scanner sc = new Scanner(System.in);
         String[] parsedCommand;

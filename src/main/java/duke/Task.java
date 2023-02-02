@@ -1,9 +1,13 @@
 package duke;
-
+/** Task object containing the name and isDone status of the task */
 public class Task {
     private String taskName;
     private boolean isDone;
 
+    /**
+     * Creates Task object.
+     * @param taskName Description of the task.
+     */
     public Task(String taskName) {
         this.taskName = taskName;
         this.isDone = false;
@@ -19,9 +23,9 @@ public class Task {
 
     /**
      * Returns the parsed task in the form of {task type} | {isDone} | {task name} | {Date}
-     * as a string
+     * as a string.
      *
-     * @return String contains task data
+     * @return String contains task data.
      */
     public String getParsedTaskDataString() {
         char taskType;

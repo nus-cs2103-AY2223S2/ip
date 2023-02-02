@@ -1,10 +1,10 @@
 package duke;
 
 import java.io.*;
-
+/** Handles the storage and retrieval of tasks. */
 public class Storage {
     TaskList taskList;
-
+    /** Creates storage object. */
     public Storage(TaskList taskList) {
         this.taskList = taskList;
     }
@@ -41,6 +41,11 @@ public class Storage {
         return task;
     }
 
+    /**
+     * Saves tasks into the task file in data folder.
+     * Creates data folder and task file if it does not exist.
+     * @throws IOException Thrown when there's an issue writing to the file.
+     */
     public void saveTasks() throws IOException {
         FileWriter taskFileWriter = new FileWriter("C:\\Users\\jedng\\Documents\\CS2103T\\ip\\ip\\data\\tasks.txt");
         Task task;
@@ -57,6 +62,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Load tasks from task file.
+     * @return TaskList object populated with saved tasks from previous session.
+     */
     public TaskList loadTasks() {
         Task parsedTask;
         String taskString;

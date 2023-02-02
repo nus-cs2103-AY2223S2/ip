@@ -2,7 +2,7 @@ package duke;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/** Represent the list of Task objects */
 public class TaskList {
     private List<Task> taskList = new ArrayList<>();
 
@@ -36,6 +36,10 @@ public class TaskList {
         taskToMark.unmark();
     }
 
+    /**
+     * Get all the Task objects and display them to user.
+     * @return String representation of list of Task objects.
+     */
     public String getTaskList() {
         StringBuilder sb = new StringBuilder();
         int taskIndex;

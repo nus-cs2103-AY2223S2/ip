@@ -1,6 +1,7 @@
 package duke;
-
+/** Handles the interface to interact with the user */
 public class Ui {
+    /**Prints DUKE to console to welcome user. */
     public void greet() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -10,7 +11,7 @@ public class Ui {
         System.out.println(logo);
         reply("Hello! I'm Duke\nWhat can I do for you?");
     }
-
+    /** Format reply from Duke. */
     public void reply(String s) {
         System.out.println("\t"
                 + "____________________________________________________________");
@@ -18,7 +19,7 @@ public class Ui {
         System.out.println("\t"
                 + "____________________________________________________________");
     }
-
+    /** Formats reply to tell user task has been added. */
     public String formatAddTaskReply(TaskList taskList, Task task) {
         String formattedReply;
         formattedReply = String.format(

@@ -3,7 +3,7 @@ package duke;
 import java.util.Arrays;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
+/** Parser to parse the commands by the user */
 public class Parser {
     private String[] parseTodo(String command) throws ZeroLengthDescriptionException {
         String[] split_command = command.split(" ");
@@ -57,6 +57,13 @@ public class Parser {
         return parsedCommand;
     }
 
+    /**
+     * Parses the command input by the user, and returns the key entities
+     * in the command.
+     * @param command The command input by the user.
+     * @return A String array containing the extracted key entities of the command.
+     * @throws ZeroLengthDescriptionException Thrown with an empty task description is given.
+     */
     public String[] parseCommand(String command) throws ZeroLengthDescriptionException {
         String[] splitCommand = command.split(" ");
         String[] parsedCommand;
