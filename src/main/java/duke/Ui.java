@@ -5,16 +5,26 @@ import duke.utils.FormatHelper;
 import java.io.PrintStream;
 import java.util.Scanner;
 
+/**
+ * Class for methods relating to user interface input and output.
+ */
 public class Ui {
     private static final String linebreak = "    ___________________________________________________________________________________";
     private Scanner input;
     private PrintStream output;
 
+    /**
+     * Constructor for Ui class.
+     */
     public Ui() {
         this.input = new Scanner(System.in);
         this.output = new PrintStream(System.out);
     };
 
+    /**
+     * Outputs to console text with padded line break before and after.
+     * @param s String to output.
+     */
     public void reply(String s) {
         if (s.equals("")) {
             return;
