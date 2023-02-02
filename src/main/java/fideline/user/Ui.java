@@ -59,7 +59,7 @@ public class Ui {
     /**
      * Displays list of tasks to the user.
      *
-     * @param list
+     * @param list String representation of the list of existing tasks.
      */
     public void listMsg(String list) {
         displayln("here! your list:" + list);

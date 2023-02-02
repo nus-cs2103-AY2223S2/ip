@@ -1,19 +1,42 @@
 package fideline;
 
-import fideline.exception.*;
-import fideline.task.TaskManager;
-import fideline.save.Storage;
-import fideline.user.Ui;
-import fideline.user.Parser;
+import fideline.exception.CorruptedDataFileException;
+import fideline.exception.DataFileNotFoundException;
+import fideline.exception.FidelineException;
+import fideline.exception.UnableToCreateDataFileException;
 import fideline.execution.Command;
+import fideline.save.Storage;
+import fideline.task.TaskManager;
+import fideline.user.Parser;
+import fideline.user.Ui;
 
+/**
+ * Fideline is a chatbot that handles a list of tasks for the user.
+ *
+ * @author Fun Leon
+ */
 public class Fideline {
+
+    /** Manages creation of new tasks and handles old ones */
     private TaskManager taskManager;
+
+    /** Handler for storage of existing tasks locally */
     private Storage storage;
+
+    /** Handler for display messages to the user */
     private Ui ui;
 
 
-
+    /**
+     * Boots up Fideline. Attempts to load existing saved data.
+     *
+     * @param filePath Path of the data file.
+     * @throws CorruptedDataFileException Signals to the user that the saved
+     *                                    data is corrupted and cannot be read.
+     * @throws UnableToCreateDataFileException Signals to the user that saved
+     *                                         data cannot be located and a
+     *                                         new file is unable to be created.
+     */
     public Fideline(String filePath) throws CorruptedDataFileException,
             UnableToCreateDataFileException {
         ui = new Ui();
@@ -27,6 +50,10 @@ public class Fideline {
         }
     }
 
+    /**
+     * Starts Fideline's program. Fideline takes in the user's input
+     * until it is turned off with a "bye" command.
+     */
     public void run() {
         ui.showLine();
         ui.hello();
@@ -51,4 +78,5 @@ public class Fideline {
             UnableToCreateDataFileException {
         new Fideline("./task-data.txt").run();
     }
+
 }

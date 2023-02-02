@@ -36,11 +36,15 @@ public abstract class Task {
     /**
      * Changes status of the task to done.
      */
-    public void mark() { this.isDone = true; }
+    public void mark() {
+        this.isDone = true;
+    }
 
     /**
      * Changes status of the task to not done.
      */
-    public void unmark() {this.isDone = false; }
+    public void unmark() {
+        this.isDone = false;
+    }
 
 }

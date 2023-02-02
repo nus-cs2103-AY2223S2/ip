@@ -13,7 +13,7 @@ import fideline.user.Ui;
 public class ListCommand extends Command {
 
     /**
-     * Fetches
+     * Fetches list of all existing tasks from the taskmanager.
      *
      * @param taskManager Manager for existing tasks and creation of new ones.
      * @param storage     Handler for storage of existing tasks locally.

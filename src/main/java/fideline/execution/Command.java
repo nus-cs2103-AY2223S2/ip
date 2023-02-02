@@ -1,8 +1,8 @@
 package fideline.execution;
 
 import fideline.exception.FidelineException;
-import fideline.task.TaskManager;
 import fideline.save.Storage;
+import fideline.task.TaskManager;
 import fideline.user.Ui;
 
 /**
@@ -29,6 +29,7 @@ public abstract class Command {
      * @param taskManager Manager for existing tasks and creation of new ones.
      * @param storage Handler for storage of existing tasks locally.
      * @param ui Handler for display messages to the user.
+     * @throws FidelineException Custom exception raised while the program is running.
      */
     public abstract void execute(TaskManager taskManager, Storage storage, Ui ui) throws FidelineException;
 
