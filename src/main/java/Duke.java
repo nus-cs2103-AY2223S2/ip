@@ -1,4 +1,8 @@
 import java.util.*;
+import java.util.Scanner;
+import java.io.File;
+import java.io.IOException;
+import java.io.FileWriter;
 
 public class Duke {
     public static void main(String[] args) {
@@ -9,7 +13,28 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
 
-        ArrayList<Task> list = new ArrayList<>();
+        File file = new File("/data/dukeList.txt");
+
+        boolean fileExists = file.exists();
+
+        if (!fileExists) {
+            File dir = new File("/data");
+            boolean dirCreated = dir.mkdir();
+            try {
+                File dukeList = new File("/data/dukeList.txt");
+                if (dukeList.createNewFile()) {
+                    System.out.println("File created: " + dukeList.getName());
+                } else {
+                    System.out.println("File already exists.");
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                System.out.println("An error occurred.");
+            }
+        }
+
+
+        ArrayList<Task> list = readFile();
         Scanner sc = new Scanner(System.in);
         while (true) {
             String str = sc.nextLine();
@@ -30,6 +55,7 @@ public class Duke {
                     n = Integer.parseInt(num) - 1;
                     t = list.get(n);
                     t.markAsDone();
+                    writeToFile(list);
                     System.out.println("Nice! I've marked this task as done:\n"
                             + "  [" + t.getStatusIcon() + "] " + t.description);
                     break;
@@ -41,6 +67,7 @@ public class Duke {
                     n_1 = Integer.parseInt(num_1) - 1;
                     t_1 = list.get(n_1);
                     t_1.unMark();
+                    writeToFile(list);
                     System.out.println("OK, I've marked this task as not done yet:\n"
                             + "  [" + t_1.getStatusIcon() + "] " + t_1.description);
                     break;
@@ -53,6 +80,7 @@ public class Duke {
                         break;
                     }
                     list.add(a);
+                    writeToFile(list);
                     System.out.println("Got it. I've added this task:\n  "
                                         + a.toString() + "\nNow you have " + list.size()
                                         + " tasks in the list.");
@@ -67,6 +95,7 @@ public class Duke {
                         break;
                     }
                     list.add(b);
+                    writeToFile(list);
                     System.out.println("Got it. I've added this task:\n  "
                             + b.toString() + "\nNow you have " + list.size()
                             + " tasks in the list.");
@@ -83,6 +112,7 @@ public class Duke {
                         break;
                     }
                     list.add(c);
+                    writeToFile(list);
                     System.out.println("Got it. I've added this task:\n  "
                             + c.toString() + "\nNow you have " + list.size()
                             + " tasks in the list.");
@@ -95,6 +125,7 @@ public class Duke {
                     nD = Integer.parseInt(numD) - 1;
                     tD = list.get(nD);
                     list.remove(nD);
+                    writeToFile(list);
                     System.out.println("Noted. I've removed this task:\n  "
                             + tD.toString()
                             + "\nNow you have " + list.size()
@@ -123,5 +154,69 @@ public class Duke {
         if (str.startsWith("event ")) return 4;
         if (str.startsWith("delete ")) return 5;
         return 6;
+    }
+
+    static ArrayList<Task> readFile() {
+        ArrayList<Task> dukeList = new ArrayList<>();
+        try {
+            Scanner s = new Scanner(new File("/data/dukeList.txt"));
+//            new FileWriter("/data/dukeList.txt", false).close();
+            while (s.hasNextLine()) {
+                String str = s.nextLine();
+                System.out.println(str);
+                if (str.startsWith("E")) {
+                    Event e = new Event(str.substring(7, str.indexOf(" |f")),
+                            str.substring(str.indexOf(" |f") +3, str.indexOf(" |t")),
+                            str.substring(str.indexOf(" |t") + 3));
+                    if (str.startsWith("E | X")) {
+                        e.markAsDone();
+                    }
+                    dukeList.add(e);
+                }
+                if (str.startsWith("D")) {
+                    Deadline d = new Deadline(str.substring(7, str.indexOf(" |b")),
+                            str.substring(str.indexOf(" |b") + 4));
+                    if (str.startsWith("D | X")) {
+                        d.markAsDone();
+                    }
+                    dukeList.add(d);
+                }
+                if (str.startsWith("T")) {
+                    Todo t = new Todo(str.substring(7));
+                    if (str.startsWith("T | X")) {
+                        t.markAsDone();
+                    }
+                    dukeList.add(t);
+                }
+
+            }
+            s.close();
+        } catch (IOException | DukeException e) {
+            e.printStackTrace();
+            System.out.println("An error occurred.");
+        }
+        return dukeList;
+    }
+
+    static void writeToFile(ArrayList<Task> dukeList) {
+        try {
+            FileWriter writer = new FileWriter("/data/dukeList.txt", false);
+            for(Task t: dukeList) {
+                if (t instanceof Deadline) {
+                    writer.write("D | " + t.getStatusIcon() + " | " + t.description + " |by " + ((Deadline) t).by
+                            + System.lineSeparator());
+                }
+                if (t instanceof Event) {
+                    writer.write("E | " + t.getStatusIcon() + " | " + t.description + " |f " + ((Event) t).from
+                                + " |t " +  ((Event) t).to + System.lineSeparator());
+                }
+                if (t instanceof Todo) {
+                    writer.write("T | " + t.getStatusIcon() + " | " + t.description + System.lineSeparator());
+                }
+            }
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+        }
     }
 }
