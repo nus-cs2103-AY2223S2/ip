@@ -11,6 +11,9 @@ import java.util.function.Consumer;
  * Handles displaying of messages and user interactions via the graphical user interface.
  */
 public class Gui implements Ui {
+    private static final double STAGE_WIDTH = 600;
+    private static final double STAGE_HEIGHT = 600;
+
     private final Stage stage;
 
     private final MainWindow mainWindow;
@@ -27,8 +30,8 @@ public class Gui implements Ui {
         mainWindow = new MainWindow(inputHandler);
         stage.setScene(new Scene(mainWindow));
 
-        stage.setMinWidth(600);
-        stage.setMinHeight(600);
+        stage.setMinWidth(STAGE_WIDTH);
+        stage.setMinHeight(STAGE_HEIGHT);
         stage.setResizable(false);
     }
 
