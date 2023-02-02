@@ -15,7 +15,7 @@ public class DialogBox extends HBox {
     private static final Image userImage = new Image(DialogBox.class.getResourceAsStream("/images/red.png"));
     private static final Image dukeImage = new Image(DialogBox.class.getResourceAsStream("/images/cyan.png"));
 
-    public DialogBox(Label l, ImageView iv) {
+    private DialogBox(Label l, ImageView iv) {
         text = l;
         displayPicture = iv;
 
@@ -23,16 +23,20 @@ public class DialogBox extends HBox {
         displayPicture.setFitWidth(100.0);
         displayPicture.setFitHeight(100.0);
 
-        this.setAlignment(Pos.TOP_RIGHT);
-        this.getChildren().addAll(text, displayPicture);
     }
 
     public static DialogBox makeUserDialog(String text) {
-        return new DialogBox(new Label(text), new ImageView(userImage));
+        DialogBox dialogBox = new DialogBox(new Label("You said: " + text), new ImageView(userImage));
+        dialogBox.getChildren().addAll(dialogBox.displayPicture, dialogBox.text);
+        dialogBox.setAlignment(Pos.TOP_LEFT);
+        return dialogBox;
     }
 
     public static DialogBox makeDukeDialog(String text) {
-        return new DialogBox(new Label(text), new ImageView(dukeImage));
+        DialogBox dialogBox = new DialogBox(new Label(text), new ImageView(dukeImage));
+        dialogBox.getChildren().addAll(dialogBox.text, dialogBox.displayPicture);
+        dialogBox.setAlignment(Pos.TOP_RIGHT);
+        return dialogBox;
     }
 
 }

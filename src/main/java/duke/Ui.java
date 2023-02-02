@@ -106,10 +106,8 @@ public class Ui {
      * Prints the stored message to the user.
      */
     public void displayMessage() {
-        // Ui.prettyPrint(this.message.toString());
-        Label l = new Label(this.message.toString());
-        l.setWrapText(true);
-        this.dialogContainer.getChildren().add(l);
+        DialogBox newChild = DialogBox.makeDukeDialog(this.message.toString());
+        this.dialogContainer.getChildren().add(newChild);
         this.clearMessage();
     }
 
@@ -148,15 +146,13 @@ public class Ui {
     private void initializeHandlers() {
         // on-click handler for sendButton
         this.sendButton.setOnMouseClicked((event) -> {
-            // this.duke.run(userInput.getText());
             this.handleUserInput();
         });
 
         // "enter" on-press handler for userInput
-        // this.userInput.setOnAction((event) -> {
-        // this.dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-        // this.userInput.clear();
-        // });
+        this.userInput.setOnAction((event) -> {
+            this.handleUserInput();
+        });
 
         this.dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
@@ -164,7 +160,13 @@ public class Ui {
 
     private void handleUserInput() {
         String userText = userInput.getText();
-        this.dialogContainer.getChildren().addAll(DialogBox.makeUserDialog(userText));
+        // don't handle if user gives a blank input
+        if (userText.equals("")) {
+            return;
+        }
+        DialogBox newChild = DialogBox.makeUserDialog(userText);
+        this.dialogContainer.getChildren().add(newChild);
+        this.duke.run(userText);
         this.userInput.clear();
     }
 }
