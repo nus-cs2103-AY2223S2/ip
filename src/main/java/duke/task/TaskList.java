@@ -41,13 +41,15 @@ public class TaskList extends ArrayList<Task> {
      * @param s The string that the task names will contain.
      * @return The tasklist containing the tasks that have the string in their names.
      */
-    public TaskList containsStringInName(String s) {
+    public TaskList containsStringInName(String... s) {
         TaskList containsStringTasks = new TaskList();
 
         for (int i = 0; i < size(); i++) {
             Task temp = get(i);
-            if (temp.hasStringInName(s)) {
-                containsStringTasks.add(temp);
+            for (int j = 0; j < s.length; j++) {
+                if (temp.hasStringInName(s[j])) {
+                    containsStringTasks.add(temp);
+                }
             }
         }
 
