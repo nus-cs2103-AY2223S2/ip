@@ -3,7 +3,7 @@ public abstract class Task {
     protected boolean isDone;
 
     public Task(String description) throws EmptyDescriptionException{
-        if (description == "") {
+        if (description.equals("") || description.equals(" ")) {
             throw new EmptyDescriptionException();
         } else {
             this.description = description;
