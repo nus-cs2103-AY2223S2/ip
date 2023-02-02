@@ -29,6 +29,8 @@ public class Duke {
         } catch (DukeException e) {
             ui.showLoadingError();
             tasks = new TaskList();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
     public static Path loadDir() throws IOException {
