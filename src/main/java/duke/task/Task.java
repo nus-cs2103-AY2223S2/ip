@@ -10,24 +10,24 @@ public abstract class Task {
     }
 
     public void setDone() {
-        this.isDone = true;
+        isDone = true;
     }
 
     public void setNotDone() {
-        this.isDone = false;
+        isDone = false;
     }
 
     protected String getStatusIcon() {
-        return (this.isDone ? "[X]" : "[ ]");
+        return (isDone ? "[X]" : "[ ]");
     }
 
     @Override
     public String toString() {
-        return getStatusIcon() + " " + this.description;
+        return getStatusIcon() + " " + description;
     }
 
     public String getTaskString() {
-        return (this.isDone ? 1 : 0) + " | " + this.description;
+        return (isDone ? 1 : 0) + " | " + description;
     }
 
     public abstract String getTaskState();

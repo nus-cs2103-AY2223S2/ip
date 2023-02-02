@@ -8,10 +8,10 @@ import duke.exception.DukeInvalidArgumentException;
 import duke.parser.Parser;
 
 public class TaskList {
-    private final ArrayList<Task> TASK_LIST;
+    private final ArrayList<Task> TASKS;
 
     public TaskList(ArrayList<Task> taskList) {
-        TASK_LIST = taskList;
+        TASKS = taskList;
     }
 
     public void addToDo(String userCommand) throws DukeException {
@@ -23,9 +23,9 @@ public class TaskList {
 
         String taskDescription = userCommandParts[1].trim();
         ToDo toDo = new ToDo(taskDescription);
-        TASK_LIST.add(toDo);
+        TASKS.add(toDo);
         System.out.println("Got it. I've added this task:\n\t" + toDo
-                + "\nNow you have " + TASK_LIST.size() + " task(s) in the list.");
+                + "\nNow you have " + TASKS.size() + " task(s) in the list.");
     }
 
     public void addDeadline(String userCommand) throws DukeException {
@@ -38,8 +38,8 @@ public class TaskList {
         }
 
         if (userCommandParts.length < 2) {
-            throw new DukeInvalidArgumentException("Invalid format!\n" +
-                    "Use `deadline {description} /by {due date}`");
+            throw new DukeInvalidArgumentException("Invalid format!\n"
+                    + "Use `deadline {description} /by {due date}`");
         }
 
         if (userCommandParts[1].trim().isEmpty()) {
@@ -48,10 +48,10 @@ public class TaskList {
 
         LocalDateTime dueDate = Parser.parseDateTime(userCommandParts[1].trim()) ;
         Deadline deadline = new Deadline(description, dueDate);
-        TASK_LIST.add(deadline);
+        TASKS.add(deadline);
 
         System.out.println("Got it. I've added this task:\n\t" + deadline
-                + "\nNow you have " + TASK_LIST.size() + " task(s) in the list.");
+                + "\nNow you have " + TASKS.size() + " task(s) in the list.");
     }
 
     public void addEvent(String userCommand) throws DukeException {
@@ -64,8 +64,8 @@ public class TaskList {
         }
 
         if (userCommandParts.length < 2) {
-            throw new DukeInvalidArgumentException("Invalid format!\n" +
-                    "Use `event {description} /from {start date/time} /to {end date/time}`");
+            throw new DukeInvalidArgumentException("Invalid format!\n"
+                    + "Use `event {description} /from {start date/time} /to {end date/time}`");
         }
 
         String[] timeParts = userCommandParts[1].split(" /to", 2);
@@ -86,19 +86,19 @@ public class TaskList {
         }
 
         Event event = new Event(description, startDateTime, endDateTime);
-        TASK_LIST.add(event);
+        TASKS.add(event);
 
         System.out.println("Got it. I've added this task:\n\t" + event
-                + "\nNow you have " + TASK_LIST.size() + " task(s) in the list.");
+                + "\nNow you have " + TASKS.size() + " task(s) in the list.");
     }
 
     public void printTaskList() {
-        if (TASK_LIST.size() == 0) {
+        if (TASKS.size() == 0) {
             System.out.println("There are no tasks in your Task List!");
         } else {
             System.out.println("Your Tasks:");
-            for (int i = 0; i < TASK_LIST.size(); i++) {
-                System.out.println((i + 1) + ". " + TASK_LIST.get(i));
+            for (int i = 0; i < TASKS.size(); i++) {
+                System.out.println((i + 1) + ". " + TASKS.get(i));
             }
         }
     }
@@ -113,17 +113,17 @@ public class TaskList {
             String taskNumber = userCommandParts[1];
             int taskIndex = Integer.parseInt(taskNumber) - 1;
 
-            if (TASK_LIST.size() == 0) {
+            if (TASKS.size() == 0) {
                 System.out.println("There are no tasks in your Task List!");
 
-            } else if (0 <= taskIndex && taskIndex < TASK_LIST.size()) {
-                Task task = TASK_LIST.get(taskIndex);
+            } else if (0 <= taskIndex && taskIndex < TASKS.size()) {
+                Task task = TASKS.get(taskIndex);
                 task.setDone();
                 System.out.println("Task marked as completed\n" + task);
 
             } else {
-                throw new DukeInvalidArgumentException("Please provide a valid Task number\n" +
-                        "You have " + TASK_LIST.size() + " task(s) in your Task List");
+                throw new DukeInvalidArgumentException("Please provide a valid Task number\n"
+                        + "You have " + TASKS.size() + " task(s) in your Task List");
             }
 
         } catch (NumberFormatException exception) {
@@ -141,17 +141,17 @@ public class TaskList {
             String taskNumber = userCommandParts[1];
             int taskIndex = Integer.parseInt(taskNumber) - 1;
 
-            if (TASK_LIST.size() == 0) {
+            if (TASKS.size() == 0) {
                 System.out.println("There are no tasks in your Task List!");
 
-            } else if (0 <= taskIndex && taskIndex < TASK_LIST.size()) {
-                Task task = TASK_LIST.get(taskIndex);
+            } else if (0 <= taskIndex && taskIndex < TASKS.size()) {
+                Task task = TASKS.get(taskIndex);
                 task.setNotDone();
                 System.out.println("Task marked as not completed\n" + task);
 
             } else {
-                throw new DukeInvalidArgumentException("Please provide a valid Task number\n" +
-                        "You have " + TASK_LIST.size() + " task(s) in your Task List");
+                throw new DukeInvalidArgumentException("Please provide a valid Task number\n"
+                        + "You have " + TASKS.size() + " task(s) in your Task List");
             }
 
         } catch (NumberFormatException exception) {
@@ -169,17 +169,17 @@ public class TaskList {
             String taskNumber = userCommandParts[1];
             int taskIndex = Integer.parseInt(taskNumber) - 1;
 
-            if (TASK_LIST.size() == 0) {
+            if (TASKS.size() == 0) {
                 System.out.println("There are no tasks in your Task List!");
-            } else if (0 <= taskIndex && taskIndex < TASK_LIST.size()) {
-                Task task = TASK_LIST.get(taskIndex);
-                TASK_LIST.remove(taskIndex);
+            } else if (0 <= taskIndex && taskIndex < TASKS.size()) {
+                Task task = TASKS.get(taskIndex);
+                TASKS.remove(taskIndex);
 
                 System.out.println("Noted. I've deleted this task:\n\t" + task
-                        + "\nNow you have " + TASK_LIST.size() + " task(s) in the list.");
+                        + "\nNow you have " + TASKS.size() + " task(s) in the list.");
             } else {
-                throw new DukeInvalidArgumentException("Please provide a valid Task number\n" +
-                        "You have " + TASK_LIST.size() + " task(s) in your Task List");
+                throw new DukeInvalidArgumentException("Please provide a valid Task number\n"
+                        + "You have " + TASKS.size() + " task(s) in your Task List");
             }
 
         } catch (NumberFormatException exception) {
@@ -188,6 +188,6 @@ public class TaskList {
     }
 
     public ArrayList<Task> getTaskList() {
-        return TASK_LIST;
+        return TASKS;
     }
 }

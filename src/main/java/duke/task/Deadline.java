@@ -15,13 +15,13 @@ public class Deadline extends Task {
     @Override
     public String toString() {
 
-        return "[D]" + super.toString() +
-                " (by: " + this.dueDate.format(formatter) + ")";
+        return "[D]" + super.toString()
+                + " (by: " + dueDate.format(formatter) + ")";
     }
 
     @Override
     public String getTaskState() {
-        return "D | " + super.getTaskString() +
-                " | " + this.dueDate;
+        return "D | " + super.getTaskString()
+                + " | " + dueDate;
     }
 }

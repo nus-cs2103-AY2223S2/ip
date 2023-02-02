@@ -28,7 +28,6 @@ public class Duke {
             }
             try {
                 Parser.processCommand(input, storage, tasks);
-
             } catch (DukeException exception) {
                 System.out.println(exception.getMessage());
             }

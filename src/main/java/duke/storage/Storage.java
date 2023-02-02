@@ -17,11 +17,11 @@ import duke.exception.DukeStorageException;
 
 
 public class Storage {
-    private static final Path dataPath = Paths.get("data");
-    private static final Path taskListPath = Paths.get("data", "duke.txt");
+    private static final Path DATA_PATH = Paths.get("data");
+    private static final Path TASK_LIST_PATH = Paths.get("data", "duke.txt");
 
     private ArrayList<Task> parseTaskList() throws IOException, DukeStorageException {
-        List<String> lines = Files.readAllLines(taskListPath);
+        List<String> lines = Files.readAllLines(TASK_LIST_PATH);
         ArrayList<Task> taskList = new ArrayList<>();
 
         for (String line : lines) {
@@ -58,13 +58,13 @@ public class Storage {
     }
     public ArrayList<Task> loadTaskList() {
         try {
-            if (!Files.exists(dataPath)) {
+            if (!Files.exists(DATA_PATH)) {
                 System.out.println("Creating data folder . . .");
-                Files.createDirectories(dataPath);
+                Files.createDirectories(DATA_PATH);
             }
-            if (!Files.exists(taskListPath)) {
+            if (!Files.exists(TASK_LIST_PATH)) {
                 System.out.println("Creating task list file . . .");
-                Files.createFile(taskListPath);
+                Files.createFile(TASK_LIST_PATH);
             }
             return parseTaskList();
 
@@ -79,7 +79,7 @@ public class Storage {
 
     public void storeTaskList(ArrayList<Task> taskList) {
         try {
-            BufferedWriter bufferedWriter = Files.newBufferedWriter(taskListPath);
+            BufferedWriter bufferedWriter = Files.newBufferedWriter(TASK_LIST_PATH);
             for (Task task : taskList) {
                 String line = task.getTaskState();
                 bufferedWriter.write(line);
