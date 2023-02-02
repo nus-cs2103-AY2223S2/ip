@@ -22,9 +22,7 @@ public class Ui {
 
     // duke components
     private Duke duke;
-    private Scanner scanner;
     private StringBuilder message;
-    private boolean doPromptUserInput;
 
     // javafx ui components
     private ScrollPane scrollPane;
@@ -35,16 +33,18 @@ public class Ui {
 
     /**
      * Initializes a Ui object.
+     *
+     * @param duke The Duke instance that this Ui object belongs to
      */
     public Ui(Duke duke) {
         this.duke = duke;
-        this.scanner = new Scanner(System.in);
         this.message = new StringBuilder();
-        this.doPromptUserInput = true;
     }
 
     /**
      * Initializes the main Scene to be displayed on the Stage.
+     *
+     * @param stage The stage to display the created scene on
      */
     public void initializeStage(Stage stage) {
         // create components
@@ -119,30 +119,14 @@ public class Ui {
     /**
      * Appends a string to the stored message.
      *
-     * @param toAdd The string to be appended to the stored message.
+     * @param toAdd The string to be appended to the stored message
      */
     public void addToMessage(String toAdd) {
         this.message.append(toAdd);
         this.message.append(NEWL);
     }
 
-    /**
-     * Appends a string to the stored message.
-     *
-     * @param toAdd             The string to be appended to the stored message.
-     * @param doPromptUserInput Indicates whether the user should be prompted for
-     *                          input after this message.
-     */
-    public void addToMessage(String toAdd, boolean doPromptUserInput) {
-        this.doPromptUserInput = doPromptUserInput;
-        this.addToMessage(toAdd);
-    }
-
-    /** Reads a line of input from the user. */
-    public String readCommand() {
-        return this.scanner.nextLine();
-    }
-
+    /** Initialize all JavaFX event handlers */
     private void initializeHandlers() {
         // on-click handler for sendButton
         this.sendButton.setOnMouseClicked((event) -> {
@@ -154,10 +138,12 @@ public class Ui {
             this.handleUserInput();
         });
 
+        // dialogContainer handler to auto-scroll
         this.dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
     }
 
+    /** Handles the event where the user inputs a command into userInput */
     private void handleUserInput() {
         String userText = userInput.getText();
         // don't handle if user gives a blank input

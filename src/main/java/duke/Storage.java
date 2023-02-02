@@ -77,7 +77,7 @@ public class Storage {
             this.notifyNoStorage();
         } catch (InvalidDateException | InvalidArgumentException e) {
             this.ui.clearMessage();
-            this.ui.addToMessage("Duke ran into an error while reading saved data.", false);
+            this.ui.addToMessage("Duke ran into an error while reading saved data.");
             this.ui.displayMessage();
             taskList.clearTasks();
         }
@@ -104,7 +104,7 @@ public class Storage {
         if (this.hasFile) {
             this.ui.addToMessage("WARNING: Duke cannot read from/write to a storage file. ");
             this.ui.addToMessage("         All tasks created will only last within this session.");
-            this.ui.addToMessage("", false);
+            this.ui.addToMessage("");
             this.ui.displayMessage();
             this.hasFile = false;
         }
