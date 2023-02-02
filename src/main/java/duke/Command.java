@@ -10,7 +10,8 @@ public class Command {
      * Constructs a Command with the specified description and any necessary arguments.
      * 
      * @param description The Command description (eg: todo, list, mark, etc)
-     * @param arguments The necessary arguments for the command (eg: command "deadline" can have argument "11/02/2023 1200"
+     * @param arguments The necessary arguments for the command
+     *                  (eg: command "deadline" can have argument "11/02/2023 1200"
      */
     public Command(String description, List<String> arguments) {
         this.description = description;

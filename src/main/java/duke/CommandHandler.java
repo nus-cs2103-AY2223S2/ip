@@ -13,43 +13,57 @@ public class CommandHandler {
      *              If required, the TaskList will be modified in place as a side effect of the method call.
      * @return The response that Duke will display upon execution of the command.
      */
-    public String handleCommand(Command command, TaskList tasks) {
+    public String handleCommand(Command command, TaskList tasks, Storage storage) {
+        String s;
         switch (command.getDescription()) {
         case "bye":
             return endDuke();
-            //Fallthrough (java doesn't let me compile if I add a break)
+        //Fallthrough (java doesn't let me compile if I add a break)
         case "list":
             return showTasks(tasks);
-            //Fallthrough
+        //Fallthrough
         case "mark":
-            return markTask(command.getArguments().get(0), tasks);
-            //Fallthrough 
+            s = markTask(command.getArguments().get(0), tasks);
+            storage.saveData(tasks);
+            return s;
+        //Fallthrough
         case "unmark":
-            return unmarkTask(command.getArguments().get(0), tasks);
-            //Fallthrough 
+            s = unmarkTask(command.getArguments().get(0), tasks);
+            storage.saveData(tasks);
+            return s;
+        //Fallthrough
         case "todo":
-            return addTodo(command.getArguments().get(0), tasks);
-            //Fallthrough 
+            s = addTodo(command.getArguments().get(0), tasks);
+            storage.saveData(tasks);
+            return s;
+        //Fallthrough
         case "deadline":
-            return addDeadline(command.getArguments().get(0), command.getArguments().get(1), tasks);
-            //Fallthrough 
+            s = addDeadline(command.getArguments().get(0), command.getArguments().get(1), tasks);
+            storage.saveData(tasks);
+            return s;
+        //Fallthrough
         case "event":
-            return addEvent(command.getArguments().get(0), 
+            s = addEvent(command.getArguments().get(0),
                     command.getArguments().get(1), command.getArguments().get(2), tasks);
-            //Fallthrough 
+            storage.saveData(tasks);
+            return s;
+        //Fallthrough
         case "delete":
-            return deleteEvent(command.getArguments().get(0), tasks);
-            //Fallthrough 
+            s = deleteEvent(command.getArguments().get(0), tasks);
+            storage.saveData(tasks);
+            return s;
+        //Fallthrough
         case "noMatch":
             return noMatch();
-            //Fallthrough 
+        //Fallthrough
         case "invalid":
             return invalid(command.getArguments().get(0));
-            //Fallthrough
+        //Fallthrough
         case "find":
             return findTasks(command.getArguments().get(0), tasks);
+        default:
+            return "";
         }
-        return "";
     }
 
     /**
