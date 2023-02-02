@@ -1,5 +1,6 @@
 package commands;
 
+import exceptions.NoDateException;
 import storage.Storage;
 import storage.TaskList;
 import tasks.Event;
@@ -20,7 +21,7 @@ public class EventCommand extends Command {
     public EventCommand(String userInput) {
         this.description = getDescription(userInput);
         this.from = getFrom(userInput);
-        this.to = getTo(userInput);
+        this.to = getUntil(userInput);
     }
 
     /**
@@ -38,7 +39,11 @@ public class EventCommand extends Command {
      * @return The starting date.
      */
     public String getFrom(String userInput) {
-        return userInput.substring(6).split(" /from ")[1].split(" /to ")[0];
+        String[] temp = userInput.substring(6).split(" /from ")[1].split(" /to ");
+        if (temp[0].trim().equals("")) {
+            throw new NoDateException("event", null);
+        }
+        return temp[0];
     }
 
     /**
@@ -46,8 +51,12 @@ public class EventCommand extends Command {
      * @param userInput The user input.
      * @return The ending date.
      */
-    public String getTo(String userInput) {
-        return userInput.substring(6).split(" /from ")[1].split(" /to ")[1];
+    public String getUntil(String userInput) {
+        String[] temp = userInput.substring(6).split(" /from ")[1].split(" /to ");
+        if (temp.length == 1) {
+            throw new NoDateException("event", null);
+        }
+        return temp[1];
     }
 
     /**

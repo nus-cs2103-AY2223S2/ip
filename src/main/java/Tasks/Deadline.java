@@ -1,6 +1,10 @@
 package tasks;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
+import exceptions.InvalidDateFormatException;
 
 /**
  * This class is used to represent the Deadline task.
@@ -15,26 +19,25 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String by) {
         super(description);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+
         String[] temp = by.split(" ");
-        String[] date = temp[0].split("-");
         if (temp.length == 1) {
-            this.by = LocalDateTime.of(Integer.parseInt(date[0]), Integer.parseInt(date[1]),
-                                    Integer.parseInt(date[2]), 00, 00);
-        } else {
-            this.by = LocalDateTime.of(Integer.parseInt(date[0]), Integer.parseInt(date[1]), Integer.parseInt(date[2]),
-                                    Integer.parseInt(temp[1].substring(0, 2)),
-                                    Integer.parseInt(temp[1].substring(2)));
+            by += " 0000";
+        }
+        try {
+            this.by = LocalDateTime.parse(by, formatter);
+        } catch (DateTimeParseException e) {
+            throw new InvalidDateFormatException(e);
         }
     }
 
     /**
-     * Returns the deadline of the task.
-     * @return The deadline of the task.
+     * Returns the deadline of the task in LocalDateTime.
+     * @return The deadline of the task in LocalDateTime.
      */
-    public String getBy() {
-        return this.by.getYear() + "-" + this.by.getMonthValue() + "-" + this.by.getDayOfMonth()
-                + " " + this.by.getHour() + (this.by.getMinute() < 10 ? "0"
-                + this.by.getMinute() : this.by.getMinute());
+    public LocalDateTime getBy() {
+        return this.by;
     }
 
     /**

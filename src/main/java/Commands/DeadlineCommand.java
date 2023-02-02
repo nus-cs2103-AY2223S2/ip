@@ -1,5 +1,6 @@
 package commands;
 
+import exceptions.InvalidDateFormatException;
 import storage.Storage;
 import storage.TaskList;
 import tasks.Deadline;
@@ -36,7 +37,11 @@ public class DeadlineCommand extends Command {
      * @return The deadline.
      */
     public String getBy(String userInput) {
-        return userInput.substring(9).split(" /by ")[1];
+        String[] temp = userInput.substring(9).split(" /by ");
+        if (temp.length == 1) {
+            throw new InvalidDateFormatException(null);
+        }
+        return temp[1];
     }
 
     /**

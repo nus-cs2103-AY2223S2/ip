@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -84,10 +85,11 @@ public class Storage {
 
             if (task instanceof Deadline) {
                 Deadline temp = (Deadline) task;
-                sb.append(" | ").append(temp.getBy());
+                sb.append(" | ").append(formatLocalDateTime(temp.getBy()));
             } else if (task instanceof Event) {
                 Event temp = (Event) task;
-                sb.append(" | ").append(temp.getFrom()).append(" | ").append(temp.getTo());
+                sb.append(" | ").append(formatLocalDateTime(temp.getFrom()))
+                    .append(" | ").append(formatLocalDateTime(temp.getUntil()));
             }
 
             sb.append("\n");
@@ -95,5 +97,16 @@ public class Storage {
         FileWriter fw = new FileWriter(this.file, false);
         fw.write(sb.toString());
         fw.close();
+    }
+
+    /**
+     * Returns the formatted string representation of the date for storing in the database.
+     * @param date The date to be formatted.
+     * @return The formatted string representation of the date.
+     */
+    private String formatLocalDateTime(LocalDateTime date) {
+        return date.getYear() + "-" + date.getMonthValue() + "-" + date.getDayOfMonth() + " "
+            + (date.getHour() < 10 ? "0" + date.getHour() : date.getHour())
+            + (date.getMinute() < 10 ? "0" + date.getMinute() : date.getMinute());
     }
 }

@@ -1,8 +1,0 @@
-T |   | read book 1
-D | X | read book 1 | 2019-8-4 000
-E |   | read book 3 | 2019-8-4 000 | 2020-4-3 1000
-T |   | read
-E |   | read book 5 | 2019-7-11 1600 | 2020-10-11 1540
-D |   | read book 6 | 2019-10-2 000
-D |   | read book 6 | 2019-10-2 000
-D |   | read book 6 | 2019-10-2 000
