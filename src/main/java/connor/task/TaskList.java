@@ -38,14 +38,14 @@ public class TaskList {
      * @param ui prints the message.
      * @throws InvalidTaskException if number is invalid or is not a number.
      */
-    public void deleteTask(String number, Ui ui) throws InvalidTaskException {
+    public String deleteTask(String number, Ui ui) throws InvalidTaskException {
         try {
             int value = Integer.parseInt(number);
             if (number.length() < 1 || value > this.tasks.size() || value <= 0) {
                 throw new InvalidTaskException();
             } else {
                 Task task = this.tasks.remove(value - 1);
-                ui.deleteTaskMessage(task, this.tasks.size());
+                return ui.deleteTaskMessage(task, this.tasks.size());
             }
         } catch (NumberFormatException e) {
             throw new InvalidTaskException();
@@ -64,10 +64,11 @@ public class TaskList {
      *
      * @param number the task to be marked done (list starts at 1).
      * @param ui prints the message.
+     * @return String that indicates a task is marked done.
      */
-    public void markDone(int number, Ui ui) {
+    public String markDone(int number, Ui ui) {
         this.tasks.get(number - 1).mark();
-        ui.markDoneMessage(this.tasks.get(number - 1).toString());
+        return ui.markDoneMessage(this.tasks.get(number - 1).toString());
     }
 
     /**
@@ -75,10 +76,11 @@ public class TaskList {
      *
      * @param number the task to be marked undone (list starts at 1).
      * @param ui prints the message.
+     * @return String that indicates a task is marked undone.
      */
-    public void markUndone(int number, Ui ui) {
+    public String markUndone(int number, Ui ui) {
         this.tasks.get(number - 1).unmark();
-        ui.markUndoneMessage(this.tasks.get(number - 1).toString());
+        return ui.markUndoneMessage(this.tasks.get(number - 1).toString());
     }
 
     /**
@@ -89,16 +91,14 @@ public class TaskList {
      */
     public String toString() {
         StringBuilder str = new StringBuilder();
-        str.append(Ui.LINE).append("\n");
         for (int i = 0; i < this.tasks.size(); i++) {
-            str.append("        ")
-                    .append(i + 1)
+            str.append(i + 1)
                     .append(".")
                     .append(this.tasks.get(i).toString())
                     .append("\n");
         }
 
-        str.append("        I have ")
+        str.append("I have ")
                 .append(this.tasks.size())
                 .append(" tasks in my memory")
                 .append("\n");
@@ -113,11 +113,11 @@ public class TaskList {
      */
     public String find(String keyword) {
         StringBuilder str = new StringBuilder();
-        str.append(Ui.LINE).append("        HERE ARE THE MATCHING RESULTS:\n");
+        str.append("HERE ARE THE MATCHING RESULTS:\n");
         int counter = 1;
         for (Task task : this.tasks) {
             if (task.getTaskName().contains(keyword)) {
-                str.append("        ")
+                str.append("  ")
                         .append(counter++)
                         .append(".")
                         .append(task)
