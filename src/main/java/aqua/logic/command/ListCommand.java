@@ -11,7 +11,7 @@ import aqua.manager.TaskManager;
  * An implementation of Command that will produce an ExecutionService that
  * will display the state the task manager.
  */
-public class ListCommand extends ServiceProvider {
+public class ListCommand extends CommandController {
     @Override
     public ExecutionService getService(ArgumentMap args, LogicManager manager, boolean isLoading) {
         return ExecutionService.of(new ExecutionTask<TaskManager>(args, manager) {
@@ -37,5 +37,11 @@ public class ListCommand extends ServiceProvider {
             return manager.toString();
         }
         return "Nothing!! - ̗̀ ( ˶'ᵕ'˶) ̖́-";
+    }
+
+
+    @Override
+    public String getDescription() {
+        return "Displayes a view of your task list";
     }
 }

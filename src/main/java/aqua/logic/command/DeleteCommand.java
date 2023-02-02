@@ -14,11 +14,23 @@ import aqua.manager.LogicManager;
  * will delete an AquaTask from the task manager and then save the state of the
  * task manager to hard disk.
  */
-public class DeleteCommand extends ServiceProvider {
+public class DeleteCommand extends CommandController {
     @Override
     public ExecutionService getService(ArgumentMap args, LogicManager manager, boolean isLoading) {
         return ExecutionService.of(new DeleteTask(args, manager))
                 .setFollowUp(new WriteTaskCommand().getService(args, manager));
+    }
+
+
+    @Override
+    public String getSyntax() {
+        return "<integer:taskNum>";
+    }
+
+
+    @Override
+    public String getDescription() {
+        return "Deletes a task";
     }
 
 

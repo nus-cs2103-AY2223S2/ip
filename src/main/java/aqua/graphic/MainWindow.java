@@ -7,7 +7,8 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 
 
@@ -20,7 +21,7 @@ public class MainWindow extends UiComponent<VBox> {
 
     @FXML private ScrollPane textScrollPane;
     @FXML private VBox textDisplayArea;
-    @FXML private TextField inputField;
+    @FXML private SuggestionTextField inputField;
 
 
     /**
@@ -124,5 +125,13 @@ public class MainWindow extends UiComponent<VBox> {
     @FXML
     private void handleSend(ActionEvent event) {
         manager.processInput();
+    }
+
+
+    @FXML
+    private void handleKeyRelease(KeyEvent event) {
+        if (KeyCode.ENTER.equals(event.getCode())) {
+            handleSend(null);
+        }
     }
 }

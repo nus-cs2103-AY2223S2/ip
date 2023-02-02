@@ -39,4 +39,16 @@ public class AddDeadlineCommand extends AddTaskCommand {
         // return formed deadline
         return new AquaDeadline(name, isCompleted, by);
     }
+
+
+    @Override
+    public String getSyntax() {
+        return "<literal:name> /by <date:by>";
+    }
+
+
+    @Override
+    public String getDescription() {
+        return "Adds a DEADLINE";
+    }
 }

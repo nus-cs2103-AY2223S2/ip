@@ -43,4 +43,16 @@ public class AddEventCommand extends AddTaskCommand {
         // return formed event
         return new AquaEvent(name, isCompleted, from, to);
     }
+
+
+    @Override
+    public String getSyntax() {
+        return "<literal:name> /from <date:from> /to <date:to>";
+    }
+
+
+    @Override
+    public String getDescription() {
+        return "Adds an EVENT";
+    }
 }

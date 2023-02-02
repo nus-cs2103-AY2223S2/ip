@@ -13,7 +13,7 @@ import aqua.manager.LogicManager;
  * An implementation of Command that will produce an ExecutionService that
  * will display a filtered list of the user's current tasks.
  */
-public class FilterCommand extends ServiceProvider {
+public class FilterCommand extends CommandController {
     @Override
     public ExecutionService getService(ArgumentMap args, LogicManager manager, boolean isLoading) {
         return ExecutionService.of(new ExecutionTask<LinkedHashMap<Integer, AquaTask>>(args, manager) {
@@ -39,5 +39,17 @@ public class FilterCommand extends ServiceProvider {
             builder.append(String.format("%d. %s\n", entry.getKey(), entry.getValue()));
         }
         return builder.toString().strip();
+    }
+
+
+    @Override
+    public String getSyntax() {
+        return "<literal:pattern>";
+    }
+
+
+    @Override
+    public String getDescription() {
+        return "Displayes a filtered view of your task list";
     }
 }
