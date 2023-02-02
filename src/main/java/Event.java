@@ -48,7 +48,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "E | " + super.toString() + " | from: " + from.format(format) + " | " + "to: " + to.format(format);
+        return String.format("E | %s | from: %s | to: %s", super.toString(), from.format(format), to.format(format));
     }
 
 }
