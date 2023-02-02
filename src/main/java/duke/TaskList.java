@@ -23,7 +23,7 @@ public class TaskList {
     /**
      * Marks the task at the given index as done.
      *
-     * @param index Index of task to be marked as done.
+     * @param index Index of task to be marked as done
      */
     public void markTaskAsDone(int index) {
         Task task = this.list.get(index);
@@ -35,7 +35,7 @@ public class TaskList {
     /**
      * Marks the task at the given index as undone.
      *
-     * @param index Index of task to be marked as undone.
+     * @param index Index of task to be marked as undone
      */
     public void markTaskAsUndone(int index) {
         Task task = this.list.get(index);
@@ -59,7 +59,7 @@ public class TaskList {
     /**
      * Deletes a task from the task list.
      *
-     * @param index Task to be deleted from the task list.
+     * @param index Task to be deleted from the task list
      */
     public void deleteTask(int index) {
         Task currentTask = list.get(index);
