@@ -12,12 +12,24 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.format.DateTimeParseException;
 
+/**
+ * This is the driver class for Duke, the CLI task manager.
+ * Every Duke object has its own storage, tasklist, and ui objects.
+ *
+ * @author Jian Cheng
+ * @version 0.1
+ */
+
 public class Duke {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Returns a new Duke object.
+     * @param filePath the filepath of the serialized TaskList object stored in memory
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -29,6 +41,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the Duke object.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -51,6 +66,16 @@ public class Duke {
         new Duke(getFilePath()).run();
     }
 
+    /**
+     * Returns a system-specific string denoting the location of DukeMem.
+     *
+     * First, if it doesn't exist yet, the data directory containing DukeMem
+     * will be created. Then, the path to the DukeMem.ser file in the
+     * new directory will be generated and returned, regardless of whether
+     * it exists yet.
+     *
+     * @return filePath system-specific string indicating the location of DukeMem
+     */
     private static String getFilePath() {
         Path dirPath = Paths.get(".", "data");
         try {
