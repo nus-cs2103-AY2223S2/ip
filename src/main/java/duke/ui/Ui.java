@@ -50,7 +50,7 @@ public class Ui {
      * Displays sentence used in list command
      */
     public String listMessage(String input) {
-        return ("Take a look at ye DREAM goals for 2023") + input;
+        return ("Take a look at ye DREAM goals for 2023 \n") + input;
     }
 
     /**

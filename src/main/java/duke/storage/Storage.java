@@ -40,7 +40,7 @@ public class Storage {
     public String displayList() {
         String printList = "";
         for (int i = 0; i < list.size(); i++) {
-            printList = printList + (i + 1 + "." + list.get(i));
+            printList = printList + "\n" + (i + 1 + "." + list.get(i));
         }
         return ui.listMessage(printList);
     }
