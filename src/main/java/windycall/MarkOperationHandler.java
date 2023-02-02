@@ -1,6 +1,7 @@
 package windycall;
 
 import java.util.List;
+import javafx.util.Pair;
 
 public class MarkOperationHandler extends OperationHandler {
 
@@ -9,16 +10,21 @@ public class MarkOperationHandler extends OperationHandler {
 
     }
 
-    public static void handle(Parser parser, List<Task> tasks, String[] parts, Storage storage) {
-        int num = parser.getMarkIndex(parts);
+    public static String handle(Parser parser, List<Task> tasks, String[] parts, Storage storage) {
+//        int num = parser.getMarkIndex(parts);
+        Pair<Integer, String> info = parser.getMarkIndex(parts);
+        int num = info.getKey();
+        String message = info.getValue();
         if (num >= 1 && num <= tasks.size()) {
-            System.out.println("     Good job! I've marked this task as done:");
             tasks.get(num - 1).markAsDone();
-            Ui.space();
-            System.out.println(tasks.get(num - 1));
+            String returnedMessage = "Good job! I've marked this task as done:\n";
+            returnedMessage += tasks.get(num - 1);
             storage.handleTaskChange(tasks);
-        } else if (num != -1) {
-            System.out.println("     Sorry, your index is out of range");
+            return returnedMessage;
+        } else if (num > tasks.size()) {
+            return "Sorry, your index is out of range";
+        } else {
+            return message;
         }
     }
 

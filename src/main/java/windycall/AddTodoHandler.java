@@ -12,7 +12,7 @@ public class AddTodoHandler extends AddTaskHandler {
             throw new WindyCallException("☹ OOPS!!! The description of a todo cannot be empty!");
         }
         String description = message.substring(5);
-        System.out.println("Got it. I've added this Todo task:");
+//        System.out.println("Got it. I've added this Todo task:");
         return new Todo(description, false);
     }
 }

@@ -88,8 +88,8 @@ public class Storage {
                 myWriter.write(task.getFileFormat());
             }
             myWriter.close();
-            Ui.space();
-            System.out.println("Successfully wrote to the file.");
+//            Ui.space();
+//            System.out.println("Successfully wrote to the file.");
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();

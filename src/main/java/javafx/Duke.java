@@ -12,6 +12,9 @@ import javafx.scene.layout.Region;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import java.util.concurrent.TimeUnit;
+
+import windycall.WindyCall;
 
 
 public class Duke extends Application {
@@ -22,11 +25,17 @@ public class Duke extends Application {
     private Button sendButton;
     private Scene scene;
 
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/pikachu.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/cxk.jfif"));
+
+    private WindyCall windycall;
 
     public static void main(String[] args) {
         // ...
+    }
+
+    public Duke() {
+        this.windycall = new WindyCall();
     }
 
     @Override
@@ -79,13 +88,19 @@ public class Duke extends Application {
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
+        // greetings
+        Label dukeGreetingText = new Label("I'm WindyCall, how can I help you?");
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(dukeGreetingText, new ImageView(duke))
+        );
+
         // for step 3
         sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
+            handleUserInput(stage);
         });
 
         userInput.setOnAction((event) -> {
-            handleUserInput();
+            handleUserInput(stage);
         });
 
         //Scroll down to the end every time dialogContainer's height changes.
@@ -112,7 +127,7 @@ public class Duke extends Application {
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
-    private void handleUserInput() {
+    private void handleUserInput(Stage stage) {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
@@ -127,8 +142,10 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     private String getResponse(String input) {
-        return "Duke heard: " + input;
+        return windycall.run(input);
     }
+
+
 
 
 }

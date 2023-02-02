@@ -28,47 +28,42 @@ public class WindyCall {
      * Serves as a runner of the application.
      * Requires parser to translate user command and handle different commands accordingly.
      */
-    public void run() {
-        Scanner scan = new Scanner(System.in);
-        ui.greeting();
-        while (true) {
-            String userCommand = scan.nextLine();
-            if (userCommand.equals("bye")) {
-                ui.byeWords();
-                break;
-            }
+    public String run(String userCommand) {
             OperationType type = parser.getOperationType(userCommand);
-            Ui.line();
             String[] parts = userCommand.split(" ");
             switch (type) {
             case LIST:
-                ListOperationHandler.handle(tasks, ui);
-                break;
+                return ListOperationHandler.handle(tasks, ui);
+//                break;
             case MARK:
-                MarkOperationHandler.handle(parser, tasks, parts, storage);
-                break;
+                return MarkOperationHandler.handle(parser, tasks, parts, storage);
+//                break;
             case UNMARK:
-                UnmarkOperationHandler.handle(parser, tasks, parts, storage);
-                break;
+                return UnmarkOperationHandler.handle(parser, tasks, parts, storage);
+//                break;
             case DELETE:
-                DeleteOperationHandler.handle(parser, tasks, parts, storage);
-                break;
+                return DeleteOperationHandler.handle(parser, tasks, parts, storage);
+//                break;
             case FIND:
-                FindOperationHandler.handle(parts, ui, tasks, userCommand);
-                break;
+                return FindOperationHandler.handle(parts, ui, tasks, userCommand);
+//                break;
             default:
+                String returnedMessage;
                 try {
-                    AddTaskHandler.addTask(userCommand, tasks, storage);
+                    returnedMessage = AddTaskHandler.addTask(userCommand, tasks, storage);
                 } catch (WindyCallException e) {
-                    System.out.println(e.getMessage());
+                    returnedMessage = e.getMessage();
                 }
-                break;
+                return returnedMessage;
+//                break;
             }
-            Ui.line();
-        }
+//            return "";
+
     }
+    /*
     public static void main(String[] args) {
         WindyCall chatBox = new WindyCall();
         chatBox.run();
     }
+     */
 }
