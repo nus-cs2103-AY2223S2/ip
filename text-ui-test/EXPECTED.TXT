@@ -18,20 +18,20 @@ ________________________________________________________________
 ________________________________________________________________
 ________________________________________________________________
 	Got it. I have added this task:
-    [D][ ] return (by: Sunday)
-	You have 2 tasks in the list.
-
+ 	[D][ ] return book (by: Jan 01 2010 0600 PM)
+	You have 2 tasks in the listOfTasks.
 ________________________________________________________________
 ________________________________________________________________
 	Got it. I have added this task:
-    [E][ ] meeting (from:Monday to:Sunday)
+    [E][ ] meeting (from:Jan 01 2010 1800 PM to:0700 PM)
 	Now you have 3 tasks in the list.
 ________________________________________________________________
 ________________________________________________________________
 	Here are the tasks in your list:
 	1.[T][X] eat
-	2.[D][ ] return (by: Sunday)
-	3.[E][ ] meeting (from:Monday to:Sunday)
+	2.[D][ ] return (by: Jan 01 2010 0600 PM)
+	3.[E][ ] meeting (from:Jan 01 2010 1800 PM to:0700 PM)
+
 ________________________________________________________________
 Bye. Hope to see you again soon!
 

@@ -1,6 +1,6 @@
 todo eat
 mark 1
-deadline return book /by Sunday
-event meeting /from Monday /to Sunday
+deadline return book /by 2010-01-01 1800
+event meeting /from 2010-01-01 1800 /to 1900
 list
 bye

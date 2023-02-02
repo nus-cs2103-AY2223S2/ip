@@ -36,22 +36,15 @@ public class Duke  {
     public void run() {
         this.ui.greet();
         while (Parser.getFlag()){
-            try{
                 String input = ui.readIn();
                 System.out.println(getResponse(input));
-                storage.saveData(list);
-
-
-            }
-            catch (IOException e){
-                e.printStackTrace();
-            }
         }
     }
     public String getResponse(String input) {
         String response = "";
         try {
             response = Parser.parse(input, this.list);
+            storage.saveData(list);
        }
        catch (IOException e){
            e.printStackTrace();

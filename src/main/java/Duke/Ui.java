@@ -20,8 +20,8 @@ public class Ui {
     /**
      * The method of Underline() to print out a separating line
      */
-    public static void Underline(){
-        System.out.println((UNDERLINE));
+    public static String Underline(){
+        return (UNDERLINE);
     }
 
     /**
@@ -37,9 +37,9 @@ public class Ui {
      */
     public void greet() {
         System.out.println(logo);
-        System.out.println("Welcome! I'm duke.Duke.");
+        System.out.println("Welcome! I'm Duke.");
         System.out.println("What can I do for you?");
-        Underline();
+        System.out.println(Ui.Underline());
     }
 
     /**

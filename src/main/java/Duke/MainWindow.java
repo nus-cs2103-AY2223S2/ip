@@ -27,7 +27,7 @@ public class MainWindow extends AnchorPane {
 
     private Duke Duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser1.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
 
@@ -39,7 +39,7 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         sendButton.setFont(Font.font("Helvetica"));
         userInput.setFont(Font.font("Helvetica"));
-        String greeting = "Welcome! I'm Duke.\nWhat can I do for you?";
+        String greeting = "\tWelcome! I'm Duke.\n\tWhat can I do for you?";
         dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog(greeting, dukeImage)
         );
@@ -73,6 +73,7 @@ public class MainWindow extends AnchorPane {
             TimerTask task = new TimerTask() {
                 public void run() {
                     Platform.exit();
+                    System.exit(0);
                 }
             };
             Timer timer = new Timer("Delay");

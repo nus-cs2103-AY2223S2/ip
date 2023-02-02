@@ -1,5 +1,6 @@
 
 package Duke.Exceptions;
+import Duke.Ui;
 /**
  * Contains a duke exception object when description is missing for the command.
  */
@@ -21,6 +22,6 @@ public class emptyDescriptionException extends DukeException {
 
     @Override
     public String toString() {
-        return  String.format("%s The description of a %s cannot be empty.", super.toString(), command );
+        return  String.format("%s The description of a %s cannot be empty.\n" + Ui.Underline(), super.toString(), command );
     }
 }
