@@ -6,7 +6,9 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import kira.ui.gui.MainWindow;
 
 /**
  * Main app to run KiraBot GUI.
@@ -18,11 +20,12 @@ public class KiraApp extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(KiraApp.class.getResource("/view/KiraController.fxml"));
-            AnchorPane ap = fxmlLoader.load();
-            Scene scene = new Scene(ap);
+            FXMLLoader fxmlLoader = new FXMLLoader(KiraApp.class.getResource("/view/MainWindow.fxml"));
+            GridPane ap = fxmlLoader.load();
+            Scene scene = new Scene(ap, 400, 600);
             stage.setScene(scene);
-            KiraController controller = fxmlLoader.<KiraController>getController();
+            stage.setTitle("KiraBot~");
+            MainWindow controller = fxmlLoader.<MainWindow>getController();
             controller.setBot(kiraBot);
             controller.setup();
             stage.show();

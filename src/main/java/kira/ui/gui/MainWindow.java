@@ -1,18 +1,18 @@
-package kira;
+package kira.ui.gui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import kira.ui.gui.DialogBox;
+import kira.KiraBot;
 
 /**
  * Controller for KiraBot GUI. Provides the layout for the other controls.
  */
-public class KiraController extends AnchorPane {
+public class MainWindow extends GridPane {
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -24,8 +24,8 @@ public class KiraController extends AnchorPane {
 
     private KiraBot kiraBot;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
-    private Image kiraBotImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
+    private Image kiraBotImage = new Image(this.getClass().getResourceAsStream("/images/KiraBot.png"));
 
     @FXML
     public void initialize() {

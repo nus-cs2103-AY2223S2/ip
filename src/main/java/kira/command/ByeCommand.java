@@ -1,5 +1,8 @@
 package kira.command;
 
+import java.util.concurrent.CompletableFuture;
+
+import javafx.application.Platform;
 import kira.storage.TaskList;
 import kira.ui.Ui;
 
@@ -18,6 +21,15 @@ public class ByeCommand extends Command {
     @Override
     public boolean execute(Ui ui, TaskList tasklist) {
         ui.endMsg();
+        CompletableFuture.runAsync(() -> {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }).thenRun(() -> {
+            Platform.exit();
+        });
         return false;
     }
 
