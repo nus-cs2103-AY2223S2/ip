@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 enum Query { LIST, FIND, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE }
-class Parser {
+public class Parser {
     /**
      * Get input string, parses it and run corresponding functions.
      * some corresponding function modifies TaskList object

@@ -51,7 +51,7 @@ public class Component extends Application {
 
         // You will need to import `javafx.scene.layout.Region` for this.
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
-
+        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
         userInput.setPrefWidth(325.0);
 
         sendButton.setPrefWidth(55.0);

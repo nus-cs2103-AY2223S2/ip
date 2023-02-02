@@ -1,7 +1,7 @@
 package duke;
 import java.util.ArrayList;
 
-class Ui {
+public class Ui {
     /**
      * Print intro.
      */

@@ -1,5 +1,5 @@
 package duke;
-import java.util.Scanner;
+import duke.component.Main;
 import javafx.application.Application;
 
 
@@ -12,6 +12,6 @@ public class Duke {
      * @param args
      */
     public static void main(String[] args) {
-        Application.launch(Component.class, args);
+        Application.launch(Main.class, args);
     }
 }
