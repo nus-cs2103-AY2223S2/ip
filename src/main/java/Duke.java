@@ -1,4 +1,6 @@
 import java.io.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -134,6 +136,17 @@ public class Duke {
         return parsedCommand;
     }
 
+    private String reformatDate(String unformattedDate) {
+        LocalDate deadlineDateObj;
+        DateTimeFormatter dtf;
+        String formattedDeadline;
+
+        deadlineDateObj = LocalDate.parse(unformattedDate);
+        dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        formattedDeadline = deadlineDateObj.format(dtf);
+        return formattedDeadline;
+    }
+
     private String[] parseDeadline(String command) throws ZeroLengthDescriptionException {
         String[] split_command = command.split("/");
         String by = split_command[1];
@@ -142,7 +155,11 @@ public class Duke {
         checkCommandLength(taskAndName);
         String[] taskNameSplit = Arrays.copyOfRange(taskAndName, 1, taskAndName.length);
         String taskName = String.join(" ", taskNameSplit);
-        String[] parsedCommand = new String[] {taskAndName[0], taskName, by};
+
+        String unformattedDeadline = by.split(" ")[1];
+        String formattedDeadline = reformatDate(unformattedDeadline);
+
+        String[] parsedCommand = new String[] {taskAndName[0], taskName, formattedDeadline};
         return parsedCommand;
     }
 
@@ -150,12 +167,18 @@ public class Duke {
         String[] split_command = command.split("/");
         String from = split_command[1];
         String to = split_command[2];
+        //format from and to
+        String unformattedFrom = from.split(" ")[1];
+        String unformattedTo = to.split(" ")[1];
+        String formattedFrom = reformatDate(unformattedFrom);
+        String formattedTo = reformatDate(unformattedTo);
+
         //need to split task type and name
         String[] taskAndName = split_command[0].split(" ");
         checkCommandLength(taskAndName);
         String[] taskNameSplit = Arrays.copyOfRange(taskAndName, 1, taskAndName.length);
         String taskName = String.join(" ", taskNameSplit);
-        String[] parsedCommand = new String[] {taskAndName[0], taskName, from, to};
+        String[] parsedCommand = new String[] {taskAndName[0], taskName, formattedFrom, formattedTo};
         return parsedCommand;
     }
 
