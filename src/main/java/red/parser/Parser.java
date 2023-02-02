@@ -75,7 +75,6 @@ public class Parser {
             if (timestr.length == 2 && timestr[1].isEmpty()) {
                 NewDeadlineTask = new DeadlineTask(deadstr[0],timestr[0]);
             } else if (timestr.length == 2) {
-                System.out.println("hello");
                 System.out.println(timestr[1].isEmpty());
                 NewDeadlineTask = new DeadlineTask(deadstr[0],timestr[0],timestr[1]);
             } else if (timestr.length == 1) {
