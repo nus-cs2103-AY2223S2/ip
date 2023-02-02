@@ -1,5 +1,6 @@
 import java.util.*;
 
+
 public class Duke {
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -61,7 +62,8 @@ public class Duke {
                     int ind = str.indexOf("/by");
                     Task b = null;
                     try {
-                        b = new Deadline(str.substring(9, ind), str.substring(ind+3));
+                        b = new Deadline(str.substring(9, ind), str.substring(ind+4));
+                        b.isDate();
                     } catch (DukeException e) {
                         System.out.println(e.getMessage());
                         break;
@@ -76,8 +78,9 @@ public class Duke {
                     int index_2 = str.indexOf("/to");
                     Task c = null;
                     try {
-                        c = new Event(str.substring(6, index_1), str.substring(index_1+5, index_2),
-                                                str.substring(index_2 + 3));
+                        c = new Event(str.substring(6, index_1), str.substring(index_1+6, index_2),
+                                                str.substring(index_2 + 4));
+                        c.isDate();
                     } catch (DukeException e) {
                         System.out.println(e.getMessage());
                         break;
