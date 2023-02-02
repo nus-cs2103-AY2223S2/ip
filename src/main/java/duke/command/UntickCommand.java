@@ -12,9 +12,9 @@ public class UntickCommand extends Command{
         this.taskIndex = taskIndex;
     }
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task task = tasks.untickTask(this.taskIndex);
-        ui.printUntickTask(task);
+        return ui.printUntickTask(task);
     }
 
     @Override
