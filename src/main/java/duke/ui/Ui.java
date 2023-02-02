@@ -7,7 +7,7 @@ import duke.task.Task;
 import duke.task.TaskList;
 
 /**
- * The Ui class represents Duke's user interface that interacts with the user.
+ * The Ui class represents Duke's command line user interface that interacts with the user.
  */
 public class Ui {
     private static Ui instanceUi = new Ui();
