@@ -259,7 +259,7 @@ public class TaskList {
         String keyword = userCommandParts[1];
         ArrayList<Task> results = new ArrayList<>();
 
-        for (Task task : TASK_LIST) {
+        for (Task task : TASKS) {
             if (task.getDescription().contains(keyword)) {
                 results.add(task);
             }
