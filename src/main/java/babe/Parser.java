@@ -77,6 +77,18 @@ class Parser {
 
     }
 
+    /**
+     * Returns true if the description is available for an instruction.
+     * Throws NoDescriptionException if description is not available.
+     * @return A boolean value;
+     */
+    private static void checkIfDescriptionAvail(int len)
+            throws NoDescriptionException {
+        if (len == 1) {
+            throw new NoDescriptionException();
+        }
+    }
+
 
     public static ArrayList<String> parse(String input)
             throws NoDescriptionException, NonsenseInputException, WrongDateFormatException {
@@ -101,20 +113,12 @@ class Parser {
             outputs.add(userInput.get(1));
 
         } else if (instruction.equals("todo")) {
-
-            if (inputLength == 1) {
-                throw new NoDescriptionException();
-            }
-
+            checkIfDescriptionAvail(inputLength);
             String description = Parser.rebuildUserInput(1, inputLength);
-
             outputs.add(description);
 
         } else if (instruction.equals("deadline")) {
-
-            if (inputLength == 1) {
-                throw new NoDescriptionException();
-            }
+            checkIfDescriptionAvail(inputLength);
 
             int deadlineIndex = Parser.findArgument("/by");
             String description = Parser.rebuildUserInput(1, deadlineIndex - 1);
@@ -124,14 +128,11 @@ class Parser {
                 outputs.add(description);
                 outputs.add(deadline);
             } catch (Exception e) {
-                System.out.println(e);
                 throw new WrongDateFormatException();
             }
 
-        } else if (instruction.equalsIgnoreCase("event")) {
-            if (inputLength == 1) {
-                throw new NoDescriptionException();
-            }
+        } else if (instruction.equals("event")) {
+            checkIfDescriptionAvail(inputLength);
 
             int startDateIndex = Parser.findArgument("/from");
             int endDateIndex = Parser.findArgument("/to");
@@ -139,22 +140,22 @@ class Parser {
             String description = Parser.rebuildUserInput(1, startDateIndex - 1);
             String startDate = Parser.formatDate(Parser.rebuildUserInput(startDateIndex, endDateIndex - 1));
             String endDate = Parser.formatDate(Parser.rebuildUserInput(endDateIndex, inputLength));
-            try {
 
+            try {
                 outputs.add(description);
                 outputs.add(startDate);
                 outputs.add(endDate);
-
             } catch (Exception e) {
                 throw new WrongDateFormatException();
             }
 
-
-        } else if (instruction.equalsIgnoreCase("delete")) {
-            if (inputLength == 1) {
-                throw new NoDescriptionException();
-            }
+        } else if (instruction.equals("delete")) {
+            checkIfDescriptionAvail(inputLength);
             outputs.add(userInput.get(1));
+
+        } else if (instruction.equals("find")) {
+            checkIfDescriptionAvail(inputLength);
+            outputs.add(rebuildUserInput(1, inputLength));
 
         } else {
             throw new NonsenseInputException();

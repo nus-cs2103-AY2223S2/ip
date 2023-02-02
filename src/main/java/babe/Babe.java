@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import babe.exception.NonsenseInputException;
+import babe.task.Task;
 
 /**
  * <h1> Hi Babe! </h1>
@@ -23,56 +24,58 @@ public class Babe {
 
     public static void main(String[] args) {
 
-        Babe chatBot = new Babe();
+        Babe babe = new Babe();
         Ui.welcomeUser();
-        Storage.initializeStorage(chatBot.taskList);
+        Storage.initializeStorage(babe.taskList);
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
             try {
-
                 ArrayList<String> parseOutputs = Parser.parse(scanner.nextLine());
+                String instruction = parseOutputs.get(0);
 
-//                String instruction = chatBot.userInput.get(0);
-//                int inputLength = chatBot.userInput.size();
-
-                if (parseOutputs.get(0).equals("bye")) {
+                if (instruction.equals("bye")) {
                     scanner.close();
                     Ui.sayBye();
                     System.exit(0);
 
-                } else if (parseOutputs.get(0).equals("list")) {
-                    Ui.printList(chatBot.taskList);
+                } else if (instruction.equals("list")) {
+                    Ui.printList(babe.taskList);
 
-                } else if (parseOutputs.get(0).equals("mark")) {
+                } else if (instruction.equals("mark")) {
                     int index = Integer.parseInt(parseOutputs.get(1));
-                    chatBot.taskList.changeStatus(true, index);
-                    Storage.save(chatBot.taskList);
+                    babe.taskList.changeStatus(true, index);
+                    Storage.save(babe.taskList);
 
-                } else if (parseOutputs.get(0).equals("unmark")) {
+                } else if (instruction.equals("unmark")) {
                     int index = Integer.parseInt(parseOutputs.get(1));
-                    chatBot.taskList.changeStatus(false, index);
-                    Storage.save(chatBot.taskList);
+                    babe.taskList.changeStatus(false, index);
+                    Storage.save(babe.taskList);
 
-                } else if (parseOutputs.get(0).equals("todo")) {
-                    chatBot.taskList.addToDo(parseOutputs.get(1), true);
-                    Storage.save(chatBot.taskList);
+                } else if (instruction.equals("todo")) {
+                    babe.taskList.addToDo(parseOutputs.get(1), true);
+                    Storage.save(babe.taskList);
 
-                } else if (parseOutputs.get(0).equals("deadline")) {
-                    chatBot.taskList.addDeadline(parseOutputs.get(1), parseOutputs.get(2), true);
-                    Storage.save(chatBot.taskList);
-                } else if (parseOutputs.get(0).equals("event")) {
-
-                    chatBot.taskList.addEvent(parseOutputs.get(1),
+                } else if (instruction.equals("deadline")) {
+                    babe.taskList.addDeadline(parseOutputs.get(1), parseOutputs.get(2), true);
+                    Storage.save(babe.taskList);
+                    
+                } else if (instruction.equals("event")) {
+                    babe.taskList.addEvent(parseOutputs.get(1),
                             parseOutputs.get(2),
                             parseOutputs.get(3),
                             true);
-                    Storage.save(chatBot.taskList);
+                    Storage.save(babe.taskList);
 
-                } else if (parseOutputs.get(0).equals("delete")) {
+                } else if (instruction.equals("delete")) {
                     int index = Integer.parseInt(parseOutputs.get(1));
-                    chatBot.taskList.deleteTask(index);
-                    Storage.save(chatBot.taskList);
+                    babe.taskList.deleteTask(index);
+                    Storage.save(babe.taskList);
+
+                } else if (instruction.equals("find")) {
+                    String searchKey = parseOutputs.get(1);
+                    ArrayList<Task> foundTasks = babe.taskList.findTasks(searchKey);
+                    Ui.notifyFindResults(foundTasks);
 
                 } else {
                     throw new NonsenseInputException();

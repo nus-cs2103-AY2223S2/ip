@@ -92,6 +92,24 @@ class TaskList {
         Ui.notifyStatusChanged(itemAtIndex, toMark);
     }
 
+    /**
+     * Find a task in the TaskList that contains the searchKey entirely.
+     *
+     * @param searchKey A String input by the user.
+     * @return A Task array containing the Tasks found.
+     */
+    public ArrayList<Task> findTasks(String searchKey) {
+        ArrayList<Task> foundTasks = new ArrayList<>();
+        for (int i = 0; i < taskCount; i++) {
+            Task task = tasks.get(i);
+            if (task.contains(searchKey)) {
+                foundTasks.add(task);
+            }
+        }
+
+        return foundTasks;
+    }
+
     @Override
     /**
      * Implements toString() method for the TaskList.
@@ -127,6 +145,7 @@ class TaskList {
     protected Task get(int index) {
         return tasks.get(index);
     }
+
 
 
 }
