@@ -12,11 +12,19 @@ public enum DukeCommand {
     TODO("todo"),
     DEADLINE("deadline"),
     EVENT("event"),
+    FIND("find"),
     MARK("mark"),
     UNMARK("unmark"),
     INVALID("invalid");
 
+    /**
+     * the command.  For example, the command of the command "todo read book" is "todo".
+     */
     private final String command;
+
+    /**
+     * the description of the command.  For example, the description of the command "todo read book" is "read book".
+     */
     private String description;
 
     DukeCommand(String command) {
@@ -24,10 +32,16 @@ public enum DukeCommand {
         this.description = "";
     }
 
+    /**
+     * @param description the description of the command.
+     */
     private void setDescription(String description) {
         this.description = description;
     }
 
+    /**
+     * @return the command.
+     */
     public String getCommand() {
         return command;
     }
@@ -44,7 +58,7 @@ public enum DukeCommand {
             ui.printGoodbye();
             break;
         case LIST:
-            ui.prettifyOut(taskList.toString());
+            ui.printTaskList(taskList);
             break;
         case DELETE:
             int taskToDelete = Integer.parseInt(this.description) - 1;
@@ -96,6 +110,10 @@ public enum DukeCommand {
                 ui.printDukeException(e);
             }
             break;
+        case FIND:
+            TaskList foundTasks = taskList.findTasks(this.description);
+            ui.printTasksFound(foundTasks);
+            break;
         case UNMARK:
             try {
                 int taskToUnmark = Integer.parseInt(this.description) - 1;
@@ -112,10 +130,14 @@ public enum DukeCommand {
         }
     }
 
-    public static DukeCommand getCommand(String command) {
+    /**
+     * @param input the user input.
+     * @return a DukeCommand object. If the command is invalid, returns DukeCommand.INVALID.
+     */
+    public static DukeCommand getCommand(String input) {
         for (DukeCommand c : DukeCommand.values()) {
-            if (c.getCommand().equals(command.split(" ")[0])) {
-                if (c != LIST && c != BYE) c.setDescription(command.split(" ", 2)[1].trim());
+            if (c.getCommand().equals(input.split(" ")[0])) {
+                if (c != LIST && c != BYE) c.setDescription(input.split(" ", 2)[1].trim());
                 return c;
             }
         }
