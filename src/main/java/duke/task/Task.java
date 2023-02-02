@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.util.regex.Pattern;
+
 /**
  * Represents over-arching Task type.
  */
@@ -52,7 +54,9 @@ public class Task {
      * @return boolean representing result of the search.
      */
     public boolean contains(String subString) {
-        return this.title.contains(subString);
+        //Add support for searching case-insensitive search.
+        return Pattern.compile(Pattern.quote(subString), Pattern.CASE_INSENSITIVE).matcher(this.title).find();
+        //return this.title.contains(subString);
     }
 
     /**
