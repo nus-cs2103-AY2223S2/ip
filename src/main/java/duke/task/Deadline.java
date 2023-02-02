@@ -9,7 +9,7 @@ import duke.helper.Parser;
  * Subclass of task representing a deadline task
  */
 public class Deadline extends Task {
-    private LocalDateTime dueDateTime;
+    private String dueDateTime;
 
     /**
      * Constructor for Deadline Class
@@ -19,9 +19,14 @@ public class Deadline extends Task {
      * @param isDone whether the task is done
      * @throws InvalidDateTimeException If the dateTime input is invalid
      */
-    public Deadline(String description, String by, boolean isDone) throws InvalidDateTimeException {
+    public Deadline(String description, String by, boolean isDone) {
         super(description, isDone, "D");
-        this.dueDateTime = Parser.handleDateTime(by);
+        this.dueDateTime = by;
+    }
+
+    public Deadline(String description, String by) throws InvalidDateTimeException {
+        super(description, false, "D");
+        this.dueDateTime = Parser.handleDateTime(by).toString();
     }
 
     /**
@@ -31,7 +36,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return String.format("%s (by: %s %s)", super.toString(),
-                dueDateTime.toLocalDate(), dueDateTime.toLocalTime());
+        return String.format("%s (by: %s)", super.toString(), dueDateTime);
     }
 }

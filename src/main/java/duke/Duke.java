@@ -12,6 +12,7 @@ import duke.storage.FileSystem;
  * Main class of the project
  */
 public class Duke {
+
     private final Ui ui;
     private Parser parser;
     private FileSystem db;
@@ -20,50 +21,33 @@ public class Duke {
     /**
      * Constructor for Duke class
      *
-     * @param filePath path of the storage file
      */
-    public Duke(String filePath) {
+    public Duke() {
         this.ui = new Ui();
 
         try {
-            db = new FileSystem(filePath);
+            db = new FileSystem("data/dukeTasks.txt");
             this.tasks = new TaskList(db.loadFromFile());
-            this.parser = new Parser(tasks);
+            this.parser = new Parser(tasks, ui, db);
         } catch (DukeException | IOException e) {
             System.out.println(e);
         }
     }
 
-    /**
-     * Runs the Duke program
-     */
-    public void run() {
-        ui.showWelcome();
-        String[] splitStr = ui.getNextLine();
+    public String getResponse(String input) {
+        String output = "";
 
-        while (!splitStr[0].equals("bye")) {
-            try {
-                this.parser.parseInputs(splitStr);
-            } catch (DukeException | IOException e) {
-                System.out.println(e);
-            } catch (NumberFormatException e) {
-                ui.showErrorMsg(splitStr[0]);
-            } catch (IndexOutOfBoundsException e) {
-                ui.showErrorMsg(tasks.getTasks().size());
-            } finally {
-                splitStr = ui.getNextLine();
-            }
+        try {
+            output = this.parser.parseInputs(input);
+        } catch (DukeException | IOException e) {
+            System.out.println(e);
+        } catch (NumberFormatException e) {
+            ui.showErrorMsg(input);
+        } catch (IndexOutOfBoundsException e) {
+            ui.showErrorMsg(tasks.getTasks().size());
+        } catch (NullPointerException e) {
+            System.out.println(e);
         }
-        db.updateFile(tasks);
-        ui.showExit();
-    }
-
-    /**
-     * Main method to execute Duke program
-     *
-     * @param arg Command line argument
-     */
-    public static void main(String[] arg) {
-        new Duke("data/dukeTasks.txt").run();
+        return output;
     }
 }
