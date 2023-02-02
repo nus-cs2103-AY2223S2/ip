@@ -65,13 +65,24 @@ public class Main extends Application {
      * @param stage
      */
     private void setGUILayout(Stage stage) {
+        final String APP_TITLE = "Shao";
+        final String SEND_BUTTON_LABEL = "Send";
+        final double SEND_BUTTON_WIDTH = 55.0;
+        final double APP_HEIGHT = 600.0;
+        final double APP_WIDTH = 400.0;
+        final double SCROLLPANE_HEIGHT = 535;
+        final double SCROLLPANE_WIDTH = 385;
+        final double TEXTFIELD_WIDTH = 325;
+        final double OFFSET = 1.0;
+
         // Step 1. Formatting the window to look as expected.
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
-
         userInput = new TextField();
-        sendButton = new Button("Send");
+
+        sendButton = new Button(SEND_BUTTON_LABEL);
+        sendButton.setPrefWidth(SEND_BUTTON_WIDTH);
 
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
@@ -82,33 +93,31 @@ public class Main extends Application {
         stage.show();
 
         // Step 2. Formatting the window to look as expected
-        stage.setTitle("Shao");
+        stage.setTitle(APP_TITLE);
         stage.setResizable(false);
-        stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
+        stage.setMinHeight(APP_HEIGHT);
+        stage.setMinWidth(APP_WIDTH);
 
-        mainLayout.setPrefSize(400.0, 600.0);
+        mainLayout.setPrefSize(APP_WIDTH, APP_HEIGHT);
 
-        scrollPane.setPrefSize(385, 535);
+        scrollPane.setPrefSize(SCROLLPANE_WIDTH, SCROLLPANE_HEIGHT);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
-        scrollPane.setVvalue(1.0);
+        scrollPane.setVvalue(OFFSET);
         scrollPane.setFitToWidth(true);
 
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
-        userInput.setPrefWidth(325.0);
+        userInput.setPrefWidth(TEXTFIELD_WIDTH);
 
-        sendButton.setPrefWidth(55.0);
+        AnchorPane.setTopAnchor(scrollPane, OFFSET);
 
-        AnchorPane.setTopAnchor(scrollPane, 1.0);
+        AnchorPane.setBottomAnchor(sendButton, OFFSET);
+        AnchorPane.setRightAnchor(sendButton, OFFSET);
 
-        AnchorPane.setBottomAnchor(sendButton, 1.0);
-        AnchorPane.setRightAnchor(sendButton, 1.0);
-
-        AnchorPane.setLeftAnchor(userInput, 1.0);
-        AnchorPane.setBottomAnchor(userInput, 1.0);
+        AnchorPane.setLeftAnchor(userInput, OFFSET);
+        AnchorPane.setBottomAnchor(userInput, OFFSET);
 
         sendButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override

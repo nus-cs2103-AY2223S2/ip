@@ -24,4 +24,9 @@ public class Deadline extends Task {
 		return String.format("D|%d|%s|%s", isDone ? 1 : 0,
 				description, formatSavedDateTime(by));
 	};
+
+	@Override
+	public boolean hasMatchDateTime(LocalDateTime dt) {
+		return by.equals(dt);
+	}
 }
