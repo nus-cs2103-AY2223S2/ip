@@ -8,8 +8,10 @@ import lulu.exception.LuluException;
 
 import lulu.task.Task;
 import lulu.task.Todo;
+
 public class TodoCommand extends Command {
     private String description;
+
     public TodoCommand(String rest) throws LuluException {
         if (rest.isEmpty()) {
             throw new LuluException("(=✖ ᆺ ✖=) The description of a todo cannot be empty.");
@@ -20,13 +22,13 @@ public class TodoCommand extends Command {
     /**
      * This method adds a todo task to tasks upon execution.
      *
-     * @param tasks the TaskList to be added with a todo task
-     * @param ui the UI that displays messages
+     * @param tasks   the TaskList to be added with a todo task
+     * @param ui      the UI that displays messages
      * @param storage the Storage is not relevant in this command
      */
-    public void execute(TaskList tasks, UI ui, Storage storage) {
+    public String execute(TaskList tasks, UI ui, Storage storage) {
         Task t = new Todo(description);
         tasks.add(t);
-        ui.showAddText(tasks.getRecentTaskDescription(), tasks.getSize());
+        return ui.showContainer(ui.showAddText(tasks.getRecentTaskDescription(), tasks.getSize()));
     }
 }

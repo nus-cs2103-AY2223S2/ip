@@ -12,6 +12,7 @@ import lulu.exception.LuluException;
 public class DeadlineCommand extends Command {
     private String description;
     private String by;
+
     public DeadlineCommand(String rest) throws LuluException {
         if (rest.isEmpty()) {
             throw new LuluException("(=✖ ᆺ ✖=) The description of a deadline cannot be empty.");
@@ -27,13 +28,13 @@ public class DeadlineCommand extends Command {
     /**
      * This method adds a deadline task to tasks upon execution.
      *
-     * @param tasks the TaskList to be added with a deadline task
-     * @param ui the UI that displays messages
+     * @param tasks   the TaskList to be added with a deadline task
+     * @param ui      the UI that displays messages
      * @param storage the Storage is not relevant in this command
      */
-    public void execute(TaskList tasks, UI ui, Storage storage) {
+    public String execute(TaskList tasks, UI ui, Storage storage) {
         Task t = new Deadline(description, by);
         tasks.add(t);
-        ui.showAddText(tasks.getRecentTaskDescription(), tasks.getSize());
+        return ui.showContainer(ui.showAddText(tasks.getRecentTaskDescription(), tasks.getSize()));
     }
 }

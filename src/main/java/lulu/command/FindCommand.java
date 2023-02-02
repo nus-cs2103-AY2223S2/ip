@@ -16,15 +16,8 @@ public class FindCommand extends Command {
         this.description = rest;
     }
 
-    public void execute(TaskList tasks, UI ui, Storage storage) {
+    public String execute(TaskList tasks, UI ui, Storage storage) {
         TaskList matched = tasks.find(this.description);
-        ui.showLine();
-        ui.listMatchText();
-        int length = matched.getSize();
-        for (int i = 0; i < length; i++) {
-            System.out.print(i + 1);
-            System.out.println(". " + matched.get(i));
-        }
-        ui.showLine();
+        return ui.showContainer(ui.listMatchText(), matched.printList());
     }
 }

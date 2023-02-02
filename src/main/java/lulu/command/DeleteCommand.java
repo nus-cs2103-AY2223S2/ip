@@ -5,6 +5,7 @@ import lulu.UI;
 import lulu.Storage;
 
 import lulu.exception.InvalidCommandException;
+
 public class DeleteCommand extends Command {
     private int taskNumber;
 
@@ -26,12 +27,13 @@ public class DeleteCommand extends Command {
     /**
      * This method deletes a task from tasks upon execution.
      *
-     * @param tasks the TaskList to be deleted with a task
-     * @param ui the UI that displays messages
+     * @param tasks   the TaskList to be deleted with a task
+     * @param ui      the UI that displays messages
      * @param storage the Storage is not relevant in this command
      */
-    public void execute(TaskList tasks, UI ui, Storage storage) {
-        ui.showDeleteText(tasks.getTaskDescription(taskNumber), tasks.getSize()-1);
+    public String execute(TaskList tasks, UI ui, Storage storage) {
+        String text = ui.showContainer(ui.showDeleteText(tasks.getTaskDescription(taskNumber), tasks.getSize() - 1));
         tasks.remove(taskNumber);
+        return text;
     }
 }

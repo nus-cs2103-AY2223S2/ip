@@ -1,16 +1,14 @@
-T`1`sleep
-D`0`sleep ` today
-E`0`sleep ` today ` tomorrow
-T`1`sleep tomorrow
-D`0`run ` 2022-05-12
-E`1`running ` 2023-05-12` 2080-05-12
+T`1`run
+T`1`run
+T`0`run2
+T`1`run
+T`0`run3
+T`1`run
 D`0`run ` tomorrow
-D`0`run ` tomorrowwww qasfawr
-E`0`run ` today ` tomorrow
-E`1`run ` today to to to ` tomorrow
-T`1`runn run run
-E`1`run ` 2000-05-12` 2010-06-12
+T`1`run
 T`0`run
-D`0`run ` tomorrow
-E`0`run ` today ` tomorrow
+T`0`study
+D`0`study ` tomorrow
+T`0`take mrt
+T`0`run
 T`0`run

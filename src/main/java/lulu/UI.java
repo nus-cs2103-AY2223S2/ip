@@ -1,10 +1,31 @@
 package lulu;
 
+import java.util.Scanner;
+import java.lang.StringBuilder;
+
 public class UI {
-    private static final String LINE = "____________________________________________________________";
+    private static final String LINE = "______________________________________";
 
     public void showLine() {
         System.out.println(LINE);
+    }
+
+    public String readCommand() {
+        Scanner sc = new Scanner(System.in);
+        String s = sc.nextLine();
+        return s;
+    }
+
+    public String showContainer(String... content) {
+        StringBuilder container = new StringBuilder();
+        container.append(LINE);
+        container.append('\n');
+        for (String s : content) {
+            container.append(s);
+            container.append('\n');
+        }
+        container.append(LINE);
+        return container.toString();
     }
 
     public void showGreetText() {
@@ -14,59 +35,63 @@ public class UI {
         System.out.println(LINE);
     }
 
-    public void showExitText() {
-        System.out.println(LINE);
-        System.out.println("Bye! Hope to see you again soon! (=◉ᆽ◉=)");
-        System.out.println(LINE);
+    public String showExitText() {
+        return ("Bye! Hope to see you again soon!");
     }
 
-    public void showAddText(String taskDescription, int size) {
-        System.out.println(LINE);
-        System.out.println("Got it. I've added this task:");
-        System.out.println("  " + taskDescription);
-        System.out.println("Now you have " + size + " tasks in the list. ฅ(=චᆽච=ฅ)");
-        System.out.println(LINE);
+    public String showAddText(String taskDescription, int size) {
+        StringBuilder text = new StringBuilder();
+        text.append("Got it. I've added this task:");
+        text.append('\n');
+        text.append("  " + taskDescription);
+        text.append('\n');
+        text.append("Now you have " + size + " tasks in the list.");
+        return text.toString();
     }
 
-    public void showDeleteText(String taskDescription, int size) {
-        System.out.println(LINE);
-        System.out.println("Noted! I've removed this task:");
-        System.out.println("  " + taskDescription);
-        System.out.println("Now you have " + size + " tasks in the list. ฅ(=චᆽච=ฅ)");
-        System.out.println(LINE);
+    public String showDeleteText(String taskDescription, int size) {
+        StringBuilder text = new StringBuilder();
+        text.append("Noted! I've removed this task:");
+        text.append('\n');
+        text.append("  " + taskDescription);
+        text.append('\n');
+        text.append("Now you have " + size + " tasks in the list.");
+        return text.toString();
     }
 
-    public void listText() {
-        System.out.println("ฅ(=චᆽච=ฅ) Here are the tasks in your list: ");
+    public String listText() {
+        return (" Here are the tasks in your list: ");
     }
 
-    public void listMatchText() {
-        System.out.println("ฅ(=චᆽච=ฅ) Here are the matching tasks in your list: ");
+    public String listMatchText() {
+        return ("Here are the matching tasks in your list: ");
     }
 
-    public void showMarkText(String taskMark) {
-        System.out.println(LINE);
-        System.out.println("(₌♥ᆽ♥₌) Nice! I've marked this task as done:");
-        System.out.println(" " + taskMark);
-        System.out.println(LINE);
+    public String showMarkText(String taskMark) {
+        StringBuilder text = new StringBuilder();
+        text.append("Nice! I've marked this task as done:");
+        text.append('\n');
+        text.append(" " + taskMark);
+        return text.toString();
     }
 
-    public void showUnmarkText(String taskUnmark) {
-        System.out.println(LINE);
-        System.out.println("(₌ ᵕ̣̣̣̣̣ ᆽ ᵕ̣̣̣̣̣₌) OK, I've marked this task as not done yet:");
-        System.out.println(" " + taskUnmark);
-        System.out.println(LINE);
+    public String showUnmarkText(String taskUnmark) {
+        StringBuilder text = new StringBuilder();
+        text.append("OK, I've marked this task as not done yet:");
+        text.append('\n');
+        text.append(" " + taskUnmark);
+        return text.toString();
     }
 
-    public void showLoad() {
-        System.out.println("loading...");
+    public String showLoad() {
+        return ("loading...");
     }
 
-    public void showLoadComplete() {
-        System.out.println("loading complete.");
+    public String showLoadComplete() {
+        return ("loading complete.");
     }
 
-    public void showOutOfBounds() {
-        System.out.println("(=ಠᆽಠ=) That is out of bounds!");
+    public String showOutOfBounds() {
+        return ("(=ಠᆽಠ=) That is out of bounds!");
     }
 }
