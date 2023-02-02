@@ -1,7 +1,5 @@
 package duke;
 
-import java.util.Scanner;
-
 import duke.command.CommandParser;
 import duke.exception.DukeException;
 import duke.storage.FileStorage;
