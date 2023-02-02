@@ -158,7 +158,7 @@ public class TaskList {
             throw new DukeException("No matching task found.");
         }
 
-        foundTasks.deleteCharAt(foundTasks.length() - 1);
+        foundTasks.deleteCharAt(foundTasks.length() - 1); // Deletes the last lineSeparator.
         return foundTasks.toString();
     }
 }

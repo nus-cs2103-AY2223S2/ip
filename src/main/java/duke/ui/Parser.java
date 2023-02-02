@@ -44,12 +44,13 @@ public class Parser {
 
             // Split string into 2 parts, 1st part is the operation, 2nd part is the description
             String[] command = input.split(" ", 2);
+            Operation op = Operation.valueOf(command[0].toUpperCase()); // Throws exception if not a valid operation.
 
+            // The operation is valid but no description was given.
             if (command.length < 2) {
                 throw new DukeException("No command description given.");
             }
 
-            Operation op = Operation.valueOf(command[0].toUpperCase()); // Attain the operation
             String description = command[1];
 
             switch (op) {
@@ -99,7 +100,6 @@ public class Parser {
      * @throws DateTimeParseException If the date format is invalid.
      */
     public static Command addTaskParser(Operation op, String description) throws DateTimeParseException {
-
         switch (op) {
         case TODO:
             return new CommandAddTodo(description);
@@ -143,6 +143,6 @@ public class Parser {
      * @return A Command instance to find tasks.
      */
     public static Command findTaskParser(String keyword) {
-        return new CommandFind(keyword);
+        return new CommandFind(keyword.trim());
     }
 }

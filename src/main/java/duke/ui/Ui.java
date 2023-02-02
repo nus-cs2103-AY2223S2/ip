@@ -20,45 +20,21 @@ public class Ui {
     }
 
     /**
-     * Creates a decorated response message with self-adjusting width
-     * to match message length.
+     * Creates a decorated response message.
      * @param s Message.
      */
     public void formResponse(String s) {
-        String opener = "*";
-        String ender = "*";
 
-        // Find max length of a line
-        String[] stringArr = s.split(System.lineSeparator());
-        int maxLen = 0;
-        for (String str : stringArr) {
-            maxLen = Math.max(maxLen, str.length());
-        }
-
-        // Create adjustable text box
-        for (int i = 0; i < maxLen; i++) {
-            if (i == maxLen - 1) {
-                opener += "-*";
-                ender += "-*";
-            } else {
-                opener += "-";
-                ender += "-";
-            }
-        }
-
-        // Change String array to a StringBuilder
-        // Append line separator + space character " " to each line
+        // Append ">" to each new line to indicate box reply
+        String[] StringArray = s.split(System.lineSeparator());
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < stringArr.length; i++) {
-            sb.append(" " + stringArr[i]);
-            if (i != stringArr.length - 1) {
-                sb.append(System.lineSeparator());
-            }
+
+        for (String line : StringArray) {
+            sb.append("\t> " + line + "\n");
         }
 
-        System.out.println("\n" + opener + "\n"
-                + sb.toString()
-                + "\n" + ender + "\n");
+        sb.setLength(sb.length() - 1); // remove the last lineSeparator.
+        System.out.println(sb);
     }
 
     /**
