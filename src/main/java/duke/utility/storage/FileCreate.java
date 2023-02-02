@@ -6,16 +6,17 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 /**
- * Represents a <code>FilecReate</code> object that contains methods to 
- * create files and folders with the path specified.
+ * Represents a <code>FilecReate</code> object that contains methods to create files and folders
+ * with the path specified.
  * 
  * 
  * @author Brian Quek
  */
 public class FileCreate {
-    
-    /** 
+
+    /**
      * Creates a file based on the given file path.
+     * 
      * @param path the file path.
      */
     public static void createFile(Path path) {
@@ -27,10 +28,11 @@ public class FileCreate {
         }
     }
 
-    
-    /** 
+
+    /**
      * Creates a folder based on the given path in the paraemter.
-     * @param path the folder path 
+     * 
+     * @param path the folder path
      */
     public static void createFolder(Path path) {
         try {

@@ -1,8 +1,7 @@
 package duke.tasklist.task_types;
 
 /**
- * Represents a <code>task</code> object that contains a string holding the
- * <code>event</code> time
+ * Represents a <code>task</code> object that contains a string holding the <code>event</code> time
  * from a specific length stated by the user.
  * 
  * 

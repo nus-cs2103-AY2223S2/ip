@@ -9,17 +9,17 @@ import duke.utility.ui.Ui;
 import duke.utility.ui.UiMessage;
 
 /**
- * <h1>Duke Chatbot</h1>
- * The Duke chatbot is a bot that is capable to keep
- * track of tasks from the users.
+ * <h1>Duke Chatbot</h1> The Duke chatbot is a bot that is capable to keep track of tasks from the
+ * users.
  * 
  * @author Brian Quek
  */
 
 public class Duke {
-    
-    /** 
+
+    /**
      * Main function that creates and run the Duke Bot object.
+     * 
      * @param args
      */
     public static void main(String[] args) {

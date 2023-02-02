@@ -1,8 +1,7 @@
 package duke.duke_exception;
 
 /**
- * An Exception class used to handle invalid commands where Duke is unable to
- * respond to.
+ * An Exception class used to handle invalid commands where Duke is unable to respond to.
  * 
  * 
  * @author Brian Quek
@@ -34,15 +33,14 @@ public class DukeException extends Exception {
                 message = "Input parameters cannot be empty!";
                 break;
             /**
-             * Handles cases where the command and parameters are present but invalid
-             * parameter typing.
+             * Handles cases where the command and parameters are present but invalid parameter
+             * typing.
              */
             case 3:
                 message = "Input parameters must be numerical!";
                 break;
             /**
-             * Handles cases for deadline/event commands where the /by, /from or /to are
-             * missing.
+             * Handles cases for deadline/event commands where the /by, /from or /to are missing.
              */
             case 4:
                 message = "Missing /by, /from or /by parameters.";

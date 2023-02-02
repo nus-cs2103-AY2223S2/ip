@@ -10,9 +10,9 @@ import java.io.ObjectOutputStream;
 import java.nio.file.Paths;
 
 import duke.tasklist.TaskList;
+
 /**
- * Represents a <code>Storage</code> object that contain method to
- * write and read data from a file.
+ * Represents a <code>Storage</code> object that contain method to write and read data from a file.
  * 
  * 
  * @author Brian Quek
@@ -21,8 +21,8 @@ public class Storage {
     private static final String FOLDER_PATH = "src/main/java/duke/utility/storage/";
     private static final String FILE_PATH = "src/main/java/duke/utility/storage/storage.txt";
 
-    
-    /** 
+
+    /**
      * Reads data from the .txt file and wraps into a TaskList object.
      * 
      * @return the list of tasks from the given .txt file.
@@ -48,9 +48,10 @@ public class Storage {
         return list == null ? new TaskList() : list;
     }
 
-    
-    /** 
+
+    /**
      * Writes data to the .txt file specified by FILE_PATH, saving the TaskList object as a whole.
+     * 
      * @param list the list of tasks to be written into the .txt file.
      */
     public static void writeData(TaskList list) {

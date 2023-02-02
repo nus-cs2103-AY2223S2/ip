@@ -4,19 +4,17 @@ import duke.tasklist.TaskList;
 import duke.utility.parser.CommandMap;
 
 /**
- * Represents a <code>Ui</code> object that prints out the
- * the relevant Ui required.
+ * Represents a <code>Ui</code> object that prints out the the relevant Ui required.
  * 
  * @author Brian Quek
  */
 public class Ui {
-    private static final String BRACKETS = "_______________________________________________________\n";
+    private static final String BRACKETS =
+            "_______________________________________________________\n";
 
-    private static String logo = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
+    private static String logo =
+            " ____        _        \n" + "|  _ \\ _   _| | _____ \n" + "| | | | | | | |/ / _ \\\n"
+                    + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
     private static String openingMessage = "Welcome to the Duke Bot.\n";
 
     /**
@@ -26,13 +24,14 @@ public class Ui {
         System.out.println(openingMessage + logo);
     }
 
-    
-    /** 
-     * Loads the relevant print lines based on the type of message set
-     * and the task in the parameter.
+
+    /**
+     * Loads the relevant print lines based on the type of message set and the task in the
+     * parameter.
      * 
-     * @param msg the UiMessage object that contains the message type and if applicable the task involved.
-     * @param list the task list which handles every relevant task in hand. 
+     * @param msg the UiMessage object that contains the message type and if applicable the task
+     *        involved.
+     * @param list the task list which handles every relevant task in hand.
      */
     public void load(UiMessage msg, TaskList list) {
         String ui = BRACKETS;
