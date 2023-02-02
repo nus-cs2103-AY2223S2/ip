@@ -24,7 +24,7 @@ public class Duke {
 
 
     public static void main(String[] args) {
-        String txtDir = System.getProperty("user.dir") + "/data/save.txt";
+        String txtDir = "./save.txt";
         new Duke(txtDir).run();
     }
 
