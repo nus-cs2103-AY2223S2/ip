@@ -10,37 +10,10 @@ public class Duke {
     System.out.println(divider + "Hello! I'm Duke");
     System.out.println("What can I do for you?\n" + divider);
 
-    ArrayList<Task> tasks = new ArrayList<>();
-
     File prevTasks = new File("./data/tasks.txt");
-    Scanner fileSc;
-    try {
-      fileSc = new Scanner(prevTasks);
-      while(fileSc.hasNextLine()) {
-        String[] savedData = fileSc.nextLine().split(" \\| ");
-        Task t = new Task("");
-        switch (savedData[0]) {
-        case "T":
-          t = new Todo(savedData[2]);
-          break;
-        case "D":
-          t = new Deadline(savedData[2], savedData[3]);
-          break;
-        case "E":
-          t = new Event(savedData[2], savedData[3], savedData[4]);
-          break;
-        }
-        if (savedData[1].equals("0")) {
-          t.unmark();
-        } else {
-          t.mark();
-        }
-      }
-      fileSc.close();
-    } catch (FileNotFoundException fnfe) {
-      prevTasks.createNewFile();                      //Previous task file doesn't exist,
-    }                                                 //create new prevTask file.
+    FileHandler saveManager = new FileHandler(prevTasks);
 
+    ArrayList<Task> tasks = new ArrayList<>(saveManager.extractTasks());
 
     Scanner sc = new Scanner(System.in);
 
@@ -56,10 +29,10 @@ public class Duke {
           break;
 
         case "bye":   //Exit
+          saveManager.saveTasks(tasks);
           System.out.println(divider + "Bye. Hope to see you again soon!\n" + divider);
           return;
 
-          //Other single word commands go here.
 
         default:                                      //Instructions with arguments
           StringTokenizer tokens = new StringTokenizer(instr, " ");
