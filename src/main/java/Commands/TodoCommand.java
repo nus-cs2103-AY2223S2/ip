@@ -25,7 +25,7 @@ public class TodoCommand extends Command {
      * @return The description.
      */
     public String getDescription(String userInput) {
-        return userInput.split(" ")[1];
+        return userInput.substring(5);
     }
 
     /**
