@@ -16,10 +16,9 @@ import javafx.stage.Stage;
 public class Ui {
 
     // commonly-displayed elements
-    public static final String DIVIDER = "____________________________________________________________";
+    public static final String NEWL = "\n";
     public static final String LOGO = " ____        _        \n" + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n" + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
-    public static final String NEWL = "\n";
 
     // duke components
     private Duke duke;
@@ -146,23 +145,11 @@ public class Ui {
         return this.scanner.nextLine();
     }
 
-    /**
-     * Pretty prints a given string.
-     *
-     * @param text The string to be pretty-printed.
-     */
-    public static void prettyPrint(String text) {
-        System.out.println(DIVIDER);
-        System.out.print(text);
-        System.out.println(DIVIDER);
-        System.out.println();
-    }
-
     private void initializeHandlers() {
         // on-click handler for sendButton
         this.sendButton.setOnMouseClicked((event) -> {
-            this.duke.run(userInput.getText());
-            this.userInput.clear();
+            // this.duke.run(userInput.getText());
+            this.handleUserInput();
         });
 
         // "enter" on-press handler for userInput
@@ -171,5 +158,13 @@ public class Ui {
         // this.userInput.clear();
         // });
 
+        this.dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+
+    }
+
+    private void handleUserInput() {
+        String userText = userInput.getText();
+        this.dialogContainer.getChildren().addAll(DialogBox.makeUserDialog(userText));
+        this.userInput.clear();
     }
 }
