@@ -14,6 +14,8 @@ public class TaskList implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private ArrayList<Task> tasks = new ArrayList<>();
+    private ArrayList<Task> foundTasks;
+    private ArrayList<Integer> foundTaskIndices;
 
     private void addTask(String[] parsedRequest) throws LeoTaskException {
         try {
@@ -42,6 +44,18 @@ public class TaskList implements Serializable {
         System.out.printf("Alright! I've removed this from your list: %s\n", taskDesc);
         System.out.printf("You have %d tasks in your list, vamos, get moving!\n", tasks.size());
     }
+
+    private void findTask(String keyword) {
+        foundTasks = new ArrayList<>();
+        foundTaskIndices = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.toString().contains(keyword)) {
+                foundTasks.add(task);
+                foundTaskIndices.add(tasks.indexOf(task) + 1);
+            }
+        }
+    }
+
 
     /**
      * Processes the request given by the user.
@@ -74,6 +88,19 @@ public class TaskList implements Serializable {
                 break;
             case "delete":
                 deleteTask(Parser.getTaskID(parsedRequest[1]));
+                break;
+            case "find":
+                findTask(parsedRequest[1]);
+                if (foundTasks.isEmpty()) {
+                    Ui.printResponse("You've been caught offside my friend, no tasks found!");
+                    break;
+                }
+                Ui.printResponse("Here are the matching tasks in your list:");
+                for (int i = 0; i < foundTasks.size(); i++) {
+                    System.out.printf("%d) %s\n", foundTaskIndices.get(i), foundTasks.get(i));
+                }
+                Ui.printResponse("To perform any action on these tasks, use the stated indices.");
+                Ui.printDivider();
                 break;
             default:
                 addTask(parsedRequest);

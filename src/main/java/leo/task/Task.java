@@ -24,10 +24,10 @@ public class Task implements Serializable {
     private boolean isDone = false;
     private Type type;
     final static List<String> descCommands = Arrays
-            .asList("todo", "deadline", "event", "mark", "unmark", "delete");
+            .asList("todo", "deadline", "event", "mark", "unmark", "delete", "find");
 
     final static List<String> commands = Arrays
-            .asList("list", "bye", "todo", "deadline", "event", "mark", "unmark", "delete");
+            .asList("list", "bye", "todo", "deadline", "event", "mark", "unmark", "delete", "find");
 
     private Task(String taskDesc, String cmd) {
         this.taskDesc = taskDesc;
