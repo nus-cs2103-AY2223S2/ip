@@ -41,7 +41,7 @@ public class Storage {
 
     /**
      * Loads a previously saved database file and returns the TaskList corresponding to the saved database file.
-     * @return A TaskList corresponding to the saved satabase file.
+     * @return A TaskList corresponding to the saved database file.
      */
     public TaskList loadData() {
         Scanner s;
@@ -63,13 +63,17 @@ public class Storage {
      * @param taskList The TaskList to be saved to the database.
      * @throws IOException Exception thrown if the database file does not exist.
      */
-    public void saveData(TaskList taskList) throws IOException {
-        FileWriter fw = new FileWriter(this.file);
-        
-        for (Task task : taskList.getTasks()) {
-            fw.write(task.formatTask() + System.lineSeparator());
+    public void saveData(TaskList taskList) {
+        try {
+            FileWriter fw = new FileWriter(this.file);
+
+            for (Task task : taskList.getTasks()) {
+                fw.write(task.formatTask() + System.lineSeparator());
+            }
+            fw.close();
+        } catch (IOException e) {
+            System.out.println(e);
         }
-        fw.close();
     }
     
 

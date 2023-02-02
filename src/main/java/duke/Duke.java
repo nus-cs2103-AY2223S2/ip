@@ -1,32 +1,21 @@
 package duke;
 
-import java.io.IOException;
+import javafx.application.Application;
 
 public class Duke {
-    private boolean isRunning;
-    private final TaskList tasks;
-    private final UiHandler ui;
-    private final Storage storage;
-    
+
+    private final GuiHandler ui;
+
     Duke() {
-        this.storage = new Storage("./data/duke.txt");
-        this.isRunning = true;
-        this.tasks = this.storage.loadData();
-        this.ui = new UiHandler();
+        this.ui = new GuiHandler();
     }
 
     /**
      * Main function for running Duke.
      * @param args
-     * @throws IOException
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         Duke d = new Duke();
-        d.ui.showStartingDialogue();
-        
-        while (d.isRunning) {
-            d.isRunning = d.ui.run(d.tasks);
-            d.storage.saveData(d.tasks);
-        }
+        Application.launch(d.ui.getClass(), args);
     }
 }
