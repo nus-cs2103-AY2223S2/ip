@@ -1,24 +1,23 @@
 package duke.command;
 
+import java.io.IOException;
+import java.time.LocalDateTime;
+
 import duke.task.Event;
 import duke.util.DukeException;
 import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
 
-import java.io.IOException;
-import java.time.LocalDateTime;
-
-/*
+/**
  * Represents a command that adds an event to the task list.
  */
 public class EventCommand extends Command {
 
     private final Event task;
 
-    /*
+    /**
      * Constructor for an EventCommand object.
-     * 
      * @param description Description of the event.
      * @param fromTime Start time of the event.
      * @param toTime End time of the event.
@@ -27,9 +26,8 @@ public class EventCommand extends Command {
         this.task = new Event(description, fromTime, toTime);
     }
 
-    /*
+    /**
      * Executes the command and adds an event to the task list.
-     * 
      * @param tl TaskList which the Duke will modify.
      * @param ui Ui to be used to facilitate interactions between user and the CLI.
      * @param storage Storage to be used to handle interactions with the save file.

@@ -1,9 +1,11 @@
 package duke;
 
 import duke.command.Command;
-import duke.util.*;
-
-import java.io.IOException;
+import duke.util.DukeException;
+import duke.util.Parser;
+import duke.util.Storage;
+import duke.util.TaskList;
+import duke.util.Ui;
 
 /*
  * Represents the Duke program, a chatbot that helps you keep track of your tasks.
@@ -25,9 +27,8 @@ public class Duke {
         }
     }
 
-    /*
+    /**
      * Main method to run the Duke program.
-     * 
      * @param args Command line arguments.
      */
     public static void main(String[] args) {

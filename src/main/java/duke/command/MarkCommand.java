@@ -1,22 +1,21 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.util.DukeException;
 import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
 
-import java.io.IOException;
-
-/*
+/**
  * Represents a command that marks or unmarks a task in the task list.
  */
 public class MarkCommand extends Command {
     private final int markNumber;
     private final boolean isMark;
 
-    /*
+    /**
      * Constructor for the MarkCommand object.
-     * 
      * @param markNumber Number of the task to be marked or unmarked.
      * @param isMark True if the task is to be marked, false if the task is to be unmarked.
      */
@@ -25,9 +24,8 @@ public class MarkCommand extends Command {
         this.isMark = isMark;
     }
 
-    /*
+    /**
      * Executes the command and marks or unmarks a task in the task list.
-     * 
      * @param tl TaskList which the Duke will modify.
      * @param ui Ui to be used to facilitate interactions between user and the CLI.
      * @param storage Storage to be used to handle interactions with the save file.

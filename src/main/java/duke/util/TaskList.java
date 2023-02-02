@@ -1,12 +1,15 @@
 package duke.util;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
 
+<<<<<<< HEAD
 /*
  * Represents a list of tasks.
  */
+=======
+import duke.task.Task;
+
+>>>>>>> branch-A-CodingStandard
 public class TaskList {
 
     private final ArrayList<Task> taskList;
@@ -93,5 +96,4 @@ public class TaskList {
     public String unmarkTask(int index) {
         return taskList.get(index).unmark();
     }
-
 }
