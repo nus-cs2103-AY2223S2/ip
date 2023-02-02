@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import leo.parser.Parser;
 import leo.ui.Ui;
 
+/**
+ * Represents a list of tasks.
+ */
 public class TaskList implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -40,6 +43,11 @@ public class TaskList implements Serializable {
         System.out.printf("You have %d tasks in your list, vamos, get moving!\n", tasks.size());
     }
 
+    /**
+     * Processes the request given by the user.
+     * @param parsedRequest
+     * @throws LeoTaskException
+     */
     public void processRequest(String[] parsedRequest) throws LeoTaskException {
         try {
             if (!Task.commands.contains(parsedRequest[0])) {

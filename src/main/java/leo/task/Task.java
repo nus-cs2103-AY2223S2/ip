@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
+import leo.parser.Parser;
 import leo.ui.Ui;
 
 /**
@@ -44,6 +45,12 @@ public class Task implements Serializable {
         }
     }
 
+    /**
+     * Creates a task based on the command given and content of the task.
+     * @param taskArray
+     * @return
+     * @throws LeoTaskException
+     */
     public static Task createTask(String[] taskArray) throws LeoTaskException {
 
         try {
@@ -73,6 +80,9 @@ public class Task implements Serializable {
         }
     }
 
+    /**
+     * Marks the task as done.
+     */
     public void setDone() {
         isDone = true;
         Ui.printDivider();
@@ -83,6 +93,9 @@ public class Task implements Serializable {
 
     }
 
+    /**
+     * Marks the task as not done.
+     */
     public void setNotDone() {
         isDone = false;
         Ui.printDivider();
@@ -91,19 +104,18 @@ public class Task implements Serializable {
         Ui.printDivider();
     }
 
-    public boolean getDone() {
-        return isDone;
-    }
-
+    /**
+     * Returns the character representing the status of the task.
+     * @return 'X' if task is done, ' ' if task is not done.
+     */
     public char getDoneChar() {
         return isDone ? 'X' : ' ';
     }
 
-    public static LocalDateTime stringToDate(String dateTimeString) {
-        LocalDateTime date = LocalDateTime.parse(dateTimeString.trim(), DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
-        return date;
-    }
-
+    /**
+     * Returns the String representation of the task.
+     * @return String representation of the task.
+     */
     @Override
     public String toString() {
         return String.format("[%c][%c] %s", getType(), getDoneChar(), taskDesc);
@@ -130,7 +142,7 @@ public class Task implements Serializable {
                     throw new MissingDeadlineException();
                 }
 
-                dl.by = stringToDate(dlDetails[1]);
+                dl.by = Parser.stringToDate(dlDetails[1]);
                 return dl;
             } catch (MissingDeadlineException e) {
                 Ui.printError(e);
@@ -171,8 +183,8 @@ public class Task implements Serializable {
                 if (evDetails.length < 2) {
                     throw new MissingTimelineException();
                 }
-                ev.from = stringToDate(evDetails[0]);
-                ev.to = stringToDate(evDetails[1]);
+                ev.from = Parser.stringToDate(evDetails[0]);
+                ev.to = Parser.stringToDate(evDetails[1]);
                 return ev;
             } catch (MissingTimelineException e) {
                 Ui.printError(e);

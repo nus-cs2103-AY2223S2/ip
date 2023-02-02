@@ -1,20 +1,26 @@
 package leo.storage;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import leo.task.TaskList;
 
+
+/**
+ * Encapsulates the storage functions of the task list.
+ */
+
 public class Storage {
-    public static void writeObjectToFile(Object obj) {
+    /**
+     * Writes serialized tasklist to a file.
+     * @param tl
+     */
+    public static void writeObjectToFile(TaskList tl) {
         try {
             FileOutputStream fileOut = new FileOutputStream("taskList.ser");
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
-            out.writeObject(obj);
+            out.writeObject(tl);
             out.close();
             fileOut.close();
             System.out.println("Serialized data is saved in taskList.ser");

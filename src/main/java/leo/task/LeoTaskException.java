@@ -1,5 +1,8 @@
 package leo.task;
 
+/**
+ * Custom Exceptions thrown by Leo.
+ */
 public class LeoTaskException extends Exception {
     public LeoTaskException(String msg) {
         super(msg);
