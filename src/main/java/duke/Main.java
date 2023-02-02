@@ -19,16 +19,11 @@ public class Main extends Application {
     public void start(Stage stage) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
-            System.out.println("cant load");
-
             AnchorPane ap = fxmlLoader.load();
-            System.out.println("hi");
-
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             stage.setTitle("Duke");
             fxmlLoader.<MainWindow>getController().setDuke(this.duke);
-            System.out.println("hi");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

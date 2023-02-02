@@ -36,7 +36,15 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(img);
+
     }
+//    private Label getDialogLabel(String text) {
+//        // You will need to import `javafx.scene.control.Label`.
+//        Label textToAdd = new Label(text);
+//        textToAdd.setWrapText(true);
+//
+//        return textToAdd;
+//    }
 
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.

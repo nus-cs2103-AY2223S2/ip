@@ -20,16 +20,9 @@ import java.time.format.DateTimeParseException;
  */
 public class Duke {
 
-//    private ScrollPane scrollPane;
-//    private VBox dialogContainer;
-//    private TextField userInput;
-//    private Button sendButton;
-//    private Scene scene;
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-//    private Image user = new Image(this.getClass().getResourceAsStream("/DaUser.png"));
-//    private Image duke = new Image(this.getClass().getResourceAsStream("/DaDuke.png"));
 
     /**
      * Duke constructor.
@@ -57,28 +50,6 @@ public class Duke {
      * Input is converted into a Command object which is executed.
      * Exits from the while loop if the command is a ByeCommand.
      */
-//    public void run() {
-//        this.ui.showWelcomeMessage();
-//        boolean isExit = false;
-//
-//        while (!isExit) {
-//
-//            try {
-//                String command = this.ui.readCommand();
-//                Command c = Parser.parse(command);
-//                c.execute(this.tasks, this.ui, this.storage);
-//                isExit = c.isExit();
-//            } catch (IllegalArgumentException e) {
-//                System.out.println("    input is not of the correct format!");
-//            }
-//        }
-//    }
-//    public void run() {
-//        dialogContainer.getChildren().addAll(
-//                DialogBox.getDukeDialog(new Label(this.ui.showWelcomeMessage()), new ImageView(duke))
-//        );
-//    }
-
 
 //    @Override
 //    public void start(Stage stage) {
@@ -163,20 +134,6 @@ public class Duke {
 //        return textToAdd;
 //    }
 
-    /**
-     * Iteration 2:
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
-     */
-//    private void handleUserInput() {
-//        String userText = userInput.getText() + "    ";
-//        String dukeText = getResponse(userInput.getText());
-//        dialogContainer.getChildren().addAll(
-//                DialogBox.getUserDialog(userText, user),
-//                DialogBox.getDukeDialog(dukeText, duke)
-//        );
-//        userInput.clear();
-//    }
 
     /**
      * You should have your own function to generate a response to user input.
@@ -194,11 +151,4 @@ public class Duke {
             return e.getMessage();
         }
     }
-
-    /**
-     * Main method that creates an instance of Duke and calls the run() method
-     */
-//    public static void main(String[] args) {
-//        new Duke();
-//    }
 }
