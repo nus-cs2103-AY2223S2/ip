@@ -113,6 +113,19 @@ public class Ui {
         );
     }
 
+    public void showFoundTasks(List<Task> taskList) {
+        if (taskList.isEmpty()) {
+            System.out.println("What are you trying to find?");
+        } else {
+            System.out.println("Here you go, do you need anything else?");
+
+            for (int i = 0; i < taskList.size(); i++) {
+                Task currTask = taskList.get(i);
+                System.out.println((i + 1) + ". " + currTask.toString());
+            }
+        }
+    }
+
     /** Error methods */
     /**
      * Prints error message.
