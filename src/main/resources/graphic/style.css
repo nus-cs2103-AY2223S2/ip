@@ -13,7 +13,7 @@
     -fx-light-text-color: rgb(232, 232, 232);
 
     /* Highlight fill color */
-    -fx-accent: rgb(6, 99, 102);
+    -fx-accent: derive(-fx-base, -10%);
 
     /* Highlight flow for focus */
     -fx-focus-color: rgb(167, 138, 173);
