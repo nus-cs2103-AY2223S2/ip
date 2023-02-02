@@ -7,21 +7,26 @@ import java.util.Scanner;
 public class Ui {
     private static Scanner sc = new Scanner(System.in);
 
+    private String line = "____________________________________________________________";
     /**
      * Prints the welcome message
      */
-    public void printWelcomeMsg() {
+    public String printWelcomeMsg() {
+        StringBuilder sb = new StringBuilder();
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
 
-        printLine();
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
-        printLine();
+
+        sb.append("Hello from\n" + logo);
+        sb.append(line);
+        sb.append("Hello! I'm Duke");
+        sb.append("What can I do for you?");
+        sb.append(line);
+
+        return sb.toString();
     }
 
 
@@ -37,26 +42,32 @@ public class Ui {
     /**
      * Print a seperator line
      */
-    public void printLine() {
-        System.out.println("____________________________________________________________");
+    public String printLine() {
+        return line;
     }
 
     /**
      * Print all the tasks
      * @param tasks
      */
-    public void printTasks(TaskList tasks) {
+    public String printTasks(TaskList tasks) {
+        StringBuilder sb = new StringBuilder();
         int count = 1;
         for (Task task : tasks.getTasks()) {
-            System.out.println(count + "." + task);
+            sb.append(count + "." + task);
+            sb.append('\n');
             count++;
         }
+        return sb.toString();
     }
 
 
-    public void printFoundTasks(TaskList tasks) {
-        System.out.println("Here are the matching tasks in your list:");
-        printTasks(tasks);
+    public String printFoundTasks(TaskList tasks) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Here are the matching tasks in your list:");
+        sb.append('\n');
+        sb.append(printTasks(tasks));
+        return sb.toString();
     }
 
     /**
@@ -64,10 +75,14 @@ public class Ui {
      * @param task
      * @param taskCount
      */
-    public void printAddTask(Task task, int taskCount) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task);
-        System.out.println("Now you have " + taskCount + " tasks in the list");
+    public String printAddTask(Task task, int taskCount) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Got it. I've added this task:");
+        sb.append('\n');
+        sb.append(task);
+        sb.append('\n');
+        sb.append("Now you have " + taskCount + " tasks in the list");
+        return sb.toString();
     }
 
     /**
@@ -75,42 +90,49 @@ public class Ui {
      * @param task
      * @param taskCount
      */
-    public void printDeleteTask(Task task, int taskCount) {
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(task);
-        System.out.println("Now you have " + taskCount + " tasks in the list");
+    public String printDeleteTask(Task task, int taskCount) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Noted. I've removed this task:\n");
+        sb.append(task);
+        sb.append('\n');
+        sb.append("Now you have " + taskCount + " tasks in the list");
+        return sb.toString();
     }
 
     /**
      * Print after marking a task as done
      * @param task
      */
-    public void printTickTask(Task task) {
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(task);
+    public String printTickTask(Task task) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Nice! I've marked this task as done:\n");
+        sb.append(task);
+        return sb.toString();
     }
 
     /**
      * Print after marking a task as not done
      * @param task
      */
-    public void printUntickTask(Task task) {
-        System.out.println("OK! I've marked this task as not done yet:");
-        System.out.println(task);
+    public String printUntickTask(Task task) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("OK! I've marked this task as not done yet:\n");
+        sb.append(task.toString());
+        return sb.toString();
     }
 
     /**
      * Print an error
      * @param errMsg
      */
-    public void printError(String errMsg) {
-        System.out.println(errMsg);
+    public String printError(String errMsg) {
+        return errMsg;
     }
 
     /**
      * Print the goodbye message
      */
-    public void printGoodbyeMsg() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String printGoodbyeMsg() {
+        return "Bye. Hope to see you again soon!";
     }
 }

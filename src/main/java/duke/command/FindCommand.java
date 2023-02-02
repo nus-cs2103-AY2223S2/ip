@@ -11,9 +11,9 @@ public class FindCommand extends Command {
         this.query = query;
     }
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         TaskList foundTasks = tasks.find(this.query);
-        ui.printFoundTasks(foundTasks);
+        return ui.printFoundTasks(foundTasks);
     }
 
     @Override

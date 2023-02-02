@@ -2,6 +2,8 @@ package duke;
 
 import duke.command.Command;
 public class Duke {
+
+
     private TaskList tasks;
     private Storage storage;
     private Ui ui;
@@ -34,7 +36,16 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) {
-        new Duke("./data").run();
+    public String getResponse(String input) {
+        StringBuilder sb = new StringBuilder();
+        try {
+            Command c = Parser.parse(input);
+            sb.append(c.execute(tasks, ui, storage));
+        } catch (DukeException e) {
+            ui.printError(e.getMessage());
+        }
+
+        return sb.toString();
     }
+
 }

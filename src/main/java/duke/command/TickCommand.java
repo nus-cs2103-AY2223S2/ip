@@ -11,9 +11,9 @@ public class TickCommand extends Command{
         this.taskIndex = taskIndex;
     }
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task task = tasks.tickTask(this.taskIndex);
-        ui.printTickTask(task);
+        return ui.printTickTask(task);
     }
 
     @Override

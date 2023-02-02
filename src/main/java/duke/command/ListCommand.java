@@ -5,8 +5,8 @@ import duke.Ui;
 import duke.Storage;
 public class ListCommand extends Command {
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.printTasks(tasks);
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.printTasks(tasks);
     }
 
     @Override
