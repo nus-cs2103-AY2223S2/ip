@@ -1,10 +1,11 @@
 package duke;
 
-import java.util.Scanner;
-import java.util.ArrayList;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 
 /**
  * The Storage class is to handle loading/saving tasks from/in the file.
@@ -13,7 +14,7 @@ public class Storage {
     private final File file;
 
     /**
-     * Store user input. Create directory if it does not exist/cannot
+     * Stores user input. Creates directory if it does not exist/cannot
      * be found in the given file path.
      *
      * @param filePath Where the file should be stored.
@@ -22,13 +23,16 @@ public class Storage {
     public Storage(String filePath) throws IOException {
         this.file = new File(filePath);
         if (!file.exists()) {
-            file.getParentFile().mkdirs();
-            file.createNewFile();
+            if (file.getParentFile().mkdirs()) {
+                if (!file.createNewFile()) {
+                    throw new IOException();
+                }
+            }
         }
     }
 
     /**
-     * Load all records from the file.
+     * Loads all records from the file.
      *
      * @return Previous records that store inside an array list.
      * @throws IOException If records in the file cannot be loaded.
@@ -44,7 +48,7 @@ public class Storage {
     }
 
     /**
-     * Write/update to the file.
+     * Writes/updates to the file.
      *
      * @param tasks Tasks that needed to be written to the file.
      * @throws IOException Update cannot be written to the file.

@@ -1,6 +1,7 @@
-import java.util.Scanner;
 import java.io.IOException;
 import java.time.DateTimeException;
+import java.util.Scanner;
+
 import duke.DukeException;
 import duke.Parser;
 import duke.Storage;
@@ -12,18 +13,18 @@ import duke.Ui;
  */
 //Follow the given coding standard.
 public class Duke {
-    private Ui ui;
+    private final Ui ui;
     private Storage storage;
     private TaskList tasks;
 
     /**
-     * Create <case>Duke</case> object.
+     * Creates <case>Duke</case> object.
      *
      * @param filePath To specific a file path to save the previous records.
-     * @throws IOException If file cannot be loaded.
      */
-    public Duke(String filePath) throws IOException {
+    public Duke(String filePath) {
         ui = new Ui();
+
         try {
             storage = new Storage(filePath);
             tasks = new TaskList(storage.loadRecord());
@@ -37,17 +38,21 @@ public class Duke {
 
     /**
      * Main application loop.
-     * Get the user input to trigger the run.
+     * Gets the user input to trigger the run.
      */
     public void run() {
         Scanner sc = new Scanner(System.in);
         while (true) {
+            String input = sc.nextLine().trim();
+            if (input.equals("bye")) {
+                break;
+            }
             try {
-                if (Parser.parseInput(tasks, sc.nextLine().trim())) {
+                if (Parser.parseInput(tasks, input)) {
                     storage.writeToFile(tasks);
                 }
             } catch (DukeException e) {
-                ui.println(e.eMessage);
+                ui.println(e.getMessage());
             } catch (NumberFormatException e) {
                 ui.println("The operation must follow by a integer");
             } catch (IOException e) {
@@ -63,9 +68,8 @@ public class Duke {
      * Entry point to the application.
      *
      * @param args Optional arguments.
-     * @throws IOException if cannot access folder/file.
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         Duke duke = new Duke("./userRecords/records.txt");
         duke.run();
     }

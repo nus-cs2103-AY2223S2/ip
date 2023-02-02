@@ -1,47 +1,46 @@
 package duke;
 
 /**
- * The task class contains all the tasks that can be opreated by
- * users.
+ * The task class contains all the tasks that can be operated by users.
  */
 public class Task {
-    private String taskDescription;
+    private final String taskDescription;
     private boolean isDone;
 
     /**
-     * Generate a <code>Task</code> object.
+     * Generates a <code>Task</code> object.
      * @param taskDescription The task description.
      */
-    public Task (String taskDescription) {
+    public Task(String taskDescription) {
         this.taskDescription = taskDescription;
         this.isDone = false;
     }
 
     /**
-     * Get the status of a task.
+     * Gets the status of a task.
      *
      * @return Whether the task is being marked or not.
      */
     public String getStatusIcon() {
-        return (isDone ? "X" : " ");
+        return isDone ? "X" : " ";
     }
 
     /**
-     * Set the task as done.
+     * Sets the task as done.
      */
     public void setIsDone() {
         isDone = true;
     }
 
     /**
-     * Set the task as not done.
+     * Sets the task as not done.
      */
     public void revertIsDone() {
         isDone = false;
     }
 
     /**
-     * Get the description of a task
+     * Gets the description of a task.
      *
      * @return A specific task description.
      */
@@ -50,14 +49,13 @@ public class Task {
     }
 
     /**
-     * Construct display message.
+     * Constructs display message.
      *
      * @return Message in format.
      */
-
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "]" + " " + this.getTaskDes();
+        return "[" + this.getStatusIcon() + "]" + " " + taskDescription;
     }
 }
 
@@ -72,7 +70,7 @@ class Todo extends Task {
     }
 }
 class Deadline extends Task {
-    private TimeConvertor by;
+    private final TimeConvertor by;
 
     public Deadline(String description, TimeConvertor by) {
         super(description);
@@ -90,8 +88,8 @@ class Deadline extends Task {
 }
 
 class Event extends Task {
-    private TimeConvertor from;
-    private TimeConvertor to;
+    private final TimeConvertor from;
+    private final TimeConvertor to;
 
     public Event(String description, TimeConvertor from, TimeConvertor to) {
         super(description);

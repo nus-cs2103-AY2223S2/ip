@@ -1,19 +1,29 @@
 package duke;
 
 /**
- * Extend from Exception to handle different exceptions.
+ * Extends from Exception to handle different exceptions.
  * Different exceptions correspond to different message.
  */
 public class DukeException extends Exception {
-    public String eMessage;
+    private final String eMessage;
 
     /**
-     * Generate a <code>DukeException</code> object.
+     * Generates a <code>DukeException</code> object.
      *
      * @param eMessage Respective error message for exception.
      */
     public DukeException(String eMessage) {
         this.eMessage = eMessage;
+    }
+
+    /**
+     * Gets the error message.
+     *
+     * @return Error message.
+     */
+    @Override
+    public String getMessage() {
+        return this.eMessage;
     }
 }
 
