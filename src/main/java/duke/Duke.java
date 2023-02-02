@@ -3,8 +3,6 @@ package duke;
 import duke.command.Command;
 import duke.exception.DukeException;
 import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 /** Duke is an interactive To-Do list created for CS2103T. */
@@ -62,9 +60,7 @@ public class Duke extends Application {
 
     @Override
     public void start(Stage stage) {
-        Scene scene = this.ui.initializeScene();
-        stage.setScene(scene);
-        stage.show();
+        this.ui.initializeStage(stage);
 
         // move stuff from main() here
         // this.storage.readToTaskList(this.taskList);
