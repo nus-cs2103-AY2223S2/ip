@@ -1,6 +1,7 @@
 package duke.functions;
 
 import duke.exceptions.*;
+import duke.tasks.Task;
 import duke.tasks.TaskList;
 import java.util.Scanner;
 
@@ -54,6 +55,9 @@ public class Parser {
                 break;
             case "bye":
                 bye(split);
+                break;
+            case "find":
+                find(split);
                 break;
             default:
                 throw new InvalidCommandException();
@@ -174,6 +178,28 @@ public class Parser {
             String todoName = split[1];
             this.list.insertToDo(todoName);
         } catch (InvalidArgumentsException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private void find(String[] split) {
+        try {
+            if (split.length != 2) {
+                throw new InvalidArgumentsException();
+            }
+            String name = split[1];
+            ArrayList<Task> results = this.list.findMatchingTasks(name);
+            if (!results.isEmpty()) {
+                System.out.println("Here are the tasks in your list:");
+                int index = 0;
+                for (Task task : results) {
+                    System.out.printf("%d.%s%n", index, task);
+                    index++;
+                }
+            } else {
+                System.out.println("There are no matching tasks currently!");
+            }
+        }catch (InvalidArgumentsException e) {
             System.out.println(e.getMessage());
         }
     }

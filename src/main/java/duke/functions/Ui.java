@@ -16,7 +16,7 @@ import java.util.Scanner;
  */
 public class Ui {
     public static ArrayList<String> commandList = new ArrayList<>(Arrays.asList
-            ("todo", "deadline", "event", "mark", "unmark", "list", "bye", "delete"));
+            ("todo", "deadline", "event", "mark", "unmark", "list", "bye", "delete", "find"));
 
     /**
      * Main method to start interaction between user and interface.
