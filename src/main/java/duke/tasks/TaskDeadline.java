@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
  * AY2223-S2 CS2103T
  */
 public class TaskDeadline extends Task {
-    protected LocalDateTime time;
+    private LocalDateTime time;
 
     /**
      * Constructor for creating a TaskDeadline object.

@@ -7,8 +7,8 @@ package duke.tasks;
  * AY2223-S2 CS2103T
  */
 public class Task {
-    protected String description;
-    protected boolean isDone;
+    private String description;
+    private boolean isDone;
 
     /**
      * Constructor for creating a Task object.

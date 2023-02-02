@@ -9,8 +9,8 @@ import java.time.LocalDateTime;
  * AY2223-S2 CS2103T
  */
 public class TaskEvent extends Task{
-    protected LocalDateTime from;
-    protected LocalDateTime to;
+    private LocalDateTime from;
+    private LocalDateTime to;
 
     /**
      * Constructor for creating a TaskEvent object.
