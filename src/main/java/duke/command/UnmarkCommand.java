@@ -44,9 +44,9 @@ public class UnmarkCommand extends Command {
      * @throws DukeException
      */
     public String executeString(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        tasks.get(taskNo).unmarkAsDone();
+        tasks.get(taskNum).markAsUndone();
         storage.save(tasks);
-        return ui.stringUnmarkDone(tasks, taskNo);
+        return ui.stringUnmarkDone(tasks, taskNum);
     }
 
     /**

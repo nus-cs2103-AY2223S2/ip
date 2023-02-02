@@ -44,9 +44,9 @@ public class MarkCommand extends Command {
      * @throws DukeException
      */
     public String executeString(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        tasks.get(taskNo).markAsDone();
+        tasks.get(taskNum).markAsDone();
         storage.save(tasks);
-        return ui.stringMarkDone(tasks, taskNo);
+        return ui.stringMarkDone(tasks, taskNum);
     }
 
     /**

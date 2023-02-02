@@ -43,6 +43,11 @@ public class Duke {
         }
     }
 
+    public static void main(String[] args) {
+        Duke duke = new Duke();
+        duke.run();
+    }
+
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
