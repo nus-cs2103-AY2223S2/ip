@@ -9,7 +9,6 @@ import duke.task.Task;
  * Ui class that handles all the interactions with the users
  */
 public class Ui {
-    private final String line = "_______________________________________________________________________";
     private Scanner scanner;
 
     public Ui() {
@@ -22,17 +21,6 @@ public class Ui {
 
     public static String showErrorMsg(int size) {
         return String.format("Sorry but there are only %d tasks stored!\n", size);
-    }
-
-    public String getNextLine() {
-        return line + scanner.nextLine() + line;
-    }
-
-    /**
-     * Prints the welcome message when the program starts running
-     */
-    public String showWelcome() {
-        return line + "Hello! I'm Duke\n" + "What can I do for you?";
     }
 
     /**
@@ -77,7 +65,7 @@ public class Ui {
      * @param task task to be added
      * @param size the number of tasks after the task is added
      */
-    public static String showTaskOutput(Task task, int size) {
+    public String showTaskOutput(Task task, int size) {
         return "Got it. I've added this task:\n"
                 + task
                 + "\nNow you have " + size + " tasks in the list.";
@@ -88,7 +76,7 @@ public class Ui {
      *
      * @param taskList List of all the tasks
      */
-    public static String filter(ArrayList<Task> taskList) {
+    public String filter(ArrayList<Task> taskList) {
         String output = "Here are the matching tasks in your list:\n";
         for (Task task : taskList) {
             output += task + "\n";

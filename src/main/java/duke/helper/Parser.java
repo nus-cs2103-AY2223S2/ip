@@ -1,15 +1,14 @@
 package duke.helper;
 
-import java.io.IOException;
-import java.time.DateTimeException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 import duke.exception.DukeException;
 import duke.exception.EmptyTaskException;
 import duke.exception.InvalidDateTimeException;
 import duke.exception.InvalidTaskException;
-import duke.storage.FileSystem;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -21,25 +20,26 @@ import duke.task.ToDo;
 public class Parser {
     private TaskList tasks;
     private Ui ui;
-    private FileSystem fileSystem;
 
     /**
      * Constructor for Parser class
      *
      * @param tasks list of all tasks
      * @param ui class that handles user interaction
-     * @param fileSystem class that stores the tasks
      */
-    public Parser(TaskList tasks, Ui ui, FileSystem fileSystem) {
+    public Parser(TaskList tasks, Ui ui) {
         this.tasks = tasks;
         this.ui = ui;
-        this.fileSystem = fileSystem;
     }
 
     /**
-     * Handles the input according to the type of the task
+     * Parse user inputs
+     *
+     * @param desc description of the task
+     * @return String representation of Task
+     * @throws DukeException If input is invalid
      */
-    public String parseInputs(String desc) throws DukeException, IOException {
+    public String parseInputs(String desc) throws DukeException {
         String[] inputs = desc.split(" ", 2);
         String type = inputs[0];
 
@@ -57,25 +57,29 @@ public class Parser {
             checkTaskDesc(inputs);
             Task toDoTask = new ToDo(inputs[1], false);
             tasks.addToTasks(toDoTask);
-            return Ui.showTaskOutput(toDoTask, tasks.getTasks().size());
+            return ui.showTaskOutput(toDoTask, tasks.getTasks().size());
 
         case "deadline":
             checkTaskDesc(inputs);
             String[] deadlineDesc = inputs[1].split(" /by ");
-            Task deadlineTask = new Deadline(deadlineDesc[0], deadlineDesc[1]);
+
+            Task deadlineTask = new Deadline(deadlineDesc[0], handleDateTime(deadlineDesc[1]).toString());
             tasks.addToTasks(deadlineTask);
-            return Ui.showTaskOutput(deadlineTask, tasks.getTasks().size());
+            return ui.showTaskOutput(deadlineTask, tasks.getSize());
 
         case "event":
             checkTaskDesc(inputs);
             String[] eventDesc = parseEventDesc(inputs[1]);
-            Task eventTask = new Event(eventDesc[0], eventDesc[1], eventDesc[2]);
+
+            Task eventTask = new Event(eventDesc[0],
+                    handleDateTime(eventDesc[1]).toString(),
+                    handleDateTime(eventDesc[2]).toString());
             tasks.addToTasks(eventTask);
-            return Ui.showTaskOutput(eventTask, tasks.getTasks().size());
+            return ui.showTaskOutput(eventTask, tasks.getSize());
 
         case "delete":
             int taskNo = Integer.parseInt(inputs[1]) - 1;
-            return tasks.deleteTask(taskNo).toString();
+            return tasks.deleteTask(taskNo);
 
         case "find":
             ArrayList<Task> taskList = tasks.getTasks();
@@ -85,10 +89,9 @@ public class Parser {
                     output.add(task);
                 }
             }
-            return Ui.filter(output);
+            return ui.filter(output);
 
         case "bye":
-            fileSystem.updateFile(tasks);
             return ui.showExit();
 
         default:
@@ -119,15 +122,8 @@ public class Parser {
      */
     public static LocalDateTime handleDateTime(String dateTime) throws InvalidDateTimeException {
         try {
-            String[] period = dateTime.split("/", 3);
-            String[] yearTime = period[2].split(" ");
-            int year = Integer.parseInt(yearTime[0]);
-            int month = Integer.parseInt(period[1]);
-            int day = Integer.parseInt(period[0]);
-            int hour = Integer.parseInt(yearTime[1].substring(0, 2));
-            int min = Integer.parseInt(yearTime[1].substring(2));
-            return LocalDateTime.of(year, month, day, hour, min);
-        } catch (NumberFormatException | IndexOutOfBoundsException | DateTimeException e) {
+            return LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        } catch (DateTimeParseException e) {
             throw new InvalidDateTimeException();
         }
     }
@@ -144,6 +140,5 @@ public class Parser {
         eventDesc[1] = desc.split(" /from ")[1].split(" /to ")[0];
         eventDesc[2] = desc.split(" /from ")[1].split(" /to ")[1];
         return eventDesc;
-
     }
 }

@@ -28,25 +28,31 @@ public class Duke {
         try {
             db = new FileSystem("data/dukeTasks.txt");
             this.tasks = new TaskList(db.loadFromFile());
-            this.parser = new Parser(tasks, ui, db);
+            this.parser = new Parser(tasks, ui);
         } catch (DukeException | IOException e) {
             System.out.println(e);
         }
     }
 
+    /**
+     * Gets Duke's response
+     *
+     * @param input User's input
+     * @return String to be printed in GUI
+     */
     public String getResponse(String input) {
         String output = "";
 
         try {
             output = this.parser.parseInputs(input);
-        } catch (DukeException | IOException e) {
+        } catch (DukeException e) {
             System.out.println(e);
         } catch (NumberFormatException e) {
             ui.showErrorMsg(input);
         } catch (IndexOutOfBoundsException e) {
             ui.showErrorMsg(tasks.getTasks().size());
-        } catch (NullPointerException e) {
-            System.out.println(e);
+        } finally {
+            db.updateFile(tasks);
         }
         return output;
     }

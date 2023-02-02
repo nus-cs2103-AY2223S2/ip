@@ -47,11 +47,16 @@ public class TaskList {
      * @param taskNo Task number to be deleted
      * @return task that has been deleted
      */
-    public Task deleteTask(int taskNo) {
-        Task task = tasks.get(taskNo);
-        tasks.remove(taskNo);
-        ui.showDelete(task, tasks.size());
-        return task;
+    public String deleteTask(int taskNo) {
+        String output = "";
+        try {
+            Task task = tasks.get(taskNo);
+            tasks.remove(taskNo);
+            output = ui.showDelete(task, tasks.size());
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println(String.format("There are only %d tasks", tasks.size()));
+        }
+        return output;
     }
 
     /**
@@ -74,5 +79,9 @@ public class TaskList {
      */
     public ArrayList<Task> getTasks() {
         return tasks;
+    }
+
+    public int getSize() {
+        return tasks.size();
     }
 }
