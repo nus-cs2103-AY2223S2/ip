@@ -1,9 +1,5 @@
 package ui;
 
-import parser.Parser;
-
-import storage.Storage;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -13,15 +9,15 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-
-import task.Deadline;
-import task.Event;
+import parser.Parser;
+import storage.Storage;
 import task.Task;
 import tasklist.TaskList;
 
 public class Ui {
 
 	final private int BOX_PADDING = 20;
+	final private int COLUMN_GAP = 10;
 
 	/**
 	 * Create a wrapped label.
@@ -60,7 +56,7 @@ public class Ui {
 		HBox rowContainer = new HBox();
 		rowContainer.setAlignment(Pos.CENTER_LEFT);
 		rowContainer.setPadding(new Insets(BOX_PADDING));
-		rowContainer.setSpacing(10);
+		rowContainer.setSpacing(COLUMN_GAP);
 		rowContainer.getChildren().addAll(storage.getBotImageView(), messages);
 		dialogContainer.getChildren().add(rowContainer);
 	}
@@ -76,7 +72,7 @@ public class Ui {
 		HBox rowContainer = new HBox();
 		rowContainer.setAlignment(Pos.CENTER_RIGHT);
 		rowContainer.setPadding(new Insets(BOX_PADDING));
-		rowContainer.setSpacing(10);
+		rowContainer.setSpacing(COLUMN_GAP);
 		rowContainer.getChildren().addAll(createLabel(message), storage.getUserImageView());
 		dialogContainer.getChildren().add(rowContainer);
 	}
@@ -197,29 +193,14 @@ public class Ui {
 		int itemNum = 1;
 		for (int i = 0; i < tasklist.size(); i++) {
 			Task curTask = tasklist.get(i);
-			if (curTask instanceof Deadline) {
-				Deadline deadline = (Deadline) curTask;
-				if (deadline.getBy().equals(dateTime)) {
-					if (!hasItem) {
-						messages.getChildren().add(createLabel(header));
-					}
-					hasItem = true;
-					messages.getChildren().add(
-							createLabel(String.format("%d. %s", itemNum, deadline)));
-					itemNum += 1;
+			if (curTask.hasMatchDateTime(dateTime)) {
+				if (!hasItem) {
+					messages.getChildren().add(createLabel(header));
 				}
-			}
-			if (curTask instanceof Event) {
-				Event event = (Event) curTask;
-				if (event.getFrom().equals(dateTime) || event.getTo().equals(dateTime)) {
-					if (!hasItem) {
-						messages.getChildren().add(createLabel(header));
-					}
-					hasItem = true;
-					messages.getChildren().add(
-							createLabel(String.format("%d. %s", itemNum, event)));
-					itemNum += 1;
-				}
+				hasItem = true;
+				messages.getChildren().add(
+						createLabel(String.format("%d. %s", itemNum, curTask)));
+				itemNum++;
 			}
 		}
 		if (!hasItem) {
@@ -253,7 +234,7 @@ public class Ui {
 				hasItem = true;
 				messages.getChildren().add(
 						createLabel(String.format("%d. %s", itemNum, curTask)));
-				itemNum += 1;
+				itemNum++;
 			}
 		}
 		if (!hasItem) {

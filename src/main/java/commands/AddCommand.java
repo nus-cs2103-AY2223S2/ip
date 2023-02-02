@@ -67,7 +67,6 @@ public class AddCommand extends Command {
 			case TODO:
 				task = new Todo(description);
 				break;
-
 			case DEADLINE:
 				LocalDateTime by = parser.getBy(inputArr, ui, storage, dialogContainer);
 				if (by == null) {
@@ -80,7 +79,6 @@ public class AddCommand extends Command {
 				}
 				task = new Deadline(parser.trimDate(description), by);
 				break;
-
 			case EVENT:
 				LocalDateTime[] fromTo = parser.getFromTo(inputArr, ui, storage, dialogContainer);
 				if (fromTo[0] == null && fromTo[1] == null) {
@@ -109,7 +107,6 @@ public class AddCommand extends Command {
 
 				task = new Event(parser.trimDate(description), fromTo);
 				break;
-
 			default:
 				return false;
 		}
@@ -135,7 +132,6 @@ public class AddCommand extends Command {
 			tasklist.add(task);
 			storage.saveNewData(task, ui);
 			ui.printAddedTask(task, tasklist.size(), dialogContainer, storage);
-			return;
 		}
 	}
 

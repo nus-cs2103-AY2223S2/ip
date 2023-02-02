@@ -46,11 +46,11 @@ public class TaskList {
 	/**
 	 * Mark or unmark a task.
 	 * 
-	 * @param itemNum
+	 * @param itemNum         An item number to be marked/unmarked.
 	 * @param isMark
-	 * @param storage
-	 * @param ui
-	 * @param dialogContainer
+	 * @param storage         A store that represents the data access object (DAO).
+	 * @param ui              A service to render the page of GUI.
+	 * @param dialogContainer A container that holds all the rows of labels.
 	 */
 	public void markItem(String itemNum, boolean isMark, Storage storage, Ui ui, VBox dialogContainer) {
 		int idx = Integer.parseInt(itemNum) - 1;
@@ -73,10 +73,10 @@ public class TaskList {
 	/**
 	 * Delete a task from existing tasks.
 	 * 
-	 * @param ui
-	 * @param storage
-	 * @param dialogContainer
-	 * @param itemNum
+	 * @param ui              A service to render the page of GUI.
+	 * @param storage         A store that represents the data access object (DAO).
+	 * @param dialogContainer A container that holds all the rows of labels.
+	 * @param itemNum         An item number to be deleted.
 	 */
 	public void deleteTask(Ui ui, Storage storage, VBox dialogContainer, String itemNum) {
 		try {

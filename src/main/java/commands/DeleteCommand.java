@@ -30,7 +30,6 @@ public class DeleteCommand extends Command {
 		try {
 			tasklist.deleteTask(ui, storage, dialogContainer, inputArr[1]);
 		} catch (NumberFormatException ex) {
-			ui.printError("Oops! An item number must be provided.");
 			errorMessage = "Oops! An item number must be provided.";
 			ui.sendResponse(dialogContainer, storage, ui.createLabel(errorMessage));
 		}

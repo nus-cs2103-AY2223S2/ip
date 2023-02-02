@@ -93,22 +93,20 @@ public class Parser {
 			case TODO:
 				newTask = new Todo(inputArr[2]);
 				break;
-
 			case DEADLINE:
 				newTask = new Deadline(inputArr[2], parseDateTimeStr(inputArr[3], ui, storage, dialogContainer));
 				break;
-
 			case EVENT:
 				newTask = new Event(inputArr[2],
 						new LocalDateTime[] { parseDateTimeStr(inputArr[3], ui, storage, dialogContainer),
 								parseDateTimeStr(inputArr[4], ui, storage, dialogContainer) });
 				break;
-
 			default:
 				break;
 		}
-		if (inputArr[1].equals("1"))
+		if (inputArr[1].equals("1")) {
 			newTask.markAsDone();
+		}
 		tasklist.add(newTask);
 	}
 
@@ -170,10 +168,10 @@ public class Parser {
 	 * @return LocalDateTime
 	 */
 	public LocalDateTime getBy(String[] inputArr, Ui ui, Storage storage, VBox dialogContainer) {
-		int l = inputArr.length;
-		for (int i = 0; i < l; i++) {
-			if (i < l - 1 && inputArr[i].equals("/by")) {
-				return parseDateTimeStr(sliceArrAndConcate(inputArr, i + 1, l), ui, storage, dialogContainer);
+		int arrLen = inputArr.length;
+		for (int i = 0; i < arrLen; i++) {
+			if (i < arrLen - 1 && inputArr[i].equals("/by")) {
+				return parseDateTimeStr(sliceArrAndConcate(inputArr, i + 1, arrLen), ui, storage, dialogContainer);
 			}
 		}
 		String errorMessage = "Oops! The description of a DEADLINE must include a BY datetime";
@@ -191,12 +189,12 @@ public class Parser {
 	 * @return LocalDateTime[]
 	 */
 	public LocalDateTime[] getFromTo(String[] inputArr, Ui ui, Storage storage, VBox dialogContainer) {
-		int l = inputArr.length;
-		int fromStartIdx = -1, fromEndIdx = l, toStartIdx = -1;
+		int arrLen = inputArr.length;
+		int fromStartIdx = -1, fromEndIdx = arrLen, toStartIdx = -1;
 		LocalDateTime from = null;
 		LocalDateTime to = null;
-		for (int i = 0; i < l; i++) {
-			if (i < l - 1) {
+		for (int i = 0; i < arrLen; i++) {
+			if (i < arrLen - 1) {
 				if (inputArr[i].equals("/from")) {
 					fromStartIdx = i + 1;
 				}
@@ -210,7 +208,7 @@ public class Parser {
 			from = parseDateTimeStr(sliceArrAndConcate(inputArr, fromStartIdx, fromEndIdx), ui, storage,
 					dialogContainer);
 			if (from != null && toStartIdx > -1) {
-				to = parseDateTimeStr(sliceArrAndConcate(inputArr, toStartIdx, l), ui, storage, dialogContainer);
+				to = parseDateTimeStr(sliceArrAndConcate(inputArr, toStartIdx, arrLen), ui, storage, dialogContainer);
 			}
 		}
 		return new LocalDateTime[] { from, to };

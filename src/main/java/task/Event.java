@@ -31,4 +31,9 @@ public class Event extends Task {
 		return String.format("E|%d|%s|%s|%s", isDone ? 1 : 0, description,
 				formatSavedDateTime(from), formatSavedDateTime(to));
 	};
+
+	@Override
+	public boolean hasMatchDateTime(LocalDateTime dt) {
+		return from.equals(dt) || to.equals(dt);
+	}
 }

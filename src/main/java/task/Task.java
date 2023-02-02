@@ -12,6 +12,9 @@ abstract public class Task {
 		this.isDone = false;
 	}
 
+	/**
+	 * @return String
+	 */
 	public String getDescription() {
 		return description;
 	}
@@ -71,4 +74,13 @@ abstract public class Task {
 	 * @return String
 	 */
 	public abstract String getSavedFormat();
+
+	/**
+	 * Return true if task datetime equals to datetime.
+	 * 
+	 * @param dt
+	 * @return boolean
+	 */
+	public abstract boolean hasMatchDateTime(LocalDateTime dt);
+
 }
