@@ -47,7 +47,7 @@ public class TaskList {
      * @return true if task list is empty, false otherwise
      */
     public boolean isEmpty() {
-        return this.validLen() == 0;
+        return this.getValidLen() == 0;
     }
 
     /**
@@ -73,7 +73,7 @@ public class TaskList {
      *
      * @return the first null index.
      */
-    public int validLen() {
+    public int getValidLen() {
         int len = 0;
         while (arr[len] != null) {
             len++;
@@ -155,7 +155,7 @@ public class TaskList {
     public String delete(int num1) throws IOException {
         try {
             try {
-                if (num1 < this.validLen()) {
+                if (num1 < this.getValidLen()) {
                     String original = arr[num1];
                     int trace = num1;
                     String[] originalList = new String[100];
@@ -172,7 +172,7 @@ public class TaskList {
                     }
                     return("Noted. I've removed this task:" + "\n" + original + "\n"
                             + String.format("Now you have %d "
-                            + "tasks in the list", this.validLen()));
+                            + "tasks in the list", this.getValidLen()));
                 }
             } catch (IndexOutOfBoundsException e) {
                 throw new InvalidIndexException();
@@ -193,12 +193,12 @@ public class TaskList {
      * @return new task list with task added.
      */
     public String add(Task task) {
-        int len = this.validLen();
+        int len = this.getValidLen();
         arr[len] = task.toString();
         return("Got it. I've added this task:" + "\n" + task.toString()
                 + "\n"
                 + String.format("Now you have %d "
-                + "tasks in the list", this.validLen()));
+                + "tasks in the list", this.getValidLen()));
         //return new TaskList(arr);
     }
 
