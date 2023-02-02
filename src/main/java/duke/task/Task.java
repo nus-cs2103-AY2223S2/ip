@@ -33,5 +33,9 @@ public abstract class Task {
         return (isDone ? 1 : 0) + " | " + description;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     public abstract String getTaskState();
 }

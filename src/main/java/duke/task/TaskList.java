@@ -249,4 +249,29 @@ public class TaskList {
     public ArrayList<Task> getTaskList() {
         return TASKS;
     }
+
+    public void findTask(String userCommand) throws DukeException {
+        String[] userCommandParts = userCommand.split(" ", 2);
+        if (userCommandParts.length != 2) {
+            throw new DukeInvalidArgumentException("Please enter search keyword");
+        }
+
+        String keyword = userCommandParts[1];
+        ArrayList<Task> results = new ArrayList<>();
+
+        for (Task task : TASK_LIST) {
+            if (task.getDescription().contains(keyword)) {
+                results.add(task);
+            }
+        }
+
+        if (results.size() == 0) {
+            System.out.println("No search results for \"" + keyword + "\" :(");
+        } else {
+            System.out.println("Search results for \"" + keyword + "\":");
+            for (int i = 0; i < results.size(); i++) {
+                System.out.println((i + 1) + ". " + results.get(i));
+            }
+        }
+    }
 }
