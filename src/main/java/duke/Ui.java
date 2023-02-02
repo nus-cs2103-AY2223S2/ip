@@ -2,6 +2,9 @@ package duke;
 
 import java.util.Scanner;
 
+/**
+ * Class that deals with printing messages to console.
+ */
 public class Ui {
     private static final String BANNER_LINE = "_".repeat(30);
     private static final String LOGO = " ,ggg, ,ggggggg,                                                               ,ggg,\n"
@@ -20,23 +23,43 @@ public class Ui {
                                      + "                                                                                         I8   8I\n"
                                      + "                                                                                         `8, ,8I\n"
                                      + "                                                                                          `Y8P\"\n";
+
+    /**
+     * Constructor for a UI object.
+     */
     public Ui() {
     }
 
+    /**
+     * Prints the logo.
+     */
     public void printLogo() {
         System.out.println("Hello from\n" + LOGO);
     }
 
+    /**
+     * Greets the user.
+     */
     public void greet() {
         printLogo();
         printInBanner("Greetings humans~", "Tis I! Nakiri Ayame!", "What can I do for you?");
     }
 
+    /**
+     * Reads a command from the user and returns it.
+     *
+     * @return A String object that is the command from the user.
+     */
     public String readCommand() {
         Scanner input = new Scanner(System.in);
         return input.nextLine();
     }
 
+    /**
+     * Pretty prints some text.
+     *
+     * @param messages Strings to pretty print.
+     */
     public void printInBanner(String... messages) {
         System.out.println(BANNER_LINE);
         for (String m : messages) {

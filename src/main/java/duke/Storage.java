@@ -7,31 +7,37 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * Class with utilities to save/load a Duke TaskList to/from a file
+ */
 public class Storage {
-    // private final SaveManager saveManager;
     private String filePath;
 
+    /**
+     * Constructor for a Storage object.
+     *
+     * @param filePath Relative path to saved TaskList file
+     */
     public Storage(String filePath) {
-        // this.saveManager = new SaveManager(filePath);
         this.filePath = filePath;
     }
 
+    /**
+     * Sets the filePath to a new filePath.
+     *
+     * @param filePath Relative path to saved TaskList file
+     */
     public void changeFilePath(String filePath) {
-        // this.saveManager.changeFilePath(filePath);
         this.filePath = filePath;
     }
 
+    /**
+     * Loads a TaskList from supplied file.
+     *
+     * @return ArrayList of Task objects that can be passed into a TaskList constructor.
+     * @throws DukeException If the file was corrupted, or could not be read.
+     */
     public ArrayList<Task> loadTasklistFromFile() throws DukeException {
-        /*
-        boolean isLoaded = saveManager.deserialize();
-        if (!isLoaded) {
-            return new ArrayList<>();
-        }
-
-        ArrayList<Task> taskList = saveManager.load("ArrayList<Task>");
-        return taskList;
-        */
         ArrayList<Task> tasks = new ArrayList<>();
         Path path = Paths.get(filePath);
         if (Files.notExists(path)) {
@@ -80,17 +86,12 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves a TaskList to the supplied file.
+     *
+     * @param tasks TaskList to save.
+     */
     public void saveTasklistToFile(TaskList tasks) {
-        /*
-        ArrayList<Task> taskList = tasks.getTaskList();
-        saveManager.save("ArrayList<Task>", taskList);
-        try {
-            saveManager.serialize();
-        } catch (DukeException ignored) {
-            System.out.println("Something went wrong");
-        }
-
-         */
         Path path = Paths.get(filePath);
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < tasks.getSize(); i++) {

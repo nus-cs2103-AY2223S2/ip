@@ -11,11 +11,25 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.*;
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
+/**
+ * Class containing methods to parse a Duke command.
+ */
 public class Parser {
     private static final Set<String> DELIMITERS = new HashSet<>(Arrays.asList("/from", "/to", "/by"));
 
+    /**
+     * Parses a String representing a Duke command.
+     * @param fullCommand String representing a Duke command
+     * @return Command object if it was successfully parsed
+     * @throws DukeException If user has the file delimiter | in the input or if an invalid command was supplied
+     */
     public static Command parse(String fullCommand) throws DukeException {
         if (fullCommand.contains("|")) {
             System.out.println("Neeeee fuzakenjaNEYOO\nDon't use the | character da yo");
@@ -90,13 +104,22 @@ public class Parser {
         }
     }
 
+    /**
+     * Creates a space-separated String from an Iterator of Strings of all elements that come before a delimiter.
+     * e.g. For the Iterator {"1", "2", "3", "4"} and delimiter "3", the function returns "1 2"
+     *
+     * @param args Iterator on a List of Strings
+     * @param delimiter Delimiter to stop copying before
+     * @return String object containing space-separated values
+     * @throws DukeException If supplied delimiter isn't in the available list of delimiters
+     */
     private static String copyUntilDelimiter(Iterator<String> args, String delimiter) throws DukeException {
         if (!DELIMITERS.contains(delimiter)) {
             throw new DukeException();
         }
 
         List<String> words = new ArrayList<>();
-        String curWord = "";
+        String curWord;
         while (args.hasNext()) {
             curWord = args.next();
             if (curWord.equals(delimiter)) {
@@ -107,9 +130,16 @@ public class Parser {
         return String.join(" ", words);
     }
 
+    /**
+     * Creates a space-separated String from an Iterator of Strings which contains all
+     * Strings after the Iterators current position.
+     *
+     * @param args Iterator on a list of Strings
+     * @return String object containing space-separated values
+     */
     private static String copyUntilDelimiter(Iterator<String> args) {
         List<String> words = new ArrayList<>();
-        String curWord = "";
+        String curWord;
         while (args.hasNext()) {
             curWord = args.next();
             words.add(curWord);
@@ -117,6 +147,12 @@ public class Parser {
         return String.join(" ", words);
     }
 
+    /**
+     * Determines if a String is parsable as a LocalDateTime object.
+     *
+     * @param args String maybe containing a LocalDateTime
+     * @return True if the String is parsable as a LocalDateTime object and false otherwise.
+     */
     private static boolean isDateTime(String args) {
         try {
             LocalDateTime.parse(args, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
@@ -126,6 +162,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Determines if a String is parsable as a LocalDate object.
+     *
+     * @param args String maybe containing a LocalDate
+     * @return True if the String is parsable as a LocalDateTime object and false otherwise.
+     */
     private static boolean isDate(String args) {
         try {
             LocalDate.parse(args, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
@@ -135,13 +177,22 @@ public class Parser {
         }
     }
 
-    public static Date parseDate(String arg) throws IllegalArgumentException {
+    /**
+     * Parses a String maybe containing a LocalDate or LocalDateTime.
+     * The string is parsable as a LocalDate if it is of the format yyyy-MM-dd.
+     * The string is parsable as a LocalDateTime if it is of the format yyyy-MM-dd HH:mm.
+     *
+     * @param arg String maybe containing a LocalDate or LocalDateTime.
+     * @return Date object if successfully parsed.
+     * @throws DukeException If supplied String cannot be parsed according to the specifications above.
+     */
+    public static Date parseDate(String arg) throws DukeException {
         if (isDateTime(arg)) {
             return new Date(LocalDateTime.parse(arg, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
         } else if (isDate(arg)) {
             return new Date(LocalDate.parse(arg, DateTimeFormatter.ofPattern("yyyy-MM-dd")));
         } else {
-            throw new IllegalArgumentException();
+            throw new DukeException();
         }
     }
 }
