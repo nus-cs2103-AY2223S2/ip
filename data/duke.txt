@@ -1,0 +1,3 @@
+T|0|read book
+T|0|tear book
+D|0|sell book |2023-01-02

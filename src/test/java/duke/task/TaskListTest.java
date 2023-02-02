@@ -1,13 +1,12 @@
 package duke.task;
 
 import duke.DukeException;
+
+import java.util.Arrays;
+import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 
 public class TaskListTest {
     @Test
@@ -25,7 +24,6 @@ public class TaskListTest {
         TaskList list = new TaskList(new ArrayList<Task>(Arrays.asList(dontCare, testTask, dontCare)));
         list.deleteTask(1);
         TaskList listAfterDelete = new TaskList(new ArrayList<Task>(Arrays.asList(dontCare, dontCare)));
-
         assertEquals(listAfterDelete, list);
     }
 }

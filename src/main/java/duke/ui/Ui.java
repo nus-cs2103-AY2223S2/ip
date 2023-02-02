@@ -24,7 +24,7 @@ public class Ui {
      * to match message length.
      * @param s Message.
      */
-    public void formResponse(String s) {
+    public String formResponse(String s) {
         String opener = "*";
         String ender = "*";
 
@@ -56,9 +56,12 @@ public class Ui {
             }
         }
 
-        System.out.println("\n" + opener + "\n"
+        String toPrint = "\n" + opener + "\n"
                 + sb.toString()
-                + "\n" + ender + "\n");
+                + "\n" + ender + "\n";
+
+        System.out.println(toPrint);
+        return toPrint;
     }
 
     /**
