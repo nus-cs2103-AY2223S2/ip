@@ -6,7 +6,16 @@ import java.time.LocalDateTime;
 
 import static duke.utils.FormatHelper.INPUTFORMAT;
 
+/**
+ * Parser class that processes user inputs.
+ */
 public class Parser {
+    /**
+     * Parses user command input and returns an appropriate Command object.
+     * @param userInput text command that the user inputted.
+     * @return Command object representing the type of command.
+     * @throws DukeException If user inputted command is invalid.
+     */
     public static Command parse(String userInput) throws DukeException {
         if (userInput.equals("")) {
             return new EmptyCommand();
