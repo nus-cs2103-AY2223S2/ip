@@ -25,14 +25,14 @@ public class ToDoCommand extends AddTaskCommand {
     /**
      * Adds todo task from input to the task list.
      *
-     * @param args Argument list in order: description.
-     * @param ui User interface.
+     * @param ui       User interface.
      * @param taskList Task list.
-     * @param storage Storage.
+     * @param storage  Storage.
+     * @param args     Argument list in order: description.
      * @throws DukeException If failed to save new task list to storage.
      */
     @Override
-    public void run(String[] args, Ui ui, TaskList taskList, Storage storage) throws DukeException {
+    public void run(Ui ui, TaskList taskList, Storage storage, String... args) throws DukeException {
         String description = args[0];
 
         addTask(new ToDo(description), ui, taskList, storage);

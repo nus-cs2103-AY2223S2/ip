@@ -6,7 +6,6 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class FindCommand implements Command {
@@ -26,7 +25,7 @@ public class FindCommand implements Command {
     }
 
     @Override
-    public void run(String[] args, Ui ui, TaskList taskList, Storage storage) throws DukeException {
+    public void run(Ui ui, TaskList taskList, Storage storage, String... args) throws DukeException {
         String textToFind = args[0];
 
         ui.showLine();

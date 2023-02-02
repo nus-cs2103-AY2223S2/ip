@@ -25,14 +25,14 @@ public class MarkCommand implements Command {
     /**
      * Marks task in task list.
      *
-     * @param args Argument list in order: task number (whole number format).
-     * @param ui User interface.
+     * @param ui       User interface.
      * @param taskList Task list.
-     * @param storage Storage.
+     * @param storage  Storage.
+     * @param args     Argument list in order: task number (whole number format).
      * @throws DukeException If task number < 0 or > total tasks or invalid task number.
      */
     @Override
-    public void run(String[] args, Ui ui, TaskList taskList, Storage storage) throws DukeException {
+    public void run(Ui ui, TaskList taskList, Storage storage, String... args) throws DukeException {
         int taskNo = Integer.parseInt(args[0]);
 
         if (taskNo > 0 && taskNo <= taskList.getTotalTasks()) {
