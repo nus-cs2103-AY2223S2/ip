@@ -17,8 +17,8 @@ import java.util.Date;
  */
 public class Storage {
     private File saveFile;
-    private final String SAVE_FILE_DIR_PATH = System.getProperty("user.dir") + "/data/";
-    private final String SAVE_FILE_PATH = SAVE_FILE_DIR_PATH + "dukeSave.txt";
+    private static final String SAVE_FILE_DIR_PATH = System.getProperty("user.dir") + "/data/";
+    private static final String SAVE_FILE_PATH = SAVE_FILE_DIR_PATH + "dukeSave.txt";
     public Storage() {
         File savedFileDir = new File(SAVE_FILE_DIR_PATH);
         File savedTaskFile = new File(SAVE_FILE_PATH);
@@ -90,7 +90,7 @@ public class Storage {
         return userTasks;
     }
 
-    public void saveTasksToFile(ArrayList<Task> taskList) {
+    public static void saveTasksToFile(ArrayList<Task> taskList) {
         try {
             String toWrite = "";
             FileWriter fileWriter = new FileWriter(SAVE_FILE_PATH);
