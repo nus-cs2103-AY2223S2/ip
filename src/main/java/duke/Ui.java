@@ -1,19 +1,21 @@
 package duke;
 
+import java.util.ArrayList;
+
 public class Ui {
 
     /**
      * Prints the introduction message when the chatbot is first booted up.
      */
-    public void introduce() {
+    public void introduce(StringBuilder allResponses) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("Hello! I'm Duke, your friendly chatbot.");
-        System.out.println("What can I do for you?");
+        allResponses.append("Hello from\n" + logo);
+        allResponses.append("Hello! I'm Duke, your friendly chatbot.\n");
+        allResponses.append("What can I do for you?\n");
     }
 
     public void instruct() {

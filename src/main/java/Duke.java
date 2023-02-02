@@ -29,6 +29,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke extends Application {
@@ -63,6 +64,10 @@ public class Duke extends Application {
 
     @Override
     public void start(Stage stage) {
+        ui = new Ui();
+        storage = new Storage("src/data/duke.txt");
+        tasks = new TaskList(storage.load());
+        parser = new Parser();
         //Step 1. Setting up required components
 
         //The container for the content of the chat to scroll.
@@ -166,17 +171,17 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     private String getResponse(String input) {
-        return "Duke heard: " + input;
+        StringBuilder allResponses = new StringBuilder();
+        ui.introduce(allResponses);
+        return allResponses.toString();
     }
-
-
 
     /**
      * Executes the Duke chatbot. 
      */
     public void run() {
 
-        ui.introduce();
+        //ui.introduce();
         ui.instruct();
         Scanner scan = new Scanner(System.in);
         String userInput = scan.nextLine();
