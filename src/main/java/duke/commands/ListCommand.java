@@ -24,7 +24,7 @@ public class ListCommand extends Command {
      * List all task of the TaskList.
      */
     @Override
-    public void action() {
-        ui.listResponse(taskList);
+    public String action() {
+        return ui.listResponse(taskList);
     }
 }

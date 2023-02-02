@@ -34,8 +34,8 @@ public class FindCommand extends Command {
      * Finds all the tasks on the TaskList with string.
      */
     @Override
-    public void action() {
+    public String action() {
         List<Task> matchedTasks = taskList.findTask(string);
-        ui.findResponse(matchedTasks);
+        return ui.findResponse(matchedTasks);
     }
 }

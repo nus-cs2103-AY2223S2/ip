@@ -39,10 +39,10 @@ public class AddCommand extends Command {
      * Adds the task to the TaskList.
      */
     @Override
-    public void action() {
+    public String action() {
         taskList.addTask(task);
-        ui.addResponse(task, taskList);
         storage.editStorage(taskList.getTaskList());
         storage.saveToFile(file);
+        return ui.addResponse(task, taskList);
     }
 }

@@ -45,10 +45,10 @@ public class MarkCommand extends Command {
      * Marks the task on the TaskList.
      */
     @Override
-    public void action() {
+    public String action() {
         Task task = taskList.markTask(index);
-        ui.markResponse(task);
         storage.editStorage(taskList.getTaskList());
         storage.saveToFile(file);
+        return ui.markResponse(task);
     }
 }
