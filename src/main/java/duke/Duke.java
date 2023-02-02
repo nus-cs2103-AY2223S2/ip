@@ -19,6 +19,11 @@ public class Duke extends Application {
 
     private Storage storage;
     private TaskList allTasks;
+    private static String[] defaultMemoryPathArray = {".", "memory.txt"};
+
+    public Duke() {
+        this(defaultMemoryPathArray);
+    }
 
     public Duke(String[] memoryPathArray) {
         this.storage = new Storage(memoryPathArray);
