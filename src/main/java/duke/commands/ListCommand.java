@@ -2,7 +2,6 @@ package duke.commands;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
 
 /**
  * A command type that the chatting bot can read.
@@ -14,18 +13,23 @@ public class ListCommand extends Command {
      *
      * @param list
      * @param store
-     * @param ui
      */
     @Override
-    public void execute(TaskList list, Storage store, Ui ui) {
-        ui.showMessage("Here are the tasks in your list:");
+    public String execute(TaskList list, Storage store) {
+        String response = "Here are the tasks in your list:\n";
         if (list.size() == 0) {
-            ui.showMessage("OOPS!!! Your list is empty.");
+            response += "OOPS!!! Your list is empty.";
+            return response;
         }
         for (int i = 0; i < list.size(); i++) {
-            System.out.print(i + 1 + ".");
-            System.out.println(list.get(i).toString());
+            response += Integer.toString(i + 1);
+            response += ".";
+            response += list.get(i).toString();
+            if (i != list.size() - 1) {
+                response += "\n";
+            }
         }
+        return response;
     }
 
     /**

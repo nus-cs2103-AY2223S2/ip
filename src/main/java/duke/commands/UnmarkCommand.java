@@ -3,7 +3,6 @@ package duke.commands;
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
 
 /**
  * A command type that the chatting bot can read.
@@ -35,17 +34,17 @@ public class UnmarkCommand extends Command {
      *
      * @param list
      * @param store
-     * @param ui
      */
     @Override
-    public void execute(TaskList list, Storage store, Ui ui) throws DukeException {
+    public String execute(TaskList list, Storage store) throws DukeException {
         if (unmarkNumber < 1 || unmarkNumber > list.size()) {
             throw new DukeException("Sorry, this task number is invalid.");
         }
         list.get(this.unmarkNumber - 1).setStatus(false);
         store.save(list);
-        ui.showMessage("OK, I've marked this task as not done yet:");
-        ui.showMessage(list.get(unmarkNumber - 1).toString());
+        String response = "Nice! I've marked this task as not done yet:\n";
+        response += list.get(unmarkNumber - 1).toString();
+        return response;
     }
 
     /**

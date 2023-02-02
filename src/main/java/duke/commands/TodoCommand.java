@@ -4,7 +4,6 @@ import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Todos;
-import duke.Ui;
 
 /**
  * A command type that the chatting bot can read.
@@ -36,15 +35,15 @@ public class TodoCommand extends Command {
      *
      * @param list
      * @param store
-     * @param ui
      */
     @Override
-    public void execute(TaskList list, Storage store, Ui ui) throws DukeException {
+    public String execute(TaskList list, Storage store) throws DukeException {
         list.add(new Todos((taskName)));
         store.save(list);
-        ui.showMessage("Got it. I've added this task:");
-        ui.showMessage(list.get(list.size() - 1).toString());
-        ui.showMessage("Now you have " + list.size() + " tasks in the list.");
+        String response = "Got it. I've added this task:\n";
+        response += list.get(list.size() - 1).toString();
+        response += "\nNow you have " + list.size() + " tasks in the list.";
+        return response;
     }
 
     /**

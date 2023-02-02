@@ -3,7 +3,6 @@ package duke.commands;
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
 
 /**
  * A command type that the chatting bot can read.
@@ -26,26 +25,31 @@ public class FindCommand extends Command {
      *
      * @param list
      * @param store
-     * @param ui
      */
     @Override
-    public void execute(TaskList list, Storage store, Ui ui) throws DukeException {
-        ui.showMessage("Here are the matching tasks in your list:");
+    public String execute(TaskList list, Storage store) throws DukeException {
+        String response = "Here are the matching tasks in your list:\n";
         if (list.size() == 0) {
-            ui.showMessage("OOPS!!! Your list is empty.");
+            response += "OOPS!!! Your list is empty.";
+            return response;
         }
         int count = 0;
         for (int i = 0; i < list.size(); i++) {
             int result = list.get(i).getName().indexOf(targetName);
             if (result >= 0) {
-                System.out.print(count + 1 + ".");
+                response += Integer.toString(count + 1);
+                response += ".";
                 count++;
-                System.out.println(list.get(i).toString());
+                response += list.get(i).toString();
+                if (i != list.size() - 1) {
+                    response += "\n";
+                }
             }
         }
         if (count == 0) {
-            ui.showMessage("OOPS!!! There are no matching tasks in your list.");
+            response += "OOPS!!! There are no matching tasks in your list.";
         }
+        return response;
     }
 
     /**

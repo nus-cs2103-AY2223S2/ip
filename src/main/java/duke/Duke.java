@@ -9,40 +9,34 @@ public class Duke {
 
     private Storage storage;
     private TaskList tasks;
-    private Ui ui;
 
     /**
      * The constructor of this class.
      */
     public Duke() {
-        ui = new Ui();
         storage = new Storage();
         tasks = storage.load();
     }
 
-    /**
-     * The method that runs the chatting bot.
-     */
-    public void run() {
-        ui.greet();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.getUserCommand();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, storage, ui);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showMessage(e.getMessage());
-            }
-        }
-    }
 
     /**
-     * The main method.
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
      */
-    public static void main(String[] args) {
-        new Duke().run();
+    public String getResponse(String input) {
+        String result = null;
+        try {
+            boolean isExit;
+            Command c = Parser.parse(input);
+            isExit = c.isExit();
+            if (isExit) {
+                return null;
+            }
+            result = c.execute(tasks, storage);
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+        }
+        return result;
     }
 
 }

@@ -3,7 +3,6 @@ package duke.commands;
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
 
 /**
  * A command type that the chatting bot can read.
@@ -15,12 +14,10 @@ public class ByeCommand extends Command {
      *
      * @param list
      * @param store
-     * @param ui
      */
     @Override
-    public void execute(TaskList list, Storage store, Ui ui) throws DukeException {
-        ui.showMessage("Bye. Hope to see you again soon!");
-        return;
+    public String execute(TaskList list, Storage store) throws DukeException {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**

@@ -4,7 +4,6 @@ import duke.DukeException;
 import duke.Storage;
 import duke.Task;
 import duke.TaskList;
-import duke.Ui;
 
 /**
  * The parent class of the specific commands.
@@ -16,11 +15,11 @@ public class Command {
      *
      * @param list
      * @param store
-     * @param ui
      */
-    public void execute(TaskList list, Storage store, Ui ui) throws DukeException {
+    public String execute(TaskList list, Storage store) throws DukeException {
         list.add(new Task(""));
         store.save(list);
+        return "";
     }
 
     /**
