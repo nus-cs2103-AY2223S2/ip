@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 public class Duke {
@@ -80,11 +81,17 @@ public class Duke {
                         String description = splitDeadline[0].substring(9);
                         String deadline = splitDeadline[1];
                         horizontalLine();
-                        list.addTask(new Deadline(description, deadline));
-                        list.getTaskDetails();
-                        horizontalLine();
-                        userInput = scanner.nextLine();
-                        continue;
+                        try {
+                            list.addTask(new Deadline(description, deadline));
+                            list.getTaskDetails();
+                            horizontalLine();
+                            userInput = scanner.nextLine();
+                            continue;
+                        } catch (IOException e) {
+                            System.out.println("Please enter the date in the correct format");
+                            userInput = scanner.nextLine();
+                            continue;
+                        }
                     }
                     case EVENT: {
                         String[] splitTimes = userInput.split("/");
@@ -92,11 +99,17 @@ public class Duke {
                         String startDayTime = splitTimes[1];
                         String endDayTime = splitTimes[2];
                         horizontalLine();
-                        list.addTask(new Event(startDayTime, endDayTime, description));
-                        list.getTaskDetails();
-                        horizontalLine();
-                        userInput = scanner.nextLine();
-                        continue;
+                        try {
+                            list.addTask(new Event(startDayTime, endDayTime, description));
+                            list.getTaskDetails();
+                            horizontalLine();
+                            userInput = scanner.nextLine();
+                            continue;
+                        } catch (IOException e) {
+                            System.out.println("Please enter the start/end date and time in the correct format");
+                            userInput = scanner.nextLine();
+                            continue;
+                        }
                     }
 
                     case DELETE: {
@@ -113,6 +126,8 @@ public class Duke {
                 }
             } catch (DukeException e){
                 System.out.println("Invalid Duke Request; please re-enter your request!");
+                userInput = scanner.nextLine();
+                continue;
             }
 
 
