@@ -25,13 +25,6 @@ public class Duke {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        Command loadCommand = new LoadCommand();
-        try {
-            loadCommand.execute(taskList, ui, storage);
-        } catch (Exception e) {
-            ui.showError(e.getMessage());
-        }
     }
 
     /**
@@ -70,10 +63,30 @@ public class Duke {
     }
 
 
-    public String getResponse(String input) {
-        StringBuilder response = new StringBuilder("i eat duck and chicken");
+    public String getResponse(String fullCommand) {
+        boolean isExit = false;
+        StringBuilder response = new StringBuilder();
+        try {
+            Command c = Parser.parse(fullCommand);
+            response.append(c.execute(taskList, ui, storage));
+            isExit = c.isExit();
+            if (c.isSave()) {
+                Command save = new SaveCommand();
+                response.append(save.execute(taskList, ui, storage));
+            }
+            return response.toString();
+        } catch (Exception e) {
+            return(e.getMessage());
+        }
+    }
 
-        return response.toString();
-
+    public String loadStorageData() {
+        Command loadCommand = new LoadCommand();
+        try {
+            String response = loadCommand.execute(taskList, ui, storage);
+            return response;
+        } catch (Exception e) {
+            return(e.getMessage());
+        }
     }
 }

@@ -1,5 +1,6 @@
 package app.command;
 
+import app.chatbot.Response;
 import app.chatbot.Storage;
 import app.chatbot.Ui;
 import app.task.TaskList;
@@ -23,15 +24,15 @@ public class MarkAsDoneCommand extends Command {
      * @throws Exception
      */
     @Override
-    public void execute(TaskList tl, Ui ui, Storage storage) throws Exception {
+    public String execute(TaskList tl, Ui ui, Storage storage) throws Exception {
         boolean alreadyMarked;
         try {
             int i = Integer.valueOf(this.markAtIndex) - 1;
             alreadyMarked = tl.markAsDone(i);
             if (alreadyMarked) {
-                ui.reply(tl.getTask(i).getDesc() + " already marked as done!");
+                return new Response(tl.getTask(i).getDesc() + " already marked as done!").toString();
             } else {
-                ui.reply("Marked " + tl.getTask(i).getDesc() + " as done!");
+                return new Response("Marked " + tl.getTask(i).getDesc() + " as done!").toString();
             }
         } catch (NumberFormatException e) {
             throw new Exception("Please specify the task by its index number.");

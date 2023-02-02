@@ -4,9 +4,11 @@ import java.util.Map;
 
 import app.chatbot.Storage;
 import app.chatbot.Ui;
+import app.chatbot.Response;
 import app.task.Task;
 import app.task.TaskList;
 import app.task.TaskTypes;
+
 
 /**
  * Functions as an executor to convert user-input arguments
@@ -34,18 +36,21 @@ public class AddCommand extends Command {
      * @param tl
      * @param ui
      * @param storage
+     * @return String response
      * @throws Exception
      */
     @Override
-    public void execute(TaskList tl, Ui ui, Storage storage) throws Exception {
+    public String execute(TaskList tl, Ui ui, Storage storage) throws Exception {
+        Response response = new Response();
         try {
             Task newTask = tl.addTask(this.taskType, this.args);
             int numTasks = tl.getAllTasks().size();
-            ui.reply("New task added:");
-            ui.reply(newTask.toString());
-            ui.reply("You now have " + numTasks + " task(s) in your list.");
+            response.addLine("New task added:");
+            response.addLine(newTask.toString());
+            response.addLine("You now have " + numTasks + " task(s) in your list.");
         } catch (Exception e) {
             throw e;
         }
+        return response.toString();
     }
 }

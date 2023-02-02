@@ -1,5 +1,6 @@
 package app.command;
 
+import app.chatbot.Response;
 import app.chatbot.Storage;
 import app.chatbot.Ui;
 import app.task.Task;
@@ -27,13 +28,16 @@ public class DeleteCommand extends Command {
      * @throws Exception
      */
     @Override
-    public void execute(TaskList tl, Ui ui, Storage storage) throws Exception {
+    public String execute(TaskList tl, Ui ui, Storage storage) throws Exception {
+        Response response = new Response();
         try {
             int i = Integer.valueOf(deleteAtIndex) - 1;
             Task deletedTask = tl.deleteTask(i);
-            ui.reply("Removed " + deletedTask.getDesc() + " from the list. You now have " + tl.size() + " tasks left.");
+            response.addLine("Removed " + deletedTask.getDesc()
+                    + " from the list. You now have " + tl.size() + " tasks left.");
         } catch (NumberFormatException e) {
             throw e;
         }
+        return response.toString();
     }
 }

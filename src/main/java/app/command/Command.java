@@ -29,9 +29,10 @@ public abstract class Command {
      * @param tl
      * @param ui
      * @param storage
+     * @return String response
      * @throws Exception
      */
-    public abstract void execute(TaskList tl, Ui ui, Storage storage) throws Exception;
+    public abstract String execute(TaskList tl, Ui ui, Storage storage) throws Exception;
 
     public boolean isExit() {
         return this.isExit;

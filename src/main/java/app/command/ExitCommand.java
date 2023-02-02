@@ -1,5 +1,6 @@
 package app.command;
 
+import app.chatbot.Response;
 import app.chatbot.Storage;
 import app.chatbot.Ui;
 import app.task.TaskList;
@@ -22,7 +23,7 @@ public class ExitCommand extends Command {
      * @param storage
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.reply("Alright, goodbye to you too!");
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return new Response("Alright, goodbye to you too!").toString();
     }
 }

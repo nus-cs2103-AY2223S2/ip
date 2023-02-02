@@ -2,6 +2,7 @@ package app.command;
 
 import java.util.List;
 
+import app.chatbot.Response;
 import app.chatbot.Storage;
 import app.chatbot.Ui;
 import app.task.Task;
@@ -25,10 +26,10 @@ public class ListCommand extends Command {
      * @param storage
      */
     @Override
-    public void execute(TaskList tl, Ui ui, Storage storage) {
+    public String execute(TaskList tl, Ui ui, Storage storage) {
         List<Task> listTasks = tl.getAllTasks();
         if (listTasks.isEmpty()) {
-            ui.reply("You don't have anything listed right now.");
+            return new Response("You don't have anything listed right now.").toString();
         } else {
             StringBuilder output = new StringBuilder("Eh this is what you've written down so far:\n");
             for (int i = 0; i < listTasks.size(); i++) {
@@ -36,8 +37,9 @@ public class ListCommand extends Command {
                 output.append(": " + listTasks.get(i));
                 output.append("\n");
             }
-            ui.reply(output.toString());
-            ui.reply("You have " + listTasks.size() + " tasks listed.");
+            Response r = new Response(output.toString());
+            r.addLine("You have " + listTasks.size() + " tasks listed.");
+            return r.toString();
         }
     }
 }

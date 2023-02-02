@@ -15,7 +15,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tl, Ui ui, Storage storage) {
+    public String execute(TaskList tl, Ui ui, Storage storage) {
         StringBuilder resultDisplay = new StringBuilder("");
         boolean isSearchSuccessful = false;
         for (int i = 0; i < tl.size(); i++) {
@@ -29,10 +29,10 @@ public class FindCommand extends Command {
             }
         }
         if (!isSearchSuccessful) {
-            ui.reply("Ah I didn't find any tasks matching '" + this.searchContent + "'." );
+            return ("Ah I didn't find any tasks matching '" + this.searchContent + "'." + "\n" );
         } else {
-            ui.reply("Here's the tasks matching '" + this.searchContent + "':\n" +
-                    resultDisplay);
+            return ("Here's the tasks matching '" + this.searchContent + "':\n" +
+                    resultDisplay + "\n");
         }
     }
 }

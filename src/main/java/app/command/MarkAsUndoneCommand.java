@@ -1,5 +1,6 @@
 package app.command;
 
+import app.chatbot.Response;
 import app.chatbot.Storage;
 import app.chatbot.Ui;
 import app.task.TaskList;
@@ -23,15 +24,15 @@ public class MarkAsUndoneCommand extends Command {
      * @throws Exception
      */
     @Override
-    public void execute(TaskList tl, Ui ui, Storage storage) throws Exception {
+    public String execute(TaskList tl, Ui ui, Storage storage) throws Exception {
         boolean alreadyMarked;
         try {
             int i = Integer.valueOf(this.unmarkAtIndex) - 1;
             alreadyMarked = tl.unmarkDone(i);
             if (alreadyMarked) {
-                ui.reply(tl.getTask(i).getDesc() + " is already undone!");
+                return new Response(tl.getTask(i).getDesc() + " is already undone!").toString();
             } else {
-                ui.reply("Unmarked " + tl.getTask(i).getDesc() + ".");
+                return new Response("Unmarked " + tl.getTask(i).getDesc() + ".").toString();
             }
         } catch (NumberFormatException e) {
             throw new Exception("Please specify the task by its index number.");

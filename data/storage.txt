@@ -3,4 +3,4 @@ D | 0 | call the ambulance | by:2024-02-02T08:00
 E | 0 | court hearing | from:2023-08-01T18:00 | to:2023-08-01T20:00
 E | 1 | class | from:2023-01-25T19:00 | to:2023-01-25T20:00
 D | 1 | complete this task | by:2023-01-26T17:00
-T | 0 | make a proper GUI
+D | 0 | COMMIT CHANGES FINALLY | by:2023-02-02T17:00

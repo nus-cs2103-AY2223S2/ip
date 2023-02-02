@@ -96,10 +96,11 @@ public class Storage {
                         tl.addTask(taskType, argValues);
                     }
                     totalSuccess++;
+                    line = br.readLine();
                 } catch (Exception e) {
-                    throw new Exception("task.Task number " + totalTaskCounter + " failed to load.");
+                    line = br.readLine();
                 }
-                line = br.readLine();
+
             }
             return totalSuccess;
         } catch (Exception e) {
