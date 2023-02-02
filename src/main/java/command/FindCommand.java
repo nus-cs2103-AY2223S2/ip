@@ -1,5 +1,6 @@
 package command;
-
+// alphabetical
+//todo
 import tasks.TaskList;
 import exceptions.DukeException;
 import duke.Storage;
@@ -32,13 +33,14 @@ public class FindCommand extends Command{
      * @throws DukeException
      */
 
+    // a space before the for loop todo
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException{
         ArrayList<Task> res = new ArrayList<>();
-        for(int i = 0; i < taskList.size(); i++){
+        for (int i = 0; i < taskList.size(); i++) {
             Task t = taskList.get(i);
             String s = t.getDescription();
-            if(s.contains(keyword)){
+            if (s.contains(keyword)) {
                 res.add(t);
             }
         }

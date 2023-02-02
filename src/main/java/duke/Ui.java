@@ -40,7 +40,7 @@ public class Ui {
      * @return a string
      */
     public static String greet() {
-        return "Hello! I'm duke.Duke.\n" + "What can I do for you?";
+        return "Hello! I'm Duke.\n" + "What can I do for you?";
     }
 
     /**
