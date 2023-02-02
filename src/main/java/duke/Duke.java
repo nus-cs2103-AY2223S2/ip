@@ -3,6 +3,7 @@ package duke;
 import duke.command.Command;
 import duke.exception.DukeException;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.stage.Stage;
 
 /** Duke is an interactive To-Do list created for CS2103T. */
@@ -50,6 +51,9 @@ public class Duke extends Application {
         } finally {
             this.ui.displayMessage();
             this.storage.saveToFile(this.taskList);
+            if (isExit) {
+                Platform.exit();
+            }
         }
     }
 
