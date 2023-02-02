@@ -1,5 +1,6 @@
 package main;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import task.Task;
@@ -97,6 +98,17 @@ public class Ui {
         System.out.println(indentation + "You have " + taskList.getTotalNumberOfTask() + " tasks in the list.");
         for (int i = 0; i < taskList.getTotalNumberOfTask(); i++) {
             System.out.println(indentation + (i + 1) + "." + taskList.getTaskAtIndex(i));
+        }
+    }
+
+    /**
+     * Outputs details of tasks that is searched.
+     * @param taskList List of tasks searched.
+     */
+    public void outputFindTask(ArrayList<Task> taskList) {
+        System.out.println(indentation + "Here are the matching tasks in your list:");
+        for (int i = 0; i < taskList.size(); i++) {
+            System.out.println(indentation + (i + 1) + "." + taskList.get(i));
         }
     }
 

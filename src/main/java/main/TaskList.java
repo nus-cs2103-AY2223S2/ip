@@ -87,6 +87,22 @@ public class TaskList {
     }
 
     /**
+     * Find all tasks that contain keyword.
+     *
+     * @param keyword Keyword that user input.
+     * @return List of tasks that contains keyword.
+     */
+    public ArrayList<Task> findTask(String keyword) {
+        ArrayList<Task> matchedTask = new ArrayList<>();
+        for (Task t : arrOfTask) {
+            if (t.getNameOfTask().contains(keyword)) {
+                matchedTask.add(t);
+            }
+        }
+        return matchedTask;
+    }
+
+    /**
      * Writes details of all task to file.
      *
      * @param fw Used when writing to class.

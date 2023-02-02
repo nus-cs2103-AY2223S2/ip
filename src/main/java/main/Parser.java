@@ -31,6 +31,8 @@ public class Parser {
                 return new ExitCommand();
             } else if (command.equals("list")) {
                 return new ListCommand();
+            } else if (command.startsWith("find")) {
+                return new FindCommand(command.substring(5));
             } else if (command.startsWith("mark")) {
                 return new MarkDoneCommand(Integer.parseInt(command.substring(5)));
             } else if (command.startsWith("unmark")) {
