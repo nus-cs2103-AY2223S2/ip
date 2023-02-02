@@ -85,9 +85,7 @@ public class Duke {
                     try {
                         ui.printCommand(tasks.addTask(commandInfoList, this.storage));
                     } catch (DateTimeParseException e) {
-                        System.out.println("Invalid inputs!\n");
-                        System.out.println("Please enter your date & time in the format: YYYY-MM-DD HH:MM \n");
-                        System.out.println("Please also ensure they are valid values!\n");
+                        ui.printInvalidDateError();
                         break;
                     }
                     break;
