@@ -11,8 +11,14 @@ import duke.ui.Ui;
 public abstract class Command {
     /**
      * Executes the command given.
+     *
+     * @param tasks The ArrayList of tasks.
+     * @param storage The class that reads and write program data to hard drive.
+     * @param ui The class that handles interaction with the users.
+     * @return A string message to signify the success or failure of task executed.
+     * @throws DukeException If task is not executed successfully.
      */
-    public abstract void execute(TaskList tasks, Storage storage, Ui ui) throws DukeException;
+    public abstract String execute(TaskList tasks, Storage storage, Ui ui) throws DukeException;
 
     /**
      * Returns whether the command requires the program to exit.

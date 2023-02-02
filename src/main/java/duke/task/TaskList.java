@@ -42,82 +42,86 @@ public class TaskList {
      * Adds tasks into the list and prints out completion message when done.
      *
      * @param task The task to be added.
+     * @return A string message to signify the success or failure of task executed.
      */
-    public void add(Task task) {
+    public String add(Task task) {
         this.tasks.add(task);
-        System.out.println("Got it. I've added this task:");
-        System.out.println(" " + task);
-        System.out.println("Now you have "
-                + this.tasks.size() + " task(s) in your list.\n");
+        String output = "Got it. I've added this task:\n " + task + "\nNow you have "
+                + this.tasks.size() + " task(s) in your list.\n";
+        return output;
     }
 
     /**
      * Deletes task at the given index.
      *
      * @param index The index of task to be deleted.
+     * @return A string message to signify the success or failure of task executed.
      * @throws OutOfBoundsException If index given is less than 0
      *                              or more than the index of the last list element.
      */
-    public void delete(int index) throws OutOfBoundsException {
+    public String delete(int index) throws OutOfBoundsException {
         if (index < 0 || index >= this.tasks.size()) {
             throw new OutOfBoundsException("Item at given index does not exist! "
                     + "Please enter a valid index.");
         }
         Task removed = this.tasks.remove(index);
-        System.out.println("Noted. I've removed this task:\n" + " "
+        return "Noted. I've removed this task:\n " + " "
                 + removed + "\nNow you have " + this.tasks.size()
-                + " task(s) in the list.\n");
+                + " task(s) in the list.\n";
     }
 
     /**
      * Marks the task at the given index as done.
      *
      * @param index The index number of the task given.
+     * @return A string message to signify the success of failure of task executed.
      * @throws OutOfBoundsException If index given is less than 0
      *                              or more than the index of the last list element.
      */
-    public void markIsDone(int index) throws OutOfBoundsException {
+    public String markIsDone(int index) throws OutOfBoundsException {
         if (index < 0 || index >= this.tasks.size()) {
             throw new OutOfBoundsException("Item at given index does not exist! "
                     + "Please enter a valid index.");
         }
         this.tasks.get(index).markIsDone();
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(" " + this.tasks.get(index) + "\n");
+        return "Nice! I've marked this task as done:\n "
+                + this.tasks.get(index) + "\n";
     }
 
     /**
      * Marks the task at the given index as not done.
      *
      * @param index The index number of the task given.
+     * @return A string message to signify the success of failure of task executed.
      * @throws OutOfBoundsException If index given is less than 0
      *                              or more than the index of the last list element.
      */
-    public void unmarkIsDone(int index) throws OutOfBoundsException {
+    public String unmarkIsDone(int index) throws OutOfBoundsException {
         if (index < 0 || index >= this.tasks.size()) {
             throw new OutOfBoundsException("Item at given index does not exist! "
                     + "Please enter a valid index.");
         }
         this.tasks.get(index).unmarkIsDone();
-        System.out.println("OK, I've marked this task as not done:");
-        System.out.println(" " + this.tasks.get(index) + "\n");
+        return "OK, I've marked this task as not done:\n "
+                + this.tasks.get(index) + "\n";
     }
 
     /**
-     * Prints all the tasks in the list.
+     * Appends all the tasks in the list into a string.
+     *
+     * @return A string representation of the list of all the tasks.
      */
-    public void print() {
+    public String print() {
         int size = this.tasks.size();
         if (size == 0) {
-            System.out.println("There are no items in the list.\n");
-            return;
+            return "There are no items in the list.\n";
         }
-        System.out.println("Here are the tasks in your list:");
+        StringBuilder sb = new StringBuilder();
+        sb.append("Here are the tasks in your list:");
         for (int i = 0; i < size; i++) {
-            String toPrint = String.format("%d. %s", (i + 1), this.tasks.get(i));
-            System.out.println(toPrint);
+            sb.append(String.format("\n%d. %s", (i + 1), this.tasks.get(i)));
         }
-        System.out.println("");
+        return sb.toString();
     }
 
     /**
@@ -125,33 +129,25 @@ public class TaskList {
      * and prints them out.
      *
      * @param keyword The keyword to search for.
+     * @return The results of the search.
      */
-    public void find(String keyword) {
+    public String find(String keyword) {
         int size = this.tasks.size();
-        int printIndex = 1;
         int currIndex = 0;
-        while (printIndex == 1 && currIndex < size) {
-            Task curr = this.tasks.get(currIndex);
-            if (curr.containKeyword(" " + keyword + " ")) {
-                System.out.println("Here are the matching tasks in your list:");
-                String toPrint = String.format("%d. %s", printIndex, curr);
-                printIndex++;
-                System.out.println(toPrint);
-            }
-            currIndex++;
-        }
+        int printIndex = 1;
+        StringBuilder sb = new StringBuilder();
+        sb.append("Here are the matching tasks in your list:");
         while (currIndex < size) {
             Task curr = this.tasks.get(currIndex);
             if (curr.containKeyword(" " + keyword + " ")) {
-                String toPrint = String.format("%d. %s", printIndex, curr);
+                sb.append(String.format("\n%d. %s", printIndex, curr));
                 printIndex++;
-                System.out.println(toPrint);
             }
             currIndex++;
         }
         if (printIndex == 1) {
-            System.out.println("None of the items in your list matches with \"" + keyword + "\"");
+            return "None of the items in your list matches with \"" + keyword + "\"";
         }
-        System.out.print("\n");
+        return sb.toString();
     }
 }

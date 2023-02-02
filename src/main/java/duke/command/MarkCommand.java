@@ -25,10 +25,12 @@ public class MarkCommand extends Command {
      * @param tasks The ArrayList of tasks.
      * @param storage The class that reads and write program data to hard drive.
      * @param ui The class that handles interaction with the users.
+     * @return A string message to signify the success or failure of task executed.
+     * @throws DukeException If given index is out of bounds.
      */
     @Override
-    public void execute(TaskList tasks, Storage storage, Ui ui) throws DukeException {
-        tasks.markIsDone(this.index);
+    public String execute(TaskList tasks, Storage storage, Ui ui) throws DukeException {
+        return tasks.markIsDone(this.index);
     }
 
     /**
