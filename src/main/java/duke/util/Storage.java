@@ -14,7 +14,7 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
-/*
+/**
  * Represents a storage object that handles interactions with the save file.
  */
 public class Storage {
@@ -22,9 +22,8 @@ public class Storage {
     private final File file;
     private final String filePath;
 
-    /*
+    /**
      * Constructor for a Storage object.
-     * 
      * @param filePath Path of the save file.
      */
     public Storage(String filePath) {
@@ -43,9 +42,8 @@ public class Storage {
         }
     }
 
-    /*
-     * Loads the save file into a TaskList object
-     * 
+    /**
+     * Loads the save file into a TaskList object.
      * @return TaskList object containing the tasks in the save file.
      * @throws DukeException If there is an error in loading the save file.
      */
@@ -107,9 +105,8 @@ public class Storage {
         return tl;
     }
 
-    /*
+    /**
      * Updates the save file with the current TaskList.
-     * 
      * @param tl TaskList object containing the current tasks.
      * @throws IOException If there is an error in writing to the save file.
      */

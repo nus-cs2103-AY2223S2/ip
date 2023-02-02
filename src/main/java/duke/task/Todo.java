@@ -1,10 +1,6 @@
 package duke.task;
 
-<<<<<<< HEAD
-/*
-=======
 /**
->>>>>>> branch-A-CodingStandard
  * Represents a task called todo.
  * A todo is a task without any date/time attached to it.
  */

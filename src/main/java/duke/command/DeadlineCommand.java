@@ -9,9 +9,6 @@ import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
 
-import java.io.IOException;
-import java.time.LocalDateTime;
-
 /**
  * Represents a command that adds a deadline to the task list.
  */

@@ -7,7 +7,7 @@ import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
 
-/*
+/**
  * Represents the Duke program, a chatbot that helps you keep track of your tasks.
  */
 public class Duke {
@@ -36,7 +36,7 @@ public class Duke {
         new Duke(txtDir).run();
     }
 
-    /*
+    /**
      * Runs the Duke program.
      */
     public void run() {

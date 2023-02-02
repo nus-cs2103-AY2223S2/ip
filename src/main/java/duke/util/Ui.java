@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 import duke.task.Task;
 
-/*
+/**
  * Represents the user interface of the program.
  * The Ui object is responsible for printing messages to the user.
  */
@@ -59,7 +59,7 @@ public class Ui {
             + ".                        !lG0$0GV,                       .";
     private final Scanner sc;
 
-    /*
+    /**
      * Constructor to create a new Ui object.
      * Scanner is used to read user input and is initialised here.
      */
@@ -71,9 +71,8 @@ public class Ui {
         return rawInputLine.trim().isEmpty();
     }
 
-    /*
+    /**
      * Reads the user input and returns the words as a string array split by spaces.
-     * 
      * @return String array of user input.
      */
     public String[] getUserCommand() {
@@ -86,7 +85,7 @@ public class Ui {
         return fullInputLine.split(" ", 2);
     }
 
-    /*
+    /**
      * Prints the welcome message.
      */
     public void showWelcomeMessage() {
@@ -96,7 +95,7 @@ public class Ui {
                 DASHED_LINE);
     }
 
-    /*
+    /**
      * Prints the goodbye message.
      */
     public void showGoodbyeMessage() {
@@ -105,10 +104,9 @@ public class Ui {
                 DASHED_LINE);
     }
 
-    /*
+    /**
      * Prints the message to the user with the given prefix.
      * Each windows separator is replaced with a line separator.
-     * 
      * @param message Message to be printed.
      */
     public void showToUser(String... message) {
@@ -117,11 +115,10 @@ public class Ui {
         }
     }
 
-    /*
+    /**
      * Formats the message to be printed to the user with the given prefix.
      * Each windows separator is replaced with a line separator.
-     * 
-     * @param Strings of Messages to be printed.
+     * @param message of Messages to be printed.
      * @return Formatted message as a string.
      */
     public String formatMessage(String... message) {
@@ -132,11 +129,9 @@ public class Ui {
         return formattedMessage;
     }
 
-    /*
+    /**
      * Prints the list of tasks to the user.
-     * 
      * @param tl TaskList object containing the list of tasks.
-     * @return Formatted message as a string.
      */
     public void showToUserList(TaskList tl) {
         if (tl.isEmpty()) {
@@ -154,9 +149,8 @@ public class Ui {
         }
     }
 
-    /*
+    /**
      * Prints the string of remaining tasks the user has in the list.
-     * 
      * @param tl TaskList object containing the list of tasks.
      * @return Formatted message as a string.
      */

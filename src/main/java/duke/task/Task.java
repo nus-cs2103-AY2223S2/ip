@@ -49,7 +49,7 @@ public abstract class Task {
         return this.taskName;
     }
 
-    /*
+    /**
      * Marks the task as undone.
      * @return String to be shown to the user.
      */

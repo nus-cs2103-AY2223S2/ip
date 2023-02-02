@@ -7,13 +7,27 @@ import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
 
+/**
+ * Represents a command that finds tasks using a keyword.
+ */
 public class FindCommand extends Command {
     private final String keyword;
 
+    /**
+     * Constructor for a FindCommand object that exits the program.
+     * @param keyword The keyword the FindCommand is searching for.
+     */
     public FindCommand(String keyword) {
         this.keyword = keyword;
     }
 
+    /**
+     * Executes the find command by iterating through the task list.
+     * Finds matching tasks based on the keyword given.
+     * @param tl TaskList which the Duke will modify.
+     * @param ui Ui to be used to facilitate interactions between user and the CLI.
+     * @param storage Storage to be used to handle interactions with the save file.
+     */
     @Override
     public void execute(TaskList tl, Ui ui, Storage storage) {
         ArrayList<Task> matchTasks = new ArrayList<>();
