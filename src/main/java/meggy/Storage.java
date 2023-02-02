@@ -1,8 +1,4 @@
-package Meggy;
-
-import Meggy.Exception.Function;
-import Meggy.Exception.MeggyException;
-import Meggy.Task.UserTask;
+package meggy;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -12,10 +8,14 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Scanner;
 
+import meggy.exception.Function;
+import meggy.exception.MeggyException;
+import meggy.task.UserTask;
+
 /** Save cross-session data in file. */
 public class Storage {
     /** From "command" in a data line to the type of {@link UserTask} to be created. */
-    public final static Map<String, Function<String, UserTask>> DATA_ENTRY_TO_TASK = Map.of(
+    public static final Map<String, Function<String, UserTask>> DATA_ENTRY_TO_TASK = Map.of(
             Resource.CMD_TODO, Util.TODO_NEW,
             Resource.CMD_DDL, Util.DDL_NEW,
             Resource.CMD_EVENT, Util.EVENT_NEW

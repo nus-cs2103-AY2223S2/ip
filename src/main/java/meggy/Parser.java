@@ -1,11 +1,11 @@
-package Meggy;
-
-import Meggy.Exception.Function;
-import Meggy.Exception.MeggyException;
-import Meggy.Exception.MeggyNFException;
-import Meggy.Exception.MeggyNoArgException;
+package meggy;
 
 import java.util.Map;
+
+import meggy.exception.Function;
+import meggy.exception.MeggyException;
+import meggy.exception.MeggyNfException;
+import meggy.exception.MeggyNoArgException;
 
 /** Contains various static parsing methods. */
 public class Parser {
@@ -19,7 +19,7 @@ public class Parser {
      * @param args Non-null. Trimmed arguments string.
      * @return Parsed idx (starts with 0)
      * @throws MeggyNoArgException If args string is empty.
-     * @throws MeggyNFException    If args string's first word is not a signed 32-bit {@link Integer}.
+     * @throws MeggyNfException    If args string's first word is not a signed 32-bit {@link Integer}.
      */
     public static int parseIdx(String args) throws MeggyException {
         final String arg = get1stArg(args);
@@ -30,14 +30,14 @@ public class Parser {
         try {
             idx = Integer.parseInt(arg) - 1;
         } catch (NumberFormatException e) {
-            throw new MeggyNFException(arg);
+            throw new MeggyNfException(arg);
         }
         return idx;
     }
 
     /**
-     * Parses text line into command, arguments, and finds job according to job table. All continuous whitespaces
-     * are replaced with a single whitespace.
+     * Parses text line into command, arguments, and finds job according to job table. All continuous whitespaces are
+     * replaced with a single whitespace.
      *
      * @return Parsed command, job, and argument encapsulated in an {@code JobAndArg} object.
      */
@@ -56,6 +56,7 @@ public class Parser {
 
     /**
      * Gets first argument in string that separates args with whitespace.
+     *
      * @param args Non-null. Trimmed arguments string.
      * @return The substring before the 1st whitespace character, or original string if no whitespace exists.
      */

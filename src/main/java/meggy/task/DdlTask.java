@@ -1,17 +1,17 @@
-package Meggy.Task;
+package meggy.task;
 
-import Meggy.Exception.MeggyException;
-import Meggy.MeggyTime;
-import Meggy.Resource;
+import meggy.MeggyTime;
+import meggy.Resource;
+import meggy.exception.MeggyException;
 
 /** {@link UserTask} with a due time. */
 public class DdlTask extends UserTask {
     /** Bracketed icon of task type. */
-    public final static String LABEL = getTaskTypeLabel(Resource.CMD_DDL);
+    public static final String LABEL = getTaskTypeLabel(Resource.CMD_DDL);
     /** 'Due' keyword formatted to be looked up in user input during parsing. */
-    public final static String DUE_KEYWORD_FORMATTED = formatKeyword(Resource.KW_DUE);
+    public static final String DUE_KEYWORD_FORMATTED = formatKeyword(Resource.KW_DUE);
     /** Formatted 'Due' keyword length. Cached for later use. */
-    public final static int DUE_LEN = DUE_KEYWORD_FORMATTED.length();
+    public static final int DUE_LEN = DUE_KEYWORD_FORMATTED.length();
     /** Due time. */
     public final MeggyTime due;
 

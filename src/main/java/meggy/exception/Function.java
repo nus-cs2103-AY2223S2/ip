@@ -1,4 +1,4 @@
-package Meggy.Exception;
+package meggy.exception;
 
 /**
  * Functional interface that supports {@link MeggyException} signature.

@@ -1,18 +1,16 @@
-package Meggy;
-
-import Meggy.Exception.Function;
-import Meggy.Exception.MeggyException;
-import Meggy.Exception.MeggyNoArgException;
-import Meggy.Task.UserTask;
+package meggy;
 
 import java.io.File;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.IOException;
 import java.util.Map;
-import java.util.Scanner;
 
-/** The chatbot. Supports customized {@link InputStream} and {@link OutputStream}. */
-public class Meggy implements Runnable {
+import meggy.exception.Function;
+import meggy.exception.MeggyException;
+import meggy.exception.MeggyNoArgException;
+import meggy.task.UserTask;
+
+/** The chatbot. After initialization, interact by calling {@code getResponse} method. */
+public class Meggy {
     /**
      * What to do when reaching different commands. Keys: non-null strings. Values: Non-null function that accepts
      * unparsed string arguments and return chatbot response strings.
@@ -23,32 +21,16 @@ public class Meggy implements Runnable {
     public final Function<String, String> unknownCmdBehavior = s -> {
         throw new MeggyException(Resource.errUnknownCmd(Parser.get1stArg(s)));
     };
-    /** Customizable input. */
-    private final Scanner in;
-    /** The text-based UI used by the chatbot. */
-    private final UI ui;
     /** List of tasks. Allows dupes. */
     private final TaskList tasks;
     /** Location to save cross-session data. */
     private final Storage storage;
 
     /**
-     * Creates a chatbot instance with specified IO.
-     *
-     * @param in  Non-null. Customizable input.
-     * @param out Non-null. Customizable output.
+     * Creates a chatbot agent instance.
      */
-    public Meggy(InputStream in, OutputStream out) {
-        if (in == null) {
-            throw new NullPointerException("InputStream is null");
-        }
-        if (out == null) {
-            throw new NullPointerException("OutputStream is null");
-        }
-        this.in = new Scanner(in);
-        this.ui = new UI(out);
+    public Meggy() {
         tasks = new TaskList();
-        storage = new Storage(new File(Util.DATA_FILE_PATH));
         usrCmdToJob = Map.of(
                 Resource.CMD_EXIT, s -> Resource.FAREWELL,
                 Resource.CMD_LIST, s -> Resource.NOTIF_LIST + tasks,
@@ -60,7 +42,10 @@ public class Meggy implements Runnable {
                 Resource.CMD_DEL, this::deleteTask,
                 Resource.CMD_FIND, this::find
         );
+        storage = new Storage(new File(Util.DATA_FILE_PATH));
+        storage.load(tasks);
     }
+
 
     /**
      * Updates the status of the user task specified by index.
@@ -78,7 +63,7 @@ public class Meggy implements Runnable {
             return e.getMessage() + Util.usageIdxCmd(newStatus ? Resource.CMD_MARK : Resource.CMD_UNMK);
         }
         final UserTask task = tasks.get(idx);
-        task.status = newStatus;
+        task.setDone(newStatus);
         return (newStatus ? Resource.NOTIF_MARK : Resource.NOTIF_UNMK) + Resource.TASK_STRING_INDENT + task + '\n';
     }
 
@@ -101,8 +86,9 @@ public class Meggy implements Runnable {
      *
      * @param arg Non-null. Index (start with 1) string of task to be updated.
      * @return Response to 'delete' command.
+     * @throws MeggyException If storage file IO throws {@link IOException}.
      */
-    private String deleteTask(String arg) {
+    private String deleteTask(String arg) throws MeggyException {
         final int idx;
         try {
             idx = Parser.parseIdx(arg);
@@ -111,11 +97,7 @@ public class Meggy implements Runnable {
             return e.getMessage() + Util.usageIdxCmd(Resource.CMD_DEL);
         }
         final UserTask task = tasks.remove(idx);
-        try {
-            storage.save(tasks);
-        } catch (MeggyException e) {
-            ui.dispLn(e.getMessage());
-        }
+        storage.save(tasks);
         return Resource.NOTIF_DEL + reportChangedTaskAndList(task);
     }
 
@@ -148,39 +130,20 @@ public class Meggy implements Runnable {
         return Resource.NOTIF_FIND + ans;
     }
 
-    /** Interacts with user through designated IO. */
-    @Override
-    public void run() {
-        // Front page
-        ui.disp(Resource.MSG_HD);
-        ui.dispLn(Resource.MEGGY_LOGO);
-        ui.disp(Resource.GREETINGS);
-        ui.disp(Resource.MSG_TL);
-        storage.load(tasks);
-        while (in.hasNextLine()) { // reads input and responds in each iteration
-            //Parse command and args
-            final Parser.JobAndArg<String> jobAndArg = Parser.parseJobAndArg(usrCmdToJob, in.nextLine());
+    /**
+     * Parses and executes user's input line.
+     *
+     * @param in Non-null. User's raw input line.
+     * @return Complete response of this chatbot. Either the response of a valid query or error message.
+     */
+    public String getResponse(String in) {
+        try {
+            final Parser.JobAndArg<String> jobAndArg = Parser.parseJobAndArg(usrCmdToJob, in);
             final Function<String, String> job = jobAndArg.job == null ? unknownCmdBehavior : jobAndArg.job;
-            //Execute commands and display results
-            ui.disp(Resource.MSG_HD);
-            String response;
-            try {
-                response = job.apply(jobAndArg.args);
-            } catch (MeggyException e) {
-                response = e.getMessage();
-            }
-            ui.disp(response);
-            ui.disp(Resource.MSG_TL);
-            if (Resource.CMD_EXIT.equals(jobAndArg.cmd)) {
-                in.close();
-                ui.close();
-                return;
-            }
+            return job.apply(jobAndArg.args);
+        } catch (MeggyException e) {
+            return e.getMessage();
         }
-        ui.dispLn("WARNING: REACHED END OF INPUT WITHOUT 'BYE' COMMAND");
-    }
-
-    public static void main(String[] args) {
-        new Meggy(System.in, System.out).run();
+        // if (Resource.CMD_EXIT.equals(jobAndArg.cmd)) return;
     }
 }
