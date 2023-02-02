@@ -52,6 +52,7 @@ public class TaskList extends ArrayList<Task> {
 
     /**
      * Marks a Task as complete based on a given index.
+     *
      * @param index 1-based index to mark.
      * @return The Task which has been marked.
      * @throws DukeException
@@ -90,4 +91,24 @@ public class TaskList extends ArrayList<Task> {
         }
         return true;
     }
+
+    /**
+     * Returns a new TaskList containing all the Tasks containing a given keyword.
+     *
+     * @param toFind The keyword to search for.
+     * @return New TaskList containing the relevant tasks.
+     */
+    public TaskList findTasks(String toFind) {
+        TaskList results = new TaskList();
+
+        for (int i = 0; i < super.size(); ++i) {
+            Task task = super.get(i);
+            if (task.toString().substring(7).contains(toFind)) {
+                results.addTask(task);
+            }
+        }
+
+        return results;
+    }
 }
+
