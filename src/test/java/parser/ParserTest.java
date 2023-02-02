@@ -1,5 +1,8 @@
 package parser;
 
+import ui.Ui;
+import storage.Storage;
+
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -17,9 +20,8 @@ import commands.DeleteCommand;
 import commands.ExitCommand;
 import commands.ListCommand;
 import commands.MarkCommand;
+
 import javafx.scene.layout.VBox;
-import storage.Storage;
-import ui.Ui;
 
 public class ParserTest {
 

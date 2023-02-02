@@ -1,9 +1,12 @@
 package commands;
 
-import javafx.scene.layout.VBox;
-import storage.Storage;
-import tasklist.TaskList;
 import ui.Ui;
+
+import storage.Storage;
+
+import javafx.scene.layout.VBox;
+
+import tasklist.TaskList;
 
 public class DeleteCommand extends Command {
 

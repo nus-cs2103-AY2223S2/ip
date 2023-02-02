@@ -1,10 +1,16 @@
 package parser;
 
+import ui.Ui;
+
+import storage.Storage;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.stream.Stream;
+
+import javafx.scene.layout.VBox;
 
 import commands.AddCommand;
 import commands.Command;
@@ -14,14 +20,13 @@ import commands.ExitCommand;
 import commands.FindCommand;
 import commands.ListCommand;
 import commands.MarkCommand;
-import javafx.scene.layout.VBox;
-import storage.Storage;
+
 import task.Deadline;
 import task.Event;
 import task.Task;
 import task.Todo;
+
 import tasklist.TaskList;
-import ui.Ui;
 
 public class Parser {
 

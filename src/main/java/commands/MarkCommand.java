@@ -1,9 +1,10 @@
 package commands;
 
-import javafx.scene.layout.VBox;
+import ui.Ui;
 import storage.Storage;
 import tasklist.TaskList;
-import ui.Ui;
+
+import javafx.scene.layout.VBox;
 
 public class MarkCommand extends Command {
 

@@ -1,8 +1,10 @@
 package commands;
 
-import javafx.scene.layout.VBox;
-import storage.Storage;
 import ui.Ui;
+
+import storage.Storage;
+
+import javafx.scene.layout.VBox;
 
 public class ExitCommand extends Command {
 

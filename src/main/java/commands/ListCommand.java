@@ -1,9 +1,11 @@
 package commands;
 
-import javafx.scene.layout.VBox;
-import storage.Storage;
-import tasklist.TaskList;
 import ui.Ui;
+import storage.Storage;
+
+import tasklist.TaskList;
+
+import javafx.scene.layout.VBox;
 
 public class ListCommand extends Command {
 

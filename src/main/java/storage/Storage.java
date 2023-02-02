@@ -1,5 +1,13 @@
 package storage;
 
+import parser.Parser;
+
+import task.Task;
+
+import tasklist.TaskList;
+
+import ui.Ui;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -16,10 +24,6 @@ import java.util.stream.Stream;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
-import parser.Parser;
-import task.Task;
-import tasklist.TaskList;
-import ui.Ui;
 
 public class Storage {
 

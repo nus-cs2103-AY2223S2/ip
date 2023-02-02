@@ -1,10 +1,14 @@
 package commands;
 
-import javafx.scene.layout.VBox;
-import parser.Parser;
-import storage.Storage;
-import tasklist.TaskList;
 import ui.Ui;
+
+import storage.Storage;
+
+import parser.Parser;
+
+import tasklist.TaskList;
+
+import javafx.scene.layout.VBox;
 
 public class FindCommand extends Command {
 

@@ -1,5 +1,9 @@
 package ui;
 
+import parser.Parser;
+
+import storage.Storage;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -9,8 +13,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import parser.Parser;
-import storage.Storage;
+
 import task.Deadline;
 import task.Event;
 import task.Task;

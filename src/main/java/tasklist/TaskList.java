@@ -1,12 +1,15 @@
 package tasklist;
 
+import ui.Ui;
+
+import storage.Storage;
+
+import task.Task;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import javafx.scene.layout.VBox;
-import storage.Storage;
-import task.Task;
-import ui.Ui;
 
 public class TaskList {
 

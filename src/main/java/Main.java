@@ -1,5 +1,13 @@
-
 import commands.Command;
+
+import parser.Parser;
+
+import storage.Storage;
+
+import tasklist.TaskList;
+
+import ui.Ui;
+
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -14,10 +22,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import parser.Parser;
-import storage.Storage;
-import tasklist.TaskList;
-import ui.Ui;
 
 public class Main extends Application {
 
