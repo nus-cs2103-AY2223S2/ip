@@ -26,7 +26,6 @@ public class Fideline {
     /** Handler for display messages to the user */
     private Ui ui;
 
-
     /**
      * Boots up Fideline. Attempts to load existing saved data.
      *

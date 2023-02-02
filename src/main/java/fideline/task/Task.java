@@ -1,5 +1,6 @@
 package fideline.task;
 
+
 /**
  * Representation of a task that can be completed.
  *
@@ -7,11 +8,14 @@ package fideline.task;
  */
 public abstract class Task {
 
+
     /** Title describing the task */
     private String description;
 
+
     /** Status that indicates if the task is done */
     private boolean isDone;
+
 
     /**
      * Constructs a task object that has a description. Tasks
@@ -24,6 +28,7 @@ public abstract class Task {
         this.isDone = false;
     }
 
+
     /**
      * Returns string representation of the task.
      *
@@ -33,6 +38,7 @@ public abstract class Task {
         return (isDone ? "[X] " : "[ ] ") + description;
     }
 
+
     /**
      * Changes status of the task to done.
      */
@@ -40,11 +46,22 @@ public abstract class Task {
         this.isDone = true;
     }
 
+
     /**
      * Changes status of the task to not done.
      */
     public void unmark() {
         this.isDone = false;
+    }
+
+
+    /**
+     * Returns description of the task.
+     *
+     * @return Description of the task.
+     */
+    public String getDescription() {
+        return description;
     }
 
 }

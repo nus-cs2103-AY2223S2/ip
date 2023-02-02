@@ -58,11 +58,10 @@ public class Storage {
             Scanner fileScan = new Scanner(dataFile);
             String dataString = "";
             while (fileScan.hasNext()) {
+                String s = fileScan.nextLine();
                 if (lineCounter != lineNum) {
-                    dataString += fileScan.nextLine();
+                    dataString += s;
                     dataString += "\n";
-                } else {
-                    fileScan.nextLine();
                 }
                 lineCounter++;
             }
@@ -70,7 +69,11 @@ public class Storage {
                     : dataString.substring(0, dataString.length() - 1);
             FileWriter fw = new FileWriter(dataFile);
             PrintWriter pw = new PrintWriter(fw);
-            pw.println(dataString);
+            if (dataString.length() != 0) {
+                pw.println(dataString);
+            } else {
+                pw.print("");
+            }
             pw.close();
         } catch (IOException e) {
             throw new DataFileInteractionException(e.getMessage());

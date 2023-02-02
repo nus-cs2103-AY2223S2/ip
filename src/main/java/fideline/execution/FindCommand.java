@@ -1,22 +1,33 @@
 package fideline.execution;
 
+
 import fideline.save.Storage;
 import fideline.task.TaskManager;
 import fideline.user.Ui;
 
 
+
+
 /**
- * Shows the user the list of all existing tasks.
+ * Shows the user a list of all existing tasks that have
+ * descriptions that contain the given input.
  *
  * @author Fun Leon
  */
 
 
-public class ListCommand extends Command {
+public class FindCommand extends Command {
+
+
+    private String findString;
+    public FindCommand(String findString) {
+        this.findString = findString;
+    }
 
 
     /**
-     * Fetches list of all existing tasks from the taskmanager.
+     * Fetches list of all existing tasks from the taskmanager that contain
+     * the given string.
      *
      * @param taskManager Manager for existing tasks and creation of new ones.
      * @param storage     Handler for storage of existing tasks locally.
@@ -24,11 +35,11 @@ public class ListCommand extends Command {
      */
     @Override
     public void execute(TaskManager taskManager, Storage storage, Ui ui) {
-        String s = taskManager.getTaskListString();
+        String s = taskManager.findTask(findString);
         if (s.equals("")) {
-            ui.emptyListMsg();
+            ui.emptyFindMsg();
         } else {
-            ui.listMsg(s);
+            ui.findMsg(s);
         }
     }
 }

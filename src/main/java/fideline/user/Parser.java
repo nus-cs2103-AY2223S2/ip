@@ -16,15 +16,18 @@ import fideline.execution.CreateEventCommand;
 import fideline.execution.CreateTodoCommand;
 import fideline.execution.DeleteCommand;
 import fideline.execution.ExitCommand;
+import fideline.execution.FindCommand;
 import fideline.execution.ListCommand;
 import fideline.execution.MarkCommand;
 import fideline.execution.UnmarkCommand;
 
 public class Parser {
 
+
     private static final String[] possibleCommandsArr = {
-        "bye", "list", "todo", "deadline", "event", "mark", "unmark", "delete"
+        "bye", "list", "todo", "deadline", "event", "mark", "unmark", "delete", "find"
     };
+
 
     public static Command getCommand(String userInput) throws FidelineException {
         ArrayList<String> possibleCommandsList = new ArrayList<>();
@@ -42,7 +45,7 @@ public class Parser {
                 // error for unknown command
                 throw new UnknownCommandException();
             }
-        // below handles commands with arguments
+            // below handles commands with arguments
         } else if (userInput.startsWith("todo ")) {
             return new CreateTodoCommand(userInput.substring(5, userInput.length()));
         } else if (userInput.startsWith("deadline ")) {
@@ -91,25 +94,27 @@ public class Parser {
             }
         } else if (userInput.startsWith("mark ")) {
             try {
-                int taskNum = Integer.valueOf(userInput.substring(5, userInput.length()));
+                int taskNum = Integer.parseInt(userInput.substring(5, userInput.length()));
                 return new MarkCommand(taskNum);
             } catch (NumberFormatException nfe) {
                 throw new InvalidArgumentException("integer (e.g: mark 2)");
             }
         } else if (userInput.startsWith("unmark ")) {
             try {
-                int taskNum = Integer.valueOf(userInput.substring(7, userInput.length()));
+                int taskNum = Integer.parseInt(userInput.substring(7, userInput.length()));
                 return new UnmarkCommand(taskNum);
             } catch (NumberFormatException nfe) {
                 throw new InvalidArgumentException("integer (e.g: unmark 2)");
             }
         } else if (userInput.startsWith("delete ")) {
             try {
-                int taskNum = Integer.valueOf(userInput.substring(7, userInput.length()));
+                int taskNum = Integer.parseInt(userInput.substring(7, userInput.length()));
                 return new DeleteCommand(taskNum);
             } catch (NumberFormatException nfe) {
                 throw new InvalidArgumentException("integer! (e.g: delete 2");
             }
+        } else if (userInput.startsWith("find ")) {
+            return new FindCommand(userInput.substring(5, userInput.length()));
         }
         throw new UnknownCommandException();
     }

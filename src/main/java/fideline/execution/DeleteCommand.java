@@ -27,7 +27,7 @@ public class DeleteCommand extends Command {
             storage.deleteLine(taskNum);
             ui.deleteMsg(s, taskManager.getTaskCount());
         } else {
-            throw new InvalidArgumentException("task! (the one given does not exist!)");
+            throw new InvalidArgumentException("task!\n(the one given does not exist!)");
         }
     }
 }
