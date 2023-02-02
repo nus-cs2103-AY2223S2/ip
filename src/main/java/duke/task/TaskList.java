@@ -2,6 +2,7 @@ package duke.task;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 /**
  * A wrapper class for arraylist of tasks
@@ -28,6 +29,7 @@ public class TaskList {
         this();
 
         tasks.addAll(Arrays.asList(taskArr));
+        Collections.sort(tasks);
     }
 
     /**
@@ -44,6 +46,7 @@ public class TaskList {
      */
     public void addTask(Task task) {
         tasks.add(task);
+        Collections.sort(tasks);
     }
 
     /**
