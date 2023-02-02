@@ -16,4 +16,12 @@ public class Deadline extends Task {
         String dateString = date.format(dateFormatter);
         return taskType + super.toString() + " (by: " + dateString + ")";
     }
+
+    @Override
+    public String toStorageData() {
+        String completed = this.getStatusIcon();
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d MMM u");
+        String dateString = date.format(dateFormatter);
+        return taskType + "//" + completed + "//" + description + "//" + dateString;
+    }
 }

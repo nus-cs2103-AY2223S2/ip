@@ -13,4 +13,10 @@ public class Event extends Task {
     public String toString() {
         return taskType + super.toString() + " (from: " + from + " to:" + to + ")";
     }
+
+    @Override
+    public String toStorageData() {
+        String completed = getStatusIcon();
+        return taskType + "//" + completed + "//" + description + "//" + from + "//" + to;
+    }
 }

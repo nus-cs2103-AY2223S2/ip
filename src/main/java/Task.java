@@ -19,7 +19,7 @@ public class Task {
         return (isDone ? "X" : " ");
     }
 
-    public void markAsDone() {
+    public void mark() {
         isDone = true;
     }
 
@@ -30,5 +30,9 @@ public class Task {
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "]" + this.description;
+    }
+
+    public String toStorageData() {
+        return this.toString();
     }
 }
