@@ -19,5 +19,8 @@ text-ui-test/EXPECTED-UNIX.TXT
 # Java class files
 *.class
 
+# JAR files
+*.jar
+
 # Local storage files
 duke.txt
