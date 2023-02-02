@@ -19,15 +19,15 @@ public class Cbot {
 
     private TaskList tl;
     private final FileStuff fs;
-    private boolean doBye;
-    private boolean prevBad;
+    private boolean isBye;
+    private boolean prevWasBad;
 
     /**
      * Constructs a fresh Cbot instance.
      */
     public Cbot() {
         this.fs = new FileStuff(PATH);
-        this.doBye = false;
+        this.isBye = false;
 
         try {
             this.tl = fs.loadFile();
@@ -43,7 +43,7 @@ public class Cbot {
      * @return true if BYE has been called.
      */
     public boolean isBye() {
-        return this.doBye;
+        return this.isBye;
     }
 
     /**
@@ -52,7 +52,7 @@ public class Cbot {
      * @return true if an exception was just thrown.
      */
     public boolean isBad() {
-        return this.prevBad;
+        return this.prevWasBad;
     }
 
     /**
@@ -80,23 +80,23 @@ public class Cbot {
             p = new Parser(input);
 
             if (p.isBye()) {
-                this.doBye = true;
+                this.isBye = true;
             }
 
             output = p.respond(tl);
-            this.prevBad = false;
+            this.prevWasBad = false;
 
             if (p.needSave()) {
                 this.fs.saveFile(tl);
             }
         } catch (BadInputException e) {
-            this.prevBad = true;
+            this.prevWasBad = true;
             return UI.warnBad(e);
         } catch (PoorInputException e) {
-            this.prevBad = true;
+            this.prevWasBad = true;
             return UI.warn(e);
         } catch (DateTimeParseException e) {
-            this.prevBad = true;
+            this.prevWasBad = true;
             return UI.warnTime();
         }
 

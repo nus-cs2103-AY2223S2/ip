@@ -128,7 +128,7 @@ public enum Command {
      * @return Whether the text means to call this Command.
      * @see Parser
      */
-    boolean match(String input) {
+    boolean matches(String input) {
         if (this.hasText && input.length() > getLen()) {
             return input.substring(0, getLen()).toLowerCase().equals(this.str);
         } else {
@@ -157,7 +157,7 @@ public enum Command {
      * @param text The body text to check.
      * @return Whether there is missing body text, given the Command type.
      */
-    boolean missingText(String text) {
+    boolean isMissingText(String text) {
         return (this.hasText && text.length() == 0);
     }
 }

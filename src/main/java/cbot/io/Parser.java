@@ -36,7 +36,7 @@ public class Parser {
         }
 
         for (Command c : Command.values()) {
-            if (c.match(input)) {
+            if (c.matches(input)) {
                 this.c = c;
                 this.text = c.getText(input);
                 matchFound = true;
@@ -79,7 +79,7 @@ public class Parser {
     public String respond(TaskList tl) throws PoorInputException, DateTimeParseException {
         String output;
 
-        if (this.c.missingText(this.text)) {
+        if (this.c.isMissingText(this.text)) {
             throw new PoorInputException("That command needs an input");
         }
 
