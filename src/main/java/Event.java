@@ -14,7 +14,7 @@ public class Event extends Task{
     public void printTask(){
         System.out.print("[E]");
         super.printTask();
-        System.out.println("(from: " + startDate + "to: " + endDate + ")");
+        System.out.println("(from: " + startDate + " to: " + endDate + ")");
 
     }
 
