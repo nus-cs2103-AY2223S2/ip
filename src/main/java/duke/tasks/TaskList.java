@@ -92,5 +92,18 @@ public class TaskList {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        int i = 1;
+        for (Task task : taskList) {
+            sb.append(i);
+            sb.append(". ");
+            sb.append(task);
+            sb.append("\n");
+            ++i;
+        }
+        return sb.toString();
+    }
 
 }

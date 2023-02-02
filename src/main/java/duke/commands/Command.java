@@ -8,5 +8,5 @@ public abstract class Command {
     /**
      * Performs an action in response to the command.
      */
-    public abstract void action();
+    public abstract String action();
 }

@@ -43,10 +43,10 @@ public class UnmarkCommand extends Command {
      * Unmark the task on the TaskList.
      */
     @Override
-    public void action() {
+    public String action() {
         Task task = taskList.unmarkTask(index);
-        ui.unmarkResponse(task);
         storage.editStorage(taskList.getTaskList());
         storage.saveToFile(file);
+        return ui.unmarkResponse(task);
     }
 }

@@ -20,8 +20,8 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void action() {
+    public String action() {
         List<Task> matchedTasks = taskList.findTask(string);
-        ui.findResponse(matchedTasks);
+        return ui.findResponse(matchedTasks);
     }
 }

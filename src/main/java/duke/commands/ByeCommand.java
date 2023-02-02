@@ -22,8 +22,7 @@ public class ByeCommand extends Command {
      * Says bye and exit.
      */
     @Override
-    public void action() {
-        ui.byeMessage();
-        System.exit(0);
+    public String action() {
+        return ui.byeMessage();
     }
 }

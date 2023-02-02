@@ -44,10 +44,10 @@ public class DeleteCommand extends Command {
      * Delete the task from the TaskList.
      */
     @Override
-    public void action() {
+    public String action() {
         Task task = taskList.removeTask(index);
-        ui.deleteResponse(task, taskList);
         storage.editStorage(taskList.getTaskList());
         storage.saveToFile(file);
+        return ui.deleteResponse(task, taskList);
     }
 }
