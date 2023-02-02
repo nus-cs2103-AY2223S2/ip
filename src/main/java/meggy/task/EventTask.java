@@ -1,20 +1,20 @@
-package Meggy.Task;
-
-import Meggy.Exception.MeggyException;
-import Meggy.MeggyTime;
-import Meggy.Resource;
+package meggy.task;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import meggy.MeggyTime;
+import meggy.Resource;
+import meggy.exception.MeggyException;
+
 /** {@link UserTask} with a start time and an end time. */
 public class EventTask extends UserTask {
     /** Bracketed icon of task type. */
-    public final static String LABEL = getTaskTypeLabel(Resource.CMD_EVENT);
+    public static final String LABEL = getTaskTypeLabel(Resource.CMD_EVENT);
     /** 'Start' keyword formatted to be looked up in user input during parsing. */
-    public final static String START_KEYWORD_FORMATTED = formatKeyword(Resource.KW_STT);
+    public static final String START_KEYWORD_FORMATTED = formatKeyword(Resource.KW_STT);
     /** 'End' keyword formatted to be looked up in user input during parsing. */
-    public final static String END_KEYWORD_FORMATTED = formatKeyword(Resource.KW_END);
+    public static final String END_KEYWORD_FORMATTED = formatKeyword(Resource.KW_END);
     /** Start time. */
     public final MeggyTime start;
     /** End time. */
@@ -70,8 +70,8 @@ public class EventTask extends UserTask {
     /** @inheritDoc */
     @Override
     public String encode() {
-        return Resource.CMD_EVENT + ' ' + desc + ' ' + START_KEYWORD_FORMATTED + start.encode() + ' ' +
-                END_KEYWORD_FORMATTED + end.encode();
+        return Resource.CMD_EVENT + ' ' + desc + ' ' + START_KEYWORD_FORMATTED + start.encode() + ' '
+                + END_KEYWORD_FORMATTED + end.encode();
     }
 
     /** @inheritDoc */

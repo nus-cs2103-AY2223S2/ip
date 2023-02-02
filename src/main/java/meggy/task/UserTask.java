@@ -1,16 +1,16 @@
-package Meggy.Task;
+package meggy.task;
 
-import Meggy.Exception.MeggyException;
-import Meggy.Exception.MeggyNoArgException;
-import Meggy.Resource;
-import Meggy.Util;
+import meggy.Resource;
+import meggy.Util;
+import meggy.exception.MeggyException;
+import meggy.exception.MeggyNoArgException;
 
 /** Entries to be recorded by the chatbot. */
 public abstract class UserTask {
     /** Task description. */
     public final String desc;
     /** Task completion status. */
-    public boolean status;
+    private boolean isDone;
 
     /** @param desc Non-null. Description string of task with command removed. */
     public UserTask(String desc) throws MeggyException {
@@ -18,7 +18,7 @@ public abstract class UserTask {
             throw new MeggyNoArgException();
         }
         this.desc = desc;
-        status = false;
+        isDone = false;
     }
 
     /**
@@ -41,15 +41,20 @@ public abstract class UserTask {
         return '/' + keyword + ' ';
     }
 
+    /** Update the completion status of this task. */
+    public void setDone(boolean done) {
+        this.isDone = done;
+    }
+
     /**
      * @return The string representation of this task in data file format. Currently: re-create the command that would
-     * add the task.
+     *         add the task.
      */
     public abstract String encode();
 
     /** @return The string representation of this task in text UI. */
     @Override
     public String toString() {
-        return Util.parenthesize(status ? Resource.DONE_MK : ' ') + ' ' + desc;
+        return Util.parenthesize(isDone ? Resource.DONE_MK : ' ') + ' ' + desc;
     }
 }

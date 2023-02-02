@@ -1,4 +1,4 @@
-package Meggy.Task;
+package meggy.task;
 
 /** Keyword-position pair. Enables index sorting of keywords by index positions. */
 public class KwIdxPair implements Comparable<KwIdxPair> {

@@ -1,4 +1,4 @@
-package Meggy;
+package meggy;
 
 import java.io.Closeable;
 import java.io.OutputStream;

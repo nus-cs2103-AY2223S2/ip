@@ -1,4 +1,4 @@
-package Meggy;
+package meggy;
 
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
@@ -30,8 +30,8 @@ public class MeggyTime {
         for (int j = 0; j < dateFmts.length; j++) {
             final String dateFmt = dateFmts[j];
             for (String dateSep : dateSeps) {
-                final String datePart = dateSep == null ? datePartLong[j] :
-                        dateFmt.charAt(0) + dateSep + dateFmt.charAt(1) + dateSep + dateFmt.charAt(2);
+                final String datePart = dateSep == null ? datePartLong[j]
+                        : dateFmt.charAt(0) + dateSep + dateFmt.charAt(1) + dateSep + dateFmt.charAt(2);
                 for (String timeSep : timeSeps) {
                     final String timePart = "HH" + timeSep + "mm";
                     FORMATTERS[i++] = DateTimeFormatter.ofPattern(datePart + ' ' + timePart);
@@ -59,8 +59,8 @@ public class MeggyTime {
     }
 
     /**
-     * Factory method. Trims none-null strings. It also accepts {@code null} value, in which case it returns the
-     * cached {@code NA} value.
+     * Factory method. Trims none-null strings. It also accepts {@code null} value, in which case it returns the cached
+     * {@code NA} value.
      *
      * @param time Untrimmed time value to be interpreted or {@code null} if {@code NA} value is intended.
      */

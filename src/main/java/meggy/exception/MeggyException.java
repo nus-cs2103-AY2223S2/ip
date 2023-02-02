@@ -1,6 +1,6 @@
-package Meggy.Exception;
+package meggy.exception;
 
-import Meggy.Resource;
+import meggy.Resource;
 
 /** {@link Exception} that will eventually print out with {@code Resource.ERR_BASE} prefix. */
 public class MeggyException extends Exception {

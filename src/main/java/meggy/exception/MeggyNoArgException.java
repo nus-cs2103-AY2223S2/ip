@@ -1,6 +1,6 @@
-package Meggy.Exception;
+package meggy.exception;
 
-import Meggy.Resource;
+import meggy.Resource;
 
 /** Deals with the absence of argument after commands that needs argument(s). */
 public class MeggyNoArgException extends MeggyException {

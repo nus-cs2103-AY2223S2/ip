@@ -1,15 +1,15 @@
-package Meggy;
-
-import Meggy.Exception.Function;
-import Meggy.Exception.MeggyException;
-import Meggy.Exception.MeggyNoArgException;
-import Meggy.Task.UserTask;
+package meggy;
 
 import java.io.File;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Map;
 import java.util.Scanner;
+
+import meggy.exception.Function;
+import meggy.exception.MeggyException;
+import meggy.exception.MeggyNoArgException;
+import meggy.task.UserTask;
 
 /** The chatbot. Supports customized {@link InputStream} and {@link OutputStream}. */
 public class Meggy implements Runnable {
@@ -62,6 +62,7 @@ public class Meggy implements Runnable {
         );
     }
 
+
     /**
      * Updates the status of the user task specified by index.
      *
@@ -78,7 +79,7 @@ public class Meggy implements Runnable {
             return e.getMessage() + Util.usageIdxCmd(newStatus ? Resource.CMD_MARK : Resource.CMD_UNMK);
         }
         final UserTask task = tasks.get(idx);
-        task.status = newStatus;
+        task.setDone(newStatus);
         return (newStatus ? Resource.NOTIF_MARK : Resource.NOTIF_UNMK) + Resource.TASK_STRING_INDENT + task + '\n';
     }
 
@@ -178,9 +179,5 @@ public class Meggy implements Runnable {
             }
         }
         ui.dispLn("WARNING: REACHED END OF INPUT WITHOUT 'BYE' COMMAND");
-    }
-
-    public static void main(String[] args) {
-        new Meggy(System.in, System.out).run();
     }
 }

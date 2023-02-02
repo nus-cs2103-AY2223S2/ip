@@ -1,12 +1,12 @@
-package Meggy.Task;
+package meggy.task;
 
-import Meggy.Exception.MeggyException;
-import Meggy.Resource;
+import meggy.Resource;
+import meggy.exception.MeggyException;
 
 /** {@link UserTask} that has no time whatsoever */
 public class TodoTask extends UserTask {
     /** Bracketed icon of task type. */
-    public final static String LABEL = getTaskTypeLabel(Resource.CMD_TODO);
+    public static final String LABEL = getTaskTypeLabel(Resource.CMD_TODO);
 
     /** @param desc Non-null. Description string of task with command removed. */
     public TodoTask(String desc) throws MeggyException {

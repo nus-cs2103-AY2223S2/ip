@@ -1,14 +1,14 @@
-package Meggy.Exception;
+package meggy.exception;
 
-import Meggy.Resource;
+import meggy.Resource;
 
 /** Converts upcoming {@link IndexOutOfBoundsException} into {@link MeggyException}. */
-public class MeggyIOBException extends MeggyException {
+public class MeggyIobException extends MeggyException {
     /**
      * @param idx      Index (starts with 0) in question.
      * @param listSize Size of list that would cause {@link IndexOutOfBoundsException} when queried with idx.
      */
-    public MeggyIOBException(int idx, int listSize) {
+    public MeggyIobException(int idx, int listSize) {
         super(Resource.errOutOfBounds(idx, listSize));
     }
 }

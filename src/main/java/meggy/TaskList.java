@@ -1,9 +1,9 @@
-package Meggy;
-
-import Meggy.Exception.MeggyIOBException;
-import Meggy.Task.UserTask;
+package meggy;
 
 import java.util.ArrayList;
+
+import meggy.exception.MeggyIobException;
+import meggy.task.UserTask;
 
 /** {@link ArrayList} implementation of chat bot task list. Note that task deletion takes O(n) time. */
 public class TaskList extends ArrayList<UserTask> {
@@ -11,11 +11,11 @@ public class TaskList extends ArrayList<UserTask> {
         super();
     }
 
-    /** @throws MeggyIOBException If the parsed index is out of bounds with respect to this tasks list. */
-    public void boundsCheck(int idx) throws MeggyIOBException {
+    /** @throws MeggyIobException If the parsed index is out of bounds with respect to this tasks list. */
+    public void boundsCheck(int idx) throws MeggyIobException {
         final int size = size();
         if (idx < 0 || (idx >= size)) {
-            throw new MeggyIOBException(idx, size);
+            throw new MeggyIobException(idx, size);
         }
     }
 

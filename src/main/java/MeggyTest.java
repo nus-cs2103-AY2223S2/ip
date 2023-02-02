@@ -1,10 +1,4 @@
-import Meggy.Exception.MeggyException;
-import Meggy.Meggy;
-import Meggy.MeggyTime;
-import Meggy.Task.DdlTask;
-import Meggy.Task.EventTask;
-import Meggy.Task.TodoTask;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
@@ -13,7 +7,14 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.Random;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import meggy.Meggy;
+import meggy.MeggyTime;
+import meggy.exception.MeggyException;
+import meggy.task.DdlTask;
+import meggy.task.EventTask;
+import meggy.task.TodoTask;
 
 /**
  * For testing purpose only.
@@ -51,8 +52,8 @@ public class MeggyTest {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         new Meggy(new FileInputStream("text-ui-test/input.txt"), out).run();
         String actual = out.toString().replaceAll("\r", "");
-        String expected = new String(new FileInputStream("text-ui-test/EXPECTED.txt").readAllBytes()).
-                replaceAll("\r", "");
+        String expected = new String(new FileInputStream("text-ui-test/EXPECTED.txt").readAllBytes())
+                .replaceAll("\r", "");
         assertEquals(expected, actual);
         System.out.println(actual);
     }
@@ -80,7 +81,8 @@ public class MeggyTest {
     @Test
     public void eventTaskIntegrityTest() throws MeggyException {
         for (int k = 0; k < N_TEST; k++) {
-            EventTask a = EventTask.of(randString() + EventTask.START_KEYWORD_FORMATTED + randMeggyTime() + EventTask.END_KEYWORD_FORMATTED + randMeggyTime());
+            EventTask a = EventTask.of(randString() + EventTask.START_KEYWORD_FORMATTED + randMeggyTime()
+                    + EventTask.END_KEYWORD_FORMATTED + randMeggyTime());
             String data = a.encode();
             EventTask b = EventTask.of(data.substring(data.indexOf(' ') + 1));
             assertEquals(a, b);

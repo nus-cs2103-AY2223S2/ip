@@ -8,7 +8,7 @@
               __/ | __/ | __/ |
              |___/ |___/ |___/
 
- Wommy! Get REKT by the upcoming star of Inkopolis, Meggy.Meggy!
+ Wommy! Get REKT by the upcoming star of Inkopolis, Meggy!
 ------------------------------------------------------------
 
 >------------------------------------------------------------
@@ -102,22 +102,22 @@
 ------------------------------------------------------------
 
 >------------------------------------------------------------
- OOPS!!! Can not retrieve item with non-positive index (0).
+ OOPS!!! Can't retrieve item with non-positive index (0).
  Usage: mark <idx: integer between 1 and list size (inclusive)>
 ------------------------------------------------------------
 
 >------------------------------------------------------------
- OOPS!!! Can not retrieve item with index 100 from a list of size 8.
+ OOPS!!! Can't retrieve item with index 100 from a list of size 8.
  Usage: unmark <idx: integer between 1 and list size (inclusive)>
 ------------------------------------------------------------
 
 >------------------------------------------------------------
- OOPS!!! Can not interpret "a" as an index number.
+ OOPS!!! Can't interpret "a" as an index number.
  Usage: unmark <idx: integer between 1 and list size (inclusive)>
 ------------------------------------------------------------
 
 >------------------------------------------------------------
- OOPS!!! Can not retrieve item with non-positive index (-1).
+ OOPS!!! Can't retrieve item with non-positive index (-1).
  Usage: delete <idx: integer between 1 and list size (inclusive)>
 ------------------------------------------------------------
 
@@ -128,12 +128,12 @@
 ------------------------------------------------------------
 
 >------------------------------------------------------------
- OOPS!!! Can not retrieve item with index 100 from a list of size 7.
+ OOPS!!! Can't retrieve item with index 100 from a list of size 7.
  Usage: delete <idx: integer between 1 and list size (inclusive)>
 ------------------------------------------------------------
 
 >------------------------------------------------------------
- OOPS!!! Can not interpret "x" as an index number.
+ OOPS!!! Can't interpret "x" as an index number.
  Usage: delete <idx: integer between 1 and list size (inclusive)>
 ------------------------------------------------------------
 

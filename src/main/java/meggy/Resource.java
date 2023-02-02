@@ -1,71 +1,71 @@
-package Meggy;
+package meggy;
 
 /** Class that stores all customizable data statically. Works like a 'resource pack' */
 public final class Resource {
     /** Prefix of all error messages. */
-    public final static String ERR_BASE = " OOPS!!! ";
+    public static final String ERR_BASE = " OOPS!!! ";
     /** Error message if no argument is provided to a command that needs argument(s). */
-    public final static String ERR_NO_ARGS = "Description of this command cannot be empty.\n";
+    public static final String ERR_NO_ARGS = "Description of this command cannot be empty.\n";
     /** Error message if an error prevents writing to a file. */
-    public final static String ERR_FILE_WRITE = "Can't save data to file. ";
+    public static final String ERR_FILE_WRITE = "Can't save data to file. ";
     /** Error message if an {@link java.io.IOException} prevents file interaction. */
-    public final static String ERR_IO = "An IO error occurred.\n";
+    public static final String ERR_IO = "An IO error occurred.\n";
     /** Error message if an {@link SecurityException} prevents file interaction. */
-    public final static String ERR_NO_FILE_ACCESS = "File access denied by system.\n";
+    public static final String ERR_NO_FILE_ACCESS = "File access denied by system.\n";
     /** Indentation before task string when displaying in list. */
-    public final static String TASK_STRING_INDENT = "    ";
+    public static final String TASK_STRING_INDENT = "    ";
     /** 'Exit' command. */
-    public final static String CMD_EXIT = "bye";
+    public static final String CMD_EXIT = "bye";
     /** 'List' command. */
-    public final static String CMD_LIST = "list";
+    public static final String CMD_LIST = "list";
     /** 'Mark' command. */
-    public final static String CMD_MARK = "mark";
+    public static final String CMD_MARK = "mark";
     /** 'Unmark' command. */
-    public final static String CMD_UNMK = "unmark";
+    public static final String CMD_UNMK = "unmark";
     /** 'Todo' command. */
-    public final static String CMD_TODO = "todo";
+    public static final String CMD_TODO = "todo";
     /** 'Deadline' command. */
-    public final static String CMD_DDL = "deadline";
+    public static final String CMD_DDL = "deadline";
     /** 'Event' command. */
-    public final static String CMD_EVENT = "event";
+    public static final String CMD_EVENT = "event";
     /** 'Delete' command. */
-    public final static String CMD_DEL = "delete";
+    public static final String CMD_DEL = "delete";
     /** 'Find' command. */
-    public final static String CMD_FIND = "find";
+    public static final String CMD_FIND = "find";
     /** 'Due time' keyword of 'deadline' command. */
-    public final static String KW_DUE = "by";
+    public static final String KW_DUE = "by";
     /** 'Start time' keyword of 'event' command. */
-    public final static String KW_STT = "from";
+    public static final String KW_STT = "from";
     /** 'End time' keyword of 'event' command. */
-    public final static String KW_END = "to";
+    public static final String KW_END = "to";
     /** Notification message after 'todo/deadline/event' command. */
-    public final static String NOTIF_ADD = " Got it. Added this task:\n";
+    public static final String NOTIF_ADD = " Got it. Added this task:\n";
     /** Notification message after 'list' command. */
-    public final static String NOTIF_LIST = " Here are the tasks in your list:\n";
+    public static final String NOTIF_LIST = " Here are the tasks in your list:\n";
     /** Notification message after 'mark' command. */
-    public final static String NOTIF_MARK = " Booyah! Marked this task as done:\n";
+    public static final String NOTIF_MARK = " Booyah! Marked this task as done:\n";
     /** Notification message after 'unmark' command. */
-    public final static String NOTIF_UNMK = " OK. Marked this task as not done:\n";
+    public static final String NOTIF_UNMK = " OK. Marked this task as not done:\n";
     /** Notification message after syntax error. */
-    public final static String NOTIF_USAGE = " Usage: ";
+    public static final String NOTIF_USAGE = " Usage: ";
     /** Notification message after 'delete' command. */
-    public final static String NOTIF_DEL = " OK. Removed this task:\n";
+    public static final String NOTIF_DEL = " OK. Removed this task:\n";
     /** Notification message after 'find' command. */
-    public final static String NOTIF_FIND = " Here are the matching tasks in your list:\n";
+    public static final String NOTIF_FIND = " Here are the matching tasks in your list:\n";
     /** Front page wallpaper. */
-    public final static String MEGGY_LOGO = " __  __\n|  \\/  |\n| \\  / | ___  __ _  __ _ _   _\n| |\\/| |/ _ \\/ _`" +
-            " |/ _` | | | |\n| |  | |  __/ (_| | (_| | |_| |\n|_|  |_|\\___|\\__, |\\__, |\\__, |\n              __/ " +
-            "| __/ | __/ |\n             |___/ |___/ |___/\n";
+    public static final String MEGGY_LOGO = " __  __\n|  \\/  |\n| \\  / | ___  __ _  __ _ _   _\n| |\\/| |/ _ \\/ _` |"
+            + "/ _` | | | |\n| |  | |  __/ (_| | (_| | |_| |\n|_|  |_|\\___|\\__, |\\__, |\\__, |\n              __/ | "
+            + "__/ | __/ |\n             |___/ |___/ |___/\n";
     /** Message header. */
-    public final static String MSG_HD = "------------------------------------------------------------\n";
+    public static final String MSG_HD = "------------------------------------------------------------\n";
     /** Message tail. */
-    public final static String MSG_TL = MSG_HD + "\n>";
+    public static final String MSG_TL = MSG_HD + "\n>";
     /** Front page greetings. */
-    public final static String GREETINGS = " Wommy! Get REKT by the upcoming star of Inkopolis, Meggy.Meggy!\n";
+    public static final String GREETINGS = " Wommy! Get REKT by the upcoming star of Inkopolis, Meggy!\n";
     /** Notification message after 'bye' command. */
-    public final static String FAREWELL = " OK gotta go play more Turf Wars. Have a nice day!\n";
+    public static final String FAREWELL = " OK gotta go play more Turf Wars. Have a nice day!\n";
     /** Icon for tasks marked 'done'. */
-    public final static char DONE_MK = 'X';
+    public static final char DONE_MK = 'X';
 
     /** @deprecated Class stores all resource values statically should not be initialized. */
     private Resource() {
@@ -95,8 +95,8 @@ public final class Resource {
      * @param arg Non-null. String in question.
      * @return Error message.
      */
-    public static String errNFE(String arg) {
-        return "Can not interpret \"" + arg + "\" as an index number.\n";
+    public static String errNfe(String arg) {
+        return "Can't interpret \"" + arg + "\" as an index number.\n";
     }
 
     /**
@@ -106,8 +106,8 @@ public final class Resource {
      * @return Message about empty input or unknown command or empty input.
      */
     public static String errUnknownCmd(String cmd) {
-        return "".equals(cmd) ? "Umm that's all white space? Say something! Speak to me!\n" : "Don't know what \"" +
-                cmd + "\" means.\n";
+        return "".equals(cmd) ? "Umm that's all blank? Say something! Speak to me!\n" : "Don't know what \""
+                + cmd + "\" means.\n";
     }
 
     /**
@@ -119,8 +119,8 @@ public final class Resource {
      */
     public static String errOutOfBounds(int idx, int listSize) {
         idx += 1;
-        return "Can not retrieve item with " +
-                (idx > 0 ? "index " + idx + " from a list of size " + listSize : "non-positive index (" + idx + ')')
+        return "Can't retrieve item with " + (
+                idx > 0 ? "index " + idx + " from a list of size " + listSize : "non-positive index (" + idx + ')')
                 + ".\n";
     }
 }

@@ -1,10 +1,10 @@
-package Meggy;
+package meggy;
 
-import Meggy.Exception.Function;
-import Meggy.Task.DdlTask;
-import Meggy.Task.EventTask;
-import Meggy.Task.TodoTask;
-import Meggy.Task.UserTask;
+import meggy.exception.Function;
+import meggy.task.DdlTask;
+import meggy.task.EventTask;
+import meggy.task.TodoTask;
+import meggy.task.UserTask;
 
 /** Class that stores all helper functions and uncustomizable constants statically. */
 public final class Util {
