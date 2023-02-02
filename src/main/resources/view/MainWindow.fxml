@@ -9,7 +9,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: #1F294A;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="launcher.MainWindow">
     <children>
-        <TextField fx:id="userInput" layoutY="558.0" onAction="#handleUserInput" prefHeight="30.0" prefWidth="324.0" promptText="Type something..." style="-fx-background-color: #1F294A;" AnchorPane.bottomAnchor="1.0">
+        <TextField fx:id="userInput" layoutY="558.0" onAction="#handleUserInput" prefHeight="30.0" prefWidth="324.0" promptText="Type something..." style="-fx-background-color: #1F294A; -fx-text-fill: #ffffff;" AnchorPane.bottomAnchor="1.0">
          <font>
             <Font size="14.0" />
          </font>
