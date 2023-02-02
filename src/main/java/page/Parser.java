@@ -76,8 +76,8 @@ public class Parser {
                                     questLog.incompleteQuest(questNum);
                                     ui.printQuestIncompleted(questLog.getQuest(questNum));
                                 } else {
-                                    questLog.deleteQuest(questNum);
                                     ui.printQuestDeleted(questLog.getQuest(questNum));
+                                    questLog.deleteQuest(questNum);
                                 }
                             } catch (NumberFormatException nfe) {
                                 throw new PageException("Sorry, that's not a number!");
