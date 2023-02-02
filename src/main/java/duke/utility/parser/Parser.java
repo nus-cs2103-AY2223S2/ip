@@ -9,10 +9,14 @@ import duke.tasklist.task_types.ToDo;
 import duke.utility.ui.UiMessage;
 
 public class Parser {
-    private static DukeException wrongNumberParam = new DukeException("Wrong number of parameters inserted.");
-    private static DukeException noParamCommand = new DukeException("Command cannot have any parameters");
-    private static DukeException noNumericParam = new DukeException("Parameter is not a numerical value.");
-    private static DukeException noSpecialParam = new DukeException("Missing special param e.g /by, /from, /to");
+    private static DukeException wrongNumberParam =
+            new DukeException("Wrong number of parameters inserted.");
+    private static DukeException noParamCommand =
+            new DukeException("Command cannot have any parameters");
+    private static DukeException noNumericParam =
+            new DukeException("Parameter is not a numerical value.");
+    private static DukeException noSpecialParam =
+            new DukeException("Missing special param e.g /by, /from, /to");
     private static DukeException emptyParam = new DukeException("Empty parameter inserted.");
 
     private static UiMessage printTasks(String[] command, TaskList list) throws DukeException {

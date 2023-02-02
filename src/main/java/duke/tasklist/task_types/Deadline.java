@@ -6,14 +6,14 @@ import duke.duke_exception.DukeException;
 import duke.utility.date.Date;
 
 /**
- * Represents a <code>task</code> object that contains a string holding the
- * <code>deadline</code>.
+ * Represents a <code>task</code> object that contains a string holding the <code>deadline</code>.
  * 
  * 
  * @author Brian Quek
  */
 public class Deadline extends Task {
-    private static DukeException invalidDate = new DukeException("Invalid date input/format. [Format: yyyy-mm-dd] ");
+    private static DukeException invalidDate =
+            new DukeException("Invalid date input/format. [Format: yyyy-mm-dd] ");
     protected Date deadline;
 
     /**
@@ -39,6 +39,7 @@ public class Deadline extends Task {
     }
 
     public String toTextString() {
-        return String.format("D | %s | %s | %s", super.status ? "1" : "0", super.name, this.deadline.dateToFileText());
+        return String.format("D | %s | %s | %s", super.status ? "1" : "0", super.name,
+                this.deadline.dateToFileText());
     }
 }

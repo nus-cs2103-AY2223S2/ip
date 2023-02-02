@@ -4,13 +4,12 @@ import duke.tasklist.TaskList;
 import duke.utility.parser.CommandMap;
 
 public class Ui {
-    private static final String BRACKETS = "_______________________________________________________\n";
+    private static final String BRACKETS =
+            "_______________________________________________________\n";
 
-    private static String logo = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
+    private static String logo =
+            " ____        _        \n" + "|  _ \\ _   _| | _____ \n" + "| | | | | | | |/ / _ \\\n"
+                    + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
     private static String openingMessage = "Welcome to the Duke Bot.\n";
 
     public static void welcomeMessage() {
