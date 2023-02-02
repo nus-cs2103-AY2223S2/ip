@@ -5,6 +5,7 @@ import duke.command.Command;
 import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
+import duke.task.TaskList;
 import duke.ui.Ui;
 
 
@@ -14,17 +15,17 @@ import duke.ui.Ui;
 public class Duke {
 
     private Storage storage;
-    private Storage tasks;
+    private TaskList tasks;
     private Ui ui;
 
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
-            tasks = new Storage(storage.load());
+            tasks = storage.load();
         } catch (DukeException e) {
             ui.showLoadingError(e.getMessage());
-            tasks = new Storage();
+            tasks = new TaskList();
         }
     }
 
@@ -48,7 +49,7 @@ public class Duke {
             } catch (IllegalArgumentException e) {
                 ui.showLoadingError("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             } finally {
-                storage.updateStorage();
+                storage.updateStorage(tasks);
                 ui.showLine();
             }
         }

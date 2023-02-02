@@ -1,4 +1,5 @@
 1. [T][X] read book
-2. [T][X] join sports club
-3. [D][ ] return book (by: Dec 2 2023 01:50 PM)
-4. [E][ ] project meeting (from: Mon 2pm to: 4pm)
+2. [T][ ] join sports club
+3. [T][ ] borrow book
+4. [D][ ] return book (by: Dec 2 2023 01:50 PM)
+5. [E][ ] project meeting (from: Mon 2pm to: 4pm)

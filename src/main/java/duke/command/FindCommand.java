@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.storage.Storage;
 import duke.task.Task;
+import duke.task.TaskList;
 import duke.ui.Ui;
 
 import java.util.ArrayList;
@@ -20,15 +21,15 @@ public class FindCommand extends Command {
         this.keywords = new ArrayList<>();
     }
 
-    public boolean execute(Storage tl, Ui ui, Storage storage) {
-        for (Task t : tl.getTasks()) {
-            if (t.getDescription().indexOf(keyword) != -1) {    // keyword is found in the task
-                this.keywords.add(t);
+    public boolean execute(TaskList tl, Ui ui, Storage storage) {
+        for (Task task : tl.getTasks()) {
+            if (task.getDescription().indexOf(keyword) != -1) {    // keyword is found in the task
+                this.keywords.add(task);
             }
         }
         System.out.println("Here are the matching tasks in your list: ");
-        for (Task t : this.keywords) {
-            System.out.println(t);
+        for (Task task : this.keywords) {
+            System.out.println(task);
         }
         return true;
     }

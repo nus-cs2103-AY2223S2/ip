@@ -4,6 +4,7 @@ import duke.exception.DukeException;
 import duke.task.Event;
 import duke.storage.Storage;
 import duke.task.Task;
+import duke.task.TaskList;
 import duke.ui.Ui;
 
 
@@ -26,10 +27,10 @@ public class EventCommand extends Command {
         this.to = cmd.substring(indexOfToTime);
     }
 
-    public boolean execute(Storage tl, Ui ui, Storage storage) {
-        Task t = new Event(activity, from, to);
-        tl.addTask(t);
-        System.out.println("Got it. I've added this duke.task:\n" + t
+    public boolean execute(TaskList tl, Ui ui, Storage storage) {
+        Task task = new Event(activity, from, to);
+        tl.addTask(task);
+        System.out.println("Got it. I've added this duke.task:\n" + task
                 + "\n Now you have " + tl.getSize() + " tasks in the list.");
         return true;
     }

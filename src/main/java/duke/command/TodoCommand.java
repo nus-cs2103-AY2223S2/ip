@@ -3,6 +3,7 @@ package duke.command;
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.Task;
+import duke.task.TaskList;
 import duke.task.Todo;
 import duke.ui.Ui;
 
@@ -19,10 +20,10 @@ public class TodoCommand extends Command {
         this.activity = cmd.substring(c.length() + 1);
     }
 
-    public boolean execute(Storage tl, Ui ui, Storage storage) {
-        Task t = new Todo(this.activity);
-        tl.addTask(t);
-        System.out.println("Got it. I've added this duke.task:\n" + t
+    public boolean execute(TaskList tl, Ui ui, Storage storage) {
+        Task task = new Todo(this.activity);
+        tl.addTask(task);
+        System.out.println("Got it. I've added this duke.task:\n" + task
                 + "\n Now you have " + tl.getSize() + " tasks in the list.");
         return true;
     }

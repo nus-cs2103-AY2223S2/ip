@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.storage.Storage;
 import duke.task.Task;
+import duke.task.TaskList;
 import duke.ui.Ui;
 
 
@@ -15,9 +16,9 @@ public class DeleteCommand extends Command {
         this.id = Integer.parseInt(cmd);
     }
 
-    public boolean execute(Storage tl, Ui ui, Storage storage) {
-        Task t6 = tl.removeTask(this.id - 1);
-        System.out.println("Noted. I've removed this duke.task:\n" + t6
+    public boolean execute(TaskList tl, Ui ui, Storage storage) {
+        Task task = tl.removeTask(this.id - 1);
+        System.out.println("Noted. I've removed this duke.task:\n" + task
                 + "\n Now you have " + tl.getSize() + " tasks in the list.");
         return true;
     }

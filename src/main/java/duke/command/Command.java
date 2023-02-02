@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.exception.DukeException;
 import duke.storage.Storage;
+import duke.task.TaskList;
 import duke.ui.Ui;
 
 /**
@@ -17,7 +18,7 @@ public abstract class Command {
      * @param storage - harddisk store using textfile.
      * @return boolean - true or false depending on the results.
      */
-    public abstract boolean execute(Storage tasks, Ui ui, Storage storage);
+    public abstract boolean execute(TaskList tasks, Ui ui, Storage storage);
 
     /**
      * Check if program needs to be exited from command bye.
