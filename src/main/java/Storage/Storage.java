@@ -2,8 +2,6 @@ package Storage;
 
 import java.io.File;
 
-import Deadline.Deadline;
-import Event.Event;
 import Task.Task;
 
 import java.io.FileWriter;

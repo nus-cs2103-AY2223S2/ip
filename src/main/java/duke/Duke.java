@@ -1,14 +1,9 @@
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.io.FileWriter;
+package duke;
 
+import java.util.Scanner;
 import Storage.Storage;
 import Task.Task;
 import TaskList.TaskList;
-import todo.todo;
-import Event.Event;
-import Deadline.Deadline;
 import Exception.*;
 import Ui.Ui;
 import Parser.Parser;

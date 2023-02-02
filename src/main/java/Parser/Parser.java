@@ -1,10 +1,10 @@
 package Parser;
 
-import Deadline.Deadline;
-import Event.Event;
+import Task.Deadline;
+import Task.Event;
 import Task.Task;
 import TaskList.TaskList;
-import todo.todo;
+import Task.todo;
 import Exception.noTaskDescriptionException;
 import Exception.invalidInputException;
 import Exception.dukeException;
