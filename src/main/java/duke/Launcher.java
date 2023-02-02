@@ -5,14 +5,17 @@ package duke;
  */
 public class Launcher {
     /**
-     * Main method of the app. By default, the app runs using a graphical user interface. However, if the "--cli"
-     * argument is provided, then the app will run using a command-line interface.
+     * Determines which version of the app to run, CLI or GUI, and runs it.
+     * <p>
+     * By default, the app runs using a GUI. However, if the "--cli" argument is provided, then the app will run via a
+     * CLI.
+     * </p>
      *
      * @param args Command-line arguments.
      */
     public static void main(String[] args) {
         if (shouldLaunchCli(args)) {
-            DukeCli.run();
+            CliDuke.launch();
         } else {
             DukeGui.run(args);
         }
