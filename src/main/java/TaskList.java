@@ -61,7 +61,7 @@ public class TaskList {
         System.out.println("Now you have " + numOfTasks + " tasks in the list.");
     }
 
-    public void addDeadline(String[] args, int by) {
+    public void addDeadline(String[] args, int by) throws DukeException {
         int len = args.length;
         StringBuilder taskName = new StringBuilder(args[1]);
         for (int i = 2; i < by; i++) {
@@ -78,7 +78,7 @@ public class TaskList {
         System.out.println("Now you have " + numOfTasks + " tasks in the list.");
     }
 
-    public void addEvent(String[] args, int from, int to) {
+    public void addEvent(String[] args, int from, int to) throws DukeException {
         int len = args.length;
         StringBuilder taskName = new StringBuilder(args[1]);
         for (int i = 2; i < from; i++) {

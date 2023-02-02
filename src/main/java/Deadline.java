@@ -1,20 +1,30 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task{
 
     protected String by;
     protected LocalDate byDate;
 
-    public Deadline(String description, String by) {
+    public Deadline(String description, String by) throws DukeException {
         super(description);
         this.by = by;
-        this.byDate = LocalDate.parse(by);
+        try {
+            this.byDate = LocalDate.parse(by);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Wrong format for date!");
+        }
     }
 
-    public Deadline(String description, String by, String status) {
+    public Deadline(String description, String by, String status) throws DukeException {
         super(description, status);
         this.by = by;
+        try {
+            this.byDate = LocalDate.parse(by);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Wrong format for date!");
+        }
     }
 
     @Override
