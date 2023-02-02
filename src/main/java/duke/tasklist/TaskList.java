@@ -52,12 +52,14 @@ public class TaskList {
         return toReturn;
     }
 
-    public void printList() {
+    public String printList() {
         int counter = 0;
+        String toReturn = "Here are the tasks in your list my premier:";
         for (Task i : arrList) {
             counter++;
-            System.out.println(counter + ". " + i.toString());
+            toReturn = toReturn + counter + ". " + i.toString() + System.getProperty("line.separator");
         }
+        return toReturn;
     }
 
 }

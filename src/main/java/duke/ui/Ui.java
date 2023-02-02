@@ -23,25 +23,37 @@ public class Ui {
     /**
      * Prints greeting message for User upon startup.
      */
-    public void sayHi() {
+    public String sayHi() {
         String newLine = System.getProperty("line.separator");
-        System.out.println("-------------------------------------------------------"
-                + newLine + "Hello! Jak Sie Masz! I am Borat.\n What I do for you Premier Azamat?");
+        return "-------------------------------------------------------"
+                + newLine + "Hello! Jak Sie Masz! I am Borat.\n What I do for you Premier Azamat?";
     }
 
     /**
      * Prints goodbye message for User upon exit.
      */
-    public void sayBye() {
-        System.out.println("Chenquieh. Hope to see you again Premier Azamat!");
+    public String sayBye() {
+        return "Chenquieh. Hope to see you again Premier Azamat!";
     }
 
+   // public Boolean checkBye() {
+   //     String echo = scanner.nextLine().trim();
+   //     return this.parser.isExit(echo);
+   // }
     /**
      * Parses the user's input as Duke runs.
      */
-    public boolean parseInput() throws DukeException {
+    public String parseInput() throws DukeException {
         String echo = scanner.nextLine().trim(); // get user input and trim trailing white sp
-        boolean toExit = this.parser.parse(echo);
-        return toExit;
+        return this.parser.parse(echo);
+    }
+
+    public String parseInput(String echo) throws DukeException {
+        return this.parser.parse(echo);
+    }
+    public String showError(Exception e) {
+        return e.getMessage();
     }
 }
+
+

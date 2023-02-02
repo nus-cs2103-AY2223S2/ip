@@ -1,4 +1,3 @@
-
 package duke;
 
 import duke.exception.DukeException;
@@ -6,6 +5,7 @@ import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 import java.io.IOException;
+
 
 /**
  * Represents a build instance of Duke.
@@ -33,19 +33,31 @@ public class Duke {
      */
     public void run() {
         this.ui.sayHi();
-        boolean exit = false;
-        while (!exit) {
+        boolean isExit = false;
+        while (!isExit) {
             try {
-                exit = this.ui.parseInput();
+            //    isExit = this.ui.checkBye();
+                this.ui.parseInput();
             } catch (DukeException e) {
-                System.out.println(e.getMessage());
+                ui.showError(e);
             }
         }
-        if (exit) {
+        if (isExit) {
             this.ui.sayBye();
         }
         storage.saveToFile(tasks);
-        //...
+    }
+
+    public String getResponse(String input) {
+        try {
+            String output = this.ui.parseInput(input);
+            storage.saveToFile(tasks);
+            return output;
+        } catch (DukeException e) {
+            return ui.showError(e);
+        } catch (Exception e) {
+            return e.getMessage();
+        }
     }
 
     /**

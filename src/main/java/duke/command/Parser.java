@@ -19,23 +19,30 @@ public class Parser {
         this.tasks = arrList;
     }
 
-    /**
+    public boolean isExit(String command) {
+        if (command.equals("bye")) {
+            return true;
+        }
+        return false;
+    }
+        /**
      * Returns a boolean value after parsing User input, to indicate whether
      * the program should keep running.
      *
      * @param command String representation of User input.
      * @return boolean that determines whether Duke continues to run.
      */
-    public boolean parse(String command) {
+    public String parse(String command) {
         Task task;
         int indx;
+        String toReturn;
         switch(command) {
         case "bye":
-            return true;
+            return "Chenquieh. Hope to see you again Premier Azamat!";
         case "list":
-            System.out.println("Here are the tasks in your list my premier:");
-            this.tasks.printList();
-            break;
+            String taskString = this.tasks.printList();
+            toReturn = taskString;
+            return toReturn;
         default:
             String[] arrOfStr = command.split(" ", 2);
             try {
@@ -47,33 +54,35 @@ public class Parser {
             case "delete":
                 indx = Integer.parseInt(arrOfStr[1]);
                 task = this.tasks.delete(indx);
-                System.out.println("Noted. I've removed this task:" + task);
-                System.out.println("Now you have " + this.tasks.size() + " tasks in the list.");
-                break;
+                toReturn = "Noted. I've removed this task:";
+                toReturn = toReturn.concat(task.toString());
+                toReturn = toReturn + System.lineSeparator() +
+                        "Now you have " + this.tasks.size() + " tasks in the list.";
+                return toReturn;
             case "unmark":
                 indx = Integer.parseInt(arrOfStr[1]);
                 task = this.tasks.get(indx);
                 this.tasks.setToUnmark(indx);
-                System.out.println("OK, I've marked this task as not done yet:\n" + task);
-                break;
+                toReturn = "OK, I've marked this task as not done yet:\n" + task;
+                return toReturn;
             case "mark":
                 indx = Integer.parseInt(arrOfStr[1]);
                 task = this.tasks.get(indx);
                 this.tasks.setToMark(indx);
-                System.out.println("Nice! I've marked this task as done:\n" + task);
-                break;
+                toReturn = "Nice! I've marked this task as done:\n" + task;
+                return toReturn;
             case "find":
                 String toSearch = arrOfStr[1];
                 TaskList toPrint = this.tasks.search(toSearch);
-                System.out.println("Here are the matching tasks in your list:");
-                toPrint.printList();
-                break;
+                toReturn = "Here are the matching tasks in your list:" + toPrint.printList();
+                return toReturn;
             case "todo":
                 task = new Todo(arrOfStr[1]);
-                System.out.println("Very nice. I've added this task:\n" + task);
+                toReturn = "Very nice. I've added this task:" + System.lineSeparator() + task
+                        + System.lineSeparator();
                 this.tasks.add(task);
-                System.out.println("Now you have " + this.tasks.size() + " tasks in the list.");
-                break;
+                toReturn = toReturn + "Now you have " + this.tasks.size() + " tasks in the list.";
+                return toReturn;
             case "deadline":
                 String[] dl = arrOfStr[1].split("/by ");
                 try {
@@ -82,21 +91,22 @@ public class Parser {
                     System.out.println(e.getMessage());
                 }
                 task = new Deadline(dl[0], dl[1]);
-                System.out.println("Very nice. I've added this task:\n" + task);
+                toReturn = "Very nice. I've added this task:" + System.lineSeparator() + task;
                 this.tasks.add(task);
-                System.out.println("Now you have " + this.tasks.size() + " tasks in the list.");
-                break;
+                return toReturn;
             case "event":
                 String[] ev = arrOfStr[1].split("/from");
                 String[] time = ev[1].split("/to");
                 task = new Event(ev[0], time[0], time[1]);
-                System.out.println("Very nice. I've added this task:\n" + task);
+                toReturn = "Very nice. I've added this task:" + System.lineSeparator() + task;
                 this.tasks.add(task);
-                System.out.println("Now you have " + this.tasks.size() + " tasks in the list.");
-                break;
+                toReturn = toReturn + "Now you have " + this.tasks.size() + " tasks in the list.";
+                return toReturn;
+            default:
+                toReturn = "Sorry your command is invalid";
+                return toReturn;
             }
         }
-        return false;
     }
 
     /**
