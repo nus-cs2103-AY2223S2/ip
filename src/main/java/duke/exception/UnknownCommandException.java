@@ -5,7 +5,7 @@ public class UnknownCommandException extends DukeException {
 
     /**
      * Initializes an UnknownCommandException caused by an unknown user command.
-     * 
+     *
      * @param cmd The command given by the user that cannot be parsed
      */
     public UnknownCommandException(String cmd) {

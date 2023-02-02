@@ -9,14 +9,13 @@ import duke.task.Task;
 /** A representation of the "event" command in Duke. */
 public class EventCommand extends Command {
 
-    private final String NAME = "event";
     private String title;
     private String from;
     private String to;
 
     /**
      * Initializes an event command with a given title, start date, and end date.
-     * 
+     *
      * @param title The title of the Event to be created
      * @param from  The start date of the Event to be created
      * @param to    The end date of the Event to be created

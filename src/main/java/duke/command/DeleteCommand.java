@@ -7,12 +7,11 @@ import duke.exception.DukeException;
 /** A representation of the "delete" command in Duke. */
 public class DeleteCommand extends Command {
 
-    private final String NAME = "delete";
     private int index;
 
     /**
      * Initializes a unmark command with a given index.
-     * 
+     *
      * @param index The index of the task to be marked as not done yet
      */
     public DeleteCommand(int index) {

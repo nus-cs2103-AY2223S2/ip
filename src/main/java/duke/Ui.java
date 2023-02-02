@@ -5,15 +5,15 @@ import java.util.Scanner;
 /** Handles input/output for Duke. */
 public class Ui {
 
+    // commonly-displayed elements
+    public static final String DIVIDER = "____________________________________________________________";
+    public static final String LOGO = " ____        _        \n" + "|  _ \\ _   _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n" + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
+    public static final String NEWL = "\n";
+
     private Scanner scanner;
     private StringBuilder message;
     private boolean doPromptUserInput;
-
-    // commonly-displayed elements
-    public static final String DIVIDER = "____________________________________________________________";
-    public static final String NEWL = "\n";
-    public static final String LOGO = " ____        _        \n" + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n" + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
 
     /**
      * Initializes a Ui object.
@@ -24,6 +24,7 @@ public class Ui {
         this.doPromptUserInput = true;
     }
 
+    /** Prints a welcome message. */
     public void showWelcome() {
         this.addToMessage("Hello from");
         this.addToMessage(LOGO);
@@ -52,7 +53,7 @@ public class Ui {
 
     /**
      * Appends a string to the stored message.
-     * 
+     *
      * @param toAdd The string to be appended to the stored message.
      */
     public void addToMessage(String toAdd) {
@@ -62,7 +63,7 @@ public class Ui {
 
     /**
      * Appends a string to the stored message.
-     * 
+     *
      * @param toAdd             The string to be appended to the stored message.
      * @param doPromptUserInput Indicates whether the user should be prompted for
      *                          input after this message.
@@ -79,7 +80,7 @@ public class Ui {
 
     /**
      * Pretty prints a given string.
-     * 
+     *
      * @param text The string to be pretty-printed.
      */
     public static void prettyPrint(String text) {

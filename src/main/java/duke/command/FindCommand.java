@@ -7,12 +7,11 @@ import duke.exception.DukeException;
 /** A representation of the "find" command in Duke. */
 public class FindCommand extends Command {
 
-    private final String NAME = "find";
     private String keyword;
 
     /**
      * Initializes a find command with a given keyword.
-     * 
+     *
      * @param keyword The keyword to find tasks with
      */
     public FindCommand(String keyword) {

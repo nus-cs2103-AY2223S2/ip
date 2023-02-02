@@ -13,7 +13,7 @@ public class Deadline extends Task {
 
     /**
      * Creates a Deadline object with a given name, completion status, and deadline.
-     * 
+     *
      * @param name     The name of the object to be created
      * @param isDone   The completion status of the object to be created
      * @param deadline A string representation of the task's deadline
@@ -29,7 +29,7 @@ public class Deadline extends Task {
 
     /**
      * Creates a Deadline object with a given name and deadline.
-     * 
+     *
      * @param name     The name of the object to be created
      * @param deadline A string representation of the task's deadline
      */

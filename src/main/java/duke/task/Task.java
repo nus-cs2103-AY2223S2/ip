@@ -23,7 +23,7 @@ public abstract class Task {
 
     /**
      * Parses a date from a string using the date formatter.
-     * 
+     *
      * @param dateString The string to be parsed
      * @return The date represented by the given string
      */
@@ -33,7 +33,7 @@ public abstract class Task {
 
     /**
      * Get a string representation of a date using the date formatter.
-     * 
+     *
      * @param date The date to be formatted
      * @return The formatted string representation of that date
      */
@@ -55,14 +55,14 @@ public abstract class Task {
 
     /**
      * Gets a string representation of the task type.
-     * 
+     *
      * @return A string representation of the task type.
      */
     protected abstract String getTaskType();
 
     /**
      * Serializes the task object into a string.
-     * 
+     *
      * @return A string representation of the task object.
      */
     public String serialize() {
