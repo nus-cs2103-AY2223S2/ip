@@ -1,3 +1,7 @@
+package duke;
+
+import duke.task.Task;
+
 import java.util.Scanner;
 
 public class Ui {
@@ -52,7 +56,7 @@ public class Ui {
      * Prints out the Greeting message.
      */
     public void printGreeting() {
-        String GREETING = "Hello! I'm Duke\nWhat can I do for you?";
+        String GREETING = "Hello! I'm duke.Duke\nWhat can I do for you?";
         prettifyOut(GREETING);
     }
 

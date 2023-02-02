@@ -1,3 +1,10 @@
+package duke;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -10,7 +17,7 @@ public class Storage {
     private final ArrayList<Task> tasks;
 
     /**
-     * Creates a Storage object.
+     * Creates a duke.Storage object.
      *
      * @param filePath the path of the file to be stored.
      */
@@ -55,10 +62,10 @@ public class Storage {
     }
 
     /**
-     * Parses the storage string and returns the Task object.
+     * Parses the storage string and returns the duke.task.Task object.
      *
      * @param storageString the string representation of the task to be stored in the hard disk.
-     * @return the Task object.
+     * @return the duke.task.Task object.
      * @throws DukeException if the storage string is invalid.
      */
     private Task parseStorageString(String storageString) throws DukeException {

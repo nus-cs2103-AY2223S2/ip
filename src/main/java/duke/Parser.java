@@ -1,3 +1,9 @@
+package duke;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.ToDo;
+
 public class Parser {
 
     public Parser() {
@@ -5,7 +11,7 @@ public class Parser {
 
     /**
      * @param input the input string from the user.
-     * @return the ToDo object created from the input string.
+     * @return the duke.task.ToDo object created from the input string.
      */
     public static ToDo parseTodo(String input)  {
         return new ToDo(input);
@@ -13,7 +19,7 @@ public class Parser {
 
     /**
      * @param input the input string from the user.
-     * @return the Deadline object created from the input string.
+     * @return the duke.task.Deadline object created from the input string.
      * @throws DukeException if the input string is invalid.
      */
     public static Deadline parseDeadline(String input) throws DukeException {
@@ -26,7 +32,7 @@ public class Parser {
 
     /**
      * @param input the input string from the user.
-     * @return the Event object created from the input string.
+     * @return the duke.task.Event object created from the input string.
      * @throws DukeException if the input string is invalid.
      */
     public static Event parseEvent(String input) throws DukeException {
