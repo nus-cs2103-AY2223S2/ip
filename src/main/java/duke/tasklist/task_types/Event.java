@@ -29,7 +29,4 @@ public class Event extends Task {
         return String.format("[E]%s (from: %s to: %s)", super.toString(), from, to);
     }
 
-    public String toTextString() {
-        return String.format("E | %s | %s | %s", super.status ? "1" : "0", super.name, this.from + " " + this.to);
-    }
 }

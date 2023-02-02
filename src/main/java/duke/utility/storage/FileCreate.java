@@ -5,19 +5,33 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+/**
+ * Represents a <code>FilecReate</code> object that contains methods to 
+ * create files and folders with the path specified.
+ * 
+ * 
+ * @author Brian Quek
+ */
 public class FileCreate {
-    public static File createFile(Path path) {
+    
+    /** 
+     * Creates a file based on the given file path.
+     * @param path the file path.
+     */
+    public static void createFile(Path path) {
         try {
             Files.createFile(path);
-            File f = new File(path.toString());
-            return f;
+            new File(path.toString());
         } catch (IOException e) {
             System.out.println("Do not have permission to create folder.");
         }
-
-        return null;
     }
 
+    
+    /** 
+     * Creates a folder based on the given path in the paraemter.
+     * @param path the folder path 
+     */
     public static void createFolder(Path path) {
         try {
             Files.createDirectories(path);

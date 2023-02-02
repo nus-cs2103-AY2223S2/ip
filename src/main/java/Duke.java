@@ -17,7 +17,11 @@ import duke.utility.ui.UiMessage;
  */
 
 public class Duke {
-
+    
+    /** 
+     * Main function that creates and run the Duke Bot object.
+     * @param args
+     */
     public static void main(String[] args) {
         Scanner inputScanner = new Scanner(System.in);
         Ui ui = new Ui();
