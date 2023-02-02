@@ -24,11 +24,13 @@ public class TaskListTest {
     @Test
     public void deleteTaskTest() throws DukeException {
         Task testTask = new Todo("test");
-        Task dontCare = new Todo("");
+        Task dontCare = new Todo("dont care");
         TaskList list = new TaskList(new ArrayList<Task>(Arrays.asList(dontCare, testTask, dontCare)));
-        list.deleteTask(1);
+        list.listTasks(); // To update the indexToTask hashmap
+        Task taskDeleted = list.deleteTask(1);
         TaskList listAfterDelete = new TaskList(new ArrayList<Task>(Arrays.asList(dontCare, dontCare)));
 
         assertEquals(listAfterDelete, list);
+        assertEquals(testTask, taskDeleted);
     }
 }
