@@ -5,6 +5,12 @@ import fideline.exception.InvalidArgumentException;
 import fideline.save.Storage;
 import fideline.task.TaskManager;
 import fideline.user.Ui;
+
+/**
+ * Command that executes the removal of a task from the task list.
+ *
+ * @author Fun Leon
+ */
 public class DeleteCommand extends Command {
 
     private int taskNum;

@@ -6,6 +6,11 @@ import fideline.save.Storage;
 import fideline.task.TaskManager;
 import fideline.user.Ui;
 
+/**
+ * Command that executes the status change of a task to done.
+ *
+ * @author Fun Leon
+ */
 public class MarkCommand extends Command {
 
     private int taskNum;
