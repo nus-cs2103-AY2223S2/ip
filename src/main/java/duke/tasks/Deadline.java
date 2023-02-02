@@ -7,11 +7,11 @@ import java.time.LocalDateTime;
 public class Deadline extends Task {
 
     static protected String DEFAULT_TIME = "2359";
-    protected LocalDateTime by;
+    protected LocalDateTime dateBy;
 
     public Deadline(String description, String by) {
         super(description);
-        this.by = Parser.stringToDateTime(by);
+        this.dateBy = Parser.stringToDateTime(by);
     }
 
     @Override
@@ -20,7 +20,7 @@ public class Deadline extends Task {
     }
 
     public String getBy() {
-        return Parser.dateTimeToString(by);
+        return Parser.dateTimeToString(dateBy);
     }
 
     @Override
@@ -29,7 +29,7 @@ public class Deadline extends Task {
     }
 
     public String parseBySaving() {
-        return Parser.dateTimeSaving(by);
+        return Parser.dateTimeSaving(dateBy);
     }
 
     /**

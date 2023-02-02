@@ -1,6 +1,7 @@
 package duke;
 
 import duke.command.Command;
+
 import java.io.IOException;
 
 public class Duke {
@@ -22,7 +23,7 @@ public class Duke {
     }
 
     public void run() {
-        ui.greet();
+        ui.printGreet();
         boolean ongoing = true;
         while (ongoing) {
             try {

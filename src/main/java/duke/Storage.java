@@ -46,7 +46,7 @@ public class Storage {
      * Tasks are all saved in a separate file.
      *
      * @param taskList the current tasklist
-     * @exception IOException catch for Input and Output inconsistencies.
+     * @throws IOException catch for Input and Output inconsistencies.
      */
     public void loadTasks(TaskList taskList) throws IOException {
         File folder = new File(dirPath);

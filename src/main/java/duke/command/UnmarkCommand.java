@@ -1,7 +1,11 @@
 package duke.command;
 
-import duke.*;
 import duke.tasks.Task;
+import duke.Parser;
+import duke.DukeException;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 
 public class UnmarkCommand extends Command {
     public UnmarkCommand(String textCmd) {

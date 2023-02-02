@@ -4,6 +4,7 @@ import duke.tasks.Task;
 
 import java.util.ArrayList;
 import java.util.List;
+
 public class TaskList {
     protected List<Task> tasks;
     protected int num_tasks;

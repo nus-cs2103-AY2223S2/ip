@@ -5,9 +5,9 @@ import duke.tasks.Task;
 import java.util.Scanner;
 
 public class Ui {
-    public static String HELLO = "Hello! I am Duke Nice To Meet You\n";
-    public static String BYE = "Bye! Hope to See You Again!";
-    public static String ADD = "Got it fam! I've added this task:\n ";
+    public static String GREET_MSG = "Hello! I am Duke Nice To Meet You\n";
+    public static String BYE_MSG = "Bye! Hope to See You Again!";
+    public static String ADD_MSG = "Got it fam! I've added this task:\n ";
 
 
     private Scanner sc;
@@ -40,15 +40,15 @@ public class Ui {
     /**
      * Greets the user.
      */
-    public void greet() {
-        System.out.println(HELLO);
+    public void printGreet() {
+        System.out.println(GREET_MSG);
     }
 
     /**
      * Says goodbye to the user.
      */
-    public void bye() {
-        System.out.println(BYE);
+    public void printBye() {
+        System.out.println(BYE_MSG);
     }
 
 
@@ -69,7 +69,7 @@ public class Ui {
     /**
      * Prints the task that's been completed by the user.
      *
-     * @param markedTask.
+     * @param markedTask task that is to be marked by the user
      */
     public void printMarkTask(Task markedTask) {
         System.out.println("Nice! I have marked this task as Done:\n" + markedTask.toString() + "\n");
@@ -83,7 +83,7 @@ public class Ui {
      * @param to_add the task that's to be added .
      */
     public void printAddTask(Task to_add, Integer num_tasks) {
-        System.out.println("Got it fam! I've added this task:\n " + to_add.toString());
+        System.out.println(ADD_MSG + to_add.toString());
         System.out.println("You currently have " + num_tasks + " tasks in this list!\n");
     }
 

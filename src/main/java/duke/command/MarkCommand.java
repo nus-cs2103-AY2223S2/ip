@@ -1,7 +1,11 @@
 package duke.command;
 
-import duke.*;
 import duke.tasks.Task;
+import duke.Parser;
+import duke.DukeException;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 
 public class MarkCommand extends Command {
     public MarkCommand(String textCmd) {
