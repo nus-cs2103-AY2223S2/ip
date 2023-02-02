@@ -1,9 +1,3 @@
-/**
- * Storage for user inputs up to 100 records.
- *
- * @author JamesLiuZX
- * AY2223-S2 CS2103T
- */
 package duke.tasks;
 
 import duke.exceptions.DateTimeFormatException;
@@ -16,22 +10,35 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+/**
+ * Encapsulates a container for all tasks.
+ *
+ * @author JamesLiuZX
+ * AY2223-S2 CS2103T
+ */
 public class TaskList {
-    //Variables are kept protected and accessed only through internal getter and setter methods.
-    protected static final int size = 100;
-    protected ArrayList<Task> records;
+    //Variables are kept private and accessed only through internal getter and setter methods.
+    private static final int size = 100;
+    private ArrayList<Task> records;
     private final String filePath = "./data/duke.txt";
-    private final String database = "duke.txt";
     private Path path = Paths.get(filePath);
     private DatabaseWriter dw = new DatabaseWriter(path);
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy HHmm");
     private String dateTimeRegex = "^\\d{2}/\\d{2}/\\d{2} \\d{4}$";
 
-    //Constructor
+    /**
+     * Constructor for initialising a new TaskList.
+     *
+     */
     public TaskList() {
         records = new ArrayList<>(size);
     }
 
+    /**
+     * Marks a task in the list as done. (1-indexed)
+     *
+     * @param index Index of task marked.
+     */
     public void mark(int index) {
         index--;
         if (index < 0 || index > size) {
@@ -45,6 +52,11 @@ public class TaskList {
         return;
     }
 
+    /**
+     * Marks a task in the list as undone. (1-indexed)
+     *
+     * @param index Index of task marked.
+     */
     public void unMark(int index) {
         index--;
         if (index < 0 || index > size) {
@@ -58,13 +70,23 @@ public class TaskList {
         return;
     }
 
-    public void insert(String record) {
-        Task t = new Task(record);
+    /**
+     * Inserts a generic task to the TaskList.
+     *
+     * @param name Task name to be added.
+     */
+    public void insertTask(String name) {
+        Task t = new Task(name);
         this.records.add(t);
         dw.addToDb(t);
         System.out.println(Ui.format("added: " + t));
     }
 
+    /**
+     * Inserts a TaskToDo to the TaskList.
+     *
+     * @param name Task name to be added.
+     */
     public void insertToDo(String name) {
         TaskToDo t = new TaskToDo(name);
         this.records.add(t);
@@ -72,11 +94,23 @@ public class TaskList {
         System.out.println(Ui.format("Got it. I've added this task:\n" + t.toString()));
     }
 
+    /**
+     * Inserts a TaskToDo from the database to the TaskList, does not invoke addToDb() in avoid infinite loop.
+     *
+     * @param name Task name to be added.
+     * @param isInitial Boolean value of whether the program is population the TaskList.
+     */
     public void insertToDo(String name, boolean isInitial) {
         TaskToDo t = new TaskToDo(name);
         this.records.add(t);
     }
 
+    /**
+     * Inserts a TaskDeadline from the database to the TaskList.
+     *
+     * @param name Task name to be added.
+     * @param time Deadline time in string, according to the dateTimeRegex format.
+     */
     public void insertDeadline(String name, String time) throws DateTimeFormatException {
         System.out.println(time);
         try {
@@ -93,6 +127,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Inserts a TaskDeadline from the database to the TaskList, does not invoke addToDb() in avoid infinite loop.
+     *
+     * @param name Task name to be added.
+     * @param time Deadline time in string, according to the dateTimeRegex format.
+     * @param isInitial Boolean value of whether the program is population the TaskList.
+     */
     public void insertDeadline(String name, String time, boolean isInitial) {
         try {
             if (!time.matches(dateTimeRegex)) { // dd/mm/yy tttt
@@ -107,6 +148,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Inserts a TaskEvent from the database to the TaskList.
+     *
+     * @param name Task name to be added.
+     * @param startString Start time in string, according to the dateTimeRegex format.
+     * @param endString End time in string, according to the dateTimeRegex format.
+     */
     public void insertEvent(String name, String startString, String endString) {
         try {
             if (!startString.matches(dateTimeRegex) // dd/mm/yy tttt
@@ -124,6 +172,14 @@ public class TaskList {
         }
     }
 
+    /**
+     * Inserts a TaskEvent from the database to the TaskList, does not invoke addToDb() in avoid infinite loop.
+     *
+     * @param name Task name to be added.
+     * @param startString Start time in string, according to the dateTimeRegex format.
+     * @param endString End time in string, according to the dateTimeRegex format.
+     * @param isInitial Boolean value of whether the program is population the TaskList.
+     */
     public void insertEvent(String name, String startString, String endString, boolean isInitial) {
         try {
             if (!startString.matches(dateTimeRegex) // dd/mm/yy tttt
@@ -140,16 +196,18 @@ public class TaskList {
         }
     }
 
-    public Task getTask(int index) {
-        return this.records.get(index);
-    }
-
+    /**
+     * Removes task from TaskList.
+     *
+     * @param index Index of task to be deleted. (1-indexed)
+     */
     public void deleteTask(int index) {
         Task t = this.records.get(index);
         this.records.remove(index);
         dw.removeFromDb(index);
         System.out.println(Ui.format("Noted. I've removed this task:\n" + t.toString()));
     }
+
 
     public ArrayList<Task> findMatchingTasks(String keyword) {
         ArrayList<Task> selected = new ArrayList<>();
@@ -160,6 +218,12 @@ public class TaskList {
         }
         return selected;
     }
+
+    /**
+     * Returns string representation the TaskList by iterating through it.
+     *
+     * @return String representation of TaskList.
+     */
 
     @Override
     public String toString() {
@@ -172,6 +236,4 @@ public class TaskList {
         }
         return Ui.format(output);
     }
-
-
 }
