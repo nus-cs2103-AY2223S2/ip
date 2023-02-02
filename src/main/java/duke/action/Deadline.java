@@ -23,8 +23,8 @@ public class Deadline extends Task {
      * @param time Cut-off time of task for completion
      * @throws DukeException if convertToLocalDate and convertToLocalTime fails to compute respectively
      */
-    public Deadline(String description,String date, String time) throws DukeException {
-        super(description,TypeOfTask.deadline);
+    public Deadline(String description, String date, String time) throws DukeException {
+        super(description, TypeOfTask.deadline);
         this.date = super.parser.covertToLocalDate(date);
         this.time = super.parser.convertToLocalTime(time);
     }
@@ -33,7 +33,7 @@ public class Deadline extends Task {
      * Returns the cut-off date for the task to be completed
      * @return cut-off date
      */
-    public LocalDate getDate(){
+    public LocalDate getDate() {
         return this.date;
     }
 
@@ -41,7 +41,7 @@ public class Deadline extends Task {
      * Returns the cut-off local time of the task
      * @return cut-off time
      */
-    public LocalTime getTime(){
+    public LocalTime getTime() {
         return this.time;
     }
 
@@ -53,6 +53,6 @@ public class Deadline extends Task {
     public String toString() {
         //return "[D]" + super.getDescription() + " (by: " + this.day + ")";
         String day = this.getDate().format(DateTimeFormatter.ofPattern(DESIRED_DATE_FORMAT));
-        return String.format("[D][%s] %s (by: %s %s)",super.getStatusIcon(),super.getDescription(),day,this.getTime().toString());
+        return String.format("[D][%s] %s (by: %s %s)", super.getStatusIcon(), super.getDescription(), day, this.getTime().toString());
     }
 }

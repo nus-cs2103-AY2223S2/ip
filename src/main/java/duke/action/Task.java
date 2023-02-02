@@ -11,6 +11,7 @@ public class Task implements Serializable {
     protected String description;
     protected boolean isDone;
     protected TypeOfTask type;
+
     protected Parser parser;
 
     /**
@@ -18,7 +19,7 @@ public class Task implements Serializable {
      * @param description Description of the task
      * @param type Type of task
      */
-    public Task(String description,TypeOfTask type){
+    public Task(String description, TypeOfTask type) {
         this.description = description;
         this.isDone = false;
         this.type = type;
@@ -29,7 +30,7 @@ public class Task implements Serializable {
      * Returns the status of task with either X or " ".
      * @return status of task
      */
-    public String getStatusIcon(){
+    public String getStatusIcon() {
         return (isDone ? "X" : " ");
     }
 
@@ -37,7 +38,7 @@ public class Task implements Serializable {
      * Returns the description of the task
      * @return description of task
      */
-    public String getDescription(){
+    public String getDescription() {
         return this.description;
     }
 
@@ -45,7 +46,7 @@ public class Task implements Serializable {
      * Returns the type of task in character format
      * @return character format of task
      */
-    public String getTypeOfTask(){
+    public String getTypeOfTask() {
         switch(this.type){
             case deadline:
                 return "D";
@@ -61,14 +62,14 @@ public class Task implements Serializable {
     /**
      * marks the task as done
      */
-    public void markAsDone(){
+    public void markAsDone() {
         this.isDone = true;
     }
 
     /**
      * unmarks the task as done
      */
-    public void unmarkAsDone(){
+    public void unmarkAsDone() {
         this.isDone = false;
     }
 

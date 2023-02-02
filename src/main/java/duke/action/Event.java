@@ -23,7 +23,7 @@ public class Event extends Task{
      * @param endTime End time of the task
      * @throws DukeException When convertToLocalTime cannot be computed due to unacceptable inputs
      */
-    public Event(String description,String startTime,String endTime) throws DukeException {
+    public Event(String description, String startTime, String endTime) throws DukeException {
         super(description,TypeOfTask.event);
         // to check if the user specifies the day also
         String[] startTimeArray = startTime.split(" ");
@@ -64,15 +64,15 @@ public class Event extends Task{
     @Override
     public String toString() {
         if (startTime == null) {
-            return String.format("[E][%s] %s (from: %s to: %s)",super.getStatusIcon(),super.getDescription(),this.startDay,this.endDay);
+            return String.format("[E][%s] %s (from: %s to: %s)", super.getStatusIcon(), super.getDescription(), this.startDay, this.endDay);
         } else if (endDay == null) {
             String startTime = this.startTime.toString();
             String endTime = this.endTime.toString();
-            return String.format("[E][%s] %s (from: %s %s to: %s)",super.getStatusIcon(),super.getDescription(),this.startDay,startTime,endTime);
+            return String.format("[E][%s] %s (from: %s %s to: %s)", super.getStatusIcon(), super.getDescription(), this.startDay, startTime, endTime);
         } else {
             String startTime = this.startTime.toString();
             String endTime = this.endTime.toString();
-            return String.format("[E][%s] %s (from: %s %s to: %s %s)",super.getStatusIcon(),super.getDescription(),this.startDay,startTime,this.endDay,endTime);
+            return String.format("[E][%s] %s (from: %s %s to: %s %s)", super.getStatusIcon(), super.getDescription(), this.startDay, startTime, this.endDay, endTime);
         }  
     }
 }

@@ -12,7 +12,7 @@ public class Todo extends Task {
      * Default constructor that takes in the description of the task
      * @param description
      */
-    public Todo(String description){
+    public Todo(String description) {
         super(description,TypeOfTask.todo);
     }
 
@@ -21,7 +21,7 @@ public class Todo extends Task {
      * @return description of task
      */
     @Override
-    public String toString(){
-        return String.format("[T][%s] %s", super.getStatusIcon(),super.getDescription());
+    public String toString() {
+        return String.format("[T][%s] %s", super.getStatusIcon(), super.getDescription());
     }
 }

@@ -18,8 +18,8 @@ public class ParserTest {
     @Test
     void testDeleteInputException() throws DukeException {
         Parser parser = new Parser();
-        String[] fakeInput = new String[]{"Delete","2","3"};
-        Assertions.assertThrows(DukeException.class, () -> parser.convertToUserInput(fakeInput,TypeOfTask.delete,""));
+        String[] fakeInput = new String[]{"Delete", "2", "3"};
+        Assertions.assertThrows(DukeException.class, () -> parser.convertToUserInput(fakeInput, TypeOfTask.delete, ""));
     }
 
     /**
@@ -31,7 +31,7 @@ public class ParserTest {
         Parser parser = new Parser();
         //String[] fakeInput = new String[]{"20/20/20"};
         String fakeInput = "20/20/20";
-        Assertions.assertThrows(DukeException.class,() -> parser.covertToLocalDate(fakeInput));
+        Assertions.assertThrows(DukeException.class, () -> parser.covertToLocalDate(fakeInput));
     }
 
     /**

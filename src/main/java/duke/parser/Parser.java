@@ -39,8 +39,8 @@ public class Parser implements Serializable {
      * @return the contents of the user inputs
      * @throws DukeException when an error occurs during execution depending on the type of task
      */
-    public String convertToUserInput(String[] input, TypeOfTask action,String limiter ) throws DukeException{
-        switch(action){
+    public String convertToUserInput(String[] input, TypeOfTask action, String limiter ) throws DukeException {
+        switch(action) {
             case todo: {
                 // changed the way the string is outputted from the array
                 String userInput = String.join(" ", Arrays.copyOfRange(input, 0, input.length));
@@ -52,7 +52,7 @@ public class Parser implements Serializable {
             case deadline: { // added braces to scope the variables below locally to each case
                 // algo to detect deadline's input content
                 String userInput = "";
-                if(!limiter.equals("/by")){
+                if(!limiter.equals("/by")) {
                     for (int i = 0; i < input.length; i++) {
                         if (input[i].equals("/by")) {
                             break;
@@ -64,7 +64,7 @@ public class Parser implements Serializable {
                     // to get the date and time after "/by"
                     for (int i = 0; i < input.length; i++) {
                         if (input[i].equals("/by")) {
-                            for(int j = i + 1; j < input.length; j++){
+                            for(int j = i + 1; j < input.length; j++) {
                                 userInput += input[j] + " ";
                             }
                             break;
@@ -79,11 +79,11 @@ public class Parser implements Serializable {
             }
             case event: {
                 String userInput = "";
-                if(limiter.equals("/from")){
-                    for(int i = 0; i < input.length; i++){
-                        if(input[i].equals("/from")){
-                            for(int j = i + 1; j < input.length; j++){
-                                if(input[j].equals("/to")){
+                if(limiter.equals("/from")) {
+                    for(int i = 0; i < input.length; i++) {
+                        if(input[i].equals("/from")) {
+                            for(int j = i + 1; j < input.length; j++) {
+                                if(input[j].equals("/to")) {
                                     break;
                                 } else {
                                     userInput += input[j] + " ";
@@ -95,7 +95,7 @@ public class Parser implements Serializable {
                 } else if (limiter.equals("/to")) {
                     for(int i = 0; i < input.length; i++){
                         if(input[i].equals("/to")){
-                            for(int j = i + 1; j < input.length; j++){
+                            for(int j = i + 1; j < input.length; j++) {
                                 userInput += input[j] + " ";
                             }
                             break;
@@ -118,9 +118,9 @@ public class Parser implements Serializable {
             }
             case delete: {
                 if(input.length == 0)
-                    throw new DukeException(TypeOfTask.delete,0);
+                    throw new DukeException(TypeOfTask.delete, 0);
                 else if(input.length > 1)
-                    throw new DukeException(TypeOfTask.delete,1);
+                    throw new DukeException(TypeOfTask.delete, 1);
                 else
                     return input[0];
             }
@@ -157,7 +157,7 @@ public class Parser implements Serializable {
      * @return local time
      * @throws DukeException when error occurs during execution
      */
-    public LocalTime convertToLocalTime(String time) throws DukeException{
+    public LocalTime convertToLocalTime(String time) throws DukeException {
         String[] timeFormats = {"h:mm a", "HH:mm", "hh:mm a", "HH:mm:ss","HHmm","h:mma","hh:mma","h:a"};
         LocalTime localTime;
         for (String timeFormat : timeFormats) {

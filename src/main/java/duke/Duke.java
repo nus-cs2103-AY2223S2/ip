@@ -20,11 +20,11 @@ public class Duke {
      * Default constructor
      * @throws Exception
      */
-    public Duke() throws Exception{
+    public Duke() throws Exception {
         this.ui = new Ui();
         this.storage = new Storage();
         this.parser = new Parser();
-        try{
+        try {
             taskList = new TaskList(this.storage.loadTasks());
         } catch (DukeException duke) {
             TypeOfTask errorTask = duke.getErrorTask();

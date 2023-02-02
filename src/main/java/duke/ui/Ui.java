@@ -57,7 +57,7 @@ public class Ui {
      * @param task Task instance
      * @param taskList List of tasks
      */
-    public void displayResult(TypeOfTask type,Task task, TaskList taskList) {
+    public void displayResult(TypeOfTask type, Task task, TaskList taskList) {
         if(type == TypeOfTask.bye) {
             System.out.println("Bye. Hope to see you again soon!");
             //this.showLine();
@@ -81,24 +81,24 @@ public class Ui {
             this.showLine();
             System.out.println("Got it. I've added this task:");
             System.out.println(task.toString());
-            System.out.println(String.format("Now you have %d tasks in the list",taskList.getSize()));
+            System.out.println(String.format("Now you have %d tasks in the list", taskList.getSize()));
             //this.showLine();
         } else if(type == TypeOfTask.deadline){
             // for deadline
             this.showLine();
             System.out.println("Got it. I've added this task:");
             System.out.println(task.toString());
-            System.out.println(String.format("Now you have %d tasks in the list",taskList.getSize()));
+            System.out.println(String.format("Now you have %d tasks in the list", taskList.getSize()));
             //this.showLine();
         } else if (type == TypeOfTask.event) {
             // for event
             this.showLine();
             System.out.println("Got it. I've added this task:");
             System.out.println(task.toString());
-            System.out.println(String.format("Now you have %d tasks in the list",taskList.getSize()));
+            System.out.println(String.format("Now you have %d tasks in the list", taskList.getSize()));
             //this.showLine();
         } else if(type == TypeOfTask.delete) {
-            System.out.println(String.format("Now you have %d tasks in the list",taskList.getSize()));
+            System.out.println(String.format("Now you have %d tasks in the list", taskList.getSize()));
             //System.out.println("*-".repeat(100));
         }else {
             System.out.println("Oh no! You forgot to type in something useful :p");

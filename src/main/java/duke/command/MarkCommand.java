@@ -16,7 +16,7 @@ public class MarkCommand extends Command {
      * @param contents Inputs from user
      */
     public MarkCommand(String[] contents) {
-        super(contents,false);
+        super(contents, false);
     }
 
     /**

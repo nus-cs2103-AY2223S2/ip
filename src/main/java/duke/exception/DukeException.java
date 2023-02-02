@@ -22,11 +22,11 @@ public class DukeException extends Exception {
         super();
         this.errorCode = errorCode;
         this.errorTask = task;
-        switch(task){
+        switch(task) {
             case todo: {
                 switch(errorCode){
                     case 0:
-                        this.message = String.format("Oops! The description of %s cannot be empty",task.toString());
+                        this.message = String.format("Oops! The description of %s cannot be empty", task.toString());
                         break;
                     default:
                         this.message = "Something went wrong here";
@@ -35,9 +35,9 @@ public class DukeException extends Exception {
                 break;
             }
             case deadline: {
-                switch(errorCode){
+                switch(errorCode) {
                     case 0:
-                        this.message = String.format("Oops! The description of %s cannot be empty",task.toString());
+                        this.message = String.format("Oops! The description of %s cannot be empty", task.toString());
                         break;
                     default:
                         this.message = "Something went wrong here";
@@ -46,9 +46,9 @@ public class DukeException extends Exception {
                 break;
             }
             case event: {
-                switch(errorCode){
+                switch(errorCode) {
                     case 0:
-                        this.message = String.format("Oops! The description of %s cannot be empty",task.toString());
+                        this.message = String.format("Oops! The description of %s cannot be empty", task.toString());
                         break;
                     case 1:
                         this.message = "Please check your inputs again for the days and time given";
@@ -63,9 +63,9 @@ public class DukeException extends Exception {
                 break;
             }
             case mark: {
-                switch(errorCode){
+                switch(errorCode) {
                     case 0:
-                        this.message = String.format("Oops! The description of %s cannot be empty",task.toString());
+                        this.message = String.format("Oops! The description of %s cannot be empty", task.toString());
                         break;
                     case 1:
                         this.message = "Please check if your inputs are valid.";
@@ -77,9 +77,9 @@ public class DukeException extends Exception {
                 break;
             }
             case unmark: {
-                switch(errorCode){
+                switch(errorCode) {
                     case 0:
-                        this.message = String.format("Oops! The description of %s cannot be empty",task.toString());
+                        this.message = String.format("Oops! The description of %s cannot be empty", task.toString());
                         break;
                     case 1:
                         this.message = "Please check if your inputs are valid.";
@@ -93,7 +93,7 @@ public class DukeException extends Exception {
             case delete: {
                 switch(errorCode) {
                     case 0:
-                        this.message = String.format("Oops! The description of %s cannot be empty",task.toString());
+                        this.message = String.format("Oops! The description of %s cannot be empty", task.toString());
                         break;
                     case 1:
                         this.message = "You entered wrongly. Please try again!";
@@ -141,7 +141,7 @@ public class DukeException extends Exception {
     /**
      * Constructor for if a generic exception is thrown
      */
-    public DukeException(){
+    public DukeException() {
         super();
         this.message = "Oops! I don't understand what it means!";
     }

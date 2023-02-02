@@ -14,6 +14,7 @@ public abstract class Command {
     // use protected modifier when subclasses need this info
     // private modifier is to encapsulate data within the class itself
     protected String[] contents;
+
     protected Parser parser;
     protected boolean exitStatus;
 
@@ -22,7 +23,7 @@ public abstract class Command {
      * @param contents Input from the user
      * @param exitStatus 1 for exiting programming, 0 for staying
      */
-    public Command(String[] contents,boolean exitStatus) {
+    public Command(String[] contents, boolean exitStatus) {
         this.contents = contents;
         this.parser = new Parser();
         this.exitStatus = exitStatus;

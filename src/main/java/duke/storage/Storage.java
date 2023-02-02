@@ -21,7 +21,7 @@ public class Storage {
     /**
      * Default constructor. Constructor specifies hard codded file using relative path.
      */
-    public Storage(){
+    public Storage() {
         this.filePath = "src" + File.separator + "main" + File.separator 
                 + "java" + File.separator + "duke" + File.separator 
                 + "data" + File.separator + "duke.txt";
@@ -45,10 +45,10 @@ public class Storage {
         try (ObjectInputStream load = new ObjectInputStream(new FileInputStream(this.filePath))) {
             taskList = (List<Task>) load.readObject();
             //return taskList;
-        } catch(Exception e){
+        } catch(Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
-            throw new DukeException(TypeOfTask.storage,0);
+            throw new DukeException(TypeOfTask.storage, 0);
         } finally {
             return taskList; 
         }
@@ -65,7 +65,7 @@ public class Storage {
         } catch (Exception e) {
             System.out.println(e);
             //e.printStackTrace();
-            throw new DukeException(TypeOfTask.storage,1);
+            throw new DukeException(TypeOfTask.storage, 1);
         }
     }
 
