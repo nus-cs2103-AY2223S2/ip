@@ -1,12 +1,6 @@
 package duke;
 
-import duke.command.AddCommand;
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.ExitCommand;
-import duke.command.ListCommand;
-import duke.command.MarkCommand;
-import duke.command.UnmarkCommand;
+import duke.command.*;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
@@ -16,7 +10,7 @@ import duke.task.Todo;
  */
 public class Parser {
 
-    protected enum COMMAND {BYE, LIST, TODO, DEADLINE, EVENT, MARK, UNMARK, DELETE}
+    protected enum COMMAND {BYE, LIST, TODO, DEADLINE, EVENT, MARK, UNMARK, DELETE, FIND}
 
     /**
      * Generates command from user command input
@@ -46,6 +40,8 @@ public class Parser {
                 return new UnmarkCommand(fullCommand);
             case DELETE:
                 return new DeleteCommand(fullCommand);
+            case FIND:
+                return new FindCommand(fullCommand);
             default:
                 throw new DukeException("I'm sorry, but I don't know what that means");
             }

@@ -100,12 +100,44 @@ public class Ui {
      * @param tasks List of tasks
      */
     public void showTasks(TaskList tasks) throws DukeException {
+        if (tasks.size() == 0) {
+            echo("There is no task in your list");
+            return;
+        }
+
         StringBuilder message = new StringBuilder("Here are the tasks in your list:");
         for (int i = 0; i < tasks.size(); i++) {
             message.append("\n")
                     .append(i + 1)
                     .append(".")
                     .append(tasks.get(i));
+        }
+        echo(message.toString());
+    }
+
+    /**
+     * Shows the list of tasks that contains the specified keyword
+     *
+     * @param tasks List of tasks
+     * @param keyword Keyword
+     */
+    public void showFind(TaskList tasks, String keyword) {
+        StringBuilder message = new StringBuilder("Here are the matching tasks in your list:");
+        int i = 0;
+        for (Task task: tasks.getTasks()) {
+            if (task.getDescription()
+                    .toUpperCase()
+                    .contains(keyword
+                            .toUpperCase())) {
+                message.append("\n")
+                        .append(i + 1)
+                        .append(".")
+                        .append(task);
+                i++;
+            }
+        }
+        if (i == 0) {
+            message = new StringBuilder("There is no matching task in your list");
         }
         echo(message.toString());
     }
