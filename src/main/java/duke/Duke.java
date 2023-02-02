@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Duke {
+
     public static void main(String[] args) {
         TasksList list = new TasksList(100);
         UI ui = new UI();
@@ -20,10 +21,10 @@ public class Duke {
         storage.loadData();
         start(ui, storage, parser, list);
     }
+
     public static void start(UI ui, Storage storage, Parser parser, TasksList list) {
         Scanner input = new Scanner(System.in);
         String command;
-        int counter = 0;
     
         while(true) {
             command = input.nextLine();
