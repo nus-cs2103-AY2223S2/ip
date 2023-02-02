@@ -12,11 +12,15 @@ public class Deadline extends Task{
         return this.deadline;
     }
     @Override
+    public String saveTask(){
+        return super.saveTask() + '|' + this.type + '|' + this.deadline;
+    }
+    @Override
     public char getType() {
         return type;
     }
     @Override
     public String toString(){
-        return super.toString() + "(by: "+ deadline + ")";
+        return super.toString() + " (by: "+ deadline + ")";
     }
 }
