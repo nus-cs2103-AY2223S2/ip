@@ -42,7 +42,7 @@ public class Event extends Task {
     @Override
     public String toDiskFormat() {
         return String.format("E|%d|%s|%s|%s", super.getIsDone() ? 1 : 0, super.getTitle(),
-                this.startTime, this.endTime);
+                super.dateTimeToString(this.startTime), super.dateTimeToString(this.endTime));
     }
 
     /**

@@ -36,7 +36,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toDiskFormat() {
-        return String.format("D|%d|%s|%s", super.getIsDone() ? 1 : 0, super.getTitle(), this.deadline);
+        return String.format("D|%d|%s|%s", super.getIsDone() ? 1 : 0, super.getTitle(),
+                super.dateTimeToString(this.deadline));
     }
 
     /**

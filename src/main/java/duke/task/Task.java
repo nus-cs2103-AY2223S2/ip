@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.exceptions.DukeInvalidArgumentException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -42,10 +44,12 @@ public abstract class Task {
 
     public abstract String toDiskFormat();
     protected LocalDateTime parseDateString(String dateString) throws DateTimeParseException {
-        return LocalDateTime.parse(dateString);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH-mm");
+        return LocalDateTime.parse(dateString, formatter);
     }
+
     protected String dateTimeToString(LocalDateTime localDateTime) {
-        return localDateTime.format(DateTimeFormatter.ofPattern("dd MMM uuuu, HH.mm a"));
+        return localDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd-HH-mm"));
     }
     @Override
     public String toString() {
