@@ -33,6 +33,7 @@ public class Duke {
             throw new RuntimeException(e);
         }
     }
+
     public static Path loadDir() throws IOException {
         String home = System.getProperty("user.home");
         Path dir = Paths.get(home, "data");
