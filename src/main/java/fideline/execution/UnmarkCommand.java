@@ -6,6 +6,11 @@ import fideline.save.Storage;
 import fideline.task.TaskManager;
 import fideline.user.Ui;
 
+/**
+ * Command that executes the status change of a task to undone.
+ *
+ * @author Fun Leon
+ */
 public class UnmarkCommand extends Command {
 
     private int taskNum;
@@ -32,6 +37,4 @@ public class UnmarkCommand extends Command {
         }
     }
 
-
 }
-
