@@ -41,6 +41,25 @@ public class TaskList extends ArrayList<Task> {
         return task;
     }
 
+    /**
+     * Returns a new TaskList containing all the Tasks containing a given keyword.
+     *
+     * @param toFind The keyword to search for.
+     * @return New TaskList containing the relevant tasks.
+     */
+    public TaskList findTasks(String toFind) {
+        TaskList results = new TaskList();
+
+        for (int i = 0; i < super.size(); ++i) {
+            Task task = super.get(i);
+            if (task.toString().substring(7).contains(toFind)) {
+                results.addTask(task);
+            }
+        }
+
+        return results;
+    }
+
     private boolean checkSize(int index) throws DukeException {
         if (index == 0 || index > super.size()) {
             throw new DukeException(String.format(ERROR.INVALID_INDEX.getMessage(), super.size()));

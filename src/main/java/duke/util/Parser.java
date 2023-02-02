@@ -21,6 +21,9 @@ public class Parser {
             return new Command(CommandType.DELETE_TASK, index);
         } else if (input.startsWith("todo") || input.startsWith("deadline") || input.startsWith("event")) {
             return new Command(CommandType.ADD_TASK, input);
+        } else if (input.startsWith("find")) {
+            String toFind = input.replace("find ", "");
+            return new Command(CommandType.FIND_TASK, toFind);
         } else {
             return new Command(CommandType.INVALID_COMMAND);
         }
