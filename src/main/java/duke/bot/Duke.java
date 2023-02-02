@@ -3,6 +3,7 @@ package duke.bot;
 import duke.taskmanager.TaskList;
 
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 /**
@@ -12,6 +13,8 @@ public class Duke {
     ///////////////////
     private Storage storage;
     private TaskList tasks;
+    private static final String FILE_PATH = Paths.get(Paths.get(System.getProperty("user.home")).toString(),
+            "tasks.txt").toString();
     private Ui ui;
 
 
@@ -27,8 +30,7 @@ public class Duke {
         }
     }
     public Duke() {
-        ui = new Ui();
-        storage = new Storage("duke/bot/data/tasks.txt");
+        storage = new Storage(FILE_PATH);
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -45,7 +47,7 @@ public class Duke {
             Parser.parse(str, tasks);
         }
     }
-    public String getResponse(String input, TaskList tasks)  {
+    public String getResponse(String input)  {
         return "Duke: " + Parser.parse(input, tasks);
     }
 
@@ -55,12 +57,4 @@ public class Duke {
     }
 
 
-    public TaskList getTasks() {
-        try {
-            tasks = new TaskList(storage.load());
-        } catch (DukeException ignored) {
-
-        }
-        return tasks;
-    }
 }

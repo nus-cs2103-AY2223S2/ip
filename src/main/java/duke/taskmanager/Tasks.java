@@ -47,6 +47,6 @@ public class Tasks {
         return "Got it I've added this task: \n";
     }
 
-    /*returns generic message message to indicate that task has been removed */
+    /*returns generic message to indicate that task has been removed */
     public String deleted() {return "Noted. I've removed this task:\n";}
 }

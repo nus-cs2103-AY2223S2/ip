@@ -14,23 +14,23 @@ public class Parser {
 
     /*function parses applicable inputs and prints out respective outputs based on saved state from storage*/
     public static String parse(String str, TaskList tasks) {
-        TaskList todoList = tasks;
+        assert tasks != null;
         StringBuilder res = new StringBuilder();
         if (str.equals("bye")) {
             Exit();
         } else if(str.contains("delete")) {
-            if(todoList.isEmpty()) {
+            if(tasks.isEmpty()) {
                 res.append("There is nothing on your list to delete");
                 return res.toString();
             } else {
                 int index = Integer.parseInt((str.substring(7)));
-                Tasks t = todoList.get(index-1);
-                todoList.remove(index - 1);
-                TaskList.rewrite(todoList);
-                res.append("\nNow you have ").append(todoList.size()).append(" tasks in the list");
+                Tasks t = tasks.get(index-1);
+                tasks.remove(index - 1);
+                TaskList.rewrite(tasks);
+                res.append("\nNow you have ").append(tasks.size()).append(" tasks in the list");
                 System.out.println(t.deleted() +
                         "\nNow you have " +
-                        todoList.size() +
+                        tasks.size() +
                         " tasks in the list");
                 return res.toString();
             }
@@ -39,7 +39,7 @@ public class Parser {
             res.append("Here are the tasks matching the description:");
             String keyword = str.split(" ", 2)[1];
             int n = 1;
-            for (Tasks t : todoList.getList()) {
+            for (Tasks t : tasks.getList()) {
                 if (t.getDesc().contains(keyword)) {
                     System.out.println(n + ". "
                             + t.icon()
@@ -57,13 +57,13 @@ public class Parser {
             if (str.equals("list")) {
                 System.out.println("Here are the tasks in your list:");
                 res.append("Here are the tasks in your list:");
-                if (todoList.isEmpty()) {
+                if (tasks.isEmpty()) {
                     System.out.println("You have nothing scheduled, add something to the list.");
                     res.append("\nYou have nothing scheduled, add something to the list.");
                     return res.toString();
                 } else {
                     int n = 1;
-                    for (Tasks t : todoList.getList()) {
+                    for (Tasks t : tasks.getList()) {
                         System.out.println(n + ". "
                                 + t.icon()
                                 + t.completed() + " "
@@ -80,9 +80,9 @@ public class Parser {
 
                 if (str.contains("un")) {
                     int index = Integer.parseInt((str.substring(7)));
-                    Tasks t = todoList.get(index - 1);
+                    Tasks t = tasks.get(index - 1);
                     t.unmark();
-                    TaskList.rewrite(todoList);
+                    TaskList.rewrite(tasks);
                     res.append("Oops! Stop procrastinating: \n"
                             + t.completed() + " " + t.getDesc());
                     System.out.println("Oops! Stop procrastinating: \n"
@@ -90,9 +90,9 @@ public class Parser {
                     return res.toString();
                 } else {
                     int index = Integer.parseInt(str.substring(5));
-                    Tasks t = todoList.get(index - 1);
+                    Tasks t = tasks.get(index - 1);
                     t.mark();
-                    TaskList.rewrite(todoList);
+                    TaskList.rewrite(tasks);
                     res.append("Nice! I've marked this task as done: \n"
                             + t.completed() + " " + t.getDesc());
                     System.out.println("Nice! I've marked this task as done: \n"
@@ -105,55 +105,56 @@ public class Parser {
                 try {
                     switch (type) {
                         case "todo":
+
                             Tasks t = new ToDo(str);
-                            todoList.add(t);
+                            tasks.add(t);
                             System.out.println(t.added() +
                                     "\nNow you have " +
-                                    todoList.size() +
+                                    tasks.size() +
                                     " tasks in the list");
                             res.append(t.added() +
                                     "\nNow you have " +
-                                    todoList.size() +
+                                    tasks.size() +
                                     " tasks in the list");
                             return res.toString();
                         case "deadline":
                             Tasks d = new Deadline(str);
-                            todoList.add(d);
+                            tasks.add(d);
                             System.out.println(d.added() +
                                     "\nNow you have " +
-                                    todoList.size() +
+                                    tasks.size() +
                                     " tasks in the list");
                             res.append(d.added() +
                                     "\nNow you have " +
-                                    todoList.size() +
+                                    tasks.size() +
                                     " tasks in the list");
                             return res.toString();
                         case "event":
                             Tasks e = new Event(str);
-                            todoList.add(e);
+                            tasks.add(e);
                             System.out.println(e.added() +
                                     "\nNow you have " +
-                                    todoList.size() +
+                                    tasks.size() +
                                     " tasks in the list");
                             res.append(e.added() +
                                     "\nNow you have " +
-                                    todoList.size() +
+                                    tasks.size() +
                                     " tasks in the list");
                             return res.toString();
                         default:
                             return res.toString();
                     }
 
-                } catch (unrecogException e){
+                } catch (unrecogException e) {
                     System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
                     res.append("☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
                     return res.toString();
-                } catch(emptyDescException e) {
-                    System.out.println("☹ OOPS!!! The description of a "+type+" cannot be empty.\n");
-                    res.append("☹ OOPS!!! The description of a "+type+" cannot be empty.\n");
+                } catch (emptyDescException e) {
+                    System.out.println("☹ OOPS!!! The description of a " + type + " cannot be empty.\n");
+                    res.append("☹ OOPS!!! The description of a " + type + " cannot be empty.\n");
                     return res.toString();
-                }catch(unspecTimeException e) {
-                    if(type.equals("event")) {
+                } catch (unspecTimeException e) {
+                    if (type.equals("event")) {
                         System.out.println(" Please specify a timeframe (from/ ... to/ ...)\n");
                         res.append(" Please specify a timeframe (from/ ... to/ ...)\n");
                         return res.toString();

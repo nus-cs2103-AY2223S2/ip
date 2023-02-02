@@ -27,7 +27,6 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Duke duke;
-    private TaskList tasks;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duke.png"));
@@ -39,7 +38,6 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke d) {
         duke = d;
-        tasks = d.getTasks();
     }
 
     /**
@@ -49,13 +47,16 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        tasks = new TaskList();
-
         String response = duke.getResponse(input);
 
         if (input == "bye") {
             Platform.exit();
         }
+        dialogContainer.getChildren().add(DialogBox.getUserDialog("Hello! I'm duke.Duke\nWhat can I do for you? "+
+        "\n('bye' to terminate duke.Duke)" +
+                "\n('list' to access list of tasks)" +
+                "\n('un/mark X' to un/mark X task on list)" +
+                "\n('todo/deadline/event' for keeping note of different tasks)", dukeImage));
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)

@@ -18,6 +18,7 @@ import java.util.Scanner;
 public class Storage {
     String path;
 
+
     /*Constructor for Storage object containing saved file path */
     public Storage(String str){
         this.path = str;
@@ -61,8 +62,8 @@ public class Storage {
             sc.close();
         } catch (FileNotFoundException e) {
             throw new DukeException();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        } catch (Exception ignored) {
+
         }
         return tasksList;
     }
