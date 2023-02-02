@@ -9,7 +9,13 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui) {
-        ui.printTasks(tasks);
+    public String execute(TaskList tasks) {
+        String returnMessage = "";
+        int taskNumber = 1;
+        for (int i = 0; i < tasks.getSize(); i++) {
+            String task = taskNumber + ". " + tasks.getTask(i).toString();
+            returnMessage += task;
+        }
+        return returnMessage;
     }
 }

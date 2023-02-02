@@ -1,13 +1,13 @@
 package duke;
 
 import duke.command.Parser;
-import duke.exception.DukeException;
 import duke.task.Task;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -29,7 +29,7 @@ public class Storage {
      * Loads tasks from task log file
      * @return An ArrayList of Tasks from task log
      */
-    public ArrayList<Task> loadTasksFromTaskLog() throws DukeException {
+    public ArrayList<Task> loadTasksFromTaskLog() {
         File taskLog = new File(filePath);
         Scanner taskLogScanner = null;
         try {

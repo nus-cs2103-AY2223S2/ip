@@ -17,30 +17,19 @@ public class Duke {
     /**
      * Constructor for Duke Class. If log file does not exist, create a new log file
      */
-    public Duke() throws DukeException {
+    public Duke() {
         Storage.logFileExists(FILE_PATH);
         ui = new Ui();
         storage = new Storage(FILE_PATH);
         tasks = new TaskList(storage.loadTasksFromTaskLog());
     }
 
-    /**
-     * Runs Duke interface which interprets user input
-     */
-    public void run() throws DukeException {
-        ui.greetUser();
-        while (!isExit) {
-            String userInput = ui.getInput();
-            Command c = Parser.getCommandType(userInput);
-            c.execute(tasks, ui);
-            isExit = c.getExitStatus();
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.getCommandType(input);
+            return c.execute(tasks);
+        } catch (DukeException e) {
+            return ("Invalid input");
         }
-    }
-
-    /**
-     * Initialise Duke chatbot
-     */
-    public static void main(String[] args) throws DukeException {
-        new Duke().run();
     }
 }

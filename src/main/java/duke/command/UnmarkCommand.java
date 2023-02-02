@@ -11,11 +11,12 @@ public class UnmarkCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui) {
+    public String execute(TaskList tasks) {
         int toUnMark = userInput.charAt(7) - 48;
         Task toUnMarkTask = tasks.getTask(toUnMark - 1);
         toUnMarkTask.unmarkTask();
-        ui.informTaskIsUnMarked(toUnMarkTask);
         Storage.saveTasksToTaskLog(tasks);
+        return "Nice! I've unmarked this task as incomplete:\n   "
+                + toUnMarkTask + "\n";
     }
 }

@@ -9,8 +9,9 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui) {
-         ui.sayGoodbye();
-         isExit = true;
+    public String execute(TaskList tasks) {
+        isExit = true;
+        return "Bye. Hope to see you again soon!";
+
      }
 }

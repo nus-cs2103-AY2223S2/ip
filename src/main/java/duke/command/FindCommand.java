@@ -12,9 +12,18 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui) {
+    public String execute(TaskList tasks) {
         String keyword = Parser.getFindKeyword(userInput);
         ArrayList<Task> foundTasks = tasks.filterTasks(keyword);
-        ui.printFoundTasks(foundTasks);
+        if (foundTasks.size() == 0) {
+            return "There are no matching tasks\n";
+        }
+        String returnMessage = "Here are the matching tasks in your list:";
+        int taskNumber = 1;
+        for (int i = 0; i < foundTasks.size(); i++) {
+            String foundTask = taskNumber + ". " + tasks.getTask(i).toString() + "/n";
+            returnMessage += foundTask;
+        }
+        return returnMessage;
     }
 }

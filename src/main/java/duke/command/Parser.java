@@ -8,6 +8,7 @@ import duke.task.ToDo;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Scanner;
 
 /**
  * Class for Parser which translates between different task formats
@@ -23,15 +24,10 @@ public final class Parser {
         return LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
     }
 
-    /**
-     * Get command from user input
-     * @param input User input
-     * @return command String
-     */
-    public static String getCommand(String input) {
-        return input.split(" ")[0];
+    public static String getInput() {
+        Scanner sc = new Scanner(System.in);
+        return sc.nextLine();
     }
-
     /**
      * Get keyword from find command
      * @param input User input containing find command
@@ -46,7 +42,7 @@ public final class Parser {
      * @param taskLog Task log to be translated
      * @return Task which was represented by its task log format
      */
-    public static Task translateTaskLogToTask(String taskLog) throws DukeException {
+    public static Task translateTaskLogToTask(String taskLog) {
         Task taskToReturn = new Task();
         String[] taskLogCommands = taskLog.split(" \\| ");
         String taskType = taskLogCommands[0];
@@ -70,7 +66,7 @@ public final class Parser {
             taskToReturn = new Event(taskName, formattedStartTime, formattedEndTime);
             break;
         default:
-            throw new DukeException("Invalid task log type");
+            //throw new DukeException("Invalid task log type");
         }
         if (taskStatus.equals("1")) {
             taskToReturn.markTask();
