@@ -5,18 +5,18 @@ package duke.task;
  */
 public abstract class Task {
     private String description;
-    private TaskType taskType;
+    private TaskType typeOfTask;
     private boolean isDone;
 
     /**
      * Creates a task.
      *
      * @param description The description of the task.
-     * @param taskType The type of task.
+     * @param typeOfTask The type of task.
      */
-    public Task(String description, TaskType taskType) {
+    public Task(String description, TaskType typeOfTask) {
         this.description = description;
-        this.taskType = taskType;
+        this.typeOfTask = typeOfTask;
         this.isDone = false;
     }
 
@@ -28,8 +28,8 @@ public abstract class Task {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
-    public TaskType getTaskType() {
-        return taskType;
+    public TaskType getTypeOfTask() {
+        return typeOfTask;
     }
 
     public String getDescription() {

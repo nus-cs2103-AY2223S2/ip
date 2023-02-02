@@ -28,7 +28,7 @@ public class DeadlineCommandTest {
         Assertions.assertDoesNotThrow(() -> { command.run(ui, taskList, storage, args); });
 
         Assertions.assertEquals(1, taskList.getTotalTasks());
-        Assertions.assertEquals(TaskType.DEADLINE, taskList.getTask(1).getTaskType());
+        Assertions.assertEquals(TaskType.DEADLINE, taskList.getTask(1).getTypeOfTask());
         Assertions.assertEquals(description, taskList.getTask(1).getDescription());
 
         LocalDateTime byDateTime = ((Deadline) taskList.getTask(1)).getBy();

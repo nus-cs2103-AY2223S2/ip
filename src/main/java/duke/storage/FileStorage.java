@@ -102,7 +102,7 @@ public class FileStorage implements Storage {
         try {
             FileWriter fileWriter = new FileWriter(String.format("%s/%s", directoryPath, fileName));
             for (Task task : tasks) {
-                switch (task.getTaskType()) {
+                switch (task.getTypeOfTask()) {
                 case TODO:
                     ToDo todo = (ToDo) task;
                     fileWriter.write(String.format("T;%d;%s\n", todo.isDone() ? 1 : 0, todo.getDescription()));

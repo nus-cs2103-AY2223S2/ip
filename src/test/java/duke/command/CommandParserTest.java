@@ -25,7 +25,7 @@ public class CommandParserTest {
         Assertions.assertDoesNotThrow(() -> { commandParser.parseInputAndExecuteCommand(input, ui, taskList, storage); });
 
         Assertions.assertEquals(1, taskList.getTotalTasks());
-        Assertions.assertEquals(TaskType.TODO, taskList.getTask(1).getTaskType());
+        Assertions.assertEquals(TaskType.TODO, taskList.getTask(1).getTypeOfTask());
         Assertions.assertEquals("description", taskList.getTask(1).getDescription());
     }
 
@@ -54,7 +54,7 @@ public class CommandParserTest {
         Assertions.assertDoesNotThrow(() -> { commandParser.parseInputAndExecuteCommand(input, ui, taskList, storage); });
 
         Assertions.assertEquals(1, taskList.getTotalTasks());
-        Assertions.assertEquals(TaskType.DEADLINE, taskList.getTask(1).getTaskType());
+        Assertions.assertEquals(TaskType.DEADLINE, taskList.getTask(1).getTypeOfTask());
         Assertions.assertEquals("description", taskList.getTask(1).getDescription());
 
         LocalDateTime byDateTime = ((Deadline) taskList.getTask(1)).getBy();
@@ -103,7 +103,7 @@ public class CommandParserTest {
         Assertions.assertDoesNotThrow(() -> { commandParser.parseInputAndExecuteCommand(input, ui, taskList, storage); });
 
         Assertions.assertEquals(1, taskList.getTotalTasks());
-        Assertions.assertEquals(TaskType.EVENT, taskList.getTask(1).getTaskType());
+        Assertions.assertEquals(TaskType.EVENT, taskList.getTask(1).getTypeOfTask());
         Assertions.assertEquals("description", taskList.getTask(1).getDescription());
 
         LocalDateTime byDateTime = ((Event) taskList.getTask(1)).getFrom();
@@ -161,7 +161,7 @@ public class CommandParserTest {
         Assertions.assertDoesNotThrow(() -> { commandParser.parseInputAndExecuteCommand(input, ui, taskList, storage); });
 
         Assertions.assertEquals(1, taskList.getTotalTasks());
-        Assertions.assertEquals(TaskType.TODO, taskList.getTask(1).getTaskType());
+        Assertions.assertEquals(TaskType.TODO, taskList.getTask(1).getTypeOfTask());
         Assertions.assertEquals(true, taskList.getTask(1).isDone());
     }
 
@@ -192,7 +192,7 @@ public class CommandParserTest {
         Assertions.assertDoesNotThrow(() -> { commandParser.parseInputAndExecuteCommand(input, ui, taskList, storage); });
 
         Assertions.assertEquals(1, taskList.getTotalTasks());
-        Assertions.assertEquals(TaskType.TODO, taskList.getTask(1).getTaskType());
+        Assertions.assertEquals(TaskType.TODO, taskList.getTask(1).getTypeOfTask());
         Assertions.assertEquals(false, taskList.getTask(1).isDone());
     }
 
