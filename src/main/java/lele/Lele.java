@@ -16,10 +16,11 @@ import javafx.stage.Stage;
  * The main class that represents the chatbot, Lele, which helps
  * to build a checklist consisting of todos, deadlines, events.
  */
-public class Lele extends Application {
+public class Lele {
     private final Storage storage;
     private TaskList taskList;
     private final Ui ui;
+
 
     /**
      * Constructor for Lele.
@@ -70,13 +71,6 @@ public class Lele extends Application {
         new Lele("./data/lele.txt").run();
     }
 
-    @Override
-    public void start(Stage stage) {
-        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
-        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
 
-        stage.setScene(scene); // Setting the stage to show our screen
-        stage.show(); // Render the stage.
-    }
 
 }
