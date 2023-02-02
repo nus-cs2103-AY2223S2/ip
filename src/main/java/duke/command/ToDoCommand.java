@@ -1,11 +1,14 @@
 package duke.command;
 
-import duke.ui.Ui;
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.task.ToDo;
+import duke.ui.Ui;
 
+/**
+ * Command to add todo task.
+ */
 public class ToDoCommand extends AddTaskCommand {
     @Override
     public String getCommandName() {

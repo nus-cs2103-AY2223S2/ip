@@ -1,5 +1,8 @@
 package duke.ui;
 
+/**
+ * Interface defining basic methods for user interface.
+ */
 public interface Ui {
     void showText(String text);
 

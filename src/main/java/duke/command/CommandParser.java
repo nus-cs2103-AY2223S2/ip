@@ -1,19 +1,29 @@
 package duke.command;
 
-import duke.exception.DukeException;
-import duke.ui.Ui;
-import duke.storage.Storage;
-import duke.task.TaskList;
-
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
+/**
+ * Holds mapping of all available commands.
+ * Parses input and executes the respective commands
+ * with the arguments given in the input.
+ */
 public class CommandParser {
     private HashMap<String, Command> commandMap;
 
     private boolean hasUserQuit = false;
 
+    /**
+     * Creates command parser. All available commands are
+     * initialized and are mapped accordingly to their
+     * respective commands.
+     */
     public CommandParser() {
         commandMap = new HashMap<>();
 
@@ -51,7 +61,8 @@ public class CommandParser {
      * @param storage Storage.
      * @throws DukeException If command is unknown or does not match the command syntax.
      */
-    public void parseInputAndExecuteCommand(String input, Ui ui, TaskList taskList, Storage storage) throws DukeException {
+    public void parseInputAndExecuteCommand(String input, Ui ui, TaskList taskList, Storage storage)
+            throws DukeException {
         String commandName = input.split(" ")[0];
 
         if (commandName.equals("bye")) {

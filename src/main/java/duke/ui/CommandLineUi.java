@@ -1,5 +1,8 @@
 package duke.ui;
 
+/**
+ * User interface implementation for the command line.
+ */
 public class CommandLineUi implements Ui {
     /**
      * Displays text on command line.
@@ -25,9 +28,9 @@ public class CommandLineUi implements Ui {
     @Override
     public void showStartup() {
         String logo =
-                " /\\_/\\\n" +
-                        "( o.o )   ~meow~\n" +
-                        " > ^ <";
+                " /\\_/\\\n"
+                + "( o.o )   ~meow~\n"
+                + " > ^ <";
         System.out.println(logo);
         showLine();
         showText("Hello! I'm duke.Duke");

@@ -1,13 +1,23 @@
 package duke.task;
 
-import duke.util.DateTimeUtils;
-
 import java.time.LocalDateTime;
 
+import duke.util.DateTimeUtils;
+
+/**
+ * Event task representation.
+ */
 public class Event extends Task {
     private LocalDateTime from;
     private LocalDateTime to;
 
+    /**
+     * Creates an event task.
+     *
+     * @param description The description of the event.
+     * @param from The starting date of the event.
+     * @param to The ending date of the event.
+     */
     public Event(String description, LocalDateTime from, LocalDateTime to) {
         super(description, TaskType.EVENT);
         this.from = from;

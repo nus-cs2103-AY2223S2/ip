@@ -2,6 +2,9 @@ package duke.task;
 
 import java.util.List;
 
+/**
+ * List for managing tasks.
+ */
 public class TaskList {
     private List<Task> tasks;
 

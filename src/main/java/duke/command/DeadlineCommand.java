@@ -1,5 +1,8 @@
 package duke.command;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
+
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.Deadline;
@@ -7,9 +10,9 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 import duke.util.DateTimeUtils;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
-
+/**
+ * Command to add deadline task.
+ */
 public class DeadlineCommand extends AddTaskCommand {
     @Override
     public String getCommandName() {
