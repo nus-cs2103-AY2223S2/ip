@@ -1,9 +1,5 @@
-/*
-taskList class HAS Tasks
-Task attributes: index, isDone, taskDescription
-Task methods: checkOff(int)
-Tasklist
- */
+package duke;
+
 public class Task {
     private String taskName;
     private boolean isDone;
