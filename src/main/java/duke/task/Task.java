@@ -1,12 +1,13 @@
-/**
- * File name: Task.java
- * @author: Jerome Neo
- * Description: Task class that Todo, Event and Deadline inherits from.
- */
 package duke.task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ *      File name: Task.java
+ *      @author: Jerome Neo
+ *      Description: Task class that Todo, Event and Deadline inherits from.
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -75,7 +76,6 @@ public class Task {
      * Returns a LocalDateTime object that can be stored.
      * This method accepts Strings with the following format dd/MM/yyyy HHmm
      * where the time is in 24 hours.
-     * 
      * @param stringDate
      * @return the LocalDateTime representation of the string.
      */

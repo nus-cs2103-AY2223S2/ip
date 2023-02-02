@@ -1,11 +1,12 @@
-/**
- * File name: Deadline.java
- * @author: Jerome Neo
- * Description: Deadline class that inherits from the Task class.
- */
 package duke.task;
+
 import java.time.LocalDateTime;
 
+/**
+ *      File name: Deadline.java
+ *      @author: Jerome Neo
+ *      Description: Deadline class that inherits from the Task class.
+ */
 public class Deadline extends Task {
     protected String by;
     protected LocalDateTime byDateTime;
@@ -19,7 +20,7 @@ public class Deadline extends Task {
     public Deadline(String description, String by) {
         super(description);
         this.by = by;
-        this.byDateTime =  Task.convertDateTime(by);
+        this.byDateTime = Task.convertDateTime(by);
     }
 
     /**
@@ -38,6 +39,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + "[" +this.getStatusIcon() + "] " + this.getDescription() + " (by: " + dateTimeToString(byDateTime) + ")";
+        return "[D]" + "[" + this.getStatusIcon() + "] "
+            + this.getDescription() + " (by: " + dateTimeToString(byDateTime) + ")";
     }
 }

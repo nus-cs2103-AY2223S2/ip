@@ -1,11 +1,12 @@
-/**
- * File name: Event.java
- * @author: Jerome Neo
- * Description: Event class that inherits from the Task class.
- */
 package duke.task;
+
 import java.time.LocalDateTime;
 
+/**
+ *      File name: Event.java
+ *      @author: Jerome Neo
+ *      Description: Event class that inherits from the Task class.
+ */
 public class Event extends Task {
     protected String from;
     protected String to;
@@ -52,6 +53,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + "[" +this.getStatusIcon() + "] " + this.getDescription() + " (from: " + dateTimeToString(fromDateTime) + " to: " + dateTimeToString(toDateTime)  + ")";
+        return "[E]" + "[" + this.getStatusIcon() + "] " + this.getDescription()
+            + " (from: " + dateTimeToString(fromDateTime) + " to: " + dateTimeToString(toDateTime) + ")";
     }
 }
