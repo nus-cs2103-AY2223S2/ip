@@ -6,4 +6,3 @@
 [T][ ] go to bed 
 [T][ ] wash your face 
 [T][ ] go Hanoi 
-[T][ ] buy food 

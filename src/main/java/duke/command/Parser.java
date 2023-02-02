@@ -1,11 +1,8 @@
 package duke.command;
 
 import duke.exception.DukeException;
-import duke.exception.InvalidEventDateTimeException;
-import duke.exception.InvalidIndexException;
 import duke.exception.MissingContentException;
-import duke.task.Deadline;
-import duke.task.Task;
+import duke.exception.InvalidIndexException;
 
 /**
  * Makes sense of what users say
@@ -51,9 +48,9 @@ public class Parser {
         } catch (NullPointerException e) {
             throw new MissingContentException();
         }
-        if (!listOfAction.checkValidIndex(taskIndex)) {
+        if (!listOfAction.checkValidIndex(taskIndex - 1)) {
             throw new InvalidIndexException();
-        } else if (taskIndex < 0) {
+        } else if (taskIndex < 1) {
             throw new InvalidIndexException();
         }
         return taskIndex;

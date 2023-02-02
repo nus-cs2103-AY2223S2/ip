@@ -88,7 +88,6 @@ public class Ui {
     public String findWordIntro(TaskList taskList,String[] arr, boolean containsKeyword) {
         if (arr.length >= 1) {
             if (containsKeyword) {
-                //return("Here are the matching tasks in your list:");
                 return(taskList.findWord(arr[1]));
             } else {
                 return("Sorry boss! No task found!");
@@ -143,7 +142,6 @@ public class Ui {
         } catch (MissingContentException | InvalidIndexException | IOException e) {
             return(e.getMessage());
         }
-        //return listOfAction;
     }
 
 
@@ -173,15 +171,12 @@ public class Ui {
             int index = Parser.getTaskIndex(listOfAction, command) - 1;
             try {
                 return(listOfAction.delete(index));
-               // System.out.println(String.format("Now you have %d "
-                 //       + "tasks in the list", listOfAction.validLen()));
             } catch (IOException e) {
                 return(new InvalidIndexException().getMessage());
             }
         } catch (MissingContentException | InvalidIndexException e) {
             return(e.getMessage());
         }
-        //return listOfAction;
     }
 
     /**
@@ -194,11 +189,9 @@ public class Ui {
         String remaining = Parser.toDo(command);
         if (remaining.equals("")) {
             return(new MissingContentException().getMessage());
-            //return listOfAction;
         }
         Todo newTask = new Todo(command[0], remaining, false);
         return(listOfAction.add(newTask));
-       // return listOfAction;
     }
 
     /**
@@ -209,17 +202,13 @@ public class Ui {
      */
     public String addDeadline(TaskList listOfAction, String[] command) {
         try {
-            //System.out.println("Got it. I've added this task:");
             String detail = new Parser().deadlineDetail(command);
             String remaining = new Parser().getDeadlineFull(command);
             Deadline newTaskDeadline = new Deadline(command[0], detail, remaining);
             return(listOfAction.add(newTaskDeadline));
-            //System.out.println(String.format("Now you have %d "
-              //      + "tasks in the list", listOfAction.validLen()));
         } catch (MissingContentException | InvalidDeadlineDateException e) {
             return(e.getMessage());
         }
-       // return listOfAction;
     }
 
     public String addEvent(TaskList listOfAction, String[] command) {
@@ -246,6 +235,5 @@ public class Ui {
         } catch (InvalidEventDateTimeException e) {
             return(e.getMessage());
         }
-       // return listOfAction;
     }
 }

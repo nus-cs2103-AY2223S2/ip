@@ -72,7 +72,6 @@ public class Duke {
                 switch (myAction) {
                 case Find:
                     ui.says(ui.findWordIntro(listOfAction, arr, listOfAction.checkWord(arr[1])));
-                    //listOfAction.findWord(arr[1]);
                     break;
 
                 case Bye:
@@ -84,24 +83,19 @@ public class Duke {
                     break;
 
                 case Mark:
-                    //listOfAction =
                     ui.says(ui.mark(listOfAction, arr));
-                    file.overwrite(listOfAction);
                     break;
 
                 case Unmark:
                     ui.says(ui.unmark(listOfAction, arr));
-                    file.overwrite(listOfAction);
                     break;
 
                 case Delete:
                     ui.says(ui.delete(listOfAction, arr));
-                    file.overwrite(listOfAction);
                     break;
 
                 case Todo:
                     ui.says(ui.toDo(listOfAction, arr));
-                    file.overwrite(listOfAction);
                     break;
 
                 case Deadline:
@@ -120,10 +114,10 @@ public class Duke {
                 ui.showUnknownError();
             }
 
+            file.overwrite(listOfAction);
             arr = ui.getInput();
             s = arr[0];
         }
-        //sc.close();
         ui.bye();
     }
 
@@ -139,7 +133,6 @@ public class Duke {
             switch (myAction) {
                 case Find:
                     return(ui.findWordIntro(listOfAction, arr, listOfAction.checkWord(arr[1])));
-                    //listOfAction.findWord(arr[1]);
 
                 case Bye:
                     return(ui.bye());
@@ -148,25 +141,19 @@ public class Duke {
                     return(ui.list(listOfAction));
 
                 case Mark:
-                    //listOfAction =
                     return(ui.mark(listOfAction, arr));
-                    //file.overwrite(listOfAction);
 
                 case Unmark:
                     return(ui.unmark(listOfAction, arr));
-                    //file.overwrite(listOfAction);
 
                 case Delete:
                     return(ui.delete(listOfAction, arr));
-                    //file.overwrite(listOfAction);
 
                 case Todo:
                     return(ui.toDo(listOfAction, arr));
-                    //file.overwrite(listOfAction);
 
                 case Deadline:
                     return(ui.addDeadline(listOfAction, arr));
-                    //file.overwrite(listOfAction);
 
                 case Event:
                     return(ui.addEvent(listOfAction, arr));
