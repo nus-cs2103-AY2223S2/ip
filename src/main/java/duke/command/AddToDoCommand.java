@@ -24,7 +24,6 @@ public class AddToDoCommand extends Command {
         store.saveToFile(tasks);
         ui.printWithPartition("\tGot it. I've added this task:\n" + "\t  " + temp.toString()
                 + "\n\tNow you have " + Integer.toString(tasks.size()) + " tasks in the list.\n");
-
     };
 
 }

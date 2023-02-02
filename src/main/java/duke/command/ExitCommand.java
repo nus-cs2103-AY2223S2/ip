@@ -15,7 +15,6 @@ public class ExitCommand extends Command {
     /**
      * Begins Duke's shutdown.
      *
-     * @throws DukeException If user input is invalid.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage store) {

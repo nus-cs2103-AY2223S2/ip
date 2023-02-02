@@ -20,7 +20,7 @@ public class Ui {
     /**
      * Returns the instance of Ui.
      *
-     * @return
+     * @return An instance of Ui.
      */
     public static Ui getInstance() {
         return instanceUi;
@@ -63,6 +63,8 @@ public class Ui {
 
     /**
      * Prints the Tasks in Duke's list, including their done status.
+     *
+     * @param tasks The task list to print out.
      */
     public void printList(TaskList tasks) {
         String ls = "\tHere are the tasks in your list:\n";
