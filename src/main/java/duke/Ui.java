@@ -78,7 +78,8 @@ public class Ui {
     }
 
     /**
-     * Displays an error message to user, informing him/her that the date/time given were of the wrong format.
+     * Displays an error message to user, informing him/her that the date/time given were of the wrong format and
+     * informs them of the correct format.
      */
     public void printInvalidDateError() {
         sb.append("Invalid inputs!\n");
