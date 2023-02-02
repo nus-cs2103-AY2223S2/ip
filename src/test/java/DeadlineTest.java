@@ -2,11 +2,14 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 import duke.Deadline;
-public class TodoTest {
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+public class DeadlineTest {
 
     @Test
     public void testDeadline() {
-        assertEquals("[D][ ] return book (by: Dec 2 2019)",
-                new Deadline("deadline return book /by 2/12/2019").printTask());
+        assertEquals("deadline return book /by 2/12/2019 @ 0",
+                new Deadline("return book", "deadline return book /by 2/12/2019",
+                        LocalDate.parse("2019-12-2")).toString());
     }
 }

@@ -6,6 +6,7 @@ public class TodoTest {
 
     @Test
     public void testTodo() {
-        assertEquals("[T][ ] borrow book", new ToDo("todo borrow book").printTask());
+        assertEquals("todo borrow book  @ 0", new ToDo("borrow book",
+                "todo borrow book").toString());
     }
 }
