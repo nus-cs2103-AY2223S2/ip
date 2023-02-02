@@ -29,8 +29,8 @@ public class Deadlines extends Task {
     }
 
     @Override
-    public String formattedDescription() {
-        return super.formattedDescription()
+    public String formatDescription() {
+        return super.formatDescription()
                 + String.format(" | %s", dueDate.toString());
     }
 }

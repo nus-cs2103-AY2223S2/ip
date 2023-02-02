@@ -58,7 +58,7 @@ public class Storage {
         FileWriter writer = new FileWriter(dukeFilePath);
         for (int i = 0; i < tasks.getTaskListSize(); i++) {
             Task currTask = tasks.getTaskByIndex(i);
-            writer.write(currTask.formattedDescription() + "\n");
+            writer.write(currTask.formatDescription() + "\n");
         }
         writer.close();
     }

@@ -41,7 +41,7 @@ public class Task {
         return String.format("[%s][%s] %s", this.taskType, this.getStatusIcon(), this.name);
     }
 
-    public String formattedDescription() {
+    public String formatDescription() {
         String status = isDone ? "1" : "0";
         String description = String.format("%s | %s | %s", this.taskType,
                 status, this.name);

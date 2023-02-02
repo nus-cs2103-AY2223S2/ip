@@ -26,8 +26,8 @@ public class Events extends Task {
     }
 
     @Override
-    public String formattedDescription() {
-        return super.formattedDescription()
+    public String formatDescription() {
+        return super.formatDescription()
                 + String.format(" | %s | %s", startDate.toString(),
                 endDate.toString());
     }
