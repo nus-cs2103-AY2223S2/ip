@@ -1,14 +1,18 @@
 package babe.task;
 
+/**
+ * <code>Deadline</code> class represents a <code>Task</code> that has a deadline.
+ * It extends from <code>Task</code> as implied.
+ */
 public class Deadline extends Task {
 
-    /** A date/time for this Deadline */
+    /** A date/time for this <code>Deadline</code> */
     private String deadline = "";
 
     /**
-     * Constructor for Deadline item.
+     * Constructor for <code>Deadline</code> item.
      *
-     * @param content Description of this Deadline.
+     * @param content Description of this <code>Deadline</code>.
      * @param deadline Date for the deadline of this item.
      */
     public Deadline(String content, String deadline) {
@@ -17,17 +21,22 @@ public class Deadline extends Task {
     }
 
     @Override
+    /**
+     * Returns String representation of the <code>Deadline</code> item.
+     *
+     * @return A String that represents the <code>Deadline</code> item, including its description, done status
+     *         and deadline.
+     */
     public String toString() {
         return (this.isDone ? this.MARKED : this.UNMARKED) + " " + this.description
                 + " (by: " + this.deadline + ")";
     }
 
     /**
-     * Returns String representation of the Deadline object for data storage.
-     * Saves the content of the Deadline, including its isDone status, description,and the deadline date
-     * into a String with the delimiter "|" to be written into a data file.
+     * Returns String representation of the <code>Deadline</code> object for data storage.
+     * The format is as such: D|{done status}|{description}|{deadline}
      *
-     * @return A String representing this Deadline object.
+     * @return A String representing this <code>Deadline</code> object.
      */
     public String toSaveFormat() {
         return "D|" + (this.isDone ? 1 : 0) + "|" + this.description + "|" + this.deadline;

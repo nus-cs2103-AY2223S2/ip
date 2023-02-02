@@ -11,7 +11,7 @@ import java.nio.file.Paths;
 import java.util.Scanner;
 
 /**
- * This class deals with loading tasks from the file and saving tasks in the file.
+ * The <code>Storage</code> class deals with loading tasks from the file and saving tasks in the file.
  */
 class Storage {
     /**

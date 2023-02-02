@@ -3,7 +3,8 @@ package babe;
 import babe.task.Task;
 
 /**
- * This class deals with interactions with the user
+ * The <code>Ui</code> class deals with interactions with the user.
+ * It contains all functions used to generate the GUI and the messages seen in Babe.
  */
 class Ui {
 

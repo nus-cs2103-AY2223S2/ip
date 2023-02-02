@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * This class deals with making sense of the user command.
+ * The <code>Parser</code> class deals with making sense of the user command.
+ * It contains the method parse(String), which is responsible for processing the user input,
+ * distinguishing the commands and the parameters.
  */
 class Parser {
 

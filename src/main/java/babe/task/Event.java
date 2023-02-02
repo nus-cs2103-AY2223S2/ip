@@ -1,19 +1,23 @@
 package babe.task;
 
+/**
+ * <code>Event</code> class represents a simple <code>Event</code> with just a description, done status,
+ * to and from date and time. It extends from <code>Task</code></code> as implied.
+ */
 public class Event extends Task {
 
-    /** The start date/time for this Event. */
+    /** The start date/time for this <code>Event</code>. */
     private String fromDate = "";
 
-    /** The end date/time for this Event. */
+    /** The end date/time for this <code>Event</code>. */
     private String toDate = "";
 
     /**
-     * Constructor for Event object.
+     * Constructor for <code>Event</code> object.
      *
-     * @param content Description of this Event.
-     * @param fromDate The start date/time for this Event.
-     * @param toDate The end date/time for this Event.
+     * @param content Description of this <code>Event</code>.
+     * @param fromDate The start date/time for this <code>Event</code>.
+     * @param toDate The end date/time for this <code>Event</code>.
      */
     public Event(String content, String fromDate, String toDate) {
         super(content);
@@ -22,17 +26,21 @@ public class Event extends Task {
     }
 
     @Override
+    /**
+     * Returns String representation of the <code>Event</code> item.
+     *
+     * @return A String that represents the <code>Event</code> item, including its description and done status.
+     */
     public String toString() {
         return (this.isDone ? this.MARKED : this.UNMARKED) + " " + this.description
                 + " (from: " + this.fromDate + ", to: " + this.toDate + ")";
     }
 
     /**
-     * Returns String representation of the Event object for data storage.
-     * Saves the content of the Event, including its isDone status, description,and the to/from date
-     * into a String with the delimiter "|" to be written into a data file.
+     * Returns String representation of the <code>Event</code> object for data storage.
+     * The format is as such: E|{done status}|{description}|{fromDate}|{toDate}
      *
-     * @return A String representing this Event object.
+     * @return A String representing this <code>Event</code> object.
      */
     public String toSaveFormat() {
         return "E|" + (this.isDone ? 1 : 0) + "|" + this.description + "|" + this.fromDate + "|"
