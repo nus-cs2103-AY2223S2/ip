@@ -7,6 +7,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 
+/** A JavaFX component representing a dialog box. */
 public class DialogBox extends HBox {
 
     // user images
@@ -21,26 +22,43 @@ public class DialogBox extends HBox {
     private Label text;
     private ImageView displayPicture;
 
-    private DialogBox(Label l, ImageView iv) {
-        text = l;
-        text.setFont(DialogBox.DEFAULT_FONT);
-        displayPicture = iv;
+    /**
+     * Creates a DialogBox with a given text string and image.
+     *
+     * @param text  The message to be displayed
+     * @param image The image to be displayed
+     */
+    private DialogBox(String text, Image image) {
+        this.text = new Label(text);
+        this.text.setFont(DialogBox.DEFAULT_FONT);
+        this.text.setWrapText(true);
 
-        text.setWrapText(true);
-        displayPicture.setFitWidth(100.0);
-        displayPicture.setFitHeight(100.0);
-
+        this.displayPicture = new ImageView(image);
+        this.displayPicture.setFitWidth(100.0);
+        this.displayPicture.setFitHeight(100.0);
     }
 
+    /**
+     * Creates a DialogBox using the user's avatar.
+     *
+     * @param text The message to be displayed
+     * @return The created DialogBox
+     */
     public static DialogBox makeUserDialog(String text) {
-        DialogBox dialogBox = new DialogBox(new Label("You said: " + text), new ImageView(userImage));
+        DialogBox dialogBox = new DialogBox("You said: " + text, DialogBox.userImage);
         dialogBox.getChildren().addAll(dialogBox.displayPicture, dialogBox.text);
         dialogBox.setAlignment(Pos.TOP_LEFT);
         return dialogBox;
     }
 
+    /**
+     * Creates a DialogBox using Duke's avatar.
+     *
+     * @param text The message to be displayed
+     * @return The created DialogBox
+     */
     public static DialogBox makeDukeDialog(String text) {
-        DialogBox dialogBox = new DialogBox(new Label(text), new ImageView(dukeImage));
+        DialogBox dialogBox = new DialogBox(text, DialogBox.dukeImage);
         dialogBox.getChildren().addAll(dialogBox.text, dialogBox.displayPicture);
         dialogBox.setAlignment(Pos.TOP_RIGHT);
         return dialogBox;

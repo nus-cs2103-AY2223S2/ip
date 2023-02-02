@@ -29,14 +29,6 @@ public class Duke extends Application {
         this.storage = new Storage(Duke.PATH, this.ui);
     }
 
-    /**
-     * Initializes and runs Duke.
-     *
-     * @param args Ignored
-     */
-    public static void main(String[] args) {
-    }
-
     /** Runs Duke. */
     public void run(String rawInput) {
         Command command;
@@ -60,8 +52,6 @@ public class Duke extends Application {
     @Override
     public void start(Stage stage) {
         this.ui.initializeStage(stage);
-
-        // move stuff from main() here
         this.storage.readToTaskList(this.taskList);
         this.ui.showWelcome();
     }
