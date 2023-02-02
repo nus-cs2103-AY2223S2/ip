@@ -8,20 +8,20 @@ import java.io.IOException;
  * User interface class to interact with the user.
  */
 public class Ui {
-    static final String BORDER = "----------------------------------------\n";
-
+    private static final String BORDER = "----------------------------------------";
+    private static final String PROJECT_PATH = System.getProperty("user.home") + "/ip/src";
     /**
      * Prints welcome message.
      */
     protected String showWelcome() {
         String logo = "           " + "█▀▀ █░░ █ █▀ █▀▀\n"
-                + "Hello from" + " ██▄ █▄▄ █ ▄█ ██▄";
+                + "Hello from" + " ██▄ █▄▄ █ ▄█ ██▄\n";
         logo += "I am a personal Chatbot who keep track of various things!\nEnter help to view commands!";
         return wrapText(logo);
     }
 
     public static String wrapText(String text) {
-        return BORDER + text + "\n" + BORDER;
+        return BORDER + "\n" + text + "\n" + BORDER;
     }
 
     /**
@@ -95,11 +95,13 @@ public class Ui {
      * Prints help message.
      */
     protected String showHelp() {
-        // Might be shifted all into a file.
+        // Shifted into file.
         try {
-            return wrapText(Files.readString(Paths.get("/help.txt")));
+            return wrapText(Files.readString(Paths.get(System.getProperty("user.dir")
+                    + "/src/main/resources/help.txt")));
         } catch (IOException e) {
-            return "";
+            System.out.println(e.toString());
+            return e.getMessage();
         }
 
     }

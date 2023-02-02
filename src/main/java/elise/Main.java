@@ -13,7 +13,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Elise elise = new Elise("/data/list.txt");
+    private Elise elise = new Elise("/list.txt");
 
     @Override
     public void start(Stage stage) {
