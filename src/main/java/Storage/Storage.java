@@ -10,12 +10,21 @@ import java.util.Scanner;
 import Exception.*;
 import Parser.Parser;
 
+/**
+ * Represents a class that encapsulates all methods that works with files, including loading and saving.
+ */
 public class Storage {
     
     String FILEPATH;
 
     // filepath should be "data/duke.txt"
 
+    /**
+     * Constructor for Storage object.
+     *
+     * @param filePath String corresponding to relative path of duke.txt which is the saved list between sessions.
+     * @return Storage Object.
+     */
     public Storage(String filePath) {
         this.FILEPATH = filePath;
 
@@ -36,6 +45,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Returns an Arraylist which corresponds to the list of tasks saved in object filepath.
+     *
+     * @return ArrayList object which is a list of Tasks saved from previous session.
+     * @throws dukeException If unable to read/parse the file in object filepath.
+     */
     public ArrayList<Task> load() throws dukeException {
         ArrayList<Task> listToStore = new ArrayList<Task>();
 
@@ -63,6 +78,11 @@ public class Storage {
         return listToStore;
     }
 
+    /**
+     * Stores the current Arraylist in current session to hard drive.
+     *
+     * @param listToStore ArrayList of Tasks to be stored in object filepath.
+     */
     public void save(ArrayList<Task> listToStore) {
         try {
             FileWriter fw = new FileWriter("data/duke.txt");
@@ -81,7 +101,7 @@ public class Storage {
                 fw.close();
             } catch (Exception e) {
                 // TODO: handle exception
-                System.out.println("    An Error has occured");
+                System.out.println("    An Error has occurred");
                 break;
             }
         }

@@ -8,11 +8,23 @@ import Exception.*;
 import Ui.Ui;
 import Parser.Parser;
 
+
+/**
+ * Represents the whole program, containing the main program for the whole bot.
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor for a Duke Object.
+     * Initializes the whole program as well as required objects.
+     * If path leads to a file that does not exist, the file will be created.
+     *
+     * @param filePath String of path to stored list from previous sessions.
+     * @return Duke object.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -23,6 +35,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Function that runs while waiting for user input.
+     */
     public void run() {
         String echo;
         Scanner scan = new Scanner(System.in);
@@ -67,6 +82,11 @@ public class Duke {
         ui.showClosingMessage();
     }
 
+    /**
+     * Main function of the whole program.
+     *
+     * @param args command line arguments that are not in use.
+     */
     public static void main(String[] args) {
         new Duke("data/duke.txt").run();
     }

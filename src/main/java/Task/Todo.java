@@ -1,10 +1,12 @@
 package Task;
 
+/**
+ *
+ */
 public class Todo extends Task {
     
     public Todo(String description) {
         super(description);
-        this.isDone = false;
     }
 
     public Todo(boolean isDone, String description) {
