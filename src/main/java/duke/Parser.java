@@ -13,6 +13,8 @@ public class Parser {
         } else if (command.startsWith("delete")) {
             int taskNumber = Integer.parseInt(command.split(" ")[1]);
             return new DeleteCommand(taskNumber);
+        } else if (command.startsWith("find")) {
+            return new FindCommand(command.split(" ")[1]);
         } else {
             String type = command.split(" ")[0];
             String[] commandArr = command.split(" ", 2);
