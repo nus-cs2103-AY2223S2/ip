@@ -1,8 +1,6 @@
 package duke;
 
-import duke.command.Command;
 import duke.exception.DukeException;
-import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
@@ -26,35 +24,20 @@ public class Duke {
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            ui.showError(String.format("%sWill be creating a new task list instead~\n", e.getMessage()));
+            System.out.println(e.getMessage() + " Will be creating a new task list instead~\n");
             tasks = new TaskList();
         }
     }
 
-    /**
-     * Provides the main skeleton code for Duke.
-     */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
-        }
+    public Storage getStorage() {
+        return storage;
     }
 
-    //CHECKSTYLE.OFF: JavadocMethod
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+    public TaskList getTasks() {
+        return tasks;
     }
-    //CHECKSTYLE.ON: JavadocMethod
+
+    public Ui getUi() {
+        return ui;
+    }
 }

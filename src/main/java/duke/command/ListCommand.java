@@ -18,7 +18,7 @@ public class ListCommand extends Command {
      * @throws DukeException Throws exception from the methods called in this method.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        ui.showList(tasks);
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        return ui.getListOutput(tasks);
     }
 }
