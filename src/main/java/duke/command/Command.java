@@ -3,7 +3,7 @@ package duke.command;
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.Ui;
+import duke.ui.IoHandler;
 
 /**
  * The command class represents Duke's function based on user input.
@@ -19,7 +19,7 @@ public abstract class Command {
      * @return An output string for duke, if any.
      * @throws DukeException If the function cannot execute properly.
      */
-    public abstract String execute(TaskList tasks, Ui ui, Storage store) throws DukeException;
+    public abstract String execute(TaskList tasks, IoHandler ui, Storage store) throws DukeException;
 
     /**
      * Tells Duke to not exit.

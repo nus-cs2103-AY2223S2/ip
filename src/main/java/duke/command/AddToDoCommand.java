@@ -4,7 +4,7 @@ import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.task.ToDo;
-import duke.ui.Ui;
+import duke.ui.IoHandler;
 
 /**
  * Represents Duke's todo command
@@ -18,11 +18,11 @@ public class AddToDoCommand extends Command {
      * @throws DukeException If user input is invalid.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage store) throws DukeException {
+    public String execute(TaskList tasks, IoHandler ui, Storage store) throws DukeException {
         ToDo temp = new ToDo(ui.getName());
         tasks.add(temp);
         store.saveToFile(tasks);
-        return ui.printWithPartition("\tGot it. I've added this task:\n" + "\t  " + temp.toString()
+        return ui.produceDukeOutput("\tGot it. I've added this task:\n" + "\t  " + temp.toString()
                 + "\n\tNow you have " + Integer.toString(tasks.size()) + " tasks in the list.\n");
     };
 

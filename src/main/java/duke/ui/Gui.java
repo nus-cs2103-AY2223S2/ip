@@ -1,11 +1,13 @@
 package duke.ui;
 
 import duke.exception.DukeException;
+import duke.task.Task;
+import duke.task.TaskList;
 
 /**
- * Gui represents a Ui that helps to handle graphical input.
+ * Gui represents a Ui that helps to handle input and ouput for graphics.
  */
-public class Gui extends Ui {
+public class Gui implements IoHandler {
     private String input;
     private String command;
     private String others;
@@ -16,7 +18,6 @@ public class Gui extends Ui {
      * @param input The graphical input for gui to handle.
      */
     public Gui(String input) {
-        super(input);
         this.input = input;
         breakInputIntoSubstrings();
     }
@@ -40,8 +41,8 @@ public class Gui extends Ui {
     }
 
     @Override
-    public String printNextInput() {
-        return printWithPartition("\tDuke: " + others.strip() + "\n");
+    public String produceInputAsOutput() {
+        return produceDukeOutput("\tDuke: " + others.strip() + "\n");
     }
 
     @Override
@@ -100,4 +101,44 @@ public class Gui extends Ui {
             throw new DukeException("Please input a valid task number");
         }
     }
+
+    @Override
+    public String produceDukeOutput(String s) {
+        return s;
+    }
+
+    @Override
+    public String greet() {
+        // @formatter:off
+        String logo = " ____        _        \n"
+                    + "|  _ \\ _   _| | _____ \n"
+                    + "| | | | | | | |/ / _ \\\n"
+                    + "| |_| | |_| |   <  __/\n"
+                    + "|____/ \\__,_|_|\\_\\___|\n";
+        // @formatter:on
+        String greetString = "Hello from\n" + logo + "\nWhat can I do for you?\n";
+
+        return greetString;
+    }
+
+    @Override
+    public String produceTaskListOutput(TaskList tasks) {
+        String ls = "\tHere are the tasks in your list:\n";
+        for (int i = 0; i < tasks.size(); i++) {
+            Task temp = tasks.get(i);
+            ls = ls + "\t" + Integer.toString(i + 1) + "." + temp.toString() + "\n";
+        }
+        return produceDukeOutput(ls);
+    }
+
+    @Override
+    public String produceGoodbyeOutput() {
+        return produceDukeOutput("\tGoodbye!\n");
+    }
+
+    @Override
+    public String produceExceptionOutput(String message) {
+        return produceDukeOutput("\t" + message + "\n");
+    }
+
 }

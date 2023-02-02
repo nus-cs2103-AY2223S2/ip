@@ -3,7 +3,7 @@ package duke.command;
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.Ui;
+import duke.ui.IoHandler;
 
 /**
  * Represents Duke's delete function.
@@ -18,11 +18,11 @@ public class DeleteCommand extends Command {
      * @throws DukeException If user input is invalid.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage store) throws DukeException {
+    public String execute(TaskList tasks, IoHandler ui, Storage store) throws DukeException {
         Integer taskNum = ui.getTaskNum();
         String s = tasks.delete(taskNum);
         store.saveToFile(tasks);
-        return ui.printWithPartition("\tNoted. I've removed this task:\n\t  " + s + "\n" + "\tNow you have "
+        return ui.produceDukeOutput("\tNoted. I've removed this task:\n\t  " + s + "\n" + "\tNow you have "
                 + Integer.toString(tasks.size()) + " tasks in the list.\n");
     };
 }

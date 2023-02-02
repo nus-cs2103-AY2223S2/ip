@@ -1,5 +1,8 @@
 package duke;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import duke.command.Command;
 import duke.command.Parser;
 import duke.exception.DukeException;
@@ -29,7 +32,7 @@ public class Duke {
             tasks = store.loadFromFile();
             tasks = tasks == null ? new TaskList() : tasks;
         } catch (Exception e) {
-            ui.printException(e.getMessage());
+            ui.produceExceptionOutput(e.getMessage());
             tasks = new TaskList();
         }
     }
@@ -56,7 +59,7 @@ public class Duke {
                 c.execute(tasks, ui, store);
                 isExit = c.canExit();
             } catch (DukeException e) {
-                ui.printException(e.getMessage());
+                ui.produceExceptionOutput(e.getMessage());
             }
         }
     }
@@ -72,9 +75,19 @@ public class Duke {
             gui = new Gui(input);
             String command = gui.getCommand();
             Command c = Parser.parseCommand(command);
-            return c.execute(tasks, gui, store);
+            String response = c.execute(tasks, gui, store);
+
+            // from https://stackoverflow.com/questions/21974415
+            if (c.canExit()) {
+                new Timer().schedule(new TimerTask() {
+                    public void run() {
+                        System.exit(0);
+                    }
+                }, 1300); // 1.3s
+            }
+            return response;
         } catch (DukeException e) {
-            return gui.printException(e.getMessage());
+            return gui.produceExceptionOutput(e.getMessage());
         }
     }
 

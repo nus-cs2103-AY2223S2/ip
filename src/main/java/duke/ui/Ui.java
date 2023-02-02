@@ -7,18 +7,14 @@ import duke.task.Task;
 import duke.task.TaskList;
 
 /**
- * The Ui class represents Duke's command line user interface that interacts with the user.
+ * The Ui class represents Duke's command line user interface handles input and output.
  */
-public class Ui {
+public class Ui implements IoHandler {
     private static Ui instanceUi = new Ui();
     private Scanner sc;
 
     private Ui() {
         sc = new Scanner(System.in);
-    }
-
-    protected Ui(String input) {
-        System.out.println(input);
     }
 
     /**
@@ -34,9 +30,8 @@ public class Ui {
 
     /**
      * Prints Duke's greetings.
-     *
-     * @returns Duke's greetings as a formatted String.
      */
+    @Override
     public String greet() {
         // @formatter:off
         String logo = " ____        _        \n"
@@ -63,7 +58,8 @@ public class Ui {
      * @param s The string in between the ---- partitions.
      * @return Resulting string with ---- partitions.
      */
-    public String printWithPartition(String s) {
+    @Override
+    public String produceDukeOutput(String s) {
         String ouput = "---------------------\n" + s + "---------------------\n";
 
         System.out.println(ouput);
@@ -77,13 +73,14 @@ public class Ui {
      * @param tasks The task list to print out.
      * @return The string of the tasklist that was printed out.
      */
-    public String printList(TaskList tasks) {
+    @Override
+    public String produceTaskListOutput(TaskList tasks) {
         String ls = "\tHere are the tasks in your list:\n";
         for (int i = 0; i < tasks.size(); i++) {
             Task temp = tasks.get(i);
             ls = ls + "\t" + Integer.toString(i + 1) + "." + temp.toString() + "\n";
         }
-        return printWithPartition(ls);
+        return produceDukeOutput(ls);
     }
 
     /**
@@ -91,8 +88,8 @@ public class Ui {
      *
      * @return The string of that was printed out.
      */
-    public String printNextInput() {
-        return printWithPartition("\tDuke: " + sc.nextLine().strip() + "\n");
+    public String produceInputAsOutput() {
+        return produceDukeOutput("\tDuke: " + sc.nextLine().strip() + "\n");
     }
 
     /**
@@ -101,8 +98,8 @@ public class Ui {
      * @param message The exception message.
      * @return The string of the printed out exception message.
      */
-    public String printException(String message) {
-        return printWithPartition("\t" + message + "\n");
+    public String produceExceptionOutput(String message) {
+        return produceDukeOutput("\t" + message + "\n");
     }
 
     /**
@@ -110,8 +107,8 @@ public class Ui {
      *
      * @return The string of the printed out duke's goodbye.
      */
-    public String printGoodbye() {
-        return printWithPartition("\tGoodbye!\n");
+    public String produceGoodbyeOutput() {
+        return produceDukeOutput("\tGoodbye!\n");
     }
 
     // endregion
@@ -124,6 +121,7 @@ public class Ui {
      * <p>
      * Warning: May prompt user for a line of input if not used properly.
      */
+    @Override
     public void throwAwayInput() {
         sc.nextLine();
     }

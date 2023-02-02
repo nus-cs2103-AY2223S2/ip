@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.Ui;
+import duke.ui.IoHandler;
 
 /**
  * Represents the Priority function of Duke.
@@ -16,7 +16,7 @@ public class PriorityCommand extends Command {
      *
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage store) {
-        return ui.printList(tasks.sorted());
+    public String execute(TaskList tasks, IoHandler ui, Storage store) {
+        return ui.produceTaskListOutput(tasks.sorted());
     };
 }

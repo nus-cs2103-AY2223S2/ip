@@ -3,7 +3,7 @@ package duke.command;
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.Ui;
+import duke.ui.IoHandler;
 
 /**
  * Represents Duke's mark function.
@@ -18,11 +18,11 @@ public class MarkCommand extends Command {
      * @throws DukeException If user input is invalid.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage store) throws DukeException {
+    public String execute(TaskList tasks, IoHandler ui, Storage store) throws DukeException {
         Integer taskNum = ui.getTaskNum();
         String s = tasks.mark(taskNum);
         store.saveToFile(tasks);
-        return ui.printWithPartition("\tNice! I've marked this task as done:\n\t  " + s + "\n");
+        return ui.produceDukeOutput("\tNice! I've marked this task as done:\n\t  " + s + "\n");
     };
 
 }
