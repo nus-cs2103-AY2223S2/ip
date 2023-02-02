@@ -1,11 +1,10 @@
 package duke.storage;
 import duke.data.TypeOfTask;
-import duke.event.Task;
+import duke.action.Task;
 import duke.exception.DukeException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
@@ -36,7 +35,6 @@ public class Storage {
     public List<Task> loadTasks() throws DukeException {
         List<Task> taskList = new ArrayList<>();
         try (ObjectInputStream load = new ObjectInputStream(new FileInputStream(this.filePath))) {
-            System.out.println("this is fine");
             taskList = (List<Task>) load.readObject();
             //return taskList;
         } catch(Exception e){

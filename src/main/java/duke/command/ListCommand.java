@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.data.TaskList;
 import duke.data.TypeOfTask;
-import duke.event.Task;
+import duke.action.Task;
 import duke.storage.Storage;
 import duke.ui.Ui;
 

@@ -2,7 +2,7 @@ package duke.data;
 import java.io.Serializable;
 import java.util.List;
 
-import duke.event.Task;
+import duke.action.Task;
 
 public class TaskList implements Serializable {
     private List<Task> list;

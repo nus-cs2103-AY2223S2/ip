@@ -2,8 +2,8 @@ package duke.command;
 
 import duke.data.TaskList;
 import duke.data.TypeOfTask;
-import duke.event.Task;
-import duke.event.Todo;
+import duke.action.Task;
+import duke.action.Todo;
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.ui.Ui;

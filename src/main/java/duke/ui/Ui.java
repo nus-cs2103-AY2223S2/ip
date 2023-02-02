@@ -2,7 +2,7 @@ package duke.ui;
 import java.util.Scanner;
 import duke.data.TaskList;
 import duke.data.TypeOfTask;
-import duke.event.Task;
+import duke.action.Task;
 
 /*
  * User Interface Class for handling user's interactions

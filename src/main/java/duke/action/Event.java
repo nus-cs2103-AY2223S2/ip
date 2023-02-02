@@ -1,9 +1,13 @@
-package duke.event;
+package duke.action;
 import duke.data.TypeOfTask;
 import duke.exception.DukeException;
 import java.time.LocalTime;
 import java.util.Arrays;
 
+/**
+ * Event class that tracks the description, start time and end time of the task
+ * @author Haiqel Bin Hanaffi (Acerizm)
+ */
 public class Event extends Task{
 
     //default constructor
@@ -12,7 +16,13 @@ public class Event extends Task{
     private String startDay;
     private String endDay;
 
-
+    /**
+     * Default constructor that takes in description,start time and end time of the task
+     * @param description Description of the task
+     * @param startTime Start time of the task
+     * @param endTime End time of the task
+     * @throws DukeException When convertToLocalTime cannot be computed due to unacceptable inputs
+     */
     public Event(String description,String startTime,String endTime) throws DukeException {
         super(description,TypeOfTask.event);
         // to check if the user specifies the day also
@@ -47,7 +57,10 @@ public class Event extends Task{
         } 
     }
 
-
+    /**
+     * Prints the details of the Event
+     * @return details of the Event
+     */
     @Override
     public String toString() {
         if (startTime == null) {

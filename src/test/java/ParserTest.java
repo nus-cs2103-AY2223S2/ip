@@ -1,10 +1,8 @@
-package duke;
 import duke.data.TypeOfTask;
 import duke.parser.Parser;
 import duke.exception.DukeException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /*

@@ -5,8 +5,16 @@ import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.ui.Ui;
 
+/**
+ * Bye command class when user types "bye" or "quit"
+ *
+ * @author Haiqel Bin Hanaffi (Acerizm)
+ */
 public class ByeCommand extends Command {
-    
+
+    /**
+     * default constructor
+     */
     public ByeCommand() {
         super(null,true);
     }
