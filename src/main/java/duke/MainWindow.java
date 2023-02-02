@@ -49,7 +49,4 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
     }
-    private String getResponse(String input) {
-        return "Duke read: " + input;
-    }
 }

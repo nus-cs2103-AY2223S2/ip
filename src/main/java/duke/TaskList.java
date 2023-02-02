@@ -45,10 +45,12 @@ public class TaskList<Task> {
     /**
      * Prints the toString of all tasks in the taskList
      */
-    void printTasks() {
+    String printTasks() {
+        String toPrintTasks = "";
         for (int i = 0; i < taskList.size(); i++) {
-            System.out.println(taskList.get(i));
+            toPrintTasks += taskList.get(i).toString() + "\n";
         }
+        return toPrintTasks;
     }
 
     int getSize() {

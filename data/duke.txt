@@ -1,5 +1,7 @@
-T | 0 | eat food
+T | 1 | eat food
 T | 0 | run around
 D | 0 |  tern  | 2022-01-02
 E | 0 |  turn aorund  | 2011-09-02 2011-01-02
 T | 0 | eat and sh
+T | 0 | run home
+D | 0 |  litter  | 2022-01-01

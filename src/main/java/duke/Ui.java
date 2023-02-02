@@ -30,70 +30,80 @@ public class Ui {
                 + "\n" + "What would you like to do?");
     }
 
-    /**
-     * Prints goodbye message when user exits
-     * the program with "bye" command
-     */
-    void printGoodbyeMessage() {
-        System.out.println("Goodbye! Hope to see you again XOXO");
-    }
 
-    void printTasksMessage() {
-        System.out.println("Here are all your tasks!");
+
+    String printTasksMessage() {
+        return "Here are all your tasks!";
     }
 
     /**
-     * Prints the completed task
-     * @param string the toString() of the task that is marked as done
+     * Standard Duke response when user enters "MARK" command
+     * @param markedTask toString() of Task that was completed
+     * @return Message congratulating user for completing the task
      */
-    void printMarkedTaskMessage(String string) {
-        System.out.println("Good job on completing this task!" + "\n" + string);
+    String printMarkedTaskMessage(String markedTask) {
+        return "Good job on completing this task! \n" + markedTask;
     }
 
     /**
-     * Prints the uncompleted task
-     * @param string The toString() of the task that is marked as undone
+     * Standard Duke response when user enters "UNMARK" command
+     * @param unmarkedTask toString() of Task that was remarked as uncompleted
+     * @return Message reminding user to complete the task
      */
-    void printUnmarkedTaskMessage(String string) {
-        System.out.println("Remember to complete this task!!" + "\n" + string);
+    String printUnmarkedTaskMessage(String unmarkedTask) {
+        return "Remember to complete this task!! \n" + unmarkedTask;
     }
 
     /**
-     * Prints the added task and total tasks in the list
-     * @param string The toString() of the task added
-     * @param size The current size of the taskList
+     * Standard Duke response when user enters "ADD" command
+     * @param addedTask toString() of Task that was added
+     * @param taskListSize size of current taskList after adding the task
+     * @return Message informing users on the task added and number of tasks in the list
      */
-    void printAddedTasks(String string, int size) {
-        System.out.println(String.format("Got it! I've added this task to the list!"
+    String printAddedTasks(String addedTask, int taskListSize) {
+        return String.format("Got it! I've added this task to the list!"
                 + "\n" + "%s" + "\n" + "Now you have %d tasks in the list!"
-                + "\n", string, size));
+                + "\n", addedTask, taskListSize);
     }
 
     /**
-     * Prints the deleted task and total tasks in the list
-     * @param string The toString() of the task deleted
-     * @param size The current size of the taskList
+     * Standard Duke response when user enters "DELETE" command
+     * @param deletedTask toString() of task that was deleted
+     * @param taskListSize size of current taskList after deleting task
+     * @return Message informing users on the task deleted and number of tasks left in the list
      */
-    void printDeletedTasks(String string, int size) {
-        System.out.println(String.format("Alright, let me remove this task..."
+    String printDeletedTasks(String deletedTask, int taskListSize) {
+        return String.format("Alright, let me remove this task..."
                 + "\n" + "%s" + "\n" + "Now you have %d tasks in the list!"
-                + "\n", string, size));
+                + "\n", deletedTask, taskListSize);
     }
 
-    void printWrongInput() {
-        System.out.println("Wrong input!!");
+
+    String printFileNotFound() {
+        return "File not found :(((";
     }
 
-    void printFileNotFound() {
-        System.out.println("File not found :(((");
+    /**
+     * Standard Duke response when user enters "FIND" command and matching tasks are found
+     * @return Message telling users the tasks in list
+     */
+    String printMatchingTasks() {
+        return "Here are the matching tasks in your list: ";
     }
 
-    void printMatchingTasks() {
-        System.out.println("Here are the matching tasks in your list: ");
+    /**
+     * Standard Duke response when user enters "FIND" command and no matching tasks are found
+     * @return Message telling users there are no matching tasks
+     */
+    String printNoMatchingTasks() {
+        return "Unfortunately there are no matching tasks :((";
     }
 
-    void printNoMatchingTasks() {
-        System.out.println("Unfortunately there are no matching tasks :((");
+    /**
+     * Standard Duke response when user enters "BYE" command
+     * @return Goodbye message and exit instructions
+     */
+    String printExitInstructions() {
+        return "Goodbye! Hope to see you again XOXO" + "\n" + "Click on the box on the top left to exit!";
     }
-
 }

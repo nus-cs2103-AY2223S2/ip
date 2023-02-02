@@ -16,11 +16,9 @@ public class Duke {
 
     /**
      * Constructor for Duke
-     * @param filePath Contains file path to the saved duke.txt file
-     * @param directoryPath Contains directory path to the saved duke.txt file
      */
-    public Duke(String filePath, String directoryPath) {
-        this.storage = new Storage(filePath, directoryPath);
+    public Duke() {
+        this.storage = new Storage(FILE_PATH, DIRECTORY_PATH);
         try {
             this.taskList = storage.readFile();
         } catch (NeroException e) {
@@ -30,35 +28,28 @@ public class Duke {
         this.parser = new Parser();
     }
 
-    public Duke() {}
+
+
 
     /**
-     * Runs the program and catches IOException if file is not found
-     * or NeroException if an error occurs, printing the error message
-     * accordingly
+     * Creates the response that Duke replies to the user
+     * @param input commands given by the user
+     * @return Duke's response to the commands
      */
-    public void run() {
+    String getResponse(String input) {
         ui.printWelcomeMessage();
-        boolean toEnd = false;
-        while (!toEnd) {
-            String originalString = ui.readLine();
-            try {
-                toEnd = parser.parseCommand(originalString, taskList, ui);
-                storage.saveFile(taskList);
-            } catch (IOException e) {
-                ui.printFileNotFound();
-            } catch (NeroException ne) {
-                ne.printStackTrace();
-            }
+        String toPrint = "";
+        try {
+            toPrint = parser.parseCommand(input, taskList, ui);
+            storage.saveFile(taskList);
+        } catch (IOException e) {
+            toPrint = ui.printFileNotFound();
+        } catch (NeroException ne) {
+            toPrint = ne.getMessage();
+        } finally {
+            return toPrint;
         }
     }
-
-    public static void main(String[] args) {
-        new Duke(FILE_PATH, DIRECTORY_PATH).run();
-    }
-
-    String getResponse(String input) {
-        return "Duke read: " + input;
-    }
 }
+
 

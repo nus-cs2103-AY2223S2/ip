@@ -19,40 +19,35 @@ public class Parser {
      *     which exits the chat bot. Else, returns false which continues the chat bot
      * @throws NeroException Throws an exception depending on the exception faced
      */
-    boolean parseCommand(String originalString, TaskList<Task> taskList, Ui ui) throws NeroException {
+    String parseCommand(String originalString, TaskList<Task> taskList, Ui ui) throws NeroException {
         try {
             String[] input = originalString.split(" ");
             switch (Enum.valueOf(Types.class, input[0].toUpperCase())) {
             case BYE:
-                ui.printGoodbyeMessage();
-                return true;
+                return ui.printExitInstructions();
             case LIST:
-                ui.printTasksMessage();
-                taskList.printTasks();
-                return false;
+                return ui.printTasksMessage() + "\n" + taskList.printTasks();
             case MARK: {
                 try {
                     int taskToMark = Integer.parseInt(input[1]) - 1;
                     Task currTask = taskList.get(taskToMark);
                     currTask.setAsDone();
-                    ui.printMarkedTaskMessage(currTask.toString());
+                    return ui.printMarkedTaskMessage(currTask.toString());
                 } catch (IndexOutOfBoundsException e) {
                     throw new NeroException("Please add the correct index from 0 to "
                             + taskList.getSize());
                 }
-                return false;
             }
             case UNMARK: {
                 try {
                     int taskToUnmark = Integer.parseInt(input[1]) - 1;
                     Task currTask = taskList.get(taskToUnmark);
                     currTask.setAsUndone();
-                    ui.printUnmarkedTaskMessage(currTask.toString());
+                    return ui.printUnmarkedTaskMessage(currTask.toString());
                 } catch (IndexOutOfBoundsException e) {
                     throw new NeroException("Please add the correct index from 0 to "
                             + taskList.getSize());
                 }
-                return false;
             }
             case TODO:
                 int index = originalString.indexOf("todo");
@@ -60,11 +55,10 @@ public class Parser {
                     String toAdd = originalString.substring(index + 5);
                     Task newTask = new ToDo(toAdd);
                     taskList.addTask(newTask);
-                    ui.printAddedTasks(newTask.toString(), taskList.getSize());
+                    return ui.printAddedTasks(newTask.toString(), taskList.getSize());
                 } catch (IndexOutOfBoundsException e) {
                     throw new NeroException("Description cannot be empty!!!");
                 }
-                return false;
             case DEADLINE:
                 try {
                     String[] splitString = originalString.split("/");
@@ -72,11 +66,10 @@ public class Parser {
                     String duration = splitString[1].replace("by", "");
                     Task newTask = new Deadline(description, duration);
                     taskList.addTask(newTask);
-                    ui.printAddedTasks(newTask.toString(), taskList.getSize());
+                    return ui.printAddedTasks(newTask.toString(), taskList.getSize());
                 } catch (IndexOutOfBoundsException e) {
-                    System.out.println("Add a task description and deadline!!!");
+                    throw new NeroException("Add a task description and deadline in yyyy-mm-dd format!!!");
                 }
-                return false;
             case EVENT:
                 try {
                     String[] splitString = originalString.split("/");
@@ -85,21 +78,19 @@ public class Parser {
                     String endDate = splitString[2].replace("to", "");
                     Task newTask = new Event(description, startDate, endDate);
                     taskList.addTask(newTask);
-                    ui.printAddedTasks(newTask.toString(), taskList.getSize());
+                    return ui.printAddedTasks(newTask.toString(), taskList.getSize());
                 } catch (IndexOutOfBoundsException e) {
-                    throw new NeroException("Add a task description, from and to date!!!");
+                    throw new NeroException("Add a task description, from and to date in yyyy-mm-dd format!!!");
                 }
-                return false;
             case DELETE:
                 try {
                     int toDelete = Integer.parseInt(input[1]) - 1;
                     Task removedTask = taskList.get(toDelete);
                     taskList.removeTask(toDelete);
-                    ui.printDeletedTasks(removedTask.toString(), taskList.getSize());
+                    return ui.printDeletedTasks(removedTask.toString(), taskList.getSize());
                 } catch (IndexOutOfBoundsException e) {
                     throw new NeroException("Add a correct task number");
                 }
-                return false;
             case FIND:
                 TaskList<Task> newTaskList = new TaskList<>();
                 for (int i = 0; i < taskList.getSize(); i++) {
@@ -108,18 +99,15 @@ public class Parser {
                     }
                 }
                 if (newTaskList.getSize() > 0) {
-                    ui.printMatchingTasks();
-                    newTaskList.printTasks();
+                    return ui.printMatchingTasks() + "\n" + newTaskList.printTasks();
                 } else {
-                    ui.printNoMatchingTasks();
+                    return ui.printNoMatchingTasks();
                 }
-                return false;
             default:
-                return false;
+                return "Command not detected! Please retry";
             }
         } catch (IllegalArgumentException e) {
-            ui.printWrongInput();
-            return false;
+            throw new NeroException("Wrong input!! Command not found!!");
         }
     }
 }
