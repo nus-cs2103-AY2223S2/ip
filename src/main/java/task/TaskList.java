@@ -48,12 +48,22 @@ public class TaskList extends ArrayList<Task> {
     }
 
     /**
-     * Get the task list that contains all tasks whose names contain the given string
-     * @param string the string to search for
+     * Get the task list that all tasks whose names contain the given strings
+     * @param strings the strings to search for
      * @return a task list
      */
-    public TaskList getTaskNameContains(String string) {
-        List<Task> filteredTasks = this.stream().filter(t -> t.containString(string)).collect(Collectors.toList());
+    public TaskList getTaskNameContains(String... strings) {
+        List<Task> filteredTasks = this
+                .stream()
+                .filter(
+                        t -> {
+                            boolean isContained = false;
+                            for (String string: strings) {
+                                isContained = isContained || t.containString(string);
+                            }
+                            return isContained;
+                        })
+                .collect(Collectors.toList());
         return new TaskList(new ArrayList<>(filteredTasks));
     }
 }
