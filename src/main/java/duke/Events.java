@@ -4,8 +4,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Events extends Task {
+
     protected LocalDate startDate;
     protected LocalDate endDate;
+
     public Events(String name, String startDate, String endDate) {
         super(name, "E");
         this.startDate = LocalDate.parse(startDate);
@@ -19,8 +21,8 @@ public class Events extends Task {
     }
 
     @Override
-    public String description() {
-        return String.format("%s (from: %s to: %s)", super.description(),
+    public String getDescription() {
+        return String.format("%s (from: %s to: %s)", super.getDescription(),
                 this.startDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")),
                 this.endDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
     }

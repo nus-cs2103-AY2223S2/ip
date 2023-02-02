@@ -4,7 +4,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Deadlines extends Task {
+
     protected LocalDate dueDate;
+
     public Deadlines(String name, String dueDate) {
         super(name, "D");
         this.dueDate = LocalDate.parse(dueDate);
@@ -23,8 +25,8 @@ public class Deadlines extends Task {
 //    }
 
     @Override
-    public String description() {
-        return String.format("%s (by: %s)", super.description(),
+    public String getDescription() {
+        return String.format("%s (by: %s)", super.getDescription(),
                 this.dueDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
     }
 

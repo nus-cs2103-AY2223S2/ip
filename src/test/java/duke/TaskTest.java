@@ -9,8 +9,8 @@ public class TaskTest {
         Task expectedTask = new Task("finish homework", "T", true);
         Task newTask = new Task("finish homework", "T");
         newTask.markDone();
-        assertEquals(expectedTask.description(),
-                newTask.description());
+        assertEquals(expectedTask.getDescription(),
+                newTask.getDescription());
     }
 
     @Test

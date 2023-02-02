@@ -1,6 +1,7 @@
 package duke;
 
 public class Task {
+
     protected String name;
     protected boolean isDone;
     protected String taskType;
@@ -37,7 +38,7 @@ public class Task {
         this.isDone = false;
     }
 
-    public String description() {
+    public String getDescription() {
         return String.format("[%s][%s] %s", this.taskType, this.getStatusIcon(), this.name);
     }
 
