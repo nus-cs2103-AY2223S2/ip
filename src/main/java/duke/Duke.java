@@ -1,10 +1,14 @@
-package duke;// Tan Matthew Simon Castaneda
+package duke; // Tan Matthew Simon Castaneda
 
 import duke.helper.Parser;
 import duke.storage.Storage;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Encapsulates ChadGPT in its full majesty.
+ *
+ */
 public class Duke {
 
     private String filepath;
@@ -39,7 +43,7 @@ public class Duke {
      */
     public void run() {
 
-        while(true) {
+        while (true) {
             String input = ui.readLine();
             String[] command = input.split(" ");
 

@@ -1,15 +1,18 @@
 package duke.storage;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Scanner;
+
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.TaskList;
 import duke.tasks.Todo;
 
-import java.nio.file.*;
-import java.util.Scanner;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+
 
 /**
  *  A file manager to act as storage for user's tasks.
@@ -18,7 +21,7 @@ import java.io.IOException;
  * @version CS2103 AY22/23 Semester 2
  */
 public class Storage {
-    String path;
+    private String path;
 
     /**
      * Constructor to create user's storage system.
@@ -43,16 +46,19 @@ public class Storage {
 
                 if (tasklist.getTasks().get(i) instanceof Deadline) {
                     Deadline curr = (Deadline) tasklist.getTasks().get(i);
-                    fileWriter.write(curr.getType() +"/" + String.valueOf(curr.getCompletionStatus() + "/" + curr.getName()));
+                    fileWriter.write(curr.getType() + "/" + String.valueOf(curr.getCompletionStatus()
+                            + "/" + curr.getName()));
                     fileWriter.write("/" + curr.getEndTime());
                 } else if (tasklist.getTasks().get(i) instanceof Event) {
                     Event curr = (Event) tasklist.getTasks().get(i);
-                    fileWriter.write(curr.getType() +"/" + String.valueOf(curr.getCompletionStatus()) + "/" + curr.getName());
+                    fileWriter.write(curr.getType() + "/" + String.valueOf(curr.getCompletionStatus())
+                            + "/" + curr.getName());
                     fileWriter.write("/" + curr.getStartTime());
                     fileWriter.write("/" + curr.getEndTime());
                 } else if (tasklist.getTasks().get(i) instanceof Todo) {
                     Todo curr = (Todo) tasklist.getTasks().get(i);
-                    fileWriter.write(curr.getType() +"/" + String.valueOf(curr.getCompletionStatus()) + "/" + curr.getName());
+                    fileWriter.write(curr.getType() + "/" + String.valueOf(curr.getCompletionStatus())
+                            + "/" + curr.getName());
                 }
                 if (i < tasklist.getCurrentSize() - 1) {
                     fileWriter.write("\n");
@@ -82,7 +88,7 @@ public class Storage {
             }
             Scanner sc = new Scanner(file);
             //System.out.println("we here bois3");
-            while(sc.hasNextLine()) {
+            while (sc.hasNextLine()) {
                 //System.out.println("we here bois1");
                 String temp1 = sc.nextLine();
                 String[] input = temp1.split("/");

@@ -8,10 +8,12 @@ package duke.tasks;
  */
 public class Task {
 
-    String name;
-    boolean completionStatus;
 
-    static String type;
+    private static String type;
+    private String name;
+    private boolean completionStatus;
+
+
 
     /**
      * Constructor to create the task object associated with the user's task.
@@ -63,7 +65,7 @@ public class Task {
      * @return A string representation of the user's task.
      */
     @Override
-    public String toString(){
+    public String toString() {
         if (completionStatus == true) {
             return "[X] " + this.name;
         } else {

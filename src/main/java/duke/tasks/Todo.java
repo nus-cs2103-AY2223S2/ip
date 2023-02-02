@@ -9,7 +9,7 @@ package duke.tasks;
 
 public class Todo extends Task {
 
-    static final String type  = "T";
+    private static final String type = "T";
 
 
     /**
