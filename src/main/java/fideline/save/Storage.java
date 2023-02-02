@@ -1,17 +1,15 @@
 package fideline.save;
 
-import fideline.exception.DataFileInteractionException;
-import fideline.exception.DataFileNotFoundException;
-import fideline.exception.UnableToCreateDataFileException;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-
-
 import java.util.Scanner;
+
+import fideline.exception.DataFileInteractionException;
+import fideline.exception.DataFileNotFoundException;
+import fideline.exception.UnableToCreateDataFileException;
 
 public class Storage {
 
@@ -91,8 +89,8 @@ public class Storage {
                     dataString += fileScan.nextLine();
                 } else {
                     String s = fileScan.nextLine();
-                    dataString += s.substring(0,2) + newMark
-                            + s.substring(3,s.length());
+                    dataString += s.substring(0, 2) + newMark
+                            + s.substring(3, s.length());
                 }
                 dataString += "\n";
                 lineCounter++;

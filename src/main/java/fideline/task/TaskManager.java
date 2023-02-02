@@ -1,8 +1,8 @@
 package fideline.task;
 
-import fideline.exception.CorruptedDataFileException;
-
 import java.util.ArrayList;
+
+import fideline.exception.CorruptedDataFileException;
 
 /**
  * Manager of new and existing tasks. Handles creating, deletion and
@@ -95,9 +95,9 @@ public class TaskManager {
     public String getTaskListString() {
         String listString = "";
         for (int i = 1; i <= taskList.size(); i++) {
-                listString += "\n" + i + ". "
-                        + getTaskString(i);
-            }
+            listString += "\n" + i + ". "
+                    + getTaskString(i);
+        }
         return listString;
     }
 
