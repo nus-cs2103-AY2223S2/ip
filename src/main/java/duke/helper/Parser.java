@@ -38,6 +38,8 @@ public class Parser {
                 tasks.addEvent(input);
             } else if (command[0].equals("delete")) {
                 tasks.deleteTask(command);
+            } else if (command[0].equals("find")) {
+                tasks.findTask(command[1]);
             } else {
                 System.out.println("Invalid command wake up brother");
             }

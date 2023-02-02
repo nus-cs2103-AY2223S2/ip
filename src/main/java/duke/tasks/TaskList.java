@@ -172,7 +172,21 @@ public class TaskList {
         }
     }
 
+    /**
+     * Prints out a list of tasks with the given words.
+     *
+     * @param word The word to be searched.
+     */
 
+    public void findTask(String word) {
+        TaskList taskList = new TaskList(this.size);
+        for (Task item : this.getTasks()) {
+            if (item.hasString(word)) {
+                taskList.append(item);
+            }
+        }
+        taskList.listTasks();
+    }
 
     //list
 
