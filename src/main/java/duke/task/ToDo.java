@@ -4,6 +4,7 @@ package duke.task;
  * The ToDo class extends the Task class and represents a task that needs to be done.
  */
 public class ToDo extends Task {
+    // Unique identifier for Serializer implementation: do not change var name
     private static final long serialVersionUID = 101;
 
     /**

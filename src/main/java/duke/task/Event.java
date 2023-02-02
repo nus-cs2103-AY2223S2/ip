@@ -10,6 +10,7 @@ import duke.exception.DukeException;
  * The Event class extends the DatedTask class and represents an event with a start and end date.
  */
 public class Event extends DatedTask {
+    // Unique identifier for Serializer implementation: do not change var name
     private static final long serialVersionUID = 103;
 
     private LocalDate start;

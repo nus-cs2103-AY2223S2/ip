@@ -10,6 +10,7 @@ import duke.exception.DukeException;
  * The Deadline class extends the DatedTask class and represents a datedtask with a due date.
  */
 public class Deadline extends DatedTask {
+    // Unique identifier for Serializer implementation: do not change var name
     private static final long serialVersionUID = 102;
 
     private LocalDate date;

@@ -17,6 +17,11 @@ public class Ui {
         sc = new Scanner(System.in);
     }
 
+    /**
+     * Returns the instance of Ui.
+     *
+     * @return
+     */
     public static Ui getInstance() {
         return instanceUi;
     }

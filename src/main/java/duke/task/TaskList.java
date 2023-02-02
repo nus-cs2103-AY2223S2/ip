@@ -9,6 +9,7 @@ import duke.exception.DukeException;
  * The tasklist represents the list of tasks.
  */
 public class TaskList extends ArrayList<Task> {
+    // Unique identifier for Serializer implementation: do not change var name
     private static final long serialVersionUID = 200;
     private TaskList sorted;
 

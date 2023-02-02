@@ -6,6 +6,7 @@ import java.io.Serializable;
  * This Task class represents a task.
  */
 public class Task implements Serializable, Comparable<Task> {
+    // Unique identifier for Serializer implementation: do not change var name
     private static final long serialVersionUID = 100;
     private String name;
     private boolean isDone;
@@ -66,6 +67,22 @@ public class Task implements Serializable, Comparable<Task> {
         return false;
     }
 
+    /**
+     * Compares this tasks with the specified task for order of importance.
+     *
+     * <p>
+     * Returns a negative integer, zero, or a positive integer if this object is more important than, equal
+     * to, or less important than the specified object.
+     *
+     * <pre>
+     * Order of importance determination:
+     * 1. Unfinished Tasks are More Important than Completed Tasks.
+     * 2. Dated Unfinished Tasks are More Important than Undated Unfinished Tasks.
+     * 3. Unfinished Earlier End Dates are More Important than Unfinished Later End Dates.
+     * </pre>
+     *
+     * @param t The task to compare to.
+     */
     @Override
     public int compareTo(Task t) {
         if (t.isMarkedDone() && this.isMarkedDone()) {

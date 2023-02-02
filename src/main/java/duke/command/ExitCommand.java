@@ -28,7 +28,7 @@ public class ExitCommand extends Command {
      * @return True
      */
     @Override
-    public boolean isExit() {
+    public boolean canExit() {
         return true;
     }
 }

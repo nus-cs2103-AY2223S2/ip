@@ -9,6 +9,7 @@ import duke.exception.DukeException;
  * The DatedTask represents a Task that contains a date.
  */
 public class DatedTask extends Task {
+    // Unique identifier for Serializer implementation: do not change var name
     private static final long serialVersionUID = 110;
 
     private LocalDate imptDate;
@@ -29,6 +30,9 @@ public class DatedTask extends Task {
         }
     }
 
+    /**
+     * @return True, the class is dated.
+     */
     @Override
     public boolean hasDate() {
         return true;
