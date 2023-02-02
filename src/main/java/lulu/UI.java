@@ -1,10 +1,18 @@
 package lulu;
 
+import java.util.Scanner;
+
 public class UI {
     private static final String LINE = "____________________________________________________________";
 
     public void showLine() {
         System.out.println(LINE);
+    }
+
+    public String readCommand() {
+        Scanner sc = new Scanner(System.in);
+        String s = sc.nextLine();
+        return s;
     }
 
     public void showGreetText() {
