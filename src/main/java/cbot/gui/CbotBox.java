@@ -7,27 +7,26 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
 
 /**
  * An example of a custom control using FXML.
  * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
  * containing text from the speaker.
  */
-public class DialogBox extends HBox {
+public class CbotBox extends HBox {
     @FXML
-    private Label dialog;
+    private Text dialog;
     @FXML
     private ImageView displayPicture;
 
-    private DialogBox(String text, Image img, String viewPath) {
+    private CbotBox(String text, Image img, String viewPath) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource(viewPath));
             fxmlLoader.setController(this);
@@ -37,8 +36,8 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
+        // Using a Text/TextFlow Node following @hingen's solution. Thank you!
         dialog.setText(text);
-        dialog.setPadding(new Insets(10.0));
 
         displayPicture.setImage(img);
         displayPicture.setClip(new Circle(50.0, 50.0, 50.0));
@@ -55,25 +54,14 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Constructs a DialogBox representing the user.
-     *
-     * @param text The user's input.
-     * @param img The user's Image.
-     * @return A new DialogBox, for the user.
-     */
-    public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img, "/view/UserBox.fxml");
-    }
-
-    /**
-     * Constructs a DialogBox representing Cbot.
+     * Constructs a CbotBox representing Cbot's response.
      *
      * @param text Cbot's output.
      * @param img Cbot's image.
-     * @return A new DialogBox, for Cbot.
+     * @return A new CbotBox, for Cbot.
      */
-    public static DialogBox getCbotDialog(String text, Image img) {
-        var db = new DialogBox(text, img, "/view/CbotBox.fxml");
+    public static CbotBox getCbotDialog(String text, Image img) {
+        var db = new CbotBox(text, img, "/view/CbotBox.fxml");
         db.flip();
         return db;
     }

@@ -10,7 +10,7 @@ public class UI {
     //CHECKSTYLE.OFF: SingleSpaceSeparator
 
     // Frequently Used Strings
-    private static final String BLANK     = "   ";
+    private static final String BLANK     = "";
     private static final String INDENT    = " ~ ";
     private static final String WARNING   = "!! ";
     private static final String ERROR     = WARNING + "<Error> ";
