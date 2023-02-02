@@ -1,9 +1,11 @@
 package duke;
 
 import duke.command.Command;
-import duke.util.*;
-
-import java.io.IOException;
+import duke.util.DukeException;
+import duke.util.Parser;
+import duke.util.Storage;
+import duke.util.TaskList;
+import duke.util.Ui;
 
 public class Duke {
     private Ui ui;
@@ -21,7 +23,6 @@ public class Duke {
             this.ui.showToUser(e.getMessage());
         }
     }
-
 
     public static void main(String[] args) {
         String txtDir = "./save.txt";

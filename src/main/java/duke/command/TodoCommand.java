@@ -1,14 +1,14 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.task.Todo;
 import duke.util.DukeException;
 import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
 
-import java.io.IOException;
-
-/*
+/**
  * Represents a command that adds a todo to the task list.
  */
 public class TodoCommand extends Command {
@@ -17,9 +17,8 @@ public class TodoCommand extends Command {
         this.task = new Todo(taskName);
     }
 
-    /*
+    /**
      * Executes the command and adds a todo to the task list.
-     * 
      * @param tl TaskList which the Duke will modify.
      * @param ui Ui to be used to facilitate interactions between user and the CLI.
      * @param storage Storage to be used to handle interactions with the save file.

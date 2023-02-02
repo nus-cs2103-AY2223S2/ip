@@ -1,8 +1,8 @@
 package duke.util;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
+
+import duke.task.Task;
 
 public class TaskList {
 
@@ -43,5 +43,4 @@ public class TaskList {
     public String unmarkTask(int index) {
         return taskList.get(index).unmark();
     }
-
 }

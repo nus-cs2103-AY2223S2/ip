@@ -1,32 +1,29 @@
 package duke.command;
 
-import duke.Duke;
+import java.io.IOException;
+
 import duke.task.Task;
 import duke.util.DukeException;
 import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
 
-import java.io.IOException;
-
-/*
+/**
  * Represents a command that deletes a task from the task list.
  */
 public class DeleteCommand extends Command {
     private final int taskNumberToDelete;
 
-    /*
+    /**
      * Constructor for the DeleteCommand object.
-     * 
      * @param taskNumberToDelete The task number to be deleted.
      */
     public DeleteCommand(int taskNumberToDelete) {
         this.taskNumberToDelete = taskNumberToDelete;
     }
 
-    /*
+    /**
      * Executes the command and deletes a task from the task list.
-     * 
      * @param tl TaskList which the Duke will modify.
      * @param ui Ui to be used to facilitate interactions between user and the CLI.
      * @param storage Storage to be used to handle interactions with the save file.
