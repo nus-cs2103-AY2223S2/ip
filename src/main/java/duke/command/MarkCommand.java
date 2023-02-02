@@ -18,11 +18,11 @@ public class MarkCommand extends Command {
      * @throws DukeException If user input is invalid.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage store) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage store) throws DukeException {
         Integer taskNum = ui.getTaskNum();
         String s = tasks.mark(taskNum);
         store.saveToFile(tasks);
-        ui.printWithPartition("\tNice! I've marked this task as done:\n\t  " + s + "\n");
+        return ui.printWithPartition("\tNice! I've marked this task as done:\n\t  " + s + "\n");
     };
 
 }

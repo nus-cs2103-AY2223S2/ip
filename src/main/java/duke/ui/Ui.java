@@ -17,6 +17,10 @@ public class Ui {
         sc = new Scanner(System.in);
     }
 
+    protected Ui(String input) {
+        System.out.println(input);
+    }
+
     /**
      * Returns the instance of Ui.
      *
@@ -30,8 +34,10 @@ public class Ui {
 
     /**
      * Prints Duke's greetings.
+     *
+     * @returns Duke's greetings as a formatted String.
      */
-    public void greet() {
+    public String greet() {
         // @formatter:off
         String logo = " ____        _        \n"
                     + "|  _ \\ _   _| | _____ \n"
@@ -39,10 +45,11 @@ public class Ui {
                     + "| |_| | |_| |   <  __/\n"
                     + "|____/ \\__,_|_|\\_\\___|\n";
         // @formatter:on
+        String greetString = "Hello from\n" + logo + "\nWhat can I do for you?\n"
+                + "---------------------\n\n";
+        System.out.println(greetString);
 
-        System.out.println("Hello from\n" + logo);
-        System.out.println("What can I do for you?");
-        System.out.println("---------------------\n");
+        return greetString;
     }
 
     /**
@@ -54,48 +61,57 @@ public class Ui {
      * --------------------- </blockquote>
      *
      * @param s The string in between the ---- partitions.
+     * @return Resulting string with ---- partitions.
      */
-    public void printWithPartition(String s) {
-        System.out.println("---------------------");
-        System.out.print(s);
-        System.out.println("---------------------");
+    public String printWithPartition(String s) {
+        String ouput = "---------------------\n" + s + "---------------------\n";
+
+        System.out.println(ouput);
+
+        return ouput;
     }
 
     /**
      * Prints the Tasks in Duke's list, including their done status.
      *
      * @param tasks The task list to print out.
+     * @return The string of the tasklist that was printed out.
      */
-    public void printList(TaskList tasks) {
+    public String printList(TaskList tasks) {
         String ls = "\tHere are the tasks in your list:\n";
         for (int i = 0; i < tasks.size(); i++) {
             Task temp = tasks.get(i);
             ls = ls + "\t" + Integer.toString(i + 1) + "." + temp.toString() + "\n";
         }
-        printWithPartition(ls);
+        return printWithPartition(ls);
     }
 
     /**
      * Prints the next line of input.
+     *
+     * @return The string of that was printed out.
      */
-    public void printNextInput() {
-        printWithPartition("\tDuke: " + sc.nextLine().strip() + "\n");
+    public String printNextInput() {
+        return printWithPartition("\tDuke: " + sc.nextLine().strip() + "\n");
     }
 
     /**
      * Prints the exception message as Duke.
      *
      * @param message The exception message.
+     * @return The string of the printed out exception message.
      */
-    public void printException(String message) {
-        printWithPartition("\t" + message + "\n");
+    public String printException(String message) {
+        return printWithPartition("\t" + message + "\n");
     }
 
     /**
      * Prints Duke's goodbye message.
+     *
+     * @return The string of the printed out duke's goodbye.
      */
-    public void printGoodbye() {
-        printWithPartition("\tGoodbye!\n");
+    public String printGoodbye() {
+        return printWithPartition("\tGoodbye!\n");
     }
 
     // endregion

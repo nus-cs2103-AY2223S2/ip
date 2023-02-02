@@ -18,11 +18,11 @@ public class DeleteCommand extends Command {
      * @throws DukeException If user input is invalid.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage store) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage store) throws DukeException {
         Integer taskNum = ui.getTaskNum();
         String s = tasks.delete(taskNum);
         store.saveToFile(tasks);
-        ui.printWithPartition("\tNoted. I've removed this task:\n\t  " + s + "\n" + "\tNow you have "
+        return ui.printWithPartition("\tNoted. I've removed this task:\n\t  " + s + "\n" + "\tNow you have "
                 + Integer.toString(tasks.size()) + " tasks in the list.\n");
     };
 }

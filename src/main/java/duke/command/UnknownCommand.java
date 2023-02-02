@@ -18,7 +18,7 @@ public class UnknownCommand extends Command {
      *
      * @throws DukeException Always as command is not understood.
      */
-    public void execute(TaskList tasks, Ui ui, Storage store) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage store) throws DukeException {
         ui.throwAwayInput();
         throw new DukeException("I don't understand that command");
     };

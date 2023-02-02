@@ -19,12 +19,12 @@ public class AddDeadlineCommand extends Command {
      * @throws DukeException If user input is invalid.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage store) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage store) throws DukeException {
         String[] data = ui.getDeadline();
         Deadline temp = new Deadline(data[0], data[1]);
         tasks.add(temp);
         store.saveToFile(tasks);
-        ui.printWithPartition("\tGot it. I've added this task:\n" + "\t  " + temp.toString()
+        return ui.printWithPartition("\tGot it. I've added this task:\n" + "\t  " + temp.toString()
                 + "\n\tNow you have " + Integer.toString(tasks.size()) + " tasks in the list.\n");
 
     };

@@ -11,7 +11,6 @@ import duke.exception.DukeException;
 public class TaskList extends ArrayList<Task> {
     // Unique identifier for Serializer implementation: do not change var name
     private static final long serialVersionUID = 200;
-    private TaskList sorted;
 
     /**
      * Constructs the task list.
@@ -26,18 +25,14 @@ public class TaskList extends ArrayList<Task> {
      * @return A sorted copy of this tasklist.
      */
     public TaskList sorted() {
-        if (sorted != null && sorted.size() == size()) {
-            return sorted;
-        }
 
-        TaskList temp = new TaskList();
+        TaskList sorted = new TaskList();
         for (int i = 0; i < size(); i++) {
-            temp.add(new Task(Integer.toString(i)));
+            sorted.add(new Task(Integer.toString(i)));
         }
-        Collections.copy(temp, this);
-        Collections.sort(temp);
-        sorted = temp;
-        return temp;
+        Collections.copy(sorted, this);
+        Collections.sort(sorted);
+        return sorted;
     }
 
     /**

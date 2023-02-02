@@ -16,9 +16,10 @@ public abstract class Command {
      * @param tasks The tasklist to conduct the function with.
      * @param ui    The ui to get user input and print out function notifications.
      * @param store The storage to save the tasklist with.
+     * @return An output string for duke, if any.
      * @throws DukeException If the function cannot execute properly.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage store) throws DukeException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage store) throws DukeException;
 
     /**
      * Tells Duke to not exit.

@@ -16,7 +16,7 @@ public class PriorityCommand extends Command {
      *
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage store) {
-        ui.printList(tasks.sorted());
+    public String execute(TaskList tasks, Ui ui, Storage store) {
+        return ui.printList(tasks.sorted());
     };
 }

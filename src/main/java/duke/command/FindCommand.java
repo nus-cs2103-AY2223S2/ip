@@ -18,10 +18,10 @@ public class FindCommand extends Command {
      * @throws DukeException If the string given is empty.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage store) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage store) throws DukeException {
         String subString = ui.getName();
         TaskList containStringTasks = tasks.containsStringInName(subString);
-        ui.printList(containStringTasks);
+        return ui.printList(containStringTasks);
     }
 
 }

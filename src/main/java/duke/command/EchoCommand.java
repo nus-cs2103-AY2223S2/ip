@@ -16,8 +16,8 @@ public class EchoCommand extends Command {
      *
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage store) {
-        ui.printNextInput();
+    public String execute(TaskList tasks, Ui ui, Storage store) {
+        return ui.printNextInput();
     };
 
 }
