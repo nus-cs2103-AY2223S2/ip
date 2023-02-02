@@ -5,6 +5,7 @@ import java.io.IOException;
 import duke.commands.Command;
 import duke.commands.CommandInput;
 import duke.exceptions.CommandExecutionError;
+import duke.gui.DialogBox;
 import duke.tasks.TaskList;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -93,6 +94,8 @@ public class Duke extends Application {
        AnchorPane.setLeftAnchor(userInput , 1.0);
        AnchorPane.setBottomAnchor(userInput, 1.0);
 
+       dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+
         //Step 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
@@ -109,39 +112,22 @@ public class Duke extends Application {
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
-        );
+        Label userTextLabel = new Label(userInput.getText());
+        dialogContainer.getChildren().add(
+                DialogBox.getUserDialog(userTextLabel, new ImageView(user)));
+
+        Command command = CommandInput.getCommandFromInput(userInput.getText(), tasks);
         userInput.clear();
-    }
-
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
-    private String getResponse(String input) {
-        return "Duke heard: " + input;
-    }
-
-    public void run() {
-        Ui.greetUser();
-        while (Ui.getIsRunning()) {
-            Command command = CommandInput.getCommandFromInput(Ui.getLine(), tasks);
-            try {
-                command.execute();
-            } catch (CommandExecutionError e) {
-                Ui.displayMsg("Couldn't execute command :/ \n" + e.toString());
-            }
-            Ui.getNextCommand();
+        try {
+            command.execute(this);
+        } catch (CommandExecutionError e) {
+            sendResponse("Couldn't execute command :/ \n" + e.toString());
         }
     }
 
-    // Initialize and run duke
-    public static void main(String[] args) throws IOException {
-        new Duke().run();
-        Application.launch(Duke.class, args);
+    public void sendResponse(String dukeResponse) {
+        Label dukeTextLabel = new Label(dukeResponse);
+        dialogContainer.getChildren().add(
+            DialogBox.getDukeDialog(dukeTextLabel, new ImageView(duke)));
     }
 }

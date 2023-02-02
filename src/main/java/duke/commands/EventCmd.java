@@ -1,5 +1,6 @@
 package duke.commands;
 
+import duke.Duke;
 import duke.Ui;
 import duke.exceptions.CommandExecutionError;
 import duke.tasks.Event;
@@ -27,16 +28,12 @@ public class EventCmd extends Command {
     }
 
     // Adds the Event task to the list
-    public void execute() throws CommandExecutionError {
+    public void execute(Duke duke) throws CommandExecutionError {
         this.event = Event.create(this.lineInput);
         taskList.add(this.event);
-        uiReply();
-    };
-
-    // Acknowlege on UI that the Deadline task has been added.
-    public void uiReply() {
-        Ui.displayMsg("Got it. I've added this task:\n"
-                + Ui.indentString(this.event.toString(), 1) + "\n"
-                + Ui.numTaskToString(taskList.countTasks()));
-    };
+        
+        duke.sendResponse("Got it. I've added this task:\n"
+        + Ui.indentString(this.event.toString(), 1) + "\n"
+        + Ui.numTaskToString(taskList.countTasks()));
+    }
 }

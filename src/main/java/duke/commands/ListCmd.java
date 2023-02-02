@@ -1,6 +1,6 @@
 package duke.commands;
 
-import duke.Ui;
+import duke.Duke;
 import duke.tasks.TaskList;
 
 /**
@@ -21,13 +21,7 @@ public class ListCmd extends Command {
     }
 
     // Executes UI reply
-    public void execute() {
-        uiReply();
+    public void execute(Duke duke) {
+        duke.sendResponse("Here are the tasks in your list:\n" + taskList.toString());
     }
-
-    // Output to UI the tasks in the task list
-    public void uiReply() {
-        Ui.displayMsg("Here are the tasks in your list:\n" + taskList.toString());
-    }
-
 }

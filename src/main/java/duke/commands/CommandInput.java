@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.Optional;
 
 import duke.Parser;
-import duke.Ui;
 import duke.tasks.TaskList;
 
 /**
@@ -44,23 +43,23 @@ public enum CommandInput {
         CommandInput commandInput = getCommandInput(commandLine);
         switch (commandInput) {
         case LIST:
-            return new ListCmd(tasks, Ui.getLine());
+            return new ListCmd(tasks, commandLine);
         case MARK:
-            return new MarkCmd(tasks, Ui.getLine());
+            return new MarkCmd(tasks, commandLine);
         case UNMARK:
-            return new UnmarkCmd(tasks, Ui.getLine());
+            return new UnmarkCmd(tasks, commandLine);
         case DELETE:
-            return new DeleteCmd(tasks, Ui.getLine());
+            return new DeleteCmd(tasks, commandLine);
         case EVENT:
-            return new EventCmd(tasks, Ui.getLine());
+            return new EventCmd(tasks, commandLine);
         case DEADLINE:
-            return new DeadlineCmd(tasks, Ui.getLine());
+            return new DeadlineCmd(tasks, commandLine);
         case TODO:
-            return new ToDoCmd(tasks, Ui.getLine());
+            return new ToDoCmd(tasks, commandLine);
         case BYE:
-            return new ByeCmd(tasks, Ui.getLine());
+            return new ByeCmd(tasks, commandLine);
         case FIND:
-            return new FindCmd(tasks, Ui.getLine());
+            return new FindCmd(tasks, commandLine);
         default:
             return new UnrecognizedCmd(tasks, commandLine);
         }

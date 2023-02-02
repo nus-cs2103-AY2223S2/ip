@@ -1,5 +1,6 @@
 package duke.commands;
 
+import duke.Duke;
 import duke.Parser;
 import duke.Ui;
 import duke.exceptions.ListIndexMissing;
@@ -26,15 +27,11 @@ public class MarkCmd extends Command {
     }
 
     // Marks the specified task as completed.
-    public void execute() throws ListIndexMissing {
+    public void execute(Duke duke) throws ListIndexMissing {
         this.index = Parser.parseMarkUnmarkDeleteIndex(lineInput);
         this.task = taskList.get(this.index).markDone();
-        uiReply();
-    }
-
-    // Acknowledge on UI that the task has been marked as complete.
-    public void uiReply() {
+        
         String output = "Nice! I've marked this task as done:";
-        Ui.displayMsg(output + "\n" + Ui.indentString(this.task.toString(), 1));
+        duke.sendResponse(output + "\n" + Ui.indentString(this.task.toString(), 1));
     }
 }
