@@ -14,9 +14,16 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Manages storage of tasks between sessions.
+ */
 public class Storage {
     private File storageFile;
 
+    /**
+     * Constructor for a Storage object.
+     * @param file File path for storage.
+     */
     public Storage(String file) {
         try {
             String innerPath = System.getProperty("user.dir");
@@ -27,7 +34,11 @@ public class Storage {
             e.printStackTrace();
         }
     }
-    // create an empty text file if there is no data or load the existing data to task list if data exist
+
+    /**
+     * Parses Storage file for previously stored Tasks.
+     * @return ArrayList containing all previously stored Tasks.
+     */
     public ArrayList<Task> load() {
         try {
             ArrayList<Task> tasks = new ArrayList<Task>();
@@ -56,6 +67,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Adds Task to storage file.
+     * @param t Task object to be stored.
+     */
     public void add(Task t) {
         try {
             FileWriter fw = new FileWriter(storageFile, true);
@@ -70,6 +85,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Updates storage file with the current state of all tasks.
+     * @param tasks TaskList containing all current tasks.
+     */
     public void saveState(TaskList tasks) {
         try {
             int numberOfTasks = tasks.size();
