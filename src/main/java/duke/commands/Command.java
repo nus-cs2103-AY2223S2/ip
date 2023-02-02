@@ -13,7 +13,7 @@ public abstract class Command {
     public boolean isActive;
 
     /** Frame to be used in response. */
-    public static final String FRAME = "    ____________________________________________________________\n";
+    public static final String FRAME = ""; //"    ____________________________________________________________\n";
 
     public Command() {
         this.isActive = true;
