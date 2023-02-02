@@ -95,7 +95,7 @@ public class Duke {
                     break;
 
                 case Todo:
-                    ui.says(ui.toDo(listOfAction, arr));
+                    ui.says(ui.addToDo(listOfAction, arr));
                     break;
 
                 case Deadline:
@@ -150,7 +150,7 @@ public class Duke {
                     return(ui.delete(listOfAction, arr));
 
                 case Todo:
-                    return(ui.toDo(listOfAction, arr));
+                    return(ui.addToDo(listOfAction, arr));
 
                 case Deadline:
                     return(ui.addDeadline(listOfAction, arr));

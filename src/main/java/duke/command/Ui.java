@@ -185,7 +185,7 @@ public class Ui {
      * @param command command from user input
      * @return new updated task list
      */
-    public String toDo(TaskList listOfAction, String[] command) {
+    public String addToDo(TaskList listOfAction, String[] command) {
         String remaining = Parser.toDo(command);
         if (remaining.equals("")) {
             return(new MissingContentException().getMessage());
