@@ -37,14 +37,14 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() +
-                " (from: " + startDateTime.format(formatter) +
-                " to: " + endDateTime.format(formatter) + ")";
+        return "[E]" + super.toString()
+                + " (from: " + startDateTime.format(formatter)
+                + " to: " + endDateTime.format(formatter) + ")";
     }
 
     @Override
     public String getTaskState() {
-        return "E | " + super.getTaskString() + " | "
-                + this.startDateTime + " | " + this.endDateTime;
+        return "E | " + super.getTaskString()
+                + " | " + startDateTime + " | " + endDateTime;
     }
 }
