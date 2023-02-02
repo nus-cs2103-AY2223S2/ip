@@ -155,8 +155,7 @@ public class TaskList {
             System.out.println("Wake up and choose a better task to mark");
         }
     }
-
-    //unmark
+    
 
     /**
      *  Method which marks the task specified by the index as undone.
