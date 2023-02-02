@@ -14,8 +14,8 @@ public class CreateTodo extends Command {
    }
 
    @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.add(new Todo(desc, false));
-        ui.showAdd(tasks.get(tasks.size() - 1), tasks.size());
+        return ui.showAdd(tasks.get(tasks.size() - 1), tasks.size());
     }
 }

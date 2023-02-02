@@ -46,7 +46,7 @@ public class StorageTest {
 
     @Test
     public void testSave() {
-        File testFile = new File("test.txt");
+        File testFile = new File("data/test.txt");
         if (testFile.exists()) {
             testFile.delete();
         }

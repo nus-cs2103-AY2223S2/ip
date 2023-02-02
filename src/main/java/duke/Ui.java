@@ -40,8 +40,8 @@ public class Ui {
     /**
      * Display goodbye message.
      */
-    public void showBye() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String showBye() {
+        return "Bye. Hope to see you again soon!\n";
     }
 
     /**
@@ -49,11 +49,12 @@ public class Ui {
      * 
      * @param list the list of tasks to display.
      */
-    public void showList(TaskList list) {
-        System.out.println("Here are the tasks in your list:");
+    public String showList(TaskList list) {
+        String ret = "Here are the tasks in your list:\n";
         for (int i = 0; i < list.size(); i++) {
-            System.out.println((i+1) + ". " + list.get(i));
+            ret = ret + (i+1) + ". " + list.get(i) + "\n";
         }
+        return ret;
     }
 
     /**
@@ -61,9 +62,8 @@ public class Ui {
      * 
      * @param task the task that was marked.
      */
-    public void showMark(Task task) {
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(task);
+    public String showMark(Task task) {
+        return "Nice! I've marked this task as done:\n" + task + "\n";
     }
 
     /**
@@ -71,9 +71,8 @@ public class Ui {
      * 
      * @param task the task that was unmarked.
      */
-    public void showUnmark(Task task) {
-        System.out.println("OK, I've marked this task as not done yet:");
-        System.out.println(task);
+    public String showUnmark(Task task) {
+        return "OK, I've marked this task as not done yet:\n" + task + "\n";
     }
 
     /**
@@ -82,10 +81,8 @@ public class Ui {
      * @param task the task that was added.
      * @param size the size of the list after the addition.
      */
-    public void showAdd(Task task, int size) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task);
-        System.out.println("Now you have " + size + " tasks in the list.");
+    public String showAdd(Task task, int size) {
+        return "Got it. I've added this task:\n" + task + "\nNow you have " + size + " tasks in the list.\n";
     }
 
     /**
@@ -94,28 +91,27 @@ public class Ui {
      * @param task the task that was deleted.
      * @param size the size of the list after the deletion.
      */
-    public void showDelete(Task task, int size) {
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(task);
-        System.out.println("Now you have " + size + " tasks in the list.");
+    public String showDelete(Task task, int size) {
+        return "Noted. I've removed this task:\n" + task + "\nNow you have " + size + " tasks in the list.\n";
     }
 
-    public void showFind(TaskList list) {
-        System.out.println("Here are the matching tasks in your list:");
+    public String showFind(TaskList list) {
+        String ret = "Here are the matching tasks in your list:\n";
         for (int i = 0; i < list.size(); i++) {
-            System.out.println((i+1) + ". " + list.get(i));
+            ret = ret + (i+1) + ". " + list.get(i) + "\n";
         }
+        return ret;
     }
 
-    public void showLoadingError() {
-        System.out.println("Error loading file!");
+    public String showLoadingError() {
+        return "Error loading file!\n";
     }
 
     /**
      * Display the error message for saving the file.
      */
-    public void showSavingError() {
-        System.out.println("Error saving file!");
+    public String showSavingError() {
+        return "Error saving file!\n";
     }
 
     /**
@@ -123,8 +119,8 @@ public class Ui {
      * 
      * @param message the error message to display.
      */
-    public void showError(String message) {
-        System.out.println(message);
+    public String showError(String message) {
+        return message + "\n";
     }
 
     /**

@@ -9,7 +9,7 @@ public class List extends Command {
     public List() {
         super();
     }
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        ui.showList(tasks);
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        return ui.showList(tasks);
     };
 }

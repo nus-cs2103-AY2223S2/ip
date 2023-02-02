@@ -14,12 +14,12 @@ public class Delete extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (index > tasks.size() || index < 1) {
             throw new DukeException("Please specify a valid task number.");
         }
         Task t = tasks.get(index-1);
         tasks.remove(index-1);
-        ui.showDelete(t, tasks.size());
+        return ui.showDelete(t, tasks.size());
     }
 }

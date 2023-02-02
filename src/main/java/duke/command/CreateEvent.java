@@ -20,8 +20,8 @@ public class CreateEvent extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.add(new Event(description, start, end, false));
-        ui.showAdd(tasks.get(tasks.size() - 1), tasks.size());
+        return ui.showAdd(tasks.get(tasks.size() - 1), tasks.size());
     }
 }
