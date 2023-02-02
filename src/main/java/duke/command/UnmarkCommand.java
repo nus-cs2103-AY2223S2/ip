@@ -7,13 +7,27 @@ import duke.Ui;
 
 import duke.task.Task;
 
+/**
+ * Handles the changing the status of task to not done
+ */
 public class UnmarkCommand extends Command {
     private final int index;
 
+    /**
+     * Stores the index of the task to be marked as not done
+     *
+     * @param index Index of the task to be marked as not done
+     */
     public UnmarkCommand(int index) {
         this.index = index;
     }
 
+    /**
+     * Stores the index of the task to be marked as not done
+     *
+     * @param fullCommand The user's input command
+     * @throws DukeException If input from user does not contain a valid index
+     */
     public UnmarkCommand(String fullCommand) throws DukeException {
         try {
             index = Integer.parseInt(fullCommand
@@ -26,6 +40,16 @@ public class UnmarkCommand extends Command {
         }
     }
 
+    /**
+     * Changes completion status of task to not done
+     * Saves changes made to list in the hard disk
+     *
+     * @param tasks List of tasks
+     * @param ui Handles user interaction
+     * @param storage Handles saving and loading tasks
+     * @throws DukeException If encountering an I/O interrupt while saving data
+     * @throws DukeException If given index is not in the list of tasks
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task task = tasks.unmark(index);

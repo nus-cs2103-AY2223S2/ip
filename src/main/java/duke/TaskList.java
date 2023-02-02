@@ -25,6 +25,13 @@ public class TaskList {
         return tasks.size();
     }
 
+    /**
+     * Gets the task at the specified index
+     *
+     * @param index Index of the task
+     * @return Task at specified index
+     * @throws DukeException If given index is not in the list
+     */
     public Task get(int index) throws DukeException {
         try {
             return tasks.get(index);
@@ -46,6 +53,7 @@ public class TaskList {
      * Removes specified task from list of tasks
      *
      * @param index Index of task to be removed
+     * @throws DukeException If given index is not in the list of tasks
      */
     public Task delete(int index) throws DukeException {
         try {
@@ -59,6 +67,7 @@ public class TaskList {
      * Marks specified task from list of tasks as done
      *
      * @param index Index of specified task
+     * @throws DukeException If given index is not in the list of tasks
      */
     public Task mark(int index) throws DukeException {
         try {
@@ -74,6 +83,7 @@ public class TaskList {
      * Changes the status of specified task from list of tasks back to not done
      *
      * @param index Index of specified task
+     * @throws DukeException If given index is not in the list of tasks
      */
     public Task unmark(int index) throws DukeException {
         try {

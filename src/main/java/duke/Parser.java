@@ -18,10 +18,12 @@ public class Parser {
 
     protected enum COMMAND {BYE, LIST, TODO, DEADLINE, EVENT, MARK, UNMARK, DELETE}
 
-    public Parser() {
-
-    }
-
+    /**
+     * Generates command from user command input
+     *
+     * @param fullCommand User command input
+     * @throws DukeException If the input from the user is not a valid command
+     */
     public static Command parse(String fullCommand) throws DukeException {
         try {
             String[] input = fullCommand.trim().split(" ", 2);

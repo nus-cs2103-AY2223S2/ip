@@ -4,7 +4,7 @@ package duke;
 import duke.command.Command;
 
 /**
- *
+ * Generates a Duke object
  */
 public class Duke {
 
@@ -12,6 +12,12 @@ public class Duke {
     private TaskList tasks;
     private final Ui ui;
 
+    /**
+     * Generates a Duke object
+     * Stores saved data in specified filepath
+     *
+     * @param filePath Location of saved data
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -23,6 +29,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Executes Duke
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -41,6 +50,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Creates and run Duke
+     */
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
     }

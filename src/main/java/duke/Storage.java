@@ -40,6 +40,8 @@ public class Storage {
      * Checks the directories and filepath of the storage location.
      * If directory does not exist, create the necessary directories.
      * If file does not exist, create the file.
+     *
+     * @throws DukeException If encountering an I/O interrupt while checking the location of saved data
      */
     private void checkStorage() throws DukeException {
         try {
@@ -61,6 +63,7 @@ public class Storage {
      * Saves the changes made to the list of task in the hard disk
      *
      * @param tasks List of tasks
+     * @throws DukeException If encountering an I/O interrupt while saving data
      */
     public void save(TaskList tasks) throws DukeException {
         try {
@@ -85,6 +88,7 @@ public class Storage {
      * Returns the data stored in the hard disk
      *
      * @return List of tasks as string
+     * @throws DukeException If encountering an I/O interrupt while loading data
      */
     public TaskList load() throws DukeException {
         try {

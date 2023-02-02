@@ -28,11 +28,19 @@ public class Ui {
         return sc.nextLine();
     }
 
+    /**
+     * Shows the divider line ("_______")
+     */
     public void showLine() {
         System.out.println(" ".repeat(4)
                 + "_".repeat(60));
     }
 
+    /**
+     * Shows the specified message
+     *
+     * @param message Message to be shown
+     */
     public void echo(String message) {
         String indent = " ".repeat(5);
         System.out.println(indent
@@ -40,6 +48,9 @@ public class Ui {
                 "\n" + indent));
     }
 
+    /**
+     * Shows Duke's logo and greets the user
+     */
     public void showWelcome() {
         // Shows logo of Duke
         System.out.println("Hello from\n"
@@ -56,20 +67,38 @@ public class Ui {
         showLine();
     }
 
+    /**
+     * Shows farewell message
+     */
     public void showFarewell() {
         echo("Bye. Hope to see you again soon!");
     }
 
+    /**
+     * Shows the specified task's details
+     *
+     * @param task Task to be shown
+     */
     public void showTask(Task task) {
         echo("  " + task.toString());
     }
 
+    /**
+     * Shows the number of tasks stored in list
+     *
+     * @param tasks List of tasks
+     */
     public void showTaskCount(TaskList tasks) {
         echo("Now you have "
                 + tasks.size()
                 + " tasks in the list.");
     }
 
+    /**
+     * Shows the list of task
+     *
+     * @param tasks List of tasks
+     */
     public void showTasks(TaskList tasks) throws DukeException {
         StringBuilder message = new StringBuilder("Here are the tasks in your list:");
         for (int i = 0; i < tasks.size(); i++) {
@@ -82,10 +111,19 @@ public class Ui {
     }
 
     // Error messages for exceptions specific to Duke.
+    /**
+     * Shows the error message of the encountered exception
+     *
+     * @param errorMessage Error message
+     */
     public void showError(String errorMessage) {
         echo("☹ OOPS!!! " + errorMessage + " :-(");
     }
 
+    /**
+     * Shows the error message of the exception encountered when loading tasks
+     * from save data
+     */
     public void showLoadingError() {
         showError("There was an error while loading from save file");
     }

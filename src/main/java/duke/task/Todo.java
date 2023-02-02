@@ -27,6 +27,13 @@ public class Todo extends Task {
         super(description, isDone);
     }
 
+
+    /**
+     * Generate a todo object from user's command input
+     *
+     * @param input The user's command input
+     * @throws DukeException If saved data of the todo task is missing some fields
+     */
     public static Todo generate(String input) throws DukeException {
         // Cleans input and checks for description
         try {
@@ -38,6 +45,13 @@ public class Todo extends Task {
         }
     }
 
+    /**
+     * Generate a todo object from saved data
+     *
+     * @param input The saved data of the task
+     * @param isDone The completion status of the task
+     * @throws DukeException If saved data of the todo task is missing some fields
+     */
     public static Todo load(String input, boolean isDone) throws DukeException {
         // Cleans input and checks for description
         input = input.trim();
@@ -57,6 +71,10 @@ public class Todo extends Task {
         return "[T]" + super.toString();
     }
 
+    /**
+     * @inherit
+     * Returns the ToDo task's saved data in string format
+     */
     @Override
     public String save() {
         return "T | " + getStatusIcon()
