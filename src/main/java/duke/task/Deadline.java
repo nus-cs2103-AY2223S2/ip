@@ -3,16 +3,32 @@ package duke.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/*
+ * Represents a task with a deadline.
+ */
 public class Deadline extends Task {
 
     protected LocalDateTime byTime;
     private static final DateTimeFormatter DATETIME_FORMAT = DateTimeFormatter.ofPattern("EEE, d MMM yyyy hh:mma");
 
+    /*
+     * Constructor to make a new Deadline object.
+     * 
+     * @param taskName Name of the task.
+     * @param byTime Deadline of the task.
+     */
     public Deadline(String taskName, LocalDateTime byTime) {
         super(taskName);
         this.byTime = byTime;
     }
 
+    /*
+     * Constructor for a new Deadline object used for loading from save file.
+     * 
+     * @param taskName Name of the task.
+     * @param byTime Deadline of the task.
+     * @param isDone Status of the task.
+     */
     public Deadline(String taskName, LocalDateTime byTime, boolean isDone) {
         super(taskName);
         this.byTime = byTime;

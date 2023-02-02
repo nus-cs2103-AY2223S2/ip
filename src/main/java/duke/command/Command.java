@@ -10,8 +10,10 @@ import duke.util.Ui;
  * Other commands extend this class.
  */
 public abstract class Command {
+    
     /**
      * Executes the command.
+     * 
      * @param tl TaskList which the Duke will modify.
      * @param ui Ui to be used to facilitate interactions between user and the CLI.
      * @param storage Storage to be used to handle interactions with the save file.
@@ -19,6 +21,11 @@ public abstract class Command {
      */
     public abstract void execute(TaskList tl, Ui ui, Storage storage) throws DukeException;
 
+    /*
+     * Returns true if the command is an exit command.
+     * 
+     * @return false
+     */
     public boolean isExit() {
         return false;
     }

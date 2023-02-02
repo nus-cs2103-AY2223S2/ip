@@ -1,5 +1,9 @@
 package duke.task;
 
+/*
+ * Represents a task to be put into the task list.
+ * All other tasks inherit from this class.
+ */
 public abstract class Task {
     protected String taskName;
     protected boolean isDone;
@@ -9,10 +13,20 @@ public abstract class Task {
         this.isDone = false;
     }
 
+    /*
+     * Returns the status icon of the task.
+     * 
+     * @return String representing the status icon of the task "X" or " ". 
+     */
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
+    /*
+     * Marks the task as done.
+     * 
+     * @return String to be shown to the user.
+     */
     public String mark() {
         if (!isDone) {
             this.isDone = true;
@@ -25,6 +39,11 @@ public abstract class Task {
         }
     }
 
+    /*
+     * Marks the task as undone.
+     * 
+     * @return String to be shown to the user.
+     */
     public String unmark() {
         if (isDone) {
             this.isDone = false;
@@ -37,9 +56,12 @@ public abstract class Task {
         }
     }
 
+    /*
+     * Encodes the Deadline object into a String array for saving into the save file.
+     * 
+     * @return String[] of the encoded Deadline object.
+     */
     public abstract String[] encode();
-
-
 
     @Override
     public String toString() {

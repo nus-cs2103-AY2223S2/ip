@@ -3,24 +3,42 @@ package duke.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/*
+ * Represents a task called event with a starting from time and ending to time.
+ */
 public class Event extends Task {
 
     protected LocalDateTime fromTime;
     protected LocalDateTime toTime;
     private static final DateTimeFormatter DATETIME_FORMAT = DateTimeFormatter.ofPattern("EEE, d MMM yyyy hh:mma");
 
+    /*
+     * Constructor to make a new Event object.
+     * 
+     * @param taskName Name of the task.
+     * @param fromTime Starting time of the event.
+     * @param toTime Ending time of the event.
+     */
     public Event(String taskName, LocalDateTime fromTime, LocalDateTime toTime) {
         super(taskName);
         this.fromTime = fromTime;
         this.toTime = toTime;
     }
 
+    /*
+     * Constructor for a new Event object used for loading from save file.
+     * 
+     * @param taskName Name of the task.
+     * @param fromTime Starting time of the event.
+     * @param toTime Ending time of the event.
+     */
     public Event(String taskName, LocalDateTime fromTime, LocalDateTime toTime, boolean isDone) {
         super(taskName);
         this.fromTime = fromTime;
         this.toTime = toTime;
         this.isDone = isDone;
     }
+
 
     @Override
     public String[] encode() {
