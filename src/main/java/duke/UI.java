@@ -29,6 +29,25 @@ public class UI {
     }
 
     /**
+     * Prints out the list of tasks from the task list that contains a certain
+     * keyword
+     */
+    public void findTask(TasksList list, String keyword) {
+        int counter = 1;
+        for (int i = 0; i < list.getSize(); i++) {
+            
+            String[] taskDescription = list.getTask(i).getDescription().split(" ");
+            for (String word : taskDescription) {
+                if(keyword.equals(word)) {
+                    System.out.println(counter + "." + list.getTask(i).toString());
+                    counter++;
+                    break;
+                }
+            }
+        }
+    }
+
+    /**
      * Mark the task in the certain index of the Task List as done
      * @param list Task List
      * @param index index of the task

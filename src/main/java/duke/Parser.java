@@ -25,6 +25,15 @@ public class Parser {
     }
 
     /**
+     * Returns the keyword from the command
+     * @param input the command from the user input
+     * @return keyword
+     */
+    public String getKeyword(String input) {
+        return input.substring(5);
+    }
+
+    /**
      * Returns a description of a Todo object
      * @param input todo command
      * @return Description of the todo object 

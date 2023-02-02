@@ -76,6 +76,13 @@ public class Duke {
                     }
                 } else if (commandArr[0].equals("list")) {
                     ui.showList(list);
+                } else if (commandArr[0].equals("find")) {
+                    try {
+                        DukeExceptions.checkEmptyDescription(commandArr);
+                        ui.findTask(list, parser.getKeyword(command));
+                    } catch (EmptyDescriptionException e) {
+                        System.out.println(e.getMessage());
+                    }
                 } else if (commandArr[0].equals("bye")) {
                     storage.saveData();
                     ui.showExit();
