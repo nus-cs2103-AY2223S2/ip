@@ -10,6 +10,7 @@ public class Parser {
     }
 
     /**
+     * Parses the input string from the user representing a todo task.
      * @param input the input string from the user.
      * @return the duke.task.ToDo object created from the input string.
      */
@@ -18,6 +19,7 @@ public class Parser {
     }
 
     /**
+     * Parses the input string from the user representing a deadline task.
      * @param input the input string from the user.
      * @return the duke.task.Deadline object created from the input string.
      * @throws DukeException if the input string is invalid.
@@ -31,6 +33,7 @@ public class Parser {
     }
 
     /**
+     * Parses the input string from the user representing an event task.
      * @param input the input string from the user.
      * @return the duke.task.Event object created from the input string.
      * @throws DukeException if the input string is invalid.

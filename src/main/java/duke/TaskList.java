@@ -14,6 +14,10 @@ public class TaskList {
         this.taskList = taskList;
     }
 
+    /**
+     * @param index the index of the task to be retrieved.
+     * @return the task at the specified index.
+     */
     public Task getTask(int index) {
         return  this.taskList.get(index);
     }
@@ -39,6 +43,16 @@ public class TaskList {
     public Task markTaskUndone(int index) {
         this.taskList.get(index).markAsUndone();
         return this.taskList.get(index);
+    }
+
+    public TaskList findTasks(String keyword) {
+        TaskList matchingTasks = new TaskList();
+        for (Task task : this.taskList) {
+            if (task.getDescription().contains(keyword)) {
+                matchingTasks.addTask(task);
+            }
+        }
+        return matchingTasks;
     }
 
     /**
@@ -81,10 +95,7 @@ public class TaskList {
 
     @Override
     public String toString() {
-        if (this.taskList.isEmpty()) {
-            return "You have no tasks in your list.";
-        }
-        StringBuilder sb = new StringBuilder("Here are the tasks in your list:\n");
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < this.taskList.size(); i++) {
             sb.append(i + 1).append(". ").append(this.taskList.get(i)).append("\n");
         }
