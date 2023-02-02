@@ -9,7 +9,7 @@ public class Event extends Task {
         super(description);
         String[] fromDateTime = from.split(" ");
         String[] toDateTime = to.split(" ");
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
 
         if (fromDateTime.length != 2) from += " 0000";    // default to 00:00
         if (toDateTime.length != 2) to += " 2359";        // default to 23:59
@@ -22,7 +22,9 @@ public class Event extends Task {
      * @return the string representation of the task to be stored in the hard disk.
      */
     public String toStorageString() {
-        return "E | " + (isDone ? "1" : "0") + " | " + description + " | " + from + " | " + to;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+        return "E | " + (isDone ? "1" : "0") + " | " + description + " | " + formatter.format(this.from) +
+                " | " + formatter.format(this.to);
     }
     @Override
     public String toString() {
