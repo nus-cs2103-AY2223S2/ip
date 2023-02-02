@@ -11,12 +11,29 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ *  A file manager to act as storage for user's tasks.
+ *
+ * @author Tan Matthew Simon Castaneda
+ * @version CS2103 AY22/23 Semester 2
+ */
 public class Storage {
     String path;
 
+    /**
+     * Constructor to create user's storage system.
+     *
+     * @param path relative filepath for user's tasks to be stored.
+     */
     public Storage(String path) {
         this.path = path;
     }
+
+    /**
+     * Saves user's existing tasks into a .txt file.
+     *
+     * @param tasklist List of tasks to be saved from the user.
+     */
 
     public void saveTask(TaskList tasklist) {
         try {
@@ -48,6 +65,11 @@ public class Storage {
 
     }
 
+    /**
+     * Loads an existing user's tasks into the tasklist.
+     *
+     * @return A list of tasks previously saved by the user.
+     */
     public TaskList loadTask() {
 
         TaskList tasklist = new TaskList(100);

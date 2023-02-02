@@ -5,12 +5,22 @@ import duke.exceptions.InvalidTaskDescriptionException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Encapsulates the list of tasks that the user has to complete.
+ *
+ * @author Tan Matthew Simon Castaneda
+ * @version CS2103 AY22/23 Semester 2
+ */
 public class TaskList {
     ArrayList<Task> tasks;
     int size;
 
 
-
+    /**
+     * A constuctor to create an object representing the lists of tasks to be done by the user.
+     *
+     * @param size Maximum number of tasks that the list will hold.
+     */
     public TaskList(int size) {
         this.size = size;
         this.tasks = new ArrayList<>(size);
@@ -31,12 +41,25 @@ public class TaskList {
     }
 
     //generic method to add any duke.tasks
+
+    /**
+     * Adds an already constructed task to the list.
+     *
+     * @param task Task to be added into the list.
+     */
     public void append(Task task) {
         this.tasks.add(task);
     }
 
 
     //add task
+
+    /**
+     * Creates a task object and adds it into the tasklist. (For todo tasks)
+     *
+     * @param input User input which describes the task.
+     * @throws InvalidTaskDescriptionException If escription of the task does not match specified format.
+     */
     public void addTask(String input) throws InvalidTaskDescriptionException {
         String[] newInput = input.split("todo ");
         if (newInput.length < 2) {
@@ -50,6 +73,13 @@ public class TaskList {
     }
 
     //add event
+
+    /**
+     * Creates an event object and adds it into the tasklist.
+     *
+     * @param input User input which describes the event, including its start and end time.
+     * @throws InvalidTaskDescriptionException If description of the event does not match specified format.
+     */
     public void addEvent(String input) throws InvalidTaskDescriptionException{
         String[] nInput = input.split("/");
         if (nInput.length < 2) {
@@ -64,6 +94,13 @@ public class TaskList {
     }
 
     //add deadline
+
+    /**
+     * Creates a deadline object and adds it into the tasklist.
+     *
+     * @param input User input which describes the deadline including its time to be completed.
+     * @throws InvalidTaskDescriptionException If description of the deadline does not match specified format.
+     */
     public void addDeadline(String input) throws InvalidTaskDescriptionException{
         String[] nInput = input.split("/");
         if (nInput.length < 2) {
@@ -81,6 +118,12 @@ public class TaskList {
 
 
     //delete
+
+    /**
+     * Deletes a task from the tasklist.
+     *
+     * @param command User input which specifies the index to delete the object (1-based).
+     */
     public void deleteTask(String[] command) {
         int taskPointer = Integer.parseInt(command[1]) - 1;
         //duke.tasks.Task temp = duke.tasks.get(taskPointer);
@@ -99,6 +142,11 @@ public class TaskList {
 
     //mark
 
+    /**
+     * Method which marks the task specified by the index as done.
+     *
+     * @param command User input which specifies the index of the task to mark as done (1-based).
+     */
     public void mark(String[] command) {
         int taskPointer = Integer.parseInt(command[1]) - 1;
         try {
@@ -109,6 +157,12 @@ public class TaskList {
     }
 
     //unmark
+
+    /**
+     *  Method which marks the task specified by the index as undone.
+     *
+     * @param command User input which specifies the index of the task to mark as undone (1-based).
+     */
     public void unmark(String[] command) {
         int taskPointer = Integer.parseInt(command[1]) - 1;
         try {
@@ -121,6 +175,11 @@ public class TaskList {
 
 
     //list
+
+    /**
+     * Method to list out all the tasks for the users view.
+     *
+     */
     public void listTasks() {
         if (this.getCurrentSize() == 0) {
             System.out.println("You got nothing to do brother its time to get a life");

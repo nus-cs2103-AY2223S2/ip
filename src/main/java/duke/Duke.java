@@ -13,6 +13,11 @@ public class Duke {
 
     private Ui ui;
 
+    /**
+     * Helper function to initialize ChadGPT's context.
+     *
+     * @param filepath Relative filepath of ChadGPT's storage.
+     */
     public Duke(String filepath) {
         this.filepath = filepath;
         this.ui = new Ui();
@@ -29,6 +34,9 @@ public class Duke {
 
     }
 
+    /**
+     * Runs ChadGPT in its full majesty.
+     */
     public void run() {
 
         while(true) {
@@ -45,6 +53,11 @@ public class Duke {
         ui.close();
     }
 
+    /**
+     * Method to start up ChadGPT.
+     *
+     * @param args Command line arguments.
+     */
     public static void main(String[] args) {
         new Duke("./duke.txt").run();
     }

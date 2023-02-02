@@ -1,5 +1,11 @@
 package duke.tasks;
 
+/**
+ * Encapsulates a task that the user has to complete.
+ *
+ * @author Tan Matthew Simon Castaneda
+ * @version CS2103 AY22/23 Semester 2
+ */
 public class Task {
 
     String name;
@@ -7,6 +13,11 @@ public class Task {
 
     static String type;
 
+    /**
+     * Constructor to create the task object associated with the user's task.
+     *
+     * @param name Name of the task that the user has to complete.
+     */
     public Task(String name) {
         this.name = name;
         this.completionStatus = false;
@@ -24,6 +35,10 @@ public class Task {
         return this.name;
     }
 
+    /**
+     * Marks the users Tasks as completed.
+     *
+     */
     public void markAsDone() {
         this.completionStatus = true;
         System.out.println("Congrats bro you've done something with your life");
@@ -31,6 +46,10 @@ public class Task {
         return;
     }
 
+    /**
+     * Marks the user's task as undone if it was previously marked as done.
+     *
+     */
     public void undoTask() {
         this.completionStatus = false;
         System.out.println("Stop being useless why u ask me to unmark");
@@ -38,6 +57,11 @@ public class Task {
         return;
     }
 
+    /**
+     * Converts the user's tasks to its string representation
+     *
+     * @return A string representation of the user's task.
+     */
     @Override
     public String toString(){
         if (completionStatus == true) {
