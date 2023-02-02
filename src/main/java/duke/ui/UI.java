@@ -5,9 +5,10 @@ import java.util.Scanner;
 import duke.command.Command;
 import duke.command.Parser;
 
+import duke.exceptions.DukeException;
+
 import duke.task.TaskList;
 
-import duke.exceptions.DukeException;
 
 /**
  * Class that handles the interface that user interacts with.

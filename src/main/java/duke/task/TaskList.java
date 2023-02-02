@@ -115,6 +115,12 @@ public class TaskList {
         }
         return display.toString();
     }
+
+    /**
+     * Gets all the tasks which contains or are associated with the given word in string.
+     * @param word the specified word.
+     * @return formatted string showing details of all tasks associated to the word.
+     */
     public String find(String word) {
         StringBuilder display = new StringBuilder();
         int count = 1;

@@ -19,7 +19,7 @@ public class Deadline extends Task {
      * Constructor for a Deadline object.
      * @param des Description of the task.
      * @param deadline String format of the deadline of the task.
-     * @throws InvalidDateException Throws InvalidDateException if the string representation of deadline is not of the correct format.
+     * @throws InvalidDateException if the string representation of deadline is not of the correct format.
      */
     public Deadline(String des, String deadline) throws InvalidDateException {
         super(des);
@@ -36,7 +36,8 @@ public class Deadline extends Task {
      */
     @Override
     public String getStatusIcon() {
-        return String.format("[D]%s | BY: %s", super.getStatusIcon(), this.deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+        return String.format("[D]%s | BY: %s", super.getStatusIcon(),
+                this.deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
     }
 
     /**

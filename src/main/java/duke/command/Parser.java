@@ -6,9 +6,9 @@ import java.time.format.DateTimeFormatter;
 import duke.exceptions.DukeException;
 import duke.exceptions.InvalidIndexException;
 import duke.task.Deadline;
-import duke.task.ToDo;
 import duke.task.TaskList;
 import duke.task.Event;
+import duke.task.ToDo;
 import duke.task.Task;
 import duke.ui.Span;
 
@@ -121,7 +121,8 @@ public class Parser {
                 }
                 String info = echo.substring(6);
                 if (!info.matches(".+ /from .+ /to .+")) {
-                    throw new DukeException("<event> is to be used as such: $ event <des> /from <YYYY-MM-DD> /to <YYYY-MM-DD>");
+                    throw new DukeException("<event> is to be used as such: "
+                            + "$ event <des> /from <YYYY-MM-DD> /to <YYYY-MM-DD>");
                 }
                 String[] sp = info.split(" /from ");
                 if (sp[1].trim().equals("")) {
@@ -142,7 +143,7 @@ public class Parser {
                 System.out.println(
                         Span.format("Here are the deadlines/events on "
                             + date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
-                                    + ":\n" + tasks.listAllOnDate(date)
+                                + ":\n" + tasks.listAllOnDate(date)
                         )
                 );
                 break;
