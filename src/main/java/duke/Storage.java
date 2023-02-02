@@ -14,8 +14,18 @@ public class Storage {
 
     public static String path = "DukeData/tasks.txt";
     public static String dirPath = "DukeData";
+
+    /**
+     * Creates Storage for Duke to load tasks from previous run
+     * and save tasks in the current run.
+     */
     public Storage() {}
 
+    /**
+     * Saves the task into a separate file after each update from the user.
+     *
+     * @param taskList the current tasklist.
+     */
     public void saveTasks(TaskList taskList) {
         try {
             String input = "";
@@ -31,6 +41,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads all the task from the previous run.
+     * Tasks are all saved in a separate file.
+     *
+     * @param taskList the current tasklist
+     * @exception IOException catch for Input and Output inconsistencies.
+     */
     public void loadTasks(TaskList taskList) throws IOException {
         File folder = new File(dirPath);
         if (!folder.exists()) {

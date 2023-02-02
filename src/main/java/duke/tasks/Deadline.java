@@ -32,11 +32,22 @@ public class Deadline extends Task {
         return Parser.dateTimeSaving(by);
     }
 
+    /**
+     * Produces a String that adheres to our Storage formatting
+     * holding all the relevant information.
+     *
+     * @return the String of the specific task for saving
+     */
     @Override
     public String saveString() {
         return String.format("D|%s|%s|%s", super.saveString(), super.description, this.parseBySaving());
     }
 
+    /**
+     * All the Information of the Deadline task
+     *
+     * @return a String of all the information of the Deadline task to be printed by the Ui
+     */
     @Override
     public String toString() {
         return String.format("[D]%s (by: %s)", super.toString(), this.getBy());

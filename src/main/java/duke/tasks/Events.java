@@ -44,12 +44,23 @@ public class Events extends Task {
         return Parser.dateTimeSaving(startDate);
     }
 
+    /**
+     * Produces a String that adheres to our Storage formatting
+     * holding all the relevant information.
+     *
+     * @return the String of the specific task for saving
+     */
     @Override
     public String saveString() {
         return String.format("E|%s|%s|%s|%s", super.saveString(), super.description,
                 this.parseStartSaving(), this.parseEndSaving());
     }
 
+    /**
+     * All the Information of the Event task
+     *
+     * @return a String of all the information of the Event task to be printed by the Ui
+     */
     public String toString() {
         return String.format("[E]%s (from: %s to: %s)", super.toString(), this.getStart(), this.getEnd());
     }

@@ -13,8 +13,21 @@ public class TaskAssigner {
 
     public static ArrayList<String> task_t = new ArrayList<>(List.of("todo", "event", "deadline"));
 
+
+    /**
+     * Creates a Task Assigner for Duke.
+     * Responsible for creating either Deadline task, ToDo task or
+     * Event task depending on the user's input.
+     */
     public TaskAssigner() {}
 
+    /**
+     * Creates either Deadline task, ToDo task or
+     * Event task depending on the user's input.
+     *
+     * @param command the user's command.
+     * @exception DukeException catch inconsistencies and error in the user's input.
+     */
     public Task assignTask(String command) throws DukeException {
         String[] seq = command.split(" ");
         String ref = seq[0];
@@ -38,10 +51,23 @@ public class TaskAssigner {
         }
     }
 
+    /**
+     * Creates a ToDo task.
+     *
+     * @param command the user's command.
+     * @return a ToDo task.
+     */
     public Task assignToDo(String command) {
         return new ToDos(command.substring(5));
     }
 
+    /**
+     * Creates a Deadline task
+     *
+     * @param command the user's command.
+     * @exception DukeException catches incorrect formatting of Date and Time for Deadline.
+     * @return a Deadline task.
+     */
     public Task assignDeadline(String command) throws DukeException {
         String[] splitTiming = command.split("/by ");
         if (splitTiming.length != 2) {
@@ -60,6 +86,13 @@ public class TaskAssigner {
         }
     }
 
+    /**
+     * Creates a Event task
+     *
+     * @param command the user's command.
+     * @exception DukeException catches incorrect formatting of Date and Time for Event.
+     * @return a Event task.
+     */
     public Task assignEvent(String command) throws DukeException {
         String[] splitTimings = command.split("/from | /to ");
         if (splitTimings.length != 3) {
