@@ -102,7 +102,6 @@ public class Parser {
      *                                  with numArgs given.
      */
     public static String[] getArgs(String commandName, String argString, int numArgs)
-
             throws InvalidArgumentException {
         String[] args = argString.split(" ");
         if (args.length != numArgs) {
