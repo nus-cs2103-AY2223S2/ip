@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * Encapsulates a task object.
+ * Encapsulates a Task object.
  *
  * @author Sean Chin Jun Kai
  */
@@ -13,7 +13,7 @@ public class Task {
     /**
      * Constructor for creating a Task object.
      *
-     * @param description name of the task.
+     * @param description Name of the Task.
      */
     public Task(String description) {
         this.description = description;
@@ -21,34 +21,32 @@ public class Task {
     }
 
     /**
-     * Returns string representation of the status of the task.
+     * Returns string representation of the status of the Task.
      *
-     * @return status of task.
+     * @return Status of Task.
      */
     public String getStatusIcon() {
         return (isDone ? "X" : " ");
     }
 
     /**
-     * Marks task as done.
-     *
+     * Marks Task as done.
      */
     public void mark() {
         this.isDone = true;
     }
 
     /**
-     * Unmarks a task.
-     *
+     * Unmarks a Task.
      */
     public void unmark() {
         this.isDone = false;
     }
 
     /**
-     * Returns string representation of a Task object which users can see in the command line.
+     * Returns string representation of a Task object which users can see in the GUI.
      *
-     * @return String representation of task.
+     * @return String representation of Task.
      */
     @Override
     public String toString() {
@@ -57,9 +55,9 @@ public class Task {
     }
 
     /**
-     * Returns string representation of a task object to store in txt file.
+     * Returns string representation of a Task object to store in txt file.
      *
-     * @return String representation of task.
+     * @return String representation of Task.
      */
     public String getText() {
         return String.format("| %s | %s", this.getStatusIcon().equals("X") ? "1" : "0", this.description);

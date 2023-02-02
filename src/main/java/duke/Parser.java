@@ -102,8 +102,8 @@ public class Parser {
     /**
      * Parses the stored arguments and returns a Todo object.
      *
-     * @param args arguments following the main command.
-     * @return  Todo object.
+     * @param args Arguments following the main command.
+     * @return Todo object.
      * @throws DukeException if description of Todo is not present.
      */
     public static Todo parseTodo(String[] args) throws DukeException {
@@ -119,8 +119,8 @@ public class Parser {
     /**
      * Parses the stored arguments and returns a Deadline object.
      *
-     * @param args arguments following the main command.
-     * @return  Deadline object.
+     * @param args Arguments following the main command.
+     * @return Deadline object.
      * @throws DukeException if end date/time not present or wrong format of end date/time.
      */
     public static Deadline parseDeadline(String[] args) throws DukeException {
@@ -140,8 +140,8 @@ public class Parser {
     /**
      * Parses the stored arguments and returns an Event object.
      *
-     * @param args arguments following the main command.
-     * @return  Event object.
+     * @param args Arguments following the main command.
+     * @return Event object.
      * @throws DukeException if start and end date/time not present.
      */
     public static Event parseEvent(String[] args) throws DukeException {
@@ -153,10 +153,10 @@ public class Parser {
     }
 
     /**
-     * Parses the stored arguments to get referenced task ID.
+     * Parses the stored arguments to get referenced Task ID.
      *
-     * @param args arguments following the main command.
-     * @return  task ID.
+     * @param args Arguments following the main command.
+     * @return Task ID.
      * @throws DukeException if task ID is of the wrong type.
      */
     public static int parseTask(String[] args) throws DukeException {

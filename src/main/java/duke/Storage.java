@@ -7,8 +7,8 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 /**
- * Encapsulates a storage unit which handles loading tasks from the
- * file and saving tasks in the file.
+ * Encapsulates a storage unit which handles loading Tasks from the
+ * file and saving Tasks in the file.
  *
  * @author Sean Chin Jun Kai
  */
@@ -20,9 +20,9 @@ public class Storage {
     }
 
     /**
-     * Loads all saved tasks in txt file.
+     * Loads all saved Tasks in txt file.
      *
-     * @return List of saved tasks.
+     * @return List of saved Tasks.
      * @throws DukeException if there is an error with reading or creating the txt file.
      */
     public TaskList load() throws DukeException {
@@ -47,9 +47,9 @@ public class Storage {
     }
 
     /**
-     * Saves all tasks into txt file.
+     * Saves all Tasks into txt file.
      *
-     * @param tasks List of current tasks.
+     * @param tasks List of current Tasks.
      * @throws DukeException if there is an error writing to the txt file.
      */
     public void saveToFile(TaskList tasks) throws DukeException {
@@ -64,9 +64,9 @@ public class Storage {
 
 
     /**
-     * Formats tasks in txt file into corresponding Task objects.
+     * Formats Tasks in txt file into corresponding Task objects.
      *
-     * @param input task in txt file.
+     * @param input Task in txt file.
      * @return Task object.
      * @throws DukeException if there is an error reading the file.
      */

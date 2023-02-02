@@ -9,6 +9,7 @@ public class Ui {
 
     /**
      * Returns error message to be displayed to user when error occurs while using Duke.
+     *
      * @param error exception caught.
      * @return the message string of the thrown exception.
      */
@@ -17,9 +18,10 @@ public class Ui {
     }
 
     /**
-     * Returns the string representation of Task List to be shown to user.
-     * @param tasks Task List
-     * @return string representation of the Task List
+     * Returns the string representation of TaskList to be shown to user.
+     *
+     * @param tasks TaskList.
+     * @return string representation of the TaskList.
      */
     public String showTasksMessage(TaskList tasks) {
         if (tasks.size() != 0) {
@@ -31,6 +33,7 @@ public class Ui {
 
     /**
      * Returns the goodbye message when user triggers the bye command.
+     *
      * @return goodbye message.
      */
     public String showGoodbyeMessage() {
@@ -38,9 +41,10 @@ public class Ui {
     }
 
     /**
-     * Returns the message when user successfully adds a task to the Task List.
+     * Returns the message when user successfully adds a task to the TaskList.
+     *
      * @param task Task added.
-     * @param tasks Task List.
+     * @param tasks TaskList.
      * @return added Task success message.
      */
     public String addedTaskMessage(Task task, TaskList tasks) {
@@ -51,7 +55,8 @@ public class Ui {
     }
 
     /**
-     * Returns the message when user successfully marks a task in the Task List.
+     * Returns the message when user successfully marks a Task in the TaskList.
+     *
      * @param task Task marked.
      * @return mark Task success message.
      */
@@ -60,7 +65,8 @@ public class Ui {
     }
 
     /**
-     * Returns the message when user successfully unmarks a task in the Task List.
+     * Returns the message when user successfully unmarks a Task in the TaskList.
+     *
      * @param task Task unmarked.
      * @return unmark Task success message.
      */
@@ -70,9 +76,10 @@ public class Ui {
 
 
     /**
-     * Returns the message when user successfully deletes a task from the Task List.
+     * Returns the message when user successfully deletes a Task from the TaskList.
+     *
      * @param task Task deleted.
-     * @param tasks Task List.
+     * @param tasks TaskList.
      * @return delete Task success message.
      */
     public String deleteTaskMessage(Task task, TaskList tasks) {

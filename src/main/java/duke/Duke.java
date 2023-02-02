@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * Encapsulates a Command Line Application which acts as a Task Manager.
+ * Encapsulates a GUI Application which acts as a Task Manager.
  *
  * @author Sean Chin Jun Kai
  */
@@ -28,7 +28,7 @@ public class Duke {
 
     /**
      * Returns the result string to be shown to user in GUI
-     * based on user's input
+     * based on user's input.
      *
      * @param input text that user enters into GUI.
      * @return string to be displayed to user.

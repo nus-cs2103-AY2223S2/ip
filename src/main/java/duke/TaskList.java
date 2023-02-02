@@ -3,7 +3,7 @@ package duke;
 import java.util.ArrayList;
 
 /**
- * Encapsulates a container for the task list.
+ * Encapsulates a container for Tasks.
  *
  * @author Sean Chin Jun Kai.
  */
@@ -12,7 +12,6 @@ public class TaskList {
 
     /**
      * Constructor for initialising new TaskList.
-     *
      */
     public TaskList() {
         this.tasks = new ArrayList<>();
@@ -21,7 +20,7 @@ public class TaskList {
     /**
      * Adds task to the TaskList.
      *
-     * @param task task to be added.
+     * @param task Task to be added.
      */
     public void addTask(Task task) {
         this.tasks.add(task);
@@ -43,9 +42,9 @@ public class TaskList {
     }
 
     /**
-     * Removes task from TaskList.
+     * Removes Task from TaskList.
      *
-     * @param chosen task to be removed.
+     * @param chosen Task to be removed.
      * @throws DukeException if Task does not exist in TaskList.
      */
     public void deleteTask(Task chosen) throws DukeException {
@@ -53,10 +52,10 @@ public class TaskList {
     }
 
     /**
-     * Finds all matching tasks containing the keyword
+     * Finds all matching Tasks containing the keyword.
      *
-     * @param keyword keyword passed in by user
-     * @return list of tasks matching the keyword
+     * @param keyword keyword passed in by user.
+     * @return string representation of list of Tasks matching the keyword.
      */
     public String getMatchingTasksString(String keyword) {
         StringBuilder res = new StringBuilder();
@@ -89,9 +88,9 @@ public class TaskList {
     }
 
     /**
-     * Returns representation of task list to be stored into txt file
+     * Returns representation of TaskList to be stored into txt file.
      *
-     * @return string representation of task list.
+     * @return string representation of TaskList.
      */
     public String saveString() {
         StringBuilder result = new StringBuilder();

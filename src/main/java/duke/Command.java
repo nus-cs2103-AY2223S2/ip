@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * A collection of enums which represent possible commands given by user
+ * A collection of enums which represent possible commands given by user.
  *
  * @author Sean Chin Jun Kai
  */
