@@ -6,6 +6,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import saturday.utilities.Storage;
 
@@ -23,6 +24,9 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            stage.setTitle("Saturday");
+//            stage.setFullScreen(true);
+            stage.setResizable(false);
             fxmlLoader.<MainWindow>getController().setSaturday(saturday);
             stage.show();
         } catch (IOException e) {

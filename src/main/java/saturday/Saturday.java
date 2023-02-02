@@ -69,15 +69,9 @@ public class Saturday {
         }
     }
 
-    /**
-     * main method for the Saturday application
-     *
-     * @param args command line arguments
-     */
 //    public static void main(String[] args) {
 //        String filePath = Storage.getFilePath();
 //        new Saturday(filePath).run();
-//        SaturdayFX.launch(args);
 //    }
 
     public String getResponse(String input) {

@@ -7,6 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -20,11 +21,13 @@ public class MainWindow extends AnchorPane {
     private TextField userInput;
     @FXML
     private Button sendButton;
+    @FXML
+    private Button exitButton;
 
     private Saturday saturday;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/RedBall.png"));
-    private Image saturdayImage = new Image(this.getClass().getResourceAsStream("/images/BlueBall.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/BlueBall.png"));
+    private Image saturdayImage = new Image(this.getClass().getResourceAsStream("/images/RedBall.png"));
 
     @FXML
     public void initialize() {
@@ -48,5 +51,10 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getSaturdayDialog(response, saturdayImage)
         );
         userInput.clear();
+    }
+    @FXML
+    private void handleExitButtonAction() {
+        Stage stage = (Stage) exitButton.getScene().getWindow();
+        stage.close();
     }
 }
