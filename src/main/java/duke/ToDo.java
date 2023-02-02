@@ -20,6 +20,4 @@ class ToDo extends Task {
         return this.completed ? "[T]" + "[x] " + this.description
                 : "[T]" + "[ ] " + this.description;
     }
-
-
 }

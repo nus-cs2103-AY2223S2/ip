@@ -14,7 +14,6 @@ class Event extends Task {
     public Event(String keyword, String message, Boolean completed) {
         super(keyword, message, completed);
     }
-
     @Override
     public String provideDetails() {
         String[] helperArray = this.description.split("/from");
@@ -22,10 +21,7 @@ class Event extends Task {
         String[] helperArray2 = helperArray[1].split("/to");
         String secondPart = helperArray2[0];
         String thirdPart = helperArray2[1];
-
         return this.completed ? "[E]" + "[x] " + firstPart + "(from:" + secondPart + "to:" + thirdPart + ")"
                               : "[E]" + "[ ] " + firstPart + "(from:" + secondPart + "to:" + thirdPart + ")";
-
     }
-
 }

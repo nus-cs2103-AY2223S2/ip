@@ -17,7 +17,6 @@ class Task {
      * Data of the task stored in the hard drive.
      */
     String storedData;
-    
 
     public Task(String keyword, String description, Boolean completed) {
         this.description = description;
