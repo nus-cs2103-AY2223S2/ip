@@ -1,20 +1,20 @@
-package TaskList;
-
-import Task.Task;
-import Task.Todo;
-
-import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
+package tasklist;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.ArrayList;
+
+import org.junit.jupiter.api.Test;
+
+import task.Task;
+import task.Todo;
+
 public class TaskListTest {
-    Todo simpleTask = new Todo("Apple");
-    ArrayList<Task> emptyList = new ArrayList<Task>();
+    private Todo simpleTask = new Todo("Apple");
+    private ArrayList<Task> emptyList = new ArrayList<Task>();
 
     @Test
-    void getListTest(){
+    void getListTest() {
         TaskList taskListTest = new TaskList(emptyList);
         taskListTest.addTask(new Todo("Apple"));
         emptyList.add(simpleTask);
@@ -22,11 +22,11 @@ public class TaskListTest {
     }
 
     @Test
-    void getIndexTest(){
+    void getIndexTest() {
         TaskList taskListTest = new TaskList(emptyList);
         taskListTest.addTask(simpleTask);
         taskListTest.addTask(new Todo("Orange"));
-        assertEquals(simpleTask,taskListTest.get(0));
+        assertEquals(simpleTask, taskListTest.get(0));
     }
 
 }

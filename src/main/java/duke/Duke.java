@@ -1,12 +1,13 @@
 package duke;
 
 import java.util.Scanner;
-import Storage.Storage;
-import Task.Task;
-import TaskList.TaskList;
-import Exception.*;
-import Ui.Ui;
-import Parser.Parser;
+
+import exception.DukeException;
+import parser.Parser;
+import storage.Storage;
+import task.Task;
+import tasklist.TaskList;
+import ui.Ui;
 
 public class Duke {
     private Storage storage;
@@ -18,7 +19,7 @@ public class Duke {
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
-        } catch (dukeException e) {
+        } catch (DukeException e) {
             ui.showLoadingError();
         }
     }
@@ -34,7 +35,7 @@ public class Duke {
                 break;
             }
 
-            if(Parser.parseCommands(echo, tasks, ui)) {
+            if (Parser.parseCommands(echo, tasks, ui)) {
                 continue;
             }
 
@@ -43,7 +44,7 @@ public class Duke {
             // Create a separate function in order to assign to item;
             try {
                 item = Parser.parseEcho(echo);
-            } catch (dukeException e) {
+            } catch (DukeException e) {
                 // TODO: handle exception
                 System.out.println(e.getMessage());
                 continue;

@@ -1,7 +1,6 @@
-package Task;
+package task;
 
 public class Todo extends Task {
-    
     public Todo(String description) {
         super(description);
         this.isDone = false;
@@ -20,8 +19,8 @@ public class Todo extends Task {
     @Override
     public String getCommand() {
         return this.isDone
-        ? "1 todo " + this.description
-        : "0 todo " + this.description;
+            ? "1 todo " + this.description
+            : "0 todo " + this.description;
     }
 
 }

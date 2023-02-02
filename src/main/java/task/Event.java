@@ -1,11 +1,10 @@
-package Task;
+package task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import Task.Task;
 
 public class Event extends Task {
-    protected DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+    protected DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
     protected String from;
     protected String to;
     protected LocalDateTime fromDate;
@@ -17,8 +16,8 @@ public class Event extends Task {
         super(description);
         this.from = from;
         this.to = to;
-        fromDate = LocalDateTime.parse(from, FORMAT);
-        toDate = LocalDateTime.parse(to, FORMAT);
+        fromDate = LocalDateTime.parse(from, format);
+        toDate = LocalDateTime.parse(to, format);
         displayFrom = this.fromDate.toString().replace("T", " ");
         displayTo = this.toDate.toString().replace("T", " ");
     }
@@ -28,8 +27,8 @@ public class Event extends Task {
         this.from = from;
         this.to = to;
         this.isDone = isDone;
-        fromDate = LocalDateTime.parse(from, FORMAT);
-        toDate = LocalDateTime.parse(to, FORMAT);
+        fromDate = LocalDateTime.parse(from, format);
+        toDate = LocalDateTime.parse(to, format);
         displayFrom = this.fromDate.toString().replace("T", " ");
         displayTo = this.toDate.toString().replace("T", " ");
     }
@@ -41,9 +40,9 @@ public class Event extends Task {
 
     @Override
     public String getCommand() {
-        return this.isDone 
-        ? "1 event " + this.description + " /from " + this.from + " /to " + this.to
-        : "0 event " + this.description + " /from " + this.from + " /to " + this.to;
+        return this.isDone
+            ? "1 event " + this.description + " /from " + this.from + " /to " + this.to
+            : "0 event " + this.description + " /from " + this.from + " /to " + this.to;
 
     }
 }
