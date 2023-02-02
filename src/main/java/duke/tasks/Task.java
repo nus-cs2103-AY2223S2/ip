@@ -3,7 +3,6 @@ package duke.tasks;
 import java.io.Serializable;
 
 import duke.DukeException;
-import duke.UserInterface;
 
 
 /**
@@ -40,7 +39,7 @@ public abstract class Task implements Serializable {
      */
     public String mark() {
         isCompleted = true;
-        return MARKED_RESPONSE + UserInterface.INDENT + this;
+        return MARKED_RESPONSE + this;
     }
 
     /**
@@ -50,7 +49,7 @@ public abstract class Task implements Serializable {
      */
     public String unmark() {
         isCompleted = false;
-        return UNMARKED_RESPONSE + UserInterface.INDENT + this;
+        return UNMARKED_RESPONSE + this;
     }
 
     /**
