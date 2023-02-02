@@ -29,11 +29,11 @@ public class Storage {
         Task newtask;
         String[] tokens = str.split("\\|");
         if (tokens[0].equals("T")) {
-            newtask = new ToDo(tokens[2], tokens[1] == "1");
+            newtask = new ToDo(tokens[2], tokens[1].equals("1"));
         } else if (tokens[0].equals("D")) {
-            newtask = new Deadline(tokens[2], tokens[3], tokens[1] == "1");
+            newtask = new Deadline(tokens[2], tokens[3], tokens[1].equals("1"));
         } else {
-            newtask = new Event(tokens[2], tokens[3], tokens[4], tokens[1] == "1");
+            newtask = new Event(tokens[2], tokens[3], tokens[4], tokens[1].equals("1"));
         }
         return newtask;
     }
