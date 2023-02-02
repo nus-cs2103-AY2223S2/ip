@@ -12,9 +12,9 @@ import duke.utilities.Ui;
 
 public class DeadlineCommandTest {
 
-    TaskList taskList;
-    Ui ui;
-    Storage storage;
+    private TaskList taskList;
+    private Ui ui;
+    private Storage storage;
 
     @BeforeEach
     public void beforeEach() {
