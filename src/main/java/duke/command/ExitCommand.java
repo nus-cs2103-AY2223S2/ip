@@ -17,12 +17,12 @@ public class ExitCommand extends Command{
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        ui.sayGoodbye();
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             storage.save(tasks.getTasksToSave());
         } catch (IOException e) {
             throw new DukeException("unable to save tasks");
         }
+        return ui.sayGoodbye();
     }
 }

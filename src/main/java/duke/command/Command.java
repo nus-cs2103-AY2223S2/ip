@@ -27,6 +27,6 @@ public abstract class Command {
      * @param storage the storage
      * @throws DukeException the duke exception
      */
-    public abstract void execute(TaskList Tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList Tasks, Ui ui, Storage storage) throws DukeException;
 
 }

@@ -1,2 +1,2 @@
 T | 1 | hair
-T | 0 | makeup
+T | 0 | brush teeth

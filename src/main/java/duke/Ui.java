@@ -58,16 +58,16 @@ public class Ui {
      * @param newTask    the new task
      * @param numOfTasks the num of tasks
      */
-    public static void showTask(Task newTask, int numOfTasks) {
-        System.out.println(String.format("Got it. I've added this task:\n %s\n Now you have %d tasks in the list.",
-                newTask, numOfTasks));
+    public static String showTask(Task newTask, int numOfTasks) {
+        return String.format("Got it. I've added this task:\n %s\n Now you have %d tasks in the list.",
+                newTask, numOfTasks);
     }
 
     /**
      * Says goodbye.
      */
-    public static void sayGoodbye() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public static String sayGoodbye() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
