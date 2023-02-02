@@ -5,7 +5,11 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    public String getBy() {
+        return by;
+    }
+
     public String toString() {
-        return String.format("[E]%s (%s)", super.toString(), by);
+        return String.format("[D]%s (by: %s)", super.toString(), by);
     }
 }
