@@ -18,9 +18,12 @@ public class Ui {
         System.out.println("Hello from\n" + logo);
     }
 
-    public static void indentedPrintln(String message) {
-        String indentedMessage = "     " + message;
-        System.out.println(indentedMessage);
+    public static void indentedPrintln(String ... messages) {
+        int len = messages.length
+        for (int i = 0; i < len; i++) {
+            String indentedMessage = "     " + messages[i];
+            System.out.println(indentedMessage);
+        }
     }
 
     public static LocalDateTime parseDateTime(String s) {
