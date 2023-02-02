@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.Scanner;
 
 public class Duke {
@@ -40,6 +42,8 @@ public class Duke {
             }
 
         }
+
+        scn.close();
 
     }
 

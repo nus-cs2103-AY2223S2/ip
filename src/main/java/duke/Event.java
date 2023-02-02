@@ -1,3 +1,5 @@
+package duke;
+
 public class Event extends Task {
     private static final String taskType = "[E]";
     private String from;

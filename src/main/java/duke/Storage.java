@@ -1,3 +1,4 @@
+package duke;
 
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -46,7 +47,7 @@ public class Storage {
                         Task deadline = new Deadline(description, date);
 
                         if (status.equals("X")) {
-                        deadline.mark();
+                            deadline.mark();
                         }
 
                         tasks.add(deadline);
@@ -66,7 +67,7 @@ public class Storage {
                     } else {
                         throw new DukeException("Unknown task type found in storage file");
                     }
-                } 
+                }
                 sn.close();
             } catch (FileNotFoundException e) {
                 System.out.println("File could not be found!");

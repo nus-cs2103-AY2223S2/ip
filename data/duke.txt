@@ -1,3 +1,1 @@
-[T]//X// test
-[D]// // test2 //2 Dec 2019
-[E]// // test3 // Mon 4pm // 6pm
+[D]//X// test2 //2 Dec 2019
