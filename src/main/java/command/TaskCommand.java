@@ -1,9 +1,10 @@
 package command;
 
+import duke.DukeException;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
-import duke.DukeException;
 import task.Task;
 import task.TaskList;
 

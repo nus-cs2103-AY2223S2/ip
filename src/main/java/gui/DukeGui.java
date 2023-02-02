@@ -1,8 +1,5 @@
 package gui;
 
-import java.util.Objects;
-import java.util.concurrent.TimeUnit;
-
 import duke.Duke;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -18,6 +15,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.util.Objects;
 
 /**
  * The class that starts the GUI application and interacts with the user.
@@ -35,9 +33,9 @@ public class DukeGui extends Application {
     /**
      * Starts the GUI.
      * @param stage the primary stage for this application, onto which
-     * the application scene can be set.
-     * Applications may create other stages, if needed, but they will not be
-     * primary stages.
+     *              the application scene can be set.
+     *              Applications may create other stages, if needed,
+     *              but they will not be primary stages.
      */
     @Override
     public void start(Stage stage) {

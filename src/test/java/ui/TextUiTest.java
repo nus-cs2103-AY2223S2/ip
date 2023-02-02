@@ -1,11 +1,9 @@
 package ui;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Test;
-
-import ui.TextUi;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 
 public class TextUiTest {
     @Test

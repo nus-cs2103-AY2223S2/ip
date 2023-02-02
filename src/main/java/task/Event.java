@@ -1,10 +1,10 @@
 package task;
 
+import duke.DukeException;
+
 import java.time.LocalDate;
 
-import duke.DukeException;
 import ui.Parser;
-
 
 /**
  * The event class that extends the Task class.

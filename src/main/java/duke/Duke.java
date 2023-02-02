@@ -1,15 +1,12 @@
 package duke;
 
+import java.util.ArrayList;
+
 import command.Command;
-
 import storage.Storage;
-
 import task.TaskList;
 import ui.Parser;
 import ui.TextUi;
-
-import java.util.ArrayList;
-
 
 /**
  * duke.Duke is the class that responds to user enquiry.
