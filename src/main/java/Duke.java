@@ -9,6 +9,12 @@ import java.io.File;
 import java.io.IOException;
 import java.io.FileWriter;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
+
 /**
  * Duke Class: Serves as entry point of the program, or JAR file.
  *
