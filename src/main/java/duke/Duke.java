@@ -23,7 +23,7 @@ public class Duke extends Application {
      * @param path Path to the saved data
      */
     public Duke() {
-        this.ui = new Ui();
+        this.ui = new Ui(this);
         this.taskList = new TaskList(this.ui);
         this.storage = new Storage(Duke.PATH, this.ui);
     }
@@ -37,24 +37,19 @@ public class Duke extends Application {
     }
 
     /** Runs Duke. */
-    public void run() {
-        String rawInput;
+    public void run(String rawInput) {
         Command command;
         boolean isExit = false;
 
-        while (!isExit) {
-            try {
-                // scan for user input
-                rawInput = this.ui.readCommand();
-                command = Parser.parse(rawInput);
-                command.execute(taskList, ui);
-                isExit = command.isExit();
-            } catch (DukeException e) {
-                this.ui.addToMessage(e.toString());
-            } finally {
-                this.ui.displayMessage();
-                this.storage.saveToFile(this.taskList);
-            }
+        try {
+            command = Parser.parse(rawInput);
+            command.execute(taskList, ui);
+            isExit = command.isExit();
+        } catch (DukeException e) {
+            this.ui.addToMessage(e.toString());
+        } finally {
+            this.ui.displayMessage();
+            this.storage.saveToFile(this.taskList);
         }
     }
 
@@ -63,8 +58,7 @@ public class Duke extends Application {
         this.ui.initializeStage(stage);
 
         // move stuff from main() here
-        // this.storage.readToTaskList(this.taskList);
-        // this.ui.showWelcome();
-        // this.run();
+        this.storage.readToTaskList(this.taskList);
+        this.ui.showWelcome();
     }
 }

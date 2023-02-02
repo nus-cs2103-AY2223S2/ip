@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -21,6 +22,7 @@ public class Ui {
     public static final String NEWL = "\n";
 
     // duke components
+    private Duke duke;
     private Scanner scanner;
     private StringBuilder message;
     private boolean doPromptUserInput;
@@ -35,7 +37,8 @@ public class Ui {
     /**
      * Initializes a Ui object.
      */
-    public Ui() {
+    public Ui(Duke duke) {
+        this.duke = duke;
         this.scanner = new Scanner(System.in);
         this.message = new StringBuilder();
         this.doPromptUserInput = true;
@@ -83,10 +86,12 @@ public class Ui {
         userInput.setPrefWidth(325.0);
         sendButton.setPrefWidth(55.0);
 
+        // display scene
         this.scene = new Scene(mainLayout);
-
         stage.setScene(scene);
         stage.show();
+
+        this.initializeHandlers();
     }
 
     /** Prints a welcome message. */
@@ -102,13 +107,11 @@ public class Ui {
      * Prints the stored message to the user.
      */
     public void displayMessage() {
-        Ui.prettyPrint(this.message.toString());
+        // Ui.prettyPrint(this.message.toString());
+        Label l = new Label(this.message.toString());
+        l.setWrapText(true);
+        this.dialogContainer.getChildren().add(l);
         this.clearMessage();
-        if (this.doPromptUserInput) {
-            System.out.print("> ");
-        } else {
-            this.doPromptUserInput = true;
-        }
     }
 
     /** Clears the stored message. */
@@ -153,5 +156,20 @@ public class Ui {
         System.out.print(text);
         System.out.println(DIVIDER);
         System.out.println();
+    }
+
+    private void initializeHandlers() {
+        // on-click handler for sendButton
+        this.sendButton.setOnMouseClicked((event) -> {
+            this.duke.run(userInput.getText());
+            this.userInput.clear();
+        });
+
+        // "enter" on-press handler for userInput
+        // this.userInput.setOnAction((event) -> {
+        // this.dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
+        // this.userInput.clear();
+        // });
+
     }
 }
