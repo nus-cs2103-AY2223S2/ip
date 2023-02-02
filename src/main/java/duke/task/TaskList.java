@@ -18,6 +18,7 @@ public class TaskList {
         this.tasklst = tasklst;
     }
 
+
     /**
      * This method returns the task based on the id.
      *
@@ -39,6 +40,7 @@ public class TaskList {
         return this.tasklst.remove(i);
     }
 
+
     /**
      * This method adds a new task to the current tasklist.
      *
@@ -48,6 +50,7 @@ public class TaskList {
         this.tasklst.add(t);
     }
 
+
     /**
      * This method returns the size of tasks in the list.
      *
@@ -56,6 +59,7 @@ public class TaskList {
     public int getSize() {
         return this.tasklst.size();
     }
+
 
     /**
      * This method returns the tasklist in a string format.
@@ -70,6 +74,7 @@ public class TaskList {
         }
         return res;
     }
+
 
     /**
      * This method returns the ArrayList of tasklist.
