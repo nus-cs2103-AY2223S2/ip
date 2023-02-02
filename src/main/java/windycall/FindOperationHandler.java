@@ -9,12 +9,11 @@ public class FindOperationHandler extends OperationHandler {
 
     }
 
-    public static void handle(String[] parts, Ui ui, List<Task> tasks, String userCommand) {
+    public static String handle(String[] parts, Ui ui, List<Task> tasks, String userCommand) {
         if (parts.length == 1) {
-            Ui.space();
-            System.out.println("Please input description of task you want to find");
+            return "Please input description of task you want to find";
         } else {
-            ui.displayTasks(tasks, userCommand.substring(5));
+            return ui.displayTasks(tasks, userCommand.substring(5));
         }
     }
 }

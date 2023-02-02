@@ -30,7 +30,7 @@ public class AddEventHandler extends AddTaskHandler {
         String description = message.substring(6, idxFrom - 1);
         String from = message.substring(idxFrom + 6, idxTo - 1);
         String to = message.substring(idxTo + 4);
-        System.out.println("Got it. I've added this Event task:");
+//        System.out.println("Got it. I've added this Event task:");
         return new Event(description, false, from, to);
     }
 }

@@ -8,7 +8,7 @@ public class ListOperationHandler extends OperationHandler {
 
     }
 
-    public static void handle(List<Task> tasks, Ui ui) {
-        ui.displayTasks(tasks);
+    public static String handle(List<Task> tasks, Ui ui) {
+        return ui.displayTasks(tasks);
     }
 }

@@ -2,6 +2,7 @@ package windycall;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import javafx.util.Pair;
 
 /**
  * Deals with making sense of the user command by splitting
@@ -50,49 +51,55 @@ public class Parser {
      * @param parts parts of String of user command split by space
      * @return an index representing which task user want to mark
      */
-    public int getMarkIndex(String[] parts) {
+    public Pair<Integer, String> getMarkIndex(String[] parts) {
         if (parts.length == 1) {
-            System.out.println("     You should input a number to mark/unmark a task");
-            return -1;
+//            System.out.println("     You should input a number to mark/unmark a task");
+//            return -1;
+            return new Pair<>(-1, "You should input a number to mark/unmark a task");
+
         }
         int num = -1;
         try {
             num = Integer.parseInt(parts[1]);
         } catch (NumberFormatException e) {
-            Ui.space();
-            System.out.println("☹ OOPS!!! You should input a number");
+//            System.out.println("☹ OOPS!!! You should input a number");
+            return new Pair<>(-1, "☹ OOPS!!! You should input a number");
         }
-        return num;
+        return new Pair<>(num, "Success");
     }
 
-    public int getUnmarkIndex(String[] parts) {
+    public Pair<Integer, String> getUnmarkIndex(String[] parts) {
         if (parts.length == 1) {
-            System.out.println("     You should input a number to mark/unmark a task");
-            return -1;
+//            System.out.println("     You should input a number to mark/unmark a task");
+//            return -1;
+            return new Pair<>(-1, "You should input a number to mark/unmark a task");
+
         }
         int num = -1;
         try {
             num = Integer.parseInt(parts[1]);
         } catch (NumberFormatException e) {
-            Ui.space();
-            System.out.println("☹ OOPS!!! You should input a number");
+//            System.out.println("☹ OOPS!!! You should input a number");
+            return new Pair<>(-1, "☹ OOPS!!! You should input a number");
         }
-        return num;
+        return new Pair<>(num, "Success");
     }
 
-    public int getDeleteIndex(String[] parts) {
+    public Pair<Integer, String> getDeleteIndex(String[] parts) {
         if (parts.length == 1) {
-            System.out.println("     You should input a number to delete a task");
-            return -1;
+//            System.out.println("     You should input a number to mark/unmark a task");
+//            return -1;
+            return new Pair<>(-1, "You should input a number to delete a task");
+
         }
         int num = -1;
         try {
             num = Integer.parseInt(parts[1]);
         } catch (NumberFormatException e) {
-            Ui.space();
-            System.out.println("☹ OOPS!!! You should input a number");
+//            System.out.println("☹ OOPS!!! You should input a number");
+            return new Pair<>(-1, "☹ OOPS!!! You should input a number");
         }
-        return num;
+        return new Pair<>(num, "Success");
     }
 
     /**

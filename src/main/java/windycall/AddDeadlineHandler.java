@@ -20,7 +20,7 @@ public class AddDeadlineHandler extends AddTaskHandler {
             throw new WindyCallException("☹ OOPS!!! You haven't specify the deadline for the Task");
         }
         String description = message.substring(9, idx - 1);
-        System.out.println("Got it. I've added this Deadline task:");
+//        System.out.println("Got it. I've added this Deadline task:");
         String deadline = message.substring(idx + 4);
         return new Deadline(description, false, deadline);
     }

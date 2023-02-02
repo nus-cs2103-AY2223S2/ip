@@ -11,8 +11,7 @@ public abstract class AddTaskHandler extends OperationHandler {
      * @param message message input by users
      * @throws WindyCallException If user input command is invalid
      */
-    public static void addTask(String message, List<Task> tasks, Storage storage) throws WindyCallException {
-        Ui.space();
+    public static String addTask(String message, List<Task> tasks, Storage storage) throws WindyCallException {
         String[] parts = message.split(" ");
 
         Task newTask;
@@ -25,12 +24,12 @@ public abstract class AddTaskHandler extends OperationHandler {
         } else {
             throw new WindyCallException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
-        Ui.space();
-        System.out.println(newTask);
+        String returnedMessage = "Got it. I've added this task:\n";
+        returnedMessage += newTask + "\n";
         tasks.add(newTask);
         storage.handleTaskChange(tasks);
-        Ui.space();
-        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+        returnedMessage += "Now you have " + tasks.size() + " tasks in the list.";
+        return returnedMessage;
     }
 
 }
