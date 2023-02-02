@@ -7,7 +7,13 @@ import duke.task.TaskList;
 import duke.util.Storage;
 import duke.util.UI;
 
+/**
+ * Class to encapsulate a parsed command which has a defined command type and specific parameters.
+ */
 public class Command {
+    /**
+     * All available command types.
+     */
     public enum CommandType {
         EXIT,
         LIST,
@@ -22,23 +28,52 @@ public class Command {
     private CommandType commandType;
     private String param;
 
+    /**
+     * Creates an instance of Command with the type defined but no parameters.
+     *
+     * @param commandType The type of command.
+     */
     public Command(CommandType commandType) {
         this.commandType = commandType;
     }
 
+    /**
+     * Creates an instance of Command with the type defined and one parameter.
+     *
+     * @param commandType The type of command.
+     * @param param A paramter used for the given type of command.
+     */
     public Command(CommandType commandType, String param) {
         this.commandType = commandType;
         this.param = param;
     }
 
+    /**
+     * Returns the command type.
+     *
+     * @return The command type.
+     */
     public CommandType getCommandType() {
         return this.commandType;
     }
 
+    /**
+     * Returns the parameter in this command.
+     *
+     * @return The command parameter.
+     */
     public String getParam() {
         return this.param;
     }
 
+    /**
+     * Executes the current command using a given TaskList, UI, and Storage.
+     *
+     * @param taskList TaskList containing tasks to use for this command.
+     * @param ui The UI to print output to.
+     * @param storage Storage to save the TaskList to if this command changes the TaskList.
+     * @throws DukeException
+     */
     public void execute(TaskList taskList, UI ui, Storage storage) throws DukeException {
         String output = "";
 
