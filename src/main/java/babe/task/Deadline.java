@@ -2,13 +2,15 @@ package babe.task;
 
 public class Deadline extends Task {
 
-    /** A date/time for this Deadline */
+    /**
+     * A date/time for this Deadline
+     */
     private String deadline = "";
 
     /**
      * Constructor for Deadline item.
      *
-     * @param content Description of this Deadline.
+     * @param content  Description of this Deadline.
      * @param deadline Date for the deadline of this item.
      */
     public Deadline(String content, String deadline) {
@@ -31,7 +33,9 @@ public class Deadline extends Task {
      */
     public String toSaveFormat() {
         return "D|" + (this.isDone ? 1 : 0) + "|" + this.description + "|" + this.deadline;
-    };
+    }
+
+    ;
 }
 
 

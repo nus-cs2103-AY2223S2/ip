@@ -2,18 +2,22 @@ package babe.task;
 
 public class Event extends Task {
 
-    /** The start date/time for this Event. */
+    /**
+     * The start date/time for this Event.
+     */
     private String fromDate = "";
 
-    /** The end date/time for this Event. */
+    /**
+     * The end date/time for this Event.
+     */
     private String toDate = "";
 
     /**
      * Constructor for Event object.
      *
-     * @param content Description of this Event.
+     * @param content  Description of this Event.
      * @param fromDate The start date/time for this Event.
-     * @param toDate The end date/time for this Event.
+     * @param toDate   The end date/time for this Event.
      */
     public Event(String content, String fromDate, String toDate) {
         super(content);
@@ -38,5 +42,7 @@ public class Event extends Task {
         return "E|" + (this.isDone ? 1 : 0) + "|" + this.description + "|" + this.fromDate + "|"
                 + this.toDate;
 
-    };
+    }
+
+    ;
 }

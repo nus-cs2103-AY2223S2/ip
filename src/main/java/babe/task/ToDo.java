@@ -8,6 +8,7 @@ public class ToDo extends Task {
 
     /**
      * Constructor for ToDos
+     *
      * @param content A String representing the content of this item.
      */
     public ToDo(String content) {
@@ -31,5 +32,7 @@ public class ToDo extends Task {
      */
     public String toSaveFormat() {
         return "T|" + (this.isDone ? 1 : 0) + "|" + this.description;
-    };
+    }
+
+    ;
 }
