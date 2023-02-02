@@ -90,7 +90,7 @@ public class CommandParser {
             args[g - 1] = commandPatternMatcher.group(g);
         }
 
-        command.run(args, ui, taskList, storage);
+        command.run(ui, taskList, storage, args);
     }
 
     /**

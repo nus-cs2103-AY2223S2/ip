@@ -25,7 +25,7 @@ public class DeadlineCommandTest {
         Storage storage = new StubStorage(new ArrayList<>());
         DeadlineCommand command = new DeadlineCommand();
 
-        Assertions.assertDoesNotThrow(() -> { command.run(args, ui, taskList, storage); });
+        Assertions.assertDoesNotThrow(() -> { command.run(ui, taskList, storage, args); });
 
         Assertions.assertEquals(1, taskList.getTotalTasks());
         Assertions.assertEquals(TaskType.DEADLINE, taskList.getTask(1).getTaskType());

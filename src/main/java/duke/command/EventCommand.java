@@ -32,14 +32,15 @@ public class EventCommand extends AddTaskCommand {
     /**
      * Adds event task from input to the task list.
      *
-     * @param args Argument list in order: description, from, to.
-     * @param ui User interface.
+     * @param ui       User interface.
      * @param taskList Task list.
-     * @param storage Storage.
-     * @throws DukeException If failed to save new task list to storage or invalid date time format.
+     * @param storage  Storage.
+     * @param args     Argument list in order: description, from, to.
+     * @throws DukeException If failed to save new task list to storage or invalid date time
+     *                       format.
      */
     @Override
-    public void run(String[] args, Ui ui, TaskList taskList, Storage storage) throws DukeException {
+    public void run(Ui ui, TaskList taskList, Storage storage, String... args) throws DukeException {
         String description = args[0];
         String from = args[1];
         String to = args[2];

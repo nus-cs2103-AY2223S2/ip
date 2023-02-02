@@ -26,7 +26,7 @@ public class EventCommandTest {
         Storage storage = new StubStorage(new ArrayList<>());
         EventCommand command = new EventCommand();
 
-        Assertions.assertDoesNotThrow(() -> { command.run(args, ui, taskList, storage); });
+        Assertions.assertDoesNotThrow(() -> { command.run(ui, taskList, storage, args); });
 
         Assertions.assertEquals(1, taskList.getTotalTasks());
         Assertions.assertEquals(TaskType.EVENT, taskList.getTask(1).getTaskType());

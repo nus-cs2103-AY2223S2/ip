@@ -26,13 +26,13 @@ public class ListCommand implements Command {
     /**
      * Lists tasks in task list.
      *
-     * @param args Argument list; Does not take in any arguments.
-     * @param ui User interface.
+     * @param ui       User interface.
      * @param taskList Task list.
-     * @param storage Storage.
+     * @param storage  Storage.
+     * @param args     Argument list; Does not take in any arguments.
      */
     @Override
-    public void run(String[] args, Ui ui, TaskList taskList, Storage storage) {
+    public void run(Ui ui, TaskList taskList, Storage storage, String... args) {
         ui.showLine();
         ui.showText("Here are the tasks in your list:");
         for (int taskNo = 1; taskNo <= taskList.getTotalTasks(); taskNo++) {

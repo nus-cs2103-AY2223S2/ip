@@ -22,7 +22,7 @@ public class ToDoCommandTest {
         Storage storage = new StubStorage(new ArrayList<>());
         ToDoCommand command = new ToDoCommand();
 
-        Assertions.assertDoesNotThrow(() -> { command.run(args, ui, taskList, storage); });
+        Assertions.assertDoesNotThrow(() -> { command.run(ui, taskList, storage, args); });
 
         Assertions.assertEquals(1, taskList.getTotalTasks());
         Assertions.assertEquals(TaskType.TODO, taskList.getTask(1).getTaskType());

@@ -25,7 +25,7 @@ public class MarkCommandTest {
 
         String[] args = { "1" };
 
-        Assertions.assertDoesNotThrow(() -> { command.run(args, ui, taskList, storage); });
+        Assertions.assertDoesNotThrow(() -> { command.run(ui, taskList, storage, args); });
 
         Assertions.assertEquals(true, taskList.getTask(1).isDone());
     }
@@ -44,7 +44,7 @@ public class MarkCommandTest {
 
         String[] args = { "2" };
 
-        Assertions.assertDoesNotThrow(() -> { command.run(args, ui, taskList, storage); });
+        Assertions.assertDoesNotThrow(() -> { command.run(ui, taskList, storage, args); });
 
         Assertions.assertEquals(true, taskList.getTask(2).isDone());
     }
@@ -63,7 +63,7 @@ public class MarkCommandTest {
 
         String[] args = { "3" };
 
-        Assertions.assertDoesNotThrow(() -> { command.run(args, ui, taskList, storage); });
+        Assertions.assertDoesNotThrow(() -> { command.run(ui, taskList, storage, args); });
 
         Assertions.assertEquals(true, taskList.getTask(3).isDone());
     }

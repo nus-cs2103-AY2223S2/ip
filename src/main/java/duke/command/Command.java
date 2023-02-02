@@ -15,5 +15,5 @@ public interface Command {
 
     String getCommandPattern();
 
-    void run(String[] args, Ui ui, TaskList taskList, Storage storage) throws DukeException;
+    void run(Ui ui, TaskList taskList, Storage storage, String... args) throws DukeException;
 }

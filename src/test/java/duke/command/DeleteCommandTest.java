@@ -27,7 +27,7 @@ public class DeleteCommandTest {
 
         String[] args = { "1" };
 
-        Assertions.assertDoesNotThrow(() -> { command.run(args, ui, taskList, storage); });
+        Assertions.assertDoesNotThrow(() -> { command.run(ui, taskList, storage, args); });
 
         Assertions.assertEquals(2, taskList.getTotalTasks());
         Assertions.assertEquals("task 2", taskList.getTask(1).getDescription());
@@ -47,7 +47,7 @@ public class DeleteCommandTest {
 
         String[] args = { "2" };
 
-        Assertions.assertDoesNotThrow(() -> { command.run(args, ui, taskList, storage); });
+        Assertions.assertDoesNotThrow(() -> { command.run(ui, taskList, storage, args); });
 
         Assertions.assertEquals(2, taskList.getTotalTasks());
         Assertions.assertEquals("task 3", taskList.getTask(2).getDescription());
@@ -67,7 +67,7 @@ public class DeleteCommandTest {
 
         String[] args = { "3" };
 
-        Assertions.assertDoesNotThrow(() -> { command.run(args, ui, taskList, storage); });
+        Assertions.assertDoesNotThrow(() -> { command.run(ui, taskList, storage, args); });
 
         Assertions.assertEquals(2, taskList.getTotalTasks());
         Assertions.assertEquals("task 2", taskList.getTask(2).getDescription());
