@@ -52,6 +52,11 @@ public class Ui {
             case bye:
                 ui += "Bye! See you soon!\n";
                 break;
+            case find:
+                TaskList filteredTasks = list.filter(msg.task.getName());
+                ui += "\nHere are the matching tasks in your list:" + "\n"
+                        + filteredTasks.toString();
+                break;
             default:
                 ui += "Added one task!\n" + msg.task.toString() + "\n" + list.getTotal();
         }

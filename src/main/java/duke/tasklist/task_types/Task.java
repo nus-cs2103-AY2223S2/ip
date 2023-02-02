@@ -4,13 +4,14 @@ import java.io.Serializable;
 
 /**
  * Represents a <code>task</code> object that contains a string holding the <code>name</code> of the
- * task and the <code>status</code> of the task.
+ * task and the <code>status</code> of the task. Represents a <code>task</code> object that contains
+ * a string holding the <code>name</code> of the task and the <code>status</code> of the task.
  * 
  * 
  * @author Brian Quek
  */
 
-public abstract class Task implements Serializable {
+public class Task implements Serializable {
     protected String name;
     protected boolean status;
 
@@ -20,6 +21,10 @@ public abstract class Task implements Serializable {
     public Task(String name) {
         this.name = name;
         this.status = false;
+    }
+
+    public String getName() {
+        return this.name;
     }
 
     /**

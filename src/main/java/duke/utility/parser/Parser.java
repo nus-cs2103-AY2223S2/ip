@@ -197,6 +197,24 @@ public class Parser {
     }
 
 
+
+    private static UiMessage findTasks(String[] command, TaskList list) throws DukeException {
+        if (command.length > 2) {
+            throw wrongCommandFormat;
+        }
+
+        if (command.length == 1) {
+            throw emptyParam;
+        }
+
+        String keyword = command[1];
+
+
+        return new UiMessage(CommandMap.find, new Task(keyword));
+    }
+
+
+
     /**
      * Reads the input of the user and parse the input accordingly.
      * 
@@ -224,6 +242,8 @@ public class Parser {
                     return createDeadline(command, list);
                 case event:
                     return createEvent(command, list);
+                case find:
+                    return findTasks(command, list);
                 default:
                     return createToDo(command, list);
             }
