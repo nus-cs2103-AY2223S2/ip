@@ -1,11 +1,12 @@
-package Ui;
-
-import Task.Task;
+package ui;
 
 import java.util.ArrayList;
 
+import task.Task;
+
+
 public class Ui {
-    boolean isStarted;
+    private boolean isStarted;
 
     public Ui() {
         isStarted = true;

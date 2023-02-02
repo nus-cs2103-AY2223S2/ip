@@ -1,47 +1,48 @@
-package Parser;
+package parser;
 
-import Task.Deadline;
-import Task.Event;
-import Task.Task;
-import TaskList.TaskList;
-import Task.Todo;
-import Exception.noTaskDescriptionException;
-import Exception.invalidInputException;
-import Exception.dukeException;
-import Ui.Ui;
+import exception.DukeException;
+import exception.InvalidInputException;
+import exception.NoTaskDescriptionException;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.Todo;
+import tasklist.TaskList;
+import ui.Ui;
 
 import java.util.ArrayList;
 
 public class Parser {
 
 
-    public static Task parseEcho(String echo) throws dukeException {
+    public static Task parseEcho(String echo) throws DukeException {
         if (echo.startsWith("todo")) {
             if (echo.substring(4).trim().isEmpty()) {
-                throw(new noTaskDescriptionException("     ☹ OOPS!!! The description of a todo cannot be empty."));
+                throw(new NoTaskDescriptionException("     ☹ OOPS!!! The description of a todo cannot be empty."));
             }
             return new Todo(echo.substring(4).trim());
 
         } else if (echo.startsWith("deadline")) {
             String deadlineArguments = echo.substring(8).trim();
             if (deadlineArguments.isEmpty()) {
-                throw(new noTaskDescriptionException("     ☹ OOPS!!! The description of a deadline cannot be empty."));
+                throw(new NoTaskDescriptionException("     ☹ OOPS!!! The description of a deadline cannot be empty."));
             }
-            String splitArguments[] = deadlineArguments.split("/");
+            String[] splitArguments = deadlineArguments.split("/");
 
             return new Deadline(splitArguments[0], splitArguments[1].substring(2).trim());
 
         } else if (echo.startsWith("event")) {
             String eventArguments = echo.substring(5).trim();
             if (eventArguments.isEmpty()) {
-                throw(new noTaskDescriptionException("     ☹ OOPS!!! The description of a event cannot be empty."));
+                throw(new NoTaskDescriptionException("     ☹ OOPS!!! The description of a event cannot be empty."));
             }
-            String splitArguments[] = eventArguments.split("/");
-            return new Event(splitArguments[0], splitArguments[1].substring(4).trim(), splitArguments[2].substring(2).trim());
+            String[] splitArguments = eventArguments.split("/");
+            return new Event(splitArguments[0], splitArguments[1].substring(4).trim(),
+                    splitArguments[2].substring(2).trim());
 
         } else {
             // System.out.println("Placeholder");
-            throw(new invalidInputException("      ☹ OOPS!!! I'm sorry, but I don't know what that means :-("));
+            throw(new InvalidInputException("      ☹ OOPS!!! I'm sorry, but I don't know what that means :-("));
         }
     }
 
@@ -50,14 +51,15 @@ public class Parser {
             return new Todo(isDone, echo.substring(4).trim());
         } else if (echo.startsWith("deadline")) {
             String deadlineArguments = echo.substring(8).trim();
-            String splitArguments[] = deadlineArguments.split("/");
+            String[] splitArguments = deadlineArguments.split("/");
             return new Deadline(isDone, splitArguments[0], splitArguments[1].substring(2).trim());
         } else if (echo.startsWith("event")) {
             String eventArguments = echo.substring(5).trim();
-            String splitArguments[] = eventArguments.split("/");
-            return new Event(isDone, splitArguments[0], splitArguments[1].substring(4).trim(), splitArguments[2].substring(2).trim());
+            String[] splitArguments = eventArguments.split("/");
+            return new Event(isDone, splitArguments[0], splitArguments[1].substring(4).trim(),
+                    splitArguments[2].substring(2).trim());
         } else {
-            throw(new invalidInputException("      ☹ OOPS!!! File format seems weird"));
+            throw(new InvalidInputException("      ☹ OOPS!!! File format seems weird"));
         }
     }
 
@@ -72,7 +74,7 @@ public class Parser {
         if (echo.startsWith("mark")) {
             try {
                 int taskToModify = Integer.parseInt(echo.replaceAll("[^0-9]", ""));
-                tasks.markDone(taskToModify-1);
+                tasks.markDone(taskToModify - 1);
             } catch (Exception e) {
                 // TODO: handle exception
             }
@@ -82,7 +84,7 @@ public class Parser {
         if (echo.startsWith("unmark")) {
             try {
                 int taskToModify = Integer.parseInt(echo.replaceAll("[^0-9]", ""));
-                tasks.markUndone(taskToModify-1);
+                tasks.markUndone(taskToModify - 1);
             } catch (Exception e) {
                 // TODO: handle exception
             }
@@ -92,7 +94,7 @@ public class Parser {
         if (echo.startsWith("delete") || echo.startsWith("remove")) {
             try {
                 int taskToModify = Integer.parseInt(echo.replaceAll("[^0-9]", ""));
-                tasks.removeTask(taskToModify-1);
+                tasks.removeTask(taskToModify - 1);
                 ui.printListNumber(tasks.getList());
             } catch (Exception e) {
                 // TODO: handle exception

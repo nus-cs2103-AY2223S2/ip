@@ -1,8 +1,9 @@
-package TaskList;
+package tasklist;
 
-import Task.Task;
 import java.util.ArrayList;
-import Ui.Ui;
+
+import task.Task;
+import ui.Ui;
 
 public class TaskList {
     private static ArrayList<Task> taskList;

@@ -1,23 +1,20 @@
-package Storage;
+package storage;
 
 import java.io.File;
-
-import Task.Task;
-
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
-import Exception.*;
-import Parser.Parser;
+
+import exception.DukeException;
+import parser.Parser;
+import task.Task;
 
 public class Storage {
-    
-    String FILEPATH;
-
+    private String filepath;
     // filepath should be "data/duke.txt"
 
     public Storage(String filePath) {
-        this.FILEPATH = filePath;
+        this.filepath = filePath;
 
         // Checks if the file exists, else creates it
         File createFolder = new File(filePath);
@@ -36,7 +33,7 @@ public class Storage {
         }
     }
 
-    public ArrayList<Task> load() throws dukeException {
+    public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> listToStore = new ArrayList<Task>();
 
         try {
@@ -54,7 +51,7 @@ public class Storage {
                 listToStore.add(task);
             }
             s.close();
-        } catch (dukeException e){
+        } catch (DukeException e) {
             throw e;
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -86,6 +83,4 @@ public class Storage {
             }
         }
     }
-
-    
 }

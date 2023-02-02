@@ -1,6 +1,4 @@
-package Task;
-
-import Ui.Ui;
+package task;
 
 public class Task {
     protected String description;
@@ -12,7 +10,7 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return ( isDone ? "[X]" : "[ ]");
+        return (isDone ? "[X]" : "[ ]");
     }
 
     public void mark_done() {

@@ -1,10 +1,13 @@
-package Parser;
+package parser;
 
-import Task.Todo;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import task.Todo;
+
+
 
 public class ParserTest {
     @Test
@@ -15,7 +18,7 @@ public class ParserTest {
 
     @Test
     void parseFileReaderTest() {
-        Todo simpleTask = new Todo(true,"Apple");
+        Todo simpleTask = new Todo(true, "Apple");
         Todo task = (Todo) Parser.parseFileReader("todo Apple", true);
         assertEquals(simpleTask.toString(), task.toString());
         assertTrue(task.getIsDone());
