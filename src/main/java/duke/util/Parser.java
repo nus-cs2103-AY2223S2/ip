@@ -33,7 +33,7 @@ public class Parser {
     private final Ui ui;
 
     private enum DukeCommand {
-        bye,
+        bye, 
         todo,
         deadline,
         event,
@@ -149,9 +149,12 @@ public class Parser {
                 validateParameterExists(cmd, "/to");
                 String eventArgs = cmd.substring(6);
 
-                String eventDesc = eventArgs.split(" /from ")[0];
-                LocalDate eventFrom = LocalDate.parse(eventArgs.split(" /from ")[1].split(" /to ")[0]);
-                LocalDate eventBy = LocalDate.parse(eventArgs.split(" /from ")[1].split(" /to ")[1]);
+                String[] firstSplit = eventArgs.split(" /from ");
+                String[] secondSplit = firstSplit[1].split(" /to ");
+
+                String eventDesc = firstSplit[0];
+                LocalDate eventFrom = LocalDate.parse(secondSplit[0]);
+                LocalDate eventBy = LocalDate.parse(secondSplit[1]);
 
                 command = new EventCommand(taskList, eventDesc, eventFrom, eventBy, ui);
                 break;

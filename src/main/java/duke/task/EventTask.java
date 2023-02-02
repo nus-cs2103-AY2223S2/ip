@@ -40,12 +40,14 @@ public class EventTask extends Task {
         this(description, false, from, to);
     }
 
-    public LocalDate getFrom() {
-        return from;
-    }
-
-    public LocalDate getTo() {
-        return to;
+    /**
+     * Returns true if the target date falls between the start and end date of this event.
+     * @param targetDate The mentioned target date.
+     * @return True if the target date is during this event period of interest.
+     */
+    public boolean checkDateDuringTask(LocalDate targetDate) {
+        return (from.isEqual(targetDate) || from.isBefore(targetDate))
+                && (to.isEqual(targetDate) || to.isAfter(targetDate));
     }
 
     /**
