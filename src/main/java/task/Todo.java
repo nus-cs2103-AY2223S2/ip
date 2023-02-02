@@ -1,11 +1,19 @@
 package task;
 
+/**
+ *
+ */
 public class Todo extends Task {
     public Todo(String description) {
         super(description);
-        this.isDone = false;
     }
 
+    /**
+     * Constructor for a to do object with additional parameter
+     * @param isDone Boolean on whether the to do object is done.
+     * @param description String to accompany and describing the task.
+     * @return a To do object.
+     */
     public Todo(boolean isDone, String description) {
         super(description);
         this.isDone = isDone;
