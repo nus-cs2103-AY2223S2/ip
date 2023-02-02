@@ -1,6 +1,10 @@
 package duke.functions;
 
+import duke.exceptions.*;
 import duke.tasks.TaskList;
+
+import java.io.File;
+import java.util.Scanner;
 
 public class Parser {
     private TaskList list;
@@ -9,82 +13,162 @@ public class Parser {
         this.list = list;
     }
 
-    /**
-     *  Handles the logic flow direction from user input.
-     *  1. When a '/' is present, there are 3 arguments to the input.
-     *  The first loop section handles by splitting them into command, task name and deadline,
-     *  and passes them down to handleThreeInputs(command, name, time, d);
-     *  2. Else, it is a double argument input, split by first empty space " ",
-     *  with split[1] being task name if command is todo, else split[1] is index for CRUD commands.
-     *  3. Otherwise, handle single inputs with the function.
-     * @param input User input from terminal.
-     * @param d Initialised TaskList data structure
-     *
-     */
-    public void handleInput(String input, TaskList d) {
-        if (input.contains("/")) {
-            String[] split = input.split("/", 2);
-            String[] secondSplit = split[0].split(" ", 2);
-            String command = secondSplit[0];
-            String name = secondSplit[1];
-            String time = split[1];
-            handleThreeInputs(command, name, time, d);
-        } else {
-            String[] split = input.split(" ", 2);
-            String command = split[0];
-            if ("todo".equalsIgnoreCase(command)) {
-                d.insertToDo(split[1]);
-            } else if (split.length > 1) {
-                Integer index = Integer.parseInt(split[1]);
-                handleTwoInputs(command, index, d);
-            } else {
-                handleSingleInput(command, d);
+    public void handleInput(String input) throws InvalidCommandException {
+        String[] split = input.split(" ", 2);
+        String cmd = split[0];
+        switch (cmd) {
+            case "list":
+                System.out.println(this.list.toString());
+                break;
+            case "mark":
+                mark(split);
+                break;
+            case "unmark":
+                unmark(split);
+                break;
+            case "delete":
+                delete(split);
+                break;
+            case "deadline":
+                deadline(split);
+                break;
+            case "event":
+                event(split);
+                break;
+            case "todo":
+                todo(split);
+                break;
+            case "bye":
+                bye(split);
+                break;
+            default:
+                throw new InvalidCommandException();
+        }
+    }
+
+    public void parseDatabase(Scanner fileReader, TaskList dl) {
+        int index = -1;
+        while (fileReader.hasNextLine()) {
+            String input = fileReader.nextLine();
+            String[] split = input.split("\\|");
+            String cmd = split[0];
+            String status = split[1];
+            String taskName = split[2];
+            index++;
+            switch (cmd) {
+                case "T":
+                    dl.insertToDo(taskName, true);
+                    if (status.equals("X")) {
+                        dl.mark(index);
+                    }
+                    break;
+                case "D":
+                    String deadline = "a";
+                    dl.insertDeadline(taskName, deadline, true);
+                    if (status.equals("X")) {
+                        dl.mark(index);
+                    }
+                    break;
+                case "E":
+                    String startTime = split[3];
+                    String endTime = split[3];
+                    dl.insertEvent(taskName, startTime, endTime, true);
+                    if (status.equals("X")) {
+                        dl.mark(index);
+                    }
+                    break;
+                default:
+                    break;
             }
         }
     }
 
-    public void handleSingleInput(String command, TaskList d) {
-        switch (command) {
-            case "bye":
-                exit();
-                break;
-            case "list":
-                System.out.println(d.toString());
-                break;
-            default:
-                d.insert(command);
+
+    private void mark(String[] split) throws InvalidCommandException {
+        try {
+            if (split.length > 1) {
+                throw new MultipleArgumentsException();
+            }
+            Integer index = Integer.parseInt(split[1]);
+            this.list.mark(index);
+        } catch (NumberFormatException | MultipleArgumentsException e) {
+            System.out.println("Please input a number after the command.");
         }
     }
 
-    public void handleTwoInputs(String command, Integer index, TaskList d) {
-        switch (command) {
-            case "mark":
-                d.mark(index);
-                break;
-            case "unmark":
-                d.unMark(index);
-                break;
-            case "delete":
-                d.deleteTask(index);
-                break;
+    private void unmark(String[] split) throws InvalidCommandException {
+        try {
+            if (split.length > 1) {
+                throw new MultipleArgumentsException();
+            }
+            Integer index = Integer.parseInt(split[1]);
+            this.list.unMark(index);
+        } catch (NumberFormatException | MultipleArgumentsException e) {
+            System.out.println("Please input a number after the command.");
         }
     }
 
-    public void handleThreeInputs(String command, String name, String time, TaskList d) {
-        switch (command) {
-            case "deadline":
-                d.insertDeadline(name, time);
-                break;
-            case "event":
-                d.insertEvent(name, time);
-                break;
-            case "todo":
-                d.insertToDo(name);
-                break;
+    private void delete(String[] split) {
+        try {
+            if (split.length > 1) {
+                throw new MultipleArgumentsException();
+            }
+            Integer index = Integer.parseInt(split[1]);
+            this.list.deleteTask(index);
+        } catch (NumberFormatException | MultipleArgumentsException e) {
+            System.out.println("Please input a number after the command.");
         }
     }
 
-    public static void exit(){
+    private void deadline(String[] split) {
+        try {
+            String[] secondSplit = split[1].split("/by ");
+            if (secondSplit.length != 2) {
+                throw new InvalidArgumentsException();
+            }
+            this.list.insertDeadline(secondSplit[0], secondSplit[1]);
+        } catch (InvalidArgumentsException | DateTimeFormatException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private void event(String[] split) {
+        try {
+            String[] secondSplit = split[1].split("/from |/to ", 3);
+            System.out.println(secondSplit);
+            if (secondSplit.length != 3) {
+                throw new InvalidArgumentsException();
+            }
+            this.list.insertEvent(secondSplit[0], secondSplit[1], secondSplit[2]);
+        } catch (InvalidArgumentsException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private void todo(String[] split) {
+        try {
+            if (split.length != 2) {
+                throw new InvalidArgumentsException();
+            }
+            String todoName = split[1];
+            this.list.insertToDo(todoName);
+        } catch (InvalidArgumentsException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private void bye(String[] split) throws InvalidCommandException {
+        try {
+            if (split.length != 1) {
+                throw new InvalidArgumentsException();
+            }
+            exit();
+        } catch (InvalidArgumentsException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void exit() {
         String exitMsg = Ui.format("Bye. Come back soon!");
         System.out.println(exitMsg);
         System.exit(1);

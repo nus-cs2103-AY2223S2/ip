@@ -36,7 +36,7 @@ public class Task {
     public String toStringDb() {
         return String.format(
                 "%s|%s",
-                this.isDone? 1 : 0,
+                this.isDone? "X" : 0,
                 this.description
         );
     }

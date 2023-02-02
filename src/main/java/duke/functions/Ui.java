@@ -1,5 +1,7 @@
 package duke.functions;
 
+import duke.exceptions.DateTimeFormatException;
+import duke.exceptions.DukeException;
 import duke.exceptions.EmptyInputException;
 import duke.exceptions.InvalidCommandException;
 import duke.tasks.TaskList;
@@ -7,6 +9,7 @@ import duke.tasks.TaskList;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.zip.DataFormatException;
 
 public class Ui {
     public static ArrayList<String> commandList = new ArrayList<>(Arrays.asList
@@ -28,10 +31,9 @@ public class Ui {
                 if (!isValidCommand) {
                     throw new InvalidCommandException();
                 }
-                p.handleInput(input, records);
-            }catch (EmptyInputException | InvalidCommandException exception) {
-                System.out.println("Input Error, please input a command within the list:" +
-                        "todo, deadline, event, mark, unmark, list, delete, bye.");
+                p.handleInput(input);
+            }catch (DukeException e) {
+                System.out.println(e.getMessage());
             }
         }
     }

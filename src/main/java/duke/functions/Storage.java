@@ -17,40 +17,8 @@ public class Storage {
         File f = new File(filePath);
         try {
             Scanner fileReader = new Scanner(f);
-            System.out.println("Database loaded.");
-            int index = -1;
-            while (fileReader.hasNextLine()) {
-                String input = fileReader.nextLine();
-                String[] split = input.split("\\|");
-                String cmd = split[0];
-                String status = split[1];
-                String taskName = split[2];
-                index++;
-                switch (cmd) {
-                    case "T":
-                        dl.insertToDo(taskName, true);
-                        if (status.equals("X")) {
-                            dl.mark(index);
-                        }
-                        break;
-                    case "D":
-                        String deadline = "a";
-                        dl.insertDeadline(taskName, deadline, true);
-                        if (status.equals("X")) {
-                            dl.mark(index);
-                        }
-                        break;
-                    case "E":
-                        String time = split[3];
-                        dl.insertEvent(taskName, time, true);
-                        if (status.equals("X")) {
-                            dl.mark(index);
-                        }
-                        break;
-                    default:
-                        break;
-                }
-            }
+            Parser p = new Parser(dl);
+            p.parseDatabase(fileReader, dl);
             fileReader.close();
             dl.toString();
         } catch (FileNotFoundException e) {

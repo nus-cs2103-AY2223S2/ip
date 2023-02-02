@@ -6,6 +6,7 @@
  */
 package duke.tasks;
 
+import duke.exceptions.DateTimeFormatException;
 import duke.functions.DatabaseWriter;
 import duke.functions.Ui;
 
@@ -23,7 +24,8 @@ public class TaskList {
     private final String database = "duke.txt";
     private Path path = Paths.get(filePath);
     private DatabaseWriter dw = new DatabaseWriter(path);
-    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yy HH:mm");
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy HHmm");
+    private String dateTimeRegex = "^\\d{2}/\\d{2}/\\d{2} \\d{4}$";
 
     //Constructor
     public TaskList() {
@@ -31,6 +33,7 @@ public class TaskList {
     }
 
     public void mark(int index) {
+        index--;
         if (index < 0 || index > size) {
             System.out.println(String.format("Indices have to be positive and less than %d.", size));
             return;
@@ -43,6 +46,7 @@ public class TaskList {
     }
 
     public void unMark(int index) {
+        index--;
         if (index < 0 || index > size) {
             System.out.println(String.format("Indices have to be positive and less than %d.", size));
             return;
@@ -73,34 +77,67 @@ public class TaskList {
         this.records.add(t);
     }
 
-    public void insertDeadline(String name, String time) {
-        LocalDateTime dateTime = LocalDateTime.parse(time, formatter);
-        TaskDeadline d = new TaskDeadline(time, dateTime);
-        this.records.add(d);
-        dw.addToDb(d);
-        System.out.println(Ui.format("Got it. I've added this task:\n" + d.toString()));
-    }
-    public void insertDeadline(String name, String time, boolean isInitial) {
-        LocalDateTime dateTime = LocalDateTime.parse(time, formatter);
-        TaskDeadline d = new TaskDeadline(time, dateTime);
-        this.records.add(d);
+    public void insertDeadline(String name, String time) throws DateTimeFormatException {
+        System.out.println(time);
+        try {
+            if (!time.matches(dateTimeRegex)) { // dd/mm/yy tttt
+                throw new DateTimeFormatException();
+            }
+            LocalDateTime dateTime = LocalDateTime.parse(time, formatter);
+            TaskDeadline d = new TaskDeadline(time, dateTime);
+            this.records.add(d);
+            dw.addToDb(d);
+            System.out.println(Ui.format("Got it. I've added this task:\n" + d.toString()));
+        } catch (DateTimeFormatException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
-    public void insertEvent(String name, String time) {
-        String[] times = time.split("/", 2);
-        LocalDateTime start = LocalDateTime.parse(times[0], formatter);
-        LocalDateTime end = LocalDateTime.parse(times[1], formatter);
-        TaskEvent e = new TaskEvent(name, start, end);
-        this.records.add(e);
-        dw.addToDb(e);
-        System.out.println(Ui.format("Got it. I've added this task:\n" + e.toString()));
+    public void insertDeadline(String name, String time, boolean isInitial) {
+        try {
+            if (!time.matches(dateTimeRegex)) { // dd/mm/yy tttt
+                throw new DateTimeFormatException();
+            }
+            LocalDateTime dateTime = LocalDateTime.parse(time, formatter);
+            TaskDeadline d = new TaskDeadline(time, dateTime);
+            this.records.add(d);
+            System.out.println(Ui.format("Got it. I've added this task:\n" + d.toString()));
+        } catch (DateTimeFormatException e) {
+            System.out.println(e.getMessage());
+        }
     }
-    public void insertEvent(String name, String time, boolean isInitial) {
-        String[] times = time.split("/", 2);
-        LocalDateTime start = LocalDateTime.parse(times[0], formatter);
-        LocalDateTime end = LocalDateTime.parse(times[1], formatter);
-        TaskEvent e = new TaskEvent(name, start, end);
-        this.records.add(e);
+
+    public void insertEvent(String name, String startString, String endString) {
+        try {
+            if (!startString.matches(dateTimeRegex) // dd/mm/yy tttt
+                    | !endString.matches(dateTimeRegex)) {
+                throw new DateTimeFormatException();
+            }
+            LocalDateTime start = LocalDateTime.parse(startString, formatter);
+            LocalDateTime end = LocalDateTime.parse(endString, formatter);
+            TaskEvent e = new TaskEvent(name, start, end);
+            this.records.add(e);
+            dw.addToDb(e);
+            System.out.println(Ui.format("Got it. I've added this task:\n" + e.toString()));
+        } catch (DateTimeFormatException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void insertEvent(String name, String startString, String endString, boolean isInitial) {
+        try {
+            if (!startString.matches(dateTimeRegex) // dd/mm/yy tttt
+                    | !endString.matches(dateTimeRegex)) {
+                throw new DateTimeFormatException();
+            }
+            LocalDateTime start = LocalDateTime.parse(startString, formatter);
+            LocalDateTime end = LocalDateTime.parse(endString, formatter);
+            TaskEvent e = new TaskEvent(name, start, end);
+            this.records.add(e);
+            System.out.println(Ui.format("Got it. I've added this task:\n" + e.toString()));
+        } catch (DateTimeFormatException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public Task getTask(int index) {
