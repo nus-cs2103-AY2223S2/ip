@@ -22,32 +22,32 @@ public class CommandHandler {
             return showTasks(tasks);
             //Fallthrough
         case "mark":
-            return markTask(command.getArguments().get(0), tasks);
+            return markTask(command.getArguments()[0], tasks);
             //Fallthrough 
         case "unmark":
-            return unmarkTask(command.getArguments().get(0), tasks);
+            return unmarkTask(command.getArguments()[0], tasks);
             //Fallthrough 
         case "todo":
-            return addTodo(command.getArguments().get(0), tasks);
+            return addTodo(command.getArguments()[0], tasks);
             //Fallthrough 
         case "deadline":
-            return addDeadline(command.getArguments().get(0), command.getArguments().get(1), tasks);
+            return addDeadline(command.getArguments()[0], command.getArguments()[1], tasks);
             //Fallthrough 
         case "event":
-            return addEvent(command.getArguments().get(0), 
-                    command.getArguments().get(1), command.getArguments().get(2), tasks);
+            return addEvent(command.getArguments()[0],
+                    command.getArguments()[1], command.getArguments()[2], tasks);
             //Fallthrough 
         case "delete":
-            return deleteEvent(command.getArguments().get(0), tasks);
+            return deleteEvent(command.getArguments()[0], tasks);
             //Fallthrough 
         case "noMatch":
             return noMatch();
             //Fallthrough 
         case "invalid":
-            return invalid(command.getArguments().get(0));
+            return invalid(command.getArguments()[0]);
             //Fallthrough
         case "find":
-            return findTasks(command.getArguments().get(0), tasks);
+            return findTasks(command.getArguments()[0], tasks);
         }
         return "";
     }

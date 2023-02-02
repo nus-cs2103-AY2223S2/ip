@@ -10,7 +10,7 @@ public class Storage {
     String path;
     File file;
     Parser parser;
-    
+
     public Storage() {
         this.path = null;
         this.file = null;
