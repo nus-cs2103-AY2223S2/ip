@@ -79,8 +79,18 @@ public class SuggestionTextField extends TextField {
                 ? forceCommand(inputCmd)
                 : getCommandSuggestions(inputCmd);
         return cmdList.stream()
-                .map(command -> new MenuItem(command.name()))
+                .map(command -> getSuggestionMessage(command, isCompleteCommand))
+                .map(message -> new MenuItem(message))
                 .collect(Collectors.toList());
+    }
+
+
+    private String getSuggestionMessage(Command command, boolean isComplete) {
+        String message = command.name();
+        if (isComplete) {
+            message += " " + command.getSyntax();
+        }
+        return message.strip();
     }
 
 
