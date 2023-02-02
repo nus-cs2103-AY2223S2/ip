@@ -11,19 +11,19 @@ import duke.ui.Ui;
 /**
  * Represents an Event command.
  */
-public class AddEventCommand extends Command {
+public class CommandAddEvent extends Command {
     private String description;
     private LocalDate from;
     private LocalDate to;
 
     /**
-     * Constructor for AddEventCommand.
+     * Constructor for CommandAddEvent.
      *
      * @param eventDescription Description of an event task.
      * @param from Date the event starts.
      * @param to Date the event ends.
      */
-    public AddEventCommand(String eventDescription, LocalDate from, LocalDate to) {
+    public CommandAddEvent(String eventDescription, LocalDate from, LocalDate to) {
         this.description = eventDescription;
         this.from = from;
         this.to = to;

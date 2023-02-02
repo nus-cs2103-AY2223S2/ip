@@ -8,9 +8,9 @@ import duke.ui.Ui;
 /**
  * Represents a Mark command.
  */
-public class MarkTaskCommand extends Command {
+public class CommandMarkTask extends Command {
     private int idx;
-    public MarkTaskCommand(int idx) {
+    public CommandMarkTask(int idx) {
         this.idx = idx;
     }
 

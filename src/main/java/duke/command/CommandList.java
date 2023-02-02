@@ -8,8 +8,8 @@ import duke.ui.Ui;
 /**
  * Represents a List command.
  */
-public class ListTasksCommand extends Command {
-    public ListTasksCommand() {
+public class CommandList extends Command {
+    public CommandList() {
     }
 
     @Override

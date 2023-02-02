@@ -4,17 +4,17 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 import duke.DukeException;
-import duke.command.AddDeadlineCommand;
-import duke.command.AddEventCommand;
-import duke.command.AddTodoCommand;
+import duke.command.CommandAddDeadline;
+import duke.command.CommandAddEvent;
+import duke.command.CommandAddTodo;
 import duke.command.Command;
-import duke.command.DeleteTaskCommand;
-import duke.command.ExitCommand;
-import duke.command.FindCommand;
-import duke.command.ListTasksCommand;
-import duke.command.MarkTaskCommand;
+import duke.command.CommandDeleteTask;
+import duke.command.CommandExit;
+import duke.command.CommandFind;
+import duke.command.CommandList;
+import duke.command.CommandMarkTask;
+import duke.command.CommandUnmarkTask;
 import duke.command.Operation;
-import duke.command.UnmarkTaskCommand;
 
 /**
  * Represents a parser to process user inputs.
@@ -36,7 +36,7 @@ public class Parser {
 
         try {
             if (input.equals("bye")) {
-                return new ExitCommand();
+                return new CommandExit();
             }
 
             // Split strings into 2, first part is the operation, 2nd part is the description
@@ -57,15 +57,14 @@ public class Parser {
             case EVENT:
                 return addTaskParser(input);
             case LIST:
-                return new ListTasksCommand();
+                return new CommandList();
             case DELETE:
                 return deleteTaskParser(input);
             case FIND:
                 return findTaskParser(input);
             default:
+                return null; // cannot reach here, as duke.command.Operation.valueOf throws IllegalArgumentException
             }
-
-            return null; // cannot reach here, as duke.command.Operation.valueOf throws IllegalArgumentException
         } catch (NumberFormatException e) {
             throw new DukeException("Task must be referenced by its index.");
         } catch (IllegalArgumentException e) {
@@ -79,26 +78,26 @@ public class Parser {
      * Parses the mark command input.
      *
      * @param input User input.
-     * @return MarkTaskCommand instance.
+     * @return CommandMarkTask instance.
      * @throws NumberFormatException If format of task index is invalid.
      */
     public static Command markTaskParser(String input) throws NumberFormatException {
         String[] command = input.split(" ", 2);
         int taskIndex = Integer.parseInt(command[1]); // Throws exception if not valid string as id
-        return new MarkTaskCommand(taskIndex);
+        return new CommandMarkTask(taskIndex);
     }
 
     /**
      * Parses the unmark command input.
      *
      * @param input User input.
-     * @return UnmarkTaskCommand instance.
+     * @return CommandUnmarkTask instance.
      * @throws NumberFormatException If format of task index is invalid.
      */
     public static Command unmarkTaskParser(String input) throws NumberFormatException {
         String[] command = input.split(" ", 2);
         int taskIndex = Integer.parseInt(command[1]); // Throws exception if not valid string as id
-        return new UnmarkTaskCommand(taskIndex);
+        return new CommandUnmarkTask(taskIndex);
     }
 
     /**
@@ -115,27 +114,26 @@ public class Parser {
 
         switch (op) {
         case TODO:
-            return new AddTodoCommand(description);
+            return new CommandAddTodo(description);
         case DEADLINE:
             String[] deadlineString = description.split("/by", 2);
-            String deadlineDescription = deadlineString[0];
+            String deadlineDescription = deadlineString[0].trim();
             LocalDate by = LocalDate.parse(deadlineString[1].trim());
 
-            return new AddDeadlineCommand(deadlineDescription, by);
+            return new CommandAddDeadline(deadlineDescription, by);
         case EVENT:
             String[] eventString = description.split("/from", 2);
-            String eventDescription = eventString[0];
+            String eventDescription = eventString[0].trim();
 
             // Parse the string to get to and from dates of the event
             String[] fromAndTo = eventString[1].split("/to", 2);
             LocalDate from = LocalDate.parse(fromAndTo[0].trim());
             LocalDate to = LocalDate.parse(fromAndTo[1].trim());
 
-            return new AddEventCommand(eventDescription, from, to);
+            return new CommandAddEvent(eventDescription, from, to);
         default:
+            return null;
         }
-
-        return null;
     }
 
     /**
@@ -148,7 +146,7 @@ public class Parser {
     public static Command deleteTaskParser(String input) throws NumberFormatException {
         String[] command = input.split(" ", 2);
         int taskIndex = Integer.parseInt(command[1]); // Throws exception if not valid string as id
-        return new DeleteTaskCommand(taskIndex);
+        return new CommandDeleteTask(taskIndex);
     }
 
     /**
@@ -160,6 +158,6 @@ public class Parser {
     public static Command findTaskParser(String input) {
         String[] command = input.split(" ", 2);
         String keyword = command[1];
-        return new FindCommand(keyword);
+        return new CommandFind(keyword);
     }
 }

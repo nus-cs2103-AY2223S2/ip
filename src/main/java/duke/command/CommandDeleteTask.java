@@ -9,9 +9,9 @@ import duke.ui.Ui;
 /**
  * Represents a Delete command.
  */
-public class DeleteTaskCommand extends Command {
+public class CommandDeleteTask extends Command {
     private int index;
-    public DeleteTaskCommand(int taskIndex) {
+    public CommandDeleteTask(int taskIndex) {
         this.index = taskIndex;
     }
 

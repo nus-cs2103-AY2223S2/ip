@@ -9,11 +9,11 @@ import duke.ui.Ui;
 /**
  * Represents a Todo command.
  */
-public class AddTodoCommand extends Command {
+public class CommandAddTodo extends Command {
 
     private String description;
 
-    public AddTodoCommand(String description) {
+    public CommandAddTodo(String description) {
         this.description = description;
     }
 

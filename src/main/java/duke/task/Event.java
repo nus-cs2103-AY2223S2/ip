@@ -31,7 +31,7 @@ public class Event extends Task {
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
         return "[E]" + super.toString()
-                + "(from " + this.from.format(formatter)
+                + " (from " + this.from.format(formatter)
                 + " to " + this.to.format(formatter) + ")";
     }
 

@@ -8,9 +8,9 @@ import duke.ui.Ui;
 /**
  * Represents an Exit command.
  */
-public class ExitCommand extends Command {
+public class CommandExit extends Command {
 
-    public ExitCommand() {
+    public CommandExit() {
 
     }
 

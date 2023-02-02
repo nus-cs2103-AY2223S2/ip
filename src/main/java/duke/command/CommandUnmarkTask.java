@@ -8,10 +8,10 @@ import duke.ui.Ui;
 /**
  * Represents an Unmark command.
  */
-public class UnmarkTaskCommand extends Command {
+public class CommandUnmarkTask extends Command {
 
     private int idx;
-    public UnmarkTaskCommand(int idx) {
+    public CommandUnmarkTask(int idx) {
         this.idx = idx;
     }
 

@@ -8,9 +8,9 @@ import duke.ui.Ui;
 /**
  * Represents a Find command.
  */
-public class FindCommand extends Command {
+public class CommandFind extends Command {
     private String keyword;
-    public FindCommand(String keyword) {
+    public CommandFind(String keyword) {
         this.keyword = keyword;
     }
 

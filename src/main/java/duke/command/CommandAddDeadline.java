@@ -11,7 +11,7 @@ import duke.ui.Ui;
 /**
  * Represents a Deadline command.
  */
-public class AddDeadlineCommand extends Command {
+public class CommandAddDeadline extends Command {
     private String deadlineDescription;
     private LocalDate by;
 
@@ -21,7 +21,7 @@ public class AddDeadlineCommand extends Command {
      * @param deadlineDescription Description of the deadline task.
      * @param by Date of the deadline.
      */
-    public AddDeadlineCommand(String deadlineDescription, LocalDate by) {
+    public CommandAddDeadline(String deadlineDescription, LocalDate by) {
         super();
         this.deadlineDescription = deadlineDescription;
         this.by = by;

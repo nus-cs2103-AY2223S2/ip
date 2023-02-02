@@ -5,8 +5,6 @@ import java.util.List;
 
 import duke.DukeException;
 
-
-
 /**
  * Represents a list of tasks.
  */
@@ -175,5 +173,4 @@ public class TaskList {
         foundTasks.deleteCharAt(foundTasks.length() - 1);
         return foundTasks.toString();
     }
-
 }
