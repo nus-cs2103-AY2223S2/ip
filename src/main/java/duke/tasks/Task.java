@@ -1,5 +1,7 @@
 package duke.tasks;
 
+import java.util.Objects;
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -39,7 +41,7 @@ public class Task {
 
         case "E":
             String[]fromToSplit = taskStringSplit[3].split(" - ");
-            currTask = new Events(taskStringSplit[2], fromToSplit[0], fromToSplit[1]);
+            currTask = new Event(taskStringSplit[2], fromToSplit[0], fromToSplit[1]);
             break;
         }
 
@@ -54,5 +56,12 @@ public class Task {
         return "[" + getStatusIcon() + "] " + this.description;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Task)) return false;
+        Task task = (Task) o;
+        return isDone == task.isDone && description.equals(task.description);
+    }
 }
 

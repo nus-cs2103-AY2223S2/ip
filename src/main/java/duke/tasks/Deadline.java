@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Objects;
+
 import duke.dukeexceptions.DukeExceptions;
 
 public class Deadline extends Task {
@@ -37,4 +39,14 @@ public class Deadline extends Task {
                 + " (by:" + by.format(DateTimeFormatter.ofPattern("MM/dd/yyyy 'at' hh:mm a")) + ")"
                 +"\n";
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Deadline)) return false;
+        if (!super.equals(o)) return false;
+        Deadline deadline = (Deadline) o;
+        return Objects.equals(by, deadline.by);
+    }
+
 }

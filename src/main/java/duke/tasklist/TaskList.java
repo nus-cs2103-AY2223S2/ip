@@ -1,7 +1,7 @@
 package duke.tasklist;
 import duke.dukeexceptions.MissingArgumentException;
 import duke.tasks.Deadline;
-import duke.tasks.Events;
+import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.ToDo;
 
@@ -14,8 +14,8 @@ public class TaskList {
         this.len = 0;
     }
 
-    public int length(){
-        return this.len;
+    public Task showTask(int index){
+        return list[index];
     }
 
     public void list(){
@@ -95,7 +95,7 @@ public class TaskList {
             throw new MissingArgumentException("The to cannot be empty.");
         }
 
-        this.list[len] = new Events(description, from, to);
+        this.list[len] = new Event(description, from, to);
         this.len++;
 
         String reply = "  Got it. I've added this task:\n"

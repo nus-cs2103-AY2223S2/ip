@@ -5,6 +5,7 @@ import duke.tasklist.TaskList;
 
 public class ToDoCommand extends Command{
     private String requestContent;
+
     public ToDoCommand(String requestContent){
         super("TODO");
         this.requestContent = requestContent;

@@ -5,14 +5,15 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Objects;
 
-public class Events extends Task {
+public class Event extends Task {
 
     protected LocalDateTime from;
     protected LocalDateTime to;
     private static final String tag = "E";
 
-    public Events(String description, String from, String to) {
+    public Event(String description, String from, String to) {
         super(description);
         try {
             String[] fromSplit = from.split(" ");
@@ -45,4 +46,14 @@ public class Events extends Task {
                 + " to:" + this.to.format(DateTimeFormatter.ofPattern("MM/dd/yyyy 'at' hh:mm a"))
                 + ")" +"\n";
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Event)) return false;
+        if (!super.equals(o)) return false;
+        Event event = (Event) o;
+        return Objects.equals(from, event.from) && Objects.equals(to, event.to);
+    }
+
 }
