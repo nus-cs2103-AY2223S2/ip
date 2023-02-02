@@ -45,17 +45,17 @@ public class Parser {
             return new Command("todo", taskName);
 
         } else if (input.startsWith("deadline")) {
-            int dash_index = input.indexOf("/");
-            String taskName = input.substring(9, dash_index);
-            String by = input.substring(dash_index + 4);
+            int dashIndex = input.indexOf("/");
+            String taskName = input.substring(9, dashIndex);
+            String by = input.substring(dashIndex + 4);
             return new Command("deadline", taskName, by);
 
         } else if (input.startsWith("event")) {
-            int first_dash_index = input.indexOf("/");
-            int second_dash_index = input.lastIndexOf("/");
-            String taskName = input.substring(6, first_dash_index);
-            String from = input.substring(first_dash_index + 6, second_dash_index);
-            String to = input.substring(second_dash_index + 4);
+            int firstDashIndex = input.indexOf("/");
+            int secondDashIndex = input.lastIndexOf("/");
+            String taskName = input.substring(6, firstDashIndex);
+            String from = input.substring(firstDashIndex + 6, secondDashIndex);
+            String to = input.substring(secondDashIndex + 4);
             return new Command("event", taskName, from, to);
 
         } else {

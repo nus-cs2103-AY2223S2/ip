@@ -1,7 +1,8 @@
 package duke.task;
 
-import java.util.ArrayList;
 import java.io.Serializable;
+
+import java.util.ArrayList;
 
 /**
  * Class that contains the list of task objects.

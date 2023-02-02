@@ -19,14 +19,14 @@ public class Ui {
     /**
      * Prints a line.
      */
-    public void showLine(){
+    public void showLine() {
         System.out.println("_______");
     }
 
     /**
      * Prints welcome message.
      */
-    public void showWelcome(){
+    public void showWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"

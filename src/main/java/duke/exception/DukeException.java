@@ -1,6 +1,9 @@
 package duke.exception;
 
-public class DukeException extends Exception{
+/**
+ * Exception class for exceptions related to duke.
+ */
+public class DukeException extends Exception {
     /**
      * Constructor of DukeException
      *

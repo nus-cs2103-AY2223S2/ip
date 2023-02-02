@@ -1,8 +1,15 @@
 package duke.command;
 
 import duke.exception.DukeException;
-import duke.task.*;
+
 import duke.storage.Storage;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
+
 import duke.ui.Ui;
 
 /**
@@ -117,7 +124,7 @@ public class Command {
             break;
 
         case UNMARK:
-            if (index+1 == 0) {
+            if (index + 1 == 0) {
                 throw new DukeException("cannot unmark a number not in the list!");
             }
             task = tasks.get(index);

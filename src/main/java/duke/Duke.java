@@ -1,12 +1,13 @@
 package duke;
+
+import java.io.IOException;
+
 import duke.command.Command;
 import duke.command.Parser;
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
-
-import java.io.IOException;
 
 /**
  * Main logic of Duke the chat bot which tracks the user's tasks.
