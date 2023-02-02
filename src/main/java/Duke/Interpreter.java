@@ -6,6 +6,7 @@ import java.lang.String;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+// format the time in the form of 11/10/2019 5pm
 
 /**
  * The Duke.Interpreter interpreters the users' input
@@ -16,8 +17,6 @@ public class Interpreter {
         // all the operations
         mark, list, delete, deadline, event, bye, todo, unmark, find
     }
-
-    // format the time in the form of 11/10/2019 5pm
 
     /**
      * The method mark marks the Task as done
@@ -178,7 +177,7 @@ public class Interpreter {
             }
 
         }
-        return null; // to be modified
+        return null;
     }
 
     public static Find find(String command, TaskTable table) throws MissingDescriptionException {
@@ -230,15 +229,5 @@ public class Interpreter {
             default:
                 throw new InvalidCommandException();
         }
-        /*
-        } catch (InvalidCommandException | InvalidTimeFormatException |
-                MissingDescriptionException | EmptyCommandException | OutRangeException | NullPointerException e) {
-            //e.printStackTrace();
-            System.out.println("    ____________________________________________________________\n");
-            System.out.println(e.getMessage());
-            System.out.println("    ____________________________________________________________\n");
-            return null;
-        }
-         */
     }
 }

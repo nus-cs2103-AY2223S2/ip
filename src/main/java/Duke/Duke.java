@@ -44,8 +44,6 @@ public class Duke {
         monitor.displayLogo();
         monitor.welcome();
 
-        // coc.start();
-
         boolean running = true;
         while (running) {
             try {
