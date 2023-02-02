@@ -23,6 +23,7 @@ idea:
  */
 public class Duke {
     private TaskList taskList = new TaskList();
+    private Parser parser = new Parser();
     private Task task;
 
     private Task parseTaskString(String taskString) {
@@ -127,15 +128,6 @@ public class Duke {
         reply("Bye! Hope to see you again soon!");
     }
 
-    private String[] parseTodo(String command) throws ZeroLengthDescriptionException {
-        String[] split_command = command.split(" ");
-        checkCommandLength(split_command);
-        String[] taskNameSplit = Arrays.copyOfRange(split_command, 1, split_command.length);
-        String taskName = String.join(" ", taskNameSplit);
-        String[] parsedCommand = new String[] {split_command[0], taskName};
-        return parsedCommand;
-    }
-
     private String reformatDate(String unformattedDate) {
         LocalDate deadlineDateObj;
         DateTimeFormatter dtf;
@@ -228,24 +220,24 @@ public class Duke {
         while (true) {
             String userInput = sc.nextLine().toLowerCase();
             try {
-                parsedCommand = parseCommand(userInput);
+                parsedCommand = parser.parseCommand(userInput);
                 switch (parsedCommand[0]) {
                 case "todo":
-                    checkCommandLength(parsedCommand);
+                    //checkCommandLength(parsedCommand);
                     Task newTodo = new Todo(parsedCommand[1]);
                     taskList.addTask(newTodo);
                     formattedReply = formatAddTaskReply(taskList, newTodo);
                     reply(formattedReply);
                     break;
                 case "deadline":
-                    checkCommandLength(parsedCommand);
+                    //checkCommandLength(parsedCommand);
                     Task newDeadline = new Deadline(parsedCommand[1], parsedCommand[2]);
                     taskList.addTask(newDeadline);
                     formattedReply = formatAddTaskReply(taskList, newDeadline);
                     reply(formattedReply);
                     break;
                 case "event":
-                    checkCommandLength(parsedCommand);
+                    //checkCommandLength(parsedCommand);
                     Task newEvent = new Event(parsedCommand[1], parsedCommand[2], parsedCommand[3]);
                     taskList.addTask(newEvent);
                     formattedReply = formatAddTaskReply(taskList, newEvent);
