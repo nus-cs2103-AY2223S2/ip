@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -127,9 +128,13 @@ public class Duke extends Application {
                     DialogBox.getUserDialog(userText, new ImageView(user)),
                     DialogBox.getDukeDialog(dukeText, new ImageView(duke))
             );
-        }
-        catch (Exception ignored) {}
+        } catch (Exception ignored) {}
         userInput.clear();
+    }
+
+
+    private void closeStage() {
+        Platform.exit();
     }
 
     /**
@@ -147,6 +152,7 @@ public class Duke extends Application {
         case "bye":
             System.out.println(first);
             reply = mainUi.printReply("bye");
+            closeStage();
             break;
         case "mark":
             Task completedTask = getTaskForMarking(toFindFirstWord, mainTaskList);
@@ -209,8 +215,8 @@ public class Duke extends Application {
         }
 
         StringBuilder finalString = new StringBuilder();
-        for (int i = 0; i < reply.size(); i++) {
-            finalString.append("Duke heard: ").append(reply.get(i)).append("\n");
+        for (String s : reply) {
+            finalString.append(s).append("\n");
         }
         return finalString.toString();
     }

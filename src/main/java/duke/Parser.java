@@ -31,7 +31,8 @@ public class Parser {
             taskAndTime = otherArgs[1].split(" /from ", 2);
             String[] toTime = taskAndTime[1].split(" /to ", 2);
             return new String[]{otherArgs[0], taskAndTime[0], toTime[0], toTime[1]};
+        default:
+            return null;
         }
-        return null;
     }
 }
