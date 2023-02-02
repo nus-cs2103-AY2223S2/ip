@@ -40,6 +40,7 @@ public class Interpreter {
             } catch (NumberFormatException e) {
                 throw new InvalidCommandException();
             }
+            assert index > 0;
             if (index > len - 1) {
                 throw new OutRangeException();
             } else {
@@ -69,6 +70,7 @@ public class Interpreter {
             } catch (NumberFormatException e) {
                 throw new InvalidCommandException();
             }
+            assert index > 0;
             if (index > len - 1) {
                 throw new OutRangeException();
             } else {
@@ -98,6 +100,7 @@ public class Interpreter {
             } catch (NumberFormatException e) {
                 throw new InvalidCommandException();
             }
+            assert(index > 0);
             if (index > len - 1) {
                 throw new OutRangeException();
             } else {
