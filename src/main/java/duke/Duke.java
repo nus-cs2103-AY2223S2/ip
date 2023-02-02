@@ -36,7 +36,6 @@ public class Duke {
         boolean isExit = false;
         while (!isExit) {
             try {
-            //    isExit = this.ui.checkBye();
                 this.ui.parseInput();
             } catch (DukeException e) {
                 ui.showError(e);
