@@ -17,6 +17,20 @@ public class Duke {
     public static int listNum = 1; // reserve first element away
     public static boolean running = true;
 
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
+
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
+        }
+    }
     public static Path loadDir() throws IOException {
         String home = System.getProperty("user.home");
         Path dir = Paths.get(home, "data");
