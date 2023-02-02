@@ -1,11 +1,11 @@
 package duke.commands;
 
+import java.util.Arrays;
 import duke.exceptions.DukeInvalidTodoCommandException;
 import duke.tasks.TodoTask;
 import duke.utilities.Storage;
 import duke.utilities.TaskList;
 import duke.utilities.Ui;
-import java.util.Arrays;
 
 /**
  * The {@code Command} class for the {@code todo} command.

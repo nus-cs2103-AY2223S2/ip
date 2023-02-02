@@ -2,9 +2,8 @@ package duke.utilities;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-
-import duke.exceptions.DukeUnknownActionException;
 import org.junit.jupiter.api.Test;
+import duke.exceptions.DukeUnknownActionException;
 
 public class ParserTest {
 

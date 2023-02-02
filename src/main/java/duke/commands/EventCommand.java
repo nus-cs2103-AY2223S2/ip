@@ -1,11 +1,11 @@
 package duke.commands;
 
+import java.util.Arrays;
 import duke.exceptions.DukeInvalidEventCommandException;
 import duke.tasks.EventTask;
 import duke.utilities.Storage;
 import duke.utilities.TaskList;
 import duke.utilities.Ui;
-import java.util.Arrays;
 
 /**
  * The {@code Command} class for the {@code event} command.

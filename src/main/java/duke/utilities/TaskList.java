@@ -1,9 +1,9 @@
 package duke.utilities;
 
-import duke.tasks.DeadlineTask;
-import duke.tasks.Task;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import duke.tasks.DeadlineTask;
+import duke.tasks.Task;
 
 /**
  * The list of user tasks.
@@ -20,8 +20,7 @@ public class TaskList {
     }
 
     /**
-     * Instantiates a new {@code TaskList} object from the {@code taskList}
-     * provided.
+     * Instantiates a new {@code TaskList} object from the {@code taskList} provided.
      */
     public TaskList(ArrayList<Task> taskList) {
         tasks = taskList;
@@ -136,8 +135,7 @@ public class TaskList {
     }
 
     /**
-     * Converts the entire task list to a string. This string is to be stored on the
-     * disk.
+     * Converts the entire task list to a string. This string is to be stored on the disk.
      *
      * @return A string representing the entire task list.
      */

@@ -1,14 +1,14 @@
 package duke.commands;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Arrays;
 import duke.exceptions.DukeInvalidDeadlineCommandException;
 import duke.tasks.DeadlineTask;
 import duke.utilities.Storage;
 import duke.utilities.TaskList;
 import duke.utilities.Ui;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.Arrays;
 
 /**
  * The {@code Command} class for the {@code deadline} command.
