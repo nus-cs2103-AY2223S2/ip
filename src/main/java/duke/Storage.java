@@ -10,7 +10,7 @@ public class Storage {
     String path;
     File file;
     Parser parser;
-    
+
     public Storage() {
         this.path = null;
         this.file = null;
@@ -64,6 +64,9 @@ public class Storage {
      * @throws IOException Exception thrown if the database file does not exist.
      */
     public void saveData(TaskList taskList) {
+        if (path == null) {
+            return;
+        }
         try {
             FileWriter fw = new FileWriter(this.file);
 

@@ -2,22 +2,19 @@ package duke;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CommandTest {
     @Test
     public void testGetDescription() {
-        assertEquals("todo", new Command("todo", new ArrayList<String>()).getDescription());
+        assertEquals("todo", new Command("todo").getDescription());
     }
     @Test
     public void testGetArguments() {
-        List<String> lst = new ArrayList<>();
-        lst.add("3pm");
-        lst.add("tomorrow");
-        assertEquals(lst, new Command("event", lst).getArguments());
+        String[] s = new String[] {"3pm", "tomorrow"};
+        assertArrayEquals(s,
+                new Command("event", "3pm", "tomorrow").getArguments());
     }
     
 }

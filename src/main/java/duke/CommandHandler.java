@@ -23,33 +23,33 @@ public class CommandHandler {
             return showTasks(tasks);
         //Fallthrough
         case "mark":
-            s = markTask(command.getArguments().get(0), tasks);
+            s = markTask(command.getArguments()[0], tasks);
             storage.saveData(tasks);
             return s;
         //Fallthrough
         case "unmark":
-            s = unmarkTask(command.getArguments().get(0), tasks);
+            s = unmarkTask(command.getArguments()[0], tasks);
             storage.saveData(tasks);
             return s;
         //Fallthrough
         case "todo":
-            s = addTodo(command.getArguments().get(0), tasks);
+            s = addTodo(command.getArguments()[0], tasks);
             storage.saveData(tasks);
             return s;
         //Fallthrough
         case "deadline":
-            s = addDeadline(command.getArguments().get(0), command.getArguments().get(1), tasks);
+            s = addDeadline(command.getArguments()[0], command.getArguments()[1], tasks);
             storage.saveData(tasks);
             return s;
         //Fallthrough
         case "event":
-            s = addEvent(command.getArguments().get(0),
-                    command.getArguments().get(1), command.getArguments().get(2), tasks);
+            s = addEvent(command.getArguments()[0],
+                    command.getArguments()[1], command.getArguments()[2], tasks);
             storage.saveData(tasks);
             return s;
         //Fallthrough
         case "delete":
-            s = deleteEvent(command.getArguments().get(0), tasks);
+            s = deleteEvent(command.getArguments()[0], tasks);
             storage.saveData(tasks);
             return s;
         //Fallthrough
@@ -57,12 +57,13 @@ public class CommandHandler {
             return noMatch();
         //Fallthrough
         case "invalid":
-            return invalid(command.getArguments().get(0));
+            return invalid(command.getArguments()[0]);
         //Fallthrough
         case "find":
-            return findTasks(command.getArguments().get(0), tasks);
+            return findTasks(command.getArguments()[0], tasks);
         default:
             return "";
+            //Fallthrough
         }
     }
 

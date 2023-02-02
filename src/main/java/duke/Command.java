@@ -1,10 +1,10 @@
 package duke;
 
-import java.util.List;
+import java.util.Arrays;
 
 public class Command {
     private final String description;
-    private final List<String> arguments;
+    private final String[] arguments;
 
     /**
      * Constructs a Command with the specified description and any necessary arguments.
@@ -13,7 +13,7 @@ public class Command {
      * @param arguments The necessary arguments for the command
      *                  (eg: command "deadline" can have argument "11/02/2023 1200"
      */
-    public Command(String description, List<String> arguments) {
+    public Command(String description, String ... arguments) {
         this.description = description;
         this.arguments = arguments;
     }
@@ -30,9 +30,10 @@ public class Command {
      * Returns the arguments of the command in an ArrayList
      * @return Arguments of the command
      */
-    public List<String> getArguments() {
+    public String[] getArguments() {
         return arguments;
     }
+
 
     /**
      * Compares if another object o is equal to this command.
@@ -42,23 +43,34 @@ public class Command {
      */
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Command)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Command command = (Command) o;
 
-        if (!description.equals(command.description)) return false;
-        return arguments.equals(command.arguments);
+        if (!description.equals(command.description)) {
+            return false;
+        }
+        // Probably incorrect - comparing Object[] arrays with Arrays.equals
+        return Arrays.equals(arguments, command.getArguments());
     }
 
-    /**
-     * Returns the hash code value for this command.
-     * @return The hash code value for this command.
-     */
     @Override
     public int hashCode() {
         int result = description.hashCode();
-        result = 31 * result + arguments.hashCode();
+        result = 31 * result + Arrays.hashCode(arguments);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Command{" +
+                "description='" + description + '\'' +
+                ", arguments=" + Arrays.toString(arguments) +
+                '}';
     }
 }
