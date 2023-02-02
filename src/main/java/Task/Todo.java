@@ -1,18 +1,16 @@
 package Task;
 
-import Task.Task;
-
-public class todo extends Task {
+public class Todo extends Task {
     
-    public todo(String description) {
+    public Todo(String description) {
         super(description);
+        this.isDone = false;
     }
 
-    public todo(boolean isDone, String description) {
+    public Todo(boolean isDone, String description) {
         super(description);
         this.isDone = isDone;
     }
-    
 
     @Override
     public String toString() {

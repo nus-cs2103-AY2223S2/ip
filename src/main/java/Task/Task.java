@@ -23,9 +23,26 @@ public class Task {
         this.isDone = false;
     }
 
+    public boolean getIsDone() {
+        return this.isDone;
+    }
+
     @Override
     public String toString() {
         return this.getStatusIcon() + " " + this.description;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+
+        if (!(o instanceof Task)) {
+            return false;
+        }
+
+        return ((Task) o).description == this.description && ((Task) o).isDone == this.isDone;
     }
 
     public String getCommand() {

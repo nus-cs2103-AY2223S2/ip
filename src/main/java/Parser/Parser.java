@@ -4,7 +4,7 @@ import Task.Deadline;
 import Task.Event;
 import Task.Task;
 import TaskList.TaskList;
-import Task.todo;
+import Task.Todo;
 import Exception.noTaskDescriptionException;
 import Exception.invalidInputException;
 import Exception.dukeException;
@@ -18,7 +18,7 @@ public class Parser {
             if (echo.substring(4).trim().isEmpty()) {
                 throw(new noTaskDescriptionException("     ☹ OOPS!!! The description of a todo cannot be empty."));
             }
-            return new todo(echo.substring(4).trim());
+            return new Todo(echo.substring(4).trim());
 
         } else if (echo.startsWith("deadline")) {
             String deadlineArguments = echo.substring(8).trim();
@@ -45,7 +45,7 @@ public class Parser {
 
     public static Task parseFileReader(String echo, boolean isDone) {
         if (echo.startsWith("todo")) {
-            return new todo(isDone, echo.substring(4).trim());
+            return new Todo(isDone, echo.substring(4).trim());
         } else if (echo.startsWith("deadline")) {
             String deadlineArguments = echo.substring(8).trim();
             String splitArguments[] = deadlineArguments.split("/");
