@@ -1,9 +1,14 @@
 import java.io.IOException;
-import java.nio.file.*;
+import java.nio.file.FileAlreadyExistsException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.Files;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 /**
  * Class Duke implements a chatbot encapsulates user's tasks and show it
@@ -103,8 +108,8 @@ public class Duke {
         TASKS.add(newTask);
         writeFile();
         System.out.println(reply("Got it. I've added this task:\n  "
-                    + newTask
-                    + "\nNow you have " + TASKS.size() + " tasks in the list\n"));
+                + newTask
+                + "\nNow you have " + TASKS.size() + " tasks in the list\n"));
 
     }
 
@@ -122,6 +127,16 @@ public class Duke {
         target.unmark();
         writeFile();
         System.out.println(reply("OK, I've marked this task as not done yet:\n  " + target + "\n"));
+    }
+
+    private static void find(String command) {
+        String keyWord = command.substring(5);
+        Predicate<Task> keyWordFilter = task -> (task.getDescription().contains(keyWord));
+        Stream<Task> resultedTasks = TASKS.stream().filter(keyWordFilter);
+        Stream<String> searchResult = resultedTasks.map((task) -> task.toString());
+        String message = "Here are the matching tasks in your list:\n";
+        message = searchResult.reduce(message, (result, element) -> result + element + "\n");
+        System.out.println(reply(message));
     }
 
     private static void displayTasks() {
@@ -164,6 +179,10 @@ public class Duke {
                 continue;
             } else if (command.startsWith("delete ")) {
                 delete(command);
+                command = input.nextLine();
+                continue;
+            } else if (command.startsWith("find ")) {
+                find(command);
                 command = input.nextLine();
                 continue;
             }
