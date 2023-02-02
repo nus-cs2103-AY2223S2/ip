@@ -8,6 +8,7 @@ import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.TaskType;
 import duke.tasks.ToDo;
+import duke.ui.Ui;
 
 /**
  * Contains the list of all tasks logged in by the user.
@@ -62,7 +63,7 @@ public class TaskList {
      * @param shouldPrintOutput a boolean specifying if the function should print
      *     an output as acknowledgement for adding the task to the TaskList.
      */
-    public void addToList(String title, TaskType type, LocalDateTime start,
+    public String addToList(String title, TaskType type, LocalDateTime start,
                           LocalDateTime end, boolean done, boolean shouldPrintOutput) {
         // TODO: Create multiple addToLists with different method signature
         Task task;
@@ -73,15 +74,17 @@ public class TaskList {
         } else if (type == TaskType.EVENT) {
             task = new Event(title, start, end, done);
         } else {
-            Ui.println("Something seems wrong...");
-            return;
+            // TODO: Think of how to show the user this issue
+            return "Something seems wrong with the task type...I could not add this task";
         }
         this.array.add(task);
-        if (shouldPrintOutput) {
-            Ui.println("Added this to your task list:");
-            Ui.println("  " + task.toString());
-            Ui.println(String.format("Number of tasks left: %d", this.array.size()));
-        }
+        String resultString = "Added this to your task list: \n"
+                + task.toString()
+                + "\n"
+                + String.format("Number of tasks left: %d", this.array.size())
+                + "\n";
+
+        return resultString;
     }
 
     /**
@@ -89,11 +92,14 @@ public class TaskList {
      *
      * @param taskIndex an integer referencing the index of a task.
      */
-    public void deleteTask(int taskIndex) {
+    public String deleteTask(int taskIndex) {
         Task deletedTask = this.array.remove(taskIndex);
-        Ui.println("Removed this from your task list:");
-        Ui.println("  " + deletedTask.toString());
-        Ui.println(String.format("Number of tasks left: %d", this.array.size()));
+        String resultString = "Removed this from your task list: "
+                + "\n"
+                + deletedTask.toString()
+                + "\n"
+                + String.format("Number of tasks left: %d", this.array.size());
+        return resultString;
     }
 
     /**
@@ -102,19 +108,20 @@ public class TaskList {
      * @param taskIndex an integer referencing the index of a task.
      * @param completionStatus a boolean specifying whether the task is completed or not.
      */
-    public void changeTaskCompletionStatus(int taskIndex, boolean completionStatus) {
+    public String changeTaskCompletionStatus(int taskIndex, boolean completionStatus) {
         Task task = this.array.get(taskIndex);
         task.setDone(completionStatus);
+        String resultString = "";
         if (completionStatus) {
-            Ui.println("Solid work man! This task is marked done");
+            resultString += "Solid work man! This task is marked done\n";
         } else {
-            Ui.println("Aww what happened? This task is marked as undone");
+            resultString += "Aww what happened? This task is marked as undone\n";
         }
-        String toPrint = task.toString();
-        Ui.println(toPrint);
+        resultString += task.toString() + "\n";
+        return resultString;
     }
 
-    public void find(String keyword) {
+    public String find(String keyword) {
         TaskList result = new TaskList();
         for (Task t: this.array) {
             String taskDescription = t.toString();
@@ -124,11 +131,13 @@ public class TaskList {
             }
         }
 
+        String resultString = "";
         if (result.size() == 0) {
-            Ui.println("There are no matching tasks in your list!");
-            return;
+            resultString = "There are no matching tasks in your list!";
+            return resultString;
         }
-        Ui.println("Here are the matching tasks in your list:");
-        Ui.printTaskList(result);
+        resultString = "Here are the matching tasks in your list:";
+        resultString += ReplyString.getTaskListString(result);
+        return resultString;
     }
 }

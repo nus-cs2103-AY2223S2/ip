@@ -8,3 +8,6 @@
 
 ### Things to undo
 1. Remove comments around MissingJavadocCheck in checkstyle.xml
+
+### Things to do
+1. Update all javadoc + coding standards

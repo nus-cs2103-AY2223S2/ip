@@ -7,6 +7,7 @@ import duke.commands.Commands;
 import duke.exceptions.DukeException;
 import duke.exceptions.IllegalCommandException;
 import duke.tasks.TaskType;
+import duke.ui.Ui;
 
 /**
  * Acts as the parser to listen to and act upon user input in the command line interface.
@@ -22,7 +23,7 @@ public class Parser {
      * @return A boolean representing if the application should continue prompting the user for input.
      * @throws DukeException if the user input is not recognized.
      */
-    public static boolean handleCommands(String rawCommand, TaskList allTasks) throws DukeException {
+    public static String handleCommands(String rawCommand, TaskList allTasks) throws DukeException {
         int commandIndex = rawCommand.indexOf(' ');
         String command = rawCommand;
         String arguments = "";
@@ -32,17 +33,17 @@ public class Parser {
             arguments = rawCommand.substring(commandIndex + 1).trim();
         }
 
+        String result = "";
         switch (command) {
         case "bye":
-            Ui.printGoodbye();
-            return false;
+            return result;
         case "list":
-            Ui.printAllTasks(allTasks);
+            result = ReplyString.getAllTasksString(allTasks);
             break;
         case "mark":
             try {
                 int markIndex = Integer.parseInt(arguments) - 1;
-                allTasks.changeTaskCompletionStatus(markIndex, true);
+                result = allTasks.changeTaskCompletionStatus(markIndex, true);
             } catch (Throwable e) {
                 throw new IllegalCommandException(Commands.MARK);
             }
@@ -50,7 +51,7 @@ public class Parser {
         case "unmark":
             try {
                 int unmarkIndex = Integer.parseInt(arguments) - 1;
-                allTasks.changeTaskCompletionStatus(unmarkIndex, false);
+                result = allTasks.changeTaskCompletionStatus(unmarkIndex, false);
             } catch (Throwable e) {
                 throw new IllegalCommandException(Commands.UNMARK);
             }
@@ -59,7 +60,7 @@ public class Parser {
             if (arguments.trim().equals("")) {
                 throw new IllegalCommandException(Commands.TODO);
             }
-            allTasks.addToList(arguments, TaskType.TODO, null, null, false, true);
+            result = allTasks.addToList(arguments, TaskType.TODO, null, null, false, true);
             break;
         case "deadline":
             try {
@@ -67,7 +68,7 @@ public class Parser {
                 String dateByString = arguments.substring(slashIndex + 4);
                 DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
                 LocalDateTime dateBy = LocalDateTime.parse(dateByString, dateFormat);
-                allTasks.addToList(arguments.substring(0, slashIndex - 1), TaskType.DEADLINE,
+                result = allTasks.addToList(arguments.substring(0, slashIndex - 1), TaskType.DEADLINE,
                         null, dateBy, false, true);
             } catch (Throwable e) {
                 throw new IllegalCommandException(Commands.DEADLINE);
@@ -84,7 +85,7 @@ public class Parser {
                 LocalDateTime start = LocalDateTime.parse(startString, dateFormat);
                 LocalDateTime end = LocalDateTime.parse(endString, dateFormat);
                 // TODO: Check if start date is after end date
-                allTasks.addToList(arguments.substring(0, firstSlashIndex - 1), TaskType.EVENT,
+                result = allTasks.addToList(arguments.substring(0, firstSlashIndex - 1), TaskType.EVENT,
                         start, end, false, true);
             } catch (Throwable e) {
                 throw new IllegalCommandException(Commands.EVENT);
@@ -93,14 +94,14 @@ public class Parser {
         case "delete":
             try {
                 int deleteIndex = Integer.parseInt(arguments) - 1;
-                allTasks.deleteTask(deleteIndex);
+                result = allTasks.deleteTask(deleteIndex);
             } catch (Throwable e) {
                 throw new IllegalCommandException(Commands.DELETE);
             }
             break;
         case "find":
             try {
-                allTasks.find(arguments);
+                result = allTasks.find(arguments);
             } catch (Throwable e) {
                 throw new IllegalCommandException(Commands.FIND);
             }
@@ -108,7 +109,7 @@ public class Parser {
         default:
             throw new IllegalCommandException(Commands.UNRECOGNIZED);
         }
-        return true;
+        return result;
     }
 
 }

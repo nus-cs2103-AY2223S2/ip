@@ -16,6 +16,7 @@ import java.util.Scanner;
 import duke.exceptions.MemoryFailedException;
 import duke.tasks.Task;
 import duke.tasks.TaskType;
+import duke.ui.Ui;
 
 /**
  * Handles the loading of data from and storage of data to memory.
@@ -76,7 +77,8 @@ public class Storage {
             LocalDateTime end = LocalDateTime.parse(attributes[4], dateFormat);
             allTasks.addToList(title, TaskType.EVENT, start, end, done, false);
         } else {
-            Ui.println("Some task in memory does not fall into the three task categories!"
+            // TODO: Think if I can alert user of this
+            System.out.println("Some task in memory does not fall into the three task categories!"
                     + "\nThese are not loaded.");
         }
     }
