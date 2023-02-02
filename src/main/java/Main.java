@@ -139,6 +139,8 @@ public class Main extends Application {
      */
     public void readCommand(Stage stage) {
         String fullCommand = userInput.getText();
+        assert fullCommand.trim().length() > 0 : "Input cannot be empty";
+
         userInput.setText("");
 
         ui.sendInput(dialogContainer, storage, fullCommand);
