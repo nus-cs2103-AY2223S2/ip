@@ -1,6 +1,6 @@
 package duke.command;
 
-import java.util.function.Function;
+import java.util.function.BiFunction;
 
 /**
  * A command that takes arguments.
@@ -8,7 +8,7 @@ import java.util.function.Function;
  * @see Command
  */
 public class ArgCommand extends Command {
-    private final Function<String[], String[]> function;
+    private final BiFunction<String[], Boolean, String[]> function;
 
     /**
      * Creates a new ArgCommand.
@@ -17,15 +17,16 @@ public class ArgCommand extends Command {
      * @param helpStr  The help string of the command.
      * @param params   The named parameters of the command.
      * @param function The function to be called when the command is executed.
+     *                 The function should take in an array of string inputs, a Boolean
+     *                 object used to flag program exit, and output an array of strings.
      */
-    public ArgCommand(String name, String helpStr, String[] params,
-                      Function<String[], String[]> function) {
+    public ArgCommand(String name, String helpStr, String[] params, BiFunction<String[], Boolean, String[]> function) {
         super(name, helpStr, true, params);
         this.function = function;
     }
 
     @Override
-    public String[] execute(String[] args) {
-        return function.apply(args);
+    public String[] execute(String[] args, Boolean hasQuit) {
+        return function.apply(args, hasQuit);
     }
 }
