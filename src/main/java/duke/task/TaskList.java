@@ -15,8 +15,11 @@ public class TaskList {
     private final Storage storage;
 
     /**
-     * Creates a TaskList object and fill the task list using the data from the specified storage if it exist. If the
-     * specified storage does not exist, create it.
+     * Creates a TaskList object.
+     * <p>
+     * Fills the task list using the data from the specified storage if it exist. If the storage does not exist, create
+     * it.
+     * </p>
      *
      * @param storage The storage to read the task list from and write the task list to.
      * @throws DukeException Indicates an error in loading from storage or creating the storage.
@@ -27,8 +30,7 @@ public class TaskList {
         if (storage.doesExist()) {
             loadFromStorage();
         } else {
-            tasks = new ArrayList<Task>();
-            storage.create();
+            createNewTaskListAndStorage();
         }
     }
 
@@ -36,7 +38,8 @@ public class TaskList {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < tasks.size(); ++i) {
-            stringBuilder.append(String.format("%d.%s\n", i + 1, tasks.get(i).toString()));
+            String taskStr = String.format("%d.%s\n", i + 1, tasks.get(i).toString());
+            stringBuilder.append(taskStr);
         }
 
         return stringBuilder.toString().trim();
@@ -121,14 +124,15 @@ public class TaskList {
 
     private void loadFromStorage() throws DukeException {
         List<Task> tasks = new ArrayList<Task>();
-        String[] taskStrs = storage.read().split("\n");
+        String[] taskStorageStrs = storage.read().split("\n");
 
-        for (String taskStr : taskStrs) {
-            if (taskStr.isEmpty()) {
+        for (String taskStorageStr : taskStorageStrs) {
+            if (taskStorageStr.isEmpty()) {
                 continue;
             }
 
-            tasks.add(createTask(taskStr.split(" \\| ")));
+            String[] args = taskStorageStr.split(Task.FIELD_SPLIT_REGEX);
+            tasks.add(createTask(args));
         }
 
         this.tasks = tasks;
@@ -147,14 +151,19 @@ public class TaskList {
         }
     }
 
+    private void createNewTaskListAndStorage() throws DukeException {
+        tasks = new ArrayList<Task>();
+        storage.create();
+    }
+
     private void writeToStorage() throws DukeException {
-        StringBuilder taskStr = new StringBuilder();
+        StringBuilder data = new StringBuilder();
 
         for (Task task : tasks) {
-            taskStr.append(task.getStorageStr());
-            taskStr.append("\n");
+            data.append(task.getStorageStr());
+            data.append("\n");
         }
 
-        storage.write(taskStr.toString());
+        storage.write(data.toString());
     }
 }

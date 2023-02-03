@@ -4,6 +4,14 @@ package duke.task;
  * Represents a task.
  */
 public abstract class Task {
+    /** Use to divide the fields of the task when writing to storage. */
+    protected static final char FIELD_DIVIDER = '|';
+
+    /** Use to split a task storage string into it's fields.*/
+    static final String FIELD_SPLIT_REGEX = String.format(" \\%c ", Task.FIELD_DIVIDER);
+
+    private static final String FIELD_DIVIDER_SUBSTITUTE = "\\|";
+
     private boolean isDone;
     private final String description;
 
@@ -37,7 +45,9 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        return String.format("[%s] %s", isDone ? "X" : " ", description);
+        String doneStatusStr = isDone ? "X" : " ";
+
+        return String.format("[%s] %s", doneStatusStr, description);
     }
 
     /**
@@ -46,36 +56,41 @@ public abstract class Task {
      * @return A string containing data about the task.
      */
     public String getStorageStr() {
-        return String.format("%s | %s", isDone, formatStrForStorage(description));
+        return String.format("%b %s %s", isDone, FIELD_DIVIDER, formatStrForStorage(description));
     }
 
     /**
-     * Formats a specified string so that it is suited for writing to storage. Returns the formatted string.
+     * Formats a string to be suited for writing to storage and returns the formatted string.
      *
-     * @param string The string to be formatted.
+     * @param str The string to be formatted.
      * @return The string formatted to be suited for writing to storage.
      */
-    protected static String formatStrForStorage(String string) {
-        return string.replace("|", "\\|");
+    protected static String formatStrForStorage(String str) {
+        return str.replace(Character.toString(FIELD_DIVIDER), FIELD_DIVIDER_SUBSTITUTE);
     }
 
     /**
      * Takes an array of strings that were loaded from storage, undo the formatting from
      * {@link duke.task.Task#formatStrForStorage}, and return the strings.
      *
-     * @param strings The strings that are to be formatted.
+     * @param strs The strings that are to be formatted.
      * @return The strings with formatting from {@link duke.task.Task#formatStrForStorage} undone.
      */
-    protected static String[] formatStrsFromStorage(String[] strings) {
-        String[] formatted = new String[strings.length];
+    protected static String[] formatStrsFromStorage(String[] strs) {
+        String[] formatted = new String[strs.length];
 
-        for (int i = 0; i < strings.length; ++i) {
-            formatted[i] = strings[i].replace("\\|", "|");
+        for (int i = 0; i < strs.length; ++i) {
+            formatted[i] = strs[i].replace(FIELD_DIVIDER_SUBSTITUTE, Character.toString(FIELD_DIVIDER));
         }
 
         return formatted;
     }
 
+    /**
+     * Returns true if the task is done. Otherwise, returns false.
+     *
+     * @return True if the task is done. False otherwise.
+     */
     protected boolean isDone() {
         return isDone;
     }

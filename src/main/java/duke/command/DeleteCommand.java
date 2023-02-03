@@ -20,32 +20,43 @@ public class DeleteCommand implements Command {
     public String run(String input, TaskList tasks) throws DukeException {
         int index = extractValidIndex(input, tasks);
         Task task = tasks.removeAt(index);
+
         return getMessage(tasks, task);
     }
 
     private int extractValidIndex(String input, TaskList tasks) throws DukeException {
         String argStr = input.replaceFirst("delete", "").trim();
 
-        if (argStr.isEmpty()) {
-            throw new DukeException("The task to be deleted must be specified!");
-        }
+        validateNonEmptyArg(argStr);
 
-        int index;
-        try {
-            index = Integer.parseInt(argStr) - 1;
-        } catch (NumberFormatException e) {
-            throw new DukeException("The index of the task to be deleted must be an integer!");
-        }
-
-        if (index >= tasks.size() || index < 0) {
-            throw new DukeException("The task to be deleted doesn't exist!");
-        }
+        int index = extractIntegerArg(argStr);
+        validateIndexRange(index, tasks);
 
         return index;
     }
 
+    private void validateNonEmptyArg(String argStr) throws DukeException {
+        if (argStr.isEmpty()) {
+            throw new DukeException("The task to be deleted must be specified!");
+        }
+    }
+
+    private int extractIntegerArg(String argStr) throws DukeException {
+        try {
+            return Integer.parseInt(argStr) - 1;
+        } catch (NumberFormatException e) {
+            throw new DukeException("The index of the task to be deleted must be an integer!");
+        }
+    }
+
+    private void validateIndexRange(int index, TaskList tasks) throws DukeException {
+        if (index >= tasks.size() || index < 0) {
+            throw new DukeException("The task to be deleted doesn't exist!");
+        }
+    }
+
     private String getMessage(TaskList tasks, Task task) {
-        return String.format("I've removed this task:\n  %s\nNow you have %d tasks in the list.",
-                task.toString(), tasks.size());
+        return String.format("I've removed this task:\n  %s\nNow you have %d tasks in the list.", task.toString(),
+                tasks.size());
     }
 }

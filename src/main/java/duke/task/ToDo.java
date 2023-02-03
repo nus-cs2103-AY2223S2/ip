@@ -7,6 +7,8 @@ import duke.utils.BooleanUtils;
  * Represents a to-do task.
  */
 public class ToDo extends Task {
+    private static final char SYMBOL = 'T';
+
     /**
      * Creates a ToDo object.
      *
@@ -25,31 +27,42 @@ public class ToDo extends Task {
      * @throws DukeException Indicates missing data or incorrect data type in args.
      */
     public static ToDo createFromStorage(String[] args) throws DukeException {
-        if (args.length != 3) {
-            throw new DukeException("A to-do in storage has missing data!");
-        }
+        validateNoMissingData(args);
 
-        if (!BooleanUtils.isBooleanStr(args[1])) {
-            throw new DukeException("A to-do in storage has an incorrect data type!");
-        }
+        String[] formattedArgs = Task.formatStrsFromStorage(args);
 
-        args = Task.formatStrsFromStorage(args);
+        boolean isDone = extractValidIsDone(formattedArgs);
+        String description = formattedArgs[2];
 
-        return new ToDo(Boolean.parseBoolean(args[1]), args[2]);
+        return new ToDo(isDone, description);
     }
 
     @Override
     public String getStorageStr() {
-        return String.format("T | %s", super.getStorageStr());
+        return String.format("%c %c %s", SYMBOL, FIELD_DIVIDER, super.getStorageStr());
     }
 
     @Override
     public String toString() {
-        return String.format("[T]%s", super.toString());
+        return String.format("[%c]%s", SYMBOL, super.toString());
     }
 
     @Override
     protected Task createCopy() {
         return new ToDo(isDone(), getDescription());
+    }
+
+    private static void validateNoMissingData(String[] args) throws DukeException {
+        if (args.length != 3) {
+            throw new DukeException("A to-do in storage has missing data!");
+        }
+    }
+
+    private static boolean extractValidIsDone(String[] formattedArgs) throws DukeException {
+        if (!BooleanUtils.isBooleanStr(formattedArgs[1])) {
+            throw new DukeException("A to-do in storage has an incorrect data type!");
+        }
+
+        return Boolean.parseBoolean(formattedArgs[1]);
     }
 }

@@ -8,12 +8,15 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 /**
- * Handles displaying of messages and user interactions via the graphical user interface.
+ * Handles displaying of messages and user interactions via the GUI.
  */
 public class Gui implements Ui {
+    private static final double STAGE_WIDTH = 600;
+    private static final double STAGE_HEIGHT = 600;
+
     private final Stage stage;
 
-    private final MainWindow mainWindow;
+    private MainWindow mainWindow;
 
     /**
      * Creates a Gui object.
@@ -23,13 +26,10 @@ public class Gui implements Ui {
      */
     public Gui(Stage stage, BiConsumer<String, Consumer<String>> inputHandler) {
         this.stage = stage;
-
         mainWindow = new MainWindow(inputHandler);
-        stage.setScene(new Scene(mainWindow));
 
-        stage.setMinWidth(600);
-        stage.setMinHeight(600);
-        stage.setResizable(false);
+        setupStageScene();
+        setupStageSize();
     }
 
     @Override
@@ -40,5 +40,15 @@ public class Gui implements Ui {
     @Override
     public void print(String message) {
         mainWindow.printDukeMessage(message);
+    }
+
+    private void setupStageScene() {
+        stage.setScene(new Scene(mainWindow));
+    }
+
+    private void setupStageSize() {
+        stage.setMinWidth(STAGE_WIDTH);
+        stage.setMinHeight(STAGE_HEIGHT);
+        stage.setResizable(false);
     }
 }
