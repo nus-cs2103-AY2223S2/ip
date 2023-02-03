@@ -114,12 +114,12 @@ public class TaskList {
      *
      * @param num The 1-based index of the task.
      * @return An encouraging confirmation message.
-     * @see cbot.task.Task#yesDo()
+     * @see Task#mark()
      */
     public String mark(int num) {
         int index = num - 1;
 
-        if (tasks.get(index).yesDo()) {
+        if (tasks.get(index).mark()) {
             return "Woohoo! You've completed:\n" + GAP
                     + tasks.get(index).toString();
         } else {
@@ -133,12 +133,12 @@ public class TaskList {
      *
      * @param num The 1-based index of the task.
      * @return A consoling confirmation message.
-     * @see cbot.task.Task#noDo()
+     * @see Task#unmark()
      */
     public String unmark(int num) {
         int index = num - 1;
 
-        if (tasks.get(index).noDo()) {
+        if (tasks.get(index).unmark()) {
             return "Aw, okay :( I've unmarked:\n" + GAP
                     + tasks.get(index).toString();
         } else {

@@ -97,6 +97,10 @@ public class UI {
             sb.append(BLANK).append(s).append("\n");
         }
 
+        if (!arr.isEmpty()) {
+            sb.deleteCharAt(sb.length() - 1);
+        }
+
         return sb.toString();
     }
 }

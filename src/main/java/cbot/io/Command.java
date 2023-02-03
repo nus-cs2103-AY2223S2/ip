@@ -10,73 +10,54 @@ public enum Command {
     //NAME      (str,           hasText,    save),
     /** Ends the Cbot session. */
     BYE         ("bye"),
-
     /** Displays the current list of tasks. */
     LIST        ("list"),
-
     /** Marks the stipulated task as done. */
     MARK        ("mark ",       true,       true),
-
     /** Catches MARK calls with no input. */
     MARK_BAD    ("mark"),
-
     /** Marks the stipulated task as not done. */
     UNMARK      ("unmark ",     true,       true),
-
     /** Catches UNMARK calls with no input. */
     UNMARK_BAD  ("unmark"),
-
     /** Deletes the stipulated task from the list. */
     DELETE      ("delete ",     true,       true),
-
     /** Catches DELETE calls with no input. */
     DELETE_BAD  ("delete"),
-
+    /** Deletes the stipulated task from the list. Same as DELETE. */
+    REMOVE      ("remove ",     true,       true),
+    /** Catches REMOVE calls with no input. */
+    REMOVE_BAD  ("remove"),
     /** Adds a To-Do task to the list. */
     TODO        ("todo ",       true,       true),
-
     /** Catches TODO calls with no input. */
     TODO_BAD    ("todo"),
-
     /** Adds a Deadline task to the list. */
     DEADLINE    ("deadline ",   true,       true),
-
     /** Catches DEADLINE calls with no input. */
     DEADLINE_BAD("deadline"),
-
     /** Adds an Event task to the list. */
     EVENT       ("event ",      true,       true),
-
     /** Catches EVENT calls with no input. */
     EVENT_BAD   ("event"),
-
     /** Sorts the list by date and description. */
     SORT        ("sort",        false,      true),
-
     /** Displays the tasks that fall before the given date. */
     BEFORE      ("before ",     true),
-
     /** Catches BEFORE calls with no input. */
     BEFORE_BAD  ("before"),
-
     /** Displays the tasks that fall after the given date. */
     AFTER       ("after ",      true),
-
     /** Catches AFTER calls with no input. */
     AFTER_BAD   ("after"),
-
     /** Displays the tasks that match the given filter. */
     FILTER      ("filter ",     true),
-
     /** Catches FILTER calls with no input. */
     FILTER_BAD  ("filter"),
-
     /** Displays the tasks that contain the input. */
     FIND        ("find ",       true),
-
     /** Catches FIND calls with no input. */
     FIND_BAD    ("find"),
-
     /** Catches all other inputs. */
     NONE        ("");
 

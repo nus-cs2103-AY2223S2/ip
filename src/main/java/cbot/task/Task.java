@@ -107,13 +107,10 @@ public class Task implements Comparable<Task> {
      *
      * @return Whether the status changed from not done to done.
      */
-    public boolean yesDo() {
-        if (this.isDone) {
-            return false;
-        } else {
-            this.isDone = true;
-            return true;
-        }
+    public boolean mark() {
+        boolean b = !this.isDone;
+        this.isDone = true;
+        return b;
     }
 
     /**
@@ -121,13 +118,10 @@ public class Task implements Comparable<Task> {
      *
      * @return Whether the status changed from done to not done.
      */
-    public boolean noDo() {
-        if (this.isDone) {
-            this.isDone = false;
-            return true;
-        } else {
-            return false;
-        }
+    public boolean unmark() {
+        boolean b = this.isDone;
+        this.isDone = false;
+        return b;
     }
 
     /**

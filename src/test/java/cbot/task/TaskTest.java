@@ -69,53 +69,53 @@ public class TaskTest {
     @Test
     public void testYesDoTrue1() {
         Task t = new Task("test", false);
-        assertTrue(t.yesDo());
+        assertTrue(t.mark());
     }
     
     @Test
     public void testYesDoTrue2() {
         Task t = new Task("test", true);
-        t.noDo();
-        assertTrue(t.yesDo());
+        t.unmark();
+        assertTrue(t.mark());
     }
     
     @Test
     public void testYesDoFalse1() {
         Task t = new Task("test", true);
-        assertFalse(t.yesDo());
+        assertFalse(t.mark());
     }
     
     @Test
     public void testYesDoFalse2() {
         Task t = new Task("test", false);
-        t.yesDo();
-        assertFalse(t.yesDo());
+        t.mark();
+        assertFalse(t.mark());
     }
     
     @Test
     public void testNoDoTrue1() {
         Task t = new Task("test", true);
-        assertTrue(t.noDo());
+        assertTrue(t.unmark());
     }
     
     @Test
     public void testNoDoTrue2() {
         Task t = new Task("test", false);
-        t.yesDo();
-        assertTrue(t.noDo());
+        t.mark();
+        assertTrue(t.unmark());
     }
     
     @Test
     public void testNoDoFalse1() {
         Task t = new Task("test", false);
-        assertFalse(t.noDo());
+        assertFalse(t.unmark());
     }
     
     @Test
     public void testNoDoFalse2() {
         Task t = new Task("test", true);
-        t.noDo();
-        assertFalse(t.noDo());
+        t.unmark();
+        assertFalse(t.unmark());
     }
     
     @Test

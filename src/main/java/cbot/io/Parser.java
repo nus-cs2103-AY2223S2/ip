@@ -14,7 +14,7 @@ import cbot.time.TimeStuff;
  * Handles much of the parsing of user inputs.
  */
 public class Parser {
-    private Command c;
+    private Command command;
     private String text;
 
     /**
@@ -26,7 +26,7 @@ public class Parser {
      * @see Command
      */
     public Parser(String input) throws PoorInputException {
-        this.c = null;
+        this.command = null;
         this.text = "";
 
         boolean matchFound = false;
@@ -37,7 +37,7 @@ public class Parser {
 
         for (Command c : Command.values()) {
             if (c.matches(input)) {
-                this.c = c;
+                this.command = c;
                 this.text = c.getText(input);
                 matchFound = true;
                 break;
@@ -55,7 +55,7 @@ public class Parser {
      * @return true if the stored Command is BYE.
      */
     public boolean isBye() {
-        return (this.c == Command.BYE);
+        return (this.command == Command.BYE);
     }
 
     /**
@@ -64,7 +64,7 @@ public class Parser {
      * @return Whether the task list needs to be saved after the Command.
      */
     public boolean needSave() {
-        return this.c.needSave();
+        return this.command.needSave();
     }
 
     /**
@@ -79,11 +79,11 @@ public class Parser {
     public String respond(TaskList tl) throws PoorInputException, DateTimeParseException {
         String output;
 
-        if (this.c.isMissingText(this.text)) {
+        if (this.command.isMissingText(this.text)) {
             throw new PoorInputException("That command needs an input");
         }
 
-        switch (this.c) {
+        switch (this.command) {
         case BYE:
             output = UI.sayBye();
             break;
@@ -128,6 +128,8 @@ public class Parser {
             break;
 
         case DELETE:
+            // Fallthrough
+        case REMOVE:
             try {
                 int num = Integer.parseInt(this.text);
 
