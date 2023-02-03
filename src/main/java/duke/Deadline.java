@@ -18,7 +18,7 @@ public class Deadline extends Task {
      * @param endTime Task due date.
      */
     public Deadline(String taskDetails, String endTime) {
-        super(s);
+        super(taskDetails);
         this.endTime = LocalDate.parse(endTime, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
 
