@@ -89,14 +89,17 @@ public class Parser {
         } else if (splitCommand.length > 2) {
             throw new DukeException(GuiText.generateIndexErrorMessage(IndexErrorType.TOO_MANY_NUMBERS));
         }
+
         try {
             int taskIndex = Integer.parseInt(splitCommand[1]) - 1;
             if (uppercaseCommand.equals(CommandType.MARK.name())) {
                 return new MarkCommand(taskIndex);
             } else if (uppercaseCommand.equals(CommandType.UNMARK.name())) {
                 return new UnmarkCommand(taskIndex);
-            } else {
+            } else if (uppercaseCommand.equals(CommandType.DELETE.name())) {
                 return new DeleteCommand(taskIndex);
+            } else {
+                throw new DukeException(GuiText.generateGenericErrorMessage());
             }
         } catch (NumberFormatException e) {
             throw new DukeException(GuiText.generateIndexErrorMessage(IndexErrorType.NOT_A_NUMBER));
@@ -126,7 +129,7 @@ public class Parser {
                 task = addEvent(command, line);
                 break;
             default:
-                break;
+                throw new DukeException(GuiText.generateGenericErrorMessage());
             }
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException(GuiText.generateMissingArgumentErrorMessage(taskType));
@@ -147,9 +150,11 @@ public class Parser {
      */
     private static Task addTodo(String command, String line) throws DukeException {
         String description = line.split(command)[1].trim();
+
         if (description.isEmpty()) {
             throw new DukeException(GuiText.generateMissingArgumentErrorMessage(TaskType.TODO));
         }
+
         return Task.createTask(TaskType.TODO, description);
     }
 
@@ -163,11 +168,16 @@ public class Parser {
      */
     private static Task addDeadline(String command, String line) throws DukeException {
         String details = line.split(command)[1].trim();
-        String name = details.split(Parser.BY_INDICATOR)[0].trim();
-        String deadline = details.split(Parser.BY_INDICATOR)[1].trim();
+
+        String[] detailsSplitByBy = details.split(Parser.BY_INDICATOR);
+        
+        String name = detailsSplitByBy[0].trim();
+        String deadline = detailsSplitByBy[1].trim();
+
         if (name.isEmpty() || deadline.isEmpty()) {
             throw new DukeException(GuiText.generateMissingArgumentErrorMessage(TaskType.DEADLINE));
         }
+
         return Task.createTask(TaskType.DEADLINE, name, deadline);
     }
 
@@ -181,13 +191,21 @@ public class Parser {
      */
     private static Task addEvent(String command, String line) throws DukeException {
         String details = line.split(command)[1].trim();
-        String name = details.split(Parser.FROM_INDICATOR)[0].trim();
-        String from = details.split(Parser.FROM_INDICATOR)[1].split(Parser.TO_INDICATOR)[0].trim();
-        String to = details.split(Parser.FROM_INDICATOR)[1].split(Parser.TO_INDICATOR)[1].trim();
-        if (name.isEmpty() || from.isEmpty() || to.isEmpty()) {
+
+        String[] detailsSplitByFrom = details.split(Parser.FROM_INDICATOR);
+
+        String name = detailsSplitByFrom[0].trim();
+
+        String[] splitByTo = detailsSplitByFrom[1].split(Parser.TO_INDICATOR);
+
+        String startDate = splitByTo[0].trim();
+        String endDate = splitByTo[1].trim();
+
+        if (name.isEmpty() || startDate.isEmpty() || endDate.isEmpty()) {
             throw new DukeException(GuiText.generateMissingArgumentErrorMessage(TaskType.EVENT));
         }
-        return Task.createTask(TaskType.EVENT, name, from, to);
+
+        return Task.createTask(TaskType.EVENT, name, startDate, endDate);
     }
 
     /**

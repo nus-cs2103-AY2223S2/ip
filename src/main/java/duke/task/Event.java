@@ -4,29 +4,41 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/** Class that represents an event */
 public class Event extends Task {
 
-    private LocalDate from;
-    private LocalDate to;
+    private LocalDate startDate;
+    private LocalDate endDate;
 
-    public Event(String name, String from, String to) throws DateTimeParseException {
+    /**
+     * Constructs an Event object with
+     * the given name, start date,
+     * and end date.
+     *
+     * @param name Name of this event.
+     * @param startDate Date that this event starts.
+     * @param endDate Date that this event ends.
+     * @throws DateTimeParseException if startDate or endDate are not validly formatted dates.
+     */
+    public Event(String name, String startDate, String endDate) throws DateTimeParseException {
         super(name);
-        this.from = LocalDate.parse(from);
-        this.to = LocalDate.parse(to);
-        assert this.from != null : "From should not be null";
-        assert this.to != null : "To should not be null";
+        this.startDate = LocalDate.parse(startDate);
+        this.endDate = LocalDate.parse(endDate);
+        assert this.startDate != null : "Start date should not be null";
+        assert this.endDate != null : "End date should not be null";
     }
 
     @Override
     public String toString() {
         return "[E] " + super.toString() + " (from: "
-            + this.from.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " to: "
-            + this.to.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+            + this.startDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " to: "
+            + this.endDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
     @Override
     public String getFileRepresentation() {
-        return "E" + "@" + (super.isDone() ? "1" : "0") + "@" + this.getName() + "@" + this.from + "@" + this.to;
+        return "E" + "@" + (super.isDone() ? "1" : "0")
+                + "@" + this.getName() + "@" + this.startDate + "@" + this.endDate;
     }
 
 }

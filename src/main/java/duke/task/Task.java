@@ -1,6 +1,7 @@
 package duke.task;
 
 import duke.exception.DukeException;
+import duke.gui.GuiText;
 
 /** Class that represents a task */
 public abstract class Task {
@@ -72,6 +73,14 @@ public abstract class Task {
         return newTask;
     }
 
+    /**
+     * Checks if the name of this task
+     * contains the given keyword.
+     *
+     * @param keyword Keyword to check for.
+     * @return true if name of this task contains the
+     *         given keyword, otherwise false.
+     */
     public boolean nameContainsKeyword(String keyword) {
         return this.name.contains(keyword);
     }
@@ -93,11 +102,11 @@ public abstract class Task {
             String by = arguments[1];
             return new Deadline(name, by);
         case EVENT:
-            String from = arguments[1];
-            String to = arguments[2];
-            return new Event(name, from, to);
+            String startDate = arguments[1];
+            String endDate = arguments[2];
+            return new Event(name, startDate, endDate);
         default:
-            return null;
+            throw new DukeException(GuiText.generateGenericErrorMessage());
         }
     }
 

@@ -72,8 +72,8 @@ public class Duke {
      * @return Text indicating whether loading
      *         from storage was successful.
      */
-    public String displayLoadStatus() {
-        return this.guiText.showLoad(isLoadSuccessful);
+    public String displayLoadFromStorageStatus() {
+        return this.guiText.showLoadFromStorageStatus(isLoadSuccessful);
     }
 
 }

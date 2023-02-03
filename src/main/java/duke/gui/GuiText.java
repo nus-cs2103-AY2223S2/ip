@@ -106,7 +106,7 @@ public class GuiText {
     }
 
     /**
-     * Generates the command to do with
+     * Generates the error message to do with
      * receiving an unknown command.
      *
      * @return Error message.
@@ -118,7 +118,7 @@ public class GuiText {
     }
 
     /**
-     * Generates the command to do with
+     * Generates the error message to do with
      * not receiving a keyword when finding
      * tasks.
      *
@@ -126,6 +126,16 @@ public class GuiText {
      */
     public static String generateMissingKeywordErrorMessage() {
         return "I'm lost. You need to give me at least one keyword to look for!";
+    }
+
+    /**
+     * Generates the generic error message for
+     * when something goes wrong.
+     *
+     * @return Error message.
+     */
+    public static String generateGenericErrorMessage() {
+        return "Something's gone wrong!";
     }
 
     /**
@@ -224,14 +234,14 @@ public class GuiText {
      * @param isSuccessful Whether loading from storage succeeded.
      * @return Text showing what happened when loading from storage.
      */
-    public String showLoad(boolean isSuccessful) {
+    public String showLoadFromStorageStatus(boolean isSuccessful) {
         return isSuccessful ? "Tasks successfully loaded from storage!" : "Loading from storage failed.";
     }
 
     public String showHelp() {
         String acceptedCommands = "Here are all the commands that I accept!\n"
                 + "\n";
-        return acceptedCommands + CommandType.getAllCommandFormats();
+        return acceptedCommands + CommandType.getAllCommandFormatString();
     }
 
 }
