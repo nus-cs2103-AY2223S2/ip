@@ -19,15 +19,15 @@ public class UnmarkCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
-            int i = Integer.parseInt(this.details);
-            Task taskToMark = tasks.get(i-1);
+            int parseInt = Integer.parseInt(this.details);
+            Task taskToMark = tasks.get(parseInt-1);
             taskToMark.markUnmark(false);
             storage.update(tasks);
             ui.show("OK, I've marked this task as not done yet:");
             ui.show(String.valueOf(taskToMark));
-        } catch (NumberFormatException err) {
+        } catch (NumberFormatException e) {
             throw new DukeException("☹ OOPS!!! " + this.details + " is not a valid integer for indexing the task list.");
-        } catch (IndexOutOfBoundsException err) {
+        } catch (IndexOutOfBoundsException e) {
             throw new DukeException("☹ OOPS!!! There are less than " + this.details + " tasks.");
         }
     }
