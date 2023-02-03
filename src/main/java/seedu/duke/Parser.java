@@ -11,7 +11,7 @@ public class Parser {
      * Enum for Commands for DukeBot.
      */
     public enum Commands {
-        BYE, LIST, FIND, MARK, UNMARK, DELETE, TODO, DEADLINE, EVENT }
+        BYE, LIST, FIND, MARK, UNMARK, DELETE, TODO, DEADLINE, EVENT, HELP}
 
     /**
      * The Parser parses the commands based on the user input.
@@ -96,6 +96,9 @@ public class Parser {
                 return "Hey! The description of an event cannot be empty!";
             }
             break;
+        }
+        case HELP: {
+            return "Visit this page for a detailed guide on how to use Duke!\n\n";
         }
         default:
             return "Invalid argument";
