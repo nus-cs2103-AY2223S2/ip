@@ -14,11 +14,11 @@ public class Deadline extends Task {
     /**
      * Returns an instance of Deadline object mark undone.
      *
-     * @param taskDetails Task details.
+     * @param ss Task details.
      * @param endTime Task due date.
      */
-    public Deadline(String taskDetails, String endTime) {
-        super(s);
+    public Deadline(String ss, String endTime) {
+        super(ss);
         this.endTime = LocalDate.parse(endTime, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
 

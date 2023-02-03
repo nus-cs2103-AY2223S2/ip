@@ -82,6 +82,8 @@ public class Duke {
                     taskList.addEventEvent(userInput);
                     storage.overwriteFile(taskList);
                     break;
+                case FIND:
+                    taskList.find(userInput);
             }
         }
         ui.printOutro();
