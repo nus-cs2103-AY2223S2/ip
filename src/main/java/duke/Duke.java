@@ -22,7 +22,7 @@ public class Duke {
      * @param filePath The file path given in String.
      * @throws IOException Throws if there is an I/O error.
      */
-    public Duke(String filePath) throws IOException {
+    public Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
         this.tasks = new TaskList(storage.load());
@@ -32,7 +32,7 @@ public class Duke {
      * The program runs the Duke file with the correct file path.
      * @param args Command line arguments.
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         new Duke("data/duke.txt").run();
     }
 
@@ -40,7 +40,7 @@ public class Duke {
      * Runs the Duke program.
      * @throws IOException Throws if there is an I/O error.
      */
-    public void run() throws IOException {
+    public void run() {
         boolean isContinueConvo = true;
         while (isContinueConvo) {
             try {
@@ -51,6 +51,8 @@ public class Duke {
                 isContinueConvo = c.isContinueConvo();
             } catch (DukeException e) {
                 ui.showError(e);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
             ui.showLine();
         }

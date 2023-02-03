@@ -26,12 +26,16 @@ public class Storage {
      * @param filePath The filepath for the database.
      * @throws IOException Throws if there is an I/O error.
      */
-    public Storage(String filePath) throws IOException {
+    public Storage(String filePath) {
         this.filePath = filePath;
         this.file = new File(filePath);
         if (!this.file.exists()) {
             new File("data").mkdir();
-            this.file.createNewFile();
+            try {
+                this.file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -40,27 +44,33 @@ public class Storage {
      * @return The database
      * @throws IOException Throws if there is an I/O error.
      */
-    public ArrayList<Task> load() throws IOException {
+    public ArrayList<Task> load() {
         ArrayList<Task> db = new ArrayList<Task>(100);
-        BufferedReader brFile = new BufferedReader(new FileReader(this.filePath));
-        String input;
-        while ((input = brFile.readLine()) != null) {
-            String[] temp = input.split(" \\| ");
-            Task task;
-            if (temp[0].equals("T")) {
-                task = new ToDo(temp[2]);
-            } else if (temp[0].equals("D")) {
-                task = new Deadline(temp[2], temp[3]);
-            } else {
-                task = new Event(temp[2], temp[3], temp[4]);
-            }
+        BufferedReader brFile;
+        try {
+            brFile = new BufferedReader(new FileReader(this.filePath));
+            String input;
+            while ((input = brFile.readLine()) != null) {
+                String[] temp = input.split(" \\| ");
+                Task task;
+                if (temp[0].equals("T")) {
+                    task = new ToDo(temp[2]);
+                } else if (temp[0].equals("D")) {
+                    task = new Deadline(temp[2], temp[3]);
+                } else {
+                    task = new Event(temp[2], temp[3], temp[4]);
+                }
 
-            if (temp[1].equals("X")) {
-                task.setDone();
+                if (temp[1].equals("X")) {
+                    task.setDone();
+                }
+                db.add(task);
+                brFile.close();
             }
-            db.add(task);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        brFile.close();
+
         return db;
     }
 
@@ -69,7 +79,7 @@ public class Storage {
      * @param tasks The tasks to be stored.
      * @throws IOException Throws if there is an I/O error.
      */
-    public void store(TaskList tasks) throws IOException {
+    public void store(TaskList tasks) {
         List<Task> db = tasks.getTasks();
         StringBuilder sb = new StringBuilder();
         for (Task task: db) {
@@ -94,9 +104,13 @@ public class Storage {
 
             sb.append("\n");
         }
-        FileWriter fw = new FileWriter(this.file, false);
-        fw.write(sb.toString());
-        fw.close();
+        try {
+            FileWriter fw = new FileWriter(this.file, false);
+            fw.write(sb.toString());
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**

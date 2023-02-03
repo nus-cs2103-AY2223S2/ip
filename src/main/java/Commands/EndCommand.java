@@ -1,7 +1,5 @@
 package commands;
 
-import java.io.IOException;
-
 import storage.Storage;
 import storage.TaskList;
 import ui.Ui;
@@ -17,7 +15,7 @@ public class EndCommand extends Command {
      * @param storage The storage.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.showFarewell();
         storage.store(tasks);
     }

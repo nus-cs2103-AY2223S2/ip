@@ -61,7 +61,6 @@ public class Ui {
     /**
      * Print the error message under a DukeException.
      * @param e A DukeException error.
-     * @throws IOException Throws if there is an I/O error.
      */
     public void showError(DukeException e) {
         System.out.println(e.getMessage());
@@ -71,9 +70,13 @@ public class Ui {
      * Print the farewell message.
      * @throws IOException Throws if there is an I/O error.
      */
-    public void showFarewell() throws IOException {
+    public void showFarewell() {
         System.out.println(FAREWELL);
-        br.close();
+        try {
+            br.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
