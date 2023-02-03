@@ -34,8 +34,13 @@ public class DeadlineTask extends Task {
         this(description, false, by);
     }
 
-    public LocalDate getBy() {
-        return by;
+    /**
+     * Returns true if the target date is before or during this event.
+     * @param targetDate The mentioned date.
+     * @return True if the given date occurs before or during this event.
+     */
+    public boolean checkDateIsBefore(LocalDate targetDate) {
+        return by.isEqual(targetDate) || by.isAfter(targetDate);
     }
 
     /**
