@@ -26,6 +26,7 @@ import book.task.ToDo;
 public final class Parser {
     /**
      * Parses {@code String} input and returns the relevant {@code Command}.
+     *
      * @param command {@code String} input to be parsed and returned as a {@code Command}.
      * @return {@code Command} parsed from the {@code String} input, initialized with relevant
      *         additional arguments.
@@ -75,6 +76,7 @@ public final class Parser {
     /**
      * Parses {@code String} input representing Date/Time and returns the corresponding
      * {@code LocalDateTime}.
+     *
      * @param dateTime {@code String} input representing Date/Time to be parsed.
      * @return {@code LocalDateTime} corresponding to the given {@code String} input.
      * @throws DateTimeParseException if an error occurs when parsing the {@code String} input.

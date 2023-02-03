@@ -6,6 +6,7 @@ package book.task;
 public class ToDo extends Task {
     /**
      * Initializes an {@code ToDo} object.
+     *
      * @param description {@code String} description of the {@code ToDo} object.
      */
     public ToDo(String description) {
@@ -14,6 +15,7 @@ public class ToDo extends Task {
 
     /**
      * Returns the {@code String} representation of a {@code ToDo} for saving.
+     *
      * @return {@code String} representation of a {@code ToDo} for saving.
      */
     @Override
@@ -23,6 +25,7 @@ public class ToDo extends Task {
 
     /**
      * Returns the {@code String} representation of the {@code ToDo}.
+     *
      * @return {@code String} representation of the {@code ToDo}.
      */
     @Override

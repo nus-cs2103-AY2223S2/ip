@@ -13,6 +13,7 @@ public class Event extends Task {
 
     /**
      * Initializes an {@code Event} object.
+     *
      * @param description {@code String} description of the {@code Task} object.
      * @param startDateTime {@code LocalDateTime} representing the start of the {@code Event}.
      * @param endDateTime {@code LocalDateTime} representing the end of the {@code Event}.
@@ -25,6 +26,7 @@ public class Event extends Task {
 
     /**
      * Returns the {@code String} representation of a {@code Event} for saving.
+     *
      * @return {@code String} representation of a {@code Event} for saving.
      */
     @Override
@@ -36,6 +38,7 @@ public class Event extends Task {
 
     /**
      * Returns the {@code String} representation of the {@code Event}.
+     *
      * @return {@code String} representation of the {@code Event}.
      */
     @Override

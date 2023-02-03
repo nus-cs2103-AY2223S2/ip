@@ -7,6 +7,7 @@ package book.exception;
 public class SaveException extends BookException {
     /**
      * Initializes a {@code SaveException}.
+     *
      * @param message {@code String} message associated with the {@code SaveException}.
      */
     public SaveException(String message) {

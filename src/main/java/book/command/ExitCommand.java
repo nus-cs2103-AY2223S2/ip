@@ -11,6 +11,7 @@ import book.exception.SaveException;
 public class ExitCommand extends Command {
     /**
      * Updates the {@code Storage}, prints the relevant output to the {@code Ui}.
+     *
      * @param storage {@code Storage} associated with the {@code Command}.
      * @param list {@code TaskList} associated with the {@code Command}.
      * @param ui {@code Ui} associated with the {@code Command}.
@@ -25,6 +26,7 @@ public class ExitCommand extends Command {
 
     /**
      * Returns {@code true}.
+     *
      * @return {@code true}.
      */
     @Override

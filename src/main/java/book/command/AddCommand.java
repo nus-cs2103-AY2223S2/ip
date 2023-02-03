@@ -15,6 +15,7 @@ public class AddCommand extends Command {
 
     /**
      * Initializes an {@code AddCommand} object.
+     *
      * @param task {@code Task} to be added by the {@code AddCommand}.
      */
     public AddCommand(Task task) {
@@ -24,6 +25,7 @@ public class AddCommand extends Command {
     /**
      * Adds the associated {@code Task} to the {@code TaskList} and updates the {@code Storage},
      * prints the relevant output to the {@code Ui}.
+     *
      * @param storage {@code Storage} associated with the {@code AddCommand}.
      * @param list {@code TaskList} associated with the {@code AddCommand}.
      * @param ui {@code Ui} associated with the {@code AddCommand}.

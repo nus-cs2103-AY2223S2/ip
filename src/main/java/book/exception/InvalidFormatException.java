@@ -6,6 +6,7 @@ package book.exception;
 public class InvalidFormatException extends BookException {
     /**
      * Initializes an {@code InvalidFormatException}.
+     *
      * @param message {@code String} message associated with the {@code InvalidFormatException}.
      */
     public InvalidFormatException(String message) {

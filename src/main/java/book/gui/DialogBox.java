@@ -28,6 +28,7 @@ public class DialogBox extends HBox {
     /**
      * Initializes a {@code DialogBox} instance with the given {@code ImageView} image and
      * {@code Label} containing the {@code String} text, and handles the formatting and layout.
+     *
      * @param image {@code ImageView} image used in the {@code DialogBox}.
      * @param label {@code Label} containing text used in the {@code DialogBox}.
      */

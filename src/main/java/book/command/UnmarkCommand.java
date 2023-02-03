@@ -15,6 +15,7 @@ public class UnmarkCommand extends Command {
 
     /**
      * Initializes a {@code UnmarkCommand} object.
+     *
      * @param index {@code int} 1-based index of the {@code Task} to be unmarked.
      */
     public UnmarkCommand(int index) {
@@ -24,6 +25,7 @@ public class UnmarkCommand extends Command {
     /**
      * Unmarks the {@code Task} at the associated {@code int} index in the {@code TaskList} as
      * complete and updates the {@code Storage}, prints the relevant output to the {@code Ui}.
+     *
      * @param storage {@code Storage} associated with the {@code Command}.
      * @param list {@code TaskList} associated with the {@code Command}.
      * @param ui {@code Ui} associated with the {@code Command}.

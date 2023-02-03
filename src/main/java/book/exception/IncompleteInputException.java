@@ -6,6 +6,7 @@ package book.exception;
 public class IncompleteInputException extends BookException {
     /**
      * Initializes an {@code IncompleteInputException}.
+     *
      * @param message {@code String} message associated with the {@code IncompleteInputException}.
      */
     public IncompleteInputException(String message) {

@@ -17,6 +17,7 @@ public abstract class Task {
 
     /**
      * Initializes a {@code Task} object.
+     *
      * @param description {@code String} description of the {@code Task} object.
      */
     public Task(String description) {
@@ -40,16 +41,26 @@ public abstract class Task {
 
     /**
      * Returns the {@code String} representation of a {@code Task} for saving.
+     *
      * @return {@code String} representation of a {@code Task} for saving.
      */
     public abstract String saveString();
 
+    /**
+     * Returns {@code true} if the {@code String} description contains {@code String} keyword, else
+     * return {@code false}.
+     *
+     * @param keyword {@code String} keyword to check is in {@code String} description.
+     * @return {@code true} if the {@code String} description contains {@code String} keyword, else
+     *         return {@code false}.
+     */
     public boolean containsKeyword(String keyword) {
         return this.description.contains(keyword);
     }
 
     /**
      * Returns the {@code String} representation of the {@code Task}.
+     *
      * @return {@code String} representation of the {@code Task}.
      */
     @Override

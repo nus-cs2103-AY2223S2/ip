@@ -61,6 +61,7 @@ public class Gui extends Application {
 
     /**
      * Overrides the {@code start} method for JavaFx.
+     *
      * @param stage the primary stage for this application, onto which the application scene can be
      *         set. Applications may create other stages, if needed, but they will not be primary
      *         stages.

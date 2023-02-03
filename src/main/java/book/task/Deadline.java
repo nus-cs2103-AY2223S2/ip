@@ -7,11 +7,11 @@ import java.time.LocalDateTime;
  */
 public class Deadline extends Task {
     /** {@code LocalDateTime} representing the deadline of the {@code Deadline}. */
-
     private LocalDateTime dateTime;
 
     /**
      * Initializes a {@code Deadline} object.
+     *
      * @param description {@code String} description of the {@code Task}.
      * @param dateTime {@code LocalDateTime} representing the deadline of the {@code Deadline}.
      */
@@ -22,6 +22,7 @@ public class Deadline extends Task {
 
     /**
      * Returns the {@code String} representation of a {@code Deadline} for saving.
+     *
      * @return {@code String} representation of a {@code Deadline} for saving.
      */
     @Override
@@ -32,6 +33,7 @@ public class Deadline extends Task {
 
     /**
      * Returns the {@code String} representation of the {@code Deadline}.
+     *
      * @return {@code String} representation of the {@code Deadline}.
      */
     @Override

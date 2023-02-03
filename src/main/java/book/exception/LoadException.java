@@ -7,6 +7,7 @@ package book.exception;
 public class LoadException extends BookException {
     /**
      * Initializes a {@code LoadException}.
+     *
      * @param message {@code String} message associated with the {@code LoadException}.
      */
     public LoadException(String message) {
