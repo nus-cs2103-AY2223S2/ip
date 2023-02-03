@@ -21,14 +21,14 @@ public class ToDo extends Task {
      * @return the to do in string format
      */
     public String saveTask() {
-        String completed = this.isDone? "1":"0";
+        String completed = this.isDone ? "1" : "0";
         return this.tag + " | " + completed + " | "
                 + this.description;
     }
 
     @Override
     public String toString() {
-        return "[T]" + super.toString() +"\n";
+        return "[T]" + super.toString() + "\n";
     }
 
     @Override

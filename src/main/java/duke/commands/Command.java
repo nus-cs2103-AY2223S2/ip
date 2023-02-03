@@ -15,7 +15,7 @@ public abstract class Command {
      *
      * @param tag to know what command is used.
      */
-    public Command(String tag){
+    public Command(String tag) {
         this.isEnd = tag.equals("END");
         this.tag = tag;
     }
@@ -34,5 +34,7 @@ public abstract class Command {
      *
      * @return boolean to tell if command is an exit command.
      */
-    public boolean isExit(){return isEnd;}
+    public boolean isExit() {
+        return isEnd;
+    }
 }

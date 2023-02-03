@@ -6,10 +6,10 @@ import duke.tasklist.TaskList;
 /**
  * Command to add a "to do" task to a task list.
  */
-public class ToDoCommand extends Command{
+public class ToDoCommand extends Command {
     private String requestContent;
 
-    public ToDoCommand(String requestContent){
+    public ToDoCommand(String requestContent) {
         super("TODO");
         this.requestContent = requestContent;
     }

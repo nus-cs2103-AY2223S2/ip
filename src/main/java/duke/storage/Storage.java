@@ -1,11 +1,12 @@
 package duke.storage;
-import java.io.IOException;
 import java.io.File;
 import java.io.FileWriter;
-import duke.tasklist.TaskList;
+import java.io.IOException;
 import java.util.Scanner;
-import duke.tasks.Task;
+
 import duke.dukeexceptions.DukeExceptions;
+import duke.tasklist.TaskList;
+import duke.tasks.Task;
 
 /**
  * Class to abstract the interaction between local storage and program task list.
@@ -19,7 +20,7 @@ public class Storage {
      *
      * @param path the data path where we will load and store the data
      */
-    public Storage(String path){
+    public Storage(String path) {
         this.path = path;
         fileSetup();
     }
@@ -30,18 +31,18 @@ public class Storage {
     public void fileSetup() {
         File directory = new File(path);
         try {
-            if(!directory.exists()){
+            if (!directory.exists()) {
                 directory.mkdir();
             }
 
             this.file = new File(path, "duke.txt");
 
-            if(!this.file.exists()){
+            if (!this.file.exists()) {
                 this.file.createNewFile();
             }
 
 
-        } catch (IOException exception){
+        } catch (IOException exception) {
             System.out.println(exception.getMessage());
         }
     }
@@ -51,7 +52,7 @@ public class Storage {
      *
      * @return Loaded task list.
      */
-    public TaskList loadFile(){
+    public TaskList loadFile() {
         TaskList result = new TaskList();
         try {
             Scanner scanner = new Scanner(this.file);

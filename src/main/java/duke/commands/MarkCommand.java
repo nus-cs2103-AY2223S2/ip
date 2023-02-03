@@ -9,13 +9,13 @@ import duke.tasklist.TaskList;
 public class MarkCommand extends Command {
     private int index;
 
-    public MarkCommand(int index){
+    public MarkCommand(int index) {
         super("MARK");
         this.index = index;
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage){
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.setDone(this.index);
     }
 }

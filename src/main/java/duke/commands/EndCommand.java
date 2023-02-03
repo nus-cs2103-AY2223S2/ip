@@ -6,8 +6,8 @@ import duke.tasklist.TaskList;
 /**
  * Command to terminate program.
  */
-public class EndCommand extends Command{
-    public EndCommand(){
+public class EndCommand extends Command {
+    public EndCommand() {
         super("END");
     }
 

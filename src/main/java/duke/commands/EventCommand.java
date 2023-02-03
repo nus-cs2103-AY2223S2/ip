@@ -6,9 +6,9 @@ import duke.tasklist.TaskList;
 /**
  * Command to add an event to a task list.
  */
-public class EventCommand extends Command{
+public class EventCommand extends Command {
     private String requestContent;
-    public EventCommand(String requestContent){
+    public EventCommand(String requestContent) {
         super("EVENT");
         this.requestContent = requestContent;
     }

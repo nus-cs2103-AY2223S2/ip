@@ -8,13 +8,13 @@ import duke.tasklist.TaskList;
  */
 public class UnmarkCommand extends Command {
     private int index;
-    public UnmarkCommand(int index){
+    public UnmarkCommand(int index) {
         super("UNMARK");
         this.index = index;
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage){
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.setNotDone(this.index);
     }
 }

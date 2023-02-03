@@ -1,6 +1,6 @@
 package duke.tasks;
 
-import java.util.Objects;
+import duke.dukeexceptions.DukeExceptions;
 
 /**
  * A task class that specific task inherit from.
@@ -31,14 +31,14 @@ public abstract class Task {
     /**
      * Sets a task to be done.
      */
-    public void setDone(){
+    public void setDone() {
         this.isDone = true;
     }
 
     /**
      * Sets a task to be not done.
      */
-    public void setNotDone(){
+    public void setNotDone() {
         this.isDone = false;
     }
 
@@ -47,7 +47,9 @@ public abstract class Task {
      *
      * @return the description
      */
-    public String getDescription() { return this.description; }
+    public String getDescription() {
+        return this.description;
+    }
 
     /**
      * formats the task into a string to be saved locally
@@ -59,13 +61,12 @@ public abstract class Task {
      *
      * @return the task that has been decoded
      */
-    public static Task decode(String taskString){
-//        System.out.println(taskString);
-        String[] taskStringSplit = taskString.split(" \\| ",4);
+    public static Task decode(String taskString) throws DukeExceptions {
+        String[] taskStringSplit = taskString.split(" \\| ", 4);
         //temporarily set the currTask to null.
         Task currTask = null;
 
-        switch(taskStringSplit[0]){
+        switch(taskStringSplit[0]) {
         case "T":
             currTask = new ToDo(taskStringSplit[2]);
             break;
@@ -80,21 +81,28 @@ public abstract class Task {
             break;
         }
 
-        if(taskStringSplit[1].equals("1")){
+        // default:
+        // throw new DukeExceptions("Loading of file failed.");
+
+        if (taskStringSplit[1].equals("1")) {
             currTask.setDone();
         }
         return currTask;
     }
 
     @Override
-    public String toString (){
+    public String toString() {
         return "[" + getStatusIcon() + "] " + this.description;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Task)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Task)) {
+            return false;
+        }
         Task task = (Task) o;
         return isDone == task.isDone && description.equals(task.description);
     }

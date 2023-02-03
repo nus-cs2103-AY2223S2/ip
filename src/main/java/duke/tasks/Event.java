@@ -1,5 +1,4 @@
 package duke.tasks;
-import duke.dukeexceptions.DukeExceptions;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -7,14 +6,14 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Objects;
 
+import duke.dukeexceptions.DukeExceptions;
 /**
  *  A task representing an event
  */
 public class Event extends Task {
-
+    private static final String tag = "E";
     protected LocalDateTime from;
     protected LocalDateTime to;
-    private static final String tag = "E";
 
     /**
      *  Constructor for an event.
@@ -47,7 +46,7 @@ public class Event extends Task {
      * @return the event in string format
      */
     public String saveTask() {
-        String completed = this.isDone? "1":"0";
+        String completed = this.isDone ? "1" : "0";
         return this.tag + " | " + completed + " | "
                 + this.description
                 + " | " + this.from.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))
@@ -64,7 +63,7 @@ public class Event extends Task {
         return "[E]" + super.toString()
                 + "(from:" + this.from.format(DateTimeFormatter.ofPattern("MM/dd/yyyy 'at' hh:mm a"))
                 + " to:" + this.to.format(DateTimeFormatter.ofPattern("MM/dd/yyyy 'at' hh:mm a"))
-                + ")" +"\n";
+                + ")" + "\n";
     }
 
     /**
@@ -74,9 +73,15 @@ public class Event extends Task {
      */
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Event)) return false;
-        if (!super.equals(o)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Event)) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
         Event event = (Event) o;
         return Objects.equals(from, event.from) && Objects.equals(to, event.to);
     }

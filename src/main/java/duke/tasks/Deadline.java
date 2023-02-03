@@ -13,8 +13,8 @@ import duke.dukeexceptions.DukeExceptions;
  */
 public class Deadline extends Task {
 
-    protected LocalDateTime by;
     private static final String tag = "D";
+    protected LocalDateTime by;
 
     /**
      * Constructor for a deadline.
@@ -40,7 +40,7 @@ public class Deadline extends Task {
      * @return the deadline in string format
      */
     public String saveTask() {
-        String completed = this.isDone? "1":"0";
+        String completed = this.isDone ? "1" : "0";
         String formattedDate = by.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
 
         return this.tag + " | " + completed + " | "
@@ -51,14 +51,23 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString()
                 + " (by:" + by.format(DateTimeFormatter.ofPattern("MM/dd/yyyy 'at' hh:mm a")) + ")"
-                +"\n";
+                + "\n";
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Deadline)) return false;
-        if (!super.equals(o)) return false;
+        if (this == o) {
+            return true;
+        }
+
+        if (!(o instanceof Deadline)) {
+            return false;
+        }
+
+        if (!super.equals(o)) {
+            return false;
+        }
+
         Deadline deadline = (Deadline) o;
         return Objects.equals(by, deadline.by);
     }

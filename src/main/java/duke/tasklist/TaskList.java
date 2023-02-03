@@ -16,7 +16,7 @@ public class TaskList {
     /**
      * Constructor for the task list.
      */
-    public TaskList(){
+    public TaskList() {
         this.list = new Task[100];
         this.len = 0;
     }
@@ -27,16 +27,16 @@ public class TaskList {
      * @param index index of the task you want to retrieve
      * @return the task
      */
-    public Task showTask(int index){
+    public Task showTask(int index) {
         return list[index];
     }
 
     /**
      * Prints out all the task in the task list.
      */
-    public void list(){
+    public void list() {
         String result = "";
-        for(int i = 0; i < this.len ; i++){
+        for (int i = 0; i < this.len; i++) {
             int index = i + 1;
             result += "  " + index + ". " + list[i].toString();
         }
@@ -48,7 +48,7 @@ public class TaskList {
      *
      * @param index index of task to be marked done
      */
-    public void setDone(int index){
+    public void setDone(int index) {
         this.list[index].setDone();
         String reply = "  Nice! I've marked this task as done:\n"
                 + "    " + list[index].toString();
@@ -60,7 +60,7 @@ public class TaskList {
      *
      * @param index index of task to be set as not done
      */
-    public void setNotDone(int index){
+    public void setNotDone(int index) {
         this.list[index].setNotDone();
         String reply = "  OK, I've marked this task as not done:\n"
                 + "    " + list[index].toString();
@@ -72,7 +72,7 @@ public class TaskList {
      *
      * @param task the task to be added.
      */
-    public void addTask(Task task){
+    public void addTask(Task task) {
         this.list[len] = task;
         this.len++;
     }
@@ -126,7 +126,7 @@ public class TaskList {
      *
      * @param requestContent the additional information needed to create an Event
      */
-    public void addEvent(String requestContent) throws MissingArgumentException{
+    public void addEvent(String requestContent) throws MissingArgumentException {
         String[] splitFrom = requestContent.split(" /from ", 2);
         String description = splitFrom[0].trim();
 
@@ -161,7 +161,7 @@ public class TaskList {
      * @param index the index of the task to be printed
      * @return the task as a formatted string
      */
-    public String taskToString(int index){
+    public String taskToString(int index) {
         return list[index].toString();
     }
 
@@ -172,8 +172,8 @@ public class TaskList {
      */
     public void delete(int index) {
         Task deletedTask = list[index];
-        for (int i = index; i < this.len; i++){
-            this.list[i] = this.list[i+1];
+        for (int i = index; i < this.len; i++) {
+            this.list[i] = this.list[i + 1];
         }
 
         this.len--;
@@ -188,9 +188,9 @@ public class TaskList {
      *
      * @return the task list in formatted string
      */
-    public String saveTaskList(){
+    public String saveTaskList() {
         String result = "";
-        for (int i = 0; i < this.len; i++){
+        for (int i = 0; i < this.len; i++) {
             result += list[i].saveTask() + "\n";
         }
         return result;
@@ -201,18 +201,18 @@ public class TaskList {
      *
      * @param keywords the keywords to be searched.
      */
-    public void find(String keywords, Ui ui){
+    public void find(String keywords, Ui ui) {
         TaskList temp = new TaskList();
-        for(int i = 0; i < this.len ; i++){
+        for (int i = 0; i < this.len; i++) {
             Task currTask = this.list[i];
-            if(currTask.getDescription().contains(keywords)){
+            if (currTask.getDescription().contains(keywords)) {
                 temp.addTask(currTask);
             }
         }
 
-        if(temp.len == 0){
+        if (temp.len == 0) {
             ui.displayMessage("There's nothing in your list that matched keyword\n");
-        } else{
+        } else {
             ui.displayMessage("Here are the matching tasks in your list:\n");
         }
         temp.list();

@@ -22,7 +22,7 @@ public class Ui {
      */
     public void outro() {
         String bye = "  Bye! have a great day\n";
-            System.out.println(bye);
+        System.out.println(bye);
     }
 
     /**
@@ -36,7 +36,7 @@ public class Ui {
     }
 
 
-    public void showLine(){
+    public void showLine() {
         System.out.println("  ________________________________");
     }
 
@@ -45,7 +45,7 @@ public class Ui {
      *
      * @param message the string to be printed
      */
-    public void displayMessage(String message){
+    public void displayMessage(String message) {
         System.out.print(message);
     }
 }

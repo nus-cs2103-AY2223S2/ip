@@ -6,9 +6,9 @@ import duke.tasklist.TaskList;
 /**
  * Command to add a deadline.
  */
-public class DeadlineCommand extends Command{
+public class DeadlineCommand extends Command {
     private String requestContent;
-    public DeadlineCommand(String requestContent){
+    public DeadlineCommand(String requestContent) {
         super("DEADLINE");
         this.requestContent = requestContent;
     }

@@ -6,10 +6,10 @@ import duke.tasklist.TaskList;
 /**
  * Command to delete a task.
  */
-public class DeleteCommand extends Command{
+public class DeleteCommand extends Command {
     private int index;
 
-    public DeleteCommand(int index){
+    public DeleteCommand(int index) {
         super("DELETE");
         this.index = index;
     }
