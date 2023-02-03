@@ -2,7 +2,7 @@ package tasklist;
 import java.util.ArrayList;
 import task.Task;
 public class TaskList {
-    ArrayList<Task> list;
+    public ArrayList<Task> list;
 
     public TaskList() {
         this.list = new ArrayList<Task>();
@@ -23,6 +23,4 @@ public class TaskList {
     public int size() {
         return this.list.size();
     }
-
-
 }
