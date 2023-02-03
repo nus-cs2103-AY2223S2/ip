@@ -31,8 +31,8 @@ public class Ui {
     /**
      * Print the welcome message when user first run Duke.
      */
-    public void showWelcome() {
-        System.out.println("Hello from\n" + logo + "Hello! I'm Duke\nWhat can I do for you?");
+    public static String showWelcome() {
+        return "Hello from\n" + logo + "Hello! I'm Duke\nWhat can I do for you?";
     }
 
     /**
@@ -49,15 +49,15 @@ public class Ui {
      *
      * @param errorMsg
      */
-    public void showError(String errorMsg) {
-        System.out.println(errorMsg);
+    public String showError(String errorMsg) {
+        return errorMsg;
     }
 
     /**
      * Print the message when the user type "list" command.
      */
-    public void showListMessage() {
-        System.out.println("Here are the tasks in your list:");
+    public String showListMessage() {
+        return "Here are the tasks in your list:";
     }
 
     /**
@@ -66,9 +66,9 @@ public class Ui {
      * @param task
      * @param tasksLen
      */
-    public void showDeleteMessage(Task task, String tasksLen) {
-        System.out.println("Noted. I've removed this task:\n  "
-                + task + "\nNow you have " + tasksLen + " tasks in the list.");
+    public String showDeleteMessage(Task task, String tasksLen) {
+        return "Noted. I've removed this task:\n  "
+                + task + "\nNow you have " + tasksLen + " tasks in the list.";
     }
 
     /**
@@ -77,16 +77,16 @@ public class Ui {
      * @param task
      * @param tasksLen
      */
-    public void showAddTaskMsg(Task task, String tasksLen) {
-        System.out.println("Got it. I've added this task:\n  "
-                + task + "\nNow you have " + tasksLen + " tasks in the list.");
+    public String showAddTaskMsg(Task task, String tasksLen) {
+        return "Got it. I've added this task:\n  "
+                + task + "\nNow you have " + tasksLen + " tasks in the list.";
     }
 
     /**
      * Print the message when the user type "exit" command.
      */
-    public void exit() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String exit() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
@@ -94,8 +94,8 @@ public class Ui {
      *
      * @param task
      */
-    public void showMarkedMsg(Task task) {
-        System.out.println("Nice! I've marked this task as done:\n" + task);
+    public String showMarkedMsg(Task task) {
+        return "Nice! I've marked this task as done:\n" + task;
     }
 
     /**
@@ -103,34 +103,35 @@ public class Ui {
      *
      * @param task
      */
-    public void showUnmarkedMsg(Task task) {
-        System.out.println("Ok, I've marked this as not done yet:\n" + task);
+    public String showUnmarkedMsg(Task task) {
+        return "Ok, I've marked this as not done yet:\n" + task;
     }
 
     /**
      * Print all the tasks containing the keyword requested by user.
      * @param tasklist
      */
-    public void showRelevantTasks(ArrayList<Task> tasklist) {
-        System.out.println("Here are the matching tasks in your list:\n");
+    public String showRelevantTasks(ArrayList<Task> tasklist) {
+        String currStr = "Here are the matching tasks in your list:\n";
         int counter = 1;
         for (int i = 0; i < tasklist.size(); i++) {
-            System.out.println(counter+ "." + tasklist.get(i));
+            currStr = currStr + counter+ "." + tasklist.get(i);
         }
+        return currStr;
     }
 
     /**
      * Print the message when user type an unknown command.
      */
-    public void showLoadingError() {
-        System.out.println("No existing tasklist!");
+    public String showLoadingError() {
+        return "No existing tasklist!";
     }
 
     /**
      * Print divider line.
      */
-    public void showLine() {
-        System.out.println("\n---------------------------------\n");
+    public String showLine() {
+        return "\n---------------------------------\n";
     }
 }
 

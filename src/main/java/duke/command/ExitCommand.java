@@ -14,15 +14,15 @@ public class ExitCommand extends Command {
 
     /**
      * Terminate duke program.
-     *
-     * @param tasks
+     *  @param tasks
      * @param ui
      * @param storage
+     * @return
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.exit();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         isExit();
+        return ui.exit();
     }
 
     /**

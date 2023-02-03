@@ -24,9 +24,10 @@ public class FindCommand extends Command {
      * @param tasks
      * @param ui
      * @param storage
+     * @return
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         int lenOfTaskList = tasks.getLength();
         ArrayList<Task> relevantTasks = new ArrayList<>();
         for (int i = 0; i < lenOfTaskList; i++) {
@@ -35,7 +36,8 @@ public class FindCommand extends Command {
                 relevantTasks.add(currTask);
             }
         }
-        ui.showRelevantTasks(relevantTasks);
+
+        return ui.showRelevantTasks(relevantTasks);
     }
 
     /**

@@ -53,7 +53,6 @@ public class Storage {
     private Task convertStrToTask(String str) {
         String getTaskType = str.substring(0, 1);
         String getStatus = str.substring(4, 5);
-        System.out.println(getTaskType);
         switch (getTaskType) {
         case TODO:
             task = new Todo(str.substring(8));
@@ -86,7 +85,6 @@ public class Storage {
         } else if (getStatus.equals("1")) {
             task.markAsDone();
         }
-        System.out.println(task);
         return task;
     }
 
@@ -163,7 +161,6 @@ public class Storage {
                     currLine++;
                     continue;
                 } else {
-                    System.out.println(line);
                     writerToTempFile.write(line + "\n");
                     line = bufReader.readLine();
                     currLine++;

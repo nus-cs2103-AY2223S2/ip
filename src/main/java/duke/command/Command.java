@@ -14,12 +14,12 @@ public abstract class Command {
 
     /**
      * Execute the command.
-     *
-     * @param tasks
+     *  @param tasks
      * @param ui
      * @param storage
+     * @return
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage);
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage);
 
     /**
      * Check if the command cause duke to terminate.

@@ -30,12 +30,13 @@ public class UnmarkCommand extends Command {
      * @param tasks
      * @param ui
      * @param storage
+     * @return
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task taskToBeUnmarked = tasks.getTask(taskNum - 1);
         taskToBeUnmarked.markAsIncomplete();
-        ui.showUnmarkedMsg(taskToBeUnmarked);
+        return ui.showUnmarkedMsg(taskToBeUnmarked);
     }
 
     /**

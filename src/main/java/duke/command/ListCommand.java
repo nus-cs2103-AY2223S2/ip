@@ -14,19 +14,20 @@ public class ListCommand extends Command {
 
     /**
      * List all the tasks in the tasklist.
-     *
-     * @param tasks
+     *  @param tasks
      * @param ui
      * @param storage
+     * @return
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         int counter = 1;
-        ui.showListMessage();
+        String currList = "\n";
         for (int i = 0; i < tasks.getLength(); i++) {
-            System.out.println(counter + "." + tasks.getTask(i).toString());
+            currList = currList + counter + "." + tasks.getTask(i).toString() + "\n";
             counter++;
         }
+        return  ui.showListMessage() + currList;
     }
 
     /**

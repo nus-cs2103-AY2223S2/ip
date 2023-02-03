@@ -25,19 +25,19 @@ public class DeleteCommand extends Command {
 
     /**
      * Delete the task in the tasklist and update it in the txt file.
-     *
-     * @param tasks
+     *  @param tasks
      * @param ui
      * @param storage
+     * @return
      */
 
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task taskDeleted = tasks.getTask(taskNum - 1);
         tasks.delete(taskNum - 1);
-        ui.showDeleteMessage(taskDeleted, String.valueOf(tasks.getLength()));
         storage.delete(taskNum);
+        return ui.showDeleteMessage(taskDeleted, String.valueOf(tasks.getLength()));
     }
 
     /**

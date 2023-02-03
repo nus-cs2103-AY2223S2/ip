@@ -6,10 +6,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import duke.storage.Storage;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.TaskList;
-import duke.task.Todo;
+import duke.task.*;
 import duke.ui.Ui;
 
 /**
@@ -75,21 +72,21 @@ public class AddCommand extends Command {
 
     /**
      * Add the task into the task list and update the task in the tasks.txt.
-     *
-     * @param tasks
+     *  @param tasks
      * @param ui
      * @param storage
+     * @return
      */
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        Task task = null;
         switch (taskType) {
         case TODO:
             try {
-                Todo todo = new Todo(taskDesc);
-                tasks.addTask(todo);
-                ui.showAddTaskMsg(todo, String.valueOf(tasks.getLength()));
-                storage.update(todo);
+                task = new Todo(taskDesc);
+                tasks.addTask(task);
+                storage.update(task);
             } catch (IOException e) {
                 e.printStackTrace();
             } finally {
@@ -99,10 +96,9 @@ public class AddCommand extends Command {
             try {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
                 LocalDateTime dueDate = LocalDateTime.parse(deadline.substring(3), formatter);
-                Deadline deadline = new Deadline(taskDesc, dueDate);
-                tasks.addTask(deadline);
-                ui.showAddTaskMsg(deadline, String.valueOf(tasks.getLength()));
-                storage.update(deadline);
+                task = new Deadline(taskDesc, dueDate);
+                tasks.addTask(task);
+                storage.update(task);
             } catch (DateTimeException e) {
                 System.out.println("ERROR!! Please key in valid date format: dd-MM-yyyy HHmm");
             } catch (IOException e) {
@@ -112,10 +108,9 @@ public class AddCommand extends Command {
             }
         case EVENT:
             try {
-                Event event = new Event(taskDesc, from.substring(5), by.substring(3));
-                tasks.addTask(event);
-                ui.showAddTaskMsg(event, String.valueOf(tasks.getLength()));
-                storage.update(event);
+                task = new Event(taskDesc, from.substring(5), by.substring(3));
+                tasks.addTask(task);
+                storage.update(task);
             } catch (IOException e) {
                 e.printStackTrace();
             } finally {
@@ -124,6 +119,7 @@ public class AddCommand extends Command {
         default:
             break;
         }
+        return ui.showAddTaskMsg(task, String.valueOf(tasks.getLength()));
     }
 
     /**

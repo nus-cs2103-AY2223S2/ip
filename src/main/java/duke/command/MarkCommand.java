@@ -28,16 +28,16 @@ public class MarkCommand extends Command {
 
     /**
      * Mark the task as completed as requested by user.
-     *
-     * @param tasks
+     *  @param tasks
      * @param ui
      * @param storage
+     * @return
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task taskToBeMarked = tasks.getTask(taskNum - 1);
         taskToBeMarked.markAsDone();
-        ui.showMarkedMsg(taskToBeMarked);
+        return ui.showMarkedMsg(taskToBeMarked);
     }
 
     /**

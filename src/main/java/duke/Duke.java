@@ -17,7 +17,11 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
     private Storage storage;
+    private boolean isExit = false;
 
+    public Duke() {
+
+    }
     /**
      * Constructor for Duke object.
      *
@@ -60,7 +64,25 @@ public class Duke {
      * @param args
      * @throws DukeException
      */
-    public static void main(String[] args) throws DukeException {
+    public static void main(String[] args) {
         new Duke("ip/data/tasks.txt").run();
     }
+
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        if (!isExit) {
+            Command c = Parser.parse(input);
+            isExit = c.isExit();
+            return c.execute(tasks, ui, storage);
+        } else {
+            return ui.exit();
+        }
+    }
+
+
+
 }
