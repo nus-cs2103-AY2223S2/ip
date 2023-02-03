@@ -1,6 +1,16 @@
+package duke;
+
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.SimpleTimeZone;
+import task.TaskList;
+import task.Task;
+import task.Command;
+import task.Parser;
+import task.Event;
+import task.Deadline;
+import task.Todo;
+import storage.Storage;
+import ui.Ui;
 
 public class Duke {
     protected final TaskList taskList;
@@ -11,7 +21,7 @@ public class Duke {
     protected String directoryPath;
     protected String dataFilePath;
 
-    protected Duke() {
+    public Duke() {
         this.dataFilePath = "./data/duke.txt";
         this.directoryPath = "./data";
         this.commandList = new ArrayList<>();

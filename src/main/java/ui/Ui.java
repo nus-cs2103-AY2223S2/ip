@@ -1,6 +1,8 @@
+package ui;
+
 public class Ui {
     public String greeting() {
-        String str = "Hi~ I'm Duke>_<\nWhat can I do for you?";
+        String str = "Hi~ I'm duke.Duke>_<\nWhat can I do for you?";
         return str;
     }
 

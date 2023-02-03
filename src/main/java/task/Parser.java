@@ -1,3 +1,7 @@
+package task;
+
+import duke.*;
+
 public class Parser {
     public void checkEmpty(String input, String command) throws DukeException {
         if (input.length() < command.length() + 1) {
