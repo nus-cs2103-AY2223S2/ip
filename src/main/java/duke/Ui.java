@@ -10,7 +10,7 @@ public class Ui {
      * @return Welcome message.
      */
     public static String welcomeMsg() {
-        return "Hello! I'm Duke\n  What can I do for you?\n";
+        return "Hello! I'm Duke\n  Can you show me da wae?\n";
     }
 
     /**
@@ -86,7 +86,7 @@ public class Ui {
      * @return Unknown input message.
      */
     public static String unknownInputMsg() {
-        return "I'm sorry, but I don't know what that means :-(\n";
+        return "Dat is not da wae\n";
     }
 
     /**
