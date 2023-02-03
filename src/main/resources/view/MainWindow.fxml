@@ -5,24 +5,28 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
-
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.HBox?>
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600.0" minWidth="400.0" prefHeight="600.0"
-            prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600.0" minWidth="400.0"
+            xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="jarvis.ui.layout.MainWindow">
-    <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="540.0" prefWidth="400.0" vvalue="1.0">
-        <VBox fx:id="chatContainer" prefHeight="540.0" prefWidth="380.0"/>
+    <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" vvalue="1.0"
+                AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="60.0"
+                AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                fitToWidth="true" fitToHeight="true">
+        <VBox fx:id="chatContainer"/>
     </ScrollPane>
-    <HBox prefWidth="400.0" spacing="10.0" AnchorPane.bottomAnchor="1.0">
+    <HBox fx:id="userInputBar" spacing="10.0" AnchorPane.bottomAnchor="10.0"
+          AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
         <padding>
-            <Insets top="10.0" bottom="10.0" left="10.0" right="10.0"/>
+            <Insets top="10.0" />
         </padding>
-        <TextField fx:id="userInput" onAction="#handleUserInput" prefHeight="40.0" prefWidth="320.0"
-                   promptText="Send a command..."
+        <TextField fx:id="userInput" onAction="#handleUserInput" prefHeight="40.0"
+                   promptText="Send a command..." HBox.hgrow="ALWAYS"
                    AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0"/>
         <Button fx:id="sendButton" mnemonicParsing="false" onAction="#handleUserInput"
-                prefHeight="40.0" prefWidth="80.0" text="Enter"
+                prefHeight="40.0" prefWidth="60.0" text="Send"
                 AnchorPane.bottomAnchor="1.0" AnchorPane.rightAnchor="1.0"/>
     </HBox>
 </AnchorPane>
