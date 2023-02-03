@@ -35,6 +35,7 @@ class TaskList {
      *          the internal list.
      */
     public void forEach(BiConsumer<Task, Integer> f) {
+        assert tasks != null;
         for (int i = 0; i < tasks.size(); i++) {
             f.accept(tasks.get(i), i);
         }
@@ -47,6 +48,7 @@ class TaskList {
      * @return The new filtered list.
      */
     public TaskList filter(Predicate<Task> f) {
+        assert tasks != null;
         return new TaskList(tasks.stream().filter(f).collect(Collectors.toList()));
     }
 
@@ -56,6 +58,7 @@ class TaskList {
      * @return The serialized string.
      */
     public String marshal() {
+        assert tasks != null;
         return tasks.stream()
                 .map(task -> task.marshal())
                 .collect(Collectors.joining("\n"));
@@ -67,6 +70,7 @@ class TaskList {
      * @return The number of tasks in the list.
      */
     public int count() {
+        assert tasks != null;
         return tasks.size();
     }
 
@@ -76,6 +80,7 @@ class TaskList {
      * @param task The new task to add.
      */
     public void add(Task task) {
+        assert tasks != null;
         tasks.add(task);
     }
 
@@ -87,6 +92,7 @@ class TaskList {
      * @throws TaskNotFoundException If the index is out of bounds.
      */
     public Task get(int idx) {
+        assert tasks != null;
         try {
             return tasks.get(idx);
         } catch (IndexOutOfBoundsException e) {
@@ -119,6 +125,7 @@ class TaskList {
      * @return The removed task.
      */
     public Task remove(int idx) {
+        assert tasks != null;
         Task ret = get(idx);
         tasks.remove(idx);
         return ret;
@@ -133,6 +140,7 @@ class TaskList {
 
     @Override
     public boolean equals(Object other) {
+        assert tasks != null;
         if (!(other instanceof TaskList)) {
             return false;
         }
