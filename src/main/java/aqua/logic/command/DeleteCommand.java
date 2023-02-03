@@ -4,8 +4,10 @@ import aqua.aquatask.AquaTask;
 import aqua.exception.IllegalSyntaxException;
 import aqua.exception.ProcedureExecutionException;
 import aqua.logic.ArgumentMap;
+import aqua.logic.ExecutionDisplayerTask;
 import aqua.logic.ExecutionService;
 import aqua.logic.ExecutionTask;
+import aqua.manager.IoManager;
 import aqua.manager.LogicManager;
 
 
@@ -14,9 +16,15 @@ import aqua.manager.LogicManager;
  */
 public class DeleteCommand extends CommandController {
     @Override
-    public ExecutionService getService(ArgumentMap args, LogicManager manager, boolean isLoading) {
-        return ExecutionService.of(new DeleteTask(args, manager))
-                .setFollowUp(new WriteTaskCommand().getService(args, manager));
+    public ExecutionService getService(ArgumentMap args, LogicManager manager) {
+        return ExecutionService.of(new DeleteTask(args, manager));
+    }
+
+
+    @Override
+    public ExecutionService getService(ArgumentMap args, LogicManager logicManager, IoManager ioManager) {
+        return ExecutionService.of(new DeleteDisplayerTask(args, logicManager, ioManager))
+                .setFollowUp(new WriteTaskCommand().getService(args, logicManager, ioManager));
     }
 
 
@@ -32,6 +40,27 @@ public class DeleteCommand extends CommandController {
     }
 
 
+    private AquaTask deleteTask(ArgumentMap args, LogicManager manager)
+                throws IllegalSyntaxException, ProcedureExecutionException {
+        try {
+            // get task index string
+            String indexString = args.getMainInput().filter(num -> !num.isBlank())
+                    .orElseThrow(() -> new IllegalSyntaxException("Task number disappered!"));
+
+            // parse index string
+            int index = Integer.parseInt(indexString) - 1;
+
+            // delete and return deleted task
+            return manager.getTaskManager().delete(index);
+        } catch (NumberFormatException numEx) {
+            throw new IllegalSyntaxException("Task number given was not an integer");
+        } catch (IndexOutOfBoundsException oobEx) {
+            throw new ProcedureExecutionException(
+                    "The task number given is out of bounds of my task counting capabilities");
+        }
+    }
+
+
 
 
 
@@ -44,43 +73,39 @@ public class DeleteCommand extends CommandController {
         @Override
         public AquaTask process(ArgumentMap args, LogicManager manager)
                     throws IllegalSyntaxException, ProcedureExecutionException {
-            try {
-                // get task index string
-                String indexString = args.getMainInput().filter(num -> !num.isBlank())
-                        .orElseThrow(() -> new IllegalSyntaxException("Task number disappered!"));
+            return deleteTask(args, manager);
+        }
+    }
 
-                // parse index string
-                int index = Integer.parseInt(indexString) - 1;
 
-                // delete and return deleted task
-                return manager.getTaskManager().delete(index);
-            } catch (NumberFormatException numEx) {
-                throw new IllegalSyntaxException("Task number given was not an integer");
-            } catch (IndexOutOfBoundsException oobEx) {
-                throw new ProcedureExecutionException(
-                        "The task number given is out of bounds of my task counting capabilities");
-            }
+
+
+
+    private class DeleteDisplayerTask extends ExecutionDisplayerTask<AquaTask> {
+        DeleteDisplayerTask(ArgumentMap args, LogicManager logicManager, IoManager ioManager) {
+            super(args, logicManager, ioManager);
         }
 
 
         @Override
-        public String formDisplayMessage(AquaTask task, LogicManager manager) {
-            return String.format(String.join("\n",
-                            "I have deleted the task:",
-                            "  %s",
-                            "%s"),
-                    task.toString(),
-                    getRemainingMessage(manager));
+        protected AquaTask process(ArgumentMap args, LogicManager manager)
+                    throws IllegalSyntaxException, ProcedureExecutionException {
+            return deleteTask(args, manager);
         }
 
 
-        private String getRemainingMessage(LogicManager manager) {
-            int numTask = manager.getTaskManager().size();
-            if (numTask > 0) {
-                return String.format("You have %d task(s) left, all the best ( ง*`꒳´*)ว",
-                        numTask);
-            }
-            return "٩ (ˊᗜˋ *) و You have no task left~ ☆";
+        @Override
+        protected void display(AquaTask task, IoManager manager) {
+            manager.reply(String.format(String.join("\n",
+                            "I have deleted the task:",
+                            "  %s"),
+                    task.toString()));
         }
     }
+
+
+
+
+    // "٩ (ˊᗜˋ *) و You have no task left~ ☆"
+    // "You have %d task(s) left, all the best ( ง*`꒳´*)ว"
 }

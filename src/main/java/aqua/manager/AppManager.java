@@ -83,7 +83,7 @@ public class AppManager {
 
 
     private void startParser(ParserService<CommandLineInput> service) {
-        service.setOnSucceeded(s -> startExecution(service.getValue().getService(logicManager)));
+        service.setOnSucceeded(s -> startExecution(service.getValue().getService(logicManager, ioManager)));
         service.setOnFailed(f -> handleExecutionFailure(service));
         service.start();
     }
@@ -112,7 +112,6 @@ public class AppManager {
      * @param service - the service whose task succeeded.
      */
     private void handleExecutionSuccess(ExecutionService service) {
-        ioManager.reply(service.getValue());
         service.followUpDispatcher().ifPresentOrElse(
                 this::startExecution,
                 this::completeService);

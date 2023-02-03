@@ -2,17 +2,36 @@ package aqua.logic.command;
 
 import java.io.IOException;
 
+import aqua.exception.ProcedureExecutionException;
 import aqua.logic.ArgumentMap;
+import aqua.logic.ExecutionDisplayerTask;
 import aqua.logic.ExecutionService;
 import aqua.logic.ExecutionTask;
+import aqua.manager.IoManager;
 import aqua.manager.LogicManager;
 
 
 /** A {@code CommandController} to save {@code AquaTask} state. */
 public class WriteTaskCommand extends CommandController {
     @Override
-    public ExecutionService getService(ArgumentMap args, LogicManager manager, boolean isLoading) {
-        return ExecutionService.of(new ExecutionTask<String>(args, manager) {
+    public ExecutionService getService(ArgumentMap args, LogicManager manager) {
+        return ExecutionService.of(new ExecutionTask<Void>(args, manager) {
+            @Override
+            public Void process(ArgumentMap args, LogicManager manager) throws ProcedureExecutionException {
+                try {
+                    manager.getTaskManager().saveToFile();
+                } catch (IOException ioEx) {
+                    throw new ProcedureExecutionException("Failed to save data", ioEx);
+                }
+                return null;
+            }
+        });
+    }
+
+
+    @Override
+    public ExecutionService getService(ArgumentMap args, LogicManager logicManager, IoManager ioManager) {
+        return ExecutionService.of(new ExecutionDisplayerTask<String>(args, logicManager, ioManager) {
             @Override
             public String process(ArgumentMap args, LogicManager manager) {
                 try {
@@ -28,10 +47,9 @@ public class WriteTaskCommand extends CommandController {
                 return "Safely stored hehe (  •̀֊•́ )";
             }
 
-
             @Override
-            public String formDisplayMessage(String data, LogicManager manager) {
-                return data;
+            protected void display(String message, IoManager manager) {
+                manager.reply(message);
             }
         });
     }

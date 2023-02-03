@@ -4,8 +4,10 @@ import aqua.aquatask.AquaTask;
 import aqua.exception.IllegalSyntaxException;
 import aqua.exception.ProcedureExecutionException;
 import aqua.logic.ArgumentMap;
+import aqua.logic.ExecutionDisplayerTask;
 import aqua.logic.ExecutionService;
 import aqua.logic.ExecutionTask;
+import aqua.manager.IoManager;
 import aqua.manager.LogicManager;
 
 /** A {@code CommandController} to mark {@code AquaTask} as complete. */
@@ -27,9 +29,15 @@ public class MarkTaskCommand extends CommandController {
 
 
     @Override
-    public ExecutionService getService(ArgumentMap args, LogicManager manager, boolean isLoading) {
-        return ExecutionService.of(new MarkTask(args, manager))
-                .setFollowUp(new WriteTaskCommand().getService(args, manager));
+    public ExecutionService getService(ArgumentMap args, LogicManager manager) {
+        return ExecutionService.of(new MarkTask(args, manager));
+    }
+
+
+    @Override
+    public ExecutionService getService(ArgumentMap args, LogicManager logicManager, IoManager ioManager) {
+        return ExecutionService.of(new MarkDisplayerTask(args, logicManager, ioManager))
+                .setFollowUp(new WriteTaskCommand().getService(args, logicManager, ioManager));
     }
 
 
@@ -48,6 +56,27 @@ public class MarkTaskCommand extends CommandController {
     }
 
 
+    private AquaTask markTask(ArgumentMap args, LogicManager manager)
+                throws IllegalSyntaxException, ProcedureExecutionException {
+        try {
+            // get index String
+            String indexString = args.getMainInput().filter(num -> !num.isBlank())
+                    .orElseThrow(() -> new IllegalSyntaxException("Task number disappered!"));
+
+            // parse index String (minus 1 as user enters 1 based index)
+            int index = Integer.parseInt(indexString) - 1;
+
+            // mark and return marked task
+            return manager.getTaskManager().mark(index, isCompletedMarker);
+        } catch (NumberFormatException numEx) {
+            throw new IllegalSyntaxException("Task number given was not an integer");
+        } catch (IndexOutOfBoundsException oobEx) {
+            throw new ProcedureExecutionException(
+                    "The task number given is out of bounds of my task counting capabilities");
+        }
+    }
+
+
 
 
 
@@ -60,36 +89,42 @@ public class MarkTaskCommand extends CommandController {
         @Override
         public AquaTask process(ArgumentMap args, LogicManager manager)
                     throws IllegalSyntaxException, ProcedureExecutionException {
-            try {
-                // get index String
-                String indexString = args.getMainInput().filter(num -> !num.isBlank())
-                        .orElseThrow(() -> new IllegalSyntaxException("Task number disappered!"));
+            return markTask(args, manager);
+        }
+    }
 
-                // parse index String (minus 1 as user enters 1 based index)
-                int index = Integer.parseInt(indexString) - 1;
 
-                // mark and return marked task
-                return manager.getTaskManager().mark(index, isCompletedMarker);
-            } catch (NumberFormatException numEx) {
-                throw new IllegalSyntaxException("Task number given was not an integer");
-            } catch (IndexOutOfBoundsException oobEx) {
-                throw new ProcedureExecutionException(
-                        "The task number given is out of bounds of my task counting capabilities");
-            }
+
+
+
+    private class MarkDisplayerTask extends ExecutionDisplayerTask<AquaTask> {
+        MarkDisplayerTask(ArgumentMap args, LogicManager logicManager, IoManager ioManager) {
+            super(args, logicManager, ioManager);
         }
 
+
         @Override
-        public String formDisplayMessage(AquaTask task, LogicManager manager) {
+        protected AquaTask process(ArgumentMap args, LogicManager manager)
+                    throws IllegalSyntaxException, ProcedureExecutionException {
+            return markTask(args, manager);
+        }
+
+
+        @Override
+        protected void display(AquaTask task, IoManager manager) {
+            String message;
             if (isCompletedMarker) {
-                return String.format(String.join("\n",
+                message = String.format(String.join("\n",
                                 "I have marked this task:",
                                 "  %s"),
                         task.toString());
+            } else {
+                message = String.format(String.join("\n",
+                                "Uah (๑•﹏•) Okay I have unmarked the task:",
+                                "  %s"),
+                        task.toString());
             }
-            return String.format(String.join("\n",
-                            "Uah (๑•﹏•) Okay I have unmarked the task:",
-                            "  %s"),
-                    task.toString());
+            manager.reply(message);
         }
     }
 }

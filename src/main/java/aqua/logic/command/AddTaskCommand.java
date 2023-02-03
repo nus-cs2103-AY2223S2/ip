@@ -3,8 +3,10 @@ package aqua.logic.command;
 import aqua.aquatask.AquaTask;
 import aqua.exception.IllegalSyntaxException;
 import aqua.logic.ArgumentMap;
+import aqua.logic.ExecutionDisplayerTask;
 import aqua.logic.ExecutionService;
 import aqua.logic.ExecutionTask;
+import aqua.manager.IoManager;
 import aqua.manager.LogicManager;
 
 
@@ -21,12 +23,22 @@ public abstract class AddTaskCommand extends CommandController {
 
 
     @Override
-    public ExecutionService getService(ArgumentMap args, LogicManager manager, boolean isLoading) {
-        ExecutionService service = ExecutionService.of(new AddTask(args, manager));
-        if (isLoading) {
-            return service;
-        }
-        return service.setFollowUp(new WriteTaskCommand().getService(args, manager));
+    public ExecutionService getService(ArgumentMap args, LogicManager manager) {
+        return ExecutionService.of(new AddTask(args, manager));
+    }
+
+
+    @Override
+    public ExecutionService getService(ArgumentMap args, LogicManager logicManager, IoManager ioManager) {
+        return ExecutionService.of(new AddDisplayerTask(args, logicManager, ioManager))
+                .setFollowUp(new WriteTaskCommand().getService(args, logicManager));
+    }
+
+
+    private AquaTask addProcess(ArgumentMap args, LogicManager manager) throws IllegalSyntaxException {
+        AquaTask task = createTask(args);
+        manager.getTaskManager().add(task);
+        return task;
     }
 
 
@@ -41,25 +53,34 @@ public abstract class AddTaskCommand extends CommandController {
 
         @Override
         public AquaTask process(ArgumentMap args, LogicManager manager) throws IllegalSyntaxException {
-            // create task
-            AquaTask task = createTask(args);
+            return addProcess(args, manager);
+        }
+    }
 
-            // add task
-            manager.getTaskManager().add(task);
-            return task;
+
+
+
+
+    private class AddDisplayerTask extends ExecutionDisplayerTask<AquaTask> {
+        AddDisplayerTask(ArgumentMap args, LogicManager logicManager, IoManager ioManager) {
+            super(args, logicManager, ioManager);
         }
 
 
         @Override
-        public String formDisplayMessage(AquaTask task, LogicManager manager) {
-            return String.format(String.join("\n",
+        public AquaTask process(ArgumentMap args, LogicManager manager) throws IllegalSyntaxException {
+            return addProcess(args, manager);
+        }
+
+
+        @Override
+        protected void display(AquaTask task, IoManager manager) {
+            manager.reply(String.format(String.join("\n",
                             "Hai okay desu! I have added the task:",
                             "/／",
                             "  %s",
-                            "\\＼",
-                            "You now have %d tasks."),
-                    task.toString(),
-                    manager.getTaskManager().size());
+                            "\\＼"),
+                    task.toString()));
         }
     }
 }

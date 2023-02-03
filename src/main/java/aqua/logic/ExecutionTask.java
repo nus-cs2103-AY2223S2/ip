@@ -13,7 +13,7 @@ import javafx.concurrent.Task;
  *
  * @param <T> the return type of the result after execution.
  */
-public abstract class ExecutionTask<T> extends Task<String> {
+public abstract class ExecutionTask<T> extends Task<Void> {
     /** The arguments to work on. */
     private final ArgumentMap args;
     /** The AppManager to work on. */
@@ -46,27 +46,18 @@ public abstract class ExecutionTask<T> extends Task<String> {
     protected abstract T process(ArgumentMap args, LogicManager manager)
             throws IllegalSyntaxException, ProcedureExecutionException;
 
-    /**
-     * Returns the message of the execution of the task.
-     *
-     * @param data - the data produced after execution of the task.
-     * @param manager - the AppManager to pull additional data from.
-     */
-    protected abstract String formDisplayMessage(T data, LogicManager manager);
-
 
     /**
-     * Executes the task on the same thread where this method is called.
+     * Executes the task process.
      *
-     * @return the String result message to be displayed.
+     * @return the output of the execution.
      * @throws IllegalSyntaxException if the argument given contains invalid
      *      syntax.
      * @throws ProcedureExecutionException if the task failed to execute
      *      completely.
      */
-    public String execute() throws IllegalSyntaxException, ProcedureExecutionException {
-        T data = process(args, manager);
-        return formDisplayMessage(data, manager);
+    public T process() throws IllegalSyntaxException, ProcedureExecutionException {
+        return process(args, manager);
     }
 
 
@@ -80,7 +71,8 @@ public abstract class ExecutionTask<T> extends Task<String> {
      *      completely.
      */
     @Override
-    protected String call() throws IllegalSyntaxException, ProcedureExecutionException {
-        return execute();
+    protected Void call() throws IllegalSyntaxException, ProcedureExecutionException {
+        process();
+        return null;
     }
 }
