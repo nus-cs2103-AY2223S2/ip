@@ -11,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
+import javafx.stage.Window;
 
 
 /** The main window of the application. */
@@ -66,7 +67,10 @@ public class MainWindow extends UiComponent<VBox> {
      * @return the AppManager to run the app.
      */
     private AppManager initialiseAppManager(LogicManager logicManager) {
-        IoManager ioManager = new IoManager(this::getInput, this::displayReply);
+        IoManager ioManager = new IoManager(
+                this::getWindow,
+                this::getInput,
+                this::displayReply);
         return new AppManager(logicManager, ioManager);
     }
 
@@ -74,6 +78,15 @@ public class MainWindow extends UiComponent<VBox> {
     /** Executes the starting processes. */
     public void start() {
         manager.start();
+    }
+
+
+    private Window getWindow() {
+        try {
+            return getRoot().getScene().getWindow();
+        } catch (NullPointerException nullEx) {
+            return null;
+        }
     }
 
 

@@ -7,6 +7,8 @@ import java.util.function.Supplier;
 import aqua.exception.IllegalSyntaxException;
 import aqua.exception.LoadException;
 import aqua.exception.ProcedureExecutionException;
+import javafx.stage.Popup;
+import javafx.stage.Window;
 
 
 /** Manager of inputs and outputs. */
@@ -42,6 +44,7 @@ public class IoManager {
             "I messed up big time...",
             "  %s");
 
+    private final Supplier<Window> windowSupplier;
     private final Supplier<String> inputSupplier;
     private final Consumer<String> outputConsumer;
 
@@ -52,7 +55,9 @@ public class IoManager {
      * @param inputSupplier - the supplier to get user input from.
      * @param outputConsumer - the consumer to display messages to the user.
      */
-    public IoManager(Supplier<String> inputSupplier, Consumer<String> outputConsumer) {
+    public IoManager(Supplier<Window> windowSupplier,
+                Supplier<String> inputSupplier, Consumer<String> outputConsumer) {
+        this.windowSupplier = windowSupplier;
         this.inputSupplier = inputSupplier;
         this.outputConsumer = outputConsumer;
     }
@@ -121,5 +126,11 @@ public class IoManager {
      */
     public void reply(String msg) {
         outputConsumer.accept(msg);
+    }
+
+
+    public void popup(Popup popup) {
+        Optional.ofNullable(windowSupplier.get())
+                .ifPresent(popup::show);
     }
 }
