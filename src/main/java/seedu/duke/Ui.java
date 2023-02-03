@@ -4,19 +4,8 @@ import java.util.ArrayList;
 
 public class Ui {
 
-    private static boolean receivedBye = false;
-
     public static void showError(Exception e) {
         System.out.println(e);
-    }
-
-    public static void showWelcome() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
     }
 
     /**
@@ -102,9 +91,5 @@ public class Ui {
         default:
             return "OOPS!!! I'm sorry, but I don't know what that means :-(";
         }
-    }
-
-    public static boolean receivedBye() {
-        return receivedBye;
     }
 }
