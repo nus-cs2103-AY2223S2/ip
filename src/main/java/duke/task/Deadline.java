@@ -10,6 +10,26 @@ import java.time.format.FormatStyle;
 public class Deadline extends Task {
     protected LocalDate duedate;
 
+    /**
+     * Constructor for Deadline task, loaded from the storage file.
+     * @param input Description of task including its due date.
+     * @param isDone Whether the task is marked or unmarked.
+     */
+    public Deadline(String input, boolean isDone) {
+        super(input, isDone);
+        this.symbol = 'D';
+        String[] temp = input.split(",");
+        this.description = temp[0];
+        LocalDate inputFormatter = LocalDate.parse(temp[1]);
+        this.duedate = inputFormatter;
+        this.duedateString = inputFormatter.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
+    }
+
+    /**
+     * Constructor a new Deadline task keyed in by the user.
+     * @param input Description and duedate of the task, including its header "deadline".
+     * @throws DukeException If description is empty, or duedate keyed in does not fit specified format.
+     */
     public Deadline(String input) throws DukeException {
         super(input);
         this.symbol = 'D';
@@ -26,17 +46,6 @@ public class Deadline extends Task {
             this.duedate = inputFormatter;
             this.duedateString = inputFormatter.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
     }
-
-    public Deadline(String input, boolean isDone) {
-        super(input, isDone);
-        this.symbol = 'D';
-        String[] temp = input.split(",");
-        this.description = temp[0];
-        LocalDate inputFormatter = LocalDate.parse(temp[1]);
-        this.duedate = inputFormatter;
-        this.duedateString = inputFormatter.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
-    }
-
     public String saveTask() {
         return this.symbol + "," + isDone + "," + this.description + "," + duedate;
     }

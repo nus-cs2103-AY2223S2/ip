@@ -10,17 +10,28 @@ import java.util.Scanner;
 public class Storage {
     protected File file;
 
-    public Storage(String fileInput) throws DukeException{
+    /**
+     * Finds or creates a storage text file to save and load tasks.
+     * @param fileInput The String file path to find the storage text file.
+     * @throws DukeException If creating the directory or file for storage is unsuccessful.
+     */
+    public Storage(String fileInput) throws DukeException {
         try {
             this.file = new File(fileInput);
             if (!file.exists()) {
                 Files.createDirectories(Paths.get(file.getParent()));
                 this.file = Files.createFile(Path.of(fileInput)).toFile();
             }
-        } catch (IOException err){
-            throw new DukeException("Error, the directory of tasks cannot be found.");
+        } catch (IOException err) {
+            throw new DukeException("Error, the directory of tasks cannot be found or created. Any new tasks you enter will not be saved.");
         }
     }
+
+    /**
+     * Loads the tasks written in the storage file (if any) to an ArrayList.
+     * @return An ArrayList of tasks that was written into the storage text file.
+     * @throws DukeException If there is an error with opening a scanner to read the storage file.
+     */
     public ArrayList<Task> loadTasks() throws DukeException {
         try {
             ArrayList<Task> tasks = new ArrayList<>();
@@ -37,11 +48,16 @@ public class Storage {
                 }
             }
             return tasks;
-        } catch(FileNotFoundException err) {
-            throw new DukeException("Error, your saved tasks cannot be loaded.");
+        } catch (FileNotFoundException err) {
+            throw new DukeException("There has been an error loading your saved tasks. Any new tasks you enter will not be saved.");
         }
     }
 
+    /**
+     * Saves the ArrayList of tasks into the storage file.
+     * @param taskList The taskList to save the tasks from.
+     * @throws DukeException If there is an error with writing the tasks into the storage text file.
+     */
     public void saveTasks(TaskList taskList) throws DukeException {
         try {
             FileWriter fileWriter = new FileWriter(file);

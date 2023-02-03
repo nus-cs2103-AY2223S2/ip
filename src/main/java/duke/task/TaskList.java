@@ -1,7 +1,6 @@
 package duke.task;
 
 import duke.DukeException;
-import duke.task.Task;
 
 import java.util.ArrayList;
 
@@ -12,10 +11,19 @@ public class TaskList {
         this.tasks = tasks;
     }
 
-    public void addTask(Task cur) {
-        tasks.add(cur);
+    /**
+     * Adds a task to the task list.
+     * @param task The task to be added.
+     */
+    public void addTask(Task task) {
+        tasks.add(task);
     }
 
+    /**
+     * Deletes a task from the task list.
+     * @param index The number of the task to delete.
+     * @throws DukeException If the number specified is invalid (> Number of tasks in task list or <= 0).
+     */
     public void deleteTask(int index) throws DukeException {
         try {
             tasks.remove(index - 1);
@@ -24,6 +32,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Unmarks a task in the task list.
+     * @param index The number of the task to unmark.
+     * @throws DukeException If the number specified is invalid (> Number of tasks in task list or <= 0).
+     */
     public void unmarkTask(int index) throws DukeException {
         try {
             Task cur = tasks.get(index - 1);
@@ -33,6 +46,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Marks a task in the task list.
+     * @param index The number of the task to mark.
+     * @throws DukeException If the number specified is invalid (> Number of tasks in task list or <= 0).
+     */
     public void markTask(int index) throws DukeException {
         try {
             Task cur = tasks.get(index - 1);

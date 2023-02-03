@@ -4,10 +4,21 @@ import duke.DukeException;
 
 public class Todo extends Task {
 
+    /**
+     * Constructor for Todo task, loaded from the storage file.
+     * @param input Description of the task.
+     * @param isDone Whether the task is marked or unmarked.
+     */
     public Todo(String input, boolean isDone) {
         super(input, isDone);
         this.symbol = 'T';
     }
+
+    /**
+     * Constructor for a new Todo task keyed in by the user.
+     * @param input Description of the task, including its header "todo".
+     * @throws DukeException If description of task is empty.
+     */
     public Todo(String input) throws DukeException {
         super(input);
         this.symbol = 'T';
