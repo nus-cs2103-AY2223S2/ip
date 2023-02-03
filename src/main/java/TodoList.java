@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class TodoList {
+public class TodoList implements Serializable {
     private ArrayList<Task> todo_list;
 
     public TodoList() {
