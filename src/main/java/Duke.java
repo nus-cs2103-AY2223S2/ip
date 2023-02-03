@@ -1,10 +1,13 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 public class Duke {
     protected static ArrayList<Task> taskList;
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        taskList = new ArrayList<Task>();
+        taskList = new ArrayList<>();
 
         String logo = " ____        _\n"
                     + "|  _ \\ _   _| | _____\n"
@@ -72,13 +75,24 @@ public class Duke {
         }
         String[] dlString = input[1].split(" /by ");
         if (dlString.length == 1 || dlString[1].isEmpty()) {
-            throw new DukeException(" ☹ OOPS!!! The due date of a deadline cannot be empty.");
+            throw new DukeException(" ☹ OOPS!!! The description and due date of a deadline cannot be empty.");
         }
-        Deadline tempDeadline = new Deadline(dlString[0], dlString[1]);
-        taskList.add(tempDeadline);
-        String message = "Got it. I've added this task:\n " + tempDeadline.toString();
-        message += "\nNow you have " + taskList.size() + " tasks in the list.";
-        dukeSpeak(message);
+        try {
+            String[] dateTimeString = dlString[1].split(" ");
+            String timeString = "00:00";
+            if (dateTimeString.length == 2) {
+                timeString = dateTimeString[1].substring(0, 2) + ":" + dateTimeString[1].substring(2);
+            }
+            LocalDateTime dueDate = LocalDateTime.parse(dateTimeString[0] + "T" + timeString); // format: 2007-12-03T10:15:30
+            Deadline tempDeadline = new Deadline(dlString[0], dueDate);
+            taskList.add(tempDeadline);
+            String message = "Got it. I've added this task:\n " + tempDeadline.toString();
+            message += "\nNow you have " + taskList.size() + " tasks in the list.";
+            dukeSpeak(message);
+        } catch(DateTimeParseException dateTimeParseException) {
+            throw new DukeException("Hey! Incorrect format for date-time! Try:  yyyy-mm-dd hhmm");
+        }
+
     }
 
     public static void event(String[] input) throws DukeException {
@@ -93,12 +107,27 @@ public class Duke {
         if (timeSplit.length == 1 || timeSplit[1].isEmpty()) {
             throw new DukeException(" ☹ OOPS!!! The start & end time of an event cannot be empty.");
         }
+        try {
+            String[] dateTimeString = timeSplit[0].split(" ");
+            String startTimeString = "00:00";
+            if (dateTimeString.length == 2) {
+                startTimeString = dateTimeString[1].substring(0, 2) + ":" + dateTimeString[1].substring(2);
+            }
+            LocalDateTime startDate = LocalDateTime.parse(dateTimeString[0] + "T" + startTimeString); // format: 2007-12-03T10:15:30
+            String endTimeString = timeSplit[1].substring(0, 2) + ":" + timeSplit[1].substring(2);
+            LocalDateTime endDate = LocalDateTime.parse(dateTimeString[0] + "T" + endTimeString);
 
-        Event tempEvent = new Event(eventString[0], timeSplit[0], timeSplit[1]);
-        taskList.add(tempEvent);
-        String message = "Got it. I've added this task:\n " + tempEvent.toString();
-        message += "\nNow you have " + taskList.size() + " tasks in the list.";
-        dukeSpeak(message);
+            Event tempEvent = new Event(eventString[0], startDate, endDate);
+            taskList.add(tempEvent);
+            String message = "Got it. I've added this task:\n " + tempEvent.toString();
+            message += "\nNow you have " + taskList.size() + " tasks in the list.";
+            dukeSpeak(message);
+
+        } catch (DateTimeParseException dateTimeParseException) {
+            throw new DukeException("Hey! Incorrect format for date-time! Try:  yyyy-mm-dd hhmm");
+        }
+
+
     }
 
     public static void listTask() {
