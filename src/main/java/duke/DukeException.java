@@ -17,6 +17,6 @@ public class DukeException extends Exception {
 
     @Override
     public String toString() {
-        return String.format("[Error Encountered] %s", message);
+        return String.format("%s", message);
     }
 }

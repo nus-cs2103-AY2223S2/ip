@@ -41,11 +41,13 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     public String getResponse(String cmd) {
+        assert cmd.length() <= 0 : "Command should not be an empty string";
+
         try {
             Command command = parser.parseUserCommand(cmd);
             return command.execute();
         } catch (DukeException e) {
-            return "Sorry, I ran into a problem... Try again";
+            return e.toString();
         }
     }
 }

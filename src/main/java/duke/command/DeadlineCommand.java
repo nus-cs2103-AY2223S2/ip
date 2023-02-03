@@ -37,6 +37,7 @@ public class DeadlineCommand extends Command {
     public String execute() throws DukeException {
         DeadlineTask task = new DeadlineTask(taskDescription, deadlineBy);
         taskList.addTask(task);
+        System.out.println(taskList.size());
 
         return ui.showTaskCreatedMessage(task);
     }

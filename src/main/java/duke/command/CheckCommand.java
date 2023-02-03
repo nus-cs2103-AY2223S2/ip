@@ -36,14 +36,13 @@ public class CheckCommand extends Command {
         for (Task task : taskList.allTasks()) {
             if (task instanceof EventTask) {
                 EventTask eventTask = (EventTask) task;
-                if ((eventTask.getFrom().isEqual(targetDate) || eventTask.getFrom().isBefore(targetDate))
-                        && (eventTask.getTo().isEqual(targetDate) || eventTask.getTo().isAfter(targetDate))) {
+                if (eventTask.checkDateDuringTask(targetDate)) {
                     stringBuilder.append(eventTask);
                     stringBuilder.append("\n");
                 }
             } else if (task instanceof DeadlineTask) {
                 DeadlineTask deadlineTask = (DeadlineTask) task;
-                if (deadlineTask.getBy().isEqual(targetDate) || deadlineTask.getBy().isAfter(targetDate)) {
+                if (deadlineTask.checkDateIsBefore(targetDate)) {
                     stringBuilder.append(deadlineTask);
                     stringBuilder.append("\n");
                 }
