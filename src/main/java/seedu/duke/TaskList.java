@@ -42,6 +42,7 @@ public class TaskList {
      * @return size of the TaskList.
      */
     public int size() {
+        assert this.size >= 0: "TaskList length cannot be negative.";
         return taskList.size();
     }
 

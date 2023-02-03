@@ -32,9 +32,9 @@ public class Parser {
         try {
             // Split the user input into an array with the command and the description
             String[] description = s.split(" ", 2);
-            // Set command
             String command = description[0];
             Commands currCommand = Commands.valueOf(command.toUpperCase());
+            assert taskList.size() >= 0: "TaskList length cannot be negative.";
 
         switch (currCommand) {
         case BYE:

@@ -42,6 +42,7 @@ public class Ui {
      * @return String for tasks left.
      */
     public String displayTaskList(TaskList taskList) {
+        assert taskList.size() >= 0: "TaskList length cannot be negative.";
         if (taskList.size() == 0) {
             return "You have no tasks. Hooray!";
         } else {
@@ -64,6 +65,7 @@ public class Ui {
      * @return String the number of tasks in the TaskList
      */
     public String displayFindList(TaskList taskList, String keyword) {
+        assert taskList.size() >= 0: "TaskList length cannot be negative.";
         if (taskList.size() == 0) {
             return "There are no such tasks.";
         } else {
@@ -86,6 +88,7 @@ public class Ui {
      * @return String for marked.
      */
     public static String displayMarked(TaskList taskList, int index) {
+        assert taskList.size() >= 0: "TaskList length cannot be negative.";
         String markingTask = "Alright, marking this task as done:";
         return markingTask + "\n\n" + indent(taskList.get(index).toString());
     }
@@ -99,6 +102,7 @@ public class Ui {
      * @return String for unmarked.
      */
     public static String displayUnmarked(TaskList taskList, int index) {
+        assert taskList.size() >= 0: "TaskList length cannot be negative.";
         String unmarkingTask = "Alright, marking this task not done yet:";
         return unmarkingTask + "\n\n" + indent(taskList.get(index).toString());
     }
@@ -112,6 +116,7 @@ public class Ui {
      * @return String for deleted.
      */
     public static String displayDelete(TaskList taskList, int index) {
+        assert taskList.size() >= 0: "TaskList length cannot be negative.";
         String removingTask = "Noted, removing this task:";
         Task t = taskList.get(index);
         return removingTask + "\n\n" + indent(t.toString());
@@ -137,6 +142,7 @@ public class Ui {
      * @return String for TaskList size.
      */
     public static String checkList(TaskList taskList) {
+        assert taskList.size() >= 0: "TaskList length cannot be negative.";
         if (taskList.size() == 1) {
             return "You have 1 task in the list.";
         } else if (taskList.size() == 0) {
