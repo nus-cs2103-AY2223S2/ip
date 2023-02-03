@@ -1,11 +1,17 @@
 package task;
+
+/**
+ * Parent class Task
+ * Inherited by ToDo, Deadline and Event Class
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
 
     /**
-     * Constructor
-     * @param description
+     * Constructor.
+     *
+     * @param description Description of the task
      */
     public Task(String description) {
         this.description = description;
@@ -13,9 +19,10 @@ public class Task {
     }
 
     /**
-     * Another Constructor
-     * @param description
-     * @param isDone
+     * Another Constructor.
+     *
+     * @param description Description of the task.
+     * @param isDone Status to show if the task is done.
      */
     public Task(String description, boolean isDone) {
         this.description = description;
@@ -23,8 +30,8 @@ public class Task {
     }
 
     /**
-     * Returns isDoneStatus in String form
-     * X indicating marked, and whitespace indicating unmarked
+     * Returns isDoneStatus in String form.
+     * X indicating marked, and whitespace indicating unmarked.
      *
      * @return isDone
      */
@@ -33,14 +40,14 @@ public class Task {
     }
 
     /**
-     * Marks the task as done
+     * Marks the task as done.
      */
     public void mark() {
         this.isDone = true;
     }
 
     /**
-     * Marks the task as undone
+     * Marks the task as undone.
      */
     public void unmark() {
         this.isDone = false;

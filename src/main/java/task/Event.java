@@ -1,15 +1,35 @@
 package task;
+
+/**
+ * Encapsulates a Task with a duration
+ *
+ */
 public class Event extends Task {
 
     protected String from;
     protected String to;
 
+    /**
+     * Constructor
+     *
+     * @param description Description of the task.
+     * @param from Start of the task.
+     * @param to End of the task.
+     */
     public Event(String description, String from, String to) {
         super(description);
         this.from = from;
         this.to = to;
     }
 
+    /**
+     * Another Constructor
+     *
+     * @param description Description of the task.
+     * @param from Start of the task.
+     * @param to End of the task.
+     * @param marked Status to show if the task is done.
+     */
     public Event(String description, String from, String to, boolean marked) {
         super(description, marked);
         this.from = from;
