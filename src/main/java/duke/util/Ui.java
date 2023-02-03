@@ -1,5 +1,6 @@
-package duke;
+package duke.util;
 
+import duke.Duke;
 import duke.command.Command;
 
 import java.util.Arrays;
@@ -15,11 +16,11 @@ public class Ui {
     private String[] helpMsg = {};
 
     /**
-     * Defines the Duke commands from which the help message is generated.
+     * Creates the help message from the given Duke commands.
      *
      * @param commands The commands recognized by Duke.
      */
-    public void setCommands(Command[] commands) {
+    public void setHelpMsg(Command[] commands) {
         this.helpMsg = generateHelp(commands);
     }
 

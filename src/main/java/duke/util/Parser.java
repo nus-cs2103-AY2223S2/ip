@@ -1,4 +1,4 @@
-package duke;
+package duke.util;
 
 import duke.command.Command;
 
@@ -66,5 +66,19 @@ public class Parser {
             }
         }
         throw new IllegalArgumentException("Command not found: " + name);
+    }
+
+    /**
+     * Helper method to join array of Strings with indentation
+     *
+     * @param lines array of Strings to be joined
+     * @return the resultant output String with 1 tab of indentation
+     */
+    public static String join(String[] lines) {
+        StringBuilder outputs = new StringBuilder();
+        for (String str : lines) {
+            outputs.append("\t").append(str).append("\n");
+        }
+        return outputs.toString();
     }
 }

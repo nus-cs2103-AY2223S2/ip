@@ -1,6 +1,8 @@
 package duke.command;
 
-import java.util.function.Function;
+import duke.util.Stateful;
+
+import java.util.function.Supplier;
 
 /**
  * A simple command that does not take arguments.
@@ -8,22 +10,22 @@ import java.util.function.Function;
  * @see Command
  */
 public class BasicCommand extends Command {
-  private final Function<Boolean, String[]> function;
+    private final Supplier<Stateful> supplier;
 
-  /**
-   * Creates a new BasicCommand.
-   *
-   * @param name     The name of the command.
-   * @param helpStr  The help string of the command.
-   * @param supplier The supplier to be called when the command is executed.
-   */
-  public BasicCommand(String name, String helpStr,Function<Boolean, String[]> supplier) {
-    super(name, helpStr, false, new String[]{});
-    this.function = supplier;
-  }
+    /**
+     * Creates a new BasicCommand.
+     *
+     * @param name     The name of the command.
+     * @param helpStr  The help string of the command.
+     * @param supplier The supplier to be called when the command is executed.
+     */
+    public BasicCommand(String name, String helpStr, Supplier<Stateful> supplier) {
+        super(name, helpStr, false, new String[]{});
+        this.supplier = supplier;
+    }
 
-  @Override
-  public String[] execute(String[] params, Boolean hasQuit) {
-    return function.apply(hasQuit);
-  }
+    @Override
+    public Stateful execute(String[] params) {
+        return supplier.get();
+    }
 }
