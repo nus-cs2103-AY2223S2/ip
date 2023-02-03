@@ -23,7 +23,8 @@ public class FindCommand extends Command {
 
     /**
      * Executes logic of displaying task list by filtering task objects on given keyword.
-     *  @param ui UI instance of bot.
+     *
+     * @param ui UI instance of bot.
      * @param taskList Current task list storing tasks.
      * @param storage Storage file to store current state items of task list.
      * @return Bot's reply to user's find task command.

@@ -26,7 +26,8 @@ public class DeleteCommand extends Command {
      * Gets specified task object from task list, reduces total object count and removes it from task list.
      * Deletes the task from storage file record.
      * Returns successful delete message to user.
-     *  @param ui UI instance of bot.
+     *
+     * @param ui UI instance of bot.
      * @param taskList Current task list storing tasks.
      * @param storage Storage file to store current state items of task list.
      * @return Bot's reply to user's delete task command.
@@ -36,7 +37,7 @@ public class DeleteCommand extends Command {
         Task task = taskList.getTask(taskIndex);
 
         task.removeTask();
-        taskList.removeListMember(taskIndex);
+        taskList.removeTask(taskIndex);
         storage.rewriteFile(taskIndex);
         return ui.replyRemoveTaskMsg(task, Task.printTotalTask());
     }

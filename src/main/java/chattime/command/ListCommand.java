@@ -27,7 +27,8 @@ public class ListCommand extends Command {
     /**
      * Implements and executes main logic of ListCommand object.
      * Assign cases into displayList and listTime.
-     *  @param ui UI instance of bot.
+     *
+     * @param ui UI instance of bot.
      * @param taskList Current task list storing tasks.
      * @param storage Storage file to store current state items of task list.
      * @return Bot's reply to user's request list command.
@@ -39,7 +40,7 @@ public class ListCommand extends Command {
         } else {
             return listTime(ui, taskList);
         }
-    };
+    }
 
     /**
      * Executes logic of displaying basic task list, without time search.

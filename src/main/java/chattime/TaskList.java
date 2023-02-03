@@ -33,7 +33,7 @@ public class TaskList {
      *
      * @param index Input index from user, index-th task in task list to be removed.
      */
-    public void removeListMember(int index) {
+    public void removeTask(int index) {
         tasks.remove(index - 1);
     }
 

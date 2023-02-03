@@ -18,10 +18,13 @@ public class Task {
      */
     enum TaskType {
         TODO("T"), DEADLINE("D"), EVENT("E");
+
         private String taskCode;
+
         TaskType(String code) {
             taskCode = code;
         }
+
         @Override
         public String toString() {
             return taskCode;

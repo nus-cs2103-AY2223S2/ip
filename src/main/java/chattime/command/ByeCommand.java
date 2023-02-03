@@ -12,7 +12,8 @@ public class ByeCommand extends Command {
     /**
      * Implements and executes main logic of ByeCommand object.
      * Exits the bot program with ending message.
-     *  @param ui UI instance of bot.
+     *
+     * @param ui UI instance of bot.
      * @param taskList Current task list storing tasks.
      * @param storage Storage file to store current state items of task list.
      * @return Bot's reply to user's end chat command.

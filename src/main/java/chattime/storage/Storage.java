@@ -224,7 +224,7 @@ public class Storage {
                 writeToFile(updateString.toString(), false);
             }
         } catch (IOException | IndexOutOfBoundsException e) {
-            ui.printError(e.getMessage());
+            System.err.println(e.getMessage());
         }
     }
 

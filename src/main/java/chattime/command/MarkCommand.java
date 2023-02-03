@@ -28,7 +28,8 @@ public class MarkCommand extends Command {
      * Gets task from task list.
      * Executes task status marking and returns UI message respectively to user.
      * Updates data in storage file.
-     *  @param ui UI instance of bot.
+     *
+     * @param ui UI instance of bot.
      * @param taskList Current task list storing tasks.
      * @param storage Storage file to store current state items of task list.
      * @return Bot's reply to user's task mark or unmark done command.

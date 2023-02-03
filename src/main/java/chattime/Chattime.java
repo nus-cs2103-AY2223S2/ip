@@ -44,6 +44,7 @@ public class Chattime {
 
     /**
      * Replies gretting message to user.
+     *
      * @return Greeting words.
      */
     String greet() {
@@ -52,6 +53,7 @@ public class Chattime {
 
     /**
      * Determines if the 'bye' command is given to a bot instance.
+     *
      * @return The running status of current bot.
      */
     boolean checkRunningStatus() {
