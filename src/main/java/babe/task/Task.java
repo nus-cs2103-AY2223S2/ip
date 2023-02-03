@@ -65,4 +65,13 @@ public abstract class Task {
      */
     public abstract String toSaveFormat();
 
+    /**
+     * Checks if a Task's description contains the given search key.
+     *
+     * @return A boolean value; true if the search key is entirely contained within the description. False otherwise.
+     */
+    public Boolean contains(String key) {
+        return description.contains(key);
+    }
+
 }

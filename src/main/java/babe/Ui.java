@@ -2,6 +2,8 @@ package babe;
 
 import babe.task.Task;
 
+import java.util.ArrayList;
+
 /**
  * This class deals with interactions with the user
  */
@@ -77,6 +79,23 @@ class Ui {
         Ui.drawLineHeader();
         System.out.println(toMark ? "Okay, babygorl. I've marked this as Done:" : "We have un-Done this for you:");
         System.out.println(task.toString());
+    }
+
+    protected static void notifyFindResults(ArrayList<Task> tasks) {
+        if (tasks.size() == 0) {
+            Ui.drawLineHeader();
+            System.out.println("Oh nuuu we can't find the task you are looking for. "
+                    + "Perhaps you haven't added the item yet?\n"
+                    + "Try 'list' command to check!");
+
+        } else {
+            Ui.drawLineHeader();
+            System.out.println("Here's what we could find: ");
+            for (int i = 0; i < tasks.size(); i++) {
+                System.out.printf("%d. ", i + 1);
+                System.out.println(tasks.get(i));
+            }
+        }
     }
 
 
