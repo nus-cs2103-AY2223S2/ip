@@ -1,9 +1,14 @@
 package clippy.command;
 
-import clippy.exception.*;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+
+import clippy.exception.ClippyException;
+import clippy.exception.ClippyInvalidDateException;
+import clippy.exception.ClippyInvalidEventException;
+import clippy.exception.ClippyMissingDeadlineException;
+import clippy.exception.ClippyTodoEmptyDescriptionException;
+import clippy.exception.ClippyUnknownCommandException;
 
 /**
  * Parser to parse all user commands.
@@ -11,6 +16,7 @@ import java.time.format.DateTimeParseException;
  * @author chunzkok
  */
 public class Parser {
+    private static final String[] EMPTY_ARG_LIST = new String[]{};
     /**
      * Identifies the correct Command handler to be invoked based on the user input.
      *
@@ -20,7 +26,6 @@ public class Parser {
      */
     public static Command parse(String command) throws ClippyException {
         String[] args = command.split(" ");
-        final String[] EMPTY_ARG_LIST = new String[]{};
         switch (args[0]) {
         case "bye":
             return dispatch(CommandType.BYE, EMPTY_ARG_LIST);
@@ -35,8 +40,7 @@ public class Parser {
                 throw new ClippyTodoEmptyDescriptionException();
             }
             return dispatch(CommandType.TODO, new String[] { args[1] });
-        case "deadline":
-        {
+        case "deadline": {
             int byIndex = command.indexOf("/by ");
             if (byIndex == -1 || command.length() < byIndex + 4) {
                 throw new ClippyMissingDeadlineException();
@@ -51,11 +55,12 @@ public class Parser {
             }
         }
         case "event": {
-
             int fromIndex = command.indexOf("/from ");
             int toIndex = command.indexOf("/to ");
-            if (fromIndex == -1 || toIndex == -1 || toIndex - fromIndex < 5 ||
-                    command.length() - toIndex < 4) {
+            if (fromIndex == -1
+                    || toIndex == -1
+                    || toIndex - fromIndex < 5
+                    || command.length() - toIndex < 4) {
                 throw new ClippyInvalidEventException();
             }
 

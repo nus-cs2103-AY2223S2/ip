@@ -10,7 +10,7 @@ import clippy.ui.Ui;
  * @author chunzkok
  */
 public class MarkCommand extends Command {
-    int taskIdToMark;
+    private int taskIdToMark;
 
     /**
      * Creates a MarkCommand instance.

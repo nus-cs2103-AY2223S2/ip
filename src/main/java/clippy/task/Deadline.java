@@ -29,8 +29,8 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         // only show day of the week + day of the month + month
-        return "[D]" + super.toString() +
-                " (by: " + by.format(DateTimeFormatter.ofPattern("EEE dd MMM")) + ")";
+        return "[D]" + super.toString()
+                + " (by: " + by.format(DateTimeFormatter.ofPattern("EEE dd MMM")) + ")";
     }
 
     /**

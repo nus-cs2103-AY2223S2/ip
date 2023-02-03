@@ -1,11 +1,11 @@
 package clippy.command;
 
+import java.util.List;
+
 import clippy.storage.Storage;
 import clippy.task.Task;
 import clippy.task.TaskList;
 import clippy.ui.Ui;
-
-import java.util.List;
 
 /**
  * Command handler for the `find` command.

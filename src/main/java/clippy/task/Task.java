@@ -66,20 +66,20 @@ public abstract class Task {
         Task result = null;
         try {
             switch (arguments[0]) {
-                case "D":
-                    result = new Deadline(arguments[1], LocalDate.parse(arguments[3]));
-                    break;
-                case "T":
-                    result = new ToDo(arguments[1]);
-                    break;
-                case "E":
-                    result = new Event(
-                            arguments[1],
-                            LocalDate.parse(arguments[3]),
-                            LocalDate.parse(arguments[4]));
-                    break;
-                default:
-                    return null;
+            case "D":
+                result = new Deadline(arguments[1], LocalDate.parse(arguments[3]));
+                break;
+            case "T":
+                result = new ToDo(arguments[1]);
+                break;
+            case "E":
+                result = new Event(
+                        arguments[1],
+                        LocalDate.parse(arguments[3]),
+                        LocalDate.parse(arguments[4]));
+                break;
+            default:
+                return null;
             }
         } catch (DateTimeParseException e) {
             System.out.println(">>> Unable to parse date: " + e.toString());

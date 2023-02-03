@@ -13,14 +13,14 @@ import clippy.ui.Ui;
  * @author chunzkok
  */
 public class Clippy {
-    private static final String logo = "   _____  _  _                      \n" +
-            "  / ____|| |(_)                     \n" +
-            " | |     | | _  _ __   _ __   _   _ \n" +
-            " | |     | || || '_ \\ | '_ \\ | | | |\n" +
-            " | |____ | || || |_) || |_) || |_| |\n" +
-            "  \\_____||_||_|| .__/ | .__/  \\__, |\n" +
-            "               | |    | |      __/ |\n" +
-            "               |_|    |_|     |___/ ";
+    private static final String logo = "   _____  _  _                      \n"
+            + "  / ____|| |(_)                     \n"
+            + " | |     | | _  _ __   _ __   _   _ \n"
+            + " | |     | || || '_ \\ | '_ \\ | | | |\n"
+            + " | |____ | || || |_) || |_) || |_| |\n"
+            + "  \\_____||_||_|| .__/ | .__/  \\__, |\n"
+            + "               | |    | |      __/ |\n"
+            + "               |_|    |_|     |___/ ";
     private Ui ui;
     private Storage storage;
     private TaskList taskList;

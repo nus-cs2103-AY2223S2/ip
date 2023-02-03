@@ -10,7 +10,7 @@ import clippy.ui.Ui;
  * @author chunzkok
  */
 public class UnmarkCommand extends Command {
-    int taskIdToUnmark;
+    private int taskIdToUnmark;
 
     /**
      * Creates an UnmarkCommand instance.

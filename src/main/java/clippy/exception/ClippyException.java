@@ -6,7 +6,7 @@ package clippy.exception;
  * @author chunzkok
  */
 public class ClippyException extends Exception {
-    String msg;
+    private String msg;
 
     /**
      * Creates a ClippyException instance.

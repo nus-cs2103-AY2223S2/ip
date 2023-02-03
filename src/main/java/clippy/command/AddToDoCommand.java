@@ -1,8 +1,8 @@
 package clippy.command;
 
 import clippy.storage.Storage;
-import clippy.task.ToDo;
 import clippy.task.TaskList;
+import clippy.task.ToDo;
 import clippy.ui.Ui;
 
 /**
