@@ -55,6 +55,8 @@ public class Gui extends Application {
      */
     public Gui() {
         this.book = new Book();
+        assert this.bookIcon != null : "Missing Book icon resource";
+        assert this.userIcon != null : "Missing User icon resource";
     }
 
     /**
@@ -65,6 +67,7 @@ public class Gui extends Application {
      */
     @Override
     public void start(Stage stage) {
+        assert this.book != null : "GUI should have an associated Book";
         setStage(stage);
         setDialogContainer();
         setScrollPane();

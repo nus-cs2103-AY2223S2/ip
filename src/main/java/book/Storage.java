@@ -47,6 +47,8 @@ public class Storage {
                 System.out.print("Book.Book had an issue loading the history book.\n");
             }
         }
+        assert this.bookSave != null : "Storage should have an associated save File";
+        assert this.saveDir != null : "Storage should have an associated save directory File";
     }
 
     /**
