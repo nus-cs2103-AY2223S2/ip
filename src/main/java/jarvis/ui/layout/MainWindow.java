@@ -59,9 +59,11 @@ public class MainWindow extends AnchorPane {
 
         String inputText = userInput.getText();
         String jarvisText = jarvis.getResponse(inputText);
+        boolean hasError = jarvis.resetErrorFlag();
+
         chatContainer.getChildren().addAll(
-                new MessageBox(inputText, userImage),
-                new MessageBox(jarvisText, jarvisImage).flip()
+                new MessageBox(inputText, userImage).makeUltron(),
+                new MessageBox(jarvisText, jarvisImage).makeJarvis().flip().makeError(hasError)
         );
         userInput.clear();
     }

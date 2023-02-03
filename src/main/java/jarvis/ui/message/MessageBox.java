@@ -53,7 +53,7 @@ public class MessageBox extends HBox {
     @FXML
     public void initialize() {
         this.getStyleClass().add("message-box");
-        messageChat.getStyleClass().add("message-chat");
+        messageChat.getStyleClass().addAll("message-chat-base");
     }
 
     /**
@@ -66,6 +66,28 @@ public class MessageBox extends HBox {
         ObservableList<Node> nodes = FXCollections.observableArrayList(this.getChildren());
         FXCollections.reverse(nodes);
         this.getChildren().setAll(nodes);
+        return this;
+    }
+
+    /**
+     * Sets the error style.
+     *
+     * @return This message box.
+     */
+    public MessageBox makeError(boolean hasError) {
+        if (hasError) {
+            messageChat.getStyleClass().add("message-chat-error");
+        }
+        return this;
+    }
+
+    public MessageBox makeJarvis() {
+        messageChat.getStyleClass().add("message-chat-jarvis");
+        return this;
+    }
+
+    public MessageBox makeUltron() {
+        messageChat.getStyleClass().add("message-chat-ultron");
         return this;
     }
 }
