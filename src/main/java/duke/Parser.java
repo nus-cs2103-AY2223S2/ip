@@ -133,9 +133,9 @@ public class Parser {
         return parseInfo;
     }
 
-    public static String parseFindKeyword(String commandInput) throws FindKeywordMissing {
+    public static String[] parseFindKeyword(String commandInput) throws FindKeywordMissing {
         try {
-            return commandInput.split(" ")[1];
+            return commandInput.substring(6).split(" ");
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new FindKeywordMissing();
         }

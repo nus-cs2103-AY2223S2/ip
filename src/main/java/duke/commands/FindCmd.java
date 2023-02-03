@@ -19,8 +19,8 @@ public class FindCmd extends Command {
 
     /** Searches for specified keyword in the task list */
     public void execute(Duke duke) throws CommandExecutionError {
-        String findKeyword = Parser.parseFindKeyword(this.lineInput);
-        this.findResult = this.taskList.find(findKeyword);
+        String[] findKeywords = Parser.parseFindKeyword(this.lineInput);
+        this.findResult = this.taskList.find(findKeywords);
         
         duke.sendResponse("Here are matching tasks in your list:\n" + this.findResult.toString());
     }
