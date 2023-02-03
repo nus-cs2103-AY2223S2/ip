@@ -3,6 +3,7 @@ package chungus;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -25,20 +26,20 @@ class Parser {
      * @throws ChungusException When the expected command format is wrong.
      */
     public static Handler parse(String cmd) {
-        String[] args = cmd.split("\\s+");
-        switch (args[0]) {
+        String[] tokens = cmd.split("\\s+");
+        switch (tokens[0]) {
         case "bye": {
-            return Handlers.getHandlerBye();
+            return Handlers.getBye();
         }
         case "list": {
-            return Handlers.getHandlerList();
+            return Handlers.getList();
         }
         case "todo": {
             String[] pair = cmd.split("\\s+", 2);
             if (pair.length < 2) {
                 throw new ChungusException("Description of todo cannot be empty.");
             }
-            return Handlers.getHandlerTodo(pair[1]);
+            return Handlers.getTodo(pair[1]);
         }
         case "deadline": {
             Matcher matcher = DEADLINE_PATTERN.matcher(cmd);
@@ -50,7 +51,7 @@ class Parser {
             String desc = matcher.group(1);
             LocalDateTime deadline = parseDateTimeInput(matcher.group(2));
 
-            return Handlers.getHandlerDeadline(desc, deadline);
+            return Handlers.getDeadline(desc, deadline);
         }
         case "event": {
             Matcher matcher = EVENT_PATTERN.matcher(cmd);
@@ -64,19 +65,19 @@ class Parser {
             LocalDateTime from = parseDateTimeInput(matcher.group(2));
             LocalDateTime to = parseDateTimeInput(matcher.group(3));
 
-            return Handlers.getHandlerEvent(desc, from, to);
+            return Handlers.getEvent(desc, from, to);
         }
         case "mark": {
-            int idx = getTaskNumberArg(args[1]) - 1;
-            return Handlers.getHandlerMark(idx);
+            int idx = getTaskNumberArg(tokens[1]) - 1;
+            return Handlers.getMark(idx);
         }
         case "unmark": {
-            int idx = getTaskNumberArg(args[1]) - 1;
-            return Handlers.getHandlerUnmark(idx);
+            int idx = getTaskNumberArg(tokens[1]) - 1;
+            return Handlers.getUnmark(idx);
         }
         case "delete": {
-            int idx = getTaskNumberArg(args[1]) - 1;
-            return Handlers.getHandlerDelete(idx);
+            int idx = getTaskNumberArg(tokens[1]) - 1;
+            return Handlers.getDelete(idx);
         }
         case "find": {
             String[] pair = cmd.split("\\s+", 2);
@@ -84,10 +85,27 @@ class Parser {
             if (pair.length == 2) {
                 searchTerm = pair[1];
             }
-            return Handlers.getHandlerFind(searchTerm);
+            return Handlers.getFind(searchTerm);
+        }
+        case "tag": {
+            int idx = getTaskNumberArg(tokens[1]) - 1;
+            String[] tags = Arrays.copyOfRange(tokens, 2, tokens.length);
+            return Handlers.getTag(idx, tags);
+        }
+        case "tagall": {
+            String[] tags = Arrays.copyOfRange(tokens, 1, tokens.length);
+            return Handlers.getTagAll(tags);
+        }
+        case "tagany": {
+            String[] tags = Arrays.copyOfRange(tokens, 1, tokens.length);
+            return Handlers.getTagAny(tags);
+        }
+        case "tagsee": {
+            int idx = getTaskNumberArg(tokens[1]) - 1;
+            return Handlers.getTagSee(idx);
         }
         default: {
-            return Handlers.getHandlerUnknown(args[0]);
+            return Handlers.getUnknown(tokens[0]);
         }
         }
     }
@@ -101,9 +119,11 @@ class Parser {
     }
 
     private static int getTaskNumberArg(String s) {
-        String[] xs = s.split("\\s+");
-        assert xs.length > 0;
-        int num = Integer.parseInt(xs[xs.length - 1]);
-        return num;
+        try {
+            int num = Integer.parseInt(s);
+            return num;
+        } catch (NumberFormatException e) {
+            throw new ChungusException(String.format("Expected a number"), e);
+        }
     }
 }
