@@ -27,17 +27,11 @@ public class ToDo extends Task {
      * @throws DukeException Indicates missing data or incorrect data type in args.
      */
     public static ToDo createFromStorage(String[] args) throws DukeException {
-        if (args.length != 3) {
-            throw new DukeException("A to-do in storage has missing data!");
-        }
-
-        if (!BooleanUtils.isBooleanStr(args[1])) {
-            throw new DukeException("A to-do in storage has an incorrect data type!");
-        }
+        validateNoMissingData(args);
 
         String[] formattedArgs = Task.formatStrsFromStorage(args);
 
-        boolean isDone = Boolean.parseBoolean(formattedArgs[1]);
+        boolean isDone = extractValidIsDone(formattedArgs);
         String description = formattedArgs[2];
 
         return new ToDo(isDone, description);
@@ -56,5 +50,19 @@ public class ToDo extends Task {
     @Override
     protected Task createCopy() {
         return new ToDo(isDone(), getDescription());
+    }
+
+    private static void validateNoMissingData(String[] args) throws DukeException {
+        if (args.length != 3) {
+            throw new DukeException("A to-do in storage has missing data!");
+        }
+    }
+
+    private static boolean extractValidIsDone(String[] formattedArgs) throws DukeException {
+        if (!BooleanUtils.isBooleanStr(formattedArgs[1])) {
+            throw new DukeException("A to-do in storage has an incorrect data type!");
+        }
+
+        return Boolean.parseBoolean(formattedArgs[1]);
     }
 }

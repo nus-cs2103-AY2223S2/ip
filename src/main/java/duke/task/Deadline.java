@@ -36,24 +36,36 @@ public class Deadline extends Task {
      * @throws DukeException Indicates missing data or incorrect data type or format in args.
      */
     public static Deadline createFromStorage(String[] args) throws DukeException {
-        if (args.length != 4) {
-            throw new DukeException("A deadline in storage has missing data!");
-        }
-
-        if (!BooleanUtils.isBooleanStr(args[1])) {
-            throw new DukeException("A deadline in storage has an incorrect data type!");
-        }
+        validateNoMissingData(args);
 
         String[] formattedArgs = Task.formatStrsFromStorage(args);
 
-        LocalDateTime cutoff;
+        boolean isDone = extractValidIsDone(formattedArgs);
+        LocalDateTime cutoff = extractValidCutoff(formattedArgs);
+
+        return new Deadline(isDone, formattedArgs[2], cutoff);
+    }
+
+    private static void validateNoMissingData(String[] args) throws DukeException {
+        if (args.length != 4) {
+            throw new DukeException("A deadline in storage has missing data!");
+        }
+    }
+
+    private static boolean extractValidIsDone(String[] formattedArgs) throws DukeException {
+        if (!BooleanUtils.isBooleanStr(formattedArgs[1])) {
+            throw new DukeException("A deadline in storage has an incorrect data type!");
+        }
+
+        return Boolean.parseBoolean(formattedArgs[1]);
+    }
+
+    private static LocalDateTime extractValidCutoff(String[] formattedArgs) throws DukeException {
         try {
-            cutoff = LocalDateTime.parse(formattedArgs[3]);
+            return LocalDateTime.parse(formattedArgs[3]);
         } catch (DateTimeParseException e) {
             throw new DukeException("A deadline in storage has an incorrectly formatted cutoff date and time!");
         }
-
-        return new Deadline(Boolean.parseBoolean(formattedArgs[1]), formattedArgs[2], cutoff);
     }
 
     @Override

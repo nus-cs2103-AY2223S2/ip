@@ -39,32 +39,14 @@ public class Event extends Task {
      * @throws DukeException Indicates missing data or incorrect data type or format in args.
      */
     public static Event createFromStorage(String[] args) throws DukeException {
-        if (args.length != 5) {
-            throw new DukeException("An event in storage has missing data!");
-        }
-
-        if (!BooleanUtils.isBooleanStr(args[1])) {
-            throw new DukeException("An event in storage has an incorrect data type!");
-        }
+        validateNoMissingData(args);
 
         String[] formattedArgs = Task.formatStrsFromStorage(args);
 
-        LocalDateTime start;
-        try {
-            start = LocalDateTime.parse(formattedArgs[3]);
-        } catch (DateTimeParseException e) {
-            throw new DukeException("An event in storage has an incorrectly formatted start of event!");
-        }
-
-        LocalDateTime end;
-        try {
-            end = LocalDateTime.parse(formattedArgs[4]);
-        } catch (DateTimeParseException e) {
-            throw new DukeException("An event in storage has an incorrectly formatted end of event!");
-        }
-
-        boolean isDone = Boolean.parseBoolean(formattedArgs[1]);
+        boolean isDone = extactValidIsDone(formattedArgs);
         String description = formattedArgs[2];
+        LocalDateTime start = extractValidStart(formattedArgs);
+        LocalDateTime end = extactValidEnd(formattedArgs);
 
         return new Event(isDone, description, start, end);
     }
@@ -89,5 +71,35 @@ public class Event extends Task {
     @Override
     protected Task createCopy() {
         return new Event(isDone(), getDescription(), start, end);
+    }
+
+    private static void validateNoMissingData(String[] args) throws DukeException {
+        if (args.length != 5) {
+            throw new DukeException("An event in storage has missing data!");
+        }
+    }
+
+    private static LocalDateTime extractValidStart(String[] formattedArgs) throws DukeException {
+        try {
+            return LocalDateTime.parse(formattedArgs[3]);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("An event in storage has an incorrectly formatted start of event!");
+        }
+    }
+
+    private static LocalDateTime extactValidEnd(String[] formattedArgs) throws DukeException {
+        try {
+            return LocalDateTime.parse(formattedArgs[4]);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("An event in storage has an incorrectly formatted end of event!");
+        }
+    }
+
+    private static boolean extactValidIsDone(String[] formattedArgs) throws DukeException {
+        if (!BooleanUtils.isBooleanStr(formattedArgs[1])) {
+            throw new DukeException("An event in storage has an incorrect data type!");
+        }
+
+        return Boolean.parseBoolean(formattedArgs[1]);
     }
 }
