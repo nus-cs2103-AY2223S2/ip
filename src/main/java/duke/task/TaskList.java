@@ -29,6 +29,7 @@ public class TaskList {
     }
 
     public String unmark(int taskNumber) {
+        assert(taskNumber > 0);
         Task taskName = listDataBase.get(taskNumber - 1);
         taskName.unMark();
         String result = "OK, I've marked this task as not done yet \n";
@@ -39,6 +40,7 @@ public class TaskList {
     }
 
     public String mark(int taskNumber) {
+        assert(taskNumber > 0);
         Task taskName = listDataBase.get(taskNumber - 1);
         taskName.markAsDone();
         String result = "Nice! I've marked this task as done:\n";
@@ -53,6 +55,7 @@ public class TaskList {
         if (s.length < 2) {
             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
         }
+        assert (s.length >= 2);
         for (int j = 1; j < s.length; j++) {
             taskDescription += s[j];
             taskDescription += " ";
@@ -75,6 +78,7 @@ public class TaskList {
         if (s.length < 2) {
             throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
         }
+        assert (s.length >= 2);
         for (int j = 1; j < s.length; j++) {
             if (s[j].equals("/by")) {
                 isTime = true;
@@ -142,6 +146,7 @@ public class TaskList {
     }
 
     public String delete(int taskNumberDelete) throws DukeException {
+        assert(taskNumberDelete > 0);
         Task currentTask = listDataBase.get(taskNumberDelete - 1);
         String result = "Noted. I've removed this task:\n";
         //System.out.println("Noted. I've removed this task:");
@@ -164,6 +169,7 @@ public class TaskList {
         return null;
     }
     public String find(String word) {
+        assert(word.length() > 0);
         int count = 1;
         String result = "Here are the matching tasks in your list:\n";
         //System.out.println("Here are the matching tasks in your list:");

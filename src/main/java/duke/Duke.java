@@ -39,6 +39,7 @@ public class Duke {
      * Main Program that reads the commands and processes them onto DUKE
      */
     public String run(String input) {
+        assert(input.length() > 0);
         try {
             String fullCommand = input;
             //ui.showLine(); // show the divider line ("_______")
