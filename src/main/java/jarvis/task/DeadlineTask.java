@@ -3,9 +3,9 @@ package jarvis.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
-import jarvis.exception.CommandParseException;
-import jarvis.exception.InvalidParameterException;
-import jarvis.exception.MissingParameterException;
+import jarvis.exception.command.CommandParseException;
+import jarvis.exception.command.InvalidParameterException;
+import jarvis.exception.command.MissingParameterException;
 
 /**
  * Task class representing a deadline task

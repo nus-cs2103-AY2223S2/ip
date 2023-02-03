@@ -1,6 +1,6 @@
 package jarvis.command;
 
-import jarvis.exception.InvalidParameterException;
+import jarvis.exception.command.InvalidParameterException;
 import jarvis.storage.Storage;
 import jarvis.task.TaskList;
 import jarvis.ui.Ui;

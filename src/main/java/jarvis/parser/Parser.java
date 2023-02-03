@@ -20,7 +20,7 @@ import jarvis.command.subcommand.ByCommand;
 import jarvis.command.subcommand.DurationCommand;
 import jarvis.command.subcommand.FromCommand;
 import jarvis.command.subcommand.ToCommand;
-import jarvis.exception.InvalidActionException;
+import jarvis.exception.command.InvalidActionException;
 
 
 /**

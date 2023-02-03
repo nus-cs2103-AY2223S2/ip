@@ -1,7 +1,7 @@
 package jarvis.task;
 
 import jarvis.duration.Duration;
-import jarvis.exception.MissingParameterException;
+import jarvis.exception.command.MissingParameterException;
 
 /**
  * Task class representing a timed (fixed-duration) task.

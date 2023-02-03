@@ -1,4 +1,6 @@
-package jarvis.exception;
+package jarvis.exception.command;
+
+import jarvis.exception.JarvisException;
 
 /**
  * Exception from parsing a command.

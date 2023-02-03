@@ -3,8 +3,8 @@ package jarvis.command;
 import java.util.List;
 
 import jarvis.duration.Duration;
-import jarvis.exception.CommandParseException;
-import jarvis.exception.MissingParameterException;
+import jarvis.exception.command.CommandParseException;
+import jarvis.exception.command.MissingParameterException;
 import jarvis.storage.Storage;
 import jarvis.task.TaskList;
 import jarvis.task.TimedTask;

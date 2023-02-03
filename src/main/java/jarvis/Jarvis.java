@@ -3,7 +3,7 @@ package jarvis;
 import java.util.Scanner;
 
 import jarvis.command.Command;
-import jarvis.exception.InvalidActionException;
+import jarvis.exception.command.InvalidActionException;
 import jarvis.parser.Parser;
 import jarvis.storage.Storage;
 import jarvis.task.TaskList;

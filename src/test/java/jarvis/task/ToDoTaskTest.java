@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import jarvis.exception.MissingParameterException;
+import jarvis.exception.command.MissingParameterException;
 
 public class ToDoTaskTest {
     private static final String BODY = "a todo task";

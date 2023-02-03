@@ -1,6 +1,6 @@
 package jarvis.command;
 
-import jarvis.exception.MissingParameterException;
+import jarvis.exception.command.MissingParameterException;
 import jarvis.storage.Storage;
 import jarvis.task.TaskList;
 import jarvis.task.ToDoTask;
