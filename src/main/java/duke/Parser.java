@@ -181,12 +181,12 @@ public class Parser {
     private static Task addEvent(String command, String line) throws DukeException {
         String details = line.split(command)[1].trim();
         String name = details.split(Parser.FROM_INDICATOR)[0].trim();
-        String from = details.split(Parser.FROM_INDICATOR)[1].split(Parser.TO_INDICATOR)[0].trim();
-        String to = details.split(Parser.FROM_INDICATOR)[1].split(Parser.TO_INDICATOR)[1].trim();
-        if (name.isEmpty() || from.isEmpty() || to.isEmpty()) {
+        String startDate = details.split(Parser.FROM_INDICATOR)[1].split(Parser.TO_INDICATOR)[0].trim();
+        String endDate = details.split(Parser.FROM_INDICATOR)[1].split(Parser.TO_INDICATOR)[1].trim();
+        if (name.isEmpty() || startDate.isEmpty() || endDate.isEmpty()) {
             throw new DukeException(GuiText.generateMissingArgumentErrorMessage(TaskType.EVENT));
         }
-        return Task.createTask(TaskType.EVENT, name, from, to);
+        return Task.createTask(TaskType.EVENT, name, startDate, endDate);
     }
 
     /**

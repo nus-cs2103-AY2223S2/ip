@@ -92,9 +92,9 @@ public abstract class Task {
             String by = arguments[1];
             return new Deadline(name, by);
         case EVENT:
-            String from = arguments[1];
-            String to = arguments[2];
-            return new Event(name, from, to);
+            String startDate = arguments[1];
+            String endDate = arguments[2];
+            return new Event(name, startDate, endDate);
         default:
             return null;
         }

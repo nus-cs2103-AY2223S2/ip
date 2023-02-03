@@ -6,25 +6,26 @@ import java.time.format.DateTimeParseException;
 
 public class Event extends Task {
 
-    private LocalDate from;
-    private LocalDate to;
+    private LocalDate starDate;
+    private LocalDate endDate;
 
-    public Event(String name, String from, String to) throws DateTimeParseException {
+    public Event(String name, String startDate, String endDate) throws DateTimeParseException {
         super(name);
-        this.from = LocalDate.parse(from);
-        this.to = LocalDate.parse(to);
+        this.starDate = LocalDate.parse(startDate);
+        this.endDate = LocalDate.parse(endDate);
     }
 
     @Override
     public String toString() {
         return "[E] " + super.toString() + " (from: "
-            + this.from.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " to: "
-            + this.to.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+            + this.starDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " to: "
+            + this.endDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
     @Override
     public String getFileRepresentation() {
-        return "E" + "@" + (super.isDone() ? "1" : "0") + "@" + this.getName() + "@" + this.from + "@" + this.to;
+        return "E" + "@" + (super.isDone() ? "1" : "0")
+                + "@" + this.getName() + "@" + this.starDate + "@" + this.endDate;
     }
 
 }
