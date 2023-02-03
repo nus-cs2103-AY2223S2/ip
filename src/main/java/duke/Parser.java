@@ -2,10 +2,11 @@ package duke;
 
 public class Parser {
 
-    /** Converts a task from a format of:
-     * TASK_TYPE | TASK_IS_DONE | TASK_NAME | TASK_START | TASK_END
+    /**
+     * Converts a task from the task list format
      * to a Task object
-     * @return a Task object
+     * @param line line to be converted to a <code>Task</code>
+     * @return a <code>Task</code>> object with the relevant information
      */
     public static Task convertTaskFromLineInTaskList(String line) {
         String[] taskInfo = line.split("[|]");
@@ -27,11 +28,23 @@ public class Parser {
         }
     }
 
+    /**
+     * Makes a <code>ToDos</code> object from the given line.
+     * @param line information of the <code>ToDos</code> in a
+     *             <code>String</code> format
+     * @return a <code>Task</code> object of the <code>ToDos</code>
+     */
     public static Task makeTodoFromCommand(String line) {
         String taskName = line.substring(5);
         return new ToDos(taskName);
     }
 
+    /**
+     * Makes a <code>Deadlines</code> object from the given line.
+     * @param line information of the <code>Deadlines</code> in a
+     *             <code>String</code> format
+     * @return a <code>Task</code> object of the <code>Deadlines</code>
+     */
     public static Task makeDeadlineFromCommand(String line) {
         String taskInfo = line.substring(9);
         String taskName = taskInfo.split(" /by")[0];
@@ -39,6 +52,12 @@ public class Parser {
         return new Deadlines(taskName, taskDeadline);
     }
 
+    /**
+     * Makes a <code>Events</code> object from the given line.
+     * @param line information of the <code>Events</code> in a
+     *             <code>String</code> format
+     * @return a <code>Task</code> object of the <code>Events</code>
+     */
     public static Task makeEventFromCommand(String line) {
         String taskInfo = line.substring(6);
         String taskName = taskInfo.split(" /")[0];

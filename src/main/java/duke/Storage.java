@@ -13,11 +13,6 @@ public class Storage {
 
     public Storage(String filePath) {
         try {
-//            File data = new File("data");
-//            if (!data.exists()) {
-//                data.mkdir();
-//                System.out.printf("Create folder: %s\n", data.getName());
-//            }
             this.dukeFilePath = filePath;
             File dukeTxt = new File(filePath);
             if (dukeTxt.createNewFile()) {
@@ -30,8 +25,8 @@ public class Storage {
 
     /**
      * Reads the task list and adds all tasks currently
-     * in task list to an ArrayList<Task></Task>
-     * @return The task list in the form of an ArrayList<Task></Task>
+     * in task list to an <code>ArrayList</code>
+     * @return The task list in the form of an <code>ArrayList</code>
      * @throws DukeException if task list is empty
      */
     public ArrayList<Task> load() throws DukeException {
@@ -54,6 +49,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Updates the task list.
+     * @param tasks list of updated tasks
+     * @throws IOException if something went wrong while updating
+     */
     public void updateTaskList(TaskList tasks) throws IOException {
         FileWriter writer = new FileWriter(dukeFilePath);
         for (int i = 0; i < tasks.getTaskListSize(); i++) {
