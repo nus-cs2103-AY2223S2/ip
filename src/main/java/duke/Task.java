@@ -52,4 +52,8 @@ public class Task {
         }
         return "[X] " + this.taskName;
     }
+
+    public String getDetails() {
+        return this.taskName;
+    }
 }

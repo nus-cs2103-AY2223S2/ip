@@ -132,4 +132,18 @@ public class Ui {
     public void printTotalTask(List<Task> storedInputs) {
         System.out.println("You currently have " + storedInputs.size()  + " tasks in the list.\n");
     }
+
+    /**
+     * Prints found task message.
+     *
+     * @param allTaskFound String to print.
+     */
+    public void printFoundTasks(String allTaskFound) {
+        if (allTaskFound.isBlank()) {
+            System.out.println("DOES NOT EXIST");
+        } else {
+            System.out.println("\nHere you go:\n" + allTaskFound);
+        }
+    }
+
 }

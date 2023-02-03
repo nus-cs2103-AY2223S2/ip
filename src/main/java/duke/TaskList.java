@@ -207,4 +207,35 @@ public class TaskList {
         ui.printAddTaskSuccessfulMessage(newTask);
         ui.printTotalTask(storedInputs);
     }
+
+    /**
+     * Prints all task that stores the given phrase.
+     *
+     * @param userInputRaw Unmodified user input.
+     */
+    public void find(String userInputRaw) {
+
+        String givenPhrase = userInputRaw;
+
+        try {
+            givenPhrase = removeKeyword(givenPhrase);
+        } catch (DukeException e) {
+            ui.printEmptyDetailsMessage("event");
+            return;
+        }
+
+        int count = 1;
+        StringBuilder s = new StringBuilder("  ");
+
+        for (int i = 0; i < this.storedInputs.size(); i++) {
+            Task currentTask = this.storedInputs.get(i);
+            if (currentTask.getDetails().contains(givenPhrase)) {
+                s.append(count).append(".").append(currentTask).append("\n  ");
+                count += 1;
+            }
+        }
+
+        ui.printFoundTasks(s.toString());
+
+    }
 }

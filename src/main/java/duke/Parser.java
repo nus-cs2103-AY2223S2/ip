@@ -39,6 +39,9 @@ public class Parser {
         if (arr[0].equals("event")) {
             return EventType.EVENT;
         }
+        if (arr[0].equals("find")) {
+            return EventType.FIND;
+        }
         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
