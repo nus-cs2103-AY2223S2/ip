@@ -1,9 +1,14 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DukeParser {
     String inputString;
     DukeCommand command;
+
+    final DateTimeFormatter INPUT_DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     public DukeParser(String inputString) {
         this.inputString = inputString;
@@ -52,8 +57,14 @@ public class DukeParser {
                 String description = inputString.substring(offset, byIndex).strip();
                 String deadline = inputString.substring(byIndex + ("/by".length())).strip();
 
-                commandArgs.add(description);
-                commandArgs.add(deadline);
+
+                try {
+                    LocalDate.parse(deadline, INPUT_DATE_FORMAT);
+                    commandArgs.add(description);
+                    commandArgs.add(deadline);
+                } catch (DateTimeParseException e) {
+                    throw new Error("☹ OOPS!!! The time format is invalid, please use yyyy-MM-dd");
+                }
                 break;
             }
             case EVENT: {
@@ -66,13 +77,25 @@ public class DukeParser {
                     throw new Error("Invalid argument!");
 
                 String description = inputString.substring(offset, fromIndex).strip();
-                String from =
-                        inputString.substring(fromIndex + ("/from".length()), toIndex).strip();
-                String to = inputString.substring(toIndex + ("/to".length())).strip();
 
-                commandArgs.add(description);
-                commandArgs.add(from);
-                commandArgs.add(to);
+                try {
+                    String from =
+                            inputString.substring(fromIndex + ("/from".length()), toIndex).strip();
+                    String to = inputString.substring(toIndex + ("/to".length())).strip();
+                    LocalDate fromDate = LocalDate.parse(from, INPUT_DATE_FORMAT);
+                    LocalDate toDate = LocalDate.parse(to, INPUT_DATE_FORMAT);
+
+                    boolean isValidFromDate = fromDate.isBefore(toDate) || fromDate.isEqual(toDate);
+
+                    if (!isValidFromDate)
+                        throw new Error("☹ OOPS!!! from date should be before to date!");
+                    commandArgs.add(description);
+                    commandArgs.add(from);
+                    commandArgs.add(to);
+
+                } catch (DateTimeParseException e) {
+                    throw new Error("☹ OOPS!!! The time format is invalid, please use yyyy-MM-dd");
+                }
                 break;
             }
 
