@@ -1,7 +1,10 @@
 package task;
 
 import java.util.ArrayList;
-import java.util.function.Function;
+import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import dukeexception.NotFoundException;
 import struct.Triple;
@@ -70,7 +73,7 @@ public class TaskList {
      */
     public String addTask(Task task) {
         this.tasks.add(task);
-        return "OK OK Uncle Roger add for you:\n" + task + this.printSize();
+        return "OK OK Uncle Roger add for you:\n" + task + "\n" + this.printSize();
     }
 
     /**
@@ -79,7 +82,7 @@ public class TaskList {
      */
     public String deleteTask(int index) {
         this.isInList(index);
-        String finalString = "FUIYOH task completed:\n" + this.tasks.get(index);
+        String finalString = "Haiya delete task:\n" + this.tasks.get(index);
         this.tasks.remove(index);
         return finalString;
     }
@@ -102,24 +105,19 @@ public class TaskList {
 
     /**
      * Prints out some items from the list.
-     * @param taskFilter A filter that returns a boolean.
+     * @param taskPredicate A filter that returns a boolean.
      */
-    public String listItems(Function<Task, Boolean> taskFilter) {
+    public String listItems(Predicate<Task> taskPredicate) {
         if (this.isEmpty()) {
             return "Haiya list empty!";
         }
 
-        StringBuilder finalString = new StringBuilder();
-        finalString.append("OK OK Uncle Roger tell you what to do:\n");
-        int count = 0;
-        for (int id = 0; id < this.tasks.size(); id++) {
-            Task task = this.getTask(id);
-            if (taskFilter.apply(task)) {
-                finalString.append(String.format("%d. %s\n", count + 1, task));
-                count += 1;
-            }
-        }
-        return finalString.toString();
+        String response = "OK OK Uncle Roger tell you what to do:\n";
+        List<Task> filteredTasks = this.tasks.stream().filter(taskPredicate).collect(Collectors.toList());
+        response += IntStream.range(0, filteredTasks.size())
+                .mapToObj(i -> String.format("%d. %s\n", i + 1, filteredTasks.get(i)))
+                .collect(Collectors.joining());
+        return response;
     }
 
     /**

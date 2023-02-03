@@ -52,7 +52,7 @@ public class Gui {
         int i = 0;
         StringBuilder finalMessage = new StringBuilder();
         while (true) {
-            finalMessage.append(lines[i] + "\n");
+            finalMessage.append(lines[i]).append("\n");
             i++;
             if (i == lines.length) {
                 dialogContainer.getChildren().addAll(
@@ -60,7 +60,7 @@ public class Gui {
                 );
                 break;
             }
-            if (i % 5 == 0) {
+            if (i % 4 == 0) {
                 dialogContainer.getChildren().addAll(
                         DialogBox.getDukeDialog(finalMessage.toString(), dukeImage)
                 );

@@ -32,11 +32,11 @@ public abstract class Command {
         case "event":
             return new AddCommand(commandWord.toUpperCase().charAt(0), commandContent);
         case "find":
-            return new FindCommand(commandContent);
+            return new FindCommand(commandContent.strip().split(" "));
         default:
             throw new UnknownCommandException();
         }
-    };
+    }
 
     /**
      * Executes the given command and outputs to the ui.
