@@ -46,7 +46,8 @@ public class Main extends Application {
 
             stage.setScene(scene);
             stage.setTitle("Duke");
-            //fxmlLoader.<MainWindow>getController().setDuke(duke);
+            //FXMLLoader fxmlLoader2 = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+            //fxmlLoader2.<MainWindow>getController().setDuke(duke);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

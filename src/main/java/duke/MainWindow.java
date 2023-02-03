@@ -60,6 +60,7 @@ public class MainWindow extends AnchorPane {
         System.setOut(oldPrintStream);
         Label greeting = new Label(storeString.toString());
         dialogContainer.getChildren().addAll(greeting);
+        duke = new Duke();
     }
 
     public void setDuke(Duke d) {
