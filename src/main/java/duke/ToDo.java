@@ -5,10 +5,21 @@ package duke;
  */
 public class ToDo extends Task {
 
+    /**
+     * Create a undone ToDo task which consist task details only.
+     *
+     * @param s Task details.
+     */
     public ToDo(String s) {
         super(s);
     }
 
+    /**
+     * Creates an instance of ToDo that takes in task status.
+     *
+     * @param isTaskDone
+     * @param taskDetails
+     */
     public ToDo(Boolean isTaskDone, String taskDetails) {
         super(taskDetails);
         if (isTaskDone) {

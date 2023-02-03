@@ -9,9 +9,17 @@ import java.util.List;
  */
 public class TaskList {
 
+    /** Stores all task */
     private List<Task> storedInputs;
+
+    /** Handles interaction with user */
     private Ui ui = new Ui();
 
+    /**
+     * Creates an instance of TaskList.
+     *
+     * @param savedInputs List of task.
+     */
     public TaskList(LinkedList<Task> savedInputs) {
         this.storedInputs = new LinkedList<>(savedInputs);
     }
@@ -29,6 +37,11 @@ public class TaskList {
         return storedInputs;
     }
 
+    /**
+     * Mark a task a done.
+     *
+     * @param userInput User input.
+     */
     public void markEvent(String userInput) {
         String[] arr = userInput.split(" ");
         int num = Integer.parseInt(arr[1]);
@@ -44,6 +57,11 @@ public class TaskList {
         ui.printMarkMessage(t);
     }
 
+    /**
+     * Mark a task as not done.
+     *
+     * @param userInput User input.
+     */
     public void unmarkEvent(String userInput) {
         String[] arr = userInput.split(" ");
         int num = Integer.parseInt(arr[1]);
@@ -59,6 +77,11 @@ public class TaskList {
         ui.printUnMarkMessage(t);
     }
 
+    /**
+     * Delete an event.
+     *
+     * @param userInput User input.
+     */
     public void deleteEvent(String userInput) {
         String[] arr = userInput.split(" ");
         int num = Integer.parseInt(arr[1]);
@@ -75,7 +98,15 @@ public class TaskList {
         ui.printTotalTask(storedInputs);
     }
 
-    String removeKeyword(String s) throws DukeException {
+    /**
+     * Filter out keywords from user input.
+     * Use for processing task information.
+     *
+     * @param s User input.
+     * @return User input without keywords.
+     * @throws DukeException If keyword is the only input.
+     */
+    public String removeKeyword(String s) throws DukeException {
         try {
             s = s.substring(s.indexOf(" ")).trim();
         } catch (StringIndexOutOfBoundsException e) {
@@ -89,6 +120,11 @@ public class TaskList {
         return s;
     }
 
+    /**
+     * Add a ToDo task.
+     *
+     * @param userInput User input.
+     */
     public void addToDoEvent(String userInput) {
         try {
             userInput = removeKeyword(userInput);
@@ -103,6 +139,11 @@ public class TaskList {
         ui.printTotalTask(storedInputs);
     }
 
+    /**
+     * Add a Deadline task.
+     *
+     * @param userInput User input.
+     */
     public void addDeadlineEvent(String userInput) {
         try {
             userInput = removeKeyword(userInput);
@@ -133,6 +174,10 @@ public class TaskList {
         ui.printTotalTask(storedInputs);
     }
 
+    /**
+     * Add an Event task.
+     * @param userInput User input.
+     */
     public void addEventEvent(String userInput) {
         try {
             userInput = removeKeyword(userInput);
