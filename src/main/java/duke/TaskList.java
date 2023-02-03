@@ -40,6 +40,8 @@ public class TaskList {
                 System.out.print(e.toString());
             } catch (DateTimeParseException e) {
                 System.out.println("Please input date in YYYY-MM-DD format!");
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("Please fill in all details (task description and date)!");
             }
 
         } else if (type.equals("event")) {
@@ -56,8 +58,9 @@ public class TaskList {
 
             } catch (MissingDescriptionException e) {
                 System.out.print(e.toString());
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("Please fill in all details (task description, start and end time)!");
             }
-
         }
     }
 

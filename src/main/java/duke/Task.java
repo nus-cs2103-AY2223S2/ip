@@ -5,7 +5,7 @@ public class Task {
     protected Boolean isDone;
 
     public Task(String description) throws MissingDescriptionException {
-        if (description == "" || description == " ") {
+        if (description.equals("") || description.equals(" ")) {
             throw new MissingDescriptionException();
         } else {
             this.description = description;

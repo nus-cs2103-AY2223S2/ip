@@ -14,16 +14,22 @@ public class Parser {
             ui.printMessage("Here are the tasks in your list:\n" + taskList.toString());
 
         } else if (command.startsWith("mark")) {
-
-            String str = command.split(" ", 2)[1];
-            int index = Integer.parseInt(str);
-            taskList.markTask(index);
+            try {
+                String str = command.split(" ", 2)[1];
+                int index = Integer.parseInt(str);
+                taskList.markTask(index);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("Please give the index of the task you wish to mark!");
+            }
 
         } else if (command.startsWith("unmark")) {
-
-            String str = command.split(" ", 2)[1];
-            int index = Integer.parseInt(str);
-            taskList.unmarkTask(index);
+            try {
+                String str = command.split(" ", 2)[1];
+                int index = Integer.parseInt(str);
+                taskList.unmarkTask(index);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("Please give the index of the task you wish to unmark!");
+            }
 
         } else if (command.startsWith("todo")) {
 
@@ -41,11 +47,13 @@ public class Parser {
             taskList.addTask(description, "event");
 
         } else if (command.startsWith("delete")) {
-
-            String str = command.split(" ", 2)[1];
-            int index = Integer.parseInt(str);
-            taskList.delete(index);
-
+            try {
+                String str = command.split(" ", 2)[1];
+                int index = Integer.parseInt(str);
+                taskList.delete(index);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("Please give the index of the task you wish to delete!");
+            }
         } else {
             throw new UnknownCommandException();
         }

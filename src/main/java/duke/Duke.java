@@ -22,7 +22,7 @@ public class Duke {
         ui.greet();
         Scanner scn = new Scanner(System.in);
 
-        while (true) {
+        while (scn.hasNext()) {
             String userInput = scn.nextLine();
 
             try {
