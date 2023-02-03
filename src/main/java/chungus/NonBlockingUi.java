@@ -4,18 +4,20 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
 
 /**
- * Represents an abstract, basic, I/O user interface.
+ * Represents an abstract, basic, I/O-based user interface. Importantly, its
+ * initialization is guaranteed not to block the caller.
  */
-public interface Ui {
+public interface NonBlockingUi {
     /**
-     * Starts the UI instance.
+     * Initializes the UI instance.
      * 
-     * @param handler    A lambda to apply to each line of user input.
-     * @param beforeEach Something to run before each response.
-     * @param afterEach  Something to run after each response.
-     * @param isRunning  Whether the app is still running.
+     * @param inputHandler A lambda to apply to each line of user input.
+     * @param beforeEach   Something to run before each response.
+     * @param afterEach    Something to run after each response.
+     * @param isRunning    Whether the app is still running.
      */
-    public void startWith(Consumer<String> handler, Runnable beforeEach, Runnable afterEach, AtomicBoolean isRunning);
+    public void init(Consumer<String> inputHandler, Runnable beforeEach, Runnable afterEach,
+            AtomicBoolean isRunning);
 
     /**
      * Displays text.

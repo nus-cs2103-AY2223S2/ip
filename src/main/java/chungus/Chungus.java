@@ -10,7 +10,7 @@ import chungus.textui.TextUi;
  * A task management app.
  */
 public class Chungus {
-    private Ui ui;
+    private NonBlockingUi ui;
     private TaskList tasks;
     private Storage db;
     private AtomicBoolean isRunning;
@@ -34,7 +34,7 @@ public class Chungus {
      * @param dbPath Path to a database file to read and write tasks from.
      * @throws RuntimeException For errors related to the database file.
      */
-    public Chungus(Ui ui, String dbPath) {
+    public Chungus(NonBlockingUi ui, String dbPath) {
         this.ui = ui;
         tasks = new TaskList();
 
@@ -67,7 +67,7 @@ public class Chungus {
      * @param afterEach  A lambda to run after each command is handled.
      */
     public void spin(Runnable beforeEach, Runnable afterEach) {
-        ui.startWith(cmd -> parseAndExec(cmd), beforeEach, afterEach, isRunning);
+        ui.init(cmd -> parseAndExec(cmd), beforeEach, afterEach, isRunning);
         while (isRunning.get()) {
         }
     }

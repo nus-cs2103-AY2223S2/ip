@@ -12,6 +12,9 @@ import javafx.stage.Stage;
 public class Main extends Application {
     private Chungus chungus;
 
+    private static final double DEFAULT_W = 400.0;
+    private static final double DEFAULT_H = 600.0;
+
     /**
      * {@inheritDoc}
      */
@@ -27,6 +30,9 @@ public class Main extends Application {
             return;
         }
 
+        assert ap.getPrefHeight() == DEFAULT_H;
+        assert ap.getPrefWidth() == DEFAULT_W;
+
         Scene scene = new Scene(ap);
         primaryStage.setScene(scene);
 
@@ -40,8 +46,8 @@ public class Main extends Application {
         }, () -> {
         })).start();
 
-        primaryStage.setMinHeight(600.0);
-        primaryStage.setMinWidth(400.0);
+        primaryStage.setMinHeight(DEFAULT_H);
+        primaryStage.setMinWidth(DEFAULT_W);
         primaryStage.show();
     }
 
