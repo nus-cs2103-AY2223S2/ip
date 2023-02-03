@@ -3,6 +3,7 @@ package duke;
 import java.util.ArrayList;
 
 public class TaskList {
+
     private ArrayList<Task> tasks;
 
     public TaskList() {
@@ -53,8 +54,8 @@ public class TaskList {
         TaskList taskFinder = new TaskList();
         for (Task task : tasks) {
             String[] taskName = task.getName().split(" ");
-            for (int i = 0; i < taskName.length; i++) {
-                if (taskName[i].equals(searchWord) && !taskFinder.contains(task)) {
+            for (String s : taskName) {
+                if (s.equals(searchWord) && !taskFinder.contains(task)) {
                     taskFinder.addTask(task);
                 }
             }
