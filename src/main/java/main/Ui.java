@@ -9,32 +9,20 @@ import task.Task;
  */
 public class Ui {
     private StringBuilder output = new StringBuilder();
-    private Scanner scanner;
 
     public Ui() {
         this.output = new StringBuilder();
-        this.scanner = new Scanner(System.in);
-    }
-
-    public void close() {
-        this.scanner.close();
-    }
-
-    public String readCommand() {
-        return scanner.nextLine();
-    }
-
-    public void showWelcome() {
-        System.out.println("Hello! I'm Duke" + "\n" + "What can I do for you?");
     }
 
     private void resetOutput() {
         output.setLength(0);
     }
 
-    public void showLine() {
-        System.out.println(output.toString());
+    public String showLine() {
+        String temp = output.toString();
         resetOutput();
+        return temp;
+        
     }
 
     private void appendToOutput(String str) {
@@ -72,7 +60,7 @@ public class Ui {
         appendToOutput("Duke: " + "Bye" + ". Hope I never see you again!");
     }
 
-    public void showError(String errorMessage) {
-        System.out.println("There seems to be a problem: " + errorMessage);
+    public String showError(String errorMessage) {
+        return ("There seems to be a problem: " + errorMessage);
     }
 }

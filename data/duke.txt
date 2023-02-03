@@ -1,2 +1,1 @@
-[T][] | fuck you|
-[D][] | return book |(2000-12-02T14:00)
+[T][] | borrow book|
