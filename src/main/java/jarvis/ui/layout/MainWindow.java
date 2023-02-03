@@ -34,8 +34,12 @@ public class MainWindow extends AnchorPane {
             .getClass()
             .getResourceAsStream("/images/Jarvis.jpg")));
 
+    /**
+     * Initialises MainWindow.
+     */
     @FXML
     public void initialize() {
+
         scrollPane.vvalueProperty().bind(chatContainer.heightProperty());
         sendButton.getStyleClass().add("button");
     }

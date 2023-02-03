@@ -47,6 +47,9 @@ public class MessageBox extends HBox {
         displayPicture.setFill(new ImagePattern(image));
     }
 
+    /**
+     * Initialises MessageBox.
+     */
     @FXML
     public void initialize() {
         this.getStyleClass().add("message-box");
