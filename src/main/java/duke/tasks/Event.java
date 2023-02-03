@@ -42,10 +42,25 @@ public class Event extends Task {
     }
 
     /**
+     * Check if the event's dates contains the given keyword.
+     *
+     * @param keyword The keyword argument.
+     * @return A boolean value.
+     */
+    public boolean dateContains(String keyword) {
+        keyword = keyword.toLowerCase();
+        if ((this.from.length() >= keyword.length()) || (this.to.length() >= keyword.length())) {
+            return this.from.toLowerCase().contains(keyword) || this.to.toLowerCase().contains(keyword);
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * @inheritDoc
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + from + " to: " + to + ")";
+        return "[E]" + super.toString() + "\n (from: " + from + " to: " + to + ")";
     }
 }

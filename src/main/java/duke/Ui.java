@@ -1,5 +1,7 @@
 package duke;
 
+import duke.tasks.Task;
+
 /**
  * The class for the UI of the program.
  */
@@ -29,5 +31,21 @@ public class Ui {
                 + "  8. find <keyword(s)>\n"
                 + "  9. bye\n"
                 + "What can I do for you?";
+    }
+
+    /**
+     * Prints the bye message when user inputs bye.
+     */
+    public String showByeMessage() {
+        return "Bye. Hope to see you again soon!";
+    }
+
+    public String confirmationMessage(String action, TaskList tasks, Task task) {
+        return "Got it. I've " + action + " this task:\n"
+                + "  "
+                + task
+                + "\nNow you have "
+                + tasks.size()
+                + " tasks in the list.";
     }
 }

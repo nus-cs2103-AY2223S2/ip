@@ -43,11 +43,7 @@ public class DeadlineCommand extends Command {
 
             tasks.add(d);
             storage.saveTaskList(tasks);
-            return "Got it. I've added this task:\n  "
-                    + d + "\n"
-                    + "Now you have "
-                    + tasks.size()
-                    + " tasks in the list.";
+            return ui.confirmationMessage("added", tasks, d);
         } catch (DukeException de) {
             return de.getMessage();
         } catch (DateTimeParseException date_time_e) {

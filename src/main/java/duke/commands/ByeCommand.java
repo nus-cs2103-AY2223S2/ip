@@ -23,7 +23,7 @@ public class ByeCommand extends Command {
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         storage.saveTaskList(tasks);
-        return "Bye. Hope to see you again soon!";
+        return ui.showByeMessage();
     }
 
     /**

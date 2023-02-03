@@ -32,7 +32,7 @@ public class UnmarkCommand extends Command {
             Task task = tasks.get(index - 1);
             task.unmark();
             storage.saveTaskList(tasks);
-            return "OK, I've marked this task as not done yet:\n" + "      " + task;
+            return "OK, I've marked this task as not done yet:\n  " + task;
         } catch (DukeException de) {
             return de.getMessage();
         } catch (NumberFormatException nfe) {

@@ -32,12 +32,7 @@ public class DeleteCommand extends Command {
             Task task = tasks.get(index - 1);
             tasks.remove(index - 1);
             storage.saveTaskList(tasks);
-            return "Noted. I've removed this task:\n"
-                    + "  "
-                    + task
-                    + "Now you have "
-                    + tasks.size()
-                    + " tasks in the list.";
+            return ui.confirmationMessage("deleted", tasks, task);
         } catch (DukeException de) {
             return de.getMessage();
         } catch (IndexOutOfBoundsException e) {

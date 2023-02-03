@@ -46,11 +46,8 @@ public class EventCommand extends Command {
                     input.substring(indexTo + 4, input.length()));
             tasks.add(e);
             storage.saveTaskList(tasks);
-            return "Got it. I've added this task:\n"
-                    + "  " + e
-                    + "Now you have "
-                    + tasks.size()
-                    + " tasks in the list.";
+            return ui.confirmationMessage("added", tasks, e);
+
         } catch (DukeException de) {
             return de.getMessage();
         } catch (DateTimeParseException date_time_e) {

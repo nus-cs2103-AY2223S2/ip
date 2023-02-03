@@ -32,10 +32,24 @@ public class Deadline extends Task {
     }
 
     /**
+     * Check if the deadline's date contains the given keyword.
+     *
+     * @param keyword The keyword argument.
+     * @return A boolean value.
+     */
+    public boolean dateContains(String keyword) {
+        if (this.by.length() >= keyword.length()) {
+            return this.by.toLowerCase().contains(keyword.toLowerCase());
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * @inheritDoc
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.by + ")";
+        return "[D]" + super.toString() + "\n (by: " + this.by + ")";
     }
 }

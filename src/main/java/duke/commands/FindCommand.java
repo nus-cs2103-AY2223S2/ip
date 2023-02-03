@@ -2,6 +2,8 @@ package duke.commands;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
 import duke.tasks.Task;
 
 /**
@@ -32,6 +34,16 @@ public class FindCommand extends Command {
                 if (t.contains(keyword)) {
                     counter++;
                     result += "" + counter + ". " + t + "\n";
+                } else if (t instanceof Deadline) {
+                    if (((Deadline) t).dateContains(keyword)) {
+                        counter++;
+                        result += "" + counter + ". " + t + "\n";
+                    }
+                } else if (t instanceof Event) {
+                    if (((Event) t).dateContains(keyword)) {
+                        counter++;
+                        result += "" + counter + ". " + t + "\n";
+                    }
                 }
             }
             return result;

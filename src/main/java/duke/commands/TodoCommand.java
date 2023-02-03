@@ -31,11 +31,7 @@ public class TodoCommand extends Command {
             Todo td = new Todo(input.substring(5, input.length()));
             tasks.add(td);
             storage.saveTaskList(tasks);
-            return "Got it. I've added this task:\n"
-                    + "  " + td + "\n"
-                    + "Now you have "
-                    + tasks.size()
-                    + " tasks in the list.";
+            return ui.confirmationMessage("added", tasks, td);
         } catch (DukeException de) {
             return de.getMessage();
         }
