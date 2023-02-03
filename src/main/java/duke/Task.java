@@ -5,13 +5,13 @@ package duke;
  */
 public class Task {
     /** Count total Tasks created */
-    public static Integer count = 0;
+    //public static Integer count = 0;
 
     /** Name of task */
     protected String taskName;
 
     /** Task status */
-    protected Boolean taskDone;
+    protected Boolean isTaskDone;
 
     /**
      * Creates an instance of Task.
@@ -20,22 +20,22 @@ public class Task {
      */
     protected Task(String taskName) {
         this.taskName = taskName;
-        this.taskDone = false;
-        Task.count++;
+        this.isTaskDone = false;
+        //Task.count++;
     }
 
     /**
      * Mark this task as done.
      */
     public void markDone() {
-        this.taskDone = true;
+        this.isTaskDone = true;
     }
 
     /**
      * Mark this task as not done.
      */
     public void markUnDone() {
-        this.taskDone = false;
+        this.isTaskDone = false;
     }
 
     /**
@@ -47,7 +47,7 @@ public class Task {
 
     @Override
     public String toString() {
-        if (!taskDone) {
+        if (!isTaskDone) {
             return "[ ] " + this.taskName;
         }
         return "[X] " + this.taskName;

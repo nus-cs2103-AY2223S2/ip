@@ -14,10 +14,10 @@ public class Deadline extends Task {
     /**
      * Returns an instance of Deadline object mark undone.
      *
-     * @param s Task details.
+     * @param taskDetails Task details.
      * @param endTime Task due date.
      */
-    public Deadline(String s, String endTime) {
+    public Deadline(String taskDetails, String endTime) {
         super(s);
         this.endTime = LocalDate.parse(endTime, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
@@ -39,7 +39,7 @@ public class Deadline extends Task {
 
     @Override
     public String writeToFile() {
-        if (!taskDone) {
+        if (!isTaskDone) {
             return "D| |"
                     + this.taskName
                     + "|"
@@ -53,7 +53,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        if (!taskDone) {
+        if (!isTaskDone) {
             return "[D][ ] " + this.taskName
                     + " (by: " + this.endTime.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + ")";
         }

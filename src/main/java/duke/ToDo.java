@@ -28,7 +28,7 @@ public class ToDo extends Task {
     }
     @Override
     public String writeToFile() {
-        if (!taskDone) {
+        if (!isTaskDone) {
             return "T| |" + this.taskName;
         }
         return "T|X|" + this.taskName;
@@ -36,7 +36,7 @@ public class ToDo extends Task {
 
     @Override
     public String toString() {
-        if (!taskDone) {
+        if (!isTaskDone) {
             return "[T][ ] " + this.taskName;
         }
         return "[T][X] " + this.taskName;

@@ -49,7 +49,7 @@ public class Event extends Task {
 
     @Override
     public String writeToFile() {
-        if (!taskDone) {
+        if (!isTaskDone) {
             return "E| |"
                     + this.taskName
                     + "|"
@@ -67,7 +67,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        if (!taskDone) {
+        if (!isTaskDone) {
             return "[E][ ] " + this.taskName
                 + " (from: " + this.startTime.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))
                 + " to: " + this.endTime.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + ")";
