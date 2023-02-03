@@ -41,7 +41,7 @@ public class Ui {
     }
 
     public String showInvalidTimeError() {
-        return "☹ OOPS!!! Invalid datetime. Syntax: YYYY-MM-DD";
+        return "Invalid datetime. Syntax: YYYY-MM-DD";
     }
 
     public String readCommand() throws DukeException {
@@ -65,8 +65,7 @@ public class Ui {
     }
 
     public void printTaskExistence() {
-        printLine();
-        System.out.println("    Here are your existing tasks: ");
+        System.out.println("Here are your existing tasks: ");
     }
 
     public String printTask(Task task) {

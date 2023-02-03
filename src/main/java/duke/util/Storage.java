@@ -83,7 +83,6 @@ public class Storage {
 
         Scanner sc = new Scanner(file); // create a Scanner using the File as the source
 
-        ui.printTaskExistence();
         while (sc.hasNext()) {
 
             String[] inputs = sc.nextLine().trim().split(" \\| ");
