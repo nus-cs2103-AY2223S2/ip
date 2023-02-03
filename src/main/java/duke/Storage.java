@@ -21,13 +21,6 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    /**
-     * Loads Tasks previously stored in storage into the TaskList.
-     *
-     * @param parser the Parser needed to translate the Task from storage format to TaskList format
-     * @return the ArrayList of Tasks needed to create a TaskList
-     * @throws InvalidFilePathException If the file path of storage doesn't exist
-     */
     public ArrayList<Task> loadTasks(Parser parser) throws DukeExceptions {
         File file = new File(this.filePath);
         ArrayList<Task> resultingList = new ArrayList<>();
@@ -48,12 +41,6 @@ public class Storage {
         }
     }
 
-    /**
-     * Updates the Tasks generated and reflects any changes made in storage.
-     *
-     * @param tasks TaskList of the resulting Tasks
-     * @throws InvalidFilePathException If the file path of storage doesn't exist
-     */
     public void updateTasks(TaskList tasks) throws DukeExceptions {
         try {
             FileWriter fw = new FileWriter(this.filePath);

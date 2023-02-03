@@ -14,15 +14,6 @@ public class ToDoCommand implements Command {
         this.input = input;
     }
 
-    /**
-     * Creates a new ToDo, adds it to the TaskList, and displays confirmation message of addition. If there are any
-     * errors from creating a new ToDo, the error is displayed.
-     *
-     * @param taskList the TaskList the new ToDo is added to
-     * @param ui the Ui needed to display according messages
-     * @param storage the Storage used during this session
-     * @throws ForgottenArgumentException If no description for the ToDo is given
-     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeExceptions {
         try {

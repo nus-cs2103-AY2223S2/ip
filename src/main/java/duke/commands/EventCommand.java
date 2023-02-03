@@ -14,13 +14,6 @@ public class EventCommand implements Command {
         this.input = input;
     }
 
-    /**
-     * Creates a new Event, adds it to the TaskList, and displays confirmation message of addition.
-     *
-     * @param taskList the TaskList the new Event is added to
-     * @param ui the Ui needed to display according messages
-     * @param storage the Storage used during this session
-     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         String[] s1 = input.substring(6).split("/from");

@@ -25,14 +25,6 @@ import java.time.format.DateTimeFormatter;
 
 public class Parser {
     public enum CommandType {BYE, LIST, TODO, DEADLINE, EVENT, MARK, UNMARK, DELETE}
-
-    /**
-     * Handles the commands given by a user and returns the appropriate command to be executed.
-     *
-     * @param input the input given by a user
-     * @return the required Command
-     * @throws UnknownCommandException If a given command doesn't match the supported command types
-     */
     public Command handleCommand(String input) throws DukeExceptions {
         try {
             CommandType command = CommandType.valueOf(input.split(" ")[0].toUpperCase());
@@ -60,14 +52,6 @@ public class Parser {
             throw new UnknownCommandException();
         }
     }
-
-    /**
-     * Translates the Tasks saved in storage into TaskList format as needed and creates the corresponding Task.
-     *
-     * @param input the String of the Task saved in storage
-     * @return the resulting Task
-     * @throws InvalidFilePathException If the file path of storage doesn't exist
-     */
     public Task translateFileToTaskList(String input) throws DukeExceptions {
         String[] splitInput = input.split(" \\| ");
         String taskType = splitInput[0];
