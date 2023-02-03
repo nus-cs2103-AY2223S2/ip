@@ -1,27 +1,10 @@
 package duke;
 
-import duke.ui.DialogBox;
-import duke.utils.ReplyString;
-import javafx.application.Application;
-import javafx.fxml.FXML;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-
 import duke.exceptions.DukeException;
 import duke.exceptions.MemoryFailedException;
 import duke.utils.Parser;
 import duke.utils.Storage;
 import duke.utils.TaskList;
-import duke.ui.Ui;
 
 /**
  * Represents the entry point for the Duke application. The main function resides in this class.
