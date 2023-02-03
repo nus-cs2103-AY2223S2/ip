@@ -47,10 +47,10 @@ public class Parser {
     }
 
     /**
-     * Returns true if the input contains a bye command, otherwise, returns false.
+     * Returns true if the input contains a bye command. Otherwise, returns false.
      *
      * @param input The input which is to be checked for whether it contains a bye command.
-     * @return True if the input contains a bye command, otherwise, returns false.
+     * @return True if the input contains a bye command. False otherwise.
      */
     public boolean isByeCommand(String input) {
         return input.split(" ")[0].equals("bye");

@@ -43,7 +43,7 @@ public abstract class DukeUtils {
      * task list.
      * </p>
      *
-     * @return The task list loaded from storage if it exists. Otherwise, returns the new task list.
+     * @return The task list loaded from storage if it exists. Otherwise, the new task list.
      * @throws DukeException Indicates an error in loading from storage or creating storage.
      */
     public static TaskList loadTasks() throws DukeException {

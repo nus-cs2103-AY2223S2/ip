@@ -89,7 +89,7 @@ public abstract class Task {
     /**
      * Returns true if the task is done. Otherwise, returns false.
      *
-     * @return True if the task is done. Otherwise, returns false.
+     * @return True if the task is done. False otherwise.
      */
     protected boolean isDone() {
         return isDone;
