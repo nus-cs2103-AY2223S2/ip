@@ -16,14 +16,14 @@ import duke.tasklist.task_types.Task;
  */
 public class TaskList implements Serializable {
     private static DukeException invalidIndex = new DukeException("Invalid index keyed.");
-    private ArrayList<Task> list;
+    private ArrayList<Task> tasks;
 
     public TaskList() {
-        list = new ArrayList<>();
+        tasks = new ArrayList<>();
     }
 
-    public TaskList(List<Task> list) {
-        this.list = new ArrayList<Task>(list);
+    public TaskList(List<Task> newTasks) {
+        this.tasks = new ArrayList<Task>(newTasks);
     }
 
 
@@ -33,7 +33,7 @@ public class TaskList implements Serializable {
      * @param task the added task
      */
     public void addTask(Task task) {
-        list.add(task);
+        tasks.add(task);
     }
 
 
@@ -46,7 +46,7 @@ public class TaskList implements Serializable {
      */
     public Task getTask(int index) throws DukeException {
         try {
-            return list.get(index);
+            return tasks.get(index);
         } catch (IndexOutOfBoundsException e) {
             throw invalidIndex;
         }
@@ -61,7 +61,7 @@ public class TaskList implements Serializable {
      */
     public void deleteTask(int index) throws DukeException {
         try {
-            list.remove(index);
+            tasks.remove(index);
         } catch (IndexOutOfBoundsException e) {
             throw invalidIndex;
         }
@@ -77,7 +77,7 @@ public class TaskList implements Serializable {
      */
     public void markedTask(int index) throws DukeException {
         try {
-            list.get(index).setStatus(true);
+            tasks.get(index).setStatus(true);
         } catch (IndexOutOfBoundsException e) {
             throw invalidIndex;
         }
@@ -93,7 +93,7 @@ public class TaskList implements Serializable {
      */
     public void unmarkedTask(int index) throws DukeException {
         try {
-            list.get(index).setStatus(false);
+            tasks.get(index).setStatus(false);
         } catch (IndexOutOfBoundsException e) {
             throw invalidIndex;
         }
@@ -106,7 +106,7 @@ public class TaskList implements Serializable {
      * @return a String message showing the number of tasks you have left in your list.
      */
     public String getTotal() {
-        return String.format("Now you have %d tasks in the list\n", list.size());
+        return String.format("Now you have %d tasks in the list\n", tasks.size());
     }
 
 
@@ -116,11 +116,11 @@ public class TaskList implements Serializable {
      * @return a int containing the size number of the list.
      */
     public int getSize() {
-        return list.size();
+        return tasks.size();
     }
 
     public TaskList filter(String name) {
-        Stream<Task> taskStream = this.list.stream();
+        Stream<Task> taskStream = this.tasks.stream();
         return new TaskList(taskStream.filter(task -> task.getName().contains(name))
                 .collect(Collectors.toList()));
     }
@@ -134,9 +134,9 @@ public class TaskList implements Serializable {
     @Override
     public String toString() {
         String str = "";
-        for (int i = 0; i < list.size(); i++) {
+        for (int i = 0; i < tasks.size(); i++) {
             int index = i + 1;
-            str += "\n" + index + ". " + list.get(i).toString();
+            str += "\n" + index + ". " + tasks.get(i).toString();
         }
 
         return str + "\n";
