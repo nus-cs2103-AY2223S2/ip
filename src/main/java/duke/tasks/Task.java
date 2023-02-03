@@ -26,7 +26,7 @@ public class Task {
     }
 
     public String getDataString() {
-        if(this.isDone()) {
+        if (this.isDone()) {
             return "1 | " + this.getDescription();
         } else {
             return "0 | " + this.getDescription();
@@ -35,7 +35,7 @@ public class Task {
 
     @Override
     public String toString() {
-        if(this.isDone()) {
+        if (this.isDone()) {
             return "[X] " + this.getDescription();
         } else {
             return "[ ] " + this.getDescription();

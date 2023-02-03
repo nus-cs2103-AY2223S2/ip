@@ -1,9 +1,9 @@
 package duke.tasks;
 
-import java.util.ArrayList;
-
 import duke.exceptions.DukeExceptions;
 import duke.exceptions.InvalidIndexException;
+
+import java.util.ArrayList;
 
 public class TaskList {
     private ArrayList<Task> tasks;

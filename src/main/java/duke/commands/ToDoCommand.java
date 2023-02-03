@@ -2,8 +2,10 @@ package duke.commands;
 
 import duke.Storage;
 import duke.Ui;
+
 import duke.exceptions.DukeExceptions;
 import duke.exceptions.ForgottenArgumentException;
+
 import duke.tasks.TaskList;
 import duke.tasks.ToDo;
 
@@ -21,7 +23,7 @@ public class ToDoCommand implements Command {
             ToDo newToDo = new ToDo(description);
             taskList.addTask(newToDo);
             ui.showAddedMessage(newToDo, taskList);
-        } catch(StringIndexOutOfBoundsException e) {
+        } catch (StringIndexOutOfBoundsException e) {
             throw new ForgottenArgumentException();
         }
     }

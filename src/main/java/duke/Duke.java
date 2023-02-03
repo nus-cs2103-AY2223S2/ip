@@ -1,9 +1,10 @@
 package duke;
 
 import duke.commands.ByeCommand;
+import duke.commands.Command;
+
 import duke.exceptions.DukeExceptions;
 import duke.tasks.TaskList;
-import duke.commands.Command;
 
 import java.util.Scanner;
 
@@ -33,14 +34,13 @@ public class Duke {
                 String input = s.nextLine();
                 Command command = this.parser.handleCommand(input);
 
-                if(command instanceof ByeCommand) {
+                if (command instanceof ByeCommand) {
                     command.execute(taskList, ui, storage);
                     break;
                 } else {
                     command.execute(taskList, ui, storage);
                 }
-
-            } catch(DukeExceptions e) {
+            } catch (DukeExceptions e) {
                 ui.showError(e);
             }
         }
