@@ -7,6 +7,9 @@ import Exceptions.WessyException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 
 public class Wessy {
     static String OPENING_LINE = "    -Wessy------------------------------" +
@@ -52,8 +55,8 @@ public class Wessy {
                     printNormal("☹ OOPS!!! It is not a number." +
                             " Please enter a number.");
                 } catch (ArrayIndexOutOfBoundsException ex) {
-                    printNormal("☹ OOPS!!! Please enter a " +
-                            "valid task number.");
+                    printNormal("☹ OOPS!!! Please enter the " +
+                            "correct format.");
                 }
             }
         }
@@ -87,6 +90,42 @@ public class Wessy {
                 return new String[]{description};
         }
         return new String[] {};
+    }
+
+    static LocalDateTime parseDateTime(String str) {
+        int n = str.length();
+        if (n <= 10) {
+            return LocalDateTime.parse(parseDate(str) + "T12:34:56");
+        }
+        int idx = 10;
+        if (str.charAt(9) == ' ') {
+            idx = 9;
+        } else if (str.charAt(8) == ' ') {
+            idx = 8;
+        }
+        if (str.charAt(idx + 3) == ':') {
+            return LocalDateTime.parse(parseDate(str.substring(0, idx)) + "T" + str.substring(idx + 1) + ":00");
+        }
+        if (str.charAt(idx + 3) == '.') {
+            return LocalDateTime.parse(parseDate(str.substring(0, idx)) + "T" + str.substring(idx + 1, idx + 3) + ":" + str.substring(idx + 4) + ":00");
+        }
+        return LocalDateTime.parse(parseDate(str.substring(0, idx)) + "T" + str.substring(idx + 1, idx + 3) + ":" + str.substring(idx + 3) + ":00");
+    }
+
+    static String parseDate(String str) {
+        String[] components = str.split("-", 3);
+        if (str.indexOf("/") != -1) {
+            components = str.split("/", 3);
+        }
+        for (int i = 0; i < components.length; i++) {
+            if (components[i].length() == 1) {
+                components[i] = "0" + components[i];
+            }
+        }
+        if (components[0].length() == 4) {
+            return components[0] + "-" + components[1] + "-" + components[2];
+        }
+        return components[2] + "-" + components[1] + "-" + components[0];
     }
 
     static boolean checkCmd(String userInput, CmdType type) {
@@ -194,12 +233,28 @@ public class Wessy {
 
     static void println(String str) {
         int length = str.length();
-        String message = "   |   " + str;
-        for (int i = 0; i < 70 - length - 3; i++) {
-            message += " ";
+        if (length <= 64) {
+            String message = "   |   " + str;
+            for (int i = 0; i < 67 - length; i++) {
+                message += " ";
+            }
+            message += "|";
+            System.out.println(message);
+        } else {
+            System.out.println("   |   " + str.substring(0, 64) + "   |");
+            int remainingLength = length - 64;
+            int leftover = remainingLength % 62;
+            int n = (int) Math.floor(remainingLength/62);
+            for (int i = 0; i < n; i++) {
+                System.out.println("   |     " + str.substring(62 * i, 62 * (i + 1)) + "   |");
+            }
+            String message = "   |     " + str.substring(length - leftover);
+            for (int i = 0; i < 65 - leftover; i++) {
+                message += " ";
+            }
+            message += "|";
+            System.out.println(message);
         }
-        message += "|";
-        System.out.println(message);
     }
 
     static Task add(String[] strings) {
@@ -207,9 +262,9 @@ public class Wessy {
         if (len == 1) {
             tasks.add(new ToDo(strings[0]));
         } else if (len == 2) {
-            tasks.add(new Deadline(strings[0], strings[1]));
+            tasks.add(new Deadline(strings[0], parseDateTime(strings[1])));
         } else if (len == 3) {
-            tasks.add(new Event(strings[0], strings[1], strings[2]));
+            tasks.add(new Event(strings[0], parseDateTime(strings[1]), parseDateTime(strings[2])));
         }
         return tasks.get(tasks.size() - 1);
     }
