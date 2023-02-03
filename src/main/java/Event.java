@@ -4,6 +4,13 @@ class Event extends Task {
     }
 
     @Override
+    public String getFileDesc() {
+        return this.isDone
+        ? "E|1|" + this.name + "|" + this.startDate + "|" + this.endDate
+        : "E|0|" + this.name + "|" + this.startDate + "|" + this.endDate;
+    }
+
+    @Override
     public String toString() {
         return this.isDone
                 ? "[E][X] " + this.name + " (from: " + this.startDate + " to: " + this.endDate + ")"

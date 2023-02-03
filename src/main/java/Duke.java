@@ -1,19 +1,66 @@
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Scanner;
 
 public class Duke {
+
+    private static final String SAVE_PATH = "./taskList.txt";
+
+    private static ArrayList<Task> loadData(String filePath) throws IOException {
+        ArrayList<Task> taskList = new ArrayList<>();
+        File file = new File(filePath);
+        if (file.createNewFile()){
+            return taskList;
+        }
+        Scanner sc = new Scanner(file);
+        while (sc.hasNextLine()) {
+            Task task;
+            String[] line = sc.nextLine().split("\\|");
+            if (line[0].equals("T")) {
+                task = new Todo(line[2].strip());
+            } else if (line[0].equals("D")) {
+                task = new Deadline(line[2], line[3]);
+            } else {
+                task = new Event(line[2], line[3], line[4]);
+            }
+
+            if (line[1] == "1") {
+                task.mark();
+            }
+
+            taskList.add(task);
+        }
+        sc.close();
+        return taskList;
+    }
+
+    public static void storeData(ArrayList<Task> t) throws IOException {
+        File file = new File(SAVE_PATH);
+        if (file.createNewFile()) {
+            System.out.println("Created new file taskList.txt");
+        } 
+        FileWriter fw = new FileWriter(file);
+        String taskString = "";
+        for (int i = 0; i < t.size(); i++){
+            taskString += t.get(i).getFileDesc() + "\n";
+        }
+        fw.write(taskString);
+        fw.close();
+    }
     public static void main(String[] args) throws IOException, DukeException {
 
         System.out.println("Hello! I'm Duke\n" +
                 "What can I do for you?");
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-        ArrayList<Task> lst = new ArrayList<>();
-        int count = 0;
+        try {
+            ArrayList<Task> lst = loadData(SAVE_PATH);
+            int count = 0 + lst.size();
             String[] word = br.readLine().strip().split(" ",2);
 
             while (!word[0].equals("bye")) {
@@ -104,6 +151,10 @@ public class Duke {
                     word = br.readLine().strip().split(" ",2);
                 }
             }
-        System.out.println("Duke: Goodbye");
+            storeData(lst);
+            System.out.println("Duke: Goodbye");
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
