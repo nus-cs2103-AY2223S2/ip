@@ -4,11 +4,11 @@ package duke.task;
  * Represents a task.
  */
 public abstract class Task {
-    /** Use to split a task storage string into it's fields.*/
-    static final String FIELD_SPLIT_REGEX = String.format(" \\%c ", Task.FIELD_DIVIDER);
-
     /** Use to divide the fields of the task when writing to storage. */
     protected static final char FIELD_DIVIDER = '|';
+
+    /** Use to split a task storage string into it's fields.*/
+    static final String FIELD_SPLIT_REGEX = String.format(" \\%c ", Task.FIELD_DIVIDER);
 
     private static final String FIELD_DIVIDER_SUBSTITUTE = "\\|";
 
