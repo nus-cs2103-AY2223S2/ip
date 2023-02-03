@@ -21,6 +21,7 @@ public class Deadline extends Task {
     public Deadline(String name, String by) throws DateTimeParseException {
         super(name);
         this.by = LocalDate.parse(by);
+        assert this.by != null : "By should not be null";
     }
 
     @Override

@@ -7,7 +7,7 @@ import java.time.format.DateTimeParseException;
 /** Class that represents an event */
 public class Event extends Task {
 
-    private LocalDate starDate;
+    private LocalDate startDate;
     private LocalDate endDate;
 
     /**
@@ -22,21 +22,23 @@ public class Event extends Task {
      */
     public Event(String name, String startDate, String endDate) throws DateTimeParseException {
         super(name);
-        this.starDate = LocalDate.parse(startDate);
+        this.startDate = LocalDate.parse(startDate);
         this.endDate = LocalDate.parse(endDate);
+        assert this.startDate != null : "Start date should not be null";
+        assert this.endDate != null : "End date should not be null";
     }
 
     @Override
     public String toString() {
         return "[E] " + super.toString() + " (from: "
-            + this.starDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " to: "
+            + this.startDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " to: "
             + this.endDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
     @Override
     public String getFileRepresentation() {
         return "E" + "@" + (super.isDone() ? "1" : "0")
-                + "@" + this.getName() + "@" + this.starDate + "@" + this.endDate;
+                + "@" + this.getName() + "@" + this.startDate + "@" + this.endDate;
     }
 
 }

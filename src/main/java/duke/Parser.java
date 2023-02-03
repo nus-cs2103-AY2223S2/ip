@@ -136,6 +136,7 @@ public class Parser {
         } catch (DateTimeParseException e) {
             throw new DukeException(GuiText.generateDateErrorMessage());
         }
+        assert task != null : "Task should not be null";
         return new AddCommand(task);
     }
 
