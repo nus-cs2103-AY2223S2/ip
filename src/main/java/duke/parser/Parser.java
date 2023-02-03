@@ -9,6 +9,7 @@ import duke.command.ListCommand;
 import duke.command.MarkCommand;
 import duke.command.TodoCommand;
 import duke.command.UnmarkCommand;
+import duke.command.FindCommand;
 import duke.data.TypeOfTask;
 import duke.exception.DukeException;
 
@@ -39,8 +40,15 @@ public class Parser implements Serializable {
      * @return the contents of the user inputs
      * @throws DukeException when an error occurs during execution depending on the type of task
      */
-    public String convertToUserInput(String[] input, TypeOfTask action, String limiter ) throws DukeException {
+    public String convertToUserInput(String[] input, TypeOfTask action,String limiter ) throws DukeException{
         switch(action) {
+            case find: {
+                String userInput = String.join(" ", Arrays.copyOfRange(input, 0, input.length));
+                if (userInput.equals("") || userInput == null)
+                    throw new DukeException(TypeOfTask.find, 0);
+                else
+                    return userInput;
+            }
             case todo: {
                 // changed the way the string is outputted from the array
                 String userInput = String.join(" ", Arrays.copyOfRange(input, 0, input.length));
@@ -201,6 +209,8 @@ public class Parser implements Serializable {
                 return new EventCommand(contents);
             case "delete":
                 return new DeleteCommand(contents);
+            case "find":
+                return new FindCommand(contents);
             default: throw new DukeException();
         }
     }
