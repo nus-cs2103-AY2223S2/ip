@@ -22,7 +22,7 @@ public class CliDuke {
 
     private CliDuke() {
         parser = new Parser();
-        ui = (Ui)(new Cli(System.out, System.in, this::handleInput, parser::isByeCommand));
+        ui = (Ui) (new Cli(System.out, System.in, this::handleInput, parser::isByeCommand));
 
         try {
             tasks = DukeUtils.loadTasks();
