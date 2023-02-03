@@ -18,6 +18,9 @@ public class Storage {
         return save.exists();
     }
 
+    /**
+     * Creates a new save file
+     */
     public static void createSave() {
         try {
             save.createNewFile();
