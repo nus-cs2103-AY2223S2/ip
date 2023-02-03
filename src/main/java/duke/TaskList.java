@@ -16,6 +16,15 @@ public class TaskList {
     public Task getTaskByIndex(int index) {
         return this.tasks.get(index);
     }
+
+    public boolean isEmpty() {
+        return this.tasks.isEmpty();
+    }
+
+    public boolean contains(Task task) {
+        return this.tasks.contains(task);
+    }
+
     public void addTask(Task task){
         this.tasks.add(task);
     }
@@ -40,13 +49,16 @@ public class TaskList {
         return tasks.size();
     }
 
-    public void printTaskList() {
-        for (int i = 0; i < tasks.size(); i++) {
-            Task currTask = tasks.get(i);
-            System.out.printf("%d. %s\n", i + 1, currTask.description());
+    public TaskList makeTaskFinder(String searchWord) {
+        TaskList taskFinder = new TaskList();
+        for (Task task : tasks) {
+            String[] taskName = task.getName().split(" ");
+            for (int i = 0; i < taskName.length; i++) {
+                if (taskName[i].equals(searchWord) && !taskFinder.contains(task)) {
+                    taskFinder.addTask(task);
+                }
+            }
         }
-        if (tasks.isEmpty()) {
-            System.out.println("No tasks in task list.");
-        }
+        return taskFinder;
     }
 }

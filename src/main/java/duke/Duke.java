@@ -32,7 +32,7 @@ public class Duke {
                     ui.sayBye();
                     break;
                 case "list":
-                    tasks.printTaskList();
+                    ui.showTaskList(tasks);
                     break;
                 case "mark":
                     int indexOfTaskToMarkDone = Integer.parseInt(command.split(" ")[1]) - 1;
@@ -63,6 +63,11 @@ public class Duke {
                     int indexOfTaskToDelete = Integer.parseInt(command.split(" ")[1]);
                     Task taskToDelete = tasks.deleteTask(indexOfTaskToDelete);
                     ui.showDeletingTask(taskToDelete, tasks);
+                    break;
+                case "find":
+                    String searchWord = Parser.getSearchWord(command);
+                    TaskList tasksFound = tasks.makeTaskFinder(searchWord);
+                    ui.showFindingTask(tasksFound);
                     break;
                 default:
                     throw new DukeException("Command not recognised.");
