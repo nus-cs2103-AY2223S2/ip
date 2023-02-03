@@ -7,14 +7,14 @@ import java.util.Scanner;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 
-public class Data {
+public class Storage {
     private DateTimeFormatter savedFormat = DateTimeFormatter.ofPattern("dd/MMM/yyyy HHmm");
     private DateTimeFormatter loadFormat = DateTimeFormatter.ofPattern("yyyy/MM/dd HHmm");
     private boolean exist;
     private File saved;
     private String path;
 
-    public Data(String path) throws IOException {
+    public Storage(String path) throws IOException {
         this.path = path;
         this.saved = new File(path);
         if(this.saved.createNewFile()) {
