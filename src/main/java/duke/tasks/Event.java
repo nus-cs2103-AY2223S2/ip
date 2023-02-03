@@ -21,14 +21,14 @@ public class Event extends Task {
 
     @Override
     public String getDataString() {
-        return "E | " + super.getDataString() + " | " + this.eventStart.format(getEventFormatter()) + " to "
-                + this.eventEnd.format(getEventFormatter());
+        return "E | " + super.getDataString() + " | " + this.eventStart.format(getEventFormatter()) + " to " +
+                this.eventEnd.format(getEventFormatter());
     }
 
     @Override
     public String toString() {
         String timeFrame;
-        if((eventStart.getYear() == eventEnd.getYear()) && (eventStart.getDayOfYear() == eventEnd.getDayOfYear())) {
+        if ((eventStart.getYear() == eventEnd.getYear()) && (eventStart.getDayOfYear() == eventEnd.getDayOfYear())) {
             timeFrame = eventStart.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT)) + " " +
                     eventStart.format(DateTimeFormatter.ofPattern("HH:mm")) + " to: " +
                     eventEnd.format(DateTimeFormatter.ofPattern("HH:mm")) + ")";

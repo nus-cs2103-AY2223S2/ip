@@ -2,9 +2,11 @@ package duke.commands;
 
 import duke.Storage;
 import duke.Ui;
+
 import duke.exceptions.DukeExceptions;
 import duke.exceptions.ForgottenArgumentException;
 import duke.exceptions.InvalidIndexException;
+
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 
@@ -17,7 +19,7 @@ public class MarkCommand implements Command {
 
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeExceptions {
-        if(input.length() < 6) {
+        if (input.length() < 6) {
             throw new ForgottenArgumentException();
         } else {
             int index = Integer.parseInt(input.substring(5)) - 1;
