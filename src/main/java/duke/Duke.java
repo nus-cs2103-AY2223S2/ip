@@ -1,13 +1,10 @@
 package duke;
 
+import duke.exceptions.DukeException;
+import duke.storage.FileManagement;
+import duke.task.TaskList;
 import duke.ui.Span;
 import duke.ui.UI;
-
-import duke.storage.FileManagement;
-
-import duke.task.TaskList;
-
-import duke.exceptions.DukeException;
 
 /**
  * Duke is a personal assistant bot that helps user to track tasks.
@@ -24,9 +21,12 @@ public class Duke {
      * Constructor for Duke.
      */
     public Duke() {
-        this.fileManager = new FileManagement(); // to manage saved data
-        this.tasks = new TaskList(fileManager.retrieve()); // load existing list of tasks; creates empty if does not exist
-        this.ui = new UI(this.tasks); // receives user input and run parser
+        // to manage saved data
+        this.fileManager = new FileManagement();
+        // load existing list of tasks; creates empty if does not exist
+        this.tasks = new TaskList(fileManager.retrieve());
+        // receives user input and run parser
+        this.ui = new UI(this.tasks);
     }
 
     /**
@@ -44,7 +44,8 @@ public class Duke {
             if (exit) {
                 this.ui.byeUser();
             }
-            this.fileManager.save(tasks); // save regardless
+            // save regardless
+            this.fileManager.save(tasks);
         }
     }
 

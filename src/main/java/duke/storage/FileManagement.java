@@ -3,18 +3,16 @@ package duke.storage;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
-import duke.task.TaskList;
-import duke.task.Task;
-import duke.task.ToDo;
+import duke.exceptions.InvalidDateException;
 import duke.task.Deadline;
 import duke.task.Event;
-
-import duke.exceptions.InvalidDateException;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.ToDo;
 
 /**
  * A file manager to manage the saving and retrieval of users' data.
@@ -100,15 +98,17 @@ public class FileManagement {
         String des = components[2];
         Task decoded = null;
         switch (command) {
-            case "todo":
-                decoded = new ToDo(des);
-                break;
-            case "deadline":
-                decoded = new Deadline(des, components[3]);
-                break;
-            case "event":
-                decoded = new Event(des, components[3], components[4]);
-                break;
+        case "todo":
+            decoded = new ToDo(des);
+            break;
+        case "deadline":
+            decoded = new Deadline(des, components[3]);
+            break;
+        case "event":
+            decoded = new Event(des, components[3], components[4]);
+            break;
+        default:
+            break;
         }
         if (toMark.equals("true")) {
             decoded.markTask();

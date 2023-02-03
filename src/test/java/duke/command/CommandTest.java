@@ -1,7 +1,10 @@
 package duke.command;
-import duke.exceptions.UnknownCommandException;
-import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
+import duke.exceptions.UnknownCommandException;
 
 public class CommandTest {
     @Test
