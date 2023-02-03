@@ -231,7 +231,7 @@ public class GuiText {
     public String showHelp() {
         String acceptedCommands = "Here are all the commands that I accept!\n"
                 + "\n";
-        return acceptedCommands + CommandType.getAllCommandFormats();
+        return acceptedCommands + CommandType.getAllCommandFormatString();
     }
 
 }
