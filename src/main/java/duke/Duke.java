@@ -18,11 +18,10 @@ public class Duke {
      * Storage for saving and retrieving tasks from a file,
      * and Tasklist for storing the tasks.
      * Catches any errors thrown when the program is running.
-     * @param filePath
      */
-    public Duke(String filePath) {
+    public Duke() {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage();
         try {
             tasks = new TaskList(storage.retrieveTasks());
         } catch (DukeException e) {
@@ -54,7 +53,19 @@ public class Duke {
         }
     }
 
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            String response = c.execute(tasks, ui, storage);
+            return response;
+        } catch (DukeException e) {
+            return ui.showError(e);
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+    }
+
     public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+        new Duke().run();
     }
 }

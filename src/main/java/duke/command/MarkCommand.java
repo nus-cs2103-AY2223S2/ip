@@ -32,21 +32,24 @@ public class MarkCommand extends Command {
      * @throws DukeException when user input does not comply with intended uses.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException, DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException, DukeException {
         if (taskIndex >= tasks.size()) {
             String errorMessage = String.format("Task %d does not exist!", taskIndex + 1);
             throw new DukeException(errorMessage);
         } else {
             Task t = tasks.get(taskIndex);
+            String msg;
             if (isMark) {
                 t.mark();
-                ui.showMessage("Congratulations for completing the task ^^ I've marked it as done:");
+                msg = "Congratulations for completing the task ^^ I've marked it as done: \n";
             } else {
                 t.unmark();
-                ui.showMessage("Ok, I've unmarked the task for you:");
+                msg = "Ok, I've unmarked the task for you: \n";
             }
-            ui.showMessage(t.toString());
             storage.saveTasks(tasks.getTasks());
+            msg += t.toString();
+            msg += "\n";
+            return msg;
         }
     }
 }

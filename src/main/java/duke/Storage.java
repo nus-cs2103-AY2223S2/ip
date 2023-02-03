@@ -15,14 +15,12 @@ import duke.task.Todo;
  * Represents the file to store tasks the user has inputted.
  */
 public class Storage {
-    private final String filePath;
+    private static final String DEFAULT_FILEPATH = "./data/duke.txt";
 
     /**
      * Creates a storage file at the intended file path.
-     * @param filePath
      */
-    public Storage(String filePath) {
-        this.filePath = filePath;
+    public Storage() {
     }
 
     /**
@@ -31,7 +29,7 @@ public class Storage {
      * @throws IOException
      */
     public void saveTasks(ArrayList<Task> tasks) throws IOException {
-        FileWriter fw = new FileWriter(this.filePath);
+        FileWriter fw = new FileWriter(DEFAULT_FILEPATH);
         StringBuilder textToAdd = new StringBuilder();
         for (Task task : tasks) {
             textToAdd.append(task).append("\n");
@@ -47,7 +45,7 @@ public class Storage {
      * @throws DukeException
      */
     public ArrayList<Task> retrieveTasks() throws IOException, DukeException {
-        File f = new File(this.filePath);
+        File f = new File(DEFAULT_FILEPATH);
         f.getParentFile().mkdirs();
         if (!f.exists()) {
             f.createNewFile();

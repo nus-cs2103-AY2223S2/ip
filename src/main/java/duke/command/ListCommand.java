@@ -20,7 +20,7 @@ public class ListCommand extends Command {
      * @param storage Storage that backups the saving of tasks.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showMessageWithoutNewline(tasks.print());
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return tasks.print();
     }
 }

@@ -23,7 +23,7 @@ public class FindCommand extends Command {
      * @param storage Storage that backups the saving of tasks.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         TaskList matchingTasks = new TaskList();
         for (int i = 0; i < tasks.size(); i++) {
             Task t = tasks.get(i);
@@ -34,10 +34,12 @@ public class FindCommand extends Command {
         }
 
         if (matchingTasks.size() > 0) {
-            ui.showMessage("I've found the following matching task(s) in your list!");
-            ui.showMessageWithoutNewline(matchingTasks.print());
+            String msg = "I've found the following matching task(s) in your list! \n";
+            msg += matchingTasks.print();
+            msg += "\n";
+            return msg;
         } else {
-            ui.showMessage("Oh no, I couldn't find any matching tasks! :(");
+            return "Oh no, I couldn't find any matching tasks! :( \n";
         }
     }
 }
