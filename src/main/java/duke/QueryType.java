@@ -12,5 +12,6 @@ public enum QueryType {
     deadline,
     event,
     invalid,
+    find,
     exit
 }

@@ -70,6 +70,15 @@ public class TaskList {
         }
     }
 
+    public ArrayList<Task> findTasks(String input) {
+        ArrayList<Task> foundTasks = new ArrayList<>();
+        for (Task cur : this.tasks) {
+            if (cur.getDescription().contains(input)) {
+                foundTasks.add(cur);
+            }
+        }
+        return foundTasks;
+    }
     public int getNumTasks() {
         return tasks.size();
     }

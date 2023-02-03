@@ -1,1 +1,2 @@
 E,true,meeting,Feb 10 2023 1800 to Feb 11 2023 2100
+T,false,buy apples

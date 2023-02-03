@@ -46,6 +46,8 @@ public class Query {
             } else if (inputArr[0].equals("delete")) {
                 return QueryType.delete;
             }
+        } else if (inputArr[0].equals("find")) {
+            return QueryType.find;
         } else if (inputArr[0].equals("todo")) {
             return QueryType.todo;
         } else if (inputArr[0].equals("deadline")) {

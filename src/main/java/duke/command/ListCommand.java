@@ -17,9 +17,9 @@ public class ListCommand extends Command {
                     ui.showMessage(taskList.getTasks().indexOf(cur) + 1 + ". [" + cur.getSymbol() + "] "
                                     + "[" + cur.getStatusIcon() + "] " + cur.getDescription());
                 } else {
-                    System.out.println(taskList.getTasks().indexOf(cur) + 1 + ". [" + cur.getSymbol() + "] "
+                    ui.showMessage(taskList.getTasks().indexOf(cur) + 1 + ". [" + cur.getSymbol() + "] "
                                         + "[" + cur.getStatusIcon() + "] " + cur.getDescription()
-                                        + " (" + cur.getDescription() + ")");
+                                        + " (" + cur.getDuedateString() + ")");
                 }
             }
         }
