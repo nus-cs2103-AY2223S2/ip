@@ -69,22 +69,18 @@ public class EventTask extends Task {
         LocalDate comparableDate;
         if (task instanceof EventTask) {
             comparableDate = ((EventTask) task).from;
-        }
-        else if (task instanceof DeadlineTask) {
+        } else if (task instanceof DeadlineTask) {
             comparableDate = ((DeadlineTask) task).by;
-        }
-        else {
+        } else {
             // Non-comparable, they are equal
             return 0;
         }
 
         if (this.from == comparableDate) {
             return 0;
-        }
-        else if (this.from.isAfter(comparableDate)) {
+        } else if (this.from.isAfter(comparableDate)) {
             return 1;
-        }
-        else {
+        } else {
             return -1;
         }
     }

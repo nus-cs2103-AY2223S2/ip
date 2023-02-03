@@ -4,8 +4,6 @@ import duke.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
 
-import java.util.Arrays;
-
 /**
  * A command that searches for any tasks that contains a keyword.
  * @author Junyi

@@ -33,7 +33,7 @@ public class Parser {
     private final Ui ui;
 
     private enum DukeCommand {
-        bye, 
+        bye,
         todo,
         deadline,
         event,
