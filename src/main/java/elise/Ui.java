@@ -9,7 +9,6 @@ import java.io.IOException;
  */
 public class Ui {
     private static final String BORDER = "----------------------------------------";
-    private static final String PROJECT_PATH = System.getProperty("user.home") + "/ip/src";
     /**
      * Prints welcome message.
      */
@@ -28,16 +27,10 @@ public class Ui {
      * Prints error message.
      *
      * @param e EliseException.
+     * @return Error message.
      */
     protected String showError(EliseException e) {
         return wrapText(e.getMessage());
-    }
-
-    /**
-     * Prints exit message.
-     */
-    protected String byeMessage() {
-        return wrapText("Bye. Hope to see you again soon!");
     }
 
     /**

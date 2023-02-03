@@ -10,7 +10,6 @@ public class Command {
     /*
     Command codes:
     -1 - Invalid input.
-    0 - bye
     1 - list
     2 - mark
     3 - unmark
@@ -81,9 +80,7 @@ public class Command {
         if (code == -1) {
             return "Bye";
         }
-        if (code == 0) {
-            return ui.byeMessage();
-        } else if (code == 1) {
+        if (code == 1) {
             return Ui.wrapText(taskList.list());
         } else if (code == 2) {
             Task t = taskList.markDone(index);
@@ -117,15 +114,4 @@ public class Command {
             throw new EliseException("Invalid code.");
         }
     }
-
-    /**
-     * Returns true if exit command, false otherwise.
-     *
-     * @return Whether it is an exit command.
-     */
-    protected boolean isExit() {
-        return code == 0;
-    }
-
-
 }

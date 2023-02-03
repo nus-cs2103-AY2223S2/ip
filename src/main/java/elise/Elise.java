@@ -30,7 +30,6 @@ public class Elise {
     /**
      * Runs Elise chat-bot.
      *
-     * @throws IOException Unexpected IOException
      */
 
     public String getResponse(String input) {
@@ -38,24 +37,13 @@ public class Elise {
             Command c = Parser.read(input);
             return c.execute(ui, taskList, storage);
         } catch (EliseException e) {
-            return e.getMessage();
+            return ui.showError(e);
         } catch (IOException e) {
-            return "boomed";
+            return e.getMessage();
         }
     }
 
     public String getWelcome() {
         return ui.showWelcome();
-    }
-
-    /**
-     * Driver function.
-     *
-     * @param args Command line arguments
-     * @throws EliseException If filePath is invalid
-     * @throws IOException Unexpected IOException
-     */
-    public static void main(String[] args) {
-        Elise elise1 = new Elise("/list.txt");
     }
 }
