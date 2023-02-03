@@ -44,7 +44,14 @@ test {
 }
 
 application {
-    mainClassName = "duke.Duke"
+    mainClassName = "duke.Launcher"
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'duke.Launcher'
+    }
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
 }
 
 shadowJar {
