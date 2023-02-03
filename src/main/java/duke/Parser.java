@@ -46,4 +46,9 @@ public class Parser {
         String taskEnd = taskInfo.split(" /")[2].substring(3);
         return new Events(taskName, taskStart, taskEnd);
     }
+
+    public static String getSearchWord(String line) {
+        String searchWord = line.substring(5);
+        return searchWord;
+    }
 }

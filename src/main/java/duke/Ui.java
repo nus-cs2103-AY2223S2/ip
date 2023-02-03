@@ -35,6 +35,25 @@ public class Ui {
                 task.description());
     }
 
+    public void showTaskList(TaskList tasks) {
+        for (int i = 0; i < tasks.getTaskListSize(); i++) {
+            Task currTask = tasks.getTaskByIndex(i);
+            System.out.printf("%d. %s\n", i + 1, currTask.description());
+        }
+        if (tasks.isEmpty()) {
+            System.out.println("No tasks in task list.");
+        }
+    }
+
+    public void showFindingTask(TaskList tasks) {
+        if (tasks.isEmpty()) {
+            System.out.println("No matching tasks found.");
+        } else {
+            System.out.println("Here are the matching tasks in your list:");
+            this.showTaskList(tasks);
+        }
+    }
+
     public void askForNextCommand() {
         System.out.println("What would you like me to do next?");
     }
