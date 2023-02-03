@@ -171,9 +171,10 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     private String getResponse(String input) {
-        StringBuilder allResponses = new StringBuilder();
-        ui.introduce(allResponses);
-        return allResponses.toString();
+        //StringBuilder allResponses = new StringBuilder();
+        //ui.introduce(allResponses);
+        //return allResponses.toString();
+        return "I heard you:\n" + input;
     }
 
     /**
