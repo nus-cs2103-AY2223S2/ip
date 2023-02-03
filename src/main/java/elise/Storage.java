@@ -17,7 +17,7 @@ import java.util.Scanner;
 public class Storage {
     private final Path filePath;
     private List<Task> taskState;
-    private static final String PROJECT_PATH = System.getProperty("user.dir") + "/src/main/resources";
+    private static final String PROJECT_PATH = System.getProperty("user.dir") + "/elise";
 
     /**
      * Constructor for Storage.

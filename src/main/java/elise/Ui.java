@@ -1,14 +1,18 @@
 package elise;
 
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.stream.Collectors;
 
 /**
  * User interface class to interact with the user.
  */
 public class Ui {
     private static final String BORDER = "----------------------------------------";
+    private final String HELP_MESSAGE = new BufferedReader(
+            new InputStreamReader(this.getClass().getResourceAsStream("/help.txt")))
+            .lines().collect(Collectors.joining("\n"));
+
     /**
      * Prints welcome message.
      */
@@ -88,13 +92,6 @@ public class Ui {
      * Prints help message.
      */
     protected String showHelp() {
-        // Shifted into file.
-        try {
-            return wrapText(Files.readString(Paths.get(System.getProperty("user.dir")
-                    + "/src/main/resources/help.txt")));
-        } catch (IOException e) {
-            return e.getMessage();
-        }
-
+        return wrapText(HELP_MESSAGE);
     }
 }
