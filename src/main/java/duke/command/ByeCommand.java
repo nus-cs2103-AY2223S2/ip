@@ -3,7 +3,7 @@ package duke.command;
 import duke.task.TaskList;
 
 /**
- * Represents a bye command.
+ * Represents a bye command for exiting the app.
  */
 public class ByeCommand implements Command {
     /**

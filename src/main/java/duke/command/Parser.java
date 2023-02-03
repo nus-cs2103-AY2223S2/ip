@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Handles parsing of user inputs.
+ * Handles parsing of user inputs to determine the command to execute.
  */
 public class Parser {
     private final Map<String, Command> strToCommand;

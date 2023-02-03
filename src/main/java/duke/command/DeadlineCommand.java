@@ -42,10 +42,25 @@ public class DeadlineCommand extends AddCommand {
     }
 
     private String[] extractValidArgs(String input) throws DukeException {
+        validateCommandFormat(input);
+
+        String[] args = extractArgs(input);
+
+        validateNonEmptyDescription(args);
+        validateNonEmptyCutoff(args);
+
+        validateCutoffFormat(args);
+
+        return args;
+    }
+
+    private void validateCommandFormat(String input) throws DukeException {
         if (!input.matches("deadline .+ /by .+")) {
             throw new DukeException("The deadline command format should be:\n  deadline <description> /by <cutoff>");
         }
+    }
 
+    private String[] extractArgs(String input) {
         String argStr = input.replaceFirst("deadline", "");
         String[] args = argStr.split(" /by ", 2);
 
@@ -53,30 +68,40 @@ public class DeadlineCommand extends AddCommand {
             args[i] = args[i].trim();
         }
 
+        return args;
+    }
+
+    private void validateNonEmptyDescription(String[] args) throws DukeException {
         if (args[0].isEmpty()) {
             throw new DukeException("The description of a deadline cannot be empty!");
         }
+    }
 
+    private void validateNonEmptyCutoff(String[] args) throws DukeException {
         if (args[1].isEmpty()) {
             throw new DukeException("The cutoff of a deadline must be specified!");
         }
+    }
 
+    private void validateCutoffFormat(String[] args) throws DukeException {
         if (!args[1].matches(LocalDateTimeUtils.INPUT_DATE_TIME_REGEX)) {
             throw new DukeException(String.format("The cutoff format should be:\n  %s",
                     LocalDateTimeUtils.INPUT_DATE_TIME_FORMAT));
         }
-
-        return args;
     }
 
     private Deadline createDeadline(String[] args) throws DukeException {
-        LocalDateTime cutoff;
+        String description = args[0];
+        LocalDateTime cutoff = extractValidCutoff(args);
+
+        return new Deadline(false, description, cutoff);
+    }
+
+    private LocalDateTime extractValidCutoff(String[] args) throws DukeException {
         try {
-            cutoff = LocalDateTime.parse(args[1], LocalDateTimeUtils.INPUT_DATE_TIME_FORMATTER);
+            return LocalDateTime.parse(args[1], LocalDateTimeUtils.INPUT_DATE_TIME_FORMATTER);
         } catch (DateTimeParseException e) {
             throw new DukeException("The cutoff provided is an invalid date and time!");
         }
-
-        return new Deadline(false, args[0], cutoff);
     }
 }
