@@ -1,11 +1,14 @@
 package duke.task;
 
+/**
+ * Represents a task. It can be a 'to do', 'deadline' or 'event' task.
+ */
 public abstract class Task {
-    public String description;
     protected boolean isDone;
-    public char symbol;
+    protected String description;
+    protected String duedateString;
+    protected char symbol;
 
-    public String duedateString;
 
 
     public Task(String description, boolean isDone) {
@@ -18,6 +21,16 @@ public abstract class Task {
         this.isDone = false;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public String getDuedateString() {
+        return duedateString;
+    }
+    public char getSymbol() {
+        return symbol;
+    }
     /**
      * Gets the status icon of a task to indicate if it is marked or not.
      * @return An "X" or " " if it is marked or unmarked respectively.
@@ -35,7 +48,8 @@ public abstract class Task {
     }
 
     /**
-     * Converts the task to a specified string format of [Symbol],[Marked/UnMarked],[Description],[Deadline if any] to save.
+     * Converts the task to a specified string format of
+     * [Symbol],[Marked/UnMarked],[Description],[Deadline if any] to save.
      * @return String with the specified save format of a task.
      */
     public abstract String saveTask();

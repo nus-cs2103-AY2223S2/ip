@@ -1,11 +1,14 @@
 package duke.task;
 
-import duke.DukeException;
-import duke.Parser;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import duke.DukeException;
+import duke.Parser;
+
+/**
+ * Represents an Event task that has a description, a start date and time as well as an end date and time.
+ */
 public class Event extends Task {
     protected LocalDateTime startTime;
     protected LocalDateTime endTime;
@@ -41,7 +44,8 @@ public class Event extends Task {
         }
         String[] eventArr = inputArr[1].split("/", 2); //split description from timings
         if (eventArr.length == 1 || eventArr[1].isBlank()) {
-            throw new DukeException("Please include duration of the event in the following format: /<yyyy-MM-dd HHmm> to <yyyy-MM-dd HHmm>");
+            throw new DukeException("Please include duration of the event in the following format:"
+                                     + " /<yyyy-MM-dd HHmm> to <yyyy-MM-dd HHmm>");
         }
         this.description = eventArr[0];
         String[] dueArr = eventArr[1].split(" to ");

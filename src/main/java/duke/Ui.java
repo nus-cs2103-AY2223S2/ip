@@ -2,9 +2,15 @@ package duke;
 
 import java.util.Scanner;
 
+/**
+ * Represents the user interface that the user interacts with, displaying messages and reading in inputs.
+ */
 public class Ui {
-    Scanner scanner = new Scanner(System.in);
+    private Scanner scanner = new Scanner(System.in);
 
+    /**
+     * Prints out a welcome message for the user.
+     */
     public void showWelcomeMessage() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"

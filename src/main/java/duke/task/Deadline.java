@@ -1,12 +1,15 @@
 package duke.task;
 
-import duke.DukeException;
-import duke.Parser;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
+import duke.DukeException;
+import duke.Parser;
+
+/**
+ * Represents a Deadline Task that has a description and a due date.
+ */
 public class Deadline extends Task {
     protected LocalDate duedate;
 
@@ -42,13 +45,13 @@ public class Deadline extends Task {
             throw new DukeException("Please include a deadline in the following format: '/yyyy-MM-dd'");
         }
         this.description = descriptionArr[0];
-            LocalDate inputFormatter = Parser.parseDate(descriptionArr[1]);
-            this.duedate = inputFormatter;
-            this.duedateString = inputFormatter.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
+        LocalDate inputFormatter = Parser.parseDate(descriptionArr[1]);
+        this.duedate = inputFormatter;
+        this.duedateString = inputFormatter.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
     }
     public String saveTask() {
         return this.symbol + "," + isDone + "," + this.description + "," + duedate;
     }
 }
 
-//sample input: deadline do homework /2023-01-30
+//sample input: deadline do homework/2023-01-30

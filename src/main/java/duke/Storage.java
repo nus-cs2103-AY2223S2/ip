@@ -1,12 +1,15 @@
 package duke;
 
-import duke.task.*;
-
 import java.io.*;
 import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.task.*;
+
+/**
+ * Represents the storage of Duke, allowing the application to load and save tasks to a text file.
+ */
 public class Storage {
     protected File file;
 
@@ -23,7 +26,8 @@ public class Storage {
                 this.file = Files.createFile(Path.of(fileInput)).toFile();
             }
         } catch (IOException err) {
-            throw new DukeException("Error, the directory of tasks cannot be found or created. Any new tasks you enter will not be saved.");
+            throw new DukeException("Error, the directory of tasks cannot be found or created. "
+                                    + "Any new tasks you enter will not be saved.");
         }
     }
 
@@ -49,7 +53,8 @@ public class Storage {
             }
             return tasks;
         } catch (FileNotFoundException err) {
-            throw new DukeException("There has been an error loading your saved tasks. Any new tasks you enter will not be saved.");
+            throw new DukeException("There has been an error loading your saved tasks. "
+                                    + "Any new tasks you enter will not be saved.");
         }
     }
 
@@ -61,7 +66,7 @@ public class Storage {
     public void saveTasks(TaskList taskList) throws DukeException {
         try {
             FileWriter fileWriter = new FileWriter(file);
-            for (Task cur : taskList.tasks) {
+            for (Task cur : taskList.getTasks()) {
                 String curText = cur.saveTask();
                 fileWriter.write(curText);
                 fileWriter.write('\n');

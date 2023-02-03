@@ -11,9 +11,9 @@ public class MarkCommand extends Command {
     }
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         ui.showMessage("Nice! I've marked this task as done: ");
-        Task cur = taskList.tasks.get(index - 1);
+        Task cur = taskList.getTasks().get(index - 1);
         taskList.markTask(index);
-        ui.showMessage("[" + cur.getStatusIcon() + "] " + cur.description);
+        ui.showMessage("[" + cur.getStatusIcon() + "] " + cur.getDescription());
     }
     public boolean isExit() {
         return false;

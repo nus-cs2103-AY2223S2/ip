@@ -1,15 +1,17 @@
 package duke;
 
-import duke.command.*;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Todo;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import duke.command.*;
+import duke.task.*;
+
+/**
+ * Represents a Parser that parses in the user input.
+ * Determines what Command it should execute based on the string format.
+ */
 public class Parser {
 
     /**
@@ -18,12 +20,13 @@ public class Parser {
      * @return A LocalDateTime object of the specified Date and TIme.
      * @throws DukeException If the String input does not match the desired format of Date and Time.
      */
-    public static LocalDateTime parseDateTime (String dateTimeString) throws DukeException {
+    public static LocalDateTime parseDateTime(String dateTimeString) throws DukeException {
         DateTimeFormatter displayFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
         try {
             return LocalDateTime.parse(dateTimeString, displayFormatter);
         } catch (DateTimeParseException err) {
-            throw new DukeException("Invalid deadline format! Please format it in <yyyy-MM-dd HHmm> to <yyyy-MM-dd HHmm>");
+            throw new DukeException("Invalid deadline format! Please format it in"
+                                    + " <yyyy-MM-dd HHmm> to <yyyy-MM-dd HHmm>");
         }
     }
 
@@ -33,7 +36,7 @@ public class Parser {
      * @return A LocalDate object of the specified Date.
      * @throws DukeException if the String input does not match the desired format of Date.
      */
-    public static LocalDate parseDate (String dateString) throws DukeException {
+    public static LocalDate parseDate(String dateString) throws DukeException {
         try {
             return LocalDate.parse(dateString);
         } catch (DateTimeParseException err) {
