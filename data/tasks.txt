@@ -1,8 +1,0 @@
-<<<<<<< HEAD
-deadline / undone / return book  / Dec 13 2000 1200
-deadline / done / do ps1  / Dec 03 2021 1200
-=======
-deadline / done / return book  / Dec 13 2000 1200
-todo / undone / sleep
-todo / undone / sleep now
->>>>>>> branch-level-9
