@@ -32,7 +32,7 @@ public class EventCommand extends Command {
      * @throws DukeBadInstructionFormatException If user input is not 'clear'
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage)
+    public String execute(TaskList tasks, Ui ui, Storage storage)
             throws DukeBadInstructionFormatException {
         String[] splitted = this.fullCommand.split(" ");
         //Get 'duke.task.Deadline' description, 'from' and 'to' index
@@ -75,7 +75,7 @@ public class EventCommand extends Command {
         Event currentTask = new Event(description, from, to);
         storage.fileAppend(currentTask);
         tasks.append(currentTask);
-        ui.showAddedTask(currentTask, tasks);
+        return ui.showAddedTask(currentTask, tasks);
 
     }
     /**

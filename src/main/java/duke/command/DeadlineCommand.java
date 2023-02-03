@@ -32,7 +32,7 @@ public class DeadlineCommand extends Command {
      * @throws DukeBadInstructionFormatException If user input is wrong.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage)
+    public String execute(TaskList tasks, Ui ui, Storage storage)
             throws DukeBadInstructionFormatException {
         String[] splitted = this.fullCommand.split(" ");
         //Get 'duke.task.Deadline' description and 'by' index
@@ -69,7 +69,7 @@ public class DeadlineCommand extends Command {
         Deadline currentTask = new Deadline(description, by);
         storage.fileAppend(currentTask);
         tasks.append(currentTask);
-        ui.showAddedTask(currentTask, tasks);
+        return ui.showAddedTask(currentTask, tasks);
 
     }
     /**
