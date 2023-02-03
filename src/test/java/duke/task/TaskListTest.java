@@ -2,6 +2,7 @@ package duke.task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -14,23 +15,43 @@ import duke.DukeException;
  */
 public class TaskListTest {
     @Test
+    public void getListTest() {
+        List<Task> testList = new ArrayList<Task>();
+        TaskList tasklist = new TaskList(testList);
+        List<Task> returnedList = tasklist.getList();
+        assertEquals(testList, returnedList);
+    }
+
+    @Test
+    public void addTaskTest() {
+        Task taskToAdd = new Todo("To add");
+        List<Task> listOfTasks = new ArrayList<Task>();
+
+        // Add task to the task list
+        TaskList testList = new TaskList(listOfTasks);
+        testList.addTask(taskToAdd);
+
+        assertEquals(taskToAdd, listOfTasks.get(0));
+    }
+
+    @Test
     public void getTaskTest() {
-        TaskList list = new TaskList(new ArrayList<Task>());
         Task testTask = new Todo("test");
-        list.addTask(testTask);
+        TaskList list = new TaskList(new ArrayList<Task>(Arrays.asList(testTask)));
         assertEquals(testTask, list.getTask(0));
     }
 
     @Test
     public void deleteTaskTest() throws DukeException {
-        Task testTask = new Todo("test");
-        Task dontCare = new Todo("dont care");
-        TaskList list = new TaskList(new ArrayList<Task>(Arrays.asList(dontCare, testTask, dontCare)));
-        list.listTasks(); // To update the indexToTask hashmap
-        Task taskDeleted = list.deleteTask(1);
-        TaskList listAfterDelete = new TaskList(new ArrayList<Task>(Arrays.asList(dontCare, dontCare)));
+        Task taskToDelete = new Todo("test");
+        TaskList listOfTasks = new TaskList(new ArrayList<Task>(Arrays.asList(taskToDelete)));
 
-        assertEquals(listAfterDelete, list);
-        assertEquals(testTask, taskDeleted);
+        listOfTasks.listTasks(); // To update the indexToTask hashmap
+
+        Task taskDeleted = listOfTasks.deleteTask(0);
+        TaskList listAfterDelete = new TaskList(new ArrayList<Task>());
+
+        assertEquals(listAfterDelete, listOfTasks);
+        assertEquals(taskToDelete, taskDeleted);
     }
 }
