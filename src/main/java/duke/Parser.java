@@ -8,6 +8,14 @@ import java.util.Scanner;
 public class Parser {
 
     private static TaskList taskList = new TaskList();
+
+    /**
+     * Returns a boolean to signify the termination of the chatbot.
+     * It handles the user input.
+     *
+     * @return Whether chatbot is still running.
+     * @throws DukeException If input is empty.
+     */
     public static boolean talk() throws DukeException{
         Scanner myObj = new Scanner(System.in);
         String inp = myObj.nextLine();
@@ -23,6 +31,12 @@ public class Parser {
         return false;
     }
 
+    /**
+     * Process the user input and react/output according.
+     *
+     * @param task String user inputted string for processing.
+     * @throws DukeException If action is invalid or if task description is empty.
+     */
     public static void operationHandler(String task) throws DukeException{
         String[] inpArr = task.split(" ");
         if (inpArr[0].equals("list")) {
@@ -57,7 +71,15 @@ public class Parser {
         }
     }
 
-    private static String[] stringProcessor(boolean isDeadline, String s){ // isDeadline = false meaning isEvent
+    /**
+     * Returns an array of processed String for the actions "Deadline" and "Event".
+     * Separate the name and the date(s).
+     *
+     * @param isDeadline boolean whether is it deadline or event.
+     * @param s String string for processing.
+     * @return String[] processed String.
+     */
+    private static String[] stringProcessor(boolean isDeadline, String s){
         if (isDeadline){
             String[] processedArr = new String[2];
             String tempString = "";
@@ -89,10 +111,18 @@ public class Parser {
         }
     }
 
+    /**
+     * Output the TaskList..
+     */
     public static void list(){
         taskList.print();
     }
 
+    /**
+     * Process the inputs from saved file if it exists.
+     *
+     * @param dataArr String[] the array of Strings from file to be processed.
+     */
     public static void fileInpProcessor(String[] dataArr){
         try {
             Parser.operationHandler(dataArr[0]);
@@ -104,6 +134,9 @@ public class Parser {
         }
     }
 
+    /**
+     * Saves the current list to a file.
+     */
     public static void saveFile(){
         try {
             FileWriter myWriter = new FileWriter("data/duke.txt");

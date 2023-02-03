@@ -11,6 +11,9 @@ public class Event extends Task{
         this.endDate = endDate;
     }
 
+    /**
+     * Output the event task (with dates) for user to see.
+     */
     @Override
     public void printTask(){
         System.out.print("[E]");

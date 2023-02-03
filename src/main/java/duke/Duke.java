@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * An Exception class to handle exceptions related to Duke
+ */
 class DukeException extends Exception {
 
     public DukeException(String errorMessage){
@@ -7,6 +10,10 @@ class DukeException extends Exception {
         super(errorMessage);
     }
 }
+
+/**
+ * Main Duke class
+ */
 public class Duke {
 
     private Storage storage;
@@ -18,6 +25,9 @@ public class Duke {
         storage = new Storage(filePath);
     }
 
+    /**
+     * Run the loop of the chat bot.
+     */
     public void run() {
         boolean isRunning = true;
         //listReader();

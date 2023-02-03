@@ -10,6 +10,9 @@ public class Deadline extends Task{
         this.date = date;
     }
 
+    /**
+     * Output the deadline task (with date) for user to see.
+     */
     @Override
     public void printTask(){
         System.out.print("[D]");

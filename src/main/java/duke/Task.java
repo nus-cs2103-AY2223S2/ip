@@ -1,4 +1,9 @@
 package duke;
+
+/**
+ * Represents a Task, storing the task name, and its string as was inputted
+ * for data storage convenience.
+ */
 public class Task {
     private String name;
     private String inpString;
@@ -8,16 +13,26 @@ public class Task {
         this.name = name;
         this.inpString = inpString;
     }
+
+    /**
+     * Mark a Task as done, and output the task for the user to see.
+     */
     public void markDone(){
         isDone = true;
         this.printTask();
     }
 
+    /**
+     * Mark a Task as undone, and output the task for the user to see.
+     */
     public void markUndone() {
         isDone = false;
         this.printTask();
     }
 
+    /**
+     * Output the Task for user to see.
+     */
     public void printTask(){
         if (isDone){
             System.out.print("[X] " + name);
