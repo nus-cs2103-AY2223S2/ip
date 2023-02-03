@@ -37,9 +37,9 @@
                     <center>
                         <BorderPane prefWidth="520.0" style="-fx-background-radius: 1em;" styleClass="transparent" stylesheets="@../values/style.css" BorderPane.alignment="CENTER">
                             <center>
-                                <ScrollPane prefWidth="690.0" style="-fx-background-color: #FBFCFC; -fx-background-radius: 1em;" styleClass="transparent">
+                                <ScrollPane prefHeight="545.0" prefWidth="688.0" style="-fx-background-color: #FBFCFC; -fx-background-radius: 1em;" styleClass="transparent">
                                     <content>
-                                        <VBox fx:id="taskListContainer" alignment="TOP_CENTER" prefHeight="20.0" prefWidth="680.0" styleClass="transparent" stylesheets="@../values/style.css">
+                                        <VBox fx:id="taskListContainer" alignment="TOP_CENTER" prefHeight="20.0" prefWidth="675.0" styleClass="transparent" stylesheets="@../values/style.css">
                                             <padding>
                                                 <Insets bottom="10.0" top="10.0" />
                                             </padding>
@@ -52,7 +52,7 @@
                                 </ScrollPane>
                             </center>
                             <top>
-                                <Label fx:id="lblToday" text="Today" textFill="#352f44" BorderPane.alignment="CENTER_LEFT">
+                                <Label fx:id="lblToday" text="Task List" textFill="#352f44" BorderPane.alignment="CENTER_LEFT">
                                     <font>
                                         <Font size="16.0" />
                                     </font>

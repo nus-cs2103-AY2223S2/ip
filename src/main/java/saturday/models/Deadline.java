@@ -19,8 +19,8 @@ public class Deadline extends Task {
      * @param description the description of the deadline
      * @param deadline the deadline time of the task
      */
-    public Deadline(String description, String deadline) {
-        super(description);
+    public Deadline(int index, String description, String deadline) {
+        super(index, description);
         this.deadline = DateTimeParser.parseDate(deadline);
     }
 
@@ -42,6 +42,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + DateTimeParser.printDateTime(deadline) + ")";
+        return DateTimeParser.printDateTime(deadline);
     }
 }

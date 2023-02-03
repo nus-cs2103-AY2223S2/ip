@@ -9,6 +9,7 @@ import java.io.Serializable;
  * @version 0.1
  */
 public class Task implements Serializable {
+    private int index;
     private boolean isDone;
     private String description;
 
@@ -17,7 +18,8 @@ public class Task implements Serializable {
      *
      * @param description the description of the task
      */
-    public Task(String description) {
+    public Task(int index, String description) {
+        this.index = index;
         this.isDone = false;
         this.description = description;
     }
@@ -32,11 +34,20 @@ public class Task implements Serializable {
     }
 
     /**
+     * Returns index of the task.
+     *
+     * @return index number
+     */
+    public int getIndex() {
+        return this.index;
+    }
+
+    /**
      * Returns whether the task is isDone or not.
      *
      * @return true if the task is isDone, false otherwise
      */
-    public boolean isDone() {
+    public boolean getIsDone() {
         return this.isDone;
     }
 

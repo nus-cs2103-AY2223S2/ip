@@ -20,7 +20,7 @@ public enum Command {
             int space = args.indexOf(" ");
             if (space != -1) {
                 String description = args.substring(args.indexOf(" ") + 1);
-                ToDo task = new ToDo(description);
+                ToDo task = new ToDo(taskList.size() + 1, description);
                 taskList.add(task);
                 return "Got it. I've added this task:\n\t " + task + "\n\tNow you have " + taskList.size()
                         + " tasks in the list.";
@@ -40,7 +40,7 @@ public enum Command {
             if (space != -1 && by != -1 && by > space) {
                 String description = args.substring(space + 1, by - 1);
                 String deadline = args.substring(by + 4);
-                Deadline task = new Deadline(description, deadline);
+                Deadline task = new Deadline(taskList.size() + 1, description, deadline);
                 taskList.add(task);
                 return "Got it. I've added this task:\n\t " + task + "\n\tNow you have " + taskList.size()
                         + " tasks in the list.";
@@ -62,7 +62,7 @@ public enum Command {
                 String description = args.substring(space + 1, from - 1);
                 String start = args.substring(from + 6, to - 1);
                 String end = args.substring(to + 4);
-                Event task = new Event(description, start, end);
+                Event task = new Event(taskList.size() + 1, description, start, end);
                 taskList.add(task);
                 return "Got it. I've added this task:\n\t " + task + "\n\tNow you have " + taskList.size()
                         + " tasks in the list.";
@@ -74,7 +74,7 @@ public enum Command {
     /**
      * Command for displaying the TaskList.
      */
-    LIST("list") {
+    LIST("list") { // TODO: What do i do with this
         @Override
         public String execute(TaskList taskList, String args) {
             int on = args.indexOf("/on");
@@ -103,7 +103,7 @@ public enum Command {
                     int i = Integer.parseInt(number);
                     try {
                         taskList.mark(i);
-                        return "Nice! I've marked this task as done:\n\t  " + taskList.get(i);
+                        return "Nice! I've marked this task as done";
                     } catch (IndexOutOfBoundsException e) {
                         return "OOPS!!! There's no such task in your list";
                     }
@@ -125,7 +125,7 @@ public enum Command {
                     int i = Integer.parseInt(number);
                     try {
                         taskList.unMark(i);
-                        return "OK, I've marked this task as not done yet:\n\t  " + taskList.get(i);
+                        return "OK, I've marked this task as not done yet";
                     } catch (IndexOutOfBoundsException e) {
                         return "OOPS!!! There's no such task in your list";
                     }

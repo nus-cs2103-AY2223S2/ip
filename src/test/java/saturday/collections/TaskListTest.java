@@ -21,7 +21,7 @@ public class TaskListTest {
         setUp();
         taskList.add(new ToDo("Test task"));
         taskList.mark(1);
-        Assertions.assertTrue(taskList.get(1).isDone());
+        Assertions.assertTrue(taskList.get(1).getIsDone());
     }
 
     @Test
@@ -30,7 +30,7 @@ public class TaskListTest {
         taskList.add(new ToDo("Test task"));
         taskList.mark(1);
         taskList.unMark(1);
-        Assertions.assertFalse(taskList.get(1).isDone());
+        Assertions.assertFalse(taskList.get(1).getIsDone());
     }
 
     @Test

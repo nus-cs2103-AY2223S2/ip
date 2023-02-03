@@ -21,8 +21,8 @@ public class Event extends Task {
      * @param from the start time of the event
      * @param to the end time of the event
      */
-    public Event(String description, String from, String to) {
-        super(description);
+    public Event(int index, String description, String from, String to) {
+        super(index, description);
         this.from = DateTimeParser.parseDate(from);
         this.to = DateTimeParser.parseDate(to);
     }
@@ -46,15 +46,13 @@ public class Event extends Task {
     }
 
     /**
-     * Returns a string representation of the event. The format of the returned string is "[E]"
-     * followed by the result of the toString() method from the superclass,
-     * and the start and end time of the event in the format "(from: start_time to: end_time)".
+     * Returns a string representation of the event. The format of the returned string
+     * the format "(from: start_time to: end_time)".
      *
      * @return a string representation of the event.
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + DateTimeParser.printDateTime(from) + " to: "
-                + DateTimeParser.printDateTime(to) + ")";
+        return DateTimeParser.printDateTime(from) + " - " + DateTimeParser.printDateTime(to);
     }
 }
