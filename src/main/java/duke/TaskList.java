@@ -38,7 +38,7 @@ public class TaskList {
     public Task get(int index) throws DukeException {
         try {
             return tasksList.get(index);
-        } catch (Exception e) {
+        } catch (IndexOutOfBoundsException e) {
             throw new DukeException(Views.OUT_RANGE_ERR_STRING.eng());
         }
     }

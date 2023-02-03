@@ -66,18 +66,15 @@ public class Storage {
                     Task newTask = new Todo(title, isDone);
                     tasksList.add(newTask);
                 } else if (line.startsWith(Commands.DEADLINE.cmd())) {
-                    if (line.indexOf(Commands.BY.cmd()) == -1) {
-                        throw new DukeException(Views.MISSING_ARGS_ERR_STRING.eng());
-                    }
+                    assert line.indexOf(Commands.BY.cmd()) != -1 : Views.MISSING_ARGS_ERR_STRING.eng();
                     String title = line.substring(Commands.DEADLINE.cmd().length(),
                             line.indexOf(Commands.BY.cmd()));
                     Task newTask = new Deadline(title,
                             line.substring(line.indexOf(Commands.BY.cmd())), isDone);
                     tasksList.add(newTask);
                 } else if (line.startsWith(Commands.EVENT.cmd())) {
-                    if (line.indexOf(Commands.FROM.cmd()) == -1 || line.indexOf(Commands.TO.cmd()) == -1) {
-                        throw new DukeException(Views.MISSING_ARGS_ERR_STRING.eng());
-                    }
+                    assert line.indexOf(Commands.FROM.cmd()) != -1 && line.indexOf(Commands.TO.cmd()) != -1
+                            : Views.MISSING_ARGS_ERR_STRING.eng();
                     String title = line.substring(Commands.EVENT.cmd().length(),
                             line.indexOf(Commands.FROM.cmd()));
                     Task newTask = new Event(title,
@@ -89,7 +86,7 @@ public class Storage {
             }
             scanner.close();
         } catch (Exception e) {
-            // System.out.println(e);
+            // Silent fail if cannot load previous file
         }
         return tasksList;
     }
