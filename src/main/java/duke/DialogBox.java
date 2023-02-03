@@ -37,6 +37,7 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        dialog.getStyleClass().add("round-lbl");
         displayPicture.setClip(new Circle(70, 43, 40));
         displayPicture.setImage(img);
         this.setAlignment(Pos.TOP_RIGHT);
