@@ -21,6 +21,7 @@ import duke.tasklist.TaskList;
 public class Storage {
     private File allTasks;
     private File taskFolder;
+    private String loadStatus;
 
     /**
      * Constructor
@@ -30,6 +31,7 @@ public class Storage {
     public Storage(String filePath, String folderPath) {
         this.allTasks = new File(filePath);
         this.taskFolder = new File(folderPath);
+        this.loadStatus = "";
     }
 
     /**
@@ -66,11 +68,14 @@ public class Storage {
             } catch (FileNotFoundException e) {
                 throw new DukeException("Could not load the default tasks: " + e.getMessage());
             }
-            System.out.println("\n\n---Default duke.task.Task List successfully loaded\n\n");
+            loadStatus += "\n\n---Default duke.task.Task List successfully loaded\n\n";
         }
         return defaultTasks;
     }
 
+    public String getLoadStatus() {
+        return loadStatus;
+    }
     /**
      * method that loads all local tasks to an ArrayList of Tasks to be passed to TaskList
      * @param tasks default ArrayList of Tasks

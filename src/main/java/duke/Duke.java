@@ -31,6 +31,9 @@ public class Duke {
             tasks = new TaskList();
         }
     }
+    public String getLoadStatus() {
+        return storage.getLoadStatus();
+    }
 
     /**
      * a function that runs the program by repeatedly accepting user input and respond to them until

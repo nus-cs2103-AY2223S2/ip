@@ -9,12 +9,7 @@ public class Ui {
     /**
      * the welcome message to be displayed when the programm starts running
      */
-    private static String welcomeMessage = "Hello from\n"
-        + " ____        _        \n"
-        + "|  _ \\ _  _| | _____ \n"
-        + "| | | | | | | |/ / _ \\\n"
-        + "| |_| | |_| |   <  __/\n"
-        + "|____/\\__,_|_|\\_\\___|\n";
+    private static String welcomeMessage = "Hello from ClashPlanner\n";
 
     public static String getWelcomeMessage() {
         return welcomeMessage;
