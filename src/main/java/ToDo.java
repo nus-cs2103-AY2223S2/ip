@@ -1,16 +1,15 @@
 public class ToDo extends Task{
-    String tag = "[T]";
+    String tag = "T";
     public ToDo() {
         super.tag = tag;
     }
 
     @Override
-    public void genDscp(String input) throws InvalidTodo{
-        String dscp = input.replace("todo ", "");
-        if (dscp.isBlank()) {
+    public void genDscp(String input) throws InvalidTodo {
+        if (input.isBlank()) {
             throw new InvalidTodo();
         }
-        super.task = dscp;
+        super.description = input;
     }
 
     //Override toString
