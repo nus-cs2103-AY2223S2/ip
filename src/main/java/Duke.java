@@ -127,6 +127,12 @@ public class Duke extends Application {
 
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(ui.introduce(), new ImageView(duke))
+        );
+
+        storage.addToFile(tasks);
+
         //Part 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
@@ -171,9 +177,7 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     private String getResponse(String input) {
-        //StringBuilder allResponses = new StringBuilder();
-        //ui.introduce(allResponses);
-        //return allResponses.toString();
+
         return "I heard you:\n" + input;
     }
 
@@ -182,8 +186,6 @@ public class Duke extends Application {
      */
     public void run() {
 
-        //ui.introduce();
-        ui.instruct();
         Scanner scan = new Scanner(System.in);
         String userInput = scan.nextLine();
 
