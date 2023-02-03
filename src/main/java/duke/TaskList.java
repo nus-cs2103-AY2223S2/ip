@@ -46,24 +46,17 @@ public class TaskList {
     }
 
     /**
-     * Exits from the application.
-     */
-    public void bye() {
-        System.out.println("Bye. Hope to see you again soon! ^_^");
-        System.exit(0);
-    }
-
-    /**
      * Displays all the tasks in the list.
      */
-    public void printList() {
+    public String printList() {
+        String allItems = "Here are the tasks in your list: \n";
         if (lists.size() == 0) {
-            System.out.println("No tasks in your list.");
+            return "No tasks in your list.";
         } else {
-            System.out.println("Here are the tasks in your list:");
             for (int i = 0; i < lists.size(); i++) {
-                System.out.println(i + 1 + "." + lists.get(i));
+                allItems = allItems + (i + 1) + ". " + lists.get(i) + "\n";
             }
+            return allItems;
         }
     }
 
@@ -73,13 +66,12 @@ public class TaskList {
      * @param index The task to be selected.
      * @throws TaskNotExistException If the task does not exist in the list.
      */
-    public void mark(int index) throws TaskNotExistException {
+    public String mark(int index) throws TaskNotExistException {
         if (index > lists.size() || index < 1) {
             throw new TaskNotExistException();
         }
         lists.get(index - 1).setIsDone();
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(lists.get(index - 1));
+        return "Nice! I've marked this task as done: \n" + lists.get(index - 1);
     }
 
     /**
@@ -88,13 +80,12 @@ public class TaskList {
      * @param index The task to be selected.
      * @throws TaskNotExistException If the task does not exist in the list.
      */
-    public void unmark(int index) throws TaskNotExistException {
+    public String unmark(int index) throws TaskNotExistException {
         if (index > lists.size() || index < 1) {
             throw new TaskNotExistException();
         }
         lists.get(index - 1).revertIsDone();
-        System.out.println("Nice! I've marked this task as not done:");
-        System.out.println(lists.get(index - 1));
+        return "Ok! I've marked this task as not done: \n" + lists.get(index - 1);
     }
 
     /**
@@ -102,11 +93,11 @@ public class TaskList {
      *
      * @param desc The description of a todo task.
      */
-    public void todo(String desc) {
+    public String todo(String desc) {
         Todo todo = new Todo(desc);
         lists.add(todo);
-        System.out.println("Got it. I've added this task:\n" + todo);
-        System.out.println("Now you have " + lists.size() + " tasks in the list.");
+        return "Got it. I've added this task:\n" + todo + "\n" + "Now you have "
+                + lists.size() + " tasks in the list.";
     }
 
     /**
@@ -115,11 +106,11 @@ public class TaskList {
      * @param desc The description of a deadline task.
      * @param time The deadline of a deadline task.
      */
-    public void deadline(String desc, TimeConvertor time) {
+    public String deadline(String desc, TimeConvertor time) {
         Deadline deadline = new Deadline(desc, time);
         lists.add(deadline);
-        System.out.println("Got it. I've added this task:\n" + deadline);
-        System.out.println("Now you have " + lists.size() + " tasks in the list.");
+        return "Got it. I've added this task:\n" + deadline + "\n" + "Now you have "
+                + lists.size() + " tasks in the list.";
     }
 
     /**
@@ -129,11 +120,11 @@ public class TaskList {
      * @param from The start time of an event task.
      * @param to The end time of  a task.
      */
-    public void event(String desc, TimeConvertor from, TimeConvertor to) {
+    public String event(String desc, TimeConvertor from, TimeConvertor to) {
         Event event = new Event(desc, from, to);
         lists.add(event);
-        System.out.println("Got it. I've added this task:\n" + event);
-        System.out.println("Now you have " + lists.size() + " tasks in the list.");
+        return "Got it. I've added this task:\n" + event + "\n" + "Now you have "
+                + lists.size() + " tasks in the list.";
     }
 
     /**
@@ -142,12 +133,12 @@ public class TaskList {
      * @param index The task to be selected.
      * @throws TaskNotExistException The selected task does not exist in the list.
      */
-    public void delete(int index) throws TaskNotExistException {
+    public String delete(int index) throws TaskNotExistException {
         if (index > lists.size() || index < 1) {
             throw new TaskNotExistException();
         }
-        System.out.println("Got it. I've remove this task:\n" + lists.remove(index - 1));
-        System.out.println("Now you have " + lists.size() + " tasks in the list.");
+        return "Got it. I've remove this task:\n" + lists.remove(index - 1)
+                + "\n" + "Now you have " + lists.size() + " tasks in the list.";
     }
 
     /**
@@ -155,17 +146,20 @@ public class TaskList {
      *
      * @param searchKey Search key for finding the task.
      */
-    public void find(String searchKey) {
+    public String find(String searchKey) {
         boolean isFind = false;
+        String allFind = "";
+
         for (int i = 0; i < lists.size(); i++) {
             if (lists.get(i).getTaskDes().contains(searchKey.trim())) {
-                System.out.println((i + 1) + ". " + lists.get(i));
                 isFind = true;
+                allFind = allFind + (i + 1) + ". " + lists.get(i) + "\n";
             }
         }
         if (!isFind) {
-            System.out.println("No result found.");
+            return "No result found.";
         }
+        return allFind;
     }
 
     /**
@@ -175,21 +169,24 @@ public class TaskList {
      *
      * @param checkDeadline The date.
      */
-    public void check(String checkDeadline) {
+    public String check(String checkDeadline) {
         boolean ifDeadlineExist = false;
+        String allCheck = "";
+
         for (int i = 0; i < lists.size(); i++) {
             Task currT = lists.get(i);
             if (currT instanceof Deadline) {
                 Deadline dTask = (Deadline) currT;
                 if (dTask.getDeadline().equals(checkDeadline)) {
                     ifDeadlineExist = true;
-                    System.out.println((i + 1) + "." + dTask);
+                    allCheck = allCheck + (i + 1) + "." + dTask;
                 }
             }
         }
         if (!ifDeadlineExist) {
-            System.out.println("No deadline found on " + checkDeadline);
+            return "No deadline found on " + checkDeadline;
         }
+        return allCheck;
     }
 }
 

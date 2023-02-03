@@ -55,38 +55,31 @@ public class Parser {
      * @throws MissingNumberException Not indication of task index number.
      * @throws MissingDescriptionException No task description.
      */
-    public static boolean parseInput(TaskList list, String userInput)
+    public static String parseInput(TaskList list, String userInput)
             throws TaskNotExistException, MissingNumberException, MissingDescriptionException, UnknownInputException {
         int chosenTask;
 
         switch (userInput.split("\\s+")[0]) {
-        case "bye":
-            list.bye();
-            return false;
         case "list":
-            list.printList();
-            return false;
+            return list.printList();
         case "mark":
             if (!userInput.contains(" ")) {
                 throw new MissingNumberException("mark");
             }
             chosenTask = Integer.parseInt(userInput.split("\\s+")[1]);
-            list.mark(chosenTask);
-            return true;
+            return list.mark(chosenTask);
         case "unmark":
             if (!userInput.contains(" ")) {
                 throw new MissingNumberException("unmark");
             }
             chosenTask = Integer.parseInt(userInput.split("\\s+")[1]);
-            list.unmark(chosenTask);
-            return true;
+            return list.unmark(chosenTask);
         case "todo":
             if (!userInput.contains(" ")) {
                 throw new MissingDescriptionException("todo");
             }
             String todoDescription = userInput.substring(userInput.indexOf(" ")).trim();
-            list.todo(todoDescription);
-            return true;
+            return list.todo(todoDescription);
         case "deadline":
             if (!userInput.contains(" ")) {
                 throw new MissingDescriptionException("deadline");
@@ -98,8 +91,7 @@ public class Parser {
             String ddDescription = ddFull.split("/")[0];
             String ddDate = ddFull.split("/")[1].substring(ddFull.split("/")[1]
                     .indexOf(" ")).trim();
-            list.deadline(ddDescription, new TimeConvertor(ddDate));
-            return true;
+            return list.deadline(ddDescription, new TimeConvertor(ddDate));
         case "event":
             if (!userInput.contains(" ")) {
                 throw new MissingDescriptionException("event");
@@ -113,31 +105,26 @@ public class Parser {
                     .substring(eventFull.split("/")[1].indexOf(" ")).trim();
             String eventTo = eventFull.split("/")[2].substring(eventFull
                     .split("/")[2].indexOf(" ")).trim();
-            list.event(eventDescription, new TimeConvertor(eventFrom), new TimeConvertor(eventTo));
-            return true;
+            return list.event(eventDescription, new TimeConvertor(eventFrom), new TimeConvertor(eventTo));
         case "delete":
             if (!userInput.contains(" ")) {
                 throw new MissingNumberException("delete");
             }
             chosenTask = Integer.parseInt(userInput.split("\\s+")[1]);
-            list.delete(chosenTask);
-            return true;
+            return list.delete(chosenTask);
         case "find":
             if (!userInput.contains(" ")) {
                 throw new MissingNumberException("find");
             }
-            list.find(userInput.substring(userInput.indexOf(" ") + 1));
-            return false;
+            return list.find(userInput.substring(userInput.indexOf(" ") + 1));
         case "check":
             if (!userInput.contains("/")) {
                 throw new MissingNumberException("check");
             }
             String checkDeadline = userInput.split("/")[1];
-            list.check(checkDeadline);
-            return false;
+            return list.check(checkDeadline);
         default:
-            System.out.println("Oh no, I am not sure what that means, could you try again?");
-            return false;
+            return "Oh no, I am not sure what that means, could you try again?";
         }
     }
 }
