@@ -7,13 +7,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
-import javafx.scene.text.Text;
 
 /**
  * An example of a custom control using FXML.
@@ -22,7 +23,7 @@ import javafx.scene.text.Text;
  */
 public class CbotBox extends HBox {
     @FXML
-    private Text dialog;
+    private Label dialog;
     @FXML
     private ImageView displayPicture;
 
@@ -36,8 +37,8 @@ public class CbotBox extends HBox {
             e.printStackTrace();
         }
 
-        // Using a Text/TextFlow Node following @hingen's solution. Thank you!
         dialog.setText(text);
+        dialog.setPadding(new Insets(10.0));
 
         displayPicture.setImage(img);
         displayPicture.setClip(new Circle(50.0, 50.0, 50.0));
