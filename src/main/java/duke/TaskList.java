@@ -214,6 +214,7 @@ public class TaskList {
      * @return a string representation of the task with the given index.
      */
     public String addOrdinal(int index, Task task) {
+        assert index >= 0 && task != null;
         return (index + 1) + ". " + task;
     }
 }

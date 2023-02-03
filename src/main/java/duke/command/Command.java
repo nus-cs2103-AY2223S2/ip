@@ -74,6 +74,7 @@ public abstract class Command {
     /**
      * Each command encapsulates an operation that Duke can perform, as a function that may accept parameters. This
      * method executes the operation.
+     *
      * @param params The parameters to pass to the operation.
      * @return The output of the operation.
      */
