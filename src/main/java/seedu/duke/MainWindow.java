@@ -32,6 +32,9 @@ public class MainWindow extends AnchorPane {
         duke = d;
     }
 
+    /**
+     * Takes in the user's input and creates dialog boxes corresponding to the user's input and Duke's response
+     */
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
