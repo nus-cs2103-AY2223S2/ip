@@ -81,11 +81,21 @@ public class MessageBox extends HBox {
         return this;
     }
 
+    /**
+     * Sets the Jarvis style.
+     *
+     * @return This message box.
+     */
     public MessageBox makeJarvis() {
         messageChat.getStyleClass().add("message-chat-jarvis");
         return this;
     }
 
+    /**
+     * Sets the Ultron style.
+     *
+     * @return This message box.
+     */
     public MessageBox makeUltron() {
         messageChat.getStyleClass().add("message-chat-ultron");
         return this;

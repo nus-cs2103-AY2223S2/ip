@@ -39,7 +39,6 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     public void initialize() {
-
         scrollPane.vvalueProperty().bind(chatContainer.heightProperty());
         sendButton.getStyleClass().add("button");
     }
