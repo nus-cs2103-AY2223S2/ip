@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import aqua.graphic.SuggestionTextField?>
-
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
@@ -20,7 +19,7 @@
       </ScrollPane>
       <HBox alignment="CENTER_LEFT" spacing="5.0" VBox.vgrow="NEVER">
          <children>
-            <SuggestionTextField fx:id="inputField" maxWidth="1.7976931348623157E308" onKeyReleased="#handleKeyRelease" promptText="Message" HBox.hgrow="ALWAYS" />
+            <TextField fx:id="inputField" maxWidth="1.7976931348623157E308" onKeyReleased="#handleKeyRelease" promptText="Message" HBox.hgrow="ALWAYS" />
             <Button mnemonicParsing="false" onAction="#handleSend" text="Send" />
          </children>
       </HBox>
