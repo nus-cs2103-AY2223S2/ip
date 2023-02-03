@@ -65,6 +65,7 @@ public class Gui extends Application {
      */
     @Override
     public void start(Stage stage) {
+        assert this.book != null : "GUI should have an associated Book";
         setStage(stage);
         setDialogContainer();
         setScrollPane();
