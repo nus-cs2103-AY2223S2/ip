@@ -1,15 +1,14 @@
 package panav.parser;
 
 import panav.command.Command;
+import panav.command.DeadlineCommand;
+import panav.command.DeleteCommand;
+import panav.command.EditCommand;
+import panav.command.EventCommand;
+import panav.command.ExitCommand;
+import panav.command.FindCommand;
 import panav.command.ListCommand;
 import panav.command.TodoCommand;
-import panav.command.EventCommand;
-import panav.command.DeadlineCommand;
-import panav.command.EditCommand;
-import panav.command.ExitCommand;
-import panav.command.DeleteCommand;
-import panav.command.FindCommand;
-
 import panav.exception.InvalidInputException;
 
 /**
@@ -39,8 +38,11 @@ public class Parser {
                 String deadlineMessage = fullCommand.substring(9, indexBy - 1);
                 return new DeadlineCommand(deadlineMessage, by);
             case "event":
-                int fromIndex = 0, toIndex = 0;
-                String eventMessage = "", from = "", to = "";
+                int fromIndex = 0;
+                int toIndex = 0;
+                String eventMessage = "";
+                String from = "";
+                String to = "";
                 for (int j = 0; j < temp.length; j++) {
                     if (temp[j].compareTo("/from") == 0) {
                         fromIndex = j;

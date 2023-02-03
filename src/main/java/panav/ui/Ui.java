@@ -1,18 +1,21 @@
 package panav.ui;
 
+import java.util.Scanner;
+
 import panav.task.Task;
 import panav.task.TaskList;
 
-import java.util.Scanner;
+
 
 /**
  * Class to represent all the UI tasks to interact with the user.
  */
 public class Ui {
 
-    Scanner sc = new Scanner(System.in);
-
     private static final String LINE_DIVIDER = "____________________________________________________________";
+
+    private Scanner sc = new Scanner(System.in);
+
 
 
     /**

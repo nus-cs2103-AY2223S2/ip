@@ -1,12 +1,5 @@
 package panav.storage;
 
-import panav.exception.ToDoDescriptionException;
-
-import panav.task.Task;
-import panav.task.ToDo;
-import panav.task.Deadline;
-import panav.task.Event;
-import panav.task.TaskList;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,6 +7,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import panav.exception.ToDoDescriptionException;
+import panav.task.Deadline;
+import panav.task.Event;
+import panav.task.Task;
+import panav.task.TaskList;
+import panav.task.ToDo;
+
 
 /**
  * Class to represent the storage facility of the program. It loads up the existing task list

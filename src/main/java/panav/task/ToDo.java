@@ -7,6 +7,11 @@ import panav.exception.ToDoDescriptionException;
  */
 public class ToDo extends Task {
 
+    /**
+     * Constructor to initialise attributes.
+     * @param description
+     * @throws ToDoDescriptionException
+     */
     public ToDo(String description) throws ToDoDescriptionException {
         super(description);
         if (description.length() == 0) {
@@ -16,6 +21,6 @@ public class ToDo extends Task {
 
     @Override
     public String toString() {
-        return "[T]" + super.toString() ;
+        return "[T]" + super.toString();
     }
 }
