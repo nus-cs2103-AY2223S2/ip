@@ -1,4 +1,3 @@
-package leo;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -15,7 +14,6 @@ import leo.ui.Ui;
 
 /**
  * Main class for Leo.
- * @author Vigneshwar Hariharan
  */
 public class Leo {
 
@@ -35,9 +33,24 @@ public class Leo {
      * Starts the Leo program.
      * @throws LeoTaskException
      */
+    public void start() throws LeoTaskException {
+        //Get saved state
+        ui.greetUser();
+        String[] request = parser.parseRequest(); // reads in command fed by user
+        readFile();
 
-    public String getResponse(String request) throws LeoTaskException {
+        if (taskList == null) {
+            taskList = new TaskList();
+        }
         
+        while (!request[0].equals("bye")) {
+            taskList.processRequest(request);
+            request = parser.parseRequest();
+        }
+        
+        Storage.writeObjectToFile(taskList);
+        ui.printExit();
+        parser.close();
     }
 
     /**

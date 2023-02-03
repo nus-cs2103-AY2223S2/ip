@@ -1,7 +1,5 @@
 package leo.parser;
 
-import leo.task.TaskList;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
@@ -52,9 +50,5 @@ public class Parser {
     public static LocalDateTime stringToDate(String dateTimeString) {
         LocalDateTime date = LocalDateTime.parse(dateTimeString.trim(), DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
         return date;
-    }
-
-    public String parse(String request, TaskList taskList) {
-        return " ";
     }
 }
