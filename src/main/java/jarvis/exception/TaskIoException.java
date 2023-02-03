@@ -7,4 +7,8 @@ public class TaskIoException extends JarvisException {
     public TaskIoException(String message, String friendlyMessage) {
         super(message, friendlyMessage);
     }
+
+    public TaskIoException(String message) {
+        super(message, "I'm afraid the tasks could not be saved.");
+    }
 }

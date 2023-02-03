@@ -5,7 +5,7 @@ package jarvis.exception;
  */
 public class MissingParameterException extends CommandParseException {
     public MissingParameterException(String message) {
-        super(message);
+        super(message, "I'm missing some information, could you please repeat?");
     }
 
     public MissingParameterException(String message, String friendlyMessage) {
