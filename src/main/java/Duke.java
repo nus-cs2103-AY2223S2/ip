@@ -1,13 +1,11 @@
 import java.io.IOException;
-
 import java.util.ArrayList;
 
-import duke.Ui;
+import duke.DukeExceptions;
 import duke.Parser;
 import duke.Storage;
 import duke.TaskList;
-import duke.DukeExceptions;
-
+import duke.Ui;
 import duke.tasktypes.Task;
 
 /**
@@ -15,11 +13,11 @@ import duke.tasktypes.Task;
  */
 public class Duke {
 
-    static ArrayList<Task> storedText = new ArrayList<Task>();
-    static Ui DukeUi;
-    static Parser DukeParser;
-    static Storage DukeStorage;
-    static TaskList DukeTaskList;
+    private static ArrayList<Task> storedText = new ArrayList<Task>();
+    private static Ui dukeUi;
+    private static Parser dukeParser;
+    private static Storage dukeStorage;
+    private static TaskList dukeTaskList;
 
     /**
      * Constructor to create an instance of Duke chatbot.
@@ -27,12 +25,12 @@ public class Duke {
      * @throws DukeExceptions
      */
     Duke() throws IOException, DukeExceptions {
-        DukeUi = new Ui();
-        DukeParser = new Parser();
-        DukeStorage = new Storage("data", "dukedata.txt");
+        dukeUi = new Ui();
+        dukeParser = new Parser();
+        dukeStorage = new Storage("data", "dukedata.txt");
 
         try {
-            DukeTaskList = new TaskList(DukeStorage.loadTask());
+            dukeTaskList = new TaskList(dukeStorage.loadTask());
         } catch (DukeExceptions DE) {
             System.out.println(DE.toString());
         }
@@ -44,11 +42,11 @@ public class Duke {
      * @throws DukeExceptions
      */
     public void run() throws IOException, DukeExceptions {
-        String input = DukeUi.gettingUserInput();
+        String input = dukeUi.gettingUserInput();
 
         while (!input.equals("bye")) {
-            DukeParser.readInput(input, DukeTaskList);
-            input = DukeUi.gettingUserInput();
+            dukeParser.readInput(input, dukeTaskList);
+            input = dukeUi.gettingUserInput();
         }
     }
 
@@ -64,7 +62,7 @@ public class Duke {
         System.out.println("Hello from\n" + logo + "\nWhat can I do for you?");
         Duke initDuke = new Duke();
         initDuke.run();
-        DukeStorage.storeTask(DukeTaskList.getListOfTasks());
+        dukeStorage.storeTask(dukeTaskList.getListOfTasks());
         System.out.println("Bye! Hope to see you again soon!");
     }
 

@@ -1,25 +1,22 @@
 package duke;
 
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
-
-import java.io.IOException;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import duke.tasktypes.Deadlines;
 import duke.tasktypes.Events;
-import duke.tasktypes.ToDo;
 import duke.tasktypes.Task;
+import duke.tasktypes.ToDo;
 
 /**
  * Class used to help in storing and loading user's list of tasks for Duke chatbot.
  */
 public class Storage {
-    
     protected Path dataPath;
 
     /**
@@ -33,7 +30,6 @@ public class Storage {
     }
 
     /**
-     *
      * @param filePath
      * @param fileName
      * @return Path whereby the file containing the list of tasks is supposed to be. If there is no such file, the
@@ -75,23 +71,24 @@ public class Storage {
      * @param requiredInformation A string containing the full name of the task as written into the file previously.
      * @throws DukeExceptions
      */
-    public void handleDeadline(Character isDone, ArrayList<Task> listOfTasks, String requiredInformation) throws DukeExceptions {
-                String deadlineWithBy = requiredInformation.substring(requiredInformation.lastIndexOf("("));
-                String rawDate = deadlineWithBy.split("\\(by: ")[1].split("\\)")[0];
-                String[] nameSplitInArr = requiredInformation.substring(6).split(" ");
-                String nameOfTask = nameSplitInArr[0];
-                for (int i = 1; i < nameSplitInArr.length; i++) {
-                    if (nameSplitInArr[i].equals("(by:")) {
-                        break;
-                    }
-                    nameOfTask = nameOfTask + " " + nameSplitInArr[i];
-                }
-                String toInitialize = nameOfTask + " /by" + " " + rawDate;
-                Task toAdd = new Deadlines(toInitialize);
-                if (isDone.equals('X')) {
-                    toAdd.setDone();
-                }
-                listOfTasks.add(toAdd);
+    public void handleDeadline(
+            Character isDone, ArrayList<Task> listOfTasks, String requiredInformation) throws DukeExceptions {
+        String deadlineWithBy = requiredInformation.substring(requiredInformation.lastIndexOf("("));
+        String rawDate = deadlineWithBy.split("\\(by: ")[1].split("\\)")[0];
+        String[] nameSplitInArr = requiredInformation.substring(6).split(" ");
+        String nameOfTask = nameSplitInArr[0];
+        for (int i = 1; i < nameSplitInArr.length; i++) {
+            if (nameSplitInArr[i].equals("(by:")) {
+                break;
+            }
+            nameOfTask = nameOfTask + " " + nameSplitInArr[i];
+        }
+        String toInitialize = nameOfTask + " /by" + " " + rawDate;
+        Task toAdd = new Deadlines(toInitialize);
+        if (isDone.equals('X')) {
+            toAdd.setDone();
+        }
+        listOfTasks.add(toAdd);
     }
 
     /**
@@ -101,24 +98,25 @@ public class Storage {
      * @param requiredInformation A string containing the full name of the task as written into the file previously.
      * @throws DukeExceptions
      */
-    public void handleEvents(Character isDone, ArrayList<Task> listOfTasks, String requiredInformation) throws DukeExceptions {
-                String timeframe = requiredInformation.substring(requiredInformation.lastIndexOf("("));
-                String from = timeframe.substring(1).split(" to:")[0].substring(5);
-                String to = timeframe.substring(1).split("to: ")[1].split("\\)")[0];
-                String[] nameSplitInArr = requiredInformation.substring(6).split(" ");
-                String nameOfTask = nameSplitInArr[0];
-                for (int i = 1; i < nameSplitInArr.length; i++) {
-                    if (nameSplitInArr[i].equals("(from:")) {
-                        break;
-                    }
-                    nameOfTask = nameOfTask + " " + nameSplitInArr[i];
-                }
-                String toInitialize = nameOfTask + " /from" + from + " /to " + to;
-                Task toAdd = new Events(toInitialize);
-                if (isDone.equals('X')) {
-                    toAdd.setDone();
-                }
-                listOfTasks.add(toAdd); 
+    public void handleEvents(
+        Character isDone, ArrayList<Task> listOfTasks, String requiredInformation) throws DukeExceptions {
+        String timeframe = requiredInformation.substring(requiredInformation.lastIndexOf("("));
+        String from = timeframe.substring(1).split(" to:")[0].substring(5);
+        String to = timeframe.substring(1).split("to: ")[1].split("\\)")[0];
+        String[] nameSplitInArr = requiredInformation.substring(6).split(" ");
+        String nameOfTask = nameSplitInArr[0];
+        for (int i = 1; i < nameSplitInArr.length; i++) {
+            if (nameSplitInArr[i].equals("(from:")) {
+                break;
+            }
+            nameOfTask = nameOfTask + " " + nameSplitInArr[i];
+        }
+        String toInitialize = nameOfTask + " /from" + from + " /to " + to;
+        Task toAdd = new Events(toInitialize);
+        if (isDone.equals('X')) {
+            toAdd.setDone();
+        }
+        listOfTasks.add(toAdd);
     }
 
     /**
@@ -135,7 +133,7 @@ public class Storage {
             return useThis;
         }
         while (scannerForFileData.hasNextLine()) {
-            String taskToLoad = scannerForFileData.nextLine();  
+            String taskToLoad = scannerForFileData.nextLine();
             String dataWithoutIndexes = taskToLoad.substring(2);
             Character isDone = dataWithoutIndexes.charAt(4);
             Character taskType = dataWithoutIndexes.charAt(1);

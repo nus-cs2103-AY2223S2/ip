@@ -9,7 +9,6 @@ import duke.tasktypes.Task;
  * Class containing the list of tasks for Duke chatbot.
  */
 public class TaskList {
-    
     protected ArrayList<Task> listOfTasks;
 
     /**
@@ -49,13 +48,18 @@ public class TaskList {
                 throw new DukeExceptions("Wrong size for mark/unmark");
             }
             Task gettingTask = listOfTasks.remove(indexToUse);
-            String toOutput = "Noted. I've removed this task:\n  " + gettingTask.toString() + "\nNow you have " + listOfTasks.size() + " tasks in the list";
-            System.out.println(toOutput);    
+            String toOutput = "Noted. I've removed this task:\n  " + gettingTask.toString()
+                    + "\nNow you have " + listOfTasks.size() + " tasks in the list";
+            System.out.println(toOutput);
         } catch (DukeExceptions DE) {
             System.out.println(DE.toString());
         }
     }
 
+    /**
+     * Finds a list of tasks containing the given keyword.
+     * @param keyword String representation of the keyword.
+     */
     public void findTasks(String keyword) {
         String starter = "Here are the matching tasks in your list:";
         Integer firstIndex = 1;
@@ -78,9 +82,11 @@ public class TaskList {
         listOfTasks.add(toAdd);
         String toPrint = "";
         if (listOfTasks.size() == 1) {
-            toPrint = "Got it. I've added this task:\n  " + toAdd.toString() + "\nNow you have " + listOfTasks.size() + " task in the list.";
+            toPrint = "Got it. I've added this task:\n  " + toAdd.toString()
+                    + "\nNow you have " + listOfTasks.size() + " task in the list.";
         } else {
-            toPrint = "Got it. I've added this task:\n  " + toAdd.toString() + "\nNow you have " + listOfTasks.size() + " tasks in the list.";                   
+            toPrint = "Got it. I've added this task:\n  " + toAdd.toString()
+                    + "\nNow you have " + listOfTasks.size() + " tasks in the list.";
         }
         System.out.println(toPrint);
     }

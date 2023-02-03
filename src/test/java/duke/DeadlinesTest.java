@@ -1,18 +1,18 @@
 package duke;
 
-import duke.tasktypes.Deadlines;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.Test;
+
 import duke.tasktypes.Deadlines;
+
 public class DeadlinesTest {
     @Test
     public void testEmpty() throws DukeExceptions {
         String caughtIt = "";
         try {
             Deadlines emptyOne = new Deadlines("");
-        } catch  (DukeExceptions DE){
+        } catch (DukeExceptions DE) {
             caughtIt = DE.toString();
         }
         assertEquals(":( Sorry, the description of a deadline cannot be empty!", caughtIt);
@@ -21,7 +21,8 @@ public class DeadlinesTest {
     @Test
     public void testInvalidDate() throws DukeExceptions {
         Deadlines testIt = new Deadlines("test0 /by 12/12/2023");
-        assertEquals("This task does not have a valid due date! Please input the date in this format: YYYY-MM-DD", testIt.taskDate());
+        assertEquals("This task does not have a valid due date! Please input the date in this format: YYYY-MM-DD",
+                testIt.taskDate());
     }
     @Test
     public void testUndoneWithDate() throws DukeExceptions {

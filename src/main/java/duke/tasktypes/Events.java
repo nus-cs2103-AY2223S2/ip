@@ -14,7 +14,7 @@ public class Events extends Task {
      * @param taskName String containing the task's name and due date.
      * @throws DukeExceptions if there is no start & end period being input.
      */
-    public Events(String taskName) throws DukeExceptions{
+    public Events(String taskName) throws DukeExceptions {
         super(taskName.split("/from ")[0]);
         if (taskName.length() <= 0 || taskName.isBlank()) {
             throw new DukeExceptions("event");

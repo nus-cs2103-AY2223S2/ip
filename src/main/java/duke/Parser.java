@@ -2,16 +2,14 @@ package duke;
 
 import duke.tasktypes.Deadlines;
 import duke.tasktypes.Events;
-import duke.tasktypes.ToDo;
 import duke.tasktypes.Task;
+import duke.tasktypes.ToDo;
 
 /**
  * Class used to interpret the user's input for Duke chatbot.
  */
 public class Parser {
-    
     public Parser() {}
-
     /**
      * Function to redirect user's input to the relevant functions.
      * @param input String representation of the user's input.
@@ -19,7 +17,6 @@ public class Parser {
      * @throws DukeExceptions if the user inputs an invalid command.
      */
     public void readInput(String input, TaskList listOfTasks) throws DukeExceptions {
-        
         try {
             if (input.startsWith("todo")) {
                 handleToDoTask(input, listOfTasks);
@@ -72,6 +69,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Function to handle find command from the user input
+     * @param input String representation of the user's input.
+     * @param listOfTasks The list of tasks which has been loaded into the Duke chatbot instance.
+     * @throws DukeExceptions if the keyword given is invalid.
+     */
     public void handleFindTask(String input, TaskList listOfTasks) throws DukeExceptions {
         try {
             String[] checkForKeywordArr = input.split(" ");

@@ -1,8 +1,8 @@
 package duke;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 import duke.tasktypes.Events;
 public class EventsTest {
@@ -12,7 +12,7 @@ public class EventsTest {
         String caughtIt = "";
         try {
             Events emptyOne = new Events("");
-        } catch  (DukeExceptions DE){
+        } catch (DukeExceptions DE) {
             caughtIt = DE.toString();
         }
         assertEquals(":( Sorry, the description of an event cannot be empty!", caughtIt);
@@ -20,7 +20,8 @@ public class EventsTest {
 
     @Test
     public void testUndoneValid() throws DukeExceptions {
-        assertEquals("[E][ ]test1 (from: Monday to: Thursday)", new Events("test1 /from Monday /to Thursday").toString());
+        assertEquals("[E][ ]test1 (from: Monday to: Thursday)",
+                new Events("test1 /from Monday /to Thursday").toString());
     }
 
     @Test

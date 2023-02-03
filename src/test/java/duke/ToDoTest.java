@@ -1,8 +1,8 @@
 package duke;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 import duke.tasktypes.ToDo;
 public class ToDoTest {
@@ -11,7 +11,7 @@ public class ToDoTest {
         String caughtIt = "";
         try {
             ToDo emptyOne = new ToDo("");
-        } catch  (DukeExceptions DE){
+        } catch (DukeExceptions DE) {
             caughtIt = DE.toString();
         }
         assertEquals(":( Sorry, the description of a todo cannot be empty!", caughtIt);

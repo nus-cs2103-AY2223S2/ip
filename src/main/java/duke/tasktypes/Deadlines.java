@@ -23,7 +23,7 @@ public class Deadlines extends Task {
      * @throws DukeExceptions if the task name is empty.
      * @throws DateTimeParseException if the due date is an invalid format.
      */
-    public Deadlines(String taskName) throws DukeExceptions, DateTimeParseException{
+    public Deadlines(String taskName) throws DukeExceptions, DateTimeParseException {
         super(taskName.split("/by ")[0]);
         if (taskName.length() <= 0 || taskName.isBlank()) {
             throw new DukeExceptions("deadline");
@@ -74,10 +74,12 @@ public class Deadlines extends Task {
      */
     public void reformat() {
         String[] reconstructedDateArr = this.endsBy.split(" ");
-        String reconstructedDateInString = reconstructedDateArr[0] + " " + reconstructedDateArr[1] + " " + reconstructedDateArr[2];
+        String reconstructedDateInString = reconstructedDateArr[0] + " "
+                + reconstructedDateArr[1] + " " + reconstructedDateArr[2];
         reconstructedDateInString = reconstructedDateInString.replace(" ", "/");
         DateTimeFormatter originalFormat = DateTimeFormatter.ofPattern("MMM/d/uuuu");
-        LocalDate reconstructedDate = LocalDate.parse(LocalDate.parse(reconstructedDateInString, originalFormat).toString());
+        LocalDate reconstructedDate = LocalDate.parse(
+                LocalDate.parse(reconstructedDateInString, originalFormat).toString());
         this.dueDateBy = reconstructedDate;
     }
 
@@ -91,7 +93,7 @@ public class Deadlines extends Task {
         boolean isValid = true;
         try {
             LocalDate.parse(toCheck);
-        } catch (DateTimeParseException DTPE) {
+        } catch (DateTimeParseException exception) {
             isValid = false;
         }
         return isValid;
@@ -108,7 +110,7 @@ public class Deadlines extends Task {
         try {
             DateTimeFormatter originalFormat = DateTimeFormatter.ofPattern("MMM/d/uuuu");
             LocalDate.parse(toCheck, originalFormat);
-        } catch (DateTimeParseException DTPE) {
+        } catch (DateTimeParseException exception) {
             isValid = false;
         }
         return isValid;
@@ -124,7 +126,7 @@ public class Deadlines extends Task {
         boolean isValid = true;
         try {
             LocalTime.parse(toCheck);
-        } catch (DateTimeParseException DTPE) {
+        } catch (DateTimeParseException exception) {
             isValid = false;
         }
         return isValid;
@@ -133,7 +135,7 @@ public class Deadlines extends Task {
     /**
      * Function to format the deadline task's due date if it is a valid input.
      * @return String representation of the due date if valid, else string representation of prompting valid input
-     * is returned.
+     *      is returned.
      */
     public String taskDate() {
         String toReturn = "";
@@ -177,13 +179,16 @@ public class Deadlines extends Task {
             String newFormatOfDate = this.dueDateBy.format(newFormat).replace("/", " ");
             if (this.done) {
                 if (validTime) {
-                    toReturn = "[D][X]" + this.getName() + "(by: " + newFormatOfDate + " " + this.dueTime.toString() + ")";
+                    toReturn = "[D][X]" + this.getName() + "(by: "
+                            + newFormatOfDate + " " + this.dueTime.toString() + ")";
                 } else {
-                    toReturn = "[D][X]" + this.getName() + "(by: " + newFormatOfDate + ")";
+                    toReturn = "[D][X]" + this.getName() + "(by: "
+                            + newFormatOfDate + ")";
                 }
             } else {
                 if (validTime) {
-                    toReturn = "[D][ ]" + this.getName() + "(by: " + newFormatOfDate + " " + this.dueTime.toString() + ")";
+                    toReturn = "[D][ ]" + this.getName() + "(by: "
+                            + newFormatOfDate + " " + this.dueTime.toString() + ")";
                 } else {
                     toReturn = "[D][ ]" + this.getName() + "(by: " + newFormatOfDate + ")";
                 }
