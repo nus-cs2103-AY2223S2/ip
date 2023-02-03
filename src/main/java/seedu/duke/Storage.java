@@ -28,6 +28,11 @@ public class Storage {
             System.out.println("Unable to create new save file: " + e);
         }
     }
+
+    /**
+     * Creates a new TaskList based on an existing save
+     * @param ls The TaskList to be written to
+     */
     public static void loadSave(TaskList ls) {
         BufferedReader r = null;
         try {
