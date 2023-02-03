@@ -11,6 +11,8 @@ import java.time.format.DateTimeParseException;
  * Represents an event task.
  */
 public class Event extends Task {
+    private static final char SYMBOL = 'E';
+
     private final LocalDateTime start;
     private final LocalDateTime end;
 
@@ -45,23 +47,26 @@ public class Event extends Task {
             throw new DukeException("An event in storage has an incorrect data type!");
         }
 
-        args = Task.formatStrsFromStorage(args);
+        String[] formattedArgs = Task.formatStrsFromStorage(args);
 
         LocalDateTime start;
         try {
-            start = LocalDateTime.parse(args[3]);
+            start = LocalDateTime.parse(formattedArgs[3]);
         } catch (DateTimeParseException e) {
             throw new DukeException("An event in storage has an incorrectly formatted start of event!");
         }
 
         LocalDateTime end;
         try {
-            end = LocalDateTime.parse(args[4]);
+            end = LocalDateTime.parse(formattedArgs[4]);
         } catch (DateTimeParseException e) {
             throw new DukeException("An event in storage has an incorrectly formatted end of event!");
         }
 
-        return new Event(Boolean.parseBoolean(args[1]), args[2], start, end);
+        boolean isDone = Boolean.parseBoolean(formattedArgs[1]);
+        String description = formattedArgs[2];
+
+        return new Event(isDone, description, start, end);
     }
 
     @Override
@@ -69,7 +74,8 @@ public class Event extends Task {
         String startStr = Task.formatStrForStorage(start.toString());
         String endStr = Task.formatStrForStorage(end.toString());
 
-        return String.format("E | %s | %s | %s", super.getStorageStr(), startStr, endStr);
+        return String.format("%c %c %s %c %s %c %s", SYMBOL, FIELD_DIVIDER, super.getStorageStr(), FIELD_DIVIDER,
+                startStr, FIELD_DIVIDER, endStr);
     }
 
     @Override
@@ -77,7 +83,7 @@ public class Event extends Task {
         String startStr = start.format(LocalDateTimeUtils.OUTPUT_DATE_TIME_FORMATTER);
         String endStr = end.format(LocalDateTimeUtils.OUTPUT_DATE_TIME_FORMATTER);
 
-        return String.format("[E]%s (from: %s to: %s)", super.toString(), startStr, endStr);
+        return String.format("[%c]%s (from: %s to: %s)", SYMBOL, super.toString(), startStr, endStr);
     }
 
     @Override

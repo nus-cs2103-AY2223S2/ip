@@ -7,6 +7,8 @@ import duke.utils.BooleanUtils;
  * Represents a to-do task.
  */
 public class ToDo extends Task {
+    private static final char SYMBOL = 'T';
+
     /**
      * Creates a ToDo object.
      *
@@ -33,19 +35,22 @@ public class ToDo extends Task {
             throw new DukeException("A to-do in storage has an incorrect data type!");
         }
 
-        args = Task.formatStrsFromStorage(args);
+        String[] formattedArgs = Task.formatStrsFromStorage(args);
 
-        return new ToDo(Boolean.parseBoolean(args[1]), args[2]);
+        boolean isDone = Boolean.parseBoolean(formattedArgs[1]);
+        String description = formattedArgs[2];
+
+        return new ToDo(isDone, description);
     }
 
     @Override
     public String getStorageStr() {
-        return String.format("T | %s", super.getStorageStr());
+        return String.format("%c %c %s", SYMBOL, FIELD_DIVIDER, super.getStorageStr());
     }
 
     @Override
     public String toString() {
-        return String.format("[T]%s", super.toString());
+        return String.format("[%c]%s", SYMBOL, super.toString());
     }
 
     @Override

@@ -11,6 +11,8 @@ import java.time.format.DateTimeParseException;
  * Represents a deadline task.
  */
 public class Deadline extends Task {
+    private static final char SYMBOL = 'D';
+
     private final LocalDateTime cutoff;
 
     /**
@@ -42,28 +44,29 @@ public class Deadline extends Task {
             throw new DukeException("A deadline in storage has an incorrect data type!");
         }
 
-        args = Task.formatStrsFromStorage(args);
+        String[] formattedArgs = Task.formatStrsFromStorage(args);
 
         LocalDateTime cutoff;
         try {
-            cutoff = LocalDateTime.parse(args[3]);
+            cutoff = LocalDateTime.parse(formattedArgs[3]);
         } catch (DateTimeParseException e) {
             throw new DukeException("A deadline in storage has an incorrectly formatted cutoff date and time!");
         }
 
-        return new Deadline(Boolean.parseBoolean(args[1]), args[2], cutoff);
+        return new Deadline(Boolean.parseBoolean(formattedArgs[1]), formattedArgs[2], cutoff);
     }
 
     @Override
     public String getStorageStr() {
-        return String.format("D | %s | %s", super.getStorageStr(), Task.formatStrForStorage(cutoff.toString()));
+        return String.format("%c %c %s %c %s", SYMBOL, FIELD_DIVIDER, super.getStorageStr(), FIELD_DIVIDER,
+                Task.formatStrForStorage(cutoff.toString()));
     }
 
     @Override
     public String toString() {
         String cutoffStr = cutoff.format(LocalDateTimeUtils.OUTPUT_DATE_TIME_FORMATTER);
 
-        return String.format("[D]%s (by: %s)", super.toString(), cutoffStr);
+        return String.format("[%c]%s (by: %s)", SYMBOL, super.toString(), cutoffStr);
     }
 
     @Override
