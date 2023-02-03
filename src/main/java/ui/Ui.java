@@ -1,7 +1,7 @@
-package Ui;
+package ui;
 import java.time.format.DateTimeFormatter;
-import TaskList.TaskList;
-import Task.Task;
+import tasklist.TaskList;
+import task.Task;
 
 public class Ui {
     final static String ENTRY_OUTPUT = "Hello! I'm Duke\nWhat can I do for you?";

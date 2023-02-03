@@ -1,16 +1,17 @@
-package Parser;
+package parser;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import DukeException.InvalidInputException;
-import DukeException.EmptyDescriptionException;
-import Ui.Ui;
-import Task.Task;
-import TaskList.TaskList;
-import Task.ToDo;
-import Task.Deadline;
-import Task.Event;
+
+import duke_exception.InvalidInputException;
+import duke_exception.EmptyDescriptionException;
+import ui.Ui;
+import task.Task;
+import tasklist.TaskList;
+import task.ToDo;
+import task.Deadline;
+import task.Event;
 
 
 

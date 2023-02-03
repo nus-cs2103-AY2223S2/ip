@@ -1,16 +1,16 @@
-package Storage;
+package storage;
 
-import TaskList.TaskList;
+import tasklist.TaskList;
 
 import java.io.PrintWriter;
 import java.io.IOException;
 import java.io.File;
 import java.util.Scanner;
-import TaskList.TaskList;
-import Task.Task;
-import Task.ToDo;
-import Task.Deadline;
-import Task.Event;
+
+import task.Task;
+import task.ToDo;
+import task.Deadline;
+import task.Event;
 
 public class Storage {
     String path;

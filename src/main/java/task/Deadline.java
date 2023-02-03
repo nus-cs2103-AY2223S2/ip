@@ -1,4 +1,4 @@
-package Task;
+package task;
 public class Deadline extends Task {
 
     public String by;
