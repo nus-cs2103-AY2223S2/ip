@@ -124,5 +124,5 @@ public class Duke {
         Duke duke = new Duke();
         duke.moreOop();
     }
-    
+
 }
