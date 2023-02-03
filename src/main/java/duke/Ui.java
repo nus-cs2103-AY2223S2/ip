@@ -44,7 +44,7 @@ public class Ui {
     /**
      * Prints the goodbye message upon termination of the chatbot.
      */
-    public void terminate() {
-        System.out.println("Bye. Hope to see you again!");
+    public String terminate() {
+        return("Bye. Hope to see you again!\n");
     }
 }

@@ -59,15 +59,17 @@ public class TaskList {
      * If the list is empty, print a custom message.
      * Otherwise, print out the contents of the list in the order in which they were added.
      */
-    public void printContents() {
+    public String printContents() {
+        String response = "Attempting to print out your tasks...\n";
         if (lstOfItems.size() == 0 ) {
-            System.out.println("Nothing here yet. Add your 1st item!");
+            response += ("Nothing here yet. Add your 1st item!\n");
         } else {
             for (int i = 0; i < lstOfItems.size(); i++) {
-                System.out.print(String.valueOf(i + 1) + ".");
-                System.out.println(lstOfItems.get(i));
+                response += (String.valueOf(i + 1) + ".");
+                response += (lstOfItems.get(i) + "\n");
             }
         }
+        return response;
     }
 
     /**
@@ -94,17 +96,19 @@ public class TaskList {
      * Adds the desired new Task into the TaskList.
      * @param newTask the desired new Task that the user wishes to add in.
      */
-    public void addTask(Task newTask) {
-        System.out.println("Got it. I have added: ");
-        System.out.println(newTask);
+    public String addTask(Task newTask) {
+        String response = "Adding new task in progress...\n";
+        response += ("Got it. I have added: ");
+        response += (newTask + "\n");
         lstOfItems.add(newTask);
-        System.out.print("Now you have " + String.valueOf(lstOfItems.size()));
+        response += ("Now you have " + String.valueOf(lstOfItems.size()));
         if (lstOfItems.size() == 1) {
-            System.out.print(" task");
+            response += (" task");
         } else {
-            System.out.print(" tasks");
+            response += (" tasks");
         }
-        System.out.println(" in the list");
+        response += (" in the list\n");
+        return response;
     }
 
     /**
@@ -119,39 +123,43 @@ public class TaskList {
      * Marks a task as completed.
      * @param number the task number to be marked as completed.
      */
-    public void markTask(int number) {
+    public String markTask(int number) {
+        String response = "Marking task in progress...\n";
         try {
             if (number > lstOfItems.size()) {
                 throw new DukeException("No such item!");
             } else {
                 lstOfItems.get(number - 1).makeCompleted();
-                System.out.println("Ok, I've marked this Task as completed:");
-                System.out.println(lstOfItems.get(number - 1));
+                response += ("Ok, I've marked this Task as completed: ");
+                response += (lstOfItems.get(number - 1) + "\n");
             }
         } catch (DukeException err) {
             System.out.println(err);
         }
+        return response;
     }
 
     /**
      * Deletes a task..
      * @param number the task number to be deleted.
      */
-    public void deleteTask(int number) {
+    public String deleteTask(int number) {
+        String response = "Deleting task in progress...\n";
         try {
             if (number > lstOfItems.size()) {
                 throw new DukeException("No such item!");
             } else {
-                System.out.println("Ok, I've removed this Task:");
-                System.out.println(lstOfItems.get(number - 1));
+                response += ("Ok, I've removed this Task: ");
+                response += (lstOfItems.get(number - 1) + "\n");
                 lstOfItems.remove(number - 1);
                 String remaining = (lstOfItems.size() == 1) ? " task" : " tasks";
-                System.out.print("Now you have ");
-                System.out.println(String.valueOf(lstOfItems.size()) + remaining + " left!");
+                response += ("Now you have ");
+                response += (String.valueOf(lstOfItems.size()) + remaining + " left!\n");
             }
         } catch (DukeException err) {
             System.out.println(err);
         }
+        return response;
     }
 
     /**
@@ -170,7 +178,8 @@ public class TaskList {
         return lstOfItems.size();
     }
 
-    public void find(String keyword) {
+    public String find(String keyword) {
+        String response = "Finding " + keyword + " in progress...\n";
         int found = 0;
         ArrayList<Task> foundTasks = new ArrayList<>();
 
@@ -181,14 +190,15 @@ public class TaskList {
             }
         }
         if (found == 0) {
-            System.out.println("Didn't manage to find any tasks with this keyword!");
+            response += ("Didn't manage to find any tasks with this keyword!\n");
         } else {
             String descriptor = (found == 1) ? " task " : " tasks ";
-            System.out.println("Found " + String.valueOf(found) + descriptor + "with this keyword");
+            response += ("Found " + String.valueOf(found) + descriptor + "with this keyword\n");
             for (int i = 0; i < foundTasks.size(); i++) {
-                System.out.print(String.valueOf(i + 1) + ". ");
-                System.out.println(foundTasks.get(i));
+                response += (String.valueOf(i + 1) + ". ");
+                response += (foundTasks.get(i) + "\n");
             }
         }
+        return response;
     }
 }

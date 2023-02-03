@@ -28,6 +28,7 @@ public class DialogBox extends HBox {
         this.getChildren().addAll(text, displayPicture);
     }
 
+    //Code modified from https://www.tabnine.com/code/java/methods/javafx.scene.Node/setStyle
     private void setDukeStyle(Node... nodes) {
         for (Node node : nodes) {
             node.setStyle("-fx-background-color: lightblue");
