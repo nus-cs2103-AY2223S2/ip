@@ -7,6 +7,7 @@ import duke.controller.MainWindow;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -16,6 +17,7 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     private Duke duke = new Duke("data/duke.txt");
+    private Image iconImage = new Image(this.getClass().getResourceAsStream("/images/retro-robot.png"));
 
     /**
      * This method runs the ui and scene for the bot.
@@ -29,6 +31,8 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            stage.getIcons().add(iconImage);
+            stage.setTitle("Duke Bot");
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             fxmlLoader.<MainWindow>getController().sendStart();
             stage.show();
