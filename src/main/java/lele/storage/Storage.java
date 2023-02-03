@@ -1,8 +1,12 @@
 package lele.storage;
 
 import lele.exception.EmptyStorageException;
-import lele.task.*;
-
+import lele.exception.LoadingFailureException;
+import lele.task.Deadline;
+import lele.task.Event;
+import lele.task.Task;
+import lele.task.TaskList;
+import lele.task.Todo;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -21,7 +25,7 @@ public class Storage {
      * Constructor to instantiate the file path
      * and array list.
      *
-     * @param filePath
+     * @param filePath Receives the file path from Lele.java
      */
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -36,33 +40,20 @@ public class Storage {
      * @return A task list for instantiating a TaskList.
      * @throws EmptyStorageException Thrown when no existing data found.
      */
-    public ArrayList<Task> load() throws EmptyStorageException {
+    public ArrayList<Task> load() throws EmptyStorageException, LoadingFailureException {
         try {
             File f = new File(this.filePath);
             File dir = f.getParentFile();
             if (!dir.exists() && !f.exists()) {
-//                System.out.println("d and f don't exist");
-//                if(dir.mkdir()) {
-//                    System.out.println("Directory Created");
-//                } else {
-//                    System.out.println("Directory is not created");
-//                }
-//                if(f.createNewFile()) {
-//                    System.out.println("File Created");
-//                } else {
-//                    System.out.println("File is not created");
-//                }
-                dir.mkdir(); f.createNewFile();
-                throw new EmptyStorageException("No existing data, creating a new file now");
-            }
-            else if (!f.exists()) {
+                dir.mkdir();
                 f.createNewFile();
-            }
-            else if (!dir.exists() && f.exists()) {
+                throw new EmptyStorageException("No existing data, creating a new file now");
+            } else if (!f.exists()) {
+                f.createNewFile();
+            } else if (!dir.exists() && f.exists()) {
                 // TODO: move file to data directory if file exists but not directory
-            }
-            else {
-//              Dir + file exists, update taskList arr
+            } else {
+                // Dir + file exists, update taskList arr
                 Scanner sc = new Scanner(f);
                 while (sc.hasNextLine()) {
                     String input = sc.nextLine();
@@ -85,7 +76,7 @@ public class Storage {
      * @param inputArr Input received from parser.
      * @param taskType The type of task received.
      */
-    public void loadTasks(String[] inputArr, String taskType) {
+    public void loadTasks(String[] inputArr, String taskType) throws LoadingFailureException {
         switch (taskType) {
             case "T":
                 Todo todo = new Todo(inputArr[2]);
@@ -102,6 +93,8 @@ public class Storage {
                 Event ev = new Event(inputArr[2], inputArr[3], inputArr[4]);
                 this.list.add(ev);
                 ev.markStatus(inputArr[1]);
+            default:
+                throw new LoadingFailureException("File couldn't be loaded: Possibly due to wrong format");
         }
     }
 
@@ -113,14 +106,14 @@ public class Storage {
      * @throws IOException An error when there's an issue with file writing.
      */
     public void updateStorage(TaskList tasklist) throws IOException {
-//        System.out.println("entered update storage");
+        // System.out.println("entered update storage");
         Task task;
         StringBuilder sb = new StringBuilder();
         FileWriter fw = new FileWriter(filePath);
         for (Task value : tasklist.getList()) {
             task = value;
             String taskName = task.getName();
-//            System.out.println("taskName: " + taskName);
+            // System.out.println("taskName: " + taskName);
             sb.append(taskName);
             sb.append("|");
             if (task.getStatusIcon().equals("X")) {

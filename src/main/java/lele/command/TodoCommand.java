@@ -4,7 +4,6 @@ import lele.storage.Storage;
 import lele.task.TaskList;
 import lele.task.Todo;
 import lele.ui.Ui;
-
 import java.io.IOException;
 
 /**
@@ -17,7 +16,7 @@ public class TodoCommand extends Command {
     /**
      * Instantiates the to-do instance.
      *
-     * @param todo
+     * @param todo Instantiates the to-do created by the user.
      */
     public TodoCommand(Todo todo) {
         this.todo = todo;
@@ -34,9 +33,9 @@ public class TodoCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
-            taskList.addTasks(todo);
-            storage.updateStorage(taskList);
-            ui.printAddTask(taskList, todo);
+        taskList.addTasks(todo);
+        storage.updateStorage(taskList);
+        ui.printAddTask(taskList, todo);
     }
 
     /**

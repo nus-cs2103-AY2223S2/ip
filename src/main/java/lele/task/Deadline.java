@@ -44,8 +44,7 @@ public class Deadline extends Task {
      * The date and time of the deadline, to be
      * stored in the user's data.
      *
-     * @return A string representation of the date
-     * and time of the deadline.
+     * @return A string representation of the date and time of the deadline.
      */
     public String getDateTime() {
         return this.unFormatted + " " + this.byTime;

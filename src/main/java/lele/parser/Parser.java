@@ -1,6 +1,15 @@
 package lele.parser;
 
-import lele.command.*;
+import lele.command.ByeCommand;
+import lele.command.Command;
+import lele.command.DeadlineCommand;
+import lele.command.EventCommand;
+import lele.command.DeleteCommand;
+import lele.command.FindCommand;
+import lele.command.ListCommand;
+import lele.command.MarkCommand;
+import lele.command.TodoCommand;
+import lele.command.UnmarkCommand;
 import lele.exception.EmptyDescException;
 import lele.exception.UnknownCommandException;
 import lele.task.Deadline;
@@ -28,9 +37,6 @@ public class Parser {
         BYE
 
     }
-
-
-
     /**
      * Matches the appropriate enum to the input converted
      * into a string, then creates the relevant command to be
@@ -39,8 +45,7 @@ public class Parser {
      *
      * @param fullCommand String representation of user input.
      * @return A command to be executed.
-     * @throws UnknownCommandException Error when input does not match
-     * any of the commands allowed.
+     * @throws UnknownCommandException Error when input does not match any of the commands allowed.
      * @throws EmptyDescException Input does not contain a description.
      */
     public static Command parse(String fullCommand) throws UnknownCommandException, EmptyDescException {
@@ -49,7 +54,6 @@ public class Parser {
             Commands command = Commands.valueOf(inputArr[0].toUpperCase());
             String desc = "variable not initialised";
             StringBuilder sb = new StringBuilder();
-
             switch (command) {
                 case TODO:
                     if (inputArr.length == 1) {

@@ -3,7 +3,6 @@ package lele.command;
 import lele.storage.Storage;
 import lele.task.TaskList;
 import lele.ui.Ui;
-
 import java.io.IOException;
 
 /**
@@ -33,8 +32,8 @@ public class UnmarkCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
-            ui.printUnMarkStatus(taskList, index);
-            storage.updateStorage(taskList);
+        ui.printUnMarkStatus(taskList, index);
+        storage.updateStorage(taskList);
     }
 
     /**

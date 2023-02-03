@@ -32,8 +32,7 @@ public class Task {
      * For its child classes to instantiate and override,
      * not to be run by Task.
      *
-     * @return A string to indicate that this shouldn't be run
-     * by Task.
+     * @return A string to indicate that this shouldn't be run by Task.
      */
     public String getName() {
         return "You should not be getting this output here";

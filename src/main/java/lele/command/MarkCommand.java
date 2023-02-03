@@ -3,7 +3,6 @@ package lele.command;
 import lele.storage.Storage;
 import lele.task.TaskList;
 import lele.ui.Ui;
-
 import java.io.IOException;
 
 /**
@@ -28,13 +27,12 @@ public class MarkCommand extends Command {
      * @param taskList Current task list instance.
      * @param ui Current ui instance.
      * @param storage Current storage instance.
-     * @throws IOException When there is a problem with
-     * writing to the storage.
+     * @throws IOException When there is a problem with writing to the storage.
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
-            ui.printMarkStatus(taskList, index);
-            storage.updateStorage(taskList);
+        ui.printMarkStatus(taskList, index);
+        storage.updateStorage(taskList);
     }
 
     /**

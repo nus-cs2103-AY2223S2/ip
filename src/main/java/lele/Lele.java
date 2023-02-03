@@ -1,13 +1,12 @@
 package lele;
 
 import lele.command.Command;
-import lele.exception.LeleException;
 import lele.exception.EmptyStorageException;
+import lele.exception.LeleException;
 import lele.parser.Parser;
 import lele.storage.Storage;
 import lele.task.TaskList;
 import lele.ui.Ui;
-
 import java.io.IOException;
 
 /**
@@ -29,7 +28,7 @@ public class Lele {
         storage = new Storage(filePath);
         try {
             taskList = new TaskList(storage.load());
-        } catch (EmptyStorageException e) {
+        } catch (LeleException e) {
             ui.showLoadingError();
             taskList = new TaskList();
         }
