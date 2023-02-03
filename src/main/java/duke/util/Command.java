@@ -78,7 +78,7 @@ public class Command {
      * @param storage Storage to save the TaskList to if this command changes the TaskList.
      * @throws DukeException
      */
-    public void execute(TaskList taskList, UI ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, UI ui, Storage storage) throws DukeException {
         String output = "";
 
         switch (this.commandType) {
@@ -126,6 +126,6 @@ public class Command {
                 throw new DukeException(ERROR.INVALID_INPUT.getMessage());
         }
 
-        ui.printFormattedOutput(output);
+        return output;
     }
 }
