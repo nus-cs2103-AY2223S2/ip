@@ -96,6 +96,8 @@ public class Duke extends Application {
 
        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
+       sendResponse("Hello I'm Duke! \nWhat can I do for you?");
+
         //Step 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
@@ -105,6 +107,8 @@ public class Duke extends Application {
             handleUserInput();
         });
     }
+
+
 
     /**
      * Iteration 2:
