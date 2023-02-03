@@ -55,6 +55,6 @@ public class Cli implements Ui {
 
     @Override
     public void print(String message) {
-        printStream.printf("%s\n     %s\n%s\n", MESSAGE_BORDER, message.replace("\n", "\n     "), MESSAGE_BORDER);
+        printStream.printf("%s\n     %s\n%s\n\n", MESSAGE_BORDER, message.replace("\n", "\n     "), MESSAGE_BORDER);
     }
 }
