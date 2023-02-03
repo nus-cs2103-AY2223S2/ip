@@ -12,11 +12,14 @@ public class ListCommand extends Command {
             ui.showMessage("You have no tasks due!");
         } else {
             ui.showMessage("Here are the tasks you have due!");
-            for (Task cur : taskList.tasks) {
+            for (Task cur : taskList.getTasks()) {
                 if (cur instanceof Todo) {
-                    ui.showMessage(taskList.tasks.indexOf(cur) + 1 + ". [" + cur.symbol + "] " + "[" + cur.getStatusIcon() + "] " + cur.description);
+                    ui.showMessage(taskList.getTasks().indexOf(cur) + 1 + ". [" + cur.getSymbol() + "] "
+                                    + "[" + cur.getStatusIcon() + "] " + cur.getDescription());
                 } else {
-                    System.out.println(taskList.tasks.indexOf(cur) + 1 + ". [" + cur.symbol + "] " + "[" + cur.getStatusIcon() + "] " + cur.description + " (" + cur.duedateString + ")");
+                    System.out.println(taskList.getTasks().indexOf(cur) + 1 + ". [" + cur.getSymbol() + "] "
+                                        + "[" + cur.getStatusIcon() + "] "+ cur.getDescription()
+                                        + " (" + cur.getDescription() + ")");
                 }
             }
         }

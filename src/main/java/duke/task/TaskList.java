@@ -1,16 +1,26 @@
 package duke.task;
 
-import duke.DukeException;
-
 import java.util.ArrayList;
 
+import duke.DukeException;
+
+/**
+ * Represents the list of tasks in Duke. This task list will be saved into and loaded from a storage text file.
+ */
 public class TaskList {
-    public ArrayList<Task> tasks;
+    private ArrayList<Task> tasks;
 
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 
+    /**
+     * Gets the ArrayList of tasks.
+     * @return The ArrayList of tasks.
+     */
+    public ArrayList<Task> getTasks() {
+        return tasks;
+    }
     /**
      * Adds a task to the task list.
      * @param task The task to be added.

@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Represents the type of Command when there is a String user input.
+ */
 public class Query {
     protected String input;
 
@@ -33,6 +36,7 @@ public class Query {
         } else if (input.equals("bye")) {
             return QueryType.exit;
         }
+
         String[] inputArr = input.split(" ");
         if (inputArr.length == 2 && isNumeric(inputArr[1])) {
             if (inputArr[0].equals("mark")) {
@@ -42,14 +46,11 @@ public class Query {
             } else if (inputArr[0].equals("delete")) {
                 return QueryType.delete;
             }
-        }
-        else if (inputArr[0].equals("todo")) {
+        } else if (inputArr[0].equals("todo")) {
             return QueryType.todo;
-        }
-        else if (inputArr[0].equals("deadline")) {
+        } else if (inputArr[0].equals("deadline")) {
             return QueryType.deadline;
-        }
-        else if (inputArr[0].equals("event")) {
+        } else if (inputArr[0].equals("event")) {
             return QueryType.event;
         }
         return QueryType.invalid;

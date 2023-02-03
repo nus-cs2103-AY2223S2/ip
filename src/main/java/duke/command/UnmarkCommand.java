@@ -13,9 +13,9 @@ public class UnmarkCommand extends Command {
 
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         ui.showMessage("OK, I've marked this task as not done yet: ");
-        Task cur = taskList.tasks.get(index - 1);
+        Task cur = taskList.getTasks().get(index - 1);
         taskList.unmarkTask(index);
-        ui.showMessage("[" + cur.getStatusIcon() + "] " + cur.description);
+        ui.showMessage("[" + cur.getStatusIcon() + "] " + cur.getDescription());
     }
 
     public boolean isExit() {

@@ -1,16 +1,19 @@
 package duke;
 
-import org.junit.jupiter.api.Test;
-import duke.task.*;
-
-import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import java.util.ArrayList;
+
+import org.junit.jupiter.api.Test;
+
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
+
 public class TaskListTest {
     @Test
-    public void addTodoTest(){
+    public void addTodoTest() {
         TaskList taskList = new TaskList(new ArrayList<Task>());
         try {
             taskList.addTask(new Todo("todo Dummy Task"));

@@ -2,6 +2,9 @@ package duke.task;
 
 import duke.DukeException;
 
+/**
+ * Represents a 'To Do' task that has a description.
+ */
 public class Todo extends Task {
 
     /**
