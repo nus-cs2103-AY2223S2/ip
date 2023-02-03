@@ -50,7 +50,7 @@ class Handlers {
      * 
      * @return A handler for exiting the app.
      */
-    public static Handler getHandlerBye() {
+    public static Handler getBye() {
         return (TaskList tasks, NonBlockingUi ui, Storage storage) -> {
             ui.info("Bye!");
             return true;
@@ -62,10 +62,9 @@ class Handlers {
      * 
      * @return A handler for listing tasks.
      */
-    public static Handler getHandlerList() {
+    public static Handler getList() {
         return (TaskList tasks, NonBlockingUi ui, Storage storage) -> {
             ui.info("Here are the tasks in your list:\n%s", tasks);
-            // Handler.printTasksIndented(tasks, ui);
             return false;
         };
     }
@@ -76,7 +75,7 @@ class Handlers {
      * @param desc The description of the new todo.
      * @return A handler which creates a new Todo with the given description.
      */
-    public static Handler getHandlerTodo(String desc) {
+    public static Handler getTodo(String desc) {
         return (TaskList tasks, NonBlockingUi ui, Storage storage) -> {
             Todo task = new Todo(desc);
             tasks.add(task);
@@ -94,7 +93,7 @@ class Handlers {
      * @return A handler which creates a new task with the given description and
      *         deadline.
      */
-    public static Handler getHandlerDeadline(String desc, LocalDateTime deadline) {
+    public static Handler getDeadline(String desc, LocalDateTime deadline) {
         return (TaskList tasks, NonBlockingUi ui, Storage storage) -> {
             Deadline task = new Deadline(desc, deadline);
             tasks.add(task);
@@ -113,7 +112,7 @@ class Handlers {
      * @return A handler which creates a new event with the given description and
      *         dates.
      */
-    public static Handler getHandlerEvent(String desc, LocalDateTime from, LocalDateTime to) {
+    public static Handler getEvent(String desc, LocalDateTime from, LocalDateTime to) {
         return (TaskList tasks, NonBlockingUi ui, Storage storage) -> {
             Event task = new Event(desc, from, to);
             tasks.add(task);
@@ -129,7 +128,7 @@ class Handlers {
      * @param idx The current index of the task (0-based).
      * @return A handler to mark the specified task as complete.
      */
-    public static Handler getHandlerMark(int idx) {
+    public static Handler getMark(int idx) {
         return (TaskList tasks, NonBlockingUi ui, Storage storage) -> {
             tasks.setDone(idx);
 
@@ -145,7 +144,7 @@ class Handlers {
      * @param idx The current index of the task (0-based).
      * @return A handler to mark the specified task as incomplete.
      */
-    public static Handler getHandlerUnmark(int idx) {
+    public static Handler getUnmark(int idx) {
         return (TaskList tasks, NonBlockingUi ui, Storage storage) -> {
             tasks.setNotDone(idx);
 
@@ -161,7 +160,7 @@ class Handlers {
      * @param idx The current index of the task (0-based).
      * @return A handler to delete the specified task.
      */
-    public static Handler getHandlerDelete(int idx) {
+    public static Handler getDelete(int idx) {
         return (TaskList tasks, NonBlockingUi ui, Storage storage) -> {
             Task task = tasks.remove(idx);
             Handler.reportDeletedTask(task, ui, tasks);
@@ -176,7 +175,7 @@ class Handlers {
      * @param searchTerm The term(s) to search for.
      * @return A handler for finding tasks.
      */
-    public static Handler getHandlerFind(String searchTerm) {
+    public static Handler getFind(String searchTerm) {
         return (TaskList tasks, NonBlockingUi ui, Storage storage) -> {
             TaskList filtered = tasks.filter(task -> task.desc().contains(searchTerm));
             if (filtered.count() == 0) {
@@ -194,9 +193,114 @@ class Handlers {
      * @param cmd The raw unknown command.
      * @return A handler to respond to the unknown command.
      */
-    public static Handler getHandlerUnknown(String cmd) {
+    public static Handler getUnknown(String cmd) {
         return (TaskList tasks, NonBlockingUi ui, Storage storage) -> {
             throw new ChungusException(String.format("Unknown command \"%s\"", cmd));
+        };
+    }
+
+    /**
+     * Returns a handler to handle tagging tasks.
+     * 
+     * @param idx  The task's index.
+     * @param tags The tags to add.
+     * @return A handler to tag a task.
+     */
+    public static Handler getTag(int idx, String... tags) {
+        return (TaskList tasks, NonBlockingUi ui, Storage storage) -> {
+            tasks.get(idx).addTags(tags);
+            StringBuilder sb = new StringBuilder(String.format("Task %d is now tagged with", idx + 1));
+            for (String tag : tags) {
+                sb.append(" #").append(tag);
+            }
+            ui.info(sb.toString());
+            return false;
+        };
+    }
+
+    /**
+     * Returns a handler to handle the tagall command. This command finds tasks
+     * which match all the tags provided.
+     * 
+     * @param tags The tags to match for.
+     * @return A handler to find the matching tasks.
+     */
+    public static Handler getTagAll(String... tags) {
+        return (TaskList tasks, NonBlockingUi ui, Storage storage) -> {
+            if (tags.length == 0) {
+                ui.error("Please provide at least one tag!");
+                return false;
+            }
+
+            TaskList tagged = tasks.filter(task -> {
+                for (String tag : tags) {
+                    if (!task.hasTag(tag)) {
+                        return false;
+                    }
+                }
+                return true;
+            });
+            if (tagged.count() == 0) {
+                ui.info("No tasks found for these tags.");
+            } else {
+                ui.info("I found these tagged tasks:\n%s", tagged);
+            }
+            return false;
+        };
+    }
+
+    /**
+     * Returns a handler to handle the tagany command. This command finds tasks
+     * which match at least one of the tags provided.
+     * 
+     * @param tags The tags to match for.
+     * @return A handler to find the matching tasks.
+     */
+    public static Handler getTagAny(String... tags) {
+        return (TaskList tasks, NonBlockingUi ui, Storage storage) -> {
+            if (tags.length == 0) {
+                ui.error("Please provide at least one tag!");
+                return false;
+            }
+
+            TaskList tagged = tasks.filter(task -> {
+                for (String tag : tags) {
+                    if (task.hasTag(tag)) {
+                        return true;
+                    }
+                }
+                return false;
+            });
+            if (tagged.count() == 0) {
+                ui.info("No tasks found for these tags.");
+            } else {
+                ui.info("I found these tagged tasks:\n%s", tagged);
+            }
+            return false;
+        };
+    }
+
+    /**
+     * Returns a handler which prints the tags a task has.
+     * 
+     * @param idx The task's index.
+     * @return A handler to print the task's tags.
+     */
+    public static Handler getTagSee(int idx) {
+        return (TaskList tasks, NonBlockingUi ui, Storage storage) -> {
+            String[] tags = tasks.get(idx).getTags();
+            if (tags.length == 0) {
+                ui.error("This task has no tags.");
+                return false;
+            } else {
+                StringBuilder sb = new StringBuilder();
+                sb.append("This task is tagged with");
+                for (String tag : tags) {
+                    sb.append(" #").append(tag);
+                }
+                ui.info(sb.toString());
+            }
+            return false;
         };
     }
 }

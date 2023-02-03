@@ -2,6 +2,7 @@ package chungus;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashSet;
 
 import chungus.util.Pair;
 
@@ -11,6 +12,8 @@ import chungus.util.Pair;
 abstract class Task {
     private String desc;
     private boolean isDone;
+
+    protected HashSet<String> tags;
 
     protected static final DateTimeFormatter DATETIME_FMT = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
 
@@ -22,6 +25,7 @@ abstract class Task {
     public Task(String desc) {
         this.desc = desc;
         isDone = false;
+        tags = new HashSet<>();
     }
 
     /**
@@ -108,6 +112,44 @@ abstract class Task {
             throw t;
         }
     }
+
+    public boolean hasTag(String tag) {
+        return tags.contains(tag);
+    }
+
+    public void addTags(String... tags) {
+        for (String tag : tags) {
+            this.tags.add(tag);
+        }
+    }
+
+    protected String chonkifyTags() {
+        StringBuilder sb = new StringBuilder();
+        for (String tag : tags) {
+            sb.append(Chonk.chonkify(tag));
+        }
+        return sb.toString();
+    }
+
+    protected static HashSet<String> dechonkifyTags(String s, int idx) {
+        Pair<String, Integer> dechonked;
+        HashSet<String> tags = new HashSet<>();
+
+        while (idx < s.length()) {
+            dechonked = Chonk.dechonkify(s, idx);
+            trueOrThrow(dechonked != null, new TaskMarshalException(s));
+            String tag = dechonked.first();
+            idx = dechonked.second();
+
+            tags.add(tag);
+        }
+
+        return tags;
+    }
+
+    public String[] getTags() {
+        return tags.stream().toArray(String[]::new);
+    }
 }
 
 /**
@@ -134,7 +176,9 @@ class Todo extends Task {
 
         b.append('T');
         b.append(isDone() ? '1' : '0');
-        b.append(desc());
+        b.append(Chonk.chonkify(desc()));
+
+        b.append(chonkifyTags());
 
         return b.toString();
     }
@@ -148,11 +192,22 @@ class Todo extends Task {
      */
     public static Todo unmarshal(String s) {
         trueOrThrow(s.charAt(0) == 'T', new TaskMarshalException(s));
-
         boolean isDone = s.charAt(1) == '0' ? false : true;
 
-        String desc = s.substring(2, s.length());
+        int idx = 2;
+        Pair<String, Integer> dechonked;
+
+        // Dechonk the description
+        dechonked = Chonk.dechonkify(s, idx);
+        trueOrThrow(dechonked != null, new TaskMarshalException(s));
+        String desc = dechonked.first();
+        idx = dechonked.second();
+
         Todo ret = new Todo(desc);
+
+        // Dechonk the tags
+        ret.tags = dechonkifyTags(s, idx);
+
         if (isDone) {
             ret.setDone();
         } else {
@@ -203,6 +258,8 @@ class Deadline extends Task {
         b.append(Chonk.chonkify(desc()));
         b.append(Chonk.chonkify(deadline.format(DATETIME_FMT)));
 
+        b.append(chonkifyTags());
+
         return b.toString();
     }
 
@@ -227,6 +284,7 @@ class Deadline extends Task {
         dechonked = Chonk.dechonkify(s, idx);
         trueOrThrow(dechonked != null, new TaskMarshalException(s));
         String deadline = dechonked.first();
+        idx = dechonked.second();
 
         Deadline ret = new Deadline(desc, LocalDateTime.parse(deadline, DATETIME_FMT));
         boolean isDone = s.charAt(1) == '0' ? false : true;
@@ -236,6 +294,9 @@ class Deadline extends Task {
         } else {
             ret.setNotDone();
         }
+
+        // Dechonk the tags
+        ret.tags = dechonkifyTags(s, idx);
 
         return ret;
     }
@@ -285,6 +346,8 @@ class Event extends Task {
         b.append(Chonk.chonkify(from.format(DATETIME_FMT)));
         b.append(Chonk.chonkify(to.format(DATETIME_FMT)));
 
+        b.append(chonkifyTags());
+
         return b.toString();
     }
 
@@ -315,6 +378,7 @@ class Event extends Task {
         dechonked = Chonk.dechonkify(s, idx);
         trueOrThrow(dechonked != null, new TaskMarshalException(s));
         String to = dechonked.first();
+        idx = dechonked.second();
 
         Event ret = new Event(desc, LocalDateTime.parse(from, DATETIME_FMT), LocalDateTime.parse(to, DATETIME_FMT));
         if (isDone) {
@@ -322,6 +386,9 @@ class Event extends Task {
         } else {
             ret.setNotDone();
         }
+
+        // Dechonk the tags
+        ret.tags = dechonkifyTags(s, idx);
 
         return ret;
     }
