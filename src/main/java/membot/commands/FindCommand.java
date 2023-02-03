@@ -17,7 +17,7 @@ public class FindCommand extends Command {
 
     @Override
     public void execute() {
-        if (InputValidator.isFindInputValid(this.input)) {
+        if (InputValidator.isSingleInputValid(this.input, false)) {
             String keyword = input.substring(5);
 
             ArrayList<Task> tasks = Task.find(keyword);

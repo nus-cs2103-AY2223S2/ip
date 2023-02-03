@@ -9,6 +9,8 @@ import java.util.List;
  */
 public class InputValidator {
     private static final String[] RESERVED = new String[]{"/by", "/to", "/from"};
+    private static final int MIN_INPUT_LENGTH = 2;
+    private static final String DELIMITER_SPACE = " ";
 
     /**
      * Validates if commands in the form of <code>[command] [integer]</code> is valid.
@@ -16,11 +18,15 @@ public class InputValidator {
      * @param input The command to be validated.
      * @return True if command is valid, else false.
      */
-    public static boolean isCheckInputValid(String input) {
-        String[] split = input.split(" ");
+    public static boolean isSingleInputValid(String input, boolean isInt) {
+        String[] split = input.split(DELIMITER_SPACE);
 
-        if (split.length != 2) {
+        if (split.length != MIN_INPUT_LENGTH) {
             return false;
+        }
+
+        if (!isInt) {
+            return true;
         }
 
         try {
@@ -32,18 +38,6 @@ public class InputValidator {
     }
 
     /**
-     * Validates if the find command is valid.
-     *
-     * @param input The find command.
-     * @return True if command is valid, else false.
-     */
-    public static boolean isFindInputValid(String input) {
-        String[] split = input.split(" ");
-
-        return split.length >= 2;
-    }
-
-    /**
      * Cleanses and normalises a <code>todo</code> command.
      *
      * @param input The <code>todo</code> command.
@@ -51,7 +45,7 @@ public class InputValidator {
      * @throws InvalidCommandException If the command parsed is invalid.
      */
     public static String[] normaliseTodoInput(String input) throws InvalidCommandException {
-        String[] split = input.split(" ");
+        String[] split = input.split(DELIMITER_SPACE);
         List<String> reservedList = Arrays.asList(RESERVED);
         for (String s : split) {
             if (reservedList.contains(s)) {
@@ -80,7 +74,7 @@ public class InputValidator {
      */
     public static String[] normaliseDeadlineInput(String input) throws
             InvalidCommandException, NoDeadlineFoundException {
-        String[] split = input.split(" ");
+        String[] split = input.split(DELIMITER_SPACE);
         if (split.length < 4) {
             throw new InvalidCommandException("Invalid Syntax - \"deadline [title] /by [deadline]\" "
                     + "(e.g. \"deadline physics project /by tomorrow 3pm\"");
@@ -130,7 +124,7 @@ public class InputValidator {
      */
     public static String[] normaliseEventInput(String input) throws InvalidCommandException,
             NoStartDateTimeFoundException, NoEndDateTimeFoundException {
-        String[] split = input.split(" ");
+        String[] split = input.split(DELIMITER_SPACE);
         if (split.length < 6) {
             throw new InvalidCommandException("Invalid syntax");
         }
@@ -187,7 +181,7 @@ public class InputValidator {
         }
 
         String substring = input.substring(dateTimeStartIndex);
-        if (substring.split(" ")[1].startsWith("/") || substring.split(" ")[1].isEmpty()) {
+        if (substring.split(DELIMITER_SPACE)[1].startsWith("/") || substring.split(DELIMITER_SPACE)[1].isEmpty()) {
             throw new NoStartDateTimeFoundException("Unable to find start dateTime");
         }
 
@@ -206,7 +200,7 @@ public class InputValidator {
         }
 
         String substring = input.substring(dateTimeStartIndex);
-        if (substring.split(" ")[1].startsWith("/") || substring.split(" ")[1].isEmpty()) {
+        if (substring.split(DELIMITER_SPACE)[1].startsWith("/") || substring.split(DELIMITER_SPACE)[1].isEmpty()) {
             throw new NoEndDateTimeFoundException("Unable to find end dateTime");
         }
 
