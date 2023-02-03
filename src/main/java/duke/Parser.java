@@ -80,19 +80,14 @@ public class Parser {
             title = input.substring(Commands.TODO.len());
         } else if (input.startsWith(Commands.DEADLINE.cmd())) {
             int indexOfBy = input.indexOf(Commands.BY.cmd());
-            if (indexOfBy == -1) {
-                throw new DukeException(Views.MISSING_ARGS_ERR_STRING.eng());
-            }
+            assert indexOfBy != -1 : Views.MISSING_ARGS_ERR_STRING.eng();
             title = input.substring(Commands.DEADLINE.len(), indexOfBy);
             String deadline = input.substring(indexOfBy);
             returnString[1] = deadline;
         } else if (input.startsWith(Commands.EVENT.cmd())) {
             int indexOfFrom = input.indexOf(Commands.FROM.cmd());
             int indexOfTo = input.indexOf(Commands.TO.cmd());
-
-            if (indexOfFrom == -1 || indexOfTo == -1) {
-                throw new DukeException(Views.MISSING_ARGS_ERR_STRING.eng());
-            }
+            assert indexOfFrom != -1 && indexOfFrom != -1 : Views.MISSING_ARGS_ERR_STRING.eng();
             title = input.substring(Commands.EVENT.len(), indexOfFrom);
             String from = input.substring(indexOfFrom, indexOfTo);
             String to = input.substring(indexOfTo);

@@ -44,9 +44,7 @@ public class Event extends Task {
         } catch (java.time.format.DateTimeParseException e) {
             throw new DukeException(Views.DATE_PARSE_ERR_STRING.eng());
         }
-        if (this.to.isBefore(this.from)) {
-            throw new DukeException(Views.DATE_WRONG_ORDER_STRING.eng());
-        }
+        assert this.to.isAfter(this.from) : Views.DATE_WRONG_ORDER_STRING.eng();
     }
 
     /**

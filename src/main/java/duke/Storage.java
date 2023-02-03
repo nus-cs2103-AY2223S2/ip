@@ -83,7 +83,7 @@ public class Storage {
             }
             scanner.close();
         } catch (Exception e) {
-            // System.out.println(e);
+            // Silent fail if cannot load previous file
         }
         return tasksList;
     }

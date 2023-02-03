@@ -1,6 +1,5 @@
 package duke.task;
 
-import duke.DukeException;
 import duke.enums.Views;
 
 /**
@@ -14,9 +13,8 @@ public abstract class Task {
      * Creates a task, throws error if its empty string
      *
      * @param title of the Task that that is being created
-     * @throws DukeException
      */
-    Task(String title) throws DukeException {
+    Task(String title) {
         this(title, false);
     }
 
@@ -25,12 +23,9 @@ public abstract class Task {
      *
      * @param title  of the Task that that is being created
      * @param isDone status of the Task
-     * @throws DukeException
      */
-    Task(String title, boolean isDone) throws DukeException {
-        if (title.trim().length() == 0) {
-            throw new DukeException(Views.EMPTY_ERR_STRING.eng());
-        }
+    Task(String title, boolean isDone) {
+        assert title.trim().length() > 0 : Views.EMPTY_ERR_STRING.eng();
         this.title = title.trim();
         this.isDone = isDone;
     }

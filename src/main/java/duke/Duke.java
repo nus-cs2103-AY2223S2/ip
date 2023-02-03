@@ -1,6 +1,7 @@
 package duke;
 
 import duke.command.Command;
+import duke.enums.Views;
 
 /**
  * Main class that runs the chatbot
@@ -38,11 +39,21 @@ public class Duke {
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
             } catch (DukeException e) {
-                ui.showError(e.getMessage());
+                if (e instanceof DukeException) {
+                    ui.showError(e);
+                } else {
+                    ui.showError(Views.UNKNOWN_ERR_STRING.eng());
+                }
+            } catch (AssertionError e) {
+                ui.showError(e);
             }
         }
     }
 
+    /**
+     * Main method for running the text Version
+     * @param args
+     */
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.run();
@@ -56,8 +67,6 @@ public class Duke {
         try {
             Command c = Parser.parse(input);
             return c.executeString(tasks, ui, storage);
-            // System.out.println(c.executeString(tasks, ui, storage));
-            // return "asdf";
         } catch (DukeException e) {
             return ui.stringError(e.getMessage());
         }
