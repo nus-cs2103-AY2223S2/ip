@@ -25,11 +25,13 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/zoro.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/chopper.png"));
 
+    /**
+     * Initializes the application.
+     */
     @FXML
     public void initialize() {
         this.duke = new Duke();
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-//        Label welcomeMessage = new Label();
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(duke.showWelcomeMessage(), dukeImage)
         );
@@ -46,7 +48,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String text = userInput.getText();
-        String input = text  + "    ";
+        String input = text + "    ";
         String response = duke.getResponse(text);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),

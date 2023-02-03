@@ -1,5 +1,4 @@
 package duke;
-import java.util.Scanner;
 
 /**
  * The class for the UI of the program.
@@ -21,7 +20,8 @@ public class Ui {
                 + "My commands are the following:\n"
                 + "  1. todo <description>\n"
                 + "  2. deadline <description> /by <yyyy-MM-dd\n      HHmm(optional)>\n"
-                + "  3. event <description> /from <yyyy-MM-dd\n      HHmm(optional)> /to <yyyy-MM-dd\n      HHmm(optional)>\n"
+                + "  3. event <description> /from <yyyy-MM-dd\n      HHmm(optional)> "
+                + "/to <yyyy-MM-dd\n      HHmm(optional)>\n"
                 + "  4. delete <task number>\n"
                 + "  5. mark <task number>\n"
                 + "  6. unmark <task number>\n"
