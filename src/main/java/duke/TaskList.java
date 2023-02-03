@@ -130,11 +130,11 @@ public class TaskList {
                 throw new DukeException("No such item!");
             } else {
                 lstOfItems.get(number - 1).makeCompleted();
-                response += ("Ok, I've marked this Task as completed: ");
+                response += ("Ok, I've marked this Task as completed: \n");
                 response += (lstOfItems.get(number - 1) + "\n");
             }
         } catch (DukeException err) {
-            System.out.println(err);
+            response += (err + "\n");
         }
         return response;
     }
@@ -149,7 +149,7 @@ public class TaskList {
             if (number > lstOfItems.size()) {
                 throw new DukeException("No such item!");
             } else {
-                response += ("Ok, I've removed this Task: ");
+                response += ("Ok, I've removed this Task: \n");
                 response += (lstOfItems.get(number - 1) + "\n");
                 lstOfItems.remove(number - 1);
                 String remaining = (lstOfItems.size() == 1) ? " task" : " tasks";
@@ -157,7 +157,7 @@ public class TaskList {
                 response += (String.valueOf(lstOfItems.size()) + remaining + " left!\n");
             }
         } catch (DukeException err) {
-            System.out.println(err);
+            response += (err + "\n");
         }
         return response;
     }

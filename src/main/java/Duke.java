@@ -201,11 +201,12 @@ public class Duke extends Application {
                         if (terms.length == 1) {
                             String error = "The description of a todo cannot be empty";
                             throw new DukeException(error);
+                        } else {
+                            Task newTask = new Todo(userInput.substring(5));
+                            response += tasks.addTask(newTask);
                         }
-                        Task newTask = new Todo(userInput.substring(5));
-                        response += tasks.addTask(newTask);
                     } catch (DukeException err) {
-                        System.out.println(err);
+                        response += (err + "\n");
                     }
                 } else if (terms[0].equals("deadline")) {
                     String[] splitBySlash = userInput.split("/");
@@ -218,7 +219,7 @@ public class Duke extends Application {
                         Task newTask = new Deadline(description, by);
                         response += tasks.addTask(newTask);
                     } catch (DukeException err) {
-                        System.out.println(err);
+                        response += (err + "\n");
                     }
 
                 } else if (terms[0].equals("event")) {
@@ -233,13 +234,13 @@ public class Duke extends Application {
                         Task newTask = new Event(description, from, to);
                         response += tasks.addTask(newTask);
                     } catch (DukeException err) {
-                        System.out.println(err);
+                        response += (err + "\n");
                     }
                 } else {
                     try {
                         throw new DukeException("I don't know what that means.");
                     } catch (DukeException err) {
-                        System.out.println(err);
+                        response += (err + "\n");
                     }
                 }
 
