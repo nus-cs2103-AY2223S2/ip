@@ -1,8 +1,5 @@
 package page;
 
-/**
- * Represents a Page chatbot that can manage a list of tasks.
- */
 public class Page {
 
     private Ui ui;
@@ -10,11 +7,6 @@ public class Page {
     private QuestLog questLog;
     private Parser parser;
 
-    /**
-     * Constructs a Page object that saves/loads data from the given file path.
-     *
-     * @param filePath File path where the Page object saves/loads data.
-     */
     public Page(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
@@ -28,9 +20,6 @@ public class Page {
         this.parser = new Parser();
     }
 
-    /**
-     * Runs the Page chatbot.
-     */
     public void run() {
         boolean isBye = false;
 
@@ -46,11 +35,6 @@ public class Page {
         }
     }
 
-    /**
-     * Starts the Page chatbot.
-     *
-     * @param args Command line arguments.
-     */
     public static void main(String[] args) {
         Page page = new Page("data/questlog.txt");
         page.run();
