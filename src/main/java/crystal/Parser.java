@@ -18,6 +18,7 @@ import crystal.command.FindCommand;
 
 public class Parser {
 
+
     /**
      * Returns the respective command object based on the command
      * the user enters.
@@ -67,7 +68,7 @@ public class Parser {
             int num = Integer.parseInt(getNum);
             return new DeleteCommand(num);
         } else {
-            throw new CrystalException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new CrystalException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 }

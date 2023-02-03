@@ -9,31 +9,39 @@ import java.util.Scanner;
 
 /**
  * Represents the Ui task.
- *
  */
 public class Ui {
     Scanner sc = new Scanner(System.in);
+    String line = " ____________________________________________________________";
+
 
     /**
      * Return the next Line in the file
-     *
+     * @returns the next line in the file
      */
     public String readCommand() {
         return sc.nextLine();
     }
 
     /**
-     * Prints the welcome message.
+     * Returns the welcome message.
+     * @returns the welcome message.
      *
      */
-    public void showWelcome() {
-        System.out.println(" ____________________________________________________________");
-        System.out.println(" Hi! I am CRYSTAL.\n How may I be of assistance?");
-        System.out.println(" ____________________________________________________________");
+    public String showWelcome() {
+//        System.out.println(" ____________________________________________________________");
+//        System.out.println(" Hi! I am CRYSTAL.\n How may I be of assistance?");
+//        System.out.println(" ____________________________________________________________");
+        StringBuilder temp = new StringBuilder();
+        temp.append(line + "\n");
+        temp.append(" Hi! I am CRYSTAL.\n How may I be of assistance?\n");
+        temp.append(line + "\n");
+        return temp.toString();
     }
 
     /**
      * Prints the error message.
+     *
      * @param e Exception
      */
     public void showError(CrystalException e) {
@@ -44,136 +52,174 @@ public class Ui {
 
     /**
      * Prints the error message if the file failed to load.
-     *
      */
     public void showLoadingError() {
         System.out.println("Load Error");
     }
 
     /**
-     * Prints the list.
+     * Returns the list.
+     *
      * @param task tasklist
+     * @return the message.
      */
-    public void printList(TaskList task) {
-        System.out.println(" ____________________________________________________________");
-        System.out.println("Here are your current tasks:");
+    public String printList(TaskList task) {
+        StringBuilder temp = new StringBuilder();
+        temp.append(line + "\n");
+        temp.append("Here are your current tasks:\n");
         for (int i = 0; i < task.size(); i++) {
-            System.out.println(i + 1 + ". " + task.get(i));
+            temp.append(i + 1 + ". " + task.get(i) + "\n");
         }
-        System.out.println(" ____________________________________________________________");
+        temp.append(line + "\n");
+
+        return temp.toString();
+
     }
 
     /**
-     * Prints the unmark task message.
-     * @param task tasklist.
-     * @param num The task number to be unmarked
+     * Returns the unmark task message.
      *
+     * @param task tasklist.
+     * @param num  The task number to be unmarked
+     * @return the message.
      */
-    public void printUnmark(TaskList task, int num) {
-        Task unmarkTask = task.get(num-1);
-        System.out.println(" ____________________________________________________________");
-        System.out.println("Alright, I've marked this task as not done: ");
-        unmarkTask.isDone = false;
-        System.out.println(unmarkTask.toString());
-        System.out.println(" ____________________________________________________________");
+    public String printUnmark(TaskList task, int num) {
+        Task unmarkTask = task.get(num - 1);
+        StringBuilder temp = new StringBuilder();
+        temp.append(line + "\n");
+        temp.append("Alright, I've marked this task as not done: \n");
+        unmarkTask.isDone = true;
+        temp.append(unmarkTask.toString() + "\n");
+        temp.append(line + "\n");
+        return temp.toString();
     }
 
     /**
-     * Prints the mark task message.
-     * @param task tasklist.
-     * @param num The task number to be marked
+     * Returns the mark task message.
      *
+     * @param task tasklist.
+     * @param num  The task number to be marked
+     * @return the message.
      */
-    public void printMark(TaskList task, int num) {
+    public String printMark(TaskList task, int num) {
         Task markTask = task.get(num - 1);
-        System.out.println(" ____________________________________________________________");
-        System.out.println("Alright, I've marked the task as done: ");
+        StringBuilder temp = new StringBuilder();
+        temp.append(line + "\n");
+        temp.append("Alright, I've marked the task as done: \n");
         markTask.isDone = true;
-        System.out.println(markTask.toString());
-        System.out.println(" ____________________________________________________________");
+        temp.append(markTask.toString() + "\n");
+        temp.append(line + "\n");
+        return temp.toString();
     }
 
 
     /**
-     * Prints the todo task message.
+     * Returns the todo task message.
+     *
      * @param task tasklist.
-     * @param td Todo task
-     *
+     * @param td   Todo task
+     * @return the message
      */
-    public void printTodo(TaskList task, Todo td) {
-        System.out.println(" ____________________________________________________________");
-        System.out.println("Alright, I've added this task: ");
-        System.out.println(td.toString());
-        System.out.println("Current number of tasks : " + task.size());
-        System.out.println(" ____________________________________________________________");
+    public String printTodo(TaskList task, Todo td) {
+
+        StringBuilder temp = new StringBuilder();
+        temp.append(line + "\n");
+        temp.append("Alright, I've added this task: \n");
+        temp.append(td.toString() + "\n");
+        temp.append("Current number of tasks : " + task.size() + "\n");
+        temp.append(line + "\n");
+        return temp.toString();
     }
 
 
     /**
-     * Prints the deadline task message.
+     * Returns the deadline task message.
+     *
      * @param task tasklist.
-     * @param dl Deadline task.
-     *
+     * @param dl   Deadline task.
+     * @return the message
      */
-    public void printDeadline(TaskList task, Deadline dl) {
-        System.out.println(" ____________________________________________________________");
-        System.out.println("Alright, I've added this task: ");
-        System.out.println(dl.toString());
-        System.out.println("Current number of tasks : " + task.size());
-        System.out.println(" ____________________________________________________________");
+    public String printDeadline(TaskList task, Deadline dl) {
+
+        StringBuilder temp = new StringBuilder();
+        temp.append(line + "\n");
+        temp.append("Alright, I've added this task: \n");
+        temp.append(dl.toString() + "\n");
+        temp.append("Current number of tasks : " + task.size() + "\n");
+        temp.append(line + "\n");
+        return temp.toString();
+
     }
 
 
     /**
-     * Prints the event task message.
+     * Returns the event task message.
+     *
      * @param task tasklist.
-     * @param evt Event task.
-     *
+     * @param evt  Event task.
+     * @return the message
      */
-    public void printEvent(TaskList task, Event evt) {
-        System.out.println(" ____________________________________________________________");
-        System.out.println("Alright, I've added this task: ");
-        System.out.println(evt.toString());
-        System.out.println("Current number of tasks: " + task.size());
-        System.out.println(" ____________________________________________________________");
+    public String printEvent(TaskList task, Event evt) {
+        StringBuilder temp = new StringBuilder();
+        temp.append(line + "\n");
+        temp.append("Alright, I've added this task: \n");
+        temp.append(evt.toString() + "\n");
+        temp.append("Current number of tasks: " + task.size() + "\n");
+        temp.append(line + "\n");
+        return temp.toString();
+
     }
 
     /**
-     * Prints the bye message.
-     *
+     * Returns the bye message.
+     * @return the message
      */
-    public void printBye() {
-        System.out.println(" ____________________________________________________________");
-        System.out.println(" Thank You. Please come by again~!");
-        System.out.println(" ____________________________________________________________");
+    public String printBye() {
+        StringBuilder temp = new StringBuilder();
+        temp.append(line + "\n");
+        temp.append(" Thank You. Please come by again~!\n");
+        temp.append(line + "\n");
+        return temp.toString();
     }
 
     /**
-     * Prints the delete message.
+     * Returns the delete message.
+     *
      * @param task Tasklist
-     * @param num the task number to be deleted
+     * @param num  the task number to be deleted
+     * @return the message
      */
-    public void printDelete(TaskList task, int num) {
-        System.out.println(" ____________________________________________________________");
-        System.out.println("Alright, I've removed this task: ");
+    public String printDelete(TaskList task, int num) {
+        StringBuilder temp = new StringBuilder();
+        temp.append(line + "\n");
+        temp.append("Alright, I've removed this task: \n");
         Task item = task.get(num - 1);
         task.remove(num - 1);
-        System.out.println(item.toString());
-        System.out.println("Current number of tasks: " + task.size());
-        System.out.println(" ____________________________________________________________");
+        temp.append(item.toString() + "\n");
+        temp.append("Current number of tasks: " + task.size() + "\n");
+        temp.append(line + "\n");
+        return temp.toString();
     }
 
-    public void printFind(TaskList task, String word) {
-        System.out.println(" ____________________________________________________________");
-        System.out.println("Here are the matching tasks in your list: ");
+    /**
+     * Returns the find message
+     * @param task Tasklist
+     * @param word the word to be found in the tasklist
+     * @return the message
+     */
+    public String printFind(TaskList task, String word) {
+
+        StringBuilder temp = new StringBuilder();
+        temp.append(line + "\n");
+        temp.append("Here are the matching tasks in your list: \n");
         int counter = 1;
         for (int i = 0; i < task.size(); i++) {
-            if (task.get(i).getDescription().contains(word)) {
-                System.out.println(counter + ". " + task.get(i));
+            if (task.get(i).getDescription().contains(word.trim())) {
+                temp.append(counter + ". " + task.get(i) + "\n");
                 counter++;
             }
         }
-        System.out.println(" ____________________________________________________________");
-
+        temp.append(line + "\n");
+        return temp.toString();
     }
 }

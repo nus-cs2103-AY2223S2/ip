@@ -32,10 +32,11 @@ public class TodoCommand extends Command{
      * @param storage storage.
      *
      */
-    public void execute(TaskList tasks, Ui ui,Storage storage) {
+    public String execute(TaskList tasks, Ui ui,Storage storage) {
         Todo todo = new Todo(task);
         tasks.add(todo);
-        ui.printTodo(tasks, todo);
+        storage.saveFile(tasks);
+        return ui.printTodo(tasks, todo);
 
     }
 

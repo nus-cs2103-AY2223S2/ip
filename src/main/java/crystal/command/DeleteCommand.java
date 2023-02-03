@@ -30,8 +30,9 @@ public class DeleteCommand extends Command{
      * @param storage storage.
      *
      */
-    public void execute(TaskList tasks, Ui ui,Storage storage) {
-        ui.printDelete(tasks, this.num);
+    public String execute(TaskList tasks, Ui ui,Storage storage) {
+        storage.saveFile(tasks);
+        return ui.printDelete(tasks, this.num);
     }
 
     /**

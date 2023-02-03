@@ -62,4 +62,8 @@ public class TaskList {
     public void remove(int i) {
         this.arr.remove(i);
     }
+
+    public String toString() {
+        return arr.toString();
+    }
 }

@@ -37,10 +37,11 @@ public class DeadlineCommand extends Command{
      * @param storage storage.
      * @throws CrystalException if the user input is incorrectly formatted
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws CrystalException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws CrystalException {
         Deadline deadline = new Deadline(description, by);
         tasks.add(deadline);
-        ui.printDeadline(tasks, deadline);
+        storage.saveFile(tasks);
+        return ui.printDeadline(tasks, deadline);
     }
 
     /**

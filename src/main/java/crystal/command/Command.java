@@ -20,7 +20,7 @@ public abstract class Command {
      * @param storage storage.
      *
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws CrystalException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws CrystalException;
 
     /**
      * Abstract method to determine whether the program should end or not.

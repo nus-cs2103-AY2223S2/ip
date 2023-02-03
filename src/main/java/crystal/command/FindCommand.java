@@ -28,8 +28,8 @@ public class FindCommand extends Command {
      * @param storage storage.
      *
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.printFind(tasks, this.word);
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.printFind(tasks, this.word);
     }
 
     /**

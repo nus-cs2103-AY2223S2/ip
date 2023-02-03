@@ -37,10 +37,11 @@ public class EventCommand extends Command{
      * @param storage storage.
      *
      */
-    public void execute(TaskList tasks, Ui ui,Storage storage) throws CrystalException {
+    public String execute(TaskList tasks, Ui ui,Storage storage) throws CrystalException {
         Event event = new Event(description, from, to);
         tasks.add(event);
-        ui.printEvent(tasks, event);
+        storage.saveFile(tasks);
+        return ui.printEvent(tasks, event);
 
     }
 
