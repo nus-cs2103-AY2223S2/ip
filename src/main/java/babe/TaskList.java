@@ -8,8 +8,8 @@ import babe.task.ToDo;
 import java.util.ArrayList;
 
 /**
- * This class contains the task list.
- * It has operations to add/delete tasks in the list
+ * The <code>TaskList</code> class represents the list of Tasks in Babe.
+ * It contains methods for displaying and manipulating content of this TaskList.
  */
 class TaskList {
     /**

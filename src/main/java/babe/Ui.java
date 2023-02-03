@@ -5,7 +5,8 @@ import babe.task.Task;
 import java.util.ArrayList;
 
 /**
- * This class deals with interactions with the user
+ * The <code>Ui</code> class deals with interactions with the user.
+ * It contains all functions used to generate the GUI and the messages seen in Babe.
  */
 class Ui {
 

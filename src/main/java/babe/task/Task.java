@@ -1,7 +1,8 @@
 package babe.task;
 
 /**
- * Interface for list items in Babe,
+ * <code>Task</code> is an abstract class that specifies functions required by its concrete
+ * subclasses (namely, <code>Event</code>, <code>ToDo</code> and <code>Deadline</code> to have.
  */
 public abstract class Task {
     /**
@@ -15,7 +16,7 @@ public abstract class Task {
     static String UNMARKED = "[ ]";
 
     /**
-     * Done status for this Task.
+     * Done status for this <code>Task</code>.
      */
     boolean isDone = false;
 
@@ -25,7 +26,7 @@ public abstract class Task {
     String description = "";
 
     /**
-     * Constructor for Tasks
+     * Constructor for <code>Task</code>s
      *
      * @param content A String that is the description of this item.
      */
@@ -35,33 +36,33 @@ public abstract class Task {
 
     @Override
     /**
-     * Returns String representation of the Task item.
-     * Each subclass of Task has a designated String format.
+     * Returns String representation of the <code>Task</code> item.
+     *
+     * @return A String that represents the <code>Task</code> item, including its description and done status.
      */
     public abstract String toString();
 
     /**
-     * Mark the item as Done.
-     * Assign truth value to isDone.
+     * Mark the <code>Task</code> as Done.
      */
     public void mark() {
         isDone = true;
     }
 
     /**
-     * Mark the item as Undone.
-     * Assign false value to isDone.
+     * Mark the <code>Task</code> as Undone.
      */
     public void unmark() {
         isDone = false;
     }
 
     /**
-     * Returns String representation of the Task item for data storage.
-     * Saves the content of the Task, including its isDone, subtype and description into a String with the delimiter
-     * "|" to be written into a data file.
+     * Returns String representation of the <code>Task</code> item for data storage.
+     * The String representation includes its done status, subtype and description. The delimiter "|"
+     * is used.
      *
-     * @return A String representing this Task object.
+     * @return A String representing this <code>Task</code> object, specifically for
+     *         <code> Storage </code>'s input.
      */
     public abstract String toSaveFormat();
 
