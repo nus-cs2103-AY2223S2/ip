@@ -34,6 +34,45 @@ public class Duke {
     private Ui ui;
 
 
+
+    void moreOop() {
+        storage = new Storage();
+        storage.readFromFile();
+        //Store byte array
+        ByteArrayOutputStream storeString = new ByteArrayOutputStream();
+        PrintStream printStream = new PrintStream(storeString);
+        PrintStream oldPrintStream = System.out;
+        System.setOut(printStream);
+        //Instantiate taskList and storage
+        this.taskList = storage.getTasks();
+        storage.createDirectory();
+        //Instantiate new UI
+        ui = new Ui();
+        ui.showWelcome();
+        //Reset previous System
+        System.out.flush();
+        System.setOut(oldPrintStream);
+        System.out.println(storeString.toString());
+        //Set while loop flag
+        boolean isExit = false;
+        //Initalise while loop
+        while (!isExit) {
+            ui.readCommand();
+            //Reset byte array
+            storeString = new ByteArrayOutputStream();
+            printStream = new PrintStream(storeString);
+            System.setOut(printStream);
+            //Custom duke commands
+            taskList = ui.execute(taskList);
+            //Reset System
+            System.out.flush();
+            System.setOut(oldPrintStream);
+            System.out.println(storeString.toString());
+            //Store file
+            storage.writeToFile(taskList.toString());
+        }
+    }
+
     @FXML
     protected String getResponse(String input) {
         //return storeString.toString();
@@ -80,4 +119,10 @@ public class Duke {
         return storeString.toString();
 
     }
+
+    public static void main(String[] args) {
+        Duke duke = new Duke();
+        duke.moreOop();
+    }
+    
 }
