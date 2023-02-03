@@ -14,6 +14,7 @@ import duke.commands.Command;
 import duke.commands.DeadlineCommand;
 import duke.commands.DeleteCommand;
 import duke.commands.EventCommand;
+import duke.commands.FindCommand;
 import duke.commands.ListCommand;
 import duke.commands.MarkCommand;
 import duke.commands.ToDoCommand;
@@ -24,7 +25,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Parser {
-    public enum CommandType {BYE, LIST, TODO, DEADLINE, EVENT, MARK, UNMARK, DELETE}
+    public enum CommandType {BYE, LIST, TODO, DEADLINE, EVENT, MARK, UNMARK, DELETE, FIND}
     public Command handleCommand(String input) throws DukeExceptions {
         try {
             CommandType command = CommandType.valueOf(input.split(" ")[0].toUpperCase());
@@ -45,6 +46,8 @@ public class Parser {
                     return new UnmarkCommand(input);
                 case DELETE:
                     return new DeleteCommand(input);
+            case FIND:
+                return new FindCommand(input);
                 default:
                     throw new UnknownCommandException();
             }
