@@ -3,8 +3,11 @@ package aqua.manager;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import aqua.aquatask.AquaTask;
@@ -56,6 +59,15 @@ public class TaskManager implements Reloadable {
      */
     public AquaTask delete(int taskNum) throws IndexOutOfBoundsException {
         return tasks.remove(taskNum);
+    }
+
+
+    public List<AquaTask> filterWithin(LocalDateTime start, LocalDateTime end) {
+        return tasks.stream()
+                .filter(task ->
+                        task.getStart().map(end::isBefore).orElse(false)
+                        || task.getEnd().map(start::isAfter).orElse(false)
+                ).collect(Collectors.toList());
     }
 
 
