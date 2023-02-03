@@ -10,7 +10,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import saturday.utilities.Storage;
 
-import javax.naming.ldap.Control;
 
 public class Dashboard extends Application {
     private Saturday saturday = new Saturday(Storage.getFilePath());
@@ -34,7 +33,7 @@ public class Dashboard extends Application {
      */
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/Home.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Controller.class.getResource("/view/Home.fxml"));
         Parent root = fxmlLoader.load();
         Scene scene = new Scene(root);
         scene.setFill(Color.TRANSPARENT);
