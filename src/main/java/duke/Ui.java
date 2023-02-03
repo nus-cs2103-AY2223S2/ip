@@ -6,6 +6,10 @@ import java.util.Scanner;
  * Encapsulates the interaction between user and program.
  */
 public class Ui {
+    /**
+     * Displays a welcome message to the user.
+     * @return msg the welcome message
+     */
     public String showWelcome() {
         String msg = "Hello! I'm Chiwa, your personal chatbot (◔◡◔✿) \n";
         msg += "What can I do for you today? \n";
