@@ -16,6 +16,9 @@ public class Deadline extends Task{
         this.isDone = isDone;
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public String save() {
         return "D|" + (this.isDone ? 1 : 0) + "|" + this.description + "|" + this.time + "\n";

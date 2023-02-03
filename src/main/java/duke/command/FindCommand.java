@@ -1,15 +1,15 @@
 package duke.command;
-import duke.Storage;
-import duke.Ui;
-import duke.TaskList;
+
 import duke.DukeException;
-import duke.task.Task;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 
-public class UnmarkCommand extends Command{
-    private int index;
+public class FindCommand extends Command {
+    private String keyword;
 
-    public UnmarkCommand(int index) {
-        this.index = index;
+    public FindCommand(String keyword) {
+        this.keyword = keyword;
     }
 
     /**
@@ -17,9 +17,7 @@ public class UnmarkCommand extends Command{
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        Task unmarkedTask = tasks.markTaskUndone(index);
-        storage.save(tasks);
-        return ui.showUnmarkTask(unmarkedTask);
+        return ui.showFoundTasks(tasks.findKeywordTasks(keyword));
     }
 
     /**
@@ -32,6 +30,6 @@ public class UnmarkCommand extends Command{
 
     @Override
     public String toString() {
-        return "Command: Mark task " + index;
+        return "Command: Find tasks containing \"" + keyword + "\".";
     }
 }

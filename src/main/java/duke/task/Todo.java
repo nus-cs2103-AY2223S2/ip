@@ -11,6 +11,9 @@ public class Todo extends Task{
         this.isDone = isDone;
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public String save() {
         return "T|" + (this.isDone ? 1 : 0) + "|" + this.description + "\n";

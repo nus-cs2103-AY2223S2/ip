@@ -4,11 +4,18 @@ import duke.Ui;
 import duke.TaskList;
 
 public class ListCommand extends Command{
+
+    /**
+     * @inheritDoc
+     */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage){
-        ui.showTasks(tasks);
+    public String execute(TaskList tasks, Ui ui, Storage storage){
+        return ui.showTasks(tasks);
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public boolean isExit() {
         return false;

@@ -16,6 +16,13 @@ public class Storage {
         this.file = new File(filepath);
     }
 
+    /**
+     * Loads a saved task list from file in this Storage object.
+     * If the file does not exist, creates a new empty files and parent directories.
+     *
+     * @return Saved ArrayList of Tasks from the location.
+     * @throws DukeException If the file does not exist or if there is loading errors from the file.
+     */
     public ArrayList<Task> load() throws DukeException {
         if (!file.exists()) {
             try {
@@ -37,6 +44,7 @@ public class Storage {
         return tasks;
     }
 
+
     private Task storageParse(String data) throws DukeException {
         //
         String[] taskData = data.split("\\|");
@@ -56,6 +64,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the TaskList to the file in this Storage object.
+     *
+     * @param tasks TaskList of Tasks to be saved to file.
+     */
     public void save(TaskList tasks) {
         try {
             FileWriter fileWriter = new FileWriter(file, false);

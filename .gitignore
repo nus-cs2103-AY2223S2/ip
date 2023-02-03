@@ -16,3 +16,5 @@ bin/
 /text-ui-test/ACTUAL.TXT
 text-ui-test/EXPECTED-UNIX.TXT
 data/
+src/main/java/JavaFxTrial.java
+src/main/java/JavaFxTrialLauncher.java

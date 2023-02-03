@@ -12,16 +12,24 @@ public class MarkCommand extends Command{
         this.index = index;
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task markedTask = tasks.markTaskDone(index);
         storage.save(tasks);
-        ui.showMarkTask(markedTask);
+        return ui.showMarkTask(markedTask);
     }
+
+    /**
+     * @inheritDoc
+     */
     @Override
     public boolean isExit() {
         return false;
     }
+
 
     @Override
     public String toString() {
