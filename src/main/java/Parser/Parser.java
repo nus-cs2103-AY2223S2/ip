@@ -1,6 +1,17 @@
+package Parser;
+
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import DukeException.InvalidInputException;
+import DukeException.EmptyDescriptionException;
+import Ui.Ui;
+import Task.Task;
+import TaskList.TaskList;
+import Task.ToDo;
+import Task.Deadline;
+import Task.Event;
+
 
 
 public class Parser {
@@ -17,7 +28,7 @@ public class Parser {
 
 
 
-    void parse(String input, Ui ui, TaskList list) throws IOException {
+    public void parse(String input, Ui ui, TaskList list) throws IOException {
         try {
             String[] inputWords = input.split(" ", 2);
             String command = inputWords[0];

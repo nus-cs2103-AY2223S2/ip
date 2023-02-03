@@ -1,6 +1,7 @@
+package Ui;
 import java.time.format.DateTimeFormatter;
-import java.util.Scanner;
-import java.util.ArrayList;
+import TaskList.TaskList;
+import Task.Task;
 
 public class Ui {
     final static String ENTRY_OUTPUT = "Hello! I'm Duke\nWhat can I do for you?";
@@ -8,8 +9,8 @@ public class Ui {
     final static DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy/MM/d HHmm");
 
     final static DateTimeFormatter outputFormatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
-    boolean isClosed;
-    Ui() {
+    public boolean isClosed;
+    public Ui() {
        this.isClosed = false;
     }
 

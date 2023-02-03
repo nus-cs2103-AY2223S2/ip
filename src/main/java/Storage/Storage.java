@@ -1,13 +1,23 @@
+package Storage;
+
+import TaskList.TaskList;
+
 import java.io.PrintWriter;
 import java.io.IOException;
 import java.io.File;
 import java.util.Scanner;
+import TaskList.TaskList;
+import Task.Task;
+import Task.ToDo;
+import Task.Deadline;
+import Task.Event;
+
 public class Storage {
     String path;
     File file;
     PrintWriter output;
     Scanner sc;
-    Storage (String path) throws IOException {
+    public Storage(String path) throws IOException {
         this.path = path;
         this.file = new File(path);
         this.sc = new Scanner(file);
@@ -15,7 +25,7 @@ public class Storage {
         this.output = new PrintWriter(path);
     }
 
-    TaskList load() throws IOException {
+    public TaskList load() throws IOException {
         if (!file.exists()) {
             System.out.println("cannot find file");
             file.createNewFile();
@@ -46,7 +56,7 @@ public class Storage {
 
 
 
-    String[] getDescriptionAndMarkedStatus(String description) {
+    public String[] getDescriptionAndMarkedStatus(String description) {
         String[] words = description.split("] ");
         String newDescription = words[1];
         String firstWord = words[0];
@@ -54,7 +64,7 @@ public class Storage {
         return new String[]{newDescription, marked};
     }
 
-    void save(TaskList list) {
+    public void save(TaskList list) {
         for (int i = 0; i < list.size(); i++) {
             Task task = list.getTask(i);
             this.output.println(i+1 + "." + task.toString());
