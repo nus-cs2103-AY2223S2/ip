@@ -15,16 +15,32 @@ public class Event extends Task {
         this.eventEnd = eventEnd;
     }
 
+    /**
+     * Returns the DateTimeFormatter used to format Events.
+     *
+     * @return the DateTimeFormatter used to format Events
+     */
     public static DateTimeFormatter getEventFormatter() {
         return EVENT_FORMAT;
     }
 
+    /**
+     * Generates the String representation of the Event needed for data storage.
+     *
+     * @return the Event in String format for data storage
+     */
     @Override
     public String getDataString() {
         return "E | " + super.getDataString() + " | " + this.eventStart.format(getEventFormatter()) + " to " +
                 this.eventEnd.format(getEventFormatter());
     }
 
+    /**
+     * Generates the String representation of the Event, representation depends on whether the Event completes on the
+     * same day or not.
+     *
+     * @return the String representation of the Event
+     */
     @Override
     public String toString() {
         String timeFrame;
