@@ -61,12 +61,12 @@ public class Duke {
         Label greeting = new Label(storeString.toString());
         */
         //System.out.flush();
-        System.setOut(oldPrintStream);
-        //System.out.println(storeString.toString());
 
-        storeString = new ByteArrayOutputStream();
-        printStream = new PrintStream(storeString);
-        System.setOut(printStream);
+        //System.out.println(storeString.toString());
+        //System.setOut(oldPrintStream);
+//        storeString = new ByteArrayOutputStream();
+//        printStream = new PrintStream(storeString);
+//        System.setOut(printStream);
 
 
         taskList = ui.execute(taskList);
@@ -76,7 +76,7 @@ public class Duke {
         //System.out.println(storeString.toString());
 
         storage.writeToFile(taskList.toString());
-
+        System.out.println("Store string " + storeString.toString());
         return storeString.toString();
 
     }
