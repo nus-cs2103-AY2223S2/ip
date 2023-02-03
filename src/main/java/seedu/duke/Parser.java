@@ -98,7 +98,7 @@ public class Parser {
             break;
         }
         case HELP: {
-            return "Visit this page for a detailed guide on how to use Duke!\n\n";
+            return "Visit this page for a detailed guide on how to use Duke!\n\nhttps://gremmyz.github.io/ip/";
         }
         default:
             return "Invalid argument";

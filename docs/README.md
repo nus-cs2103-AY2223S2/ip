@@ -21,8 +21,7 @@ DukePro is a **desktop chatbot for managing your tasks, optimized for use via a 
 1. Ensure you have Java `11` or above installed in your Computer.
 2. Download the latest `duke.jar` from [here](https://github.com/gremmyz/ip/releases/tag/A-Jar).
 3. Copy the file to an empty folder that you want to use as the *home folder* for your DukePro.
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar duke.jar` command to run the application. A GUI similar to the below should appear.
-![GUI](/assets/samplebot.png)
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar duke.jar` command to run the application.
 5. Type the command that you wish to execute into the command box and hit Enter to execute it. e.g. typing `help` and pressing Enter will provide you with the support link.
 6. Some example commands that you can try are:
 - `list`: Lists all the tasks.
