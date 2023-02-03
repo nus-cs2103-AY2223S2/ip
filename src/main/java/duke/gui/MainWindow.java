@@ -24,6 +24,7 @@ import javafx.util.Duration;
 public class MainWindow extends AnchorPane {
 
     private static final String dirPath = "./data/";
+    private static final int exitDelayTimeInSeconds = 5;
 
     /**
      * Images to be used in GUI.
@@ -77,7 +78,7 @@ public class MainWindow extends AnchorPane {
         if (this.duke.isExit()) {
             userInput.setDisable(true);
             sendButton.setDisable(true);
-            PauseTransition delay = new PauseTransition(Duration.seconds(5));
+            PauseTransition delay = new PauseTransition(Duration.seconds(MainWindow.exitDelayTimeInSeconds));
             delay.setOnFinished( event -> this.stage.close() );
             delay.play();
         }

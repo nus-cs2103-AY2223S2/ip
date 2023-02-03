@@ -4,6 +4,12 @@ package duke.command;
 public enum CommandType {
     BYE, MARK, UNMARK, DEADLINE, TODO, EVENT, LIST, FIND, DELETE, HELP;
 
+    /**
+     * Constructs instructions on all available
+     * commands.
+     *
+     * @return Instructions on all available commands.
+     */
     public static String getAllCommandFormatString() {
         String allCommandFormatString = "";
 

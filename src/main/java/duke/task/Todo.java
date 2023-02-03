@@ -1,7 +1,14 @@
 package duke.task;
 
+/** Class that represents a todo */
 public class Todo extends Task {
 
+    /**
+     * Constructs a Todo object with
+     * the given name.
+     *
+     * @param name Name of this todo.
+     */
     public Todo(String name) {
         super(name);
     }

@@ -72,6 +72,14 @@ public abstract class Task {
         return newTask;
     }
 
+    /**
+     * Checks if the name of this task
+     * contains the given keyword.
+     *
+     * @param keyword Keyword to check for.
+     * @return true if name of this task contains the
+     *         given keyword, otherwise false.
+     */
     public boolean nameContainsKeyword(String keyword) {
         return this.name.contains(keyword);
     }

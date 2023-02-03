@@ -6,6 +6,7 @@ public enum TaskType {
 
     /**
      * Returns the enum value that matches a command.
+     *
      * @param uppercaseCommand Command in uppercase.
      * @return
      */
