@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import jarvis.exception.InvalidParameterException;
+import jarvis.exception.command.InvalidParameterException;
 
 /**
  * Container class for task filtering information.

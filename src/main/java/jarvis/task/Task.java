@@ -3,8 +3,8 @@ package jarvis.task;
 import java.util.Scanner;
 
 import jarvis.duration.Duration;
-import jarvis.exception.CommandParseException;
-import jarvis.exception.MissingParameterException;
+import jarvis.exception.command.CommandParseException;
+import jarvis.exception.command.MissingParameterException;
 
 /**
  * Abstract task class.

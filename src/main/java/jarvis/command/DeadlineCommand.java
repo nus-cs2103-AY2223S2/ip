@@ -2,7 +2,7 @@ package jarvis.command;
 
 import java.util.List;
 
-import jarvis.exception.CommandParseException;
+import jarvis.exception.command.CommandParseException;
 import jarvis.storage.Storage;
 import jarvis.task.DeadlineTask;
 import jarvis.task.TaskList;

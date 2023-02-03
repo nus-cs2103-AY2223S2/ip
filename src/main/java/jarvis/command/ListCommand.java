@@ -2,7 +2,7 @@ package jarvis.command;
 
 import java.util.List;
 
-import jarvis.exception.InvalidParameterException;
+import jarvis.exception.command.InvalidParameterException;
 import jarvis.storage.Storage;
 import jarvis.task.TaskFilter;
 import jarvis.task.TaskList;

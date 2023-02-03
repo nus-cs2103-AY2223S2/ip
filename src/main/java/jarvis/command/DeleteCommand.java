@@ -1,6 +1,6 @@
 package jarvis.command;
 
-import jarvis.exception.MissingParameterException;
+import jarvis.exception.command.InvalidIndexException;
 import jarvis.storage.Storage;
 import jarvis.task.TaskList;
 import jarvis.ui.Ui;
@@ -32,7 +32,7 @@ public class DeleteCommand extends Command {
     public void execute(Ui ui, TaskList taskList, Storage storage) {
         try {
             ui.print(taskList.deleteTask(this.index));
-        } catch (MissingParameterException e) {
+        } catch (InvalidIndexException e) {
             ui.printError(e.getFriendlyMessage());
         }
     }

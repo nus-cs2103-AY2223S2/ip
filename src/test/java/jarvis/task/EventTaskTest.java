@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
-import jarvis.exception.CommandParseException;
+import jarvis.exception.command.CommandParseException;
 
 public class EventTaskTest {
     private static final String BODY = "an event test";

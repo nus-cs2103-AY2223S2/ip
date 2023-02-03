@@ -1,6 +1,6 @@
 package jarvis.task;
 
-import jarvis.exception.MissingParameterException;
+import jarvis.exception.command.MissingParameterException;
 
 /**
  * Task class representing a todo task.

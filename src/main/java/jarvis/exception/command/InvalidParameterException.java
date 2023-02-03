@@ -1,4 +1,4 @@
-package jarvis.exception;
+package jarvis.exception.command;
 
 /**
  * Exception from commands with invalid or unknown parameters.

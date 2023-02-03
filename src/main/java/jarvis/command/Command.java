@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import jarvis.exception.CommandParseException;
-import jarvis.exception.InvalidActionException;
+import jarvis.exception.command.CommandParseException;
+import jarvis.exception.command.InvalidActionException;
 import jarvis.storage.Storage;
 import jarvis.task.TaskList;
 import jarvis.ui.Ui;

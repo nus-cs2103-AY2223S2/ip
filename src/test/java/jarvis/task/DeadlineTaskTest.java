@@ -8,8 +8,8 @@ import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
-import jarvis.exception.CommandParseException;
-import jarvis.exception.InvalidParameterException;
+import jarvis.exception.command.CommandParseException;
+import jarvis.exception.command.InvalidParameterException;
 
 
 public class DeadlineTaskTest {
