@@ -6,3 +6,4 @@ D|0|submit assignment|2023-01-30 0000
 T|0|study jap
 D|0|submit hw|2023-03-01 0000
 E|0|work|2023-01-28 0000|2023-01-28 0000
+D|0|return clothes|2023-02-03 1600

@@ -1,21 +1,16 @@
 package commands;
 
-import ui.Ui;
+import java.time.LocalDateTime;
 
+import javafx.scene.layout.VBox;
 import parser.Parser;
-
 import storage.Storage;
-
-import tasklist.TaskList;
-
 import task.Deadline;
 import task.Event;
 import task.Task;
 import task.Todo;
-
-import java.time.LocalDateTime;
-
-import javafx.scene.layout.VBox;
+import tasklist.TaskList;
+import ui.Ui;
 
 public class AddCommand extends Command {
 
@@ -57,19 +52,33 @@ public class AddCommand extends Command {
 	 * @param parser          A service to parse text input.
 	 * @param storage         A store that represents the data access object (DAO).
 	 * @param dialogContainer A container that holds all the rows of labels.
+	 * @param tasklist        All the tasks that are recorded.
 	 * @return boolean
 	 */
-	private boolean setTask(String[] inputArr, Ui ui, Parser parser, Storage storage, VBox dialogContainer) {
+	private boolean setTask(String[] inputArr, Ui ui, Parser parser, Storage storage, VBox dialogContainer,
+			TaskList tasklist) {
 		String description = parser.sliceArrAndConcate(inputArr, 1, inputArr.length);
 		String errorMessage = String.format(
 				"Oops! The description of a %s ", this.taskType);
+		String duplicatedErrorMessage = String.format(
+				"Oops! This %s has already been recorded.", taskType);
+
 		switch (taskType) {
 			case TODO:
+				if (tasklist.hasDuplicateTodo(description)) {
+					ui.sendResponse(dialogContainer, storage, ui.createLabel(duplicatedErrorMessage));
+					return false;
+				}
 				task = new Todo(description);
 				break;
 			case DEADLINE:
+				description = parser.trimDate(description);
 				LocalDateTime by = parser.getBy(inputArr, ui, storage, dialogContainer);
 				if (by == null) {
+					return false;
+				}
+				if (tasklist.hasDuplicateDeadline(description, by)) {
+					ui.sendResponse(dialogContainer, storage, ui.createLabel(duplicatedErrorMessage));
 					return false;
 				}
 				if (by.isBefore(LocalDateTime.now())) {
@@ -77,35 +86,42 @@ public class AddCommand extends Command {
 					ui.sendResponse(dialogContainer, storage, ui.createLabel(errorMessage));
 					return false;
 				}
-				task = new Deadline(parser.trimDate(description), by);
+				task = new Deadline(description, by);
 				break;
 			case EVENT:
+				description = parser.trimDate(description);
 				LocalDateTime[] fromTo = parser.getFromTo(inputArr, ui, storage, dialogContainer);
-				if (fromTo[0] == null && fromTo[1] == null) {
+				LocalDateTime from = fromTo[0];
+				LocalDateTime to = fromTo[1];
+				if (from == null && to == null) {
 					return false;
 				}
-				if (fromTo[0] == null) {
+				if (from == null) {
 					errorMessage += "must include a FROM datetime.";
 					ui.sendResponse(dialogContainer, storage, ui.createLabel(errorMessage));
 					return false;
 				}
-				if (fromTo[1] == null) {
+				if (to == null) {
 					errorMessage += "must include a TO datetime.";
 					ui.sendResponse(dialogContainer, storage, ui.createLabel(errorMessage));
 					return false;
 				}
-				if (fromTo[0].isBefore(LocalDateTime.now())) {
+				if (tasklist.hasDuplicateEvent(description, from, to)) {
+					errorMessage = duplicatedErrorMessage;
+					ui.sendResponse(dialogContainer, storage, ui.createLabel(duplicatedErrorMessage));
+					return false;
+				}
+				if (from.isBefore(LocalDateTime.now())) {
 					errorMessage = "Oops! FROM datetime must be after the current datetime";
 					ui.sendResponse(dialogContainer, storage, ui.createLabel(errorMessage));
 					return false;
 				}
-				if (fromTo[0].isAfter(fromTo[1])) {
+				if (from.isAfter(to)) {
 					errorMessage = "Oops! FROM datetime should be later than TO date/time.";
 					ui.sendResponse(dialogContainer, storage, ui.createLabel(errorMessage));
 					return false;
 				}
-
-				task = new Event(parser.trimDate(description), fromTo);
+				task = new Event(description, fromTo);
 				break;
 			default:
 				return false;
@@ -128,7 +144,7 @@ public class AddCommand extends Command {
 			ui.sendResponse(dialogContainer, storage, ui.createLabel(errorMessage));
 			return;
 		}
-		if (setTask(inputArr, ui, parser, storage, dialogContainer)) {
+		if (setTask(inputArr, ui, parser, storage, dialogContainer, tasklist)) {
 			tasklist.add(task);
 			storage.saveNewData(task, ui);
 			ui.printAddedTask(task, tasklist.size(), dialogContainer, storage);

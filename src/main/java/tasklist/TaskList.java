@@ -1,17 +1,22 @@
 package tasklist;
 
-import ui.Ui;
-
-import storage.Storage;
-
-import task.Task;
-
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 import javafx.scene.layout.VBox;
+import storage.Storage;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.Todo;
+import ui.Ui;
 
 public class TaskList {
+
+	enum TaskType {
+		TODO, DEADLINE, EVENT
+	}
 
 	private List<Task> tasks = new ArrayList<>();
 
@@ -90,4 +95,64 @@ public class TaskList {
 		}
 	}
 
+	/**
+	 * Return true if a todo with similar description existed.
+	 * 
+	 * @param description
+	 * @return boolean
+	 */
+	public boolean hasDuplicateTodo(String description) {
+		for (Task task : tasks) {
+			if (task instanceof Todo) {
+				Todo todo = (Todo) task;
+				if (todo.getDescription().equalsIgnoreCase(description)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Return true if a deadline with similar description and 'by' datetime existed.
+	 * 
+	 * @param description
+	 * @param by
+	 * @return boolean
+	 */
+	public boolean hasDuplicateDeadline(String description, LocalDateTime by) {
+		for (Task task : tasks) {
+			if (task instanceof Deadline) {
+				Deadline deadline = (Deadline) task;
+				if (deadline.getDescription().equalsIgnoreCase(description)
+						&& deadline.getBy().equals(by)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Return true if an event with similar description and, 'from' and 'to'
+	 * datetime existed.
+	 * 
+	 * @param description
+	 * @param from
+	 * @param to
+	 * @return boolean
+	 */
+	public boolean hasDuplicateEvent(String description, LocalDateTime from, LocalDateTime to) {
+		for (Task task : tasks) {
+			if (task instanceof Event) {
+				Event event = (Event) task;
+				if (event.getDescription().equalsIgnoreCase(description)
+						&& event.getFrom().equals(from)
+						&& event.getTo().equals(to)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 }
