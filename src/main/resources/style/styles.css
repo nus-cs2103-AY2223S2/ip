@@ -1,0 +1,14 @@
+.button {
+    -fx-background-color: "#63B6D3"
+}
+
+.message-box {
+}
+
+.message-chat {
+    -fx-background-color: "#B1E1E5";
+    -fx-background-radius: 10;
+    -fx-background-insets: 5;
+    -fx-border-insets: 5;
+    -fx-padding: 10;
+}

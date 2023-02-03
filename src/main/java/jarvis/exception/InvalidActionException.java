@@ -5,6 +5,6 @@ package jarvis.exception;
  */
 public class InvalidActionException extends CommandParseException {
     public InvalidActionException(String message) {
-        super(message);
+        super(message, "I don't understand what to do, please try again.");
     }
 }

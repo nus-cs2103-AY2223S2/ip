@@ -29,14 +29,19 @@ public class MainWindow extends AnchorPane {
 
     private final Image userImage = new Image(Objects.requireNonNull(this
             .getClass()
-            .getResourceAsStream("/images/User.png")));
+            .getResourceAsStream("/images/User.jpg")));
     private final Image jarvisImage = new Image(Objects.requireNonNull(this
             .getClass()
             .getResourceAsStream("/images/Jarvis.jpg")));
 
+    /**
+     * Initialises MainWindow.
+     */
     @FXML
     public void initialize() {
+
         scrollPane.vvalueProperty().bind(chatContainer.heightProperty());
+        sendButton.getStyleClass().add("button");
     }
 
     public void setJarvis(Jarvis jarvis) {

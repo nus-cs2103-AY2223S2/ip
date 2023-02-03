@@ -59,10 +59,7 @@ public class Storage {
             }
             writer.close();
         } catch (IOException e) {
-            throw new TaskIoException(
-                    "Unable to save tasks",
-                    "I couldn't save your tasks."
-            );
+            throw new TaskIoException("Unable to save tasks");
         }
     }
 

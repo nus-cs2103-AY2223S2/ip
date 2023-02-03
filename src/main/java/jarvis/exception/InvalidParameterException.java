@@ -5,7 +5,7 @@ package jarvis.exception;
  */
 public class InvalidParameterException extends CommandParseException {
     public InvalidParameterException(String message) {
-        super(message);
+        super(message, "I don't understand the given information, please try again.");
     }
 
     public InvalidParameterException(String message, String friendlyMessage) {

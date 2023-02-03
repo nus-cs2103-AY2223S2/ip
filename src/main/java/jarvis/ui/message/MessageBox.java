@@ -12,6 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
@@ -19,6 +20,8 @@ import javafx.scene.shape.Circle;
  * Container class for a chat message.
  */
 public class MessageBox extends HBox {
+    @FXML
+    private VBox messageChat;
     @FXML
     private Label messageText;
     @FXML
@@ -42,6 +45,15 @@ public class MessageBox extends HBox {
 
         messageText.setText(message);
         displayPicture.setFill(new ImagePattern(image));
+    }
+
+    /**
+     * Initialises MessageBox.
+     */
+    @FXML
+    public void initialize() {
+        this.getStyleClass().add("message-box");
+        messageChat.getStyleClass().add("message-chat");
     }
 
     /**
