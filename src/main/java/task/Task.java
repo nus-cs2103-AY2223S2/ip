@@ -18,7 +18,7 @@ public class Task {
     }
     @Override
     public String toString() {
-        if (this.isMarked == true) {
+        if (this.isMarked) {
             return "[X] " + this.name;
         } else {
             return "[ ] " + this.name;
