@@ -28,6 +28,7 @@ public class Storage {
      * Initializes a {@code Storage} by retrieving the save {@code File} the given {@code Path}, if
      * the save {@code File} or directory {@code File} is missing, creates the respective empty
      * {@code File}s.
+     *
      * @param filePath {@code Path} for retrieving the save {@code File}.
      */
     public Storage(Path filePath) {
@@ -52,6 +53,7 @@ public class Storage {
     /**
      * Saves the given {@code TaskList} to the save {@code File} associated with the
      * {@code Storage}.
+     *
      * @param list {@code TaskList} to save to save {@code File}.
      * @throws SaveException if an error occurs with updating the {@code File}.
      */
@@ -70,6 +72,7 @@ public class Storage {
     /**
      * Returns an {@code ArrayList<Task>} loaded with the {@code Task}s stored in the associated
      * save {@code File}.
+     *
      * @return {@code ArrayList<Task>} loaded with the {@code Task}s stored in the associated save
      *         {@code File}.
      * @throws LoadException if an error occurs with loading the save {@code File}.

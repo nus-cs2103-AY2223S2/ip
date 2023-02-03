@@ -12,6 +12,7 @@ public abstract class Command {
     /**
      * Abstract method to be implemented by {@code Command} representing the execution of the
      * {@code Command}.
+     *
      * @param storage {@code Storage} associated with the {@code Command}.
      * @param list {@code TaskList} associated with the {@code Command}.
      * @param ui {@code Ui} associated with the {@code Command}.
@@ -24,6 +25,7 @@ public abstract class Command {
     /**
      * Returns {@code true} if a {@code Command} is an {@code ExitCommand}, else returns
      * {@code false}.
+     *
      * @return {@code true} if a {@code Command} is an {@code ExitCommand}, else returns
      *         {@code false}.
      */

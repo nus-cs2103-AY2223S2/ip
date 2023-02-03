@@ -7,6 +7,7 @@ package book.exception;
 public class BookException extends Exception {
     /**
      * Initializes a {@code BookException}.
+     *
      * @param message {@code String} message associated with the {@code BookException}.
      */
     public BookException(String message) {

@@ -15,6 +15,7 @@ public class Ui {
 
     /**
      * Returns the {@code String} welcome message for {@code Book}.
+     *
      * @return {@code String} welcome message for {@code Book}.
      */
     public static String showWelcome() {
@@ -23,6 +24,7 @@ public class Ui {
 
     /**
      * Returns the {@code String} exit message for {@code Book}.
+     *
      * @return {@code String} exit message for {@code Book}
      */
     public String showExit() {
@@ -32,6 +34,7 @@ public class Ui {
 
     /**
      * Returns the {@code String} message for adding a {@code Task} to {@code Book}.
+     *
      * @param task {@code Task} associated with the message.
      * @return {@code String} message for adding a {@code Task} to {@code Book}.
      */
@@ -41,6 +44,7 @@ public class Ui {
 
     /**
      * Returns the {@code String} message for deleting a {@code Task} from {@code Book}.
+     *
      * @param task {@code Task} associated with the message.
      * @return {@code String} message for deleting a {@code Task} from {@code Book}.
      */
@@ -50,6 +54,7 @@ public class Ui {
 
     /**
      * Returns the {@code String} message for marking a {@code Task} from {@code Book}.
+     *
      * @param task {@code Task} associated with the message.
      * @return {@code String} message for marking a {@code Task} from {@code Book}.
      */
@@ -59,6 +64,7 @@ public class Ui {
 
     /**
      * Returns the {@code String} message for marking a {@code Task} from {@code Book}.
+     *
      * @param task {@code Task} associated with the message.
      * @return {@code String} message for marking a {@code Task} from {@code Book}.
      */
@@ -69,6 +75,7 @@ public class Ui {
     /**
      * Returns the {@code String} message for showing the size of the {@code TaskList} in
      * {@code Book}.
+     *
      * @param list {@code TaskList} associated with the message.
      * @return {@code String} message for showing the size of the {@code TaskList} in
      *         {@code Book}.
@@ -79,6 +86,7 @@ public class Ui {
 
     /**
      * Returns the {@code String} message for showing the {@code TaskList} in {@code Book}.
+     *
      * @param list {@code TaskList} associated with the message.
      * @return {@code String} message for showing the {@code TaskList} in {@code Book}.
      */
@@ -88,19 +96,20 @@ public class Ui {
 
     /**
      * Returns the {@code String} message for showing the {@code Task}s matching the given
-     * {@code String} keyword
-     * in {@code TaskList} in {@code Book}.
+     * {@code String} keyword in {@code TaskList} in {@code Book}.
+     *
      * @param list {@code TaskList} associated with the message.
      * @param keyword {@code String} keyword associated with the message.
      * @return {@code String} message for showing the {@code Task}s matching the given
      *         {@code String} keyword
      */
     public String showMatchingTasksList(TaskList list, String keyword) {
-        return "Book found the following matching tasks stored:\n" + list.matchingTasks(keyword);
+        return "Book found the following matching tasks stored:\n" + list.findMatchingTasks(keyword);
     }
 
     /**
      * Returns the {@code String} the message for showing errors in the execution of {@code Book}.
+     *
      * @param message {@code String} message associated with the error.
      * @return {@code String} the message for showing errors in the execution of {@code Book}.
      */

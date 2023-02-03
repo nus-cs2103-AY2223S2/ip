@@ -13,6 +13,7 @@ public class TaskList {
 
     /**
      * Initializes a {@code TaskList} with the given {@code ArrayList<Task>}.
+     *
      * @param list {@code ArrayList<Task>} to initialize the {@code TaskList} with.
      */
 
@@ -29,6 +30,7 @@ public class TaskList {
 
     /**
      * Adds the given {@code Task} to the {@code TaskList}.
+     *
      * @param task {@code Task} to be added.
      */
     public void addTask(Task task) {
@@ -37,6 +39,7 @@ public class TaskList {
 
     /**
      * Returns the {@code Task} at the given {@code int} index.
+     *
      * @param index {@code int} index of {@code Task} to retrieve.
      * @return The {@code Task} at the given {@code int} index.
      */
@@ -47,6 +50,7 @@ public class TaskList {
     /**
      * Removes the {@code Task} associated with the given {@code int} index from the
      * {@code TaskList}.
+     *
      * @param index {@code int} index of {@code Task} to remove.
      * @return The removed {@code Task} at the given {@code int} index.
      */
@@ -56,6 +60,7 @@ public class TaskList {
 
     /**
      * Returns the {@code int} size of the {@code TaskList}.
+     *
      * @return the {@code int} size of the {@code TaskList}.
      */
     public int listSize() {
@@ -65,11 +70,12 @@ public class TaskList {
     /**
      * Returns the {@code String} representation of {@code Task}s matching the given {@code String}
      * keyword in {@code TaskList}.
+     *
      * @param keyword {@code String} keyword to match {@code Task}s in {@code TaskList}.
      * @return {@code String} representation of {@code Task}s matching the given {@code String}
      *         keyword in {@code TaskList}.
      */
-    public String matchingTasks(String keyword) {
+    public String findMatchingTasks(String keyword) {
         int index = 1;
         String listString = "";
         for (Task task : this.list) {
@@ -84,6 +90,7 @@ public class TaskList {
 
     /**
      * Returns the {@code String} representation of the {@code TaskList}.
+     *
      * @return {@code String} representation of the {@code TaskList}.
      */
     @Override

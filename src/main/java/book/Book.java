@@ -40,17 +40,18 @@ public class Book {
     /**
      * Passes any {@code String userInput} from the {@code Gui} to {@code Parser}, then executes
      * the returned {@code Command} and returns the resulting {@code String}.
+     *
      * @param userInput {@code String userInput} from the {@code Gui}.
      * @return {@code String} to be displayed on the {@code Gui}.
      */
     public String parseAndReturn(String userInput) {
         try {
             Command command = Parser.parse(userInput);
-            String returnFromCommand = command.execute(this.storage, this.list, this.ui);
+            String commandOutput = command.execute(this.storage, this.list, this.ui);
             if (command.isExit()) {
                 Platform.exit();
             }
-            return returnFromCommand;
+            return commandOutput;
         } catch (BookException exception) {
             return this.ui.showError(exception.getMessage());
         }
