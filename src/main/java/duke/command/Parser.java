@@ -35,7 +35,7 @@ public class Parser {
         } else if (command.equals("list")) {
             return new ListCommand();
         } else if (command.equals("find")) {
-            if (chunked.length != 1) {
+            if (chunked.length != 2) {
                 throw new DukeInvalidCommandException();
             } else {
                 return new FindCommand(chunked[1]);
