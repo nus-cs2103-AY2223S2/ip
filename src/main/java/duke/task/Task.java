@@ -17,6 +17,11 @@ public abstract class Task {
         this.description = description;
         this.isDone = false;
     }
+
+    /**
+     * Gets the status icon of a task to indicate if it is marked or not.
+     * @return An "X" or " " if it is marked or unmarked respectively.
+     */
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
@@ -29,5 +34,9 @@ public abstract class Task {
         this.isDone = false;
     }
 
+    /**
+     * Converts the task to a specified string format of [Symbol],[Marked/UnMarked],[Description],[Deadline if any] to save.
+     * @return String with the specified save format of a task.
+     */
     public abstract String saveTask();
 }

@@ -12,7 +12,12 @@ import java.time.format.DateTimeParseException;
 
 public class Parser {
 
-
+    /**
+     * Parses a string input specifying a Date and Time.
+     * @param dateTimeString string input specifying a Date and Time.
+     * @return A LocalDateTime object of the specified Date and TIme.
+     * @throws DukeException If the String input does not match the desired format of Date and Time.
+     */
     public static LocalDateTime parseDateTime (String dateTimeString) throws DukeException {
         DateTimeFormatter displayFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
         try {
@@ -22,6 +27,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses a string input specifying a Date.
+     * @param dateString String input specifying a Date.
+     * @return A LocalDate object of the specified Date.
+     * @throws DukeException if the String input does not match the desired format of Date.
+     */
     public static LocalDate parseDate (String dateString) throws DukeException {
         try {
             return LocalDate.parse(dateString);
@@ -29,6 +40,13 @@ public class Parser {
             throw new DukeException("Invalid deadline format! Please format it in <yyyy-MM-dd>");
         }
     }
+
+    /**
+     * Parses the entire String input by the user and determines what command the input represents.
+     * @param fullCommand String input specifying the type of command and its description.
+     * @return A Command Object specifying what command the String input is addressing.
+     * @throws DukeException If a task that the input is trying to add to the task list is invalid.
+     */
     public static Command parse(String fullCommand) throws DukeException {
         QueryType inputType = Query.queryType(fullCommand);
         String[] fullCommandArr = fullCommand.split(" ");

@@ -7,6 +7,11 @@ public class Query {
         this.input = input;
     }
 
+    /**
+     * Determines if a string consists of only numbers
+     * @param str String to check
+     * @return a boolean indicating whether the string is numeric or not.
+     */
     static boolean isNumeric(String str) {
         char[] charArray = str.toCharArray();
         for (char c : charArray) {
@@ -17,6 +22,11 @@ public class Query {
         return true;
     }
 
+    /**
+     * Returns an enumeration of QueryType that tells what type of command the input is.
+     * @param input String to check.
+     * @return A QueryType indicating the type of command.
+     */
     static QueryType queryType(String input) {
         if (input.equals("list")) {
             return QueryType.list;
