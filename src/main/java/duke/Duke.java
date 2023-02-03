@@ -52,6 +52,7 @@ public class Duke {
     public void run() {
         ui.showInitMessage();
         ui.showGreeting();
+        ui.makeSeperation();
         boolean isExit = false;
         while (!isExit) {
             try {
@@ -70,8 +71,30 @@ public class Duke {
         ui.makeSeperation();
     }
 
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        boolean isExit = false;
+        String ret = "";
+        System.out.println(input);
+        try {
+            Command c = Parser.parse(input);
+            ret = c.execute(tasks, ui, storage);
+            isExit = c.isExit();
+            System.out.println(ret);
+            return ret;
+        } catch (DukeException e) {
+            System.out.println("error: " + e);
+            ret = ui.showError(e.getMessage());
+        }
+        return ret;
+
     }
+
+    //public static void main(String[] args) {
+    //    new Duke("data/tasks.txt").run();
+    //}
 
 }

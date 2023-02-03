@@ -31,7 +31,7 @@ public class ToDo extends Task {
      */
     @Override
     public String getFileFormatString() {
-        //to be split using "|"
+        //to be split using "@"
         return "T" + "@" + this.isDone + "@" + this.description;
     }
 }

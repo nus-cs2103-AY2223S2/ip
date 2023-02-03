@@ -67,7 +67,7 @@ public class Event extends Task {
      */
     @Override
     public String getFileFormatString() {
-        //to be split using "|"
+        //to be split using "@"
         return "E" + "@" + this.isDone + "@" + this.description + "@"
                 + this.fromString + "@" + this.toString;
     }
