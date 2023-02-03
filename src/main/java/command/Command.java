@@ -15,6 +15,7 @@ public abstract class Command {
      * @return Command object that can be executed.
      */
     public static Command create(String[] commandWordContent) {
+        assert commandWordContent != null : "Command should not be null.";
         String commandWord = commandWordContent[0];
         String commandContent = commandWordContent[1];
         switch (commandWord) {

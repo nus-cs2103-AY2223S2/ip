@@ -11,8 +11,6 @@ import task.TaskList;
  * Duke chatbot that will respond to users' commands.
  */
 public class Duke {
-    private static final String GREETING = "Hallo Hallo niece and nephew! My name is Uncle Roger."
-            + "What you want?";
     private final Gui gui;
     private final Storage storage;
     private TaskList taskList;
@@ -22,7 +20,6 @@ public class Duke {
      */
     public Duke(Gui gui) {
         this.storage = new Storage("./data/taskList.txt");
-        this.taskList = new TaskList();
         this.gui = gui;
         gui.greet();
         try {
