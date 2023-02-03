@@ -17,7 +17,7 @@ public class Launcher {
         if (shouldLaunchCli(args)) {
             CliDuke.launch();
         } else {
-            DukeGui.run(args);
+            GuiDuke.launch(args);
         }
     }
 
