@@ -32,6 +32,7 @@ public abstract class UiComponent<T extends Node> {
      */
     public UiComponent(String filePath) {
         this.root = initialiseRoot(filePath);
+        assert root != null : "Root is not initialised";
     }
 
 
