@@ -31,18 +31,20 @@ public class FindCommand extends Command {
      * @param tl       - list of tasks.
      * @param ui       - interface.
      * @param storage  - harddisk store using textfile.
-     * @return boolean - returns true.
+     * @return String  - returns the result of the command execution.
      */
-    public boolean execute(TaskList tl, Ui ui, Storage storage) {
+    public String execute(TaskList tl, Ui ui, Storage storage) {
         for (Task task : tl.getTasks()) {
             if (task.getDescription().indexOf(keyword) != -1) { // keyword is found in the task
                 this.keywords.add(task);
             }
         }
-        System.out.println("Here are the matching tasks in your list: ");
+        StringBuilder res = new StringBuilder();
+        res.append("Here are the matching tasks in your list: \n");
+        int counter = 1;
         for (Task task : this.keywords) {
-            System.out.println(task);
+            res.append(counter++ + ". " + task + "\n");
         }
-        return true;
+        return res.toString();
     }
 }

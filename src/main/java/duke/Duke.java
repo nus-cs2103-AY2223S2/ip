@@ -1,4 +1,4 @@
-//Reference from the given code provided on CS2103 module website
+// Reference from the given code provided on CS2103 module website
 package duke;
 
 import duke.command.Command;
@@ -14,9 +14,11 @@ import duke.ui.Ui;
  */
 public class Duke {
 
+    private String res;
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+
 
     /**
      * Constructor for Duke.
@@ -27,41 +29,33 @@ public class Duke {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
+            res = "";
             tasks = storage.load();
         } catch (DukeException e) {
-            ui.showLoadingError(e.getMessage());
+            res = e.getMessage();
             tasks = new TaskList();
         }
     }
 
 
     /**
-     * Method that runs the chatbot based on the commands given.
+     * Function to get a response from the duke chatbot.
+     *
+     * @param fullCommand the command given by the user.
+     * @return String the result of the command.
      */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine();
-                Command.isValidCommand(fullCommand);
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                System.out.println(e);
-            } catch (IllegalArgumentException e) {
-                ui.showLoadingError("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-            } finally {
-                storage.updateStorage(tasks);
-                ui.showLine();
-            }
+    public String getResponse(String fullCommand) {
+        try {
+            Command.isValidCommand(fullCommand);
+            Command c = Parser.parse(fullCommand);
+            this.res = c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            this.res = e.getMessage();
+        } catch (IllegalArgumentException e) {
+            this.res = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+        } finally {
+            storage.updateStorage(tasks);
         }
-    }
-
-
-    public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
+        return this.res;
     }
 }

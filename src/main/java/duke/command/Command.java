@@ -13,12 +13,12 @@ public abstract class Command {
     /**
      * Abstract method to be used by the other commands from inherited class.
      *
-     * @param tl    - list of tasks.
+     * @param tl       - list of tasks.
      * @param ui       - interface.
      * @param storage  - harddisk store using textfile.
-     * @return boolean - true or false depending on the results.
+     * @return String  - returns the result of the command.
      */
-    public abstract boolean execute(TaskList tl, Ui ui, Storage storage);
+    public abstract String execute(TaskList tl, Ui ui, Storage storage);
 
     /**
      * Check if program needs to be exited from command bye.

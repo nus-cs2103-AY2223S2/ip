@@ -16,11 +16,10 @@ public class ByeCommand extends Command {
      * @param tl       - list of tasks.
      * @param ui       - interface.
      * @param storage  - harddisk store using textfile.
-     * @return boolean - returns true.
+     * @return String  - returns the result of the command execution.
      */
-    public boolean execute(TaskList tl, Ui ui, Storage storage) {
-        System.out.println("Bye. Hope to see you again soon!");
-        return true;
+    public String execute(TaskList tl, Ui ui, Storage storage) {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**

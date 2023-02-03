@@ -27,12 +27,11 @@ public class DeleteCommand extends Command {
      * @param tl       - list of tasks.
      * @param ui       - interface.
      * @param storage  - harddisk store using textfile.
-     * @return boolean - returns true.
+     * @return String  - returns the result of the command execution.
      */
-    public boolean execute(TaskList tl, Ui ui, Storage storage) {
+    public String execute(TaskList tl, Ui ui, Storage storage) {
         Task task = tl.removeTask(this.id - 1);
-        System.out.println("Noted. I've removed this duke.task:\n" + task
-                + "\n Now you have " + tl.getSize() + " tasks in the list.");
-        return true;
+        return "Noted. I've removed this duke.task:\n" + task
+                + "\n Now you have " + tl.getSize() + " tasks in the list.";
     }
 }

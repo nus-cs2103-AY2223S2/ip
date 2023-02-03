@@ -36,13 +36,12 @@ public class DeadlineCommand extends Command {
      * @param tl       - list of tasks.
      * @param ui       - interface.
      * @param storage  - harddisk store using textfile.
-     * @return boolean - returns true.
+     * @return String  - returns the result of the command execution.
      */
-    public boolean execute(TaskList tl, Ui ui, Storage storage) {
+    public String execute(TaskList tl, Ui ui, Storage storage) {
         Task task = new Deadline(this.activity, this.date, this.time);
         tl.addTask(task);
-        System.out.println("Got it. I've added this duke.task:\n" + task
-                + "\n Now you have " + tl.getSize() + " tasks in the list.");
-        return true;
+        return "Got it. I've added this duke.task:\n" + task
+                + "\n Now you have " + tl.getSize() + " tasks in the list.";
     }
 }
