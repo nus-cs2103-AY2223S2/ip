@@ -1,19 +1,20 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.*;
 
 public class Duke {
-  public static void main(String[] args) {
-    //        String logo = " ____        _        \n"
-    //                + "|  _ \\ _   _| | _____ \n"
-    //                + "| | | | | | | |/ / _ \\\n"
-    //                + "| |_| | |_| |   <  __/\n"
-    //                + "|____/ \\__,_|_|\\_\\___|\n";
-    //        System.out.println("Hello from\n" + logo);
+  public static void main(String[] args) throws IOException {
 
     String divider = "____________________________________________________________\n";
     System.out.println(divider + "Hello! I'm Duke");
     System.out.println("What can I do for you?\n" + divider);
 
-    ArrayList<Task> tasks = new ArrayList<>();
+    File prevTasks = new File("./data/tasks.txt");
+    FileHandler saveManager = new FileHandler(prevTasks);
+
+    ArrayList<Task> tasks = new ArrayList<>(saveManager.extractTasks());
+
     Scanner sc = new Scanner(System.in);
 
     while(sc.hasNext()) {
@@ -28,32 +29,35 @@ public class Duke {
           break;
 
         case "bye":   //Exit
+          saveManager.saveTasks(tasks);
           System.out.println(divider + "Bye. Hope to see you again soon!\n" + divider);
           return;
 
-          //Other single word commands go here.
 
         default:                                      //Instructions with arguments
           StringTokenizer tokens = new StringTokenizer(instr, " ");
           String action = tokens.nextToken(); //Splitting the action and args.
 
-          String keyword = "";  //keyword = argument(s) after the action.
+          StringBuilder keyword = new StringBuilder();  //keyword = argument(s) after the action.
           while(tokens.hasMoreTokens()) {
-            keyword = keyword + " " + tokens.nextToken();
+            keyword.append(" ")
+                    .append(tokens.nextToken());
           }
-          keyword = keyword.strip();
-          if(keyword.equals("")) {
+          keyword = new StringBuilder(keyword.toString()
+                                              .strip());
+          if(keyword.toString()
+                  .equals("")) {
             System.out.println(divider + "OOPS!!! The description of a " + action + " cannot be empty.\n" + divider);
           }
 
           switch(action) {                            //For instructions with argument(s).
             case "add":
-              tasks.add(new Task(keyword));
+              tasks.add(new Task(keyword.toString()));
               break;
 
             case "mark":
               try {
-                Task t1 = tasks.get(Integer.parseInt(keyword) - 1);
+                Task t1 = tasks.get(Integer.parseInt(keyword.toString()) - 1);
                 t1.mark();
                 System.out.println(divider + "Nice! I've marked this task as done:\n" + t1 + "\n" + divider);
               } catch(IndexOutOfBoundsException ioobe) {
@@ -66,7 +70,7 @@ public class Duke {
 
             case "unmark":
               try {
-                Task t2 = tasks.get(Integer.parseInt(keyword) - 1);
+                Task t2 = tasks.get(Integer.parseInt(keyword.toString()) - 1);
                 t2.unmark();
                 System.out.println(divider + "OK! I've marked this task as not done yet:\n" + t2 + "\n" + divider);
               } catch(IndexOutOfBoundsException ioobe) {
@@ -78,22 +82,24 @@ public class Duke {
               break;
 
             case "todo":
-              tasks.add(new Todo(keyword));
+              tasks.add(new Todo(keyword.toString()));
               break;
 
             case "deadline":
-              String[] deadlineFinder = keyword.split(" /by "); //Split keyword into description and date, separated by "/by".
-              keyword = deadlineFinder[0];
+              String[] deadlineFinder = keyword.toString()
+                      .split(" /by "); //Split keyword into description and date, separated by "/by".
+              keyword = new StringBuilder(deadlineFinder[0]);
               try {
                 String deadline = deadlineFinder[1];
-                tasks.add(new Deadline(keyword, deadline));
+                tasks.add(new Deadline(keyword.toString(), deadline));
               } catch(IndexOutOfBoundsException ioobe) {
                 System.out.println("Please define a deadline following the keyword '/by'.");
               }
               break;
 
             case "event":
-              String[] startFinder = keyword.split(" /from ");  //Split keyword into description and start,end.
+              String[] startFinder = keyword.toString()
+                      .split(" /from ");  //Split keyword into description and start,end.
               try{
                 String[] endFinder = startFinder[1].split(" /to "); //Split start,end into start and end.
                 tasks.add(new Event(startFinder[0], endFinder[0], endFinder[1]));
@@ -104,7 +110,7 @@ public class Duke {
 
             case "delete":
               try {
-                int deleteIdx = Integer.parseInt(keyword);
+                int deleteIdx = Integer.parseInt(keyword.toString());
                 tasks.remove(deleteIdx - 1);
               } catch(NumberFormatException nfe) {
                 System.out.println("Please enter the index number you wish to delete.");
