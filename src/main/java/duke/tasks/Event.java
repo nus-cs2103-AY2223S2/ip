@@ -7,12 +7,22 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Objects;
 
+/**
+ *  A task representing an event
+ */
 public class Event extends Task {
 
     protected LocalDateTime from;
     protected LocalDateTime to;
     private static final String tag = "E";
 
+    /**
+     *  Constructor for an event.
+     *
+     * @param description the description of the event
+     * @param from data and time of when event starts
+     * @param to data and time of when event ends
+     */
     public Event(String description, String from, String to) {
         super(description);
         try {
@@ -31,6 +41,11 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Returns the event in a formatted string to be saved locally.
+     *
+     * @return the event in string format
+     */
     public String saveTask() {
         String completed = this.isDone? "1":"0";
         return this.tag + " | " + completed + " | "
@@ -39,6 +54,11 @@ public class Event extends Task {
                 + " - " + this.to.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
     }
 
+    /**
+     * Returns the event in formatted string to be printed into console.
+     *
+     * @return the event in string format
+     */
     @Override
     public String toString() {
         return "[E]" + super.toString()
@@ -47,6 +67,11 @@ public class Event extends Task {
                 + ")" +"\n";
     }
 
+    /**
+     * Checks if an object is an event with the same description, from and to.
+     *
+     * @return boolean of whether an object is an event with the same description, from and to
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

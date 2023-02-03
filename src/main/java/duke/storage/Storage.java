@@ -7,15 +7,26 @@ import java.util.Scanner;
 import duke.tasks.Task;
 import duke.dukeexceptions.DukeExceptions;
 
+/**
+ * Class to abstract the interaction between local storage and program task list.
+ */
 public class Storage {
     private File file;
     private final String path;
 
+    /**
+     * Constructor for storage abstraction.
+     *
+     * @param path the data path where we will load and store the data
+     */
     public Storage(String path){
         this.path = path;
         fileSetup();
     }
 
+    /**
+     * Sets up file and directory if not present.
+     */
     public void fileSetup() {
         File directory = new File(path);
         try {
@@ -35,6 +46,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads locally stored data for program and returns it as a Tasklist.
+     *
+     * @return Loaded task list.
+     */
     public TaskList loadFile(){
         TaskList result = new TaskList();
         try {
@@ -50,6 +66,10 @@ public class Storage {
         return result;
     }
 
+    /**
+     * Stores a task list locally.
+     * @param taskList task list to be stored.
+     */
     public void save(TaskList taskList) {
         try {
             FileWriter fileWriter = new FileWriter(this.file);

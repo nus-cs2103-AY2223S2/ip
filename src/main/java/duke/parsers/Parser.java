@@ -3,7 +3,17 @@ import duke.commands.*;
 import duke.dukeexceptions.DukeExceptions;
 import duke.dukeexceptions.MissingArgumentException;
 
+/**
+ * Deals with making sense of the user command.
+ */
 public class Parser {
+
+    /**
+     * Parses a request to generate command.
+     *
+     * @param fullCommand content to be parsed
+     * @return A corresponding command.
+     */
     public static Command parse(String fullCommand) throws DukeExceptions{
         String[] splitStr = fullCommand.split(" ");
         String requestContent = fullCommand.split(" ", 2).length == 2
@@ -48,6 +58,9 @@ public class Parser {
             }
             int index = Integer.parseInt(requestContent.trim()) - 1;
             return new DeleteCommand(index);
+
+        case "find":
+            return new FindCommand(requestContent);
 
         default:
             return new UnknownCommand();

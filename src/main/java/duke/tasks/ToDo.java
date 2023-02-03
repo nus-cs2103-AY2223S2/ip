@@ -1,20 +1,25 @@
 package duke.tasks;
 
+/**
+ *  A task representing an to do.
+ */
 public class ToDo extends Task {
     private static final String tag = "T";
 
+    /**
+     *  Constructor for to do event with description
+     *
+     * @param description description of the to do task.
+     */
     public ToDo(String description) {
         super(description);
     }
 
-
-    public void ToDoReply(){
-        String reply = "  ________________________________\n"
-                + "  Got it. I've added this task:\n" + this.toString() + "\n"
-                + "  Got it. I've added this task:\n"
-                + "  ________________________________\n";
-    }
-
+    /**
+     * Returns the to do in a formatted string to be saved locally.
+     *
+     * @return the to do in string format
+     */
     public String saveTask() {
         String completed = this.isDone? "1":"0";
         return this.tag + " | " + completed + " | "

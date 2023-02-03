@@ -2,33 +2,68 @@ package duke.tasks;
 
 import java.util.Objects;
 
-public class Task {
+/**
+ * A task class that specific task inherit from.
+ */
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Constructor for a task with a description
+     *
+     * @param description the desctiption of the task
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
+    /**
+     * Returns a string denoting whether the task is done
+     *
+     * @return "X" for task that are done and "" for task that are not.
+     */
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
+    /**
+     * Sets a task to be done.
+     */
     public void setDone(){
         this.isDone = true;
     }
 
+    /**
+     * Sets a task to be not done.
+     */
     public void setNotDone(){
         this.isDone = false;
     }
 
-    public String saveTask() { return this.description; }
+    /**
+     * retrieves the description of the task.
+     *
+     * @return the description
+     */
+    public String getDescription() { return this.description; }
 
+    /**
+     * formats the task into a string to be saved locally
+     */
+    public abstract String saveTask();
+
+    /**
+     * decodes a task that has been formatted to be saved locally back into a task.
+     *
+     * @return the task that has been decoded
+     */
     public static Task decode(String taskString){
 //        System.out.println(taskString);
         String[] taskStringSplit = taskString.split(" \\| ",4);
-        Task currTask = new Task("ll");
+        //temporarily set the currTask to null.
+        Task currTask = null;
 
         switch(taskStringSplit[0]){
         case "T":

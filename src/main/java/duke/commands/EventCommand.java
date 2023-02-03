@@ -3,6 +3,9 @@ import duke.Ui;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 
+/**
+ * Command to add an event to a task list.
+ */
 public class EventCommand extends Command{
     private String requestContent;
     public EventCommand(String requestContent){

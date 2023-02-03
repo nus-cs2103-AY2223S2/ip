@@ -6,6 +6,9 @@ import duke.parsers.Parser;
 import duke.tasklist.TaskList;
 import duke.storage.Storage;
 
+/**
+ * The main duke program.
+ */
 public class Duke {
     private Storage storage;
     private TaskList taskList;
@@ -17,6 +20,9 @@ public class Duke {
         this.taskList = storage.loadFile();
     }
 
+    /**
+     * Begins the execution of the Duke program.
+     */
     public void run() {
         this.ui.showWelcome();
         boolean isExit = false;

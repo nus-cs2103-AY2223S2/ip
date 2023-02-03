@@ -8,11 +8,20 @@ import java.util.Objects;
 
 import duke.dukeexceptions.DukeExceptions;
 
+/**
+ * A task representing a deadline.
+ */
 public class Deadline extends Task {
 
     protected LocalDateTime by;
     private static final String tag = "D";
 
+    /**
+     * Constructor for a deadline.
+     *
+     * @param description the description of the deadline
+     * @param by the date and time of the due date
+     */
     public Deadline(String description, String by) {
         super(description);
         try {
@@ -25,6 +34,11 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Returns the deadline in a formatted string to be saved locally.
+     *
+     * @return the deadline in string format
+     */
     public String saveTask() {
         String completed = this.isDone? "1":"0";
         String formattedDate = by.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));

@@ -3,6 +3,9 @@ import duke.Ui;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 
+/**
+ * Command to add a "to do" task to a task list.
+ */
 public class ToDoCommand extends Command{
     private String requestContent;
 

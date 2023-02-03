@@ -3,6 +3,9 @@ import duke.Ui;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 
+/**
+ * Command to terminate program.
+ */
 public class EndCommand extends Command{
     public EndCommand(){
         super("END");
@@ -10,8 +13,7 @@ public class EndCommand extends Command{
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        String bye = "  Bye! have a great day";
-        System.out.println(bye);
+        ui.outro();
         return;
     }
 }

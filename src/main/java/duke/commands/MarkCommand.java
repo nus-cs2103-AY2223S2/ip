@@ -3,6 +3,9 @@ import duke.Ui;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 
+/**
+ * Command to mark a task as completed.
+ */
 public class MarkCommand extends Command {
     private int index;
 
