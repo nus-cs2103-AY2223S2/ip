@@ -119,13 +119,14 @@ public class Duke extends Application {
         Command command = CommandInput.getCommandFromInput(userInput.getText(), tasks);
         userInput.clear();
         try {
-            command.execute(this);
+            command.execute();
+            sendResponse(command.getResponse());
         } catch (CommandExecutionError e) {
             sendResponse("Couldn't execute command :/ \n" + e.toString());
         }
     }
 
-    public void sendResponse(String dukeResponse) {
+    private void sendResponse(String dukeResponse) {
         Label dukeTextLabel = new Label(dukeResponse);
         dialogContainer.getChildren().add(
             DialogBox.getDukeDialog(dukeTextLabel, new ImageView(duke)));

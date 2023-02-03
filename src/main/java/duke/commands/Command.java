@@ -1,6 +1,5 @@
 package duke.commands;
 
-import duke.Duke;
 import duke.exceptions.CommandExecutionError;
 import duke.tasks.TaskList;
 
@@ -11,6 +10,7 @@ public abstract class Command {
 
     protected TaskList taskList;
     protected String lineInput;
+    protected String response;
 
     /**
      * Constructor method.
@@ -24,5 +24,9 @@ public abstract class Command {
     }
 
     /** Performs the action according to the type of command. */
-    public abstract void execute(Duke duke) throws CommandExecutionError;
+    public abstract void execute() throws CommandExecutionError;
+
+    public String getResponse() {
+        return this.response;
+    }
 }

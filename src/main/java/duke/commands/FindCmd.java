@@ -1,6 +1,5 @@
 package duke.commands;
 
-import duke.Duke;
 import duke.Parser;
 import duke.exceptions.CommandExecutionError;
 import duke.tasks.TaskList;
@@ -18,11 +17,11 @@ public class FindCmd extends Command {
     }
 
     /** Searches for specified keyword in the task list */
-    public void execute(Duke duke) throws CommandExecutionError {
+    public void execute() throws CommandExecutionError {
         String[] findKeywords = Parser.parseFindKeyword(this.lineInput);
         this.findResult = this.taskList.find(findKeywords);
         
-        duke.sendResponse("Here are matching tasks in your list:\n" + this.findResult.toString());
+        this.response = "Here are matching tasks in your list:\n" + this.findResult.toString();
     }
 
     public TaskList getFindResult() {

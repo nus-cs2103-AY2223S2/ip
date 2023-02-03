@@ -2,7 +2,6 @@ package duke.commands;
 
 import java.io.IOException;
 
-import duke.Duke;
 import duke.Storage;
 import duke.Ui;
 import duke.exceptions.CommandExecutionError;
@@ -13,7 +12,7 @@ public class ByeCmd extends Command {
         super(taskList, lineInput);
     }
 
-    public void execute(Duke duke) throws CommandExecutionError {
+    public void execute() throws CommandExecutionError {
         Ui.shutDown();
         try {
             Storage.saveToFile(taskList);
@@ -21,6 +20,6 @@ public class ByeCmd extends Command {
         } catch (IOException e) {
             // Ui.showSavingError()
         }
-        duke.sendResponse("Bye. Hope to see you again soon!");
-    };
+        this.response = "Bye. Hope to see you again soon!";
+    }
 }

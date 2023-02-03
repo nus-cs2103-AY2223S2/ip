@@ -1,6 +1,5 @@
 package duke.commands;
 
-import duke.Duke;
 import duke.Ui;
 import duke.exceptions.CommandExecutionError;
 import duke.tasks.Deadline;
@@ -27,12 +26,12 @@ public class DeadlineCmd extends Command {
     }
 
     /** Adds the Deadline task to the task list. */
-    public void execute(Duke duke) throws CommandExecutionError {
+    public void execute() throws CommandExecutionError {
         this.deadline = Deadline.create(this.lineInput);
         taskList.add(this.deadline);
 
-        duke.sendResponse("Got it. I've added this task:\n"
+        this.response = "Got it. I've added this task:\n"
                 + Ui.indentString(this.deadline.toString(), 1)
-                + "\n" + Ui.numTaskToString(taskList.countTasks()));
+                + "\n" + Ui.numTaskToString(taskList.countTasks());
     };
 }

@@ -1,6 +1,5 @@
 package duke.commands;
 
-import duke.Duke;
 import duke.Parser;
 import duke.Ui;
 import duke.exceptions.CommandExecutionError;
@@ -26,12 +25,12 @@ public class DeleteCmd extends Command {
     }
 
     /** Deletes the specified task from the task list. */
-    public void execute(Duke duke) throws CommandExecutionError {
+    public void execute() throws CommandExecutionError {
         int index = Parser.parseMarkUnmarkDeleteIndex(lineInput);
         this.task = this.taskList.removeTask(index);
         
-        duke.sendResponse("Noted. I've removed this task:\n"
+        this.response = "Noted. I've removed this task:\n"
                 + Ui.indentString(this.task.toString(), 1) + "\n"
-                + Ui.numTaskToString(taskList.countTasks()));
+                + Ui.numTaskToString(taskList.countTasks());
     }
 }

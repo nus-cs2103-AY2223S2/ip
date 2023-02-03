@@ -1,6 +1,5 @@
 package duke.commands;
 
-import duke.Duke;
 import duke.Ui;
 import duke.exceptions.CommandExecutionError;
 import duke.tasks.Task;
@@ -26,12 +25,12 @@ public class ToDoCmd extends Command {
     }
 
     // Adds the ToDo task to the task list.
-    public void execute(Duke duke) throws CommandExecutionError {
+    public void execute() throws CommandExecutionError {
         this.toDo = ToDo.create(this.lineInput);
         taskList.add(this.toDo);
 
-        duke.sendResponse("Got it. I've added this task:\n"
+        this.response = "Got it. I've added this task:\n"
                 + Ui.indentString(this.toDo.toString(), 1)
-                + "\n" + Ui.numTaskToString(taskList.countTasks()));
+                + "\n" + Ui.numTaskToString(taskList.countTasks());
     };
 }
