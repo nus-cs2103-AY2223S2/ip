@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.exception.DukeException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -19,8 +21,16 @@ public class Events extends Task {
      * @param startTime   the time the task starts
      * @param endTime     the time the task ends
      */
-    public Events(String description, String startTime, String endTime) {
+    public Events(String description, String startTime, String endTime) throws DukeException {
         super(description);
+        if (startTime.length() <= 0) {
+            throw new DukeException("Check your Date!");
+        }
+        if (endTime.length() <= 0) {
+            throw new DukeException("Check your Date!");
+        }
+        assert (startTime.length() > 0);
+        assert (endTime.length() > 0);
         DateTimeFormatter formatterStart = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm ");
         this.startTime = LocalDateTime.parse(startTime, formatterStart);
         DateTimeFormatter formatterEnd = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");

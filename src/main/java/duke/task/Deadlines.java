@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.exception.DukeException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -16,8 +18,12 @@ public class Deadlines extends Task {
      * @param description What task to be kept track
      * @param date        date and time the task is due
      */
-    public Deadlines(String description, String date) {
+    public Deadlines(String description, String date) throws DukeException {
         super(description);
+        if (date.length() <= 0) {
+            throw new DukeException("No Date!");
+        }
+        assert (date.length() > 0);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
         this.date = LocalDateTime.parse(date, formatter);
 
