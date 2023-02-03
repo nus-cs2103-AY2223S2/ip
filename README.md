@@ -6,6 +6,7 @@ This is a project template for a greenfield Java project. It's named after the J
 
 Prerequisites: JDK 11, update Intellij to the most recent version.
 
+<<<<<<< Updated upstream
 1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
 1. Open the project into Intellij as follows:
    1. Click `Open`.
@@ -16,6 +17,24 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
 3. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
    ```
    Hello from
+=======
+Features:
+- [x] Managing tasks
+- [ ] Managing deadlines (coming soon)
+- [ ] Reminders (coming soon)
+---
+If you're a Java programmer, you can use it to practice Java too. Here's the `main` method:
+```java
+public class Main {
+    public static void main(String[] args) {
+        Application.launch(MainApp.class, args);
+    }
+}
+``` 
+---
+So what are you waiting for? Come say hello to
+```
+>>>>>>> Stashed changes
     ____        _        
    |  _ \ _   _| | _____ 
    | | | | | | | |/ / _ \
