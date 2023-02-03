@@ -31,6 +31,8 @@ public class Duke {
     public Duke(String dirPath) {
         this.guiText = new GuiText();
         this.storage = new Storage(dirPath);
+        assert this.guiText != null : "GuiText should not be null";
+        assert this.storage != null : "Storage should not be null";
         try {
             this.tasks = new TaskList(storage.load());
             MainWindow.changeSpriteExpression(SpriteEmotion.HAPPY);
@@ -50,6 +52,7 @@ public class Duke {
     public String runCommand(String command) {
         try {
             Command c = Parser.parseCommand(command);
+            assert c != null : "Command should not be null";
             this.isExit = c.isExit();
             return c.execute(this.tasks, this.guiText, this.storage);
         } catch (DukeException e) {

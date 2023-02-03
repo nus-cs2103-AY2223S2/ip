@@ -13,6 +13,8 @@ public class Event extends Task {
         super(name);
         this.from = LocalDate.parse(from);
         this.to = LocalDate.parse(to);
+        assert this.from != null : "From should not be null";
+        assert this.to != null : "To should not be null";
     }
 
     @Override

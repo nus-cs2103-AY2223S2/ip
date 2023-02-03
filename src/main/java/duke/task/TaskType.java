@@ -15,6 +15,7 @@ public enum TaskType {
                 return t;
             }
         }
+        assert false;
         return null;
     }
 }
