@@ -38,4 +38,26 @@ public class EitherTest {
         var expected = Either.left(40);
         assertEquals(expected.toString(), actual.toString());
     }
+
+    @Test
+    public void flatMapLeftFail() {
+        var actual = Either.left(20).flatMap(x -> Either.right("Error"));
+        var expected = Either.right("Error");
+        assertEquals(expected.toString(), actual.toString());
+    }
+
+    @Test
+    public void flatMapRightSuccess() {
+        var actual = Either.right("original error").flatMap(x -> Either.left(20));
+        var expected = Either.right("original error");
+        assertEquals(expected.toString(), actual.toString());
+    }
+
+    @Test
+    public void flatMapRightFail() {
+        var actual = Either.right("original error").flatMap(x -> Either.right("new error"));
+        var expected = Either.right("original error");
+        assertEquals(expected.toString(), actual.toString());
+
+    }
 }

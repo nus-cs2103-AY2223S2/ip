@@ -62,6 +62,8 @@ public class Result<T> {
 
     @Override
     public String toString() {
-        return this.result.toString();
+        return this.result.match(
+                pr -> String.format("Ok(%s, %s)", pr.first(), pr.second()),
+                msg -> String.format("Error(%s)", msg));
     }
 }
