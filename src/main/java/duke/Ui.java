@@ -23,68 +23,72 @@ public class Ui {
      * Shows all the tasks currently in the list and their status.
      *
      * @param tasks TaskList of current tasks.
+     * @return String of list of tasks
      */
-    public void showTasks(TaskList tasks) {
-        this.showSepLine();
-        System.out.println(tasks);
-        this.showSepLine();
+    public String showTasks(TaskList tasks) {
+        return tasks.toString();
     }
 
     /**
      * Prints the welcome screen of the app.
      */
-    public void showWelcome() {
+    public String showWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        this.showSepLine();
-        System.out.println("Hello! I'm Duke, what can I do for you?");
-        this.showSepLine();
 
-        this.showHelp();
+        return "Hello from\n" + logo + "\n" +
+                this.showSepLine() +
+                "Hello! I'm Duke, what can I do for you?\n" +
+                this.showSepLine() +
+                this.showHelp();
     }
 
     /**
      * Prints additional information on how to use each command.
+     *
+     * @return String of Help message
      */
-    public void showHelp() {
-        this.showSepLine();
-        System.out.println("Commands:");
-        System.out.println("Adding tasks: todo, event (requires date), deadline " +
-                "(requires date in yyyy-mm-dd format)");
-        System.out.println("To specify date, task description should be followed by" +
-                " /[date]");
-        System.out.println("Marking completion: mark (index), unmark (index)");
-        System.out.println("Removing tasks: remove (index)");
-        System.out.println("List all tasks: list");
-        System.out.println("Exit Duke: exit");
-        this.showSepLine();
+    public String showHelp() {
+        return "Commands:\n" +
+                "Adding tasks: todo, event (requires date), deadline " +
+                "(requires date in yyyy-mm-dd format)\n" +
+                "To specify date, task description should be followed by" +
+                " /[date]\n" +
+                "Marking completion: mark (index), unmark (index)\n" +
+                "Removing tasks: remove (index)\n" +
+                "List all tasks: list\n" +
+                "Exit Duke: exit";
     }
 
     /**
      * Prints a goodbye message.
+     *
+     * @return String of Goodbye message
      */
-    public void showGoodbye() {
-        System.out.println("Bye! Hope to see you again soon!");
+    public String showGoodbye() {
+        return "Bye! Hope to see you again soon!";
     }
 
     /**
      * Prints a separation line.
+     *
+     * @return String of a separation line.
      */
-    public void showSepLine() {
-        System.out.println("-----------------------------------------");
+    public String showSepLine() {
+        return "----------------------------\n";
     }
 
     /**
      * Prints an error message.
      *
      * @param message Error message
+     * @return String of error message
      */
-    public void showError(String message) {
-        System.out.println(message);
+    public String showError(String message) {
+        return message;
     }
 
     /**
@@ -92,10 +96,8 @@ public class Ui {
      *
      * @param message Loading error message.
      */
-    public void showLoadingError(String message) {
-        showSepLine();
-        System.out.println(message);
-        showSepLine();
+    public String showLoadingError(String message) {
+        return message;
     }
 
     /**
@@ -103,10 +105,11 @@ public class Ui {
      *
      * @param task Task that is added.
      * @param tasks Current TaskList
+     * @return String of details when a Task is added
      */
-    public void showAddTask(Task task, TaskList tasks) {
-        System.out.println("Added: " + task);
-        System.out.println("Now you have " + tasks.size() + " task(s) in the list.");
+    public String showAddTask(Task task, TaskList tasks) {
+        return "Added: " + task + "\n" +
+                "Now you have " + tasks.size() + " task(s) in the list.";
     }
 
     /**
@@ -114,34 +117,35 @@ public class Ui {
      *
      * @param task Task that is deleted.
      * @param tasks Current TaskList.
+     * @return String of details when a Task is deleted.
      */
-    public void showDeleteTask(Task task, TaskList tasks) {
-        System.out.println("Deleted: " + task);
-        System.out.println("Now you have " + tasks.size() + " task(s) in the list.");
+    public String showDeleteTask(Task task, TaskList tasks) {
+        return "Deleted: " + task + "\n" +
+                "Now you have " + tasks.size() + " task(s) in the list.";
     }
 
     /**
      * Prints details of when a Task in the list is marked.
      *
      * @param task Task that is marked.
+     * @return String of details when a Task is marked.
      */
-    public void showMarkTask(Task task) {
-        System.out.println("I've marked this task as done: " + task);
+    public String showMarkTask(Task task) {
+        return "I've marked this task as done: " + task;
     }
 
     /**
      * Prints details of when a Task in the list is unmarked.
      *
      * @param task Task that is unmarked.
+     * @return String of details when a Task is unmarked.
      */
-    public void showUnmarkTask(Task task) {
-        System.out.println("I've unmarked this task as done: " + task);
+    public String showUnmarkTask(Task task) {
+        return "I've unmarked this task as done: " + task;
     }
 
-    public void showFoundTasks(TaskList keywordTasks) {
-        this.showSepLine();
-        System.out.println("Here are the matching tasks in your list:");
-        System.out.println(keywordTasks);
-        this.showSepLine();
+    public String showFoundTasks(TaskList keywordTasks) {
+        return "Here are the matching tasks in your list:\n" +
+                keywordTasks;
     }
 }

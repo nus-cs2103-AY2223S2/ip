@@ -15,10 +15,10 @@ public class AddCommand extends Command{
      * @inheritDoc
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage){
+    public String execute(TaskList tasks, Ui ui, Storage storage){
         tasks.addTask(task);
         storage.save(tasks);
-        ui.showAddTask(task, tasks);
+        return ui.showAddTask(task, tasks);
     }
 
     /**

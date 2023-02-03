@@ -16,10 +16,10 @@ public class UnmarkCommand extends Command{
      * @inheritDoc
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task unmarkedTask = tasks.markTaskUndone(index);
         storage.save(tasks);
-        ui.showUnmarkTask(unmarkedTask);
+        return ui.showUnmarkTask(unmarkedTask);
     }
 
     /**
