@@ -41,12 +41,16 @@ public class Task {
         }
     }
 
+    public boolean contains(String subS){
+        return name.contains(subS);
+    }
+
     @Override
     public String toString(){
         if (isDone){
-            return this.inpString + " @ " + "1\n";
+            return this.inpString + "@" + "1\n";
         } else {
-            return this.inpString + " @ " + "0\n";
+            return this.inpString + "@" + "0\n";
         }
     }
 

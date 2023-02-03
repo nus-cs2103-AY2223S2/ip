@@ -65,6 +65,9 @@ public class Parser {
                 taskList.add(newEvent);
             } else if (inpArr[0].equals("delete")){ // need to handle exception
                 taskList.remove(Integer.parseInt(inpArr[1])-1);
+            } else if (inpArr[0].equals("find")) {
+                System.out.println("here ya go :)");
+                taskList.find(inpArr[1]);
             } else {
                 throw new DukeException("Invalid Input!");
             }
@@ -126,7 +129,7 @@ public class Parser {
     public static void fileInpProcessor(String[] dataArr){
         try {
             Parser.operationHandler(dataArr[0]);
-            if (dataArr[1].equals(" 1 ")) {
+            if (dataArr[1].equals("1")) {
                 Parser.operationHandler("mark " + Integer.toString(taskList.size()));
             }
         } catch (DukeException e){

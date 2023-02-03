@@ -4,14 +4,14 @@ import java.util.List;
 
 public class TaskList {
 
-    private static List<Task> toDoList = new ArrayList<>();
+    private List<Task> toDoList = new ArrayList<>();
 
     /**
      * Mark a Task as done, and output the task for the user to see.
      *
      * @param ind int the index of the task to be marked.
      */
-    public static void markDone(int ind){
+    public void markDone(int ind){
         toDoList.get(ind).markDone();
     }
 
@@ -20,7 +20,7 @@ public class TaskList {
      *
      * @param ind int the index of the task to be marked.
      */
-    public static void markUndone(int ind){
+    public void markUndone(int ind){
         toDoList.get(ind).markUndone();
     }
 
@@ -29,7 +29,7 @@ public class TaskList {
      *
      * @param task Task the task to be added.
      */
-    public static void add(Task task){
+    public void add(Task task){
         toDoList.add(task);
     }
 
@@ -38,7 +38,7 @@ public class TaskList {
      *
      * @param ind int the index of the task to be removed.
      */
-    public static void remove(int ind){
+    public void remove(int ind){
         toDoList.remove(ind);
     }
 
@@ -47,14 +47,14 @@ public class TaskList {
      *
      * @param ind int the index of the task to be extracted.
      */
-    public static Task get(int ind){
+    public Task get(int ind){
         return toDoList.get(ind);
     }
 
     /**
      * Output all the Tasks for user to see.
      */
-    public static void print(){
+    public void print(){
         for (int i = 0; i < toDoList.size(); i++){
             System.out.print(Integer.toString(i+1) + ". ");
             toDoList.get(i).printTask();
@@ -66,7 +66,17 @@ public class TaskList {
      *
      * @return int size of list.
      */
-    public static int size(){
+    public int size(){
         return toDoList.size();
+    }
+
+    public void find(String subS){
+        TaskList foundList = new TaskList();
+        for (int i = 0; i < toDoList.size(); i++){
+            if (toDoList.get(i).contains(subS)) {
+                foundList.add(toDoList.get(i));
+            }
+        }
+        foundList.print();
     }
 }
