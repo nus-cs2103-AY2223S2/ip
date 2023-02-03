@@ -24,8 +24,10 @@ public class Duke {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Gets the response in regards to user input.
+     *
+     * @param input User input.
+     * @return Response to user input.
      */
     public String getResponse(String input) {
         String[] descriptions = input.split(" ", 2);
