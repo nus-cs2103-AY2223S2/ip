@@ -43,21 +43,18 @@ public class Duke {
     */
     public void handleRequest() {
         while (true) {
-            try {
-                String fullcommand = ui.readCommand();
-                Command command = Parser.parse(fullcommand);
+            String fullcommand = ui.readCommand();
+            Command command = Parser.parse(fullcommand);
 
-                // Breaks when is an exit command
-                if (command.isExit()) {
-                    break;
-                }
-
-                // Executes command
-                command.execute(tasks, ui, storage);
-
-            } finally {
-                ui.showDivider();
+            // Breaks when is an exit command
+            if (command.isExit()) {
+                break;
             }
+
+            // Executes command
+            command.execute(tasks, ui, storage);
+
+            ui.showDivider();
         }
     }
 

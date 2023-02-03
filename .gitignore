@@ -17,3 +17,5 @@ bin/
 text-ui-test/EXPECTED-UNIX.TXT
 *.class
 text-ui-test/d2utmpf2mDdk
+.vscode
+.prettierrc.json
