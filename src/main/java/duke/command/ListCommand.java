@@ -18,7 +18,7 @@ public class ListCommand extends Command {
                                     + "[" + cur.getStatusIcon() + "] " + cur.getDescription());
                 } else {
                     System.out.println(taskList.getTasks().indexOf(cur) + 1 + ". [" + cur.getSymbol() + "] "
-                                        + "[" + cur.getStatusIcon() + "] "+ cur.getDescription()
+                                        + "[" + cur.getStatusIcon() + "] " + cur.getDescription()
                                         + " (" + cur.getDescription() + ")");
                 }
             }
