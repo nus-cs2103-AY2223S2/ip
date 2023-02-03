@@ -2,8 +2,8 @@ package lele.ui;
 
 import lele.task.Task;
 import lele.task.TaskList;
-
 import java.util.Scanner;
+import java.lang.StringBuilder;
 
 /**
  *  Handles what to show to the user in response
@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class Ui {
     private final String separator;
     private final Scanner sc;
-
+    private final StringBuilder sb;
     /**
      * Constructor to instantiate a String separator
      * and a Scanner instance to receive inputs.
@@ -21,6 +21,7 @@ public class Ui {
     public Ui () {
         this.separator = "____________________________________________________________";
         this.sc = new Scanner(System.in);
+        this.sb = new StringBuilder();
     }
 
     /**
@@ -74,6 +75,15 @@ public class Ui {
     }
 
     /**
+     * Helps to clear the strings contained in StringBuilder.
+     * More efficient compared to creating a new instance of string builder
+     * each time a function is called.
+     */
+    public void clearBuffer() {
+        this.sb.setLength(0);
+    }
+
+    /**
      * Prints to the command line the separator line.
      */
     public void showLine() {
@@ -96,26 +106,29 @@ public class Ui {
      *
      * @param message Receives the string from exception.
      */
-    public void showError(String message) {
-        System.out.println(message);
+    public String showError(String message) {
+        return message;
     }
 
     /**
      * Prints to the command line a message when the user inputs
      * bye.
      */
-    public void printBye() {
-        System.out.println("See yer again RUFF!");
+    public String printBye() {
+        return "See yer again RUFF!";
     }
 
     /**
      * Prints the list of tasks created by the user.
      *
      * @param taskList TaskList instance created by the user.
+     * @return Output to user.
      */
-    public void printTaskList(TaskList taskList) {
-        System.out.println("Here are the tasks in your list dawg:");
-        taskList.printList();
+    public String printTaskList(TaskList taskList) {
+        clearBuffer();
+        sb.append("Here are the tasks in your list dawg:\n");
+        sb.append(taskList.printList());
+        return sb.toString();
     }
 
     /**
@@ -124,11 +137,14 @@ public class Ui {
      *
      * @param taskList TaskList created by the user.
      * @param index The index of the task marked by the user.
+     * @return Output to user.
      */
-    public void printMarkStatus(TaskList taskList, int index) {
-        taskList.markStatus(index);
-        System.out.println("The task is marked, dawg");
-        System.out.println(taskList.getTask(index - 1));
+    public String printMarkStatus(TaskList taskList, int index) {
+        clearBuffer();
+        sb.append("The task is marked, dawg\n");
+        sb.append(taskList.getTask(index - 1));
+        sb.append("\n");
+        return sb.toString();
     }
 
     /**
@@ -137,23 +153,29 @@ public class Ui {
      *
      * @param taskList TaskList created by the user.
      * @param index The index of the task unmarked by the user.
+     * @return Output to user.
      */
-    public void printUnMarkStatus(TaskList taskList, int index) {
-        taskList.unMarkStatus(index);
-        System.out.println("Gotcha dawg, unmarked");
-        System.out.println(taskList.getTask(index - 1));
+    public String printUnMarkStatus(TaskList taskList, int index) {
+        clearBuffer();
+        sb.append("Gotcha dawg, unmarked\n");
+        sb.append(taskList.getTask(index - 1));
+        sb.append("\n");
+        return sb.toString();
     }
 
     /**
      * Prints the message for when a user adds a task.
      *
      * @param taskList TaskList created by the user.
-     * @param task The task to be added
+     * @param task The task to be added.
+     * @return Output to user.
      */
-    public void printAddTask(TaskList taskList, Task task) {
-        System.out.println("Gotcha, I've added:");
-        System.out.println("  " + task);
-        System.out.println("Now you have " + taskList.listSize() + " in the list!");
+    public String printAddTask(TaskList taskList, Task task) {
+        clearBuffer();
+        sb.append("Gotcha, I've added:\n");
+        sb.append("  " + task + "\n");
+        sb.append("Now you have " + taskList.listSize() + " in the list!\n");
+        return sb.toString();
     }
 
     /**
@@ -161,15 +183,20 @@ public class Ui {
      *
      * @param taskList TaskList created by the user.
      * @param task The task to be deleted.
+     * @return Output to user.
      */
-    public void printDelete(TaskList taskList, Task task) {
-        System.out.println("Removing your task? It's gone now RUFF:");
-        System.out.println("  " + task);
-        System.out.println("Now you have " + taskList.listSize() + " in the list!");
+    public String printDelete(TaskList taskList, Task task) {
+        clearBuffer();
+        sb.append("Removing your task? It's gone now RUFF:\n");
+        sb.append("  " + task + "\n");
+        sb.append("Now you have " + taskList.listSize() + " in the list!\n");
+        return sb.toString();
     }
 
-    public void printFind(TaskList taskList, String regex) {
-        System.out.println("Here are the matching tasks in your list:");
-        taskList.findTasks(regex);
+    public String printFind(TaskList taskList, String regex) {
+        clearBuffer();
+        sb.append("Here are the matching tasks in your list:\n");
+        sb.append(taskList.findTasks(regex));
+        return sb.toString();
     }
 }

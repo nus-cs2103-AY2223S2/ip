@@ -32,15 +32,16 @@ public class DeadlineCommand extends Command {
      * @param taskList Current task list instance.
      * @param ui Current ui instance.
      * @param storage Current storage instance.
+     * @return Output to user.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         try {
             taskList.addTasks(deadline);
             storage.updateStorage(taskList);
-            ui.printAddTask(taskList, deadline);
+            return ui.printAddTask(taskList, deadline);
         } catch  (IOException e) {
-            e.printStackTrace();
+            return e.getMessage();
         }
     }
 

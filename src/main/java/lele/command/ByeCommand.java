@@ -17,11 +17,11 @@ public class ByeCommand extends Command {
      * @param taskList Current task list instance.
      * @param ui Current ui instance.
      * @param storage Current storage instance.
+     * @return Output to user.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.printBye();
-
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        return ui.printBye();
     }
 
     /**

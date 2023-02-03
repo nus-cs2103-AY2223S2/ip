@@ -1,6 +1,6 @@
 package lele.task;
 
-
+import java.lang.StringBuilder;
 import java.util.ArrayList;
 
 /**
@@ -30,11 +30,14 @@ public class TaskList {
 
     /**
      * Prints the current list of tasks.
+     * @return Output to user.
      */
-    public void printList() {
+    public String printList() {
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < this.list.size(); i++) {
-            System.out.println((i+1) + "." + this.list.get(i));
+            sb.append((i+1) + "." + this.list.get(i) + "\n");
         }
+        return sb.toString();
     }
 
     /**
@@ -42,14 +45,17 @@ public class TaskList {
      * the regex of the query.
      *
      * @param regex The description to find.
+     * @return Output tasks to user.
      */
-    public void findTasks(String regex) {
+    public String findTasks(String regex) {
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < this.list.size(); i++) {
             Task task = this.list.get(i);
             if (this.list.get(i).getDescription().contains(regex)) {
-                System.out.println((i + 1) + "." + task);
+                sb.append((i + 1) + "." + task + "\n");
             }
         }
+        return sb.toString();
     }
 
     /**

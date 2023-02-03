@@ -31,12 +31,13 @@ public class TodoCommand extends Command {
      * @param ui Current ui instance.
      * @param storage Current storage instance.
      * @throws IOException An error with writing to storage.
+     * @return Output to user.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
             taskList.addTasks(todo);
             storage.updateStorage(taskList);
-            ui.printAddTask(taskList, todo);
+            return ui.printAddTask(taskList, todo);
     }
 
     /**
