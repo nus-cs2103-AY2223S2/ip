@@ -54,12 +54,13 @@ public class Ui {
         System.out.println("Hello from\n" + Ui.LOGO);
     }
     /**
-     * Prints out the greeting message and a line separation.
+     * Returns and prints the greeting message and a line separation.
      */
-    public void showGreeting() {
+    public static String showGreeting() {
         System.out.println("\tHello! I'm Duke\n"
                 + "\tWhat can I do for you?");
-        makeSeperation();
+        return "\tHello! I'm Duke\n"
+                + "\tWhat can I do for you?";
     }
     /**
      * Prints <code>Duke</code>'s marked-task message.
@@ -84,9 +85,9 @@ public class Ui {
      * Prints <code>Duke</code>'s added-task message.
      */
     public String showAddedTask(Task t, TaskList tl) {
-//        System.out.println("\tGot it. I've added this task:\n\t  " + t
-//                + "\n\t" + String.format("Now you have %d tasks in the list.",
-//                tl.getLength()));
+        System.out.println("\tGot it. I've added this task:\n\t  " + t
+                + "\n\t" + String.format("Now you have %d tasks in the list.",
+                tl.getLength()));
         return "\tGot it. I've added this task:\n\t  " + t
                 + "\n\t" + String.format("Now you have %d tasks in the list.",
                 tl.getLength());
@@ -116,6 +117,12 @@ public class Ui {
         System.out.println("\tBye. Hope to see you again soon!");
         return "\tBye. Hope to see you again soon!";
     }
+
+    /**
+     * Returns and prints a numbered list <code>String</code>.
+     * @param tasks <code>ArrayList</code> of <code>Task</code>s
+     * @return Formatted <code>String</code> of list of <code>Task</code>s
+     */
     public String showTaskListPretty(ArrayList<Task> tasks) {
         String toPrint = "";
         int i = 1;

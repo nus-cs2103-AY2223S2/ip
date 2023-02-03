@@ -52,7 +52,7 @@ public class Deadline extends Task {
 
     @Override
     public String getFileFormatString() {
-        //to be split using "|"
+        //to be split using "@"
         return "D" + "@" + this.isDone + "@" + this.description + "@" + this.byString;
     }
 }
