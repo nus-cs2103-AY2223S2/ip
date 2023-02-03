@@ -33,6 +33,18 @@ jobs:
       - name: Build and check with Gradle
         run: ./gradlew check
 
+      - name: Install Linux packages
+        if: runner.os == 'Linux'
+        run: sudo apt-get install dos2unix
+
+      - name: Install MacOS packages
+        if: always() && runner.os == 'macOS'
+        run: sudo brew install dos2unix
+
+      - name: Install Windows packages
+        if: always() && runner.os == 'Windows'
+        run: sudo apt-get install dos2unix
+
       - name: Perform IO redirection test (*NIX)
         if: runner.os == 'Linux'
         working-directory:  ${{ github.workspace }}/text-ui-test

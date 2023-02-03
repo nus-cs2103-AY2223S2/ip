@@ -26,8 +26,6 @@ fi
 
 java -classpath ../bin duke/Duke < input.txt > ACTUAL.TXT
 
-nix-env -i dos2unix
-
 # convert to UNIX format
 cp EXPECTED.TXT EXPECTED-UNIX.TXT
 dos2unix ACTUAL.TXT EXPECTED-UNIX.TXT
