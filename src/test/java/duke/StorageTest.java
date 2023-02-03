@@ -20,7 +20,6 @@ class StorageTest {
         Path path = tempDir.resolve("test.txt");
         Storage s = new Storage(path.toString());
         s.write("[T][ ] Buy groceries");
-        s.close();
 
         assertArrayEquals(Collections.singletonList("[T][ ] Buy groceries").toArray(), Files.readAllLines(path).toArray());
     }

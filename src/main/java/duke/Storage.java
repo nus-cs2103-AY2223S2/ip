@@ -1,6 +1,5 @@
 package duke;
 
-import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -13,10 +12,13 @@ import java.util.regex.Pattern;
  * , can be written to and read from.
  */
 class Storage {
-    private static final Pattern TO_MATCH = Pattern.compile("\\[(?<type>\\S)]\\[(?<done>[ X])] (?<arguments>.*)");
+    private static final Pattern TO_MATCH;
+
+    static {
+        TO_MATCH = Pattern.compile("[0-9]*\\. \\[(?<type>[DTH])]\\[(?<done>[ X])] (?<arguments>.*)");
+    }
+
     private final String fileName;
-    private FileWriter fw;
-    private File dataFile;
 
     /**
      * Creates a storage.
@@ -26,13 +28,12 @@ class Storage {
      */
     Storage(String fileName) throws IOException {
         this.fileName = fileName;
-        fw = new FileWriter(fileName, true);
     }
 
     /**
      * Reads file and returns TaskList.
      *
-     * @return TaskLitt.
+     * @return TaskList.
      * @throws IOException If file cannot be read.
      * @throws DukeException If file format is corrupted.
      */
@@ -45,7 +46,7 @@ class Storage {
             String s = sc.nextLine();
             Matcher matcher = TO_MATCH.matcher(s);
             if (!matcher.matches()) {
-                throw new DukeException("Task List is Corrupted!");
+                throw new DukeException("CorruptedTaskListException");
             }
             String taskType = matcher.group("type");
             boolean isDone = matcher.group("done").equals("X");
@@ -70,10 +71,9 @@ class Storage {
                 }
                 break;
             default:
-                throw new DukeException("Task List is Corrupted!");
+                throw new DukeException("CorruptedTaskListException");
             }
         }
-        System.out.println(tl.size());
         return tl;
     }
 
@@ -85,44 +85,8 @@ class Storage {
      * @throws IOException If I/O error occurs while writing.
      */
     void write(String s) throws IOException {
-        fw.write(s + '\n');
-        fw.flush();
-    }
-
-    /**
-     * Closes file.
-     *
-     * @throws IOException If I/O error occurs while closing.
-     */
-    void close() throws IOException {
+        FileWriter fw = new FileWriter(fileName);
+        fw.write(s);
         fw.close();
-    }
-
-    /**
-     * Checks if string matches format.
-     *
-     * @param s String to check.
-     * @return Boolean if string matches format.
-     */
-    boolean matchesFormat(String s) {
-        Matcher matcher = TO_MATCH.matcher(s);
-        return matcher.matches();
-    }
-
-    /**
-     * Creates file.
-     */
-    void createFile() {
-        File file = new File(fileName);
-        File directory = new File(file.getParent());
-        try {
-            directory.mkdir();
-            boolean fileCreated = file.createNewFile();
-            if (!fileCreated) {
-                System.out.println("Error: File already exists");
-            }
-        } catch (IOException e) {
-            System.out.println("Error: " + e);
-        }
     }
 }

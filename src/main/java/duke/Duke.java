@@ -1,11 +1,19 @@
 package duke;
 
-import java.util.Scanner;
-
 /**
  * This is Duke who initialises Joe the Java Bot!
  */
 public class Duke {
+
+    private static Joe joe;
+
+    public Duke() {
+        joe = new Joe();
+    }
+
+    static String handleResponse(String input) {
+        return joe.handleResponse(input);
+    }
 
     /**
      * Runs Joe, my java bot!
@@ -13,29 +21,26 @@ public class Duke {
      * @param args Input arguments, will be ignored.
      */
     public static void main(String[] args) {
-        Joe joe = new Joe();
-        Scanner sc = new Scanner(System.in);
-
-        String logo = "     |             \n"
-            + "     |  _ \\    _ \\ \n"
-            + " \\   | (   |   __/ \n"
-            + "\\___/ \\___/  \\___|\n";
-
-
+        String logo = "\t     |             \n"
+            + "\t     |  _ \\    _ \\ \n"
+            + "\t \\   | (   |   __/ \n"
+            + "\t\\___/ \\___/  \\___|\n";
 
         String greeting = "\tHello! I'm Joe\n\tWhat Can I do for you?";
 
-        System.out.println("Hello from\n" + logo);
-        Joe.printNewLine();
-        System.out.println(greeting);
-        Joe.printNewLine();
+        Ui.show("Hello from\n" + logo);
+        Ui.show(greeting);
 
         while (true) {
-            String output = joe.handleResponse(sc.nextLine());
+            String output = handleResponse(Ui.nextLine());
             if (output == null) {
-                System.out.println("Are you sure you inputted a correct response?");
+                Ui.show("Are you sure you inputted a correct response?");
+                continue;
             }
-            System.out.println(output);
+            Ui.show(output);
+            if (output.equals("\tBye. Hope to see you again soon!")) {
+                System.exit(0);
+            }
         }
     }
 

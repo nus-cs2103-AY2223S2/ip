@@ -6,12 +6,14 @@ public class DukeException extends Exception {
         super(msg);
     }
 
-    public static void rethrow(String s) throws ToDoException, UnknownCommandException {
+    public static void rethrow(String s) throws ToDoException, UnknownCommandException, CorruptedTaskListException {
         try {
             if (s.equals("ToDoException")) {
                 throw new ToDoException();
-            } else {
+            } else if (s.equals("UnkownCommandException")) {
                 throw new UnknownCommandException();
+            } else {
+                throw new CorruptedTaskListException();
             }
         } catch (Exception e) {
             throw e;
@@ -38,4 +40,13 @@ public class DukeException extends Exception {
         }
     }
 
+    static class CorruptedTaskListException extends Exception {
+        public CorruptedTaskListException() {
+            super("Task List is Corrupted!");
+        }
+
+        public CorruptedTaskListException(String msg) {
+            super(msg);
+        }
+    }
 }

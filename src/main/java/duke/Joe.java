@@ -20,38 +20,16 @@ class Joe {
         }
         parser = new Parser(taskList);
     }
+
     String handleResponse(String input) {
         String out = parser.parse(input);;
-        if (out.startsWith("added: ")) {
-            String t = out.split("added: ", 2)[1];
-            System.out.println(storage.matchesFormat(t));
-            if (storage.matchesFormat(t)) {
-                try {
-                    storage.write(t);
-                } catch (Exception e) {
-                    out = e.getMessage();
-                }
-            }
-        }
-        if (out.equals("")) {
-            out = sayBye();
+        try {
+            storage.write(parser.returnList(parser.getTaskList()));
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
         return out;
     }
 
-    
-    String sayBye() {
-        try {
-            storage.close();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        System.out.println("\tBye. Hope to see you again soon!");
-        System.exit(0);
-        return "";
-    }
-    public static void printNewLine() {
-        String newline = "\t____________________________________________________________";
-        System.out.println(newline);
-    }
+
 }

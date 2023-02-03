@@ -8,9 +8,15 @@ import java.util.stream.Collectors;
 class Parser {
 
     private TaskList taskList;
+
     Parser(TaskList taskList) {
         this.taskList = taskList;
     }
+
+    TaskList getTaskList() {
+        return taskList;
+    }
+
     String parse(String input) {
         if (input.equals("bye")) {
             return sayBye();
@@ -28,11 +34,13 @@ class Parser {
             return addTask(input)[1];
         }
     }
-    private String returnList(List<Task> taskList) {
+    String returnList(List<Task> taskList) {
         StringBuilder out = new StringBuilder();
-        for (int i = 1; i <= taskList.size(); i++) {
+        int size = taskList.size();
+        for (int i = 1; i < size; i++) {
             out.append(String.format("%d. %s\n", i, taskList.get(i - 1)));
         }
+        out.append(String.format("%d. %s", size, taskList.get(size - 1)));
         return out.toString();
     }
 
@@ -45,7 +53,7 @@ class Parser {
 
     private String unmark(String input) {
         int i = Integer.parseInt(input.split(" ", 2)[1]) - 1;
-        Task task = taskList.remove(i);
+        Task task = taskList.get(i);
         task.unmark();
         return String.format("\tNice! I've marked this task as not done yet:\n\t  %s", task);
     }
@@ -90,7 +98,6 @@ class Parser {
             case "d": {
                 DateTimeFormatter altFormatter = DateTimeFormatter.ofPattern("EEE, d MMM yyyy hh:mma");
                 String[] s = split[1].split(" by: ");
-                System.out.println(s[0]);
                 LocalDateTime byTime = LocalDateTime.parse(s[1], altFormatter);
                 Task task = new Deadline(s[0], byTime);
                 taskList.add(task);
@@ -98,7 +105,6 @@ class Parser {
             }
             case "deadline": {
                 String[] s = split[1].split(" /by ");
-                System.out.println(s[0]);
                 LocalDateTime byTime = LocalDateTime.parse(s[1], formatter);
                 Task task = new Deadline(s[0], byTime);
                 taskList.add(task);
@@ -128,7 +134,7 @@ class Parser {
             default:
                 DukeException.rethrow("UnknownCommand");
             }
-        } catch (DukeException.ToDoException | DukeException.UnknownCommandException e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
         return null;
