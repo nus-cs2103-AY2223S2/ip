@@ -13,6 +13,9 @@ import java.util.function.Function;
  * Handles user interactions and displaying of messages via a CLI.
  */
 public class Cli implements Ui {
+    private static final String MESSAGE_BORDER =
+            "    ______________________________________________________________________";
+
     private final PrintStream printStream;
     private final Scanner scanner;
 
@@ -52,8 +55,6 @@ public class Cli implements Ui {
 
     @Override
     public void print(String message) {
-        printStream.println("    ______________________________________________________________________");
-        printStream.printf("     %s\n", message.replace("\n", "\n     "));
-        printStream.println("    ______________________________________________________________________\n");
+        printStream.printf("%s\n     %s\n%s\n", MESSAGE_BORDER, message.replace("\n", "\n     "), MESSAGE_BORDER);
     }
 }
