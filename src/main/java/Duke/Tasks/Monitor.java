@@ -29,7 +29,7 @@ public class Monitor {
      */
     public void welcome() {
         String start = "    ____________________________________________________________\n" +
-                "     Yo this is Duke.Duke.\n" +
+                "     Yo this is Duke.\n" +
                 "     Give me something exciting to do.\n" +
                 "    ____________________________________________________________\n";
         System.out.println(start);
