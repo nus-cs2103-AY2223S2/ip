@@ -7,6 +7,11 @@ public class Task {
         this.isDone = false;
     }
 
+    public Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
+    }
+
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
@@ -17,6 +22,20 @@ public class Task {
 
     public void unmark() {
         this.isDone = false;
+    }
+
+
+
+    public static Task getDescriptionFromString(String description) {
+        String[] words = description.split("] ");
+        String newDescription = words[1];
+        String firstWord = words[0];
+        char marked = firstWord.charAt(firstWord.length()-1);
+        if (marked == 'X') {
+            return new Task(newDescription, true);
+        } else {
+            return new Task(newDescription, false);
+        }
     }
 
     @Override
