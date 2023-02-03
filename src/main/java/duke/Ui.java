@@ -2,6 +2,9 @@ package duke;
 
 import java.util.List;
 
+/**
+ * Handles the UI elements of chat-bot Duke.
+ */
 public class Ui {
 
     private String logo() {

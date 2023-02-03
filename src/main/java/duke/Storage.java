@@ -7,6 +7,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.LinkedList;
 
+/**
+ * Handles file operations.
+ */
 public class Storage {
 
     private Path filePath;

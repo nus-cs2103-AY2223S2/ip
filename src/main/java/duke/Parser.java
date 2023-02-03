@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Decodes the input base on the keyword the user input.
+ */
 public class Parser {
 
     protected static EventType parse(String input) throws DukeException {

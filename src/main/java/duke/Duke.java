@@ -2,6 +2,9 @@ package duke;
 
 import java.util.Scanner;
 
+/**
+ * The sequence of events for the chat-bot duke.
+ */
 public class Duke {
 
     private Scanner getInput;

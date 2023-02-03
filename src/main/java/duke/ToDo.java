@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * ToDo is a type of task which consist of the task details only.
+ */
 public class ToDo extends Task {
 
     public ToDo(String s) {

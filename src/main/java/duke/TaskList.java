@@ -4,6 +4,9 @@ import java.time.format.DateTimeParseException;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * List to store Task objects.
+ */
 public class TaskList {
 
     private List<Task> storedInputs;

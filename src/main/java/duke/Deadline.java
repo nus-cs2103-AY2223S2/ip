@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Deadline is a type of task which includes a due date.
+ * Deadline is a task which consist of the details and due date.
  */
 public class Deadline extends Task {
 

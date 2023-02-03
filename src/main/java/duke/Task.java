@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Base class for all tasks consisting of task details and status.
+ */
 public class Task {
     public static Integer count = 0;
 

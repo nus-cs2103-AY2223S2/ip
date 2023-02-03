@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Event is a type of task which includes a start and end date.
+ * Event is a type of task which includes the details, start date and end date.
  */
 public class Event extends Task {
 
