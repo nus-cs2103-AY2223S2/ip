@@ -46,6 +46,10 @@ public class Quest {
         isCompleted = false;
     }
 
+    public boolean hasKeyword(String keyword) {
+        return description.toLowerCase().contains(keyword.toLowerCase());
+    }
+
     /**
      * Returns the String representation of the quest.
      *

@@ -122,6 +122,22 @@ public class QuestLog {
     }
 
     /**
+     * Returns an ArrayList of quests in the Quest Log containing the given keyword.
+     *
+     * @param keyword The keyword to search for.
+     * @return An ArrayList of Quests whose description contains the given keyword.
+     */
+    public ArrayList<Quest> filterByKeyword(String keyword) {
+        ArrayList<Quest> result = new ArrayList<>();
+        for (Quest q : quests) {
+            if (q.hasKeyword(keyword)) {
+                result.add(q);
+            }
+        }
+        return result;
+    }
+
+    /**
      * Returns the String representation of every quest in the Quest Log.
      *
      * @return String representation of the Quest Log.

@@ -101,6 +101,13 @@ public class Parser {
                     }
                 }
                 break;
+            case "find":
+                if (splitInput.length == 1) {
+                    throw new PageException("Sorry, please include a keyword to search for.");
+                } else {
+                    ui.printFilteredQuestLog(questLog.filterByKeyword(splitInput[1]));
+                }
+                break;
             default:
                 ui.printInvalidInput();
                 break;
