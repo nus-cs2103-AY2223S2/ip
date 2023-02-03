@@ -33,4 +33,8 @@ public enum Commands {
     public String cmd() {
         return cmd;
     }
+
+    public int len() {
+        return cmd.length();
+    }
 }

@@ -62,25 +62,22 @@ public class Storage {
                 line = line.replace("[ ]", "");
                 line = line.replace("[X]", "");
                 if (line.startsWith(Commands.TODO.cmd())) {
-                    String title = line.substring(Commands.TODO.cmd().length());
+                    String[] parsed = Parser.handleTask(line);
+                    String title = parsed[0];
                     Task newTask = new Todo(title, isDone);
                     tasksList.add(newTask);
                 } else if (line.startsWith(Commands.DEADLINE.cmd())) {
-                    assert line.indexOf(Commands.BY.cmd()) != -1 : Views.MISSING_ARGS_ERR_STRING.eng();
-                    String title = line.substring(Commands.DEADLINE.cmd().length(),
-                            line.indexOf(Commands.BY.cmd()));
-                    Task newTask = new Deadline(title,
-                            line.substring(line.indexOf(Commands.BY.cmd())), isDone);
+                    String[] parsed = Parser.handleTask(line);
+                    String title = parsed[0];
+                    String deadline = parsed[1];
+                    Task newTask = new Deadline(title, deadline, isDone);
                     tasksList.add(newTask);
                 } else if (line.startsWith(Commands.EVENT.cmd())) {
-                    assert line.indexOf(Commands.FROM.cmd()) != -1 && line.indexOf(Commands.TO.cmd()) != -1
-                            : Views.MISSING_ARGS_ERR_STRING.eng();
-                    String title = line.substring(Commands.EVENT.cmd().length(),
-                            line.indexOf(Commands.FROM.cmd()));
-                    Task newTask = new Event(title,
-                            line.substring(line.indexOf(Commands.FROM.cmd()),
-                                    line.indexOf(Commands.TO.cmd())),
-                            line.substring(line.indexOf(Commands.TO.cmd())), isDone);
+                    String[] parsed = Parser.handleTask(line);
+                    String title = parsed[0];
+                    String from = parsed[1];
+                    String to = parsed[2];
+                    Task newTask = new Event(title, from, to, isDone);
                     tasksList.add(newTask);
                 }
             }
