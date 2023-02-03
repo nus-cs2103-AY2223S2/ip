@@ -1,8 +1,10 @@
 package duke.tasklist;
 
-import java.util.*;
-import duke.ui.Ui;
+import java.util.ArrayList;
+
 import duke.tasktypes.Task;
+import duke.ui.Ui;
+
 
 /**
  * Represents a collection of tasks.
@@ -38,75 +40,87 @@ public class TaskList {
     }
 
     /**
+     * Returns task has been added message.
      * Adds task to collection.
      * Informs User upon successful task addition.
      *
      * @param task Task instance to be added.
+     * @return Task has been added message.
      */
-    public void addTask(Task task) {
+    public String addTask(Task task) {
         this.taskStorage.add(task);
         numTasks++;
-        ui.taskAdd(task, numTasks);
+        return ui.taskAdd(task, numTasks);
     }
 
     /**
+     * Returns task has been deleted message.
      * Deletes task from collection.
      * Informs User upon successful task deletion.
      *
      * @param toDelete Integer index of task to be deleted.
+     * @return Task has been deleted message.
      */
-    public void deleteTask(int toDelete) {
+    public String deleteTask(int toDelete) {
         Task deleted = taskStorage.remove(toDelete - 1);
         numTasks--;
-        ui.taskDelete(deleted, numTasks);
+        return ui.taskDelete(deleted, numTasks);
     }
 
     /**
+     * Returns task has been marked done message.
      * Marks specified task in collection as complete.
      * Informs User upon successful operation.
      *
      * @param mark Integer index of task to be mark complete.
+     * @return Task has been marked done message.
      */
-    public void markTask(int mark) {
+    public String markTask(int mark) {
         Task marked = taskStorage.get(mark - 1);
         marked.setDone();
-        ui.markTaskDone(marked);
+        return ui.markTaskDone(marked);
     }
 
     /**
+     * Returns task has been unmarked message.
      * Unmarks specified task in collection as incomplete.
      * Informs User upon successful operation.
      *
      * @param unmark Integer index of task to be mark incomplete.
+     * @return Task has been unmarked message.
      */
-    public void unmarkTask(int unmark) {
+    public String unmarkTask(int unmark) {
         Task unmarked = taskStorage.get(unmark - 1);
         unmarked.setUndone();
-        ui.markTaskUndone(unmarked);
+        return ui.markTaskUndone(unmarked);
     }
 
     /**
+     * Returns String representation of tasks in Task collection.
      * Prints all current tasks in collection to standard output.
+     *
+     * @return String representaton of tasks in Task collection.
      */
-    public void printTasks() {
+    public String printTasks() {
         int count = 1;
-        System.out.println("Here are the tasks in your list:");
+        String output = "";
+        output += "Here are the tasks in your list:\n";
         for (Task task : taskStorage) {
-            String output = String.format("%d.%s", count++, task.toString());
-            System.out.println(output);
+            output += String.format("%d.%s", count++, task.toString()) + "\n";
         }
+        return output;
     }
 
     /**
      * Returns a new TaskList object containing tasks that matched given keyword.
      *
-     * @param keyword String keyword to be matched with task descriptions.
+     * @param keywords String array keywords to containing words to be matched with task descriptions.
      * @return Returns a new TaskList object containing matching tasks.
      */
-    public TaskList getMatchingTasks(String keyword) {
+    public TaskList getMatchingTasks(String[] keywords) {
         TaskList matchTasks = new TaskList(this.ui);
         for (Task task : this.taskStorage) {
-            if (task.matchKeyword(keyword)) {
+            if (task.matchKeywords(keywords)) {
                 matchTasks.loadTask(task);
             }
         }

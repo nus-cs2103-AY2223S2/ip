@@ -9,15 +9,15 @@ import duke.ui.Ui;
  */
 public class FindCommand extends Command {
 
-    private String keyword;
+    private String[] keywords;
 
     /**
      * Constructs a find using keyword command.
      *
      * @param toFind String keyword to matched with.
      */
-    public FindCommand(String toFind) {
-        this.keyword = toFind;
+    public FindCommand(String ... toFind) {
+        this.keywords = toFind;
     }
 
     @Override
@@ -27,18 +27,20 @@ public class FindCommand extends Command {
 
     /**
      * Lists all tasks that give a match with keyword.
+     * Returns String representation of tasks that matched keyword.
      *
      * @param tasks Tasklist object.
      * @param storage Storage object.
      * @param ui Ui Object.
+     * @return String representation of matching tasks.
      */
     @Override
-    public void execute(TaskList tasks, Storage storage, Ui ui) {
-        TaskList matchTasks = tasks.getMatchingTasks(this.keyword);
+    public String execute(TaskList tasks, Storage storage, Ui ui) {
+        TaskList matchTasks = tasks.getMatchingTasks(this.keywords);
         if (matchTasks.getNumTasks() == 0) {
-            ui.noMatchingTask();
+            return ui.noMatchingTask();
         } else {
-            ui.printTasks(matchTasks);
+            return ui.printTasks(matchTasks);
         }
     }
 }

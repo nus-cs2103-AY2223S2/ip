@@ -19,13 +19,15 @@ public class ListCommand extends Command {
 
     /**
      * Lists all existing tasks in task collection.
+     * Returns String representation of all existing tasks.
      *
      * @param tasks Tasklist object.
      * @param storage Storage object.
      * @param ui Ui Object.
+     * @return String representation of tasks in Task collection.
      */
     @Override
-    public void execute(TaskList tasks, Storage storage, Ui ui) {
-        ui.printTasks(tasks);
+    public String execute(TaskList tasks, Storage storage, Ui ui) {
+        return ui.printTasks(tasks);
     }
 }

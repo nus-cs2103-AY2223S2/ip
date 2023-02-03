@@ -3,9 +3,11 @@ package duke.tasktypes;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.time.format.FormatStyle;
+
+import duke.exceptions.DukeException;
 
 /**
  * Represents an Event Task.
@@ -34,34 +36,42 @@ public class Event extends Task {
      * @param start Starting time of Event.
      * @param end Ending time of Event
      */
-    public Event(String description, String start, String end) {
+    public Event(String description, String start, String end) throws DukeException {
         super(description);
         String[] startDateAndTime = start.split(" ");
         String startDate = startDateAndTime[0];
         String startTime = startDateAndTime[1];
-        startDate = startDate.replace('/','-');
+        startDate = startDate.replace('/', '-');
         this.forSavingStart = startDate + " " + startTime;
         startTime = startTime.substring(0, 2) + ':' + startTime.substring(2);
 
-        this.startDate = LocalDate.parse(startDate);
-        this.startTime = LocalTime.parse(startTime);
+        try {
+            this.startDate = LocalDate.parse(startDate);
+            this.startTime = LocalTime.parse(startTime);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Please enter your date and time in this format: yyyy/mm/dd HHMM");
+        }
         this.startDateTime = LocalDateTime.of(this.startDate, this.startTime);
-        this.startBy = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT).
-                format(this.startDateTime);
+        this.startBy = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT)
+                        .format(this.startDateTime);
 
 
         String[] endDateAndTime = end.split(" ");
         String endDate = endDateAndTime[0];
         String endTime = endDateAndTime[1];
-        endDate = endDate.replace('/','-');
+        endDate = endDate.replace('/', '-');
         this.forSavingEnd = endDate + " " + endTime;
         endTime = endTime.substring(0, 2) + ':' + endTime.substring(2);
 
-        this.endDate = LocalDate.parse(endDate);
-        this.endTime = LocalTime.parse(endTime);
+        try {
+            this.endDate = LocalDate.parse(endDate);
+            this.endTime = LocalTime.parse(endTime);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Please enter your date and time in this format: yyyy/mm/dd HHMM");
+        }
         this.endDateTime = LocalDateTime.of(this.endDate, this.endTime);
-        this.endBy = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT).
-                format(this.endDateTime);
+        this.endBy = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT)
+                        .format(this.endDateTime);
 
     }
 

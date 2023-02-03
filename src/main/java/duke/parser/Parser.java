@@ -3,25 +3,20 @@ package duke.parser;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import duke.command.Command;
-import duke.command.ExitCommand;
-import duke.command.ListCommand;
 import duke.command.AddCommand;
+import duke.command.Command;
 import duke.command.DeleteCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
 import duke.command.MarkCommand;
 import duke.command.UnmarkCommand;
-import duke.command.FindCommand;
-
 import duke.exceptions.DukeException;
-
 import duke.tasklist.TaskList;
-
 import duke.tasktypes.Deadline;
 import duke.tasktypes.Event;
 import duke.tasktypes.Task;
 import duke.tasktypes.ToDo;
-
-
 
 
 /**
@@ -57,13 +52,17 @@ public class Parser {
         case "unmark ":
             inputArr = fullCommand.split(" ");
             int toUnmark = Integer.parseInt(inputArr[1]);
+            if (toUnmark > tasks.getNumTasks()) {
+                throw new DukeException("Task does not exist! Please enter valid input!");
+            }
             return new UnmarkCommand(toUnmark);
-
         case "mark ":
             inputArr = fullCommand.split(" ");
             int toMark = Integer.parseInt(inputArr[1]);
+            if (toMark > tasks.getNumTasks()) {
+                throw new DukeException("Task does not exist! Please enter valid input!");
+            }
             return new MarkCommand(toMark);
-
         case "delete ":
             inputArr = fullCommand.split(" ");
             int toDelete = Integer.parseInt(inputArr[1]);
@@ -71,11 +70,12 @@ public class Parser {
                 throw new DukeException("Task does not exist! Please enter valid input!");
             }
             return new DeleteCommand(toDelete);
-
         case "find ":
             inputArr = fullCommand.split(" ", 2);
-            String toFind = inputArr[1];
+            String[] toFind = inputArr[1].split(" ");
             return new FindCommand(toFind);
+        default:
+            break;
         }
 
         validateTaskCommand(fullCommand, TASK_COMMANDS);
@@ -89,16 +89,16 @@ public class Parser {
         case "todo":
             task = new ToDo(inputArr[1]);
             break;
-
         case "deadline":
             newInputArr = inputArr[1].split(" /by ", 2);
             task = new Deadline(newInputArr[0], newInputArr[1]);
             break;
-
         case "event":
             newInputArr = inputArr[1].split(" /from ", 2);
             String[] newerInputArr = newInputArr[1].split(" /to ", 2);
             task = new Event(newInputArr[0], newerInputArr[0], newerInputArr[1]);
+            break;
+        default:
             break;
         }
 

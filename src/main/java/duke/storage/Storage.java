@@ -1,22 +1,18 @@
 package duke.storage;
 
-import duke.tasklist.TaskList;
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
 
+import duke.exceptions.DukeException;
+import duke.tasklist.TaskList;
 import duke.tasktypes.Deadline;
 import duke.tasktypes.Event;
 import duke.tasktypes.Task;
 import duke.tasktypes.ToDo;
-
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
-
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
-import java.util.List;
-
-
 import duke.ui.Ui;
 
 /**
@@ -79,13 +75,13 @@ public class Storage {
                 case "T":
                     task = new ToDo(taskSplit[2]);
                     break;
-
                 case "D":
                     task = new Deadline(taskSplit[2], taskSplit[3]);
                     break;
-
                 case "E":
                     task = new Event(taskSplit[2], taskSplit[3], taskSplit[4]);
+                    break;
+                default:
                     break;
                 }
 
@@ -104,17 +100,20 @@ public class Storage {
 
         } catch (IOException e) {
             ui.showError(e);
+        } catch (DukeException e) {
+            ui.showError(e);
         }
-
         return tasks;
     }
 
     /**
+     * Returns Tasks has been successfully saved message.
      * Saves existing tasks in TaskList into data file.
      *
      * @param tasks Updated TaskList with changes to be saved.
+     * @return Task has been saved message.
      */
-    public void save(TaskList tasks) {
+    public String save(TaskList tasks) {
         this.tasks = tasks;
 
         try {
@@ -133,10 +132,10 @@ public class Storage {
                 }
             }
             writer.close();
-            ui.saved();
+            return ui.saved();
 
         } catch (IOException e) {
-            ui.showError(e);
+            return ui.showError(e);
         }
     }
 

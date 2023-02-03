@@ -3,9 +3,11 @@ package duke.tasktypes;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.time.format.FormatStyle;
+
+import duke.exceptions.DukeException;
 
 /**
  * Represents a Deadline Task.
@@ -26,20 +28,23 @@ public class Deadline extends Task {
      * @param description Description of task.
      * @param by Ending time of task.
      */
-    public Deadline(String description, String by) {
+    public Deadline(String description, String by) throws DukeException {
         super(description);
         String[] dateAndTime = by.split(" ");
         String date = dateAndTime[0];
         String time = dateAndTime[1];
-        date = date.replace('/','-');
+        date = date.replace('/', '-');
         this.forSaving = date + " " + time;
         time = time.substring(0, 2) + ':' + time.substring(2);
-
-        this.byDate = LocalDate.parse(date);
-        this.byTime = LocalTime.parse(time);
+        try {
+            this.byDate = LocalDate.parse(date);
+            this.byTime = LocalTime.parse(time);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Please enter your date and time in this format: yyyy/mm/dd HHMM");
+        }
         this.byDateTime = LocalDateTime.of(this.byDate, this.byTime);
-        this.doneBy = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT).
-                format(this.byDateTime);
+        this.doneBy = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT)
+                        .format(this.byDateTime);
     }
 
     @Override
