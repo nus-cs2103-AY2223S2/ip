@@ -55,6 +55,7 @@ public class Parser {
             throw new UnknownCommandException();
         }
     }
+
     public Task translateFileToTaskList(String input) throws DukeExceptions {
         String[] splitInput = input.split(" \\| ");
         String taskType = splitInput[0];

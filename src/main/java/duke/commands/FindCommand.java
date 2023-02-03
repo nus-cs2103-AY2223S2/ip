@@ -30,7 +30,7 @@ public class FindCommand implements Command {
             }
         }
 
-        if(hasMatch) {
+        if (hasMatch) {
             ui.showMessage("here are the task(s) which match your query:" + sb.toString() + "\n");
         } else {
             ui.showMessage("looks like there aren't any tasks which match your query...\n");
