@@ -28,17 +28,17 @@ class Parser {
         String[] args = cmd.split("\\s+");
         switch (args[0]) {
         case "bye": {
-            return Handlers.bye();
+            return Handlers.getHandlerBye();
         }
         case "list": {
-            return Handlers.list();
+            return Handlers.getHandlerList();
         }
         case "todo": {
             String[] pair = cmd.split("\\s+", 2);
             if (pair.length < 2) {
                 throw new ChungusException("Description of todo cannot be empty.");
             }
-            return Handlers.todo(pair[1]);
+            return Handlers.getHandlerTodo(pair[1]);
         }
         case "deadline": {
             Matcher matcher = DEADLINE_PATTERN.matcher(cmd);
@@ -50,7 +50,7 @@ class Parser {
             String desc = matcher.group(1);
             LocalDateTime deadline = parseDateTimeInput(matcher.group(2));
 
-            return Handlers.deadline(desc, deadline);
+            return Handlers.getHandlerDeadline(desc, deadline);
         }
         case "event": {
             Matcher matcher = EVENT_PATTERN.matcher(cmd);
@@ -64,19 +64,19 @@ class Parser {
             LocalDateTime from = parseDateTimeInput(matcher.group(2));
             LocalDateTime to = parseDateTimeInput(matcher.group(3));
 
-            return Handlers.event(desc, from, to);
+            return Handlers.getHandlerEvent(desc, from, to);
         }
         case "mark": {
             int idx = getTaskNumberArg(args[1]) - 1;
-            return Handlers.mark(idx);
+            return Handlers.getHandlerMark(idx);
         }
         case "unmark": {
             int idx = getTaskNumberArg(args[1]) - 1;
-            return Handlers.unmark(idx);
+            return Handlers.getHandlerUnmark(idx);
         }
         case "delete": {
             int idx = getTaskNumberArg(args[1]) - 1;
-            return Handlers.delete(idx);
+            return Handlers.getHandlerDelete(idx);
         }
         case "find": {
             String[] pair = cmd.split("\\s+", 2);
@@ -84,10 +84,10 @@ class Parser {
             if (pair.length == 2) {
                 searchTerm = pair[1];
             }
-            return Handlers.find(searchTerm);
+            return Handlers.getHandlerFind(searchTerm);
         }
         default: {
-            return Handlers.unknown(args[0]);
+            return Handlers.getHandlerUnknown(args[0]);
         }
         }
     }
@@ -102,6 +102,7 @@ class Parser {
 
     private static int getTaskNumberArg(String s) {
         String[] xs = s.split("\\s+");
+        assert xs.length > 0;
         int num = Integer.parseInt(xs[xs.length - 1]);
         return num;
     }
