@@ -5,7 +5,7 @@ import java.time.format.DateTimeParseException;
 import duke.exception.DukeException;
 import duke.task.Event;
 import duke.task.TaskList;
-import duke.util.Ui;
+import duke.ui.Ui;
 
 /**
  * Executable command to create event task.
@@ -13,16 +13,16 @@ import duke.util.Ui;
  * @author Guo-KeCheng
  */
 public class EventCommand extends Command {
-    private String command;
-    private TaskList taskList;
-    private Ui ui;
+    private final String command;
+    private final TaskList taskList;
+    private final Ui ui;
 
     /**
      * EventCommand constructor
      *
-     * @param command Entire line of user input
+     * @param command  Entire line of user input
      * @param taskList Existing taskList
-     * @param ui Shared Ui object
+     * @param ui       Shared Ui object
      */
     public EventCommand(String command, TaskList taskList, Ui ui) {
         this.command = command;
@@ -38,7 +38,7 @@ public class EventCommand extends Command {
      * @throws DukeException if input is incorrect
      */
     @Override
-    public boolean execute() throws DukeException {
+    public String execute() throws DukeException {
         String taskName = getTaskName("event", command);
         String startDate = getStartDate(command);
         String endDate = getEndDate("event", command);
@@ -46,11 +46,10 @@ public class EventCommand extends Command {
         try {
             Event event = new Event(taskName, startDate, endDate);
             taskList.add(event);
-            ui.printAddedTask(event, taskList);
+            return ui.printAddedTask(event, taskList);
         } catch (DateTimeParseException e) {
-            ui.showInvalidTimeError();
+            return ui.showInvalidTimeError();
         }
 
-        return false;
     }
 }

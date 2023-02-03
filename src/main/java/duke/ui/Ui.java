@@ -1,4 +1,4 @@
-package duke.util;
+package duke.ui;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -36,12 +36,12 @@ public class Ui {
         System.out.println(line);
     }
 
-    public void showError(String message) {
-        System.out.println("    " + message);
+    public String showError(String message) {
+        return message;
     }
 
-    public void showInvalidTimeError() {
-        System.out.println("    ☹ OOPS!!! Invalid datetime. Syntax: YYYY-MM-DD");
+    public String showInvalidTimeError() {
+        return "☹ OOPS!!! Invalid datetime. Syntax: YYYY-MM-DD";
     }
 
     public String readCommand() throws DukeException {
@@ -60,8 +60,8 @@ public class Ui {
         }
     }
 
-    public void printTaskSaved() {
-        System.out.println("    Tasks saved successfully. ");
+    public String printTaskSaved() {
+        return "Tasks saved successfully.";
     }
 
     public void printTaskExistence() {
@@ -69,55 +69,56 @@ public class Ui {
         System.out.println("    Here are your existing tasks: ");
     }
 
-    public void printTask(Task task) {
-        System.out.println("    " + task);
+    public String printTask(Task task) {
+        return task.toString();
     }
 
-    public void printList(TaskList taskList) {
-        System.out.println("    Here are the tasks in your list: ");
+    public String printList(TaskList taskList) {
+        String output = "Here are the tasks in your list: \n";
 
         for (int i = 0; i < taskList.size(); i++) {
             Task toDo = taskList.get(i);
-            System.out.println("    " + (i + 1) + "." + toDo);
+            output += (i + 1) + "." + toDo + "\n";
         }
+
+        return output;
     }
 
-    public void printNoTaskWithKeywordFound(String keyword) {
-        System.out.printf("    Sorry. No tasks were found to contain '%s' keyword.", keyword);
-        System.out.println();
+    public String printNoTaskWithKeywordFound(String keyword) {
+        return String.format("Sorry. No tasks were found to contain '%s' keyword.", keyword);
     }
 
-    public void printFoundList(TaskList taskList) {
-        System.out.println("    Here are the matching tasks in your list: ");
+    public String printFoundList(TaskList taskList) {
+        String output = "Here are the matching tasks in your list: \n";
 
         for (int i = 0; i < taskList.size(); i++) {
             Task toDo = taskList.get(i);
-            System.out.println("    " + (i + 1) + "." + toDo);
+            output += (i + 1) + "." + toDo + "\n";
         }
+
+        return output;
     }
 
-    public void printMarkedTask(Task task) {
-        System.out.println("    Nice! I've marked this task as done:");
-        System.out.println("      " + task);
+    public String printMarkedTask(Task task) {
+        return "Nice! I've marked this task as done: \n" + task;
     }
 
-    public void printUnmarkedTask(Task task) {
-        System.out.println("    OK, I've marked this task as not done yet:");
-        System.out.println("      " + task);
+    public String printUnmarkedTask(Task task) {
+        return "OK, I've marked this task as not done yet: \n" + task;
     }
 
-    public void printDeletedTask(Task task) {
-        System.out.println("    Noted. I've removed this task:");
-        System.out.println("      " + task);
+    public String printDeletedTask(Task task) {
+        return "Noted. I've removed this task:\n" + task;
     }
 
-    public void printAddedTask(Task task, TaskList taskList) {
-        System.out.println("    Got it. I've added this task:");
-        System.out.println("      " + task);
-        System.out.println("    Now you have " + taskList.size() + " tasks in the list.");
+    public String printAddedTask(Task task, TaskList taskList) {
+        String output = "Got it. I've added this task: \n" + task + "\n";
+        output += "Now you have " + taskList.size() + " tasks in the list.";
+
+        return output;
     }
 
-    public void printBye() {
-        System.out.println("    Bye. Hope to see you again soon!");
+    public String printBye() {
+        return "Bye. Hope to see you again soon!";
     }
 }

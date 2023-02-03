@@ -12,6 +12,7 @@ import duke.command.TodoCommand;
 import duke.command.UnmarkCommand;
 import duke.exception.DukeException;
 import duke.task.TaskList;
+import duke.ui.Ui;
 
 /**
  * Parser class: handles user inputs

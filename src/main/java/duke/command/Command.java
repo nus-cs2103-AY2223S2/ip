@@ -14,7 +14,7 @@ public abstract class Command {
      * @ throws DukeException
      *
      */
-    public abstract boolean execute() throws DukeException;
+    public abstract String execute() throws DukeException;
 
     /*
      * getTaskName checks the command line for the correct taskName syntax

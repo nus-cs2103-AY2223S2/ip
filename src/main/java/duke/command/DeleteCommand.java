@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.exception.DukeException;
 import duke.task.TaskList;
-import duke.util.Ui;
+import duke.ui.Ui;
 
 /**
  * Executable command to delete specific task.
@@ -10,17 +10,17 @@ import duke.util.Ui;
  * @author Guo-KeCheng
  */
 public class DeleteCommand extends Command {
-    private String command;
-    private TaskList taskList;
-    private Ui ui;
+    private final String command;
+    private final TaskList taskList;
+    private final Ui ui;
 
 
     /**
      * DeleteCommand constructor
      *
-     * @param command Entire line of user input
+     * @param command  Entire line of user input
      * @param taskList Existing taskList
-     * @param ui Shared Ui object
+     * @param ui       Shared Ui object
      */
     public DeleteCommand(String command, TaskList taskList, Ui ui) {
         this.command = command;
@@ -33,22 +33,22 @@ public class DeleteCommand extends Command {
      * throws exception for wrong syntax and invalid task number
      */
     @Override
-    public boolean execute() throws DukeException {
+    public String execute() throws DukeException {
         String[] inputs = command.split(" ");
         if (inputs.length == 2) {
+            
             int ind = Integer.parseInt(inputs[1]) - 1;
             if (ind >= taskList.size() || ind < 0) {
                 throw new DukeException("☹ OOPS!!! Invalid task number :(");
             }
 
-            ui.printDeletedTask(taskList.get(ind));
-
             taskList.remove(ind);
+
+            return ui.printDeletedTask(taskList.get(ind));
 
         } else {
             throw new DukeException("Incorrect command: delete <valid task index>");
         }
 
-        return false;
     }
 }

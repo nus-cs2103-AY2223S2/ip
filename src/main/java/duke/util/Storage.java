@@ -11,6 +11,7 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.ToDo;
+import duke.ui.Ui;
 
 /**
  * Storage solely handles any activities related to storage
@@ -33,7 +34,7 @@ public class Storage {
      * Storage constructor
      *
      * @param filePath String representation of a filepath
-     * @param ui Shared Ui Object
+     * @param ui       Shared Ui Object
      */
     public Storage(String filePath, Ui ui) {
         this.filePath = filePath;

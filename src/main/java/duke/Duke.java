@@ -2,15 +2,26 @@ package duke;
 
 import java.io.FileNotFoundException;
 
+import duke.ui.DialogBox;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import javafx.scene.layout.Region;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.task.TaskList;
 import duke.util.Parser;
 import duke.util.Storage;
-import duke.util.Ui;
-
-
-
+import duke.ui.Ui;
 
 
 /**
@@ -21,14 +32,20 @@ public class Duke {
     private final Storage storage;
     private final Ui ui;
 
+    private ScrollPane scrollPane;
+    private VBox dialogContainer;
+    private TextField userInput;
+    private Button sendButton;
+    private Scene scene;
+
+
     /**
      * Duke class constructor
-     *
-     * @param filePath
      */
-    public Duke(String filePath) {
+    public Duke() {
         ui = new Ui();
         ui.printWelcome();
+        String filePath = "./data/duke.txt";
         storage = new Storage(filePath, ui);
         try {
             taskList = storage.load(filePath);
@@ -37,27 +54,19 @@ public class Duke {
         }
     }
 
+
     /**
-     * Read and process user commands
+     * Generate a response to user input.
      */
-    public void run() {
-        boolean isTerminate = false;
+    public String getResponse(String input) {
+        try {
+            ui.printLine();
+            Command cmd = Parser.parse(input, taskList, ui, storage);
+            return cmd.execute();
 
-        while (!isTerminate) {
-            try {
-                ui.printLine();
-
-                String input = ui.readCommand();
-                Command cmd = Parser.parse(input, taskList, ui, storage);
-                isTerminate = cmd.execute();
-
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            }
+        } catch (DukeException e) {
+            return ui.showError(e.getMessage());
         }
     }
 
-    public static void main(String[] args) {
-        new Duke("./data/duke.txt").run();
-    }
 }
