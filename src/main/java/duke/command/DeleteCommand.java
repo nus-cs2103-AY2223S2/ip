@@ -29,18 +29,19 @@ public class DeleteCommand extends Command {
      * @throws DukeException when user input does not comply with intended uses.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException, DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException, DukeException {
         if (taskIndex >= tasks.size()) {
             String errorMessage = String.format("Task %d does not exist!", taskIndex + 1);
             throw new DukeException(errorMessage);
         } else {
             Task task = tasks.get(this.taskIndex);
-            ui.showMessage("Ok, I've deleted the following task for you:");
-            ui.showMessage(task.toString());
+            String msg = "Ok, I've deleted the following task for you: \n";
+            msg += task.toString();
+            msg += "\n";
             tasks.remove(this.taskIndex);
-            String msg = String.format("You now have %d task(s) in your list!", tasks.size());
-            ui.showMessage(msg);
+            msg += String.format("You now have %d task(s) in your list! \n", tasks.size());
             storage.saveTasks(tasks.getTasks());
+            return msg;
         }
     }
 }
