@@ -7,9 +7,16 @@ import java.util.Scanner;
  */
 public class Duke {
 
+    /** Scanner object use to receive user inputs */
     private Scanner getInput;
+
+    /** Ui object to handle interactions with user */
     private Ui ui;
+
+    /** Storage object to deal with file operations */
     private Storage storage;
+
+    /** List to store all task */
     private TaskList taskList;
 
     private Duke(String filePath) {

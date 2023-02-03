@@ -12,6 +12,7 @@ import java.util.LinkedList;
  */
 public class Storage {
 
+    /** Stores filePath */
     private Path filePath;
 
     public Storage(String filePath) {

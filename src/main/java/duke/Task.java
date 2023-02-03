@@ -4,6 +4,7 @@ package duke;
  * Base class for all tasks consisting of task details and status.
  */
 public class Task {
+    /** Count total Tasks created */
     public static Integer count = 0;
 
     protected String taskName;
