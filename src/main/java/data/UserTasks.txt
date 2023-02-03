@@ -1,11 +1,3 @@
 Event,true,party,12/2/23 0600,12/2/23 1000
 Deadline,false,test program,25/12/23 1150
-Todo,false,test4
-Todo,true,work3
-Todo,false,hwlp
-Event,false,party,12/2/23 1800,12/2/23 2200
-Event,false,party,12/2/23 1800,12/2/23 2200
-Event,false,party,12/2/23 1800,12/2/23 2200
-Event,false,party,12/2/23 1800,12/2/23 2200
-Event,false,party,12/2/23 1800,12/2/23 2200
-Event,false,party,12/2/23 1800,12/2/23 2200
+Todo,false,work

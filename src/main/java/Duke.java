@@ -19,14 +19,14 @@ public class Duke extends Application {
      *
      * @param args
      */
-    public static void main(String[] args) {
-        WelcomeUI welcome = new WelcomeUI();
-        Scanner input = new Scanner(System.in);
-        ChatBot chat = new ChatBot(input, welcome);
-
-        chat.run();
-        input.close();
-    }
+//    public static void main(String[] args) {
+//        WelcomeUI welcome = new WelcomeUI();
+//        Scanner input = new Scanner(System.in);
+//        ChatBot chat = new ChatBot(input, welcome);
+//
+//        chat.run();
+//        input.close();
+//    }
 
     @Override
     public void start(Stage stage) {

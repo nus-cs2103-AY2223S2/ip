@@ -48,41 +48,28 @@ public class Parser {
 
         this.inputArr = ip.split(" ", 2);
 
-//        if (ip.isBlank()) {
-//            System.out.println("No command given, please give me one!");
-//        }
-
         String userCommand = inputArr[0];
 
         try {
             switch (userCommand) {
             case "list":
-                command = new ListCommand();
-                break;
+                return new ListCommand();
             case "bye":
-                command = new ByeCommand(fileManager);
-                break;
+                return new ByeCommand(fileManager);
             case "find":
-                command = new FindCommand(inputArr[1]);
-                break;
+                return new FindCommand(inputArr[1]);
             case "check":
-                command = new CheckCommand(inputArr[1]);
-                break;
+                return new CheckCommand(inputArr[1]);
             case "uncheck":
-                command = new UncheckCommand(inputArr[1]);
-                break;
+                return new UncheckCommand(inputArr[1]);
             case "delete":
-                command = new DeleteCommand(inputArr[1]);
-                break;
+                return new DeleteCommand(inputArr[1]);
             case "todo":
-                command = new TodoCommand(inputArr[1]);
-                break;
+                return new TodoCommand(inputArr[1]);
             case "event":
-                command = new EventCommand(inputArr[1]);
-                break;
+                return new EventCommand(inputArr[1]);
             case "deadline":
-                command = new DeadlineCommand(inputArr[1]);
-                break;
+                return new DeadlineCommand(inputArr[1]);
             case "":
                 throw new DukeException("No command given, please give me one!");
             default:
