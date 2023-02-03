@@ -13,22 +13,22 @@ public class TaskList {
     //private static final int GAPS = 3;
     private static final String GAP = "   ";
 
-    private final ArrayList<Task> tdl;
+    private final ArrayList<Task> tasks;
 
     /**
      * Constructs an empty list of tasks.
      */
     public TaskList() {
-        this.tdl = new ArrayList<>();
+        this.tasks = new ArrayList<>();
     }
 
     /**
      * Constructs a (special) list of the given tasks.
      *
-     * @param tdl A (not-so-special) list of tasks.
+     * @param tasks A (not-so-special) list of tasks.
      */
-    public TaskList(ArrayList<Task> tdl) {
-        this.tdl = tdl;
+    public TaskList(ArrayList<Task> tasks) {
+        this.tasks = tasks;
     }
 
     /**
@@ -37,7 +37,7 @@ public class TaskList {
      * @return The number of tasks.
      */
     public int getCount() {
-        return this.tdl.size();
+        return this.tasks.size();
     }
 
     /**
@@ -47,7 +47,7 @@ public class TaskList {
      * @return A confirmation message.
      */
     public String addTask(Task task) {
-        this.tdl.add(task);
+        this.tasks.add(task);
         return String.format("\"%s\" added!",
                 task.toString());
     }
@@ -72,9 +72,9 @@ public class TaskList {
         ArrayList<String> arr = new ArrayList<>();
 
         for (int i = 0; i < getCount(); i++) {
-            if (pred.test(this.tdl.get(i))) {
+            if (pred.test(this.tasks.get(i))) {
                 arr.add(String.format("%3d. %s",
-                        i + 1, this.tdl.get(i)));
+                        i + 1, this.tasks.get(i)));
             }
         }
 
@@ -119,12 +119,12 @@ public class TaskList {
     public String mark(int num) {
         int index = num - 1;
 
-        if (tdl.get(index).yesDo()) {
+        if (tasks.get(index).yesDo()) {
             return "Woohoo! You've completed:\n" + GAP
-                    + tdl.get(index).toString();
+                    + tasks.get(index).toString();
         } else {
             return "You've already done:\n" + GAP
-                    + tdl.get(index).toString();
+                    + tasks.get(index).toString();
         }
     }
 
@@ -138,12 +138,12 @@ public class TaskList {
     public String unmark(int num) {
         int index = num - 1;
 
-        if (tdl.get(index).noDo()) {
+        if (tasks.get(index).noDo()) {
             return "Aw, okay :( I've unmarked:\n" + GAP
-                    + tdl.get(index).toString();
+                    + tasks.get(index).toString();
         } else {
             return "Hm, you haven't yet done:\n" + GAP
-                    + tdl.get(index).toString();
+                    + tasks.get(index).toString();
         }
     }
 
@@ -155,7 +155,7 @@ public class TaskList {
      */
     public String delTask(int num) {
         return "Got it! Deleted:\n" + GAP
-                + tdl.remove(num - 1).toString();
+                + tasks.remove(num - 1).toString();
     }
 
     /**
@@ -164,7 +164,7 @@ public class TaskList {
      * @see cbot.task.Task#compareTo(Task)
      */
     public void sort() {
-        Collections.sort(tdl);
+        Collections.sort(tasks);
     }
 
     /**
@@ -177,12 +177,12 @@ public class TaskList {
     public String makeFileFriendly() {
         StringBuilder sb = new StringBuilder();
 
-        for (Task t : this.tdl) {
+        for (Task t : this.tasks) {
             sb.append(t.makeFileFriendly());
             sb.append("\n");
         }
 
-        if (!tdl.isEmpty()) {
+        if (!tasks.isEmpty()) {
             sb.deleteCharAt(sb.length() - 1);
         }
 

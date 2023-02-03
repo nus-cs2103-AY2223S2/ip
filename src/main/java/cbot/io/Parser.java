@@ -274,37 +274,49 @@ public class Parser {
 
             switch (this.text.toLowerCase()) {
             case "todo":
+                // Fallthrough
             case "td":
+                // Fallthrough
             case "t":
                 msg = "Ok! These are on your ToDo list:\n";
                 arrFilter = tl.listFilter(t -> t.getSymbol().equals(Task.TODO_SYMBOL));
                 break;
 
             case "deadline":
+                // Fallthrough
             case "dl":
+                // Fallthrough
             case "d":
                 msg = "Ok! Here are your Deadlines:\n";
                 arrFilter = tl.listFilter(t -> t.getSymbol().equals(Deadline.DEADLINE_SYMBOL));
                 break;
 
             case "event":
+                // Fallthrough
             case "ev":
+                // Fallthrough
             case "e":
                 msg = "Ok! Here are your Events:\n";
                 arrFilter = tl.listFilter(t -> t.getSymbol().equals(Event.EVENT_SYMBOL));
                 break;
 
             case "complete":
+                // Fallthrough
             case "done":
+                // Fallthrough
             case "completed":
+                // Fallthrough
             case "x":
                 msg = "Ok! Here are the Tasks you've completed:\n";
                 arrFilter = tl.listFilter(t -> t.getStatus().equals(Task.DONE_TRUE));
                 break;
 
             case "incomplete":
+                // Fallthrough
             case "not done":
+                // Fallthrough
             case "!done":
+                // Fallthrough
             case "undone":
                 msg = "Ok! Here are the Tasks you haven't completed yet:\n";
                 arrFilter = tl.listFilter(t -> !t.getStatus().equals(Task.DONE_TRUE));
