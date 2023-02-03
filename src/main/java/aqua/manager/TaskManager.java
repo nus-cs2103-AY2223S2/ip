@@ -12,6 +12,7 @@ import java.util.stream.Stream;
 
 import aqua.aquatask.AquaTask;
 import aqua.storage.Reloadable;
+import aqua.util.DateUtils;
 import aqua.util.FileUtils;
 
 /** Manager of tasks. */
@@ -63,11 +64,19 @@ public class TaskManager implements Reloadable {
 
 
     public List<AquaTask> filterWithin(LocalDateTime start, LocalDateTime end) {
-        return tasks.stream()
-                .filter(task ->
-                        task.getStart().map(end::isBefore).orElse(false)
-                        || task.getEnd().map(start::isAfter).orElse(false)
-                ).collect(Collectors.toList());
+        ArrayList<AquaTask> filteredTasks = new ArrayList<>();
+        for (AquaTask task : tasks) {
+            task.getStart()
+                    .flatMap(s ->
+                            task.getEnd().map(e ->
+                                    DateUtils.isIntersecting(s, e, start, end)))
+                    .ifPresent(isWithin -> {
+                        if (isWithin) {
+                            filteredTasks.add(task);
+                        }
+                    });
+        }
+        return filteredTasks;
     }
 
 

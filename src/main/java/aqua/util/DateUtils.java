@@ -61,4 +61,9 @@ public class DateUtils {
     public static String formatNice(LocalDateTime time) {
         return time.format(DateTimeFormatter.ofPattern("d LLL yyyy HHmm"));
     }
+
+
+    public static boolean isIntersecting(LocalDateTime s1, LocalDateTime e1, LocalDateTime s2, LocalDateTime e2) {
+        return !(s1.equals(e2) || e1.equals(s2) || s1.isAfter(e2) || e1.isBefore(s2));
+    }
 }
