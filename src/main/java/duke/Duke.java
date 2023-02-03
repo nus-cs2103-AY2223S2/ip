@@ -41,11 +41,6 @@ public class Duke {
                 taskList.size() + " tasks in the list:D";
     }
 
-    public String print_curr_taskList() {
-        return taskList.print_curr_tasks();
-    }
-
-
     public String mark_as_done(int index) throws DukeException {
         if (taskList.size() <= index) {
             throw new WrongIndexException();
