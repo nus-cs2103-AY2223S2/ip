@@ -1,11 +1,16 @@
 package tasks;
 
 import java.io.Serializable;
+import java.time.format.DateTimeFormatter;
 
 public class Task implements Serializable {
     private static final long serialVersionUID = 4048021127880559361L;
+
     boolean isDone = false;
     String description;
+
+    final DateTimeFormatter INPUT_DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    final DateTimeFormatter OUTPUT_DATE_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy");
 
     public Task(String description) {
         this.description = description;
