@@ -61,12 +61,14 @@ public class TaskList {
      * @param keyword
      * @return A task list containing tasks which contain the search keyword
      */
-    public TaskList find(String keyword) {
+    public TaskList find(String... keywords) {
         TaskList result = new TaskList();
         for (int i = 0; i < this.tasks.size(); i++) {
             Task curTask = this.tasks.get(i);
-            if (curTask.taskName.contains(keyword)) {
-                result.add(curTask);
+            for (String keyword : keywords) {
+                if (curTask.taskName.contains(keyword)) {
+                    result.add(curTask);
+                }
             }
         }
         return result;

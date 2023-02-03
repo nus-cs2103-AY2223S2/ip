@@ -19,8 +19,8 @@ public class FindCmd extends Command {
 
     /** Searches for specified keyword in the task list */
     public void execute() throws CommandExecutionError {
-        String findKeyword = Parser.parseFindKeyword(this.lineInput);
-        this.findResult = this.taskList.find(findKeyword);
+        String[] findKeywords = Parser.parseFindKeyword(this.lineInput);
+        this.findResult = this.taskList.find(findKeywords);
         uiReply();
     }
 
