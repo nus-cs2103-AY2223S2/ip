@@ -15,6 +15,13 @@ public class FindCommand implements Command {
         this.input = input;
     }
 
+    /**
+     * Finds Tasks in TaskList which match and contain a given query word.
+     *
+     * @param taskList the TaskList to be searched
+     * @param ui the Ui needed to display according messages
+     * @param storage the Storage used to update the save file
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeExceptions {
         String query = input.substring(5);
