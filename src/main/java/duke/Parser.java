@@ -5,6 +5,13 @@ package duke;
  */
 public class Parser {
 
+    /**
+     * Returns the event type associated to the user input
+     *
+     * @param input User input.
+     * @return EventType
+     * @throws DukeException If keyword is not recognised.
+     */
     protected static EventType parse(String input) throws DukeException {
         String[] arr = input.split(" ");
 
