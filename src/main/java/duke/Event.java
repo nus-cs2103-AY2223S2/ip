@@ -3,9 +3,15 @@ package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Event is a type of task which includes a start and end date.
+ */
 public class Event extends Task {
 
+    /** Start date of this task */
     private LocalDate startTime;
+
+    /** End date of this task */
     private LocalDate endTime;
 
     public Event(String s, String startTime, String endTime) {

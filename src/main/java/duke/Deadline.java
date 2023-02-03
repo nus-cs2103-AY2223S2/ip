@@ -3,15 +3,32 @@ package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Deadline is a type of task which includes a due date.
+ */
 public class Deadline extends Task {
 
+    /** Due date for this task */
     private LocalDate endTime;
 
+    /**
+     * Returns an instance of Deadline object mark undone.
+     *
+     * @param s Task details.
+     * @param endTime Task due date.
+     */
     public Deadline(String s, String endTime) {
         super(s);
         this.endTime = LocalDate.parse(endTime, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
 
+    /**
+     * Returns an instance of Deadline object.
+     *
+     * @param isTaskDone Task done status.
+     * @param taskDetails Task details.
+     * @param taskDate Task due date.
+     */
     public Deadline(Boolean isTaskDone, String taskDetails, String taskDate) {
         super(taskDetails);
         if (isTaskDone) {
