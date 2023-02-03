@@ -42,6 +42,7 @@ public class Ui {
      * @param task The created Task.
      */
     public String showTaskCreatedMessage(Task task) {
+        assert task != null : "Added task cannot be null!";
         return "Hey new task added!\n"
                 + task;
     }
