@@ -1,5 +1,6 @@
 package duke.command;
 import duke.task.*;
+import duke.UI;
 
 /**
  * Executes the task creation commands stored in the command queue, by parsing the user input.
@@ -35,7 +36,6 @@ public class TaskCreationCommands extends Commands {
             task = new Todo(desc, false);
         }
         list.addTask(task);
-        System.out.println("Got it. I've added this task: \n" + task);
-        System.out.println("Now you have " + list.getTaskCount() + " tasks in the list.");
+        UI.addUI(task.toString(), list.getTaskCount());
     }
 }

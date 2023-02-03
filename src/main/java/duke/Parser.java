@@ -2,7 +2,7 @@ package duke;
 
 import duke.command.*;
 import duke.exception.DukeException;
-import duke.exception.InsufficientAruments;
+import duke.exception.InsufficientArguments;
 import duke.exception.UnknownCommand;
 import duke.task.TaskList;
 
@@ -33,7 +33,7 @@ public class Parser {
                     queue.add(new Find(input));
                 } else if (input.matches("^deadline\\s.*$") || input.matches("^event\\s.*$") || input.matches("^todo\\s.*$")) {
                     if (input.split(" ").length < 2) {
-                        throw new InsufficientAruments("OOPS!!! The description of a " +
+                        throw new InsufficientArguments("OOPS!!! The description of a " +
                                 input.split(" ")[0] + " cannot be empty.");
                     } else {
                         queue.add(new TaskCreationCommands(input)); //if the command is a valid task creation command

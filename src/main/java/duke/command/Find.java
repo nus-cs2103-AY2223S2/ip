@@ -1,6 +1,7 @@
 package duke.command;
 import duke.task.TaskList;
 import duke.task.Tasks;
+import duke.UI;
 
 /**
  * Implements the find task functionality.
@@ -21,10 +22,9 @@ public class Find extends Commands{
         String item = substrings[1];
         TaskList foundTasks = tasks.findTask(item);
         if (foundTasks.getTaskCount() == 0) {
-            System.out.println("Sorry, there is no such tasks.");
+            UI.noTaskFoundUI();
         } else {
-            System.out.println("Here are the matching tasks in your list:");
-            foundTasks.listTasks();
+            UI.taskFoundUI(foundTasks);
         }
     }
 }

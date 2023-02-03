@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.task.TaskList;
+import duke.UI;
 
 /**
  * This class marks a particular task in the task list as done.
@@ -21,7 +22,6 @@ public class Mark extends Commands {
         int taskNumber = Character.getNumericValue(content.charAt(content.length() - 1));
         taskNumber -= 1;
         tasks.markTask(taskNumber, true);
-        System.out.println("Nice! I've marked this task as done:\n" + "[" + tasks.getTaskIcon(taskNumber)
-                + "] " + tasks.getTaskContent(taskNumber));
+        UI.markTaskCompleted(tasks, taskNumber);
     }
 }
