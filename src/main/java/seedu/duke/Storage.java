@@ -22,7 +22,7 @@ public class Storage {
      * referenced from https://stackoverflow.com/a/28620461
      */
     public Storage() {
-        String path = System.getProperty("user.dir") + System.getProperty("file.separator") + "lists";
+        String path = System.getProperty("user.dir") + System.getProperty("file.separator");
         File directory = new File(path);
         if (!directory.exists()) {
             File taskList = new File(path, "taskList.txt");
@@ -35,7 +35,7 @@ public class Storage {
             }
         } else {
             String filePath = System.getProperty("user.dir") + System.getProperty("file.separator")
-                    + "lists" + System.getProperty("file.separator") + "taskList.txt";
+                    + System.getProperty("file.separator") + "taskList.txt";
             File save = new File(filePath);
             if (!save.exists()) {
                 File taskList = new File(path, "taskList.txt");
