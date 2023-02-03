@@ -19,10 +19,9 @@ public class Task {
     }
 
     /**
-     * Another Constructor.
-     *
-     * @param description Description of the task.
-     * @param isDone Status to show if the task is done.
+     * Another Constructor
+     * @param description
+     * @param isDone
      */
     public Task(String description, boolean isDone) {
         this.description = description;
