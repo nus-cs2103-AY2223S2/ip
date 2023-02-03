@@ -42,7 +42,7 @@ public class Deadline extends Task {
         }
         String[] descriptionArr = inputArr[1].split("/"); //split task from due date
         if (descriptionArr.length == 1 || descriptionArr[0].isEmpty()) {
-            throw new DukeException("Please include a deadline in the following format: '/yyyy-MM-dd'");
+            throw new DukeException("Please include a description or a deadline in the following format: '/yyyy-MM-dd'");
         }
         this.description = descriptionArr[0];
         LocalDate inputFormatter = Parser.parseDate(descriptionArr[1]);

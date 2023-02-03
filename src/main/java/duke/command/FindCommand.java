@@ -19,7 +19,7 @@ public class FindCommand extends Command {
         if (foundTasks.size() == 0) {
             ui.showMessage("We could not find any matching tasks.");
         } else {
-            ui.showMessage();
+            ui.showMessage("Here are the matching tasks in your list: ");
             for (Task foundTask : foundTasks) {
                 if (foundTask instanceof Todo) {
                     ui.showMessage(foundTasks.indexOf(foundTask) + 1 + ". [" + foundTask.getSymbol() + "] "
