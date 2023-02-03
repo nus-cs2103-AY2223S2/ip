@@ -104,7 +104,18 @@ public class Ui {
      *         {@code String} keyword
      */
     public String showMatchingTasksList(TaskList list, String keyword) {
-        return "Book found the following matching tasks stored:\n" + list.findMatchingTasks(keyword);
+        return "Book found the following matching tasks stored:\n"
+                + list.findMatchingTasks(keyword);
+    }
+
+    /**
+     * Returns the {@code String} message for showing the sorted {@code TaskList} in {@code Book}.
+     *
+     * @param list {@code TaskList} associated with the message.
+     * @return {@code String} message for showing the sorted {@code TaskList} in {@code Book}.
+     */
+    public String showSortedList(TaskList list) {
+        return "Book sorted your tasks:\n" + list;
     }
 
     /**

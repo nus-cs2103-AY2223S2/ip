@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * Abstract class representing a {@code Task}.
  */
-public abstract class Task {
+public abstract class Task implements Comparable<Task> {
     /** {@code DateTimeFormatter} storing the format for printing {@code LocalDateTime}. */
     protected static DateTimeFormatter printFormat = DateTimeFormatter.ofPattern("dd MMM '('EEE')' - hh:mma");
     /** {@code DateTimeFormatter} storing the format for saving {@code LocalDateTime}. */
@@ -56,6 +56,22 @@ public abstract class Task {
      */
     public boolean containsKeyword(String keyword) {
         return this.description.contains(keyword);
+    }
+
+    /**
+     * Compares two {@code Task} instances lexicographically, based on their {@code String}
+     * description.
+     *
+     * @param task the {@code Task} object to be compared.
+     * @return {@code int 0} if the {@code String} descriptions are equal, an {@code int} value
+     *         less than {@code 0} if the {@code String} description is lexicographically less than
+     *         the {@code String} description of the {@code Task} argument, and an {@code int}
+     *         value greater than {@code 0} if the description is lexicographically greater than
+     *         the {@code String} description of the {@code Task} argument.
+     */
+    @Override
+    public int compareTo(Task task) {
+        return this.description.compareTo(task.description);
     }
 
     /**

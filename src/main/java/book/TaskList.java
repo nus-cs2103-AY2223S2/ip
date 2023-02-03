@@ -1,6 +1,7 @@
 package book;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import book.task.Task;
 
@@ -86,6 +87,13 @@ public class TaskList {
             }
         }
         return listString;
+    }
+
+    /**
+     * Sorts the {@code Task}s in {@code TaskList}.
+     */
+    public void sortTaskList() {
+        Collections.sort(list);
     }
 
     /**
