@@ -1,6 +1,10 @@
 package task;
 public class ToDo extends Task {
 
+    /**
+     * Constructor
+     * @param description
+     */
     public ToDo(String description) {
         super(description);
     }
