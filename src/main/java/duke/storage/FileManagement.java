@@ -99,15 +99,15 @@ public class FileManagement {
         String des = components[2];
         Task decoded = null;
         switch (command) {
-            case "todo":
-                decoded = new ToDo(des);
-                break;
-            case "deadline":
-                decoded = new Deadline(des, components[3]);
-                break;
-            case "event":
-                decoded = new Event(des, components[3], components[4]);
-                break;
+        case "todo":
+            decoded = new ToDo(des);
+            break;
+        case "deadline":
+            decoded = new Deadline(des, components[3]);
+            break;
+        case "event":
+            decoded = new Event(des, components[3], components[4]);
+            break;
         }
         if (toMark.equals("true")) {
             decoded.markTask();
