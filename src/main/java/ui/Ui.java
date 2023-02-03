@@ -1,5 +1,7 @@
 package ui;
+
 import java.time.format.DateTimeFormatter;
+
 import tasklist.TaskList;
 import task.Task;
 
@@ -7,7 +9,6 @@ public class Ui {
     final static String ENTRY_OUTPUT = "Hello! I'm Duke\nWhat can I do for you?";
     final static String BYE_OUTPUT = "Bye. Hope to see you again soon!";
     final static DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy/MM/d HHmm");
-
     final static DateTimeFormatter outputFormatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
     public boolean isClosed;
     public Ui() {

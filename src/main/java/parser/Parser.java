@@ -13,8 +13,6 @@ import task.ToDo;
 import task.Deadline;
 import task.Event;
 
-
-
 public class Parser {
     final static String EXIT_COMMAND = "bye";
     final static String LIST_COMMAND = "list";
@@ -26,8 +24,6 @@ public class Parser {
     final static String EVENT_COMMAND = "event";
     final static DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy/MM/d HHmm");
     final static DateTimeFormatter outputFormatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
-
-
 
     public void parse(String input, Ui ui, TaskList list) throws IOException {
         try {
