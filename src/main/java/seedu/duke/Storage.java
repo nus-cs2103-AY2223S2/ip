@@ -70,6 +70,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the TaskList into a save file
+     * @param ls The TaskList to be saved
+     * @throws IOException When the save file cannot be written to
+     */
     public static void saveList(TaskList ls) throws IOException {
         ArrayList<Task> tasks = ls.getList();
         BufferedWriter writer = new BufferedWriter(new FileWriter("./data/duke.txt"));
