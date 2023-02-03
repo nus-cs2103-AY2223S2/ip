@@ -2,21 +2,18 @@ package duke;
 
 import duke.exception.DukeException;
 
-import java.util.Scanner;
-
 public class Ui {
+    private TaskList tasks;
     private static final String GREETINGS_MESSAGE = "Hello! I'm Duke\nWhat can I do for you?";
     private static final String GOODBYE_MESSAGE = "Bye. Hope to see you soon!";
 
-    boolean acceptCommand(TaskList tasks) throws DukeException {
-        Scanner sc = new Scanner(System.in);
-        String command = sc.nextLine();
-        if (command.equals("bye")) {
-            return true;
-        }
+    public Ui(TaskList tasks) {
+        this.tasks = tasks;
+    }
+
+    String acceptCommand(String command) throws DukeException {
         String printable = Parser.processCommand(command, tasks);
-        System.out.println(display(printable));
-        return false;
+        return display(printable);
     }
 
     void showGreetingsMessage() {

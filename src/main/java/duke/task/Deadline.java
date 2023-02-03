@@ -3,7 +3,7 @@ package duke.task;
 import java.time.LocalDateTime;
 
 public class Deadline extends Task {
-    LocalDateTime doneBy;
+    private LocalDateTime doneBy;
 
     /**
      * Constructor for Deadline.

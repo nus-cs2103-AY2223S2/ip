@@ -1,6 +1,6 @@
 package duke.exception;
 public class DukeException extends Exception {
-    String errorMessage;
+    private String errorMessage;
 
     /**
      * DukeException constructor.

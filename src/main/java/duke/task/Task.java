@@ -29,7 +29,7 @@ public abstract class Task {
     public void undoTask() {
         this.isDone = false;
     }
-    String formatDateTime (LocalDateTime dateTime) {
+    String formatDateTime(LocalDateTime dateTime) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
         return dateTime.format(formatter);
     }

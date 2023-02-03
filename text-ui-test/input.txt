@@ -5,7 +5,6 @@ list
 todo
 event project meeting /from Mon 2pm /to 4pm
 unmark 1
-mark 2
 blah
 list
 bye

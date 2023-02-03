@@ -1,5 +1,9 @@
 package duke;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+
 import duke.exception.DukeException;
 import duke.exception.EmptyTaskDescriptionException;
 import duke.exception.InvalidCommandException;
@@ -8,10 +12,10 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-
+/**
+ * A parser that deals with user input and transforms them into
+ * a form that can be processed.
+ */
 public class Parser {
     static String processCommand(String command, TaskList tasks) throws DukeException {
         String[] commandArr = command.split(" ");
@@ -33,7 +37,8 @@ public class Parser {
     static String parseCommand(String command, TaskList tasks) throws DukeException {
         String[] commandArr = command.split(" ");
         String taskType = commandArr[0];
-        String description; Task task;
+        String description;
+        Task task;
         switch (taskType) {
         case "todo":
             if (commandArr.length == 1) {
@@ -49,7 +54,8 @@ public class Parser {
             task = new Deadline(description, parseDateTime(doneByString));
             break;
         case "event":
-            int startIndex = command.indexOf("/from"), endIndex = command.indexOf("/to");
+            int startIndex = command.indexOf("/from");
+            int endIndex = command.indexOf("/to");
             description = command.substring(6, startIndex - 1);
             String startString = command.substring(startIndex + 6, endIndex - 1);
             String endString = command.substring(endIndex + 4);

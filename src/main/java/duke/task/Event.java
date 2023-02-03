@@ -3,8 +3,8 @@ package duke.task;
 import java.time.LocalDateTime;
 
 public class Event extends Task {
-    LocalDateTime start;
-    LocalDateTime end;
+    private LocalDateTime start;
+    private LocalDateTime end;
 
     /**
      * Constructor for Event.
