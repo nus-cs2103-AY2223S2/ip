@@ -9,8 +9,8 @@ import duke.utilities.Ui;
  */
 public class ByeCommand extends Command {
 
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.showMessage("Exiting...");
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        return "Exiting...";
     }
 
     public boolean isByeCommand() {

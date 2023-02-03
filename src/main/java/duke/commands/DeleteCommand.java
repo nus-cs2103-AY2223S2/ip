@@ -27,7 +27,7 @@ public class DeleteCommand extends Command {
      *
      * @throws DukeInvalidDeleteCommandException If the {@code delete} command is invalid.
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage)
+    public String execute(TaskList taskList, Ui ui, Storage storage)
             throws DukeInvalidDeleteCommandException {
 
         if (tokens.length != 2) {
@@ -48,9 +48,10 @@ public class DeleteCommand extends Command {
 
         // need to convert back to 0-indexed
         Task deletedTask = taskList.deleteTask(taskNumber - 1);
-        ui.showMessage("Deleted:\n" + deletedTask.toString());
-        ui.showNumberOfTasks(taskList.getSize());
         storage.saveTaskList(taskList);
+
+        String numTasksString = ui.formatNumberOfTasksAsString(taskList.getSize());
+        return "Deleted:\n" + deletedTask + "\n" + numTasksString;
     }
 
     public boolean isByeCommand() {

@@ -28,7 +28,7 @@ public class EventCommand extends Command {
      *
      * @throws DukeInvalidEventCommandException If the {@code event} command is invalid.
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage)
+    public String execute(TaskList taskList, Ui ui, Storage storage)
             throws DukeInvalidEventCommandException {
 
         int indexOfFrom = -1;
@@ -61,11 +61,11 @@ public class EventCommand extends Command {
         String to = String.join(" ", toArray);
 
         EventTask newEventTask = new EventTask(taskName, from, to);
-
         taskList.addTask(newEventTask);
-        ui.showMessage("Added:\n" + newEventTask);
-        ui.showNumberOfTasks(taskList.getSize());
         storage.saveTaskList(taskList);
+
+        String numTasksString = ui.formatNumberOfTasksAsString(taskList.getSize());
+        return "Added:\n" + newEventTask + "\n" + numTasksString;
     }
 
     public boolean isByeCommand() {

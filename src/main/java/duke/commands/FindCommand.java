@@ -15,7 +15,7 @@ public class FindCommand extends Command {
         this.tokens = tokens;
     }
 
-    public void execute(TaskList taskList, Ui ui, Storage storage)
+    public String execute(TaskList taskList, Ui ui, Storage storage)
             throws DukeInvalidFindCommandException {
 
         if (tokens.length < 2) {
@@ -26,14 +26,10 @@ public class FindCommand extends Command {
         ArrayList<String> taskStrings = taskList.findTasks(name);
 
         if (taskStrings.size() == 0) {
-            ui.showMessage("No tasks match the query \"" + name + "\"");
-            return;
+            return "No tasks match the query \"" + name + "\"";
         }
 
-        ui.showMessage("Found:");
-        for (String string : taskStrings) {
-            ui.showMessage(string);
-        }
+        return "Found:\n" + String.join("\n", taskStrings);
     }
 
     public boolean isByeCommand() {

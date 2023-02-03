@@ -31,7 +31,7 @@ public class DeadlineCommand extends Command {
      *
      * @throws DukeInvalidDeadlineCommandException If the {@code deadline} command is invalid.
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage)
+    public String execute(TaskList taskList, Ui ui, Storage storage)
             throws DukeInvalidDeadlineCommandException {
 
         int indexOfBy = -1;
@@ -69,9 +69,10 @@ public class DeadlineCommand extends Command {
 
         DeadlineTask newDeadlineTask = new DeadlineTask(taskName, byDate);
         taskList.addTask(newDeadlineTask);
-        ui.showMessage("Added:\n" + newDeadlineTask);
-        ui.showNumberOfTasks(taskList.getSize());
         storage.saveTaskList(taskList);
+
+        String numTasksString = ui.formatNumberOfTasksAsString(taskList.getSize());
+        return "Added:\n" + newDeadlineTask + "\n" + numTasksString;
     }
 
     public boolean isByeCommand() {

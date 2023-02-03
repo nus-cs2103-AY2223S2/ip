@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 import duke.exceptions.DukeInvalidDueOnCommandException;
 import duke.tasks.Task;
 import duke.utilities.Storage;
@@ -31,7 +33,7 @@ public class DueOnCommand extends Command {
      *
      * @throws DukeInvalidDueOnCommandException If the {@code dueon} command is invalid.
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage)
+    public String execute(TaskList taskList, Ui ui, Storage storage)
             throws DukeInvalidDueOnCommandException {
 
         if (tokens.length != 2) {
@@ -49,13 +51,11 @@ public class DueOnCommand extends Command {
         ArrayList<Task> dueOnTasks = taskList.getAllTasksThatAreDueOn(dueOnDate);
 
         if (dueOnTasks.size() == 0) {
-            ui.showMessage("There are no deadline tasks due on " + dueOnDate);
-            return;
+            return "There are no deadline tasks due on " + dueOnDate;
         }
 
-        for (Task task : dueOnTasks) {
-            ui.showMessage(task.toString());
-        }
+        List<String> taskStrings = dueOnTasks.stream().map(task -> task.toString()).collect(Collectors.toList());
+        return String.join("\n", taskStrings);
     }
 
     public boolean isByeCommand() {

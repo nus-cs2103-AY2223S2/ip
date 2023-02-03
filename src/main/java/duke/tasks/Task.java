@@ -19,14 +19,14 @@ public class Task {
     }
 
     /**
-     * Marks the task as done
+     * Marks the task as done.
      */
     public void markDone() {
         isDone = true;
     }
 
     /**
-     * Unmarks the task as done
+     * Unmarks the task as done.
      */
     public void unmarkDone() {
         isDone = false;
