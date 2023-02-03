@@ -1,5 +1,3 @@
-
-
 import java.io.File;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -162,7 +160,7 @@ public class Duke {
 
     public static void save() throws IOException {
         String home = System.getProperty("user.dir");
-        PrintWriter output = new PrintWriter( home + File.separator + "ip" + File.separator + "data" + File.separator + "duke.txt");
+        PrintWriter output = new PrintWriter(home + File.separator + "data" + File.separator + "duke.txt");
         for (int i = 0; i < list.size(); i++) {
             Task task = list.get(i);
             output.println(i+1 + "." + task.toString());
