@@ -26,7 +26,7 @@ fi
 
 java -classpath ../bin duke/Duke < input.txt > ACTUAL.TXT
 
-sudo brew install dos2unix
+nix-env -i dos2unix
 
 # convert to UNIX format
 cp EXPECTED.TXT EXPECTED-UNIX.TXT
