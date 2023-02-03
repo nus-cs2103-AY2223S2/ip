@@ -15,9 +15,6 @@ public abstract class Task {
     /**
      * Constructor for Task object.
      * @param des Description of the task.
-     *
-     * @author Andre Lin HuiKai
-     * @version CS2103T AY22/23 Semester 2
      */
     public Task(String des) {
         this.description = des;

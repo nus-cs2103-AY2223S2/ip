@@ -4,9 +4,7 @@ import java.util.Scanner;
 
 import duke.command.Command;
 import duke.command.Parser;
-
 import duke.exceptions.DukeException;
-
 import duke.task.TaskList;
 
 

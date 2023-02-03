@@ -1,7 +1,9 @@
 package duke.task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
+
 import duke.exceptions.InvalidDateException;
 
 public class EventTest {

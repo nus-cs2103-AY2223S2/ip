@@ -1,9 +1,8 @@
 package duke.task;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
-import java.time.LocalDate;
 
 /**
  * Class for TaskList to store a collections of tasks.
@@ -25,7 +24,9 @@ public class TaskList {
      * Constructor for the creation of a TaskList object.
      * @param tasks List of tasks to be included in TaskList after creation.
      */
-    public TaskList(List<Task> tasks) { this.tasks = tasks; }
+    public TaskList(List<Task> tasks) {
+        this.tasks = tasks;
+    }
 
     /**
      * Gets the list of tasks.

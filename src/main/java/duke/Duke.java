@@ -1,10 +1,10 @@
 package duke;
 
-import duke.storage.FileManagement;
 import duke.exceptions.DukeException;
-import duke.ui.UI;
+import duke.storage.FileManagement;
 import duke.task.TaskList;
 import duke.ui.Span;
+import duke.ui.UI;
 
 /**
  * Duke is a personal assistant bot that helps user to track tasks.

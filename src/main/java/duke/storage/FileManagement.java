@@ -3,17 +3,16 @@ package duke.storage;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import duke.exceptions.InvalidDateException;
 import duke.task.Deadline;
 import duke.task.Event;
-import duke.task.TaskList;
 import duke.task.Task;
+import duke.task.TaskList;
 import duke.task.ToDo;
-import duke.exceptions.InvalidDateException;
 
 /**
  * A file manager to manage the saving and retrieval of users' data.
@@ -107,6 +106,8 @@ public class FileManagement {
             break;
         case "event":
             decoded = new Event(des, components[3], components[4]);
+            break;
+        default:
             break;
         }
         if (toMark.equals("true")) {
