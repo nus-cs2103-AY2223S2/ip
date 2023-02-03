@@ -136,12 +136,12 @@ public class TaskList {
      * @return TaskList of found tasks.
      */
     public TaskList findTasks(String keyword) {
-        TaskList tempList = new TaskList();
+        TaskList foundList = new TaskList();
         for (Task t: taskList) {
             if (t.description.contains(keyword)) {
-                tempList.addTask(t);
+                foundList.addTask(t);
             }
         }
-        return tempList;
+        return foundList;
     }
 }
