@@ -79,7 +79,7 @@ public class Parser {
         checkEmptyDescription(inputWords);
         String[] splitedString = inputWords[1].split(" /by ");
         String action = splitedString[0];
-        String date = splitedString[1]; // in yyyy-mm-dd HHMM format
+        String date = splitedString[1]; // in yyyy/mm/d HHMM format
         LocalDateTime inputDateTime = LocalDateTime.parse(date, inputFormatter);
         String outputDateTime = inputDateTime.format(outputFormatter);
         Task newTask = new Deadline(action, outputDateTime);

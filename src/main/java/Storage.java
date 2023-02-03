@@ -4,38 +4,40 @@ import java.io.File;
 import java.util.Scanner;
 public class Storage {
     String path;
-    PrintWriter output;
     File file;
-    Storage (String path) {
+    PrintWriter output;
+    Scanner sc;
+    Storage (String path) throws IOException {
         this.path = path;
         this.file = new File(path);
+        this.sc = new Scanner(file);
+        boolean test = this.sc.hasNextLine(); // for some reason this
+        this.output = new PrintWriter(path);
     }
 
     TaskList load() throws IOException {
         if (!file.exists()) {
+            System.out.println("cannot find file");
             file.createNewFile();
         }
-
-        Scanner sc = new Scanner(file);
         TaskList list = new TaskList();
-
-        while (sc.hasNext()) {
+        while (sc.hasNextLine()) {
             String line = sc.nextLine();
             String[] descriptionAndMarkedStatus = this.getDescriptionAndMarkedStatus(line);
             String description = descriptionAndMarkedStatus[0];
             String markedStatus = descriptionAndMarkedStatus[1];
-            boolean marked = markedStatus.equals("T") ? true : false;
+            boolean marked = markedStatus.equals("X") ? true : false;
             char letter = line.charAt(3);
             Task task;
             if (letter == 'T') {
                 task = new ToDo(description, marked);
             } else if (letter == 'D') {
-                String[] words = description.split(" by: ");
+                String[] words = description.split("\\|by: ");
                 task = new Deadline(words[0], words[1], marked);
             } else {
-                String[] words = description.split(" from: ");
+                String[] words = description.split("\\|from: ");
                 String[] fromTo = words[1].split(" to: ");
-                task = new Event(words[0], fromTo[0], fromTo[1]);
+                task = new Event(words[0], fromTo[0], fromTo[1], marked);
             }
             list.addTask(task);
         }
@@ -55,8 +57,8 @@ public class Storage {
     void save(TaskList list) {
         for (int i = 0; i < list.size(); i++) {
             Task task = list.getTask(i);
-            output.println(i+1 + "." + task.toString());
+            this.output.println(i+1 + "." + task.toString());
         }
-        output.close();
+        this.output.close();
     }
 }

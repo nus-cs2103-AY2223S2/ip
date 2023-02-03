@@ -14,15 +14,10 @@ public class Duke {
     Parser parser;
     final static String DEFAULT_PATH = System.getProperty("user.dir") + File.separator + "data" + File.separator + "duke.txt";
 
-    Duke(String path) {
+    Duke(String path) throws IOException {
         this.ui = new Ui();
         this.storage = new Storage(path);
-        try {
-            this.list = this.storage.load();
-        } catch (Exception e) {
-            this.ui.showLoadingError();
-            this.list = new TaskList();
-        }
+        this.list = this.storage.load();
         this.parser = new Parser();
     }
 
