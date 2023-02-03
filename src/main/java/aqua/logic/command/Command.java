@@ -15,7 +15,8 @@ public enum Command {
     DEADLINE(new AddDeadlineCommand()),
     EVENT(new AddEventCommand()),
     DELETE(new DeleteCommand()),
-    FIND(new FilterCommand());
+    FIND(new FilterCommand()),
+    VIEW(new ViewScheduleCommand());
 
 
     private final CommandController controller;
