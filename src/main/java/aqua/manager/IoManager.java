@@ -7,6 +7,7 @@ import java.util.function.Supplier;
 import aqua.exception.IllegalSyntaxException;
 import aqua.exception.LoadException;
 import aqua.exception.ProcedureExecutionException;
+import javafx.application.Platform;
 import javafx.stage.Popup;
 import javafx.stage.Window;
 
@@ -130,7 +131,7 @@ public class IoManager {
 
 
     public void popup(Popup popup) {
-        Optional.ofNullable(windowSupplier.get())
-                .ifPresent(popup::show);
+        Platform.runLater(() -> Optional.ofNullable(windowSupplier.get())
+                .ifPresent(popup::show));
     }
 }
