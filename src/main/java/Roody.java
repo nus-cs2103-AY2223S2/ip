@@ -3,6 +3,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -42,9 +44,9 @@ public class Roody {
                     if (inputs[2].equals("T")) {
                         temp = new Todo(inputs[0]);
                     } else if (inputs[2].equals("D")) {
-                        temp = new Deadline(inputs[0], inputs[3]); 
+                        temp = new Deadline(inputs[0], LocalDate.parse(inputs[3])); 
                     } else if (inputs[2].equals("E")) {
-                        temp = new Event(inputs[0], inputs[3], inputs[4]);
+                        temp = new Event(inputs[0], LocalDate.parse(inputs[3]), LocalDate.parse(inputs[4]));
                     } else {
                         new RoodyException("Error loading text");
                         s.close();
@@ -113,7 +115,7 @@ public class Roody {
         for (String str : inputs) {
             str.trim();
         }
-        Task task = new Todo(input.substring("todo ".length()));
+        Task task = new Todo(input.substring("todo ".length()).trim());
         char type = input.charAt(0);
         if (type == 't') {
         } else if (type == 'd') {
@@ -122,7 +124,14 @@ public class Roody {
                 new RoodyException("I don't understand that. Don't use additonal \"/\" for deadlines.");
                 return;
             } else {
-                task = new Deadline(inputs[0].substring("deadline ".length()), inputs[1].substring("by ".length()));
+                inputs[0] = inputs[0].substring("deadline ".length()).trim();
+                inputs[1] = inputs[1].substring("by ".length()).trim();
+                try {
+                    task = new Deadline(inputs[0], LocalDate.parse(inputs[1]));
+                } catch (DateTimeParseException e) {
+                    new RoodyException("Accepted date format is yyyy-mm-dd.");
+                    return;
+                }
             }
         } else if (type == 'e') {
             // more or less than two / detected,
@@ -130,7 +139,15 @@ public class Roody {
                 new RoodyException("I don't understand that. Don't use additonal \"/\" for events.");
                 return;
             } else {
-                task = new Event(inputs[0].substring("event ".length()), inputs[1].substring("from ".length()), inputs[2].substring("to ".length()));
+                inputs[0] = inputs[0].substring("event ".length()).trim();
+                inputs[1] = inputs[1].substring("from ".length()).trim();
+                inputs[2] = inputs[2].substring("to ".length()).trim();
+                try {
+                    task = new Event(inputs[0], LocalDate.parse(inputs[1]), LocalDate.parse(inputs[2]));
+                } catch (DateTimeParseException e) {
+                    new RoodyException("Accepted date format is yyyy-mm-dd.");
+                    return;
+                }
             }
         } else {
             new RoodyException("Error, wrong input detected");
