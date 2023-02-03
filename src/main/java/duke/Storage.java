@@ -15,6 +15,11 @@ public class Storage {
     /** Stores filePath */
     private Path filePath;
 
+    /**
+     * Creates an instance of Storage.
+     *
+     * @param filePath Path of file from the home directory in Unix format.
+     */
     public Storage(String filePath) {
         String home = System.getProperty("user.home"); // Get home directory
         String[] s = filePath.split("/");
@@ -47,6 +52,11 @@ public class Storage {
 
     }
 
+    /**
+     * Returns a list of all task stored in the file.
+     *
+     * @return List of all task stored in the file
+     */
     public LinkedList<Task> loadFile() {
 
         LinkedList<Task> savedInputs = new LinkedList<>();
@@ -110,6 +120,11 @@ public class Storage {
         return line;
     }
 
+    /**
+     * Overwrites the entire file with the current list of task.
+     *
+     * @param taskList Current list of task.
+     */
     public void overwriteFile(TaskList taskList) {
         StringBuilder s = new StringBuilder();
         for (Task storedInput : taskList.getList()) {
