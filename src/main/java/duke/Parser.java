@@ -47,40 +47,63 @@ public class Parser {
                 int taskNum = getNumbers(input) - 1;
                 return new UnmarkCommand(taskNum);
             } else if (input.startsWith(Commands.TODO.cmd())) {
-                String title = input.substring(Commands.TODO.cmd().length());
+                String[] parsed = handleTask(input);
+                String title = parsed[0];
                 return new TodoCommand(title);
             } else if (input.startsWith(Commands.DEADLINE.cmd())) {
-
-                if (input.indexOf(Commands.BY.cmd()) == -1) {
-                    throw new DukeException(Views.MISSING_ARGS_ERR_STRING.eng());
-                }
-                String title = input.substring(Commands.DEADLINE.cmd().length(), input.indexOf(Commands.BY.cmd()));
-
-                String deadline = input.substring(input.indexOf(Commands.BY.cmd()));
-
+                String[] parsed = handleTask(input);
+                String title = parsed[0];
+                String deadline = parsed[1];
                 return new DeadlineCommand(title, deadline);
             } else if (input.startsWith(Commands.EVENT.cmd())) {
-
-                if (input.indexOf(Commands.FROM.cmd()) == -1 || input.indexOf(Commands.TO.cmd()) == -1) {
-                    throw new DukeException(Views.MISSING_ARGS_ERR_STRING.eng());
-                }
-                String title = input.substring(Commands.EVENT.cmd().length(), input.indexOf(Commands.FROM.cmd()));
-
-                String from = input.substring(input.indexOf(Commands.FROM.cmd()), input.indexOf(Commands.TO.cmd()));
-
-                String to = input.substring(input.indexOf(Commands.TO.cmd()));
-
+                String[] parsed = handleTask(input);
+                String title = parsed[0];
+                String from = parsed[1];
+                String to = parsed[2];
                 return new EventCommand(title, from, to);
             } else if (input.startsWith(Commands.DEL.cmd())) {
                 int taskNum = getNumbers(input) - 1;
                 return new DeleteCommand(taskNum);
             } else if (input.startsWith(Commands.FIND.cmd())) {
-                String query = input.substring(Commands.FIND.cmd().length());
+                String query = input.substring(Commands.FIND.len());
                 return new FindCommand(query);
             } else {
                 throw new DukeException(Views.UNKNOWN_CMD_ERR_STRING.eng());
             }
         }
+    }
+
+    public static String[] handleTask(String input) throws DukeException {
+        String[] returnString = new String[3];
+        String title;
+        if (input.startsWith(Commands.TODO.cmd())) {
+            title = input.substring(Commands.TODO.len());
+        } else if (input.startsWith(Commands.DEADLINE.cmd())) {
+            int indexOfBy = input.indexOf(Commands.BY.cmd());
+            if (indexOfBy == -1) {
+                throw new DukeException(Views.MISSING_ARGS_ERR_STRING.eng());
+            }
+            title = input.substring(Commands.DEADLINE.len(), indexOfBy);
+            String deadline = input.substring(indexOfBy);
+            returnString[1] = deadline;
+        } else if (input.startsWith(Commands.EVENT.cmd())) {
+            int indexOfFrom = input.indexOf(Commands.FROM.cmd());
+            int indexOfTo = input.indexOf(Commands.TO.cmd());
+
+            if (indexOfFrom == -1 || indexOfTo == -1) {
+                throw new DukeException(Views.MISSING_ARGS_ERR_STRING.eng());
+            }
+            title = input.substring(Commands.EVENT.len(), indexOfFrom);
+            String from = input.substring(indexOfFrom, indexOfTo);
+            String to = input.substring(indexOfTo);
+            returnString[1] = from;
+            returnString[2] = to;
+        } else {
+            throw new DukeException(Views.END_STRING.eng());
+        }
+        returnString[0] = title;
+        return returnString;
+
     }
 
     /**
