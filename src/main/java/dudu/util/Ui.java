@@ -14,8 +14,7 @@ public class Ui {
     private static final String GREETING = DIVIDER + LOGO
             + "Hello! I'm Dudu\n" + "What can I do for you?\n"
             + DIVIDER;
-    public Ui() {
-    }
+    public Ui() {}
 
     public void showLine() {
         System.out.print(DIVIDER);

@@ -28,7 +28,6 @@ public class UnMarkCommand extends Command {
             currTask.markAsUndone();
             storage.saveTask(list.getList());
             return "OK, I've marked this task as not done yet:\n  " + currTask;
-//            System.out.println("  " + currTask);
         } catch (TaskNumRangeException ex) {
             return ex.toString();
         } catch (DuduException ex) {

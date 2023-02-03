@@ -28,7 +28,6 @@ public class MarkCommand extends Command {
             currTask.markAsDone();
             storage.saveTask(list.getList());
             return "Nice! I've marked this task as done:\n  " + currTask;
-//            System.out.println("  " + currTask);
         } catch (TaskNumRangeException ex) {
             return ex.toString();
         } catch (DuduException ex) {

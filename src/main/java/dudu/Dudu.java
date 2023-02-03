@@ -44,6 +44,14 @@ public class Dudu {
     }
 
     /**
+     * Returns dudu exit status
+     * @return Has dudu exit
+     */
+    public static boolean hasExit() {
+        return isExit;
+    }
+
+    /**
      * Run Dudu
      */
     public void run() {
@@ -65,18 +73,12 @@ public class Dudu {
         }
     }
 
-//    public static void main(String[] args) {
-//        new Dudu("data/tasks.txt").run();
-//    }
-
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Gets the response from dudu.
+     * @param input Command from the user
+     * @return Dudu's response
      */
-    public String getResponse(String input)  {
-        if (input.isBlank()) {
-            return ">";
-        }
+    public String getResponse(String input) {
         Command command;
         try {
             command = Parser.parse(input, list, storage);
@@ -86,7 +88,6 @@ public class Dudu {
         } catch (DuduException ex) {
             return ex.toString();
         }
-
     }
 
 }

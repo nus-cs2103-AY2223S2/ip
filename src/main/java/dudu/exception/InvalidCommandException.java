@@ -14,6 +14,11 @@ public class InvalidCommandException extends DuduException {
         detail = "";
     }
 
+    /**
+     * Constructor for invalid command exception.
+     * @param msg Error message
+     * @param detail The detail error message to user.
+     */
     public InvalidCommandException(String msg, String detail) {
         super(msg);
         this.detail = "\n" + detail;
@@ -21,6 +26,6 @@ public class InvalidCommandException extends DuduException {
 
     @Override
     public String toString() {
-        return "OOPS!!!\n I'm sorry, but I don't know what that means :-(";
+        return "OOPS!!!\n I'm sorry, but I don't know what that means :-(" + detail;
     }
 }

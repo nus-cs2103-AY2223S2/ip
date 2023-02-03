@@ -1,12 +1,13 @@
 package dudu.command;
 
+import java.util.ArrayList;
+
 import dudu.exception.DuduException;
 import dudu.task.Task;
 import dudu.task.TaskList;
 import dudu.util.Storage;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+
 
 /**
  * Command class for finding task

@@ -1,6 +1,6 @@
 package dudu;
 
-import dudu.exception.DuduException;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -30,7 +30,7 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setDudu(Dudu dudu){
+    public void setDudu(Dudu dudu) {
         this.dudu = dudu;
         this.userInput.setText("Hi");
         this.handleUserInput();
@@ -43,11 +43,16 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = dudu.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, duduImage)
-        );
-        userInput.clear();
+        if (Dudu.hasExit()) {
+            Platform.exit();
+        }
+        if (!input.isBlank()) {
+            String response = dudu.getResponse(input);
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getDuduDialog(response, duduImage)
+            );
+            userInput.clear();
+        }
     }
 }

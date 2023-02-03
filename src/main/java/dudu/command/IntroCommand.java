@@ -3,6 +3,9 @@ package dudu.command;
 import dudu.task.TaskList;
 import dudu.util.Storage;
 
+/**
+ * Command class to introduce dudu.
+ */
 public class IntroCommand extends Command {
     public IntroCommand() {
         super("Hi");
