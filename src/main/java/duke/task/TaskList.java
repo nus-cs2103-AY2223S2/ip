@@ -1,5 +1,7 @@
 package duke.task;
 import duke.Storage;
+
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 /**
@@ -41,6 +43,16 @@ public class TaskList {
             System.out.println( i + "." + tasks);
             i++;
         }
+    }
+
+    public TaskList getTaskByTime(LocalDateTime time) {
+        TaskList newTaskList = new TaskList(null);
+        for (int i = 0; i < this.getTaskCount(); i++) {
+            if (this.tasks.get(i).getTime() == time) {
+                newTaskList.addTask(this.tasks.get(i));
+            }
+        }
+        return newTaskList;
     }
 
     /**
@@ -105,6 +117,6 @@ public class TaskList {
      * @return The content of the task at the given index.
      */
     public String getTaskContent(int index) {
-        return this.tasks.get(index).seeTaskContent();
+        return this.tasks.get(index).getTaskContent();
     }
 }

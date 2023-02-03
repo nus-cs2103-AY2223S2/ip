@@ -3,6 +3,7 @@ package duke;
 import duke.task.Tasks;
 import java.io.*;
 import java.util.ArrayList;
+import duke.UI;
 
 
 /**
@@ -27,8 +28,9 @@ public class Storage {
             ObjectOutputStream output = new ObjectOutputStream(file);
             output.writeObject(task);
             output.close();
+            UI.successfulSaveTask();
         } catch (IOException e) {
-            System.out.println("file error");
+            UI.unsuccessulSaveTask(e);
         }
     }
 
@@ -43,8 +45,10 @@ public class Storage {
             ObjectInputStream output = new ObjectInputStream(file);
             ArrayList<Tasks> task = (ArrayList<Tasks>)output.readObject();
             output.close();
+            UI.successfulLoadTask();
             return task;
         } catch (IOException | ClassNotFoundException e) {
+            UI.unsucessfulLoadTask();
             return new ArrayList<Tasks>();
         }
     }

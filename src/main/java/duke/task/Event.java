@@ -24,6 +24,7 @@ public class Event extends Tasks {
         this.from = LocalDateTime.parse(from, format);
         this.to = LocalDateTime.parse(to, format);
         this.type = 'E';
+        this.time = this.to;
     }
 
     /**
@@ -36,6 +37,6 @@ public class Event extends Tasks {
         String from = this.from.format(format);
         String to = this.to.format(format);
         return "[" + this.getTypeIcon() + "]"
-                + "[" + this.getStatusIcon() + "] " + this.seeTaskContent() + " (from: " + from + " to: " + to + ")";
+                + "[" + this.getStatusIcon() + "] " + this.getTaskContent() + " (from: " + from + " to: " + to + ")";
     }
 }

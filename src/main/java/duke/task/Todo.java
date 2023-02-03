@@ -13,6 +13,7 @@ public class Todo extends Tasks {
     public Todo(String content, boolean isDone) {
         super(content, isDone);
         this.type = 'T';
+        this.time = null;
     }
 
     /**
@@ -22,6 +23,6 @@ public class Todo extends Tasks {
     @Override
     public String toString() {
         return "[" + this.getTypeIcon() + "]"
-                + "[" + this.getStatusIcon() + "] " + this.seeTaskContent();
+                + "[" + this.getStatusIcon() + "] " + this.getTaskContent();
     }
 }

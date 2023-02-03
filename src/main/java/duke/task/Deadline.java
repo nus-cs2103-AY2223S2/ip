@@ -34,6 +34,6 @@ public class Deadline extends Tasks {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MMM-dd HH:mm");
         String time = this.time.format(format);
         return "[" + this.getTypeIcon() + "]"
-                + "[" + this.getStatusIcon() + "] " + this.seeTaskContent() + " (by: " + time + ")";
+                + "[" + this.getStatusIcon() + "] " + this.getTaskContent() + " (by: " + time + ")";
     }
 }

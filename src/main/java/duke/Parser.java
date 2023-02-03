@@ -6,6 +6,10 @@ import duke.exception.InsufficientArguments;
 import duke.exception.UnknownCommand;
 import duke.task.TaskList;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
+
 /**
  * Implements the parsing of command line arguments, and create and put the corresponding command with the parsed input
  * arguments into the command queue.
@@ -29,6 +33,13 @@ public class Parser {
                     queue.add(new Unmark(input));
                 } else if (input.matches("delete+ [0-9]+")) {
                     queue.add(new Delete(input));
+                } else if (input.matches("find by date\\s.*$")) {
+                    System.out.println("test1");
+                    String[] substrings = input.split(" date ");
+                    DateTimeFormatter format = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
+                    format.withLocale(Locale.ENGLISH);
+                    LocalDateTime time = LocalDateTime.parse(substrings[1], format);
+                    queue.add(new SearchByDate(time));
                 } else if (input.matches("find\\s.*$")){
                     queue.add(new Find(input));
                 } else if (input.matches("^deadline\\s.*$") || input.matches("^event\\s.*$") || input.matches("^todo\\s.*$")) {

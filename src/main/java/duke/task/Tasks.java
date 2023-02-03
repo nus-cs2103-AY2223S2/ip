@@ -24,7 +24,11 @@ abstract public class Tasks implements Serializable {
         this.is_Done = is_Done;
     }
 
-    public String seeTaskContent() {
+    public LocalDateTime getTime() {
+        return this.time;
+    }
+
+    public String getTaskContent() {
         return content;
     }
 

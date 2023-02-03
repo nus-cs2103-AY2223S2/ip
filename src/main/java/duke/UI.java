@@ -47,6 +47,21 @@ public class UI {
                 + "] " + taskList.getTaskContent(taskNumber));
     }
 
+    public static void successfulLoadTask() {
+        System.out.println("Successfully retrieved past task list.");
+    }
+
+    public static void unsucessfulLoadTask() {
+        System.out.println("No past task list found, created new task list.");
+    }
+
+    public static void successfulSaveTask() {
+        System.out.println("Successfully saved your current tasks.");
+    }
+
+    public static void unsuccessulSaveTask(Exception e) {
+        System.out.println("Sorry, unable to save your current tasks due to " + e.getMessage());
+    }
 
 
 }
