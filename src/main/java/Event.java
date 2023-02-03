@@ -20,11 +20,15 @@ public class Event extends Task {
         return this.end;
     }
     @Override
+    public String saveTask(){
+        return super.saveTask() + '|' + this.type + '|' + this.start + '|' + this.end;
+    }
+    @Override
     public char getType() {
         return type;
     }
     @Override
     public String toString(){
-        return super.toString() + "(from: " + start + "to: " + end + ")";
+        return super.toString() + " (from: " + start + " to: " + end + ")";
     }
 }

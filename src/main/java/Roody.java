@@ -1,4 +1,10 @@
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -10,6 +16,65 @@ public class Roody {
         // Assumed no more than 100 tasks
         this.list = new ArrayList<Task>();
         this.printBuffer = new ArrayList<String>();
+    }
+
+    // Loads information from txt file or creates new text file
+    private void loadFile() {
+        try {
+            File data = new File("./data/Roody.txt");
+            File folder = new File("./data"); 
+            // check if file exists
+            if (!folder.exists()) {
+                folder.mkdir();
+            }
+            if (data.createNewFile()) {
+                //System.out.println("File created: " + data.getName());
+            } else {
+                //System.out.println("File already exists.");
+                Scanner s = new Scanner(data);
+                String task = "";
+                while (s.hasNextLine()){
+                    task = s.nextLine();
+                    String[] inputs = task.split("\\|", 5);
+                    //System.out.println(Arrays.toString(inputs));
+                    // filter by task
+                    Task temp;
+                    if (inputs[2].equals("T")) {
+                        temp = new Todo(inputs[0]);
+                    } else if (inputs[2].equals("D")) {
+                        temp = new Deadline(inputs[0], inputs[3]); 
+                    } else if (inputs[2].equals("E")) {
+                        temp = new Event(inputs[0], inputs[3], inputs[4]);
+                    } else {
+                        new RoodyException("Error loading text");
+                        s.close();
+                        return;
+                    }
+                    if (inputs[1].equals("true")) {
+                        temp.setDone();
+                    }
+                    list.add(temp);
+                }
+                s.close();
+            } 
+            
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    } 
+    
+    // saves information if any into roody.txt
+    private void saveFile() {
+        Path output = Paths.get("./data/Roody.txt");
+        for (Task t : list) {
+            printBuffer.add(t.saveTask());
+        }
+        try {
+            Files.write(output, printBuffer);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     // Provides basic line 
@@ -45,6 +110,9 @@ public class Roody {
     // Stores input to string
     private void addToList(String input) {
         String[] inputs = input.split("/");
+        for (String str : inputs) {
+            str.trim();
+        }
         Task task = new Todo(input.substring("todo ".length()));
         char type = input.charAt(0);
         if (type == 't') {
@@ -148,6 +216,7 @@ public class Roody {
         Roody roody = new Roody();
         // Sends initial greeting
         roody.greet();
+        roody.loadFile();
         String input = "";
         String[] inputs;
         Scanner scanner = new Scanner(System.in);
@@ -171,11 +240,16 @@ public class Roody {
                 }
             // Checks for second input
             } else if (inputs[0].equals("mark") || inputs[0].equals("unmark")) {
-                if (inputs.length == 2) {                    
-                    roody.complete(inputs[1], inputs[0].equals("mark"));
-                } else {
-                    new RoodyException("Please enter a index number to be marked/unmarked");
+                try {
+                    if (inputs.length == 2) {                    
+                        roody.complete(inputs[1], inputs[0].equals("mark"));
+                    } else {
+                        new RoodyException("Please enter a index number to be marked/unmarked");
+                    }
+                } catch (NumberFormatException e) {
+                    new RoodyException("Please enter a valid index.");
                 }
+
             } else if (inputs[0].equals("todo") || inputs[0].equals("deadline") || inputs[0].equals("event")) {
                 if (inputs.length > 1) {
                     roody.addToList(input);
@@ -187,6 +261,7 @@ public class Roody {
             }
         }
         scanner.close();
+        roody.saveFile();
         roody.bye();
     }
 }

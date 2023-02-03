@@ -4,6 +4,10 @@ public class Todo extends Task {
         super(description);
     }
     @Override
+    public String saveTask(){
+        return super.saveTask() + '|' + this.type;
+    }
+    @Override
     public char getType() {
         return type;
     }

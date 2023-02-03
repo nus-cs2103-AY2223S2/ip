@@ -17,6 +17,9 @@ public abstract class Task {
     public char getType() {
         return 'a';
     }
+    public String saveTask() {
+        return this.description + '|' + this.done;
+    }
     @Override
     public String toString(){
         return this.description;
