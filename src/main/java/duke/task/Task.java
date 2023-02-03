@@ -11,6 +11,13 @@ public class Task {
     private String type;
     private boolean isDone;
 
+    /**
+     * Constructor for Task.
+     *
+     * @param type the type of command of the given task.
+     * @param doneStatus checks if the task is mark or unmark.
+     * @param description the description of the task written by the user.
+     */
     public Task(String type, String doneStatus, String description) {
         this.doneStatus = doneStatus;
         this.type = type;
@@ -18,6 +25,11 @@ public class Task {
         isTaskDone(this.doneStatus);
     }
 
+    /**
+     * Constructor for Task.
+     *
+     * @param description the description of the task written by the user.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
@@ -41,7 +53,9 @@ public class Task {
     public boolean isTaskDone(String doneStatus) {
         if (doneStatus.equals(" ")) {
             this.isDone = false;
-        } else this.isDone = true;
+        } else {
+            this.isDone = true;
+        }
         return this.isDone;
     }
 
@@ -70,9 +84,9 @@ public class Task {
 
     @Override
     public String toString() {
-        if (this.type == null)
+        if (this.type == null) {
             return "[" + this.getStatusIcon() + "]" + " " + this.description;
-        else {
+        } else {
             return "[" + this.type + "]" + "[" + this.getStatusIcon() + "]" + " " + this.description;
         }
     }

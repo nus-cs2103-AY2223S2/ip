@@ -1,8 +1,7 @@
 package duke.command;
 
-import duke.exception.DukeException;
-import duke.task.Deadline;
 import duke.storage.Storage;
+import duke.task.Deadline;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
@@ -16,6 +15,11 @@ public class DeadlineCommand extends Command {
     private String date;
     private String time;
 
+    /**
+     * Constructor for DeadlineCommand.
+     *
+     * @param cmd the command given by the user.
+     */
     public DeadlineCommand(String cmd) {
         String c = cmd.split(" ")[0];
         int indexOfBy = cmd.indexOf("/by ");
@@ -26,6 +30,14 @@ public class DeadlineCommand extends Command {
         this.time = datetime.split(" ")[1];
     }
 
+    /**
+     * Override execute method from the abstract class of Command.
+     *
+     * @param tl       - list of tasks.
+     * @param ui       - interface.
+     * @param storage  - harddisk store using textfile.
+     * @return boolean - returns true.
+     */
     public boolean execute(TaskList tl, Ui ui, Storage storage) {
         Task task = new Deadline(this.activity, this.date, this.time);
         tl.addTask(task);

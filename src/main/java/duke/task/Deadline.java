@@ -13,17 +13,24 @@ public class Deadline extends Task {
     private LocalDate byDate;
     private LocalTime byTime;
 
-    public Deadline(String activity, String bydate, String bytime) {
+    /**
+     * Constructor for Deadline.
+     *
+     * @param activity the activity of the task written by the user.
+     * @param byDate the start datetime of the task.
+     * @param byTime the end datetime of the task.
+     */
+    public Deadline(String activity, String byDate, String byTime) {
         super(activity);
-        this.byDate = LocalDate.parse(bydate);
-        this.byTime = LocalTime.parse(bytime, DateTimeFormatter.ofPattern("HHmm"));
+        this.byDate = LocalDate.parse(byDate);
+        this.byTime = LocalTime.parse(byTime, DateTimeFormatter.ofPattern("HHmm"));
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " +
-                this.byDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " +
-                this.byTime.format(DateTimeFormatter.ofPattern("hh:mm a")) + ")";
+        return "[D]" + super.toString() + " (by: "
+                + this.byDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " "
+                + this.byTime.format(DateTimeFormatter.ofPattern("hh:mm a")) + ")";
     }
 }
 

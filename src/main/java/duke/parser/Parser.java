@@ -4,7 +4,16 @@
 
 package duke.parser;
 
-import duke.command.*;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.EventCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
+import duke.command.TodoCommand;
+import duke.command.UnmarkCommand;
 
 
 /**
@@ -34,26 +43,26 @@ public class Parser {
         String[] cmd2 = cmd.split(" ");
         CommandType commandType = CommandType.valueOf(cmd2[0].toLowerCase());
         switch (commandType) {
-            case list:
-                return new ListCommand();
-            case mark:
-                return new MarkCommand(cmd2[1]);
-            case unmark:
-                return new UnmarkCommand(cmd2[1]);
-            case bye:
-                return new ByeCommand();
-            case todo:
-                return new TodoCommand(cmd);
-            case deadline:
-                return new DeadlineCommand(cmd);
-            case event:
-                return new EventCommand(cmd);
-            case delete:
-                return new DeleteCommand(cmd2[1]);
-            case find:
-                return new FindCommand(cmd);
-            default:
-                throw new IllegalArgumentException();
+        case list:
+            return new ListCommand();
+        case mark:
+            return new MarkCommand(cmd2[1]);
+        case unmark:
+            return new UnmarkCommand(cmd2[1]);
+        case bye:
+            return new ByeCommand();
+        case todo:
+            return new TodoCommand(cmd);
+        case deadline:
+            return new DeadlineCommand(cmd);
+        case event:
+            return new EventCommand(cmd);
+        case delete:
+            return new DeleteCommand(cmd2[1]);
+        case find:
+            return new FindCommand(cmd);
+        default:
+            throw new IllegalArgumentException();
         }
     }
 }

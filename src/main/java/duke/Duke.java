@@ -18,6 +18,11 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor for Duke.
+     *
+     * @param filePath the path fo the file.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);

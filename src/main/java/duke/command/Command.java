@@ -13,17 +13,17 @@ public abstract class Command {
     /**
      * Abstract method to be used by the other commands from inherited class.
      *
-     * @param tasks   - list of tasks.
-     * @param ui      - interface.
-     * @param storage - harddisk store using textfile.
+     * @param tl    - list of tasks.
+     * @param ui       - interface.
+     * @param storage  - harddisk store using textfile.
      * @return boolean - true or false depending on the results.
      */
-    public abstract boolean execute(TaskList tasks, Ui ui, Storage storage);
+    public abstract boolean execute(TaskList tl, Ui ui, Storage storage);
 
     /**
      * Check if program needs to be exited from command bye.
      *
-     * @return boolean - true or false depending upon the command.
+     * @return boolean - true or false depending on the command.
      */
     public boolean isExit() {
         return false;
@@ -50,8 +50,8 @@ public abstract class Command {
                 String activity = cmd.substring(cmdtype.length() + 1, indexOfBy - 1);
                 String date = cmd.substring(indexOfDate);
             } catch (StringIndexOutOfBoundsException e) {
-                throw new DukeException("☹ OOPS!!! The format of a deadline: " +
-                        "deadline {activity} /by {yyyy-mm-dd} {hhmm}");
+                throw new DukeException("☹ OOPS!!! The format of a deadline: "
+                        + "deadline {activity} /by {yyyy-mm-dd} {hhmm}");
             }
         } else if (cmdtype.equals("event")) {
             try {
@@ -63,8 +63,8 @@ public abstract class Command {
                 String from = cmd.substring(indexOfFromTime, indexOfTo - 1);
                 String to = cmd.substring(indexOfToTime);
             } catch (StringIndexOutOfBoundsException e) {
-                throw new DukeException("☹ OOPS!!! The format of a event: " +
-                        "event {activity} /from {datetime} /to {datetime}");
+                throw new DukeException("☹ OOPS!!! The format of a event: "
+                        + "event {activity} /from {datetime} /to {datetime}");
             }
         }
         return true;

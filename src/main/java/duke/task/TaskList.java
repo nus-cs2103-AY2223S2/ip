@@ -79,7 +79,7 @@ public class TaskList {
     /**
      * This method returns the ArrayList of tasklist.
      *
-     * @return ArrayList<Task> - Returns the ArrayList of Tasks.
+     * @return ArrayList<> - Returns the ArrayList of Tasks.
      */
     public ArrayList<Task> getTasks() {
         return this.tasklst;

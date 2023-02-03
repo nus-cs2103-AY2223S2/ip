@@ -46,11 +46,15 @@ application {
     mainClassName = "seedu.duke.Duke"
 }
 
+checkstyle {
+    toolVersion = '10.2'
+}
+
 shadowJar {
     archiveBaseName = "duke"
     archiveClassifier = null
 }
 
-run{
+run {
     standardInput = System.in
 }

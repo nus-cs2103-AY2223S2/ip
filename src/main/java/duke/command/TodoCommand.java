@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -14,12 +13,25 @@ import duke.ui.Ui;
 public class TodoCommand extends Command {
     private String activity;
 
+    /**
+     * Constructor for TodoCommand.
+     *
+     * @param cmd the command given by the user.
+     */
     public TodoCommand(String cmd) {
         System.out.println(cmd);
         String c = cmd.split(" ")[0];
         this.activity = cmd.substring(c.length() + 1);
     }
 
+    /**
+     * Override execute method from the abstract class of Command
+     *
+     * @param tl       - list of tasks.
+     * @param ui       - interface.
+     * @param storage  - harddisk store using textfile.
+     * @return boolean - returns true.
+     */
     public boolean execute(TaskList tl, Ui ui, Storage storage) {
         Task task = new Todo(this.activity);
         tl.addTask(task);
