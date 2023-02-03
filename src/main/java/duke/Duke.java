@@ -1,7 +1,6 @@
 package duke;
 
 import duke.command.Command;
-
 import java.io.FileNotFoundException;
 
 /**
@@ -32,19 +31,19 @@ public class Duke {
      * Runs the Duke application
      */
     public void run() {
-            ui.showGreetMessage();
-            boolean isExit = false;
-            while (!isExit) {
-                try {
-                    String fullCommand = ui.readUserCommand();
-                    Command c = Parser.parse(fullCommand);
-                    c.execute(tasks, ui, storage);
-                    isExit = c.isExit();
-                } catch (DukeException e) {
-                    ui.showErrorMessage(e.getMessage());
-                }
+        ui.showGreetMessage();
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                String fullCommand = ui.readUserCommand();
+                Command c = Parser.parse(fullCommand);
+                c.execute(tasks, ui, storage);
+                isExit = c.isExit();
+            } catch (DukeException e) {
+                ui.showErrorMessage(e.getMessage());
             }
         }
+    }
 
     /**
      * Creates a Duke object and runs it

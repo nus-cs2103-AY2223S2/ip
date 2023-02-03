@@ -5,6 +5,10 @@ import duke.TaskList;
 import duke.TextUi;
 import duke.task.Task;
 
+/**
+ * Deletes a task from task list upon execution
+ */
+
 public class DeleteCommand extends Command {
     private final int TASK_NUM;
 

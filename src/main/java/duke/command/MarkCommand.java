@@ -6,7 +6,11 @@ import duke.TaskList;
 import duke.TextUi;
 import duke.task.Task;
 
-public class MarkCommand extends Command{
+/**
+ * Marks the task as done upon execution
+ */
+
+public class MarkCommand extends Command {
     private final int TASK_NUM;
 
     /**

@@ -1,4 +1,9 @@
 package duke.task;
+
+/**
+ * A todo task that contains a description
+ */
+
 public class Todo extends Task {
 
     /**

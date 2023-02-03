@@ -1,5 +1,9 @@
 package duke.task;
 
+/**
+ * A task with description
+ */
+
 public class Task {
     protected String description;
     protected boolean isDone;

@@ -4,6 +4,10 @@ import duke.Storage;
 import duke.TaskList;
 import duke.TextUi;
 
+/**
+ * List out all the tasks in the task list upon execution
+ */
+
 public class ListCommand extends Command {
 
     /**

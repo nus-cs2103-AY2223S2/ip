@@ -2,10 +2,14 @@ package duke.command;
 
 import duke.DukeException;
 import duke.Storage;
+import duke.task.Task;
 import duke.TaskList;
 import duke.TextUi;
 import duke.task.Todo;
-import duke.task.Task;
+
+/**
+ * Creates a Todo task and add it to the task list
+ */
 
 public class TodoCommand extends Command {
     private final String DETAIL;
