@@ -2,17 +2,17 @@
 “The way to get started is to quit talking and begin doing.”  – Walt Disney [(source)](https://blog.hubspot.com/sales/famous-quotes)
  
 The app is so **easy to use**, you can even use it while doing a dookie. 
-Fear not cus i'm here to help you!
+
 
 ![image](https://media.istockphoto.com/id/1257001864/vector/a-cartoon-illustration-of-a-brown-poo-dookie-or-turd.jpg?s=612x612&w=0&k=20&c=MOpwoydkJGmRuy7FkW1-V0fjX9wCP41MdXUpYycYBtQ=)
  
-DukePro frees your mind of having to remember things you need to do. It's,
+Dukie frees your mind of having to remember things you need to do. It's,
  
 * text-based
 * easy to pick up
 * ~FAST~ SUPER FAST to use
  
-DukePro currently supports the following functions:
+Dukie currently supports the following functions:
  
 * [x]  Managing tasks
 * [x]  Managing deadlines
