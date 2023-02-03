@@ -36,6 +36,8 @@ public class Parser {
      * @throws DukeException Indicates that no known command was found in the input.
      */
     public Command getCommand(String input) throws DukeException {
+        assert input != null;
+
         String op = input.split(" ")[0];
         Command command = strToCommand.get(op);
 
@@ -53,6 +55,8 @@ public class Parser {
      * @return True if the input contains a bye command, otherwise, returns false.
      */
     public boolean isByeCommand(String input) {
+        assert input != null;
+
         return input.split(" ")[0].equals("bye");
     }
 }

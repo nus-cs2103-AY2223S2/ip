@@ -36,6 +36,8 @@ public class ToDoCommand extends AddCommand {
     }
 
     private String extractValidDescription(String input) throws DukeException {
+        assert input != null;
+
         String description = input.replaceFirst("todo", "").trim();
 
         if (description.isEmpty()) {

@@ -42,6 +42,8 @@ public class DeadlineCommand extends AddCommand {
     }
 
     private String[] extractValidArgs(String input) throws DukeException {
+        assert input != null;
+
         if (!input.matches("deadline .+ /by .+")) {
             throw new DukeException("The deadline command format should be:\n  deadline <description> /by <cutoff>");
         }
@@ -70,6 +72,9 @@ public class DeadlineCommand extends AddCommand {
     }
 
     private Deadline createDeadline(String[] args) throws DukeException {
+        assert args != null;
+        assert args.length == 2;
+
         LocalDateTime cutoff;
         try {
             cutoff = LocalDateTime.parse(args[1], LocalDateTimeUtils.INPUT_DATE_TIME_FORMATTER);

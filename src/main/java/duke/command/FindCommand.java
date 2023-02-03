@@ -33,6 +33,8 @@ public class FindCommand implements Command {
     }
 
     private String extractValidKeyphrase(String input) throws DukeException {
+        assert input != null;
+
         String[] args = input.split(" ", 2);
 
         if (args.length != 2 || args[1].trim().isEmpty()) {
@@ -43,6 +45,9 @@ public class FindCommand implements Command {
     }
 
     private List<Integer> filterTasksByKeyphrase(TaskList tasks, String keyphrase) {
+        assert tasks != null;
+        assert keyphrase != null;
+
         List<Integer> taskIndexes = new ArrayList<Integer>();
         for (int i = 0; i < tasks.size(); ++i) {
             if (tasks.get(i).getDescription().contains(keyphrase)) {
@@ -54,6 +59,9 @@ public class FindCommand implements Command {
     }
 
     private String getMatchedTaskListStr(TaskList tasks, List<Integer> matchedTasks) {
+        assert tasks != null;
+        assert matchedTasks != null;
+
         StringBuilder stringBuilder = new StringBuilder();
         for (Integer index : matchedTasks) {
             stringBuilder.append(String.format("%d.%s\n", index + 1, tasks.get(index).toString()));

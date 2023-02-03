@@ -18,6 +18,8 @@ public abstract class AddCommand implements Command {
      */
     @Override
     public String run(String input, TaskList tasks) throws DukeException {
+        assert tasks != null;
+
         Task task = createTask(input);
         tasks.add(task);
 

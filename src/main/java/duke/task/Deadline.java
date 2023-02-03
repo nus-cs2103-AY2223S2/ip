@@ -23,6 +23,8 @@ public class Deadline extends Task {
     public Deadline(boolean isDone, String description, LocalDateTime cutoff) {
         super(isDone, description);
 
+        assert cutoff != null;
+
         this.cutoff = cutoff;
     }
 
@@ -34,6 +36,8 @@ public class Deadline extends Task {
      * @throws DukeException Indicates missing data or incorrect data type or format in args.
      */
     public static Deadline createFromStorage(String[] args) throws DukeException {
+        assert args != null;
+
         if (args.length != 4) {
             throw new DukeException("A deadline in storage has missing data!");
         }

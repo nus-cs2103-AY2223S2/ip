@@ -25,6 +25,9 @@ public class Event extends Task {
     public Event(boolean isDone, String description, LocalDateTime start, LocalDateTime end) {
         super(isDone, description);
 
+        assert start != null;
+        assert end != null;
+
         this.start = start;
         this.end = end;
     }
@@ -37,6 +40,8 @@ public class Event extends Task {
      * @throws DukeException Indicates missing data or incorrect data type or format in args.
      */
     public static Event createFromStorage(String[] args) throws DukeException {
+        assert args != null;
+
         if (args.length != 5) {
             throw new DukeException("An event in storage has missing data!");
         }

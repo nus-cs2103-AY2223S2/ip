@@ -56,6 +56,8 @@ public abstract class Task {
      * @return The string formatted to be suited for writing to storage.
      */
     protected static String formatStrForStorage(String string) {
+        assert string != null;
+
         return string.replace("|", "\\|");
     }
 
@@ -67,6 +69,8 @@ public abstract class Task {
      * @return The strings with formatting from {@link duke.task.Task#formatStrForStorage} undone.
      */
     protected static String[] formatStrsFromStorage(String[] strings) {
+        assert strings != null;
+
         String[] formatted = new String[strings.length];
 
         for (int i = 0; i < strings.length; ++i) {

@@ -23,6 +23,9 @@ public abstract class DukeUtils {
      * @param tasks The user's task list.
      */
     public static void handleInput(String input, Consumer<String> printer, Parser parser, TaskList tasks) {
+        assert printer != null;
+        assert parser != null;
+
         String message;
         try {
             message = parser.getCommand(input).run(input, tasks);

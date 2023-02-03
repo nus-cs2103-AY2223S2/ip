@@ -25,6 +25,8 @@ public class ToDo extends Task {
      * @throws DukeException Indicates missing data or incorrect data type in args.
      */
     public static ToDo createFromStorage(String[] args) throws DukeException {
+        assert args != null;
+
         if (args.length != 3) {
             throw new DukeException("A to-do in storage has missing data!");
         }

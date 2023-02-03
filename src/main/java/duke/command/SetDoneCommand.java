@@ -18,6 +18,8 @@ public abstract class SetDoneCommand implements Command {
      */
     @Override
     public String run(String input, TaskList tasks) throws DukeException {
+        assert tasks != null;
+
         int index = extractValidIndex(input, tasks);
         Task task = tasks.get(index).setDone(shouldBeDone());
 
@@ -48,6 +50,9 @@ public abstract class SetDoneCommand implements Command {
     protected abstract String getSuccessMessagePrefix();
 
     private int extractValidIndex(String input, TaskList tasks) throws DukeException {
+        assert input != null;
+        assert tasks != null;
+
         String argStr = input.replaceFirst(getCommand(), "").trim();
 
         if (argStr.isEmpty()) {
@@ -70,6 +75,8 @@ public abstract class SetDoneCommand implements Command {
     }
 
     private String getMessage(Task task) {
+        assert task != null;
+
         return String.format("%s\n  %s", getSuccessMessagePrefix(), task.toString());
     }
 }

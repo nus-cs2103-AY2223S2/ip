@@ -19,6 +19,8 @@ public class FileStorage implements Storage {
      * @param path The path of the file to use for storage.
      */
     public FileStorage(Path path) {
+        assert path != null;
+
         this.path = path;
     }
 

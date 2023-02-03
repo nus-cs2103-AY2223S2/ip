@@ -42,6 +42,8 @@ public class EventCommand extends AddCommand {
     }
 
     private String[] extractValidArgs(String input) throws DukeException {
+        assert input != null;
+
         if (!input.matches("event .+ /from .+ /to .+")) {
             throw new DukeException("The event command format should be:\n  event <description> /from <start of event> "
                     + "/to <end of event>");
@@ -76,6 +78,9 @@ public class EventCommand extends AddCommand {
     }
 
     private Event createEvent(String[] args) throws DukeException {
+        assert args != null;
+        assert args.length == 3;
+
         LocalDateTime start;
         try {
             start = LocalDateTime.parse(args[1], LocalDateTimeUtils.INPUT_DATE_TIME_FORMATTER);

@@ -22,6 +22,8 @@ public class Gui implements Ui {
      * @param inputHandler Handles the user's inputs.
      */
     public Gui(Stage stage, BiConsumer<String, Consumer<String>> inputHandler) {
+        assert stage != null;
+
         this.stage = stage;
 
         mainWindow = new MainWindow(inputHandler);

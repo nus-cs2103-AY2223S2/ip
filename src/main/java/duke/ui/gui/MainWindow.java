@@ -37,6 +37,8 @@ public class MainWindow extends AnchorPane {
      * @param inputHandler Handles the user's input.
      */
     public MainWindow(BiConsumer<String, Consumer<String>> inputHandler) {
+        assert inputHandler != null;
+
         this.inputHandler = inputHandler;
 
         try {
