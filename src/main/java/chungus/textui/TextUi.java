@@ -9,12 +9,12 @@ import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
 
-import chungus.Ui;
+import chungus.NonBlockingUi;
 
 /**
  * A simple console based UI.
  */
-public class TextUi implements Ui {
+public class TextUi implements NonBlockingUi {
     private Scanner in;
     private Writer out;
 
@@ -41,11 +41,11 @@ public class TextUi implements Ui {
      * {@inheritDoc}
      */
     @Override
-    public void startWith(Consumer<String> handler, Runnable before, Runnable after, AtomicBoolean isRunning) {
+    public void init(Consumer<String> inputHandler, Runnable before, Runnable after, AtomicBoolean isRunning) {
         new Thread(() -> {
             while (isRunning.get()) {
                 before.run();
-                handler.accept(in.nextLine().trim());
+                inputHandler.accept(in.nextLine().trim());
                 after.run();
             }
         }).start();

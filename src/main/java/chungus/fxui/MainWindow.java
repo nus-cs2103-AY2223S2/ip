@@ -3,7 +3,7 @@ package chungus.fxui;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
 
-import chungus.Ui;
+import chungus.NonBlockingUi;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -13,7 +13,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-public class MainWindow extends AnchorPane implements Ui {
+public class MainWindow extends AnchorPane implements NonBlockingUi {
     @FXML
     private ScrollPane scrollPane;
 
@@ -38,7 +38,8 @@ public class MainWindow extends AnchorPane implements Ui {
      * {@inheritDoc}
      */
     @Override
-    public void startWith(Consumer<String> handler, Runnable beforeEach, Runnable afterEach, AtomicBoolean isRunning) {
+    public void init(Consumer<String> inputHandler, Runnable beforeEach, Runnable afterEach,
+            AtomicBoolean isRunning) {
         Runnable handleInput = () -> {
             String cmd = userInput.getText();
             if (cmd.length() == 0) {
@@ -49,7 +50,7 @@ public class MainWindow extends AnchorPane implements Ui {
             dialogContainer.getChildren().add(new DialogBox(cmd, dogeImage));
 
             beforeEach.run();
-            handler.accept(cmd);
+            inputHandler.accept(cmd);
             afterEach.run();
         };
 
