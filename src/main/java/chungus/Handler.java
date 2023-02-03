@@ -50,7 +50,7 @@ class Handlers {
      * 
      * @return A handler for exiting the app.
      */
-    public static Handler bye() {
+    public static Handler getHandlerBye() {
         return (TaskList tasks, Ui ui, Storage storage) -> {
             ui.info("Bye!");
             return true;
@@ -62,7 +62,7 @@ class Handlers {
      * 
      * @return A handler for listing tasks.
      */
-    public static Handler list() {
+    public static Handler getHandlerList() {
         return (TaskList tasks, Ui ui, Storage storage) -> {
             ui.info("Here are the tasks in your list:\n%s", tasks);
             // Handler.printTasksIndented(tasks, ui);
@@ -76,7 +76,7 @@ class Handlers {
      * @param desc The description of the new todo.
      * @return A handler which creates a new Todo with the given description.
      */
-    public static Handler todo(String desc) {
+    public static Handler getHandlerTodo(String desc) {
         return (TaskList tasks, Ui ui, Storage storage) -> {
             Todo task = new Todo(desc);
             tasks.add(task);
@@ -94,7 +94,7 @@ class Handlers {
      * @return A handler which creates a new task with the given description and
      *         deadline.
      */
-    public static Handler deadline(String desc, LocalDateTime deadline) {
+    public static Handler getHandlerDeadline(String desc, LocalDateTime deadline) {
         return (TaskList tasks, Ui ui, Storage storage) -> {
             Deadline task = new Deadline(desc, deadline);
             tasks.add(task);
@@ -113,7 +113,7 @@ class Handlers {
      * @return A handler which creates a new event with the given description and
      *         dates.
      */
-    public static Handler event(String desc, LocalDateTime from, LocalDateTime to) {
+    public static Handler getHandlerEvent(String desc, LocalDateTime from, LocalDateTime to) {
         return (TaskList tasks, Ui ui, Storage storage) -> {
             Event task = new Event(desc, from, to);
             tasks.add(task);
@@ -129,7 +129,7 @@ class Handlers {
      * @param idx The current index of the task (0-based).
      * @return A handler to mark the specified task as complete.
      */
-    public static Handler mark(int idx) {
+    public static Handler getHandlerMark(int idx) {
         return (TaskList tasks, Ui ui, Storage storage) -> {
             tasks.setDone(idx);
 
@@ -145,7 +145,7 @@ class Handlers {
      * @param idx The current index of the task (0-based).
      * @return A handler to mark the specified task as incomplete.
      */
-    public static Handler unmark(int idx) {
+    public static Handler getHandlerUnmark(int idx) {
         return (TaskList tasks, Ui ui, Storage storage) -> {
             tasks.setNotDone(idx);
 
@@ -161,7 +161,7 @@ class Handlers {
      * @param idx The current index of the task (0-based).
      * @return A handler to delete the specified task.
      */
-    public static Handler delete(int idx) {
+    public static Handler getHandlerDelete(int idx) {
         return (TaskList tasks, Ui ui, Storage storage) -> {
             Task task = tasks.remove(idx);
             Handler.reportDeletedTask(task, ui, tasks);
@@ -176,7 +176,7 @@ class Handlers {
      * @param searchTerm The term(s) to search for.
      * @return A handler for finding tasks.
      */
-    public static Handler find(String searchTerm) {
+    public static Handler getHandlerFind(String searchTerm) {
         return (TaskList tasks, Ui ui, Storage storage) -> {
             TaskList filtered = tasks.filter(task -> task.desc().contains(searchTerm));
             if (filtered.count() == 0) {
@@ -194,7 +194,7 @@ class Handlers {
      * @param cmd The raw unknown command.
      * @return A handler to respond to the unknown command.
      */
-    public static Handler unknown(String cmd) {
+    public static Handler getHandlerUnknown(String cmd) {
         return (TaskList tasks, Ui ui, Storage storage) -> {
             throw new ChungusException(String.format("Unknown command \"%s\"", cmd));
         };

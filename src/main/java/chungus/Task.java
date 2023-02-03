@@ -83,6 +83,7 @@ abstract class Task {
      * @throws TaskMarshalException If the string is invalid.
      */
     public static Task unmarshal(String s) {
+        assert s.length() > 1;
         char typ = s.charAt(0);
         switch (typ) {
         case 'T':
@@ -213,9 +214,7 @@ class Deadline extends Task {
      * @throws TaskMarshalException If the string is invalid.
      */
     public static Deadline unmarshal(String s) {
-        if (s.charAt(0) != 'D') {
-            throw new TaskMarshalException(s);
-        }
+        trueOrThrow(s.charAt(0) == 'D', new TaskMarshalException(s));
 
         int idx = 2;
         Pair<String, Integer> dechonked;
@@ -297,9 +296,7 @@ class Event extends Task {
      * @throws TaskMarshalException If the string is invalid.
      */
     public static Event unmarshal(String s) {
-        if (s.charAt(0) != 'E') {
-            throw new TaskMarshalException(s);
-        }
+        trueOrThrow(s.charAt(0) == 'E', new TaskMarshalException(s));
         boolean isDone = s.charAt(1) == '0' ? false : true;
 
         int idx = 2;
