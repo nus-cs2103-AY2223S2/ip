@@ -6,13 +6,15 @@ package babe.task;
  */
 public class Deadline extends Task {
 
-    /** A date/time for this <code>Deadline</code> */
+    /**
+     * A date/time for this <code>Deadline</code>
+     */
     private String deadline = "";
 
     /**
      * Constructor for <code>Deadline</code> item.
      *
-     * @param content Description of this <code>Deadline</code>.
+     * @param content  Description of this <code>Deadline</code>.
      * @param deadline Date for the deadline of this item.
      */
     public Deadline(String content, String deadline) {
@@ -40,7 +42,9 @@ public class Deadline extends Task {
      */
     public String toSaveFormat() {
         return "D|" + (this.isDone ? 1 : 0) + "|" + this.description + "|" + this.deadline;
-    };
+    }
+
+    ;
 }
 
 

@@ -6,18 +6,22 @@ package babe.task;
  */
 public class Event extends Task {
 
-    /** The start date/time for this <code>Event</code>. */
+    /**
+     * The start date/time for this <code>Event</code>.
+     */
     private String fromDate = "";
 
-    /** The end date/time for this <code>Event</code>. */
+    /**
+     * The end date/time for this <code>Event</code>.
+     */
     private String toDate = "";
 
     /**
      * Constructor for <code>Event</code> object.
      *
-     * @param content Description of this <code>Event</code>.
+     * @param content  Description of this <code>Event</code>.
      * @param fromDate The start date/time for this <code>Event</code>.
-     * @param toDate The end date/time for this <code>Event</code>.
+     * @param toDate   The end date/time for this <code>Event</code>.
      */
     public Event(String content, String fromDate, String toDate) {
         super(content);
@@ -46,5 +50,7 @@ public class Event extends Task {
         return "E|" + (this.isDone ? 1 : 0) + "|" + this.description + "|" + this.fromDate + "|"
                 + this.toDate;
 
-    };
+    }
+
+    ;
 }

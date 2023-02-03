@@ -25,6 +25,7 @@ class TaskList {
     /**
      * Adds a ToDo to memory.
      * Calls the ToDo constructor and inserts created ToDo into this Babe's memory.
+     *
      * @param content The description of the ToDo item.
      */
     public Task addToDo(String content, boolean toNotify) {
@@ -39,8 +40,9 @@ class TaskList {
     /**
      * Adds a Deadline to memory.
      * Calls the Deadline constructor and inserts created Deadline into this Babe's memory.
+     *
      * @param content The content of the Deadline item.
-     * @param date The date of the deadline. May include time too.
+     * @param date    The date of the deadline. May include time too.
      */
     public Task addDeadline(String content, String date, boolean toNotify) {
         Deadline item = new Deadline(content, date);
@@ -54,9 +56,10 @@ class TaskList {
     /**
      * Adds an Event to memory.
      * Calls the Event constructor and inserts created Event into this Babe's memory.
-     * @param content The content of the Event item.
+     *
+     * @param content   The content of the Event item.
      * @param startDate The start date of the Event. May include time too.
-     * @param endDate The end date of the Event. May include time too.
+     * @param endDate   The end date of the Event. May include time too.
      */
     public Task addEvent(String content, String startDate, String endDate, boolean toNotify) {
         Event item = new Event(content, startDate, endDate);
@@ -126,6 +129,7 @@ class TaskList {
 
     /**
      * Returns true if the TaskList has zero items.
+     *
      * @return A boolean value. true if Task List has zero items, false otherwise.
      */
     protected boolean isEmpty() {
