@@ -27,6 +27,7 @@ public class FindCommand extends Command{
      */
     @Override
     public void execute(TaskList tasks, UI ui, Storage storage) throws RedException {
+        ui.addCurrentReply(tasks.find(descriptor));
         System.out.println(tasks.find(descriptor));
     }
 }

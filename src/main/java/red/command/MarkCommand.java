@@ -40,7 +40,7 @@ public class MarkCommand extends Command {
             throw new RedException("Task specified does not exist");
         } else {
             Task currentTask = tasks.indexOf(this.taskIndex);
-            currentTask.mark();
+            ui.addCurrentReply(currentTask.mark());
         }
     }
 

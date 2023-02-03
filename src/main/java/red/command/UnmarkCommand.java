@@ -40,7 +40,7 @@ public class UnmarkCommand extends Command {
             throw new RedException("Task specified does not exist");
         } else {
             Task currentTask = tasks.indexOf(this.taskIndex);
-            currentTask.unmark();
+            ui.addCurrentReply(currentTask.unmark());
         }
     }
 }

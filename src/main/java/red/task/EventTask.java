@@ -5,8 +5,8 @@ package red.task;
  */
 public class EventTask extends Task {
 
-    protected String by;
-    protected String byy;
+    protected String start;
+    protected String end;
 
     /**
      * Constructor for a EventTask that takes in a description as well as starting and ending time.
@@ -15,14 +15,14 @@ public class EventTask extends Task {
      * @param by The starting time of the event.
      * @param byy The ending time of the event.
      */
-    public EventTask(String description, String by, String byy) {
+    public EventTask(String description, String start, String end) {
         super(description);
-        this.by = by;
-        this.byy = byy;
+        this.start = start;
+        this.start = end;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (From: " + by + " To: " + byy + ")";
+        return "[E]" + super.toString() + " (From: " + start + " To: " + end + ")";
     }
 }

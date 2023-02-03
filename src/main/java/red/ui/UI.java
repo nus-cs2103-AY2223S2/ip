@@ -8,6 +8,7 @@ import java.util.Scanner;
 public class UI {
 
     private static Scanner scanner;
+    private StringBuilder redReply = new StringBuilder();
 
     /**
      * Sends a greeting to the user.
@@ -42,5 +43,17 @@ public class UI {
         System.out.println("Error Message String = " + err);
 
 
+    }
+
+    public void clear() {
+        this.redReply = new StringBuilder();
+    }
+
+    public String getCurrentReply() {
+        return String.valueOf(this.redReply);
+    }
+
+    public void addCurrentReply(String reply) {
+        this.redReply.append(reply);
     }
 }
