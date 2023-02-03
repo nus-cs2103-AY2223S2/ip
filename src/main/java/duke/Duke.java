@@ -17,8 +17,8 @@ public class Duke {
         this.parser = new Parser();
         this.storage = new Storage(filePath);
         try {
-            taskList = new TaskList(storage.loadTasks(parser)); // edit loadTasks()
-        } catch (DukeExceptions e) { // throws the error if file path can't be found
+            taskList = new TaskList(storage.loadTasks(parser));
+        } catch (DukeExceptions e) {
             ui.showError(e);
             taskList = new TaskList();
         }
