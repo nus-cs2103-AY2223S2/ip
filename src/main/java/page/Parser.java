@@ -2,8 +2,22 @@ package page;
 
 import page.quest.*;
 
+/**
+ * Represents a parser that interprets inputs given to Page, then executes them.
+ */
 public class Parser {
 
+    /**
+     * Parses and executes the input given to Page.
+     * Returns <code>true</code> if the input is <code>bye</code> and <code>false</code> otherwise.
+     *
+     * @param input Input given to Page.
+     * @param ui The UI that the input may interact with.
+     * @param storage The Storage that the input may modify.
+     * @param questLog The Quest Log that the input may modify.
+     * @return <code>true</code> if the input is <code>bye</code>, <code>false</code> otherwise.
+     * @throws PageException If input is invalid.
+     */
     public boolean parseExecute(String input, Ui ui, Storage storage, QuestLog questLog) throws PageException {
         switch (input) {
             case "bye":

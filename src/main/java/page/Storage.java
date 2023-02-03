@@ -9,13 +9,28 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents a storage object that handles saving and loading of data.
+ */
 public class Storage {
+    /** File where the save data is stored. */
     private File storageFile;
 
+    /**
+     * Constructs a Storage object that saves and loads data to the given file path.
+     *
+     * @param filePath The file path where data is saved to and loaded from.
+     */
     public Storage(String filePath) {
         this.storageFile = new File(filePath);
     }
 
+    /**
+     * Returns the stored list of quests.
+     *
+     * @return The stored list of quests.
+     * @throws PageException If the saved data is incorrectly formatted.
+     */
     public ArrayList<Quest> loadData() throws PageException {
         ArrayList<Quest> loadedQuests = new ArrayList<>();
         try {
@@ -53,6 +68,11 @@ public class Storage {
         return loadedQuests;
     }
 
+    /**
+     * Saves the given Quest Log into storage.
+     *
+     * @param questLog The Quest Log to be saved.
+     */
     public void saveData(QuestLog questLog) {
         try {
             if (storageFile.getParentFile() != null) {
