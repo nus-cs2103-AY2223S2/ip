@@ -31,12 +31,13 @@ public class DeleteCommand extends Command {
      * @param ui Current ui instance.
      * @param storage Current storage instance.
      * @throws IOException When there is a problem with writing to the file.
+     * @return Output to user.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
         Task t = taskList.deleteTasks(inputIndex);
         storage.updateStorage(taskList);
-        ui.printDelete(taskList, t);
+        return ui.printDelete(taskList, t);
     }
 
     /**

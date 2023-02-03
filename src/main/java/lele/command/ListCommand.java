@@ -13,14 +13,14 @@ public class ListCommand extends Command {
     /**
      * Prints the tasks in the task list.
      *
-     * @param taskList Current task list instance.
-     * @param ui Current ui instance.
-     * @param storage Current storage instance.
+     * @param taskList
+     * @param ui
+     * @param storage
+     * @return Output to user.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-
-        ui.printTaskList(taskList);
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        return ui.printTaskList(taskList);
     }
 
     /**

@@ -29,11 +29,13 @@ public class UnmarkCommand extends Command {
      * @param storage Current storage instance.
      * @throws IOException When there is a problem with
      * writing to the storage.
+     * @return Output to user
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
-        ui.printUnMarkStatus(taskList, index);
-        storage.updateStorage(taskList);
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
+            taskList.unMarkStatus(index);
+            storage.updateStorage(taskList);
+            return ui.printUnMarkStatus(taskList, index);
     }
 
     /**

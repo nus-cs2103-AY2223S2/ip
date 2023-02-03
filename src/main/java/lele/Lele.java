@@ -1,7 +1,6 @@
 package lele;
 
 import lele.command.Command;
-import lele.exception.EmptyStorageException;
 import lele.exception.LeleException;
 import lele.parser.Parser;
 import lele.storage.Storage;
@@ -17,6 +16,7 @@ public class Lele {
     private final Storage storage;
     private TaskList taskList;
     private final Ui ui;
+
 
     /**
      * Constructor for Lele.
@@ -47,15 +47,17 @@ public class Lele {
                 String fullCommand = ui.readCommand();
                 ui.showLine(); // show the divider line ("_______")
                 Command c = Parser.parse(fullCommand);
-                c.execute(taskList, ui, storage);
+                String output = c.execute(taskList, ui, storage);
+                System.out.println(output);
                 isExit = c.isExit();
             } catch (LeleException | IOException e) {
-                ui.showError(e.getMessage());
+                System.out.println(ui.showError(e.getMessage()));
             } finally {
                 ui.showLine();
             }
         }
     }
+
 
     /**
      * The main method. Initialises a Lele instance and
@@ -66,6 +68,23 @@ public class Lele {
     public static void main(String[] args) {
         new Lele("./data/lele.txt").run();
     }
+
+    /**
+     * Receives user input from GUI and responds
+     * accordingly with commands.
+     *
+     * @param input Query from user.
+     * @return Response for user's query.
+     */
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(taskList, ui, storage);
+        } catch (LeleException | IOException e) {
+            return ui.showError(e.getMessage());
+        }
+    }
+
 
 
 }

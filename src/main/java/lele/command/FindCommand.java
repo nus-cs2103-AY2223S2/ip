@@ -28,8 +28,8 @@ public class FindCommand extends Command {
      * @param storage Current storage instance.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.printFind(taskList, this.regex);
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        return ui.printFind(taskList, this.regex);
     }
 
     /**
