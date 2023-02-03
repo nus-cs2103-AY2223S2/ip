@@ -14,12 +14,27 @@ public class Event extends Task {
     /** End date of this task */
     private LocalDate endTime;
 
+    /**
+     * Creates an Event object.
+     *
+     * @param s Details of event.
+     * @param startTime Start date of event.
+     * @param endTime End date of event.
+     */
     public Event(String s, String startTime, String endTime) {
         super(s);
         this.startTime = LocalDate.parse(startTime, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         this.endTime = LocalDate.parse(endTime, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
 
+    /**
+     * Creates an Event object.
+     * Use when reading from file.
+     *
+     * @param isTaskDone Status of event.
+     * @param taskDetails Details of event.
+     * @param taskDate Start and end date of event.
+     */
     public Event(Boolean isTaskDone, String taskDetails, String taskDate) {
         super(taskDetails);
         if (isTaskDone) {
