@@ -58,9 +58,11 @@ public class Duke extends Application {
         super();
     }
 
+    /*
     public static void main(String[] args) {
         new Duke("src/data/duke.txt").run();
     }
+     */
 
     @Override
     public void start(Stage stage) {
@@ -127,6 +129,10 @@ public class Duke extends Application {
 
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(ui.introduce(), new ImageView(duke))
+        );
+
         //Part 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
@@ -170,37 +176,23 @@ public class Duke extends Application {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    private String getResponse(String input) {
-        //StringBuilder allResponses = new StringBuilder();
-        //ui.introduce(allResponses);
-        //return allResponses.toString();
-        return "I heard you:\n" + input;
-    }
+    private String getResponse(String userInput) {
+        String response = "I heard you: " + userInput + "\n";
 
-    /**
-     * Executes the Duke chatbot. 
-     */
-    public void run() {
-
-        //ui.introduce();
-        ui.instruct();
-        Scanner scan = new Scanner(System.in);
-        String userInput = scan.nextLine();
-
-        while (!parser.checkEnd(userInput)) {
+        if (!parser.checkEnd(userInput)) {
             if (parser.checkListRequest(userInput)) {
-                tasks.printContents();
+                response += tasks.printContents();
             } else if (parser.checkMarkRequest(userInput)) {
                 String[] terms = userInput.split(" ");
                 int itemNo = Integer.parseInt(terms[1]);
-                tasks.markTask(itemNo);
+                response += tasks.markTask(itemNo);
             } else if (parser.checkDeleteRequest(userInput)) {
                 String[] terms = userInput.split(" ");
                 int itemNo = Integer.parseInt(terms[1]);
-                tasks.deleteTask(itemNo);
+                response += tasks.deleteTask(itemNo);
             } else if (parser.checkFindRequest(userInput)) {
                 String toBeFound = userInput.substring(5);
-                tasks.find(toBeFound);
+                response += tasks.find(toBeFound);
             }
             else {
                 String[] terms = userInput.split(" ");
@@ -209,11 +201,12 @@ public class Duke extends Application {
                         if (terms.length == 1) {
                             String error = "The description of a todo cannot be empty";
                             throw new DukeException(error);
+                        } else {
+                            Task newTask = new Todo(userInput.substring(5));
+                            response += tasks.addTask(newTask);
                         }
-                        Task newTask = new Todo(userInput.substring(5));
-                        tasks.addTask(newTask);
                     } catch (DukeException err) {
-                        System.out.println(err);
+                        response += (err + "\n");
                     }
                 } else if (terms[0].equals("deadline")) {
                     String[] splitBySlash = userInput.split("/");
@@ -224,9 +217,9 @@ public class Duke extends Application {
                         String description = splitBySlash[0].substring(9);
                         String by = splitBySlash[1].substring(3);
                         Task newTask = new Deadline(description, by);
-                        tasks.addTask(newTask);
+                        response += tasks.addTask(newTask);
                     } catch (DukeException err) {
-                        System.out.println(err);
+                        response += (err + "\n");
                     }
 
                 } else if (terms[0].equals("event")) {
@@ -239,22 +232,24 @@ public class Duke extends Application {
                         String from = splitBySlash[1].substring(5);
                         String to = splitBySlash[2].substring(3);
                         Task newTask = new Event(description, from, to);
-                        tasks.addTask(newTask);
+                        response += tasks.addTask(newTask);
                     } catch (DukeException err) {
-                        System.out.println(err);
+                        response += (err + "\n");
                     }
                 } else {
                     try {
                         throw new DukeException("I don't know what that means.");
                     } catch (DukeException err) {
-                        System.out.println(err);
+                        response += (err + "\n");
                     }
                 }
 
             }
-            userInput = scan.nextLine();
+        } else {
+            storage.addToFile(tasks);
+            response += ui.terminate();
         }
-        storage.addToFile(tasks);
-        ui.terminate();
+
+        return response;
     }
 }
