@@ -1,8 +1,11 @@
 package page;
 
-import page.quest.*;
-
 import java.util.ArrayList;
+
+import page.quest.Deadline;
+import page.quest.Event;
+import page.quest.Quest;
+import page.quest.Todo;
 
 /**
  * Represents the Quest Log: a list of tasks managed by Page.
@@ -15,7 +18,7 @@ public class QuestLog {
      * Constructs an empty Quest Log.
      */
     public QuestLog() {
-        this.quests = new ArrayList<Quest>();
+        quests = new ArrayList<Quest>();
     }
 
     /**

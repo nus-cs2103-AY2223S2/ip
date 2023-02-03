@@ -1,8 +1,12 @@
-import org.junit.jupiter.api.Test;
-import page.*;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
+
+import page.PageException;
+import page.Parser;
+import page.QuestLog;
+import page.Ui;
 
 public class ParserTest {
     @Test

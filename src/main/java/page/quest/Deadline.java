@@ -1,21 +1,21 @@
 package page.quest;
 
-import page.PageException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import page.PageException;
 
 /**
  * Represents a deadline, i.e. a quest with a complete-by date/time.
  */
 public class Deadline extends Quest {
-    /** Complete-by time for the deadline */
-    private LocalDateTime by;
     /** Formatter for converting inputs in the HHmm dd/MM/yy format into LocalDateTime objects */
     private static DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("[HHmm dd/MM/yy][dd MMM yyyy hh:mma]");
     /** Formatter for converting LocalDateTime objects into the dd MMM yyyy hh:mma format for outputting */
     private static DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy hh:mma");
+    /** Complete-by time for the deadline */
+    private LocalDateTime by;
 
     /**
      * Constructs a new Deadline with the given description and complete-by date/time.

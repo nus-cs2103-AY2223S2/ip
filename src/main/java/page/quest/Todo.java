@@ -4,6 +4,7 @@ package page.quest;
  * Represents a todo, i.e. a quest with no specific start or end date.
  */
 public class Todo extends Quest {
+
     public Todo(String description) {
         super(description);
     }
