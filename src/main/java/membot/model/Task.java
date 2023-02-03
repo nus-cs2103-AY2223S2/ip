@@ -113,9 +113,10 @@ public abstract class Task {
         case COMPLETED:
             return "X";
         default:
-            // Should not reach here
-            return "?";
+            assert false : "Available Task status are: NEW, COMPLETED";
         }
+
+        return "?";
     }
 
     /**
@@ -174,7 +175,7 @@ public abstract class Task {
                         new String(endDateTime, StandardCharsets.UTF_8));
                 break;
             default:
-                break;
+                assert false : "Unknown Task type";
             }
 
             restoredTask.setStatus(TaskStatus.valueOf(new String(status, StandardCharsets.UTF_8)));
