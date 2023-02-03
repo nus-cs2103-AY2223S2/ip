@@ -28,7 +28,6 @@ public class CommandLineInputParser implements Parser<CommandLineInput> {
         String argString = "";
         Command command;
 
-        // parse
         try (Scanner scanner = new Scanner(input)) {
             if (scanner.hasNext()) {
                 // parse command
