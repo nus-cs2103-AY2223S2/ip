@@ -14,6 +14,7 @@ public class Delete extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage){
         this.t = tasks.getTask(index);
         tasks.removeTask(index);
+        storage.saveTaskList(tasks);
         ui.printRemovedMessage(this.t, tasks.size());
     }
 }
