@@ -11,6 +11,7 @@ import book.command.ExitCommand;
 import book.command.FindCommand;
 import book.command.ListCommand;
 import book.command.MarkCommand;
+import book.command.SortCommand;
 import book.command.UnmarkCommand;
 import book.exception.IncompleteInputException;
 import book.exception.InvalidFormatException;
@@ -45,6 +46,8 @@ public final class Parser {
                 return new ExitCommand();
             case "list":
                 return new ListCommand();
+            case "sort":
+                return new SortCommand();
             case "mark":
                 return new MarkCommand(Integer.parseInt(inputs[1]));
             case "unmark":

@@ -1,4 +1,4 @@
-# book.book project
+# Book project
 
 Welcome to
 ```
@@ -12,6 +12,6 @@ Welcome to
 a Personal Assistant Chatbot that helps to keep track of various things!
 
 ## Credits
-[checkstyle.xml](https://github.com/se-edu/addressbook-level3/tree/master/config/checkstyle)\n
-[suppressions.xml](https://github.com/se-edu/addressbook-level3/tree/master/config/checkstyle)\n
+[checkstyle.xml](https://github.com/se-edu/addressbook-level3/tree/master/config/checkstyle)  
+[suppressions.xml](https://github.com/se-edu/addressbook-level3/tree/master/config/checkstyle)  
 [gradle.yml](https://github.com/se-edu/duke/blob/full-template/.github/workflows/gradle.yml)
