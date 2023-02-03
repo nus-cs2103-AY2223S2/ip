@@ -12,18 +12,18 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-/**
- * Storage class to store the tasks in text file.
- *
- * @author Gao Mengqi
- * @version CS2103T AY22/23 Semester 2
- */
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+/**
+ * Storage class to store the tasks in text file.
+ *
+ * @author Gao Mengqi
+ * @version CS2103T AY22/23 Semester 2
+ */
 public class Storage {
     private static final String TODO = "T";
     private static final String DEADLINE = "D";

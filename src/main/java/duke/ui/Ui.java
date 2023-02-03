@@ -1,10 +1,9 @@
 package duke.ui;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.task.Task;
 
 /**
  * Class for the Ui object.
@@ -16,11 +15,11 @@ import java.util.Scanner;
 public class Ui {
     private static String logo =
             "      _     _            _                 \n" +
-            "     | |   (_)          | |                \n" +
-            "  ___| |__  _ _ __   ___| |__   __ _ _ __  \n" +
-            " / __| '_ \\| | '_ \\ / __| '_ \\ / _` | '_ \\ \n" +
-            " \\__ \\ | | | | | | | (__| | | | (_| | | | |\n" +
-            " |___/_| |_|_|_| |_|\\___|_| |_|\\__,_|_| |_|\n";
+                    "     | |   (_)          | |                \n" +
+                    "  ___| |__  _ _ __   ___| |__   __ _ _ __  \n" +
+                    " / __| '_ \\| | '_ \\ / __| '_ \\ / _` | '_ \\ \n" +
+                    " \\__ \\ | | | | | | | (__| | | | (_| | | | |\n" +
+                    " |___/_| |_|_|_| |_|\\___|_| |_|\\__,_|_| |_|\n";
     private final Scanner sc;
 
     /**
@@ -117,7 +116,7 @@ public class Ui {
         String currStr = "Here are the matching tasks in your list:\n";
         int counter = 1;
         for (int i = 0; i < tasklist.size(); i++) {
-            currStr = currStr + counter+ "." + tasklist.get(i);
+            currStr = currStr + counter + "." + tasklist.get(i);
         }
         return currStr;
     }
