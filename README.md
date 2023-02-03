@@ -1,5 +1,5 @@
 ## Dukie
-“The way to get started is to quit talking and begin doing.”  – Walt Disney [(source)](https://blog.hubspot.com/sales/famous-quotes)
+> “The way to get started is to quit talking and begin doing.”  – Walt Disney [(source)](https://blog.hubspot.com/sales/famous-quotes)
  
 The app is so **easy to use**, you can even use it while doing a dookie. 
 
