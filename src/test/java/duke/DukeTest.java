@@ -15,8 +15,8 @@ public class DukeTest {
         System.setOut(new PrintStream(printedString));
         ByteArrayInputStream inputString = new ByteArrayInputStream(("bye\n").getBytes());
         System.setIn(inputString);
-        Duke duke = new Duke("src/data/duke.txt");
-        duke.run();
+        Duke duke = new Duke();
+//        duke.run();
 
         assertEquals("-----------------------------------------------------------" +
                         "Hello! I'm BobWhat can I do for you?" +

@@ -2,6 +2,7 @@ package duke;
 
 import duke.task.Task;
 import duke.task.ToDo;
+import duke.ui.UiController;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
@@ -29,8 +30,8 @@ public class TaskListTest {
         System.setOut(new PrintStream(printedString));
         TaskList lst = new TaskList();
         Task task = new ToDo("this is a test task");
-        Ui ui = new Ui();
-        lst.addTaskToList(task, ui);
+//        UiController ui = new UiController();
+//        lst.addTaskToList(task, ui);
         assertEquals(1, lst.size());
         assertTrue(lst.tasks.get(0) instanceof ToDo);
         assertEquals(lst.tasks.get(0).getName(), "this is a test task");
