@@ -99,8 +99,10 @@ public class Ui {
             //this.showLine();
         } else if(type == TypeOfTask.delete) {
             System.out.println(String.format("Now you have %d tasks in the list",taskList.getSize()));
-            //System.out.println("*-".repeat(100));
-        }else {
+            //System.out.println("*-".repeat(100))
+        } else if(type == TypeOfTask.find) {
+            System.out.println("Here are the matching tasks in your list");
+        } else {
             System.out.println("Oh no! You forgot to type in something useful :p");
             System.out.println("What can I do for you?");
         }

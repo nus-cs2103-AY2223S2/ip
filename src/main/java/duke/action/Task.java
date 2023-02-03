@@ -59,6 +59,14 @@ public class Task implements Serializable {
     }
 
     /**
+     * Returns the parser stored
+     * @return parser
+     */
+    public Parser getParser() {
+        return this.parser;
+    }
+
+    /**
      * marks the task as done
      */
     public void markAsDone(){

@@ -1,3 +1,5 @@
+package duke;
+
 import duke.data.TypeOfTask;
 import duke.parser.Parser;
 import duke.exception.DukeException;
@@ -5,7 +7,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
- * ParserTest class tests the functionality of parser with multiple different test cases
+ * duke.ParserTest class tests the functionality of parser with multiple different test cases
  *
  * @author Haiqel Bin Hanaffi (Acerizm)
  */

@@ -46,8 +46,8 @@ public class Storage {
             taskList = (List<Task>) load.readObject();
             //return taskList;
         } catch(Exception e){
-            System.out.println(e.getMessage());
-            e.printStackTrace();
+//            System.out.println(e.getMessage());
+//            e.printStackTrace();
             throw new DukeException(TypeOfTask.storage,0);
         } finally {
             return taskList; 

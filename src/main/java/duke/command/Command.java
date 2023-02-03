@@ -29,6 +29,14 @@ public abstract class Command {
     }
 
     /**
+     * Returns the contents of the command
+     * @return contents of command
+     */
+    public String[] getContents() {
+        return this.contents;
+    }
+
+    /**
      * Returns the exit status
      * @return exit status
      */

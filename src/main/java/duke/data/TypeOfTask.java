@@ -15,5 +15,6 @@ public enum TypeOfTask {
     event,
     delete,
     parser,
-    storage
+    storage,
+    find
 }

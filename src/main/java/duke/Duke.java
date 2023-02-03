@@ -57,6 +57,7 @@ public class Duke {
                 ui.showLine();
             }
         }
+        ui.close();
     }
 
     /**

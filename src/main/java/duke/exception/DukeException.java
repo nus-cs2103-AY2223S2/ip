@@ -23,6 +23,20 @@ public class DukeException extends Exception {
         this.errorCode = errorCode;
         this.errorTask = task;
         switch(task){
+            case find: {
+                switch(errorCode) {
+                    case 0:
+                        this.message = "Description of find cannot be empty! Try again!";
+                        break;
+                    case 1:
+                        this.message = "There are no tasks that matches your description. Try again!";
+                        break;
+                    default:
+                        this.message = "something went wrong here";
+                        break;
+                }
+                break;
+            }
             case todo: {
                 switch(errorCode){
                     case 0:
