@@ -36,6 +36,7 @@ public class Event extends Task {
         String input = inputSplit[0];
         String[] dateSplit = inputSplit[1].split(" ", 2);
         String date = dateSplit[1];
+
         Event event = new Event(input, LocalDate.parse(date));
         taskList.addTask(event);
         return Ui.addedTask() + Ui.indent(event.toString());

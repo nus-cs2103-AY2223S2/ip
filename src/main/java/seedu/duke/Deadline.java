@@ -36,6 +36,7 @@ public class Deadline extends Task {
         String input = inputSplit[0];
         String[] dateSplit = inputSplit[1].split(" ", 2);
         String date = dateSplit[1];
+
         Deadline deadline = new Deadline(input, LocalDate.parse(date));
         taskList.addTask(deadline);
         return Ui.addedTask() + Ui.indent(deadline.toString());
