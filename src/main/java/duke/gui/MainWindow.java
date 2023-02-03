@@ -84,9 +84,9 @@ public class MainWindow extends AnchorPane {
     }
 
     private void entry() {
-        String loadStatus = this.duke.displayLoadStatus();
+        String loadFromStorageStatus = this.duke.displayLoadFromStorageStatus();
         dialogContainer.getChildren().addAll(
-            DialogBox.getDukeDialog(loadStatus, MainWindow.currentColetteImage)
+            DialogBox.getDukeDialog(loadFromStorageStatus, MainWindow.currentColetteImage)
         );
         MainWindow.changeSpriteExpression(SpriteEmotion.NEUTRAL);
         String greetingText = GuiText.showGreeting();

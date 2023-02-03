@@ -56,6 +56,7 @@ public class TaskList {
         } else if (index < 0) {
             throw new DukeException(GuiText.generateIndexErrorMessage(IndexErrorType.NEGATIVE));
         }
+
         Task task = this.getTaskAtIndex(index);
         switch (commandType) {
         case MARK:
@@ -68,7 +69,7 @@ public class TaskList {
             this.tasks.remove(index);
             break;
         default:
-            break;
+            throw new DukeException(GuiText.generateGenericErrorMessage());
         }
         return task;
     }
@@ -134,8 +135,8 @@ public class TaskList {
      */
     public TaskList findTasksByKeyword(String ... keywords) {
         TaskList filteredTaskList = new TaskList();
-        for (String keyword : keywords) {
-            for (Task t : this.tasks) {
+        for (Task t : this.tasks) {
+            for (String keyword : keywords) {
                 if (t.nameContainsKeyword(keyword) && ! filteredTaskList.containsTask(t)) {
                     filteredTaskList.addTask(t);
                 }

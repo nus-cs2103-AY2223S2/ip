@@ -1,6 +1,7 @@
 package duke.task;
 
 import duke.exception.DukeException;
+import duke.gui.GuiText;
 
 /** Class that represents a task */
 public abstract class Task {
@@ -96,7 +97,7 @@ public abstract class Task {
             String endDate = arguments[2];
             return new Event(name, startDate, endDate);
         default:
-            return null;
+            throw new DukeException(GuiText.generateGenericErrorMessage());
         }
     }
 
