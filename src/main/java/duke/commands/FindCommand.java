@@ -26,12 +26,12 @@ public class FindCommand extends Command {
         try {
             String keyword = this.input.substring(5, input.length());
             int counter = 0;
-            String result = "    Here are the matching tasks in your list:\n";
+            String result = "Here are the matching tasks in your list:\n";
             for (int i = 0; i < tasks.size(); i++) {
                 Task t = tasks.get(i);
                 if (t.contains(keyword)) {
                     counter++;
-                    result += "    " + counter + ". " + t + "\n";
+                    result += "" + counter + ". " + t + "\n";
                 }
             }
             return result;

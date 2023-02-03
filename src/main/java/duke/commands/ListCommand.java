@@ -22,7 +22,7 @@ public class ListCommand extends Command {
      * @inheritDoc
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        String result = "    Here are the tasks in your list:\n";
+        String result = "Here are the tasks in your list:\n";
         for (int i = 0; i < tasks.size(); i++) {
             int num = i + 1;
             result += "    "

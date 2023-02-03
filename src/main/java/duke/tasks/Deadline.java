@@ -20,14 +20,14 @@ public class Deadline extends Task {
         super(description);
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter newDateTime = DateTimeFormatter.ofPattern("MMM dd yyyy hh:mm a");
+        DateTimeFormatter newDate = DateTimeFormatter.ofPattern("MMM dd yyyy");
         try {
             LocalDateTime output = LocalDateTime.parse(date, dateTimeFormatter);
-            DateTimeFormatter newPattern = DateTimeFormatter.ofPattern("MMM dd yyyy hh:mm a");
-            this.by = output.format(newPattern);
+            this.by = output.format(newDateTime);
         } catch (DateTimeParseException e) {
             LocalDate output = LocalDate.parse(date, dateFormatter);
-            DateTimeFormatter newPattern = DateTimeFormatter.ofPattern("MMM dd yyyy");
-            this.by = output.format(newPattern);
+            this.by = output.format(newDate);
         }
     }
 
