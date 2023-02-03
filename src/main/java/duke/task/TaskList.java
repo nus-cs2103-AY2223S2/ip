@@ -41,4 +41,8 @@ public class TaskList {
             throw new DukeException("That task does not exist!");
         }
     }
+
+    public int getNumTasks() {
+        return tasks.size();
+    }
 }

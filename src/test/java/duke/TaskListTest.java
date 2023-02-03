@@ -1,0 +1,45 @@
+package duke;
+
+import org.junit.jupiter.api.Test;
+import duke.task.*;
+
+import java.util.ArrayList;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+
+public class TaskListTest {
+    @Test
+    public void addTodoTest(){
+        TaskList taskList = new TaskList(new ArrayList<Task>());
+        try {
+            taskList.addTask(new Todo("todo Dummy Task"));
+        } catch (DukeException err) {
+            fail();
+        }
+        assertEquals(1, taskList.getNumTasks());
+    }
+
+    @Test
+    public void validateTodoTask() {
+        try {
+            Todo todo = new Todo("todo ");
+            fail();
+        } catch (DukeException err) {
+            return;
+        }
+    }
+
+    @Test
+    public void markTodoTest() {
+        TaskList taskList = new TaskList(new ArrayList<Task>());
+        try {
+            taskList.addTask(new Todo("todo Dummy Task"));
+            taskList.markTask(1);
+        } catch (DukeException err) {
+            System.out.println("Ignore exception: For testing purposes");
+        }
+        assertEquals("X", taskList.tasks.get(0).getStatusIcon());
+
+    }
+}

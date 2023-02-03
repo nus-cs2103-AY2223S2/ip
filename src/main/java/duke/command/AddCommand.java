@@ -14,7 +14,7 @@ public class AddCommand extends Command {
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         ui.showMessage("Got it. I've added this task:");
         taskList.addTask(this.task);
-        ui.showMessage("Now you have " + taskList.tasks.size() + " tasks in your list");
+        ui.showMessage("Now you have " + taskList.getNumTasks() + " tasks in your list");
     }
 
     public boolean isExit() {

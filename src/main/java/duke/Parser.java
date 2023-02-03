@@ -12,9 +12,7 @@ import java.time.format.DateTimeParseException;
 
 public class Parser {
 
-    /**
-     * this ParseDateTime method was referenced from fellow classmate @jmestxr
-     */
+
     public static LocalDateTime parseDateTime (String dateTimeString) throws DukeException {
         DateTimeFormatter displayFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
         try {

@@ -16,7 +16,7 @@ public class DeleteCommand extends Command {
         Task cur = taskList.tasks.get(index - 1);
         taskList.deleteTask(index);
         ui.showMessage("[" + cur.getStatusIcon() + "] " + cur.description);
-        ui.showMessage("Now you have " + taskList.tasks.size() + " tasks in the list.");
+        ui.showMessage("Now you have " + taskList.getNumTasks() + " tasks in the list.");
     }
 
     public boolean isExit() {
