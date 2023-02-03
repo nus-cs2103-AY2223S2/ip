@@ -37,17 +37,17 @@ public class Task {
     /**
      * Changes status of current task as done by assigning isDone as true.
      */
-    public void mark() {
+    public String mark() {
         this.isDone = true;
-        System.out.println("This task has been marked as completed:\n" + this + "\n");
+        return "This task has been marked as completed:\n" + this + "\n";
     }
 
     /**
      * Changes status of current task as not done by assigning isDone as false.
      */
-    public void unmark() {
+    public String unmark() {
         this.isDone = false;
-        System.out.println("This task has been marked as uncompleted:\n" + this + "\n");
+        return "This task has been marked as uncompleted:\n" + this + "\n";
     }
 
     @Override

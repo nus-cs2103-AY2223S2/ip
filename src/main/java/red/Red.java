@@ -12,6 +12,8 @@ import red.task.TaskList;
 
 import red.ui.UI;
 
+import red.ui.DialogBox;
+
 /**
  * The main Red class to run
  */
@@ -52,6 +54,24 @@ public class Red {
         }
         this.storage.saveToStorage();
     }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        try {
+            this.ui.clear();
+            Command command = Parser.parse(input);
+            command.execute(this.tasks, this.ui, this.storage);
+            return this.ui.getCurrentReply();
+        } catch (RedException e) {
+            // append the error message to the ui's response
+            this.ui.addCurrentReply(e.getMessage());
+            return this.ui.getCurrentReply();
+        }
+    }
+
 
     public static void main(String[] args) {
         new Red().run();

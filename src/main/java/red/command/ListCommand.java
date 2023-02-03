@@ -25,6 +25,7 @@ public class ListCommand extends Command {
             System.out.println("There are no tasks in your list.");
             return;
         }
+        ui.addCurrentReply(String.valueOf(tasks));
         System.out.println(tasks);
     }
 }

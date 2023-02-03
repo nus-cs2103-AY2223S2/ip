@@ -35,6 +35,7 @@ public class AddCommand extends Command {
     @Override
     public void execute(TaskList tasks, UI ui, Storage storage) throws RedException {
         tasks.addTask(this.task);
+        ui.addCurrentReply("Add Task: " + this.task +"\n");
     }
 
     /**
