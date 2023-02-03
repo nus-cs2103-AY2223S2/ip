@@ -41,6 +41,7 @@ run{
     standardInput = System.in
 }
 
+
 repositories {
     mavenCentral()
 }
@@ -61,3 +62,13 @@ dependencies {
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'mac'
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
 }
+
+plugins {
+    id 'checkstyle'
+    // other plugins
+}
+
+checkstyle {
+    toolVersion = '10.2'
+}
+
