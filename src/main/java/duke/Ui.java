@@ -110,7 +110,7 @@ public class Ui {
     /**
      * Prints out the task that is marked done
      *
-     * @param tasks  TaskList object to get the task
+     * @param tasks   TaskList object to get the task
      * @param taskNum int index of task in the ArrayList
      * @throws DukeException when the task is not found in the list
      */
@@ -121,7 +121,7 @@ public class Ui {
     /**
      * Prints out the task that is marked done
      *
-     * @param tasks  TaskList object to get the task
+     * @param tasks   TaskList object to get the task
      * @param taskNum int index of task in the ArrayList
      * @return String representation of what the task looks like when its done
      * @throws DukeException when the task is not found in the list
@@ -133,7 +133,7 @@ public class Ui {
     /**
      * Prints out the task that is marked undone
      *
-     * @param tasks  TaskList object to get the task
+     * @param tasks   TaskList object to get the task
      * @param taskNum int index of task in the ArrayList
      * @throws DukeException when the task is not found in the list
      */
@@ -144,7 +144,7 @@ public class Ui {
     /**
      * Prints out the task that is marked undone
      *
-     * @param tasks  TaskList object to get the task
+     * @param tasks   TaskList object to get the task
      * @param taskNum int index of task in the ArrayList
      * @return String representation of when task is undone
      * @throws DukeException when the task is not found in the list
@@ -238,6 +238,24 @@ public class Ui {
      */
     public void showError(String err) {
         printer(err);
+    }
+
+    /**
+     * Prints out the error given in as a String
+     *
+     * @param err
+     */
+    public void showError(Exception err) {
+        printer(err.getMessage());
+    }
+
+    /**
+     * Prints out the error given in as a String
+     *
+     * @param err
+     */
+    public void showError(Error err) {
+        printer(err.getMessage());
     }
 
     /**

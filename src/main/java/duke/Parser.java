@@ -51,9 +51,7 @@ public class Parser {
                 return new TodoCommand(title);
             } else if (input.startsWith(Commands.DEADLINE.cmd())) {
 
-                if (input.indexOf(Commands.BY.cmd()) == -1) {
-                    throw new DukeException(Views.MISSING_ARGS_ERR_STRING.eng());
-                }
+                assert input.indexOf(Commands.BY.cmd()) != -1 : Views.MISSING_ARGS_ERR_STRING.eng();
                 String title = input.substring(Commands.DEADLINE.cmd().length(), input.indexOf(Commands.BY.cmd()));
 
                 String deadline = input.substring(input.indexOf(Commands.BY.cmd()));
@@ -61,9 +59,9 @@ public class Parser {
                 return new DeadlineCommand(title, deadline);
             } else if (input.startsWith(Commands.EVENT.cmd())) {
 
-                if (input.indexOf(Commands.FROM.cmd()) == -1 || input.indexOf(Commands.TO.cmd()) == -1) {
-                    throw new DukeException(Views.MISSING_ARGS_ERR_STRING.eng());
-                }
+                assert input.indexOf(Commands.FROM.cmd()) != -1 && input.indexOf(Commands.TO.cmd()) != -1
+                        : Views.MISSING_ARGS_ERR_STRING.eng();
+
                 String title = input.substring(Commands.EVENT.cmd().length(), input.indexOf(Commands.FROM.cmd()));
 
                 String from = input.substring(input.indexOf(Commands.FROM.cmd()), input.indexOf(Commands.TO.cmd()));
