@@ -19,12 +19,12 @@ public class Todo extends Task {
      * The description is the task name.
      *
      * @param taskList the TaskList to add the Todo object into.
-     * @param desc     String input for description of a Todo object.
+     * @param description     String input for description of a Todo object.
      *
      * @return String for Todo creation.
      */
-    public static String createTodo(TaskList taskList, String desc) {
-        Todo todo = new Todo(desc);
+    public static String createTodo(TaskList taskList, String description) {
+        Todo todo = new Todo(description);
         taskList.addTask(todo);
         return Ui.addedTask() + Ui.indent(todo.toString());
     }

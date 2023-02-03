@@ -37,76 +37,69 @@ public class Parser {
             Commands currCommand = Commands.valueOf(command.toUpperCase());
 
         switch (currCommand) {
-            // Command for bye
-            case BYE:
-                response = ui.displayExit();
-                break;
-                // Command for list
-            case LIST: {
-                response = ui.displayTaskList(taskList);
-                break;
-            }
-            // Command for find
-            case FIND: {
-                String keyword = description[1];
-                response = ui.displayFindList(taskList.findTasks(keyword), keyword);
-                break;
-            }
-            // Command to mark as done
-            case MARK: {
+        case BYE:
+            response = ui.displayExit();
+            break;
+        case LIST: {
+            response = ui.displayTaskList(taskList);
+            break;
+        }
+        case FIND: {
+            String keyword = description[1];
+            response = ui.displayFindList(taskList.findTasks(keyword), keyword);
+            break;
+        }
+        case MARK: {
+            String input = description[1];
+            response = TaskList.markTask(taskList, input);
+            storage.write(taskList);
+            break;
+        }
+        case UNMARK: {
+            String input = description[1];
+            response = TaskList.unmarkTask(taskList, input);
+            storage.write(taskList);
+            break;
+        }
+        case DELETE: {
+            String input = description[1];
+            response = TaskList.removeTask(taskList, input);
+            storage.write(taskList);
+            break;
+        }
+        case TODO: {
+            try {
                 String input = description[1];
-                response = TaskList.markTask(taskList, input);
+                response = Todo.runTodo(taskList, input);
                 storage.write(taskList);
-                break;
+            } catch (ArrayIndexOutOfBoundsException e) {
+                return "Hey! The description of a todo cannot be empty!";
             }
-            // Command to unmark
-            case UNMARK: {
+            break;
+        }
+        case DEADLINE: {
+            try {
                 String input = description[1];
-                response = TaskList.unmarkTask(taskList, input);
+                response = Deadline.runDeadline(taskList, input);
                 storage.write(taskList);
-                break;
+            } catch (ArrayIndexOutOfBoundsException e) {
+                return "Hey! The description of a deadline cannot be empty!";
             }
-            // Command to remove task
-            case DELETE: {
+            break;
+        }
+        case EVENT: {
+            try {
                 String input = description[1];
-                response = TaskList.removeTask(taskList, input);
+                response = Event.runEvent(taskList, input);
                 storage.write(taskList);
-                break;
+            } catch (ArrayIndexOutOfBoundsException e) {
+                return "Hey! The description of an event cannot be empty!";
             }
-            // Create Duke.Todo task
-            case TODO: {
-                try {
-                    String input = description[1];
-                    response = Todo.runTodo(taskList, input);
-                    storage.write(taskList);
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    return "Hey! The description of a todo cannot be empty!";
-                }
-                break;
-            }
-            // Create deadline task
-            case DEADLINE: {
-                try {
-                    String input = description[1];
-                    response = Deadline.runDeadline(taskList, input);
-                    storage.write(taskList);
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    return "Hey! The description of a deadline cannot be empty!";
-                }
-                break;
-            }
-            // Create event task
-            case EVENT: {
-                try {
-                    String input = description[1];
-                    response = Event.runEvent(taskList, input);
-                    storage.write(taskList);
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    return "Hey! The description of an event cannot be empty!";
-                }
-                break;
-            }
-            }
+            break;
+        }
+        default:
+            return "Invalid argument";
+        }
         } catch (IllegalArgumentException e) {
             return "I don't know what that means :(";
         }

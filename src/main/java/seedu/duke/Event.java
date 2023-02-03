@@ -27,12 +27,12 @@ public class Event extends Task {
      * The description is split into the task name (input) and the date to be parsed (date).
      *
      * @param taskList the TaskList to add the Event object into.
-     * @param desc     String input for the description of an Event object.
+     * @param description     String input for the description of an Event object.
      *
      * @return String for Event creation
      */
-    public static String createEvent(TaskList taskList, String desc) {
-        String[] inputSplit = desc.split("/", 2);
+    public static String createEvent(TaskList taskList, String description) {
+        String[] inputSplit = description.split("/", 2);
         String input = inputSplit[0];
         String[] dateSplit = inputSplit[1].split(" ", 2);
         String date = dateSplit[1];

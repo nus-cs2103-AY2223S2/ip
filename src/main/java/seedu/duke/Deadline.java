@@ -27,12 +27,12 @@ public class Deadline extends Task {
      * The description is split into the task name (input) and the date to be parsed (date).
      *
      * @param taskList the TaskList to add the Deadline object into.
-     * @param desc     String input for description of a Deadline object.
+     * @param description     String input for description of a Deadline object.
      *
      * @return String for Deadline creation
      */
-    public static String createDeadline(TaskList taskList, String desc) {
-        String[] inputSplit = desc.split("/", 2);
+    public static String createDeadline(TaskList taskList, String description) {
+        String[] inputSplit = description.split("/", 2);
         String input = inputSplit[0];
         String[] dateSplit = inputSplit[1].split(" ", 2);
         String date = dateSplit[1];

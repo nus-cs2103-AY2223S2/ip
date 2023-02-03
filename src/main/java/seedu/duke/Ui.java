@@ -51,8 +51,7 @@ public class Ui {
                 list = list + "\n   " + index + ". " + taskList.get(index - 1).toString();
                 index++;
             }
-            String hasTasks = "Here are your tasks:";
-            return hasTasks + "\n" + list;
+            return "Here are your tasks:" + "\n" + list;
         }
     }
 
@@ -74,8 +73,7 @@ public class Ui {
                 list = list + "\n   " + index + ". " + taskList.get(index - 1).toString();
                 index++;
             }
-            String hasTasks = "Here are the tasks with the keyword: ";
-            return hasTasks + keyword + "\n" + list + "\n" + checkList(taskList);
+            return "Here are the tasks with the keyword: " + keyword + "\n" + list + "\n" + checkList(taskList);
         }
     }
 
