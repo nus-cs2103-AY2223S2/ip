@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import jarvis.exception.command.InvalidParameterException;
+import jarvis.exception.command.InvalidIndexException;
 import jarvis.exception.command.MissingParameterException;
 
 /**
@@ -52,12 +52,9 @@ public class TaskList {
      * @return List of response lines.
      * @throws MissingParameterException If the index to delete is invalid.
      */
-    public List<String> deleteTask(int index) throws MissingParameterException {
+    public List<String> deleteTask(int index) throws InvalidIndexException {
         if (index <= 0 || index > this.tasks.size()) {
-            throw new MissingParameterException(
-                    "Invalid index",
-                    String.format("Please provide an index from %d to %d.", 1, this.tasks.size())
-            );
+            throw new InvalidIndexException(1, this.tasks.size());
         }
         Task task = this.tasks.remove(index - 1);
         return List.of(String.format("Got it, I've removed task %d.", index), "\t" + task);
@@ -74,16 +71,13 @@ public class TaskList {
      * @param isDone Whether the task is marked as done.
      * @return List of response lines.
      */
-    public List<String> setTaskDone(int index, boolean isDone) throws InvalidParameterException {
+    public List<String> setTaskDone(int index, boolean isDone) throws InvalidIndexException {
         if (this.tasks.isEmpty()) {
             return List.of("There are no tasks to mark, please add a task first.");
         }
 
         if (index <= 0 || index > this.tasks.size()) {
-            throw new InvalidParameterException(
-                    "Invalid index",
-                    String.format("Please provide an index from %d to %d.", 1, this.tasks.size())
-            );
+            throw new InvalidIndexException(1, this.tasks.size());
         }
 
         Task task = this.tasks.get(index - 1);
