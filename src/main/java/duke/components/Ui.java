@@ -7,6 +7,7 @@ import duke.commands.UnmarkCommand;
 import duke.exceptions.DukeException;
 import duke.tasks.Task;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
@@ -100,5 +101,18 @@ public class Ui {
                 deleteCommand.getTaskToDelete()
         );
         showNumTasks(tasks);
+    }
+
+    public void showFindResults(ArrayList<Task> results) {
+        if (results.size() == 0) {
+            System.out.println(
+                    "No tasks found!"
+            );
+        } else {
+            System.out.println("These are the " + results.size() + " tasks I found:");
+            for (int i = 0; i< results.size(); i++) {
+                System.out.println(i + 1 + ". " + results.get(i));
+            }
+        }
     }
 }

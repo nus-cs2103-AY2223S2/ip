@@ -47,6 +47,9 @@ public class Parser {
         case "event":
             ret = new AddEventCommand(tokens);
             break;
+        case "find":
+            ret = new FindCommand(tokens);
+            break;
         default:
             throw new DukeException("I'm sorry, I could not understand that command.");
         }
