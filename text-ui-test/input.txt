@@ -23,4 +23,20 @@ delete 4
 list
 delete 1
 list
+delete 1
+delete 1
+deadline return book /by 2023-02-10 18:00
+deadline assignment /by 2023-02-10
+deadline cooking /by 18:00
+list
+event dance /from 2023-02-10 18:00 /to 2023-02-10 19:00
+list
+event dance /from 2023-02-10 /to 2023-02-10 19:00
+list
+event dance /from 2023-02-10 18:00 /to 2023-02-10
+list
+event dance /from 2023-02-10 /to 2023-02-10
+list
+event dance /from 18:00 /to 19:00
+list
 bye
