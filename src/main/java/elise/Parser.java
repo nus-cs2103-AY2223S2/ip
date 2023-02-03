@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
-import java.util.Scanner;
 
 /**
  * Parser class to parse user inputs.
@@ -18,18 +17,19 @@ public class Parser {
     /**
      * Parses user input into command.
      *
-     * @param sc Scanner for system input.
+     * @param sCommand Scanner for system input.
      * @return Command parsed.
      */
-    protected static Command read(Scanner sc) throws EliseException {
+    protected static Command read(String sCommand) throws EliseException {
         int rank;
         Word command;
+        String[] val = sCommand.split(" ", 2);
         try {
-            command = Word.valueOf(sc.next().toUpperCase());
+            command = Word.valueOf(val[0].toUpperCase());
         } catch (IllegalArgumentException e) {
             throw new EliseException("Invalid input.");
         }
-        String s = sc.nextLine().trim();
+        String s = val.length > 1 ? val[1].trim() : "";
         String[] message;
 
         if (s.length() > 500) {

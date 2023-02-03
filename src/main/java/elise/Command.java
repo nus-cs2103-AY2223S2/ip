@@ -10,7 +10,6 @@ public class Command {
     /*
     Command codes:
     -1 - Invalid input.
-    0 - bye
     1 - list
     2 - mark
     3 - unmark
@@ -77,58 +76,42 @@ public class Command {
      * @throws EliseException EliseException unique to Elise
      * @throws IOException Unexpected IOException
      */
-    protected void execute(Ui ui, TaskList taskList, Storage storage) throws EliseException, IOException {
+    protected String execute(Ui ui, TaskList taskList, Storage storage) throws EliseException, IOException {
         if (code == -1) {
-            return;
+            return "Bye";
         }
-        if (code == 0) {
-            ui.byeMessage();
-        } else if (code == 1) {
-            // System.out.println("here");
-            taskList.list();
-            ui.showLine();
+        if (code == 1) {
+            return Ui.wrapText(taskList.list());
         } else if (code == 2) {
             Task t = taskList.markDone(index);
-            ui.markDoneMessage(t);
             storage.write();
+            return ui.markDoneMessage(t);
         } else if (code == 3) {
             Task t = taskList.markUndone(index);
-            ui.markUndoneMessage(t);
             storage.write();
+            return ui.markUndoneMessage(t);
         } else if (code == 4) {
             Task t = taskList.addTask(0, content);
-            ui.addMessage(t, taskList);
             storage.write();
+            return ui.addMessage(t, taskList);
         } else if (code == 5) {
             Task t = taskList.addTask(1, content);
-            ui.addMessage(t, taskList);
             storage.write();
+            return ui.addMessage(t, taskList);
         } else if (code == 6) {
             Task t = taskList.addTask(2, content);
-            ui.addMessage(t, taskList);
             storage.write();
+            return ui.addMessage(t, taskList);
         } else if (code == 7) {
             Task t = taskList.delete(index);
-            ui.deleteMessage(t, taskList);
             storage.write();
+            return ui.deleteMessage(t, taskList);
         } else if (code == 8) {
-            taskList.find(keyword);
-            ui.showLine();
+            return Ui.wrapText(taskList.find(keyword));
         } else if (code == 9) {
-            ui.showHelp();
+            return ui.showHelp();
         } else {
             throw new EliseException("Invalid code.");
         }
     }
-
-    /**
-     * Returns true if exit command, false otherwise.
-     *
-     * @return Whether it is an exit command.
-     */
-    protected boolean isExit() {
-        return code == 0;
-    }
-
-
 }

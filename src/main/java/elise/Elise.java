@@ -1,7 +1,6 @@
 package elise;
 
 import java.io.IOException;
-import java.util.Scanner;
 
 /**
  * Elise is a personal assistant chat-bot that help to keep track of various stuff.
@@ -18,42 +17,33 @@ public class Elise {
      * @param filePath Path of initial data file.
      * @throws EliseException if filePath is invalid.
      */
-    public Elise(String filePath) throws EliseException {
-        ui = new Ui();
-        storage = new Storage(filePath);
-        taskList = new TaskList(storage.load());
+    public Elise(String filePath) {
+        try {
+            ui = new Ui();
+            storage = new Storage(filePath);
+            taskList = new TaskList(storage.load());
+        } catch (EliseException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
      * Runs Elise chat-bot.
      *
-     * @throws IOException Unexpected IOException
      */
-    public void run() throws IOException {
-        ui.showWelcome();
-        Scanner sc = new Scanner(System.in);
-        while (sc.hasNext()) {
-            try {
-                Command c = Parser.read(sc);
-                c.execute(ui, taskList, storage);
-                if (c.isExit()) {
-                    return;
-                }
-            } catch (EliseException e) {
-                ui.showError(e);
-            }
+
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.read(input);
+            return c.execute(ui, taskList, storage);
+        } catch (EliseException e) {
+            return ui.showError(e);
+        } catch (IOException e) {
+            return e.getMessage();
         }
     }
 
-    /**
-     * Driver function.
-     *
-     * @param args Command line arguments
-     * @throws EliseException If filePath is invalid
-     * @throws IOException Unexpected IOException
-     */
-    public static void main(String[] args) throws EliseException, IOException {
-        Elise elise1 = new Elise("./data/list.txt");
-        elise1.run();
+    public String getWelcome() {
+        return ui.showWelcome();
     }
 }

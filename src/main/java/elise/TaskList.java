@@ -21,16 +21,17 @@ public class TaskList {
     /**
      * Lists out all tasks and their status.
      */
-    protected void list() {
+    protected String list() {
         if (tasks.size() == 0) {
-            System.out.println("No tasks left :)");
-            return;
+            return "No tasks left :)";
         }
         int rank = 1;
+        String out = "";
         for (Task t : tasks) {
-            System.out.println(rank + "." + t.fullMessage());
+            out += rank + "." + t.fullMessage() + "\n";
             rank++;
         }
+        return out.trim();
     }
 
     /**
@@ -38,19 +39,21 @@ public class TaskList {
      *
      * @param keyword Keyword to match.
      */
-    protected void find(String keyword) {
+    protected String find(String keyword) {
         int rank = 1;
         // Matches exact keyword. Do not match part of word.
         String regex = ".*\\b" + keyword + "\\b.*";
-        System.out.println("Looking for matching tasks in your list...");
+        String out = "";
         for (Task t : tasks) {
             if (t.toString().matches(regex)) {
-                System.out.println(rank + "." + t.fullMessage());
+                out += rank + "." + t.fullMessage() + "\n";
                 rank++;
             }
         }
-        if (rank == 1) {
-            System.out.println("Cannot find any matching task!");
+        if (rank > 1) {
+            return out.trim();
+        } else {
+            return "Cannot find any matching task!";
         }
     }
 

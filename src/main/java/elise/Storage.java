@@ -17,6 +17,7 @@ import java.util.Scanner;
 public class Storage {
     private final Path filePath;
     private List<Task> taskState;
+    private static final String PROJECT_PATH = System.getProperty("user.dir") + "/src/main/resources";
 
     /**
      * Constructor for Storage.
@@ -25,10 +26,10 @@ public class Storage {
      * @param filePath Path of the file.
      */
     protected Storage(String filePath) {
-        Path file = Paths.get(filePath);
-        Path parent = file.getParent();
+        Path file = Paths.get(PROJECT_PATH + filePath);
+        System.out.println(file);
         try {
-            Files.createDirectories(parent);
+            Files.createDirectories(Paths.get(PROJECT_PATH));
             Files.createFile(file);
         } catch (FileAlreadyExistsException e) {
             // all good.

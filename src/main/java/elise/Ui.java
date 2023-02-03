@@ -1,49 +1,36 @@
 package elise;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.io.IOException;
+
 /**
  * User interface class to interact with the user.
  */
 public class Ui {
-    static final String BORDER = "----------------------------------------";
-
+    private static final String BORDER = "----------------------------------------";
     /**
      * Prints welcome message.
      */
-    protected void showWelcome() {
-        showLine();
-        String logo = "           " + "█▀▀ █░░ █ █▀ █▀▀\n"
-                + "Hello from" + " ██▄ █▄▄ █ ▄█ ██▄";
-        System.out.println(logo);
-        showLine();
-        System.out.println("I am a personal Chatbot who keep track of various things!\nEnter help to view commands!");
-        showLine();
+    protected String showWelcome() {
+        String logo = "                      " + "█▀▀ █░░ █ █▀ █▀▀\n"
+                + "Hello from" + " ██▄ █▄▄ █ ▄█ ██▄\n";
+        logo += "I am a personal Chatbot who keep track of various things!\nEnter help to view commands!";
+        return wrapText(logo);
     }
 
-    /**
-     * Prints border.
-     */
-    protected void showLine() {
-        System.out.println(BORDER);
+    public static String wrapText(String text) {
+        return BORDER + "\n" + text + "\n" + BORDER;
     }
 
     /**
      * Prints error message.
      *
      * @param e EliseException.
+     * @return Error message.
      */
-    protected void showError(EliseException e) {
-        showLine();
-        System.out.println(e.getMessage());
-        showLine();
-    }
-
-    /**
-     * Prints exit message.
-     */
-    protected void byeMessage() {
-        showLine();
-        System.out.println("Bye. Hope to see you again soon!");
-        showLine();
+    protected String showError(EliseException e) {
+        return wrapText(e.getMessage());
     }
 
     /**
@@ -51,11 +38,9 @@ public class Ui {
      *
      * @param t Task marked done.
      */
-    protected void markDoneMessage(Task t) {
-        showLine();
-        System.out.println("Nice! I've marked this task as done:\n"
+    protected String markDoneMessage(Task t) {
+        return wrapText("Nice! I've marked this task as done:\n"
                 + t.fullMessage());
-        showLine();
     }
 
     /**
@@ -63,11 +48,9 @@ public class Ui {
      *
      * @param t Task marked undone.
      */
-    protected void markUndoneMessage(Task t) {
-        showLine();
-        System.out.println("OK, I've marked this task as not done yet:\n"
+    protected String markUndoneMessage(Task t) {
+        return wrapText("Nice! I've marked this task as not done yet:\n"
                 + t.fullMessage());
-        showLine();
     }
 
     /**
@@ -75,8 +58,8 @@ public class Ui {
      *
      * @param taskList Task manager.
      */
-    private void sizeMessage(TaskList taskList) {
-        System.out.println("Now you have " + taskList.getSize() + " tasks in this list");
+    private String sizeMessage(TaskList taskList) {
+        return "Now you have " + taskList.getSize() + " tasks in this list";
     }
 
     /**
@@ -85,11 +68,9 @@ public class Ui {
      * @param t Task added.
      * @param taskList Task manager.
      */
-    protected void addMessage(Task t, TaskList taskList) {
-        showLine();
-        System.out.println("Got it. I've added this task:\n" + t.fullMessage());
-        sizeMessage(taskList);
-        showLine();
+    protected String addMessage(Task t, TaskList taskList) {
+        return wrapText("Got it. I've added this task:\n" + t.fullMessage() + "\n"
+                + sizeMessage(taskList));
     }
 
     /**
@@ -98,32 +79,22 @@ public class Ui {
      * @param t Task deleted.
      * @param taskList Task manager.
      */
-    protected void deleteMessage(Task t, TaskList taskList) {
-        showLine();
-        System.out.println("Noted. I've removed this task:\n" + t.fullMessage());
-        sizeMessage(taskList);
-        showLine();
+    protected String deleteMessage(Task t, TaskList taskList) {
+        return wrapText("Noted. I've removed this task:\n" + t.fullMessage() + "\n"
+                + sizeMessage(taskList));
     }
 
     /**
      * Prints help message.
      */
-    protected void showHelp() {
-        // Might be shifted all into a file.
-        showLine();
-        System.out.println("Available commands: \n");
-        System.out.println("todo [M] - Adds todo task, replace [M] with message.");
-        System.out.println("deadline [M] /by [D] - "
-                + "Adds deadline task, replace [M] with message and [D] with date/time.");
-        System.out.println("event [M] /from [D] /to [D] - "
-                + "Adds event task, replace [M] with message and [D] with date/time.\n");
-        System.out.println("Intended date/time should be in format dd-MM-yyyy HHmm or dd-MM-yyyy.");
-        System.out.println("Otherwise, the date/time will be treated as plain text.\n");
-        System.out.println("list - Lists all tasks.");
-        System.out.println("mark [R] - Marks task as done, replace [R] with rank of task.");
-        System.out.println("unmark [R] - Marks task as not done, replace [R] with rank of task.");
-        System.out.println("find [K] - Lists all matching task, replace [K] with keyword.");
-        System.out.println("bye - Exits the chat bot.");
-        showLine();
+    protected String showHelp() {
+        // Shifted into file.
+        try {
+            return wrapText(Files.readString(Paths.get(System.getProperty("user.dir")
+                    + "/src/main/resources/help.txt")));
+        } catch (IOException e) {
+            return e.getMessage();
+        }
+
     }
 }
