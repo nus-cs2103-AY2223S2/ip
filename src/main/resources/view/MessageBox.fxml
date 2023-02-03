@@ -2,14 +2,11 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.shape.Circle?>
-
-<?import javafx.scene.paint.ImagePattern?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.VBox?>
-<fx:root alignment="TOP_RIGHT" maxHeight="Infinity" maxWidth="Infinity" prefWidth="380.0"
+
+<fx:root alignment="TOP_RIGHT" maxHeight="Infinity" maxWidth="Infinity"
          type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
     <padding>
         <Insets bottom="15.0" left="5.0" right="5.0" top="15.0"/>

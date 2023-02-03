@@ -10,6 +10,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 /**
@@ -20,6 +21,8 @@ public class MainWindow extends AnchorPane {
     private ScrollPane scrollPane;
     @FXML
     private VBox chatContainer;
+    @FXML
+    private HBox userInputBar;
     @FXML
     private TextField userInput;
     @FXML
@@ -39,7 +42,6 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     public void initialize() {
-
         scrollPane.vvalueProperty().bind(chatContainer.heightProperty());
         sendButton.getStyleClass().add("button");
     }
@@ -59,9 +61,11 @@ public class MainWindow extends AnchorPane {
 
         String inputText = userInput.getText();
         String jarvisText = jarvis.getResponse(inputText);
+        boolean hasError = jarvis.resetErrorFlag();
+
         chatContainer.getChildren().addAll(
-                new MessageBox(inputText, userImage),
-                new MessageBox(jarvisText, jarvisImage).flip()
+                new MessageBox(inputText, userImage).makeUltron(),
+                new MessageBox(jarvisText, jarvisImage).makeJarvis().flip().makeError(hasError)
         );
         userInput.clear();
     }

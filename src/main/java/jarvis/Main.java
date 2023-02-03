@@ -24,7 +24,7 @@ public class Main extends Application {
             scene.getStylesheets().add("/style/styles.css");
             primaryStage.setScene(scene);
             primaryStage.setMinWidth(400.0);
-            primaryStage.setMinHeight(600.0);
+            primaryStage.setMinHeight(630.0);
             fxmlLoader.<MainWindow>getController().setJarvis(jarvis);
             primaryStage.show();
         } catch (IOException e) {

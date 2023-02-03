@@ -25,6 +25,7 @@ public class Ui {
 
     private final String name;
     private final List<String> responses;
+    private boolean isErrorPrinted;
 
     /**
      * Constructor for the Ui class.
@@ -35,6 +36,7 @@ public class Ui {
         assert name != null && !name.isBlank();
         this.name = name;
         this.responses = new LinkedList<>();
+        this.isErrorPrinted = false;
     }
 
     /**
@@ -46,6 +48,18 @@ public class Ui {
         String dump = String.join("\n", this.responses);
         this.responses.clear();
         return dump;
+    }
+
+    /**
+     * Sets the 'isErrorPrinted' flag and returns the previous value.
+     *
+     * @param flag Whether an error was printed.
+     * @return The previous value.
+     */
+    public boolean setErrorFlag(boolean flag) {
+        boolean result = isErrorPrinted;
+        isErrorPrinted = flag;
+        return result;
     }
 
     /**
@@ -109,6 +123,7 @@ public class Ui {
      * @param message Error message.
      */
     public void printError(String message) {
+        isErrorPrinted = true;
         print(String.format("I've a problem! %s", message));
     }
 
