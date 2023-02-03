@@ -8,7 +8,7 @@ import task.Task;
  * Encapsulates the list of tasks inputted by the user.
  */
 public class TaskList {
-    ArrayList<Task> list;
+    public ArrayList<Task> list;
 
     /**
      * Constructor.
@@ -53,6 +53,4 @@ public class TaskList {
     public int size() {
         return this.list.size();
     }
-
-
 }

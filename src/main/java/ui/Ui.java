@@ -108,5 +108,19 @@ public class Ui {
         System.out.println("Could not load list. Using a new, empty list instead");
     }
 
+    /**
+     * Prints the search output.
+     *
+     * @param list List of tasks.
+     * @param searchWord Search word.
+     */
+    public void printFind(TaskList list, String searchWord) {
+        System.out.println("Here are the matching tasks in your list: ");
+        for (Task task: list.list) {
+            if (task.description.contains(searchWord)) {
+                System.out.println(task.toString());
+            }
+        }
+    }
 
 }

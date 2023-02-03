@@ -26,6 +26,7 @@ public class Parser {
     final static String TODO_COMMAND = "todo";
     final static String DEADLINE_COMMAND = "deadline";
     final static String EVENT_COMMAND = "event";
+    final static String FIND_COMMAND = "find";
     final static DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy/MM/d HHmm");
     final static DateTimeFormatter outputFormatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
 
@@ -45,6 +46,8 @@ public class Parser {
                 ui.isClosed = true;
             } else if (command.equals(LIST_COMMAND)) {
                 ui.printGetList(list);
+            } else if (command.equals(FIND_COMMAND)) {
+                this.handleFind(inputWords, ui, list);
             } else if (isMark(command)) {
                 this.handleMark(inputWords, ui, list);
             } else if (isUnmark(command)) {
@@ -63,6 +66,18 @@ public class Parser {
         } catch (Exception e) {
             ui.printException(e);
         }
+    }
+
+    /**
+     * Handles finding tasks based on a search word.
+     *
+     * @param inputWords Command input.
+     * @param ui User interface.
+     * @param list List of tasks.
+     */
+    public void handleFind(String[] inputWords, Ui ui, TaskList list) {
+        String searchWord = inputWords[1];
+        ui.printFind(list, searchWord);
     }
 
     /**

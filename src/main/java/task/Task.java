@@ -5,8 +5,8 @@ package task;
  * Inherited by ToDo, Deadline and Event Class
  */
 public class Task {
-    protected String description;
-    protected boolean isDone;
+    public String description;
+    public boolean isDone;
 
     /**
      * Constructor.
