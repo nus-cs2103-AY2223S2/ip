@@ -4,7 +4,7 @@ package duke.task;
  * A base Task class that has a description and a completed status
  * @author Junyi
  */
-public class Task {
+public class Task implements Comparable<Task> {
     /* True if task is completed */
     protected boolean isDone;
 
@@ -82,4 +82,8 @@ public class Task {
         return String.format("[%s] %s", getStatusIcon(), description);
     }
 
+    @Override
+    public int compareTo(Task task) {
+        return 0;
+    }
 }

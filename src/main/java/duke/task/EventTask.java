@@ -64,6 +64,31 @@ public class EventTask extends Task {
         return stringBuilder.toString();
     }
 
+    @Override
+    public int compareTo(Task task) {
+        LocalDate comparableDate;
+        if (task instanceof EventTask) {
+            comparableDate = ((EventTask) task).from;
+        }
+        else if (task instanceof DeadlineTask) {
+            comparableDate = ((DeadlineTask) task).by;
+        }
+        else {
+            // Non-comparable, they are equal
+            return 0;
+        }
+
+        if (this.from == comparableDate) {
+            return 0;
+        }
+        else if (this.from.isAfter(comparableDate)) {
+            return 1;
+        }
+        else {
+            return -1;
+        }
+    }
+
     /**
      * Returns an instance of the task represented by the given data.
      * @param data The serialised string of the task.

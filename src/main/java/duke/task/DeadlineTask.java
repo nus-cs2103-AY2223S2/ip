@@ -43,6 +43,31 @@ public class DeadlineTask extends Task {
         return by.isEqual(targetDate) || by.isAfter(targetDate);
     }
 
+    @Override
+    public int compareTo(Task task) {
+        LocalDate comparableDate;
+        if (task instanceof EventTask) {
+            comparableDate = ((EventTask) task).from;
+        }
+        else if (task instanceof DeadlineTask) {
+            comparableDate = ((DeadlineTask) task).by;
+        }
+        else {
+            // Non-comparable, they are equal
+            return 0;
+        }
+
+        if (this.by == comparableDate) {
+            return 0;
+        }
+        else if (this.by.isAfter(comparableDate)) {
+            return 1;
+        }
+        else {
+            return -1;
+        }
+    }
+
     /**
      * Serialise task to be saved in local storage.
      * @return Serialised string of this task.
