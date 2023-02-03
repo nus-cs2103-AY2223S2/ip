@@ -11,6 +11,11 @@ package duke;
 import duke.command.ArgCommand;
 import duke.command.BasicCommand;
 import duke.command.Command;
+import duke.util.Parser;
+import duke.util.State;
+import duke.util.Stateful;
+import duke.util.TaskList;
+import duke.util.Ui;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -23,9 +28,6 @@ public class Duke {
     public static final String DEFAULT_PATH = "data.txt";
     private final Ui ui;
     private final Parser parser;
-    private Boolean hasQuit = false; // in case there are more commands that affect
-    // program execution or state, might replace
-    // with a proper State() class
 
     public Duke() {
         this(DEFAULT_PATH);
@@ -42,12 +44,61 @@ public class Duke {
             temp = new TaskList(new ArrayList<>());
         }
         taskList = temp;
-        Command[] commands = new Command[]{ new BasicCommand("exit", "exit the app", hasQuit -> new String[]{ "Goodbye." }), new BasicCommand("help", "show this help message", hasQuit -> ui.getHelpMsg()), new BasicCommand("list", "list tasks", hasQuit -> taskList.stringify()), new ArgCommand("add", "add task", new String[]{ "\\s" }, (args, hasQuit) -> taskList.add(args)), new ArgCommand("delete", "delete task", new String[]{}, (args, hasQuit) -> taskList.delete(args)),
-                // The following commands can take any number of space-delimited
-                // unnamed integer arguments (dang that was a mouthful). See
-                // implementation details in TaskList.java.
-                new ArgCommand("mark", "mark/unmark task as done", new String[]{}, (args, hasQuit) -> taskList.mark(args)), new ArgCommand("find", "find tasks containing text fragment", new String[]{}, (args, hasQuit) -> taskList.find(args)), };
-        ui.setCommands(commands);
+        Command[] commands = new Command[]{
+            new BasicCommand("exit", "exit the app",
+                    () -> new Stateful(
+                            new String[]{ "Goodbye." },
+                            new State(true)
+                    )
+            ),
+            new BasicCommand("help",
+                    "show this help message",
+                    () -> new Stateful(
+                            ui.getHelpMsg(),
+                            new State(false)
+                    )
+            ),
+            new BasicCommand("list",
+                    "list tasks",
+                    () -> new Stateful(
+                            taskList.stringify(),
+                            new State(false)
+                    )
+            ),
+            new ArgCommand("add",
+                    "add task",
+                    new String[]{ "\\s" },
+                    args -> new Stateful(
+                            taskList.add(args),
+                            new State(false)
+                    )
+            ),
+            new ArgCommand("mark",
+                    "mark/unmark task as done",
+                    new String[]{},
+                    args -> new Stateful(
+                            taskList.mark(args),
+                            new State(false)
+                    )
+            ),
+            new ArgCommand("delete",
+                    "delete task",
+                    new String[]{},
+                    args -> new Stateful(
+                            taskList.delete(args),
+                            new State(false)
+                    )
+            ),
+            new ArgCommand("find",
+                    "find tasks containing text fragment",
+                    new String[]{},
+                    args -> new Stateful(
+                            taskList.find(args),
+                            new State(false)
+                    )
+            ),
+        };
+        ui.setHelpMsg(commands);
         this.parser = new Parser(commands);
     }
 
@@ -63,44 +114,31 @@ public class Duke {
     private void run() {
         this.ui.printIntro();
         Scanner scanner = new Scanner(System.in);
-        while (scanner.hasNextLine() && !hasQuit) {
-            this.getResponse(scanner.nextLine());
+        while (scanner.hasNextLine()) {
+            Stateful stateful = this.getResponse(scanner.nextLine());
+            ui.print(stateful.output());
+            if (stateful.state().doQuit()) {
+                break;
+            }
         }
         scanner.close();
     }
 
-    /**
-     * I/O handler for Duke. Entrypoint for {@link duke.controller.MainWindow}.
-     *
-     * @param input An input string.
-     * @return output for given input.
-     */
-    public String getResponse(String input) {
+    public Stateful getResponse(String input) {
         try {
             String[] lineParts = input.split("\\s", 2);
             Command cmd = this.parser.parseCommand(lineParts[0]);
-            if (cmd.getName().equals("exit")) {
-                this.hasQuit = false;
-            }
             if (cmd.hasParams()) {
                 if (lineParts.length < 2 || lineParts[1].isEmpty()) {
                     throw new IllegalArgumentException("Missing argument.");
                 }
                 String[] arguments = Parser.parseArgs(lineParts[1], cmd);
-                return this.join(cmd.execute(arguments, hasQuit));
+                return cmd.execute(arguments);
             } else {
-                return this.join(cmd.execute(new String[]{}, hasQuit));
+                return cmd.execute(new String[]{});
             }
         } catch (Exception e) {
-            return e.toString();
+            return new Stateful(e.toString().split("\\r?\\n"), new State(false));
         }
-    }
-
-    private String join(String[] lines) {
-        StringBuilder outputs = new StringBuilder();
-        for (String str : lines) {
-            outputs.append("\t").append(str).append("\n");
-        }
-        return outputs.toString();
     }
 }

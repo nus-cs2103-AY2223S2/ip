@@ -1,6 +1,8 @@
 package duke.controller;
 
 import duke.Duke;
+import duke.util.Parser;
+import duke.util.Stateful;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -8,6 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.util.Objects;
 
@@ -43,13 +46,17 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
-        assert response != null && !response.isEmpty();
-        dialogContainer
-                .getChildren()
+        Stateful response = duke.getResponse(input);
+        String output = Parser.join(response.output());
+        dialogContainer.getChildren()
                 .addAll(DialogBox.getUserDialog(input, userImage),
-                        DialogBox.getDukeDialog(response, dukeImage)
+                        DialogBox.getDukeDialog(output, dukeImage)
                 );
         userInput.clear();
+        if (response.state().doQuit()) {
+            userInput.setEditable(false);
+            Stage stage = (Stage) scrollPane.getScene().getWindow();
+            stage.close();
+        }
     }
 }

@@ -8,7 +8,8 @@
 
 package duke.command;
 
-import duke.Ui;
+import duke.util.Stateful;
+import duke.util.Ui;
 
 /**
  * Represents a command that Duke recognizes.
@@ -76,7 +77,7 @@ public abstract class Command {
      * method executes the operation.
      *
      * @param params The parameters to pass to the operation.
-     * @return The output of the operation.
+     * @return The output of the operation (and any side effects).
      */
-    public abstract String[] execute(String[] params, Boolean hasQuit);
+    public abstract Stateful execute(String[] params);
 }

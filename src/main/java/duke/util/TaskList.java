@@ -1,5 +1,6 @@
-package duke;
+package duke.util;
 
+import duke.Duke;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -191,12 +192,22 @@ public class TaskList {
      */
     public String[] find(String[] argument) {
         String keyword = argument[0].toLowerCase();
-        List<Integer> matchIndexes = IntStream.range(0, this.tasks.size()).parallel().filter(i -> this.tasks.get(i).getDesc().toLowerCase().contains(keyword)).boxed().toList();
+        List<Integer> matchIndexes = IntStream.range(0, this.tasks.size())
+                .parallel()
+                .filter(i -> this.tasks.get(i)
+                        .getDesc()
+                        .toLowerCase()
+                        .contains(keyword)
+                ).boxed()
+                .toList();
         if (matchIndexes.size() < 1) {
             return new String[]{ "No matches found." };
         } else {
-            List<String> outputs = matchIndexes.stream().map(i -> addOrdinal(i, this.tasks.get(i))).collect(Collectors.toList());
-            outputs.add(0, matchIndexes.size() + String.format(" match%s found:", matchIndexes.size() > 1 ? "es" : ""));
+            List<String> outputs = matchIndexes.stream()
+                    .map(i -> addOrdinal(i, this.tasks.get(i)))
+                    .collect(Collectors.toList());
+            String countStr = String.format(" match%s found:", matchIndexes.size() > 1 ? "es" : "");
+            outputs.add(0, matchIndexes.size() + countStr);
             return outputs.toArray(String[]::new);
         }
     }

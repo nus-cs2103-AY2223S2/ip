@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.util.TaskList;
+
 import java.io.Serializable;
 import java.time.format.DateTimeFormatter;
 
@@ -9,7 +11,7 @@ import java.time.format.DateTimeFormatter;
  * with a due date or a {@link Event} with a start and end date.
  *
  * @see duke.Duke
- * @see duke.TaskList
+ * @see TaskList
  */
 public class Task implements Serializable {
 
