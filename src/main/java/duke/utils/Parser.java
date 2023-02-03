@@ -7,7 +7,6 @@ import duke.commands.Commands;
 import duke.exceptions.DukeException;
 import duke.exceptions.IllegalCommandException;
 import duke.tasks.TaskType;
-import duke.ui.Ui;
 
 /**
  * Acts as the parser to listen to and act upon user input in the command line interface.
