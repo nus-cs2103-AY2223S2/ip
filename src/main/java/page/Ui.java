@@ -2,6 +2,7 @@ package page;
 
 import page.quest.Quest;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
@@ -43,6 +44,13 @@ public class Ui {
 
     public void printQuestDeleted(Quest q) {
         System.out.println("Quest Deleted... lost to the ages...\n" + q.toString());
+    }
+
+    public void printFilteredQuestLog(ArrayList<Quest> arr) {
+        System.out.println("Greetings sire, here are the matching quests in the Quest Log:");
+        for (Quest q : arr) {
+            System.out.println(q.toString());
+        }
     }
 
     public void printInvalidInput() {

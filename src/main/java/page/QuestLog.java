@@ -53,6 +53,16 @@ public class QuestLog {
         quests.get(i - 1).markIncomplete();
     }
 
+    public ArrayList<Quest> filterByKeyword(String keyword) {
+        ArrayList<Quest> result = new ArrayList<>();
+        for (Quest q : quests) {
+            if (q.hasKeyword(keyword)) {
+                result.add(q);
+            }
+        }
+        return result;
+    }
+
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();

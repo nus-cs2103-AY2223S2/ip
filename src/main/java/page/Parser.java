@@ -62,7 +62,7 @@ public class Parser {
                     case "incomplete":
                     case "delete":
                         if (splitInput.length == 1) {
-                            throw new PageException("Sorry, please include the number of the quest to be marked " + splitInput[0] + "!");
+                            throw new PageException("Sorry, please include the number of the quest!");
                         } else {
                             try {
                                 int questNum = Integer.parseInt(splitInput[1]);
@@ -82,6 +82,13 @@ public class Parser {
                             } catch (NumberFormatException nfe) {
                                 throw new PageException("Sorry, that's not a number!");
                             }
+                        }
+                        break;
+                    case "find":
+                        if (splitInput.length == 1) {
+                            throw new PageException("Sorry, please include a keyword to search for.");
+                        } else {
+                            ui.printFilteredQuestLog(questLog.filterByKeyword(splitInput[1]));
                         }
                         break;
                     default:
