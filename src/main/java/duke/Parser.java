@@ -1,16 +1,15 @@
 package duke;
 
-import duke.command.Command;
 import duke.command.AddCommand;
+import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
-
-import duke.task.Task;
 import duke.task.Deadline;
 import duke.task.Event;
+import duke.task.Task;
 import duke.task.Todo;
 
 /**
@@ -76,8 +75,8 @@ public class Parser {
                     String[] addon = rest.split(" /", 2);
                     String description = addon[0];
                     if (addon.length <= 1) {
-                        throw new DukeException("Oops!! I do not have enough information to create a deadline task!\n" +
-                                "You might be missing a date or the task description.");
+                        throw new DukeException("Oops!! I do not have enough information to create a deadline task!\n"
+                                + "You might be missing a date or the task description.");
                     } else {
                         String byString = addon[1];
                         String[] byPart = byString.split(" ", 2);
@@ -89,8 +88,8 @@ public class Parser {
                     String[] addon = rest.split(" /", 3);
                     String description = addon[0];
                     if (addon.length <= 1) {
-                        throw new DukeException("Oops!! I do not have enough information to create a event task!\n" +
-                                "Please ensure you have indicated the duration using /from and /to!");
+                        throw new DukeException("Oops!! I do not have enough information to create a event task!\n"
+                                + "Please ensure you have indicated the duration using /from and /to!");
                     } else {
                         String fromString = addon[1];
                         String[] fromPart = fromString.split(" ", 2);

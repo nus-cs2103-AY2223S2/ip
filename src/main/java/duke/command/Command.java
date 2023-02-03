@@ -7,6 +7,11 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
+/**
+ * Represents a command.
+ * Can be implemented by classes representing
+ * various types of commands.
+ */
 public abstract class Command {
     public Command() {}
 
