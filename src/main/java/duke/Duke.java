@@ -19,15 +19,16 @@ public class Duke {
     private final Ui ui;
     /** Reference for the Parser object used for parsing user input. */
     private final Parser parser;
+    /** Relative path to the save file. */
+    private static final String PATH = "data/tasks.txt";
 
     /**
      * Constructor for Duke object.
      * Creates a new Object with the save file at the specified path.
-     * @param path The relative path of the save text file.
      */
-    public Duke(String path) {
+    public Duke() {
         ui = new Ui();
-        storage = new Storage(path);
+        storage = new Storage(PATH);
         try {
             tasks = new TaskList(storage.loadSaveFile());
         } catch (DukeException e) {
@@ -42,7 +43,7 @@ public class Duke {
      * @param args The command line arguments.
      */
     public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+        new Duke().run();
     }
 
     /**
@@ -64,6 +65,18 @@ public class Duke {
             this.storage.save(tasks.getTasks());
         } catch (DukeException e) {
             this.ui.printException(e);
+        }
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        try {
+            return this.parser.parseAndExecute((input));
+        } catch (DukeException e) {
+            return "Sorry Duke failed to understand";
         }
     }
 }
