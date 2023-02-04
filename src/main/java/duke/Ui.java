@@ -77,15 +77,18 @@ public class Ui {
      * @throws DukeException when the task is not found in the list
      */
     public String stringList(TaskList tasks) throws DukeException {
-        if (tasks.size() == 0) {
-            return Views.EMPTY_LIST_STRING.eng();
-        } else {
-            String toPrint = "";
-            for (int i = 0; i < tasks.size(); i++) {
-                toPrint += ((i + 1) + "." + tasks.get(i)) + "\n      ";
-            }
-            return toPrint.substring(0, toPrint.length() - 7);
-        }
+        return stringList(tasks.getList());
+    }
+
+    /**
+     * Takes in a list of tasks and turn it into String
+     *
+     * @param tasks TaskList object to print the list
+     * @return String representation of list of tasks
+     * @throws DukeException when the task is not found in the list
+     */
+    public String stringList(TaskList tasks, boolean isGui) throws DukeException {
+        return stringList(tasks.getList(), isGui);
     }
 
     /**
@@ -96,14 +99,35 @@ public class Ui {
      * @throws DukeException
      */
     public String stringList(ArrayList<Task> tasks) throws DukeException {
+        return stringList(tasks, false);
+    }
+
+    /**
+     * Takes in a ArrayList of tasks and Strings it
+     *
+     * @param tasks TaskList object to print the list
+     * @return String representation of list of tasks
+     * @throws DukeException
+     */
+    public String stringList(ArrayList<Task> tasks, boolean isGui) throws DukeException {
         if (tasks.size() == 0) {
             return Views.CANNOT_FIND_STRING.eng();
         } else {
             String toPrint = Views.FOUND_LIST_STRING.eng();
-            for (int i = 0; i < tasks.size(); i++) {
-                toPrint += ((i + 1) + "." + tasks.get(i)) + "\n      ";
+            if (isGui) {
+                toPrint = toPrint.substring(0, toPrint.length() - 6);
             }
-            return toPrint.substring(0, toPrint.length() - 7);
+            for (int i = 0; i < tasks.size(); i++) {
+                toPrint += ((i + 1) + "." + tasks.get(i)) + "\n";
+                if (!isGui) {
+                    toPrint += "      ";
+            }
+            }
+            if (isGui) {
+                return toPrint.substring(0, toPrint.length() - 1);
+            } else {
+                return toPrint.substring(0, toPrint.length() - 7);
+            }
         }
     }
 

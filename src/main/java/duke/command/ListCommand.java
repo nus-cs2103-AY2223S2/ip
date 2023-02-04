@@ -31,7 +31,7 @@ public class ListCommand extends Command {
      * @throws DukeException
      */
     public String executeString(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        return ui.stringList(tasks);
+        return ui.stringList(tasks, true);
     }
 
     /**

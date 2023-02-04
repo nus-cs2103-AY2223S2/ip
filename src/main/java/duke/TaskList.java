@@ -57,11 +57,14 @@ public class TaskList {
      *
      * @return ArrayList of found task
      */
-    public ArrayList<Task> search(String query) {
+    public ArrayList<Task> search(String... query) {
         ArrayList<Task> results = new ArrayList<Task>();
+        // Inefficient O(N^2) search method. Fix this whenever
         for (Task task : this.tasksList) {
-            if (task.getTitle().toLowerCase().contains(query.trim().toLowerCase())) {
-                results.add(task);
+            for (String word : query) {
+                if (task.getTitle().toLowerCase().contains(word.trim().toLowerCase())) {
+                    results.add(task);
+                }
             }
         }
         return results;
