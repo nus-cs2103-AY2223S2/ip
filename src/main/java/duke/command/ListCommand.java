@@ -13,8 +13,9 @@ public class ListCommand extends Command {
         String returnMessage = "";
         int taskNumber = 1;
         for (int i = 0; i < tasks.getSize(); i++) {
-            String task = taskNumber + ". " + tasks.getTask(i).toString();
+            String task = taskNumber + ". " + tasks.getTask(i).toString() + '\n';
             returnMessage += task;
+            taskNumber++;
         }
         return returnMessage;
     }

@@ -18,11 +18,12 @@ public class FindCommand extends Command {
         if (foundTasks.size() == 0) {
             return "There are no matching tasks\n";
         }
-        String returnMessage = "Here are the matching tasks in your list:";
+        String returnMessage = "Here are the matching tasks in your list: \n";
         int taskNumber = 1;
         for (int i = 0; i < foundTasks.size(); i++) {
-            String foundTask = taskNumber + ". " + tasks.getTask(i).toString() + "/n";
+            String foundTask = taskNumber + ". " + tasks.getTask(i).toString() + "\n";
             returnMessage += foundTask;
+            taskNumber++;
         }
         return returnMessage;
     }
