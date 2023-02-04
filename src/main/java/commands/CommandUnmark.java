@@ -29,6 +29,7 @@ public class CommandUnmark extends Command {
             }
             String unmarkString = userInput[1].strip();
             int unmarkInput = Integer.parseInt(unmarkString) - 1;
+            assert (unmarkInput >= 0);
             taskList.get(unmarkInput).markNotDone();
             autoSave(taskList);
             return ("Okay, the following task is marked as NOT done!\n"

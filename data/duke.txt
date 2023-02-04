@@ -1,2 +1,2 @@
-T=X=egg
-T= =meat
+T= =egg
+E=X=kill=Now=Forever

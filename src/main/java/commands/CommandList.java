@@ -33,6 +33,7 @@ public class CommandList extends Command {
                     toPrint.append("\n");
                 }
             }
+            assert (!toPrint.toString().equals(""));
             return ("Here are your tasks:\n" + toPrint);
         }
     }

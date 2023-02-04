@@ -26,6 +26,7 @@ public class CommandToDo extends Command {
             if (toDoName.strip().length() == 0) {
                 throw new DukeException(ui.formatLogicError("Tasks.ToDo description cannot be blank."));
             }
+            assert (!toDoName.equals(""));
             Task taskToAdd = new ToDo(toDoName);
             taskList.add(new ToDo(toDoName));
             autoSave(taskList);

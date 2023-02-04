@@ -22,7 +22,7 @@ public class Parser {
     public String parse(String parseInput) throws DukeException {
         // switch case for future commands
         String[] inputs = parseInput.split(" ", 2);
-        if (inputs.length == 0) {
+        if (inputs[0].length() == 0) {
             throw new DukeException("Uh, where's your input?\nYou can't just say nothing at all.");
         }
         switch (inputs[0]) {

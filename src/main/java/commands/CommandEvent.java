@@ -38,6 +38,7 @@ public class CommandEvent extends Command {
             if (toDate.strip().length() == 0) {
                 throw new DukeException(ui.formatLogicError("event's to field cannot be blank."));
             }
+            assert (!eventName.equals("") && !fromDate.equals("") && !toDate.equals(""));
             Task eventToAdd = new Event(eventName, fromDate, toDate);
             taskList.add(eventToAdd);
             autoSave(taskList);

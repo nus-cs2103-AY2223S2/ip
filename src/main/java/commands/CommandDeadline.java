@@ -32,6 +32,7 @@ public class CommandDeadline extends Command {
             if (deadlineDate.strip().length() == 0) {
                 throw new DukeException(ui.formatLogicError("deadline date cannot be blank."));
             }
+            assert (!deadlineName.equals("") && !deadlineDate.equals(""));
             Task deadlineToAdd = new Deadline(deadlineName, deadlineDate);
             taskList.add(deadlineToAdd);
             autoSave(taskList);

@@ -29,6 +29,7 @@ public class CommandDelete extends Command {
                         "delete <insert INTEGER>"));
             }
             String deleteString = userInput[1].strip();
+            assert (deleteString.length() != 0);
             int deleteInput = Integer.parseInt(deleteString) - 1;
             Task deletedTask = taskList.get(deleteInput);
             taskList.remove(deleteInput);

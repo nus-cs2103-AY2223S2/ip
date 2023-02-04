@@ -36,6 +36,7 @@ public class CommandFind extends Command {
                 }
             }
             if (!isEmpty) {
+                assert (!toPrint.toString().equals(""));
                 return ("Here are the tasks that matched your query:\n" + toPrint);
             } else {
                 return ("Sorry, nothing matches your search query!");

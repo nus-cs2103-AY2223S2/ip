@@ -29,6 +29,7 @@ public class CommandMark extends Command {
             }
             String markString = userInput[1].strip();
             int markInput = Integer.parseInt(markString) - 1;
+            assert (markInput >= 0);
             taskList.get(markInput).markDone();
             autoSave(taskList);
             return ("Okay, the following task is marked as done!\n"

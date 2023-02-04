@@ -14,7 +14,11 @@ public class DukeException extends Exception {
         this.errorMessage = errorMessage;
     }
 
+    /**
+     * Prints the error message associated with the DukeException.
+     */
     public String printErrorMessage() {
+        assert (!this.errorMessage.equals(""));
         return this.errorMessage;
     }
 

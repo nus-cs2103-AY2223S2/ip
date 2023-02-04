@@ -45,6 +45,7 @@ public class Storage {
             while (fileScan.hasNextLine()) {
                 String fileLine = fileScan.nextLine();
                 String[] evalArray = fileLine.split("=");
+                assert (evalArray[0].length() == 1);
                 switch (evalArray[0]) {
                 case ("T"):
                     ToDo newToDo = new ToDo(evalArray[2]);
@@ -84,6 +85,7 @@ public class Storage {
     public void saveTaskList(TaskList toSave) throws IOException {
         FileWriter dukeWriter = new FileWriter("data/duke.txt");
         for (int i = 0; i < toSave.size(); i++) {
+            assert (!toSave.get(i).toSaveString().equals(""));
             dukeWriter.write(toSave.get(i).toSaveString() + "\n");
         }
         dukeWriter.close();
