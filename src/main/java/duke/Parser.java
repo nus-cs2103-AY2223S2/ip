@@ -29,6 +29,7 @@ public class Parser {
             return ".";
         } else {
             if (input.contains("unmark")) {
+                assert(input.length() == 8);
                 int i = Integer.parseInt(input.substring(7, 8));
                 Task t = taskList.unmarkTask(i);
                 try {
@@ -38,6 +39,7 @@ public class Parser {
                 }
                 return Ui.printUnmark(taskList, i);
             } else if (input.contains("mark")) {
+                assert(input.length() == 8);
                 int i = Integer.parseInt(input.substring(5, 6));
                 Task t = taskList.markTask(i);
                 try {
@@ -47,6 +49,7 @@ public class Parser {
                 }
                 return Ui.printMark(taskList, i);
             } else if (input.contains("delete")) {
+                assert(input.length() == 8);
                 int i = Integer.parseInt(input.substring(7, 8));;
                 try {
                     FileReadWrite.writeDelete(i);

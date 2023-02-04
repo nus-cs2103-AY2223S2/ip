@@ -29,6 +29,7 @@ public abstract class FileReadWrite {
         if (!file.exists()) {
             file.mkdir();
         }
+        assert (file.exists());
         Scanner scanner = new Scanner(file);
         while (scanner.hasNext()) {
             String nextLine = scanner.nextLine();
