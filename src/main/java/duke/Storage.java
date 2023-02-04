@@ -61,6 +61,7 @@ public class Storage {
                     if (taskDetails[1].equals("1")) {
                         tasks.add(new Todo(taskDetails[2], true));
                     } else {
+                        assert taskDetails[1].equals("0") : "todo task should be marked as undone";
                         tasks.add(new Todo(taskDetails[2], false));
                     }
                     break;
@@ -68,6 +69,7 @@ public class Storage {
                     if (taskDetails[1].equals("1")) {
                         tasks.add(new Deadline(taskDetails[2], true, taskDetails[3]));
                     } else {
+                        assert taskDetails[1].equals("0") : "deadline task should be marked as undone";
                         tasks.add(new Deadline(taskDetails[2], false, taskDetails[3]));
                     }
                     break;
@@ -75,6 +77,7 @@ public class Storage {
                     if (taskDetails[1].equals("1")) {
                         tasks.add(new Event(taskDetails[2], true, taskDetails[3], taskDetails[4]));
                     } else {
+                        assert taskDetails[1].equals("0") : "event task should be marked as undone";
                         tasks.add(new Event(taskDetails[2], false, taskDetails[3], taskDetails[4]));
                     }
                     break;
