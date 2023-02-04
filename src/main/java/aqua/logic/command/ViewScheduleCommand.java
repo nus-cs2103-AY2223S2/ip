@@ -78,7 +78,7 @@ public class ViewScheduleCommand extends CommandController {
 
 
 
-    private class TimeableAquaTask implements Timeable {
+    private class TimeableAquaTask extends Timeable {
         private final AquaTask task;
 
 
