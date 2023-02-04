@@ -17,7 +17,14 @@ public class Duke {
     public static void main(String[] args) {
         Ui ui = new Ui();
         ui.printWelcome();
-        TaskList toDoList = new TaskList();
+        Storage storage = new Storage("data");
+        TaskList toDoList;
+        try {
+            toDoList = storage.initialise();
+        } catch (DukeException ex) {
+            System.out.println(ex.getMessage());
+            return;
+        }
         Scanner sc = new Scanner(System.in);
         while (true) {
             String command = sc.nextLine();
@@ -34,6 +41,7 @@ public class Duke {
             }
             if (curCommand instanceof Exit) {
                 ui.printGoodbye();
+                storage.update(toDoList);
                 break;
             }
         }

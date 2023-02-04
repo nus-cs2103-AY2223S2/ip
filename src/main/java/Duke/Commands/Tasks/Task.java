@@ -1,13 +1,38 @@
 package Duke.Commands.Tasks;
 
 // skeleton code for this class is taken from cs2103 website
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
     public Task(String description) {
+        this(description, false);
+    }
+
+    public Task(String description, boolean isDone) {
         this.description = description.trim();
-        this.isDone = false;
+        this.isDone = isDone;
+    }
+
+    public abstract String getTaskClass();
+
+    /**
+     * Gets the description of this task
+     *
+     * @return A String representing the description of this task
+     */
+    public String getDescription() {
+        return this.description;
+    }
+
+    /**
+     * Generates a String to store this task in a local text file
+     *
+     * @return A representative String that contains data about the current task
+     */
+    public String generateStorageText() {
+        return String.format("%s-%s-%s",
+                this.getTaskClass(), this.getStatusIcon(), this.getDescription());
     }
 
     protected String getStatusIcon() {

@@ -2,10 +2,19 @@ package Duke.Commands.Tasks;
 
 public class ToDo extends Task {
     public ToDo(String description) {
-        super(description);
+        super(description, false);
     }
 
-    private String getTaskClass() {
+    public ToDo(String description, boolean isDone) {
+        super(description, isDone);
+    }
+
+    /**
+     * Generates a letter representing the type of task
+     *
+     * @return a letter representing the type of this task
+     */
+    public String getTaskClass() {
         return "T";
     }
 
