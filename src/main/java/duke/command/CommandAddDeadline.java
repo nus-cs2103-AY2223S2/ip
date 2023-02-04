@@ -32,6 +32,7 @@ public class CommandAddDeadline extends Command {
         Task deadline = new Deadline(deadlineDescription, by);
         tasks.addTask(deadline);
         storage.save(tasks.getList());
-        return ui.formResponse("New deadline task added: " + deadline);
+        return ui.formResponse("New deadline added: " + deadline
+                + String.format("\nThere are currently %d tasks.", tasks.getSize()));
     }
 }

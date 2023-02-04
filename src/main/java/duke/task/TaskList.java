@@ -37,6 +37,11 @@ public class TaskList {
         taskList.add(task);
     }
 
+
+    public int getSize() {
+        return this.taskList.size();
+    }
+
     /**
      * Lists out all the tasks in the list in chronological order.
      * Map the task index to each task.
@@ -96,6 +101,7 @@ public class TaskList {
         checkIndex(idx);
         Task t = indexToTask.get(idx);
         taskList.remove(t);
+        indexToTask.remove(idx);
         return t;
     }
 

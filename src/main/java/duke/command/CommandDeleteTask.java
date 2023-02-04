@@ -19,7 +19,7 @@ public class CommandDeleteTask extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task deleted = tasks.deleteTask(index - 1);
         storage.save(tasks.getList());
-        return ui.formResponse("Task deleted: " + deleted);
+        return ui.formResponse("LeTask deleted: " + deleted);
     }
 }
 
