@@ -1,7 +1,5 @@
 package Week2.src.main;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -15,20 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-
-/**
- * A simple todo bot to manage my todo list.
- * It can mark done jobs or unmark.
- * A simple todo bot that helps you to manage your tasks with deadline or occuring time.
- * @author Park Hyunjin
- */
-public class Duke extends Application {
-
-    private static Storage storage;
-    private Ui ui;
-    private static TaskList tasklist;
-    static boolean isBye = false;
-
+public class DukeGUI extends Application {
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
@@ -38,66 +23,6 @@ public class Duke extends Application {
     private Image bot = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
 
-
-    /**
-     * Constructor of Duke.
-     * It begins the basic operation of the program when it is constructed.
-     * Duke constructor.
-     * Takes filePath from main and creates Ui and storage from it.
-     * It can load previous data from the file path.
-     * @throws IOException
-     */
-    public Duke() {
-
-    }
-
-    /**
-     * Prints out a line
-     * @return a line to divide outcomes.
-     */
-    public static void lining() {
-        System.out.println("____________________________________________________________");
-    }
-
-    static FileWriter fw;
-
-    static {
-        try {
-            fw = new FileWriter("saves/data.txt");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    /**
-     * Writes information of the task on the file
-     * @param currtask Current task that user has entered
-     * It uses a file writer to write the data on the file according to the user's input.
-     * @throws IOException
-     */
-    public static void writeOn(Task currtask) throws IOException {
-        fw.write(currtask.toString() +System.lineSeparator());
-    }
-
-    public String run(String input) throws IOException {
-        storage = new Storage("/saves/data.txt");
-        Ui ui = new Ui();
-        try {
-            tasklist = new TaskList(storage.load());
-            Parser parser = new Parser(tasklist);
-            if (!isBye) {
-                return parser.runParser(input);
-            } else {
-                return ui.bye();
-            }
-        } catch (IndexOutOfBoundsException e) {
-            return ui.showEmptyError();
-        } catch (FileNotFoundException e) {
-            return ui.showFileError();
-        } catch (Exception e) {
-            return ui.showLoadingError();
-        }
-    }
 
     @Override
     public void start(Stage stage) {
@@ -160,19 +85,11 @@ public class Duke extends Application {
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
         sendButton.setOnMouseClicked((event) -> {
-            try {
-                handleUserInput();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            handleUserInput();
         });
 
         userInput.setOnAction((event) -> {
-            try {
-                handleUserInput();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            handleUserInput();
         });
     }
 
@@ -194,7 +111,7 @@ public class Duke extends Application {
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
-    private void handleUserInput() throws IOException {
+    private void handleUserInput() {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
@@ -204,8 +121,7 @@ public class Duke extends Application {
         userInput.clear();
     }
 
-    private String getResponse(String input) throws IOException {
-        return run(input);
+    private String getResponse(String input) {
+        return "";
     }
-
 }
