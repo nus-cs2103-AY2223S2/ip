@@ -15,11 +15,11 @@ public class Event extends Task {
 
     /**
      * Constructor
-     * @param isCompleted whether the event is completed; 0 for not completed, 1 for completed
+     * @param isCompleted whether the event is completed
      * @param taskDescription description of the event
      * @param duration the duration of the event
      */
-    public Event(int isCompleted, String taskDescription, Duration duration) {
+    public Event(boolean isCompleted, String taskDescription, Duration duration) {
         super(taskDescription, isCompleted);
         this.duration = duration;
     }

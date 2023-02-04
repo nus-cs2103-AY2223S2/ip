@@ -28,11 +28,13 @@ public class FindCommand extends Command {
     public String execute(TaskList taskList, Ui ui, Storage storage) throws LackOfArgumentException {
         String[] insArr = instruction.split(" ");
         if (insArr.length == 1) {
-            throw new LackOfArgumentException();
-        } else {
+            throw new LackOfArgumentException("Please specify a search keyword");
+        } else if (insArr.length > 1) {
             String keyword = instruction.substring(5).trim();
             String res = taskList.findTasks(keyword).toString();
             return ui.getFormattedString(res);
+        } else {
+            throw new Error("Internal Error");
         }
     }
 }

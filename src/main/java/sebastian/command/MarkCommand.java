@@ -36,7 +36,7 @@ public class MarkCommand extends Command {
             TaskNotExistException, CannotWriteDataException {
         String[] insArr = instruction.split(" ");
         if (insArr.length == 1) {
-            throw new LackOfArgumentException();
+            throw new LackOfArgumentException("Please specify the index of the task to be marked");
         } else if (insArr.length == 2) {
             try {
                 int taskIndex = Integer.parseInt(insArr[1]);
@@ -51,8 +51,10 @@ public class MarkCommand extends Command {
             } catch (IndexOutOfBoundsException e) {
                 throw new TaskNotExistException();
             }
-        } else {
+        } else if (insArr.length > 2) {
             throw new InstructionFormatMismatchException("mark");
+        } else {
+            throw new Error("Internal Error");
         }
     }
 }

@@ -8,7 +8,7 @@ public class LackOfArgumentException extends InputFormatMismatchException {
     /**
      * Constructor
      */
-    public LackOfArgumentException() {
-        super("Please specify an argument");
+    public LackOfArgumentException(String msg) {
+        super(msg);
     }
 }

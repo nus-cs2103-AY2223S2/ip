@@ -38,7 +38,7 @@ public class TaskList {
      * @param taskDescription a description of the to-do to be added
      * @return the to-do generated
      */
-    public Task addTodo(int isCompleted, String taskDescription) {
+    public Task addTodo(boolean isCompleted, String taskDescription) {
         Task newTask = new Todo(isCompleted, taskDescription);
         this.taskList.add(newTask);
         return newTask;
@@ -50,7 +50,7 @@ public class TaskList {
      * @param taskDescription a description of the deadline to be added
      * @return the deadline generated
      */
-    public Task addDeadline(int isCompleted, String taskDescription, String endTime) throws
+    public Task addDeadline(boolean isCompleted, String taskDescription, String endTime) throws
             DeadlineFormatMismatchException {
         try {
             Task newTask = new Deadline(isCompleted, taskDescription, new EndTime(convertStringToDate(endTime)));
@@ -67,7 +67,7 @@ public class TaskList {
      * @param taskDescription a description of the event to be added
      * @return the event generated
      */
-    public Task addEvent(int isCompleted, String taskDescription, String from, String to) throws
+    public Task addEvent(boolean isCompleted, String taskDescription, String from, String to) throws
             EventFormatMismatchException {
         try {
             Task newTask = new Event(isCompleted, taskDescription,

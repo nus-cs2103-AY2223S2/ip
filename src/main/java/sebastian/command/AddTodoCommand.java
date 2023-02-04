@@ -30,14 +30,16 @@ public class AddTodoCommand extends AddTaskCommand {
             throws LackOfArgumentException, CannotWriteDataException {
         String[] insArr = instruction.split(" ");
         if (insArr.length == 1) {
-            throw new LackOfArgumentException();
-        } else {
+            throw new LackOfArgumentException("Please specify a description for your Todo");
+        } else if (insArr.length > 1) {
             String task = instruction.substring(5);
             int originalSize = taskList.getTotalTasks();
-            String res = this.addTask(taskList.addTodo(0, task.trim()), taskList.getTotalTasks());
+            String res = this.addTask(taskList.addTodo(false, task.trim()), taskList.getTotalTasks());
             assert taskList.getTotalTasks() == originalSize + 1;
             storage.writeToDisk(taskList);
             return ui.getFormattedString(res);
+        } else {
+            throw new Error("Internal Error");
         }
     }
 }
