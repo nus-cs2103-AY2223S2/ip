@@ -60,7 +60,6 @@ public class TaskList {
         if (task != null) {
             tasks.add(task);
         }
-        Ui.informTaskIsAdded(task, tasks.size());
         Storage.saveTasksToTaskLog(this);
     }
 

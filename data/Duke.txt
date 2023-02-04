@@ -1,3 +1,4 @@
 T | 1 | read book
 D | 0 | return book | 03/02/2023 15:00
 T | 0 | return book
+E | 1 | tutorial | 06/02/2023 15:00 - 06/02/2023 16:00
