@@ -15,8 +15,8 @@ import javafx.scene.layout.VBox;
 
 
 public class DaySchedule extends HBox {
-    private static final double ROW_WIDTH = 600;
-    private static final double ROW_HEIGHT = 15;
+    private static final double ROW_WIDTH = 1000;
+    private static final double ROW_HEIGHT = 20;
     private static final double HOURS_IN_A_DAY = 24;
     private static final double MINUTES_IN_A_DAY = 1440;
 
@@ -82,10 +82,10 @@ public class DaySchedule extends HBox {
         for (ScheduleTimeable timeable : timeables) {
             double startX = (startTime.until(timeable.getStart(), ChronoUnit.MINUTES) / MINUTES_IN_A_DAY)
                     * ROW_WIDTH;
-            startX = Math.max(0, startX) + 0.5;
+            startX = Math.max(0, (int) startX) + 0.5;
             double endX = (startTime.until(timeable.getEnd(), ChronoUnit.MINUTES) / MINUTES_IN_A_DAY)
                     * ROW_WIDTH;
-            endX = Math.min(ROW_WIDTH, endX) + 0.5;
+            endX = Math.min(ROW_WIDTH, (int) endX) + 0.5;
 
             Pane scheduleBox = new Pane();
             scheduleBox.setMinHeight(ROW_HEIGHT);
@@ -105,7 +105,7 @@ public class DaySchedule extends HBox {
         GraphicsContext context = canvas.getGraphicsContext2D();
 
         for (int i = 0; i <= HOURS_IN_A_DAY; i++) {
-            double xMark = (i / HOURS_IN_A_DAY) * ROW_WIDTH + 0.5;
+            double xMark = ((int) ((i / HOURS_IN_A_DAY) * ROW_WIDTH)) + 0.5;
             context.strokeLine(xMark, 0, xMark, ROW_HEIGHT);
         }
 
