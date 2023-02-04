@@ -19,48 +19,29 @@ public class Duke {
 
     /**
      * Constructor for Duke object.
-     *
-     * @param filePath Path of the file where the task objects are stored.
      */
-    public Duke(String filePath) {
+    public Duke() {
         ui = new Ui();
-        this.storage = new Storage(filePath);
+        storage = new Storage("tasks.txt");
         try {
-            this.tasks = new TaskList(storage.load());
+            tasks = new TaskList(storage.load());
         } catch (IOException e) {
             e.printStackTrace();
-            this.tasks = new TaskList();
+            tasks = new TaskList();
         }
     }
 
     /**
-     * Runs the chat flow.
-     * Prints the welcome message when user first starts up the chat.
-     * Loops while getting user input for commands until user inputs "bye".
-     * Exits chat and prints farewell message.
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
      */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                System.out.println(e);
-            } finally {
-                ui.showLine();
-            }
+    public String getResponse(String input) {
+        try {
+            Command command = Parser.parse(input);
+            return command.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            System.out.println("Unrecognized command");
         }
-    }
-
-    /**
-     * Main method which runs the duke object.
-     */
-    public static void main(String[] args) {
-        new Duke("tasks.txt").run();
+        return "OOPS!!! I'm sorry, but I don't know what that means :-(";
     }
 }

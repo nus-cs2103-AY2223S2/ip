@@ -96,21 +96,21 @@ public class Command {
      * @param ui The Ui object to display messages.
      * @param storage The Storage object to save the task after execution.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         CommandName cn = CommandName.valueOf(this.commandName.toUpperCase());
         Task task;
 
         switch(cn) {
         case BYE:
-            ui.farewellMessage();
             this.isExit = true;
-            break;
+            return ui.farewellMessage();
 
         case LIST:
+            StringBuilder listOfTasks = new StringBuilder("Here are your tasks: \n");
             for (int i = 0; i < tasks.size(); i++) {
-                System.out.println(i + 1 + ". " + tasks.get(i));
+                listOfTasks.append(i + 1).append(". ").append(tasks.get(i)).append("\n");
             }
-            break;
+            return listOfTasks.toString();
 
         case MARK:
             if (index + 1 == 0) {
@@ -119,9 +119,7 @@ public class Command {
             task = tasks.get(index);
             task.mark();
             storage.saveTasks(tasks);
-            System.out.println("Nice! I've marked this task as done:");
-            System.out.println(task);
-            break;
+            return "Nice! I've marked this task as done:\n" + task;
 
         case UNMARK:
             if (index + 1 == 0) {
@@ -130,56 +128,50 @@ public class Command {
             task = tasks.get(index);
             task.unmark();
             storage.saveTasks(tasks);
-            System.out.println("OK, I've marked this task as not done yet:");
-            System.out.println(task);
-            break;
+            return "OK, I've marked this task as not done yet:\n" + task;
 
         case DELETE:
             task = tasks.get(index);
             tasks.delete(index);
             storage.saveTasks(tasks);
-            System.out.println("Noted. I've removed this task: \n" + task);
-            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-            break;
+            return "Noted. I've removed this task: \n" + task +
+                    "\nNow you have " + tasks.size() + " tasks in the list.";
 
         case TODO:
             Todo todo = new Todo(taskName);
             tasks.add(todo);
             storage.saveTasks(tasks);
-            System.out.println("Got it. I've added this task: \n" + todo);
-            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-            break;
+            return "Got it. I've added this task: \n" + todo +
+                    "\nNow you have " + tasks.size() + " tasks in the list.";
 
         case FIND:
             int counter = 0;
-            System.out.println("Here are the matching tasks in your list:");
+            StringBuilder matchingTasks = new StringBuilder("Here are the matching tasks in your list:");
             for (int i = 0; i < tasks.size(); i++) {
                 Task findTask = tasks.get(i);
                 if (findTask.contains(taskName)) {
                     counter++;
-                    System.out.print(counter + ". " + findTask + "\n");
+                    matchingTasks.append(counter).append(". ").append(findTask).append("\n");
                 }
             }
-            break;
+            return matchingTasks.toString();
 
         case DEADLINE:
             Deadline deadline = new Deadline(taskName, by);
             tasks.add(deadline);
             storage.saveTasks(tasks);
-            System.out.println("Got it. I've added this task: \n" + deadline);
-            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-            break;
+            return "Got it. I've added this task: \n" + deadline +
+                    "\nNow you have " + tasks.size() + " tasks in the list.";
 
         case EVENT:
             Event event = new Event(taskName, from, to);
             tasks.add(event);
             storage.saveTasks(tasks);
-            System.out.println("Got it. I've added this task: \n" + event);
-            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-            break;
+            return "Got it. I've added this task: " + event +
+                    "\now you have " + tasks.size() + " tasks in the list.";
 
         default:
-            throw new IllegalArgumentException();
+            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 
