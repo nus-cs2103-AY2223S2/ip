@@ -3,6 +3,7 @@ package duke.entities;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Objects;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -28,8 +29,8 @@ public class TaskList {
         this.storage = storage;
         try {
             storage.connect();
-            Boolean success = storage.load(this);
-            if (success) {
+            Boolean isSuccessful = storage.load(this);
+            if (isSuccessful) {
                 System.out.println("Successfully loaded data.");
             } else {
                 System.out.println("Data load unsuccessful. Initializing empty storage.");
@@ -49,6 +50,7 @@ public class TaskList {
     }
 
     private String filter(Predicate<? super Task> predicate, String emptyMsg, boolean index) {
+        assert !Objects.equals(emptyMsg, "") : "an empty message is needed in case the filtered list is empty";
         List<Task> filteredList = taskList.stream().filter(predicate).collect(Collectors.toList());
         if (filteredList.size() == 0) {
             return emptyMsg;
@@ -93,8 +95,8 @@ public class TaskList {
                 + UI.newLine() + "Now you have " + taskList.size() + " tasks in the list.";
     }
 
-    private boolean isValidKey(Integer key) {
-        return (key <= taskList.size() && key > 0);
+    private boolean isNotValidKey(Integer key) {
+        return (key > taskList.size() || key <= 0);
     }
 
     /**
@@ -105,10 +107,9 @@ public class TaskList {
      * @throws DukeException An error indicating there was an error in retrieving the specified task.
      */
     public Task getTask(Integer key) throws DukeException {
-        if (!isValidKey(key)) {
+        if (isNotValidKey(key)) {
             throw new DukeException("This task don't exists! Please select one from the list.");
         }
-        // accounts for 0-based indexing
         return taskList.get(key - 1);
     }
 
@@ -134,7 +135,7 @@ public class TaskList {
      * @return Status message of the executed command.
      */
     public String deleteTask(Integer key) throws DukeException {
-        if (!isValidKey(key)) {
+        if (isNotValidKey(key)) {
             throw new DukeException("This task don't exists! Please select one from the list.");
         }
         Task task = taskList.get(key - 1);

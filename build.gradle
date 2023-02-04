@@ -44,7 +44,7 @@ test {
 }
 
 application {
-    mainClassName = "Duke"
+    mainClassName = "duke.Duke"
 }
 
 checkstyle {
@@ -57,5 +57,6 @@ shadowJar {
 }
 
 run{
+    enableAssertions = true
     standardInput = System.in
 }
