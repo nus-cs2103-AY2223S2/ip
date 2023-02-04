@@ -2,20 +2,19 @@ package duke.commands;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-
+import java.io.File;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import duke.exceptions.DukeInvalidDeadlineCommandException;
 import duke.utilities.Storage;
 import duke.utilities.TaskList;
 import duke.utilities.Ui;
-import java.io.File;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 public class DeadlineCommandTest {
 
-    TaskList taskList;
-    Ui ui;
-    Storage storage;
+    private TaskList taskList;
+    private Ui ui;
+    private Storage storage;
 
     @BeforeEach
     public void beforeEach() {

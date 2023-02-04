@@ -1,3 +1,4 @@
+import java.nio.file.Path;
 import duke.commands.Command;
 import duke.exceptions.DukeException;
 import duke.exceptions.DukeInvalidFileFormatException;
@@ -5,7 +6,6 @@ import duke.utilities.Parser;
 import duke.utilities.Storage;
 import duke.utilities.TaskList;
 import duke.utilities.Ui;
-import java.nio.file.Path;
 
 public class Duke {
 
@@ -16,8 +16,8 @@ public class Duke {
     /**
      * Instantiates a new Duke app.
      *
-     * @param filePath The path to the {@code duke.txt} file. The Duke app will save the user's
-     *                 tasks to {@code duke.txt} after every command, and load from it on startup.
+     * @param filePath The path to the {@code duke.txt} file. The Duke app will save the user's tasks
+     *                 to {@code duke.txt} after every command, and load from it on startup.
      */
     Duke(String filePath) {
         ui = new Ui();

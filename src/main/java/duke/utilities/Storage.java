@@ -1,13 +1,13 @@
 package duke.utilities;
 
-import duke.exceptions.DukeInvalidFileFormatException;
-import duke.tasks.Task;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import duke.exceptions.DukeInvalidFileFormatException;
+import duke.tasks.Task;
 
 /**
  * The storage manager for Duke.

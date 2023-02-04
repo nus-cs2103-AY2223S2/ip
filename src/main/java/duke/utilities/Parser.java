@@ -1,5 +1,9 @@
 package duke.utilities;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Arrays;
 import duke.commands.ByeCommand;
 import duke.commands.Command;
 import duke.commands.DeadlineCommand;
@@ -17,10 +21,6 @@ import duke.tasks.DeadlineTask;
 import duke.tasks.EventTask;
 import duke.tasks.Task;
 import duke.tasks.TodoTask;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.Arrays;
 
 public class Parser {
 
@@ -73,8 +73,7 @@ public class Parser {
      * @param line A string representing a line in the {@code duke.txt} file, excluding the newline
      *             character.
      * @return A {@code Task} object parsed from the line {@code line} in the {@code duke.txt} file.
-     * @throws DukeInvalidFileFormatException If the {@code duke.txt} file is incorrectly
-     *                                        formatted.
+     * @throws DukeInvalidFileFormatException If the {@code duke.txt} file is incorrectly formatted.
      */
     public static Task parseTask(String line) throws DukeInvalidFileFormatException {
         // need to escape the literal character "|" since it is a special character used
