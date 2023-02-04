@@ -1,0 +1,6 @@
+deadline ip /by 2023-02-05 0000
+mark 1
+todo party
+mark 2
+event exam /from 2022-02-02 0000  /to 2022-02-02 0001
+event haha /from 2022-02-02 0001  /to 2022-02-02 0010

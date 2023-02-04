@@ -7,7 +7,8 @@ public class DukeRerun {
 
     public static String combineStrArr(String[] strArr) {
       StringBuilder curStr = new StringBuilder();
-      for (int i = 1; i < strArr.length; i++) {
+      curStr.append(strArr[1]);
+      for (int i = 2; i < strArr.length; i++) {
         curStr.append(" ").append(strArr[i]);
       }
       return curStr.toString();
