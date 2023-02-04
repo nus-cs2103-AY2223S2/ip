@@ -15,6 +15,8 @@ import javafx.stage.Stage;
 
 /** Manager of inputs and outputs. */
 public class IoManager {
+    private static final String PATH_CSS = "/graphic/style.css";
+
     /** Greeting message. */
     private static final String MESSAGE_GREETING =
             "Konaqua~~\n(*ゝω･*)ﾉ Perfect idol gamer nekomimi super maid Minato Aqua desu!";
@@ -135,7 +137,9 @@ public class IoManager {
 
     private void showPopup(Parent root) {
         Stage stage = new Stage();
-        stage.setScene(new Scene(root));
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add(this.getClass().getResource(PATH_CSS).toString());
+        stage.setScene(scene);
         stage.show();
     }
 }
