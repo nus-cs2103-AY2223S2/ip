@@ -2,7 +2,7 @@ package sebastian.command;
 
 import java.time.format.DateTimeParseException;
 
-import sebastian.exceptions.DateFormatMismatchException;
+import sebastian.exceptions.GetFormatMismatchException;
 import sebastian.exceptions.LackOfArgumentException;
 import sebastian.main.Storage;
 import sebastian.main.TaskList;
@@ -26,11 +26,11 @@ public class GetCommand extends Command {
      * @param storage storage instance created at the start of the session
      * @return a string representing the result of task execution
      * @throws LackOfArgumentException when user did not indicate a date
-     * @throws DateFormatMismatchException when user attempts to specify a data with the wrong format
+     * @throws GetFormatMismatchException when user attempts to specify a data with the wrong format
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage)
-            throws LackOfArgumentException, DateFormatMismatchException {
+            throws LackOfArgumentException, GetFormatMismatchException {
         String[] insArr = instruction.split(" ");
         if (insArr.length == 1) {
             throw new LackOfArgumentException();
@@ -39,10 +39,10 @@ public class GetCommand extends Command {
                 String res = taskList.getTasksOnDate(insArr[1]).toString();
                 return ui.getFormattedString(res);
             } catch (DateTimeParseException e) {
-                throw new DateFormatMismatchException();
+                throw new GetFormatMismatchException();
             }
         } else {
-            throw new DateFormatMismatchException();
+            throw new GetFormatMismatchException();
         }
     }
 }

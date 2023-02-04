@@ -5,11 +5,11 @@ import sebastian.time.DatePattern;
 /**
  * Exception when a date is given in the wrong format
  */
-public class DateFormatMismatchException extends InputFormatMismatchException {
+public class GetFormatMismatchException extends InputFormatMismatchException {
     /**
      * Constructor
      */
-    public DateFormatMismatchException() {
+    public GetFormatMismatchException() {
         super(
                 "Please specify a date in the following format:" + "\n" + "get " + DatePattern.TASK_ON_DATE_FORMAT
         );
