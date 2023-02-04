@@ -30,7 +30,7 @@ public class TestStorageStub extends Storage {
     }
 
     @Override
-    public void write(Task task) {}
+    public void writeOne(Task task) {}
 
     @Override
     public void writeAll(TaskList taskList) {}

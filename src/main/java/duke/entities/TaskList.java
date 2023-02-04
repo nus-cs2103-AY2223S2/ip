@@ -89,7 +89,7 @@ public class TaskList {
      */
     public String addTask(Task task) throws DukeException {
         taskList.add(task);
-        storage.write(task);
+        storage.writeOne(task);
         return "Got it. I've added this task:"
                 + UI.indentMessage(String.valueOf(task))
                 + UI.newLine() + "Now you have " + taskList.size() + " tasks in the list.";
@@ -138,8 +138,7 @@ public class TaskList {
         if (isNotValidKey(key)) {
             throw new DukeException("This task don't exists! Please select one from the list.");
         }
-        Task task = taskList.get(key - 1);
-        taskList.remove(key - 1);
+        Task task = taskList.remove(key - 1);
         storage.writeAll(this);
 
         return "Noted. I've removed the task:"

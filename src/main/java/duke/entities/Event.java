@@ -56,7 +56,9 @@ public class Event extends Task {
 
     @Override
     public boolean isActiveOn(LocalDate date) {
-        return date.isAfter(from) && date.isBefore(to) || date.isEqual(from) || date.equals(to);
+        boolean isBetweenDuration = date.isAfter(from) && date.isBefore(to);
+        boolean isOnDuration = date.isEqual(from) || date.equals(to);
+        return isBetweenDuration || isOnDuration;
     }
 
     @Override

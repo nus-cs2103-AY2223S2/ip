@@ -66,11 +66,14 @@ public class Storage implements Loader<TaskList> {
             Scanner reader = new Scanner(file);
             while (reader.hasNextLine()) {
                 List<String> data = Arrays.asList(reader.nextLine().split(" \\| "));
+
+                // Parse task attributes from data
+                // Expect only valid data to be saved to hard drive
                 TaskType taskType = getTaskType(data);
                 boolean isDone = isDone(data);
                 String description = data.get(2);
-                SerializableTask task;
 
+                SerializableTask task;
                 switch(taskType) {
                 case TODO:
                 case DEADLINE:
@@ -81,10 +84,11 @@ public class Storage implements Loader<TaskList> {
                     break;
                 default: task = null;
                 }
-                if (task != null) {
-                    String msg = taskList.addTask(task.unmarshal(), false);
-                    System.out.println(msg);
+                if (task == null) {
+                    return false;
                 }
+                String msg = taskList.addTask(task.unmarshal(), false);
+                System.out.println(msg);
             }
             return true;
         } catch (FileNotFoundException e) {
@@ -108,20 +112,26 @@ public class Storage implements Loader<TaskList> {
     /**
      * Writes all task currently in memory to the hard disk.
      *
-     * @param taskList The tasklist in memory.
+     * @param taskList The task-list in memory.
      * @throws DukeException An exception to be thrown if there are any errors that occur.
      */
     public void writeAll(TaskList taskList) throws DukeException {
         try {
             FileWriter fileWriter = new FileWriter(file);
             for (Task task : taskList.getTaskList()) {
-                SerializableTask tsk = task.serialize();
-                fileWriter.write(tsk.marshal() + "\n");
+                write(fileWriter, task);
             }
             fileWriter.close();
         } catch (IOException e) {
             throw new DukeException(GENERIC_ERROR + e.getMessage());
         }
+    }
+
+    private static void write(FileWriter fileWriter, Task task) throws IOException {
+        assert task != null : "cannot write empty task to hard disk";
+
+        SerializableTask tsk = task.serialize();
+        fileWriter.write(tsk.marshal() + "\n");
     }
 
     /**
@@ -130,11 +140,10 @@ public class Storage implements Loader<TaskList> {
      * @param task The task in memory.
      * @throws DukeException An exception to be thrown if there are any errors that occur.
      */
-    public void write(Task task) throws DukeException {
+    public void writeOne(Task task) throws DukeException {
         try {
             FileWriter fileWriter = new FileWriter(file, true);
-            SerializableTask tsk = task.serialize();
-            fileWriter.write(tsk.marshal() + "\n");
+            write(fileWriter, task);
             fileWriter.close();
         } catch (IOException e) {
             throw new DukeException(GENERIC_ERROR + e.getMessage());
