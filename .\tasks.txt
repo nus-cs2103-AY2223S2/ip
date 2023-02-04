@@ -1,2 +1,9 @@
+<<<<<<< HEAD
 E |   | this | Feb 22 2022 0000AM-Feb 23 2022 0000AM
 T |   | something
+=======
+T |   | something
+T | X | bring food
+E |   | do this | Jan 11 2011 0000AM-Feb 22 2022 0000AM
+D |   | do that | Jan 03 2023 0600AM
+>>>>>>> origin/master
