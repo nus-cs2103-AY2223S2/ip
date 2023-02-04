@@ -48,20 +48,20 @@ public class TaskList {
         return this.filter(predicate, emptyMsg, false);
     }
 
-    private String filter(Predicate<? super Task> predicate, String emptyMsg, boolean index) {
+    private String filter(Predicate<? super Task> predicate, String emptyMsg, boolean requireIndexing) {
         List<Task> filteredList = taskList.stream().filter(predicate).collect(Collectors.toList());
         if (filteredList.size() == 0) {
             return emptyMsg;
         }
         ListIterator<Task> it = filteredList.listIterator();
         StringBuilder sb = new StringBuilder("These are the tasks you asked for.");
-        while (it.hasNext()) {
-            if (index) {
+        it.forEachRemaining((task) -> {
+            if (requireIndexing) {
                 sb.append("\n").append(it.nextIndex() + 1).append(". ").append(it.next());
             } else {
                 sb.append("\n").append(it.next());
             }
-        }
+        });
         return sb.toString();
     }
 
