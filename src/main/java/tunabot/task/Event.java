@@ -2,6 +2,8 @@ package tunabot.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import tunabot.exceptions.InputException;
 
 /**
  * Class to handle Events
@@ -38,11 +40,27 @@ public class Event extends Task {
         this.end = LocalDateTime.parse(end, formatter);
     }
 
+    public void setEnd(String end) throws InputException {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy-HHmm");
+        try {
+            this.end = LocalDateTime.parse(end, formatter);
+        } catch (DateTimeParseException e) {
+            throw new InputException("BLUB! Date format is invalid! It should be dd/mm/yy-hhmm.");
+        }
+    }
     public String getEnd() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy-HHmm");
         return end.format(formatter);
     }
-
+    
+    public void setStart(String start) throws InputException {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy-HHmm");
+        try {
+            this.start = LocalDateTime.parse(start, formatter);
+        } catch (DateTimeParseException e) {
+            throw new InputException("BLUB! Date format is invalid! It should be dd/mm/yy-hhmm.");
+        }
+    }
     public String getStart() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy-HHmm");
         return start.format(formatter);

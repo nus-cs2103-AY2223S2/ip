@@ -4,7 +4,7 @@ package tunabot.task;
  * Class to handle Tasks
  */
 public class Task {
-    final String name;
+    String name;
     private boolean isDone;
 
     /**
@@ -31,6 +31,9 @@ public class Task {
     }
     public boolean getDone() {
         return isDone;
+    }
+    public void setName(String name) {
+        this.name = name;
     }
 
     /**

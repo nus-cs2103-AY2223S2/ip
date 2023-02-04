@@ -39,8 +39,48 @@ public class Parser {
             return newDeadline(tasks, command);
         case "find":
             return find(tasks, command);
+        case"update":
+            return update(tasks, command);
         default:
             return "BLUB OH! INVALID COMMAND!";
+        }
+    }
+
+    private static String update(TaskList tasks, String[] command) throws InputException {
+        if (command.length < 2) {
+            throw new InputException("BLUB! Needs more info to update!");
+        }
+        String[] details = command[1].split(" /name | /from | /by | /to ");
+        try {
+            int index = Integer.parseInt(details[0]) - 1;
+            Task updateTask = tasks.get(index);
+            if (updateTask instanceof Event) {
+                Event updateEvent = (Event) updateTask;
+                if (details.length < 4) {
+                    throw new InputException("BLUB! Updating an Event needs a new name,"
+                        + " new start date and new end date!");
+                }
+                updateEvent.setName(details[1]);
+                updateEvent.setStart(details[2]);
+                updateEvent.setEnd(details[3]);
+            } else if (updateTask instanceof Deadline) {
+                Deadline updateDeadline = (Deadline) updateTask;
+                if (details.length < 3) {
+                    throw new InputException("BLUB! Updating a Deadline needs a new name and new deadline!");
+                }
+                updateDeadline.setName(details[1]);
+                updateDeadline.setDeadline(command[2]);
+            } else {
+                if (details.length < 2) {
+                    throw new InputException("BLUB! Updating a Task needs a new name!");
+                }
+                updateTask.setName(details[1]);
+            }
+            return "Task has been updated!\n" + Ui.list(tasks);
+        } catch (IllegalArgumentException e) {
+            throw new InputException("BLUB! Index chosen isn't a number!");
+        } catch (IndexOutOfBoundsException e) {
+            throw new InputException("BLUB! Task chosen isn't on the list!");
         }
     }
 

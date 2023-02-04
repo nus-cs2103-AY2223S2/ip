@@ -2,6 +2,7 @@ package tunabot;
 
 import java.util.ArrayList;
 
+import tunabot.task.Event;
 import tunabot.task.Task;
 
 
@@ -40,5 +41,9 @@ public class TaskList {
             }
         }
         return targetList;
+    }
+
+    public void set(int index, Task updateTask) {
+        tasks.set(index, updateTask);
     }
 }
