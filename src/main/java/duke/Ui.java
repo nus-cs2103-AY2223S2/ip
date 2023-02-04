@@ -14,56 +14,80 @@ public class Ui {
     /**
      * shows duke logo at the beginnig
      */
-    public static void showLogo() {
+    public static String showLogo() {
         String logo = " ____        _        \n"
                     + "|  _ \\ _   _| | _____ \n"
-                    + "| | | | | | | |/ / _ \\\n"
-                    + "| |_| | |_| |   <  __/\n"
+                    + "| | | | | | | |/ / _ \\ \n"
+                    + "| |_| | |_| |   <  __// \n"
                     + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println(logo);
+        //System.out.println(logo);
+        return logo;
     }
 
     /**
      * shows welcome after printing logo
      */
-    public static void showWelcome() {
+    public static String showWelcome() {
+        StringBuilder str = new StringBuilder();
         System.out.println(Indentation + Horizontal);
         System.out.println(Indentation + "Hello! I'm Duke");
         System.out.println(Indentation + "What can I do for you?");
         System.out.println(Indentation + Horizontal);
+
+        str.append(Indentation + "Hello! I'm Duke");
+        str.append(System.getProperty("line.separator"));
+        str.append(Indentation + "What can I do for you?");
+        str.append(System.getProperty("line.separator"));
+        return str.toString();
     }
 
     /**
      * shows loading error
      */
     public void showLoadingError() {
+        StringBuilder str = new StringBuilder();
         System.out.println(Indentation + Horizontal);
         System.out.println(Indentation + "Loading error! please try again");
         System.out.println(Indentation + Horizontal);
+
+        str.append(Indentation + "Loading error! please try again");
     }
 
     /**
      * exits the program
      */
-    public static void exit() {
+    public static String exit() {
+        StringBuilder str = new StringBuilder();
         System.out.println(Indentation + Horizontal);
         System.out.println(Indentation + "Bye. Hope to see you again soon!");
         System.out.println(Indentation + Horizontal);
+
+        str.append(Indentation + "Bye. Hope to see you again soon!");
+        return str.toString();
     }
 
     /**
      * shows list details
      * @param task
      */
-    public static void showList(TaskList task) {
+    public static String showList(TaskList task) {
+        StringBuilder str = new StringBuilder();
         System.out.println(Indentation + Horizontal);
         System.out.println(Indentation + "Here are the tasks in your list:");
+        //str.append(Indentation + Horizontal);
+        str.append(Indentation + "Here are the tasks in your list: ");
+        str.append(System.getProperty("line.separator"));
+
 
         for (int i = 0; i < task.size(); i++) {
             System.out.println(Indentation + (i + 1) + "." + task.get(i).toString());
+            str.append(Indentation + (i + 1) + "." + task.get(i).toString());
+            str.append(System.getProperty("line.separator"));
         }
 
+        //str.append(Indentation + Horizontal);
         System.out.println(Indentation + Horizontal);
+        return str.toString();
     }
 
     /**
@@ -80,7 +104,8 @@ public class Ui {
      * @param num
      * @param tasks
      */
-    public static void done(String num, TaskList tasks) {
+    public static String done(String num, TaskList tasks) {
+        StringBuilder str = new StringBuilder();
         int number = Integer.parseInt(num) - 1;
         //tasks.get(number).isDone = true;
         tasks.get(number).isDone = true;
@@ -89,6 +114,13 @@ public class Ui {
         System.out.println("Nice! I've marked this task as done:");
         System.out.println(Indentation + tasks.get(number).toString());
         System.out.println(Indentation + Horizontal);
+
+        str.append("Nice! I've marked this task as done:");
+        str.append(System.getProperty("line.separator"));
+        str.append(Indentation + tasks.get(number).toString());
+        str.append(System.getProperty("line.separator"));
+
+        return str.toString();
     }
 
     /**
@@ -96,7 +128,8 @@ public class Ui {
      * @param num
      * @param tasks
      */
-    public static void undone(String num, TaskList tasks) {
+    public static String undone(String num, TaskList tasks) {
+        StringBuilder str = new StringBuilder();
         int number = Integer.parseInt(num) - 1;
         tasks.get(number).isDone = false;
 
@@ -104,6 +137,12 @@ public class Ui {
         System.out.println("OK, I've marked this task as not done yet:");
         System.out.println(Indentation + tasks.get(number).toString());
         System.out.println(Indentation + Horizontal);
+
+        str.append("Nice! I've marked this task as done:");
+        str.append(System.getProperty("line.separator"));
+        str.append(Indentation + tasks.get(number).toString());
+        str.append(System.getProperty("line.separator"));
+        return str.toString();
     }
 
     /**
@@ -111,24 +150,37 @@ public class Ui {
      * @param num
      * @param tasks
      */
-    public static void delete(String num, TaskList tasks) {
+    public static String delete(String num, TaskList tasks) {
+        StringBuilder str = new StringBuilder();
         int index = Integer.parseInt(num) - 1;
         try {
             if (!(tasks.get(index)).equals(null)) {
                 System.out.println(Indentation + Horizontal);
                 System.out.println(Indentation + "Noted. I've removed this task:");
-
                 System.out.println(Indentation + tasks.get(index).toString());
+
+                str.append(Indentation + "Noted. I've removed this task:");
+                str.append(System.getProperty("line.separator"));
+                str.append(Indentation + tasks.get(index).toString());
+                str.append(System.getProperty("line.separator"));
+
                 tasks.remove(index);
                 Task.taskNum--;
 
                 System.out.println(" Now you have " + Task.taskNum + " tasks in the list.");
                 System.out.println(Indentation + Horizontal);
+
+                str.append(" Now you have " + Task.taskNum + " tasks in the list.");
+                str.append(System.getProperty("line.separator"));
             }
         } catch (Exception e) {
             System.out.println(Indentation + Horizontal);
             System.out.println(" ☹ OOPS!!! I'm sorry, but the list is empty :-(");
             System.out.println(Indentation + Horizontal);
+
+            str.append(" ☹ OOPS!!! I'm sorry, but the list is empty :-(");
+            str.append(System.getProperty("line.separator"));
         }
+        return str.toString();
     }
 }
