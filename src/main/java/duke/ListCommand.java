@@ -26,4 +26,8 @@ public class ListCommand extends Command {
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         ui.showList(taskList);
     }
+
+    public String executeReturnString(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        return ui.formatShowList(taskList);
+    }
 }

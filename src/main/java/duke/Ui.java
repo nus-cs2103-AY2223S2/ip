@@ -43,6 +43,14 @@ public class Ui {
         System.out.println(welcomeMsg);
     }
 
+    public static String getWelcomeMsg() {
+        String welcomeMsg = spacesPrefix
+                + "Hello! I'm Duke\n"
+                + spacesPrefix
+                + "How can I help you?";
+        return welcomeMsg;
+    }
+
     /**
      * Displays goodbye message to the user.
      */
@@ -50,6 +58,12 @@ public class Ui {
         String exitMsg = spacesPrefix
                 + "Farewell! See you soon!";
         System.out.println(exitMsg);
+    }
+
+    public String formatGoodbye() {
+        String exitMsg = spacesPrefix
+                + "Farewell! See you soon!";
+        return exitMsg;
     }
 
     /**
@@ -70,6 +84,12 @@ public class Ui {
         System.out.println(spacesPrefix + task);
     }
 
+    public String formatTaskAdded(Task task, TaskList taskList) {
+        String addedTask = spacesPrefix + "New task added: " + task;
+        String numTasks = spacesPrefix + " Now list has " + taskList.getSize() + " tasks.";
+        return addedTask + "\n" + numTasks;
+    }
+
     /**
      * Displays the removed task to the user given Task.
      *
@@ -78,6 +98,12 @@ public class Ui {
     public void showTaskRemoved(Task task) {
         System.out.println(formatMessage("Removed task: "));
         System.out.println(spacesPrefix + task);
+    }
+
+    public String formatTaskRemoved(Task task, TaskList taskList) {
+        String removedTask = spacesPrefix + "Removed task: " + task;
+        String numTasks = spacesPrefix + " Now list has " + taskList.getSize() + " tasks.";
+        return removedTask + "\n" + numTasks;
     }
 
     /**
@@ -108,6 +134,16 @@ public class Ui {
         }
     }
 
+    public String formatShowList(TaskList taskList) {
+        String finishedList = spacesPrefix + "Here are the tasks in your list:";
+        for (int i = 0; i < taskList.getSize(); i++) {
+            int number = i + 1;
+            finishedList = finishedList + "\n" + spacesPrefix + " " + number
+                    + ". " + taskList.getTaskList().get(i);
+        }
+        return finishedList;
+    }
+
     /**
      * Displays the marked task to the user given Task.
      *
@@ -118,6 +154,12 @@ public class Ui {
         System.out.println(spacesPrefix + task);
     }
 
+    public String formatTaskMarked(Task task, TaskList taskList) {
+        String markedTask = spacesPrefix + "Marked task as done: " + task;
+        String numTasks = spacesPrefix + " Now list has " + taskList.getSize() + " tasks.";
+        return markedTask + "\n" + numTasks;
+    }
+
     /**
      * Displays the unmarked task to the user given Task.
      *
@@ -126,6 +168,12 @@ public class Ui {
     public void showTaskUnmarked(Task task) {
         System.out.println(formatMessage("Marked task as undone:"));
         System.out.println(spacesPrefix + task);
+    }
+
+    public String formatTaskUnmarked(Task task, TaskList taskList) {
+        String unmarkedTask = spacesPrefix + "Marked task as undone: " + task;
+        String numTasks = spacesPrefix + " Now list has " + taskList.getSize() + " tasks.";
+        return unmarkedTask + "\n" + numTasks;
     }
 
     /**
@@ -162,6 +210,10 @@ public class Ui {
         System.out.println(formatMessage(number + "." + task));
     }
 
+    public String formatFoundTask(int number, Task task) {
+        return formatMessage(number + "." + task);
+    }
+
     /**
      * Displays message with formatting to user.
      *
@@ -169,6 +221,10 @@ public class Ui {
      */
     public void displayFormattedMessage(String message) {
         System.out.println(formatMessage(message));
+    }
+
+    public void closeScanner() {
+        this.in.close();
     }
 
     /**

@@ -27,6 +27,10 @@ public class ByeCommand extends Command {
         ui.showGoodbye();
     }
 
+    public String executeReturnString(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        return ui.formatGoodbye();
+    }
+
     /**
      * Returns whether program should continue
      *

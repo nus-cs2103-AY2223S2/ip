@@ -34,4 +34,16 @@ public class TodoCommand extends Command {
         ui.showTaskAdded(taskTodo);
         ui.showNumTasks(taskList);
     }
+
+    public String executeReturnString(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        if (input.length() == 0) {
+            throw new DukeException(
+                    "You cant be doing nothing!! Please try again!");
+        }
+        Todo taskTodo = new Todo(input);
+        taskList.addTask(taskTodo);
+        storage.writeTasksToFile(taskList.getTaskList().toString());
+        return ui.formatTaskAdded(taskTodo, taskList);
+    }
+
 }
