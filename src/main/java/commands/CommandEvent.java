@@ -22,23 +22,9 @@ public class CommandEvent extends Command {
         TaskList taskList = new Storage().loadTaskList();
         try {
             String eventSentence = userInput[1];
-            String eventName = eventSentence.substring(0, eventSentence.indexOf(" /from"));
-            // ERROR: event description is blank.
-            if (eventName.strip().length() == 0) {
-                throw new DukeException(ui.formatLogicError("event description cannot be blank."));
-            }
-            String fromDate = eventSentence.substring(eventSentence.indexOf(" /from") + 7,
-                    eventSentence.indexOf(" /to"));
-            // ERROR: event's from field is blank.
-            if (fromDate.strip().length() == 0) {
-                throw new DukeException(ui.formatLogicError("event's from field cannot be blank."));
-            }
-            String toDate = eventSentence.substring(eventSentence.indexOf(" /to") + 5);
-            // ERROR: event's to field is blank.
-            if (toDate.strip().length() == 0) {
-                throw new DukeException(ui.formatLogicError("event's to field cannot be blank."));
-            }
-            Task eventToAdd = new Event(eventName, fromDate, toDate);
+            Task eventToAdd = new Event(getEventName(eventSentence),
+                                        getFromDate(eventSentence),
+                                        getToDate(eventSentence));
             taskList.add(eventToAdd);
             autoSave(taskList);
             return ("Task added:\n " + eventToAdd + "\n" + "There are now " + taskList.size()
@@ -48,5 +34,36 @@ public class CommandEvent extends Command {
                     "event <insert description> /from <insert from field> "
                             + "/to <insert to field>"));
         }
+    }
+    public String getEventName(String eventSentence) throws StringIndexOutOfBoundsException,
+            ArrayIndexOutOfBoundsException, DukeException {
+        Ui ui = new Ui();
+        String eventName = eventSentence.substring(0, eventSentence.indexOf(" /from"));
+        // ERROR: event description is blank.
+        if (eventName.strip().length() == 0) {
+            throw new DukeException(ui.formatLogicError("event description cannot be blank."));
+        }
+        return eventName;
+    }
+    public String getFromDate(String eventSentence) throws StringIndexOutOfBoundsException,
+            ArrayIndexOutOfBoundsException, DukeException {
+        Ui ui = new Ui();
+        String fromDate = eventSentence.substring(eventSentence.indexOf(" /from") + 7,
+                eventSentence.indexOf(" /to"));
+        // ERROR: event's from field is blank.
+        if (fromDate.strip().length() == 0) {
+            throw new DukeException(ui.formatLogicError("event's from field cannot be blank."));
+        }
+        return fromDate;
+    }
+    public String getToDate(String eventSentence) throws StringIndexOutOfBoundsException,
+            ArrayIndexOutOfBoundsException, DukeException {
+        Ui ui = new Ui();
+        String toDate = eventSentence.substring(eventSentence.indexOf(" /to") + 5);
+        // ERROR: event's to field is blank.
+        if (toDate.strip().length() == 0) {
+            throw new DukeException(ui.formatLogicError("event's to field cannot be blank."));
+        }
+        return toDate;
     }
 }
