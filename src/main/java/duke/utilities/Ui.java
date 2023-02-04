@@ -43,15 +43,16 @@ public class Ui {
     }
 
     /**
-     * Formats and prints the number of tasks.
+     * Formats the parameter {@code numTasks} into a string.
      *
      * @param numTasks The number of tasks in the task list.
+     * @return A string indicating the number of tasks in the task list.
      */
-    public void showNumberOfTasks(int numTasks) {
+    public String formatNumberOfTasksAsString(int numTasks) {
         if (numTasks == 1) {
-            System.out.println("There is 1 task in the list");
+            return "There is 1 task in the list";
         } else {
-            System.out.println("There are " + numTasks + " tasks in the list");
+            return "There are " + numTasks + " tasks in the list";
         }
     }
 

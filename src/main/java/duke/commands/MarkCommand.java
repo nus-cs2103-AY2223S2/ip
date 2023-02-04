@@ -27,7 +27,7 @@ public class MarkCommand extends Command {
      *
      * @throws DukeInvalidMarkCommandException If the {@code mark} command is invalid.
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage)
+    public String execute(TaskList taskList, Ui ui, Storage storage)
             throws DukeInvalidMarkCommandException {
 
         if (tokens.length != 2) {
@@ -48,8 +48,9 @@ public class MarkCommand extends Command {
 
         // need to convert back to 0-indexed
         Task task = taskList.markTaskAsDone(taskNumber - 1);
-        ui.showMessage("Marked:\n" + task.toString());
         storage.saveTaskList(taskList);
+
+        return "Marked:\n" + task.toString();
     }
 
     public boolean isByeCommand() {

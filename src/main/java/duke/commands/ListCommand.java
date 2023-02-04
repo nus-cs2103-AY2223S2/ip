@@ -1,5 +1,6 @@
 package duke.commands;
 
+import java.util.ArrayList;
 import duke.exceptions.DukeEmptyListException;
 import duke.tasks.Task;
 import duke.utilities.Storage;
@@ -16,16 +17,20 @@ public class ListCommand extends Command {
      *
      * @throws DukeEmptyListException If the {@code taskList} is empty.
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeEmptyListException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeEmptyListException {
         if (taskList.isEmpty()) {
             throw new DukeEmptyListException();
         }
 
+        ArrayList<String> taskStrings = new ArrayList<>();
+
         for (int i = 0; i < taskList.getSize(); i++) {
             Task task = taskList.getTask(i);
             String indexString = Integer.toString(i + 1);
-            ui.showMessage(indexString + ". " + task.toString());
+            taskStrings.add(indexString + ". " + task.toString());
         }
+
+        return String.join("\n", taskStrings);
     }
 
     public boolean isByeCommand() {

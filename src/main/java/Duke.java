@@ -6,6 +6,7 @@ import duke.utilities.Parser;
 import duke.utilities.Storage;
 import duke.utilities.TaskList;
 import duke.utilities.Ui;
+import javafx.application.Platform;
 
 public class Duke {
 
@@ -60,6 +61,21 @@ public class Duke {
             } catch (DukeException e) {
                 ui.showMessage(e.getMessage());
             }
+        }
+    }
+
+    public String getResponse(String line) {
+        try {
+            Command command = Parser.parseUserCommand(line);
+            String response = command.execute(taskList, ui, storage);
+
+            if (command.isByeCommand()) {
+                Platform.exit();
+            }
+
+            return response;
+        } catch (DukeException e) {
+            return e.getMessage();
         }
     }
 }

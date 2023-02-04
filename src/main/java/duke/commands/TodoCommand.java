@@ -28,7 +28,7 @@ public class TodoCommand extends Command {
      *
      * @throws DukeInvalidTodoCommandException If the {@code todo} command is invalid.
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage)
+    public String execute(TaskList taskList, Ui ui, Storage storage)
             throws DukeInvalidTodoCommandException {
 
         String[] taskNameArray = Arrays.copyOfRange(tokens, 1, tokens.length);
@@ -41,9 +41,10 @@ public class TodoCommand extends Command {
         TodoTask newTodoTask = new TodoTask(taskName);
 
         taskList.addTask(newTodoTask);
-        ui.showMessage("Added:\n" + newTodoTask);
-        ui.showNumberOfTasks(taskList.getSize());
         storage.saveTaskList(taskList);
+
+        String numTasksString = ui.formatNumberOfTasksAsString(taskList.getSize());
+        return "Added:\n" + newTodoTask + "\n" + numTasksString;
     }
 
     public boolean isByeCommand() {

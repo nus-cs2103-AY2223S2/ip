@@ -27,7 +27,7 @@ public class UnmarkCommand extends Command {
      *
      * @throws DukeInvalidUnmarkCommandException If the {@code unmark} command is invalid.
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage)
+    public String execute(TaskList taskList, Ui ui, Storage storage)
             throws DukeInvalidUnmarkCommandException {
 
         if (tokens.length != 2) {
@@ -48,8 +48,9 @@ public class UnmarkCommand extends Command {
 
         // need to convert back to 0-indexed
         Task task = taskList.unmarkTaskAsDone(taskNumber - 1);
-        ui.showMessage("Unmarked:\n" + task.toString());
         storage.saveTaskList(taskList);
+
+        return "Unmarked:\n" + task.toString();
     }
 
     public boolean isByeCommand() {
