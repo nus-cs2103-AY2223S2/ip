@@ -42,6 +42,7 @@ public class CreateTodoCommand extends Command {
     public String execute() {
         try {
             String[] commandMessageArr = commandMessage.split(" ", 2);
+            assert commandMessageArr.length == 2 : "todo command should split into 2";
             Task task = new Todo(commandMessageArr[1], false);
 
             taskList.addTask(task);
