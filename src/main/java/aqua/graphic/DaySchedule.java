@@ -29,7 +29,6 @@ public class DaySchedule extends HBox {
         initialiseDay(startTime);
         List<? extends List<Timeable>> sepTimeable = separateConflicting(timeables);
         for (List<Timeable> row : sepTimeable) {
-            System.out.println(startTime);
             addRow(startTime, row);
         }
     }
@@ -91,8 +90,10 @@ public class DaySchedule extends HBox {
         for (Timeable timeable : timeables) {
             double startX = (startTime.until(timeable.getStart(), ChronoUnit.MINUTES) / MINUTES_IN_A_DAY)
                     * ROW_WIDTH;
+            startX = Math.max(0, startX);
             double endX = (startTime.until(timeable.getEnd(), ChronoUnit.MINUTES) / MINUTES_IN_A_DAY)
                     * ROW_WIDTH;
+            endX = Math.min(ROW_WIDTH, endX);
             Rectangle rectangle = new Rectangle(endX - startX, ROWHEIGHT);
             pane.getChildren().add(rectangle);
             rectangle.setLayoutX(startX);

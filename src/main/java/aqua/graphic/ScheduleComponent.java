@@ -28,9 +28,8 @@ public class ScheduleComponent extends VBox {
         for (Timeable timeable : timeables) {
             int startDay = (int) startTime.until(timeable.getStart(), ChronoUnit.DAYS);
             int endDay = (int) startTime.until(timeable.getEnd(), ChronoUnit.DAYS);
-            sepTimeables.get(startDay).add(timeable);
-            if (endDay != startDay) {
-                sepTimeables.get(endDay).add(timeable);
+            for (int i = startDay; i <= endDay; i++) {
+                sepTimeables.get(i).add(timeable);
             }
         }
         return sepTimeables;
