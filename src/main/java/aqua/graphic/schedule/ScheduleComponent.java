@@ -6,6 +6,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.css.PseudoClass;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -23,7 +24,7 @@ public class ScheduleComponent extends VBox {
         List<? extends List<ScheduleTimeable>> rows = split(startTime, timeables);
         getChildren().add(new ScheduleHeader(LABEL_WIDTH, ROW_WIDTH));
         for (int i = 0; i < rows.size(); i++) {
-            addRow(startTime.plusDays(i), rows.get(i));
+            addRow(startTime.plusDays(i), rows.get(i), i);
         }
     }
 
@@ -47,10 +48,15 @@ public class ScheduleComponent extends VBox {
     }
 
 
-    private void addRow(LocalDateTime startTime, List<ScheduleTimeable> timeables) {
+    private void addRow(LocalDateTime startTime, List<ScheduleTimeable> timeables, int index) {
         HBox box = new HBox();
         box.setAlignment(Pos.CENTER_LEFT);
         box.getStyleClass().add("schedule-date-box");
+        if (index % 2 == 0) {
+            box.pseudoClassStateChanged(PseudoClass.getPseudoClass("even"), true);
+        } else {
+            box.pseudoClassStateChanged(PseudoClass.getPseudoClass("odd"), true);
+        }
 
         Label dateLabel = new Label();
         dateLabel.setMinWidth(LABEL_WIDTH);

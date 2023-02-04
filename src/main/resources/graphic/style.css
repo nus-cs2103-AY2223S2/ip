@@ -112,9 +112,17 @@
     -fx-shape: "M 0 0 L 0 100 L 90 100 C 105 100 105 85 90 80 S 0 50 0 0 Z"
 }
 
-
 .schedule-date-box {
-    -fx-border-color : black;
+    -fx-color : -fx-background;
+}
+
+
+.schedule-date-box:odd {
+    -fx-background-color : derive(-fx-color, -5%);
+}
+
+.schedule-date-box:even {
+    -fx-background-color : derive(-fx-color, -10%);
 }
 
 .schedule-box {
