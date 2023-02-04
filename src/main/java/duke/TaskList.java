@@ -1,6 +1,10 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import duke.enums.Views;
 import duke.task.Task;
@@ -57,7 +61,14 @@ public class TaskList {
      * @return ArrayList of found task
      */
     public ArrayList<Task> search(String... query) {
-        ArrayList<Task> results = new ArrayList<Task>();
+        // Solution below adapted from https://stackoverflow.com/q/40605998
+        // Removes empty string from query
+        List<String> filteredList = Arrays.stream(query)
+                .filter(string -> !string.isEmpty())
+                .collect(Collectors.toList());
+        query = filteredList.toArray(new String[0]);
+
+        HashSet<Task> results = new HashSet<Task>();
         // Inefficient O(N^2) search method. Fix this whenever
         for (Task task : this.tasksList) {
             for (String word : query) {
@@ -66,7 +77,7 @@ public class TaskList {
                 }
             }
         }
-        return results;
+        return new ArrayList<Task>(results);
     }
 
     /**
