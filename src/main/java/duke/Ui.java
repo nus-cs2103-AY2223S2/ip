@@ -290,21 +290,6 @@ public class Ui {
     }
 
     /**
-     * Print out load error when loading from a file
-     */
-    public void showLoadingError() {
-        printer(stringLoadingError());
-    }
-
-    /**
-     * Print out load error when loading from a file
-     * @return String representation of loading error
-     */
-    public String stringLoadingError() {
-        return "File load has error";
-    }
-
-    /**
      * Private method to print with lines and indents
      *
      * @param to of the event ending datePrint

@@ -22,6 +22,7 @@ public enum Views {
     EMPTY_ERR_STRING("Hey, ☹ The description of a task cannot be empty."),
     UNKNOWN_CMD_ERR_STRING("Hey, ☹ I'm sorry, but I don't know what that means :-("),
     MISSING_ARGS_ERR_STRING("Hey, ☹ I'm sorry, but you are missing some arguments"),
+    LOAD_EXTRA_ERR_STRING("File load has error, ignoring that line of error"),
     DATE_WRONG_ORDER_STRING("Hey, ☹ you seem to have ordered the /to and /from wrongly"),
     DATE_PARSE_ERR_STRING(
             "Hey, ☹ please enter the date in this format YYYY-MM-DDTHH:MM like this: '2023-01-20T18:00'");

@@ -73,6 +73,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Centralised parser to parse Tasks input and sort out the specific args for
+     * the 3 types of task: Todo Deadline Event
+     * @param input
+     * @return String[] to be added todo deadline and event objects/command
+     * @throws DukeException
+     */
     public static String[] handleTask(String input) throws DukeException {
         String[] returnString = new String[3];
         String title;
@@ -98,7 +105,6 @@ public class Parser {
         }
         returnString[0] = title;
         return returnString;
-
     }
 
     /**

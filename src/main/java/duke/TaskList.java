@@ -15,9 +15,8 @@ public class TaskList {
      * For creating a taskList from storage
      *
      * @param tasksList as an ArrayList
-     * @throws DukeException
      */
-    TaskList(ArrayList<Task> tasksList) throws DukeException {
+    TaskList(ArrayList<Task> tasksList) {
         this.tasksList = tasksList;
     }
 
