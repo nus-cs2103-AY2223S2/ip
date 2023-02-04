@@ -97,12 +97,12 @@ public class Storage implements Loader<TaskList> {
     }
 
     private static boolean isDone(List<String> data) {
-        assert data.get(1).equals("1") || data.get(1).equals("0") : "status can only be yes or no" ;
+        assert data.get(1).equals("1") || data.get(1).equals("0") : "status can only be yes or no";
         return data.get(1).equals("1");
     }
 
     private static TaskType getTaskType(List<String> data) {
-        assert !data.isEmpty(): "data cannot be empty!";
+        assert !data.isEmpty() : "data cannot be empty!";
         assert Arrays.stream(TaskType.values()).anyMatch(i -> Objects.equals(i.getType(), data.get(0)));
 
         // Expect only valid data to be saved to hard drive
