@@ -14,153 +14,146 @@ public class Parser {
      *
      * @param commandString string that contains the user's input command
      * @param taskList a list that contains all tasks
-     * @param ui an Ui object that possesses user interaction functionality
      * @return true if the application should exit. Otherwise, returns false.
      */
-    public boolean parseAndExecute(String commandString, TaskList taskList, Ui ui) {
+    public static String parseAndExecute(String commandString, TaskList taskList) {
         Scanner stringStream = new Scanner(commandString);
         String command = stringStream.next();
 
         if (command.equalsIgnoreCase("bye")) {
-            return true;
+            return "bye";
         } else if (command.equalsIgnoreCase("list")) {
-            handleList(taskList, ui);
+            return handleList(taskList);
         } else if (command.equalsIgnoreCase("mark")) {
-            handleMark(stringStream, taskList, ui);
+            return handleMark(stringStream, taskList);
         } else if (command.equalsIgnoreCase("unmark")) {
-            handleUnmark(stringStream, taskList, ui);
+            return handleUnmark(stringStream, taskList);
         } else if (command.equalsIgnoreCase("deadline")) {
-            handleDeadline(stringStream, taskList, ui);
+            return handleDeadline(stringStream, taskList);
         } else if (command.equalsIgnoreCase("event")) {
-            handleEvent(stringStream, taskList, ui);
+            return handleEvent(stringStream, taskList);
         } else if (command.equalsIgnoreCase("todo")) {
-            handleToDo(stringStream, taskList, ui);
+            return handleToDo(stringStream, taskList);
         } else if (command.equalsIgnoreCase("delete")) {
-            handleDelete(stringStream, taskList, ui);
+            return handleDelete(stringStream, taskList);
         } else if (command.equalsIgnoreCase("find")) {
-            handleFind(stringStream, taskList, ui);
+            return handleFind(stringStream, taskList);
         } else {
-            ui.showMessage("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            return Ui.genUnknownCommandMsg();
         }
-        return false;
     }
 
-    private static void handleList(TaskList taskList, Ui ui) {
+    private static String handleList(TaskList taskList) {
         String output = "";
         for (int i = 0; i != taskList.size(); ++i) {
             Task t = taskList.get(i);
             output += (i + 1) + ". " + t.toString() + "\n";
         }
-        ui.showMessage(output);
+        return Ui.genShowTaskListMsg(output);
     }
 
-    private static void handleMark(Scanner stringStream, TaskList taskList, Ui ui) {
+    private static String handleMark(Scanner stringStream, TaskList taskList) {
         if (stringStream.hasNext()) {
             try {
                 int target = Integer.parseInt(stringStream.next()) - 1;
                 if (target < 0 || target >= taskList.size()) {
-                    ui.showMessage("This task does not exist!");
-                    return;
+                    return Ui.genTaskDoesNotExistMsg();
                 }
                 Task t = taskList.get(target);
                 t.mark();
                 String output = "I've marked this task as done!\n" + (target + 1) + ". " + t.toString();
-                ui.showMessage(output);
-                return;
+                return Ui.genMarkTaskMsg(true);
             } catch (NumberFormatException nfe) {
-                ui.showMessage("☹ OOPS!!! Please provide the number of the task to mark.");
+                return Ui.genMissingTaskNumberMsg();
             }
         } else {
-            ui.showMessage("☹ OOPS!!! We weren't told which task to mark.");
+            return Ui.genMissingTaskNumberMsg();
         }
     }
 
-    private static void handleUnmark(Scanner stringStream, TaskList taskList, Ui ui) {
+    private static String handleUnmark(Scanner stringStream, TaskList taskList) {
         if (stringStream.hasNext()) {
             try {
                 int target = Integer.parseInt(stringStream.next()) - 1;
                 if (target < 0 || target >= taskList.size()) {
-                    ui.showMessage("This task does not exist!");
-                    return;
+                    return Ui.genTaskDoesNotExistMsg();
                 }
                 Task t = taskList.get(target);
                 t.unmark();
                 String output = "I've marked this task as not done!\n" + (target + 1) + ". " + t.toString();
-                ui.showMessage(output);
+                return Ui.genMarkTaskMsg(false);
             } catch (NumberFormatException nfe) {
-                ui.showMessage("☹ OOPS!!! Please provide the number of the task to unmark.");
+                return Ui.genMissingTaskNumberMsg();
             }
         } else {
-            ui.showMessage("☹ OOPS!!! We weren't told which task to unmark.");
+            return Ui.genMissingTaskNumberMsg();
         }
     }
 
-    private static void handleDelete(Scanner stringStream, TaskList taskList, Ui ui) {
+    private static String handleDelete(Scanner stringStream, TaskList taskList) {
         if (stringStream.hasNext()) {
             try {
                 int target = Integer.parseInt(stringStream.next()) - 1;
                 if (target < 0 || target >= taskList.size()) {
-                    ui.showMessage("This task does not exist!");
-                    return;
+                    return Ui.genTaskDoesNotExistMsg();
                 }
                 Task t = taskList.get(target);
                 taskList.remove(target);
                 String output = "I've deleted this task!\n" + (target + 1) + ". " + t.toString();
-                ui.showMessage(output);
+                return Ui.genDeleteTaskMsg();
             } catch (NumberFormatException nfe) {
-                ui.showMessage("☹ OOPS!!! Please provide the number of the task to delete.");
+                return Ui.genMissingTaskNumberMsg();
             }
         } else {
-            ui.showMessage("☹ OOPS!!! We weren't told which task to delete.");
+            return Ui.genMissingTaskNumberMsg();
         }
     }
 
-    private static void handleDeadline(Scanner stringStream, TaskList taskList, Ui ui) {
+    private static String handleDeadline(Scanner stringStream, TaskList taskList) {
         try {
             Deadline newTask = Deadline.parseDeadlineCommand(stringStream);
             taskList.add(newTask);
             String output = "I've added this task:\n" + newTask.toString()
                     + "\n" + "You now have " + taskList.size() + " tasks in the list";
-            ui.showMessage(output);
+            return Ui.genAddTaskMsg(output);
         } catch (DukeException e) {
-            ui.showMessage(e.getMessage());
+            return Ui.genAddTaskMsg(e.getMessage());
         } catch (DateTimeParseException e) {
-            ui.showMessage("☹ OOPS!!! We couldn't figure out the entered date and time.\n"
+            return Ui.genAddTaskMsg("☹ OOPS!!! We couldn't figure out the entered date and time.\n"
                     + "Please use the format: dd/mm/yyyy hh:ss");
         }
     }
 
-    private static void handleEvent(Scanner stringStream, TaskList taskList, Ui ui) {
+    private static String handleEvent(Scanner stringStream, TaskList taskList) {
         try {
             Event newTask = Event.parseEventCommand(stringStream);
             taskList.add(newTask);
             String output = "I've added this task:\n" + newTask.toString() + "\n" + "You now have "
                     + taskList.size() + " tasks in the list";
-            ui.showMessage(output);
+            return Ui.genAddTaskMsg(output);
         } catch (DukeException e) {
-            ui.showMessage(e.getMessage());
+            return Ui.genAddTaskMsg(e.getMessage());
         } catch (DateTimeParseException e) {
-            ui.showMessage("☹ OOPS!!! We couldn't figure out the entered date and time.\n"
+            return Ui.genAddTaskMsg("☹ OOPS!!! We couldn't figure out the entered date and time.\n"
                     + "Please use the format: dd/mm/yyyy hh:ss");
         }
     }
 
-    private static void handleToDo(Scanner stringStream, TaskList taskList, Ui ui) {
+    private static String handleToDo(Scanner stringStream, TaskList taskList) {
         try {
             ToDo newTask = ToDo.parseToDoCommand(stringStream);
             taskList.add(newTask);
             String output = "I've added this task:\n" + newTask.toString()
                     + "\n" + "You now have " + taskList.size() + " tasks in the list";
-            ui.showMessage(output);
+            return Ui.genAddTaskMsg(output);
         } catch (DukeException e) {
-            ui.showMessage(e.getMessage());
+            return Ui.genAddTaskMsg(e.getMessage());
         }
     }
 
-    private static void handleFind(Scanner stringStream, TaskList taskList, Ui ui) {
+    private static String handleFind(Scanner stringStream, TaskList taskList) {
         if (!stringStream.hasNext()) {
-            ui.showMessage("☹ OOPS!!! Please enter a keyword we can use to search");
-            return;
+            return Ui.genMissingKeywordMsg();
         }
 
         String keyword = stringStream.next();
@@ -172,7 +165,7 @@ public class Parser {
                 tasksOfInterest.add(t);
             }
         }
-        handleList(tasksOfInterest, ui);
+        return handleList(tasksOfInterest);
     }
 
 }

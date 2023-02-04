@@ -33,10 +33,9 @@ public class Storage {
      * Adds all tasks in the file located at storagePath into taskList.
      *
      * @param taskList the list where tasks loaded from the file at storagePath are added to
-     * @param ui an Ui object that contains user message displaying functionality
      * @throws FileNotFoundException if the file at storagePath does not exist
      */
-    public void read(TaskList taskList, Ui ui) throws FileNotFoundException {
+    public void read(TaskList taskList) throws FileNotFoundException {
         File f = new File(storagePath);
         Scanner s = new Scanner(f);
 
@@ -53,7 +52,7 @@ public class Storage {
                     taskList.add(ToDo.parseToDoStringArray(parts));
                 }
             } catch (DateTimeParseException e) {
-                ui.showMessage("☹ OOPS!!! Failed to load a task from storage!");
+
             }
 
         }
