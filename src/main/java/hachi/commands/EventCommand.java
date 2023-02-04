@@ -11,6 +11,7 @@ import hachi.tasks.Event;
  */
 public class EventCommand extends Command {
     private String input;
+    static String separator = "‿୨♡୧‿‿‿‿୨♡୧‿‿‿‿୨♡୧‿";
 
     /**
      * EventCommand constructor.
@@ -21,29 +22,28 @@ public class EventCommand extends Command {
         this.input = input;
     }
 
-    public boolean execute(TaskList toDoList, Ui ui, Storage storage) {
+    public String execute(TaskList toDoList, Ui ui, Storage storage) {
         try {
             int index_e1 = input.indexOf("/");
             int index_e2 = input.lastIndexOf("/");
             if (input.length() > 5 && !input.contains("/")) {
-                throw new HachiExceptions("☹ Ohno! seems like you forgot to put the time of the event ");
+                throw new HachiExceptions(separator + "\n" + "\n" + "Ohno! seems like you forgot to put the time of the event ");
             }
             if (!input.substring(index_e1 + 1, input.length()).contains("/")) {
-                throw new HachiExceptions("☹ Ohno! seems like you forgot to put the ending time of the event ");
+                throw new HachiExceptions(separator + "\n" + "\n" + " Ohno! seems like you forgot to put the ending time of the event ");
             }
             if (input.length() <= 5) {
-                throw new HachiExceptions("☹ Ohno! The description cannot be empty.");
+                throw new HachiExceptions(separator + "\n" + "\n" + "Ohno! The description cannot be empty.");
             }
             Event eventTask = new Event(input.substring(6, index_e1 - 1),
                     input.substring(index_e1 + 6, index_e2 - 1),
                     input.substring(index_e2 + 4, input.length()));
-            System.out.println("   okie dokie. I've added this task:" + "\n" + eventTask);
             toDoList.add(eventTask);
             storage.saveTaskList(toDoList);
-            System.out.println("   Now you have " + toDoList.size() + " tasks in the list.");
+            return separator + "\n" + "\n" + "   okie dokie. I've added this task:" + "\n" + eventTask +
+                    "   Now you have " + toDoList.size() + " tasks in the list.";
         } catch (HachiExceptions e) {
-            System.out.println(e.getMessage());
+            return e.getMessage();
         }
-        return false;
     }
 }

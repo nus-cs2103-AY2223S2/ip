@@ -9,7 +9,7 @@ import hachi.main.Ui;
  */
 public class ExitCommand extends Command {
     private String input;
-    static String separator = "‿୨♡୧‿︵‿︵︵‿︵‿୨♡୧‿︵‿︵︵‿︵‿୨♡୧‿";
+    static String separator = "‿୨♡୧‿‿‿‿୨♡୧‿‿‿‿୨♡୧‿";
 
     /**
      * ExitCommand constructor.
@@ -20,10 +20,10 @@ public class ExitCommand extends Command {
         this.input = input;
     }
 
-    public boolean execute(TaskList toDoList, Ui ui, Storage storage) {
+    public String execute(TaskList toDoList, Ui ui, Storage storage) {
         storage.saveTaskList(toDoList);
-        System.out.println(separator + "\n" + "   Ciao ~ see you again soon!");
-        return false;
+        return separator + "\n" + "\n" + "   Ciao ~ see you again soon!";
+
     }
 
 }
