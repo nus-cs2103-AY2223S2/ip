@@ -3,17 +3,19 @@ package aqua.logic.command;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import aqua.aquatask.AquaTask;
+import aqua.graphic.ScheduleComponent;
 import aqua.logic.ArgumentMap;
 import aqua.logic.ExecutionDisplayerTask;
 import aqua.logic.ExecutionService;
 import aqua.logic.ExecutionTask;
 import aqua.manager.IoManager;
 import aqua.manager.LogicManager;
+import aqua.util.Timeable;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Circle;
 import javafx.stage.Popup;
 
 public class ViewScheduleCommand extends CommandController {
@@ -38,7 +40,7 @@ public class ViewScheduleCommand extends CommandController {
 
             @Override
             protected void display(List<AquaTask> tasks, IoManager manager) {
-                manager.popup(new SchedulePopup());
+                manager.popup(new SchedulePopup(getMonday(LocalDateTime.now()), tasks));
             }
         });
     }
@@ -72,15 +74,32 @@ public class ViewScheduleCommand extends CommandController {
         private double y = 0;
 
 
-        SchedulePopup() {
+        SchedulePopup(LocalDateTime startTime, List<AquaTask> tasks) {
             VBox box = new VBox();
-            box.getChildren().add(new Circle(50));
+            box.setStyle("-fx-background-color: white");
             getContent().add(box);
-            setWidth(100);
-            setHeight(100);
             box.setOnMousePressed(this::handleMousePress);
             box.setOnMouseDragged(this::handleMouseDragged);
             box.setOnMouseReleased(this::handleMouseRelease);
+            List<Timeable> timeables = tasks.stream()
+                    .map(task -> new Timeable() {
+                        @Override
+                        public LocalDateTime getStart() {
+                            return task.getStart().orElseThrow();
+                        }
+
+                        @Override
+                        public LocalDateTime getEnd() {
+                            return task.getEnd().orElseThrow();
+                        }
+
+                        @Override
+                        public String toString() {
+                            return task.toString();
+                        }
+                    }).collect(Collectors.toList());
+            ScheduleComponent schedule = new ScheduleComponent(startTime, timeables);
+            box.getChildren().add(schedule);
         }
 
 
