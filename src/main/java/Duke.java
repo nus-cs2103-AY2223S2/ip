@@ -58,6 +58,15 @@ public class Duke {
         }
     }
 
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            String s = c.execute(tasks, ui, storage);
+            return s;
+        } catch (Exception e) {
+            return ui.showError(e.getMessage());
+        }
+    }
 
     /**
      * The entry point of application.

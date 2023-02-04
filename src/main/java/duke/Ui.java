@@ -30,8 +30,8 @@ public class Ui {
      *
      * @param errorMessage the error message
      */
-    public static void showError(String errorMessage) {
-        System.out.println("☹ OOPS!!! " + errorMessage);
+    public static String showError(String errorMessage) {
+        return "☹ OOPS!!! " + errorMessage;
     }
 
     /**
