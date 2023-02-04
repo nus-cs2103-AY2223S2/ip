@@ -3,6 +3,7 @@ package tunabot.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
 import tunabot.exceptions.InputException;
 
 /**
@@ -52,7 +53,6 @@ public class Event extends Task {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy-HHmm");
         return end.format(formatter);
     }
-    
     public void setStart(String start) throws InputException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy-HHmm");
         try {
@@ -68,7 +68,7 @@ public class Event extends Task {
 
     @Override
     public String saveFormat() {
-        return "E;" + this.name + ";" + this.getDone() + ";" + this.getStart() + ";" + this.getEnd();
+        return "E;" + this.getName() + ";" + this.getDone() + ";" + this.getStart() + ";" + this.getEnd();
     }
 
     @Override

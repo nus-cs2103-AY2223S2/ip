@@ -2,7 +2,6 @@ package tunabot;
 
 import java.util.ArrayList;
 
-import tunabot.task.Event;
 import tunabot.task.Task;
 
 

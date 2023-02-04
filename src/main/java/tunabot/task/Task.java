@@ -4,7 +4,7 @@ package tunabot.task;
  * Class to handle Tasks
  */
 public class Task {
-    String name;
+    private String name;
     private boolean isDone;
 
     /**
