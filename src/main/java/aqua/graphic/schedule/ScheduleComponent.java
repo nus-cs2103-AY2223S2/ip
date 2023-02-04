@@ -14,13 +14,14 @@ import javafx.scene.text.TextAlignment;
 
 public class ScheduleComponent extends VBox {
     private static final double LABEL_WIDTH = 80;
-    private static final double ROW_WIDTH = 600;
+    private static final double ROW_WIDTH = 1000;
 
     private static final int DAYS_IN_WEEK = 7;
 
 
     public ScheduleComponent(LocalDateTime startTime, List<? extends ScheduleTimeable> timeables) {
         List<? extends List<ScheduleTimeable>> rows = split(startTime, timeables);
+        getChildren().add(new ScheduleHeader(LABEL_WIDTH, ROW_WIDTH));
         for (int i = 0; i < rows.size(); i++) {
             addRow(startTime.plusDays(i), rows.get(i));
         }
@@ -48,7 +49,6 @@ public class ScheduleComponent extends VBox {
 
     private void addRow(LocalDateTime startTime, List<ScheduleTimeable> timeables) {
         HBox box = new HBox();
-        box.setSpacing(5);
         box.setAlignment(Pos.CENTER_LEFT);
         box.getStyleClass().add("schedule-date-box");
 
