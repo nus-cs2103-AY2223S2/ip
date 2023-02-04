@@ -138,12 +138,12 @@ public class TaskList {
     }
 
     /**
-    * Finds all the tasks matching the keyword.
+    * Finds all the tasks matching the keywords.
     *
-    * @param keyword Keyword to find the tasks.
+    * @param keywords Keywords to find the tasks.
     * @return String representation of all the matching tasks.
     */
-    public String findTasks(String keyword) throws DukeException {
+    public String findTasks(String... keywords) throws DukeException {
         // Reset Hashmap
         indexToTask.clear();
         StringBuilder foundTasks = new StringBuilder();
@@ -153,11 +153,15 @@ public class TaskList {
         for (Task t : this.taskList) {
             String description = t.getDescription();
 
-            if (description.contains(keyword)) {
-                foundTasks.append((idx + 1) + ". " + t + System.lineSeparator());
-                indexToTask.put(idx, t);
-                idx++;
+            for (String keyword : keywords) {
+                if (description.contains(keyword)) {
+                    foundTasks.append((idx + 1) + ". " + t + System.lineSeparator());
+                    indexToTask.put(idx, t);
+                    idx++;
+                    break; // Break out of for loop
+                }
             }
+
         }
 
         if (foundTasks.length() == 0) {

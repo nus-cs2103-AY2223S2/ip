@@ -51,7 +51,7 @@ public class Parser {
                 throw new DukeException("No command description given.");
             }
 
-            String description = command[1];
+            String description = command[1].trim();
 
             switch (op) {
             case MARK:
@@ -137,12 +137,12 @@ public class Parser {
     }
 
     /**
-     * Parses the command to find tasks matching keyword.
+     * Parses the command to find tasks matching a list of keywords.
      *
-     * @param keyword String representing the keyword to search the tasks for.
+     * @param keywords String representing the keywords to search the tasks for.
      * @return A Command instance to find tasks.
      */
-    public static Command findTaskParser(String keyword) {
-        return new CommandFind(keyword.trim());
+    public static Command findTaskParser(String keywords) {
+        return new CommandFind(keywords.split(" "));
     }
 }
