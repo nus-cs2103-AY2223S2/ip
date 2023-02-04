@@ -4,16 +4,19 @@ Added new todo:
   [T][ ] task 1
 Number of tasks: 1
 Added new deadline:
-  [D][ ] task 2 (by: sun)
+  [D][ ] task 2 (by: May 05 2023)
 Number of tasks: 2
 Added new event:
-  [E][ ] task 3 (from: sun to: mon)
+  [E][ ] task 3 (from: May 05 2023 to: May 06 2023)
 Number of tasks: 3
+Date after /by needs to be in format yyyy-mm-dd
+Date after /from and /to needs to be in format yyyy-mm-dd
+/to date is before /from date
 1 [T][ ] task 1
-2 [D][ ] task 2 (by: sun)
-3 [E][ ] task 3 (from: sun to: mon)
+2 [D][ ] task 2 (by: May 05 2023)
+3 [E][ ] task 3 (from: May 05 2023 to: May 06 2023)
 Task has been marked as done:
- [D][X] task 2 (by: sun)
+ [D][X] task 2 (by: May 05 2023)
 Task has been marked as not done:
- [D][ ] task 2 (by: sun)
+ [D][ ] task 2 (by: May 05 2023)
 Duke: Goodbye
