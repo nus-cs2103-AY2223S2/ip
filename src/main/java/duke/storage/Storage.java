@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
 import duke.entities.SerializableTask;
@@ -68,8 +69,8 @@ public class Storage implements Loader<TaskList> {
 
                 // Parse task attributes from data
                 // Expect only valid data to be saved to hard drive
-                TaskType taskType = TaskType.valueOf(data.get(0).toUpperCase());
-                boolean isDone = data.get(1).equals("1");
+                TaskType taskType = getTaskType(data);
+                boolean isDone = isDone(data);
                 String description = data.get(2);
 
                 SerializableTask task;
@@ -93,6 +94,19 @@ public class Storage implements Loader<TaskList> {
         } catch (FileNotFoundException e) {
             throw new DukeException(GENERIC_ERROR + e.getMessage());
         }
+    }
+
+    private static boolean isDone(List<String> data) {
+        assert data.get(1).equals("1") || data.get(1).equals("0") : "status can only be yes or no" ;
+        return data.get(1).equals("1");
+    }
+
+    private static TaskType getTaskType(List<String> data) {
+        assert !data.isEmpty(): "data cannot be empty!";
+        assert Arrays.stream(TaskType.values()).anyMatch(i -> Objects.equals(i.getType(), data.get(0)));
+
+        // Expect only valid data to be saved to hard drive
+        return TaskType.valueOf(data.get(0).toUpperCase());
     }
 
     /**
