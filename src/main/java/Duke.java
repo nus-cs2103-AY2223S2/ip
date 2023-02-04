@@ -1,24 +1,57 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+    static final String BYE = "bye";
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.println(greet());
 
-        ArrayList<Task> lst = new ArrayList<>();
+        ArrayList<Task> arr = new ArrayList<>();
         while (sc.hasNext()) {
             String cmd = sc.nextLine();
-            if (cmd.equals("bye")) {
-                exit(); break;
-            } else if (cmd.equals("list")) {
-                printList(lst);
-            } else {
-                print(add(cmd, lst));
+            if (cmd.equals(BYE)) {
+                exit();
+                break;
             }
+            execute(cmd, arr);
         }
         sc.close();
+    }
+    static void execute(String cmd, ArrayList<Task> arr) {
+        String[] words = cmd.split(" ");
+        switch (words[0]) {
+            case "list":
+                printList(arr);
+                break;
+            case "mark":
+                mark(words[1], arr);
+                break;
+            case "unmark":
+                unmark(words[1], arr);
+                break;
+            default:
+                print(add(cmd, arr));
+        }
+        /* if (words[0].equals("list")) {
+            printList(arr);
+        } else if (words[0].equals("mark")) {   //try catch if words have 2 elements
+            mark(words[1], arr);
+        } else if (words[0].equals("unmark")) { //try catch if words have 2 elements
+            unmark(words[1], arr);
+        } else {
+            print(add(cmd, arr));
+        }*/
+    }
+    static void mark(String num, ArrayList<Task> arr) {     //try catch, possibility of error if user enter wrong cmd
+        int index = Integer.parseInt(num);
+        arr.get(index - 1).markAsDone();
+        print(String.format("Nice! I've marked this task as done: \n\t%s", arr.get(index - 1)));
+    }
+    static void unmark(String num, ArrayList<Task> arr) {   //try catch, possibility of error if user enter wrong cmd
+        int index = Integer.parseInt(num);
+        arr.get(index - 1).unmarkAsDone();
+        print(String.format("Ok, I've marked this task as not done yet: \n\t%s", arr.get(index - 1)));
     }
     static String ownName() {
         String name = " ____        _        \n"
@@ -32,7 +65,8 @@ public class Duke {
         return String.format("Hello I am: \n%sWhat can I do for you?", ownName());
     }
     static String add(String cmd, ArrayList<Task> lst) {
-        lst.add(new Task(cmd)); return String.format("added: %s", cmd);
+        lst.add(new Task(cmd));
+        return String.format("added: %s", cmd);
     }
     static void printList(ArrayList<Task> arr) {
         String str = "";
