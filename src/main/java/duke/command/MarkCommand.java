@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.DukeExceptions;
+import duke.TodoList;
+
 public class MarkCommand extends Command{
     private TodoList todoList;
     private int index;

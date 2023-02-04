@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.DukeExceptions;
+import duke.TodoList;
+
 public class UnmarkCommand extends Command{
     private TodoList todoList;
     private int index;
@@ -8,7 +13,7 @@ public class UnmarkCommand extends Command{
     }
 
     @Override
-    public void execute() throws DukeExceptions{
+    public void execute() throws DukeExceptions {
         todoList.unmark(index);
     }
 }

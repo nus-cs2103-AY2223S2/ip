@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.DukeExceptions;
+import duke.TodoList;
+
 public class AddTaskCommand extends Command{
     private TodoList todoList;
     private String instruction;
@@ -10,7 +15,7 @@ public class AddTaskCommand extends Command{
     }
 
     @Override
-    public void execute() throws DukeExceptions{
+    public void execute() throws DukeExceptions {
         todoList.add(instruction, description);
         System.out.println(String.format("Now I have %d tasks in the list.", todoList.number_of_tasks()));
     }

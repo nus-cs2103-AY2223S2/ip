@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.DukeExceptions;
+import duke.TodoList;
+
 public class ListCommand extends Command{
     private TodoList todoList;
 
@@ -6,7 +11,7 @@ public class ListCommand extends Command{
     }
 
     @Override
-    public void execute() throws DukeExceptions{
+    public void execute() throws DukeExceptions {
         String shown_list = todoList.toString();
         System.out.println(shown_list);
     }

@@ -1,7 +1,8 @@
+package duke;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Task implements Serializable {
