@@ -69,7 +69,10 @@ public class Parser {
         case DELETE:
             return new DeleteCommand(Integer.parseInt(splitDescriptionAndDetails[1]));
         case FIND:
-            return new FindCommand(splitDescriptionAndDetails[1]);
+            if (splitDescriptionAndDetails[1].trim().equals("")) {
+                throw new BerryException("Please key in a keyword for me to find :<");
+            }
+            return new FindCommand(splitDescriptionAndDetails[1].split(" "));
         default:
             throw new UnknownCommandException();
         }

@@ -6,9 +6,9 @@ import berry.storage.Storage;
 import berry.exception.BerryException;
 
 public class FindCommand extends Command {
-    private static String keyword;
+    private static String[] keyword;
 
-    public FindCommand(String keyword) {
+    public FindCommand(String[] keyword) {
         this.keyword = keyword;
     }
 
