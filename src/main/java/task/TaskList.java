@@ -1,9 +1,9 @@
 package task;
 
+import duke.DukeException;
+
 import java.util.ArrayList;
 import java.util.Iterator;
-
-import duke.DukeException;
 
 /**
  * TaskList contains the task list which stores tasks and has operations to add/delete tasks in the list.
@@ -66,6 +66,7 @@ public class TaskList {
         try {
             Task task = this.tasks.get(taskNo - 1);
             task.markDone();
+            assert task.getStatusIcon().equals("X") : "task should be marked done";
             return task;
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Sorry you have provided an invalid task number...");
@@ -82,6 +83,7 @@ public class TaskList {
         try {
             Task task = this.tasks.get(taskNo - 1);
             task.markNotDone();
+            assert task.getStatusIcon().equals(" ") : "task should be marked done";
             return task;
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Sorry you have provided an invalid task number...");

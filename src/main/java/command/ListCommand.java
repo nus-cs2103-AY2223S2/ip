@@ -17,9 +17,11 @@ public class ListCommand extends Command {
     @Override
     public String execute(TaskList tasks) {
         Iterator<Task> tasksIterator = tasks.list().iterator();
+
         if (!tasksIterator.hasNext()) {
             return "There are currently no tasks in your list...";
         }
+
         StringBuilder response = new StringBuilder();
 
         response.append("Here are the tasks in your list:\n\n");
