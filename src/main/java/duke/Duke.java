@@ -8,6 +8,10 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Parser;
 import duke.ui.Ui;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 /**
  * Main class to run Duke programme.
