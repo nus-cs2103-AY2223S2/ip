@@ -80,6 +80,7 @@ public class Storage {
                 LocalDate endTimeParsed = LocalDate.parse(endTime, formatter);
                 todolist.add(taskE, startTimeParsedE, endTimeParsed);
                 break;
+            default:
             }
         }
         System.out.println("\t--------------------------");

@@ -9,6 +9,12 @@ public class Task {
     private String task;
     private boolean done;
 
+    /**
+     * Constructor for Task.
+     *
+     * @param id the is associated with this Task
+     * @param task task description
+     */
     public Task(int id, String task) {
         this.id = id;
         this.task = task;
@@ -21,7 +27,7 @@ public class Task {
      * @return This task
      */
     public String printTask() {
-        return done ? "[x] " + task: "[ ] " + task;
+        return done ? "[x] " + task : "[ ] " + task;
     }
 
     /**

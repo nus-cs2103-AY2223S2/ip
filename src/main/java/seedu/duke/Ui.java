@@ -9,14 +9,15 @@ public class Ui {
 
     public Ui() {};
 
-    Scanner sc = new Scanner(System.in);
-
     /**
-     * Gets the next instruction line from user
+     * Gets the next instruction line from user.
      *
      * @return user command
      */
     public String getNextCommand() {
-        return sc.nextLine();
+        Scanner sc = new Scanner(System.in);
+        String command = sc.nextLine();
+        sc.close();
+        return command;
     }
 }

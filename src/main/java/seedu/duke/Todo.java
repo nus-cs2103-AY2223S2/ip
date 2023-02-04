@@ -14,7 +14,7 @@ public class Todo extends Task {
      */
     @Override
     public String printTask() {
-        return this.isDone() ? "[T][x] " + this.getTask(): "[T][ ] " + this.getTask();
+        return this.isDone() ? "[T][x] " + this.getTask() : "[T][ ] " + this.getTask();
     }
 
 }
