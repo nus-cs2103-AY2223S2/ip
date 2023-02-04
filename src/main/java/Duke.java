@@ -11,12 +11,13 @@ public class Duke {
         }
     }
 
-    private static String numOfTasks(ArrayList<Task> tasks) {
+    private static String checkPlural(ArrayList<Task> tasks) {
         return tasks.size() == 1 ? " task " : " tasks ";
     }
 
     public static void main(String[] args) {
-        ArrayList<Task> tasks = new ArrayList<>();
+        Storage storage = new Storage("./data.txt");
+        ArrayList<Task> tasks = storage.getTasksFromFile();
         Scanner sc = new Scanner(System.in );
 
         String logo = " ____        _        \n"
@@ -35,7 +36,9 @@ public class Duke {
                 String remainingInput = splitInput.length > 1 ? splitInput[1] : null;
 
                 if (command.equals(commands.BYE.toString())) {
-                    System.out.println("Bye. Hope to see you again!");
+                    System.out.println("Saving your data...");
+                    storage.storeTasksInFile(tasks);
+                    System.out.println("Bye!");
                     break;
                 } else if (command.equals(commands.LIST.toString())) {
                     System.out.println("Here are the tasks in your list");
@@ -60,12 +63,11 @@ public class Duke {
                     if (remainingInput == null) {
                         throw new IncorrectInputException("Enter a description!");
                     }
-                    String description = remainingInput;
-                    Task newTask = new Todo(description);
+                    Task newTask = new Todo(remainingInput);
                     tasks.add(newTask);
                     System.out.println("Got it. I've added this task:");
                     System.out.println(newTask);
-                    System.out.println("Now you have " + tasks.size() + Duke.numOfTasks(tasks) + "in the list.");
+                    System.out.println("Now you have " + tasks.size() + Duke.checkPlural(tasks) + "in the list.");
                 } else if (command.equals(commands.DEADLINE.toString())) {
                     if (remainingInput == null) {
                         throw new IncorrectInputException("Enter a description with a deadline!");
@@ -81,7 +83,7 @@ public class Duke {
                     tasks.add(newTask);
                     System.out.println("Got it. I've added this task:");
                     System.out.println(newTask);
-                    System.out.println("Now you have " + tasks.size() + Duke.numOfTasks(tasks) + "in the list.");
+                    System.out.println("Now you have " + tasks.size() + Duke.checkPlural(tasks) + "in the list.");
                 } else if (command.equals(commands.EVENT.toString())) {
                     if (remainingInput == null) {
                         throw new IncorrectInputException("Enter a description and event period!");
@@ -102,14 +104,14 @@ public class Duke {
                     tasks.add(newTask);
                     System.out.println("Got it. I've added this task:");
                     System.out.println(newTask);
-                    System.out.println("Now you have " + tasks.size() + Duke.numOfTasks(tasks) + "in the list.");
+                    System.out.println("Now you have " + tasks.size() + Duke.checkPlural(tasks) + "in the list.");
                 } else if (command.equals(commands.DELETE.toString())) {
                     int indexOfTask = Integer.parseInt(remainingInput) - 1;
                     Task toDelete = tasks.get(indexOfTask);
                     System.out.println("Alright, removing this task:");
                     System.out.println(toDelete.toString());
                     tasks.remove(toDelete);
-                    System.out.println("Now you have " + tasks.size() + Duke.numOfTasks(tasks) + "in the list.");
+                    System.out.println("Now you have " + tasks.size() + Duke.checkPlural(tasks) + "in the list.");
                 } else {
                     throw new IncorrectInputException("Enter a valid task!");
                 }
