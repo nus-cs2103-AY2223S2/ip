@@ -88,15 +88,6 @@ public class TaskList {
     }
 
     /**
-     * Gets the task in the id spot.
-     * @param id Index of the task to be retrieved.
-     * @return The task at that index.
-     */
-    private Task getTask(int id) {
-        return this.tasks.get(id);
-    }
-
-    /**
      * Prints out all tasks in the list.
      */
     public String listItems() {
