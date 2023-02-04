@@ -16,6 +16,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 
+
 /**
  * A simple todo bot to manage my todo list.
  * It can mark done jobs or unmark.
@@ -26,7 +27,6 @@ public class Duke extends Application {
 
     private static Storage storage;
     private Ui ui;
-    private static TaskList tasklist;
     static boolean isBye = false;
 
     private ScrollPane scrollPane;
@@ -34,10 +34,10 @@ public class Duke extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image bot = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpg"));
+    private Image bot = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpg"));
 
-
+    static TaskList tasklist = new TaskList();
 
     /**
      * Constructor of Duke.
@@ -55,10 +55,6 @@ public class Duke extends Application {
      * Prints out a line
      * @return a line to divide outcomes.
      */
-    public static void lining() {
-        System.out.println("____________________________________________________________");
-    }
-
     static FileWriter fw;
 
     static {
@@ -83,7 +79,8 @@ public class Duke extends Application {
         storage = new Storage("/saves/data.txt");
         Ui ui = new Ui();
         try {
-            tasklist = new TaskList(storage.load());
+            //tasklist = new TaskList(storage.load());
+            ui.hello();
             Parser parser = new Parser(tasklist);
             if (!isBye) {
                 return parser.runParser(input);

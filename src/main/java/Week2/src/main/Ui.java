@@ -23,7 +23,7 @@ public class Ui {
      * First interaction with user
      */
     public String hello() {
-        return "Hello! I'm Duke\nWhat can I do for you?";
+        return "Hello! I'm Bada\nWhat can I do for you?";
     }
 
     public String bye() {
