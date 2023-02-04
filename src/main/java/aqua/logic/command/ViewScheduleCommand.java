@@ -93,7 +93,7 @@ public class ViewScheduleCommand extends CommandController {
 
         @Override
         public LocalDateTime getStart() {
-            return task.getStart().orElseThrow();
+            return task.getStart().orElseGet(this::getEnd);
         }
 
 

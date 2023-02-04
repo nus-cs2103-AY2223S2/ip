@@ -20,6 +20,7 @@ public class DaySchedule extends HBox {
     private static final double ROW_HEIGHT = 20;
     private static final double HOURS_IN_A_DAY = 24;
     private static final double MINUTES_IN_A_DAY = 1440;
+    private static final double MIN_WIDTH = ROW_HEIGHT;
 
     private final VBox rowDisplayArea = new VBox();
 
@@ -83,10 +84,15 @@ public class DaySchedule extends HBox {
         for (ScheduleTimeable timeable : timeables) {
             double startX = (startTime.until(timeable.getStart(), ChronoUnit.MINUTES) / MINUTES_IN_A_DAY)
                     * ROW_WIDTH;
-            startX = Math.max(0, (int) startX) + 0.5;
+            startX = Math.max(0, (int) startX);
             double endX = (startTime.until(timeable.getEnd(), ChronoUnit.MINUTES) / MINUTES_IN_A_DAY)
                     * ROW_WIDTH;
-            endX = Math.min(ROW_WIDTH, (int) endX) + 0.5;
+            endX = Math.min(ROW_WIDTH, (int) endX);
+
+            if (endX - startX <= MIN_WIDTH) {
+                startX -= MIN_WIDTH / 2;
+                endX += MIN_WIDTH / 2;
+            }
 
             Pane scheduleBox = new Pane();
             scheduleBox.setMinHeight(ROW_HEIGHT);
