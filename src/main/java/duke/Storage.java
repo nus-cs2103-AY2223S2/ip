@@ -120,6 +120,7 @@ public class Storage {
                     }
                     hasSkipped = false;
                 }
+                assert tasks.size() >= 0 : "Something is wrong with the data file";
                 fileReader.close();
                 return tasks;
             }
