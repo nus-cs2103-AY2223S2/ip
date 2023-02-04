@@ -2,9 +2,18 @@ package roody;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a Deadline Task
+ */
 public class Deadline extends Task{
     private LocalDate deadline;
     private char type = 'D';
+
+    /**
+     * Creates a Deadline with specified description and due date.
+     * @param description The description of the deadline.
+     * @param date The due date of the deadline.
+     */
     public Deadline(String description, LocalDate date){
         super(description);
         this.deadline = date;

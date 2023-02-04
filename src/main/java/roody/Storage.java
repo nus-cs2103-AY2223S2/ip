@@ -8,13 +8,29 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents the data storage handler
+ */
 public class Storage {
+    /** filepath to data file */
     String filePath;
+    /** filepath to folder */
     String defaultFolderPath = "./data";
+
+    /**
+     * Creates a Storage handler with specified filepath to save data.
+     * @param filePath The filepath to a file to save data on.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
-     // Loads information from txt file or creates new text file
+
+    /**
+     * Returns information from the data file.
+     * If folder not present, creates a new folder.
+     * If file not present, creates a new file.
+     * @return Tasks.
+     */
     public ArrayList<Task> loadFile() {
         ArrayList<Task> list = new ArrayList<>();
         try {
@@ -59,12 +75,15 @@ public class Storage {
             e.printStackTrace();
         }
         return list;
-    } 
-    
-    // saves information if any into roody.txt
+    }
+
+    /**
+     * Saves Task information, if any, into a preset file.
+     * @param list The ArrayList of Tasks to be saved.
+     */
     public void saveFile(ArrayList<Task> list) {
         ArrayList<String> buffer = new ArrayList<>();
-        Path output = Paths.get("./data/Roody.txt");
+        Path output = Paths.get(filePath);
         for (Task t : list) {
             buffer.add(t.saveTask());
         }
