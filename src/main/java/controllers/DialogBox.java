@@ -49,13 +49,13 @@ public class DialogBox extends HBox {
         }
         dialog.setText(text);
         displayPicture.setImage(img);
-        this.style();
+        this.setStyle();
     }
 
     /**
      * Styles the dialog box and other components it contains
      */
-    private void style() {
+    private void setStyle() {
         Circle circle = new Circle();
         circle.setCenterY(50.0);
         circle.setCenterX(50.0);
@@ -63,6 +63,7 @@ public class DialogBox extends HBox {
         displayPicture.setClip(circle);
 
         this.setSpacing(10);
+
         BorderStroke borderStroke = new BorderStroke(Color.GRAY, BorderStrokeStyle.SOLID,
                 new CornerRadii(20.0), new BorderWidths(1.0));
         Border dialogBorder = new Border(borderStroke);
@@ -78,6 +79,7 @@ public class DialogBox extends HBox {
         Label l = (Label) tmp.get(0);
         l.setAlignment(Pos.TOP_LEFT);
         l.setTextAlignment(TextAlignment.LEFT);
+
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
