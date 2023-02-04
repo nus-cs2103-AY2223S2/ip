@@ -13,8 +13,32 @@ public class Event extends Task {
         this.to = to;
     }
 
-    private String getTaskClass() {
+    /**
+     * Generates a letter representing the type of task
+     *
+     * @return a letter representing the type of this task
+     */
+    public String getTaskClass() {
         return "T";
+    }
+
+    private String getFromTime() {
+        return this.from;
+    }
+
+    private String getToTime() {
+        return this.to;
+    }
+
+    /**
+     * Generates a String to store this task in a local text file
+     *
+     * @return A representative String that contains data about the current task
+     */
+    public String generateStorageText() {
+        return String.format("%s-%s-%s-%s-%s",
+                this.getTaskClass(), this.getStatusIcon(),
+                this.getDescription(), this.getFromTime(), this.getToTime());
     }
 
     public String toString() {

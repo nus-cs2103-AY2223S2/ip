@@ -11,8 +11,28 @@ public class Deadline extends Task {
         this.deadline = deadline;
     }
 
-    private String getTaskClass() {
+    /**
+     * Generates a letter representing the type of task
+     *
+     * @return a letter representing the type of this task
+     */
+    public String getTaskClass() {
         return "D";
+    }
+
+    private String getDeadline() {
+        return this.deadline;
+    }
+
+    /**
+     * Generates a String to store this task in a local text file
+     *
+     * @return A representative String that contains data about the current task
+     */
+    public String generateStorageText() {
+        return String.format("%s-%s-%s-%s",
+                this.getTaskClass(), this.getStatusIcon(),
+                this.getDescription(), this.getDeadline());
     }
 
     public String toString() {

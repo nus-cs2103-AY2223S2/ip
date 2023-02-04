@@ -9,7 +9,12 @@ public class ToDo extends Task {
         super(description, isDone);
     }
 
-    private String getTaskClass() {
+    /**
+     * Generates a letter representing the type of task
+     *
+     * @return a letter representing the type of this task
+     */
+    public String getTaskClass() {
         return "T";
     }
 

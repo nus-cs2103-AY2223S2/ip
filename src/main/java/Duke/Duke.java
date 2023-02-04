@@ -41,6 +41,7 @@ public class Duke {
             }
             if (curCommand instanceof Exit) {
                 ui.printGoodbye();
+                storage.update(toDoList);
                 break;
             }
         }
