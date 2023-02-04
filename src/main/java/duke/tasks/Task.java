@@ -59,6 +59,10 @@ public class Task {
         this.isDone = false;
     }
 
+    public boolean containsKeyWord(String keyWord) {
+        return this.getDescription().contains(keyWord);
+    }
+
     /**
      * Status of its completion status
      *

@@ -3,12 +3,12 @@ package duke;
 import duke.tasks.Task;
 
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Ui {
     public static String GREET_MSG = "Hello! I am Duke Nice To Meet You\n";
     public static String BYE_MSG = "Bye! Hope to See You Again!";
     public static String ADD_MSG = "Got it fam! I've added this task:\n ";
-
 
     private Scanner sc;
 
@@ -107,5 +107,15 @@ public class Ui {
         System.out.println("Noted!I have deleted the task for you:\n " +
                 removedTask.toString() + "\nyou currently have " + num_tasks +
                 " tasks in this list!\n");
+    }
+
+    public void printTaskByKeyWord(TaskList taskList, String keyWord) throws DukeException {
+        ArrayList<Task> allFoundTasks = taskList.getTasksByKeyWord(keyWord);
+        System.out.println("Here are the matching tasks in your list:");
+        int index = 1;
+        for (Task task : allFoundTasks) {
+            System.out.println(String.format("%d.%s", index, task.toString()));
+            index++;
+        }
     }
 }

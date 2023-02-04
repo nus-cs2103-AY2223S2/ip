@@ -97,4 +97,18 @@ public class TaskList {
             System.out.println((i + 1) + "." + ref.toString());
         }
     }
+
+    public ArrayList<Task> getTasksByKeyWord(String keyWord) throws DukeException {
+        ArrayList<Task> allFoundTasks = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.containsKeyWord(keyWord)) {
+                allFoundTasks.add(task);
+            }
+        }
+        if (allFoundTasks.size() == 0) {
+            throw new DukeException(String.format("Unable to find any Tasks that contain this Keyword: %s\n", keyWord));
+        } else {
+            return allFoundTasks;
+        }
+    }
 }
