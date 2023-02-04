@@ -2,8 +2,8 @@ package roody;
 public abstract class Task {
     private boolean done;
     private String description;
-    public Task(String description) {  
-        this.done = false; 
+    public Task(String description) {
+        this.done = false;
         this.description = description;
     }
     public boolean isDone() {
@@ -22,7 +22,7 @@ public abstract class Task {
         return this.description + '|' + this.done;
     }
     @Override
-    public String toString(){
+    public String toString() {
         return this.description;
     }
 }
