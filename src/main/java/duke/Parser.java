@@ -85,7 +85,7 @@ public class Parser {
     /**
      * Parses the user input command string.
      * @param userCommand The user input string.
-     * @return The user command encapsulated in the form a Command object.
+     * @return The user command represented as a Command object.
      * @throws DukeException If an invalid or unsupported command is provided by the user.
      */
     public static Command parse(String userCommand) throws DukeException {

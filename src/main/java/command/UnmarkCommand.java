@@ -21,7 +21,6 @@ public class UnmarkCommand extends Command {
     /**
      * Unmarks the task with the task no as done.
      * @param tasks The existing task list.
-     * @param ui The ui of Duke chat.
      * @throws DukeException If there are no task with the task number, i.e. the task to be
      *     unmarked does not exist.
      */

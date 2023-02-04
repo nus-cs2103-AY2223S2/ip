@@ -36,8 +36,8 @@ public class Duke {
     }
 
     /**
-     * Handles the user text input by parsing it, executing the relevant command and
-     * returning the text response by Duke.
+     * Comprehends the user text input and execute the relevant action and producing a response
+     * corresponding to the input.
      * @param input The user text input.
      */
     public void handleUserInput(String input) {

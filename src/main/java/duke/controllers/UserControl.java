@@ -10,18 +10,34 @@ import javafx.scene.layout.StackPane;
 
 import java.io.IOException;
 
+/**
+ * Controller for the footer section of the GUI where user inputs the desired commands
+ * for Duke to execute.
+ */
 public class UserControl extends StackPane {
+    /**
+     * The component for user to input the desired text command.
+     */
     @FXML
     private TextField userInput;
 
+    /**
+     * The button that the user clicks to send the desired command for Duke.
+     */
     @FXML
     private Button sendButton;
 
+    /**
+     * The icon of the sendButton.
+     */
     @FXML
     private ImageView sendIcon;
 
     private MainWindow mainWindow;
 
+    /**
+     * Constructor for UserControl.
+     */
     public UserControl() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/user-control/UserControl.fxml"));
         fxmlLoader.setRoot(this);
@@ -53,6 +69,9 @@ public class UserControl extends StackPane {
         this.mainWindow = mainWindow;
     }
 
+    /**
+     * Handler to execute when user clicks on sendButton to post the desired text command to Duke.
+     */
     @FXML
     public void sendInput() {
         String input = userInput.getText();

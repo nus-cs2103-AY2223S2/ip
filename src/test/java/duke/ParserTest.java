@@ -1,13 +1,27 @@
 package duke;
 
-import command.*;
+import command.AddCommand;
+import command.Command;
+import command.DeleteCommand;
+import command.ExitCommand;
+import command.FindCommand;
+import command.ListCommand;
+import command.MarkCommand;
+import command.UnmarkCommand;
+
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
-import static org.junit.jupiter.api.Assertions.*;
-
+/**
+ * Driver to test the parsing commands of Parser.
+ */
 public class ParserTest {
+    /**
+     * Tests for correct parsing of valid commands.
+     */
     @Test
-    public void parse_validCommands() throws DukeException {
+    public void parse_validCommands() {
         /* Test Case 1: add event */
         try {
             Command addTodo = Parser.parse("todo task 1");
@@ -81,8 +95,11 @@ public class ParserTest {
         }
     }
 
+    /**
+     * Tests for correct parsing of invalid commands.
+     */
     @Test
-    public void parse_invalidCommands() throws DukeException {
+    public void parse_invalidCommands() {
         /* Test Case 1: missing task name */
         try {
             Parser.parse("todo");

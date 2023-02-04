@@ -17,16 +17,32 @@ import java.nio.file.Paths;
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends BorderPane {
+    /**
+     * The scroll container that contains dialogContainer.
+     */
     @FXML
     private ScrollPane scrollPane;
+
+    /**
+     * The container that contains all the dialogs between Duke and the user.
+     */
     @FXML
     private VBox dialogContainer;
 
+    /**
+     * The footer section where the user inputs the desired command and sends it to Duke.
+     */
     @FXML
     private UserControl userControl;
 
+    /**
+     * The Duke chatbot instance for this application.
+     */
     private Duke duke;
 
+    /**
+     * The image of Duke.
+     */
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/mascot.png"));
 
     @FXML
@@ -46,6 +62,9 @@ public class MainWindow extends BorderPane {
         dialogContainer.getChildren().add(dialog);
     }
 
+    /**
+     * Closes the GUI application after 0.5 seconds.
+     */
     public void terminate() {
         /* Wait for 0.5 seconds before closing the app */
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.5), e -> {

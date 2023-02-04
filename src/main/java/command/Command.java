@@ -10,7 +10,6 @@ public abstract class Command {
     /**
      * Executes the command which might cause changes to the existing task list and ui.
      * @param tasks The existing task list.
-     * @param ui The ui of Duke chat.
      * @throws DukeException If there is an error encountered during the execution of the command.
      */
     public abstract String execute(TaskList tasks) throws DukeException;
