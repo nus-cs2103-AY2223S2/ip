@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
 import duke.entities.SerializableTask;
@@ -65,12 +66,14 @@ public class Storage implements Loader<TaskList> {
             Scanner reader = new Scanner(file);
             while (reader.hasNextLine()) {
                 List<String> data = Arrays.asList(reader.nextLine().split(" \\| "));
-                // Expect only valid data to be saved to hard drive
-                TaskType taskType = TaskType.valueOf(data.get(0).toUpperCase());
-                boolean isDone = data.get(1).equals("1");
-                String description = data.get(2);
-                SerializableTask task;
 
+                // Parse task attributes from data
+                // Expect only valid data to be saved to hard drive
+                TaskType taskType = getTaskType(data);
+                boolean isDone = isDone(data);
+                String description = data.get(2);
+
+                SerializableTask task;
                 switch(taskType) {
                 case TODO:
                 case DEADLINE:
@@ -81,10 +84,11 @@ public class Storage implements Loader<TaskList> {
                     break;
                 default: task = null;
                 }
-                if (task != null) {
-                    String msg = taskList.addTask(task.unmarshal(), false);
-                    System.out.println(msg);
+                if (task == null) {
+                    return false;
                 }
+                String msg = taskList.addTask(task.unmarshal(), false);
+                System.out.println(msg);
             }
             return true;
         } catch (FileNotFoundException e) {
@@ -92,19 +96,31 @@ public class Storage implements Loader<TaskList> {
         }
     }
 
+    private static boolean isDone(List<String> data) {
+        assert data.get(1).equals("1") || data.get(1).equals("0") : "status can only be yes or no" ;
+        return data.get(1).equals("1");
+    }
+
+    private static TaskType getTaskType(List<String> data) {
+        assert !data.isEmpty(): "data cannot be empty!";
+        assert Arrays.stream(TaskType.values()).anyMatch(i -> Objects.equals(i.getType(), data.get(0)));
+
+        // Expect only valid data to be saved to hard drive
+        return TaskType.valueOf(data.get(0).toUpperCase());
+    }
+
     /**
      * Writes all task currently in memory to the hard disk.
      *
-     * @param taskList The tasklist in memory.
+     * @param taskList The task-list in memory.
      * @throws DukeException An exception to be thrown if there are any errors that occur.
      */
     public void writeAll(TaskList taskList) throws DukeException {
         try {
             FileWriter fileWriter = new FileWriter(file);
             taskList.getTaskList().parallelStream().forEach(task -> {
-                SerializableTask tsk = task.serialize();
                 try {
-                    fileWriter.write(tsk.marshal() + "\n");
+                    write(fileWriter, task.serialize());
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -115,17 +131,23 @@ public class Storage implements Loader<TaskList> {
         }
     }
 
+    private static void write(FileWriter fileWriter, Task task) throws IOException {
+        assert task != null : "cannot write empty task to hard disk";
+
+        SerializableTask tsk = task.serialize();
+        fileWriter.write(tsk.marshal() + "\n");
+    }
+
     /**
      * Append current task in memory to the hard disk.
      *
      * @param task The task in memory.
      * @throws DukeException An exception to be thrown if there are any errors that occur.
      */
-    public void write(Task task) throws DukeException {
+    public void writeOne(Task task) throws DukeException {
         try {
             FileWriter fileWriter = new FileWriter(file, true);
-            SerializableTask tsk = task.serialize();
-            fileWriter.write(tsk.marshal() + "\n");
+            write(fileWriter, task);
             fileWriter.close();
         } catch (IOException e) {
             throw new DukeException(GENERIC_ERROR + e.getMessage());
