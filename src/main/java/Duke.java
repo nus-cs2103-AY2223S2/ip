@@ -64,9 +64,23 @@ public class Duke {
     static String greet() {
         return String.format("Hello I am: \n%sWhat can I do for you?", ownName());
     }
-    static String add(String cmd, ArrayList<Task> lst) {
-        lst.add(new Task(cmd));
-        return String.format("added: %s", cmd);
+    static String add(String cmd, ArrayList<Task> arr) {
+        String[] words = cmd.split(" ");
+        String typeOfTask = words[0];
+        Task task = new Task(cmd);
+        switch(typeOfTask) {
+            case "todo":
+                task = new ToDo(cmd);
+                break;
+            case "deadline":
+                task = new Deadline(cmd);
+                break;
+            case "event":
+                task = new Event(cmd);
+                break;
+        }
+        arr.add(task);
+        return String.format("Got it. I've added this task: \n\t\t%s \n\tNow you have %d tasks in the list.", task, arr.size());
     }
     static void printList(ArrayList<Task> arr) {
         String str = "";
