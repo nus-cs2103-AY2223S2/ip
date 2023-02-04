@@ -8,7 +8,16 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
+/**
+ * This is the AddDeadlineCommand class to represent add deadline commands passed to Duke.
+ * Encapsulates the information needed to add a Deadline object to the TaskList.
+ */
 public class AddDeadlineCommand extends AddCommand {
+    /**
+     * Creates a new AddDeadlineCommand.
+     * @param tokens {@inheritDoc}
+     * @throws DukeException when exceptions are encountered in creating the Deadline.
+     */
     public AddDeadlineCommand(ArrayList<String> tokens) throws DukeException {
         super(tokens);
         LocalDate by;
@@ -25,6 +34,6 @@ public class AddDeadlineCommand extends AddCommand {
         }
 
         Deadline newDeadline = new Deadline(name, by);
-        super.setTaskToAdd(newDeadline);
+        setTaskToAdd(newDeadline);
     }
 }
