@@ -81,13 +81,4 @@ public class Storage {
             System.out.println(ex.getStackTrace());
         }
     }
-/*
-    public TaskList load() {}
-
-    void filter(String ... keywords) {
-
-        String x = keywords[0];
-
-    }
-     */
 }
