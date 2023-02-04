@@ -16,3 +16,4 @@ bin/
 
 /text-ui-test/ACTUAL.TXT
 text-ui-test/EXPECTED-UNIX.TXT
+lib/gson-2.10.1.jar
