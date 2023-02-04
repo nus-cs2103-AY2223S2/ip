@@ -118,11 +118,15 @@ public class Storage implements Loader<TaskList> {
     public void writeAll(TaskList taskList) throws DukeException {
         try {
             FileWriter fileWriter = new FileWriter(file);
-            for (Task task : taskList.getTaskList()) {
-                write(fileWriter, task);
-            }
+            taskList.getTaskList().parallelStream().forEach(task -> {
+                try {
+                    write(fileWriter, task);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
             fileWriter.close();
-        } catch (IOException e) {
+        } catch (IOException | RuntimeException e) {
             throw new DukeException(GENERIC_ERROR + e.getMessage());
         }
     }
