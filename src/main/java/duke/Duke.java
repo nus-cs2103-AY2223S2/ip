@@ -5,6 +5,10 @@ import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 /**
  * <h1>Duke Task Manager</h1>
@@ -14,7 +18,7 @@ import duke.ui.Ui;
  *
  * @author Leng Wei Cong, Justin
  */
-public class Duke {
+public class Duke extends Application {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
@@ -27,6 +31,13 @@ public class Duke {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
         this.tasks = new TaskList(this.storage.load());
+    }
+
+    /**
+     * Another constructor for JavaFX
+     */
+    public Duke() {
+        // Empty
     }
 
     /**
@@ -64,6 +75,18 @@ public class Duke {
     */
     public void echo(String input) {
         ui.showMessage(input);
+    }
+
+    /**
+     * Starts JavaFX
+     */
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
     }
 
     /**
