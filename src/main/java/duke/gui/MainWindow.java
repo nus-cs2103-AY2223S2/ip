@@ -78,6 +78,7 @@ public class MainWindow extends AnchorPane {
         if (this.duke.isExit()) {
             userInput.setDisable(true);
             sendButton.setDisable(true);
+            HelpWindow.closeHelpWindow();
             PauseTransition delay = new PauseTransition(Duration.seconds(MainWindow.exitDelayTimeInSeconds));
             delay.setOnFinished( event -> this.stage.close() );
             delay.play();
