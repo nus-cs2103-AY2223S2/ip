@@ -28,8 +28,7 @@ public class TaskList {
      * @param path the path
      */
     public TaskList(String path) {
-        //default size
-        ListOfTasks = new ArrayList<>(100);
+        ListOfTasks = new ArrayList<>();
         storage = new Storage(path);
         init();
     }
@@ -43,7 +42,7 @@ public class TaskList {
     public String gui_add(Task input) {
         try {
             String str;
-            if (input.taskName.equals("") || input.taskName.equals(" ")) {
+            if (input.taskName.equals("") || input.taskName.isBlank()) {
                 throw new DukeException("OOPS!!! The description of a todo cannot be empty.\n");
             } else {
                 ListOfTasks.add(input);
@@ -63,13 +62,12 @@ public class TaskList {
             return str;
         } catch (DukeException e) {
             if (input instanceof ToDo)
-                System.out.println("OOPS!!! The description of a todo cannot be empty.\n");
+                return "OOPS!!! The description of a todo cannot be empty.\n";
             else if (input instanceof Deadlines)
-                System.out.println("OOPS!!! The description of a deadline cannot be empty.\n");
+               return "OOPS!!! The description of a deadline cannot be empty.\n";
             else
-                System.out.println("OOPS!!! The description of a event cannot be empty.\n");
+                return "OOPS!!! The description of a event cannot be empty.\n";
         }
-        return null;
     }
 
     /**
@@ -78,7 +76,6 @@ public class TaskList {
      * @return the string
      */
     public String gui_displayAll() {
-        System.out.println(Parser.THE_TASKS_IN_YOUR_LIST);
         StringBuilder str = new StringBuilder(Parser.THE_TASKS_IN_YOUR_LIST);
         for (int x = 0; x < ListOfTasks.size(); x++) {
             ListOfTasks.get(x).display();
