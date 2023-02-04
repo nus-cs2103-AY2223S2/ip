@@ -105,6 +105,9 @@ public class ViewScheduleCommand extends CommandController {
 
         @Override
         public List<String> getStyleClass() {
+            if (getStart().isEqual(getEnd())) {
+                return List.of("deadline-box");
+            }
             return List.of("schedule-box");
         }
 

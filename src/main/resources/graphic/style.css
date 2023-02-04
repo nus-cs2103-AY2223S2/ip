@@ -138,3 +138,18 @@
 .schedule-box:incomplete {
     -fx-color: rgb(187, 213, 212);
 }
+
+.deadline-box {
+    -fx-background-color: -fx-shadow-highlight-color, -fx-outer-border, -fx-inner-border, -fx-body-color;
+    -fx-background-insets: 1 0 0 1, 1, 2, 3;
+    -fx-background-radius : 3, 3, 2, 1;
+    -fx-rotate: 45;
+}
+
+.deadline-box:complete {
+    -fx-color: rgb(173, 216, 171);
+}
+
+.deadline-box:incomplete {
+    -fx-color: rgb(216, 199, 171);
+}
