@@ -1,12 +1,6 @@
 package duke.parser;
 
-import duke.command.AddCommand;
-import duke.command.ByeCommand;
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.ListCommand;
-import duke.command.MarkCommand;
-import duke.command.UnmarkCommand;
+import duke.command.*;
 import duke.exception.DukeException;
 
 public class Parser {
@@ -45,6 +39,10 @@ public class Parser {
             }
             case "delete": {
                 command = new DeleteCommand(restOfCommand);
+                break;
+            }
+            case "find": {
+                command = new FindCommand(restOfCommand);
                 break;
             }
             default:
