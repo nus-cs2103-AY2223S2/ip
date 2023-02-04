@@ -27,7 +27,8 @@ public class EventButton extends DukeButton {
         Label endLabel = new Label("End (yyyy-mm-dd hh:mm):");
         TextField endTextField = new TextField();
         Button addTaskButton = new Button("Add Task");
-        vbox.getChildren().addAll(desLabel, desTextField, startLabel, startTextField, endLabel, endTextField, addTaskButton);
+        vbox.getChildren().addAll(desLabel, desTextField, startLabel, startTextField, endLabel, endTextField
+                , addTaskButton);
 
         addTaskButton.setOnMouseClicked((event) -> {
             String des = desTextField.getText();

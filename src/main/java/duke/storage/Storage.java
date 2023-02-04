@@ -8,7 +8,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
-import java.util.Map;
 import java.util.Scanner;
 
 public class Storage {
@@ -17,7 +16,6 @@ public class Storage {
      */
     String fp;
     File f;
-    Map<String, Task> taskMap;
 
     /**
      * Constructor for an instance of Storage.
@@ -48,6 +46,7 @@ public class Storage {
                 }
                 String[] line = l.split(" \\| ");
                 Task t = TaskMap.get(line[0]);
+                assert t instanceof Task : "Task not loaded from save file";
                 t.setStatus(line[1].equals("X") ? true : false);
                 t.configure(Arrays.copyOfRange(line, 2, line.length));
                 tl.loadTask(t);

@@ -1,13 +1,10 @@
 package duke.functions;
 
-import duke.dukeExceptions.DukeException;
-
 public class DeleteTask extends Functions {
     /**
      * Constructor for an instance of Function.
      *
-     * @param tl TaskList object that stores all defined tasks
-     * @param st Storage object that controls writing and loading onto/from file
+     * @param fn Function object that defines the overall function of the Duke program
      */
     public DeleteTask(Functions fn) {
         super(fn.getTl(), fn.getSt(), fn.getOutputLayout());
@@ -17,7 +14,6 @@ public class DeleteTask extends Functions {
      * Method to define function of delete command
      *
      * @param inp Index of task specified
-     * @throws DukeException
      */
     public void delete(String inp) {
         int index = Integer.parseInt(inp) - 1;
