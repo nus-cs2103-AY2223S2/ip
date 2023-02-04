@@ -1,3 +1,7 @@
+package duke;
+
+import duke.exception.DukeException;
+
 import java.util.Scanner;
 
 public class Duke {
@@ -8,6 +12,7 @@ public class Duke {
         storage = new Storage(filePath);
         tasks = storage.readData();
     }
+
     public void run() {
         Ui.welcomeMessage();
         Parser parser = new Parser(new Scanner(System.in));
@@ -22,6 +27,7 @@ public class Duke {
             Ui.farewellMessage();
         }
     }
+
     public static void main(String[] args) {
         new Duke("data.txt").run();
     }
