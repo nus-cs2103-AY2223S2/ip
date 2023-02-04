@@ -20,6 +20,6 @@ public class Event extends Task {
 
     @Override
     public String formatForFile() {
-        return "E | " + (this.isDone ? 1 : 0) + " | " + description + " | " + this.from + " | " + this.to + "\n";
+        return "E | " + (this.isDone ? 1 : 0) + " | " + description + " | " + this.from.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm")) + " | " + this.to.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm")) + "\n";
     }
 }
