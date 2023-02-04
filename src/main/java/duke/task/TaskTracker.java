@@ -38,7 +38,7 @@ public class TaskTracker {
      */
     public Task getTask(int index) throws TaskNotFoundException {
         if (index < 0 || tasks.size() < index + 1) {
-            throw new TaskNotFoundException("duke.task.Task " + (index + 1) + " not found!");
+            throw new TaskNotFoundException("Task " + (index + 1) + " not found!");
         }
 
         return tasks.get(index);
