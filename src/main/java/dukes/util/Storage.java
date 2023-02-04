@@ -92,7 +92,6 @@ public class Storage {
         if (!directory.exists()) {
             directory.mkdir();
         }
-        File writeFile = new File(filePath);
         try {
             FileWriter fw = new FileWriter(filePath);
             fw.write(currWriteIn);
