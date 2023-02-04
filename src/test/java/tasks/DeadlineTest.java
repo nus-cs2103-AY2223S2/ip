@@ -1,6 +1,7 @@
 package tasks;
 
-import exceptions.DukeException;
+import duke.exceptions.DukeException;
+import duke.tasks.Deadline;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
