@@ -41,6 +41,7 @@ public class CommandList extends Command {
                 newList.append("\n");
             }
         }
+        assert (!newList.toString().equals(""));
         return newList.toString();
     }
 }

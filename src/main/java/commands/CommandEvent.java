@@ -22,9 +22,11 @@ public class CommandEvent extends Command {
         TaskList taskList = new Storage().loadTaskList();
         try {
             String eventSentence = userInput[1];
-            Task eventToAdd = new Event(getEventName(eventSentence),
-                                        getFromDate(eventSentence),
-                                        getToDate(eventSentence));
+            String eventName = getEventName(eventSentence);
+            String fromDate = getFromDate(eventSentence);
+            String toDate = getToDate(eventSentence);
+            assert (!eventName.equals("") && !fromDate.equals("") && !toDate.equals(""));
+            Task eventToAdd = new Event(eventName, fromDate, toDate);
             taskList.add(eventToAdd);
             autoSave(taskList);
             return ("Task added:\n " + eventToAdd + "\n" + "There are now " + taskList.size()

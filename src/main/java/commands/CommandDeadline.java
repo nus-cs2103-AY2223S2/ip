@@ -22,7 +22,10 @@ public class CommandDeadline extends Command {
         TaskList taskList = new Storage().loadTaskList();
         try {
             String deadlineSentence = userInput[1];
-            Task deadlineToAdd = new Deadline(getDeadlineName(deadlineSentence), getDeadlineDate(deadlineSentence));
+            String deadlineName = getDeadlineName(deadlineSentence);
+            String deadlineDate = getDeadlineDate(deadlineSentence);
+            assert (!deadlineName.equals("") && !deadlineDate.equals(""));
+            Task deadlineToAdd = new Deadline(deadlineName, deadlineDate);
             taskList.add(deadlineToAdd);
             autoSave(taskList);
             return ("Task added:\n " + deadlineToAdd + "\n" + "There are now " + taskList.size()
