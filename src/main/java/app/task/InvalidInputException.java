@@ -2,7 +2,7 @@ package app.task;
 
 public class InvalidInputException extends Exception {
 
-    InvalidInputException(String msg) {
+    public InvalidInputException(String msg) {
         super(msg);
     }
 }

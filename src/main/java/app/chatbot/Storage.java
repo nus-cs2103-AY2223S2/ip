@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import app.task.InvalidInputException;
 import app.task.Task;
 import app.task.TaskList;
 import app.task.TaskTypes;
@@ -25,8 +26,7 @@ import app.task.TaskTypes;
 public class Storage {
     public static final String SEPARATOR_REGEX = " \\| ";
     public static final String SEPARATOR = " | ";
-    public static final String SUB_SEPARATOR = ":";
-    private Path path;
+    public static final String SUB_SEPARATOR = ":"; // for commands with additional args
     private final File file;
 
     /**
@@ -34,11 +34,10 @@ public class Storage {
      * data. If the path location does not exist, the necessary files and directories
      * are created.
      *
-     * @param path the relative path for which the text data file will be stored
-     * @throws IOException
+     * @param path the relative path for which the text data file will be stored.
+     * @throws IOException, propagated from FileWriter.
      */
     Storage(Path path) throws IOException {
-        this.path = path;
         this.file = new File(path.toString());
 
         // creates storage directory or data if they don't exist
@@ -50,6 +49,7 @@ public class Storage {
 
     /**
      * Loads a single line in storage into a given task.TaskList.
+     * Method is under review to return totalSuccesses and totalFailures.
      *
      * It is assumed that a line in storage follows the format specified here:
      * taskSymbol | isDone | desc | addtl-arg1:value | addtl-arg2:value ...
@@ -59,53 +59,65 @@ public class Storage {
      *
      * @param tl empty TaskList, assuming this is executed upon startup of app.
      * @return totalSuccess, the number of lines that have been successfully loaded into the tl.
+     * @throws
      */
     public int loadIntoTaskList(TaskList tl) throws Exception {
 
+        BufferedReader br = new BufferedReader(new FileReader(this.file));
+        String line = br.readLine();
+        int totalTaskCounter = 0;
+        int totalSuccess = 0;
+        while (line != null) {
+            totalTaskCounter++;
+            List<String> args = Arrays.asList(line.split(SEPARATOR_REGEX));
 
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(this.file));
-            String line = br.readLine();
-            int totalTaskCounter = 0;
-            int totalSuccess = 0;
-            while (line != null) {
-                totalTaskCounter++;
-                List<String> args = Arrays.asList(line.split(SEPARATOR_REGEX));
+            TaskTypes.Type taskType = getTaskTypeFromStorageFormat(args);
+            Map<String, String> argValues = getArgMapFromStorageFormat(args);
+            boolean isDone = getIsDoneFromStorageFormat(args);
 
-                // get task type
-                String symbol = args.get(0);
-                TaskTypes.Type taskType = TaskTypes.symbolToTask.getValue().get(symbol);
-
-                // get arg map
-                Map<String, String> argValues = new HashMap<>();
-                boolean isDone = args.get(1).equals("1");
-                argValues.put("Description", args.get(2));
-
-                // remaining named arguments
-                if (args.size() > 3) {
-                    for (String pair : args.subList(3, args.size())) {
-                        String[] split = pair.split(SUB_SEPARATOR, 2);
-                        argValues.put(split[0], split[1]);
-                    }
+            try {
+                if (isDone) {
+                    tl.addDoneTask(taskType, argValues);
+                } else {
+                    tl.addTask(taskType, argValues);
                 }
-
-                try {
-                    if (isDone) {
-                        tl.addDoneTask(taskType, argValues);
-                    } else {
-                        tl.addTask(taskType, argValues);
-                    }
-                    totalSuccess++;
-                    line = br.readLine();
-                } catch (Exception e) {
-                    line = br.readLine();
-                }
-
+                totalSuccess++;
+                line = br.readLine();
+            } catch (Exception e) {
+                line = br.readLine();
             }
-            return totalSuccess;
-        } catch (Exception e) {
-            throw e;
+
         }
+        return totalSuccess;
+    }
+
+    private TaskTypes.Type getTaskTypeFromStorageFormat(List<String> args) {
+        String symbol = args.get(0);
+        return TaskTypes.symbolToTask.getValue().get(symbol);
+    }
+
+    private Map<String,String> getArgMapFromStorageFormat(List<String> args) {
+        Map<String, String> argValues = new HashMap<>();
+        argValues.put("Description", args.get(2));
+
+        // remaining named arguments
+        if (args.size() > 3) {
+            for (String pair : args.subList(3, args.size())) {
+                String[] split = pair.split(SUB_SEPARATOR, 2);
+                argValues.put(split[0], split[1]);
+            }
+        }
+        return argValues;
+    }
+
+    private boolean getIsDoneFromStorageFormat(List<String> args) throws InvalidStorageException {
+        String arg = args.get(1);
+        boolean isDoneTrue = arg.equals("1");
+        boolean isUnDoneTrue = arg.equals("0");
+        if (!isDoneTrue && !isUnDoneTrue) {
+            throw new InvalidStorageException("error loading isDone");
+        }
+        return isDoneTrue;
     }
 
     /**
@@ -113,10 +125,9 @@ public class Storage {
      * Thus, this should only be executed when the TaskList contains the right information.
      *
      * @param tl TaskList with updated data to be stored.
-     * @return int value of 1 is returned for successful writing of data.
-     * @throws Exception
+     * @throws IOException, propagated from FileWriter.
      */
-    public int saveToStorage(TaskList tl) throws Exception {
+    public void saveToStorage(TaskList tl) throws IOException {
         BufferedWriter br = new BufferedWriter(new FileWriter(this.file));
         for (Task task : tl.getAllTasks()) {
             String data = task.asDataFormat();
@@ -124,9 +135,11 @@ public class Storage {
             br.newLine();
         }
         br.close();
-        return 1;
     }
 
+    /**
+     * Indicates invalid storage data
+     */
     public static class InvalidStorageException extends Exception {
         InvalidStorageException(String msg) {
             super(msg);
