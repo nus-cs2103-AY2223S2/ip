@@ -5,10 +5,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class FileHandler {
+public class Storage {
     File prevTasks;
 
-    public FileHandler(File prevTasks) {
+    public Storage(File prevTasks) {
         this.prevTasks = prevTasks;
     }
 

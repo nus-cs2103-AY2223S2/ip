@@ -13,7 +13,7 @@ public class UI {
 
 //        Load from file
         File prevTasks = new File("./data/tasks.txt");
-        FileHandler saveManager = new FileHandler(prevTasks);
+        Storage saveManager = new Storage(prevTasks);
 
         ArrayList<Task> tasks = new ArrayList<>(saveManager.extractTasks());
 
