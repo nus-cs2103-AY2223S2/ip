@@ -18,11 +18,11 @@ public class CommandAddTodo extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task todo = new Todo(description);
         tasks.addTask(todo);
-        ui.formResponse("New todo task added: " + todo);
         storage.save(tasks.getList());
+        return ui.formResponse("New todo task added: " + todo);
     }
 
 }

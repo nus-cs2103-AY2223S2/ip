@@ -3,7 +3,7 @@ package duke.task;
 /**
  * Represents a task.
  */
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -30,20 +30,6 @@ public class Task {
     }
 
     /**
-     * Mark a task status as done.
-     */
-    public void markAsDone() {
-        this.isDone = true;
-    }
-
-    /**
-     * Mark a task status as undone.
-     */
-    public void markAsUndone() {
-        this.isDone = false;
-    }
-
-    /**
      * Gets the status of the given task.
      * @return Status of the task.
      */
@@ -64,7 +50,5 @@ public class Task {
      * Returns the string representation of the task in the save file.
      * @return Representation of the task in the save file.
      */
-    public String toSavedString() {
-        return "";
-    }
+    public abstract String toSavedString();
 }

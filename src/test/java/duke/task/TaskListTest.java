@@ -1,5 +1,6 @@
 package duke.task;
 
+<<<<<<< HEAD
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
@@ -7,6 +8,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
+=======
+import duke.DukeException;
+
+import java.util.Arrays;
+import java.util.ArrayList;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+>>>>>>> branch-Level-10
 
 import duke.DukeException;
 
@@ -43,6 +53,7 @@ public class TaskListTest {
 
     @Test
     public void deleteTaskTest() throws DukeException {
+<<<<<<< HEAD
         Task taskToDelete = new Todo("test");
         TaskList listOfTasks = new TaskList(new ArrayList<Task>(Arrays.asList(taskToDelete)));
 
@@ -53,5 +64,13 @@ public class TaskListTest {
 
         assertEquals(listAfterDelete, listOfTasks);
         assertEquals(taskToDelete, taskDeleted);
+=======
+        Task testTask = new Todo("test");
+        Task dontCare = new Todo("");
+        TaskList list = new TaskList(new ArrayList<Task>(Arrays.asList(dontCare, testTask, dontCare)));
+        list.deleteTask(1);
+        TaskList listAfterDelete = new TaskList(new ArrayList<Task>(Arrays.asList(dontCare, dontCare)));
+        assertEquals(listAfterDelete, list);
+>>>>>>> branch-Level-10
     }
 }

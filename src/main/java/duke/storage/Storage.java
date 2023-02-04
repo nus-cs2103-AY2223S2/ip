@@ -42,12 +42,12 @@ public class Storage {
      * Adds a task from the save file to the task list.
      */
     private void loadTaskFromFile(String task) {
-        // Parser
+        /* Parser */
         String[] command = task.split("\\|");
-        String taskType = command[0];
-        String description = command[2];
+        String taskType = command[0].trim();
+        String description = command[2].trim();
 
-        Task t = new Task("");
+        Task t = new Todo(""); // Placeholder task
 
         switch (taskType) {
         case "T":
@@ -65,10 +65,8 @@ public class Storage {
         default:
         }
 
-        boolean isMarked = command[1].equals("1");
-        if (isMarked) {
-            t.markAsDone();
-        }
+        boolean isMarked = command[1].trim().equals("1");
+        t.markStatus(isMarked);
 
         this.taskList.add(t);
     }
@@ -92,15 +90,15 @@ public class Storage {
         // Load file
         File file = new File(directory + "/" + filename);
 
-        // Create file if not exist
+        // Create file if necessary
         try {
             if (file.createNewFile()) {
-                ui.showFileCreatedSuccessfully();
+                ui.print("No save file found. Creating new save...");
             } else {
-                ui.showCreatingFile();
+                ui.print("Save file loaded");
             }
         } catch (IOException e) {
-            ui.showError("Something went wrong while creating a new save");
+            ui.print("Something went wrong while creating a new save");
         }
 
         return file;
@@ -113,7 +111,7 @@ public class Storage {
      * @return List of tasks from the save file
      */
     public List<Task> load() {
-
+        ui.printLoadingFile();
         File file = fileWithAssurance(this.fileDirectory, this.fileName);
 
         try {
@@ -124,7 +122,7 @@ public class Storage {
             }
             sc.close();
         } catch (FileNotFoundException e) {
-            ui.showSaveNotFound();
+            ui.print("File not found");
         } finally {
             return this.taskList;
         }
@@ -134,7 +132,6 @@ public class Storage {
      * Saves the task list to hard drive.
      */
     public void save(List<Task> tasks) {
-        ui.showSavingFile();
         try {
             FileWriter fw = new FileWriter(this.fileDirectory + "/" + this.fileName);
 
@@ -144,9 +141,9 @@ public class Storage {
             }
 
             fw.close();
-
+            ui.printSavingFile();
         } catch (IOException e) {
-            ui.showError("Something went wrong with saving file.");
+            ui.print("Something went wrong while saving file");
         }
     }
 }

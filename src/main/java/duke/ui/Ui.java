@@ -1,83 +1,57 @@
 package duke.ui;
 
-import java.util.Scanner;
-
 /**
  * Represents the UI of the bot.
  */
 public class Ui {
     private String botName;
-    private Scanner sc;
 
     /**
-     * Constructor for UI.
+     * Constructor for a UI that handle forming bot responses.
      *
      * @param name Name of chatbot.
      */
     public Ui(String name) {
         this.botName = name;
-        this.sc = new Scanner(System.in);
     }
 
     /**
-     * Creates a decorated response message.
+     * Creates a response message.
      * @param s Message.
+     * @return String representing Duke's response.
      */
-    public void formResponse(String s) {
-
-        // Append ">" to each new line to indicate box reply
-        String[] StringArray = s.split(System.lineSeparator());
-        StringBuilder sb = new StringBuilder();
-
-        for (String line : StringArray) {
-            sb.append("\t> " + line + "\n");
-        }
-
-        sb.setLength(sb.length() - 1); // remove the last lineSeparator.
-        System.out.println(sb);
+    public String formResponse(String s) {
+        return s;
     }
 
     /**
-     * Shows welcome message.
+     * Returns a welcome message.
+     * @return String representing welcome message.
      */
-    public void showWelcome() {
-        this.formResponse(botName + "Bot activated.");
+    public String sayHello() {
+        return this.formResponse("LEBRON JAMESSSS #kidfromAkron #kingme");
     }
 
     /**
-     * Reads user input and returns it.
-     * @return User's input.
+     * Returns a terminating message.
+     * @return String representing goodbye message.
      */
-    public String readCommand() {
-        return sc.nextLine();
+    public String sayGoodbye() {
+        return this.formResponse("Not staying for Taco Tuesday? :<");
     }
 
     /**
-     * Displays terminating message and closes the scanner.
+     * Print the string on the output screen.
+     * @param s String to print.
      */
-    public void terminate() {
-        this.formResponse("Bot terminated.");
-        this.sc.close();
+    public void print(String s) {
+        System.out.println("> " + s);
     }
 
-    public void showSaveNotFound() {
-        this.formResponse("An error occurred while locating save file.");
+    public void printLoadingFile() {
+        this.print("Loading file...");
     }
-
-    public void showFileCreatedSuccessfully() {
-        this.formResponse("New save file created.");
+    public void printSavingFile() {
+        this.print("Saving file...");
     }
-
-    public void showCreatingFile() {
-        this.formResponse("Save file detected. Loading...");
-    }
-
-    public void showSavingFile() {
-        this.formResponse("Saving file...");
-    }
-
-    public void showError(String s) {
-        this.formResponse(s);
-    }
-
 }

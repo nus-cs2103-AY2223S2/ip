@@ -16,10 +16,10 @@ public class CommandDeleteTask extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task deleted = tasks.deleteTask(index - 1);
-        ui.formResponse("Task deleted: " + deleted);
         storage.save(tasks.getList());
+        return ui.formResponse("Task deleted: " + deleted);
     }
 }
 

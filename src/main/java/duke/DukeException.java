@@ -10,7 +10,7 @@ public class DukeException extends Exception {
 
     /**
      * Returns the error message of the exception.
-     * @return The error message of the exception.
+     * @return String representing error message.
      */
     @Override
     public String toString() {
