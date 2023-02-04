@@ -1,4 +1,4 @@
-package parser;
+package command;
 
 
 public enum DukeCommand {

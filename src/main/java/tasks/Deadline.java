@@ -1,6 +1,7 @@
 package tasks;
 
 import java.time.LocalDate;
+import date.DukeDate;
 
 public class Deadline extends Task {
     private static final long serialVersionUID = 8193173341399324817L;
@@ -9,12 +10,11 @@ public class Deadline extends Task {
 
     public Deadline(String description, String by) {
         super(description);
-        this.by = LocalDate.parse(by, super.INPUT_DATE_FORMAT);
+        this.by = DukeDate.parseDateString(by);
     }
 
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(),
-                by.format(super.OUTPUT_DATE_FORMAT));
+        return String.format("[D]%s (by: %s)", super.toString(), DukeDate.convertDateToString(by));
     }
 }

@@ -1,7 +1,6 @@
 package driver;
 
 
-import parser.DukeCommand;
 import parser.DukeParser;
 import tasks.Deadline;
 import tasks.Event;
@@ -9,6 +8,7 @@ import tasks.Task;
 import tasks.TaskList;
 import tasks.ToDo;
 import java.util.Scanner;
+import command.DukeCommand;
 
 public class Driver {
     TaskList taskList;
