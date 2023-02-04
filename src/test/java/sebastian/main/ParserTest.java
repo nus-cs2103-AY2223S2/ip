@@ -1,13 +1,27 @@
 package sebastian.main;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Test;
-import sebastian.command.*;
+
+import sebastian.command.AddDeadlineCommand;
+import sebastian.command.AddEventCommand;
+import sebastian.command.AddTodoCommand;
+import sebastian.command.Command;
+import sebastian.command.DeleteCommand;
+import sebastian.command.ExitCommand;
+import sebastian.command.GetCommand;
+import sebastian.command.ListCommand;
+import sebastian.command.MarkCommand;
+import sebastian.command.UnmarkCommand;
 import sebastian.exceptions.IllegalInputException;
-import static org.junit.jupiter.api.Assertions.*;
+
 
 public class ParserTest {
     @Test
-    public void testAddCommand(){
+    public void testAddCommand() {
         assertAll(() -> {
             Command todo = Parser.parse("todo");
             assertTrue(todo instanceof AddTodoCommand);

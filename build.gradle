@@ -45,7 +45,7 @@ test {
 }
 
 application {
-    mainClassName = "sebastian.Sebastian"
+    mainClassName = "Launcher"
 }
 
 shadowJar {

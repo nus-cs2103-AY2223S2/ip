@@ -1,11 +1,16 @@
 package sebastian.main;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Test;
+
 import sebastian.exceptions.DeadlineFormatMismatchException;
 import sebastian.task.Deadline;
 import sebastian.task.Task;
 import sebastian.task.Todo;
-import static org.junit.jupiter.api.Assertions.*;
 
 public class TaskListTest {
     @Test
@@ -47,7 +52,7 @@ public class TaskListTest {
                 tl.addDeadline(0, "random deadline", "2023-1-1 9999");
             });
         }, () -> {
-            Task t = tl.addDeadline(0, "random deadline","2023-01-27 2359");
+            Task t = tl.addDeadline(0, "random deadline", "2023-01-27 2359");
             assertTrue(t instanceof Deadline);
         });
 
