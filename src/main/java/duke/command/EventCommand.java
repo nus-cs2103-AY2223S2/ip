@@ -19,13 +19,13 @@ public class EventCommand extends Command {
      * @param input
      */
     public EventCommand(String input) {
-        String[] checkerSlash = input.split("/");
-        String[] checkerEvent = checkerSlash[0].split("event ");
-        String[] checkerFrom = checkerSlash[1].split("from ");
-        String[] checkerTo = checkerSlash[2].split("to ");
-        this.message = checkerEvent[1];
-        this.from = checkerFrom[1];
-        this.to = checkerTo[1];
+        String[] eventCommand = input.split("/");
+        String[] eventMessage = eventCommand[0].split("event ");
+        String[] fromTiming = eventCommand[1].split("from ");
+        String[] toTiming = eventCommand[2].split("to ");
+        this.message = eventMessage[1];
+        this.from = fromTiming[1];
+        this.to = toTiming[1];
     }
 
     /**
@@ -39,7 +39,7 @@ public class EventCommand extends Command {
     public String execute(TaskList tasks, Ui ui, StorageList storage) {
         Event t = new Event(message, from, to);
         tasks.addToList(t);
-        return "Got it, I've added this task:" + t + tasks.statement();
+        return "Got it, I've added this task:" + t + tasks.getLengthMessage();
     }
 
 }

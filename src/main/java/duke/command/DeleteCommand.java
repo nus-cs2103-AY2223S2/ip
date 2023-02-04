@@ -31,7 +31,7 @@ public class DeleteCommand extends Command {
      */
     public String execute(TaskList tasks, Ui ui, StorageList storage) throws DukeException {
         tasks.deleteTask(listNum);
-        return "Task " + (listNum + 1) + " has been deleted from the list\n" + tasks.statement();
+        return "Task " + (listNum + 1) + " has been deleted from the list\n" + tasks.getLengthMessage();
     }
 
 }

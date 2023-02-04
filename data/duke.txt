@@ -5,6 +5,7 @@
 [D][ ] eat chicken (by: Jan 12 2012 06:00 PM)
 [T][ ] bye
 [T][ ] bye
-[T][ ] bye
 [T][ ] can
-[T][ ] do work
+[D][X] eat sushi (by: Dec 12 1999 07:00 PM)
+[D][ ] do hw (by: Dec 10 2019 06:00 PM)
+[E][ ] have fun (from: decemebr to:jan)

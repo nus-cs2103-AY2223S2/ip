@@ -8,6 +8,6 @@ public class TaskTest {
     @Test
     public void isDoneTest() {
         Task t = new Task("do work", "T", "X");
-        assertEquals(true, t.checkisdonestr());
+        assertEquals(true, t.isTaskDone());
     }
 }

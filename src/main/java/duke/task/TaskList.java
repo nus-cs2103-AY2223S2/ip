@@ -54,7 +54,7 @@ public class TaskList {
             output += String.valueOf(x + 1) + "." + list.get(x) + "\n";
         }
         return "Here are the tasks in your list:\n" + output
-                + "\n" + statement();
+                + "\n" + getLengthMessage();
     }
 
     /**
@@ -85,15 +85,15 @@ public class TaskList {
      *
      * @return Integer - Number of elements in list.
      */
-    public int lengthOflist() {
+    private int getLengthOfList() {
         return list.size();
     }
 
     /**
      * Output the statement for the number of tasks in the list.
      */
-    public String statement() {
-        return "Now you have " + this.lengthOflist() + " tasks in your list.\n";
+    public String getLengthMessage() {
+        return "Now you have " + this.getLengthOfList() + " tasks in your list.\n";
     }
 
     /**
@@ -102,7 +102,7 @@ public class TaskList {
      * @param message String that the user wants to find.
      * @return List List of tasks which matches the input string.
      */
-    public ArrayList<Task> find(String message) {
+    public ArrayList<Task> findStringInTask(String message) {
         ArrayList<Task> arrStr = new ArrayList<>();
         for (Task t : list) {
             if (t.toString().contains(message)) {
