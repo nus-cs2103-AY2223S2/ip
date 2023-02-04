@@ -8,10 +8,18 @@ import colette.gui.MainWindow;
 import colette.gui.SpriteEmotion;
 import colette.task.Task;
 
+/** Class that represents a user command to add a task */
 public class AddCommand extends Command {
 
     private Task task;
 
+    /**
+     * Constructs an AddCommand object
+     * that adds the given task to the
+     * list.
+     *
+     * @param task Task to add to the list.
+     */
     public AddCommand(Task task) {
         super(false);
         this.task = task;

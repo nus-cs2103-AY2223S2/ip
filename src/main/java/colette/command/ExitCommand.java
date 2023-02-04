@@ -6,8 +6,13 @@ import colette.gui.GuiText;
 import colette.gui.MainWindow;
 import colette.gui.SpriteEmotion;
 
+/** Class that represents a user command to exit the chatbot */
 public class ExitCommand extends Command {
 
+    /**
+     * Constructs an ExitCommand object
+     * to exit the chatbot.
+     */
     public ExitCommand() {
         super(true);
     }

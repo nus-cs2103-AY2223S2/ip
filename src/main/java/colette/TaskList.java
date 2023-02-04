@@ -134,7 +134,7 @@ public class TaskList {
      * keyword and returns a new TaskList containing only
      * these tasks.
      *
-     * @param keyword The given keyword that tasks must contain.
+     * @param keywords The given keywords that tasks must contain.
      * @return New TaskList containing only matching tasks.
      */
     public TaskList findTasksByKeyword(String ... keywords) {
@@ -144,7 +144,7 @@ public class TaskList {
                 if (keyword.isBlank()) {
                     continue;
                 }
-                if (t.nameContainsKeyword(keyword) && ! filteredTaskList.containsTask(t)) {
+                if (t.nameContainsKeyword(keyword) && !filteredTaskList.containsTask(t)) {
                     filteredTaskList.addTask(t);
                 }
             }

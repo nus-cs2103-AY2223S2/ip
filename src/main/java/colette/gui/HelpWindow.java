@@ -18,6 +18,9 @@ public class HelpWindow extends AnchorPane {
     @FXML
     private Text helpText;
 
+    /**
+     * Initialize the help window.
+     */
     @FXML
     public void initialize() {
         this.helpText.setText(GuiText.generateHelpWindowText());

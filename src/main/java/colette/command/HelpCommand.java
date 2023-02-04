@@ -7,8 +7,13 @@ import colette.gui.HelpWindow;
 import colette.gui.MainWindow;
 import colette.gui.SpriteEmotion;
 
+/** Class that represents a user command to launch the help window */
 public class HelpCommand extends Command {
-    
+
+    /**
+     * Constructs a HelpCommand object
+     * to launch the help window.
+     */
     public HelpCommand() {
         super(false);
     }

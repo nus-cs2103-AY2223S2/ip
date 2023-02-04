@@ -8,10 +8,18 @@ import colette.gui.MainWindow;
 import colette.gui.SpriteEmotion;
 import colette.task.Task;
 
+/** Class that represents a user command to delete a task */
 public class DeleteCommand extends Command {
 
     private int index;
 
+    /**
+     * Constructs a DeleteCommand object
+     * that deletes the task in the list
+     * at the given index.
+     *
+     * @param index Index of the list to delete the task from.
+     */
     public DeleteCommand(int index) {
         super(false);
         this.index = index;

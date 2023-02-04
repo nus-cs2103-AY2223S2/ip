@@ -26,7 +26,7 @@ public class DialogBox extends HBox {
 
     private static final float WRAPPING_WIDTH = 250;
     private static final float IMAGE_LENGTH = 70;
-    private static final float ROUNDED_CORNERS_LENGTH = 25;    
+    private static final float ROUNDED_CORNERS_LENGTH = 25;
 
     private static final Color COLOR_COLETTE = Color.CORNFLOWERBLUE;
     private static final Color COLOR_USER = Color.CRIMSON;

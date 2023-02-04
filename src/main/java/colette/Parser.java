@@ -61,7 +61,9 @@ public class Parser {
      * @return Command object representing multi-word command.
      * @throws ColetteException if given multi-word command string cannot be parsed.
      */
-    private static Command processCommand(String line, String[] lineSplitBySpaces, String command, String uppercaseCommand) throws ColetteException {
+    private static Command processCommand(
+        String line, String[] lineSplitBySpaces, String command, String uppercaseCommand
+    ) throws ColetteException {
         if (uppercaseCommand.equals(CommandType.MARK.name())
                 || uppercaseCommand.equals(CommandType.UNMARK.name())
                 || uppercaseCommand.equals(CommandType.DELETE.name())) {
@@ -173,7 +175,7 @@ public class Parser {
         String details = line.split(command)[1].trim();
 
         String[] detailsSplitByBy = details.split(Parser.BY_INDICATOR);
-        
+
         String name = detailsSplitByBy[0].trim();
         String deadline = detailsSplitByBy[1].trim();
 

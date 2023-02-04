@@ -1,6 +1,7 @@
 package colette.gui;
 
 import colette.Colette;
+
 import javafx.animation.PauseTransition;
 
 import javafx.fxml.FXML;
@@ -59,6 +60,9 @@ public class MainWindow extends AnchorPane {
         this.stage = stage;
     }
 
+    /**
+     * Initialize the main window.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -96,7 +100,7 @@ public class MainWindow extends AnchorPane {
         sendButton.setDisable(true);
         HelpWindow.closeHelpWindow();
         PauseTransition delay = new PauseTransition(Duration.seconds(MainWindow.exitDelayTimeInSeconds));
-        delay.setOnFinished( event -> this.stage.close() );
+        delay.setOnFinished(event -> this.stage.close());
         delay.play();
     }
 

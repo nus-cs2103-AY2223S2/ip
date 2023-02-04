@@ -6,10 +6,18 @@ import colette.gui.GuiText;
 import colette.gui.MainWindow;
 import colette.gui.SpriteEmotion;
 
+/** Class that represents a user command to find tasks */
 public class FindCommand extends Command {
 
     private String[] keywords;
 
+    /**
+     * Constructs a FindCommand object
+     * that finds all tasks that match any of the
+     * given keywords.
+     *
+     * @param keywords Keywords to match tasks to.
+     */
     public FindCommand(String ... keywords) {
         super(false);
         this.keywords = keywords;
