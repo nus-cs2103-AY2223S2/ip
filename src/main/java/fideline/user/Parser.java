@@ -21,14 +21,26 @@ import fideline.execution.ListCommand;
 import fideline.execution.MarkCommand;
 import fideline.execution.UnmarkCommand;
 
+/**
+ * Manager of new and existing tasks. Handles creating, deletion and
+ * status change of all tasks.
+ *
+ * @author Fun Leon
+ */
 public class Parser {
-
 
     private static final String[] possibleCommandsArr = {
         "bye", "list", "todo", "deadline", "event", "mark", "unmark", "delete", "find"
     };
 
-
+    /**
+     * Parses the user input (String), and finds the command issued by the user
+     * and any relevant parameters.
+     *
+     * @param userInput User input as a string.
+     * @return The command associated with the user input.
+     * @throws FidelineException Thrown if user input is invalid for any reason.
+     */
     public static Command getCommand(String userInput) throws FidelineException {
         ArrayList<String> possibleCommandsList = new ArrayList<>();
         possibleCommandsList.addAll(Arrays.asList(possibleCommandsArr));

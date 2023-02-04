@@ -41,7 +41,6 @@ public class TaskManager {
         taskList = new ArrayList<Task>();
     }
 
-
     public String addTodo(String taskName) {
         Todo newTodo = new Todo(taskName);
         taskList.add(newTodo);
@@ -110,7 +109,6 @@ public class TaskManager {
     public int getTaskCount() {
         return taskList.size();
     }
-
 
     public String findTask(String findString) {
         ArrayList<Task> list = new ArrayList<>();
