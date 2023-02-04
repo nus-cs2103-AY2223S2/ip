@@ -12,7 +12,7 @@ public class Leo {
 
     private final Ui ui;
 
-    private Leo(String filePath) {
+    public Leo(String filePath) {
         ui = new Ui();
         run();
         try {
@@ -24,13 +24,7 @@ public class Leo {
         }
     }
 
-    public static void main(String[] args) {
-        new Leo("data/leo.txt");
-    }
-
     private void run() {
         ui.greetings();
     }
-
-
 }

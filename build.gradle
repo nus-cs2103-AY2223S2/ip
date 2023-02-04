@@ -44,7 +44,7 @@ test {
 }
 
 application {
-    mainClassName = "leo.Leo"
+    mainClassName = "leo.ui.Launcher"
 }
 
 shadowJar {
