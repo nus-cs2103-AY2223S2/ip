@@ -1,4 +1,4 @@
-package duke.task;
+package duke.logic.task;
 
 /**
  * Task parent class.

@@ -1,16 +1,38 @@
-package duke;
+package duke.logic;
 
 import java.util.ArrayList;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
+import duke.DukeException;
+import duke.logic.task.Deadline;
+import duke.logic.task.Event;
+import duke.logic.task.Task;
+import duke.logic.task.Todo;
 
 /**
  * Parser class takes in commands and executes them.
  */
 public class Parser {
+
+    /**
+     * Splits input into command and content strings.
+     * @param input Input String.
+     * @return String array of size 2 containing command and content.
+     */
+    public static String[] parse(String input) {
+        String[] words = input.split(" ");
+        String command = words[0];
+        StringBuilder desc = new StringBuilder();
+        desc.append(" ");
+        for (int i = 1; i < words.length; i++) {
+            desc.append(words[i]);
+            if (i < words.length - 1) {
+                // only add whitespace if not last word
+                desc.append(" ");
+            }
+
+        }
+        return new String[]{command, desc.toString()};
+    }
 
     /**
      * Executes the appropriate command based on the input given by the user, which is split into
@@ -115,6 +137,7 @@ public class Parser {
             response = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
         }
 
+        System.out.println(response);
         return response;
     }
 }
