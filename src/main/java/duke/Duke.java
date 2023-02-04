@@ -1,18 +1,19 @@
 package duke;
 import java.util.ArrayList;
-import duke.task.TaskList;
 import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.layout.Region;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+import duke.task.TaskList;
 
 /**
  * A Duke class
@@ -37,10 +38,6 @@ public class Duke extends Application {
             tasks = new TaskList(new ArrayList<>());
         }
     }
-
-//    //public static void main(String[] args) {
-//        new Duke().run();
-//    }
 
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
@@ -132,37 +129,37 @@ public class Duke extends Application {
     public String run(String fullCommand) {
         String firstWord = Parser.getFirstWord(fullCommand);
         switch (firstWord) {
-            case "bye":
-                Storage.saveToFile(tasks.getList());
-                return ui.showBye();
+        case "bye":
+            Storage.saveToFile(tasks.getList());
+            return ui.showBye();
 
-            case "list":
-                return tasks.list();
+        case "list":
+            return tasks.list();
 
-            case "delete":
-                return tasks.delete(Parser.getIndex(fullCommand));
+        case "delete":
+            return tasks.delete(Parser.getIndex(fullCommand));
 
-            case "mark":
-                return tasks.mark(Parser.getIndex(fullCommand));
+        case "mark":
+            return tasks.mark(Parser.getIndex(fullCommand));
 
-            case "unmark":
-                return tasks.unmark(Parser.getIndex(fullCommand));
+        case "unmark":
+            return tasks.unmark(Parser.getIndex(fullCommand));
 
-            case "todo":
-                return tasks.addTodo(fullCommand);
+        case "todo":
+            return tasks.addTodo(fullCommand);
 
-            case "deadline":
-                return tasks.addDeadline(fullCommand);
+        case "deadline":
+            return tasks.addDeadline(fullCommand);
 
-            case "event":
-                return tasks.addEvent(fullCommand);
+        case "event":
+            return tasks.addEvent(fullCommand);
 
-            case "find":
-                return tasks.find(fullCommand);
+        case "find":
+            return tasks.find(fullCommand);
 
-            default:
-                return "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
-            }
+        default:
+            return "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+        }
     }
 }
 
