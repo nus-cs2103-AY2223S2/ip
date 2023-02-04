@@ -8,7 +8,9 @@ import aqua.exception.IllegalSyntaxException;
 import aqua.exception.LoadException;
 import aqua.exception.ProcedureExecutionException;
 import javafx.application.Platform;
-import javafx.stage.Popup;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import javafx.stage.Window;
 
 
@@ -130,8 +132,14 @@ public class IoManager {
     }
 
 
-    public void popup(Popup popup) {
-        Platform.runLater(() -> Optional.ofNullable(windowSupplier.get())
-                .ifPresent(popup::show));
+    public void popup(Parent root) {
+        Platform.runLater(() -> showPopup(root));
+    }
+
+
+    private void showPopup(Parent root) {
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 }
