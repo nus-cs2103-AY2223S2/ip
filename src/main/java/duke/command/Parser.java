@@ -30,21 +30,22 @@ public class Parser {
     }
 
     /**
-     * Parses the user's input and execute the necessary actions associated with the command
+     * Parses the user's input and execute the necessary actions associated with the command before returning an acknowledgement.
      * @param command
      * @param echo The user input to be parsed to be used in the execution of its associated command.
-     * @return a boolean value that determines whether the program will continue or halt.
+     * @return a string that describes the action done.
      * @throws DukeException if there is missing required information in the user's input.
      */
-    public boolean execute(Command command, String echo) throws DukeException {
+    public String execute(Command command, String echo) throws DukeException {
         // to be converted into the right (sub) task below
         Task task = null;
+        String ret = "";
         switch (command) {
         case BYE: {
-            return true;
+            return "BYE";
         }
         case LIST: {
-            System.out.println(Span.format("Here are the tasks in your list:\n" + tasks.listTasks()));
+            ret = "Here are the tasks in your list:\n" + tasks.listTasks();
             break;
         }
         case MARK: {
@@ -54,7 +55,7 @@ public class Parser {
             int taskNum = Integer.parseInt(echo.substring(5).trim());
             if (1 <= taskNum && taskNum <= tasks.getSize()) {
                 String marked = tasks.toggleMark(taskNum);
-                System.out.println(Span.format("Nice! I've marked this task as done:\n\t" + marked));
+                ret = "Nice! I've marked this task as done:\n\t" + marked;
             } else {
                 throw new InvalidIndexException(taskNum);
             }
@@ -67,7 +68,7 @@ public class Parser {
             int taskNum = Integer.parseInt(echo.substring(7).trim());
             if (1 <= taskNum && taskNum <= tasks.getSize()) {
                 String unmarked = tasks.toggleUnmark(taskNum);
-                System.out.println(Span.format("OK, I've marked this task as not done yet:\n\t" + unmarked));
+                ret = "OK, I've marked this task as not done yet:\n\t" + unmarked;
             } else {
                 throw new InvalidIndexException(taskNum);
             }
@@ -80,13 +81,11 @@ public class Parser {
             int taskNum = Integer.parseInt(echo.substring(7).trim());
             if (1 <= taskNum && taskNum <= tasks.getSize()) {
                 Task removed = tasks.delete(taskNum);
-                System.out.println(Span.format(
-                        "Noted. I've removed this task:\n\t"
-                                + removed.getStatusIcon()
-                                + "\n" + "Now you have "
-                                + tasks.getSize()
-                                + " task(s) in the list.")
-                );
+                ret = "Noted. I've removed this task:\n\t"
+                        + removed.getStatusIcon()
+                        + "\n" + "Now you have "
+                        + tasks.getSize()
+                        + " task(s) in the list.";
             } else {
                 throw new InvalidIndexException(taskNum);
             }
@@ -140,12 +139,9 @@ public class Parser {
                 throw new DukeException("Date input in the format of YYYY-MM-DD required!");
             }
             LocalDate date = LocalDate.parse(echo.substring(11).trim());
-            System.out.println(
-                    Span.format("Here are the deadlines/events on "
-                        + date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
-                            + ":\n" + tasks.listAllOnDate(date)
-                    )
-            );
+            ret = "Here are the deadlines/events on "
+                    + date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                    + ":\n" + tasks.listAllOnDate(date);
             break;
         }
         case FIND: {
@@ -153,10 +149,7 @@ public class Parser {
                 throw new DukeException("Please supply a word to find!");
             }
             String toFind = echo.substring(5);
-            System.out.println(Span.format(
-                    tasks.find(toFind)
-                    )
-            );
+            ret = tasks.find(toFind);
             break;
         }
         default:
@@ -164,14 +157,12 @@ public class Parser {
         }
         if (task != null) {
             tasks.addTask(task);
-            System.out.println(Span.format(
-                    "Got it. I've added this task:\n\t"
-                            + task.getStatusIcon()
-                            + "\n" + "Now you have "
-                            + tasks.getSize()
-                            + " task(s) in the list.")
-            );
+            ret = "Got it. I've added this task:\n\t"
+                    + task.getStatusIcon()
+                    + "\n" + "Now you have "
+                    + tasks.getSize()
+                    + " task(s) in the list.";
         }
-        return false;
+        return ret;
     }
 }
