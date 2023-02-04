@@ -20,21 +20,25 @@ public class Duke {
         }
         Scanner sc = new Scanner(file);
         while (sc.hasNextLine()) {
-            Task task;
-            String[] line = sc.nextLine().split("\\|");
-            if (line[0].equals("T")) {
-                task = new Todo(line[2].strip());
-            } else if (line[0].equals("D")) {
-                task = new Deadline(line[2], line[3]);
-            } else {
-                task = new Event(line[2], line[3], line[4]);
+            try {
+                Task task;
+                String[] line = sc.nextLine().split("\\|");
+                if (line[0].equals("T")) {
+                    task = new Todo(line[2].strip());
+                } else if (line[0].equals("D")) {
+                    task = new Deadline(line[2], line[3]);
+                } else {
+                    task = new Event(line[2], line[3], line[4]);
+                }
+    
+                if (line[1] == "1") {
+                    task.mark();
+                }
+    
+                taskList.add(task);
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
             }
-
-            if (line[1] == "1") {
-                task.mark();
-            }
-
-            taskList.add(task);
         }
         sc.close();
         return taskList;

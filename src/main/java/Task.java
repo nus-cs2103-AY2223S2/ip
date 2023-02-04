@@ -15,6 +15,11 @@ public class Task {
         return date.format(format);
     }
 
+    public String convertFileDate(LocalDate date) {
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        return date.format(format);
+    }
+
     public void mark() {
         this.isDone = true;
     }

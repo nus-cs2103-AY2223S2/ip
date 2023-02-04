@@ -15,8 +15,8 @@ class Event extends Task {
     @Override
     public String getFileDesc() {
         return this.isDone
-        ? "E|1|" + this.name + "|" + this.startDate + "|" + this.endDate
-        : "E|0|" + this.name + "|" + this.startDate + "|" + this.endDate;
+        ? "E|1|" + this.name + "|" + convertFileDate(this.from) + "|" + convertFileDate(this.to)
+        : "E|0|" + this.name + "|" + convertFileDate(this.from) + "|" + convertFileDate(this.to);
     }
 
     @Override
