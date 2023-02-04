@@ -45,43 +45,55 @@ public class Ui {
      * Displays the error message.
      * @param err Error.
      */
-    public void showError(Exception err) {
+    public String showError(Exception err) {
         String msg = err.getMessage();
         System.out.println(msg);
+
+        String formats = "Here are the appropriate formats to use:\n"
+                + "todo DESC\n"
+                + "deadline DESC /by DD/MM/YYYY HHMM\n"
+                + "event DESC /from DD/MM/YYYY HHMM /to DD/MM/YYYY HHMM\n"
+                + "list\n"
+                + "find KEYWORD\n"
+                + "mark TASK_NUM\n"
+                + "unmark TASK_NUM\n"
+                + "delete TASK_NUM\n"
+                + "bye";
+
+        String response = "";
+        response = response + msg + "\n";
+
         if (msg.equals("Hmm, your command format's a little off!")) {
-            System.out.println("Here are the appropriate formats to use:");
-            System.out.println("todo DESC");
-            System.out.println("deadline DESC /by DD/MM/YYYY HHMM");
-            System.out.println("event DESC /from DD/MM/YYYY HHMM /to DD/MM/YYYY HHMM");
-            System.out.println("list");
-            System.out.println("find KEYWORD");
-            System.out.println("mark TASK_NUM");
-            System.out.println("unmark TASK_NUM");
-            System.out.println("delete TASK_NUM");
-            System.out.println("bye");
+            System.out.println(formats);
+            response += formats;
         }
+        return response;
     }
 
-    public void sayBye() {
-        System.out.println("Bye bye :( Hope to see you again soon!");
+    /**
+     * Says bye to the user.
+     * @return
+     */
+    public String sayBye() {
+        String response = "Bye bye :( Hope to see you again soon!";
+        System.out.println(response);
+        return response;
     }
 
     /**
      * Tells the user that a task has been marked done.
      * @param t The task that has been marked done.
      */
-    public void mark(Task t) {
-        System.out.println("Okie! I've marked this task as done:");
-        System.out.println(t);
+    public String mark(Task t) {
+        return "Okie! I've marked this task as done:\n" + t;
     }
 
     /**
      * Tells the user that a task has been marked undone.
      * @param t The task that has been marked done.
      */
-    public void unmark(Task t) {
-        System.out.println("Okie! I've marked this task as not done yet:");
-        System.out.println(t);
+    public String unmark(Task t) {
+        return "Okie! I've marked this task as not done yet:\n" + t;
     }
 
     /**
@@ -89,10 +101,14 @@ public class Ui {
      * @param t The task that has been added.
      * @param tasks List of tasks.
      */
-    public void add(Task t, TaskList tasks) {
-        System.out.println("Alright! I've added this task:");
-        System.out.println(t);
-        showTaskListStatus(tasks);
+    public String add(Task t, TaskList tasks) {
+
+        String response = "Alright! I've added this task:\n"
+                + t
+                + "\n" + showTaskListStatus(tasks);
+
+        System.out.println(response);
+        return response;
     }
 
     /**
@@ -100,34 +116,42 @@ public class Ui {
      * @param t The task that has been deleted.
      * @param tasks List of tasks.
      */
-    public void delete(Task t, TaskList tasks) {
-        System.out.println("Okie! I've removed this task:");
-        System.out.println(t);
-        showTaskListStatus(tasks);
+    public String delete(Task t, TaskList tasks) {
+        String response = "Okie! I've removed this task:\n"
+                + t
+                + "\n" + showTaskListStatus(tasks);
+        System.out.println(response);
+        return response;
     }
 
-    void showTaskListStatus(TaskList tasks) {
+    String showTaskListStatus(TaskList tasks) {
+        String response;
         if (tasks.size() == 1) { // grammar
-            System.out.println("Now you have 1 task on your list.");
+            response = "Now you have 1 task on your list.";
         } else {
-            System.out.println(String.format("Now you have %s tasks on your list.", tasks.size()));
+            response = String.format("Now you have %s tasks on your list.", tasks.size());
         }
+        System.out.println(response);
+        return response;
     }
 
     /**
      * Lists the tasks in the TaskList.
      * @param tasks List of tasks.
      */
-    public void list(TaskList tasks) {
+    public String list(TaskList tasks) {
+        String response;
         if (tasks.isEmpty()) {
-            System.out.println("Your list is currently empty!");
+            response = "Your list is currently empty!";
         } else {
-            System.out.println("Here are all the things on your list!");
+            response = "Here are all the things on your list!";
             for (int i = 0; i < tasks.size(); i++) {
                 Task t = tasks.get(i);
-                System.out.println(String.format("%s. %s", i + 1, t));
+                response = response + "\n" + String.format("%s. %s", i + 1, t);
             }
         }
+        System.out.println(response);
+        return response;
     }
 
     /**
@@ -135,13 +159,15 @@ public class Ui {
      * @param keyword Keyword to find in list of tasks.
      * @param tasks List of tasks.
      */
-    public void find(String keyword, TaskList tasks) {
-        System.out.println("Here are all the things on your list with this keyword!");
+    public String find(String keyword, TaskList tasks) {
+        String response = "Here are all the things on your list with this keyword!";
         for (int i = 0; i < tasks.size(); i++) {
             Task t = tasks.get(i);
             if (t.getDesc().contains(keyword)) {
-                System.out.println(String.format("%s. %s", i + 1, t));
+                response = response + "\n" + String.format("%s. %s", i + 1, t);
             }
         }
+        System.out.println(response);
+        return response;
     }
 }

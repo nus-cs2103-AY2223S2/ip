@@ -11,6 +11,7 @@ import duke.ui.Ui;
  */
 public class Duke {
 
+    private static final String DIR_PATH = "./data/";
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
@@ -28,6 +29,13 @@ public class Duke {
             ui.setFirstTime(true);
             this.tasks = new TaskList();
         }
+    }
+
+    /**
+     * Creates a new Duke with a default directory path.
+     */
+    public Duke() {
+        this(DIR_PATH);
     }
 
     /**
@@ -50,6 +58,16 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("./data/").run();
+        new Duke(DIR_PATH).run();
     }
+
+    String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, ui, storage);
+        } catch (Exception err) {
+            return ui.showError(err);
+        }
+    }
+
 }

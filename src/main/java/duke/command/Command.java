@@ -16,5 +16,5 @@ public abstract class Command {
     public boolean isBye() {
         return false;
     }
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException;
 }

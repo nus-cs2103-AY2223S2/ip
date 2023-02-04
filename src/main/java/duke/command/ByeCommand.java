@@ -25,8 +25,8 @@ public class ByeCommand extends Command {
      * @throws DukeException
      * @throws IOException
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
-        ui.sayBye();
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
         storage.saveTasks(tasks);
+        return ui.sayBye();
     }
 }

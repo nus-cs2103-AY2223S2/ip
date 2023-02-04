@@ -28,7 +28,8 @@ public class UnmarkCommand extends Command {
      * @throws DukeException
      * @throws IOException
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
+        String response;
         if (num <= 0) {
             throw new DukeInvalidArgumentException("Huh? Your task number needs to be greater than zero!");
         } else if (num > tasks.size()) {
@@ -36,9 +37,10 @@ public class UnmarkCommand extends Command {
         } else {
             Task t = tasks.unmark(num - 1);
             ui.showBunny();
-            ui.unmark(t);
+            response = ui.unmark(t);
         }
         storage.saveTasks(tasks);
+        return response;
     }
 
 }

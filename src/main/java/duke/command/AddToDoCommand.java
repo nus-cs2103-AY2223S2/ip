@@ -24,12 +24,13 @@ public class AddToDoCommand extends Command {
      * @param storage Storage to save and load list of tasks.
      * @throws IOException
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         ToDo t = new ToDo(desc);
         tasks.add(t);
         ui.showBunny();
-        ui.add(t, tasks);
+        String response = ui.add(t, tasks);
         storage.saveTasks(tasks);
+        return response;
     }
 
 }

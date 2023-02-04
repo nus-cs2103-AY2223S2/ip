@@ -15,9 +15,9 @@ public class ListCommand extends Command {
      * @param ui UI handler.
      * @param storage Storage to save and load list of tasks.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         ui.showBunny();
-        ui.list(tasks);
+        return ui.list(tasks);
     }
 
 }
