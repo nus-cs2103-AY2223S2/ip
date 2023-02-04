@@ -107,9 +107,11 @@ public class Ui {
             break;
         case CONFUSED:
             standard = "I don't quite understand, please try again.";
+            isErrorPrinted = true;
             break;
         case REJECT:
             standard = "Sorry, I can't handle that right now.";
+            isErrorPrinted = true;
             break;
         default:
             standard = "I'm most definitely a teapot.";

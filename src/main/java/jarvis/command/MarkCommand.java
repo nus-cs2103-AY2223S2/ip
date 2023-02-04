@@ -1,6 +1,6 @@
 package jarvis.command;
 
-import jarvis.exception.command.InvalidParameterException;
+import jarvis.exception.command.CommandParseException;
 import jarvis.storage.Storage;
 import jarvis.task.TaskList;
 import jarvis.ui.Ui;
@@ -35,7 +35,7 @@ public class MarkCommand extends Command {
     public void execute(Ui ui, TaskList taskList, Storage storage) {
         try {
             ui.print(taskList.setTaskDone(this.index, this.isDone));
-        } catch (InvalidParameterException e) {
+        } catch (CommandParseException e) {
             ui.printError(e.getFriendlyMessage());
         }
     }

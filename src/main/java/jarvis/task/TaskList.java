@@ -5,7 +5,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import jarvis.exception.command.CommandParseException;
 import jarvis.exception.command.InvalidIndexException;
+import jarvis.exception.command.InvalidParameterException;
 
 /**
  * Container class for tasks and their corresponding operations.
@@ -51,7 +53,13 @@ public class TaskList {
      * @return List of response lines.
      * @throws InvalidIndexException If the index to delete is invalid.
      */
-    public List<String> deleteTask(int index) throws InvalidIndexException {
+    public List<String> deleteTask(int index) throws CommandParseException {
+        if (this.tasks.isEmpty()) {
+            throw new InvalidParameterException(
+                    "TaskList is empty",
+                    "There are no tasks to delete, please add a task first."
+            );
+        }
         if (index <= 0 || index > this.tasks.size()) {
             throw new InvalidIndexException(1, this.tasks.size());
         }
@@ -70,9 +78,12 @@ public class TaskList {
      * @param isDone Whether the task is marked as done.
      * @return List of response lines.
      */
-    public List<String> setTaskDone(int index, boolean isDone) throws InvalidIndexException {
+    public List<String> setTaskDone(int index, boolean isDone) throws CommandParseException {
         if (this.tasks.isEmpty()) {
-            return List.of("There are no tasks to mark, please add a task first.");
+            throw new InvalidParameterException(
+                    "TaskList is empty",
+                    "There are no tasks to mark, please add a task first."
+            );
         }
 
         if (index <= 0 || index > this.tasks.size()) {

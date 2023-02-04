@@ -67,7 +67,6 @@ public class Jarvis {
             command = Parser.parse(input);
         } catch (InvalidActionException e) {
             this.ui.printStandard(Ui.Response.CONFUSED);
-            this.ui.setErrorFlag(true);
             return;
         }
         command.execute(this.ui, this.taskList, this.storage);
