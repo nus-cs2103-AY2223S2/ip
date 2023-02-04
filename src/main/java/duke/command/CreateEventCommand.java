@@ -62,6 +62,7 @@ public class CreateEventCommand extends Command {
     public Event createEvent() {
         String[] commandMessageArr = commandMessage.split("/", 3);
         assert commandMessageArr.length == 3 : "event command should split into 3";
+
         return new Event(commandMessageArr[0].substring(6), false,
                 commandMessageArr[1].substring(5).trim(),
                 commandMessageArr[2].substring(3));

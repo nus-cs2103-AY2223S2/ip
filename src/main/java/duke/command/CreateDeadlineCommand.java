@@ -62,6 +62,7 @@ public class CreateDeadlineCommand extends Command {
     public Deadline createDeadline() {
         String[] commandMessageArr = commandMessage.split("/", 2);
         assert commandMessageArr.length == 2 : "deadline command should split into 2";
+
         return new Deadline(commandMessageArr[0].substring(9), false,
                 commandMessageArr[1].substring(3));
     }

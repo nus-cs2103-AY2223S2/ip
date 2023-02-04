@@ -59,6 +59,7 @@ public class UnmarkTaskCommand extends Command {
     public Task unmarkTask() {
         String[] commandMessageArr = commandMessage.split(" ", 2);
         assert commandMessageArr.length == 2 : "unmark command should split into 2";
+
         int taskNumber = Integer.parseInt(commandMessageArr[1]);
         return taskList.unmarkTask(taskNumber);
     }
