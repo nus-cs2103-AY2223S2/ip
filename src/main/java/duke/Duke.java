@@ -79,9 +79,13 @@ public class Duke {
             response.append(ui.bye());
             break;
         case "list":
+            // Fallthrough
+        case "l":
             response.append(tasks);
             break;
         case "todo":
+            // Fallthrough
+        case "t":
             try {
                 Todo newTodo = new Todo(parser.getCommandDetails(userInput));
                 tasks = tasks.add(newTodo);
@@ -96,6 +100,8 @@ public class Duke {
             }
             break;
         case "deadline":
+            // Fallthrough
+        case "d":
             try {
                 String deadlineStr = parser.getDeadline(userInput);
                 String[] split = deadlineStr.split(" ");
@@ -123,6 +129,8 @@ public class Duke {
             }
             break;
         case "event":
+            // Fallthrough
+        case "e":
             try {
                 String eventFromStr = parser.getEventFrom(userInput);
                 String[] splitFrom = eventFromStr.split(" ");
@@ -178,6 +186,8 @@ public class Duke {
             }
             break;
         case "find":
+            // Fallthrough
+        case "f":
             try {
                 TaskList taskListKeyword = tasks.findKeyword(parser.getCommandDetails(userInput));
                 if (taskListKeyword.size() == 0) {
@@ -248,11 +258,15 @@ public class Duke {
                 System.exit(0);
                 break;
             case "list":
+                // Fallthrough
+            case "l":
                 ui.showLine();
                 System.out.println(tasks);
                 ui.showLine();
                 break;
             case "todo":
+                // Fallthrough
+            case "t":
                 try {
                     Todo newTodo = new Todo(parser.getCommandDetails(userInput));
                     tasks = tasks.add(newTodo);
@@ -271,6 +285,8 @@ public class Duke {
                 }
                 break;
             case "deadline":
+                // Fallthrough
+            case "d":
                 try {
                     String deadlineStr = parser.getDeadline(userInput);
                     String[] split = deadlineStr.split(" ");
@@ -302,6 +318,8 @@ public class Duke {
                 }
                 break;
             case "event":
+                // Fallthrough
+            case "e":
                 try {
                     String eventFromStr = parser.getEventFrom(userInput);
                     String[] splitFrom = eventFromStr.split(" ");
@@ -365,6 +383,8 @@ public class Duke {
                 }
                 break;
             case "find":
+                // Fallthrough
+            case "f":
                 try {
                     TaskList taskListKeyword = tasks.findKeyword(parser.getCommandDetails(userInput));
                     ui.showLine();
