@@ -98,6 +98,6 @@ public class Event extends TimedTask {
     @Override
     public String toString() {
         String s = (status) ? "X" : " ";
-        return "E | " + s + " | " + getDes() + " | " + toStringFileStart() + " to " + toStringFileEnd();
+        return this.taskNumber + " | E | " + s + " | " + getDes() + " | " + toStringFileStart() + " to " + toStringFileEnd();
     }
 }

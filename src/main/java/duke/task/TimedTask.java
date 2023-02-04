@@ -77,6 +77,10 @@ public abstract class TimedTask extends Task {
         this.fileEndString = end.format(fileFormat);
     }
 
+    public LocalDateTime getEnd() {
+        return this.end;
+    }
+
     /**
      * Method to display end date time onto console
      *

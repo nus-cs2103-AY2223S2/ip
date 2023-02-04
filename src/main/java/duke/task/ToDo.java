@@ -39,6 +39,6 @@ public class ToDo extends Task {
     @Override
     public String toString() {
         String s = (status) ? "X" : " ";
-        return "T | " + s + " | " + getDes();
+        return this.taskNumber + " | T | " + s + " | " + getDes();
     }
 }

@@ -6,6 +6,7 @@ public class Task {
      */
     boolean status;
     String des;
+    int taskNumber;
 
     /**
      * Constructor to create a generic Task.
@@ -32,6 +33,14 @@ public class Task {
      */
     public void configure(String[] s) {
         setDes(s[0]);
+    }
+
+    public int getTaskNumber() {
+        return this.taskNumber;
+    }
+
+    public void setTaskNumber(int i) {
+        this.taskNumber = i;
     }
 
     /**
@@ -82,6 +91,6 @@ public class Task {
      */
     public String toString() {
         String s = (status) ? "X" : " ";
-        return "  | " + s + this.des;
+        return this.taskNumber + " |   | " + s + this.des;
     }
 }

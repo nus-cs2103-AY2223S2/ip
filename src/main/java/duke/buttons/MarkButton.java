@@ -27,7 +27,7 @@ public class MarkButton extends DukeButton {
 
         markTaskButton.setOnMouseClicked((event) -> {
             String markIndex = markTextField.getText();
-            new MarkTask(this.fn).mark(markIndex, true);
+            MarkTask.mark(super.fn, markIndex, true);
         });
 
         return vbox;
