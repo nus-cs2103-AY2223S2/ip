@@ -27,7 +27,9 @@ public class Duration {
     }
 
     public boolean isEmpty() {
-        return days == 0;
+        return days == 0
+                && hours == 0
+                && minutes == 0;
     }
 
     /**
