@@ -28,7 +28,7 @@ public class TodoButton extends DukeButton {
 
         addTaskButton.setOnMouseClicked((event) -> {
             String des = desTextField.getText();
-            new CreateTodo(this.fn).todo(des);
+            CreateTodo.todo(super.fn, des);
         });
 
         return vbox;

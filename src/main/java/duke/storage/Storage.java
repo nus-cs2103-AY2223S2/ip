@@ -45,10 +45,10 @@ public class Storage {
                     continue;
                 }
                 String[] line = l.split(" \\| ");
-                Task t = TaskMap.get(line[0]);
-                assert t instanceof Task : "Task not loaded from save file";
-                t.setStatus(line[1].equals("X") ? true : false);
-                t.configure(Arrays.copyOfRange(line, 2, line.length));
+                Task t = TaskMap.get(line[1]);
+                t.setTaskNumber(Integer.parseInt(line[0]));
+                t.setStatus(line[2].equals("X") ? true : false);
+                t.configure(Arrays.copyOfRange(line, 3, line.length));
                 tl.loadTask(t);
             }
             sc.close();
@@ -57,8 +57,9 @@ public class Storage {
         } catch (DateTimeParseException e) {
             System.out.println("Task file corrupted");
             e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
         return tl;
     }
 

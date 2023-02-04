@@ -34,7 +34,7 @@ public class EventButton extends DukeButton {
             String des = desTextField.getText();
             String start = startTextField.getText();
             String end = endTextField.getText();
-            new CreateEvent(this.fn).events(des, start, end);
+            CreateEvent.events(super.fn, des, start, end);
         });
 
         return vbox;

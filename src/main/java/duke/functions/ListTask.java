@@ -1,25 +1,27 @@
 package duke.functions;
 
-public class ListTask extends Functions {
-    /**
-     * Constructor for an instance of Function.
-     *
-     * @param fn Function object that defines the overall function of the Duke program
-     */
-    public ListTask(Functions fn) {
-        super(fn.getTl(), fn.getSt(), fn.getOutputLayout());
-    }
+import java.util.Collections;
+
+public class ListTask {
 
     /**
      * Method to define function of list command
      */
-    public void list() {
+    static public void list(Functions fn) {
         String h = "Here are the tasks in your list:\n";
         String l = "";
-        for (int i = 0; i < tl.count(); i++) {
-            String s = i + 1 + "." + tl.getTask(i).printStatus();
+        for (int i = 0; i < fn.tl.count(); i++) {
+            String s = i + 1 + "." + fn.tl.getTask(i).printStatus();
             l += s;
         }
-        outputLayout.getChildren().add(getDialogLabel(h + l));
+        fn.getOutputLayout().getChildren().add(fn.getDialogLabel(h + l));
+    }
+
+    static public void deadlineSort(Functions fn) {
+        Collections.sort(fn.tl.iterable(), new TaskListSort.SortByDeadline());
+    }
+
+    static public void defaultSort(Functions fn) {
+        Collections.sort(fn.tl.iterable(), new TaskListSort.SortByDefault());
     }
 }

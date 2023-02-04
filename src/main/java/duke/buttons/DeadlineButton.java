@@ -31,7 +31,7 @@ public class DeadlineButton extends DukeButton {
         addTaskButton.setOnMouseClicked((event) -> {
             String des = desTextField.getText();
             String end = endTextField.getText();
-            new CreateDeadline(this.fn).deadline(des, end);
+            CreateDeadline.deadline(super.fn, des, end);
         });
         return vbox;
     }

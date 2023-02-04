@@ -27,7 +27,7 @@ public class UnmarkButton extends DukeButton {
 
         unmarkTaskButton.setOnMouseClicked((event) -> {
             String markIndex = unmarkTextField.getText();
-            new MarkTask(this.fn).mark(markIndex, false);
+            MarkTask.mark(super.fn, markIndex, false);
         });
 
         return vbox;

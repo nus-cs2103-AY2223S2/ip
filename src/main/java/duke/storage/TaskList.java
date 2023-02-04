@@ -10,12 +10,14 @@ public class TaskList {
      * Represents the list of task user has created, or loaded from file.
      */
     List<Task> list;
+    int count;
 
     /**
      * Constructor to create an instance of Tasklist
      */
     public TaskList() {
         this.list = new ArrayList<>();
+        this.count = 0;
     }
 
     /**
@@ -24,6 +26,8 @@ public class TaskList {
      * @param t Task object representing task created
      */
     public String addTask(Task t) {
+        this.count++;
+        t.setTaskNumber(count);
         this.list.add(t);
         return printCount() + t.printStatus();
     }
@@ -34,6 +38,7 @@ public class TaskList {
      * @param t Task object read from file
      */
     public void loadTask(Task t) {
+        this.count++;
         this.list.add(t);
     }
 
@@ -43,6 +48,7 @@ public class TaskList {
      * @param index Index of task in TaskList
      */
     public void removeTask(int index) {
+        this.count--;
         this.list.remove(index);
     }
 
@@ -71,7 +77,7 @@ public class TaskList {
      * @return Int representation of count of Tasks in TaskList
      */
     public int count() {
-        return this.list.size();
+        return this.count;
     }
 
     /**

@@ -42,6 +42,6 @@ public class Deadline extends TimedTask {
     @Override
     public String toString() {
         String s = (status) ? "X" : " ";
-        return "D | " + s + " | " + getDes() + " | " + super.toStringFileEnd();
+        return this.taskNumber + " | D | " + s + " | " + getDes() + " | " + super.toStringFileEnd();
     }
 }
