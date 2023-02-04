@@ -44,8 +44,11 @@ public abstract class Task {
      *  @param keyword the string to check if description contains it
      * @return true if keyword is contained
      */
-    public boolean hasKeyword(String keyword) {
-        return description.contains(keyword);
+    public boolean hasKeyword(String ... keyword) {
+        for (String word : keyword) {
+            if (description.contains(word)) return true;
+        }
+        return false;
     }
 
     /**

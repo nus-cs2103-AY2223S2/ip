@@ -65,12 +65,15 @@ public class TaskList {
     /**
      * Prints tasks which contains the given keyword by the user.
      *
-     * @param keyword is the keyword to be searched against the task descriptions
+     * @param keywords is the keyword to be searched against the task descriptions
      */
-    public void findTaskIndexWithKeyword(String keyword) {
+    public void findTaskIndexWithKeyword(String ... keywords) {
         for (Task t : listOfTasks) {
-            if (t.hasKeyword(keyword)) {
-                System.out.println((listOfTasks.indexOf(t) + 1) + ". " + t.toString());
+            for (String wordToMatch : keywords) {
+                if (t.hasKeyword(wordToMatch)) {
+                    System.out.println((listOfTasks.indexOf(t) + 1) + ". " + t.toString());
+                    break;
+                }
             }
         }
     }
