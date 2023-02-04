@@ -12,9 +12,9 @@ public class Task {
      * @param taskDescription description of the task
      * @param isCompleted whether the task is completed; 0 for not completed, 1 for completed
      */
-    public Task(String taskDescription, int isCompleted) {
+    public Task(String taskDescription, boolean isCompleted) {
         this.taskDescription = taskDescription;
-        this.taskStatus = isCompleted == 0 ? TaskStatus.NOT_DONE : TaskStatus.DONE;
+        this.taskStatus = isCompleted? TaskStatus.NOT_DONE : TaskStatus.DONE;
     }
 
     /**
@@ -54,7 +54,7 @@ public class Task {
      * @return the formatted String representation
      */
     public String formatForSave() {
-        int isCompleted = taskStatus == TaskStatus.DONE ? 1 : 0;
+        String isCompleted = taskStatus == TaskStatus.DONE ? "DONE" : "NOT_DONE";
         return isCompleted + "<>" + taskDescription;
     }
 }

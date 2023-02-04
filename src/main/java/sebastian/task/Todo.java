@@ -9,10 +9,10 @@ public class Todo extends Task {
 
     /**
      * Constructor
-     * @param isCompleted whether the to-do is completed; 0 for not completed, 1 for completed
+     * @param isCompleted whether the to-do is completed
      * @param taskDescription description of the to-do
      */
-    public Todo(int isCompleted, String taskDescription) {
+    public Todo(boolean isCompleted, String taskDescription) {
         super(taskDescription, isCompleted);
     }
 

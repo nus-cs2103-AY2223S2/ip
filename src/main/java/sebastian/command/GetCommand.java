@@ -33,7 +33,7 @@ public class GetCommand extends Command {
             throws LackOfArgumentException, GetFormatMismatchException {
         String[] insArr = instruction.split(" ");
         if (insArr.length == 1) {
-            throw new LackOfArgumentException();
+            throw new LackOfArgumentException("Please specify a date");
         } else if (insArr.length == 2) {
             try {
                 String res = taskList.getTasksOnDate(insArr[1]).toString();
@@ -41,8 +41,10 @@ public class GetCommand extends Command {
             } catch (DateTimeParseException e) {
                 throw new GetFormatMismatchException();
             }
-        } else {
+        } else if (insArr.length > 2) {
             throw new GetFormatMismatchException();
+        } else {
+            throw new Error("Internal Error");
         }
     }
 }

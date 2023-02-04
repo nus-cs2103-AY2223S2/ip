@@ -10,7 +10,7 @@ import sebastian.exceptions.CannotLoadDataException;
 import sebastian.exceptions.CannotWriteDataException;
 import sebastian.exceptions.DeadlineFormatMismatchException;
 import sebastian.exceptions.EventFormatMismatchException;
-
+import sebastian.task.TaskStatus;
 
 
 /**
@@ -36,7 +36,7 @@ public class Storage {
             while ((curLine = br.readLine()) != null) {
                 String[] curTask = curLine.split("<>");
                 String taskType = curTask[0];
-                int isCompleted = Integer.parseInt(curTask[1]);
+                boolean isCompleted = curTask[1].equals("DONE");
                 String taskDescription = curTask[2];
                 switch (taskType) {
                 case "T":
@@ -84,6 +84,4 @@ public class Storage {
         }
 
     }
-
-
 }
