@@ -238,10 +238,27 @@ public class GuiText {
         return isSuccessful ? "Tasks successfully loaded from storage!" : "Loading from storage failed.";
     }
 
-    public String showHelp() {
+    /**
+     * Generates the text to put in the separate
+     * help window.
+     *
+     * @return Text to put in the separate help window.
+     */
+    public static String generateHelpWindowText() {
         String acceptedCommands = "Here are all the commands that I accept!\n"
                 + "\n";
         return acceptedCommands + CommandType.getAllCommandFormatString();
+    }
+
+    /**
+     * Returns the text to show when
+     * user uses the help command.
+     *
+     * @param isHelpWindowOpen Whether the help window is already open.
+     * @return Text to show.
+     */
+    public static String showHelp(boolean isHelpWindowOpen) {
+        return !isHelpWindowOpen ? "The help window has been opened!" : "The help window is already open!";
     }
 
 }
