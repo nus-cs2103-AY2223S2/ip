@@ -38,7 +38,7 @@ public class Sebastian {
             return ui.getGreeting();
         } catch (CannotLoadDataException e) {
             tasks = new TaskList();
-            return ui.getError(e.getMessage());
+            return ui.getError(e.getMessage()) + "\n" + ui.getGreeting();
         }
     }
 
