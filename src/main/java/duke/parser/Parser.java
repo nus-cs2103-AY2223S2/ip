@@ -40,7 +40,7 @@ public class Parser {
                 System.out.println(eventFormatter[0]);
                 //System.out.println(eventFormatter[1]);
                 if (details.length < 3 ) {
-                    throw new DukeException("Either the description or dates (from/to) of the task is missing");
+                    throw new IllegalArgumentException("Either the description or dates (from/to) of the task is missing");
                 }
                 else {
                     String[] startEndDate = eventFormatter[1].split(" /to ");
