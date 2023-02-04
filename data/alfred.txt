@@ -1,3 +1,2 @@
-T | 0 | return book
-T | 0 | returnnb ook
-T | 0 | read book
+D | 1 | return book  | 12/12/2023 1200
+E | 0 | project meeting  | 12/12/2023 1200-12/12/2023 1400
