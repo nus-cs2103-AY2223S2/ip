@@ -42,7 +42,7 @@ public class DialogBox extends HBox {
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
-    private void flip() {
+    private void flipDialogBox() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
@@ -55,7 +55,7 @@ public class DialogBox extends HBox {
 
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
-        db.flip();
+        db.flipDialogBox();
         return db;
     }
 }

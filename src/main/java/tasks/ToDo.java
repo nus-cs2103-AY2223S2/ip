@@ -67,10 +67,10 @@ public class ToDo extends Task {
     @Override
     public void mark() {
         super.mark();
-        System.out.println(String.format(" [%s][%s] %s",
+        System.out.printf(" [%s][%s] %s%n",
                 this.getTaskType(),
                 this.getStatusIcon(),
-                this.description));
+                this.description);
     }
 
     /**
@@ -79,10 +79,10 @@ public class ToDo extends Task {
     @Override
     public void unmark() {
         super.unmark();
-        System.out.println(String.format(" [%s][%s] %s",
+        System.out.printf(" [%s][%s] %s%n",
                 this.getTaskType(),
                 this.getStatusIcon(),
-                this.description));
+                this.description);
     }
 
     /**

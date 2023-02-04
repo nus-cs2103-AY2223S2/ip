@@ -7,26 +7,10 @@ import java.util.Scanner;
  */
 public class Ui {
 
-    private static final String BANNER = "____________________________________________________________";
     private static final String WELCOME_MSG = "Greetings! JEDI GRANDMASTER YODA here\n" + "For you, What can I do?";
     private static final String BYE_MSG = "Be Gone, You Must. May the Force be with You!";
-
     /**
-     * Responds to the command given by standard input with the appropriate formatting.
-     * @param command the input that is retrieved from standard input
-     * @param nextLine provides necessary indent should requested
-     */
-    public void respond(String command, boolean nextLine) {
-        String answer = "";
-        if (nextLine) {
-            answer += BANNER;
-        }
-        answer += "\n" + command + "\n" + BANNER;
-        System.out.println(answer);
-    }
-
-    /**
-     * Displays the Good Bye message.
+     * Displays the Goodbye message.
      */
     public void displayByeMessage() {
         System.out.println(BYE_MSG);
@@ -40,22 +24,11 @@ public class Ui {
     public String readCommand(Scanner scanner) {
         return scanner.nextLine();
     }
-
-    /**
-     * Displays the welcome message when launched.
-     */
-    public void displayWelcomeMessage() {
-        System.out.println(String.format("%s\n%s\n%s", BANNER, WELCOME_MSG, BANNER));
-    }
     public String getWelcomeMsg() {
         return WELCOME_MSG;
     }
     public String getByeMsg() {
         return BYE_MSG;
-    }
-
-    public void showMessage(String message) {
-        System.out.println(message);
     }
     /**
      * Shows exception message thrown to the UI.
