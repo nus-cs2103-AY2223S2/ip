@@ -39,9 +39,4 @@ public class Recur extends Events implements Runnable  {
         System.out.println("Scheduled task");
     }
 
-
-
-
-
-
 }

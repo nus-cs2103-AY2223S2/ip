@@ -33,8 +33,6 @@ public class Main extends Application {
             //bp.getChildren().
             //Button button = scene2.lookup("#goButton");
 
-
-
             /*
             Label label1 = new Label("Welcome to Manchester United");
             Button button = new Button();

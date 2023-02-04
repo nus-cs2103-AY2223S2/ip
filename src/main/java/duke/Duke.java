@@ -85,7 +85,6 @@ public class Duke {
 
     @FXML
     protected String getResponse(String input) {
-        //return storeString.toString();
 
         storage = new Storage();
         storage.readFromFile();
@@ -100,32 +99,14 @@ public class Duke {
         PrintStream oldPrintStream = System.out;
         System.setOut(printStream);
 
-        /*
-        ui = new Ui();
-        */
-
         ui = new Ui(input);
-        /*
-        ui.showWelcome();
-        Label greeting = new Label(storeString.toString());
-        */
-        //System.out.flush();
-
-        //System.out.println(storeString.toString());
-        //System.setOut(oldPrintStream);
-//        storeString = new ByteArrayOutputStream();
-//        printStream = new PrintStream(storeString);
-//        System.setOut(printStream);
-
-
         taskList = ui.execute(taskList);
 
         System.out.flush();
         System.setOut(oldPrintStream);
-        //System.out.println(storeString.toString());
 
         storage.writeToFile(taskList.toString());
-        System.out.println("Store string " + storeString.toString());
+        System.out.println("Store string " + storeString);
         return storeString.toString();
 
     }
