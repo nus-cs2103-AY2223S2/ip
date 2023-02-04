@@ -1,4 +1,4 @@
-package aqua.graphic;
+package aqua.graphic.schedule;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

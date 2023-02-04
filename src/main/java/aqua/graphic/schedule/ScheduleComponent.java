@@ -1,4 +1,4 @@
-package aqua.graphic;
+package aqua.graphic.schedule;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -27,7 +27,9 @@ public class ScheduleComponent extends VBox {
         }
         for (Timeable timeable : timeables) {
             int startDay = (int) startTime.until(timeable.getStart(), ChronoUnit.DAYS);
+            startDay = Math.max(0, startDay);
             int endDay = (int) startTime.until(timeable.getEnd(), ChronoUnit.DAYS);
+            endDay = Math.min(DAYS_IN_WEEK - 1, endDay);
             for (int i = startDay; i <= endDay; i++) {
                 sepTimeables.get(i).add(timeable);
             }

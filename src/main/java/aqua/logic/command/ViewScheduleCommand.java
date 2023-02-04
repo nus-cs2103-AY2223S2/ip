@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import aqua.aquatask.AquaTask;
-import aqua.graphic.ScheduleComponent;
+import aqua.graphic.schedule.ScheduleComponent;
 import aqua.logic.ArgumentMap;
 import aqua.logic.ExecutionDisplayerTask;
 import aqua.logic.ExecutionService;
