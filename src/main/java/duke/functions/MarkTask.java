@@ -1,14 +1,12 @@
 package duke.functions;
 
-import duke.dukeExceptions.DukeException;
 import duke.task.Task;
 
 public class MarkTask extends Functions {
     /**
      * Constructor for an instance of Function.
      *
-     * @param tl TaskList object that stores all defined tasks
-     * @param st Storage object that controls writing and loading onto/from file
+     * @param fn Function object that defines the overall function of the Duke program
      */
     public MarkTask(Functions fn) {
         super(fn.getTl(), fn.getSt(), fn.getOutputLayout());
@@ -18,7 +16,6 @@ public class MarkTask extends Functions {
      * Method to define function of unmark command
      *
      * @param inp Index of task specified
-     * @throws DukeException
      */
     public void mark(String inp, boolean flag) {
         int index = Integer.parseInt(inp) - 1;

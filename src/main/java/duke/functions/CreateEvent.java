@@ -7,8 +7,7 @@ public class CreateEvent extends Functions {
     /**
      * Constructor for an instance of Function.
      *
-     * @param tl TaskList object that stores all defined tasks
-     * @param st Storage object that controls writing and loading onto/from file
+     * @param fn Function object that defines the overall function of the Duke program
      */
     public CreateEvent(Functions fn) {
         super(fn.getTl(), fn.getSt(), fn.getOutputLayout());
@@ -17,8 +16,9 @@ public class CreateEvent extends Functions {
     /**
      * Method to define function of event command. Create event task
      *
-     * @param inp Description of event task. Define event with "/from ... /to ...".
-     *            Example: deadline task1 /from 12/12/2023 12:12 /to 12/12/2023 23:59
+     * @param des   Description of the task
+     * @param start Start time of the task
+     * @param end   End time of the task
      */
     public void events(String des, String start, String end) {
         Event ev = new Event(false, des, start, end);

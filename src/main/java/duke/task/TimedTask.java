@@ -44,12 +44,14 @@ public abstract class TimedTask extends Task {
     /**
      * Method to assist with loading from file.
      *
-     * @param des String representation loaded from file
+     * @param s String representation loaded from file
      */
     @Override
     public void configure(String[] s) {
         setDes(s[0]);
-        setEnd(dateTimeFileInParse(s[1]).format(isoFormat));
+        String endTime = dateTimeFileInParse(s[1]).format(isoFormat);
+        assert endTime instanceof String : "Line from save file has not been transformed";
+        setEnd(endTime);
     }
 
     /**
@@ -68,7 +70,9 @@ public abstract class TimedTask extends Task {
      * @param s String representation of end date time
      */
     public void setEnd(String s) {
-        this.end = dateTimeConsoleInParse(s);
+        LocalDateTime endTime = dateTimeConsoleInParse(s);
+        assert endTime instanceof LocalDateTime : "End time has not be set properly";
+        this.end = endTime;
         this.consoleEndString = end.format(consoleFormat);
         this.fileEndString = end.format(fileFormat);
     }

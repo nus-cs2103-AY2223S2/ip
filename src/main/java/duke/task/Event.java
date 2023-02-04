@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 public class Event extends TimedTask {
     /**
-     * Represent Event tasks. Event tasks have both start date time and end date time.
+     * Represents Event tasks. Event tasks have both start date time and end date time.
      */
     LocalDateTime start;
     String consoleStartString;
@@ -19,6 +19,11 @@ public class Event extends TimedTask {
 
     /**
      * Constructor for an instance of an Event. Sets the status, description, start time and end time.
+     *
+     * @param status Describes the completion status of the event
+     * @param des    Describes the task
+     * @param start  Specifies the start time of the event
+     * @param end    Specifies the end time of the event
      */
     public Event(boolean status, String des, String start, String end) {
         super();
@@ -31,14 +36,18 @@ public class Event extends TimedTask {
     /**
      * Method used to load saved Event task in file into Duke program. Read file inputs and create appropriate definitions
      *
-     * @param des Description of task. Includes start date time and end date time.
+     * @param s Each line in the save file
      */
     @Override
     public void configure(String[] s) {
         setDes(s[0]);
         String[] d = s[1].split(" to ");
-        setStart(dateTimeFileInParse(d[0]).format(isoFormat));
-        setEnd(dateTimeFileInParse(d[1]).format(isoFormat));
+        String startTime = dateTimeFileInParse(d[0]).format(isoFormat);
+        assert startTime instanceof String : "Line from save file has not been transformed";
+        String endTime = dateTimeFileInParse(d[1]).format(isoFormat);
+        assert endTime instanceof String : "Line from save file has not been transformed";
+        setStart(startTime);
+        setEnd(endTime);
     }
 
     /**
@@ -47,7 +56,9 @@ public class Event extends TimedTask {
      * @param s String representation of start date time
      */
     public void setStart(String s) {
-        this.start = dateTimeConsoleInParse(s);
+        LocalDateTime startTime = dateTimeConsoleInParse(s);
+        assert startTime instanceof LocalDateTime : "Start time has not be set properly";
+        this.start = startTime;
         this.consoleStartString = start.format(super.consoleFormat);
         this.fileStartString = start.format(super.fileFormat);
     }

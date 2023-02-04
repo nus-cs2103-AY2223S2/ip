@@ -10,15 +10,29 @@ public class TaskMap {
      * Assists in loading from file
      */
 
+    /**
+     * Method to assist in interpreting lines from the save file. If line starts with particular letter, corresponding tasks will be created
+     *
+     * @param s Particular letter
+     * @return Corresponding object
+     */
     static public Task get(String s) {
+        Task t = null;
         switch (s) {
         case "T":
-            return new ToDo();
+            t = new ToDo();
+            break;
         case "E":
-            return new Event();
+            t = new Event();
+            break;
         case "D":
-            return new Deadline();
+            t = new Deadline();
+            break;
         }
-        return new Task();
+        assert t == null : "Task not loaded properly";
+        if (t == null) {
+            t = new Task();
+        }
+        return t;
     }
 }
