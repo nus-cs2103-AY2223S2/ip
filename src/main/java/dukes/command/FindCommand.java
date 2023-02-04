@@ -35,39 +35,11 @@ public class FindCommand extends Command {
      * @param ui the UI in charge of user interactions.
      * @param storage handles the loading and saving of files.
      * @throws DukeException if unexpected runtime issue occurs.
-     */
-    public void execute(TaskList tasks, UI ui, Storage storage) throws DukeException {
-        List<Task> findList = tasks.searchTaskList(this.body);
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < findList.size(); i++) {
-            sb.append(i+1).append(". ");
-            sb.append(findList.get(i).toString()).append("\n");
-        }
-        if (sb.length() != 0) {
-            sb.deleteCharAt(sb.length() - 1);
-        }
-        ui.showFind(sb.toString());
-    }
-
-    /**
-     * Print the tasks in the list that matches the specific pattern.
-     *
-     * @param tasks contains the task list.
-     * @param ui the UI in charge of user interactions.
-     * @param storage handles the loading and saving of files.
-     * @throws DukeException if unexpected runtime issue occurs.
      * @return method feedback
      */
     public String runCommand(TaskList tasks, UI ui, Storage storage) throws DukeException {
         List<Task> findList = tasks.searchTaskList(this.body);
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < findList.size(); i++) {
-            sb.append(i+1).append(". ");
-            sb.append(findList.get(i).toString()).append("\n");
-        }
-        if (sb.length() != 0) {
-            sb.deleteCharAt(sb.length() - 1);
-        }
-        return ui.returnFind(sb.toString());
+        String output = processList(findList);
+        return ui.returnFind(output);
     }
 }

@@ -42,28 +42,6 @@ public class DeleteCommand extends Command {
      * @param ui the UI in charge of user interactions.
      * @param storage handles the loading and saving of files.
      * @throws DukeException if the index provided is out of bounds.
-     */
-    public void execute(TaskList tasks, UI ui, Storage storage) throws DukeException {
-        List<Task> taskList = tasks.getTaskList();
-        int index = Integer.parseInt(body);
-        try {
-            Task theTask = taskList.get(index - 1);
-            taskList.remove(theTask);
-            ui.showDelete(theTask, tasks);
-            storage.save(tasks);
-        } catch (IndexOutOfBoundsException ex) {
-            throw new DukeException("You have entered an invalid index.");
-        }
-    }
-
-    /**
-     * Delete the specific task from task list;
-     * save the new task list to hard disk, and provide feedback to user.
-     *
-     * @param tasks contains the task list.
-     * @param ui the UI in charge of user interactions.
-     * @param storage handles the loading and saving of files.
-     * @throws DukeException if the index provided is out of bounds.
      * @return method feedback
      */
     public String runCommand(TaskList tasks, UI ui, Storage storage) throws DukeException {

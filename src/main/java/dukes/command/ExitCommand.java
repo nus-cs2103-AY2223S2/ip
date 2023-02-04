@@ -24,18 +24,6 @@ public class ExitCommand extends Command {
     }
 
     /**
-     * Expect to do nothing, just break the while cycle.
-     *
-     * @param tasks contains the task list.
-     * @param ui the UI in charge of user interactions.
-     * @param storage handles the loading and saving of files.
-     * @throws DukeException if the index provided is out of bounds.
-     */
-    public void execute(TaskList tasks, UI ui, Storage storage) throws DukeException {
-        // do nothing
-    }
-
-    /**
      * Provide goodbye message to user.
      *
      * @param tasks contains the task list.

@@ -127,23 +127,9 @@ public class Parser {
         } else if (splited[splited.length - 1].equals("/by")) {
             throw new DukeException("No valid deadline specified.");
         } else {
-            // Maybe move the part in handleDeadLine up
-            StringBuilder sb = new StringBuilder();
-            StringBuilder time = new StringBuilder();
-            boolean isTime = false;
-            for (int i = 1; i < splited.length; i++) {
-                if (splited[i].equals("/by")) {
-                    isTime = true;
-                } else if (!isTime) {
-                    sb.append(splited[i]).append(" ");
-                } else {
-                    time.append(splited[i]).append(" ");
-                }
-            }
-            sb.deleteCharAt(sb.length()-1);
-            time.deleteCharAt(time.length()-1);
-            String taskName = sb.toString();
-            String deadline = time.toString();
+            int deadlineSplit = findSplitter(splited, "/by");
+            String taskName = parseHelper(splited, 0, deadlineSplit);
+            String deadline = parseHelper(splited, deadlineSplit + 1, splited.length);
 
             try {
                 LocalDate theDate = validateTime(deadline);
@@ -178,31 +164,11 @@ public class Parser {
                         Arrays.asList(splited).indexOf("/to") - 1) {
             throw new DukeException("No valid event time specified.");
         } else {
-            StringBuilder sb = new StringBuilder();
-            StringBuilder start = new StringBuilder();
-            StringBuilder end = new StringBuilder();
-            boolean isStart = false;
-            boolean isEnd = false;
-            for (int i = 1; i < splited.length; i++) {
-                if (splited[i].equals("/from")) {
-                    isStart = true;
-                } else if (splited[i].equals("/to")) {
-                    isStart = false;
-                    isEnd = true;
-                } else if (!isStart && !isEnd) {
-                    sb.append(splited[i]).append(" ");
-                } else if (isStart) {
-                    start.append(splited[i]).append(" ");
-                } else {
-                    end.append(splited[i]).append(" ");
-                }
-            }
-            sb.deleteCharAt(sb.length() - 1);
-            start.deleteCharAt(start.length() - 1);
-            end.deleteCharAt(end.length() - 1);
-            String taskName = sb.toString();
-            String startTime = start.toString();
-            String endTime = end.toString();
+            int fromIndex = findSplitter(splited, "/from");
+            int toIndex = findSplitter(splited, "/to");
+            String taskName = parseHelper(splited, 0, fromIndex);
+            String startTime = parseHelper(splited, fromIndex + 1, toIndex);
+            String endTime = parseHelper(splited, toIndex + 1, splited.length);
 
             try {
                 LocalDate startDate = validateTime(startTime);
@@ -215,6 +181,45 @@ public class Parser {
                 throw new DukeException("Please enter date in the format dd/mm/yyyy");
             }
         }
+    }
+
+    /**
+     * Helper method to extract the string content form the splitted string array
+     *
+     * @param splited the splitted array of strings
+     * @param start the start index
+     * @param end the end index
+     * @return the string that supposed to be extracted
+     */
+    public static String parseHelper(String[] splited, int start, int end) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < splited.length; i++) {
+            if (i >= start && i < end) {
+                sb.append(splited[i]).append(" ");
+                break;
+            }
+        }
+        if (sb.length() != 0) {
+            sb.deleteCharAt(sb.length()-1);
+        }
+        return sb.toString();
+    }
+
+    /**
+     * Find the splitting index in the array by the given pattern
+     *
+     * @param splitted the splitted array of strings
+     * @param identifier the pattern to be matched
+     * @return the split index between different sections of command
+     */
+    public static int findSplitter(String[] splitted, String identifier) {
+        int split = -1;
+        for (int i = 0; i < splitted.length; i++) {
+            if (splitted[i].equals(identifier)) {
+                split = i;
+            }
+        }
+        return split;
     }
 
     /**
@@ -324,17 +329,27 @@ public class Parser {
         if (temp[0].equals("T")) {
             newTask = new ToDo(temp[2], isDone);
         } else if (temp[0].equals("D")) {
-            DateTimeFormatter formatter =
-                    DateTimeFormatter.ofPattern("yyyy-MM-dd", new Locale("en"));
-            LocalDate deadline = LocalDate.parse(temp[3], formatter);
+            LocalDate deadline = getLocalDate(temp, 3);
             newTask = new DeadLine(temp[2], isDone, deadline);
         } else {
-            DateTimeFormatter formatter =
-                    DateTimeFormatter.ofPattern("yyyy-MM-dd", new Locale("en"));
-            LocalDate start = LocalDate.parse(temp[3], formatter);
-            LocalDate end = LocalDate.parse(temp[4], formatter);
+            LocalDate start = getLocalDate(temp, 3);
+            LocalDate end = getLocalDate(temp, 4);
             newTask = new Event(temp[2], isDone, start, end);
         }
         return newTask;
+    }
+
+    /**
+     * Util method to extract local date
+     *
+     * @param temp the string array containing the date string
+     * @param index the index of the string to be parsed
+     * @return the localdate represented by the string
+     */
+    private static LocalDate getLocalDate(String[] temp, int index) {
+        DateTimeFormatter formatter =
+                DateTimeFormatter.ofPattern("yyyy-MM-dd", new Locale("en"));
+        LocalDate deadline = LocalDate.parse(temp[index], formatter);
+        return deadline;
     }
 }

@@ -7,6 +7,7 @@ import dukes.util.Storage;
 
 import dukes.task.Task;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -53,51 +54,6 @@ public class ListCommand extends Command {
         this.action = 1;
     }
 
-    /**
-     * List all the task, or the specific task in the given date, from the task list.
-     *
-     * @param tasks contains the task list.
-     * @param ui the UI in charge of user interactions.
-     * @param storage handles the loading and saving of files.
-     * @throws DukeException if the index provided is out of bounds.
-     */
-    public void execute(TaskList tasks, UI ui, Storage storage) throws DukeException {
-        List<Task> taskList = tasks.getTaskList();
-        if (action == 0) { // just list
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < taskList.size(); i++) {
-                sb.append(i+1).append(". ");
-                sb.append(taskList.get(i).toString()).append("\n");
-            }
-            if (sb.length() != 0) {
-                sb.deleteCharAt(sb.length() - 1);
-            }
-            ui.showList(sb.toString(), 0);
-        } else { // search
-            StringBuilder sb = new StringBuilder();
-            int counter = 0;
-            for (int i = 0; i < taskList.size(); i++) {
-                Task theTask = taskList.get(i);
-                if (theTask.getTag().equals("D") &&
-                        theTask.getDeadLine().equals(date)) {
-                    counter += 1;
-                    sb.append(counter).append(". ");
-                    sb.append(theTask.toString()).append("\n");
-                } else if (theTask.getTag().equals("E") &&
-                        (theTask.getStart().isBefore(date) || theTask.getStart().equals(date)) &&
-                        (theTask.getEnd().isAfter(date) || theTask.getEnd().equals(date))) {
-                    // begin < theDate, end > theDate
-                    counter += 1;
-                    sb.append(counter).append(". ");
-                    sb.append(theTask.toString()).append("\n");
-                }
-            }
-            if (sb.length() != 0) {
-                sb.deleteCharAt(sb.length() - 1);
-            }
-            ui.showList(sb.toString(), 1);
-        }
-    }
 
     /**
      * List all the task, or the specific task in the given date, from the task list.
@@ -112,38 +68,36 @@ public class ListCommand extends Command {
     public String runCommand(TaskList tasks, UI ui, Storage storage) throws DukeException {
         List<Task> taskList = tasks.getTaskList();
         if (action == 0) { // just list
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < taskList.size(); i++) {
-                sb.append(i+1).append(". ");
-                sb.append(taskList.get(i).toString()).append("\n");
-            }
-            if (sb.length() != 0) {
-                sb.deleteCharAt(sb.length() - 1);
-            }
-            return ui.returnList(sb.toString(), 0);
+            String output = processList(taskList);
+            return ui.returnList(output, 0);
         } else { // search
-            StringBuilder sb = new StringBuilder();
+            List<Task> targetTasks = new ArrayList<>();
             int counter = 0;
             for (int i = 0; i < taskList.size(); i++) {
                 Task theTask = taskList.get(i);
-                if (theTask.getTag().equals("D") &&
-                        theTask.getDeadLine().equals(date)) {
+                if (isWithinDate(theTask)) {
                     counter += 1;
-                    sb.append(counter).append(". ");
-                    sb.append(theTask.toString()).append("\n");
-                } else if (theTask.getTag().equals("E") &&
-                        (theTask.getStart().isBefore(date) || theTask.getStart().equals(date)) &&
-                        (theTask.getEnd().isAfter(date) || theTask.getEnd().equals(date))) {
-                    // begin < theDate, end > theDate
-                    counter += 1;
-                    sb.append(counter).append(". ");
-                    sb.append(theTask.toString()).append("\n");
+                    targetTasks.add(theTask);
                 }
             }
-            if (sb.length() != 0) {
-                sb.deleteCharAt(sb.length() - 1);
-            }
-            return ui.returnList(sb.toString(), 1);
+            String output = processList(targetTasks);
+
+            return ui.returnList(output, 1);
         }
+    }
+
+    /**
+     * Private util method to check if the task is related to the date
+     *
+     * @param theTask the target task
+     * @return if the task is related to the given date
+     */
+    private boolean isWithinDate(Task theTask) {
+        boolean hasDeadline = theTask.getTag().equals("D") &&
+                theTask.getDeadLine().equals(date);
+        boolean hasEvent = theTask.getTag().equals("E") &&
+                (theTask.getStart().isBefore(date) || theTask.getStart().equals(date)) &&
+                (theTask.getEnd().isAfter(date) || theTask.getEnd().equals(date));
+        return hasDeadline || hasEvent;
     }
 }

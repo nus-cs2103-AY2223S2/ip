@@ -17,6 +17,8 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
+//        int x = 0; --> Attempts to create exception through Assertions
+//        assert x > 0 : "Not valid";
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();

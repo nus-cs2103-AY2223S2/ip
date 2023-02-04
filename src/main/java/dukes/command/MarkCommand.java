@@ -42,32 +42,6 @@ public class MarkCommand extends Command {
      * @param ui the UI in charge of user interactions.
      * @param storage handles the loading and saving of files.
      * @throws DukeException if the index provided is out of bounds.
-     */
-    public void execute(TaskList tasks, UI ui, Storage storage) throws DukeException {
-        List<Task> taskList = tasks.getTaskList();
-        int index = Integer.parseInt(body);
-        try {
-            Task theTask = taskList.get(index - 1);
-            if (this.action == 0) {
-                theTask.setDone();
-            } else {
-                theTask.setUnDone();
-            }
-            ui.showMark(theTask, action);
-            storage.save(tasks);
-        } catch (IndexOutOfBoundsException ex) {
-            throw new DukeException("You have entered an invalid index.");
-        }
-    }
-
-    /**
-     * Mark the specific task from task list as done or undone;
-     * save the new task list to hard disk, and provide feedback to user.
-     *
-     * @param tasks contains the task list.
-     * @param ui the UI in charge of user interactions.
-     * @param storage handles the loading and saving of files.
-     * @throws DukeException if the index provided is out of bounds.
      * @return method feedback
      */
     public String runCommand(TaskList tasks, UI ui, Storage storage) throws DukeException {

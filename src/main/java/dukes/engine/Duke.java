@@ -53,30 +53,26 @@ public class Duke {
         }
     }
 
-    /**
-     * Runner of Duke class. Call classes to interpret command and execute.
-     * Catch all the runtime DukeExceptions and provide feedback.
-     */
-    public void run() {
-        Scanner sc = new Scanner(System.in);
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand(sc);
-                ui.showLine();
-                Command c = parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
-        }
-        ui.showBye();
-        sc.close();
-    }
+//    public void run() {
+//        Scanner sc = new Scanner(System.in);
+//        ui.showWelcome();
+//        boolean isExit = false;
+//        while (!isExit) {
+//            try {
+//                String fullCommand = ui.readCommand(sc);
+//                ui.showLine();
+//                Command c = parser.parse(fullCommand);
+//                c.execute(tasks, ui, storage);
+//                isExit = c.isExit();
+//            } catch (DukeException e) {
+//                ui.showError(e.getMessage());
+//            } finally {
+//                ui.showLine();
+//            }
+//        }
+//        ui.showBye();
+//        sc.close();
+//    }
 
     /**
      * Generates the response of duke engine used by MainWindow.
@@ -93,14 +89,9 @@ public class Duke {
         }
     }
 
-    /**
-     * Main driver of the Duke engine.
-     *
-     * @param args keyboard arguments
-     */
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
-    }
+//    public static void main(String[] args) {
+//        new Duke("data/tasks.txt").run();
+//    }
 
 
 }
