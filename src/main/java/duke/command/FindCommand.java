@@ -5,13 +5,26 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Command to find a task by searching for a keyword.
+ */
 public class FindCommand extends Command {
     private final String keyword;
 
+    /**
+     * Constructor for class FindCommand.
+     * @param keyword the keyword to find.
+     */
     public FindCommand(String keyword) {
         this.keyword = keyword;
     }
 
+    /**
+     * Executes the command to find all matching Tasks.
+     * @param tasks TaskList containing all the currently stored Tasks.
+     * @param ui Ui that deals with interactions with the user.
+     * @param storage Storage that loads and saves tasks to the file containing currently stored Tasks.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         TaskList matchingTasks = new TaskList();
@@ -30,6 +43,10 @@ public class FindCommand extends Command {
         }
     }
 
+    /**
+     * Checks if the Command terminates the Duke Program.
+     * @return false as FindCommand does not terminate the Duke program.
+     */
     @Override
     public boolean isExit() {
         return false;
