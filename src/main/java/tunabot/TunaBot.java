@@ -162,6 +162,7 @@ public class TunaBot extends Application {
         );
         userInput.clear();
         if (input.equals("bye")) {
+            storage.save(tasks);
             Platform.exit();
         }
     }

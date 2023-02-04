@@ -43,13 +43,21 @@ public class Deadline extends Task {
         }
     }
 
+    public void setDeadline(String deadline) throws InputException {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy-HHmm");
+        try {
+            this.deadline = LocalDateTime.parse(deadline, formatter);
+        } catch (DateTimeParseException e) {
+            throw new InputException("BLUB! Date format is invalid! It should be dd/mm/yy-hhmm.");
+        }
+    }
     public String getDeadline() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy-HHmm");
         return deadline.format(formatter);
     }
     @Override
     public String saveFormat() {
-        return "T;" + this.name + ";" + this.getDone() + ";" + this.getDeadline();
+        return "T;" + this.getName() + ";" + this.getDone() + ";" + this.getDeadline();
     }
     @Override
     public String toString() {
