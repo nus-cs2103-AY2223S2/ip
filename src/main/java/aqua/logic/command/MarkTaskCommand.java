@@ -7,6 +7,7 @@ import aqua.logic.ArgumentMap;
 import aqua.logic.ExecutionService;
 import aqua.logic.ExecutionTask;
 import aqua.manager.LogicManager;
+import aqua.util.Kaomoji;
 
 /** A {@code CommandController} to mark {@code AquaTask} as complete. */
 public class MarkTaskCommand extends CommandController {
@@ -87,7 +88,7 @@ public class MarkTaskCommand extends CommandController {
                         task.toString());
             }
             return String.format(String.join("\n",
-                            "Uah (๑•﹏•) Okay I have unmarked the task:",
+                            "Uah " + Kaomoji.OH_NO + " Okay I have unmarked the task:",
                             "  %s"),
                     task.toString());
         }

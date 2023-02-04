@@ -7,6 +7,7 @@ import aqua.logic.ArgumentMap;
 import aqua.logic.ExecutionService;
 import aqua.logic.ExecutionTask;
 import aqua.manager.LogicManager;
+import aqua.util.Kaomoji;
 
 
 /**
@@ -77,10 +78,10 @@ public class DeleteCommand extends CommandController {
         private String getRemainingMessage(LogicManager manager) {
             int numTask = manager.getTaskManager().size();
             if (numTask > 0) {
-                return String.format("You have %d task(s) left, all the best ( ง*`꒳´*)ว",
+                return String.format("You have %d task(s) left, all the best " + Kaomoji.CHEER_ENCOURAGE,
                         numTask);
             }
-            return "٩ (ˊᗜˋ *) و You have no task left~ ☆";
+            return Kaomoji.CHEER_RELIEF + " You have no task left~ " + Kaomoji.STAR_WHITE;
         }
     }
 }

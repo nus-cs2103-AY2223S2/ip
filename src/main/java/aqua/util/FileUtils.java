@@ -108,4 +108,11 @@ public class FileUtils {
                 .orElseThrow(() -> new FileNotFoundException(
                         String.format("Resource file %s not found", pathString)));
     }
+
+
+    public static InputStream getResourceStream(String pathString) throws FileNotFoundException {
+        return Optional.ofNullable(FileUtils.class.getResourceAsStream(pathString))
+                .orElseThrow(() -> new FileNotFoundException(
+                        String.format("Resource file %s not found", pathString)));
+    }
 }
