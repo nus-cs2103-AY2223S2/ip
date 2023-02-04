@@ -28,9 +28,13 @@ public class HelpWindow extends AnchorPane {
      * Launches the help window if it is not already open.
      */
     public static void launchHelpWindow() {
+        if (HelpWindow.isOpen) {
+            return;
+        }
+
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Gui.class
-                    .getResource("../resources/view/HelpWindow.fxml"));
+                    .getClassLoader().getResource("view/HelpWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             Stage stage = new Stage();

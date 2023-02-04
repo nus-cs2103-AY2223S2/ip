@@ -37,14 +37,20 @@ public class Parser {
      * @throws DukeException if given command string cannot be parsed.
      */
     public static Command parseCommand(String line) throws DukeException {
-        if (line.toUpperCase().equals(CommandType.BYE.name())) {
+        String lineTrimmedOfSpaces = line.trim();
+        String[] lineSplitBySpaces = lineTrimmedOfSpaces.split(" ");
+
+        String command = lineSplitBySpaces[0];
+        String uppercaseCommand = command.toUpperCase();
+
+        if (uppercaseCommand.equals(CommandType.BYE.name())) {
             return new ExitCommand();
-        } else if (line.toUpperCase().equals(CommandType.LIST.name())) {
+        } else if (uppercaseCommand.equals(CommandType.LIST.name())) {
             return new ListCommand();
-        } else if (line.toUpperCase().equals(CommandType.HELP.name())) {
+        } else if (uppercaseCommand.equals(CommandType.HELP.name())) {
             return new HelpCommand();
         } else {
-            return processCommand(line);
+            return processCommand(lineTrimmedOfSpaces, lineSplitBySpaces, command, uppercaseCommand);
         }
     }
 
@@ -52,17 +58,17 @@ public class Parser {
      * Parses multi-word command strings.
      *
      * @param line String representing multi-word command.
+     * @param lineSplitBySpaces Multi-word command split by spaces.
+     * @param command Command given.
+     * @param uppercaseCommand Command given in uppercase.
      * @return Command object representing multi-word command.
      * @throws DukeException if given multi-word command string cannot be parsed.
      */
-    private static Command processCommand(String line) throws DukeException {
-        String[] splitCommand = line.split(" ");
-        String command = splitCommand[0];
-        String uppercaseCommand = command.toUpperCase();
+    private static Command processCommand(String line, String[] lineSplitBySpaces, String command, String uppercaseCommand) throws DukeException {
         if (uppercaseCommand.equals(CommandType.MARK.name())
                 || uppercaseCommand.equals(CommandType.UNMARK.name())
                 || uppercaseCommand.equals(CommandType.DELETE.name())) {
-            return processTask(uppercaseCommand, splitCommand);
+            return processTask(uppercaseCommand, lineSplitBySpaces);
         } else if (uppercaseCommand.equals(CommandType.TODO.name())
                 || uppercaseCommand.equals(CommandType.DEADLINE.name())
                 || uppercaseCommand.equals(CommandType.EVENT.name())) {

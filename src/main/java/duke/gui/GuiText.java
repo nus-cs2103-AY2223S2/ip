@@ -145,7 +145,7 @@ public class GuiText {
      * @return Text response listing tasks.
      */
     public String showList(TaskList tasks) {
-        if (tasks.getSize() == 0) {
+        if (tasks.isEmpty()) {
             return "There are currently no tasks in your list. Would you like to add some?";
         } else {
             return "Here are all the tasks in your list:\n"
@@ -217,11 +217,9 @@ public class GuiText {
      * @return Text listing matching tasks.
      */
     public String showFind(TaskList tasks) {
-        if (tasks.getSize() == 0) {
-            MainWindow.changeSpriteExpression(SpriteEmotion.NEUTRAL);
+        if (tasks.isEmpty()) {
             return "There are no tasks matching any of your keywords.";
         } else {
-            MainWindow.changeSpriteExpression(SpriteEmotion.HAPPY);
             return "Here are all the matching tasks in your list:\n"
                     + tasks;
         }

@@ -107,6 +107,10 @@ public class TaskList {
         return this.tasks.size();
     }
 
+    public boolean isEmpty() {
+        return this.tasks.isEmpty();
+    }
+
     @Override
     public String toString() {
         StringBuffer res = new StringBuffer();
@@ -137,6 +141,9 @@ public class TaskList {
         TaskList filteredTaskList = new TaskList();
         for (Task t : this.tasks) {
             for (String keyword : keywords) {
+                if (keyword.isBlank()) {
+                    continue;
+                }
                 if (t.nameContainsKeyword(keyword) && ! filteredTaskList.containsTask(t)) {
                     filteredTaskList.addTask(t);
                 }

@@ -31,15 +31,15 @@ public class MainWindow extends AnchorPane {
      * Obtained from https://talesofanswers.tumblr.com/private/78610087338/tumblr_n1y0bhROrr1rsepsd
      */
     private static final Image USER_NEUTRAL_IMAGE = new Image(MainWindow.class
-            .getResourceAsStream("../resources/images/Lloyd_Neutral.gif"));
+            .getClassLoader().getResourceAsStream("images/Lloyd_Neutral.gif"));
     private static final Image DUKE_NEUTRAL_IMAGE = new Image(MainWindow.class
-            .getResourceAsStream("../resources/images/Colette_Neutral.gif"));
+            .getClassLoader().getResourceAsStream("images/Colette_Neutral.gif"));
     private static final Image DUKE_HAPPY_IMAGE = new Image(MainWindow.class
-            .getResourceAsStream("../resources/images/Colette_Happy.gif"));
+            .getClassLoader().getResourceAsStream("images/Colette_Happy.gif"));
     private static final Image DUKE_SURPRISED_IMAGE = new Image(MainWindow.class
-            .getResourceAsStream("../resources/images/Colette_Surprised.gif"));
+            .getClassLoader().getResourceAsStream("images/Colette_Surprised.gif"));
     private static final Image DUKE_SAD_IMAGE = new Image(MainWindow.class
-            .getResourceAsStream("../resources/images/Colette_Sad.gif"));
+            .getClassLoader().getResourceAsStream("images/Colette_Sad.gif"));
     private static Image currentColetteImage = MainWindow.DUKE_NEUTRAL_IMAGE;
 
     /** JavaFX GUI objects */
@@ -76,12 +76,7 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
         if (this.duke.isExit()) {
-            userInput.setDisable(true);
-            sendButton.setDisable(true);
-            HelpWindow.closeHelpWindow();
-            PauseTransition delay = new PauseTransition(Duration.seconds(MainWindow.exitDelayTimeInSeconds));
-            delay.setOnFinished( event -> this.stage.close() );
-            delay.play();
+            exit();
         }
     }
 
@@ -95,6 +90,15 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().addAll(
             DialogBox.getDukeDialog(greetingText, MainWindow.currentColetteImage)
         );
+    }
+
+    private void exit() {
+        userInput.setDisable(true);
+        sendButton.setDisable(true);
+        HelpWindow.closeHelpWindow();
+        PauseTransition delay = new PauseTransition(Duration.seconds(MainWindow.exitDelayTimeInSeconds));
+        delay.setOnFinished( event -> this.stage.close() );
+        delay.play();
     }
 
     /**

@@ -16,14 +16,9 @@ public class HelpCommand extends Command {
     @Override
     public String execute(TaskList tasks, GuiText guiText, Storage storage) {
         boolean isHelpWindowOpen = HelpWindow.isOpen();
-
-        if (!isHelpWindowOpen) {
-            MainWindow.changeSpriteExpression(SpriteEmotion.HAPPY);
-            HelpWindow.launchHelpWindow();
-        } else {
-            MainWindow.changeSpriteExpression(SpriteEmotion.SURPRISED);
-        }
-
+        SpriteEmotion spriteEmotion = !isHelpWindowOpen ? SpriteEmotion.HAPPY : SpriteEmotion.SURPRISED;
+        MainWindow.changeSpriteExpression(spriteEmotion);
+        HelpWindow.launchHelpWindow();
         return GuiText.showHelp(isHelpWindowOpen);
     }
 
