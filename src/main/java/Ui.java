@@ -7,24 +7,23 @@ public class Ui {
         this.printBuffer = new ArrayList<String>();
     }
 
-     // Provides basic line 
-    private void line() {
+     // Provides basic showLine 
+    public void showLine() {
         System.out.println("____________________________________________________________");
+    }
+    public void startNextLine() {
+        System.out.print("=> ");
     }
 
     // Repeats the input 
     public void speak(String input) {
-        line();
+        showLine();
         System.out.println(input);
-        line();
-        System.out.print("=> ");
     }
     public void speak(List<String> inputs) {
-        line();
+        showLine();
         inputs.forEach(x -> System.out.println(x));
-        line();
         inputs.clear();
-        System.out.print("=> ");
     }
     public void showAddTask(Task task, int listLength) {
         printBuffer.add("Got it. I've added this task:");
@@ -52,7 +51,7 @@ public class Ui {
     }
 
     // Prints entire list in this.list
-    public void printList(ArrayList<Task> list) {
+    public void printList(ArrayList<Task> list) throws RoodyException{
         int count = 0;
         int listIndex = 0;
         StringBuilder stringBuilder = new StringBuilder();
@@ -82,7 +81,7 @@ public class Ui {
             }
             speak(printBuffer);
         } else {
-            new RoodyException("There doesn't seem to be any tasks in your list.");
+            throw new RoodyException("There doesn't seem to be any tasks in your list.");
         }
     }
 
@@ -91,10 +90,12 @@ public class Ui {
         this.printBuffer.add("Hello, I'm Roody!");
         this.printBuffer.add("What can I do for you?");
         speak(this.printBuffer);
+        showLine();
     }
     
     // final greeting
     public void bye() {
         speak("Bye. Hope to see you again soon!");
+        showLine();
     }
 }
