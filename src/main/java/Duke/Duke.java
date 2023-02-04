@@ -34,7 +34,6 @@ public class Duke {
                 curCommand = parser.process();
                 curCommand.execute(toDoList);
                 ui.printCommandMessage(curCommand);
-                ui.printList(toDoList);
             } catch (DukeException ex) {
                 System.out.println(ex.getMessage());
                 continue;

@@ -16,11 +16,15 @@ public class ListTasks extends Command {
 
     @Override
     public void execute(TaskList toDoList) {
-        // empty
+        String res = "";
+        for (int i = 0; i < toDoList.size(); i++) {
+            res += String.format("%d.%s\n", i + 1, toDoList.get(i));
+        }
+        System.out.println("Printing tasks:\n" + res);
     }
 
     @Override
     public String toString() {
-        return "Printing tasks:";
+        return "";
     }
 }

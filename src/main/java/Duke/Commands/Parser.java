@@ -89,6 +89,8 @@ public class Parser {
                 (command.charAt(command.length() - 1)) - 1;
         String description = this.getTaskName();
         switch (commandArr[0]) {
+        case "find":
+            return new Find(this.command, commandArr[1]);
         case "list":
             return new ListTasks(this.command);
         case "mark":
