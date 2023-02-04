@@ -6,11 +6,13 @@ import java.util.Scanner;
 import java.util.StringTokenizer;
 
 public class UI {
-    public void run() throws IOException {
-//        Intro text
+    public void welcome() {
+        //        Intro text
         String divider = "____________________________________________________________\n";
         System.out.println(divider + "Hello! I'm Duke");
         System.out.println("What can I do for you?\n" + divider);
+    }
+    public void readInput() throws IOException {
 
 //        Load from file
         File prevTasks = new File("./data/tasks.txt");
