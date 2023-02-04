@@ -1,0 +1,4 @@
+T | 1 | study
+D | 1 | study | 01/01/2019
+T | 1 | makeup
+D | 0 | jh | 02/03/2018

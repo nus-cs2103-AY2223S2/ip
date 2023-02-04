@@ -1,5 +1,7 @@
 package duke;
 
+import duke.tasks.Task;
+
 import java.io.IOException;
 
 /**
@@ -10,6 +12,7 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private boolean isActive;
 
     /**
      * The construction of duke
@@ -51,6 +54,26 @@ public class Duke {
      * @param  args
      */
     public static void main(String[] args) throws IOException {
-        new Duke("data/tasks.txt").run();
+        //new Duke("data/tasks.txt").run();
+    }
+
+
+    public String getResponse(String input) throws IOException {
+        String temp = "";
+
+
+        try {
+            if (input.equals("bye")) {
+                temp += Ui.exit();
+            } else {
+                temp = Parser.parse(input, tasks);
+                storage.updateFile(tasks);
+            }
+
+            return temp;
+        } catch (Exception e) {
+            return "Error";
+        }
+        //return Parser.parse(input, tasks);
     }
 }
