@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 import duke.task.TaskList;
 
-
 /**
  * Handles all Ui displaying and user input.
  */
@@ -19,7 +18,7 @@ public class Ui {
     }
 
     /**
-     * Displays the starting logo for Duke.
+     * Displays the starting logo for duke.Duke.
      */
     public void displayIntro() {
         String logo = " ___________________\n"

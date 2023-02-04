@@ -1,12 +1,19 @@
 package duke;
 
+import duke.task.TaskList;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Parses user input into usable terms for Duke.
+ * Parses user input into usable terms for duke.Duke.
  */
 public class Parser {
+    /**
+     * Constructor for Parser class.
+     */
+    public Parser() {
+    }
     /**
      * Returns command from user input.
      *
@@ -25,6 +32,17 @@ public class Parser {
      */
     public String getDescription(String input) {
         return input.split(" ")[1];
+    }
+
+    /**
+     * Returns description of task from user input, depending on given index.
+     *
+     * @param input User input.
+     * @param startIndex Index of starting character.
+     * @return Description of task as String.
+     */
+    public String getDescription(String input, int startIndex) {
+        return input.substring(startIndex);
     }
 
     /**
