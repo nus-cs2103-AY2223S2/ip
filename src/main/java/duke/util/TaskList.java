@@ -10,8 +10,11 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.function.Consumer;
+import java.util.Objects;
+import java.util.Queue;
+import java.util.function.IntConsumer;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -73,55 +76,69 @@ public class TaskList {
     /**
      * Returns a string representation of the tasks in the list.
      *
-     * @return a string representation of the tasks in the list.
-     * @see Ui#print(String)
+     * @return  a string representation of the tasks in the list.
+     * @see     Ui#print(String)
      */
-    public String[] stringify() {
+    public Queue<String> stringify() {
         if (this.tasks.size() == 0) {
-            return new String[]{ "No tasks found." };
+            return new LinkedList<>(Collections.singletonList("No tasks found."));
         }
-        String[] outputs = new String[this.tasks.size()];
-        for (int i = 0; i < this.tasks.size(); i++) {
-            outputs[i] = addOrdinal(i, this.tasks.get(i));
-        }
-        return outputs;
+        Queue<String> header = new LinkedList<>(Collections.singletonList("tasks: "));
+        Queue<String> outputs = IntStream.range(0, this.tasks.size())
+                .mapToObj(i -> "\t" + addOrdinal(i, this.tasks.get(i)))
+                .collect(Collectors.toCollection(LinkedList::new));
+        header.addAll(outputs);
+        return header;
     }
 
     /**
-     * Creates a new {@link Task} from the given arguments and adds it to the list.
+     * Adds a new {@link Task} to the list.
      *
-     * @param arguments the arguments to be used to create the task.
+     * @param  task the task to be added.
      * @return a string representation of the task that was added.
      */
-    public String[] add(String[] arguments) {
-        Task newTask;
-        switch (arguments[0]) {
-        case "/todo" -> newTask = new ToDo(arguments[1]);
-        case "/deadline" -> {
-            String[] deadlineArgs = Parser.parseArgs(arguments[1], new String[]{ " /by " });
-            newTask = new Deadline(deadlineArgs[0], deadlineArgs[1]);
-        }
-        case "/event" -> {
-            String[] eventArgs = Parser.parseArgs(arguments[1], new String[]{ " /from ", " /to " });
-            newTask = new Event(eventArgs[0], eventArgs[1], eventArgs[2]);
-        }
-        default -> throw new IllegalArgumentException("Invalid task type: " + arguments[0]);
-        }
-        this.tasks.add(newTask);
+    public String add(Task task) {
+        this.tasks.add(task);
         this.save();
-        return new String[]{ "added: " + newTask };
+        return "added: " + task;
+    }
+
+    public String addTodo(String description) {
+        Task newTask = new ToDo (Objects.requireNonNull(description));
+        return this.add(newTask);
+    }
+
+    public String addDeadline(String description, String by) {
+        Task newTask = new Deadline(Objects.requireNonNull(description),
+                Objects.requireNonNull(by));
+        return this.add(newTask);
+    }
+
+    public String addEvent(String description, String from, String to) {
+        Task newTask = new Event(Objects.requireNonNull(description),
+                Objects.requireNonNull(from),
+                Objects.requireNonNull(to));
+        return this.add(newTask);
     }
 
     /**
      * Marks (toggle) the task(s) at the given index(es).
      *
      * @param indStr the index(es) of the task(s) to be marked as done.
+     * @param isDone the new status of the task(s). Null to toggle.
      * @return a string representation of the task(s) that were (un)marked.
      */
-    public String[] mark(String[] indStr) {
+    public Queue<String> toggleMark(Queue<String> indStr, Boolean isDone) {
+        if (indStr == null || indStr.size() == 0) {
+            return new LinkedList<>();
+        }
         List<Integer> indexes = new ArrayList<>();
-        Consumer<Integer> mark = ind -> {
-            this.tasks.get(ind).mark();
+        IntConsumer mark = ind -> {
+            if (isDone != null) {
+                this.tasks.get(ind).mark(isDone);
+            } else {
+                this.tasks.get(ind).mark();
+            }
             indexes.add(ind);
         };
         this.consume(indStr, mark);
@@ -130,11 +147,17 @@ public class TaskList {
             throw new IllegalArgumentException("No tasks found.");
         } else if (indexes.size() == 1) {
             Task task = this.tasks.get(indexes.get(0));
-            return new String[]{ (task.isDone() ? "marked: " : "unmarked: ") + addOrdinal(indexes.get(0), task) };
+            return new LinkedList<>(Collections.singletonList(
+                    (task.isDone() ? "marked: " : "unmarked: ")
+                            + addOrdinal(indexes.get(0), task)
+            ));
         } else {
-            List<String> outputs = indexes.stream().map(i -> "\t" + addOrdinal(i, this.tasks.get(i))).collect(Collectors.toList());
-            outputs.add(0, "marked:");
-            return outputs.toArray(new String[0]);
+            Queue<String> header = new LinkedList<>(Collections.singletonList("marked: "));
+            Queue<String> outputs = indexes.stream()
+                    .map(i -> "\t" + addOrdinal(i, this.tasks.get(i)))
+                    .collect(Collectors.toCollection(LinkedList::new));
+            header.addAll(outputs);
+            return header;
         }
     }
 
@@ -144,9 +167,9 @@ public class TaskList {
      * @param indStr the index(es) of the task(s) to be deleted.
      * @return a string representation of the task(s) that were deleted.
      */
-    public String[] delete(String[] indStr) {
+    public Queue<String> delete(Queue<String> indStr) {
         List<Integer> indexes = new ArrayList<>();
-        Consumer<Integer> delete = ind -> {
+        IntConsumer delete = ind -> {
             if (this.tasks.size() <= ind) {
                 throw new IllegalArgumentException("Task not found: " + ind);
             }
@@ -158,7 +181,9 @@ public class TaskList {
         } else if (indexes.size() == 1) {
             Task rmTask = this.tasks.remove((int) indexes.get(0));
             this.save();
-            return new String[]{ "deleted: " + addOrdinal(indexes.get(0), rmTask) };
+            return new LinkedList<>(Collections.singletonList(
+                    "deleted: " + addOrdinal(indexes.get(0), rmTask)
+            ));
         } else {
             indexes.sort(Collections.reverseOrder());
             List<String> outputs = new ArrayList<>();
@@ -168,17 +193,13 @@ public class TaskList {
             this.save();
             Collections.reverse(outputs);
             outputs.add(0, "deleted:");
-            return outputs.toArray(new String[0]);
+            return new LinkedList<>(outputs);
         }
     }
 
-    private void consume(String[] argument, Consumer<Integer> consumer) {
+    private void consume(Queue<String> arguments, IntConsumer consumer) {
         try {
-            String[] inds = argument[0].split("\\s");
-            for (String s : inds) {
-                int ind = Integer.parseInt(s) - 1;
-                consumer.accept(ind);
-            }
+            arguments.stream().mapToInt(Integer::parseInt).map(i -> --i).forEach(consumer);
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
             throw new IllegalArgumentException("Invalid index.");
         }
@@ -190,25 +211,20 @@ public class TaskList {
      * @param argument the search term.
      * @return a string representation of the tasks that matched the search term.
      */
-    public String[] find(String[] argument) {
-        String keyword = argument[0].toLowerCase();
+    public Queue<String> find(String argument) {
+        String keyword = argument.toLowerCase();
         List<Integer> matchIndexes = IntStream.range(0, this.tasks.size())
                 .parallel()
-                .filter(i -> this.tasks.get(i)
-                        .getDesc()
-                        .toLowerCase()
-                        .contains(keyword)
-                ).boxed()
-                .toList();
+                .filter(i -> this.tasks.get(i).getDesc().toLowerCase().contains(keyword))
+                .boxed().toList();
         if (matchIndexes.size() < 1) {
-            return new String[]{ "No matches found." };
+            return new LinkedList<>(Collections.singletonList("No matches found."));
         } else {
-            List<String> outputs = matchIndexes.stream()
-                    .map(i -> addOrdinal(i, this.tasks.get(i)))
-                    .collect(Collectors.toList());
-            String countStr = String.format(" match%s found:", matchIndexes.size() > 1 ? "es" : "");
-            outputs.add(0, matchIndexes.size() + countStr);
-            return outputs.toArray(String[]::new);
+            String countStr = String.format("match%s found:", matchIndexes.size() > 1 ? "es" : "");
+            Queue<String> header = new LinkedList<>(Collections.singletonList(countStr));
+            Queue<String> outputs = matchIndexes.stream().map(i -> "\t" + addOrdinal(i, this.tasks.get(i))).collect(Collectors.toCollection(LinkedList::new));
+            header.addAll(outputs);
+            return header;
         }
     }
 

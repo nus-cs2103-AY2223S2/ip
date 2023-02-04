@@ -4,29 +4,48 @@ import duke.Duke;
 import duke.command.Command;
 
 import java.util.Arrays;
-import java.util.stream.Stream;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+import java.util.stream.Collectors;
 
 /**
- * Utility class for formatting and printing output from Duke.
+ * Utility class for formatting and printing printable from Duke.
  *
  * @see Duke
  */
 public class Ui {
 
-    private String[] helpMsg = {};
+    private HashMap<String, String> helpDict = new HashMap<>();
+    private static final List<String> HEADER_STR = Collections.singletonList("Usage: <command> [<args>]");
 
     /**
-     * Creates the help message from the given Duke commands.
+     * Creates the help message dictionary from the given Duke commands.
      *
      * @param commands The commands recognized by Duke.
      */
-    public void setHelpMsg(Command[] commands) {
-        this.helpMsg = generateHelp(commands);
+    public void setHelpDict(Command[] commands) {
+        this.helpDict = generateHelp(commands);
     }
 
-    private String[] generateHelp(Command[] commands) {
-        Stream<String> strings = Arrays.stream(commands).map(c -> String.format("\t%4s : %s", c.getName(), c.getHelpStr()));
-        return Stream.concat(Stream.of("Usage: <command> [<args>]"), strings).toArray(String[]::new);
+    private HashMap<String, String> generateHelp(Command[] commands) {
+        return Arrays.stream(commands)
+                .collect(Collectors.toMap(Command::getName,
+                        Command::getHelpText,
+                        (prev, next) -> next,
+                        HashMap::new)
+                );
+    }
+
+    /**
+     * Returns the help message dictionary.
+     *
+     * @return The help message dictionary.
+     */
+    public HashMap<String, String> getHelpDict() {
+        return this.helpDict;
     }
 
     /**
@@ -34,8 +53,16 @@ public class Ui {
      *
      * @return The help message.
      */
-    public String[] getHelpMsg() {
-        return helpMsg;
+    public Queue<String> getHelpMsg() {
+        Queue<String> header = new LinkedList<>(HEADER_STR);
+        header.addAll(new LinkedList<>(this.helpDict.values()));
+        return header;
+    }
+
+    public static Queue<String> getHelpMsg(List<String> commands) {
+        Queue<String> header = new LinkedList<>(HEADER_STR);
+        header.addAll(commands);
+        return header;
     }
 
 
@@ -43,7 +70,7 @@ public class Ui {
      * Prints the help message.
      */
     public void print() {
-        this.print(this.helpMsg);
+        this.print(this.getHelpMsg());
     }
 
     /**
@@ -52,7 +79,7 @@ public class Ui {
      * @param msg The message to be printed.
      */
     public void print(String msg) {
-        this.print(msg.split("\n"));
+        this.print(new LinkedList<>(Arrays.asList(msg.split("\n"))));
     }
 
     /**
@@ -60,7 +87,7 @@ public class Ui {
      *
      * @param lines The lines to be printed.
      */
-    public void print(String[] lines) {
+    public void print(Queue<String> lines) {
         StringBuilder outputs = new StringBuilder();
         for (String str : lines) {
             outputs.append("\t").append(str).append("\n");

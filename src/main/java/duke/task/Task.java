@@ -54,11 +54,19 @@ public class Task implements Serializable {
     }
 
     /**
-     * Marks the task as done.
+     * Toggles the status of the task.
      */
     public void mark() {
-        this.isDone = !this.isDone;
-        // return this.isDone;
+        this.mark(!this.isDone);
+    }
+
+    /**
+     * Explicitly marks the task as done (or not done).
+     *
+     * @param isDone The new status of the task.
+     */
+    public void mark(boolean isDone){
+        this.isDone = isDone;
     }
 
     @Override

@@ -5,28 +5,30 @@ import duke.util.State;
 import duke.util.Stateful;
 import org.junit.jupiter.api.Test;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class CommandTest {
 
-    private final Command basCommand = new BasicCommand("test", "test help", () -> new Stateful(new String[]{"test"}, new State(false)));
-    private final Command argCommand = new ArgCommand("test2", "test2 help", new String[]{"\\s"}, params -> new Stateful(new String[]{"test"}, new State(false)));
+    private final Command command = new Command("test","test help", stateful -> new Stateful(new LinkedList<>(List.of("test")), new State(false)));
+    private final NestCommand nestedCommand = new NestCommand("test2","test2 help", new Command[]{command});
 
     @Test
-    void testBasCommand() {
-        assertEquals("test", basCommand.getName());
-        assertEquals("test help", basCommand.getHelpStr());
-        assertFalse(basCommand.hasParams());
-        assertArrayEquals(new String[]{}, basCommand.getParams());
-        assertArrayEquals(new String[]{"test"}, basCommand.execute(new String[]{}).output());
+    void testCommand() {
+        assertEquals("test", command.getName());
+        assertEquals("\ttest : test help", command.getHelpText());
+        assertFalse(command.hasSubCommands());
+        assertEquals("test", command.execute(new Stateful(new LinkedList<>(), new State(false)),new LinkedList<>()).outputs().poll());
+        assertFalse(command.execute(new Stateful(new LinkedList<>(), new State(false)),new LinkedList<>()).state().doQuit());
     }
 
     @Test
-    void testArgCommand() {
-        assertEquals("test2", argCommand.getName());
-        assertEquals("test2 help", argCommand.getHelpStr());
-        assertTrue(argCommand.hasParams());
-        assertArrayEquals(new String[]{"\\s"}, argCommand.getParams());
-        assertArrayEquals(new String[]{"test"}, argCommand.execute(new String[]{}).output());
+    void testNestCommand() {
+        assertEquals("test2", nestedCommand.getName());
+        assertEquals("\ttest2 : test2 help", nestedCommand.getHelpText());
+        assertTrue(nestedCommand.hasSubCommands());
+        assertEquals(command, nestedCommand.getSubCommands().get("test"));
     }
 }
