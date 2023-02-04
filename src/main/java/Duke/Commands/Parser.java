@@ -30,7 +30,9 @@ public class Parser {
     private String getTaskName() {
         String[] commandArr = this.command.split(" ");
         String taskName = "";
-        for (int i = 1; i < commandArr.length; i++) {
+        for (int i = 1; i < commandArr.length &&
+                !commandArr[i].equals("/by") &&
+                !commandArr[i].equals("/from"); i++) {
             taskName += commandArr[i] + " ";
         }
         return taskName;

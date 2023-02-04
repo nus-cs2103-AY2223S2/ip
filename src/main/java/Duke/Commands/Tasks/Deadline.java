@@ -36,9 +36,9 @@ public class Deadline extends Task {
      * @return A representative String that contains data about the current task
      */
     public String generateStorageText() {
-        return String.format("%s-%s-%s-%s",
+        return String.format("%s~%s~%s~%s",
                 this.getTaskClass(), this.getStatusIcon(),
-                this.getDescription(), this.getDeadline());
+                this.getDescription(), this.deadline);
     }
 
     public String toString() {

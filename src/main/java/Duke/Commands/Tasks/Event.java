@@ -22,7 +22,7 @@ public class Event extends Task {
      * @return a letter representing the type of this task
      */
     public String getTaskClass() {
-        return "T";
+        return "E";
     }
 
     /**
@@ -31,7 +31,7 @@ public class Event extends Task {
      * @return A representative String that contains data about the current task
      */
     public String generateStorageText() {
-        return String.format("%s-%s-%s-%s-%s",
+        return String.format("%s~%s~%s~%s~%s",
                 this.getTaskClass(), this.getStatusIcon(),
                 this.getDescription(), this.from.toString(), this.to.toString());
     }

@@ -31,7 +31,7 @@ public abstract class Task {
      * @return A representative String that contains data about the current task
      */
     public String generateStorageText() {
-        return String.format("%s-%s-%s",
+        return String.format("%s~%s~%s",
                 this.getTaskClass(), this.getStatusIcon(), this.getDescription());
     }
 

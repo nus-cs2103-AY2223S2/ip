@@ -53,7 +53,7 @@ public class Storage {
         // index 1 is task completion status (done or not)
         // index 2 is task description
         // index 3 to 4 are task times
-        String[] taskDescription = task.split("-");
+        String[] taskDescription = task.split("~");
         switch (taskDescription[0]) {
         case "T":
             return new ToDo(taskDescription[2], getCompletionStatus(taskDescription[1]));
