@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
@@ -112,11 +113,15 @@ public class Duke {
                         if (tempWord.length == 1) {
                             throw new DukeException("/by needs a date/time.");
                         }
-                        Task t = new Deadline(tempWord[0].strip(), tempWord[1].strip());
-                        lst.add(t);
-                        count++;
-                        System.out.println("Added new deadline:\n  " + t + "\nNumber of tasks: " + count);
-                        word = br.readLine().strip().split(" ",2);
+                        try {
+                            Task t = new Deadline(tempWord[0].strip(), tempWord[1].strip());
+                            lst.add(t);
+                            count++;
+                            System.out.println("Added new deadline:\n  " + t + "\nNumber of tasks: " + count);
+                            word = br.readLine().strip().split(" ",2);
+                        } catch (DateTimeParseException e) {
+                            throw new DukeException("Date after /by needs to be in format yyyy-mm-dd");
+                        }
                     } else if (word[0].equals("event")) {
                         if (word.length == 1 || !word[1].contains("/from") || !word[1].contains("/to") ) {
                             throw new DukeException("Event needs a /from and /to.");
@@ -127,11 +132,15 @@ public class Duke {
                         if (from.length == 1 || to.length == 1) {
                             throw new DukeException("/from and /to needs a date/time.");
                         }
-                        Task t = new Event(tempWord[0].strip(), from[1].strip(), to[1].strip());
-                        lst.add(t);
-                        count++;
-                        System.out.println("Added new event:\n  " + t + "\nNumber of tasks: " + count);
-                        word = br.readLine().strip().split(" ",2);
+                        try {
+                            Task t = new Event(tempWord[0].strip(), from[1].strip(), to[1].strip());
+                            lst.add(t);
+                            count++;
+                            System.out.println("Added new event:\n  " + t + "\nNumber of tasks: " + count);
+                            word = br.readLine().strip().split(" ",2);
+                        } catch (DateTimeParseException e) {
+                            throw new DukeException("Date after /from and /to needs to be in format yyyy-mm-dd");
+                        }
                     } else if (word[0].equals("delete")) {
                         if (word.length == 1) {
                             throw new DukeException("Delete needs a number.");

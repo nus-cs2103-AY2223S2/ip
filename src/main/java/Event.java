@@ -1,6 +1,15 @@
+import java.time.LocalDate;
+
 class Event extends Task {
-    public Event(String name, String start, String end) {
-        super(name, start, end);
+    private LocalDate from;
+    private LocalDate to;
+    public Event(String name, String start, String end) throws DukeException {
+        super(name);
+        this.from = LocalDate.parse(start);
+        this.to = LocalDate.parse(end);
+        if (this.from.isAfter(this.to)) {
+            throw new DukeException("/to date is before /from date");
+        }
     }
 
     @Override
@@ -13,7 +22,7 @@ class Event extends Task {
     @Override
     public String toString() {
         return this.isDone
-                ? "[E][X] " + this.name + " (from: " + this.startDate + " to: " + this.endDate + ")"
-                : "[E][ ] " + this.name + " (from: " + this.startDate + " to: " + this.endDate + ")";
+                ? "[E][X] " + this.name + " (from: " + getDate(this.from) + " to: " + getDate(this.to) + ")"
+                : "[E][ ] " + this.name + " (from: " + getDate(this.from) + " to: " + getDate(this.to) + ")";
     }
 }
