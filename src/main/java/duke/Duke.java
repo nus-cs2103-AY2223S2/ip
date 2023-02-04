@@ -17,44 +17,48 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private String name;
 
     /**
      * Constructor for the bot.
      */
     public Duke() {
-        this.ui = new Ui("Tyrone");
+        this.name = "LeDuke";
+        this.ui = new Ui(name);
         this.storage = new Storage(FILE_DIRECTORY, FILE_NAME, ui);
         this.tasks = new TaskList(storage.load());
     }
 
     /**
-     * Activates the bot.
+     * Forms a response from the user input.
+     * Terminates the bot if command is BYE.
+     *
+     * @param input String representing an input.
+     * @return String representing Duke's response.
      */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            }
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            String response = c.execute(tasks, ui, storage);
+            return response;
+        } catch (DukeException e) {
+            return e.getMessage();
         }
-
-        storage.save(tasks.getList());
-        ui.terminate();
     }
 
     /**
-     * Forms a decorated response from a message input.
-     *
-     * @param input String representing an input.
-     * @return A decorated String.
+     * Returns the name of the bot
+     * @return String as the name of the bot.
      */
-    public String getResponse(String input) {
-        return ui.formResponse(input);
+    public String getName() {
+        return this.name;
+    }
+
+    /**
+     * Returns a welcome message from the bot.
+     * @return String as a welcome message .
+     */
+    public String createWelcomeMessage() {
+        return ui.showWelcome();
     }
 }

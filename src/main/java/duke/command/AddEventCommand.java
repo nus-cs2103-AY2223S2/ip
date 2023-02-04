@@ -30,10 +30,10 @@ public class AddEventCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task event = new Event(description, from, to);
         tasks.addTask(event);
-        ui.formResponse("New event task added: " + event);
         storage.save(tasks.getList());
+        return ui.formResponse("New event task added: " + event);
     }
 }

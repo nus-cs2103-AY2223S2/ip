@@ -1,6 +1,5 @@
 package duke.ui;
 
-import duke.Main;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -9,10 +8,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-
-import duke.Duke;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.IOException;
+
+import duke.Duke;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -28,11 +29,12 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Duke duke;
+    private final Stage stage;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/LeDuke_avatar.png"));
 
-    public MainWindow() {
+    public MainWindow(Duke duke, Stage stage) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/MainWindow.fxml"));
             fxmlLoader.setController(this);
@@ -42,16 +44,14 @@ public class MainWindow extends AnchorPane {
             e.printStackTrace();
         }
 
-        this.setDuke(new Duke());
+        this.duke = duke;
+        this.showWelcomeMessage();
+        this.stage = stage;
     }
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-    }
-
-    public void setDuke(Duke d) {
-        duke = d;
     }
 
     /**
@@ -67,5 +67,23 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+
+        if (input.equals("bye")) {
+            fireCloseEvent();
+        }
+    }
+
+    private void fireCloseEvent() {
+        stage.fireEvent(new WindowEvent(
+                stage,
+                WindowEvent.WINDOW_CLOSE_REQUEST
+        ));
+    }
+
+    private void showWelcomeMessage() {
+        String welcomeMessage = duke.createWelcomeMessage();
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(welcomeMessage, dukeImage)
+        );
     }
 }

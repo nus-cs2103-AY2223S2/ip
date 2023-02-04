@@ -118,13 +118,13 @@ public class Parser {
             return new AddTodoCommand(description);
         case DEADLINE:
             String[] deadlineString = description.split("/by", 2);
-            String deadlineDescription = deadlineString[0];
+            String deadlineDescription = deadlineString[0].trim();
             LocalDate by = LocalDate.parse(deadlineString[1].trim());
 
             return new AddDeadlineCommand(deadlineDescription, by);
         case EVENT:
             String[] eventString = description.split("/from", 2);
-            String eventDescription = eventString[0];
+            String eventDescription = eventString[0].trim();
 
             // Parse the string to get to and from dates of the event
             String[] fromAndTo = eventString[1].split("/to", 2);

@@ -1,13 +1,10 @@
 package duke.ui;
 
-import java.util.Scanner;
-
 /**
  * Represents the UI of the bot.
  */
 public class Ui {
     private String botName;
-    private Scanner sc;
 
     /**
      * Constructor for UI.
@@ -16,13 +13,12 @@ public class Ui {
      */
     public Ui(String name) {
         this.botName = name;
-        this.sc = new Scanner(System.in);
     }
 
     /**
-     * Creates a decorated response message with self-adjusting width
-     * to match message length.
+     * Creates a decorated response message.
      * @param s Message.
+     * @return String representing Duke's response.
      */
     public String formResponse(String s) {
         return s;
@@ -30,45 +26,42 @@ public class Ui {
 
     /**
      * Shows welcome message.
+     * @return String representing welcome message.
      */
-    public void showWelcome() {
-        this.formResponse(botName + "Bot activated.");
-    }
-
-    /**
-     * Reads user input and returns it.
-     * @return User's input.
-     */
-    public String readCommand() {
-        return sc.nextLine();
+    public String showWelcome() {
+        return this.formResponse(botName + " activated.");
     }
 
     /**
      * Displays terminating message and closes the scanner.
+     * @return String representing goodbye message.
      */
-    public void terminate() {
-        this.formResponse("Bot terminated.");
-        this.sc.close();
+    public String terminate() {
+        return this.formResponse("Not staying for Taco Tuesday? :<");
     }
 
-    public void showSaveNotFound() {
-        this.formResponse("An error occurred while locating save file.");
+    public void printSaveNotFound() {
+        this.print("An error occurred while locating save file.");
     }
 
-    public void showFileCreatedSuccessfully() {
-        this.formResponse("New save file created.");
+    public void printFileCreatedSuccessfully() {
+        this.print("New save file created.");
     }
 
-    public void showCreatingFile() {
-        this.formResponse("Save file detected. Loading...");
+    public void printCreatingFile() {
+        this.print("Save file detected. Loading...");
     }
 
-    public void showSavingFile() {
-        this.formResponse("Saving file...");
+    public void printSavingFile() {
+        this.print("Saving file...");
     }
 
-    public void showError(String s) {
-        this.formResponse(s);
+    public void printSavingFileError() {
+        this.print("Something went wrong with saving file.");
+    }
+
+    public void print(String s) {
+        System.out.println(s);
     }
 
 }

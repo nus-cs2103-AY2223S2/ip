@@ -28,10 +28,10 @@ public class AddDeadlineCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task deadline = new Deadline(deadlineDescription, by);
         tasks.addTask(deadline);
-        ui.formResponse("New deadline task added: " + deadline);
         storage.save(tasks.getList());
+        return ui.formResponse("New deadline task added: " + deadline);
     }
 }

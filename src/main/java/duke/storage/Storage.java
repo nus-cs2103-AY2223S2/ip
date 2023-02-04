@@ -44,10 +44,10 @@ public class Storage {
     private void loadTaskFromFile(String task) {
         // Parser
         String[] command = task.split("\\|");
-        String taskType = command[0];
-        String description = command[2];
+        String taskType = command[0].trim();
+        String description = command[2].trim();
 
-        Task t = new Task("");
+        Task t = new Todo(""); // Placeholder task
 
         switch (taskType) {
         case "T":
@@ -65,7 +65,7 @@ public class Storage {
         default:
         }
 
-        boolean isMarked = command[1].equals("1");
+        boolean isMarked = command[1].trim().equals("1");
         if (isMarked) {
             t.markAsDone();
         }
@@ -95,12 +95,12 @@ public class Storage {
         // Create file if not exist
         try {
             if (file.createNewFile()) {
-                ui.showFileCreatedSuccessfully();
+                ui.printFileCreatedSuccessfully();
             } else {
-                ui.showCreatingFile();
+                ui.printCreatingFile();
             }
         } catch (IOException e) {
-            ui.showError("Something went wrong while creating a new save");
+            ui.print("Something went wrong while creating a new save");
         }
 
         return file;
@@ -124,7 +124,7 @@ public class Storage {
             }
             sc.close();
         } catch (FileNotFoundException e) {
-            ui.showSaveNotFound();
+            ui.printSaveNotFound();
         } finally {
             return this.taskList;
         }
@@ -134,7 +134,7 @@ public class Storage {
      * Saves the task list to hard drive.
      */
     public void save(List<Task> tasks) {
-        ui.showSavingFile();
+        ui.printSavingFile();
         try {
             FileWriter fw = new FileWriter(this.fileDirectory + "/" + this.fileName);
 
@@ -146,7 +146,7 @@ public class Storage {
             fw.close();
 
         } catch (IOException e) {
-            ui.showError("Something went wrong with saving file.");
+            ui.printSavingFileError();
         }
     }
 }
