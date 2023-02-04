@@ -1,8 +1,13 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task1{
-  public String time;
+  public LocalDateTime time;
   public Deadline(String string, String time) {
     super(string);
-    this.time = time;
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+    this.time = LocalDateTime.parse(time, formatter);
   }
   @Override
   public void printType() {

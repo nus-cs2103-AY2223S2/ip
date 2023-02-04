@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.time.LocalDate;
 
 public class Duke2 {
   public static void listTask(ArrayList<Task1> tasks) {
@@ -24,7 +25,8 @@ public class Duke2 {
 
   public static String combineStrArr(String[] strArr) {
     StringBuilder curStr = new StringBuilder();
-    for (int i = 1; i < strArr.length; i++) {
+    curStr.append(strArr[1]);
+    for (int i = 2; i < strArr.length; i++) {
       curStr.append(" ").append(strArr[i]);
     }
     return curStr.toString();
@@ -50,9 +52,9 @@ public class Duke2 {
     String[] strArr = str.split(" ");
     String[] strArrP = str.split("/");
     if (strArr.length < 2) {
-      throw new EmptyDescription(new Deadline("", ""));
+      throw new EmptyDescription(new Deadline("", "2022-01-01 0000"));
     } else if (strArrP.length < 2) {
-      throw new EmptyTime(new Deadline("", ""));
+      throw new EmptyTime(new Deadline("", "2022-01-01 0000"));
     } else {
       System.out.println("---------------------------");
       System.out.println("Got it. I've added this task:");
@@ -62,9 +64,9 @@ public class Duke2 {
       String time = combineStrArr(strArr2);
       String[] strArr3 = strArr1[0].split(" ");
       String task = combineStrArr(strArr3);
-      System.out.println(" [D][ ] " + task + " (by: " + time + ")");
-      Task1 curTask = new Deadline(task, time);
+      Deadline curTask = new Deadline(task, time);
       tasks.add(curTask);
+      System.out.println(" [D][ ] " + task + " (by: " + curTask.time + ")");
       System.out.println("Now you have " + tasks.size() + " tasks in the list.");
       System.out.println("---------------------------");
     }
@@ -73,9 +75,9 @@ public class Duke2 {
     String[] strArr = str.split(" ");
     String[] strArrP = str.split("/");
     if (strArr.length < 2) {
-      throw new EmptyDescription(new Event("", "", ""));
+      throw new EmptyDescription(new Event("", "2022-01-01 0000", "2022-01-01 0000"));
     } else if (strArrP.length < 3) {
-      throw new EmptyTime(new Event("", "", ""));
+      throw new EmptyTime(new Event("", "2022-01-01 0000", "2022-01-01 0000"));
     } else {
       System.out.println("---------------------------");
       System.out.println("Got it. I've added this task:");
@@ -88,10 +90,10 @@ public class Duke2 {
       String startTime = combineStrArr(strArr2);
       String endTime = combineStrArr(strArr3);
       String task = combineStrArr(strArr4);
-      System.out.println(" [E][ ] " + task + " (from: "
-          + startTime + " to: " + endTime + ")");
-      Task1 curTask = new Event(task, startTime, endTime);
+      Event curTask = new Event(task, startTime, endTime);
       tasks.add(curTask);
+      System.out.println(" [E][ ] " + task + " (from: "
+          + curTask.startTime + " to: " + curTask.endTime + ")");
       System.out.println("Now you have " + tasks.size() + " tasks in the list.");
       System.out.println("---------------------------");
     }
@@ -142,7 +144,7 @@ public class Duke2 {
     System.out.println("---------------------------");
   }
 
-  public static void main(String[] args) throws IOException, NoSuchTask {
+  public static void main(String[] args) throws IOException {
     String logo = " ____        _        \n"
         + "|  _ \\ _   _| | _____ \n"
         + "| | | | | | | |/ / _ \\\n"
