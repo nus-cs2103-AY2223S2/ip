@@ -16,24 +16,26 @@ public abstract class Command {
      */
     public static Command create(String[] commandWordContent) {
         assert commandWordContent != null : "Command should not be null.";
-        String commandWord = commandWordContent[0];
+        CommandType commandType = CommandType.valueOf(commandWordContent[0].toUpperCase());
         String commandContent = commandWordContent[1];
-        switch (commandWord) {
-        case "bye":
+        switch (commandType) {
+        case BYE:
             return new ExitCommand();
-        case "list":
+        case LIST:
             return new ListCommand();
-        case "delete":
+        case DELETE:
             return new DeleteCommand(commandContent);
-        case "mark":
-        case "unmark":
-            return new MarkCommand(commandWord, commandContent);
-        case "todo":
-        case "deadline":
-        case "event":
-            return new AddCommand(commandWord.toUpperCase().charAt(0), commandContent);
-        case "find":
+        case MARK:
+        case UNMARK:
+            return new MarkCommand(commandType, commandContent);
+        case TODO:
+        case DEADLINE:
+        case EVENT:
+            return new AddCommand(commandType, commandContent);
+        case FIND:
             return new FindCommand(commandContent.strip().split(" "));
+        case REMIND:
+            return new RemindCommand();
         default:
             throw new UnknownCommandException();
         }

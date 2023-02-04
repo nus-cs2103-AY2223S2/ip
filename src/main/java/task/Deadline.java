@@ -40,6 +40,11 @@ public class Deadline extends Task {
     }
 
     @Override
+    public boolean isSoon() {
+        return this.by.isBefore(LocalDateTime.now().plusDays(7)) && this.by.isAfter(LocalDateTime.now());
+    }
+
+    @Override
     public String toString() {
         return String.format(
                 "[D]%s (by: %s)",

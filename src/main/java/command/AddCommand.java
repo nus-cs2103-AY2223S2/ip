@@ -14,11 +14,11 @@ public class AddCommand extends Command {
 
     /**
      * Constructs an AddCommand object.
-     * @param taskType The type of task to create in the command.
+     * @param commandType The type of task to create in the command.
      * @param commandContent Content to be stored within the task.
      */
-    public AddCommand(char taskType, String commandContent) {
-        this.taskType = taskType;
+    public AddCommand(CommandType commandType, String commandContent) {
+        this.taskType = commandType.toString().charAt(0);
         this.content = commandContent;
     }
 

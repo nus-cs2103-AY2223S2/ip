@@ -14,11 +14,11 @@ public class MarkCommand extends Command {
 
     /**
      * Constructor for MarkCommand.
-     * @param commandWord Whether to mark or unmark the task.
+     * @param commandType Whether to mark or unmark the task.
      * @param commandContent Potentially contains the id of the task to be marked.
      */
-    public MarkCommand(String commandWord, String commandContent) {
-        this.isToMark = commandWord.equals("mark");
+    public MarkCommand(CommandType commandType, String commandContent) {
+        this.isToMark = commandType == CommandType.MARK;
         this.index = Parser.parseInt(commandContent, "Item Marking") - 1;
     }
 

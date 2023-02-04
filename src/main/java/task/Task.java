@@ -60,6 +60,14 @@ public abstract class Task {
         return this.content;
     }
 
+    /**
+     * Checks when the task will be important.
+     * @return Whether the deadline or start of event is soon.
+     */
+    public boolean isSoon() {
+        return false;
+    }
+
     @Override
     public String toString() {
         String markedStatus = this.isMarked() ? "X" : " ";

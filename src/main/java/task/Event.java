@@ -47,6 +47,11 @@ public class Event extends Task {
     }
 
     @Override
+    public boolean isSoon() {
+        return this.from.isBefore(LocalDateTime.now().plusDays(7)) && this.from.isAfter(LocalDateTime.now());
+    }
+
+    @Override
     public String toString() {
         return String.format(
                 "[E]%s (from: %s to: %s)",

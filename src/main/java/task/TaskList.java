@@ -88,6 +88,15 @@ public class TaskList {
     }
 
     /**
+     * Filters items in the list.
+     * @param taskPredicate A filter that returns a boolean.
+     * @return A filtered list of items.
+     */
+    private List<Task> filterItems(Predicate<Task> taskPredicate) {
+        return this.tasks.stream().filter(taskPredicate).collect(Collectors.toList());
+    }
+
+    /**
      * Prints out all tasks in the list.
      */
     public String listItems() {
@@ -104,7 +113,7 @@ public class TaskList {
         }
 
         String response = "OK OK Uncle Roger tell you what to do:\n";
-        List<Task> filteredTasks = this.tasks.stream().filter(taskPredicate).collect(Collectors.toList());
+        List<Task> filteredTasks = this.filterItems(taskPredicate);
         response += IntStream.range(0, filteredTasks.size())
                 .mapToObj(i -> String.format("%d. %s\n", i + 1, filteredTasks.get(i)))
                 .collect(Collectors.joining());
