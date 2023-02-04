@@ -7,6 +7,8 @@ import java.util.List;
 
 import aqua.util.DateUtils;
 import aqua.util.Timeable;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -15,6 +17,7 @@ import javafx.scene.layout.VBox;
 public class DaySchedule extends HBox {
     private static final double ROW_WIDTH = 600;
     private static final double ROW_HEIGHT = 15;
+    private static final double HOURS_IN_A_DAY = 24;
     private static final double MINUTES_IN_A_DAY = 1440;
 
     private final VBox rowDisplayArea = new VBox();
@@ -24,7 +27,10 @@ public class DaySchedule extends HBox {
         getChildren().addAll(rowDisplayArea);
         List<? extends List<ScheduleTimeable>> sepTimeable = separateConflicting(timeables);
         for (List<ScheduleTimeable> row : sepTimeable) {
-            addRow(startTime, row);
+            rowDisplayArea.getChildren().add(createRow(startTime, row));
+        }
+        if (sepTimeable.isEmpty()) {
+            rowDisplayArea.getChildren().add(createRow());
         }
     }
 
@@ -61,17 +67,25 @@ public class DaySchedule extends HBox {
     }
 
 
-    private void addRow(LocalDateTime startTime, List<ScheduleTimeable> timeables) {
+    private Pane createRow() {
         Pane pane = new Pane();
         pane.setMinWidth(ROW_WIDTH);
         pane.setMaxHeight(ROW_HEIGHT);
+        pane.getChildren().add(drawMarkings());
+        return pane;
+    }
+
+
+    private Pane createRow(LocalDateTime startTime, List<ScheduleTimeable> timeables) {
+        Pane pane = createRow();
+
         for (ScheduleTimeable timeable : timeables) {
             double startX = (startTime.until(timeable.getStart(), ChronoUnit.MINUTES) / MINUTES_IN_A_DAY)
                     * ROW_WIDTH;
-            startX = Math.max(0, startX);
+            startX = Math.max(0, startX) + 0.5;
             double endX = (startTime.until(timeable.getEnd(), ChronoUnit.MINUTES) / MINUTES_IN_A_DAY)
                     * ROW_WIDTH;
-            endX = Math.min(ROW_WIDTH, endX);
+            endX = Math.min(ROW_WIDTH, endX) + 0.5;
 
             Pane scheduleBox = new Pane();
             scheduleBox.setMinHeight(ROW_HEIGHT);
@@ -81,6 +95,20 @@ public class DaySchedule extends HBox {
             pane.getChildren().add(scheduleBox);
             scheduleBox.setLayoutX(startX);
         }
-        rowDisplayArea.getChildren().add(pane);
+
+        return pane;
+    }
+
+
+    private Canvas drawMarkings() {
+        Canvas canvas = new Canvas(ROW_WIDTH, ROW_HEIGHT);
+        GraphicsContext context = canvas.getGraphicsContext2D();
+
+        for (int i = 0; i <= HOURS_IN_A_DAY; i++) {
+            double xMark = (i / HOURS_IN_A_DAY) * ROW_WIDTH + 0.5;
+            context.strokeLine(xMark, 0, xMark, ROW_HEIGHT);
+        }
+
+        return canvas;
     }
 }
