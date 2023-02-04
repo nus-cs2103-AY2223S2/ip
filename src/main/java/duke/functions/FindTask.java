@@ -2,30 +2,20 @@ package duke.functions;
 
 import duke.task.Task;
 
-public class FindTask extends Functions {
-
-    /**
-     * Constructor for an instance of Function.
-     *
-     * @param fn Function object that defines the overall function of the Duke program
-     */
-    public FindTask(Functions fn) {
-        super(fn.getTl(), fn.getSt(), fn.getOutputLayout());
-    }
-
+public class FindTask {
     /**
      * Method to define the find function for the find button
      *
      * @param query Keyword to search
      */
-    public void find(String query) {
+    static public void find(Functions fn, String query) {
         boolean flag = false;
         boolean printed = false;
         int i = 1;
         String h = "";
         String task = "";
 
-        for (Task t : tl.iterable()) {
+        for (Task t : fn.getTl().iterable()) {
             if (t.getDes().contains(query)) {
                 flag = true;
                 if (flag && !printed) {
@@ -39,10 +29,10 @@ public class FindTask extends Functions {
         }
         if (!flag) {
             String s = "No matching tasks are found in your list\n";
-            outputLayout.getChildren().add(getDialogLabel(s));
+            fn.getOutputLayout().getChildren().add(fn.getDialogLabel(s));
         } else {
             String t = "Search done!\n";
-            outputLayout.getChildren().add(getDialogLabel(h + task + t));
+            fn.getOutputLayout().getChildren().add(fn.getDialogLabel(h + task + t));
         }
     }
 }

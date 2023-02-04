@@ -17,22 +17,14 @@ public class TaskMap {
      * @return Corresponding object
      */
     static public Task get(String s) {
-        Task t = null;
         switch (s) {
         case "T":
-            t = new ToDo();
-            break;
+            return new ToDo();
         case "E":
-            t = new Event();
-            break;
+            return new Event();
         case "D":
-            t = new Deadline();
-            break;
+            return new Deadline();
         }
-        assert t == null : "Task not loaded properly";
-        if (t == null) {
-            t = new Task();
-        }
-        return t;
+        return new Task();
     }
 }

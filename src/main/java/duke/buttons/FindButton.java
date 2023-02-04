@@ -27,7 +27,7 @@ public class FindButton extends DukeButton {
 
         findTaskButton.setOnMouseClicked((event) -> {
             String keyword = keywordTextField.getText();
-            new FindTask(this.fn).find(keyword);
+            FindTask.find(super.fn, keyword);
         });
 
         return vbox;

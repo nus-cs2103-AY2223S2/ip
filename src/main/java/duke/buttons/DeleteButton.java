@@ -27,7 +27,7 @@ public class DeleteButton extends DukeButton {
 
         delTaskButton.setOnMouseClicked((event) -> {
             String delIndex = delTextField.getText();
-            new DeleteTask(this.fn).delete(delIndex);
+            DeleteTask.delete(super.fn, delIndex);
         });
 
         return vbox;
