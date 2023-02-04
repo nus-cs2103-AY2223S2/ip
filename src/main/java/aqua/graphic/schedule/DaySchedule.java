@@ -13,7 +13,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Rectangle;
 
 
 public class DaySchedule extends HBox {
@@ -87,16 +86,21 @@ public class DaySchedule extends HBox {
         Pane pane = new Pane();
         pane.setMinWidth(ROW_WIDTH);
         pane.setMaxHeight(ROWHEIGHT);
-        for (Timeable timeable : timeables) {
+        for (ScheduleTimeable timeable : timeables) {
             double startX = (startTime.until(timeable.getStart(), ChronoUnit.MINUTES) / MINUTES_IN_A_DAY)
                     * ROW_WIDTH;
             startX = Math.max(0, startX);
             double endX = (startTime.until(timeable.getEnd(), ChronoUnit.MINUTES) / MINUTES_IN_A_DAY)
                     * ROW_WIDTH;
             endX = Math.min(ROW_WIDTH, endX);
-            Rectangle rectangle = new Rectangle(endX - startX, ROWHEIGHT);
-            pane.getChildren().add(rectangle);
-            rectangle.setLayoutX(startX);
+
+            Pane scheduleBox = new Pane();
+            scheduleBox.setMinHeight(ROWHEIGHT);
+            scheduleBox.setMinWidth(endX - startX);
+            scheduleBox.getStyleClass().setAll(timeable.getStyleClass());
+
+            pane.getChildren().add(scheduleBox);
+            scheduleBox.setLayoutX(startX);
         }
         rowDisplayArea.getChildren().add(pane);
     }
