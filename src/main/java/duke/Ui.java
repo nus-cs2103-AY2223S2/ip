@@ -121,7 +121,7 @@ public class Ui {
                 toPrint += ((i + 1) + "." + tasks.get(i)) + "\n";
                 if (!isGui) {
                     toPrint += "      ";
-            }
+                }
             }
             if (isGui) {
                 return toPrint.substring(0, toPrint.length() - 1);
@@ -290,21 +290,6 @@ public class Ui {
      */
     public String stringError(String err) {
         return err;
-    }
-
-    /**
-     * Print out load error when loading from a file
-     */
-    public void showLoadingError() {
-        printer(stringLoadingError());
-    }
-
-    /**
-     * Print out load error when loading from a file
-     * @return String representation of loading error
-     */
-    public String stringLoadingError() {
-        return "File load has error";
     }
 
     /**

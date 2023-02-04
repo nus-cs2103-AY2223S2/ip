@@ -51,8 +51,9 @@ public class Storage {
      * Loads the items from storage
      *
      * @return Array of tasks
+     * @throws DukeException
      */
-    public ArrayList<Task> load() {
+    public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasksList = new ArrayList<Task>(100);
         try {
             Scanner scanner = new Scanner(new File("duke_data.txt"));
@@ -61,28 +62,31 @@ public class Storage {
                 boolean isDone = line.indexOf("[X]") == -1 ? false : true;
                 line = line.replace("[ ]", "");
                 line = line.replace("[X]", "");
+                String[] parsed = Parser.handleTask(line);
                 if (line.startsWith(Commands.TODO.cmd())) {
-                    String[] parsed = Parser.handleTask(line);
                     String title = parsed[0];
                     Task newTask = new Todo(title, isDone);
                     tasksList.add(newTask);
                 } else if (line.startsWith(Commands.DEADLINE.cmd())) {
-                    String[] parsed = Parser.handleTask(line);
                     String title = parsed[0];
                     String deadline = parsed[1];
                     Task newTask = new Deadline(title, deadline, isDone);
                     tasksList.add(newTask);
                 } else if (line.startsWith(Commands.EVENT.cmd())) {
-                    String[] parsed = Parser.handleTask(line);
                     String title = parsed[0];
                     String from = parsed[1];
                     String to = parsed[2];
                     Task newTask = new Event(title, from, to, isDone);
                     tasksList.add(newTask);
+                } else {
+                    throw new DukeException(Views.LOAD_EXTRA_ERR_STRING.eng());
                 }
             }
             scanner.close();
         } catch (Exception e) {
+            if (e instanceof DukeException) {
+                throw new DukeException(e.getMessage());
+            }
             // Silent fail if cannot load previous file
         }
         return tasksList;
