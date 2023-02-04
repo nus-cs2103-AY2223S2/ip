@@ -75,17 +75,17 @@ public class UI {
     }
 
     /**
-     * Display success message when user add tasks into list.
+     * Private util method to extract duplicate code
      *
-     * @param theTask the task added into the list.
-     * @param tasks the list of tasks.
+     * @param theTask the target task
+     * @param header word to be said by Duke
+     * @return the StringBuilder containing the header and task
      */
-    public static void showAdd(Task theTask, TaskList tasks) {
-        System.out.println(WORD_ADD);
-        System.out.println(theTask.toString());
-        int numTask = tasks.getTaskList().size();
-        System.out.println("Now you have " + numTask +
-                " tasks in the list.");
+    private static StringBuilder getStringBuilder(Task theTask, String header) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(header).append("\n");
+        sb.append(theTask.toString()).append("\n");
+        return sb;
     }
 
     /**
@@ -96,27 +96,11 @@ public class UI {
      * @return the success message.
      */
     public static String returnAdd(Task theTask, TaskList tasks) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(WORD_ADD).append("\n");
-        sb.append(theTask.toString()).append("\n");
+        StringBuilder sb = getStringBuilder(theTask, WORD_ADD);
         int numTask = tasks.getTaskList().size();
         sb.append("Now you have " + numTask +
                 " tasks in the list.");
         return sb.toString();
-    }
-
-    /**
-     * Display success message when user delete tasks from list.
-     *
-     * @param theTask the task deleted from the list.
-     * @param tasks the list of tasks.
-     */
-    public static void showDelete(Task theTask, TaskList tasks) {
-        System.out.println(WORD_DELETE);
-        System.out.println(theTask.toString());
-        int numTask = tasks.getTaskList().size();
-        System.out.println("Now you have " + numTask +
-                " tasks in the list.");
     }
 
     /**
@@ -127,29 +111,11 @@ public class UI {
      * @return the delete message.
      */
     public static String returnDelete(Task theTask, TaskList tasks) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(WORD_DELETE).append("\n");
-        sb.append(theTask.toString()).append("\n");
+        StringBuilder sb = getStringBuilder(theTask, WORD_DELETE);
         int numTask = tasks.getTaskList().size();
         sb.append("Now you have " + numTask +
                 " tasks in the list.");
         return sb.toString();
-    }
-
-    /**
-     * Display success message when user list all the tasks,
-     * or list the tasks on the specific date.
-     *
-     * @param str a string containing the list of tasks to be displayed.
-     * @param action 0 for list, 1 for search.
-     */
-    public static void showList(String str, int action) {
-        if (action == 0) {
-            System.out.println(WORD_LIST);
-        } else {
-            System.out.println(WORD_SEARCH);
-        }
-        System.out.println(str);
     }
 
     /**
@@ -177,21 +143,6 @@ public class UI {
      *
      * @param theTask the task to be marked.
      * @param action 0 for mark, 1 for unmark.
-     */
-    public static void showMark(Task theTask, int action) {
-        if (action == 0) {
-            System.out.println(WORD_MARK_DONE);
-        } else {
-            System.out.println(WORD_MARK_UNDONE);
-        }
-        System.out.println(" " + theTask.toString());
-    }
-
-    /**
-     * Display success message when user mark a task as done or undone.
-     *
-     * @param theTask the task to be marked.
-     * @param action 0 for mark, 1 for unmark.
      * @return the mark or unmark string.
      */
     public static String returnMark(Task theTask, int action) {
@@ -204,16 +155,6 @@ public class UI {
         sb.append("\n");
         sb.append(" " + theTask.toString());
         return sb.toString();
-    }
-
-    /**
-     * Display success message when user find tasks based on specific pattern.
-     *
-     * @param str the find keyword.
-     */
-    public static void showFind(String str) {
-        System.out.println(WORD_FIND);
-        System.out.println(str);
     }
 
     /**

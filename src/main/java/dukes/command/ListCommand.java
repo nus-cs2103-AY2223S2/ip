@@ -72,11 +72,9 @@ public class ListCommand extends Command {
             return ui.returnList(output, 0);
         } else { // search
             List<Task> targetTasks = new ArrayList<>();
-            int counter = 0;
             for (int i = 0; i < taskList.size(); i++) {
                 Task theTask = taskList.get(i);
                 if (isWithinDate(theTask)) {
-                    counter += 1;
                     targetTasks.add(theTask);
                 }
             }
