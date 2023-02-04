@@ -22,8 +22,13 @@ public class UiTest {
 
         System.out.flush();
 
+        // Remove line breaks, both windows or unix styles
+        expected = expected.replace("\n", "");
+        String actual = outContent.toString().replace("\n", "");
+        actual = actual.replace("\r", "");
+
         // Assert output
-        Assertions.assertEquals(expected, outContent.toString());
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test
@@ -47,8 +52,13 @@ public class UiTest {
 
         System.out.flush();
 
+        // Remove line breaks, both windows or unix styles
+        expected = expected.replace("\n", "");
+        String actual = outContent.toString().replace("\n", "");
+        actual = actual.replace("\r", "");
+
         // Assert output
-        Assertions.assertEquals(expected, outContent.toString());
+        Assertions.assertEquals(expected, actual);
     }
 
 }
