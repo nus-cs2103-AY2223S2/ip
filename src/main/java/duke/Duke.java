@@ -42,10 +42,4 @@ public class Duke {
             return e.getMessage();
         }
     }
-
-    public static void main(String ...args) throws DukeException {
-        Storage storage = new Storage("test.txt");
-        TaskList taskList = new TaskList(storage);
-        System.out.println(taskList.listTasks(task -> true, true));
-    }
 }
