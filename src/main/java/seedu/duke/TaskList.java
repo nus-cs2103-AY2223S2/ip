@@ -55,12 +55,15 @@ public class TaskList {
     /**
      * prints the tasks.
      */
-    public void showList(){
+    public String showList(){
+        String reply = "";
         System.out.println("    -------------------------------------------");
         for (int i = 0; i < list.size(); i++) {
+            reply += "    " + String.valueOf(i + 1) + "."  + list.get(i).toString() +"\n";
             System.out.println("    " + String.valueOf(i + 1) + "."  + list.get(i).toString());
         }
         System.out.println("    -------------------------------------------");
+        return reply;
     }
 
     /**
@@ -176,7 +179,7 @@ public class TaskList {
         list.remove(index);
     }
 
-    public void find(String[] echoSplit) {
+    public String find(String[] echoSplit) {
         System.out.println("    -------------------------------------------");
         String keyword = echoSplit[1];
         for (int i = 0; i < list.size(); i++) {
@@ -184,11 +187,14 @@ public class TaskList {
             String[] taskSplit = description.split(" ");
             for (int j = 0; j < taskSplit.length; j++) {
                 if (keyword.equals(taskSplit[j])) {
+
                     System.out.println("    " + String.valueOf(i + 1) + "."  + list.get(i).toString());
-                    break;
+                    return "    " + String.valueOf(i + 1) + "."  + list.get(i).toString();
+
                 }
             }
         }
         System.out.println("    -------------------------------------------");
+        return "not found";
     }
 }

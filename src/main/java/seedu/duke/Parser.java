@@ -18,35 +18,44 @@ public class Parser {
      * @param COUNTER int indicating list size
      * @param tasks TaskList object containing the tasks list and functions.
      */
-    public void parse(String echo, String[] echoSplit, int COUNTER, TaskList tasks) throws DukeException {
+    public String parse(String echo, String[] echoSplit, int COUNTER, TaskList tasks) throws DukeException {
         if (echo.equals("list")) {
-            tasks.showList();
+            return tasks.showList();
         } else if (echoSplit.length < 2 && !echo.equals("")) {
             throw new DukeException();
         } else if (echoSplit[0].equals("mark")) {
             int index = Integer.valueOf(echoSplit[1]) - 1;
             tasks.mark(index);
+            return "Marked " + index;
         } else if (echoSplit[0].equals("unmark")) {
             int index = Integer.valueOf(echoSplit[1]) - 1;
             tasks.unmark(index);
+            return "Unmarked " + index;
         } else {
             if (echoSplit[0].equals("todo")) {
                 tasks.addToDo(echoSplit);
                 COUNTER++;
+                return "added task";
             } else if (echoSplit[0].equals("deadline")) {
                 tasks.addDeadline(echoSplit, 0);
                 COUNTER++;
+                return "added deadline task";
             } else if (echoSplit[0].equals("event")) {
                 tasks.addEvent(echoSplit, 0);
                 COUNTER++;
+                return "added event task";
             } else if (echoSplit[0].equals("delete")) {
                 int index = Integer.valueOf(echoSplit[1]) - 1;
                 tasks.delete(index);
                 COUNTER--;
+                return "delete task " + index;
             } else if (echoSplit[0].equals("find")) {
-                tasks.find(echoSplit);
+                return tasks.find(echoSplit);
+
             } else {
+
                 System.out.println("I don't know what you are talking about");
+                return "I don't know what you are talking about";
             }
         }
 

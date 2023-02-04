@@ -15,19 +15,19 @@ public class Ui {
                 "What can I do for you?\n" + logo);
     }
 
-    public boolean getInput(TaskList tasks) throws DukeException {
-        Scanner input = new Scanner(System.in);
-        String echo = input.nextLine();
+    public static String getInput(TaskList tasks, String input) throws DukeException {
+//        Scanner input = new Scanner(System.in);
+        String echo = input;
         String[] echoSplit = echo.split(" ");
 
         if(echo.equals("bye")) {
-            System.out.println("    -------------------------------------------\n"
-                    + "    Bye. Hope to see you again soon!\n    -------------------------------------------");
-            return false;
+//            System.out.println("    -------------------------------------------\n"
+//                    + "    Bye. Hope to see you again soon!\n    -------------------------------------------");
+            return "    Bye. Hope to see you again soon!";
         } else {
             Parser parser = new Parser();
-            parser.parse(echo, echoSplit, COUNTER, tasks);
-            return true;
+            String reply = parser.parse(echo, echoSplit, COUNTER, tasks);
+            return reply;
         }
 
     }

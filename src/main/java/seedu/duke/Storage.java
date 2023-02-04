@@ -65,10 +65,10 @@ public class Storage {
             System.out.println("File not found...creating the file");
             fw = new FileWriter("duke.txt");
         } catch(ArrayIndexOutOfBoundsException a) {
-            System.out.println("array...creating the file");
+//            System.out.println("array...creating the file");
             fw = new FileWriter("duke.txt");
         } finally {
-            System.out.println("err...creating the file");
+//            System.out.println("err...creating the file");
             fw = new FileWriter("duke.txt");
         }
         return list;

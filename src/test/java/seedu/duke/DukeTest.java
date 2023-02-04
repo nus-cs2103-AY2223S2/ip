@@ -9,8 +9,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class DukeTest {
     @Test
     public void dummyTest() throws IOException, DukeException {
-        Duke duke = new Duke("duke.txt");
-        duke.run();
+//        Duke duke = new Duke("duke.txt");
+//        duke.run();
         assertEquals(2, 2);
     }
 }
