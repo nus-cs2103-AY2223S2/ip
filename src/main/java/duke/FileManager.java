@@ -30,16 +30,16 @@ public class FileManager {
             FileInputStream fis = new FileInputStream(this.filePath);
             ObjectInputStream ois = new ObjectInputStream(fis);
             ArrayList<Task> toDoList = (ArrayList<Task>) ois.readObject();
-            System.out.println(this.ui.savedFileFound());
+            //System.out.println(this.ui.savedFileFound());
             TaskList taskList = new TaskList(toDoList);
             return taskList;
         } catch (IOException e) {
-            System.out.println(this.ui.savedFileNotFound());
+            //System.out.println(this.ui.savedFileNotFound());
             ArrayList<Task> toDoList = new ArrayList<Task>();
             TaskList taskList = new TaskList(toDoList);
             return taskList;
         } catch (ClassNotFoundException e) {
-            System.out.println(this.ui.savedFileNotFound());
+            //System.out.println(this.ui.savedFileNotFound());
             ArrayList<Task> toDoList = new ArrayList<Task>();
             TaskList taskList = new TaskList(toDoList);
             return taskList;

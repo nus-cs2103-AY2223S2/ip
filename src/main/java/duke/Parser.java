@@ -30,25 +30,25 @@ public class Parser {
      * event [Event description] /from [Date in YYYY-MM-DD format] /to [Date in YYYY-MM-DD format]
      * @param userMessage String input from the user
      */
-    public void parse(String userMessage) {
+    public String parse(String userMessage) {
         String [] parts = userMessage.split(" ", 2);
 
         if (parts[0].equals("bye")) {
-            bye();
+            return bye();
         } else if (parts[0].equals("list")) {
-            list();
+            return list();
         } else if (parts[0].equals("mark")) {
-            mark(userMessage);
+            return mark(userMessage);
         } else if (parts[0].equals("unmark")) {
-            unmark(userMessage);
+            return unmark(userMessage);
         } else if (parts[0].equals("delete")) {
-            delete(userMessage);
+            return delete(userMessage);
         } else if (parts[0].equals("todo")) {
             try {
                 Todo newToDo = new Todo(parts[1]);
-                this.taskList.add(newToDo);
+                return this.taskList.add(newToDo);
             } catch (IndexOutOfBoundsException e) {
-                System.out.println("    OOPS!!! The description of todo cannot be empty.");
+                return "Bruhh.. The description of todo cannot be empty.";
             }
         } else if (parts[0].equals("deadline")) {
             try {
@@ -56,11 +56,11 @@ public class Parser {
                 String[] deadline = deadlineParts[1].split(" ", 2);
                 LocalDate byDate = LocalDate.parse(deadline[1]);
                 Deadline newDeadline = new Deadline(deadlineParts[0], byDate);
-                this.taskList.add(newDeadline);
+                return this.taskList.add(newDeadline);
             } catch (IndexOutOfBoundsException e) {
-                System.out.println("    OOPS!!! The description of deadline cannot be empty.");
+                return "Bruhh.. The description of deadline cannot be empty.";
             } catch (DateTimeParseException e) {
-                System.out.println("    Incorrect date format, try again~");
+                return "Incorrect date format dude.. try again~";
             }
         } else if (parts[0].equals("event")) {
             try {
@@ -70,62 +70,60 @@ public class Parser {
                 LocalDate fromDate = LocalDate.parse(from[1]);
                 LocalDate toDate = LocalDate.parse(to[1]);
                 Event newEvent = new Event(eventParts[0], fromDate, toDate);
-                this.taskList.add(newEvent);
+                return this.taskList.add(newEvent);
             } catch (IndexOutOfBoundsException e) {
-                System.out.println("    OOPS!!! The description of event cannot be empty.");
+                return "Bruhh.. The description of event cannot be empty.";
             } catch (DateTimeParseException e) {
-                System.out.println("    Incorrect date format, please try again~");
+                return "Incorrect date format dude.. try again~";
             }
         } else if (parts[0].equals("find")) {
             try {
                 String keyword = parts[1];
-                System.out.println("    MATCHY Matchyyy!~ Here are the matching tasks:");
-                this.taskList.find(keyword);
+                return this.taskList.find(keyword);
             } catch (IndexOutOfBoundsException e) {
-                System.out.println("    OOPS!!! You gotta tell me what to search for :<");
+                return "Bruhh.. You gotta tell me what to search for :<";
             }
         } else {
-            System.out.println("    OOPS!!! I'm sorry, but I don't know what that means :<");
+            return "I have no idea what are you talking about dude..";
         }
     }
 
-    private void bye() {
+    private String bye() {
         this.fileManager.saveFile(this.taskList.getList());
-        System.out.print("  Cya~ Till next time!");
+        return "Cya boi";
     }
 
-    private void list() {
-        System.out.println("    Here are the tasks in your list:");
-        this.taskList.list();
+    private String list() {
+        return this.taskList.list();
     }
 
-    private void mark(String userMessage) {
+    private String mark(String userMessage) {
         String [] messageParts = userMessage.split(" ", 2);
         try {
             int taskNumber = Integer.parseInt(messageParts[1]);
-            this.taskList.mark(taskNumber);
+            return this.taskList.mark(taskNumber);
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("    Please specify which task to mark~  >:(");
+            return "Please specify which task to mark~  >:(";
         }
     }
 
-    private void unmark(String userMessage) {
+    private String unmark(String userMessage) {
         String [] messageParts = userMessage.split(" ", 2);
         try {
             int taskNumber = Integer.parseInt(messageParts[1]);
-            this.taskList.unmark(taskNumber);
+            return this.taskList.unmark(taskNumber);
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("    Please specify which task to unmark~  >:(");
+            return "Please specify which task to unmark~  >:(";
         }
     }
 
-    private void delete(String userMessage) {
+    private String delete(String userMessage) {
         String [] messageParts = userMessage.split(" ", 2);
         try {
             int taskNumber = Integer.parseInt(messageParts[1]);
-            this.taskList.remove(taskNumber);
+            return this.taskList.remove(taskNumber);
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("    Please specify which task to delete~  >:(");
+            return "Please specify which task to delete~  >:(";
         }
     }
 }

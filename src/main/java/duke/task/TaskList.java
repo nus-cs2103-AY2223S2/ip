@@ -9,11 +9,12 @@ public class TaskList {
         this.taskList = taskList;
     }
 
-    public void add(Task newTask) {
+    public String add(Task newTask) {
         this.taskList.add(newTask);
-        System.out.println("    Got it. I've added this task:");
-        System.out.println("     " + newTask.toString());
-        System.out.println("    Now you have " + this.taskList.size() + " tasks in the list");
+        String taskAdded = "Got it. I've added this task:";
+        String taskString = newTask.toString();
+        String totalTask = "Now you have " + Integer.toString(this.taskList.size()) + " tasks in the list";
+        return taskAdded + "\n" + taskString + "\n" + totalTask;
     }
 
     /**
@@ -24,16 +25,18 @@ public class TaskList {
      * Argument must be the task number and not index of the task in the list.
      * @param taskNumber
      */
-    public void remove(int taskNumber) {
+    public String remove(int taskNumber) {
         try {
             int taskIndex = taskNumber - 1;
             Task taskToRemove = this.taskList.get(taskIndex);
-            System.out.println("    Noted. I've removed this task:");
-            System.out.println("     " + taskToRemove.toString());
+            String taskRemoved = "Noted. I've removed this task:";
+            String taskString = taskToRemove.toString();
             this.taskList.remove(taskIndex);
-            System.out.println("    Now you have " + this.taskList.size() + " tasks in the list");
+            String totalTask = "Now you have " + Integer.toString(this.taskList.size()) + " tasks in the list";
+            return taskRemoved + "\n" + taskString + "\n" + totalTask;
         } catch (IndexOutOfBoundsException e) {
             System.out.println("    Incorrect selection made~  >:(");
+            return "Incorrect selection made~  >:(";
         }
     }
 
@@ -45,11 +48,12 @@ public class TaskList {
      * Argument must be the task number and not index of the task in the list.
      * @param taskNumber
      */
-    public void mark(int taskNumber) {
+    public String mark(int taskNumber) {
         int taskIndex = taskNumber - 1;
         this.taskList.get(taskIndex).mark();
-        System.out.println("    OK, I've marked this task as done:");
-        System.out.println("     " + this.taskList.get(taskIndex).toString());
+        String markMessage = "OK, I've marked this task as done:";
+        String taskString = this.taskList.get(taskIndex).toString();
+        return markMessage + "\n" + taskString;
     }
 
     /**
@@ -58,34 +62,42 @@ public class TaskList {
      * marks that task from the list with an " ".
      * @param taskNumber number label and not the index of the task in the list
      */
-    public void unmark(int taskNumber) {
+    public String unmark(int taskNumber) {
         int taskIndex = taskNumber - 1;
         this.taskList.get(taskIndex).unmark();
-        System.out.println("    OK, I've marked this task as not done yet:");
-        System.out.println("     " + this.taskList.get(taskIndex).toString());
+        String markMessage = "OK, I've marked this task as not done yet:";
+        String taskString = this.taskList.get(taskIndex).toString();
+        return markMessage + "\n" + taskString;
     }
 
     /**
      * Iterates through the list and prints every task description with a number label next to it.
      */
-    public void list() {
+    public String list() {
+        String listMessage = "Here are the tasks in your list:";
+        String listOfTask = "";
         for (int i = 0; i < this.taskList.size(); i++) {
             int numbering = i + 1;
-            System.out.println("    " + numbering + "." + taskList.get(i).toString());
+            listOfTask += Integer.toString(numbering) + "." + taskList.get(i).toString() + "\n";
         }
+        return listMessage + "\n" + listOfTask;
     }
 
-    public void find(String keyword) {
+    public String find(String keyword) {
+        String findMessage = "According to " + keyword + ", these are what I've found:";
         ArrayList<Task> searchResult = new ArrayList<Task>();
         for (int i = 0; i < this.taskList.size(); i++) {
             if (taskList.get(i).getDescription().contains(keyword) == true) {
                 searchResult.add(taskList.get(i));
             }
         }
+
+        String listOfResult = "";
         for (int j = 0; j < searchResult.size(); j++) {
             int numbering = j + 1;
-            System.out.println("    " + numbering + "." + searchResult.get(j).toString());
+            listOfResult += Integer.toString(numbering) + "." + searchResult.get(j).toString() + "\n";
         }
+        return findMessage + "\n" + listOfResult;
     }
 
     /**
