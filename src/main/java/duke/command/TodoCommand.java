@@ -16,8 +16,8 @@ public class TodoCommand extends Command {
      * @param fullCommand
      */
     public TodoCommand(String fullCommand) {
-        String[] checker = fullCommand.split("todo ");
-        this.message = checker[1];
+        String[] todoCommand = fullCommand.split("todo ");
+        this.message = todoCommand[1];
     }
 
     /**
@@ -28,9 +28,9 @@ public class TodoCommand extends Command {
      * @return String Output of the todo command when executed.
      */
     public String execute(TaskList tasks, StorageList storage) {
-        Todo t = new Todo(message);
-        tasks.addToList(t);
-        return "Got it, I've added this task:\n" + t + "\n" + tasks.statement();
+        Todo todoTask = new Todo(message);
+        tasks.addToList(todoTask);
+        return "Got it, I've added this task:\n" + todoTask + "\n" + tasks.getLengthMessage();
     }
 
 }

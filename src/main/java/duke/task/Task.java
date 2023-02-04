@@ -8,7 +8,7 @@ public class Task {
     protected String description;
     protected boolean isDone;
     protected String typeofTask = "";
-    protected String doneStr;
+    protected String doneString;
 
     /**
      * Constructor for the task class with description,
@@ -20,9 +20,10 @@ public class Task {
      */
     public Task(String description, String typeOfTask, String doneStr) {
         this.description = description;
-        this.doneStr = doneStr;
-        checkisdonestr();
+        this.doneString = doneStr;
         this.typeofTask = typeOfTask;
+        isTaskDone();
+
 
     }
 
@@ -41,8 +42,8 @@ public class Task {
      *
      * @return boolean - Returns true if contains "X" else will return false.
      */
-    public boolean checkisdonestr() {
-        if (this.doneStr.equals("X")) {
+    public boolean isTaskDone() {
+        if (this.doneString.equals("X")) {
             this.isDone = true;
         } else {
             this.isDone = false;

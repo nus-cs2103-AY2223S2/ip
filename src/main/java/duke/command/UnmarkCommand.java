@@ -9,7 +9,7 @@ import duke.task.TaskList;
  * Unmark command to indicate task as incomplete.
  */
 public class UnmarkCommand extends Command {
-    private int listNum;
+    private int taskNum;
 
     /**
      * Constructor for the unmark command.
@@ -17,8 +17,8 @@ public class UnmarkCommand extends Command {
      * @param input Input for which task to be unmarked.
      */
     public UnmarkCommand(String input) {
-        int taskNumberMark = Integer.valueOf(input) - 1;
-        this.listNum = taskNumberMark;
+        int taskNumber = Integer.valueOf(input) - 1;
+        this.taskNum = taskNumber;
 
     }
 
@@ -30,8 +30,8 @@ public class UnmarkCommand extends Command {
      * @return String Output when the command is unmarked.
      */
     public String execute(TaskList tasks, StorageList storage) throws DukeException {
-        tasks.unmarkTask(listNum);
-        return "Task " + (listNum + 1) + " has been marked as not done.\n" + tasks.statement();
+        tasks.unmarkTask(taskNum);
+        return "Task " + (taskNum + 1) + " has been marked as not done.\n" + tasks.getLengthMessage();
     }
 
 }

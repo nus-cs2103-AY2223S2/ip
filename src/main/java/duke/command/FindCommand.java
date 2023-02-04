@@ -18,8 +18,8 @@ public class FindCommand extends Command {
      * @param fullCommand Input for command to be found in task list.
      */
     public FindCommand(String fullCommand) {
-        String[] checker = fullCommand.split("find ");
-        this.message = checker[1];
+        String[] findCommand = fullCommand.split("find ");
+        this.message = findCommand[1];
     }
 
     /**
@@ -30,13 +30,13 @@ public class FindCommand extends Command {
      * @return String
      */
     public String execute(TaskList tasks, StorageList storage) {
-        ArrayList<Task> arrList = tasks.find(message);
-        String output = "";
-        for (Task t : arrList) {
-            output += t + "\n";
+        ArrayList<Task> tasksList = tasks.findStringInTask(message);
+        String stringOutputOfTask = "";
+        for (Task t : tasksList) {
+            stringOutputOfTask += t + "\n";
         }
 
-        return "Here are the matching tasks in your list: " + output;
+        return "Here are the matching tasks in your list: " + stringOutputOfTask;
     }
 
 }

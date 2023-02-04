@@ -18,7 +18,11 @@ public class ByeCommand extends Command {
         return "See you soon!";
     }
 
-    @Override
+    /**
+     * Check if program is to be exited upon bye command.
+     *
+     * @return boolean - true or false according to command.
+     */
     public boolean isExit() {
         return true;
     }

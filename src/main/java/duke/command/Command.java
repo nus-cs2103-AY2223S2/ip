@@ -17,13 +17,5 @@ public abstract class Command {
      */
     public abstract String execute(TaskList tasks, StorageList storage) throws DukeException;
 
-    /**
-     * Check if program is to be exited upon bye command.
-     *
-     * @return boolean - true or false according to command.
-     */
-    public boolean isExit() {
-        return false;
-    }
 
 }

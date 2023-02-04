@@ -8,7 +8,7 @@ import duke.task.TaskList;
  * Mark Command to make any task on the list to be done.
  */
 public class MarkCommand extends Command {
-    private int listNum;
+    private int taskNum;
 
     /**
      * Constructor for mark command.
@@ -16,8 +16,8 @@ public class MarkCommand extends Command {
      * @param input Task to be marked as completed.
      */
     public MarkCommand(String input) {
-        int taskNumberMark = Integer.valueOf(input) - 1;
-        this.listNum = taskNumberMark;
+        int taskNumber = Integer.valueOf(input) - 1;
+        this.taskNum = taskNumber;
     }
 
     /**
@@ -28,7 +28,7 @@ public class MarkCommand extends Command {
      * @return String Output when the task is marked complete.
      */
     public String execute(TaskList tasks, StorageList storage) throws DukeException {
-        tasks.markTask(listNum);
-        return "Task " + (listNum + 1) + " has been marked as done.\n" + tasks.statement();
+        tasks.markTask(taskNum);
+        return "Task " + (taskNum + 1) + " has been marked as done.\n" + tasks.getLengthMessage();
     }
 }
