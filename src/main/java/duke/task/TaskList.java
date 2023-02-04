@@ -85,7 +85,8 @@ public class TaskList {
         int size = taskList.size();
 
         if (size == 0 || taskNumber > size) {
-            throw new DukeException("duke.task.Task number does not exist.");
+            String exceptionMessage = "Task number does not exist.";
+            throw new DukeException(exceptionMessage);
         }
 
         Task task = taskList.get(taskNumber - 1);

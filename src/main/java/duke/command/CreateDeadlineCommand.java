@@ -41,16 +41,28 @@ public class CreateDeadlineCommand extends Command {
     @Override
     public String execute() {
         try {
-            String[] commandMessageArr = commandMessage.split("/", 2);
-            assert commandMessageArr.length == 2 : "deadline command should split into 2";
-            Task task = new Deadline(commandMessageArr[0].substring(9), false,
-                    commandMessageArr[1].substring(3));
+            String startOfReply = "The following task has been added:\n";
 
+            Task task = createDeadline();
             taskList.addTask(task);
             storage.storeTask(task);
-            return "The following task has been added:\n" + "  " + task;
+
+            return startOfReply + "  " + task;
         } catch (IOException exception) {
-            return "An error has occurred!\n" + exception.getMessage();
+            String startOfErrorMessage = "An error has occurred!\n";
+            return startOfErrorMessage + exception.getMessage();
         }
+    }
+
+    /**
+     * Creates a deadline.
+     *
+     * @return Deadline created.
+     */
+    public Deadline createDeadline() {
+        String[] commandMessageArr = commandMessage.split("/", 2);
+        assert commandMessageArr.length == 2 : "deadline command should split into 2";
+        return new Deadline(commandMessageArr[0].substring(9), false,
+                commandMessageArr[1].substring(3));
     }
 }

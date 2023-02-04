@@ -28,7 +28,7 @@ public abstract class Task {
      *
      * @return Task marked symbol.
      */
-    private String isMarkedSymbol() {
+    private String getMarkedSymbol() {
         return isMarked ? "X" : " ";
     }
 
@@ -38,7 +38,7 @@ public abstract class Task {
      * @return Task details.
      */
     public String toString() {
-        return "[" + isMarkedSymbol() + "] " + description;
+        return "[" + getMarkedSymbol() + "] " + description;
     }
 
     /**

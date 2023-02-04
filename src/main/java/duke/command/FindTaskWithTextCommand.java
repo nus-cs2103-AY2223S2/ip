@@ -31,24 +31,38 @@ public class FindTaskWithTextCommand extends Command {
      */
     @Override
     public String execute() {
-        int size = taskList.getSize();
         String searchString = commandMessage.split(" ", 2)[1];
+        String noTaskMessage = "No task stored.";
+        int listSize = taskList.getSize();
 
-        if (size == 0) {
-            return "No task stored.";
+        if (listSize == 0) {
+            return noTaskMessage;
         } else {
-            StringBuilder reply = new StringBuilder("The following tasks matches your query:");
-            int count = 0;
-
-            for (int i = 1; i <= size; i++) {
-                Task task = taskList.getTask(i);
-                count++;
-
-                if (task.hasSubstring(searchString)) {
-                    reply.append("\n").append(count).append(". ").append(task);
-                }
-            }
-            return count == 0 ? "No matches found." : reply.toString();
+            return listMatchingTasks(searchString, listSize);
         }
+    }
+
+    /**
+     * Finds matching tasks and return them as a list.
+     *
+     * @param searchString Keyword for the search.
+     * @param listSize Total number of tasks in list.
+     * @return list of matching tasks.
+     */
+    public String listMatchingTasks(String searchString, int listSize) {
+        StringBuilder reply = new StringBuilder("The following tasks matches your query:");
+        String noMatchMessage = "No matches found.";
+        int count = 0;
+
+        for (int i = 1; i <= listSize; i++) {
+            Task task = taskList.getTask(i);
+            count++;
+
+            if (task.hasSubstring(searchString)) {
+                reply.append("\n").append(count).append(". ").append(task);
+            }
+        }
+
+        return count == 0 ? noMatchMessage : reply.toString();
     }
 }

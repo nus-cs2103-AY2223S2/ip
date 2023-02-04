@@ -39,15 +39,28 @@ public class MarkTaskCommand extends Command {
     @Override
     public String execute() {
         try {
-            String[] commandMessageArr = commandMessage.split(" ", 2);
-            assert commandMessageArr.length == 2 : "mark command should split into 2";
-            int taskNumber = Integer.parseInt(commandMessageArr[1]);
-            Task task = taskList.markTask(taskNumber);
+            String startOfReply = "The following task is marked as done:\n";
 
+            Task task = markTask();
             storage.restructure(taskList);
-            return "The following task is marked as done:\n" + "  " + task;
+
+            return startOfReply + "  " + task;
         } catch (IOException exception) {
-            return "An error has occurred!\n" + exception.getMessage();
+            String startOfErrorMessage = "An error has occurred!\n";
+            return startOfErrorMessage + exception.getMessage();
         }
+    }
+
+    /**
+     * Marks task as done.
+     *
+     * @return Task that was marked.
+     */
+    public Task markTask() {
+        String[] commandMessageArr = commandMessage.split(" ", 2);
+        assert commandMessageArr.length == 2 : "mark command should split into 2";
+
+        int taskNumber = Integer.parseInt(commandMessageArr[1]);
+        return taskList.markTask(taskNumber);
     }
 }

@@ -41,15 +41,29 @@ public class DeleteTaskCommand extends Command {
     @Override
     public String execute() {
         try {
-            String[] commandMessageArr = commandMessage.split(" ", 2);
-            assert commandMessageArr.length == 2 : "delete command should split into 2";
-            int taskNumber = Integer.parseInt(commandMessageArr[1]);
-            Task task = taskList.deleteTask(taskNumber);
+            String startOfReply = "The following task has been deleted:\n";
 
+            Task task = deleteTask();
             storage.restructure(taskList);
-            return "The following task has been deleted:\n" + "  " + task;
+
+            return startOfReply + "  " + task;
         } catch (IOException | DukeException exception) {
-            return "An error has occurred!\n" + exception.getMessage();
+            String startOfErrorMessage = "An error has occurred!\n";
+            return startOfErrorMessage + exception.getMessage();
         }
+    }
+
+    /**
+     * Deletes a task from the list and returns it.
+     *
+     * @return Deleted task.
+     * @throws DukeException If task exist.
+     */
+    public Task deleteTask() throws DukeException {
+        String[] commandMessageArr = commandMessage.split(" ", 2);
+        assert commandMessageArr.length == 2 : "delete command should split into 2";
+
+        int taskNumber = Integer.parseInt(commandMessageArr[1]);
+        return taskList.deleteTask(taskNumber);
     }
 }

@@ -52,16 +52,21 @@ public class Storage {
      * @throws IOException If an I/O error occurs.
      */
     public ArrayList<Task> getTasks() throws IOException {
-        ArrayList<Task> taskList = new ArrayList<>();
-        String taskStorageString = reader.readLine();
+        try {
+            ArrayList<Task> taskList = new ArrayList<>();
+            String taskStorageString = reader.readLine();
 
-        while (taskStorageString != null) {
-            String[] data = taskStorageString.split("\\|");
-            taskList.add(parseTaskData(data));
-            taskStorageString = reader.readLine();
+            while (taskStorageString != null) {
+                String[] data = taskStorageString.split("\\|");
+                taskList.add(parseTaskData(data));
+                taskStorageString = reader.readLine();
+            }
+
+            return taskList;
+        } catch (DukeException exception) {
+            System.out.println(exception.getMessage());
+            return new ArrayList<>();
         }
-
-        return taskList;
     }
 
     /**
@@ -69,8 +74,9 @@ public class Storage {
      *
      * @param data Storage string from file.
      * @return Task instance.
+     * @throws DukeException If parsing of data fails.
      */
-    private Task parseTaskData(String[] data) {
+    private Task parseTaskData(String[] data) throws DukeException {
         switch (data[0]) {
         case "T":
             assert data.length == 3 : "todo data should have 3 parts";
@@ -78,9 +84,12 @@ public class Storage {
         case "D":
             assert data.length == 4 : "deadline data should have 4 parts";
             return new Deadline(data[2], Boolean.parseBoolean(data[1]), data[3]);
-        default:
+        case "E":
             assert data.length == 5 : "event data should have 5 parts";
             return new Event(data[2], Boolean.parseBoolean(data[1]), data[3], data[4]);
+        default:
+            String exceptionMessage = "Error parsing storage data.";
+            throw new DukeException(exceptionMessage);
         }
     }
 

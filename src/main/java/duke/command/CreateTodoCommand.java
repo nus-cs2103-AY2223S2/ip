@@ -41,15 +41,28 @@ public class CreateTodoCommand extends Command {
     @Override
     public String execute() {
         try {
-            String[] commandMessageArr = commandMessage.split(" ", 2);
-            assert commandMessageArr.length == 2 : "todo command should split into 2";
-            Task task = new Todo(commandMessageArr[1], false);
+            String startOfReply = "The following task has been added:\n";
 
+            Task task = createTodo();
             taskList.addTask(task);
             storage.storeTask(task);
-            return "The following task has been added:\n" + "  " + task;
+
+            return startOfReply + "  " + task;
         } catch (IOException exception) {
-            return "An error has occurred!\n" + exception.getMessage();
+            String startOfErrorMessage = "An error has occurred!\n";
+            return startOfErrorMessage + exception.getMessage();
         }
+    }
+
+    /**
+     * Creates a todo.
+     *
+     * @return Todo created.
+     */
+    public Todo createTodo() {
+        String[] commandMessageArr = commandMessage.split(" ", 2);
+        assert commandMessageArr.length == 2 : "todo command should split into 2";
+
+        return new Todo(commandMessageArr[1], false);
     }
 }

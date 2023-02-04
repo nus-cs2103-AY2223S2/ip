@@ -39,7 +39,8 @@ public class Duke {
             Command command = Parser.parseCommand(input, taskList, storage);
             return command.execute();
         } catch (DukeException exception) {
-            return "An error has occurred!\n" + exception.getMessage();
+            String startOfErrorMessage = "An error has occurred!\n";
+            return startOfErrorMessage + exception.getMessage();
         }
     }
 }
