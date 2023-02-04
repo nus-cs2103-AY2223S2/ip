@@ -29,7 +29,7 @@ public class Storage {
      */
     public TaskList formTaskListFromData() throws CannotLoadDataException {
         TaskList taskList = new TaskList();
-        File file = new File("SebastianData.txt");
+        File file = new File("src/main/resources/SebastianData.txt");
         try {
             BufferedReader br = new BufferedReader(new FileReader(file));
             String curLine;
@@ -64,7 +64,7 @@ public class Storage {
      */
     public void writeToDisk(TaskList taskList) throws CannotWriteDataException {
         if (file == null) {
-            file = new File("SebastianData.txt");
+            file = new File("src/main/resources/SebastianData.txt");
         }
         FileWriter fw = null;
         try {

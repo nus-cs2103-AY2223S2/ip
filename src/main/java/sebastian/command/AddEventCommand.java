@@ -42,8 +42,10 @@ public class AddEventCommand extends AddTaskCommand {
             } else if (task[0].equals("")) {
                 throw new LackOfArgumentException();
             } else {
+                int originalSize = taskList.getTotalTasks();
                 String res = this.addTask(taskList.addEvent(0, task[0].trim(), task[1].trim(), task[2].trim()),
                         taskList.getTotalTasks());
+                assert taskList.getTotalTasks() == originalSize + 1;
                 storage.writeToDisk(taskList);
                 return ui.getFormattedString(res);
             }
