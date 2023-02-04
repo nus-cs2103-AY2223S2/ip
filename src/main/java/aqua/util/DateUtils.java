@@ -73,6 +73,15 @@ public class DateUtils {
     }
 
 
+    public static boolean isIntersecting(LocalDateTime s1, LocalDateTime e1, LocalDateTime s2, LocalDateTime e2,
+                double threshold) {
+        boolean isStartIntersecting = Math.abs(s1.until(s2, ChronoUnit.MINUTES)) <= threshold;
+        boolean isEndIntersecting = Math.abs(e1.until(e2, ChronoUnit.MINUTES)) <= threshold;
+        boolean isStartEndIntersecting = isStartIntersecting || isEndIntersecting;
+        return !(s1.isAfter(e2) || e1.isBefore(s2)) || isStartEndIntersecting;
+    }
+
+
     public static LocalDateTime getStartOfWeek(LocalDateTime time) {
         return toStartOfWeek(time, DEFAULT_START_OF_WEEK);
     }

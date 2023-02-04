@@ -20,7 +20,8 @@ public class DaySchedule extends HBox {
     private static final double ROW_HEIGHT = 20;
     private static final double HOURS_IN_A_DAY = 24;
     private static final double MINUTES_IN_A_DAY = 1440;
-    private static final double MIN_WIDTH = ROW_HEIGHT;
+    private static final double MIN_WIDTH_PIXS = ROW_HEIGHT;
+    private static final double MIN_WIDTH_MINS = (MIN_WIDTH_PIXS / ROW_WIDTH) * MINUTES_IN_A_DAY;
 
     private final VBox rowDisplayArea = new VBox();
 
@@ -61,7 +62,8 @@ public class DaySchedule extends HBox {
         for (Timeable storedTimeable : timeables) {
             if (DateUtils.isIntersecting(
                         timeable.getStart(), timeable.getEnd(),
-                        storedTimeable.getStart(), storedTimeable.getEnd())) {
+                        storedTimeable.getStart(), storedTimeable.getEnd(),
+                        MIN_WIDTH_MINS)) {
                 return true;
             }
         }
@@ -89,9 +91,9 @@ public class DaySchedule extends HBox {
                     * ROW_WIDTH;
             endX = Math.min(ROW_WIDTH, (int) endX);
 
-            if (endX - startX <= MIN_WIDTH) {
-                startX -= MIN_WIDTH / 2;
-                endX += MIN_WIDTH / 2;
+            if (Math.abs(endX - startX) <= MIN_WIDTH_PIXS) {
+                startX -= MIN_WIDTH_PIXS / 2;
+                endX += MIN_WIDTH_PIXS / 2;
             }
 
             Pane scheduleBox = new Pane();
