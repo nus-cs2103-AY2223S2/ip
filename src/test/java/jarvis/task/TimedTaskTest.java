@@ -12,7 +12,7 @@ public class TimedTaskTest {
     private static final int HOURS = 2;
     private static final int MINUTES = 3;
 
-    private Duration duration;
+    private final Duration duration;
     private TimedTask task;
 
     public TimedTaskTest() {
