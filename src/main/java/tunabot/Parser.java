@@ -25,97 +25,125 @@ public class Parser {
         case "bye":
             return "    Bye! Blub blub!";
         case "mark":
-            if (command.length < 2) {
-                throw new InputException("BLUB! No task chosen!");
-            }
-            try {
-                int index = Integer.parseInt(command[1]);
-                tasks.get(index - 1).markDone();
-                return Ui.mark(tasks.get(index - 1));
-            } catch (IllegalArgumentException e) {
-                throw new InputException("BLUB! Index chosen isn't a number!");
-            } catch (IndexOutOfBoundsException e) {
-                throw new InputException("BLUB! Task chosen isn't on the list!");
-            }
+            return mark(tasks, command);
         case "unmark":
-            if (command.length < 2) {
-                throw new InputException("BLUB! No task chosen!");
-            }
-            try {
-                int index = Integer.parseInt(command[1]);
-                tasks.get(index - 1).unmarkDone();
-                return Ui.unmark(tasks.get(index - 1));
-            } catch (IllegalArgumentException e) {
-                throw new InputException("BLUB! Index chosen isn't a number!");
-            } catch (IndexOutOfBoundsException e) {
-                throw new InputException("BLUB! Task chosen isn't on the list!");
-            }
+            return unmark(tasks, command);
         case "delete":
-            if (command.length < 2) {
-                throw new InputException("BLUB! No task chosen!");
-            }
-            try {
-                int index = Integer.parseInt(command[1]);
-
-                String delete = Ui.delete(tasks.get((index - 1)), tasks.size() - 1);
-                tasks.remove(index - 1);
-                return delete;
-            } catch (IllegalArgumentException e) {
-                throw new InputException("BLUB! Index chosen isn't a number!");
-            } catch (IndexOutOfBoundsException e) {
-                throw new InputException("BLUB! Task chosen isn't on the list!");
-            }
+            return delete(tasks, command);
         case "todo":
-            if (command.length < 2) {
-                throw new InputException("BLUB! Task needs a name!");
-            } else {
-                Task newTask = new Task(command[1]);
-                tasks.add(newTask);
-                return Ui.add(newTask, tasks.size());
-            }
+            return newTask(tasks, command);
         case "event":
-            if (command.length < 2) {
-                throw new InputException("BLUB! Event needs a name, "
-                    + "a start time and end time!");
-            } else {
-                String[] details = command[1].split("/from |/to ", 3);
-                if (details.length < 3) {
-                    throw new InputException("BLUB! Event is missing info!"
-                        + " Please check input. BLUB!");
-                }
-                Event newEvent = new Event(details[0], details[1], details[2]);
-                tasks.add(newEvent);
-                return Ui.add(newEvent, tasks.size());
-            }
+            return newEvent(tasks, command);
         case "deadline":
-            if (command.length < 2) {
-                throw new InputException("BLUB! Deadline needs a name and due date!");
-            } else {
-                String[] details = command[1].split("/by ", 2);
-                if (details.length < 2) {
-                    throw new InputException("BLUB! Deadline is missing info!"
-                        + " PLease check input. BLUB!");
-                }
-                Deadline newDeadline = new Deadline(details[0], details[1]);
-                tasks.add(newDeadline);
-                return Ui.add(newDeadline, tasks.size());
-            }
+            return newDeadline(tasks, command);
         case "find":
-            if (command.length < 2) {
-                throw new InputException("BLUB! find needs a search target!");
-            } else {
-                String target = command[1];
-                TaskList targetList = tasks.find(target);
-                if (targetList.size() == 0) {
-                    return "BLUB! No matching tasks!";
-                } else {
-                    String found = "BLUB! Here are your matching task(s)!\n";
-                    found += Ui.list(targetList);
-                    return found;
-                }
-            }
+            return find(tasks, command);
         default:
             return "BLUB OH! INVALID COMMAND!";
+        }
+    }
+
+    private static String find(TaskList tasks, String[] command) throws InputException {
+        if (command.length < 2) {
+            throw new InputException("BLUB! find needs a search target!");
+        } else {
+            String target = command[1];
+            TaskList targetList = tasks.find(target);
+            if (targetList.size() == 0) {
+                return "BLUB! No matching tasks!";
+            } else {
+                String found = "BLUB! Here are your matching task(s)!\n";
+                found += Ui.list(targetList);
+                return found;
+            }
+        }
+    }
+
+    private static String newEvent(TaskList tasks, String[] command) throws InputException {
+        if (command.length < 2) {
+            throw new InputException("BLUB! Event needs a name, "
+                + "a start time and end time!");
+        } else {
+            String[] details = command[1].split("/from |/to ", 3);
+            if (details.length < 3) {
+                throw new InputException("BLUB! Event is missing info!"
+                    + " Please check input. BLUB!");
+            }
+            Event newEvent = new Event(details[0], details[1], details[2]);
+            tasks.add(newEvent);
+            return Ui.add(newEvent, tasks.size());
+        }
+    }
+
+    private static String newTask(TaskList tasks, String[] command) throws InputException {
+        if (command.length < 2) {
+            throw new InputException("BLUB! Task needs a name!");
+        } else {
+            Task newTask = new Task(command[1]);
+            tasks.add(newTask);
+            return Ui.add(newTask, tasks.size());
+        }
+    }
+
+    private static String delete(TaskList tasks, String[] command) throws InputException {
+        if (command.length < 2) {
+            throw new InputException("BLUB! No task chosen!");
+        }
+        try {
+            int index = Integer.parseInt(command[1]);
+
+            String delete = Ui.delete(tasks.get((index - 1)), tasks.size() - 1);
+            tasks.remove(index - 1);
+            return delete;
+        } catch (IllegalArgumentException e) {
+            throw new InputException("BLUB! Index chosen isn't a number!");
+        } catch (IndexOutOfBoundsException e) {
+            throw new InputException("BLUB! Task chosen isn't on the list!");
+        }
+    }
+
+    private static String unmark(TaskList tasks, String[] command) throws InputException {
+        if (command.length < 2) {
+            throw new InputException("BLUB! No task chosen!");
+        }
+        try {
+            int index = Integer.parseInt(command[1]);
+            tasks.get(index - 1).unmarkDone();
+            return Ui.unmark(tasks.get(index - 1));
+        } catch (IllegalArgumentException e) {
+            throw new InputException("BLUB! Index chosen isn't a number!");
+        } catch (IndexOutOfBoundsException e) {
+            throw new InputException("BLUB! Task chosen isn't on the list!");
+        }
+    }
+
+    private static String mark(TaskList tasks, String[] command) throws InputException {
+        if (command.length < 2) {
+            throw new InputException("BLUB! No task chosen!");
+        }
+        try {
+            int index = Integer.parseInt(command[1]);
+            tasks.get(index - 1).markDone();
+            return Ui.mark(tasks.get(index - 1));
+        } catch (IllegalArgumentException e) {
+            throw new InputException("BLUB! Index chosen isn't a number!");
+        } catch (IndexOutOfBoundsException e) {
+            throw new InputException("BLUB! Task chosen isn't on the list!");
+        }
+    }
+
+    private static String newDeadline(TaskList tasks, String[] command) throws InputException {
+        if (command.length < 2) {
+            throw new InputException("BLUB! Deadline needs a name and due date!");
+        } else {
+            String[] details = command[1].split("/by ", 2);
+            if (details.length < 2) {
+                throw new InputException("BLUB! Deadline is missing info!"
+                    + " PLease check input. BLUB!");
+            }
+            Deadline newDeadline = new Deadline(details[0], details[1]);
+            tasks.add(newDeadline);
+            return Ui.add(newDeadline, tasks.size());
         }
     }
 }
