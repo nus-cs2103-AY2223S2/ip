@@ -99,13 +99,16 @@ public class AddCommand extends Command {
     public String runCommand(TaskList tasks, UI ui, Storage storage) throws DukeException {
         List<Task> taskList = tasks.getTaskList();
         Task theTask;
+        assert (this.taskTag != null) : "No empty task tag";
         if (this.taskTag.equals("T")) {
             // here body is just taskName
             theTask = new ToDo(this.body);
         } else if (this.taskTag.equals("D")) {
             theTask = new DeadLine(this.body, this.deadline);
-        } else {
+        } else if (this.taskTag.equals("E")) {
             theTask = new Event(this.body, this.start, this.end);
+        } else {
+            throw new DukeException("Unidentified task identifier");
         }
         taskList.add(theTask);
         storage.save(tasks);

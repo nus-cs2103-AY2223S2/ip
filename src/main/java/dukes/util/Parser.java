@@ -306,8 +306,9 @@ public class Parser {
 
     /**
      * Private util method to ensure the command has all the required words
-     * @param splited
-     * @param values
+     * @param splited the command
+     * @param values all the required words
+     *
      * @return
      */
     private static boolean hasAllRequiredWord(String[] splited, String... values) {

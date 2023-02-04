@@ -42,6 +42,20 @@ public class UI {
     }
 
     /**
+     * Private util method to extract duplicate code
+     *
+     * @param theTask the target task
+     * @param header word to be said by Duke
+     * @return the StringBuilder containing the header and task
+     */
+    private static StringBuilder getStringBuilder(Task theTask, String header) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(header).append("\n");
+        sb.append(theTask.toString()).append("\n");
+        return sb;
+    }
+
+    /**
      * Display success message when user add tasks into list.
      *
      * @param theTask the task added into the list.
@@ -51,7 +65,6 @@ public class UI {
     public static String returnAdd(Task theTask, TaskList tasks) {
         return getUpdateResponse(theTask, tasks, WORD_ADD);
     }
-
 
     /**
      * Display success message when user delete tasks from list.
@@ -86,7 +99,6 @@ public class UI {
     public static String returnMark(Task theTask, int action) {
         return getConditionalResponse(" " + theTask.toString(), action, WORD_MARK_DONE, WORD_MARK_UNDONE);
     }
-
 
     /**
      * Display success message when user find tasks based on specific pattern.
