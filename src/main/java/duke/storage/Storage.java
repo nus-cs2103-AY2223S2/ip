@@ -120,7 +120,7 @@ public class Storage implements Loader<TaskList> {
             FileWriter fileWriter = new FileWriter(file);
             taskList.getTaskList().parallelStream().forEach(task -> {
                 try {
-                    write(fileWriter, task.serialize());
+                    write(fileWriter, task);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
