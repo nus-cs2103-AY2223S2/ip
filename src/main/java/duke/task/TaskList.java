@@ -10,7 +10,7 @@ import java.time.format.DateTimeParseException;
  * Encapsulates an arraylist of Task with the various methods
  */
 public class TaskList {
-    private ArrayList<Task> list = new ArrayList<Task>();
+    private ArrayList<Task> list;
 
     public TaskList(ArrayList<Task> list) {
         this.list = list;
@@ -36,7 +36,7 @@ public class TaskList {
      */
     public String addTask() {
         return "Got it. I've added this duke.task:\n" + list.get(list.size() - 1)
-        + "\n" + "Now you have " + list.size() + " tasks in the list.";
+                + "\n" + "Now you have " + list.size() + " tasks in the list.";
     }
 
     /**
@@ -77,7 +77,7 @@ public class TaskList {
     public String addTodo(String command) {
         try {
             String description = Parser.getDescription(command);
-            list.add(new Todo(description,false));
+            list.add(new Todo(description, false));
             return this.addTask();
         } catch (Exception e) {
             return "OOPS!!! The description of a todo cannot be empty.";
