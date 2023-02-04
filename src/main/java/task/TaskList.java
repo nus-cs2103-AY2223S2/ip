@@ -59,7 +59,7 @@ public class TaskList {
     /**
      * Prints the size of the task list.
      */
-    public String printSize() {
+    public String getSizeAsFormattedString() {
         int size = this.tasks.size();
         if (size > 5) {
             return String.format("Haiya now %d things to do... Why so many? Why so weak?", size);
@@ -73,7 +73,7 @@ public class TaskList {
      */
     public String addTask(Task task) {
         this.tasks.add(task);
-        return "OK OK Uncle Roger add for you:\n" + task + "\n" + this.printSize();
+        return "OK OK Uncle Roger add for you:\n" + task + "\n" + this.getSizeAsFormattedString();
     }
 
     /**
