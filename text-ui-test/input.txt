@@ -1,0 +1,31 @@
+list
+todo
+list
+todo read book
+list
+event
+event bookfest
+event bookfest /from 25/01/23-1800
+list
+event bookfest /from 25/01/23-1800 /to 26/01/23-1800
+list
+deadline
+deadline return book
+list
+deadline return book /by 28/01/23-1800
+list
+mark 1
+list
+mark 2
+list
+unmark 2
+list
+mark 3
+unmark task
+unmark 1
+list
+delete 2
+list
+banana
+baaaanan
+bye
