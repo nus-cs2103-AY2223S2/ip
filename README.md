@@ -21,8 +21,4 @@ public static void main() {
 }
 ```
 
-<<<<<<< HEAD
-This site was built using [GitHub Pages](https://pages.github.com/).
-=======
-This site was built using [GitHub Pages](https://pages.github.com/).
->>>>>>> 21a1db5cda396938da97d8a9666f633c967e7b59
+This site was built using [GitHub Pages](https://pages.github.com/)..
