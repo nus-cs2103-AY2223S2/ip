@@ -61,6 +61,8 @@ public class DeleteTaskCommand extends Command {
      */
     public Task deleteTask() throws DukeException {
         String[] commandMessageArr = commandMessage.split(" ", 2);
+        assert commandMessageArr.length == 2 : "delete command should split into 2";
+
         int taskNumber = Integer.parseInt(commandMessageArr[1]);
         return taskList.deleteTask(taskNumber);
     }

@@ -79,10 +79,13 @@ public class Storage {
     private Task parseTaskData(String[] data) throws DukeException {
         switch (data[0]) {
         case "T":
+            assert data.length == 3 : "todo data should have 3 parts";
             return new Todo(data[2], Boolean.parseBoolean(data[1]));
         case "D":
+            assert data.length == 4 : "deadline data should have 4 parts";
             return new Deadline(data[2], Boolean.parseBoolean(data[1]), data[3]);
         case "E":
+            assert data.length == 5 : "event data should have 5 parts";
             return new Event(data[2], Boolean.parseBoolean(data[1]), data[3], data[4]);
         default:
             String exceptionMessage = "Error parsing storage data.";
