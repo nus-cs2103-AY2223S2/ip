@@ -12,6 +12,7 @@ import duke.utils.CustomValidator;
  * Represents a Task Object.
  */
 public abstract class Task {
+    public static final Pattern TODO = Pattern.compile("^(todo) (?<description>.+)$", Pattern.CASE_INSENSITIVE);
     /** Task validation **/
     public static final Pattern EVENT =
             Pattern.compile("^(event) (?<description>.+) /from (?<from>.+) /to (?<to>.+)$",
@@ -19,7 +20,6 @@ public abstract class Task {
     public static final Pattern DEADLINE =
             Pattern.compile("^(deadline) (?<description>.+) /by (?<by>.+)$",
                     Pattern.CASE_INSENSITIVE);
-    public static final Pattern TODO = Pattern.compile("^(todo) (?<description>.+)$", Pattern.CASE_INSENSITIVE);
 
     /** Date validation **/
     private static final String INVALID_DATE_MESSAGE = "Date is not valid! Please try again.";

@@ -1,5 +1,7 @@
 package duke.utils;
 
+import duke.exceptions.DukeException;
+
 /**
  * An interface for performing the serializing action.
  *
@@ -7,5 +9,5 @@ package duke.utils;
  */
 public interface ISerializable<T, U> {
     T marshal();
-    U unmarshal();
+    U unmarshal() throws DukeException;
 }

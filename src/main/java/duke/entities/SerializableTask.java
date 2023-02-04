@@ -1,6 +1,7 @@
 package duke.entities;
 
 import duke.enums.TaskType;
+import duke.exceptions.DukeException;
 import duke.utils.ISerializable;
 
 /**
@@ -49,7 +50,7 @@ public class SerializableTask implements ISerializable<String, Task> {
     }
 
     @Override
-    public Task unmarshal() {
+    public Task unmarshal() throws DukeException {
         Task task;
         switch (taskType) {
         case TODO:
@@ -62,9 +63,9 @@ public class SerializableTask implements ISerializable<String, Task> {
             task = new Event(description, flags.split(" to "));
             break;
         default:
-            task = null;
+            throw new DukeException("It seems like an empty task has made it into your hard disk");
         }
-        if (isDone && task != null) {
+        if (isDone) {
             task.markTask();
         }
         return task;
