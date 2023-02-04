@@ -24,7 +24,7 @@ public class Parser {
                 return new ListCommand(input);
 
             case DEADLINE:
-                return new DdlCommand(input);
+                return new DeadlineCommand(input);
 
             case UNMARK:
                 return new UnmarkCommand(input);
@@ -46,6 +46,7 @@ public class Parser {
 
             case FIND:
                 return new FindCommand(input);
+
             default:
                 throw new IllegalArgumentException();
         }

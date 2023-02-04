@@ -48,7 +48,6 @@ public class Storage {
      *
      * @return List of stored tasks.
      */
-
     public TaskList loadTaskList() {
         File file = new File(this.filePath);
         if (file.exists()) {

@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * Encapsulates a Task with a deadline.
  */
-public class Ddl extends Task {
+public class Deadline extends Task {
     private String time;
 
     /**
@@ -15,7 +15,7 @@ public class Ddl extends Task {
      * @param input The description of the task.
      * @param time  The deadline of the task.
      */
-    public Ddl(String input, String time) {
+    public Deadline(String input, String time) {
         super(input);
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 

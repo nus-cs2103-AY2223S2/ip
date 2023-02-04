@@ -9,7 +9,7 @@ import hachi.main.Storage;
  */
 public class ListCommand extends Command {
     private String input;
-    static String separator = "‿୨♡୧‿︵‿︵︵‿︵‿୨♡୧‿︵‿︵︵‿︵‿୨♡୧‿";
+    static String separator = "‿୨♡୧‿‿‿‿୨♡୧‿‿‿‿୨♡୧‿";
 
     /**
      * ListCommand constructor.
@@ -20,16 +20,16 @@ public class ListCommand extends Command {
         this.input = input;
     }
 
-    public boolean execute(TaskList toDoList, Ui ui, Storage storage) {
+    public String execute(TaskList toDoList, Ui ui, Storage storage) {
         if (toDoList.size() > 0) {
-            System.out.println(separator + "\n" + "   Here are the tasks in your list:");
+            String msg = separator + "\n" + "\n" + "   Here are the tasks in your list:\n";
             for (int i = 0; i < toDoList.size(); i++) {
                 int num = i + 1;
-                System.out.print("    " + num + ". " + toDoList.get(i) + "\n");
+                msg += "    " + num + ". " + toDoList.get(i) + "\n";
             }
+            return msg;
         } else {
-            System.out.print(separator + "\n" + "   You don't have any tasks at the moment" + "\n");
+            return separator + "\n" + "\n" + "   You don't have any tasks at the moment" + "\n";
         }
-        return false;
     }
 }
