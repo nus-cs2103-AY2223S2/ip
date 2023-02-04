@@ -25,8 +25,9 @@ public class Storage {
 
     /**
      * Saves user-inputted tasks into a file.
-     * @param tasks
-     * @throws IOException
+     *
+     * @param tasks to be saved
+     * @throws IOException if file cannot be accessed.
      */
     public void saveTasks(ArrayList<Task> tasks) throws IOException {
         FileWriter fw = new FileWriter(DEFAULT_FILEPATH);
@@ -41,8 +42,9 @@ public class Storage {
     /**
      * Retrieves tasks previously saved in a file for the user.
      * @return ArrayList of Tasks that were saved previously
-     * @throws IOException
-     * @throws DukeException
+     *
+     * @throws IOException if file cannot be read.
+     * @throws DukeException if user input cannot be understood.
      */
     public ArrayList<Task> retrieveTasks() throws IOException, DukeException {
         File f = new File(DEFAULT_FILEPATH);

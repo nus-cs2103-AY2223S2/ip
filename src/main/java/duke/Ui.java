@@ -8,6 +8,7 @@ import java.util.Scanner;
 public class Ui {
     /**
      * Displays a welcome message to the user.
+     *
      * @return msg the welcome message
      */
     public String showWelcome() {
@@ -18,6 +19,7 @@ public class Ui {
 
     /**
      * Reads the command entered by the user.
+     *
      * @return the input to be parsed.
      */
     public String readCommand() {

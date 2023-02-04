@@ -19,10 +19,11 @@ public class Parser {
 
     /**
      * Parses the user input to obtain the intended Command.
+     *
      * @param input read from System.in by the Ui
      * @return the corresponding Command
-     * @throws DukeException
-     * @throws NumberFormatException
+     * @throws DukeException when user input does not follow expected format.
+     * @throws NumberFormatException whe user does input an integer for task number.
      */
     public static Command parse(String input) throws DukeException, NumberFormatException {
         String[] inputs = input.split(" ", 2);

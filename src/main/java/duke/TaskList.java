@@ -40,6 +40,7 @@ public class TaskList {
 
     /**
      * Prints out all the tasks in the list by numbering them in order.
+     *
      * @return printed tasks for the list command to show to user
      */
     public String print() {
