@@ -1,13 +1,21 @@
 package aqua.graphic.schedule;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.geometry.Pos;
+import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.TextAlignment;
 
 public class ScheduleComponent extends VBox {
+    private static final double LABEL_WIDTH = 80;
+    private static final double ROW_WIDTH = 600;
+
     private static final int DAYS_IN_WEEK = 7;
 
 
@@ -39,6 +47,20 @@ public class ScheduleComponent extends VBox {
 
 
     private void addRow(LocalDateTime startTime, List<ScheduleTimeable> timeables) {
-        getChildren().add(new DaySchedule(startTime, timeables));
+        HBox box = new HBox();
+        box.setSpacing(5);
+        box.setAlignment(Pos.CENTER_LEFT);
+
+        Label dateLabel = new Label();
+        dateLabel.setMinWidth(LABEL_WIDTH);
+        dateLabel.setMaxWidth(LABEL_WIDTH);
+        dateLabel.setPrefWidth(LABEL_WIDTH);
+        dateLabel.setTextAlignment(TextAlignment.CENTER);
+        dateLabel.setText(startTime.format(DateTimeFormatter.ofPattern("LLL d (EEE)")));
+
+        DaySchedule schedule = new DaySchedule(startTime, timeables);
+
+        box.getChildren().addAll(dateLabel, schedule);
+        getChildren().add(box);
     }
 }

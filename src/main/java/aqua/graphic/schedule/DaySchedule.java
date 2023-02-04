@@ -1,52 +1,31 @@
 package aqua.graphic.schedule;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
 import aqua.util.DateUtils;
 import aqua.util.Timeable;
-import javafx.geometry.Pos;
-import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 
 public class DaySchedule extends HBox {
-    private static final double LABEL_WIDTH = 80;
     private static final double ROW_WIDTH = 600;
-    private static final double ROWHEIGHT = 15;
+    private static final double ROW_HEIGHT = 15;
     private static final double MINUTES_IN_A_DAY = 1440;
 
     private final VBox rowDisplayArea = new VBox();
 
 
     public DaySchedule(LocalDateTime startTime, List<ScheduleTimeable> timeables) {
-        initialiseDay(startTime);
+        getChildren().addAll(rowDisplayArea);
         List<? extends List<ScheduleTimeable>> sepTimeable = separateConflicting(timeables);
         for (List<ScheduleTimeable> row : sepTimeable) {
             addRow(startTime, row);
         }
-    }
-
-
-    private final void initialiseDay(LocalDateTime startTime) {
-        Label label = initialiseLabel(startTime);
-        getChildren().addAll(label, rowDisplayArea);
-    }
-
-
-    private Label initialiseLabel(LocalDateTime startTime) {
-        Label dateLabel = new Label();
-        dateLabel.setMinWidth(LABEL_WIDTH);
-        dateLabel.setPrefWidth(LABEL_WIDTH);
-        dateLabel.setMaxWidth(LABEL_WIDTH);
-        dateLabel.setAlignment(Pos.CENTER);
-        dateLabel.setText(startTime.format(DateTimeFormatter.ofPattern("LLL d (EEE)")));
-        return dateLabel;
     }
 
 
@@ -85,7 +64,7 @@ public class DaySchedule extends HBox {
     private void addRow(LocalDateTime startTime, List<ScheduleTimeable> timeables) {
         Pane pane = new Pane();
         pane.setMinWidth(ROW_WIDTH);
-        pane.setMaxHeight(ROWHEIGHT);
+        pane.setMaxHeight(ROW_HEIGHT);
         for (ScheduleTimeable timeable : timeables) {
             double startX = (startTime.until(timeable.getStart(), ChronoUnit.MINUTES) / MINUTES_IN_A_DAY)
                     * ROW_WIDTH;
@@ -95,7 +74,7 @@ public class DaySchedule extends HBox {
             endX = Math.min(ROW_WIDTH, endX);
 
             Pane scheduleBox = new Pane();
-            scheduleBox.setMinHeight(ROWHEIGHT);
+            scheduleBox.setMinHeight(ROW_HEIGHT);
             scheduleBox.setMinWidth(endX - startX);
             scheduleBox.getStyleClass().setAll(timeable.getStyleClass());
 
