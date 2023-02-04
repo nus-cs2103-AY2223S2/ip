@@ -14,9 +14,13 @@ import aqua.logic.ExecutionTask;
 import aqua.manager.IoManager;
 import aqua.manager.LogicManager;
 import aqua.util.DateUtils;
+import javafx.css.PseudoClass;
 
 
 public class ViewScheduleCommand extends CommandController {
+    private static final PseudoClass PSEUDO_CLASS_COMPLETE = PseudoClass.getPseudoClass("complete");
+    private static final PseudoClass PSEUDO_CLASS_INCOMPLETE = PseudoClass.getPseudoClass("incomplete");
+
     @Override
     public ExecutionService getService(ArgumentMap args, LogicManager manager) {
         return ExecutionService.of(new ExecutionTask<DisplayData>(args, manager) {
@@ -102,6 +106,15 @@ public class ViewScheduleCommand extends CommandController {
         @Override
         public List<String> getStyleClass() {
             return List.of("schedule-box");
+        }
+
+
+        @Override
+        public List<PseudoClass> getPseudoClass() {
+            if (task.isComplete()) {
+                return List.of(PSEUDO_CLASS_COMPLETE);
+            }
+            return List.of(PSEUDO_CLASS_INCOMPLETE);
         }
 
 

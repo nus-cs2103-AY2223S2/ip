@@ -7,6 +7,7 @@ import java.util.List;
 
 import aqua.util.DateUtils;
 import aqua.util.Timeable;
+import javafx.css.PseudoClass;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.HBox;
@@ -91,6 +92,9 @@ public class DaySchedule extends HBox {
             scheduleBox.setMinHeight(ROW_HEIGHT);
             scheduleBox.setMinWidth(endX - startX);
             scheduleBox.getStyleClass().setAll(timeable.getStyleClass());
+            for (PseudoClass pseudoClass : timeable.getPseudoClass()) {
+                scheduleBox.pseudoClassStateChanged(pseudoClass, true);
+            }
 
             pane.getChildren().add(scheduleBox);
             scheduleBox.setLayoutX(startX);
