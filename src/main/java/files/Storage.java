@@ -31,10 +31,7 @@ public class Storage {
     public static TaskList loadData(TaskList taskList, String filePath) throws IOException {
         try {
             taskList = readFromFile(filePath);
-            //System.out.println(taskList.listItems());
             System.out.println("Hrmm Hrmm, some past tasks I see!!\n'list' command to see more, you must enter");
-            //System.out.println(BANNER);
-            //return "Hrmm Hrmm, some past tasks I see!!\n'list' command to see more, you must enter";
             return taskList;
         } catch (FileNotFoundException e) {
             Path path = Paths.get("src/main/data");
@@ -42,10 +39,8 @@ public class Storage {
             File newTaskFile = new File(filePath);
             newTaskFile.createNewFile();
             taskList = new TaskList();
-            //System.out.println("A new file created, I have!");
             return taskList;
         }
-        //return "A new file created, I have";
     }
 
     /**

@@ -29,7 +29,6 @@ public class Duke {
     private VBox dialogContainer;
     private boolean isExit = false;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/yoda.jpeg"));
 
 
@@ -50,7 +49,6 @@ public class Duke {
 
     public void setDialogBox(VBox dialogContainer) {
         this.dialogContainer = dialogContainer;
-        //this.dialogContainer.getChildren().add(DialogBox.getDukeDialog("negga negga", dukeImage));
     }
 
     /**
