@@ -26,13 +26,7 @@ public class Window {
         duke.getFn().setOutputLayout(outputLayout);
 
         //pane to display all task
-        ScrollPane scrollPane = new ScrollPane();
-        scrollPane.setContent(outputLayout);
-        scrollPane.setPrefSize(385, 200);
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-        scrollPane.setVvalue(1.0);
-        scrollPane.setFitToWidth(true);
+        ScrollPane scrollPane = makeScrollPane(outputLayout);
         outputLayout.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
         //pane to hold 3 buttons for each task
@@ -45,6 +39,18 @@ public class Window {
 
         assert mainLayout.getChildren().isEmpty() == false : "Main layout has not been filled with anything";
         return mainLayout;
+    }
+
+    static private ScrollPane makeScrollPane(Pane outputLayout) {
+        ScrollPane scrollPane = new ScrollPane();
+        scrollPane.setContent(outputLayout);
+        scrollPane.setPrefSize(385, 200);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        scrollPane.setVvalue(1.0);
+        scrollPane.setFitToWidth(true);
+
+        return scrollPane;
     }
 
     static public void setStage(Stage stage, Scene scene) {
