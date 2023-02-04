@@ -10,7 +10,7 @@ import sebastian.exceptions.CannotLoadDataException;
 import sebastian.exceptions.CannotWriteDataException;
 import sebastian.exceptions.DeadlineFormatMismatchException;
 import sebastian.exceptions.EventFormatMismatchException;
-
+import sebastian.task.TaskStatus;
 
 
 /**
@@ -29,14 +29,14 @@ public class Storage {
      */
     public TaskList formTaskListFromData() throws CannotLoadDataException {
         TaskList taskList = new TaskList();
-        File file = new File("SebastianData.txt");
+        File file = new File("src/main/resources/SebastianData.txt");
         try {
             BufferedReader br = new BufferedReader(new FileReader(file));
             String curLine;
             while ((curLine = br.readLine()) != null) {
                 String[] curTask = curLine.split("<>");
                 String taskType = curTask[0];
-                int isCompleted = Integer.parseInt(curTask[1]);
+                boolean isCompleted = curTask[1].equals("DONE");
                 String taskDescription = curTask[2];
                 switch (taskType) {
                 case "T":
@@ -64,7 +64,7 @@ public class Storage {
      */
     public void writeToDisk(TaskList taskList) throws CannotWriteDataException {
         if (file == null) {
-            file = new File("SebastianData.txt");
+            file = new File("src/main/resources/SebastianData.txt");
         }
         FileWriter fw = null;
         try {
@@ -84,6 +84,4 @@ public class Storage {
         }
 
     }
-
-
 }

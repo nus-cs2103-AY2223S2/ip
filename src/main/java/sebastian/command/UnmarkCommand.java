@@ -36,7 +36,7 @@ public class UnmarkCommand extends Command {
             TaskNotExistException, CannotWriteDataException {
         String[] insArr = instruction.split(" ");
         if (insArr.length == 1) {
-            throw new LackOfArgumentException();
+            throw new LackOfArgumentException("Please specify the index of the task to be unmarked");
         } else if (insArr.length == 2) {
             try {
                 int taskIndex = Integer.parseInt(insArr[1]);
@@ -50,8 +50,10 @@ public class UnmarkCommand extends Command {
             } catch (IndexOutOfBoundsException e) {
                 throw new TaskNotExistException();
             }
-        } else {
+        } else if (insArr.length > 2) {
             throw new InstructionFormatMismatchException("unmark");
+        } else {
+            throw new Error("Internal Error");
         }
     }
 }

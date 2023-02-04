@@ -35,20 +35,22 @@ public class AddDeadlineCommand extends AddTaskCommand {
             throws LackOfArgumentException, DeadlineFormatMismatchException, CannotWriteDataException {
         String[] insArr = instruction.split(" ");
         if (insArr.length == 1) {
-            throw new LackOfArgumentException();
-        } else {
+            throw new LackOfArgumentException("Please specify a description and an end time for your deadline");
+        } else if (insArr.length > 1) {
             String deadline = instruction.substring(9);
             String[] task = deadline.split("/by");
-            if (task.length != 2) {
-                throw new DeadlineFormatMismatchException();
-            } else if (task[0].equals("")) {
-                throw new LackOfArgumentException();
-            } else {
-                String res = this.addTask(taskList.addDeadline(0, task[0].trim(), task[1].trim()),
+            if (task.length == 2 && !task[0].equals("")) {
+                String res = this.addTask(taskList.addDeadline(false, task[0].trim(), task[1].trim()),
                        taskList.getTotalTasks());
                 storage.writeToDisk(taskList);
                 return ui.getFormattedString(res);
+            } else if (task.length == 2 && task[0].equals("")) {
+                throw new LackOfArgumentException("Please specify a description for your deadline");
+            } else {
+                throw new DeadlineFormatMismatchException();
             }
+        } else {
+            throw new Error("Internal Error");
         }
     }
 }

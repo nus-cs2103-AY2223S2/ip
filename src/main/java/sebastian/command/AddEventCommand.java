@@ -33,20 +33,23 @@ public class AddEventCommand extends AddTaskCommand {
             throws LackOfArgumentException, EventFormatMismatchException, CannotWriteDataException {
         String[] insArr = instruction.split(" ");
         if (insArr.length == 1) {
-            throw new LackOfArgumentException();
-        } else {
+            throw new LackOfArgumentException("Please specify a description, a start time and an end time for your " +
+                    "event");
+        } else if (insArr.length > 1) {
             String event = instruction.substring(6);
             String[] task = event.split("/from|/to");
-            if (task.length != 3) {
-                throw new EventFormatMismatchException();
-            } else if (task[0].equals("")) {
-                throw new LackOfArgumentException();
-            } else {
-                String res = this.addTask(taskList.addEvent(0, task[0].trim(), task[1].trim(), task[2].trim()),
+            if (task.length == 3 && !task[0].equals("")) {
+                String res = this.addTask(taskList.addEvent(false, task[0].trim(), task[1].trim(), task[2].trim()),
                         taskList.getTotalTasks());
                 storage.writeToDisk(taskList);
                 return ui.getFormattedString(res);
+            } else if (task.length == 3 && task[0].equals("")) {
+                throw new LackOfArgumentException("Please specify a description for your event");
+            } else {
+                throw new EventFormatMismatchException();
             }
+        } else {
+            throw new Error("Internal Error");
         }
     }
 
