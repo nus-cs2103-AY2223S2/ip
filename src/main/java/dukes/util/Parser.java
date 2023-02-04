@@ -94,15 +94,10 @@ public class Parser {
      */
     public Command validateToDo(String command) throws DukeException {
         String[] splited = command.split(" ");
-        if (splited.length < 2) {
+        if (hasNoContent(splited)) {
             throw new DukeException("OOPS!!! Description of todo not found.");
         } else {
-            StringBuilder sb = new StringBuilder();
-            for (int i = 1; i < splited.length; i++) {
-                sb.append(splited[i]).append(" ");
-            }
-            sb.deleteCharAt(sb.length()-1);
-            String taskName = sb.toString();
+            String taskName = parseHelper(splited, 0, splited.length);
             return new AddCommand(
                     false, true, "add",
                     taskName, "T");
@@ -120,9 +115,9 @@ public class Parser {
      */
     public Command validateDeadLine(String command) throws DukeException {
         String[] splited = command.split(" ");
-        if (splited.length < 2) {
+        if (hasNoContent(splited)) {
             throw new DukeException("OOPS!!! Description of deadline not found.");
-        } else if (!Arrays.asList(splited).contains("/by")) {
+        } else if (!hasAllRequiredWord(splited, "/by")) {
             throw new DukeException("Deadline of the task not specified.");
         } else if (splited[splited.length - 1].equals("/by")) {
             throw new DukeException("No valid deadline specified.");
@@ -154,10 +149,9 @@ public class Parser {
      */
     public Command validateEvent(String command) throws DukeException {
         String[] splited = command.split(" ");
-        if (splited.length < 2) {
+        if (hasNoContent(splited)) {
             throw new DukeException("OOPS!!! Description of event not found.");
-        } else if (!Arrays.asList(splited).contains("/from") ||
-                !Arrays.asList(splited).contains("/to")) {
+        } else if (!hasAllRequiredWord(splited, "/from", "/to")) {
             throw new DukeException("Event time not specified completely.");
         } else if (splited[splited.length - 1].equals("/to") ||
                 Arrays.asList(splited).indexOf("/from") ==
@@ -184,48 +178,6 @@ public class Parser {
     }
 
     /**
-     * Helper method to extract the string content form the splitted string array
-     *
-     * @param splited the splitted array of strings
-     * @param start the start index
-     * @param end the end index
-     * @return the string that supposed to be extracted
-     */
-    public static String parseHelper(String[] splited, int start, int end) {
-        assert (splited.length >= 2) : "This should not appear";
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < splited.length; i++) {
-            if (i >= start && i < end) {
-                sb.append(splited[i]).append(" ");
-                break;
-            }
-        }
-        if (sb.length() != 0) {
-            sb.deleteCharAt(sb.length()-1);
-        }
-        return sb.toString();
-    }
-
-    /**
-     * Find the splitting index in the array by the given pattern
-     *
-     * @param splitted the splitted array of strings
-     * @param identifier the pattern to be matched
-     * @return the split index between different sections of command
-     */
-    public static int findSplitter(String[] splitted, String identifier) {
-        assert (splitted.length >= 2) : "This should not appear";
-        int split = -1;
-        for (int i = 0; i < splitted.length; i++) {
-            if (splitted[i].equals(identifier)) {
-                split = i;
-            }
-        }
-        assert (split > 0) : "Identifier not found in the array";
-        return split;
-    }
-
-    /**
      * Validate if the command labelled as "mark" or "unmark" indeed contains a valid command.
      *
      * @param command the command string to be interpreted.
@@ -235,7 +187,7 @@ public class Parser {
      */
     public Command validateMark(String command, int action) throws DukeException {
         String[] splited = command.split(" ");
-        if (splited.length < 2) {
+        if (hasNoContent(splited)) {
             throw new DukeException("You have not specified the index of the marking.");
         } else {
             int index = Integer.parseInt(splited[1]);
@@ -253,7 +205,7 @@ public class Parser {
      */
     public Command validateDelete(String command) throws DukeException {
         String[] splited = command.split(" ");
-        if (splited.length < 2) {
+        if (hasNoContent(splited)) {
             throw new DukeException("You have not specified the index of the marking.");
         } else {
             int index = Integer.parseInt(splited[1]);
@@ -277,7 +229,7 @@ public class Parser {
                     "list","");
         } else { // search
             String[] splited = command.split(" ");
-            if (splited.length < 2) {
+            if (hasNoContent(splited)) {
                 throw new DukeException("OOPS! Target date not found.");
             }
             try {
@@ -299,7 +251,7 @@ public class Parser {
      */
     public Command validateFind(String command) throws DukeException {
         String[] splited = command.split(" ");
-        if (splited.length < 2) {
+        if (hasNoContent(splited)) {
             throw new DukeException("You have not specified the search keyword.");
         } else {
             // allows for searching a pattern
@@ -340,6 +292,73 @@ public class Parser {
             newTask = new Event(temp[2], isDone, start, end);
         }
         return newTask;
+    }
+
+    /**
+     * Private util method to check if command has no content
+     *
+     * @param splited the command
+     * @return if the command is invalid
+     */
+    private static boolean hasNoContent(String[] splited) {
+        return splited.length < 2;
+    }
+
+    /**
+     * Private util method to ensure the command has all the required words
+     * @param splited the command
+     * @param values all the required words
+     *
+     * @return
+     */
+    private static boolean hasAllRequiredWord(String[] splited, String... values) {
+        boolean hasAll = true;
+        for (String s : values) {
+            if (!Arrays.asList((splited)).contains(s)) {
+                hasAll = false;
+                break;
+            }
+        }
+        return hasAll;
+    }
+
+    /**
+     * Helper method to extract the string content form the splitted string array
+     *
+     * @param splited the splitted array of strings
+     * @param start the start index
+     * @param end the end index
+     * @return the string that supposed to be extracted
+     */
+    private static String parseHelper(String[] splited, int start, int end) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < splited.length; i++) {
+            if (i >= start && i < end) {
+                sb.append(splited[i]).append(" ");
+                break;
+            }
+        }
+        if (sb.length() != 0) {
+            sb.deleteCharAt(sb.length()-1);
+        }
+        return sb.toString();
+    }
+
+    /**
+     * Find the splitting index in the array by the given pattern
+     *
+     * @param splitted the splitted array of strings
+     * @param identifier the pattern to be matched
+     * @return the split index between different sections of command
+     */
+    private static int findSplitter(String[] splitted, String identifier) {
+        int split = -1;
+        for (int i = 0; i < splitted.length; i++) {
+            if (splitted[i].equals(identifier)) {
+                split = i;
+            }
+        }
+        return split;
     }
 
     /**
