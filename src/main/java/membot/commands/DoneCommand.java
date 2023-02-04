@@ -23,7 +23,7 @@ public class DoneCommand extends Command {
      */
     @Override
     public void execute() {
-        if (InputValidator.isCheckInputValid(this.input)) {
+        if (InputValidator.isSingleInputValid(this.input, true)) {
             int taskId = Integer.parseInt(this.input.split(" ")[1]);
             try {
                 Task.setStatusCompleted(taskId);
