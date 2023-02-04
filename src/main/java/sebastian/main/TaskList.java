@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import sebastian.exceptions.DeadlineFormatMismatchException;
 import sebastian.exceptions.EventFormatMismatchException;
@@ -158,12 +159,7 @@ public class TaskList {
      * @return A new Tasklist containing all the qualified tasks
      */
     public TaskList findTasks(String keyword) {
-        List<Task> res = new ArrayList<>();
-        for (Task t : taskList) {
-            if (t.containsKeyword(keyword)) {
-                res.add(t);
-            }
-        }
+        List<Task> res = taskList.stream().filter(x -> x.containsKeyword(keyword)).collect(Collectors.toList());
         return new TaskList(res);
     }
 
