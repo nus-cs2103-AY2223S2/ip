@@ -5,6 +5,7 @@ import aqua.logic.ExecutionService;
 import aqua.logic.ExecutionTask;
 import aqua.manager.LogicManager;
 import aqua.manager.TaskManager;
+import aqua.util.Kaomoji;
 
 
 /** A {@code CommandController} to list {@code AquaTask}. */
@@ -21,7 +22,7 @@ public class ListCommand extends CommandController {
             @Override
             public String formDisplayMessage(TaskManager taskManager, LogicManager manager) {
                 return String.format(String.join("\n",
-                                "Here is your task list ( ꜆ 'ᵕ' )꜆",
+                                "Here is your task list " + Kaomoji.PLACING_DOWN,
                                 "%s"),
                         getListMessage(taskManager));
             }
@@ -33,7 +34,7 @@ public class ListCommand extends CommandController {
         if (manager.size() > 0) {
             return manager.toString();
         }
-        return "Nothing!! - ̗̀ ( ˶'ᵕ'˶) ̖́-";
+        return "Nothing!! " + Kaomoji.BLUSH;
     }
 
 

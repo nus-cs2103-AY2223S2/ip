@@ -6,6 +6,7 @@ import aqua.logic.ArgumentMap;
 import aqua.logic.ExecutionService;
 import aqua.logic.ExecutionTask;
 import aqua.manager.LogicManager;
+import aqua.util.Kaomoji;
 
 
 /** A {@code CommandController} to add {@code AquaTask}. */
@@ -54,9 +55,9 @@ public abstract class AddTaskCommand extends CommandController {
         public String formDisplayMessage(AquaTask task, LogicManager manager) {
             return String.format(String.join("\n",
                             "Hai okay desu! I have added the task:",
-                            "/／",
+                            Kaomoji.WAVE_UP,
                             "  %s",
-                            "\\＼",
+                            Kaomoji.WAVE_DOWN,
                             "You now have %d tasks."),
                     task.toString(),
                     manager.getTaskManager().size());

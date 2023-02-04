@@ -6,6 +6,7 @@ import aqua.logic.ArgumentMap;
 import aqua.logic.ExecutionService;
 import aqua.logic.ExecutionTask;
 import aqua.manager.LogicManager;
+import aqua.util.Kaomoji;
 
 
 /** A {@code CommandController} to save {@code AquaTask} state. */
@@ -25,7 +26,7 @@ public class WriteTaskCommand extends CommandController {
                                     "If you leave me I might forget everything!!"),
                             ioEx.getMessage());
                 }
-                return "Safely stored hehe (  •̀֊•́ )";
+                return "Safely stored hehe " + Kaomoji.SMUG;
             }
 
 

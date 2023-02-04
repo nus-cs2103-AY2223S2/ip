@@ -7,35 +7,37 @@ import java.util.function.Supplier;
 import aqua.exception.IllegalSyntaxException;
 import aqua.exception.LoadException;
 import aqua.exception.ProcedureExecutionException;
+import aqua.util.Kaomoji;
 
 
 /** Manager of inputs and outputs. */
 public class IoManager {
     /** Greeting message. */
-    private static final String MESSAGE_GREETING =
-            "Konaqua~~\n(*ゝω･*)ﾉ Perfect idol gamer nekomimi super maid Minato Aqua desu!";
+    private static final String MESSAGE_GREETING = String.join("\n",
+            "Konaqua~~",
+            Kaomoji.CUTE_TOSS + " Perfect idol gamer nekomimi super maid Minato Aqua desu!");
     /** Load success message. */
     private static final String MESSAGE_LOAD_SUCCESS =
-            "I remembered all your previous tasks! Praise me (⋈◍＞◡＜◍)。✧♡";
+            "I remembered all your previous tasks! Praise me " + Kaomoji.HEART_PASS;
 
     /** Syntax exception message format. */
     private static final String EXCEPTION_FORMAT_SYNTAX = String.join("\n",
             "Hanya??",
             "I do not understand because:",
             "  %s",
-            "Gomennasai!! (╥﹏╥)");
+            "Gomennasai!! " + Kaomoji.CRY);
     /** Execution exception message format. */
     private static final String EXCEPTION_FORMAT_EXECUTION = String.join("\n",
             "Hanya??",
             "I was doing what you told me to do half way but messed up because:",
             "  %s",
-            "Gomennasai!! (╥﹏╥)");
+            "Gomennasai!! " + Kaomoji.CRY);
     /** Load exception message format. */
     private static final String EXCEPTION_FORMAT_LOAD = String.join("\n",
             "Hanya??",
             "I was looking through my notes and could not remember your previous tasks because:",
             "  %s",
-            "Gomennasai!! But you did not touch it right? ( ･-･)");
+            "Gomennasai!! But you did not touch it right? " + Kaomoji.THINKING);
     /** All other exception message format. */
     private static final String EXCEPTION_FORMAT_DEATH = String.join("\n",
             "UWAWAWA!!",
