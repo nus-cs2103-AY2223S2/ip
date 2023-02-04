@@ -3,6 +3,9 @@ package duke.task;
 import duke.Parser;
 import duke.Ui;
 
+import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.time.format.DateTimeParseException;
 
@@ -105,6 +108,37 @@ public class TaskList {
         } catch (Exception e) {
             return "OOPS!!! Unrecognizable formet\n Please write it in this format: deadline xxx /by "
                     + "YYYY-MM-DD HH:mm.";
+        }
+    }
+
+    /**
+     * View tasks on a specific date
+     */
+    public String view(String command) {
+        try {
+            String d = command.split(" ")[1];
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate date = LocalDate.parse(d, formatter);
+            String res = "Here are the tasks happening on that day\n";
+            for (Task t: list) {
+                if (t instanceof Deadline) {
+                    Deadline temp = (Deadline) t;
+                    if (temp.deadline.toLocalDate().equals(date)) {
+                        res += temp + "\n";
+                    }
+                }
+                if (t instanceof Event) {
+                    Event temp = (Event) t;
+                    if (temp.begin.toLocalDate().equals(date) ||
+                            temp.end.toLocalDate().equals(date)) {
+                        res += temp + "\n";
+                    }
+                }
+            }
+            return res;
+        } catch (Exception e) {
+            return e.getMessage();
+                    //"OOPS!!! Unrecognizable formet\n Please write it in this format: view yyyy-MM-dd";
         }
     }
 

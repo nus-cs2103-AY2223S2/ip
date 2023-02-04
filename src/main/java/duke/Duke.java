@@ -55,9 +55,6 @@ public class Duke extends Application {
 
     @Override
     public void start(Stage stage) {
-        //Step 1. Setting up required components
-
-        //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
@@ -135,6 +132,9 @@ public class Duke extends Application {
 
         case "list":
             return tasks.list();
+
+        case "view":
+            return tasks.view(fullCommand);
 
         case "delete":
             return tasks.delete(Parser.getIndex(fullCommand));
