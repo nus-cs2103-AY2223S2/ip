@@ -1,3 +1,5 @@
+package Baymax;
+
 import exceptions.BaymaxException;
 
 public class Baymax {

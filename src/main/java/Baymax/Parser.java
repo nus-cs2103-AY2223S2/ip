@@ -1,3 +1,9 @@
+package Baymax;
+
+import Tasks.Deadline;
+import Tasks.Event;
+import Tasks.*;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -49,7 +55,7 @@ public class Parser {
                 } else if (event.equals(currentInput.split("\\s+", 2)[0])) {
                     Task even = new Event(currentInput.split(" ", 2)[1].split(" /from ", 2)[0], currentInput.split(" ", 2)[1].split(" /from ", 2)[1].split(" /to ", 2)[0], currentInput.split(" ", 2)[1].split(" /from ", 2)[1].split(" /to ", 2)[1]);
                     myList.add(even);
-                    System.out.println("Done. I've added the Event: " + even.toString());
+                    System.out.println("Done. I've added the Tasks.Event: " + even.toString());
                 }
             }
         }

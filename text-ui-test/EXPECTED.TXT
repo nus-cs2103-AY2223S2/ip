@@ -1,4 +1,4 @@
-Hello, I am Baymax your personal Chatbot Companion.
+Hello, I am Baymax.Baymax your personal Chatbot Companion.
 What can I do for you today?
 Done. I've added the task: [T][ ] walk the dog
 

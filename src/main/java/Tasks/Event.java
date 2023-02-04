@@ -1,9 +1,11 @@
+package Tasks;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
-public class Event extends Task{
+public class Event extends Task {
 
     protected String start;
     protected String end;

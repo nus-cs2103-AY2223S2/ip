@@ -1,3 +1,5 @@
+package Baymax;
+
 public class Ui {
     // deals with interactions with the user
     public void showLoadingError() {
@@ -5,7 +7,7 @@ public class Ui {
     }
 
     public void welcomeMessage() {
-        System.out.println("Hello, I am Baymax your personal chat bot Companion. \nWhat can I do for you today?");
+        System.out.println("Hello, I am Baymax.Baymax your personal chat bot Companion. \nWhat can I do for you today?");
     }
 
     public void exitMessage() {

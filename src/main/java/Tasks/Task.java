@@ -1,3 +1,5 @@
+package Tasks;
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -20,10 +22,10 @@ public class Task {
     }
 
     public void markAsDoneMessage() {
-        System.out.println("Task Marked as done");
+        System.out.println("Tasks.Task Marked as done");
     }
 
     public void markAsNotDoneMessage() {
-        System.out.println("Task marked as not done");
+        System.out.println("Tasks.Task marked as not done");
     }
 }
