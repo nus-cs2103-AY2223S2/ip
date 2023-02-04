@@ -1,7 +1,6 @@
 package duke.controller;
 
 import duke.Duke;
-import duke.util.Parser;
 import duke.util.Stateful;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -47,8 +46,8 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         Stateful response = duke.getResponse(input);
-        assert response.output() != null && response.output().length > 0;
-        String output = Parser.join(response.output());
+        assert response.outputs() != null && response.outputs().size() > 0;
+        String output = String.join("\n", response.outputs());
         dialogContainer.getChildren()
                 .addAll(DialogBox.getUserDialog(input, userImage),
                         DialogBox.getDukeDialog(output, dukeImage)
