@@ -33,15 +33,15 @@ public class DeleteCommand extends Command{
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
-            int i = Integer.parseInt(details);
-            Task removedTask = tasks.remove(i - 1);
+            int parseInt = Integer.parseInt(details);
+            Task removedTask = tasks.remove(parseInt - 1);
             storage.update(tasks);
             ui.show("Noted. I've removed this task:");
             ui.show(String.valueOf(removedTask));
             ui.show("Now you have " + tasks.size() + " tasks in the list.");
-        } catch (NumberFormatException err) {
+        } catch (NumberFormatException e) {
             throw new DukeException("☹ OOPS!!! " + details + " is not a valid integer for indexing the task list.");
-        } catch (IndexOutOfBoundsException err) {
+        } catch (IndexOutOfBoundsException e) {
             throw new DukeException("☹ OOPS!!! There are less than " + details + " tasks.");
         }
     }
