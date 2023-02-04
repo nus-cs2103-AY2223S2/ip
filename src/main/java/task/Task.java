@@ -6,14 +6,16 @@ package task;
 public abstract class Task {
     private boolean marked;
     private final String content;
+    private final boolean isHigh;
 
     /**
      * Constructor for Task object.
      * @param content Content to be placed in the task.
      */
-    public Task(String content) {
+    public Task(String content, boolean isHigh) {
         this.marked = false;
         this.content = content;
+        this.isHigh = isHigh;
     }
 
     /**
@@ -24,13 +26,15 @@ public abstract class Task {
      * @return Task object.
      */
     public static Task create(char taskType, String content) {
+        boolean isHigh = content.contains("high");
+        content = content.replace(" high", "");
         switch (taskType) {
         case 'T':
-            return Todo.create(content);
+            return Todo.create(content, isHigh);
         case 'D':
-            return Deadline.create(content);
+            return Deadline.create(content, isHigh);
         case 'E':
-            return Event.create(content);
+            return Event.create(content, isHigh);
         default:
             return null;
         }
@@ -71,7 +75,8 @@ public abstract class Task {
     @Override
     public String toString() {
         String markedStatus = this.isMarked() ? "X" : " ";
-        return String.format("[%s] %s", markedStatus, this.getContent());
+        String priorityStatus = this.isHigh ? "!!" : "";
+        return String.format("[%s] %s%s", markedStatus, this.getContent(), priorityStatus);
     }
 
     /**
