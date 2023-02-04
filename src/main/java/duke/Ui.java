@@ -4,32 +4,12 @@ package duke;
  * Deals with interactions with the user.
  */
 public class Ui {
-    /**
-     * Returns the welcome message in String format.
-     */
-    public String welcome() {
-        return "---\nhi i'm Duke! what's up?\n---";
-    }
-
-    /**
-     * Returns the top divider line ("---") in String format.
-     */
-    public String lineTop() {
-        return "---\n"; // show the divider line ("---")
-    }
-
-    /**
-     * Returns the bottom divider line ("---") in String format.
-     */
-    public String lineBottom() {
-        return "\n---"; // show the divider line ("---")
-    }
 
     /**
      * Returns the bye message in String format.
      */
     public String bye() {
-        return "---\nbye! see u soon! :-)\n---";
+        return "bye! see u soon! :-)";
     }
 
     /**
@@ -51,5 +31,12 @@ public class Ui {
      */
     public void showBye() {
         System.out.println("---\nbye! see u soon! :-)\n---");
+    }
+
+    /**
+     * Prints a DukeException message.
+     */
+    public void showException(DukeException ex) {
+        System.out.println(ex);
     }
 }
