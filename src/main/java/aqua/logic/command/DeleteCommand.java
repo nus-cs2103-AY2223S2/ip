@@ -9,6 +9,7 @@ import aqua.logic.ExecutionService;
 import aqua.logic.ExecutionTask;
 import aqua.manager.IoManager;
 import aqua.manager.LogicManager;
+import aqua.util.Kaomoji;
 
 
 /**
@@ -106,6 +107,6 @@ public class DeleteCommand extends CommandController {
 
 
 
-    // "٩ (ˊᗜˋ *) و You have no task left~ ☆"
-    // "You have %d task(s) left, all the best ( ง*`꒳´*)ว"
+    // "You have %d task(s) left, all the best " + Kaomoji.CHEER_ENCOURAGE
+    // Kaomoji.CHEER_RELIEF + " You have no task left~ " + Kaomoji.STAR_WHITE;
 }

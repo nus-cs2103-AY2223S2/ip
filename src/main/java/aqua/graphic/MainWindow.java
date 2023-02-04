@@ -34,14 +34,21 @@ public class MainWindow extends UiComponent<VBox> {
      */
     public MainWindow(LogicManager logicManager) {
         super(PATH_FXML_FILE);
-
         this.manager = initialiseAppManager(logicManager);
+        initialiseTextDisplayArea();
+        initialiseScrollPane();
+    }
 
+
+    private void initialiseTextDisplayArea() {
         // add listener to auto scroll to bottom
         textDisplayArea.heightProperty().addListener((ob, o, n) -> {
             textScrollPane.setVvalue(1D);
         });
+    }
 
+
+    private void initialiseScrollPane() {
         // add listener to sync display area size to view port
         textScrollPane.viewportBoundsProperty().addListener((ob, o, n) -> {
             double width = n.getWidth();
