@@ -54,7 +54,7 @@ public class Roody {
             ui.startNextLine();
             try {
                 String command = scanner.nextLine();
-                String[] commands = Parser.Parse(command);
+                String[] commands = Parser.parse(command);
                 switch (commands[0]) {
                     case "list":
                         ui.printList(list);
