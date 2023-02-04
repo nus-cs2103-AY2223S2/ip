@@ -110,24 +110,21 @@ public class Ui {
      * @throws DukeException
      */
     public String stringList(ArrayList<Task> tasks, boolean isGui) throws DukeException {
-        if (tasks.size() == 0) {
-            return Views.CANNOT_FIND_STRING.eng();
+        assert tasks.size() != 0 : Views.CANNOT_FIND_STRING.eng();
+        String toPrint = Views.FOUND_LIST_STRING.eng();
+        if (isGui) {
+            toPrint = toPrint.substring(0, toPrint.length() - 6);
+        }
+        for (int i = 0; i < tasks.size(); i++) {
+            toPrint += ((i + 1) + "." + tasks.get(i)) + "\n";
+            if (!isGui) {
+                toPrint += "      ";
+            }
+        }
+        if (isGui) {
+            return toPrint.substring(0, toPrint.length() - 1);
         } else {
-            String toPrint = Views.FOUND_LIST_STRING.eng();
-            if (isGui) {
-                toPrint = toPrint.substring(0, toPrint.length() - 6);
-            }
-            for (int i = 0; i < tasks.size(); i++) {
-                toPrint += ((i + 1) + "." + tasks.get(i)) + "\n";
-                if (!isGui) {
-                    toPrint += "      ";
-            }
-            }
-            if (isGui) {
-                return toPrint.substring(0, toPrint.length() - 1);
-            } else {
-                return toPrint.substring(0, toPrint.length() - 7);
-            }
+            return toPrint.substring(0, toPrint.length() - 7);
         }
     }
 
