@@ -1,14 +1,20 @@
 package Duke.Commands.Tasks;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task {
-    protected String deadline;
+    protected LocalDate deadline;
+    protected static String DATE_FORMAT = "MMM dd yyyy";
+
     public Deadline(String description, String deadline) {
         this(description, false, deadline);
     }
 
     public Deadline(String description, boolean isDone, String deadline) {
         super(description, isDone);
-        this.deadline = deadline;
+        this.deadline = LocalDate.parse(deadline);
     }
 
     /**
@@ -21,7 +27,7 @@ public class Deadline extends Task {
     }
 
     private String getDeadline() {
-        return this.deadline;
+        return this.deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
     }
 
     /**
@@ -37,6 +43,6 @@ public class Deadline extends Task {
 
     public String toString() {
         return String.format("[%s][%s] %s (by: %s)",
-                this.getTaskClass(), this.getStatusIcon(), this.description, this.deadline);
+                this.getTaskClass(), this.getStatusIcon(), this.description, this.getDeadline());
     }
 }

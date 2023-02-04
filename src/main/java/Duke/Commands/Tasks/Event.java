@@ -1,16 +1,19 @@
 package Duke.Commands.Tasks;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task {
-    protected String from;
-    protected String to;
+    protected LocalDate from;
+    protected LocalDate to;
     public Event(String description, String from, String to) {
         this(description, false, from, to);
     }
 
     public Event(String description, boolean isDone, String from, String to) {
         super(description, isDone);
-        this.from = from;
-        this.to = to;
+        this.from = LocalDate.parse(from);
+        this.to = LocalDate.parse(to);
     }
 
     /**
@@ -22,14 +25,6 @@ public class Event extends Task {
         return "T";
     }
 
-    private String getFromTime() {
-        return this.from;
-    }
-
-    private String getToTime() {
-        return this.to;
-    }
-
     /**
      * Generates a String to store this task in a local text file
      *
@@ -38,12 +33,20 @@ public class Event extends Task {
     public String generateStorageText() {
         return String.format("%s-%s-%s-%s-%s",
                 this.getTaskClass(), this.getStatusIcon(),
-                this.getDescription(), this.getFromTime(), this.getToTime());
+                this.getDescription(), this.from.toString(), this.to.toString());
+    }
+
+    private String getFrom() {
+        return this.from.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+    }
+
+    private String getTo() {
+        return this.to.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
     }
 
     public String toString() {
         return String.format("[%s][%s] %s (from: %s to: %s)",
                 this.getTaskClass(), this.getStatusIcon(),
-                this.description, this.from, this.to);
+                this.description, this.getFrom(), this.getTo());
     }
 }
