@@ -39,7 +39,7 @@ public abstract class Task {
     public void setCompletion(boolean completion) {
         this.completed = completion;
         if (completion) {
-            System.out.println("    Nice! I've marked this task as done:\n" + "      " + this);
+            System.out.println("    Nice! I've marked this task as done:\n" + "     " + this);
         } else {
             System.out.println("    OK, I've marked this task as not done yet:\n" + "       " + this);
         }
