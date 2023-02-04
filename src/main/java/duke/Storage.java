@@ -55,10 +55,13 @@ public class Storage {
         while (s.hasNext()) {
             String[] curr = s.nextLine().split(" \\| ");
             if (curr[0].equals("T")) {
+                assert curr.length == 3;
                 list.add(new Todo(curr[2], Boolean.valueOf(curr[1])));
             } else if (curr[0].equals("D")) {
+                assert curr.length == 4;
                 list.add(new Deadline(curr[2], curr[3], Boolean.valueOf(curr[1])));
             } else if (curr[0].equals("E")) {
+                assert curr.length == 5;
                 list.add(new Event(curr[2], curr[3], curr[4], Boolean.valueOf(curr[1])));
             }
         }

@@ -56,7 +56,9 @@ public class TaskList {
      * @param i index of task in arraylist
      */
     public String mark(int i) {
-        list.get(i).mark();
+        Task task = list.get(i);
+        assert task != null;
+        task.mark();
         return "Nice! I've marked this duke.task as done:\n" + list.get(i);
     }
 
@@ -65,7 +67,9 @@ public class TaskList {
      * @param i index of task in arraylist
      */
     public String unmark(int i) {
-        list.get(i).unmark();
+        Task task = list.get(i);
+        assert task != null;
+        task.unmark();
         return "OK, I've marked this duke.task as not done yet:\n" + list.get(i);
     }
 
@@ -91,6 +95,7 @@ public class TaskList {
     public String addDeadline(String command) {
         try {
             String[] parsed = Parser.parseDeadline(command);
+            assert parsed.length == 2;
             String deadline = parsed[1];
             String description = parsed[0];
             list.add(new Deadline(description, deadline, false));
@@ -110,6 +115,7 @@ public class TaskList {
     public String addEvent(String command) {
         try {
             String[] parsed = Parser.parseEvent(command);
+            assert parsed.length == 3;
             String description = parsed[0];
             String start = parsed[1];
             String end = parsed[2];
