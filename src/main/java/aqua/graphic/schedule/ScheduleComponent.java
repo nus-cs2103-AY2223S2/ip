@@ -14,7 +14,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 
 public class ScheduleComponent extends VBox {
-    private static final double LABEL_WIDTH = 80;
+    private static final double LABEL_WIDTH = 100;
     private static final double ROW_WIDTH = 1000;
 
     private static final int DAYS_IN_WEEK = 7;
@@ -51,6 +51,7 @@ public class ScheduleComponent extends VBox {
     private void addRow(LocalDateTime startTime, List<ScheduleTimeable> timeables, int index) {
         HBox box = new HBox();
         box.setAlignment(Pos.CENTER_LEFT);
+        box.setMaxWidth(ROW_WIDTH);
         box.getStyleClass().add("schedule-date-box");
         if (index % 2 == 0) {
             box.pseudoClassStateChanged(PseudoClass.getPseudoClass("even"), true);
@@ -62,8 +63,8 @@ public class ScheduleComponent extends VBox {
         dateLabel.setMinWidth(LABEL_WIDTH);
         dateLabel.setMaxWidth(LABEL_WIDTH);
         dateLabel.setPrefWidth(LABEL_WIDTH);
-        dateLabel.setTextAlignment(TextAlignment.CENTER);
-        dateLabel.setAlignment(Pos.CENTER);
+        dateLabel.setTextAlignment(TextAlignment.LEFT);
+        dateLabel.setAlignment(Pos.CENTER_LEFT);
         dateLabel.setText(startTime.format(DateTimeFormatter.ofPattern("LLL d (EEE)")));
 
         VBox scheduleContainer = new VBox(new DaySchedule(startTime, timeables));
