@@ -36,8 +36,18 @@ public class Duke {
 
 
     void moreOop() {
+        ByteArrayOutputStream storeSavedString = new ByteArrayOutputStream();
+        PrintStream printStreamSaved = new PrintStream(storeSavedString);
+        PrintStream oldPrintStreamSaved = System.out;
+        System.setOut(printStreamSaved);
+
         storage = new Storage();
         storage.readFromFile();
+
+        System.out.flush();
+        System.setOut(oldPrintStreamSaved
+        );
+
         //Store byte array
         ByteArrayOutputStream storeString = new ByteArrayOutputStream();
         PrintStream printStream = new PrintStream(storeString);
