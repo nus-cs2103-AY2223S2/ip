@@ -14,7 +14,7 @@ public class UnmarkCommand extends Command {
     public void execute(TaskList tasklist, Ui ui, Storage storage) {
         Task t = tasklist.getTasks().get(index - 1);
         t.unmarkDone();
-        ui.showUnmarkDoneMessage(t);
+        ui.appendUnmarkDoneMessage(t);
     }
     @Override
     public boolean isExitCommand() {

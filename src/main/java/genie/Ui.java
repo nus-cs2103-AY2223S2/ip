@@ -17,32 +17,26 @@ public class Ui {
                     "                     / / __   / _ \\  / __ \\  / /  / _ \\\n" +
                     "                    / /_/ /  /  __/ / / / / / /  /  __/\n" +
                     "                    \\____/   \\___/ /_/ /_/ /_/   \\___/ \n";
+    private StringBuilder response;
     /**
      * A constructor for Ui class.
      */
-    public Ui() {}
+    public Ui() {
+        response = new StringBuilder();
+    }
 
     /**
      * Prints greet message.
      */
     public void greet() {
-        System.out.println("Hello! This is Genie, your personal task tracker!");
+        response.append("Hello! This is Genie, your personal task tracker!");
     }
 
     /**
      * Prints Genie logo.
      */
     public void bootLogo() {
-        printLine();
-        System.out.println(GENIE_LOGO);
-        printLine();
-    }
-
-    /**
-     * Prints a line.
-     */
-    public void printLine() {
-        System.out.println("==============================================================================");
+        response.append(GENIE_LOGO);
     }
 
     /**
@@ -51,15 +45,14 @@ public class Ui {
      */
     public void printList(ArrayList<Task> tasks) {
         if (tasks.size() > 0) {
-            System.out.println("Here are the tasks in your list:");
+            response.append("Here are the tasks in your list:\n");
             for (int i = 1; i <= tasks.size(); i++) {
                 Task t = tasks.get(i - 1);
-                System.out.println(i + ". " + t.toString());
+                response.append(i + ". " + t.toString() + "\n");
             }
         } else {
             showEmptyListMessage();
         }
-        printLine();
     }
 
     /**
@@ -76,8 +69,7 @@ public class Ui {
      * @param t task to be marked done
      */
     public void showMarkDoneMessage(Task t) {
-        System.out.println("Nice! I've marked this task as done:\n" + "  " + t.toString());
-        printLine();
+        response.append("Nice! I've marked this task as done:\n" + "  " + t.toString() + "\n");
     }
 
     /**
@@ -85,19 +77,17 @@ public class Ui {
      * @param t task to be added
      * @param size number of tasks in the list
      */
-    public void showAddTaskMessage(Task t, int size) {
-        System.out.println("Got it. I've added this task:\n  " + t.toString());
-        System.out.println("Now you have " + size + " tasks in the list.");
-        printLine();
+    public void appendAddTaskMessage(Task t, int size) {
+        response.append("Got it. I've added this task:\n  " + t.toString() + "\n");
+        response.append("Now you have " + size + " tasks in the list.");
     }
 
     /**
      * Prints unmark done message.
      * @param t task to be unmarked done
      */
-    public void showUnmarkDoneMessage(Task t) {
-        System.out.println("Okay, I've marked this task as not done yet:\n" + "  " + t.toString());
-        printLine();
+    public void appendUnmarkDoneMessage(Task t) {
+        response.append("Okay, I've marked this task as not done yet:\n" + "  " + t.toString() + "\n");
     }
     /**
      * Prints delete task message.
@@ -105,62 +95,59 @@ public class Ui {
      * @param size number of tasks in the list
      */
     public void showDeleteTaskMessage(Task t, int size) {
-        System.out.println("Noted. I've removed this task:\n" + "  " + t.toString() +
-                "\nNow you have " + size + " tasks in the list.");
-        printLine();
+        response.append("Noted. I've removed this task:\n" + "  " + t.toString() +
+                "\nNow you have " + size + " tasks in the list.\n");
     }
     /**
      * Prints add farewell message.
      */
     public void showFarewellMessage() {
-        System.out.println("Bye. Hope to see you again soon!");
-        printLine();
+        response.append("Bye. Hope to see you again soon!\n");
     }
 
     /**
      * Returns general error message.
-     * @return error message
      */
-    public String showErrorMessage() {
-        return "Something went wrong here xx...";
+    public void showErrorMessage() {
+        response.append("Something went wrong here xx...\n");
     }
-
-    /**
-     * Prints loaded task list from .txt file
-     * @param tl task list
-     */
+    /*
     public void printLoadedTaskList(ArrayList<String> tl) {
         if (tl.isEmpty()) {
             showEmptyListMessage();
         } else {
-            System.out.println("Here is a record of your task list from where you had previously left off:");
+            response.append("Here is a record of your task list from where you had previously left off:\n");
             for (int i = 0; i < tl.size(); i++) {
-                System.out.println("  " + tl.get(i));
+                response.append("  " + tl.get(i) + "\n");
             }
-            System.out.println("Now, what can I do for you?");
-        }
-        printLine();
+            response.append("\nNow, what can I do for you?\n");
     }
+    */
 
     /**
      * Prints empty list message.
      */
     public void showEmptyListMessage() {
-        System.out.println("Your task list is currently empty! Let's get started! ^-^");
+        response.append("Your task list is currently empty! Let's get started! ^-^\n");
     }
     public void printMatchingTaskList(ArrayList<Task> tasks) {
         if(tasks.size() > 0) {
-            System.out.println("Here are the matching tasks in your list:");
+            response.append("Here are the matching tasks in your list:\n");
             for(int i = 1; i <= tasks.size(); i++) {
                 Task t = tasks.get(i - 1);
-                System.out.println(i + ". " + t.toString());
+                response.append(i + ". " + t.toString() + "\n");
             }
         } else {
             showEmptyMatchingTasksMessage();
         }
-        printLine();
     }
     public void showEmptyMatchingTasksMessage() {
-        System.out.println("There are no matching tasks for your search :(");
+        response.append("There are no matching tasks for your search :(\n");
+    }
+    public String getResponse() {
+        return response.toString();
+    }
+    public void clearResponse() {
+        response.setLength(0);
     }
 }
