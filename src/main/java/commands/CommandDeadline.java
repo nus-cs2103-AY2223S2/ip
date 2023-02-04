@@ -22,17 +22,7 @@ public class CommandDeadline extends Command {
         TaskList taskList = new Storage().loadTaskList();
         try {
             String deadlineSentence = userInput[1];
-            String deadlineName = deadlineSentence.substring(0, deadlineSentence.indexOf(" /by"));
-            // ERROR: deadline description is blank.
-            if (deadlineName.strip().length() == 0) {
-                throw new DukeException(ui.formatLogicError("deadline description cannot be blank."));
-            }
-            String deadlineDate = deadlineSentence.substring(deadlineSentence.indexOf(" /by") + 5);
-            // ERROR: deadline date is blank.
-            if (deadlineDate.strip().length() == 0) {
-                throw new DukeException(ui.formatLogicError("deadline date cannot be blank."));
-            }
-            Task deadlineToAdd = new Deadline(deadlineName, deadlineDate);
+            Task deadlineToAdd = new Deadline(getDeadlineName(deadlineSentence), getDeadlineDate(deadlineSentence));
             taskList.add(deadlineToAdd);
             autoSave(taskList);
             return ("Task added:\n " + deadlineToAdd + "\n" + "There are now " + taskList.size()
@@ -41,5 +31,25 @@ public class CommandDeadline extends Command {
             throw new DukeException(ui.formatCommandError("deadline",
                     "deadline <insert description> " + "/by <insert deadline>"));
         }
+    }
+    public String getDeadlineName(String deadlineSentence) throws StringIndexOutOfBoundsException,
+            ArrayIndexOutOfBoundsException, DukeException {
+        Ui ui = new Ui();
+        String deadlineName = deadlineSentence.substring(0, deadlineSentence.indexOf(" /by"));
+        // ERROR: deadline description is blank.
+        if (deadlineName.strip().length() == 0) {
+            throw new DukeException(ui.formatLogicError("deadline description cannot be blank."));
+        }
+        return deadlineName;
+    }
+    public String getDeadlineDate(String deadlineSentence) throws StringIndexOutOfBoundsException,
+            ArrayIndexOutOfBoundsException, DukeException {
+        Ui ui = new Ui();
+        String deadlineDate = deadlineSentence.substring(deadlineSentence.indexOf(" /by") + 5);
+        // ERROR: deadline date is blank.
+        if (deadlineDate.strip().length() == 0) {
+            throw new DukeException(ui.formatLogicError("deadline date cannot be blank."));
+        }
+        return deadlineDate;
     }
 }

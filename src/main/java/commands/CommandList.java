@@ -26,14 +26,21 @@ public class CommandList extends Command {
         if (taskList.size() == 0) {
             return ("You don't have anything to do right now!");
         } else {
-            StringBuilder toPrint = new StringBuilder();
-            for (int i = 1; i < taskList.size() + 1; i++) {
-                toPrint.append(i).append(". ").append(taskList.get(i - 1).toString());
-                if (i < taskList.size()) {
-                    toPrint.append("\n");
-                }
-            }
-            return ("Here are your tasks:\n" + toPrint);
+            return ("Here are your tasks:\n" + listMake(taskList));
         }
+    }
+    /**
+     * Generates a list of the tasks present in the input taskList.
+     * @param taskList The user's TaskList.
+     */
+    public String listMake(TaskList taskList) {
+        StringBuilder newList = new StringBuilder();
+        for (int i = 1; i < taskList.size() + 1; i++) {
+            newList.append(i).append(". ").append(taskList.get(i - 1).toString());
+            if (i < taskList.size()) {
+                newList.append("\n");
+            }
+        }
+        return newList.toString();
     }
 }
