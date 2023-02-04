@@ -18,6 +18,7 @@ public class Parser {
      * @throws InputException If the command does not fit required format
      */
     public static String parse(String input, TaskList tasks) throws InputException {
+        assert tasks != null : "Task list should exist at this point";
         String[] command = input.split(" ", 2);
         switch (command[0]) {
         case "list":

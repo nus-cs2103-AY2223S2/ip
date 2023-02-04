@@ -53,6 +53,8 @@ public class TunaBot extends Application {
         } catch (IOException e) {
             ui.saveFileProblem();
         }
+        assert tasks != null : "Storage should have loaded either an existing "
+            + "task list from save file or initialised a new task list";
     }
 
     /**
@@ -64,7 +66,7 @@ public class TunaBot extends Application {
             try {
                 String input = s.nextLine();
                 ui.line();
-                String output = Parser.parse(input, tasks);
+                Parser.parse(input, tasks);
                 toExit = input.equals("bye");
             } catch (InputException e) {
                 ui.printErrorMessage(e);
