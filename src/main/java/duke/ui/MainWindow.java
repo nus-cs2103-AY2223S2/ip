@@ -1,5 +1,8 @@
 package duke.ui;
 
+import java.io.IOException;
+
+import duke.Duke;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -10,10 +13,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-
-import java.io.IOException;
-
-import duke.Duke;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -34,6 +33,12 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/LeDuke_avatar.png"));
 
+    /**
+     * Constructor for MainWindow class.
+     *
+     * @param duke Duke bot instance.
+     * @param stage Javafx Stage instance.
+     */
     public MainWindow(Duke duke, Stage stage) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/MainWindow.fxml"));

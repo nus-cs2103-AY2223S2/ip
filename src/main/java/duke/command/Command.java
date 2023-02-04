@@ -10,6 +10,7 @@ import duke.ui.Ui;
  */
 public abstract class Command {
     /**
+     * Executes the command then returns the string response from the bot.
      *
      * @param tasks The TaskList instance of a list of tasks.
      * @param ui Ui instance.

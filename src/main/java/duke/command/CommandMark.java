@@ -5,9 +5,19 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Represents a Mark/Unmark command.
+ */
 public class CommandMark extends Command {
     private int idx;
     private boolean isDone;
+
+    /**
+     * Constructor for a Mark/Unmark command.
+     *
+     * @param idx Index of the task to be marked/unmarked.
+     * @param isDone Status of the task to be marked/unmarked.
+     */
     public CommandMark(int idx, boolean isDone) {
         this.idx = idx;
         this.isDone = isDone;

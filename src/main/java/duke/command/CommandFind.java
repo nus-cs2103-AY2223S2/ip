@@ -19,5 +19,4 @@ public class CommandFind extends Command {
         String foundTasks = tasks.findTasks(this.keyword);
         return ui.formResponse("LeTasks matching your keywords:" + System.lineSeparator() + foundTasks);
     }
-
 }
