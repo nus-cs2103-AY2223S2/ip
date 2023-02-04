@@ -3,7 +3,6 @@ package duke.command;
 import duke.storage.StorageList;
 import duke.task.TaskList;
 import duke.task.Todo;
-import duke.ui.Ui;
 
 /**
  * Todoclass to indicate a task needed to be completed.
@@ -25,11 +24,10 @@ public class TodoCommand extends Command {
      * Method to execute the todo command.
      *
      * @param tasks   - task list of the current tasks.
-     * @param ui      - interface of the command.
      * @param storage - database of the history of commands.
      * @return String Output of the todo command when executed.
      */
-    public String execute(TaskList tasks, Ui ui, StorageList storage) {
+    public String execute(TaskList tasks, StorageList storage) {
         Todo t = new Todo(message);
         tasks.addToList(t);
         return "Got it, I've added this task:\n" + t + "\n" + tasks.statement();

@@ -3,7 +3,6 @@ package duke.command;
 import duke.storage.StorageList;
 import duke.task.Deadline;
 import duke.task.TaskList;
-import duke.ui.Ui;
 
 /**
  * Deadline command for the tasks with deadline.
@@ -29,11 +28,10 @@ public class DeadlineCommand extends Command {
      * of formatting.
      *
      * @param tasks   - task list of the current tasks.
-     * @param ui      - interface of the command.
      * @param storage - database of the history of commands.
      * @return String
      */
-    public String execute(TaskList tasks, Ui ui, StorageList storage) {
+    public String execute(TaskList tasks, StorageList storage) {
         Deadline taskDeadline = new Deadline(message, timing);
         if (!taskDeadline.checkFormat()) {
             tasks.addToList(taskDeadline);
