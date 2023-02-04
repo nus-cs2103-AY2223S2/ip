@@ -23,6 +23,14 @@ public class EndTime {
         return ld.equals(endTime.toLocalDate());
     }
 
+    /**
+     * Update the end time
+     * @param endTime the updated endTime
+     */
+    public void updateEndTime(LocalDateTime endTime) {
+        this.endTime = endTime;
+    }
+
     @Override
     public String toString() {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern(DatePattern.PRESENTATION_FORMAT.toString());

@@ -1,6 +1,7 @@
 package sebastian.task;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import sebastian.time.Duration;
 
@@ -31,6 +32,18 @@ public class Event extends Task {
      */
     public boolean isOnSameDay(LocalDate ld) {
         return duration.isSameDay(ld);
+    }
+
+    public void update(String description, LocalDateTime from, LocalDateTime to) {
+        if(description != null) {
+            super.update(description);
+        }
+        if(from != null) {
+            this.duration.updateFromTime(from);
+        }
+        if(to != null) {
+            this.duration.updateEndTime(to);
+        }
     }
 
     @Override

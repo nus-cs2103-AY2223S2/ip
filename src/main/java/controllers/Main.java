@@ -15,7 +15,7 @@ import sebastian.Sebastian;
  * Class used to connect the controller and view of MainWindow
  */
 public class Main extends Application {
-    private Sebastian sebastian = new Sebastian("SebastianData.txt");
+    private Sebastian sebastian = new Sebastian("src/main/resources/SebastianData.txt");
 
     @Override
     public void start(Stage stage) {

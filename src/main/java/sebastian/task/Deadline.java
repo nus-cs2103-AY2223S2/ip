@@ -1,6 +1,7 @@
 package sebastian.task;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import sebastian.time.EndTime;
 
@@ -33,6 +34,15 @@ public class Deadline extends Task {
      */
     public boolean isOnSameDay(LocalDate ld) {
         return endTime.isSameDay(ld);
+    }
+
+    public void update(String description, LocalDateTime endTime) {
+        if(description != null) {
+            super.update(description);
+        }
+        if(endTime != null) {
+            this.endTime.updateEndTime(endTime);
+        }
     }
 
     @Override

@@ -1,8 +1,8 @@
 E<>DONE<>project meeting<>2023-01-27 1600<>2023-01-27 1800
-T<>NOT_DONE<>read books
+T<>NOT_DONE<>read Harry Potter
 D<>DONE<>cs2012<>2023-01-29 1400
 E<>NOT_DONE<>visit relative<>2023-01-22 1400<>2023-01-22 2200
 E<>DONE<>gaming<>2023-01-22 1400<>2023-01-22 2200
 D<>NOT_DONE<>cs2105 tutorial<>2023-01-25 1100
 T<>DONE<>finish level 10
-T<>NOT_DONE<>lecture
+T<>DONE<>lecture

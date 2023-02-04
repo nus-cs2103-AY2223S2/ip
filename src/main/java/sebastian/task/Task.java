@@ -4,7 +4,7 @@ package sebastian.task;
  * Class representing a task
  */
 public class Task {
-    private final String taskDescription;
+    private String taskDescription;
     private TaskStatus taskStatus;
 
     /**
@@ -42,6 +42,10 @@ public class Task {
      */
     public boolean containsKeyword(String keyword) {
         return taskDescription.contains(keyword);
+    }
+
+    public void update(String updateDetail) {
+        this.taskDescription = updateDetail;
     }
 
     @Override

@@ -11,6 +11,7 @@ import sebastian.command.GetCommand;
 import sebastian.command.ListCommand;
 import sebastian.command.MarkCommand;
 import sebastian.command.UnmarkCommand;
+import sebastian.command.UpdateCommand;
 import sebastian.exceptions.IllegalInputException;
 
 /**
@@ -45,6 +46,8 @@ public class Parser {
             return new DeleteCommand(fullCommand);
         case "get":
             return new GetCommand(fullCommand);
+        case "update":
+            return new UpdateCommand(fullCommand);
         case "bye":
             return new ExitCommand();
         default:

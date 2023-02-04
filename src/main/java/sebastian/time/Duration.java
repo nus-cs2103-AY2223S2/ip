@@ -30,6 +30,26 @@ public class Duration {
         return ld.equals(from.toLocalDate());
     }
 
+    /**
+     * Update the start time of the duration
+     * @param from the new start time
+     * @return the updated duration
+     */
+    public Duration updateFromTime(LocalDateTime from) {
+        this.from = from;
+        return this;
+    }
+
+    /**
+     * Update the end time of the duration
+     * @param to the new end time
+     * @return the updated duration
+     */
+    public Duration updateEndTime(LocalDateTime to) {
+        this.to = to;
+        return this;
+    }
+
     @Override
     public String toString() {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern(DatePattern.PRESENTATION_FORMAT.toString());
