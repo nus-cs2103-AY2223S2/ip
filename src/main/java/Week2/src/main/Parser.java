@@ -92,15 +92,13 @@ public class Parser {
         } else if (c.startsWith("find")) {
             String keyword = c.substring(6);
             Search sr = new Search(tasklist);
-            Search.find(keyword);
+            return Search.find(keyword);
         } else if (!c.equals("bye")) {
             return "OOPS!!! I'm sorry, but I don't know what that means :-(";
         } else {
             Duke.isBye = true;
             return ui.bye();
         }
-
-        return "";
     }
 
     public void updateTL() {
