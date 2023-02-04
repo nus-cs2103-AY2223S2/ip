@@ -50,17 +50,20 @@ public class ScheduleComponent extends VBox {
         HBox box = new HBox();
         box.setSpacing(5);
         box.setAlignment(Pos.CENTER_LEFT);
+        box.getStyleClass().add("schedule-date-box");
 
         Label dateLabel = new Label();
         dateLabel.setMinWidth(LABEL_WIDTH);
         dateLabel.setMaxWidth(LABEL_WIDTH);
         dateLabel.setPrefWidth(LABEL_WIDTH);
         dateLabel.setTextAlignment(TextAlignment.CENTER);
+        dateLabel.setAlignment(Pos.CENTER);
         dateLabel.setText(startTime.format(DateTimeFormatter.ofPattern("LLL d (EEE)")));
 
-        DaySchedule schedule = new DaySchedule(startTime, timeables);
+        VBox scheduleContainer = new VBox(new DaySchedule(startTime, timeables));
+        scheduleContainer.setAlignment(Pos.CENTER_LEFT);
 
-        box.getChildren().addAll(dateLabel, schedule);
+        box.getChildren().addAll(dateLabel, scheduleContainer);
         getChildren().add(box);
     }
 }
