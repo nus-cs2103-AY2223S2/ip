@@ -171,6 +171,10 @@ public class Ui {
         System.out.println(formatMessage(message));
     }
 
+    public void closeScanner() {
+        this.in.close();
+    }
+
     /**
      * Adds spacing indentation to the message.
      *
