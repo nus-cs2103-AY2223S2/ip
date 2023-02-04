@@ -39,14 +39,26 @@ public class UnmarkTaskCommand extends Command {
     @Override
     public String execute() {
         try {
-            String[] commandMessageArr = commandMessage.split(" ", 2);
-            int taskNumber = Integer.parseInt(commandMessageArr[1]);
-            Task task = taskList.unmarkTask(taskNumber);
+            String startOfReply = "The following task is marked as not done:\n";
 
+            Task task = unmarkTask();
             storage.restructure(taskList);
-            return "The following task is marked as not done:\n" + "  " + task;
+
+            return startOfReply + "  " + task;
         } catch (IOException exception) {
-            return "An error has occurred!\n" + exception.getMessage();
+            String startOfErrorMessage = "An error has occurred!\n";
+            return startOfErrorMessage + exception.getMessage();
         }
+    }
+
+    /**
+     * Unmarks task and returns it.
+     *
+     * @return Task that was unmarked.
+     */
+    public Task unmarkTask() {
+        String[] commandMessageArr = commandMessage.split(" ", 2);
+        int taskNumber = Integer.parseInt(commandMessageArr[1]);
+        return taskList.unmarkTask(taskNumber);
     }
 }

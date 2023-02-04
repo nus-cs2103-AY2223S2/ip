@@ -41,16 +41,28 @@ public class CreateEventCommand extends Command {
     @Override
     public String execute() {
         try {
-            String[] commandMessageArr = commandMessage.split("/", 3);
-            Task task = new Event(commandMessageArr[0].substring(6), false,
-                    commandMessageArr[1].substring(5).trim(),
-                    commandMessageArr[2].substring(3));
+            String startOfReply = "The following task has been added:\n";
 
+            Task task = createEvent();
             taskList.addTask(task);
             storage.storeTask(task);
-            return "The following task has been added:\n" + "  " + task;
+
+            return startOfReply + "  " + task;
         } catch (IOException exception) {
-            return "An error has occurred!\n" + exception.getMessage();
+            String startOfErrorMessage = "An error has occurred!\n";
+            return startOfErrorMessage + exception.getMessage();
         }
+    }
+
+    /**
+     * Creates an event.
+     *
+     * @return Event created.
+     */
+    public Event createEvent() {
+        String[] commandMessageArr = commandMessage.split("/", 3);
+        return new Event(commandMessageArr[0].substring(6), false,
+                commandMessageArr[1].substring(5).trim(),
+                commandMessageArr[2].substring(3));
     }
 }

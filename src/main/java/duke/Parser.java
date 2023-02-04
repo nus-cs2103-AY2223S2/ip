@@ -29,7 +29,7 @@ public class Parser {
      */
     public static Command parseCommand(String input, TaskList taskList, Storage storage)
             throws DukeException {
-        String type = input.split(" ", 2)[0];
+        String type = getType(input);
 
         switch(type) {
         case "todo":
@@ -53,5 +53,15 @@ public class Parser {
         default:
             throw new DukeException("Input is not recognized.");
         }
+    }
+
+    /**
+     * Returns the type of command.
+     *
+     * @param input User's input.
+     * @return Type of command.
+     */
+    public static String getType(String input) {
+        return input.split(" ", 2)[0];
     }
 }

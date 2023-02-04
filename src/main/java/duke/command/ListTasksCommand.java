@@ -27,25 +27,36 @@ public class ListTasksCommand extends Command {
      * Lists the tasks for the user and returns the reply with the list
      * of found tasks
      *
-     * @return the list of found tasks.
+     * @return The list of found tasks.
      */
     @Override
     public String execute() {
-        int size = taskList.getSize();
+        int listSize = taskList.getSize();
+        String noTaskMessage = "No task stored.";
 
-        if (size == 0) {
-            return "No task stored.";
+        if (listSize == 0) {
+            return noTaskMessage;
         } else {
-            StringBuilder reply = new StringBuilder("Total tasks: " + taskList.getSize());
-            int count = 0;
-
-            for (int i = 1; i <= size; i++) {
-                count++;
-                Task task = taskList.getTask(i);
-                reply.append("\n").append(count).append(". ").append(task);
-            }
-
-            return reply.toString();
+            return listTasks(listSize);
         }
+    }
+
+    /**
+     * Lists all tasks.
+     *
+     * @param listSize Total number of tasks in list.
+     * @return List of all the tasks.
+     */
+    public String listTasks(int listSize) {
+        StringBuilder reply = new StringBuilder("Total tasks: " + taskList.getSize());
+        int count = 0;
+
+        for (int i = 1; i <= listSize; i++) {
+            count++;
+            Task task = taskList.getTask(i);
+            reply.append("\n").append(count).append(". ").append(task);
+        }
+
+        return reply.toString();
     }
 }
