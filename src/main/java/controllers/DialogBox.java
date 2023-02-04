@@ -49,13 +49,13 @@ public class DialogBox extends HBox {
         }
         dialog.setText(text);
         displayPicture.setImage(img);
-        this.style();
+        this.setStyle();
     }
 
     /**
      * Styles the dialog box and other components it contains
      */
-    private void style() {
+    private void setStyle() {
         Circle circle = new Circle();
         circle.setCenterY(25.0);
         circle.setCenterX(25.0);
@@ -80,6 +80,7 @@ public class DialogBox extends HBox {
         Label l = (Label) tmp.get(0);
         l.setAlignment(Pos.TOP_LEFT);
         l.setTextAlignment(TextAlignment.LEFT);
+
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);

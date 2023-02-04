@@ -25,7 +25,6 @@ public class Parser {
      * @throws IllegalInputException when user command cannot be interpreted
      */
     public static Command parse(String fullCommand) throws IllegalInputException {
-
         String action = fullCommand.split(" ")[0];
         switch (action) {
         case "find":
