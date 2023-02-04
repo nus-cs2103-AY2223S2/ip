@@ -28,26 +28,9 @@ public class UI {
     public static final String WORD_SEARCH = "Here are your tasks on the given date: ";
     public static final String WORD_ADD = "This task is added to your list: ";
     public static final String WORD_DELETE = "Ok, I will remove this task for you: ";
+    public static final String NOW_YOU_HAVE = "Now you have ";
+    public static final String TASK_IN_LIST = " tasks in the list.";
 
-    /**
-     * Read in user command inputs.
-     *
-     * @param sc the scanner to read inputs.
-     * @return a string read from the input.
-     */
-    public static String readCommand(Scanner sc) {
-        return sc.nextLine();
-    }
-
-    /**
-     * Display welcome message when Duke starts.
-     */
-    public static void showWelcome() {
-        showLine();
-        System.out.println(WORD_LOGO);
-        System.out.println(WORD_GREET);
-        showLine();
-    }
 
     /**
      * Display error message when data file is not found in the hard disk.
@@ -59,36 +42,6 @@ public class UI {
     }
 
     /**
-     * Display the decorative horizontal bar.
-     */
-    public static void showLine() {
-        System.out.println(WORD_DIVISHION_LINE);
-    }
-
-    /**
-     * Display error message when runtime issue happens for Duke.
-     *
-     * @param msg error message to be displayed.
-     */
-    public static void showError(String msg) {
-        System.out.println(msg);
-    }
-
-    /**
-     * Display success message when user add tasks into list.
-     *
-     * @param theTask the task added into the list.
-     * @param tasks the list of tasks.
-     */
-    public static void showAdd(Task theTask, TaskList tasks) {
-        System.out.println(WORD_ADD);
-        System.out.println(theTask.toString());
-        int numTask = tasks.getTaskList().size();
-        System.out.println("Now you have " + numTask +
-                " tasks in the list.");
-    }
-
-    /**
      * Display success message when user add tasks into list.
      *
      * @param theTask the task added into the list.
@@ -96,28 +49,9 @@ public class UI {
      * @return the success message.
      */
     public static String returnAdd(Task theTask, TaskList tasks) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(WORD_ADD).append("\n");
-        sb.append(theTask.toString()).append("\n");
-        int numTask = tasks.getTaskList().size();
-        sb.append("Now you have " + numTask +
-                " tasks in the list.");
-        return sb.toString();
+        return getUpdateResponse(theTask, tasks, WORD_ADD);
     }
 
-    /**
-     * Display success message when user delete tasks from list.
-     *
-     * @param theTask the task deleted from the list.
-     * @param tasks the list of tasks.
-     */
-    public static void showDelete(Task theTask, TaskList tasks) {
-        System.out.println(WORD_DELETE);
-        System.out.println(theTask.toString());
-        int numTask = tasks.getTaskList().size();
-        System.out.println("Now you have " + numTask +
-                " tasks in the list.");
-    }
 
     /**
      * Display success message when user delete tasks from list.
@@ -127,29 +61,7 @@ public class UI {
      * @return the delete message.
      */
     public static String returnDelete(Task theTask, TaskList tasks) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(WORD_DELETE).append("\n");
-        sb.append(theTask.toString()).append("\n");
-        int numTask = tasks.getTaskList().size();
-        sb.append("Now you have " + numTask +
-                " tasks in the list.");
-        return sb.toString();
-    }
-
-    /**
-     * Display success message when user list all the tasks,
-     * or list the tasks on the specific date.
-     *
-     * @param str a string containing the list of tasks to be displayed.
-     * @param action 0 for list, 1 for search.
-     */
-    public static void showList(String str, int action) {
-        if (action == 0) {
-            System.out.println(WORD_LIST);
-        } else {
-            System.out.println(WORD_SEARCH);
-        }
-        System.out.println(str);
+        return getUpdateResponse(theTask, tasks, WORD_DELETE);
     }
 
     /**
@@ -161,30 +73,7 @@ public class UI {
      * @return the list string.
      */
     public static String returnList(String str, int action) {
-        StringBuilder sb = new StringBuilder();
-        if (action == 0) {
-            sb.append(WORD_LIST);
-        } else {
-            sb.append(WORD_SEARCH);
-        }
-        sb.append("\n");
-        sb.append(str);
-        return sb.toString();
-    }
-
-    /**
-     * Display success message when user mark a task as done or undone.
-     *
-     * @param theTask the task to be marked.
-     * @param action 0 for mark, 1 for unmark.
-     */
-    public static void showMark(Task theTask, int action) {
-        if (action == 0) {
-            System.out.println(WORD_MARK_DONE);
-        } else {
-            System.out.println(WORD_MARK_UNDONE);
-        }
-        System.out.println(" " + theTask.toString());
+        return getConditionalResponse(str, action, WORD_LIST, WORD_SEARCH);
     }
 
     /**
@@ -195,26 +84,9 @@ public class UI {
      * @return the mark or unmark string.
      */
     public static String returnMark(Task theTask, int action) {
-        StringBuilder sb = new StringBuilder();
-        if (action == 0) {
-            sb.append(WORD_MARK_DONE);
-        } else {
-            sb.append(WORD_MARK_UNDONE);
-        }
-        sb.append("\n");
-        sb.append(" " + theTask.toString());
-        return sb.toString();
+        return getConditionalResponse(" " + theTask.toString(), action, WORD_MARK_DONE, WORD_MARK_UNDONE);
     }
 
-    /**
-     * Display success message when user find tasks based on specific pattern.
-     *
-     * @param str the find keyword.
-     */
-    public static void showFind(String str) {
-        System.out.println(WORD_FIND);
-        System.out.println(str);
-    }
 
     /**
      * Display success message when user find tasks based on specific pattern.
@@ -227,9 +99,41 @@ public class UI {
     }
 
     /**
-     * Display goodbye message when Duke session ends.
+     * To provide the updated response for add and delete tasks
+     * @param theTask
+     * @param tasks
+     * @param header
+     * @return
      */
-    public static void showBye() {
-        System.out.println(WORD_BYE);
+    private static String getUpdateResponse(Task theTask, TaskList tasks, String header) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(header).append("\n");
+        sb.append(theTask.toString()).append("\n");
+        int numTask = tasks.getTaskList().size();
+        sb.append(NOW_YOU_HAVE + numTask +
+                TASK_IN_LIST);
+        return sb.toString();
     }
+
+    /**
+     * To provide the response for list/search, mark/unmark command
+     *
+     * @param str target string
+     * @param action 0 or 1
+     * @param header0 used if action = 0
+     * @param header1 used if action = 1
+     * @return the output string
+     */
+    private static String getConditionalResponse(String str, int action, String header0, String header1) {
+        StringBuilder sb = new StringBuilder();
+        if (action == 0) {
+            sb.append(header0);
+        } else {
+            sb.append(header1);
+        }
+        sb.append("\n");
+        sb.append(str);
+        return sb.toString();
+    }
+
 }
