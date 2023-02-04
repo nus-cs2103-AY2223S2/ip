@@ -14,7 +14,7 @@ public class ListCommand extends Command{
      * {@inheritDoc}
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws BerryException{
-        ui.showListOfTasks(tasks);
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws BerryException{
+        return ui.showListOfTasks(tasks);
     }
 }

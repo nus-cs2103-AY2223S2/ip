@@ -14,9 +14,9 @@ public class ExitCommand extends Command {
      * {@inheritDoc}
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws BerryException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws BerryException {
         storage.saveTasks(tasks);
-        ui.showGoodbye();
         setExit(true);
+        return ui.showGoodbye();
     }
 }

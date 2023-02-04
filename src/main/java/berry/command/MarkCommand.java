@@ -22,13 +22,14 @@ public class MarkCommand extends Command {
      * {@inheritDoc}
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws BerryException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws BerryException {
+        String output = "";
         if (tasks.isIndexWithinRange(taskIndex)) {
-            ui.showMark();
-            tasks.markDone(taskIndex);
+            output += ui.showMark() + tasks.markDone(taskIndex);
         } else {
             throw new IndexOutOfRangeException();
         }
         storage.saveTasks(tasks);
+        return output;
     }
 }

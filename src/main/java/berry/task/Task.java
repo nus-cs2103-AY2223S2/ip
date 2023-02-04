@@ -17,17 +17,17 @@ public abstract class Task {
     /**
      * Marks a task as done.
      */
-    public void markAsDone() {
+    public String markAsDone() {
         this.isDone = true;
-        System.out.println(this.toString());
+        return this.toString();
     }
 
     /**
      * Marks a task as not done.
      */
-    public void markAsNotDone() {
+    public String markAsNotDone() {
         this.isDone = false;
-        System.out.println(this.toString());
+        return this.toString();
     }
 
     /**

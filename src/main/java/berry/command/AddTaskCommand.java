@@ -23,10 +23,10 @@ public class AddTaskCommand extends Command {
      * {@inheritDoc}
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws BerryException {
-        ui.showAdd();
-        tasks.addTask(task);
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws BerryException {
+        String output = ui.showAdd() + tasks.addTask(task);
         storage.saveTasks(tasks);
+        return output;
     }
 }
 

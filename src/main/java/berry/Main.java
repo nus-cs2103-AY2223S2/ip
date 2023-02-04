@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import berry.storage.Storage;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -23,10 +24,14 @@ public class Main extends Application {
     public void start(Stage stage) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
-            AnchorPane ap = fxmlLoader.load();
-            Scene scene = new Scene(ap);
+            AnchorPane anchorPane = fxmlLoader.load();
+            Scene scene = new Scene(anchorPane);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setBerry(berry);
+
+//            fxmlLoader.<MainWindow>getController().setBerry(berry);
+            MainWindow mainWindow = fxmlLoader.getController();
+            mainWindow.setBerry(berry);
+            mainWindow.setStage(stage);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
