@@ -14,7 +14,7 @@ public class Parser {
      * Constructor method for Parser class
      * @param argLine raw input from command line
      */
-    public Parser(String argLine){
+    public Parser(String argLine) {
         this.args = argLine.split(" ", 2);
     }
 

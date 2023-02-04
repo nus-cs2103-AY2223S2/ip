@@ -102,12 +102,14 @@ public class TaskList {
     /**
      * Prints out contents of taskList
      */
-    public void generate() {
-        System.out.println("_____________________________________\n");
+    public String generate() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("_____________________________________\n");
         for (Task task : storage) {
-            System.out.println(storage.indexOf(task) + " | " + task + "\n");
+            sb.append(storage.indexOf(task) + " | " + task + "\n");
         }
-        System.out.println("_____________________________________\n");
+        sb.append("_____________________________________\n");
+        return sb.toString().trim();
     }
 
 
@@ -137,13 +139,13 @@ public class TaskList {
      * @param index index of taskList to remove
      * @throws DukeException when index is less than 0 or greater than size of taskList - 1
      */
-    public void markTask(int index) throws DukeException {
+    public String markTask(int index) throws DukeException {
         try {
             storage.get(index).markAsDone();
-            System.out.println("_____________________________________\n"
+            return "_____________________________________\n"
                     + "Nice! I've marked this task as done:\n"
                     + storage.get(index) + "\n"
-                    + "_____________________________________\n");
+                    + "_____________________________________\n";
         } catch (IndexOutOfBoundsException err) {
             throw new DukeException("Invalid Index given!");
         }
@@ -154,13 +156,13 @@ public class TaskList {
      * @param index index of taskList to remove
      * @throws DukeException when index is less than 0 or greater than size of taskList - 1
      */
-    public void unMarkTask(int index) throws DukeException {
+    public String unMarkTask(int index) throws DukeException {
         try {
             storage.get(index).unMark();
-            System.out.println("_____________________________________\n"
+            return "_____________________________________\n"
                     + "Ok. I've marked this task as not done yet:\n"
                     + storage.get(index)+ "\n"
-                    + "_____________________________________\n");
+                    + "_____________________________________\n";
         } catch (IndexOutOfBoundsException err) {
             throw new DukeException("Invalid Index given!");
         }

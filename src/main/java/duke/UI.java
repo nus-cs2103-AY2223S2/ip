@@ -56,14 +56,13 @@ public class UI {
     /**
      * Stops prompting user for input and terminates the program
      */
-    public static void end() {
-        System.out.println(
-                "_____________________________________\n"
+    public static String end() {
+        String endMessage = "_____________________________________\n"
                         + "Bye. Hope to see you again soon!\n"
                         + "_____________________________________\n"
-        );
+        ;
         sc.close();
-        System.exit(0);
+        return endMessage;
     }
 
     /**

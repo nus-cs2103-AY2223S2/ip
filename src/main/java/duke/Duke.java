@@ -1,5 +1,8 @@
 package duke;
 
+import javafx.application.Application;
+import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
@@ -9,22 +12,39 @@ import java.nio.file.Paths;
 /**
  * {@code Duke} class that encapsulates Duke program
  */
-public class Duke {
+public class Duke extends Application {
     /**
      * Duke's UI feature
      */
-    private static UI ui = new UI();
+    private UI ui = new UI();
 
     /**
      * filePath of file to be accessed or edited
      */
-    private static Path path;
+    private Path path;
 
     /**
      * stores a list of tasks to complete
      */
-    private static TaskList taskList;
+    private TaskList taskList;
 
+    /**
+     * stores data of file specified by path
+     */
+    private Storage storage;
+
+    /**
+     * handles gui of Duke Application
+     */
+    private GUI gui= new GUI();
+
+    /**
+     * Default constructor to circumvent NoSuchMethodException problem when running
+     * Application.launch
+     *
+     * Credit to @rmj1405 for providing the tip :)
+     */
+    public Duke() {}
 
     /**
      * Constructor method of {@code Duke} class
@@ -36,7 +56,7 @@ public class Duke {
             if (!Files.exists(path)) {
                 Files.createFile(path);
             }
-            Storage storage = new Storage(path);
+            storage = new Storage(path);
             taskList = new TaskList(storage.loadLines());
         } catch (InvalidPathException err) {
             ui.showLoadingError();
@@ -46,6 +66,16 @@ public class Duke {
         } catch (DukeException dukeErr) {
             ui.displayError(dukeErr);
         }
+    }
+
+    /**
+     * Starts Duke Application with default stage provided
+     * @param stage default stage provided to start the application
+     */
+    @Override
+    public void start(Stage stage) {
+        gui.startUpProgram(stage);
+        gui.runEvent(taskList, storage);
     }
 
     /**
@@ -74,7 +104,6 @@ public class Duke {
      * @param args array of command line arguments if any
      */
     public static void main(String[] args) {
-        Duke mainProgram = new Duke(System.getProperty("user.dir"));
-        mainProgram.run();
+        new Duke(System.getProperty("user.dir")).run();
     }
 }
