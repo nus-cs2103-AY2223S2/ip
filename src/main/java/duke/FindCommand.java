@@ -10,8 +10,8 @@ public class FindCommand implements Command {
     }
 
     @Override
-    public void execute(TaskList taskList) throws DukeException {
-        taskList.find(keywords);
+    public String execute(TaskList taskList) throws DukeException {
+        return taskList.find(keywords);
     }
 
     @Override

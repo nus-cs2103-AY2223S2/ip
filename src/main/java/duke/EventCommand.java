@@ -9,8 +9,8 @@ public class EventCommand implements Command {
         newEvent = t;
     }
     @Override
-    public void execute(TaskList taskList) {
-        taskList.add(newEvent);
+    public String execute(TaskList taskList) {
+        return taskList.add(newEvent);
     }
     @Override
     public boolean isExit() {

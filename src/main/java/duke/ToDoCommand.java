@@ -9,8 +9,8 @@ public class ToDoCommand implements Command {
         newToDo = t;
     }
     @Override
-    public void execute(TaskList taskList) {
-        taskList.add(newToDo);
+    public String execute(TaskList taskList) {
+        return taskList.add(newToDo);
     }
     @Override
     public boolean isExit() {

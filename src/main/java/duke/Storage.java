@@ -27,8 +27,7 @@ public class Storage {
             file.getParentFile().mkdirs();
             if (file.createNewFile()) {
                 System.out.println("file created");
-            }
-            else {
+            } else {
                 file.delete();
                 file.createNewFile();
             }

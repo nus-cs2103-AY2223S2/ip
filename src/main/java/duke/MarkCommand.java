@@ -9,8 +9,8 @@ public class MarkCommand implements Command {
         markIndex = i;
     }
     @Override
-    public void execute(TaskList taskList) throws DukeException {
-        taskList.mark(markIndex);
+    public String execute(TaskList taskList) throws DukeException {
+        return taskList.mark(markIndex);
     }
 
     @Override

@@ -10,8 +10,8 @@ public class DeadlineCommand implements Command {
         newDeadline = t;
     }
     @Override
-    public void execute(TaskList taskList) {
-        taskList.add(newDeadline);
+    public String execute(TaskList taskList) {
+        return taskList.add(newDeadline);
     }
 
     @Override

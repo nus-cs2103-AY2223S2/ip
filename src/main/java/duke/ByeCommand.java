@@ -8,8 +8,8 @@ public class ByeCommand implements Command {
     ByeCommand() {}
 
     @Override
-    public void execute(TaskList taskList) {
-        taskList.end();
+    public String execute(TaskList taskList) {
+        return taskList.end();
     }
 
     @Override

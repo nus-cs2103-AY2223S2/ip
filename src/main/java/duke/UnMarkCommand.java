@@ -10,8 +10,8 @@ public class UnMarkCommand implements Command {
     }
 
     @Override
-    public void execute(TaskList taskList) throws DukeException {
-        taskList.unmark(unMarkIndex);
+    public String execute(TaskList taskList) throws DukeException {
+        return taskList.unmark(unMarkIndex);
     }
 
     @Override

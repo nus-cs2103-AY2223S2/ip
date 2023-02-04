@@ -14,7 +14,7 @@ public class Deadline extends Task {
      * @param description -> Task description
      * @param by -> String format of time deadline
      */
-    public Deadline(String description, String by) {
+    public Deadline(String description, String by) throws DukeException {
         super(description);
         ddline = new Times(by);
     }
@@ -29,7 +29,8 @@ public class Deadline extends Task {
     public static Deadline createDeadline(String input) throws DukeException {
         int ddlineIndex = input.indexOf("/");
         if (ddlineIndex == -1) {
-            throw new DukeException(ExceptionType.TASK_FORMAT_ERROR);
+            DukeException e = new TaskFormatException();
+            throw e;
         }
         String description = input.substring(9, ddlineIndex - 1);
         String by = input.substring(ddlineIndex + 4);

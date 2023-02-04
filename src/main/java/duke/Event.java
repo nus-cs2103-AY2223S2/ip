@@ -14,7 +14,7 @@ public class Event extends Task {
      * @param from -> String format of starting time of event
      * @param to -> String format of ending time of event
      */
-    public Event(String description, String from, String to) {
+    public Event(String description, String from, String to) throws DukeException {
         super(description);
         this.from = new Times(from);
         this.to = new Times(to);
@@ -32,7 +32,8 @@ public class Event extends Task {
         int index1 = input.indexOf("/");
         int index2 = input.lastIndexOf("/");
         if (index1 == -1 || index2 == -1 || index1 == index2) {
-            throw new DukeException(ExceptionType.TASK_FORMAT_ERROR);
+            DukeException e = new TaskFormatException();
+            throw e;
         }
         String description = input.substring(6, index1 - 1);
         String from = input.substring(index1 + 6, index2 - 1);

@@ -19,6 +19,7 @@ public class Parser {
         Task newTask;
         String description;
         input = input.trim();
+        DukeException e;
         // command bye
         if (input.equals("bye")) {
             return new ByeCommand();
@@ -31,7 +32,8 @@ public class Parser {
         int firstBlank = input.indexOf(" ");
         // No description of task
         if (firstBlank == -1) {
-            throw new DukeException(ExceptionType.DESCRIPTION_EMPTY);
+            e = new DescriptionEmptyException();
+            throw e;
         }
         String header = input.substring(0, firstBlank);
         // command todo
@@ -56,8 +58,9 @@ public class Parser {
             try {
                 int index = Integer.parseInt(input.substring(7)) - 1;
                 return new DeleteCommand(index);
-            } catch (NumberFormatException e) {
-                throw new DukeException(ExceptionType.NO_NUMBER);
+            } catch (NumberFormatException E) {
+                e = new NoNumberException();
+                throw e;
             }
         }
         // command mark
@@ -65,23 +68,26 @@ public class Parser {
             try {
                 int index = Integer.parseInt(input.substring(5)) - 1;
                 return new MarkCommand(index);
-            } catch (NumberFormatException e) {
-                throw new DukeException(ExceptionType.NO_NUMBER);
+            } catch (NumberFormatException E) {
+                e = new NoNumberException();
+                throw e;
             }
         }
         // command unmark
         if (header.equals("unmark")) {
             try {
                 int index = Integer.parseInt(input.substring(7)) - 1;
-                return new MarkCommand(index);
-            } catch (NumberFormatException e) {
-                throw new DukeException(ExceptionType.NO_NUMBER);
+                return new UnMarkCommand(index);
+            } catch (NumberFormatException E) {
+                e = new NoNumberException();
+                throw e;
             }
         }
         if (header.equals("find")) {
             String keywords = input.substring(5);
             return new FindCommand(keywords);
         }
-        throw new DukeException(ExceptionType.UNCLEAR_COMMAND);
+        e = new UnclearCommandException();
+        throw e;
     }
 }

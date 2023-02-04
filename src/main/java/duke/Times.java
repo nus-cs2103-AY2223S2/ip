@@ -15,11 +15,12 @@ public class Times {
      *
      * @param time (format:yyyy-mm-dd hhmm) (eg. 2019-10-15 1530)
      */
-    Times(String time) throws DateTimeParseException {
+    Times(String time) throws DukeException {
         try {
             d = LocalDateTime.parse(time, FORMATTER);
-        } catch (DateTimeParseException e) {
-            System.out.println("Input String is not correct format for time");
+        } catch (DateTimeParseException E) {
+            DukeException e = new WrongFormatTimeException();
+            throw e;
         }
     }
 

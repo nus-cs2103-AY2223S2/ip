@@ -20,8 +20,8 @@ public class TaskList {
         this.list = new ArrayList<>();
     }
 
-    public void end() {
-        ui.sayBye();
+    public String end() {
+        return ui.sayBye();
     }
 
     /**
@@ -29,43 +29,44 @@ public class TaskList {
      * @param i
      * @throws DukeException if ith task doesn't exist
      */
-    public void mark(int i) throws DukeException {
+    public String mark(int i) {
         try {
             list.get(i).markAsDone();
             s.update(list);
-            ui.showMark(list.get(i));
-        } catch (IndexOutOfBoundsException e) {
-            throw new DukeException(ExceptionType.TASK_NOT_EXIST);
+            return ui.showMark(list.get(i));
+        } catch (IndexOutOfBoundsException E) {
+            DukeException e = new TaskNotExistException();
+            return e.toString();
         }
     }
 
     /**
      * Unmark ith task as not done
      * @param i
-     * @throws DukeException if ith task doesn't exist
      */
-    public void unmark(int i) throws DukeException {
+    public String unmark(int i) {
         try {
             list.get(i).markAsNotDone();
             s.update(list);
-            ui.showMarkNotDone(list.get(i));
-        } catch (IndexOutOfBoundsException e) {
-            throw new DukeException(ExceptionType.TASK_NOT_EXIST);
+            return ui.showMarkNotDone(list.get(i));
+        } catch (IndexOutOfBoundsException E) {
+            DukeException e = new TaskNotExistException();
+            return e.toString();
         }
     }
 
-    public void list() {
-        ui.showList(list);
+    public String list() {
+        return ui.showList(list);
     }
 
     /**
      * Adds task to list
      * @param t
      */
-    public void add(Task t) {
+    public String add(Task t) {
         list.add(t);
         s.write(t);
-        ui.showAddTask(list);
+        return ui.showAddTask(list);
     }
 
     /**
@@ -73,13 +74,14 @@ public class TaskList {
      * @param deleteIndex
      * @throws DukeException if ith task doesn't exist
      */
-    public void delete(int deleteIndex) throws DukeException {
+    public String delete(int deleteIndex) {
         try {
             Task temp = list.remove(deleteIndex);
             s.update(list);
-            ui.showDelete(temp, list);
-        } catch (IndexOutOfBoundsException e) {
-            throw new DukeException(ExceptionType.TASK_NOT_EXIST);
+            return ui.showDelete(temp, list);
+        } catch (IndexOutOfBoundsException E) {
+            DukeException e = new TaskNotExistException();
+            return e.toString();
         }
     }
 
@@ -87,7 +89,7 @@ public class TaskList {
      * List out the tasks which contain keywords
      * @param keywords
      */
-    public void find(String keywords) {
+    public String find(String keywords) {
         ArrayList<Task> matches = new ArrayList<>();
         Iterator<Task> it = list.iterator();
         while (it.hasNext()) {
@@ -96,6 +98,6 @@ public class TaskList {
                 matches.add(t);
             }
         }
-        ui.showFind(matches);
+        return ui.showFind(matches);
     }
 }

@@ -11,40 +11,39 @@ public class Ui {
      * Output message of marking
      * @param t -> task mark as done
      */
-    public void showMark(Task t) {
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(t);
+    public String showMark(Task t) {
+        return "Nice! I've marked this task as done:\n" + t + "\n";
     }
 
     /**
      * Output message of Unmarking
      * @param t -> task mark as not done
      */
-    public void showMarkNotDone(Task t) {
-        System.out.println("OK, I've marked this task as not done yet:");
-        System.out.println(t);
+    public String showMarkNotDone(Task t) {
+        return "OK, I've marked this task as not done yet:\n" + t + "\n";
     }
 
     /**
      * Greets to user
      */
-    public void sayHello() {
-        System.out.println("Hello! I'm Luminus\nWhat can I do for you?");
+    public String sayHello() {
+        return "Hello! I'm Luminus\nWhat can I do for you?\n";
     }
 
-    public void sayBye() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String sayBye() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
      * show list of task to user
      * @param list -> list of tasks
      */
-    public void showList(ArrayList<Task> list) {
-        System.out.println("Here are the tasks in your list:");
+    public String showList(ArrayList<Task> list) {
+        StringBuilder str = new StringBuilder("Here are the tasks in your list:\n");
         for (int i = 1; i <= list.size(); i++) {
-            System.out.println(i + ". " + list.get(i - 1));
+            str.append(i + ". " + list.get(i - 1) + "\n");
         }
+        return str.toString();
     }
 
     /**
@@ -53,10 +52,11 @@ public class Ui {
      * 2. print current size of list
      * @param list -> list of tasks
      */
-    public void showAddTask(ArrayList<Task> list) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println(list.get(list.size() - 1));
-        System.out.println("Now you have " + list.size() + " tasks in the list.");
+    public String showAddTask(ArrayList<Task> list) {
+        StringBuilder str = new StringBuilder("Got it. I've added this task:\n");
+        str.append(list.get(list.size() - 1) + "\n");
+        str.append("Now you have " + list.size() + " tasks in the list.\n");
+        return str.toString();
     }
 
     /**
@@ -66,26 +66,27 @@ public class Ui {
      * @param temp -> the deleted task
      * @param list -> list after deletion
      */
-    public void showDelete(Task temp, ArrayList<Task> list) {
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(temp);
-        System.out.println("Now you have " + list.size() + " tasks in the list.");
+    public String showDelete(Task temp, ArrayList<Task> list) {
+        StringBuilder str = new StringBuilder("Noted. I've removed this task:\n");
+        str.append(temp + "\n");
+        str.append("Now you have " + list.size() + " tasks in the list.\n");
+        return str.toString();
     }
 
     /**
      * Output the tasks which matches keywords
      * @param matches
      */
-    public void showFind(ArrayList<Task> matches) {
+    public String showFind(ArrayList<Task> matches) {
         if (matches.size() == 0) {
-            System.out.println("Sorry, I can't find any tasks that matches your keywords.");
-            return;
+            return "Sorry, I can't find any tasks that matches your keywords.\n";
         }
-        System.out.println("Here are the matching tasks in your list:");
+        StringBuilder str = new StringBuilder("Here are the matching tasks in your list:\n");
         for (int i = 0; i < matches.size(); i++) {
             Task temp = matches.get(i);
-            System.out.println((i + 1) + ". " + temp);
+            str.append((i + 1) + ". " + temp + "\n");
         }
+        return str.toString();
     }
 
 }

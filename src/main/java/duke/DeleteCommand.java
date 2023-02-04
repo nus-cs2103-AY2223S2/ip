@@ -10,8 +10,8 @@ public class DeleteCommand implements Command {
     }
 
     @Override
-    public void execute(TaskList taskList) throws DukeException {
-        taskList.delete(deleteIndex);
+    public String execute(TaskList taskList) {
+        return taskList.delete(deleteIndex);
     }
 
     @Override
