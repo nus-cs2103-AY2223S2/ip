@@ -192,6 +192,7 @@ public class Parser {
      * @return the string that supposed to be extracted
      */
     public static String parseHelper(String[] splited, int start, int end) {
+        assert (splited.length >= 2) : "This should not appear";
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < splited.length; i++) {
             if (i >= start && i < end) {
@@ -213,12 +214,14 @@ public class Parser {
      * @return the split index between different sections of command
      */
     public static int findSplitter(String[] splitted, String identifier) {
+        assert (splitted.length >= 2) : "This should not appear";
         int split = -1;
         for (int i = 0; i < splitted.length; i++) {
             if (splitted[i].equals(identifier)) {
                 split = i;
             }
         }
+        assert (split > 0) : "Identifier not found in the array";
         return split;
     }
 
