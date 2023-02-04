@@ -7,6 +7,16 @@ import duke.task.Task;
  * Deals with making sense of the user command
  */
 public class Parser {
+    private MainWindow mainWindow;
+
+    /**
+     * Constructs a new Parser instance
+     *
+     * @param mainWindow Controller for MainWindow
+     */
+    public Parser(MainWindow mainWindow) {
+        this.mainWindow = mainWindow;
+    }
 
     /**
      * Runs the input command given by the user and write into file if list has changed
@@ -27,7 +37,7 @@ public class Parser {
         words[0] = words[0].toUpperCase();
         switch(words[0]) {
         case "BYE":
-            System.out.println("Bye. Hope to see you again soon!");
+            mainWindow.sendDukeResponse("Bye. Hope to see you again soon!");
             return true;
         case "LIST":
             tasks.printList();
@@ -36,15 +46,15 @@ public class Parser {
             Task markTask = tasks.getTask(Integer.parseInt(words[1]));
             markTask.mark();
             hasTaskChanged = true;
-            System.out.println("Nice! I've marked this task as done:");
-            System.out.println(markTask);
+            mainWindow.sendDukeResponse("Nice! I've marked this task as done:");
+            mainWindow.sendDukeResponse(markTask.toString());
             break;
         case "UNMARK":
             Task unmarkTask = tasks.getTask(Integer.parseInt(words[1]));
             unmarkTask.unmark();
             hasTaskChanged = true;
-            System.out.println("OK, I've marked this task as not done yet:");
-            System.out.println(unmarkTask);
+            mainWindow.sendDukeResponse("OK, I've marked this task as not done yet:");
+            mainWindow.sendDukeResponse(unmarkTask.toString());
             break;
         case "TODO":
         case "DEADLINE":

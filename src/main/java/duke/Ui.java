@@ -10,14 +10,17 @@ import java.io.InputStreamReader;
 public class Ui {
     private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     private Parser parser;
+    private MainWindow mainWindow;
 
     /**
      * Constructs a new Ui instance
      * 
      * @param parser Parser instance
+     * @param mainWindow Controller for MainWindow
      */
-    public Ui(Parser parser) {
+    public Ui(Parser parser, MainWindow mainWindow) {
         this.parser = parser;
+        this.mainWindow = mainWindow;
     }
 
      /**
@@ -28,35 +31,22 @@ public class Ui {
      * @return true if command is bye, otherwise return false
      * @throws IOException If an I/O error occurs
      */
-    public boolean receiveInput(TaskList tasks, Storage storage) throws IOException {
+    public boolean receiveInput(TaskList tasks, Storage storage, String input) throws IOException {
         String[] words;
         boolean isCommandBye = false;
-        System.out.print("Type your input below: \n");
-        words = br.readLine().split(" ");
+        words = input.split(" ");
 
         try { 
             isCommandBye = parser.runCommand(tasks, storage, words);
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Number out of range/Input empty. Please try again!");
+            mainWindow.sendDukeResponse("Number out of range/Input empty. Please try again!");
         } catch (NumberFormatException e) {
-            System.out.println("Invalid number. Please enter a number!");
+            mainWindow.sendDukeResponse("Invalid number. Please enter a number!");
         } catch (InvalidCommandException e) {
-            System.out.println(e.getMessage());
+            mainWindow.sendDukeResponse(e.getMessage());
         } catch (EmptyDescriptionException e) {
-            System.out.println(e.getMessage());
+            mainWindow.sendDukeResponse(e.getMessage());
         }
-        horizontalLine();
         return isCommandBye;
-    }
-
-
-    /**
-     * Prints a double horizontal line
-     */ 
-    private static void horizontalLine() { 
-        for (int i = 0; i < 20; i++) {
-            System.out.print("=");
-        }
-        System.out.println("");
     }
 }

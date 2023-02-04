@@ -2,3 +2,7 @@
 Deadline|    NO     | hoho | 27 Jan 1999 03:00pm
   Event |    NO     | bobo | 27 Jan 1999 07:00pm - 28 Jan 1999 09:00am
   Todo  |    NO     | Clean house | ---
+  Todo  |    NO     | testing | ---
+  Todo  |    NO     | haha | ---
+  Todo  |    NO     | hehe | ---
+  Todo  |    NO     | test | ---

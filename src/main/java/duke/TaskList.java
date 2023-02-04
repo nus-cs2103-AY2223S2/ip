@@ -13,14 +13,17 @@ import duke.task.Todo;
  */
 public class TaskList {
     private ArrayList<Task> tasks;
+    private MainWindow mainWindow;
     
     /**
      * Constructs a new TaskList instance
-     * 
+     *
+     * @param mainWindow Controller for MainWindow
      * @param list List of the tasks
      */
-    public TaskList(ArrayList<Task> list) {
+    public TaskList(ArrayList<Task> list, MainWindow mainWindow) {
         tasks = list;
+        this.mainWindow = mainWindow;
     }
 
     /**
@@ -47,7 +50,7 @@ public class TaskList {
                 }
                 LocalDateTime dateTimeBy = DateTime.getDateTime(words,indexForBy);
                 if (dateTimeBy == null) {
-                    System.out.println("Please enter in this format {description} /by DD/MM/YYYY HHMM. Try again");
+                    mainWindow.sendDukeResponse("Please enter in this format {description} /by DD/MM/YYYY HHMM. Try again");
                     return false;
                 }
                 description = String.join(" ",Arrays.copyOfRange(words, 0, indexForBy));
@@ -61,7 +64,7 @@ public class TaskList {
                 int indexForTo = Parser.getIndexOfWord(words, "/to");
 
                 if (DateTime.getDateTime(words,indexForFrom) == null || DateTime.getDateTime(words,indexForTo) == null) {
-                    System.out.println("Please enter in this format {description} /from DD/MM/YYYY HHMM /to DD/MM/YYYY HHMM. Try again");
+                    mainWindow.sendDukeResponse("Please enter in this format {description} /from DD/MM/YYYY HHMM /to DD/MM/YYYY HHMM. Try again");
                     return false;
                 }
 
@@ -73,8 +76,8 @@ public class TaskList {
 
         }
         tasks.add(task);
-        System.out.println("Got it. I've added this task:\n" + task);
-        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+        mainWindow.sendDukeResponse("Got it. I've added this task:\n" + task);
+        mainWindow.sendDukeResponse("Now you have " + tasks.size() + " tasks in the list.");
         return true;
     }
 
@@ -88,8 +91,8 @@ public class TaskList {
     public boolean deleteTask(int num) throws IndexOutOfBoundsException {
         Task selectedTask = getTask(num);
         tasks.remove(selectedTask);
-        System.out.println("Noted. I've removed this task:\n" + selectedTask);
-        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+        mainWindow.sendDukeResponse("Noted. I've removed this task:\n" + selectedTask);
+        mainWindow.sendDukeResponse("Now you have " + tasks.size() + " tasks in the list.");
         return true;
     }
 
@@ -97,9 +100,11 @@ public class TaskList {
      * Prints the list
      */ 
     public void printList() {
+        String listOfTask = "";
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println((i+1) + ". " + tasks.get(i));
+           listOfTask += (i+1) + ". " + tasks.get(i) + "\n";
         }
+        mainWindow.sendDukeResponse(listOfTask);
     }
 
     /**
@@ -122,21 +127,28 @@ public class TaskList {
         return tasks;
     }
 
+    /**
+     * Prints out all matching task in the list based on user's keyword
+     *
+     * @param description user input keyword
+     */
     public void findTask(String description) {
+        String foundTasks = "";
         boolean hasFound = false;
         int index = 1;
         for (Task task : tasks) {
             if (task.getDescription().contains(description)) {
                 if (!hasFound) {
                     hasFound = true;
-                    System.out.println("Here are the matching tasks in your list:");
+                    mainWindow.sendDukeResponse("Here are the matching tasks in your list:");
                 }
-                System.out.println(index + ". " + task.toString());
+                foundTasks += index + ". " + task.toString() + "\n";
                 index++;
             }
         }
+        mainWindow.sendDukeResponse(foundTasks);
         if (!hasFound) {
-            System.out.println("No matching tasks found in your list:");
+            mainWindow.sendDukeResponse("No matching tasks found in your list:");
         }
     }
 }
