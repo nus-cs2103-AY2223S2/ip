@@ -51,7 +51,6 @@ public class TaskList {
      *
      * @param index Index of task in TaskList
      * @return Task Object
-     * @throws taskNotFoundException
      */
     public Task getTask(int index) {
         return this.list.get(index);

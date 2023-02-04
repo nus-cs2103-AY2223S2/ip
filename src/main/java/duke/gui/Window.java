@@ -10,6 +10,12 @@ import javafx.stage.Stage;
 
 public class Window {
 
+    /**
+     * Method to make the Pane that will house all other Panes
+     *
+     * @param duke Duke program that requires GUI
+     * @return Pane that will represent the overall layout
+     */
     static public Pane makeWindow(Duke duke) {
         //pane to gather user input
         Pane inputLayout = new Pane();
@@ -36,6 +42,8 @@ public class Window {
         //main layout
         VBox mainLayout = new VBox();
         mainLayout.getChildren().addAll(buttonLayout, inputLayout, scrollPane);
+
+        assert mainLayout.getChildren().isEmpty() == false : "Main layout has not been filled with anything";
         return mainLayout;
     }
 

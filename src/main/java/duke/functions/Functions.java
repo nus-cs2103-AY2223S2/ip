@@ -24,6 +24,13 @@ public class Functions {
         this.st = st;
     }
 
+    /**
+     * Constructor for an instance of Function.
+     *
+     * @param tl TaskList object that stores all defined tasks
+     * @param st Storage object that controls writing and loading onto/from file
+     * @param op Pane to display the output for all functions
+     */
     public Functions(TaskList tl, Storage st, Pane op) {
         this.tl = tl;
         this.st = st;

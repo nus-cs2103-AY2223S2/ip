@@ -6,8 +6,7 @@ public class CreateTodo extends Functions {
     /**
      * Constructor for an instance of Function.
      *
-     * @param tl TaskList object that stores all defined tasks
-     * @param st Storage object that controls writing and loading onto/from file
+     * @param fn Function object that defines the overall function of the Duke program
      */
     public CreateTodo(Functions fn) {
         super(fn.getTl(), fn.getSt(), fn.getOutputLayout());

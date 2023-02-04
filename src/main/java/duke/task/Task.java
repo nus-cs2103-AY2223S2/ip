@@ -28,7 +28,7 @@ public class Task {
     /**
      * Method to configure information read from file, into Task objects for TaskList
      *
-     * @param des
+     * @param s Line extracted from save file
      */
     public void configure(String[] s) {
         setDes(s[0]);

@@ -7,13 +7,17 @@ public class FindTask extends Functions {
     /**
      * Constructor for an instance of Function.
      *
-     * @param tl TaskList object that stores all defined tasks
-     * @param st Storage object that controls writing and loading onto/from file
+     * @param fn Function object that defines the overall function of the Duke program
      */
     public FindTask(Functions fn) {
         super(fn.getTl(), fn.getSt(), fn.getOutputLayout());
     }
 
+    /**
+     * Method to define the find function for the find button
+     *
+     * @param query Keyword to search
+     */
     public void find(String query) {
         boolean flag = false;
         boolean printed = false;
