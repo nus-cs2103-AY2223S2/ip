@@ -13,9 +13,9 @@ public class FindCommand extends Command{
      * @param list Tasklist
      * @param ui User interface of the Chat bot.
      */
-    public void processCommand(TaskList list, String item, Ui ui) {
+    public String processCommand(TaskList list, String item, Ui ui) {
         ui.print("Here are tasks that associate with " + item + ":");
-
+        String output = "";
         for (int i = 0; i < list.getSize(); i++) {
             boolean toPrint = false;
             Task currentTask = list.getTask(i);
@@ -26,9 +26,9 @@ public class FindCommand extends Command{
                 }
             }
             if(toPrint) {
-                ui.print(currentTask.toString());
+                output += String.format("%d\n",currentTask.toString());
             }
         }
-        ui.printDivider();
+        return output;
     }
 }

@@ -22,21 +22,21 @@ public class SearchDateCommand extends Command {
      * @param date The date to be searched for in the TaskList.
      * @param ui   User interface of the Chat bot.
      */
-    public void processCommand(TaskList list, String date, Ui ui) {
+    public String processCommand(TaskList list, String date, Ui ui) {
         LocalDate now = LocalDate.parse(date.trim());
-        ui.print("Tasks occurring on " + now.toString() + ":");
+        String output = "Tasks occurring on " + now.toString() + ":\n";
         for (int i = 0; i < list.getSize(); i++) {
             Task currTask = list.getTask(i);
             if (currTask instanceof Deadline) {
                 if (now.equals(((Deadline) currTask).getBy())) {
-                    ui.print(currTask.toString());
+                    output = output + currTask.toString() + "\n";
                 }
             } else if (currTask instanceof Event) {
                 if (now.equals(((Event) currTask).getEndDate()) || now.equals(((Event) currTask).getStartDate())) {
-                    ui.print(currTask.toString());
+                    output = output + currTask.toString() + "\n";
                 }
             }
         }
-        ui.printDivider();
+        return output;
     }
 }

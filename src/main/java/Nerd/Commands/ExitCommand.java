@@ -13,7 +13,7 @@ public class ExitCommand extends Command {
      *
      * @param ui User interface of the Chat bot.
      */
-    public void processCommand(Ui ui) {
-        ui.printBye();
+    public String processCommand(Ui ui) {
+        return "See you next time!";
     }
 }

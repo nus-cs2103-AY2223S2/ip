@@ -13,10 +13,20 @@ public abstract class Command {
     /**
      * Duke.Commands abstract method that processes the command.
      */
-    public void processCommand(TaskList list, int index, Ui ui) {};
-    public void processCommand(TaskList list, String desc, String by, Ui ui) {};
-    public void processCommand(TaskList list, String desc, String from, String to, Ui ui) {};
-    public void processCommand(Ui ui) {};
-    public void processCommand(TaskList list, String item, Ui ui) {};
+    public String processCommand(TaskList list, int index, Ui ui) {
+        return null;
+    }
+    public String processCommand(TaskList list, String desc, String by, Ui ui) {
+        return null;
+    }
+    public String processCommand(TaskList list, String desc, String from, String to, Ui ui) {
+        return null;
+    }
+    public String processCommand(Ui ui) {
+        return null;
+    }
+    public String processCommand(TaskList list, String item, Ui ui) {
+        return null;
+    }
 
 }

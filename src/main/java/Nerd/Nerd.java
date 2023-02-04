@@ -17,6 +17,7 @@ public class Nerd {
     private Storage storage;
     private Ui ui;
     private Parser parser;
+    private String filePath;
 
     /**
      * Duke.Duke Constructor for initializing the Duke object.
@@ -24,6 +25,7 @@ public class Nerd {
      * @param filePath of the storage
      */
     public Nerd(String filePath) {
+        this.filePath = filePath;
         ui = new Ui();
         parser = new Parser();
         storage = new Storage(filePath);
@@ -92,6 +94,40 @@ public class Nerd {
         storage.save(this.list);
         ui.printBye();
 
+    }
+
+    public String getResponse(String input) {
+        String output = "";
+        try {
+            Command command = parser.parseCommand(input);
+            if (command instanceof ListCommand) {
+                output = ((ListCommand) command).processCommand(list, ui);
+            } else if (command instanceof DeleteCommand) {
+                output = ((DeleteCommand) command).processCommand(list, parser.parseIndex(input), ui);
+            } else if (command instanceof MarkCommand) {
+                output = ((MarkCommand) command).processCommand(list, parser.parseIndex(input), ui);
+            } else if (command instanceof UnmarkCommand) {
+                output = ((UnmarkCommand) command).processCommand(list, parser.parseIndex(input), ui);
+            } else if (command instanceof TodoCommand) {
+                output = ((TodoCommand) command).processCommand(list, parser.parseDescription(input), ui);
+            } else if (command instanceof DeadlineCommand) {
+                output = ((DeadlineCommand) command).processCommand(list, parser.parseDescription(input),
+                        parser.parseDeadline(input), ui);
+            } else if (command instanceof EventCommand) {
+                String[] eventlist = parser.parseEvent(input);
+                output = ((EventCommand) command).processCommand(list, parser.parseDescription(input),
+                        eventlist[0], eventlist[1], ui);
+            } else if (command instanceof ExitCommand) {
+                output = ((ExitCommand) command).processCommand(ui);
+            } else if (command instanceof SearchDateCommand) {
+                output = ((SearchDateCommand) command).processCommand(list, parser.parseDescription(input), ui);
+            } else if (command instanceof FindCommand) {
+                output = ((FindCommand) command).processCommand(list, parser.parseDescription(input), ui);
+            }
+        } catch (NerdException e) {
+            return e.getMessage();
+        }
+        return output;
     }
 }
 

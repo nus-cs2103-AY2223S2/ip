@@ -19,11 +19,10 @@ public class EventCommand extends Command {
      * @param to   The ending date of the Event.
      * @param ui   User interface of the Chat bot.
      */
-    public void processCommand(TaskList list, String desc, String from, String to, Ui ui) {
+    public String processCommand(TaskList list, String desc, String from, String to, Ui ui) {
         Event event = new Event(desc, from, to);
         list.addTask(event);
-        ui.print(String.format("Sure!, I've added the following events:\n %s", event.toString()));
-        ui.print(String.format("Now you have %d tasks in the list.", list.getSize()));
-        ui.printDivider();
+        return String.format("Sure!, I've added the following events:\n %s\nNow you have %d tasks in the list.",
+                event.toString(), list.getSize());
     }
 }

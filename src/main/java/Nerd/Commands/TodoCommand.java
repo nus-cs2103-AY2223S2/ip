@@ -17,12 +17,11 @@ public class TodoCommand extends Command {
      * @param desc The description of the Task.
      * @param ui   User interface of the Chat bot.
      */
-    public void processCommand(TaskList list, String desc, Ui ui) {
+    public String processCommand(TaskList list, String desc, Ui ui) {
         Todo task = new Todo(desc);
         list.addTask(task);
-        ui.print(String.format("alright, I've added the following task:\n %s", task.toString()));
-        ui.print(String.format("Now you have %d tasks in the list.", list.getSize()));
-        ui.printDivider();
+        return String.format("alright, I've added the following task:\n %s\nNow you have %d tasks in the list.",
+                task.toString(), list.getSize());
     }
 
 }

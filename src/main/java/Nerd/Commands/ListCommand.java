@@ -16,11 +16,12 @@ public class ListCommand extends Command {
      * @param list The TaskList object that stores Tasks.
      * @param ui   User interface of the Chat bot.
      */
-    public void processCommand(TaskList list, Ui ui) {
+    public String processCommand(TaskList list, Ui ui) {
+        String output = "";
         for (int i = 0; i < list.getSize(); i++) {
             Task t = list.getTask(i);
-            ui.print(String.format("%d.%s", i + 1, t.toString()));
+            output += String.format("%d.%s\n", i + 1, t.toString());
         }
-        ui.printDivider();
+        return output;
     }
 }

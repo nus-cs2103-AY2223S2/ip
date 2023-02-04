@@ -17,10 +17,9 @@ public class MarkCommand extends Command {
      * @param index The position of the Task in the TaskList to be marked.
      * @param ui    User interface of the Chat bot.
      */
-    public void processCommand(TaskList list, int index, Ui ui) {
+    public String processCommand(TaskList list, int index, Ui ui) {
         Task task = list.getTask(index);
         task.setDone();
-        ui.print(String.format("Nice, this task has been marked as done:\n %s", task.toString()));
-        ui.printDivider();
+        return String.format("Nice, this task has been marked as done:\n %s", task.toString());
     }
 }
