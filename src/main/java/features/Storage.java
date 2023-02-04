@@ -22,26 +22,11 @@ public class Storage {
     public TaskList loadTaskList() {
 
         TaskList newTaskList = new TaskList();
-        File dukePath = new File("data");
-        File dukeSave = new File("data/duke.txt");
-
+        File dukeDirectory = new File("data");
+        File dukeSavePath = new File("data/duke.txt");
+        checkSaveFile(dukeDirectory, dukeSavePath);
         try {
-            if (!dukePath.exists()) {
-                if (dukePath.mkdirs()) {
-                    System.out.println("No save files detected. Creating new save file...");
-                }
-                if (!dukeSave.exists()) {
-                    if (dukeSave.createNewFile()) {
-                        System.out.println("New save file created!");
-                    }
-                }
-            }
-        } catch (IOException err) {
-            System.out.println("Sorry, could not save that.");
-        }
-
-        try {
-            Scanner fileScan = new Scanner(dukeSave);
+            Scanner fileScan = new Scanner(dukeSavePath);
             while (fileScan.hasNextLine()) {
                 String fileLine = fileScan.nextLine();
                 String[] evalArray = fileLine.split("=");
@@ -91,4 +76,26 @@ public class Storage {
         dukeWriter.close();
     }
 
+    /**
+     * Checks if data/duke.txt exists, and creates it otherwise.
+     * @param fileDirectory The directory name of the save file.
+     * @param fileName The path to the save file.
+     */
+    public void checkSaveFile(File fileDirectory, File fileName) {
+        try {
+            if (!fileDirectory.exists()) {
+                if (fileDirectory.mkdirs(
+                )) {
+                    System.out.println("No save files detected. Creating new save file...");
+                }
+                if (!fileName.exists()) {
+                    if (fileName.createNewFile()) {
+                        System.out.println("New save file created!");
+                    }
+                }
+            }
+        } catch (IOException err) {
+            System.out.println("Sorry, could not save that.");
+        }
+    }
 }

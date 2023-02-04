@@ -27,8 +27,8 @@ public class CommandFind extends Command {
             }
             StringBuilder toPrint = new StringBuilder();
             for (int i = 0; i < taskList.size(); i++) {
-                if (taskList.get(i).getName().toLowerCase().contains(query.toLowerCase())) {
-                    if (i < taskList.size() && !isEmpty) {
+                if (matchesName(taskList, i, query)) {
+                    if (i < taskList.size() && !isEmpty) { //if end of TaskList has been reached.
                         toPrint.append("\n");
                     }
                     toPrint.append(i + 1).append(". ").append(taskList.get(i).toString());
@@ -44,5 +44,15 @@ public class CommandFind extends Command {
         } catch (ArrayIndexOutOfBoundsException err) {
             throw new DukeException(ui.formatLogicError("search query cannot be empty."));
         }
+    }
+    /**
+     * Returns true if subject in taskList at index i is the same as the query.
+     * @param taskList The user's TaskList.
+     * @param index The index in the taskList where the subject is found.
+     * @param query The query to compare the subject with.
+     */
+    public boolean matchesName(TaskList taskList, int index, String query) {
+        String subject = taskList.get(index).getName();
+        return subject.toLowerCase().contains(query.toLowerCase());
     }
 }
