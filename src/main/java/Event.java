@@ -6,9 +6,10 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
     protected LocalDateTime from;
     protected LocalDateTime to;
+    protected String stringFrom;
+    protected String stringTo;
     protected boolean fromHasTime = true;
     protected boolean toHasTime = true;
-    protected DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
     private static final String[] DATE_FORMATS = {
             "dd-MM-yyyy",
             "dd/MM/yyyy",
@@ -24,10 +25,15 @@ public class Event extends Task {
     private static final DateTimeFormatter DISPLAY_DATE_FORMAT = DateTimeFormatter.ofPattern("dd MMM yyyy");
     private static final DateTimeFormatter DISPLAY_DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("dd MMM yyyy h a");
 
-    public Event(String description, String from, String to) {
+    public Event(String description, String from, String to) throws DukeException {
         super(description);
+        stringFrom = from;
+        stringTo = to;
         parseFrom(from);
         parseTo(to);
+        if (from == null || to == null) {
+            throw new DukeException("Invalid format for /from and /to fields!");
+        }
     }
 
     private void parseFrom(String from) {
@@ -83,19 +89,11 @@ public class Event extends Task {
     }
 
     public String getFrom() {
-        if (fromHasTime) {
-            return from.format(DISPLAY_DATE_TIME_FORMAT);
-        } else {
-            return from.toLocalDate().format(DISPLAY_DATE_FORMAT);
-        }
+        return stringFrom;
     }
 
     public String getTo() {
-        if (toHasTime) {
-            return to.format(DISPLAY_DATE_TIME_FORMAT);
-        } else {
-            return to.toLocalDate().format(DISPLAY_DATE_FORMAT);
-        }
+        return stringTo;
     }
 
     @Override

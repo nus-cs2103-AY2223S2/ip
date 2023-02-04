@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
     protected LocalDateTime by;
+    protected String stringBy;
     protected boolean hasTime = true;
     private static final String[] DATE_FORMATS = {
             "dd-MM-yyyy",
@@ -21,14 +22,14 @@ public class Deadline extends Task {
     private static final DateTimeFormatter DISPLAY_DATE_FORMAT = DateTimeFormatter.ofPattern("dd MMM yyyy");
     private static final DateTimeFormatter DISPLAY_DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("dd MMM yyyy h a");
 
-    public Deadline(String description, String by) {
+    public Deadline(String description, String by) throws DukeException {
         super(description);
+        stringBy = by;
         for (String format : DATE_FORMATS) {
             try {
                 this.by = LocalDateTime.of(LocalDate.parse(by, DateTimeFormatter.ofPattern(format)),
                         LocalDateTime.now().toLocalTime());
                 hasTime = false;
-
             } catch (DateTimeException e) {
                 //Try next format
                 continue;
@@ -46,14 +47,13 @@ public class Deadline extends Task {
                 break;
             }
         }
+        if (this.by == null) {
+            throw new DukeException("Invalid format for /by field!");
+        }
     }
 
     public String getBy() {
-        if (hasTime) {
-            return by.format(DISPLAY_DATE_TIME_FORMAT);
-        } else {
-            return by.toLocalDate().format(DISPLAY_DATE_FORMAT);
-        }
+        return stringBy;
     }
 
     @Override
