@@ -33,7 +33,9 @@ public class AddTodoCommand extends AddTaskCommand {
             throw new LackOfArgumentException();
         } else {
             String task = instruction.substring(5);
+            int originalSize = taskList.getTotalTasks();
             String res = this.addTask(taskList.addTodo(0, task.trim()), taskList.getTotalTasks());
+            assert taskList.getTotalTasks() == originalSize + 1;
             storage.writeToDisk(taskList);
             return ui.getFormattedString(res);
         }

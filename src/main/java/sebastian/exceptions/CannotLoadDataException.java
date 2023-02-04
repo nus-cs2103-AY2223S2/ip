@@ -8,6 +8,6 @@ public class CannotLoadDataException extends SebastianException {
      * Constructor
      */
     public CannotLoadDataException() {
-        super("Sorry, I cannot retrieve your past tasks. I'll create a new task list for you");
+        super("I'll create a new task list to store your data");
     }
 }
