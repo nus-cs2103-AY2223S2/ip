@@ -44,11 +44,11 @@ test {
 }
 
 application {
-    mainClassName = "duke.DukeLauncher"
+    mainClassName = "colette.ColetteLauncher"
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "colette"
     archiveClassifier = null
 }
 
