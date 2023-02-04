@@ -89,7 +89,6 @@ public class Parser {
      */
     private static void validate(CommandType commandType, String input) throws BerryException {
         String command = input.split(" ")[0];
-        System.out.println("command type: " + commandType);
 
         if (!(commandType == CommandType.TODO ||
                 commandType == CommandType.DEADLINE ||
