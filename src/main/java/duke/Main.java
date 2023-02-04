@@ -1,15 +1,27 @@
 package duke;
 
-import duke.Duke;
+import java.io.IOException;
 
-public class Main {
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
-    /**
-     * Driver method.
-     * @param args
-     */
-    public static void main(String[] args) {
-        Duke bot = new Duke();
-        bot.run();
+import duke.ui.MainWindow;
+
+/**
+ * A GUI for Duke using FXML.
+ */
+public class Main extends Application {
+
+    private Duke duke = new Duke();
+
+    @Override
+    public void start(Stage stage) {
+        AnchorPane ap = new MainWindow();
+        Scene scene = new Scene(ap);
+        stage.setScene(scene);
+        stage.show();
     }
 }
