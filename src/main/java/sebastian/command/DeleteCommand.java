@@ -40,9 +40,11 @@ public class DeleteCommand extends Command {
         } else if (insArr.length == 2) {
             try {
                 int taskIndex = Integer.parseInt(insArr[1]);
+                int originalSize = taskList.getTotalTasks();
                 String res = "Noted. I have deleted this task: " + "\n"
                         + taskList.deleteTaskAtIndex(taskIndex) + "\n"
                         + "Now your have " + taskList.getTotalTasks() + " tasks in the list";
+                assert taskList.getTotalTasks() == originalSize - 1;
                 storage.writeToDisk(taskList);
                 return ui.getFormattedString(res);
             } catch (NumberFormatException e) {

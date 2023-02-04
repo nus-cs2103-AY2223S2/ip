@@ -33,7 +33,9 @@ public class AddTodoCommand extends AddTaskCommand {
             throw new LackOfArgumentException("Please specify a description for your Todo");
         } else if (insArr.length > 1) {
             String task = instruction.substring(5);
+            int originalSize = taskList.getTotalTasks();
             String res = this.addTask(taskList.addTodo(false, task.trim()), taskList.getTotalTasks());
+            assert taskList.getTotalTasks() == originalSize + 1;
             storage.writeToDisk(taskList);
             return ui.getFormattedString(res);
         } else {

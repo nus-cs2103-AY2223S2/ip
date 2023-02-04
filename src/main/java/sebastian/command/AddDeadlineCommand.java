@@ -40,8 +40,10 @@ public class AddDeadlineCommand extends AddTaskCommand {
             String deadline = instruction.substring(9);
             String[] task = deadline.split("/by");
             if (task.length == 2 && !task[0].equals("")) {
+                int originalSize = taskList.getTotalTasks();
                 String res = this.addTask(taskList.addDeadline(false, task[0].trim(), task[1].trim()),
                        taskList.getTotalTasks());
+                assert taskList.getTotalTasks() == originalSize + 1;
                 storage.writeToDisk(taskList);
                 return ui.getFormattedString(res);
             } else if (task.length == 2 && task[0].equals("")) {

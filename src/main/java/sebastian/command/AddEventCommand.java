@@ -39,8 +39,10 @@ public class AddEventCommand extends AddTaskCommand {
             String event = instruction.substring(6);
             String[] task = event.split("/from|/to");
             if (task.length == 3 && !task[0].equals("")) {
+                int originalSize = taskList.getTotalTasks();
                 String res = this.addTask(taskList.addEvent(false, task[0].trim(), task[1].trim(), task[2].trim()),
                         taskList.getTotalTasks());
+                assert taskList.getTotalTasks() == originalSize + 1;
                 storage.writeToDisk(taskList);
                 return ui.getFormattedString(res);
             } else if (task.length == 3 && task[0].equals("")) {
