@@ -11,7 +11,6 @@ import javafx.application.Platform;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
 
 /** Manager of inputs and outputs. */
@@ -47,7 +46,6 @@ public class IoManager {
             "I messed up big time...",
             "  %s");
 
-    private final Supplier<Window> windowSupplier;
     private final Supplier<String> inputSupplier;
     private final Consumer<String> outputConsumer;
 
@@ -58,9 +56,7 @@ public class IoManager {
      * @param inputSupplier - the supplier to get user input from.
      * @param outputConsumer - the consumer to display messages to the user.
      */
-    public IoManager(Supplier<Window> windowSupplier,
-                Supplier<String> inputSupplier, Consumer<String> outputConsumer) {
-        this.windowSupplier = windowSupplier;
+    public IoManager(Supplier<String> inputSupplier, Consumer<String> outputConsumer) {
         this.inputSupplier = inputSupplier;
         this.outputConsumer = outputConsumer;
     }
