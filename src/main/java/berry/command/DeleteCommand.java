@@ -22,13 +22,15 @@ public class DeleteCommand extends Command {
      * {@inheritDoc}
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws BerryException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws BerryException {
+        String output = "";
         if (tasks.isIndexWithinRange(taskIndex)) {
-            ui.showDelete();
+            output += ui.showDelete();
             tasks.deleteTask(taskIndex);
         } else {
             throw new IndexOutOfRangeException();
         }
         storage.saveTasks(tasks);
+        return output;
     }
 }

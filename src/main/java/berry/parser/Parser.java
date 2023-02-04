@@ -19,20 +19,21 @@ import berry.task.Event;
 import berry.task.Todo;
 
 /**
- * Parses user input.
+ * Parses user input into {@code Commands}.
  */
-
 public class Parser {
-
+    /**
+     * Types of commands.
+     */
     private enum CommandType {
         LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, FIND, BYE
     }
 
     /**
-     * Parses user input into command word and arguments for execution.
+     * Parses user input into a {@code Command}.
      *
      * @param userInput is the full user input string
-     * @return the command based on the user input
+     * @return command based on the user input
      * @throws BerryException if the given string cannot be parsed
      */
     public static Command parseInput(String userInput) throws BerryException {
@@ -88,6 +89,13 @@ public class Parser {
      */
     private static void validate(CommandType commandType, String input) throws BerryException {
         String command = input.split(" ")[0];
+        System.out.println("command type: " + commandType);
+
+        if (!(commandType == CommandType.TODO ||
+                commandType == CommandType.DEADLINE ||
+                commandType == CommandType.EVENT)) {
+            return;
+        }
 
         switch(commandType) {
         case TODO:
@@ -117,6 +125,8 @@ public class Parser {
                 throw new EmptyClauseException("from");
             }
             break;
+        default:
+            throw new UnknownCommandException();
         }
     }
 }

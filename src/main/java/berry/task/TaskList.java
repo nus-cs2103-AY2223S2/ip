@@ -26,9 +26,9 @@ public class TaskList {
      *
      * @param task is the task to be added
      */
-    public void addTask(Task task) {
+    public String addTask(Task task) {
         listOfTasks.add(task);
-        System.out.println(task.toString());
+        return task.toString();
     }
 
     /**
@@ -36,10 +36,11 @@ public class TaskList {
      *
      * @param index is the number identifying the task given by the user as seen from the task list
      */
-    public void deleteTask(int index){
-        System.out.println(listOfTasks.get(index - 1).toString());
+    public String deleteTask(int index) {
+        String output = listOfTasks.get(index - 1).toString();
         listOfTasks.remove(index - 1);
-        printNumberOfTasks();
+        output += getNumberOfTasks();
+        return output;
     }
 
     /**
@@ -47,9 +48,9 @@ public class TaskList {
      *
      * @param index is the number identifying the task given by the user as seen from the task list
      */
-    public void markDone(int index) {
+    public String markDone(int index) {
         Task t = listOfTasks.get(index - 1);
-        t.markAsDone();
+        return t.markAsDone();
     }
 
     /**
@@ -57,9 +58,9 @@ public class TaskList {
      *
      * @param index is the number identifying the task given by the user as seen from the task list
      */
-    public void markNotDone(int index) {
+    public String markNotDone(int index) {
         Task t = listOfTasks.get(index - 1);
-        t.markAsNotDone();
+        return t.markAsNotDone();
     }
 
     /**
@@ -67,15 +68,18 @@ public class TaskList {
      *
      * @param keywords is the keyword to be searched against the task descriptions
      */
-    public void findTaskIndexWithKeyword(String ... keywords) {
+
+    public String findTaskIndexWithKeyword(String ... keywords) {
+        String listTasks = "";
         for (Task t : listOfTasks) {
             for (String wordToMatch : keywords) {
                 if (t.hasKeyword(wordToMatch)) {
-                    System.out.println((listOfTasks.indexOf(t) + 1) + ". " + t.toString());
+                    listTasks += (listOfTasks.indexOf(t) + 1) + ". " + t.toString() + "\n";
                     break;
                 }
             }
         }
+        return listTasks;
     }
 
     /**
@@ -94,7 +98,7 @@ public class TaskList {
     /**
      * Prints the number of tasks in the task list.
      */
-    public void printNumberOfTasks() {
-        System.out.println("You now have " + listOfTasks.size() + " tasks in the list ૮꒰ˊᗜˋ* ꒱ა");
+    public String getNumberOfTasks() {
+        return "You now have " + listOfTasks.size() + " tasks in the list ૮꒰ˊᗜˋ* ꒱ა";
     }
 }

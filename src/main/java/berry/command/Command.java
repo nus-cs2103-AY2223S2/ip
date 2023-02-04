@@ -28,5 +28,5 @@ public abstract class Command {
     /**
      * Executes the command and returns the result.
      */
-    public abstract void execute (TaskList tasks, Ui ui, Storage storage) throws BerryException;
+    public abstract String execute (TaskList tasks, Ui ui, Storage storage) throws BerryException;
 }

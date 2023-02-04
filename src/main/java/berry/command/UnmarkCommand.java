@@ -22,13 +22,14 @@ public class UnmarkCommand extends Command {
      * {@inheritDoc}
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws BerryException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws BerryException {
+        String output = "";
         if (tasks.isIndexWithinRange(taskIndex)) {
-            ui.showUnmark();
-            tasks.markNotDone(taskIndex);
+            output += ui.showUnmark() + tasks.markNotDone(taskIndex);
         } else {
             throw new IndexOutOfRangeException();
         }
         storage.saveTasks(tasks);
+        return output;
     }
 }
