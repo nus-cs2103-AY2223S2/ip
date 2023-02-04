@@ -1,6 +1,7 @@
 package duke.entities;
 
 import java.time.LocalDate;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -73,17 +74,19 @@ public abstract class Task {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
-    private static boolean validateDate(String date) {
-        return CustomValidator.validate(date, (String val) -> FORMAT_DATE.matcher(val).matches());
+    private static boolean isNotValidDate(String date) {
+        assert date != null : "date cannot be null";
+        return !CustomValidator.validate(date, (String val) -> FORMAT_DATE.matcher(val).matches());
     }
 
     private static Task createTask(TaskType type, String description, Matcher matcher) throws DukeException {
+        assert !Objects.equals(description, "") : "description should not be empty";
         switch (type) {
         case TODO: return new Todo(description);
         case EVENT:
             String from = matcher.group("from");
             String to = matcher.group("to");
-            if (!validateDate(from) || !validateDate(to)) {
+            if (isNotValidDate(from) || isNotValidDate(to)) {
                 throw type.getErr();
             }
             LocalDate fromDate = LocalDate.parse(from);
@@ -94,7 +97,7 @@ public abstract class Task {
             return new Event(description, fromDate, toDate);
         case DEADLINE:
             String by = matcher.group("by");
-            if (!validateDate(by)) {
+            if (isNotValidDate(by)) {
                 throw type.getErr();
             }
             LocalDate byDate = LocalDate.parse(by);
