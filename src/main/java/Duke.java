@@ -7,7 +7,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         System.out.println(greet());
 
-        ArrayList<String> lst = new ArrayList<>();
+        ArrayList<Task> lst = new ArrayList<>();
         while (sc.hasNext()) {
             String cmd = sc.nextLine();
             if (cmd.equals("bye")) {
@@ -20,10 +20,7 @@ public class Duke {
         }
         sc.close();
     }
-    public static void exit() {
-        print("Bye. Hope to see you again soon!");
-    }
-    public static String ownName() {
+    static String ownName() {
         String name = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -31,23 +28,37 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         return name;
     }
-    public static String greet() {
+    static String greet() {
         return String.format("Hello I am: \n%sWhat can I do for you?", ownName());
     }
-    public static String echo(String cmd) { return cmd; }
-    public static String add(String cmd, ArrayList<String> lst) {
-        lst.add(cmd); return String.format("added: %s", cmd);
+    static String add(String cmd, ArrayList<Task> lst) {
+        lst.add(new Task(cmd)); return String.format("added: %s", cmd);
     }
-    public static void printList(ArrayList<String> arr) {
+    static void printList(ArrayList<Task> arr) {
         String str = "";
         for (int i = 0; i < arr.size(); i++) {
-            if (i != 0) { str += "\t"; }
+            if (i != 0) {
+                str += "\t";
+            }
             str += String.format("%d. %s \n", i+1, arr.get(i));
         }
         print(str);
     }
-    public static void print(String reply) {
+    static void exit() {
+        print("Bye. Hope to see you again soon!");
+    }
+    /**
+     * Used to print out any reply with the correct formatting
+     */
+    static void print(String reply) {
         String topBottom = "~~~~~~~~~~~~~~~~~~~~\n";
         System.out.println(String.format("\t%s \t%s\n \t%s", topBottom, reply, topBottom));
+    }
+
+    /**
+     * Used in Level-1 to echo
+     */
+    static String echo(String cmd) {
+        return cmd;
     }
 }
