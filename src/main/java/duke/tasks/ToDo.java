@@ -7,14 +7,14 @@ public class ToDo extends Task {
 
     /**
      * Constructor for a ToDo task.
-     * @param name
+     * @param name Name of the task.
      */
     public ToDo(String name) {
         super(name);
     }
 
     public String toSaveFormat() {
-        return String.format("T,%s", this.name);
+        return String.format("T,%s,%s", this.name, this.getStatusIcon());
     }
 
     @Override

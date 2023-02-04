@@ -8,19 +8,20 @@ import duke.commands.Command;
 public class UI {
     private static final String DATE_FORMAT = "dd/mm/yyyy";
 
-    public void printInitMessage() {
+    public String getInitMessage() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n"
+
+        return "Hello from\n"
                 + logo
-                + ", your personal assistant.\n");
+                + ", your personal assistant.\n";
     }
 
-    public void printExitMessage() {
-        System.out.println("I hope you've managed to be productive today. Bye!");
+    public String getExitMessage() {
+        return "I hope you've managed to be productive today. Bye!";
     }
 
     private String indentString(String s) {

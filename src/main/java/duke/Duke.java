@@ -14,10 +14,9 @@ import duke.views.UI;
  */
 public class Duke {
     private TaskList tasks;
-    private UI ui;
+    public UI ui;
     private Storage storage;
 
-    private static boolean isExited = false;
 
     public Duke() throws IOException {
         this.tasks = new TaskList();
@@ -40,7 +39,4 @@ public class Duke {
         }
     }
 
-    public boolean isExited() {
-        return isExited;
-    }
 }

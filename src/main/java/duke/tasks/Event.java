@@ -35,7 +35,7 @@ public class Event extends Task {
     }
 
     public String toSaveFormat() {
-        return String.format("E,%s,%s,%s", this.name, this.startDate, this.endDate);
+        return String.format("E,%s,%s,%s,%s", this.name, this.getStatusIcon(), this.startDate, this.endDate);
     }
 
     @Override

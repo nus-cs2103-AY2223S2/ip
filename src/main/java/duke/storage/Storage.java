@@ -13,6 +13,7 @@ import java.util.Scanner;
 import duke.exceptions.DukeException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
+import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.tasks.ToDo;
 
@@ -86,29 +87,36 @@ public class Storage {
         String[] inputList = input.split(",");
         String taskType = inputList[0];
         String taskName = inputList[1];
+        String isDone = inputList[2];
+
+        Task newTask;
 
         switch (taskType) {
         case "T": {
-            tasks.addTask(new ToDo(taskName));
+            newTask = new ToDo(taskName);
             break;
         }
         case "D": {
-            String by = inputList[2];
+            String by = inputList[3];
             LocalDateTime deadline = LocalDateTime.parse(by, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));
-            tasks.addTask(new Deadline(taskName, deadline));
+            newTask = new Deadline(taskName, deadline);
             break;
         }
         case "E": {
-            String from = inputList[2];
-            String to = inputList[3];
+            String from = inputList[3];
+            String to = inputList[4];
             LocalDateTime startDate = LocalDateTime.parse(from, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));
             LocalDateTime endDate = LocalDateTime.parse(to, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));
-            tasks.addTask(new Event(taskName, startDate, endDate));
+            newTask = new Event(taskName, startDate, endDate);
             break;
         }
         default: {
             throw new DukeException("Unable to parse this line: " + input);
         }
         }
+        if (isDone.equals("X")) {
+            newTask.markAsDone();
+        }
+        tasks.addTask(newTask);
     }
 }
