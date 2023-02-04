@@ -4,7 +4,6 @@ import genie.command.Command;
 import genie.exception.DukeException;
 
 import java.io.*;
-import java.util.Scanner;
 
 /**
  * The main class for Genie, a Command-line Interface bot. Primarily functions as a task planner that responds to
@@ -14,47 +13,34 @@ public class Genie {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+
     public Genie() {
         ui = new Ui();
         storage = new Storage();
         try {
             tasks = storage.loadData();
         } catch (IOException e) {
-            System.out.println(ui.showErrorMessage() + "\n" + e);
+           e.getMessage(); //todo fix this
         }
     }
 
-    /**
-     * This driver creates the Genie bot.
-     * @param args an array of command-line arguments
-     */
-    public static void main(String[] args) {
-        new Genie().activate();
-    }
-
-    /**
-     * Starts up the Genie bot on the command-line interface.
-     */
-    public void activate() {
-        ui.bootLogo();
-        ui.greet();
+    public String getResponse(String input) {
         boolean isExit = false;
-        ui.printLoadedTaskList(storage.getLoadedTaskList());
-        Scanner sc = new Scanner(System.in);
         while (!isExit) {
             try {
-                //String i = ui.readCommand();
-                String i = sc.nextLine();
-                ui.printLine();
                 Parser parser = new Parser();
-                Command c = parser.parse(i);
+                Command c = parser.parse(input);
                 c.execute(tasks, ui, storage);
                 isExit = c.isExitCommand();
+                String response = ui.getResponse();
+                ui.clearResponse();
+                return response;
             } catch (IOException e) {
-                System.out.println(ui.showErrorMessage() + "\n" + e);
+                return e.getMessage(); //todo fix this
             } catch (DukeException e) {
-                System.out.println(e.getMessage());
+                return (e.getMessage()); //todo fix this
             }
         }
+        return "This should not print.\n";
     }
 }

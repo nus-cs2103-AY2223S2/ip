@@ -26,7 +26,7 @@ public class AddCommand extends Command {
             task = taskList.addEventFromUser(fullCommand);
             break;
         }
-        ui.showAddTaskMessage(task, taskList.getTasks().size());
+        ui.appendAddTaskMessage(task, taskList.getTasks().size());
     }
     @Override
     public boolean isExitCommand() {
