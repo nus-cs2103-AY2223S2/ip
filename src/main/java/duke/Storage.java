@@ -1,13 +1,13 @@
 package duke;
 
+import task.*;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Scanner;
-
-import task.*;
 
 /**
  * Storage deals with loading tasks from the file and saving tasks in the file.
@@ -64,8 +64,12 @@ public class Storage {
                     default:
                         throw new DukeException("Task is not recorded in a valid format...");
                     }
+
+                    assert task != null: "task should not be null";
+
                     if (isTaskDone) {
                         task.markDone();
+                        assert task.getStatusIcon().equals("X") : "task should be marked done";
                     }
                     tasks.add(task);
                 } catch (DukeException e) {

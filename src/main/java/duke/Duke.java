@@ -26,6 +26,7 @@ public class Duke {
         this.storage = new Storage(filePath);
         try {
             this.taskList = new TaskList(this.storage.load());
+            assert taskList != null : "taskList should not be null.";
         } catch (DukeException e) {
             this.app.addDukeDialog(e.getMessage());
             this.taskList = new TaskList();

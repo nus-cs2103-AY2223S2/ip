@@ -27,6 +27,7 @@ public class FindCommand extends Command {
     @Override
     public String execute(TaskList tasks) {
         Iterator<Task> resultsIterator = tasks.find(this.query).iterator();
+
         if (!resultsIterator.hasNext()) {
             return "There are no matching tasks in your list...";
         }
