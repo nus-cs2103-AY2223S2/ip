@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.StringTokenizer;
@@ -97,6 +98,8 @@ public class UI {
                         tasks.add(new Deadline(keyword.toString(), deadline));
                     } catch (IndexOutOfBoundsException ioobe) {
                         System.out.println("Please define a deadline following the keyword '/by'.");
+                    } catch (DateTimeParseException dtpe) {
+                        System.out.println("Please enter a valid date in the format YYYY-MM-DD.");
                     }
                     break;
 
