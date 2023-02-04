@@ -14,14 +14,25 @@ public class TaskList {
      */
     private ArrayList<Task> tasks;
 
+    /**
+     * Constructor for TaskList.
+     */
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
-    public TaskList(ArrayList<Task> tasks) throws DukeException {
+    /**
+     * Constructor for TaskList.
+     * @param tasks The initial tasks in the list.
+     */
+    public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 
+    /**
+     * Gets the number of tasks in the list.
+     * @return The number of tasks in the list.
+     */
     public int getNoOfTasks() {
         return this.tasks.size();
     }

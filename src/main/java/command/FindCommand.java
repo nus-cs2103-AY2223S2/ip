@@ -22,7 +22,6 @@ public class FindCommand extends Command {
     /**
      * Finds tasks with a description that contains the query string.
      * @param tasks The existing task list.
-     * @param ui The ui of Duke chat.
      */
     @Override
     public String execute(TaskList tasks) {

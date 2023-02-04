@@ -21,7 +21,6 @@ public class DeleteCommand extends Command {
     /**
      * Deletes the task with the task no.
      * @param tasks The existing task list.
-     * @param ui The ui of Duke chat.
      * @throws DukeException If there are no task with the task number, i.e. the task to be
      *     deleted does not exist.
      */

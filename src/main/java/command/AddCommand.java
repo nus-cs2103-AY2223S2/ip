@@ -20,7 +20,6 @@ public class AddCommand extends Command {
     /**
      * Adds the task to the existing task list.
      * @param tasks The existing task list.
-     * @param ui The ui of Duke chat.
      */
     @Override
     public String execute(TaskList tasks) {

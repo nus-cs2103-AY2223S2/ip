@@ -7,6 +7,9 @@ import task.TaskList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+/**
+ * Driver to test the actions available on TaskList.
+ */
 public class TaskListTest {
     @Test
     public void add() {
@@ -71,6 +74,9 @@ public class TaskListTest {
     }
 }
 
+/**
+ * Stub class for Task, used in TaskListTest.
+ */
 class TaskStub extends Task {
     public TaskStub(String description) {
         super(description);
