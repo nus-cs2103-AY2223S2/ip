@@ -14,58 +14,62 @@ public class Parser {
      * Function to redirect user's input to the relevant functions.
      * @param input String representation of the user's input.
      * @param listOfTasks The list of tasks which has been loaded into the Duke chatbot instance.
+     * @return String representation of output.
      * @throws DukeExceptions if the user inputs an invalid command.
      */
-    public void readInput(String input, TaskList listOfTasks) throws DukeExceptions {
+
+    private String outputToReturn;
+    public String readInput(String input, TaskList listOfTasks) throws DukeExceptions {
         try {
             if (input.startsWith("todo")) {
                 handleToDoTask(input, listOfTasks);
-                return;
+                return this.outputToReturn;
             }
 
             if (input.startsWith("find")) {
                 handleFindTask(input, listOfTasks);
-                return;
+                return this.outputToReturn;
             }
 
             if (input.startsWith("deadline")) {
                 handleDeadlineTask(input, listOfTasks);
-                return;
+                return this.outputToReturn;
             }
 
             if (input.startsWith("event")) {
                 handleEventTask(input, listOfTasks);
-                return;
+                return this.outputToReturn;
             }
 
             if (input.equals("list")) {
                 handleList(listOfTasks);
-                return;
+                return this.outputToReturn;
             }
 
             if (input.startsWith("delete")) {
                 handleDelete(input, listOfTasks);
-                return;
+                return this.outputToReturn;
             }
 
             if (input.startsWith("checkdue")) {
                 handleCheckDue(input, listOfTasks);
-                return;
+                return this.outputToReturn;
             }
 
             if (input.startsWith("mark")) {
                 handleMark(input, listOfTasks);
-                return;
+                return this.outputToReturn;
             }
 
             if (input.startsWith("unmark")) {
                 handleUnmark(input, listOfTasks);
-                return;
+                return this.outputToReturn;
             }
 
             throw new DukeExceptions("");
         } catch (DukeExceptions DE) {
-            System.out.println(DE.toString());
+            this.outputToReturn = DE.toString();
+            return this.outputToReturn;
         }
     }
 
@@ -82,9 +86,9 @@ public class Parser {
                 throw new DukeExceptions("find");
             }
             String keyword = input.substring(4);
-            listOfTasks.findTasks(keyword);
+            this.outputToReturn = listOfTasks.findTasks(keyword);
         } catch (DukeExceptions DE) {
-            System.out.println(DE.toString());
+            this.outputToReturn = DE.toString();
         }
     }
 
@@ -98,9 +102,9 @@ public class Parser {
         try {
             String useForInit = input.substring(4);
             Task toAdd = new ToDo(useForInit);
-            listOfTasks.addTask(toAdd);
+            this.outputToReturn = listOfTasks.addTask(toAdd);
         } catch (DukeExceptions DE) {
-            System.out.println(DE.toString());
+            this.outputToReturn = DE.toString();
         }
     }
 
@@ -114,9 +118,9 @@ public class Parser {
         try {
             String useForInit = input.substring(8);
             Task toAdd = new Deadlines(useForInit);
-            listOfTasks.addTask(toAdd);
+            this.outputToReturn = listOfTasks.addTask(toAdd);
         } catch (DukeExceptions DE) {
-            System.out.println(DE.toString());
+            this.outputToReturn = DE.toString();
         }
     }
 
@@ -130,9 +134,9 @@ public class Parser {
         try {
             String useForInit = input.substring(5);
             Task toAdd = new Events(useForInit);
-            listOfTasks.addTask(toAdd);
+            this.outputToReturn = listOfTasks.addTask(toAdd);
         } catch (DukeExceptions DE) {
-            System.out.println(DE.toString());
+            this.outputToReturn = DE.toString();
         }
     }
 
@@ -141,7 +145,7 @@ public class Parser {
      * @param listOfTasks The arraylist containing the tasks from Duke chatbot.
      */
     public void handleList(TaskList listOfTasks) {
-        listOfTasks.toRead();
+        this.outputToReturn = listOfTasks.toRead();
     }
 
     /**
@@ -156,9 +160,9 @@ public class Parser {
             if (commandSplit.length <= 1) {
                 throw new DukeExceptions(" ");
             }
-            listOfTasks.deleteTask(Integer.parseInt(commandSplit[1]));
+            this.outputToReturn = listOfTasks.deleteTask(Integer.parseInt(commandSplit[1]));
         } catch (DukeExceptions DE) {
-            System.out.println(DE.toString());
+            this.outputToReturn = DE.toString();
         }
     }
 
@@ -169,7 +173,7 @@ public class Parser {
      */
     public void handleCheckDue(String input, TaskList listOfTasks) {
         String[] commandSplit = input.split(" ");
-        listOfTasks.checkDueDate(Integer.parseInt(commandSplit[1]));
+        this.outputToReturn = listOfTasks.checkDueDate(Integer.parseInt(commandSplit[1]));
     }
 
     /**
@@ -184,9 +188,9 @@ public class Parser {
             if (commandSplit.length <= 1) {
                 throw new DukeExceptions("");
             }
-            listOfTasks.markTask(Integer.parseInt(commandSplit[1]));
+            this.outputToReturn = listOfTasks.markTask(Integer.parseInt(commandSplit[1]));
         } catch (DukeExceptions DE) {
-            System.out.println(DE.toString());
+            this.outputToReturn = DE.toString();
         }
     }
 
@@ -202,9 +206,9 @@ public class Parser {
             if (commandSplit.length <= 1) {
                 throw new DukeExceptions("");
             }
-            listOfTasks.unmarkTask(Integer.parseInt(commandSplit[1]));
+            this.outputToReturn = listOfTasks.unmarkTask(Integer.parseInt(commandSplit[1]));
         } catch (DukeExceptions DE) {
-            System.out.println(DE.toString());
+            this.outputToReturn = DE.toString();
         }
     }
 }
