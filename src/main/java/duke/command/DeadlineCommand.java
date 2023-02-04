@@ -11,7 +11,6 @@ import duke.exception.DukeException;
 import duke.storage.StorageList;
 import duke.task.Deadline;
 import duke.task.TaskList;
-import duke.ui.Ui;
 
 /**
  * Deadline command for the tasks with deadline.
@@ -95,17 +94,17 @@ public class DeadlineCommand extends Command {
      * of formatting.
      *
      * @param tasks   - task list of the current tasks.
-     * @param ui      - interface of the command.
      * @param storage - database of the history of commands.
      * @return String
      */
-    public String execute(TaskList tasks, Ui ui, StorageList storage) {
+    public String execute(TaskList tasks, StorageList storage) {
         Deadline deadlineTask = new Deadline(description, targetDate, targetTiming);
         if (isFormatCorrect() && !isDeadlineOver()) {
             tasks.addToList(deadlineTask);
             return "Got it, I've added this task:\n" + deadlineTask + tasks.getLengthMessage();
         } else if (isDeadlineOver()) {
             return "Deadline is over, please insert another deadline.";
+
         } else {
             return "Wrong Format, Please fill in with the following format: YYYY-MM-DD h:mm";
         }

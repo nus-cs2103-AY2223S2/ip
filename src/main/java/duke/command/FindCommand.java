@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import duke.storage.StorageList;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.ui.Ui;
 
 /**
  * This class builds a find command object to allow string to be matched.
@@ -27,11 +26,10 @@ public class FindCommand extends Command {
      * Method to execute the finding of tasks in the task list.
      *
      * @param tasks   - task list of the current tasks.
-     * @param ui      - interface of the command.
      * @param storage - database of the history of commands.
      * @return String
      */
-    public String execute(TaskList tasks, Ui ui, StorageList storage) {
+    public String execute(TaskList tasks, StorageList storage) {
         ArrayList<Task> tasksList = tasks.findStringInTask(message);
         String stringOutputOfTask = "";
         for (Task t : tasksList) {

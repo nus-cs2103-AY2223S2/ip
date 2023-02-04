@@ -6,6 +6,5 @@
 [T][ ] bye
 [T][ ] bye
 [T][ ] can
-[D][X] eat sushi (by: Dec 12 1999 07:00 PM)
-[D][ ] do hw (by: Dec 10 2019 06:00 PM)
-[E][ ] have fun (from: decemebr to:jan)
+[T][ ] do work
+[T][ ] can

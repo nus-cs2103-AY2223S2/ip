@@ -65,9 +65,12 @@ public class StorageList {
             if (!dir.exists()) {
                 dir.mkdirs();
             }
+            assert dir.exists() :  "Command file should be created";
             java.nio.file.Path path = java.nio.file.Paths.get("data", "duke.txt");
             FileWriter writer = new FileWriter(String.valueOf(path));
             for (Task str : list) {
+                assert str != null : "Empty tasks should not exist in itemList.";
+                assert !str.toString().equals("") : "Storage string should never be empty.";
                 writer.write(str.toString() + System.lineSeparator());
             }
             writer.close();
