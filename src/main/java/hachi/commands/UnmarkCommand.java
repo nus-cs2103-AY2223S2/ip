@@ -11,6 +11,7 @@ import hachi.tasks.Task;
  */
 public class UnmarkCommand extends Command {
     private String input;
+    static String separator = "‿୨♡୧‿‿‿‿୨♡୧‿‿‿‿୨♡୧‿";
 
     /**
      * UnmarkCommand constructor.
@@ -21,21 +22,20 @@ public class UnmarkCommand extends Command {
         this.input = input;
     }
 
-    public boolean execute(TaskList toDoList, Ui ui, Storage storage) {
+    public String execute(TaskList toDoList, Ui ui, Storage storage) {
         try {
             if (input.length() <= 7 || !Character.isDigit(input.charAt(7))) {
-                throw new HachiExceptions("☹ Ohno! I don't know which task to mark/unmark :(");
+                throw new HachiExceptions(separator + "\n" + "\n" + " Ohno! I don't know which task to mark/unmark :(");
             }
             int index = Integer.parseInt(input.substring(7));
             Task task = toDoList.get(index - 1);
             task.unmark();
             storage.saveTaskList(toDoList);
-            System.out.println("   okie dokie, I've marked this task as not done yet: " + "\n" + task);
+            return separator + "\n" + "\n" + "   okie dokie, I've marked this task as not done yet: " + "\n" + task;
         } catch (HachiExceptions e) {
-            System.out.println(e.getMessage());
+            return e.getMessage();
         } catch (IndexOutOfBoundsException e1) {
-            System.out.println(" There is no task to be unmarked");
+            return separator + "\n" + "\n" + " There is no task to be unmarked";
         }
-        return false;
     }
 }

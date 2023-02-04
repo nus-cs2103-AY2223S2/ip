@@ -17,15 +17,13 @@ public abstract class Command {
      * @param storage storage object that stores the to-do list
      * @return True if execution is successful, false if it is not.
      */
-
-    public abstract boolean execute(TaskList tasks, Ui ui, Storage storage);
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage);
 
     /**
      * Indicates whether the program exits
      *
      * @return True if the program needs to exit, false if it does not.
      */
-
     public boolean isExit() {
         return false;
     }

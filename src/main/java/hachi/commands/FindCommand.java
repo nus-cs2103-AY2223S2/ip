@@ -10,7 +10,7 @@ import hachi.tasks.Task;
  */
 public class FindCommand extends Command {
     private String input;
-    static String separator = "‿୨♡୧‿︵‿︵︵‿︵‿୨♡୧‿︵‿︵︵‿︵‿୨♡୧‿";
+    static String separator = "‿୨♡୧‿‿‿‿୨♡୧‿‿‿‿୨♡୧‿";
 
     /**
      * FindCommand constructor.
@@ -21,22 +21,21 @@ public class FindCommand extends Command {
         this.input = input;
     }
 
-    public boolean execute(TaskList toDoList, Ui ui, Storage storage) {
+    public String execute(TaskList toDoList, Ui ui, Storage storage) {
         try {
             String keyword = this.input.substring(5, input.length());
             int n = 0;
-            System.out.println("   Here are the matching tasks in your list:");
+            String msg = "   Here are the matching tasks in your list:";
             for (int i = 0; i < toDoList.size(); i++) {
                 Task t = toDoList.get(i);
                 if (t.toString().contains(keyword)) {
                     n++;
-                    System.out.println("   " + n + ". " + t + "\n");
+                    msg += "   " + n + ". " + t + "\n";
                 }
             }
-            return true;
+            return separator + "\n" + "\n" + msg;
         } catch (Exception e) {
-            e.getMessage();
-            return false;
+            return e.getMessage();
         }
     }
 }

@@ -1,4 +1,1 @@
    your to-do list: 
-      [T][ ] sleep
-      [T][ ] eat
-      [T][ ] eat fruit
