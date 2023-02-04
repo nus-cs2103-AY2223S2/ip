@@ -1,4 +1,5 @@
 import java.io.BufferedReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -30,7 +31,26 @@ public class Duke2 {
     return curStr.toString();
   }
 
-  public static void addTodo(String[] strArr, ArrayList<Task1> tasks) throws EmptyDescription {
+  public static String arrayListToString(ArrayList<Task1> task1s) {
+    StringBuilder arrayString = new StringBuilder();
+    for (Task1 t : task1s) {
+      arrayString.append(t.toString());
+      arrayString.append(t.string);
+      if(t instanceof Deadline) {
+        arrayString.append(" /by").append(((Deadline) t).time);
+      }
+      if(t instanceof Event) {
+        arrayString.append(" /from").append(((Event) t).startTime).append(" /to").append(((Event) t).endTime);
+      }
+      arrayString.append("\n");
+      if (t.mark) {
+        arrayString.append("mark ").append(task1s.indexOf(t) + 1).append("\n");
+      }
+    }
+    return arrayString.toString();
+  }
+
+  public static void addTodo(String[] strArr, ArrayList<Task1> tasks) throws EmptyDescription, IOException {
     if (strArr.length < 2) {
       throw new EmptyDescription(new Todo(""));
     } else {
@@ -41,12 +61,13 @@ public class Duke2 {
       Task1 curTask = new Todo(curString);
       tasks.add(curTask);
       int taskNum = tasks.size();
+      appendToFile(arrayListToString(tasks));
       System.out.println("Now you have " + taskNum + " tasks in the list.");
       System.out.println("---------------------------");
     }
   }
 
-  public static void addDeadline(String str, ArrayList<Task1> tasks) throws EmptyDescription, EmptyTime {
+  public static void addDeadline(String str, ArrayList<Task1> tasks) throws EmptyDescription, EmptyTime, IOException {
     String[] strArr = str.split(" ");
     String[] strArrP = str.split("/");
     if (strArr.length < 2) {
@@ -65,11 +86,12 @@ public class Duke2 {
       System.out.println(" [D][ ] " + task + " (by: " + time + ")");
       Task1 curTask = new Deadline(task, time);
       tasks.add(curTask);
+      appendToFile(arrayListToString(tasks));
       System.out.println("Now you have " + tasks.size() + " tasks in the list.");
       System.out.println("---------------------------");
     }
   }
-  public static void addEvent(String str, ArrayList<Task1> tasks) throws EmptyDescription, EmptyTime {
+  public static void addEvent(String str, ArrayList<Task1> tasks) throws EmptyDescription, EmptyTime, IOException {
     String[] strArr = str.split(" ");
     String[] strArrP = str.split("/");
     if (strArr.length < 2) {
@@ -92,6 +114,7 @@ public class Duke2 {
           + startTime + " to: " + endTime + ")");
       Task1 curTask = new Event(task, startTime, endTime);
       tasks.add(curTask);
+      appendToFile(arrayListToString(tasks));
       System.out.println("Now you have " + tasks.size() + " tasks in the list.");
       System.out.println("---------------------------");
     }
@@ -125,7 +148,7 @@ public class Duke2 {
     throw new NoSuchTask(i);
   }
 
-  public static void deleteTask(Task1 task, ArrayList<Task1> tasks) {
+  public static void deleteTask(Task1 task, ArrayList<Task1> tasks) throws IOException {
     System.out.println("---------------------------");
     System.out.println("Noted. I've removed this task:");
     System.out.print(" ");
@@ -138,11 +161,20 @@ public class Duke2 {
     System.out.print(task.string);
     task.printTime();
     tasks.remove(task);
+    appendToFile(arrayListToString(tasks));
     System.out.println("Now you have " + tasks.size() + " tasks in the list.");
     System.out.println("---------------------------");
   }
 
-  public static void main(String[] args) throws IOException, NoSuchTask {
+  private static void appendToFile(String textToAppend) throws IOException {
+    FileWriter fw = new FileWriter("data/duke.txt", false);
+    fw.write(textToAppend);
+    fw.close();
+  }
+
+  public static void main(String[] args) throws IOException {
+    ArrayList<Task1> tasks = new ArrayList<>();
+    DukeRerun.loading(tasks);
     String logo = " ____        _        \n"
         + "|  _ \\ _   _| | _____ \n"
         + "| | | | | | | |/ / _ \\\n"
@@ -155,7 +187,6 @@ public class Duke2 {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     String str = br.readLine();
     String[] strArr = str.split(" ");
-    ArrayList<Task1> tasks = new ArrayList<>();
     while (!str.equals("bye")) {
       if (str.equals("list")) {
         listTask(tasks);
@@ -171,6 +202,7 @@ public class Duke2 {
         } else {
           Task1 curTask = tasks.get(curIndex);
           markTask(curTask, true);
+          appendToFile(arrayListToString(tasks) + "\n");
         }
       } else if (strArr[0].equals("unmark")) {
         int curIndex = Integer.parseInt(strArr[1]) - 1;
@@ -184,6 +216,7 @@ public class Duke2 {
         } else {
           Task1 curTask = tasks.get(curIndex);
           markTask(curTask, false);
+          appendToFile(arrayListToString(tasks) + "\n");
         }
       } else if (strArr[0].equals("todo")) {
         try {
