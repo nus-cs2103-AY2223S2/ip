@@ -31,4 +31,13 @@ public class DeleteCommand extends Command {
         ui.showTaskRemoved(removedTask);
         ui.showNumTasks(taskList);
     }
+
+    public String executeReturnString(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        int taskNumber = Integer.parseInt(input);
+
+        Task removedTask = taskList.deleteTask(taskNumber);
+        storage.writeTasksToFile(taskList.getTaskList().toString());
+
+        return ui.formatTaskRemoved(removedTask, taskList);
+    }
 }

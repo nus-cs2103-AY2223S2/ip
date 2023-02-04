@@ -39,4 +39,20 @@ public class DeadlineCommand extends Command {
         ui.showTaskAdded(taskDeadline);
         ui.showNumTasks(taskList);
     }
+
+    public String executeReturnString(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        if (input.length() == 0) {
+            throw new DukeException(
+                    "You cant be doing nothing!! Please try again!");
+        }
+
+        String[] descSplit = input.split("/");
+        Deadline taskDeadline = new Deadline(
+                descSplit[0].substring(0,descSplit[0].length()-1),
+                descSplit[1].substring(3));
+
+        taskList.addTask(taskDeadline);
+        storage.writeTasksToFile(taskList.getTaskList().toString());
+        return ui.formatTaskAdded(taskDeadline, taskList);
+    }
 }

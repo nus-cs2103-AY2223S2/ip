@@ -30,4 +30,13 @@ public class UnmarkCommand extends Command {
         ui.showTaskUnmarked(unmarkedTask);
         ui.showNumTasks(taskList);
     }
+
+    public String executeReturnString(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        int taskNumber = Integer.parseInt(input);
+
+        Task unmarkedTask = taskList.changeMarkStatus(taskNumber);
+        storage.writeTasksToFile(taskList.getTaskList().toString());
+
+        return ui.formatTaskUnmarked(unmarkedTask, taskList);
+    }
 }

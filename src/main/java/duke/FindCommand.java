@@ -38,4 +38,21 @@ public class FindCommand extends Command {
             }
         }
     }
+
+    public String executeReturnString(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        if (taskList.getSize() == 0) {
+            return ui.formatMessage("Task list is empty, can't find anything!");
+        } else {
+            String matchingTasks = "Matching tasks are shown below: ";
+            int matchingTasksCounter = 0;
+            for (int i = 1; i <= taskList.getSize(); i++) {
+                Task curTask = taskList.getTask(i);
+                if (curTask.getDescription().contains(this.input)) {
+                    matchingTasksCounter += 1;
+                    matchingTasks = matchingTasks + "\n" + ui.formatFoundTask(matchingTasksCounter, curTask);
+                }
+            }
+            return matchingTasks;
+        }
+    }
 }
