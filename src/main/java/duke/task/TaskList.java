@@ -78,7 +78,7 @@ public class TaskList {
     public void find(String keyword) {
         ArrayList<Task> searchResult = new ArrayList<Task>();
         for (int i = 0; i < this.taskList.size(); i++) {
-            if(taskList.get(i).getDescription().contains(keyword) == true) {
+            if (taskList.get(i).getDescription().contains(keyword) == true) {
                 searchResult.add(taskList.get(i));
             }
         }

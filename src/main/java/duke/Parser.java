@@ -1,12 +1,12 @@
 package duke;
 
-import duke.task.TaskList;
-import duke.task.Todo;
 import duke.task.Deadline;
 import duke.task.Event;
+import duke.task.TaskList;
+import duke.task.Todo;
 
-import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.time.LocalDate;
 
 public class Parser {
     private FileManager fileManager;
@@ -84,7 +84,7 @@ public class Parser {
             } catch (IndexOutOfBoundsException e) {
                 System.out.println("    OOPS!!! You gotta tell me what to search for :<");
             }
-        }else {
+        } else {
             System.out.println("    OOPS!!! I'm sorry, but I don't know what that means :<");
         }
     }

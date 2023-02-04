@@ -12,7 +12,7 @@ public class Duke {
     public Duke(String filePath) {
         this.fileManager = new FileManager(filePath);
         this.taskList = this.fileManager.getFile();
-        this.parser =  new Parser(this.fileManager, this.taskList);
+        this.parser = new Parser(this.fileManager, this.taskList);
     }
 
     /**
