@@ -6,6 +6,7 @@ import java.time.format.DateTimeParseException;
 
 public class Task implements Serializable {
     private Boolean isDone;
+//    private static final long serialVersionUID = -7531925916726747642;
 
     public Task() {
         this.isDone = false;
@@ -32,39 +33,7 @@ public class Task implements Serializable {
         this.isDone = false;
     }
 
-    public LocalDate parseDate(String[] possibleDateTime) throws DateTimeParseException {
-        try {
-            //parse date
-            LocalDate possibleDeadlineDate = LocalDate.parse(possibleDateTime[0]);
-            return possibleDeadlineDate;
-        } catch (DateTimeParseException ex) {
-            //can not parse date
-            return null;
-        }
-    }
-
-    public String parseStringDate(LocalDate possibleDeadlineDate) {
-        return possibleDeadlineDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-    }
-
-    public LocalTime parseTime(String[] possibleDateTime) throws DateTimeParseException {
-        try {
-            //parse date
-            LocalTime possibleDeadlineTime = (possibleDateTime.length == 1)
-                    ? LocalTime.parse(possibleDateTime[0])
-                    : LocalTime.parse(possibleDateTime[1]);
-            return possibleDeadlineTime;
-        } catch (DateTimeParseException ex) {
-            //can not parse date
-            return null;
-        }
-    }
-
-    public String parseStringTime(LocalTime possibleDeadlineTime) {
-        return possibleDeadlineTime.format(DateTimeFormatter.ofPattern("hh:mm a"));
-    }
-
-    class Todo extends Task {
+    private class Todo extends Task {
         private String task;
 
         public Todo(String task) {
@@ -79,7 +48,8 @@ public class Task implements Serializable {
         }
     }
 
-    class Deadline extends Task {
+    private class Deadline extends Task {
+        private static final long serialVersionUID = -7531925916726747642L;
         private String task;
         private String deadline;
         private Boolean isDate = false;
@@ -98,17 +68,17 @@ public class Task implements Serializable {
             this.task = commands[0];
             this.deadline = commands[1];
             String[] possibleDateTime = this.deadline.split((" "));
-            LocalDate possibleDeadlineDate = parseDate(possibleDateTime);
+            LocalDate possibleDeadlineDate = Parser.parseDate(possibleDateTime);
             if (possibleDeadlineDate != null) {
                 this.isDate = true;
                 this.deadlineDate = possibleDeadlineDate;
-                this.deadlineDateString = parseStringDate(possibleDeadlineDate);
+                this.deadlineDateString = Parser.parseStringDate(possibleDeadlineDate);
             }
-            LocalTime possibleDeadlineTime = parseTime(possibleDateTime);
+            LocalTime possibleDeadlineTime = Parser.parseTime(possibleDateTime);
             if (possibleDeadlineTime != null) {
                 this.isTime = true;
                 this.deadlineTime = possibleDeadlineTime;
-                this.deadlineTimeString = parseStringTime(possibleDeadlineTime);
+                this.deadlineTimeString = Parser.parseStringTime(possibleDeadlineTime);
             }
         }
 
@@ -133,7 +103,8 @@ public class Task implements Serializable {
         }
     }
 
-    class Event extends Task {
+    private class Event extends Task {
+        private static final long serialVersionUID = 6827458563349815922L;
         private String task;
         private String from;
         private String to;
@@ -165,32 +136,32 @@ public class Task implements Serializable {
             this.to = from_to_timeline[1];
             //parse date and time of /from
             String[] possibleDateTime = this.from.split((" "));
-            LocalDate possibleFromDate = parseDate(possibleDateTime);
+            LocalDate possibleFromDate = Parser.parseDate(possibleDateTime);
             if (possibleFromDate != null) {
                 this.isFromDate = true;
                 this.fromDate = possibleFromDate;
-                this.fromDateString = parseStringDate(possibleFromDate);
+                this.fromDateString = Parser.parseStringDate(possibleFromDate);
             }
-            LocalTime possibleFromTime = parseTime(possibleDateTime);
+            LocalTime possibleFromTime = Parser.parseTime(possibleDateTime);
             if (possibleFromTime != null) {
                 this.isFromTime = true;
                 this.fromTime = possibleFromTime;
-                this.fromTimeString = parseStringTime(possibleFromTime);
+                this.fromTimeString = Parser.parseStringTime(possibleFromTime);
             }
 
             //parse date and time of /to
             possibleDateTime = this.to.split((" "));
-            LocalDate possibleToDate = parseDate(possibleDateTime);
+            LocalDate possibleToDate = Parser.parseDate(possibleDateTime);
             if (possibleToDate != null) {
                 this.isToDate = true;
                 this.toDate = possibleToDate;
-                this.toDateString = parseStringDate(possibleToDate);
+                this.toDateString = Parser.parseStringDate(possibleToDate);
             }
-            LocalTime possibleToTime = parseTime(possibleDateTime);
+            LocalTime possibleToTime = Parser.parseTime(possibleDateTime);
             if (possibleToTime != null) {
                 this.isToTime = true;
                 this.toTime = possibleToTime;
-                this.toTimeString = parseStringTime(possibleToTime);
+                this.toTimeString = Parser.parseStringTime(possibleToTime);
             }
         }
 
