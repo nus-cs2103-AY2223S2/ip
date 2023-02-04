@@ -1,7 +1,6 @@
-package Duke.Commands;
+package duke.Commands;
 
-import Duke.Commands.Tasks.Task;
-import Duke.TaskList;
+import duke.TaskList;
 
 /**
  * This class handles the command to unmark tasks as completed (i.e. they are incomplete)

@@ -1,6 +1,6 @@
-package Duke.Commands;
-import Duke.Commands.Tasks.Task;
-import Duke.TaskList;
+package duke.Commands;
+import duke.Commands.Tasks.Task;
+import duke.TaskList;
 
 /**
  * This class handles addition commands

@@ -1,9 +1,9 @@
-package Duke.Commands;
+package duke.Commands;
 
-import Duke.Commands.Tasks.Deadline;
-import Duke.Commands.Tasks.Event;
-import Duke.Commands.Tasks.ToDo;
-import Duke.DukeException.DukeException;
+import duke.Commands.Tasks.Deadline;
+import duke.Commands.Tasks.Event;
+import duke.Commands.Tasks.ToDo;
+import duke.DukeException.DukeException;
 
 /**
  * This class interprets the user command

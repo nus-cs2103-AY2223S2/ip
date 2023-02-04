@@ -1,7 +1,7 @@
-package Duke.Commands;
+package duke.Commands;
 
-import Duke.Commands.Tasks.Task;
-import Duke.TaskList;
+import duke.Commands.Tasks.Task;
+import duke.TaskList;
 
 /**
  * This class handles deletion commands

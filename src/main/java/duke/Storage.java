@@ -1,10 +1,10 @@
-package Duke;
+package duke;
 
-import Duke.Commands.Tasks.Deadline;
-import Duke.Commands.Tasks.Task;
-import Duke.Commands.Tasks.ToDo;
-import Duke.Commands.Tasks.Event;
-import Duke.DukeException.DukeException;
+import duke.Commands.Tasks.Deadline;
+import duke.Commands.Tasks.Task;
+import duke.Commands.Tasks.ToDo;
+import duke.Commands.Tasks.Event;
+import duke.DukeException.DukeException;
 
 import java.io.*;
 

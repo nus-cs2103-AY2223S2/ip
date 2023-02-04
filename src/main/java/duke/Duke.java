@@ -1,12 +1,12 @@
-package Duke;
+package duke;
 
 import java.util.Scanner;
 import java.lang.String;
 
-import Duke.Commands.Parser;
-import Duke.Commands.Command;
-import Duke.Commands.Exit;
-import Duke.DukeException.DukeException;
+import duke.Commands.Parser;
+import duke.Commands.Command;
+import duke.Commands.Exit;
+import duke.DukeException.DukeException;
 
 /**
  * @author Shi Jiaao

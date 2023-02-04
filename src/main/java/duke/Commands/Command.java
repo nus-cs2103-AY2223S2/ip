@@ -1,6 +1,6 @@
-package Duke.Commands;
+package duke.Commands;
 
-import Duke.TaskList;
+import duke.TaskList;
 
 /**
  * This class is an abstract class representing all commands

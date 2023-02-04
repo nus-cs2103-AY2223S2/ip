@@ -1,4 +1,4 @@
-package Duke.Commands.Tasks;
+package duke.Commands.Tasks;
 
 // skeleton code for this class is taken from cs2103 website
 public abstract class Task {

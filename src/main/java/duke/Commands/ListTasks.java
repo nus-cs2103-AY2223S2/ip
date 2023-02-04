@@ -1,6 +1,6 @@
-package Duke.Commands;
+package duke.Commands;
 
-import Duke.TaskList;
+import duke.TaskList;
 
 /**
  * This class represents the command to list all current tasks
