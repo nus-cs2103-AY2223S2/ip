@@ -1,7 +1,7 @@
 package duke.task;
 
 /**
- * Type todo of a task
+ * Type todo that is inherited from task
  */
 public class Todo extends Task {
 
