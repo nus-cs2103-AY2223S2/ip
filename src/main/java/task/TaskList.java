@@ -129,6 +129,7 @@ public class TaskList {
      * @return The string representation of the task list in storage.
      */
     public String tasksStorageString(String delimiter) {
+        assert !delimiter.equals("");
         StringBuilder finalString = new StringBuilder();
         for (Task task : this.tasks) {
             finalString.append(task.toStorageString());
