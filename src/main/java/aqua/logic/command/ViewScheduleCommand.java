@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import aqua.aquatask.AquaTask;
 import aqua.graphic.schedule.ScheduleComponent;
+import aqua.graphic.schedule.ScheduleTimeable;
 import aqua.logic.ArgumentMap;
 import aqua.logic.ExecutionDisplayerTask;
 import aqua.logic.ExecutionService;
@@ -13,7 +14,6 @@ import aqua.logic.ExecutionTask;
 import aqua.manager.IoManager;
 import aqua.manager.LogicManager;
 import aqua.util.DateUtils;
-import aqua.util.Timeable;
 
 
 public class ViewScheduleCommand extends CommandController {
@@ -53,7 +53,7 @@ public class ViewScheduleCommand extends CommandController {
 
 
     private ScheduleComponent formScheduleDisplay(LocalDateTime startTime, List<AquaTask> tasks) {
-        List<Timeable> timeables = tasks.stream()
+        List<ScheduleTimeable> timeables = tasks.stream()
                 .map(task -> new TimeableAquaTask(task))
                 .collect(Collectors.toList());
         return new ScheduleComponent(startTime, timeables);
@@ -78,7 +78,7 @@ public class ViewScheduleCommand extends CommandController {
 
 
 
-    private class TimeableAquaTask extends Timeable {
+    private class TimeableAquaTask extends ScheduleTimeable {
         private final AquaTask task;
 
 
@@ -96,6 +96,12 @@ public class ViewScheduleCommand extends CommandController {
         @Override
         public LocalDateTime getEnd() {
             return task.getEnd().orElseThrow();
+        }
+
+
+        @Override
+        public List<String> getStyleClass() {
+            return List.of("schedule-box");
         }
 
 

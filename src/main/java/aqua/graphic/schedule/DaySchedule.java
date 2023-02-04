@@ -25,10 +25,10 @@ public class DaySchedule extends HBox {
     private final VBox rowDisplayArea = new VBox();
 
 
-    public DaySchedule(LocalDateTime startTime, List<Timeable> timeables) {
+    public DaySchedule(LocalDateTime startTime, List<ScheduleTimeable> timeables) {
         initialiseDay(startTime);
-        List<? extends List<Timeable>> sepTimeable = separateConflicting(timeables);
-        for (List<Timeable> row : sepTimeable) {
+        List<? extends List<ScheduleTimeable>> sepTimeable = separateConflicting(timeables);
+        for (List<ScheduleTimeable> row : sepTimeable) {
             addRow(startTime, row);
         }
     }
@@ -51,11 +51,11 @@ public class DaySchedule extends HBox {
     }
 
 
-    private List<? extends List<Timeable>> separateConflicting(List<Timeable> timeables) {
-        ArrayList<ArrayList<Timeable>> sepTimeables = new ArrayList<>();
-        for (Timeable timeable : timeables) {
+    private List<? extends List<ScheduleTimeable>> separateConflicting(List<ScheduleTimeable> timeables) {
+        ArrayList<ArrayList<ScheduleTimeable>> sepTimeables = new ArrayList<>();
+        for (ScheduleTimeable timeable : timeables) {
             boolean isAdded = false;
-            for (List<Timeable> timeableSet : sepTimeables) {
+            for (List<ScheduleTimeable> timeableSet : sepTimeables) {
                 if (!hasConflict(timeable, timeableSet)) {
                     timeableSet.add(timeable);
                     isAdded = true;
@@ -71,7 +71,7 @@ public class DaySchedule extends HBox {
     }
 
 
-    private boolean hasConflict(Timeable timeable, List<Timeable> timeables) {
+    private boolean hasConflict(Timeable timeable, List<? extends Timeable> timeables) {
         for (Timeable storedTimeable : timeables) {
             if (DateUtils.isIntersecting(
                         timeable.getStart(), timeable.getEnd(),
@@ -83,7 +83,7 @@ public class DaySchedule extends HBox {
     }
 
 
-    private void addRow(LocalDateTime startTime, List<Timeable> timeables) {
+    private void addRow(LocalDateTime startTime, List<ScheduleTimeable> timeables) {
         Pane pane = new Pane();
         pane.setMinWidth(ROW_WIDTH);
         pane.setMaxHeight(ROWHEIGHT);
