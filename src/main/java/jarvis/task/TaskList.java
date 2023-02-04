@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import jarvis.exception.command.InvalidIndexException;
-import jarvis.exception.command.MissingParameterException;
 
 /**
  * Container class for tasks and their corresponding operations.
@@ -50,7 +49,7 @@ public class TaskList {
      *
      * @param index Index of the task to delete.
      * @return List of response lines.
-     * @throws MissingParameterException If the index to delete is invalid.
+     * @throws InvalidIndexException If the index to delete is invalid.
      */
     public List<String> deleteTask(int index) throws InvalidIndexException {
         if (index <= 0 || index > this.tasks.size()) {

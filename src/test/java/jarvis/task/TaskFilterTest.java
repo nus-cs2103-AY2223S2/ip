@@ -1,10 +1,11 @@
 package jarvis.task;
 
-import jarvis.exception.command.InvalidParameterException;
-import org.junit.jupiter.api.Test;
-
 import java.time.LocalDate;
 import java.util.List;
+
+import org.junit.jupiter.api.Test;
+
+import jarvis.exception.command.InvalidParameterException;
 
 public class TaskFilterTest {
     private static final List<String> KEYWORDS = List.of("hello", "world");
