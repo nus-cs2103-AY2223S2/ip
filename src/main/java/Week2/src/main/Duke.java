@@ -15,8 +15,6 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-
-
 /**
  * A simple todo bot to manage my todo list.
  * It can mark done jobs or unmark.
@@ -41,12 +39,7 @@ public class Duke extends Application {
 
     /**
      * Constructor of Duke.
-     * It begins the basic operation of the program when it is constructed.
-     * Duke constructor.
-     * Takes filePath from main and creates Ui and storage from it.
-     * It can load previous data from the file path.
-     * @throws IOException
-     */
+     * /
     public Duke() {
 
     }
@@ -75,6 +68,13 @@ public class Duke extends Application {
         fw.write(currtask.toString() +System.lineSeparator());
     }
 
+    /**
+     * Runs Duke and begins the program.
+     * It invokes parser to start managing tasks.
+     * @param input
+     * @return
+     * @throws IOException
+     */
     public String run(String input) throws IOException {
         storage = new Storage("/saves/data.txt");
         Ui ui = new Ui();
