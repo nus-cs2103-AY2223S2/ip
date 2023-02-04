@@ -43,18 +43,8 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-//        hbox.setMaxHeight(Double.POSITIVE_INFINITY);
-//        hbox.setMinHeight(Double.NEGATIVE_INFINITY);
-//        dialog.setMaxHeight(Double.POSITIVE_INFINITY);
-//        dialog.setMinHeight(Double.NEGATIVE_INFINITY);
         dialog.setText(text);
         circle.setFill(new ImagePattern(img));
-//        displayPicture.setImage(img);
-//        displayPicture.set
-//        hbox.autosize();
-//        hbox.setMinSize(dialog.USE_PREF_SIZE,dialog.USE_PREF_SIZE);
-//        hbox.setMaxSize(dialog.USE_PREF_SIZE,dialog.USE_PREF_SIZE);
-
     }
 
     /**

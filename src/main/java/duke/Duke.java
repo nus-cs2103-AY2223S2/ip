@@ -36,6 +36,7 @@ public class Duke {
      * @param mainWindow Controller for MainWindow
      */
     public Duke(MainWindow mainWindow) {
+        assert mainWindow != null : "Something is wrong with the creaiton of mainWindow";
         this.mainWindow = mainWindow;
         storage = new Storage();
         parser = new Parser(mainWindow);
@@ -52,17 +53,5 @@ public class Duke {
      */
     public void processInput(String input) throws IOException {
         ui.receiveInput(tasks, storage,input);
-    }
-
-    public void printDukeIntro(){
-        String logo = " _______   _______    _______   ___     __   \n" 
-        + "|   ____| |   __  \\  |   ____| |   \\   |  |\n" 
-        + "|  |____  |  |  \\  | |  |____  |    \\  |  |\n"
-        + "|  _____| |  |__/ /  |  _____| |  |\\ \\ |  |\n"
-        + "|  |____  |  | |  \\  |  |____  |  | \\ \\|  |\n"
-        + "|_______| |__| |___\\ |_______| |__|  \\____|\n";
-        mainWindow.sendDukeResponse("Hello from\n" + logo);
-        mainWindow.sendDukeResponse("Hello! I'm Eren\nWhat can I do for you?");
-
     }
 }

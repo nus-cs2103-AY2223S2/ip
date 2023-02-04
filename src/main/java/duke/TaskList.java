@@ -45,6 +45,7 @@ public class TaskList {
             String description;
             if (type.equals("DEADLINE")) {
                 int indexForBy = Parser.getIndexOfWord(words, "/by");
+                assert indexForBy < -1 : "Something is wrong with the retrival of the index for the word by";
                 if (indexForBy == 0) {
                     throw new EmptyDescriptionException("The description of " + type + " cannot be empty. Please try again");
                 }
@@ -58,15 +59,18 @@ public class TaskList {
             }
             else {
                 int indexForFrom = Parser.getIndexOfWord(words, "/from");
+                assert indexForFrom < -1 : "Something is wrong with the retrival of the index for the word from";
                 if (indexForFrom == 0) {
                     throw new EmptyDescriptionException("The description of " + type + " cannot be empty. Please try again");
                 }
                 int indexForTo = Parser.getIndexOfWord(words, "/to");
-
+                assert indexForTo < -1 : "Something is wrong with the retrival of the index for the word from";
                 if (DateTime.getDateTime(words,indexForFrom) == null || DateTime.getDateTime(words,indexForTo) == null) {
                     mainWindow.sendDukeResponse("Please enter in this format {description} /from DD/MM/YYYY HHMM /to DD/MM/YYYY HHMM. Try again");
                     return false;
                 }
+                assert tasks.size() >= 1 : "Something is wrong with add of task";
+
 
                 LocalDateTime dateTimeFrom = DateTime.getDateTime(words,indexForFrom);
                 LocalDateTime dateTimeTo = DateTime.getDateTime(words,indexForTo);
@@ -76,6 +80,7 @@ public class TaskList {
 
         }
         tasks.add(task);
+        assert tasks.size() >= 1 : "Something is wrong with add of task";
         mainWindow.sendDukeResponse("Got it. I've added this task:\n" + task);
         mainWindow.sendDukeResponse("Now you have " + tasks.size() + " tasks in the list.");
         return true;
@@ -86,11 +91,12 @@ public class TaskList {
      * 
      * @param num Index of the task to be deleted
      * @return true if task has been deleted, else false
-     * @throws IndexOutOfBoundsExceptio If num > listOfTask.size()
+     * @throws IndexOutOfBoundsException If num > listOfTask.size()
      */ 
     public boolean deleteTask(int num) throws IndexOutOfBoundsException {
         Task selectedTask = getTask(num);
         tasks.remove(selectedTask);
+        assert tasks.size() >= 0 : "Something is wrong with deleting of task";
         mainWindow.sendDukeResponse("Noted. I've removed this task:\n" + selectedTask);
         mainWindow.sendDukeResponse("Now you have " + tasks.size() + " tasks in the list.");
         return true;

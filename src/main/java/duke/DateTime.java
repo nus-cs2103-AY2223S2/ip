@@ -22,8 +22,7 @@ public class DateTime {
         if (index != -1 && words.length >= index+2) {
             try {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
-                dateTime = LocalDateTime.parse(words[index+1] + " " + words[index+2], formatter); 
-                // System.out.println(dateTime.getDayOfYear());
+                dateTime = LocalDateTime.parse(words[index+1] + " " + words[index+2], formatter);
                 return dateTime;
             } catch (DateTimeParseException e) {
                 return null;
