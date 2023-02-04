@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Scanner;
 
+import tunabot.exceptions.InputException;
 import tunabot.task.Deadline;
 import tunabot.task.Event;
 import tunabot.task.Task;
@@ -28,6 +29,11 @@ public class Storage {
      * @throws IOException if an I/O Exception occurs when creating a new file.
      */
     public TaskList load() throws IOException {
+        File saveFile = getSaveFile();
+        return loadSave(saveFile);
+    }
+
+    private File getSaveFile() throws IOException {
         File saveFile = filePath.toFile();
         Path parentPath = filePath.getParent();
         File parentFolder = parentPath.toFile();
@@ -37,8 +43,9 @@ public class Storage {
         if (!saveFile.exists()) {
             saveFile.createNewFile();
         }
-        return loadSave(saveFile);
+        return saveFile;
     }
+
     private static TaskList loadSave(File saveFile) {
         TaskList tasks = new TaskList();
         try {
@@ -60,6 +67,8 @@ public class Storage {
             }
         } catch (FileNotFoundException e) {
             System.out.println("BLUB! Couldn't find save file!");
+        } catch (InputException e) {
+            System.out.println("BLUB! Format error!");
         }
         return tasks;
     }
