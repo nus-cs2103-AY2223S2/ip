@@ -126,8 +126,15 @@
 }
 
 .schedule-box {
-    -fx-color: rgb(187, 213, 212);
     -fx-background-color: -fx-shadow-highlight-color, -fx-outer-border, -fx-inner-border, -fx-body-color;
     -fx-background-insets: 1 1 0 1, 1, 2, 3;
     -fx-background-radius : 10, 10, 9, 8;
+}
+
+.schedule-box:complete {
+    -fx-color: rgb(173, 216, 171);
+}
+
+.schedule-box:incomplete {
+    -fx-color: rgb(187, 213, 212);
 }
