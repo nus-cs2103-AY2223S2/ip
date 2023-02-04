@@ -1,14 +1,18 @@
 package aqua.util;
 
+import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoUnit;
 
 import aqua.exception.IllegalSyntaxException;
 
 
 /** Utility class for dates and time. */
 public class DateUtils {
+    public static final DayOfWeek DEFAULT_START_OF_WEEK = DayOfWeek.SUNDAY;
+
     /**
      * Parses String of the following format to a LocalDateTime.
      * <ul>
@@ -65,5 +69,28 @@ public class DateUtils {
 
     public static boolean isIntersecting(LocalDateTime s1, LocalDateTime e1, LocalDateTime s2, LocalDateTime e2) {
         return !(s1.equals(e2) || e1.equals(s2) || s1.isAfter(e2) || e1.isBefore(s2));
+    }
+
+
+    public static LocalDateTime getStartOfWeek(LocalDateTime time) {
+        return toStartOfWeek(time, DEFAULT_START_OF_WEEK);
+    }
+
+
+    public static LocalDateTime toStartOfWeek(LocalDateTime time, DayOfWeek weekStart) {
+        int offset = time.getDayOfWeek().getValue() - weekStart.getValue();
+        if (offset < 0) {
+            offset += DayOfWeek.SUNDAY.getValue();
+        }
+        return toStartOfDay(time.minus(offset, ChronoUnit.DAYS));
+    }
+
+
+    public static LocalDateTime toStartOfDay(LocalDateTime time) {
+        return LocalDateTime.of(
+                time.getYear(),
+                time.getMonthValue(),
+                time.getDayOfMonth(),
+                0, 0);
     }
 }

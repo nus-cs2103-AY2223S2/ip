@@ -1,6 +1,5 @@
 package aqua.logic.command;
 
-import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,6 +12,7 @@ import aqua.logic.ExecutionService;
 import aqua.logic.ExecutionTask;
 import aqua.manager.IoManager;
 import aqua.manager.LogicManager;
+import aqua.util.DateUtils;
 import aqua.util.Timeable;
 
 
@@ -45,22 +45,10 @@ public class ViewScheduleCommand extends CommandController {
 
 
     private DisplayData filterTasks(ArgumentMap args, LogicManager manager) {
-        LocalDateTime start = getMonday(LocalDateTime.now());
+        LocalDateTime start = DateUtils.getStartOfWeek(LocalDateTime.now());
         LocalDateTime end = start.plusDays(7);
         List<AquaTask> tasks = manager.getTaskManager().filterWithin(start, end);
         return new DisplayData(tasks, start);
-    }
-
-
-    private LocalDateTime getMonday(LocalDateTime time) {
-        DayOfWeek day = time.getDayOfWeek();
-        int minusDays = day.getValue() - DayOfWeek.MONDAY.getValue();
-        LocalDateTime monday = time.minusDays(minusDays);
-        return LocalDateTime.of(
-                monday.getYear(),
-                monday.getMonthValue(),
-                monday.getDayOfMonth(),
-                0, 0);
     }
 
 
