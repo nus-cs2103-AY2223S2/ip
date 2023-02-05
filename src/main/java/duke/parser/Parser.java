@@ -91,9 +91,10 @@ public class Parser {
         case DISPLAY_LIST:
             return new DisplayListCommand();
         default:
+            // Do nothing
         }
 
-        // duke.commands with arguments
+        // Commands with arguments
         if (parts.length < 2) {
             throw new EmptyArgumentDukeException();
         }
@@ -148,6 +149,7 @@ public class Parser {
                 throw new EmptyArgumentDukeException();
             }
         default:
+            assert false : "Should not reach this point";
         }
 
         return null;

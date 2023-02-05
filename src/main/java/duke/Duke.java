@@ -40,6 +40,7 @@ public class Duke {
                 return command.execute(taskList, uiText, storage);
             }
             storage.save(taskList);
+            assert false : "Should not reach this point";
             return null;
         } catch (DukeException e) {
             return e.toString();
