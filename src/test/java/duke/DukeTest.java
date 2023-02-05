@@ -14,11 +14,11 @@ import duke.ui.Ui;
 
 public class DukeTest {
 
-    private final ByteArrayInputStream  inDukeContent = new ByteArrayInputStream("bye".getBytes());
+    private final ByteArrayInputStream inDukeContent = new ByteArrayInputStream("bye".getBytes());
     private final ByteArrayOutputStream outDukeContent = new ByteArrayOutputStream();
     private final ByteArrayOutputStream outUiContent = new ByteArrayOutputStream();
-    Duke duke;
-    Ui ui;
+    private Duke duke;
+    private Ui ui;
 
     @BeforeEach
     void setUp() {
