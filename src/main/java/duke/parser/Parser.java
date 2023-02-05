@@ -64,12 +64,17 @@ public class Parser {
 
     /**
      * Function to process the user's request and get the response
-     * @return
+     * @return Command to be executed.
      */
     public Command processRequest() {
         String[] req = this.request.split(" ");
         String command = req[0];
         CommandType commandType = CommandType.findCommand(command);
+
+        if (commandType == null) {
+            throw new UnknownCommandException();
+        }
+
         switch (commandType) {
         case LIST:
             return new ListCommand();
