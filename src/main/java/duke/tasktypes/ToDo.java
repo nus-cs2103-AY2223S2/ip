@@ -7,6 +7,11 @@ import java.time.LocalDateTime;
  */
 public class ToDo extends Task {
 
+    /**
+     * Constructs an ToDo Task instance.
+     *
+     * @param description Description of task.
+     */
     public ToDo(String description) {
         super(description);
         this.when = LocalDateTime.MAX;

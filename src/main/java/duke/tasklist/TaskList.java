@@ -156,6 +156,12 @@ public class TaskList {
         return output;
     }
 
+    /**
+     * Returns String representation of tasks in Task collection.
+     * Prints all current tasks in collection ordered by deadline.
+     *
+     * @return String representation of tasks in Task collection.
+     */
     public String printTasksInOrder() {
         if (this.numTasks == 0) {
             return "There are no available tasks at the moment!\n";
