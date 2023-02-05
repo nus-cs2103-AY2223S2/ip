@@ -23,7 +23,37 @@ public class Parser {
     private String response;
 
     /**
-     * Constructor for Parser.Request class
+     * Enum for commands.
+     */
+    protected static enum CommandType {
+        BYE, DEADLINE, DELETE, EVENT, FIND, LIST, MARK, UNMARK, TODO;
+
+        /**
+         * Find command type of on user's input
+         * @param input User's input.
+         * @return Command type.
+         */
+        public static CommandType findCommand(String input) {
+            for (CommandType commandType : CommandType.values()) {
+                if (commandType.name().equalsIgnoreCase(input)) {
+                    return commandType;
+                }
+            }
+            return null;
+        }
+    }
+
+    /**
+     * Constructor for Parser class
+     * @param request request by the user
+     */
+    public Parser(String request) {
+            this.request = request;
+            this.tasks = new TaskList();
+    }
+
+    /**
+     * Constructor for Parser class
      * @param request request by the user
      * @param tasks duke.task array to store the tasks added by the user
      */
@@ -39,24 +69,25 @@ public class Parser {
     public Command processRequest() {
         String[] req = this.request.split(" ");
         String command = req[0];
-        switch (command) {
-        case "list":
+        CommandType commandType = CommandType.findCommand(command);
+        switch (commandType) {
+        case LIST:
             return new ListCommand();
-        case "mark":
+        case MARK:
             return new MarkCommand(this.request);
-        case "unmark":
+        case UNMARK:
             return new UnmarkCommand(this.request);
-        case "todo":
+        case TODO:
             return new AddTodoCommand(this.request);
-        case "deadline":
+        case DEADLINE:
             return new AddDeadlineCommand(this.request);
-        case "event":
+        case EVENT:
             return new AddEventCommand(this.request);
-        case "delete":
+        case DELETE:
             return new RemoveCommand(this.request);
-        case "find":
+        case FIND:
             return new FindCommand(this.request);
-        case "bye":
+        case BYE:
             return new ExitCommand();
         default:
             throw new UnknownCommandException();

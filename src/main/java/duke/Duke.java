@@ -70,6 +70,7 @@ public class Duke {
             return e.getMessage();
         }
     }
+
     /**
      * Function to handle the user's request
      */
