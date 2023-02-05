@@ -1,0 +1,10 @@
+deadline return book /by 2/12/2019 1800
+
+Hello! I'm Willy
+What can I do for you?
+[T][ ]todo borrow book
+Now you have 1 things in your list
+[D][ ]deadline return book  (by Sunday)
+Now you have 2 things in your list 
+[E][ ]event project meeting  (from Mon 2pm to 4pm)
+Now you have 3 things in your list 

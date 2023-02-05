@@ -30,6 +30,17 @@ public class Storage {
         }
     }
 
+    public Storage(String filePathGiven) {
+        // double check later
+        try {
+            relativeFilePath = new File(".").getCanonicalPath();
+            filePath = Paths.get(relativeFilePath, '/' + DATA_PATH);
+            Files.createDirectories(filePath.getParent());
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
+
     public List<Task> loadData() {
         List<Task> list = new ArrayList<>();
         try {

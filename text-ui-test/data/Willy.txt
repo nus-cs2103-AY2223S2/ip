@@ -1,5 +1,5 @@
-Hello! I'm Willy
-What can I do for you?
+[T][ ]todo borrow book
+[T][ ]todo borrow book
 [T][ ]todo borrow book
 [D][ ]deadline return book  (by Sunday)
 [E][ ]event project meeting  (from from Mon 2pm  to to 4pm)
