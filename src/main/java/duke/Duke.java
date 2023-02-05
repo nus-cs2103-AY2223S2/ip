@@ -35,9 +35,13 @@ public class Duke {
      *
      * @param filePath Location of saved data.
      */
-    public Duke(String filePath) {
+    public Duke(String... filePath) {
         ui = new Ui();
-        storage = new Storage(filePath);
+        if (filePath.length > 0) {
+            storage = new Storage(filePath[0]);
+        } else {
+            storage = new Storage("data/tasks.txt");
+        }
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
