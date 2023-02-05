@@ -1,6 +1,11 @@
 import java.util.Scanner;
 import java.util.Arrays;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import DukeHelpfulCode.*;
+
 
 
 public class Duke {
@@ -9,6 +14,17 @@ public class Duke {
     private static UserList USERLIST = new UserList();
 
     public static void main(String[] args) {
+        File save = new File("data/save.txt");
+        try {
+            if (save.createNewFile()) {
+                System.out.println("File created: " + save.getName());
+            } else {
+                System.out.println("File already exists.");
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
         greeting();
         takeCmd();
     }
@@ -153,14 +169,41 @@ public class Duke {
 
     private static void addTodo(Todo todo){
         USERLIST.addToDo(todo);
+        try {
+            FileWriter writer = new FileWriter("data/save.txt", true);
+            writer.write(todo.toString() + "\n");
+            writer.close();
+            System.out.println("Successfully wrote to the file.");
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
     }
 
     private static void addDeadline(Deadline dl){
         USERLIST.addDeadline(dl);
+        try {
+            FileWriter writer = new FileWriter("data/save.txt", true);
+            writer.write(dl.toString() + "\n");
+            writer.close();
+            System.out.println("Successfully wrote to the file.");
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
     }
 
     private static void addEvent(Event e){
         USERLIST.addEvent(e);
+        try {
+            FileWriter writer = new FileWriter("data/save.txt", true);
+            writer.write(e.toString() + "\n");
+            writer.close();
+            System.out.println("Successfully wrote to the file.");
+        } catch (IOException ex) {
+            System.out.println("An error occurred.");
+            ex.printStackTrace();
+        }
     }
 
     private static void list(){
