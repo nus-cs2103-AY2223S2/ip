@@ -31,22 +31,22 @@ public class Storage {
     public static TaskList loadData() throws IOException {
         TaskList list = new TaskList();
         if (!dataFolder.exists()) {
-            System.out.println("---The default duke.task.Task Folder is not found, creating data folder...");
+            System.out.println("The data folder is not found, creating new data folder");
             dataFolder.mkdir();
-            System.out.println("---Task Folder created successfully");
+            System.out.println("Folder created successfully");
             File f = new File(dataFolder, "task.txt");
             try {
                 f.createNewFile();
-                System.out.printf("---Task File created successfully\n---ready to create tasks\n");
+                System.out.printf("file created successfully\n");
             } catch (IOException e) {
                 throw new DukeException("Error creating file: " + e.getMessage());
             }
         } else if(!data.exists()) {
-            System.out.println("The default tasks do not exist, creating default task file...");
+            System.out.println("file does not exist, creating new file");
             File f = new File(dataFolder, "duke.txt");
             try {
                 f.createNewFile();
-                System.out.printf("---Task File created successfully\n---ready to create tasks\n");
+                System.out.printf("file create successfully");
             } catch (IOException e) {
                 throw new DukeException("Error creating file: " + e.getMessage());
             }
