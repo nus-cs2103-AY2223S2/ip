@@ -37,7 +37,9 @@ public class TaskList {
      */
     public void loadTask(Task task) {
         this.taskStorage.add(task);
+        int originalNumTasks = this.numTasks;
         numTasks++;
+        assert (originalNumTasks + 1) == this.numTasks : "Number of tasks mismatch!";
     }
 
     /**
@@ -50,7 +52,9 @@ public class TaskList {
      */
     public String addTask(Task task) {
         this.taskStorage.add(task);
+        int originalNumTasks = this.numTasks;
         numTasks++;
+        assert (originalNumTasks + 1) == this.numTasks : "Number of tasks mismatch!";
         return ui.taskAdd(task, numTasks);
     }
 
@@ -74,7 +78,9 @@ public class TaskList {
             throw new DukeException("Task does not exist! Please enter valid Task ID!");
         } else {
             taskStorage.remove(deleteTask);
+            int originalNumTasks = this.numTasks;
             numTasks--;
+            assert (originalNumTasks - 1) == this.numTasks : "Number of tasks mismatch!";
             return ui.taskDelete(deleteTask, numTasks);
         }
     }
@@ -143,6 +149,7 @@ public class TaskList {
         for (Task task : taskStorage) {
             output += String.format("%d.%s", count++, task.toString()) + "\n";
         }
+        assert count == this.numTasks : "Number of tasks printed mismatch.";
         return output;
     }
 
@@ -159,6 +166,8 @@ public class TaskList {
                 matchTasks.loadTask(task);
             }
         }
+        assert matchTasks.numTasks <= this.numTasks
+                : "Number of matching tasks cannot exceed number of existing tasks";
         return matchTasks;
     }
 
