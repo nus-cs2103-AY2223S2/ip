@@ -74,6 +74,7 @@ public class Storage {
      * @throws IOException If no such text file is found.
      */
     public void writeToFile(List<Task> storage, String filePath) throws IOException {
+        assert filePath != "" : "File Path should not be empty!";
         FileWriter fw = new FileWriter(filePath);
         for (Task element : storage) {
             String mark = "0";
@@ -104,6 +105,7 @@ public class Storage {
      * @throws FileNotFoundException If file not found.
      */
     public List<Task> readAddFileContents(String filePath) throws FileNotFoundException {
+        assert filePath != "" : "File Path should not be empty!";
         File f = new File(filePath);
         List<Task> storage = new ArrayList<>();
         Scanner fileScanner = new Scanner(f);

@@ -42,6 +42,7 @@ public class Duke {
      * @param filepath The file path for the data stored in the txt file.
      */
     public Duke(String filepath) {
+        assert filepath != "" : "File path should not be empty";
         ui = new Ui();
         storage = new Storage(filepath);
         if (!isFind) {
