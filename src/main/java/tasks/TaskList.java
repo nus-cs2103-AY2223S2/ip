@@ -63,9 +63,7 @@ public class TaskList {
         TaskList filteredTasks = new TaskList();
         this.taskList.stream()
                 .filter(x-> x.toString().trim().contains(keyword))
-                .forEach(x -> {
-                    filteredTasks.addTaskSilent(x);
-                });
+                .forEach(filteredTasks::addTaskSilent);
         if (filteredTasks.getSize() == 0) {
             System.out.println("Empty the Jedi Archives are, the task you seek");
         } else {
