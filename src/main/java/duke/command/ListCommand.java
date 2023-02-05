@@ -68,11 +68,15 @@ public class ListCommand extends Command {
                 return filterDate.map(x -> {
                     if (task instanceof Deadline) {
                         Deadline d = (Deadline) task;
-                        return d.getBy().toLocalDate().equals(x.toLocalDate());
+                        if (d.getBy().toLocalDate().equals(x.toLocalDate())) {
+                            return true;
+                        }
                     }
                     if (task instanceof Event) {
                         Event e = (Event) task;
-                        return e.getFrom().toLocalDate().equals(x.toLocalDate());
+                        if (e.getFrom().toLocalDate().equals(x.toLocalDate())) {
+                            return true;
+                        }
                     }
                     return false;
                 }).orElse(true);
@@ -133,11 +137,15 @@ public class ListCommand extends Command {
         return db.getAllTask().stream().filter(task -> {
             if (task instanceof Deadline) {
                 Deadline d = (Deadline) task;
-                return d.getBy().toLocalDate().equals(date.toLocalDate());
+                if (d.getBy().toLocalDate().equals(date.toLocalDate())) {
+                    return true;
+                }
             }
             if (task instanceof Event) {
                 Event e = (Event) task;
-                return e.getFrom().toLocalDate().equals(date.toLocalDate());
+                if (e.getFrom().toLocalDate().equals(date.toLocalDate())) {
+                    return true;
+                }
             }
             return false;
         }).collect(Collectors.toList());
