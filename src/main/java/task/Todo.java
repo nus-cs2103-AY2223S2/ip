@@ -2,11 +2,17 @@ package task;
 
 import java.time.LocalDate;
 
+/**
+ * Todo task
+ */
 public class Todo extends Task {
     private Todo(String desc, boolean done) {
         super(desc, done);
     }
 
+    /**
+     * @param desc Task description
+     */
     public Todo(String desc) {
         this(desc, false);
     }
@@ -16,16 +22,25 @@ public class Todo extends Task {
         return "[T]" + super.toString();
     }
 
+    /**
+     * {@inheritDoc}}
+     */
     @Override
     public boolean hasDate(LocalDate date) {
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Todo markDone() {
         return new Todo(this.desc, true);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Todo markNotDone() {
         return new Todo(this.desc, false);
