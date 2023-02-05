@@ -38,6 +38,7 @@ public class Duke {
         deadline,
         event,
         delete,
+        tag,
         find,
         originalList
     }
@@ -97,6 +98,9 @@ public class Duke {
                 break;
             case delete:
                 dukeText += deleteCommand(ui, storage, userParse);
+                break;
+            case tag:
+                dukeText += addTagCommand(ui, storage, userParse);
                 break;
             case find:
                 dukeText += findCommand(ui, userParse);
@@ -195,7 +199,7 @@ public class Duke {
      */
     public static String markCommand(Ui ui, Parser userParse, Storage storage) throws DukeException {
         String message = "";
-        int userIndex = Integer.parseInt(userParse.inputArr[1]) - 1;
+        int userIndex = userParse.checkValidIndex(userParse.inputArr[1]) - 1;
 
         if (!isDisplayList) {
             isDisplayList = true;
@@ -208,7 +212,6 @@ public class Duke {
                 if (marked.tasksList.get(userIndex)
                         == tasks.tasksList.get(i)) {
                     tasks.tasksList.get(i).mark();
-                    System.out.println("test");
                 }
             }
         } else {
@@ -229,7 +232,7 @@ public class Duke {
      */
     public static String unmarkCommand(Ui ui, Parser userParse, Storage storage) throws DukeException {
         String message = "";
-        int userIndex = Integer.parseInt(userParse.inputArr[1]) - 1;
+        int userIndex = userParse.checkValidIndex(userParse.inputArr[1]) - 1;
 
         if (!isDisplayList) {
             isDisplayList = true;
@@ -395,6 +398,39 @@ public class Duke {
         tempTasks = new TaskList(tasks);
         message += "Here are the list of tasks:\n";
         message += ui.list(tasks);
+        storage.write(tasks);
+        return message;
+    }
+
+    /**
+     * Returns the tag message for the command tag.
+     *
+     * @param ui The UI for the program.
+     * @param storage The storage for the program.
+     * @param userParse The user input.
+     * @return The string of the tag message after tagging.
+     * @throws DukeException if there is an invalid command index
+     */
+    public static String addTagCommand(Ui ui, Storage storage, Parser userParse) throws DukeException {
+        String message = "";
+        int userIndex = userParse.checkValidIndex(userParse.inputArr[1]) - 1;
+
+        if (!isDisplayList) {
+            isDisplayList = true;
+            ui.noListError(tasks);
+        }
+        if (isFind) {
+            TaskList marked = tempTasks.tag(userParse);
+            message += ui.tagDisplay(marked, userParse);
+            for (int i = 0; i < tasks.tasksCounter; i++) {
+                if (marked.tasksList.get(userIndex)
+                        == tasks.tasksList.get(i)) {
+                    tasks.tasksList.get(i).addTag(marked.tasksList.get(userIndex));
+                }
+            }
+        } else {
+            message += ui.tagDisplay(tasks.tag(userParse), userParse);
+        }
         storage.write(tasks);
         return message;
     }

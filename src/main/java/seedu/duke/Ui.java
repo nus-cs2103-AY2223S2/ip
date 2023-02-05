@@ -178,4 +178,17 @@ public class Ui {
         message += "Enter your command again. :)\n";
         throw new DukeException(message);
     }
+
+    /**
+     * Returns the tag message for the display.
+     *
+     * @param tasks The list of tasks.
+     * @param userParse The user input.
+     * @return The tag message for the display.
+     */
+    public String tagDisplay(TaskList tasks, Parser userParse) {
+        String uiText = "Nice! I've tagged this task:\n";
+        uiText += tasks.tasksList.get(Integer.parseInt(userParse.inputArr[1]) - 1).toString() + "\n";
+        return uiText;
+    }
 }

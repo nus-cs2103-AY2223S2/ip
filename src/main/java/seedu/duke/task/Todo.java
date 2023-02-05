@@ -5,6 +5,8 @@
 
 package seedu.duke.task;
 
+import java.util.stream.Collectors;
+
 /**
  * Represents a todo task. A <code>Todo</code> object corresponds to a
  * description by a string.
@@ -28,6 +30,11 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
-        return "[T] " + super.toString();
+        String message = "[T] " + super.toString();
+        if (tags.size() != 0) {
+            message += "\n";
+            message += "#" + tags.stream().collect(Collectors.joining(" "));
+        }
+        return message;
     }
 }

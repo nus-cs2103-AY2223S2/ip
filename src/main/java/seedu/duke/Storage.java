@@ -76,20 +76,29 @@ public class Storage {
     public void writeToFile(List<Task> storage, String filePath) throws IOException {
         assert filePath != "" : "File Path should not be empty!";
         FileWriter fw = new FileWriter(filePath);
+        String tagsString = "";
+
         for (Task element : storage) {
             String mark = "0";
             if (element.getStatusIcon().equals("X")) {
                 mark = "1";
             }
+            if (element.getTags().size() != 0) {
+                for (String curr : element.getTags()) {
+                    tagsString += " | " + curr;
+                }
+            }
             if (element instanceof Todo) {
-                fw.write("T | " + mark + " | " + element.getDescription());
+                fw.write("T | " + mark + " | " + element.getDescription() + tagsString);
             }
             if (element instanceof Deadline) {
-                fw.write("D | " + mark + " | " + element.getDescription() + " | " + ((Deadline) element).getBy());
+                fw.write("D | " + mark + " | " + element.getDescription() + " | " + ((Deadline) element).getBy()
+                        + tagsString);
             }
             if (element instanceof Event) {
                 fw.write("E | " + mark + " | " + element.getDescription() + " | "
-                        + ((Event) element).getFrom() + " | " + ((Event) element).getTo());
+                        + ((Event) element).getFrom() + " | " + ((Event) element).getTo()
+                        + tagsString);
             }
             fw.write(System.lineSeparator());
         }
@@ -120,17 +129,32 @@ public class Storage {
                 if (mark) {
                     t.mark();
                 }
+                if (currArray.length > 3) {
+                    for (int i = 3; i < currArray.length; i++) {
+                        t.addTag(currArray[i].trim());
+                    }
+                }
                 storage.add(t);
             } else if (currArray[0].trim().equals("D")) {
                 Deadline d = new Deadline(currArray[2], currArray[3]);
                 if (mark) {
                     d.mark();
                 }
+                if (currArray.length > 3) {
+                    for (int i = 3; i < currArray.length; i++) {
+                        d.addTag(currArray[i].trim());
+                    }
+                }
                 storage.add(d);
             } else {
                 Event e = new Event(currArray[2], currArray[3], currArray[4]);
                 if (mark) {
                     e.mark();
+                }
+                if (currArray.length > 3) {
+                    for (int i = 3; i < currArray.length; i++) {
+                        e.addTag(currArray[i].trim());
+                    }
                 }
                 storage.add(e);
             }

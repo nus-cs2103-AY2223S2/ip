@@ -7,6 +7,7 @@ package seedu.duke.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.stream.Collectors;
 
 /**
  * Represents a deadline task. A <code>Deadline</code> object corresponds to a
@@ -44,7 +45,12 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D] " + super.toString() + " (by: "
+        String message = "[D] " + super.toString() + " (by: "
                 + by.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + " )";
+        if (tags.size() != 0) {
+            message += "\n";
+            message += "#" + tags.stream().collect(Collectors.joining(" "));
+        }
+        return message;
     }
 }

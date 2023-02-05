@@ -5,6 +5,8 @@
 
 package seedu.duke.task;
 
+import java.util.stream.Collectors;
+
 /**
  * Represents an event task. An <code>Event</code> object corresponds to a
  * description and deadline (from and to) by three strings.
@@ -52,7 +54,12 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E] " + super.toString()
+        String message = "[E] " + super.toString()
                 + " (from: " + from + " to: " + to + " )";
+        if (tags.size() != 0) {
+            message += "\n";
+            message += "#" + tags.stream().collect(Collectors.joining(" "));
+        }
+        return message;
     }
 }
