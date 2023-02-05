@@ -32,7 +32,7 @@ public class StringUtils {
      * @return new string array with no blanks or whitespaces
      */
     public static String[] removeWhiteSpace(String[] array) {
-        return Arrays.stream(array).filter(x -> !x.equals(" ") && !x.equals("")).toArray(String[]::new);
+        return Arrays.stream(array).filter(x -> !x.isBlank()).toArray(String[]::new);
     }
 
     /**
