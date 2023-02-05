@@ -1,0 +1,4 @@
+[T][ ]todo book
+[T][ ]todo borrow
+[D][ ]deadline return book (Sunday)
+[D][X]deadline return book  (due on 2019-12-02 at 18:00)
