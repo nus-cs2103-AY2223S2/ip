@@ -40,6 +40,11 @@ public abstract class Task {
         isDone = value;
     }
 
+    /**
+     * Returns true if this task's description contains the keyword, false otherwise.
+     * @param keyword A keyword, which can contain spaces.
+     * @return True if if this task's description contains the keyword, false otherwise.
+     */
     public boolean matchesKeyword(String keyword) {
         return description.contains(keyword);
     }

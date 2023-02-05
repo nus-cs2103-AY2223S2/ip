@@ -57,6 +57,12 @@ public class TaskList {
         return list.get(getIndexFromNumber(number)).toString();
     }
 
+    /**
+     * Returns a task list that contains the tasks in this task list which matches
+     *      the given keyword.
+     * @param keyword A keyword, which can contain spaces.
+     * @return A task list containing the matching tasks.
+     */
     public TaskList getMatchingTasks(String keyword) {
         TaskList matchingTasks = new TaskList();
         for (Task task : list) {
