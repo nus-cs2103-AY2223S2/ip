@@ -25,10 +25,11 @@ public class FindCommand extends Command {
      * @param tasks   to be modified
      * @param ui      to display changes
      * @param storage to interact with as necessary
+     * @return Response string.
      * @throws DukeException
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        ui.showMatchingTasks(tasks.filterTasks(this.findString));
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        return ui.showMatchingTasks(tasks.filterTasks(this.findString));
     }
 }

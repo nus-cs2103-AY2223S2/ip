@@ -1,7 +1,6 @@
 package duke.ui;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import duke.data.TaskList;
 import duke.data.task.Task;
@@ -12,79 +11,52 @@ import duke.data.task.Task;
  */
 public class Ui {
 
-    private static final String LOGO = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
-
-    private static final String DIVIDER = "----------------------------------------------------";
-
-    private Scanner sc;
-
-    /**
-     * Constructor for Ui.
-     */
-    public Ui() {
-        this.sc = new Scanner(System.in);
-    }
-
-    /**
-     * Reads the next command from input.
-     *
-     * @return String of command.
-     */
-    public String readCommand() {
-        String cmd = sc.nextLine();
-        return cmd;
-    }
-
     /**
      * Display to user task count.
      *
      * @param size Number of tasks.
+     * @return Show task count string.
      */
-    public void showTaskCount(int size) {
-        System.out.println("There are now " + Integer.toString(size) + " task(s) in the list.");
+    public String showTaskCount(int size) {
+        return "There are now " + Integer.toString(size) + " task(s) in the list.";
     }
 
     /**
      * Displays to user the task added.
      *
      * @param task Task to be added.
+     * @return Add task string.
      */
-    public void showAddTask(Task task) {
-        System.out.println("Understood. I have added the task:\n" + task.toString());
+    public String showAddTask(Task task) {
+        return "Understood. I have added the task:\n" + task.toString();
     }
 
     /**
      * Displays to user the task deleted.
      *
      * @param task Task to be deleted.
+     * @return Delete task string.
      */
-    public void showDeleteTask(Task task) {
-        System.out.println("Noted. I have removed the task:\n" + task.toString());
-    }
-
-    /**
-     * Displays to user that tasks have been saved.
-     */
-    public void showSavedTasks() {
-        System.out.println("Tasks have been saved.");
+    public String showDeleteTask(Task task) {
+        return "Noted. I have removed the task:\n" + task.toString();
     }
 
     /**
      * Displays all tasks in TaskList.
      *
      * @param tasks TaskList containing tasks to be displayed.
+     * @return All tasks string.
      */
-    public void showAllTasks(TaskList tasks) {
+    public String showAllTasks(TaskList tasks) {
+
         if (tasks.isEmpty()) {
-            System.out.println("No tasks added yet.");
+            return "No tasks added yet.";
         } else {
+            String str = "";
             for (int i = 0; i < tasks.size(); i++) {
-                System.out.println((i + 1) + ". " + tasks.get(i).toString());
+                str += (i + 1) + ". " + tasks.get(i).toString() + "\n";
             }
+            return str;
         }
     }
 
@@ -92,15 +64,17 @@ public class Ui {
      * Displays tasks that contains a string.
      *
      * @param taskArray Array containing the tasks that contain the string.
+     * @return Found tasks string.
      */
-    public void showMatchingTasks(ArrayList<Task> taskArray) {
+    public String showMatchingTasks(ArrayList<Task> taskArray) {
         if (taskArray.size() == 0) {
-            System.out.println("No tasks found.");
+            return "No tasks found.";
         } else {
-            System.out.println("These are the tasks I have found:");
+            String str = "These are the tasks I have found:";
             for (int i = 0; i < taskArray.size(); i++) {
-                System.out.println((i + 1) + ". " + taskArray.get(i).toString());
+                str += (i + 1) + ". " + taskArray.get(i).toString() + "\n";
             }
+            return str;
         }
     }
 
@@ -108,36 +82,30 @@ public class Ui {
      * Displays task marked.
      *
      * @param task Task to be marked.
+     * @return Mark string.
      */
-    public void showMarked(Task task) {
-        System.out.println(task.outputMarked() + task.toString());
+    public String showMarked(Task task) {
+        return task.outputMarked() + task.toString();
     }
 
     /**
      * Displays task unmarked.
      *
      * @param task Task to be unmarked.
+     * @return Unmark string.
      */
-    public void showUnmarked(Task task) {
-        System.out.println(task.outputUnmarked() + task.toString());
+    public String showUnmarked(Task task) {
+        return task.outputUnmarked() + task.toString();
     }
 
-    /**
-     * Displays welcome message.
-     */
-    public void showWelcome() {
-        showLine();
-        System.out.println(LOGO + "Hello! I'm Duke. How may I be of assistance?\n");
-        showLine();
-    }
 
     /**
      * Displays goodbye message.
+     *
+     * @return Goodbye string.
      */
-    public void showGoodbye() {
-        showLine();
-        System.out.println("Thank you for your patronage. Goodbye!\n");
-        showLine();
+    public String showGoodbye() {
+        return "Tasks saved. Thank you for your patronage. Goodbye!";
     }
 
     /**
@@ -147,13 +115,6 @@ public class Ui {
      */
     public void showError(String error) {
         System.out.println("Error: " + error);
-    }
-
-    /**
-     * Displays divider line.
-     */
-    public void showLine() {
-        System.out.println(DIVIDER);
     }
 
 }
