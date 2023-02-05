@@ -2,12 +2,6 @@ package duke;
 
 import java.io.IOException;
 
-import duke.DukeException;
-import duke.Parser;
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
-
 /**
  * Represents the main Duke class.
  */
@@ -16,8 +10,8 @@ public class Duke {
     private static final String SAVE_PATH = "./taskList.txt";
     private Storage storage;
     private TaskList taskList;
-    private Ui ui = new Ui();
-    private Parser parser = new Parser();
+    private static final Ui UI = new Ui();
+    private static final Parser PARSER = new Parser();
 
     /**
      * Constructor for a Duke object.
@@ -38,21 +32,21 @@ public class Duke {
     }
 
     public void run() throws IOException, DukeException{
-        ui.start();
-        String[] input = ui.readLine();
+        UI.start();
+        String[] input = UI.readLine();
         while (!input[0].equals("bye")) {
             try {
-                ui.displayLine();
-                parser.readInput(input, taskList);
-                ui.displayLine();
-                input = ui.readLine();
+                UI.displayLine();
+                PARSER.readInput(input, taskList);
+                UI.displayLine();
+                input = UI.readLine();
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
-                ui.displayLine();
-                input = ui.readLine();
+                UI.displayLine();
+                input = UI.readLine();
             }
         }
-        ui.goodbye();
+        UI.goodbye();
         storage.storeData(this.taskList.getTasks());
     }
 }

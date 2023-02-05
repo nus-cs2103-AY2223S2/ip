@@ -7,15 +7,11 @@ public class Todo extends Task {
 
     @Override
     public String getFileDesc() {
-        return this.isDone
-        ? "T|1|" + this.name
-        : "T|0|" + this.name;
+        return "T|" + super.getFileDesc();
     }
 
     @Override
     public String toString() {
-        return this.isDone
-                ? "[T][X] " + this.name
-                : "[T][ ] " + this.name;
+        return "[T]" + super.toString();
     }
 }

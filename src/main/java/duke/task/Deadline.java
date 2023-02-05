@@ -11,15 +11,11 @@ public class Deadline extends Task {
 
     @Override
     public String getFileDesc() {
-        return this.isDone
-        ? "D|1|" + this.name + "|" + convertFileDate(this.deadline)
-        : "D|0|" + this.name + "|" + convertFileDate(this.deadline);
+        return "D|" + super.getFileDesc() + "|" + convertFileDate(this.deadline);
     }
 
     @Override
     public String toString() {
-        return this.isDone
-                ? "[D][X] " + this.name + " (by: " + getDate(this.deadline) + ")"
-                : "[D][ ] " + this.name + " (by: " + getDate(this.deadline) + ")";
+        return "[D]" + super.toString() + " (by: " + getDate(this.deadline) + ")";
     }
 }
