@@ -98,13 +98,11 @@ public class DaySchedule extends HBox {
         Pane pane = createRow();
 
         for (ScheduleTimeable timeable : timeables) {
-            double startX = (startTime.until(timeable.getStart(), ChronoUnit.MINUTES) / MINUTES_IN_A_DAY)
-                    * ROW_WIDTH;
-            startX = Math.max(0, (int) startX);
+            double startOffset = startTime.until(timeable.getStart(), ChronoUnit.MINUTES);
+            double startX = convertMinsToRowPix(startOffset);
 
             double durationMins = timeable.duration() / MICRO_IN_MINUTE;
-            double dayFrac = Math.min(durationMins / MINUTES_IN_A_DAY, 1D);
-            double width = dayFrac * ROW_WIDTH;
+            double width = convertMinsToRowPix(durationMins);
 
             if (width <= MIN_WIDTH_PIXS) {
                 startX -= MIN_WIDTH_PIXS / 2;
@@ -131,6 +129,13 @@ public class DaySchedule extends HBox {
         }
 
         return canvas;
+    }
+
+
+    private double convertMinsToRowPix(double mins) {
+        double dayFrac = mins / MINUTES_IN_A_DAY;
+        dayFrac = Math.min(Math.max(0D, dayFrac), 1D);
+        return dayFrac * ROW_WIDTH;
     }
 
 
