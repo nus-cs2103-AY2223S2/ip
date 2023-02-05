@@ -23,7 +23,8 @@ public class Deadline extends Task {
     public String summary() {
         String s = "D___";
         String d = this.getDone() ? "✓" : " X";
-        return s + d + "___" + this.getTask() + "___" + this.getDate();
+        String p = this.getPriority() + "___";
+        return s + d + "___" + p + this.getTask() + "___" + this.getDate();
     }
 
     @Override

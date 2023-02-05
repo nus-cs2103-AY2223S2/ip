@@ -79,4 +79,10 @@ public class TaskList extends ArrayList<Task> {
     public Task delete(int index) {
         return this.remove(index - 1);
     }
+
+    public Task markPriority(int index, int p) {
+        Task t = this.get(index - 1);
+        t.markPriority(p);
+        return t;
+    }
 }

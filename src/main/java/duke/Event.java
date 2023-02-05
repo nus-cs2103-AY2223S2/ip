@@ -31,7 +31,8 @@ public class Event extends Task {
     public String summary() {
         String s = "E___";
         String d = this.getDone() ? "✓" : "X";
-        return s + d + "___" + this.getTask() + "___" + this.getDate1() + "___" + this.getDate2();
+        String p = this.getPriority() + "___";
+        return s + d + "___" + p + this.getTask() + "___" + this.getDate1() + "___" + this.getDate2();
     }
 
     @Override

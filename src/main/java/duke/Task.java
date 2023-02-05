@@ -8,10 +8,13 @@ package duke;
 public abstract class Task {
     private boolean done;
     private String task;
+    private int priority; // 0 = High, 1 = Normal, 2 = Low priority.
+    public static final String[] arr = new String[] {"High", "Normal", "Low"};
 
     public Task(String name, boolean done) {
         this.done = done;
         this.task = name;
+        this.priority = 2;
     }
 
     public void mark() {
@@ -20,6 +23,14 @@ public abstract class Task {
 
     public void unmark() {
         this.done = false;
+    }
+
+    public void markPriority(int prio) {
+        this.priority = prio;
+    }
+
+    public String getPriority() {
+        return arr[this.priority];
     }
 
     public boolean getDone() {
@@ -41,6 +52,6 @@ public abstract class Task {
     @Override
     public String toString() {
         String checkmark = this.done ? "X" : " ";
-        return String.format("[ %s ] %s", checkmark, this.task);
+        return String.format("[ %s ] %s priority: %s", checkmark, this.task, this.arr[this.priority]);
     }
 }

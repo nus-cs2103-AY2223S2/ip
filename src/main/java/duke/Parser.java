@@ -49,7 +49,7 @@ public class Parser {
             }
             return Ui.printMark(taskList, i);
         } else if (input.contains("delete")) {
-            assert(input.length() == 8);
+            //assert(input.length() == 8);
             int i = Integer.parseInt(input.substring(7, 8));;
             try {
                 FileReadWrite.writeDelete(i);
@@ -63,16 +63,26 @@ public class Parser {
             return Ui.printFindList(taskList, keyword);
         } else if (input.equals("list")) {
             return Ui.printListCommand(taskList);
+        } else if (input.contains("priority")) {
+            int index = Integer.parseInt(input.substring(9, 10));
+            int p = Integer.parseInt(input.substring(11, 12));
+            Task t = taskList.markPriority(index, p);
+            try {
+                FileReadWrite.writePriority(index, t, p);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return Ui.printMarkPriority(taskList, index, p);
         } else {
             try {
                 Task newTask = createTask(input);
                 taskList.add(newTask);
+                this.size++;
                 try {
                     FileReadWrite.writeTask(taskList);
-                    } catch (IOException e) {
+                } catch (IOException e) {
                     e.printStackTrace();
-                    }
-                this.size++;
+                }
                 return Ui.printAddTask(newTask, size);
             } catch (EmptyArgException e) {
                 return Ui.emptyError();

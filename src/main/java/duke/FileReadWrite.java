@@ -29,27 +29,34 @@ public abstract class FileReadWrite {
         if (!file.exists()) {
             file.mkdir();
         }
-        assert (file.exists());
         Scanner scanner = new Scanner(file);
         while (scanner.hasNext()) {
             String nextLine = scanner.nextLine();
             String[] arr = nextLine.split("___", 5);
             String taskType = arr[0];
             String done = arr[1];
-            String description = arr[2];
+            String prio = arr[2];
+            int p = prio.equals("High") ? 0
+                    : (prio.equals("Normal")
+                    ? 1
+                    : 2);
+            String description = arr[3];
             Task nextTask;
             if (taskType.equals("T")) {
                 boolean d = done.equals("✓") ? true : false;
                 nextTask = new Todo(description, d);
+                nextTask.markPriority(p);
             } else if (taskType.equals("D")) {
                 boolean d = done.equals("✓") ? true : false;
                 String date = arr[3];
                 nextTask = new Deadline(description, d, date);
+                nextTask.markPriority(p);
             } else {
                 String date1 = arr[3];
                 String date2 = arr[4];
                 boolean d = done.equals("✓") ? true : false;
                 nextTask = new Event(description, d, date1, date2);
+                nextTask.markPriority(p);
             }
             taskList.add(nextTask);
         }
@@ -131,6 +138,23 @@ public abstract class FileReadWrite {
         }
         lines.remove(i - 1);
 
+        FileWriter fileWriter = new FileWriter(FILE_PATH);
+        for (String s : lines) {
+            fileWriter.write(s + "\n");
+        }
+        fileWriter.close();
+    }
+
+    public static void writePriority(int i, Task t, int p) throws IOException {
+        File file = new File(FILE_PATH);
+        Scanner scanner = new Scanner(file);
+        ArrayList<String> lines = new ArrayList<>();
+        while (scanner.hasNext()) {
+            lines.add(scanner.nextLine());
+        }
+        lines.remove(i - 1);
+        t.markPriority(p);
+        lines.add(i - 1, t.summary());
         FileWriter fileWriter = new FileWriter(FILE_PATH);
         for (String s : lines) {
             fileWriter.write(s + "\n");

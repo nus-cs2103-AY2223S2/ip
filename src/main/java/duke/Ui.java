@@ -101,7 +101,7 @@ public class Ui {
     public static String printAddTask(Task task, int size) {
         String s = "Roger! I've added this task to the list:\n";
         s = s + task + "\n";
-        s = s + String.format("Now you have %d tasks left in the list", size);
+        s = s + String.format("Now you have %d tasks left in the list\n", size);
         return s;
     }
 
@@ -109,7 +109,13 @@ public class Ui {
 
     public static String printFindList(TaskList taskList, String input) {
         String s = "Here are the matching tasks in your list";
-        return s + taskList.findList(input);
+        return s + taskList.findList(input) + "\n";
+    }
+
+    public static String printMarkPriority(TaskList taskList, int index, int p) {
+        String s = "This task has now been marked as ";
+        String prio = Task.arr[p] + " priority! \n";
+        return s + prio + taskList.get(index - 1);
     }
 
 }

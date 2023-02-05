@@ -20,7 +20,8 @@ public class Todo extends Task {
     public String summary() {
         String s = "T___";
         String d = this.getDone() ? "✓" : "X";
-        return s + d + "___" + this.getTask();
+        String p = this.getPriority() + "___";
+        return s + d + "___" + p + this.getTask();
     }
 
 }
