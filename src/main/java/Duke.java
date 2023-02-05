@@ -19,7 +19,6 @@ public class Duke {
         }
 
         Scanner scan = new Scanner(System.in);
-        taskList = new ArrayList<>();
 
 
         String logo = " ____        _\n"
@@ -94,10 +93,10 @@ public class Duke {
             if (oneTaskString[0].equals("T")) {
                 tempTask = new Todo(oneTaskString[2]);
             } else if (oneTaskString[0].equals("D")) {
-                LocalDateTime tempDateTime = LocalDateTime.parse(oneTaskString[3]);
+                LocalDateTime tempDateTime = LocalDateTime.parse(oneTaskString[3].replace("/", "-"));
                 tempTask = new Deadline(oneTaskString[2], tempDateTime);
             } else if (oneTaskString[0].equals("E")) {
-                String[] dateSplit = oneTaskString[3].split("-");
+                String[] dateSplit = oneTaskString[3].split(">");
                 LocalDateTime startDateTime = LocalDateTime.parse(dateSplit[0]);
                 LocalDateTime endDateTime = LocalDateTime.parse(dateSplit[1]);
                 tempTask = new Event(oneTaskString[2], startDateTime, endDateTime);
@@ -108,6 +107,7 @@ public class Duke {
                 }
                 taskList.add(tempTask);
             }
+
         } // end of while-loop
 
 
@@ -240,7 +240,7 @@ public class Duke {
 
             Event tempEvent = new Event(eventString[0], startDate, endDate);
             String saveString = "E | 0 | " + tempEvent.getDescription() + " | "
-                    + tempEvent.getFromDate() + "-" + tempEvent.getToDate();
+                    + tempEvent.getFromDate() + ">" + tempEvent.getToDate();
             saveToFile(saveString);
 
             taskList.add(tempEvent);

@@ -23,7 +23,7 @@ public class Event extends Task {
     public String toString() {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm");
         String start = from.format(format);
-        String end = from.format(format);
+        String end = to.format(format);
         return "[E]" + super.toString() + " (from: " + start + " to: " + end + ")";
     }
 }

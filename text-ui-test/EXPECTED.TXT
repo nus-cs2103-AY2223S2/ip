@@ -15,12 +15,12 @@ Now you have 1 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
- [D][ ] return book (by: June 6th)
+ [D][ ] return book (by: 06 Aug 2023 00:00)
 Now you have 2 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
- [E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
+ [E][ ] project meeting (from: 06 Aug 2023 14:00 to: 06 Aug 2023 16:00)
 Now you have 3 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
@@ -44,19 +44,19 @@ ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
 1. [T][X] read book
-2. [D][ ] return book (by: June 6th)
-3. [E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
+2. [D][ ] return book (by: 06 Aug 2023 00:00)
+3. [E][ ] project meeting (from: 06 Aug 2023 14:00 to: 06 Aug 2023 16:00)
 4. [T][X] join sports club
 5. [T][ ] borrow book
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
- [D][ ] return book (by: Sunday)
+ [D][ ] return book (by: 05 Feb 2023 12:00)
 Now you have 6 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
- [E][ ] project meeting (from: Mon 2pm to: 4pm)
+ [E][ ] project meeting (from: 06 Feb 2023 14:00 to: 06 Feb 2023 16:00)
 Now you have 7 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
@@ -66,12 +66,12 @@ Now you have 6 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Noted. I've removed this task:
- [D][ ] return book (by: June 6th)
+ [D][ ] return book (by: 06 Aug 2023 00:00)
 Now you have 5 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Noted. I've removed this task:
- [E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
+ [E][ ] project meeting (from: 06 Aug 2023 14:00 to: 06 Aug 2023 16:00)
 Now you have 4 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
@@ -86,12 +86,12 @@ Now you have 2 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Noted. I've removed this task:
- [D][ ] return book (by: Sunday)
+ [D][ ] return book (by: 05 Feb 2023 12:00)
 Now you have 1 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Noted. I've removed this task:
- [E][ ] project meeting (from: Mon 2pm to: 4pm)
+ [E][ ] project meeting (from: 06 Feb 2023 14:00 to: 06 Feb 2023 16:00)
 Now you have 0 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
