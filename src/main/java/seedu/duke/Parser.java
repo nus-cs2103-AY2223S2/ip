@@ -103,4 +103,20 @@ public class Parser {
         }
         return temp.trim();
     }
+
+    /**
+     * Check if the Index is valid.
+     *
+     * @param userIndex The user index input for the command.
+     * @return The valid index input
+     * @throws DukeException if the index input is not a number.
+     */
+    public int checkValidIndex(String userIndex) throws DukeException {
+        try {
+            int index = Integer.parseInt(userIndex);
+            return index;
+        } catch (NumberFormatException e) {
+            throw new DukeException("Index should be a number!");
+        }
+    }
 }

@@ -5,6 +5,9 @@
 
 package seedu.duke.task;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Represents a task. A <code>Task</code> object corresponds to a
  * description by a string.
@@ -13,6 +16,7 @@ package seedu.duke.task;
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected List<String> tags;
 
     /**
      * Constructor for the class Task.
@@ -22,6 +26,7 @@ public class Task {
     public Task(String description) {
         this.description = description.trim();
         this.isDone = false;
+        this.tags = new ArrayList<>();
     }
 
     /**
@@ -54,6 +59,33 @@ public class Task {
      */
     public String getDescription() {
         return this.description;
+    }
+
+    /**
+     * Getter for the variable tag of this object instance.
+     *
+     * @return The list of tags.
+     */
+    public List<String> getTags() {
+        return this.tags;
+    }
+
+    /**
+     * Adding tag to this task.
+     *
+     * @param tagDescription The description of the task.
+     */
+    public void addTag(String tagDescription) {
+        tags.add(tagDescription);
+    }
+
+    /**
+     * Copy the tags from one object to another.
+     *
+     * @param task The task with tags to copy from.
+     */
+    public void addTag(Task task) {
+        tags = new ArrayList<>(task.tags);
     }
 
     /**

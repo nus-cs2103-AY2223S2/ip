@@ -56,16 +56,21 @@ public class TaskList {
      *
      * @param userParse The input from the user.
      * @return The TaskList with the specified marked task.
-     * @throws DukeException if user index is more than the list.
+     * @throws DukeException if user index is more than the list or command index is not a number.
      */
     public TaskList mark(Parser userParse) throws DukeException {
-        int userIndex = Integer.parseInt(userParse.inputArr[1]) - 1;
-        if (userIndex >= tasksCounter) {
-            String message = "There is no such index.\n Please try again with the correct indexing.\n";
-            throw new DukeException(message);
-        } else {
-            tasksList.get(Integer.parseInt(userParse.inputArr[1]) - 1).mark();
-            return this;
+        try {
+            int userIndex = userParse.checkValidIndex(userParse.inputArr[1]) - 1;
+
+            if (userIndex >= tasksCounter || userIndex < 0) {
+                String message = "There is no such index.\n Please try again with the correct indexing.\n";
+                throw new DukeException(message);
+            } else {
+                tasksList.get(userIndex).mark();
+                return this;
+            }
+        } catch (DukeException e) {
+            throw e;
         }
     }
 
@@ -74,16 +79,21 @@ public class TaskList {
      *
      * @param userParse The input from the user.
      * @return The TaskList with the specified unmarked task.
-     * @throws DukeException if user index is more than the list.
+     * @throws DukeException if user index is more than the list or command index is not a number.
      */
     public TaskList unmark(Parser userParse) throws DukeException {
-        int userIndex = Integer.parseInt(userParse.inputArr[1]) - 1;
-        if (userIndex >= tasksCounter) {
-            String message = "There is no such index.\n Please try again with the correct indexing.\n";
-            throw new DukeException(message);
-        } else {
-            tasksList.get(Integer.parseInt(userParse.inputArr[1]) - 1).unmark();
-            return this;
+        try {
+            int userIndex = userParse.checkValidIndex(userParse.inputArr[1]) - 1;
+
+            if (userIndex >= tasksCounter || userIndex < 0) {
+                String message = "There is no such index.\n Please try again with the correct indexing.\n";
+                throw new DukeException(message);
+            } else {
+                tasksList.get(userIndex).unmark();
+                return this;
+            }
+        } catch (DukeException e) {
+            throw e;
         }
     }
 
@@ -194,18 +204,23 @@ public class TaskList {
      *
      * @param userParse The input from the user.
      * @return The Task deleted.
-     * @throws DukeException if user index is more than the list.
+     * @throws DukeException if user index is more than the list or command index is not a number.
      */
     public Task delete(Parser userParse) throws DukeException {
-        int userIndex = Integer.parseInt(userParse.inputArr[1]) - 1;
-        if (userIndex >= tasksCounter) {
-            String message = "There is no such index.\n Please try again with the correct indexing.\n";
-            throw new DukeException(message);
-        } else {
-            String[] inputArr = userParse.inputArr;
-            Task deleted = tasksList.remove(Integer.parseInt(inputArr[1]) - 1);
-            tasksCounter--;
-            return deleted;
+        try {
+            int userIndex = userParse.checkValidIndex(userParse.inputArr[1]) - 1;
+
+            if (userIndex >= tasksCounter || userIndex < 0) {
+                String message = "There is no such index.\n Please try again with the correct indexing.\n";
+                throw new DukeException(message);
+            } else {
+                String[] inputArr = userParse.inputArr;
+                Task deleted = tasksList.remove(Integer.parseInt(inputArr[1]) - 1);
+                tasksCounter--;
+                return deleted;
+            }
+        } catch (DukeException e) {
+            throw e;
         }
     }
 
@@ -225,5 +240,32 @@ public class TaskList {
             }
         }
         return tempFind;
+    }
+
+    /**
+     * Tag a tasks in the list with the tag description.
+     *
+     * @param userParse The user input.
+     * @return The tasks of tag items.
+     * @throws DukeException if the command index is out of bounds or invalid number.
+     */
+    public TaskList tag(Parser userParse) throws DukeException {
+        try {
+            int userIndex = userParse.checkValidIndex(userParse.inputArr[1]) - 1;
+
+            if (userIndex >= tasksCounter || userIndex < 0) {
+                String message = "There is no such index.\n Please try again with the correct indexing.\n";
+                throw new DukeException(message);
+            } else {
+                String tagMessage = "";
+                for (int i = 2; i < userParse.inputArr.length; i++) {
+                    tagMessage += userParse.inputArr[i] + " ";
+                }
+                tasksList.get(userIndex).addTag(userParse.checkDescription(tagMessage.trim()));
+                return this;
+            }
+        } catch (DukeException e) {
+            throw e;
+        }
     }
 }
