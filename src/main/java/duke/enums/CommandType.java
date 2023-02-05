@@ -19,7 +19,7 @@ public enum CommandType {
     DEADLINE("deadline", new DukeException("Invalid format for Deadline." + LS
             + "Usage: deadline <task> /by <" + DATE_TIME_FORMAT + ">")),
     EVENT("event", new DukeException("Invalid format for Event." + LS
-            + "Usage: <task> /from <" + DATE_TIME_FORMAT + "> /to <" + DATE_TIME_FORMAT + ">")),
+            + "Usage: event <task> /from <" + DATE_TIME_FORMAT + "> /to <" + DATE_TIME_FORMAT + ">")),
     INCORRECT("incorrect", new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-("));
     private String word;
     private DukeException e;
