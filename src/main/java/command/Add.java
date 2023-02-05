@@ -11,15 +11,12 @@ import util.Parser;
 import util.Util;
 
 public class Add implements Command {
-    private final Task task;
-
     private static final String SUCCESS = "Task added: %s";
-
     private static final String TODO_FORMAT = "todo 'description'";
-
     private static final String DEADLINE_FORMAT = "deadline 'description' /by 'YYYY-MM-DD'";
-
     private static final String EVENT_FORMAT = "event 'description' /from 'YYYY-MM-DD' /to 'YYYY-MM-DD'";
+
+    private final Task task;
 
     private Add(Task task) {
         this.task = task;

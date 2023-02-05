@@ -6,11 +6,11 @@ import task.TaskList;
 import util.Parser;
 
 public class Delete implements Command {
-    private final int taskNum;
-
     private static final String ERROR = "Task not in list.";
     private static final String SUCCESS = "Task %d has been deleted.\nTasks remaining: %s";
     private static final String FORMAT = "delete 'task number'";
+
+    private final int taskNum;
 
     private Delete(int taskNum) {
         this.taskNum = taskNum;

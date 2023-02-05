@@ -8,8 +8,9 @@ import task.TaskList;
 import util.Parser;
 
 public class FindByDate implements Command {
-    private final LocalDate date;
     private static final String FORMAT = "findbydate 'YYYY-MM-DD'";
+    
+    private final LocalDate date;
 
     private FindByDate(LocalDate date) {
         this.date = date;

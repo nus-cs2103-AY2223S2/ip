@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 public abstract class Task implements Serializable {
-
     protected final String desc;
     protected final boolean done;
     
