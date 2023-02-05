@@ -21,11 +21,12 @@ public class Ui {
     /**
      * Outputs greeting message to the User when Duke is booted up.
      */
-    public void greetUser() {
+    public String greetUser() {
         System.out.println(divider);
         System.out.println("    Hello! I'm Duke");
         System.out.println("    What can I do for you?");
         System.out.println(divider);
+        return divider + "    Hello! I'm Duke\n" + "    What can I do for you?\n" + divider;
     }
 
     /**
@@ -39,9 +40,19 @@ public class Ui {
     /**
      * Closes the Scanner object and displays end message to the User.
      */
-    public void closeCommand() {
+    public String closeCommand() {
         System.out.println("    Bye. Hope to see you again soon!");
         this.command.close();
+        return "    Bye. Hope to see you again soon!";
+    }
+
+    /**
+     * Outputs required message for the User.
+     * @return String output of text.
+     */
+    public String userOutput(String input) {
+        System.out.println(input);
+        return input;
     }
 
     /**

@@ -54,7 +54,7 @@ public class DeadlineTask extends Task {
      * @param t TaskList to store the newly created DeadlineTask
      * @throws DukeException If command is invalid.
      */
-    public static void createDeadlineTask(String command, TaskList t) throws DukeException {
+    public static String createDeadlineTask(String command, TaskList t) throws DukeException {
         ArrayList<String> input = new ArrayList<>(Arrays.asList(command.split(" ")));
         if (input.size() <= 1) {
             throw new DukeException("deadline");
@@ -76,7 +76,7 @@ public class DeadlineTask extends Task {
             }
         }
         DeadlineTask d = new DeadlineTask(taskName.toString(), DateTimeParser.dateTimeParser(deadline.toString()));
-        t.addTask(d);
+        return t.addTask(d);
     }
 
     @Override

@@ -36,12 +36,12 @@ public abstract class Task {
      * Marks a task as done and prints out action done.
      * @param completion Completion status of the task.
      */
-    public void setCompletion(boolean completion) {
+    public String setCompletion(boolean completion) {
         this.completed = completion;
         if (completion) {
-            System.out.println("    Nice! I've marked this task as done:\n" + "     " + this);
+            return String.format("    Nice! I've marked this task as done:\n" + "     " + this);
         } else {
-            System.out.println("    OK, I've marked this task as not done yet:\n" + "       " + this);
+            return String.format("    OK, I've marked this task as not done yet:\n" + "       " + this);
         }
     }
 

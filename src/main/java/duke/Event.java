@@ -51,7 +51,7 @@ public class Event extends Task {
      * @param t TaskList object to add the newly created Task into the list of tasks.
      * @throws DukeException If command is invalid.
      */
-    public static void createEvent(String command, TaskList t) throws DukeException {
+    public static String createEvent(String command, TaskList t) throws DukeException {
         ArrayList<String> input = new ArrayList<>(Arrays.asList(command.split(" ")));
         if (input.size() <= 1) {
             throw new DukeException("event");
@@ -79,10 +79,9 @@ public class Event extends Task {
                 }
             }
         }
-        System.out.println(taskName);
         Event e = new Event(taskName.toString(), DateTimeParser.dateTimeParser(start.stripTrailing()),
                 DateTimeParser.dateTimeParser(end.toString()));
-        t.addTask(e);
+        return t.addTask(e);
     }
 
     @Override
