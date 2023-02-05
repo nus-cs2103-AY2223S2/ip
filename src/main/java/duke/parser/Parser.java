@@ -41,14 +41,11 @@ public class Parser {
         } else if (fullCommand.equals("list")) {
             return new ListCommand();
         }
-
         Command valueCommand = getValueCommand(fullCommand);
         if (valueCommand != null) {
             return valueCommand;
         }
-
         validateTaskCommand(fullCommand, TASK_COMMANDS);
-
         return getTaskCommand(fullCommand);
     }
 
@@ -119,10 +116,12 @@ public class Parser {
      * @return String representation of just the command.
      */
     public static String returnCommand(String input, String[] commands) {
+        assert commands.length > 0 : "There are no commands available.";
+        boolean gotMatch;
         for (String s : commands) {
             Pattern word = Pattern.compile(s);
             Matcher match = word.matcher(input);
-            boolean gotMatch = match.find();
+            gotMatch = match.find();
 
             if (gotMatch && match.start() == 0) {
                 return s;
@@ -139,6 +138,7 @@ public class Parser {
      * @throws DukeException If User input is invalid. (e.g. Add deadline task without supplying end time.)
      */
     public static void validateTaskCommand(String input, String[] commands) throws DukeException {
+        assert commands.length > 0 : "There are no commands available.";
         input = input.trim();
         for (String s : commands) {
             if (s.equals(input + " ")) {
@@ -147,11 +147,15 @@ public class Parser {
         }
 
         boolean isCorrect = false;
+        boolean gotMatch;
         for (String s : commands) {
             Pattern word = Pattern.compile(s);
             Matcher match = word.matcher(input);
-            boolean gotMatch = match.find() && (match.start() == 0);
-            isCorrect = isCorrect || gotMatch;
+            gotMatch = match.find() && (match.start() == 0);
+            isCorrect = gotMatch;
+            if (isCorrect) {
+                break;
+            }
         }
 
         if (!isCorrect) {

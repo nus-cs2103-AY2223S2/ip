@@ -29,6 +29,7 @@ public class ExitCommand extends Command {
     @Override
     public String execute(TaskList tasks, Storage storage, Ui ui) {
         String output = "";
+        output += ui.uploading();
         output += storage.save(tasks);
         output += ui.goodbye();
         ui.close();

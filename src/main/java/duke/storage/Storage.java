@@ -52,7 +52,7 @@ public class Storage {
         } catch (IOException e) {
             ui.showError(e);
         }
-
+        assert dukeFile.exists() : "XyDuke data file not created.";
         tasks = new TaskList(this.ui);
     }
 
@@ -87,7 +87,7 @@ public class Storage {
 
                 String done = taskSplit[1];
                 if (done.equals("1")) {
-                    assert task != null;
+                    assert task != null : "Unrecognised task type.";
                     task.setDone();
                 }
 
@@ -116,9 +116,6 @@ public class Storage {
 
         try {
             PrintWriter writer = new PrintWriter(dukeFile);
-
-            ui.uploading();
-
             int count = 0;
             for (Task task : tasks.getTasks()) {
                 count++;
