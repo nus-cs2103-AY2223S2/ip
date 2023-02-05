@@ -1,0 +1,17 @@
+todo eat
+todo sleep
+todo repeat
+list
+mark
+mark 100
+mark 1
+list
+unmark 1
+list
+delete 2
+delete 3
+deadline sleep /by 10pm
+event repeat /from today /to tomorrow
+list
+bye
+
