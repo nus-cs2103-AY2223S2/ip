@@ -4,14 +4,14 @@ import java.util.HashMap;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-import aqua.exception.IllegalSyntaxException;
+import aqua.exception.SyntaxException;
 import aqua.logic.ArgumentMap;
 
 
 /** A parser to parse a String into a {@code ArgumentMap}. */
 public class ArgumentParser implements Parser<ArgumentMap> {
     @Override
-    public ArgumentMap parse(String input) throws IllegalSyntaxException {
+    public ArgumentMap parse(String input) throws SyntaxException {
         // initialize input map
         HashMap<String, String> inputMap = new HashMap<>();
 
@@ -40,7 +40,7 @@ public class ArgumentParser implements Parser<ArgumentMap> {
 
 
     private static void addInput(String token, HashMap<String, String> inputMap)
-                throws IllegalSyntaxException {
+                throws SyntaxException {
         try (Scanner scanner = new Scanner(token)) {
             // parse tag
             String key = scanner.next();
@@ -53,7 +53,7 @@ public class ArgumentParser implements Parser<ArgumentMap> {
 
             // check for duplicates
             if (inputMap.containsKey(key)) {
-                throw new IllegalSyntaxException("Duplicate parameters");
+                throw new SyntaxException("Duplicate parameters");
             }
 
             // add tag(key) - value pair to map
@@ -61,7 +61,7 @@ public class ArgumentParser implements Parser<ArgumentMap> {
                 inputMap.put(key, value);
             }
         } catch (NoSuchElementException noElmEx) {
-            throw new IllegalSyntaxException("Parameter name disappeared!");
+            throw new SyntaxException("Parameter name disappeared!");
         }
     }
 }

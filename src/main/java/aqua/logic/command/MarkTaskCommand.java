@@ -1,7 +1,7 @@
 package aqua.logic.command;
 
 import aqua.aquatask.AquaTask;
-import aqua.exception.IllegalSyntaxException;
+import aqua.exception.SyntaxException;
 import aqua.exception.ProcedureException;
 import aqua.logic.ArgumentMap;
 import aqua.logic.ExecutionDisplayerTask;
@@ -58,11 +58,11 @@ public class MarkTaskCommand extends CommandController {
 
 
     private AquaTask markTask(ArgumentMap args, LogicManager manager)
-                throws IllegalSyntaxException, ProcedureException {
+                throws SyntaxException, ProcedureException {
         try {
             // get index String
             String indexString = args.getMainInput().filter(num -> !num.isBlank())
-                    .orElseThrow(() -> new IllegalSyntaxException("Task number disappered!"));
+                    .orElseThrow(() -> new SyntaxException("Task number disappered!"));
 
             // parse index String (minus 1 as user enters 1 based index)
             int index = Integer.parseInt(indexString) - 1;
@@ -70,7 +70,7 @@ public class MarkTaskCommand extends CommandController {
             // mark and return marked task
             return manager.getTaskManager().mark(index, isCompletedMarker);
         } catch (NumberFormatException numEx) {
-            throw new IllegalSyntaxException("Task number given was not an integer");
+            throw new SyntaxException("Task number given was not an integer");
         } catch (IndexOutOfBoundsException oobEx) {
             throw new ProcedureException(
                     "The task number given is out of bounds of my task counting capabilities");
@@ -89,7 +89,7 @@ public class MarkTaskCommand extends CommandController {
 
         @Override
         public AquaTask process(ArgumentMap args, LogicManager manager)
-                    throws IllegalSyntaxException, ProcedureException {
+                    throws SyntaxException, ProcedureException {
             return markTask(args, manager);
         }
     }
@@ -106,7 +106,7 @@ public class MarkTaskCommand extends CommandController {
 
         @Override
         protected AquaTask process(ArgumentMap args, LogicManager manager)
-                    throws IllegalSyntaxException, ProcedureException {
+                    throws SyntaxException, ProcedureException {
             return markTask(args, manager);
         }
 

@@ -1,6 +1,6 @@
 package aqua.logic.parser;
 
-import aqua.exception.IllegalSyntaxException;
+import aqua.exception.SyntaxException;
 
 
 /**
@@ -15,8 +15,8 @@ public interface Parser<R> {
      *
      * @param input - the String to parse.
      * @return the object representation of the data in the given String.
-     * @throws IllegalSyntaxException if the String cannot be parsed due to
+     * @throws SyntaxException if the String cannot be parsed due to
      *      syntax errors.
      */
-    public R parse(String input) throws IllegalSyntaxException;
+    public R parse(String input) throws SyntaxException;
 }

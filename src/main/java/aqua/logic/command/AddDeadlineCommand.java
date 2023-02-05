@@ -3,7 +3,7 @@ package aqua.logic.command;
 import java.time.LocalDateTime;
 
 import aqua.aquatask.AquaDeadline;
-import aqua.exception.IllegalSyntaxException;
+import aqua.exception.SyntaxException;
 import aqua.logic.ArgumentMap;
 import aqua.util.DateUtils;
 
@@ -16,15 +16,15 @@ public class AddDeadlineCommand extends AddTaskCommand {
      * Specifically, an {@code AquaDeadline}.
      */
     @Override
-    public AquaDeadline createTask(ArgumentMap args) throws IllegalSyntaxException {
+    public AquaDeadline createTask(ArgumentMap args) throws SyntaxException {
         // get name
         String name = args.getMainInput()
                 .filter(n -> !n.isBlank())
-                .orElseThrow(() -> new IllegalSyntaxException("Name disappeared!"));
+                .orElseThrow(() -> new SyntaxException("Name disappeared!"));
 
         // get by date
         String byString = args.get("by")
-                .orElseThrow(() -> new IllegalSyntaxException("[by] disappeared!"));
+                .orElseThrow(() -> new SyntaxException("[by] disappeared!"));
         LocalDateTime by = DateUtils.parse(byString);
 
         // get is complete

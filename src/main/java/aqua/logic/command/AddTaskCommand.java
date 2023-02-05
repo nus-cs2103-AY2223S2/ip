@@ -1,7 +1,7 @@
 package aqua.logic.command;
 
 import aqua.aquatask.AquaTask;
-import aqua.exception.IllegalSyntaxException;
+import aqua.exception.SyntaxException;
 import aqua.logic.ArgumentMap;
 import aqua.logic.ExecutionDisplayerTask;
 import aqua.logic.ExecutionService;
@@ -18,9 +18,9 @@ public abstract class AddTaskCommand extends CommandController {
      *
      * @param args - the argument map.
      * @return the task created from the given arguments.
-     * @throws IllegalSyntaxException if the arguments are of invalid syntax.
+     * @throws SyntaxException if the arguments are of invalid syntax.
      */
-    public abstract AquaTask createTask(ArgumentMap args) throws IllegalSyntaxException;
+    public abstract AquaTask createTask(ArgumentMap args) throws SyntaxException;
 
 
     @Override
@@ -36,7 +36,7 @@ public abstract class AddTaskCommand extends CommandController {
     }
 
 
-    private AquaTask addProcess(ArgumentMap args, LogicManager manager) throws IllegalSyntaxException {
+    private AquaTask addProcess(ArgumentMap args, LogicManager manager) throws SyntaxException {
         AquaTask task = createTask(args);
         manager.getTaskManager().add(task);
         return task;
@@ -53,7 +53,7 @@ public abstract class AddTaskCommand extends CommandController {
 
 
         @Override
-        public AquaTask process(ArgumentMap args, LogicManager manager) throws IllegalSyntaxException {
+        public AquaTask process(ArgumentMap args, LogicManager manager) throws SyntaxException {
             return addProcess(args, manager);
         }
     }
@@ -69,7 +69,7 @@ public abstract class AddTaskCommand extends CommandController {
 
 
         @Override
-        public AquaTask process(ArgumentMap args, LogicManager manager) throws IllegalSyntaxException {
+        public AquaTask process(ArgumentMap args, LogicManager manager) throws SyntaxException {
             return addProcess(args, manager);
         }
 

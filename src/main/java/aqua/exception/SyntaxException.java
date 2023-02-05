@@ -1,9 +1,9 @@
 package aqua.exception;
 
 /** Signals that the the given syntax is invalid. */
-public class IllegalSyntaxException extends Exception {
+public class SyntaxException extends Exception {
     /** Constructs an IllegalSyntaxException without any message or cause. */
-    public IllegalSyntaxException() {}
+    public SyntaxException() {}
 
 
     /**
@@ -11,7 +11,7 @@ public class IllegalSyntaxException extends Exception {
      *
      * @param description - the message of the exception.
      */
-    public IllegalSyntaxException(String description) {
+    public SyntaxException(String description) {
         super(description);
     }
 
@@ -22,7 +22,7 @@ public class IllegalSyntaxException extends Exception {
      * @param description - the message of the exception.
      * @param cause - the cause of the exception.
      */
-    public IllegalSyntaxException(String description, Throwable cause) {
+    public SyntaxException(String description, Throwable cause) {
         super(description, cause);
     }
 
@@ -31,7 +31,7 @@ public class IllegalSyntaxException extends Exception {
      *
      * @param cause - the cause of the exception.
      */
-    public IllegalSyntaxException(Throwable cause) {
+    public SyntaxException(Throwable cause) {
         super(cause);
     }
 }

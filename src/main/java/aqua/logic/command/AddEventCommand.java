@@ -3,7 +3,7 @@ package aqua.logic.command;
 import java.time.LocalDateTime;
 
 import aqua.aquatask.AquaEvent;
-import aqua.exception.IllegalSyntaxException;
+import aqua.exception.SyntaxException;
 import aqua.logic.ArgumentMap;
 import aqua.util.DateUtils;
 
@@ -16,19 +16,19 @@ public class AddEventCommand extends AddTaskCommand {
      * Specifically, an {@code AquaEvent}.
      */
     @Override
-    public AquaEvent createTask(ArgumentMap args) throws IllegalSyntaxException {
+    public AquaEvent createTask(ArgumentMap args) throws SyntaxException {
         // get name
         String name = args.getMainInput().filter(n -> !n.isBlank())
-                .orElseThrow(() -> new IllegalSyntaxException("Name disappeared!"));
+                .orElseThrow(() -> new SyntaxException("Name disappeared!"));
 
         // get from date
         String fromString = args.get(AquaEvent.TAG_FROM)
-                .orElseThrow(() -> new IllegalSyntaxException("[from] disappeared!"));
+                .orElseThrow(() -> new SyntaxException("[from] disappeared!"));
         LocalDateTime from = DateUtils.parse(fromString);
 
         // get to date
         String toString = args.get(AquaEvent.TAG_TO)
-                .orElseThrow(() -> new IllegalSyntaxException("[to] disappeared!"));
+                .orElseThrow(() -> new SyntaxException("[to] disappeared!"));
         LocalDateTime to = DateUtils.parse(toString);
 
         // get is complete

@@ -2,7 +2,7 @@ package aqua.logic;
 
 import java.util.Optional;
 
-import aqua.exception.IllegalSyntaxException;
+import aqua.exception.SyntaxException;
 import aqua.exception.ProcedureException;
 import javafx.concurrent.Service;
 
@@ -71,11 +71,11 @@ public abstract class ExecutionService extends Service<Void> {
     /**
      * Executes the encapsulated task process.
      *
-     * @throws IllegalSyntaxException if there are syntax errors.
+     * @throws SyntaxException if there are syntax errors.
      * @throws ProcedureExecutionExecution if the task fail to execute
      *      completely.
      */
-    public void process() throws IllegalSyntaxException, ProcedureException {
+    public void process() throws SyntaxException, ProcedureException {
         task.process();
     }
 

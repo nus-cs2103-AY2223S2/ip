@@ -1,7 +1,7 @@
 package aqua.logic.command;
 
 import aqua.aquatask.AquaToDo;
-import aqua.exception.IllegalSyntaxException;
+import aqua.exception.SyntaxException;
 import aqua.logic.ArgumentMap;
 
 
@@ -13,11 +13,11 @@ public class AddToDoCommand extends AddTaskCommand {
      * Specifically, an {@code AquaToDo}.
      */
     @Override
-    public AquaToDo createTask(ArgumentMap args) throws IllegalSyntaxException {
+    public AquaToDo createTask(ArgumentMap args) throws SyntaxException {
         // get name
         String name = args.getMainInput()
                 .filter(n -> !n.isBlank())
-                .orElseThrow(() -> new IllegalSyntaxException("Name disappeared!"));
+                .orElseThrow(() -> new SyntaxException("Name disappeared!"));
 
         // get is complete
         boolean isComplete = args.get(AquaToDo.TAG_IS_COMPLETE)

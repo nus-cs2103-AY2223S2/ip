@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
 
-import aqua.exception.IllegalSyntaxException;
+import aqua.exception.SyntaxException;
 
 
 /** Utility class for dates and time. */
@@ -23,9 +23,9 @@ public class DateUtils {
      *
      * @param dateString - the date String to parse.
      * @return the parsed LocalDateTime.
-     * @throws IllegalSyntaxException if the given String cannot be parsed.
+     * @throws SyntaxException if the given String cannot be parsed.
      */
-    public static LocalDateTime parse(String dateString) throws IllegalSyntaxException {
+    public static LocalDateTime parse(String dateString) throws SyntaxException {
         try {
             // yyyy-MM-ddThh:mm default format
             return LocalDateTime.parse(dateString);
@@ -45,12 +45,12 @@ public class DateUtils {
                 }
             } catch (DateTimeParseException ex) {
                 // random numbers eg. 0000-00-00
-                throw new IllegalSyntaxException(
+                throw new SyntaxException(
                     String.format("I do not understand when this is [%s]", dateString)
                 );
             }
         }
-        throw new IllegalSyntaxException(
+        throw new SyntaxException(
             String.format("I do not understand when this is [%s]", dateString)
         );
     }

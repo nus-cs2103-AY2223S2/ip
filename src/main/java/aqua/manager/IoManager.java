@@ -4,7 +4,7 @@ import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-import aqua.exception.IllegalSyntaxException;
+import aqua.exception.SyntaxException;
 import aqua.exception.LoadException;
 import aqua.exception.ProcedureException;
 import aqua.util.Kaomoji;
@@ -95,7 +95,7 @@ public class IoManager {
     private String getExceptionReply(Throwable ex) {
         try {
             throw ex;
-        } catch (IllegalSyntaxException syntaxEx) {
+        } catch (SyntaxException syntaxEx) {
             return String.format(EXCEPTION_FORMAT_SYNTAX, ex.getMessage());
         } catch (ProcedureException cmdExeEx) {
             return String.format(EXCEPTION_FORMAT_EXECUTION, ex.getMessage());

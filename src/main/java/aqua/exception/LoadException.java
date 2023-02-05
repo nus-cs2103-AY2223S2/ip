@@ -2,11 +2,11 @@ package aqua.exception;
 
 /** Signals that a loading error has occured. */
 public class LoadException extends Exception {
-    /** Constructs a LoadException without any message or cause. */
+    /** Constructs a {@code LoadException} without any message or cause. */
     public LoadException() {}
 
     /**
-     * Constructs a LoadException with the specified message.
+     * Constructs a {@code LoadException} with the specified message.
      *
      * @param msg - the message of the exception.
      */
@@ -15,7 +15,7 @@ public class LoadException extends Exception {
     }
 
     /**
-     * Constructs a LoadException with the specified cause.
+     * Constructs a {@code LoadException} with the specified cause.
      *
      * @param cause - the cause of the exception.
      */
@@ -24,7 +24,7 @@ public class LoadException extends Exception {
     }
 
     /**
-     * Constructs a LoadException with the specified message and cause.
+     * Constructs a {@code LoadException} with the specified message and cause.
      *
      * @param msg - the message of the exception.
      * @param cause - the cause of the exception.

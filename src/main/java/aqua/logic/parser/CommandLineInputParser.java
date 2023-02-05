@@ -2,7 +2,7 @@ package aqua.logic.parser;
 
 import java.util.Scanner;
 
-import aqua.exception.IllegalSyntaxException;
+import aqua.exception.SyntaxException;
 import aqua.logic.CommandLineInput;
 import aqua.logic.command.Command;
 
@@ -24,7 +24,7 @@ public class CommandLineInputParser implements Parser<CommandLineInput> {
 
 
     @Override
-    public CommandLineInput parse(String input) throws IllegalSyntaxException {
+    public CommandLineInput parse(String input) throws SyntaxException {
         String argString = "";
         Command command;
 
@@ -38,10 +38,10 @@ public class CommandLineInputParser implements Parser<CommandLineInput> {
                     argString = scanner.nextLine().strip();
                 }
             } else {
-                throw new IllegalSyntaxException("Empty input");
+                throw new SyntaxException("Empty input");
             }
         } catch (IllegalArgumentException illArgEx) {
-            throw new IllegalSyntaxException("I do not know what that command is suppose to do");
+            throw new SyntaxException("I do not know what that command is suppose to do");
         }
 
         // create and return command line input

@@ -1,7 +1,7 @@
 package aqua.logic.command;
 
 import aqua.aquatask.AquaTask;
-import aqua.exception.IllegalSyntaxException;
+import aqua.exception.SyntaxException;
 import aqua.exception.ProcedureException;
 import aqua.logic.ArgumentMap;
 import aqua.logic.ExecutionDisplayerTask;
@@ -41,11 +41,11 @@ public class DeleteCommand extends CommandController {
 
 
     private AquaTask deleteTask(ArgumentMap args, LogicManager manager)
-                throws IllegalSyntaxException, ProcedureException {
+                throws SyntaxException, ProcedureException {
         try {
             // get task index string
             String indexString = args.getMainInput().filter(num -> !num.isBlank())
-                    .orElseThrow(() -> new IllegalSyntaxException("Task number disappered!"));
+                    .orElseThrow(() -> new SyntaxException("Task number disappered!"));
 
             // parse index string
             int index = Integer.parseInt(indexString) - 1;
@@ -53,7 +53,7 @@ public class DeleteCommand extends CommandController {
             // delete and return deleted task
             return manager.getTaskManager().delete(index);
         } catch (NumberFormatException numEx) {
-            throw new IllegalSyntaxException("Task number given was not an integer");
+            throw new SyntaxException("Task number given was not an integer");
         } catch (IndexOutOfBoundsException oobEx) {
             throw new ProcedureException(
                     "The task number given is out of bounds of my task counting capabilities");
@@ -72,7 +72,7 @@ public class DeleteCommand extends CommandController {
 
         @Override
         public AquaTask process(ArgumentMap args, LogicManager manager)
-                    throws IllegalSyntaxException, ProcedureException {
+                    throws SyntaxException, ProcedureException {
             return deleteTask(args, manager);
         }
     }
@@ -89,7 +89,7 @@ public class DeleteCommand extends CommandController {
 
         @Override
         protected AquaTask process(ArgumentMap args, LogicManager manager)
-                    throws IllegalSyntaxException, ProcedureException {
+                    throws SyntaxException, ProcedureException {
             return deleteTask(args, manager);
         }
 
