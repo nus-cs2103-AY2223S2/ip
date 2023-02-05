@@ -4,7 +4,7 @@ import java.time.format.DateTimeParseException;
 import java.io.IOException;
 
 public class Duke {
-    public static void main(String[] args) throws IOException{
+    public static void main(String[] args) throws IOException {
         Ui ui = new Ui();
         Parser parser = new Parser();
         ui.initialise();
@@ -12,20 +12,20 @@ public class Duke {
         
         while(!parser.isInput("bye")) {
             if (parser.isInput("list")) {
-                if(ui.getList().isEmpty()) {
+                if (ui.getList().isEmpty()) {
                     ui.emptyErr();
                 } else {
                     ui.viewList();
                 }
             } else if (parser.isInput("mark")) {
-                if(ui.getList().isEmpty()) {
+                if (ui.getList().isEmpty()) {
                     ui.emptyErr();
                 } else {
                     int num = parser.getTaskNum();
                     ui.markTask(num);
                 }
             } else if (parser.isInput("unmark")) {
-                if(ui.getList().isEmpty()) {
+                if (ui.getList().isEmpty()) {
                     ui.emptyErr();
                 } else {
                     int num = parser.getTaskNum();
@@ -53,7 +53,7 @@ public class Duke {
                     ui.reset();
                 }
             } else if (parser.isInput("delete")) {
-                if(ui.getList().isEmpty()) {
+                if (ui.getList().isEmpty()) {
                     ui.emptyErr();
                 } else {
                     int num = parser.getTaskNum();
