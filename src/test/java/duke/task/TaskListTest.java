@@ -31,6 +31,6 @@ public class TaskListTest {
         String[] results = tasks.findAll("kword").split("\n");
         assertEquals(2, results.length);
         assertEquals("0. [T][ ] task with kword", results[0]);
-        assertEquals("2. [D][ ] another kword task (by: 1 January 2000 10:00)", results[1]);
+        assertEquals("2. [D][ ] another kword task (by: 01 01 2000 10:00)", results[1]);
     }
 }

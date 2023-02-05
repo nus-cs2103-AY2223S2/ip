@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.time.format.FormatStyle;
 
 /**
  * Instance of a date and time.
@@ -53,7 +52,7 @@ public class DateTime {
      */
     @Override
     public String toString() {
-        return date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG))
+        return date.format(DateTimeFormatter.ofPattern("dd MM yyyy"))
                 + " " + time;
     }
 
