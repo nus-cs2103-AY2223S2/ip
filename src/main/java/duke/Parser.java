@@ -98,7 +98,7 @@ public class Parser {
             } else {
                 throw new BadCommandException("I'm sorry, but I don't know what that means :-(");
             }
-
+            assert newTask != null : "newTask should not be null";
             tasks.addTask(newTask);
             return ui.showNormalMessage(String.format(
                     "Got it. I've added this task:\n\t%s\nNow you have %d task%s in the list.",

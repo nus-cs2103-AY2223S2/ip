@@ -52,6 +52,7 @@ public class Duke extends Application {
             ui.showErrorMessage(e.getMessage());
             tasks = new TaskList();
         }
+        assert tasks != null : "tasks should not be null";
     }
 
     /**
