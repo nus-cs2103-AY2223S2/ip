@@ -5,12 +5,11 @@
 
 package seedu.duke;
 
-import seedu.duke.task.Task;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import seedu.duke.task.Task;
 
 /**
  * Represents the main program of Duke.
@@ -49,7 +48,7 @@ public class Duke {
      * @param filepath The file path for the data stored in the txt file.
      */
     public Duke(String filepath) {
-        assert filepath != "" : "File path should not be empty";
+        assert filepath.equals("") : "File path should not be empty";
         ui = new Ui();
         storage = new Storage(filepath);
         if (!isFind) {
@@ -131,9 +130,8 @@ public class Duke {
      * @return A String of List of commands.
      */
     public static String getCommands() {
-        String commandsMessage = "";
-        List<String> commandList = new ArrayList<String>();
-        
+        String commandsMessage;
+        List<String> commandList = new ArrayList<>();
         for (Commands curr : Commands.values()) {
             commandList.add(curr.name() + "\n");
         }
