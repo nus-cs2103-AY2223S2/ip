@@ -15,6 +15,7 @@ import duke.ui.Ui;
  */
 public class FindCommand extends Command {
     private String keyword;
+
     public FindCommand(String keyword) {
         this.keyword = keyword;
     }
@@ -28,16 +29,17 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        int lenOfTaskList = tasks.getLength();
-        ArrayList<Task> relevantTasks = new ArrayList<>();
-        for (int i = 0; i < lenOfTaskList; i++) {
+        final int TOTAL_NUM_OF_TASKS = tasks.getLength();
+        ArrayList<Task> tasksWithKeyword = new ArrayList<>();
+
+        for (int i = 0; i < TOTAL_NUM_OF_TASKS; i++) {
             Task currTask = tasks.getTask(i);
             if (currTask.getDescription().contains(keyword)) {
-                relevantTasks.add(currTask);
+                tasksWithKeyword.add(currTask);
             }
         }
 
-        return ui.showRelevantTasks(relevantTasks);
+        return ui.showRelevantTasks(tasksWithKeyword);
     }
 
     /**

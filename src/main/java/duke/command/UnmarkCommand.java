@@ -23,8 +23,6 @@ public class UnmarkCommand extends Command {
         this.taskNum = taskNum;
     }
 
-
-
     /**
      * Unmark the task to incompleted as requested by user.
      * @param tasks

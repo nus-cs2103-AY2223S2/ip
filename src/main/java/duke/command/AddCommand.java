@@ -27,7 +27,7 @@ public class AddCommand extends Command {
 
     private String taskType;
     private String taskDesc;
-    private String deadline;
+    private String deadlineDue;
     private String from;
     private String by;
 
@@ -54,7 +54,7 @@ public class AddCommand extends Command {
     public AddCommand(String taskType, String taskDesc, String deadline) {
         this.taskType = taskType;
         this.taskDesc = taskDesc;
-        this.deadline = deadline;
+        this.deadlineDue = deadline;
     }
 
     /**
@@ -73,6 +73,28 @@ public class AddCommand extends Command {
         this.by = by;
     }
 
+    public Task addToDo(TaskList tasks, Storage storage) {
+        Task task = new Todo(taskDesc);
+        return task;
+    }
+
+    public Task addDeadline(TaskList tasks, Storage storage) {
+        Task task = null;
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
+            LocalDateTime dueDate = LocalDateTime.parse(deadlineDue.substring(3), formatter);
+            task = new Deadline(taskDesc, dueDate);
+            return task;
+        } catch (DateTimeException e) {
+            System.out.println("ERROR!! Please key in valid date format: dd-MM-yyyy HHmm");
+        }
+        return task;
+    }
+
+    public Task addEvent(TaskList tasks, Storage storage) {
+        Task task = new Event(taskDesc, from.substring(5), by.substring(3));
+        return task;
+    }
 
     /**
      * Add the task into the task list and update the task in the tasks.txt.
@@ -85,43 +107,25 @@ public class AddCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task task = null;
+
         switch (taskType) {
         case TODO:
-            try {
-                task = new Todo(taskDesc);
-                tasks.addTask(task);
-                storage.update(task);
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                break;
-            }
+            task = addToDo(tasks, storage);
+            break;
         case DEADLINE:
-            try {
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
-                LocalDateTime dueDate = LocalDateTime.parse(deadline.substring(3), formatter);
-                task = new Deadline(taskDesc, dueDate);
-                tasks.addTask(task);
-                storage.update(task);
-            } catch (DateTimeException e) {
-                System.out.println("ERROR!! Please key in valid date format: dd-MM-yyyy HHmm");
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                break;
-            }
+            task = addDeadline(tasks, storage);
+            break;
         case EVENT:
-            try {
-                task = new Event(taskDesc, from.substring(5), by.substring(3));
-                tasks.addTask(task);
-                storage.update(task);
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                break;
-            }
+            task = addEvent(tasks, storage);
         default:
             break;
+        }
+
+        try {
+            tasks.addTask(task);
+            storage.update(task);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return ui.showAddTaskMsg(task, String.valueOf(tasks.getLength()));
     }
