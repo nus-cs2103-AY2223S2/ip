@@ -21,29 +21,29 @@ public class Parser {
      */
     public void readInput(String[] input, TaskList taskList) throws DukeException {
         switch (input[0]) {
-            case "list":   
-                taskList.list(); 
-                break;        
-            case "mark":
-                mark(input, taskList);
-                break;
-            case "unmark":
-                unmark(input, taskList);
-                break;
-            case "todo":
-                todo(input, taskList);
-                break;
-            case "deadline":
-                deadline(input, taskList);
-                break;
-            case "event":
-                event(input, taskList);
-                break;
-            case "delete":
-                delete(input, taskList);
-                break;
-            default:
-                throw new DukeException("Sorry I do not understand the command");
+        case "list":
+            taskList.list();
+            break;
+        case "mark":
+            mark(input, taskList);
+            break;
+        case "unmark":
+            unmark(input, taskList);
+            break;
+        case "todo":
+            todo(input, taskList);
+            break;
+        case "deadline":
+            deadline(input, taskList);
+            break;
+        case "event":
+            event(input, taskList);
+            break;
+        case "delete":
+            delete(input, taskList);
+            break;
+        default:
+            throw new DukeException("Sorry I do not understand the command");
         }
     }
 

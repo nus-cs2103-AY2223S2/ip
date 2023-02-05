@@ -9,14 +9,14 @@ import duke.task.Task;
  * Represents a class to store a user's tasks.
  */
 public class TaskList {
-    private ArrayList<Task> taskList;
+    private ArrayList<Task> tasks;
     private int count;
 
     /**
      * Constructor for a TaskList object.
      */
     public TaskList() {
-        this.taskList = new ArrayList<>();
+        this.tasks = new ArrayList<>();
     }
 
     /**
@@ -24,7 +24,7 @@ public class TaskList {
      */
     public void list() {
         int curr = 1;
-        Iterator<Task> iter = this.taskList.iterator();
+        Iterator<Task> iter = this.tasks.iterator();
         while (iter.hasNext()) {
             System.out.println(curr + " " + iter.next());
             curr++;
@@ -36,7 +36,7 @@ public class TaskList {
      * @param t Task to be added.
      */
     public void addTask(Task t) {
-        this.taskList.add(t);
+        this.tasks.add(t);
         count++;
     }
 
@@ -45,7 +45,7 @@ public class TaskList {
      * @param i Index of task to be deleted.
      */
     public void deleteTask(int i) {
-        Task t = this.taskList.remove(i);
+        Task t = this.tasks.remove(i);
         count--;
         System.out.println("Deleted task:\n  " + t + "\nNumber of tasks: " + count);
     }
@@ -55,7 +55,7 @@ public class TaskList {
      * @param i Index of task to be marked.
      */
     public void markTask(int i) {
-        Task t = this.taskList.get(i);
+        Task t = this.tasks.get(i);
         t.mark();
         System.out.println("Task has been marked as done:\n " + t);
     }
@@ -65,7 +65,7 @@ public class TaskList {
      * @param i Index of task to be unmarked.
      */
     public void unmarkTask(int i) {
-        Task t = this.taskList.get(i);
+        Task t = this.tasks.get(i);
         t.unmark();
         System.out.println("Task has been marked as not done:\n " + t);
     }
@@ -83,6 +83,6 @@ public class TaskList {
      * @return ArrayList User's task
      */
     public ArrayList<Task> getTasks() {
-        return this.taskList;
+        return this.tasks;
     }
 }

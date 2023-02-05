@@ -18,15 +18,11 @@ public class Event extends Task {
 
     @Override
     public String getFileDesc() {
-        return this.isDone
-        ? "E|1|" + this.name + "|" + convertFileDate(this.from) + "|" + convertFileDate(this.to)
-        : "E|0|" + this.name + "|" + convertFileDate(this.from) + "|" + convertFileDate(this.to);
+        return "E|" + super.getFileDesc() + "|" + convertFileDate(this.from) + "|" + convertFileDate(this.to);
     }
 
     @Override
     public String toString() {
-        return this.isDone
-                ? "[E][X] " + this.name + " (from: " + getDate(this.from) + " to: " + getDate(this.to) + ")"
-                : "[E][ ] " + this.name + " (from: " + getDate(this.from) + " to: " + getDate(this.to) + ")";
+        return "[E]" + super.toString() + " (from: " + getDate(this.from) + " to: " + getDate(this.to) + ")";
     }
 }
