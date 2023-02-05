@@ -3,7 +3,7 @@ package duke.controllers;
 import java.util.function.Supplier;
 import java.util.regex.Pattern;
 
-import duke.entities.TaskList;
+import duke.entities.managers.CacheManager;
 import duke.enums.CommandType;
 import duke.exceptions.DukeException;
 import duke.utils.IExecutable;
@@ -11,7 +11,7 @@ import duke.utils.IExecutable;
 /**
  * Command represents an abstraction over the inputs to the duke chatbot.
  */
-public abstract class Command implements IExecutable<TaskList> {
+public abstract class Command implements IExecutable<CacheManager> {
     protected static final String INVALID_FORMAT_ERROR = "Invalid format.";
     protected static final Pattern VALID_NUMBER = Pattern.compile("[-+]?\\d+");
 
@@ -43,7 +43,7 @@ public abstract class Command implements IExecutable<TaskList> {
      * @throws DukeException Throws an exception when something goes wrong.
      */
     @Override
-    public abstract String execute(Supplier<? extends TaskList> store) throws DukeException;
+    public abstract String execute(Supplier<? extends CacheManager> store) throws DukeException;
 
     public boolean isTerminating() {
         return isTerminating;

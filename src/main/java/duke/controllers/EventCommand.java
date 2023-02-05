@@ -4,7 +4,7 @@ import java.util.function.Supplier;
 import java.util.regex.Matcher;
 
 import duke.entities.Task;
-import duke.entities.TaskList;
+import duke.entities.managers.CacheManager;
 import duke.enums.CommandType;
 import duke.enums.TaskType;
 import duke.exceptions.DukeException;
@@ -31,8 +31,8 @@ public class EventCommand extends Command {
      * The method verifies the command and add a new task with the specified from and to dates.
      */
     @Override
-    public String execute(Supplier<? extends TaskList> taskList) throws DukeException {
-        TaskList store = taskList.get();
+    public String execute(Supplier<? extends CacheManager> taskList) throws DukeException {
+        CacheManager store = taskList.get();
         Matcher mEvent = Task.EVENT.matcher(args);
         return Task.processTask(mEvent, TaskType.EVENT, store);
     }

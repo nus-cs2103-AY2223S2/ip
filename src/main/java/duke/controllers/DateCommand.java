@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.function.Supplier;
 import java.util.regex.Pattern;
 
-import duke.entities.TaskList;
+import duke.entities.managers.CacheManager;
 import duke.enums.CommandType;
 import duke.exceptions.DukeException;
 import duke.utils.CustomValidator;
@@ -34,8 +34,8 @@ public class DateCommand extends Command {
      * This method parses the command to verify and filter tasks with the date specified.
      */
     @Override
-    public String execute(Supplier<? extends TaskList> taskList) throws DukeException {
-        TaskList store = taskList.get();
+    public String execute(Supplier<? extends CacheManager> taskList) throws DukeException {
+        CacheManager store = taskList.get();
         boolean valid = CustomValidator.validate(args.strip(), input -> VALID_DATE.matcher(input).find());
         if (valid) {
             return store.filter(task -> task.isActiveOn(LocalDate.parse(args.split(" ")[1])),

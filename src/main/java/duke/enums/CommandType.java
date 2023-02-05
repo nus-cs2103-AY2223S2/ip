@@ -14,5 +14,7 @@ public enum CommandType {
     UNMARK,
     INVALID,
     DATE,
-    FIND
+    FIND,
+    UNDO,
+    CHECKOUT
 }

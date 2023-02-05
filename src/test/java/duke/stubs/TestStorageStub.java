@@ -1,7 +1,7 @@
 package duke.stubs;
 
 import duke.entities.Task;
-import duke.entities.TaskList;
+import duke.entities.managers.CacheManager;
 import duke.storage.Storage;
 
 /**
@@ -25,7 +25,7 @@ public class TestStorageStub extends Storage {
     public void connect() {}
 
     @Override
-    public Boolean load(TaskList taskList) {
+    public Boolean load(CacheManager cacheManager) {
         return true;
     }
 
@@ -33,5 +33,5 @@ public class TestStorageStub extends Storage {
     public void writeOne(Task task) {}
 
     @Override
-    public void writeAll(TaskList taskList) {}
+    public void writeAll(CacheManager cacheManager) {}
 }

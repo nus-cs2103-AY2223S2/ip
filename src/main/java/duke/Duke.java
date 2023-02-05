@@ -1,7 +1,7 @@
 package duke;
 
 import duke.controllers.Command;
-import duke.entities.TaskList;
+import duke.entities.managers.CacheManager;
 import duke.exceptions.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
@@ -12,7 +12,7 @@ import duke.storage.Storage;
  * and exiting the program writes data to the hard disk.
  */
 public class Duke {
-    private static TaskList taskList;
+    private static CacheManager cacheManager;
 
     /**
      * Duke Constructor for initializing the duke.Duke Object.
@@ -22,7 +22,7 @@ public class Duke {
     public Duke(String filename) {
         Storage storage = new Storage(filename);
         try {
-            taskList = new TaskList(storage);
+            cacheManager = new CacheManager(storage);
         } catch (DukeException e) {
             System.out.println(e.getMessage());
         }
@@ -37,7 +37,7 @@ public class Duke {
     public String getResponse(String input) {
         Command cmd = Parser.parse(input);
         try {
-            return cmd.execute(() -> taskList);
+            return cmd.execute(() -> cacheManager);
         } catch (DukeException e) {
             return e.getMessage();
         }
