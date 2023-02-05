@@ -69,7 +69,7 @@ public class Parser {
             requiredValues.add(Command.Argument.TO);
             break;
         default:
-            // Do nothing
+            assert false : "Unhandled command: " + command;
         }
         checkHasArgs(command, requiredArgs);
         checkHasValues(command, requiredValues);

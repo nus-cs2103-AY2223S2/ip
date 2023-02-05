@@ -43,7 +43,6 @@ public class TaskList {
         try {
             execute(Parser.parse(input));
         } catch (IllegalArgumentException e) {
-            e.printStackTrace();
             throw new IOException("Task list on disk corrupted!"
                     + " Some tasks might be missing or incorrect.");
         }
@@ -87,7 +86,7 @@ public class TaskList {
             tasks.remove(task);
             break;
         default:
-            // Do nothing
+            assert false : "Unhandled command: " + command;
         }
         return task;
     }

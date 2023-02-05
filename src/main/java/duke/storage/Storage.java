@@ -41,7 +41,10 @@ public class Storage {
      */
     public FileWriter getFileWriter() throws IOException {
         File file = new File(filePath);
-        file.getParentFile().mkdirs();
-        return new FileWriter(file);
+        if (file.getParentFile().mkdirs()) {
+            return new FileWriter(file);
+        } else {
+            throw new IOException("Failed to create required directories");
+        }
     }
 }
