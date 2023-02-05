@@ -85,11 +85,24 @@ public class Parser {
                     throw new DukeException(deleteError);
                 }
                 return new Command.DeleteCommand(indexInput - 1);
+            case "filter":
+                if (parts.length != 2 || parts[1].trim().isEmpty()) {
+                    throw new DukeException("Command filter has to be followed by a keyword(s) separated with commas.");
+                }
+                String[] stringKeywords = parts[1].trim().split(",");
+                String[] validKeywords = new String[stringKeywords.length];
+                for (int i = 0; i < stringKeywords.length; i++) {
+                    String keyword = null;
+                    keyword = stringKeywords[i].trim();
+                    validKeywords[i] = keyword;
+                }
+                return new Command.FilterCommand(validKeywords);
             case "filterdate":
                 if (parts.length != 2 || parts[1].trim().isEmpty()) {
-                    throw new DukeException("Command filterdate has to be followed by date.");
+                    throw new DukeException("Command filterdate has to be followed by date(s) separated with commas.");
                 }
-                LocalDate date = null;
+                String[] stringDates = parts[1].trim().split(",");
+                LocalDate[] validDates = new LocalDate[stringDates.length];
                 DateTimeFormatter[] formatters = {
                         DateTimeFormatter.ofPattern("ddMMyyyy"),
                         DateTimeFormatter.ofPattern("dd/MM/yyyy"),
@@ -97,25 +110,25 @@ public class Parser {
                         DateTimeFormatter.ofPattern("yyyy/MM/dd"),
                         DateTimeFormatter.ofPattern("yyyy-MM-dd")
                 };
-                for (DateTimeFormatter formatter : formatters) {
-                    // Goes through list of formatters to see which matches the date input
-                    try {
-                        date = LocalDate.parse(parts[1].trim(), formatter);
-                        break;
-                    } catch (DateTimeParseException e) {
-                        // Invalid format, try the next one
+                for (int i = 0; i < stringDates.length; i++) {
+                    LocalDate date = null;
+                    for (DateTimeFormatter formatter : formatters) {
+                        // Goes through list of formatters to see which matches the date input
+                        try {
+                            date = LocalDate.parse(stringDates[i].trim(), formatter);
+                            validDates[i] = date;
+                            break;
+                        } catch (DateTimeParseException e) {
+                            // Invalid format, try the next one
+                        }
                     }
                 }
-                if (date == null) {
-                    throw new DukeException("Reenter date in this format: (ddMMyyyy)");
+                for (LocalDate date : validDates) {
+                    if (date == null) {
+                        throw new DukeException("Reenter dates in this format: (ddMMyyyy)");
+                    }
                 }
-                return new Command.FilterCommand(date);
-            case "filter":
-                if (parts.length != 2 || parts[1].trim().isEmpty()) {
-                    throw new DukeException("Command filter has to be followed by a keyword.");
-                }
-                String keyword = parts[1].trim();
-                return new Command.FilterCommand(keyword);
+                return new Command.FilterDateCommand(validDates);
             case "bye":
                 return new Command.ExitCommand();
             default:

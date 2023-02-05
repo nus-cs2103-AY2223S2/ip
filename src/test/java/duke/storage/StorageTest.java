@@ -30,7 +30,7 @@ public class StorageTest {
     @Test
     void testSave() throws DukeException {
         // Add a task to the list
-        tasks.addTask(new Deadline("Test deadline", "01012023"));
+        tasks.add(new Deadline("Test deadline", "01012023"));
         storage.save(tasks);
         File file = new File(testFile);
         // Assert that the file has been created and has content
@@ -41,11 +41,11 @@ public class StorageTest {
     @Test
     void testLoad() throws DukeException {
         // Add a task to the list
-        tasks.addTask(new Event("Test event", "01012023 1200", "02012023 1800"));
+        tasks.add(new Event("Test event", "01012023 1200", "02012023 1800"));
         storage.save(tasks);
         TaskList loadedTasks = storage.load();
         // Assert that the loaded tasks have the same size as the original list
-        assertEquals(tasks.getSize(), loadedTasks.getSize());
+        assertEquals(tasks.size(), loadedTasks.size());
     }
 
     @AfterEach

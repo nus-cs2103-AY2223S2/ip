@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -103,9 +104,10 @@ public class ParserTest {
 
     @Test
     public void parse_validFilterCommand_returnsFilterCommand() throws DukeException {
-        Command command = Parser.parse("filterdate 01012023");
+        Command command = Parser.parse("filter hi, wow, sup");
         assertTrue(command instanceof Command.FilterCommand);
-        assertEquals(LocalDate.of(2023,01,01), ((Command.FilterCommand) command).getObject());
+        String[] keywords = new String[] {"hi", "wow", "sup"};
+        assertEquals(Arrays.asList(keywords), Arrays.asList(((Command.FilterCommand) command).getKeywords()));
     }
 
     @Test

@@ -3,141 +3,115 @@ package duke.task;
 import duke.ui.Ui;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-public class TaskList {
-    /** Arraylist of tasks */
-    private ArrayList<Task> tasks;
+public class TaskList extends ArrayList<Task>{
 
     /**
-     * Constructs TaskList class.
+     * Constructs task list.
+     */
+    public TaskList(ArrayList<Task> tasks) {
+        super(tasks);
+    }
+
+    /**
+     * Constructs empty task list.
      */
     public TaskList() {
-        this.tasks = new ArrayList<>();
+        super();
     }
 
     /**
-     * Gets ArrayList of tasks.
+     * Marks task in TaskList.
      *
-     * @return ArrayList of tasks.
+     * @param index Index of task to be marked.
      */
-    public ArrayList<Task> getTasks() {
-        return tasks;
-    }
-
-    /**
-     * Sets ArrayList of tasks.
-     *
-     * @param tasks ArrayList of tasks to be set to.
-     */
-    public void setTasks(ArrayList<Task> tasks) {
-        this.tasks = tasks;
-    }
-
-    /**
-     * Gets size of ArrayList of tasks.
-     *
-     * @return Size of ArrayList of tasks.
-     */
-    public int getSize() {
-        return tasks.size();
-    }
-
-    /**
-     * Gets task of specified index in ArrayList.
-     *
-     * @param index Index of the task in ArrayList.
-     * @return Task of specified index in ArrayList.
-     */
-    public Task getTask(int index) {
-        return tasks.get(index);
-    }
-
-    /**
-     * Adds task to ArrayList.
-     *
-     * @param task Task to be added.
-     */
-    public void addTask(Task task) {
-        tasks.add(task);
-    }
-
-    /**
-     * Marks task in ArrayList.
-     *
-     * @param task Task to be marked.
-     */
-    public void markTask(Task task) {
+    public void markTask(int index) {
+        Task task= this.get(index);
         task.setDone(true);
     }
 
     /**
-     * Unmarks task in ArrayList.
+     * Unmarks task in TaskList.
      *
-     * @param task Task to be unmarked.
+     * @param index Index of task to be unmarked.
      */
-    public void unmarkTask(Task task) {
+    public void unmarkTask(int index) {
+        Task task= this.get(index);
         task.setDone(false);
     }
 
     /**
-     * Deletes task of specified index in ArrayList.
+     * Shows tasks in TaskList.
      *
-     * @param index Index of the task in ArrayList.
+     * @return List of tasks in TaskList in strings.
      */
-    public void deleteTask(int index) {
-        tasks.remove(index);
+    @Override
+    public String toString() {
+        String list = "";
+        for (int i = 0; i < this.size(); i++) {
+            Task t = this.get(i);
+            int index = i + 1;
+            if (i == this.size() - 1) {
+                list += "\t" + index + "." + t;
+            } else {
+                list += "\t" + index + "." + t + "\n";
+            }
+        }
+        return list;
     }
 
     /**
-     * Shows tasks in ArrayList using Ui.
+     * Filter tasks by keywords.
      *
-     * @param ui Ui to show tasks.
+     * @param keywords Keywords to filter tasks by.
+     * @return TaskList of filtered tasks.
      */
-    public void showList(Ui ui) {
-        ui.showList(this);
+    public TaskList filter(String... keywords) {
+        TaskList filteredTasks = new TaskList();
+        for (String keyword : keywords) {
+            for (Task task : this) {
+                String description = task.getDescription();
+                if (description.contains(keyword.trim())) {
+                    if (!filteredTasks.contains(task)) {
+                        filteredTasks.add(task);
+                    }
+                }
+            }
+        }
+        return filteredTasks;
     }
 
     /**
-     * Filter tasks by their date.
-     * Shows deadlines and ongoing events on that date.
+     * Filter tasks by their dates.
      *
-     * @param ui Ui to show filtered tasks.
-     * @param date Date to filter tasks by.
+     * @param dates Dates to filter tasks by.
+     * @return TaskList of filtered tasks.
      */
-    public void filterDate(Ui ui, LocalDate date) {
-        int count = 0;
-        for (Task task : tasks) {
-            if (task instanceof Deadline) {
-                Deadline deadline = (Deadline) task;
-                if (deadline.getDeadline().toLocalDate().isEqual(date)) {
-                    ui.printUi(deadline.toString());
-                    count++;
-                }
-            } else if (task instanceof Event) {
-                Event event = (Event) task;
-                if (event.getStartDateTime().toLocalDate().isEqual(date) ||
-                        event.getEndDateTime().toLocalDate().isEqual(date) ||
-                        (event.getStartDateTime().toLocalDate().isBefore(date) &&
-                                event.getEndDateTime().toLocalDate().isAfter(date))) {
-                    ui.printUi(event.toString());
-                    count++;
+    public TaskList filterDate(LocalDate... dates) {
+        TaskList filteredTasks = new TaskList();
+        for (LocalDate date : dates) {
+            for (Task task : this) {
+                if (task instanceof Deadline) {
+                    Deadline deadline = (Deadline) task;
+                    if (deadline.getDeadline().toLocalDate().isEqual(date)) {
+                        if (!filteredTasks.contains(task)) {
+                            filteredTasks.add(task);
+                        }
+                    }
+                } else if (task instanceof Event) {
+                    Event event = (Event) task;
+                    if (event.getStartDateTime().toLocalDate().isEqual(date) ||
+                            event.getEndDateTime().toLocalDate().isEqual(date) ||
+                            (event.getStartDateTime().toLocalDate().isBefore(date) &&
+                                    event.getEndDateTime().toLocalDate().isAfter(date))) {
+                        if (!filteredTasks.contains(task)) {
+                            filteredTasks.add(task);
+                        }
+                    }
                 }
             }
         }
-        ui.printUi("Number of tasks on " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ": " + count);
-    }
-
-    public void filter(Ui ui, String keyword) {
-        int count = 0;
-        for (Task task : tasks) {
-            String desc = task.getDescription();
-            if (desc.contains(keyword)) {
-                ui.printUi(task.toString());
-                count++;
-            }
-        }
-        ui.printUi("Number of tasks with " + "'" + keyword + "'" + ": " + count);
+        return filteredTasks;
     }
 }
