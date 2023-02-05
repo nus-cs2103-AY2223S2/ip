@@ -3,7 +3,7 @@ package duke.taskers;
 /**
  * Task class.
  */
-public class Task {
+public abstract class Task {
 
     private final String description;
     private boolean isDone;
@@ -46,6 +46,8 @@ public class Task {
         return ((this.isDone ? "1" : "0") + " / "
                 + this.description.trim()).trim();
     }
+
+    public abstract String formatStringForFile();
 
     /**
      * Formats for the task string.

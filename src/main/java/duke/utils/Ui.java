@@ -35,15 +35,6 @@ public class Ui {
     }
 
     /**
-     * Reads the command on the command line.
-     *
-     * @return String of the command.
-     */
-    public String readCommand() {
-        return this.in.nextLine();
-    }
-
-    /**
      * Prints out the matching tasks.
      *
      * @param arrList Array of matching tasks.
@@ -70,14 +61,6 @@ public class Ui {
             totalString += "\n     " + (i + 1) + "." + arrList.get(i).toString();
         }
         return totalString;
-    }
-
-    /**
-     * Prints out the line that sandwiches Duke's responses.
-     */
-    public void showLine() {
-        this.out.println("    _______________________________________"
-                + "________________________________________________");
     }
 
     /**

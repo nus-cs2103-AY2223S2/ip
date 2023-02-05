@@ -31,6 +31,7 @@ public class Storage {
      * @param filePath The path to the duke file.
      */
     public Storage(String filePath) {
+        assert !filePath.equals("");
         this.filePath = filePath;
         int lastIndexOfSlash = this.filePath.lastIndexOf(File.separator);
         this.dirPath = this.filePath.substring(0, lastIndexOfSlash);
@@ -44,18 +45,7 @@ public class Storage {
      * @return The string representation to be appended to the file.
      */
     public static String taskStringFormatter(Task t) {
-        String s = "";
-        if (t instanceof Todo) {
-            Todo todo = (Todo) t;
-            s = todo.formatStringForFile();
-        } else if (t instanceof Deadline) {
-            Deadline deadline = (Deadline) t;
-            s = deadline.formatStringForFile();
-        } else {
-            Event event = (Event) t;
-            s = event.formatStringForFile();
-        }
-        return s;
+        return t.formatStringForFile();
     }
 
 
@@ -89,7 +79,9 @@ public class Storage {
                 String[] valueArr = str.split("/");
 
                 Task thisTask = null;
-                boolean doneOrNot = valueArr[1].trim().equals("1");
+                String doneOrNotStr = valueArr[1].trim();
+                assert doneOrNotStr.equals("1") || doneOrNotStr.equals("0");
+                boolean doneOrNot = doneOrNotStr.equals("1");
                 String type = valueArr[0].toLowerCase().trim();
 
                 switch (type) {
