@@ -13,14 +13,6 @@ public class Task {
         this.isDone = false;
     }
 
-    public String getDoneStatus() {
-        if (isDone) {
-            return "X";
-        } else {
-            return " ";
-        }
-    }
-
     public void setDone() {
         this.isDone = true;
     }
@@ -58,6 +50,18 @@ public class Task {
         System.out.println("     OK, I've marked this task as not done yet:");
         System.out.println("       " + this);
         Task.printHorizontalLine();
+    }
+
+    public void printTask() {
+        System.out.println(this.id + ".[" + this.getStatusIcon() + "] " + this.description);
+    }
+
+    public String getStatusIcon() {
+        return (isDone ? "X" : " "); // mark done task with X
+    }
+
+    public String getDescription() {
+        return description;
     }
 
 }
