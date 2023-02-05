@@ -6,8 +6,9 @@ Mr. Bear is a **convenient and flexible** software that helps you to manage and 
 + easy to learn
 + ~~FAST~~ *SUPER FAST* to use
 
-**And it is ***FREE!!!***
+And it is ***FREE!!!***
 
+## Quick Start
 All you need to do is,
 1. download it from [here](https://github.com/Yufannnn/ip/releases). 
 2. double-click it. 
@@ -16,10 +17,10 @@ All you need to do is,
 
 If you are not sure how to use it, check out the [User Guide](https://yufannnn.github.io/ip/)! 
 
-Features:
+## Features:
 
 - [X] Graphic User Interface
 - [X] Add four type of tasks (todo, deadline, event, fixed duration)
 - [X] Search, Sort, Find tasks
 - [X] Mark, Unmark, Delete, massDelete tasks
-- [ ] Undo Command (Partially functional and comming soon...)
+- [X] find the next free day
