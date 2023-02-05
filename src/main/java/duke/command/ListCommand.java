@@ -74,7 +74,7 @@ public class ListCommand extends Command {
                     }
                     if (task instanceof Event) {
                         Event e = (Event) task;
-                        if (e.getFrom().toLocalDate().equals(x.toLocalDate())) {
+                        if (e.getStartDate().toLocalDate().equals(x.toLocalDate())) {
                             return true;
                         }
                     }
@@ -143,7 +143,7 @@ public class ListCommand extends Command {
             }
             if (task instanceof Event) {
                 Event e = (Event) task;
-                if (e.getFrom().toLocalDate().equals(date.toLocalDate())) {
+                if (e.getStartDate().toLocalDate().equals(date.toLocalDate())) {
                     return true;
                 }
             }

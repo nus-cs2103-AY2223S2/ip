@@ -17,7 +17,14 @@ public class DukeRepoImpl extends DukeRepo {
      * Default constructor
      */
     public DukeRepoImpl() {
-        local = new DukeLocalDatabase();
+        this(false);
+    }
+
+    /**
+     * Constructor for testing
+     */
+    public DukeRepoImpl(boolean isTestMode) {
+        local = new DukeLocalDatabase(isTestMode);
     }
 
     /**
@@ -33,6 +40,7 @@ public class DukeRepoImpl extends DukeRepo {
      */
     @Override
     public Task getTask(int taskId) {
+        assert taskId > 0;
         return local.getTask(taskId);
     }
 
@@ -57,6 +65,7 @@ public class DukeRepoImpl extends DukeRepo {
      */
     @Override
     public Task removeTask(int taskId) {
+        assert taskId > 0;
         return local.removeTask(taskId);
     }
 

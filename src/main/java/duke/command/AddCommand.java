@@ -22,8 +22,8 @@ public class AddCommand extends Command {
     private DukeCommand tType;
     private String title;
     private Boolean isDone;
-    private LocalDateTime date1;
-    private LocalDateTime date2;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
 
     /**
      * Constructor for adding a todo.
@@ -42,10 +42,10 @@ public class AddCommand extends Command {
      * @param tType  {@link DukeCommand} enum
      * @param title  {@link String} object
      * @param isDone boolean
-     * @param date1  {@link LocalDateTime} object
+     * @param startDate  {@link LocalDateTime} object
      */
-    public AddCommand(DukeCommand tType, String title, boolean isDone, LocalDateTime date1) {
-        this(tType, title, isDone, date1, null);
+    public AddCommand(DukeCommand tType, String title, boolean isDone, LocalDateTime startDate) {
+        this(tType, title, isDone, startDate, null);
     }
 
     /**
@@ -54,15 +54,15 @@ public class AddCommand extends Command {
      * @param tType  {@link DukeCommand} enum
      * @param title  {@link String} object
      * @param isDone boolean
-     * @param date1  {@link LocalDateTime} object
-     * @param date2  {@link LocalDateTime} object
+     * @param startDate  {@link LocalDateTime} object
+     * @param endDate  {@link LocalDateTime} object
      */
-    public AddCommand(DukeCommand tType, String title, boolean isDone, LocalDateTime date1, LocalDateTime date2) {
+    public AddCommand(DukeCommand tType, String title, boolean isDone, LocalDateTime startDate, LocalDateTime endDate) {
         this.tType = tType;
         this.title = title;
         this.isDone = isDone;
-        this.date1 = date1;
-        this.date2 = date2;
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
     /**
@@ -100,9 +100,9 @@ public class AddCommand extends Command {
         case TODO:
             return new Todo(title, isDone);
         case DEADLINE:
-            return new Deadline(title, isDone, date1);
+            return new Deadline(title, isDone, startDate);
         case EVENT:
-            return new Event(title, isDone, date1, date2);
+            return new Event(title, isDone, startDate, endDate);
         default:
             throw new InvalidTaskTypeException(Message.EXCEPTION_INVALID_TASK_TYPE);
         }
