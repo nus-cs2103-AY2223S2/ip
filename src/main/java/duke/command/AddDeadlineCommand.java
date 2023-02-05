@@ -1,10 +1,10 @@
 package duke.command;
 
-import java.time.DateTimeException;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import duke.exception.InvalidArgumentException;
 import duke.exception.MissingArgumentException;
+import duke.parser.DateTimeParser;
 import duke.storage.TaskList;
 import duke.task.Deadline;
 
@@ -44,16 +44,12 @@ public class AddDeadlineCommand extends Command {
         String task = req[0].strip();
         String deadline = req[1].strip();
 
-        try {
-            LocalDate dueDate = LocalDate.parse(deadline);
-            Deadline newDeadline = tasks.addDeadline(task, dueDate);
-            return "Great! I've added this task for you \n" + newDeadline
-                    + "\nYou have " + tasks.numOfTask() + " tasks in the list";
+        LocalDateTime dueDate = DateTimeParser.parse(deadline);
+        Deadline newDeadline = tasks.addDeadline(task, dueDate);
 
-        } catch (DateTimeException error) {
-            throw new InvalidArgumentException("Please insert your date using the format, "
-                    + "YYYY-MM-DD (e.g. 2000-01-01)");
-        }
+        return "Great! I've added this task for you \n" + newDeadline
+                + "\nYou have " + tasks.numOfTask() + " tasks in the list";
+
 
     }
 }

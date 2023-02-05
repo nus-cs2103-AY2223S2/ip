@@ -48,8 +48,8 @@ public class Parser {
      * @param request request by the user
      */
     public Parser(String request) {
-            this.request = request;
-            this.tasks = new TaskList();
+        this.request = request;
+        this.tasks = new TaskList();
     }
 
     /**

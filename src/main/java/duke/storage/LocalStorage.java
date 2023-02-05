@@ -7,10 +7,11 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.DateTimeException;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import duke.exception.DukeException;
 import duke.exception.InvalidArgumentException;
+import duke.parser.DateTimeParser;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -79,7 +80,7 @@ public class LocalStorage {
                     case "D":
                         String dueDate = args[3].trim();
                         try {
-                            LocalDate formattedDueDate = LocalDate.parse(dueDate);
+                            LocalDateTime formattedDueDate = DateTimeParser.parse(dueDate);
                             Deadline deadline = new Deadline(taskDesc, formattedDueDate);
                             if (taskStatus.equals("1")) {
                                 deadline.markComplete();
@@ -88,14 +89,14 @@ public class LocalStorage {
                             break;
                         } catch (DateTimeException error) {
                             throw new InvalidArgumentException("Wrong date format! Please follow the format "
-                                    + "YYYY-MM-DD (e.g. 2000-01-01)");
+                                    + "YYYY-MM-DD HHmm (e.g. 2000-01-01 2311)");
                         }
                     case "E":
                         String from = args[3].strip();
                         String to = args[4].strip();
                         try {
-                            LocalDate startDate = LocalDate.parse(from);
-                            LocalDate endDate = LocalDate.parse(to);
+                            LocalDateTime startDate = DateTimeParser.parse(from);
+                            LocalDateTime endDate = DateTimeParser.parse(to);
                             Event event = new Event(taskDesc, startDate, endDate);
                             if (startDate.isAfter(endDate)) {
                                 throw new InvalidArgumentException("Your start date should be before your end date!");
@@ -107,7 +108,7 @@ public class LocalStorage {
                             break;
                         } catch (DateTimeException error) {
                             throw new InvalidArgumentException("Wrong date format! Please follow the format "
-                                    + "YYYY-MM-DD (e.g. 2000-01-01)");
+                                    + "YYYY-MM-DD HHmm (e.g. 2000-01-01 2311)");
                         }
                     default:
                         break;

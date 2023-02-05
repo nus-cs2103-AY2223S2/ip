@@ -1,10 +1,10 @@
 package duke.command;
 
-import java.time.DateTimeException;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import duke.exception.InvalidArgumentException;
 import duke.exception.MissingArgumentException;
+import duke.parser.DateTimeParser;
 import duke.storage.TaskList;
 import duke.task.Event;
 
@@ -61,21 +61,16 @@ public class AddEventCommand extends Command {
             throw new MissingArgumentException("Please insert an end date.");
         }
 
-        try {
-            LocalDate startDate = LocalDate.parse(from);
-            LocalDate endDate = LocalDate.parse(to);
-            Event newEvent = tasks.addEvent(task, startDate, endDate);
+        LocalDateTime startDate = DateTimeParser.parse(from);
+        LocalDateTime endDate = DateTimeParser.parse(to);
+        Event newEvent = tasks.addEvent(task, startDate, endDate);
 
-            // check valid `duration`
-            if (startDate.isAfter(endDate)) {
-                throw new InvalidArgumentException("Your start date should be before your end date!");
-            }
-
-            return "Great! I've added this task for you \n" + newEvent
-                    + "\nYou have " + tasks.numOfTask() + " tasks in the list";
-        } catch (DateTimeException error) {
-            throw new InvalidArgumentException("Wrong date format! "
-                    + "Please follow the format YYYY-MM-DD (e.g. 2000-01-01)");
+        // check valid `duration`
+        if (startDate.isAfter(endDate)) {
+            throw new InvalidArgumentException("Your start date should be before your end date!");
         }
+
+        return "Great! I've added this task for you \n" + newEvent
+                + "\nYou have " + tasks.numOfTask() + " tasks in the list";
     }
 }

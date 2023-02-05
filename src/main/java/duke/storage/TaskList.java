@@ -1,7 +1,7 @@
 package duke.storage;
 
 import java.io.File;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import duke.task.Deadline;
@@ -66,7 +66,7 @@ public class TaskList {
      * @param dueDate the deadline of the task
      * @return the added Deadline
      */
-    public Deadline addDeadline(String task, LocalDate dueDate) {
+    public Deadline addDeadline(String task, LocalDateTime dueDate) {
         Deadline taskDeadline = new Deadline(task, dueDate);
         this.tasks.add(taskDeadline);
         return taskDeadline;
@@ -79,7 +79,7 @@ public class TaskList {
      * @param to end time of the event
      * @return the added Event
      */
-    public Event addEvent(String task, LocalDate from, LocalDate to) {
+    public Event addEvent(String task, LocalDateTime from, LocalDateTime to) {
         Event event = new Event(task, from, to);
         this.tasks.add(event);
         return event;

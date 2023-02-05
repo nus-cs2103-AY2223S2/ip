@@ -1,14 +1,14 @@
 package duke.task;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
  * Event that runs for a duration.
  */
 public class Event extends Task {
-    private final LocalDate from;
-    private final LocalDate to;
+    private final LocalDateTime from;
+    private final LocalDateTime to;
 
     /**
      * Constructor to create a new event
@@ -16,7 +16,7 @@ public class Event extends Task {
      * @param from start time of the event
      * @param to end time of the event
      */
-    public Event(String task, LocalDate from, LocalDate to) {
+    public Event(String task, LocalDateTime from, LocalDateTime to) {
         super(task);
         this.from = from;
         this.to = to;
@@ -31,8 +31,8 @@ public class Event extends Task {
     @Override
     public String toString() {
         String statusIcon = this.completed ? "X" : " ";
-        String formatted_start = from.format(DateTimeFormatter.ofPattern("MMM dd yyy"));
-        String formatted_end = to.format(DateTimeFormatter.ofPattern("MMM dd yyy"));
-        return "[E][" + statusIcon + "] " + this.task + " (from: " + formatted_start + " to: " + formatted_end + ")";
+        String formattedStart = from.format(DateTimeFormatter.ofPattern("MMM dd yyyy, h:mma"));
+        String formattedEnd = to.format(DateTimeFormatter.ofPattern("MMM dd yyyy, h:mma"));
+        return "[E][" + statusIcon + "] " + this.task + " (from: " + formattedStart + " to: " + formattedEnd + ")";
     }
 }

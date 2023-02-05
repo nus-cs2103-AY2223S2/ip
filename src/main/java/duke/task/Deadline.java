@@ -1,20 +1,20 @@
 package duke.task;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
  * Task with a deadline.
  */
 public class Deadline extends Task {
-    private final LocalDate dueDate;
+    private final LocalDateTime dueDate;
 
     /**
      * Constructor method for Deadline
      * @param task new task to be added
      * @param dueDate deadline of the task
      */
-    public Deadline(String task, LocalDate dueDate) {
+    public Deadline(String task, LocalDateTime dueDate) {
         super(task);
         this.dueDate = dueDate;
     }
@@ -28,7 +28,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         String statusIcon = this.completed ? "X" : " ";
-        String formattedDueDate = dueDate.format(DateTimeFormatter.ofPattern("MMM dd yyy"));
+        String formattedDueDate = dueDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy, h:mma"));
         return "[D][" + statusIcon + "] " + this.task + " (by: " + formattedDueDate + ")";
     }
 }
