@@ -39,11 +39,13 @@ public class Parser {
         if (command.contains("/")) {
             String[] temp2;
             String[] temp = command.split(" ", 2);
+
             if (temp[0].equals("deadline")) {
                 temp2 = temp[1].split("/", 2);
             } else {
                 temp2 = temp[1].split("/");
             }
+
             temp2[1] = temp2[1].replace("/", "-");
             arr = new String[temp.length + temp2.length - 1];
             arr[0] = temp[0];
@@ -64,9 +66,9 @@ public class Parser {
     public static Command parse(String command) {
         Command parsedCommand = null;
         String[] arr = splitCommand(command);
-        String commandType = arr[0].trim();
+        final String COMMAND_TYPE = arr[0].trim();
 
-        switch (commandType) {
+        switch (COMMAND_TYPE) {
         case BYE:
             parsedCommand = new ExitCommand();
             break;

@@ -30,14 +30,12 @@ public class DeleteCommand extends Command {
      * @param storage
      * @return
      */
-
-
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        Task taskDeleted = tasks.getTask(taskNum - 1);
+        Task taskToBeDeleted = tasks.getTask(taskNum - 1);
         tasks.delete(taskNum - 1);
         storage.delete(taskNum);
-        return ui.showDeleteMessage(taskDeleted, String.valueOf(tasks.getLength()));
+        return ui.showDeleteMessage(taskToBeDeleted, String.valueOf(tasks.getLength()));
     }
 
     /**
@@ -45,7 +43,6 @@ public class DeleteCommand extends Command {
      *
      * @return whether the program is exited.
      */
-
     @Override
     public boolean isExit() {
         return false;

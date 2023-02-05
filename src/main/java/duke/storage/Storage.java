@@ -30,9 +30,6 @@ public class Storage {
     private static final String EVENT = "E";
 
     private String filePath;
-    private FileWriter writer;
-    private ArrayList<Task> taskList = new ArrayList<>();
-    private Task task;
 
     /**
      * Constructor for Storage.
@@ -43,6 +40,35 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    public void markTaskStatus(String status, Task task) {
+        if (status.equals("0")) {
+            task.markAsIncomplete();
+        } else if (status.equals("1")) {
+            task.markAsDone();
+        }
+    }
+
+    public Deadline formatDeadlineStr(String str) {
+        String updatedStr = str.replace("(", "").replace(")", "").trim();
+        String[] paraForDeadline = updatedStr.split("by: ", 2);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy hhmm a");
+        LocalDateTime tempDueDate = LocalDateTime.parse(paraForDeadline[1], formatter);
+
+        DateTimeFormatter newFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
+        String finalDueDate = tempDueDate.format(newFormatter);
+
+        LocalDateTime dueDate = LocalDateTime.parse(finalDueDate, newFormatter);
+        return new Deadline(paraForDeadline[0], dueDate);
+    }
+
+    public Event formatEventStr(String str) {
+        String updatedStr = str.replace("(", "").replace(")", "").trim();
+        String[] getParas = updatedStr.split("from: ", 2);
+        String getDesc = getParas[0];
+        String[] getDueDateInfo = getParas[1].split("to: ", 2);
+        return new Event(getDesc, getDueDateInfo[0], getDueDateInfo[1]);
+    }
+
     /**
      * Convert the task information in the txt file to Task objects.
      *
@@ -51,40 +77,23 @@ public class Storage {
      */
 
     private Task convertStrToTask(String str) {
-        String getTaskType = str.substring(0, 1);
-        String getStatus = str.substring(4, 5);
-        switch (getTaskType) {
+        Task task = null;
+        final String TASK_TYPE = str.substring(0, 1);
+        final String STATUS_OF_TASK = str.substring(4, 5);
+        switch (TASK_TYPE) {
         case TODO:
             task = new Todo(str.substring(8));
             break;
         case DEADLINE:
-            String updatedStr = str.substring(8).replace("(", "").replace(")", "").trim();
-            String[] paraForDeadline = updatedStr.split("by: ", 2);
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy hhmm a");
-            LocalDateTime tempDueDate = LocalDateTime.parse(paraForDeadline[1], formatter);
-
-            DateTimeFormatter newFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
-            String finalDueDate = tempDueDate.format(newFormatter);
-
-            LocalDateTime dueDate = LocalDateTime.parse(finalDueDate, newFormatter);
-            task = new Deadline(paraForDeadline[0], dueDate);
+            task = formatDeadlineStr(str.substring(8));
             break;
         case EVENT:
-            String updatedStrr = str.substring(8).replace("(", "").replace(")", "");
-            String[] getParas = updatedStrr.split("from: ", 2);
-            String getDesc = getParas[0];
-            String[] getFromBy = getParas[1].split("to: ", 2);
-            task = new Event(getDesc, getFromBy[0], getFromBy[1]);
+            task = formatEventStr(str.substring(8));
             break;
         default:
             break;
         }
-
-        if (getStatus.equals("0")) {
-            task.markAsIncomplete();
-        } else if (getStatus.equals("1")) {
-            task.markAsDone();
-        }
+        markTaskStatus(STATUS_OF_TASK, task);
         return task;
     }
 
@@ -96,14 +105,14 @@ public class Storage {
      */
 
     public ArrayList<Task> load() throws DukeException {
+        ArrayList<Task> taskList = new ArrayList<>();
         try {
             BufferedReader bufReader = new BufferedReader(new FileReader(filePath));
-            String line = bufReader.readLine();
-            while (line != null) {
-                Task addTask = convertStrToTask(line);
+            String currLine = bufReader.readLine();
+            while (currLine != null) {
+                Task addTask = convertStrToTask(currLine);
                 taskList.add(addTask);
-
-                line = bufReader.readLine();
+                currLine = bufReader.readLine();
             }
             bufReader.close();
         } catch (FileNotFoundException e) {
@@ -125,6 +134,7 @@ public class Storage {
     public void update(Task task) throws IOException {
         Path dataDir = Paths.get("ip/data");
         Path dataFile = Paths.get("ip/data/tasks.txt");
+
         // directory does not exists
         if (!Files.isDirectory(dataDir)) {
             Files.createDirectory(dataDir);
@@ -137,7 +147,8 @@ public class Storage {
         }
 
         assert Files.exists(dataFile) : "tasks.txt file should be created";
-        writer = new FileWriter("ip/data/tasks.txt", true);
+        FileWriter writer = new FileWriter("ip/data/tasks.txt", true);
+
         String finalTasks = "";
         String taskInfo = task.toString().replace("[ ]", " | 0 |").replace("[X]", "| 1 |");
         taskInfo = taskInfo.replace("[", "").replace("]", "");
