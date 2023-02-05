@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.exceptions.TaskException;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
@@ -33,7 +32,6 @@ public class MarkCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Storage storage, Ui ui) {
-
         return taskList.markItem(index);
     }
 }
