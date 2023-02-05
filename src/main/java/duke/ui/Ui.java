@@ -71,7 +71,8 @@ public class Ui {
      * @param message Message to be printed.
      */
     public void display(String message) {
-         this.response = message;
+        assert message != null : "Message to be displayed is invalid!";
+        this.response = message;
     }
 
     public String getResponse() {
