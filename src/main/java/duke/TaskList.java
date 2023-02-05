@@ -1,6 +1,5 @@
 package duke;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import exceptions.IncorrectNoOfArgumentException;
@@ -16,8 +15,6 @@ import exceptions.IncorrectNoOfArgumentException;
 public class TaskList {
 
     private ArrayList<Task> taskList;
-    private StringBuilder sb;
-    private String message;
 
     /**
      * Returns a TaskList object that stores all tasks in an ArrayList of type Task
