@@ -85,6 +85,7 @@ public class Storage {
                 default:
                     continue;
                 }
+                assert t != null : "task shouldn't be null";
                 tasks.addTask(t);
             }
         } catch (IOException | SamInvalidDateException e) {

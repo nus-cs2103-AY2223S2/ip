@@ -67,6 +67,7 @@ public class AddCommand extends Command {
             throw new SamUnknownCommandException();
         }
 
+        assert task != null : "task shouldn't be null";
         tasks.addTask(task);
 
         ui.respond("Gotcha, I'll add the task to your list:",
