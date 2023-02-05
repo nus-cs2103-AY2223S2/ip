@@ -4,6 +4,12 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Class for Event object.
+ * Stores task, start and end deadline of an event.
+ * 
+ * @author Bryan Tan
+ */
 public class Event extends Task {
     private String task;
     private LocalDateTime start;
@@ -11,6 +17,14 @@ public class Event extends Task {
     private DateTimeFormatter acceptingFormat = DateTimeFormatter.ofPattern("yyyy/MM/dd HHmm");
     private DateTimeFormatter displayFormat = DateTimeFormatter.ofPattern("dd/MMM/yyyy HHmm");
 
+    /**
+     * Constructor for Event object.
+     * 
+     * @param task Description of the Event.
+     * @param start Starting date and time of the Event.
+     * @param end Ending date and time of the Event.
+     * @return an Event object.
+     */
     public Event(String task, String start, String end) {
         super(task);
         try {

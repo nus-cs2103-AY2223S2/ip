@@ -9,6 +9,13 @@ import java.util.Scanner;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 
+/**
+ * Class for Storage object.
+ * Saves list of tasks of current session in hard disk.
+ * Loads pre-existing list of tasks upon startup if any.
+ * 
+ * @author Bryan Tan
+ */
 public class Storage {
     private DateTimeFormatter savedFormat = DateTimeFormatter.ofPattern("dd/MMM/yyyy HHmm");
     private DateTimeFormatter loadFormat = DateTimeFormatter.ofPattern("yyyy/MM/dd HHmm");
@@ -16,6 +23,13 @@ public class Storage {
     private File saved;
     private String path;
 
+    /**
+     * Constructor for Storage class.
+     * 
+     * @param path path of file to load (if exists).
+     * @throws IOException when path is invalid.
+     * @return A Storage object.
+     */
     public Storage(String path) throws IOException {
         this.path = path;
         this.saved = new File(path);
@@ -26,10 +40,21 @@ public class Storage {
         }
     }
 
+    /**
+     * Checks if a pre-existing saved list of tasks is available.
+     * 
+     * @return true if file is available, false otherwise.
+     */
     public boolean isSaved() {
         return this.exist;
     }
 
+    /**
+     * Saves list of tasks in current session into same file path and file name.
+     * 
+     * @param list List of tasks to be saved.
+     * @throws IOException when file path is invalid.
+     */
     public void save(ArrayList<Task> list) throws IOException {
         FileWriter fw = new FileWriter(path, false);
         for (int i = 0; i < list.size(); i++) {
@@ -66,6 +91,12 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * Loads pre-existing saved list of tasks.
+     * 
+     * @return Arraylist containing tasks created from previous session.
+     * @throws FileNotFoundException when file is not found.
+     */
     public ArrayList<Task> load() throws FileNotFoundException {
         Scanner sc = new Scanner(this.saved);
         ArrayList<Task> list = new ArrayList<>();

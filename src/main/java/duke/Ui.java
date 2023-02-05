@@ -4,12 +4,23 @@ import java.io.IOException;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
+/**
+ * Class for Ui object.
+ * This class handles the interface that the user interacts with.
+ * 
+ * @author Bryan Tan
+ */
 public class Ui {
     private final String intro = "Hi! I'm Duke! :)\nHow may I help?";
     private final String outro = "Goodbye!";
     private TaskList tList;
     private Storage savedList;
 
+    /**
+     * Initialises the user interface.
+     * 
+     * @throws IOException when file path is invalid.
+     */
     public void initialise() throws IOException {
         System.out.println(this.intro);
         System.out.println();
@@ -29,6 +40,11 @@ public class Ui {
         }
     }
 
+    /**
+     * Saves list of tasks in current session to hard drive.
+     * 
+     * @throws IOException when file to write to is not found.
+     */
     public void save() throws IOException {
         savedList.save(this.tList.getList());
     }
@@ -41,6 +57,9 @@ public class Ui {
         return this.outro;
     }
 
+    /**
+     * Prints goodbye messgae.
+     */
     public void end() {
         System.out.print("Duke: ");
         System.out.println(this.outro);
@@ -50,11 +69,19 @@ public class Ui {
         return this.tList.getList();
     }
 
+    /**
+     * Resets the interface to a state ready for user input.
+     */
     public void reset() {
         System.out.println();
         System.out.print("User: ");
     }
     
+    /**
+     * Adds a task to the current list of tasks.
+     * 
+     * @param t Task to be added.
+     */
     public void addToList(Task t) {
         this.tList.add(t);
         System.out.print("Duke: ");
@@ -63,11 +90,17 @@ public class Ui {
         reset();
     }
 
+    /**
+     * Handles the exception when access or manipulation of an empty is attempted.
+     */
     public void emptyErr() {
         System.out.println("Duke: Error!! List empty! Try again.");
         reset();
     }
 
+    /**
+     * Prints out all tasks created so far.
+     */
     public void viewList() {
         System.out.println("Here's your list of tasks:");
         System.out.println();
@@ -77,6 +110,11 @@ public class Ui {
         reset();
     }
 
+    /**
+     * Marks specified task as done and informs user.
+     * 
+     * @param num Index no. of task in the list to be marked as done
+     */
     public void markTask(int num) {
         if(num >= this.tList.size()) {
             System.out.println("Duke: Task no." + (num+1) + " not found. Try again.");
@@ -88,6 +126,11 @@ public class Ui {
         reset();
     }
 
+    /**
+     * Unmarks specified task as undone and informs user.
+     * 
+     * @param num Index no. of task in the list to be marked as undone.
+     */
     public void unmarkTask(int num) {
         if(num >= this.tList.size()) {
             System.out.println("Duke: Task no." + (num+1) + " not found. Try again.");
@@ -99,6 +142,12 @@ public class Ui {
         reset();
     }
 
+    /**
+     * Creates a ToDo object.
+     * 
+     * @param task String array containing descriptions of the task.
+     * @return ToDo object.
+     */
     public ToDo makeToDo(String[] task) {
         StringBuilder sb = new StringBuilder();
         for(int i = 1; i < task.length; i++) {
@@ -107,6 +156,13 @@ public class Ui {
         return new ToDo(sb.toString());
     }
 
+    /**
+     * Creates Event object.
+     * 
+     * @param task String array containing descriptions of the event.
+     * @return Event object.
+     * @throws DateTimeParseException if user inputs date and time in the wrong format.
+     */
     public Event makeEvent(String[] task) throws DateTimeParseException {
         StringBuilder start = new StringBuilder();
         StringBuilder end = new StringBuilder();
@@ -139,6 +195,13 @@ public class Ui {
         return new Event(desc.toString(), start.toString(), end.toString());
     }
 
+    /**
+     * Creates a task with given deadline.
+     * 
+     * @param task String array containing descriptions of the event.
+     * @return Deadline object.
+     * @throws DateTimeParseException if user inputs date and time in the wrong format.
+     */
     public Deadline makeDeadline(String[] task) throws DateTimeParseException {
         StringBuilder desc = new StringBuilder();
         StringBuilder by = new StringBuilder();
@@ -161,6 +224,11 @@ public class Ui {
         return new Deadline(desc.toString(), by.toString());
     }
 
+    /**
+     * Deletes a specified task.
+     * 
+     * @param num Index no. of task in the list to be deleted.
+     */
     public void delete(int num) {
         if(num >= this.tList.size()) {
             System.out.println("Duke: Task no." + (num+1) + " not found. Try again.");
