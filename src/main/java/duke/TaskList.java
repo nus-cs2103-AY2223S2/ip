@@ -53,7 +53,7 @@ public class TaskList {
                 }
                 LocalDateTime dateTimeBy = DateTime.getDateTime(words,indexForBy);
                 if (dateTimeBy == null) {
-                    mainWindow.sendDukeResponse("Please enter in this format {description} /by DD/MM/YYYY HHMM. Try again");
+                    mainWindow.sendDukeResponse("Please enter in this format {description} /by DD/MM/YYYY HHmm. Try again");
                     return false;
                 }
                 description = String.join(" ",Arrays.copyOfRange(words, 0, indexForBy));
@@ -72,8 +72,8 @@ public class TaskList {
                 dateTimeFrom = DateTime.getDateTime(words,indexForFrom);
                 dateTimeTo = DateTime.getDateTime(words,indexForTo);
                 if (dateTimeTo == null || dateTimeFrom == null) {
-                    mainWindow.sendDukeResponse("Please enter in this format {description} /from DD/MM/YYYY HHMM /to " +
-                            "DD/MM/YYYY HHMM. Try again");
+                    mainWindow.sendDukeResponse("Please enter in this format {description} /from DD/MM/YYYY HHmm /to " +
+                            "DD/MM/YYYY HHmm. Try again");
                     return false;
                 }
                 assert tasks.size() >= 1 : "Something is wrong with add of task";

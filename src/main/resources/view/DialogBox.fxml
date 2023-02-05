@@ -7,7 +7,9 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<fx:root fx:id="hbox" alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" style="-fx-background-color: azure; -fx-border-color: lightgrey transparent lightgrey transparent;" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root fx:id="hbox" alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0"
+         style="-fx-background-color: azure; -fx-border-color: lightgrey transparent lightgrey transparent;" type="javafx.scene.layout.HBox"
+         xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <Label fx:id="dialog" cache="true" maxHeight="1.7976931348623157E308" minHeight="-Infinity" text="Label" wrapText="true">
          <HBox.margin>

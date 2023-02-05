@@ -1,11 +1,13 @@
 package duke;
 
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
@@ -51,6 +53,9 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
+        for (Node node:dialogContainer.getChildren()){
+            VBox.setVgrow(node,Priority.ALWAYS);
+        }
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage)
         );

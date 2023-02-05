@@ -8,7 +8,7 @@ import duke.task.Task;
  */
 public class Parser {
     private MainWindow mainWindow;
-
+    private static final String BULLET_POINT = "\u2022";
     /**
      * Constructs a new Parser instance
      *
@@ -72,8 +72,34 @@ public class Parser {
             String[] findWords = Arrays.copyOfRange(words, 1, words.length);
             tasks.findTask(String.join(" ", findWords));
             break;
+        case "HELP":
+            String commands = "List of commands:\n"
+                    + BULLET_POINT
+                    + "Todo [Description] \n"
+                    + "    - Adds a todo task with description\n"
+                    + BULLET_POINT
+                    + "Deadline [Description] \\by [Date and time in this format DD/MM/YYYY HHmm]\n"
+                    + "    - Adds a deadline task with description and deadline date\n"
+                    + BULLET_POINT
+                    + "Event [Description] \\from [Date and time in this format DD/MM/YYYY HHmm] "
+                    + "\\to [Date and time]\n" +
+                    "    - Adds an event task with description, start and end date \n"
+                    + BULLET_POINT
+                    + "Delete [Index]\n"
+                    + "    - Deletes a task at that index\n"
+                    + BULLET_POINT
+                    + "Mark [Index]\n"
+                    + "    - Marks a task at that index as completed\n"
+                    + BULLET_POINT
+                    + "Unmark [Index]\n"
+                    + "    - Unmarks a task at that index as not done\n"
+                    + BULLET_POINT
+                    + "Find [Keyword]\n"
+                    + "    - Lists all task that matches the keyword";
+            mainWindow.sendDukeResponse(commands);
+            break;
         default:
-            throw new InvalidCommandException("Invalid command. Please try again");
+            throw new InvalidCommandException("Invalid command. Please try again." + "\nType \"help\" to see all commands");
         }
         if (hasTaskChanged) {
             storage.saveFile(tasks.getListOfTask());
