@@ -15,8 +15,8 @@ import app.task.TaskTypes;
  * into a Task, and add into the TaskList.
  */
 public class AddCommand extends Command {
-    private Map<String, String> args;
-    private TaskTypes.Type taskType;
+    private final Map<String, String> args;
+    private final TaskTypes.Type taskType;
 
     /**
      * Constructs an AddCommand.

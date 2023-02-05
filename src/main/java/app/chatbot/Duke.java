@@ -91,9 +91,10 @@ public class Duke {
     public String loadStorageData() {
         Command loadCommand = new LoadCommand();
         try {
+            System.out.println("Loading storage data...");
             return loadCommand.execute(taskList, ui, storage);
         } catch (Exception e) {
-            return(e.getMessage());
+            return (e.getMessage());
         }
     }
 }

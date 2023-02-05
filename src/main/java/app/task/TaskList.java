@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
-
-import app.command.CommandNotFoundException;
 
 /**
  * Represents the List of Tasks, and the primary class that the
@@ -20,6 +17,9 @@ import app.command.CommandNotFoundException;
 public class TaskList implements Iterable<Task> {
     private final List<Task> tasks;
 
+    /**
+     * Initialises an empty TaskList
+     */
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
@@ -41,62 +41,36 @@ public class TaskList implements Iterable<Task> {
      * and the correct mappings of the task. Throws exceptions for if the inputs are invalid.
      * <br>
      * Tasks are always added to the end of the TaskList.
-     * <br>
-     * This method is under rework, as checking of arguments is done here and not in the respective
-     * Task constructors - to move the check and exceptions to each individual task type.
      * @param type one of the available task types provided in TaskTypes.
      * @param args map of argument names to their values.
      * @return the same Task object that was added into the TaskList
      * @throws InvalidDateTimeException
-     * @throws CommandNotFoundException
      * @throws InvalidInputException
      */
-
     public Task addTask(TaskTypes.Type type, Map<String, String> args)
-            throws InvalidDateTimeException, CommandNotFoundException, InvalidInputException {
+            throws InvalidDateTimeException, InvalidInputException {
         Task newTask;
-        String desc;
+        String desc = args.get("Description");
         switch (type) {
         case TODO:
-            desc = args.get("Description");
-            if (Objects.isNull(desc) || desc.equals("")) {
-                throw new InvalidInputException("eh ur description is blank");
-            }
             newTask = new ToDo(desc);
             break;
         case DEADLINE:
-            desc = args.get("Description");
-            if (Objects.isNull(desc) || desc.equals("")) {
-                throw new InvalidInputException("eh ur description is blank");
-            }
             String by = args.get("by");
-            if (Objects.isNull(by) || by.equals("")) {
-                throw new InvalidInputException(
-                        "eh need to specify ur deadline by when - deadline <desc> /by <when>");
-            }
-
             newTask = new Deadline(desc, by);
             break;
         case EVENT:
-            desc = args.get("Description");
-            if (Objects.isNull(desc) || desc.equals("")) {
-                throw new InvalidInputException("eh ur description is blank");
-            }
             String from = args.get("from");
             String to = args.get("to");
-            if (Objects.isNull(from) || Objects.isNull(to) || from.equals("") || to.equals("")) {
-                throw new InvalidInputException(
-                        "eh need to specify ur event from when to when - event <desc> /from <when> /to <when>");
-            }
-
             newTask = new Event(desc, from, to);
             break;
         default:
-            throw new CommandNotFoundException("I don't recognise this type of task. Try add todo <desc>!");
+            throw new InvalidInputException("Task not recognised");
         }
         this.tasks.add(this.tasks.size(), newTask); // always adds to the end
         return newTask;
     }
+
 
     /**
      * Adds a task following addTask. Additionally, marks a task done after adding.
@@ -104,11 +78,10 @@ public class TaskList implements Iterable<Task> {
      * @param args map of argument names to their values.
      * @return the same Task object that was added into the TaskList
      * @throws InvalidDateTimeException
-     * @throws CommandNotFoundException
      * @throws InvalidInputException
      */
     public Task addDoneTask(TaskTypes.Type type, Map<String, String> args)
-            throws InvalidDateTimeException, CommandNotFoundException, InvalidInputException {
+            throws InvalidDateTimeException, InvalidInputException {
         Task newTask = addTask(type, args); // add to end of list
         int index = this.tasks.size() - 1; // mark the last/latest item as done
         markAsDone(index);

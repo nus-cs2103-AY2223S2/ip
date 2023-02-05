@@ -33,9 +33,10 @@ public class ListCommand extends Command {
         } else {
             StringBuilder output = new StringBuilder("Eh this is what you've written down so far:\n");
             for (int i = 0; i < listTasks.size(); i++) {
-                output.append(i + 1);
-                output.append(": " + listTasks.get(i));
-                output.append("\n");
+                output.append(i + 1)
+                        .append(": ")
+                        .append(listTasks.get(i))
+                        .append('\n');
             }
             Response r = new Response(output.toString());
             r.addLine("You have " + listTasks.size() + " tasks listed.");

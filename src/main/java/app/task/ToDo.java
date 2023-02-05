@@ -2,7 +2,7 @@ package app.task;
 
 public class ToDo extends Task {
 
-    ToDo(String description) {
+    ToDo(String description) throws InvalidInputException {
         super(description);
         this.symbol = "T";
     }

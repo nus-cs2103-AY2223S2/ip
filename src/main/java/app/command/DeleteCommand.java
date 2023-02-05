@@ -37,7 +37,8 @@ public class DeleteCommand extends Command {
             response.addLine("Removed " + deletedTask.getDesc()
                     + " from the list. You now have " + tl.size() + " tasks left.");
         } catch (NumberFormatException e) {
-            throw new InvalidInputException("Specify a task by its task number. Try 'list' or 'find' to get the number :)");
+            throw new InvalidInputException("Specify a task by its task number. "
+                    + "Try 'list' or 'find' to get the number :)");
         }
         return response.toString();
     }
