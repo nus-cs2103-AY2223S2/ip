@@ -1,5 +1,6 @@
 package task;
-public class Event extends Task{
+
+public class Event extends Task {
     private String from;
     private String to;
     private String code;
@@ -11,14 +12,13 @@ public class Event extends Task{
         this.code = "[E]";
     }
 
-    public String getCode(){
+    public String getCode() {
         return this.code;
     }
 
     @Override
     public String toString() {
-        return code + super.toString() + " (" + from + to + ")";
+        return code + super.toString() + " (from " + from + " to " + to + ")";
     }
-    
-}
 
+}

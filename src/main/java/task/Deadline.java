@@ -1,5 +1,6 @@
 package task;
-public class Deadline extends Task{
+
+public class Deadline extends Task {
     private String by;
     private String code;
 
@@ -8,8 +9,8 @@ public class Deadline extends Task{
         this.by = by;
         this.code = "[D]";
     }
-    
-    public String getCode(){
+
+    public String getCode() {
         return this.code;
     }
 
@@ -17,5 +18,5 @@ public class Deadline extends Task{
     public String toString() {
         return code + super.toString() + " (" + by + ")";
     }
-    
+
 }

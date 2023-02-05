@@ -1,4 +1,5 @@
 package task;
+
 public class Task {
     private String msg;
     private Boolean status;
@@ -22,8 +23,8 @@ public class Task {
     }
 
     public void unmark() {
-        System.out.println("OK, I've marked this task as not done yet:\n" + getStatusIcon() + msg);
         status = false;
+        System.out.println("OK, I've unmarked this task:\n" + getStatusIcon() + msg);
     }
 
     @Override

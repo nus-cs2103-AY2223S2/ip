@@ -1,8 +1,8 @@
 package task;
-public class ToDos extends Task {
+public class Todo extends Task {
     private String code;
 
-    public ToDos(String msg) {
+    public Todo(String msg) {
         super(msg);
         this.code = "[T]";
     }

@@ -2,7 +2,7 @@ package storage;
 
 import task.Deadline;
 import task.Event;
-import task.ToDos;
+import task.Todo;
 import task.Task;
 import task.TaskList;
 
@@ -39,23 +39,26 @@ public class Storage {
                 Task taskEntry = null;
                 if (taskType == 'T') {
                     // [T][ ]todo borrow book
-                    String details = line.substring(7);
-                    taskEntry = new ToDos(details);
+                    String details = line.substring(6);
+                    taskEntry = new Todo(details);
 
-                } 
-                // else if (taskType == 'E') {
+                } else if (taskType == 'D') {
+                    // [D][ ]deadline return book (by Sunday)
+                    String[] result = line.split("\\(by ", 2);
+                    String details = result[0].substring(6).trim();
+                    String date = result[1].replace(")", "");
+                    taskEntry = new Deadline(details, date);
 
-                //     String details = line.substring(7);
-
-                //     // Task taskEntry = new Event(details);
-
-                // } else if (taskType == 'D') {
-                //     // [D][ ]deadline return book (by Sunday)
-                //     String details = line.substring(7);
-
-                //     // Task taskEntry = new Deadline(details);
-
-                // }
+                } else if (taskType == 'E') {
+                    // [E][ ]event project meeting (from Mon 2pm to 4pm)
+                    String[] result = line.split("\\(from ", 2);
+                    String details = result[0].substring(6).trim();
+                    String fromAndToResult = result[1].replace(")", "");
+                    String[] fromAndToSplit = fromAndToResult.split(" to ");
+                    String from = fromAndToSplit[0];
+                    String to = fromAndToSplit[1];
+                    taskEntry = new Event(details, from, to);
+                }
                 list.add(taskEntry);
             }
         } catch (IOException e) {
@@ -65,7 +68,7 @@ public class Storage {
         }
     }
 
-    public void save(TaskList tList){
+    public void save(TaskList tList) {
         String tempText = "";
         for (int i = 0; i < tList.getTaskCount(); i++) {
             tempText += tList.getTask(i) + "\n";

@@ -1,6 +1,4 @@
-[T][ ]todo borrow book
-[T][ ]todo borrow book
-[T][ ]todo borrow book
-[T][ ]todo borrow book
-[T][ ]todo borrow book
-[T][ ]todo borrow book
+[T][ ]todo book
+[T][X]todo borrow
+[D][X]deadline return book (Sunday)
+[E][ ]event project meeting (from Mon 2pm to 4pm)
