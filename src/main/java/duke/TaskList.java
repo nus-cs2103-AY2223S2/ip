@@ -24,7 +24,6 @@ public class TaskList {
      */
     public TaskList(ArrayList<String> fileTasks) {
         this.taskList = addAll(fileTasks);
-        this.sb = new StringBuilder();
     }
 
     /**
