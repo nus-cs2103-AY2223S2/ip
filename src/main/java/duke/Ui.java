@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -11,13 +13,9 @@ public class Ui {
         displayLine();    
     }
 
-    public String[] readLine() throws DukeException {
-        try {
-            System.out.print("Type your command: ");
-            return br.readLine().strip().split(" ",2);
-        } catch (IOException e) {
-            throw new DukeException("Error reading input");
-        }
+    public String[] readLine() throws IOException {
+        System.out.print("Type your command: ");
+        return br.readLine().strip().split(" ",2);
     }
 
     public void displayLine() {

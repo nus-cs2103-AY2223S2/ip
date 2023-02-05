@@ -1,6 +1,10 @@
+package duke.task;
+
 import java.time.LocalDate;
 
-class Event extends Task {
+import duke.DukeException;
+
+public class Event extends Task {
     private LocalDate from;
     private LocalDate to;
     public Event(String name, String start, String end) throws DukeException {

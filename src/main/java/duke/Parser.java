@@ -1,4 +1,11 @@
+package duke;
+
 import java.time.format.DateTimeParseException;
+
+import duke.task.Task;
+import duke.task.Todo;
+import duke.task.Deadline;
+import duke.task.Event;
 
 public class Parser {
     public Parser() {};
@@ -35,7 +42,13 @@ public class Parser {
         if (input.length == 1) {
             throw new DukeException("Mark needs a number.");
         }
-        if (Integer.parseInt(input[1]) > taskList.size()) {
+        int index;
+        try {
+            index = Integer.parseInt(input[1]);
+        } catch (NumberFormatException e) {
+            throw new DukeException("Invalid number.");
+        }
+        if (index > taskList.size()) {
             throw new DukeException("Invalid task.");
         }
         taskList.markTask(Integer.parseInt(input[1]) - 1);
@@ -45,7 +58,13 @@ public class Parser {
         if (input.length == 1) {
             throw new DukeException("Unmark needs a number.");
         }
-        if (Integer.parseInt(input[1]) > taskList.size()) {
+        int index;
+        try {
+            index = Integer.parseInt(input[1]);
+        } catch (NumberFormatException e) {
+            throw new DukeException("Invalid number.");
+        }
+        if (index > taskList.size()) {
             throw new DukeException("Invalid task.");
         }
         taskList.unmarkTask(Integer.parseInt(input[1]) - 1);
@@ -73,7 +92,7 @@ public class Parser {
             taskList.addTask(t);
             System.out.println("Added new deadline:\n  " + t + "\nNumber of tasks: " + taskList.size());
         } catch (DateTimeParseException e) {
-            throw new DukeException("Date after /by needs to be in format yyyy-mm-dd");
+            throw new DukeException("Date after /by needs to be in format yyyy-mm-dd.");
         }
     }
 
@@ -92,7 +111,7 @@ public class Parser {
             taskList.addTask(t);
             System.out.println("Added new event:\n  " + t + "\nNumber of tasks: " + taskList.size());
         } catch (DateTimeParseException e) {
-            throw new DukeException("Date after /from and /to needs to be in format yyyy-mm-dd");
+            throw new DukeException("Date after /from and /to needs to be in format yyyy-mm-dd.");
         }
     }
 
@@ -100,7 +119,12 @@ public class Parser {
         if (input.length == 1) {
             throw new DukeException("Delete needs a number.");
         }
-        int index = Integer.parseInt(input[1]); 
+        int index;
+        try {
+            index = Integer.parseInt(input[1]);
+        } catch (NumberFormatException e) {
+            throw new DukeException("Invalid number.");
+        }
         if (index > taskList.size()) {
             throw new DukeException("Invalid task.");
         }
