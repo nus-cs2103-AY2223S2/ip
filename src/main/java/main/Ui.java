@@ -26,7 +26,7 @@ public class Ui {
      */
     public static void greet() {
         System.out.println(newLine);
-        System.out.println(indentation + "Hello! I'm Main.Duke");
+        System.out.println(indentation + "Hello! I'm Duke, your task planner");
         System.out.println(indentation + "What can I do for you?");
         System.out.println(newLine);
     }
