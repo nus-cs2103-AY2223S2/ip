@@ -14,6 +14,6 @@ public class ExitCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.respond("Goodbye!");
+        ui.respond(Ui.Dialog.BYE.getDialog());
     }
 }

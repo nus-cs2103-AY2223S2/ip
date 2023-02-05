@@ -1,6 +1,7 @@
 package sam.task;
 
 import sam.SamException;
+import sam.Ui;
 
 /**
  * A SamException thrown when a required task title
@@ -8,6 +9,6 @@ import sam.SamException;
  */
 public class SamMissingTaskTitleException extends SamException {
     public SamMissingTaskTitleException() {
-        super("Oops, you forgot a title for your task!");
+        super(Ui.Dialog.MISSING_TASK_TITLE.getDialog());
     }
 }

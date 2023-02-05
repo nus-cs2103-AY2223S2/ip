@@ -39,8 +39,8 @@ public class MarkCommand extends Command {
             throw new SamInvalidTaskException();
         }
         String message = isDone
-                ? "Great! I'll check the task:"
-                : "Okay, I'll uncheck the task:";
+                ? Ui.Dialog.MARK.getDialog()
+                : Ui.Dialog.UNMARK.getDialog();
         ui.respond(message,
                 tasks.getTask(id).toString());
         storage.save(tasks);
