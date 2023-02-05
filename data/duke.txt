@@ -1,9 +1,6 @@
 T___X___bye
 T___X___hi
-T___✓___lol
 E___X______2010-10-12___2010-12-10
-T___X___event
 D___ X___event___2010-10-19
 T___X___basketball
-T___X___event
-T___X___event
+T___X___2103

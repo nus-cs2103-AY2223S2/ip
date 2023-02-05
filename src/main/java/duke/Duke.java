@@ -29,6 +29,11 @@ public class Duke {
 
 
     public String getResponse(String input) {
+        assert (!isEmptyInput(input));
         return "Duke: " + parser.parseInput(input);
+    }
+
+    public boolean isEmptyInput(String input) {
+        return input.equals("") || input.equals(null);
     }
 }
