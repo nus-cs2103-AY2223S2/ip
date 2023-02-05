@@ -85,19 +85,19 @@ public class Parser<T> {
     }
 
     public Parser<List<T>> some() {
-        return many().satisfy(s -> !s.isEmpty()).overrideMsg("Less than 1 parse successful.");
+        return many().satisfy(s -> !s.isEmpty(), "some: Less than 1 parse succesfull.");
     }
 
     public <U> Parser<List<T>> someUntil(Parser<U> p) {
-        return manyUntil(p).satisfy(s -> !s.isEmpty());
+        return manyUntil(p).satisfy(s -> !s.isEmpty(), "some: Less than 1 parse successfull.");
     }
 
     public Parser<T> overrideMsg(String errorMsg) {
         return new Parser<>(inp -> this.parse(inp).overrideMsg(errorMsg));
     }
 
-    public Parser<T> satisfy(Predicate<T> condition) {
-        return new Parser<>(inp -> this.parse(inp).filter(condition));
+    public Parser<T> satisfy(Predicate<T> condition, String failMsg) {
+        return new Parser<>(inp -> this.parse(inp).filterOrElse(condition, failMsg));
     }
 
     public <U> Parser<U> map(Function<? super T, ? extends U> f) {
@@ -117,14 +117,14 @@ public class Parser<T> {
 
     public static <U> Parser<String> takeWhile(Predicate<Character> pred) {
         return anyChar()
-                .satisfy(pred)
+                .satisfy(pred, "")
                 .many()
                 .map(l -> Util.listToString(l));
     }
 
     public static Parser<String> takeTill(Predicate<Character> pred) {
         return anyChar()
-                .satisfy(pred.negate())
+                .satisfy(pred.negate(), "")
                 .many()
                 .map(l -> Util.listToString(l));
     }
@@ -155,17 +155,16 @@ public class Parser<T> {
     }
 
     public static Parser<Character> charParser(char c) {
-        return anyChar().satisfy(x -> x == c).overrideMsg(String.format("Character %s not found.", c));
+        return anyChar().satisfy(x -> x == c, String.format("Character %s not found.", c));
     }
 
     public static Parser<String> strParser(String str) {
-        return take(str.length()).satisfy(s -> s.equals(str))
-                .overrideMsg(String.format("String %s not found."));
+        return take(str.length()).satisfy(s -> s.equals(str), String.format("String %s not found."));
     }
 
     public static Parser<String> strParserIgnoreCase(String str) {
-        return take(str.length()).satisfy(s -> s.toLowerCase().equals(str.toLowerCase()))
-                .overrideMsg(String.format("String %s not found. (case ignored)", str));
+        return take(str.length()).satisfy(s -> s.toLowerCase().equals(str.toLowerCase()),
+                String.format("String %s not found. (case ignored).", str));
     }
 
     public static Parser<String> nextStr() {

@@ -19,19 +19,25 @@ public class Result<T> {
         this.result = result;
     }
 
+    /**
+     * @param res    Parse result
+     * @param remain Remaining input after parse
+     * @return Ok result
+     */
     static <T> Result<T> ok(T res, String remain) {
         return new Result<>(Either.left(new Pair<>(res, remain)));
     }
 
+    /**
+     * @param error Error message
+     * @return Error result
+     */
     static <T> Result<T> error(String error) {
         return new Result<>(Either.right(error));
     }
 
-    public Result<T> filter(Predicate<T> condition) {
-        return this.result.match(
-                pr -> condition.test(pr.first()) ? this
-                        : error(String.format("%s failed to satisfy condition.", pr.first())),
-                errorMsg -> this);
+    public Result<T> filterOrElse(Predicate<? super T> condition, String errorMsg) {
+        return new Result<>(this.result.filterOrElse(pr -> condition.test(pr.first()), errorMsg));
     }
 
     public Result<T> overrideMsg(String errorMsg) {
