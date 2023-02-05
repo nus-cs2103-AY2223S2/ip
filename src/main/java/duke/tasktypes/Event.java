@@ -6,6 +6,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.FormatStyle;
+import java.util.ArrayList;
 
 import duke.exceptions.DukeException;
 
@@ -15,18 +16,14 @@ import duke.exceptions.DukeException;
  */
 public class Event extends Task {
 
-    private LocalDate endDate;
-    private LocalTime endTime;
     private LocalDateTime endDateTime;
     private String endBy;
 
-    private LocalDate startDate;
-    private LocalTime startTime;
     private LocalDateTime startDateTime;
     private String startBy;
 
-    private String forSavingStart;
-    private String forSavingEnd;
+    private ArrayList<String> forSaving = new ArrayList<>();
+
 
     /**
      * Constructs an Event Task instance.
@@ -38,41 +35,31 @@ public class Event extends Task {
      */
     public Event(String description, String start, String end) throws DukeException {
         super(description);
-        String[] startDateAndTime = start.split(" ");
-        String startDate = startDateAndTime[0];
-        String startTime = startDateAndTime[1];
-        startDate = startDate.replace('/', '-');
-        this.forSavingStart = startDate + " " + startTime;
-        startTime = startTime.substring(0, 2) + ':' + startTime.substring(2);
-
-        try {
-            this.startDate = LocalDate.parse(startDate);
-            this.startTime = LocalTime.parse(startTime);
-        } catch (DateTimeParseException e) {
-            throw new DukeException("Please enter your date and time in this format: yyyy/mm/dd HHMM");
-        }
-        this.startDateTime = LocalDateTime.of(this.startDate, this.startTime);
+        this.startDateTime = getDateTime(start);
         this.startBy = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT)
                         .format(this.startDateTime);
 
-
-        String[] endDateAndTime = end.split(" ");
-        String endDate = endDateAndTime[0];
-        String endTime = endDateAndTime[1];
-        endDate = endDate.replace('/', '-');
-        this.forSavingEnd = endDate + " " + endTime;
-        endTime = endTime.substring(0, 2) + ':' + endTime.substring(2);
-
-        try {
-            this.endDate = LocalDate.parse(endDate);
-            this.endTime = LocalTime.parse(endTime);
-        } catch (DateTimeParseException e) {
-            throw new DukeException("Please enter your date and time in this format: yyyy/mm/dd HHMM");
-        }
-        this.endDateTime = LocalDateTime.of(this.endDate, this.endTime);
+        this.endDateTime = getDateTime(end);
         this.endBy = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT)
                         .format(this.endDateTime);
 
+    }
+    private LocalDateTime getDateTime(String by) throws DukeException {
+        try {
+            String[] dateAndTime = by.split(" ");
+            String date = dateAndTime[0];
+            String time = dateAndTime[1];
+            date = date.replace('/', '-');
+            this.forSaving.add(date + " " + time);
+            time = time.substring(0, 2) + ':' + time.substring(2);
+            LocalDate byDate = LocalDate.parse(date);
+            LocalTime byTime = LocalTime.parse(time);
+            return LocalDateTime.of(byDate, byTime);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Please enter your date and time in this format: yyyy/mm/dd HHMM");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("Missing Date or Time input!");
+        }
     }
 
     @Override
@@ -83,7 +70,8 @@ public class Event extends Task {
         } else {
             done = "0";
         }
-        return "E" + ",," + done + ",," + this.description + ",," + this.forSavingStart + ",," + this.forSavingEnd;
+        return "E" + ",," + done + ",," + this.description + ",,"
+                + this.forSaving.get(0) + ",," + this.forSaving.get(1);
     }
 
     @Override

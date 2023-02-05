@@ -98,9 +98,7 @@ public class Storage {
                 ui.printTasks(tasks);
             }
 
-        } catch (IOException e) {
-            ui.showError(e);
-        } catch (DukeException e) {
+        } catch (IOException | DukeException e) {
             ui.showError(e);
         }
         return tasks;

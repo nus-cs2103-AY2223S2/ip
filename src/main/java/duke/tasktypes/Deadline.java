@@ -15,8 +15,6 @@ import duke.exceptions.DukeException;
  */
 public class Deadline extends Task {
 
-    private LocalDate byDate;
-    private LocalTime byTime;
     private LocalDateTime byDateTime;
     private String forSaving;
     private String doneBy;
@@ -30,21 +28,27 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String by) throws DukeException {
         super(description);
-        String[] dateAndTime = by.split(" ");
-        String date = dateAndTime[0];
-        String time = dateAndTime[1];
-        date = date.replace('/', '-');
-        this.forSaving = date + " " + time;
-        time = time.substring(0, 2) + ':' + time.substring(2);
-        try {
-            this.byDate = LocalDate.parse(date);
-            this.byTime = LocalTime.parse(time);
-        } catch (DateTimeParseException e) {
-            throw new DukeException("Please enter your date and time in this format: yyyy/mm/dd HHMM");
-        }
-        this.byDateTime = LocalDateTime.of(this.byDate, this.byTime);
+        this.byDateTime = getByDateTime(by);
         this.doneBy = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT)
                         .format(this.byDateTime);
+    }
+
+    private LocalDateTime getByDateTime(String by) throws DukeException {
+        try {
+            String[] dateAndTime = by.split(" ");
+            String date = dateAndTime[0];
+            String time = dateAndTime[1];
+            date = date.replace('/', '-');
+            this.forSaving = date + " " + time;
+            time = time.substring(0, 2) + ':' + time.substring(2);
+            LocalDate byDate = LocalDate.parse(date);
+            LocalTime byTime = LocalTime.parse(time);
+            return LocalDateTime.of(byDate, byTime);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Please enter your date and time in this format: yyyy/mm/dd HHMM");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("Missing Date or Time input!");
+        }
     }
 
     @Override
