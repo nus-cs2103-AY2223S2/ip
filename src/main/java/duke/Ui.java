@@ -68,7 +68,7 @@ public class Ui {
     }
 
     /**
-     * Oututs add message to user.
+     * Outputs add message to user.
      *
      * @param task Task to be added.
      * @param size Size of the tasklist
