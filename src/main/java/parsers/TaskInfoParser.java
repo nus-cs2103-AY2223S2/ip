@@ -7,6 +7,8 @@ import tasks.Event;
 import tasks.Task;
 import tasks.ToDo;
 
+import java.util.Arrays;
+
 /**
  * Parser which takes in commands or string responses and returns a task.
  */
@@ -51,16 +53,18 @@ public class TaskInfoParser extends Parser {
             String description = StringUtils.joinString(stringArray, 2, byIndex - 1);
             String deadline = stringArray[length - 2];
             String time = stringArray[length - 1];
+            assert(byIndex + 2 == length - 1);
             return Deadline.create(description, deadline, time, stringArray[1]);
         case "E":
             int fromIndex = StringUtils.searchString(stringArray, "from");
             int toIndex = StringUtils.searchString(stringArray, "to");
+            assert(fromIndex + 3 == toIndex);
+            assert(toIndex + 2 == length - 1);
             String description1 = StringUtils.joinString(stringArray, 2, fromIndex - 1);
             String startDate = stringArray[fromIndex + 1];
             String startTime = stringArray[fromIndex + 2];
             String endDate = stringArray[toIndex + 1];
             String endTime = stringArray[toIndex + 2];
-            assert(toIndex + 3 == length - 1);
             return Event.create(description1, startDate, endDate, startTime, endTime, stringArray[1]);
         default:
             break;

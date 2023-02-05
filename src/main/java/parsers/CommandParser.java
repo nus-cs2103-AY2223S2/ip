@@ -73,6 +73,7 @@ public class CommandParser extends Parser {
      * @return true if the command requires an index, false otherwise
      */
     public static boolean isIndexRequiredCommand(String command) {
+        assert !command.isEmpty();
         return command.equals("mark")
                 || command.equals("unmark")
                 || command.equals("delete")

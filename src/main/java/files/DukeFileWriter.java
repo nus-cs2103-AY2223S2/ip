@@ -21,6 +21,7 @@ public class DukeFileWriter {
         try {
             FileWriter fileWriter = new FileWriter(path);
             ArrayList<Task> taskArrayList = taskList.getTaskList();
+            assert taskArrayList != null;
             if (taskArrayList.size() > 0) {
                 for (int i = 0; i < taskArrayList.size() - 1; i++) {
                     fileWriter.write(taskArrayList.get(i).writeTask());

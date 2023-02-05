@@ -28,6 +28,7 @@ public class Duke {
     private TaskList taskList = new TaskList();
     private VBox dialogContainer;
     private boolean isExit = false;
+
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/yoda.jpeg"));
 
 
