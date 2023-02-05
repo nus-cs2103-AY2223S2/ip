@@ -10,5 +10,7 @@ public enum Commands {
     EVENT,
     DELETE,
     FIND,
-    DEFAULT
+    DEFAULT,
+    YES,
+    NO
 }

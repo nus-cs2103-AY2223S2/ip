@@ -17,9 +17,11 @@ public class Parser {
     private int index;
     private String name;
     private LocalDate[] dates;
+    private boolean awaitingConfirmation;
 
     public Parser() {
         this.dates = new LocalDate[NUM_OF_DATES];
+        this.awaitingConfirmation = false;
     }
 
     /**
@@ -34,6 +36,18 @@ public class Parser {
      */
     public Commands parseInput(String input) throws DukeException {
         String[] delimited = input.split(" ");
+        if (this.awaitingConfirmation) {
+            switch(delimited[0].toLowerCase()) {
+            case "yes":
+            case "y":
+                return Commands.YES;
+            case "no":
+            case "n":
+                return Commands.NO;
+            default:
+                throw new DukeException("Please input either \"yes\" or \"no\".");
+            }
+        }
         switch (delimited[0].toLowerCase()) {
         case "bye":
             return Commands.BYE;
@@ -153,5 +167,9 @@ public class Parser {
 
     public LocalDate getEndDate() {
         return this.dates[1];
+    }
+
+    public void setAwaitingConfirmation(boolean bool) {
+        this.awaitingConfirmation = bool;
     }
 }

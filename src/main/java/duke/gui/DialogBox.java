@@ -2,6 +2,7 @@ package duke.gui;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -14,6 +15,7 @@ public class DialogBox extends HBox {
     private ImageView displayPicture;
 
     public DialogBox(Label l, ImageView iv) {
+        l.setPadding(new Insets(0, 12, 0, 12));
         text = l;
         displayPicture = iv;
 
@@ -23,6 +25,7 @@ public class DialogBox extends HBox {
 
         this.setAlignment(Pos.TOP_RIGHT);
         this.getChildren().addAll(text, displayPicture);
+        this.setPadding(new Insets(8));
     }
 
     private void flip() {
