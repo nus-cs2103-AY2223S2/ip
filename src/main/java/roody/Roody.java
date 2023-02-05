@@ -22,7 +22,7 @@ public class Roody {
      * Creates a chatbot with specified filepath to task data.
      * @param filepath The filepath to task data.
      */
-    public Roody(String filepath){
+    public Roody(String filepath) {
         // Assumed no more than 100 tasks
         this.list = new ArrayList<Task>();
         this.ui = new Ui();
@@ -30,9 +30,9 @@ public class Roody {
     }
 
     // toggles completion status of tasks
-    private void complete(int index, boolean complete) throws RoodyException {
+    private void completeTask(int index, boolean complete) throws RoodyException {
         if (index > list.size() - 1 || list.get(index) == null) {
-            new RoodyException("Sorry, that task doesn't exist");
+            throw new RoodyException("Sorry, that task doesn't exist");
         } else {
             Task task = list.get(index);
             if (complete) {
@@ -44,12 +44,29 @@ public class Roody {
         }
     }
 
-    private void delete(int index) {
+    private void findTaskByKeyword(String keyword) throws RoodyException {
+        ArrayList<Task> foundTasks = new ArrayList<>();
+        for (Task task : list) {
+            // Splits by "|"
+            String[] words = task.saveTask().split("\\|");
+            // Further splits description by whitespace
+            String[] desc = words[0].split("\\s");
+            for (String word : desc) {
+                // Searches for a match to keyword
+                if (word.equals(keyword)) {
+                    foundTasks.add(task);
+                }
+            }
+        }
+        ui.showFoundTasks(foundTasks);
+    }
+
+    private void deleteTask(int index) throws RoodyException {
         if (index > list.size() - 1 || list.get(index) == null) {
-            new RoodyException("Sorry, that task doesn't exist");
+            throw new RoodyException("Sorry, that task doesn't exist");
         } else {
             Task task = list.get(index);
-            list.remove(index - 1);
+            list.remove(index);
             ui.showDeleteTask(task, list.size());
         }
     }
@@ -86,7 +103,7 @@ public class Roody {
                         throw new RoodyException("Tasks require a description");
                     }
                     try {
-                        task = new Deadline(commands[1], LocalDate.parse(commands[3]));
+                        task = new Deadline(commands[1], LocalDate.parse(commands[2]));
                         list.add(task);
                         ui.showAddTask(task, list.size());
                     } catch (DateTimeParseException e) {
@@ -98,7 +115,7 @@ public class Roody {
                         throw new RoodyException("Tasks require a description");
                     }
                     try {
-                        task = new Event(commands[1], LocalDate.parse(commands[3]), LocalDate.parse(commands[5]));
+                        task = new Event(commands[1], LocalDate.parse(commands[2]), LocalDate.parse(commands[3]));
                         list.add(task);
                         ui.showAddTask(task, list.size());
                     } catch (DateTimeParseException e) {
@@ -114,9 +131,9 @@ public class Roody {
                     }
                     int index = Integer.parseInt(commands[0]) - 1;
                     if (commands[0].equals("delete")) {
-                        delete(index);
+                        deleteTask(index);
                     } else {
-                        complete(index, commands[0].equals("mark"));
+                        completeTask(index, commands[0].equals("mark"));
                     }
                     break;
                 case "bye":
@@ -125,7 +142,7 @@ public class Roody {
                 default:
                     throw new RoodyException("I don't quite understand that.");
                 }
-            } catch (Exception e) {
+            } catch (RoodyException e) {
                 ui.showLine();
                 System.out.println(e.getMessage());
             } finally {
@@ -137,6 +154,10 @@ public class Roody {
         storage.saveFile(list);
     }
 
+    /**
+     * Runs Roody's main process.
+     * @param args Args.
+     */
     public static void main(String[] args) {
         Roody roody = new Roody("./data/Roody.txt");
         roody.run();

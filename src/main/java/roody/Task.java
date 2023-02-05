@@ -11,8 +11,8 @@ public abstract class Task {
      * Creates a Task with specified description.
      * @param description The description of the Task.
      */
-    public Task(String description) {  
-        this.done = false; 
+    public Task(String description) {
+        this.done = false;
         this.description = description;
     }
     public boolean isDone() {

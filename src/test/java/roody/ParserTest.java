@@ -6,9 +6,13 @@ import org.junit.jupiter.api.Test;
 public class ParserTest {
     @Test
     public void testParse_singleInput() {
-        String[] commands = Parser.parse("todo dinner");
-        assertEquals("todo", commands[0]);
-        assertEquals("dinner", commands[1]);
+        try {
+            String[] commands = Parser.parse("todo dinner");
+            assertEquals("todo", commands[0]);
+            assertEquals("dinner", commands[1]);
+        } catch (RoodyException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     // To be achived in later implementations

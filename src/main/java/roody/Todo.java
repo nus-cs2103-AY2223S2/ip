@@ -10,7 +10,7 @@ public class Todo extends Task {
      * Creates a Todo with specified description.
      * @param description The specified description of the todo.
      */
-    public Todo(String description){
+    public Todo(String description) {
         super(description);
     }
     @Override
@@ -23,6 +23,10 @@ public class Todo extends Task {
     }
     @Override
     public String toString() {
-        return super.toString() + "";
+        char done = ' ';
+        if (isDone()) {
+            done = 'X';
+        }
+        return "[T][" + done + "] " + super.toString() + "";
     }
 }

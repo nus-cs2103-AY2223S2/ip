@@ -77,14 +77,10 @@ public class Storage {
         return list;
     }
 
-<<<<<<< HEAD
     /**
      * Saves Task information, if any, into a preset file.
      * @param list The ArrayList of Tasks to be saved.
      */
-=======
-    // saves information if any into roody.txt
->>>>>>> branch-A-CodingStandard
     public void saveFile(ArrayList<Task> list) {
         ArrayList<String> buffer = new ArrayList<>();
         Path output = Paths.get(filePath);
