@@ -46,6 +46,7 @@ public class Parser {
     /**
      * Returns the singular integer index from a provided parameter string. For commands
      * that only require a single integer value, such as 'mark'.
+     *
      * @param paramsStr Given parameter string.
      * @return The singular integer index.
      * @throws BadCommandException If the parameter string is not a valid integer representation.
@@ -64,6 +65,7 @@ public class Parser {
      * Returns a pair whose key represents the default argument, and whose value represents the mapping between
      * the parameter names and the argument values. If there is no default argument, then the key value is set
      * to null. The default argument is always assumed to be the first argument.
+     *
      * @param paramsStr The parameter string provided.
      * @param hasDefaultArgument Boolean indicating if there is a default argument.
      * @return A pair representing the above.
