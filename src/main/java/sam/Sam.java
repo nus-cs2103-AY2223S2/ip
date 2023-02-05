@@ -46,6 +46,13 @@ public class Sam extends Application {
         }
     }
 
+    private void exitApp() {
+        ui.disable();
+        PauseTransition delay = new PauseTransition(Duration.seconds(1));
+        delay.setOnFinished(event -> Platform.exit());
+        delay.play();
+    }
+
     /**
      * Parses the input into a command and executes it.
      * 
@@ -56,10 +63,7 @@ public class Sam extends Application {
             Command c = Parser.parseCommand(input);
             c.execute(tasks, ui, storage);
             if (c instanceof ExitCommand) {
-                ui.disable();
-                PauseTransition delay = new PauseTransition(Duration.seconds(2));
-                delay.setOnFinished(event -> Platform.exit());
-                delay.play();
+                exitApp();
             }
         } catch (SamException e) {
             ui.respond(e.getMessage());
