@@ -1,6 +1,6 @@
 package james.task;
 
-import james.JamesException;
+import james.exception.JamesException;
 
 /**
  * The todo class.

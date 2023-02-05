@@ -1,4 +1,4 @@
-package james;
+package james.gui;
 
 import javafx.application.Application;
 

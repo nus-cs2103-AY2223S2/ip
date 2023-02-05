@@ -1,23 +1,63 @@
 package james.command;
 
-public class FindCommand extends Command{
+
+import james.jamesbot.Storage;
+
+import james.task.TaskList;
+
+import james.jamesbot.Ui;
+
+
+/**
+ * Finds tasks based on keyword.
+ */
+public class FindCommand extends Command {
+    /** The user input. */
+    private String userCommand;
+
+    /** The keyword the user is searching for in the tasks. */
     private String keyword;
 
-    public FindCommand(String keyword) {
-        this.keyword = keyword;
+    /** A TaskList containing the tasks with the keywords. */
+    private TaskList matchedTasks;
+
+    /**
+     * Constructor for FindCommand object.
+     *
+     * @param userCommand The user input.
+     */
+    public FindCommand(String userCommand) {
+        this.userCommand = userCommand;
+        String[] taskData = userCommand.split(" ", 2);
+        this.keyword = taskData[1].trim();
+        this.matchedTasks = new TaskList();
     }
 
-    @Override
-    public void execute() {
-        ui.printFoundTasks(taskList.findTasks(keyword));
-    }
+    /**
+     * Executes the find command.
+     *
+     * @param tasks The list where tasks are added to.
+     * @param ui The ui to print out JamesBot's response.
+     * @param storage The task list that is stored in the user's hard disk.
+     */
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        int tasksLength = tasks.size();
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj instanceof FindCommand) {
-            return keyword.equals(((FindCommand) obj).keyword);
+        for (int i = 0; i < tasksLength; i++) {
+            if (tasks.get(i).toString().contains(keyword)) {
+                matchedTasks.add(tasks.get(i));
+            }
         }
+
+        return ui.findTask(matchedTasks);
+    }
+
+    /**
+     * Returns whether FindCommand exits the program.
+     *
+     * @return false as FindCommand does not exit the program.
+     */
+    public boolean isExit() {
         return false;
     }
 }
-

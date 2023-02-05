@@ -2,47 +2,118 @@ package james.task;
 
 import java.util.ArrayList;
 
-/**
- * The task list class.
- * Contains the task list and operations to modify the task list.
- */
+/** This class encapsulates a TaskList object. */
 public class TaskList {
-    ArrayList<Task> taskList = new ArrayList<>();
+    /** The list of user's tasks. */
+    public ArrayList<Task> taskList;
 
-    public void addToTaskList(Task task) {
-        taskList.add(task);
+    /**
+     * Constructor for TaskList object.
+     */
+    public TaskList() {
+        this.taskList = new ArrayList<Task>();
+    }
+    public Task getTask(int index) {
+        return taskList.get(index);
     }
 
     public void markTask(int index) {
         taskList.get(index).markDone();
     }
 
-    public void unmarkTask(int index) {
-        taskList.get(index).markUndone();
-    }
-
-    public Task getTask(int index) {
-        return taskList.get(index);
-    }
-
-    public int getSize() {
-        return taskList.size();
-    }
-
     public ArrayList<Task> getTaskList() {
         return taskList;
     }
 
-    public Task deleteTask(int index) {
-        return taskList.remove(index);
+
+    /**
+     * Returns the number of tasks in the task list.
+     *
+     * @return The number of tasks in the task list.
+     */
+    public int size() {
+        return taskList.size();
     }
-    public ArrayList<Task> findTasks(String keyword) {
-        ArrayList<Task> foundTasks = new ArrayList<>();
-        for (Task task : taskList) {
-            if (task.getTask().contains(keyword)) {
-                foundTasks.add(task);
+
+    /**
+     * Returns the task at index i of the task list.
+     *
+     * @param i The index of the task to be returned.
+     * @return The task at index i of the task list
+     */
+    public Task get(int i) {
+        return taskList.get(i);
+    }
+
+    /**
+     * Adds a new task to the task list.
+     *
+     * @param newTask The new task added.
+     */
+    public void add(Task newTask) {
+        taskList.add(newTask);
+    }
+
+    /**
+     * Removes the task at the specified position in task list.
+     *
+     * @param i The index of the task to be removed.
+     * @return The task that is removed.
+     */
+    public Task remove(int i) {
+        return taskList.remove(i);
+    }
+
+    /**
+     * Returns the string representation of the task list displayed
+     * to the user.
+     *
+     * @return The string representation of a TaskList.
+     */
+    public String taskListToString() {
+        int count = taskList.size();
+
+        if (count == 0) {
+            return "\nyou currently have no tasks, feed me <:";
+        }
+
+        String userToDoStr = "";
+
+        for (int i = 0; i < count; i++) {
+            String listItem = " " + String.valueOf(i + 1) + ". " + taskList.get(i).toString();
+
+            userToDoStr = userToDoStr + "\n" + listItem;
+        }
+
+        return userToDoStr;
+    }
+    public int getSize() {
+        return taskList.size();
+    }
+
+
+
+
+    /**
+     * Returns the TaskList represented by a string to be stored in the taskList
+     * file in user's hard disk.
+     *
+     * @return The string representation of stored TaskList.
+     */
+    public String taskListToStoreString() {
+        int count = taskList.size();
+        String taskListStorage = "";
+
+        for (int i = 0; i < count; i++) {
+            String taskItem = taskList.get(i).toStoreString();
+
+            if (i == 0) {
+                taskListStorage = taskItem;
+            } else {
+                taskListStorage = taskListStorage + "\n" + taskItem;
             }
         }
-        return foundTasks;
+
+        return taskListStorage;
     }
 }

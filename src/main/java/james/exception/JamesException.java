@@ -1,4 +1,4 @@
-package james;
+package james.exception;
 
 /**
  * The JamesException class.

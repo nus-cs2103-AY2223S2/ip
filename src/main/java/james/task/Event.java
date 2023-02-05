@@ -37,15 +37,6 @@ public class Event extends Task {
         return "E | " + super.toStoreString() + " | " + startFormat + " | " + endFormat + "\n";
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj instanceof Event) {
-            return super.equals(obj)
-                    && start.equals(((Event) obj).start)
-                    && end.equals(((Event) obj).end);
-        }
-        return super.equals(obj);
-    }
 }
 
 
