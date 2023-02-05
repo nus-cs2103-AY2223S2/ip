@@ -7,9 +7,18 @@ import duke.task.Todo;
 import duke.task.Deadline;
 import duke.task.Event;
 
+/**
+ * Represents a class to decipher user's commands.
+ */
 public class Parser {
     public Parser() {};
 
+    /**
+     * Reads the command that the user input, calls the respective functions.
+     * @param input User's input command.
+     * @param taskList User's TaskList.
+     * @throws DukeException If user enters invalid input.
+     */
     public void readInput(String[] input, TaskList taskList) throws DukeException {
         switch (input[0]) {
             case "list":   
@@ -38,6 +47,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Method to handle the mark command.
+     * @param input User's input
+     * @param taskList User's TaskList
+     * @throws DukeException If user enters invalid number or task that has not been created.
+     */
     public void mark(String[] input, TaskList taskList) throws DukeException {
         if (input.length == 1) {
             throw new DukeException("Mark needs a number.");
@@ -54,6 +69,12 @@ public class Parser {
         taskList.markTask(Integer.parseInt(input[1]) - 1);
     }
 
+    /**
+     * Method to handle the unmark command.
+     * @param input User's input
+     * @param taskList User's TaskList
+     * @throws DukeException If user enters invalid number or task that has not been created.
+     */
     public void unmark(String[] input, TaskList taskList) throws DukeException {
         if (input.length == 1) {
             throw new DukeException("Unmark needs a number.");
@@ -70,6 +91,12 @@ public class Parser {
         taskList.unmarkTask(Integer.parseInt(input[1]) - 1);
     }
 
+    /**
+     * Method to handle the todo command.
+     * @param input User's input
+     * @param taskList User's TaskList
+     * @throws DukeException If user did not provide name of Todo.
+     */
     public void todo(String[] input, TaskList taskList) throws DukeException {
         if (input.length == 1) {
             throw new DukeException("todo needs a description");
@@ -79,6 +106,12 @@ public class Parser {
         System.out.println("Added new todo:\n  " + t + "\nNumber of tasks: " + taskList.size());
     }
 
+    /**
+     * Method to handle the deadline command.
+     * @param input User's input
+     * @param taskList User's TaskList
+     * @throws DukeException If user did not enter /by date or invalid date format.
+     */
     public void deadline(String[] input, TaskList taskList) throws DukeException {
         if (input.length == 1 || !input[1].contains("/by")) {
             throw new DukeException("Deadline needs a /by.");
@@ -96,6 +129,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Method to handle the event command.
+     * @param input User's input
+     * @param taskList User's TaskList
+     * @throws DukeException If user did not enter /from or /to or invalid date format.
+     */
     public void event(String[] input, TaskList taskList) throws DukeException {
         if (input.length == 1 || !input[1].contains("/from") || !input[1].contains("/to") ) {
             throw new DukeException("Event needs a /from and /to.");
@@ -115,6 +154,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Method to handle the delete command.
+     * @param input User's input
+     * @param taskList User's TaskList
+     * @throws DukeException If user enters invalid number.
+     */
     public void delete(String[] input, TaskList taskList) throws DukeException {
         if (input.length == 1) {
             throw new DukeException("Delete needs a number.");

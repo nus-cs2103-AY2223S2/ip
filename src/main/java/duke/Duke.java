@@ -8,6 +8,9 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
+/**
+ * Represents the main Duke class.
+ */
 public class Duke {
 
     private static final String SAVE_PATH = "./taskList.txt";
@@ -16,6 +19,9 @@ public class Duke {
     private Ui ui = new Ui();
     private Parser parser = new Parser();
 
+    /**
+     * Constructor for a Duke object.
+     */
     public Duke() {
         try {
             this.storage = new Storage(SAVE_PATH);
@@ -24,6 +30,7 @@ public class Duke {
             System.out.println(e.getMessage());
         }
     }
+
 
     public static void main(String[] args) throws IOException, DukeException {
         Duke duke = new Duke();

@@ -12,13 +12,25 @@ import duke.task.Todo;
 import duke.task.Deadline;
 import duke.task.Event;
 
+/**
+ * Represents a class used to store and load user's tasks from Duke chatbot.
+ */
 public class Storage {
     private String filePath;
 
+    /**
+     * Constructor for a Storage object.
+     * @param filePath Relative path of taskList.txt file.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads a TaskList from taskList.txt.
+     * @return TaskList containing user's saved tasks.
+     * @throws DukeException If file could not be read.
+     */
     public TaskList loadData() throws DukeException {
         TaskList taskList = new TaskList();
         File file = new File(this.filePath);
@@ -61,6 +73,11 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Store user's tasks in a taskList.txt file in given relative file path.
+     * @param t User's tasks to store.
+     * @throws DukeException If unable to save file.
+     */
     public void storeData(ArrayList<Task> t) throws DukeException {
         File file = new File(this.filePath);
         try {
