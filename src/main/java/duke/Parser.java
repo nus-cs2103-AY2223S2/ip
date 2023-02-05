@@ -188,6 +188,7 @@ public class Parser {
             default:
                 throw UNKNOWN_COMMAND_ERROR;
             }
+            assert newTask != null : "newTask should not be null";
             tasks.addTask(newTask);
             return ui.showNormalMessage(String.format(
                     "Got it. I've added this task:\n\t%s\nNow you have %d task%s in the list.",
