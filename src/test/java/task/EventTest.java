@@ -2,6 +2,7 @@ package task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import duke.task.Event;
 import org.junit.jupiter.api.Test;
 public class EventTest {
     @Test
