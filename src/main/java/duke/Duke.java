@@ -38,7 +38,7 @@ public class Duke {
 
     public void setUp() {
         try {
-            taskList = Storage.loadData(taskList, FILEPATH);
+            taskList = Storage.loadData(FILEPATH);
             //System.out.println(taskList.listItems());
         } catch (IOException e) {
             this.dialogContainer.getChildren()

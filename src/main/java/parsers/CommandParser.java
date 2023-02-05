@@ -47,6 +47,7 @@ public class CommandParser extends Parser {
                 return new DeleteTaskCommand(commands[1]);
             case BYE:
                 return new ExitCommand();
+            // Fall through allowed as all the commands pertain to task creation.
             case TODO:
             case DEADLINE:
             case EVENT:

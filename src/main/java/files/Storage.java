@@ -23,12 +23,12 @@ public class Storage {
     /**
      * Returns a task list after loading all the tasks from a file.
      * Creates a path and a file if file does not exist and then return an empty task list.
-     * @param taskList the task list from it will store the tasks read from file
      * @param filePath the path of the file from which Storage will load tasks from
      * @return a task list containing tasks read from file
      * @throws IOException if reading is not successful
      */
-    public static TaskList loadData(TaskList taskList, String filePath) throws IOException {
+    public static TaskList loadData(String filePath) throws IOException {
+        TaskList taskList = new TaskList();
         try {
             taskList = readFromFile(filePath);
             System.out.println("Hrmm Hrmm, some past tasks I see!!\n'list' command to see more, you must enter");
