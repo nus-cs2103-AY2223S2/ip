@@ -5,6 +5,7 @@ import commands.Command;
 import commands.DeleteCommand;
 import commands.ListCommand;
 import commands.ToggleMarkTaskCommand;
+import commands.FindCommand;
 
 import exception.InvalidCommandException;
 import exception.TaskFactoryException;
@@ -50,9 +51,6 @@ public class Parser {
         default:
             throw new InvalidCommandException("Unknown command");
         }
-
-
-
 
     }
 }
