@@ -34,6 +34,7 @@ public class Duke {
     /**
      * Allow users to add, mark and un-mark, delete, add task (to-do, deadline, event)
      * or show items in a list and will exit if the bye command is returned
+     *
      * @param input instruction from the user
      * @return task description as result
      */
@@ -43,24 +44,22 @@ public class Duke {
 
         try {
             Command c = this.parser.parse(input);
+            assert c != null : "Command is null";
             this.exitStatus = c.isExit();
             this.storage.writeToFile();
             return c.execute(tasks, storage, ui);
 
         } catch (TaskException e) {
             return e.getMessage();
-        } catch (NullPointerException e) {
-            return "Object pointing to null, please check code";
-        } catch (ArrayIndexOutOfBoundsException e) {
-            return "Check if the index is within the size of the array";
         } catch (IndexOutOfBoundsException e) {
-            return "Nothing to mark/unmark!";
+            return "Nothing to mark/unmark/delete!";
         }
 
     }
 
     /**
      * Closes app upon receiving 'true'
+     *
      * @return boolean of exitStatus
      */
     public boolean isExitApp() {

@@ -1,8 +1,7 @@
 package duke.gui;
 
-import java.util.Collections;
-
 import java.io.IOException;
+import java.util.Collections;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
