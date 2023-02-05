@@ -9,10 +9,16 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
 
-    protected LocalDateTime by;
     private static final DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     private static final DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
+    protected LocalDateTime by;
 
+    /**
+     * Constructor to create a Deadline task.
+     *
+     * @param description String containing Deadline description.
+     * @param by String containing Deadline date.
+     */
     public Deadline(String description, String by) {
         super(description);
         this.by = LocalDateTime.parse(by, inputFormatter);
@@ -41,7 +47,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + "[" + super.getStatusIcon() + "] " + super.toString() +
-                " (by: " + by.format(outputFormatter) + ")";
+        return "[D]" + "[" + super.getStatusIcon() + "] " + super.toString()
+                + " (by: " + by.format(outputFormatter) + ")";
     }
 }

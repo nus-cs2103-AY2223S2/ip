@@ -8,6 +8,9 @@ import duke.task.Task;
 import duke.task.ToDo;
 import duke.tasklist.TaskList;
 
+/**
+ * Class to perform UI operations.
+ */
 public class Ui {
 
     /**
@@ -56,7 +59,7 @@ public class Ui {
             tasks.getTask(taskNumber - 1).markAsDone();
             System.out.printf("     %s%n", "Nice! I've marked this task as done:");
             System.out.printf("       %s%n", tasks.getTask(taskNumber - 1).toString());
-        } catch (NumberFormatException|IndexOutOfBoundsException e) {
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
             System.out.printf("     %s%n", "Please input valid task number.");
         }
     }
@@ -74,7 +77,7 @@ public class Ui {
             tasks.getTask(taskNumber - 1).markAsNotDone();
             System.out.printf("     %s%n", "OK, I've marked this task as not done yet:");
             System.out.printf("       %s%n", tasks.getTask(taskNumber - 1).toString());
-        } catch (NumberFormatException|IndexOutOfBoundsException e) {
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
             throw new DukeException("Input a valid task number.");
         }
     }
@@ -152,7 +155,7 @@ public class Ui {
             System.out.printf("     %s%n", "Noted. I've removed this task:");
             System.out.printf("       %s%n", t.toString());
             System.out.printf("     %s%d%s%n", "Now you have ", tasks.getSize(), " tasks in the list.");
-        } catch (NumberFormatException|IndexOutOfBoundsException e) {
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
             throw new DukeException("Input a valid task number.");
         }
     }

@@ -1,14 +1,22 @@
 package duke.tasklist;
 
+import java.util.ArrayList;
+
 import duke.exception.DukeException;
 import duke.task.Task;
 
-import java.util.ArrayList;
-
+/**
+ * Class to create a list of tasks.
+ */
 public class TaskList {
 
     private ArrayList<Task> list;
 
+    /**
+     * Constructor to create a TaskList.
+     *
+     * @param list ArrayList of tasks to initialize TaskList with.
+     */
     public TaskList(ArrayList<Task> list) {
         this.list = list;
     }

@@ -1,12 +1,5 @@
 package duke.storage;
 
-import duke.exception.DukeException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
-import duke.tasklist.TaskList;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -16,6 +9,13 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+import duke.tasklist.TaskList;
 
 /**
  * Stores file path and has methods to implement file I/O operations.
@@ -36,7 +36,7 @@ public class Storage {
             String fileSep = System.getProperty("file.separator");
             String userDir = System.getProperty("user.dir");
 
-            foldPath = Paths.get( userDir + fileSep + "data");
+            foldPath = Paths.get(userDir + fileSep + "data");
             filePath = Paths.get(foldPath + fileSep + "duke.txt");
 
             if (!Files.isDirectory(foldPath)) {

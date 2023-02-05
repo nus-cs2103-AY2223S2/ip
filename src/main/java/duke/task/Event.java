@@ -10,12 +10,18 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
 
-    protected LocalDateTime from;
-    protected LocalDateTime to;
     private static final DateTimeFormatter INPUT_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     private static final DateTimeFormatter OUTPUT_FORMATTER = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
+    protected LocalDateTime from;
+    protected LocalDateTime to;
 
-
+    /**
+     * Constructor to create an Event task.
+     *
+     * @param description String containing Event description.
+     * @param from String containing Event begin date.
+     * @param to String containing Event end date.
+     */
     public Event(String description, String from, String to) {
         super(description);
         this.from = LocalDateTime.parse(from, INPUT_FORMATTER);
@@ -56,7 +62,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + "[" + super.getStatusIcon() + "] " + super.toString() +
-                " (from: " + from.format(OUTPUT_FORMATTER) + " to: " + to.format(OUTPUT_FORMATTER) + ")";
+        return "[E]" + "[" + super.getStatusIcon() + "] " + super.toString()
+                + " (from: " + from.format(OUTPUT_FORMATTER) + " to: " + to.format(OUTPUT_FORMATTER) + ")";
     }
 }
