@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -58,4 +60,8 @@ public class Duke {
         new Duke("data/duke.txt", "/data").run();
     }
 
+    public String getResponse(String input) {
+        String res = parser.parse(input);
+        return res;
+    }
 }
