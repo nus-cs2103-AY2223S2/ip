@@ -1,6 +1,7 @@
 package duke.parser;
 
 import java.time.format.DateTimeParseException;
+import java.util.Optional;
 
 import duke.command.AddCommand;
 import duke.command.Command;
@@ -55,6 +56,7 @@ public class Parser {
             if (ops.length != 5) {
                 throw new InvalidCommandArgsException(Message.EXCEPTION_INVALID_EVENT_CMD);
             }
+
             return new AddCommand(DukeCommand.EVENT, title, isDone, DateUtil.toLocalDateTime(ops[3]),
                     DateUtil.toLocalDateTime(ops[4]));
         default:
@@ -79,82 +81,24 @@ public class Parser {
         } catch (IllegalArgumentException e) {
             throw new NoSuchCommandException(Message.EXCEPTION_NOSUCH_COMMAND);
         }
-
-        // handle simple commands
-        switch (command) {
-        case LIST:
-            return new ListCommand();
-        case BYE:
-            return new ExitCommand();
-        default:
-            break;
-        }
-
         try {
+            // handle simple commands
+            Optional<Command> c = handleSimpleCommand(command);
+            if (!c.isEmpty()) {
+                return c.get();
+            }
+
             // handle commands with single args
-            switch (command) {
-            case MARK:
-                if (ops.length != 2) {
-                    throw new InvalidCommandArgsException(Message.EXCEPTION_INVALID_MARK_CMD);
-                }
-                return new MarkCommand(Integer.parseInt(ops[1]), true);
-            case UNMARK:
-                if (ops.length != 2) {
-                    throw new InvalidCommandArgsException(Message.EXCEPTION_INVALID_UNMARK_CMD);
-                }
-                return new MarkCommand(Integer.parseInt(ops[1]), false);
-            case DELETE:
-                if (ops.length != 2) {
-                    throw new InvalidCommandArgsException(Message.EXCEPTION_INVALID_DELETE_CMD);
-                }
-                return new DeleteCommand(Integer.parseInt(ops[1]));
-            case DATE:
-                if (ops.length != 2) {
-                    throw new InvalidCommandArgsException(Message.EXCEPTION_INVALID_DATE_CMD);
-                }
-                return new ListCommand(DateUtil.toLocalDateTime(ops[1]));
-            case FIND:
-                if (ops.length != 2) {
-                    throw new InvalidCommandArgsException(Message.EXCEPTION_INVALID_DATE_CMD);
-                }
-                return new ListCommand(ops[1]);
-            default:
-                break;
+            c = handleSingleArgCommand(command, ops);
+            if (!c.isEmpty()) {
+                return c.get();
             }
 
             // handle commands with multiple args
-            String[] args;
-            switch (command) {
-            case TODO:
-                if (ops.length != 2) {
-                    throw new InvalidCommandArgsException(Message.EXCEPTION_INVALID_TODO_CMD);
-                }
-
-                return new AddCommand(DukeCommand.TODO, ops[1], false);
-            case DEADLINE:
-                if (ops.length != 2) {
-                    throw new InvalidCommandArgsException(Message.EXCEPTION_INVALID_DATE_CMD);
-                }
-
-                args = ops[1].split(" /[a-z]*[^ ] ");
-                if (args.length != 2) {
-                    throw new InvalidCommandArgsException(Message.EXCEPTION_INVALID_DEADLINE_CMD);
-                }
-
-                return new AddCommand(DukeCommand.DEADLINE, args[0], false, DateUtil.toLocalDateTime(args[1]));
-            case EVENT:
-                if (ops.length != 2) {
-                    throw new InvalidCommandArgsException(Message.EXCEPTION_INVALID_EVENT_CMD);
-                }
-
-                args = ops[1].split(" /[a-z]*[^ ] ");
-                if (args.length != 3) {
-                    throw new InvalidCommandArgsException(Message.EXCEPTION_INVALID_EVENT_CMD);
-                }
-
-                return new AddCommand(DukeCommand.EVENT, args[0], false, DateUtil.toLocalDateTime(args[1]),
-                        DateUtil.toLocalDateTime(args[2]));
-            default:
+            c = handleComplexArgCommand(command, ops);
+            if (!c.isEmpty()) {
+                return c.get();
+            } else {
                 throw new NoSuchCommandException(Message.EXCEPTION_NOSUCH_COMMAND);
             }
         } catch (DateTimeParseException e) {
@@ -165,4 +109,125 @@ public class Parser {
 
     }
 
+    /**
+     * Handles simple command parsing.
+     *
+     * @param command
+     * @return
+     */
+    private static Optional<Command> handleSimpleCommand(DukeCommand command) {
+        // handle simple commands
+        switch (command) {
+        case LIST:
+            return Optional.of(new ListCommand());
+        case BYE:
+            return Optional.of(new ExitCommand());
+        default:
+            return Optional.empty();
+        }
+    }
+
+    /**
+     * Handles single arg command parsing.
+     *
+     * @param command
+     * @return
+     */
+    private static Optional<Command> handleSingleArgCommand(DukeCommand command, String ops[]) throws NumberFormatException, InvalidCommandArgsException {
+        // ensure option args matches the format
+        if (ops.length != 2) {
+            switch (command) {
+            case MARK:
+                throw new InvalidCommandArgsException(Message.EXCEPTION_INVALID_MARK_CMD);
+            case UNMARK: 
+                throw new InvalidCommandArgsException(Message.EXCEPTION_INVALID_UNMARK_CMD);
+            case DELETE: 
+                throw new InvalidCommandArgsException(Message.EXCEPTION_INVALID_DELETE_CMD);
+            case DATE: 
+                throw new InvalidCommandArgsException(Message.EXCEPTION_INVALID_DATE_CMD);
+            case FIND:
+                throw new InvalidCommandArgsException(Message.EXCEPTION_INVALID_DATE_CMD);
+            default:
+                break;
+            }
+        }
+
+        // handle commands with single args
+        switch (command) {
+        case MARK:
+            assert ops.length == 2 : Message.EXCEPTION_INVALID_MARK_CMD;
+
+            return Optional.of(new MarkCommand(Integer.parseInt(ops[1]), true));
+        case UNMARK:
+            assert ops.length == 2 : Message.EXCEPTION_INVALID_UNMARK_CMD;
+
+            return Optional.of(new MarkCommand(Integer.parseInt(ops[1]), false));
+        case DELETE:
+            assert ops.length == 2 : Message.EXCEPTION_INVALID_DELETE_CMD;
+
+            return Optional.of(new DeleteCommand(Integer.parseInt(ops[1])));
+        case DATE:
+            assert ops.length == 2 : Message.EXCEPTION_INVALID_DATE_CMD;
+
+            return Optional.of(new ListCommand(DateUtil.toLocalDateTime(ops[1])));
+        case FIND:
+            assert ops.length == 2 : Message.EXCEPTION_INVALID_DATE_CMD;
+
+            return Optional.of(new ListCommand(ops[1]));
+        default:
+            return Optional.empty();
+        }
+    }
+
+    /**
+     * Handles multiple arg command parsing.
+     *
+     * @param command
+     * @return
+     */
+    private static Optional<Command> handleComplexArgCommand(DukeCommand command, String ops[]) throws DateTimeParseException, InvalidCommandArgsException {
+        // ensure option args matches the format
+        if (ops.length != 2) {
+            switch (command) {
+            case TODO:
+                throw new InvalidCommandArgsException(Message.EXCEPTION_INVALID_TODO_CMD);
+            case DEADLINE: 
+                throw new InvalidCommandArgsException(Message.EXCEPTION_INVALID_DATE_CMD);
+            case EVENT: 
+                throw new InvalidCommandArgsException(Message.EXCEPTION_INVALID_EVENT_CMD);
+            default:
+                break;
+            }
+        }
+
+        // handle commands with multiple args
+        String[] args;
+        switch (command) {
+        case TODO:
+            assert ops.length == 2 : Message.EXCEPTION_INVALID_TODO_CMD;
+
+            return Optional.of(new AddCommand(DukeCommand.TODO, ops[1], false));
+        case DEADLINE:
+            assert ops.length == 2 : Message.EXCEPTION_INVALID_DATE_CMD;
+
+            args = ops[1].split(" /[a-z]*[^ ] ");
+            if(args.length != 2) {
+                throw new InvalidCommandArgsException(Message.EXCEPTION_INVALID_DEADLINE_CMD);
+            }
+
+            return Optional.of(new AddCommand(DukeCommand.DEADLINE, args[0], false, DateUtil.toLocalDateTime(args[1])));
+        case EVENT:
+            assert ops.length == 2 : Message.EXCEPTION_INVALID_EVENT_CMD;
+
+            args = ops[1].split(" /[a-z]*[^ ] ");
+            if(args.length != 3) {
+                throw new InvalidCommandArgsException(Message.EXCEPTION_INVALID_EVENT_CMD);
+            }
+
+            return Optional.of(new AddCommand(DukeCommand.EVENT, args[0], false, DateUtil.toLocalDateTime(args[1]),
+                    DateUtil.toLocalDateTime(args[2])));
+        default:
+            return Optional.empty();
+        }
+    }
 }
