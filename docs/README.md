@@ -42,30 +42,29 @@ This is a simple user guide for the usage of Mr. Bear Application.
 >
 > + JDK 11
 > + update Intellij to the most recent version.
-> + For those new to git, please check this out on how to download the project: [Download and try the Project](#download-and-try-the-project)
 
 1. Open Intellij.
 2. If you are not on the welcome screen, navigate to "File" > "Close Project" to close any existing projects.
-3. You should now be on the welcome screen and ready to import or open your project.
+3. At this point, you should be seeing the welcome screen and be able to either import a project or open one.
 4. Set up the correct JDK version, as follows:
-    1. Open Intellij and select "Configure" from the welcome screen or go to "File" > "Project Structure"
-    2. In the Project Structure window, click on "Project" and select "Project SDK" from the dropdown menu
-    3. In the SDKs section, ensure that JDK 11 is selected. If it is not listed, click on "New..." and navigate to the location where JDK 11 is installed on your system
-    4. Select the correct version and click "OK" to set it as the default SDK for the project.
-    5. Click "Apply" and "OK" to save the changes and close the Project Structure window.
+	1. Launch Intellij and select "Configure" from the welcome screen or navigate to "File" > "Project Structure".
+	2. Once in the Project Structure window, click on "Project" and choose "Project SDK" from the drop-down menu.
+	3. In the SDKs section, confirm that JDK 11 is selected. If it's not present, click on "New..." and locate the JDK 11 installation on your system.
+	4. Pick the correct version and press "OK" to set it as the default SDK for your project.
+	5. Click "Apply" and "OK" to save the changes and exit the Project Structure window.
 
-3. To import the project into Intellij, please follow these steps:
-   1. Open Intellij and navigate to "File" > "Open" or "File" > "Import Project"
-   2. Locate the project folder and select the root directory of the project, then click "OK"
-   3. The project will be imported and should automatically build and index. If prompted to configure any settings or dependencies, accept the defaults.
-   4. Once the import is complete, the project should be ready to run and debug within Intellij.
+3. Here are the steps to import the project into Intellij:
+	1. Start Intellij and go to "File" > "Open" or "File" > "Import Project".
+	2. Find the project folder, select the root directory of the project, and click "OK".
+	3. The project will be imported and the necessary build and indexing will occur automatically. If any configuration or dependencies are prompted, accept the default options.
+	4. Upon completion of the import, the project should be fully functional for running and debugging within Intellij.
 
 
-4. Once the importing process has been finished, you can navigate to the src/main/java/Launcher.java file. Right-click on it and select the option to "Run Launcher" in order to execute the file.
+4. After the import is completed, you can access the src/main/java/Launcher.java file. To run it, simply right-click on it and choose the option "Run Launcher".
 
-5. If the setup process has been completed correctly, the graphical user interface should become visible within a short period of time.
+5. If the setup was successful, the graphical user interface should appear shortly.
 
-6. You can now input the command and press the Enter key to execute it.
+6. You can now type in your command and press Enter to run it.
 
 ### Run the project in terminal
 
@@ -73,8 +72,8 @@ This is a simple user guide for the usage of Mr. Bear Application.
 2. Navigate to any empty folder and place the downloaded file into that folder.
 3. Navigate your terminal directory to the folder that contains your **Bill.jar** file
 4. To launch the Mr. Bear Application, you have two options:
-	+ Double-click the "Mr.Bear.jar" file on your device.
-    + Open the command prompt and enter the command:
+    * Double-click the "Mr.Bear.jar" file on your device.
+    * Open the command prompt and enter the command:
         ```
         java -jar Mr.Bear.jar
         ```
@@ -82,12 +81,12 @@ This is a simple user guide for the usage of Mr. Bear Application.
         ```
         java -jar Mr.Bear.jar -cli 
 		```
-5. You should expect to see a Graphical User Interface(GUI) appear in a few second
+5. You should expect the Graphical User Interface (GUI) to appear in a matter of seconds.
 6. You should expect to see a window as shown below: 
 
 ![welcome](welcome.png)
 
-7. Once the application is running, type the help command to view a list of available commands and learn what tasks the chatbot can assist with.
+7. When the application is running, enter the "help" command to view a list of available commands and learn the tasks that the chatbot can help with.
 ```
 help
 ````
