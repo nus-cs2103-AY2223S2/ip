@@ -31,11 +31,9 @@ public class Duke {
 
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/yoda.jpeg"));
 
-
-    public static void main(String[] args) {
-        new Duke().run();
-    }
-
+    /**
+     * Set up the Main Window via Duke.
+     */
     public void setUp() {
         try {
             taskList = Storage.loadData(FILEPATH);
@@ -49,28 +47,6 @@ public class Duke {
 
     public void setDialogBox(VBox dialogContainer) {
         this.dialogContainer = dialogContainer;
-    }
-
-    /**
-     * Runs the entire program.
-     */
-    public void run() {
-        Scanner scanner = new Scanner(System.in);
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String response = ui.readCommand(scanner);
-                Command command = commandParser.parse(response);
-                command.execute(taskList, ui, storage);
-                isExit = command.isExit();
-            } catch (DukeException e) {
-                ui.showLoadingErrorMessage(e);
-            } finally {
-                System.out.println(BANNER);
-            }
-        }
-        storage.saveData(FILEPATH, taskList);
-        System.out.println(BANNER);
     }
 
     /**
