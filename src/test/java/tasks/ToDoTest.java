@@ -1,13 +1,13 @@
 package tasks;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class ToDoTest {
-
-    String[] commands = {"todo", "ip 7"};
-    ToDo simpleTask;
+    private String[] commands = {"todo", "ip 7"};
+    private ToDo simpleTask;
     @Test
     void createTask_simpleTask() {
         ToDo simpleTask = ToDo.create(commands);
@@ -25,8 +25,8 @@ class ToDoTest {
 
     @Test
     void buildDescription_simpleTask() {
-        String[] simpleTaskArrayCommand = {"todo","ip", "7"};
-        assertEquals(ToDo.buildDescription(simpleTaskArrayCommand, 1,2), "ip 7");
+        String[] simpleTaskArrayCommand = {"todo", "ip", "7"};
+        assertEquals(ToDo.buildDescription(simpleTaskArrayCommand, 1, 2), "ip 7");
     }
 
     @Test

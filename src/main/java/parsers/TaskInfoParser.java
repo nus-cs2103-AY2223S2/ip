@@ -7,7 +7,6 @@ import tasks.Event;
 import tasks.Task;
 import tasks.ToDo;
 
-import java.util.Arrays;
 
 /**
  * Parser which takes in commands or string responses and returns a task.
