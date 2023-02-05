@@ -91,9 +91,14 @@ public class TaskList {
      * @param keyword Keyword for searching tasks
      * @return List of filtered Tasks
      */
-    public ArrayList<Task> findMatchingTasks(String keyword) {
-        return (ArrayList<Task>) tasks
-                .stream().filter(task -> task.toString().contains(keyword))
-                .collect(Collectors.toList());
+    public String findMatchingTasks(String keyword) {
+        StringBuilder tasksList = new StringBuilder("Here are the matching task(s): ");
+        int count = 1;
+        for (Task task : tasks) {
+            if (task.toString().contains(keyword)) {
+                tasksList.append(count++).append(". ").append(task.toString());
+            }
+        }
+        return tasksList.toString();
     }
 }
