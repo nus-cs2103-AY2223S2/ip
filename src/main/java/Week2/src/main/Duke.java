@@ -79,7 +79,11 @@ public class Duke extends Application {
         storage = new Storage("/saves/data.txt");
         Ui ui = new Ui();
         try {
+
             //this.tasklist = new TaskList(storage.load());
+
+            //tasklist = new TaskList(storage.load());
+
             ui.hello();
             Parser parser = new Parser(tasklist);
             if (!isBye) {
@@ -94,6 +98,40 @@ public class Duke extends Application {
         } catch (Exception e) {
             return ui.showLoadingError();
         }
+
+    }
+
+    /**
+     * Iteration 1:
+     * Creates a label with the specified text and adds it to the dialog container.
+     * @param text String containing text to add
+     * @return a label with the specified text that has word wrap enabled.
+     */
+    private Label getDialogLabel(String text) {
+        // You will need to import `javafx.scene.control.Label`.
+        Label textToAdd = new Label(text);
+        textToAdd.setWrapText(true);
+
+        return textToAdd;
+    }
+    /**
+     * Iteration 2:
+     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * the dialog container. Clears the user input after processing.
+     */
+    private void handleUserInput() throws IOException {
+        Label userText = new Label(userInput.getText());
+        Label dukeText = new Label(getResponse(userInput.getText()));
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(userText, new ImageView(user)),
+                DialogBox.getDukeDialog(dukeText, new ImageView(bot))
+        );
+        userInput.clear();
+    }
+
+    private String getResponse(String input) throws IOException {
+        return run(input);
+
     }
 
     @Override
@@ -173,35 +211,4 @@ public class Duke extends Application {
         });
     }
 
-    /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
-    }
-    /**
-     * Iteration 2:
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
-     */
-    private void handleUserInput() throws IOException {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(bot))
-        );
-        userInput.clear();
-    }
-
-    private String getResponse(String input) throws IOException {
-        return run(input);
-    }
 }

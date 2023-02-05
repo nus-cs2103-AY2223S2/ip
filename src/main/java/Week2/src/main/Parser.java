@@ -99,6 +99,7 @@ public class Parser {
             Duke.isBye = true;
             return ui.bye();
         }
+
     }
 
     public void updateTL() {
