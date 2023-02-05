@@ -16,6 +16,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 
 
+/** A {@code UiComponent} to display a view of tasks. */
 public class TaskView extends UiComponent<VBox> {
     private static final String PATH_FXML_FILE = "TaskView.fxml";
 
@@ -26,6 +27,12 @@ public class TaskView extends UiComponent<VBox> {
     @FXML private VBox todoDisplayArea;
 
 
+    /**
+     * Constructs a {@code TaskView} from the given parameters.
+     *
+     * @param startTime - the start time.
+     * @param report - the filter of tasks to display.
+     */
     public TaskView(LocalDateTime startTime, TaskFilterReport report) {
         super(PATH_FXML_FILE);
         initialiseSchedule(startTime, report.filtered);

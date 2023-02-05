@@ -14,6 +14,7 @@ import aqua.manager.TaskFilterReport;
 import aqua.util.DateUtils;
 
 
+/** A {@code CommandController} to view schedule. */
 public class ViewScheduleCommand extends CommandController {
     @Override
     public ExecutionService getService(ArgumentMap args, LogicManager manager) {

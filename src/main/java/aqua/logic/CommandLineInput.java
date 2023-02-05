@@ -42,7 +42,6 @@ public class CommandLineInput {
      * Returns the ExecutionService to execute the command.
      *
      * @param manager - the LogicManager for the command to work on.
-     * @param isLoading - if the command purpose is to load a previous state.
      * @return the ExecutionService of the command.
      */
     public ExecutionService getService(LogicManager manager, IoManager ioManager) {

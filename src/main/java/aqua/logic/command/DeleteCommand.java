@@ -9,7 +9,6 @@ import aqua.logic.ExecutionService;
 import aqua.logic.ExecutionTask;
 import aqua.manager.IoManager;
 import aqua.manager.LogicManager;
-import aqua.util.Kaomoji;
 
 
 /**

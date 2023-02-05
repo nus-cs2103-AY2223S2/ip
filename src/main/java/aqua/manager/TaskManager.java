@@ -6,7 +6,6 @@ import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.stream.Stream;
 
 import aqua.aquatask.AquaTask;
@@ -62,6 +61,15 @@ public class TaskManager implements Reloadable {
     }
 
 
+    /**
+     * Filters tasks that are within the time range specified. Tasks that do
+     * not have a start date are classified under unknown.
+     *
+     * @param start - the starting time of tasks to include.
+     * @param end - the ending time of the tasks to include.
+     * @return a {@code TaskFilterReport} containing data of the tasks
+     *      filtered.
+     */
     public TaskFilterReport filterWithin(LocalDateTime start, LocalDateTime end) {
         ArrayList<AquaTask> filtered = new ArrayList<>();
         ArrayList<AquaTask> unknown = new ArrayList<>();

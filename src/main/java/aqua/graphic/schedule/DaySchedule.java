@@ -17,6 +17,7 @@ import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
 
+/** A graphical display of a day's schedule. */
 public class DaySchedule extends HBox {
     private static final double ROW_WIDTH = 1000;
     private static final double ROW_HEIGHT = 20;
@@ -32,6 +33,12 @@ public class DaySchedule extends HBox {
     private final VBox rowDisplayArea = new VBox();
 
 
+    /**
+     * Constructs a {@code DaySchedule} from the given parameters.
+     *
+     * @param startTime - the start time of the day.
+     * @param timeables - the list of {@code ScheduleTimeable} to display.
+     */
     public DaySchedule(LocalDateTime startTime, List<ScheduleTimeable> timeables) {
         getChildren().addAll(rowDisplayArea);
         List<? extends List<ScheduleTimeable>> sepTimeable = separateConflicting(timeables);

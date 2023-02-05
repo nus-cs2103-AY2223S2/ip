@@ -45,7 +45,7 @@ public enum Command {
      *
      * @param args - the arguments for the command to work on.
      * @param manager - the {@code LogicManager} for the command to work on.
-     * @param isLoading - if the command is to be executed to load data.
+     * @param ioManager - the {@code IoManager} to display results through.
      * @return the {@code ExecutionService} to execute.
      */
     public ExecutionService getService(ArgumentMap args, LogicManager manager, IoManager ioManager) {

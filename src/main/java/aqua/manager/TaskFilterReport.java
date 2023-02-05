@@ -13,6 +13,12 @@ public class TaskFilterReport {
     public final List<AquaTask> unknown;
 
 
+    /**
+     * Constructs a {@code TaskFilterReport} from the given parameters.
+     *
+     * @param filtered - list of filtered tasks
+     * @param unknow - list of tasks that cannot be filtered.
+     */
     public TaskFilterReport(List<AquaTask> filtered, List<AquaTask> unknown) {
         this.filtered = List.copyOf(filtered);
         this.unknown = List.copyOf(unknown);
