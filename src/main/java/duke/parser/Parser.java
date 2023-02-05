@@ -33,7 +33,6 @@ public class Parser {
      * @return A command to be executed.
      */
     public static Command parseCommand(String userInput) {
-        assert userInput.length() != 0 : "input should not be empty";
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             // incorrect command
