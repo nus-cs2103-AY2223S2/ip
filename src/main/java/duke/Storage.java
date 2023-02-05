@@ -42,6 +42,7 @@ public class Storage {
     public ArrayList<Task> loadData() throws CorruptedFileException, IOException {
         ArrayList<Task> taskList = new ArrayList<>();
         File targetFile = new File(FILE_PATH);
+        assert targetFile != null;
         targetFile.getParentFile().mkdirs();
         targetFile.createNewFile();
         Scanner scanner = new Scanner(targetFile);
@@ -92,6 +93,7 @@ public class Storage {
      */
     public void saveData(TaskList taskList) throws IOException {
         FileWriter fw = new FileWriter(FILE_PATH);
+        assert fw != null;
         for (Task task : taskList.tasks) {
             fw.write(task.toDataFormatString() + "\n");
         }
