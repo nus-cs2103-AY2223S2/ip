@@ -15,6 +15,7 @@ public class Duke {
                 break;
             }
             execute(cmd, arr);
+//            echo(sc.nextLine());
         }
         sc.close();
     }
@@ -70,13 +71,13 @@ public class Duke {
         Task task = new Task(cmd);
         switch(typeOfTask) {
             case "todo":
-                task = new ToDo(cmd);
+                task = new ToDo(cmd.replace("todo ", ""));
                 break;
             case "deadline":
-                task = new Deadline(cmd);
+                task = new Deadline(cmd.replace("deadline ", ""));
                 break;
             case "event":
-                task = new Event(cmd);
+                task = new Event(cmd.replace("event ", ""));
                 break;
         }
         arr.add(task);
@@ -86,9 +87,9 @@ public class Duke {
         String str = "";
         for (int i = 0; i < arr.size(); i++) {
             if (i != 0) {
-                str += "\t";
+                str += "\n\t";
             }
-            str += String.format("%d. %s \n", i+1, arr.get(i));
+            str += String.format("%d. %s", i+1, arr.get(i));
         }
         print(str);
     }
@@ -106,7 +107,7 @@ public class Duke {
     /**
      * Used in Level-1 to echo
      */
-    static String echo(String cmd) {
-        return cmd;
+    static void echo(String cmd) {
+        System.out.println(cmd);
     }
 }

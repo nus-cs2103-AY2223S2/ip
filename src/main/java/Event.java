@@ -2,9 +2,9 @@ public class Event extends Task {
     private String from;
     private String to;
     public Event(String cmd) {
-        this(cmd.replace("event ", "").split(" /")[0],
-                cmd.replace("event ", "").split(" /")[1].replace("from ", ""),
-                cmd.replace("event ", "").split(" /")[2].replace("to ", ""));
+        this(cmd.split(" /")[0],
+                cmd.split(" /")[1].replace("from ", ""),
+                cmd.split(" /")[2].replace("to ", ""));
     }
     Event(String task, String from, String to) {
         super(task);

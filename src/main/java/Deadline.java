@@ -1,8 +1,8 @@
 public class Deadline extends Task {
     private String deadline;
     public Deadline(String cmd) {
-        this(cmd.replace("deadline ", "").split(" /by")[0],
-                cmd.replace("deadline ", "").split(" /by")[1]);
+        this(cmd.split(" /by")[0],
+                cmd.split(" /by")[1]);
     }
     Deadline(String task, String deadline) {
         super(task);
