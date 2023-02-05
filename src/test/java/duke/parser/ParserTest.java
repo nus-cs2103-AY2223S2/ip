@@ -24,7 +24,8 @@ public class ParserTest {
             assertEquals(expected.toString(), ((AddCommand) cmd).getTask().toString());
 
             cmd = Parser.parse("event test /from 01/01/2020 /to 02/01/2020");
-            Event expected2 = new Event("test", false, LocalDateTime.of(2020, 1, 1, 0, 0, 0), LocalDateTime.of(2020, 1, 2, 0, 0, 0));
+            Event expected2 = new Event("test", false, LocalDateTime.of(2020, 1, 1, 0, 0, 0),
+                    LocalDateTime.of(2020, 1, 2, 0, 0, 0));
             assertTrue(cmd instanceof AddCommand);
             assertEquals(expected2.toString(), ((AddCommand) cmd).getTask().toString());
         } catch (DateTimeParseException | DukeException e) {

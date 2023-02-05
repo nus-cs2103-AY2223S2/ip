@@ -133,17 +133,18 @@ public class Parser {
      * @param command
      * @return
      */
-    private static Optional<Command> handleSingleArgCommand(DukeCommand command, String ops[]) throws NumberFormatException, InvalidCommandArgsException {
+    private static Optional<Command> handleSingleArgCommand(DukeCommand command, String[] ops)
+            throws NumberFormatException, InvalidCommandArgsException {
         // ensure option args matches the format
         if (ops.length != 2) {
             switch (command) {
             case MARK:
                 throw new InvalidCommandArgsException(Message.EXCEPTION_INVALID_MARK_CMD);
-            case UNMARK: 
+            case UNMARK:
                 throw new InvalidCommandArgsException(Message.EXCEPTION_INVALID_UNMARK_CMD);
-            case DELETE: 
+            case DELETE:
                 throw new InvalidCommandArgsException(Message.EXCEPTION_INVALID_DELETE_CMD);
-            case DATE: 
+            case DATE:
                 throw new InvalidCommandArgsException(Message.EXCEPTION_INVALID_DATE_CMD);
             case FIND:
                 throw new InvalidCommandArgsException(Message.EXCEPTION_INVALID_DATE_CMD);
@@ -185,15 +186,16 @@ public class Parser {
      * @param command
      * @return
      */
-    private static Optional<Command> handleComplexArgCommand(DukeCommand command, String ops[]) throws DateTimeParseException, InvalidCommandArgsException {
+    private static Optional<Command> handleComplexArgCommand(DukeCommand command, String[] ops)
+            throws DateTimeParseException, InvalidCommandArgsException {
         // ensure option args matches the format
         if (ops.length != 2) {
             switch (command) {
             case TODO:
                 throw new InvalidCommandArgsException(Message.EXCEPTION_INVALID_TODO_CMD);
-            case DEADLINE: 
+            case DEADLINE:
                 throw new InvalidCommandArgsException(Message.EXCEPTION_INVALID_DATE_CMD);
-            case EVENT: 
+            case EVENT:
                 throw new InvalidCommandArgsException(Message.EXCEPTION_INVALID_EVENT_CMD);
             default:
                 break;
@@ -211,7 +213,7 @@ public class Parser {
             assert ops.length == 2 : Message.EXCEPTION_INVALID_DATE_CMD;
 
             args = ops[1].split(" /[a-z]*[^ ] ");
-            if(args.length != 2) {
+            if (args.length != 2) {
                 throw new InvalidCommandArgsException(Message.EXCEPTION_INVALID_DEADLINE_CMD);
             }
 
@@ -220,7 +222,7 @@ public class Parser {
             assert ops.length == 2 : Message.EXCEPTION_INVALID_EVENT_CMD;
 
             args = ops[1].split(" /[a-z]*[^ ] ");
-            if(args.length != 3) {
+            if (args.length != 3) {
                 throw new InvalidCommandArgsException(Message.EXCEPTION_INVALID_EVENT_CMD);
             }
 
