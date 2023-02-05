@@ -38,4 +38,17 @@ public class Todo extends Task {
     public String toString() {
         return "[T]" + super.toString();
     }
+
+
+    /**
+     * Returns whether this todo have the same description as another todo.
+     *
+     * @param other Other object.
+     * @return true if other object is a todo and has the same description,
+     *         false otherwise.
+     */
+    @Override
+    public boolean equals(Object other) {
+        return super.equals(other) && (other instanceof Todo);
+    }
 }

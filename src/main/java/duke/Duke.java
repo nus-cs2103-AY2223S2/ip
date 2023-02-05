@@ -81,7 +81,7 @@ public class Duke extends Application {
     public void handleUserInput(String input) {
         try {
             execute(Parser.parse(input));
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException | IllegalStateException e) {
             controller.showBadCommandMessage(e.getMessage());
         }
     }

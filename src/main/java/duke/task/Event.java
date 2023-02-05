@@ -51,4 +51,20 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.toString() + " (from: " + from + " to: " + to + ")";
     }
+
+    /**
+     * Returns whether this event have the same description, start and end datetime as another event.
+     *
+     * @param other Other object.
+     * @return true if other object is an event and has the same description, start and end datetime,
+     *         false otherwise.
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (!(super.equals(other) && (other instanceof Event))) {
+            return false;
+        }
+        Event event = (Event) other;
+        return from.equals(event.from) && to.equals(event.to);
+    }
 }
