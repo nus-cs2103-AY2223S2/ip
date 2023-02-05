@@ -71,7 +71,7 @@ public class AddCommand extends Command {
      * @param isExit show if the command is an ExitCommand.
      * @param isValid show if the command is valid.
      * @param header specify the type the command belongs to, e.g. "add", "delete".
-     * @param body specify the key information the command supposed to pass on.
+     * @param body specifies taskName.
      * @param taskTag specifies the type of task to add, "T" for todo, "D" for deadline, "E" for event.
      * @param start the start date of the event.
      * @param end the end date of the event.
@@ -113,5 +113,20 @@ public class AddCommand extends Command {
         taskList.add(theTask);
         storage.save(tasks);
         return ui.returnAdd(theTask, tasks);
+    }
+
+    @Override
+    public LocalDate getDeadline() {
+        return this.deadline;
+    }
+
+    @Override
+    public LocalDate getStart() {
+        return this.start;
+    }
+
+    @Override
+    public LocalDate getEnd() {
+        return this.end;
     }
 }

@@ -91,4 +91,16 @@ public abstract class Command {
     public void setBody(String body) {
         this.body = body;
     }
+
+    public LocalDate getDeadline() {
+        return LocalDate.parse("1970-01-01");
+    };
+
+    public LocalDate getStart() {
+        return LocalDate.parse("1970-01-01");
+    }
+
+    public LocalDate getEnd() {
+        return LocalDate.parse("1970-01-01");
+    }
 }
