@@ -3,6 +3,8 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import duke.enums.TaskType;
+
 /**
  * Represents an event task.
  *
@@ -24,7 +26,7 @@ public class Event extends Task {
      * @param to End of event.
      */
     public Event(String description, boolean isMarked, String from, String to) {
-        super(description, isMarked);
+        super(description, isMarked, TaskType.EVENT);
         this.from = LocalDate.parse(from);
         this.to = LocalDate.parse(to);
     }

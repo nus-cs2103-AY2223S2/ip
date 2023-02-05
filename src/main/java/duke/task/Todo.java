@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.enums.TaskType;
+
 /**
  * Represents a todo task.
  *
@@ -13,7 +15,7 @@ public class Todo extends Task {
      * @param isMarked Task marking.
      */
     public Todo(String description, boolean isMarked) {
-        super(description, isMarked);
+        super(description, isMarked, TaskType.TODO);
     }
 
     /**

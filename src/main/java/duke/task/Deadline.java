@@ -3,6 +3,8 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import duke.enums.TaskType;
+
 /**
  * Represents a deadline task.
  *
@@ -20,7 +22,7 @@ public class Deadline extends Task {
      * @param by Task deadline.
      */
     public Deadline(String description, boolean isMarked, String by) {
-        super(description, isMarked);
+        super(description, isMarked, TaskType.DEADLINE);
         this.by = LocalDate.parse(by);
     }
 
@@ -43,5 +45,15 @@ public class Deadline extends Task {
     @Override
     public String toTaskStorageString() {
         return "D" + "|" + super.toTaskStorageString() + "|" + by;
+    }
+
+    /**
+     * Returns if the deadline is due today.
+     *
+     * @return True is the deadline is due today and false otherwise.
+     */
+    public boolean isDueToday() {
+        LocalDate todayDate = LocalDate.now();
+        return by.equals(todayDate);
     }
 }

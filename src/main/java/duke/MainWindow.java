@@ -1,5 +1,7 @@
 package duke;
 
+import java.io.IOException;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -31,10 +33,18 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     public void initialize() {
-        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog("Hello what can I do for you?", dukeImage)
-        );
+        try {
+            scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+            System.out.println(duke);
+            setDuke(new Duke("data/duke.txt"));
+            String reminders = duke.getReminders();
+            String welcomeMessage = "Welcome!\n";
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getDukeDialog(welcomeMessage + reminders, dukeImage)
+            );
+        } catch (IOException exception) {
+            System.out.println(exception.getMessage());
+        }
     }
 
     /**
