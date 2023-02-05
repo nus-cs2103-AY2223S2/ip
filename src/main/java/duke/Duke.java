@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.IOException;
 
 import duke.DukeException;
@@ -23,6 +25,11 @@ public class Duke {
         }
     }
 
+    public static void main(String[] args) throws IOException, DukeException {
+        Duke duke = new Duke();
+        duke.run();
+    }
+
     public void run() throws IOException, DukeException{
         ui.start();
         String[] input = ui.readLine();
@@ -30,7 +37,7 @@ public class Duke {
             try {
                 ui.displayLine();
                 parser.readInput(input, taskList);
-                ui.displayLine();  
+                ui.displayLine();
                 input = ui.readLine();
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
@@ -40,9 +47,5 @@ public class Duke {
         }
         ui.goodbye();
         storage.storeData(this.taskList.getTasks());
-    }
-
-    public static void main(String[] args) throws IOException, DukeException {
-        new Duke().run();
     }
 }
