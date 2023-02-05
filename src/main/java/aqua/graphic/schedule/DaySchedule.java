@@ -27,6 +27,8 @@ public class DaySchedule extends HBox {
     private static final double TOOLTIP_SHOW_DELAY = 0;
     private static final double TOOLTIP_HIDE_DELAY = 0;
 
+    private static final PseudoClass PSEUDO_CLASS_HOVER = PseudoClass.getPseudoClass("hover");
+
     private final VBox rowDisplayArea = new VBox();
 
 
@@ -108,6 +110,8 @@ public class DaySchedule extends HBox {
             for (PseudoClass pseudoClass : timeable.getPseudoClass()) {
                 scheduleBox.pseudoClassStateChanged(pseudoClass, true);
             }
+            scheduleBox.setOnMouseEntered(e -> scheduleBox.pseudoClassStateChanged(PSEUDO_CLASS_HOVER, true));
+            scheduleBox.setOnMouseExited(e -> scheduleBox.pseudoClassStateChanged(PSEUDO_CLASS_HOVER, false));
 
             pane.getChildren().add(scheduleBox);
             scheduleBox.setLayoutX(startX);

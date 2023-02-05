@@ -11,13 +11,13 @@
          <children>
             <VBox VBox.vgrow="SOMETIMES">
                <children>
-                  <Label text="Schedule" />
+                  <Label styleClass="title" text="Schedule" />
                   <VBox fx:id="scheduleDisplayArea" />
                </children>
             </VBox>
             <VBox VBox.vgrow="SOMETIMES">
                <children>
-                  <Label text="Todo" />
+                  <Label styleClass="title" text="Todo" />
                   <VBox fx:id="todoDisplayArea" fillWidth="false" />
                </children>
             </VBox>

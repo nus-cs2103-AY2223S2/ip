@@ -154,6 +154,13 @@
     -fx-color: rgb(216, 199, 171);
 }
 
+.schedule-box:hover,
+.deadline-box:hover {
+    -fx-color: -fx-hover-base;
+}
+
+
+
 .todo-label {
     -fx-background-color: -fx-shadow-highlight-color, -fx-outer-border, -fx-inner-border, -fx-body-color;
     -fx-background-insets: 1 1 0 1, 1, 2, 3;
@@ -166,4 +173,9 @@
 
 .todo-label:incomplete {
     -fx-color: rgb(189, 169, 212);
+}
+
+.title {
+    -fx-font-size: 24;
+    -fx-font-weight: bold;
 }
