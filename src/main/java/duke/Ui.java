@@ -108,7 +108,7 @@ public class Ui {
      * @param taskList TaskList which contains the list of tasks.
      */
     public String showList(TaskList taskList) {
-        if(taskList.getSize() == 0) {
+        if (taskList.getSize() == 0) {
             String message = "\tThere is nothing in ur list currently";
             return message;
         } else {

@@ -1,10 +1,12 @@
 package duke.command;
 
-import duke.*;
-import duke.tasks.Task;
-
 import java.util.ArrayList;
 
+import duke.DukeException;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.tasks.Task;
 /**
  * DeleteCommand is a command that deletes a task from the task list
  */

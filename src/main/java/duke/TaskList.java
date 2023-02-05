@@ -104,8 +104,8 @@ public class TaskList {
         int sizeOfList = listOfTasks.size();
         return Stream.iterate(0, i -> i + 1)
                 .limit(sizeOfList)
-                .map(x -> String.format("\n\t%d%s", x + 1 ,listOfTasks.get(x).toString()))
-                .reduce("\n\tHere are the tasks in your list:", (y,z) -> y + z);
+                .map(x -> String.format("\n\t%d%s", x + 1, listOfTasks.get(x).toString()))
+                .reduce("\n\tHere are the tasks in your list:", (y, z) -> y + z);
     }
 
     /**

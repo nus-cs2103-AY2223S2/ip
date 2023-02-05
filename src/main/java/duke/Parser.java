@@ -89,7 +89,7 @@ public class Parser {
                     throw new DukeException("\tPlease enter the task number to delete!");
                 } else {
                     return new DeleteCommand(Integer.parseInt(splitString[1].trim()) - 1, isFine);
-                    }
+                }
             case find:
                 if (splitString[1].trim().equals("")) {
                     throw new DukeException("\t☹ OOPS!!! The name of task u want to find cannot be empty!.");
