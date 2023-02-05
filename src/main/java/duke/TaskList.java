@@ -100,20 +100,6 @@ public class TaskList {
     /**
      * Prints the tasks in the list for the user.
      */
-    /**public String printList() {
-        String s = "";
-        int i = 1;
-        s = "\n\tHere are the tasks in your list:";
-        for (Task task : listOfTasks) {
-            s += "\n\t"
-                    + i
-                    + ". "
-                    + task.toString();
-            i++;
-        }
-        return s;
-    } **/
-
     public String printList() {
         int sizeOfList = listOfTasks.size();
         return Stream.iterate(0, i -> i + 1)
