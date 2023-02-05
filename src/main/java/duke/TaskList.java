@@ -34,8 +34,9 @@ public class TaskList {
             return "Got it. I've added this task:\n"
                             + "  " + task + "\n"
                             + "Now you have " + tasks.size() + " task(s) in the list.";
+        } else {
+            return "";
         }
-        else return "";
     }
 
     /**

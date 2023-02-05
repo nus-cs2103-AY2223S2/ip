@@ -101,6 +101,9 @@ public class Parser {
                 TaskList filtered = new TaskList(tasks.findMatchingTasks(commandArr[1]));
                 response = filtered.printList();
                 break;
+            case BYE:
+                response = "Bye bye!";
+                break;
             default:
                 throw new DukeException("I'm sorry, but I don't know what that means :-(");
             }
@@ -113,6 +116,6 @@ public class Parser {
         return response;
     }
 
-    enum Actions { LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, FIND }
+    enum Actions { LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, FIND, BYE }
 
 }

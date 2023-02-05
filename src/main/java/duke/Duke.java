@@ -1,12 +1,7 @@
 package duke;
-
 import java.io.IOException;
 import java.util.Scanner;
 
-import duke.Parser;
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
 import exception.DukeException;
 
 /**
@@ -60,6 +55,12 @@ public class Duke {
         new Duke("data/duke.txt", "/data").run();
     }
 
+    /**
+     * Returns response of the bot.
+     *
+     * @param input User's input.
+     * @return Response that corresponds to the input.
+     */
     public String getResponse(String input) {
         String res = parser.parse(input);
         return res;
