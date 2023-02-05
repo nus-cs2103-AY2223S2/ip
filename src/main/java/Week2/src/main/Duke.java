@@ -79,7 +79,7 @@ public class Duke extends Application {
         storage = new Storage("/saves/data.txt");
         Ui ui = new Ui();
         try {
-            //tasklist = new TaskList(storage.load());
+            //this.tasklist = new TaskList(storage.load());
             ui.hello();
             Parser parser = new Parser(tasklist);
             if (!isBye) {
@@ -204,5 +204,4 @@ public class Duke extends Application {
     private String getResponse(String input) throws IOException {
         return run(input);
     }
-
 }
