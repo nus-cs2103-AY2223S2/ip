@@ -34,7 +34,7 @@ public class Storage {
         // double check later
         try {
             relativeFilePath = new File(".").getCanonicalPath();
-            filePath = Paths.get(relativeFilePath, '/' + DATA_PATH);
+            filePath = Paths.get(relativeFilePath, '/' + filePathGiven);
             Files.createDirectories(filePath.getParent());
         } catch (IOException e) {
             System.out.println(e);
