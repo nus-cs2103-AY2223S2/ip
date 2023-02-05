@@ -42,8 +42,6 @@ public class Event extends Task {
      * @throws DukeException Indicates missing data or incorrect data type or format in args.
      */
     public static Event createFromStorage(String[] args) throws DukeException {
-        assert args != null;
-
         validateNoMissingData(args);
 
         String[] formattedArgs = Task.formatStrsFromStorage(args);
@@ -79,12 +77,17 @@ public class Event extends Task {
     }
 
     private static void validateNoMissingData(String[] args) throws DukeException {
+        assert args != null;
+
         if (args.length != 5) {
             throw new DukeException("An event in storage has missing data!");
         }
     }
 
     private static LocalDateTime extractValidStart(String[] formattedArgs) throws DukeException {
+        assert formattedArgs != null;
+        assert formattedArgs.length >= 4;
+
         try {
             return LocalDateTime.parse(formattedArgs[3]);
         } catch (DateTimeParseException e) {
@@ -93,6 +96,9 @@ public class Event extends Task {
     }
 
     private static LocalDateTime extactValidEnd(String[] formattedArgs) throws DukeException {
+        assert formattedArgs != null;
+        assert formattedArgs.length >= 5;
+
         try {
             return LocalDateTime.parse(formattedArgs[4]);
         } catch (DateTimeParseException e) {
@@ -101,6 +107,9 @@ public class Event extends Task {
     }
 
     private static boolean extactValidIsDone(String[] formattedArgs) throws DukeException {
+        assert formattedArgs != null;
+        assert formattedArgs.length >= 2;
+
         if (!BooleanUtils.isBooleanStr(formattedArgs[1])) {
             throw new DukeException("An event in storage has an incorrect data type!");
         }

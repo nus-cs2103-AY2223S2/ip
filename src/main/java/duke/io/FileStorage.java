@@ -62,6 +62,8 @@ public class FileStorage implements Storage {
 
     @Override
     public void write(String data) throws DukeException {
+        assert data != null;
+
         try {
             Files.writeString(path, data);
         } catch (IOException e) {

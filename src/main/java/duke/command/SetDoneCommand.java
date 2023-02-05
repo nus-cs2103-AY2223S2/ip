@@ -50,9 +50,6 @@ public abstract class SetDoneCommand implements Command {
     protected abstract String getSuccessMessagePrefix();
 
     private int extractValidIndex(String input, TaskList tasks) throws DukeException {
-        assert input != null;
-        assert tasks != null;
-
         String argStr = extractArgStr(input);
 
         validateNonEmptyArg(argStr);
@@ -64,16 +61,22 @@ public abstract class SetDoneCommand implements Command {
     }
 
     private String extractArgStr(String input) {
+        assert input != null;
+
         return input.replaceFirst(getCommand(), "").trim();
     }
 
     private void validateNonEmptyArg(String argStr) throws DukeException {
+        assert argStr != null;
+
         if (argStr.isEmpty()) {
             throw new DukeException(String.format("The task to %s must be specified!", getCommand()));
         }
     }
 
     private int extractIntegerArg(String argStr) throws DukeException {
+        assert argStr != null;
+
         try {
             return Integer.parseInt(argStr) - 1;
         } catch (NumberFormatException e) {
@@ -82,6 +85,8 @@ public abstract class SetDoneCommand implements Command {
     }
 
     private void validateIndexRange(int index, TaskList tasks) throws DukeException {
+        assert tasks != null;
+
         if (index >= tasks.size() || index < 0) {
             throw new DukeException(String.format("The task to %s doesn't exist!", getCommand()));
         }

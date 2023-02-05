@@ -22,6 +22,8 @@ public class Launcher {
     }
 
     private static boolean shouldLaunchCli(String[] args) {
+        assert args != null;
+
         return args.length == 1 && args[0].equals("--cli");
     }
 }

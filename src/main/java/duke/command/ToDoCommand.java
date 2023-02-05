@@ -36,8 +36,6 @@ public class ToDoCommand extends AddCommand {
     }
 
     private String extractValidDescription(String input) throws DukeException {
-        assert input != null;
-
         String description = extractDescription(input);
 
         validateNonEmptyDescription(description);
@@ -46,10 +44,14 @@ public class ToDoCommand extends AddCommand {
     }
 
     private String extractDescription(String input) {
+        assert input != null;
+
         return input.replaceFirst("todo", "").trim();
     }
 
     private void validateNonEmptyDescription(String description) throws DukeException {
+        assert description != null;
+
         if (description.isEmpty()) {
             throw new DukeException("The description of a to-do cannot be empty!");
         }

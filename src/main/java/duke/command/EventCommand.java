@@ -42,8 +42,6 @@ public class EventCommand extends AddCommand {
     }
 
     private String[] extractValidArgs(String input) throws DukeException {
-        assert input != null;
-
         validateCommandFormat(input);
 
         String[] args = extractArgs(input);
@@ -58,6 +56,8 @@ public class EventCommand extends AddCommand {
     }
 
     private void validateCommandFormat(String input) throws DukeException {
+        assert input != null;
+
         if (!input.matches("event .+ /from .+ /to .+")) {
             throw new DukeException("The event command format should be:\n  event <description> /from <start of event> "
                     + "/to <end of event>");
@@ -65,6 +65,8 @@ public class EventCommand extends AddCommand {
     }
 
     private String[] extractArgs(String input) {
+        assert input != null;
+
         String argStr = input.replaceFirst("event ", "");
         String[] args = argStr.split("( /from | /to )", 3);
 
@@ -76,24 +78,36 @@ public class EventCommand extends AddCommand {
     }
 
     private void validateNonEmptyDescription(String[] args) throws DukeException {
+        assert args != null;
+        assert args.length >= 1;
+
         if (args[0].isEmpty()) {
             throw new DukeException("The description of an event cannot be empty!");
         }
     }
 
     private void validateNonEmptyStart(String[] args) throws DukeException {
+        assert args != null;
+        assert args.length >= 2;
+
         if (args[1].isEmpty()) {
             throw new DukeException("The start of an event must be specified!");
         }
     }
 
     private void validateNonEmptyEnd(String[] args) throws DukeException {
+        assert args != null;
+        assert args.length >= 3;
+
         if (args[2].isEmpty()) {
             throw new DukeException("The end of an event must be specified!");
         }
     }
 
     private void validateStartAndEndFormat(String[] args) throws DukeException {
+        assert args != null;
+        assert args.length >= 3;
+
         if (!args[1].matches(LocalDateTimeUtils.INPUT_DATE_TIME_REGEX)
                 || !args[2].matches(LocalDateTimeUtils.INPUT_DATE_TIME_REGEX)) {
 
@@ -104,7 +118,7 @@ public class EventCommand extends AddCommand {
 
     private Event createEvent(String[] args) throws DukeException {
         assert args != null;
-        assert args.length == 3;
+        assert args.length >= 1;
 
         String description = args[0];
         LocalDateTime start = extractValidStart(args);
@@ -114,6 +128,9 @@ public class EventCommand extends AddCommand {
     }
 
     private LocalDateTime extractValidStart(String[] args) throws DukeException {
+        assert args != null;
+        assert args.length >= 2;
+
         try {
             return LocalDateTime.parse(args[1], LocalDateTimeUtils.INPUT_DATE_TIME_FORMATTER);
         } catch (DateTimeParseException e) {
@@ -122,6 +139,9 @@ public class EventCommand extends AddCommand {
     }
 
     private LocalDateTime extractValidEnd(String[] args) throws DukeException {
+        assert args != null;
+        assert args.length >= 3;
+
         try {
             return LocalDateTime.parse(args[2], LocalDateTimeUtils.INPUT_DATE_TIME_FORMATTER);
         } catch (DateTimeParseException e) {

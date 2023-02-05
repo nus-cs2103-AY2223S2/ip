@@ -30,8 +30,6 @@ public class FindCommand implements Command {
     }
 
     private String extractValidKeyphrase(String input) throws DukeException {
-        assert input != null;
-
         String[] args = extractArgs(input);
 
         validateNonEmptyKeyphrase(args);
@@ -40,10 +38,14 @@ public class FindCommand implements Command {
     }
 
     private String[] extractArgs(String input) {
+        assert input != null;
+
         return input.split(" ", 2);
     }
 
     private void validateNonEmptyKeyphrase(String[] args) throws DukeException {
+        assert args != null;
+
         if (args.length != 2 || args[1].trim().isEmpty()) {
             throw new DukeException("The keyphrase to search for cannot be empty!");
         }
@@ -64,6 +66,8 @@ public class FindCommand implements Command {
     }
 
     private String getMessage(TaskList tasks, List<Integer> matchedTaskIndexes) {
+        assert matchedTaskIndexes != null;
+
         if (matchedTaskIndexes.isEmpty()) {
             return "The task you're searching for DOESN'T EXIST!";
         } else {

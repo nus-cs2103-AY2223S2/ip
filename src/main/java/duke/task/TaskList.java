@@ -146,6 +146,7 @@ public class TaskList {
 
     private Task createTask(String[] args) throws DukeException {
         assert args != null;
+        assert args.length >= 1;
 
         switch (args[0]) {
         case "T":
