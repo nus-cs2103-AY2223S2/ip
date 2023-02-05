@@ -1,3 +1,4 @@
-Event,false,party,12/2/23 0600,12/2/23 1000
+Event,true,party,12/2/23 0600,12/2/23 1000
 Deadline,true,test program,25/12/23 1150
-Todo,false,task2
+Todo,false,work
+Todo,false,work

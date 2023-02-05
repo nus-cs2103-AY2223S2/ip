@@ -8,7 +8,7 @@ import util.DukeException;
  * Executes uncheck task from list command.
  */
 public class UncheckCommand extends Command {
-    private final TaskManager taskManager;
+    //private final TaskManager taskManager;
     private final int index;
 
     /**
@@ -18,20 +18,28 @@ public class UncheckCommand extends Command {
      * @param taskManager
      * @param input
      */
-    public UncheckCommand(TaskManager taskManager, String input) {
-        this.taskManager = taskManager;
+    public UncheckCommand(String input) {
+        //this.taskManager = taskManager;
         this.index = super.extractIndex(input) - 1;
+    }
+
+    @Override
+    public boolean isExit() {
+        return false;
     }
 
     /**
      * Unchecks task at index given by user.
      *
+     * @return
      * @throws DukeException
      */
     @Override
-    public void executeCommand() throws DukeException {
+    public String executeCommand(TaskManager taskManager) throws DukeException {
         try {
             taskManager.uncheckTask(this.index);
+            String str = "No worries! I have unchecked this task in the list: ";
+            return str + System.lineSeparator() + taskManager.printTask(this.index);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Item does not exist in list! Please check your list again.");
         }

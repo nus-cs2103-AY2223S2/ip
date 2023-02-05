@@ -27,7 +27,7 @@ public class FileManager implements Serializable {
      * @param taskManager
      */
     public void saveTasksToFile(TaskManager taskManager) {
-        try{
+        try {
             File file = new File(FILEPATH);
             if (!file.isFile() && !file.isDirectory()) {
                 System.out.println("File or folder not found!");
