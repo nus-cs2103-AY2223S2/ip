@@ -1,25 +1,24 @@
 package duke.commands;
 
-/** This is a command to add a task to Duke
- *
- * @author Wong Yong Xiang
+/**
+ * This is a command to add a task to Duke.
  */
 public abstract class AddCommand extends Command {
     private final String commandType;
 
     /**
-     * Constructor of the class AddCommand
+     * Constructor of the class AddCommand.
      *
-     * @param commandType the type of AddCommand
+     * @param commandType the type of AddCommand.
      */
     public AddCommand(String commandType) {
         this.commandType = commandType;
     }
 
     /**
-     * Returns whether the program Duke should terminate
+     * Returns whether the program Duke should terminate.
      *
-     * @return false
+     * @return false.
      */
     @Override
     public boolean isExit() {

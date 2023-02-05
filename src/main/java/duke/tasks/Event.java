@@ -18,7 +18,7 @@ public class Event extends Task {
     public Event(String description, LocalDate from, LocalDate to) {
         super(description);
         this.from = from;
-        this.to= to;
+        this.to = to;
     }
 
     /** Another constructor for the Event class
@@ -31,7 +31,7 @@ public class Event extends Task {
     public Event(String description, LocalDate from, LocalDate to, boolean isDone) {
         super(description, isDone);
         this.from = from;
-        this.to= to;
+        this.to = to;
     }
 
     /** Returns the string representation of Event
@@ -82,10 +82,6 @@ public class Event extends Task {
         }
 
         Event e = (Event) o;
-        if (this.description.equals(e.description) && this.from.equals(e.from) && this.to.equals(e.to)) {
-            return true;
-        } else {
-            return false;
-        }
+        return this.description.equals(e.description) && this.from.equals(e.from) && this.to.equals(e.to);
     }
 }
