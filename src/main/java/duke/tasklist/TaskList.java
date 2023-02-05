@@ -2,6 +2,7 @@ package duke.tasklist;
 
 import java.util.ArrayList;
 
+import duke.exceptions.DukeException;
 import duke.tasktypes.Task;
 import duke.ui.Ui;
 
@@ -62,16 +63,26 @@ public class TaskList {
      * Deletes task from collection.
      * Informs User upon successful task deletion.
      *
-     * @param toDelete Integer index of task to be deleted.
+     * @param toDelete Task ID of task to be deleted.
      * @return Task has been deleted message.
      */
-    public String deleteTask(int toDelete) {
-        assert toDelete <= this.numTasks : "Delete Task input invalid.";
-        Task deleted = taskStorage.remove(toDelete - 1);
-        int originalNumTasks = this.numTasks;
-        numTasks--;
-        assert (originalNumTasks - 1) == this.numTasks : "Number of tasks mismatch!";
-        return ui.taskDelete(deleted, numTasks);
+    public String deleteTask(int toDelete) throws DukeException {
+        Task deleteTask = null;
+        for (Task task : taskStorage) {
+            if (task.getTaskID() == toDelete) {
+                deleteTask = task;
+                break;
+            }
+        }
+        if (deleteTask == null) {
+            throw new DukeException("Task does not exist! Please enter valid Task ID!");
+        } else {
+            taskStorage.remove(deleteTask);
+            int originalNumTasks = this.numTasks;
+            numTasks--;
+            assert (originalNumTasks - 1) == this.numTasks : "Number of tasks mismatch!";
+            return ui.taskDelete(deleteTask, numTasks);
+        }
     }
 
     /**
@@ -79,14 +90,23 @@ public class TaskList {
      * Marks specified task in collection as complete.
      * Informs User upon successful operation.
      *
-     * @param mark Integer index of task to be mark complete.
+     * @param mark Task ID of task to be mark complete.
      * @return Task has been marked done message.
      */
-    public String markTask(int mark) {
-        assert mark <= this.numTasks : "Mark Task input invalid.";
-        Task marked = taskStorage.get(mark - 1);
-        marked.setDone();
-        return ui.markTaskDone(marked);
+    public String markTask(int mark) throws DukeException {
+        Task markTask = null;
+        for (Task task : taskStorage) {
+            if (task.getTaskID() == mark) {
+                markTask = task;
+                break;
+            }
+        }
+        if (markTask == null) {
+            throw new DukeException("Task does not exist! Please enter valid Task ID!");
+        } else {
+            markTask.setDone();
+            return ui.markTaskDone(markTask);
+        }
     }
 
     /**
@@ -94,23 +114,35 @@ public class TaskList {
      * Unmarks specified task in collection as incomplete.
      * Informs User upon successful operation.
      *
-     * @param unmark Integer index of task to be mark incomplete.
+     * @param unmark Task ID of task to be mark incomplete.
      * @return Task has been unmarked message.
      */
-    public String unmarkTask(int unmark) {
-        assert unmark <= this.numTasks : "Unmark Task input invalid.";
-        Task unmarked = taskStorage.get(unmark - 1);
-        unmarked.setUndone();
-        return ui.markTaskUndone(unmarked);
+    public String unmarkTask(int unmark) throws DukeException {
+        Task unmarkTask = null;
+        for (Task task : taskStorage) {
+            if (task.getTaskID() == unmark) {
+                unmarkTask = task;
+                break;
+            }
+        }
+        if (unmarkTask == null) {
+            throw new DukeException("Task does not exist! Please enter valid Task ID!");
+        } else {
+            unmarkTask.setUndone();
+            return ui.markTaskUndone(unmarkTask);
+        }
     }
 
     /**
      * Returns String representation of tasks in Task collection.
      * Prints all current tasks in collection to standard output.
      *
-     * @return String representaton of tasks in Task collection.
+     * @return String representation of tasks in Task collection.
      */
     public String printTasks() {
+        if (this.numTasks == 0) {
+            return "There are no available tasks at the moment!\n";
+        }
         int count = 1;
         String output = "";
         output += "Here are the tasks in your list:\n";
