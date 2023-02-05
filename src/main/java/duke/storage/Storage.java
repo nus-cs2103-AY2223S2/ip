@@ -127,7 +127,6 @@ public class Storage {
         Path dataFile = Paths.get("ip/data/tasks.txt");
         // directory does not exists
         if (!Files.isDirectory(dataDir)) {
-            System.out.println("hi");
             Files.createDirectory(dataDir);
             Files.createFile(dataFile);
         } else {
@@ -136,6 +135,8 @@ public class Storage {
                 Files.createFile(dataFile);
             }
         }
+
+        assert Files.exists(dataFile) : "tasks.txt file should be created";
         writer = new FileWriter("ip/data/tasks.txt", true);
         String finalTasks = "";
         String taskInfo = task.toString().replace("[ ]", " | 0 |").replace("[X]", "| 1 |");
@@ -153,6 +154,7 @@ public class Storage {
         try {
             Path tempFile = Paths.get("ip/data/tempTasks.txt");
             Files.createFile(tempFile);
+            assert Files.exists(tempFile) : "tempTasks.txt file should be created";
             BufferedReader bufReader = new BufferedReader(new FileReader(filePath));
             FileWriter writerToTempFile = new FileWriter("ip/data/tempTasks.txt", true);
 

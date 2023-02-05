@@ -42,14 +42,14 @@ public class Duke {
      * Start the Duke program.
      */
     public void run() {
-        ui.showWelcome();
+        System.out.println(ui.showWelcome());
         boolean isExit = false;
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
                 ui.showLine(); // show the divider line ("_______")
                 Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
+                System.out.println(c.execute(tasks, ui, storage));
                 isExit = c.isExit();
                 ui.showLine();
             } catch (NullPointerException e) {
@@ -76,6 +76,7 @@ public class Duke {
     public String getResponse(String input) {
         if (!isExit) {
             Command c = Parser.parse(input);
+            assert c != null : "command should not be null";
             isExit = c.isExit();
             return c.execute(tasks, ui, storage);
         } else {
