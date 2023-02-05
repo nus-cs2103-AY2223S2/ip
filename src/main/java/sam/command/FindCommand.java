@@ -17,7 +17,7 @@ public class FindCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         List<String> list = tasks.findTasks(args);
-        if (list.size() == 0) {
+        if (list.isEmpty()) {
             ui.respond("None of your tasks match!");
         } else {
             list.add(0, String.format("I found %d matching tasks:", list.size()));
