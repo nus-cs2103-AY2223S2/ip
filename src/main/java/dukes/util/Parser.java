@@ -1,17 +1,10 @@
 package dukes.util;
 
+import dukes.command.*;
 import dukes.task.Task;
 import dukes.task.ToDo;
 import dukes.task.DeadLine;
 import dukes.task.Event;
-
-import dukes.command.Command;
-import dukes.command.AddCommand;
-import dukes.command.DeleteCommand;
-import dukes.command.ListCommand;
-import dukes.command.ExitCommand;
-import dukes.command.MarkCommand;
-import dukes.command.FindCommand;
 
 import java.util.Locale;
 import java.util.Arrays;
@@ -45,28 +38,32 @@ public class Parser {
             String[] splits = command.split(" ");
             if (splits.length == 0) {
                 throw new DukeException("Sorry, I cannot recognise your input.");
-            } else if (splits[0].equals("mark")) {
-                // maybe make MarkCommand.execute handle exception?
-                return validateMark(command, 0);
-            } else if (splits[0].equals("unmark")) {
-                return validateMark(command, 1);
-            } else if (splits[0].equals("delete")) {
-                return validateDelete(command);
-            } else if (splits[0].equals("todo")) {
-                // these 3 needs a AddCommand
-                return validateToDo(command);
-            } else if (splits[0].equals("deadline")) {
-                return validateDeadLine(command);
-            } else if (splits[0].equals("event")) {
-                return validateEvent(command);
-            } else if (splits[0].equals("list")) {
-                return validateList(command, 0);
-            } else if (splits[0].equals("search")) {
-                return validateList(command, 1);
-            } else if (splits[0].equals("find")) {
-                return validateFind(command);
-            } else {
-                throw new DukeException("Sorry, I cannot recognise your input.");
+            }
+            switch (splits[0]) {
+                case "mark":
+                    // maybe make MarkCommand.execute handle exception?
+                    return validateMark(command, 0);
+                case "unmark":
+                    return validateMark(command, 1);
+                case "delete":
+                    return validateDelete(command);
+                case "todo":
+                    // these 3 needs a AddCommand
+                    return validateToDo(command);
+                case "deadline":
+                    return validateDeadLine(command);
+                case "event":
+                    return validateEvent(command);
+                case "list":
+                    return validateList(command, 0);
+                case "search":
+                    return validateList(command, 1);
+                case "find":
+                    return validateFind(command);
+                case "update":
+                    return validateUpdate(command);
+                default:
+                    throw new DukeException("Sorry, I cannot recognise your input.");
             }
         }
     }
@@ -78,7 +75,7 @@ public class Parser {
      * @return the date being parsed.
      * @throws DateTimeParseException if the string is not a valid date, or is not of dd/mm/yyyy format.
      */
-    LocalDate validateTime(String timeString) throws DateTimeParseException {
+    public LocalDate validateTime(String timeString) throws DateTimeParseException {
         // Set the time input as dd/mm/yyyy
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
         LocalDate theDate = LocalDate.parse(timeString, formatter);
@@ -125,7 +122,6 @@ public class Parser {
             int deadlineSplit = findSplitter(splited, "/by");
             String taskName = parseHelper(splited, 0, deadlineSplit);
             String deadline = parseHelper(splited, deadlineSplit + 1, splited.length);
-
             try {
                 LocalDate theDate = validateTime(deadline);
                 return new AddCommand(
@@ -267,6 +263,27 @@ public class Parser {
         }
     }
 
+    // The method: let UpdateCommand to make the judgement?
+
+
+    public Command validateUpdate(String command) throws DukeException {
+        String[] splited = command.split(" ");
+        if (hasNoUpdateContent(splited)) {
+            throw new DukeException("You have not specified the update content.");
+        } else {
+            assert (splited.length >= 3) : "Should already be caught";
+            try {
+                int index = Integer.parseInt(splited[1]);
+                // ALL content after the index is passed as body
+                String newContent = parseHelper(splited, 2, splited.length);
+                return new UpdateCommand(false, true, "update",
+                        Integer.toString(index), newContent);
+            } catch (NumberFormatException ex) {
+                throw new DukeException("You have entered an invalid index.");
+            }
+        }
+    }
+
     /**
      * Static method that interpret hard disk line into task object.
      *
@@ -274,8 +291,7 @@ public class Parser {
      * @return a task interpreted from the file line.
      */
     public static Task fetchTask(String fileLine) {
-        // System.out.println(fileLine);
-        // Still get issues -- must be able to parse the date time!!
+        // This should not have issue for DateTime not format
         Task newTask;
         // DO NOT USE | as separator!! You need \\| for escape. Better use @
         String[] temp = fileLine.split("@");
@@ -305,6 +321,16 @@ public class Parser {
     }
 
     /**
+     * Private util method to check if the update command has no content
+     *
+     * @param splited the update command
+     * @return if the command is invalid
+     */
+    private static boolean hasNoUpdateContent(String[] splited) {
+        return splited.length < 3;
+    }
+
+    /**
      * Private util method to ensure the command has all the required words
      * @param splited the command
      * @param values all the required words
@@ -330,12 +356,12 @@ public class Parser {
      * @param end the end index
      * @return the string that supposed to be extracted
      */
-    private static String parseHelper(String[] splited, int start, int end) {
+    public static String parseHelper(String[] splited, int start, int end) {
+        assert (splited.length >= 2) : "This should not appear";
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < splited.length; i++) {
             if (i >= start && i < end) {
                 sb.append(splited[i]).append(" ");
-                break;
             }
         }
         if (sb.length() != 0) {
@@ -351,7 +377,8 @@ public class Parser {
      * @param identifier the pattern to be matched
      * @return the split index between different sections of command
      */
-    private static int findSplitter(String[] splitted, String identifier) {
+    public static int findSplitter(String[] splitted, String identifier) {
+        assert (splitted.length >= 2) : "This should not appear";
         int split = -1;
         for (int i = 0; i < splitted.length; i++) {
             if (splitted[i].equals(identifier)) {
@@ -368,7 +395,7 @@ public class Parser {
      * @param index the index of the string to be parsed
      * @return the localdate represented by the string
      */
-    private static LocalDate getLocalDate(String[] temp, int index) {
+    public static LocalDate getLocalDate(String[] temp, int index) throws DateTimeParseException {
         DateTimeFormatter formatter =
                 DateTimeFormatter.ofPattern("yyyy-MM-dd", new Locale("en"));
         LocalDate deadline = LocalDate.parse(temp[index], formatter);

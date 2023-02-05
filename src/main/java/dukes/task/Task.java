@@ -50,6 +50,10 @@ public class Task {
         return this.taskName;
     }
 
+    public void setTaskName(String taskName) {
+        this.taskName = taskName;
+    }
+
     String getFromTime() {
         return "";
     }
@@ -63,15 +67,21 @@ public class Task {
         return LocalDate.parse("1970-01-01");
     }
 
+    public void setDeadLine(LocalDate newDeadLine) {};
+
     /** Dummy method to be used by subclass. Returns dummy date. */
     public LocalDate getStart() {
         return LocalDate.parse("1970-01-01");
     }
 
+    public void setStart(LocalDate newStart) {};
+
     /** Dummy method to be used by subclass. Returns dummy date. */
     public LocalDate getEnd() {
         return LocalDate.parse("1970-01-01");
     }
+
+    public void setEnd(LocalDate newEnd) {};
 
     public String getTag() { return this.tag; }
 

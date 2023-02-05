@@ -50,6 +50,16 @@ public class Event extends Task {
         return this.end;
     }
 
+    @Override
+    public void setStart(LocalDate newStart) {
+        this.start = newStart;
+    }
+
+    @Override
+    public void setEnd(LocalDate newEnd) {
+        this.end = newEnd;
+    }
+
     /**
      * Returns a string containing {tag "E" for event task} +
      * {if the task is completed} + the content of the task.

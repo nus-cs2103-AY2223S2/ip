@@ -31,6 +31,8 @@ public class UI {
     public static final String NOW_YOU_HAVE = "Now you have ";
     public static final String TASK_IN_LIST = " tasks in the list.";
 
+    public static final String WORD_UPDATE = "You have successfully updated this task: ";
+
 
     /**
      * Display error message when data file is not found in the hard disk.
@@ -108,6 +110,10 @@ public class UI {
      */
     public static String returnFind(String str) {
         return WORD_FIND + "\n" + str;
+    }
+
+    public static String returnUpdate(Task theTask, TaskList tasks) {
+        return getUpdateResponse(theTask, tasks, WORD_UPDATE);
     }
 
     /**

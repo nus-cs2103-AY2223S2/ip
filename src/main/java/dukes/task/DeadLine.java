@@ -40,6 +40,11 @@ public class DeadLine extends Task {
         return this.deadline;
     }
 
+    @Override
+    public void setDeadLine(LocalDate newDeadline) {
+        this.deadline = newDeadline;
+    }
+
     /**
      * Returns a string containing {tag "D" for deadline task} +
      * {if the task is completed} + the content of the task.
