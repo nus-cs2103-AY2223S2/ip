@@ -63,10 +63,9 @@ public class DaySchedule extends HBox {
                     break;
                 }
             }
-            if (isAdded) {
-                continue;
+            if (!isAdded) {
+                sepTimeables.add(new ArrayList<>(List.of(timeable)));
             }
-            sepTimeables.add(new ArrayList<>(List.of(timeable)));
         }
         return sepTimeables;
     }
