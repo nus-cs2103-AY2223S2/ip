@@ -2,6 +2,7 @@ package duke;
 
 import java.io.IOException;
 
+import gui.DialogBox;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -26,6 +27,8 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
+            fxmlLoader.<MainWindow>getController().setStage(stage);
+            fxmlLoader.<MainWindow>getController().sendGreeting();
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

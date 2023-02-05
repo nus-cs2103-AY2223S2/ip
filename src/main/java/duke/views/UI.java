@@ -15,13 +15,8 @@ public class UI {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
 
-        return "Hello from\n"
-                + logo
-                + ", your personal assistant.\n";
-    }
-
-    public String getExitMessage() {
-        return "I hope you've managed to be productive today. Bye!";
+        return "Hello. I'm Duke, your personal assistant.\n"
+                + "How may I help you today?";
     }
 
     private String indentString(String s) {
@@ -32,9 +27,8 @@ public class UI {
      * Displays a list of possible commands
      * to the user
      */
-    public void printCommands() {
-        System.out.println(
-                "Here is the list of available commands I can do:"
+    public String getAvailableCommands() {
+        return "Here is the list of available commands I can do:"
                         + indentString("bye")
                         + indentString("todo [name]")
                         + indentString("deadline [name] /by [" + DATE_FORMAT + "]")
@@ -44,7 +38,7 @@ public class UI {
                         + indentString("unmark [index]")
                         + indentString("delete [index]")
                         + indentString("find [search term]")
-                        + indentString("bye"));
+                        + indentString("bye");
     }
 
     public void printCommandOutput(Command c) {

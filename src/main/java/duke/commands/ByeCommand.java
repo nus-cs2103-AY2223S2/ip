@@ -9,7 +9,8 @@ import duke.views.UI;
 
 public class ByeCommand extends Command {
     public ByeCommand() {
-        this.commandStatus = "Exit command executed!";
+        this.commandStatus = "Exit command executed!\n"
+                + "I hope you've managed to be productive today. Bye!";
         this.isExit = true;
     }
 
