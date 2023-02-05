@@ -291,6 +291,9 @@ public class Duke extends Application {
 
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public void start(Stage stage) {
         try {
@@ -304,5 +307,14 @@ public class Duke extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public void stop() throws Exception {
+        super.stop();
+        storage.saveDataToFile();
     }
 }
