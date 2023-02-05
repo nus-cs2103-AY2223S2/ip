@@ -86,6 +86,12 @@ public class Ui {
                 + "8. get yyyy-MM-dd\n" + space() + "-- to retrieve the tasks on a specific date\n"
                 + "9. bye\n" + space() + "-- to exit the session\n"
                 + "10. find [keyword]\n" + space() + "-- find tasks containing the keyword\n"
+                + "11. update\n"
+                + space() + "/desc [new description]\n"
+                + space() + "/by [new deadline due date]\n"
+                + space() + "/from [new event start time\n"
+                + space() + "/to [new end time for event]\n"
+                + space() + "-- to update details of your task with flags\n"
                 + "You can start giving commands below";
         return guide;
     }
