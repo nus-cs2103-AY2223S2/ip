@@ -35,7 +35,6 @@ public class AddCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Storage storage, Ui ui) {
-        taskList.addItem(instruction.toString(), input);
-        return "Task has been added";
+        return taskList.addItem(instruction.toString(), input);
     }
 }

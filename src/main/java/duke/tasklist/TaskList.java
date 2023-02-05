@@ -25,6 +25,7 @@ public class TaskList {
 
     /**
      * Prints list
+     *
      * @return print items in the list
      */
     public String printList() {
@@ -70,19 +71,19 @@ public class TaskList {
      * @param instruction command entered by user
      * @param input       name of the three task types
      */
-    public void addItem(String instruction, String input) {
+    public String addItem(String instruction, String input) {
         try {
             switch (instruction) {
             case "TODO":
-                if (input.length() < 5) {
-                    this.ui.error("todo");
+                if (input.length() <= 5) {
+                    return this.ui.error("todo");
                 }
                 this.storage.addTodoItem(input);
                 break;
 
             case "DEADLINE":
                 if (!input.contains("/by")) {
-                    this.ui.error("deadline");
+                    return this.ui.error("deadline");
                 }
                 final String[] deadline_part = input.substring(9, input.length()).split("/by ");
                 this.storage.addDeadlineItem(deadline_part[0], deadline_part[1]);
@@ -93,7 +94,7 @@ public class TaskList {
                 boolean to = input.contains("/to");
 
                 if ((!from || !to) || !(from && to)) {
-                    this.ui.error("event");
+                    return this.ui.error("event");
                 }
                 final String[] event_part = input.substring(6, input.length()).split("/from ");
                 String[] range = event_part[1].split("/to ");
@@ -101,18 +102,17 @@ public class TaskList {
                 break;
 
             default:
-                System.out.println("Should not print anything");
+                return "Should not print anything";
             }
 
         } catch (TaskException e) {
-            System.out.println(e.getMessage());
+            return e.getMessage();
         } catch (NullPointerException e) {
             System.out.println("Object pointing to null, please check code");
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Check if the index is within the size of the array");
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println("Nothing to mark/unmark!");
         }
+        return "Task has been added";
     }
 
     /**
