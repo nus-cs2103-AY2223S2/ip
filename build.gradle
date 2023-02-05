@@ -48,7 +48,7 @@ test {
 }
 
 application {
-    mainClassName = "seedu.Willy.Willy"
+    mainClassName = "Willy.Willy"
 }
 
 shadowJar {

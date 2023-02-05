@@ -43,10 +43,10 @@ public class Parser {
         isExit = true;
     }
 
-    public void parseCommand(String command) throws WillyException {
+    public void parseCommand(String command) throws WillyException {    
         String[] tempBySpace = command.split(" ");
         String[] tempBySlash = command.split("/");
-
+        
         if (tempBySpace[0].equals("mark")) {
             int index = getIndex(tempBySpace[1]);
             tList.markTask(index);
