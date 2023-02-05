@@ -19,7 +19,7 @@ public class Storage {
     private final String filePath;
 
     /**
-     * Contructor for Storage.
+     * Constructor for Storage.
      *
      * @param filePath The filepath where data is saved.
      */
@@ -28,7 +28,7 @@ public class Storage {
     }
 
     /**
-     * Getter method to get the filepath.
+     * Gets the filepath.
      *
      * @return filepath where data is saved.
      */

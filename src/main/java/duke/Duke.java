@@ -47,7 +47,7 @@ public class Duke {
     }
 
     /**
-     * Gets response from Duke.
+     * Generates response from Duke.
      *
      * @param command Command inputted by User.
      * @return Response from Duke.

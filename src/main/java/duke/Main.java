@@ -16,7 +16,7 @@ public class Main extends Application {
     private Duke duke;
 
     /**
-     * A method to start the Duke Application.
+     * Starts the Duke Application.
      *
      * @param stage The Stage of the Application.
      */

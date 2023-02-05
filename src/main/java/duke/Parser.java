@@ -29,7 +29,7 @@ public class Parser {
     }
     private static boolean isFine;
     /**
-     * The parse method creates new commands.
+     * Creates new command according to the input of the user.
      *
      * @param inputCommand Input command from the user.
      * @return Command that corresponds to the user input.
