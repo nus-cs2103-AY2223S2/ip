@@ -52,21 +52,21 @@ public class Parser {
         case "unmark ":
             inputArr = fullCommand.split(" ");
             int toUnmark = Integer.parseInt(inputArr[1]);
-            if (toUnmark > tasks.getNumTasks()) {
+            if (toUnmark > tasks.getNumTasks() || toUnmark <= 0) {
                 throw new DukeException("Task does not exist! Please enter valid input!");
             }
             return new UnmarkCommand(toUnmark);
         case "mark ":
             inputArr = fullCommand.split(" ");
             int toMark = Integer.parseInt(inputArr[1]);
-            if (toMark > tasks.getNumTasks()) {
+            if (toMark > tasks.getNumTasks() || toMark <= 0) {
                 throw new DukeException("Task does not exist! Please enter valid input!");
             }
             return new MarkCommand(toMark);
         case "delete ":
             inputArr = fullCommand.split(" ");
             int toDelete = Integer.parseInt(inputArr[1]);
-            if (toDelete > tasks.getNumTasks()) {
+            if (toDelete > tasks.getNumTasks() || toDelete <= 0) {
                 throw new DukeException("Task does not exist! Please enter valid input!");
             }
             return new DeleteCommand(toDelete);
@@ -113,10 +113,12 @@ public class Parser {
      * @return String representation of just the command.
      */
     public static String returnCommand(String input, String[] commands) {
+        assert commands.length > 0 : "There are no commands available.";
+        boolean gotMatch;
         for (String s : commands) {
             Pattern word = Pattern.compile(s);
             Matcher match = word.matcher(input);
-            boolean gotMatch = match.find();
+            gotMatch = match.find();
 
             if (gotMatch && match.start() == 0) {
                 return s;
@@ -133,6 +135,7 @@ public class Parser {
      * @throws DukeException If User input is invalid. (e.g. Add deadline task without supplying end time.)
      */
     public static void validateTaskCommand(String input, String[] commands) throws DukeException {
+        assert commands.length > 0 : "There are no commands available.";
         input = input.trim();
         for (String s : commands) {
             if (s.equals(input + " ")) {
@@ -141,11 +144,15 @@ public class Parser {
         }
 
         boolean isCorrect = false;
+        boolean gotMatch;
         for (String s : commands) {
             Pattern word = Pattern.compile(s);
             Matcher match = word.matcher(input);
-            boolean gotMatch = match.find() && (match.start() == 0);
-            isCorrect = isCorrect || gotMatch;
+            gotMatch = match.find() && (match.start() == 0);
+            isCorrect = gotMatch;
+            if (isCorrect) {
+                break;
+            }
         }
 
         if (!isCorrect) {

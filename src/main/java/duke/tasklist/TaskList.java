@@ -36,7 +36,9 @@ public class TaskList {
      */
     public void loadTask(Task task) {
         this.taskStorage.add(task);
+        int originalNumTasks = this.numTasks;
         numTasks++;
+        assert (originalNumTasks + 1) == this.numTasks : "Number of tasks mismatch!";
     }
 
     /**
@@ -49,7 +51,9 @@ public class TaskList {
      */
     public String addTask(Task task) {
         this.taskStorage.add(task);
+        int originalNumTasks = this.numTasks;
         numTasks++;
+        assert (originalNumTasks + 1) == this.numTasks : "Number of tasks mismatch!";
         return ui.taskAdd(task, numTasks);
     }
 
@@ -62,8 +66,11 @@ public class TaskList {
      * @return Task has been deleted message.
      */
     public String deleteTask(int toDelete) {
+        assert toDelete <= this.numTasks : "Delete Task input invalid.";
         Task deleted = taskStorage.remove(toDelete - 1);
+        int originalNumTasks = this.numTasks;
         numTasks--;
+        assert (originalNumTasks - 1) == this.numTasks : "Number of tasks mismatch!";
         return ui.taskDelete(deleted, numTasks);
     }
 
@@ -76,6 +83,7 @@ public class TaskList {
      * @return Task has been marked done message.
      */
     public String markTask(int mark) {
+        assert mark <= this.numTasks : "Mark Task input invalid.";
         Task marked = taskStorage.get(mark - 1);
         marked.setDone();
         return ui.markTaskDone(marked);
@@ -90,6 +98,7 @@ public class TaskList {
      * @return Task has been unmarked message.
      */
     public String unmarkTask(int unmark) {
+        assert unmark <= this.numTasks : "Unmark Task input invalid.";
         Task unmarked = taskStorage.get(unmark - 1);
         unmarked.setUndone();
         return ui.markTaskUndone(unmarked);
@@ -108,6 +117,7 @@ public class TaskList {
         for (Task task : taskStorage) {
             output += String.format("%d.%s", count++, task.toString()) + "\n";
         }
+        assert count == this.numTasks : "Number of tasks printed mismatch.";
         return output;
     }
 
@@ -124,6 +134,8 @@ public class TaskList {
                 matchTasks.loadTask(task);
             }
         }
+        assert matchTasks.numTasks <= this.numTasks
+                : "Number of matching tasks cannot exceed number of existing tasks";
         return matchTasks;
     }
 
