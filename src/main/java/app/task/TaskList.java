@@ -48,12 +48,11 @@ public class TaskList implements Iterable<Task> {
      * @param args map of argument names to their values.
      * @return the same Task object that was added into the TaskList
      * @throws InvalidDateTimeException
-     * @throws CommandNotFoundException
      * @throws InvalidInputException
      */
 
     public Task addTask(TaskTypes.Type type, Map<String, String> args)
-            throws InvalidDateTimeException, CommandNotFoundException, InvalidInputException {
+            throws InvalidDateTimeException, InvalidInputException {
         Task newTask;
         String desc;
         switch (type) {
@@ -92,7 +91,7 @@ public class TaskList implements Iterable<Task> {
             newTask = new Event(desc, from, to);
             break;
         default:
-            throw new CommandNotFoundException("I don't recognise this type of task. Try add todo <desc>!");
+            throw new InvalidInputException("Task not recognised");
         }
         this.tasks.add(this.tasks.size(), newTask); // always adds to the end
         return newTask;
@@ -104,11 +103,10 @@ public class TaskList implements Iterable<Task> {
      * @param args map of argument names to their values.
      * @return the same Task object that was added into the TaskList
      * @throws InvalidDateTimeException
-     * @throws CommandNotFoundException
      * @throws InvalidInputException
      */
     public Task addDoneTask(TaskTypes.Type type, Map<String, String> args)
-            throws InvalidDateTimeException, CommandNotFoundException, InvalidInputException {
+            throws InvalidDateTimeException, InvalidInputException {
         Task newTask = addTask(type, args); // add to end of list
         int index = this.tasks.size() - 1; // mark last(est) item as done
         markAsDone(index);
