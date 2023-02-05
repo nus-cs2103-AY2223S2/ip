@@ -11,7 +11,7 @@ public class Event extends Task {
     protected LocalDateTime startDateTime;
     protected String endStr;
     protected LocalDateTime endDateTime;
-    protected static DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+    protected static DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d-M-yyyy HHmm");
     protected static DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM d yyyy, hh:mma");
 
     /**
@@ -55,8 +55,8 @@ public class Event extends Task {
     @Override
     public String toString() {
         return String.format(
-            "%s (from: %s to: %s)", 
-            super.toString(), 
+            "%s (from: %s to: %s)",
+            super.toString(),
             startDateTime == null ? startStr : startDateTime.format(outputFormatter),
             endDateTime == null ? endStr : endDateTime.format(outputFormatter)
         );
