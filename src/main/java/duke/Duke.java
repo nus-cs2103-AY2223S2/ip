@@ -3,7 +3,7 @@ package duke;
 import duke.exceptions.DukeException;
 import duke.storage.FileManagement;
 import duke.task.TaskList;
-import duke.ui.Span;
+// import duke.ui.Span;
 import duke.ui.UI;
 
 /**
@@ -30,31 +30,26 @@ public class Duke {
     }
 
     /**
-     * Runs the user interface and accepts users' input for processing.
+     * Gets greeting message to be displayed to the user.
+     * @return the greeting message in string.
      */
-    public void run() {
-        this.ui.greetUser();
-        boolean exit = false;
-        while (!exit) {
-            try {
-                exit = this.ui.processInput();
-            } catch (DukeException e) {
-                System.out.println(Span.format(e.toString()));
-            }
-            if (exit) {
-                this.ui.byeUser();
-            }
-            // save regardless
-            this.fileManager.save(tasks);
-        }
+    public String getGreeting() {
+        String logo = "DUKE";
+        String greeting = "Hello i'm\n"
+                + logo
+                + "\nWhat can I do for you?";
+        return greeting;
     }
 
-    /**
-     * Entry point to Duke application where Duke is initialized.
-     * @param args Unused arguments that user optionally provides when Duke is launched
-     */
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.run();
+    public String getResponse(String input) {
+        String response = "";
+        try {
+            response = this.ui.processInput(input);
+        } catch (DukeException e) {
+            return e.toString();
+        }
+        this.fileManager.save(tasks);
+        return response;
     }
+
 }
