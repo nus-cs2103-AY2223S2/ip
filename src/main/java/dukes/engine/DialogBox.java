@@ -7,12 +7,18 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 
 /**
  * An example of a custom control using FXML.
@@ -24,12 +30,14 @@ public class DialogBox extends HBox {
     /** Handles text component of input */
     @FXML
     private Label dialog;
+    @FXML
+    private Label username;
 
     /** Handles the icon component of input */
     @FXML
     private ImageView displayPicture;
 
-    private DialogBox(String text, Image img) {
+    private DialogBox(String text, Image img, String user) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -40,6 +48,12 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        dialog.setFont(new Font("Courier New", 13));
+        username.setText(user);
+        username.setFont(new Font("Courier New", 10));
+
+        dialog.setWrapText(true);
+        dialog.setMnemonicParsing(false);
         displayPicture.setImage(img);
     }
 
@@ -61,7 +75,11 @@ public class DialogBox extends HBox {
      * @return a DialogBox representing user's activity
      */
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        DialogBox output = new DialogBox(text, img, "heeeyi");
+        output.setBackground(new Background(
+                new BackgroundFill(Color.web("#DDFBC9"), CornerRadii.EMPTY, Insets.EMPTY)
+        ));
+        return output;
     }
 
 
@@ -73,8 +91,11 @@ public class DialogBox extends HBox {
      * @return a DialogBox representing chat engine's activity
      */
     public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+        var db = new DialogBox(text, img, "duke");
         db.flip();
+        db.setBackground(new Background(
+                new BackgroundFill(Color.web("#C9FBEC"), CornerRadii.EMPTY, Insets.EMPTY)
+        ));
         return db;
     }
 }
