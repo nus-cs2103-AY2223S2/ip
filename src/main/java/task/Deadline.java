@@ -36,7 +36,6 @@ public class Deadline extends Task {
         String date = sb.toString();
         DateTimeFormatter f1 = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         this.date = LocalDate.parse(date, f1);
-        // System.out.println(date.f1(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 
         String time = dateArr[3];
         DateTimeFormatter f2 = DateTimeFormatter.ofPattern("HHmm");
