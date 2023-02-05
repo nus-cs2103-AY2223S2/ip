@@ -2,7 +2,7 @@ import duke.DukeException;
 import duke.Parser;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
+import duke.ui.Ui;
 
 /**
  * The main class that Duke is invoked on.
@@ -54,13 +54,22 @@ public class Duke {
         ui.printExit();
     }
 
+    public String getDukeResponse(String input) {
+
+        /* This is the string in response to the user input **/
+        String dukeResponse;
+
+        dukeResponse = parser.runCommand(input, tasks, storage, ui);
+
+        return dukeResponse;
+    }
+
     /**
      * This is the main method which invokes Duke to run.
      *
      * @param args Unused.
      */
     public static void main(String[] args) {
-
         new Duke("tasks.txt").runDuke();
     }
 }

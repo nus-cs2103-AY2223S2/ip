@@ -59,6 +59,15 @@ public class TaskList {
         System.out.println("    ____________________________________________________________");
     }
 
+    public String returnTaskAsString() {
+        String result;
+        result = "";
+        for (int i = 0; i < tasks.size(); i++) {
+            result = result + (i + 1) + ". " + tasks.get(i).toString() + "\n";
+        }
+        return result;
+    }
+
     /**
      * Method to delete the selected task.
      *
@@ -68,6 +77,12 @@ public class TaskList {
         Task t = tasks.get(index - 1);
         tasks.remove(index - 1);
         System.out.println(t + " is now gone!");
+    }
+
+    public String deleteTaskWithResult(int index) {
+        Task t = tasks.get(index - 1);
+        tasks.remove(index - 1);
+        return t + " is now gone!";
     }
 
     /**
@@ -80,6 +95,11 @@ public class TaskList {
         System.out.println("I marked this task as done:\n" + tasks.get(index - 1));
     }
 
+    public String markTaskWithResult(int index) {
+        tasks.get(index - 1).markDone();
+        return "I marked this task as done:\n" + tasks.get(index - 1);
+    }
+
     /**
      * Method to unmark the selected task as done.
      *
@@ -88,6 +108,11 @@ public class TaskList {
     public void unMarkTask(int index) {
         tasks.get(index - 1).markUndone();
         System.out.println("I marked this task as undone:\n" + tasks.get(index - 1));
+    }
+
+    public String unMarkTaskWithResult(int index) {
+        tasks.get(index - 1).markUndone();
+        return "I marked this task as undone:\n" + tasks.get(index - 1);
     }
 
     /**
@@ -101,6 +126,16 @@ public class TaskList {
     }
 
     /**
+     * Method to return the last task added to the list as String.
+     */
+    public String returnNewestTaskAsString() {
+       return "Task added:\n"
+                + tasks.get(tasks.size() - 1)
+                + "\nTotal task now: "
+                + tasks.size();
+    }
+
+    /**
      * Method to search through the task list to find a specific task
      * @param searchString The string to search with.
      */
@@ -110,5 +145,16 @@ public class TaskList {
                 System.out.println((i + 1) + ". " + tasks.get(i).toString());
             }
         }
+    }
+
+    public String searchTaskWithResult(String searchString) {
+        String res;
+        res = "";
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).name.contains(searchString)) {
+                res = res + (i + 1) + ". " + tasks.get(i).toString() + "\n";
+            }
+        }
+        return res;
     }
 }
