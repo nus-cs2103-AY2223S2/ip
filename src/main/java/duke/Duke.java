@@ -74,6 +74,7 @@ public class Duke {
     * @return The LocalDateTime object being created.
     */
     public static LocalDateTime createLocalDateTime(String dateTime) {
+        assert !dateTime.equals("");
         LocalDateTime date;
         try {
             String stringWithNoTrailingWhitespaces = dateTime.trim();
