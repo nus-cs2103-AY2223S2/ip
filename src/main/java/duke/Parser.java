@@ -158,31 +158,28 @@ public class Parser {
                 newTask = new Todo(paramsStr);
                 break;
             }
-            case DEADLINE: {
-                Pair<String, HashMap<String, String>> descMappingPair =
-                        getMappingFromParamsStr(paramsStr, true);
-                String description = descMappingPair.getKey();
-                HashMap<String, String> paramToArgMap = descMappingPair.getValue();
-                if (!paramToArgMap.containsKey("by")) {
-                    throw INSUFFICIENT_PARAMS_ERROR;
-                }
-                newTask = new Deadline(description, paramToArgMap.get("by"));
-                break;
-            }
+            case DEADLINE:
             case EVENT: {
-                Pair<String, HashMap<String, String>> descMappingPair =
+                Pair<String, HashMap<String, String>> descriptionMappingPair =
                         getMappingFromParamsStr(paramsStr, true);
-                String description = descMappingPair.getKey();
-                HashMap<String, String> paramToArgMap = descMappingPair.getValue();
-                if (!paramToArgMap.containsKey("from")
-                        || !paramToArgMap.containsKey("to")) {
-                    throw INSUFFICIENT_PARAMS_ERROR;
+                String description = descriptionMappingPair.getKey();
+                HashMap<String, String> paramToArgMap = descriptionMappingPair.getValue();
+
+                if (commandEnumValue == Command.DEADLINE) {
+                    if (!paramToArgMap.containsKey("by")) {
+                        throw INSUFFICIENT_PARAMS_ERROR;
+                    }
+                    newTask = new Deadline(description, paramToArgMap.get("by"));
+                } else {
+                    if (!paramToArgMap.containsKey("from") || !paramToArgMap.containsKey("to")) {
+                        throw INSUFFICIENT_PARAMS_ERROR;
+                    }
+                    newTask = new Event(
+                            description,
+                            paramToArgMap.get("from"),
+                            paramToArgMap.get("to")
+                    );
                 }
-                newTask = new Event(
-                        description,
-                        paramToArgMap.get("from"),
-                        paramToArgMap.get("to")
-                );
                 break;
             }
             default:
