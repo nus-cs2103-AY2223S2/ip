@@ -16,7 +16,7 @@ run {
 }
 
 application {
-    mainClassName = 'Duke'
+    mainClassName = 'Launcher'
 }
 
 test {
