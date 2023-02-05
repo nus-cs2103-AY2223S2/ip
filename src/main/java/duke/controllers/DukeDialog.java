@@ -1,13 +1,13 @@
 package duke.controllers;
 
+import java.io.IOException;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-
-import java.io.IOException;
 
 /**
  * A control that represents a dialog box by Duke consisting of a dialog to represent the text response

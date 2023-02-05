@@ -1,5 +1,7 @@
 package duke.controllers;
 
+import java.nio.file.Paths;
+
 import duke.Duke;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -10,8 +12,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
-
-import java.nio.file.Paths;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.

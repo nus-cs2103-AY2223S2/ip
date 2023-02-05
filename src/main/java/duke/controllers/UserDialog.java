@@ -1,11 +1,11 @@
 package duke.controllers;
 
+import java.io.IOException;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
-
-import java.io.IOException;
 
 /**
  * A control that represents a dialog box by the user consisting of a dialog to represent

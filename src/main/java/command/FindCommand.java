@@ -1,9 +1,9 @@
 package command;
 
+import java.util.Iterator;
+
 import task.Task;
 import task.TaskList;
-
-import java.util.Iterator;
 
 /**
  * Command to find tasks given a query string.

@@ -1,9 +1,9 @@
 package task;
 
+import java.time.LocalDateTime;
+
 import duke.DukeException;
 import duke.Parser;
-
-import java.time.LocalDateTime;
 
 /**
  * Event is a Task that starts at a specific date/time and ends at a specific date/time.

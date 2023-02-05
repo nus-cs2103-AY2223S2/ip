@@ -1,9 +1,9 @@
 package task;
 
-import duke.DukeException;
-
 import java.util.ArrayList;
 import java.util.Iterator;
+
+import duke.DukeException;
 
 /**
  * TaskList contains the task list which stores tasks and has operations to add/delete tasks in the list.

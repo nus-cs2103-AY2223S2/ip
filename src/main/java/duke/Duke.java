@@ -1,10 +1,10 @@
 package duke;
 
+import java.nio.file.Path;
+
 import command.Command;
 import duke.controllers.MainWindow;
 import task.TaskList;
-
-import java.nio.file.Path;
 
 /**
  * The Duke ChatBot.

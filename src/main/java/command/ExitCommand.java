@@ -9,7 +9,6 @@ public class ExitCommand extends Command {
     /**
      * Shows a goodbye greeting indicating the end of the chat session.
      * @param tasks The existing task list.
-     * @param ui The ui of Duke chat.
      */
     @Override
     public String execute(TaskList tasks) {
