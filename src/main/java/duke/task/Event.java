@@ -32,14 +32,14 @@ public class Event extends Task {
      * returns from date.
      * @return {@link LocalDateTime} object
      */
-    public LocalDateTime getStartDate() {
+    public LocalDateTime getFrom() {
         return startDate;
     }
     /**
      * returns to date.
      * @return {@link LocalDateTime} object
      */
-    public LocalDateTime getEndDate() {
+    public LocalDateTime getTo() {
         return endDate;
     }
 
