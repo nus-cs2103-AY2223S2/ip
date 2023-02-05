@@ -1,10 +1,10 @@
-package storage;
+package duke.storage;
 
-import task.Task;
-import task.Event;
-import task.Deadline;
-import task.ToDo;
-import exception.DukeException;
+import duke.task.Task;
+import duke.task.Event;
+import duke.task.Deadline;
+import duke.task.ToDo;
+import duke.exception.DukeException;
 
 import java.util.ArrayList;
 
@@ -20,10 +20,6 @@ import java.util.Map;
 public class TaskList {
     private final ArrayList<Task> list;
     private final HashMap<String, HashSet<Task>> map = new HashMap<>();
-
-    public TaskList(ArrayList<Task> list) {
-        this.list = list;
-    }
 
     public TaskList() {
         this.list = new ArrayList<>();
@@ -47,10 +43,12 @@ public class TaskList {
         }
     }
     
-    public void find(String word) {
+    public String find(String word) {
+        String output = "";
         for (Task task: map.get(word)) {
-            System.out.println(task.toString());
+            output += (task.toString() + "\n");
         }
+        return output;
     }
 
     public ArrayList<Task> getList() {
@@ -61,10 +59,12 @@ public class TaskList {
      * Prints tasks in the task list.
      *
      */
-    public void list() {
+    public String list() {
+        String output = "";
         for (int i = 1; i <= list.size(); i++) {
-            System.out.println(i + ": " + list.get(i - 1));
+            output += (i + ": " + list.get(i - 1) + "\n");
         }
+        return output;
     }
     /**
      * Adds a task to the task list.
@@ -73,7 +73,6 @@ public class TaskList {
      */
     public void add(Task newTask) {
         list.add(newTask);
-
     }
 
     /**

@@ -1,2 +1,11 @@
-package duke.command;public class Command {
+package duke.command;
+
+import duke.storage.TaskList;
+import duke.ui.Ui;
+import duke.storage.Storage;
+
+public abstract class Command {
+
+    public abstract String execute(TaskList list, Ui ui);
+
 }

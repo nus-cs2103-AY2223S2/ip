@@ -1,4 +1,4 @@
-package parser;
+package duke.parser;
 
 import java.util.Arrays;
 public class Parser {

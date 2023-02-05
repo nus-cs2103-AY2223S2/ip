@@ -1,4 +1,4 @@
-package task;
+package duke.task;
 
 /**
  * Represents an action that is to be done. A <code>Task</code> object corresponds to

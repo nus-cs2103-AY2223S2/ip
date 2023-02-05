@@ -1,46 +1,41 @@
+package duke;
+
 import java.util.Scanner;
 import java.io.IOException;
 
-import storage.TaskList;
-import ui.Ui;
-import storage.Storage;
-import parser.Parser;
-import exception.DukeException;
+import duke.storage.TaskList;
+import duke.ui.Ui;
+import duke.storage.Storage;
+import duke.parser.Parser;
+import duke.exception.DukeException;
+import duke.command.ListCommand;
+import duke.command.FindCommand;
+import duke.command.DeleteCommand;
+import duke.command.UnmarkCommand;
+import duke.command.Command;
+import duke.command.MarkCommand;
 
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import javafx.scene.layout.Region;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-
-
-public class Duke extends Application {
-    private static final TaskList list = new TaskList();
+public class Duke {
+    static TaskList list;
     private static final Ui ui = new Ui();
     private static final Parser logic = new Parser();
 
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    Storage storage;
 
 
-
-
+    public Duke(String data, String dataPath) {
+        this.storage = new Storage(data, dataPath);
+        try {
+            list = storage.loadData();
+        } catch (DukeException | IOException e) {
+            // ui.showLoadingError();
+            list = new TaskList();
+        }
+    }
     public static void main(String[] args) throws DukeException, IOException {
         ui.printWelcomeMessage();
         ui.showLine();
-        Storage.loadData(list);
+        list = Storage.loadData();
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
 
@@ -49,9 +44,9 @@ public class Duke extends Application {
                 ui.printListMessage();
                 list.list();
                 ui.showLine();
-            }else if (logic.checkFind(input)) {
+            } else if (logic.checkFind(input)) {
                 String word = input.split(" ")[1];
-                ui.printFindMessgae();
+                ui.printFindMessage();
                 list.find(word);
                 ui.showLine();
             } else if (logic.checkMark(input)) {
@@ -85,101 +80,37 @@ public class Duke extends Application {
         ui.showLine();
     }
 
-    @Override
-    public void start(Stage stage) {
-        //Step 1. Setting up required components
-
-        //The container for the content of the chat to scroll.
-        scrollPane = new ScrollPane();
-        dialogContainer = new VBox();
-        scrollPane.setContent(dialogContainer);
-
-        userInput = new TextField();
-        sendButton = new Button("Send");
-
-        AnchorPane mainLayout = new AnchorPane();
-        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-
-        scene = new Scene(mainLayout);
-
-        stage.setScene(scene);
-        stage.show();
-
-        stage.setTitle("Duke");
-        stage.setResizable(false);
-        stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
-
-        mainLayout.setPrefSize(400.0, 600.0);
-
-        scrollPane.setPrefSize(385, 535);
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-
-        scrollPane.setVvalue(1.0);
-        scrollPane.setFitToWidth(true);
-
-        // You will need to import `javafx.scene.layout.Region` for this.
-        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
-
-        userInput.setPrefWidth(325.0);
-
-        sendButton.setPrefWidth(55.0);
-
-        AnchorPane.setTopAnchor(scrollPane, 1.0);
-
-        AnchorPane.setBottomAnchor(sendButton, 1.0);
-        AnchorPane.setRightAnchor(sendButton, 1.0);
-
-        AnchorPane.setLeftAnchor(userInput , 1.0);
-        AnchorPane.setBottomAnchor(userInput, 1.0);
-
-        //Step 3. Add functionality to handle user input.
-        sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
-        });
-
-        userInput.setOnAction((event) -> {
-            handleUserInput();
-        });
-
-        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-    }
-
-    /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
-    }
-
-    /**
-     * Iteration 2:
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
-     */
-    private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
-        dialogContainer.getChildren().addAll(
-                new DialogBox(userText, new ImageView(user)),
-                new DialogBox(dukeText, new ImageView(duke))
-        );
-        userInput.clear();
-    }
 
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    private String getResponse(String input) {
-        return "Duke heard: " + input;
+    String getResponse(String input) {
+        Command cmd;
+        if (logic.checkList(input)) {
+            cmd = new ListCommand();
+        } else if (logic.checkFind(input)) {
+            String word = input.split(" ")[1];
+            cmd = new FindCommand(word);
+        } else if (logic.checkMark(input)) {
+            int num = Integer.parseInt(input.split(" ")[1]);
+            cmd = new MarkCommand(num);
+        } else if (logic.checkUnmark(input)) {
+            int num = Integer.parseInt(input.split(" ")[1]);
+            cmd = new UnmarkCommand(num);
+        } else if (logic.checkDelete(input)) {
+            int num = Integer.parseInt(input.split(" ")[1]);
+            cmd = new DeleteCommand(num);
+        } else if (logic.checkTask(input)) {
+            list.add(input);
+            return ui.printAddMessage(list.getLast(), list);
+        } else if (!logic.isValidCommand(input)) {
+            return ui.printInvalidCommandMessage();
+        } else {
+            return ui.printByeMessage();
+
+        }
+        return cmd.execute(list, ui);
     }
+
 }

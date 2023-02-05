@@ -1,47 +1,47 @@
-package ui;
+package duke.ui;
 
-import storage.TaskList;
-import task.Task;
+import duke.storage.TaskList;
+import duke.task.Task;
 
 public class Ui {
 
-    public void printInvalidCommandMessage() {
-        System.out.println("Sorry, I don't know what that means! :'( \n");
+    public String printInvalidCommandMessage() {
+        return ("Sorry, I don't know what that means! :'( \n");
     }
-    public void printWelcomeMessage() {
-        System.out.println("Hello!\n" + "What can I do for you?\n");
+    public String printWelcomeMessage() {
+        return ("Hello!\n" + "What can I do for you?\n");
     }
-    public void showLine() {
-        System.out.println("----------------------------------");
-    }
-
-    public void printFindMessgae() {
-        System.out.println("Here are the matching tasks in your list:\n");
+    public String showLine() {
+        return ("----------------------------------");
     }
 
-    public void printListMessage() {
-        System.out.println("Here are the tasks in your list: \n");
+    public String printFindMessage() {
+        return ("Here are the matching tasks in your list:\n");
     }
 
-    public void printAddMessage(Task newTask, TaskList list) {
-        System.out.println("Got it. I've added this task:\n" + newTask + "\nNow you have "
+    public String printListMessage() {
+        return ("Here are the tasks in your list: \n");
+    }
+
+    public String printAddMessage(Task newTask, TaskList list) {
+        return ("Got it. I've added this task:\n" + newTask + "\nNow you have "
                 + list.size() + " tasks in the list.");
     }
 
-    public void printMarkMessage(Task task) {
-        System.out.println("Nice! I've marked this task as done: \n" + task);
+    public String printMarkMessage(Task task) {
+        return ("Nice! I've marked this task as done: \n" + task);
     }
 
-    public void printUnmarkMessage(Task task) {
-        System.out.println("OK, I've marked this task as not done yet: \n" + task);
+    public String printUnmarkMessage(Task task) {
+        return ("OK, I've marked this task as not done yet: \n" + task);
     }
 
-    public void printDeleteMessage(Task removed, TaskList list) {
-        System.out.println("Noted. I've removed this task: \n" + removed + "\nNow you have "
+    public String printDeleteMessage(Task removed, TaskList list) {
+        return ("Noted. I've removed this task: \n" + removed + "\nNow you have "
                 + (list.size() - 1) + " tasks in the list.");
     }
 
-    public void printByeMessage() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String printByeMessage() {
+        return ("Bye. Hope to see you again soon!");
     }
 }
