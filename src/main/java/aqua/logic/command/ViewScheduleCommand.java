@@ -2,6 +2,7 @@ package aqua.logic.command;
 
 import java.time.LocalDateTime;
 
+import aqua.exception.IllegalSyntaxException;
 import aqua.graphic.TaskView;
 import aqua.logic.ArgumentMap;
 import aqua.logic.ExecutionDisplayerTask;
@@ -14,12 +15,11 @@ import aqua.util.DateUtils;
 
 
 public class ViewScheduleCommand extends CommandController {
-
     @Override
     public ExecutionService getService(ArgumentMap args, LogicManager manager) {
         return ExecutionService.of(new ExecutionTask<DisplayData>(args, manager) {
             @Override
-            protected DisplayData process(ArgumentMap args, LogicManager manager) {
+            protected DisplayData process(ArgumentMap args, LogicManager manager) throws IllegalSyntaxException {
                 return filterTasks(args, manager);
             }
         });
@@ -30,7 +30,7 @@ public class ViewScheduleCommand extends CommandController {
     public ExecutionService getService(ArgumentMap args, LogicManager logicManager, IoManager ioManager) {
         return ExecutionService.of(new ExecutionDisplayerTask<DisplayData>(args, logicManager, ioManager) {
             @Override
-            protected DisplayData process(ArgumentMap args, LogicManager manager) {
+            protected DisplayData process(ArgumentMap args, LogicManager manager) throws IllegalSyntaxException {
                 return filterTasks(args, manager);
             }
 
@@ -42,8 +42,12 @@ public class ViewScheduleCommand extends CommandController {
     }
 
 
-    private DisplayData filterTasks(ArgumentMap args, LogicManager manager) {
+    private DisplayData filterTasks(ArgumentMap args, LogicManager manager) throws IllegalSyntaxException {
         LocalDateTime start = DateUtils.getStartOfWeek(LocalDateTime.now());
+        if (args.getMainInput().isPresent()) {
+            LocalDateTime time = DateUtils.parse(args.getMainInput().get());
+            start = DateUtils.getStartOfWeek(time);
+        }
         LocalDateTime end = start.plusDays(7);
         TaskFilterReport report = manager.getTaskManager().filterWithin(start, end);
         return new DisplayData(report, start);
