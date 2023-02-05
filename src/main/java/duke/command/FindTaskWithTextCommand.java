@@ -47,7 +47,7 @@ public class FindTaskWithTextCommand extends Command {
      *
      * @param searchString Keyword for the search.
      * @param listSize Total number of tasks in list.
-     * @return list of matching tasks.
+     * @return List of matching tasks.
      */
     public String listMatchingTasks(String searchString, int listSize) {
         StringBuilder reply = new StringBuilder("The following tasks matches your query:");
@@ -56,11 +56,13 @@ public class FindTaskWithTextCommand extends Command {
 
         for (int i = 1; i <= listSize; i++) {
             Task task = taskList.getTask(i);
-            count++;
 
-            if (task.hasSubstring(searchString)) {
-                reply.append("\n").append(count).append(". ").append(task);
+            if (!task.hasSubstring(searchString)) {
+                continue;
             }
+
+            reply.append("\n").append(i).append(". ").append(task);
+            count++;
         }
 
         return count == 0 ? noMatchMessage : reply.toString();

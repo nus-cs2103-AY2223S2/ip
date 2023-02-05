@@ -49,12 +49,10 @@ public class ListTasksCommand extends Command {
      */
     public String listTasks(int listSize) {
         StringBuilder reply = new StringBuilder("Total tasks: " + taskList.getSize());
-        int count = 0;
 
         for (int i = 1; i <= listSize; i++) {
-            count++;
             Task task = taskList.getTask(i);
-            reply.append("\n").append(count).append(". ").append(task);
+            reply.append("\n").append(i).append(". ").append(task);
         }
 
         return reply.toString();
