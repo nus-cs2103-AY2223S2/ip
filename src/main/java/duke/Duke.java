@@ -94,7 +94,7 @@ public class Duke {
     private String formatTasks(ArrayList<Task> tasks) {
         String res = "";
         for (int i = 0; i < tasks.size(); i++) {
-            res += String.valueOf(i+1) + "." +  tasks.get(i);
+            res += i + 1 + "." +  tasks.get(i);
             res += "\n";
         }
         return res;
