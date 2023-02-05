@@ -62,16 +62,18 @@ public class TaskList {
      * @param input User input which describes the task.
      * @throws InvalidTaskDescriptionException If escription of the task does not match specified format.
      */
-    public void addTask(String input) throws InvalidTaskDescriptionException {
+    public String addTask(String input) throws InvalidTaskDescriptionException {
         String[] newInput = input.split("todo ");
         if (newInput.length < 2) {
             throw new InvalidTaskDescriptionException("brother wake up and put a legit description can");
         }
         tasks.add(new Todo(newInput[1]));
-        System.out.println("Gotchu fam");
-        System.out.printf("I've added\n" + tasks.get(this.getCurrentSize() - 1).toString()
+        String msg = "";
+        msg += "Gotchu fam\n";
+        msg += String.format("I've added\n" + tasks.get(this.getCurrentSize() - 1).toString()
                 + "\nto all the shit u need to do\n");
-        System.out.printf("shag bro now u got %d tasks\n", this.getCurrentSize());
+        msg += String.format("shag bro now u got %d tasks\n", this.getCurrentSize());
+        return msg;
     }
 
     //add event
@@ -82,17 +84,19 @@ public class TaskList {
      * @param input User input which describes the event, including its start and end time.
      * @throws InvalidTaskDescriptionException If description of the event does not match specified format.
      */
-    public void addEvent(String input) throws InvalidTaskDescriptionException {
+    public String addEvent(String input) throws InvalidTaskDescriptionException {
         String[] nInput = input.split("/");
         if (nInput.length < 2) {
             throw new InvalidTaskDescriptionException("brother wake up and put a legit description can");
         }
         String[] newInput = input.split("/");
         tasks.add(this.getCurrentSize(), new Event(newInput[0], newInput[1], newInput[2]));
-        System.out.println("Gotchu fam");
-        System.out.printf("I've added\n" + tasks.get(this.getCurrentSize() - 1).toString()
+        String msg = "";
+        msg += "Gotchu fam\n";
+        msg += String.format("I've added\n" + tasks.get(this.getCurrentSize() - 1).toString()
                 + "\nto all the shit u need to do\n");
-        System.out.printf("shag bro now u got %d tasks\n", this.getCurrentSize());
+        msg += String.format("shag bro now u got %d tasks\n", this.getCurrentSize());
+        return msg;
     }
 
     //add deadline
@@ -103,19 +107,21 @@ public class TaskList {
      * @param input User input which describes the deadline including its time to be completed.
      * @throws InvalidTaskDescriptionException If description of the deadline does not match specified format.
      */
-    public void addDeadline(String input) throws InvalidTaskDescriptionException {
+    public String addDeadline(String input) throws InvalidTaskDescriptionException {
         String[] nInput = input.split("/");
         if (nInput.length < 2) {
             throw new InvalidTaskDescriptionException("brother wake up and put a legit description can");
         }
         String[] newInput = input.split("/");
-        System.out.println(Arrays.toString(newInput));
-        System.out.println(newInput[1]);
+        //System.out.println(Arrays.toString(newInput));
+        //System.out.println(newInput[1]);
         tasks.add(this.getCurrentSize(), new Deadline(newInput[0], newInput[1]));
-        System.out.println("Gotchu fam");
-        System.out.printf("I've added\n" + tasks.get(this.getCurrentSize() - 1).toString()
+        String msg = "";
+        msg += "Gotchu fam\n";
+        msg += String.format("I've added\n" + tasks.get(this.getCurrentSize() - 1).toString()
                 + "\nto all the shit u need to do\n");
-        System.out.printf("shag bro now u got %d tasks\n", this.getCurrentSize());
+        msg += String.format("shag bro now u got %d tasks\n", this.getCurrentSize());
+        return msg;
     }
 
 
@@ -126,18 +132,20 @@ public class TaskList {
      *
      * @param command User input which specifies the index to delete the object (1-based).
      */
-    public void deleteTask(String[] command) {
+    public String deleteTask(String[] command) {
         int taskPointer = Integer.parseInt(command[1]) - 1;
         //duke.tasks.Task temp = duke.tasks.get(taskPointer);
         try {
             Task temp = tasks.get(taskPointer);
             tasks.remove(taskPointer);
-            System.out.println("Ok bro I've removed this : ");
-            System.out.printf(temp.toString()
+            String msg = "";
+            msg += "Ok bro I've removed this : \n";
+            msg += String.format(temp.toString()
                     + "\nfrom all the shit u need to do\n");
-            System.out.println("Hope you have a better life now");
+            msg += String.format("Hope you have a better life now\n");
+            return msg;
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("brother look at how long ur list is first then delete lah");
+            return "brother look at how long ur list is first then delete lah\n";
         }
     }
 
@@ -149,12 +157,13 @@ public class TaskList {
      *
      * @param command User input which specifies the index of the task to mark as done (1-based).
      */
-    public void mark(String[] command) {
+    public String mark(String[] command) {
         int taskPointer = Integer.parseInt(command[1]) - 1;
         try {
             tasks.get(taskPointer).markAsDone();
+            return "marked that for u brother\n";
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Wake up and choose a better task to mark");
+            return("Wake up and choose a better task to mark\n");
         }
     }
     
@@ -164,12 +173,13 @@ public class TaskList {
      *
      * @param command User input which specifies the index of the task to mark as undone (1-based).
      */
-    public void unmark(String[] command) {
+    public String unmark(String[] command) {
         int taskPointer = Integer.parseInt(command[1]) - 1;
         try {
             tasks.get(taskPointer).undoTask();
+            return "unmarked that for u u useless prick\n";
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Wake up and choose a better task to unmark brother");
+            return "Wake up and choose a better task to unmark brother\n";
         }
     }
 
@@ -179,14 +189,14 @@ public class TaskList {
      * @param word The word to be searched.
      */
 
-    public void findTask(String word) {
+    public String findTask(String word) {
         TaskList taskList = new TaskList(this.size);
         for (Task item : this.getTasks()) {
             if (item.hasString(word)) {
                 taskList.append(item);
             }
         }
-        taskList.listTasks();
+        return taskList.listTasks();
     }
 
     //list
@@ -195,16 +205,19 @@ public class TaskList {
      * Method to list out all the tasks for the users view.
      *
      */
-    public void listTasks() {
+    public String listTasks() {
+        String str = "";
         if (this.getCurrentSize() == 0) {
-            System.out.println("You got nothing to do brother its time to get a life");
+           str += "You got nothing to do brother its time to get a life\n";
         }
         for (int i = 0; i < this.getCurrentSize(); i++) {
             if (this.tasks.get(i) == null) {
                 break;
             }
-            System.out.printf("%d." + tasks.get(i).toString() + "\n", i + 1);
+            String str2 = String.format("%d." + tasks.get(i).toString() + "\n", i + 1);
+            str += str2;
         }
+        return str;
 
     }
 

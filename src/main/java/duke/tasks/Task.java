@@ -43,8 +43,8 @@ public class Task {
      */
     public void markAsDone() {
         this.completionStatus = true;
-        System.out.println("Congrats bro you've done something with your life");
-        System.out.println(this.toString());
+        //System.out.println("Congrats bro you've done something with your life");
+        //System.out.println(this.toString());
         return;
     }
 
@@ -54,8 +54,8 @@ public class Task {
      */
     public void undoTask() {
         this.completionStatus = false;
-        System.out.println("Stop being useless why u ask me to unmark");
-        System.out.println(this.toString());
+        //System.out.println("Stop being useless why u ask me to unmark");
+        //System.out.println(this.toString());
         return;
     }
 

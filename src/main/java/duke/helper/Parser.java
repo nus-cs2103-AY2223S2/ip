@@ -21,31 +21,34 @@ public class Parser {
      * @param input Raw string containing user input.
      * @param command Partially broken down input to make sense of commands.
      * @param tasks The list of tasks from the user.
+     * @return String that denotes message to be displayed by ChadGPT
      */
-    public static void run(String input, String[] command, TaskList tasks) {
+    public static String run(String input, String[] command, TaskList tasks) {
         try {
             if (command[0].equals("list")) {
-                tasks.listTasks();
+                return tasks.listTasks();
             } else if (command[0].equals("mark")) {
-                tasks.mark(command);
+                return tasks.mark(command);
             } else if (command[0].equals("unmark")) {
-                tasks.unmark(command);
+                return tasks.unmark(command);
             } else if (command[0].equals("todo")) {
-                tasks.addTask(input);
+                return tasks.addTask(input);
             } else if (command[0].equals("deadline")) {
-                tasks.addDeadline(input);
+                return tasks.addDeadline(input);
             } else if (command[0].equals("event")) {
-                tasks.addEvent(input);
+                return tasks.addEvent(input);
             } else if (command[0].equals("delete")) {
-                tasks.deleteTask(command);
+                return tasks.deleteTask(command);
             } else if (command[0].equals("find")) {
-                tasks.findTask(command[1]);
+                return tasks.findTask(command[1]);
             } else {
-                System.out.println("Invalid command wake up brother");
+                return "Invalid command wake up brother";
             }
         } catch (InvalidTaskDescriptionException e) {
-            System.out.println(e.getMessage());
+            return e.getMessage();
         }
+
+
 
 
     }
