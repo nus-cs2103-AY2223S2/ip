@@ -38,7 +38,7 @@ public class Duke {
         }
     }
 
-    /**i
+    /**
      * Start the Duke program.
      */
     public void run() {

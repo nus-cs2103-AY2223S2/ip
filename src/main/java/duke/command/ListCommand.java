@@ -27,7 +27,7 @@ public class ListCommand extends Command {
             currList = currList + counter + "." + tasks.getTask(i).toString() + "\n";
             counter++;
         }
-        return  ui.showListMessage() + currList;
+        return ui.showListMessage() + currList;
     }
 
     /**

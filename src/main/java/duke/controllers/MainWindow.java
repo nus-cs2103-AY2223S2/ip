@@ -36,6 +36,9 @@ public class MainWindow extends AnchorPane {
         duke = d;
     }
 
+    /**
+     * Display the welcome message whenever ShinChan is activated.
+     */
     public void showWelcome() {
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(Ui.showWelcome(), dukeImage)

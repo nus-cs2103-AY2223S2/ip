@@ -145,6 +145,10 @@ public class Storage {
         writer.close();
     }
 
+    /**
+     * Sync the tasks.txt file to delete the specific task as well.
+     * @param taskNum
+     */
     public void delete(int taskNum) {
         try {
             Path tempFile = Paths.get("ip/data/tempTasks.txt");

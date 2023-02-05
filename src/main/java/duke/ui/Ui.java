@@ -14,12 +14,12 @@ import duke.task.Task;
 
 public class Ui {
     private static String logo =
-            "      _     _            _                 \n" +
-                    "     | |   (_)          | |                \n" +
-                    "  ___| |__  _ _ __   ___| |__   __ _ _ __  \n" +
-                    " / __| '_ \\| | '_ \\ / __| '_ \\ / _` | '_ \\ \n" +
-                    " \\__ \\ | | | | | | | (__| | | | (_| | | | |\n" +
-                    " |___/_| |_|_|_| |_|\\___|_| |_|\\__,_|_| |_|\n";
+            "      _     _            _                 \n"
+                    + "     | |   (_)          | |                \n"
+                    + "  ___| |__  _ _ __   ___| |__   __ _ _ __  \n"
+                    + " / __| '_ \\| | '_ \\ / __| '_ \\ / _` | '_ \\ \n"
+                    + " \\__ \\ | | | | | | | (__| | | | (_| | | | |\n"
+                    + " |___/_| |_|_|_| |_|\\___|_| |_|\\__,_|_| |_|\n";
     private final Scanner sc;
 
     /**
@@ -30,7 +30,9 @@ public class Ui {
     }
 
     /**
-     * Print the welcome message when user first run Duke.
+     * Print the welcome message when user first run ShinChan.
+     *
+     * @return String displaying the welcome message whenever Shinchan is activated.
      */
     public static String showWelcome() {
         return "Hello from\n" + logo + "Hello! I'm Duke\nWhat can I do for you?";
@@ -66,6 +68,8 @@ public class Ui {
      *
      * @param task
      * @param tasksLen
+     *
+     * @return String object containing delete message displayed for user.
      */
     public String showDeleteMessage(Task task, String tasksLen) {
         return "Noted. I've removed this task:\n  "
@@ -77,6 +81,8 @@ public class Ui {
      *
      * @param task
      * @param tasksLen
+     *
+     * @return String object containing add task message displayed for user.
      */
     public String showAddTaskMsg(Task task, String tasksLen) {
         return "Got it. I've added this task:\n  "
@@ -85,6 +91,8 @@ public class Ui {
 
     /**
      * Print the message when the user type "exit" command.
+     *
+     * @return String object containing exit message displayed for user.
      */
     public String exit() {
         return "Bye. Hope to see you again soon!";
@@ -94,6 +102,8 @@ public class Ui {
      * Print the message when the user mark a task as done.
      *
      * @param task
+     *
+     * @return String object containing marked task message displayed for user.
      */
     public String showMarkedMsg(Task task) {
         return "Nice! I've marked this task as done:\n" + task;
@@ -103,6 +113,8 @@ public class Ui {
      * Print the message when the user mark a task as not done.
      *
      * @param task
+     *
+     * @return String object containing unmark task message displayed for user.
      */
     public String showUnmarkedMsg(Task task) {
         return "Ok, I've marked this as not done yet:\n" + task;
@@ -110,7 +122,10 @@ public class Ui {
 
     /**
      * Print all the tasks containing the keyword requested by user.
+     *
      * @param tasklist
+     *
+     * @return String object containing tasks with the keyword specified by users displayed for user.
      */
     public String showRelevantTasks(ArrayList<Task> tasklist) {
         String currStr = "Here are the matching tasks in your list:\n";
@@ -123,6 +138,8 @@ public class Ui {
 
     /**
      * Print the message when user type an unknown command.
+     *
+     * @return String object containing loading message displayed for user.
      */
     public String showLoadingError() {
         return "No existing tasklist!";
@@ -130,6 +147,8 @@ public class Ui {
 
     /**
      * Print divider line.
+     *
+     * @return String object containing divider lines displayed for user.
      */
     public String showLine() {
         return "\n---------------------------------\n";
