@@ -10,7 +10,6 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.ToDo;
-import duke.ui.Span;
 
 /**
  * Parser to parse the command and process the necessary actions associated with the command.
@@ -30,7 +29,7 @@ public class Parser {
     }
 
     /**
-     * Parses the user's input and execute the necessary actions associated with the command before returning an acknowledgement.
+     * Parses the user's input and execute the necessary actions associated with the command.
      * @param command
      * @param echo The user input to be parsed to be used in the execution of its associated command.
      * @return a string that describes the action done.
