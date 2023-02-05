@@ -274,6 +274,9 @@ public class Ui {
         reset();
     }
 
+    /**
+     * Deletes all task from the tasklist.
+     */
     public void clearList() {
         ArrayList<Task> newEmptyList = new ArrayList<>();
         this.tList.setList(newEmptyList);
