@@ -6,11 +6,15 @@ import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.ui.Ui;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 /**
  * Main program for iP
  */
-public class Duke {
+public class Duke extends Application {
     private Storage storage;
     private Ui ui;
     private TaskList taskList;
@@ -67,6 +71,16 @@ public class Duke {
      */
     public static void main(String[] args) throws Exception {
         new Duke().run();
+    }
+
+    @Override
+    public void start(Stage stage) {
+        // Labels are nodes in JavaFX
+        Label helloWorld = new Label("HelloWorld!"); // Creating a new label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to our label
+
+        stage.setScene(scene); // setting the stage to show our screen
+        stage.show(); // Render the stage
     }
 
 }
