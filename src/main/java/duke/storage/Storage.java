@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 import duke.entities.SerializableTask;
 import duke.entities.Task;
-import duke.entities.TaskList;
+import duke.entities.managers.CacheManager;
 import duke.enums.TaskType;
 import duke.exceptions.DukeException;
 import duke.utils.Loader;
@@ -20,7 +20,7 @@ import duke.utils.Loader;
  * Represents a Storage class which save the tasks in the hard disk automatically whenever the task list changes.
  * Load the data from the hard disk when duke.Duke starts up.
  */
-public class Storage implements Loader<TaskList> {
+public class Storage implements Loader<CacheManager> {
     private static final String GENERIC_ERROR = "An error occurred when creating the database: ";
     private final File file;
 
@@ -57,11 +57,11 @@ public class Storage implements Loader<TaskList> {
     /**
      * Loads the data from the specified filename.
      *
-     * @param taskList TaskList to add the loaded data to.
+     * @param cacheManager TaskList to add the loaded data to.
      * @return A boolean value indicating the success of the operation.
      * @throws DukeException An exception to be thrown if there are any errors that occur.
      */
-    public Boolean load(TaskList taskList) throws DukeException {
+    public Boolean load(CacheManager cacheManager) throws DukeException {
         try {
             Scanner reader = new Scanner(file);
             while (reader.hasNextLine()) {
@@ -87,8 +87,10 @@ public class Storage implements Loader<TaskList> {
                 if (task == null) {
                     return false;
                 }
-                String msg = taskList.addTask(task.unmarshal(), false);
-                System.out.println(msg);
+                String msg = cacheManager.addTask(task.unmarshal(), false);
+                if (msg != null) {
+                    System.out.println(msg);
+                }
             }
             return true;
         } catch (FileNotFoundException e) {
@@ -112,13 +114,13 @@ public class Storage implements Loader<TaskList> {
     /**
      * Writes all task currently in memory to the hard disk.
      *
-     * @param taskList The task-list in memory.
+     * @param cacheManager The task-list in memory.
      * @throws DukeException An exception to be thrown if there are any errors that occur.
      */
-    public void writeAll(TaskList taskList) throws DukeException {
+    public void writeAll(CacheManager cacheManager) throws DukeException {
         try {
             FileWriter fileWriter = new FileWriter(file);
-            taskList.getTaskList().parallelStream().forEach(task -> {
+            cacheManager.getTaskList().parallelStream().forEach(task -> {
                 try {
                     write(fileWriter, task);
                 } catch (IOException e) {

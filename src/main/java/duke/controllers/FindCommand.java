@@ -4,7 +4,7 @@ import java.util.function.Supplier;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import duke.entities.TaskList;
+import duke.entities.managers.CacheManager;
 import duke.enums.CommandType;
 import duke.exceptions.DukeException;
 
@@ -33,11 +33,11 @@ public class FindCommand extends Command {
      * The method verifies the command and filters tasks based on the filter string.
      */
     @Override
-    public String execute(Supplier<? extends TaskList> store) throws DukeException {
-        TaskList taskList = store.get();
+    public String execute(Supplier<? extends CacheManager> store) throws DukeException {
+        CacheManager cacheManager = store.get();
         Matcher matcher = VALID_FILTER.matcher(args);
         if (matcher.find()) {
-            return taskList.filter((task -> task.matchString(matcher.group("filter"))),
+            return cacheManager.filter((task -> task.matchString(matcher.group("filter"))),
                     "There are no tasks with this description.");
         } else {
             throw new DukeException(INVALID_FORMAT_ERROR + " " + "Please ensure you follow: filter [filter]");

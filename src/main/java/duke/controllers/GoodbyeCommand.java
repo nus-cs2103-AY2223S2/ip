@@ -2,7 +2,7 @@ package duke.controllers;
 
 import java.util.function.Supplier;
 
-import duke.entities.TaskList;
+import duke.entities.managers.CacheManager;
 import duke.enums.CommandType;
 
 /**
@@ -21,7 +21,7 @@ public class GoodbyeCommand extends Command {
      * The method returns a terminating goodbye message.
      */
     @Override
-    public String execute(Supplier<? extends TaskList> taskList) {
+    public String execute(Supplier<? extends CacheManager> taskList) {
         return message;
     }
 }

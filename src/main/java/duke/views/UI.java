@@ -31,8 +31,8 @@ public class UI {
      * @return Welcome message.
      */
     public static String welcomeMessage() {
-        return "Hello! I'm Duke. What can i do for you?\n"
-                + "Click on the help button on the top right to view the available commands!";
+        return "Hello! I'm Duke. What can i do for you? "
+                + "You can click on the help button on the top right to view the available commands!";
     }
 
     /**
@@ -43,10 +43,12 @@ public class UI {
     public static String helpMessage() {
         return "These are the available commands:"
                 + indentMessage("bye")
+                + indentMessage("undo")
                 + indentMessage("unmark   [task]")
                 + indentMessage("mark     [task]")
                 + indentMessage("delete   [task]")
-                + indentMessage("find     [filter]")
+                + indentMessage("find     [filter]?")
+                + indentMessage("checkout [version]")
                 + indentMessage("todo     [description]")
                 + indentMessage("date     [" + DATE_FORMAT + "]")
                 + indentMessage("list     (todo | deadline | event)?")

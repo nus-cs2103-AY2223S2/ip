@@ -3,7 +3,7 @@ package duke.controllers;
 import java.util.function.Supplier;
 import java.util.regex.Matcher;
 
-import duke.entities.TaskList;
+import duke.entities.managers.CacheManager;
 import duke.enums.CommandType;
 import duke.exceptions.DukeException;
 
@@ -29,8 +29,8 @@ public class DeleteCommand extends Command {
      * The method verifies the command and delete the task specified.
      */
     @Override
-    public String execute(Supplier<? extends TaskList> taskList) throws DukeException {
-        TaskList store = taskList.get();
+    public String execute(Supplier<? extends CacheManager> taskList) throws DukeException {
+        CacheManager store = taskList.get();
         Matcher m = VALID_NUMBER.matcher(args);
         if (m.find()) {
             return store.deleteTask(Integer.parseInt(m.group()));

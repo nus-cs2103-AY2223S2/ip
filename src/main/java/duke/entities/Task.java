@@ -5,6 +5,7 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import duke.entities.managers.CacheManager;
 import duke.enums.TaskType;
 import duke.exceptions.DukeException;
 import duke.utils.CustomValidator;
@@ -12,7 +13,7 @@ import duke.utils.CustomValidator;
 /**
  * Represents a Task Object.
  */
-public abstract class Task {
+public abstract class Task implements Cloneable {
     public static final Pattern TODO = Pattern.compile("^(todo) (?<description>.+)$", Pattern.CASE_INSENSITIVE);
     /** Task validation **/
     public static final Pattern EVENT =
@@ -116,7 +117,7 @@ public abstract class Task {
      * @param type Specifies the task type.
      * @throws DukeException An exception to be thrown if an invalid task is to be created.
      */
-    public static String processTask(Matcher matcher, TaskType type, TaskList store) throws DukeException {
+    public static String processTask(Matcher matcher, TaskType type, CacheManager store) throws DukeException {
         if (!matcher.find()) {
             throw type.getErr();
         }
@@ -144,5 +145,14 @@ public abstract class Task {
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
+    }
+
+    @Override
+    public Task clone() {
+        try {
+            return (Task) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
     }
 }

@@ -1,5 +1,6 @@
-package duke.entities;
+package duke.entities.managers;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
@@ -7,6 +8,8 @@ import java.util.Objects;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import duke.entities.Task;
+import duke.entities.Version;
 import duke.exceptions.DukeException;
 import duke.storage.Storage;
 import duke.views.UI;
@@ -14,18 +17,20 @@ import duke.views.UI;
 /**
  * TaskList represents a data structure that holds Tasks.
  */
-public class TaskList {
-    /** In memory store **/
-    private final List<Task> taskList = new ArrayList<>();
+public class CacheManager {
     /** Hard disk storage **/
     private final Storage storage;
+    /** Version Control Stack **/
+    private final VersionManager versions = new VersionManager(10); // Stores the last 10 state changes
+    /** In memory store **/
+    private ArrayList<Task> taskList = new ArrayList<>();
 
     /**
      * Initializes a TaskList with preloaded data.
      *
      * @param storage storage class for writing to hard disk.
      */
-    public TaskList(Storage storage) throws DukeException {
+    public CacheManager(Storage storage) throws DukeException {
         this.storage = storage;
         try {
             storage.connect();
@@ -38,6 +43,37 @@ public class TaskList {
         } catch (DukeException e) {
             System.out.println(e.getMessage() + "\n Initializing empty storage.");
         }
+    }
+
+    /**
+     * Reverts the state to the last tracked changes.
+     *
+     * @return Success message of the undo operation.
+     */
+    public String undo() throws DukeException {
+        Version state = versions.pop();
+        this.taskList = state.getState();
+        storage.writeAll(this);
+        return "State has successfully reverted to the last changes.\n"
+                + listTasks(task -> true, true);
+    }
+
+    /**
+     * Checkouts to the specified version.
+     *
+     * @param version The version of changes.
+     * @return A status message regarding the status of checking out.
+     * @throws DukeException An error that is thrown when checking out fails.
+     */
+    public String checkout(String version) throws DukeException {
+        if (version == null) {
+            return versions.toString();
+        }
+        Version state = versions.checkout(version.trim());
+        this.taskList = state.getState();
+        storage.writeAll(this);
+        return "State has successfully reverted to specified version.\n"
+                + listTasks(task -> true, true);
     }
 
     /**
@@ -69,7 +105,7 @@ public class TaskList {
     }
 
     /**
-     * Adds a given task into the TaskList.
+     * Adds a given task into memory.
      *
      * @param task The task to be added.
      * @param print Boolean value indicating if console messages should be printed.
@@ -79,7 +115,7 @@ public class TaskList {
         if (print) {
             return "Successfully added task to memory.";
         }
-        return UI.newLine();
+        return null;
     }
 
     /**
@@ -89,6 +125,9 @@ public class TaskList {
      * @throws DukeException A duke specific exception thrown due to adding error.
      */
     public String addTask(Task task) throws DukeException {
+        // NOTE: ordering affects correctness here!
+        Version current = new Version(generateStateClone(), LocalDateTime.now(), "added a task");
+        versions.push(current);
         taskList.add(task);
         storage.writeOne(task);
         return "Got it. I've added this task:"
@@ -98,6 +137,14 @@ public class TaskList {
 
     private boolean isNotValidKey(Integer key) {
         return (key > taskList.size() || key <= 0);
+    }
+
+    private ArrayList<Task> generateStateClone() {
+        ArrayList<Task> current = new ArrayList<>();
+        for (Task t : taskList) {
+            current.add(t.clone());
+        }
+        return current;
     }
 
     /**
@@ -124,6 +171,7 @@ public class TaskList {
      */
     public String getTaskAndToggle(Integer key, boolean mark) throws DukeException {
         Task task = this.getTask(key);
+        versions.push(new Version(generateStateClone(), LocalDateTime.now(), "toggled a task"));
         String msg = mark ? task.markTask() : task.unmarkTask();
         storage.writeAll(this);
         return msg;
@@ -139,6 +187,8 @@ public class TaskList {
         if (isNotValidKey(key)) {
             throw new DukeException("This task don't exists! Please select one from the list.");
         }
+        // NOTE: ordering affects correctness here!
+        versions.push(new Version(generateStateClone(), LocalDateTime.now(), "deleted a task"));
         Task task = taskList.remove(key - 1);
         storage.writeAll(this);
 
@@ -147,7 +197,7 @@ public class TaskList {
                 + UI.newLine() + "Now you have " + taskList.size() + " tasks in the list.";
     }
 
-    public List<Task> getTaskList() {
+    public ArrayList<Task> getTaskList() {
         return taskList;
     }
 

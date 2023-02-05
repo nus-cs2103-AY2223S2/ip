@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import duke.entities.Task;
-import duke.entities.TaskList;
+import duke.entities.managers.CacheManager;
 import duke.exceptions.DukeException;
 import duke.storage.Storage;
 import duke.views.UI;
@@ -14,7 +14,7 @@ import duke.views.UI;
 /**
  * A stub implementation of TaskList.
  */
-public class TestTaskListStub extends TaskList {
+public class TestCacheManagerStub extends CacheManager {
     /** In memory store **/
     private final List<Task> taskList = new ArrayList<>();
 
@@ -23,7 +23,7 @@ public class TestTaskListStub extends TaskList {
      *
      * @param storage storage class for writing to hard disk.
      */
-    public TestTaskListStub(Storage storage) throws DukeException {
+    public TestCacheManagerStub(Storage storage) throws DukeException {
         super(storage);
     }
 

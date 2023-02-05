@@ -5,7 +5,7 @@ import java.util.function.Supplier;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import duke.entities.TaskList;
+import duke.entities.managers.CacheManager;
 import duke.enums.CommandType;
 import duke.enums.TaskType;
 import duke.exceptions.DukeException;
@@ -33,8 +33,8 @@ public class ListCommand extends Command {
      * The method verifies the command and list all tasks in the store.
      */
     @Override
-    public String execute(Supplier<? extends TaskList> store) throws DukeException {
-        TaskList taskList = store.get();
+    public String execute(Supplier<? extends CacheManager> store) throws DukeException {
+        CacheManager cacheManager = store.get();
         Matcher matcher = VALID_LIST_CMD.matcher(arguments);
         if (matcher.find()) {
             String filter = matcher.group("filter");
@@ -42,7 +42,7 @@ public class ListCommand extends Command {
                     .map(enumTask -> TaskType.valueOf(enumTask.trim().toUpperCase()))
                     .orElse(TaskType.ALL);
 
-            return taskList.listTasks(task -> type.isAll() || task.getTaskType() == type, type.isAll());
+            return cacheManager.listTasks(task -> type.isAll() || task.getTaskType() == type, type.isAll());
         } else {
             throw new DukeException(INVALID_FORMAT_ERROR);
         }
