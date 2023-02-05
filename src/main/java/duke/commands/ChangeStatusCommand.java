@@ -25,11 +25,11 @@ public class ChangeStatusCommand extends Command {
     }
 
     @Override
-    public void execute(Tasks tasks, Ui ui, Storage storage) {
+    public String execute(Tasks tasks, Ui ui, Storage storage) {
         if (!Objects.equals(this.changeType, "mark")) {
-            tasks.markTaskUndone(taskNumber);
+            return tasks.markTaskUndone(taskNumber);
         } else {
-            tasks.markTaskDone(taskNumber, false);
+            return tasks.markTaskDone(taskNumber, false);
         }
     }
 }

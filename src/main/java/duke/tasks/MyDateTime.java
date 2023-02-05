@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Scanner;
 
 /**
  * Represents a date in a specified format.
@@ -19,12 +18,6 @@ public class MyDateTime {
     }
 
     public LocalDateTime getValidDateTime(String dateTime) {
-        Scanner s = new Scanner(System.in);
-
-        while (!isValidDateTime(dateTime)) {
-            System.out.println("Hey come on, give me a valid date time in this format(dd/MM/yyyy HH:mm): ");
-            dateTime = s.nextLine();
-        }
         return LocalDateTime.parse(dateTime, MyDateTime.saveFormat);
     }
 
@@ -33,7 +26,7 @@ public class MyDateTime {
      * @param dateTime The given string.
      * @return True if the string is a valid date and time, else false.
      */
-    public boolean isValidDateTime(String dateTime) {
+    public static boolean isValidDateTime(String dateTime) {
         try {
             LocalDateTime.parse(dateTime, MyDateTime.saveFormat);
         } catch (DateTimeParseException e) {

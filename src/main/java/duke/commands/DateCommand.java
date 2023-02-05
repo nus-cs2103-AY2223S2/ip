@@ -16,7 +16,7 @@ public class DateCommand extends Command {
     }
 
     @Override
-    public void execute(Tasks tasks, Ui ui, Storage storage) {
-        tasks.filterByDate(this.date);
+    public String execute(Tasks tasks, Ui ui, Storage storage) {
+        return tasks.filterByDate(this.date);
     }
 }

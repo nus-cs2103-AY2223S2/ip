@@ -6,7 +6,6 @@ import java.util.Scanner;
  * Represents the user interface for Duke.
  */
 public class Ui {
-    private static final String DIVIDER = "-".repeat(50);
 
     private static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
@@ -14,49 +13,22 @@ public class Ui {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
-    private static final String WELCOME_MESSAGE = "Hi there!\nWhat can I do for you on this fine day :)?";
-    private static final String GOODBYE_MESSAGE = "YAY Thank GOD! BYEEEEE";
+    private static final String WELCOME_MESSAGE = "WELCOME WHAT DO YOU WANT????";
+    private static final String GOODBYE_MESSAGE = "YES Thank GOD! BYEEEEE";
     private final Scanner sc;
 
     public Ui() {
         this.sc = new Scanner(System.in);
     }
 
-    public static void printDivider() {
-        System.out.println(DIVIDER);
-    }
-
     /**
      * Displays the welcome message to the user.
      */
-    public void showWelcomeMessage() {
-        Ui.printDivider();
-        System.out.println("Hello from\n" + LOGO);
-        System.out.println(WELCOME_MESSAGE);
-        Ui.printDivider();
+    public String getWelcomeMessage() {
+        return WELCOME_MESSAGE + "\n";
     }
 
-    public void showGoodbyeMessage() {
-        System.out.println(GOODBYE_MESSAGE);
+    public String getGoodbyeMessage() {
+        return GOODBYE_MESSAGE;
     }
-
-    /**
-     * Reads the user input.
-     * @return the user input.
-     */
-    public String readCommand() {
-        System.out.println("Enter something here: ");
-        String command = this.sc.nextLine();
-
-        while (ignoreEmptyLine(command)) {
-            command = this.sc.nextLine();
-        }
-        return command;
-    }
-
-    public boolean ignoreEmptyLine(String line) {
-        return line.equals("");
-    }
-
-
 }
