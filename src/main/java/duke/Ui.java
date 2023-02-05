@@ -1,5 +1,13 @@
 package duke;
 
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.io.BufferedWriter;
+import java.io.OutputStreamWriter;
+import java.io.IOException;
+
 public class Ui {
     public void showWelcome() {
         String logo = " ____        _        \n"
@@ -20,6 +28,15 @@ public class Ui {
 
     public void showLoadingError() {
         System.out.println("OHOH the input cannot make it!");
+    }
+
+    public String readCommand() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
+        StringBuilder sb = new StringBuilder();
+        String inp;
+        inp = br.readLine();
+        return inp;
     }
 
 }

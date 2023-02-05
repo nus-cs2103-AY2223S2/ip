@@ -19,6 +19,10 @@ public class Task {
         System.out.println(this);
     }
 
+    public boolean isInDescription(String string) {
+        return this.description.contains(string);
+    }
+
     public void markAsUnDone() {
         this.isDone = false;
         System.out.println("Ok, I've marked this task as not done yet:");
