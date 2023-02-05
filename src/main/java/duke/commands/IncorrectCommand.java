@@ -9,16 +9,16 @@ import duke.ui.Ui;
  */
 public class IncorrectCommand extends Command {
 
-    private static final String INT_ERROR = "Come on now, try again. I asked for an number";
-    private static final String INVALID_COMMAND_ERROR = "My bad, didn't catch what you said, "
-            + "did you mess up your spelling? 0_o";
-    private static final String TASK_DESC_ERROR = "Sure you provided everything?\n I need:"
-            + "\n----Description for [todo]"
-            + "\n----Description, /by deadline for [deadline]"
-            + "\n----Description, /from start date time /to end date time for [event]";
+    private static final String INT_ERROR = "COME ONNNN now I asked for an number";
+    private static final String INVALID_COMMAND_ERROR = "HUH?? "
+            + "U DRUNK? ";
+    private static final String TASK_DESC_ERROR = "For the LAST time?"
+            + "\n----[todo] description"
+            + "\n----[deadline] description /by deadline"
+            + "\n----[event] description /from start /to end";
     private static final String NO_DATE_ERROR = "Give me a dateeeeee";
     private static final String NO_KEYWORD_ERROR = "I need a keyword to start looking y'know??";
-
+    private static final String WRONG_DATE_FORMAT_ERROR = "WRONG!!1! I need (dd/mm/yyyy hh:ss)";
     private final String errorType;
 
     public IncorrectCommand(String commandType) {
@@ -26,27 +26,24 @@ public class IncorrectCommand extends Command {
     }
 
     @Override
-    public void execute(Tasks tasks, Ui ui, Storage storage) {
+    public String execute(Tasks tasks, Ui ui, Storage storage) {
         switch (errorType) {
         case "mark":
         case "unmark":
         case "delete":
-            System.out.println(INT_ERROR);
-            break;
+            return INT_ERROR;
         case "invalid":
-            System.out.println(INVALID_COMMAND_ERROR);
-            break;
+            return INVALID_COMMAND_ERROR;
         case "task":
-            System.out.println(TASK_DESC_ERROR);
-            break;
+            return TASK_DESC_ERROR;
         case "date":
-            System.out.println(NO_DATE_ERROR);
-            break;
+            return NO_DATE_ERROR;
         case "find":
-            System.out.println(NO_KEYWORD_ERROR);
-            break;
+            return NO_KEYWORD_ERROR;
+        case "dt format":
+            return WRONG_DATE_FORMAT_ERROR;
         default:
-            break;
+            return "";
         }
     }
 }

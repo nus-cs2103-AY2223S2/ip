@@ -13,6 +13,7 @@ public class Duke {
     private Ui ui;
     private Storage storage;
     private Tasks tasks;
+    private boolean isStart; //tracks if it is start of program, so duke can welcome user.
 
     /**
      * Creates a new Duke.
@@ -22,32 +23,28 @@ public class Duke {
         this.tasks = new Tasks();
         this.storage = new Storage();
         this.storage.load(this.tasks);
+        this.isStart = true;
     }
 
     /**
-     * Initiates the process for Duke to load and read data when called.
+     * Gets Duke's response to user input.
+     * @param input User input.
+     * @return Duke's response.
      */
-    public void run() {
-        //print Duke logo
-        ui.showWelcomeMessage();
-        boolean isExit = false;
-
-        while (!isExit) {
-            Ui.printDivider();
-            String fullCommand = ui.readCommand();
-            Command c = Parser.parse(fullCommand);
+    public String getResponse(String input) {
+        String response;
+        if (isStart) {
+            response = ui.getWelcomeMessage();
+            isStart = false;
+        } else {
+            Command c = Parser.parse(input);
             if (c instanceof ExitCommand) {
-                isExit = true;
+                response = ui.getGoodbyeMessage();
+                this.storage.save(this.tasks);
+            } else {
+                response = c.execute(this.tasks, this.ui, this.storage);
             }
-            c.execute(this.tasks, this.ui, this.storage);
-            Ui.printDivider();
         }
-
-        ui.showGoodbyeMessage();
-        this.storage.save(this.tasks);
-    }
-
-    public static void main(String[] args) {
-        new Duke().run();
+        return response;
     }
 }

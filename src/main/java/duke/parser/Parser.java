@@ -9,6 +9,7 @@ import duke.commands.ExitCommand;
 import duke.commands.FindCommand;
 import duke.commands.IncorrectCommand;
 import duke.commands.ListCommand;
+import duke.tasks.MyDateTime;
 
 /**
  * Represents a parser that receives and parses user input.
@@ -78,13 +79,18 @@ public class Parser {
             } else if (commandType.equals("deadline")) {
                 //separate description and dateTime
                 String[] details = temp.split("/by ");
+                if (!MyDateTime.isValidDateTime(details[1])) {
+                    return new IncorrectCommand("dt format");
+                }
                 return new AddCommand(details[0], details[1]);
             } else if (commandType.equals("event")) {
-                //command type is event
                 //separate description and event start end
                 String[] details = temp.split("/from ", 2);
                 //separate start and end dateTime
                 String[] time = details[1].split("/to ");
+                if (!MyDateTime.isValidDateTime(time[0]) || !MyDateTime.isValidDateTime(time[1])) {
+                    return new IncorrectCommand("dt format");
+                }
                 return new AddCommand(details[0], time[0], time[1]);
             } else {
                 return new IncorrectCommand("task");

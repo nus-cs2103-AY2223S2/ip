@@ -15,69 +15,83 @@ public class Tasks {
 
     /**
      * Prints the tasks in the task list.
+     * @return The task list.
      */
-    public void printList() {
+    public String printList() {
         if (taskList.size() == 0) {
-            System.out.println("You haven't added anything 0_0?");
+            return "NOTHIN; EMPTYYY?";
         } else {
+            String output = "";
             int count = 1;
             for (Task task : taskList) {
-                System.out.println(count + ". " + task.printTask());
+                output += count + ". " + task.printTask() + "\n";
                 count++;
             }
+            return output;
         }
     }
     /**
      * Adds a task to the task list.
      * @param task The task to be added.
      * @param silent True if printing to user is not required, else false.
+     * @return Response to user.
      */
-    public void addToList(Task task, boolean silent) {
+    public String addToList(Task task, boolean silent) {
         taskList.add(task);
+        String output = "";
         if (!silent) {
-            System.out.printf("Added to list: %s\n", task.printTask());
-            System.out.printf("Now you've got %d task(s) in your bag, CHOP CHOP GET THEM DONE.\n", taskList.size());
-
+            output = "Added to list:\n" + task.printTask() + '\n';
+            output += "Now you've got " + taskList.size() + " task(s) in your bag, CHOP CHOP GET THEM DONE.\n";
         }
+        return output;
     }
 
     /**
      * Marks a task as done.
      * @param num The index of the task in the task list.
      * @param silent True if printing to user is not required, else false.
+     * @return Response to user.
      */
-    public void markTaskDone(int num, boolean silent) {
+    public String markTaskDone(int num, boolean silent) {
+        String output = "";
         if (withinRange(num)) {
-            this.taskList.get(num).markTaskDone(silent);
+            output += this.taskList.get(num).markTaskDone(silent);
         } else {
-            System.out.println("Hey HEY HEY, that's not within range >:[");
+            output += "Hey HEY HEY, that's not within range";
         }
+        return output;
     }
 
     /**
      * Marks a task undone.
      * @param num The index of the task in the task list.
+     * @return Response to user.
      */
-    public void markTaskUndone(int num) {
+    public String markTaskUndone(int num) {
+        String output = "";
         if (withinRange(num)) {
-            this.taskList.get(num).markTaskUndone();
+            output += this.taskList.get(num).markTaskUndone();
         } else {
-            System.out.println("Hey HEY HEY, that's not within range >:[");
+            output += "Hey HEY HEY, that's not within range";
         }
+        return output;
     }
 
     /**
      * Deletes a task from the task list.
      * @param num The index of the task in the task list.
+     * @return Response to user.
      */
-    public void deleteTask(int num) {
+    public String deleteTask(int num) {
+        String output;
         if (withinRange(num)) {
-            System.out.println("Into the bin it goes! This is now deleted!\n" + this.taskList.get(num).printTask());
+            output = "Into the bin it goes! This is now deleted!\n" + this.taskList.get(num).printTask();
             this.taskList.remove(num);
-            System.out.printf("%d task(s) left to go :/\n", this.taskList.size());
+            output += "\n" + this.taskList.size() + " task(s) left to go\n";
         } else {
-            System.out.println("Hey HEY HEY, that's not within range >:[");
+            output = "Hey HEY HEY, that's not within range";
         }
+        return output;
     }
 
     public boolean withinRange(int num) {
@@ -103,48 +117,55 @@ public class Tasks {
     /**
      * Filters tasks due or occurring on a given date.
      * @param dateOnly The given date.
+     * @return Response to user.
      */
-    public void filterByDate(String dateOnly) {
+    public String filterByDate(String dateOnly) {
         if (taskList.size() == 0) {
-            System.out.println("Nothing~");
+            return "Nothing~";
+        } else if (!MyDate.isValidDate(dateOnly)) {
+            return "That's NOT a date";
         } else {
-            MyDate date = new MyDate(dateOnly);
-            System.out.println("Deadlines due or events ongoing on " + date.printDateTime());
+            String output = "";
             int count = 1;
+            MyDate date = new MyDate(dateOnly);
+            output += "Deadlines due or events ongoing on " + date.printDateTime() + "\n";
             for (Task task : taskList) {
                 if (task instanceof Deadline) {
                     Deadline d = (Deadline) task;
                     if (d.isDeadLine(date)) {
-                        System.out.println(count + ". " + task.printTask());
+                        output += count + ". " + task.printTask() + "\n";
                         count++;
                     }
                 } else if (task instanceof Event) {
                     Event e = (Event) task;
                     if (e.liesBetween(date)) {
-                        System.out.println(count + ". " + task.printTask());
+                        output += count + ". " + task.printTask() + "\n";
                         count++;
                     }
                 }
             }
+            return output;
         }
     }
 
     /**
      * Filters and prints out tasks that contain a given keyword.
      * @param keyword The given keyword.
+     * @return Response to user.
      */
-    public void filterByKeyword(String keyword) {
+    public String filterByKeyword(String keyword) {
         if (taskList.size() == 0) {
-            System.out.println("Nothing~");
+            return "Nothing~";
         } else {
-            System.out.println("Tasks that have " + keyword);
+            String output = "Tasks that have " + keyword + "\n";
             int count = 1;
             for (Task task : taskList) {
                 if (task.containsKeyword(keyword)) {
-                    System.out.println(count + ". " + task.printTask());
+                    output += count + ". " + task.printTask() + "\n";
                     count++;
                 }
             }
+            return output;
         }
     }
 }

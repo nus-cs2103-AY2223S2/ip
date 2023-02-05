@@ -27,33 +27,38 @@ public class Task {
     /**
      * Marks a task as done.
      * @param silent True if printing for user is not required, else false.
+     * @return Response to user.
      */
-    public void markTaskDone(boolean silent) {
+    public String markTaskDone(boolean silent) {
+        String output = "";
         //task already marked done
         if (this.isDone) {
-            System.out.println("Move on already, you've marked this.");
+            output += "Move on already, you've marked this.";
         } else {
             this.isDone = true;
             if (!silent) {
-                System.out.println("WOW you got something done! A miracle!! "
-                         + "I've marked this task as done now, ur wlcm :)");
-                System.out.println(printTask());
+                output += "WOW you got something done! A miracle!! "
+                         + "I've marked this task as done now, ur wlcm :)\n";
+                output += printTask();
             }
         }
+        return output;
     }
 
     /**
      * Marks a task undone.
+     * @return Response to user.
      */
-    public void markTaskUndone() {
-        //task is not done in first place
+    public String markTaskUndone() {
+        String output = "";
         if (!this.isDone) {
-            System.out.println("You didn't even do it in the first place >:/");
+            output += "You didn't even do it in the first place >:/";
         } else {
             this.isDone = false;
-            System.out.println("Ugh fine, this task is now marked undone. >:/");
-            System.out.println(printTask());
+            output += "Ugh fine, this task is now marked undone. >:/\n";
+            output += printTask();
         }
+        return output;
     }
 
     /**

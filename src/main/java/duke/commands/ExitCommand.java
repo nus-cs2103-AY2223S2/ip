@@ -10,6 +10,7 @@ import duke.ui.Ui;
 public class ExitCommand extends Command {
 
     @Override
-    public void execute(Tasks tasks, Ui ui, Storage storage) {
+    public String execute(Tasks tasks, Ui ui, Storage storage) {
+        return "exit";
     }
 }
