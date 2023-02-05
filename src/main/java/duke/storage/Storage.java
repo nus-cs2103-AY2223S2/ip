@@ -30,6 +30,7 @@ public class Storage {
      * @param filePath the location of the storage file
      */
     public Storage(String filePath) {
+        assert pathNotEmpty(filePath);
         this.file = new File(filePath);
     }
 
@@ -65,7 +66,7 @@ public class Storage {
             fw.flush();
             fw.close();
         } catch (IOException e) {
-            System.out.println("\"Fail to add to repository.");
+            System.out.println("Fail to add to repository.");
         }
     }
 
@@ -138,5 +139,9 @@ public class Storage {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private Boolean pathNotEmpty(String path) {
+        return !path.isEmpty();
     }
 }

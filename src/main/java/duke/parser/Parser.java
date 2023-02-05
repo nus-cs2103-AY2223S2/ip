@@ -77,26 +77,19 @@ public class Parser {
         CommandCode commandCode = getCommand(input);
         switch (commandCode) {
         case TODO:
-            int todoLen = 4;
-            return prepareTodo(input.substring(todoLen).trim());
+            return prepareTodo(input);
         case DEADLINE:
-            int deadlineLen = 8;
-            return prepareDeadline(input.substring(deadlineLen).trim());
+            return prepareDeadline(input);
         case EVENT:
-            int eventLen = 5;
-            return prepareEvent(input.substring(eventLen).trim());
+            return prepareEvent(input);
         case DELETE:
-            int deleteLen = 6;
-            return prepareDelete(input.substring(deleteLen).trim());
+            return prepareDelete(input);
         case MARK:
-            int markLen = 4;
-            return prepareMark(input.substring(markLen).trim());
+            return prepareMark(input);
         case UNMARK:
-            int unmarkLen = 6;
-            return prepareUnmark(input.substring(unmarkLen).trim());
+            return prepareUnmark(input);
         case FIND:
-            int findLen = 4;
-            return prepareFind(input.substring(findLen).trim());
+            return prepareFind(input);
         case LIST:
             return prepareList();
         case HELP:
@@ -108,8 +101,11 @@ public class Parser {
         }
     }
 
-    private Command prepareTodo(String args) {
+    private Command prepareTodo(String input) {
         try {
+            // Extract arguments
+            int todoStartIndex = 4;
+            String args = input.substring(todoStartIndex).trim();
             checkParamExists(!args.isBlank(), "Description of a TODO command cannot be empty.");
             return new AddCommand(args);
         } catch (DukeException e) {
@@ -117,8 +113,12 @@ public class Parser {
         }
     }
 
-    private Command prepareDeadline(String args) {
+    private Command prepareDeadline(String input) {
         try {
+            // Extract arguments
+            int deadlineStartIndex = 8;
+            String args = input.substring(deadlineStartIndex).trim();
+
             // Check the required keyword exists
             String by = "/by";
             checkParamExists(args.contains(by), "Parameter /by in the DEADLINE command is missing.");
@@ -141,8 +141,12 @@ public class Parser {
         }
     }
 
-    private Command prepareEvent(String args) {
+    private Command prepareEvent(String input) {
         try {
+            // Extract arguments
+            int eventStartIndex = 5;
+            String args = input.substring(eventStartIndex).trim();
+
             // Check the required keyword exists
             String from = "/from";
             String to = "/to";
@@ -171,22 +175,34 @@ public class Parser {
         }
     }
 
-    private Command prepareDelete(String args) {
+    private Command prepareDelete(String input) {
+        // Extract arguments
+        int deleteStartIndex = 6;
+        String args = input.substring(deleteStartIndex).trim();
         int index = Integer.parseInt(args);
         return new DeleteCommand(index - 1);
     }
 
-    private Command prepareMark(String args) {
+    private Command prepareMark(String input) {
+        // Extract arguments
+        int markStartIndex = 4;
+        String args = input.substring(markStartIndex).trim();
         int index = Integer.parseInt(args);
         return new MarkCommand(index - 1);
     }
 
-    private Command prepareUnmark(String args) {
+    private Command prepareUnmark(String input) {
+        // Extract arguments
+        int unmarkStartIndex = 6;
+        String args = input.substring(unmarkStartIndex).trim();
         int index = Integer.parseInt(args);
         return new UnmarkCommand(index - 1);
     }
 
-    private Command prepareFind(String args) {
+    private Command prepareFind(String input) {
+        // Extract arguments
+        int findStartIndex = 4;
+        String args = input.substring(findStartIndex).trim();
         return new FindCommand(args);
     }
 

@@ -30,6 +30,7 @@ public class Duke {
      * @param filePath the path to the file
      */
     public Duke(String filePath) {
+        assert pathNotEmpty(filePath);
         this.storage = new Storage(filePath);
         this.tasks = new TaskList(storage.load());
         this.ui = new Ui();
@@ -54,5 +55,9 @@ public class Duke {
         Command command = new Parser().parseCommand(input);
         command.execute(this.storage, this.tasks, this.ui);
         return ui.getResponse();
+    }
+
+    private Boolean pathNotEmpty(String path) {
+        return !path.isEmpty();
     }
 }
