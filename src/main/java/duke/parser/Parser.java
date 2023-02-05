@@ -36,10 +36,9 @@ public class Parser {
      * @throws DukeException If there are discrepancies in User input.
      */
     public static Command parse(String fullCommand) throws DukeException {
-        if (fullCommand.equals("bye")) {
-            return new ExitCommand();
-        } else if (fullCommand.equals("list")) {
-            return new ListCommand();
+        Command singleCommand = getSingleCommand(fullCommand);
+        if (singleCommand != null) {
+            return singleCommand;
         }
         Command valueCommand = getValueCommand(fullCommand);
         if (valueCommand != null) {
@@ -47,6 +46,23 @@ public class Parser {
         }
         validateTaskCommand(fullCommand, TASK_COMMANDS);
         return getTaskCommand(fullCommand);
+    }
+    public static Command getSingleCommand(String fullCommand) {
+        Command command;
+        switch (fullCommand) {
+        case "bye":
+            command = new ExitCommand();
+            break;
+        case "list":
+            command = new ListCommand(false);
+            break;
+        case "orderedlist":
+            command = new ListCommand(true);
+            break;
+        default:
+            command = null;
+        }
+        return command;
     }
 
     public static Command getTaskCommand(String fullCommand) throws DukeException {

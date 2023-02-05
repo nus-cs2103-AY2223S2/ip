@@ -1,6 +1,9 @@
 package duke.tasklist;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import duke.exceptions.DukeException;
 import duke.tasktypes.Task;
@@ -147,6 +150,22 @@ public class TaskList {
         String output = "";
         output += "Here are the tasks in your list:\n";
         for (Task task : taskStorage) {
+            output += String.format("%d.%s", count++, task.toString()) + "\n";
+        }
+        assert count == this.numTasks : "Number of tasks printed mismatch.";
+        return output;
+    }
+
+    public String printTasksInOrder() {
+        if (this.numTasks == 0) {
+            return "There are no available tasks at the moment!\n";
+        }
+        int count = 1;
+        String output = "";
+        output += "Here are the tasks in your list:\n";
+        List<Task> tasksSorted = taskStorage.stream()
+                .sorted(Comparator.comparing(Task :: getDeadline)).collect(Collectors.toList());
+        for (Task task : tasksSorted) {
             output += String.format("%d.%s", count++, task.toString()) + "\n";
         }
         assert count == this.numTasks : "Number of tasks printed mismatch.";

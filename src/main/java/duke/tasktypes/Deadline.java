@@ -31,6 +31,7 @@ public class Deadline extends Task {
         this.byDateTime = getByDateTime(by);
         this.doneBy = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT)
                         .format(this.byDateTime);
+        this.when = this.byDateTime;
     }
 
     private LocalDateTime getByDateTime(String by) throws DukeException {

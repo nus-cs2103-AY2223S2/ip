@@ -1,5 +1,7 @@
 package duke.tasktypes;
 
+import java.time.LocalDateTime;
+
 /**
  * Abstract representation of a Task object.
  */
@@ -13,6 +15,8 @@ public abstract class Task {
     protected boolean isDone;
     /** Assigned ID for task */
     protected int taskID;
+    /** Deadline of a task */
+    protected LocalDateTime when;
 
     /**
      * Constructor to initialize a Task.
@@ -83,6 +87,10 @@ public abstract class Task {
 
     public int getTaskID() {
         return this.taskID;
+    }
+
+    public LocalDateTime getDeadline() {
+        return this.when;
     }
 }
 

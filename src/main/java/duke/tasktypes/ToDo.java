@@ -1,5 +1,7 @@
 package duke.tasktypes;
 
+import java.time.LocalDateTime;
+
 /**
  * Represents a Todo Task.
  */
@@ -7,6 +9,7 @@ public class ToDo extends Task {
 
     public ToDo(String description) {
         super(description);
+        this.when = LocalDateTime.MAX;
     }
 
     @Override

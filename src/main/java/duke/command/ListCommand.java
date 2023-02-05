@@ -9,7 +9,10 @@ import duke.ui.Ui;
  */
 public class ListCommand extends Command {
 
-    public ListCommand() {
+    private boolean ordered;
+
+    public ListCommand(boolean ordered) {
+        this.ordered = ordered;
     }
 
     @Override
@@ -28,6 +31,10 @@ public class ListCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage, Ui ui) {
-        return ui.printTasks(tasks);
+        if (this.ordered) {
+            return ui.printTasksOrdered(tasks);
+        } else {
+            return ui.printTasks(tasks);
+        }
     }
 }

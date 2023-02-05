@@ -171,4 +171,15 @@ public class Ui {
         return tasks.printTasks();
     }
 
+    /**
+     * Returns existing tasks in given TaskList instance.
+     * Tasks are ordered by deadline.
+     *
+     * @param tasks TaskList object whose tasks will be printed.
+     * @return String representation of existing tasks in TaskList instance.
+     */
+    public String printTasksOrdered(TaskList tasks) {
+        return tasks.printTasksInOrder();
+    }
+
 }

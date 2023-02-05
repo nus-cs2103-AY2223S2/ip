@@ -43,6 +43,8 @@ public class Event extends Task {
         this.endBy = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT)
                         .format(this.endDateTime);
 
+        this.when = this.startDateTime;
+
     }
     private LocalDateTime getDateTime(String by) throws DukeException {
         try {
