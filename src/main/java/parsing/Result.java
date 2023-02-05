@@ -36,41 +36,64 @@ public class Result<T> {
         return new Result<>(Either.right(error));
     }
 
+    /**
+     * Checks if wrapped object satisfies condition
+     * 
+     * @param condition Condition to test
+     * @param errorMsg  Error message if condition unsatisfied
+     * @return New filtered result
+     */
     public Result<T> filterOrElse(Predicate<? super T> condition, String errorMsg) {
         return new Result<>(this.result.filterOrElse(pr -> condition.test(pr.first()), errorMsg));
     }
 
+    /**
+     * Overrides message if this is Error
+     * 
+     * @param errorMsg Message to override with
+     * @return New result
+     */
     public Result<T> overrideMsg(String errorMsg) {
         return this.result.match(
                 pr -> this,
                 msg -> error(errorMsg));
     }
 
+    /**
+     * @return true if this is ok
+     */
     public boolean isOk() {
         return this.result.isLeft();
     }
 
+    /**
+     * @return true if this is error
+     */
     public boolean isError() {
         return this.result.isRight();
     }
 
-    // public T getRes() {
-    // return this.result.fromLeft(null).first();
-    // }
-
-    // public String getRemainInp() {
-    // return this.result.fromLeft(null).second();
-    // }
-
-    // public String getErrorMsg() {
-    // return this.result.fromRight(null);
-    // }
-
+    /**
+     * Converts result to new object based on 2 mapping functions
+     * 
+     * @param <U>           Type of new object
+     * @param okFunction    Function to convert Pair<parsedObject, remainingInput>
+     *                      to new object if this is ok
+     * @param errorFunction Function to conver error message to new object if this
+     *                      is error
+     * @return New object
+     */
     public <U> U match(Function<? super Pair<? extends T, ? extends String>, ? extends U> okFunction,
             Function<? super String, ? extends U> errorFunction) {
         return this.result.match(okFunction, errorFunction);
     }
 
+    /**
+     * Maps parsed object to new wrapped object if this is ok
+     * 
+     * @param f Mapping function
+     * @return New result
+     */
     public <U> Result<U> map(Function<? super T, ? extends U> f) {
         return new Result<>(this.result.map(pr -> new Pair<>(f.apply(pr.first()), pr.second())));
     }
