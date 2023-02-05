@@ -9,6 +9,6 @@ public class ToDoTest {
     @Test
     public void stringTest() {
         ToDo temp = new ToDo("sleep");
-        assertEquals("[T] [ ] sleep ", temp.toString());
+        assertEquals("[T] [ ] sleep", temp.toString());
     }
 }
