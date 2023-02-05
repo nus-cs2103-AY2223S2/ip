@@ -131,10 +131,9 @@ public class Tasklist {
      * @return
      */
     public ArrayList<Task> find(String word) {
-        ArrayList<Task> result =
-                this.tasks.stream()
-                        .filter(t -> t.getName().contains(word))
-                        .collect(Collectors.toCollection(ArrayList::new));
+        ArrayList<Task> result = this.tasks.stream()
+                .filter(t -> t.getName().contains(word))
+                .collect(Collectors.toCollection(ArrayList::new));
         return result;
     }
 }
