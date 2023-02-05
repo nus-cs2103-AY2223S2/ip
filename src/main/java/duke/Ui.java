@@ -60,17 +60,17 @@ public class Ui {
     public ArrayList<String> printReply(String inputCommand) {
         ArrayList<String> temp = new ArrayList<>();
         switch (inputCommand) {
-            case "list":
-                for (int i = 0; i < myTaskList.countTasks(); i++) {
-                    temp.add("  " + String.valueOf(i + 1) + ". " + myTaskList.getTaskAtIndex(i));
-                }
-                break;
-            case "bye":
-                temp.add("  See you again");
-                break;
-            default:
-                temp.add("  this is not a task, contact admin");
-                break;
+        case "list":
+            for (int i = 0; i < myTaskList.countTasks(); i++) {
+                temp.add("  " + String.valueOf(i + 1) + ". " + myTaskList.getTaskAtIndex(i));
+            }
+            break;
+        case "bye":
+            temp.add("  See you again");
+            break;
+        default:
+            temp.add("  this is not a task, contact admin");
+            break;
         }
         return temp;
     }
