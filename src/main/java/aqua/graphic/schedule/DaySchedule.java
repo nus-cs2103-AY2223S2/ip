@@ -109,19 +109,10 @@ public class DaySchedule extends HBox {
                 endX += MIN_WIDTH_PIXS / 2;
             }
 
-            Pane scheduleBox = new Pane();
-            scheduleBox.setMinHeight(ROW_HEIGHT);
-            scheduleBox.setMinWidth(endX - startX);
-            scheduleBox.getStyleClass().setAll(timeable.getStyleClass());
-            Tooltip.install(scheduleBox, createTooltip(timeable));
-            for (PseudoClass pseudoClass : timeable.getPseudoClass()) {
-                scheduleBox.pseudoClassStateChanged(pseudoClass, true);
-            }
-            scheduleBox.setOnMouseEntered(e -> scheduleBox.pseudoClassStateChanged(PSEUDO_CLASS_HOVER, true));
-            scheduleBox.setOnMouseExited(e -> scheduleBox.pseudoClassStateChanged(PSEUDO_CLASS_HOVER, false));
+            Pane block = createDisplayBlock(timeable, endX - startX);
 
-            pane.getChildren().add(scheduleBox);
-            scheduleBox.setLayoutX(startX);
+            pane.getChildren().add(block);
+            block.setLayoutX(startX);
         }
 
         return pane;
@@ -138,6 +129,21 @@ public class DaySchedule extends HBox {
         }
 
         return canvas;
+    }
+
+
+    private Pane createDisplayBlock(ScheduleTimeable timeable, double width) {
+        Pane block = new Pane();
+        block.setMinHeight(ROW_HEIGHT);
+        block.setMinWidth(width);
+        block.getStyleClass().setAll(timeable.getStyleClass());
+        Tooltip.install(block, createTooltip(timeable));
+        for (PseudoClass pseudoClass : timeable.getPseudoClass()) {
+            block.pseudoClassStateChanged(pseudoClass, true);
+        }
+        block.setOnMouseEntered(e -> block.pseudoClassStateChanged(PSEUDO_CLASS_HOVER, true));
+        block.setOnMouseExited(e -> block.pseudoClassStateChanged(PSEUDO_CLASS_HOVER, false));
+        return block;
     }
 
 
