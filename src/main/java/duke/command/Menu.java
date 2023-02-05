@@ -33,10 +33,33 @@ public class Menu {
         return manager.displayAll() + "\n";
 
       case "mark":
-        return manager.mark(Integer.parseInt(tokens[1]) - 1);
+        //mark 1-3 or mark 1
+        if(tokens.length == 2){
+          //mark 1-3
+          if(tokens[1].contains("-")){
+            String[] indexes  = tokens[1].split("-");
+            return manager.markList(Integer.parseInt(indexes[0]) - 1, Integer.parseInt(indexes[1]) - 1);
+          } else {
+            return manager.mark(Integer.parseInt(tokens[1]) - 1);
+          }
+        } else {
+          return manager.markMulti(tokens);
+        }
 
       case "unmark":
-        return manager.unmark(Integer.parseInt(tokens[1]) - 1);
+        //unmark 1-3 or mark 1
+        if(tokens.length == 2){
+          //unmark 1-3
+          if(tokens[1].contains("-")){
+            String[] indexes  = tokens[1].split("-");
+            return manager.unmarkList(Integer.parseInt(indexes[0]) - 1, Integer.parseInt(indexes[1]) - 1);
+          } else {
+            return manager.unmark(Integer.parseInt(tokens[1]) - 1);
+          }
+        } else {
+          return manager.unmarkMulti(tokens);
+        }
+
 
       case "todo":
         ToDo todo = new ToDo(withoutKey, false);
@@ -53,7 +76,18 @@ public class Menu {
 
 
       case "delete":
-        return manager.delete(Integer.parseInt(tokens[1]) - 1);
+        if(tokens.length == 2){
+          //delete 1-3
+          if(tokens[1].contains("-")){
+            String[] indexes  = tokens[1].split("-");
+            return manager.deleteList(Integer.parseInt(indexes[0]) - 1, Integer.parseInt(indexes[1]) - 1);
+          } else {
+            return manager.delete(Integer.parseInt(tokens[1])-1);
+          }
+        } else {
+          String [] filtered = input.replace("delete","-1").split(" ");
+          return manager.deleteMulti(filtered);
+        }
 
       case "find":
         return manager.find(withoutKey);
