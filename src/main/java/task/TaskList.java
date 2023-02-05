@@ -46,7 +46,7 @@ public class TaskList {
         Todo entry = new Todo(details);
         tasks.add(entry);
         storage.save(this);
-        System.out.println("Successfully added a todo"); // chaneg this later
+        System.out.println("Successfully added a todo"); // chaneg 
     }
 
     public void addDeadline(String details, String date) throws WillyException {
