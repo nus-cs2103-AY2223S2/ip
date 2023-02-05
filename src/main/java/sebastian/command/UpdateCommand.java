@@ -11,7 +11,7 @@ import sebastian.main.Ui;
 /**
  * Class used to handle an update command
  */
-public class UpdateCommand extends Command{
+public class UpdateCommand extends Command {
     private String instruction;
 
     public UpdateCommand(String instruction) {
@@ -33,7 +33,7 @@ public class UpdateCommand extends Command{
     public String execute(TaskList taskList, Ui ui, Storage storage) throws LackOfArgumentException,
             UpdateFormatMismatchException, TaskNotExistException, CannotWriteDataException {
         String[] insArr = instruction.split(" ");
-        if(insArr.length == 1) {
+        if (insArr.length == 1) {
             throw new LackOfArgumentException("Please specify the index of the task to be updated and the new task");
         } else if (insArr.length > 1) {
             try {

@@ -33,8 +33,8 @@ public class AddEventCommand extends AddTaskCommand {
             throws LackOfArgumentException, EventFormatMismatchException, CannotWriteDataException {
         String[] insArr = instruction.split(" ");
         if (insArr.length == 1) {
-            throw new LackOfArgumentException("Please specify a description, a start time and an end time for your " +
-                    "event");
+            throw new LackOfArgumentException("Please specify a description, a start time and an end time for your "
+                    + "event");
         } else if (insArr.length > 1) {
             String event = instruction.substring(6);
             String[] task = event.split("/from|/to");

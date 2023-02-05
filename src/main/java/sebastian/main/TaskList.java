@@ -170,7 +170,8 @@ public class TaskList {
      * @throws LackOfArgumentException when user did not specify what to update
      * @throws UpdateFormatMismatchException when the update command is given in the wrong format
      */
-    public Task updateTask(int taskIndex, String updateDetail) throws IndexOutOfBoundsException, LackOfArgumentException, UpdateFormatMismatchException {
+    public Task updateTask(int taskIndex, String updateDetail) throws IndexOutOfBoundsException,
+            LackOfArgumentException, UpdateFormatMismatchException {
         try {
             Task taskToBeUpdated = taskList.get(taskIndex - 1);
             if (taskToBeUpdated instanceof Deadline) {
@@ -214,7 +215,8 @@ public class TaskList {
         d.update(newDesc, newEndTime);
     }
 
-    private void updateEvent(Event e, String updateDetail) throws LackOfArgumentException, UpdateFormatMismatchException {
+    private void updateEvent(Event e, String updateDetail) throws LackOfArgumentException,
+            UpdateFormatMismatchException {
         int pos1 = updateDetail.indexOf("/desc");
         int pos2 = updateDetail.indexOf("/from");
         int pos3 = updateDetail.indexOf("/to");
@@ -222,8 +224,8 @@ public class TaskList {
         LocalDateTime newFrom = null;
         LocalDateTime newTo = null;
         if (pos1 != -1) {
-            int endPos = pos2 == -1 ?
-                    pos3 == -1 ? updateDetail.length() : pos3
+            int endPos = pos2 == -1
+                    ? pos3 == -1 ? updateDetail.length() : pos3
                     : pos2;
             newDesc = updateDetail.substring(pos1 + 5, endPos).trim();
         }
@@ -242,7 +244,7 @@ public class TaskList {
                 throw new UpdateFormatMismatchException();
             }
         }
-        if(pos1 == -1 && pos2 == -1 && pos3 == -1) {
+        if (pos1 == -1 && pos2 == -1 && pos3 == -1) {
             throw new LackOfArgumentException("Please specify a body for your update command");
         }
         e.update(newDesc, newFrom, newTo);

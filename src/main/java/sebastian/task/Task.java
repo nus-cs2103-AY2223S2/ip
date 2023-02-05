@@ -14,7 +14,7 @@ public class Task {
      */
     public Task(String taskDescription, boolean isCompleted) {
         this.taskDescription = taskDescription;
-        this.taskStatus = isCompleted? TaskStatus.NOT_DONE : TaskStatus.DONE;
+        this.taskStatus = isCompleted ? TaskStatus.NOT_DONE : TaskStatus.DONE;
     }
 
     /**

@@ -36,11 +36,16 @@ public class Deadline extends Task {
         return endTime.isSameDay(ld);
     }
 
+    /**
+     * Update details of a deadline
+     * @param description new description
+     * @param endTime new end time
+     */
     public void update(String description, LocalDateTime endTime) {
-        if(description != null) {
+        if (description != null) {
             super.update(description);
         }
-        if(endTime != null) {
+        if (endTime != null) {
             this.endTime.updateEndTime(endTime);
         }
     }

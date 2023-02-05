@@ -3,8 +3,11 @@ package sebastian.exceptions;
 /**
  * Exception when an update command is given in the wrong format
  */
-public class UpdateFormatMismatchException extends InputFormatMismatchException{
+public class UpdateFormatMismatchException extends InputFormatMismatchException {
 
+    /**
+     * Constructor
+     */
     public UpdateFormatMismatchException() {
         super(
                 "Please specify an update in the following format:" + "\n"

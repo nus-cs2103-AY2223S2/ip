@@ -34,14 +34,20 @@ public class Event extends Task {
         return duration.isSameDay(ld);
     }
 
+    /**
+     * Update details of an event
+     * @param description new event description
+     * @param from new start time
+     * @param to new end time
+     */
     public void update(String description, LocalDateTime from, LocalDateTime to) {
-        if(description != null) {
+        if (description != null) {
             super.update(description);
         }
-        if(from != null) {
+        if (from != null) {
             this.duration.updateFromTime(from);
         }
-        if(to != null) {
+        if (to != null) {
             this.duration.updateEndTime(to);
         }
     }
