@@ -21,6 +21,10 @@ public class CommandQueue {
         for (Commands command : queue) {
             command.execute(list);
         }
+        //delete.execute();
+        //list.execute(delete);
+
+        //list.remove(index);
         queue.clear();
     }
 }
