@@ -22,7 +22,7 @@ public class Ui {
      * @return a divider for the greeting message.
      */
     public String startingDivider() {
-        return "---------------------------";
+        return "----------------------------";
     }
 
     /**
