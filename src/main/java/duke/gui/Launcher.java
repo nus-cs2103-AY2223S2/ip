@@ -3,12 +3,9 @@ package duke.gui;
 import javafx.application.Application;
 
 /**
- * xxx
+ * Class to launch the GUI for Duke chatbot.
  */
 public class Launcher {
-    /**
-     * @param args xxxx
-     */
     public static void main(String[] args) {
         Application.launch(Main.class, args);
     }

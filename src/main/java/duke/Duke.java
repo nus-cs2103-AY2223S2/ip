@@ -2,9 +2,8 @@ package duke;
 
 import java.io.IOException;
 
-import javafx.stage.Stage;
 import duke.gui.MainWindow;
-
+import javafx.stage.Stage;
 
 /**
  * Main Duke class whereby an instance of the Duke chatbot is initialized.
@@ -34,6 +33,7 @@ public class Duke {
 
     /**
      * Runs the Duke chatbot program.
+     * @param tool Instance of MainWindow is taken in to get user input and send output.
      * @throws IOException
      * @throws DukeExceptions
      */
@@ -48,6 +48,10 @@ public class Duke {
         dukeStorage.storeTask(dukeTaskList.getListOfTasks());
     }
 
+    /**
+     * Sets the stage whereby the Duke chatbot will be running its logic.
+     * @param stage Stage whereby the Duke chatbot will run.
+     */
     public void setStage(Stage stage) {
         this.stageToControl = stage;
     }

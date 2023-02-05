@@ -1,5 +1,8 @@
 package duke.gui;
 
+import java.io.IOException;
+
+import duke.Duke;
 import duke.DukeExceptions;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -8,14 +11,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-
-import duke.Duke;
-
-
-
-import java.io.IOException;
-
-
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -39,6 +34,9 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/trollorc.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/dukeHelm.png"));
 
+    /**
+     * Initializes the MainWindow.
+     */
     @FXML
     public void initialize() {
 
@@ -48,6 +46,10 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(firstGreetings, dukeImage));
     }
 
+    /**
+     * Sets the instance of Duke which will be running on this MainWindow.
+     * @param d The instance of Duke which will be running.
+     */
     public void setDuke(Duke d) {
         duke = d;
     }

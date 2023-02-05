@@ -9,7 +9,10 @@ import duke.tasktypes.ToDo;
  * Class used to interpret the user's input for Duke chatbot.
  */
 public class Parser {
+    private String outputToReturn;
+
     public Parser() {}
+
     /**
      * Function to redirect user's input to the relevant functions.
      * @param input String representation of the user's input.
@@ -17,8 +20,6 @@ public class Parser {
      * @return String representation of output.
      * @throws DukeExceptions if the user inputs an invalid command.
      */
-
-    private String outputToReturn;
     public String readInput(String input, TaskList listOfTasks) throws DukeExceptions {
         try {
             if (input.startsWith("todo")) {
