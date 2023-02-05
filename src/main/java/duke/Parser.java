@@ -20,52 +20,52 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * This is a class responsible for parsing the inputs given by user
+ * This is a class responsible for parsing the inputs given by user.
  */
 public class Parser {
 
     /**
-     * Constructor for Parser class
+     * Constructor for Parser class.
      */
     public Parser() {}
 
     /**
-     * Returns a Command corresponding to the information given by the user
+     * Returns a Command corresponding to the information given by the user.
      *
-     * @param fullCommand information given by the user
-     * @return corresponding Command
+     * @param fullCommand information given by the user.
+     * @return corresponding Command.
      */
     public static Command parse(String fullCommand) {
         String[] commandParts = fullCommand.split(" ", 2);
         String commandHeader = commandParts[0];
         switch (commandHeader) {
-            case "bye":
-                return new ExitCommand();
-            case "list":
-                return new ListCommand();
-            case "todo":
-                return parseTodoCommand(fullCommand);
-            case "deadline":
-                return parseDeadlineCommand(fullCommand);
-            case "event":
-                return parseEventCommand(fullCommand);
-            case "mark":
-                return parseMarkCommand(fullCommand);
-            case "unmark":
-                return parseUnmarkCommand(fullCommand);
-            case "delete":
-                return parseDeleteCommand(fullCommand);
-            case "find":
-                return parseFindCommand(fullCommand);
-            default:
-                return new InvalidCommand();
+        case "bye":
+            return new ExitCommand();
+        case "list":
+            return new ListCommand();
+        case "todo":
+            return parseTodoCommand(fullCommand);
+        case "deadline":
+            return parseDeadlineCommand(fullCommand);
+        case "event":
+            return parseEventCommand(fullCommand);
+        case "mark":
+            return parseMarkCommand(fullCommand);
+        case "unmark":
+            return parseUnmarkCommand(fullCommand);
+        case "delete":
+            return parseDeleteCommand(fullCommand);
+        case "find":
+            return parseFindCommand(fullCommand);
+        default:
+            return new InvalidCommand();
         }
     }
 
     private static AddTodoCommand parseTodoCommand(String fullCommand) throws TaskNoDescriptionException {
         String info = fullCommand.substring(4).trim();
         if (info.isEmpty()) {
-            throw (new TaskNoDescriptionException("OOPS!!! The description of a todo cannot be empty."));
+            throw new TaskNoDescriptionException("OOPS!!! The description of a todo cannot be empty.");
         }
 
         return new AddTodoCommand(info);
@@ -75,7 +75,7 @@ public class Parser {
         throws TaskNoDescriptionException, NotEnoughArgumentsException, DateTimeParseException {
         String info = fullCommand.substring(8).trim();
         if (info.isEmpty()) {
-            throw(new TaskNoDescriptionException("OOPS!!! The description of a deadline cannot be empty."));
+            throw new TaskNoDescriptionException("OOPS!!! The description of a deadline cannot be empty.");
         }
 
         try {
@@ -84,7 +84,7 @@ public class Parser {
             LocalDate byDate = LocalDate.parse(by, DateTimeFormatter.ofPattern("d/MM/yyyy"));
             return new AddDeadlineCommand(description, byDate);
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw(new NotEnoughArgumentsException("OOPS!!! Deadline requires a date after the description."));
+            throw new NotEnoughArgumentsException("OOPS!!! Deadline requires a date after the description.");
         }
     }
 
@@ -93,7 +93,7 @@ public class Parser {
             DateNotInSequenceException, DateTimeParseException {
         String info = fullCommand.substring(5).trim();
         if (info.isEmpty()) {
-            throw (new TaskNoDescriptionException("OOPS!!! The description of an event cannot be empty."));
+            throw new TaskNoDescriptionException("OOPS!!! The description of an event cannot be empty.");
         }
 
         try {
@@ -108,14 +108,14 @@ public class Parser {
             }
             return new AddEventCommand(description, fromDate, toDate);
         } catch(ArrayIndexOutOfBoundsException e) {
-            throw (new NotEnoughArgumentsException("OOPS!!! Event requires a start time and an end time."));
+            throw new NotEnoughArgumentsException("OOPS!!! Event requires a start time and an end time.");
         }
     }
 
     private static MarkCommand parseMarkCommand(String fullCommand) throws NotEnoughArgumentsException {
         String info = fullCommand.substring(4).trim();
         if (info.isEmpty()) {
-            throw (new TaskNoDescriptionException("Please specify a task number to mark."));
+            throw new TaskNoDescriptionException("Please specify a task number to mark.");
         }
         int taskNumber = Integer.parseInt(info);
         return new MarkCommand(taskNumber, true);
@@ -124,7 +124,7 @@ public class Parser {
     private static MarkCommand parseUnmarkCommand(String fullCommand) throws NotEnoughArgumentsException {
         String info = fullCommand.substring(6).trim();
         if (info.isEmpty()) {
-            throw (new TaskNoDescriptionException("Please specify a task number to unmark."));
+            throw new TaskNoDescriptionException("Please specify a task number to unmark.");
         }
         int taskNumber = Integer.parseInt(info);
         return new MarkCommand(taskNumber, false);
@@ -133,7 +133,7 @@ public class Parser {
     private static DeleteCommand parseDeleteCommand(String fullCommand) throws NotEnoughArgumentsException {
         String info = fullCommand.substring(6).trim();
         if (info.isEmpty()) {
-            throw (new TaskNoDescriptionException("Please specify a task number to delete."));
+            throw new TaskNoDescriptionException("Please specify a task number to delete.");
         }
         int taskNumber = Integer.parseInt(info);
         return new DeleteCommand(taskNumber);
@@ -142,7 +142,7 @@ public class Parser {
     private static FindCommand parseFindCommand(String fullCommand) throws NotEnoughArgumentsException {
         String info = fullCommand.substring(4).trim();
         if (info.isEmpty()) {
-            throw (new TaskNoDescriptionException("Please enter a keyword that you are looking for."));
+            throw new TaskNoDescriptionException("Please enter a keyword that you are looking for.");
         }
         return new FindCommand(info);
     }

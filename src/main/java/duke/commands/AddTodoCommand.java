@@ -7,15 +7,15 @@ import duke.Ui;
 import java.io.IOException;
 
 /**
- * This is a command to add a Todo Task to Duke
+ * This is a command to add a Todo Task to Duke.
  */
 public class AddTodoCommand extends AddCommand {
     private String description;
 
     /**
-     * Constructor for AddTodoCommand class
+     * Constructor for AddTodoCommand class.
      *
-     * @param description the description of the Todo Task created
+     * @param description the description of the Todo Task created.
      */
     public AddTodoCommand(String description) {
         super("T");
@@ -23,11 +23,11 @@ public class AddTodoCommand extends AddCommand {
     }
 
     /**
-     * Adds a Todo Task into a TaskList
+     * Adds a Todo Task into a TaskList.
      *
-     * @param taskList the TaskList storing all Task
-     * @param ui the Ui for handling inputs/outputs
-     * @param storage the Storage responsible for reading/writing data
+     * @param taskList the TaskList storing all Task.
+     * @param ui the Ui for handling inputs/outputs.
+     * @param storage the Storage responsible for reading/writing data.
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
@@ -41,10 +41,10 @@ public class AddTodoCommand extends AddCommand {
     }
 
     /**
-     * Checks if the given Object equals to this
+     * Checks if the given Object equals to this.
      *
-     * @param o the Object being compared
-     * @return true if o is an instance of this and has the same description
+     * @param o the Object being compared.
+     * @return true if o is an instance of this and has the same description.
      */
     @Override
     public boolean equals(Object o) {
@@ -56,10 +56,6 @@ public class AddTodoCommand extends AddCommand {
         }
 
         AddTodoCommand c = (AddTodoCommand) o;
-        if (this.description.equals(c.description)) {
-            return true;
-        } else {
-            return false;
-        }
+        return this.description.equals(c.description);
     }
 }

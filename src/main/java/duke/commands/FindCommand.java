@@ -5,15 +5,15 @@ import duke.TaskList;
 import duke.Ui;
 
 /**
- * This is a command to only list out task that contains the keyword
+ * This is a command to only list out task that contains the keyword.
  */
 public class FindCommand extends Command {
     private String keyword;
 
     /**
-     * Constructor for FindCommand class
+     * Constructor for FindCommand class.
      *
-     * @param keyword the keyword checked when filtering through tasks
+     * @param keyword the keyword checked when filtering through tasks.
      */
     public FindCommand(String keyword) {
         super();
@@ -21,9 +21,9 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Checks if Duke should terminate after this command
+     * Checks if Duke should terminate after this command.
      *
-     * @return false
+     * @return false.
      */
     @Override
     public boolean isExit() {
@@ -31,11 +31,11 @@ public class FindCommand extends Command {
     }
 
     /**
-     * list out the tasks that contains keyword
+     * list out the tasks that contains keyword.
      *
-     * @param taskList the TaskList containing all the task
-     * @param ui the Ui responsible for interacting with the user
-     * @param storage the Storage responsible for reading and writing data
+     * @param taskList the TaskList containing all the task.
+     * @param ui the Ui responsible for interacting with the user.
+     * @param storage the Storage responsible for reading and writing data.
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
@@ -43,10 +43,10 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Checks if the given Object equals to this
+     * Checks if the given Object equals to this.
      *
-     * @param o the Object being checked
-     * @return true if o is an instance of this
+     * @param o the Object being checked.
+     * @return true if o is an instance of this.
      */
     @Override
     public boolean equals(Object o) {
