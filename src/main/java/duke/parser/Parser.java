@@ -33,6 +33,7 @@ public class Parser {
      * @return A command to be executed.
      */
     public static Command parseCommand(String userInput) {
+        assert userInput.length() != 0 : "string should not be empty";
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             // incorrect command
@@ -60,14 +61,14 @@ public class Parser {
         case DeadlineCommand.COMMAND_WORD:
             return prepareDeadline(arguments);
 
-        case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
-
         case TodoCommand.COMMAND_WORD:
             return prepareTodo(arguments);
 
         case FindCommand.COMMAND_WORD:
             return prepareFind(arguments);
+
+        case ExitCommand.COMMAND_WORD:
+            return new ExitCommand();
 
         default:
             return new InvalidCommand();
@@ -194,7 +195,6 @@ public class Parser {
                 String desc = parseDescription(args, "event");
                 LocalDate start = parseArgsAsLocalDate(segments[1].split(" /to")[0]);
                 LocalDate end = parseArgsAsLocalDate(segments[1].split("/to ")[1]);
-                System.out.println(desc);
                 Object[] returnArr = {desc, start, end};
                 return returnArr;
             } catch (DukeException e) {

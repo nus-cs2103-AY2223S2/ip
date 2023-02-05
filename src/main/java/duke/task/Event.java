@@ -7,11 +7,11 @@ import java.time.format.DateTimeFormatter;
  * Represents an Event Task.
  */
 public class Event extends Task {
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd MMM yyyy");
     /** Start date of this Event */
     protected LocalDate start;
     /** End date of this Event */
     protected LocalDate end;
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd MMM yyyy");
 
     /**
      * Constructor to initialize an Event.

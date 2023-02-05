@@ -1,11 +1,9 @@
 package duke.commands;
 
-import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.TextUi;
-import org.w3c.dom.Text;
 
 /**
  * Represents an unmark command.

@@ -30,6 +30,9 @@ public class DukeApp extends Application {
     private Scene scene;
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private String WELCOME_MSG = "Hello from Duke!\nWhat can I do for you?";
+    private String FONT_NAME = "Arial";
+    private int FONT_SIZE = 12;
 
 
     @Override
@@ -42,8 +45,8 @@ public class DukeApp extends Application {
 
         userInput = new TextField();
         sendButton = new Button("Send");
-        userInput.setFont(new Font("Arial", 12));
-        sendButton.setFont(new Font("Arial", 12));
+        userInput.setFont(new Font(FONT_NAME, FONT_SIZE));
+        sendButton.setFont(new Font(FONT_NAME, FONT_SIZE));
 
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
@@ -67,10 +70,9 @@ public class DukeApp extends Application {
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
 
-        // You will need to import `javafx.scene.layout.Region` for this.
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
-        Label firstLabel = new Label("Hello from Duke!\nWhat can I do for you?");
+        Label firstLabel = new Label(WELCOME_MSG);
         DialogBox firstDialogBox = DialogBox.getDukeDialog(firstLabel, new ImageView(duke));
         dialogContainer.getChildren().add(firstDialogBox);
 
@@ -98,7 +100,6 @@ public class DukeApp extends Application {
         });
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
-        //Part 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
         });
@@ -119,7 +120,6 @@ public class DukeApp extends Application {
      * @return a label with the specified text that has word wrap enabled.
      */
     private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);
 
@@ -134,6 +134,7 @@ public class DukeApp extends Application {
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
+        assert userInput.getText().length() != 0 : "string should not be empty";
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
@@ -146,6 +147,7 @@ public class DukeApp extends Application {
      * Replace this stub with your completed method.
      */
     private String getResponse(String input) {
+        assert input.length() != 0 : "input should not be empty";
         Command command = new Parser().parseCommand(input);
         return command.execute(taskList, storage, ui);
     }
