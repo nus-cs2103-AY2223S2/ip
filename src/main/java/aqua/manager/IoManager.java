@@ -6,7 +6,7 @@ import java.util.function.Supplier;
 
 import aqua.exception.IllegalSyntaxException;
 import aqua.exception.LoadException;
-import aqua.exception.ProcedureExecutionException;
+import aqua.exception.ProcedureException;
 import aqua.util.Kaomoji;
 import javafx.application.Platform;
 import javafx.scene.Parent;
@@ -97,7 +97,7 @@ public class IoManager {
             throw ex;
         } catch (IllegalSyntaxException syntaxEx) {
             return String.format(EXCEPTION_FORMAT_SYNTAX, ex.getMessage());
-        } catch (ProcedureExecutionException cmdExeEx) {
+        } catch (ProcedureException cmdExeEx) {
             return String.format(EXCEPTION_FORMAT_EXECUTION, ex.getMessage());
         } catch (LoadException loadEx) {
             return String.format(EXCEPTION_FORMAT_LOAD, ex.getMessage());

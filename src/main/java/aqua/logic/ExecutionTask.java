@@ -1,7 +1,7 @@
 package aqua.logic;
 
 import aqua.exception.IllegalSyntaxException;
-import aqua.exception.ProcedureExecutionException;
+import aqua.exception.ProcedureException;
 import aqua.manager.LogicManager;
 import javafx.concurrent.Task;
 
@@ -40,11 +40,11 @@ public abstract class ExecutionTask<T> extends Task<Void> {
      * @return the result of the execution.
      * @throws IllegalSyntaxException if the argument given contains invalid
      *      syntax.
-     * @throws ProcedureExecutionException - if the task failed to execute
+     * @throws ProcedureException - if the task failed to execute
      *      completely.
      */
     protected abstract T process(ArgumentMap args, LogicManager manager)
-            throws IllegalSyntaxException, ProcedureExecutionException;
+            throws IllegalSyntaxException, ProcedureException;
 
 
     /**
@@ -53,10 +53,10 @@ public abstract class ExecutionTask<T> extends Task<Void> {
      * @return the output of the execution.
      * @throws IllegalSyntaxException if the argument given contains invalid
      *      syntax.
-     * @throws ProcedureExecutionException if the task failed to execute
+     * @throws ProcedureException if the task failed to execute
      *      completely.
      */
-    public T process() throws IllegalSyntaxException, ProcedureExecutionException {
+    public T process() throws IllegalSyntaxException, ProcedureException {
         return process(args, manager);
     }
 
@@ -67,11 +67,11 @@ public abstract class ExecutionTask<T> extends Task<Void> {
      * @return the String result message to be displayed.
      * @throws IllegalSyntaxException if the argument given contains invalid
      *      syntax.
-     * @throws ProcedureExecutionException if the task failed to execute
+     * @throws ProcedureException if the task failed to execute
      *      completely.
      */
     @Override
-    protected Void call() throws IllegalSyntaxException, ProcedureExecutionException {
+    protected Void call() throws IllegalSyntaxException, ProcedureException {
         process();
         return null;
     }

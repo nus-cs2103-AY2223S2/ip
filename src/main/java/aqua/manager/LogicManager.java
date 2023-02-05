@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 import aqua.exception.IllegalSyntaxException;
 import aqua.exception.LoadException;
-import aqua.exception.ProcedureExecutionException;
+import aqua.exception.ProcedureException;
 import aqua.logic.CommandLineInput;
 import aqua.logic.parser.ArgumentParser;
 import aqua.logic.parser.CommandLineInputParser;
@@ -54,7 +54,7 @@ public class LogicManager implements Loadable {
                 String line = scanner.nextLine();
                 parser.parse(line).getService(this).process();
             }
-        } catch (IllegalSyntaxException | ProcedureExecutionException ex) {
+        } catch (IllegalSyntaxException | ProcedureException ex) {
             throw new LoadException(ex);
         } catch (FileNotFoundException fnfEx) {
             // no save data just return

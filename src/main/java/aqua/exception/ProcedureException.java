@@ -1,16 +1,16 @@
 package aqua.exception;
 
 /** Signals that an error has occured while executing a set procedure. */
-public class ProcedureExecutionException extends Exception {
+public class ProcedureException extends Exception {
     /** Constructs a ProcedureExecutionException without any message or cause. */
-    public ProcedureExecutionException() {}
+    public ProcedureException() {}
 
     /**
      * Constructs a ProcedureExecutionException with the specified message.
      *
      * @param msg - the message of the exception.
      */
-    public ProcedureExecutionException(String msg) {
+    public ProcedureException(String msg) {
         super(msg);
     }
 
@@ -19,7 +19,7 @@ public class ProcedureExecutionException extends Exception {
      *
      * @param cause - the cause of the exception.
      */
-    public ProcedureExecutionException(Throwable cause) {
+    public ProcedureException(Throwable cause) {
         super(cause);
     }
 
@@ -32,7 +32,7 @@ public class ProcedureExecutionException extends Exception {
      */
 
 
-    public ProcedureExecutionException(String msg, Throwable cause) {
+    public ProcedureException(String msg, Throwable cause) {
         super(msg, cause);
     }
 }

@@ -2,7 +2,7 @@ package aqua.logic.command;
 
 import aqua.aquatask.AquaTask;
 import aqua.exception.IllegalSyntaxException;
-import aqua.exception.ProcedureExecutionException;
+import aqua.exception.ProcedureException;
 import aqua.logic.ArgumentMap;
 import aqua.logic.ExecutionDisplayerTask;
 import aqua.logic.ExecutionService;
@@ -58,7 +58,7 @@ public class MarkTaskCommand extends CommandController {
 
 
     private AquaTask markTask(ArgumentMap args, LogicManager manager)
-                throws IllegalSyntaxException, ProcedureExecutionException {
+                throws IllegalSyntaxException, ProcedureException {
         try {
             // get index String
             String indexString = args.getMainInput().filter(num -> !num.isBlank())
@@ -72,7 +72,7 @@ public class MarkTaskCommand extends CommandController {
         } catch (NumberFormatException numEx) {
             throw new IllegalSyntaxException("Task number given was not an integer");
         } catch (IndexOutOfBoundsException oobEx) {
-            throw new ProcedureExecutionException(
+            throw new ProcedureException(
                     "The task number given is out of bounds of my task counting capabilities");
         }
     }
@@ -89,7 +89,7 @@ public class MarkTaskCommand extends CommandController {
 
         @Override
         public AquaTask process(ArgumentMap args, LogicManager manager)
-                    throws IllegalSyntaxException, ProcedureExecutionException {
+                    throws IllegalSyntaxException, ProcedureException {
             return markTask(args, manager);
         }
     }
@@ -106,7 +106,7 @@ public class MarkTaskCommand extends CommandController {
 
         @Override
         protected AquaTask process(ArgumentMap args, LogicManager manager)
-                    throws IllegalSyntaxException, ProcedureExecutionException {
+                    throws IllegalSyntaxException, ProcedureException {
             return markTask(args, manager);
         }
 

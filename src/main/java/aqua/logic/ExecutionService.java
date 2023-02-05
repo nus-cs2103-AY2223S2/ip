@@ -3,7 +3,7 @@ package aqua.logic;
 import java.util.Optional;
 
 import aqua.exception.IllegalSyntaxException;
-import aqua.exception.ProcedureExecutionException;
+import aqua.exception.ProcedureException;
 import javafx.concurrent.Service;
 
 
@@ -75,7 +75,7 @@ public abstract class ExecutionService extends Service<Void> {
      * @throws ProcedureExecutionExecution if the task fail to execute
      *      completely.
      */
-    public void process() throws IllegalSyntaxException, ProcedureExecutionException {
+    public void process() throws IllegalSyntaxException, ProcedureException {
         task.process();
     }
 
