@@ -10,6 +10,7 @@ import exceptions.InvalidDateFormatException;
  * This class is used to represent the Deadline task.
  */
 public class Deadline extends Task {
+    private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
     protected LocalDateTime by;
 
     /**
@@ -19,8 +20,6 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String by) {
         super(description);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-
         String[] temp = by.split(" ");
         if (temp.length == 1) {
             by += " 0000";

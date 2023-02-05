@@ -25,9 +25,10 @@ public class Ui {
     protected static final String UNDONE_TASK = "Nice! I've marked this task as not done yet:";
     protected static final String DELETED_TASK = "Noted. I've removed this task:";
     protected static final String ADDED_TASK = "Got it. I've added this task:";
-    String output;
 
     private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+    private String output;
 
     /**
      * Constructor for the UI.

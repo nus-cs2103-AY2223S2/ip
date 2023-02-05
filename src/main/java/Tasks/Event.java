@@ -10,6 +10,7 @@ import exceptions.InvalidDateFormatException;
  * This class is used to represent an Event task.
  */
 public class Event extends Task {
+    private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
     protected LocalDateTime from;
     protected LocalDateTime until;
 
@@ -21,7 +22,6 @@ public class Event extends Task {
      */
     public Event(String description, String from, String until) {
         super(description);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
         String[] temp = from.split(" ");
         if (temp.length == 1) {
             from += " 0000";

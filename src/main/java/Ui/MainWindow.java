@@ -31,6 +31,10 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+
+    /**
+     * Initialise the MainWindow.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -56,8 +60,15 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
-        if (Parser.parseCommand(input) instanceof EndCommand) {
-            PauseTransition delay = new PauseTransition(Duration.seconds(1));
+        checkIfClosePlatform(input);
+    }
+
+    /**
+     * Checks if the user input provided is correct before closing the platform.
+     */
+    private void checkIfClosePlatform(String userInput) {
+        if (Parser.parseCommand(userInput) instanceof EndCommand) {
+            PauseTransition delay = new PauseTransition(Duration.seconds(2));
             delay.setOnFinished(event -> Platform.exit());
             delay.play();
         }
