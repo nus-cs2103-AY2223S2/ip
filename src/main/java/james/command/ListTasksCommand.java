@@ -2,16 +2,16 @@ package james.command;
 
 import james.JamesException;
 import james.task.TaskList;
-import james.ui.UI;
+import james.ui.Ui;
 
 /**
  * The command to list all tasks in the task list.
  */
-public class AddListCommand extends Command {
-    public AddListCommand() {
+public class ListTasksCommand extends Command {
+    public ListTasksCommand() {
     }
 
-    public void assign(TaskList taskList, UI ui) {
+    public void assign(TaskList taskList, Ui ui) {
         super.assign(taskList, ui);
     }
 
@@ -22,7 +22,7 @@ public class AddListCommand extends Command {
 
     @Override
     public boolean equals(Object obj) {
-        return obj instanceof AddListCommand;
+        return obj instanceof ListTasksCommand;
     }
 
 

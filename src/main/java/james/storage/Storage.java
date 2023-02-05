@@ -49,15 +49,15 @@ public class Storage {
             while (sc.hasNextLine()) {
                 String[] task = sc.nextLine().split(" \\| ");
                 switch (task[0]) {
-                    case "T":
-                        taskList.addToTaskList(new ToDo(task[2]));
-                        break;
-                    case "D":
-                        taskList.addToTaskList(new Deadline(task[2], task[3]));
-                        break;
-                    case "E":
-                        taskList.addToTaskList(new Event(task[2], task[3], task[4]));
-                        break;
+                case "T":
+                    taskList.addToTaskList(new ToDo(task[2]));
+                    break;
+                case "D":
+                    taskList.addToTaskList(new Deadline(task[2], task[3]));
+                    break;
+                case "E":
+                    taskList.addToTaskList(new Event(task[2], task[3], task[4]));
+                    break;
                 }
                 if (task[1].equals("1")) {
                     taskList.markTask(taskList.getTaskList().size() - 1);

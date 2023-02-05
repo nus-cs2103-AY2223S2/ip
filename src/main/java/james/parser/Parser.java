@@ -4,7 +4,7 @@ import james.JamesException;
 import james.command.FindCommand;
 import james.command.AddDeadlineCommand;
 import james.command.AddEventCommand;
-import james.command.AddListCommand;
+import james.command.ListTasksCommand;
 import james.command.AddToDoCommand;
 import james.command.AddMarkCommand;
 import james.command.AddUnmarkCommand;
@@ -77,25 +77,24 @@ public class Parser {
 
 
     public Command parseCommand(String input) throws JamesException {
-                if (input.equals("list")) {
-                    return new AddListCommand();
-                } else if (input.startsWith("mark")) {
-                    return new AddMarkCommand(Integer.parseInt(input.split(" ")[1]) - 1);
-                } else if (input.startsWith("unmark")) {
-                    return new AddUnmarkCommand(Integer.parseInt(input.split(" ")[1]) - 1);
-                } else if (input.startsWith("todo")) {
-                    return new AddToDoCommand(parseToDoTask(input));
-                } else if (input.startsWith("deadline")) {
-                    return new AddDeadlineCommand(parseDeadlineTask(input));
-                } else if (input.startsWith("event")) {
-                    return new AddEventCommand(parseEventTask(input));
-                } else if (input.startsWith("delete")) {
-                    return new DeleteCommand(Integer.parseInt(input.split(" ")[1]) - 1);
-                } else if (input.startsWith("find")) {
-                    return new FindCommand(parseTask(input));
-                } else {
-                    throw new JamesException("OOPS!!! I'm sorry, but I don't know what that means :-(");
-                }
-
+        if (input.equals("list")) {
+            return new ListTasksCommand();
+        } else if (input.startsWith("mark")) {
+            return new AddMarkCommand(Integer.parseInt(input.split(" ")[1]) - 1);
+        } else if (input.startsWith("unmark")) {
+            return new AddUnmarkCommand(Integer.parseInt(input.split(" ")[1]) - 1);
+        } else if (input.startsWith("todo")) {
+            return new AddToDoCommand(parseToDoTask(input));
+        } else if (input.startsWith("deadline")) {
+            return new AddDeadlineCommand(parseDeadlineTask(input));
+        } else if (input.startsWith("event")) {
+            return new AddEventCommand(parseEventTask(input));
+        } else if (input.startsWith("delete")) {
+            return new DeleteCommand(Integer.parseInt(input.split(" ")[1]) - 1);
+        } else if (input.startsWith("find")) {
+            return new FindCommand(parseTask(input));
+        } else {
+            throw new JamesException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+        }
     }
 }

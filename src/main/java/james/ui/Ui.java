@@ -11,7 +11,7 @@ import java.util.Scanner;
  * The user interface class.
  * Handles all user's input and output.
  */
-public class UI {
+public class Ui {
     private Scanner scan = new Scanner(System.in);
 
     /**
