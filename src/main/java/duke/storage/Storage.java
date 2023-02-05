@@ -77,7 +77,8 @@ public class Storage {
     public void mark(int index) {
         List<String> tasks = getSavedTasksAsList();
         StringBuilder sb = new StringBuilder(tasks.get(index));
-        sb.setCharAt(4, 'X');
+        int markIndex = 4;
+        sb.setCharAt(markIndex, 'X');
         replaceLineInFile(index, sb.toString());
     }
 
@@ -89,7 +90,8 @@ public class Storage {
     public void unmark(int index) {
         List<String> tasks = getSavedTasksAsList();
         StringBuilder sb = new StringBuilder(tasks.get(index));
-        sb.setCharAt(4, ' ');
+        int markIndex = 4;
+        sb.setCharAt(markIndex, ' ');
         replaceLineInFile(index, sb.toString());
     }
 

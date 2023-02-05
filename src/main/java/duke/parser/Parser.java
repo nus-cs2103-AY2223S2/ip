@@ -77,27 +77,34 @@ public class Parser {
         CommandCode commandCode = getCommand(input);
         switch (commandCode) {
         case TODO:
-            return prepareTodo(input.substring(4).trim());
+            int todoLen = 4;
+            return prepareTodo(input.substring(todoLen).trim());
         case DEADLINE:
-            return prepareDeadline(input.substring(8).trim());
+            int deadlineLen = 8;
+            return prepareDeadline(input.substring(deadlineLen).trim());
         case EVENT:
-            return prepareEvent(input.substring(5).trim());
+            int eventLen = 5;
+            return prepareEvent(input.substring(eventLen).trim());
         case DELETE:
-            return prepareDelete(input.substring(6).trim());
+            int deleteLen = 6;
+            return prepareDelete(input.substring(deleteLen).trim());
         case MARK:
-            return prepareMark(input.substring(4).trim());
+            int markLen = 4;
+            return prepareMark(input.substring(markLen).trim());
         case UNMARK:
-            return prepareUnmark(input.substring(6).trim());
+            int unmarkLen = 6;
+            return prepareUnmark(input.substring(unmarkLen).trim());
         case FIND:
-            return prepareFind(input.substring(4).trim());
+            int findLen = 4;
+            return prepareFind(input.substring(findLen).trim());
         case LIST:
-            return new ListCommand();
+            return prepareList();
         case HELP:
-            return new HelpCommand();
+            return prepareHelp();
         case EXIT:
-            return new ExitCommand();
+            return prepareExit();
         default:
-            return new InvalidCommand();
+            return prepareInvalid();
         }
     }
 
@@ -182,6 +189,23 @@ public class Parser {
     private Command prepareFind(String args) {
         return new FindCommand(args);
     }
+
+    private Command prepareList() {
+        return new ListCommand();
+    }
+
+    private Command prepareHelp() {
+        return new HelpCommand();
+    }
+
+    private Command prepareExit() {
+        return new ExitCommand();
+    }
+
+    private Command prepareInvalid() {
+        return new InvalidCommand();
+    }
+
 
     private void checkParamExists(Boolean isExists, String errorMessage) throws DukeException {
         if (!isExists) {
