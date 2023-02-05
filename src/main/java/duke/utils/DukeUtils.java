@@ -26,6 +26,9 @@ public abstract class DukeUtils {
      * @param printer Prints to the UI.
      */
     public static void handleInput(String input, TaskList tasks, Parser parser, Consumer<String> printer) {
+        assert parser != null;
+        assert printer != null;
+
         String message;
         try {
             message = parser.getCommand(input).run(input, tasks);

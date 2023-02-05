@@ -32,6 +32,11 @@ public class Cli implements Ui {
      */
     public Cli(PrintStream printStream, InputStream inputStream, BiConsumer<String, Consumer<String>> inputHandler,
                Function<String, Boolean> exitConditionChecker) {
+        assert printStream != null;
+        assert inputStream != null;
+        assert inputHandler != null;
+        assert exitConditionChecker != null;
+
         this.printStream = printStream;
         this.scanner = new Scanner(inputStream);
         this.inputHandler = inputHandler;

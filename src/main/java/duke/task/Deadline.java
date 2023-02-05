@@ -25,6 +25,8 @@ public class Deadline extends Task {
     public Deadline(boolean isDone, String description, LocalDateTime cutoff) {
         super(isDone, description);
 
+        assert cutoff != null;
+
         this.cutoff = cutoff;
     }
 
@@ -46,28 +48,6 @@ public class Deadline extends Task {
         return new Deadline(isDone, formattedArgs[2], cutoff);
     }
 
-    private static void validateNoMissingData(String[] args) throws DukeException {
-        if (args.length != 4) {
-            throw new DukeException("A deadline in storage has missing data!");
-        }
-    }
-
-    private static boolean extractValidIsDone(String[] formattedArgs) throws DukeException {
-        if (!BooleanUtils.isBooleanStr(formattedArgs[1])) {
-            throw new DukeException("A deadline in storage has an incorrect data type!");
-        }
-
-        return Boolean.parseBoolean(formattedArgs[1]);
-    }
-
-    private static LocalDateTime extractValidCutoff(String[] formattedArgs) throws DukeException {
-        try {
-            return LocalDateTime.parse(formattedArgs[3]);
-        } catch (DateTimeParseException e) {
-            throw new DukeException("A deadline in storage has an incorrectly formatted cutoff date and time!");
-        }
-    }
-
     @Override
     public String getStorageStr() {
         return String.format("%c %c %s %c %s", SYMBOL, FIELD_DIVIDER, super.getStorageStr(), FIELD_DIVIDER,
@@ -84,5 +64,35 @@ public class Deadline extends Task {
     @Override
     protected Task createCopy() {
         return new Deadline(isDone(), getDescription(), cutoff);
+    }
+
+    private static void validateNoMissingData(String[] args) throws DukeException {
+        assert args != null;
+
+        if (args.length != 4) {
+            throw new DukeException("A deadline in storage has missing data!");
+        }
+    }
+
+    private static boolean extractValidIsDone(String[] formattedArgs) throws DukeException {
+        assert formattedArgs != null;
+        assert formattedArgs.length >= 2;
+
+        if (!BooleanUtils.isBooleanStr(formattedArgs[1])) {
+            throw new DukeException("A deadline in storage has an incorrect data type!");
+        }
+
+        return Boolean.parseBoolean(formattedArgs[1]);
+    }
+
+    private static LocalDateTime extractValidCutoff(String[] formattedArgs) throws DukeException {
+        assert formattedArgs != null;
+        assert formattedArgs.length >= 4;
+
+        try {
+            return LocalDateTime.parse(formattedArgs[3]);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("A deadline in storage has an incorrectly formatted cutoff date and time!");
+        }
     }
 }

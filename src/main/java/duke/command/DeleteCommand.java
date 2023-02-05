@@ -18,6 +18,8 @@ public class DeleteCommand implements Command {
      */
     @Override
     public String run(String input, TaskList tasks) throws DukeException {
+        assert tasks != null;
+
         int index = extractValidIndex(input, tasks);
         Task task = tasks.removeAt(index);
 
@@ -25,6 +27,8 @@ public class DeleteCommand implements Command {
     }
 
     private int extractValidIndex(String input, TaskList tasks) throws DukeException {
+        assert input != null;
+
         String argStr = input.replaceFirst("delete", "").trim();
 
         validateNonEmptyArg(argStr);
@@ -36,12 +40,16 @@ public class DeleteCommand implements Command {
     }
 
     private void validateNonEmptyArg(String argStr) throws DukeException {
+        assert argStr != null;
+
         if (argStr.isEmpty()) {
             throw new DukeException("The task to be deleted must be specified!");
         }
     }
 
     private int extractIntegerArg(String argStr) throws DukeException {
+        assert argStr != null;
+
         try {
             return Integer.parseInt(argStr) - 1;
         } catch (NumberFormatException e) {
@@ -50,12 +58,17 @@ public class DeleteCommand implements Command {
     }
 
     private void validateIndexRange(int index, TaskList tasks) throws DukeException {
+        assert tasks != null;
+
         if (index >= tasks.size() || index < 0) {
             throw new DukeException("The task to be deleted doesn't exist!");
         }
     }
 
     private String getMessage(TaskList tasks, Task task) {
+        assert tasks != null;
+        assert task != null;
+
         return String.format("I've removed this task:\n  %s\nNow you have %d tasks in the list.", task.toString(),
                 tasks.size());
     }

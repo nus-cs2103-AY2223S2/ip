@@ -11,6 +11,8 @@ public abstract class BooleanUtils {
      * @return True if a string is a boolean in string form. False otherwise.
      */
     public static boolean isBooleanStr(String str) {
+        assert str != null;
+
         return str.equals("true") || str.equals("false");
     }
 }

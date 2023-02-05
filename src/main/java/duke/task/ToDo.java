@@ -53,12 +53,17 @@ public class ToDo extends Task {
     }
 
     private static void validateNoMissingData(String[] args) throws DukeException {
+        assert args != null;
+
         if (args.length != 3) {
             throw new DukeException("A to-do in storage has missing data!");
         }
     }
 
     private static boolean extractValidIsDone(String[] formattedArgs) throws DukeException {
+        assert formattedArgs != null;
+        assert formattedArgs.length >= 2;
+
         if (!BooleanUtils.isBooleanStr(formattedArgs[1])) {
             throw new DukeException("A to-do in storage has an incorrect data type!");
         }

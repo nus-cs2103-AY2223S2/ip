@@ -25,6 +25,8 @@ public class TaskList {
      * @throws DukeException Indicates an error in loading from storage or creating the storage.
      */
     public TaskList(Storage storage) throws DukeException {
+        assert storage != null;
+
         this.storage = storage;
 
         if (storage.doesExist()) {
@@ -72,6 +74,8 @@ public class TaskList {
      * @throws DukeException Indicates failure to write to storage.
      */
     public void add(Task task) throws DukeException {
+        assert task != null;
+
         tasks.add(task);
 
         try {
@@ -111,6 +115,8 @@ public class TaskList {
      * @throws DukeException Indicates failure to write to storage.
      */
     public void update(int index, Task task) throws DukeException {
+        assert task != null;
+
         Task oldTask = tasks.get(index);
         tasks.set(index, task);
 
@@ -139,6 +145,9 @@ public class TaskList {
     }
 
     private Task createTask(String[] args) throws DukeException {
+        assert args != null;
+        assert args.length >= 1;
+
         switch (args[0]) {
         case "T":
             return ToDo.createFromStorage(args);

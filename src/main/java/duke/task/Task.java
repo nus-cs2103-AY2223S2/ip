@@ -66,6 +66,8 @@ public abstract class Task {
      * @return The string formatted to be suited for writing to storage.
      */
     protected static String formatStrForStorage(String str) {
+        assert str != null;
+
         return str.replace(Character.toString(FIELD_DIVIDER), FIELD_DIVIDER_SUBSTITUTE);
     }
 
@@ -77,6 +79,8 @@ public abstract class Task {
      * @return The strings with formatting from {@link duke.task.Task#formatStrForStorage} undone.
      */
     protected static String[] formatStrsFromStorage(String[] strs) {
+        assert strs != null;
+
         String[] formatted = new String[strs.length];
 
         for (int i = 0; i < strs.length; ++i) {
