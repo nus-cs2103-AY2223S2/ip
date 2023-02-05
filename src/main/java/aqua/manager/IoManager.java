@@ -8,10 +8,16 @@ import aqua.exception.IllegalSyntaxException;
 import aqua.exception.LoadException;
 import aqua.exception.ProcedureExecutionException;
 import aqua.util.Kaomoji;
+import javafx.application.Platform;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 
 /** Manager of inputs and outputs. */
 public class IoManager {
+    private static final String PATH_CSS = "/graphic/style.css";
+
     /** Greeting message. */
     private static final String MESSAGE_GREETING = String.join("\n",
             "Konaqua~~",
@@ -123,5 +129,19 @@ public class IoManager {
      */
     public void reply(String msg) {
         outputConsumer.accept(msg);
+    }
+
+
+    public void popup(Parent root) {
+        Platform.runLater(() -> showPopup(root));
+    }
+
+
+    private void showPopup(Parent root) {
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add(this.getClass().getResource(PATH_CSS).toString());
+        stage.setScene(scene);
+        stage.show();
     }
 }

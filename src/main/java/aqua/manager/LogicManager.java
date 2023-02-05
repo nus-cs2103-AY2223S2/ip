@@ -52,7 +52,7 @@ public class LogicManager implements Loadable {
             CommandLineInputParser parser = new CommandLineInputParser(new ArgumentParser());
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
-                parser.parse(line).getService(this, true).execute();
+                parser.parse(line).getService(this).process();
             }
         } catch (IllegalSyntaxException | ProcedureExecutionException ex) {
             throw new LoadException(ex);

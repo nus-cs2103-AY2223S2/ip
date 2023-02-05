@@ -1,8 +1,10 @@
 package aqua.logic.command;
 
 import aqua.logic.ArgumentMap;
+import aqua.logic.ExecutionDisplayerTask;
 import aqua.logic.ExecutionService;
 import aqua.logic.ExecutionTask;
+import aqua.manager.IoManager;
 import aqua.manager.LogicManager;
 import aqua.manager.TaskManager;
 import aqua.util.Kaomoji;
@@ -11,20 +13,30 @@ import aqua.util.Kaomoji;
 /** A {@code CommandController} to list {@code AquaTask}. */
 public class ListCommand extends CommandController {
     @Override
-    public ExecutionService getService(ArgumentMap args, LogicManager manager, boolean isLoading) {
+    public ExecutionService getService(ArgumentMap args, LogicManager manager) {
         return ExecutionService.of(new ExecutionTask<TaskManager>(args, manager) {
             @Override
             public TaskManager process(ArgumentMap args, LogicManager manager) {
                 return manager.getTaskManager();
             }
+        });
+    }
 
+
+    @Override
+    public ExecutionService getService(ArgumentMap args, LogicManager logicManager, IoManager ioManager) {
+        return ExecutionService.of(new ExecutionDisplayerTask<TaskManager>(args, logicManager, ioManager) {
+            @Override
+            public TaskManager process(ArgumentMap args, LogicManager manager) {
+                return manager.getTaskManager();
+            }
 
             @Override
-            public String formDisplayMessage(TaskManager taskManager, LogicManager manager) {
-                return String.format(String.join("\n",
+            protected void display(TaskManager taskManager, IoManager manager) {
+                manager.reply(String.format(String.join("\n",
                                 "Here is your task list " + Kaomoji.PLACING_DOWN,
                                 "%s"),
-                        getListMessage(taskManager));
+                        getListMessage(taskManager)));
             }
         });
     }

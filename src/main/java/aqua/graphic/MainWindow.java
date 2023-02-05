@@ -73,7 +73,9 @@ public class MainWindow extends UiComponent<VBox> {
      * @return the AppManager to run the app.
      */
     private AppManager initialiseAppManager(LogicManager logicManager) {
-        IoManager ioManager = new IoManager(this::getInput, this::displayReply);
+        IoManager ioManager = new IoManager(
+                this::getInput,
+                this::displayReply);
         return new AppManager(logicManager, ioManager);
     }
 

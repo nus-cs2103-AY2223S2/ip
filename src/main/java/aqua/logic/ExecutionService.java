@@ -11,7 +11,7 @@ import javafx.concurrent.Service;
  * Implementation of {@link Service} to handle the execution of its
  * encapsulated {@link ExecutionTask}.
  */
-public abstract class ExecutionService extends Service<String> {
+public abstract class ExecutionService extends Service<Void> {
     /** The task to dispatch. */
     private final ExecutionTask<?> task;
 
@@ -69,16 +69,14 @@ public abstract class ExecutionService extends Service<String> {
 
 
     /**
-     * Executes the encapsulated task on the same thread where the method is
-     * called.
+     * Executes the encapsulated task process.
      *
-     * @return the result message of the task's execution.
      * @throws IllegalSyntaxException if there are syntax errors.
      * @throws ProcedureExecutionExecution if the task fail to execute
      *      completely.
      */
-    public String execute() throws IllegalSyntaxException, ProcedureExecutionException {
-        return task.execute();
+    public void process() throws IllegalSyntaxException, ProcedureExecutionException {
+        task.process();
     }
 
 

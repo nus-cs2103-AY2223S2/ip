@@ -3,12 +3,14 @@ package aqua.manager;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.stream.Stream;
 
 import aqua.aquatask.AquaTask;
 import aqua.storage.Reloadable;
+import aqua.util.DateUtils;
 import aqua.util.FileUtils;
 
 /** Manager of tasks. */
@@ -56,6 +58,36 @@ public class TaskManager implements Reloadable {
      */
     public AquaTask delete(int taskNum) throws IndexOutOfBoundsException {
         return tasks.remove(taskNum);
+    }
+
+
+    /**
+     * Filters tasks that are within the time range specified. Tasks that do
+     * not have a start date are classified under unknown.
+     *
+     * @param start - the starting time of tasks to include.
+     * @param end - the ending time of the tasks to include.
+     * @return a {@code TaskFilterReport} containing data of the tasks
+     *      filtered.
+     */
+    public TaskFilterReport filterWithin(LocalDateTime start, LocalDateTime end) {
+        ArrayList<AquaTask> filtered = new ArrayList<>();
+        ArrayList<AquaTask> unknown = new ArrayList<>();
+        for (AquaTask task : tasks) {
+            if (!task.getEnd().isPresent()) {
+                unknown.add(task);
+                continue;
+            }
+            LocalDateTime taskEnd = task.getEnd().get();
+            LocalDateTime taskStart = taskEnd;
+            if (task.getStart().isPresent()) {
+                taskStart = task.getStart().get();
+            }
+            if (DateUtils.isIntersecting(taskStart, taskEnd, start, end)) {
+                filtered.add(task);
+            }
+        }
+        return new TaskFilterReport(filtered, unknown);
     }
 
 

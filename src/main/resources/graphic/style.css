@@ -84,7 +84,6 @@
 
 .scroll-bar .thumb {
     -fx-background-color : rgb(188, 165, 192);
-    -fx-background-insets : 2.0, 0.0, 0.0, 0.0;
     -fx-background-radius : 5.0;
 }
 
@@ -111,4 +110,72 @@
 .speech-bubble .speech-bubble-pointer-right {
     -fx-background-color: -bubble-fill-color;
     -fx-shape: "M 0 0 L 0 100 L 90 100 C 105 100 105 85 90 80 S 0 50 0 0 Z"
+}
+
+.schedule-date-box {
+    -fx-color : -fx-background;
+}
+
+
+.schedule-date-box:odd {
+    -fx-background-color : derive(-fx-color, -5%);
+}
+
+.schedule-date-box:even {
+    -fx-background-color : derive(-fx-color, -10%);
+}
+
+.schedule-box {
+    -fx-background-color: -fx-shadow-highlight-color, -fx-outer-border, -fx-inner-border, -fx-body-color;
+    -fx-background-insets: 1 1 0 1, 1, 2, 3;
+    -fx-background-radius : 10, 10, 9, 8;
+}
+
+.schedule-box:complete {
+    -fx-color: rgb(173, 216, 171);
+}
+
+.schedule-box:incomplete {
+    -fx-color: rgb(187, 213, 212);
+}
+
+.deadline-box {
+    -fx-background-color: -fx-shadow-highlight-color, -fx-outer-border, -fx-inner-border, -fx-body-color;
+    -fx-background-insets: 1 0 0 1, 1, 2, 3;
+    -fx-background-radius : 3, 3, 2, 1;
+    -fx-rotate: 45;
+}
+
+.deadline-box:complete {
+    -fx-color: rgb(173, 216, 171);
+}
+
+.deadline-box:incomplete {
+    -fx-color: rgb(216, 199, 171);
+}
+
+.schedule-box:hover,
+.deadline-box:hover {
+    -fx-color: -fx-hover-base;
+}
+
+
+
+.todo-label {
+    -fx-background-color: -fx-shadow-highlight-color, -fx-outer-border, -fx-inner-border, -fx-body-color;
+    -fx-background-insets: 1 1 0 1, 1, 2, 3;
+    -fx-background-radius : 10, 10, 9, 8;
+}
+
+.todo-label:complete {
+    -fx-color: rgb(173, 216, 171);
+}
+
+.todo-label:incomplete {
+    -fx-color: rgb(189, 169, 212);
+}
+
+.title {
+    -fx-font-size: 24;
+    -fx-font-weight: bold;
 }

@@ -2,6 +2,7 @@ package aqua.logic.command;
 
 import aqua.logic.ArgumentMap;
 import aqua.logic.ExecutionService;
+import aqua.manager.IoManager;
 import aqua.manager.LogicManager;
 
 
@@ -15,7 +16,7 @@ public enum Command {
     EVENT(new AddEventCommand()),
     DELETE(new DeleteCommand()),
     FIND(new FilterCommand()),
-    BYE(new ByeCommand());
+    VIEW(new ViewScheduleCommand());
 
 
     private final CommandController controller;
@@ -35,7 +36,7 @@ public enum Command {
      * @return the {@code ExecutionService} to execute.
      */
     public ExecutionService getService(ArgumentMap args, LogicManager manager) {
-        return controller.getService(args, manager, false);
+        return controller.getService(args, manager);
     }
 
 
@@ -44,11 +45,11 @@ public enum Command {
      *
      * @param args - the arguments for the command to work on.
      * @param manager - the {@code LogicManager} for the command to work on.
-     * @param isLoading - if the command is to be executed to load data.
+     * @param ioManager - the {@code IoManager} to display results through.
      * @return the {@code ExecutionService} to execute.
      */
-    public ExecutionService getService(ArgumentMap args, LogicManager manager, boolean isLoading) {
-        return controller.getService(args, manager, isLoading);
+    public ExecutionService getService(ArgumentMap args, LogicManager manager, IoManager ioManager) {
+        return controller.getService(args, manager, ioManager);
     }
 
 

@@ -1,6 +1,7 @@
 package aqua.logic;
 
 import aqua.logic.command.Command;
+import aqua.manager.IoManager;
 import aqua.manager.LogicManager;
 
 
@@ -41,10 +42,9 @@ public class CommandLineInput {
      * Returns the ExecutionService to execute the command.
      *
      * @param manager - the LogicManager for the command to work on.
-     * @param isLoading - if the command purpose is to load a previous state.
      * @return the ExecutionService of the command.
      */
-    public ExecutionService getService(LogicManager manager, boolean isLoading) {
-        return command.getService(args, manager, isLoading);
+    public ExecutionService getService(LogicManager manager, IoManager ioManager) {
+        return command.getService(args, manager, ioManager);
     }
 }

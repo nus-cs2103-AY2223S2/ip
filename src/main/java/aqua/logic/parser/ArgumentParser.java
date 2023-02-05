@@ -57,7 +57,9 @@ public class ArgumentParser implements Parser<ArgumentMap> {
             }
 
             // add tag(key) - value pair to map
-            inputMap.put(key, value);
+            if (!value.isBlank()) {
+                inputMap.put(key, value);
+            }
         } catch (NoSuchElementException noElmEx) {
             throw new IllegalSyntaxException("Parameter name disappeared!");
         }
