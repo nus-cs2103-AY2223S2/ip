@@ -1,8 +1,8 @@
 package duke;
-import duke.exception.DukeException;
 import duke.command.Command;
 import duke.data.TaskList;
 import duke.data.TypeOfTask;
+import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.ui.Ui;
@@ -45,11 +45,11 @@ public class Duke {
     public void run() throws Exception {
         ui.displayWelcome();
         boolean isExit = false;
-        while(!isExit) {
+        while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
                 Command command = this.parser.parse(fullCommand);
-                command.execute(this.taskList,this.ui,this.storage);
+                command.execute(this.taskList, this.ui, this.storage);
                 isExit = command.isExit();
             } catch (DukeException duke) {
                 System.out.println(duke.getMessage());

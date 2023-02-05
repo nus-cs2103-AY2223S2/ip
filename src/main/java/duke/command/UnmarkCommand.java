@@ -1,7 +1,7 @@
 package duke.command;
+import duke.action.Task;
 import duke.data.TaskList;
 import duke.data.TypeOfTask;
-import duke.action.Task;
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.ui.Ui;
@@ -33,7 +33,7 @@ public class UnmarkCommand extends Command {
             currentTask.unmarkAsDone();
             ui.displayResult(TypeOfTask.unmark, currentTask, taskList);
         } catch (Exception e) {
-            throw new DukeException(TypeOfTask.unmark,1);
+            throw new DukeException(TypeOfTask.unmark, 1);
         }
     }
 }

@@ -1,9 +1,11 @@
 package duke.action;
-import duke.data.TypeOfTask;
-import duke.exception.DukeException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+
+import duke.data.TypeOfTask;
+import duke.exception.DukeException;
+
 
 /**
  * Deadline class that tracks the start and end time for a defined task
@@ -11,10 +13,9 @@ import java.time.format.DateTimeFormatter;
  * @author Haiqel Bin Hanaffi (Acerizm)
  */
 public class Deadline extends Task {
+    private static final String desiredDateFormat = "MMM dd yyyy";
     private LocalDate date;
     private LocalTime time;
-    static private String DESIRED_DATE_FORMAT = "MMM dd yyyy";
-
     /**
      * Constructor that takes in the description of the task, date of the task and the time
      *
@@ -52,7 +53,8 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         //return "[D]" + super.getDescription() + " (by: " + this.day + ")";
-        String day = this.getDate().format(DateTimeFormatter.ofPattern(DESIRED_DATE_FORMAT));
-        return String.format("[D][%s] %s (by: %s %s)", super.getStatusIcon(), super.getDescription(), day, this.getTime().toString());
+        String day = this.getDate().format(DateTimeFormatter.ofPattern(desiredDateFormat));
+        return String.format("[D][%s] %s (by: %s %s)", super.getStatusIcon(),
+                super.getDescription(), day, this.getTime().toString());
     }
 }

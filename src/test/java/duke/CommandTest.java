@@ -1,4 +1,8 @@
 package duke;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
 
 import duke.action.Task;
 import duke.action.Todo;
@@ -8,10 +12,6 @@ import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.ui.Ui;
-import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Unit testing class for command testing

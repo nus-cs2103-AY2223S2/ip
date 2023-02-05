@@ -5,7 +5,8 @@ import java.util.List;
 import duke.action.Task;
 
 /**
- * Task List class stores the list of tasks that the user has specified. The class is also serializable for storing into memory.
+ * Task List class stores the list of tasks that the user has specified.
+ * The class is also serializable for storing into memory.
  * @author Haiqel Bin Hanaffi (Acerizm)
  */
 public class TaskList implements Serializable {
@@ -38,10 +39,10 @@ public class TaskList implements Serializable {
 
     /**
      * Adds task to the list of tasks
-     * @param Task Task object
+     * @param task Task object
      */
-    public void addTask(Task Task) {
-        list.add(Task);
+    public void addTask(Task task) {
+        list.add(task);
     }
 
     /**

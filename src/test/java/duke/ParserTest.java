@@ -1,10 +1,11 @@
 package duke;
-
-import duke.data.TypeOfTask;
-import duke.parser.Parser;
-import duke.exception.DukeException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import duke.data.TypeOfTask;
+import duke.exception.DukeException;
+import duke.parser.Parser;
+
 
 /**
  * duke.ParserTest class tests the functionality of parser with multiple different test cases

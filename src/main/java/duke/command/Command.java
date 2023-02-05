@@ -52,5 +52,5 @@ public abstract class Command {
      * @param storage Storage object
      * @throws DukeException When execute() fails due to errors during run time
      */
-    public abstract void execute(TaskList taskList,Ui ui,Storage storage) throws DukeException;
+    public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
 }

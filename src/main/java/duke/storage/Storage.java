@@ -1,7 +1,4 @@
 package duke.storage;
-import duke.data.TypeOfTask;
-import duke.action.Task;
-import duke.exception.DukeException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -10,20 +7,25 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import duke.action.Task;
+import duke.data.TypeOfTask;
+import duke.exception.DukeException;
+
+
 /**
  * Storage class that manages the loading and saving of the data before and after the program's execution.
  *
  * @author Haiqel Bin Hanaffi (Acerizm)
  */
 public class Storage {
-    String filePath;
+    private String filePath;
 
     /**
      * Default constructor. Constructor specifies hard codded file using relative path.
      */
     public Storage() {
-        this.filePath = "src" + File.separator + "main" + File.separator 
-                + "java" + File.separator + "duke" + File.separator 
+        this.filePath = "src" + File.separator + "main" + File.separator
+                + "java" + File.separator + "duke" + File.separator
                 + "data" + File.separator + "duke.txt";
     }
 
@@ -31,7 +33,7 @@ public class Storage {
      * constructor that accepts a custom and different filepath
      * @param filePath File path of the data
      */
-    public Storage(String filePath){
+    public Storage(String filePath) {
         this.filePath = filePath;
     }
 
@@ -45,12 +47,10 @@ public class Storage {
         try (ObjectInputStream load = new ObjectInputStream(new FileInputStream(this.filePath))) {
             taskList = (List<Task>) load.readObject();
             //return taskList;
-        } catch(Exception e) {
-//            System.out.println(e.getMessage());
-//            e.printStackTrace();
-            throw new DukeException(TypeOfTask.storage,0);
+        } catch (Exception e) {
+            throw new DukeException(TypeOfTask.storage, 0);
         } finally {
-            return taskList; 
+            return taskList;
         }
     }
 
@@ -61,7 +61,7 @@ public class Storage {
      */
     public void saveTasks(List<Task> taskList) throws DukeException {
         try (ObjectOutputStream save = new ObjectOutputStream(new FileOutputStream(this.filePath))) {
-            save.writeObject(taskList); 
+            save.writeObject(taskList);
         } catch (Exception e) {
             System.out.println(e);
             //e.printStackTrace();

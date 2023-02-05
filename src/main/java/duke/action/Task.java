@@ -1,10 +1,12 @@
 package duke.action;
-import duke.data.TypeOfTask;
-import duke.parser.Parser;
 import java.io.Serializable;
 
+import duke.data.TypeOfTask;
+import duke.parser.Parser;
+
 /**
- * Task class that tracks the description, completion status and type of task. This tasks has multiple subclasses: Deadline, Event and Todo
+ * Task class that tracks the description, completion status and type of task.
+ * This tasks has multiple subclasses: Deadline, Event and Todo
  * @author Haiqel Bin Hanaffi (Acerizm)
  */
 public class Task implements Serializable {
@@ -47,15 +49,15 @@ public class Task implements Serializable {
      * @return character format of task
      */
     public String getTypeOfTask() {
-        switch(this.type){
-            case deadline:
-                return "D";
-            case event:
-                return "E";
-            case todo:
-                return "T";
-            default:
-                return null;
+        switch(this.type) {
+        case deadline:
+            return "D";
+        case event:
+            return "E";
+        case todo:
+            return "T";
+        default:
+            return null;
         }
     }
 
