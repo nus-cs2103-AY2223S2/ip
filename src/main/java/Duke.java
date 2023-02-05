@@ -2,7 +2,7 @@ import duke.DukeException;
 import duke.Parser;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
+import duke.ui.Ui;
 
 /**
  * The main class that Duke is invoked on.
@@ -60,7 +60,6 @@ public class Duke {
      * @param args Unused.
      */
     public static void main(String[] args) {
-
         new Duke("tasks.txt").runDuke();
     }
 }

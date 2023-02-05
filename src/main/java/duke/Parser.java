@@ -1,5 +1,7 @@
 package duke;
 
+import duke.ui.Ui;
+
 /**
  * This is the class that parses the command sent to Duke.
  */
