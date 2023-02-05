@@ -21,8 +21,10 @@ public class Deadline extends Task {
 
     @Override
     public String toData() {
+        String[] dateTime = this.dueDate.toString().split("T");
+        String dueDateData = dateTime[0] + " " + dateTime[1].replace(":", "");
         String status = this.completed ? "1" : "0";
-        return "D | " + status + " | " + this.task + " | " + this.dueDate;
+        return "D | " + status + " | " + this.task + " | " + dueDateData;
     }
 
     @Override

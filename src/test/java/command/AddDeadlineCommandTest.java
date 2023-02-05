@@ -20,9 +20,9 @@ public class AddDeadlineCommandTest {
 
     @Test
     public void deadlineTest() {
-        Command addDeadlineTest = new AddDeadlineCommand("deadline test /by 2023-01-29");
+        Command addDeadlineTest = new AddDeadlineCommand("deadline test /by 2023-01-29 2311");
         addDeadlineTest.execute(tasks);
-        String expected = "[D][ ] test (by: Jan 29 2023)";
+        String expected = "[D][ ] test (by: Jan 29 2023, 11:11PM)";
         assertEquals(expected, tasks.getTask(0).toString());
     }
 

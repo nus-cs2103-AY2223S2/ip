@@ -20,9 +20,9 @@ public class AddEventCommandTest {
 
     @Test
     public void eventTest() {
-        Command addEventTest = new AddEventCommand("event testing /from 2023-01-27 /to 2023-01-29");
+        Command addEventTest = new AddEventCommand("event testing /from 2023-01-27 2311 /to 2023-01-29 2311");
         addEventTest.execute(tasks);
-        String expected = "[E][ ] testing (from: Jan 27 2023 to: Jan 29 2023)";
+        String expected = "[E][ ] testing (from: Jan 27 2023, 11:11PM to: Jan 29 2023, 11:11PM)";
         assertEquals(expected, tasks.getTask(0).toString());
     }
 }

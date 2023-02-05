@@ -24,8 +24,12 @@ public class Event extends Task {
 
     @Override
     public String toData() {
+        String[] fromDate = this.from.toString().split("T");
+        String fromDateData = fromDate[0] + " " + fromDate[1].replace(":", "");
+        String[] toDate = this.from.toString().split("T");
+        String toDateData = toDate[0] + " " + toDate[1].replace(":", "");
         String status = this.completed ? "1" : "0";
-        return "E | " + status + " | " + this.task + " | " + this.from + " | " + this.to;
+        return "E | " + status + " | " + this.task + " | " + fromDateData + " | " + toDateData;
     }
 
     @Override
