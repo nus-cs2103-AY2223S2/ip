@@ -7,20 +7,20 @@ import java.time.LocalDateTime;
  */
 public class Event extends Task {
 
-    protected LocalDateTime from;
-    protected LocalDateTime to;
+    protected LocalDateTime startDateTime;
+    protected LocalDateTime endDateTime;
 
     /**
      * Constructs an instance of Event with specified description, start and end time.
      *
      * @param description Task description.
-     * @param from Start time of event.
-     * @param to End time of event.
+     * @param startDateTime Start time of event.
+     * @param endDateTime End time of event.
      */
-    public Event(String description, LocalDateTime from, LocalDateTime to) {
+    public Event(String description, LocalDateTime startDateTime, LocalDateTime endDateTime) {
         super(description);
-        this.from = from;
-        this.to = to;
+        this.startDateTime = startDateTime;
+        this.endDateTime = endDateTime;
     }
 
     /**
@@ -28,13 +28,13 @@ public class Event extends Task {
      *
      * @param isDone Status of the task (completed or not completed).
      * @param description Task description.
-     * @param from Start time of event.
-     * @param to End time of event.
+     * @param startDateTime Start time of event.
+     * @param endDateTime End time of event.
      */
-    public Event(boolean isDone, String description, LocalDateTime from, LocalDateTime to) {
+    public Event(boolean isDone, String description, LocalDateTime startDateTime, LocalDateTime endDateTime) {
         super(isDone, description);
-        this.from = from;
-        this.to = to;
+        this.startDateTime = startDateTime;
+        this.endDateTime = endDateTime;
     }
 
     /**
@@ -42,17 +42,17 @@ public class Event extends Task {
      *
      * @return Start time of event.
      */
-    LocalDateTime getFrom() {
-        return from;
+    LocalDateTime getStartDateTime() {
+        return startDateTime;
     }
 
     /**
      * Updates the start time of this Event with specified start time.
      *
-     * @param from New start time of the event.
+     * @param startDateTime New start time of the event.
      */
-    void setFrom(LocalDateTime from) {
-        this.from = from;
+    void setStartDateTime(LocalDateTime startDateTime) {
+        this.startDateTime = startDateTime;
     }
 
     /**
@@ -60,17 +60,17 @@ public class Event extends Task {
      *
      * @return End time of the event.
      */
-    LocalDateTime getTo() {
-        return to;
+    LocalDateTime getEndDateTime() {
+        return endDateTime;
     }
 
     /**
      * Updates the end time of this Event with specified end time.
      *
-     * @param to New end time of the event.
+     * @param endDateTime New end time of the event.
      */
-    void setTo(LocalDateTime to) {
-        this.to = to;
+    void setEndDateTime(LocalDateTime endDateTime) {
+        this.endDateTime = endDateTime;
     }
 
     /**
@@ -79,7 +79,7 @@ public class Event extends Task {
     @Override
     public String toCsv() {
         return "E," + super.toCsv() + ","
-                + from + "," + to;
+                + startDateTime + "," + endDateTime;
     }
 
     /**
@@ -89,11 +89,11 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.toString()
                 + " (From: "
-                + from.getDayOfMonth() + " " + from.getMonth() + " " + from.getYear() + " "
-                + from.getHour() + from.getMinute() // TODO: bugalert (may not always be 4-digits)
+                + startDateTime.getDayOfMonth() + " " + startDateTime.getMonth() + " " + startDateTime.getYear() + " "
+                + startDateTime.getHour() + startDateTime.getMinute() // TODO: bugalert (may not always be 4-digits)
                 + " To: "
-                + to.getDayOfMonth() + " " + to.getMonth() + " " + to.getYear() + " "
-                + to.getHour() + to.getMinute() // TODO: bugalert (may not always be 4-digits)
+                + endDateTime.getDayOfMonth() + " " + endDateTime.getMonth() + " " + endDateTime.getYear() + " "
+                + endDateTime.getHour() + endDateTime.getMinute() // TODO: bugalert (may not always be 4-digits)
                 + ")";
     }
 }
