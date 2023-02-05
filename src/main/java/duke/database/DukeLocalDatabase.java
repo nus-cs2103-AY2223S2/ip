@@ -27,8 +27,17 @@ class DukeLocalDatabase {
      * Default constructor
      */
     public DukeLocalDatabase() {
+        this(false);
+    }
+
+    /**
+     * Default constructor
+     */
+    public DukeLocalDatabase(boolean isTestMode) {
         tasks = new ArrayList<Task>();
-        open();
+        if (!isTestMode) {
+            open();
+        }
     }
 
     /**
@@ -47,6 +56,7 @@ class DukeLocalDatabase {
      * @return {@link Task} object
      */
     public Task getTask(int taskId) {
+        assert taskId > 0;
         return tasks.get(taskId - 1);
     }
 
@@ -67,8 +77,9 @@ class DukeLocalDatabase {
      * @param taskId int
      * @return {@link Task} object
      */
-    public Task updateTask(int taskid, Task task) {
-        return tasks.set(taskid, task);
+    public Task updateTask(int taskId, Task task) {
+        assert taskId > 0;
+        return tasks.set(taskId - 1, task);
     }
 
     /**
@@ -78,6 +89,7 @@ class DukeLocalDatabase {
      * @return {@link Task} object
      */
     public Task removeTask(int taskId) {
+        assert taskId > 0;
         return tasks.remove(taskId - 1);
     }
 

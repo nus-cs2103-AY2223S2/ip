@@ -13,7 +13,7 @@ public class DukeRepoImplTest {
 
     @BeforeEach
     void setUp() {
-        db = new DukeRepoImpl();
+        db = new DukeRepoImpl(true);
     }
 
     @Test
