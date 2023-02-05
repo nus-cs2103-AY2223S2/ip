@@ -22,7 +22,7 @@ public class Duke {
         ui.initialise();
         parser.initialise();
         
-        while(!parser.isInput("bye")) {
+        while (!parser.isInput("bye")) {
             if (parser.isInput("list")) {
                 if (ui.getList().isEmpty()) {
                     ui.emptyErr();

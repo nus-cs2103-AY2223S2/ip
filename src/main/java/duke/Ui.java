@@ -28,9 +28,9 @@ public class Ui {
         this.savedList = saved;
         this.tList = new TaskList();
 
-        if(saved.isSaved()) {
+        if (saved.isSaved()) {
             this.tList.setList(saved.load());
-            if(this.tList.size() > 0) {
+            if (this.tList.size() > 0) {
                 System.out.println("Duke: Previously saved list available!");
             } else {
                 System.out.println("Duke: No previously saved list found.");
@@ -116,7 +116,7 @@ public class Ui {
      * @param num Index no. of task in the list to be marked as done
      */
     public void markTask(int num) {
-        if(num >= this.tList.size()) {
+        if (num >= this.tList.size()) {
             System.out.println("Duke: Task no." + (num+1) + " not found. Try again.");
         } else {
             this.tList.get(num).mark();
@@ -132,7 +132,7 @@ public class Ui {
      * @param num Index no. of task in the list to be marked as undone.
      */
     public void unmarkTask(int num) {
-        if(num >= this.tList.size()) {
+        if (num >= this.tList.size()) {
             System.out.println("Duke: Task no." + (num+1) + " not found. Try again.");
         } else {
             this.tList.get(num).unmark();
@@ -150,7 +150,7 @@ public class Ui {
      */
     public ToDo makeToDo(String[] task) {
         StringBuilder sb = new StringBuilder();
-        for(int i = 1; i < task.length; i++) {
+        for (int i = 1; i < task.length; i++) {
             sb.append(task[i] + " ");
         }
         return new ToDo(sb.toString());
@@ -171,24 +171,24 @@ public class Ui {
         boolean first = false;
         boolean second = false;
 
-        for(int i = 1; i < task.length; i++) {
-            if(task[i].equalsIgnoreCase("/from")) {
+        for (int i = 1; i < task.length; i++) {
+            if (task[i].equalsIgnoreCase("/from")) {
                 first = true;
                 isDescripton = false;
                 continue;
             }
-            if(task[i].equalsIgnoreCase("/to")) {
+            if (task[i].equalsIgnoreCase("/to")) {
                 second = true;
                 first = false;
                 continue;
             }
-            if(first) {
+            if (first) {
                 start.append(task[i] + " ");
             }
-            if(second) {
+            if (second) {
                 end.append(task[i] + " ");
             }
-            if(isDescripton) {
+            if (isDescripton) {
                 desc.append(task[i] + " ");
             }
         }
@@ -207,12 +207,12 @@ public class Ui {
         StringBuilder by = new StringBuilder();
         boolean isDesc = true;
 
-        for(int i = 1; i < task.length; i++) {
-            if(task[i].equalsIgnoreCase("/by")) {
+        for (int i = 1; i < task.length; i++) {
+            if (task[i].equalsIgnoreCase("/by")) {
                 isDesc = false;
                 continue;
             }
-            if(isDesc) {
+            if( isDesc) {
                 desc.append(task[i] + " ");
             } else {
                 by.append(task[i]);
@@ -230,7 +230,7 @@ public class Ui {
      * @param num Index no. of task in the list to be deleted.
      */
     public void delete(int num) {
-        if(num >= this.tList.size()) {
+        if (num >= this.tList.size()) {
             System.out.println("Duke: Task no." + (num+1) + " not found. Try again.");
         } else {
             System.out.println("Duke: Ok! Following task is removed: ");
