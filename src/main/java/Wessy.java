@@ -78,10 +78,10 @@ public class Wessy {
                             tasks.add(new ToDo(taskComponents[2], isDone));
                             break;
                         case 'D':
-                            tasks.add(new Deadline(taskComponents[2], taskComponents[3], isDone));
+                            tasks.add(new Deadline(taskComponents[2], parseDateTime(taskComponents[3]), isDone));
                             break;
                         case 'E':
-                            tasks.add(new Event(taskComponents[2], taskComponents[3], taskComponents[4], isDone));
+                            tasks.add(new Event(taskComponents[2], parseDateTime(taskComponents[3]), parseDateTime(taskComponents[4]), isDone));
                             break;
                     }
                 }
