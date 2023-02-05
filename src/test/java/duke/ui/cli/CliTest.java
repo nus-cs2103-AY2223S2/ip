@@ -7,6 +7,9 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
+import java.util.function.Function;
 
 public class CliTest {
     @Test
@@ -20,7 +23,10 @@ public class CliTest {
 
         InputStream inputStream = new ByteArrayInputStream(new byte[0]);
 
-        Cli cli = new Cli(printStream, inputStream, null, null);
+        BiConsumer<String, Consumer<String>> dummyInputHandler = (a, b) -> {}; // does nothing
+        Function<String, Boolean> dummyExitConditionChecker = (a) -> true; // does nothing
+
+        Cli cli = new Cli(printStream, inputStream, dummyInputHandler, dummyExitConditionChecker);
 
         // Test
         cli.print("Hello World! Lorem ipsum");
@@ -43,7 +49,10 @@ public class CliTest {
 
         InputStream inputStream = new ByteArrayInputStream(new byte[0]);
 
-        Cli cli = new Cli(printStream, inputStream, null, null);
+        BiConsumer<String, Consumer<String>> dummyInputHandler = (a, b) -> {}; // does nothing
+        Function<String, Boolean> dummyExitConditionChecker = (a) -> true; // does nothing
+
+        Cli cli = new Cli(printStream, inputStream, dummyInputHandler, dummyExitConditionChecker);
 
         // Test
         cli.print("Hello World!\nLorem ipsum");
@@ -57,7 +66,7 @@ public class CliTest {
     @Test
     public void start_inputMultipleLinesWithLastLineBeingExitCommand_handleAllLines() {
         String expected = "    ______________________________________________________________________\n"
-                +  "     Hello World!\n"
+                + "     Hello World!\n"
                 + "    ______________________________________________________________________\n\n"
                 + "    ______________________________________________________________________\n"
                 + "     Lorem Ipsum\n"
@@ -74,8 +83,8 @@ public class CliTest {
 
         InputStream inputStream = new ByteArrayInputStream(input.getBytes());
 
-        Cli cli = new Cli(printStream, inputStream, (message, printer) -> printer.accept(message),
-                (message) -> message.equals("exit"));
+        Cli cli = new Cli(printStream, inputStream, (message, printer) -> printer.accept(message), (message)
+                -> message.equals("exit"));
 
         // Test
         cli.start();
