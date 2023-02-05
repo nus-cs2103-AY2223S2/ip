@@ -58,7 +58,7 @@ public class Tasklist {
     public Task deleteTask(int index) throws DukeException {
         if (index >= this.tasks.size()) {
             throw new DukeException("Invalid task number provided. "
-                    + "Given task number is " + String.valueOf(index + 1)
+                    + "Given task number is " + (index + 1)
                     + " but there are only " + this.tasks.size()
                     + " task(s) in the list");
         }
@@ -88,7 +88,7 @@ public class Tasklist {
     public boolean mark(int index) throws DukeException {
         if (index >= this.tasks.size()) {
             throw new DukeException("Invalid task number provided. "
-                    + "Given task number is " + String.valueOf(index + 1)
+                    + "Given task number is " + (index + 1)
                     + " but there are only " + this.tasks.size()
                     + " task(s) in the list");
         }
@@ -112,7 +112,7 @@ public class Tasklist {
     public boolean unmark(int index) throws DukeException {
         if (index >= this.tasks.size()) {
             throw new DukeException("Invalid task number provided. "
-                    + "Given task number is " + String.valueOf(index + 1)
+                    + "Given task number is " + (index + 1)
                     + " but there are only " + this.tasks.size()
                     + " task(s) in the list");
         }
