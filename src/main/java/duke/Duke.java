@@ -76,6 +76,7 @@ public class Duke {
     public String getResponse(String input) {
         if (!isExit) {
             Command c = Parser.parse(input);
+            assert c != null : "command should not be null";
             isExit = c.isExit();
             return c.execute(tasks, ui, storage);
         } else {

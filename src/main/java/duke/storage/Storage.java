@@ -146,7 +146,9 @@ public class Storage {
             }
         }
 
+        assert Files.exists(dataFile) : "tasks.txt file should be created";
         FileWriter writer = new FileWriter("ip/data/tasks.txt", true);
+
         String finalTasks = "";
         String taskInfo = task.toString().replace("[ ]", " | 0 |").replace("[X]", "| 1 |");
         taskInfo = taskInfo.replace("[", "").replace("]", "");
@@ -163,6 +165,7 @@ public class Storage {
         try {
             Path tempFile = Paths.get("ip/data/tempTasks.txt");
             Files.createFile(tempFile);
+            assert Files.exists(tempFile) : "tempTasks.txt file should be created";
             BufferedReader bufReader = new BufferedReader(new FileReader(filePath));
             FileWriter writerToTempFile = new FileWriter("ip/data/tempTasks.txt", true);
 

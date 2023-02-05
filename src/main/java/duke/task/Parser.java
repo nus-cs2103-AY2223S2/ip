@@ -66,7 +66,7 @@ public class Parser {
     public static Command parse(String command) {
         Command parsedCommand = null;
         String[] arr = splitCommand(command);
-        final String COMMAND_TYPE = arr[0];
+        final String COMMAND_TYPE = arr[0].trim();
 
         switch (COMMAND_TYPE) {
         case BYE:
@@ -94,11 +94,11 @@ public class Parser {
             parsedCommand = new AddCommand(arr[0], arr[1], arr[2], arr[3]);
             break;
         case UNMARK:
-            int taskNumber = Integer.parseInt(arr[1]);
+            int taskNumber = Integer.parseInt(arr[1].trim());
             parsedCommand = new UnmarkCommand(taskNumber);
             break;
         case MARK:
-            int getTaskNum = Integer.parseInt(arr[1]);
+            int getTaskNum = Integer.parseInt(arr[1].trim());
             parsedCommand = new MarkCommand(getTaskNum);
             break;
         case LIST:
