@@ -9,7 +9,7 @@ public class Ui {
     public static final String LS = System.lineSeparator();
     public static final String DIVIDER = "---------------------------------------------------------";
     public static final String WARNING = "************************************";
-    public static final String DATE_TIME_FORMAT = "DD-MM-YYYY Time";
+    public static final String DATE_TIME_FORMAT = "DD/MM/YYYY Time";
     private Scanner allCommands = new Scanner(System.in);
 
     private String response = showWelcome();

@@ -12,18 +12,18 @@ public class Event extends Task {
      */
     public Event(String description, String from, String to) {
         super(description);
-        this.from = super.split(from);
-        this.to = super.split(to);
+        this.from = from;
+        this.to = to;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + this.from + " to: " + this.to + ")";
+        return "[E]" + super.toString() + " (from: " + super.split(this.from) + " to: " + super.split(this.to) + ")";
     }
 
     @Override
     public String toText() {
-        int done = -1;
+        int done;
         if (this.isDone) {
             done = 1;
         } else {

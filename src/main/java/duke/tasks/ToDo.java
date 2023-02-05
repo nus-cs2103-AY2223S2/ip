@@ -15,7 +15,7 @@ public class ToDo extends Task {
 
     @Override
     public String toText() {
-        int done = -1;
+        int done;
         if (this.isDone) {
             done = 1;
         } else {

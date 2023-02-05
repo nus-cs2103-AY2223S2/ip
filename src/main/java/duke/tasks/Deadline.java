@@ -12,17 +12,17 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String by) {
         super(description);
-        this.by = super.split(by);
+        this.by = by;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + " (by: " + super.split(this.by) + ")";
     }
 
     @Override
     public String toText() {
-        int done = -1;
+        int done;
         if (this.isDone) {
             done = 1;
         } else {

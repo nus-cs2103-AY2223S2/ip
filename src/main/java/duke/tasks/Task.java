@@ -35,31 +35,33 @@ public abstract class Task {
     public String fixDateToParse(String date) {
         String error = "0000-01-01";
         String[] arr = date.split("/");
-        String year = "";
-        String month = "";
-        String day = "";
-        if (arr.length == 3) {
-            year = arr[2];
-            if (arr[1].length() == 1) {
-                month = "0" + arr[1];
-            } else if (arr[1].length() == 2) {
-                month = arr[1];
-            } else {
-                return error;
-            }
-
-            if (arr[0].length() == 1) {
-                day = "0" + arr[0];
-            } else if (arr[0].length() == 2) {
-                day = arr[0];
-            } else {
-                return error;
-            }
-
-            return year + "-" + month + "-" + day;
-        } else {
+        String year;
+        String month;
+        String day;
+        if (arr.length != 3) {
             return error;
         }
+
+        year = arr[2];
+        month = fixDayMonth(arr[1]);
+        day = fixDayMonth(arr[0]);
+        if (month == null || day == null) {
+            System.out.println("I RAN");
+            return error;
+        }
+        return year + "-" + month + "-" + day;
+    }
+
+    private String fixDayMonth(String dayOrMonth) {
+        String result;
+        if (dayOrMonth.length() == 1) {
+            result = "0" + dayOrMonth;
+        } else if (dayOrMonth.length() == 2) {
+            result = dayOrMonth;
+        } else {
+            result = null;
+        }
+        return result;
     }
 
     /**
