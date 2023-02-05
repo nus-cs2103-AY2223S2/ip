@@ -16,27 +16,29 @@ public class Parser {
      * @return Indicates if the Duke Program should continue to run.
      * @throws DukeException
      */
-    public static boolean handleGeneralCommand(String command, TaskList tasks, Storage storage) throws DukeException {
-        if (command.startsWith("list")) {
-            tasks.listTasks();
-        } else if ((command.startsWith("mark")) || (command.startsWith("unmark"))
-                || command.startsWith("delete")) {
-            tasks.manageTask(command);
-        } else if (command.equals("bye")) {
-            storage.saveTasks(tasks);
-            return false;
-        } else if (command.startsWith("event")) {
-            Event.createEvent(command, tasks);
-        } else if (command.startsWith("deadline")) {
-            DeadlineTask.createDeadlineTask(command, tasks);
-        } else if (command.startsWith("todo")) {
-            ToDo.createToDo(command, tasks);
-        } else if (command.startsWith("find")) {
-            tasks.findTasks(command);
+    public static String handleGeneralCommand(String command, TaskList tasks, Storage storage, Ui ui) {
+        try {
+            if (command.startsWith("list")) {
+                return tasks.listTasks();
+            } else if ((command.startsWith("mark")) || (command.startsWith("unmark"))
+                    || command.startsWith("delete")) {
+                return tasks.manageTask(command);
+            } else if (command.equals("bye")) {
+                storage.saveTasks(tasks);
+                return ui.closeCommand();
+            } else if (command.startsWith("event")) {
+                return Event.createEvent(command, tasks);
+            } else if (command.startsWith("deadline")) {
+                return DeadlineTask.createDeadlineTask(command, tasks);
+            } else if (command.startsWith("todo")) {
+                return ToDo.createToDo(command, tasks);
+            } else if (command.startsWith("find")) {
+                return tasks.findTasks(command);
+            }
         }
-        else {
-            throw new DukeException();
+        catch (DukeException e) {
+            return e.toString();
         }
-        return true;
+        return "Sorry I do not understand your command :(";
     }
 }

@@ -34,7 +34,7 @@ public class ToDo extends Task {
      * @param t TaskList object to add the newly created Task into the list of tasks.
      * @throws DukeException If command is invalid.
      */
-    public static void createToDo(String command, TaskList t) throws DukeException {
+    public static String createToDo(String command, TaskList t) throws DukeException {
         String[] input = command.split(" ");
         if (input.length <= 1) {
             throw new DukeException("todo");
@@ -47,7 +47,7 @@ public class ToDo extends Task {
             }
         }
         ToDo todo = new ToDo(taskName.toString());
-        t.addTask(todo);
+        return t.addTask(todo);
     }
 
     @Override

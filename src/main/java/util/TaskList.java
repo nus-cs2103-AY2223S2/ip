@@ -44,40 +44,46 @@ public class TaskList {
      * Displays the number of tasks after addition of task.
      * @param task Task object to be tracked.
      */
-    public void addTask(Task task) {
+    public String addTask(Task task) {
         taskList.add(task);
-        System.out.printf("     Got it. I've added this task:\n"
-                + "       %s\n" + this.numTasks() + "%n", task);
+        return String.format("Got it. I've added this task:\n" + "%s\n" + this.numTasks() + "%n", task);
     }
 
     /**
      * Displays the tasks being tracked by TaskList.
      */
-    public void listTasks() {
+    public String listTasks() {
         System.out.println("    Here are the tasks in your list:");
+        StringBuilder sb = new StringBuilder();
         int counter = 1;
         for (Task t : taskList) {
-            System.out.println(counter + ". " + t.toString());
+            sb.append(counter + ". " + t.toString() + "\n");
             counter++;
         }
+        return sb.toString();
     }
 
     /**
      * Displays the tasks in the TaskList that contains the keyword specified.
      * @param command Keyword to check with the tasks in the TaskList.
      */
-    public void findTasks(String command) {
+    public String findTasks(String command) {
         System.out.println("  Here are the matching tasks in your list:");
         String[] keyword = command.split(" ");
+        StringBuilder sb = new StringBuilder();
         int counter = 1;
         for (Task t: taskList) {
             // Iterate through the ArrayList to find if a Task matches
             if (t.containsKeyword(keyword[1])) {
-                System.out.println(counter + ". " + t.toString());
+                if (counter == taskList.size()) {
+                    sb.append(counter + ". " + t.toString());
+                    break;
+                }
+                sb.append(counter + ". " + t.toString() + "\n");
                 counter++;
             }
         }
-
+        return sb.toString();
     }
 
     /**
@@ -137,7 +143,7 @@ public class TaskList {
      * @param command Input from the User.
      * @throws DukeException If the input command or task number is invalid.
      */
-    public void manageTask(String command) throws DukeException {
+    public String manageTask(String command) throws DukeException {
         String[] input = command.split(" ");
         if ((input.length != 2)) {
             throw new DukeException(input[0]);
@@ -148,12 +154,11 @@ public class TaskList {
         }
         if (input[0].equals("delete")) {
             Task task = taskList.remove(taskNumber);
-            System.out.printf("    Noted. I've removed this task:\n       %s\n%s%n",
-                    task, numTasks());
+            return String.format("    Noted. I've removed this task:\n       %s\n%s%n", task, numTasks());
         } else {
             boolean completion = input[0].equals("mark");
             Task task = taskList.get(taskNumber);
-            task.setCompletion(completion);
+            return task.setCompletion(completion);
         }
     }
 
@@ -162,6 +167,6 @@ public class TaskList {
      * @return String representation the tasks tracked by TaskList.
      */
     public String numTasks() {
-        return String.format("     Now you have %d tasks in the list", taskList.size());
+        return String.format("Now you have %d tasks in the list", taskList.size());
     }
 }

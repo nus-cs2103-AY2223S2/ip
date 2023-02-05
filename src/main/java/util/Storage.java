@@ -7,18 +7,13 @@ import java.io.*;
  * @author Merrick
  */
 public class Storage {
-    private final String filePath;
-    private final String fileDir;
+    private final String filePath = "src/main/data/duke.txt";
+    private final String fileDir = "src/main/data/";
+
     /**
      * Constructor of Storage class
-     * @param fileDir Directory of duke.txt file.
-     * @param filePath Filepath of duke.txt file.
      */
-    public Storage(String fileDir, String filePath) {
-        // check if fileDir and filePath are not empty
-        this.fileDir = fileDir;
-        this.filePath = filePath;
-    }
+    public Storage() {}
 
     /**
      * Loads the tasks stored in the duke.txt file.
