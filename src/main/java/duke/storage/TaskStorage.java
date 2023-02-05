@@ -38,6 +38,7 @@ public class TaskStorage implements Storage{
                 e.printStackTrace();
             }
         }
+        assert Files.exists(path);
         this.path = path;
         try {
             this.scanner = new Scanner(path);

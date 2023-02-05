@@ -100,7 +100,9 @@ public class Gui extends Application {
      */
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
+        assert userText != null;
         Label dukeText = new Label(duke.getResponse(userInput.getText()));
+        assert dukeText != null;
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(userImg)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(dukeImg))
