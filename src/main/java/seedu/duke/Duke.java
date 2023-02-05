@@ -12,13 +12,15 @@ import seedu.duke.task.Task;
  */
 public class Duke {
 
+    private static final String EXIT_FIND_MESSAGE = "Exiting out of \"found\" list\n";
+
     private static boolean isFind = false;
     private static boolean isDisplayList = false;
     private static TaskList tempTasks;
     private static TaskList tasks;
 
-    private Ui ui;
-    private Storage storage;
+    private final Ui ui;
+    private final Storage storage;
 
     /**
      * Represents the set of commands by the user.
@@ -63,127 +65,39 @@ public class Duke {
         // Return of the final String to add.
         String dukeText = "";
 
-        description = "";
         Parser userParse = new Parser(input);
         try {
             Commands userCommand = userParse.checkCommand(userParse.command);
             switch(userCommand) {
             case bye:
-                dukeText += ui.bye();
-                storage.write(tasks);
+                dukeText += byeCommand(ui, storage);
                 break;
             case mark:
-                if (!isDisplayList) {
-                    isDisplayList = true;
-                    ui.noListError(tasks);
-                }
-                int userIndex = Integer.parseInt(userParse.inputArr[1]) - 1;
-                if (isFind) {
-                    TaskList marked = tempTasks.mark(userParse);
-                    dukeText += ui.markDisplay(marked, userParse);
-                    for (int i = 0; i < tasks.tasksCounter; i++) {
-                        if (marked.tasksList.get(userIndex)
-                                == tasks.tasksList.get(i)) {
-                            tasks.tasksList.get(i).mark();
-                            System.out.println("test");
-                        }
-                    }
-                } else {
-                    dukeText += ui.markDisplay(tasks.mark(userParse), userParse);
-                }
-                storage.write(tasks);
+                dukeText += markCommand(ui, userParse, storage);
                 break;
             case unmark:
-                if (!isDisplayList) {
-                    isDisplayList = true;
-                    ui.noListError(tasks);
-                }
-                userIndex = Integer.parseInt(userParse.inputArr[1]) - 1;
-                if (isFind) {
-                    TaskList unmarked = tempTasks.unmark(userParse);
-                    dukeText += ui.unmarkDisplay(unmarked, userParse);
-                    for (int i = 0; i < tasks.tasksCounter; i++) {
-                        if (unmarked.tasksList.get(userIndex)
-                                == tasks.tasksList.get(i)) {
-                            tasks.tasksList.get(i).unmark();
-                        }
-                    }
-                } else {
-                    dukeText += ui.unmarkDisplay(tasks.unmark(userParse), userParse);
-                }
-                storage.write(tasks);
+                dukeText += unmarkCommand(ui, userParse, storage);
                 break;
             case list:
-                isDisplayList = true;
-                if (isFind) {
-                    dukeText += "Here are the list of found tasks:\n";
-                    dukeText += ui.list(tempTasks);
-                } else {
-                    dukeText += "Here are the list of tasks:\n";
-                    dukeText += ui.list(tasks);
-                }
+                dukeText += listCommand(ui);
                 break;
             case todo:
-                if (isFind) {
-                    dukeText += "Exiting out of \"found\" list\n";
-                    isFind = false;
-                    tempTasks = new TaskList(tasks);
-                }
-                tasks.addTodo(description, userParse);
-                dukeText += ui.addTodoMessage(tasks);
-                storage.write(tasks);
+                dukeText += todoCommand(ui, storage, userParse, description);
                 break;
             case deadline:
-                if (isFind) {
-                    dukeText += "Exiting out of \"found\" list\n";
-                    isFind = false;
-                    tempTasks = new TaskList(tasks);
-                }
-                tasks.addDeadline(description, userParse);
-                dukeText += ui.addDeadlineMessage(tasks);
-                storage.write(tasks);
+                dukeText += deadlineCommand(ui, storage, userParse, description);
                 break;
             case event:
-                if (isFind) {
-                    dukeText += "Exiting out of \"found\" list\n";
-                    isFind = false;
-                    tempTasks = new TaskList(tasks);
-                }
-                tasks.addEvent(description, userParse);
-                dukeText += ui.addEventMessage(tasks);
-                storage.write(tasks);
+                dukeText += eventCommand(ui, storage, userParse, description);
                 break;
             case delete:
-                if (!isDisplayList) {
-                    isDisplayList = true;
-                    ui.noListError(tasks);
-                }
-                if (isFind) {
-                    Task deleted = tempTasks.delete(userParse);
-                    dukeText += ui.deleteMessage(tempTasks, deleted);
-                    for (int i = 0; i < tasks.tasksCounter; i++) {
-                        if (deleted == tasks.tasksList.get(i)) {
-                            tasks.tasksList.remove(i);
-                            tasks.tasksCounter--;
-                        }
-                    }
-                } else {
-                    dukeText += ui.deleteMessage(tasks, tasks.delete(userParse));
-                }
-                storage.write(tasks);
+                dukeText += deleteCommand(ui, storage, userParse);
                 break;
             case find:
-                isDisplayList = true;
-                isFind = true;
-                tempTasks = tasks.find(userParse);
-                dukeText += ui.findMessage(tempTasks);
+                dukeText += findCommand(ui, userParse);
                 break;
             case originalList:
-                isFind = false;
-                tempTasks = new TaskList(tasks);
-                dukeText += "Here are the list of tasks:\n";
-                dukeText += ui.list(tasks);
-                storage.write(tasks);
+                dukeText += originalListCommand(ui, storage);
                 break;
             default:
                 break;
@@ -216,5 +130,265 @@ public class Duke {
             commandList += curr.name() + "\n";
         }
         return commandList;
+    }
+
+    /**
+     * Returns the exit find list message and storing some variable settings.
+     *
+     * @return The exit find list message.
+     */
+    public static String exitFindMessage() {
+        isFind = false;
+        tempTasks = new TaskList(tasks);
+        return EXIT_FIND_MESSAGE;
+    }
+
+    /**
+     * Returns delete message for find command.
+     *
+     * @param userParse The user input.
+     * @param ui The Ui of the program.
+     * @return The string message for the deleted task while in find command.
+     * @throws DukeException if there is an out of bound delete index or filepath not found for storing.
+     */
+    public static String deleteInFindMessage(Parser userParse, Ui ui) throws DukeException {
+        Task deleted;
+
+        deleted = tempTasks.delete(userParse);
+        for (int i = 0; i < tasks.tasksCounter; i++) {
+            if (deleted == tasks.tasksList.get(i)) {
+                tasks.tasksList.remove(deleted);
+                tasks.tasksCounter--;
+            }
+        }
+        return ui.deleteMessage(tempTasks, deleted);
+    }
+
+    /**
+     * Returns a bye message. Stores the required data.
+     *
+     * @param ui The UI for the program.
+     * @param storage The Storage for the program.
+     * @return The bye message.
+     * @throws DukeException if filepath cannot be found.
+     */
+    public static String byeCommand(Ui ui, Storage storage) throws DukeException {
+        storage.write(tasks);
+        return ui.bye();
+    }
+
+    /**
+     * Returns a marked message. Stores the required data.
+     *
+     * @param ui The UI for the program.
+     * @param userParse The user input.
+     * @param storage The storage for the program.
+     * @return The marked message for the task.
+     * @throws DukeException if mark index is out of bound or filepath not found for storing.
+     */
+    public static String markCommand(Ui ui, Parser userParse, Storage storage) throws DukeException {
+        String message = "";
+        int userIndex = Integer.parseInt(userParse.inputArr[1]) - 1;
+
+        if (!isDisplayList) {
+            isDisplayList = true;
+            ui.noListError(tasks);
+        }
+        if (isFind) {
+            TaskList marked = tempTasks.mark(userParse);
+            message += ui.markDisplay(marked, userParse);
+            for (int i = 0; i < tasks.tasksCounter; i++) {
+                if (marked.tasksList.get(userIndex)
+                        == tasks.tasksList.get(i)) {
+                    tasks.tasksList.get(i).mark();
+                    System.out.println("test");
+                }
+            }
+        } else {
+            message += ui.markDisplay(tasks.mark(userParse), userParse);
+        }
+        storage.write(tasks);
+        return message;
+    }
+
+    /**
+     * Returns an unmarked message. Stores the required data.
+     *
+     * @param ui The UI for the program.
+     * @param userParse The user input.
+     * @param storage The storage for the program.
+     * @return The unmarked message for the task.
+     * @throws DukeException if unmark index is out of bound or filepath not found for storing.
+     */
+    public static String unmarkCommand(Ui ui, Parser userParse, Storage storage) throws DukeException {
+        String message = "";
+        int userIndex = Integer.parseInt(userParse.inputArr[1]) - 1;
+
+        if (!isDisplayList) {
+            isDisplayList = true;
+            ui.noListError(tasks);
+        }
+
+        if (isFind) {
+            TaskList unmarked = tempTasks.unmark(userParse);
+            message += ui.unmarkDisplay(unmarked, userParse);
+            for (int i = 0; i < tasks.tasksCounter; i++) {
+                if (unmarked.tasksList.get(userIndex)
+                        == tasks.tasksList.get(i)) {
+                    tasks.tasksList.get(i).unmark();
+                }
+            }
+        } else {
+            message += ui.unmarkDisplay(tasks.unmark(userParse), userParse);
+        }
+        storage.write(tasks);
+        return message;
+    }
+
+    /**
+     * Returns the list messages for the list command.
+     *
+     * @param ui The UI for the program.
+     * @return The list message.
+     */
+    public static String listCommand(Ui ui) {
+        String message = "";
+
+        isDisplayList = true;
+        if (isFind) {
+            message += "Here are the list of found tasks:\n";
+            message += ui.list(tempTasks);
+        } else {
+            message += "Here are the list of tasks:\n";
+            message += ui.list(tasks);
+        }
+        return message;
+    }
+
+    /**
+     * Returns the todo command message. Add todo tasks to the taskList and store it.
+     *
+     * @param ui The UI for the program.
+     * @param storage The storage for the program.
+     * @param userParse The user input.
+     * @param description The description of the task.
+     * @return The string of the todo message.
+     * @throws DukeException if the todo command is empty or filepath not found for storing.
+     */
+    public static String todoCommand(Ui ui, Storage storage, Parser userParse, String description)
+            throws DukeException {
+        String message = "";
+
+        if (isFind) {
+            message += exitFindMessage();
+        }
+        tasks.addTodo(description, userParse);
+        message += ui.addTodoMessage(tasks);
+        storage.write(tasks);
+        return message;
+    }
+
+    /**
+     * Returns the deadline command message. Add deadline tasks to the taskList and store it.
+     *
+     * @param ui The UI for the program.
+     * @param storage The storage for the program.
+     * @param userParse The user input.
+     * @param description The description of the task.
+     * @return The string of the deadline message.
+     * @throws DukeException if any part of the deadline command is empty or filepath not found for storing.
+     */
+    public static String deadlineCommand(Ui ui, Storage storage, Parser userParse, String description)
+            throws DukeException {
+        String message = "";
+
+        if (isFind) {
+            message += exitFindMessage();
+        }
+        tasks.addDeadline(description, userParse);
+        message += ui.addDeadlineMessage(tasks);
+        storage.write(tasks);
+        return message;
+    }
+
+    /**
+     * Returns the event command message. Add event tasks to the taskList and store it.
+     *
+     * @param ui The UI for the program.
+     * @param storage The storage for the program.
+     * @param userParse The user input.
+     * @param description The description of the task.
+     * @return The string of the event message.
+     * @throws DukeException if any part of the event command is empty or filepath not found for storing.
+     */
+    public static String eventCommand(Ui ui, Storage storage, Parser userParse, String description)
+            throws DukeException {
+        String message = "";
+
+        if (isFind) {
+            message += exitFindMessage();
+        }
+        tasks.addEvent(description, userParse);
+        message += ui.addEventMessage(tasks);
+        storage.write(tasks);
+        return message;
+    }
+
+    /**
+     * Returns the deleted command message. Stores the new data into the txt file.
+     *
+     * @param ui The UI for the program.
+     * @param storage The storage for the program.
+     * @param userParse The user input.
+     * @return The string of the deleted command message.
+     * @throws DukeException if there is no list command beforehand or filepath not found for storing.
+     */
+    public static String deleteCommand(Ui ui, Storage storage, Parser userParse) throws DukeException {
+        String message = "";
+
+        if (!isDisplayList) {
+            isDisplayList = true;
+            ui.noListError(tasks);
+        }
+        if (isFind) {
+            message += deleteInFindMessage(userParse, ui);
+        } else {
+            message += ui.deleteMessage(tasks, tasks.delete(userParse));
+        }
+        storage.write(tasks);
+        return message;
+    }
+
+    /**
+     * Returns the find message for the find command.
+     *
+     * @param ui The UI for the program.
+     * @param userParse The user input.
+     * @return The string of the find lists.
+     */
+    public static String findCommand(Ui ui, Parser userParse) {
+        isDisplayList = true;
+        isFind = true;
+        tempTasks = tasks.find(userParse);
+        return ui.findMessage(tempTasks);
+    }
+
+    /**
+     * Returns the original list. Stores the original list into the txt file.
+     *
+     * @param ui The UI for the program.
+     * @param storage The storage for the program.
+     * @return The string for the original list.
+     * @throws DukeException if there is no file path.
+     */
+    public static String originalListCommand(Ui ui, Storage storage) throws DukeException {
+        String message = "";
+
+        isFind = false;
+        tempTasks = new TaskList(tasks);
+        message += "Here are the list of tasks:\n";
+        message += ui.list(tasks);
+        storage.write(tasks);
+        return message;
     }
 }
