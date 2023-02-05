@@ -2,8 +2,8 @@ package command;
 
 import io.Storage;
 import io.Ui;
+import parsing.Parser;
 import task.TaskList;
-import util.Parser;
 
 /**
  * Manages listing of tasks.

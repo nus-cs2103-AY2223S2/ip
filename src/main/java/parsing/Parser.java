@@ -1,4 +1,4 @@
-package util;
+package parsing;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -7,6 +7,8 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import util.Util;
 
 public class Parser<T> {
     private final Function<String, Result<T>> fn;

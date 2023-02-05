@@ -1,7 +1,10 @@
-package util;
+package parsing;
 
 import java.util.function.Function;
 import java.util.function.Predicate;
+
+import util.Either;
+import util.Pair;
 
 public class Result<T> {
     private final Either<Pair<T, String>, String> result;
