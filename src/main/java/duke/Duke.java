@@ -94,7 +94,7 @@ public class Duke {
     private String formatTasks(ArrayList<Task> tasks) {
         String res = "";
         for (int i = 0; i < tasks.size(); i++) {
-            res += "\t " + String.valueOf(i+1) + "." +  tasks.get(i);
+            res += String.valueOf(i+1) + "." +  tasks.get(i);
             res += "\n";
         }
         return res;
@@ -102,7 +102,7 @@ public class Duke {
 
     private String mark(int index) throws DukeException {
         if (this.tasklist.mark(index)) {
-            return "I've marked this as done:\n\t "
+            return "I've marked this as done:\n "
                     + this.tasklist.get(index);
         } else {
             return "The selected task has already been marked as done.";
@@ -111,7 +111,7 @@ public class Duke {
 
     private String unmark(int index) throws DukeException {
         if (this.tasklist.unmark(index)) {
-            return "I've marked this as not done yet:\n\t "
+            return "I've marked this as not done yet:\n "
                     + this.tasklist.get(index);
         } else {
             return "The selected task has not yet been marked as done.";
@@ -121,9 +121,9 @@ public class Duke {
     private String addTask(String name) {
         Task t = new Todo(name);
         this.tasklist.addTask(t, TaskTypes.TODO);
-        return "I've added the following to your list of tasks:\n\t\t"
+        return "I've added the following to your list of tasks:\n"
                 + t
-                + "\n\t You now have "
+                + "\n You now have "
                 + this.tasklist.size()
                 + " task(s) in the list.";
     }
@@ -131,9 +131,9 @@ public class Duke {
     private String addTask(String name, LocalDate byDate) {
         Task t = new Deadline(name, byDate);
         this.tasklist.addTask(t, TaskTypes.DEADLINE);
-        return "I've added the following to your list of tasks:\n\t\t"
+        return "I've added the following to your list of tasks:\n"
                 + t
-                + "\n\t You now have "
+                + "\n You now have "
                 + this.tasklist.size()
                 + " task(s) in the list.";
     }
@@ -141,18 +141,18 @@ public class Duke {
     private String addTask(String name, LocalDate startDate, LocalDate endDate) {
         Task t = new Event(name, startDate, endDate);
         this.tasklist.addTask(t, TaskTypes.EVENT);
-        return "I've added the following to your list of tasks:\n\t\t"
+        return "I've added the following to your list of tasks:\n"
                 + t
-                + "\n\t You now have "
+                + "\n You now have "
                 + this.tasklist.size()
                 + " task(s) in the list.";
     }
 
     private String deleteTask(int index) throws DukeException {
         Task task = this.tasklist.deleteTask(index);
-        return "I've removed the following from your list of tasks:\n\t\t"
+        return "I've removed the following from your list of tasks:\n"
                 + task
-                + "\n\t You now have "
+                + "\n You now have "
                 + this.tasklist.size()
                 + " task(s) in the list.";
     }
