@@ -5,9 +5,10 @@ import java.util.Optional;
 
 import aqua.util.DateUtils;
 
-/** An implementation of AquaTask to represent a deadline. */
+
+/** An {@code AquaTask} to represent a deadline. */
 public class AquaDeadline extends AquaTask {
-    /** Tag of {@code by} argument when parsing. */
+    /** Tag of {@code by} parameter when parsing. */
     public static final String TAG_BY = "by";
 
     /** If the task is completed. */
@@ -17,8 +18,8 @@ public class AquaDeadline extends AquaTask {
 
 
     /**
-     * Constructs an AquaDeadline from the given parameters while setting the
-     * task completion to {@code false}.
+     * Constructs an {@code AquaDeadline} from the given parameters while
+     * setting the task completion to {@code false}.
      *
      * @param name - the name of the task.
      * @param by - the time the task is due.
@@ -28,7 +29,7 @@ public class AquaDeadline extends AquaTask {
     }
 
     /**
-     * Constructs an AquaDeadline from the given parameters.
+     * Constructs an {@code AquaDeadline} from the given parameters.
      *
      * @param name - the name of the task.
      * @param isComplete - if the task is completed.

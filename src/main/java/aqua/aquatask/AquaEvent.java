@@ -6,7 +6,7 @@ import java.util.Optional;
 import aqua.util.DateUtils;
 
 
-/** Implementation of AquaTask to represent an Event */
+/** An {@code AquaTask} to represent an Event */
 public class AquaEvent extends AquaTask {
     /** Tag of {@code from} argument when parsing. */
     public static final String TAG_FROM = "from";

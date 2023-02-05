@@ -26,7 +26,7 @@ public abstract class AquaTask implements Reloadable {
 
 
     /**
-     * Constructs a task with the same name as the given AquaTask.
+     * Constructs an {@code AquaTask} that is a copy of the given task.
      *
      * @param task - the task to construct the new task from.
      */
