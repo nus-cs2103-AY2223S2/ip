@@ -47,10 +47,6 @@ public class Task {
     public boolean isMarked() {
         return this.done;
     }
-     
-    public String getName() {
-        return null;
-    }
 
     @Override
     public String toString() {

@@ -22,6 +22,8 @@ public class Ui {
      * @throws IOException when file path is invalid.
      */
     public void initialise() throws IOException {
+        System.out.println();
+        System.out.println();
         System.out.println(this.intro);
         System.out.println();
         Storage saved = new Storage("./dukeSaved.txt");
@@ -237,6 +239,45 @@ public class Ui {
             System.out.println(this.tList.get(num));
             this.tList.remove(num);
         }
+        reset();
+    }
+
+    /**
+     * Prints list of tasks containing specified keyword.
+     * 
+     * @param keyword keyword to search with.
+     */
+    public void find(String keyword) {
+        int counter = 1;
+        boolean printedHeader = false;
+        boolean hasMatch = false;
+
+        for (int i = 0; i < this.tList.size(); i++) {
+            Task curr = this.tList.get(i);
+            if (curr.getTask().contains(keyword)) {
+                hasMatch = true;
+
+                if (!printedHeader) {
+                    System.out.println();
+                    System.out.println("Duke: Here's your list of tasks relating to " + "\"" + keyword + "\"" + ":");
+                    printedHeader = true;
+                }
+                System.out.println(counter + ") " + curr.toString());
+                counter++;
+            }
+        }
+
+        if (!hasMatch) {
+            System.out.println("Duke: Sorry! No matching tasks found. Please try again.");
+        }
+
+        reset();
+    }
+
+    public void clearList() {
+        ArrayList<Task> newEmptyList = new ArrayList<>();
+        this.tList.setList(newEmptyList);
+        System.out.println("Duke: Ok! All tasks deleted.");
         reset();
     }
 }

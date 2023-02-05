@@ -71,8 +71,20 @@ public class Duke {
                     int num = parser.getTaskNum();
                     ui.delete(num);
                 }
+            } else if (parser.isInput("find")) {
+                if (ui.getList().isEmpty()) {
+                    ui.emptyErr();
+                } else {
+                    ui.find(parser.findTaskParsed());
+                }
+            } else if (parser.isInput("clear")) {
+                if (ui.getList().isEmpty()) {
+                    ui.emptyErr();
+                } else {
+                    ui.clearList();
+                }
             } else {
-                System.out.println("Duke; Sorry I don't recognise that command :( Please try again.");
+                System.out.println("Duke: Sorry I don't recognise that command :( Please try again.");
                 ui.reset();
             }
             parser.newInput();

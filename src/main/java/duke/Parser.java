@@ -54,6 +54,20 @@ public class Parser {
     }
 
     /**
+     * Creates String of keyword to be searched with.
+     * 
+     * @return Keyword or phrase.
+     */
+    public String findTaskParsed() {
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 1; i < this.raw.length; i++) {
+            sb.append(this.raw[i] + " ");
+        }
+        return sb.toString();
+    }
+
+    /**
      * Closes parser.
      */
     public void closeParser() {
