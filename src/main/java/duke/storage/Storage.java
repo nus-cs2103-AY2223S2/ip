@@ -45,6 +45,7 @@ public class Storage {
      * @param line
      */
     private void deleteLine(String line) {
+        assert this.storageFile.exists() : "File to be deleted from does not exist!";
         File tempFile = new File("temp.txt");
         try {
             BufferedReader reader = new BufferedReader(new FileReader(this.storageFile));
@@ -81,6 +82,7 @@ public class Storage {
      * @param newLine Line to be modified into.
      */
     private void modifyLine(String line, String newLine) {
+        assert this.storageFile.exists() : "File to be modified does not exist!";
         File tempFile = new File("temp.txt");
         try {
             BufferedReader reader = new BufferedReader(new FileReader(this.storageFile));
@@ -117,6 +119,7 @@ public class Storage {
      * @param text Line of text to be added.
      */
     private void appendToFile(String text) {
+        assert this.storageFile.exists() : "File to be written to does not exist!";
         try {
             FileWriter fw = new FileWriter(this.storageFile, true); // create a FileWriter in append mode
             fw.write(text + "\n");

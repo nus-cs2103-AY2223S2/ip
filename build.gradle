@@ -48,14 +48,15 @@ test {
 }
 
 application {
-    mainClassName = "Duke"
+    mainClassName = "gui.Launcher"
 }
 
 shadowJar {
-    archiveBaseName = "Duke"
+    archiveBaseName = "Duke-Gerty"
     archiveClassifier = null
 }
 
 run{
     standardInput = System.in
+    enableAssertions = true
 }
