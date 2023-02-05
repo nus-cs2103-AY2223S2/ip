@@ -1,4 +1,4 @@
-package ui;
+package Willy.ui;
 
 import java.io.BufferedReader;
 import java.io.IOException;

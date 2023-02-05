@@ -1,4 +1,5 @@
-package task;
+package Willy.task;
+
 public class Todo extends Task {
     private String code;
 

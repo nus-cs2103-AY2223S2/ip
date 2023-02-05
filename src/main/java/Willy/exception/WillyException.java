@@ -1,4 +1,4 @@
-package exception;
+package Willy.exception;
 
 public class WillyException extends Exception {
     public WillyException(String message){

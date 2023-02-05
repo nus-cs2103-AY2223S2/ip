@@ -1,7 +1,7 @@
-package task;
+package Willy.task;
 
-import exception.WillyException;
-import storage.Storage;
+import Willy.exception.WillyException;
+import Willy.storage.Storage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,16 +48,17 @@ public class TaskList {
         // System.out.println("Successfully deleted this task"); // chaneg this later
     }
 
-    public void addTodo(String details) throws WillyException {
+    public void addTodo(String details) {
         Todo entry = new Todo(details);
         tasks.add(entry);
         storage.save(this);
         System.out.println(entry.toString());
-        // System.out.format("Now you have %d things in your list%n", this.getTaskCount());
+        // System.out.format("Now you have %d things in your list%n",
+        // this.getTaskCount());
         // System.out.println("Successfully added a todo"); // chaneg
     }
 
-    public void addDeadline(String details, String date) throws WillyException {
+    public void addDeadline(String details, String date) {
         Deadline entry = new Deadline(details, date);
         tasks.add(entry);
         storage.save(this);
@@ -74,7 +75,7 @@ public class TaskList {
         // this later
     }
 
-    public void addEvent(String details, String dateFrom, String dateTo) throws WillyException {
+    public void addEvent(String details, String dateFrom, String dateTo) {
         Event entry = new Event(details, dateFrom, dateTo);
         tasks.add(entry);
         storage.save(this);

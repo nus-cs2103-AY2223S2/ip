@@ -1,4 +1,4 @@
-package task;
+package Willy.task;
 
 public class Task {
     private String msg;

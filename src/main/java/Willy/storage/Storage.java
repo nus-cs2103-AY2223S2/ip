@@ -1,10 +1,10 @@
-package storage;
+package Willy.storage;
 
-import task.Deadline;
-import task.Event;
-import task.Todo;
-import task.Task;
-import task.TaskList;
+import Willy.task.Deadline;
+import Willy.task.Event;
+import Willy.task.Todo;
+import Willy.task.Task;
+import Willy.task.TaskList;
 
 import java.io.File;
 import java.io.FileWriter;

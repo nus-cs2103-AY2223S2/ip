@@ -1,10 +1,12 @@
-import parser.Parser;
+package Willy;
+
+import Willy.parser.Parser;
 
 import java.io.IOException;
-import exception.WillyException;
-import storage.Storage;
-import task.TaskList;
-import ui.Ui;
+import Willy.exception.WillyException;
+import Willy.storage.Storage;
+import Willy.task.TaskList;
+import Willy.ui.Ui;
 
 public class Willy {
 
@@ -15,7 +17,7 @@ public class Willy {
     public Willy(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
-        this.tList = new TaskList(storage); // load data done in storage class
+        this.tList = new TaskList(this.storage); // load data done in storage class
     }
 
     public void run() throws IOException, WillyException {
