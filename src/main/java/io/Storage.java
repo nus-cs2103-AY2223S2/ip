@@ -35,6 +35,7 @@ public class Storage<T extends Serializable> {
 
     /**
      * @return Storage object.
+     * @param <T> Type of object to store.
      * @param type     class object for type parameter.
      * @param filename filename for storage file.
      */
