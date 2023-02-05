@@ -83,8 +83,9 @@ public class TaskList implements Iterable<Task> {
     public Task addDoneTask(TaskTypes.Type type, Map<String, String> args)
             throws InvalidDateTimeException, InvalidInputException {
         Task newTask = addTask(type, args); // add to end of list
-        int index = this.tasks.size() - 1; // mark last(est) item as done
+        int index = this.tasks.size() - 1; // mark the last/latest item as done
         markAsDone(index);
+        assert newTask.isDone();
         return newTask;
     }
 

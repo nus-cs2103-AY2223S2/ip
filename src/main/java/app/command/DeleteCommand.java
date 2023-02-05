@@ -8,7 +8,7 @@ import app.task.Task;
 import app.task.TaskList;
 
 public class DeleteCommand extends Command {
-    private String deleteAtIndex;
+    private final String deleteAtIndex;
 
     /**
      * Takes in the USER-input index - this index refers to the task as
@@ -29,7 +29,7 @@ public class DeleteCommand extends Command {
      * @throws Exception
      */
     @Override
-    public String execute(TaskList tl, Ui ui, Storage storage) throws Exception {
+    public String execute(TaskList tl, Ui ui, Storage storage) throws InvalidInputException {
         Response response = new Response();
         try {
             int i = Integer.parseInt(deleteAtIndex) - 1;

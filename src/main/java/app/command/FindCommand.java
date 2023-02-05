@@ -16,7 +16,7 @@ public class FindCommand extends Command {
 
     @Override
     public String execute(TaskList tl, Ui ui, Storage storage) {
-        StringBuilder resultDisplay = new StringBuilder("");
+        StringBuilder resultDisplay = new StringBuilder();
         boolean isSearchSuccessful = false;
         for (int i = 0; i < tl.size(); i++) {
             Task t = tl.getTask(i);
@@ -30,6 +30,7 @@ public class FindCommand extends Command {
             }
         }
         if (!isSearchSuccessful) {
+            assert resultDisplay.toString().equals("");
             return ("Ah I didn't find any tasks matching '" + this.searchContent + "'." + "\n" );
         } else {
             return ("Here's the tasks matching '" + this.searchContent + "':\n" +

@@ -52,6 +52,7 @@ public class Storage {
         if (!Files.exists(path)) {
             this.file.createNewFile();
         }
+        assert this.file.exists();
     }
 
     /**

@@ -47,6 +47,10 @@ application {
     mainClassName = "launcher.Launcher"
 }
 
+run {
+    enableAssertions = true
+}
+
 shadowJar {
     archiveBaseName = "duke"
     archiveClassifier = null

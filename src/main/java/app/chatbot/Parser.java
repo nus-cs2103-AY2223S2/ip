@@ -37,17 +37,19 @@ public class Parser {
      * @return map a mapping of each argument name to its value
      */
     private static Map<String, String> splitArgs(String input) {
-        // returns a Map mapping name of arg to arg value based on the raw format
-        // raw format according to task is /<name> <value>
 
+        // returns a Map mapping name of arg to arg value based on the raw format
         Map<String, String> map = new HashMap<>();
         String[] args = input.split(" /");
 
-        // process main command
+        // add name of main command (first word) to map
         String[] mainCommand = args[0].split(" ", 2);
-        map.put("Command", mainCommand[0]);
-        String desc = mainCommand.length == 1 ? "" : mainCommand[1].stripTrailing();
-        map.put(mainCommand[0], desc); // 0 refers to name of command, 1 refers to its additional desc
+        String mainCommandName = mainCommand[0];
+        map.put("Command", mainCommandName);
+
+        // check if there are arguments to main command, otherwise leave as ""
+        String mainCommandArg = mainCommand.length == 1 ? "" : mainCommand[1].stripTrailing();
+        map.put(mainCommandName, mainCommandArg);
 
         // process additional args, if present
         if (args.length > 1) {
@@ -59,6 +61,12 @@ public class Parser {
                 map.put(name, value);
             }
         }
+        // map should always contain "Command" and mainCommandArg keys
+        assert map.size() >= 2;
+
+        // value "Command" maps to should always be a key
+        assert map.containsKey(map.get("Command"));
+
         return map;
     }
 
@@ -68,7 +76,7 @@ public class Parser {
      * CommandNotFoundException.
      *
      * @param input untreated String entered into command line by user.
-     * @return an executeable Command containing info given by user.
+     * @return an executable Command containing info given by user.
      * @throws CommandNotFoundException
      */
     public static Command parse(String input) throws CommandNotFoundException {
