@@ -69,3 +69,7 @@ run {
     enableAssertions = true
     standardInput = System.in
 }
+
+tasks.withType(JavaExec) {
+    enableAssertions = true
+}
