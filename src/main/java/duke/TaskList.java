@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.stream.Stream;
 
 import duke.tasks.Deadline;
 import duke.tasks.Event;
@@ -99,7 +100,7 @@ public class TaskList {
     /**
      * Prints the tasks in the list for the user.
      */
-    public String printList() {
+    /**public String printList() {
         String s = "";
         int i = 1;
         s = "\n\tHere are the tasks in your list:";
@@ -111,6 +112,14 @@ public class TaskList {
             i++;
         }
         return s;
+    } **/
+
+    public String printList() {
+        int sizeOfList = listOfTasks.size();
+        return Stream.iterate(0, i -> i + 1)
+                .limit(sizeOfList)
+                .map(x -> String.format("\n\t%d%s", x + 1 ,listOfTasks.get(x).toString()))
+                .reduce("\n\tHere are the tasks in your list:", (y,z) -> y + z);
     }
 
     /**
