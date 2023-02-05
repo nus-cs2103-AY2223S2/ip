@@ -1,12 +1,12 @@
 package app.command;
 
+import java.io.IOException;
+import java.util.Map;
+
 import app.chatbot.Response;
 import app.chatbot.Storage;
 import app.chatbot.Ui;
 import app.task.TaskList;
-
-import java.io.IOException;
-import java.util.Map;
 
 public class LoadCommand extends Command {
 
@@ -21,7 +21,7 @@ public class LoadCommand extends Command {
      * @param tl
      * @param ui
      * @param storage
-     * @throws IOException, InvalidStorageException
+     * @throws IOException propagated from FileWriter
      */
     @Override
     public String execute(TaskList tl, Ui ui, Storage storage)

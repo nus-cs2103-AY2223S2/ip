@@ -150,7 +150,7 @@ public class Storage {
      * @return
      * @throws InvalidStorageException - if Description is missing
      */
-    private Map<String,String> getArgMapFromStorageFormat(List<String> args)
+    private Map<String, String> getArgMapFromStorageFormat(List<String> args)
             throws InvalidStorageException {
 
         Map<String, String> argValues = new HashMap<>();

@@ -61,8 +61,7 @@ public abstract class Task {
      * by trying across supported formats.
      * @param input
      * @return
-     * @throws InvalidDateTimeException if datetime fails to parse
-     * against available formats
+     * @throws InvalidDateTimeException if datetime fails to parse against available formats
      */
     protected LocalDateTime parseDate(String input) throws InvalidDateTimeException {
         LocalDateTime date = null;

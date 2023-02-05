@@ -22,7 +22,7 @@ public class FindCommand extends Command {
             Task t = tl.getTask(i);
             String desc = t.getDesc();
             if (desc.toLowerCase().contains(this.searchContent)) {
-                resultDisplay.append(i+1)
+                resultDisplay.append(i + 1)
                         .append(": ")
                         .append(t)
                         .append("\n");
@@ -31,10 +31,10 @@ public class FindCommand extends Command {
         }
         if (!isSearchSuccessful) {
             assert resultDisplay.toString().equals("");
-            return ("Ah I didn't find any tasks matching '" + this.searchContent + "'." + "\n" );
+            return ("Ah I didn't find any tasks matching '" + this.searchContent + "'." + "\n");
         } else {
-            return ("Here's the tasks matching '" + this.searchContent + "':\n" +
-                    resultDisplay + "\n");
+            return ("Here's the tasks matching '" + this.searchContent + "':\n"
+                    + resultDisplay + "\n");
         }
     }
 }

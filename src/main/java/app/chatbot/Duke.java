@@ -85,8 +85,7 @@ public class Duke {
 
     /**
      * Loads saved data from storage.
-     * @return Success message for loaded storage, or a message informing
-     * a load failure.
+     * @return Success message for loaded storage, or a message informing a load failure.
      */
     public String loadStorageData() {
         Command loadCommand = new LoadCommand();
