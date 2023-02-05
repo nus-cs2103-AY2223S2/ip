@@ -40,7 +40,7 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        String checkmark = this.done ? "✓" : " ";
+        String checkmark = this.done ? "X" : " ";
         return String.format("[ %s ] %s", checkmark, this.task);
     }
 }

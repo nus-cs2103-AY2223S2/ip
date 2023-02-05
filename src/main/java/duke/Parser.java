@@ -24,65 +24,60 @@ public class Parser {
      * @return boolean return false if the user indicates the end of current session
      */
 
+    @SuppressWarnings("checkstyle:Indentation")
     public String parseInput(String input) {
         if (input.equals("bye")) {
             return ".";
+        } else if (input.contains("unmark")) {
+            assert(input.length() == 8);
+            int i = Integer.parseInt(input.substring(7, 8));
+            Task t = taskList.unmarkTask(i);
+            try {
+                FileReadWrite.writeUnmark(i, t);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return Ui.printUnmark(taskList, i);
+        } else if (input.contains("mark")) {
+            assert(input.length() == 8);
+            int i = Integer.parseInt(input.substring(5, 6));
+            Task t = taskList.markTask(i);
+            try {
+                FileReadWrite.writeMark(i, t);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return Ui.printMark(taskList, i);
+        } else if (input.contains("delete")) {
+            assert(input.length() == 8);
+            int i = Integer.parseInt(input.substring(7, 8));;
+            try {
+                FileReadWrite.writeDelete(i);
+                return Ui.printDelete(taskList.delete(i), i, this.size);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            this.size--;
+        } else if (input.contains("find")) {
+            String keyword = input.substring(5);
+            return Ui.printFindList(taskList, keyword);
+        } else if (input.equals("list")) {
+            return Ui.printListCommand(taskList);
         } else {
-            if (input.contains("unmark")) {
-                assert(input.length() == 8);
-                int i = Integer.parseInt(input.substring(7, 8));
-                Task t = taskList.unmarkTask(i);
+            try {
+                Task newTask = createTask(input);
+                taskList.add(newTask);
                 try {
-                    FileReadWrite.writeUnmark(i, t);
-                } catch (IOException e) {
+                    FileReadWrite.writeTask(taskList);
+                    } catch (IOException e) {
                     e.printStackTrace();
-                }
-                return Ui.printUnmark(taskList, i);
-            } else if (input.contains("mark")) {
-                assert(input.length() == 8);
-                int i = Integer.parseInt(input.substring(5, 6));
-                Task t = taskList.markTask(i);
-                try {
-                    FileReadWrite.writeMark(i, t);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                return Ui.printMark(taskList, i);
-            } else if (input.contains("delete")) {
-                assert(input.length() == 8);
-                int i = Integer.parseInt(input.substring(7, 8));;
-                try {
-                    FileReadWrite.writeDelete(i);
-                    return Ui.printDelete(taskList.delete(i), i, this.size);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                this.size--;
-            } else if (input.contains("find")) {
-                String keyword = input.substring(5);
-                return Ui.printFindList(taskList, keyword);
-            } else {
-                switch (input) {
-                case "list":
-                    return Ui.printListCommand(taskList);
-                default:
-                    try {
-                        Task newTask = createTask(input);
-                        taskList.add(newTask);
-                        try {
-                            FileReadWrite.writeTask(taskList);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        this.size++;
-                        return Ui.printAddTask(newTask, size);
-                    } catch (EmptyArgException e) {
-                        return Ui.emptyError();
-                    } catch (UnknownInputException u) {
-                        return Ui.invalidInputError();
                     }
-                }
-
+                this.size++;
+                return Ui.printAddTask(newTask, size);
+            } catch (EmptyArgException e) {
+                return Ui.emptyError();
+            } catch (UnknownInputException u) {
+                return Ui.invalidInputError();
             }
         }
         return " ";
