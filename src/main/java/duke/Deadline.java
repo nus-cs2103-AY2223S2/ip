@@ -12,21 +12,21 @@ public class Deadline extends Task {
     public Deadline(String description, String by) throws EmptyDescriptionException {
         super(description);
         String[] str = by.split(" ");
-        this.date = LocalDate.parse(str[0], DateTimeFormatter.ofPattern("MMM-d-yyyy"));
+        this.date = LocalDate.parse(str[0], DateTimeFormatter.ofPattern("MMM-dd-yyyy"));
         if (str.length == 2) {
             this.time = LocalTime.parse(str[1], DateTimeFormatter.ofPattern("HHmm"));
         }
     }
     @Override
     public String getFileDescription() {
-        String dateString = date.format(DateTimeFormatter.ofPattern("MMM-d-yyyy"));
+        String dateString = date.format(DateTimeFormatter.ofPattern("MMM-dd-yyyy"));
         String timeString = time.format(DateTimeFormatter.ofPattern("HHmm"));
         return "D | " + super.getStatusIcon() + " | " + super.description + " | "  + dateString + " " + timeString;
     }
 
     @Override
     public String toString() {
-        String dateString = date.format(DateTimeFormatter.ofPattern("MMM-d-yyyy"));
+        String dateString = date.format(DateTimeFormatter.ofPattern("MMM-dd-yyyy"));
         String timeString = time.format(DateTimeFormatter.ofPattern("HHmm"));
         if (time != null) {
             return "[D]" + super.toString() + " (by: " + dateString + " " + timeString + ")";
