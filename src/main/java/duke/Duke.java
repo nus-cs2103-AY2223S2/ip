@@ -31,6 +31,7 @@ public class Duke {
     public Duke(Stage stage) {
         this.ui = new Ui(stage);
         String filepath = System.getProperty("user.home") + "/data/data.txt";
+        new File(filepath).getParentFile().mkdirs();
         File file = new File(filepath);
         try {
             file.createNewFile();

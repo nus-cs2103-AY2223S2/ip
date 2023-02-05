@@ -39,7 +39,7 @@ public class DeleteCommand extends Command {
             throw new DukeException("\tYou currently have no tasks in your list to delete.");
         } else {
             try {
-                if(isFind) {
+                if (isFind) {
                     ArrayList<Task> listOfFindTask = tasks.getListOfFindTasks();
                     Task temp = listOfFindTask.get(index);
                     listOfFindTask.remove(index);

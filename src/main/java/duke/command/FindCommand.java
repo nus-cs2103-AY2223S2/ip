@@ -9,7 +9,7 @@ import duke.Ui;
  * Find is a command that finds tasks in the task list filtered by a specific keyword.
  */
 public class FindCommand extends Command {
-    private String [] taskName;
+    private String[] taskName;
     /**
      * Constructor for FindCommand.
      *

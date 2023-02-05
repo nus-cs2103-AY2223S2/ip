@@ -12,7 +12,7 @@ import duke.tasks.ToDo;
  */
 public class TaskList {
     private ArrayList<Task> listOfTasks;
-    private static ArrayList<Task> listOfFindTasks;
+    private ArrayList<Task> listOfFindTasks;
 
     /**
      * Constructor for TaskList without any saved data.
