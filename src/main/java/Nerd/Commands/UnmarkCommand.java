@@ -8,16 +8,27 @@ import Nerd.Ui.Ui;
  * Represents the Duke.Commands.UnmarkCommand of the Chat bot.
  */
 public class UnmarkCommand extends Command {
+    private final int index;
 
     /**
-     * Overloaded processCommand method from the abstract class Command.
+     * Constructor of Unmark commands
+     *
+     * @param index The index of the task to be unmarked.
+     */
+    public UnmarkCommand(int index) {
+        this.index = index;
+    }
+
+    /**
+     * Overridden processCommand method from the abstract class Command.
      * Processes the command for a TodoCommand.
      *
      * @param list  The TaskList object that stores Tasks.
-     * @param index The position of the Task in the TaskList to be unmarked.
      * @param ui    User interface of the Chat bot.
+     * @return The string of the task being marked.
      */
-    public String processCommand(TaskList list, int index, Ui ui) {
+    @Override
+    public String processCommand(TaskList list, Ui ui) {
         Task task = list.getTask(index);
         task.setUndone();
         return String.format("Nice, this task has been marked as done:\n %s", task.toString());

@@ -8,20 +8,31 @@ import Nerd.Ui.Ui;
  * Represents the Duke.Commands.TodoCommand of the Chat bot.
  */
 public class TodoCommand extends Command {
+    private final String description;
 
     /**
-     * Overloaded processCommand method from the abstract class Command.
+     * Constructor of Todo commands
+     *
+     * @param description The description of the task.
+     */
+    public TodoCommand(String description) {
+        this.description = description;
+    }
+
+    /**
+     * Overridden processCommand method from the abstract class Command.
      * Processes the command for a TodoCommand.
      *
      * @param list The TaskList object that stores Tasks.
-     * @param desc The description of the Task.
      * @param ui   User interface of the Chat bot.
+     * @return The string result of adding a todo task.
      */
-    public String processCommand(TaskList list, String desc, Ui ui) {
-        Todo task = new Todo(desc);
+    @Override
+    public String processCommand(TaskList list, Ui ui) {
+        Todo task = new Todo(description);
         list.addTask(task);
-        return String.format("alright, I've added the following task:\n %s\nNow you have %d tasks in the list.",
-                task.toString(), list.getSize());
+        return String.format("alright, I've added the following task:\n %s\nNow you have %d tasks in the list."
+                ,task.toString(), list.getSize());
     }
 
 }

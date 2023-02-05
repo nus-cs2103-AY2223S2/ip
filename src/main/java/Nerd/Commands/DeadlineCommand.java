@@ -8,19 +8,33 @@ import Nerd.Ui.Ui;
  * Represents the Duke.Commands.DeadlineCommand of the Chat bot.
  */
 public class DeadlineCommand extends Command {
+    private final String description;
+    private final String by;
 
     /**
-     * Overloaded processCommand method from the abstract class Command.
+     * Constructor for a deadline command.
+     *
+     * @param description The description of the task.
+     * @param by The date of the deadline.
+     */
+    public DeadlineCommand(String description, String by) {
+        this.description = description;
+        this.by = by;
+    }
+
+    /**
+     * Overridden processCommand method from the abstract class Command.
      * Processes the command for a deadline Task.
      *
-     * @param list The TaskList object that stores Tasks.
-     * @param desc Description of the Deadline Task.
-     * @param by   dateline of the Deadline Task.
+     * @param list The TaskList object that stores tasks.
      * @param ui   User interface of the Chat bot.
+     * @return A string output for adding a deadline task.
      */
-    public String processCommand(TaskList list, String desc, String by, Ui ui) {
-        Deadline deadline = new Deadline(desc, by);
+    @Override
+    public String processCommand(TaskList list, Ui ui) {
+        Deadline deadline = new Deadline(description, by);
         list.addTask(deadline);
-        return String.format("Received, I've added the following deadlines:\n %s\nNow you have %d tasks in the list.", deadline.toString());
+        return String.format("Received, I've added the following deadlines:\n %s\nNow you have %d tasks in the list."
+                , deadline.toString(), list.getSize());
     }
 }

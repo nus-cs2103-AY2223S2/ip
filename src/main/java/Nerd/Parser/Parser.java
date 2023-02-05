@@ -27,57 +27,58 @@ public class Parser {
         try {
             type = CommandEnums.valueOf(split[0].toUpperCase().strip());
         } catch (IllegalArgumentException e) {
-            System.out.println("Sorry! I have no idea what that means ??? >:c");
-            return null;
+            throw new IllegalArgumentException("Sorry! I have no idea what that means ??? >:c");
         }
         switch (type) {
         case LIST:
             return new ListCommand();
         case MARK:
             if (!isEmptyCommand(split)) {
-                return new MarkCommand();
+                return new MarkCommand(parseIndex(input));
             } else {
                 throw new NerdException("Sorry! you can't have empty descriptions!");
             }
         case UNMARK:
             if (!isEmptyCommand(split)) {
-                return new UnmarkCommand();
+                return new UnmarkCommand(parseIndex(input));
             } else {
                 throw new NerdException("Sorry! you can't have empty descriptions!");
             }
         case TODO:
             if (!isEmptyCommand(split)) {
-                return new TodoCommand();
+                return new TodoCommand(parseDescription(input));
             } else {
                 throw new NerdException("Sorry! you can't have empty descriptions!");
             }
         case DEADLINE:
             if (!isEmptyCommand(split)) {
-                return new DeadlineCommand();
+                String[] parsedDeadline = parseDeadline(input);
+                return new DeadlineCommand(parsedDeadline[0], parsedDeadline[1]);
             } else {
                 throw new NerdException("Sorry! you can't have empty descriptions!");
             }
         case EVENT:
             if (!isEmptyCommand(split)) {
-                return new EventCommand();
+                String[] eventList = parseEvent(input);
+                return new EventCommand(eventList[0], eventList[1], eventList[2]);
             } else {
                 throw new NerdException("Sorry! you can't have empty descriptions!");
             }
         case DELETE:
             if (!isEmptyCommand(split)) {
-                return new DeleteCommand();
+                return new DeleteCommand(parseIndex(input));
             } else {
                 throw new NerdException("Sorry! you can't have empty descriptions!");
             }
         case DATE:
             if (!isEmptyCommand(split)) {
-                return new SearchDateCommand();
+                return new SearchDateCommand(parseDescription(input));
             } else {
                 throw new NerdException("Sorry! you can't have empty descriptions!");
             }
         case FIND:
             if (!isEmptyCommand(split)) {
-                return new FindCommand();
+                return new FindCommand(parseDescription(input));
             } else {
                 throw new NerdException("Sorry! you can't have empty descriptions!");
             }
@@ -162,24 +163,27 @@ public class Parser {
      * Parses the input string for deadline tasks.
      *
      * @param input The full line of the command and arguments.
-     * @return The date of the deadline.
+     * @return An array containing the description and date of the deadline.
      */
-    public String parseDeadline(String input) {
+    public String[] parseDeadline(String input) {
         String[] split = input.split("/by");
-        return split[1];
+        String description = split[0].replaceFirst("deadline ","");
+        String[] result = {description, split[1]};
+        return result;
     }
 
     /**
      * Parses the input string for Event tasks.
      *
      * @param input The full line of the command and arguments.
-     * @return A string array containing start and end dates.
+     * @return A string array containing description, start and end dates.
      */
     public String[] parseEvent(String input) {
         String[] split = input.split("/from");
+        String description = split[0].replaceFirst("event ", "");
         split = split[1].split("/to");
-        String[] res = {split[0], split[1]};
-        return res;
+        String[] result = {description, split[0], split[1]};
+        return result;
     }
 
     public boolean isEmptyCommand(String[] input) {

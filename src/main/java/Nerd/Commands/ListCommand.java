@@ -10,12 +10,14 @@ import Nerd.Ui.Ui;
 public class ListCommand extends Command {
 
     /**
-     * Overloaded processCommand method from the abstract class Command.
+     * Overridden processCommand method from the abstract class Command.
      * Processes the command for a ListCommand.
      *
      * @param list The TaskList object that stores Tasks.
      * @param ui   User interface of the Chat bot.
+     * @return The string of all task currently in the TaskList.
      */
+    @Override
     public String processCommand(TaskList list, Ui ui) {
         String output = "";
         for (int i = 0; i < list.getSize(); i++) {

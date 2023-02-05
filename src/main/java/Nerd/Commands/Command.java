@@ -1,7 +1,8 @@
 package Nerd.Commands;
 
-import Nerd.Ui.Ui;
 import Nerd.entities.TaskList;
+import Nerd.Ui.Ui;
+
 
 /**
  * Represents the Duke.Commands.Command abstract class.
@@ -12,21 +13,9 @@ public abstract class Command {
 
     /**
      * Duke.Commands abstract method that processes the command.
+     *
+     * @param list The tasklist of the Nerdbot.
+     * @param ui The user interface of the Nerdbot.
      */
-    public String processCommand(TaskList list, int index, Ui ui) {
-        return null;
-    }
-    public String processCommand(TaskList list, String desc, String by, Ui ui) {
-        return null;
-    }
-    public String processCommand(TaskList list, String desc, String from, String to, Ui ui) {
-        return null;
-    }
-    public String processCommand(Ui ui) {
-        return null;
-    }
-    public String processCommand(TaskList list, String item, Ui ui) {
-        return null;
-    }
-
+    public abstract String processCommand(TaskList list, Ui ui);
 }

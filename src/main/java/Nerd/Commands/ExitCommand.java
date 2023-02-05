@@ -1,5 +1,6 @@
 package Nerd.Commands;
 
+import Nerd.entities.TaskList;
 import Nerd.Ui.Ui;
 
 /**
@@ -8,12 +9,13 @@ import Nerd.Ui.Ui;
 public class ExitCommand extends Command {
 
     /**
-     * Overloaded processCommand method from the abstract class Command.
+     * Overridden processCommand method from the abstract class Command.
      * Processes the command for an ExitCommand.
      *
-     * @param ui User interface of the Chat bot.
+     * @return The string for processing an exit command.
      */
-    public String processCommand(Ui ui) {
+    @Override
+    public String processCommand(TaskList list, Ui ui) {
         return "See you next time!";
     }
 }

@@ -4,12 +4,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Scanner;
 import java.nio.file.Path;
+import java.util.Scanner;
 
-import Nerd.Parser.Parser;
 import Nerd.entities.*;
 import Nerd.exceptions.NerdException;
+import Nerd.Parser.Parser;
 
 /**
  * Represents the Storage of the Chat bot.
