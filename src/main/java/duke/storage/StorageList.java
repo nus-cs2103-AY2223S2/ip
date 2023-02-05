@@ -65,7 +65,7 @@ public class StorageList {
             if (!dir.exists()) {
                 dir.mkdirs();
             }
-            assert dir.exists() :  "Command file should be created";
+            assert dir.exists() : "Command file should be created";
             java.nio.file.Path path = java.nio.file.Paths.get("data", "duke.txt");
             FileWriter writer = new FileWriter(String.valueOf(path));
             for (Task str : list) {
