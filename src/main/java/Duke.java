@@ -213,7 +213,7 @@ public class Duke extends Application {
             reply = mainUi.printReply(first);
             break;
         }
-
+        assert reply.size() > 0;
         StringBuilder finalString = new StringBuilder();
         for (String s : reply) {
             finalString.append(s).append("\n");
