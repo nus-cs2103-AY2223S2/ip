@@ -2,10 +2,10 @@ package command;
 
 import duke.Storage;
 import duke.Ui;
+
 import exceptions.DukeException;
 import tasks.Task;
 import tasks.TaskList;
-
 /***
  * this class handles deleting a task as a command
  */

@@ -4,12 +4,12 @@ package command;
 
 import duke.Storage;
 import duke.Ui;
-import exceptions.DukeException;
-import tasks.Task;
-import tasks.TaskList;
 
 import java.util.ArrayList;
 
+import exceptions.DukeException;
+import tasks.Task;
+import tasks.TaskList;
 
 /***
  * Give users a way to find a task by searching for a keyword.

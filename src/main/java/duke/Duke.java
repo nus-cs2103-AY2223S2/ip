@@ -1,12 +1,11 @@
 package duke;
 
-import command.Command;
-import exceptions.DukeException;
-import tasks.TaskList;
-
 import java.io.File;
 import java.io.IOException;
 
+import command.Command;
+import exceptions.DukeException;
+import tasks.TaskList;
 
 /***
  * Main class

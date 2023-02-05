@@ -1,11 +1,11 @@
 package duke;
 
-import tasks.Task;
-import tasks.TaskList;
-
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
+
+import tasks.Task;
+import tasks.TaskList;
 
 /***
  * A class that deals with interactions with the user

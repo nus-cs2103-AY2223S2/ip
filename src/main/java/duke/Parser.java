@@ -45,7 +45,7 @@ public class Parser {
     /***
      * parse the instruction accordingly based on first word in the string
      * @param command
-     * @return
+     * @return Command
      * @throws DukeException
      */
     public static Command parse(String command) throws DukeException {
@@ -54,54 +54,54 @@ public class Parser {
         Command com;
         try {
             switch (instruction) {
-                case ("list"):
-                    com = new ListCommand();
-                    break;
-                case ("find"):
-                    checkIfBlank(c);
-                    com = new FindCommand(c[1]);
-                    break;
-                case ("mark"):
-                    checkIfBlank(c);
-                    checkIfValidInteger(c);
-                    String number = command.substring(5);
-                    int taskNum = Integer.parseInt(number);
-                    com = new MarkCommand(taskNum);
-                    break;
-                case ("unmark"):
-                    checkIfBlank(c);
-                    checkIfValidInteger(c);
-                    number = command.substring(7);
-                    int index = Integer.parseInt(number);
-                    com = new UnmarkCommand(index);
-                    break;
-                case ("todo"):
-                    checkIfBlank(c);
-                    com = new TodoCommand(command);
-                    break;
-                case ("deadline"):
-                    checkIfBlank(c);
-                    String[] limit = c[1].split(" /by ");
-                    checkIfBlank(limit);
-                    com = new DeadlineCommand(command);
-                    break;
-                case ("event"):
-                    checkIfBlank(c);
-                    String[] interval = c[1].split(" /from ");
-                    checkIfBlank(interval);
-                    com = new EventCommand(command);
-                    break;
-                case ("delete"):
-                    checkIfBlank(c);
-                    checkIfValidInteger(c);
-                    int taskNum2 = Integer.parseInt(c[1]);
-                    com = new DeleteCommand(taskNum2);
-                    break;
-                case ("bye"):
-                    com = new ByeCommand();
-                    break;
-                default:
-                    throw new InvalidInstructionException();
+            case ("list"):
+                com = new ListCommand();
+                break;
+            case ("find"):
+                checkIfBlank(c);
+                com = new FindCommand(c[1]);
+                break;
+            case ("mark"):
+                checkIfBlank(c);
+                checkIfValidInteger(c);
+                String number = command.substring(5);
+                int taskNum = Integer.parseInt(number);
+                com = new MarkCommand(taskNum);
+                break;
+            case ("unmark"):
+                checkIfBlank(c);
+                checkIfValidInteger(c);
+                number = command.substring(7);
+                int index = Integer.parseInt(number);
+                com = new UnmarkCommand(index);
+                break;
+            case ("todo"):
+                checkIfBlank(c);
+                com = new TodoCommand(command);
+                break;
+            case ("deadline"):
+                checkIfBlank(c);
+                String[] limit = c[1].split(" /by ");
+                checkIfBlank(limit);
+                com = new DeadlineCommand(command);
+                break;
+            case ("event"):
+                checkIfBlank(c);
+                String[] interval = c[1].split(" /from ");
+                checkIfBlank(interval);
+                com = new EventCommand(command);
+                break;
+            case ("delete"):
+                checkIfBlank(c);
+                checkIfValidInteger(c);
+                int taskNum2 = Integer.parseInt(c[1]);
+                com = new DeleteCommand(taskNum2);
+                break;
+            case ("bye"):
+                com = new ByeCommand();
+                break;
+            default:
+                throw new InvalidInstructionException();
             }
         } catch (NumberFormatException e) {
             throw new NumberFormatException("some msg");
@@ -117,8 +117,9 @@ public class Parser {
      */
     public static void checkIfBlank(String[] arr) throws BlankException {
         try {
-            if (arr[1].trim().isBlank())
+            if (arr[1].trim().isBlank()) {
                 throw new BlankException();
+            }
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new BlankException();
         }
