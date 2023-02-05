@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 public class Storage {
     /** Filepath of TaskList */
-    private Path filename;
+    private final Path filename;
 
     /**
      * Constructs Storage class.
@@ -36,7 +36,7 @@ public class Storage {
      */
     public void save(TaskList tasks) throws DukeException {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filename.toString()))) {
-            oos.writeObject(tasks.getTasks());
+            oos.writeObject(tasks);
         } catch (IOException e) {
             throw new DukeException(e.getMessage());
         }
@@ -49,19 +49,20 @@ public class Storage {
      * @throws DukeException If file cannot be found or if classes from the file cannot be found.
      */
     public TaskList load() throws DukeException {
-        TaskList tasks = new TaskList();
+        TaskList tasks = null;
         File file = filename.toFile();
         if (!file.exists()) {
             try {
                 file.getParentFile().mkdirs();
                 file.createNewFile();
+                tasks = new TaskList();
             } catch (IOException e) {
                 throw new DukeException(e.getMessage());
             }
         }
         if(file.length() != 0) {
             try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filename.toString()))) {
-                tasks.setTasks((ArrayList<Task>) ois.readObject());
+                tasks = new TaskList((ArrayList<Task>) ois.readObject());
             } catch (ClassNotFoundException e) {
                 throw new DukeException(e.getMessage());
             } catch (IOException e) {

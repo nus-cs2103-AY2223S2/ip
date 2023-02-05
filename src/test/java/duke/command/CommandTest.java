@@ -37,8 +37,8 @@ public class CommandTest {
         Task task = new Deadline("Test deadline", "01012023 1200");
         Command command = new Command.AddCommand(task);
         command.execute(tasks, ui, storage);
-        assertEquals(1, tasks.getSize());
-        assertEquals(task, tasks.getTask(0));
+        assertEquals(1, tasks.size());
+        assertEquals(task, tasks.get(0));
         assertEquals(true, file.length() > 0);
         // Difficult to test for ui
     }
@@ -47,10 +47,10 @@ public class CommandTest {
     public void testMarkCommand() throws DukeException {
         Task task = new Deadline("Test deadline", "01012023 1200");
         assertEquals(false, task.isDone());
-        tasks.addTask(task);
+        tasks.add(task);
         Command command = new Command.MarkCommand(0);
         command.execute(tasks, ui, storage);
-        assertEquals(true, storage.load().getTask(0).isDone());
+        assertEquals(true, storage.load().get(0).isDone());
         // Difficult to test for ui
     }
 
@@ -59,10 +59,10 @@ public class CommandTest {
         Task task = new Deadline("Test deadline", "01012023 1200");
         task.setDone(true);
         assertEquals(true, task.isDone());
-        tasks.addTask(task);
+        tasks.add(task);
         Command command = new Command.UnmarkCommand(0);
         command.execute(tasks, ui, storage);
-        assertEquals(false, storage.load().getTask(0).isDone());
+        assertEquals(false, storage.load().get(0).isDone());
         // Difficult to test for ui
     }
 

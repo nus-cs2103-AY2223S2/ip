@@ -50,7 +50,7 @@ public abstract class Command {
          */
         @Override
         public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-            tasks.addTask(task);
+            tasks.add(task);
             storage.save(tasks);
             ui.showAdded(task);
             ui.showListSize(tasks);
@@ -71,7 +71,7 @@ public abstract class Command {
          */
         @Override
         public void execute(TaskList tasks, Ui ui, Storage storage) {
-            tasks.showList(ui);
+            ui.showList(tasks);
         }
     }
 
@@ -105,11 +105,11 @@ public abstract class Command {
         public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
             Task task;
             try {
-                task = tasks.getTask(index);
+                task = tasks.get(index);
             } catch (IndexOutOfBoundsException e) {
                 throw new DukeException("Invalid index entered!");
             }
-            tasks.markTask(task);
+            tasks.markTask(index);
             storage.save(tasks);
             ui.showMarked(task);
         }
@@ -145,11 +145,11 @@ public abstract class Command {
         public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
             Task task;
             try {
-                task = tasks.getTask(index);
+                task = tasks.get(index);
             } catch (IndexOutOfBoundsException e) {
                 throw new DukeException("Invalid index entered!");
             }
-            tasks.unmarkTask(task);
+            tasks.unmarkTask(index);
             storage.save(tasks);
             ui.showUnmarked(task);
         }
@@ -185,11 +185,11 @@ public abstract class Command {
         public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
             Task task;
             try {
-                task = tasks.getTask(index);
+                task = tasks.get(index);
             } catch (IndexOutOfBoundsException e) {
                 throw new DukeException("Invalid index entered!");
             }
-            tasks.deleteTask(index);
+            tasks.remove(index);
             storage.save(tasks);
             ui.showDeleted(task);
             ui.showListSize(tasks);
@@ -197,26 +197,26 @@ public abstract class Command {
     }
 
     public static class FilterCommand extends Command {
-        /** Object for TaskList to be filtered by */
-        private Object object;
+        /** Keywords for TaskList to be filtered by */
+        private String[] keywords;
 
         /**
          * Constructs FilterCommand class.
          *
-         * @param obj Object for TaskList to be filtered by.
+         * @param keywords Keywords for TaskList to be filtered by.
          */
-        public FilterCommand(Object obj) {
-            this.object = obj;
+        public FilterCommand(String... keywords) {
+            this.keywords = keywords;
             Command.isExit =false;
         }
 
         /**
-         * Gets object for TaskList to be filtered by.
+         * Gets keywords for TaskList to be filtered by.
          *
-         * @return Object for TaskList to be filtered by.
+         * @return Keywords for TaskList to be filtered by.
          */
-        public Object getObject() {
-            return object;
+        public String[] getKeywords() {
+            return keywords;
         }
 
         /**
@@ -224,14 +224,41 @@ public abstract class Command {
          */
         @Override
         public void execute(TaskList tasks, Ui ui, Storage storage) {
-            if (object instanceof LocalDate) {
-                LocalDate date = (LocalDate) object;
-                tasks.filterDate(ui, date);
-            }
-            if (object instanceof String) {
-                String keyword = (String) object;
-                tasks.filter(ui, keyword);
-            }
+            TaskList filteredTasks = tasks.filter(keywords);
+            ui.showFilteredByKeywords(keywords, filteredTasks);
+        }
+    }
+
+    public static class FilterDateCommand extends Command {
+        /** Dates for TaskList to be filtered by */
+        private LocalDate[] dates;
+
+        /**
+         * Constructs FilterDateCommand class.
+         *
+         * @param dates Dates for TaskList to be filtered by.
+         */
+        public FilterDateCommand(LocalDate... dates) {
+            this.dates = dates;
+            Command.isExit =false;
+        }
+
+        /**
+         * Gets dates for TaskList to be filtered by.
+         *
+         * @return Dates for TaskList to be filtered by.
+         */
+        public LocalDate[] getDates() {
+            return dates;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public void execute(TaskList tasks, Ui ui, Storage storage) {
+            TaskList filteredTasks = tasks.filterDate(dates);
+            ui.showFilteredByDates(dates, filteredTasks);
         }
     }
 

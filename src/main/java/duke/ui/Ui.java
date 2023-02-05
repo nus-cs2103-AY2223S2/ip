@@ -3,8 +3,11 @@ package duke.ui;
 import duke.task.Task;
 import duke.task.TaskList;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Ui {
-    /** Scanner for UI */
+    /** Output for UI */
     private String output;
 
     /**
@@ -81,10 +84,10 @@ public class Ui {
      * Displays message including size of list.
      */
     public void showListSize(TaskList tasks) {
-        if (tasks.getSize() == 1) {
-            storeOutput("Now you have " + tasks.getSize() + " task in the list.");
+        if (tasks.size() == 1) {
+            storeOutput("Now you have " + tasks.size() + " task in the list.");
         } else {
-            storeOutput("Now you have " + tasks.getSize() + " tasks in the list.");
+            storeOutput("Now you have " + tasks.size() + " tasks in the list.");
         }
     }
 
@@ -92,13 +95,7 @@ public class Ui {
      * Displays all tasks in the list.
      */
     public void showList(TaskList tasks) {
-        String output = "Here are the tasks in your list:";
-        for (int i = 0; i < tasks.getSize(); i++) {
-            Task t = tasks.getTask(i);
-            int index = i + 1;
-            output += "\n" + index + ". " + t;
-        }
-        storeOutput(output);
+        storeOutput("Here are the tasks in your list:\n" + tasks);
     }
 
     /**
@@ -121,6 +118,41 @@ public class Ui {
     public void showDeleted(Task t) {
         storeOutput("Noted. I've removed this task:\n\t  " + t);
     }
+
+    /**
+     * Displays tasks filtered by keywords.
+     */
+    public void showFilteredByKeywords(String[] keywords, TaskList filteredTasks) {
+        int count = filteredTasks.size();
+        String keywordsMessage = "";
+        for (int i = 0; i < keywords.length; i++) {
+            String keyword = keywords[i];
+            if (i == keywords.length - 1) {
+                keywordsMessage += "'" + keyword + "'";
+            } else {
+                keywordsMessage += "'" + keyword + "'" + ", ";
+            }
+        }
+        storeOutput("Number of tasks with " + keywordsMessage + ": " + count + "\n" + filteredTasks);
+    }
+
+    /**
+     * Displays tasks filtered by dates.
+     */
+    public void showFilteredByDates(LocalDate[] dates, TaskList filteredTasks) {
+        int count = filteredTasks.size();
+        String datesMessage = "";
+        for (int i = 0; i < dates.length; i++) {
+            LocalDate date = dates[i];
+            if (i == dates.length - 1) {
+                datesMessage += date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+            } else {
+                datesMessage += date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ", ";
+            }
+        }
+        storeOutput("Number of tasks on " + datesMessage + ": " + count + "\n" + filteredTasks);
+    }
+
 
     /**
      * Displays error message if any error occurs.
