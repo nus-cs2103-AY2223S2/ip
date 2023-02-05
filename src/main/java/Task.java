@@ -19,6 +19,8 @@ public class Task {
         this.isDone = false;
     }
 
+    public void isDate() {}
+
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
     }
