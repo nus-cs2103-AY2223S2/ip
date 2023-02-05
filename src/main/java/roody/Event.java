@@ -2,10 +2,20 @@ package roody;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents an Event Task.
+ */
 public class Event extends Task {
     private LocalDate start;
     private LocalDate end;
     private char type = 'E';
+
+    /**
+     * Creates an Event with specified description, start and end date.
+     * @param description The description of the Event.
+     * @param start The start date of the Event.
+     * @param end The end date of the Event.
+     */
     public Event(String description, LocalDate start, LocalDate end) {
         super(description);
         this.start = start;

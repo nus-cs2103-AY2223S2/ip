@@ -5,11 +5,23 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents a CLI chatbot named Roody.
+ */
 public class Roody {
+    /** Stores tasks */
     private ArrayList<Task> list;
+
+    /** Manages loading/saving of task data */
     private Storage storage;
+
+    /** Manages GUI */
     private Ui ui;
 
+    /**
+     * Creates a chatbot with specified filepath to task data.
+     * @param filepath The filepath to task data.
+     */
     public Roody(String filepath){
         // Assumed no more than 100 tasks
         this.list = new ArrayList<Task>();
@@ -31,7 +43,6 @@ public class Roody {
             ui.showMarkStatus(complete, task);
         }
     }
-    
 
     private void delete(int index) {
         if (index > list.size() - 1 || list.get(index) == null) {
@@ -43,6 +54,9 @@ public class Roody {
         }
     }
 
+    /**
+     * Runs the main process of chatbot
+     */
     public void run() {
         // Sends initial greeting
         ui.greet();
