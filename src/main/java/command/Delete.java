@@ -5,6 +5,9 @@ import io.Ui;
 import task.TaskList;
 import util.Parser;
 
+/**
+ * Manages deletion of tasks from tasks.
+ */
 public class Delete implements Command {
     private final int taskNum;
 
@@ -16,6 +19,9 @@ public class Delete implements Command {
         this.taskNum = taskNum;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void execute(TaskList taskList, Storage<TaskList> storage) {
         if (this.taskNum < 1 || this.taskNum > taskList.size()) {
@@ -26,6 +32,10 @@ public class Delete implements Command {
         Ui.showReply(String.format(SUCCESS, this.taskNum, taskList.toString()));
     }
 
+    /**
+     * @return Parser that can parse the delete command.
+     * @see Parser
+     */
     public static Parser<Command> parser() {
         return Parser.skipSpace()
                 .ignoreThen(Parser.strParserIgnoreCase("delete"))

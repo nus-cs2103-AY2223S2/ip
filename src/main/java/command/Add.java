@@ -10,6 +10,9 @@ import task.Todo;
 import util.Parser;
 import util.Util;
 
+/**
+ * Manages the adding of tasks into the taskList
+ */
 public class Add implements Command {
     private final Task task;
 
@@ -25,12 +28,20 @@ public class Add implements Command {
         this.task = task;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void execute(TaskList taskList, Storage<TaskList> storage) {
         taskList.addTask(this.task);
         Ui.showReply(String.format(SUCCESS, taskList.getLast()));
     }
 
+    /**
+     * @return Parser that can parse todo tasks.
+     * @see Parser
+     * @see Todo
+     */
     private static Parser<Task> todoParser() {
         return Parser.skipSpace()
                 .ignoreThen(Parser.strParserIgnoreCase("todo"))
@@ -41,6 +52,11 @@ public class Add implements Command {
                 .overrideMsg(TODO_FORMAT);
     }
 
+    /**
+     * @return Parser that can parse deadline tasks.
+     * @see Parser
+     * @see Deadline
+     */
     private static Parser<Task> deadlineParser() {
         return Parser.skipSpace()
                 .ignoreThen(Parser.strParserIgnoreCase("deadline"))
@@ -52,6 +68,11 @@ public class Add implements Command {
                 .overrideMsg(DEADLINE_FORMAT);
     }
 
+    /**
+     * @return Parser that can parse event tasks.
+     * @see Parser
+     * @see Event
+     */
     private static Parser<Task> eventParser() {
         return Parser.skipSpace()
                 .ignoreThen(Parser.strParserIgnoreCase("event"))
@@ -66,6 +87,11 @@ public class Add implements Command {
                 .overrideMsg(EVENT_FORMAT);
     }
 
+    /**
+     * @return Parser that can parse the add command.
+     * @see Parser
+     * @see Add
+     */
     public static Parser<Command> parser() {
         return todoParser()
                 .or(deadlineParser())

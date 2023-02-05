@@ -9,11 +9,18 @@ public class Exit implements Command {
 
     private static final String FORMAT = "bye";
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isExit() {
         return true;
     }
 
+    /**
+     * @return Parser that can parse the bye command.
+     * @see Parser
+     */
     public static Parser<Command> parser() {
         return Parser.skipSpace()
                 .ignoreThen(Parser.strParserIgnoreCase("bye"))
@@ -21,6 +28,9 @@ public class Exit implements Command {
                 .overrideMsg(FORMAT);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void execute(TaskList taskList, Storage<TaskList> storage) {
         String reply = storage.save(taskList).match(
