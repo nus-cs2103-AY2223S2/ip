@@ -13,9 +13,9 @@ import java.util.Scanner;
  */
 public class Storage {
     /** filepath to data file */
-    String filePath;
+    private String filePath;
     /** filepath to folder */
-    String defaultFolderPath = "./data";
+    private String defaultFolderPath = "./data";
 
     /**
      * Creates a Storage handler with specified filepath to save data.
@@ -35,7 +35,7 @@ public class Storage {
         ArrayList<Task> list = new ArrayList<>();
         try {
             File data = new File(filePath);
-            File folder = new File(defaultFolderPath); 
+            File folder = new File(defaultFolderPath);
             // check if file exists
             if (!folder.exists()) {
                 folder.mkdir();
@@ -46,7 +46,7 @@ public class Storage {
                 //System.out.println("File already exists.");
                 Scanner s = new Scanner(data);
                 String task = "";
-                while (s.hasNextLine()){
+                while (s.hasNextLine()) {
                     task = s.nextLine();
                     String[] inputs = task.split("\\|", 5);
                     //System.out.println(Arrays.toString(inputs));
@@ -55,7 +55,7 @@ public class Storage {
                     if (inputs[2].equals("T")) {
                         temp = new Todo(inputs[0]);
                     } else if (inputs[2].equals("D")) {
-                        temp = new Deadline(inputs[0], LocalDate.parse(inputs[3])); 
+                        temp = new Deadline(inputs[0], LocalDate.parse(inputs[3]));
                     } else if (inputs[2].equals("E")) {
                         temp = new Event(inputs[0], LocalDate.parse(inputs[3]), LocalDate.parse(inputs[4]));
                     } else {
@@ -69,7 +69,7 @@ public class Storage {
                     list.add(temp);
                 }
                 s.close();
-            }    
+            }
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
@@ -77,10 +77,14 @@ public class Storage {
         return list;
     }
 
+<<<<<<< HEAD
     /**
      * Saves Task information, if any, into a preset file.
      * @param list The ArrayList of Tasks to be saved.
      */
+=======
+    // saves information if any into roody.txt
+>>>>>>> branch-A-CodingStandard
     public void saveFile(ArrayList<Task> list) {
         ArrayList<String> buffer = new ArrayList<>();
         Path output = Paths.get(filePath);

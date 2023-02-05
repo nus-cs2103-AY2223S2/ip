@@ -4,11 +4,11 @@ import java.util.List;
 
 public class Ui {
     private List<String> printBuffer;
-    public Ui(){
+    public Ui() {
         this.printBuffer = new ArrayList<String>();
     }
 
-     // Provides basic showLine 
+    // Provides basic showLine
     public void showLine() {
         System.out.println("____________________________________________________________");
     }
@@ -16,7 +16,7 @@ public class Ui {
         System.out.print("=> ");
     }
 
-    // Repeats the input 
+    // Repeats the input
     public void speak(String input) {
         showLine();
         System.out.println(input);
@@ -28,11 +28,11 @@ public class Ui {
     }
     public void showAddTask(Task task, int listLength) {
         printBuffer.add("Got it. I've added this task:");
-        printBuffer.add("  [" + task.getType() +"][ ] " + task.toString()); 
+        printBuffer.add("  [" + task.getType() + "][ ] " + task.toString());
         printBuffer.add("Now you have " + listLength + " tasks in the list.");
         speak(printBuffer);
     }
-    
+
     public void showDeleteTask(Task task, int listLength) {
         printBuffer.add("Noted. I've removed this task:");
         printBuffer.add("  [" + task.getType() + "][ ] " + task.toString());
@@ -43,16 +43,16 @@ public class Ui {
     public void showMarkStatus(boolean complete, Task task) {
         if (complete) {
             printBuffer.add("Nice! I've marked this task as done:");
-            printBuffer.add("["+ task.getType()+"][X] " + task.toString());
+            printBuffer.add("[" + task.getType() + "][X] " + task.toString());
         } else {
             printBuffer.add("OK, I've marked this task as not done yet:");
-            printBuffer.add("["+ task.getType()+"][ ] " + task.toString());
+            printBuffer.add("[" + task.getType() + "][ ] " + task.toString());
         }
         speak(printBuffer);
     }
 
     // Prints entire list in this.list
-    public void printList(ArrayList<Task> list) throws RoodyException{
+    public void printList(ArrayList<Task> list) throws RoodyException {
         int count = 0;
         int listIndex = 0;
         StringBuilder stringBuilder = new StringBuilder();
@@ -75,7 +75,7 @@ public class Ui {
                 }
                 stringBuilder.append(list.get(count).toString());
                 printBuffer.add(stringBuilder.toString());
-                
+
                 // Clears and updates values
                 stringBuilder.setLength(0);
                 count++;
@@ -93,7 +93,7 @@ public class Ui {
         speak(this.printBuffer);
         showLine();
     }
-    
+
     // final greeting
     public void bye() {
         speak("Bye. Hope to see you again soon!");

@@ -21,20 +21,20 @@ public class Event extends Task {
         this.start = start;
         this.end = end;
     }
-    public void setStart(LocalDate time){
+    public void setStart(LocalDate time) {
         this.start = time;
     }
-    public void setEnd(LocalDate time){
+    public void setEnd(LocalDate time) {
         this.end = time;
     }
-    public LocalDate getStart(){
+    public LocalDate getStart() {
         return this.start;
     }
-    public LocalDate getEnd(){
+    public LocalDate getEnd() {
         return this.end;
     }
     @Override
-    public String saveTask(){
+    public String saveTask() {
         return super.saveTask() + '|' + this.type + '|' + this.start + '|' + this.end;
     }
     @Override
@@ -42,7 +42,8 @@ public class Event extends Task {
         return type;
     }
     @Override
-    public String toString(){
-        return super.toString() + " (from: " + start.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " to: " + end.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+    public String toString() {
+        return super.toString() + " (from: " + start.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                + " to: " + end.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }

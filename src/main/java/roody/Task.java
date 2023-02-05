@@ -36,7 +36,7 @@ public abstract class Task {
         return this.description + '|' + this.done;
     }
     @Override
-    public String toString(){
+    public String toString() {
         return this.description;
     }
 }

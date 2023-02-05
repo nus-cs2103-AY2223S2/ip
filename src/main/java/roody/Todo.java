@@ -14,7 +14,7 @@ public class Todo extends Task {
         super(description);
     }
     @Override
-    public String saveTask(){
+    public String saveTask() {
         return super.saveTask() + '|' + this.type;
     }
     @Override
@@ -22,7 +22,7 @@ public class Todo extends Task {
         return type;
     }
     @Override
-    public String toString(){
+    public String toString() {
         return super.toString() + "";
     }
 }
