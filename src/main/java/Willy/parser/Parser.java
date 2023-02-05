@@ -43,16 +43,18 @@ public class Parser {
         isExit = true;
     }
 
-    public void parseCommand(String command) throws WillyException {    
+    public void parseCommand(String command) throws WillyException {
         String[] tempBySpace = command.split(" ");
         String[] tempBySlash = command.split("/");
-        
+
         if (tempBySpace[0].equals("mark")) {
             int index = getIndex(tempBySpace[1]);
             tList.markTask(index);
         } else if (tempBySpace[0].equals("unmark")) {
             int index = getIndex(tempBySpace[1]);
             tList.unmarkTask(index);
+        } else if (tempBySpace[0].equals("find")) {
+            tList.findTasks(tempBySpace[1]);
         } else if (command.contains("delete")) {
             int index = getIndex(tempBySpace[1]);
             tList.deleteTask(index);
