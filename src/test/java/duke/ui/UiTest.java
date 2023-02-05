@@ -8,6 +8,8 @@ import java.io.PrintStream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import duke.constant.Message;
+
 public class UiTest {
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
@@ -22,33 +24,26 @@ public class UiTest {
     void testPrintln() {
         String expected = "test println";
         ui.printConsole(expected);
-        assertEquals(expected + "\n", outContent.toString());
+        assertEquals(expected, outContent.toString().trim());
     }
 
     @Test
     void testShowError() {
         String expected = "test showError";
         ui.showError(expected);
-        assertEquals("Error! [ " + expected + " ]\n", outContent.toString());
+        assertEquals("[Error!] " + expected.trim(), outContent.toString().trim());
     }
 
     @Test
     void testShowLine() {
         ui.showLine();
-        assertEquals("----------------------------------------\n", outContent.toString());
+        assertEquals("----------------------------------------", outContent.toString().trim());
     }
 
     @Test
     void testShowWelcome() {
         ui.showWelcome();
-        String expected = "Hello from\n"
-            + " ____       _\n"
-            + "|  _ \\ _  _| | ____ _\n"
-            + "| | | | | |  | |/ / _ \\\n"
-            + "| |_| | |_|  |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n"
-            + "What can I do for you?"
-            + "\n";
-        assertEquals(expected, outContent.toString());
+        String expected = Message.WELCOME;
+        assertEquals(expected, outContent.toString().trim());
     }
 }
