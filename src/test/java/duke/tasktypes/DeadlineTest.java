@@ -12,6 +12,7 @@ public class DeadlineTest {
     public void testStringConversion_deadlineTaskUndone_success() {
         Deadline task = null;
         try {
+            Task.resetCounter();
             task = new Deadline("This is a test Deadline task.", "2023/01/01 1000");
         } catch (DukeException e) {
             fail();
@@ -19,7 +20,7 @@ public class DeadlineTest {
         task.setDone();
         task.setUndone();
         String actualOutput = task.toString();
-        assertEquals("[D][ ] This is a test Deadline task. (by: 1 Jan 2023, 10:00 AM)", actualOutput);
+        assertEquals("[D][ ] This is a test Deadline task. #0 (by: 1 Jan 2023, 10:00 AM)", actualOutput);
     }
 
     @Test

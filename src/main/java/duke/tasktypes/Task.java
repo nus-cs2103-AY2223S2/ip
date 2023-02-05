@@ -92,5 +92,8 @@ public abstract class Task {
     public LocalDateTime getDeadline() {
         return this.when;
     }
+    public static void resetCounter() {
+        Task.taskIdCounter = 0;
+    }
 }
 
