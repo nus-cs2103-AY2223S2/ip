@@ -13,6 +13,7 @@ import aqua.logic.ExecutionService;
 import aqua.logic.ExecutionTask;
 import aqua.manager.IoManager;
 import aqua.manager.LogicManager;
+import aqua.manager.TaskFilterReport;
 import aqua.util.DateUtils;
 import javafx.css.PseudoClass;
 
@@ -42,7 +43,7 @@ public class ViewScheduleCommand extends CommandController {
 
             @Override
             protected void display(DisplayData data, IoManager manager) {
-                manager.popup(formScheduleDisplay(data.startTime, data.tasks));
+                manager.popup(formScheduleDisplay(data.startTime, data.report));
             }
         });
     }
@@ -51,13 +52,13 @@ public class ViewScheduleCommand extends CommandController {
     private DisplayData filterTasks(ArgumentMap args, LogicManager manager) {
         LocalDateTime start = DateUtils.getStartOfWeek(LocalDateTime.now());
         LocalDateTime end = start.plusDays(7);
-        List<AquaTask> tasks = manager.getTaskManager().filterWithin(start, end);
-        return new DisplayData(tasks, start);
+        TaskFilterReport report = manager.getTaskManager().filterWithin(start, end);
+        return new DisplayData(report, start);
     }
 
 
-    private ScheduleComponent formScheduleDisplay(LocalDateTime startTime, List<AquaTask> tasks) {
-        List<ScheduleTimeable> timeables = tasks.stream()
+    private ScheduleComponent formScheduleDisplay(LocalDateTime startTime, TaskFilterReport report) {
+        List<ScheduleTimeable> timeables = report.filtered.stream()
                 .map(task -> new TimeableAquaTask(task))
                 .collect(Collectors.toList());
         return new ScheduleComponent(startTime, timeables);
@@ -68,12 +69,12 @@ public class ViewScheduleCommand extends CommandController {
 
 
     private class DisplayData {
-        final List<AquaTask> tasks;
+        final TaskFilterReport report;
         final LocalDateTime startTime;
 
 
-        public DisplayData(List<AquaTask> tasks, LocalDateTime startTime) {
-            this.tasks = tasks;
+        public DisplayData(TaskFilterReport report, LocalDateTime startTime) {
+            this.report = report;
             this.startTime = startTime;
         }
     }
