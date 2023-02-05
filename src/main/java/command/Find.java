@@ -1,8 +1,6 @@
 package command;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import io.Storage;
@@ -14,10 +12,10 @@ public class Find implements Command {
     private static final String FORMAT = "find 'keywords'";
     private static final String SUCCESS = "Tasks found: %s";
 
-    final Set<String> keywords;
+    final List<String> keywords;
 
-    private Find(List<String> inputWords) {
-        this.keywords = inputWords.stream().collect(Collectors.toCollection(HashSet::new));
+    private Find(List<String> keywords) {
+        this.keywords = keywords;
     }
 
     @Override
@@ -29,6 +27,7 @@ public class Find implements Command {
         return Parser.skipSpace()
                 .ignoreThen(Parser.strParserIgnoreCase("find"))
                 .ignoreThen(Parser.nextStr().many())
+                .map(lst -> lst.stream().map(s -> s.toLowerCase()).collect(Collectors.toList()))
                 .<Command>map(lst -> new Find(lst))
                 .overrideMsg(FORMAT);
     }
