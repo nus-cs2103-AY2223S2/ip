@@ -2,8 +2,8 @@ package command;
 
 import io.Storage;
 import io.Ui;
+import parsing.Parser;
 import task.TaskList;
-import util.Parser;
 
 public class Mark implements Command {
     private static final String ERROR = "Task not in list.";
@@ -16,6 +16,9 @@ public class Mark implements Command {
         this.taskNum = taskNum;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void execute(TaskList taskList, Storage<TaskList> storage) {
         if (this.taskNum < 1 || this.taskNum > taskList.size()) {
@@ -26,6 +29,10 @@ public class Mark implements Command {
         Ui.showReply(SUCCESS + taskList.get(this.taskNum));
     }
 
+    /**
+     * @return Parser that can parse the mark command.
+     * @see Parser
+     */
     public static Parser<Command> parser() {
         return Parser.strParserIgnoreCase("mark")
                 .thenIgnore(Parser.skipSpace())

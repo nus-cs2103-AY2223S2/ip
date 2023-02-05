@@ -3,6 +3,9 @@ package util;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Static utility functions not tied to any class
+ */
 public class Util {
 
     private static final List<Character> WS = List.of(' ', '\n', '\t', '\r');
@@ -10,6 +13,12 @@ public class Util {
     private Util() {
     }
 
+    /**
+     * Splits string into list of strings by whitespace.
+     * 
+     * @param str String to be split
+     * @return List of strings
+     */
     public static List<String> splitWhitespace(String str) {
         List<String> res = new ArrayList<>();
         String temp = "";
@@ -28,6 +37,12 @@ public class Util {
         return res;
     }
 
+    /**
+     * Clears whitespace at beginning and end of string
+     * 
+     * @param str String to process
+     * @return Resultant string
+     */
     public static String cleanup(String str) {
         int start = 0;
         int end = str.length();
@@ -44,6 +59,12 @@ public class Util {
         return str.substring(start, end);
     }
 
+    /**
+     * Fuses list of characters into a single string
+     * 
+     * @param s List of characters
+     * @return Resultant string
+     */
     public static String listToString(List<Character> s) {
         return s.stream().map(c -> c.toString()).reduce("", (a, b) -> a + b);
     }

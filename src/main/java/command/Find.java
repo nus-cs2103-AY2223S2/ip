@@ -5,9 +5,12 @@ import java.util.stream.Collectors;
 
 import io.Storage;
 import io.Ui;
+import parsing.Parser;
 import task.TaskList;
-import util.Parser;
 
+/**
+ * Manages finding tasks via keywords
+ */
 public class Find implements Command {
     private static final String FORMAT = "find 'keywords'";
     private static final String SUCCESS = "Tasks found: %s";
@@ -18,11 +21,17 @@ public class Find implements Command {
         this.keywords = keywords;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void execute(TaskList taskList, Storage<TaskList> storage) {
         Ui.showReply(String.format(SUCCESS, taskList.findByKeywords(this.keywords)));
     }
 
+    /**
+     * @return Parser that parses find command input
+     */
     public static Parser<Command> parser() {
         return Parser.skipSpace()
                 .ignoreThen(Parser.strParserIgnoreCase("find"))

@@ -3,12 +3,21 @@ package task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Event task
+ */
 public class Event extends Task {
     private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("dd MMM YY");
 
     private final LocalDate start;
     private final LocalDate end;
 
+    /**
+     * @param desc  Task description
+     * @param done  Task completed info
+     * @param start Task start date
+     * @param end   Task end date
+     */
     private Event(String desc, boolean done, LocalDate start, LocalDate end) {
         super(desc, done);
         this.start = start;

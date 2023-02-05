@@ -1,16 +1,35 @@
 package command;
 
 import io.Storage;
+import parsing.Parser;
 import task.TaskList;
-import util.Parser;
 
+/**
+ * Interface for how a command will interact with data and output.
+ */
 public interface Command {
-    public void execute(TaskList duke, Storage<TaskList> storage);
+    /**
+     * Interacts with inputs to produce required side effects.
+     * 
+     * @param taskList TaskList to be modified.
+     * @param storage  Tells storage to store/extract data if command requires it.
+     * @see TaskList
+     * @see Storage
+     */
+    public void execute(TaskList taskList, Storage<TaskList> storage);
 
-    default boolean isExit() {
+    /**
+     * @return true if Duke should exit after executing this command.
+     */
+    default public boolean isExit() {
         return false;
     }
 
+    /**
+     * @return Parser<Command> that can parse input string and turn it into a
+     *         command.
+     * @see Parser
+     */
     public static Parser<Command> parser() {
         return Add.parser()
                 .or(Mark.parser())

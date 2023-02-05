@@ -8,11 +8,19 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import util.Util;
-
+/**
+ * General Task abstract class
+ * 
+ * @see Serializable
+ */
 public abstract class Task implements Serializable {
     protected final String desc;
     protected final boolean done;
-    
+
+    /**
+     * @param desc Task description
+     * @param done Task completed info
+     */
     protected Task(String desc, boolean done) {
         this.desc = desc;
         this.done = done;
@@ -28,8 +36,17 @@ public abstract class Task implements Serializable {
         return String.format("[%c] %s", mark, this.desc);
     }
 
+    /**
+     * @return true if task has date, false otherwise.
+     * @see LocalDate
+     */
     public abstract boolean hasDate(LocalDate date);
 
+    /**
+     * Checks if task description contains keywords
+     * 
+     * @param keywords List of keywords
+     */
     public boolean hasKeywords(List<String> keywords) {
         Set<String> descKeywords = Util.splitWhitespace(desc).stream()
                 .map(s -> s.toLowerCase())
@@ -41,7 +58,13 @@ public abstract class Task implements Serializable {
                 .reduce(true, (a, b) -> a && b);
     }
 
+    /**
+     * @return new task that is marked as done.
+     */
     public abstract Task markDone();
 
+    /**
+     * @return new task that is marked as not done.
+     */
     public abstract Task markNotDone();
 }

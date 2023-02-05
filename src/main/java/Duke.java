@@ -33,12 +33,11 @@ public class Duke {
         while (!this.isExit) {
             String input = Ui.getInput();
             Command command = Command.parser().parse(input).match(
-                pr -> pr.first(),
-                msg -> Error.of(msg)
-            );
+                    pr -> pr.first(),
+                    msg -> Error.of(msg));
             command.execute(this.taskList, this.storage);
             this.isExit = command.isExit();
-        } 
+        }
     }
 
     public static void main(String[] args) {
