@@ -19,19 +19,20 @@ import javafx.util.Duration;
 
 /** A graphical display of a day's schedule. */
 public class DaySchedule extends HBox {
-    private static final double ROW_WIDTH = 1000;
     private static final double ROW_HEIGHT = 20;
     private static final double HOURS_IN_A_DAY = 24;
     private static final double MINUTES_IN_A_DAY = 1440;
     private static final double MICRO_IN_MINUTE = 6E7;
     private static final double MIN_WIDTH_PIXS = ROW_HEIGHT;
-    private static final double MIN_WIDTH_MINS = (MIN_WIDTH_PIXS / ROW_WIDTH) * MINUTES_IN_A_DAY;
     private static final double TOOLTIP_SHOW_DELAY = 0;
     private static final double TOOLTIP_HIDE_DELAY = 0;
 
     private static final PseudoClass PSEUDO_CLASS_HOVER = PseudoClass.getPseudoClass("hover");
 
     private final VBox rowDisplayArea = new VBox();
+
+    private final double rowWidth;
+    private final double conflictThreshold;
 
 
     /**
@@ -40,7 +41,9 @@ public class DaySchedule extends HBox {
      * @param startTime - the start time of the day.
      * @param timeables - the list of {@code ScheduleTimeable} to display.
      */
-    public DaySchedule(LocalDateTime startTime, List<ScheduleTimeable> timeables) {
+    public DaySchedule(LocalDateTime startTime, List<ScheduleTimeable> timeables, double rowWidth) {
+        this.rowWidth = rowWidth;
+        conflictThreshold = (MIN_WIDTH_PIXS / rowWidth) * MINUTES_IN_A_DAY;
         getChildren().addAll(rowDisplayArea);
         List<? extends List<ScheduleTimeable>> sepTimeable = separateConflicting(timeables);
         for (List<ScheduleTimeable> row : sepTimeable) {
@@ -76,7 +79,7 @@ public class DaySchedule extends HBox {
             if (DateUtils.isIntersecting(
                         timeable.getStart(), timeable.getEnd(),
                         storedTimeable.getStart(), storedTimeable.getEnd(),
-                        MIN_WIDTH_MINS)) {
+                        conflictThreshold)) {
                 return true;
             }
         }
@@ -86,7 +89,7 @@ public class DaySchedule extends HBox {
 
     private Pane createRow() {
         Pane pane = new Pane();
-        pane.setMinWidth(ROW_WIDTH);
+        pane.setMinWidth(rowWidth);
         pane.setMaxHeight(ROW_HEIGHT);
         pane.getChildren().add(drawMarkings());
         return pane;
@@ -119,11 +122,11 @@ public class DaySchedule extends HBox {
 
 
     private Canvas drawMarkings() {
-        Canvas canvas = new Canvas(ROW_WIDTH, ROW_HEIGHT);
+        Canvas canvas = new Canvas(rowWidth, ROW_HEIGHT);
         GraphicsContext context = canvas.getGraphicsContext2D();
 
         for (int i = 0; i <= HOURS_IN_A_DAY; i++) {
-            double xMark = ((int) ((i / HOURS_IN_A_DAY) * ROW_WIDTH)) + 0.5;
+            double xMark = ((int) ((i / HOURS_IN_A_DAY) * rowWidth)) + 0.5;
             context.strokeLine(xMark, 0, xMark, ROW_HEIGHT);
         }
 
@@ -134,7 +137,7 @@ public class DaySchedule extends HBox {
     private double convertMinsToRowPix(double mins) {
         double dayFrac = mins / MINUTES_IN_A_DAY;
         dayFrac = Math.min(Math.max(0D, dayFrac), 1D);
-        return dayFrac * ROW_WIDTH;
+        return dayFrac * rowWidth;
     }
 
 

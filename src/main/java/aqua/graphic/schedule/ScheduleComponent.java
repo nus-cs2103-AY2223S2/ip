@@ -75,7 +75,7 @@ public class ScheduleComponent extends VBox {
         dateLabel.setAlignment(Pos.CENTER_LEFT);
         dateLabel.setText(startTime.format(DateTimeFormatter.ofPattern("LLL d (EEE)")));
 
-        VBox scheduleContainer = new VBox(new DaySchedule(startTime, timeables));
+        VBox scheduleContainer = new VBox(new DaySchedule(startTime, timeables, ROW_WIDTH));
         scheduleContainer.setAlignment(Pos.CENTER_LEFT);
 
         box.getChildren().addAll(dateLabel, scheduleContainer);
