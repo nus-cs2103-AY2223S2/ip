@@ -102,6 +102,11 @@ public class Driver {
                                 " " + tasks.unmarkTask(taskIndex));
                         break;
                     }
+                    case DELETE: {
+                        int taskIndex = Integer.parseInt(commandArgs[0]);
+                        echo("Noted. I've removed this task:", " " + tasks.deleteTasks(taskIndex));
+                        break;
+                    }
                 }
             } catch (Error e) {
                 echo(e.getMessage());

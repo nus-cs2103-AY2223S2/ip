@@ -1,46 +1,52 @@
 package tasks;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import storage.Storage;
 
 public class TaskList implements Serializable {
     private static final long serialVersionUID = 8098680977751428278L;
-    private int numTasks = 0;
-    private Task[] tasksArray = new Task[100];
 
-    public Task[] getTasks() {
-        return this.tasksArray;
-    }
+    private List<Task> taskList = new ArrayList<>();
 
     public int getNumTasks() {
-        return this.numTasks;
+        return taskList.size();
     }
 
     public void printAll() {
-        for (int i = 0; i < numTasks; i++) {
-            String printedString = String.format("%d. %s ", i + 1, tasksArray[i].toString());
+        for (int i = 0; i < taskList.size(); i++) {
+            String printedString = String.format("%d. %s ", i + 1, taskList.get(i).toString());
             System.out.println(printedString);
         }
+
     }
 
     public void addTask(Task task) {
-        this.tasksArray[numTasks] = task;
-        numTasks++;
-        // new Storage().writeTaskList(this);
+        taskList.add(task);
         Storage.writeTaskList(this);
+    }
+
+    public String deleteTasks(int taskIndex) {
+        Task targetTask = taskList.get(taskIndex - 1);
+        taskList.remove(taskIndex - 1);
+        Storage.writeTaskList(this);
+        return targetTask.toString();
     }
 
     public String markTask(int taskIndex) {
-        this.tasksArray[taskIndex - 1].mark();
-        // new Storage().writeTaskList(this);
+        Task targetTask = taskList.get(taskIndex - 1);
+        targetTask.mark();
+        taskList.set(taskIndex - 1, targetTask);
         Storage.writeTaskList(this);
-        return this.tasksArray[taskIndex - 1].toString();
+        return targetTask.toString();
     }
 
     public String unmarkTask(int taskIndex) {
-        this.tasksArray[taskIndex - 1].unmark();
-        // new Storage().writeTaskList(this);
+        Task targetTask = taskList.get(taskIndex - 1);
+        targetTask.unmark();
+        taskList.set(taskIndex - 1, targetTask);
         Storage.writeTaskList(this);
-        return this.tasksArray[taskIndex - 1].toString();
+        return targetTask.toString();
     }
 }

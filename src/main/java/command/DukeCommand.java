@@ -2,8 +2,8 @@ package command;
 
 
 public enum DukeCommand {
-    BYE("bye"), MARK("mark"), UNMARK("unmark"), LIST("list"), TODO("todo"), DEADLINE(
-            "deadline"), EVENT("event");
+    BYE("bye"), MARK("mark"), UNMARK("unmark"), DELETE("delete"), LIST("list"), TODO(
+            "todo"), DEADLINE("deadline"), EVENT("event");
 
     public final String text;
 

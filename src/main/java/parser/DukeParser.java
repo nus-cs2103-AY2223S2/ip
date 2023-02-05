@@ -114,6 +114,17 @@ public class DukeParser {
                 break;
             }
 
+            case DELETE: {
+                String taskIndex = inputString.substring(DukeCommand.DELETE.text.length());
+                String cleanedTaskIndex = taskIndex.strip();
+                try {
+                    Integer.parseInt(cleanedTaskIndex);
+                    commandArgs.add(cleanedTaskIndex);
+                } catch (NumberFormatException e) {
+                    throw new Error("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                }
+                break;
+            }
             case MARK: {
                 String taskIndex = inputString.substring(DukeCommand.MARK.text.length());
                 String cleanedTaskIndex = taskIndex.strip();
