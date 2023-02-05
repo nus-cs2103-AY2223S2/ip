@@ -5,10 +5,10 @@ package duke.utils;
  */
 public abstract class BooleanUtils {
     /**
-     * Returns true if a string is a boolean in string form, otherwise, returns false.
+     * Returns true if a string is a boolean in string form. Otherwise, returns false.
      *
      * @param str The string to check.
-     * @return True if a string is a boolean in string form, otherwise, returns false.
+     * @return True if a string is a boolean in string form. False otherwise.
      */
     public static boolean isBooleanStr(String str) {
         assert str != null;

@@ -10,9 +10,12 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 /**
- * Handles displaying of messages and user interactions via the command-line interface.
+ * Handles user interactions and displaying of messages via a CLI.
  */
 public class Cli implements Ui {
+    private static final String MESSAGE_BORDER =
+            "    ______________________________________________________________________";
+
     private final PrintStream printStream;
     private final Scanner scanner;
 
@@ -25,7 +28,7 @@ public class Cli implements Ui {
      * @param printStream The stream to print messages to.
      * @param inputStream The stream to read the user's input from.
      * @param inputHandler Handles the user's inputs.
-     * @param exitConditionChecker Given the user's input, checks if the app should exit.
+     * @param exitConditionChecker Checks if the app should exit base on the given user input.
      */
     public Cli(PrintStream printStream, InputStream inputStream, BiConsumer<String, Consumer<String>> inputHandler,
                Function<String, Boolean> exitConditionChecker) {
@@ -57,8 +60,6 @@ public class Cli implements Ui {
 
     @Override
     public void print(String message) {
-        printStream.println("    ______________________________________________________________________");
-        printStream.printf("     %s\n", message.replace("\n", "\n     "));
-        printStream.println("    ______________________________________________________________________\n");
+        printStream.printf("%s\n     %s\n%s\n\n", MESSAGE_BORDER, message.replace("\n", "\n     "), MESSAGE_BORDER);
     }
 }

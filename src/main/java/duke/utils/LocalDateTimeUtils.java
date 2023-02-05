@@ -3,7 +3,7 @@ package duke.utils;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Contains utility methods for LocalDateTime.
+ * Contains constants for LocalDateTime.
  */
 public abstract class LocalDateTimeUtils {
     /** The format for any LocalDateTime inputted as a string. */

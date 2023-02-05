@@ -22,6 +22,7 @@ public class DeleteCommand implements Command {
 
         int index = extractValidIndex(input, tasks);
         Task task = tasks.removeAt(index);
+
         return getMessage(tasks, task);
     }
 
@@ -31,29 +32,39 @@ public class DeleteCommand implements Command {
 
         String argStr = input.replaceFirst("delete", "").trim();
 
+        validateNonEmptyArg(argStr);
+
+        int index = extractIntegerArg(argStr);
+        validateIndexRange(index, tasks);
+
+        return index;
+    }
+
+    private void validateNonEmptyArg(String argStr) throws DukeException {
         if (argStr.isEmpty()) {
             throw new DukeException("The task to be deleted must be specified!");
         }
+    }
 
-        int index;
+    private int extractIntegerArg(String argStr) throws DukeException {
         try {
-            index = Integer.parseInt(argStr) - 1;
+            return Integer.parseInt(argStr) - 1;
         } catch (NumberFormatException e) {
             throw new DukeException("The index of the task to be deleted must be an integer!");
         }
+    }
 
+    private void validateIndexRange(int index, TaskList tasks) throws DukeException {
         if (index >= tasks.size() || index < 0) {
             throw new DukeException("The task to be deleted doesn't exist!");
         }
-
-        return index;
     }
 
     private String getMessage(TaskList tasks, Task task) {
         assert tasks != null;
         assert task != null;
 
-        return String.format("I've removed this task:\n  %s\nNow you have %d tasks in the list.",
-                task.toString(), tasks.size());
+        return String.format("I've removed this task:\n  %s\nNow you have %d tasks in the list.", task.toString(),
+                tasks.size());
     }
 }

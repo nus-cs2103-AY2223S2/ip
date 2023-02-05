@@ -16,40 +16,25 @@ import java.io.IOException;
 import java.util.Collections;
 
 /**
- * Controller for DialogBox. Represents a dialog box consisting of an ImageView to represent the speaker's face and a
- * label containing the text from the speaker.
+ * Controller for DialogBox.
+ * <p>
+ * Represents a dialog box consisting of an ImageView to represent the speaker's face and a label containing the text
+ * from the speaker.
+ * </p>
  */
 public class DialogBox extends HBox {
+    private static final String FXML_PATH = "/view/DialogBox.fxml";
+
+    private static final double CLIP_CIRCLE_RADIUS = 25;
+
     @FXML
     private Text dialog;
     @FXML
     private ImageView displayPicture;
 
     private DialogBox(String message, Image img) {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
-            fxmlLoader.setController(this);
-            fxmlLoader.setRoot(this);
-            fxmlLoader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        dialog.setText(message);
-        displayPicture.setImage(img);
-
-        Circle clip = new Circle();
-        clip.setRadius(25);
-        clip.setCenterX(25);
-        clip.setCenterY(25);
-        displayPicture.setClip(clip);
-    }
-
-    private void flip() {
-        ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
-        Collections.reverse(tmp);
-        getChildren().setAll(tmp);
-        setAlignment(Pos.TOP_LEFT);
+        loadFxml();
+        setNodeValues(message, img);
     }
 
     /**
@@ -71,8 +56,44 @@ public class DialogBox extends HBox {
      * @return A dialog box with a message that appears to be spoken by Duke.
      */
     public static DialogBox getDukeDialog(String message, Image img) {
-        var db = new DialogBox(message, img);
-        db.flip();
-        return db;
+        DialogBox dialogBox = new DialogBox(message, img);
+        dialogBox.flip();
+
+        return dialogBox;
+    }
+
+    private void loadFxml() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource(FXML_PATH));
+
+            fxmlLoader.setController(this);
+            fxmlLoader.setRoot(this);
+
+            fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void setNodeValues(String message, Image img) {
+        dialog.setText(message);
+        displayPicture.setImage(img);
+        displayPicture.setClip(getDisplayPictureClip());
+    }
+
+    private Node getDisplayPictureClip() {
+        Circle clip = new Circle();
+        clip.setRadius(CLIP_CIRCLE_RADIUS);
+        clip.setCenterX(CLIP_CIRCLE_RADIUS);
+        clip.setCenterY(CLIP_CIRCLE_RADIUS);
+
+        return (Node) clip;
+    }
+
+    private void flip() {
+        ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
+        Collections.reverse(tmp);
+        getChildren().setAll(tmp);
+        setAlignment(Pos.TOP_LEFT);
     }
 }

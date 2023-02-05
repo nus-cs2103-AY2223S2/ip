@@ -15,16 +15,19 @@ public abstract class DukeUtils {
     private static final Path SAVE_FILE_PATH = Path.of("./save-data/task-list.csv");
 
     /**
-     * Validates the user's inputs, executes the appropriate command, and prints the response message.
+     * Runs the command corresponding to the user's input and prints the response message.
+     * <p>
+     * If an error occurs due to the user's input, prints the error message instead.
+     * </p>
      *
      * @param input The user's input.
-     * @param printer For printing to the UI.
-     * @param parser For determining the validity of the input and the command to execute.
      * @param tasks The user's task list.
+     * @param parser Determines the validity of the input and the command to execute.
+     * @param printer Prints to the UI.
      */
-    public static void handleInput(String input, Consumer<String> printer, Parser parser, TaskList tasks) {
-        assert printer != null;
+    public static void handleInput(String input, TaskList tasks, Parser parser, Consumer<String> printer) {
         assert parser != null;
+        assert printer != null;
 
         String message;
         try {
@@ -37,10 +40,13 @@ public abstract class DukeUtils {
     }
 
     /**
-     * Loads the previously saved tasks list from storage if it exists and returns it. Otherwise, creates a new file for
-     * storing the task list and returns an empty task list.
+     * Loads the previously saved task list from storage and returns it.
+     * <p>
+     * If a previously saved task list does not exist, creates an empty task list and a storage for it. Returns the new
+     * task list.
+     * </p>
      *
-     * @return The task list loaded from storage if it exists. Otherwise, returns an empty task list.
+     * @return The task list loaded from storage if it exists. Otherwise, the new task list.
      * @throws DukeException Indicates an error in loading from storage or creating storage.
      */
     public static TaskList loadTasks() throws DukeException {
@@ -49,6 +55,8 @@ public abstract class DukeUtils {
 
     /**
      * Returns a greeting message.
+     *
+     * @return A greeting message.
      */
     public static String getGreetingMessage() {
         String logo = " ____        _        \n"

@@ -53,25 +53,38 @@ public abstract class SetDoneCommand implements Command {
         assert input != null;
         assert tasks != null;
 
-        String argStr = input.replaceFirst(getCommand(), "").trim();
+        String argStr = extractArgStr(input);
 
+        validateNonEmptyArg(argStr);
+
+        int index = extractIntegerArg(argStr);
+        validateIndexRange(index, tasks);
+
+        return index;
+    }
+
+    private String extractArgStr(String input) {
+        return input.replaceFirst(getCommand(), "").trim();
+    }
+
+    private void validateNonEmptyArg(String argStr) throws DukeException {
         if (argStr.isEmpty()) {
             throw new DukeException(String.format("The task to %s must be specified!", getCommand()));
         }
+    }
 
-        int index;
+    private int extractIntegerArg(String argStr) throws DukeException {
         try {
-            index = Integer.parseInt(argStr) - 1;
+            return Integer.parseInt(argStr) - 1;
         } catch (NumberFormatException e) {
             throw new DukeException(String.format("The index of the task to %s must be an integer!", getCommand()));
         }
+    }
 
+    private void validateIndexRange(int index, TaskList tasks) throws DukeException {
         if (index >= tasks.size() || index < 0) {
-            String message = String.format("The task to %s doesn't exist!", getCommand());
-            throw new DukeException(message);
+            throw new DukeException(String.format("The task to %s doesn't exist!", getCommand()));
         }
-
-        return index;
     }
 
     private String getMessage(Task task) {

@@ -12,8 +12,8 @@ public class ListCommand implements Command {
      *
      * @param input {@inheritDoc}
      * @param tasks {@inheritDoc}
-     * @return A message listing out each task in tasks if tasks is not empty. Otherwise, returns a message informing
-     *         the user of the empty task list.
+     * @return A message listing out each task in tasks if tasks is not empty. Otherwise, a message informing the user
+     *         of the empty task list.
      */
     @Override
     public String run(String input, TaskList tasks) {

@@ -38,12 +38,20 @@ public class ToDoCommand extends AddCommand {
     private String extractValidDescription(String input) throws DukeException {
         assert input != null;
 
-        String description = input.replaceFirst("todo", "").trim();
+        String description = extractDescription(input);
 
+        validateNonEmptyDescription(description);
+
+        return description;
+    }
+
+    private String extractDescription(String input) {
+        return input.replaceFirst("todo", "").trim();
+    }
+
+    private void validateNonEmptyDescription(String description) throws DukeException {
         if (description.isEmpty()) {
             throw new DukeException("The description of a to-do cannot be empty!");
         }
-
-        return description;
     }
 }

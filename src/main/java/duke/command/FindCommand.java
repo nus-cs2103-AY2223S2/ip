@@ -20,28 +20,33 @@ public class FindCommand implements Command {
      */
     @Override
     public String run(String input, TaskList tasks) throws DukeException {
-        String keyphrase = extractValidKeyphrase(input);
-        List<Integer> matchedTaskIndexes = filterTasksByKeyphrase(tasks, keyphrase);
+        List<Integer> matchedTaskIndexes = getMatchedTaskIndexes(input, tasks);
+        return getMessage(tasks, matchedTaskIndexes);
+    }
 
-        if (matchedTaskIndexes.isEmpty()) {
-            return "The task you're searching for DOESN'T EXIST!";
-        } else {
-            String matchedTaskListStr = getMatchedTaskListStr(tasks, matchedTaskIndexes);
-            return String.format("It seems that there are %d matching tasks:\n%s", matchedTaskIndexes.size(),
-                    matchedTaskListStr);
-        }
+    private List<Integer> getMatchedTaskIndexes(String input, TaskList tasks) throws DukeException {
+        String keyphrase = extractValidKeyphrase(input);
+        return filterTasksByKeyphrase(tasks, keyphrase);
     }
 
     private String extractValidKeyphrase(String input) throws DukeException {
         assert input != null;
 
-        String[] args = input.split(" ", 2);
+        String[] args = extractArgs(input);
 
+        validateNonEmptyKeyphrase(args);
+
+        return args[1].trim();
+    }
+
+    private String[] extractArgs(String input) {
+        return input.split(" ", 2);
+    }
+
+    private void validateNonEmptyKeyphrase(String[] args) throws DukeException {
         if (args.length != 2 || args[1].trim().isEmpty()) {
             throw new DukeException("The keyphrase to search for cannot be empty!");
         }
-
-        return args[1].trim();
     }
 
     private List<Integer> filterTasksByKeyphrase(TaskList tasks, String keyphrase) {
@@ -56,6 +61,16 @@ public class FindCommand implements Command {
         }
 
         return taskIndexes;
+    }
+
+    private String getMessage(TaskList tasks, List<Integer> matchedTaskIndexes) {
+        if (matchedTaskIndexes.isEmpty()) {
+            return "The task you're searching for DOESN'T EXIST!";
+        } else {
+            String matchedTaskListStr = getMatchedTaskListStr(tasks, matchedTaskIndexes);
+            return String.format("It seems that there are %d matching tasks:\n%s", matchedTaskIndexes.size(),
+                    matchedTaskListStr);
+        }
     }
 
     private String getMatchedTaskListStr(TaskList tasks, List<Integer> matchedTasks) {
