@@ -18,7 +18,8 @@ If you are not sure how to use it, check out the [User Guide](https://yufannnn.g
 
 Features:
 
-- [x] Manage task
-- [X] Reminders
-- [X] User Interface
-- [ ] Undo Feature (Partially functional and comming soon...)
+- [X] Graphic User Interface
+- [X] Add four type of tasks (todo, deadline, event, fixed duration)
+- [X] Search, Sort, Find tasks
+- [X] Mark, Unmark, Delete, massDelete tasks
+- [ ] Undo Command (Partially functional and comming soon...)
