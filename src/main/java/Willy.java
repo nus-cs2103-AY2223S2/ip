@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -11,17 +12,17 @@ import task.Todo;
 
 public class Willy {
 
-    public static void listCommand(TaskList tList){
+    public static void listCommand(TaskList tList) {
         int taskCount = tList.getTaskCount();
-        if(taskCount == 0){
+        if (taskCount == 0) {
             System.out.println("You have 0 tasks in your list");
         } else {
-            System.out.format("You have %d tasks in your list \n",taskCount);
+            System.out.format("You have %d tasks in your list \n", taskCount);
             System.out.println(tList.toString());
         }
     }
 
-    public static void byeCommand(){
+    public static void byeCommand() {
         System.out.println("Bye. Hope to see you again soon!");
         System.exit(0);
     }
@@ -38,20 +39,20 @@ public class Willy {
             String command = sc.nextLine();
 
             // For marking
-            String[] temp = command.split(" ");
+            String[] tempBySpace = command.split(" ");
             // For adding
-            String[] tempAdd = command.split("/");
-            // Task tempAddTask = lst.get(Integer.parseInt(temp[1]) - 1);
+            String[] tempBySlash = command.split("/");
+            // Task tempBySlashTask = lst.get(Integer.parseInt(tempBySpace[1]) - 1);
 
             try {
-                if (temp[0].equals("mark")) {
-                    int index = Integer.parseInt(temp[1]) - 1;
+                if (tempBySpace[0].equals("mark")) {
+                    int index = Integer.parseInt(tempBySpace[1]) - 1;
                     tList.markTask(index);
-                } else if (temp[0].equals("unmark")) {
-                    int index = Integer.parseInt(temp[1]) - 1;
+                } else if (tempBySpace[0].equals("unmark")) {
+                    int index = Integer.parseInt(tempBySpace[1]) - 1;
                     tList.unmarkTask(index);
                 } else if (command.contains("delete")) {
-                    int index = Integer.parseInt(temp[1]) - 1;
+                    int index = Integer.parseInt(tempBySpace[1]) - 1;
                     tList.deleteTask(index);
                     // System.out.format("Now you have %d things in your list%n", lst.size());
 
@@ -71,10 +72,20 @@ public class Willy {
                         }
                     }
                     if (command.contains("deadline")) {
-                        tList.addDeadline(tempAdd[0],  tempAdd[1]);
+                        if (tempBySlash.length > 2) {
+                            String combinedString = String.join(" ",
+                                    Arrays.asList(tempBySlash).subList(1, tempBySlash.length));
+                            String dateString = combinedString.substring(3);
+                            String[] dateArray = dateString.split(" ");
+                            tList.addDeadlineWithDate(tempBySlash[0], dateArray);
+
+                            System.out.println("help");
+                        } else {
+                            tList.addDeadline(tempBySlash[0], tempBySlash[1]);
+                        }
                     }
                     if (command.contains("event")) {
-                        tList.addEvent(tempAdd[0], tempAdd[1], tempAdd[2]);
+                        tList.addEvent(tempBySlash[0], tempBySlash[1], tempBySlash[2]);
                     }
 
                 }
@@ -84,5 +95,4 @@ public class Willy {
         }
     }
 
-    
 }

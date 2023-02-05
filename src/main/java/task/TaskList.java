@@ -46,21 +46,28 @@ public class TaskList {
         Todo entry = new Todo(details);
         tasks.add(entry);
         storage.save(this);
-        System.out.println("added todo item"); // chaneg this later
+        // System.out.println("added todo item"); // chaneg this later
     }
 
     public void addDeadline(String details, String date) throws WillyException {
         Deadline entry = new Deadline(details, date);
         tasks.add(entry);
         storage.save(this);
-        System.out.println("added deadline item"); // chaneg this later
+        // System.out.println("added deadline item"); // chaneg this later
+    }
+
+    public void addDeadlineWithDate(String details, String[] dateArray) {
+        Deadline entry = new Deadline(details, dateArray);
+        tasks.add(entry);
+        storage.save(this);
+        // System.out.println("added deijijijijadline item"); // chaneg this later
     }
 
     public void addEvent(String details, String dateFrom, String dateTo) throws WillyException {
         Event entry = new Event(details, dateFrom, dateTo);
         tasks.add(entry);
         storage.save(this);
-        System.out.println("added event item"); // chaneg this later
+        // System.out.println("added event item"); // chaneg this later
     }
 
     @Override
@@ -78,5 +85,7 @@ public class TaskList {
         }
         return str;
     }
+
+    
 
 }
