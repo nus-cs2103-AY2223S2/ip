@@ -8,14 +8,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-/***
+/**
  * The class to store and load the ArrayList contents into a txt file and vice-versa
  */
 public class Storage {
     private File file;
 
-    /***
-     *
+    /**
      * @param filePath the place where the txt file is stored
      * @throws IOException If the file cannot be found
      */
@@ -27,7 +26,7 @@ public class Storage {
         }
     }
 
-    /***
+    /**
      *  Save the data from the arraylist into the txt file created/stored
      * @param tasks an arraylist of all the tasks
      */
@@ -56,7 +55,7 @@ public class Storage {
         }
     }
 
-    /***
+    /**
      * A method to laod the data from the txt file to the arraylist
      * @param tasks an arraylist of all the tasks
      */
@@ -92,7 +91,7 @@ public class Storage {
         }
     }
 
-    /***
+    /**
      * A method to delete all the contents in the arraylist and the txt file
      * @param tasks an arraylist of all the tasks
      * @throws IOException when the file cannot be found or created

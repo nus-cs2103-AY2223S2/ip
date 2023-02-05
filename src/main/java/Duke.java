@@ -1,23 +1,23 @@
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
 import duke.DukeException;
+import duke.Parser;
 import duke.Storage;
 import duke.Task;
 import duke.Ui;
-import duke.Parser;
 
-/***
+/**
  * The main class where the programs start
  */
 public class Duke {
-    Storage storage;
-    ArrayList<Task> list;
+    private Storage storage;
+    private ArrayList<Task> list;
 
-    /***
-     *
+    /**
      * @param filePath indicates the place where the txt file is located at
-     * @param list an arraylist containing all the task
+     * @param list     an arraylist containing all the task
      * @throws IOException throws an exception when the file cannot be found or created
      */
     public Duke(String filePath, ArrayList<Task> list) throws IOException {
@@ -28,27 +28,28 @@ public class Duke {
         this.list = list;
     }
 
-    /***
+    /**
      * A method responsible for running the program containing the loop
      */
     public void run() {
         Scanner scanner = new Scanner(System.in);
 
-            while (true) {
-                try {
-                    Parser parser = new Parser();
-                    String input = scanner.nextLine().trim();
-                    if (parser.parserInput(list, input)) {
-                        storage.saveData(list);
-                    }
-                }catch (DukeException e) {
-                    System.out.println(e.message);
+        while (true) {
+            try {
+                Parser parser = new Parser();
+                String input = scanner.nextLine().trim();
+                if (parser.parserInput(list, input)) {
+                    storage.saveData(list);
                 }
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
             }
         }
+    }
 
-    /***
+    /**
      * The main method of the Duke class
+     *
      * @param args takes in the txt file contents, optional
      * @throws IOException if cannot access the txt file
      */

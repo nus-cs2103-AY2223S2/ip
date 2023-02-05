@@ -1,14 +1,19 @@
 package duke;
 
-/***
+/**
  * The DukeException extends Exception containing the message to throw when faces exception
  * The subclasses contains different messages for different exceptions when thrown
  */
 public class DukeException extends Exception {
-    public String message;
+    private String message;
 
     public DukeException(String message) {
         this.message = message;
+    }
+
+    @Override
+    public String getMessage() {
+        return message;
     }
 }
 

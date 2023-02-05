@@ -4,22 +4,22 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-/***
+/**
  * The class to convert date given in string to Date class
  */
 public class DateStringConverter {
-    private final String[] DAY_OF_THE_WEEK = new String[]{"MONDAY", "TUESDAY", "WEDNESDAY",
-            "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"};
+    private final String[] DAY_OF_WEEK = new String[]{"FRIDAY", "MONDAY", "SATURDAY",
+            "SUNDAY", "THURSDAY", "TUESDAY", "WEDNESDAY"};
 
-    /***
+    /**
      * A method to convert the String type to date type
      * @param input a String input of date
      * @return A LocalDate object
      */
     public LocalDate convertDateInput(String input) {
         input.replace("/", "-");
-        for (int i = 0; i < DAY_OF_THE_WEEK.length; i++) {
-            if (input.equalsIgnoreCase(DAY_OF_THE_WEEK[i])) {
+        for (int i = 0; i < DAY_OF_WEEK.length; i++) {
+            if (input.equalsIgnoreCase(DAY_OF_WEEK[i])) {
                 DayOfWeek dayOfWeek = DayOfWeek.valueOf(input.toUpperCase());
                 LocalDate today = LocalDate.now();
                 LocalDate nextDate = today.with(dayOfWeek);
@@ -29,8 +29,9 @@ public class DateStringConverter {
         return LocalDate.parse(input);
     }
 
-    /***
-     *  A method to convert a String type to a LocalTime type
+    /**
+     * A method to convert a String type to a LocalTime type
+     *
      * @param input a String input of time
      * @return a LocalTime object converted from String type
      */

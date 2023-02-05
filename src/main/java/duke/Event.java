@@ -1,15 +1,14 @@
 package duke;
 
-/***
+/**
  * Event class type, a subclass of Task
  */
 public class Event extends Task {
-    final String ICON = "[E]";
-    String from;
-    String to;
+    private final String icon = "[E]";
+    private String from;
+    private String to;
 
-    /***
-     *
+    /**
      * @param details details of the Task
      * @param from the starting date of the task
      * @param to the end date of the task
@@ -20,20 +19,18 @@ public class Event extends Task {
         this.to = to.replace("to", "");
     }
 
-    /***
-     *
+    /**
      * @param details details of the task
      */
     public Event(String details) {
         super(details);
     }
 
-    /***
-     *
+    /**
      * @return the description of the task in String type indicating as an Event type
      */
     @Override
     public String toString() {
-        return ICON + super.toString() + " (from:" + from + " to:" + to + ")";
+        return icon + super.toString() + " (from:" + from + " to:" + to + ")";
     }
 }

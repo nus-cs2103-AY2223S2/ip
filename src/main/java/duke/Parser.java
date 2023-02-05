@@ -2,15 +2,13 @@ package duke;
 
 import java.util.ArrayList;
 
-/***
+/**
  * The class handling all the user input
  */
 public class Parser {
-    Ui userInterface = new Ui();
-    TaskList handler = new TaskList();
+    private TaskList handler = new TaskList();
 
-    /***
-     *
+    /**
      * @param taskArrayList arraylist containing all the task
      * @param inputType the user input of the type of tasks
      * @return boolean type to allow the user know if a task was added into the list
@@ -70,7 +68,7 @@ public class Parser {
             handler.deadlineChecker(taskArrayList, inputType);
             return true;
         } else if (tokens[0].equalsIgnoreCase("find")) {
-            if(tokens.length == 1) {
+            if (tokens.length == 1) {
                 throw new MissingDescription();
             }
             handler.find(tokens[1], taskArrayList);
