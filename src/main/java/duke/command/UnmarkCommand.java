@@ -9,7 +9,6 @@ import duke.ui.Ui;
  */
 public class UnmarkCommand extends Command {
     private int index;
-    private boolean exit;
 
     /**
      * Initialises unmark class
@@ -18,26 +17,18 @@ public class UnmarkCommand extends Command {
      */
     public UnmarkCommand(int index) {
         this.index = index;
-        this.exit = false;
     }
 
     /**
-     * Exits duke if it detects bye command
-     *
-     * @return boolean false
+     * {@inheritDoc}
      */
     @Override
     public boolean isExit() {
-        return exit;
+        return false;
     }
 
     /**
-     * Unmarks task items
-     *
-     * @param taskList arraylist that stores tasks
-     * @param storage  stores data of tasks
-     * @param ui       responds to user input
-     * @return instruction successfully set
+     * {@inheritDoc}
      */
     @Override
     public String execute(TaskList taskList, Storage storage, Ui ui) {

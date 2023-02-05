@@ -3,7 +3,7 @@ package duke.tasks;
 import java.time.LocalDate;
 
 /**
- * Stores inputs of event tasks
+ * Represents an Event Task, which will happen between a start and end date and time
  */
 public class Event extends Task {
 
@@ -42,9 +42,7 @@ public class Event extends Task {
     }
 
     /**
-     * Displays name, date and time of the event task
-     *
-     * @return shows the event item
+     * {@inheritDoc}
      */
     @Override
     public String toString() {

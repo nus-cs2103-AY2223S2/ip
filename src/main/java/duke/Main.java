@@ -18,6 +18,9 @@ public class Main extends Application {
 
     private final Duke duke = new Duke("../data/duke.txt");
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void start(Stage stage) {
         try {

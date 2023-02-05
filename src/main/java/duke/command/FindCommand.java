@@ -15,9 +15,7 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Exits duke if it detects bye command
-     *
-     * @return boolean false
+     * {@inheritDoc}
      */
     @Override
     public boolean isExit() {
@@ -25,12 +23,7 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Displays each tasks from list
-     *
-     * @param taskList arraylist that stores tasks
-     * @param storage  stores data of tasks
-     * @param ui       responds to user input
-     * @return instruction successfully set
+     * {@inheritDoc}
      */
     @Override
     public String execute(TaskList taskList, Storage storage, Ui ui) {

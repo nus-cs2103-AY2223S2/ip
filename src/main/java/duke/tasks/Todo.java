@@ -1,7 +1,7 @@
 package duke.tasks;
 
 /**
- * Stores inputs of to-do tasks
+ * Represents a task to be done
  */
 public class Todo extends Task {
     /**
@@ -14,9 +14,7 @@ public class Todo extends Task {
     }
 
     /**
-     * Displays name, date and time of the to-do task
-     *
-     * @return shows the to-do item
+     * {@inheritDoc}
      */
     @Override
     public String toString() {

@@ -3,7 +3,7 @@ package duke.tasks;
 import java.time.LocalDate;
 
 /**
- * Stores inputs of deadline tasks
+ * Represents a Deadline Task to be done with a deadline
  */
 public class Deadline extends Task {
     private final LocalDate date;
@@ -28,9 +28,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Displays name, date and time of the deadline task
-     *
-     * @return shows the deadline item
+     * {@inheritDoc}
      */
     @Override
     public String toString() {

@@ -62,6 +62,7 @@ public class DialogBox extends HBox {
      *
      * @param text Message to be displayed.
      * @param img  Image to be displayed.
+     * @return new initialised dialog box
      */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
@@ -72,6 +73,7 @@ public class DialogBox extends HBox {
      *
      * @param text Message to be displayed.
      * @param img  Image to be displayed.
+     * @return contents inside dialog box
      */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);

@@ -58,7 +58,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String dukeResponse = duke.userInputs(input);
+        String dukeResponse = duke.initialise(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(dukeResponse, dukeImage)
