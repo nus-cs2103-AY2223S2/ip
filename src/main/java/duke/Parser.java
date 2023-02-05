@@ -4,8 +4,17 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
+import javafx.util.Pair;
+
+import java.util.HashMap;
 
 public class Parser {
+    private static final BadCommandException INSUFFICIENT_PARAMS_ERROR =
+            new BadCommandException("There are insufficient or invalid parameters!");
+    private static final BadCommandException UNKNOWN_COMMAND_ERROR =
+            new BadCommandException("I'm sorry, but I don't know what that means :-(");
+    private static final String PARAMS_DELIMITER =  "/";
+
     private enum Command {
         LIST("list"),
         MARK("mark"),
@@ -15,14 +24,73 @@ public class Parser {
         DEADLINE("deadline"),
         EVENT("event"),
         FIND("find");
-        private final String typeStr;
-        Command(String typeStr) {
-            this.typeStr = typeStr;
+        private final String commandStr;
+        private static final HashMap<String, Command> STRING_TO_COMMAND_MAP = new HashMap<>();
+        static {
+            for (Command command: values()) {
+                STRING_TO_COMMAND_MAP.put(command.commandStr, command);
+            }
+        }
+        Command(String commandStr) {
+            this.commandStr = commandStr;
+        }
+        public static Command valueOfCommandStr(String commandStr) {
+            return STRING_TO_COMMAND_MAP.get(commandStr);
         }
         @Override
         public String toString() {
-            return typeStr;
+            return commandStr;
         }
+    }
+
+    /**
+     * Returns the singular integer index from a provided parameter string. For commands
+     * that only require a single integer value, such as 'mark'.
+     * @param paramsStr Given parameter string.
+     * @return The singular integer index.
+     * @throws BadCommandException If the parameter string is not a valid integer representation.
+     */
+    private int getIntegerFromParamsStr(String paramsStr) throws BadCommandException {
+        int idx;
+        try {
+            idx = Integer.parseInt(paramsStr);
+        } catch (NumberFormatException e) {
+            throw INSUFFICIENT_PARAMS_ERROR;
+        }
+        return idx;
+    }
+
+    /**
+     * Returns a pair whose key represents the default argument, and whose value represents the mapping between
+     * the parameter names and the argument values. If there is no default argument, then the key value is set
+     * to null. The default argument is always assumed to be the first argument.
+     * @param paramsStr The parameter string provided.
+     * @param hasDefaultArgument Boolean indicating if there is a default argument.
+     * @return A pair representing the above.
+     * @throws BadCommandException If any delimiter is not followed by a parameter-argument.
+     */
+    private Pair<String, HashMap<String, String>> getMappingFromParamsStr(
+            String paramsStr,
+            boolean hasDefaultArgument
+    ) throws BadCommandException {
+        String[] paramsSplit = paramsStr.trim().split(PARAMS_DELIMITER);
+        // If there's a default argument (an argument with no specified delimiter like the 'deadline' command),
+        // then we take the first item in paramsSplit as the default argument.
+        int startingIdx = hasDefaultArgument ? 1 : 0;
+        String defaultArgument = hasDefaultArgument ? paramsSplit[0].trim() : null;
+
+        HashMap<String, String> paramToArgMap = new HashMap<>();
+        for (int i = startingIdx; i < paramsSplit.length; i++) {
+            String[] paramArgSplit = paramsSplit[i].split(" ", 2);
+            if (paramArgSplit.length == 0) {
+                throw INSUFFICIENT_PARAMS_ERROR;
+            }
+            paramToArgMap.put(
+                    paramArgSplit[0].trim(),
+                    paramsSplit.length < 2 ? "" : paramArgSplit[1].trim()
+            );
+        }
+        return new Pair<>(defaultArgument, paramToArgMap);
     }
 
     /**
@@ -36,42 +104,46 @@ public class Parser {
      */
     public String parseString(String inputStr, TaskList tasks, Ui ui) throws BadCommandException {
         inputStr = inputStr.trim();
+        String[] inputSplit = inputStr.split(" ", 2);
+        String commandStr = inputSplit.length < 1 ? "" : inputSplit[0].trim();
+        String paramsStr = inputSplit.length < 2 ? "" : inputSplit[1].trim();
+        Command commandEnumValue = Command.valueOfCommandStr(commandStr);
+        if (commandEnumValue == null) {
+            throw UNKNOWN_COMMAND_ERROR;
+        }
+        Task newTask = null;
         try {
-            if (inputStr.equals(Command.LIST.toString())) {
+            switch (commandEnumValue) {
+            case LIST:
                 return ui.showNormalMessage(String.format(
                         "Here are the tasks in your list:\n%s",
                         tasks
                 ));
-            }
-            String[] inputSplit = inputStr.split(" ", 2);
-            if (inputSplit.length < 2) {
-                throw new BadCommandException("There are insufficient parameters!");
-            }
-            String commandStr = inputSplit[0].trim();
-            String params = inputSplit[1].trim();
-            Task newTask = null;
-            if (commandStr.equals(Command.FIND.toString())) {
-                TaskList matchingTasks = tasks.getTasksByKeyword(params);
+            case FIND: {
+                TaskList matchingTasks = tasks.getTasksByKeyword(paramsStr);
                 return ui.showNormalMessage(String.format(
                         "Here are the matching tasks in your list:\n%s",
                         matchingTasks
                 ));
-            } else if (commandStr.equals(Command.MARK.toString())) {
-                int idx = Integer.parseInt(params) - 1;
+            }
+            case MARK: {
+                int idx = getIntegerFromParamsStr(paramsStr) - 1;
                 tasks.markTaskAsDone(idx);
                 return ui.showNormalMessage(String.format(
                         "Nice! I've marked this task as done:\n\t%s",
                         tasks.getTask(idx)
                 ));
-            } else if (commandStr.equals(Command.UNMARK.toString())) {
-                int idx = Integer.parseInt(params) - 1;
+            }
+            case UNMARK: {
+                int idx = getIntegerFromParamsStr(paramsStr) - 1;
                 tasks.unmarkTaskAsDone(idx);
                 return ui.showNormalMessage(String.format(
                         "OK, I've marked this task as not done yet:\n\t%s",
                         tasks.getTask(idx)
                 ));
-            } else if (commandStr.equals(Command.DELETE.toString())) {
-                int idx = Integer.parseInt(params) - 1;
+            }
+            case DELETE: {
+                int idx = getIntegerFromParamsStr(paramsStr) - 1;
                 Task deletedTask = tasks.removeTask(idx);
                 return ui.showNormalMessage(String.format(
                         "Got it. I've removed this task:\n\t%s\nNow you have %d task%s in the list.",
@@ -80,25 +152,40 @@ public class Parser {
                         tasks.getSize() > 1 ? "s" : ""
                 ));
             }
-            // These commands are for adding of a new task
-            if (commandStr.equals(Command.TODO.toString())) {
-                newTask = new Todo(params.trim());
-            } else if (commandStr.equals(Command.DEADLINE.toString())) {
-                String[] paramsSplit = params.split("/by", 2);
-                if (paramsSplit.length < 2) {
-                    throw new BadCommandException("There are insufficient parameters!");
-                }
-                newTask = new Deadline(paramsSplit[0].trim(), paramsSplit[1].trim());
-            } else if (commandStr.equals(Command.EVENT.toString())) {
-                String[] paramsSplit = params.split("/from|/to", 3);
-                if (paramsSplit.length < 3) {
-                    throw new BadCommandException("There are insufficient parameters!");
-                }
-                newTask = new Event(paramsSplit[0].trim(), paramsSplit[1].trim(), paramsSplit[2].trim());
-            } else {
-                throw new BadCommandException("I'm sorry, but I don't know what that means :-(");
+            case TODO: {
+                newTask = new Todo(paramsStr);
+                break;
             }
-
+            case DEADLINE: {
+                Pair<String, HashMap<String, String>> descMappingPair =
+                        getMappingFromParamsStr(paramsStr, true);
+                String description = descMappingPair.getKey();
+                HashMap<String, String> paramToArgMap = descMappingPair.getValue();
+                if (!paramToArgMap.containsKey("by")) {
+                    throw INSUFFICIENT_PARAMS_ERROR;
+                }
+                newTask = new Deadline(description, paramToArgMap.get("by"));
+                break;
+            }
+            case EVENT: {
+                Pair<String, HashMap<String, String>> descMappingPair =
+                        getMappingFromParamsStr(paramsStr, true);
+                String description = descMappingPair.getKey();
+                HashMap<String, String> paramToArgMap = descMappingPair.getValue();
+                if (!paramToArgMap.containsKey("from")
+                        || !paramToArgMap.containsKey("to")) {
+                    throw INSUFFICIENT_PARAMS_ERROR;
+                }
+                newTask = new Event(
+                        description,
+                        paramToArgMap.get("from"),
+                        paramToArgMap.get("to")
+                );
+                break;
+            }
+            default:
+                throw UNKNOWN_COMMAND_ERROR;
+            }
             tasks.addTask(newTask);
             return ui.showNormalMessage(String.format(
                     "Got it. I've added this task:\n\t%s\nNow you have %d task%s in the list.",
