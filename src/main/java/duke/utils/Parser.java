@@ -66,7 +66,7 @@ public class Parser {
             throw new DukeException("Wrong format. Correct format: 'deadline {do something} /by {end date time}.'");
         }
 
-        LocalDateTime endDate = null;
+        LocalDateTime endDate;
         try {
             endDate = LocalDateTime.parse(arr[1], FORMATTER);
         } catch (DateTimeParseException e) {
