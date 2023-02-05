@@ -1,0 +1,26 @@
+hello
+list
+mark
+unmark
+TODO slap a rat
+toDO pet a rat
+list
+mark 1
+mark 1
+unmark 1
+unmark 1
+delete 1
+delete 1
+
+delete 1
+delete 9999
+deadline drink water /by 2015-01-29 06:00
+deadline drink water /by 2015-01-29T06:00
+event dance On The fl0or /from 2022-01-22T12:34 /to 2059-11-12T00:00
+deadline leap year /by 2028-02-29T00:12
+list
+delete
+DELETEALL
+list
+deleteALL
+lISt
