@@ -95,7 +95,7 @@ public class DaySchedule extends HBox {
 
 
     private Pane createRow(LocalDateTime startTime, List<ScheduleTimeable> timeables) {
-        Pane pane = createRow();
+        Pane rowPane = createRow();
 
         for (ScheduleTimeable timeable : timeables) {
             double startOffset = startTime.until(timeable.getStart(), ChronoUnit.MINUTES);
@@ -111,11 +111,11 @@ public class DaySchedule extends HBox {
 
             Pane block = createDisplayBlock(timeable, width);
 
-            pane.getChildren().add(block);
+            rowPane.getChildren().add(block);
             block.setLayoutX(startX);
         }
 
-        return pane;
+        return rowPane;
     }
 
 
