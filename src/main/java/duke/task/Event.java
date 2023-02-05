@@ -40,7 +40,7 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[" + type + "]" + "[" + getStatusIcon()+ "] " + this.description + " (from: " + 
-                dateTimeFrom.format(DateTimeFormatter.ofPattern("DD MMM yyyy hh:mma")) + " to: " +
-                dateTimeTo.format(DateTimeFormatter.ofPattern("DD MMM yyyy hh:mma")) + ")";
+                dateTimeFrom.format(DateTimeFormatter.ofPattern("dd MMM yyyy hh:mma")) + " to: " +
+                dateTimeTo.format(DateTimeFormatter.ofPattern("dd MMM yyyy hh:mma")) + ")";
     }
 }

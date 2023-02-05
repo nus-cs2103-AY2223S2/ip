@@ -4,13 +4,13 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-/*
+/**
  * Handles the conversion of time from user input
  */
 public class DateTime {
     
     /**
-     * Return dateTime from user given input
+     * Returns dateTime from user given input
      * 
      * @param words user input that has been put into an array of strings
      * @param index the index before the date
@@ -22,7 +22,7 @@ public class DateTime {
         if (index != -1 && words.length >= index+2) {
             try {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
-                dateTime = LocalDateTime.parse(words[index+1] + " " + words[index+2], formatter);
+                dateTime = LocalDateTime.parse(words[index + 1] + " " + words[index + 2], formatter);
                 return dateTime;
             } catch (DateTimeParseException e) {
                 return null;

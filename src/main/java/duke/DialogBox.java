@@ -13,14 +13,12 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
 import javax.swing.*;
 
 /**
- * An example of a custom control using FXML.
  * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
  * containing text from the speaker.
  */
@@ -58,10 +56,24 @@ public class DialogBox extends HBox {
         hbox.setStyle("-fx-background-color: Beige");
     }
 
+    /**
+     * Returns a DialogBox instance given the input string and image of the user
+     *
+     * @param text Input text by user to display on the GUI
+     * @param img Image to display on the GUI
+     * @return a DialogBox instance
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Returns a DialogBox instance given the string and image of duke
+     *
+     * @param text Reply text from Duke to display on the GUI
+     * @param img Image to display on the GUI
+     * @return a DialogBox instance
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
