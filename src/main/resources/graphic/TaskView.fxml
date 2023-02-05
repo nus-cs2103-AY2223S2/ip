@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="5.0" styleClass="task-view" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox VBox.vgrow="SOMETIMES">
+         <children>
+            <Label text="Schedule" />
+            <VBox fx:id="scheduleDisplayArea" />
+         </children>
+      </VBox>
+      <VBox VBox.vgrow="SOMETIMES">
+         <children>
+            <Label text="Todo" />
+            <VBox fx:id="todoDisplayArea" />
+         </children>
+      </VBox>
+   </children>
+</VBox>
