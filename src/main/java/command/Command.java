@@ -18,6 +18,7 @@ public interface Command {
                 .or(List.parser())
                 .or(FindByDate.parser())
                 .or(Delete.parser())
-                .or(Exit.parser());
+                .or(Exit.parser())
+                .or(Find.parser());
     }
 }

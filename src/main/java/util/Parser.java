@@ -168,7 +168,8 @@ public class Parser<T> {
 
     public static Parser<String> nextStr() {
         return skipSpace()
-                .ignoreThen(takeTill(c -> WS.contains(c)));
+                .ignoreThen(takeTill(c -> WS.contains(c)))
+                .satisfy(s -> !s.isEmpty());
     }
 
     public static <T> Parser<String> strUntil(Parser<T> p) {

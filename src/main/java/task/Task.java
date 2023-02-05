@@ -2,6 +2,11 @@ package task;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import util.Util;
 
 public abstract class Task implements Serializable {
 
@@ -24,6 +29,15 @@ public abstract class Task implements Serializable {
     }
 
     public abstract boolean hasDate(LocalDate date);
+
+    public boolean hasKeywords(Set<String> keywords) {
+        Set<String> descKeywords = Util.splitWhitespace(desc).stream()
+                .map(s -> s.toLowerCase())
+                .collect(Collectors.toCollection(HashSet::new));
+
+        descKeywords.retainAll(keywords);
+        return !descKeywords.isEmpty();
+    }
 
     public abstract Task markDone();
 

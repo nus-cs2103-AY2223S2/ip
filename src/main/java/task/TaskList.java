@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.IntStream;
 
 public class TaskList implements Serializable {
@@ -58,6 +59,18 @@ public class TaskList implements Serializable {
             return "No tasks found.";
         }
         return res;
+    }
+
+    public String findByKeywords(Set<String> keywords) {
+        String res = IntStream.range(0, this.size())
+                .filter(i -> this.lst.get(i).hasKeywords(keywords))
+                .mapToObj(i -> String.format("\n\t%d) %s", i + 1, this.lst.get(i)))
+                .reduce("", (a, b) -> a + b);
+        if (res.isEmpty()) {
+            return "No tasks found.";
+        }
+        return res;
+
     }
 
     @Override
