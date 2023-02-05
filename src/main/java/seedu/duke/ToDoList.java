@@ -23,8 +23,8 @@ public class ToDoList {
         System.out.println("\tTasks for Tony Stark:");
         System.out.println("\t--------------------------");
         for (int i = 0; i < count; i++) {
-            System.out.println("\t" + (i + 1) + "." +
-                    todolist.get(i).printTask());
+            System.out.println("\t" + (i + 1) + "."
+                    + todolist.get(i).printTask());
         }
         System.out.println("\t--------------------------");
     }
@@ -105,7 +105,7 @@ public class ToDoList {
      *
      * @param index index of task
      */
-    public void markDone (int index) {
+    public void markDone(int index) {
         todolist.get(index - 1).markDone(index);
     }
 
@@ -127,6 +127,12 @@ public class ToDoList {
         return count;
     }
 
+    /**
+     * Returns boolean of whether todolist has specified tasks.
+     *
+     * @param task task description
+     * @return boolean result
+     */
     public boolean hasTask(String task) {
 
         boolean res = false;
@@ -140,6 +146,11 @@ public class ToDoList {
         return res;
     }
 
+    /**
+     * Prints the specified tasks.
+     *
+     * @param task task description
+     */
     public void printTasks(String task) {
         for (int i = 0; i < count; i++) {
             if (todolist.get(i).hasTask(task)) {

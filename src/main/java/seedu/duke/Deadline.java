@@ -10,6 +10,13 @@ public class Deadline extends Task {
 
     private LocalDate timeParsed;
 
+    /**
+     * Constructor for Deadline.
+     *
+     * @param id the id associated with this Task
+     * @param task deadline description
+     * @param timeParsed time of deadline
+     */
     public Deadline(int id, String task, LocalDate timeParsed) {
         super(id, task);
         this.timeParsed = timeParsed;

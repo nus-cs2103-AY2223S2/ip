@@ -11,11 +11,11 @@ import java.io.FileNotFoundException;
  */
 public class Duke extends Application {
 
-    private final Storage STORAGE;
+    private final Storage storage;
     private ToDoList todolist;
     private Ui ui;
-    private final Parser PARSER;
-    boolean isBye;
+    private final Parser parser;
+    private boolean isBye;
 
     /**
      * Duke Constructor.
@@ -23,15 +23,15 @@ public class Duke extends Application {
      * @param dataPath
      */
     public Duke(String dataPath) {
-        STORAGE = new Storage(dataPath);
+        storage = new Storage(dataPath);
         todolist = new ToDoList();
         ui = new Ui();
-        PARSER = new Parser();
+        parser = new Parser();
         isBye = false;
 
         // Print previous data
         try {
-            STORAGE.loadTasks(todolist);
+            storage.loadTasks(todolist);
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
         }
@@ -46,9 +46,9 @@ public class Duke extends Application {
 
         System.out.println("\nPlease enter a command Mr Stark.");
 
-        while(!isBye) {
+        while (!isBye) {
             String line = ui.getNextCommand();
-            isBye = PARSER.parse(line, todolist, STORAGE);
+            isBye = parser.parse(line, todolist, storage);
         }
     }
 
