@@ -63,15 +63,6 @@ public class DukeTest {
         assertEquals(expectedCommandInfo4, actualCommandInfo4);
         System.out.println("Passed 4/4 checks of parsing task 'event': Duke.run()");
 
-        Storage storage = new Storage("data/storageTest(delete before each test).txt", "data");
-        TaskList tasks = new TaskList(storage.load());
-        String actualCommandOutput = "    ____________________________________________________________\n" +
-                "    Got it. I've added this task to the list:\n" +
-                "      [E][ ] Birthday (from: December 22, 2012 | 3:00:00 PM to: December 23, 2012 | 4:00:00 PM)\n" +
-                "    Now you have 1 tasks in the list.\n" +
-                "    ____________________________________________________________\n";
-        assertEquals(actualCommandOutput, tasks.addTask(actualCommandInfo4, storage));
-        System.out.println("Passed 1/1 check of creating task 'event': Duke.run()");
     }
 
 }

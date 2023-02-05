@@ -4,6 +4,12 @@ import java.io.IOException;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
+import duke.packages.AddCommand;
+import duke.packages.DeleteCommand;
+import duke.packages.FindCommand;
+import duke.packages.ListCommand;
+import duke.packages.MarkCommand;
+import duke.packages.UnmarkCommand;
 import exceptions.IncorrectNoOfArgumentException;
 
 /**
@@ -65,25 +71,25 @@ public class Duke {
                     ui.showFarewellMessage();
                     break;
                 case "list":
-                    ui.printCommand(tasks.list());
+                    this.tasks = new ListCommand().execute(commandInfoList, this.tasks, this.storage, this.ui);
                     break;
                 case "find":
-                    ui.printCommand(tasks.find(commandInfoList.get(1)));
+                    this.tasks = new FindCommand().execute(commandInfoList, this.tasks, this.storage, this.ui);
                     break;
                 case "mark":
-                    ui.printCommand(tasks.markTask(commandInfoList, this.storage));
+                    this.tasks = new MarkCommand().execute(commandInfoList, this.tasks, this.storage, this.ui);
                     break;
                 case "unmark":
-                    ui.printCommand(tasks.unmarkTask(commandInfoList, this.storage));
+                    this.tasks = new UnmarkCommand().execute(commandInfoList, this.tasks, this.storage, this.ui);
                     break;
                 case "delete":
-                    ui.printCommand(tasks.deleteTask(commandInfoList, this.storage));
+                    this.tasks = new DeleteCommand().execute(commandInfoList, this.tasks, this.storage, this.ui);
                     break;
                 case "error":
                     break;
                 default:
                     try {
-                        ui.printCommand(tasks.addTask(commandInfoList, this.storage));
+                        this.tasks = new AddCommand().execute(commandInfoList, this.tasks, this.storage, this.ui);
                     } catch (DateTimeParseException e) {
                         ui.printInvalidDateError();
                         break;
