@@ -79,10 +79,6 @@ public class Deadline extends Task {
         }
 
         Deadline d = (Deadline) o;
-        if (this.description.equals(d.description) && this.by.equals(d.by)) {
-            return true;
-        } else {
-            return false;
-        }
+        return this.description.equals(d.description) && this.by.equals(d.by);
     }
 }

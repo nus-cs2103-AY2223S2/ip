@@ -9,17 +9,17 @@ import java.io.IOException;
 import java.time.LocalDate;
 
 /**
- * This is a command to add a Deadline Task to Duke
+ * This is a command to add a Deadline Task to Duke.
  */
 public class AddDeadlineCommand extends AddCommand {
     private String description;
     private LocalDate by;
 
     /**
-     * Constructor of AddDeadlineCommand class
+     * Constructor of AddDeadlineCommand class.
      *
-     * @param description description of the Deadline Task created
-     * @param by the date that the Deadline Task will hold
+     * @param description description of the Deadline Task created.
+     * @param by the date that the Deadline Task will hold.
      */
     public AddDeadlineCommand(String description, LocalDate by) {
         super("D");
@@ -28,11 +28,11 @@ public class AddDeadlineCommand extends AddCommand {
     }
 
     /**
-     * Adds a Deadline Task into a TaskList
+     * Adds a Deadline Task into a TaskList.
      *
-     * @param taskList the TaskList storing all Task
-     * @param ui the Ui for handling inputs/outputs
-     * @param storage the Storage responsible for reading/writing data
+     * @param taskList the TaskList storing all Task.
+     * @param ui the Ui for handling inputs/outputs.
+     * @param storage the Storage responsible for reading/writing data.
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
@@ -46,10 +46,10 @@ public class AddDeadlineCommand extends AddCommand {
     }
 
     /**
-     * Checks if the given Object equals to this
+     * Checks if the given Object equals to this.
      *
-     * @param o the Object being compared
-     * @return true if o is an instance of this and has the same description and by
+     * @param o the Object being compared.
+     * @return true if o is an instance of this and has the same description and by.
      */
     @Override
     public boolean equals(Object o) {
@@ -61,10 +61,6 @@ public class AddDeadlineCommand extends AddCommand {
         }
 
         AddDeadlineCommand c = (AddDeadlineCommand) o;
-        if (this.description.equals(c.description) && this.by.equals(c.by)) {
-            return true;
-        } else {
-            return false;
-        }
+        return this.description.equals(c.description) && this.by.equals(c.by);
     }
 }

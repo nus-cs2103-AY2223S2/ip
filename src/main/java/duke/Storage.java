@@ -18,26 +18,26 @@ import duke.tasks.Task;
 import duke.tasks.Todo;
 
 /**
- * This is a class responsible for the read/write of data for Duke
+ * This is a class responsible for the read/write of data for Duke.
  */
 public class Storage {
     private final String FILE_PATH;
 
     /**
-     * Constructor for Storage class
+     * Constructor for Storage class.
      *
-     * @param filePath the filePath of the text file containing data for Duke
+     * @param filePath the filePath of the text file containing data for Duke.
      */
     public Storage(String filePath) {
         this.FILE_PATH = filePath;
     }
 
     /**
-     * Loads the data previously saved
+     * Loads the data previously saved.
      *
-     * @return an ArrayList of type Task containing all the data previously saved
-     * @throws CorruptedFileException if file contains unreadable data
-     * @throws IOException if there is an error in the IO
+     * @return an ArrayList of type Task containing all the data previously saved.
+     * @throws CorruptedFileException if file contains unreadable data.
+     * @throws IOException if there is an error in the IO.
      */
     public ArrayList<Task> loadData() throws CorruptedFileException, IOException {
         ArrayList<Task> taskList = new ArrayList<>();
@@ -85,10 +85,10 @@ public class Storage {
     }
 
     /**
-     * Writes the data on Duke to the text file linked by filePath
+     * Writes the data on Duke to the text file linked by filePath.
      *
-     * @param taskList the TaskList containing local data of Duke
-     * @throws IOException when there is an error in IO
+     * @param taskList the TaskList containing local data of Duke.
+     * @throws IOException when there is an error in IO.
      */
     public void saveData(TaskList taskList) throws IOException {
         FileWriter fw = new FileWriter(FILE_PATH);

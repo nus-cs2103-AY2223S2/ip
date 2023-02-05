@@ -8,16 +8,16 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
- * This is a class responsible for keeping track of the tasks in Duke
+ * This is a class responsible for keeping track of the tasks in Duke.
  */
 public class TaskList {
     protected ArrayList<Task> tasks;
     protected int counter;
 
     /**
-     * Constructor for TaskList class
+     * Constructor for TaskList class.
      *
-     * @param tasks an ArrayList of task that contains previously saved tasks
+     * @param tasks an ArrayList of task that contains previously saved tasks.
      */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
@@ -25,9 +25,9 @@ public class TaskList {
     }
 
     /**
-     * Adds a Todo to tasks
+     * Adds a Todo to tasks.
      *
-     * @param description description of the Todo
+     * @param description description of the Todo.
      */
     public String addNewTodo(String description) {
         Todo todo = new Todo(description);
@@ -37,10 +37,10 @@ public class TaskList {
     }
 
     /**
-     * Adds a Deadline to tasks
+     * Adds a Deadline to tasks.
      *
-     * @param description description of the Deadline
-     * @param by date of the Deadline
+     * @param description description of the Deadline.
+     * @param by date of the Deadline.
      */
     public String addNewDeadline(String description, LocalDate by) {
         Deadline deadline = new Deadline(description, by);
@@ -50,11 +50,11 @@ public class TaskList {
     }
 
     /**
-     * Adds an Event to tasks
+     * Adds an Event to tasks.
      *
-     * @param description description of the Event
-     * @param from start date of Event
-     * @param to end date of Event
+     * @param description description of the Event.
+     * @param from start date of Event.
+     * @param to end date of Event.
      */
     public String addNewEvent(String description, LocalDate from, LocalDate to) {
         Event event = new Event(description, from, to);
@@ -64,21 +64,21 @@ public class TaskList {
     }
 
     /**
-     * Lists out everything in tasks
+     * Lists out everything in tasks.
      */
     public String showTaskList() {
         return Ui.showTaskList(this.tasks);
     }
 
     /**
-     * Deletes a Task from tasks
+     * Deletes a Task from tasks.
      *
-     * @param taskNumber the number representing the task being deleted
-     * @throws TaskNotFoundException when taskNumber exceeds the total number of tasks available
+     * @param taskNumber the number representing the task being deleted.
+     * @throws TaskNotFoundException when taskNumber exceeds the total number of tasks available.
      */
     public String deleteTask(int taskNumber) throws TaskNotFoundException {
         if (taskNumber > this.counter) {
-            throw(new TaskNotFoundException("Task " + taskNumber +" does not exist"));
+            throw new TaskNotFoundException("Task " + taskNumber +" does not exist");
         }
         Task removedTask = tasks.remove(taskNumber - 1);
         counter--;
@@ -86,14 +86,14 @@ public class TaskList {
     }
 
     /**
-     * Marks a Task in tasks
+     * Marks a Task in tasks.
      *
-     * @param taskNumber the number representing the task being deleted
-     * @throws TaskNotFoundException when taskNumber exceeds the total number of tasks available
+     * @param taskNumber the number representing the task being deleted.
+     * @throws TaskNotFoundException when taskNumber exceeds the total number of tasks available.
      */
     public String markTask(int taskNumber) throws TaskNotFoundException {
         if (taskNumber > this.counter) {
-            throw(new TaskNotFoundException("Task " + taskNumber +" does not exist"));
+            throw new TaskNotFoundException("Task " + taskNumber +" does not exist");
         }
         Task task = tasks.get(taskNumber - 1);
         task.setDone(true);
@@ -101,14 +101,14 @@ public class TaskList {
     }
 
     /**
-     * Unmarks a Task in tasks
+     * Unmarks a Task in tasks.
      *
-     * @param taskNumber the number representing the task being deleted
-     * @throws TaskNotFoundException when taskNumber exceeds the total number of tasks available
+     * @param taskNumber the number representing the task being deleted.
+     * @throws TaskNotFoundException when taskNumber exceeds the total number of tasks available.
      */
     public String unmarkTask(int taskNumber) throws TaskNotFoundException {
         if (taskNumber > this.counter) {
-            throw(new TaskNotFoundException("Task " + taskNumber +" does not exist"));
+            throw new TaskNotFoundException("Task " + taskNumber +" does not exist");
         }
         Task task = tasks.get(taskNumber - 1);
         task.setDone(false);
@@ -116,9 +116,9 @@ public class TaskList {
     }
 
     /**
-     * List out tasks that contains the keyword
+     * List out tasks that contains the keyword.
      *
-     * @param keyword the word used for filtering tasks
+     * @param keyword the word used for filtering tasks.
      */
     public String findTask(String keyword) {
         ArrayList<Task> filteredTasks = new ArrayList<>();

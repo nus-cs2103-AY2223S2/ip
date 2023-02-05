@@ -58,10 +58,6 @@ public class Todo extends Task{
         }
 
         Todo t = (Todo) o;
-        if (this.description.equals(t.description)) {
-            return true;
-        } else {
-            return false;
-        }
+        return this.description.equals(t.description);
     }
 }

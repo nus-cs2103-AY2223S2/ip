@@ -1,7 +1,6 @@
 package duke;
 
 import duke.commands.AddDeadlineCommand;
-import duke.commands.AddTodoCommand;
 import duke.commands.Command;
 
 import org.junit.jupiter.api.Test;
@@ -18,7 +17,6 @@ public class ParserTest {
         Command c = Parser.parse("deadline grocery /by 19/10/2023");
         LocalDate date = LocalDate.parse("19/10/2023", DateTimeFormatter.ofPattern("d/MM/yyyy"));
         AddDeadlineCommand test = new AddDeadlineCommand("grocery", date);
-        //AddTodoCommand test = new AddTodoCommand("grocery");
         assertEquals(c, test);
     }
 }
