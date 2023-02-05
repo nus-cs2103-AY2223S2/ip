@@ -21,9 +21,9 @@ import javafx.scene.layout.HBox;
  */
 public class DialogBox extends HBox {
     @FXML
-    private Label dialog;
+    private Label dialog = null;
     @FXML
-    private ImageView displayPicture;
+    private ImageView displayPicture = null;
 
     private DialogBox(String text, Image img) {
         try {
@@ -34,7 +34,8 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        assert dialog != null : "dialog Label not set up properly in fxml file";
+        assert displayPicture != null : "displayPicture ImageView not set up properly in fxml file";
         dialog.setText(text);
         displayPicture.setImage(img);
     }
