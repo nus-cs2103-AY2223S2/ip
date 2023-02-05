@@ -33,6 +33,8 @@ public class Event extends Task {
     }
     @Override
     public String toString(){
-        return super.toString() + " (from: " + start.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " to: " + end.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        char done = ' ';
+        if (isDone()) done = 'X';
+        return "[E][" + done + "] " + super.toString() + " (from: " + start.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " to: " + end.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }

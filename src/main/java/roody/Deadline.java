@@ -25,6 +25,8 @@ public class Deadline extends Task{
     }
     @Override
     public String toString(){
-        return super.toString() + " (by: "+ deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        char done = ' ';
+        if (isDone()) done = 'X';
+        return "[D][" + done + "] " + super.toString() + " (by: "+ deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }

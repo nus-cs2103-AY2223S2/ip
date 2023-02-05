@@ -18,9 +18,9 @@ public class Roody {
     }
     
     // toggles completion status of tasks
-    private void complete(int index, boolean complete) throws RoodyException{
+    private void completeTask(int index, boolean complete) throws RoodyException{
         if (index > list.size() - 1 || list.get(index) == null) {
-            new RoodyException("Sorry, that task doesn't exist");
+            throw new RoodyException("Sorry, that task doesn't exist");
         } else {
             Task task = list.get(index);
             if (complete) {
@@ -31,14 +31,30 @@ public class Roody {
             ui.showMarkStatus(complete, task);
         }
     }
-    
 
-    private void delete(int index) {
+    private void findTaskByKeyword(String keyword) throws RoodyException {
+        ArrayList<Task> foundTasks = new ArrayList<>();
+        for (Task task : list) {
+            // Splits by "|"
+            String[] words = task.saveTask().split("\\|");
+            // Further splits description by whitespace
+            String[] desc = words[0].split("\\s");
+            for (String word : desc) {
+                // Searches for a match to keyword
+                if (word.equals(keyword)) {
+                    foundTasks.add(task);
+                }
+            }
+        }
+        ui.showFoundTasks(foundTasks);
+    }
+
+    private void deleteTask(int index) throws RoodyException{
         if (index > list.size() - 1 || list.get(index) == null) {
-            new RoodyException("Sorry, that task doesn't exist");
+            throw new RoodyException("Sorry, that task doesn't exist");
         } else {
             Task task = list.get(index);
-            list.remove(index - 1);
+            list.remove(index);
             ui.showDeleteTask(task, list.size());
         }
     }
@@ -72,7 +88,7 @@ public class Roody {
                             throw new RoodyException("Tasks require a description");
                         }
                         try {
-                            task = new Deadline(commands[1], LocalDate.parse(commands[3]));
+                            task = new Deadline(commands[1], LocalDate.parse(commands[2]));
                             list.add(task);
                             ui.showAddTask(task, list.size());
                         } catch (DateTimeParseException e) {
@@ -84,7 +100,7 @@ public class Roody {
                             throw new RoodyException("Tasks require a description");
                         }
                         try {
-                            task = new Event(commands[1], LocalDate.parse(commands[3]), LocalDate.parse(commands[5]));
+                            task = new Event(commands[1], LocalDate.parse(commands[2]), LocalDate.parse(commands[3]));
                             list.add(task);
                             ui.showAddTask(task, list.size());
                         } catch (DateTimeParseException e) {
@@ -97,12 +113,18 @@ public class Roody {
                         if (commands.length != 2) {                    
                             throw new RoodyException("Please enter a index number to be marked/unmarked/deleted - \"mark/unmark/delete {index}\"");
                         }
-                        int index = Integer.parseInt(commands[0]) - 1;
+                        int index = Integer.parseInt(commands[1]) - 1;
                         if (commands[0].equals("delete")) {
-                            delete(index);
+                            deleteTask(index);
                         } else { 
-                            complete(index, commands[0].equals("mark"));
+                            completeTask(index, commands[0].equals("mark"));
                         }
+                        break;
+                    case "find":
+                        if (commands.length != 2) {
+                            throw new RoodyException("Please enter a single keyword to be searched - \"find {keyword}\"");
+                        }
+                        findTaskByKeyword(commands[1]);
                         break;
                     case "bye":
                         isExit = true;
@@ -110,8 +132,7 @@ public class Roody {
                     default:
                         throw new RoodyException("I don't quite understand that.");
                 }
-            // mark/unmark index
-            } catch (Exception e) { 
+            } catch (RoodyException e) {
                 ui.showLine();
                 System.out.println(e.getMessage());
             } finally {

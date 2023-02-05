@@ -14,6 +14,8 @@ public class Todo extends Task {
     }
     @Override
     public String toString(){
-        return super.toString() + "";
+        char done = ' ';
+        if (isDone()) done = 'X';
+        return "[T][" + done + "] " + super.toString() + "";
     }
 }
