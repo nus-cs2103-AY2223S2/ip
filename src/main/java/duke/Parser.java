@@ -1,6 +1,7 @@
 package duke;
 
 import duke.command.*;
+import duke.gui.Ui;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -131,8 +132,8 @@ public class Parser {
         String[] arr = fullCommand.split(" ", 2);
         try {
             return arr[1];
-        } catch(ArrayIndexOutOfBoundsException e) {
-            ui.customMessage("☹ OOPS!!! The description of a todo cannot be empty.");
+        } catch(ArrayIndexOutOfBoundsException e)  {
+
         }
         return null;
     }

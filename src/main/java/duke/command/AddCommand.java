@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
+import duke.gui.Ui;
 import duke.Task;
 
 /**
@@ -23,12 +23,13 @@ public class AddCommand extends Command {
      * Adds ToDo,Deadline or Event tasks to the tasklist and storage.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.add(this.task);
-        ui.customMessage("Added : " + task.getValue());
-        ui.showNumberOfListings(tasks.size());
         storage.write(this.task);
+        String message = "Added : " + task.getValue() + "\n"
+                + ui.showNumberOfListings(tasks.size());
 
+        return message;
     }
 }
 

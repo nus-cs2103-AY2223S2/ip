@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
+import duke.gui.Ui;
 
 /**
  * ExitCommand - User enters the bye command.
@@ -27,8 +27,8 @@ public class ExitCommand extends Command {
      * Print the exit message
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.byeMessage();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.byeMessage();
     }
 
 }

@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
+import duke.gui.Ui;
 
 /**
  * CommandNotFound - when user enters a Command and Duke
@@ -21,7 +21,7 @@ public class CommandNotFound extends Command {
      * Display the UI
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showCommandNotFound();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.showCommandNotFound();
     }
 }

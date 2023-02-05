@@ -1,9 +1,10 @@
 package duke;
 
-import duke.Deadline;
-import duke.Event;
-
-import java.io.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.BufferedReader;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 

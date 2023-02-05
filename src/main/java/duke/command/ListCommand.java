@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
+import duke.gui.Ui;
 
 /**
  * ListCommand - User enters the list command
@@ -20,7 +20,7 @@ public class ListCommand extends Command {
      * Prints out all the tasks.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.printList(tasks.getList());
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.printList(tasks.getList());
     }
 }

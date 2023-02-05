@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
+import duke.gui.Ui;
 
 /**
  * DeleteCommand - If user enters the delete command.
@@ -19,10 +19,13 @@ public class DeleteCommand extends Command {
      *  Deletes the given task.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.customMessage("Noted. I've removed this task: \n");
-        ui.customMessage(tasks.get(index));
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+
+        String message = "Noted. I've removed this task: \n" +
+                tasks.get(index) + "\n" +
+                ui.showNumberOfListings(tasks.size() - 1);
+
         tasks.remove(index);
-        ui.showNumberOfListings(tasks.size());
+        return message;
     }
 }

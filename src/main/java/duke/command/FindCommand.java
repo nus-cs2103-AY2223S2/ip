@@ -2,13 +2,11 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
+import duke.gui.Ui;
 import duke.Task;
 
 import java.util.stream.Collectors;
 import java.util.List;
-import java.util.ArrayList;
-
 
 
 /**
@@ -26,11 +24,11 @@ public class FindCommand extends Command {
      * Finds given value in all the tasks in the TaskList
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         List<Task> matches = tasks.stream()
                 .filter(it -> it.getValue().contains( this.value ))
                 .collect(Collectors.toList());
 
-        ui.printList(matches);
+        return ui.printList(matches);
     }
 }
