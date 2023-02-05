@@ -9,19 +9,19 @@ import exception.DukeException;
  */
 public class Deadline extends Task {
 
-    private final LocalDate by;
+    private final LocalDate deadline;
 
     /**
      * Creates a new Deadline object with parent constructor and date
      *
      * @param description Task description of the Deadline object
-     * @param by Deadline date of the task
+     * @param deadline Deadline date of the task
      * @throws DukeException if there is error parsing datetime
      */
-    public Deadline(String description, String by) throws DukeException {
+    public Deadline(String description, String deadline) throws DukeException {
         super(description);
         try {
-            this.by = LocalDate.parse(by);
+            this.deadline = LocalDate.parse(deadline);
         } catch (DateTimeParseException e) {
             throw new DukeException("Parse Error: " + e.getMessage() + "\n"
                     + "\tAccepted format: \"YYYY-MM-DD\"");
@@ -44,7 +44,7 @@ public class Deadline extends Task {
             sb.append("0 | ");
         }
         sb.append(this.description).append(" | ");
-        sb.append(this.by).append("\n");
+        sb.append(this.deadline).append("\n");
         return sb.toString();
     }
 
@@ -56,8 +56,8 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: "
-                + by.getMonth().toString().substring(0, 3) + " "
-                + by.getDayOfMonth() + " "
-                + by.getYear() + ")";
+                + deadline.getMonth().toString().substring(0, 3) + " "
+                + deadline.getDayOfMonth() + " "
+                + deadline.getYear() + ")";
     }
 }

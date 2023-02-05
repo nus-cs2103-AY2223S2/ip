@@ -28,15 +28,14 @@ public class TaskList {
      * @param task   Task to be added to the list
      * @param isLoad Indicates if the action is done by auto save and load
      */
-    public void addTask(Task task, boolean isLoad) {
+    public String addTask(Task task, boolean isLoad) {
         tasks.add(task);
         if (!isLoad) {
-            Ui.print(
-                    "Got it. I've added this task:\n"
-                            + "\t  " + task + "\n"
-                            + "\tNow you have " + tasks.size() + " task(s) in the list."
-            );
+            return "Got it. I've added this task:\n"
+                            + "  " + task + "\n"
+                            + "Now you have " + tasks.size() + " task(s) in the list.";
         }
+        else return "";
     }
 
     /**
@@ -44,13 +43,12 @@ public class TaskList {
      *
      * @param taskId Id of the task to be deleted
      */
-    public void deleteTask(int taskId) {
-        Ui.print(
-                "Noted. I've removed this task:\n"
-                        + "\t  " + tasks.get(taskId) + "\n"
-                        + "\tNow you have " + (tasks.size() - 1) + " task(s) in the list."
-        );
+    public String deleteTask(int taskId) {
+        String msg = "Noted. I've removed this task:\n"
+                        + "  " + tasks.get(taskId) + "\n"
+                        + "Now you have " + (tasks.size() - 1) + " task(s) in the list.";
         tasks.remove(taskId);
+        return msg;
     }
 
     /**
@@ -75,15 +73,15 @@ public class TaskList {
     /**
      * Prints out all the tasks in the list
      */
-    public void printList() {
+    public String printList() {
         StringBuilder tasksList = new StringBuilder("Here are the tasks in your list:\n");
         for (int i = 0; i < tasks.size(); i++) {
-            tasksList.append("\t").append(i + 1).append(". ").append(tasks.get(i).toString());
+            tasksList.append(i + 1).append(". ").append(tasks.get(i).toString());
             if (i < tasks.size() - 1) {
                 tasksList.append("\n");
             }
         }
-        Ui.print(tasksList.toString());
+        return tasksList.toString();
     }
 
     /**
