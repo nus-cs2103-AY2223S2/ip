@@ -3,6 +3,7 @@ package duke;
 import java.io.IOException;
 
 import duke.command.Command;
+import duke.command.GetRemindersCommand;
 import duke.task.TaskList;
 
 /**
@@ -42,5 +43,15 @@ public class Duke {
             String startOfErrorMessage = "An error has occurred!\n";
             return startOfErrorMessage + exception.getMessage();
         }
+    }
+
+    /**
+     * Reminds users of tasks that are due today.
+     *
+     * @return List of tasks that are due today.
+     */
+    public String getReminders() {
+        Command getRemindersCommand = new GetRemindersCommand("", taskList);
+        return getRemindersCommand.execute();
     }
 }

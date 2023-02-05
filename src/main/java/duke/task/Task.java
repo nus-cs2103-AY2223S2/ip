@@ -1,5 +1,6 @@
 package duke.task;
 
+import duke.enums.TaskType;
 /**
  * Represents a task of the user.
  *
@@ -12,15 +13,19 @@ public abstract class Task {
     /** Marking to show if task is done */
     private boolean isMarked;
 
+    /** Type of task */
+    private TaskType type;
+
     /**
      * Creates a task.
      *
      * @param description Description of the task.
      * @param isMarked Task marking.
      */
-    public Task(String description, boolean isMarked) {
+    public Task(String description, boolean isMarked, TaskType type) {
         this.description = description;
         this.isMarked = isMarked;
+        this.type = type;
     }
 
     /**
@@ -73,5 +78,14 @@ public abstract class Task {
      */
     public boolean hasSubstring(String text) {
         return description.contains(text);
+    }
+
+    /**
+     * Gets the type of the task.
+     *
+     * @return Task type.
+     */
+    public TaskType getTaskType() {
+        return type;
     }
 }
