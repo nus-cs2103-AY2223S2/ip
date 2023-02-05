@@ -19,12 +19,12 @@ public class Parser {
         LinkedHashMap<Command.Argument, String> arguments = new LinkedHashMap<>();
         for (String term : input.strip().split(" /")) {
             int firstSpace = term.indexOf(" ");
-            Command.Argument argument = Command.parseArgument((firstSpace == -1
+            Command.Argument argument = Command.parseArgument((firstSpace == -1)
                     ? term
-                    : term.substring(0, firstSpace)));
-            String value = (firstSpace == -1
+                    : term.substring(0, firstSpace));
+            String value = (firstSpace == -1)
                     ? ""
-                    : term.substring(firstSpace + 1));
+                    : term.substring(firstSpace + 1);
             arguments.put(argument, value);
         }
         Command command = new Command(arguments);
@@ -36,7 +36,7 @@ public class Parser {
      * Checks if the Command's arguments are valid.
      *
      * @param command Command to check.
-     * @throws IllegalArgumentException if arguments are invalid.
+     * @throws IllegalArgumentException If arguments are invalid.
      */
     private static void checkArguments(Command command)
             throws IllegalArgumentException {
@@ -80,7 +80,7 @@ public class Parser {
      *
      * @param command Command to check.
      * @param args Required arguments.
-     * @throws IllegalArgumentException if any of the required arguments are not in
+     * @throws IllegalArgumentException If any of the required arguments are not in
      *                                  the command.
      */
     private static void checkHasArgs(Command command, ArrayList<Command.Argument> args)
@@ -97,7 +97,7 @@ public class Parser {
      * Checks if a command's arguments contain non-empty values.
      * @param command Command to check.
      * @param args Arguments with required values.
-     * @throws IllegalArgumentException if any of the arguments  are not in the
+     * @throws IllegalArgumentException If any of the arguments  are not in the
      *                                  command or have empty values.
      */
     private static void checkHasValues(Command command, ArrayList<Command.Argument> args)

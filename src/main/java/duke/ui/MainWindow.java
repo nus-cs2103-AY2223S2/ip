@@ -10,8 +10,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
 /**
- * Controller for MainWindow. Provides the layout for the other controls.
+ * Controller for MainWindow.
+ * Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
 
@@ -131,6 +133,7 @@ public class MainWindow extends AnchorPane {
 
     /**
      * Displays tasks containing a certain keyword
+     *
      * @param tasks String representation of filtered tasks.
      */
     public void showTasksWithKeyword(String tasks) {
