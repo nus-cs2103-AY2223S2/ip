@@ -33,8 +33,10 @@ public class Events extends Task {
     }
 
     private void extract() {
+        //requies modifcation for fomatting
         try {
             String[] tokens = taskName.split("/");
+            assert tokens.length == 3 : "invalid";
             String[] startdate = tokens[1].split(" ");
             String[] enddate = tokens[2].split(" ");
             taskName = tokens[0];

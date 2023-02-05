@@ -30,13 +30,13 @@ public class Deadlines extends Task {
     public Deadlines(String name, boolean done) {
         super(name, done);
         rawInput = name;
-        //dateTranslator = new duke.utilities.DateTranslator(raw);
         extract();
     }
 
     private void extract() {
         try {
             String[] tokens = taskName.split("/");
+            assert tokens.length >= 2 : "invalid";
             taskName = tokens[0];
 
             if (!DateTranslator.isDate(rawInput)) {

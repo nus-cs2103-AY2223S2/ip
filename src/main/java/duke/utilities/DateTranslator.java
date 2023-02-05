@@ -33,6 +33,7 @@ public class DateTranslator {
      * @return the boolean
      */
     public static boolean isDate(String rawInput) {
+        assert !rawInput.isBlank() :"Invalid input";
         String[] token1 = rawInput.split("/");
         String[] token2 = token1[1].split("-");
         //first date format
@@ -44,6 +45,7 @@ public class DateTranslator {
         //example input = return book /by 2/12/2019 1800
         String[] tokens;
         tokens = rawInput.split("/");
+        assert tokens.length > 0: "Empty input";
         // 2/12/2019 1800 format
         LocalDateTime time;
         if (tokens.length > 2) {
