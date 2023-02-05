@@ -1,4 +1,6 @@
-package duke;
+package duke.util;
+import duke.task.Task;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -70,13 +72,25 @@ public class TaskList {
         return toDoList.size();
     }
 
-    public void find(String subS){
+    public String find(String subS){
         TaskList foundList = new TaskList();
         for (int i = 0; i < toDoList.size(); i++){
             if (toDoList.get(i).contains(subS)) {
                 foundList.add(toDoList.get(i));
             }
         }
-        foundList.print();
+        return foundList.toString();
+    }
+
+    @Override
+    public String toString() {
+        if (toDoList.size() == 0) {
+            return "Your list is currently empty. Enter using one of the commands :)";
+        }
+        String s = "";
+        for (int i = 0; i < toDoList.size(); i++){
+            s += toDoList.get(i).toString() +"\n";
+        }
+        return s;
     }
 }

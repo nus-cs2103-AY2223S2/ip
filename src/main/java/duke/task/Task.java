@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 /**
  * Represents a Task, storing the task name, and its string as was inputted
@@ -45,12 +45,20 @@ public class Task {
         return name.contains(subS);
     }
 
-    @Override
-    public String toString(){
+    public String toStringForFile() {
         if (isDone){
             return this.inpString + "@" + "1\n";
         } else {
             return this.inpString + "@" + "0\n";
+        }
+    }
+
+    @Override
+    public String toString() {
+        if (isDone){
+            return "[X] " + name;
+        } else {
+            return "[ ] " + name;
         }
     }
 

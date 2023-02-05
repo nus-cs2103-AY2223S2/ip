@@ -1,4 +1,6 @@
-package duke;
+package duke.util;
+import duke.util.Parser;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;

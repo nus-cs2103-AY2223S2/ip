@@ -1,4 +1,10 @@
-package duke;
+package duke.util;
+import duke.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -37,14 +43,16 @@ public class Parser {
      * @param task String user inputted string for processing.
      * @throws DukeException If action is invalid or if task description is empty.
      */
-    public static void operationHandler(String task) throws DukeException{
+    public static String operationHandler(String task) throws DukeException{
         String[] inpArr = task.split(" ");
         if (inpArr[0].equals("list")) {
-            list();
+            return list();
         } else if (inpArr[0].equals("mark")) {
             taskList.markDone(Integer.parseInt(inpArr[1]) - 1);
+            return "Marked for you!";
         } else if (inpArr[0].equals("unmark")) {
             taskList.markUndone(Integer.parseInt(inpArr[1]) - 1);
+            return "Unmarked for you!";
         } else {
             // add tasks
             if (inpArr[0].equals("todo")) {
@@ -53,23 +61,28 @@ public class Parser {
                 }
                 ToDo newToDo = new ToDo(task.substring(5), task);
                 taskList.add(newToDo);
+                return "Added :)";
             } else if (inpArr[0].equals("deadline")) { // need to handle exception
                 String[] processedString = stringProcessor(true, task.substring(9));
                 Deadline newDeadline = new Deadline(processedString[0], task,
                         LocalDate.parse(processedString[1]));
                 taskList.add(newDeadline);
+                return "Added :)";
             } else if (inpArr[0].equals("event")){ // need to handle exception
                 String[] processedString = stringProcessor(false, task.substring(6));
                 Event newEvent = new Event(processedString[0], task, LocalDate.parse(processedString[1]),
                         LocalDate.parse(processedString[2]));
                 taskList.add(newEvent);
+                return "Added :)";
             } else if (inpArr[0].equals("delete")){ // need to handle exception
                 taskList.remove(Integer.parseInt(inpArr[1])-1);
+                return "Deleted for you";
             } else if (inpArr[0].equals("find")) {
                 System.out.println("here ya go :)");
-                taskList.find(inpArr[1]);
+                return taskList.find(inpArr[1]);
             } else {
-                throw new DukeException("Invalid Input!");
+                //throw new DukeException("Invalid Input!");
+                return "I am sorry, I don't understand.";
             }
         }
     }
@@ -117,8 +130,8 @@ public class Parser {
     /**
      * Output the TaskList..
      */
-    public static void list(){
-        taskList.print();
+    public static String list(){
+        return taskList.toString();
     }
 
     /**
@@ -145,7 +158,7 @@ public class Parser {
             FileWriter myWriter = new FileWriter("data/duke.txt");
             for (int i=0; i<taskList.size(); i++) {
                 Task tempTask = taskList.get(i);
-                myWriter.write(tempTask.toString());
+                myWriter.write(tempTask.toStringForFile());
             }
             myWriter.close();
             System.out.println("Saved your list :).");
