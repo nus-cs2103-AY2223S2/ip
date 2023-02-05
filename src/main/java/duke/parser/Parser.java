@@ -9,7 +9,6 @@ import duke.command.ListCommand;
 import duke.command.MassDeleteCommand;
 import duke.command.ReminderCommand;
 import duke.command.SortCommand;
-import duke.command.UndoCommand;
 import duke.exception.DukeException;
 import duke.exception.InvalidInputException;
 
@@ -33,9 +32,9 @@ public class Parser {
         FIND,
         VIEW,
         UPDATE,
-        UNDO,
         FREE,
-        FIXED, SORT;
+        FIXED,
+        SORT;
     }
 
     /**
@@ -105,60 +104,57 @@ public class Parser {
      */
     private static Command createCommand(Instruction instruction, String information) throws InvalidInputException {
         switch (instruction) {
-            case BYE:
-                //create and return ExitCommand
-                return new ExitCommand();
-            case LIST:
-                //create and return ListCommand
-                return new ListCommand();
-            case REMINDER:
-                //create and return ReminderCommand
-                return new ReminderCommand();
-            case MASSDELETE:
-                //create and return MassDeleteCommand
-                return new MassDeleteCommand();
-            case FREE:
-                //create and return FindFreeTimeCommand
-                return new FindFreeTimeCommand();
-            case SORT:
-                //create and return FindFreeTimeCommand
-                return new SortCommand();
-            case HELP:
-                //create and return command to mark item using helpDecoder in Decipherer
-                return Decipherer.parseHelpCommand(information);
-            case MARK:
-                //create and return command to mark item using markDecoder in Decipherer
-                return Decipherer.parseMarkCommand(information);
-            case UNMARK:
-                //create and return command to unmark item using unmarkDecoder in Decipherer
-                return Decipherer.parseUnmarkCommand(information);
-            case DELETE:
-                //create and return command to delete item using deleteDecoder in Decipherer
-                return Decipherer.parseDeleteCommand(information);
-            case TODO:
-                //create and return command to create to-do item using todoDecoder in Decipherer
-                return Decipherer.parseTodoCommand(information);
-            case FIXED:
-                //create and return command to create to-do item using todoDecoder in Decipherer
-                return Decipherer.parseFixedDurationCommand(information);
-            case DEADLINE:
-                //create and return command to create deadline item using deadlineDecoder in Decipherer
-                return Decipherer.parseDeadlineCommand(information);
-            case EVENT:
-                //create and return command to create event item using eventDecoder in Decipherer
-                return Decipherer.parseEventCommand(information);
-            case FIND:
-                //create and return command to find item using findDecoder in Decipherer
-                return Decipherer.parseFindCommand(information);
-            case VIEW:
-                //create and return command to view item using viewDecoder in Decipherer
-                return Decipherer.parseViewCommand(information);
-            case UPDATE:
-                //create and return command to update item using updateDecoder in Decipherer
-                return Decipherer.parseUpdateCommand(information);
-            case UNDO:
-                //create and return UndoCommand
-                return new UndoCommand();
+        case BYE:
+            //create and return ExitCommand
+            return new ExitCommand();
+        case LIST:
+            //create and return ListCommand
+            return new ListCommand();
+        case REMINDER:
+            //create and return ReminderCommand
+            return new ReminderCommand();
+        case MASSDELETE:
+            //create and return MassDeleteCommand
+            return new MassDeleteCommand();
+        case FREE:
+            //create and return FindFreeTimeCommand
+            return new FindFreeTimeCommand();
+        case SORT:
+            //create and return FindFreeTimeCommand
+            return new SortCommand();
+        case HELP:
+            //create and return command to mark item using helpDecoder in Decipherer
+            return Decipherer.parseHelpCommand(information);
+        case MARK:
+            //create and return command to mark item using markDecoder in Decipherer
+            return Decipherer.parseMarkCommand(information);
+        case UNMARK:
+            //create and return command to unmark item using unmarkDecoder in Decipherer
+            return Decipherer.parseUnmarkCommand(information);
+        case DELETE:
+            //create and return command to delete item using deleteDecoder in Decipherer
+            return Decipherer.parseDeleteCommand(information);
+        case TODO:
+            //create and return command to create to-do item using todoDecoder in Decipherer
+            return Decipherer.parseTodoCommand(information);
+        case FIXED:
+            //create and return command to create to-do item using todoDecoder in Decipherer
+            return Decipherer.parseFixedDurationCommand(information);
+        case DEADLINE:
+            //create and return command to create deadline item using deadlineDecoder in Decipherer
+            return Decipherer.parseDeadlineCommand(information);
+        case EVENT:
+            //create and return command to create event item using eventDecoder in Decipherer
+            return Decipherer.parseEventCommand(information);
+        case FIND:
+            //create and return command to find item using findDecoder in Decipherer
+            return Decipherer.parseFindCommand(information);
+        case VIEW:
+            //create and return command to view item using viewDecoder in Decipherer
+            return Decipherer.parseViewCommand(information);
+        case UPDATE:
+            //create and return command to update item using updateDecoder in Decipherer
+            return Decipherer.parseUpdateCommand(information);
         }
         //if no case matched, return null
         return null;

@@ -3,7 +3,6 @@ package duke.command;
 import duke.exception.DukeException;
 import duke.exception.InvalidInputException;
 import duke.parser.ErrorMessage;
-import duke.storage.CommandHistory;
 import duke.storage.Storage;
 import duke.task.DukeTask;
 import duke.task.TaskList;
@@ -46,9 +45,7 @@ public class UnmarkCommand extends Command {
      * @throws DukeException Throws exception if the list is empty or the given index is our of range
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage, CommandHistory commandHistory) throws DukeException {
-        // save the current state of the task list before making changes
-        commandHistory.saveState(tasks);
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (tasks.isEmpty()) {
             // throw an error message if task list is empty
             String errorMessage = ErrorMessage.TASK_LIST_EMPTY_ERROR + ErrorMessage.ADD_MORE_TASKS;

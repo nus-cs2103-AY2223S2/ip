@@ -1,9 +1,8 @@
 # User Guide to Mr. Bear!
-
+![Ui](./Ui.png)
 - [Introduction](#introduction)
 - [Quick Start](#quick-start)
   * [Run the project in intelliJ](#run-the-project-in-intellij)
-    + [Prerequisites](#prerequisites)
   * [Run the project in terminal](#run-the-project-in-terminal)
 - [Command Summary](#command-summary)
 - [Features](#features)
@@ -35,13 +34,12 @@ This project, Mr. Bear, is based on [Project Duke](https://github.com/nus-cs2103
 
 This is a simple user guide for the usage of Mr. Bear Application.
 
-![Ui](./Ui.png)
-
 ## Quick Start
 
 ### Run the project in intelliJ
 
-> #### Prerequisites
+> **Prerequisites**
+>
 > + JDK 11
 > + update Intellij to the most recent version.
 > + For those new to git, please check this out on how to download the project: [Download and try the Project](#download-and-try-the-project)
@@ -87,7 +85,7 @@ This is a simple user guide for the usage of Mr. Bear Application.
 5. You should expect to see a Graphical User Interface(GUI) appear in a few second
 6. You should expect to see a window as shown below: 
 
-![GUI of BILL](Ui.png)
+![welcome](welcome.png)
 
 7. Once the application is running, type the help command to view a list of available commands and learn what tasks the chatbot can assist with.
 ```

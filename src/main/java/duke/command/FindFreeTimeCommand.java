@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.exception.InvalidInputException;
-import duke.storage.CommandHistory;
 import duke.storage.Storage;
 import duke.task.DeadlineTask;
 import duke.task.DukeTask;
@@ -25,10 +24,9 @@ public class FindFreeTimeCommand extends Command {
      * @param tasks tasklist
      * @param ui user interface
      * @param storage storage
-     * @param commandHistory command history
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage, CommandHistory commandHistory) throws InvalidInputException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidInputException {
         // Get the current date
         LocalDate currentDate = LocalDate.now();
         // Get the end date as one month from the current date

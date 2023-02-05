@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.storage.CommandHistory;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
@@ -16,7 +15,7 @@ public class ReminderCommand extends Command{
      * @param storage The Storage Object used to save and load the TaskList
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage, CommandHistory commandHistory) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         //Create a new TaskList to store all the tasks with deadlines
         TaskList deadlineList = tasks.extractDeadlines();
         //Create a response message for the tasks with deadlines

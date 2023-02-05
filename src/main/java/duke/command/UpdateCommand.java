@@ -3,7 +3,6 @@ package duke.command;
 import duke.exception.DukeException;
 import duke.exception.InvalidInputException;
 import duke.parser.ErrorMessage;
-import duke.storage.CommandHistory;
 import duke.storage.Storage;
 import duke.task.DukeTask;
 import duke.task.TaskList;
@@ -51,11 +50,8 @@ public class UpdateCommand extends Command{
      * @param ui user interface
      * @param storage storage
      */
-
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage, CommandHistory commandHistory) throws DukeException {
-        // Save current state of task list before making changes
-        commandHistory.saveState(tasks);
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         // Check if task list is empty
         if (isEmpty(tasks)) {
             String errorMessage = ErrorMessage.TASK_LIST_EMPTY_ERROR + ErrorMessage.ADD_MORE_TASKS;

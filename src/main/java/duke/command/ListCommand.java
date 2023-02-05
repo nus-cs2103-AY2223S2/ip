@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.storage.CommandHistory;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
@@ -20,7 +19,7 @@ public class ListCommand extends Command {
      * @param storage The Storage Object used to save and load the TaskList
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage, CommandHistory commandHistory) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         // check if there are no tasks
         if (tasks.getNoOfTasks() == 0) {
             ui.appendResponse(NO_TASKS_MESSAGE);

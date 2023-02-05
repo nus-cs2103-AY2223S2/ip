@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.exception.StorageFileException;
-import duke.storage.CommandHistory;
 import duke.storage.Storage;
 import duke.task.DukeTask;
 import duke.task.TaskList;
@@ -21,12 +20,10 @@ public class SortCommand extends Command{
      * @param tasks The TaskList that contains all the tasks.
      * @param ui The Ui that handles the display of the sorted tasks.
      * @param storage The Storage that saves the sorted tasks.
-     * @param commandHistory The CommandHistory that stores the command for undo and redo.
      * @throws StorageFileException If there is an error in reading or writing to the storage file.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage, CommandHistory commandHistory)
-            throws StorageFileException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws StorageFileException {
         // check if there are no tasks
         if (tasks.getNoOfTasks() == 0) {
             ui.appendResponse(NO_TASKS_MESSAGE);

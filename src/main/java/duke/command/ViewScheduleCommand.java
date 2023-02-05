@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.exception.InvalidInputException;
-import duke.storage.CommandHistory;
 import duke.storage.Storage;
 import duke.task.DukeTask;
 import duke.task.TaskList;
@@ -36,7 +35,7 @@ public class ViewScheduleCommand extends Command {
      * @throws InvalidInputException when no tasks are found on the specified date
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage, CommandHistory commandHistory) throws InvalidInputException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidInputException {
         //Find tasks that match the specified date
         TaskList matchedTasks = findTasksOnDate(tasks, this.date);
 

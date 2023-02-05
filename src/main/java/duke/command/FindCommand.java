@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.storage.CommandHistory;
 import duke.storage.Storage;
 import duke.task.DukeTask;
 import duke.task.TaskList;
@@ -29,9 +28,8 @@ public class FindCommand extends Command {
      * @param tasks TaskList containing all the tasks
      * @param ui Ui object for displaying the matched tasks
      * @param storage Storage object for accessing the storage
-     * @param commandHistory CommandHistory object for adding the command to history
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage, CommandHistory commandHistory) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         StringBuilder message = new StringBuilder();
         for (String description : this.descriptions) {
             // Get the matched tasks based on the provided description

@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.exception.DukeException;
-import duke.storage.CommandHistory;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
@@ -27,10 +26,8 @@ public abstract class Command {
      * @param tasks the task list where the command will be executed on
      * @param ui the user interface where the result of the command will be displayed
      * @param storage the storage where the task list will be saved
-     * @param commandHistory the command history where the command will be added
      * @throws DukeException if there is any error during the execution of the command
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage
-            , CommandHistory commandHistory) throws DukeException;
+    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
 }

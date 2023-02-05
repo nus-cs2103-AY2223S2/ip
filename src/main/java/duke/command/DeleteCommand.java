@@ -3,7 +3,6 @@ package duke.command;
 import duke.exception.DukeException;
 import duke.exception.InvalidInputException;
 import duke.parser.ErrorMessage;
-import duke.storage.CommandHistory;
 import duke.storage.Storage;
 import duke.task.DukeTask;
 import duke.task.TaskList;
@@ -56,9 +55,7 @@ public class DeleteCommand extends Command {
      * @throws DukeException Throws Exception when the user inputs invalid instruction
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage, CommandHistory commandHistory) throws DukeException {
-        //save the current state of the task list before making any changes
-        commandHistory.saveState(tasks);
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (isEmpty(tasks)) {
             //if the task list is empty, throw an exception
             String errorMessage = ErrorMessage.TASK_LIST_EMPTY_ERROR + ErrorMessage.ADD_MORE_TASKS;

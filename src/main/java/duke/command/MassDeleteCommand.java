@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.exception.DukeException;
-import duke.storage.CommandHistory;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
@@ -19,9 +18,7 @@ public class MassDeleteCommand extends Command {
      * @throws DukeException Throws exception if there is an error in the execution of the command
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage, CommandHistory commandHistory) throws DukeException {
-        // Save the current state of tasks in the command history
-        commandHistory.saveState(tasks);
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         // Delete done tasks from the task list
         deleteDoneTasks(tasks);
         // Create a response message containing the updated task list

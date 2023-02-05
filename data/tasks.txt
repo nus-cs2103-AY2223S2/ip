@@ -1,3 +1,3 @@
 [D] | [ ] | submit report | Jan 30 2023 11:59
-[F] | [X] | do Computer Network homework | PT2H
+[F] | [ ] | do Computer Network homework | PT2H
 [T] | [ ] | buy milk

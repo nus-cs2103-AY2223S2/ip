@@ -3,7 +3,6 @@ package duke.command;
 import duke.exception.DukeException;
 import duke.exception.InvalidInputException;
 import duke.parser.ErrorMessage;
-import duke.storage.CommandHistory;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
@@ -149,7 +148,7 @@ public class HelpCommand extends Command {
      * @param storage The Storage Object used to save and load the TaskList
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage, CommandHistory commandHistory) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         // Initialize a StringBuilder to store the help message
         if (type == helpType.NORMAL) {
             StringBuilder message = new StringBuilder();

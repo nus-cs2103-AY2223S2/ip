@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.exception.StorageFileException;
-import duke.storage.CommandHistory;
 import duke.storage.Storage;
 import duke.task.DukeTask;
 import duke.task.TaskList;
@@ -31,12 +30,9 @@ public class AddTaskCommand extends Command {
      * @param tasks the task list to add the task to
      * @param ui the user interface to display a message to the user
      * @param storage the storage to save the task list to
-     * @param commandHistory the command history to save the previous state of the task list
      * @throws StorageFileException if there is an error saving the task list to storage
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage, CommandHistory commandHistory) throws StorageFileException {
-        // Save the current state of the task list to the command history
-        commandHistory.saveState(tasks);
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws StorageFileException {
         // Add the task to the task list
         tasks.addTask(this.task);
         // Save the task list to storage
