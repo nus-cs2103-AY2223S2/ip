@@ -23,7 +23,7 @@ public class DaySchedule extends HBox {
     private static final double HOURS_IN_A_DAY = 24;
     private static final double MINUTES_IN_A_DAY = 1440;
     private static final double MICRO_IN_MINUTE = 6E7;
-    private static final double MIN_WIDTH_PIXS = ROW_HEIGHT;
+    private static final double MIN_BLOCK_WIDTH = ROW_HEIGHT;
     private static final double TOOLTIP_SHOW_DELAY = 0;
     private static final double TOOLTIP_HIDE_DELAY = 0;
 
@@ -43,7 +43,7 @@ public class DaySchedule extends HBox {
      */
     public DaySchedule(LocalDateTime startTime, List<ScheduleTimeable> timeables, double rowWidth) {
         this.rowWidth = rowWidth;
-        conflictThreshold = (MIN_WIDTH_PIXS / rowWidth) * MINUTES_IN_A_DAY;
+        conflictThreshold = (MIN_BLOCK_WIDTH / rowWidth) * MINUTES_IN_A_DAY;
         getChildren().addAll(rowDisplayArea);
         List<? extends List<ScheduleTimeable>> sepTimeable = separateConflicting(timeables);
         for (List<ScheduleTimeable> row : sepTimeable) {
@@ -106,9 +106,9 @@ public class DaySchedule extends HBox {
             double durationMins = timeable.duration() / MICRO_IN_MINUTE;
             double width = convertMinsToRowPix(durationMins);
 
-            if (width <= MIN_WIDTH_PIXS) {
-                startX -= MIN_WIDTH_PIXS / 2;
-                width = MIN_WIDTH_PIXS;
+            if (width <= MIN_BLOCK_WIDTH) {
+                startX -= MIN_BLOCK_WIDTH / 2;
+                width = MIN_BLOCK_WIDTH;
             }
 
             Pane block = createDisplayBlock(timeable, width);
