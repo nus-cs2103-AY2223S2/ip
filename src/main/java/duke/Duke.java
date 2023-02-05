@@ -21,6 +21,10 @@ public class Duke {
     /** Ui of Duke */
     private Ui ui;
 
+    public Duke() {
+        this("./data/tasks.ser");
+    }
+
     /**
      * Constructs Duke class.
      *
@@ -28,7 +32,7 @@ public class Duke {
      */
     public Duke(String filePath) {
         ui = new Ui();
-        ui.showStartUp();
+//        ui.showStartUp();
         storage = new Storage(filePath);
         try {
             tasks = storage.load();
@@ -39,32 +43,17 @@ public class Duke {
     }
 
     /**
-     * Runs Duke application.
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
      */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
+    String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            c.execute(tasks, ui, storage);
+            return ui.displayOutput();
+        } catch (DukeException e) {
+            ui.showError(e.getMessage());
+            return ui.displayOutput();
         }
-    }
-
-    /**
-     * Starts Duke application.
-     *
-     * @param args Command-line arguments.
-     */
-    public static void main(String[] args) {
-        new Duke("./data/tasks.ser").run();
     }
 }

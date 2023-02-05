@@ -112,7 +112,7 @@ public class TaskList {
             if (task instanceof Deadline) {
                 Deadline deadline = (Deadline) task;
                 if (deadline.getDeadline().toLocalDate().isEqual(date)) {
-                    ui.printUi(deadline.toString());
+                    ui.storeOutput(deadline.toString());
                     count++;
                 }
             } else if (task instanceof Event) {
@@ -121,12 +121,12 @@ public class TaskList {
                         event.getEndDateTime().toLocalDate().isEqual(date) ||
                         (event.getStartDateTime().toLocalDate().isBefore(date) &&
                                 event.getEndDateTime().toLocalDate().isAfter(date))) {
-                    ui.printUi(event.toString());
+                    ui.storeOutput(event.toString());
                     count++;
                 }
             }
         }
-        ui.printUi("Number of tasks on " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ": " + count);
+        ui.storeOutput("Number of tasks on " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ": " + count);
     }
 
     public void filter(Ui ui, String keyword) {
@@ -134,10 +134,10 @@ public class TaskList {
         for (Task task : tasks) {
             String desc = task.getDescription();
             if (desc.contains(keyword)) {
-                ui.printUi(task.toString());
+                ui.storeOutput(task.toString());
                 count++;
             }
         }
-        ui.printUi("Number of tasks with " + "'" + keyword + "'" + ": " + count);
+        ui.storeOutput("Number of tasks with " + "'" + keyword + "'" + ": " + count);
     }
 }

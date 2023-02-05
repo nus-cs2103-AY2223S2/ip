@@ -29,7 +29,7 @@ public class UiTest {
     public void testPrintUi() {
         Ui ui = new Ui();
         System.setOut(new PrintStream(outContent));
-        ui.printUi("Test message");
+        ui.storeOutput("Test message");
         assertEquals("\tTest message\n", outContent.toString());
     }
 

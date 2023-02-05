@@ -60,7 +60,7 @@ public abstract class Task implements Serializable{
      * @return Status icon of task.
      */
     private String getStatusIcon() {
-        return (isDone ? "X" : " "); // Mark done task with X
+        return (isDone ? "X" : "   "); // Mark done task with X
     }
 
     /**

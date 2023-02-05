@@ -249,7 +249,6 @@ public abstract class Command {
          */
         @Override
         public void execute(TaskList tasks, Ui ui, Storage storage) {
-            ui.closeScanner();
             ui.showExit();
         }
     }

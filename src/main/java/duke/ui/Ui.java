@@ -1,36 +1,38 @@
 package duke.ui;
 
-import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
 
-import java.util.Scanner;
-
 public class Ui {
     /** Scanner for UI */
-    private Scanner scanner;
+    private String output;
 
     /**
      * Constructs Ui class.
      */
     public Ui() {
-        scanner = new Scanner(System.in);
+        this.output = "";
     }
 
     /**
-     * Reads user command.
-     *
-     * @return User input as string.
+     * Store output.
      */
-    public String readCommand() {
-        return scanner.nextLine();
+    public void storeOutput(String output){
+        if (this.output.isEmpty()) {
+            this.output += output;
+        } else {
+            this.output += "\n" + output;
+
+        }
     }
 
     /**
-     * Displays output with tab prepended.
+     * Displays output.
      */
-    public void printUi(String message){
-        System.out.println("\t" + message);
+    public String displayOutput(){
+        String temp = output;
+        output = "";
+        return temp;
     }
 
     /**
@@ -51,28 +53,28 @@ public class Ui {
      * Displays welcome message.
      */
     public void showWelcome() {
-        printUi("When all I do is for you, Kermie \u2665\n\tWhat can I do for you?\n");
+        storeOutput("When all I do is for you, Kermie \u2665\n\tWhat can I do for you?\n");
     }
 
     /**
      * Displays loading error when tasks cannot be loaded.
      */
     public void showLoadingError() {
-        printUi("Error: Unable to load tasks from file.");
+        storeOutput("Error: Unable to load tasks from file.");
     }
 
     /**
      * Displays Ui line.
      */
     public void showLine() {
-        printUi("__________________________________________________________");
+        storeOutput("__________________________________________________________");
     }
 
     /**
      * Displays message to acknowledge task added.
      */
     public void showAdded(Task t) {
-        printUi("Got it. I've added this task:\n\t  " + t);
+        storeOutput("Got it. I've added this task:\n\t  " + t);
     }
 
     /**
@@ -80,9 +82,9 @@ public class Ui {
      */
     public void showListSize(TaskList tasks) {
         if (tasks.getSize() == 1) {
-            printUi("Now you have " + tasks.getSize() + " task in the list.");
+            storeOutput("Now you have " + tasks.getSize() + " task in the list.");
         } else {
-            printUi("Now you have " + tasks.getSize() + " tasks in the list.");
+            storeOutput("Now you have " + tasks.getSize() + " tasks in the list.");
         }
     }
 
@@ -90,53 +92,47 @@ public class Ui {
      * Displays all tasks in the list.
      */
     public void showList(TaskList tasks) {
-        printUi("Here are the tasks in your list:");
+        String output = "Here are the tasks in your list:";
         for (int i = 0; i < tasks.getSize(); i++) {
             Task t = tasks.getTask(i);
             int index = i + 1;
-            printUi(index + "." + t);
+            output += "\n" + index + ". " + t;
         }
+        storeOutput(output);
     }
 
     /**
      * Displays message to acknowledge task marked.
      */
     public void showMarked(Task t) {
-        printUi("Nice! I've marked this task as done:\n\t  " + t);
+        storeOutput("Nice! I've marked this task as done:\n\t  " + t);
     }
 
     /**
      * Displays message to acknowledge task unmarked.
      */
     public void showUnmarked(Task t) {
-        printUi("OK, I've marked this task as not done yet:\n\t  " + t);
+        storeOutput("OK, I've marked this task as not done yet:\n\t  " + t);
     }
 
     /**
      * Displays message to acknowledge task deleted.
      */
     public void showDeleted(Task t) {
-        printUi("Noted. I've removed this task:\n\t  " + t);
+        storeOutput("Noted. I've removed this task:\n\t  " + t);
     }
 
     /**
      * Displays error message if any error occurs.
      */
     public void showError(String errorMessage) {
-        printUi("\u2639 OOPS!!! " + errorMessage);
+        storeOutput("\u2639 OOPS!!! " + errorMessage);
     }
 
     /**
      * Displays exit message.
      */
     public void showExit() {
-        printUi("Woof (\u256F\u11BA\u2570\u0E51)");
-    }
-
-    /**
-     * Closes scanner.
-     */
-    public void closeScanner() {
-        scanner.close();
+        storeOutput("Woof!!");
     }
 }
