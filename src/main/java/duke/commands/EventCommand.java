@@ -26,9 +26,13 @@ public class EventCommand extends Command {
     @Override
     public void execute(TaskList tl, Ui ui, Storage s) {
         Event t = new Event(this.desc, this.from, this.to);
-        tl.addTask(t);
-        s.addTask(t.toText());
-        ui.display("Got it. I've added this task:" + LS + t + LS + tl.numTasksMsg());
+        if (tl.isDuplicate(t)) {
+            handleDuplicate(ui);
+        } else {
+            tl.addTask(t);
+            s.addTask(t.toText());
+            ui.display("Got it. I've added this task:" + LS + t + LS + tl.numTasksMsg());
+        }
     }
     @Override
     public boolean isExit() {

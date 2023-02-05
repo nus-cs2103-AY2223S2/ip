@@ -24,6 +24,16 @@ public class TaskList {
         tasks.remove(i);
     }
 
+    public boolean isDuplicate(Task newTask) {
+        boolean isDup = false;
+        for (Task t : this.tasks) {
+            if (newTask.toText().equals(t.toText())) {
+                isDup = true;
+            }
+        }
+        return isDup;
+    }
+
     /**
      * Mark Task object at index i.
      */
