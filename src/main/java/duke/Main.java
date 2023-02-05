@@ -1,16 +1,16 @@
 package duke;
 
-import javafx.application.Application;
-
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import javafx.application.Application;
 
 /**
  * Main entry point of the program.
  */
 public class Main {
 
-    private enum Flag {
+    enum Flag {
         CLI_MODE,
         NO_LOAD_SAVES,
     }
@@ -47,25 +47,21 @@ public class Main {
 
         // Process varargs for flags
         ArrayList<Flag> flags = processVarArgs(args);
+        Duke.setFlags(flags);
 
         //Initialise components
         Scanner sc = new Scanner(System.in);
         Duke duke = new Duke();
-
-        // Retrieve saved data (if any)
-        if (!flags.contains(Flag.NO_LOAD_SAVES)) {
-            duke.storage.loadDataFromFile();
-        }
 
         System.out.println("System is ready!");
         duke.ui.println("\n\n");
         duke.ui.printBufferLine();
 
         if (flags.contains(Flag.CLI_MODE)) {
-            duke.cli();
+            duke.startAsCli();
         } else {
             duke.ui.println("Launching GUI ...");
-            TODO: Application.launch(Duke.class, args);
+            Application.launch(Duke.class, args);
         }
     }
 

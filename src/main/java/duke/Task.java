@@ -72,7 +72,7 @@ public abstract class Task implements Storable {
      */
     @Override
     public String toString() {
-        return "[" + (isDone ? "√" : " ") + "] " + description;
+        return "[" + (isDone ? "X" : " ") + "] " + description;
     }
 }
 

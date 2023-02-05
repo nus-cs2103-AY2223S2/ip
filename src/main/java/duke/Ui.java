@@ -16,6 +16,8 @@ public class Ui {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|";
 
+    private StringBuilder printCache = new StringBuilder();
+
     /**
      * Constructs an instance of Ui.
      */
@@ -30,6 +32,7 @@ public class Ui {
      * @param message Details of message to be printed.
      */
     public void println(String message) {
+        printCache.append(message).append("\n");
         System.out.println(message);
     }
 
@@ -41,7 +44,26 @@ public class Ui {
      * @param message Details of warning to be printed.
      */
     public void warn(String message) {
+        printCache.append("OOPS! ").append(message).append("\n");
         System.out.println("OOPS! " + message);
+    }
+
+    /**
+     * Returns a String of this print cache (messages printed to console) by the Ui
+     * @return String of this print cache
+     */
+    public String getRecentMessage() {
+        String recentMessage = printCache.toString();
+        printCache = new StringBuilder(); // reset cache
+        return recentMessage;
+    }
+
+    /**
+     * Prints a buffer line.
+     */
+    void printBufferLine() {
+
+        println("____________________________________________________________");
     }
 
     /**
@@ -53,11 +75,4 @@ public class Ui {
         System.out.println("Developed by: " + AUTHOR);
     }
 
-    /**
-     * Prints a buffer line.
-     */
-    void printBufferLine() {
-
-        println("____________________________________________________________");
-    }
 }
