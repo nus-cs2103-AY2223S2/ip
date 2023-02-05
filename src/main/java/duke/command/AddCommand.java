@@ -10,7 +10,6 @@ import duke.ui.Ui;
 public class AddCommand extends Command {
     private String instruction;
     private String input;
-    private boolean exit;
 
     /**
      * Initialises add class
@@ -21,26 +20,18 @@ public class AddCommand extends Command {
     public AddCommand(String instruction, String input) {
         this.instruction = instruction;
         this.input = input;
-        this.exit = false;
     }
 
     /**
-     * Exits duke if it detects bye command
-     *
-     * @return boolean false
+     * {@inheritDoc}
      */
     @Override
     public boolean isExit() {
-        return this.exit;
+        return false;
     }
 
     /**
-     * Adds task into task list
-     *
-     * @param taskList arraylist that stores tasks
-     * @param storage  stores data of tasks
-     * @param ui       responds to user input
-     * @return instruction successfully set
+     * {@inheritDoc}
      */
     @Override
     public String execute(TaskList taskList, Storage storage, Ui ui) {

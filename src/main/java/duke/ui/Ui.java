@@ -19,6 +19,8 @@ public class Ui {
 
     /**
      * Represents the start-up message
+     *
+     * @return a start up message
      */
     public static String welcomeMessage() {
         String logo = " ____        _        \n"
@@ -41,6 +43,8 @@ public class Ui {
 
     /**
      * Displays sentence used for bye command
+     *
+     * @return a bye message before app closes
      */
     public String byeMessage() {
         return "Oh no! Pls don't leave me.. I'm your ONLY friend.. Rmb?? :(";
@@ -48,6 +52,8 @@ public class Ui {
 
     /**
      * Displays sentence used in list command
+     *
+     * @return a list of items
      */
     public String listMessage(String input) {
         return ("Take a look at ye DREAM goals for 2023 \n") + input;

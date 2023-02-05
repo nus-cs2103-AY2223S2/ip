@@ -38,7 +38,7 @@ public class Duke {
      * @param input instruction from the user
      * @return task description as result
      */
-    public String userInputs(String input) {
+    public String initialise(String input) {
         Ui.welcomeMessage();
         this.storage.loadFileData();
 

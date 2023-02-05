@@ -40,46 +40,37 @@ public class Parser {
             index = Integer.parseInt(part[1]) - 1;
         }
 
-        if (!Arrays.stream(Instructions.values()).anyMatch(x -> (x.toString()).equals(first_word))) {
+        if (!Arrays.stream(Instructions.values()).anyMatch(x -> x.toString().equals(first_word))) {
             return new DefaultCommand();
         }
 
         Instructions instruction = Instructions.valueOf(first_word);
 
         switch (instruction) {
-        // Exit the system upon entering
         case BYE:
             return new ByeCommand();
 
-        // Display a list of tasks that shows its completion and types
         case LIST:
             return new ListCommand();
 
-        // Mark to complete the task, the second bracket will show a cross
         case MARK:
             return new MarkCommand(index);
 
-        // Un-mark to redo the completion of the task, the cross will be
-        // removed from the second bracket
         case UNMARK:
             return new UnmarkCommand(index);
 
-        // Add task of type (To do/ deadline/ event)
         case TODO:
         case DEADLINE:
         case EVENT: {
             return new AddCommand(instruction.toString(), input);
         }
 
-        // Delete task from the list according to its numbering on the list
         case DELETE:
             return new DeleteCommand(index);
 
-        // Find tasks that contain the input word entered by user
         case FIND:
             return new FindCommand(part[1]);
 
-        // default will throw an exception in case switch-case is unable to find instruction
         default:
             return new DefaultCommand();
         }

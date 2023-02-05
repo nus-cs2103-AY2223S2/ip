@@ -10,9 +10,7 @@ import duke.ui.Ui;
 public class ByeCommand extends Command {
 
     /**
-     * Exits duke if it detects bye command
-     *
-     * @return boolean true
+     * {@inheritDoc}
      */
     @Override
     public boolean isExit() {
@@ -20,12 +18,7 @@ public class ByeCommand extends Command {
     }
 
     /**
-     * Exits duke
-     *
-     * @param taskList arraylist that stores tasks
-     * @param storage  stores data of tasks
-     * @param ui       responds to user input
-     * @return instruction successfully set
+     * {@inheritDoc}
      */
     @Override
     public String execute(TaskList taskList, Storage storage, Ui ui) {

@@ -9,7 +9,6 @@ import duke.ui.Ui;
  */
 public class DeleteCommand extends Command {
     private int index;
-    private boolean exit;
 
     /**
      * Initialises delete class
@@ -18,7 +17,6 @@ public class DeleteCommand extends Command {
      */
     public DeleteCommand(int index) {
         this.index = index;
-        this.exit = false;
     }
 
     /**
@@ -28,7 +26,7 @@ public class DeleteCommand extends Command {
      */
     @Override
     public boolean isExit() {
-        return exit;
+        return false;
     }
 
     /**
