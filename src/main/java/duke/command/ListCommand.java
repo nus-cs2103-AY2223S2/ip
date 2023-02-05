@@ -65,22 +65,18 @@ public class ListCommand extends Command {
         } else {
 
             filtered = db.getAllTask().stream().filter(task -> {
-                return filterDate.map(x -> {
+                return filterDate.map(date -> {
                     if (task instanceof Deadline) {
                         Deadline d = (Deadline) task;
-                        if (d.getBy().toLocalDate().equals(x.toLocalDate())) {
-                            return true;
-                        }
+                        return d.getBy().toLocalDate().equals(date.toLocalDate());
                     }
                     if (task instanceof Event) {
                         Event e = (Event) task;
-                        if (e.getStartDate().toLocalDate().equals(x.toLocalDate())) {
-                            return true;
-                        }
+                        return e.getFrom().toLocalDate().equals(date.toLocalDate());
                     }
                     return false;
                 }).orElse(true);
-            }).filter(task -> filterString.map(x -> task.toString().contains(x)).orElse(true))
+            }).filter(task -> filterString.map(keyword -> task.toString().contains(keyword)).orElse(true))
                     .collect(Collectors.toList());
         }
 
@@ -137,15 +133,11 @@ public class ListCommand extends Command {
         return db.getAllTask().stream().filter(task -> {
             if (task instanceof Deadline) {
                 Deadline d = (Deadline) task;
-                if (d.getBy().toLocalDate().equals(date.toLocalDate())) {
-                    return true;
-                }
+                return d.getBy().toLocalDate().equals(date.toLocalDate());
             }
             if (task instanceof Event) {
                 Event e = (Event) task;
-                if (e.getStartDate().toLocalDate().equals(date.toLocalDate())) {
-                    return true;
-                }
+                return e.getFrom().toLocalDate().equals(date.toLocalDate());
             }
             return false;
         }).collect(Collectors.toList());
