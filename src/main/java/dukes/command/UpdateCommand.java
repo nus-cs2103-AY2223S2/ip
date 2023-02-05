@@ -99,7 +99,7 @@ public class UpdateCommand extends Command {
                         String taskName = parser.parseHelper(splited, 0, toIndex);
                         String endTime = parser.parseHelper(splited, toIndex + 1, splited.length);
 
-                        theTask.setTaskName(taskName); 
+                        theTask.setTaskName(taskName);
                         try {
                             LocalDate endDate = parser.validateTime(endTime);
                             theTask.setEnd(endDate);
