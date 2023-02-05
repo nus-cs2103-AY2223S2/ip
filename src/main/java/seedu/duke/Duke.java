@@ -7,6 +7,11 @@ package seedu.duke;
 
 import seedu.duke.task.Task;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
  * Represents the main program of Duke.
  */
@@ -126,11 +131,14 @@ public class Duke {
      * @return A String of List of commands.
      */
     public static String getCommands() {
-        String commandList = "";
+        String commandsMessage = "";
+        List<String> commandList = new ArrayList<String>();
+        
         for (Commands curr : Commands.values()) {
-            commandList += curr.name() + "\n";
+            commandList.add(curr.name() + "\n");
         }
-        return commandList;
+        commandsMessage = commandList.stream().collect(Collectors.joining());
+        return commandsMessage;
     }
 
     /**
