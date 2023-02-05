@@ -23,6 +23,7 @@ public class DaySchedule extends HBox {
     private static final double ROW_HEIGHT = 20;
     private static final double HOURS_IN_A_DAY = 24;
     private static final double MINUTES_IN_A_DAY = 1440;
+    private static final double MICRO_IN_MINUTE = 6E7;
     private static final double MIN_WIDTH_PIXS = ROW_HEIGHT;
     private static final double MIN_WIDTH_MINS = (MIN_WIDTH_PIXS / ROW_WIDTH) * MINUTES_IN_A_DAY;
     private static final double TOOLTIP_SHOW_DELAY = 0;
@@ -100,16 +101,17 @@ public class DaySchedule extends HBox {
             double startX = (startTime.until(timeable.getStart(), ChronoUnit.MINUTES) / MINUTES_IN_A_DAY)
                     * ROW_WIDTH;
             startX = Math.max(0, (int) startX);
-            double endX = (startTime.until(timeable.getEnd(), ChronoUnit.MINUTES) / MINUTES_IN_A_DAY)
-                    * ROW_WIDTH;
-            endX = Math.min(ROW_WIDTH, (int) endX);
 
-            if (Math.abs(endX - startX) <= MIN_WIDTH_PIXS) {
+            double durationMins = timeable.duration() / MICRO_IN_MINUTE;
+            double dayFrac = Math.min(durationMins / MINUTES_IN_A_DAY, 1D);
+            double width = dayFrac * ROW_WIDTH;
+
+            if (width <= MIN_WIDTH_PIXS) {
                 startX -= MIN_WIDTH_PIXS / 2;
-                endX += MIN_WIDTH_PIXS / 2;
+                width = MIN_WIDTH_PIXS;
             }
 
-            Pane block = createDisplayBlock(timeable, endX - startX);
+            Pane block = createDisplayBlock(timeable, width);
 
             pane.getChildren().add(block);
             block.setLayoutX(startX);
