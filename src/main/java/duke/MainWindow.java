@@ -49,7 +49,7 @@ public class MainWindow extends AnchorPane {
      * the dialog container. Clears the user input after processing.
      */
     @FXML
-    private void handleUserInput() throws IOException{
+    private void handleUserInput() {
         String input = userInput.getText();
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage)
@@ -61,6 +61,8 @@ public class MainWindow extends AnchorPane {
     /**
      * Creates a dialog box containing Duke's reply and then appends them to
      * the dialog container.
+     *
+     * @param reply string that contains duke reply
      */
     public void sendDukeResponse(String reply) {
         if (reply != "") {

@@ -5,25 +5,31 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.nio.file.Files;
 import java.nio.file.Paths;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
 import java.util.ArrayList;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
-/*
+/**
  * Deals with loading tasks from the file and saving tasks in the file
  */
 public class Storage {
-    private static String FILE_PATH = "./data/eren.txt";
-    private static String DIR_PATH = "./data/";
+    private static final String FILE_PATH = "./data/eren.txt";
+    private static final String DIR_PATH = "./data/";
 
     /**
      * Saves the list of task in txt file
+     *
+     * @param tasks Takes in the current list of task
      */ 
     public void saveFile(ArrayList<Task> tasks) {
         String fileContent;
@@ -33,15 +39,13 @@ public class Storage {
             dateTime = null;
             if (t.getType() == 'T') {
                 fileContent += "  Todo  |";
-            }
-            else if (t.getType() == 'D') {
+            } else if (t.getType() == 'D') {
                 fileContent += "Deadline|";
                 if (t instanceof Deadline) {
                     Deadline task = (Deadline) t;
                     dateTime = task.getDateTime();
                 }
-            }
-            else {
+            } else {
                 fileContent += "  Event |";
                 if (t instanceof Event) {
                     Event task = (Event) t;
@@ -55,10 +59,10 @@ public class Storage {
         File file = new File(FILE_PATH);
         try {
             Files.createDirectories(Paths.get(DIR_PATH));
-        } catch(IOException e){
+        } catch (IOException e) {
             System.out.println("Error creating folder");
         }
-        if(!file.exists()) {
+        if (!file.exists()) {
             try {
                 file.createNewFile();
             } catch (IOException e) {
@@ -101,24 +105,24 @@ public class Storage {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy hh:mma");
                 LocalDateTime dateTime;
                 while ((currLine = fileReader.readLine()) != null) {
-                    if(!hasSkipped) {
-                        splitInput = currLine.split("\\|");
-                        if(splitInput[0].contains("Deadline")) {
-                            dateTime = LocalDateTime.parse(splitInput[3].trim(), formatter); 
-                            task = new Deadline(splitInput[2].trim(),dateTime);
-                        } else if(splitInput[0].contains("Todo")) {
-                            task = new Todo(splitInput[2].trim());
-                        } else {
-                            String[] splitToAndFrom = (splitInput[3].trim()).split(" - ");
-                            dateTime = LocalDateTime.parse(splitToAndFrom[0], formatter);
-                            LocalDateTime dateTimeTo = LocalDateTime.parse(splitToAndFrom[1], formatter);
-                            task = new Event(splitInput[2].trim(), dateTime, dateTimeTo);
-                        }
-                        if(splitInput[1].contains("YES"))
-                            task.mark();
-                        tasks.add(task);
+                    splitInput = currLine.split("\\|");
+                    if(splitInput[0].contains("Deadline")) {
+                        dateTime = LocalDateTime.parse(splitInput[3].trim(), formatter);
+                        task = new Deadline(splitInput[2].trim(),dateTime);
+                    } else if (splitInput[0].contains("Todo")) {
+                        task = new Todo(splitInput[2].trim());
+                    } else if (splitInput[0].contains("Event")) {
+                        String[] splitToAndFrom = (splitInput[3].trim()).split(" - ");
+                        dateTime = LocalDateTime.parse(splitToAndFrom[0], formatter);
+                        LocalDateTime dateTimeTo = LocalDateTime.parse(splitToAndFrom[1], formatter);
+                        task = new Event(splitInput[2].trim(), dateTime, dateTimeTo);
+                    } else {
+                        continue;
                     }
-                    hasSkipped = false;
+                    if (splitInput[1].contains("YES")) {
+                        task.mark();
+                    }
+                    tasks.add(task);
                 }
                 assert tasks.size() >= 0 : "Something is wrong with the data file";
                 fileReader.close();

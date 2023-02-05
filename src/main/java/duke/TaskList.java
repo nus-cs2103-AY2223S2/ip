@@ -1,14 +1,16 @@
 package duke;
 
 import java.time.LocalDateTime;
+
 import java.util.ArrayList;
 import java.util.Arrays;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
-/*
+/**
  * Contains the task list and it has operations to add/delete tasks in the list
  */
 public class TaskList {
@@ -56,8 +58,10 @@ public class TaskList {
                 }
                 description = String.join(" ",Arrays.copyOfRange(words, 0, indexForBy));
                 task = new Deadline(description,DateTime.getDateTime(words,indexForBy));
-            }
-            else {
+            } else {
+                LocalDateTime dateTimeFrom;
+                LocalDateTime dateTimeTo;
+
                 int indexForFrom = Parser.getIndexOfWord(words, "/from");
                 assert indexForFrom < -1 : "Something is wrong with the retrival of the index for the word from";
                 if (indexForFrom == 0) {
@@ -65,19 +69,17 @@ public class TaskList {
                 }
                 int indexForTo = Parser.getIndexOfWord(words, "/to");
                 assert indexForTo < -1 : "Something is wrong with the retrival of the index for the word from";
-                if (DateTime.getDateTime(words,indexForFrom) == null || DateTime.getDateTime(words,indexForTo) == null) {
-                    mainWindow.sendDukeResponse("Please enter in this format {description} /from DD/MM/YYYY HHMM /to DD/MM/YYYY HHMM. Try again");
+                dateTimeFrom = DateTime.getDateTime(words,indexForFrom);
+                dateTimeTo = DateTime.getDateTime(words,indexForTo);
+                if (dateTimeTo == null || dateTimeFrom == null) {
+                    mainWindow.sendDukeResponse("Please enter in this format {description} /from DD/MM/YYYY HHMM /to " +
+                            "DD/MM/YYYY HHMM. Try again");
                     return false;
                 }
                 assert tasks.size() >= 1 : "Something is wrong with add of task";
-
-
-                LocalDateTime dateTimeFrom = DateTime.getDateTime(words,indexForFrom);
-                LocalDateTime dateTimeTo = DateTime.getDateTime(words,indexForTo);
                 description = String.join(" ",Arrays.copyOfRange(words, 0, indexForFrom));
                 task = new Event(description,dateTimeFrom,dateTimeTo);
             }
-
         }
         tasks.add(task);
         assert tasks.size() >= 1 : "Something is wrong with add of task";

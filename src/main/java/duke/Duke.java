@@ -1,18 +1,10 @@
 package duke;
 
-import java.io.IOException;
-import javafx.scene.Scene;
+import javafx.animation.PauseTransition;
 import javafx.stage.Stage;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.application.Application;
-import javafx.scene.layout.Region;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.util.Duration;
+
+import java.io.IOException;
 
 /**
  * This class is for the starting screen and the loop the commands in Ui class
@@ -29,15 +21,17 @@ public class Duke {
     private Parser parser;
     private Ui ui;
     private MainWindow mainWindow;
+    private Stage stage;
 
     /**
      * Constructs a new Duke instance
      *
      * @param mainWindow Controller for MainWindow
      */
-    public Duke(MainWindow mainWindow) {
+    public Duke(MainWindow mainWindow, Stage stage) {
         assert mainWindow != null : "Something is wrong with the creaiton of mainWindow";
         this.mainWindow = mainWindow;
+        this.stage = stage;
         storage = new Storage();
         parser = new Parser(mainWindow);
         ui = new Ui(parser,mainWindow);
@@ -51,7 +45,11 @@ public class Duke {
      *
      * @param input User input command
      */
-    public void processInput(String input) throws IOException {
-        ui.receiveInput(tasks, storage,input);
+    public void processInput(String input) {
+        if(ui.receiveInput(tasks, storage,input)) {
+            PauseTransition delay = new PauseTransition(Duration.seconds(1));
+            delay.setOnFinished( event -> stage.close() );
+            delay.play();
+        }
     }
 }

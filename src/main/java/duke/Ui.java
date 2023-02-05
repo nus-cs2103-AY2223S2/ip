@@ -1,14 +1,9 @@
 package duke;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-
-/*
+/**
  * Deals with interactions with the user
  */
 public class Ui {
-    private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     private Parser parser;
     private MainWindow mainWindow;
 
@@ -28,10 +23,10 @@ public class Ui {
      * 
      * @param tasks Arraylist containing task objects
      * @param storage Storage class that manages save and loading
+      * @param input Input text from user
      * @return true if command is bye, otherwise return false
-     * @throws IOException If an I/O error occurs
      */
-    public boolean receiveInput(TaskList tasks, Storage storage, String input) throws IOException {
+    public boolean receiveInput(TaskList tasks, Storage storage, String input) {
         String[] words;
         boolean isCommandBye = false;
         words = input.split(" ");

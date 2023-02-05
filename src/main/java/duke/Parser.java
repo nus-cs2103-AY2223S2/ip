@@ -75,7 +75,7 @@ public class Parser {
         default:
             throw new InvalidCommandException("Invalid command. Please try again");
         }
-        if(words[0] != "LIST" && hasTaskChanged) {
+        if (hasTaskChanged) {
             storage.saveFile(tasks.getListOfTask());
         }
         return false;
