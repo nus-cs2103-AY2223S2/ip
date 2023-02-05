@@ -1,15 +1,10 @@
 package duke;
 
 import duke.commands.Command;
-import duke.commands.NextCommand;
-import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.TextUi;
-import javafx.application.Application;
-import javafx.scene.image.Image;
-import javafx.stage.Stage;
 
 /**
  * Represents a Duke object
@@ -39,7 +34,6 @@ public class Duke {
             isExit = command.isExit();
         }
     }
-
 
     public void exit() {
         System.exit(0);

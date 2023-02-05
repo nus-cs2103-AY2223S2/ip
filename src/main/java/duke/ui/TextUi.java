@@ -8,8 +8,6 @@ import java.util.Scanner;
 
 public class TextUi {
 
-    private Duke duke;
-    private final Scanner in;
     private static int numberOfInputs = 0;
     private static String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
@@ -17,6 +15,8 @@ public class TextUi {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
     private static String NEXT_RESPONSE = "\nWhat else can I do for you?";
+    private Duke duke;
+    private final Scanner in;
 
     public TextUi() {
         in = new Scanner(System.in);
@@ -75,7 +75,7 @@ public class TextUi {
 
     public String printTaskList(TaskList tasks) {
         System.out.println(tasks + NEXT_RESPONSE);
-        return (tasks.toString() + NEXT_RESPONSE);
+        return (tasks + NEXT_RESPONSE);
     }
 
     public String printNext() {
