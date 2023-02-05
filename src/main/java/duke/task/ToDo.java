@@ -53,14 +53,14 @@ public class ToDo extends Task {
   @Override
   public void marked() {
     messageMarked = Parser.MARKED_THIS_TASK_AS_DONE
-            + Parser.TODO_MARKED_SPACED + taskName;
+            + Parser.TODO_MARKED_SPACED + taskName + "\n";
     done = true;
   }
 
   @Override
   public void unmarked() {
     messageUnmarked = Parser.MARKED_THIS_TASK_AS_NOT_DONE_YET
-            + Parser.TODO_UNMARKED_SPACED + taskName;
+            + Parser.TODO_UNMARKED_SPACED + taskName +"\n";
     done = false;
   }
 

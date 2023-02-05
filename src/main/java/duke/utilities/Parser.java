@@ -13,10 +13,23 @@ public class Parser {
    */
   public static final String MARKED_THIS_TASK_AS_DONE = "Nice! I've marked this task as done:\n";
   /**
+   * The constant MARKED_THESE_TASKS_AS_DONE.
+   */
+  public static final String MARKED_THESE_TASKS_AS_DONE = "Nice! I've marked these tasks as done:\n";
+  /**
+   * The constant MARKED_DUPLICATE_TASKS.
+   */
+  public static final String MARKED_DUPLICATE_TASKS = "No Bruh! I've marked these tasks as done long time ago:\n";
+  /**
    * The constant MARKED_THIS_TASK_AS_NOT_DONE_YET.
    */
   public static final String MARKED_THIS_TASK_AS_NOT_DONE_YET =
           "OK, I've marked this task as not done yet:\n";
+
+  /**
+   * The constant UNMARKED_DUPLICATE_TASKS.
+   */
+  public static final String UNMARKED_DUPLICATE_TASKS = "No Bruh! These tasks as done yet, do u mean delete?\n";
   /**
    * The constant THE_TASKS_IN_YOUR_LIST.
    */

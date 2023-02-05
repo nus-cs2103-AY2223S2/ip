@@ -61,7 +61,7 @@ class Storage {
    * @param index the index
    */
   void markAt(int index) {
-    assert index > 0 : "wrong index";
+    assert index >= 0 : "wrong index";
     String str = records.get(index).replace("false", "true");
     records.set(index, str);
   }
@@ -73,7 +73,7 @@ class Storage {
    * @param index the index
    */
   void unmarkAt(int index) {
-    assert index > 0 : "wrong index";
+    assert index >= 0 : "wrong index";
     String str = records.get(index).replace("true", "false");
     records.set(index, str);
   }
@@ -85,7 +85,7 @@ class Storage {
    * @param index the index
    */
   void deteleAt(int index) {
-    assert index > 0 : "wrong index";
+    assert index >= 0 : "wrong index";
     records.remove(index);
   }
 
