@@ -1,11 +1,9 @@
+package duke;
+
 import java.io.IOException;
 
-import duke.DukeExceptions;
-import duke.Parser;
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
 import javafx.stage.Stage;
+import duke.gui.MainWindow;
 
 
 /**
@@ -23,7 +21,7 @@ public class Duke {
      * @throws IOException
      * @throws DukeExceptions
      */
-    Duke() throws IOException, DukeExceptions {
+    public Duke() throws IOException, DukeExceptions {
         dukeParser = new Parser();
         dukeStorage = new Storage("data", "dukedata.txt");
 
