@@ -6,6 +6,12 @@ import java.util.function.Predicate;
 import util.Either;
 import util.Pair;
 
+/**
+ * Result of a parse by a Parser
+ * 
+ * @param <T> Wrapped type
+ * @see Parser
+ */
 public class Result<T> {
     private final Either<Pair<T, String>, String> result;
 

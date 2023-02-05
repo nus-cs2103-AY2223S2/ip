@@ -23,6 +23,7 @@ public class Ui {
 
         /**
          * Prints string to System.in after formatting.
+         * 
          * @param msg String to be formatted and printed.
          */
         public static void showReply(String msg) {
@@ -46,6 +47,7 @@ public class Ui {
 
         /**
          * Splits large strings into lines below a max line length.
+         * 
          * @param line string to be split.
          * @return Stream of lines.
          */
@@ -57,6 +59,7 @@ public class Ui {
 
         /**
          * Gets input from System.in`
+         * 
          * @return input line.
          */
         public static String getInput() {

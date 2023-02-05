@@ -39,7 +39,7 @@ public interface Either<L, R> {
      * original right object
      * 
      * @param <T> Left type of resultant Either
-     * @param f Mapping function
+     * @param f   Mapping function
      * @return new Either object
      */
     public <T> Either<T, R> map(Function<? super L, ? extends T> f);
@@ -51,7 +51,8 @@ public interface Either<L, R> {
      * returned at the end.
      * 
      * @param <T> left type of resultant Either
-     * @param f Function that accepts left object and returns another Either object
+     * @param f   Function that accepts left object and returns another Either
+     *            object
      */
     public <T> Either<T, R> flatMap(Function<? super L, ? extends Either<? extends T, ? extends R>> f);
 
@@ -69,8 +70,8 @@ public interface Either<L, R> {
      * Matches the appropriate function to produce new output
      * 
      * @param <T> Type of the new object
-     * @param l Function to match if this is left
-     * @param r Function to match if this is right 
+     * @param l   Function to match if this is left
+     * @param r   Function to match if this is right
      * @return new object
      */
     public <T> T match(Function<? super L, ? extends T> l, Function<? super R, ? extends T> r);

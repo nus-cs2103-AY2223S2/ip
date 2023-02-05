@@ -8,6 +8,7 @@ import java.util.stream.IntStream;
 
 /**
  * List of tasks with formatting methods
+ * 
  * @see Serializable
  * @see Task
  */
@@ -53,6 +54,7 @@ public class TaskList implements Serializable {
 
     /**
      * Adds task to list
+     * 
      * @param task Task to be added
      */
     public void addTask(Task task) {
@@ -61,6 +63,7 @@ public class TaskList implements Serializable {
 
     /**
      * Marks task as completed
+     * 
      * @param number Number of task in the list
      */
     public void markTask(int number) {
@@ -70,6 +73,7 @@ public class TaskList implements Serializable {
 
     /**
      * Unmarks task
+     * 
      * @param number Number of task in the list
      */
     public void unmarkTask(int number) {
@@ -79,6 +83,7 @@ public class TaskList implements Serializable {
 
     /**
      * Deletes task
+     * 
      * @param number Number of task in the list
      */
     public void deleteTask(int number) {
@@ -88,6 +93,7 @@ public class TaskList implements Serializable {
 
     /**
      * Finds tasks in the list via date
+     * 
      * @return Task descriptions with formatting applied
      * @param date Date to compare with
      * @see LocalDate

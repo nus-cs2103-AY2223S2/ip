@@ -2,6 +2,7 @@ package util;
 
 /**
  * Pair of 2 objects
+ * 
  * @param <T> Type of first oject
  * @param <U> Type of second object
  */
@@ -10,7 +11,7 @@ public class Pair<T, U> {
     private final U second;
 
     /**
-     * @param first First object
+     * @param first  First object
      * @param second Second object
      */
     public Pair(T first, U second) {

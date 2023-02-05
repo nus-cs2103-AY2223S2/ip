@@ -10,8 +10,9 @@ import task.TaskList;
 public interface Command {
     /**
      * Interacts with inputs to produce required side effects.
+     * 
      * @param taskList TaskList to be modified.
-     * @param storage Tells storage to store/extract data if command requires it.
+     * @param storage  Tells storage to store/extract data if command requires it.
      * @see TaskList
      * @see Storage
      */
@@ -25,7 +26,8 @@ public interface Command {
     }
 
     /**
-     * @return Parser<Command> that can parse input string and turn it into a command.
+     * @return Parser<Command> that can parse input string and turn it into a
+     *         command.
      * @see Parser
      */
     public static Parser<Command> parser() {

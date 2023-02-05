@@ -10,11 +10,10 @@ public class Deadline extends Task {
     private final LocalDate end;
     private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("dd MMM YY");
 
-
     /**
      * @param desc Task desciption
      * @param done Task completed info
-     * @param end Task due date
+     * @param end  Task due date
      * @see LocalDate
      */
     private Deadline(String desc, boolean done, LocalDate end) {
@@ -24,7 +23,7 @@ public class Deadline extends Task {
 
     /**
      * @param desc Description of task
-     * @param end Due date of task
+     * @param end  Due date of task
      * @see LocalDate
      */
     public Deadline(String desc, LocalDate end) {
