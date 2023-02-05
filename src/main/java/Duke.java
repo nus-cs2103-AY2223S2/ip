@@ -54,6 +54,16 @@ public class Duke {
         ui.printExit();
     }
 
+    public String getDukeResponse(String input) {
+
+        /* This is the string in response to the user input **/
+        String dukeResponse;
+
+        dukeResponse = parser.runCommand(input, tasks, storage, ui);
+
+        return dukeResponse;
+    }
+
     /**
      * This is the main method which invokes Duke to run.
      *
