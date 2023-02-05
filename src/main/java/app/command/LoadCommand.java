@@ -22,7 +22,7 @@ public class LoadCommand extends Command {
      */
     @Override
     public String execute(TaskList tl, Ui ui, Storage storage) throws Exception {
-        Integer numLoaded = 0;
+        int numLoaded = 0;
         try {
             numLoaded = storage.loadIntoTaskList(tl);
             return new Response("Successfully loaded " + numLoaded + " task(s) from storage.").toString();

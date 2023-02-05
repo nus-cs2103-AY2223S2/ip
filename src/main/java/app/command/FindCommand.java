@@ -16,19 +16,21 @@ public class FindCommand extends Command {
 
     @Override
     public String execute(TaskList tl, Ui ui, Storage storage) {
-        StringBuilder resultDisplay = new StringBuilder("");
+        StringBuilder resultDisplay = new StringBuilder();
         boolean isSearchSuccessful = false;
         for (int i = 0; i < tl.size(); i++) {
             Task t = tl.getTask(i);
             String desc = t.getDesc();
             if (desc.toLowerCase().contains(this.searchContent)) {
-                resultDisplay.append(i+1);
-                resultDisplay.append(": " + t);
-                resultDisplay.append("\n");
+                resultDisplay.append(i+1)
+                        .append(": ")
+                        .append(t)
+                        .append("\n");
                 isSearchSuccessful = true;
             }
         }
         if (!isSearchSuccessful) {
+            assert resultDisplay.toString().equals("");
             return ("Ah I didn't find any tasks matching '" + this.searchContent + "'." + "\n" );
         } else {
             return ("Here's the tasks matching '" + this.searchContent + "':\n" +

@@ -9,6 +9,14 @@ public class Event extends Task {
     private LocalDateTime from;
     private LocalDateTime to;
 
+    /**
+     * Constructor for an Event Task. This constructor is under rework to move
+     * the format parsing sections into a method under Task.
+     * @param description
+     * @param from
+     * @param to
+     * @throws InvalidDateTimeException
+     */
     Event(String description, String from, String to) throws InvalidDateTimeException {
         super(description);
         this.symbol = "E";

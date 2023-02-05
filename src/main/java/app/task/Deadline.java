@@ -8,6 +8,13 @@ import java.util.Objects;
 public class Deadline extends Task {
     private LocalDateTime deadline;
 
+    /**
+     * Constructor for a Deadline Task. This constructor is currently under rework
+     * to move the datetime parsing to a method under Task.
+     * @param description
+     * @param deadline
+     * @throws InvalidDateTimeException
+     */
     Deadline(String description, String deadline) throws InvalidDateTimeException {
         super(description);
         this.symbol = "D";

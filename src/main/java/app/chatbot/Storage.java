@@ -13,7 +13,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import app.task.InvalidInputException;
 import app.task.Task;
 import app.task.TaskList;
 import app.task.TaskTypes;
@@ -45,6 +44,7 @@ public class Storage {
         if (!Files.exists(path)) {
             this.file.createNewFile();
         }
+        assert this.file.exists();
     }
 
     /**

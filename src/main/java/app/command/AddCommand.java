@@ -42,15 +42,11 @@ public class AddCommand extends Command {
     @Override
     public String execute(TaskList tl, Ui ui, Storage storage) throws Exception {
         Response response = new Response();
-        try {
-            Task newTask = tl.addTask(this.taskType, this.args);
-            int numTasks = tl.getAllTasks().size();
-            response.addLine("New task added:");
-            response.addLine(newTask.toString());
-            response.addLine("You now have " + numTasks + " task(s) in your list.");
-        } catch (Exception e) {
-            throw e;
-        }
+        Task newTask = tl.addTask(this.taskType, this.args);
+        int numTasks = tl.getAllTasks().size();
+        response.addLine("New task added:");
+        response.addLine(newTask.toString());
+        response.addLine("You now have " + numTasks + " task(s) in your list.");
         return response.toString();
     }
 }

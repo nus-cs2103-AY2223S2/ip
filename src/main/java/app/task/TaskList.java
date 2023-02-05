@@ -110,8 +110,9 @@ public class TaskList implements Iterable<Task> {
     public Task addDoneTask(TaskTypes.Type type, Map<String, String> args)
             throws InvalidDateTimeException, CommandNotFoundException, InvalidInputException {
         Task newTask = addTask(type, args); // add to end of list
-        int index = this.tasks.size() - 1; // mark last(est) item as done
+        int index = this.tasks.size() - 1; // mark the last/latest item as done
         markAsDone(index);
+        assert newTask.isDone();
         return newTask;
     }
 
@@ -146,16 +147,12 @@ public class TaskList implements Iterable<Task> {
      */
     public boolean markAsDone(int index) throws IndexOutOfBoundsException {
         boolean isAlreadyMarked = false;
-        try {
-            Task task = this.tasks.get(index);
-            if (task.isDone()) {
-                isAlreadyMarked = true;
-            }
-            task.markAsDone();
-            return isAlreadyMarked;
-        } catch (IndexOutOfBoundsException e) {
-            throw e;
+        Task task = this.tasks.get(index);
+        if (task.isDone()) {
+            isAlreadyMarked = true;
         }
+        task.markAsDone();
+        return isAlreadyMarked;
     }
 
     /**
@@ -167,16 +164,12 @@ public class TaskList implements Iterable<Task> {
      */
     public boolean unmarkDone(int index) throws IndexOutOfBoundsException {
         boolean isAlreadyMarked = false;
-        try {
-            Task task = this.tasks.get(index);
-            if (!task.isDone()) {
-                isAlreadyMarked = true;
-            }
-            task.unmarkDone();
-            return isAlreadyMarked;
-        } catch (IndexOutOfBoundsException e) {
-            throw e;
+        Task task = this.tasks.get(index);
+        if (!task.isDone()) {
+            isAlreadyMarked = true;
         }
+        task.unmarkDone();
+        return isAlreadyMarked;
     }
 
     @Override
