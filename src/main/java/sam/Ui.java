@@ -1,21 +1,15 @@
 package sam;
 
-import java.util.Scanner;
-
-import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import sam.command.Command;
-import sam.parser.Parser;
 
 /**
  * Handles user interaction.
@@ -46,6 +40,9 @@ public class Ui {
     private Button sendButton;
     private Scene scene;
 
+    /**
+     * Constructs a Ui instance.
+     */
     public Ui() {
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
@@ -56,7 +53,7 @@ public class Ui {
 
     /**
      * Sets up the application's stage.
-     * 
+     *
      * @param stage The stage to set up.
      */
     public void setStage(Stage stage) {
@@ -65,7 +62,7 @@ public class Ui {
 
         scene = new Scene(mainLayout);
         stage.setScene(scene);
-        
+
         // formatting
 
         stage.setTitle("Sam");
@@ -104,7 +101,7 @@ public class Ui {
         dialogContainer.heightProperty().addListener(observable -> scrollPane.setVvalue(1.0));
 
         showLogo();
-        respond("Hello, I am Sam!");
+        respond(Dialog.GREETING.getDialog());
     }
 
     /**
@@ -114,7 +111,7 @@ public class Ui {
         Label userText = new Label(userInput.getText());
         Label userChar = new Label(USER);
         dialogContainer.getChildren().add(DialogBox.getUserDialog(userText, userChar));
-        
+
         Sam.getSamInstance().issueCommand(userInput.getText());
         userInput.clear();
     }
@@ -130,7 +127,7 @@ public class Ui {
 
     /**
      * Adds a dialogue from Sam formed by the given strings.
-     * 
+     *
      * @param messages A list of strings representing lines of dialogue.
      */
     public void respond(String... messages) {
