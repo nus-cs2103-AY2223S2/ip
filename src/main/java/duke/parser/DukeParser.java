@@ -1,11 +1,13 @@
-package parser;
+package duke.parser;
+
+import duke.command.DukeCommand;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
-import command.DukeCommand;
+
 
 public class DukeParser {
     String inputString;

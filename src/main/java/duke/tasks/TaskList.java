@@ -1,9 +1,9 @@
-package tasks;
+package duke.tasks;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import storage.Storage;
+import duke.storage.Storage;
 
 public class TaskList implements Serializable {
     private static final long serialVersionUID = 8098680977751428278L;

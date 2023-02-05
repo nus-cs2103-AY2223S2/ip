@@ -1,7 +1,7 @@
-package tasks;
+package duke.tasks;
 
 import java.time.LocalDate;
-import date.DukeDate;
+import duke.date.DukeDate;
 
 public class Deadline extends Task {
     private static final long serialVersionUID = 8193173341399324817L;

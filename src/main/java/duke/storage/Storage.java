@@ -1,4 +1,6 @@
-package storage;
+package duke.storage;
+
+import duke.tasks.TaskList;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -9,7 +11,6 @@ import java.io.ObjectOutputStream;
 
 import java.nio.file.Path;
 
-import tasks.TaskList;
 
 
 public class Storage {

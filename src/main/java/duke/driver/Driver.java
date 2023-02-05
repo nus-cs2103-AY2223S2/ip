@@ -1,14 +1,13 @@
-package driver;
+package duke.driver;
 
-
-import parser.DukeParser;
-import tasks.Deadline;
-import tasks.Event;
-import tasks.Task;
-import tasks.TaskList;
-import tasks.ToDo;
 import java.util.Scanner;
-import command.DukeCommand;
+import duke.parser.DukeParser;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.tasks.ToDo;
+import duke.command.DukeCommand;
 
 public class Driver {
     TaskList taskList;
