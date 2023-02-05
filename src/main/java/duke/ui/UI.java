@@ -1,7 +1,5 @@
 package duke.ui;
 
-import java.util.Scanner;
-
 import duke.command.Command;
 import duke.command.Parser;
 import duke.exceptions.DukeException;
@@ -12,7 +10,6 @@ import duke.task.TaskList;
  * Class that handles the interface that user interacts with.
  */
 public class UI {
-    private Scanner scanner;
     private Parser parser;
 
     /**
@@ -20,7 +17,6 @@ public class UI {
      * @param tasks A list of possible saved tasks from the previous session.
      */
     public UI(TaskList tasks) {
-        this.scanner = new Scanner(System.in);
         this.parser = new Parser(tasks);
     }
 

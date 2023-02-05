@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
 
 /**
  * An example of a custom control using FXML.
@@ -25,7 +26,9 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
-    private DialogBox(String text, Image img) {
+    private Circle icon = new Circle(50, 50, 50);
+
+    private DialogBox(String text, Image img, String user) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -36,7 +39,14 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        dialog.setWrapText(true);
+        if (user == "duke") {
+            dialog.setStyle("-fx-padding: 10; -fx-border-color:pink; -fx-background-color: white;");
+        } else if (user == "client") {
+            dialog.setStyle("-fx-padding: 10; -fx-border-color:blue; -fx-background-color: white;");
+        }
         displayPicture.setImage(img);
+        displayPicture.setClip(icon);
     }
 
     /**
@@ -50,11 +60,11 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        return new DialogBox(text, img, "client");
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+        var db = new DialogBox(text, img, "duke");
         db.flip();
         return db;
     }

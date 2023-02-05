@@ -42,7 +42,8 @@ public class Parser {
         String ret = "";
         switch (command) {
         case BYE: {
-            return "BYE";
+            ret = "GOOD_BYE";
+            break;
         }
         case LIST: {
             ret = "Here are the tasks in your list:\n" + tasks.listTasks();

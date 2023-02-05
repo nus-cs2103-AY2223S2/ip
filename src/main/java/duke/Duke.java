@@ -29,48 +29,16 @@ public class Duke {
         this.ui = new UI(this.tasks);
     }
 
-//    /**
-//     * Runs the user interface and accepts users' input for processing.
-//     */
-//    public void run() {
-//        this.ui.greetUser();
-//        boolean exit = false;
-//        while (!exit) {
-//            try {
-//                exit = this.ui.processInput();
-//            } catch (DukeException e) {
-//                System.out.println(Span.format(e.toString()));
-//            }
-//            if (exit) {
-//                this.ui.byeUser();
-//            }
-//            // save regardless
-//            this.fileManager.save(tasks);
-//        }
-//    }
-
     /**
      * Gets greeting message to be displayed to the user.
      * @return the greeting message in string.
      */
     public String getGreeting() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+        String logo = "DUKE";
         String greeting = "Hello i'm\n"
                 + logo
                 + "\nWhat can I do for you?";
         return greeting;
-    }
-
-    /**
-     * Gets the goodbye message for the user.
-     * @return the goodbye message in string.
-     */
-    public String getByeMsg() {
-        return("Bye. Hope to see you again soon!");
     }
 
     public String getResponse(String input) {
@@ -84,12 +52,4 @@ public class Duke {
         return response;
     }
 
-//    /**
-//     * Entry point to Duke application where Duke is initialized.
-//     * @param args Unused arguments that user optionally provides when Duke is launched
-//     */
-//    public static void main(String[] args) {
-//        Duke duke = new Duke();
-//        duke.run();
-//    }
 }
