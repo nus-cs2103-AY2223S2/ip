@@ -50,9 +50,9 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         if (date != null && time != null) {
-            return code + super.toString() + " (due on " + date + " at " + time + ")";
+            return code + super.toString() + "(due on " + date + " at " + time + ")";
         } else {
-            return code + super.toString() + " (" + by + ")";
+            return code + super.toString() + "(" + by + ")";
         }
     }
 

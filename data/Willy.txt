@@ -1,7 +1,4 @@
-[T][ ]todo task hello
-[T][ ]todo letsgo
-[T][ ]todo asda
 [T][ ]todo add stuff
-[T][ ]todo test
 [T][ ]todo atsk
 [T][ ]todo help
+[D][ ]deadline return book(Sunday)
