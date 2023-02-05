@@ -1,3 +1,10 @@
+package duke.util;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -11,14 +18,11 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    public ArrayList<Task> getTasksFromFile() {
+    public ArrayList<Task> loadData() {
         ArrayList<Task> tasks = new ArrayList<>();
         File file = new File(this.filePath);
-
         try {
-            if (file.createNewFile()) {
-                System.out.println("Data file created!");
-            }
+            file.createNewFile();
             Scanner fileReader = new Scanner(file);
             while (fileReader.hasNextLine()) {
                 String nextLine = fileReader.nextLine();
@@ -67,16 +71,15 @@ public class Storage {
         return tasks;
     }
 
-    public void storeTasksInFile(ArrayList<Task> tasks) {
+    public void saveData(ArrayList<Task> tasks) throws DukeException {
         try {
             FileWriter fileWriter = new FileWriter(this.filePath);
             for (Task task : tasks) {
                 fileWriter.write(String.format("%s\n", task.toData()));
             }
             fileWriter.close();
-            System.out.println("Data saved!");
         } catch (IOException e) {
-            System.out.println("Error creating or finding file!");
+            throw new DukeException("Error creating or finding file!");
         }
     }
 }
