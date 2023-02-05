@@ -2,8 +2,12 @@ package duke;
 
 import java.util.ArrayList;
 
+import duke.exception.InvalidTaskNumberException;
 import duke.task.Task;
 
+/**
+ * A
+ */
 public class TaskList {
     private ArrayList<Task> tasks;
 
@@ -15,19 +19,28 @@ public class TaskList {
         tasks.add(task);
     }
 
-    String deleteTask(int taskNum) {
+    String deleteTask(int taskNum) throws InvalidTaskNumberException {
+        if (taskNum < 1 || taskNum > getNumOfTasks()) {
+            throw new InvalidTaskNumberException(taskNum);
+        }
         Task task = tasks.remove(taskNum - 1);
         return String.format("Noted, I've removed this task:\n   %s\nYou now have %d tasks in the list\n",
                 task.toString(), getNumOfTasks());
     }
 
-    String markTask(int taskNum) {
+    String markTask(int taskNum) throws InvalidTaskNumberException {
+        if (taskNum < 1 || taskNum > getNumOfTasks()) {
+            throw new InvalidTaskNumberException(taskNum);
+        }
         Task task = tasks.get(taskNum - 1);
         task.completeTask();
         return String.format("Nice! I've marked this task as done:\n   %s\n", task);
     }
 
-    String unmarkTask(int taskNum) {
+    String unmarkTask(int taskNum) throws InvalidTaskNumberException {
+        if (taskNum < 1 || taskNum > getNumOfTasks()) {
+            throw new InvalidTaskNumberException(taskNum);
+        }
         Task task = tasks.get(taskNum - 1);
         task.undoTask();
         return String.format("OK, I've unmarked this task as not done yet:\n   %s\n", task);

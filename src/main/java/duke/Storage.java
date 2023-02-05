@@ -1,8 +1,8 @@
 package duke;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -15,6 +15,10 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
+/**
+ * A class that deals with loading stored tasks and saving
+ * tasks ito a local file.
+ */
 public class Storage {
     private String directoryPath;
     private String filePath;
@@ -27,11 +31,11 @@ public class Storage {
         if (!Files.exists(Path.of(directoryPath))) {
             new File(directoryPath).mkdirs();
             new File(filePath);
-            throw new DukeException("File not found");
+            throw new FileNotFoundException();
         }
         if (!Files.exists(Path.of(filePath))) {
             new File(filePath);
-            throw new DukeException("File not found");
+            throw new FileNotFoundException();
         }
         return parseFile(new File(filePath));
     }

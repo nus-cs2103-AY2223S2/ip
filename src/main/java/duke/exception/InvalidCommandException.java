@@ -1,5 +1,9 @@
 package duke.exception;
 
+/**
+ * A DukeException that deals with incorrect commands input
+ * by a user.
+ */
 public class InvalidCommandException extends DukeException {
     /**
      * Constructor for InvalidCommandException.

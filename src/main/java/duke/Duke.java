@@ -30,7 +30,6 @@ public class Duke {
             this.tasks = storage.load();
             this.ui = new Ui(tasks);
         } catch (FileNotFoundException | DukeException e) {
-            ui.showLoadingError();
             this.tasks = new TaskList();
             this.ui = new Ui(tasks);
         }

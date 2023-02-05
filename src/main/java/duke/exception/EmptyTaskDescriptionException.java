@@ -1,4 +1,8 @@
 package duke.exception;
+
+/**
+ * A DukeException that deals with tasks without a task description.
+ */
 public class EmptyTaskDescriptionException extends DukeException {
     /**
      * Constructor for EmptyTaskDescriptionException.
