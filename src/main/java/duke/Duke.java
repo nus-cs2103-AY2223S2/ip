@@ -28,8 +28,6 @@ public class Duke {
     private TaskList taskList = new TaskList();
     private VBox dialogContainer;
     private boolean isExit = false;
-
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/yoda.jpeg"));
 
 
@@ -39,7 +37,7 @@ public class Duke {
 
     public void setUp() {
         try {
-            taskList = Storage.loadData(taskList, FILEPATH);
+            taskList = Storage.loadData(FILEPATH);
             //System.out.println(taskList.listItems());
         } catch (IOException e) {
             this.dialogContainer.getChildren()
@@ -50,7 +48,6 @@ public class Duke {
 
     public void setDialogBox(VBox dialogContainer) {
         this.dialogContainer = dialogContainer;
-        //this.dialogContainer.getChildren().add(DialogBox.getDukeDialog("negga negga", dukeImage));
     }
 
     /**

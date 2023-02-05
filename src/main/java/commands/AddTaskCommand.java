@@ -39,7 +39,7 @@ public class AddTaskCommand extends Command {
             taskList.addTask(task);
             String reply = "Got it. Added this task, I have:";
             return String.format("%s\n %s\n%d tasks in the list, you have now!", reply,
-                    task.toString(), taskList.getSize());
+                    task, taskList.getSize());
         } catch (DukeException e) {
             System.out.println(e.getMessage());
             return e.getMessage();

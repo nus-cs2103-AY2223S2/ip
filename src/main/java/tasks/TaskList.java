@@ -23,9 +23,9 @@ public class TaskList {
      * @param task name of the task
      */
     public void addTask(Task task) {
-        System.out.println(String.format("%s\n %s", ADDTASKMSG, task.toString()));
+        System.out.printf("%s\n %s%n", ADDTASKMSG, task.toString());
         addTaskSilent(task);
-        System.out.println(String.format("%d tasks in the list, you have now.", getSize()));
+        System.out.printf("%d tasks in the list, you have now.%n", getSize());
     }
     public Task get(String idx) {
         try {
@@ -67,7 +67,7 @@ public class TaskList {
         if (filteredTasks.getSize() == 0) {
             System.out.println("Empty the Jedi Archives are, the task you seek");
         } else {
-            System.out.println(String.format("%d tasks in the Jedi Archives, I find", filteredTasks.getSize()));
+            System.out.printf("%d tasks in the Jedi Archives, I find%n", filteredTasks.getSize());
         }
         return filteredTasks;
     }
@@ -83,10 +83,10 @@ public class TaskList {
             if (idx > this.getSize()) {
                 throw new IndexOutOfBoundsException();
             }
-            System.out.println(String.format("Noted. Removed this task I have:\n %s",
-                    this.taskList.get(idx - 1)));
+            System.out.printf("Noted. Removed this task I have:\n %s%n",
+                    this.taskList.get(idx - 1));
             this.taskList.remove(idx - 1);
-            System.out.println(String.format("%d tasks in the list, you now have", getSize()));
+            System.out.printf("%d tasks in the list, you now have%n", getSize());
         } catch (IndexOutOfBoundsException e) {
             throw new NoSuchTaskException("In this index, no such task I found", null);
         } catch (Exception e) {
@@ -143,7 +143,7 @@ public class TaskList {
     }
     /**
      * Getter method to retrieve the task list.
-     * @return
+     * @return task list
      */
     public ArrayList<Task> getTaskList() {
         return taskList;

@@ -107,14 +107,14 @@ public class Event extends Task {
     @Override
     public void mark() {
         super.mark();
-        System.out.println(String.format(" [%s][%s] %s (from: %s %s to: %s %s)",
+        System.out.printf(" [%s][%s] %s (from: %s %s to: %s %s)%n",
                 this.getTaskType(),
                 this.getStatusIcon(),
                 this.description,
                 this.startDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")),
                 this.startTime.format(DateTimeFormatter.ofPattern("h:mm a")),
                 this.endDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")),
-                this.endTime.format(DateTimeFormatter.ofPattern("h:mm a"))));
+                this.endTime.format(DateTimeFormatter.ofPattern("h:mm a")));
     }
 
     /**
@@ -123,14 +123,14 @@ public class Event extends Task {
     @Override
     public void unmark() {
         super.unmark();
-        System.out.println(String.format(" [%s][%s] %s (from: %s %s to: %s %s)",
+        System.out.printf(" [%s][%s] %s (from: %s %s to: %s %s)%n",
                 this.getTaskType(),
                 this.getStatusIcon(),
                 this.description,
                 this.startDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")),
                 this.startTime.format(DateTimeFormatter.ofPattern("h:mm a")),
                 this.endDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")),
-                this.endTime.format(DateTimeFormatter.ofPattern("h:mm a"))));
+                this.endTime.format(DateTimeFormatter.ofPattern("h:mm a")));
     }
 
     /**

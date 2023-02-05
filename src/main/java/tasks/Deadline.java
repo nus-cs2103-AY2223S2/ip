@@ -83,12 +83,12 @@ public class Deadline extends Task {
     @Override
     public void mark() {
         super.mark();
-        System.out.println(String.format(" [%s][%s] %s (by: %s %s)",
+        System.out.printf(" [%s][%s] %s (by: %s %s)%n",
                 this.getTaskType(),
                 this.getStatusIcon(),
                 this.description,
                 this.deadlineDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")),
-                this.deadlineTime.format(DateTimeFormatter.ofPattern("h:mm a"))));
+                this.deadlineTime.format(DateTimeFormatter.ofPattern("h:mm a")));
     }
 
     /**
@@ -97,12 +97,12 @@ public class Deadline extends Task {
     @Override
     public void unmark() {
         super.unmark();
-        System.out.println(String.format(" [%s][%s] %s (by: %s %s)",
+        System.out.printf(" [%s][%s] %s (by: %s %s)%n",
                 this.getTaskType(),
                 this.getStatusIcon(),
                 this.description,
                 this.deadlineDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")),
-                this.deadlineTime.format(DateTimeFormatter.ofPattern("h:mm a"))));
+                this.deadlineTime.format(DateTimeFormatter.ofPattern("h:mm a")));
     }
 
     /**
