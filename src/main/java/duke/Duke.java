@@ -168,20 +168,20 @@ public class Duke {
                 unmark(Integer.parseInt(parser.getDescription(userInput)) - 1);
                 break;
             case "todo":
-                addTask(parser.getDescription(userInput, 4), TaskType.TODO);
+                addTask(parser.getDescription(userInput, 5), TaskType.TODO);
                 break;
             case "event":
-                addTask(parser.getDescription(userInput, 5), TaskType.EVENT);
+                addTask(parser.getDescription(userInput, 6), TaskType.EVENT);
                 break;
             case "deadline":
-                addTask(parser.getDescription(userInput, 8), TaskType.DEADLINE);
+                addTask(parser.getDescription(userInput, 9), TaskType.DEADLINE);
                 break;
             case "delete":
                 delete(Integer.parseInt(parser.getDescription(userInput)) - 1);
                 break;
             case "find":
-                ui.displayText(parser.getDescription(userInput, 4));
-                find(parser.getDescription(userInput, 4));
+                ui.displayText(parser.getDescription(userInput, 5));
+                find(parser.getDescription(userInput, 5));
                 break;
             default:
                 ui.displayText("I'm sorry, but I don't know what that means");
