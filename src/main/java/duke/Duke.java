@@ -19,12 +19,11 @@ public class Duke {
     /**
      * Constructor for Duke.
      *
-     * @param filePath File path to initialise storage of Duke.
      * @throws DukeException If loading of saved tasks fails.
      */
-    public Duke(String filePath) throws DukeException {
+    public Duke() throws DukeException {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage("src/main/java/duke/data/duke.txt");
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -33,36 +32,14 @@ public class Duke {
         }
     }
 
-    /**
-     * Runs the Duke application.
-     */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, ui, storage);
+        } catch (Exception e) {
+            return e.getMessage();
         }
-        ui.showGoodbye();
     }
 
-    /**
-     * Initialises Duke and runs it.
-     *
-     * @param args Args received.
-     * @throws DukeException If error occurs.
-     */
-    public static void main(String[] args) throws DukeException {
-        new Duke("src/main/java/duke/data/duke.txt").run();
-    }
 }
 
