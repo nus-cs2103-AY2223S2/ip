@@ -64,10 +64,10 @@ public class TaskManager implements Reloadable {
 
     public TaskFilterReport filterWithin(LocalDateTime start, LocalDateTime end) {
         ArrayList<AquaTask> filtered = new ArrayList<>();
-        ArrayList<AquaTask> remaining = new ArrayList<>();
+        ArrayList<AquaTask> unknown = new ArrayList<>();
         for (AquaTask task : tasks) {
             if (!task.getEnd().isPresent()) {
-                remaining.add(task);
+                unknown.add(task);
                 continue;
             }
             LocalDateTime taskEnd = task.getEnd().get();
@@ -75,13 +75,11 @@ public class TaskManager implements Reloadable {
             if (task.getStart().isPresent()) {
                 taskStart = task.getStart().get();
             }
-            if (!DateUtils.isIntersecting(taskStart, taskEnd, start, end)) {
-                remaining.add(task);
-                continue;
+            if (DateUtils.isIntersecting(taskStart, taskEnd, start, end)) {
+                filtered.add(task);
             }
-            filtered.add(task);
         }
-        return new TaskFilterReport(filtered, remaining);
+        return new TaskFilterReport(filtered, unknown);
     }
 
 

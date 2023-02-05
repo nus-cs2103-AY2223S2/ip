@@ -9,12 +9,12 @@ import aqua.aquatask.AquaTask;
 public class TaskFilterReport {
     /** The filtered list of tasks. */
     public final List<AquaTask> filtered;
-    /** The remaining tasks. */
-    public final List<AquaTask> remaining;
+    /** Tasks that cannot be filtered correctly. */
+    public final List<AquaTask> unknown;
 
 
-    public TaskFilterReport(List<AquaTask> filtered, List<AquaTask> remaining) {
+    public TaskFilterReport(List<AquaTask> filtered, List<AquaTask> unknown) {
         this.filtered = List.copyOf(filtered);
-        this.remaining = List.copyOf(remaining);
+        this.unknown = List.copyOf(unknown);
     }
 }

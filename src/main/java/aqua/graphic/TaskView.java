@@ -10,7 +10,11 @@ import aqua.graphic.schedule.ScheduleTimeable;
 import aqua.manager.TaskFilterReport;
 import javafx.css.PseudoClass;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.TextAlignment;
+
 
 public class TaskView extends UiComponent<VBox> {
     private static final String PATH_FXML_FILE = "TaskView.fxml";
@@ -25,6 +29,7 @@ public class TaskView extends UiComponent<VBox> {
     public TaskView(LocalDateTime startTime, TaskFilterReport report) {
         super(PATH_FXML_FILE);
         initialiseSchedule(startTime, report.filtered);
+        initialiseTodoView(report.unknown);
     }
 
 
@@ -36,10 +41,17 @@ public class TaskView extends UiComponent<VBox> {
     }
 
 
+    private void initialiseTodoView(List<AquaTask> tasks) {
+        for (AquaTask task : tasks) {
+            todoDisplayArea.getChildren().add(new TodoLabel(task));
+        }
+    }
 
 
 
-    private class TimeableAquaTask extends ScheduleTimeable {
+
+
+    private static class TimeableAquaTask extends ScheduleTimeable {
         private final AquaTask task;
 
 
@@ -81,6 +93,37 @@ public class TaskView extends UiComponent<VBox> {
         @Override
         public String toString() {
             return task.toString();
+        }
+    }
+
+
+
+
+
+    private static class TodoLabel extends VBox {
+        private static final double MAX_WIDTH = 600;
+        private static final Insets MARGIN = new Insets(10, 10, 10, 10);
+
+
+        TodoLabel(AquaTask task) {
+            setMaxWidth(MAX_WIDTH);
+            getStyleClass().add("todo-label");
+            if (task.isComplete()) {
+                pseudoClassStateChanged(PSEUDO_CLASS_COMPLETE, true);
+            } else {
+                pseudoClassStateChanged(PSEUDO_CLASS_INCOMPLETE, true);
+            }
+            initialiseLabel(task.toString());
+        }
+
+
+        private void initialiseLabel(String name) {
+            Label label = new Label(name);
+            label.setMaxWidth(MAX_WIDTH);
+            label.setWrapText(true);
+            label.setTextAlignment(TextAlignment.CENTER);
+            VBox.setMargin(label, MARGIN);
+            getChildren().add(label);
         }
     }
 }

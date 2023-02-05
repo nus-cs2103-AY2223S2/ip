@@ -15,7 +15,7 @@
       <VBox VBox.vgrow="SOMETIMES">
          <children>
             <Label text="Todo" />
-            <VBox fx:id="todoDisplayArea" />
+            <VBox fx:id="todoDisplayArea" fillWidth="false" />
          </children>
       </VBox>
    </children>
