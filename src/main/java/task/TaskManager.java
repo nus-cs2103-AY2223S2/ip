@@ -28,8 +28,8 @@ public class TaskManager {
     public void checkTask(int index) {
         Task task = taskArr.get(index);
         task.markAsDone();
-        System.out.println("Great job! I have checked this task off the list:");
-        System.out.println(task);
+//        System.out.println("Great job! I have checked this task off the list:");
+//        System.out.println(task);
     }
 
     /**
@@ -40,8 +40,8 @@ public class TaskManager {
     public void uncheckTask(int index) {
         Task task = taskArr.get(index);
         task.markAsUndone();
-        System.out.println("No worries! I have unchecked this task in the list: ");
-        System.out.println(task);
+//        System.out.println("No worries! I have unchecked this task in the list: ");
+//        System.out.println(task);
     }
 
     /**
@@ -51,8 +51,8 @@ public class TaskManager {
      */
     public void deleteTask(int index) {
         taskArr.remove(index);
-        System.out.println("Okay! I have removed the task!");
-        System.out.println("There are currently " + taskArr.size() + " task(s) in the list!");
+        //System.out.println("Okay! I have removed the task!");
+        //System.out.println("There are currently " + taskArr.size() + " task(s) in the list!");
     }
 
     /**
@@ -62,8 +62,8 @@ public class TaskManager {
      */
     public void addTaskToList(Task task) {
         taskArr.add(task);
-        System.out.println("I have added: " + task + "!");
-        System.out.println("There are currently " + taskArr.size() + " task(s) in the list!");
+//        System.out.println("I have added: " + task + "!");
+//        System.out.println("There are currently " + taskArr.size() + " task(s) in the list!");
     }
 
     public Task getTaskFromList(int index) {

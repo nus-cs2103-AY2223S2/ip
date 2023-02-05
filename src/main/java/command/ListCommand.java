@@ -23,10 +23,12 @@ public class ListCommand extends Command {
     /**
      * Displays the task list when prompted by user.
      *
+     * @return
      * @throws DukeException
      */
     @Override
-    public void executeCommand(TaskManager taskManager) throws DukeException {
+    public String executeCommand(TaskManager taskManager) throws DukeException {
         taskManager.displayList();
+        return "";
     }
 }

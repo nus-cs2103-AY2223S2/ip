@@ -25,11 +25,15 @@ public class TodoCommand extends Command {
     /**
      * Adds a todo type task to the list.
      *
+     * @return
      * @throws DukeException
      */
     @Override
-    public void executeCommand(TaskManager taskManager) throws DukeException {
+    public String executeCommand(TaskManager taskManager) throws DukeException {
         ToDo todo = new ToDo(this.description, false);
         taskManager.addTaskToList(todo);
+        String str = String.format("I have added: %s !", todo);
+        String str2 = "There are currently " + taskManager.getTaskArraySize() + " task(s) in the list!";
+        return str + System.lineSeparator() + str2;
     }
 }

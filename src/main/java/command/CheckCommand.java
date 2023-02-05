@@ -31,12 +31,15 @@ public class CheckCommand extends Command {
     /**
      * Checks task at index given by user.
      *
+     * @return
      * @throws DukeException
      */
     @Override
-    public void executeCommand(TaskManager taskManager) throws DukeException {
+    public String executeCommand(TaskManager taskManager) throws DukeException {
         try {
             taskManager.checkTask(this.index);
+            String str = "Great job! I have checked this task off the list:";
+            return str + System.lineSeparator() + taskManager.printTask(this.index);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Item does not exist in list! Please check your list again.");
         }

@@ -21,13 +21,14 @@ public class ByeCommand extends Command {
     }
 
      /**
-     * Displays goodbye message
-     *
-     * @throws DukeException
-     */
+      * Displays goodbye message
+      *
+      * @return
+      * @throws DukeException
+      */
     @Override
-    public void executeCommand(TaskManager taskManager) throws DukeException {
-        System.out.println("ByeBye! Come play with me again!");
+    public String executeCommand(TaskManager taskManager) throws DukeException {
         fileManager.saveTasksToFile(taskManager);
+        return "ByeBye! Come play with me again!";
     }
 }

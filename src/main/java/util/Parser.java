@@ -42,9 +42,10 @@ public class Parser {
      * @param input
      * @return command String
      */
-    public Command parse(Scanner input) {
+    public Command parse(String input) throws DukeException {
         //remove leading and trailing whitespaces
-        String ip = input.nextLine().trim();
+        //.nextLine().trim()
+        String ip = input;
 
         this.inputArr = ip.split(" ", 2);
 
@@ -76,11 +77,11 @@ public class Parser {
                 throw new DukeException("Command not recognised, please enter a valid command!");
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Please enter an index or description with the command!");
+            throw new DukeException("Please enter an index or description with the command!");
         } catch (DukeException e) {
-            System.out.println(e);
+            String str = e.getMessage();
+            throw new DukeException(str);
         }
-        return command;
     }
 
     //credit: https://stackabuse.com/java-check-if-string-is-a-number/

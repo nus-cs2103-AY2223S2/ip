@@ -30,16 +30,20 @@ public class DeleteCommand extends Command {
 
     /**
      * Deletes task at index given by user.
-     *
+     * <p>
      * String input is parsed to extract start and end
      * dates and timings of the event.
      *
+     * @return
      * @throws DukeException
      */
     @Override
-    public void executeCommand(TaskManager taskManager) throws DukeException {
+    public String executeCommand(TaskManager taskManager) throws DukeException {
         try {
             taskManager.deleteTask(this.index);
+            String str = "Okay! I have removed the task!";
+            System.out.println("There are currently " + taskManager.getTaskArraySize() + " task(s) in the list!");
+            return str;
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Item does not exist in list! Please check your list again.");
         }

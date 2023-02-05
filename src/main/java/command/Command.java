@@ -30,7 +30,8 @@ public abstract class Command {
     /**
      * Abstract method to execute the command.
      *
+     * @return
      * @throws DukeException
      */
-    public abstract void executeCommand(TaskManager taskManager) throws DukeException;
+    public abstract String executeCommand(TaskManager taskManager) throws DukeException;
 }
