@@ -42,6 +42,9 @@ public class Parser {
         case "delete":
             delete(input, taskList);
             break;
+        case "find":
+            find(input, taskList);
+            break;
         default:
             throw new DukeException("Sorry I do not understand the command");
         }
@@ -174,5 +177,19 @@ public class Parser {
             throw new DukeException("Invalid task.");
         }
         taskList.deleteTask(index - 1);
+    }
+
+    /**
+     * Method to handle the find command.
+     * @param input User's input
+     * @param taskList User's TaskList
+     * @throws DukeException If user did not enter a keyword.
+     */
+    public void find(String[] input, TaskList taskList) throws DukeException {
+        if (input.length == 1) {
+            throw new DukeException("Find needs a keyword.");
+        }
+        System.out.println("Here are the matching tasks in your list:");
+        taskList.findTask(input[1].strip());
     }
 }
