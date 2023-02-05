@@ -9,8 +9,8 @@ import duke.utils.DateUtil;
  */
 public class Event extends Task {
 
-    private LocalDateTime from;
-    private LocalDateTime to;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
 
     /**
      * Constructor
@@ -24,30 +24,30 @@ public class Event extends Task {
      */
     public Event(String title, boolean isDone, LocalDateTime from, LocalDateTime to) {
         super(title, isDone);
-        this.from = from;
-        this.to = to;
+        this.startDate = from;
+        this.endDate = to;
     }
 
     /**
      * returns from date.
      * @return {@link LocalDateTime} object
      */
-    public LocalDateTime getFrom() {
-        return from;
+    public LocalDateTime getStartDate() {
+        return startDate;
     }
     /**
      * returns to date.
      * @return {@link LocalDateTime} object
      */
-    public LocalDateTime getTo() {
-        return to;
+    public LocalDateTime getEndDate() {
+        return endDate;
     }
 
     /**
      * {@inheritDoc}
      */
     public String toCsv() {
-        return "E," + super.toCsv() + "," + DateUtil.dateToString(from) + "," + DateUtil.dateToString(to);
+        return "E," + super.toCsv() + "," + DateUtil.dateToString(startDate) + "," + DateUtil.dateToString(endDate);
     }
 
     /**
@@ -56,9 +56,9 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (from: "
-            + DateUtil.dateToPrettyString(from)
+            + DateUtil.dateToPrettyString(startDate)
             + " to: "
-            + DateUtil.dateToPrettyString(to)
+            + DateUtil.dateToPrettyString(endDate)
             + ")";
     }
 }
