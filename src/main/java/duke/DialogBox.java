@@ -16,48 +16,46 @@ import javafx.scene.shape.Circle;
 public class DialogBox extends HBox {
     private Label text;
     private ImageView displayPicture;
+    private static Color DUKE_BG_COLOR = Color.rgb(54, 54, 54);
+    private static Color USER_BG_COLOR = Color.rgb(2, 119, 189);
+    private static CornerRadii CORNER_RADIUS = new CornerRadii(5);
+    private static double IMAGE_WIDTH = 40.0;
+    private static double IMAGE_HEIGHT = 40.0;
 
     /**
      * Creates a new DialogBox.
      * @param l Label object to be shown
      * @param iv ImageView object to be shown
      */
-    private DialogBox(Label l, ImageView iv) {
+    private DialogBox(Label l, ImageView iv, Color labelColor) {
         text = l;
         displayPicture = iv;
 
         text.setWrapText(true);
-        displayPicture.setFitWidth(70.0);
-        displayPicture.setFitHeight(70.0);
+        displayPicture.setFitWidth(IMAGE_WIDTH);
+        displayPicture.setFitHeight(IMAGE_HEIGHT);
 
         this.setAlignment(Pos.TOP_RIGHT);
         this.getChildren().addAll(text, displayPicture);
 
         // Adding padding to the dialog box
         this.setPadding(new Insets(10, 10, 0, 10));
+        this.setSpacing(5);
 
         // Styling the Label
-        text.setPadding(new Insets(0, 10, 0, 10));
+        text.setPadding(new Insets(5, 10, 5, 10));
         text.setBackground(new Background(
                 new BackgroundFill(
-                        Color.rgb(54, 54, 54),
-                        CornerRadii.EMPTY,
+                        labelColor,
+                        CORNER_RADIUS,
                         Insets.EMPTY
                 )
         ));
         text.setTextFill(Color.WHITE);
-        text.setBorder(new Border(new BorderStroke(
-                Color.WHITE,
-                BorderStrokeStyle.SOLID,
-                new CornerRadii(5),
-                BorderWidths.DEFAULT
-        )));
 
         // Clipping the image to be a circle
         double radius = displayPicture.getFitWidth() / 2;
-        Circle circleClip = new Circle( radius);
-        circleClip.setCenterX(radius);
-        circleClip.setCenterY(radius);
+        Circle circleClip = new Circle(radius, radius, radius);
         displayPicture.setClip(circleClip);
     }
 
@@ -78,7 +76,7 @@ public class DialogBox extends HBox {
      * @return DialogBox for the user to be served in the GUI.
      */
     public static DialogBox getUserDialog(Label l, ImageView iv) {
-        return new DialogBox(l, iv);
+        return new DialogBox(l, iv, USER_BG_COLOR);
     }
 
     /**
@@ -88,7 +86,7 @@ public class DialogBox extends HBox {
      * @return DialogBox for duke to be served in the GUI.
      */
     public static DialogBox getDukeDialog(Label l, ImageView iv) {
-        var db = new DialogBox(l, iv);
+        var db = new DialogBox(l, iv, DUKE_BG_COLOR);
         db.flip();
         return db;
     }

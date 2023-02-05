@@ -21,17 +21,20 @@ public class Duke extends Application {
     private Ui ui;
     static protected final String DATA_DIR = "data/";
     static protected final String DATA_FILENAME = "duke.txt";
-    static protected final String WELCOME_MESSAGE = "Hello! I'm Duke\n\tWhat can I do for you?";
+    static protected final String WELCOME_MESSAGE = "Hello! I'm Duke!\nWhat can I do for you?";
     static protected final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
 
     // For javaFX UI
+    private double STAGE_WIDTH = 500;
+    private double STAGE_HEIGHT = 750;
+    private double SEND_BUTTON_WIDTH = 55;
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream(("/images/DaDuke.png")));
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/cartoon_user.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream(("/images/cartoon_robot.png")));
     public Duke() {
         this(DATA_DIR + DATA_FILENAME);
     }
@@ -93,29 +96,26 @@ public class Duke extends Application {
         // Formatting window
         stage.setTitle("Duke");
         stage.setResizable(false);
-        stage.setHeight(600.0);
-        stage.setWidth(400.0);
+        stage.setHeight(STAGE_HEIGHT);
+        stage.setWidth(STAGE_WIDTH);
 
-        mainLayout.setPrefSize(400.0, 600.0);
+        mainLayout.setPrefSize(STAGE_WIDTH, STAGE_HEIGHT);
 
-        scrollPane.setPrefSize(385, 535);
+        scrollPane.setPrefSize(STAGE_WIDTH, STAGE_HEIGHT - 75);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
 
-        dialogContainer.setMinHeight(535);
+        dialogContainer.setMinHeight(STAGE_HEIGHT - 75); // Fit to scrollPane
 
-        userInput.setPrefWidth(325.0);
+        userInput.setPrefWidth(STAGE_WIDTH - SEND_BUTTON_WIDTH);
 
-        sendButton.setPrefWidth(55.0);
+        sendButton.setPrefWidth(SEND_BUTTON_WIDTH);
 
         AnchorPane.setTopAnchor(scrollPane, 1.0);
-
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
-
         AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
@@ -127,6 +127,7 @@ public class Duke extends Application {
                         Insets.EMPTY)
                 )
         );
+        dialogContainer.setPadding(new Insets(0, 0, 10, 0));
 
         // Add functionality
         sendButton.setOnMouseClicked((event) -> {
@@ -138,6 +139,12 @@ public class Duke extends Application {
         });
         // Scroll down to the end every time dialogContainer's height changes
         dialogContainer.heightProperty().addListener((observable -> scrollPane.setVvalue(1.0)));
+
+        // Send an initial welcome message
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(
+                new Label(WELCOME_MESSAGE),
+                new ImageView(duke))
+        );
     }
 
     /**
