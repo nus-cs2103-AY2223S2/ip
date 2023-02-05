@@ -6,10 +6,11 @@ import task.TaskList;
 import util.Parser;
 
 public class Unmark implements Command {
-    private final int taskNum;
     private static final String ERROR = "Task not in list.";
     private static final String SUCCESS = "Task has been unmarked.";
     private static final String FORMAT = "mark 'task number'";
+
+    private final int taskNum;
 
     private Unmark(int taskNum) {
         this.taskNum = taskNum;

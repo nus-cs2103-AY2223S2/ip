@@ -4,8 +4,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
-    private final LocalDate end;
     private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("dd MMM YY");
+
+    private final LocalDate end;
 
     private Deadline(String desc, boolean done, LocalDate end) {
         super(desc, done);

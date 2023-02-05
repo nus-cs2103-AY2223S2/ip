@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 import util.Util;
 
 public abstract class Task implements Serializable {
-
     protected final String desc;
     protected final boolean done;
     

@@ -6,7 +6,6 @@ import task.TaskList;
 import util.Parser;
 
 public class Exit implements Command {
-
     private static final String FORMAT = "bye";
 
     @Override
