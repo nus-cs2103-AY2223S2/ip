@@ -44,8 +44,9 @@ public abstract class Command {
      * @param tasks   the task list
      * @param ui      the ui instance
      * @param storage the storage intance
+     * @return string of the command
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage);
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage);
 
     /**
      * Checks if the command has the inputs that it needs for the creation of task.

@@ -26,7 +26,7 @@ public class UnMarkComamnd extends Command {
      * @param ui      the ui instance
      * @param storage the storage instance
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             int id = Integer.parseInt(this.unwrap()[0]);
             int index = id - 1;
@@ -36,11 +36,11 @@ public class UnMarkComamnd extends Command {
 
             Task task = tasks.get(index);
             task.markAsNotDone();
-            ui.showMessage(String.format("OK, I've marked this task as not done yet:\n%s\n", task));
-
             storage.save(tasks);
+            
+            return String.format("OK, I've marked this task as not done yet:\n%s\n", task);
         } catch (CommandException | UnmarkIndexDoesNotExistException error) {
-            ui.showError(error);
+            return error.getMessage();
         }
     }
 }

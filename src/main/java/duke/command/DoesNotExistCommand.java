@@ -19,8 +19,9 @@ public class DoesNotExistCommand extends Command {
 
     /**
      * Displays message to tell user that command is not recognised.
+     * @return string
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showMessage("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
     }
 }

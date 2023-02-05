@@ -1,6 +1,7 @@
 package duke.command;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
@@ -21,14 +22,26 @@ public class ListCommand extends Command {
 
     /**
      * Displays the list of task.
+     * 
      * @param tasks   the task list
      * @param ui      the ui instance
      * @param storage the storage instance
+     * @return string
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        System.out.println("Here are the tasks in your list:");
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        if (tasks.size() == 0) {
+            return "Your task list is empty!";
+        }
+
         List<Task> immutableTaskList = tasks.getList();
 
-        ui.showTaskList(immutableTaskList);
+        String result = "Here are the tasks in your list:";
+        int index = 1;
+        for (Task task : immutableTaskList) {
+            result += ("\n" + index + ". " + task.toString());
+            index++;
+        }
+
+        return result;
     }
 }

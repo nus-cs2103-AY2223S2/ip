@@ -25,8 +25,9 @@ public class MarkCommand extends Command {
      * @param tasks   the task list
      * @param ui      the ui instance
      * @param storage the storage instance
+     * @return string
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             int id = Integer.parseInt(this.unwrap()[0]);
             int index = id - 1;
@@ -36,11 +37,11 @@ public class MarkCommand extends Command {
 
             Task task = tasks.get(index);
             task.markAsDone();
-            ui.showMessage(String.format("Nice! I've marked this task as done:\n%s", task));
-
             storage.save(tasks);
+
+            return String.format("Nice! I've marked this task as done:\n%s", task);
         } catch (CommandException | MarkIndexDoesNotExistException error) {
-            ui.showError(error);
+            return error.getMessage();
         }
     }
 }

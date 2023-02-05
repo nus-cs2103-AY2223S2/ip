@@ -28,18 +28,19 @@ public class DeadlineCommand extends Command {
      * @param tasks   the task list
      * @param ui      the ui instance
      * @param storage the storage instance
+     * @return string
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             String[] values = this.unwrap();
             Task task = new Deadline(values[0], values[1]);
 
             tasks.add(task);
-            ui.showTaskAdded(task, tasks.size());
-
             storage.save(tasks);
+
+            return "Got it. I've added this task:\n" + task + "\nNow you have " + tasks.size() + " tasks in the list.";
         } catch (CommandException error) {
-            ui.showError(error);
+            return error.getMessage();
         }
     }
 
