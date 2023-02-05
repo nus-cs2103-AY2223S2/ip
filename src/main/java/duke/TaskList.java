@@ -20,14 +20,30 @@ public class TaskList {
     }
 
     /**
-     * Prints a user's tasks in list form.
+     * Prints the user's tasks in list form.
      */
     public void list() {
         int curr = 1;
         Iterator<Task> iter = this.tasks.iterator();
         while (iter.hasNext()) {
-            System.out.println(curr + " " + iter.next());
+            Task task = iter.next();
+            System.out.println(curr + ". " + task);
             curr++;
+        }
+    }
+
+    /**
+     * Prints the user's tasks that matches keyword in list form.
+     */
+    public void findTask(String keyword) {
+        int curr = 1;
+        Iterator<Task> iter = this.tasks.iterator();
+        while (iter.hasNext()) {
+            Task task = iter.next();
+            if (task.getName().contains(keyword)) {
+                System.out.println(curr + ". " + task);
+                curr++;
+            }
         }
     }
 

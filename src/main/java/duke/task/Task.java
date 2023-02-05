@@ -17,6 +17,10 @@ public class Task {
         return date.format(format);
     }
 
+    public String getName() {
+        return this.name;
+    }
+
     public String convertFileDate(LocalDate date) {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         return date.format(format);
