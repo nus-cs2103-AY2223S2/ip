@@ -112,6 +112,7 @@ public class TaskList {
      *
      * @param index The index of the task to be updated.
      * @param task The updated task.
+     * @throws IndexOutOfBoundsException Indicates that the index is out of range.
      * @throws DukeException Indicates failure to write to storage.
      */
     public void update(int index, Task task) throws DukeException {
