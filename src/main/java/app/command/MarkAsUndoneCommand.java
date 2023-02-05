@@ -27,7 +27,7 @@ public class MarkAsUndoneCommand extends Command {
     public String execute(TaskList tl, Ui ui, Storage storage) throws Exception {
         boolean alreadyMarked;
         try {
-            int i = Integer.valueOf(this.unmarkAtIndex) - 1;
+            int i = Integer.parseInt(this.unmarkAtIndex) - 1;
             alreadyMarked = tl.unmarkDone(i);
             if (alreadyMarked) {
                 return new Response(tl.getTask(i).getDesc() + " is already undone!").toString();

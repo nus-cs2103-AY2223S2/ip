@@ -27,11 +27,7 @@ public class SaveCommand extends Command {
      */
     @Override
     public String execute(TaskList tl, Ui ui, Storage storage) throws Exception {
-        try {
-            storage.saveToStorage(tl);
-            return new Response("Changes are saved to storage.").toString();
-        } catch (Exception e) {
-            throw e;
-        }
+        storage.saveToStorage(tl);
+        return new Response("Changes are saved to storage.").toString();
     }
 }

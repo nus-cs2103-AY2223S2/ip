@@ -13,6 +13,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import app.task.InvalidDateTimeException;
+import app.task.InvalidInputException;
 import app.task.Task;
 import app.task.TaskList;
 import app.task.TaskTypes;
@@ -25,8 +27,13 @@ import app.task.TaskTypes;
 public class Storage {
     public static final String SEPARATOR_REGEX = " \\| ";
     public static final String SEPARATOR = " | ";
-    public static final String SUB_SEPARATOR = ":";
-    private Path path;
+    public static final String SUB_SEPARATOR = ":"; // for commands with additional args
+
+    private static final int SYMBOL_INDEX = 0;
+    private static final int ISDONE_INDEX = 1;
+    private static final int DESC_INDEX = 2;
+    private static final int MIN_STORAGE_ARG_SIZE = 3;
+
     private final File file;
 
     /**
@@ -34,11 +41,10 @@ public class Storage {
      * data. If the path location does not exist, the necessary files and directories
      * are created.
      *
-     * @param path the relative path for which the text data file will be stored
-     * @throws IOException
+     * @param path the relative path for which the text data file will be stored.
+     * @throws IOException, propagated from FileWriter.
      */
     Storage(Path path) throws IOException {
-        this.path = path;
         this.file = new File(path.toString());
 
         // creates storage directory or data if they don't exist
@@ -50,6 +56,7 @@ public class Storage {
 
     /**
      * Loads a single line in storage into a given task.TaskList.
+     * Method is under review to return totalSuccesses and totalFailures.
      *
      * It is assumed that a line in storage follows the format specified here:
      * taskSymbol | isDone | desc | addtl-arg1:value | addtl-arg2:value ...
@@ -59,53 +66,142 @@ public class Storage {
      *
      * @param tl empty TaskList, assuming this is executed upon startup of app.
      * @return totalSuccess, the number of lines that have been successfully loaded into the tl.
+     * @throws
      */
-    public int loadIntoTaskList(TaskList tl) throws Exception {
+    public Map<String, Integer> loadIntoTaskList(TaskList tl)
+            throws IOException {
+        Map<String, Integer> successRates = new HashMap<>();
 
+        BufferedReader br = new BufferedReader(new FileReader(this.file));
+        String line = br.readLine();
+        int totalRowsRead = 0;
+        int totalSuccess = 0;
 
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(this.file));
-            String line = br.readLine();
-            int totalTaskCounter = 0;
-            int totalSuccess = 0;
-            while (line != null) {
-                totalTaskCounter++;
-                List<String> args = Arrays.asList(line.split(SEPARATOR_REGEX));
+        while (line != null) {
+            totalRowsRead++;
+            System.out.println("Loading task #" + totalRowsRead);
 
-                // get task type
-                String symbol = args.get(0);
-                TaskTypes.Type taskType = TaskTypes.symbolToTask.getValue().get(symbol);
+            try {
+                List<String> args = splitStorageFormatArgs(line);
 
-                // get arg map
-                Map<String, String> argValues = new HashMap<>();
-                boolean isDone = args.get(1).equals("1");
-                argValues.put("Description", args.get(2));
+                TaskTypes.Type taskType = getTaskTypeFromStorageFormat(args);
+                Map<String, String> argValues = getArgMapFromStorageFormat(args);
+                boolean isDone = getIsDoneFromStorageFormat(args);
 
-                // remaining named arguments
-                if (args.size() > 3) {
-                    for (String pair : args.subList(3, args.size())) {
-                        String[] split = pair.split(SUB_SEPARATOR, 2);
-                        argValues.put(split[0], split[1]);
-                    }
-                }
-
-                try {
-                    if (isDone) {
-                        tl.addDoneTask(taskType, argValues);
-                    } else {
-                        tl.addTask(taskType, argValues);
-                    }
+                boolean isSuccess = addStorageTaskToTaskList(tl, taskType, argValues, isDone);
+                if (isSuccess) {
                     totalSuccess++;
-                    line = br.readLine();
-                } catch (Exception e) {
-                    line = br.readLine();
                 }
 
+            } catch (InvalidStorageException e) {
+                System.out.println(e.getMessage());
+            } finally {
+                line = br.readLine();
             }
-            return totalSuccess;
-        } catch (Exception e) {
-            throw e;
         }
+
+        successRates.put("Successes", totalSuccess);
+        successRates.put("Total", totalRowsRead);
+        return successRates;
+    }
+
+    /**
+     * Adds a storage format Task to a TaskList, given the processed arguments.
+     * @param tl
+     * @param taskType
+     * @param argValues
+     * @param isDone
+     * @return a boolean indicating if the addition was successful.
+     */
+    private boolean addStorageTaskToTaskList(TaskList tl,
+                                             TaskTypes.Type taskType,
+                                             Map<String, String> argValues,
+                                             boolean isDone) {
+        try {
+            if (isDone) {
+                tl.addDoneTask(taskType, argValues);
+            } else {
+                tl.addTask(taskType, argValues);
+            }
+            return true;
+        } catch (InvalidInputException | InvalidDateTimeException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+
+    private TaskTypes.Type getTaskTypeFromStorageFormat(List<String> args)
+            throws InvalidStorageException {
+
+        String symbol = args.get(SYMBOL_INDEX);
+        TaskTypes.Type taskType = TaskTypes.symbolToTask.getValue().get(symbol);
+
+        if (taskType == null) {
+            throw new InvalidStorageException("Invalid TaskType");
+        }
+        return taskType;
+    }
+
+    /**
+     * Extracts task arguments from the split storageFormat.
+     * Compulsorily extracts description.
+     * @param args
+     * @return
+     * @throws InvalidStorageException - if Description is missing
+     */
+    private Map<String,String> getArgMapFromStorageFormat(List<String> args)
+            throws InvalidStorageException {
+
+        Map<String, String> argValues = new HashMap<>();
+        try {
+            argValues.put("Description", args.get(DESC_INDEX));
+        } catch (IndexOutOfBoundsException e) {
+            throw new InvalidStorageException("Missing description");
+        }
+
+        // map additional arguments
+        if (args.size() > MIN_STORAGE_ARG_SIZE) {
+            for (String pair : args.subList(MIN_STORAGE_ARG_SIZE, args.size())) {
+                String[] split = pair.split(SUB_SEPARATOR, 2);
+                argValues.put(split[0], split[1]);
+            }
+        }
+        return argValues;
+    }
+
+    /**
+     * Extracts isDone from Storage. isDone is indicated with 1 for Done, 0 for Undone.
+     * Throws an exception for any other value.
+     * @param args
+     * @return
+     * @throws InvalidStorageException
+     */
+    private boolean getIsDoneFromStorageFormat(List<String> args) throws InvalidStorageException {
+        String arg = args.get(ISDONE_INDEX);
+        boolean isDoneTrue = arg.equals("1");
+        boolean isUnDoneTrue = arg.equals("0");
+
+        // check if arg value != (1 or 0)
+        if (!isDoneTrue && !isUnDoneTrue) {
+            throw new InvalidStorageException("error loading isDone");
+        }
+        return isDoneTrue;
+    }
+
+    /**
+     * Splits a single line from the storageFormat into a List
+     * of arguments.
+     * @param line
+     * @return
+     * @throws InvalidStorageException if the line contains less than min
+     * number of args in storage
+     */
+    private List<String> splitStorageFormatArgs(String line) throws InvalidStorageException {
+        List<String> args = Arrays.asList(line.split(SEPARATOR_REGEX));
+        if (args.size() < MIN_STORAGE_ARG_SIZE) {
+            throw new InvalidStorageException("Missing inputs for task in this line");
+        }
+        return args;
     }
 
     /**
@@ -113,10 +209,9 @@ public class Storage {
      * Thus, this should only be executed when the TaskList contains the right information.
      *
      * @param tl TaskList with updated data to be stored.
-     * @return int value of 1 is returned for successful writing of data.
-     * @throws Exception
+     * @throws IOException, propagated from FileWriter.
      */
-    public int saveToStorage(TaskList tl) throws Exception {
+    public void saveToStorage(TaskList tl) throws IOException {
         BufferedWriter br = new BufferedWriter(new FileWriter(this.file));
         for (Task task : tl.getAllTasks()) {
             String data = task.asDataFormat();
@@ -124,9 +219,11 @@ public class Storage {
             br.newLine();
         }
         br.close();
-        return 1;
     }
 
+    /**
+     * Indicates invalid storage data
+     */
     public static class InvalidStorageException extends Exception {
         InvalidStorageException(String msg) {
             super(msg);

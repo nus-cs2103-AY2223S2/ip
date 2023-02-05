@@ -5,6 +5,9 @@ import app.chatbot.Storage;
 import app.chatbot.Ui;
 import app.task.TaskList;
 
+import java.io.IOException;
+import java.util.Map;
+
 public class LoadCommand extends Command {
 
     public LoadCommand() {
@@ -18,16 +21,16 @@ public class LoadCommand extends Command {
      * @param tl
      * @param ui
      * @param storage
-     * @throws Exception
+     * @throws IOException, InvalidStorageException
      */
     @Override
-    public String execute(TaskList tl, Ui ui, Storage storage) throws Exception {
-        Integer numLoaded = 0;
-        try {
-            numLoaded = storage.loadIntoTaskList(tl);
-            return new Response("Successfully loaded " + numLoaded + " task(s) from storage.").toString();
-        } catch (Exception e) {
-            throw e;
-        }
+    public String execute(TaskList tl, Ui ui, Storage storage)
+            throws IOException {
+        Map<String, Integer> successRates = storage.loadIntoTaskList(tl);
+        int numSuccess = successRates.get("Successes");
+        int numTotalRows = successRates.get("Total");
+        return new Response("Successfully loaded "
+                + numSuccess + " of " + numTotalRows
+                +" task(s) from storage.").toString();
     }
 }

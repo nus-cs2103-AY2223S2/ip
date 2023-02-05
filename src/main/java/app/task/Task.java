@@ -1,8 +1,11 @@
 package app.task;
 
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import app.chatbot.Storage;
 
@@ -31,11 +34,53 @@ public abstract class Task {
         SUPPORTED_DATE_TIME_INPUT.add(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
     }
 
-    public Task(String description) {
+    /**
+     * Abstract constructor for Task. Description is compulsory.
+     * @param description
+     * @throws InvalidInputException
+     */
+    public Task(String description) throws InvalidInputException {
+        if (isArgEmpty(description)) {
+            throw new InvalidInputException("plz provide the description!");
+        }
         this.description = description;
         this.isDone = false;
     }
 
+    /**
+     * Checks if a String argument is null or blank.
+     * @param arg
+     * @return
+     */
+    protected boolean isArgEmpty(String arg) {
+        return Objects.isNull(arg) || arg.equals("");
+    }
+
+    /**
+     * Attempts to parse and return a String datetime into LocalDateTime,
+     * by trying across supported formats.
+     * @param input
+     * @return
+     * @throws InvalidDateTimeException if datetime fails to parse
+     * against available formats
+     */
+    protected LocalDateTime parseDate(String input) throws InvalidDateTimeException {
+        LocalDateTime date = null;
+        for (DateTimeFormatter f : SUPPORTED_DATE_TIME_INPUT) {
+            try {
+                date = LocalDateTime.parse(input, f);
+                break;
+            } catch (DateTimeParseException ignored) {
+            }
+        }
+        if (Objects.isNull(date)) {
+            throw new InvalidDateTimeException("Try reformatting your date/time to the supported formats:\n"
+                    + "yyyy-MM-dd HHmm or yyyy/MM/dd HHmm\n"
+                    + "Make sure that the date/time is valid!");
+        } else {
+            return date;
+        }
+    }
 
     /**
      * Returns the status icon for display. Marks a task as done with "X", blank otherwise.

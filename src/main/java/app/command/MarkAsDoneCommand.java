@@ -27,7 +27,7 @@ public class MarkAsDoneCommand extends Command {
     public String execute(TaskList tl, Ui ui, Storage storage) throws Exception {
         boolean alreadyMarked;
         try {
-            int i = Integer.valueOf(this.markAtIndex) - 1;
+            int i = Integer.parseInt(this.markAtIndex) - 1;
             alreadyMarked = tl.markAsDone(i);
             if (alreadyMarked) {
                 return new Response(tl.getTask(i).getDesc() + " already marked as done!").toString();

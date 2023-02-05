@@ -3,6 +3,7 @@ package app.command;
 import app.chatbot.Response;
 import app.chatbot.Storage;
 import app.chatbot.Ui;
+import app.task.InvalidInputException;
 import app.task.Task;
 import app.task.TaskList;
 
@@ -31,12 +32,13 @@ public class DeleteCommand extends Command {
     public String execute(TaskList tl, Ui ui, Storage storage) throws Exception {
         Response response = new Response();
         try {
-            int i = Integer.valueOf(deleteAtIndex) - 1;
+            int i = Integer.parseInt(deleteAtIndex) - 1;
             Task deletedTask = tl.deleteTask(i);
             response.addLine("Removed " + deletedTask.getDesc()
                     + " from the list. You now have " + tl.size() + " tasks left.");
         } catch (NumberFormatException e) {
-            throw e;
+            throw new InvalidInputException("Specify a task by its task number. "
+                    + "Try 'list' or 'find' to get the number :)");
         }
         return response.toString();
     }

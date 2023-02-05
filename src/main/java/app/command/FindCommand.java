@@ -22,9 +22,10 @@ public class FindCommand extends Command {
             Task t = tl.getTask(i);
             String desc = t.getDesc();
             if (desc.toLowerCase().contains(this.searchContent)) {
-                resultDisplay.append(i+1);
-                resultDisplay.append(": " + t);
-                resultDisplay.append("\n");
+                resultDisplay.append(i+1)
+                        .append(": ")
+                        .append(t)
+                        .append("\n");
                 isSearchSuccessful = true;
             }
         }

@@ -1,31 +1,27 @@
 package app.task;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.Objects;
 
 public class Deadline extends Task {
-    private LocalDateTime deadline;
+    private final LocalDateTime deadline;
 
-    Deadline(String description, String deadline) throws InvalidDateTimeException {
+    /**
+     * Constructor for Deadline Task.
+     * @param description
+     * @param deadline
+     * @throws InvalidInputException for any empty inputs.
+     * @throws InvalidDateTimeException for a badly formatted datetime.
+     */
+    Deadline(String description, String deadline)
+            throws InvalidInputException, InvalidDateTimeException {
         super(description);
         this.symbol = "D";
 
-        for (DateTimeFormatter f : SUPPORTED_DATE_TIME_INPUT) {
-            try {
-                this.deadline = LocalDateTime.parse(deadline, f);
-                break;
-            } catch (DateTimeParseException e) {
-                continue;
-            }
+        if (isArgEmpty(deadline)) {
+            throw new InvalidInputException("plz provide the deadline in "
+                    + "yyyy-MM-dd HHmm or yyyy/MM/dd HHmm format");
         }
-
-        if (Objects.isNull(this.deadline)) {
-            throw new InvalidDateTimeException("Try reformatting your date/time to the supported formats:\n"
-                    + "yyyy-MM-dd HHmm or yyyy/MM/dd HHmm\n"
-                    + "Make sure that the date/time is valid!");
-        }
+        this.deadline = parseDate(deadline);
     }
 
     @Override
