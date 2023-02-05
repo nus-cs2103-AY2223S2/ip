@@ -14,8 +14,8 @@ public class Todo extends duke.taskers.Task {
      * @param description Description of what the todo task is.
      * @param isDone True if todo is done, false if todo is not done.
      */
-    public Todo(String description, boolean isDone) {
-        super(description, isDone);
+    public Todo(String description, boolean isDone, boolean isPriority) {
+        super(description, isDone, isPriority);
     }
 
     /**

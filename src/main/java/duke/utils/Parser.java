@@ -15,7 +15,9 @@ import duke.commands.ExitCommand;
 import duke.commands.FindCommand;
 import duke.commands.ListCommand;
 import duke.commands.MarkCommand;
+import duke.commands.PriorityCommand;
 import duke.commands.UnmarkCommand;
+import duke.commands.UnpriorityCommand;
 import duke.exceptions.DukeException;
 
 
@@ -50,7 +52,7 @@ public class Parser {
      * @return The AddTodoCommand.
      */
     public static AddTodoCommand prepareAddTodo(String args) {
-        return new AddTodoCommand(args, false);
+        return new AddTodoCommand(args, false, false);
     }
 
     /**
@@ -76,7 +78,7 @@ public class Parser {
         if (endDate == null) {
             throw new DukeException("Datetime format is wrong. Please format as 'yyyy-MM-dd HH:mm'.");
         }
-        return new AddDeadlineCommand(arr[0], false, endDate);
+        return new AddDeadlineCommand(arr[0], false, false, endDate);
     }
 
 
@@ -111,7 +113,7 @@ public class Parser {
         if (startDate == null && endDate == null) {
             throw new DukeException("DateTime format is wrong. Please format as 'yyyy-MM-dd HH:mm'.");
         }
-        return new AddEventCommand(firstHalf[0], false, startDate, endDate);
+        return new AddEventCommand(firstHalf[0], false, false, startDate, endDate);
 
     }
 
@@ -170,6 +172,16 @@ public class Parser {
             return new ExitCommand();
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
+        case PriorityCommand.COMMAND_WORD:
+            if (args.equals("")) {
+                throw new DukeException("Argument cannot be empty");
+            }
+            return new PriorityCommand(returnIndexFromString(args));
+        case UnpriorityCommand.COMMAND_WORD:
+            if (args.equals("")) {
+                throw new DukeException("Argument cannot be empty");
+            }
+            return new UnpriorityCommand(returnIndexFromString(args));
         default:
             throw new DukeException("Sorry, I don't understand you.");
         }

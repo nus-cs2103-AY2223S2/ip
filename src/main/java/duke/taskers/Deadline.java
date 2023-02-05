@@ -21,8 +21,8 @@ public class Deadline extends Task {
      * @param isDone True if the deadline is done. false if the deadline is not done.
      * @param end Date the deadline is due.
      */
-    public Deadline(String desc, boolean isDone, LocalDateTime end) {
-        super(desc, isDone);
+    public Deadline(String desc, boolean isDone, boolean isPriority, LocalDateTime end) {
+        super(desc, isDone, isPriority);
         this.end = end;
     }
 

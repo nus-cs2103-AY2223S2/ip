@@ -82,20 +82,21 @@ public class Storage {
                 String doneOrNotStr = valueArr[1].trim();
                 assert doneOrNotStr.equals("1") || doneOrNotStr.equals("0");
                 boolean doneOrNot = doneOrNotStr.equals("1");
+                boolean priorityOrNot = valueArr[2].trim().equals("1");
                 String type = valueArr[0].toLowerCase().trim();
 
                 switch (type) {
                 case Todo.TASK_TYPE:
-                    thisTask = new Todo(valueArr[2], doneOrNot);
+                    thisTask = new Todo(valueArr[3], doneOrNot, priorityOrNot);
                     break;
                 case Deadline.TASK_TYPE:
-                    LocalDateTime end = Duke.createLocalDateTime(valueArr[3]);
-                    thisTask = new Deadline(valueArr[2], doneOrNot, end);
+                    LocalDateTime end = Duke.createLocalDateTime(valueArr[4]);
+                    thisTask = new Deadline(valueArr[3], doneOrNot, priorityOrNot, end);
                     break;
                 case Event.TASK_TYPE:
-                    LocalDateTime startDate = Duke.createLocalDateTime(valueArr[3]);
-                    LocalDateTime endDate = Duke.createLocalDateTime(valueArr[4]);
-                    thisTask = new Event(valueArr[2], doneOrNot, startDate, endDate);
+                    LocalDateTime startDate = Duke.createLocalDateTime(valueArr[4]);
+                    LocalDateTime endDate = Duke.createLocalDateTime(valueArr[5]);
+                    thisTask = new Event(valueArr[3], doneOrNot, priorityOrNot, startDate, endDate);
                     break;
                 default:
                     throw new DukeException("Something went wrong");

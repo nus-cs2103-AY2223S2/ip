@@ -20,9 +20,9 @@ public class Event extends Task {
      * @param start Starting date of event.
      * @param end Ending date of event.
      */
-    public Event(String desc, boolean isDone,
+    public Event(String desc, boolean isDone, boolean isPriority,
                  LocalDateTime start, LocalDateTime end) {
-        super(desc, isDone);
+        super(desc, isDone, isPriority);
         this.start = start;
         this.end = end;
     }

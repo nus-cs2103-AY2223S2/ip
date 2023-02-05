@@ -22,9 +22,9 @@ public class AddDeadlineCommand extends Command {
      * @param isDone If the task is done or not.
      * @param endDate End date of the task.
      */
-    public AddDeadlineCommand(String desc, boolean isDone, LocalDateTime endDate) {
+    public AddDeadlineCommand(String desc, boolean isDone, boolean isPriority, LocalDateTime endDate) {
         super();
-        this.deadline = new Deadline(desc, isDone, endDate);
+        this.deadline = new Deadline(desc, isDone, isPriority, endDate);
     }
 
     /**

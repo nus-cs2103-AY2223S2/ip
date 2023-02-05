@@ -22,9 +22,10 @@ public class AddEventCommand extends Command {
      * @param startDate Starting date of event.
      * @param endDate Ending date of event.
      */
-    public AddEventCommand(String desc, boolean isDone, LocalDateTime startDate, LocalDateTime endDate) {
+    public AddEventCommand(String desc, boolean isDone, boolean isPriority,
+                           LocalDateTime startDate, LocalDateTime endDate) {
         super();
-        this.event = new Event(desc, isDone, startDate, endDate);
+        this.event = new Event(desc, isDone, isPriority, startDate, endDate);
     }
 
     /**

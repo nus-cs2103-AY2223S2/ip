@@ -7,6 +7,7 @@ public abstract class Task {
 
     private final String description;
     private boolean isDone;
+    private boolean isPriority;
 
     /**
      * Constructor for that Task class.
@@ -14,11 +15,29 @@ public abstract class Task {
      * @param description The description of the Task.
      * @param isDone Boolean to show if the task is done or not.
      */
-    public Task(String description, boolean isDone) {
+    public Task(String description, boolean isDone, boolean isPriority) {
         this.description = description;
         this.isDone = isDone;
+        this.isPriority = isPriority;
+
     }
 
+    /**
+     * Makes the item prioritised.
+     */
+    public void prioritise() {
+        this.isPriority = true;
+    }
+
+    public void unprioritise() {
+        this.isPriority = false;
+    }
+
+    /**
+     * Gets the description from the task.
+     *
+     * @return The description string from the task.
+     */
     public String getDescription() {
         return this.description;
     }
@@ -43,8 +62,9 @@ public abstract class Task {
      * @return A partially formatted string.
      */
     public String helpFormatString() {
-        return ((this.isDone ? "1" : "0") + " / "
-                + this.description.trim()).trim();
+        String doneStr = this.isDone ? "1" : "0";
+        String isPrior = this.isPriority ? "1" : "0";
+        return doneStr + " / " + isPrior + " / " + this.description.trim();
     }
 
     public abstract String formatStringForFile();
@@ -56,8 +76,9 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        return (this.isDone ? "[X]" : "[ ]")
-                + this.description;
+        String doneStr = this.isDone ? "[X]" : "[ ]";
+        String isPrior = this.isPriority ? "[!!!]" : "[ ]";
+        return doneStr + isPrior + this.description;
     }
 
 }

@@ -39,6 +39,41 @@ public class TaskList {
         return this.listOfThings.get(index);
     }
 
+    /**
+     * Prioritises the task in the list. Marks it as prioritised and bumps it
+     * up the list.
+     *
+     * @param targetIndex The index to be prioritised.
+     * @return The task that is prioritised.
+     * @throws DukeException Array index out of bounds.
+     */
+    public Task prioritiseTask(int targetIndex) throws DukeException {
+        if (targetIndex < 0 || targetIndex >= this.listOfThings.size()) {
+            throw new DukeException("Index out of bounds.");
+        }
+        Task t = this.listOfThings.remove(targetIndex);
+        t.prioritise();
+        this.listOfThings.add(0, t);
+        return t;
+    }
+
+    /**
+     * Unprioritises the task in the list. Marks it as unprioritised and pushes it
+     * up the list.
+     *
+     * @param targetIndex The index to be unprioritised.
+     * @return The task that is unprioritised.
+     * @throws DukeException Array index out of bounds.
+     */
+    public Task unprioritiseTask(int targetIndex) throws DukeException {
+        if (targetIndex < 0 || targetIndex >= this.listOfThings.size()) {
+            throw new DukeException("Index out of bounds.");
+        }
+        Task t = this.listOfThings.remove(targetIndex);
+        t.unprioritise();
+        this.listOfThings.add(t);
+        return t;
+    }
 
     /**
      * Marks the task inside the list as undone.

@@ -57,9 +57,10 @@ public class Ui {
     public String showList(ArrayList<Task> arrList) {
         String totalString = "";
         totalString += "     Here are the tasks in your list:";
-        for (int i = 0; i < arrList.size(); i++) {
-            totalString += "\n     " + (i + 1) + "." + arrList.get(i).toString();
+        for (int j = 0; j < arrList.size(); j++) {
+            totalString += "\n     " + (j + 1) + "." + arrList.get(j).toString();
         }
+
         return totalString;
     }
 
@@ -102,6 +103,30 @@ public class Ui {
         str = "     Got it. I've added this task:\n    " + str;
         return str + listUpdate(arr);
 
+    }
+
+    /**
+     * Replies after prioritising.
+     *
+     * @param t The task to be prioritised
+     * @return The string response
+     */
+    public String prioritiseResponse(Task t) {
+        String str = "  " + t.toString();
+        str = "     Got it. I've prioritised this task:\n    " + str;
+        return str;
+    }
+
+    /**
+     * Replies after unprioritising.
+     *
+     * @param t The task to be unprioritised
+     * @return The string response
+     */
+    public String unprioritiseResponse(Task t) {
+        String str = "  " + t.toString();
+        str = "     Got it. I've unprioritised this task:\n    " + str;
+        return str;
     }
 
     /**

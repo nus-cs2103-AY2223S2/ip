@@ -20,9 +20,9 @@ public class AddTodoCommand extends Command {
      * @param desc Description of todo.
      * @param isDone If task is done or not.
      */
-    public AddTodoCommand(String desc, boolean isDone) {
+    public AddTodoCommand(String desc, boolean isDone, boolean isPriority) {
         super();
-        this.todo = new Todo(desc, isDone);
+        this.todo = new Todo(desc, isDone, isPriority);
     }
 
     /**
