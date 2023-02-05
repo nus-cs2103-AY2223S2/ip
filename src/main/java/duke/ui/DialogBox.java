@@ -23,11 +23,11 @@ public class DialogBox extends HBox {
 
     /** Label containing text for dialog */
     @FXML
-    private Label dialog;
+    private Label dialog = null;
 
     /** ImageView containing the display picture for the dialog */
     @FXML
-    private ImageView displayPicture;
+    private ImageView displayPicture = null;
 
     /**
      * Constructs a new DialogBox.
@@ -45,7 +45,8 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        assert dialog != null : "dialog Label not set up properly in fxml file";
+        assert displayPicture != null : "displayPicture ImageView not set up properly in fxml file";
         dialog.setText(text);
         displayPicture.setImage(img);
     }

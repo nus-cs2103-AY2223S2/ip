@@ -170,6 +170,7 @@ public class MainWindow extends AnchorPane {
      * @param text Text to show.
      */
     private void showDukeDialog(String text) {
+        assert dukeImage != null : "duke icon not found";
         dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog(text, dukeImage)
         );
@@ -181,6 +182,7 @@ public class MainWindow extends AnchorPane {
      * @param text Text to show.
      */
     private void showUserDialog(String text) {
+        assert userImage != null : "user icon not found";
         dialogContainer.getChildren().add(
                 DialogBox.getUserDialog(text, userImage)
         );

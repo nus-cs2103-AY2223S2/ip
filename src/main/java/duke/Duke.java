@@ -120,7 +120,7 @@ public class Duke extends Application {
             controller.showDeleteTaskSuccessMessage(tasks.execute(command));
             break;
         default:
-            // Do nothing
+            assert false : "Unhandled command: " + command;
         }
     }
 
