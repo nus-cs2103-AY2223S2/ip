@@ -4,8 +4,8 @@ package chungus.util;
  * A general pair class.
  */
 public class Pair<S, T> {
-    private S first;
-    private T second;
+    private final S first;
+    private final T second;
 
     /**
      * Constructor for a pair.
