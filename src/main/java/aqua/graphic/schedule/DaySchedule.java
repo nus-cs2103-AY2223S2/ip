@@ -10,9 +10,11 @@ import aqua.util.Timeable;
 import javafx.css.PseudoClass;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 
 public class DaySchedule extends HBox {
@@ -22,6 +24,8 @@ public class DaySchedule extends HBox {
     private static final double MINUTES_IN_A_DAY = 1440;
     private static final double MIN_WIDTH_PIXS = ROW_HEIGHT;
     private static final double MIN_WIDTH_MINS = (MIN_WIDTH_PIXS / ROW_WIDTH) * MINUTES_IN_A_DAY;
+    private static final double TOOLTIP_SHOW_DELAY = 0;
+    private static final double TOOLTIP_HIDE_DELAY = 0;
 
     private final VBox rowDisplayArea = new VBox();
 
@@ -100,6 +104,7 @@ public class DaySchedule extends HBox {
             scheduleBox.setMinHeight(ROW_HEIGHT);
             scheduleBox.setMinWidth(endX - startX);
             scheduleBox.getStyleClass().setAll(timeable.getStyleClass());
+            Tooltip.install(scheduleBox, createTooltip(timeable));
             for (PseudoClass pseudoClass : timeable.getPseudoClass()) {
                 scheduleBox.pseudoClassStateChanged(pseudoClass, true);
             }
@@ -122,5 +127,14 @@ public class DaySchedule extends HBox {
         }
 
         return canvas;
+    }
+
+
+    private Tooltip createTooltip(ScheduleTimeable timeable) {
+        Tooltip tooltip = new Tooltip(timeable.toString());
+        tooltip.setShowDelay(Duration.seconds(TOOLTIP_SHOW_DELAY));
+        tooltip.setHideDelay(Duration.seconds(TOOLTIP_HIDE_DELAY));
+        tooltip.setShowDuration(Duration.seconds(Double.MAX_VALUE));
+        return tooltip;
     }
 }
