@@ -13,7 +13,7 @@ public class Ui {
 
     String acceptCommand(String command) throws DukeException {
         String printable = Parser.processCommand(command, tasks);
-        return display(printable);
+        return printable;
     }
 
     void showGreetingsMessage() {
@@ -32,8 +32,8 @@ public class Ui {
         System.out.println(display("Error saving tasks"));
     }
 
-    void showErrorMessage(Exception e) {
-        System.out.println(display(e.getMessage()));
+    String showErrorMessage(Exception e) {
+        return e.getMessage();
     }
 
     String display(String message) {

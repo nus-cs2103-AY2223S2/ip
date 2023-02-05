@@ -41,10 +41,8 @@ public class Duke {
         try {
             response = ui.acceptCommand(input);
             storage.saveTasksInFile(tasks);
-        } catch (DukeException e) {
-            response = e.getMessage();
-        } catch (IOException e) {
-            response = e.getMessage();
+        } catch (DukeException | IOException e) {
+            response = ui.showErrorMessage(e);
         }
         return response;
     }
