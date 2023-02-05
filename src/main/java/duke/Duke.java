@@ -11,10 +11,6 @@ import java.io.FileNotFoundException;
 
 public class Duke {
 
-    enum Type {
-        TODO, DEADLINE, EVENT
-    }
-
     private static TaskList tasks;
     private Ui ui;
     private static final String FILEPATH = "duke.txt";
@@ -36,7 +32,6 @@ public class Duke {
     public static void main(String[] args) {
         new Duke().initDuke();
     }
-
 
 
     public void initDuke() {
