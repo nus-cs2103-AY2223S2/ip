@@ -9,7 +9,7 @@ import java.time.format.DateTimeParseException;
 public class Deadline extends Task {
     protected String byStr;
     protected LocalDateTime byDateTime;
-    protected static DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+    protected static DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d-M-yyyy HHmm");
     protected static DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM d yyyy, hh:mma");
 
     /**
@@ -42,8 +42,8 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return String.format(
-            "%s (by: %s)", 
-            super.toString(), 
+            "%s (by: %s)",
+            super.toString(),
             byDateTime == null ? byStr : byDateTime.format(outputFormatter)
         );
     }

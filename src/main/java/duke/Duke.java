@@ -39,6 +39,7 @@ public class Duke extends Application {
         this(DATA_DIR + DATA_FILENAME);
     }
     /**
+     * [DEPRECATED]
      * Returns a Duke object.
      * @param filePath The file path where the data file is located.
      */
@@ -56,8 +57,8 @@ public class Duke extends Application {
     }
 
     /**
-     * Runs the task bot on the command line.
      * [DEPRECATED]
+     * Runs the task bot on the command line.
      */
     public void run() {
         ui.showNormalMessage(WELCOME_MESSAGE);

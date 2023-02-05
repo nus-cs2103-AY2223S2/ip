@@ -1,8 +1,12 @@
-E | 1 | Halloween Horror Night | 29/10/2023 | 31/10/2023
 D | 0 | Assignment | 30/1/2023 2359
-D | 0 | CS3230 Assignment 1 | 1/2/2023 2359
 T | 1 | Homework
 D | 0 | Assigment | 3/3/2023 2359
 T | 0 | Laundry
 T | 1 | Sweep the floor
 E | 0 | CS3230 Exam | 15/3/2023 1400 | 15/3/2023 1600
+T | 0 | Wash the dishes
+D | 0 | Tutorial Assignemnt | Tommorow
+E | 0 | IYPT | Jan | May
+E | 0 | SYPT | August | September
+D | 0 | Exam Preperation | 16-3-2002
+D | 0 | Another Exam Prep | 16-3-2002 2359
