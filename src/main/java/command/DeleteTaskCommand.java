@@ -34,7 +34,7 @@ public class DeleteTaskCommand extends Command {
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         if (index > taskList.getTotalNumberOfTask()) {
             throw new DukeException("Index too large");
-        } else if (index <= 0) {
+        } else if (index < 0) {
             throw new DukeException("Index too small");
         }
         Task t = taskList.deleteTask(index);

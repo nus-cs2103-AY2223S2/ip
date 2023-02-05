@@ -1,12 +1,13 @@
 package command;
 
+import java.util.ArrayList;
+
 import main.DukeException;
 import main.Storage;
 import main.TaskList;
 import main.Ui;
 import task.Task;
 
-import java.util.ArrayList;
 
 /**
  * Find task that matches keyword.
