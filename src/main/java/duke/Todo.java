@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Represents a Todo task
+ */
 public class Todo extends Task {
 
     protected String icon = "[T]";
@@ -16,6 +19,4 @@ public class Todo extends Task {
     public String toString() {
         return "[T]" + super.toString();
     }
-
-
 }

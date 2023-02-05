@@ -1,43 +1,48 @@
 package duke;
 
-import java.util.ArrayList;
 import java.time.LocalDateTime;
-import java.lang.StringBuilder;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.time.format.DateTimeFormatter;
 
-
+/**
+ * Representation of the list containing tasks
+ */
 public class TaskList {
     private ArrayList<Task> list;
     private int length;
     private DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
     private DateTimeFormatter storageFormatter = DateTimeFormatter.ofPattern("MMM d yyyy, HH:mm");
 
-
-    public TaskList(ArrayList<String> tasks) {
+    /**
+     * Constructor for the TaskList class
+     * @param tasks
+     */
+    public TaskList(ArrayList<String> tasks) throws DukeException {
         this.list = new ArrayList<>();
         for (String s: tasks) {
             length++;
             String[] array = s.split("\\|");
 
             switch (array[0]) {
-                case "T": {
-                    this.addTask(new Todo(array[2], Boolean.parseBoolean(array[1])));
-                    break;
-                }
-                case "D": {
-                    LocalDateTime byDate = LocalDateTime.parse(array[3], storageFormatter);
-                    this.addTask(new Deadline(array[2], byDate, Boolean.parseBoolean(array[1])));
-                    break;
-                }
-                case "E": {
-                    LocalDateTime fromDate = LocalDateTime.parse(array[3], storageFormatter);
-                    LocalDateTime toDate = LocalDateTime.parse(array[4], storageFormatter);
-                    this.addTask(new Event(array[2], fromDate, toDate, Boolean.parseBoolean(array[1])));
-                    break;
-                }
-
+            case "T": {
+                this.addTask(new Todo(array[2], Boolean.parseBoolean(array[1])));
+                break;
+            }
+            case "D": {
+                LocalDateTime byDate = LocalDateTime.parse(array[3], storageFormatter);
+                this.addTask(new Deadline(array[2], byDate, Boolean.parseBoolean(array[1])));
+                break;
+            }
+            case "E": {
+                LocalDateTime fromDate = LocalDateTime.parse(array[3], storageFormatter);
+                LocalDateTime toDate = LocalDateTime.parse(array[4], storageFormatter);
+                this.addTask(new Event(array[2], fromDate, toDate, Boolean.parseBoolean(array[1])));
+                break;
+            }
+            default:
+                throw new DukeException("Error Task Type!!");
             }
         }
 
@@ -73,6 +78,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Method that parses the user input
+     * @param userInput input given by the user
+     * @throws DukeException
+     */
     public void parser(String userInput) throws DukeException {
         if (userInput.equals("list")) {
             System.out.println(" Here are the tasks in your list:");
@@ -167,9 +177,9 @@ public class TaskList {
     public String printList() {
         StringBuilder sb = new StringBuilder("Here are the tasks in your list: \n");
 
-        for(int i = 0; i < list.size(); i++) {
+        for (int i = 0; i < list.size(); i++) {
             int index = i + 1;
-            sb.append( index + ". " + list.get(i) + "\n");
+            sb.append(index + ". " + list.get(i) + "\n");
         }
         return (sb.toString());
     }

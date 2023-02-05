@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Represents the UI
+ */
 public class Ui {
 
     public Ui() {

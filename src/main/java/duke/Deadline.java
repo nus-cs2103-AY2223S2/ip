@@ -3,11 +3,23 @@ package duke;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a Deadline task
+ */
 public class Deadline extends Task {
 
+    /**
+     * The date and time stored.
+     */
     protected LocalDateTime by;
     protected DateTimeFormatter timeFormat;
 
+    /**
+     * Constructor for the Deadline Class
+     * @param description of the task
+     * @param by time that the task is due by
+     * @param isDone whether the task is done or not
+     */
     public Deadline(String description, LocalDateTime by, Boolean isDone) {
         super(description, 'D', isDone);
         this.by = by;

@@ -3,12 +3,22 @@ package duke;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Representation of the Event task
+ */
 public class Event extends Task {
 
     protected LocalDateTime from;
     protected LocalDateTime to;
     protected DateTimeFormatter timeFormat;
 
+    /**
+     * Constructor for the Event class
+     * @param description description of the task
+     * @param from start date
+     * @param to end date
+     * @param isDone whether the task is completed
+     */
     public Event(String description, LocalDateTime from, LocalDateTime to, Boolean isDone) {
         super(description, 'E', isDone);
         this.from = from;

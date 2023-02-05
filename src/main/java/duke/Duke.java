@@ -2,14 +2,20 @@ package duke;
 
 import java.util.Scanner;
 
-
+/**
+ * Class representing the Duke Application
+ */
 public class Duke {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
-
+    /**
+     * Main driver function for the duke Application
+     * @param args
+     * @throws Exception
+     */
     public static void main(String[] args) throws Exception {
 
         Storage database = new Storage("./data", "duke.txt");

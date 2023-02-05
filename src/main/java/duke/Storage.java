@@ -6,12 +6,19 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Class that manages the CRUD of the tasks
+ */
 public class Storage {
 
     private File folder;
     private File file;
 
-
+    /**
+     * Constructor for a new Storage class
+     * @param folderName location of the folder
+     * @param fileName name of the file doing read and write
+     */
     public Storage(String folderName, String fileName) {
         folder = new File(folderName);
         if (!folder.exists()) {
