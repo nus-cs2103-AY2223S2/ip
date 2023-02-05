@@ -12,7 +12,7 @@ import formatters.StringUtils;
 /**
  * Represents a basic task with a deadline.
  */
-public class Deadline extends Task {
+public class Deadline extends Task implements Comparable<Deadline> {
 
     private LocalDate deadlineDate;
     private LocalTime deadlineTime;
@@ -139,5 +139,26 @@ public class Deadline extends Task {
                 super.isCompleted() ? 1 : 0,
                 this.description,
                 this.deadline + " " + time);
+    }
+    public LocalDate getDeadlineDate() {
+        return deadlineDate;
+    }
+
+    public LocalTime getDeadlineTime() {
+        return deadlineTime;
+    }
+
+    @Override
+    public int compareTo(Deadline anotherDeadline) {
+        LocalTime otherTime = anotherDeadline.getDeadlineTime();
+        LocalDate otherDate = anotherDeadline.getDeadlineDate();
+        if (deadlineDate.equals(otherDate)) {
+            return deadlineTime.isBefore(otherTime)
+                    ? -1
+                    : 1;
+        }
+        return deadlineDate.isBefore(otherDate)
+                ? -1
+                : 1;
     }
 }

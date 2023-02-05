@@ -8,6 +8,7 @@ import commands.ExitCommand;
 import commands.FindTaskCommand;
 import commands.ListCommand;
 import commands.MarkTaskCommand;
+import commands.SortDeadlinesCommand;
 import commands.UnmarkTaskCommand;
 import exceptions.DukeException;
 import exceptions.IncompleteCommandException;
@@ -35,7 +36,13 @@ public class CommandParser extends Parser {
                 throw new IncompleteCommandException(String.format("Hrrmmm. Not enough arguments, "
                         + "%s has. Hmm", commands[0]), null);
             }
-            Commands command = Commands.valueOf(commands[0].toUpperCase());
+            Commands command;
+            if (commands[0].equalsIgnoreCase("sort")
+                    && commands[1].equalsIgnoreCase("deadlines")) {
+                command = Commands.SORTDEADLINES;
+            } else {
+                command = Commands.valueOf(commands[0].toUpperCase());
+            }
             switch (command) {
             case LIST:
                 return new ListCommand();
@@ -55,6 +62,8 @@ public class CommandParser extends Parser {
             case FIND:
                 String keywords = StringUtils.joinString(commands, 1, commands.length - 1);
                 return new FindTaskCommand(keywords.trim());
+            case SORTDEADLINES:
+                return new SortDeadlinesCommand();
             default:
                 throw new UnknownCommandException("Fall to the Dark Side, you must not. "
                         + "Invalid Command!", null);

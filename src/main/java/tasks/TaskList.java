@@ -19,6 +19,15 @@ public class TaskList {
     }
 
     /**
+     * Constructor for Task List.
+     * @param deadlines deadline tasks to be added into task list at initialisation
+     */
+    public TaskList(ArrayList<? extends Task> deadlines) {
+        this.taskList = new ArrayList<>();
+        taskList.addAll(deadlines);
+    }
+
+    /**
      * Adds task to the task list String array.
      * @param task name of the task
      */
@@ -70,6 +79,16 @@ public class TaskList {
             System.out.printf("%d tasks in the Jedi Archives, I find%n", filteredTasks.getSize());
         }
         return filteredTasks;
+    }
+    public ArrayList<Deadline> getDeadlineTasks() {
+        ArrayList<Deadline> deadlineTasks = new ArrayList<>();
+        taskList.stream()
+                .filter(x -> x.getTaskType().equals("D"))
+                .forEach(task -> {
+                    Deadline deadline = (Deadline) task;
+                    deadlineTasks.add(deadline);
+                });
+        return deadlineTasks;
     }
 
     /**
