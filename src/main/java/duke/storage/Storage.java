@@ -45,6 +45,7 @@ public class Storage {
      * @param line
      */
     private void deleteLine(String line) {
+        assert this.storageFile.exists() : "File to be deleted from does not exist!";
         File tempFile = new File("temp.txt");
         try {
             BufferedReader reader = new BufferedReader(new FileReader(this.storageFile));
@@ -53,19 +54,17 @@ public class Storage {
             String rmLine = line;
             String currLine;
             boolean done = false;
-            boolean linesLeft = true;
-            while (linesLeft) {
+            while (true) {
                 currLine = reader.readLine();
                 if (currLine == null) {
-                    linesLeft = false;
-                } else {
-                    String trimmedLine = currLine.trim();
-                    if (trimmedLine.equals(rmLine) && !done) {
-                        done = true;
-                        continue;
-                    }
-                    writer.write(currLine + "\n");
+                    break;
                 }
+                String trimmedLine = currLine.trim();
+                if (trimmedLine.equals(rmLine) && !done) {
+                    done = true;
+                    continue;
+                }
+                writer.write(currLine + "\n");
             }
             writer.close();
             reader.close();
@@ -81,27 +80,26 @@ public class Storage {
      * @param newLine Line to be modified into.
      */
     private void modifyLine(String line, String newLine) {
+        assert this.storageFile.exists() : "File to be modified does not exist!";
         File tempFile = new File("temp.txt");
         try {
             BufferedReader reader = new BufferedReader(new FileReader(this.storageFile));
             BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
 
-            String rmLine = line;
+            String lineToBeModified = line;
             String currLine;
             boolean done = false;
-            boolean linesLeft = true;
-            while (linesLeft) {
+            while (true) {
                 currLine = reader.readLine();
                 if (currLine == null) {
-                    linesLeft = false;
+                    break;
+                }
+                String trimmedLine = currLine.trim();
+                if (trimmedLine.equals(lineToBeModified) && !done) {
+                    done = true;
+                    writer.write(newLine + "\n");
                 } else {
-                    String trimmedLine = currLine.trim();
-                    if (trimmedLine.equals(rmLine) && !done) {
-                        done = true;
-                        writer.write(newLine + "\n");
-                    } else {
-                        writer.write(currLine + "\n");
-                    }
+                    writer.write(currLine + "\n");
                 }
             }
             writer.close();
@@ -117,6 +115,7 @@ public class Storage {
      * @param text Line of text to be added.
      */
     private void appendToFile(String text) {
+        assert this.storageFile.exists() : "File to be written to does not exist!";
         try {
             FileWriter fw = new FileWriter(this.storageFile, true); // create a FileWriter in append mode
             fw.write(text + "\n");
@@ -131,47 +130,43 @@ public class Storage {
      */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> userTasks = new ArrayList<>();
-        if (this.storageFile.exists()) {
-            try {
-                BufferedReader reader = new BufferedReader(new FileReader(this.storageFile));
-
-                String currLine;
-                boolean linesLeft = true;
-                while (linesLeft) {
-                    currLine = reader.readLine();
-                    if (currLine == null) {
-                        linesLeft = false;
-                    } else {
-                        String[] fields = currLine.split(Pattern.quote(" | "));
-                        if (fields[0].equals("T")) {
-                            Task t = new ToDo(fields[2]);
-                            if (fields[1].equals("1")) {
-                                t.markAsDone();
-                            }
-                            userTasks.add(t);
-                        } else if (fields[0].equals("D")) {
-                            Task t = new Deadline(fields[2], fields[3]);
-                            if (fields[1].equals("1")) {
-                                t.markAsDone();
-                            }
-                            userTasks.add(t);
-                        } else if (fields[0].equals("E")) {
-                            Task t = new Event(fields[2], fields[3], fields[4]);
-                            if (fields[1].equals("1")) {
-                                t.markAsDone();
-                            }
-                            userTasks.add(t);
-                        }
-                    }
-                }
-                reader.close();
-            } catch (IOException e) {
-                throw new DukeException("Error loading file");
-            }
-            return userTasks;
-        } else {
+        if (!this.storageFile.exists()) {
             return userTasks;
         }
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(this.storageFile));
+            String currLine;
+            while (true) {
+                currLine = reader.readLine();
+                if (currLine == null) {
+                    break;
+                }
+                parseTaskFromFile(userTasks, currLine);
+            }
+            reader.close();
+        } catch (IOException e) {
+            throw new DukeException("Error loading file");
+        }
+        return userTasks;
+    }
+
+    private static void parseTaskFromFile(ArrayList<Task> userTasks, String currLine) {
+        String[] fields = currLine.split(Pattern.quote(" | "));
+        Task t;
+        if (fields[0].equals("T")) {
+            t = new ToDo(fields[2]);
+        } else if (fields[0].equals("D")) {
+            t = new Deadline(fields[2], fields[3]);
+        } else if (fields[0].equals("E")) {
+            t = new Event(fields[2], fields[3], fields[4]);
+        } else {
+            //Do not add invalid task to userTasks
+            return;
+        }
+        if (fields[1].equals("1")) {
+            t.markAsDone();
+        }
+        userTasks.add(t);
     }
 
     /**

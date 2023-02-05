@@ -9,7 +9,7 @@ public class Ui {
     public static final String LS = System.lineSeparator();
     public static final String DIVIDER = "---------------------------------------------------------";
     public static final String WARNING = "************************************";
-    public static final String DATE_TIME_FORMAT = "DD-MM-YYYY Time";
+    public static final String DATE_TIME_FORMAT = "DD/MM/YYYY Time";
     private Scanner allCommands = new Scanner(System.in);
 
     private String response = showWelcome();
@@ -71,7 +71,8 @@ public class Ui {
      * @param message Message to be printed.
      */
     public void display(String message) {
-         this.response = message;
+        assert message != null : "Message to be displayed is invalid!";
+        this.response = message;
     }
 
     public String getResponse() {

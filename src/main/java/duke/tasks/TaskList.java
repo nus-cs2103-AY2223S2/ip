@@ -17,6 +17,7 @@ public class TaskList {
         this.tasks = tasks;
     }
     public void addTask(Task t) {
+        assert t != null : "The task being added is invalid!";
         tasks.add(t);
     }
     public void removeTask(int i) {
