@@ -64,7 +64,7 @@ public class Command {
      *
      * @param arg Argument in string.
      * @return Argument in enumeration.
-     * @throws IllegalArgumentException if input string is not a valid enum.
+     * @throws IllegalArgumentException If input string is not a valid enum.
      */
     public static Argument parseArgument(String arg)
             throws IllegalArgumentException {
@@ -83,7 +83,7 @@ public class Command {
      * Checks if the command contains an argument key.
      *
      * @param arg Argument to check.
-     * @return true if the argument exists, false otherwise.
+     * @return true If the argument exists, false otherwise.
      */
     public boolean hasArg(Argument arg) {
         return arguments.containsKey(arg);
@@ -93,7 +93,7 @@ public class Command {
      * Checks if a specific argument in command has a value.
      *
      * @param arg Argument to check.
-     * @return true if argument exists and value is a non-empty string,
+     * @return true If argument exists and value is a non-empty string,
      *         false otherwise.
      */
     public boolean hasValue(Argument arg) {

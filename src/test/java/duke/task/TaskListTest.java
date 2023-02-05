@@ -32,8 +32,8 @@ public class TaskListTest {
         Task task3 = tasks.execute(command3);
 
         String[] results = tasks.findAll("kword").split("\n");
-        assertEquals(2, results.length);
         assertEquals("0. " + task1, results[0]);
+        assertEquals(2, results.length);
         assertEquals("2. " + task3, results[1]);
     }
 

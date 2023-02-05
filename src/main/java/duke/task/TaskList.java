@@ -52,7 +52,7 @@ public class TaskList {
      * Executes a given command.
      *
      * @param command Command to be executed.
-     * @return The task involved in the command.
+     * @return Task involved in the command.
      */
     public Task execute(Command command) {
         Task task = null;
@@ -103,7 +103,7 @@ public class TaskList {
     /**
      * Saves the task list to disk.
      *
-     * @throws IOException when there is an exception when writing to file or directory.
+     * @throws IOException When there is an exception when writing to file or directory.
      */
     public void save(FileWriter fileWriter) throws IOException {
         for (int i = 0; i < tasks.size(); i++) {
