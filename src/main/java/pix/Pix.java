@@ -18,6 +18,7 @@ public class Pix {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
+        assert input != null:"Input cannot be null";
         MyData data = new MyData();
         Ui ui = new Ui();
         Parser parser = new Parser(data);
