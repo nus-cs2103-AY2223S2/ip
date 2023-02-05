@@ -45,7 +45,7 @@ public class Parser {
      * @param userInput The user input.
      * @return The command.
      */
-    public Command parseCommand(String userInput) {
+    public static Command parseCommand(String userInput) {
         CommandList command = CommandList.findCommand(userInput.split(" ")[0]);
         if (command == null) {
             throw new InvalidInputException(null);
@@ -88,7 +88,7 @@ public class Parser {
      * @param message The message to be checked.
      * @throws NoDescriptionException Throws if no description is found.
      */
-    private void checkForDescription(String message) throws NoDescriptionException {
+    private static void checkForDescription(String message) throws NoDescriptionException {
         String[] temp = message.split(" ");
         if (temp.length == 1) {
             throw new NoDescriptionException(temp[0], null);
@@ -100,7 +100,7 @@ public class Parser {
      * @param message The message to be checked.
      * @throws NoDateException Throws if no date(s) is/are found.
      */
-    private void checkForDate(String message) throws NoDateException {
+    private static void checkForDate(String message) throws NoDateException {
         if (!message.contains("/by") && !(message.contains("/to") && message.contains("/from"))) {
             throw new NoDateException(message.split(" ")[0], null);
         }

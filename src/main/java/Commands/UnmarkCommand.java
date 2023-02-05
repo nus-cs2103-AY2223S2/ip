@@ -34,12 +34,13 @@ public class UnmarkCommand extends Command {
      * @param tasks The database.
      * @param ui The user interface.
      * @param storage The storage.
+     * @return String for executing the command.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task task = tasks.getTaskByIndex(this.taskNumber - 1);
         task.setUndone();
-        ui.showUnmarkTask(task);
+        return ui.showUnmarkTask(task);
     }
 
     /**

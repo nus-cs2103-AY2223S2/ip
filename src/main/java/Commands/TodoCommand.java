@@ -33,12 +33,13 @@ public class TodoCommand extends Command {
      * @param tasks The database.
      * @param ui The user interface.
      * @param storage The storage.
+     * @return String for executing the command.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         ToDo toDo = new ToDo(this.description);
         tasks.addTask(toDo);
-        ui.showAddTask(toDo, tasks.getSize());
+        return ui.showAddTask(toDo, tasks.getSize());
     }
 
     /**

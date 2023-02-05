@@ -49,12 +49,13 @@ public class DeadlineCommand extends Command {
      * @param tasks The database.
      * @param ui The user interface.
      * @param storage The storage.
+     * @return String for executing the command.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         Deadline deadline = new Deadline(this.description, this.by);
         tasks.addTask(deadline);
-        ui.showAddTask(deadline, tasks.getSize());
+        return ui.showAddTask(deadline, tasks.getSize());
     }
 
     /**

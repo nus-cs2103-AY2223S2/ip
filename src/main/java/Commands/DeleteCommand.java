@@ -34,11 +34,12 @@ public class DeleteCommand extends Command {
      * @param tasks The database.
      * @param ui The user interface.
      * @param storage The storage.s
+     * @return String for executing the command.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task task = tasks.removeTaskByIndex(this.taskNumber - 1);
-        ui.showDeleteTask(task, tasks.getSize());
+        return ui.showDeleteTask(task, tasks.getSize());
     }
 
     /**

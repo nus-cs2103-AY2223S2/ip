@@ -60,17 +60,16 @@ public class Storage {
                 } else {
                     task = new Event(temp[2], temp[3], temp[4]);
                 }
-
+                
                 if (temp[1].equals("X")) {
                     task.setDone();
                 }
-                db.add(task);
-                brFile.close();
+                db.add(task);                
             }
+            brFile.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return db;
     }
 
@@ -119,7 +118,9 @@ public class Storage {
      * @return The formatted string representation of the date.
      */
     private String formatLocalDateTime(LocalDateTime date) {
-        return date.getYear() + "-" + date.getMonthValue() + "-" + date.getDayOfMonth() + " "
+        return date.getYear() + "-"
+            + (date.getMonthValue() < 10 ? "0" + date.getMonthValue() : date.getMonthValue()) + "-" 
+            + (date.getDayOfMonth() < 10 ? "0" + date.getDayOfMonth() : date.getDayOfMonth()) + " "
             + (date.getHour() < 10 ? "0" + date.getHour() : date.getHour())
             + (date.getMinute() < 10 ? "0" + date.getMinute() : date.getMinute());
     }

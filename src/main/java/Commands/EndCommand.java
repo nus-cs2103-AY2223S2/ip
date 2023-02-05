@@ -13,11 +13,12 @@ public class EndCommand extends Command {
      * @param tasks The database.
      * @param ui The user interface.
      * @param storage The storage.
+     * @return String for executing the command.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showFarewell();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         storage.store(tasks);
+        return ui.showFarewell();
     }
 
     /**

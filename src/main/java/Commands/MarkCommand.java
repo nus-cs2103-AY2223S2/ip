@@ -33,13 +33,14 @@ public class MarkCommand extends Command {
      * Mark the task.
      * @param tasks The database.
      * @param ui The user interface.
-     * @param storage The storage.s
+     * @param storage The storage.
+     * @return String for executing the command.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task task = tasks.getTaskByIndex(this.taskNumber - 1);
         task.setDone();
-        ui.showMarkTask(task);
+        return ui.showMarkTask(task);
     }
 
     /**

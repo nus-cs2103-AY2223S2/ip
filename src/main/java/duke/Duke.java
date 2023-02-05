@@ -46,7 +46,7 @@ public class Duke {
             try {
                 String fullCommand = ui.readCommand();
                 ui.showLine();
-                Command c = new Parser().parseCommand(fullCommand);
+                Command c = Parser.parseCommand(fullCommand);
                 c.execute(tasks, ui, storage);
                 isContinueConvo = c.isContinueConvo();
             } catch (DukeException e) {
@@ -55,6 +55,19 @@ public class Duke {
                 e.printStackTrace();
             }
             ui.showLine();
+        }
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parseCommand(input);
+            return c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            return e.getMessage();
         }
     }
 }

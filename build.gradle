@@ -52,7 +52,7 @@ test {
 }
 
 application {
-    mainClassName = "duke.Main"
+    mainClassName = "seedu.duke.Main"
 }
 
 shadowJar {

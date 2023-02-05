@@ -1,7 +1,5 @@
 package commands;
 
-import java.io.IOException;
-
 import storage.Storage;
 import storage.TaskList;
 import ui.Ui;
@@ -15,8 +13,9 @@ public abstract class Command {
      * @param tasks The database.
      * @param ui The user interface.
      * @param storage The storage.s
+     * @return The reply for executing the command
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws IOException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage);
 
     /**
      * Check to continue the conversation.
