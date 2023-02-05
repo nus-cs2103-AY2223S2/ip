@@ -53,6 +53,7 @@ public class Duke {
      * @return Response from Duke.
      */
     public String getResponse(String command) {
+        assert command != "" : "Command should not be empty!";
         try {
             Command userCommand = Parser.parse(command);
             return userCommand.execute(tasks, storage, ui);
