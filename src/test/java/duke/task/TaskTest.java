@@ -16,6 +16,5 @@ public class TaskTest {
         };
         assertEquals(true, task.contains("keyword"));
         assertEquals(false, task.contains("notKeyword"));
-
     }
 }

@@ -60,20 +60,20 @@ public class TaskList {
         case TODO:
             task = new Todo(
                     command.getArgumentValue(Command.Argument.TODO));
-            tasks.add(task);
+            addTask(task);
             break;
         case DEADLINE:
             task = new Deadline(
                     command.getArgumentValue(Command.Argument.DEADLINE),
                     command.getArgumentValue(Command.Argument.BY));
-            tasks.add(task);
+            addTask(task);
             break;
         case EVENT:
             task = new Event(
                     command.getArgumentValue(Command.Argument.EVENT),
                     command.getArgumentValue(Command.Argument.FROM),
                     command.getArgumentValue(Command.Argument.TO));
-            tasks.add(task);
+            addTask(task);
             break;
         case MARK:
             task = tasks.get(Integer.parseInt(command.getArgumentValue(
@@ -89,6 +89,15 @@ public class TaskList {
             assert false : "Unhandled command: " + command;
         }
         return task;
+    }
+
+    private void addTask(Task task) {
+        if (tasks.contains(task)) {
+            throw new IllegalStateException("Task " + task
+                    + " already exists");
+        } else {
+            tasks.add(task);
+        }
     }
 
     /**

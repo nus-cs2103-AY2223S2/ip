@@ -64,4 +64,20 @@ public abstract class Task {
     public String toString() {
         return (isDone ? "[X] " : "[ ] ") + description;
     }
+
+    /**
+     * Returns whether this task have the same description as another task.
+     *
+     * @param other Other object.
+     * @return true if other object is a task and has the same description,
+     *         false otherwise.
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (!(other instanceof Task)) {
+            return false;
+        }
+        Task task = (Task) other;
+        return description.equals(task.description);
+    }
 }

@@ -47,4 +47,20 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";
     }
+
+    /**
+     * Returns whether this deadline have the same description and deadline as another deadline.
+     *
+     * @param other Other object.
+     * @return true if other object is a deadline and has the same description and deadline,
+     *         false otherwise.
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (!(super.equals(other) && (other instanceof Deadline))) {
+            return false;
+        }
+        Deadline deadline = (Deadline) other;
+        return by.equals(deadline.by);
+    }
 }

@@ -89,4 +89,20 @@ public class DateTime {
                     + "expected: \"TTTT\" actual: " + time);
         }
     }
+
+    /**
+     * Returns whether this datetime represents the same date and time as another datetime.
+     *
+     * @param other Other object.
+     * @return true if other object is a datetime and represents the same date and time
+     *         as this datetime.
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (!(other instanceof DateTime)) {
+            return false;
+        }
+        DateTime dateTime = (DateTime) other;
+        return toString().equals(dateTime.toString());
+    }
 }
