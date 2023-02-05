@@ -48,6 +48,10 @@ public abstract class DateTime {
      * @return true if start happens before or is equal to end, else false.
      */
     public static boolean isValidDuration(Temporal start, Temporal end) {
+        assert start != null : "Invalid start temporal.";
+        assert end != null : "Invalid end temporal.";
+
+
         if (start instanceof LocalDateTime && end instanceof LocalDateTime) {
             return ((LocalDateTime) end).isAfter((LocalDateTime) start)
                     || ((LocalDateTime) end).equals((LocalDateTime) start);
@@ -73,6 +77,9 @@ public abstract class DateTime {
      * @return true if both refer to the same day, else false.
      */
     public static boolean isEqualDate(Temporal start, Temporal end) {
+        assert start != null : "Start is an invalid temporal.";
+        assert end != null : "End is an invalid temporal.";
+
         if (start instanceof LocalDateTime && end instanceof LocalDateTime) {
             return ((LocalDateTime) end).equals((LocalDateTime) start);
         } else if (start instanceof LocalDate && end instanceof LocalDate) {
@@ -95,6 +102,7 @@ public abstract class DateTime {
      * @return a string representing the formatted deadline.
      */
     public static String formatDate(Temporal date) {
+        assert date != null : "Invalid temporal.";
         if (date instanceof LocalDateTime) {
             //Case 1: Got date and time
             LocalDateTime dateTimeObject = (LocalDateTime) date;

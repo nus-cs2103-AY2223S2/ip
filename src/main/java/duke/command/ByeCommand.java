@@ -9,11 +9,10 @@ public class ByeCommand extends Command {
 
 
     /**
-     * Constructs a <code>ByeCommand</code>.
+     * Constructs a {@code ByeCommand}.
      */
     public ByeCommand() {
         super();
-        isExit = true;
     }
 
     /**

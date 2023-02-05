@@ -53,9 +53,7 @@ public class Storage {
         if (!directory.exists()) {
             boolean makeDirectoryStatus = directory.mkdir();
             if (!makeDirectoryStatus) {
-                Ui.printStraightLine();
                 System.out.println("Folder cannot be created.");
-                Ui.printStraightLine();
                 return false;
             }
         }
@@ -65,11 +63,9 @@ public class Storage {
         try {
             dataFile.createNewFile();
         } catch (IOException ioException) {
-            Ui.printStraightLine();
             System.out.println("File cannot be created.");
             System.out.println("The following error occurred: ");
             System.out.println(ioException.getMessage());
-            Ui.printStraightLine();
             return false;
         }
         return true;
@@ -145,7 +141,9 @@ public class Storage {
                         return false;
                     }
                 default:
-                    //Do nothing
+                    //Should never reach here because data file should only be to-do, deadline or event. Hence,
+                    //each line should start with 'T', 'D' or 'E'.
+                    assert false;
                 }
             }
             s.close();
@@ -173,6 +171,10 @@ public class Storage {
             fw.write("");
             fw.flush();
             fw = new FileWriter(dataFilePath, true);
+
+            //Sanity check
+            int count = 0;
+
             //Append new content into file
             for (int i = 0; i < tasks.getSizeOfTaskList(); i = i + 1) {
                 Task currentTask = tasks.getTask(i);
@@ -189,6 +191,8 @@ public class Storage {
                         + ((Event) currentTask).getRawEndDate();
                 if (i != tasks.getSizeOfTaskList() - 1) {
                     lineToAdd += "\n";
+                    count = count + 1;
+                    assert count == 1 : "Logic error";
                 }
                 fw.write(lineToAdd);
             }
@@ -196,10 +200,8 @@ public class Storage {
             fw.close();
             return true;
         } catch (IOException e) {
-            Ui.printStraightLine();
             System.out.println("Could not save the tasks locally. The following error occurred: ");
             System.out.println(e.getMessage());
-            Ui.printStraightLine();
             return false;
         }
     }
