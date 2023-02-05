@@ -2,6 +2,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import exception.WillyException;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.TaskList;
+import task.ToDos;
+
 public class Willy {
     public static void main(String[] args) {
         String logo = "Willy";
@@ -11,6 +18,7 @@ public class Willy {
         Scanner sc = new Scanner(System.in);
 
         List<Task> lst = new ArrayList<Task>();
+        TaskList tList = new TaskList();
 
         while (true) {
             // Init scanner
@@ -38,10 +46,12 @@ public class Willy {
                     lst.remove(Integer.parseInt(temp[1]) - 1);
                     System.out.format("Now you have %d things in your list%n", lst.size());
                 } else if (command.equals("list")) {
-                    for (int index = 0; index < lst.size(); index++) {
-                        Task curr = lst.get(index);
-                        System.out.println((index + 1) + ") " + curr.toString());
-                    }
+                    // for (int index = 0; index < lst.size(); index++) {
+                    //     Task curr = lst.get(index);
+                    //     System.out.println((index + 1) + ") " + curr.toString());
+                    // }
+                    tList.getTaskCount();
+                    System.out.println("test");
                 } else if (command.equals("bye")) {
                     System.out.println("Bye. Hope to see you again soon!");
                     System.exit(0);
@@ -51,10 +61,11 @@ public class Willy {
                 } else {
                     if (command.contains("todo")) {
                         if (command.length() > 4) {
-                            ToDos newT = new ToDos(command);
-                            lst.add(newT);
-                            System.out.println(newT.toString());
-                            System.out.format("Now you have %d things in your list%n", lst.size());
+                            // ToDos newT = new ToDos(command);
+                            // lst.add(newT);
+                            // System.out.println(newT.toString());
+                            // System.out.format("Now you have %d things in your list%n", lst.size());
+                            tList.addTodo(command);
                         } else {
                             throw new WillyException("☹ OOPS!!! The description of a todo cannot be empty.");
                         }
