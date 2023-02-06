@@ -32,6 +32,8 @@ public class Ui {
      * @param message Details of message to be printed.
      */
     public void println(String message) {
+        assert printCache != null;
+
         printCache.append(message).append("\n");
         System.out.println(message);
     }
@@ -44,6 +46,8 @@ public class Ui {
      * @param message Details of warning to be printed.
      */
     public void warn(String message) {
+        assert printCache != null;
+
         printCache.append("OOPS! ").append(message).append("\n");
         System.out.println("OOPS! " + message);
     }
@@ -53,6 +57,8 @@ public class Ui {
      * @return String of this print cache
      */
     public String getRecentMessage() {
+        assert printCache != null : "printCache is null";
+
         String recentMessage = printCache.toString();
         printCache = new StringBuilder(); // reset cache
         return recentMessage;

@@ -35,6 +35,8 @@ public class Duke extends Application {
         parser = new Parser();
         ui = new Ui();
 
+        assert Duke.flags != null : "Duke flags is null";
+
         // Retrieve saved data (if any)
         if (!Duke.flags.contains(Main.Flag.NO_LOAD_SAVES)) {
             storage.loadDataFromFile();
@@ -52,6 +54,8 @@ public class Duke extends Application {
     }
 
     private void displayTaskCount() {
+        assert taskList != null : "Duke has no taskList instance";
+
         if (taskList.isEmpty()) {
             ui.println("You do not have any task!");
         } else {
@@ -60,6 +64,9 @@ public class Duke extends Application {
     }
 
     private void displayTasks() {
+        assert taskList != null : "Duke has no taskList instance";
+        assert ui != null : "Duke has no ui instance";
+
         if (taskList.size() == 0) {
             ui.println("Your list is empty.");
         } else {
@@ -71,6 +78,10 @@ public class Duke extends Application {
     }
 
     private void addNewTask(Task task) {
+        assert taskList != null : "Duke has no taskList instance";
+        assert storage != null : "Duke has no storage instance";
+        assert ui != null : "Duke has no ui instance";
+
         taskList.add(task);
         ui.println("Got it. I've added this task:");
         ui.println("\t" + task);
@@ -85,6 +96,12 @@ public class Duke extends Application {
      * @return True if user has requested to exit program.
      */
     public boolean executeCommand(String userCmd) {
+        assert taskList != null : "Duke has no taskList instance";
+        assert storage != null : "Duke has no storage instance";
+        assert parser != null : "Duke has no parser instance";
+        assert ui != null : "Duke has no ui instance";
+
+
         int taskIdx;
         int descIdx;
         Task activeTask;
@@ -315,6 +332,8 @@ public class Duke extends Application {
     @Override
     public void stop() throws Exception {
         super.stop();
+
+        assert storage != null : "Duke has no storage instance";
         storage.saveDataToFile();
     }
 }
