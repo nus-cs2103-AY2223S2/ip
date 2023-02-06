@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import aqua.graphic.schedule.WeekSchedule;
-import aqua.graphic.schedule.ScheduleTimeable;
+import aqua.graphic.schedule.SchedulePeriod;
 import aqua.manager.TaskFilterReport;
 import aqua.usertask.UserTask;
 import javafx.css.PseudoClass;
@@ -41,7 +41,7 @@ public class TaskView extends UiComponent<VBox> {
 
 
     private void initialiseSchedule(LocalDateTime startTime, List<UserTask> tasks) {
-        List<ScheduleTimeable> timeables = tasks.stream()
+        List<SchedulePeriod> timeables = tasks.stream()
                 .map(task -> new TimedTask(task))
                 .collect(Collectors.toList());
         scheduleDisplayArea.getChildren().add(new WeekSchedule(startTime, timeables));
@@ -61,7 +61,7 @@ public class TaskView extends UiComponent<VBox> {
      * A {@code ScheduleTimeable} of a {@code UserTask} that has minimally
      * an end time.
      */
-    private static class TimedTask extends ScheduleTimeable {
+    private static class TimedTask extends SchedulePeriod {
         private final UserTask task;
 
 

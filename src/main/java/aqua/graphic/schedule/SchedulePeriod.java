@@ -2,12 +2,12 @@ package aqua.graphic.schedule;
 
 import java.util.List;
 
-import aqua.util.Timeable;
+import aqua.util.Period;
 import javafx.css.PseudoClass;
 
 
 /** A {@code Timeable} that can be displayed. */
-public abstract class ScheduleTimeable extends Timeable {
+public abstract class SchedulePeriod extends Period {
     /**
      * Returns the list of CSS styleclasses that should be added to this
      * {@code Timeable}.

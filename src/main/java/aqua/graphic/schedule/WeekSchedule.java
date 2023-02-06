@@ -28,8 +28,8 @@ public class WeekSchedule extends VBox {
      * @param startTime - the start time of the week.
      * @param timeables - the list of {@code ScheduleTimeable} to display.
      */
-    public WeekSchedule(LocalDateTime startTime, List<? extends ScheduleTimeable> timeables) {
-        List<? extends List<ScheduleTimeable>> rows = split(startTime, timeables);
+    public WeekSchedule(LocalDateTime startTime, List<? extends SchedulePeriod> timeables) {
+        List<? extends List<SchedulePeriod>> rows = split(startTime, timeables);
         getChildren().add(new ScheduleHeader(LABEL_WIDTH, ROW_WIDTH));
         for (int i = 0; i < rows.size(); i++) {
             addRow(startTime.plusDays(i), rows.get(i), i);
@@ -40,17 +40,17 @@ public class WeekSchedule extends VBox {
     /**
      * Splits a list of {@code ScheduleTimeable} into their day in the week.
      * The return type is a list of 7 lists of {@code ScheduleTimeable}.
-     * 
+     *
      * @param startTime - the time of the start of the week.
      * @param timeables - the list of {@code ScheduleTimeable} to split.
      */
-    private List<? extends List<ScheduleTimeable>> split(
-                LocalDateTime startTime, List<? extends ScheduleTimeable> timeables) {
-        ArrayList<ArrayList<ScheduleTimeable>> sepTimeables = new ArrayList<>(DAYS_IN_WEEK);
+    private List<? extends List<SchedulePeriod>> split(
+                LocalDateTime startTime, List<? extends SchedulePeriod> timeables) {
+        ArrayList<ArrayList<SchedulePeriod>> sepTimeables = new ArrayList<>(DAYS_IN_WEEK);
         for (int i = 0; i < DAYS_IN_WEEK; i++) {
             sepTimeables.add(new ArrayList<>());
         }
-        for (ScheduleTimeable timeable : timeables) {
+        for (SchedulePeriod timeable : timeables) {
             // timeables might span multiple days.
             // thus need to determine start and end days.
             int startDay = (int) startTime.until(timeable.getStart(), ChronoUnit.DAYS);
@@ -67,13 +67,13 @@ public class WeekSchedule extends VBox {
 
     /**
      * Creates and adds a {@code DaySchedule}.
-     * 
+     *
      * @param startTime - the time of the start of the day to create.
      * @param timeables - the list {@code ScheduleTimeable} to include in the
      *      day.
      * @param index - the index of the day.
      */
-    private void addRow(LocalDateTime startTime, List<ScheduleTimeable> timeables, int index) {
+    private void addRow(LocalDateTime startTime, List<SchedulePeriod> timeables, int index) {
         HBox box = createDayBox(index);
 
         Label dateLabel = createDateLabel(startTime);

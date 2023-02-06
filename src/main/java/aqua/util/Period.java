@@ -5,7 +5,7 @@ import java.time.temporal.ChronoUnit;
 
 
 /** Represents a time range. */
-public abstract class Timeable {
+public abstract class Period {
     public abstract LocalDateTime getStart();
     public abstract LocalDateTime getEnd();
 
