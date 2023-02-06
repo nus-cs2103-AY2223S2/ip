@@ -1,13 +1,15 @@
 package duke.Command;
 
 public enum Commands {
+    // TODO: use enum instead of text when parsing commands
     bye("bye"),
     mark("mark"),
     delete("delete"),
     list("list"),
     todo("todo "),
     deadline("deadline "),
-    event("event ");
+    event("event "),
+    find("find ");
 
 
     public final String label;

@@ -32,6 +32,10 @@ public abstract class Task {
         return this.description == null || this.description.trim().isEmpty();
     }
 
+    public boolean isMatch(String testStr) {
+        return this.description.contains(testStr);
+    }
+
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }

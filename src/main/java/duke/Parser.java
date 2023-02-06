@@ -5,6 +5,7 @@ import duke.Command.DeleteCommand;
 import duke.Command.ExitCommand;
 import duke.Command.ListCommand;
 import duke.Command.MarkCommand;
+import duke.Command.FindCommand;
 import duke.Exceptions.DukeException;
 import duke.Exceptions.TaskIndexException;
 import duke.Tasks.Task;
@@ -34,6 +35,8 @@ public class Parser {
                     // incorrect syntax
                     throw new TaskIndexException();
                 }
+            case "find":
+                return new FindCommand(inputArray[1]);
             default:
                 return Task.taskToCommand(input);
         }
