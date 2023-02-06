@@ -15,6 +15,7 @@ public class CommandMark extends Command {
      * Marks a specified Task at the position in the taskList specified by the user and returns
      * a String form of the action.
      * @param userInput The user's String input in array form.
+     * @return The mark confirmation message.
      * @throws DukeException Thrown if an error occurs.
      */
     @Override

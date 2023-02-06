@@ -14,6 +14,7 @@ public class CommandEvent extends Command {
     /**
      * Adds an Event task to the taskList and returns a String form of the action.
      * @param userInput The user's String input in array form.
+     * @return The event addition confirmation message.
      * @throws DukeException Thrown if an error occurs.
      */
     @Override

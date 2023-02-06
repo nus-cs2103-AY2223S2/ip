@@ -14,6 +14,7 @@ public class CommandToDo extends Command {
     /**
      * Adds a ToDo task to the taskList and returns a String form of the action.
      * @param userInput The user's String input in array form.
+     * @return The todo addition confirmation message.
      * @throws DukeException Thrown if an error occurs.
      */
     @Override

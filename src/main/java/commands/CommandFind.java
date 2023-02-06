@@ -12,6 +12,7 @@ public class CommandFind extends Command {
     /**
      * Finds and returns tasks in String form that match the user input query.
      * @param userInput The user's String input in array form.
+     * @return The find confirmation message.
      * @throws DukeException Thrown if an error occurs.
      */
     @Override
@@ -50,6 +51,7 @@ public class CommandFind extends Command {
      * @param taskList The user's TaskList.
      * @param index The index in the taskList where the subject is found.
      * @param query The query to compare the subject with.
+     * @return True if the subject matches the query, false otherwise.
      */
     public boolean matchesName(TaskList taskList, int index, String query) {
         String subject = taskList.get(index).getName();

@@ -9,6 +9,7 @@ public class CommandBye extends Command {
     /**
      * Returns a goodbye message.
      * @param userInput The user's String input in array form. Redundant.
+     * @return The goodbye message.
      * @throws DukeException Thrown if an error occurs. Redundant.
      */
     @Override

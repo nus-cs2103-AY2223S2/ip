@@ -12,6 +12,7 @@ public class CommandList extends Command {
     /**
      * Finds and returns all tasks in the taskList in String form.
      * @param userInput The user's String input in array form.
+     * @return The list confirmation message.
      * @throws DukeException Thrown if an error occurs.
      */
     @Override
@@ -32,6 +33,7 @@ public class CommandList extends Command {
     /**
      * Generates a list of the tasks present in the input taskList.
      * @param taskList The user's TaskList.
+     * @return The built list.
      */
     public String listMake(TaskList taskList) {
         StringBuilder newList = new StringBuilder();

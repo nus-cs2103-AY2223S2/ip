@@ -18,6 +18,7 @@ public class Parser {
     /**
      * Calls the Command type suitable for the user input.
      * @param parseInput The user input sent into the Parser.
+     * @return The message corresponding to the user command.
      * @throws DukeException Thrown by the individual switch cases.
      */
     public String parse(String parseInput) throws DukeException {
