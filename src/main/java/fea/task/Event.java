@@ -1,7 +1,6 @@
 package fea.task;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 /**
  * Event class that extends Task class.
  */
@@ -28,11 +27,6 @@ public class Event extends Task {
 
     public LocalDateTime getTo() {
         return to;
-    }
-
-    private String parseDateTime(LocalDateTime dateTime) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy hh:mma");
-        return dateTime.format(formatter);
     }
 
     @Override

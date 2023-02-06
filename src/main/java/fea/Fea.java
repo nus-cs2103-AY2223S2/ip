@@ -55,4 +55,12 @@ public class Fea {
     public Command parseInput(String input) {
         return Parser.parse(input);
     }
+
+    /**
+     * Gets the task list.
+     * @return TaskList The task list.
+     */
+    public TaskList getTaskList() {
+        return tasks;
+    }
 }

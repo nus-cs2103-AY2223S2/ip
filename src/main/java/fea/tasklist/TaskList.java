@@ -1,7 +1,9 @@
 package fea.tasklist;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+import fea.Main;
 import fea.exceptions.FeaException;
 import fea.storage.Storage;
 import fea.task.Task;
@@ -104,5 +106,22 @@ public class TaskList {
             }
         }
         return ui.printMatchingTasks(matchingTasksIndex, this.tasks);
+    }
+
+    /**
+     * Sets a reminder for a task.
+     * @param taskNum The task number of the task to set a reminder in task list.
+     * @param storage The storage object that handles saving to the data file.
+     * @param ui The ui object that handles printing to the user.
+     * @param reminder
+     * @return String The string of the task with the reminder.
+     * @throws FeaException If there is an exception saving to the data file.
+     */
+    public String setReminder(int taskNum, Storage storage, Ui ui, LocalDateTime reminder) throws FeaException {
+        int taskListIndex = taskNum - 1;
+        this.tasks.get(taskListIndex).setReminder(reminder);
+        Main.scheduleReminder(this.tasks.get(taskListIndex));
+        storage.saveTasks(this.tasks);
+        return ui.printReminderTask(this.tasks.get(taskNum - 1));
     }
 }

@@ -8,7 +8,6 @@ import fea.ui.Ui;
 /**
  * MarkCommand class that implements the Command interface.
  */
-
 public class MarkCommand implements Command {
 
     private static final String INVALID_TASK_NUMBER = "Please enter a valid task number!";

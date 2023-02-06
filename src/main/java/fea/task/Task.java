@@ -1,5 +1,8 @@
 package fea.task;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Task class that represents a task.
  */
@@ -7,6 +10,7 @@ package fea.task;
 public class Task {
     private String description;
     private boolean isMark;
+    private LocalDateTime reminder;
 
     /**
      * Constructor method to initialise Task.
@@ -25,6 +29,14 @@ public class Task {
         return isMark ? 'X' : ' ';
     }
 
+    public void setReminder(LocalDateTime reminder) {
+        this.reminder = reminder;
+    }
+
+    public LocalDateTime getReminder() {
+        return reminder;
+    }
+
     /**
      * Toggles the mark of the task.
      */
@@ -37,6 +49,18 @@ public class Task {
      */
     @Override
     public String toString() {
-        return String.format("[%c] %s", getMark(), this.description);
+        return String.format("[%c]%s %s", getMark(), printReminder(), this.description);
+    }
+
+    protected String parseDateTime(LocalDateTime dateTime) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy hh:mma");
+        return dateTime.format(formatter);
+    }
+
+    private String printReminder() {
+        if (this.reminder != null) {
+            return String.format(" (Reminder: %s)" , parseDateTime(this.reminder));
+        }
+        return "";
     }
 }

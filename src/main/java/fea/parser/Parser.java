@@ -8,6 +8,7 @@ import fea.commands.FindCommand;
 import fea.commands.InvalidCommand;
 import fea.commands.ListCommand;
 import fea.commands.MarkCommand;
+import fea.commands.ReminderCommand;
 
 /**
  * Parser class that parses the user input.
@@ -39,6 +40,8 @@ public class Parser {
             command = new MarkCommand(!lowercaseCommand.startsWith("unmark"), fullCommand);
         } else if (lowercaseCommand.startsWith("find")) {
             command = new FindCommand(fullCommand);
+        } else if (lowercaseCommand.startsWith("reminder")) {
+            command = new ReminderCommand(fullCommand);
         } else {
             command = new InvalidCommand();
         }

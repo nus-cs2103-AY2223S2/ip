@@ -12,7 +12,8 @@ import fea.tasklist.TaskList;
  */
 public class Ui {
 
-    public static final String WELCOME = "I'm still just an immature Servant, but I'll do what I can to help you.";
+    public static final String WELCOME = "Shielder Mash Kyrielight. \n"
+            + "I'm still just an immature Servant, but I'll do what I can to help you.";
     public static final String BYE = "Bye. Hope to see you again soon!";
     public static final String NO_TASKS = "No tasks added yet.";
     private static final String NO_TASKS_LOADED = "Data file was loaded but no tasks could be found.";
@@ -26,6 +27,7 @@ public class Ui {
     private static final String TASKS_LIST = "Here are the tasks in your list:\n";
     private static final String NO_TASKS_MATCH = "No matching tasks found.";
     private static final String TASKS_MATCH = "Here are the matching tasks in your list:";
+    private static final String SET_REMINDER = "Nice! I've set a reminder for this task:\n";
     private Logger logger = Logger.getLogger(Ui.class.getName());
 
     /**
@@ -128,6 +130,18 @@ public class Ui {
                 }
             }
         }
+        return message.toString();
+    }
+
+    /**
+     * Prints the reminder when it is set.
+     * @param task The task whose reminder is set.
+     * @return String The string of the printed reminder.
+     */
+    public String printReminderTask(Task task) {
+        StringBuilder message = new StringBuilder();
+        message.append(SET_REMINDER);
+        message.append(String.format("%s", task.toString()));
         return message.toString();
     }
 

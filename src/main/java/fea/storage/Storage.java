@@ -25,6 +25,7 @@ public class Storage {
     private static final String FILE_NOT_FOUND = "Data file could not be found.";
     private Path filePath;
     private final String fileNotCreated = String.format("File could not be created at %s", filePath);
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
 
     public Storage(String filePath) {
         this.filePath = Paths.get(filePath);
@@ -41,32 +42,28 @@ public class Storage {
             throw new FeaException(FILE_NOT_FOUND);
         }
         ArrayList<Task> loadedList = new ArrayList<>();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
         try (Scanner scanner = new Scanner(file)) {
             while (scanner.hasNextLine()) {
                 String[] args = scanner.nextLine().split(" \\| ");
                 checkTaskFormat(args[0], args[1]);
                 switch (args[0]) {
                 case "T":
-                    Todo newTodo = new Todo(args[2]);
-                    if (args[1].equals("1")) {
-                        newTodo.toggleMark();
-                    }
+                    Todo newTodo = new Todo(args[3]);
+                    checkMarkFromFile(newTodo, args[1]);
+                    setReminderFromFile(newTodo, args[2]);
                     loadedList.add(newTodo);
                     break;
                 case "D":
-                    Deadline newDeadline = new Deadline(args[2], LocalDateTime.parse(args[3], formatter));
-                    if (args[1].equals("1")) {
-                        newDeadline.toggleMark();
-                    }
+                    Deadline newDeadline = new Deadline(args[3], LocalDateTime.parse(args[4], formatter));
+                    checkMarkFromFile(newDeadline, args[1]);
+                    setReminderFromFile(newDeadline, args[2]);
                     loadedList.add(newDeadline);
                     break;
                 case "E":
-                    Event newEvent = new Event(args[2], LocalDateTime.parse(args[3], formatter),
-                            LocalDateTime.parse(args[4], formatter));
-                    if (args[1].equals("1")) {
-                        newEvent.toggleMark();
-                    }
+                    Event newEvent = new Event(args[3], LocalDateTime.parse(args[4], formatter),
+                            LocalDateTime.parse(args[5], formatter));
+                    checkMarkFromFile(newEvent, args[1]);
+                    setReminderFromFile(newEvent, args[2]);
                     loadedList.add(newEvent);
                     break;
                 default:
@@ -77,6 +74,26 @@ public class Storage {
             throw new FeaException(FILE_NOT_FOUND);
         }
         return loadedList;
+    }
+    /**
+     * Checks if the task is marked from the data file.
+     * @param task The task to be checked.
+     * @param mark Whether the task is marked.
+     */
+    public void checkMarkFromFile(Task task, String mark) {
+        if (mark.equals("1")) {
+            task.toggleMark();
+        }
+    }
+    /**
+     * Set the reminder of the task from the data file if it exists.
+     * @param task The task to set the reminder.
+     * @param reminder The reminder of the task.
+     */
+    public void setReminderFromFile(Task task, String reminder) {
+        if (!reminder.equals("")) {
+            task.setReminder(LocalDateTime.parse(reminder, formatter));
+        }
     }
     /**
      * Saves the tasks in the tasklist into the data file.
@@ -98,12 +115,14 @@ public class Storage {
         try (FileWriter fileWriter = new FileWriter(file)) {
             for (Task task : tasks) {
                 int mark = task.getMark().equals('X') ? 1 : 0;
-                String newString = String.format("T | %d | %s%n", mark, task.getDescription());
+                String reminder = task.getReminder() != null ? task.getReminder().toString() : "";
+                String newString = String.format("T | %d | %s | %s%n", mark, reminder,
+                            task.getDescription());
                 if (task instanceof Deadline) {
-                    newString = String.format("D | %d | %s | %s%n", mark,
+                    newString = String.format("D | %d | %s | %s | %s%n", mark, reminder,
                             task.getDescription(), ((Deadline) task).getBy());
                 } else if (task instanceof Event) {
-                    newString = String.format("E | %d | %s | %s | %s%n", mark,
+                    newString = String.format("E | %d | %s | %s | %s | %s%n", mark, reminder,
                             task.getDescription(), ((Event) task).getFrom(), ((Event) task).getTo());
                 }
                 fileWriter.write(newString);
