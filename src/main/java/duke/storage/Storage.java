@@ -30,6 +30,7 @@ public class Storage {
      * @param filePath the location of the storage file
      */
     public Storage(String filePath) {
+        assert pathNotEmpty(filePath);
         this.file = new File(filePath);
     }
 
@@ -127,7 +128,11 @@ public class Storage {
             throw new RuntimeException(e);
         }
     }
-
+    
+    private Boolean pathNotEmpty(String path) {
+      return !path.isEmpty();
+    }
+    
     private String getUpdatedLine(int lineToUpdate, int updateIndex, char newValue) {
         List<String> tasks = getSavedTasksAsList();
         StringBuilder sb = new StringBuilder(tasks.get(lineToUpdate));
