@@ -25,7 +25,7 @@ public abstract class Task implements Storable {
      * Constructs a Task with specified task status and description.
      *
      * @param isDone Status of the task (completed or not completed)
-     * @param description Task description
+     * @param description Description of task
      */
     public Task(boolean isDone, String description) {
         this.isDone = isDone;

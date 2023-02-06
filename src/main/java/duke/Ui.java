@@ -1,7 +1,8 @@
 package duke;
 
 /**
- * Customised how messages are printed to console.
+ * Customise how messages are printed to console.
+ * Allow messages to be printed elsewhere (eg. GUI) in batches.
  */
 public class Ui {
 
@@ -62,7 +63,6 @@ public class Ui {
      * Prints a buffer line.
      */
     void printBufferLine() {
-
         println("____________________________________________________________");
     }
 

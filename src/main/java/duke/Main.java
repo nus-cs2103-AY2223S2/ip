@@ -1,7 +1,6 @@
 package duke;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import javafx.application.Application;
 
@@ -11,7 +10,7 @@ import javafx.application.Application;
 public class Main {
 
     enum Flag {
-        CLI_MODE,
+        NO_GUI,
         NO_LOAD_SAVES,
     }
 
@@ -21,13 +20,13 @@ public class Main {
      * @param varargs Variable number of arguments provided by the program.
      * @return List of known flags detected.
      */
-    private static ArrayList<Flag> processVarArgs(String[] varargs) {
+    private static ArrayList<Flag> setEnvironment(String[] varargs) {
         ArrayList<Flag> flags = new ArrayList<>();
 
         // Process varargs, if any
         for (int i = 0; i < varargs.length; i++) {
-            if (varargs[i].compareTo("--cli") == 0) {
-                flags.add(Flag.CLI_MODE);
+            if (varargs[i].compareTo("--no-gui") == 0) {
+                flags.add(Flag.NO_GUI);
             } else if (varargs[i].compareTo("--no-load-saves") == 0) {
                 flags.add(Flag.NO_LOAD_SAVES);
             }
@@ -46,21 +45,17 @@ public class Main {
         System.out.println("Initialising system . . .");
 
         // Process varargs for flags
-        ArrayList<Flag> flags = processVarArgs(args);
-        Duke.setFlags(flags);
-
-        //Initialise components
-        Scanner sc = new Scanner(System.in);
-        Duke duke = new Duke();
+        ArrayList<Flag> envFlags = setEnvironment(args);
+        Duke.setFlags(envFlags);
 
         System.out.println("System is ready!");
-        duke.ui.println("\n\n");
-        duke.ui.printBufferLine();
 
-        if (flags.contains(Flag.CLI_MODE)) {
+        if (envFlags.contains(Flag.NO_GUI)) {
+            Duke duke = new Duke();
+            duke.ui.println("\n\n");
+            duke.ui.printBufferLine();
             duke.startAsCli();
         } else {
-            duke.ui.println("Launching GUI ...");
             Application.launch(Duke.class, args);
         }
     }

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
+import duke.Main.Flag;
 import duke.gui.MainWindow;
 import duke.storage.Storage;
 import javafx.application.Application;
@@ -18,7 +19,7 @@ import javafx.stage.Stage;
  */
 public class Duke extends Application {
 
-    private static ArrayList<Main.Flag> flags = new ArrayList<>();
+    private static ArrayList<Flag> flags = new ArrayList<>();
 
     public final Ui ui;
 
@@ -36,19 +37,19 @@ public class Duke extends Application {
         ui = new Ui();
 
         // Retrieve saved data (if any)
-        if (!Duke.flags.contains(Main.Flag.NO_LOAD_SAVES)) {
+        if (!Duke.flags.contains(Flag.NO_LOAD_SAVES)) {
             storage.loadDataFromFile();
         }
+    }
+
+    public static void setFlags(ArrayList<Flag> flags) {
+        Duke.flags = flags;
     }
 
     private static void assertThis(boolean expectsTrue, String failureMessage) throws DukeException {
         if (!expectsTrue) {
             throw new DukeException(failureMessage);
         }
-    }
-
-    public static void setFlags(ArrayList<Main.Flag> flags) {
-        Duke.flags = flags;
     }
 
     private void displayTaskCount() {
