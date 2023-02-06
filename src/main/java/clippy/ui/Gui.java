@@ -9,6 +9,9 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+/**
+ * A 'linker' between the FXML controllers and the main Clippy program.
+ */
 public class Gui extends Application {
     private Clippy clippy;
 

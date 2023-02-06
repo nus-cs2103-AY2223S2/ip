@@ -14,8 +14,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
-import clippy.ui.MainWindow;
-
 /**
  * An example of a custom control using FXML.
  * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
@@ -51,10 +49,22 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Creates a DialogBox to represent a user's input text.
+     * @param text The text to be displayed.
+     * @param img The image of the user.
+     * @return A DialogBox instance representing a user's speech box.
+     */
     public static DialogBox createUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Creates a DialogBox to represent Clippy's output text.
+     * @param text The text to be displayed.
+     * @param img The image of Clippy.
+     * @return A DialogBox instance representing Clippy's speech box.
+     */
     public static DialogBox createClippyDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

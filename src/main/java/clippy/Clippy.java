@@ -7,7 +7,6 @@ import clippy.storage.Storage;
 import clippy.task.TaskList;
 import clippy.ui.Gui;
 import clippy.ui.Ui;
-
 import javafx.application.Application;
 
 
