@@ -7,6 +7,19 @@ import duke.utilities.Parser;
  * the action to execute
  */
 public abstract class ICommand {
+    /**
+     * Represents type of actions
+     */
+    public enum Type {
+        Add,
+        Delete,
+        Exit,
+        Find,
+        ListTasks,
+        Mark,
+        Unmark
+
+    }
 
     private String msg = "Starting Command";
 

@@ -1,13 +1,17 @@
 package duke.tasks;
 
+import java.util.UUID;
+
 /**
  * Represents Task. A <code>ITask</code> abstract class corresponds to
  * the task
  */
-public abstract class ITask {
+public abstract class ITask implements Cloneable {
 
+    private final UUID id;
     private final String description;
     private boolean isDone;
+
 
     /**
      * Constructor for ITask
@@ -17,6 +21,7 @@ public abstract class ITask {
     public ITask(String description) {
         this.description = description;
         this.isDone = false;
+        id = UUID.randomUUID();
     }
 
     /**
@@ -28,8 +33,12 @@ public abstract class ITask {
     public ITask(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
-    }
+        id = UUID.randomUUID();
 
+    }
+    public UUID getId() {
+        return id;
+    }
     /**
      * TaskTypes represent different type of task
      */
@@ -93,6 +102,13 @@ public abstract class ITask {
      */
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
+    }
+    /**
+     * Clones the object
+     */
+    public Object clone() throws CloneNotSupportedException {
+
+        return super.clone();
     }
 
     @Override

@@ -46,7 +46,14 @@ public class Event extends ITask {
         return "[E] " + "/from: " + from.getTime()
                 + " /to: " + to.getTime() + " /content: " + super.toString();
     }
-
+    @Override
+    public boolean equals(Object obj) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        ITask task = (ITask) obj;
+        return task.getId() == this.getId();
+    }
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (from: "

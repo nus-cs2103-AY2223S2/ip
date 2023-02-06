@@ -12,6 +12,7 @@ import duke.utilities.Parser;
 public class Deadline extends ITask {
     private final Date by;
 
+
     /**
      * Constructor for Deadline
      *
@@ -39,7 +40,14 @@ public class Deadline extends ITask {
     public String toSaveFormat() {
         return "[D] " + "/by: " + by.getTime() + " /content: " + super.toString();
     }
-
+    @Override
+    public boolean equals(Object obj) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        ITask task = (ITask) obj;
+        return task.getId() == this.getId();
+    }
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: "
