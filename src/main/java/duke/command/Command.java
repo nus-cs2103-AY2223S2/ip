@@ -19,6 +19,7 @@ public abstract class Command {
      * @param taskList Tasklist object to be manipulated.
      * @param ui Ui object for printing.
      * @param storage Storage object for loading and saving.
+     * @return String representing the command executed
      * @throws DukeException Thrown when error occurs in execution of command.
      */
     public abstract String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;

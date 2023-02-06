@@ -1,7 +1,5 @@
 package duke;
 
-import java.util.Scanner;
-
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.storage.Storage;
@@ -32,28 +30,6 @@ public class Duke {
             storage.loadFromSave(taskList);
         } catch (DukeException e) {
             ui.print(e.getMessage());
-        }
-    }
-
-    /**
-     * Runs the Duke functionality.
-     */
-    public void run() {
-        Scanner s = new Scanner(System.in);
-        String text;
-        boolean isExit = false;
-
-        ui.printWelcome();
-
-        while (!isExit) {
-            text = s.nextLine();
-            try {
-                Command c = parser.parse(text);
-                c.execute(taskList, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.print(e.getMessage());
-            }
         }
     }
 
