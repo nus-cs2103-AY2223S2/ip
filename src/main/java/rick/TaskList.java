@@ -91,6 +91,7 @@ public class TaskList {
             throw new TaskListInvalidAccessException();
         }
         RickTask task = this.storage.setDone(i, true);
+        assert task != null; //Storage error
         return ui.section(
                 "Nice! I've marked this task as done:",
                 "  " + task
@@ -110,6 +111,7 @@ public class TaskList {
             throw new TaskListInvalidAccessException();
         }
         RickTask task = this.storage.setDone(i, false);
+        assert task != null; //Storage error
         return ui.section(
                 "OK, I've marked this task as not done yet:",
                 "  " + task
@@ -130,6 +132,7 @@ public class TaskList {
             throw new TaskListInvalidAccessException();
         }
         RickTask task = this.storage.delete(i);
+        assert task != null; //If storage error occurs
         return ui.section(
                 "Noted. I've removed this task:",
                 "  " + task,

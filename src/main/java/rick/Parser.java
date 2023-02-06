@@ -124,6 +124,8 @@ public class Parser {
                         + " Ensure it is a number!", cmd)
             ));
         }
+        assert false; //Execution should not reach this point - this is only
+        //called for "mark", "unmark", and "delete"
         return new ErrorCommand("An internal server error occurred");
     }
 }
