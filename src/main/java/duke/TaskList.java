@@ -120,6 +120,7 @@ public class TaskList implements Serializable {
 
     @Override
     public String toString() {
+        list.sort((a, b) -> b.priority.compareTo(a.priority));
         StringBuilder str = new StringBuilder();
         for (int i = 0; i < this.list.size(); i++) {
             str.append(String.format("%d: %s\n", i + 1, this.list.get(i)));
