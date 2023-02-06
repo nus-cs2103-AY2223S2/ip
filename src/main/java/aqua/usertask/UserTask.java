@@ -6,17 +6,16 @@ import java.util.Optional;
 import aqua.storage.Reloadable;
 
 
-/** Represents a task that the user wishes to track. */
+/** Represents a user created task. */
 public abstract class UserTask implements Reloadable {
     /** Tag of {@code isCompleted} argument when parsing. */
     public static final String TAG_IS_COMPLETE = "completed";
 
-    /** Name of the task. */
     private final String name;
 
 
     /**
-     * Constructs a task with the specified name.
+     * Constructs a {@code UserTask} with the specified name.
      *
      * @param name - the name of the task.
      */
@@ -26,9 +25,9 @@ public abstract class UserTask implements Reloadable {
 
 
     /**
-     * Constructs an {@code AquaTask} that is a copy of the given task.
+     * Constructs an {@code UserTask} that is a copy of the given task.
      *
-     * @param task - the task to construct the new task from.
+     * @param task - the reference task.
      */
     public UserTask(UserTask task) {
         this(task.name);
@@ -36,7 +35,7 @@ public abstract class UserTask implements Reloadable {
 
 
     /**
-     * Sets the task's completion status as specified
+     * Sets the task's completion status as specified.
      *
      * @param isComplete - if the task is completed.
      * @return a task of this task with its completion status set as specified.
