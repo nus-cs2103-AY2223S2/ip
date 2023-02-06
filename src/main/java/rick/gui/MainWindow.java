@@ -48,6 +48,7 @@ public class MainWindow extends AnchorPane {
 
     /**
      * Populate this app with the Rick server.
+     *
      * @param r The Rick server instance.
      */
     public void setRick(Rick r) {

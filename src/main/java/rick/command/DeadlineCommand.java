@@ -23,6 +23,7 @@ public class DeadlineCommand extends Command {
     /**
      * Formats the given slug as a Deadline task. Slugs should be provided in
      * this format: "{task} /by d/M/yy HHmm"
+     *
      * @param slug The provided slug.
      */
     public DeadlineCommand(String slug) {
@@ -38,6 +39,7 @@ public class DeadlineCommand extends Command {
 
     /**
      * Executes this command.
+     *
      * @param ts The TaskList instance.
      * @param ui The UI output.
      */

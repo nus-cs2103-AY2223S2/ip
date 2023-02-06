@@ -15,6 +15,7 @@ public class MarkCommand extends Command {
 
     /**
      * Formats this command with the task index.
+     *
      * @param idx The index of the task in storage.
      */
     public MarkCommand(int idx) {
@@ -23,6 +24,7 @@ public class MarkCommand extends Command {
 
     /**
      * Executes this task.
+     *
      * @param ts The TaskList instance.
      * @param ui The UI output.
      */

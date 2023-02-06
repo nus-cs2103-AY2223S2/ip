@@ -24,7 +24,8 @@ public class Rick {
     }
 
     /**
-     * Generate the server UI welcome message.
+     * Generates the server UI welcome message.
+     *
      * @return The message.
      */
     public String getWelcome() {
@@ -32,7 +33,8 @@ public class Rick {
     }
 
     /**
-     * Process the command and return the server UI response.
+     * Processes the command and returns the server UI response.
+     *
      * @param input The command from the user.
      * @return The UI response from the system.
      */
@@ -43,7 +45,8 @@ public class Rick {
     }
 
     /**
-     * Indicate to the GUI if it should exit.
+     * Indicates to the GUI if it should exit.
+     *
      * @return The indicative boolean.
      */
     public boolean isCloseAppTime() {

@@ -12,6 +12,7 @@ import rick.Ui;
 public abstract class Command {
     /**
      * Execute this command with the given TaskList and UI output.
+     *
      * @param ts The TaskList instance.
      * @param ui The UI output.
      * @return The system UI to output to the GUI from executing this command.
@@ -20,6 +21,7 @@ public abstract class Command {
 
     /**
      * Indicate if this is the Exit command.
+     *
      * @return True if it is an Exit command.
      */
     public boolean isExit() {

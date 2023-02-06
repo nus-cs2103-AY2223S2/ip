@@ -18,6 +18,7 @@ public class RickEmptyTaskException extends RickException {
 
     /**
      * The default constructor for this exception
+     *
      * @param type The type of task that was created.
      */
     public RickEmptyTaskException(TaskType type) {

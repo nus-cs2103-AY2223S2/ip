@@ -32,6 +32,7 @@ public class RickTaskTest {
 
         /**
          * Indicates if this task falls on the given date.
+         *
          * @param dt The given date.
          * @return The default value for a RickTask without a date.
          */

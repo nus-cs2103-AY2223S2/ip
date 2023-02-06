@@ -7,6 +7,7 @@ import java.time.format.DateTimeParseException;
 
 /**
  * The main utility class for providing Dates, DateTimes, and other common formatting.
+ *
  * @author SeeuSim
  *         AY22/23-S2 CS2103T
  */

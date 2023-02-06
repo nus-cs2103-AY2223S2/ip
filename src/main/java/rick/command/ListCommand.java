@@ -12,6 +12,7 @@ import rick.Ui;
 public class ListCommand extends Command {
     /**
      * Executes this command.
+     *
      * @param ts The TaskList instance.
      * @param ui The UI output.
      */

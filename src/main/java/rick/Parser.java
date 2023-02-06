@@ -19,6 +19,7 @@ import rick.exceptions.RickTaskIndexMissingException;
 /**
  * The main class for parsing commands given to the rick.Rick app via the
  * command line.
+ *
  * @author SeeuSim
  *         AY2223-S2 CS2103T
  */

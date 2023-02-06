@@ -7,7 +7,7 @@ package rick;
  *         AY2223-S2 CS2103T
  */
 public class Ui {
-    private static final String mascot =
+    private static final String MASCOT =
             "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣰⣷⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n"
             + "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⣧⠙⢿⣦⡀⠀⠀⠀⠀⠀⠀⠀⣠⣶⣦⠀⠀⠀⠀⠀⠀\n"
             + "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⠀⠀⠙⢿⣦⡀⠀⠀⠀⢀⣾⡿⠉⣿⡄⠀⠀⠀⠀⠀\n"
@@ -33,11 +33,12 @@ public class Ui {
             + "⠀⠀⠀⠀⠀⠈⠿⣶⣶⣶⣶⣶⣾⣶⣾⣷⣶⣶⣶⣶⣷⣾⣷⣶⣶⣾⡿      \n";
 
     /**
-     * The configurable greeting message for the rick.Rick app.
+     * Generates the configurable greeting message for the rick.Rick app.
+     *
      * @return The greeting message.
      */
     public String welcomeMessage() {
-        System.out.println("Hello from\n" + mascot);
+        System.out.println("Hello from\n" + MASCOT);
         String name = "R-r-r-rickkk";
         String greeting = String.format("Hello, I'm %s!", name);
         String cta = "What's up?";
@@ -46,6 +47,7 @@ public class Ui {
 
     /**
      * Prints the exit message to the UI.
+     *
      * @return The exit message.
      */
     public String exitMessage() {
@@ -82,6 +84,7 @@ public class Ui {
 
     /**
      * Format a user command guide for the user.
+     *
      * @param message The command guide to be formatted.
      * @return The output guide.
      */

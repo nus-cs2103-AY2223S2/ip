@@ -10,6 +10,7 @@ public class RickTaskIndexMissingException extends RickException {
 
     /**
      * Given a command type which accesses the store, formats the exception accordingly.
+     *
      * @param type The command type.
      */
     public RickTaskIndexMissingException(String type) {

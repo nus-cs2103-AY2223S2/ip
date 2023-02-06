@@ -15,6 +15,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Formats the command with the given storage index.
+     *
      * @param idx The provided storage task index.
      */
     public DeleteCommand(int idx) {
@@ -23,6 +24,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Executes this command.
+     *
      * @param ts The TaskList instance.
      * @param ui The UI output.
      */

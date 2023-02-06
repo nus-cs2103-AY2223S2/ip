@@ -9,6 +9,7 @@ package rick.exceptions;
 public class RickException extends Exception {
     /**
      * Constructs the exception with the given message.
+     *
      * @param message The given message.
      */
     public RickException(String message) {
