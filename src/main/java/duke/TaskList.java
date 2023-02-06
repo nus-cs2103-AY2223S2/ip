@@ -27,6 +27,7 @@ public class TaskList {
 
     /** Adds new task to task list and outputs success message. */
     protected void finishInitialization() {
+        assert this.isInitializingData : "Duke has already been initialized.";
         this.isInitializingData = false;
     }
 
@@ -60,6 +61,8 @@ public class TaskList {
         if (this.isInitializingData) {
             return "initializing";
         }
+
+        assert this.tasks.size() != 0 : "Task list is empty.";
 
         return Ui.addTaskMsg(task, this.tasks.size());
     }
