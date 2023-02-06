@@ -36,8 +36,6 @@ public class Parser {
     /**
      * Parse command the input.
      * @param input The user input.
-     * @param list list to store the task.
-     * @param storage store the list
      * @return Parsed command
      * @throws DuduException If the command is not recognised.
      */
