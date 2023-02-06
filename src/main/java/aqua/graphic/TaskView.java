@@ -16,7 +16,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 
 
-/** A {@code UiComponent} to display a view of tasks. */
+/** A {@code UiComponent} to display a view of tasks as a schedule. */
 public class TaskView extends UiComponent<VBox> {
     private static final String PATH_FXML_FILE = "TaskView.fxml";
 
@@ -42,7 +42,7 @@ public class TaskView extends UiComponent<VBox> {
 
     private void initialiseSchedule(LocalDateTime startTime, List<UserTask> tasks) {
         List<ScheduleTimeable> timeables = tasks.stream()
-                .map(task -> new TimeableAquaTask(task))
+                .map(task -> new TimedTask(task))
                 .collect(Collectors.toList());
         scheduleDisplayArea.getChildren().add(new WeekSchedule(startTime, timeables));
     }
@@ -50,19 +50,22 @@ public class TaskView extends UiComponent<VBox> {
 
     private void initialiseTodoView(List<UserTask> tasks) {
         for (UserTask task : tasks) {
-            todoDisplayArea.getChildren().add(new TodoLabel(task));
+            todoDisplayArea.getChildren().add(new UntimedTaskDisplay(task));
         }
     }
 
 
 
 
-
-    private static class TimeableAquaTask extends ScheduleTimeable {
+    /**
+     * A {@code ScheduleTimeable} of a {@code UserTask} that has minimally
+     * an end time.
+     */
+    private static class TimedTask extends ScheduleTimeable {
         private final UserTask task;
 
 
-        TimeableAquaTask(UserTask task) {
+        TimedTask(UserTask task) {
             this.task = task;
         }
 
@@ -107,12 +110,16 @@ public class TaskView extends UiComponent<VBox> {
 
 
 
-    private static class TodoLabel extends VBox {
+    /**
+     * Graphical representation of a task that does not have start and end
+     * times.
+     */
+    private static class UntimedTaskDisplay extends VBox {
         private static final double MAX_WIDTH = 600;
         private static final Insets MARGIN = new Insets(10, 10, 10, 10);
 
 
-        TodoLabel(UserTask task) {
+        UntimedTaskDisplay(UserTask task) {
             setMaxWidth(MAX_WIDTH);
             getStyleClass().add("todo-label");
             if (task.isComplete()) {

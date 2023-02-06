@@ -12,15 +12,7 @@ import javafx.scene.shape.Circle;
 
 /** A speech bubble to display messages. */
 public class SpeechBubble extends UiComponent<Region> {
-    /**
-     * String path to the left side bubble FXML file relative to the FXML
-     * directory.
-     */
     private static final String PATH_FXML_LEFT_SIDE = "SpeechBubbleLeft.fxml";
-    /**
-     * String path to the right side bubble FXML file relative to the FXML
-     * directory.
-     */
     private static final String PATH_FXML_RIGHT_SIDE = "SpeechBubbleRight.fxml";
 
     private final boolean isUser;
@@ -30,7 +22,7 @@ public class SpeechBubble extends UiComponent<Region> {
 
 
     /**
-     * Constructs a SpeechBubble from the specified parameters.
+     * Constructs a {@code SpeechBubble} from the specified parameters.
      *
      * @param isUser - {@code true} if the bubble is for the user and
      *      {@code false} otherwise.
@@ -45,12 +37,6 @@ public class SpeechBubble extends UiComponent<Region> {
     }
 
 
-    /**
-     * Returns the path to the FXML file.
-     *
-     * @param isUser - {@code true} if the bubble is for the user and
-     *      {@code false} otherwise.
-     */
     private static String getPath(boolean isUser) {
         return (isUser) ? PATH_FXML_RIGHT_SIDE : PATH_FXML_LEFT_SIDE;
     }

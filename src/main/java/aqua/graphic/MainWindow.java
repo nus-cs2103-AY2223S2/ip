@@ -15,7 +15,6 @@ import javafx.scene.layout.VBox;
 
 /** The main window of the application. */
 public class MainWindow extends UiComponent<VBox> {
-    /** String path to FXML file relative to the FXML directory. */
     private static final String PATH_FXML_FILE = "MainWindow.fxml";
 
     private static final int MESSAGE_LIMIT = 100;
@@ -28,7 +27,7 @@ public class MainWindow extends UiComponent<VBox> {
 
 
     /**
-     * Constructs a MainWindow from the given LogicManager.
+     * Constructs a {@code MainWindow} from the given LogicManager.
      *
      * @param logicManager - the LogicManager to handle logical processes.
      */
@@ -59,7 +58,6 @@ public class MainWindow extends UiComponent<VBox> {
             textDisplayArea.setPrefWidth(width);
             textDisplayArea.setMaxWidth(width);
 
-            // set the minimum height of the display area to be the view port height
             textDisplayArea.setMinHeight(height);
         });
     }
@@ -86,14 +84,6 @@ public class MainWindow extends UiComponent<VBox> {
     }
 
 
-    /**
-     * Returns the user's input.
-     *
-     * <p>{@code inputField} is cleared and the user's input message is
-     * displayed in the process.
-     *
-     * @return the user's input.
-     */
     private String getInput() {
         String input = inputField.getText();
         inputField.setText("");
@@ -104,11 +94,6 @@ public class MainWindow extends UiComponent<VBox> {
     }
 
 
-    /**
-     * Displays the specified reply.
-     *
-     * @param reply - the reply message to display.
-     */
     private void displayReply(String reply) {
         SpeechBubble bubble = new SpeechBubble(false);
         bubble.setText(reply);
@@ -116,12 +101,6 @@ public class MainWindow extends UiComponent<VBox> {
     }
 
 
-    /**
-     * Queues the specified bubble to be displayed in the JavaFx Application
-     * Thread.
-     *
-     * @param bubble - the SpeechBubble to display.
-     */
     private void displaySpeechBubble(SpeechBubble bubble) {
         textDisplayArea.getChildren().add(bubble.getRoot());
         if (textDisplayArea.getChildren().size() > MESSAGE_LIMIT) {
@@ -130,13 +109,6 @@ public class MainWindow extends UiComponent<VBox> {
     }
 
 
-    /**
-     * Handles the ActionEvent when the send button is pressed.
-     *
-     * <p>The user's input is processed and executed.
-     *
-     * @param event - the event that occured.
-     */
     @FXML
     private void handleSend(ActionEvent event) {
         manager.processInput();
