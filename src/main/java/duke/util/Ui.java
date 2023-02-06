@@ -98,10 +98,13 @@ public class Ui {
     /**
      * Prints the goodbye message.
      */
-    public void showGoodbyeMessage() {
+    public String showGoodbyeMessage() {
         showToUser(DASHED_LINE,
                 MESSAGE_GOODBYE,
                 DASHED_LINE);
+        return formatMessage(DASHED_LINE,
+                    MESSAGE_GOODBYE,
+                    DASHED_LINE);
     }
 
     /**
@@ -133,11 +136,13 @@ public class Ui {
      * Prints the list of tasks to the user.
      * @param tl TaskList object containing the list of tasks.
      */
-    public void showToUserList(TaskList tl) {
+    public String showToUserList(TaskList tl) {
+        String toShow;
         if (tl.isEmpty()) {
-            showToUser("There does not seem to be any tasks meow, would you care to add some?");
+            toShow = "There does not seem to be any tasks meow, would you care to add some?";
+            showToUser(toShow);
         } else {
-            String toShow = "Here are the tasks in your list:\n";
+            toShow = "Here are the tasks in your list:\n";
             for (int i = 0; i < tl.size(); i++) {
                 Task t = tl.get(i);
                 toShow += String.format("%s. %s", i + 1, t);
@@ -147,6 +152,7 @@ public class Ui {
             }
             showToUser(toShow);
         }
+        return toShow;
     }
 
     /**

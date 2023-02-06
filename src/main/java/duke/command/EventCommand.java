@@ -34,7 +34,7 @@ public class EventCommand extends Command {
      * @throws DukeException If there is an error in executing the command.
      */
     @Override
-    public void execute(TaskList tl, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tl, Ui ui, Storage storage) throws DukeException {
         tl.add(task);
         String toShow = "Meowww, I've added this task:\nAdded: " + task + "\n";
         toShow += ui.stringOfTaskNumbers(tl);
@@ -46,5 +46,6 @@ public class EventCommand extends Command {
             ui.showToUser(e.getMessage());
             throw new DukeException("Problem with updating in Event");
         }
+        return toShow;
     }
 }

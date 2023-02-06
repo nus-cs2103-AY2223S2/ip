@@ -1,7 +1,6 @@
-package duke.util;
+package duke.duke;
 
 import java.io.IOException;
-import java.util.Collections;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,9 +14,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
 /**
- * An example of a custom control using FXML.
- * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
- * containing text from the speaker.
  */
 public class DialogBox extends HBox {
     @FXML
@@ -28,9 +24,9 @@ public class DialogBox extends HBox {
     private Label text;
 
     /**
-     * A constructor for making a Dialog box in the GUI
-     * @param text
-     * @param img
+     * hello
+     * @param l
+     * @param iv
      */
     public DialogBox(Label l, ImageView iv) {
 
@@ -44,6 +40,7 @@ public class DialogBox extends HBox {
         this.setAlignment(Pos.TOP_RIGHT);
         this.getChildren().addAll(text, displayPicture);
     }
+
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -58,32 +55,28 @@ public class DialogBox extends HBox {
         displayPicture.setImage(img);
     }
 
-    /**
-     * Flips the dialog box such that the ImageView is on the left and text on the right.
-     */
     private void flip() {
+        this.setAlignment(Pos.TOP_LEFT);
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         FXCollections.reverse(tmp);
         this.getChildren().setAll(tmp);
-        setAlignment(Pos.TOP_LEFT);
+    }
+    public static DialogBox getUserDialog(Label l, ImageView iv) {
+        return new DialogBox(l, iv);
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
-    public static DialogBox getUserDialog(Label l, ImageView iv) {
-        return new DialogBox(l, iv);
-    }
-
-    public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+    public static DialogBox getDukeDialog(Label l, ImageView iv) {
+        var db = new DialogBox(l, iv);
         db.flip();
         return db;
     }
 
-    public static DialogBox getDukeDialog(Label l, ImageView iv) {
-        var db = new DialogBox(l, iv);
+    public static DialogBox getDukeDialog(String text, Image img) {
+        var db = new DialogBox(text, img);
         db.flip();
         return db;
     }

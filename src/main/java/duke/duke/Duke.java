@@ -1,4 +1,4 @@
-package duke;
+package duke.duke;
 
 import duke.command.Command;
 import duke.util.DukeException;
@@ -73,7 +73,7 @@ public class Duke {
     /**
      * Returns the string which is to be passed into the GUI under Poolsheen's response.
      *
-     * @param fullCommand The full string passed in by the user.
+     * @param input The full string passed in by the user.
      * @return The string which is to be passed onto the GUI.
      */
     public String getResponse(String input) {

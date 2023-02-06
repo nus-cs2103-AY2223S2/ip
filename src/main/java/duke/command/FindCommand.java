@@ -29,7 +29,7 @@ public class FindCommand extends Command {
      * @param storage Storage to be used to handle interactions with the save file.
      */
     @Override
-    public void execute(TaskList tl, Ui ui, Storage storage) {
+    public String execute(TaskList tl, Ui ui, Storage storage) {
         ArrayList<Task> matchTasks = new ArrayList<>();
         ArrayList<Integer> matchIndex = new ArrayList<>();
         for (int i = 0; i < tl.size(); i++) {
@@ -52,5 +52,6 @@ public class FindCommand extends Command {
             }
         }
         ui.showToUser(toShow);
+        return toShow;
     }
 }
