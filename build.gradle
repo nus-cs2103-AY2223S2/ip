@@ -13,6 +13,7 @@ checkstyle {
     toolVersion = '10.2'
 }
 
+
 dependencies {
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.0'
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.0'
@@ -48,7 +49,7 @@ test {
 }
 
 application {
-    mainClassName = "rick.Launcher"
+    mainClassName = "rick.Main"
 }
 
 shadowJar {
@@ -56,6 +57,6 @@ shadowJar {
     archiveClassifier = null
 }
 
-run{
+run {
     standardInput = System.in
 }
