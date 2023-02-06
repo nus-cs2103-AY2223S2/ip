@@ -3,7 +3,7 @@ package duke;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ToDoTest {
+public class TodoTest {
     @Test
     public void testToString1() {
         Task todo = new Todo("See the sunrise", false);
