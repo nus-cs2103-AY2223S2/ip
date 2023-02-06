@@ -26,6 +26,7 @@ public class Event extends Task {
         try {
             this.startDate = LocalDate.parse(startDate);
             this.endDate = LocalDate.parse(endDate);
+
         } catch (DateTimeParseException e) {
             throw new NeroException("Invalid Date!");
         }
@@ -44,8 +45,11 @@ public class Event extends Task {
         try {
             this.startDate = LocalDate.parse(startDate.trim());
             this.endDate = LocalDate.parse(endDate.trim());
+            assert this.endDate.isAfter(this.startDate);
         } catch (DateTimeParseException e) {
             throw new NeroException("Invalid Date!");
+        } catch (AssertionError e) {
+            throw new NeroException("End date must be after start date!");
         }
     }
 
