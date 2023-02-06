@@ -7,6 +7,6 @@ import sam.Ui;
  */
 public class SamInvalidIntException extends SamException {
     public SamInvalidIntException() {
-        super(Ui.Dialog.INVALID_DATE.getDialog());
+        super(Ui.Dialog.INVALID_INT.getDialog());
     }
 }

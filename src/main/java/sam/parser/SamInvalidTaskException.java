@@ -8,6 +8,6 @@ import sam.Ui;
  */
 public class SamInvalidTaskException extends SamException {
     public SamInvalidTaskException() {
-        super(Ui.Dialog.INVALID_DATE.getDialog());
+        super(Ui.Dialog.INVALID_TASK.getDialog());
     }
 }
