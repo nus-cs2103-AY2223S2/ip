@@ -95,7 +95,7 @@ public class DaySchedule extends HBox {
         Pane pane = new Pane();
         pane.setMinWidth(rowWidth);
         pane.setMaxHeight(ROW_HEIGHT);
-        pane.getChildren().add(drawMarkings());
+        pane.getChildren().add(createMarkings());
         return pane;
     }
 
@@ -132,7 +132,12 @@ public class DaySchedule extends HBox {
     }
 
 
-    private Canvas drawMarkings() {
+    /**
+     * Creates the marking display for a row.
+     * 
+     * @return the marking display for a row.
+     */
+    private Canvas createMarkings() {
         Canvas canvas = new Canvas(rowWidth, ROW_HEIGHT);
         GraphicsContext context = canvas.getGraphicsContext2D();
 
