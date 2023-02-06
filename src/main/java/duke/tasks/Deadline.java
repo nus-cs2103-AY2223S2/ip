@@ -25,7 +25,7 @@ public class Deadline extends Task {
     }
 
     public String toSaveFormat() {
-        return String.format("D,%s,%s,%s", this.name, this.getStatusIcon(), this.getDeadline());
+        return String.format("D,%s,%s,%s", this.name, this.getStatusIcon(), this.deadline);
     }
 
     @Override
