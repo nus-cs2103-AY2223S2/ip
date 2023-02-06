@@ -30,7 +30,6 @@ public abstract class Task implements Serializable {
         this.desc = desc;
         this.isDone = false;
         this.priority = Priority.LOW;
-
     }
 
     @Override

@@ -45,10 +45,7 @@ public class TaskList implements Serializable {
      * @return new TaskList with searched results
      */
     public TaskList find(String desc) {
-        return new TaskList(list
-                .stream()
-                .filter((task) -> task.desc.contains(desc))
-                .collect(Collectors.toList()));
+        return new TaskList(list.stream().filter((task) -> task.desc.contains(desc)).collect(Collectors.toList()));
     }
 
     /**
@@ -111,6 +108,15 @@ public class TaskList implements Serializable {
     public void delete(int index) {
         list.remove(index);
     }
+
+    public void setPriority(int index, Task.Priority priority) throws TaskException {
+        try {
+            list.get(index).priority = priority;
+        } catch (IndexOutOfBoundsException e) {
+            throw new TaskException("Item not found");
+        }
+    }
+
 
     public List<Task> getList() {
         return list;

@@ -10,6 +10,8 @@ import duke.commands.FindCommand;
 import duke.commands.ListCommand;
 import duke.commands.MarkDoneCommand;
 import duke.commands.NotFoundCommand;
+import duke.commands.SetPriorityCommand;
+import duke.task.Task;
 
 /**
  * Parser for commands
@@ -73,6 +75,18 @@ public class Parser {
                 return new DeleteCommand(itemIndex);
             } catch (NumberFormatException e) {
                 throw new TaskDeletionException("Not a number");
+            }
+        }
+        case "priority": {
+            if (split.length != 3) {
+                throw new TaskDeletionException("Invalid format");
+            }
+            try {
+                return new SetPriorityCommand(Integer.parseInt(split[1]) - 1, Task.Priority.valueOf(split[2]));
+            } catch (NumberFormatException e) {
+                throw new TaskException("Not a number");
+            } catch (IllegalArgumentException e) {
+                throw new TaskException("Invalid priority");
             }
         }
         default:
