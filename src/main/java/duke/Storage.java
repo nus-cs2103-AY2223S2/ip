@@ -27,72 +27,71 @@ public class Storage {
     }
 
     /**
-     *  Save the data from the arraylist into the txt file created/stored
+     * Save the data from the arraylist into the txt file created/stored
+     *
      * @param tasks an arraylist of all the tasks
      */
-    public void saveData(ArrayList<Task> tasks) {
-        try {
-            File userData = new File("userData");
-            if (!userData.exists()) {
-                userData.mkdir();
-            }
-            File dukeTxt = new File(userData, "duke.txt");
-            if (!dukeTxt.exists()) {
-                dukeTxt.createNewFile();
-            } else {
-                dukeTxt.delete();
-                dukeTxt.createNewFile();
-            }
-            FileWriter fw = new FileWriter(dukeTxt);
-            BufferedWriter dukeWrite = new BufferedWriter(fw);
-            for (int i = 0; i < tasks.size(); i++) {
-                dukeWrite.write(tasks.get(i).toString());
-                dukeWrite.newLine();
-            }
-            dukeWrite.close();
-        } catch (IOException e) {
-            System.out.println("Oh no!!");
+    public void saveData(ArrayList<Task> tasks) throws IOException {
+        File userData = new File("userData");
+        if (!userData.exists()) {
+            userData.mkdir();
         }
+        File dukeTxt = new File(userData, "duke.txt");
+        if (!dukeTxt.exists()) {
+            dukeTxt.createNewFile();
+        } else {
+            dukeTxt.delete();
+            dukeTxt.createNewFile();
+        }
+        if (tasks.isEmpty()) {
+            return;
+        }
+        FileWriter fw = new FileWriter(dukeTxt);
+        BufferedWriter dukeWrite = new BufferedWriter(fw);
+
+        for (int i = 0; i < tasks.size(); i++) {
+            dukeWrite.write(tasks.get(i).toString());
+            dukeWrite.newLine();
+        }
+        dukeWrite.close();
     }
 
     /**
      * A method to laod the data from the txt file to the arraylist
+     *
      * @param tasks an arraylist of all the tasks
      */
-    public void loadData(ArrayList<Task> tasks) {
-        try {
-            File userData = new File("userData");
-            if (!userData.exists()) {
-                userData.mkdir();
-            }
-            File dukeTxt = new File(userData, "duke.txt");
-            if (!dukeTxt.exists()) {
-                dukeTxt.createNewFile();
-            } else {
-                FileReader fw = new FileReader(dukeTxt);
-                BufferedReader dukeRead = new BufferedReader(fw);
-                String line = dukeRead.readLine();
-                while (line != null) {
-                    if (line.contains("[D]")) {
-                        tasks.add(new Deadline(line.replace("[D]", "")));
-                    } else if (line.contains("[T]")) {
-                        tasks.add(new ToDo(line.replace("[T]", "")));
-                    } else if (line.contains("[E]")) {
-                        tasks.add(new Event(line.replace("[E]", "")));
-                    } else {
-                        tasks.add(new Task(line));
-                    }
-                    line = dukeRead.readLine();
+    public void loadData(ArrayList<Task> tasks) throws IOException {
+        File userData = new File("userData");
+        if (!userData.exists()) {
+            userData.mkdir();
+        }
+        File dukeTxt = new File(userData, "duke.txt");
+        if (!dukeTxt.exists()) {
+            dukeTxt.createNewFile();
+        } else {
+            FileReader fw = new FileReader(dukeTxt);
+            BufferedReader dukeRead = new BufferedReader(fw);
+            String line = dukeRead.readLine();
+            while (line != null) {
+                if (line.contains("[D]")) {
+                    tasks.add(new Deadline(line.replace("[D]", "")));
+                } else if (line.contains("[T]")) {
+                    tasks.add(new ToDo(line.replace("[T]", "")));
+                } else if (line.contains("[E]")) {
+                    tasks.add(new Event(line.replace("[E]", "")));
+                } else {
+                    tasks.add(new Task(line));
                 }
-                dukeRead.close();
+                line = dukeRead.readLine();
             }
-        } catch (IOException e) {
-            System.out.println("Error: Data loading to the system fails !!");
+            dukeRead.close();
         }
     }
 
     /**
      * A method to delete all the contents in the arraylist and the txt file
+     *
      * @param tasks an arraylist of all the tasks
      * @throws IOException when the file cannot be found or created
      */
@@ -102,5 +101,4 @@ public class Storage {
         dukeTxt.delete();
         dukeTxt.createNewFile();
     }
-
 }

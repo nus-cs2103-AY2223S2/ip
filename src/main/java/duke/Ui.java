@@ -16,22 +16,22 @@ public class Ui {
      * Prints out that the task done message
      */
     @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
-    public void setMarkAsDone() {
-        System.out.println("Nice! I've marked this task as done:");
+    public String setMarkAsDone() {
+        return "Nice! I've marked this task as done:\n";
     }
 
     /**
      * Prints out that the task is not done yet message
      */
-    public void setUnMarkTask() {
-        System.out.println("OK, I've marked this task as not done yet:");
+    public String setUnMarkTask() {
+        return "OK, I've marked this task as not done yet:\n";
     }
 
     /**
      * Prints out that the task is added to the list.
      */
-    public void setAddedTask() {
-        System.out.println("Got it, I've added this task:");
+    public String setAddedTask() {
+        return "Got it, I've added this task:\n";
     }
 
 }
