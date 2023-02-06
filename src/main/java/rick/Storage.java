@@ -54,8 +54,8 @@ public class Storage {
     }
 
     /**
-     * Factory method that creates a RickFileWriter instance.
-     * @return The created RickFileWriter.
+     * Factory method that creates a Storage instance.
+     * @return The created Storage.
      */
     public static Storage create() {
         return new Storage();
