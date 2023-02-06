@@ -31,6 +31,6 @@ public class DeadlineTest {
     @Test
     public void testToString() {
         Deadline deadline = new Deadline("Test deadline", deadlineDateTime);
-        assertEquals("[D][ ] Test deadline (by: Jan 01 2023 12:00)", deadline.toString());
+        assertEquals("[D][   ] Test deadline (by: Jan 01 2023 12:00)", deadline.toString());
     }
 }

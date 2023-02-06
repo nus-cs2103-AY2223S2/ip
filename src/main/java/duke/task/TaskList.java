@@ -2,6 +2,9 @@ package duke.task;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class TaskList extends ArrayList<Task>{
 
@@ -46,18 +49,11 @@ public class TaskList extends ArrayList<Task>{
      * @return TaskList of filtered tasks.
      */
     public TaskList filter(String... keywords) {
-        TaskList filteredTasks = new TaskList();
-        for (String keyword : keywords) {
-            for (Task task : this) {
-                String description = task.getDescription();
-                if (description.contains(keyword.trim())) {
-                    if (!filteredTasks.contains(task)) {
-                        filteredTasks.add(task);
-                    }
-                }
-            }
-        }
-        return filteredTasks;
+        List<String> keywordList = Arrays.asList(keywords);
+        return this.stream()
+                .filter(task -> keywordList.stream().anyMatch(keyword -> task.getDescription().contains(keyword.trim())))
+                .distinct()
+                .collect(Collectors.toCollection(TaskList::new));
     }
 
     /**
@@ -68,28 +64,23 @@ public class TaskList extends ArrayList<Task>{
      */
     public TaskList filterDate(LocalDate... dates) {
         TaskList filteredTasks = new TaskList();
-        for (LocalDate date : dates) {
-            for (Task task : this) {
-                if (task instanceof Deadline) {
-                    Deadline deadline = (Deadline) task;
-                    if (deadline.getDeadline().toLocalDate().isEqual(date)) {
-                        if (!filteredTasks.contains(task)) {
-                            filteredTasks.add(task);
-                        }
-                    }
-                } else if (task instanceof Event) {
-                    Event event = (Event) task;
-                    if (event.getStartDateTime().toLocalDate().isEqual(date) ||
-                            event.getEndDateTime().toLocalDate().isEqual(date) ||
-                            (event.getStartDateTime().toLocalDate().isBefore(date) &&
-                                    event.getEndDateTime().toLocalDate().isAfter(date))) {
-                        if (!filteredTasks.contains(task)) {
-                            filteredTasks.add(task);
-                        }
-                    }
-                }
-            }
-        }
+        Arrays.stream(dates)
+                .flatMap(date -> this.stream()
+                        .filter(task -> {
+                            if (task instanceof Deadline) {
+                                Deadline deadline = (Deadline) task;
+                                return deadline.getDeadline().toLocalDate().isEqual(date);
+                            } else if (task instanceof Event) {
+                                Event event = (Event) task;
+                                return event.getStartDateTime().toLocalDate().isEqual(date) ||
+                                        event.getEndDateTime().toLocalDate().isEqual(date) ||
+                                        (event.getStartDateTime().toLocalDate().isBefore(date) &&
+                                                event.getEndDateTime().toLocalDate().isAfter(date));
+                            }
+                            return false;
+                        })
+                        .filter(task -> !filteredTasks.contains(task)))
+                .forEach(filteredTasks::add);
         return filteredTasks;
     }
 
