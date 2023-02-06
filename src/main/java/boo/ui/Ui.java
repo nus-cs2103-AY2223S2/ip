@@ -44,87 +44,10 @@ public class Ui {
     private static final String EXIT_MESSAGE = "Goodbye. Hope that I have managed to scare all your problems away."
             + "\nHave a great day! :)";
 
-
-    /** {@code Scanner} to take in user input. */
-    private Scanner sc;
-
-    /**
-     * Constructs an {@code Ui} instance to read in user input and display output.
-     */
-    public Ui() {
-        printIntroductoryMessage();
-        sc = new Scanner(System.in);
-    }
-
     /**
      * Prints out the straight line that separates commands.
      */
     public static void printStraightLine() {
         System.out.println(STRAIGHT_LINE);
     }
-
-    /**
-     * Prints the introductory message.
-     */
-    public void printIntroductoryMessage() {
-        System.out.println(LOGO);
-        printStraightLine();
-        System.out.println(INTRODUCTORY_BODY);
-        System.out.println(COMMAND_LIST);
-        printStraightLine();
-    }
-
-    /**
-     * Prints the exit message, used when bot exits normally.
-     */
-    public void printExitMessage() {
-        printStraightLine();
-        System.out.println(EXIT_MESSAGE);
-        printStraightLine();
-    }
-
-    /**
-     * Prints abnormal shutdown message, used when bot faces an exception.
-     */
-    public void printShutDownMessage() {
-        printStraightLine();
-        System.out.println("Bot shutting down...");
-        printStraightLine();
-    }
-
-    /**
-     * Prints the list of supported commands, used when user calls help.
-     */
-    public void printCommands() {
-        printStraightLine();
-        System.out.println("Supported Commands:");
-        System.out.println(COMMAND_LIST);
-        printStraightLine();
-    }
-
-    /**
-     * Prints the given string.
-     *
-     * @param statement The string to be printed.
-     */
-    public void printStatement(String statement) {
-        System.out.println(statement);
-    }
-
-    /**
-     * Gets user input for processing.
-     *
-     * @return the raw command given by the user.
-     */
-    public String getUserCommand() {
-        return sc.nextLine();
-    }
-
-    /**
-     * Cleans up UI resources after bot ends.
-     */
-    public void cleanUpUi() {
-        sc.close();
-    }
-
 }

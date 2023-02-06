@@ -20,13 +20,4 @@ public abstract class Command {
      * @return the string output of running a given command
      */
     public abstract String runCommand();
-
-    /**
-     * Checks if the command should cause the bot to exit.
-     *
-     * @return true if the command should cause the bot to exit.
-     */
-    public boolean isExit() {
-        return isExit;
-    }
 }

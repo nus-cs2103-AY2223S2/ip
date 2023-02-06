@@ -59,7 +59,6 @@ public class Storage {
                 return false;
             }
         }
-
         //Create the file
         File dataFile = new File(dataFilePath);
         try {
@@ -167,7 +166,7 @@ public class Storage {
      */
     public boolean saveTasks(TaskList tasks) {
         try {
-            File dataFile = new File(dataFilePath);
+            new File(dataFilePath);
             FileWriter fw = new FileWriter(dataFilePath);
             //Reset content of file
             fw.write("");

@@ -73,7 +73,7 @@ public class Parser {
                 int indexOfTask = Integer.parseInt(inputArray[1]) - 1;
                 if (!(indexOfTask <= tasks.getSizeOfTaskList() - 1 && indexOfTask >= 0)) {
                     throw new DukeException("Please enter a valid task number. You currently have "
-                           + Integer.toString(tasks.getSizeOfTaskList()) + " tasks.");
+                           + tasks.getSizeOfTaskList() + " tasks.");
                 }
                 CommandType ctMark = CommandType.MARK;
                 ctMark.setIndex(indexOfTask);
@@ -94,7 +94,7 @@ public class Parser {
                 int indexOfTask = Integer.parseInt(inputArray[1]) - 1;
                 if (!(indexOfTask <= tasks.getSizeOfTaskList() - 1 && indexOfTask >= 0)) {
                     throw new DukeException("Please enter a valid task number. You currently have "
-                            + Integer.toString(tasks.getSizeOfTaskList()) + " tasks.");
+                            + tasks.getSizeOfTaskList() + " tasks.");
                 }
                 CommandType ctUnmark = CommandType.UNMARK;
                 ctUnmark.setIndex(indexOfTask);
@@ -115,7 +115,7 @@ public class Parser {
                 int indexOfTask = Integer.parseInt(inputArray[1]) - 1;
                 if (!(indexOfTask <= tasks.getSizeOfTaskList() - 1 && indexOfTask >= 0)) {
                     throw new DukeException("Please enter a valid task number. You currently have "
-                            + Integer.toString(tasks.getSizeOfTaskList()) + " tasks.");
+                            + tasks.getSizeOfTaskList() + " tasks.");
                 }
                 CommandType ctDelete = CommandType.DELETE;
                 ctDelete.setIndex((indexOfTask));
@@ -267,7 +267,7 @@ public class Parser {
                 if (dateString.equals("")) {
                     throw new DukeException("The date cannot be left blank.");
                 }
-                Temporal dateObject = DateTime.getDateTimeObject(dateString);
+                DateTime.getDateTimeObject(dateString);
                 CommandType ctOn = CommandType.ON;
                 ctOn.setOnDate(dateString);
                 return ctOn;

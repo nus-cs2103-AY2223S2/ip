@@ -39,8 +39,6 @@ public class DialogBox extends HBox {
         displayPicture.setImage(image);
     }
 
-
-
     /**
      * Flips a dialog box such that the ImageView is on the left and text is on the right.
      * Differentiates between user input and bot's input.

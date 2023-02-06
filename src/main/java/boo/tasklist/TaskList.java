@@ -56,28 +56,6 @@ public class TaskList {
     }
 
     /**
-     * Prints out all the user tasks that have been entered by the user thus far.
-     */
-    public void printUserTasks() {
-        Ui.printStraightLine();
-        if (tasks.size() == 0) {
-            System.out.println("There are currently no tasks in your list.");
-            Ui.printStraightLine();
-            return;
-        }
-        System.out.println("Here are the tasks in your list:");
-        int numberOfTasks = tasks.size();
-        //Process each task in the storage
-        for (int i = 0; i < numberOfTasks; i = i + 1) {
-            String numbering = Integer.toString(i + 1) + ". ";
-            String output = numbering + tasks.get(i).getStatusOfTaskInString();
-            System.out.println(output);
-        }
-        Ui.printStraightLine();
-    }
-
-
-    /**
      * Gets all the user tasks that have been entered by the user thus far
      *
      * @return a string listing out all the available user tasks.
