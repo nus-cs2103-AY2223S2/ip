@@ -72,6 +72,20 @@ public class WeekSchedule extends VBox {
      * @param index - the index of the day.
      */
     private void addRow(LocalDateTime startTime, List<ScheduleTimeable> timeables, int index) {
+        HBox box = createDayBox(index);
+
+        Label dateLabel = createDateLabel(startTime);
+
+        // wrap in VBox to center component
+        VBox scheduleContainer = new VBox(new DaySchedule(startTime, timeables, ROW_WIDTH));
+        scheduleContainer.setAlignment(Pos.CENTER_LEFT);
+
+        box.getChildren().addAll(dateLabel, scheduleContainer);
+        getChildren().add(box);
+    }
+
+
+    private HBox createDayBox(int index) {
         HBox box = new HBox();
         box.setAlignment(Pos.CENTER_LEFT);
         box.setMaxWidth(ROW_WIDTH);
@@ -81,7 +95,11 @@ public class WeekSchedule extends VBox {
         } else {
             box.pseudoClassStateChanged(PseudoClass.getPseudoClass("odd"), true);
         }
+        return box;
+    }
 
+
+    private Label createDateLabel(LocalDateTime startTime) {
         Label dateLabel = new Label();
         dateLabel.setMinWidth(LABEL_WIDTH);
         dateLabel.setMaxWidth(LABEL_WIDTH);
@@ -89,11 +107,6 @@ public class WeekSchedule extends VBox {
         dateLabel.setTextAlignment(TextAlignment.LEFT);
         dateLabel.setAlignment(Pos.CENTER_LEFT);
         dateLabel.setText(startTime.format(DateTimeFormatter.ofPattern("LLL d (EEE)")));
-
-        VBox scheduleContainer = new VBox(new DaySchedule(startTime, timeables, ROW_WIDTH));
-        scheduleContainer.setAlignment(Pos.CENTER_LEFT);
-
-        box.getChildren().addAll(dateLabel, scheduleContainer);
-        getChildren().add(box);
+        return dateLabel;
     }
 }
