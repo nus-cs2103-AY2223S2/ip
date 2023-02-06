@@ -1,6 +1,9 @@
 package duke.tasks;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * A wrapper class for a list of tasks.
@@ -14,6 +17,10 @@ public class TaskList {
      */
     public TaskList() {
         taskList = new ArrayList<>();
+    }
+
+    public TaskList(ArrayList<Task> tasks) {
+        this.taskList = tasks;
     }
 
     /**
@@ -61,6 +68,15 @@ public class TaskList {
 
     public boolean isEmpty() {
         return (this.size() == 0);
+    }
+
+    public TaskList find(String searchTerm) {
+        List<Task> taskList = this.taskList
+                .stream()
+                .filter(task -> task.getName().contains(searchTerm))
+                .collect(Collectors.toList());
+
+        return new TaskList(new ArrayList<>(taskList));
     }
 
     @Override
