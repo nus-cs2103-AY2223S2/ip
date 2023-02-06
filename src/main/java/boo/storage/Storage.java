@@ -111,9 +111,7 @@ public class Storage {
                         tasks.addTask(deadlineTask);
                         break;
                     } catch (DateTimeParseException e) {
-                        Ui.printStraightLine();
                         System.out.println("Dates stored in the data file are corrupted. Cannot read.");
-                        Ui.printStraightLine();
                         return false;
                     }
                 case "E":
@@ -132,15 +130,11 @@ public class Storage {
                         tasks.addTask(eventTask);
                         break;
                     } catch (DukeException dukeException) {
-                        Ui.printStraightLine();
                         System.out.println(dukeException.getMessage());
-                        Ui.printStraightLine();
                         return false;
                     } catch (DateTimeParseException e) {
-                        Ui.printStraightLine();
                         System.out.println("Dates stored are corrupted. Cannot read from data file.");
                         System.out.println("Create new data file from scratch...");
-                        Ui.printStraightLine();
                         return false;
                     }
                 default:
@@ -150,10 +144,8 @@ public class Storage {
             s.close();
             return true;
         } catch (FileNotFoundException fileNotFoundException) {
-            Ui.printStraightLine();
             System.out.println("Cannot read from data file.");
             System.out.println("Create new data file from scratch...");
-            Ui.printStraightLine();
             return false;
         }
     }

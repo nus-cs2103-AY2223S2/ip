@@ -44,7 +44,6 @@ public class Boo {
      * @return the string containing the bot's response.
      */
     public String getResponse(String input) {
-
         CommandType commandType = parser.parseRawCommand(input);
         Command command = parser.parseCommandType(commandType, taskList, storage);
 

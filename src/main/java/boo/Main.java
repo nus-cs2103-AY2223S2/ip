@@ -10,6 +10,12 @@ import javafx.stage.Stage;
 
 /** Represents a GUI for the chatbot using FXML. */
 public class Main extends Application {
+
+    private float stageMinHeight = 600.0f;
+    private float stageMinWidth = 800.0f;
+
+    private String stageTitle = "Boo";
+
     private Boo boo = new Boo();
 
     @Override
@@ -24,10 +30,10 @@ public class Main extends Application {
             mainWindow.setStage(stage);
             stage.show();
 
-            stage.setTitle("Boo");
+            stage.setTitle(stageTitle);
             stage.setResizable(false);
-            stage.setMinHeight(600.0);
-            stage.setMinWidth(800.0);
+            stage.setMinHeight(stageMinHeight);
+            stage.setMinWidth(stageMinWidth);
 
         } catch (IOException e) {
             e.printStackTrace();

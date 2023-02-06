@@ -156,7 +156,7 @@ public class Parser {
      * Validates the 'unmark' input of the user.
      *
      * @param inputArray The array containing the words from the user's raw command.
-     * @return a Unmark command type if 'unmark' input is valid, else return an Exception command type.
+     * @return an Unmark command type if 'unmark' input is valid, else return an Exception command type.
      */
     private CommandType validateUnmark(String[] inputArray) {
         try {
