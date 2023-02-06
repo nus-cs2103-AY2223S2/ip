@@ -4,13 +4,13 @@ import duke.exceptions.DukeException;
 import duke.tasks.TaskList;
 
 public class Duke {
-    protected static final String filePath = "./data/duke.txt";
+    protected static final String FILEPATH = "./data/duke.txt";
     private Storage storage;
     private TaskList tasks = new TaskList();
     private Ui ui;
     public Duke() {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage(FILEPATH);
         try {
             storage.readDatabase(tasks);
         } catch (Exception e) {
@@ -36,7 +36,7 @@ public class Duke {
             Parser p = new Parser(d.tasks);
             String output = p.handleInput(input);
             return output;
-        }catch (DukeException e) {
+        } catch (DukeException e) {
             return e.getMessage();
         }
     }

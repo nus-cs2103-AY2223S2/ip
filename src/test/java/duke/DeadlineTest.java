@@ -1,12 +1,12 @@
 package duke;
 
-import duke.exceptions.DateTimeFormatException;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
 import duke.exceptions.DukeException;
 import duke.functions.Parser;
 import duke.tasks.TaskList;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 
 public class DeadlineTest {
     @Test

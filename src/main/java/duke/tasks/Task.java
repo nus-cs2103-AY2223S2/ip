@@ -4,7 +4,8 @@ package duke.tasks;
  * Parent Task object that represents each task inputted by the user.
  *
  * @author JamesLiuZX
- * AY2223-S2 CS2103T
+ *     AY2223-S2 CS2103T
+
  */
 public class Task {
     private String description;
@@ -44,7 +45,7 @@ public class Task {
     @Override
     public String toString() {
         return String.format("[%s] %s",
-                this.isDone ? "X": " ", this.description);
+                this.isDone ? "X" : " ", this.description);
     }
 
     /**
@@ -55,7 +56,7 @@ public class Task {
     public String toStringDb() {
         return String.format(
                 "%s|%s",
-                this.isDone? "X" : 0,
+                this.isDone ? "X" : 0,
                 this.description
         );
     }

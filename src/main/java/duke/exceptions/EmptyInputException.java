@@ -4,7 +4,7 @@ package duke.exceptions;
  * The exception class that informs a user that the input was empty.
  *
  * @author JamesLiuZX
- * AY2223-S2 CS2103T
+ *     AY2223-S2 CS2103T
  */
 public class EmptyInputException extends DukeException {
     /**

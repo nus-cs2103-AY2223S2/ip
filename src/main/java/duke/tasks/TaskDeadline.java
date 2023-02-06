@@ -6,7 +6,8 @@ import java.time.LocalDateTime;
  * Encapsulates a task which has a specific deadline denoted by /by.
  *
  * @author JamesLiuZX
- * AY2223-S2 CS2103T
+ *     AY2223-S2 CS2103T
+
  */
 public class TaskDeadline extends Task {
     private LocalDateTime time;

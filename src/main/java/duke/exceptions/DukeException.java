@@ -1,14 +1,12 @@
 package duke.exceptions;
 
-import java.lang.Exception;
-
 /**
  * The main exception class for this app.
  *
  * @author JamesLiuZX
- * AY2223-S2 CS2103T
+ *     AY2223-S2 CS2103T
  */
-public class DukeException extends Exception{
+public class DukeException extends Exception {
     /**
      * The default constructor for this exception.
      */

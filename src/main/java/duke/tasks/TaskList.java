@@ -1,20 +1,20 @@
 package duke.tasks;
 
-import duke.exceptions.DateTimeFormatException;
-import duke.functions.DatabaseWriter;
-import duke.functions.Ui;
-
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+import duke.exceptions.DateTimeFormatException;
+import duke.functions.DatabaseWriter;
+import duke.functions.Ui;
+
 /**
  * Encapsulates a container for all tasks.
  *
  * @author JamesLiuZX
- * AY2223-S2 CS2103T
+ *     AY2223-S2 CS2103T
  */
 public class TaskList {
     //Variables are kept private and accessed only through internal getter and setter methods.
@@ -42,12 +42,12 @@ public class TaskList {
     public String mark(int index) {
         index--;
         if (index < 0 || index > size) {
-            return(String.format("Indices have to be positive and less than %d.", size));
+            return String.format("Indices have to be positive and less than %d.", size);
         }
         Task task = this.records.get(index);
         task.markDone();
         dw.setDone(index);
-        return(Ui.format("Nice! I've marked this task as done:\n" + task.toString()));
+        return Ui.format("Nice! I've marked this task as done:\n" + task.toString());
     }
 
     /**
@@ -130,7 +130,6 @@ public class TaskList {
      * @param name Task name to be added.
      * @param time Deadline time in string, according to the dateTimeRegex format.
      * @param isInitial Boolean value of whether the program is population the TaskList.
-     * @return Task added successfully announcement.
      */
     public void insertDeadline(String name, String time, boolean isInitial) {
         try {
@@ -231,7 +230,7 @@ public class TaskList {
             return "Please insert a task first.";
         }
         for (int i = 0; i < records.size(); i++) {
-            output += String.format("%s. %s\n", i+1, this.records.get(i));
+            output += String.format("%s. %s\n", i + 1, this.records.get(i));
         }
         return Ui.format(output);
     }

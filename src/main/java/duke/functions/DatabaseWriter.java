@@ -1,16 +1,18 @@
 package duke.functions;
 
-import java.io.*;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import duke.tasks.Task;
 import java.util.List;
+
+import duke.tasks.Task;
 
 /**
  * The main class for manipulating the database records in duke.txt.
  * @author JamesLiuZX
- * AY2223-S2 CS2103T
+ *     AY2223-S2 CS2103T
  */
 public class DatabaseWriter {
     private static final String folderPath = "data";

@@ -6,9 +6,10 @@ import java.time.LocalDateTime;
  * Given a task and a time range, constructs a Task event.
  *
  * @author JamesLiuZX
- * AY2223-S2 CS2103T
+ *     AY2223-S2 CS2103T
+
  */
-public class TaskEvent extends Task{
+public class TaskEvent extends Task {
     private LocalDateTime from;
     private LocalDateTime to;
 

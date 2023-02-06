@@ -6,9 +6,10 @@ import duke.functions.Ui;
  * The exception class that indicates that the command entered is incorrect.
  *
  * @author JamesLiuZX
- * AY2223-S2 CS2103T
+ *     AY2223-S2 CS2103T
+
  */
-public class InvalidCommandException extends DukeException{
+public class InvalidCommandException extends DukeException {
     /**
      * The default constructor for this exception.
      */

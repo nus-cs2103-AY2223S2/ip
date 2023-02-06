@@ -4,7 +4,7 @@ package duke.exceptions;
  * The exception class that indicates that the DateTime format inputted is incorrect.
  *
  * @author JamesLiuZX
- * AY2223-S2 CS2103T
+ *     AY2223-S2 CS2103T
  */
 public class DateTimeFormatException extends DukeException {
     /**

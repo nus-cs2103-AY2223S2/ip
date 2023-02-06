@@ -1,15 +1,20 @@
 package duke.functions;
 
-import duke.exceptions.*;
-import duke.tasks.Task;
-import duke.tasks.TaskList;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.exceptions.DateTimeFormatException;
+import duke.exceptions.InvalidArgumentsException;
+import duke.exceptions.InvalidCommandException;
+import duke.exceptions.MultipleArgumentsException;
+
+import duke.tasks.Task;
+import duke.tasks.TaskList;
 
 /**
  * The main class for parsing commands via the command line.
  * @author JamesLiuZX
- * AY2223-S2 CS2103T
+ *     AY2223-S2 CS2103T
  */
 public class Parser {
     private TaskList list;
@@ -33,26 +38,26 @@ public class Parser {
         String[] split = input.split(" ", 2);
         String cmd = split[0];
         switch (cmd) {
-            case "list":
-                return this.list.toString();
-            case "mark":
-                return mark(split);
-            case "unmark":
-                return unmark(split);
-            case "delete":
-                return delete(split);
-            case "deadline":
-                return deadline(split);
-            case "event":
-                return event(split);
-            case "todo":
-                return todo(split);
-            case "bye":
-                return bye(split);
-            case "find":
-                return find(split);
-            default:
-                throw new InvalidCommandException();
+        case "list":
+            return this.list.toString();
+        case "mark":
+            return mark(split);
+        case "unmark":
+            return unmark(split);
+        case "delete":
+            return delete(split);
+        case "deadline":
+            return deadline(split);
+        case "event":
+            return event(split);
+        case "todo":
+            return todo(split);
+        case "bye":
+            return bye(split);
+        case "find":
+            return find(split);
+        default:
+            throw new InvalidCommandException();
         }
     }
 
@@ -73,29 +78,29 @@ public class Parser {
             String taskName = split[2];
             index++;
             switch (cmd) {
-                case "T":
-                    dl.insertToDo(taskName, true);
-                    if (status.equals("X")) {
-                        dl.mark(index);
-                    }
-                    break;
-                case "D":
-                    String deadline = "a";
-                    dl.insertDeadline(taskName, deadline, true);
-                    if (status.equals("X")) {
-                        dl.mark(index);
-                    }
-                    break;
-                case "E":
-                    String startTime = split[3];
-                    String endTime = split[3];
-                    dl.insertEvent(taskName, startTime, endTime, true);
-                    if (status.equals("X")) {
-                        dl.mark(index);
-                    }
-                    break;
-                default:
-                    break;
+            case "T":
+                dl.insertToDo(taskName, true);
+                if (status.equals("X")) {
+                    dl.mark(index);
+                }
+                break;
+            case "D":
+                String deadline = "a";
+                dl.insertDeadline(taskName, deadline, true);
+                if (status.equals("X")) {
+                    dl.mark(index);
+                }
+                break;
+            case "E":
+                String startTime = split[3];
+                String endTime = split[3];
+                dl.insertEvent(taskName, startTime, endTime, true);
+                if (status.equals("X")) {
+                    dl.mark(index);
+                }
+                break;
+            default:
+                break;
             }
         }
     }
@@ -109,7 +114,7 @@ public class Parser {
             Integer index = Integer.parseInt(split[1]);
             return this.list.mark(index);
         } catch (NumberFormatException | MultipleArgumentsException e) {
-           return ("Please input a number after the command.");
+           return "Please input a number after the command.";
         }
     }
 
@@ -192,7 +197,7 @@ public class Parser {
                 return "There are no matching tasks currently!";
             }
             return output;
-        }catch (InvalidArgumentsException e) {
+        } catch (InvalidArgumentsException e) {
             return e.getMessage();
         }
     }
@@ -208,9 +213,4 @@ public class Parser {
         }
     }
 
-    public static void exit() {
-        String exitMsg = Ui.format("Bye. Come back soon!");
-        System.out.println(exitMsg);
-        System.exit(1);
-    }
 }

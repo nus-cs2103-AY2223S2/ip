@@ -3,14 +3,15 @@ package duke.functions;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import duke.tasks.TaskList;
 import java.util.Scanner;
+
+import duke.tasks.TaskList;
 
 /**
  * Main storage class that controls the initialisation and reading of database, and the population of TaskList.
  *
  * @author JamesLiuZX
- * AY2223-S2 CS2103T
+ *     AY2223-S2 CS2103T
  */
 public class Storage {
     private String filePath;

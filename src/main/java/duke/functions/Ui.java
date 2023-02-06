@@ -1,18 +1,21 @@
 package duke.functions;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Scanner;
+
 import duke.exceptions.DukeException;
 import duke.exceptions.EmptyInputException;
 import duke.exceptions.InvalidCommandException;
 import duke.tasks.TaskList;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Scanner;
+
 
 /**
  * Main UI class that controls the formatting and display of output to CLI.
  *
  * @author JamesLiuZX
- * AY2223-S2 CS2103T
+ *     AY2223-S2 CS2103T
+
  */
 public class Ui {
     public static ArrayList<String> commandList = new ArrayList<>(Arrays.asList
@@ -41,7 +44,7 @@ public class Ui {
                     throw new InvalidCommandException();
                 }
                 p.handleInput(input);
-            }catch (DukeException e) {
+            } catch (DukeException e) {
                 System.out.println(e.getMessage());
             }
         }
