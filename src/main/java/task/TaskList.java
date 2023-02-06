@@ -21,7 +21,7 @@ public class TaskList {
     private static boolean isNew;
     private static final ArrayList<Task> taskList = new ArrayList<>();
 
-    public TaskList(File file, boolean isItNew) throws FileNotFoundException{
+    public TaskList(File file, boolean isItNew) {
         dataFile = file;
         isNew = isItNew;
         if (!isNew) {
@@ -50,52 +50,57 @@ public class TaskList {
 
     /**
      * This method handles the initialization of the file.
-     * @throws FileNotFoundException
      */
-    private void init() throws FileNotFoundException {
-        Scanner sc = new Scanner(dataFile);
-        while (sc.hasNext()) {
-            String in = sc.nextLine();
-            String[] split = in.split(" \\| ");
-            boolean isDone = split[1].equals("1");
-            switch (split[0].toUpperCase()) {
-                case "T" :
-                    Todo t = new Todo(split[2], isDone);
-                    taskList.add(t);
-                    break;
-                case "E" :
-                    Event e = new Event(split[2], split[3], split[4], isDone);
-                    taskList.add(e);
-                    break;
-                case "D" :
-                    Deadline d = new Deadline(split[2], split[3], isDone);
-                    taskList.add(d);
-                    break;
-                default:
-                    break;
+    private void init() {
+        try {
+            Scanner sc = new Scanner(dataFile);
+            while (sc.hasNext()) {
+                String in = sc.nextLine();
+                String[] split = in.split(" \\| ");
+                boolean isDone = split[1].equals("1");
+                switch (split[0].toUpperCase()) {
+                    case "T":
+                        Todo t = new Todo(split[2], isDone);
+                        taskList.add(t);
+                        break;
+                    case "E":
+                        Event e = new Event(split[2], split[3], split[4], isDone);
+                        taskList.add(e);
+                        break;
+                    case "D":
+                        Deadline d = new Deadline(split[2], split[3], isDone);
+                        taskList.add(d);
+                        break;
+                    default:
+                        break;
 
+                }
             }
+        } catch (FileNotFoundException e){
+            System.out.println(e);
         }
     }
 
     /**
      * This method handles the printing of list command.
      */
-    public static void printList() {
+    public static String printList() {
         ListIterator<Task> li = taskList.listIterator();
+        StringBuilder sb = new StringBuilder();
         if (!li.hasNext()) {
-            Ui.printListEmpty();
+            sb.append(Ui.printListEmpty());
         } else {
             int count = 1;
-            Ui.printListPrompt();
+            sb.append(Ui.printListPrompt());
             while (li.hasNext()) {
                 Task curr = li.next();
-                System.out.print(count + ". ");
-                System.out.print(curr);
+                sb.append(count).append(". ");
+                sb.append(curr);
                 count++;
             }
-            Ui.printDivider();
+            sb.append(Ui.printDivider());
         }
+        return sb.toString();
     }
 
     /**
@@ -110,27 +115,29 @@ public class TaskList {
      * This method searches for keywords in tasks.
      * @param keyword keyword to be searched
      */
-    public static void search(String keyword) {
+    public static String search(String keyword) {
         ListIterator<Task> li = taskList.listIterator();
+        StringBuilder sb = new StringBuilder();
         if (!li.hasNext()) {
-            Ui.printFindNot();
+            sb.append(Ui.printFindNot());
         } else {
             int count = 1;
             while (li.hasNext()) {
                 Task curr = li.next();
                 if (curr.hasKeyword(keyword)) {
                     if (count == 1) {
-                        Ui.printFind();
+                        sb.append(Ui.printFind());
                     }
-                    Ui.print(count, curr.toString());
+                    sb.append(Ui.print(count, curr.toString()));
                     count++;
                 }
             }
             if (count == 1) {
-                Ui.printFindNot();
+                sb.append(Ui.printFindNot());
             }
-            Ui.printDivider();
+            sb.append(Ui.printDivider());
         }
+        return sb.toString();
     }
 
     /**

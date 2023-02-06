@@ -25,7 +25,7 @@ public class EventCommand {
      * Parsing as well as creation of Event object is done here.
      *
      */
-    public void create() {
+    public String create() {
         boolean isName = true;
         boolean isStart = false;
         boolean isEnd = false;
@@ -66,6 +66,6 @@ public class EventCommand {
         strBuild.setLength(0);
         Event event = new Event(name, start, end, false);
         TaskList.addToList(event);
-        Ui.printDefault(event);
+        return Ui.printDefault(event);
     }
 }

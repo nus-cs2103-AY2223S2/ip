@@ -25,7 +25,7 @@ public class DeadlineCommand {
      * This method is used to create the Deadline command.
      * Parsing as well as creation of Deadline object is done here.
      */
-    public void create() {
+    public String create() {
         boolean isName = true;
         String name = " ", end = " ";
         for (int i = 1; i < inputs.length; i++) {
@@ -51,6 +51,6 @@ public class DeadlineCommand {
         strBuild.setLength(0);
         Deadline d = new Deadline(name, end, false);
         TaskList.addToList(d);
-        Ui.printDefault(d);
+        return Ui.printDefault(d);
     }
 }

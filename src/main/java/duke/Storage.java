@@ -3,7 +3,7 @@ package duke;
 import task.TaskList;
 
 import java.io.File;
-import java.nio.file.FileAlreadyExistsException;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -14,15 +14,11 @@ import java.nio.file.Paths;
  */
 public class Storage {
 
-    private static String DIRPATH;
-    private static String FILEPATH;
+    static final String DIRPATH = "./data";
+    static final String FILEPATH = "./data/tasks.txt";
 
     private static TaskList taskList;
-    public Storage (String dirpath, String filepath) throws Exception {
-        DIRPATH = dirpath;
-        FILEPATH = filepath;
-        this.init();
-    }
+
 
     /**
      * This method initialises the process of checking
@@ -31,22 +27,23 @@ public class Storage {
      * by default, exception will throw if it already exists.
      * Exception caught will then just load the file into File object
      * for future reference.
-     * @throws Exception when file already exist.
+     *
      */
-    private void init() throws Exception {
+    public String init() {
         try {
             Files.createDirectory(Paths.get(DIRPATH));
             File file = new File(Files.createFile(Paths.get(FILEPATH)).toString());
             taskList = new TaskList(file, true);
-            Ui.printInit();
-        } catch (FileAlreadyExistsException m) {
+            return Ui.printInit();
+        } catch (IOException m) {
             try {
                 File file = new File(Files.createFile(Paths.get(FILEPATH)).toString());
                 taskList = new TaskList(file, true);
-            } catch (FileAlreadyExistsException n) {
+                return Ui.printInit();
+            } catch (IOException n) {
                 File file = new File(FILEPATH);
                 taskList = new TaskList(file, false);
-                Ui.printWelcomeBack();
+                return Ui.printWelcomeBack();
             }
         }
     }

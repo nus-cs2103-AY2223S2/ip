@@ -1,5 +1,6 @@
 package command;
 
+import duke.MainWindow;
 import duke.Ui;
 
 import task.TaskList;
@@ -15,6 +16,7 @@ import task.Todo;
 public class TodoCommand {
 
     private String[] inputs;
+    private MainWindow mw = new MainWindow();
     private static StringBuilder strBuild = new StringBuilder();
 
     public TodoCommand(String[] inputs) {
@@ -26,14 +28,9 @@ public class TodoCommand {
      * Parsing as well as creation of Todo object is done here.
      *
      */
-    public void create() {
+    public String create() {
         if (inputs.length == 1) {
-            Ui.printTodoError();
-            String name = Ui.readCommand();
-            Todo t = new Todo(name, false);
-            strBuild.setLength(0);
-            TaskList.addToList(t);
-            Ui.printDefault(t);
+            return Ui.printMissingName();
         } else {
             for (int i = 1; i < inputs.length; i++) {
                 strBuild.append(inputs[i]);
@@ -44,7 +41,7 @@ public class TodoCommand {
             Todo t = new Todo(strBuild.toString(), false);
             strBuild.setLength(0);
             TaskList.addToList(t);
-            Ui.printDefault(t);
+            return Ui.printDefault(t);
         }
     }
 }

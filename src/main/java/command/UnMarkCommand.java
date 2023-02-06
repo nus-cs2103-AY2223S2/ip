@@ -1,5 +1,6 @@
 package command;
 
+import duke.MainWindow;
 import duke.Ui;
 
 import task.Task;
@@ -14,6 +15,7 @@ import task.TaskList;
  */
 public class UnMarkCommand {
     private int number;
+    private MainWindow mw = new MainWindow();
     public UnMarkCommand(String number) {
         this.number = Integer.parseInt(number) - 1;
     }
@@ -21,15 +23,13 @@ public class UnMarkCommand {
     /**
      * This method is used to unmark a certain task.
      */
-    public void unmark() {
+    public String unmark() {
         try {
             Task curr = TaskList.get(number);
             curr.unmark();
-            Ui.printUnmark(curr);
+            return Ui.printUnmark(curr);
         } catch (Exception m){
-            Ui.printWrongNumber();
-            String s = Ui.readCommand();
-            new UnMarkCommand(s).unmark();
+            return Ui.printWrongNumber();
         }
     }
 }

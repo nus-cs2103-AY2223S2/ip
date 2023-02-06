@@ -1,8 +1,9 @@
 package duke;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.TextField;
 import task.Task;
 
-import java.util.Dictionary;
 import java.util.Scanner;
 
 /**
@@ -13,6 +14,8 @@ public class Ui {
 
     private static final String DIVIDER = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
 
+    @FXML
+    private static TextField userInput;
     private static Scanner sc = new Scanner(System.in);
 
     /**
@@ -20,21 +23,21 @@ public class Ui {
      * @return String This returns the command line
      */
     public static String readCommand() {
-        return sc.nextLine();
+        return userInput.getText();
     }
 
     /**
      * This method prints the task information.
-     * @param String to be printed.
+     * @param info to be printed.
      */
-    public static void print(int num, String info) {
-        System.out.print(num + ". " + info);
+    public static String print(int num, String info) {
+        return (num + ". " + info);
     }
     /**
      * This method prints the farewell message
      */
-    public void printBye() {
-        System.out.println(DIVIDER + "Ah..... okkkk nehmind. GO. BYE. :)\n" + DIVIDER);
+    public static String printBye() {
+        return(DIVIDER + "Ah..... okkkk nehmind. GO. BYE. :)\n" + DIVIDER);
     }
 
     /**
@@ -42,8 +45,8 @@ public class Ui {
      * been added.
      * @param task Task object added.
      */
-    public static void printDefault(Task task) {
-        System.out.println(DIVIDER + "Aite letsgetit you added:\n" + task.toString()  +
+    public static String printDefault(Task task) {
+        return (DIVIDER + "Aite letsgetit you added:\n" + task.toString()  +
                 "currently you have " + task.numberTask() + " tasks\n" + DIVIDER);
     }
 
@@ -52,67 +55,67 @@ public class Ui {
      * been deleted.
      * @param task Task object to be deleted.
      */
-    public static void printDelete(Task task) {
-        System.out.println(DIVIDER + "Alright, deleted task:\n" + task
+    public static String printDelete(Task task) {
+        return(DIVIDER + "Alright, deleted task:\n" + task
                 + "\n" + task.numberTask() + " tasks left!\n" + DIVIDER);
     }
 
     /**
      * This method prints the divider for user interface design.
      */
-    public static void printDivider() {
-        System.out.println(DIVIDER);
+    public static String printDivider() {
+        return(DIVIDER);
     }
 
     /**
      * This method prints when user enters more than one word
      * when using find function.
      */
-    public static void printEnterKeyword() {
-        System.out.println("Please enter only one keyword:");
+    public static String printEnterKeyword() {
+        return("Please enter only one keyword:");
     }
 
     /**
      * This method prints the message for found keywords.
      */
-    public static void printFind() {
-        System.out.println(DIVIDER + "Aye this is what i found according to your keyword:\n");
+    public static String printFind() {
+        return(DIVIDER + "Aye this is what i found according to your keyword:\n");
     }
 
-    public static void printFindNot() {
-        System.out.println(DIVIDER + "Hey cant find any task with that keyword man.");
+    public static String printFindNot() {
+        return(DIVIDER + "Hey cant find any task with that keyword man.\n");
     }
 
     /**
      * This method prints the message for first time
      * initialization of Duke program.
      */
-    public static void printInit() {
-        System.out.println(DIVIDER + "Welcome hooman!\nCome add some tasks today!\n" + DIVIDER);
+    public static String printInit() {
+        return(DIVIDER + "Welcome hooman!\nCome add some tasks today!\n" + DIVIDER);
     }
 
     /**
      * This method prints the message for an
      * empty list upon list command.
      */
-    public static void printListEmpty() {
-        System.out.println(DIVIDER + "List is empty.......\n" + DIVIDER);
+    public static String printListEmpty() {
+        return(DIVIDER + "List is empty.......\n" + DIVIDER);
     }
 
     /**
      * This method prints the message for a
      * non-empty list upon list command
      */
-    public static void printListPrompt() {
-        System.out.println(DIVIDER + "Hurry up and finish these tasks:");
+    public static String printListPrompt() {
+        return(DIVIDER + "Hurry up and finish these tasks:\n");
     }
 
     /**
      * This method prints the message upon mark command.
      * @param task Task that has been marked.
      */
-    public static void printMark(Task task) {
-        System.out.println(DIVIDER + "Congrats this has been d:\n"
+    public static String printMark(Task task) {
+        return(DIVIDER + "Congrats this has been d:\n"
             + task + "\n down, Leskooo!\n" + DIVIDER);
     }
 
@@ -120,16 +123,16 @@ public class Ui {
      * This method prints the error message when
      * Todo command is incomplete.
      */
-    public static void printTodoError() {
-        System.out.println("What do u need to do ah? u never write.");
+    public static String printTodoError() {
+        return("What do u need to do ah? u never write.");
     }
 
     /**
      * This method prints the message upon unmark command.
      * @param task Task that has been unmarked.
      */
-    public static void printUnmark(Task task) {
-        System.out.println(DIVIDER + "Alright, new task:\n" + task
+    public static String printUnmark(Task task) {
+        return(DIVIDER + "Alright, new task:\n" + task
                 + "\nWe can do dis!\n" + DIVIDER);
     }
 
@@ -137,18 +140,18 @@ public class Ui {
      * This method prints the message to welcome
      * user back to Duke.
      */
-    public static void printWelcomeBack() {
+    public static String printWelcomeBack() {
         String welcome = "Welcome back hooman!\n" +
                 "Wat u want to do today?\n";
-        System.out.println(DIVIDER + welcome + DIVIDER);
+        return(DIVIDER + welcome + DIVIDER);
     }
 
     /**
      * This method prints the error message when
      * user inputs a commmand not recognised
      */
-    public void printWrongCommand() {
-        System.out.println(DIVIDER + "I have no idea what is going on, try again?\n" + DIVIDER);
+    public static String printWrongCommand() {
+        return(DIVIDER + "I have no idea what is going on, try again?\n" + DIVIDER);
     }
 
     /**
@@ -156,8 +159,12 @@ public class Ui {
      * user inputs a number less than 0 or more than
      * what exists for marking, unmarking and deleting commands.
      */
-    public static void printWrongNumber() {
-        System.out.println("Number entered out of range, type the number again");
+    public static String printWrongNumber() {
+        return("Number entered out of range, try again");
+    }
+
+    public static String printMissingName() {
+        return("No name identified, try again\n");
     }
 
 }

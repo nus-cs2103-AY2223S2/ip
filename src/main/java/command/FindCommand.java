@@ -1,5 +1,6 @@
 package command;
 
+import duke.MainWindow;
 import duke.Ui;
 import task.TaskList;
 
@@ -10,7 +11,7 @@ import task.TaskList;
 public class FindCommand {
 
     private String[] inputs;
-
+    private MainWindow mw = new MainWindow();
     private static StringBuilder strBuild = new StringBuilder();
 
     public FindCommand(String[] inputs) {
@@ -21,15 +22,16 @@ public class FindCommand {
      * This method invokes the find function to search
      * the keyword in tasks.
      */
-    public void find() {
+    public String find() {
         String keyword = "";
         if (inputs.length != 2) {
-            Ui.printEnterKeyword();
+            mw.printDuke(Ui.printEnterKeyword());
             keyword = Ui.readCommand();
+            mw.printUser(keyword);
         } else {
             keyword = inputs[1];
         }
-        TaskList.search(keyword);
+        return TaskList.search(keyword);
 
     }
 
