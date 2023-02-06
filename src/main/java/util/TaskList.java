@@ -53,12 +53,15 @@ public class TaskList {
      * Displays the tasks being tracked by TaskList.
      */
     public String listTasks() {
-        System.out.println("    Here are the tasks in your list:");
         StringBuilder sb = new StringBuilder();
+        sb.append("    Here are the tasks in your list:");
         int counter = 1;
         for (Task t : taskList) {
             sb.append(counter + ". " + t.toString() + "\n");
             counter++;
+        }
+        if (counter == 1) {
+            return "Nothing at the moment!";
         }
         return sb.toString();
     }
