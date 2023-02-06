@@ -4,11 +4,8 @@ package duke.command;
  * Represents a command that is entered by the user
  */
 public abstract class Command {
-    /** Whether the command should cause the bot to exit. */
-    protected boolean isExit = false;
-
     /**
-     * Constructs a <code>Command</code> instance.
+     * Constructs a {@code Command} instance.
      */
     public Command() {
         //Empty constructor
@@ -21,12 +18,4 @@ public abstract class Command {
      */
     public abstract String runCommand();
 
-    /**
-     * Checks if the command should cause the bot to exit.
-     *
-     * @return true if the command should cause the bot to exit.
-     */
-    public boolean isExit() {
-        return isExit;
-    }
 }

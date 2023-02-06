@@ -23,6 +23,7 @@ public abstract class Task {
      */
     public void setDoneStatus() {
         isDone = true;
+        assert isDone;
     }
 
     /**
@@ -30,6 +31,7 @@ public abstract class Task {
      */
     public void setUndoneStatus() {
         isDone = false;
+        assert !isDone;
     }
 
     /**

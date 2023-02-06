@@ -29,6 +29,14 @@ dependencies {
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
 }
 
+
+
+run {
+    enableAssertions = true
+    standardInput = System.in
+}
+
+
 test {
     useJUnitPlatform()
 
@@ -57,6 +65,11 @@ checkstyle {
     toolVersion = '10.2'
 }
 
-run{
+run {
+    enableAssertions = true
     standardInput = System.in
+}
+
+tasks.withType(JavaExec) {
+    enableAssertions = true
 }

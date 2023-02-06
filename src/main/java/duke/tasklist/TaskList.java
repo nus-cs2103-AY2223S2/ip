@@ -36,6 +36,7 @@ public class TaskList {
      * @param index The index in the list from which to retrieve the task.
      */
     public Task getTask(int index) {
+        assert index >= 0 : "Invalid index";
         return this.tasks.get(index);
     }
 
@@ -52,6 +53,7 @@ public class TaskList {
      * @param index Index of the task which is to be deleted.
      */
     public void deleteTask(int index) {
+        assert index >= 0 : "Invalid index";
         tasks.remove(index);
     }
 

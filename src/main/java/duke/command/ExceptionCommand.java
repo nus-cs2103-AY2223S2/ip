@@ -13,6 +13,7 @@ public class ExceptionCommand extends Command {
     public ExceptionCommand(String exceptionMessage) {
         super();
         this.exceptionMessage = exceptionMessage;
+        assert this.exceptionMessage != null : "Invalid exception message";
 
     }
 

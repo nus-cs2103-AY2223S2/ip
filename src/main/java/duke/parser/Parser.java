@@ -30,7 +30,7 @@ public class Parser {
     private TaskList tasks;
 
     /**
-     * Constructs a <code>Parser</code> instance.
+     * Constructs a {@code Parser} instance.
      *
      * @param tasks Task list of the user
      */
@@ -54,8 +54,17 @@ public class Parser {
         case "help":
             return CommandType.HELP;
         default:
-            //Do nothing
+            //Do nothing because there is subsequent processing if the command
+            //is not the above 3 commands.
         }
+
+        //Assert that raw command cannot be bye, list or help
+        assert rawCommand.equals("bye") == false : "Raw command should not be bye.";
+        assert rawCommand.equals("list") == false : "Raw command should not be list.";
+        assert rawCommand.equals("help") == false : "Raw command should not be help.";
+
+
+
 
         //Multiple word commands
         String[] inputArray = rawCommand.split(" ");
@@ -329,14 +338,14 @@ public class Parser {
     }
 
     /**
-     * Checks if a string can be converted into an <code>Integer</code>.
+     * Checks if a string can be converted into an {@code Integer}.
      *
-     * @param stringToCheck <code>String</code> to check whether the conversion is possible.
+     * @param stringToCheck {@code String} to check whether the conversion is possible.
      * @return true if it can be converted, else return false.
      */
     public boolean isInteger(String stringToCheck) {
         try {
-            int intVersion = Integer.parseInt(stringToCheck);
+            Integer.parseInt(stringToCheck);
         } catch (NumberFormatException numberFormatException) {
             return false;
         }
