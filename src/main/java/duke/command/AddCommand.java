@@ -15,7 +15,7 @@ public class AddCommand extends Command {
 
     @Override
     public void initCommand(TaskList tasks, Ui ui, Storage storage) {
-        tasks.addTask(task);
+        tasks.addTask(this.task);
         storage.saveData(tasks);
         ui.displayAddTaskMessage(task, tasks);
     }

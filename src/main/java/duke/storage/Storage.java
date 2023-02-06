@@ -2,6 +2,7 @@ package duke.storage;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -22,7 +23,7 @@ public class Storage {
         checkFile(filePath);
     }
     
-    private  void checkFile(String filePath) {
+    private void checkFile(String filePath) {
         File file = new File(filePath);
         if (!file.isFile()) {
             try {
@@ -30,14 +31,15 @@ public class Storage {
             } catch (IOException e) {
                 System.out.println(e);
             }
-
         }
     }
 
-    public  void saveData(TaskList taskList) {
+    public void saveData(TaskList taskList) {
         try {
             FileWriter fileWriter = new FileWriter(filePath);
-            for (Task t : taskList) {
+
+            for (int i = 0; i < taskList.size(); i++) {
+                Task t = taskList.getTask(i + 1);
                 fileWriter.write(t.formatForFile());
             }
             fileWriter.close();
@@ -46,8 +48,8 @@ public class Storage {
         }
     }
 
-    public ArrayList<Task> loadFile() throws FileNotFoundException {
-        ArrayList<Task> taskList = new ArrayList<>();
+    public List<Task> loadFile() throws FileNotFoundException {
+        List<Task> taskList = new ArrayList<>();
         File file = new File(filePath);
         if (file.isFile()) {
             Scanner sc = new Scanner(file);
@@ -72,6 +74,7 @@ public class Storage {
 
                 taskList.add(task);
             }
+            sc.close();
         }
 
         return taskList;

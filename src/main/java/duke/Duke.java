@@ -11,21 +11,14 @@ import java.io.FileNotFoundException;
 
 public class Duke {
 
-    enum Type {
-        TODO, DEADLINE, EVENT
-    }
-
     private static TaskList tasks;
-    private static Ui ui;
+    private Ui ui;
     private static final String FILEPATH = "duke.txt";
-    private static Storage storage;
-    public static void main(String[] args) {
-        initDuke();
-    }
+    private Storage storage;
 
-    public static void initDuke() {
-        ui.displayLogo();
+    public Duke() {
         ui = new Ui();
+        ui.displayLogo();
         storage = new Storage(FILEPATH);
         try {
             tasks = new TaskList(storage.loadFile());
@@ -34,22 +27,34 @@ public class Duke {
             tasks = new TaskList();
         }
         System.out.println(tasks);
-        boolean startDuke = true;
+    }
+
+    public static void main(String[] args) {
+        new Duke().initDuke();
+    }
+
+
+    public void initDuke() {
+        boolean isTerminated = false;
         Scanner sc = new Scanner(System.in);
-        while (startDuke) {
+        while (!isTerminated) {
             try {
                 String command = sc.nextLine();
                 ui.displayLine();
                 Command c = Parser.parse(command);
                 c.initCommand(tasks, ui, storage);
-                startDuke = c.isTerminated();
+                isTerminated = c.isTerminated();
             }
             catch (DukeException e) {
                 System.out.println(e);
+            } 
+            catch (IllegalArgumentException e) {
+                System.out.println("ERROR: " + e);
             }
             finally {
                 ui.displayLine();
             }
         }
+        sc.close();
     }
 }

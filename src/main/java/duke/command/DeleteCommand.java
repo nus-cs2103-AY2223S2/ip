@@ -16,7 +16,7 @@ public class DeleteCommand extends Command {
     public void initCommand(TaskList tasks, Ui ui, Storage storage) {
         // TODO Auto-generated method stub
         if (tasks.size() >= taskID && !tasks.isEmpty()) {
-            Task currentTask = tasks.geTask(taskID);
+            Task currentTask = tasks.getTask(taskID);
             tasks.deleteTask(taskID);
             storage.saveData(tasks);
             ui.displayDeleteTaskMessage(currentTask, tasks);

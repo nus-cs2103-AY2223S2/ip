@@ -15,7 +15,7 @@ public class MarkCommand extends Command {
     @Override
     public void initCommand(TaskList tasks, Ui ui, Storage storage) {
         if (tasks.size() >= taskID && !tasks.isEmpty()) {
-            Task currentTask = tasks.geTask(taskID);
+            Task currentTask = tasks.getTask(taskID);
             currentTask.mark();
             storage.saveData(tasks);
             ui.displayMarkMessage(currentTask);
