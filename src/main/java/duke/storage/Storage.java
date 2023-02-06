@@ -58,10 +58,8 @@ public class Storage {
 
     public ArrayList<Task> loadData() throws DukeException {
         ArrayList<Task> taskList = new ArrayList<>();
-
         File file = new File(this.filePath);
         try {
-            // create file if file is empty
             if (!file.exists()) {
                 file.getParentFile().mkdir();
                 file.createNewFile();
