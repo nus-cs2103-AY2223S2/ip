@@ -22,8 +22,11 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         try {
+            // relative paths start with /
+            // for some reason FXML is smart enough to find the real relative path
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
+            ap.getStylesheets().add("/css/MainWindow.css");
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);

@@ -1,0 +1,44 @@
+#userInput {
+    -fx-background-color: white;
+    -fx-border-width: 2px;
+    -fx-border-color: black;
+    -fx-border-style: solid;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 13px;
+    -fx-font-family: arial;
+    -fx-font-size: 13px;
+}
+#sendButton {
+    -fx-background-color: "#1D9BF0";
+    -fx-border-width: 2px;
+    -fx-border-style: solid;
+    -fx-border-color: black;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 13px
+}
+
+#mainContainer {
+    -fx-background-color: white;
+}
+
+#scrollPane {
+    -fx-border-width: 0;
+}
+#dialogContainer {
+    -fx-background-color: white;
+    -fx-border-width: 0;
+}
+
+#mainContainer {
+    -fx-background-color: white;
+}
+
+#closeProgramButton {
+    -fx-background-color: "#1D9BF0";
+    -fx-border-width: 2px;
+    -fx-border-color: black;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 13px;
+    -fx-font-family: arial;
+    -fx-font-size: 13px;
+}
