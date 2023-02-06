@@ -31,26 +31,24 @@ public class Commands {
     /**
      * Executes the find command.
      *
-     * @param textUi TextUi for Duke.
      * @param taskList TaskList for Duke.
      * @return String to display.
      */
-    public static String executeFindCommand(String searchTerm, TextUi textUi, TaskList taskList) {
+    public static String executeFindCommand(String searchTerm, TaskList taskList) {
         if (taskList.isEmpty()) {
             return "You currently have no task.";
         } else {
             StringBuilder outputString = new StringBuilder("Here are the matching tasks in your list:\n");
-
-            int count = 1;
+            int countLabel = 1;
             for (int i = 0; i < taskList.getArraySize(); i++) {
                 String currentTaskDescription = taskList.getTask(i).getDescription();
                 if (currentTaskDescription.contains(searchTerm)) {
-                    String currentString = count + ". " + taskList.getTask(i) + "\n";
+                    String currentString = countLabel + ". " + taskList.getTask(i) + "\n";
                     outputString.append(currentString);
-                    count++;
+                    countLabel++;
                 }
             }
-            if (count == 1) {
+            if (countLabel == 1) {
                 // there is no task with the keyword.
                 return "Here are no matching task in your list.\n";
             }
@@ -75,6 +73,7 @@ public class Commands {
             Task toMark = taskList.getTask(indexToMark);
             toMark.markAsDone();
             storage.saveTaskListToStorage(taskList);
+            assert toMark.isDone() : "Marking of the task failed.";
             return "Nice! I've marked this task as done:\n" + toMark;
         } else {
             throw new DukeException("Invalid, there is no such task");
@@ -97,6 +96,7 @@ public class Commands {
             Task toUnmark = taskList.getTask(indexToUnmark);
             toUnmark.markAsUndone();
             storage.saveTaskListToStorage(taskList);
+            assert toUnmark.isDone() : "Un-marking of the task failed.";
             return "OK, I've marked this task as not done yet:\n" + toUnmark;
         } else {
             throw new DukeException("Invalid, there is no such task");

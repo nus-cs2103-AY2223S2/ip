@@ -76,6 +76,7 @@ public class Storage {
         try {
             FileWriter myWriter = new FileWriter(file); // this truncates the duke.txt to size 0
             for (int i = 0; i < taskList.getArraySize(); i++) {
+                assert taskList.getTask(i) != null : "There is an error saving an empty task.";
                 myWriter.write(taskList.getTask(i).convertToStorableString() + "\n");
             }
             myWriter.close();
