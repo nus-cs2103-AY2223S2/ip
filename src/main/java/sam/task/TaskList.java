@@ -2,6 +2,7 @@ package sam.task;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * Represents a list of tasks.
@@ -97,9 +98,9 @@ public class TaskList {
     public List<String> findTasks(String subString) {
         List<String> list = new ArrayList<>();
         for (int i = 0; i < count(); i++) {
-            Task t = tasks.get(i);
-            if (t.title.contains(subString)) {
-                list.add(String.format("%d: %s", i + 1, t));
+            Task task = tasks.get(i);
+            if (task.title.contains(subString)) {
+                list.add(String.format("%d: %s", i + 1, task));
             }
         }
         return list;
