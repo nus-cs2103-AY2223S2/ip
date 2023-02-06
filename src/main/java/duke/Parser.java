@@ -4,6 +4,12 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.ToDo;
 
+/**
+ * Creates a new parser.
+ *
+ * @author Evan Lee
+ * @version CS2103 AY22/23 Semester 2
+ */
 public class Parser {
 	/**
 	 * Creates task and stores it in Task arraylist.
@@ -78,3 +84,4 @@ public class Parser {
 		return output;
 	}
 }
+

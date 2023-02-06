@@ -7,6 +7,12 @@ import java.util.ArrayList;
 import duke.task.Task;
 
 
+/**
+ * Creates a new task list.
+ *
+ * @author Evan Lee
+ * @version CS2103 AY22/23 Semester 2
+ */
 public class TaskList {
     private ArrayList<Task> tasks;
     private boolean isInitializingData = true;
