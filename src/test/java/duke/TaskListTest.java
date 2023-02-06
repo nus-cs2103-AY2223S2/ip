@@ -12,7 +12,6 @@ public class TaskListTest {
         tl.addTodo("abc");
         tl.addTodo("123");
         TaskList list = tl.find("1");
-        assertEquals(list.getList().get(0).desc, "123");
-        assertEquals(list.getList().size(), 1);
+        assertEquals("1: [][T][LOW] 123\n", list.toString());
     }
 }
