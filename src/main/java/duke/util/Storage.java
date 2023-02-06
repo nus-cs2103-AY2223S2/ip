@@ -109,7 +109,7 @@ public class Storage {
                 taskList.add(event);
                 break;
             default:
-                // Will not reach here
+                assert false : "Should not reach here"; // Will not reach here
             }
         }
 
