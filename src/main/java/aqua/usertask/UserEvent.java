@@ -6,7 +6,7 @@ import java.util.Optional;
 import aqua.util.DateUtils;
 
 
-/** An {@code AquaTask} to represent an Event */
+/** A {@code UserTask} to represent an event */
 public class UserEvent extends UserTask {
     /** Tag of {@code startTime} argument when parsing. */
     public static final String TAG_START_TIME = "from";
@@ -19,8 +19,8 @@ public class UserEvent extends UserTask {
 
 
     /**
-     * Constructs an AquaEvent from the given parameters while setting the
-     * event completion status to {@code false}.
+     * Constructs a {@code UserEvent} from the given parameters while setting
+     * the event's completion status to {@code false}.
      *
      * @param name - the name of the event.
      * @param startTime - the time the event starts.
@@ -31,7 +31,7 @@ public class UserEvent extends UserTask {
     }
 
     /**
-     * Constructs an AquaEvent from the given parameters.
+     * Constructs a {@code UserEvent} from the given parameters.
      *
      * @param name - the name of the event.
      * @param isCompelte - if the event is completed.
