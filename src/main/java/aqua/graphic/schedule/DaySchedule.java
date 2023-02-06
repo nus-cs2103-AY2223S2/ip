@@ -32,7 +32,6 @@ public class DaySchedule extends HBox {
     private final VBox rowDisplayArea = new VBox();
 
     private final double rowWidth;
-    private final double conflictThreshold;
 
 
     /**
@@ -43,7 +42,6 @@ public class DaySchedule extends HBox {
      */
     public DaySchedule(LocalDateTime startTime, List<ScheduleTimeable> timeables, double rowWidth) {
         this.rowWidth = rowWidth;
-        conflictThreshold = (MIN_BLOCK_WIDTH / rowWidth) * MINUTES_IN_A_DAY;
         getChildren().addAll(rowDisplayArea);
         List<? extends List<ScheduleTimeable>> sepTimeable = separateConflicting(timeables);
         for (List<ScheduleTimeable> row : sepTimeable) {
@@ -56,11 +54,12 @@ public class DaySchedule extends HBox {
 
 
     private List<? extends List<ScheduleTimeable>> separateConflicting(List<ScheduleTimeable> timeables) {
+        double threshold = (MIN_BLOCK_WIDTH / rowWidth) * MINUTES_IN_A_DAY;
         ArrayList<ArrayList<ScheduleTimeable>> sepTimeables = new ArrayList<>();
         for (ScheduleTimeable timeable : timeables) {
             boolean isAdded = false;
             for (List<ScheduleTimeable> timeableSet : sepTimeables) {
-                if (!hasConflict(timeable, timeableSet)) {
+                if (!hasConflict(timeable, timeableSet, threshold)) {
                     timeableSet.add(timeable);
                     isAdded = true;
                     break;
@@ -74,12 +73,12 @@ public class DaySchedule extends HBox {
     }
 
 
-    private boolean hasConflict(Timeable timeable, List<? extends Timeable> timeables) {
+    private boolean hasConflict(Timeable timeable, List<? extends Timeable> timeables, double threshold) {
         for (Timeable storedTimeable : timeables) {
             if (DateUtils.isIntersecting(
                         timeable.getStart(), timeable.getEnd(),
                         storedTimeable.getStart(), storedTimeable.getEnd(),
-                        conflictThreshold)) {
+                        threshold)) {
                 return true;
             }
         }
