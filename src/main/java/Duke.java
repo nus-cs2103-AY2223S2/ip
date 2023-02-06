@@ -1,6 +1,4 @@
 import java.util.Scanner;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Duke {
 
@@ -20,18 +18,13 @@ public class Duke {
 
     public void chatDuke() {
 
-        List<String> commandList = new ArrayList<>();
-
         this.printGreetingMessage();
 
         boolean saidBye = false;
         while (!saidBye) {
             String command = sc.nextLine();
-            if (command.equals("list")) {
-                this.printCommandList(commandList);
-            } else if (!command.equals("bye")) {
+            if (!command.equals("bye")) {
                 this.echoCommand(command);
-                commandList.add(command);
             } else {
                 saidBye = true;
                 this.printByeMessage();
@@ -48,19 +41,8 @@ public class Duke {
 
     public void echoCommand(String command) {
         System.out.println("\t____________________________________________________________" +
-                "\n\t" + "added: " + command +
+                "\n\t" + command +
                 "\n\t____________________________________________________________");
-    }
-
-    public void printCommandList(List<String> commandList) {
-        System.out.println("\t____________________________________________________________");
-
-        for (int i = 0; i < commandList.size(); i++) {
-            int numbering = i + 1;
-            System.out.println("\t" + numbering + ". " + commandList.get(i));
-        }
-
-        System.out.println("\t____________________________________________________________");
     }
 
     public void printByeMessage() {
