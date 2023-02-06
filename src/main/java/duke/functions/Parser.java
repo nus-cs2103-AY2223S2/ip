@@ -3,6 +3,7 @@ package duke.functions;
 import duke.exceptions.*;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -28,44 +29,35 @@ public class Parser {
      * @param input String input written in the command line.
      * @throws InvalidCommandException Error from an invalid command.
      */
-    public void handleInput(String input) throws InvalidCommandException {
+    public String handleInput(String input) throws InvalidCommandException {
         String[] split = input.split(" ", 2);
         String cmd = split[0];
         switch (cmd) {
             case "list":
-                System.out.println(this.list.toString());
-                break;
+                return this.list.toString();
             case "mark":
-                mark(split);
-                break;
+                return mark(split);
             case "unmark":
-                unmark(split);
-                break;
+                return unmark(split);
             case "delete":
-                delete(split);
-                break;
+                return delete(split);
             case "deadline":
-                deadline(split);
-                break;
+                return deadline(split);
             case "event":
-                event(split);
-                break;
+                return event(split);
             case "todo":
-                todo(split);
-                break;
+                return todo(split);
             case "bye":
-                bye(split);
-                break;
+                return bye(split);
             case "find":
-                find(split);
-                break;
+                return find(split);
             default:
                 throw new InvalidCommandException();
         }
     }
 
     /**
-     * Main method to parse database Duke.txt to populate current TaskList.
+     * Main method to parse database duke.functions.Duke.txt to populate current TaskList.
      *
      * @param fileReader
      * @param dl TaskList from
@@ -109,109 +101,110 @@ public class Parser {
     }
 
 
-    private void mark(String[] split) throws InvalidCommandException {
+    private String mark(String[] split) throws InvalidCommandException {
         try {
             if (split.length > 1) {
                 throw new MultipleArgumentsException();
             }
             Integer index = Integer.parseInt(split[1]);
-            this.list.mark(index);
+            return this.list.mark(index);
         } catch (NumberFormatException | MultipleArgumentsException e) {
-            System.out.println("Please input a number after the command.");
+           return ("Please input a number after the command.");
         }
     }
 
-    private void unmark(String[] split) throws InvalidCommandException {
+    private String unmark(String[] split) throws InvalidCommandException {
         try {
             if (split.length > 1) {
                 throw new MultipleArgumentsException();
             }
             Integer index = Integer.parseInt(split[1]);
-            this.list.unMark(index);
+            return this.list.unMark(index);
         } catch (NumberFormatException | MultipleArgumentsException e) {
-            System.out.println("Please input a number after the command.");
+            return "Please input a number after the command.";
         }
     }
 
-    private void delete(String[] split) {
+    private String delete(String[] split) {
         try {
             if (split.length > 1) {
                 throw new MultipleArgumentsException();
             }
             Integer index = Integer.parseInt(split[1]);
-            this.list.deleteTask(index);
+            return this.list.deleteTask(index);
         } catch (NumberFormatException | MultipleArgumentsException e) {
-            System.out.println("Please input a number after the command.");
+            return "Please input a number after the command.";
         }
     }
 
-    private void deadline(String[] split) {
+    private String deadline(String[] split) {
         try {
             String[] secondSplit = split[1].split("/by ");
             if (secondSplit.length != 2) {
                 throw new InvalidArgumentsException();
             }
-            this.list.insertDeadline(secondSplit[0], secondSplit[1]);
+            return this.list.insertDeadline(secondSplit[0], secondSplit[1]);
         } catch (InvalidArgumentsException | DateTimeFormatException e) {
-            System.out.println(e.getMessage());
+            return e.getMessage();
         }
     }
 
-    private void event(String[] split) {
+    private String event(String[] split) {
         try {
             String[] secondSplit = split[1].split("/from |/to ", 3);
             System.out.println(secondSplit);
             if (secondSplit.length != 3) {
                 throw new InvalidArgumentsException();
             }
-            this.list.insertEvent(secondSplit[0], secondSplit[1], secondSplit[2]);
+            return this.list.insertEvent(secondSplit[0], secondSplit[1], secondSplit[2]);
         } catch (InvalidArgumentsException e) {
-            System.out.println(e.getMessage());
+            return e.getMessage();
         }
     }
 
-    private void todo(String[] split) {
+    private String todo(String[] split) {
         try {
             if (split.length != 2) {
                 throw new InvalidArgumentsException();
             }
             String todoName = split[1];
-            this.list.insertToDo(todoName);
+            return this.list.insertToDo(todoName);
         } catch (InvalidArgumentsException e) {
-            System.out.println(e.getMessage());
+            return e.getMessage();
         }
     }
 
-    private void find(String[] split) {
+    private String find(String[] split) {
         try {
             if (split.length != 2) {
                 throw new InvalidArgumentsException();
             }
             String name = split[1];
             ArrayList<Task> results = this.list.findMatchingTasks(name);
+            String output = "Here are the tasks in your list: \n";
             if (!results.isEmpty()) {
-                System.out.println("Here are the tasks in your list:");
                 int index = 0;
                 for (Task task : results) {
-                    System.out.printf("%d.%s%n", index, task);
+                    output += String.format("%d.%s%n\n", index, task);
                     index++;
                 }
             } else {
-                System.out.println("There are no matching tasks currently!");
+                return "There are no matching tasks currently!";
             }
+            return output;
         }catch (InvalidArgumentsException e) {
-            System.out.println(e.getMessage());
+            return e.getMessage();
         }
     }
 
-    private void bye(String[] split) throws InvalidCommandException {
+    private String bye(String[] split) throws InvalidCommandException {
         try {
             if (split.length != 1) {
                 throw new InvalidArgumentsException();
             }
-            exit();
+            return "Bye. Come back soon!";
         } catch (InvalidArgumentsException e) {
-            System.out.println(e.getMessage());
+            return e.getMessage();
         }
     }
 

@@ -33,7 +33,7 @@ public class TaskToDo extends Task {
     }
 
     /**
-     * Returns string representation of a TaskToDo object that is stored in the Duke.txt file.
+     * Returns string representation of a TaskToDo object that is stored in the duke.functions.Duke.txt file.
      *
      * @return String representation of TaskTodo.
      */

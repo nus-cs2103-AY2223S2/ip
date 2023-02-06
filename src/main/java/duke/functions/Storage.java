@@ -21,7 +21,7 @@ public class Storage {
     /**
      * Reads duke.txt and populates existing TaskList in the appropriate format.
      *
-     * @param dl TaskList passed down from Duke main class.
+     * @param dl TaskList passed down from duke.functions.Duke main class.
      */
     public void readDatabase(TaskList dl) {
         File f = new File(filePath);

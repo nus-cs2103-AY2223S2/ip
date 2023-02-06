@@ -21,7 +21,7 @@ public class Ui {
     /**
      * Main method to start interaction between user and interface.
      *
-     * @param records TaskList passed down from Duke main class.
+     * @param records TaskList passed down from duke.functions.Duke main class.
      */
     public void run(TaskList records) {
         greet();
@@ -54,7 +54,7 @@ public class Ui {
      * @return String object to be written to the command line.
      */
     public static String format(String input) {
-        String s = "____________________________________________________________";
+        String s = "____________________________________";
         return String.format("%s\n%s\n%s", s, input, s);
     }
 

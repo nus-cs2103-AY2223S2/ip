@@ -39,35 +39,32 @@ public class TaskList {
      *
      * @param index Index of task marked.
      */
-    public void mark(int index) {
+    public String mark(int index) {
         index--;
         if (index < 0 || index > size) {
-            System.out.println(String.format("Indices have to be positive and less than %d.", size));
-            return;
+            return(String.format("Indices have to be positive and less than %d.", size));
         }
         Task task = this.records.get(index);
         task.markDone();
         dw.setDone(index);
-        System.out.println(Ui.format("Nice! I've marked this task as done:\n" + task.toString()));
-        return;
+        return(Ui.format("Nice! I've marked this task as done:\n" + task.toString()));
     }
 
     /**
      * Marks a task in the list as undone. (1-indexed)
      *
      * @param index Index of task marked.
+     * @return Completion announcement.
      */
-    public void unMark(int index) {
+    public String unMark(int index) {
         index--;
         if (index < 0 || index > size) {
-            System.out.println(String.format("Indices have to be positive and less than %d.", size));
-            return;
+            return String.format("Indices have to be positive and less than %d.", size);
         }
         Task task = this.records.get(index);
         task.markUndone();
         dw.setUndone(index);
-        System.out.println(Ui.format("OK, I've marked this task as not done yet:\n\n" + task.toString()));
-        return;
+        return Ui.format("OK, I've marked this task as not done yet:\n\n" + task.toString());
     }
 
     /**
@@ -75,11 +72,11 @@ public class TaskList {
      *
      * @param name Task name to be added.
      */
-    public void insertTask(String name) {
+    public String insertTask(String name) {
         Task t = new Task(name);
         this.records.add(t);
         dw.addToDb(t);
-        System.out.println(Ui.format("added: " + t));
+        return Ui.format("added: " + t);
     }
 
     /**
@@ -87,11 +84,11 @@ public class TaskList {
      *
      * @param name Task name to be added.
      */
-    public void insertToDo(String name) {
+    public String insertToDo(String name) {
         TaskToDo t = new TaskToDo(name);
         this.records.add(t);
         dw.addToDb(t);
-        System.out.println(Ui.format("Got it. I've added this task:\n" + t.toString()));
+        return Ui.format("Got it. I've added this task:\n" + t.toString());
     }
 
     /**
@@ -110,9 +107,9 @@ public class TaskList {
      *
      * @param name Task name to be added.
      * @param time Deadline time in string, according to the dateTimeRegex format.
+     * @return Task added successfully announcement.
      */
-    public void insertDeadline(String name, String time) throws DateTimeFormatException {
-        System.out.println(time);
+    public String insertDeadline(String name, String time) throws DateTimeFormatException {
         try {
             if (!time.matches(dateTimeRegex)) { // dd/mm/yy tttt
                 throw new DateTimeFormatException();
@@ -121,9 +118,9 @@ public class TaskList {
             TaskDeadline d = new TaskDeadline(time, dateTime);
             this.records.add(d);
             dw.addToDb(d);
-            System.out.println(Ui.format("Got it. I've added this task:\n" + d.toString()));
+            return Ui.format("Got it. I've added this task:\n" + d.toString());
         } catch (DateTimeFormatException e) {
-            System.out.println(e.getMessage());
+            return e.getMessage();
         }
     }
 
@@ -133,6 +130,7 @@ public class TaskList {
      * @param name Task name to be added.
      * @param time Deadline time in string, according to the dateTimeRegex format.
      * @param isInitial Boolean value of whether the program is population the TaskList.
+     * @return Task added successfully announcement.
      */
     public void insertDeadline(String name, String time, boolean isInitial) {
         try {
@@ -154,8 +152,9 @@ public class TaskList {
      * @param name Task name to be added.
      * @param startString Start time in string, according to the dateTimeRegex format.
      * @param endString End time in string, according to the dateTimeRegex format.
+     * @return Task added successfully announcement.
      */
-    public void insertEvent(String name, String startString, String endString) {
+    public String insertEvent(String name, String startString, String endString) {
         try {
             if (!startString.matches(dateTimeRegex) // dd/mm/yy tttt
                     | !endString.matches(dateTimeRegex)) {
@@ -166,9 +165,9 @@ public class TaskList {
             TaskEvent e = new TaskEvent(name, start, end);
             this.records.add(e);
             dw.addToDb(e);
-            System.out.println(Ui.format("Got it. I've added this task:\n" + e.toString()));
+            return Ui.format("Got it. I've added this task:\n" + e.toString());
         } catch (DateTimeFormatException e) {
-            System.out.println(e.getMessage());
+            return e.getMessage();
         }
     }
 
@@ -201,11 +200,11 @@ public class TaskList {
      *
      * @param index Index of task to be deleted. (1-indexed)
      */
-    public void deleteTask(int index) {
+    public String deleteTask(int index) {
         Task t = this.records.get(index);
         this.records.remove(index);
         dw.removeFromDb(index);
-        System.out.println(Ui.format("Noted. I've removed this task:\n" + t.toString()));
+        return Ui.format("Noted. I've removed this task:\n" + t.toString());
     }
 
 

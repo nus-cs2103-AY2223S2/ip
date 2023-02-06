@@ -35,7 +35,7 @@ public class TaskDeadline extends Task {
     }
 
     /**
-     * Returns string representation of a TaskDeadline object that is stored in the Duke.txt file.
+     * Returns string representation of a TaskDeadline object that is stored in the duke.functions.Duke.txt file.
      *
      * @return String representation of TaskDeadline.
      */

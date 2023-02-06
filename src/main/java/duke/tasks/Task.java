@@ -48,7 +48,7 @@ public class Task {
     }
 
     /**
-     * Returns string representation of a task object to store in the Duke.txt file.
+     * Returns string representation of a task object to store in the duke.functions.Duke.txt file.
      *
      * @return String representation of task.
      */

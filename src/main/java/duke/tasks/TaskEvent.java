@@ -37,7 +37,7 @@ public class TaskEvent extends Task{
     }
 
     /**
-     * Returns string representation of a TaskEvent object that is stored in the Duke.txt file.
+     * Returns string representation of a TaskEvent object that is stored in the duke.functions.Duke.txt file.
      *
      * @return String representation of TaskEvent.
      */
