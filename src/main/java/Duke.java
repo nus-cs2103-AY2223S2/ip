@@ -1,19 +1,81 @@
 import java.util.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.FileWriter;
+import java.io.FileNotFoundException;
+
 
 
 public class Duke {
-    public static void main(String[] args) {
 
-        Scanner sc = new Scanner(System.in);
+    private static void writeToFile(String filePath, String text) throws IOException{
+        File f = new File(filePath);
+        f.createNewFile();
+        FileWriter fw = new FileWriter(filePath, false);
+        fw.write(text);
+        fw.close();
+    }
+
+    private static String getUpdatedList(List<Task> lst) {
+        String res = "";
+        for (int i = 0; i < lst.size(); i ++) {
+            res += lst.get(i).toString();
+            res += '\n';
+        }
+        return res;
+    }
+
+    public static void main(String[] args) throws FileNotFoundException {
+
         System.out.println("Hello! I'm Duke\n");
         System.out.println("What can I do for you?\n");
 
+        /* task list */
         List<Task> lst = new ArrayList<>();
 
+        /* load duke.txt into task list */
+        File f = new File("./data/duke.txt");
+        Scanner scannerTxtFile = new Scanner(f);
+        while (scannerTxtFile.hasNext()) {
+            String txt = scannerTxtFile.nextLine();
+            if (txt.substring(1,2).equals("T")) {
+                String details = txt.substring(7);
+                Task t = new Todo(details);
+                if (txt.substring(4, 5).equals("X")) {
+                    t.mark();
+                }
+                lst.add(t);
+            } else if (txt.substring(1,2).equals("D")) {
+                String[] detailsAndDueDate = txt.substring(7).split(" \\(");
+                String details = detailsAndDueDate[0];
+                String dueDate = detailsAndDueDate[1].substring(0, detailsAndDueDate[1].length() - 1);
+                Task t = new Deadline(details, dueDate);
+                if (txt.substring(4, 5).equals("X")) {
+                    t.mark();
+                }
+                lst.add(t);
+            } else if (txt.substring(1,2).equals("E")) {
+                String[] detailsAndDate = txt.substring(7).split(" \\(");
+                String details = detailsAndDate[0];
+                String[] tmp = detailsAndDate[1].split(" to: ");
+                String to = tmp[1].substring(0, tmp[1].length() - 1);
+                String from = tmp[0].split("from: ")[1];
+                Task t = new Event(details, from, to);
+                if (txt.substring(4, 5).equals("X")) {
+                    t.mark();
+                }
+                lst.add(t);
+            }
+        }
+        scannerTxtFile.close();
+
+        /* take in user input */
+        Scanner sc = new Scanner(System.in);
 
 
         while (true) {
             try {
+
                 String input = sc.nextLine().toLowerCase();
                 String[] inputArr = input.split(" ", 2);
                 String action = inputArr[0];
@@ -71,6 +133,12 @@ public class Duke {
                     System.out.println("Noted. I've removed this task:" + '\n' + currTask  + '\n' + "Now you have " + lst.size() + " tasks in the list");
                 }else {
                     throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                }
+                String updatedList = getUpdatedList(lst);
+                try {
+                    writeToFile("./data/duke.txt", updatedList);
+                } catch (IOException e){
+                    System.out.println("oops!");
                 }
             } catch (DukeException e) {
                     System.out.println(e.getMessage());
