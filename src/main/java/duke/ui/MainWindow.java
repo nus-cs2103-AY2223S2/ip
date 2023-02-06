@@ -21,7 +21,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private TextField userInput;
     @FXML
-    Button sendButton;
+    private Button sendButton;
 
 
     /**
