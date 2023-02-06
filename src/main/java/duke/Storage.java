@@ -3,6 +3,7 @@ package duke;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.lang.Error;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -62,6 +63,8 @@ public class Storage {
                 LocalDate start = LocalDate.parse(params[3]);
                 LocalDate end = LocalDate.parse(params[4]);
                 this.myTaskList.addTask(new Event(description, isCompleted, start, end));
+            } else {
+                throw new Error("currTask should be either a ToDo, Event or Deadline");
             }
         }
         dukeReader.close();
@@ -91,6 +94,8 @@ public class Storage {
             String taskType = "D";
             newEntry = taskType + "|" + completedBit + "|" + currTask.getDescription() + "|"
                     + d.getDeadline() + newEntry;
+        } else {
+            throw new Error("currTask should be either a ToDo, Event or Deadline");
         }
         Files.write(dukeFilePath, newEntry.getBytes(), StandardOpenOption.APPEND); // don't need to close
         this.myTaskList.addTask(currTask);
@@ -154,6 +159,12 @@ public class Storage {
         Files.delete(dukeFilePath);
         Files.move(tempPath, dukeFilePath); // move from src to dest (replace)
     }
+
+    /**
+     * Get matching tasks from the task list given a string query
+     * @param targetDescription a string as a part of a query
+     * @return an ArrayList of matching tasks
+     */
     public ArrayList<Task> getMatchingTasks(String targetDescription) {
         ArrayList<Task> temp = new ArrayList<>();
         for (int i = 0; i < myTaskList.countTasks(); i++) {
