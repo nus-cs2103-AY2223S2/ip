@@ -7,7 +7,7 @@ import duke.tasks.Deadline;
 
 public class AddDeadline extends Command{
     private String description;
-    private String due_by;
+    private String dueBy;
 
     public AddDeadline(String input) {
         try {
@@ -32,9 +32,9 @@ public class AddDeadline extends Command{
                 
             } else {
                 this.description = arrOfStr[0];
-                this.due_by = arrOfStr[1];
+                this.dueBy = arrOfStr[1];
             }
-            Deadline d = new Deadline(this.description, this.due_by);
+            Deadline d = new Deadline(this.description, this.dueBy);
             tasks.add(d);
             storage.saveTaskList(tasks);
             ui.printAddedTask(d, tasks.size());
