@@ -34,7 +34,7 @@ public class Duke{
     }
 
     /**
-     * Returns the response given a user input
+     * Returns the response when given a non null user input
      *
      * @param input User input string
      * @return Output string
