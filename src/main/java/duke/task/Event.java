@@ -35,10 +35,7 @@ public class Event extends Task {
     public Event(String description, String taskStatus) throws DukeException {
         super(description.split(" /from ")[0]);
         setEventDateTimes(description);
-
-        if (taskStatus.equals("1")) {
-            this.mark();
-        }
+        markTaskIfNeeded(taskStatus, this);
     }
 
     /**

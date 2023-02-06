@@ -16,10 +16,7 @@ public class Todo extends Task {
      */
     public Todo(String description, String taskStatus) {
         super(description);
-
-        if (taskStatus.equals("1")) {
-            this.mark();
-        }
+        markTaskIfNeeded(taskStatus, this);
     }
 
     /**

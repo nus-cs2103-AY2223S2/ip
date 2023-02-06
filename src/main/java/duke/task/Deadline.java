@@ -34,9 +34,7 @@ public class Deadline extends Task {
     public Deadline(String description, String taskStatus) throws DukeException {
         super(description.split(" /by ")[0]);
         this.setDeadline(description);
-        if (taskStatus.equals("1")) {
-            this.mark();
-        }
+        markTaskIfNeeded(taskStatus, this);
     }
 
     /**
