@@ -6,7 +6,7 @@ import javafx.scene.layout.AnchorPane;
 
 
 /** The graphical display of the schedule's header. */
-class ScheduleHeader extends AnchorPane {
+public class ScheduleHeader extends AnchorPane {
     private static final double HOURS_IN_A_DAY = 24;
     private static final double HEADER_HEIGHT = 20;
     private static final double LABEL_WIDTH = 30;
@@ -19,7 +19,7 @@ class ScheduleHeader extends AnchorPane {
      *      header.
      * @param width - the width of the header in pixels.
      */
-    ScheduleHeader(double offsetWidth, double width) {
+    public ScheduleHeader(double offsetWidth, double width) {
         setMinSize(offsetWidth + width, HEADER_HEIGHT);
 
         for (int i = 0; i < HOURS_IN_A_DAY; i++) {
