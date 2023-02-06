@@ -11,19 +11,20 @@ public class Ui {
     /**
      * Sends greeting message to user
      */
-    public void sendGreetingsMessage() {
-        System.out.println("Hello I'm duke.Duke\n" + "What can I do for you?");
+    public String getGreetingsMessage() {
+        return "Hello I'm duke.Duke\n" + "What can I do for you?";
     }
 
     /**
      * Sends goodbye message to user
      */
-    public void sendGoodByeMessage() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String getGoodByeMessage() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
      * Sends task details, formatted to user
+     *
      * @param taskNumber
      * @param task
      */
@@ -33,6 +34,7 @@ public class Ui {
 
     /**
      * Loop through task lists to print task details
+     *
      * @param tasks
      * @return task details
      * @throws DukeException
@@ -50,6 +52,7 @@ public class Ui {
     }
     /**
      * Return task details based on keyword by user
+     *
      * @param tasks
      * @return task details
      * @throws DukeException
@@ -68,6 +71,7 @@ public class Ui {
 
     /**
      * Return add task message
+     *
      * @param task
      * @param taskListSize
      * @return
@@ -81,6 +85,7 @@ public class Ui {
 
     /**
      * Returns task list size message
+     *
      * @param taskListSize
      * @return
      */
@@ -90,6 +95,7 @@ public class Ui {
 
     /**
      * Return remove task message
+     *
      * @param task
      * @return
      */
@@ -101,6 +107,7 @@ public class Ui {
 
     /**
      * Return mark task message
+     *
      * @param task
      * @return
      */
@@ -112,6 +119,7 @@ public class Ui {
 
     /**
      * Return unmark task message
+     *
      * @param task
      * @return
      */
@@ -123,6 +131,7 @@ public class Ui {
 
     /**
      * Return unknown message
+     *
      * @return
      */
     public String getUnknownMessage() {

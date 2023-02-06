@@ -22,6 +22,7 @@ public class Duke {
     private Command command;
     /**
      * Constructor. Takes in a filePath to create Storage object
+     *
      * @param filePath
      */
     public Duke(String filePath) {
