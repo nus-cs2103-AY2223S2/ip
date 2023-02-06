@@ -3,8 +3,10 @@ package duke.controller;
 import duke.Duke;
 
 import duke.command.Command;
+import duke.command.ExitCommand;
 import duke.exception.DukeException;
 import duke.parser.Parser;
+import duke.ui.Ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -12,6 +14,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -33,6 +37,9 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().addAll(
+                new DialogBox(new Ui().getWelcome(), dukeImage).getDukeDialog()
+        );
     }
 
     public void setDuke(Duke duke) {
@@ -48,13 +55,13 @@ public class MainWindow extends AnchorPane {
         try {
             String response = getResponse(input);
             dialogContainer.getChildren().addAll(
-                    new DialogBox(input, userImage).getUserDialog(input, userImage),
-                    new DialogBox(input, dukeImage).getDukeDialog(response, dukeImage)
+                    new DialogBox(input, userImage).getUserDialog(),
+                    new DialogBox(response, dukeImage).getDukeDialog()
             );
         } catch (DukeException e) {
             dialogContainer.getChildren().addAll(
-                    new DialogBox(input, userImage).getUserDialog(input, userImage),
-                    new DialogBox(input, dukeImage).getDukeDialog(e.getMessage(), dukeImage)
+                    new DialogBox(input, userImage).getUserDialog(),
+                    new DialogBox(e.getMessage(), dukeImage).getDukeDialog()
             );
         }
         userInput.clear();
@@ -69,6 +76,10 @@ public class MainWindow extends AnchorPane {
     private String getResponse(String input) throws DukeException {
         String fullCommand = duke.getUi().readCommand(input);
         Command c = new Parser().parse(fullCommand);
+        if (c instanceof ExitCommand) {
+            Stage stage = (Stage) dialogContainer.getScene().getWindow();
+            stage.close();
+        }
         return c.execute(duke.getTasks(), duke.getUi(), duke.getStorage());
     }
 }

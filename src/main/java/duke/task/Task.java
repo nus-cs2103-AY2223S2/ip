@@ -77,9 +77,9 @@ public class Task {
         LocalDateTime currentDateTime = LocalDateTime.now();
         int diff = currentDateTime.compareTo(dateTime);
         if (diff > 0) {
-            return "⚠ TASK EXPIRED! ⚠";
+            return "!! TASK EXPIRED! !!";
         } else if (diff == -1) {
-            return "⚠ TASK EXPIRING SOON! ⚠";
+            return "!! TASK EXPIRING SOON! !!";
         } else {
             return "";
         }

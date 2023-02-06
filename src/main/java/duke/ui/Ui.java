@@ -14,6 +14,7 @@ import duke.task.TaskList;
  */
 public class Ui {
     private final Scanner SCANNER = new Scanner(System.in);
+    private final String SEPARATOR = "=====================================\n";
 
     /**
      * Reads command from scanner object.
@@ -31,8 +32,8 @@ public class Ui {
     /**
      * Prints out the greeting for Fake Duke.
      */
-    public String showWelcome() {
-       return "Hello!~ I'm the one and only ✨ FAKE DUKE ✨\nWhat can I do for you?\n";
+    public String getWelcome() {
+       return "Hello!~ I'm the one and only ! FAKE DUKE !\nWhat can I do for you?\n";
     }
 
     /**
@@ -42,7 +43,7 @@ public class Ui {
      * @param taskList List of tasks.
      */
     public String getAddOutput(Task task, TaskList taskList) {
-        return String.format("Got it. I've added this task:\n%s)\nNow you have %d tasks in the list.",
+        return String.format("Got it. I've added this task:\n%s\nNow you have %d tasks in the list.",
                 task.toString(), taskList.getSize());
     }
 
@@ -84,7 +85,7 @@ public class Ui {
     public String getListOutput(TaskList taskList) throws DukeException {
         String str = String.format("Here are the tasks in your list:\n");
         for (int i = 1; i <= taskList.getSize(); i++) {
-            str = String.format("%s%d.%s\n", str, i, taskList.getTask(i - 1).toString());
+            str = String.format("%s%s%d.%s\n", str, SEPARATOR, i, taskList.getTask(i - 1).toString());
         }
         return str;
     }

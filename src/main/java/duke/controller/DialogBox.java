@@ -49,13 +49,13 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
-    public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+    public DialogBox getUserDialog() {
+        return this;
     }
 
-    public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
-        db.flip();
-        return db;
+    public DialogBox getDukeDialog() {
+        this.flip();
+        dialog.setStyle("-fx-border-color: black; -fx-border-radius: 5; -fx-label-padding: 5; -fx-background-color: D4C5E2;");
+        return this;
     }
 }
