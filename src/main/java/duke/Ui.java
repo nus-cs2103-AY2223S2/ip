@@ -1,47 +1,31 @@
 package duke;
 
-import java.util.Scanner;
-
 /**
  * Interacts with user.
  */
 public class Ui {
     /**
-     * Prints custom Duke chatbot logo and welcome message.
+     * Creates custom Duke chatbot logo and welcome message.
+     * @return Welcome message.
      */
-    public void showWelcome() {
+    public String showWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("Hello! I'm duke.Duke");
-        System.out.println("What can I do for you?");
-    }
-
-    /**
-     * Reads user's commands and returns it as a string to be read by Parser object.
-     * @return User's command in string.
-     */
-    public String readCommand() {
-        Scanner scanner = new Scanner(System.in);
-        String str = scanner.nextLine();
+        String str = "Hello from\n" + logo + "\n";
+        str += "Hello! I'm Duke\n";
+        str += "What can I do for you?\n";
         return str;
     }
 
     /**
-     * Prints divider line to separate user commands and Duke's replies.
+     * Gives error message when Duke chatbot runs into errors while loading past data.
+     * @return Loading error message.
      */
-    public void showLine() {
-        System.out.println("__________________________________________________");
-    }
-
-    /**
-     * Prints error message when Duke chatbot runs into errors while loading past data.
-     */
-    public void showLoadingError() {
-        System.out.println("Oops!! There was a problem loading past data. Try rebooting me again!");
+    public String showLoadingError() {
+        return "Oops!! There was a problem loading past data. Try rebooting me again!";
     }
 
     /**

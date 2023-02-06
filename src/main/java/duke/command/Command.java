@@ -9,6 +9,6 @@ import duke.Ui;
  * Abstract parent class for all commands.
  */
 public abstract class Command {
-    public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
     public abstract boolean isExit();
 }

@@ -31,8 +31,9 @@ public class Parser {
         boolean findCheck = str.startsWith("find ");
         boolean exitCheck = str.equals("bye");
         boolean nothingCheck = str.equals("");
-        if (str.equals("todo") || str.equals("deadline") || str.equals("event") || str.equals("delete")
-                || str.equals("mark") || str.equals("unmark") || str.equals("find")) {
+        if (str.equals("todo") || str.equals("todo ") || str.equals("deadline") || str.equals("event")
+                || str.equals("delete") || str.equals("mark") || str.equals("unmark")
+                || str.equals("find")) {
             throw new RuntimeException("This command's field cannot be left blank!");
         } else if (todoCheck || deadlineCheck || eventCheck) {
             if (deadlineCheck) {
