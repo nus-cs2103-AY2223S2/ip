@@ -21,15 +21,15 @@ public class ToDo extends Task {
     /**
      * Constructor for ToDo
      * @param taskName Description of ToDo task.
-     * @param completion Completion status of ToDo task.
+     * @param isCompleted Completion status of ToDo task.
      */
-    public ToDo(String taskName, boolean completion) {
-        super(taskName, completion);
+    public ToDo(String taskName, boolean isCompleted) {
+        super(taskName, isCompleted);
     }
 
 
     /**
-     * Static method to create a ToDo Task from user input.
+     * Creates a ToDo Task from user input.
      * @param command User input to be used to create the ToDo Task.
      * @param t TaskList object to add the newly created Task into the list of tasks.
      * @throws DukeException If command is invalid.

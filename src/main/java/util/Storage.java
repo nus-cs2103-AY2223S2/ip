@@ -20,7 +20,7 @@ public class Storage {
      * @return BufferedReader object that contains the list of tasks.
      * @throws DukeException If IOException from reading duke.txt is encountered.
      */
-    public BufferedReader load() throws DukeException {
+    public BufferedReader loadData() throws DukeException {
         assert !fileDir.isEmpty() : "File Directory cannot be empty!";
         assert !filePath.isEmpty() : "File Path cannot be empty";
         BufferedReader br;

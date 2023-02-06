@@ -32,10 +32,10 @@ public class DeadlineTask extends Task {
      * Constructor of DeadlineTask.
      * @param taskName Description of DeadlineTask
      * @param deadline Deadline of the DeadlineTask
-     * @param completed Completion status of DeadlineTask
+     * @param isCompleted Completion status of DeadlineTask
      */
-    public DeadlineTask(String taskName, LocalDateTime deadline, boolean completed) {
-        super(taskName, completed);
+    public DeadlineTask(String taskName, LocalDateTime deadline, boolean isCompleted) {
+        super(taskName, isCompleted);
         assert deadline != null : "Deadline is invalid";
         this.deadline = deadline;
         this.taskType = "D";
@@ -45,12 +45,12 @@ public class DeadlineTask extends Task {
      * Outputs the deadline of the DeadlineTask in a String format
      * @return String format of the DeadlineTask's deadline.
      */
-    public String dateTimeFormatter() {
+    public String formatDateTime() {
         return deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm"));
     }
 
     /**
-     * Static method to create a DeadlineTask from user input.
+     * Creates a DeadlineTask from user input.
      * @param command Input provided by user.
      * @param t TaskList to store the newly created DeadlineTask
      * @throws DukeException If command is invalid.
@@ -87,6 +87,6 @@ public class DeadlineTask extends Task {
 
     @Override
     public String toString() {
-        return String.format("%s (by: %s)", super.toString(), dateTimeFormatter());
+        return String.format("%s (by: %s)", super.toString(), formatDateTime());
     }
 }
