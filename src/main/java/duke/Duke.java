@@ -104,9 +104,14 @@ public class Duke {
      * @param itemNo Item number in list to be marked.
      */
     public void mark(int itemNo) throws DukeException {
+        if (taskList.size() <= itemNo || itemNo < 0) {
+            throw new DukeException("Task number is invalid, please enter a valid task number!");
+        }
+        assert taskList.size() > itemNo;
         taskList.get(itemNo).setDone(true);
         ui.displayText("Nice! I've marked this task as done: " + taskList.get(itemNo).toString());
         storage.saveToFile();
+        assert taskList.get(itemNo).isDone();
     }
 
     /**
@@ -114,10 +119,15 @@ public class Duke {
      *
      * @param itemNo Item number in list to be unmarked.
      */
-    public void unmark(int itemNo) {
+    public void unmark(int itemNo) throws DukeException {
+        if (taskList.size() <= itemNo || itemNo < 0) {
+            throw new DukeException("Task number is invalid, please enter a valid task number!");
+        }
+        assert taskList.size() > itemNo;
         taskList.get(itemNo).setDone(false);
         ui.displayText("OK, I've marked this task as not done yet: " + taskList.get(itemNo).toString());
         storage.saveToFile();
+        assert !taskList.get(itemNo).isDone();
     }
 
     /**
@@ -125,12 +135,18 @@ public class Duke {
      *
      * @param itemNo Item number in list to be deleted.
      */
-    public void delete(int itemNo) {
+    public void delete(int itemNo) throws DukeException {
+        int initialSize = taskList.size();
+        if (taskList.size() <= itemNo || itemNo < 0) {
+            throw new DukeException("Task number is invalid, please enter a valid task number!");
+        }
+        assert taskList.size() > itemNo;
         ui.displayText("Noted. I've removed this task: "
                 + taskList.get(itemNo).toString());
         taskList.remove(itemNo);
         storage.saveToFile();
         ui.displayText("Now you have " + taskList.size() + " tasks in the list.");
+        assert taskList.size() == initialSize - 1;
     }
 
     /**
@@ -139,13 +155,38 @@ public class Duke {
      * @param searchInput Substring to find if any tasks contains it.
      */
     public void find(String searchInput) {
-        ui.displayText("Here are the matching tasks in your list:");
         int count = 1;
+        boolean hasResult = false;
         for (int i = 0; i < taskList.size(); i++) {
             if (taskList.get(i).toString().contains(searchInput)) {
+                if (!hasResult) {
+                    hasResult = true;
+                    ui.displayText("Here are the matching tasks in your list:");
+                }
                 ui.displayText(String.format("%d. %s", count,
                         taskList.get(i).toString()));
                 count++;
+            }
+        }
+
+        if (!hasResult) {
+            assert count == 1;
+            ui.displayText("There are no matching tasks in your list!");
+        }
+    }
+
+    /**
+     * List out all tasks.
+     */
+    public void list() {
+        if (taskList.size() == 0) {
+            ui.displayText("Congrats! You have 0 tasks!!");
+        } else {
+            assert taskList.size() > 0;
+            ui.displayText("Here are the tasks in your list:");
+            for (int i = 0; i < taskList.size(); i++) {
+                ui.displayText(String.format("%d. %s", i + 1,
+                        taskList.get(i).toString()));
             }
         }
     }
@@ -166,13 +207,8 @@ public class Duke {
         try {
             String cmd = parser.getCmd(userInput);
             switch (cmd) {
-
             case "list":
-                ui.displayText("Here are the tasks in your list:");
-                for (int i = 0; i < taskList.size(); i++) {
-                    ui.displayText(String.format("%d. %s", i + 1,
-                            taskList.get(i).toString()));
-                }
+                list();
                 break;
             case "mark":
                 mark(Integer.parseInt(parser.getDescription(userInput)) - 1);
@@ -200,8 +236,6 @@ public class Duke {
             }
         } catch (DukeException exception) {
             ui.displayText(exception.getMessage());
-        } catch (IndexOutOfBoundsException e) {
-            ui.displayText("Invalid format of input, please try again!");
         } catch (NumberFormatException e) {
             ui.displayText("Invalid integer, please try again!");
         }
