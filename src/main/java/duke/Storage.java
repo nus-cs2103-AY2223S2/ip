@@ -17,6 +17,12 @@ public class Storage {
         this.doesDirectoryExist = java.nio.file.Files.exists(path);
     }
 
+    /**
+     * Loads previous to do list stored either in main folder or in current folder.
+     * If there is no file, create one.
+     *
+     * @return A TodoList object contain information of previous to do list.
+     */
     public TodoList load() {
         try {
             File previousToDoList = new File(path.toString());
@@ -41,6 +47,11 @@ public class Storage {
         return new TodoList();
     }
 
+    /**
+     * Saves current to do list in the same file in load.
+     *
+     * @param todoList TodoList object contain information needed to save.
+     */
     public void save(TodoList todoList) {
         try{
 

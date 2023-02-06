@@ -8,8 +8,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * Parse the command
- *
+ * Parses the command.
  */
 public class Parser {
     private TodoList todoList;
@@ -20,6 +19,13 @@ public class Parser {
         this.todoList = todoList;
     }
 
+    /**
+     * Returns a Command object (can be ListCommand, ...) of the input String.
+     *
+     * @param command String input.
+     * @return Command Object corresponding to the input String command.
+     * @throws DukeExceptions If input syntax is incorrect.
+     */
     public Command parse(String command) throws DukeExceptions {
         String[] split_command = command.split(" ", 2);
         String instruction = split_command[0];
@@ -54,6 +60,13 @@ public class Parser {
         throw new DukeExceptions("OOPS!!! I'm sorry, but I don't know what that means.");
     }
 
+    /**
+     * Returns LocalDate object capture the date of an event.
+     *
+     * @param possibleDateTime A string array may contain date information.
+     * @return LocalDate object capture the date or null if there is no information.
+     * @throws DateTimeParseException If there is no information.
+     */
     public static LocalDate parseDate(String[] possibleDateTime) throws DateTimeParseException {
         try {
             //parse date
@@ -65,10 +78,23 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns String representation of the date of an event.
+     *
+     * @param possibleDeadlineDate LocalDate object capture the date of an event.
+     * @return String representation of the date of an event.
+     */
     public static String parseStringDate(LocalDate possibleDeadlineDate) {
         return possibleDeadlineDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
+    /**
+     * Returns LocalTime object capture the time of an event.
+     *
+     * @param possibleDateTime A string array may contain time information.
+     * @return LocalTime object capture the time or null if there is no information.
+     * @throws DateTimeParseException If there is no information.
+     */
     public static LocalTime parseTime(String[] possibleDateTime) throws DateTimeParseException {
         try {
             //parse date
@@ -82,6 +108,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns String representation of the time of an event.
+     *
+     * @param possibleDeadlineTime LocalTime object capture the time.
+     * @return String representation of the time of an event.
+     */
     public static String parseStringTime(LocalTime possibleDeadlineTime) {
         return possibleDeadlineTime.format(DateTimeFormatter.ofPattern("hh:mm a"));
     }

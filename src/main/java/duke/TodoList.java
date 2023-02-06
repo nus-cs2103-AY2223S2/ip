@@ -3,6 +3,9 @@ package duke;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * Represents a list containing all tasks.
+ */
 public class TodoList implements Serializable {
     private ArrayList<Task> todo_list;
 
@@ -10,6 +13,13 @@ public class TodoList implements Serializable {
         this.todo_list = new ArrayList<>(100);
     }
 
+    /**
+     * Creates and adds new task corresponding to the input.
+     *
+     * @param type Type of task.
+     * @param task Description of task.
+     * @throws DukeExceptions If the input syntax is incorrect.
+     */
     public void add(String type, String task) throws DukeExceptions{
         Task taskObject = new Task();
         Task newTask = taskObject.createNewTask(type, task);
@@ -18,6 +28,12 @@ public class TodoList implements Serializable {
         System.out.println(newTask);
     }
 
+    /**
+     * Marks a numbered task is done.
+     *
+     * @param index The number order of the task.
+     * @throws DukeExceptions If the input syntax is incorrect.
+     */
     public void mark(int index) throws DukeExceptions{
         int todo_list_length = todo_list.size();
         if (index < 0 || index > todo_list_length) {
@@ -29,6 +45,12 @@ public class TodoList implements Serializable {
         System.out.println(todo_list.get(index-1));
     }
 
+    /**
+     * Unmarks a numbered task is done.
+     *
+     * @param index The number order of the task.
+     * @throws DukeExceptions If the input syntax is incorrect.
+     */
     public void unmark(int index) throws DukeExceptions{
         int todo_list_length = todo_list.size();
         if (index < 0 || index > todo_list_length) {
@@ -41,6 +63,12 @@ public class TodoList implements Serializable {
 
     }
 
+    /**
+     * Deletes a numbered task is done.
+     *
+     * @param index The number order of the task.
+     * @throws DukeExceptions If the input syntax is incorrect.
+     */
     public void delete(int index) throws DukeExceptions {
         int todo_list_length = todo_list.size();
         if (index < 0 || index > todo_list_length) {
@@ -51,6 +79,11 @@ public class TodoList implements Serializable {
         System.out.println(task);
     }
 
+    /**
+     * Returns how many tasks in the list.
+     *
+     * @return How many tasks in the list.
+     */
     public int number_of_tasks() {
         return todo_list.size();
     }

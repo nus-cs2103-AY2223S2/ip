@@ -2,6 +2,11 @@ package duke;
 
 import duke.command.Command;
 
+/**
+ *
+ * Represents the chat bot.
+ *
+ */
 public class Duke {
     private Ui ui;
 

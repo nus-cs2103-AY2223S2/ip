@@ -3,6 +3,9 @@ package duke.command;
 import duke.DukeExceptions;
 import duke.TodoList;
 
+/**
+ * Represents an add command.
+ */
 public class AddTaskCommand extends Command{
     private TodoList todoList;
     private String instruction;

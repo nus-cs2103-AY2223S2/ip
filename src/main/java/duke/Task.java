@@ -5,6 +5,9 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a task (to do task or task with deadline,...).
+ */
 public class Task implements Serializable {
     private Boolean isDone;
 //    private static final long serialVersionUID = -7531925916726747642;
@@ -13,6 +16,14 @@ public class Task implements Serializable {
         this.isDone = false;
     }
 
+    /**
+     * Returns a subclass of a task corresponding to the input command.
+     *
+     * @param type Type of task.
+     * @param task Description of task.
+     * @return A Task Object with corresponding information.
+     * @throws DukeExceptions If the input syntax is incorrect.
+     */
     public Task createNewTask(String type, String task) throws DukeExceptions{
         if (type.equals("todo")) {
             return new Todo(task);
@@ -26,10 +37,16 @@ public class Task implements Serializable {
         }
     }
 
+    /**
+     * Marks a task is done.
+     */
     public void markTask() {
         this.isDone = true;
     }
 
+    /**
+     * Unmarks a task is done.
+     */
     public void unmarkTask() {
         this.isDone = false;
     }
