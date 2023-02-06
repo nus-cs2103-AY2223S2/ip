@@ -40,17 +40,6 @@ public class Duke extends Application{
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
-//    public Duke(String filePath) {
-//        ui = new Ui();
-//        storage = new Storage(filePath);
-//        tasks = new TaskList(storage.load());
-//    }
-//
-//    public void run() {
-//        ui.showWelcome();
-//        ui.takeCommands(this.tasks);
-//        storage.saveData(this.tasks);
-//    }
 
     @Override
     public void start(Stage stage) {
@@ -160,12 +149,6 @@ public class Duke extends Application{
     private String getResponse(String input) {
         return "Duke heard: " + input;
     }
-
-//    public static void main(String[] args) {
-//        new Duke(System.getProperty("user.dir") +"/data/duke.txt").run();
-//
-//    }
-
 
 }
 
