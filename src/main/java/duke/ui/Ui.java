@@ -54,7 +54,7 @@ public class Ui {
      * @param taskList List of tasks.
      */
     public String getDeleteOutput(String taskString, TaskList taskList) {
-        return String.format("Noted. I've removed this task:\n%sNow you have %d tasks in the list.",
+        return String.format("Noted. I've removed this task:\n%s\nNow you have %d tasks in the list.",
                 taskString, taskList.getSize());
     }
 
