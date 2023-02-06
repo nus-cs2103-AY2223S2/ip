@@ -2,6 +2,10 @@ package sam.task;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
+import sam.parser.SamInvalidDateException;
+import sam.parser.SamInvalidTaskException;
 
 /**
  * Represents a list of tasks.
@@ -58,12 +62,54 @@ public class TaskList {
      * @param isDone Indicates whether the task is done.
      * @return {@code true} if successful.
      */
-    public boolean setTaskDone(int id, boolean isDone) {
+    public Task setTaskDone(int id, boolean isDone) {
         if (!isValidId(id)) {
-            return false;
+            return null;
         }
-        getTask(id).setDone(isDone);
-        return true;
+        Task task = getTask(id);
+        task.setDone(isDone);
+        return task;
+    }
+
+    /**
+     * Updates the task with the specified id.
+     *
+     * @param id      The id of the task to update.
+     * @param argsMap A Map of the task arguments to replace.
+     * @return {@code true} if successful.
+     * @throws SamInvalidDateException If a date string is in the wrong format.
+     */
+    public Task updateTask(int id, Map<String, String> argsMap) throws SamInvalidDateException {
+        if (!isValidId(id)) {
+            return null;
+        }
+        Task task = getTask(id);
+        task.update(argsMap);
+        return task;
+    }
+
+    /**
+     * Clones the task with the specified id.
+     *
+     * @param id      The id of the task to update.
+     * @param argsMap A Map of the task arguments to replace.
+     * @return {@code true} if successful.
+     * @throws SamInvalidDateException If a date string is in the wrong format.
+     * @throws SamInvalidTaskException If the task cloning fails.
+     */
+    public Task cloneTask(int id, Map<String, String> argsMap)
+            throws SamInvalidDateException, SamInvalidTaskException {
+        if (!isValidId(id)) {
+            return null;
+        }
+        try {
+            Task task = (Task) getTask(id).clone();
+            task.update(argsMap);
+            addTask(task);
+            return task;
+        } catch (CloneNotSupportedException e) {
+            throw new SamInvalidTaskException();
+        }
     }
 
     /**
