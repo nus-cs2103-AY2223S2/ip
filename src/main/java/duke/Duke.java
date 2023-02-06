@@ -13,9 +13,9 @@ import duke.views.UI;
  * duke.Main driver class for duke.Duke.
  */
 public class Duke {
-    private TaskList tasks;
+    private final TaskList tasks;
     public UI ui;
-    private Storage storage;
+    private final Storage storage;
 
 
     public Duke() throws IOException {

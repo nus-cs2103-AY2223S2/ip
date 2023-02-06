@@ -36,14 +36,18 @@ public class Parser {
                 return new ListCommand();
             }
             case DEADLINE: {
+                boolean missingByDate = !input.contains(" /by ");
+
                 if (tooFewArgs) {
                     throw new DukeException("Please give a name for your deadline!");
-                } else if (!input.contains(" /by ")) {
+                } else if (missingByDate) {
                     throw new DukeException("Please give a date/time for your deadline!");
                 }
-                String[] parseCommand = input.split("/by");
+
+                String[] parseCommand = input.split("/by"); // Split command string into name and date
                 String name = parseCommand[0].replaceFirst("deadline ", "");
                 String deadline = parseCommand[1].strip();
+
                 return new DeadlineCommand(name, deadline);
             }
             case TODO: {
@@ -54,18 +58,24 @@ public class Parser {
                 return new ToDoCommand(name);
             }
             case EVENT: {
+                boolean missingFromDate = !input.contains(" /from ");
+                boolean missingToDate = !input.contains(" /to ");
+
                 if (tooFewArgs) {
                     throw new DukeException("Please give a name for your event!");
-                } else if (!input.contains(" /from ")) {
+                } else if (missingFromDate) {
                     throw new DukeException("Please give a starting date/time for your event!");
-                } else if (!input.contains(" /to ")) {
+                } else if (missingToDate) {
                     throw new DukeException("Please give an ending date/time for your event!");
                 }
-                String[] parseCommand = input.split("/from");
+
+                String[] parseCommand = input.split("/from"); // Split command string into description and dates
                 String name = parseCommand[0].replaceFirst("event ", "");
-                parseCommand = parseCommand[1].split("/to");
-                String from = parseCommand[0].strip();
-                String by = parseCommand[1].strip();
+
+                String[] splitDates = parseCommand[1].split("/to");
+                String from = splitDates[0].strip();
+                String by = splitDates[1].strip();
+
                 return new EventCommand(name, from, by);
             }
             case MARK: {

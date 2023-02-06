@@ -16,7 +16,8 @@ public class MarkCommand extends Command {
     public void execute(UI ui, TaskList tasks, Storage storage) throws DukeException {
         try {
             tasks.markDone(index);
-            this.commandStatus = "Good job! I have marked this task as done! \n" + "\t" + tasks.get(index - 1);
+            this.commandStatus = "Good job! I have marked this task as done! \n"
+                    + "\t" + tasks.get(index - 1);
             ui.printCommandOutput(this);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Please provide a valid index!");
