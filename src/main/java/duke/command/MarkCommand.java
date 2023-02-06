@@ -32,7 +32,7 @@ public class MarkCommand extends Command {
      * @throws DukeException If there is an error in executing the command.
      */
     @Override
-    public void execute(TaskList tl, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tl, Ui ui, Storage storage) throws DukeException {
         if (tl.isEmpty()) {
             throw new DukeException("How to mark or unmark an empty list of tasks meowww");
         }
@@ -47,13 +47,12 @@ public class MarkCommand extends Command {
             toShow = tl.unmarkTask(markNumber - 1);
             ui.showToUser(toShow);
         }
-
         try {
             storage.update(tl);
         } catch (IOException e) {
             ui.showToUser(e.getMessage());
             throw new DukeException("Problem with updating in delete");
         }
-
+        return toShow;
     }
 }

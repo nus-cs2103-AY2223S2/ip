@@ -16,7 +16,8 @@ public class ListCommand extends Command {
      * @param storage Storage to be used to handle interactions with the save file.
      */
     @Override
-    public void execute(TaskList tl, Ui ui, Storage storage) {
-        ui.showToUserList(tl);
+    public String execute(TaskList tl, Ui ui, Storage storage) {
+        String toShow = ui.showToUserList(tl);
+        return toShow;
     }
 }

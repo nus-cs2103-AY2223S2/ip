@@ -30,7 +30,7 @@ public class DeleteCommand extends Command {
      * @throws DukeException If there is an error in executing the command.
      */
     @Override
-    public void execute(TaskList tl, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tl, Ui ui, Storage storage) throws DukeException {
         if (tl.isEmpty()) {
             throw new DukeException("How to delete an empty list of tasks meowww");
         }
@@ -47,5 +47,6 @@ public class DeleteCommand extends Command {
             ui.showToUser(e.getMessage());
             throw new DukeException("Problem with updating in delete");
         }
+        return toShow;
     }
 }

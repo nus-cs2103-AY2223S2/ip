@@ -16,8 +16,9 @@ public class ExitCommand extends Command {
      * @param storage Storage to be used to handle interactions with the save file.
      */
     @Override
-    public void execute(TaskList tl, Ui ui, Storage storage) {
+    public String execute(TaskList tl, Ui ui, Storage storage) {
         ui.showGoodbyeMessage();
+        return ui.showGoodbyeMessage();
     }
 
     /**
