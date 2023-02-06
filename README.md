@@ -2,7 +2,7 @@
 
 Welcome to the task management chatbot. Given below are instructions on how to use it.
 
-## Setting up in Intellij
+## Setting up in Intellij IDEA
 
 Prerequisites: JDK 11, update Intellij to the most recent version.
 
