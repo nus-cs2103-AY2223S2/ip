@@ -7,10 +7,92 @@ import duke.task.Task;
 import duke.task.Todo;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Parser {
+
+    /**
+     * Checks if string is valid LocalDate and converts it.
+     *
+     * @param string User input.
+     * @return Valid LocalDate.
+     * @throws DukeException If user input does not match any DateTimeFormatter.
+     */
+    public static LocalDate stringToDate(String string) throws DukeException {
+        LocalDate date = null;
+        DateTimeFormatter[] formatters = {
+                DateTimeFormatter.ofPattern("ddMMyyyy"),
+                DateTimeFormatter.ofPattern("dd/MM/yyyy"),
+                DateTimeFormatter.ofPattern("dd-MM-yyyy"),
+                DateTimeFormatter.ofPattern("yyyy/MM/dd"),
+                DateTimeFormatter.ofPattern("yyyy-MM-dd")
+        };
+        for (DateTimeFormatter formatter : formatters) {
+            // Goes through list of formatters to see which matches the date input
+            try {
+                date = LocalDate.parse(string, formatter);
+                break;
+            } catch (DateTimeParseException e) {
+                // Invalid format, try the next one
+            }
+        }
+        // If date is still null, input is in invalid format
+        if (date == null) {
+            throw new DukeException("Reenter dates in this format: (ddMMyyyy)");
+        }
+        return date;
+    }
+
+    /**
+     * Checks if string is valid LocalDateTime and converts it.
+     *
+     * @param string User input.
+     * @return Valid LocalDateTime.
+     * @throws DukeException If user input does not match any DateTimeFormatter.
+     */
+    public static LocalDateTime stringToDateTime(String string) throws DukeException {
+        LocalDate date = null;
+        LocalDateTime dateTime = null;
+        DateTimeFormatter[] formatters = {
+                DateTimeFormatter.ofPattern("ddMMyyyy HHmm"),
+                DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"),
+                DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"),
+                DateTimeFormatter.ofPattern("yyyy/MM/dd HHmm"),
+                DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"),
+                DateTimeFormatter.ofPattern("ddMMyyyy"),
+                DateTimeFormatter.ofPattern("dd/MM/yyyy"),
+                DateTimeFormatter.ofPattern("dd-MM-yyyy"),
+                DateTimeFormatter.ofPattern("yyyy/MM/dd"),
+                DateTimeFormatter.ofPattern("yyyy-MM-dd")
+        };
+
+        for (DateTimeFormatter formatter : formatters) {
+            // Goes through list of formatters to see which matches the deadline date input
+            try {
+                dateTime = LocalDateTime.parse(string, formatter);
+                break;
+            } catch (DateTimeParseException e) {
+                try {
+                    date = LocalDate.parse(string, formatter);
+                    break;
+                } catch (DateTimeParseException e2) {
+                    // Invalid format, try the next one
+                }
+            }
+        }
+        // If date and dateTime is still null, input is in invalid format
+        if (date == null && dateTime == null) {
+            throw new DukeException("Reenter date in this format: (ddMMyyyy) or (ddMMyyyy HHmm).");
+        }
+
+        // Converts date to include time
+        if (date != null) {
+            dateTime = date.atStartOfDay().plusDays(1).minusNanos(1);
+        }
+        return dateTime;
+    }
 
     /**
      * Parses the user input to match commands.
@@ -38,7 +120,8 @@ public class Parser {
                 if (d_parts.length < 2 || d_parts[0].trim().isEmpty() || d_parts[1].trim().isEmpty()) {
                     throw new DukeException(deadlineError);
                 }
-                Deadline deadline = new Deadline(d_parts[0].trim(), d_parts[1].trim());
+                LocalDateTime deadlineDateTime = stringToDateTime(d_parts[1].trim());
+                Deadline deadline = new Deadline(d_parts[0].trim(), deadlineDateTime);
                 return new Command.AddCommand(deadline);
             case "event":
                 String eventError = "Command event has to have a string and 2 dates separated with /from and /to keywords.";
@@ -49,7 +132,13 @@ public class Parser {
                 if (e_parts.length < 3 || e_parts[0].trim().isEmpty() || e_parts[1].trim().isEmpty() || e_parts[2].trim().isEmpty()) {
                     throw new DukeException(eventError);
                 }
-                Event event = new Event(e_parts[0].trim(), e_parts[1].trim(), e_parts[2].trim());
+                LocalDateTime startDateTime = stringToDateTime(e_parts[1].trim());
+                LocalDateTime endDateTime = stringToDateTime(e_parts[2].trim());
+                // Checks if start date is before end date
+                if (endDateTime.isBefore(startDateTime)) {
+                    throw new DukeException("End date cannot be before start date.");
+                }
+                Event event = new Event(e_parts[0].trim(), startDateTime, endDateTime);
                 return new Command.AddCommand(event);
             case "list":
                 return new Command.ListCommand();
@@ -93,9 +182,7 @@ public class Parser {
                 String[] stringKeywords = parts[1].trim().split(",");
                 String[] validKeywords = new String[stringKeywords.length];
                 for (int i = 0; i < stringKeywords.length; i++) {
-                    String keyword = null;
-                    keyword = stringKeywords[i].trim();
-                    validKeywords[i] = keyword;
+                    validKeywords[i] = stringKeywords[i].trim();
                 }
                 return new Command.FilterCommand(validKeywords);
             case "filterdate":
@@ -104,30 +191,8 @@ public class Parser {
                 }
                 String[] stringDates = parts[1].trim().split(",");
                 LocalDate[] validDates = new LocalDate[stringDates.length];
-                DateTimeFormatter[] formatters = {
-                        DateTimeFormatter.ofPattern("ddMMyyyy"),
-                        DateTimeFormatter.ofPattern("dd/MM/yyyy"),
-                        DateTimeFormatter.ofPattern("dd-MM-yyyy"),
-                        DateTimeFormatter.ofPattern("yyyy/MM/dd"),
-                        DateTimeFormatter.ofPattern("yyyy-MM-dd")
-                };
                 for (int i = 0; i < stringDates.length; i++) {
-                    LocalDate date = null;
-                    for (DateTimeFormatter formatter : formatters) {
-                        // Goes through list of formatters to see which matches the date input
-                        try {
-                            date = LocalDate.parse(stringDates[i].trim(), formatter);
-                            validDates[i] = date;
-                            break;
-                        } catch (DateTimeParseException e) {
-                            // Invalid format, try the next one
-                        }
-                    }
-                }
-                for (LocalDate date : validDates) {
-                    if (date == null) {
-                        throw new DukeException("Reenter dates in this format: (ddMMyyyy)");
-                    }
+                    validDates[i] = stringToDate(stringDates[i].trim());
                 }
                 return new Command.FilterDateCommand(validDates);
             case "bye":

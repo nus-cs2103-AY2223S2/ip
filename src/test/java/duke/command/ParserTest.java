@@ -3,13 +3,10 @@ package duke.command;
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
-import duke.task.TaskList;
 import duke.task.Todo;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -98,7 +95,6 @@ public class ParserTest {
 
     @Test
     public void parse_invalidDeleteCommand_throwsDukeException() {
-        TaskList tasks = new TaskList();
         assertThrows(DukeException.class, () -> Parser.parse("delete   "));
     }
 

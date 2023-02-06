@@ -289,6 +289,6 @@ public abstract class Command {
      * @return Status of whether to exit Duke.
      */
     public boolean isExit() {
-        return this.isExit;
+        return isExit;
     }
 }
