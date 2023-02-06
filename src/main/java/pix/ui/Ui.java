@@ -11,55 +11,10 @@ import pix.tasks.Task;
  * Ui class which deals with the interactions with user.
  */
 public class Ui {
-    /** Visual logo of Pix. */
-    private static final String logo = "    ______    __  ___   ___ \n"
-            + "    |   _  \\  |  | \\  \\ /  / \n"
-            + "    |  |_)  | |  |  \\  V  /  \n"
-            + "    |   ___/  |  |   >   <   \n"
-            + "    |  |      |  |  /  .  \\  \n"
-            + "    | _|      |__| /__/ \\__\\\n";
-
-    /** Pix's greeting. */
-    private static final String greet = "    --------------------------------------------------------------\n"
-            + "     How can I assist you?\n"
-            + "    --------------------------------------------------------------";
-
-    /** Line in string. */
-    private static final String line = "    --------------------------------------------------------------\n";
-
-    /**
-     * Displays Pix's introduction.
-     */
-    public static void display() {
-        System.out.println("    Hello, this is\n" + logo);
-        System.out.println(greet);
-    }
-
-    /**
-     * Wraps the message in lines eventEnd display.
-     *
-     * @param message Message eventEnd be displayed.
-     * @return A String with the message wrapped in lines.
-     */
-    public static String wrapLines(String message) {
-        return "    --------------------------------------------------------------\n"
-                + "     " + message + "\n"
-                + "    --------------------------------------------------------------";
-    }
-
-    /**
-     * Returns a line.
-     *
-     * @return A String line.
-     */
-    public static String line() {
-        return line;
-    }
-
     /**
      * Returns bye string to be displayed.
      *
-     * @return ByeCommand string to be displayed.
+     * @return Bye string to be displayed.
      */
     public String bye() {
         return "Bye. Hope to see you again soon!\n\n";
@@ -162,7 +117,7 @@ public class Ui {
      */
     public String find(MyData data, String keyword) {
         StringBuilder findStringToDisplay = new StringBuilder();
-        findStringToDisplay.append("Here are tasks containing the keyword '").append(keyword).append("'\n\n");
+        findStringToDisplay.append("Here are tasks containing the keyword '").append(keyword).append("':\n\n");
         for (int i = 0; i < data.len(); i++) {
             if (data.getTaskAtIndex(i).inDescription(keyword)) {
                 findStringToDisplay.append(i + 1).append(". ").append(data.getTaskAtIndex(i)).append("\n\n");
