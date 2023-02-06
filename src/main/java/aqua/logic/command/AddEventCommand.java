@@ -22,12 +22,12 @@ public class AddEventCommand extends AddTaskCommand {
                 .orElseThrow(() -> new SyntaxException("Name disappeared!"));
 
         // get from date
-        String fromString = args.get(UserEvent.TAG_FROM)
+        String fromString = args.get(UserEvent.TAG_START_TIME)
                 .orElseThrow(() -> new SyntaxException("[from] disappeared!"));
         LocalDateTime from = DateUtils.parse(fromString);
 
         // get to date
-        String toString = args.get(UserEvent.TAG_TO)
+        String toString = args.get(UserEvent.TAG_END_TIME)
                 .orElseThrow(() -> new SyntaxException("[to] disappeared!"));
         LocalDateTime to = DateUtils.parse(toString);
 
