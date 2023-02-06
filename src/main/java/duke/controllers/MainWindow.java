@@ -1,6 +1,9 @@
 package duke.controllers;
 
 import duke.Duke;
+import duke.storage.Storage;
+import duke.task.Reminder;
+import duke.task.TaskList;
 import duke.ui.Ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -9,6 +12,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
+import java.time.LocalDateTime;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -22,6 +28,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
+    private Reminder reminder = new Reminder(LocalDateTime.now());
     private Duke duke;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
@@ -45,6 +52,11 @@ public class MainWindow extends AnchorPane {
         );
     }
 
+    public void showReminders() {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(reminder.getReminder(duke.getTaskList(), new Ui()), dukeImage)
+        );
+    }
 
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to

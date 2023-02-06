@@ -44,6 +44,10 @@ public class Duke {
         }
     }
 
+    public TaskList getTaskList() {
+        return this.tasks;
+    }
+
     /**
      * Start the Duke program.
      */

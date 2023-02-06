@@ -1,8 +1,12 @@
 package duke;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 
+import duke.controllers.DialogBox;
 import duke.controllers.MainWindow;
+import duke.task.Reminder;
+import duke.ui.Ui;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -16,6 +20,7 @@ public class Main extends Application {
 
     private Duke duke = new Duke("ip/data/tasks.txt");
 
+
     @Override
     public void start(Stage stage) {
         try {
@@ -26,6 +31,7 @@ public class Main extends Application {
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             assert duke != null: "duke should not be null";
             fxmlLoader.<MainWindow>getController().showWelcome();
+            fxmlLoader.<MainWindow>getController().showReminders();
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
