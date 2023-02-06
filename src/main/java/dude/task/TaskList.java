@@ -3,17 +3,21 @@ package dude.task;
 import java.util.ArrayList;
 import java.util.List;
 
+import dude.exception.DudeException;
+
 /**
  * A list of Tasks
  */
 public class TaskList {
-    private final List<Task> tasks;
+    private List<Task> tasks;
+    private List<Task> tasksCheckpoint;
 
     /**
      * Initializes TaskList.
      */
     public TaskList() {
         tasks = new ArrayList<>();
+        tasksCheckpoint = null;
     }
 
     /**
@@ -23,6 +27,7 @@ public class TaskList {
      */
     public TaskList(List<Task> tasks) {
         this.tasks = tasks;
+        tasksCheckpoint = null;
     }
 
     /**
@@ -41,8 +46,9 @@ public class TaskList {
      *
      * @param task Task object to be added into TaskList.
      */
-    public void addTask(Task task) {
+    public void addTask(Task task) throws DudeException {
         assert task != null : "New task should not be null";
+        backupTasks();
         tasks.add(task);
         Task.addTaskCount();
     }
@@ -52,10 +58,33 @@ public class TaskList {
      *
      * @param taskIndex Index of Task to be deleted from TaskList.
      */
-    public void deleteTask(int taskIndex) {
+    public void deleteTask(int taskIndex) throws DudeException {
         assert taskIndex > 0 : "Task index should be more than 0";
+        backupTasks();
         tasks.remove(taskIndex - 1);
         Task.decreaseTaskCount();
+    }
+
+    /**
+     * Marks Task in TaskList.
+     *
+     * @param taskIndex Index of Task to be mark in TaskList.
+     */
+    public void markTask(int taskIndex) throws DudeException {
+        assert taskIndex > 0 : "Task index should be more than 0";
+        backupTasks();
+        tasks.get(taskIndex - 1).mark();
+    }
+
+    /**
+     * Unmarks Task in TaskList.
+     *
+     * @param taskIndex Index of Task to be unmark in TaskList.
+     */
+    public void unmarkTask(int taskIndex) throws DudeException {
+        assert taskIndex > 0 : "Task index should be more than 0";
+        backupTasks();
+        tasks.get(taskIndex - 1).unmark();
     }
 
     /**
@@ -79,7 +108,6 @@ public class TaskList {
     @Override
     public String toString() {
         StringBuilder result;
-        assert tasks.size() > 0 : "Number of tasks should be more than 0";
         if (tasks.size() != 0) {
             result = new StringBuilder("Here are the tasks in your list: \n");
             for (int i = 0; i < tasks.size(); i++) {
@@ -89,5 +117,36 @@ public class TaskList {
             result = new StringBuilder("Eh... You currently got no task leh.\n");
         }
         return result.toString();
+    }
+
+    /**
+     * Clones the current state of tasks into backup.
+     */
+    public void backupTasks() throws DudeException {
+        try {
+            List<Task> tempTasks = new ArrayList<>();
+            for (Task task : this.tasks) {
+                Task newTask = (Task) task.clone();
+                tempTasks.add(newTask);
+            }
+            this.tasksCheckpoint = new ArrayList<>(tempTasks);
+        } catch (CloneNotSupportedException e) {
+            throw new DudeException("Eh... I am unable to copy from the backup tasks");
+        }
+    }
+
+    /**
+     * Restores the previous state of tasks into current task list.
+     *
+     * @return Boolean output on the success of the operation.
+     */
+    public boolean undo() {
+        if (tasksCheckpoint == null) {
+            return false;
+        }
+        tasks = new ArrayList<>(tasksCheckpoint);
+        Task.setTaskCount(tasks.size());
+        tasksCheckpoint = null;
+        return true;
     }
 }

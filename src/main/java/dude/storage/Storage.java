@@ -14,7 +14,7 @@ import dude.task.TaskList;
 import dude.task.Todo;
 
 /**
- * Handles file data input and output
+ * Handles file data input and output.
  */
 public class Storage {
 
@@ -31,8 +31,8 @@ public class Storage {
     }
 
     /**
-     * Checks if file path provided is valid
-     * If not valid, creates the directory and file
+     * Checks if file path provided is valid.
+     * If not valid, creates the directory and file.
      *
      * @param filePath Path to the data file stored.
      */
@@ -68,9 +68,9 @@ public class Storage {
     }
 
     /**
-     * Loads raw data stored in the file as TaskList
+     * Loads raw data stored in the file as TaskList.
      *
-     * @return TaskList which stores the data loaded from file
+     * @return TaskList which stores the data loaded from file.
      */
     public ArrayList<Task> loadData() throws FileNotFoundException {
         ArrayList<Task> taskList = new ArrayList<>();

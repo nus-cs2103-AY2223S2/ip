@@ -17,6 +17,10 @@ public class FindCommand extends Command {
     public FindCommand(String[] keywords) {
         this.keywords = keywords;
     }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         List<Task> filteredTasks = new ArrayList<>();

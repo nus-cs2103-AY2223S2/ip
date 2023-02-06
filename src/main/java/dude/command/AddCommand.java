@@ -1,12 +1,13 @@
 package dude.command;
 
+import dude.exception.DudeException;
 import dude.storage.Storage;
 import dude.task.Task;
 import dude.task.TaskList;
 import dude.ui.Ui;
 
 /**
- * Command to add Task into TaskList
+ * Command to add Task into TaskList.
  */
 public class AddCommand extends Command {
     private final Task newTask;
@@ -22,13 +23,15 @@ public class AddCommand extends Command {
 
     /**
      * {@inheritDoc}
-     *
-     * @return
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        tasks.addTask(newTask);
-        storage.saveData(tasks);
-        return ui.showAdd(newTask);
+        try {
+            tasks.addTask(newTask);
+            storage.saveData(tasks);
+            return ui.showAdd(newTask);
+        } catch (DudeException e) {
+            return ui.showError(e.getMessage());
+        }
     }
 }

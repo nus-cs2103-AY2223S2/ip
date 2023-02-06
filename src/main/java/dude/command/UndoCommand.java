@@ -5,16 +5,20 @@ import dude.task.TaskList;
 import dude.ui.Ui;
 
 /**
- * Command to exit Dude program
+ * Command to unmark Task.
  */
-public class ExitCommand extends Command {
+public class UndoCommand extends Command {
+
     /**
      * {@inheritDoc}
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
+        boolean result = tasks.undo();
+        if (!result) {
+            return ui.showUndoError();
+        }
         storage.saveData(tasks);
-        setExit(true);
-        return ui.showGoodbye();
+        return ui.showUndo();
     }
 }

@@ -1,12 +1,13 @@
 package dude.command;
 
+import dude.exception.DudeException;
 import dude.storage.Storage;
 import dude.task.Task;
 import dude.task.TaskList;
 import dude.ui.Ui;
 
 /**
- * Command to delete Task
+ * Command to delete Task.
  */
 public class DeleteCommand extends Command {
     private final int taskIndex;
@@ -22,18 +23,19 @@ public class DeleteCommand extends Command {
 
     /**
      * {@inheritDoc}
-     *
-     * @return
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        if (Task.getTaskCount() >= taskIndex && Task.getTaskCount() != 0) {
-            Task currentTask = tasks.getTask(taskIndex);
+        if (Task.getTaskCount() < taskIndex || Task.getTaskCount() == 0) {
+            return ui.showError("Uhh... Where got this task for me to delete?");
+        }
+        try {
             tasks.deleteTask(taskIndex);
+            Task currentTask = tasks.getTask(taskIndex);
             storage.saveData(tasks);
             return ui.showDelete(currentTask);
-        } else {
-            return ui.showError("Uhh... Where got this task for me to delete?");
+        } catch (DudeException e) {
+            return ui.showError(e.getMessage());
         }
     }
 }

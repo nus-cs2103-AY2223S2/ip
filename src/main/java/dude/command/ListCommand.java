@@ -5,13 +5,12 @@ import dude.task.TaskList;
 import dude.ui.Ui;
 
 /**
- * Command to list all the Tasks in TaskList
+ * Command to list all the Tasks in TaskList.
  */
 public class ListCommand extends Command {
+
     /**
      * {@inheritDoc}
-     *
-     * @return
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {

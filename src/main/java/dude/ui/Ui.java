@@ -7,20 +7,20 @@ import dude.task.Task;
 import dude.task.TaskList;
 
 /**
- * Handles interactions with user
+ * Handles interactions with user.
  */
 public class Ui {
     private static Scanner sc = new Scanner(System.in);
 
     /**
-     * Prints horizontal line format for program
+     * Prints horizontal line format for program.
      */
     public void showLine() {
         System.out.println(" _______________________________________________________________________");
     }
 
     /**
-     * Prints welcome message to user
+     * Prints welcome message to user.
      */
     public String showWelcome() {
         return "Eh hello! I'm dude. What you want me do for you?\n";
@@ -93,6 +93,20 @@ public class Ui {
     }
 
     /**
+     * Prints success undo message to user.
+     */
+    public String showUndo() {
+        return "Okay la. Your previous command has been undone\n";
+    }
+
+    /**
+     * Prints failed undo message to user.
+     */
+    public String showUndoError() {
+        return "Sorry leh. I think your previous command cannot be undone\n";
+    }
+
+    /**
      * Prints error message to user.
      *
      * @param error Error message to be printed.
@@ -105,7 +119,7 @@ public class Ui {
      * Prints goodbye message to user.
      */
     public String showGoodbye() {
-        return "Ciaos! See you next time.\n";
+        return "Ciaos! See you next time\n";
     }
 
     /**

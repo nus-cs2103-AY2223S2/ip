@@ -10,6 +10,7 @@ import dude.command.ExitCommand;
 import dude.command.FindCommand;
 import dude.command.ListCommand;
 import dude.command.MarkCommand;
+import dude.command.UndoCommand;
 import dude.command.UnmarkCommand;
 import dude.exception.DudeException;
 import dude.task.Deadline;
@@ -17,14 +18,14 @@ import dude.task.Event;
 import dude.task.Todo;
 
 /**
- * Parse user inputs into actual commands
+ * Parse user inputs into actual commands.
  */
 public class Parser {
     /**
-     * Enums for different possible command types
+     * Enums for different possible command types.
      */
     public enum CommandType {
-        LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, FIND, BYE
+        LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, FIND, UNDO, BYE
     }
 
     /**
@@ -71,6 +72,8 @@ public class Parser {
             return new DeleteCommand(Integer.parseInt(cmd[1]));
         case FIND:
             return new FindCommand(cmd[1].split(" "));
+        case UNDO:
+            return new UndoCommand();
         default:
             throw new DudeException("Uhh... You give me wrong command leh");
         }
@@ -82,7 +85,7 @@ public class Parser {
      *
      * @param commandType Type of command.
      * @param command Command input provided by user.
-     * @throws DudeException  If command is not valid.
+     * @throws DudeException If command is not valid.
      */
     public static void validate(CommandType commandType, String command) throws DudeException {
         String[] cmd = command.split(" ", 2);
@@ -92,6 +95,7 @@ public class Parser {
         switch (commandType) {
         case LIST:
         case BYE:
+        case UNDO:
             if (cmd.length != 1) {
                 throw new DudeException("Uhh... I think you added extra commands?");
             }
