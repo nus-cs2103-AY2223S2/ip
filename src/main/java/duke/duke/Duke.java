@@ -6,6 +6,7 @@ import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
+import javafx.scene.control.Label;
 
 /**
  * Represents the Duke program, a chatbot that helps you keep track of your tasks.
@@ -16,7 +17,11 @@ public class Duke {
     private TaskList tl;
     private boolean isExit;
 
-    private Duke(String filePath) {
+    /**
+     * The constructor for the Duke Chatbot.
+     * @param filePath
+     */
+    public Duke(String filePath) {
         this.isExit = false;
         this.ui = new Ui();
         this.storage = new Storage(filePath);
@@ -25,6 +30,10 @@ public class Duke {
         } catch (DukeException e) {
             this.ui.showToUser(e.getMessage());
         }
+    }
+
+    public Duke() {
+        this("./save.txt");
     }
 
     /**
@@ -52,6 +61,32 @@ public class Duke {
                 ui.showToUser(e.getMessage());
             }
         }
+    }
+
+    private Label getDialogLabel(String text) {
+        // You will need to import `javafx.scene.control.Label`.
+        Label textToAdd = new Label(text);
+        textToAdd.setWrapText(true);
+        return textToAdd;
+    }
+
+    /**
+     * Returns the string which is to be passed into the GUI under Poolsheen's response.
+     *
+     * @param fullCommand The full string passed in by the user.
+     * @return The string which is to be passed onto the GUI.
+     */
+    public String getResponse(String input) {
+        Parser parser = new Parser();
+        String[] processedLines = input.split(" ");
+        Command c;
+        try {
+            c = parser.parse(processedLines);
+            return c.execute(tl, ui, storage);
+        } catch (DukeException err) {
+            return err.getMessage();
+        }
+
     }
 }
 
