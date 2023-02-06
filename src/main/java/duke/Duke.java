@@ -1,5 +1,17 @@
 package duke;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.layout.Region;
+import javafx.stage.Stage;
+
+
 import duke.functions.Parser;
 import duke.functions.Storage;
 import duke.functions.Ui;
@@ -12,6 +24,7 @@ import java.util.Scanner;
  * and decoding user inputs and shut down.
  */
 public class Duke {
+    /*
     public static void main(String[] args) {
         Storage storage = new Storage("./ip-data/ip-data.txt");
         Scanner sc = new Scanner(System.in);
@@ -20,6 +33,20 @@ public class Duke {
         list = Duke.startUp(storage);
         Duke.input(sc, list);
         Duke.shutDown(storage, list);
+    }*/
+
+    /**
+     * Iteration 1:
+     * Creates a label with the specified text and adds it to the dialog container.
+     * @param text String containing text to add
+     * @return a label with the specified text that has word wrap enabled.
+     */
+    private Label getDialogLabel(String text) {
+        // You will need to import `javafx.scene.control.Label`.
+        Label textToAdd = new Label(text);
+        textToAdd.setWrapText(true);
+
+        return textToAdd;
     }
 
     private static ToDoList startUp(Storage storage) {
@@ -36,7 +63,7 @@ public class Duke {
             storage.save(list);
             Ui.exitMessage();
         } catch (Exception e) {
-
+            Ui.exitMessage();
         }
     }
 
