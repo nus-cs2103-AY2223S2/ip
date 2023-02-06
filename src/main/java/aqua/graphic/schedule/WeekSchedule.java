@@ -51,6 +51,8 @@ public class WeekSchedule extends VBox {
             sepTimeables.add(new ArrayList<>());
         }
         for (ScheduleTimeable timeable : timeables) {
+            // timeables might span multiple days.
+            // thus need to determine start and end days.
             int startDay = (int) startTime.until(timeable.getStart(), ChronoUnit.DAYS);
             startDay = Math.max(0, startDay);
             int endDay = (int) startTime.until(timeable.getEnd(), ChronoUnit.DAYS);
