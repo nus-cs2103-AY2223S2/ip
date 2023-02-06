@@ -45,7 +45,7 @@ public class Ui {
     }
     public void showStored(TaskList tasks) {
         System.out.println("File has been stored!");
-        System.out.println(tasks);
+        this.showAll(tasks);
     }
 
     public void showDeleted(Task task) {
@@ -58,11 +58,11 @@ public class Ui {
         System.out.println("duke.Command: " + word);
     }
 
-    public void goodbye() {
+    public void showGoodbye() {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
-    public void listAll(TaskList tasks) {
+    public void showAll(TaskList tasks) {
         System.out.println(tasks.toFormattedString());
     }
 }

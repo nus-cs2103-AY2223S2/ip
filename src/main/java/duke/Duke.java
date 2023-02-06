@@ -29,19 +29,20 @@ public class Duke {
         this.ui.showWelcome();
         boolean isExit = false;
         while (!isExit) {
-            String word = this.ui.readCommand();
+            String input = this.ui.readCommand();
             ui.showLine();
             try {
-                Command command = Parser.parse(word);
+                Command command = Parser.parse(input);
                 command.execute(this.tasks, this.storage, this.ui);
                 isExit = command.isExit();
             } catch (CommandException commandException) {
-                ui.showCommandError(word, commandException);
-            } catch (DukeException exception) {
-                System.out.println(exception);
+                ui.showCommandError(input, commandException);
+            } catch (DukeException dukeException) {
+                System.out.println(dukeException);
             } finally {
                 ui.showLine();
             }
         }
+        ui.showGoodbye();
     }
 }

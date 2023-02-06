@@ -3,7 +3,12 @@ package duke;
 import duke.Tasks.Task;
 import duke.Tasks.TaskList;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
 
 public class Storage {
 
@@ -12,7 +17,7 @@ public class Storage {
     File file;
     String filepath;
 
-    public Storage(String filepath) throws IOException{
+    public Storage(String filepath) throws IOException {
         this.filepath = filepath;
         this.file = new File(filepath);
         if (this.file.createNewFile()) {
