@@ -17,23 +17,25 @@ public class Ui {
 
     /** Commands that supported by the chatbot. */
     public static final String COMMAND_LIST =
-            "1.  list -> Provides a list of existing tasks.\n"
-                    + "2.  mark X -> Marks task number X as done.\n"
-                    + "3.  unmark X -> Marks task number X as undone.\n"
-                    + "4.  todo taskName -> Creates a todo task with name taskName.\n"
-                    + "5.  deadline taskName /by date -> Creates a deadline task with name taskName and deadline"
+            "1.   list -> Provides a list of existing tasks.\n"
+                    + "2.   mark X -> Marks task number X as done.\n"
+                    + "3.   unmark X -> Marks task number X as undone.\n"
+                    + "4.   todo taskName -> Creates a todo task with name taskName.\n"
+                    + "5.   deadline taskName /by date -> Creates a deadline task with name taskName and deadline"
                             + " date.\n"
-                    + "6.  event taskName /from startDate /to endDate -> Creates an event task with name taskName,\n"
-                    + "     start date startDate, and end date endDate.\n"
-                    + "7.  delete X -> Deletes task number X from the list.\n"
-                    + "8.  on givenDate -> Displays all the tasks that occur on givenDate.\n"
-                    + "9.  find keyPhrase -> Displays all the tasks whose names contain any words from keyPhrase.\n"
-                    + "10. help -> Prints the list of commands supported by this bot.\n"
-                    + "11. bye -> Exits the bot.\n\n"
+                    + "6.   event taskName /from startDate /to endDate -> Creates an event task with name taskName,\n"
+                    + "      start date startDate, and end date endDate.\n"
+                    + "7.   delete X -> Deletes task number X from the list.\n"
+                    + "8.   on givenDate -> Displays all the tasks that occur on givenDate.\n"
+                    + "9.   find keyPhrase -> Displays all the tasks whose names contain any words from keyPhrase.\n"
+                    + "10. reminder day/week/month -> Provides a reminder for upcoming or due tasks, either within \n" +
+                      "     1 day, 1 week or 1 month from the current date and time.\n"
+                    + "11. help -> Prints the list of commands supported by this bot.\n"
+                    + "12. bye -> Exits the bot.\n\n"
                     + "Please enter dates in the format of either yyyy-MM-dd hh:mm or yyyy-MM-dd.";
 
     /** Introductory message excluding logo and command list. */
-    public static final String INTRODUCTORY_BODY = "Boo! Nice to meet you.\n"
+    public static final String INTRODUCTORY_BODY = "Boo! "
             + "I am here to scare all your problems away by keeping track of your tasks.\n"
                     + "What can I help you with today?\n"
                             + "\nSupported Commands:";

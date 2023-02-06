@@ -88,7 +88,7 @@ public class MainWindow extends AnchorPane {
      * Generates the starting message from the bot.
      */
     private void generateStartingMessage() {
-        String BooText = Ui.LOGO + "\n\n" + Ui.INTRODUCTORY_BODY + "\n" + Ui.COMMAND_LIST;
+        String BooText = Ui.LOGO + "\n" + Ui.INTRODUCTORY_BODY + "\n" + Ui.COMMAND_LIST;
 
         dialogContainer.getChildren().addAll(
                 DialogBox.getBooDialog(BooText, BooImage)

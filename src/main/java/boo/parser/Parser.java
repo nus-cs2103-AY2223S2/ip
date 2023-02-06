@@ -414,10 +414,13 @@ public class Parser {
     private CommandType validateReminder(String[] inputArray) {
         try {
             boolean hasValidNumberOfSubcommands = inputArray.length == 2;
+            if (! hasValidNumberOfSubcommands) {
+                throw new BooException("Please enter one of the following after reminder: day, week or month.");
+            }
             boolean isValidKeyword = inputArray[1].equals("day") || inputArray[1].equals("week")
                     || inputArray[1].equals("month");
-            if (!hasValidNumberOfSubcommands || !isValidKeyword) {
-                throw new BooException("Please enter one of the following: day, week or month.");
+            if (!isValidKeyword) {
+                throw new BooException("Please enter one of the following after reminder: day, week or month.");
             }
             CommandType ctReminder = CommandType.REMINDER;
             ctReminder.setReminderDuration(inputArray[1]);

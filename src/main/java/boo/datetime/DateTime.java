@@ -119,6 +119,90 @@ public abstract class DateTime {
     }
 
     /**
+     * Determines if one date falls between a given period, inclusive.
+     * @param start The start date of the period.
+     * @param end The end date of the period.
+     * @param dateToCheck The date to check
+     * @return true if the date falls between a given period, inclusive, else returns false.
+     */
+    public static boolean fallWithinPeriod(LocalDateTime start, LocalDateTime end, Temporal dateToCheck) {
+        if (dateToCheck instanceof LocalDateTime) {
+            boolean isAfterOrEqualToStart = start.isBefore((LocalDateTime) dateToCheck)
+                    || start.isEqual((LocalDateTime) dateToCheck);
+            boolean isBeforeOrEqualToEnd = end.isAfter((LocalDateTime) dateToCheck) ||
+                    end.isEqual((LocalDateTime) dateToCheck);
+            return isAfterOrEqualToStart && isBeforeOrEqualToEnd;
+
+        } else if (dateToCheck instanceof LocalDate) {
+            //Compare date only
+
+            int yearOfStartDate = start.getYear();
+            int monthOfStartDate = start.getMonthValue();
+            int dayOfStartDate = start.getDayOfMonth();
+            LocalDate startDateOnly = LocalDate.of(yearOfStartDate, monthOfStartDate, dayOfStartDate);
+
+            int yearOfEndDate = end.getYear();
+            int monthOfEndDate = end.getMonthValue();
+            int dayOfEndDate = end.getDayOfMonth();
+            LocalDate endDateOnly = LocalDate.of(yearOfEndDate, monthOfEndDate, dayOfEndDate);
+
+            boolean isAfterOrEqualToStart = startDateOnly.isBefore((LocalDate) dateToCheck)
+                    || startDateOnly.isEqual((LocalDate) dateToCheck);
+            boolean isBeforeOrEqualToEnd = endDateOnly.isAfter((LocalDate) dateToCheck) ||
+                    endDateOnly.isEqual((LocalDate) dateToCheck);
+            return isAfterOrEqualToStart && isBeforeOrEqualToEnd;
+        }
+        return true;
+    }
+
+
+    /**
+     * Determines if start happens strictly before end.
+     *
+     * @param start The {@code Temporal} encapsulating the start date and time.
+     * @param end The {@code Temporal} encapsulating the end date and time.
+     * @return true if start happens strictly before end, else false.
+     */
+    public static boolean isStrictlyBefore(Temporal start, Temporal end) {
+        assert start != null : "Invalid start temporal.";
+        assert end != null : "Invalid end temporal.";
+
+
+        if (start instanceof LocalDateTime && end instanceof LocalDateTime) {
+            boolean isEndAfterStart = ((LocalDateTime) end).isAfter((LocalDateTime) start);
+            return isEndAfterStart;
+
+        } else if (start instanceof LocalDate && end instanceof LocalDate) {
+            boolean isEndAfterStart = ((LocalDate) end).isAfter((LocalDate) start);
+            return isEndAfterStart;
+
+        } else if (start instanceof LocalDate && end instanceof LocalDateTime) {
+            //Convert
+            int yearOfEndDate = ((LocalDateTime) end).getYear();
+            int monthOfEndDate = ((LocalDateTime) end).getMonthValue();
+            int dayOfEndDate = ((LocalDateTime) end).getDayOfMonth();
+            LocalDate endDateOnly = LocalDate.of(yearOfEndDate, monthOfEndDate, dayOfEndDate);
+            //Check validity
+            boolean isEndAfterStart = endDateOnly.isAfter((LocalDate) start);
+            return isEndAfterStart;
+
+        } else if (start instanceof LocalDateTime && end instanceof LocalDate) {
+            //Convert
+            int yearOfStartDate = ((LocalDateTime) start).getYear();
+            int monthOfStartDate = ((LocalDateTime) start).getMonthValue();
+            int dayOfStartDate = ((LocalDateTime) start).getDayOfMonth();
+            LocalDate startDateOnly = LocalDate.of(yearOfStartDate, monthOfStartDate, dayOfStartDate);
+            //Check validity
+            boolean isEndAfterStart = ((LocalDate) end).isAfter(startDateOnly);
+            return isEndAfterStart;
+        }
+        return true;
+    }
+
+
+
+
+    /**
      * Formats a date, returning a string in either yyyy-MM-dd HH:mm or yyyy-MM-dd format.
      *
      * @return a string representing the formatted deadline.
