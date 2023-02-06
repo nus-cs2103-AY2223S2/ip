@@ -1,14 +1,13 @@
 package aqua.usertask;
 
 
-/** An {@code AquaTask} to represent a todo. */
+/** A {@code UserTask} to represent a todo. */
 public class UserTodo extends UserTask {
-    /** If the task is completed. */
     private final boolean isComplete;
 
 
     /**
-     * Constructs an {@code AquaTask} with the given name while setting the
+     * Constructs a {@code UserTask} with the given name while setting the
      * task completion status to {@code false}.
      *
      * @param name - the name of the task.
@@ -19,7 +18,7 @@ public class UserTodo extends UserTask {
 
 
     /**
-     * Constructs an {@code AquaTask} with the given parameters.
+     * Constructs a {@code UserTask} with the given parameters.
      *
      * @param name - the name of the task.
      * @param isCompleted - if the task is completed.
