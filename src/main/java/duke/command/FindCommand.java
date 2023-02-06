@@ -33,7 +33,7 @@ public class FindCommand extends Command {
      * @param storage Storage object
      * @throws DukeException when there are no matches or user enters illegal inputs
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         List<Task> temporaryTaskList = new ArrayList<Task>();
         String taskDescription = new Parser().convertToUserInput(super.getContents(), TypeOfTask.find, " ");
         for (Task currentTask : taskList.getTasks()) {
@@ -45,10 +45,12 @@ public class FindCommand extends Command {
         if (temporaryTaskList.size() == 0) {
             throw new DukeException(TypeOfTask.find, 1);
         } else {
-            ui.displayResult(TypeOfTask.find, null, taskList);
+            String result = ui.getResult(TypeOfTask.find, null, taskList);
             for (Task tempTask: temporaryTaskList) {
-                System.out.println(tempTask.toString());
+                //System.out.println(tempTask.toString());
+                result += "\n" + tempTask.toString();
             }
+            return result;
         }
     }
 }

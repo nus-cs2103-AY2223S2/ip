@@ -28,11 +28,13 @@ public class ListCommand extends Command {
      * @param storage Storage object
      * @throws DukeException When saving of task is not possible due to unforseen errors
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.displayResult(TypeOfTask.list, null, taskList);
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        String result = ui.getResult(TypeOfTask.list, null, taskList);
         for (int i = 0; i < taskList.getSize(); i++) {
             Task currentTask = taskList.getTaskByIndex(i);
-            System.out.println(String.format("%d. %s", i + 1, currentTask.toString()));
+            //System.out.println(String.format("%d. %s", i + 1, currentTask.toString()));
+            result += "\n" + String.format("%d. %s", i + 1, currentTask.toString());
         }
+        return result;
     }
 }

@@ -73,7 +73,15 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        try {
+            //return "Duke heard: " + input;
+            String fullCommand = input;
+            Command command = this.parser.parse(fullCommand);
+            String result = command.execute(this.taskList, this.ui, this.storage);
+            return result;
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
 
 }

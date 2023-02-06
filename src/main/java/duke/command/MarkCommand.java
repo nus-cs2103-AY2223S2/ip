@@ -26,12 +26,13 @@ public class MarkCommand extends Command {
      * @param storage Storage object
      * @throws DukeException When saving of task is not possible due to unforseen errors
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         try {
             int userMarkIndex = Integer.parseInt((super.contents)[0]) - 1;
             Task currentTask = taskList.getTasks().get(userMarkIndex);
             currentTask.markAsDone();
-            ui.displayResult(TypeOfTask.mark, currentTask, taskList);
+            String result = ui.getResult(TypeOfTask.mark, currentTask, taskList);
+            return result;
         } catch (Exception e) {
             throw new DukeException(TypeOfTask.mark, 1);
         }

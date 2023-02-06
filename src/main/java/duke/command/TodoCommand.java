@@ -28,10 +28,11 @@ public class TodoCommand extends Command {
      * @param storage Storage object
      * @throws DukeException When saving of task is not possible due to unforseen errors
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         String userInput = super.parser.convertToUserInput(super.contents, TypeOfTask.todo, "");
         Task newTask = new Todo(userInput);
         taskList.addTask(newTask);
-        ui.displayResult(TypeOfTask.todo, newTask, taskList);
+        String result = ui.getResult(TypeOfTask.todo, newTask, taskList);
+        return result;
     }
 }

@@ -26,11 +26,12 @@ public class ByeCommand extends Command {
      * @param storage Storage object
      * @throws DukeException When saving of task is not possible due to unforseen errors
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         // need to save the updated taskList to the storage
         // the ui will be responsible in displaying whatever needs to be displayed
         // -> not the responsibility of the command classes
-        ui.displayResult(TypeOfTask.bye, null, null);
+        String result = ui.getResult(TypeOfTask.bye, null, null);
         storage.saveTasks(taskList.getTasks());
+        return result;
     }
 }
