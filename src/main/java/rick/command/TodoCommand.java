@@ -17,6 +17,7 @@ public class TodoCommand extends Command {
 
     /**
      * Given a task description, creates a Todo Task when executed.
+     *
      * @param task The task description to store.
      */
     public TodoCommand(String task) {
@@ -32,6 +33,7 @@ public class TodoCommand extends Command {
 
     /**
      * Executes this task.
+     *
      * @param ts The TaskList instance.
      * @param ui The UI instance.
      * @return The UI to display from the GUI.

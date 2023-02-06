@@ -14,6 +14,7 @@ public class FindCommand extends Command {
 
     /**
      * Initialise this command with the search term.
+     *
      * @param s The provided search term.
      */
     public FindCommand(String s) {
@@ -22,6 +23,7 @@ public class FindCommand extends Command {
 
     /**
      * Execute this task.
+     *
      * @param ts The TaskList instance.
      * @param ui The Ui instance.
      */

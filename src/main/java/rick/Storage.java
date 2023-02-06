@@ -55,6 +55,7 @@ public class Storage {
 
     /**
      * Factory method that creates a RickFileWriter instance.
+     *
      * @return The created RickFileWriter.
      */
     public static Storage create() {
@@ -63,6 +64,7 @@ public class Storage {
 
     /**
      * Appends a new record to the end of the file.
+     *
      * @param s The record to be appended.
      * @return The count of records in the store.
      */
@@ -84,6 +86,7 @@ public class Storage {
 
     /**
      * Modifies a task in the store.
+     *
      * @param index The index of the task in the store.
      * @param done The status of the task in the store.
      * @return The modified task.
@@ -112,6 +115,7 @@ public class Storage {
 
     /**
      * Deletes a task in the store.
+     *
      * @param index The index of the task in the store.
      * @return The deleted task.
      */
@@ -133,6 +137,7 @@ public class Storage {
 
     /**
      * Prints the store's contents as a list, line by line.
+     *
      * @return The store's contents as a String list.
      */
     @Override
@@ -180,6 +185,7 @@ public class Storage {
 
     /**
      * Calculates the number of records currently stored in the store.
+     *
      * @return The number of records stored.
      */
     public long size() {

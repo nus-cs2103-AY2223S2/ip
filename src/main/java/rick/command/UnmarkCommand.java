@@ -16,6 +16,7 @@ public class UnmarkCommand extends Command {
     /**
      * Formats this with the index of the storage to access and modify the
      * task.
+     *
      * @param idx The storage index.
      */
     public UnmarkCommand(int idx) {
@@ -24,6 +25,7 @@ public class UnmarkCommand extends Command {
 
     /**
      * Executes this task.
+     *
      * @param ts The TaskList instance.
      * @param ui The UI output.
      */

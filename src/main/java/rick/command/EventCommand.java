@@ -23,6 +23,7 @@ public class EventCommand extends Command {
      * Given a valid slug, creates an Event task when executed.
      * Slugs are of this format:
      * "{task} /from d/M/yy HHmm /to d/M/yy HHmm"
+     *
      * @param slug The provided slug.
      */
     public EventCommand(String slug) {
@@ -38,6 +39,7 @@ public class EventCommand extends Command {
 
     /**
      * Executes this command.
+     *
      * @param ts The TaskList instance.
      * @param ui The UI output.
      */

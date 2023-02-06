@@ -66,6 +66,7 @@ public class DialogBox extends HBox {
 
     /**
      * Return the User's input as a DialogBox.
+     *
      * @param text The text to display
      * @param img The user's image
      * @return The resultant DialogBox.
@@ -76,6 +77,7 @@ public class DialogBox extends HBox {
 
     /**
      * Return the System's output as a DialogBox.
+     *
      * @param text The text to display
      * @param img The user's image
      * @return The resultant DialogBox.

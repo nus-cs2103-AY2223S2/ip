@@ -15,6 +15,7 @@ public class ErrorCommand extends Command {
 
     /**
      * Formats this command with the given error message.
+     *
      * @param msg The error message to display.
      */
     public ErrorCommand(String msg) {
@@ -23,6 +24,7 @@ public class ErrorCommand extends Command {
 
     /**
      * Formats this command with the given error.
+     *
      * @param de The exception to populate this command with.
      */
     public ErrorCommand(RickException de) {
@@ -31,6 +33,7 @@ public class ErrorCommand extends Command {
 
     /**
      * Executes this command.
+     *
      * @param ts The TaskList instance.
      * @param ui The UI instance.
      * @return The UI to output to the GUI.

@@ -12,6 +12,7 @@ public class Launcher {
     /**
      * The main method of the Rick App.
      * Command line configurations may be passed in here.
+     *
      * @param args The command line options for this app.
      */
     public static void main(String[] args) {
