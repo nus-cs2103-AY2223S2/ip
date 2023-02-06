@@ -33,7 +33,8 @@ public class Task {
     }
 
     /**
-     * Returns status icon depending if task is marked.
+     * Returns status icon depending on if task is marked.
+     *
      * @return X for marked, empty if unmarked,
      */
     public String getStatusIcon() {

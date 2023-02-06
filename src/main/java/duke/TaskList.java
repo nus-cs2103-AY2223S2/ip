@@ -1,8 +1,8 @@
 package duke;
 
-import java.util.ArrayList;
-
 import duke.task.Task;
+
+import java.util.ArrayList;
 
 /**
  * Represents a tasklist.
@@ -39,6 +39,7 @@ public class TaskList {
      * @param mark final status of task.
      */
     public void markTask(int index, boolean mark) {
+        assert index < array.size() : "index cannot be out of bounds";
         this.getTask(index).setStatus(mark);
     }
 
