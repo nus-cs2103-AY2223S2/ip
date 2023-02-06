@@ -22,7 +22,7 @@ public class MainWindow extends AnchorPane {
     private Kuromi kuromi;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/melody.jfif"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/kuromi.jfif"));
+    private Image kuromiImage = new Image(this.getClass().getResourceAsStream("/images/kuromi.jfif"));
 
     @FXML
     public void initialize() {
@@ -31,6 +31,8 @@ public class MainWindow extends AnchorPane {
 
     public void setKuromi(Kuromi d) {
         kuromi = d;
+        String welcome = kuromi.getWelcomeMessage();
+        dialogContainer.getChildren().add(DialogBox.getKuromiDialog(welcome, kuromiImage));
     }
 
     /**
@@ -43,7 +45,7 @@ public class MainWindow extends AnchorPane {
         String response = kuromi.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getKuromiDialog(response, kuromiImage)
         );
         userInput.clear();
     }

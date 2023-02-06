@@ -64,4 +64,8 @@ public class Kuromi {
            return e.getMessage();
         }
     }
+
+    String getWelcomeMessage() {
+        return "Hello! I'm Kuromi\nWhat can I do for you?\n";
+    }
 }
