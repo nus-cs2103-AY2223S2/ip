@@ -1,14 +1,18 @@
 package duke;
 
-import duke.Command.Command;
-import duke.Exceptions.CommandException;
-import duke.Exceptions.DukeException;
-import duke.Tasks.TaskList;
+import duke.command.Command;
+import duke.exception.CommandException;
+import duke.exception.DukeException;
+import duke.task.TaskList;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 /**
  * Main class for Duke chatbot
  */
-public class Duke {
+public class Duke extends Application {
     private Storage storage;
     private TaskList tasks;
     private final Ui ui;
@@ -38,7 +42,23 @@ public class Duke {
     }
 
     /**
-     * Starts the program
+     * Initialise the launcher
+     * @param stage the primary stage for this application, onto which
+     * the application scene can be set.
+     * Applications may create other stages, if needed, but they will not be
+     * primary stages.
+     */
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
+    }
+
+    /**
+     * Method that abstracts the running of the program
      */
     public void run() {
         this.ui.showWelcome();
@@ -58,6 +78,5 @@ public class Duke {
                 ui.showLine();
             }
         }
-        ui.showGoodbye();
     }
 }

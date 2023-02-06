@@ -1,4 +1,4 @@
-package duke.Exceptions;
+package duke.exception;
 
 public class TaskIndexException extends DukeException {
     private int max;

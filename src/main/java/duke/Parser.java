@@ -1,15 +1,14 @@
 package duke;
 
-import duke.Command.Command;
-import duke.Command.DeleteCommand;
-import duke.Command.ExitCommand;
-import duke.Command.FindCommand;
-import duke.Command.ListCommand;
-import duke.Command.MarkCommand;
-import duke.Command.FindCommand;
-import duke.Exceptions.DukeException;
-import duke.Exceptions.TaskIndexException;
-import duke.Tasks.Task;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
+import duke.exception.DukeException;
+import duke.exception.TaskIndexException;
+import duke.task.Task;
 
 public class Parser {
     /**

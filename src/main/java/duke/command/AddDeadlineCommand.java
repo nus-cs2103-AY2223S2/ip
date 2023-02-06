@@ -1,9 +1,9 @@
-package duke.Command;
+package duke.command;
 
-import duke.Exceptions.DukeException;
-import duke.Tasks.Deadline;
+import duke.exception.DukeException;
+import duke.task.Deadline;
 import duke.Storage;
-import duke.Tasks.TaskList;
+import duke.task.TaskList;
 import duke.Ui;
 
 public class AddDeadlineCommand extends Command {

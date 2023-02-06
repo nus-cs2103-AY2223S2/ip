@@ -1,6 +1,6 @@
-package duke.Tasks;
+package duke.task;
 
-import duke.Exceptions.DescriptionException;
+import duke.exception.DescriptionException;
 
 public class ToDo extends Task {
     /**

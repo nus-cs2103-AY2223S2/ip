@@ -1,7 +1,7 @@
-package duke.Tasks;
+package duke.task;
 
 import duke.DateTimeFormat;
-import duke.Exceptions.DescriptionException;
+import duke.exception.DescriptionException;
 import java.time.LocalDateTime;
 
 /**

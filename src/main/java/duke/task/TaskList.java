@@ -1,7 +1,7 @@
-package duke.Tasks;
+package duke.task;
 
-import duke.Exceptions.CommandException;
-import duke.Exceptions.DescriptionException;
+import duke.exception.CommandException;
+import duke.exception.DescriptionException;
 
 import java.io.BufferedReader;
 import java.io.IOException;

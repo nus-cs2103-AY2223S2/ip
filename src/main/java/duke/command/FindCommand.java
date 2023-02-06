@@ -1,9 +1,9 @@
-package duke.Command;
+package duke.command;
 
-import duke.Exceptions.DukeException;
+import duke.exception.DukeException;
 import duke.Storage;
-import duke.Tasks.Task;
-import duke.Tasks.TaskList;
+import duke.task.Task;
+import duke.task.TaskList;
 import duke.Ui;
 
 public class FindCommand extends Command {
@@ -21,8 +21,7 @@ public class FindCommand extends Command {
                 newTasks.add(task);
             }
         }
-        ui.listAll(newTasks);
+        ui.showAll(newTasks);
         return newTasks.toFormattedString();
-
     }
 }

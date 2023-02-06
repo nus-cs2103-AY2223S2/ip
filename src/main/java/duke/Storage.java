@@ -1,7 +1,7 @@
 package duke;
 
-import duke.Tasks.Task;
-import duke.Tasks.TaskList;
+import duke.task.Task;
+import duke.task.TaskList;
 
 import java.io.BufferedReader;
 import java.io.File;

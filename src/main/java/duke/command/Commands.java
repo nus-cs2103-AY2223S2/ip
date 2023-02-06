@@ -1,4 +1,4 @@
-package duke.Command;
+package duke.command;
 
 public enum Commands {
     // TODO: use enum instead of text when parsing commands

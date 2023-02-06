@@ -1,12 +1,12 @@
-package duke.Tasks;
+package duke.task;
 
-import duke.Command.AddDeadlineCommand;
-import duke.Command.AddTodoCommand;
-import duke.Command.AddEventCommand;
-import duke.Command.Command;
-import duke.Command.Commands;
-import duke.Exceptions.CommandException;
-import duke.Exceptions.DescriptionException;
+import duke.command.AddDeadlineCommand;
+import duke.command.AddTodoCommand;
+import duke.command.AddEventCommand;
+import duke.command.Command;
+import duke.command.Commands;
+import duke.exception.CommandException;
+import duke.exception.DescriptionException;
 import duke.DateTimeFormat;
 
 import java.time.DateTimeException;
@@ -138,7 +138,6 @@ public abstract class Task {
                 } catch (DateTimeException ignored) {}
             }
         }
-        System.out.println("invalid!");
         return null;
     }
 }
