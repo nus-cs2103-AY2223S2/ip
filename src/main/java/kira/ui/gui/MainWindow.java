@@ -53,9 +53,16 @@ public class MainWindow extends GridPane {
 
     public void setup() {
         String output = kiraBot.setup();
+        String startMsg = kiraBot.startMsg();
         dialogContainer.getChildren().add(
-                DialogBox.getKiraDialog(output, kiraBotImage)
+                DialogBox.getKiraDialog(startMsg, kiraBotImage)
         );
+
+        if (output != null) {
+            dialogContainer.getChildren().add(
+                DialogBox.getKiraDialog(output, kiraBotImage)
+            );
+        }
     }
 
 }

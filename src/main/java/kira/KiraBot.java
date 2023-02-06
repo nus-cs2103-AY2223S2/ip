@@ -53,7 +53,6 @@ public class KiraBot {
     }
 
     public String setup() {
-        UI.startMsg();
 
         try {
             this.taskList = new TaskList(SaveLoad.load(FILEPATH));
@@ -62,6 +61,16 @@ public class KiraBot {
             this.taskList = new TaskList();
         }
 
+        return UI.getMessage();
+    }
+
+    /**
+     * Returns welcome message for the GUI
+     *
+     * @return
+     */
+    public String startMsg() {
+        UI.startMsg();
         return UI.getMessage();
     }
 

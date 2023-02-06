@@ -21,16 +21,24 @@ _5 Simple Steps_
 
 ### Features
 
-- [x] Manages Tasks as ToDo, Deadlines, Events
-
+- [x] Manages Tasks as ToDo, Deadlines, Events!
 - [x] Tells you what you have on TODAY!
+- [x] Now with a GUI!
 - [ ] Reminders (coming soon)
 
 ### I love coding
 Sure you do. If you Java programmer, you can use it to practice Java too. Here's the `main` method:
 
 ```
-public class KiraLauncher {
+public class KiraBot { // For CLI
+    public static void main(String[] args) {
+        KiraBot bot = new KiraBot();
+        bot.run();
+    }
+}
+```
+```
+public class KiraLauncher { // For GUI
     public static void main(String[] args) {
         Application.launch(KiraApp.class, args);
     }
@@ -38,3 +46,4 @@ public class KiraLauncher {
 ```
 
 > Best task management CLI ever ~NotDangabit
+> Best task management GUI ever ~AlsoNotDangabit

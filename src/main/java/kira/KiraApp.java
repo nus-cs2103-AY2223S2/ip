@@ -20,7 +20,7 @@ public class KiraApp extends Application {
     public void start(Stage stage) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(KiraApp.class.getResource("/view/MainWindow.fxml"));
-            GridPane ap = fxmlLoader.load();
+            GridPane ap = (GridPane) fxmlLoader.load();
             Scene scene = new Scene(ap, 400, 600);
             stage.setScene(scene);
             stage.setTitle("KiraBot~");
