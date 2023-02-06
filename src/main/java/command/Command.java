@@ -222,7 +222,7 @@ public enum Command {
     /**
      * Exits the task management system.
      */
-    BYE ("bye") {
+    BYE("bye") {
         @Override
         public void execute(String input) throws SundayException {
             boolean didSave = list.save();

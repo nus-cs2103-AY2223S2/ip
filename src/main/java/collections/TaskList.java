@@ -132,6 +132,12 @@ public class TaskList {
         return this.list.isEmpty();
     }
 
+    /**
+     * Finds all tasks that match a given keyword in the list of tasks.
+     *
+     * @param keyword The keyword to search for in the tasks.
+     * @return A TaskList containing all tasks that match the keyword.
+     */
     public TaskList find(String keyword) {
         TaskList found = new TaskList();
         for (int i = 0; i < this.list.size(); i++) {
