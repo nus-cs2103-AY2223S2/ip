@@ -17,11 +17,11 @@ public abstract class Task implements Serializable {
         HIGH
     }
 
-    public Priority priority;
 
     public final String desc;
     protected boolean isDone;
 
+    private Priority priority;
 
     Task(String desc) throws TaskCreationException {
         if (desc.equals("")) {
@@ -42,6 +42,14 @@ public abstract class Task implements Serializable {
     }
 
     protected abstract String getType();
+
+    public void setPriority(Priority priority) {
+        this.priority = priority;
+    }
+
+    public Priority getPriority() {
+        return priority;
+    }
 
     public void setIsDone(boolean isDone) {
         this.isDone = isDone;
