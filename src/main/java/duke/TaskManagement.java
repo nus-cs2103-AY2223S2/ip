@@ -4,12 +4,20 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * Analogous to Storage suggested by the module coordinators.
+ * Stores all the tasks of a Duke Object.
+ */
 public class TaskManagement {
     private File file;
     private File filedirectory;
     private String path;
     private String directory;
 
+    /**
+     * Constructs a TaskManagement object. By default, the file which contains
+     * the tasks of the TaskManagement object will be placed in ./data/tasks.txt.
+     */
     public TaskManagement() {
         this.directory = "./data/";
         this.path = this.directory + "tasks.txt";
@@ -27,6 +35,13 @@ public class TaskManagement {
         }
     }
 
+    /**
+     * Constructs a TaskManagement object. The file which contains
+     * the tasks of the TaskManagement object will be placed in the
+     * filepath given.
+     * @param filepath The filepath given.
+     * @throws DukeException If invalid filepath input is given.
+     */
     public TaskManagement(String filepath) throws DukeException {
         if (!filepath.substring(0, 2).equals("./") || filepath.length() <= 2) {
             throw new DukeException();
@@ -52,6 +67,11 @@ public class TaskManagement {
         }
     }
 
+    /**
+     * Saves the tasks of the TaskStorage object into the TaskManagement object.
+     * The file will be updated.
+     * @param taskStorage The TaskStorage object given.
+     */
     public void save(TaskStorage taskStorage) {
         try {
             FileWriter fw = new FileWriter(this.path);

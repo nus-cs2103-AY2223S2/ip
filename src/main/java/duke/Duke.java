@@ -7,11 +7,21 @@ import duke.task.Todo;
 
 import java.io.*;
 
+/**
+ * The class Duke encapsulates a Duke object, a chatbot which takes note
+ * of the various details of the tasks of the user.
+ */
 public class Duke {
 
     private TaskManagement taskManager; // to manage saved data
     private TaskStorage taskStorage;
     private Ui ui;
+
+    /**
+     * Constructs a Duke object with the given filepath. The file which
+     * stores all the tasks of a user will be stored in that filepath.
+     * @param filepath The given filepath.
+     */
     public Duke(String filepath) {
         ui = new Ui();
         try {
@@ -22,6 +32,11 @@ public class Duke {
             taskManager = new TaskManagement();
         }
     }
+
+    /**
+     * This method runs the Duke object. Various changes will be made in the Duke object.
+     * @throws IOException When there is invalid input.
+     */
     public void run() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
@@ -31,25 +46,23 @@ public class Duke {
         String line = "-------------------------------";
         String inp;
 
-        /**
-         * Simply echoes commands entered by the user,
-         * and exits when the user types "bye".
-         */
-
         boolean isExit = false;
         while (!isExit) {
-            //inp = br.readLine();
             inp = ui.readCommand();
-            //System.out.println(inp);
-            String[] input = inp.split(" ");
             ui.showLine();
-            //isExit = Parser.parse(inp);
             Parser parser = new Parser(this.taskStorage);
             isExit = parser.execute(inp);
             taskManager.save(parser.getTaskStorage());
             ui.showLine();
         }
     }
+
+    /**
+     * The main method of the program.
+     * @param args Not used.
+     * @throws IOException Not used.
+     * @throws DukeException Not used.
+     */
     public static void main(String[] args) throws IOException, DukeException {
         new Duke("./data/tasks.txt").run();
     }
