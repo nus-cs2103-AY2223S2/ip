@@ -25,8 +25,9 @@ public class TodoCommand extends Command {
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
-            if (5 > input.length()) {
-                throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+            String[] words = this.input.split(" ");
+            if (words.length <= 1) {
+                throw new DukeException(ui.emptyDescriptionError());
             }
             Todo td = new Todo(input.substring(5, input.length()));
             tasks.add(td);
