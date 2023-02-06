@@ -20,6 +20,11 @@ public abstract class Task {
 
     protected boolean isDone;
 
+    /**
+     * Constructor for a deadline object based on the attributes that it has
+     * @param description string representing the description
+     * @throws DescriptionException If description is empty
+     */
     public Task(String description) throws DescriptionException {
         this.description = description;
         this.isDone = false;
@@ -28,6 +33,10 @@ public abstract class Task {
         }
     }
 
+    /**
+     * Checks if description is empty
+     * @return whether the description is empty
+     */
     public boolean isEmpty() {
         return this.description == null || this.description.trim().isEmpty();
     }
@@ -36,19 +45,36 @@ public abstract class Task {
         return this.description.contains(testStr);
     }
 
+    /**
+     * Representation if task is marked
+     * @return String representation of whether the task is marked
+     */
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
+    /**
+     * Marks the task
+     */
     public void markDone() {
         this.isDone = true;
     }
 
+    /**
+     * String representation of the object
+     * @return String representation of deadline
+     */
     @Override
     public String toString() {
         return this.getStatusIcon() + " | " + this.description;
     }
 
+    /**
+     * Converts the task in string to a command object
+     * @param strTask task in string to be converted
+     * @return the specific command that the string represents
+     * @throws CommandException If there is something wrong with creation of command
+     */
     public static Command taskToCommand(String strTask) throws CommandException {
         if (strTask.startsWith(Commands.deadline.label)) {
             Pattern pattern = Pattern.compile("deadline (.+) /by (.+)");
@@ -72,6 +98,12 @@ public abstract class Task {
         throw new CommandException();
     }
 
+    /**
+     * Converts the task in string to a Task object
+     * @param strTask task in string to be converted
+     * @return the specific task that the string represents
+     * @throws CommandException If there is something wrong with creation of task
+     */
     public static Task strToTask(String strTask) throws CommandException {
         Task result;
         String[] strings = strTask.split(" \\| ");

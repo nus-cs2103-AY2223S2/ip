@@ -3,7 +3,7 @@ package duke;
 import java.time.format.DateTimeFormatter;
 
 /**
- *
+ * Represents all the DateTimeFormats that is supported by this chatbot
  */
 public enum DateTimeFormat {
     hyphenated(DateTimeFormatter.ISO_LOCAL_DATE),
@@ -17,10 +17,19 @@ public enum DateTimeFormat {
 
 
     public final DateTimeFormatter formatter;
+
+    /**
+     * Constructor for storing information in the enum
+     * @param pattern string representing the pattern
+     */
     DateTimeFormat(String pattern) {
         this.formatter = DateTimeFormatter.ofPattern(pattern);
     }
 
+    /**
+     * Constructor for storing information in the enum
+     * @param formatter format that should be stored in instance attribute formatter
+     */
     DateTimeFormat(DateTimeFormatter formatter) {
         this.formatter = formatter;
     }

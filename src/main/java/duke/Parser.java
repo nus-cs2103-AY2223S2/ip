@@ -12,6 +12,12 @@ import duke.Exceptions.TaskIndexException;
 import duke.Tasks.Task;
 
 public class Parser {
+    /**
+     * Reads the command string and converts it into a Command object based on the string
+     * @param line string that the user has input
+     * @return Command object representing what the command that user input
+     * @throws DukeException If the command is invalid
+     */
     public static Command parse(String line) throws DukeException {
         String[] inputs = line.split(" ", 2);
         String strCommand = inputs[0];
