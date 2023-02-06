@@ -27,6 +27,8 @@ public class FindCommand extends Command {
 
     @Override
     public String execute(TaskList list, Storage storage) throws DuduException {
+        assert list != null;
+        assert storage != null;
         StringBuilder sb = new StringBuilder();
         int index = 0;
         ArrayList<Task> visited = new ArrayList<>();
