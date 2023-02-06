@@ -83,6 +83,7 @@ public class Parser {
                         }
                     }
                     String[] dateTime = sb.toString().split(" ");
+                    assert !desc.isEmpty() : "desc (deadline description) should be filled, otherwise caught by exception";
                     Deadline deadline = new Deadline(desc, dateTime[0], dateTime[1]);
                     return new DeadlineCommand(deadline);
                 case EVENT:
@@ -105,6 +106,8 @@ public class Parser {
                             sb.append(" ");
                         }
                     }
+                    assert !desc.isEmpty() : "desc (event description) should be filled, otherwise caught by exception";
+                    assert !from.isEmpty() : "from (event starting date) should be filled";
                     Event event = new Event(desc, from, sb.toString().trim());
                     return new EventCommand(event);
                 case MARK:
@@ -124,7 +127,8 @@ public class Parser {
                     }
                     return new FindCommand(inputArr[1]);
                 default:
-                    throw new UnknownCommandException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    assert false; // Execution should never reach this point!
+                    throw new UnknownCommandException("☹ OOPS!!! You need to give me an input :-(");
             }
         } catch (IllegalArgumentException e) {
             throw new UnknownCommandException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");

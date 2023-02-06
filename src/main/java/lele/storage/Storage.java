@@ -28,6 +28,7 @@ public class Storage {
      * @param filePath Receives the file path from Lele.java
      */
     public Storage(String filePath) {
+        assert filePath.equals("./data/lele.txt") : "Filepath invalid";
         this.filePath = filePath;
         this.list = new ArrayList<>();
     }
@@ -112,6 +113,7 @@ public class Storage {
         FileWriter fw = new FileWriter(filePath);
         for (Task value : tasklist.getList()) {
             task = value;
+            assert task != null : "The current task list in storage shouldn't be empty";
             String taskName = task.getName();
             // System.out.println("taskName: " + taskName);
             sb.append(taskName);

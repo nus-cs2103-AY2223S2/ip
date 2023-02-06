@@ -35,7 +35,8 @@ public class Task {
      * @return A string to indicate that this shouldn't be run by Task.
      */
     public String getName() {
-        return "You should not be getting this output here";
+        assert false : "Method should not be called on the parent class"; // Should not reach here
+        return "Should not be returned";
     }
 
     /**

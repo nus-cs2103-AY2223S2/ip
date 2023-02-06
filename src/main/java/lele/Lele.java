@@ -51,6 +51,7 @@ public class Lele {
                 System.out.println(output);
                 isExit = c.isExit();
             } catch (LeleException | IOException e) {
+                assert ui.showError(e.getMessage()) instanceof String : "Function should return a string";
                 System.out.println(ui.showError(e.getMessage()));
             } finally {
                 ui.showLine();
