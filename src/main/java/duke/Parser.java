@@ -1,6 +1,12 @@
 package duke;
 
-import duke.command.*;
+import duke.command.Command;
+import duke.command.CommandBye;
+import duke.command.CommandDelete;
+import duke.command.CommandFind;
+import duke.command.CommandList;
+import duke.command.CommandMark;
+import duke.command.CommandTask;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -51,7 +57,6 @@ public class Parser {
             return new CommandFind(fullCommand, parts[1]);
         } else {
             String[] parts = fullCommand.split(" ");
-            assert parts.length > 0 : "command should be non empty";
             Task t = null;
 
             try {
