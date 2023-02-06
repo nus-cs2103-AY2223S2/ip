@@ -15,6 +15,7 @@ public class TaskList {
 
     /**
      * Constructor for TaskList
+     *
      * @param taskList
      */
     public TaskList(ArrayList<Task> taskList) {
@@ -28,50 +29,47 @@ public class TaskList {
 
     /**
      * Obtain task based on given index
+     *
      * @param index
      * @return Task
      * @throws DukeException
      */
     public Task getTask(int index) throws DukeException {
         // handle errors out of range
-        if (index < 0 || index >= this.getSize()) {
-            int display = index + 1;
-            throw new DukeException("duke.task.Task " + display + " does not exist.");
-        }
+        int display = index + 1;
+        assert index >= 0 && index < this.getSize() : "Task" + display + " does not exist.";
         return taskList.get(index);
     }
 
     /**
-     * Marks a task based on the task index provided
-     * Throws an exception if task does not exist
+     * Marks a task based on the task index provided and throws an exception if task does not exist.
+     *
      * @param index
      * @throws DukeException
      */
     public void markTask(int index) throws DukeException {
         // handle errors out of range
-        if (index < 0 || index >= this.getSize()) {
-            int display = index + 1;
-            throw new DukeException("duke.task.Task " + display + " does not exist.");
-        }
+        int display = index + 1;
+        assert index >= 0 && index < this.getSize() : "Task" + display + " does not exist.";
         this.getTask(index).markAsDone();
     }
 
     /**
      * Unmarks a task based on the task index provided
+     *
      * @param index
      * @throws DukeException
      */
     public void unmarkTask(int index) throws DukeException {
         // handle errors out of range
-        if (index < 0 || index >= this.getSize()) {
-            int display = index + 1;
-            throw new DukeException("duke.task.Task " + display + " does not exist.");
-        }
+        int display = index + 1;
+        assert index >= 0 && index < this.getSize() : "Task" + display + " does not exist.";
         this.getTask(index).markAsUndone();
     }
 
     /**
      * Add task to taskList
+     *
      * @param task
      */
     public void addTask(Task task) {
@@ -80,20 +78,20 @@ public class TaskList {
 
     /**
      * Remove task from taskList
+     *
      * @param index
      * @throws DukeException
      */
     public void removeTask(int index) throws DukeException {
         // handle errors out of range
-        if (index < 0 || index >= this.getSize()) {
-            int display = index + 1;
-            throw new DukeException("duke.task.Task " + display + " does not exist.");
-        }
+        int display = index + 1;
+        assert index >= 0 && index < this.getSize() : "Task" + display + " does not exist.";
         taskList.remove(index);
     }
 
     /**
      * Find and filter task list based on keyword
+     *
      * @param keyword
      * @return List of filtered tasks
      * @throws DukeException
