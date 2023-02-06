@@ -34,7 +34,8 @@ public class Parser {
             if (split_command.length == 1) {
                 return new ListCommand(todoList);
             } else {
-                throw new DukeExceptions("OOPS!!! The description of a list cannot have other parameters");
+                throw new DukeExceptions("OOPS!!! The description of a list " +
+                        "cannot have other parameters");
             }
         }
 
@@ -42,7 +43,8 @@ public class Parser {
         for (Instructions validInstruction : Instructions.values()) {
             if (validInstruction.name().equals(instruction)) {
                 if (split_command.length == 1) {
-                    throw new DukeExceptions(String.format("OOPS!!! The description of a %s cannot be empty.", instruction));
+                    throw new DukeExceptions(String.format("OOPS!!! The description of a %s cannot be empty.",
+                            instruction));
                 } else if (instruction.equals("mark")) {
                     int digit = Integer.parseInt(split_command[1]);
                     return new MarkCommand(todoList, digit);

@@ -36,7 +36,8 @@ public class TodoList implements Serializable {
      */
     public void mark(int index) throws DukeExceptions{
         int todo_list_length = todo_list.size();
-        if (index < 0 || index > todo_list_length) {
+        boolean isOutOfBound = index < 0 || index > todo_list_length;
+        if (isOutOfBound) {
             throw new DukeExceptions("Please use list command to check the index!");
         }
         Task task = todo_list.get(index - 1);
@@ -53,7 +54,8 @@ public class TodoList implements Serializable {
      */
     public void unmark(int index) throws DukeExceptions{
         int todo_list_length = todo_list.size();
-        if (index < 0 || index > todo_list_length) {
+        boolean isOutOfBound = index < 0 || index > todo_list_length;
+        if (isOutOfBound) {
             throw new DukeExceptions("Please use list command to check the index!");
         }
         Task task = todo_list.get(index - 1);
@@ -71,7 +73,8 @@ public class TodoList implements Serializable {
      */
     public void delete(int index) throws DukeExceptions {
         int todo_list_length = todo_list.size();
-        if (index < 0 || index > todo_list_length) {
+        boolean isOutOfBound = index < 0 || index > todo_list_length;
+        if (isOutOfBound) {
             throw new DukeExceptions("Please use list command to check the index!");
         }
         Task task = todo_list.remove(index - 1);
