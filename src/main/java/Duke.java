@@ -47,7 +47,8 @@ public class Duke {
         String[] cmd = userCmd.nextLine().split(" ");
         if (cmd[0].equals("bye")) {
             exit();
-        } else if (cmd[0].equals("todo")) {
+
+        } else if (cmd[0].equals("todo")) { // handles todo objects
             String taskName = "";
             if (cmd.length>1) {
                 for (int i = 1; i < cmd.length; i++) {
@@ -60,10 +61,16 @@ public class Duke {
             addTodo(new Todo(taskName));
             System.out.println(askForCmd);
             takeCmd();
-        } else if (cmd[0].equals("deadline")){
+
+        } else if (cmd[0].equals("deadline")) { // handles deadline objects with due dateTimes
             String taskName = "";
             String dateTime = "";
-            if (cmd.length>1) {
+
+            if (!Arrays.asList(cmd).contains("/by")) {
+                taskName += String.join(" ", cmd);
+                System.out.println("Sorry, I didn't quite catch that. When do you need this done by?\n" + LINEBREAK);
+                dateTime += userCmd.nextLine();
+            } else if (cmd.length>1) {
                 for (int i = 1; i < cmd.length; i++) {
                     if (!cmd[i].equals("/by")){
                         taskName += cmd[i] + " ";
@@ -84,14 +91,34 @@ public class Duke {
                     }
                 }
             }
+
             addDeadline(new Deadline(taskName, dateTime));
             System.out.println(askForCmd);
             takeCmd();
-        } else if (cmd[0].equals("event")){
+
+        } else if (cmd[0].equals("event")) { // handles event objects with start and end dateTimes
             String taskName = "";
             String startDateTime = "";
             String endDateTime = "";
-            if (cmd.length > 1) {
+            if (!Arrays.asList(cmd).contains("/from")) {
+                taskName += String.join(" ", cmd);
+                System.out.println("Sorry, I didn't quite catch that. When is this Event starting?\n" + LINEBREAK);
+                String[] nextL = userCmd.nextLine().split(" ");
+                if (!Arrays.asList(cmd).contains("/to")){
+                    startDateTime = String.join(" ", nextL);
+                    System.out.println("Okay, when is this Event ending?\n" + LINEBREAK);
+                    endDateTime = userCmd.nextLine();
+                } else {
+                    for (int i = 0; i < nextL.length; i++){
+                        if (nextL[i] != "/to"){
+                            startDateTime += nextL[i];
+                        } else {
+                            break;
+                        }
+                    }
+                    endDateTime = String.join(" ", nextL);
+                }
+            } else if (cmd.length > 1) {
                 int from = Arrays.asList(cmd).indexOf("/from");
                 int to = Arrays.asList(cmd).indexOf("/to");
                 for (int i = 1; i < cmd.length; i++){
@@ -121,10 +148,12 @@ public class Duke {
             addEvent(new Event(taskName, startDateTime, endDateTime));
             System.out.println(askForCmd);
             takeCmd();
+
         } else if (cmd[0].equals("list")){
             list();
             System.out.println(askForCmd);
             takeCmd();
+
         } else if (cmd[0].equals("mark") || cmd[0].equals("unmark")) {
             String markUnmark = cmd[0];
             if (userCmd.hasNext()) {

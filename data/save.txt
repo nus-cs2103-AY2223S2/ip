@@ -1,0 +1,8 @@
+[D] [ ] cock  (by: )
+[T] [ ] cock 
+[D] [ ] deadline cock (by: tonight)
+[D] [ ] deadline (by: cock)
+[D] [ ] deadline (by: 12 Dec 23 18:00)
+[D] [ ] deadline cock (by: 10 Dec 23 18:00)
+[E] [ ] event cock (from: 11 Nov 23 1919 to: 10 Oct 20 1900)
+[E] [ ] event Cock (from: 12 Dec 12 1200 to: 12 Dec 12 1200)
