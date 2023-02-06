@@ -61,231 +61,24 @@ public class Parser {
         String[] inputArray = rawCommand.split(" ");
         String firstWord = inputArray[0];
 
+        //Check cases and verify whether they are valid formats or not
         switch (firstWord) {
         case "mark":
-            try {
-                if (inputArray.length != 2) {
-                    throw new DukeException("The mark command must be followed by a single number.");
-                }
-                if (!isInteger(inputArray[1])) {
-                    throw new DukeException("The mark command must be followed by a single integer.");
-                }
-                int indexOfTask = Integer.parseInt(inputArray[1]) - 1;
-                if (!(indexOfTask <= tasks.getSizeOfTaskList() - 1 && indexOfTask >= 0)) {
-                    throw new DukeException("Please enter a valid task number. You currently have "
-                           + tasks.getSizeOfTaskList() + " tasks.");
-                }
-                CommandType ctMark = CommandType.MARK;
-                ctMark.setIndex(indexOfTask);
-                return ctMark;
-            } catch (DukeException dukeException) {
-                CommandType ctException = CommandType.EXCEPTION;
-                ctException.setExceptionMessage(dukeException.getMessage());
-                return ctException;
-            }
+            return validateMark(inputArray);
         case "unmark":
-            try {
-                if (inputArray.length != 2) {
-                    throw new DukeException("The unmark command must be followed by a single number.");
-                }
-                if (!isInteger(inputArray[1])) {
-                    throw new DukeException("The unmark command must be followed by a single integer.");
-                }
-                int indexOfTask = Integer.parseInt(inputArray[1]) - 1;
-                if (!(indexOfTask <= tasks.getSizeOfTaskList() - 1 && indexOfTask >= 0)) {
-                    throw new DukeException("Please enter a valid task number. You currently have "
-                            + tasks.getSizeOfTaskList() + " tasks.");
-                }
-                CommandType ctUnmark = CommandType.UNMARK;
-                ctUnmark.setIndex(indexOfTask);
-                return ctUnmark;
-            } catch (DukeException dukeException) {
-                CommandType ctException = CommandType.EXCEPTION;
-                ctException.setExceptionMessage(dukeException.getMessage());
-                return ctException;
-            }
+            return validateUnmark(inputArray);
         case "delete":
-            try {
-                if (inputArray.length != 2) {
-                    throw new DukeException("The delete command must be followed by a single number.");
-                }
-                if (!isInteger(inputArray[1])) {
-                    throw new DukeException("The delete command must be followed by a single integer.");
-                }
-                int indexOfTask = Integer.parseInt(inputArray[1]) - 1;
-                if (!(indexOfTask <= tasks.getSizeOfTaskList() - 1 && indexOfTask >= 0)) {
-                    throw new DukeException("Please enter a valid task number. You currently have "
-                            + tasks.getSizeOfTaskList() + " tasks.");
-                }
-                CommandType ctDelete = CommandType.DELETE;
-                ctDelete.setIndex((indexOfTask));
-                return ctDelete;
-            } catch (DukeException dukeException) {
-                CommandType ctException = CommandType.EXCEPTION;
-                ctException.setExceptionMessage(dukeException.getMessage());
-                return ctException;
-            }
+            return validateDelete(inputArray);
         case "todo":
-            try {
-                if (inputArray.length == 1) {
-                    throw new DukeException("The todo command cannot be left blank.");
-                }
-                int indexOfType = rawCommand.indexOf("todo");
-                String taskName = rawCommand.substring(indexOfType + 5);
-                CommandType ctToDo = CommandType.TODO;
-                ctToDo.setTaskName(taskName);
-                return ctToDo;
-            } catch (DukeException dukeException) {
-                CommandType ctException = CommandType.EXCEPTION;
-                ctException.setExceptionMessage(dukeException.getMessage());
-                return ctException;
-            }
+            return validateTodo(rawCommand, inputArray);
         case "deadline":
-            try {
-                int indexOfType = rawCommand.indexOf("deadline");
-                if (indexOfType + 8 > rawCommand.length() - 1) {
-                    throw new DukeException("The deadline command cannot be left blank.");
-                }
-                int indexOfBy = rawCommand.indexOf("/by");
-                if (indexOfBy == -1) {
-                    throw new DukeException("The deadline cannot be left blank.");
-                }
-                //deadline/by
-                if (indexOfType + 8 == indexOfBy) {
-                    throw new DukeException("There seems to be a missing task name.");
-                }
-                if (indexOfBy + 4 > rawCommand.length() - 1) {
-                    throw new DukeException("The deadline cannot be left blank.");
-                }
-                if (indexOfType + 9 > indexOfBy - 1) {
-                    throw new DukeException("There seems to be a missing task name.");
-                }
-                String taskName = rawCommand.substring(indexOfType + 9, indexOfBy - 1);
-                String deadlineOfTask;
-                if (rawCommand.charAt(indexOfBy + 3) == ' ') {
-                    deadlineOfTask = rawCommand.substring(indexOfBy + 4);
-                } else {
-                    deadlineOfTask = rawCommand.substring(indexOfBy + 3);
-                }
-                if (taskName.isBlank()) {
-                    throw new DukeException("The task name cannot be left blank.");
-                }
-                if (deadlineOfTask.isBlank()) {
-                    throw new DukeException("The deadline cannot be left blank.");
-                }
-                Temporal deadlineObject = DateTime.getDateTimeObject(deadlineOfTask);
-                CommandType ctDeadline = CommandType.DEADLINE;
-                ctDeadline.setTaskName(taskName);
-                ctDeadline.setDeadline(deadlineOfTask);
-                return ctDeadline;
-
-            } catch (DukeException dukeException) {
-                CommandType ctException = CommandType.EXCEPTION;
-                ctException.setExceptionMessage(dukeException.getMessage());
-                return ctException;
-            } catch (DateTimeParseException dateTimeException) {
-                CommandType ctException = CommandType.EXCEPTION;
-                ctException.setExceptionMessage(
-                        "Please check that you entered a valid date, and that the date should be in "
-                        + "the format of\nyyyy-MM-dd hh:mm or yyyy-MM-dd.");
-                return ctException;
-            }
+            return validateDeadline(rawCommand);
         case "event":
-            try {
-                int indexOfType = rawCommand.indexOf("event");
-                if (indexOfType + 5 > rawCommand.length() - 1) {
-                    throw new DukeException("The event command cannot be left blank.");
-                }
-
-                int indexOfFrom = rawCommand.indexOf("/from");
-                if (indexOfFrom == -1) {
-                    throw new DukeException("There seems to be a missing from date.");
-                }
-
-                int indexOfTo = rawCommand.indexOf("/to");
-                if (indexOfTo == -1) {
-                    throw new DukeException("There seems to be a missing to date.");
-                }
-
-                //Check taskName
-                if ((indexOfType + 6 > indexOfFrom - 1)) {
-                    throw new DukeException("There seems to be a missing task name.");
-                }
-
-                String taskName = rawCommand.substring(indexOfType + 6, indexOfFrom - 1);
-                if (taskName.isBlank()) {
-                    throw new DukeException("The task name cannot be left blank.");
-                }
-
-                //Check startDate
-                if (indexOfFrom + 6 > indexOfTo - 1) {
-                    throw new DukeException("There seems to be a missing start date.");
-                }
-
-                String startDate = rawCommand.substring(indexOfFrom + 6, indexOfTo - 1);
-                if (startDate.isBlank()) {
-                    throw new DukeException("The start date cannot be left blank.");
-                }
-
-                //Check endDate
-                if (indexOfTo + 4 > rawCommand.length() - 1) {
-                    throw new DukeException("There seems to be a missing end date.");
-                }
-
-                String endDate = rawCommand.substring(indexOfTo + 4);
-                if (endDate.isBlank()) {
-                    throw new DukeException("The end date cannot be left blank.");
-                }
-
-                //Create new event task
-                Temporal start = DateTime.getDateTimeObject(startDate);
-                Temporal end = DateTime.getDateTimeObject(endDate);
-
-                if (!DateTime.isValidDuration(start, end)) {
-                    throw new DukeException("Start date must be before end date.");
-                }
-
-                CommandType ctEvent = CommandType.EVENT;
-                ctEvent.setTaskName(taskName);
-                ctEvent.setStartDate(startDate);
-                ctEvent.setEndDate(endDate);
-                return ctEvent;
-            } catch (DukeException dukeException) {
-                CommandType ctException = CommandType.EXCEPTION;
-                ctException.setExceptionMessage(dukeException.getMessage());
-                return ctException;
-            } catch (DateTimeParseException dateTimeException) {
-                CommandType ctException = CommandType.EXCEPTION;
-                ctException.setExceptionMessage(
-                        "Please check that you entered a valid date, and that the date should be in "
-                                + "the format of\nyyyy-MM-dd hh:mm or yyyy-MM-dd.");
-                return ctException;
-            }
+            return validateEvent(rawCommand);
         case "on":
-            try {
-                String dateString = rawCommand.substring(3);
-                if (dateString.equals("")) {
-                    throw new DukeException("The date cannot be left blank.");
-                }
-                DateTime.getDateTimeObject(dateString);
-                CommandType ctOn = CommandType.ON;
-                ctOn.setOnDate(dateString);
-                return ctOn;
-            } catch (DukeException dukeException) {
-                CommandType ctException = CommandType.EXCEPTION;
-                ctException.setExceptionMessage(dukeException.getMessage());
-                return ctException;
-            } catch (DateTimeParseException dateTimeException) {
-                CommandType ctException = CommandType.EXCEPTION;
-                ctException.setExceptionMessage(
-                        "Please check that you entered a valid date, and that the date should be in "
-                                + "the format of\nyyyy-MM-dd hh:mm or yyyy-MM-dd.");
-                return ctException;
-            }
+            return validateOn(rawCommand);
         case "find":
-            CommandType ctFind = CommandType.FIND;
-            ctFind.setKeyPhrase(rawCommand.substring(5));
-            return ctFind;
+            return validateFind(rawCommand);
         default:
             return CommandType.INVALID;
         }
@@ -328,6 +121,299 @@ public class Parser {
         }
     }
 
+
+    /**
+     * Validates the 'mark' input of the user.
+     *
+     * @param inputArray The array containing the words from the user's raw command.
+     * @return a Mark command type if 'mark' input is valid, else return an Exception command type.
+     */
+    private CommandType validateMark(String[] inputArray) {
+        try {
+            if (inputArray.length != 2) {
+                throw new DukeException("The mark command must be followed by a single number.");
+            }
+            if (!isInteger(inputArray[1])) {
+                throw new DukeException("The mark command must be followed by a single integer.");
+            }
+            int indexOfTask = Integer.parseInt(inputArray[1]) - 1;
+            if (!(indexOfTask <= tasks.getSizeOfTaskList() - 1 && indexOfTask >= 0)) {
+                throw new DukeException("Please enter a valid task number. You currently have "
+                        + tasks.getSizeOfTaskList() + " tasks.");
+            }
+            CommandType ctMark = CommandType.MARK;
+            ctMark.setIndex(indexOfTask);
+            return ctMark;
+        } catch (DukeException dukeException) {
+            CommandType ctException = CommandType.EXCEPTION;
+            ctException.setExceptionMessage(dukeException.getMessage());
+            return ctException;
+        }
+    }
+
+
+    /**
+     * Validates the 'unmark' input of the user.
+     *
+     * @param inputArray The array containing the words from the user's raw command.
+     * @return a Unmark command type if 'unmark' input is valid, else return an Exception command type.
+     */
+    private CommandType validateUnmark(String[] inputArray) {
+        try {
+            if (inputArray.length != 2) {
+                throw new DukeException("The unmark command must be followed by a single number.");
+            }
+            if (!isInteger(inputArray[1])) {
+                throw new DukeException("The unmark command must be followed by a single integer.");
+            }
+            int indexOfTask = Integer.parseInt(inputArray[1]) - 1;
+            if (!(indexOfTask <= tasks.getSizeOfTaskList() - 1 && indexOfTask >= 0)) {
+                throw new DukeException("Please enter a valid task number. You currently have "
+                        + tasks.getSizeOfTaskList() + " tasks.");
+            }
+            CommandType ctUnmark = CommandType.UNMARK;
+            ctUnmark.setIndex(indexOfTask);
+            return ctUnmark;
+        } catch (DukeException dukeException) {
+            CommandType ctException = CommandType.EXCEPTION;
+            ctException.setExceptionMessage(dukeException.getMessage());
+            return ctException;
+        }
+    }
+
+    /**
+     * Validates the 'delete' input of the user.
+     *
+     * @param inputArray The array containing the words from the user's raw command.
+     * @return a Delete command type if 'delete' input is valid, else return an Exception command type.
+     */
+    private CommandType validateDelete(String[] inputArray) {
+        try {
+            if (inputArray.length != 2) {
+                throw new DukeException("The delete command must be followed by a single number.");
+            }
+            if (!isInteger(inputArray[1])) {
+                throw new DukeException("The delete command must be followed by a single integer.");
+            }
+            int indexOfTask = Integer.parseInt(inputArray[1]) - 1;
+            if (!(indexOfTask <= tasks.getSizeOfTaskList() - 1 && indexOfTask >= 0)) {
+                throw new DukeException("Please enter a valid task number. You currently have "
+                        + tasks.getSizeOfTaskList() + " tasks.");
+            }
+            CommandType ctDelete = CommandType.DELETE;
+            ctDelete.setIndex((indexOfTask));
+            return ctDelete;
+        } catch (DukeException dukeException) {
+            CommandType ctException = CommandType.EXCEPTION;
+            ctException.setExceptionMessage(dukeException.getMessage());
+            return ctException;
+        }
+    }
+
+
+    /**
+     * Validates the 'to-do' input of the user.
+     *
+     * @param rawCommand The user's raw command.
+     * @param inputArray The array containing the words from the user's raw command.
+     * @return a to-do command type if 'to-do' input is valid, else return an Exception command type.
+     */
+    private CommandType validateTodo(String rawCommand, String[] inputArray) {
+        try {
+            if (inputArray.length == 1) {
+                throw new DukeException("The todo command cannot be left blank.");
+            }
+            int indexOfType = rawCommand.indexOf("todo");
+            String taskName = rawCommand.substring(indexOfType + 5);
+            CommandType ctToDo = CommandType.TODO;
+            ctToDo.setTaskName(taskName);
+            return ctToDo;
+        } catch (DukeException dukeException) {
+            CommandType ctException = CommandType.EXCEPTION;
+            ctException.setExceptionMessage(dukeException.getMessage());
+            return ctException;
+        }
+    }
+
+    /**
+     * Validates the 'deadline' input of the user.
+     *
+     * @param rawCommand The user's raw command.
+     * @return a deadline command type if 'deadline' input is valid, else return an Exception command type.
+     */
+    private CommandType validateDeadline(String rawCommand) {
+        try {
+            int indexOfType = rawCommand.indexOf("deadline");
+            if (indexOfType + 8 > rawCommand.length() - 1) {
+                throw new DukeException("The deadline command cannot be left blank.");
+            }
+            int indexOfBy = rawCommand.indexOf("/by");
+            if (indexOfBy == -1) {
+                throw new DukeException("The deadline cannot be left blank.");
+            }
+            //deadline/by
+            if (indexOfType + 8 == indexOfBy) {
+                throw new DukeException("There seems to be a missing task name.");
+            }
+            if (indexOfBy + 4 > rawCommand.length() - 1) {
+                throw new DukeException("The deadline cannot be left blank.");
+            }
+            if (indexOfType + 9 > indexOfBy - 1) {
+                throw new DukeException("There seems to be a missing task name.");
+            }
+            String taskName = rawCommand.substring(indexOfType + 9, indexOfBy - 1);
+            String deadlineOfTask;
+            if (rawCommand.charAt(indexOfBy + 3) == ' ') {
+                deadlineOfTask = rawCommand.substring(indexOfBy + 4);
+            } else {
+                deadlineOfTask = rawCommand.substring(indexOfBy + 3);
+            }
+            if (taskName.isBlank()) {
+                throw new DukeException("The task name cannot be left blank.");
+            }
+            if (deadlineOfTask.isBlank()) {
+                throw new DukeException("The deadline cannot be left blank.");
+            }
+            DateTime.getDateTimeObject(deadlineOfTask);
+            CommandType ctDeadline = CommandType.DEADLINE;
+            ctDeadline.setTaskName(taskName);
+            ctDeadline.setDeadline(deadlineOfTask);
+            return ctDeadline;
+        } catch (DukeException dukeException) {
+            CommandType ctException = CommandType.EXCEPTION;
+            ctException.setExceptionMessage(dukeException.getMessage());
+            return ctException;
+        } catch (DateTimeParseException dateTimeException) {
+            CommandType ctException = CommandType.EXCEPTION;
+            ctException.setExceptionMessage(
+                    "Please check that you entered a valid date, and that the date should be in "
+                            + "the format of\nyyyy-MM-dd hh:mm or yyyy-MM-dd.");
+            return ctException;
+        }
+    }
+
+
+    /**
+     * Validates the 'event' input of the user.
+     *
+     * @param rawCommand The user's raw command.
+     * @return an event command type if 'event' input is valid, else return an Exception command type.
+     */
+    private CommandType validateEvent(String rawCommand) {
+        try {
+            int indexOfType = rawCommand.indexOf("event");
+            if (indexOfType + 5 > rawCommand.length() - 1) {
+                throw new DukeException("The event command cannot be left blank.");
+            }
+
+            int indexOfFrom = rawCommand.indexOf("/from");
+            if (indexOfFrom == -1) {
+                throw new DukeException("There seems to be a missing from date.");
+            }
+
+            int indexOfTo = rawCommand.indexOf("/to");
+            if (indexOfTo == -1) {
+                throw new DukeException("There seems to be a missing to date.");
+            }
+
+            //Check taskName
+            if ((indexOfType + 6 > indexOfFrom - 1)) {
+                throw new DukeException("There seems to be a missing task name.");
+            }
+
+            String taskName = rawCommand.substring(indexOfType + 6, indexOfFrom - 1);
+            if (taskName.isBlank()) {
+                throw new DukeException("The task name cannot be left blank.");
+            }
+
+            //Check startDate
+            if (indexOfFrom + 6 > indexOfTo - 1) {
+                throw new DukeException("There seems to be a missing start date.");
+            }
+
+            String startDate = rawCommand.substring(indexOfFrom + 6, indexOfTo - 1);
+            if (startDate.isBlank()) {
+                throw new DukeException("The start date cannot be left blank.");
+            }
+
+            //Check endDate
+            if (indexOfTo + 4 > rawCommand.length() - 1) {
+                throw new DukeException("There seems to be a missing end date.");
+            }
+
+            String endDate = rawCommand.substring(indexOfTo + 4);
+            if (endDate.isBlank()) {
+                throw new DukeException("The end date cannot be left blank.");
+            }
+
+            //Create new event task
+            Temporal start = DateTime.getDateTimeObject(startDate);
+            Temporal end = DateTime.getDateTimeObject(endDate);
+
+            if (!DateTime.isValidDuration(start, end)) {
+                throw new DukeException("Start date must be before end date.");
+            }
+
+            CommandType ctEvent = CommandType.EVENT;
+            ctEvent.setTaskName(taskName);
+            ctEvent.setStartDate(startDate);
+            ctEvent.setEndDate(endDate);
+            return ctEvent;
+        } catch (DukeException dukeException) {
+            CommandType ctException = CommandType.EXCEPTION;
+            ctException.setExceptionMessage(dukeException.getMessage());
+            return ctException;
+        } catch (DateTimeParseException dateTimeException) {
+            CommandType ctException = CommandType.EXCEPTION;
+            ctException.setExceptionMessage(
+                    "Please check that you entered a valid date, and that the date should be in "
+                            + "the format of\nyyyy-MM-dd hh:mm or yyyy-MM-dd.");
+            return ctException;
+        }
+    }
+
+
+    /**
+     * Validates the 'on' input of the user.
+     *
+     * @param rawCommand The user's raw command.
+     * @return an on command type if 'on' input is valid, else return an Exception command type.
+     */
+    private CommandType validateOn(String rawCommand) {
+        try {
+            String dateString = rawCommand.substring(3);
+            if (dateString.equals("")) {
+                throw new DukeException("The date cannot be left blank.");
+            }
+            DateTime.getDateTimeObject(dateString);
+            CommandType ctOn = CommandType.ON;
+            ctOn.setOnDate(dateString);
+            return ctOn;
+        } catch (DukeException dukeException) {
+            CommandType ctException = CommandType.EXCEPTION;
+            ctException.setExceptionMessage(dukeException.getMessage());
+            return ctException;
+        } catch (DateTimeParseException dateTimeException) {
+            CommandType ctException = CommandType.EXCEPTION;
+            ctException.setExceptionMessage(
+                    "Please check that you entered a valid date, and that the date should be in "
+                            + "the format of\nyyyy-MM-dd hh:mm or yyyy-MM-dd.");
+            return ctException;
+        }
+    }
+
+    /**
+     * Validates the 'find' input of the user.
+     *
+     * @param rawCommand The user's raw command.
+     * @return a find command type.
+     */
+    private CommandType validateFind(String rawCommand) {
+        CommandType ctFind = CommandType.FIND;
+        ctFind.setKeyPhrase(rawCommand.substring(5));
+        return ctFind;
+    }
+
     /**
      * Checks if a string can be converted into an {@code Integer}.
      *
@@ -336,7 +422,7 @@ public class Parser {
      */
     public boolean isInteger(String stringToCheck) {
         try {
-            int intVersion = Integer.parseInt(stringToCheck);
+            Integer.parseInt(stringToCheck);
         } catch (NumberFormatException numberFormatException) {
             return false;
         }
