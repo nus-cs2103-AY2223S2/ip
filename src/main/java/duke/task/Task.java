@@ -57,5 +57,9 @@ public class Task {
     public void markAsIncomplete() {
         this.isDone = false;
     }
+
+    public String getTaskType() {
+        return "";
+    }
 }
 

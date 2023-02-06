@@ -4,8 +4,11 @@ import duke.command.Command;
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.Parser;
+import duke.task.Reminder;
 import duke.task.TaskList;
 import duke.ui.Ui;
+
+import java.time.LocalDateTime;
 
 /**
  * Class for the Duke object.
@@ -17,6 +20,7 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
     private Storage storage;
+    private Reminder reminder;
     private boolean isExit = false;
 
     public Duke() {
@@ -35,6 +39,8 @@ public class Duke {
         } catch (DukeException e) {
             tasks = new TaskList();
             ui.showLoadingError();
+        } finally {
+            reminder = new Reminder(LocalDateTime.now());
         }
     }
 
@@ -43,6 +49,7 @@ public class Duke {
      */
     public void run() {
         System.out.println(ui.showWelcome());
+        System.out.println(reminder.getReminder(tasks, ui));
         boolean isExit = false;
         while (!isExit) {
             try {
