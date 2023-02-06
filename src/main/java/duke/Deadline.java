@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
  * class for tasks with a deadline
  */
 public class Deadline extends Task {
-    private static final String taskType = "[D]";
+    private static final String TASK_TYPE = "[D]";
     private LocalDate date;
 
     /**
@@ -32,7 +32,7 @@ public class Deadline extends Task {
     public String toString() {
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d MMM u");
         String dateString = date.format(dateFormatter);
-        return taskType + super.toString() + " (by: " + dateString + ")";
+        return TASK_TYPE + super.toString() + " (by: " + dateString + ")";
     }
 
     /**
@@ -42,9 +42,9 @@ public class Deadline extends Task {
      */
     @Override
     public String toStorageData() {
-        String completed = this.getStatusIcon();
+        String completionStatus = this.getStatusIcon();
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d MMM u");
         String dateString = date.format(dateFormatter);
-        return taskType + "//" + completed + "//" + description + "//" + dateString;
+        return TASK_TYPE + "//" + completionStatus + "//" + description + "//" + dateString;
     }
 }

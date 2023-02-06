@@ -1,13 +1,13 @@
 package duke;
 
-import java.util.Scanner;
-import java.util.ArrayList;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * deals with loading and saving tasks to/from the tasklist in Duke
@@ -102,13 +102,13 @@ public class Storage {
     /**
      * writes the tasks from the current Duke program into the text file
      * 
-     * @param taskList TaskList containing current list of tasks
+     * @param tasks TaskList containing current list of tasks
      * @throws DukeException error writing tasks into the text file
      */
-    public void save(TaskList taskList) throws DukeException {
+    public void save(TaskList tasks) throws DukeException {
         try {
             FileWriter fw = new FileWriter(filePath, false);
-            String dataString = taskList.toStorageData();
+            String dataString = tasks.toStorageData();
             fw.write(dataString);
             fw.close();
         } catch (IOException e) {

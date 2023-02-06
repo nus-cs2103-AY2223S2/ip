@@ -1,17 +1,16 @@
 package duke;
 
-import java.util.Scanner;
-import java.util.ArrayList;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
+import java.util.ArrayList;
+import java.util.Scanner;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StorageTest {
     @Test
-    public void loadTest() {
+    public void loadTest_loadTextFileData_loadedDataMatchesTextFileData() {
         Storage storage = new Storage("data/duke.txt");
         try {
             TaskList tasks = new TaskList(storage.load());
@@ -25,7 +24,7 @@ public class StorageTest {
                     storageTest += "\n";
                 }
                 scn.close();
-            assertEquals(storageTest.trim(), tasksToTest);
+                assertEquals(storageTest.trim(), tasksToTest);
             } catch (FileNotFoundException e) {
                 System.out.println("File does not exist");
             }

@@ -4,7 +4,7 @@ package duke;
  * class for tasks with a start and end time
  */
 public class Event extends Task {
-    private static final String taskType = "[E]";
+    private static final String TASK_TYPE = "[E]";
     private String from;
     private String to;
 
@@ -30,7 +30,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return taskType + super.toString() + " (from: " + from + " to:" + to + ")";
+        return TASK_TYPE + super.toString() + " (from: " + from + " to:" + to + ")";
     }
 
     /**
@@ -40,7 +40,7 @@ public class Event extends Task {
      */
     @Override
     public String toStorageData() {
-        String completed = getStatusIcon();
-        return taskType + "//" + completed + "//" + description + "//" + from + "//" + to;
+        String completionStatus = getStatusIcon();
+        return TASK_TYPE + "//" + completionStatus + "//" + description + "//" + from + "//" + to;
     }
 }
