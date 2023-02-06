@@ -20,7 +20,7 @@ import duke.Ui;
 public class AddCommand implements Command {
 
     /**
-     * Returns a Tasklist object which is the current taskList after executing the add task command and adds the task
+     * Returns a String message of the newly added task. Executes the add task command and adds the task
      * in the parsedCmd into the taskList and adds its information into the hard disk.
      *
      * @param parsedCmd ArrayList of String type that contains parsed information about the task description and
@@ -28,15 +28,15 @@ public class AddCommand implements Command {
      * @param tasks Duke's TaskList object that stores all Tasks objects.
      * @param storage Duke's Storage object to allow file access.
      * @param ui Duke's Ui object to display and print messages to the user. Acts as a screen.
-     * @return TaskList, containing all tasks after execution of command.
+     * @return String message of the newly added task.
      */
     @Override
-    public TaskList execute(ArrayList<String> parsedCmd, TaskList tasks, Storage storage, Ui ui) {
+    public String execute(ArrayList<String> parsedCmd, TaskList tasks, Storage storage, Ui ui) {
         ArrayList<Task> taskList = tasks.getTaskList();
         StringBuilder sb = new StringBuilder();
         Task newTask = null;
         boolean hasIssue = false;
-        String message;
+        String message = "";
 
         switch (parsedCmd.size()) {
         case 2: // new ToDos task
@@ -82,7 +82,9 @@ public class AddCommand implements Command {
             }
             ui.printCommand(message);
             tasks.updateTaskList(taskList);
+        } else {
+            message = parsedCmd.get(0);
         }
-        return tasks;
+        return message;
     }
 }

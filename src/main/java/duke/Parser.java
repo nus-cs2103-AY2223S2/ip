@@ -75,6 +75,7 @@ public class Parser {
         } catch (IncorrectNoOfArgumentException ex) {
             System.out.println(ex);
             parseInfoList = new ArrayList<>();
+            parseInfoList.add(ex.getMessage());
             return parseInfoList;
         }
 
@@ -105,6 +106,7 @@ public class Parser {
             } catch (IncorrectNoOfArgumentException ex) {
                 System.out.println(ex);
                 parseInfoList = new ArrayList<>();
+                parseInfoList.add(ex.getMessage());
                 break;
             }
 
@@ -127,6 +129,7 @@ public class Parser {
             } catch (IncorrectNoOfArgumentException ex) {
                 System.out.println(ex);
                 parseInfoList = new ArrayList<>();
+                parseInfoList.add(ex.getMessage());
                 break;
             }
             String startTime;
@@ -148,6 +151,7 @@ public class Parser {
             } catch (IncorrectNoOfArgumentException ex) {
                 System.out.println(ex);
                 parseInfoList = new ArrayList<>();
+                parseInfoList.add(ex.getMessage());
                 break;
             }
 
@@ -176,10 +180,10 @@ public class Parser {
             } catch (InvalidCommandException ex) {
                 System.out.println(ex);
                 parseInfoList.set(0, "error");
+                parseInfoList.add(ex.getMessage());
                 break;
             }
         }
         return parseInfoList;
     }
-
 }
