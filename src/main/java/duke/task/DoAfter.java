@@ -9,36 +9,36 @@ import duke.storage.serializer.TaskDeserializer;
 import duke.storage.serializer.TaskSerializer;
 
 /**
- * Represents a Task with a deadline.
+ * Represents an task to be done after a certain timing.
  */
-public class Deadline extends Task {
-    private static final String ICON = "D";
-    private static final String BY_KEY = "by";
+public class DoAfter extends Task {
+    private static final String ICON = "A";
+    private static final String AFTER_KEY = "after";
 
-    protected LocalDateTime by;
+    protected LocalDateTime after;
 
     /**
-     * Initialises a Deadline task.
+     * Initialises an DoAfter task.
      *
-     * @param description Description of the task.
-     * @param completed Whether the task is completed
-     * @param by Due date of task.
+     * @param description Description of DoAfter task.
+     * @param completed Whether the DoAfter task has been completed.
+     * @param after Time to be completed after.
      * @throws DukeException
      */
-    public Deadline(String description, boolean completed, String by) throws DukeException {
+    public DoAfter(String description, boolean completed, String after) throws DukeException {
         super(description, completed);
         try {
-            this.by = LocalDateTime.parse(by, RECEIVE_FORMAT);
+            this.after = LocalDateTime.parse(after, RECEIVE_FORMAT);
         } catch (DateTimeParseException e) {
-            throw new DukeException("Could not parse 'by' as date time");
+            throw new DukeException("Could not parse 'after' as date time");
         }
     }
 
     /**
-     * Returns whether {@code icon} belongs to a Deadline Task.
+     * Returns whether {@code icon} belongs to a Event Task.
      *
      * @param icon Icon to be checked.
-     * @return whether the {@code icon} belongs to a Deadline Task.
+     * @return whether the {@code icon} belongs to a Event Task.
      */
     public static boolean hasIcon(String icon) {
         return icon.equals(ICON);
@@ -52,8 +52,8 @@ public class Deadline extends Task {
         return (TaskSerializer serializer) -> {
             String description = serializer.get(DESCRIPTION_KEY).toString();
             boolean completed = Boolean.parseBoolean(serializer.get(COMPLETED_KEY).toString());
-            String by = serializer.get(BY_KEY).toString();
-            return new Deadline(description, completed, by);
+            String after = serializer.get(AFTER_KEY).toString();
+            return new DoAfter(description, completed, after);
         };
     }
 
@@ -63,16 +63,16 @@ public class Deadline extends Task {
         ts.add(CATEGORY_KEY, ICON);
         ts.add(DESCRIPTION_KEY, description);
         ts.add(COMPLETED_KEY, completed);
-        ts.add(BY_KEY, by.format(RECEIVE_FORMAT));
+        ts.add(AFTER_KEY, after.format(RECEIVE_FORMAT));
         return ts.toString();
     }
 
     @Override
     public String toString() {
         return String.format(
-            "[%s]%s (by: %s)",
+            "[%s]%s (after: %s)",
             ICON,
             super.toString(),
-            by.format(PRINT_FORMAT));
+            after.format(PRINT_FORMAT));
     }
 }

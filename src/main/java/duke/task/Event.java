@@ -1,7 +1,6 @@
 package duke.task;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 import duke.exception.DukeException;
@@ -14,12 +13,8 @@ import duke.storage.serializer.TaskSerializer;
  */
 public class Event extends Task {
     private static final String ICON = "E";
-    private static final String DESCRIPTION_KEY = "description";
-    private static final String COMPLETED_KEY = "completed";
     private static final String FROM_KEY = "from";
     private static final String TO_KEY = "to";
-    private static final DateTimeFormatter RECEIVE_FORMAT = DateTimeFormatter.ofPattern("d/M/yyyy kkmm");
-    private static final DateTimeFormatter PRINT_FORMAT = DateTimeFormatter.ofPattern("dd-MMM-uuuu,EEE,hh:mma");
 
     protected LocalDateTime from;
     protected LocalDateTime to;
@@ -84,7 +79,10 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return String.format("[%s]%s (from: %s to: %s)", ICON, super.toString(), from.format(PRINT_FORMAT),
-                to.format(PRINT_FORMAT));
+        return String.format(
+            "[%s]%s (from: %s to: %s)",
+            ICON, super.toString(),
+            from.format(PRINT_FORMAT),
+            to.format(PRINT_FORMAT));
     }
 }

@@ -2,6 +2,7 @@ package duke.core;
 
 import duke.exception.DukeException;
 import duke.task.Deadline;
+import duke.task.DoAfter;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
@@ -63,6 +64,12 @@ public class Core {
             int index = Integer.parseInt(cmd.substring(7)) - 1;
             Task task = tasks.delete(index);
             ui.deleteTask(task, tasks.length());
+        } else if (cmd.matches("^after .* /after .*$")) {
+            int afterStart = cmd.indexOf("/after");
+            String taskName = cmd.substring(6, afterStart - 1);
+            String after = cmd.substring(afterStart + 7);
+            Task task = tasks.add(new DoAfter(taskName, false, after));
+            ui.addTask(task, tasks.length());
         } else if (cmd.matches("^find .*$")) {
             String pattern = cmd.substring(5);
             TaskList filteredTasks = tasks.matches(pattern);

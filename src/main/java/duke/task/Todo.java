@@ -10,8 +10,6 @@ import duke.storage.serializer.TaskSerializer;
  */
 public class Todo extends Task {
     private static final String ICON = "T";
-    private static final String DESCRIPTION_KEY = "description";
-    private static final String COMPLETED_KEY = "completed";
 
     public Todo(String description, boolean completed) throws DukeException {
         super(description, completed);
@@ -50,6 +48,9 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        return String.format("[%s]%s", ICON, super.toString());
+        return String.format(
+            "[%s]%s",
+            ICON,
+            super.toString());
     }
 }

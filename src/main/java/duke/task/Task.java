@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.time.format.DateTimeFormatter;
+
 import duke.exception.DukeException;
 
 /**
@@ -7,6 +9,10 @@ import duke.exception.DukeException;
  */
 public abstract class Task {
     protected static final String CATEGORY_KEY = "category";
+    protected static final String DESCRIPTION_KEY = "description";
+    protected static final String COMPLETED_KEY = "completed";
+    protected static final DateTimeFormatter RECEIVE_FORMAT = DateTimeFormatter.ofPattern("d/M/yyyy kkmm");
+    protected static final DateTimeFormatter PRINT_FORMAT = DateTimeFormatter.ofPattern("dd-MMM-uuuu,EEE,hh:mma");
     protected String description;
     protected boolean completed;
 
