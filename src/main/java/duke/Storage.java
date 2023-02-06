@@ -1,16 +1,17 @@
 package duke;
 
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Scanner;
-
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
+import java.util.regex.Pattern;
 
 /**
  * Represents a storage object for backup.
@@ -20,6 +21,7 @@ public class Storage {
 
     /**
      * Returns a storage object.
+     *
      * @param filepath path of backup file.
      */
     public Storage(String filepath) {
@@ -28,8 +30,8 @@ public class Storage {
         boolean directoryExists = java.nio.file.Files.exists(path);
 
         if (!directoryExists) {
-            boolean dir = new File(path.toUri()).mkdirs();
-            if (!dir) {
+            boolean createDirSuccess = new File(path.toUri()).mkdirs();
+            if (!createDirSuccess) {
                 System.out.println("Could not create /data directory.");
             }
         }
@@ -38,6 +40,7 @@ public class Storage {
 
     /**
      * Load entire task list into the backup file.
+     *
      * @param arr task list.
      */
     public void writeArray(TaskList arr) {
@@ -56,6 +59,7 @@ public class Storage {
 
     /**
      * Reads backup file and converts into task list.
+     *
      * @return task list.
      */
     public TaskList readArray() {
@@ -71,16 +75,24 @@ public class Storage {
 
                 Task task = null;
                 line[0] = line[0].strip();
+                assert Pattern.compile("[TDE]").matcher(line[0]).matches() : "should be one of 3 types";
 
-                if (line[0].equals("T")) {
+                switch (line[0]) {
+                case "T":
                     task = new Todo(line[2]);
-                } else if (line[0].equals("D")) {
+                    break;
+                case "D":
                     task = new Deadline(line[2], line[3]);
-                } else if (line[0].equals("E")) {
+                    break;
+                case "E":
                     task = new Event(line[2], line[3], line[4]);
+                    break;
+                default:
+                    break;
                 }
 
                 if (line[1].strip().equals("1")) {
+                    assert task != null;
                     task.setStatus(true);
                 }
                 arr.addTask(task);

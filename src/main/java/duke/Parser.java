@@ -22,13 +22,15 @@ public class Parser {
      * @return command
      */
     public static Command parse(String fullCommand) {
+        String[] parts = fullCommand.split(" ");
 
-        if (fullCommand.equalsIgnoreCase("bye")) {
+        switch (parts[0].toLowerCase()) {
+        case "bye":
             return new CommandBye(fullCommand);
-        } else if (fullCommand.equalsIgnoreCase("list")) {
+        case "list":
             return new CommandList(fullCommand);
-        } else if (fullCommand.startsWith("mark") || fullCommand.startsWith("unmark")) {
-            String[] parts = fullCommand.split(" ");
+        case "mark":
+        case "unmark":
             if (parts.length != 2) {
                 System.out.println("invalid\n");
                 return null;
@@ -40,23 +42,21 @@ public class Parser {
             } else if (parts[0].equalsIgnoreCase("unmark")) {
                 return new CommandMark(fullCommand, index, false);
             }
-        } else if (fullCommand.startsWith("delete")) {
-            String[] parts = fullCommand.split(" ");
+            break;
+        case "delete":
             if (parts.length != 2) {
                 System.out.println("invalid\n");
                 return null;
             }
-            int index = Integer.parseInt(parts[1]) - 1;
+            index = Integer.parseInt(parts[1]) - 1;
             return new CommandDelete(fullCommand, index);
-        } else if (fullCommand.startsWith("find")) {
-            String[] parts = fullCommand.split(" ");
+        case "find":
             if (parts.length != 2) {
                 System.out.println("invalid\n");
                 return null;
             }
             return new CommandFind(fullCommand, parts[1]);
-        } else {
-            String[] parts = fullCommand.split(" ");
+        default:
             Task t = null;
 
             try {
@@ -66,7 +66,7 @@ public class Parser {
                     }
                     t = new Todo(fullCommand.substring(5));
                 } else if (parts[0].equalsIgnoreCase("deadline")) {
-                    int index = fullCommand.indexOf("/by");
+                    index = fullCommand.indexOf("/by");
                     if (index != -1) {
                         t = new Deadline(fullCommand.substring(9, index), fullCommand.substring(index + 4));
                     } else {

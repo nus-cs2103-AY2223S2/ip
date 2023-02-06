@@ -28,12 +28,18 @@ public abstract class Command {
 
     /**
      * Executes the command.
+     *
      * @param taskList contains the task list.
-     * @param ui deals with interactions with the user.
-     * @param storage deals with loading and saving tasks from file.
+     * @param ui       deals with interactions with the user.
+     * @param storage  deals with loading and saving tasks from file.
      */
     public abstract String execute(TaskList taskList, Ui ui, Storage storage);
 
+    /**
+     * Returns whether command is a bye command.
+     *
+     * @return false by default.
+     */
     public boolean isExit() {
         return false;
     }

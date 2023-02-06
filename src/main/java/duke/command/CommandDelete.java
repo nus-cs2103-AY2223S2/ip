@@ -28,13 +28,13 @@ public class CommandDelete extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
-        String returnString = "Noted. I've removed this task:\n";
-        returnString += (taskList.getTask(index).toString() + "\n");
         taskList.deleteTask(index);
+        String headerString = "Noted. I've removed this task:\n";
+        String taskString = taskList.getTask(index).toString() + "\n";
         String len = (taskList.getLength() == 1 ? taskList.getLength() + " task" : taskList.getLength() + " tasks");
-        returnString += ("Now you have " + len + " in the list.\n");
+        String lengthString = "Now you have " + len + " in the list.\n";
 
         storage.writeArray(taskList);
-        return returnString;
+        return headerString + taskString + lengthString;
     }
 }

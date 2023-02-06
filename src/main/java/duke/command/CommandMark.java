@@ -31,16 +31,12 @@ public class CommandMark extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
-        String returnString = "";
         taskList.markTask(index, mark);
-        if (mark) {
-            returnString += "Nice! I've marked this task as done:";
-        } else {
-            returnString += "OK, I've marked this task as not done yet:";
-        }
-        returnString += (taskList.getTask(index).toString() + "\n");
-
+        String markedString = (mark)
+                ? "Nice! I've marked this task as done:"
+                : "OK, I've marked this task as not done yet:";
+        String taskString = (taskList.getTask(index).toString() + "\n");
         storage.writeArray(taskList);
-        return returnString;
+        return markedString + taskString;
     }
 }
