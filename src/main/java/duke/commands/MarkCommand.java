@@ -29,16 +29,17 @@ public class MarkCommand extends Command {
                 throw new DukeException("OOPS!!! You are missing the number of the task to be marked.");
             }
             int index = Integer.parseInt(input.substring(5));
+            assert index <= tasks.size() : "There are insufficient tasks.";
             Task task = tasks.get(index - 1);
             task.mark();
             storage.saveTaskList(tasks);
             return "Nice! I've marked this task as done:\n  " + task;
+        } catch (AssertionError ae) {
+            return ae.getMessage();
         } catch (DukeException de) {
             return de.getMessage();
         } catch (NumberFormatException nfe) {
             return "OOPS!!! Mark has to be followed by an int.";
-        } catch (IndexOutOfBoundsException i) {
-            return "OOPS!!! There are insufficient tasks.";
         }
     }
 }

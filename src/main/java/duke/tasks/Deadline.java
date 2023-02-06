@@ -22,13 +22,18 @@ public class Deadline extends Task {
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         DateTimeFormatter newDateTime = DateTimeFormatter.ofPattern("MMM dd yyyy hh:mm a");
         DateTimeFormatter newDate = DateTimeFormatter.ofPattern("MMM dd yyyy");
+        LocalDateTime byDateTime;
+
         try {
-            LocalDateTime output = LocalDateTime.parse(date, dateTimeFormatter);
-            this.by = output.format(newDateTime);
+            byDateTime = LocalDateTime.parse(date, dateTimeFormatter);
+            this.by = byDateTime.format(newDateTime);
         } catch (DateTimeParseException e) {
-            LocalDate output = LocalDate.parse(date, dateFormatter);
-            this.by = output.format(newDate);
+            LocalDate byDate = LocalDate.parse(date, dateFormatter);
+            this.by = byDate.format(newDate);
+            byDateTime = byDate.atTime(23, 59);
         }
+        assert byDateTime.isAfter(LocalDateTime.now()) : "Date has passed";
+
     }
 
     /**

@@ -34,7 +34,7 @@ public class Storage {
             oos.writeObject(tl);
             oos.close();
             fos.close();
-            System.out.println("    Saved");
+            System.out.println("Saved");
         } catch (Exception e) {
             e.printStackTrace();
         }

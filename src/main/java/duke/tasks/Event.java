@@ -12,7 +12,7 @@ public class Event extends Task {
     private String to;
 
     /**
-     * Constructor for a Event object.
+     * Constructor for an Event object.
      *
      * @param description The Event description.
      * @param from The start date of the Event.
@@ -24,21 +24,27 @@ public class Event extends Task {
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         DateTimeFormatter newDateTime = DateTimeFormatter.ofPattern("MMM dd yyyy hh:mm a");
         DateTimeFormatter newDate = DateTimeFormatter.ofPattern("MMM dd yyyy");
+        LocalDateTime fromDateTime;
+        LocalDateTime toDateTime;
+        try {
+            fromDateTime = LocalDateTime.parse(from, dateTimeFormatter);
+            this.from = fromDateTime.format(newDateTime);
+        } catch (DateTimeParseException e) {
+            LocalDate fromDate = LocalDate.parse(from, dateFormatter);
+            this.from = fromDate.format(newDate);
+            fromDateTime = fromDate.atStartOfDay();
+        }
+        try {
+            toDateTime = LocalDateTime.parse(to, dateTimeFormatter);
+            this.to = toDateTime.format(newDateTime);
+        } catch (DateTimeParseException e) {
+            LocalDate toDate = LocalDate.parse(to, dateFormatter);
+            this.to = toDate.format(newDate);
+            toDateTime = toDate.atTime(23, 59);
 
-        try {
-            LocalDateTime fromOutput = LocalDateTime.parse(from, dateTimeFormatter);
-            this.from = fromOutput.format(newDateTime);
-        } catch (DateTimeParseException e) {
-            LocalDate fromOutput = LocalDate.parse(from, dateFormatter);
-            this.from = fromOutput.format(newDate);
         }
-        try {
-            LocalDateTime toOutput = LocalDateTime.parse(to, dateTimeFormatter);
-            this.to = toOutput.format(newDateTime);
-        } catch (DateTimeParseException e) {
-            LocalDate toOutput = LocalDate.parse(to, dateFormatter);
-            this.to = toOutput.format(newDate);
-        }
+        assert toDateTime.isAfter(fromDateTime) : "End date is earlier than start date";
+        assert fromDateTime.isAfter(LocalDateTime.now()) : "Date has passed";
     }
 
     /**

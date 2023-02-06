@@ -40,6 +40,14 @@ public class Ui {
         return "Bye. Hope to see you again soon!";
     }
 
+    /**
+     * The confirmation message after performing an action.
+     *
+     * @param action String of the action.
+     * @param tasks TaskList of all tasks.
+     * @param task The task in question.
+     * @return String The message itself.
+     */
     public String confirmationMessage(String action, TaskList tasks, Task task) {
         return "Got it. I've " + action + " this task:\n"
                 + "  "

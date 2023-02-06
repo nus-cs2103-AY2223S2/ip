@@ -29,16 +29,17 @@ public class UnmarkCommand extends Command {
                 throw new DukeException("OOPS!!! You are missing the number of the task to be unmarked.");
             }
             int index = Integer.parseInt(input.substring(7));
+            assert index <= tasks.size() : "There are insufficient tasks.";
             Task task = tasks.get(index - 1);
             task.unmark();
             storage.saveTaskList(tasks);
             return "OK, I've marked this task as not done yet:\n  " + task;
+        } catch (AssertionError ae) {
+            return ae.getMessage();
         } catch (DukeException de) {
             return de.getMessage();
         } catch (NumberFormatException nfe) {
             return "OOPS!!! Unmark has to be followed by an int.";
-        } catch (IndexOutOfBoundsException i) {
-            return "OOPS!!! There are insufficient tasks.";
         }
     }
 }

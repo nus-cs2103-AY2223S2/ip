@@ -29,14 +29,15 @@ public class DeleteCommand extends Command {
                 throw new DukeException("OOPS!!! Delete must be followed by an int.");
             }
             int index = Integer.parseInt(input.substring(7));
+            assert index <= tasks.size() : "There are insufficient tasks.";
             Task task = tasks.get(index - 1);
             tasks.remove(index - 1);
             storage.saveTaskList(tasks);
             return ui.confirmationMessage("deleted", tasks, task);
         } catch (DukeException de) {
             return de.getMessage();
-        } catch (IndexOutOfBoundsException e) {
-            return "OOPS!!! Insufficient items in the list to be deleted.";
+        } catch (AssertionError ae) {
+            return ae.getMessage();
         }
     }
 }
