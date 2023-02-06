@@ -15,11 +15,16 @@ public class Ui {
         private static final String OUTPUT_FORMAT = "%4s %s";
         private static final Scanner scanner = new Scanner(System.in);
 
-        private static final String LOGO = " ____        _        \n"
-                        + "|  _ \\ _   _| | _____ \n"
-                        + "| | | | | | | |/ / _ \\\n"
-                        + "| |_| | |_| |   <  __/\n"
-                        + "|____/ \\__,_|_|\\_\\___|";
+        private static final String LOGO = "██████╗\n"
+                        + "██╔══██╗\n"
+                        + "██║  ██║\n"
+                        + "██║  ██║\n"
+                        + "██████╔╝\n"
+                        + "╚═════╝\n"
+                        + "___                                                            \n"
+                        + " |  _.  _ |    _|_ ._ _.  _ |  o ._   _     _ |_   _. _|_ |_   _ _|_\n"
+                        + " | (_| _> |<    |_ | (_| (_ |< | | | (_|   (_ | | (_|  |_ |_) (_) |_\n"
+                        + "                                      _|                             ";
 
         /**
          * Prints string to System.in after formatting.
@@ -42,7 +47,7 @@ public class Ui {
          * Prints main welcome logo.
          */
         public static void showWelcome() {
-                System.out.println(LOGO);
+                System.out.println('\n' + LOGO);
         }
 
         /**
