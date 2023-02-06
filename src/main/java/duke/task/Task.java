@@ -84,4 +84,11 @@ public class Task {
             return "";
         }
     }
+
+    protected void markTaskIfNeeded(String taskStatus, Task task) {
+        assert taskStatus.equals("0") || taskStatus.equals("1") : "Task Status must be 0 or 1";
+        if (taskStatus.equals("1")) {
+            task.mark();
+        }
+    }
 }
