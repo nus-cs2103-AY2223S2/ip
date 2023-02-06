@@ -40,6 +40,7 @@ public class Duke{
      * @return Output string
      */
     public String getResponse(String input) {
+        assert input != null;
         try {
             Command command = this.parser.parse(input);
             if (Objects.equals(command, null)) {
