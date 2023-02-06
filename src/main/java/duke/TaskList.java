@@ -114,6 +114,12 @@ public class TaskList {
         return Ui.unmarkTaskMsg(task);
     }
 
+    /**
+     * Filters task list by a given query.
+     *
+     * @param query Query that will be used to filter task list.
+     * @return Filtered task list.
+     */
     protected ArrayList<Task> filteredTaskList(String query) {
         ArrayList<Task> filteredList = tasks.stream()
                 .filter(task -> task.toString().contains(query))
