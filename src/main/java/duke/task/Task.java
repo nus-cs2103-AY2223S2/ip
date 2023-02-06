@@ -29,12 +29,21 @@ public class Task {
     }
 
     /**
-     * Returns status if marked or not.
+     * Returns status if marked or not via a form of string
      *
      * @return Marked icon as String.
      */
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
+    }
+
+    /**
+     * Returns status if marked or not.
+     *
+     * @return isDone as boolean.
+     */
+    public boolean isDone() {
+        return isDone;
     }
 
     /**

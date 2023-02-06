@@ -37,6 +37,7 @@ public class Storage {
         try {
             File yourFile = new File("duke.txt");
             yourFile.createNewFile();
+            assert yourFile.exists();
             try (BufferedReader br = new BufferedReader(new FileReader("duke.txt"))) {
                 String line;
                 while ((line = br.readLine()) != null) {
