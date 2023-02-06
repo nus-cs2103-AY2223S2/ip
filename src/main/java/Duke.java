@@ -7,9 +7,9 @@ import java.util.Scanner;
 import java.io.File;
 import java.io.FileWriter;
 public class Duke {
-    protected static ArrayList<Task> taskList;
-    protected static File dukeFile;
-    protected static Scanner dukeScanner;
+    private static ArrayList<Task> taskList;
+    private static File dukeFile;
+    private static Scanner dukeScanner;
     public static void main(String[] args) {
         try {
             setupDuke();
@@ -113,14 +113,14 @@ public class Duke {
 
     } // end of setupDuke()
 
-    protected static void saveToFile(String entry) throws IOException {
+    private static void saveToFile(String entry) throws IOException {
         // Maybe should just accept String, leave format to caller
         FileWriter dukeWriter = new FileWriter(dukeFile, true);
         dukeWriter.write(entry + "\n");
         dukeWriter.close();
     }
 
-    protected static void deleteFromFile(int taskId) throws IOException {
+    private static void deleteFromFile(int taskId) throws IOException {
         // Delete based on line number, accept integers as argument
         dukeScanner = new Scanner(dukeFile);
         File tempFile = new File("data/temp-duke.txt");
@@ -140,7 +140,7 @@ public class Duke {
         tempFile.renameTo(dukeFile);
         dukeFile = new File("data/duke.txt");
     }
-    protected static void markEntryInFile(int taskId, boolean isMark) throws IOException {
+    private static void markEntryInFile(int taskId, boolean isMark) throws IOException {
         // Delete based on line number, accept integers as argument
         dukeScanner = new Scanner(dukeFile);
         File tempFile = new File("data/temp-duke.txt");
@@ -185,7 +185,7 @@ public class Duke {
         dukeSpeak(message);
     }
 
-    protected static void addDeadline(String[] input) throws DukeException {
+    private static void addDeadline(String[] input) throws DukeException {
         if (input.length == 1 || input[1].isEmpty()) {
             throw new DukeException(" ☹ OOPS!!! The description and due date of a deadline cannot be empty.");
         }
@@ -216,7 +216,7 @@ public class Duke {
 
     }
 
-    protected static void addEvent(String[] input) throws DukeException {
+    private static void addEvent(String[] input) throws DukeException {
         if (input.length == 1 || input[1].isEmpty()) {
             throw new DukeException(" ☹ OOPS!!! The description of an event cannot be empty.");
         }
@@ -258,7 +258,7 @@ public class Duke {
 
     }
 
-    protected static void listTask() {
+    private static void listTask() {
         String message = "Here are the tasks in your list:";
         for (int i = 0; i < taskList.size(); i++) {
             Task oneTask = taskList.get(i);
@@ -267,7 +267,7 @@ public class Duke {
         dukeSpeak(message);
     }
 
-    protected static void markTask(String[] input) throws DukeException {
+    private static void markTask(String[] input) throws DukeException {
         if (input.length == 1 || input[1].isEmpty()) {
             throw new DukeException(" ☹ OOPS!!! The item number is required to mark.");
         }
@@ -287,7 +287,7 @@ public class Duke {
         dukeSpeak(message);
     }
 
-    protected static void unmarkTask(String[] input) throws DukeException {
+    private static void unmarkTask(String[] input) throws DukeException {
         if (input.length == 1 || input[1].isEmpty()) {
             throw new DukeException(" ☹ OOPS!!! The item number is required to unmark.");
         }
@@ -306,7 +306,7 @@ public class Duke {
         dukeSpeak(message);
     }
 
-    protected static void deleteTask(String[] input) throws DukeException {
+    private static void deleteTask(String[] input) throws DukeException {
         if (input.length == 1 || input[1].isEmpty()) {
             throw new DukeException(" ☹ OOPS!!! The item number is required to delete.");
         }
@@ -326,7 +326,7 @@ public class Duke {
         dukeSpeak(message);
     }
 
-    protected static boolean validateCommand(String command) {
+    private static boolean validateCommand(String command) {
         Command[] allCommands = Command.values();
         for (int i = 0; i < allCommands.length; i++) {
             if (allCommands[i].toString().equals(command.toUpperCase())){
@@ -335,7 +335,7 @@ public class Duke {
         }
         return false;
     }
-    protected static void dukeSpeak(String message) {
+    private static void dukeSpeak(String message) {
         System.out.println("____________________________________________________________");
         System.out.println(message);
         System.out.println("____________________________________________________________");
