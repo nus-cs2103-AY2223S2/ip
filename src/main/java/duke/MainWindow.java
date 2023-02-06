@@ -20,7 +20,6 @@ public class MainWindow extends AnchorPane {
     private TextField userInput;
     @FXML
     private Button sendButton;
-
     private Duke duke;
 
     // userImage taken from "https://www.pngfind.com/mpng/TihxTxw_asta-black-clover-black-clover-asta-png-transparent/"
@@ -30,11 +29,12 @@ public class MainWindow extends AnchorPane {
 
     @FXML
     public void initialize() {
+        Ui ui = new Ui();
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog("Hi, I'm Duke and I am an automated chat bot \n " +
-                        "What would you like to do?", dukeImage));
+                DialogBox.getDukeDialog(ui.printGreetingMessage(), dukeImage));
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
+
 
     public void setDuke(Duke d) {
         duke = d;

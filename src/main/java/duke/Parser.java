@@ -12,16 +12,16 @@ public class Parser {
     /**
      * Reads input from user and splits it into cases based on Types specified
      * in enum Types
-     * @param originalString Input from user
+     * @param inputString Input from user
      * @param taskList       List containing all current tasks
      * @param ui             Ui that runs output
      * @return Boolean based on input. Only returns true when command is bye,
      *     which exits the chat bot. Else, returns false which continues the chat bot
      * @throws NeroException Throws an exception depending on the exception faced
      */
-    String parseCommand(String originalString, TaskList<Task> taskList, Ui ui) throws NeroException {
+    String parseCommand(String inputString, TaskList<Task> taskList, Ui ui) throws NeroException {
         try {
-            String[] input = originalString.split(" ");
+            String[] input = inputString.split(" ");
             switch (Enum.valueOf(Types.class, input[0].toUpperCase())) {
             case BYE:
                 return ui.printExitInstructions();
@@ -50,10 +50,10 @@ public class Parser {
                 }
             }
             case TODO:
-                int index = originalString.indexOf("todo");
+                int index = inputString.indexOf("todo");
                 try {
-                    String toAdd = originalString.substring(index + 5);
-                    Task newTask = new ToDo(toAdd);
+                    String description = inputString.substring(index + 5);
+                    Task newTask = new ToDo(description);
                     taskList.addTask(newTask);
                     return ui.printAddedTasks(newTask.toString(), taskList.getSize());
                 } catch (IndexOutOfBoundsException e) {
@@ -61,9 +61,9 @@ public class Parser {
                 }
             case DEADLINE:
                 try {
-                    String[] splitString = originalString.split("/");
-                    String description = splitString[0].replace("deadline", "");
-                    String duration = splitString[1].replace("by", "");
+                    String[] cleanedString = cleanDeadline(inputString);
+                    String description = cleanedString[0];
+                    String duration = cleanedString[1];
                     Task newTask = new Deadline(description, duration);
                     taskList.addTask(newTask);
                     return ui.printAddedTasks(newTask.toString(), taskList.getSize());
@@ -72,10 +72,10 @@ public class Parser {
                 }
             case EVENT:
                 try {
-                    String[] splitString = originalString.split("/");
-                    String description = splitString[0].replace("event", "");
-                    String startDate = splitString[1].replace("from", "");
-                    String endDate = splitString[2].replace("to", "");
+                    String[] cleanedString = cleanEvent(inputString);
+                    String description = cleanedString[0];
+                    String startDate = cleanedString[1];
+                    String endDate = cleanedString[2];
                     Task newTask = new Event(description, startDate, endDate);
                     taskList.addTask(newTask);
                     return ui.printAddedTasks(newTask.toString(), taskList.getSize());
@@ -109,5 +109,27 @@ public class Parser {
         } catch (IllegalArgumentException e) {
             throw new NeroException("Wrong input!! Command not found!!");
         }
+    }
+
+    String[] cleanDeadline(String inputString) {
+        String[] cleanedString = new String[2];
+        String[] splitString = inputString.split("/");
+        String description = splitString[0].replace("deadline", "");
+        String duration = splitString[1].replace("by", "");
+        cleanedString[0] = description;
+        cleanedString[1] = duration;
+        return cleanedString;
+    }
+
+    String[] cleanEvent(String inputString) {
+        String[] cleanedString = new String[3];
+        String[] splitString = inputString.split("/");
+        String description = splitString[0].replace("event", "");
+        String startDate = splitString[1].replace("from", "");
+        String endDate = splitString[2].replace("to", "");
+        cleanedString[0] = description;
+        cleanedString[1] = startDate;
+        cleanedString[2] = endDate;
+        return cleanedString;
     }
 }

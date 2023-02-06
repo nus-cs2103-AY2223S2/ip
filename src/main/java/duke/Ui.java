@@ -13,8 +13,10 @@ public class Ui {
         this.sc = new Scanner(System.in);
     }
 
-    String readLine() {
-        return sc.nextLine();
+
+    String printGreetingMessage() {
+        return "Hi, I'm Duke and I am an automated chat bot \n " +
+                "What would you like to do?";
     }
 
     boolean hasNextLine() {

@@ -37,16 +37,14 @@ public class Duke {
      * @return Duke's response to the commands
      */
     String getResponse(String input) {
-        String toPrint = "";
         try {
-            toPrint = parser.parseCommand(input, taskList, ui);
+            String toPrint = parser.parseCommand(input, taskList, ui);
             storage.saveFile(taskList);
-        } catch (IOException e) {
-            toPrint = ui.printFileNotFound();
-        } catch (NeroException ne) {
-            toPrint = ne.getMessage();
-        } finally {
             return toPrint;
+        } catch (IOException e) {
+            return ui.printFileNotFound();
+        } catch (NeroException ne) {
+            return ne.getMessage();
         }
     }
 }
