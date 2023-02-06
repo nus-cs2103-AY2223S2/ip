@@ -46,11 +46,11 @@ test {
 }
 
 application {
-    mainClassName = "pix.Launcher"
+    mainClassName = "seedu.duke.Duke"
 }
 
 shadowJar {
-    archiveBaseName = "Pix"
+    archiveBaseName = "duke"
     archiveClassifier = null
 }
 

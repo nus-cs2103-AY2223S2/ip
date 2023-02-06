@@ -81,7 +81,7 @@ public class MyData {
      */
     public void saveToFile() {
         String home = System.getProperty("user.dir");
-        java.nio.file.Path path = java.nio.file.Paths.get(home, "Pix.txt");
+        java.nio.file.Path path = java.nio.file.Paths.get(home, "duke.txt");
         try {
             FileWriter writer = new FileWriter(path.toFile());
             for (int i = 0; i < len(); i++) {
@@ -101,7 +101,7 @@ public class MyData {
      */
     public void loadData() throws IOException {
         String home = System.getProperty("user.dir");
-        java.nio.file.Path path = java.nio.file.Paths.get(home, "Pix.txt");
+        java.nio.file.Path path = java.nio.file.Paths.get(home, "duke.txt");
         try {
             Scanner sc = new Scanner(new File(path.toString()));
             int id = 0;
