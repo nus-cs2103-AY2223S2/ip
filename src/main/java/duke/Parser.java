@@ -5,6 +5,7 @@ import duke.commands.AddTodo;
 import duke.commands.Bye;
 import duke.commands.Command;
 import duke.commands.Delete;
+import duke.commands.Find;
 import duke.commands.List;
 import duke.commands.Mark;
 import duke.commands.Unmark;
@@ -18,7 +19,8 @@ public class Parser {
     //     LIST, 
     //     MARK, 
     //     UNMARK, 
-    //     DELETE
+    //     DELETE,
+    //     FIND
     // }
 
     public static Command parse(String input) throws DukeException{
@@ -37,12 +39,21 @@ public class Parser {
                 return new AddEvent(input);
     
             case "DELETE":
+                if (inputwords.length < 2) {
+                    throw new DukeException("Index for delete command is missing");
+                }
                 return new Delete(inputwords[1]);
     
             case "MARK":
+                if (inputwords.length < 2) {
+                    throw new DukeException("Index for mark command is missing");
+                }
                 return new Mark(inputwords[1]);
     
             case "UNMARK":
+                if (inputwords.length < 2) {
+                    throw new DukeException("Index for unmark command is missing");
+                }
                 return new Unmark(inputwords[1]);
 
             case "BYE":
@@ -50,6 +61,12 @@ public class Parser {
 
             case "LIST":
                 return new List();
+            
+            case "FIND":
+                if (inputwords.length < 2) {
+                    throw new DukeException("keyword for find command is missing");
+                }
+                return new Find(inputwords[1]);
 
             default:
                 throw new DukeException("invalid command");
