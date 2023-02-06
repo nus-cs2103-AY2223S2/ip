@@ -12,7 +12,7 @@ public class Event extends Task {
     private String to;
 
     /**
-     * Constructor for a Event object.
+     * Constructor for an Event object.
      *
      * @param description The Event description.
      * @param from The start date of the Event.
