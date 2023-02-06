@@ -46,7 +46,7 @@ public class FindCommand extends Command {
                     }
                 }
             }
-            assert counter > 0 : "There are no tasks found.";
+            assert counter > 0 : ui.noTasksMessage();
             return result;
         } catch (AssertionError ae) {
             return ae.getMessage();

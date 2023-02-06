@@ -56,4 +56,66 @@ public class Ui {
                 + tasks.size()
                 + " tasks in the list.";
     }
+
+    /**
+     * Return empty description message.
+     * @return String The message.
+     */
+    public String emptyDescriptionError() {
+        return "OOPS!!! The description of a task cannot be empty.";
+    }
+
+    /**
+     * Return wrong deadline command format message.
+     * @return String The message.
+     */
+    public String wrongDeadlineCommandFormat() {
+        return "OOPS!!! Deadline must be in the format\n"
+                + "deadline <description> /by <date>";
+    }
+
+    /**
+     * Return wrong deadline date format message.
+     * @return String The message.
+     */
+    public String wrongDeadlineDateFormat() {
+        return "Deadline must have a date of the following format:\n"
+                + "1. yyyy-MM-dd\n"
+                + "2. yyyy-MM-dd HHmm";
+    }
+
+    /**
+     * Return wrong event date format message.
+     * @return String The message.
+     */
+    public String wrongEventDateFormat() {
+        return "Event must have start and end dates of the following format:\n"
+                + "1. yyyy-MM-dd\n"
+                + "2. yyyy-MM-dd HHmm";
+    }
+
+    /**
+     * Return wrong event command format message.
+     * @return String The message.
+     */
+    public String wrongEventCommandFormat() {
+        return "OOPS!!! Event must be in the format\n"
+                + "event <description> /from <date> /to <date>";
+    }
+
+    /**
+     * Return insufficient tasks message.
+     * @return String The message.
+     */
+    public String insufficientTasksMessage() {
+        return "There are insufficient tasks.";
+    }
+
+    /**
+     * Return no tasks message.
+     * @return String The message.
+     */
+    public String noTasksMessage() {
+        return "There are no tasks.";
+    }
 }

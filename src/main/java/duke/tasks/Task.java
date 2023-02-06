@@ -14,7 +14,7 @@ public class Task implements Serializable {
      * @param description The Event description.
      */
     public Task(String description) {
-        this.description = description;
+        this.description = description.trim();
         this.done = false;
     }
 

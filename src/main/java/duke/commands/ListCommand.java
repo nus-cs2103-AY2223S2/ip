@@ -23,7 +23,7 @@ public class ListCommand extends Command {
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
-            assert tasks.size() > 0 : "There are no tasks in the list yet.";
+            assert tasks.size() > 0 : ui.noTasksMessage();
             String result = "Here are the tasks in your list:\n";
             for (int i = 0; i < tasks.size(); i++) {
                 int num = i + 1;

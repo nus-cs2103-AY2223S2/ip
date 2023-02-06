@@ -23,6 +23,13 @@ public class EventCommand extends Command {
         this.input = input;
     }
 
+    private boolean checkFormat(int indexFrom, int indexTo) {
+        return (indexFrom + 6 > indexTo - 1)
+                || (indexTo + 4 > this.input.length())
+                || (!(this.input.substring(indexFrom, indexFrom + 6).equals("/from ")
+                && this.input.substring(indexTo, indexTo + 4).equals("/to ")));
+    }
+
     /**
      * @inheritDoc
      */
@@ -30,17 +37,14 @@ public class EventCommand extends Command {
         try {
             int indexFrom = input.indexOf("/");
             int indexTo = input.lastIndexOf("/");
+            String[] words = this.input.split(" ");
+            if (words.length <= 1) {
+                throw new DukeException(ui.emptyDescriptionError());
+            }
+            if (checkFormat(indexFrom, indexTo)) {
+                throw new DukeException(ui.wrongEventCommandFormat());
+            }
 
-            if ((indexFrom + 6 > indexTo - 1)
-                    || (indexTo + 4 > input.length())
-                    || (indexFrom - 1 < 6)) {
-                throw new DukeException("OOPS!!! Event must be in the format\n"
-                        + "event <description> /from <date> /to <date>");
-            }
-            if (!(input.substring(indexFrom, indexFrom + 6).equals("/from ")
-                    && input.substring(indexTo, indexTo + 4).equals("/to "))) {
-                throw new DukeException("OOPS!!! Deadline should be followed by a /from and a /to command.");
-            }
             Event e = new Event(input.substring(6, indexFrom - 1),
                     input.substring(indexFrom + 6, indexTo - 1),
                     input.substring(indexTo + 4, input.length()));
@@ -52,9 +56,7 @@ public class EventCommand extends Command {
         } catch (DukeException de) {
             return de.getMessage();
         } catch (DateTimeParseException date_time_e) {
-            return "Event must have start and end dates of the following format:\n"
-                    + "1. yyyy-MM-dd\n"
-                    + "2. yyyy-MM-dd HHmm";
+            return ui.wrongEventDateFormat();
         }
     }
 }

@@ -29,7 +29,7 @@ public class MarkCommand extends Command {
                 throw new DukeException("OOPS!!! You are missing the number of the task to be marked.");
             }
             int index = Integer.parseInt(input.substring(5));
-            assert index <= tasks.size() : "There are insufficient tasks.";
+            assert index <= tasks.size() : ui.insufficientTasksMessage();
             Task task = tasks.get(index - 1);
             task.mark();
             storage.saveTaskList(tasks);

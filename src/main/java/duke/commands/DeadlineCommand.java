@@ -29,14 +29,15 @@ public class DeadlineCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             int indexBy = input.indexOf("/");
-            if (indexBy - 1 < 9) {
-                throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
+            String[] words = this.input.split(" ");
+            if (words.length <= 1) {
+                throw new DukeException(ui.emptyDescriptionError());
             }
             if (indexBy + 4 > input.length()) {
-                throw new DukeException("OOPS!!! You are missing the deadline of a deadline.");
+                throw new DukeException(ui.wrongDeadlineDateFormat());
             }
             if (!input.substring(indexBy, indexBy + 4).equals("/by ")) {
-                throw new DukeException("OOPS!!! Deadline should be followed by a /by command.");
+                throw new DukeException(ui.wrongDeadlineCommandFormat());
             }
             Deadline d = new Deadline(input.substring(9, indexBy - 1),
                     input.substring(indexBy + 4, input.length()));
@@ -49,9 +50,7 @@ public class DeadlineCommand extends Command {
         } catch (DukeException de) {
             return de.getMessage();
         } catch (DateTimeParseException date_time_e) {
-            return "Deadline must have a date of the following format:\n"
-                    + "1. yyyy-MM-dd\n"
-                    + "2. yyyy-MM-dd HHmm";
+            return ui.wrongDeadlineDateFormat();
         }
     }
 }
