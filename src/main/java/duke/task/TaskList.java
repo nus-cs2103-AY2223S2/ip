@@ -20,26 +20,7 @@ public class TaskList {
      */
     public TaskList(List<String> tasks) {
         for (String t : tasks) {
-            String[] data = t.split(" \\| ");
-            String type = data[0];
-            String mark = data[1];
-            String descr = data[2];
-            Task task;
-            if (type.equals("T")) {
-                task = new Todo(descr);
-            } else if (type.equals("D")) {
-                LocalDateTime dateTime = LocalDateTime.parse(data[3].trim());
-                task = new Deadline(descr, dateTime);
-            } else {
-                LocalDateTime startDt = LocalDateTime.parse(data[3].trim());
-                LocalDateTime endDt = LocalDateTime.parse(data[4].trim());
-                task = new Event(descr, startDt, endDt);
-            }
-            if (mark.equals("X")) {
-                task.markDone();
-            } else {
-                task.unmarkDone();
-            }
+            Task task = processTask(t);
             add(task);
         }
     }
@@ -97,5 +78,32 @@ public class TaskList {
      */
     public int getSize() {
         return this.taskList.size();
+    }
+
+    private Task processTask(String s) {
+        String[] data = s.split(" \\| ");
+        String type = data[0];
+        String mark = data[1];
+        String descr = data[2];
+        Task task;
+        if (type.equals("T")) {
+            task = new Todo(descr);
+        } else if (type.equals("D")) {
+            String dt = data[3].trim();
+            LocalDateTime dateTime = LocalDateTime.parse(dt);
+            task = new Deadline(descr, dateTime);
+        } else {
+            String startDt = data[3].trim();
+            String endDt = data[4].trim();
+            LocalDateTime startDateTime = LocalDateTime.parse(startDt);
+            LocalDateTime endDateTime = LocalDateTime.parse(endDt);
+            task = new Event(descr, startDateTime, endDateTime);
+        }
+        if (mark.equals("X")) {
+            task.markDone();
+        } else {
+            task.unmarkDone();
+        }
+        return task;
     }
 }
