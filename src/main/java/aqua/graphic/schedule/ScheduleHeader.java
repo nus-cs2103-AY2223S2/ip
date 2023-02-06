@@ -4,14 +4,23 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 
+
+/** The graphical display of the schedule's header. */
 class ScheduleHeader extends AnchorPane {
     private static final double HOURS_IN_A_DAY = 24;
     private static final double HEADER_HEIGHT = 20;
     private static final double LABEL_WIDTH = 30;
 
 
-    ScheduleHeader(double labelWidth, double rowWidth) {
-        setMinSize(labelWidth + rowWidth, HEADER_HEIGHT);
+    /**
+     * Constructs a {@code ScheduleHeader} from the given parameters.
+     * 
+     * @param offsetWidth - the width offset in pixel before the start of the
+     *      header.
+     * @param width - the width of the header in pixels.
+     */
+    ScheduleHeader(double offsetWidth, double width) {
+        setMinSize(offsetWidth + width, HEADER_HEIGHT);
 
         for (int i = 0; i < HOURS_IN_A_DAY; i++) {
             Label label = new Label(String.format("%02d00", i));
@@ -19,8 +28,8 @@ class ScheduleHeader extends AnchorPane {
             label.setAlignment(Pos.CENTER);
             getChildren().add(label);
 
-            double leftAnchor = labelWidth;
-            leftAnchor += ((rowWidth / HOURS_IN_A_DAY) * i);
+            double leftAnchor = offsetWidth;
+            leftAnchor += ((width / HOURS_IN_A_DAY) * i);
             leftAnchor -= LABEL_WIDTH / 2D;
 
             setLeftAnchor(label, leftAnchor);
