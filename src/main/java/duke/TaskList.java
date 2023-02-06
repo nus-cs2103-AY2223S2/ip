@@ -73,7 +73,6 @@ public class TaskList {
     protected String removeTask(int taskIndex) {
         Task task = this.tasks.remove(taskIndex);
         return Ui.removeTaskMsg(task, this.tasks.size());
-
     }
 
     /**
