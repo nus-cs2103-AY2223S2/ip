@@ -23,6 +23,12 @@ public class Parser {
     //     FIND
     // }
 
+    /**
+     * parse takes in the user input and returns a Command for the program to execute
+     * 
+     * @param input the user input
+     * @return A command object
+     */
     public static Command parse(String input) throws DukeException{
         String[] inputwords = input.split(" ");
         String commandinput = inputwords[0].toUpperCase();

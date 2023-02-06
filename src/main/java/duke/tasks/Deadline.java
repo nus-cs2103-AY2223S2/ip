@@ -6,11 +6,21 @@ import java.time.format.DateTimeParseException;
 
 import duke.DukeException;
 
+/**
+ * Deadline is a subclass of Task that has a due_by date
+ */
 public class Deadline extends Task{
     private LocalDate dueBy;
     private String output;
 
+<<<<<<< HEAD
     public Deadline(String description, String dueBy) throws DukeException{
+=======
+    // A constructor that takes in a description and a due_by date. It then parses the due_by date and
+    // formats it to a new format. If the date is not in the correct format, it will throw a
+    // DukeException.
+    public Deadline(String description, String due_by) throws DukeException{
+>>>>>>> branch-A-JavaDoc
         super(description);
         try {
             this.dueBy = LocalDate.parse(dueBy);
