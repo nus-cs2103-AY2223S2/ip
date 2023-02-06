@@ -1,9 +1,9 @@
 package duke.gui;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.Collections;
 
-import duke.MainWindow;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -28,7 +28,9 @@ public class DialogBox extends HBox {
 
     private DialogBox(String text, Image img) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+            URL fxmlLocation = getClass().getResource("/view/DialogBox.fxml");
+
+            FXMLLoader fxmlLoader = new FXMLLoader(fxmlLocation);
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();

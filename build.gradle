@@ -12,6 +12,7 @@ repositories {
 checkstyle {
     toolVersion = '10.2'
 }
+
 dependencies {
     String javaFxVersion = '11'
 
@@ -47,12 +48,14 @@ test {
 }
 
 application {
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "duke.Launcher"
 }
 
 shadowJar {
-    archiveClassifier.set("duke")
+    archiveBaseName.set("ip")
+    archiveClassifier.set("0.2")
 }
+
 
 run{
     standardInput = System.in
