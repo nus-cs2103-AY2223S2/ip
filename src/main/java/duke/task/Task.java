@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 import duke.storage.Storable;
 
@@ -8,8 +8,9 @@ import duke.storage.Storable;
  * Have to be Storable
  */
 public abstract class Task implements Storable {
-    protected boolean isDone;
-    protected String description;
+
+    private String description;
+    private boolean isDone;
 
     /**
      * Constructs a Task with specified description.
@@ -37,7 +38,7 @@ public abstract class Task implements Storable {
      *
      * @return Description of task.
      */
-    public String getDescription() {
+    String getDescription() {
         return description;
     }
 
@@ -55,7 +56,7 @@ public abstract class Task implements Storable {
      *
      * @param isDone Has the task been completed?
      */
-    void setDone(boolean isDone) {
+    public void setDone(boolean isDone) {
         this.isDone = isDone;
     }
 

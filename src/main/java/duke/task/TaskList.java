@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 import java.util.ArrayList;
 
@@ -12,7 +12,7 @@ public class TaskList {
     /**
      * Constructs a TaskList instance.
      */
-    TaskList() {
+    public TaskList() {
         tasks = new ArrayList<Task>();
     }
 
@@ -72,7 +72,7 @@ public class TaskList {
     public ArrayList<Task> search(String searchStr) {
         ArrayList<Task> results = new ArrayList<>();
         for (Task t : tasks) {
-            if (t.description.contains(searchStr)) {
+            if (t.getDescription().contains(searchStr)) {
                 results.add(t);
             }
         }

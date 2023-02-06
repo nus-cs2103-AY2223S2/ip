@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 import java.time.LocalDateTime;
 
@@ -7,8 +7,8 @@ import java.time.LocalDateTime;
  */
 public class Event extends Task {
 
-    protected LocalDateTime startDateTime;
-    protected LocalDateTime endDateTime;
+    private LocalDateTime startDateTime;
+    private LocalDateTime endDateTime;
 
     /**
      * Constructs an instance of Event with specified description, start and end time.

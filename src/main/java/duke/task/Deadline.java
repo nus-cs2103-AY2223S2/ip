@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 import java.time.LocalDateTime;
 
@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
  */
 public class Deadline extends Task {
 
-    protected LocalDateTime dueBy;
+    private LocalDateTime dueBy;
 
     /**
      * Constructs an instance of Deadline with specified description and due date.

@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 /**
  * Represents a Task with no due date.

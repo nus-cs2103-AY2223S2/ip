@@ -6,12 +6,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import duke.Deadline;
-import duke.Event;
 import duke.Parser;
-import duke.TaskList;
-import duke.Todo;
 import duke.Ui;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.TaskList;
+import duke.task.Todo;
 
 /**
  * Handles read and write of the (storable) taskList to/from file.
