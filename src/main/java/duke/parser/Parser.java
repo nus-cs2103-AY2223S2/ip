@@ -3,6 +3,7 @@ package duke.parser;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Arrays;
 
 import duke.command.AddCommand;
 import duke.command.Command;
@@ -87,14 +88,14 @@ public class Parser {
         case mark:
             checkInputFormat(splitInputs.length, 2,
                     "The task index cannot be empty.");
-            int markIndex = Integer.parseInt(splitInputs[1]);
-            c = new MarkCommand(markIndex);
+            String[] markIndexes = Arrays.copyOfRange(splitInputs, 1, splitInputs.length);
+            c = new MarkCommand(markIndexes);
             break;
         case unmark:
             checkInputFormat(splitInputs.length, 2,
                     "The task index cannot be empty.");
-            int unmarkIndex = Integer.parseInt(splitInputs[1]);
-            c = new UnmarkCommand(unmarkIndex);
+            String[] unmarkIndexes = Arrays.copyOfRange(splitInputs, 1, splitInputs.length);
+            c = new UnmarkCommand(unmarkIndexes);
             break;
         case delete:
             checkInputFormat(splitInputs.length, 2, "The task index cannot be empty.");

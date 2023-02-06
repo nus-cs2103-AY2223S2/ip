@@ -9,10 +9,10 @@ import duke.ui.Ui;
  * Marks task when user input indicates mark.
  */
 public class MarkCommand extends Command {
-    private final int TASK_INDEX;
+    private final String[] TASK_INDEXES;
 
-    public MarkCommand(int taskIndex) {
-        this.TASK_INDEX = taskIndex;
+    public MarkCommand(String ... taskIndexes) {
+        this.TASK_INDEXES = taskIndexes;
     }
 
     /**
@@ -25,7 +25,11 @@ public class MarkCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        String taskString = tasks.markTask(this.TASK_INDEX - 1);
+        String taskString = "";
+        for (String taskIndex: TASK_INDEXES) {
+            taskString = String.format("%s%s\n", taskString,
+                    tasks.markTask(Integer.parseInt(taskIndex) - 1));
+        }
         storage.saveTasks(tasks);
         return ui.getMarkOutput(taskString);
     }
