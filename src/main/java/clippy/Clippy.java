@@ -72,4 +72,9 @@ public class Clippy {
         Application.launch(Gui.class, args);
     }
 
+    // TODO: update with proper parser response
+    public String getResponse(String input) {
+        return "Clippy heard: " + input;
+    }
+
 }
