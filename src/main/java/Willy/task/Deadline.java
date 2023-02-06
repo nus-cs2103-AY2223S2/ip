@@ -4,18 +4,31 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents the Deadline
+ */
 public class Deadline extends Task {
     private String by;
     private String code;
     private LocalDate date;
     private LocalTime time;
 
+    /**
+     * Creates a deadline with a msg and by date
+     * @param msg
+     * @param by
+     */
     public Deadline(String msg, String by) {
         super(msg);
         this.by = by;
         this.code = "[D]";
     }
 
+    /**
+     * Creates a Deadline with a msg and a LocalDate/LocalTime arg
+     * @param msg
+     * @param dateArr
+     */
     public Deadline(String msg, String[] dateArr) {
         super(msg);
         this.code = "[D]";
@@ -43,10 +56,18 @@ public class Deadline extends Task {
         System.out.println(time);
     }
 
+    
+    /** 
+     * Returns the string representation of the code
+     * @return String
+     */
     public String getCode() {
         return this.code;
     }
 
+    /**
+     * Returns the string representation of the Deadline
+     */
     @Override
     public String toString() {
         if (date != null && time != null) {

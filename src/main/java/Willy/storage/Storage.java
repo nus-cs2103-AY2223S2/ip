@@ -15,11 +15,17 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents the storage 
+ */
 public class Storage {
     private static String DATA_PATH = "data/Willy.txt";
     private Path filePath;
     private String relativeFilePath;
 
+    /**
+     * Creates the storage with the given default location
+     */
     public Storage() {
         try {
             relativeFilePath = new File(".").getCanonicalPath();
@@ -30,6 +36,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Creats a custom storage based on the param file location
+     * @param filePathGiven
+     */
     public Storage(String filePathGiven) {
         // double check later
         try {
@@ -41,6 +51,11 @@ public class Storage {
         }
     }
 
+    
+    /** 
+     * To load the data from the storage location text file and return as a list of tasks
+     * @return List<Task>
+     */
     public List<Task> loadData() {
         List<Task> list = new ArrayList<>();
         try {
@@ -79,6 +94,10 @@ public class Storage {
         }
     }
 
+    /**
+     * To save the current tasklist into textfile location storage
+     * @param tList
+     */
     public void save(TaskList tList) {
         String tempText = "";
         for (int i = 0; i < tList.getTaskCount(); i++) {
@@ -86,7 +105,7 @@ public class Storage {
         }
 
         try {
-            FileWriter fileWriter = new FileWriter(DATA_PATH);
+            FileWriter fileWriter = new FileWriter(DATA_PATH); // May need to change this
             fileWriter.write(tempText);
             fileWriter.close();
         } catch (IOException e) {
