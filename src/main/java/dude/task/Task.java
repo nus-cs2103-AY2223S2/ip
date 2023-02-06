@@ -3,7 +3,7 @@ package dude.task;
 /**
  * Task structure for all tasks
  */
-public abstract class Task {
+public abstract class Task implements Cloneable {
     private static int count;
     protected String description;
     protected boolean isDone;
@@ -73,9 +73,18 @@ public abstract class Task {
     }
 
     /**
-     * Check if Task description contains a particular keyword
+     * Set current task count.
      *
-     * @return Boolean if Task contains keyword
+     * @param count Desired task count to set.
+     */
+    public static void setTaskCount(int count) {
+        Task.count = count;
+    }
+
+    /**
+     * Check if Task description contains a particular keyword.
+     *
+     * @return Boolean if Task contains keyword.
      */
     public boolean contains(String[] keywords) {
         assert keywords != null : "Keywords should not be null";
@@ -85,6 +94,17 @@ public abstract class Task {
             }
         }
         return false;
+    }
+
+    /**
+     * Creates and returns a copy of this object.
+     *
+     * @return A clone of this instance.
+     * @throws CloneNotSupportedException If cloning has failed.
+     */
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 
     /**

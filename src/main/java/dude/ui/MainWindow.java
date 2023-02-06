@@ -34,7 +34,7 @@ public class MainWindow extends AnchorPane {
     private Image dudeImage = new Image(this.getClass().getResourceAsStream("/images/DaDude.png"));
 
     /**
-     * Initializes the window and starts with a greeting
+     * Initializes the window and starts with a greeting.
      */
     @FXML
     public void initialize() {

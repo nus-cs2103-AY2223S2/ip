@@ -1,7 +1,7 @@
 package dude.exception;
 
 /**
- * Custom exception for Dude Program
+ * Custom exception for Dude Program.
  */
 public class DudeException extends Exception {
     /**

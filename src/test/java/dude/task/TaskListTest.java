@@ -7,6 +7,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import dude.exception.DudeException;
+
 public class TaskListTest {
     @Test
     public void getTask_success() {
@@ -19,7 +21,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void toRaw_success() {
+    public void toRaw_success() throws DudeException {
         List<Task> taskList = new ArrayList<>();
         TaskList tasks = new TaskList(taskList);
         tasks.addTask(new Todo("Todo"));
@@ -31,7 +33,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void toString_notEmpty_success() {
+    public void toString_notEmpty_success() throws DudeException {
         List<Task> taskList = new ArrayList<>();
         TaskList tasks = new TaskList(taskList);
         tasks.addTask(new Todo("Todo"));

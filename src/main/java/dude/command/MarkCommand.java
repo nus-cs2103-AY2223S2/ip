@@ -1,12 +1,13 @@
 package dude.command;
 
+import dude.exception.DudeException;
 import dude.storage.Storage;
 import dude.task.Task;
 import dude.task.TaskList;
 import dude.ui.Ui;
 
 /**
- * Command to mark Task
+ * Command to mark Task.
  */
 public class MarkCommand extends Command {
     private final int taskIndex;
@@ -22,17 +23,19 @@ public class MarkCommand extends Command {
 
     /**
      * {@inheritDoc}
-     *
-     * @return
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         if (Task.getTaskCount() < taskIndex || Task.getTaskCount() == 0) {
             return ui.showError("Uhh... Where got this task for me to mark?");
         }
-        Task currentTask = tasks.getTask(taskIndex);
-        currentTask.mark();
-        storage.saveData(tasks);
-        return ui.showMark(currentTask);
+        try {
+            tasks.markTask(taskIndex);
+            Task currentTask = tasks.getTask(taskIndex);
+            storage.saveData(tasks);
+            return ui.showMark(currentTask);
+        } catch (DudeException e) {
+            return ui.showError(e.getMessage());
+        }
     }
 }
