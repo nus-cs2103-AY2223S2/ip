@@ -49,18 +49,36 @@ public abstract class DateTime {
      */
     public static boolean isValidDuration(Temporal start, Temporal end) {
         if (start instanceof LocalDateTime && end instanceof LocalDateTime) {
-            return ((LocalDateTime) end).isAfter((LocalDateTime) start)
-                    || ((LocalDateTime) end).equals((LocalDateTime) start);
+            boolean isEndAfterStart = ((LocalDateTime) end).isAfter((LocalDateTime) start);
+            boolean isEndEqualToStart = end.equals(start);
+            return isEndAfterStart || isEndEqualToStart;
+
         } else if (start instanceof LocalDate && end instanceof LocalDate) {
-            return ((LocalDate) end).isAfter((LocalDate) start) || ((LocalDate) end).equals((LocalDate) start);
+            boolean isEndAfterStart = ((LocalDate) end).isAfter((LocalDate) start);
+            boolean isEndEqualToStart = end.equals(start);
+            return isEndAfterStart || isEndEqualToStart;
+
         } else if (start instanceof LocalDate && end instanceof LocalDateTime) {
-            LocalDate endDateOnly = LocalDate.of(((LocalDateTime) end).getYear(), (
-                    (LocalDateTime) end).getMonthValue(), ((LocalDateTime) end).getDayOfMonth());
-            return (endDateOnly.isAfter((LocalDate) start)) || (endDateOnly.equals((LocalDate) start));
+            //Convert
+            int yearOfEndDate = ((LocalDateTime) end).getYear();
+            int monthOfEndDate = ((LocalDateTime) end).getMonthValue();
+            int dayOfEndDate = ((LocalDateTime) end).getDayOfMonth();
+            LocalDate endDateOnly = LocalDate.of(yearOfEndDate, monthOfEndDate, dayOfEndDate);
+            //Check validity
+            boolean isEndAfterStart = endDateOnly.isAfter((LocalDate) start);
+            boolean isEndEqualToStart = (endDateOnly.equals((LocalDate) start));
+            return isEndAfterStart || isEndEqualToStart;
+
         } else if (start instanceof LocalDateTime && end instanceof LocalDate) {
-            LocalDate startDateOnly = LocalDate.of(((LocalDateTime) start).getYear(), (
-                    (LocalDateTime) start).getMonthValue(), ((LocalDateTime) start).getDayOfMonth());
-            return (((LocalDate) end).isAfter(startDateOnly)) || (((LocalDate) end).equals(startDateOnly));
+            //Convert
+            int yearOfStartDate = ((LocalDateTime) start).getYear();
+            int monthOfStartDate = ((LocalDateTime) start).getMonthValue();
+            int dayOfStartDate = ((LocalDateTime) start).getDayOfMonth();
+            LocalDate startDateOnly = LocalDate.of(yearOfStartDate, monthOfStartDate, dayOfStartDate);
+            //Check validity
+            boolean isEndAfterStart = ((LocalDate) end).isAfter(startDateOnly);
+            boolean isEndEqualToStart = ((LocalDate) end).equals(startDateOnly);
+            return isEndAfterStart || isEndEqualToStart;
         }
         return true;
     }
@@ -74,17 +92,21 @@ public abstract class DateTime {
      */
     public static boolean isEqualDate(Temporal start, Temporal end) {
         if (start instanceof LocalDateTime && end instanceof LocalDateTime) {
-            return ((LocalDateTime) end).equals((LocalDateTime) start);
+            return end.equals(start);
         } else if (start instanceof LocalDate && end instanceof LocalDate) {
-            return ((LocalDate) end).equals((LocalDate) start);
+            return (end).equals(start);
         } else if (start instanceof LocalDate && end instanceof LocalDateTime) {
-            LocalDate endDateOnly = LocalDate.of(((LocalDateTime) end).getYear(), (
-                    (LocalDateTime) end).getMonthValue(), ((LocalDateTime) end).getDayOfMonth());
-            return (endDateOnly.equals((LocalDate) start));
+            int yearOfEndDate = ((LocalDateTime) end).getYear();
+            int monthOfEndDate = ((LocalDateTime) end).getMonthValue();
+            int dayOfEndDate = ((LocalDateTime) end).getDayOfMonth();
+            LocalDate endDateOnly = LocalDate.of(yearOfEndDate, monthOfEndDate, dayOfEndDate);
+            return endDateOnly.equals(start);
         } else if (start instanceof LocalDateTime && end instanceof LocalDate) {
-            LocalDate startDateOnly = LocalDate.of(((LocalDateTime) start).getYear(), (
-                    (LocalDateTime) start).getMonthValue(), ((LocalDateTime) start).getDayOfMonth());
-            return (((LocalDate) end).equals(startDateOnly));
+            int yearOfStartDate = ((LocalDateTime) start).getYear();
+            int monthOfStartDate = ((LocalDateTime) start).getMonthValue();
+            int dayOfStartDate = ((LocalDateTime) start).getDayOfMonth();
+            LocalDate startDateOnly = LocalDate.of(yearOfStartDate, monthOfStartDate, dayOfStartDate);
+            return end.equals(startDateOnly);
         }
         return true;
     }
@@ -101,13 +123,13 @@ public abstract class DateTime {
             String monthString = dateTimeObject.getMonth().toString().charAt(0)
                     + dateTimeObject.getMonth().toString().substring(1).toLowerCase();
             String dayString = (dateTimeObject.getDayOfMonth() < 10)
-                    ? "0" + Integer.toString(dateTimeObject.getDayOfMonth())
+                    ? "0" + dateTimeObject.getDayOfMonth()
                     : Integer.toString(dateTimeObject.getDayOfMonth());
             String hourString = (dateTimeObject.getHour() < 10)
-                    ? "0" + Integer.toString(dateTimeObject.getHour())
+                    ? "0" + dateTimeObject.getHour()
                     : Integer.toString(dateTimeObject.getHour());
             String minuteString = (dateTimeObject.getMinute() < 10)
-                    ? "0" + Integer.toString(dateTimeObject.getMinute())
+                    ? "0" + dateTimeObject.getMinute()
                     : Integer.toString(dateTimeObject.getMinute());
 
             return monthString + " " + dayString + " " + dateTimeObject.getYear() + " " + hourString + ":"
@@ -118,7 +140,7 @@ public abstract class DateTime {
             String monthString = dateObject.getMonth().toString().charAt(0)
                     + dateObject.getMonth().toString().substring(1).toLowerCase();
             String dayString = (dateObject.getDayOfMonth() < 10)
-                    ? "0" + Integer.toString(dateObject.getDayOfMonth())
+                    ? "0" + dateObject.getDayOfMonth()
                     : Integer.toString(dateObject.getDayOfMonth());
 
             return monthString + " " + dayString + " " + dateObject.getYear();
