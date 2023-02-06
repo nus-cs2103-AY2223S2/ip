@@ -14,9 +14,10 @@ public class Event extends Task {
 
     /**
      * Makes an event
+     *
      * @param desc desc of event
      * @param from from when
-     * @param to to when
+     * @param to   to when
      * @throws TaskCreationException date parsing error
      */
     public Event(String desc, String from, String to) throws TaskCreationException {
@@ -36,7 +37,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return String.format("%s%s %s (From %s to %s)", getType(), getStatusIcon(), this.desc, this.from, this.to);
+        return super.toString() + String.format(" (From %s to %s)", this.from, this.to);
 
     }
 }

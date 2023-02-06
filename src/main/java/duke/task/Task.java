@@ -8,8 +8,20 @@ import java.io.Serializable;
  * Represents a task
  */
 public abstract class Task implements Serializable {
+    /**
+     * Priority of task
+     */
+    public enum Priority {
+        LOW,
+        MEDIUM,
+        HIGH
+    }
+
+    public Priority priority;
+
     public final String desc;
     protected boolean isDone;
+
 
     Task(String desc) throws TaskCreationException {
         if (desc.equals("")) {
@@ -17,7 +29,13 @@ public abstract class Task implements Serializable {
         }
         this.desc = desc;
         this.isDone = false;
+        this.priority = Priority.LOW;
 
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s%s %s", getStatusIcon(), getType(), desc);
     }
 
     protected String getStatusIcon() {

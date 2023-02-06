@@ -34,6 +34,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return String.format("%s%s %s (by: %s)", getType(), getStatusIcon(), this.desc, deadline);
+        return super.toString() + String.format(" (by: %s)", deadline);
     }
 }

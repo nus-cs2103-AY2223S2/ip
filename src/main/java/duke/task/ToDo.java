@@ -15,8 +15,4 @@ public class ToDo extends Task {
         return "[T]";
     }
 
-    @Override
-    public String toString() {
-        return String.format("%s%s %s", getType(), getStatusIcon(), this.desc);
-    }
 }
