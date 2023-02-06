@@ -41,7 +41,7 @@ public class TaskList extends ArrayList<Task> {
         return result.toString();
     }
 
-    public void addingTask(Task task) throws DescriptionException {
+    public void addTask(Task task) throws DescriptionException {
         if (task.isEmpty()) {
             throw new DescriptionException();
         } else {

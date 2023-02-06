@@ -16,7 +16,7 @@ public class ExitCommand extends Command{
         } catch (IOException ignored) {
             ui.showLoadingError();
         }
-        ui.goodbye();
+        ui.showGoodbye();
         return "";
     }
 }

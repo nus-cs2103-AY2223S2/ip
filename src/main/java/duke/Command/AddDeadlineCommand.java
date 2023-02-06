@@ -18,7 +18,7 @@ public class AddDeadlineCommand extends Command {
     @Override
     public String execute(TaskList tasks, Storage storage, Ui ui) throws DukeException {
         Deadline newDeadline = new Deadline(this.description, this.by);
-        tasks.addingTask(newDeadline);
+        tasks.addTask(newDeadline);
         ui.showTaskAdded(newDeadline, tasks);
         return newDeadline.toString();
     }

@@ -9,28 +9,28 @@ import java.time.LocalDateTime;
  */
 public class Event extends Task {
 
-    protected LocalDateTime by;
+    protected LocalDateTime from;
     protected LocalDateTime to;
-    protected String strBy;
+    protected String strFrom;
     protected String strTo;
 
-    public Event(String description, String by, String to) throws DescriptionException {
+    public Event(String description, String from, String to) throws DescriptionException {
         super(description);
-        this.strBy = by;
+        this.strFrom = from;
         this.strTo = to;
         this.to = getLocalDateTime(this.strTo);
-        this.by = getLocalDateTime(this.strBy);
+        this.from = getLocalDateTime(this.strFrom);
         if (this.to != null) {
             this.strTo = this.to.format(DateTimeFormat.defaultOutput.formatter);
         }
-        if (this.by != null) {
-            this.strBy = this.by.format(DateTimeFormat.defaultOutput.formatter);
+        if (this.from != null) {
+            this.strFrom = this.from.format(DateTimeFormat.defaultOutput.formatter);
         }
     }
 
     @Override
     public String toString() {
-        return "E | " + super.toString() + " | " + this.strBy + "-" + this.strTo;
+        return "E | " + super.toString() + " | " + this.strFrom + "-" + this.strTo;
 
     }
 }

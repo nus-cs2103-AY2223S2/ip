@@ -74,19 +74,19 @@ public abstract class Task {
 
     public static Task strToTask(String strTask) throws CommandException {
         Task result;
-        String[] separatedStr = strTask.split(" \\| ");
+        String[] strings = strTask.split(" \\| ");
         if (strTask.startsWith("T")) {
-            result = new ToDo(separatedStr[2]);
+            result = new ToDo(strings[2]);
         } else if (strTask.startsWith("D")) {
-            result = new Deadline(separatedStr[2], separatedStr[3]);
+            result = new Deadline(strings[2], strings[3]);
         } else if (strTask.startsWith("E")) {
-            String[] separatedBy = separatedStr[3].split("-");
-            result = new Event(separatedStr[2], separatedBy[0], separatedBy[1]);
+            String[] separatedBy = strings[3].split("-");
+            result = new Event(strings[2], separatedBy[0], separatedBy[1]);
         } else {
             throw new CommandException();
         }
         try {
-            if (separatedStr[1].equals("X")) {
+            if (strings[1].equals("X")) {
                 result.markDone();
             }
             return result;
