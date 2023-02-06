@@ -9,7 +9,7 @@ package duke.util;
 public class DukeException extends Exception {
 
     /**
-     * Constructor for a new DukeException object.
+     * Constructor for a new DukeException object to provide the message to show to user.
      * @param message is a string to be printed by the Ui object.
      */
     public DukeException(String message) {
