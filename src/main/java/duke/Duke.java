@@ -16,6 +16,7 @@ public class Duke {
      * @param filePath path for backup file.
      */
     public Duke(String filePath) {
+        assert filePath != "" : "filePath is non empty";
         ui = new Ui();
         storage = new Storage(filePath);
         try {
