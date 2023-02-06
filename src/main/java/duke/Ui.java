@@ -25,9 +25,9 @@ public class Ui {
      * Prints welcome message to user when user first starts
      * the program
      */
-    void printWelcomeMessage() {
-        System.out.println("Hi, I'm Nero and I am an automated chat bot"
-                + "\n" + "What would you like to do?");
+    String printWelcomeMessage() {
+        return "Hi, I'm Nero and I am an automated chat bot"
+                + "\n" + "What would you like to do?";
     }
 
 

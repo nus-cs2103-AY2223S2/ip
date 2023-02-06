@@ -37,7 +37,6 @@ public class Duke {
      * @return Duke's response to the commands
      */
     String getResponse(String input) {
-        ui.printWelcomeMessage();
         String toPrint = "";
         try {
             toPrint = parser.parseCommand(input, taskList, ui);

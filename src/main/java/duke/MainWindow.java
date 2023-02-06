@@ -23,11 +23,16 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    // userImage taken from "https://www.pngfind.com/mpng/TihxTxw_asta-black-clover-black-clover-asta-png-transparent/"
+    // dukeImage taken from "https://blackcloverthots.tumblr.com/post/612892427599134720/marisashinx-nero-gets-what-nero-deserves"
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Asta.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/New.png"));
 
     @FXML
     public void initialize() {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog("Hi, I'm Duke and I am an automated chat bot \n " +
+                        "What would you like to do?", dukeImage));
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
