@@ -1,31 +1,23 @@
 package command;
 
 import duke.DukeList;
-import duke.TextBorder;
+import duke.Ui;
 
-/**
- * Represents a Command that list stored tasks
- */
 public class ListCommand extends Command{
     private DukeList dukeList;
+    private Ui ui;
 
-    /**
-     * Creates a ListCommand with the given DukeList
-     * @param dukeList the DukeList to be listed
-     */
-    public ListCommand(DukeList dukeList) {
+    public ListCommand(DukeList dukeList, Ui ui) {
         this.dukeList = dukeList;
+        this.ui = ui;
     }
 
-    /**
-     * Prints out all tasks in the current DukeList
-     */
     @Override
     public void execute() {
         if (this.dukeList.isEmpty()) {
-            System.out.println(new TextBorder("Yo there's nothing in the list."));
+            this.ui.addStatement("Yo there's nothing in the list.");
         } else {
-            System.out.println(new TextBorder(this.dukeList.toString()));
+            this.ui.addStatement(this.dukeList.toString());
         }
     }
 

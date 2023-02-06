@@ -2,32 +2,23 @@ package command;
 
 import duke.DukeList;
 import duke.Storage;
+import duke.Ui;
 
-/**
- * Represents a Command that saves the current list and signals ends the programme
- */
 public class ExitCommand extends Command {
     private DukeList dukeList;
     private Storage storage;
+    private Ui ui;
 
-    /**
-     * Creates an ExitCommand with the given DukeList and Storage
-     * @param dukeList the DukeList that is to be saved
-     * @param storage the Storage to which the DukeList will be saved to
-     */
-    public ExitCommand(DukeList dukeList, Storage storage) {
+    public ExitCommand(DukeList dukeList, Storage storage, Ui ui) {
         this.dukeList = dukeList;
         this.storage = storage;
+        this.ui = ui;
     }
 
-    /**
-     * Saves the current DukeList to Storage
-     */
     @Override
     public void execute() {
-        storage.saveList(this.dukeList);
+        storage.saveList(this.dukeList, this.ui);
     }
-
 
     @Override
     public boolean isExit() {

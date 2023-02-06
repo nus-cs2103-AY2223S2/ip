@@ -1,10 +1,12 @@
 package duke;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
 
     private Scanner scanner = new Scanner(System.in);
+    private ArrayList<String> statementList = new ArrayList<>();
     private String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
@@ -12,14 +14,18 @@ public class Ui {
             + "|____/ \\__,_|_|\\_\\___|\n";
 
     public Ui() {
-        System.out.println("Hello from\n" + logo);
-
-        System.out.println(new TextBorder("Waddup the name's Duncan. Sorry but Duke couldn't make it, had a pretty bad stomach-ache."));
-        System.out.println(new TextBorder("So what do you need bro?"));
     }
 
-    public String readCommand() {
-        return scanner.nextLine();
+    public void addStatement(String input) {
+        this.statementList.add(input) ;
+    }
+
+    public ArrayList<String> getStatements() {
+        return statementList;
+    }
+
+    public void clearStatements() {
+        statementList = new ArrayList<>();
     }
 
 }

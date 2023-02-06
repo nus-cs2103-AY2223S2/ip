@@ -9,8 +9,11 @@ import java.util.ArrayList;
 
 public class DukeList implements Serializable {
     private ArrayList<Task> list = new ArrayList<>();
+    private Ui ui;
 
-    public DukeList() {}
+    public DukeList(Ui ui) {
+        this.ui = ui;
+    }
 
     private String pluralTask (int size) {
         if (size == 1) {
@@ -21,7 +24,7 @@ public class DukeList implements Serializable {
     }
 
     public void add(String type, String s) {
-        Task task = new Task();
+        Task task;
         if (type.equals("todo")) {
             task = new Todo(s);
 
@@ -34,11 +37,9 @@ public class DukeList implements Serializable {
             String[] arr = s.split(" /from | /to", 3);
             task = new Event(arr[0], arr[1], arr[2]);
         }
-        System.out.println("Sure, Imma add that real quick");
-        System.out.println(task);
+        ui.addStatement("Sure, Imma add that real quick \n" + task);
         list.add(task);
-        System.out.println("Now you've got " + list.size() + pluralTask(list.size()));
-        System.out.println(new TextBorder(""));
+        ui.addStatement("Now you've got " + list.size() + pluralTask(list.size()));
     }
 
     public void add(Task task) {
@@ -49,24 +50,33 @@ public class DukeList implements Serializable {
         return list.isEmpty();
     }
 
-    public DukeList findSubString(String subString) {
-        DukeList foundList = new DukeList();
+    public void findSubString(String subString) {
+        DukeList foundList = new DukeList(ui);
         for (Task task : this.list) {
             if (task.hasSubstring(subString)) {
                 foundList.add(task);
             }
         }
-        return foundList;
+        if (foundList.isEmpty()) {
+            this.ui.addStatement("Sorry man, couldn't find anything with [" + subString + "]");
+        } else {
+            this.ui.addStatement("So I've found these: \n" + foundList);
+        }
+    }
+
+
+    public void setUi(Ui ui) {
+        this.ui = ui;
     }
 
     public void findAndMark(String text, boolean mark) {
         for (Task t : list) {
             if (t.isCorrectTask(text)) {
-                t.markOut(mark);
+                t.markOut(mark, ui);
                 return;
             }
         }
-        System.out.println("Sorry, can't find the task!");
+        ui.addStatement("Sorry, can't find the task!");
     }
 
     public void delete (int i) throws TaskOutOfRangeException {
@@ -74,9 +84,9 @@ public class DukeList implements Serializable {
             throw new TaskOutOfRangeException("Yo, I can't find the task at " + i);
         } else {
             Task removedTask = this.list.remove(i - 1);
-            System.out.println(new TextBorder("Got it, this task is gonez:"));
-            System.out.println(removedTask);
-            System.out.println("Now you've got " + list.size() + pluralTask(list.size()));
+            ui.addStatement("Got it, this task is gonez: \n" +
+                    removedTask + "\n" +
+                    "Now you've got " + list.size() + pluralTask(list.size()));
         }
     }
 

@@ -2,6 +2,7 @@ package duke;
 
 import command.Command;
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class ParserTest {
@@ -9,7 +10,8 @@ public class ParserTest {
     @Test
     public void isExitTest() {
         try {
-            Parser parser = new Parser(new DukeList(), new Storage(""));
+            Ui ui = new Ui();
+            Parser parser = new Parser(new DukeList(ui), new Storage("", ui), ui);
             Command c = parser.parse("todo false");
 
             assertFalse(c.isExit());

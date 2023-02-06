@@ -1,5 +1,7 @@
 package task;
 
+import duke.Ui;
+
 import java.io.Serializable;
 
 /**
@@ -30,18 +32,16 @@ public class Task implements Serializable {
      * Marks the current task with the given mark
      * @param mark a boolean value that if true, marks the task and if false, unmarks the task
      */
-    public void markOut(boolean mark) {
+    public void markOut(boolean mark, Ui ui) {
         if (mark != marked) {
             marked = !marked;
             if (marked) {
-                System.out.println("Alright, I've marked it out : \n"
-                        + this);
+                ui.addStatement("Alright, I've marked it out : \n" + this);
             } else {
-                System.out.println("Alright, I've erased the mark: \n"
-                        + this);
+                ui.addStatement("Alright, I've erased the mark: \n" + this);
             }
         } else {
-            System.out.println("Hey how I can change this mark?");
+            ui.addStatement("Hey how I can change this mark?");
         }
     }
 
