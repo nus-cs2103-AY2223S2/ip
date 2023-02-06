@@ -3,6 +3,9 @@ package duke;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Event is a type of task that has a "from" and "to" date.
+ */
 public class Event extends Task {
 
     private LocalDateTime fromDate;

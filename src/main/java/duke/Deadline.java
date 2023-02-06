@@ -3,6 +3,9 @@ package duke;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Deadline is a type of task that has a "by" date.
+ */
 public class Deadline extends Task {
 
     private LocalDateTime byDate;
@@ -23,6 +26,11 @@ public class Deadline extends Task {
         return description + " (by: " + byDate.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm")) + ")";
     }
 
+    /**
+     * Gets the "by" date String
+     *
+     * @return String of "by" date
+     */
     public String getByDate() {
         return byDate.format(FORMATTER);
     }

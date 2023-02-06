@@ -2,6 +2,9 @@ package duke;
 
 import java.util.Scanner;
 
+/**
+ * Main runner class for the Duke program.
+ */
 public class Duke {
     private Scanner scanner;
     private String horizontalLine = "************************";
@@ -25,6 +28,9 @@ public class Duke {
         duke.run();
     }
 
+    /**
+     * Runs the Duke program
+     */
     public void run() {
         // Show intro
         ui.showIntro();

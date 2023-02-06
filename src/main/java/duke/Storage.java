@@ -8,6 +8,9 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Storage class that handles loading and saving tasks to and from a txt file.
+ */
 public class Storage {
 
     private String filename;
@@ -22,6 +25,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Stores and saves the given list into a txt file in a formatted style
+     *
+     * @param taskArr The array list to save
+     */
     public void storeList(ArrayList<Task> taskArr) {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(filename, false));
@@ -55,6 +63,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads the task list from the txt file and stores it in an ArrayList
+     *
+     * @return The ArrayList containing all saved tasks
+     */
     public ArrayList<Task> loadList() {
         ArrayList<Task> taskArr = new ArrayList<>();
         try {

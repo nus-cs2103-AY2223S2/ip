@@ -1,5 +1,10 @@
 package duke;
 
+/**
+ * Class that represents a Command consisting of a type and data.
+ * Type refers to todo, deadline or event.
+ * Data refers to the dates associated with the Command.
+ */
 public class Command {
 
     private String type;
@@ -11,6 +16,12 @@ public class Command {
         this.data = data;
     }
 
+    /**
+     * Executes the Command instance using a given task list and UI
+     *
+     * @param taskList taskList object to modify tasks in if command requires
+     * @param ui UI object to show command execution on
+     */
     public void execute(TaskList taskList, Ui ui) {
         switch(type) {
             case "bye":
