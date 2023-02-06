@@ -30,6 +30,14 @@ deadline test
 event test
 del 1
 del1
+list
+mark 1 2
+unmark 1 2
+del 1 2
+list
+del0
+del0 -2
+del-2
 clear
 asdf
 bye

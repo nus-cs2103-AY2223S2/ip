@@ -1,5 +1,7 @@
 package duke;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -41,11 +43,11 @@ public class Parser {
         default:
             // Have to do it at the starts with because what if "todo mark this as done"
             if (input.startsWith(Commands.MARK.cmd())) {
-                int taskNum = getNumbers(input) - 1;
-                return new MarkCommand(taskNum);
+                int[] taskNumbers = subtractInt(getNumbers(input), 1);
+                return new MarkCommand(taskNumbers);
             } else if (input.startsWith(Commands.UNMARK.cmd())) {
-                int taskNum = getNumbers(input) - 1;
-                return new UnmarkCommand(taskNum);
+                int[] taskNumbers = subtractInt(getNumbers(input), 1);
+                return new UnmarkCommand(taskNumbers);
             } else if (input.startsWith(Commands.TODO.cmd())) {
                 String[] parsed = handleTask(input);
                 String title = parsed[0];
@@ -62,8 +64,8 @@ public class Parser {
                 String to = parsed[2];
                 return new EventCommand(title, from, to);
             } else if (input.startsWith(Commands.DEL.cmd())) {
-                int taskNum = getNumbers(input) - 1;
-                return new DeleteCommand(taskNum);
+                int[] taskNumbers = subtractInt(getNumbers(input), 1);
+                return new DeleteCommand(taskNumbers);
             } else if (input.startsWith(Commands.FIND.cmd())) {
                 String query = input.substring(Commands.FIND.len());
                 return new FindCommand(query);
@@ -76,6 +78,7 @@ public class Parser {
     /**
      * Centralised parser to parse Tasks input and sort out the specific args for
      * the 3 types of task: Todo Deadline Event
+     *
      * @param input
      * @return String[] to be added todo deadline and event objects/command
      * @throws DukeException
@@ -114,7 +117,7 @@ public class Parser {
      * @return int number found from regex
      * @throws DukeException when no number is found
      */
-    private static int getNumbers(String input) throws DukeException {
+    private static int getNumber(String input) throws DukeException {
         Pattern pattern = Pattern.compile("\\d+");
         Matcher matcher = pattern.matcher(input);
         if (matcher.find()) {
@@ -124,5 +127,45 @@ public class Parser {
         } else {
             throw new DukeException(Views.NO_INT_ERR_STRING.eng());
         }
+    }
+
+    /**
+     * Gathers the numbers found from a string
+     *
+     * @param input string from the user
+     * @return int number found from regex
+     * @throws DukeException when no number is found
+     */
+    private static int[] getNumbers(String input) throws DukeException {
+        String[] inputArray = TaskList.removeEmptyStrings(input.split(" "));
+
+        // Use hash set to ensure no duplicated numbers
+        HashSet<Integer> results = new HashSet<Integer>();
+
+        for (String inputString : inputArray) {
+            try {
+                results.add(getNumber(inputString));
+            } catch (DukeException e) {
+                // Particular string is not int, moving on to next
+            }
+        }
+        if (results.size() != 0) {
+            // Convert it back to int array
+            int[] converted = results.stream().mapToInt(Integer::intValue).toArray();
+            Arrays.sort(converted);
+            return converted;
+        } else {
+            throw new DukeException(Views.NO_INT_ERR_STRING.eng());
+        }
+    }
+
+    private static int[] subtractInt(int[] input, int subtractAmt) {
+        int[] results = new int[input.length];
+        for (int i = 0; i < input.length; i++) {
+            int subtracted = input[i] - subtractAmt;
+            assert subtracted >= 0 : Views.OUT_RANGE_ERR_STRING.eng();
+            results[i] = subtracted;
+        }
+        return results;
     }
 }
