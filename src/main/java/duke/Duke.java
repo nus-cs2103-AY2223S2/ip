@@ -1,5 +1,8 @@
 package duke;
 
+import duke.commands.Command;
+import javafx.application.Platform;
+
 /**
  * Controller for Duke
  */
@@ -15,9 +18,11 @@ public class Duke {
         parser = new Parser();
     }
 
-    public String getResponse(String input) {
-        String s = parser.parse(taskList, input);
-        storage.store(taskList);
-        return s;
+    public String getResponse(String input) throws TaskException {
+        Command s = parser.parse(input);
+        if (s.isExit()) {
+            Platform.exit();
+        }
+        return s.execute(taskList, storage);
     }
 }

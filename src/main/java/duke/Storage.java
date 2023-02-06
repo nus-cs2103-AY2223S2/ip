@@ -8,7 +8,10 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-class Storage {
+/**
+ * Manages storage of tasklists into files
+ */
+public class Storage {
     private final String savePath;
 
     Storage(String savePath) {
@@ -20,7 +23,7 @@ class Storage {
      *
      * @param list TaskList to be stored
      */
-    void store(TaskList list) {
+    public void store(TaskList list) {
         boolean ignored = new File(savePath).getParentFile().mkdirs();
         try (FileOutputStream fw = new FileOutputStream(savePath); ObjectOutputStream out = new ObjectOutputStream(
                 fw)) {
@@ -35,7 +38,7 @@ class Storage {
      *
      * @return TaskList
      */
-    TaskList load() {
+    public TaskList load() {
         try (FileInputStream fileInputStream = new FileInputStream(
                 savePath); ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
             return (TaskList) objectInputStream.readObject();
