@@ -163,8 +163,7 @@ public class Storage {
             fw.flush();
             fw = new FileWriter(dataFilePath, true);
 
-            //Sanity check
-            int count = 0;
+
 
             //Append new content into file
             for (int i = 0; i < tasks.getSizeOfTaskList(); i = i + 1) {
@@ -182,8 +181,6 @@ public class Storage {
                         + ((Event) currentTask).getRawEndDate();
                 if (i != tasks.getSizeOfTaskList() - 1) {
                     lineToAdd += "\n";
-                    count = count + 1;
-                    assert count == 1 : "Logic error";
                 }
                 fw.write(lineToAdd);
             }
