@@ -41,6 +41,10 @@ public class Parser {
         E
     }
 
+    public static String[] getIndexes(String[] splitInputs) {
+        return Arrays.stream(splitInputs, 1, splitInputs.length).toArray(String[]::new);
+    }
+
     /**
      * Parses input data entered by user.
      *
@@ -88,13 +92,13 @@ public class Parser {
         case mark:
             checkInputFormat(splitInputs.length, 2,
                     "The task index cannot be empty.");
-            String[] markIndexes = Arrays.copyOfRange(splitInputs, 1, splitInputs.length);
+            String[] markIndexes = getIndexes(splitInputs);
             c = new MarkCommand(markIndexes);
             break;
         case unmark:
             checkInputFormat(splitInputs.length, 2,
                     "The task index cannot be empty.");
-            String[] unmarkIndexes = Arrays.copyOfRange(splitInputs, 1, splitInputs.length);
+            String[] unmarkIndexes = getIndexes(splitInputs);
             c = new UnmarkCommand(unmarkIndexes);
             break;
         case delete:
