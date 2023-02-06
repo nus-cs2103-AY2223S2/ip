@@ -4,7 +4,8 @@ import duke.exceptions.DukeException;
 import duke.tasks.ITask;
 import duke.utilities.Parser;
 /**
- * Represents delete action command. A <code>Delete</code> object corresponds to
+ * Represents delete action command.
+ * A <code>Delete</code> object corresponds to
  * the action delete a task from task list
  */
 public class Delete extends ICommand {
@@ -16,7 +17,6 @@ public class Delete extends ICommand {
     @Override
     public boolean run() throws DukeException {
         ITask t = getParser().getTaskManager().remove(getParser().getIndex());
-
 
         setMsg("Noted. I've removed this task:\n" + t + "\nNow you have "
                 + getParser().getTaskManager().size() + " in the list.");

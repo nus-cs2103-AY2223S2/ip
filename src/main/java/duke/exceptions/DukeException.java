@@ -1,6 +1,7 @@
 package duke.exceptions;
 /**
- * An abstract exception class which is super class for all check exception for duke program
+ * An abstract exception class which is super
+ * class for all check exception for duke program
  */
 public class DukeException extends Exception {
     /**

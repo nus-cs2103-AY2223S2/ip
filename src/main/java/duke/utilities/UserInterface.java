@@ -21,7 +21,7 @@ import duke.tasks.ITask;
 public class UserInterface {
 
     /**
-     * Speak function to print the content onto the display
+     * Prints the content onto the display
      * in pre-define format
      *
      * @param sentences to print
@@ -35,7 +35,7 @@ public class UserInterface {
     }
 
     /**
-     * The function to ask user to input command
+     * Asks user to input command
      *
      * @param sentence type of command to ask the user to input
      */
@@ -56,7 +56,7 @@ public class UserInterface {
     }
 
     /**
-     * The function to show to error loading msg
+     * Shows to error loading msg
      *
      * @param msg to be print
      */
@@ -65,7 +65,7 @@ public class UserInterface {
     }
 
     /**
-     * The function to show to error msg
+     * Shows to error msg
      *
      * @param msg to be print
      */
@@ -74,7 +74,7 @@ public class UserInterface {
     }
 
     /**
-     * The function to read the user command
+     * Reads the user command
      *
      * @param taskManager hand over the command to task manager
      * @throws DukeException IF error occur
@@ -99,22 +99,25 @@ public class UserInterface {
         case "todo":
         case "deadline":
         case "event":
-            return new Add(new Parser(content, taskManager, ITask.convertTaskTypeCmdToEnum(cmd)));
+            return new Add(new Parser(content, taskManager,
+                    ITask.convertTaskTypeCmdToEnum(cmd)));
         case "find":
-            return new Find(new Parser(content, taskManager, ITask.convertTaskTypeCmdToEnum(cmd)));
+            return new Find(new Parser(content, taskManager,
+                    ITask.convertTaskTypeCmdToEnum(cmd)));
         default:
             throw new InvalidCommandException(cmd);
         }
     }
 
     /**
-     * The function to read the user command
+     * Reads the user command
      *
      * @param taskManager hand over the command to task manager
      * @param input       from Gui
      * @throws DukeException IF error occur
      */
-    public ICommand readCommand(TaskManager taskManager, String input) throws DukeException {
+    public ICommand readCommand(TaskManager taskManager,
+                                String input) throws DukeException {
         String[] cmd = input.split(" ", 2);
         if (cmd.length < 1) {
             throw new InvalidCommandException(input);
@@ -139,9 +142,11 @@ public class UserInterface {
         case "todo":
         case "deadline":
         case "event":
-            return new Add(new Parser(content, taskManager, ITask.convertTaskTypeCmdToEnum(cmd[0])));
+            return new Add(new Parser(content, taskManager,
+                    ITask.convertTaskTypeCmdToEnum(cmd[0])));
         case "find":
-            return new Find(new Parser(content, taskManager, ITask.convertTaskTypeCmdToEnum(cmd[0])));
+            return new Find(new Parser(content, taskManager,
+                    ITask.convertTaskTypeCmdToEnum(cmd[0])));
         default:
             throw new InvalidCommandException(cmd[0]);
         }

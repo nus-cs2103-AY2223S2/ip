@@ -4,7 +4,8 @@ import duke.exceptions.DukeException;
 import duke.utilities.Parser;
 
 /**
- * Represents Find action command. A <code>Find</code> object corresponds to
+ * Represents Find action command.
+ * A <code>Find</code> object corresponds to
  * the action find from a task
  */
 public class Find extends ICommand {

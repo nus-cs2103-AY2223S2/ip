@@ -6,7 +6,8 @@ import duke.exceptions.DukeException;
 import duke.tasks.ITask;
 
 /**
- * Represents a manager to handle all tasks. A <code>TaskManager</code> object corresponds to
+ * Represents a manager to handle all tasks.
+ * A <code>TaskManager</code> object corresponds to
  * a manager handle all task
  */
 public class TaskManager {
@@ -30,7 +31,7 @@ public class TaskManager {
 
 
     /**
-     * load the tasks from database
+     * Loads the tasks from database
      *
      * @throws DukeException IF error occur during loading of task.
      */
@@ -45,19 +46,23 @@ public class TaskManager {
         return tasks;
     }
 
+    /**
+     * Finds specific task from given keyword
+     */
     public Object[] find(String keyword) {
-        return tasks.stream().filter(x -> x.descriptionContain(keyword)).toArray();
+        return tasks.stream()
+                .filter(x -> x.descriptionContain(keyword)).toArray();
     }
 
     /**
-     * Return the size of task
+     * Returns the size of task
      */
     public int size() {
         return tasks.size();
     }
 
     /**
-     * Remove specific task at given index
+     * Removes specific task at given index
      *
      * @param index the index of task to be remove
      */
@@ -68,7 +73,7 @@ public class TaskManager {
     }
 
     /**
-     * Add specific task
+     * Adds specific task
      *
      * @param task the task to be added to the task list
      */
@@ -78,7 +83,7 @@ public class TaskManager {
     }
 
     /**
-     * Mark specific task
+     * Marks specific task
      *
      * @param index  the index of task
      * @param isDone status of task
@@ -88,7 +93,7 @@ public class TaskManager {
         if (isDone) {
             task.markAsDone();
         } else {
-            task.markAsUnDone();
+            task.markAsUndone();
         }
         storage.saveAll(tasks);
 
