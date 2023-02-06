@@ -14,15 +14,19 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class CommandTest {
     private final String testFile = "./data/tasks.ser";
     private TaskList tasks;
     private Ui ui;
     private Storage storage;
+
+    String deadline = "01012023 1200";
+    LocalDateTime deadlineDateTime = LocalDateTime.parse(deadline, DateTimeFormatter.ofPattern("ddMMyyyy HHmm"));
 
     @BeforeEach
     void setUp() {
@@ -34,35 +38,35 @@ public class CommandTest {
     @Test
     public void testAddCommand() throws DukeException {
         File file = new File(testFile);
-        Task task = new Deadline("Test deadline", "01012023 1200");
+        Task task = new Deadline("Test deadline", deadlineDateTime);
         Command command = new Command.AddCommand(task);
         command.execute(tasks, ui, storage);
         assertEquals(1, tasks.size());
         assertEquals(task, tasks.get(0));
-        assertEquals(true, file.length() > 0);
+        assertTrue(file.length() > 0);
         // Difficult to test for ui
     }
 
     @Test
     public void testMarkCommand() throws DukeException {
-        Task task = new Deadline("Test deadline", "01012023 1200");
-        assertEquals(false, task.isDone());
+        Task task = new Deadline("Test deadline", deadlineDateTime);
+        assertFalse(task.isDone());
         tasks.add(task);
         Command command = new Command.MarkCommand(0);
         command.execute(tasks, ui, storage);
-        assertEquals(true, storage.load().get(0).isDone());
+        assertTrue(storage.load().get(0).isDone());
         // Difficult to test for ui
     }
 
     @Test
     public void testUnmarkCommand() throws DukeException {
-        Task task = new Deadline("Test deadline", "01012023 1200");
+        Task task = new Deadline("Test deadline", deadlineDateTime);
         task.setDone(true);
-        assertEquals(true, task.isDone());
+        assertTrue(task.isDone());
         tasks.add(task);
         Command command = new Command.UnmarkCommand(0);
         command.execute(tasks, ui, storage);
-        assertEquals(false, storage.load().get(0).isDone());
+        assertFalse(storage.load().get(0).isDone());
         // Difficult to test for ui
     }
 

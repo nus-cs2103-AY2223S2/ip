@@ -15,11 +15,11 @@ import duke.ui.Ui;
  */
 public class Duke {
     /** Storage of Duke */
-    private Storage storage;
+    private final Storage storage;
     /** TaskList of Duke */
     private TaskList tasks;
     /** Ui of Duke */
-    private Ui ui;
+    private final Ui ui;
 
     public Duke() {
         this("./data/tasks.ser");
