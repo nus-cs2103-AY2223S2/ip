@@ -4,7 +4,10 @@ on: [push, pull_request]
 
 jobs:
   build-gradle-project:
-    runs-on: macos-latest
+    strategy:
+      matrix:
+        platform: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.platform }}
     steps:
       - name: Checkout project sources
         uses: actions/checkout@v2
