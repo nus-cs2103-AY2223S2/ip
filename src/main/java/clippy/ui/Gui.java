@@ -1,6 +1,8 @@
 package clippy.ui;
 
 import javafx.application.Application;
+import java.util.function.Consumer;
+import javafx.event.Event;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
@@ -62,7 +64,26 @@ public class Gui extends Application {
 
         AnchorPane.setBottomAnchor(inputBox, 1.0);
         AnchorPane.setLeftAnchor(inputBox, 1.0);
-        
 
+        // 3. Set user input handlers
+        Consumer<Event> sendMessage = event -> {
+            dialogContainer.getChildren().add(createDialogLabel(inputBox.getText()));
+            inputBox.clear();
+        };
+
+        // Enables sending of user input on button click or enter keypress
+        sendButton.setOnMouseClicked(event -> sendMessage.accept(event));
+        inputBox.setOnAction(event -> sendMessage.accept(event));
+
+        // Autoscrolling when dialog box size exceeds window size
+        dialogContainer.heightProperty().addListener(observable -> scrollPane.setVvalue(1.0));
+
+    }
+
+    public Label createDialogLabel(String text) {
+        Label result = new Label(text);
+        result.setWrapText(true);
+
+        return result;
     }
 }
