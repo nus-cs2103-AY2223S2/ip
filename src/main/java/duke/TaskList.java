@@ -48,4 +48,14 @@ public class TaskList {
         taskArr.remove(index);
     }
 
+    public ArrayList<Task> findTasks(String keyword) {
+        ArrayList<Task> outList = new ArrayList<>();
+        for (Task task : taskArr) {
+            if (task.getDescription().contains(keyword)) {
+                outList.add(task);
+            }
+        }
+        return outList;
+    }
+
 }

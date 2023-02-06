@@ -70,6 +70,9 @@ public class Command {
                 ui.showDeleteTask(index);
                 taskList.saveList();
                 break;
+            case "find":
+
+                break;
         }
     }
 
