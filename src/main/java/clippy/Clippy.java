@@ -5,7 +5,11 @@ import clippy.command.Parser;
 import clippy.exception.ClippyException;
 import clippy.storage.Storage;
 import clippy.task.TaskList;
+import clippy.ui.Gui;
 import clippy.ui.Ui;
+
+import javafx.application.Application;
+
 
 /**
  * The friendly task manager, Clippy!
@@ -63,7 +67,9 @@ public class Clippy {
      * @param args Command line arguments.
      */
     public static void main(String[] args) {
-        System.out.println("Hello from\n" + logo);
-        new Clippy().run();
+        // System.out.println("Hello from\n" + logo);
+        //new Clippy().run();
+        Application.launch(Gui.class, args);
     }
+
 }
