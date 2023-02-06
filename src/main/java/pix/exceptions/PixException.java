@@ -1,7 +1,7 @@
 package pix.exceptions;
 
 /**
- * PixException class to raise exceptions specific to pix.
+ * PixException class to raise exceptions specific by pix.
  */
 public class PixException extends Exception {
     /**

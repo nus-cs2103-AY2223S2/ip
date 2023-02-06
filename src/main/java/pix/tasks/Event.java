@@ -4,26 +4,26 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
- * Event task which contains the description, from date and to date.
+ * Event task which contains the description, eventStart date and eventEnd date.
  */
 public class Event extends Task {
     /** Date and time event starts. */
-    protected LocalDateTime from;
+    protected LocalDateTime eventStart;
 
     /** Date and time event ends. */
-    protected LocalDateTime to;
+    protected LocalDateTime eventEnd;
 
     /**
      * Constructs a new Event.
      *
      * @param description Description of event.
-     * @param from When event starts.
-     * @param to When event ends.
+     * @param eventStart When event starts.
+     * @param eventEnd When event ends.
      */
-    public Event(String description, String from, String to) {
+    public Event(String description, String eventStart, String eventEnd) {
         super(description);
-        this.from = LocalDateTime.parse(from, formatInput);
-        this.to = LocalDateTime.parse(to, formatInput);
+        this.eventStart = LocalDateTime.parse(eventStart, formatInput);
+        this.eventEnd = LocalDateTime.parse(eventEnd, formatInput);
     }
 
     /**
@@ -32,9 +32,8 @@ public class Event extends Task {
      * @return Date which event starts.
      */
     public LocalDate getFromDate() {
-        return this.from.toLocalDate();
+        return this.eventStart.toLocalDate();
     }
-
 
     /**
      * Gets event ending date.
@@ -42,17 +41,17 @@ public class Event extends Task {
      * @return Date which event ends.
      */
     public LocalDate getToDate() {
-        return this.to.toLocalDate();
+        return this.eventEnd.toLocalDate();
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + from.format(formatOutput) + " "
-                + "\n              to: " + to.format(formatOutput) + ")";
+        return "[E]" + super.toString() + "\nStart: " + eventStart.format(formatOutput)
+                + "\nEnd: " + eventEnd.format(formatOutput);
     }
 
     @Override
     public String toSave() {
-        return "E /" + super.toSave() + " / " + from.format(formatInput) + " / " + to.format(formatInput);
+        return "E /" + super.toSave() + " / " + eventStart.format(formatInput) + " / " + eventEnd.format(formatInput);
     }
 }

@@ -14,7 +14,7 @@ public class Ui {
     /**
      * Returns bye string to be displayed.
      *
-     * @return Bye string to be displayed.
+     * @return ByeCommand string to be displayed.
      */
     public String bye() {
         return "Bye. Hope to see you again soon!\n\n";
@@ -56,7 +56,7 @@ public class Ui {
         StringBuilder listStringToDisplay = new StringBuilder();
         listStringToDisplay.append("Here are your tasks:\n\n");
         for (int i = 0; i < data.len(); i++) {
-            listStringToDisplay.append(i + 1).append(". ").append(data.getData(i)).append("\n");
+            listStringToDisplay.append(i + 1).append(". ").append(data.getTaskAtIndex(i)).append("\n\n");
         }
         return listStringToDisplay.toString();
     }
@@ -71,16 +71,16 @@ public class Ui {
     public String listDate(MyData data, LocalDate date) {
         String listDateStringToDisplay = "Here are the tasks for the given date:\n\n";
         for (int i = 0; i < data.len(); i++) {
-            Task task = data.getData(i);
+            Task task = data.getTaskAtIndex(i);
             if (task instanceof Deadline) {
                 if (((Deadline) task).getDate().equals(date)) {
-                    listDateStringToDisplay += (i + 1) + ". " + data.getData(i) + "\n";
+                    listDateStringToDisplay += (i + 1) + ". " + data.getTaskAtIndex(i) + "\n\n";
                 }
             }
             if (task instanceof Event) {
                 Event taskEvent = (Event) task;
                 if (date.isAfter(taskEvent.getFromDate()) && date.isBefore(taskEvent.getToDate())) {
-                    listDateStringToDisplay += (i + 1) + ". " + data.getData(i) + "\n";
+                    listDateStringToDisplay += (i + 1) + ". " + data.getTaskAtIndex(i) + "\n\n";
                 }
             }
         }
@@ -112,15 +112,15 @@ public class Ui {
      * Return tasks that contains the keyword.
      *
      * @param data Data containing ArrayList of tasks.
-     * @param keyword Keyword to search tasks by.
+     * @param keyword Keyword to search by dueDate.
      * @return String of tasks that contains the keyword.
      */
     public String find(MyData data, String keyword) {
         StringBuilder findStringToDisplay = new StringBuilder();
-        findStringToDisplay.append("Here are tasks containing the keyword '").append(keyword).append("':\n\n");
+        findStringToDisplay.append("Here are tasks containing the keyword '").append(keyword).append("'\n\n");
         for (int i = 0; i < data.len(); i++) {
-            if (data.getData(i).inDescription(keyword)) {
-                findStringToDisplay.append(i + 1).append(". ").append(data.getData(i)).append("\n");
+            if (data.getTaskAtIndex(i).inDescription(keyword)) {
+                findStringToDisplay.append(i + 1).append(". ").append(data.getTaskAtIndex(i)).append("\n\n");
             }
         }
         return findStringToDisplay.toString();
