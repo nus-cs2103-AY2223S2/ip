@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import dudu.exception.DuduException;
 import dudu.exception.InvalidCommandException;
 import dudu.exception.TaskIoException;
 import dudu.task.Task;
@@ -59,7 +60,7 @@ public class Storage {
      *
      * @return List of tasks.
      */
-    public ArrayList<Task> loadTask() {
+    public ArrayList<Task> loadTask() throws DuduException {
         ArrayList<Task> list = new ArrayList<>();
         try {
             Scanner scanner = new Scanner(this.getFile());
@@ -67,7 +68,7 @@ public class Storage {
                 list.add(Task.decode(scanner.nextLine()));
             }
         } catch (TaskIoException | FileNotFoundException | InvalidCommandException ex) {
-            System.out.println(ex);
+            throw new DuduException(ex.toString());
         }
         return list;
     }

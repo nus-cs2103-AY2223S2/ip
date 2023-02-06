@@ -83,8 +83,6 @@ public class Dudu {
         try {
             command = Parser.parse(input);
             return command.execute(list, storage);
-        } catch (InvalidCommandException ex) {
-            return ex.toString();
         } catch (DuduException ex) {
             return ex.toString();
         }
