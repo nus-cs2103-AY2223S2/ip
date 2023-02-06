@@ -1,13 +1,13 @@
 package clippy.ui;
 
 import javafx.application.Application;
-import java.util.function.Consumer;
-import javafx.event.Event;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.Region;
@@ -21,6 +21,8 @@ public class Gui extends Application {
     private Label label;
     private Button sendButton;
     private TextField inputBox;
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/UserChadderson.jpeg"));
+    private Image clippy = new Image(this.getClass().getResourceAsStream("/images/Clippy.png"));
 
     @Override
     public void start(Stage stage) {
@@ -66,14 +68,10 @@ public class Gui extends Application {
         AnchorPane.setLeftAnchor(inputBox, 1.0);
 
         // 3. Set user input handlers
-        Consumer<Event> sendMessage = event -> {
-            dialogContainer.getChildren().add(createDialogLabel(inputBox.getText()));
-            inputBox.clear();
-        };
 
         // Enables sending of user input on button click or enter keypress
-        sendButton.setOnMouseClicked(event -> sendMessage.accept(event));
-        inputBox.setOnAction(event -> sendMessage.accept(event));
+        sendButton.setOnMouseClicked(event -> handleUserInput());
+        inputBox.setOnAction(event -> handleUserInput());
 
         // Autoscrolling when dialog box size exceeds window size
         dialogContainer.heightProperty().addListener(observable -> scrollPane.setVvalue(1.0));
@@ -85,5 +83,26 @@ public class Gui extends Application {
         result.setWrapText(true);
 
         return result;
+    }
+    /**
+     * Iteration 2:
+     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * the dialog container. Clears the user input after processing.
+     */
+    private void handleUserInput() {
+        Label userText = new Label(inputBox.getText());
+        Label clippyText = new Label(getResponse(inputBox.getText()));
+        dialogContainer.getChildren().addAll(
+                DialogBox.createUserDialog(userText, new ImageView(user)),
+                DialogBox.createClippyDialog(clippyText, new ImageView(clippy))
+        );
+        inputBox.clear();
+    }
+
+    /**
+     * TODO: replace this with actual Clippy command parser.
+     */
+    private String getResponse(String input) {
+        return "Clippy heard: " + input;
     }
 }
