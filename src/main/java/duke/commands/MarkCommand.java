@@ -3,9 +3,9 @@ package duke.commands;
 import java.io.IOException;
 
 import duke.exception.DukeException;
+import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
-import duke.storage.Storage;
 
 /**
  * Represents a Command that marks tasks in the TaskList as done.
@@ -13,6 +13,10 @@ import duke.storage.Storage;
 public class MarkCommand extends Command {
     private final int index;
 
+    /**
+     * Constructs a MarkCommand
+     * @param index specifies task to be marked as done
+     */
     public MarkCommand(int index) {
         this.index = index;
     }

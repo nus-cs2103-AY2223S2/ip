@@ -3,11 +3,12 @@ package duke.commands;
 import java.io.IOException;
 
 import duke.exception.DukeException;
-import duke.task.Task;
-import duke.task.ToDo;
-import duke.task.TaskList;
-import duke.ui.Ui;
 import duke.storage.Storage;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.ToDo;
+import duke.ui.Ui;
+
 
 /**
  * Represents a Command that only adds ToDo tasks to the TaskList.
@@ -15,6 +16,10 @@ import duke.storage.Storage;
 public class AddToDoCommand extends Command {
     private final String description;
 
+    /**
+     * Constructs an AddToDoCommand
+     * @param description
+     */
     public AddToDoCommand(String description) {
         this.description = description;
     }

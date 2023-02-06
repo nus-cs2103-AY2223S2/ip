@@ -1,21 +1,17 @@
 package duke.commands;
 
-import duke.exception.DukeException;
-import duke.commands.DeleteCommand;
-
-import duke.task.TaskList;
-import duke.ui.Ui;
-import org.junit.jupiter.api.Test;
-import storage.StorageStub;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import org.junit.jupiter.api.Test;
+
+import duke.exception.DukeException;
+import duke.task.TaskList;
+import duke.ui.Ui;
+import storage.StorageStub;
 
 public class DeleteCommandTest {
     @Test
     public void deleteCommand_deleteFromEmptyTaskList_throwsException() {
-        int index = 0;
         TaskList tasklist = new TaskList();
         StorageStub stub = new StorageStub();
         Ui ui = new Ui();

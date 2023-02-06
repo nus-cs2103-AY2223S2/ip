@@ -1,13 +1,15 @@
 package duke.commands;
 
+import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
+
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
-import org.junit.jupiter.api.Test;
 import storage.StorageStub;
 
-import static org.junit.jupiter.api.Assertions.fail;
 
 public class AddDeadlineCommandTest {
     @Test

@@ -29,10 +29,18 @@ public class Ui {
     private final Scanner in;
     private final PrintStream out;
 
+    /**
+     * Represents the Ui shown to user through the system. Default Constructor.
+     */
     public Ui() {
         this(System.in, System.out);
     }
 
+    /**
+     * Constructs Ui
+     * @param in input
+     * @param out output
+     */
     public Ui(InputStream in, PrintStream out) {
         this.in = new Scanner(in);
         this.out = out;
@@ -71,6 +79,10 @@ public class Ui {
         showToUser(LOADING_ERROR);
     }
 
+    /**
+     * Calls Ui to show an indexed list of tasks
+     * @param tasks task list
+     */
     public void showIndexedList(ArrayList<Task> tasks) {
         int count = 1;
         for (Task t : tasks) {

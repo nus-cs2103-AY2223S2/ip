@@ -3,10 +3,10 @@ package duke.commands;
 import java.io.IOException;
 
 import duke.exception.DukeException;
+import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
-import duke.storage.Storage;
 
 /**
  * Represents a Command that deletes tasks from TaskList.
@@ -14,6 +14,10 @@ import duke.storage.Storage;
 public class DeleteCommand extends Command {
     private final int index;
 
+    /**
+     * Constructs a DeleteCommand
+     * @param index specifies task to be deleted
+     */
     public DeleteCommand(int index) {
         this.index = index;
     }

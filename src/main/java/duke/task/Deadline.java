@@ -10,7 +10,7 @@ public class Deadline extends Task {
     private final LocalDate by;
 
     /**
-     * Constructor for deadline. Could throw DateTimeParseException which is handled in AddDeadlineCommand instead.
+     * Constructs a deadline task. Could throw DateTimeParseException which is handled in AddDeadlineCommand instead.
      * @param description for the task
      * @param by deadline date as a string
      */
@@ -20,8 +20,8 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String toTXT() {
-        return String.format("D | %s | %s", super.toTXT(), by);
+    public String toTxt() {
+        return String.format("D | %s | %s", super.toTxt(), by);
     }
 
     @Override

@@ -3,15 +3,21 @@ package duke.commands;
 import java.util.ArrayList;
 
 import duke.exception.DukeException;
+import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
-import duke.storage.Storage;
 
-
+/**
+ * Represents FindCommand that will display tasks matching a specific keyword
+ */
 public class FindCommand extends Command {
     private final String keyword;
 
+    /**
+     * Constructs a FindCommand
+     * @param keyword used to match with tasks in task list
+     */
     public FindCommand(String keyword) {
         this.keyword = keyword;
     }
@@ -33,6 +39,4 @@ public class FindCommand extends Command {
             ui.showToUser("No matching tasks were found.");
         }
     }
-
-
 }

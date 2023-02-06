@@ -3,12 +3,12 @@ package duke.commands;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 
-import duke.task.Task;
+import duke.exception.DukeException;
+import duke.storage.Storage;
 import duke.task.Deadline;
+import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
-import duke.storage.Storage;
-import duke.exception.DukeException;
 
 /**
  * Represents a Command that only adds Deadline tasks to the TaskList.
@@ -17,6 +17,11 @@ public class AddDeadlineCommand extends Command {
     private final String description;
     private final String deadline;
 
+    /**
+     * Constructs an AddDeadlineCommand
+     * @param description of the deadline task
+     * @param deadline date in String format
+     */
     public AddDeadlineCommand(String description, String deadline) {
         this.description = description;
         this.deadline = deadline;
@@ -29,7 +34,7 @@ public class AddDeadlineCommand extends Command {
      * @param ui Existing Ui used by the main Duke class.
      * @param storage Existing Storage used by the main Duke class.
      * @throws DukeException if something happened to task storage file during runtime or deadline field is not
-     * in the correct format.
+     *     in the correct format.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {

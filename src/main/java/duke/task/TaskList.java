@@ -29,11 +29,19 @@ public class TaskList {
         return this.list;
     }
 
+    /**
+     * Marks specified task as done
+     * @param index required to find specified task
+     */
     public void mark(int index) {
         Task currentTask = list.get(index);
         currentTask.markAsDone();
     }
 
+    /**
+     * Marks specified task as undone
+     * @param index required to find specified task
+     */
     public void unmark(int index) {
         Task currentTask = list.get(index);
         currentTask.markAsUndone();
