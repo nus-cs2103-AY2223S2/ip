@@ -37,6 +37,8 @@ public class Storage {
      * @param ui       Shared Ui Object
      */
     public Storage(String filePath, Ui ui) {
+        assert filePath != null;
+        assert ui != null;
         this.filePath = filePath;
         this.ui = ui;
     }
@@ -109,7 +111,7 @@ public class Storage {
                 taskList.add(event);
                 break;
             default:
-                // Will not reach here
+                assert false : "Should not reach here"; // Will not reach here
             }
         }
 

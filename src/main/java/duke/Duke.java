@@ -45,7 +45,7 @@ public class Duke {
             taskList = new TaskList();
         }
     }
-    
+
 
     /**
      * Generate a response to user input.
