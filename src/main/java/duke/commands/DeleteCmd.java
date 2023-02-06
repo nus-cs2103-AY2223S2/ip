@@ -28,7 +28,7 @@ public class DeleteCmd extends Command {
     public void execute() throws CommandExecutionError {
         int index = Parser.parseMarkUnmarkDeleteIndex(lineInput);
         this.task = this.taskList.removeTask(index);
-        
+
         this.response = "Noted. I've removed this task:\n"
                 + Ui.indentString(this.task.toString(), 1) + "\n"
                 + Ui.numTaskToString(taskList.countTasks());

@@ -20,7 +20,7 @@ public class FindCmd extends Command {
     public void execute() throws CommandExecutionError {
         String[] findKeywords = Parser.parseFindKeyword(this.lineInput);
         this.findResult = this.taskList.find(findKeywords);
-        
+
         this.response = "Here are matching tasks in your list:\n" + this.findResult.toString();
     }
 

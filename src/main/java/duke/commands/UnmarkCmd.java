@@ -30,7 +30,7 @@ public class UnmarkCmd extends Command {
     public void execute() throws ListIndexMissing {
         this.index = Parser.parseMarkUnmarkDeleteIndex(this.lineInput);
         this.task = taskList.get(this.index).unmarkDone();
-        
+
         String output = "Ok, I've marked this task as not done yet:";
         this.response = output + "\n" + Ui.indentString(this.task.toString(), 1);
     }

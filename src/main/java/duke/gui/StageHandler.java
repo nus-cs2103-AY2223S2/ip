@@ -16,6 +16,9 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 public class StageHandler {
+
+    protected TaskList tasks;
+
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/tiger.jpg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/owl.jpg"));
 
@@ -25,11 +28,9 @@ public class StageHandler {
     private Button sendButton;
     private Scene scene;
 
-    protected TaskList tasks;
-
     public StageHandler(Stage stage, TaskList tasks) {
         this.tasks = tasks;
-    // The container for the content of the chat to scroll.
+        // The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
@@ -45,7 +46,7 @@ public class StageHandler {
         stage.setScene(scene);
         stage.show();
 
-    // Formatting the window to look as expected
+        // Formatting the window to look as expected
         stage.setTitle("Duke");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
@@ -80,7 +81,7 @@ public class StageHandler {
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
         });
-    
+
         userInput.setOnAction((event) -> {
             handleUserInput();
         });
@@ -99,7 +100,7 @@ public class StageHandler {
         default:
             dialogBox = new DialogBox(messageLabel, new ImageView(dukeImage), true);
         }
-        
+
         dialogContainer.getChildren().add(dialogBox);
     }
 

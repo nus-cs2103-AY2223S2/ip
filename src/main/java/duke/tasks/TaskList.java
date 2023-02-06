@@ -57,8 +57,8 @@ public class TaskList {
     }
 
     /**
-     * Searches for tasks that contains the search keyword
-     * @param keyword
+     * Searches for tasks that contains the search keyword(s)
+     * @param keywords Search query
      * @return A task list containing tasks which contain the search keyword
      */
     public TaskList find(String... keywords) {

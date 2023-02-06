@@ -29,7 +29,7 @@ public class MarkCmd extends Command {
     public void execute() throws ListIndexMissing {
         this.index = Parser.parseMarkUnmarkDeleteIndex(lineInput);
         this.task = taskList.get(this.index).markDone();
-        
+
         String output = "Nice! I've marked this task as done:";
         this.response = output + "\n" + Ui.indentString(this.task.toString(), 1);
     }

@@ -26,8 +26,8 @@ public class Duke extends Application {
     @Override
     public void start(Stage stage) {
         StageHandler stageHandler = new StageHandler(stage, tasks);
-        stageHandler.displayMessage(Profile.DUKE,"Hello I'm Duke! \nWhat can I do for you?");
+        stageHandler.displayMessage(Profile.DUKE, "Hello I'm Duke! \nWhat can I do for you?");
     }
 
-    
+
 }
