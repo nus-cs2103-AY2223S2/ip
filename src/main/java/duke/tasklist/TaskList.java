@@ -2,6 +2,7 @@ package duke.tasklist;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import duke.exception.DukeException;
 import duke.storage.Storage;
@@ -105,11 +106,9 @@ public class TaskList {
      */
     public TaskList matches(String pattern) throws DukeException {
         TaskList filtered = new TaskList();
-        for (Task task: tasks) {
-            if (task.matches(pattern)) {
-                filtered.add(task);
-            }
-        }
+        filtered.tasks = tasks.stream().filter((Task task) -> {
+            return task.matches(pattern);
+        }).collect(Collectors.toList());
         return filtered;
     }
 
