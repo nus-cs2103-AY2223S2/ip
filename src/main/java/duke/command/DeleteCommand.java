@@ -13,9 +13,9 @@ public class DeleteCommand extends Command {
         this.index = index;
     }
 
-    public void execute(TaskList l, Ui ui, Storage s) {
+    public String execute(TaskList l, Ui ui, Storage s) {
         Task t = l.remove(index);
-        ui.showDelete(t, l);
+        return ui.showDelete(t, l);
     }
 
 }

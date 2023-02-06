@@ -10,5 +10,5 @@ public abstract class Command {
         return false;
     }
 
-    public abstract void execute(TaskList l, Ui ui, Storage s) throws Exception;
+    public abstract String execute(TaskList l, Ui ui, Storage s) throws Exception;
 }

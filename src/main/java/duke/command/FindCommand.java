@@ -12,7 +12,7 @@ public class FindCommand extends Command {
         this.keyword = keyword;
     }
 
-    public void execute(TaskList l, Ui ui, Storage s) {
-        l.find(keyword, ui);
+    public String execute(TaskList l, Ui ui, Storage s) {
+        return l.find(keyword, ui);
     }
 }
