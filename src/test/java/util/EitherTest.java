@@ -1,6 +1,7 @@
 package util;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
 public class EitherTest {
@@ -11,7 +12,7 @@ public class EitherTest {
         assertEquals(true, left.isLeft());
         assertEquals(false, right.isLeft());
     }
-    
+
     @Test
     public void testRight() {
         var left = Either.left(69);
@@ -32,7 +33,7 @@ public class EitherTest {
         assertEquals(Either.right("Random error").toString(), right.map(x -> x + 1).toString());
     }
 
-    @Test 
+    @Test
     public void flatMapLeftSuccess() {
         var actual = Either.left(20).flatMap(x -> Either.left(x + 20));
         var expected = Either.left(40);
