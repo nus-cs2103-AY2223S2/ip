@@ -25,6 +25,7 @@ public class Parser {
         strToCommand.put("unmark", new UnmarkCommand());
         strToCommand.put("find", new FindCommand());
         strToCommand.put("list", new ListCommand());
+        strToCommand.put("archive", new ArchiveCommand());
         strToCommand.put("bye", new ByeCommand());
     }
 
