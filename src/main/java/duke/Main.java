@@ -35,7 +35,6 @@ public class Main extends Application {
             });
 
             stage.show();
-
             duke.start();
         } catch (IOException e) {
             e.printStackTrace();

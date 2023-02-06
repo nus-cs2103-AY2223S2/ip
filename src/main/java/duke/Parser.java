@@ -1,7 +1,5 @@
 package duke;
 
-import duke.task.TaskList;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -49,7 +47,7 @@ public class Parser {
      * Returns the front part of description of task.
      *
      * @param description Description of task.
-     * @param split String to split the description.
+     * @param split Substring to split the description.
      * @return Front part of the description as String.
      */
     public String getPreDescription(String description, String split) {
@@ -60,7 +58,7 @@ public class Parser {
      * Returns the back part of description of task.
      *
      * @param description Description of task.
-     * @param split String to split the description.
+     * @param split Substring to split the description.
      * @return Back part of the description as String.
      */
     public String getPostDescription(String description, String split) {

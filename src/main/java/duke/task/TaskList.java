@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Handles storing of the tasks to task list.
  */
 public class TaskList {
-    private ArrayList<Task> taskList;
+    private final ArrayList<Task> taskList;
 
     /**
      * Constructor for TaskList class.

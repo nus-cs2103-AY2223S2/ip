@@ -12,6 +12,14 @@ import duke.task.Todo;
  * Handles duke.Duke, a Personal Assistant Chatbot that helps a person to keep track of various things.
  */
 public class Duke {
+    static final int TODO_LENGTH = "todo ".length();
+    static final int EVENT_LENGTH = "event ".length();
+    static final int DEADLINE_LENGTH = "deadline ".length();
+    static final int FIND_LENGTH = "find ".length();
+    static final String FROM_SUBSTRING = " /from ";
+    static final String TO_SUBSTRING = " /to ";
+    static final String BY_SUBSTRING = " /by ";
+
     /**
      * Handles identifying task type.
      */
@@ -20,10 +28,10 @@ public class Duke {
         EVENT,
         DEADLINE
     }
-    private TaskList taskList;
-    private FxUi ui;
-    private Storage storage;
-    private Parser parser;
+    private final TaskList taskList;
+    private final FxUi ui;
+    private final Storage storage;
+    private final Parser parser;
 
     /**
      * Duke constructor.
@@ -35,7 +43,7 @@ public class Duke {
         this.taskList = new TaskList();
         this.storage = new Storage(taskList);
         this.parser = new Parser();
-        storage.initalizeList();
+        storage.initializeList();
     }
 
     /**
@@ -49,17 +57,20 @@ public class Duke {
         case TODO:
             Todo todoTask = new Todo(description);
             taskList.add(todoTask);
-            ui.displayText("Got it. I've added this task: " + todoTask.toString());
+            ui.displayText("Got it. I've added this task: " + todoTask);
             ui.displayText("Now you have " + taskList.size() + " tasks in the list.");
             break;
         case EVENT:
             try {
-                String modifiedDescription = parser.getPostDescription(description, " /from ");
-                LocalDate fromDate = parser.getDateTime(parser.getPreDescription(modifiedDescription, " /to "));
-                LocalDate toDate = parser.getDateTime(parser.getPostDescription(modifiedDescription, " /to "));
-                Event eventTask = new Event(parser.getPreDescription(description, " /from "), fromDate, toDate);
+                String modifiedDescription = parser.getPostDescription(description, FROM_SUBSTRING);
+
+                String newDescription = parser.getPreDescription(description, FROM_SUBSTRING);
+                LocalDate fromDate = parser.getDateTime(parser.getPreDescription(modifiedDescription, TO_SUBSTRING));
+                LocalDate toDate = parser.getDateTime(parser.getPostDescription(modifiedDescription, TO_SUBSTRING));
+                Event eventTask = new Event(newDescription, fromDate, toDate);
                 taskList.add(eventTask);
-                ui.displayText("Got it. I've added this task: " + eventTask.toString());
+
+                ui.displayText("Got it. I've added this task: " + eventTask);
                 ui.displayText("Now you have " + taskList.size() + " tasks in the list.");
                 break;
             } catch (Exception e) {
@@ -69,10 +80,12 @@ public class Duke {
             }
         case DEADLINE:
             try {
-                Deadline deadlineTask = new Deadline(parser.getPreDescription(description, " /by "),
-                        parser.getDateTime(parser.getPostDescription(description, " /by ")));
+                String newDescription = parser.getPreDescription(description, BY_SUBSTRING);
+                LocalDate byDate = parser.getDateTime(parser.getPostDescription(description, BY_SUBSTRING));
+                Deadline deadlineTask = new Deadline(newDescription, byDate);
                 taskList.add(deadlineTask);
-                ui.displayText("Got it. I've added this task: " + deadlineTask.toString());
+
+                ui.displayText("Got it. I've added this task: " + deadlineTask);
                 ui.displayText("Now you have " + taskList.size() + " tasks in the list.");
                 break;
             } catch (Exception e) {
@@ -204,19 +217,19 @@ public class Duke {
                 unmark(Integer.parseInt(parser.getDescription(userInput)) - 1);
                 break;
             case "todo":
-                addTask(parser.getDescription(userInput, 5), TaskType.TODO);
+                addTask(parser.getDescription(userInput, TODO_LENGTH), TaskType.TODO);
                 break;
             case "event":
-                addTask(parser.getDescription(userInput, 6), TaskType.EVENT);
+                addTask(parser.getDescription(userInput, EVENT_LENGTH), TaskType.EVENT);
                 break;
             case "deadline":
-                addTask(parser.getDescription(userInput, 9), TaskType.DEADLINE);
+                addTask(parser.getDescription(userInput, DEADLINE_LENGTH), TaskType.DEADLINE);
                 break;
             case "delete":
                 delete(Integer.parseInt(parser.getDescription(userInput)) - 1);
                 break;
             case "find":
-                find(parser.getDescription(userInput, 5));
+                find(parser.getDescription(userInput, FIND_LENGTH));
                 break;
             default:
                 ui.displayText("I'm sorry, but I don't know what that means");
