@@ -30,6 +30,6 @@ public class MarkDoneCommand extends Command {
             tasks.unmark(index - 1);
         }
         storage.store(tasks);
-        return listAll(tasks);
+        return tasks.toString();
     }
 }

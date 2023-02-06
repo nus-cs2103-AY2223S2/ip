@@ -118,9 +118,12 @@ public class TaskList implements Serializable {
     }
 
 
-    public List<Task> getList() {
-        return list;
+    @Override
+    public String toString() {
+        StringBuilder str = new StringBuilder();
+        for (int i = 0; i < this.list.size(); i++) {
+            str.append(String.format("%d: %s\n", i + 1, this.list.get(i)));
+        }
+        return str.toString();
     }
-
-
 }

@@ -19,7 +19,7 @@ public class DeleteCommand extends Command {
         try {
             tasks.delete(index - 1);
             storage.store(tasks);
-            return "Removal successful. New list:\n" + listAll(tasks);
+            return "Removal successful. New list:\n" + tasks.toString();
         } catch (IndexOutOfBoundsException e) {
             throw new TaskDeletionException("Item not found");
         }

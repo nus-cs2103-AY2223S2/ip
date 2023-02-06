@@ -27,6 +27,6 @@ public class AddDeadlineCommand extends Command {
     public String execute(TaskList tl, Storage storage) throws TaskCreationException {
         tl.addDeadline(desc, deadline);
         storage.store(tl);
-        return listAll(tl);
+        return tl.toString();
     }
 }

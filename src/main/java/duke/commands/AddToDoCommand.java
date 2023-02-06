@@ -25,6 +25,6 @@ public class AddToDoCommand extends Command {
     public String execute(TaskList tl, Storage storage) throws TaskCreationException {
         tl.addTodo(desc);
         storage.store(tl);
-        return listAll(tl);
+        return tl.toString();
     }
 }

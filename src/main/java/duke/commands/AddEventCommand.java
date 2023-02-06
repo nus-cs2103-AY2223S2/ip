@@ -31,6 +31,6 @@ public class AddEventCommand extends Command {
     public String execute(TaskList tl, Storage storage) throws TaskCreationException {
         tl.addEvent(desc, from, to);
         storage.store(tl);
-        return listAll(tl);
+        return tl.toString();
     }
 }
