@@ -94,6 +94,12 @@ public class Ui {
      * @param stage The stage to set up.
      */
     public void setStage(Stage stage) {
+        double windowHeight = 600.0;
+        double windowWidth = 400.0;
+        double inputHeight = 60.0;
+        double inputWidth = 340.0;
+        double padding = 16.0;
+
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
@@ -104,12 +110,12 @@ public class Ui {
 
         stage.setTitle("Sam");
         stage.setResizable(false);
-        stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
+        stage.setMinHeight(windowHeight);
+        stage.setMinWidth(windowWidth);
 
-        mainLayout.setPrefSize(400.0, 600.0);
+        mainLayout.setPrefSize(windowWidth, windowHeight);
 
-        scrollPane.setPrefSize(400.0, 540.0);
+        scrollPane.setPrefSize(windowWidth, windowHeight - inputHeight);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
@@ -117,12 +123,12 @@ public class Ui {
         scrollPane.setFitToWidth(true);
 
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
-        dialogContainer.setPadding(new Insets(16));
+        dialogContainer.setPadding(new Insets(padding));
 
-        userInput.setPrefWidth(340.0);
-        userInput.setPrefHeight(60.0);
-        sendButton.setPrefWidth(60.0);
-        sendButton.setPrefHeight(60.0);
+        userInput.setPrefWidth(inputWidth);
+        userInput.setPrefHeight(inputHeight);
+        sendButton.setPrefWidth(windowWidth - inputWidth);
+        sendButton.setPrefHeight(inputHeight);
 
         AnchorPane.setTopAnchor(scrollPane, 1.0);
         AnchorPane.setBottomAnchor(sendButton, 1.0);
