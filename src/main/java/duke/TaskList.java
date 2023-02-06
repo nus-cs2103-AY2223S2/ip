@@ -95,6 +95,17 @@ public class TaskList {
         }
     }
 
+    public void findTask(String keyword) {
+        ArrayList<Task> matchingTasks = new ArrayList<Task>();
+        for (Task task : taskList) {
+            if (task.toString().contains(keyword)) {
+                matchingTasks.add(task);
+            }
+        }
+        TaskList matches = new TaskList(matchingTasks);
+        System.out.println("Here are the matching tasks in your list:\n" + matches.toString());
+    }
+
     public int getSize() {
         return taskList.size();
     }
