@@ -21,6 +21,7 @@ public class Parser {
     private static final String BYE = "bye";
     private static final String FIND = "find";
     private static final String EDIT = "edit";
+    private static final String HELP = "help";
 
     /**
      * Split the command into different parts.
@@ -113,6 +114,9 @@ public class Parser {
         case EDIT:
             parsedCommand = new EditCommand(arr[1].trim(), arr[2].trim(), arr[3].trim());
             break;
+        case HELP:
+                parsedCommand = new HelpCommand();
+                break;
         default:
             System.out.println("No such command!");
         }
