@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import sam.parser.SamInvalidDateException;
+import sam.parser.SamInvalidTaskException;
 
 /**
  * Represents a list of tasks.
@@ -84,6 +85,30 @@ public class TaskList {
         Task task = getTask(id);
         task.update(argsMap);
         return task;
+    }
+
+    /**
+     * Clones the task with the specified id.
+     *
+     * @param id      The id of the task to update.
+     * @param argsMap A Map of the task arguments to replace.
+     * @return {@code true} if successful.
+     * @throws SamInvalidDateException If a date string is in the wrong format.
+     * @throws SamInvalidTaskException If the task cloning fails.
+     */
+    public Task cloneTask(int id, Map<String, String> argsMap)
+            throws SamInvalidDateException, SamInvalidTaskException {
+        if (!isValidId(id)) {
+            return null;
+        }
+        try {
+            Task task = (Task) getTask(id).clone();
+            task.update(argsMap);
+            addTask(task);
+            return task;
+        } catch (CloneNotSupportedException e) {
+            throw new SamInvalidTaskException();
+        }
     }
 
     /**

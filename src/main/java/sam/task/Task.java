@@ -10,7 +10,7 @@ import sam.parser.SamInvalidDateException;
 /**
  * Represents a user task.
  */
-public abstract class Task {
+public abstract class Task implements Cloneable {
     private static final String DATE_PATTERN = "MMM d yyyy";
 
     private String title;
@@ -101,4 +101,9 @@ public abstract class Task {
      * @return A string representation of the task.
      */
     public abstract String toSaveFormat();
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
 }

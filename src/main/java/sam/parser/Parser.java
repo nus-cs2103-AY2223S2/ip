@@ -6,6 +6,7 @@ import java.time.format.DateTimeParseException;
 import java.util.Map;
 
 import sam.command.AddCommand;
+import sam.command.CloneCommand;
 import sam.command.Command;
 import sam.command.DeleteCommand;
 import sam.command.EditCommand;
@@ -123,6 +124,9 @@ public class Parser {
             break;
         case "edit":
             c = new EditCommand(args);
+            break;
+        case "clone":
+            c = new CloneCommand(args);
             break;
         default:
             throw new SamUnknownCommandException();

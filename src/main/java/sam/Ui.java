@@ -31,6 +31,7 @@ public class Ui {
         FIND("I found %d matching tasks:"),
         FIND_EMPTY("None of your tasks match!"),
         EDIT("Okay, I've updated the following task:"),
+        CLONE("Okay, I've cloned the following task:"),
         INVALID_DATE("Please write dates as 'd/M/yyyy'!"),
         INVALID_INT("Oops, I was expecting an integer!"),
         INVALID_TASK("Oops, that task does not exist!"),
