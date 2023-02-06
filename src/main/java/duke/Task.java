@@ -7,11 +7,11 @@ package duke;
 public class Task {
 
     protected String description;
-    protected boolean done;
+    protected boolean isDone;
 
     public Task(String description) {
         this.description = description;
-        this.done = false;
+        this.isDone = false;
     }
 
     /**
@@ -20,7 +20,7 @@ public class Task {
      * @return String of done or not icon
      */
     public String getStatusIcon() {
-        return (done ? "X" : " "); // mark done task with X
+        return (isDone ? "X" : " "); // mark done task with X
     }
 
     /**
@@ -43,7 +43,7 @@ public class Task {
      * @param val boolean value of whether task is done
      */
     public void setDone(boolean val) {
-        done = val;
+        isDone = val;
     }
 
     public String getDescription() {
