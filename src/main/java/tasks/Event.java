@@ -13,11 +13,12 @@ public class Event extends Task {
      * Constructs a task that takes place within a time period.
      *
      * @param description   Description of the task.
+     * @param priority Priority of the task.
      * @param startDateTime Starting date and time of the task.
      * @param endDateTime   Ending date and time of the task.
      */
-    public Event(String description, LocalDateTime startDateTime, LocalDateTime endDateTime) {
-        super(description);
+    public Event(String description, int priority, LocalDateTime startDateTime, LocalDateTime endDateTime) {
+        super(description, priority);
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
     }

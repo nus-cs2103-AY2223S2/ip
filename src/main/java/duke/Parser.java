@@ -38,47 +38,51 @@ public class Parser {
             return new String[] {"list"};
         } else if (toParse.startsWith("mark")) {
             Matcher matcher = compileAndMatch("mark (.*)", toParse);
-            if (!foundMatch(matcher, 1)) {
+            if (noMatchFound(matcher, 1)) {
                 throw new InvalidCommandException("The task number of a mark command cannot be empty.");
             }
             return new String[] {"mark", matcher.group(1)};
         } else if (toParse.startsWith("unmark")) {
             Matcher matcher = compileAndMatch("unmark (.*)", toParse);
-            if (!foundMatch(matcher, 1)) {
+            if (noMatchFound(matcher, 1)) {
                 throw new InvalidCommandException("The task number of an unmark command cannot be empty.");
             }
             return new String[] {"unmark", matcher.group(1)};
         } else if (toParse.startsWith("delete")) {
             Matcher matcher = compileAndMatch("delete (.*)", toParse);
-            if (!foundMatch(matcher, 1)) {
+            if (noMatchFound(matcher, 1)) {
                 throw new InvalidCommandException(
                     "The task number to be deleted must be specified, and must be an integer.");
             }
             return new String[] {"delete", matcher.group(1)};
         } else if (toParse.startsWith("find")) {
             Matcher matcher = compileAndMatch("find (.*)", toParse);
-            if (!foundMatch(matcher, 1)) {
+            if (noMatchFound(matcher, 1)) {
                 throw new InvalidCommandException("Must supply a search string to the find command.");
             }
             return new String[] {"find", matcher.group(1)};
         } else if (toParse.startsWith("todo")) {
-            Matcher matcher = compileAndMatch("todo (.*)", toParse);
-            if (!foundMatch(matcher, 1)) {
-                throw new InvalidCommandException("The description of a todo cannot be empty.");
+            Matcher matcher = compileAndMatch("todo (.*) /prio (\\d+)", toParse);
+            if (noMatchFound(matcher, 2)) {
+                throw new InvalidCommandException(
+                    "The description of a todo cannot be empty, and the priority must be a positive integer.");
             }
-            return new String[] {"todo", matcher.group(1)};
+            return new String[] {"todo", matcher.group(1), matcher.group(2)};
         } else if (toParse.startsWith("deadline")) {
-            Matcher matcher = compileAndMatch("deadline (.*) /by (.*)", toParse);
-            if (!foundMatch(matcher, 2)) {
-                throw new InvalidCommandException("The end date of a deadline cannot be empty.");
+            Matcher matcher = compileAndMatch("deadline (.*) /by (.*) /prio (\\d+)", toParse);
+            if (noMatchFound(matcher, 3)) {
+                throw new InvalidCommandException(
+                    "The end date of a deadline cannot be empty, and the priority must be a positive integer.");
             }
-            return new String[] {"deadline", matcher.group(1), matcher.group(2)};
+            return new String[] {"deadline", matcher.group(1), matcher.group(3), matcher.group(2)};
         } else if (toParse.startsWith("event")) {
-            Matcher matcher = compileAndMatch("event (.*) /from (.*) /to (.*)", toParse);
-            if (!foundMatch(matcher, 3)) {
-                throw new InvalidCommandException("An event must have a nonempty from date and a to date.");
+            Matcher matcher = compileAndMatch("event (.*) /from (.*) /to (.*) /prio (\\d+)", toParse);
+            if (noMatchFound(matcher, 4)) {
+                throw new InvalidCommandException(
+                    "An event must have a nonempty from date and to date, and the priority must be a positive integer."
+                );
             }
-            return new String[] {"event", matcher.group(1), matcher.group(2), matcher.group(3)};
+            return new String[] {"event", matcher.group(1), matcher.group(4), matcher.group(2), matcher.group(3)};
         } else {
             throw new UnknownCommandException();
         }
@@ -89,24 +93,24 @@ public class Parser {
      *
      * @param matcher            Matcher containing the regex and the string to be matched with.
      * @param expectedGroupCount Number of groups that should be matched.
-     * @return Whether the matcher found a result with the correct number of groups.
+     * @return Whether the matcher did not find a result with the correct number of groups.
      */
-    private static boolean foundMatch(Matcher matcher, int expectedGroupCount) {
+    private static boolean noMatchFound(Matcher matcher, int expectedGroupCount) {
         if (!matcher.find()) {
-            return false;
+            return true;
         }
 
         try {
             // Ignore the first group which is the entire matched string
             for (int i = 1; i < expectedGroupCount + 1; i++) {
                 if (matcher.group(i).length() == 0) {
-                    return false;
+                    return true;
                 }
             }
         } catch (IndexOutOfBoundsException e) {
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 
     /**
@@ -117,7 +121,8 @@ public class Parser {
      * @throws DukeException if the command given is invalid or is not a command known by the chatbot.
      */
     public static String[] parseFileCommand(String toParse) throws DukeException {
-        Pattern fileCommandPattern = Pattern.compile("\\d+\\.\\[([TDE])]\\[([ X])\\] (.*)");
+        // Groups: 1: TaskType, 2: isDone, 3: priority, 4: task details
+        Pattern fileCommandPattern = Pattern.compile("\\d+\\.\\[([TDE])]\\[([ X])\\]\\[(\\d+)\\] (.*)");
         Pattern deadlinePattern = Pattern.compile("(.*) /by (.*)");
         Pattern eventPattern = Pattern.compile("(.*) /from (.*) /to (.*)");
         Matcher fileCommandMatcher = fileCommandPattern.matcher(toParse);
@@ -127,19 +132,20 @@ public class Parser {
         }
         switch (fileCommandMatcher.group(1)) {
         case "T":
-            return new String[] {"T", fileCommandMatcher.group(2), fileCommandMatcher.group(3)};
+            return new String[] {"T", fileCommandMatcher.group(2), fileCommandMatcher.group(3),
+                fileCommandMatcher.group(4)};
         case "D":
-            individualMatcher = deadlinePattern.matcher(fileCommandMatcher.group(3));
+            individualMatcher = deadlinePattern.matcher(fileCommandMatcher.group(4));
             if (individualMatcher.find()) {
-                return new String[] {"D", fileCommandMatcher.group(2), individualMatcher.group(1),
-                    individualMatcher.group(2)};
+                return new String[] {"D", fileCommandMatcher.group(2), fileCommandMatcher.group(3),
+                    individualMatcher.group(1), individualMatcher.group(2)};
             }
             // Fallthrough
         case "E":
-            individualMatcher = eventPattern.matcher(fileCommandMatcher.group(3));
+            individualMatcher = eventPattern.matcher(fileCommandMatcher.group(4));
             if (individualMatcher.find()) {
-                return new String[] {"D", fileCommandMatcher.group(2), individualMatcher.group(1),
-                    individualMatcher.group(2), individualMatcher.group(3)};
+                return new String[] {"D", fileCommandMatcher.group(2), fileCommandMatcher.group(3),
+                    individualMatcher.group(1), individualMatcher.group(2), individualMatcher.group(3)};
             }
             // Fallthrough
         default:

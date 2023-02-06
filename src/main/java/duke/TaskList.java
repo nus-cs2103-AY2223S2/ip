@@ -34,16 +34,25 @@ public class TaskList {
         Task newTask;
         for (String[] fileCommand : dataFileTasks) {
             assert fileCommand.length > 0;
+            int priority;
+            try {
+                priority = Integer.parseInt(fileCommand[2]);
+                if (priority <= 0) {
+                    throw new InvalidDataFileException();
+                }
+            } catch (Exception e) {
+                throw new InvalidDataFileException();
+            }
             switch (fileCommand[0]) {
             case "T":
-                newTask = new ToDo(fileCommand[2]);
+                newTask = new ToDo(fileCommand[3], priority);
                 break;
             case "D":
-                newTask = new Deadline(fileCommand[2], Parser.parseDate(fileCommand[3], true));
+                newTask = new Deadline(fileCommand[3], priority, Parser.parseDate(fileCommand[4], true));
                 break;
             case "E":
-                newTask = new Event(fileCommand[2], Parser.parseDate(fileCommand[3], true),
-                    Parser.parseDate(fileCommand[4], true));
+                newTask = new Event(fileCommand[3], priority, Parser.parseDate(fileCommand[4], true),
+                    Parser.parseDate(fileCommand[5], true));
                 break;
             default:
                 throw new InvalidDataFileException();

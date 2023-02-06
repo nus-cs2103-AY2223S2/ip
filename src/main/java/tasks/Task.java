@@ -21,19 +21,27 @@ public abstract class Task {
      * Whether the task is done or not.
      */
     protected boolean isDone;
+    /**
+     * A positive integer representing how important the task is, where lower values are more important.
+     */
+    protected int priority;
 
     /**
      * Constructs a new task.
      *
      * @param description Description of the task.
+     * @param priority Priority of the task.
      */
-    public Task(String description) {
+    public Task(String description, int priority) {
         this.description = description;
         this.isDone = false;
+        assert priority >= 0 : "Attempted to create task with negative priority";
+        this.priority = priority;
     }
 
     /**
      * Gets the date time formatter for input.
+     *
      * @return Date time formatter for input.
      */
     public static DateTimeFormatter getInputDateTimeFormatter() {
@@ -42,6 +50,7 @@ public abstract class Task {
 
     /**
      * Gets the date time formatter for output.
+     *
      * @return Date time formatter for output.
      */
     public static DateTimeFormatter getOutputDateTimeFormatter() {
@@ -55,6 +64,17 @@ public abstract class Task {
      */
     public void setDone(boolean done) {
         this.isDone = done;
+    }
+
+    /**
+     * Sets the priority of a task.
+     *
+     * @param priority The priority level to set the task to.
+     */
+    public void setPriority(int priority) {
+        // Checking for negative priority is done in Parser
+        assert priority >= 0 : "Attempted to set negative priority";
+        this.priority = priority;
     }
 
     /**
@@ -87,6 +107,6 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "]" + " " + this.description;
+        return "[" + this.getStatusIcon() + "]" + "[" + this.priority + "]" + " " + this.description;
     }
 }

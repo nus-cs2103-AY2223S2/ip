@@ -8,9 +8,10 @@ public class ToDo extends Task {
      * Construct a new task that can be completed.
      *
      * @param description Description of the task.
+     * @param priority Priority of the task.
      */
-    public ToDo(String description) {
-        super(description);
+    public ToDo(String description, int priority) {
+        super(description, priority);
     }
 
     @Override

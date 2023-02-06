@@ -12,10 +12,11 @@ public class Deadline extends Task {
      * Constructs a task with a deadline.
      *
      * @param description Description of the task.
+     * @param priority Priority of the task.
      * @param endDateTime Deadline of the task.
      */
-    public Deadline(String description, LocalDateTime endDateTime) {
-        super(description);
+    public Deadline(String description, int priority, LocalDateTime endDateTime) {
+        super(description, priority);
         this.endDateTime = endDateTime;
     }
 
