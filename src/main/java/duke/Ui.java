@@ -101,6 +101,7 @@ public class Ui {
             temp = printNewTask(currTask);
             break;
         }
+        assert temp.size() > 0;
         return temp;
     }
 

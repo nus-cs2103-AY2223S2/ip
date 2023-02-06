@@ -51,6 +51,7 @@ public class Storage {
             String type = params[0];
             boolean isCompleted = params[1].equals("1");
             String description = params[2];
+            assert description != null;
 
             if (type.equals("T")) {
                 this.myTaskList.addTask(new ToDo(description, isCompleted));
