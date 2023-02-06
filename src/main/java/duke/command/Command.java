@@ -105,6 +105,7 @@ public abstract class Command {
         public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
             Task task;
             try {
+                assert index >= 0: "Index must be non-negative.";
                 task = tasks.get(index);
             } catch (IndexOutOfBoundsException e) {
                 throw new DukeException("Invalid index entered!");
@@ -145,6 +146,7 @@ public abstract class Command {
         public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
             Task task;
             try {
+                assert index >= 0: "Index must be non-negative.";
                 task = tasks.get(index);
             } catch (IndexOutOfBoundsException e) {
                 throw new DukeException("Invalid index entered!");
@@ -185,6 +187,7 @@ public abstract class Command {
         public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
             Task task;
             try {
+                assert index >= 0: "Index must be non-negative.";
                 task = tasks.get(index);
             } catch (IndexOutOfBoundsException e) {
                 throw new DukeException("Invalid index entered!");
