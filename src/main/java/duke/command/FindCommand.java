@@ -15,14 +15,15 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         String result = taskList.find(this.keyword);
+        String str;
         if (result.equals("")) {
-            System.out.println("Sorry, I didn't find any matching tasks...");
+            str = "Sorry, I didn't find any matching tasks...";
         } else {
-            result = "Here, these are the tasks I found that match your search:\n" + result;
-            System.out.println(result);
+            str = "Here, these are the tasks I found that match your search:\n" + result;
         }
+        return str;
     }
 
     @Override

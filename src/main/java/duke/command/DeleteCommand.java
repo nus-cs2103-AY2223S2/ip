@@ -16,9 +16,10 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        System.out.println(taskList.deleteTask(this.index));
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        String str = taskList.deleteTask(this.index);
         storage.save(taskList);
+        return str;
     }
 
     @Override

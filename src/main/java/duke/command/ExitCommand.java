@@ -10,9 +10,9 @@ import duke.Ui;
  */
 public class ExitCommand extends Command {
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         storage.save(taskList);
-        System.out.println("Goodbye! It's been a pleasure talking to you!");
+        return "Goodbye! It's been a pleasure talking to you!";
     }
 
     @Override
