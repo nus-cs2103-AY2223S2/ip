@@ -1,5 +1,6 @@
 package duke;
 
+import duke.exceptions.EmptyCommandException;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -21,8 +22,8 @@ public class Gui extends Application {
     private Button sendButton;
     private Scene scene;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Alice.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Bob.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/Alice.png"));
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Bob.png"));
 
     private Duke duke;
 
@@ -34,7 +35,6 @@ public class Gui extends Application {
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
-
         userInput = new TextField();
         sendButton = new Button("Send");
 
@@ -42,7 +42,6 @@ public class Gui extends Application {
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
         scene = new Scene(mainLayout);
-
         stage.setScene(scene);
         stage.show();
 
@@ -61,11 +60,8 @@ public class Gui extends Application {
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
 
-        // You will need to import `javafx.scene.layout.Region` for this.
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
-
         userInput.setPrefWidth(325.0);
-
         sendButton.setPrefWidth(55.0);
 
         AnchorPane.setTopAnchor(scrollPane, 1.0);
@@ -77,37 +73,37 @@ public class Gui extends Application {
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
-        duke = new Duke("task.txt");
+        //Create Duke instance
+        duke = new Duke("tasks.txt");
 
+        //Welcome Msg
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(new Label(duke.getWelcomeMsg()), new ImageView(dukeImage))
         );
 
-        //Part 3. Add functionality to handle user input.
-        sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
-        });
 
-        userInput.setOnAction((event) -> {
-            handleUserInput();
-        });
+        //Part 3. Add functionality to handle user input.
+        sendButton.setOnMouseClicked((event) -> handleUserInput());
+        userInput.setOnAction((event) -> handleUserInput());
 
     }
 
     private void handleUserInput() {
-        if (userInput.getText().equals("")) { // CAN DLT EMPTYCOMMANDEXC
+        Label userText = new Label(userInput.getText());
+        try {
+            Label dukeText = new Label(getResponse(userInput.getText()));
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(userText, new ImageView(userImage)),
+                    DialogBox.getDukeDialog(dukeText, new ImageView(dukeImage))
+            );
+        } catch (EmptyCommandException e) {
+            System.out.println("h");
             return;
         }
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(userImage)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(dukeImage))
-        );
         userInput.clear();
     }
 
-    private String getResponse(String input) {
+    private String getResponse(String input) throws EmptyCommandException {
         return duke.process(input);
     }
 

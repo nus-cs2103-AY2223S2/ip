@@ -8,6 +8,8 @@ import duke.exceptions.EmptyCommandException;
 import duke.exceptions.InvalidCommandException;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Parser {
 
@@ -32,35 +34,36 @@ public class Parser {
             return new ListCommand();
         }
 
-        String s[] = fullCommand.split(" ", 2);
+        String[] s = fullCommand.split(" ", 2);
         String firstWord = s[0];
+        ArrayList<String> strCommandList = new ArrayList<>(
+                List.of("mark", "unmark", "delete", "todo", "find", "deadline", "event"));
 
-        if (firstWord.equals("mark") || firstWord.equals("unmark") || firstWord.equals("delete") || firstWord.equals("todo") ||
-                firstWord.equals("deadline") || firstWord.equals("event") || firstWord.equals("find")) {
-            if (s.length <= 1) { throw new InvalidArgumentException();} //might wanna chk for firstWord first
+        if (!strCommandList.contains(firstWord)) {
+            throw new InvalidCommandException();
+        }
 
-            switch (firstWord) {
-            case "mark":
-                return new MarkCommand(1, Integer.parseInt(s[1]) - 1);
-            case "unmark":
-                return new MarkCommand(0, Integer.parseInt(s[1]) - 1);
-            case "delete":
-                return new DeleteCommand(Integer.parseInt(s[1]) - 1);
-            case "todo":
-                return new AddCommand(TaskType.ToDo, s[1], false);
-            case "find":
-                return new FindCommand(s[1]);
-            case "deadline":
-                String st[] = s[1].split(" /by ", 2);
-                return new AddCommand(TaskType.Deadline, st[0], false, LocalDate.parse(st[1]));
-            case "event":
-                String stt[] = s[1].split(" /from ", 2);
-                String sttt[] = stt[1].split(" /to ", 2);
-                return new AddCommand(TaskType.Event, stt[0], false, sttt[0], sttt[1]);
-            }
-            throw new InvalidCommandException(); // extra
+        if (s.length <= 1) { throw new InvalidArgumentException();}
 
-        } else {
+        switch (firstWord) { // add assert here
+        case "mark":
+            return new MarkCommand(1, Integer.parseInt(s[1]) - 1);
+        case "unmark":
+            return new MarkCommand(0, Integer.parseInt(s[1]) - 1);
+        case "delete":
+            return new DeleteCommand(Integer.parseInt(s[1]) - 1);
+        case "todo":
+            return new AddCommand(TaskType.ToDo, s[1], false);
+        case "find":
+            return new FindCommand(s[1]);
+        case "deadline":
+            String[] secondSplitArray = s[1].split(" /by ", 2);
+            return new AddCommand(TaskType.Deadline, secondSplitArray[0], false, LocalDate.parse(secondSplitArray[1]));
+        case "event":
+            String[] thirdSplitArray = s[1].split(" /from ", 2);
+            String[] fourthSplitArray = thirdSplitArray[1].split(" /to ", 2);
+            return new AddCommand(TaskType.Event, thirdSplitArray[0], false, fourthSplitArray[0], fourthSplitArray[1]);
+        default:
             throw new InvalidCommandException();
         }
 
