@@ -8,7 +8,8 @@ public abstract class Task {
     protected boolean isDone;
 
     /**
-     * Creates an instance of tasl
+     * Creates an instance of task
+     *
      * @param description
      */
     public Task(String description) {
