@@ -24,9 +24,10 @@ public class FindCommand extends Command {
      * @param tasks TaskList containing all the currently stored Tasks.
      * @param ui Ui that deals with interactions with the user.
      * @param storage Storage that loads and saves tasks to the file containing currently stored Tasks.
+     * @return the response from Duke.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         TaskList matchingTasks = new TaskList();
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
@@ -35,12 +36,14 @@ public class FindCommand extends Command {
                 matchingTasks.add(task);
             }
         }
+        String dukeResponse = "";
         if (matchingTasks.size() == 0) {
-            ui.show("There are no matching tasks!");
+            dukeResponse = "There are no matching tasks!";
         } else {
-            ui.show("Here are the matching tasks in your list:");
-            new ListCommand().execute(matchingTasks, ui, storage);
+            dukeResponse += "Here are the matching tasks in your list:\n";
+            dukeResponse += new ListCommand().execute(matchingTasks, ui, storage);
         }
+        return dukeResponse;
     }
 
     /**

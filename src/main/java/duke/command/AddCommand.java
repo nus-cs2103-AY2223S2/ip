@@ -10,6 +10,7 @@ import duke.ui.Ui;
 
 import java.time.DateTimeException;
 
+
 /**
  * Command that add Tasks.
  */
@@ -24,7 +25,7 @@ public class AddCommand extends Command {
      */
     public AddCommand(String taskType, String details) {
         if (details.isBlank()) {
-            throw new DukeException("☹ OOPS!!! The description of a new task cannot be empty.");
+            throw new DukeException(":( OOPS!!! The description of a new task cannot be empty.");
         }
         this.taskType = taskType;
         this.details = details;
@@ -35,34 +36,34 @@ public class AddCommand extends Command {
      * @param tasks TaskList containing all the currently stored Tasks.
      * @param ui Ui that deals with interactions with the user.
      * @param storage Storage that loads and saves tasks to the file containing currently stored Tasks.
+     * @return the response from Duke.
      * @throws DukeException If user inputs dates and timings in the wrong format when creating a Deadline or Event.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
+            String dukeResponse = "";
             switch (taskType) {
-                case "todo":
-                    ToDo toDo = ToDo.addToDo(this.details);
-                    tasks.add(toDo);
-                    ui.show("Got it, I've added this task:");
-                    ui.show(String.valueOf(toDo));
-                    break;
-                case "deadline":
-                    Deadline deadline = Deadline.addDeadline(details);
-                    tasks.add(deadline);
-                    ui.show("Got it, I've added this task:");
-                    ui.show(String.valueOf(deadline));
-                    break;
-                case "event":
-                    Event event = Event.addEvent(details);
-                    tasks.add(event);
-                    ui.show("Got it, I've added this task:");
-                    ui.show(String.valueOf(event));
-                    break;
-                default:
-                    break;
+            case "todo":
+                ToDo toDo = ToDo.addToDo(this.details);
+                tasks.add(toDo);
+                dukeResponse = "Got it, I've added this task:\n" + toDo;
+                break;
+            case "deadline":
+                Deadline deadline = Deadline.addDeadline(details);
+                tasks.add(deadline);
+                dukeResponse = "Got it, I've added this task:\n" + deadline;
+                break;
+            case "event":
+                Event event = Event.addEvent(details);
+                tasks.add(event);
+                dukeResponse = "Got it, I've added this task:\n" + event;
+                break;
+            default:
+                break;
             }
             storage.update(tasks);
+            return dukeResponse;
         } catch (DateTimeException e) {
             throw new DukeException("Please key dates in this format: dd-MM-yyyy HHmm");
         }
