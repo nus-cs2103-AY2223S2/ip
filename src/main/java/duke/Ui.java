@@ -1,23 +1,9 @@
 package duke;
-import java.util.Scanner;
+
 import duke.task.Task;
 
 public class Ui {
-    private Scanner scanner;
 
-    public Ui () {
-        this.scanner = new Scanner(System.in);
-    }
-
-    /**
-     * Reads the command from stdin.
-     *
-     * @return String of a text command.
-     */
-    public String readCommand() {
-        System.out.println("Input Command:");
-        return scanner.nextLine();
-    }
 
     /**
      * Shows all the tasks currently in the list and their status.
@@ -39,11 +25,11 @@ public class Ui {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
 
-        return "Hello from\n" + logo + "\n" +
-                this.showSepLine() +
-                "Hello! I'm Duke, what can I do for you?\n" +
-                this.showSepLine() +
-                this.showHelp();
+        return "Hello from\n" + logo + "\n"
+                + this.showSepLine()
+                + "Hello! I'm Duke, what can I do for you?\n"
+                + this.showSepLine()
+                + this.showHelp();
     }
 
     /**
@@ -52,15 +38,15 @@ public class Ui {
      * @return String of Help message
      */
     public String showHelp() {
-        return "Commands:\n" +
-                "Adding tasks: todo, event (requires date), deadline " +
-                "(requires date in yyyy-mm-dd format)\n" +
-                "To specify date, task description should be followed by" +
-                " /[date]\n" +
-                "Marking completion: mark (index), unmark (index)\n" +
-                "Removing tasks: remove (index)\n" +
-                "List all tasks: list\n" +
-                "Exit Duke: exit";
+        return "Commands:\n"
+                + "Adding tasks: todo, event (requires date), deadline "
+                + "(requires date in yyyy-mm-dd format)\n"
+                + "To specify date, task description should be followed by"
+                + " /[date]\n"
+                + "Marking completion: mark (index), unmark (index)\n"
+                + "Removing tasks: remove (index)\n"
+                + "List all tasks: list\n"
+                + "Exit Duke: exit";
     }
 
     /**
@@ -108,8 +94,8 @@ public class Ui {
      * @return String of details when a Task is added
      */
     public String showAddTask(Task task, TaskList tasks) {
-        return "Added: " + task + "\n" +
-                "Now you have " + tasks.size() + " task(s) in the list.";
+        return "Added: " + task + "\n"
+                + "Now you have " + tasks.size() + " task(s) in the list.";
     }
 
     /**
@@ -120,8 +106,8 @@ public class Ui {
      * @return String of details when a Task is deleted.
      */
     public String showDeleteTask(Task task, TaskList tasks) {
-        return "Deleted: " + task + "\n" +
-                "Now you have " + tasks.size() + " task(s) in the list.";
+        return "Deleted: " + task + "\n"
+                + "Now you have " + tasks.size() + " task(s) in the list.";
     }
 
     /**
@@ -145,7 +131,7 @@ public class Ui {
     }
 
     public String showFoundTasks(TaskList keywordTasks) {
-        return "Here are the matching tasks in your list:\n" +
-                keywordTasks;
+        return "Here are the matching tasks in your list:\n"
+                + keywordTasks;
     }
 }

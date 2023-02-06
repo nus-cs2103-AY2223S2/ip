@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class Storage {
     private File file;
 
-    public Storage (String filepath) {
+    public Storage(String filepath) {
         this.file = new File(filepath);
     }
 
@@ -28,7 +28,9 @@ public class Storage {
             try {
                 this.file.getParentFile().mkdirs();
                 this.file.createNewFile();
-            } catch (IOException e) {}
+            } catch (IOException e) {
+                // We do not expect an IOException to occur here.
+            }
             throw new DukeException("File does not exist!");
         }
         ArrayList<Task> tasks = new ArrayList<Task>();

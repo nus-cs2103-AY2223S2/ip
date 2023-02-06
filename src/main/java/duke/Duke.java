@@ -1,4 +1,5 @@
 package duke;
+import duke.command.Command;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
@@ -6,21 +7,19 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import duke.command.Command;
-
 
 
 public class Duke extends Application {
     private Storage storage;
     private Ui ui;
     private TaskList tasks;
-    private String filepath = "./data/test.txt";
+    private final String filepath = "./data/test.txt";
 
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -36,7 +35,7 @@ public class Duke extends Application {
     }
 
     /**
-     * Runs the Duke tasklist application.
+     * Runs the Duke task list application.
      */
     public void run() {
         this.storage = new Storage(filepath);
@@ -105,13 +104,9 @@ public class Duke extends Application {
 
 
 
-        sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
-        });
+        sendButton.setOnMouseClicked((event) -> handleUserInput());
 
-        userInput.setOnAction((event) -> {
-            handleUserInput();
-        });
+        userInput.setOnAction((event) -> handleUserInput());
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
 
@@ -135,7 +130,9 @@ public class Duke extends Application {
     private String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
+            assert c != null : "c should be an executable command";
             String response = c.execute(tasks, ui, storage);
+
             if (c.isExit()) {
                 dialogContainer.getChildren().addAll(
                         DialogBox.getDukeDialog(new Label(response), new ImageView(duke))

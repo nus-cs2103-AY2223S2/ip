@@ -1,9 +1,19 @@
 package duke;
-import duke.task.*;
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
+import duke.command.UnmarkCommand;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Todo;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+
 
 public class Parser {
 
@@ -15,8 +25,9 @@ public class Parser {
      * @return Command to be executed.
      * @throws DukeException If the string command is invalid.
      */
-    public static Command parse(String cmd) throws DukeException{
+    public static Command parse(String cmd) throws DukeException {
         String[] tokens = cmd.split(" ", 2);
+        assert tokens != null : "Command should not be empty";
         String command = tokens[0];
 
         // List Tasks
@@ -37,8 +48,7 @@ public class Parser {
             try {
                 int index = Integer.parseInt(tokens[1]);
                 return new DeleteCommand(index);
-            }
-            catch (NumberFormatException nfe) {
+            } catch (NumberFormatException nfe) {
                 throw new DukeException("Index must be an integer!");
             }
         }
@@ -51,8 +61,7 @@ public class Parser {
             try {
                 int index = Integer.parseInt(tokens[1]);
                 return new MarkCommand(index);
-            }
-            catch (NumberFormatException nfe) {
+            } catch (NumberFormatException nfe) {
                 throw new DukeException("Index must be an integer!");
             }
         }
@@ -63,8 +72,7 @@ public class Parser {
             try {
                 int index = Integer.parseInt(tokens[1]);
                 return new UnmarkCommand(index);
-            }
-            catch (NumberFormatException nfe) {
+            } catch (NumberFormatException nfe) {
                 throw new DukeException("Index must be an integer!");
             }
         }
