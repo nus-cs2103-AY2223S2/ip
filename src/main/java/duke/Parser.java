@@ -18,7 +18,7 @@ public class Parser {
             throws DukeException {
         String command;
         String body;
-
+        assert userInput != null : "No user input detected";
         if (userInput.contains(" ")) {
             command = userInput.substring(0, userInput.indexOf(" "));
             body = userInput.substring(userInput.indexOf(" ") + 1);
@@ -43,7 +43,7 @@ public class Parser {
         case "event":
             return Commands.executeEventCommand(body, textUi, taskList, storage);
         case "find":
-            return Commands.executeFindCommand(body, textUi, taskList);
+            return Commands.executeFindCommand(body, taskList);
         default:
             throw new DukeException("I'm sorry, I don't know what that means!");
         }
