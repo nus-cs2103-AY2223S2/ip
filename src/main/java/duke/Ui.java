@@ -1,7 +1,6 @@
 package duke;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import tasks.Task;
 
@@ -11,6 +10,7 @@ import tasks.Task;
 public class Ui {
     /**
      * The message to be shown before quitting the application.
+     *
      * @return The goodbye message.
      */
     public String getGoodbyeMessage() {
@@ -18,7 +18,7 @@ public class Ui {
     }
 
     /**
-     * Human readable information about the task list after adding a task.
+     * Returns human readable information about the task list after adding a task.
      *
      * @param task  Task that was added.
      * @param tasks Task list that task was added to.
@@ -29,7 +29,7 @@ public class Ui {
     }
 
     /**
-     * Human readable information about the task list after deleting a task.
+     * Returns humanreadable information about the task list after deleting a task.
      *
      * @param task  Task that was deleted.
      * @param tasks Task list that task was deleted from.
@@ -40,7 +40,7 @@ public class Ui {
     }
 
     /**
-     * Human readable information about the task list after marking a task as complete.
+     * Returns humanreadable information about the task list after marking a task as complete.
      *
      * @param task Task that was marked as complete.
      * @return The relevant information about the task list.
@@ -50,7 +50,7 @@ public class Ui {
     }
 
     /**
-     * Human readable information about the task list after marking a task as uncomplete.
+     * Returns humanreadable information about the task list after marking a task as uncomplete.
      *
      * @param task Task that was marked as uncomplete.
      * @return The relevant information about the task list.
@@ -60,7 +60,7 @@ public class Ui {
     }
 
     /**
-     * Human readable information about the tasks found with the search string.
+     * Returns humanreadable information about the tasks found with the search string.
      *
      * @param tasks List of tasks that were found by the search string.
      * @return The relevant information about the tasks.
@@ -78,7 +78,7 @@ public class Ui {
     }
 
     /**
-     * Human readable information about an error message.
+     * Returns humanreadable information about an error message.
      *
      * @param errorMessage Error message describing the error.
      * @return Human readable information about the error message.
@@ -89,6 +89,7 @@ public class Ui {
 
     /**
      * An error message for unexpected errors.
+     *
      * @return The error message.
      */
     public String getLoadingError() {
