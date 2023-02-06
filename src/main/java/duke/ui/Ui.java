@@ -11,15 +11,15 @@ public class Ui {
     /**
      * Sends greeting message to user
      */
-    public void sendGreetingsMessage() {
-        System.out.println("Hello I'm duke.Duke\n" + "What can I do for you?");
+    public String getGreetingsMessage() {
+        return "Hello I'm duke.Duke\n" + "What can I do for you?";
     }
 
     /**
      * Sends goodbye message to user
      */
-    public void sendGoodByeMessage() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String getGoodByeMessage() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**

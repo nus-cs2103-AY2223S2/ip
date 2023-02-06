@@ -76,6 +76,8 @@ public class Command {
             storage.saveData(tasks);
             response = response + ui.getTotalTasksMessage(tasks.getSize());
             return response;
+        case BYE:
+            return ui.getGoodByeMessage();
         default:
             return "I'm sorry, but I don't know what that means :-(";
         }

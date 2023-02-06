@@ -20,6 +20,7 @@ public class Parser {
         UNMARK,
         DELETE,
         FIND,
+        BYE,
         UNKNOWN
     };
 
@@ -29,22 +30,25 @@ public class Parser {
      * @return
      */
     public Action getCommand(String userInput) {
+        String s = userInput.split(" ", 2)[0];
         if (userInput.equals("list")) {
             return Action.LIST;
-        } else if (userInput.split(" ", 2)[0].equals("todo")) {
+        } else if (s.equals("todo")) {
             return Action.TODO;
-        } else if (userInput.split(" ", 2)[0].equals("deadline")) {
+        } else if (s.equals("deadline")) {
             return Action.DEADLINE;
-        } else if (userInput.split(" ", 2)[0].equals("event")) {
+        } else if (s.equals("event")) {
             return Action.EVENT;
-        } else if (userInput.split(" ", 2)[0].equals("mark")) {
+        } else if (s.equals("mark")) {
             return Action.MARK;
-        } else if (userInput.split(" ", 2)[0].equals("unmark")) {
+        } else if (s.equals("unmark")) {
             return Action.UNMARK;
-        } else if (userInput.split(" ", 2)[0].equals("delete")) {
+        } else if (s.equals("delete")) {
             return Action.DELETE;
-        } else if (userInput.split(" ", 2)[0].equals("find")) {
+        } else if (s.equals("find")) {
             return Action.FIND;
+        } else if (s.equals("bye")) {
+            return Action.BYE;
         }
         return Action.UNKNOWN;
     }
