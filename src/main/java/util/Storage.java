@@ -21,6 +21,8 @@ public class Storage {
      * @throws DukeException If IOException from reading duke.txt is encountered.
      */
     public BufferedReader load() throws DukeException {
+        assert !fileDir.isEmpty() : "File Directory cannot be empty!";
+        assert !filePath.isEmpty() : "File Path cannot be empty";
         BufferedReader br;
         try {
             File directory = new File(this.fileDir);

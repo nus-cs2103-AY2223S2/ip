@@ -17,6 +17,9 @@ public class Parser {
      * @throws DukeException
      */
     public static String handleGeneralCommand(String command, TaskList tasks, Storage storage, Ui ui) {
+        assert tasks != null : "TaskList should be already initialised";
+        assert storage != null : "Storage should be already initialised";
+        assert ui != null : "UI should already be initialised";
         try {
             if (command.startsWith("list")) {
                 return tasks.listTasks();
