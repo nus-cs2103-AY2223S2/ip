@@ -27,7 +27,9 @@ public class TaskCommandTest extends CommandTest {
         STORAGE.delete(Integer.parseInt(String.valueOf(STORAGE.size() - 1)));
         String expectedUi = "Got it. I've added this task:\n"
                 + "  [T][ ] val\n"
-                + String.format("Now you have %s tasks in the list.", beforeSize + 1);
+                + String.format("Now you have %s task%s in the list.",
+                    beforeSize + 1,
+                    beforeSize + 1 == 1 ? "" : "s");
         assertEquals(expectedUi, actualUi);
     }
 
@@ -57,7 +59,9 @@ public class TaskCommandTest extends CommandTest {
 
         String expectedUi = "Got it. I've added this task:\n"
                 + "  [D][ ] task one (by: Feb 02 2023 12:00AM)\n"
-                + String.format("Now you have %s tasks in the list.", beforeSize + 1);
+                + String.format("Now you have %s task%s in the list.",
+                    beforeSize + 1,
+                    beforeSize + 1 == 1 ? "" : "s");
         assertEquals(expectedUi, actualUi);
     }
 
@@ -111,7 +115,9 @@ public class TaskCommandTest extends CommandTest {
         STORAGE.delete(Integer.parseInt(String.valueOf(beforeSize)));
         String expectedUi = "Got it. I've added this task:\n"
                 + "  [E][ ] task one (from: Feb 2 2023 12:00AM to: Feb 2 2023 12:01AM)\n"
-                + String.format("Now you have %s tasks in the list.", beforeSize + 1);
+                + String.format("Now you have %s task%s in the list.",
+                    beforeSize + 1,
+                    beforeSize + 1 == 1 ? "" : "s");
         assertEquals(expectedUi, actualUi);
     }
 
