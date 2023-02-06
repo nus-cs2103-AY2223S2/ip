@@ -15,6 +15,7 @@ import boo.command.InvalidCommand;
 import boo.command.ListCommand;
 import boo.command.MarkCommand;
 import boo.command.OnCommand;
+import boo.command.ReminderCommand;
 import boo.command.ToDoCommand;
 import boo.command.UnmarkCommand;
 import boo.datetime.DateTime;
@@ -79,6 +80,8 @@ public class Parser {
             return validateOn(rawCommand);
         case "find":
             return validateFind(rawCommand);
+        case "reminder":
+            return validateReminder(inputArray);
         default:
             return CommandType.INVALID;
         }
@@ -114,6 +117,8 @@ public class Parser {
             return new HelpCommand();
         case FIND:
             return new FindCommand(command.getKeyPhrase(), tasks);
+        case REMINDER:
+            return new ReminderCommand(command.getReminderDuration(), tasks);
         case INVALID:
             return new InvalidCommand();
         default:
@@ -412,6 +417,33 @@ public class Parser {
         CommandType ctFind = CommandType.FIND;
         ctFind.setKeyPhrase(rawCommand.substring(5));
         return ctFind;
+    }
+
+
+    /**
+     * Validates the 'reminder' input of the user.
+     *
+     * @param inputArray The array containing the words from the user's raw command.
+     */
+    private CommandType validateReminder(String[] inputArray) {
+        try {
+            boolean hasValidNumberOfSubcommands = inputArray.length == 2;
+            if (!hasValidNumberOfSubcommands) {
+                throw new BooException("Please enter one of the following after reminder: day, week or month.");
+            }
+            boolean isValidKeyword = inputArray[1].equals("day") || inputArray[1].equals("week")
+                    || inputArray[1].equals("month");
+            if (!isValidKeyword) {
+                throw new BooException("Please enter one of the following after reminder: day, week or month.");
+            }
+            CommandType ctReminder = CommandType.REMINDER;
+            ctReminder.setReminderDuration(inputArray[1]);
+            return ctReminder;
+        } catch (BooException booException) {
+            CommandType ctException = CommandType.EXCEPTION;
+            ctException.setExceptionMessage(booException.getMessage());
+            return ctException;
+        }
     }
 
     /**

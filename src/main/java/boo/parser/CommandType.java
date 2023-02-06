@@ -5,7 +5,7 @@ package boo.parser;
  */
 public enum CommandType {
     /** Possible command types. */
-    BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, ON, HELP, INVALID, EXCEPTION, FIND;
+    BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, ON, HELP, INVALID, EXCEPTION, FIND, REMINDER;
 
     /** Name of task associated with to-do, deadline and event commands. */
     private String taskName;
@@ -23,6 +23,8 @@ public enum CommandType {
     private String keyPhrase;
     /** Exception message to be displayed. */
     private String exceptionMessage;
+    /** Duration within which to find tasks to remind the user. */
+    private String reminderDuration;
 
 
 
@@ -99,6 +101,16 @@ public enum CommandType {
     }
 
     /**
+     * Gets the reminder duration to check for upcoming or ongoing tasks.
+     *
+     * @return the reminder duration to use.
+     */
+    public String getReminderDuration() {
+        return this.reminderDuration;
+    }
+
+
+    /**
      * Sets the name of the task associated with this command. The command is to-do, deadline or event.
      */
     public void setTaskName(String taskName) {
@@ -153,5 +165,13 @@ public enum CommandType {
      */
     public void setExceptionMessage(String exceptionMessage) {
         this.exceptionMessage = exceptionMessage;
+    }
+
+    /**
+     * Set the reminder duration that is used check for upcoming or ongoing tasks.
+     *
+     */
+    public void setReminderDuration(String reminderDuration) {
+        this.reminderDuration = reminderDuration;
     }
 }
