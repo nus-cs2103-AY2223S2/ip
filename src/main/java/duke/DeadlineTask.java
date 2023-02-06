@@ -15,7 +15,7 @@ import java.util.Arrays;
  * @author Merrick
  */
 public class DeadlineTask extends Task {
-    protected LocalDateTime deadline;
+    private LocalDateTime deadline;
 
     /**
      * Constructor of DeadlineTask.
@@ -36,6 +36,7 @@ public class DeadlineTask extends Task {
      */
     public DeadlineTask(String taskName, LocalDateTime deadline, boolean completed) {
         super(taskName, completed);
+        assert deadline != null : "Deadline is invalid";
         this.deadline = deadline;
         this.taskType = "D";
     }

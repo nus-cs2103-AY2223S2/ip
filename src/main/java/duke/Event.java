@@ -26,6 +26,8 @@ public class Event extends Task {
      */
     public Event(String taskName, LocalDateTime start, LocalDateTime end) {
         super(taskName);
+        assert start != null : "Start Time is not valid";
+        assert end != null : "End Time is not valid";
         this.start = start;
         this.end = end;
         this.taskType = "E";

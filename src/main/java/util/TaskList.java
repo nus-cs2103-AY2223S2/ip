@@ -46,7 +46,7 @@ public class TaskList {
      */
     public String addTask(Task task) {
         taskList.add(task);
-        return String.format("Got it. I've added this task:\n" + "%s\n" + this.numTasks() + "%n", task);
+        return String.format("Got it. I've added this task:\n" + "       %s\n" + this.numTasks() + "%n", task);
     }
 
     /**
@@ -154,7 +154,7 @@ public class TaskList {
         }
         if (input[0].equals("delete")) {
             Task task = taskList.remove(taskNumber);
-            return String.format("    Noted. I've removed this task:\n       %s\n%s%n", task, numTasks());
+            return String.format("Noted. I've removed this task:\n       %s\n%s%n", task, numTasks());
         } else {
             boolean completion = input[0].equals("mark");
             Task task = taskList.get(taskNumber);
