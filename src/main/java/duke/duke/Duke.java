@@ -9,7 +9,7 @@ import duke.util.Ui;
 import javafx.scene.control.Label;
 
 /**
- * Represents the Duke program, a chatbot that helps you keep track of your tasks.
+ * Represents the Tohtoro program
  */
 public class Duke {
     private Ui ui;

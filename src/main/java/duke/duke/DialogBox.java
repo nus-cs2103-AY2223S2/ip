@@ -14,6 +14,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
 /**
+ * Represents the dialog box for the GUI using the JavaFX library
  */
 public class DialogBox extends HBox {
     @FXML
