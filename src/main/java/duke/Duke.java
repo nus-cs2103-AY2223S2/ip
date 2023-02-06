@@ -131,6 +131,7 @@ public class Duke extends Application {
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
+
         //Step 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
@@ -166,16 +167,15 @@ public class Duke extends Application {
         ImageView imageViewDuke = new ImageView(duke);
 //        imageViewUser.setClip(userClip);
 //        imageViewDuke.setClip(dukeClip);
+
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText,imageViewUser),
-                DialogBox.getDukeDialog(dukeText, imageViewDuke)
+                DialogBox.getUserDialog(userInput.getText(), user),
+                DialogBox.getDukeDialog(userInput.getText(), duke)
         );
         userInput.clear();
     }
 
-    private String getResponse(String input) {
+    public String getResponse(String input) {
         return "Duke heard: " + input;
     }
-
-
 }
