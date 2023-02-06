@@ -1,18 +1,18 @@
 package duke;
 
-import java.util.ArrayList;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 
 public class TaskList {
-    private ArrayList<Task> taskList;
+    private ArrayList<Task> tasks;
 
-    public TaskList(ArrayList<Task> taskList) {
-        this.taskList = taskList;
+    public TaskList(ArrayList<Task> tasks) {
+        this.tasks = tasks;
     }
 
     public TaskList() {
-        this.taskList = new ArrayList<Task>();
+        this.tasks = new ArrayList<Task>();
     }
 
     public void addTask(String taskDescription, String type) {
@@ -20,9 +20,9 @@ public class TaskList {
         if (type.equals("todo")) {
             try {
                 Todo todo = new Todo(taskDescription);
-                taskList.add(todo);
+                tasks.add(todo);
                 System.out.println("Got it. I've added this task:\n" + todo.toString() + "\nNow you have "
-                        + taskList.size() + " tasks in the list.");
+                        + tasks.size() + " tasks in the list.");
             } catch (MissingDescriptionException e) {
                 System.out.print(e.toString());
             }
@@ -33,9 +33,9 @@ public class TaskList {
                 String date = descriptionDate[1];
                 LocalDate dateString = LocalDate.parse(date);
                 Deadline deadline = new Deadline(description, dateString);
-                taskList.add(deadline);
+                tasks.add(deadline);
                 System.out.println("Got it. I've added this task:\n" + deadline.toString() + "\nNow you have "
-                        + taskList.size() + " tasks in the list.");
+                        + tasks.size() + " tasks in the list.");
             } catch (MissingDescriptionException e) {
                 System.out.print(e.toString());
             } catch (DateTimeParseException e) {
@@ -52,9 +52,9 @@ public class TaskList {
                 String from = remainder[0];
                 String to = remainder[1];
                 Event event = new Event(description, from, to);
-                taskList.add(event);
+                tasks.add(event);
                 System.out.println("Got it. I've added this task:\n" + event.toString() + "\nNow you have "
-                        + taskList.size() + " tasks in the list.");
+                        + tasks.size() + " tasks in the list.");
 
             } catch (MissingDescriptionException e) {
                 System.out.print(e.toString());
@@ -66,8 +66,8 @@ public class TaskList {
 
     public void markTask(int index) throws IndexOutOfBoundsException {
         try {
-            taskList.get(index - 1).mark();
-            System.out.println("Nice! I've marked this task as done:\n" + taskList.get(index - 1).toString());
+            tasks.get(index - 1).mark();
+            System.out.println("Nice! I've marked this task as done:\n" + tasks.get(index - 1).toString());
         } catch (IndexOutOfBoundsException e) {
             System.out.println("There is no such task in the list!");
         }
@@ -75,20 +75,20 @@ public class TaskList {
 
     public void unmarkTask(int index) throws IndexOutOfBoundsException {
         try {
-            taskList.get(index - 1).unmark();
-            System.out.println("OK, I've marked this task as not done yet:\n" + taskList.get(index - 1).toString());
+            tasks.get(index - 1).unmark();
+            System.out.println("OK, I've marked this task as not done yet:\n" + tasks.get(index - 1).toString());
         } catch (IndexOutOfBoundsException e) {
             System.out.println("There is no such task in the list!");
         }
     }
 
-    public void delete(int index) throws IndexOutOfBoundsException {
+    public void deleteTask(int index) throws IndexOutOfBoundsException {
         try {
 
-            Task task = taskList.get(index - 1);
-            taskList.remove(index - 1);
+            Task task = tasks.get(index - 1);
+            tasks.remove(index - 1);
             System.out.println("Noted. I've removed this task:\n" + task.toString() + "\nNow you have "
-                    + taskList.size() + " tasks in the list.");
+                    + tasks.size() + " tasks in the list.");
 
         } catch (IndexOutOfBoundsException e) {
             System.out.println("There is no such task in the list!");
@@ -96,12 +96,12 @@ public class TaskList {
     }
 
     public int getSize() {
-        return taskList.size();
+        return tasks.size();
     }
 
     public String toStorageData() {
         String data = "";
-        for (Task task : taskList) {
+        for (Task task : tasks) {
             data += task.toStorageData();
             data += "\n";
         }
@@ -112,8 +112,8 @@ public class TaskList {
     @Override
     public String toString() {
         String taskToText = "";
-        for (int i = 1; i <= taskList.size(); i++) {
-            Task task = taskList.get(i - 1);
+        for (int i = 1; i <= tasks.size(); i++) {
+            Task task = tasks.get(i - 1);
             String line = Integer.toString(i) + ". " + task.toString();
             taskToText += line;
             taskToText += "\n";

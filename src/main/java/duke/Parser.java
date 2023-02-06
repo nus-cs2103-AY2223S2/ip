@@ -4,20 +4,20 @@ public class Parser {
 
     private static Ui ui = new Ui();
 
-    public static void parse(String command, TaskList taskList) throws DukeException {
+    public static void parse(String command, TaskList tasks) throws DukeException {
         if (command.equals("bye")) {
 
             ui.exit();
 
         } else if (command.equals("list")) {
 
-            ui.printMessage("Here are the tasks in your list:\n" + taskList.toString());
+            ui.printMessage("Here are the tasks in your list:\n" + tasks.toString());
 
         } else if (command.startsWith("mark")) {
             try {
                 String str = command.split(" ", 2)[1];
                 int index = Integer.parseInt(str);
-                taskList.markTask(index);
+                tasks.markTask(index);
             } catch (ArrayIndexOutOfBoundsException e) {
                 System.out.println("Please give the index of the task you wish to mark!");
             }
@@ -26,7 +26,7 @@ public class Parser {
             try {
                 String str = command.split(" ", 2)[1];
                 int index = Integer.parseInt(str);
-                taskList.unmarkTask(index);
+                tasks.unmarkTask(index);
             } catch (ArrayIndexOutOfBoundsException e) {
                 System.out.println("Please give the index of the task you wish to unmark!");
             }
@@ -34,23 +34,23 @@ public class Parser {
         } else if (command.startsWith("todo")) {
 
             String description = command.replace("todo", "");
-            taskList.addTask(description, "todo");
+            tasks.addTask(description, "todo");
 
         } else if (command.startsWith("deadline")) {
 
             String description = command.replace("deadline", "");
-            taskList.addTask(description, "deadline");
+            tasks.addTask(description, "deadline");
 
         } else if (command.startsWith("event")) {
 
             String description = command.replace("event", "");
-            taskList.addTask(description, "event");
+            tasks.addTask(description, "event");
 
         } else if (command.startsWith("delete")) {
             try {
                 String str = command.split(" ", 2)[1];
                 int index = Integer.parseInt(str);
-                taskList.delete(index);
+                tasks.deleteTask(index);
             } catch (ArrayIndexOutOfBoundsException e) {
                 System.out.println("Please give the index of the task you wish to delete!");
             }

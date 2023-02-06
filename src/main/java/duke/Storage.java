@@ -1,13 +1,13 @@
 package duke;
 
-import java.util.Scanner;
-import java.util.ArrayList;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Storage {
 
@@ -85,10 +85,10 @@ public class Storage {
         return tasks;
     }
 
-    public void save(TaskList taskList) throws DukeException {
+    public void save(TaskList tasks) throws DukeException {
         try {
             FileWriter fw = new FileWriter(filePath, false);
-            String dataString = taskList.toStorageData();
+            String dataString = tasks.toStorageData();
             fw.write(dataString);
             fw.close();
         } catch (IOException e) {
