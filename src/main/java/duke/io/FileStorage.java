@@ -41,6 +41,7 @@ public class FileStorage implements Storage {
         } catch (FileAlreadyExistsException e) {
             // Nothing to do as the file already exist
         } catch (IOException e) {
+            System.out.println(e);
             throw new DukeException("I encountered an I/O error when creating the save file!");
         } catch (SecurityException e) {
             throw new DukeException("I do not have enough permissions to create the save file!");

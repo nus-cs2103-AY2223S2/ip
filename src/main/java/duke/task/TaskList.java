@@ -108,7 +108,7 @@ public class TaskList {
     }
 
     /**
-     * Updates the task at index.
+     * Updates the task at index and writes the updated task list to storage.
      *
      * @param index The index of the task to be updated.
      * @param task The updated task.
@@ -125,6 +125,33 @@ public class TaskList {
             writeToStorage();
         } catch (DukeException e) {
             tasks.set(index, oldTask);
+            throw e;
+        }
+    }
+
+    /**
+     * Writes the task list to the specified storage.
+     *
+     * @param storage The storage to write to.
+     * @throws DukeException Indicates failure to write to the specified storage.
+     */
+    public void save(Storage storage) throws DukeException {
+        writeToStorage(storage);
+    }
+
+    /**
+     * Deletes all tasks in the task list and writes the empty task list to storage.
+     *
+     * @throws DukeException Indicates failure to write to storage.
+     */
+    public void clear() throws DukeException {
+        List<Task> oldTasks = tasks;
+        tasks = new ArrayList<Task>();
+
+        try {
+            writeToStorage();
+        } catch (DukeException e) {
+            tasks = oldTasks;
             throw e;
         }
     }
@@ -167,6 +194,12 @@ public class TaskList {
     }
 
     private void writeToStorage() throws DukeException {
+        writeToStorage(storage);
+    }
+
+    private void writeToStorage(Storage storage) throws DukeException {
+        assert storage != null;
+
         StringBuilder data = new StringBuilder();
 
         for (Task task : tasks) {
