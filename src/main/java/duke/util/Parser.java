@@ -74,7 +74,7 @@ public class Parser {
             break;
         case "event":
             try {
-                String[] eventDetails = userInput[1].split(" /by ", 2);
+                String[] eventDetails = userInput[1].split(" /from ", 2);
                 String eventDescription = eventDetails[0];
                 String eventPeriod = eventDetails.length > 0 ? eventDetails[1] : null;
 
@@ -82,7 +82,7 @@ public class Parser {
                     throw new DukeException("Enter a valid event period!");
                 }
 
-                String[] splitEventPeriod = eventPeriod.split( " / to ");
+                String[] splitEventPeriod = eventPeriod.split( " /to ");
 
                 if (splitEventPeriod.length < 2) {
                     throw new DukeException("Enter a valid event period!");
