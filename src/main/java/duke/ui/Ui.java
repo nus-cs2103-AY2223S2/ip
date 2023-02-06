@@ -1,9 +1,12 @@
 package duke.ui;
 
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.task.Deadline;
 import duke.task.Task;
+import duke.task.TaskList;
 
 /**
  * Class for the Ui object.
@@ -143,6 +146,28 @@ public class Ui {
      */
     public String showLoadingError() {
         return "No existing tasklist!";
+    }
+
+    public String showReminders () {
+        return "You have an upcoming deadline";
+    }
+
+    public String showUpcomingTasks(ArrayList<Deadline> tasks) {
+        String str = "";
+
+        if (tasks.size() == 0) {
+            return showLine() + "No upcoming tasks due~~" + showLine();
+        } else {
+            int counter = 1;
+            for (int i = 0; i < tasks.size(); i++) {
+                Deadline currTask = tasks.get(i);
+                str = str + counter + ". " + currTask.getDescription() + "due: "
+                        + currTask.getDeadline().format(DateTimeFormatter.ofPattern("MMM dd yyyy hhmm a")) + "\n";
+                counter++;
+            }
+        }
+
+        return showLine() + "You have " + tasks.size() + " upcoming tasks due\n" + str;
     }
 
     /**

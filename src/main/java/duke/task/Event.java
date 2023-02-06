@@ -10,7 +10,7 @@ package duke.task;
 public class Event extends Task {
     private String from;
     private String to;
-
+    private String taskType = "E";
     /**
      * Constructor for Event.
      *
@@ -22,6 +22,10 @@ public class Event extends Task {
         super(description);
         this.from = from;
         this.to = to;
+    }
+    @Override
+    public String getTaskType() {
+        return this.taskType;
     }
 
     /**

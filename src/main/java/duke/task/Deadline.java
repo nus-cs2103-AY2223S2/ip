@@ -14,6 +14,7 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
 
     protected LocalDateTime by;
+    protected String taskType = "D";
 
 
     /**
@@ -28,6 +29,14 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    @Override
+    public String getTaskType() {
+        return this.taskType;
+    }
+
+    public LocalDateTime getDeadline() {
+        return this.by;
+    }
     /**
      * Message printed when a new Deadline task is added.
      *

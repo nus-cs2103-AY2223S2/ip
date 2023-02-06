@@ -7,6 +7,7 @@ package duke.task;
  * @version CS2103T AY22/23 Semester 2
  */
 public class Todo extends Task {
+    private String taskType = "T";
 
     /**
      * Constructor for Todo object.
@@ -15,6 +16,10 @@ public class Todo extends Task {
      */
     public Todo(String description) {
         super(description);
+    }
+    @Override
+    public String getTaskType() {
+        return this.taskType;
     }
 
     /**
