@@ -37,6 +37,7 @@ public class Storage {
         } catch (Exception e) {
             throw new DukeException("No data file found");
         } finally {
+            assert sc != null : "sc should not be null";
             sc.close();
         }
         return tasks;
