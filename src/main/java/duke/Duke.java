@@ -45,7 +45,7 @@ public class Duke extends Application {
         this.storage = new Storage();
         this.parser = new Parser();
         try {
-            tasks = new TaskList(storage.load());
+            tasks = new TaskList(storage.loadData());
         } catch (DukeException e) {
             tasks = new TaskList();
         }

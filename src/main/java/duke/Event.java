@@ -38,17 +38,17 @@ public class Event extends Task {
      * @param taskName Description of Event Task.
      * @param start Start datetime for the Event.
      * @param end End datetime for the Event.
-     * @param completed Completion status for the Event.
+     * @param isCompleted Completion status for the Event.
      */
-    public Event(String taskName, LocalDateTime start, LocalDateTime end, boolean completed) {
-        super(taskName, completed);
+    public Event(String taskName, LocalDateTime start, LocalDateTime end, boolean isCompleted) {
+        super(taskName, isCompleted);
         this.start = start;
         this.end = end;
         this.taskType = "E";
     }
 
     /**
-     * Static method to create a Event Task from user input.
+     * Creates an Event Task from user input.
      * @param command User input to be used to create the Event Task.
      * @param t TaskList object to add the newly created Task into the list of tasks.
      * @throws DukeException If command is invalid.

@@ -12,16 +12,16 @@ package duke;
 public abstract class Task {
     protected String taskType = "T";
     private final String taskName;
-    private boolean completed = false;
+    private boolean isCompleted = false;
     /**
      * Constructor for Task class.
      *
      * @param taskName Description of task.
-     * @param completed Specifies if the task is completed.
+     * @param isCompleted Specifies if the task is isCompleted.
      */
-    public Task(String taskName, boolean completed) {
+    public Task(String taskName, boolean isCompleted) {
         this.taskName = taskName;
-        this.completed = completed;
+        this.isCompleted = isCompleted;
     }
 
     /**
@@ -34,11 +34,11 @@ public abstract class Task {
 
     /**
      * Marks a task as done and prints out action done.
-     * @param completion Completion status of the task.
+     * @param isCompleted Completion status of the task.
      */
-    public String setCompletion(boolean completion) {
-        this.completed = completion;
-        if (completion) {
+    public String setCompletion(boolean isCompleted) {
+        this.isCompleted = isCompleted;
+        if (isCompleted) {
             return String.format("    Nice! I've marked this task as done:\n" + "     " + this);
         } else {
             return String.format("    OK, I've marked this task as not done yet:\n" + "       " + this);
@@ -58,7 +58,7 @@ public abstract class Task {
      * @return String represented the completion status of the Task.
      */
     public String displayMark() {
-        if (this.completed) {
+        if (this.isCompleted) {
             return "X";
         }
         return " ";
@@ -78,7 +78,7 @@ public abstract class Task {
      * @return String to be saved in Task history.
      */
     public String saveTaskString() {
-        return String.format("%s|%s|%b", this.taskType, this.taskName, this.completed);
+        return String.format("%s|%s|%b", this.taskType, this.taskName, this.isCompleted);
     }
 
     @Override
