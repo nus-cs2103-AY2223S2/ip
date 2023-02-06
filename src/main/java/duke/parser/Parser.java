@@ -58,7 +58,6 @@ public class Parser {
         try {
             action = Action.valueOf(splitInputs[0]);
         } catch (IllegalArgumentException e) {
-//            return new ListCommand();
             throw new DukeException("I'm sorry, but Fake Duke doesn't know what that means :-(");
         }
 
