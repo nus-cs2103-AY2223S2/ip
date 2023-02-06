@@ -27,8 +27,12 @@ public class UnmarkCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String taskString = "";
         for (String taskIndex: TASK_INDEXES) {
-            taskString = String.format("%s%s\n", taskString,
-                    tasks.unmarkTask(Integer.parseInt(taskIndex) - 1));
+            try {
+                taskString = String.format("%s%s\n", taskString,
+                        tasks.unmarkTask(Integer.parseInt(taskIndex) - 1));
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid task index, skipping the unmarking of this task");
+            }
         }
         storage.saveTasks(tasks);
         return ui.getUnmarkOutput(taskString);
