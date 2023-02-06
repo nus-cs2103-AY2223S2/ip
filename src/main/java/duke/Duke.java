@@ -17,6 +17,7 @@ public class Duke {
 
     /**
      * Constructs a new chatbot.
+     *
      * @param dataFilePath Path to store the task list text file.
      */
     public Duke(String dataFilePath) {
@@ -32,7 +33,8 @@ public class Duke {
     }
 
     /**
-     * Respond to a given input message.
+     * Responds to a given input message.
+     *
      * @param input The input message.
      * @return An appropriate response.
      */
@@ -42,55 +44,62 @@ public class Duke {
         try {
             String[] parsedCommand = Parser.parseCommand(input);
             String command = parsedCommand[0];
+            String response;
             switch (command) {
             case "bye":
-                return ui.getGoodbyeMessage();
+                response = ui.getGoodbyeMessage();
+                break;
             case "list":
-                return tasks.toString();
+                response = tasks.toString();
+                break;
             case "mark":
                 taskNumber = Integer.parseInt(parsedCommand[1]);
                 tasks.setDone(taskNumber, true);
                 task = tasks.getTask(taskNumber);
-                return ui.getMarkTaskMessage(task);
+                response = ui.getMarkTaskMessage(task);
+                break;
             case "unmark":
                 taskNumber = Integer.parseInt(parsedCommand[1]);
                 tasks.setDone(taskNumber, false);
                 task = tasks.getTask(taskNumber);
-                return ui.getUnmarkTaskMessage(task);
+                response = ui.getUnmarkTaskMessage(task);
+                break;
             case "delete":
                 taskNumber = Integer.parseInt(parsedCommand[1]);
                 task = tasks.getTask(taskNumber);
                 tasks.deleteTask(taskNumber);
-                return ui.getDeleteTaskMessage(task, tasks);
+                response = ui.getDeleteTaskMessage(task, tasks);
+                break;
             case "find":
-                return ui.getFindTaskMessage(tasks.findTasks(parsedCommand[1]));
+                response = ui.getFindTaskMessage(tasks.findTasks(parsedCommand[1]));
+                break;
             case "todo":
                 task = new ToDo(parsedCommand[1]);
                 tasks.addTask(task);
-                return ui.getAddTaskMessage(task, tasks);
+                response = ui.getAddTaskMessage(task, tasks);
+                break;
             case "deadline":
                 task = new Deadline(parsedCommand[1], Parser.parseDate(parsedCommand[2], false));
                 tasks.addTask(task);
-                return ui.getAddTaskMessage(task, tasks);
+                response = ui.getAddTaskMessage(task, tasks);
+                break;
             case "event":
                 task = new Event(parsedCommand[1], Parser.parseDate(parsedCommand[2], false),
                     Parser.parseDate(parsedCommand[3], false));
                 tasks.addTask(task);
-                return ui.getAddTaskMessage(task, tasks);
+                response = ui.getAddTaskMessage(task, tasks);
+                break;
             default:
                 throw new UnknownCommandException();
             }
+
+            // After each command, save the current task list to the file
+            storage.saveTasks(tasks);
+            return response;
         } catch (DukeException e) {
             return ui.getErrorMessage(e.getMessage());
         } catch (Exception e) {
             return ui.getErrorMessage(e.toString());
-        } finally {
-            try {
-                // After each command, save the current task list to the file
-                storage.saveTasks(tasks);
-            } catch (Exception e) {
-                System.out.println(ui.getErrorMessage(e.toString()));
-            }
         }
     }
 }

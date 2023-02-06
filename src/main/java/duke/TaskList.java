@@ -31,28 +31,28 @@ public class TaskList {
      */
     public TaskList(ArrayList<String[]> dataFileTasks) throws DukeException {
         this.taskList = new ArrayList<>();
-        Task toAdd;
+        Task newTask;
         for (String[] fileCommand : dataFileTasks) {
             assert fileCommand.length > 0;
             switch (fileCommand[0]) {
             case "T":
-                toAdd = new ToDo(fileCommand[2]);
+                newTask = new ToDo(fileCommand[2]);
                 break;
             case "D":
-                toAdd = new Deadline(fileCommand[2], Parser.parseDate(fileCommand[3], true));
+                newTask = new Deadline(fileCommand[2], Parser.parseDate(fileCommand[3], true));
                 break;
             case "E":
-                toAdd = new Event(fileCommand[2], Parser.parseDate(fileCommand[3], true),
+                newTask = new Event(fileCommand[2], Parser.parseDate(fileCommand[3], true),
                     Parser.parseDate(fileCommand[4], true));
                 break;
             default:
                 throw new InvalidDataFileException();
             }
             if (fileCommand[1].equals("X")) {
-                toAdd.setDone(true);
+                newTask.setDone(true);
             }
 
-            this.addTask(toAdd);
+            this.addTask(newTask);
         }
     }
 
@@ -74,7 +74,7 @@ public class TaskList {
         return this.taskList.size() == 0;
     }
 
-    private boolean indexOutOfRange(int index) {
+    private boolean isIndexOutOfRange(int index) {
         return index - 1 >= this.size() || index < 0;
     }
 
@@ -86,7 +86,7 @@ public class TaskList {
      * @throws TaskNotFoundException if task index is out of range.
      */
     public Task getTask(int taskNumber) throws TaskNotFoundException {
-        if (this.indexOutOfRange(taskNumber)) {
+        if (this.isIndexOutOfRange(taskNumber)) {
             throw new TaskNotFoundException();
         }
         return this.taskList.get(taskNumber - 1);
@@ -108,7 +108,7 @@ public class TaskList {
      * @throws TaskNotFoundException if task index is out of range.
      */
     public void deleteTask(int taskNumber) throws TaskNotFoundException {
-        if (this.indexOutOfRange(taskNumber)) {
+        if (this.isIndexOutOfRange(taskNumber)) {
             throw new TaskNotFoundException();
         }
         this.taskList.remove(taskNumber - 1);
@@ -122,7 +122,7 @@ public class TaskList {
      * @throws TaskNotFoundException if task index is out of range.
      */
     public void setDone(int taskNumber, boolean done) throws TaskNotFoundException {
-        if (this.indexOutOfRange(taskNumber)) {
+        if (this.isIndexOutOfRange(taskNumber)) {
             throw new TaskNotFoundException();
         }
         this.taskList.get(taskNumber - 1).setDone(done);
