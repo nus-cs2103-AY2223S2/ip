@@ -40,7 +40,7 @@ public class TaskManager {
     }
 
     /**
-     * Returns all tasks
+     * Returns all tasks by using stream filter
      */
     public ArrayList<ITask> getTasks() {
         return tasks;
