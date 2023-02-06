@@ -23,6 +23,8 @@ public class DeadlineCommand extends Command {
 
     @Override
     public String execute(TaskList list, Storage storage) throws DuduException {
+        assert list != null;
+        assert storage != null;
         if (!input.contains(" /by ")) {
             throw new EmptyDescriptionException("deadline", "date", "Missing end date");
         }

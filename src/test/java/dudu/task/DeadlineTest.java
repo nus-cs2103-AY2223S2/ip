@@ -1,9 +1,10 @@
 package dudu.task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
 
 import dudu.exception.InvalidCommandException;
-import org.junit.jupiter.api.Test;
+
 
 public class DeadlineTest {
     private static final String name = "deadline task";

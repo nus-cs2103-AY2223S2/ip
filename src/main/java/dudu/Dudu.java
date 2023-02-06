@@ -63,7 +63,7 @@ public class Dudu {
                 continue;
             }
             try {
-                Parser.parse(input, list, storage);
+                Parser.parse(input);
             } catch (InvalidCommandException ex) {
                 System.out.println(ex);
             } catch (DuduException ex) {
@@ -81,7 +81,7 @@ public class Dudu {
     public String getResponse(String input) {
         Command command;
         try {
-            command = Parser.parse(input, list, storage);
+            command = Parser.parse(input);
             return command.execute(list, storage);
         } catch (InvalidCommandException ex) {
             return ex.toString();

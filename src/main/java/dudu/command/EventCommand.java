@@ -23,6 +23,8 @@ public class EventCommand extends Command {
 
     @Override
     public String execute(TaskList list, Storage storage) throws DuduException {
+        assert list != null;
+        assert storage != null;
         if (!input.contains(" /from ") || !input.contains(" /to ")) {
             throw new EmptyDescriptionException("event", "date" , "Missing date");
         }

@@ -41,7 +41,8 @@ public class Parser {
      * @return Parsed command
      * @throws DuduException If the command is not recognised.
      */
-    public static Command parse(String input, TaskList list, Storage storage) throws DuduException {
+    public static Command parse(String input) throws DuduException {
+        assert input != null;
         try {
             String[] inputArr = input.split(" ");
             Instruction instruction = Instruction.valueOf(inputArr[0].toUpperCase());

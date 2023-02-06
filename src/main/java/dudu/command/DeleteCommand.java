@@ -24,6 +24,8 @@ public class DeleteCommand extends Command {
 
     @Override
     public String execute(TaskList list, Storage storage) throws DuduException {
+        assert list != null;
+        assert storage != null;
         try {
             Task currTask = list.getTask(index);
             storage.updateTask(list.delete(index));
