@@ -26,6 +26,7 @@ public class Parser {
      * @return Date in a LocalDate instance.
      */
     private LocalDate parseDate(String dateStr) {
+        assert !dateStr.isBlank() : "Invalid string, cannot parse date";
         return LocalDate.parse(dateStr);
     }
 
@@ -40,6 +41,8 @@ public class Parser {
      * @return Date in a LocalDate instance.
      */
     private LocalDate parseDate(String dateStr, char separator) {
+        assert !dateStr.isBlank() : "Invalid string, cannot parse date";
+
         String[] date = dateStr.split(String.valueOf(separator));
         int[] dateInfo = Stream.of(date).mapToInt(Integer::parseInt).toArray();
         return LocalDate.of(dateInfo[0], dateInfo[1], dateInfo[2]);
@@ -54,6 +57,7 @@ public class Parser {
      * @return Time in a LocalTime instance.
      */
     private LocalTime parseTime(String timeStr) {
+        assert !timeStr.isBlank() : "Invalid string, cannot parse time";
         return LocalTime.parse(timeStr);
     }
 
@@ -68,6 +72,8 @@ public class Parser {
      * @return Time in a LocalTime instance.
      */
     private LocalTime parseTime(String timeStr, char separator) {
+        assert !timeStr.isBlank() : "Invalid string, cannot parse time";
+
         String[] time = timeStr.split(String.valueOf(separator));
         int[] timeInfo = Stream.of(time).mapToInt(Integer::parseInt).toArray();
         if (timeInfo.length == 2) {
@@ -98,6 +104,8 @@ public class Parser {
      * @return Date and time in a LocalDateTime instance.
      */
     public LocalDateTime parseDateTime(String str, char separator) {
+        assert !str.isBlank() : "Invalid string, cannot parse date/time";
+
         String[] s = str.split(String.valueOf(separator));
         return LocalDateTime.of(parseDate(s[0]), parseTime(s[1]));
     }
