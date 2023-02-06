@@ -33,9 +33,9 @@ public class Task {
     }
 
     /**
-     * Format to save into duke.txt file locally.
+     * Format to save into Pix.txt file locally.
      *
-     * @return Formatted of tasks to save locally.
+     * @return Format of tasks to save locally.
      */
     public String toSave() {
         return isDone ? " 1 / " + description : " 0 / " + description;

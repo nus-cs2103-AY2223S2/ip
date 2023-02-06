@@ -1,6 +1,6 @@
 todo read book
-deadline return book /by idk
-event project meeting /from sometime /to some other time
+deadline return book /dueDate idk
+event project meeting /eventStart sometime /eventEnd some other time
 todo join music club
 todo study more this sem
 list
