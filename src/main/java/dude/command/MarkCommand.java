@@ -27,13 +27,12 @@ public class MarkCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        if (Task.getTaskCount() >= taskIndex && Task.getTaskCount() != 0) {
-            Task currentTask = tasks.getTask(taskIndex);
-            currentTask.mark();
-            storage.saveData(tasks);
-            return ui.showMark(currentTask);
-        } else {
+        if (Task.getTaskCount() < taskIndex || Task.getTaskCount() == 0) {
             return ui.showError("Uhh... Where got this task for me to mark?");
         }
+        Task currentTask = tasks.getTask(taskIndex);
+        currentTask.mark();
+        storage.saveData(tasks);
+        return ui.showMark(currentTask);
     }
 }

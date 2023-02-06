@@ -18,7 +18,7 @@ public class Dude {
     private final Ui ui;
 
     /**
-     * Initializes Dude.
+     * Initializes Dude
      *
      * @param filePath Path to data file stored.
      */
@@ -30,12 +30,11 @@ public class Dude {
         } catch (FileNotFoundException e) {
             ui.showLoadingError();
             tasks = new TaskList();
-
         }
     }
 
     /**
-     * Runs Dude program.
+     * Runs Dude program
      */
     public void run() {
         ui.showWelcome();
@@ -43,7 +42,7 @@ public class Dude {
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
+                ui.showLine();
                 Command c = Parser.parse(fullCommand);
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
