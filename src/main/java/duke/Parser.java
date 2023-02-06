@@ -13,7 +13,7 @@ import java.time.format.DateTimeParseException;
 public class Parser {
     private TodoList todoList;
 
-    private enum Instructions {todo, deadline, event, mark, unmark, delete}
+    private enum Instructions {todo, deadline, event, mark, unmark, delete, find}
 
     public Parser(TodoList todoList) {
         this.todoList = todoList;
@@ -54,6 +54,8 @@ public class Parser {
                 } else if (instruction.equals("delete")) {
                     int digit = Integer.parseInt(split_command[1]);
                     return new DeleteCommand(todoList, digit);
+                } else if (instruction.equals("find")) {
+                    return new FindCommand(todoList, split_command[1]);
                 } else {
                     return new AddTaskCommand(todoList, instruction, split_command[1]);
                 }

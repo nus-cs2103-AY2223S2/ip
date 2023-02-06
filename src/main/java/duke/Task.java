@@ -10,10 +10,17 @@ import java.time.format.DateTimeParseException;
  */
 public class Task implements Serializable {
     private Boolean isDone;
+    private String description;
 //    private static final long serialVersionUID = -7531925916726747642;
 
     public Task() {
         this.isDone = false;
+        this.description = "";
+    }
+
+    public Task(String task) {
+        this.isDone = false;
+        this.description = task;
     }
 
     /**
@@ -51,11 +58,21 @@ public class Task implements Serializable {
         this.isDone = false;
     }
 
+    /**
+     * Returns true if the description contains keywords, false otherwise.
+     *
+     * @param keyword Keywords needed to find.
+     * @return true if the description contains keywords, false otherwise.
+     */
+    public boolean doesContainKeyword(String keyword) {
+        return this.description.contains(keyword);
+    }
+
     private class Todo extends Task {
         private String task;
 
         public Todo(String task) {
-            super();
+            super(task);
             this.task = task;
         }
 
@@ -78,7 +95,7 @@ public class Task implements Serializable {
         private String deadlineTimeString;
 
         public Deadline(String task) throws DukeExceptions, DateTimeParseException {
-            super();
+            super(task);
             String[] commands = task.split(" /by ");
             if (commands.length == 1) {
                 throw new DukeExceptions("OOPS!!! Looks like someone forget his/her deadline :)\n Please use /by to indicate deadline");
@@ -140,7 +157,7 @@ public class Task implements Serializable {
         private String toTimeString;
 
         public Event(String task) throws DukeExceptions {
-            super();
+            super(task);
             String[] commands = task.split(" /from ");
             if (commands.length == 1) {
                 throw new DukeExceptions("OOPS!!! Looks like someone forget when the event begins :)\n Please use /from to indicate begin time");

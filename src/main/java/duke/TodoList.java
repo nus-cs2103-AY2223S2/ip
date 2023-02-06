@@ -91,6 +91,20 @@ public class TodoList implements Serializable {
         return todo_list.size();
     }
 
+    public void find(String keyword) {
+        System.out.println("Here are the matching tasks in your list:");
+        String result_list = "";
+        int todo_list_length = todo_list.size();
+        int resultIndex = 1;
+        for (int i = 1; i <= todo_list_length; i++) {
+            Task task = todo_list.get(i-1);
+            if (task.doesContainKeyword(keyword)) {
+                result_list += String.format("%d. %s\n", resultIndex++, task);
+            }
+        }
+        System.out.println(result_list);
+    }
+
     @Override
     public String toString() {
         String shown_list = "";
