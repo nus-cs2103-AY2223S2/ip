@@ -86,6 +86,11 @@ public class DaySchedule extends HBox {
     }
 
 
+    /**
+     * Creates an empty row.
+     * 
+     * @return the graphical representation of a row of {@code Timeable}.
+     */
     private Pane createRow() {
         Pane pane = new Pane();
         pane.setMinWidth(rowWidth);
@@ -95,6 +100,13 @@ public class DaySchedule extends HBox {
     }
 
 
+    /**
+     * Creates a row populated with blocks of {@code Timeable} as specified.
+     * 
+     * @param startTime - the start time of the day.
+     * @param timeables - the list of {@code Timeable} to display.
+     * @return the graphical representation of a row of {@code Timeable}.
+     */
     private Pane createRow(LocalDateTime startTime, List<ScheduleTimeable> timeables) {
         Pane rowPane = createRow();
 
