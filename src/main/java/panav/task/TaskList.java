@@ -10,12 +10,21 @@ public class TaskList {
 
     private ArrayList<Task> tasks;
 
+    /**
+     * Constructor to initialise ArrayList of tasks and populate it with
+     * given list of tasks.
+     * @param src list of tasks.
+     */
     public TaskList(ArrayList<Task> src) {
         tasks = new ArrayList<>();
         for (Task task : src) {
             tasks.add(task);
         }
     }
+
+    /**
+     * Constructor to initialise empty ArrayList of tasks.
+     */
     public TaskList() {
         tasks = new ArrayList<>();
     }
