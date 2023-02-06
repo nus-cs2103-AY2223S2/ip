@@ -131,6 +131,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * finds tasks from the tasklist that contain description matching given keyword
+     * 
+     * @param keyword the keyword the user is looking for in the tasks
+     */
     public void findTask(String keyword) {
         ArrayList<Task> matchingTasks = new ArrayList<Task>();
         for (Task task : tasks) {
