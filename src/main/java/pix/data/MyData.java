@@ -14,11 +14,11 @@ import pix.tasks.Task;
 import pix.tasks.ToDo;
 
 /**
- * MyDate class to keep track of the list of tasks.
+ * MyData class to keep track of the list of tasks.
  */
 public class MyData {
     /** Arraylist to keep track of all tasks. */
-    private final ArrayList<Task> data = new ArrayList<Task>();
+    private final ArrayList<Task> tasks = new ArrayList<Task>();
 
     /**
      * Gets tasks at index.
@@ -26,17 +26,8 @@ public class MyData {
      * @param index Index of task to retrieve.
      * @return the Task object.
      */
-    public Task getData(int index) {
-        return this.data.get(index);
-    }
-
-    /**
-     * Delete the task at index.
-     *
-     * @param index Index of task to delete.
-     */
-    public void deleteData(int index) {
-        this.data.remove(index);
+    public Task getTaskAtIndex(int index) {
+        return this.tasks.get(index);
     }
 
     /**
@@ -44,8 +35,17 @@ public class MyData {
      *
      * @param command Task to add to the list.
      */
-    public void setData(Task command) {
-        data.add(command);
+    public void addTask(Task command) {
+        tasks.add(command);
+    }
+
+    /**
+     * Delete the task at index.
+     *
+     * @param index Index of task to delete.
+     */
+    public void deleteTask(int index) {
+        this.tasks.remove(index);
     }
 
     /**
@@ -54,7 +54,7 @@ public class MyData {
      * @param index Index to mark task as done.
      */
     public void markDone(int index) {
-        this.data.get(index).markDone();
+        this.tasks.get(index).markDone();
     }
 
 
@@ -64,7 +64,7 @@ public class MyData {
      * @param index Index to mark task as undone.
      */
     public void markUndone(int index) {
-        this.data.get(index).markUndone();
+        this.tasks.get(index).markUndone();
     }
 
     /**
@@ -73,19 +73,19 @@ public class MyData {
      * @return Length of list.
      */
     public int len() {
-        return this.data.size();
+        return this.tasks.size();
     }
 
     /**
      * Saves the list of tasks to a text file on local device.
      */
     public void saveToFile() {
-        String home = System.getProperty("user.dir");
-        java.nio.file.Path path = java.nio.file.Paths.get(home, "Pix.txt");
+        String homeDirectory = System.getProperty("user.dir");
+        java.nio.file.Path pathToSavedTasks = java.nio.file.Paths.get(homeDirectory, "Pix.txt");
         try {
-            FileWriter writer = new FileWriter(path.toFile());
+            FileWriter writer = new FileWriter(pathToSavedTasks.toFile());
             for (int i = 0; i < len(); i++) {
-                writer.write(getData(i).toSave() + "\r\n");
+                writer.write(getTaskAtIndex(i).toSave() + "\r\n");
             }
             writer.close();
         } catch (IOException e) {
@@ -94,16 +94,16 @@ public class MyData {
     }
 
     /**
-     * If duke.txt does not exist, create the file.
+     * If Pix.txt does not exist, create the file.
      * Load the tasks in the file into the ArrayList data.
      *
      * @throws IOException If path does not exist.
      */
     public void loadData() throws IOException {
-        String home = System.getProperty("user.dir");
-        java.nio.file.Path path = java.nio.file.Paths.get(home, "Pix.txt");
+        String homeDirectory = System.getProperty("user.dir");
+        java.nio.file.Path pathToSavedTasks = java.nio.file.Paths.get(homeDirectory, "Pix.txt");
         try {
-            Scanner sc = new Scanner(new File(path.toString()));
+            Scanner sc = new Scanner(new File(pathToSavedTasks.toString()));
             int id = 0;
             while (sc.hasNextLine()) {
                 String[] arr = sc.nextLine().split(" / ");
@@ -112,15 +112,15 @@ public class MyData {
                 switch (command) {
                 case "T":
                     ToDo todo = new ToDo(arr[2]);
-                    setData(todo);
+                    addTask(todo);
                     break;
                 case "D":
                     Deadline deadline = new Deadline(arr[2], arr[3]);
-                    setData(deadline);
+                    addTask(deadline);
                     break;
                 default:
                     Event event = new Event(arr[2], arr[3], arr[4]);
-                    setData(event);
+                    addTask(event);
                     break;
                 }
                 if (marked.equals("1")) {
@@ -129,7 +129,7 @@ public class MyData {
                 id++;
             }
         } catch (FileNotFoundException e) {
-            Files.createFile(path);
+            Files.createFile(pathToSavedTasks);
         }
     }
 }

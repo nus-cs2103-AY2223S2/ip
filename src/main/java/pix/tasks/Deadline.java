@@ -8,17 +8,17 @@ import java.time.LocalDateTime;
  */
 public class Deadline extends Task {
     /** Date and time of deadline. */
-    protected LocalDateTime by;
+    protected LocalDateTime dueDate;
 
     /**
      * Constructs a new Deadline.
      *
      * @param description Description of the deadline.
-     * @param by When deadline is due by.
+     * @param dueDate When deadline is due dueDate.
      */
-    public Deadline(String description, String by) {
+    public Deadline(String description, String dueDate) {
         super(description);
-        this.by = LocalDateTime.parse(by, formatInput);
+        this.dueDate = LocalDateTime.parse(dueDate, formatInput);
     }
 
     /**
@@ -27,17 +27,17 @@ public class Deadline extends Task {
      * @return Date of the deadline.
      */
     public LocalDate getDate() {
-        return this.by.toLocalDate();
+        return this.dueDate.toLocalDate();
     }
 
     @Override
     public String toString() {
         return "[D]" + super.toString()
-                + " (by: " + by.format(formatOutput) + ")";
+                + "\nDue: " + dueDate.format(formatOutput);
     }
 
     @Override
     public String toSave() {
-        return "D /" + super.toSave() + " / " + by.format(formatInput);
+        return "D /" + super.toSave() + " / " + dueDate.format(formatInput);
     }
 }
