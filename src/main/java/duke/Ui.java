@@ -29,10 +29,14 @@ public class Ui {
 
     /**
      * Returns the next input line.
+     *
      * @return input.
      */
     public String readCommand() {
         return sc.nextLine();
     }
 
+    public void showError(String message) {
+        System.out.println(message);
+    }
 }

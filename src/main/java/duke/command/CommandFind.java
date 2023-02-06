@@ -28,12 +28,13 @@ public class CommandFind extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
-        String returnString = "Here are the matching tasks in your list:\n";
+        String retString = "Here are the matching tasks in your list:\n";
         for (int i = 0; i < taskList.getLength(); i++) {
-            if (taskList.getTask(i).getDesc().contains(word)) {
-                returnString += String.format("%d.%s\n", i + 1, taskList.getTask(i).toString());
+            boolean containsKeyword = taskList.getTask(i).getDesc().contains(word);
+            if (containsKeyword) {
+                retString += String.format("%d.%s\n", i + 1, taskList.getTask(i).toString());
             }
         }
-        return returnString;
+        return retString;
     }
 }

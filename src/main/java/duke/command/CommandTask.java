@@ -29,11 +29,11 @@ public class CommandTask extends Command {
      */
     public String execute(TaskList taskList, Ui ui, Storage storage) {
         taskList.addTask(task);
-        String returnString = ("added: " + task.toString() + "\n");
+        String addedString = ("added: " + task.toString() + "\n");
         String len = (taskList.getLength() == 1 ? taskList.getLength() + " task" : taskList.getLength() + " tasks");
-        returnString += ("Now you have " + len + " in the list.");
+        String lengthString = ("Now you have " + len + " in the list.");
 
         storage.writeArray(taskList);
-        return returnString;
+        return addedString + lengthString;
     }
 }

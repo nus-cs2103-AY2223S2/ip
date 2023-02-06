@@ -33,12 +33,12 @@ public class Task {
     }
 
     /**
-     * Returns status icon depending on if task is marked.
+     * Returns status icon depending on whether task is marked.
      *
      * @return X for marked, empty if unmarked,
      */
     public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
+        return (isDone) ? "X" : " "; // mark done task with X
     }
 
     /**
@@ -55,6 +55,6 @@ public class Task {
      * @return string format.
      */
     public String toBackup() {
-        return String.format("%s | %s", (isDone ? "1" : "0"), this.desc);
+        return String.format("%s | %s", (isDone) ? "1" : "0", this.desc);
     }
 }
