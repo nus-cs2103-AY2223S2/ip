@@ -114,6 +114,9 @@ public class Parser {
             break;
         }
 
+        //Assertion Check
+        assert c == null: "Command c should not be null";
+
         return c;
     }
 
