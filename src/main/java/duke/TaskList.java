@@ -4,17 +4,35 @@ import java.util.ArrayList;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * contains list of tasks in Duke
+ */
 public class TaskList {
     private ArrayList<Task> taskList;
 
+    /**
+     * constructor for new TaskList instance from arraylist of tasks
+     * 
+     * @param taskList ArrayList of tasks to copy over
+     */
     public TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
     }
 
+    /**
+     * constructor for new TaskList instance
+     */
     public TaskList() {
         this.taskList = new ArrayList<Task>();
     }
 
+    /**
+     * adds a new task into arraylist
+     * 
+     * @param taskDescription string description of the new task to be added
+     * @param type            type of the new task to be added ie ToDo, Event or
+     *                        Deadline
+     */
     public void addTask(String taskDescription, String type) {
 
         if (type.equals("todo")) {
@@ -64,6 +82,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * marks a task in the arraylist as completed
+     * 
+     * @param index index of the task to mark as completed
+     * @throws IndexOutOfBoundsException
+     */
     public void markTask(int index) throws IndexOutOfBoundsException {
         try {
             taskList.get(index - 1).mark();
@@ -73,6 +97,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * unmarks a task in arraylist to not done
+     * 
+     * @param index index of the task to unmark
+     * @throws IndexOutOfBoundsException
+     */
     public void unmarkTask(int index) throws IndexOutOfBoundsException {
         try {
             taskList.get(index - 1).unmark();
@@ -82,6 +112,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * removes a task from the arraylist
+     * 
+     * @param index index of the task to be removed from the arraylist
+     * @throws IndexOutOfBoundsException
+     */
     public void delete(int index) throws IndexOutOfBoundsException {
         try {
 
@@ -95,10 +131,22 @@ public class TaskList {
         }
     }
 
+    /**
+     * gets the size of the tasklist
+     * 
+     * @return an integer representing the size of the tasklist
+     */
     public int getSize() {
         return taskList.size();
     }
 
+    /**
+     * returns the string representation of tasks in the tasklist to be saved into
+     * the text file
+     * 
+     * @return string representation of tasks in the tasklist to be saved into the
+     *         text file
+     */
     public String toStorageData() {
         String data = "";
         for (Task task : taskList) {
@@ -109,6 +157,13 @@ public class TaskList {
         return data.trim();
     }
 
+    /**
+     * returns the string representation of tasks in the tasklist with indexing
+     * starting from 1
+     * 
+     * @return string representation of tasks in the tasklist with indexing starting
+     *         from 1
+     */
     @Override
     public String toString() {
         String taskToText = "";

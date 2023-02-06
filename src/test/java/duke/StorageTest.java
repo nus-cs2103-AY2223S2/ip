@@ -18,8 +18,6 @@ public class StorageTest {
             String tasksToTest = tasks.toStorageData();
             File f = new File("data/duke.txt");
             String storageTest = "";
-            //storageTest is in // // // format 
-            //tasksToTest is in [][] xxx format 
             try {
                 Scanner scn = new Scanner(f);
                 while (scn.hasNext()) {
