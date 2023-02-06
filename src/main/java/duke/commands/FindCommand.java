@@ -18,15 +18,8 @@ public class FindCommand extends Command {
         if (tasks.isEmpty()) {
             this.commandStatus = "You have no tasks in your list! \n";
         } else {
-            TaskList temp = new TaskList();
-
-            for (int i = 0; i < tasks.size(); i++) {
-                Task curTask = tasks.get(i);
-                if (curTask.getName().contains(this.searchTerm)) {
-                    temp.addTask(tasks.get(i));
-                }
-            }
-
+            TaskList temp = tasks.find(searchTerm);
+            
             if (!temp.isEmpty()) {
                 this.commandStatus = "Here are the matching tasks in your list: \n" + temp;
             } else {
