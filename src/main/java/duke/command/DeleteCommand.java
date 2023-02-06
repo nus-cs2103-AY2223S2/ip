@@ -1,23 +1,27 @@
 package duke.command;
 
+import java.util.ArrayList;
+
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.enums.Views;
 import duke.task.Task;
 
 /**
  * Command: Deletes the Task given
  */
 public class DeleteCommand extends Command {
-    private int taskNum;
+    private int[] taskNumbers;
 
     /**
      * Creates Delete Command
-     * @param taskNum int index of task in the ArrayList
+     *
+     * @param taskNumbers int[] index of task in the ArrayList
      */
-    public DeleteCommand(int taskNum) {
-        this.taskNum = taskNum;
+    public DeleteCommand(int[] taskNumbers) {
+        this.taskNumbers = taskNumbers;
     }
 
     /**
@@ -29,9 +33,32 @@ public class DeleteCommand extends Command {
      * @throws DukeException
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        Task delTask = tasks.get(taskNum);
+        assert taskNumbers.length != 0 : Views.NO_INT_ERR_STRING.eng();
+        if (taskNumbers.length == 1) {
+            Task delTask = tasks.get(0);
+            execute(tasks, storage, 0);
+            ui.showDel(delTask, tasks);
+        } else {
+            ArrayList<Task> printTasks = new ArrayList<Task>();
+            for (int taskNum : taskNumbers) {
+                printTasks.add(tasks.get(taskNum));
+                execute(tasks, storage, taskNum);
+            }
+            ui.showDel(printTasks, tasks);
+        }
+    }
+
+    /**
+     * Executes the command privately, abstract from previous two executes
+     *
+     * @param tasks   TaskList object to get and set the list
+     * @param storage object required when command writes to file
+     * @param taskNum task's number to operate on
+     * @throws DukeException
+     */
+    private void execute(TaskList tasks, Storage storage, int taskNum) throws DukeException {
+        assert taskNumbers.length != 0 : Views.NO_INT_ERR_STRING.eng();
         tasks.remove(taskNum);
-        ui.showDel(delTask, tasks);
         storage.save(tasks);
     }
 
@@ -41,14 +68,22 @@ public class DeleteCommand extends Command {
      * @param tasks   TaskList object to get and set the list
      * @param ui      object to reply to user after the command has executed
      * @param storage object required when command writes to file
-     * @return returns the UI text instead of printing
+     * @return returns the UI text instead of print[]ing
      * @throws DukeException
      */
     public String executeString(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        Task delTask = tasks.get(taskNum);
-        tasks.remove(taskNum);
-        storage.save(tasks);
-        return ui.stringDel(delTask, tasks);
+        if (taskNumbers.length == 1) {
+            Task delTask = tasks.get(0);
+            execute(tasks, storage, 0);
+            return ui.stringDel(delTask, tasks);
+        } else {
+            ArrayList<Task> printTasks = new ArrayList<Task>();
+            for (int taskNum : taskNumbers) {
+                printTasks.add(tasks.get(taskNum));
+                execute(tasks, storage, taskNum);
+            }
+            return ui.stringDel(printTasks, tasks, true);
+        }
     }
 
     /**

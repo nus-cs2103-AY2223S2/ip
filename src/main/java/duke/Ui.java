@@ -43,6 +43,7 @@ public class Ui {
 
     /**
      * Return Welcome String as String
+     *
      * @return Welcome String
      */
     public String stringWelcome() {
@@ -111,20 +112,25 @@ public class Ui {
      */
     public String stringList(ArrayList<Task> tasks, boolean isGui) throws DukeException {
         assert tasks.size() != 0 : Views.CANNOT_FIND_STRING.eng();
-        String toPrint = Views.FOUND_LIST_STRING.eng();
+        String returnString = Views.FOUND_LIST_STRING.eng();
         if (isGui) {
-            toPrint = toPrint.substring(0, toPrint.length() - 6);
+            returnString = returnString.substring(0, returnString.length() - 6);
         }
+        return returnString + stringListRaw(tasks, isGui);
+    }
+
+    private String stringListRaw(ArrayList<Task> tasks, boolean isGui) throws DukeException {
+        String returnString = "";
         for (int i = 0; i < tasks.size(); i++) {
-            toPrint += ((i + 1) + "." + tasks.get(i)) + "\n";
+            returnString += ((i + 1) + "." + tasks.get(i)) + "\n";
             if (!isGui) {
-                toPrint += "      ";
+                returnString += "      ";
             }
         }
         if (isGui) {
-            return toPrint.substring(0, toPrint.length() - 1);
+            return returnString.substring(0, returnString.length() - 1);
         } else {
-            return toPrint.substring(0, toPrint.length() - 7);
+            return returnString.substring(0, returnString.length() - 7);
         }
     }
 
@@ -142,6 +148,16 @@ public class Ui {
     /**
      * Prints out the task that is marked done
      *
+     * @param tasks TaskList object to get the task
+     * @throws DukeException when the task is not found in the list
+     */
+    public void showMarkDone(ArrayList<Task> tasks) throws DukeException {
+        printer(stringMarkDone(tasks, false));
+    }
+
+    /**
+     * Prints out the task that is marked done
+     *
      * @param tasks   TaskList object to get the task
      * @param taskNum int index of task in the ArrayList
      * @return String representation of what the task looks like when its done
@@ -149,6 +165,17 @@ public class Ui {
      */
     public String stringMarkDone(TaskList tasks, int taskNum) throws DukeException {
         return Views.MARK_DONE_STRING.eng() + tasks.get(taskNum);
+    }
+
+    /**
+     * Prints out the task that is marked done
+     *
+     * @param tasks TaskList object to get the task
+     * @return String representation of what the task looks like when its done
+     * @throws DukeException when the task is not found in the list
+     */
+    public String stringMarkDone(ArrayList<Task> tasks, boolean isGui) throws DukeException {
+        return Views.MARK_DONE_STRING.eng() + stringListRaw(tasks, isGui);
     }
 
     /**
@@ -165,6 +192,16 @@ public class Ui {
     /**
      * Prints out the task that is marked undone
      *
+     * @param tasks TaskList object to get the task
+     * @throws DukeException when the task is not found in the list
+     */
+    public void showUnmarkDone(ArrayList<Task> tasks) throws DukeException {
+        printer(stringUnmarkDone(tasks, false));
+    }
+
+    /**
+     * Prints out the task that is marked undone
+     *
      * @param tasks   TaskList object to get the task
      * @param taskNum int index of task in the ArrayList
      * @return String representation of when task is undone
@@ -172,6 +209,17 @@ public class Ui {
      */
     public String stringUnmarkDone(TaskList tasks, int taskNum) throws DukeException {
         return (Views.UNMARK_DONE_STRING.eng() + tasks.get(taskNum));
+    }
+
+    /**
+     * Prints out the task that is marked undone
+     *
+     * @param tasks ArrayList object to get the task
+     * @return String representation of when task is undone
+     * @throws DukeException when the task is not found in the list
+     */
+    public String stringUnmarkDone(ArrayList<Task> tasks, boolean isGui) throws DukeException {
+        return Views.UNMARK_DONE_STRING.eng() + stringListRaw(tasks, isGui);
     }
 
     /**
@@ -191,6 +239,18 @@ public class Ui {
      */
     public String stringAdd(Task newTask) {
         return "added: " + newTask;
+    }
+
+    /**
+     * Prints out the task that is deleted and show the number of tasks left
+     * Prints out the task that is deleted String string the number of tasks left
+     *
+     * @param delTasks tasks that is deleted
+     * @param task     TaskList object to get the count
+     * @throws DukeException
+     */
+    public void showDel(ArrayList<Task> delTasks, TaskList task) throws DukeException {
+        printer(stringDel(delTasks, task, false));
     }
 
     /**
@@ -223,6 +283,25 @@ public class Ui {
     }
 
     /**
+     * Prints out the task that is deleted and show the number of tasks left
+     * Prints out the task that is deleted String string the number of tasks left
+     *
+     * @param delTask task that is deleted
+     * @param task    TaskList object to get the count
+     * @return String representation of deleted task
+     * @throws DukeException
+     */
+    public String stringDel(ArrayList<Task> delTask, TaskList task, Boolean isGui) throws DukeException {
+        String returnString = Views.DELETE_DONE_STRING.eng();
+        returnString += stringListRaw(delTask, isGui);
+        returnString += "\n      ";
+        returnString += Views.TASK_COUNT_1_STRING.eng();
+        returnString += task.size();
+        returnString += Views.TASK_COUNT_2_STRING.eng();
+        return returnString;
+    }
+
+    /**
      * Prints out to user to show that the task has been cleared
      */
     public void showClear() {
@@ -231,6 +310,7 @@ public class Ui {
 
     /**
      * Prints out to user to show that the task has been cleared
+     *
      * @return String representation of the task cleared
      */
     public String stringClear() {
@@ -246,6 +326,7 @@ public class Ui {
 
     /**
      * Prints out bye message
+     *
      * @return String representation of exit message
      */
     public String stringEnd() {

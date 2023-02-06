@@ -1,23 +1,27 @@
 package duke.command;
 
+import java.util.ArrayList;
+
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.enums.Views;
+import duke.task.Task;
 
 /**
  * Command: mark the item as undone
  */
 public class UnmarkCommand extends Command {
-    private int taskNum;
+    private int[] taskNumbers;
 
     /**
      * Creates the command to unmark task as done
      *
-     * @param taskNum int index of task in the ArrayList
+     * @param taskNumbers int[] index of task in the ArrayList
      */
-    public UnmarkCommand(int taskNum) {
-        this.taskNum = taskNum;
+    public UnmarkCommand(int[] taskNumbers) {
+        this.taskNumbers = taskNumbers;
     }
 
     /**
@@ -29,8 +33,31 @@ public class UnmarkCommand extends Command {
      * @throws DukeException
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        assert taskNumbers.length != 0 : Views.NO_INT_ERR_STRING.eng();
+        if (taskNumbers.length == 1) {
+            int taskNum = taskNumbers[0];
+            execute(tasks, storage, taskNum);
+            ui.showUnmarkDone(tasks, taskNum);
+        } else {
+            ArrayList<Task> printTasks = new ArrayList<>();
+            for (int taskNum : taskNumbers) {
+                execute(tasks, storage, taskNum);
+                printTasks.add(tasks.get(taskNum));
+            }
+            ui.showUnmarkDone(printTasks);
+        }
+    }
+
+    /**
+     * Executes the command privately, abstract from previous two executes
+     *
+     * @param tasks   TaskList object to get and set the list
+     * @param storage object required when command writes to file
+     * @param taskNum task's number to operate on
+     * @throws DukeException
+     */
+    private void execute(TaskList tasks, Storage storage, int taskNum) throws DukeException {
         tasks.get(taskNum).markAsUndone();
-        ui.showUnmarkDone(tasks, taskNum);
         storage.save(tasks);
     }
 
@@ -40,13 +67,23 @@ public class UnmarkCommand extends Command {
      * @param tasks   TaskList object to get and set the list
      * @param ui      object to reply to user after the command has executed
      * @param storage object required when command writes to file
-     * @return returns the UI text instead of printing
+     * @return returns the UI text instead of print[]ing
      * @throws DukeException
      */
     public String executeString(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        tasks.get(taskNum).markAsUndone();
-        storage.save(tasks);
-        return ui.stringUnmarkDone(tasks, taskNum);
+        assert taskNumbers.length != 0 : Views.NO_INT_ERR_STRING.eng();
+        if (taskNumbers.length == 1) {
+            int taskNum = taskNumbers[0];
+            execute(tasks, storage, taskNum);
+            return ui.stringUnmarkDone(tasks, taskNum);
+        } else {
+            ArrayList<Task> printTasks = new ArrayList<>();
+            for (int taskNum : taskNumbers) {
+                execute(tasks, storage, taskNum);
+                printTasks.add(tasks.get(taskNum));
+            }
+            return ui.stringUnmarkDone(printTasks, true);
+        }
     }
 
     /**

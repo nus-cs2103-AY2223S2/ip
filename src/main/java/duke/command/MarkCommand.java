@@ -1,23 +1,27 @@
 package duke.command;
 
+import java.util.ArrayList;
+
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.enums.Views;
+import duke.task.Task;
 
 /**
  * Command: Marks the Task as complete
  */
 public class MarkCommand extends Command {
-    private int taskNum;
+    private int[] taskNumbers;
 
     /**
      * Takes in the task number to mark as complete
      *
-     * @param taskNum int index of task in the ArrayList
+     * @param taskNumbers int index of task in the ArrayList
      */
-    public MarkCommand(int taskNum) {
-        this.taskNum = taskNum;
+    public MarkCommand(int... taskNumbers) {
+        this.taskNumbers = taskNumbers;
     }
 
     /**
@@ -29,8 +33,31 @@ public class MarkCommand extends Command {
      * @throws DukeException
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        assert taskNumbers.length != 0 : Views.NO_INT_ERR_STRING.eng();
+        if (taskNumbers.length == 1) {
+            int taskNum = taskNumbers[0];
+            execute(tasks, storage, taskNum);
+            ui.showMarkDone(tasks, taskNum);
+        } else {
+            ArrayList<Task> printTasks = new ArrayList<Task>();
+            for (int taskNum : taskNumbers) {
+                execute(tasks, storage, taskNum);
+                printTasks.add(tasks.get(taskNum));
+            }
+            ui.showMarkDone(printTasks);
+        }
+    }
+
+    /**
+     * Executes the command privately, abstract from previous two executes
+     *
+     * @param tasks   TaskList object to get and set the list
+     * @param storage object required when command writes to file
+     * @param taskNum task's number to operate on
+     * @throws DukeException
+     */
+    private void execute(TaskList tasks, Storage storage, int taskNum) throws DukeException {
         tasks.get(taskNum).markAsDone();
-        ui.showMarkDone(tasks, taskNum);
         storage.save(tasks);
     }
 
@@ -44,9 +71,19 @@ public class MarkCommand extends Command {
      * @throws DukeException
      */
     public String executeString(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        tasks.get(taskNum).markAsDone();
-        storage.save(tasks);
-        return ui.stringMarkDone(tasks, taskNum);
+        assert taskNumbers.length != 0 : Views.NO_INT_ERR_STRING.eng();
+        if (taskNumbers.length == 1) {
+            int taskNum = taskNumbers[0];
+            execute(tasks, storage, taskNum);
+            return ui.stringUnmarkDone(tasks, taskNum);
+        } else {
+            ArrayList<Task> printTasks = new ArrayList<>();
+            for (int taskNum : taskNumbers) {
+                execute(tasks, storage, taskNum);
+                printTasks.add(tasks.get(taskNum));
+            }
+            return ui.stringMarkDone(printTasks, true);
+        }
     }
 
     /**

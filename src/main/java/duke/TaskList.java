@@ -61,12 +61,7 @@ public class TaskList {
      * @return ArrayList of found task
      */
     public ArrayList<Task> search(String... query) {
-        // Solution below adapted from https://stackoverflow.com/q/40605998
-        // Removes empty string from query
-        List<String> filteredList = Arrays.stream(query)
-                .filter(string -> !string.isEmpty())
-                .collect(Collectors.toList());
-        query = filteredList.toArray(new String[0]);
+        query = removeEmptyStrings(query);
 
         HashSet<Task> results = new HashSet<Task>();
         // Inefficient O(N^2) search method. Fix this whenever
@@ -110,6 +105,21 @@ public class TaskList {
      */
     public void clear() {
         this.tasksList.clear();
+    }
+
+    /**
+     * Utility method to remove empty String in an array of strings
+     *
+     * @param input
+     * @return new String[] without empty Strings
+     */
+    public static String[] removeEmptyStrings(String[] input) {
+        // Solution below adapted from https://stackoverflow.com/q/40605998
+        // Removes empty string from query
+        List<String> filteredList = Arrays.stream(input)
+                .filter(string -> !string.isEmpty())
+                .collect(Collectors.toList());
+        return filteredList.toArray(new String[0]);
     }
 
 }
