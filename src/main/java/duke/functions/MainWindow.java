@@ -33,6 +33,7 @@ public class MainWindow extends AnchorPane {
     }
 
     public void setDuke(Duke d) {
+        assert d != null;
         duke = d;
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(
                 "If it isn't your favourite astronaut lawyer doctor plumber cleaner, Johnny Sins."

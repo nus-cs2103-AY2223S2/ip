@@ -10,8 +10,10 @@ public class Duke {
     private Ui ui;
     public Duke() {
         ui = new Ui();
+        assert FILEPATH != null;
         storage = new Storage(FILEPATH);
         try {
+            assert tasks != null;
             storage.readDatabase(tasks);
         } catch (Exception e) {
             tasks = new TaskList();
