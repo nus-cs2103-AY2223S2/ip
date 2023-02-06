@@ -15,7 +15,7 @@ import javafx.scene.text.TextAlignment;
 
 
 /** A graphical display of a week's schedule. */
-public class ScheduleComponent extends VBox {
+public class WeekSchedule extends VBox {
     private static final double LABEL_WIDTH = 100;
     private static final double ROW_WIDTH = 1000;
 
@@ -28,7 +28,7 @@ public class ScheduleComponent extends VBox {
      * @param startTime - the start time of the week.
      * @param timeabels - the list of {@code ScheduleTimeable} to display.
      */
-    public ScheduleComponent(LocalDateTime startTime, List<? extends ScheduleTimeable> timeables) {
+    public WeekSchedule(LocalDateTime startTime, List<? extends ScheduleTimeable> timeables) {
         List<? extends List<ScheduleTimeable>> rows = split(startTime, timeables);
         getChildren().add(new ScheduleHeader(LABEL_WIDTH, ROW_WIDTH));
         for (int i = 0; i < rows.size(); i++) {

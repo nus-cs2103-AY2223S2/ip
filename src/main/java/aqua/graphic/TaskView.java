@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import aqua.graphic.schedule.ScheduleComponent;
+import aqua.graphic.schedule.WeekSchedule;
 import aqua.graphic.schedule.ScheduleTimeable;
 import aqua.manager.TaskFilterReport;
 import aqua.usertask.UserTask;
@@ -44,7 +44,7 @@ public class TaskView extends UiComponent<VBox> {
         List<ScheduleTimeable> timeables = tasks.stream()
                 .map(task -> new TimeableAquaTask(task))
                 .collect(Collectors.toList());
-        scheduleDisplayArea.getChildren().add(new ScheduleComponent(startTime, timeables));
+        scheduleDisplayArea.getChildren().add(new WeekSchedule(startTime, timeables));
     }
 
 
