@@ -4,11 +4,17 @@ import io.Storage;
 import io.Ui;
 import task.TaskList;
 
+/**
+ * Main class
+ */
 public class Duke {
     private final Storage<TaskList> storage;
     private final TaskList taskList;
     private boolean isExit;
 
+    /**
+     * @param filename Name of file to save tasklist to
+     */
     public Duke(String filename) {
         this.storage = Storage.of(TaskList.class, filename);
         this.taskList = this.storage.load().match(
@@ -40,6 +46,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Main function
+     */
     public static void main(String[] args) {
         Ui.showWelcome();
         Duke duke = new Duke("taskList.ser");
