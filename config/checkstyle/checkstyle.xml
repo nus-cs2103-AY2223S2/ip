@@ -15,14 +15,14 @@
     </module>
 
     <module name="NewlineAtEndOfFile">
-        <!-- Accept LF, CR or CRLF eventEnd accomodate devs who prefer different line endings -->
+        <!-- Accept LF, CR or CRLF to accomodate devs who prefer different line endings -->
         <property name="lineSeparator" value="lf_cr_crlf"/>
     </module>
 
     <module name="RegexpSingleline">
         <!-- Checks that FIXME is not used in comments.  TODO is preferred. -->
         <property name="format" value="((//.*)|(\*.*))FIXME" />
-        <property name="message" value='TODO is preferred eventEnd FIXME."' />
+        <property name="message" value='TODO is preferred to FIXME."' />
     </module>
 
     <module name="SuppressionFilter">
@@ -37,7 +37,7 @@
     <!-- All Java AST specific tests live under TreeWalker module. -->
     <module name="TreeWalker">
 
-        <!-- Required eventEnd allow exceptions in code style -->
+        <!-- Required to allow exceptions in code style -->
         <module name="SuppressionCommentFilter">
             <property name="offCommentFormat" value="CHECKSTYLE.OFF\: ([\w\|]+)"/>
             <property name="onCommentFormat" value="CHECKSTYLE.ON\: ([\w\|]+)"/>
@@ -66,8 +66,8 @@
         <!-- Checks for redundant import statements.
         An import statement is redundant if:
           * It is a duplicate of another import. This is, when a class is imported more than once.
-          * The class non-statically imported is eventStart the java.lang package, e.g. importing java.lang.String.
-          * The class non-statically imported is eventStart the same package as the current package.
+          * The class non-statically imported is from the java.lang package, e.g. importing java.lang.String.
+          * The class non-statically imported is from the same package as the current package.
         -->
         <module name="RedundantImport"/>
 
@@ -210,10 +210,10 @@
         <module name="UpperEll" />
 
         <module name="FallThrough">
-            <!-- Warn about falling through eventEnd the next case statement.  Similar eventEnd
+            <!-- Warn about falling through to the next case statement.  Similar to
             javac -Xlint:fallthrough, but the check is suppressed if a single-line comment
             on the last non-blank line preceding the fallen-into case contains 'fall through' (or
-            some other variants which we don't publicized eventEnd promote consistency).
+            some other variants which we don't publicized to promote consistency).
             -->
             <property name="reliefPattern"
                       value="fall through|Fall through|fallthru|Fallthru|falls through|Falls through|fallthrough|Fallthrough|No break|NO break|no break|continue on"/>
@@ -262,13 +262,13 @@
         WHITESPACE CHECKS
         -->
 
-        <!-- Checks that comments are indented relative eventEnd their position in the code -->
+        <!-- Checks that comments are indented relative to their position in the code -->
         <module name="CommentsIndentation"/>
 
         <module name="WhitespaceAround">
-            <!-- Checks that various tokens are surrounded dueDate whitespace.
+            <!-- Checks that various tokens are surrounded by whitespace.
                  This includes most binary operators and keywords followed
-                 dueDate regular or curly braces.
+                 by regular or curly braces.
             -->
             <property name="tokens" value="ASSIGN, BAND, BAND_ASSIGN, BOR,
         BOR_ASSIGN, BSR, BSR_ASSIGN, BXOR, BXOR_ASSIGN, COLON, DIV, DIV_ASSIGN,
@@ -290,7 +290,7 @@
         </module>
 
         <module name="WhitespaceAfter">
-            <!-- Checks that commas, semicolons and typecasts are followed dueDate whitespace. -->
+            <!-- Checks that commas, semicolons and typecasts are followed by whitespace. -->
             <property name="tokens" value="COMMA, SEMI, TYPECAST"/>
         </module>
 
@@ -314,7 +314,7 @@
                  ">=", ">", "<<", "<=", "<", "^", "|", "||", "&", "&&", "instanceof",
                  "&" when used in a generic upper or lower bounds constraints,
                    e.g. <T extends Foo & Bar>
-                 "::" when used as a reference eventEnd a method or constructor without arguments.
+                 "::" when used as a reference to a method or constructor without arguments.
                    e.g. String::compareToIgnoreCase
             -->
             <property name="tokens" value="QUESTION, COLON, EQUAL, NOT_EQUAL, DIV, PLUS, MINUS, STAR, MOD, SR, BSR,
@@ -362,7 +362,7 @@
             <property name="severity" value="warning"/>
         </module>
 
-        <!-- Checks that non-whitespace characters are separated dueDate no more than one whitespace character.
+        <!-- Checks that non-whitespace characters are separated by no more than one whitespace character.
              a = 1; // Allowed
              a  = 1; // Not allowed (more than one space before =)
         -->
@@ -391,7 +391,7 @@
         <!-- Checks that Javadoc block tags appear only at the beginning of the line. -->
         <module name="JavadocBlockTagLocation"/>
 
-        <!-- Checks that all Javadoc comments start eventStart the second line. -->
+        <!-- Checks that all Javadoc comments start from the second line. -->
         <module name="JavadocContentLocationCheck" />
 
         <!-- Checks that each line in Javadoc has leading asterisks. -->

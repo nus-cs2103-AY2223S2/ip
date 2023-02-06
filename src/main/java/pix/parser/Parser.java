@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 
-import pix.Pix;
 import pix.commands.ByeCommand;
 import pix.commands.Command;
 import pix.commands.DeadlineCommand;
@@ -204,7 +203,7 @@ public class Parser {
                 throw new PixException("Please enter a valid number.");
             }
             return new DeleteCommand(id - 1);
-        } catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             throw new PixException("Please enter a valid number.");
         }
     }

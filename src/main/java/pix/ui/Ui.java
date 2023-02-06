@@ -62,7 +62,7 @@ public class Ui {
      * @return ByeCommand string to be displayed.
      */
     public String bye() {
-        return "ByeCommand. Hope to see you again soon!\n\n";
+        return "Bye. Hope to see you again soon!\n\n";
     }
 
     /**
