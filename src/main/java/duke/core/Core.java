@@ -26,6 +26,7 @@ public class Core {
     }
 
     private void handleCommand(String cmd) throws DukeException {
+        assert isOnline : "Commands to be handled only when online";
         if (cmd.matches("^bye$")) {
             ui.bye();
             isOnline = false;
@@ -72,6 +73,8 @@ public class Core {
     }
 
     public String setup() {
+        assert tasks != null : "tasks have been initialised";
+        assert ui != null : "ui has been initialised";
         try {
             tasks.load();
             ui.introduce();
