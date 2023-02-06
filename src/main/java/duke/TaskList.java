@@ -6,62 +6,107 @@ import duke.exception.InvalidTaskNumberException;
 import duke.task.Task;
 
 /**
- * A
+ * A task list to store all recorded tasks.
  */
 public class TaskList {
     private ArrayList<Task> tasks;
 
-    TaskList() {
+    /**
+     * A constructor for TaskList.
+     */
+    public TaskList() {
         tasks = new ArrayList<>();
     }
 
-    void addTask(Task task) {
+    /**
+     * Adds task to list of tasks.
+     *
+     * @param task Task to be added
+     */
+    public void addTask(Task task) {
         tasks.add(task);
     }
 
-    String deleteTask(int taskNum) throws InvalidTaskNumberException {
+    /**
+     * Deletes task from task list.
+     *
+     * @param taskNum Task number of task to be deleted
+     * @return Task that is deleted.
+     * @throws InvalidTaskNumberException
+     */
+    public Task deleteTask(int taskNum) throws InvalidTaskNumberException {
         if (taskNum < 1 || taskNum > getNumOfTasks()) {
             throw new InvalidTaskNumberException(taskNum);
         }
         Task task = tasks.remove(taskNum - 1);
-        return String.format("Noted, I've removed this task:\n   %s\nYou now have %d tasks in the list\n",
-                task.toString(), getNumOfTasks());
+        return task;
     }
 
-    String markTask(int taskNum) throws InvalidTaskNumberException {
+    /**
+     * Marks task as completed.
+     *
+     * @param taskNum Task number of task to be marked as completed.
+     * @return Task that is marked as completed
+     * @throws InvalidTaskNumberException
+     */
+    public Task markTask(int taskNum) throws InvalidTaskNumberException {
         if (taskNum < 1 || taskNum > getNumOfTasks()) {
             throw new InvalidTaskNumberException(taskNum);
         }
         Task task = tasks.get(taskNum - 1);
         task.completeTask();
-        return String.format("Nice! I've marked this task as done:\n   %s\n", task);
+        return task;
     }
 
-    String unmarkTask(int taskNum) throws InvalidTaskNumberException {
+    /**
+     * Marks task as not completed yet.
+     *
+     * @param taskNum Task number of task to be marked as not completed yet
+     * @return Task that is marked as not completed yet
+     * @throws InvalidTaskNumberException
+     */
+    public Task unmarkTask(int taskNum) throws InvalidTaskNumberException {
         if (taskNum < 1 || taskNum > getNumOfTasks()) {
             throw new InvalidTaskNumberException(taskNum);
         }
         Task task = tasks.get(taskNum - 1);
         task.undoTask();
-        return String.format("OK, I've unmarked this task as not done yet:\n   %s\n", task);
+        return task;
     }
 
-    String findTask(String keyword) {
+    /**
+     * Finds list of tasks that contains keyword.
+     *
+     * @param keyword String to be searched
+     * @return TaskList object containing all tasks that contains keyword
+     */
+    public TaskList findTasks(String keyword) {
         TaskList tasksFound = new TaskList();
         for (Task task : tasks) {
             if (task.getDescription().indexOf(keyword) != -1) {
                 tasksFound.addTask(task);
             }
         }
-        return tasksFound.getListOfTasks();
+        return tasksFound;
     }
 
-    String addTaskText(Task task) {
+    /**
+     * Returns String to be displayed after a task has been added to the task list.
+     *
+     * @param task Task that has been added.
+     * @return String to be displayed after a task has been added to the task list.
+     */
+    public String addTaskText(Task task) {
         return String.format("Got it. I've added this task:\n   %s\nNow you have %s task%s in the list.\n",
                 task.toString(), getNumOfTasks(), getNumOfTasks() == 1 ? "" : "s");
     }
 
-    int getNumOfTasks() {
+    /**
+     * Returns number of tasks in task list.
+     *
+     * @return Number of tasks in task list
+     */
+    public int getNumOfTasks() {
         return tasks.size();
     }
     String getSavedListOfTasks() {
@@ -72,7 +117,12 @@ public class TaskList {
         return listString.toString();
     }
 
-    String getListOfTasks() {
+    /**
+     * Returns String representation of the numbered list of tasks.
+     *
+     * @return String representation of the numbered list of tasks
+     */
+    public String getListOfTasks() {
         StringBuilder listOfTasks = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
             listOfTasks.append(String.format("%d. %s\n", i + 1, tasks.get(i)));
@@ -81,9 +131,9 @@ public class TaskList {
     }
 
     /**
-     * Returns String representation of the task list numbered.
+     * Returns String representation of the numbered task list or an empty task list.
      *
-     * @return String representation of the task list numbered.
+     * @return String representation of task list.
      */
     @Override
     public String toString() {

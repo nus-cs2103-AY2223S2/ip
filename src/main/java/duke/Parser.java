@@ -4,71 +4,56 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+import duke.command.AddDeadlineCommand;
+import duke.command.AddEventCommand;
+import duke.command.AddTodoCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
+import duke.command.UnmarkCommand;
 import duke.exception.DukeException;
-import duke.exception.EmptyTaskDescriptionException;
 import duke.exception.InvalidCommandException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
+
 
 /**
  * A parser that deals with user input and transforms them into
  * a form that can be processed.
  */
 public class Parser {
-    static String processCommand(String command, TaskList tasks) throws DukeException {
+    static Command processCommand(String command, TaskList tasks) throws DukeException {
         String[] commandArr = command.split(" ");
         switch (commandArr[0]) {
         case "list":
-            return tasks.toString();
+            return new ListCommand(tasks);
         case "mark":
-            return tasks.markTask(Integer.parseInt(commandArr[1]));
+            return new MarkCommand(tasks, Integer.parseInt(commandArr[1]));
         case "unmark":
-            return tasks.unmarkTask(Integer.parseInt(commandArr[1]));
+            return new UnmarkCommand(tasks, Integer.parseInt(commandArr[1]));
         case "delete":
-            return tasks.deleteTask(Integer.parseInt(commandArr[1]));
+            return new DeleteCommand(tasks, Integer.parseInt(commandArr[1]));
         case "find":
-            return tasks.findTask(commandArr[1]);
-        }
-        return parseCommand(command, tasks);
-    }
-
-    static String parseCommand(String command, TaskList tasks) throws DukeException {
-        String[] commandArr = command.split(" ");
-        String taskType = commandArr[0];
-        String description;
-        Task task;
-        switch (taskType) {
+            return new FindCommand(tasks, commandArr[1]);
         case "todo":
-            if (commandArr.length == 1) {
-                throw new EmptyTaskDescriptionException();
-            }
-            description = command.substring(5);
-            task = new ToDo(description);
-            break;
+            return new AddTodoCommand(tasks, command);
         case "deadline":
-            int doneByIndex = command.indexOf("/by");
-            description = command.substring(9, doneByIndex - 1);
-            String doneByString = command.substring(doneByIndex + 4);
-            task = new Deadline(description, parseDateTime(doneByString));
-            break;
+            return new AddDeadlineCommand(tasks, command);
         case "event":
-            int startIndex = command.indexOf("/from");
-            int endIndex = command.indexOf("/to");
-            description = command.substring(6, startIndex - 1);
-            String startString = command.substring(startIndex + 6, endIndex - 1);
-            String endString = command.substring(endIndex + 4);
-            task = new Event(description, parseDateTime(startString), parseDateTime(endString));
-            break;
+            return new AddEventCommand(tasks, command);
         default:
             throw new InvalidCommandException();
         }
-        tasks.addTask(task);
-        return tasks.addTaskText(task);
     }
 
-    static LocalDateTime parseDateTime(String dateTimeString) {
+    /**
+     * Parses a String representing a date and time and converts it to a
+     * LocalDateTime object.
+     *
+     * @param dateTimeString String representing date and time to be parsed
+     * @return LocalDateTime Object
+     */
+    public static LocalDateTime parseDateTime(String dateTimeString) {
         String[] dateTimeArray = dateTimeString.split(" ");
         LocalDate date = LocalDate.parse(dateTimeArray[0]);
         LocalTime time = LocalTime.parse(dateTimeArray[1]);

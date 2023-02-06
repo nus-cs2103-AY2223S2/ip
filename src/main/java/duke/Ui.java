@@ -1,5 +1,6 @@
 package duke;
 
+import duke.command.Command;
 import duke.exception.DukeException;
 
 /**
@@ -7,8 +8,8 @@ import duke.exception.DukeException;
  * to the user.
  */
 public class Ui {
-    private TaskList tasks;
     private static final String GREETINGS_MESSAGE = "Hello! I'm Duke\nWhat can I do for you?";
+    private TaskList tasks;
 
     /**
      * Constructor for Ui.
@@ -19,9 +20,8 @@ public class Ui {
         this.tasks = tasks;
     }
 
-    String acceptCommand(String command) throws DukeException {
-        String printable = Parser.processCommand(command, tasks);
-        return printable;
+    Command acceptCommand(String command) throws DukeException {
+        return Parser.processCommand(command, tasks);
     }
 
     static String showGreetingsMessage() {

@@ -3,6 +3,7 @@ package duke;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import duke.command.Command;
 import duke.exception.DukeException;
 
 
@@ -38,7 +39,8 @@ public class Duke {
     protected String getResponse(String input) {
         String response = "";
         try {
-            response = ui.acceptCommand(input);
+            Command command = ui.acceptCommand(input);
+            response = command.execute();
             storage.saveTasksInFile(tasks);
         } catch (DukeException | IOException e) {
             response = ui.showErrorMessage(e);
