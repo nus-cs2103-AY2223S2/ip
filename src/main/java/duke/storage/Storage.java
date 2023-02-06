@@ -54,7 +54,7 @@ public class Storage {
     public void writeToFile(TaskList taskList) throws IOException {
         FileWriter fw = new FileWriter(path);
         for (Task t : taskList.getList()) {
-            fw.write(t.toTXT() + System.lineSeparator());
+            fw.write(t.toTxt() + System.lineSeparator());
         }
         fw.close();
     }
@@ -66,8 +66,8 @@ public class Storage {
      * @throws IOException if specified file cannot be accessed/written to
      */
     public void appendToFile(Task task) throws IOException {
-        FileWriter fw = new FileWriter(path,true);
-        fw.write(task.toTXT() + System.lineSeparator());
+        FileWriter fw = new FileWriter(path, true);
+        fw.write(task.toTxt() + System.lineSeparator());
         fw.close();
     }
 

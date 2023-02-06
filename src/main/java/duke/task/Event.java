@@ -1,7 +1,5 @@
 package duke.task;
 
-import java.time.format.DateTimeFormatter;
-
 /**
  * Represents Event task with a description from when to when.
  */
@@ -9,6 +7,12 @@ public class Event extends Task {
     private final String from;
     private final String to;
 
+    /**
+     * Constructs an Event task.
+     * @param description of the event
+     * @param from start date or time of event
+     * @param to end date or time of event
+     */
     public Event(String description, String from, String to) {
         super(description);
         this.from = from;
@@ -16,8 +20,8 @@ public class Event extends Task {
     }
 
     @Override
-    public String toTXT() {
-        return String.format("E | %s | %s | %s", super.toTXT(), from, to);
+    public String toTxt() {
+        return String.format("E | %s | %s | %s", super.toTxt(), from, to);
     }
 
     @Override

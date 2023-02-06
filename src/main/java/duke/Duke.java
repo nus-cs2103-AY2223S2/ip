@@ -7,6 +7,9 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Represents Duke
+ */
 public class Duke {
 
     /** Default file path which Duke will attempt to access to load duke.task.Task List */
@@ -16,7 +19,10 @@ public class Duke {
     private final Ui ui;
     private TaskList tasks;
 
-
+    /**
+     * Constructs Duke using specified filePath
+     * @param filePath path to file where Duke will read from and save to
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -28,6 +34,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs Duke
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

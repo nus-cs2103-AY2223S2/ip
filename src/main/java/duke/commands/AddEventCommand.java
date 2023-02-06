@@ -3,11 +3,11 @@ package duke.commands;
 import java.io.IOException;
 
 import duke.exception.DukeException;
-import duke.task.Task;
+import duke.storage.Storage;
 import duke.task.Event;
+import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
-import duke.storage.Storage;
 
 /**
  * Represents a Command that only adds Event tasks to the TaskList.
@@ -17,6 +17,12 @@ public class AddEventCommand extends Command {
     private final String from;
     private final String to;
 
+    /**
+     * Constructs an AddEventCommand
+     * @param description of task
+     * @param from start time or date of event
+     * @param to end time or date of event
+     */
     public AddEventCommand(String description, String from, String to) {
         this.description = description;
         this.from = from;
