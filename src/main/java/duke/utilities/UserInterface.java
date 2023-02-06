@@ -9,6 +9,7 @@ import duke.commands.Find;
 import duke.commands.ICommand;
 import duke.commands.ListTasks;
 import duke.commands.Mark;
+import duke.commands.Undo;
 import duke.commands.Unmark;
 import duke.exceptions.DukeException;
 import duke.exceptions.InvalidCommandException;
@@ -88,7 +89,8 @@ public class UserInterface {
             return new Exit(new Parser(taskManager));
         case "list":
             return new ListTasks(new Parser(taskManager));
-
+        case "undo":
+            return new Undo(new Parser(taskManager));
         case "mark":
             return new Mark(new Parser(content, taskManager));
 

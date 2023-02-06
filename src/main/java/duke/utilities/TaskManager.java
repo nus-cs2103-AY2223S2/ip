@@ -2,6 +2,8 @@ package duke.utilities;
 
 import java.util.ArrayList;
 
+import duke.commands.ICommand;
+import duke.exceptions.DukeCloneException;
 import duke.exceptions.DukeException;
 import duke.tasks.ITask;
 
@@ -13,6 +15,7 @@ import duke.tasks.ITask;
 public class TaskManager {
     private ArrayList<ITask> tasks;
     private final Storage storage;
+    private LastCommand lastTask = null;
 
     /**
      * Constructor for TaskManager
@@ -64,12 +67,32 @@ public class TaskManager {
     /**
      * Removes specific task at given index
      *
-     * @param index the index of task to be remove
+     * @param index the index of task to be removed
      */
     public ITask remove(int index) throws DukeException {
+
         ITask task = tasks.remove(index);
+        updateLastTask(ICommand.Type.Delete, task);
+
         storage.saveAll(tasks);
         return task;
+    }
+
+    /**
+     * Undo an action to the task list
+     * Returns the feedback result
+     */
+    public String undo() throws DukeException {
+        String result;
+        if (lastTask == null) {
+            result = "No command capture in history";
+        } else {
+            result = lastTask.undo(tasks);
+            lastTask = null;
+        }
+        storage.saveAll(tasks);
+
+        return result;
     }
 
     /**
@@ -78,6 +101,8 @@ public class TaskManager {
      * @param task the task to be added to the task list
      */
     public void add(ITask task) throws DukeException {
+        updateLastTask(ICommand.Type.Add, task);
+
         tasks.add(task);
         storage.saveAll(tasks);
     }
@@ -90,6 +115,10 @@ public class TaskManager {
      */
     public ITask mark(int index, boolean isDone) throws DukeException {
         ITask task = tasks.get(index);
+
+
+        updateLastTask(ICommand.Type.Mark, task);
+
         if (isDone) {
             task.markAsDone();
         } else {
@@ -98,6 +127,14 @@ public class TaskManager {
         storage.saveAll(tasks);
 
         return task;
+    }
+
+    private void updateLastTask(ICommand.Type type, ITask task) throws DukeException {
+        try {
+            lastTask = new LastCommand(type, (ITask) task.clone());
+        } catch (CloneNotSupportedException e) {
+            throw new DukeCloneException(e.getMessage());
+        }
     }
 
 }
