@@ -88,6 +88,8 @@ public class Parser {
      * @throws DukeException IF error occur
      */
     public Date getBy() throws DukeException {
+        assert processed : "Processed the Parser first";
+
         if (by == null) {
             throw new ContentEmpty("'by'");
         }
@@ -130,6 +132,8 @@ public class Parser {
      * @throws DukeException IF error occur
      */
     public Date getFrom() throws DukeException {
+        assert processed : "Processed the Parser first";
+
         if (from == null) {
             throw new ContentEmpty("'from'");
         }
@@ -142,6 +146,8 @@ public class Parser {
      * @throws DukeException IF error occur
      */
     public Date getTo() throws DukeException {
+        assert processed : "Processed the Parser first";
+
         if (to == null) {
             throw new ContentEmpty("'to'");
         }
