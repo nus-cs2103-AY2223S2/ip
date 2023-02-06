@@ -3,7 +3,6 @@ package boo.tasklist;
 import java.util.ArrayList;
 
 import boo.task.Task;
-import boo.ui.Ui;
 
 /**
  * Represents the list of {@code Tasks} that the user has entered into the chatbot.

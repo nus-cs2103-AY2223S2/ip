@@ -16,7 +16,6 @@ import boo.task.Event;
 import boo.task.Task;
 import boo.task.ToDo;
 import boo.tasklist.TaskList;
-import boo.ui.Ui;
 
 /**
  * Responsible for file-related operations, such as reading and writing of the data file when dealing with loading
