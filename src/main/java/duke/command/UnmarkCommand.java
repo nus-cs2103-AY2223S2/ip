@@ -3,6 +3,9 @@ package duke.command;
 import duke.exception.DukeException;
 import duke.task.TaskList;
 import duke.ui.Ui;
+import duke.util.Storage;
+
+import java.io.IOException;
 
 /**
  * Executable command to mark an existing task as uncompleted.
@@ -10,21 +13,25 @@ import duke.ui.Ui;
  * @author Guo-KeCheng
  */
 public class UnmarkCommand extends Command {
-    private final String command;
+    private final String input;
     private final TaskList taskList;
     private final Ui ui;
+
+    private final Storage storage;
 
     /**
      * UnmarkCommand constructor
      *
-     * @param command  Entire line of user input
+     * @param input    Entire line of user input
      * @param taskList Existing taskList
      * @param ui       Shared Ui object
+     * @param storage  Shared storage object
      */
-    public UnmarkCommand(String command, TaskList taskList, Ui ui) {
-        this.command = command;
+    public UnmarkCommand(String input, TaskList taskList, Ui ui, Storage storage) {
+        this.input = input;
         this.taskList = taskList;
         this.ui = ui;
+        this.storage = storage;
     }
 
     /**
@@ -36,14 +43,20 @@ public class UnmarkCommand extends Command {
     @Override
     public String execute() throws DukeException {
 
-        String[] inputs = command.split(" ");
-        if (inputs.length == 2) {
-            int ind = Integer.parseInt(inputs[1]) - 1;
+        String[] inputs = input.split(" ");
+        if (inputs.length == 1) {
+            int ind = Integer.parseInt(inputs[0]) - 1;
             if (ind >= taskList.size() || ind < 0) {
-                throw new DukeException("☹ OOPS!!! Invalid task number :(");
+                throw new DukeException("OOPS!!! Invalid task number");
             }
 
             taskList.get(ind).markUncompleted();
+
+            try {
+                storage.save(taskList);
+            } catch (IOException e) {
+                return ui.showError(e.getMessage());
+            }
 
             return ui.printUnmarkedTask(taskList.get(ind));
 

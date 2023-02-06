@@ -47,9 +47,31 @@ public class Parser {
     public static Command parse(String input, TaskList taskList, Ui ui, Storage storage)
             throws DukeException {
 
+        checkForEmptyInput(input);
+        return convertToCommand(input, taskList, ui, storage);
+
+    }
+
+    /**
+     * Handles empty inputs
+     *
+     * @param input Entire String input from user
+     * @throws DukeException If input is empty
+     */
+    private static void checkForEmptyInput(String input) throws DukeException {
+        if (input.trim().isEmpty()) {
+            throw new DukeException("Empty Input");
+        }
+    }
+
+    private static Command convertToCommand(String input, TaskList taskList, Ui ui, Storage storage)
+            throws DukeException {
         try {
             String[] inputs = input.split(" ");
             CommandType commandType = CommandType.valueOf(inputs[0].toUpperCase());
+
+            // Removes the commandType string from input
+            String filtered_input = filterInput(input);
 
             switch (commandType) {
             case BYE:
@@ -59,31 +81,42 @@ public class Parser {
                 return new ListCommand(taskList, ui);
 
             case MARK:
-                return new MarkCommand(input, taskList, ui);
+                return new MarkCommand(filtered_input, taskList, ui, storage);
 
             case UNMARK:
-                return new UnmarkCommand(input, taskList, ui);
+                return new UnmarkCommand(filtered_input, taskList, ui, storage);
 
             case DELETE:
-                return new DeleteCommand(input, taskList, ui);
+                return new DeleteCommand(filtered_input, taskList, ui, storage);
 
             case TODO:
-                return new TodoCommand(input, taskList, ui);
+                return new TodoCommand(filtered_input, taskList, ui, storage);
 
             case DEADLINE:
-                return new DeadlineCommand(input, taskList, ui);
+                return new DeadlineCommand(filtered_input, taskList, ui, storage);
 
             case EVENT:
-                return new EventCommand(input, taskList, ui);
+                return new EventCommand(filtered_input, taskList, ui, storage);
 
             case FIND:
-                return new FindCommand(input, taskList, ui);
+                return new FindCommand(filtered_input, taskList, ui);
 
             default:
-                throw new DukeException("☹ OOPS!!! Something went wrong.");
+                throw new DukeException("OOPS!!! Something went wrong.");
             }
         } catch (IllegalArgumentException e) {
-            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means");
         }
+    }
+
+    private static String filterInput(String input) {
+        String[] result = input.split(" ", 2);
+
+        if (result.length == 1) {
+            return "";
+        } else {
+            return result[1];
+        }
+
     }
 }

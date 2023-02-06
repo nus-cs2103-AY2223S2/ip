@@ -3,6 +3,7 @@ package duke.ui;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 
 import duke.exception.DukeException;
 import duke.task.Task;
@@ -73,6 +74,11 @@ public class Ui {
     }
 
     public String printList(TaskList taskList) {
+
+        if (taskList.isEmpty()) {
+            return "You have nothing in your tasklist";
+        }
+
         String output = "Here are the tasks in your list: \n";
 
         for (int i = 0; i < taskList.size(); i++) {
@@ -83,7 +89,7 @@ public class Ui {
         return output;
     }
 
-    public String printNoTaskWithKeywordFound(String keyword) {
+    public String printNoTaskWithKeywordFound(List<String> keyword) {
         return String.format("Sorry. No tasks were found to contain '%s' keyword.", keyword);
     }
 

@@ -4,6 +4,9 @@ import duke.exception.DukeException;
 import duke.task.TaskList;
 import duke.task.ToDo;
 import duke.ui.Ui;
+import duke.util.Storage;
+
+import java.io.IOException;
 
 /**
  * Executable command to create todo.
@@ -11,21 +14,25 @@ import duke.ui.Ui;
  * @author Guo-KeCheng
  */
 public class TodoCommand extends Command {
-    private final String command;
+    private final String input;
     private final TaskList taskList;
     private final Ui ui;
+
+    private final Storage storage;
 
     /**
      * TodoCommand constructor
      *
-     * @param command  Entire line of user input
+     * @param input    Entire line of user input
      * @param taskList Existing taskList
      * @param ui       Shared Ui object
+     * @param storage  Shared storage object
      */
-    public TodoCommand(String command, TaskList taskList, Ui ui) {
-        this.command = command;
+    public TodoCommand(String input, TaskList taskList, Ui ui, Storage storage) {
+        this.input = input;
         this.taskList = taskList;
         this.ui = ui;
+        this.storage = storage;
     }
 
     /**
@@ -36,8 +43,15 @@ public class TodoCommand extends Command {
      */
     @Override
     public String execute() throws DukeException {
-        ToDo toDo = new ToDo(getTaskName("todo", command));
+        ToDo toDo = new ToDo(getTaskName("todo", input));
         taskList.add(toDo);
+
+        try {
+            storage.save(taskList);
+        } catch (IOException e) {
+            return ui.showError(e.getMessage());
+        }
+
         return ui.printAddedTask(toDo, taskList);
 
     }

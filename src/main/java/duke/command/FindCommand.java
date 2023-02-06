@@ -5,6 +5,9 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Executable command to find task based on given keyword.
  *
@@ -12,7 +15,7 @@ import duke.ui.Ui;
  */
 public class FindCommand extends Command {
 
-    private final String keyword;
+    private final ArrayList<String> keywords;
     private final TaskList taskList;
     private final Ui ui;
 
@@ -24,7 +27,7 @@ public class FindCommand extends Command {
      * @param ui       Shared Ui object
      */
     public FindCommand(String command, TaskList taskList, Ui ui) throws DukeException {
-        this.keyword = getKeyword(command);
+        this.keywords = getKeyword(command.split(" "));
         this.taskList = taskList;
         this.ui = ui;
     }
@@ -37,17 +40,19 @@ public class FindCommand extends Command {
     public String execute() throws DukeException {
         TaskList foundList = new TaskList();
 
+        if (foundList.isEmpty()) {
+            return ui.printNoTaskWithKeywordFound(keywords);
+        }
+
         for (Task task : taskList) {
-            if (task.containsKeyword(keyword)) {
-                foundList.add(task);
+            for (String keyword : keywords) {
+                if (task.containsKeyword(keyword)) {
+                    foundList.add(task);
+                }
             }
         }
 
-        if (foundList.isEmpty()) {
-            return ui.printNoTaskWithKeywordFound(keyword);
-        } else {
-            return ui.printFoundList(foundList);
-        }
+        return ui.printFoundList(foundList);
 
     }
 }

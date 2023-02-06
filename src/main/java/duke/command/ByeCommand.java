@@ -36,7 +36,7 @@ public class ByeCommand extends Command {
         try {
             storage.save(taskList);
         } catch (IOException e) {
-            ui.showError(e.getMessage());
+            return ui.showError(e.getMessage());
         }
 
         return ui.printBye();
