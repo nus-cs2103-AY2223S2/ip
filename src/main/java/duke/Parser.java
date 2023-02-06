@@ -1,4 +1,4 @@
-package duke.ui;
+package duke;
 
 import duke.command.Command;
 import duke.command.Commands;

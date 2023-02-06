@@ -71,6 +71,14 @@ public class Ui {
     }
 
     /**
+     * Get exit message.
+     */
+    public String getExit() {
+        String exitMessage = "Bye! Hope to see you again soon!";
+        return exitMessage;
+    }
+
+    /**
      * Prints welcome message.
      */
     public void printWelcome() {
@@ -90,6 +98,18 @@ public class Ui {
     }
 
     /**
+     * Get add task message.
+     * @param task New task to be added.
+     * @param taskCount Number of tasks after new task is added.
+     */
+    public String getAddTaskMessage(Task task, int taskCount) {
+        String addTaskMessage = "Got it. I've added this task:\n     " + task //
+                + "\nNow you have " + taskCount + " tasks in the list";
+        return addTaskMessage;
+    }
+
+
+    /**
      * Prints delete task message.
      * @param task Task to be deleted.
      * @param taskCount Number of tasks after task is deleted.
@@ -98,6 +118,17 @@ public class Ui {
         String deleteTaskMessage = "Noted. I've removed this task:\n     " + task //
                 + "\nNow you have " + taskCount + " tasks in the list";
         print(deleteTaskMessage);
+    }
+
+    /**
+     * Get delete task message.
+     * @param task Task to be deleted.
+     * @param taskCount Number of tasks after task is deleted.
+     */
+    public String getDeleteTaskMessage(Task task, int taskCount) {
+        String deleteTaskMessage = "Noted. I've removed this task:\n     " + task //
+                + "\nNow you have " + taskCount + " tasks in the list";
+        return deleteTaskMessage;
     }
 
     /**
@@ -110,12 +141,30 @@ public class Ui {
     }
 
     /**
+     * Get mark task message.
+     *
+     * @param task Task to be marked as done.
+     */
+    public String getMarkTaskMessage(Task task) {
+        return "Nice! I've marked this task as done: \n" + task;
+    }
+
+    /**
      * Prints unmark task message.
      *
      * @param task Task to be marked as undone.
      */
     public void printUnmarkTaskMessage(Task task) {
         print("OK, I've marked this task as not done yet: \n" + task);
+    }
+
+    /**
+     * Get unmark task message.
+     *
+     * @param task Task to be marked as undone.
+     */
+    public String getUnmarkTaskMessage(Task task) {
+        return "OK, I've marked this task as not done yet: \n" + task;
     }
 
 }

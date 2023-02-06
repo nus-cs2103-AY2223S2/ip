@@ -3,7 +3,7 @@ package duke.ui;
 import duke.command.ExitCommand;
 import duke.command.ListCommand;
 import duke.exception.DukeException;
-import duke.ui.Parser;
+import duke.Parser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

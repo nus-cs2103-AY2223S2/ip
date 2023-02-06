@@ -6,12 +6,7 @@ import duke.command.Command;
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.Parser;
 import duke.ui.Ui;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
 
 /**
  * Main class to run Duke programme.
@@ -62,7 +57,17 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) {
-        new Duke().run();
+    /**
+     * Get Duke's response.
+     * @param input String input by user.
+     * @return Duke's response.
+     */
+    public String getResponse(String input) {
+        try {
+            Command c = parser.parse(input);
+            return c.execute(taskList, ui, storage);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
 }

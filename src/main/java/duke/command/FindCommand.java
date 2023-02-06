@@ -23,7 +23,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        ui.print(taskList.findTasks(this.str));
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        return taskList.findTasks(this.str);
     }
 }
