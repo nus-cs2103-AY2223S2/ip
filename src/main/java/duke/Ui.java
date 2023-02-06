@@ -175,7 +175,11 @@ public class Ui {
      * @throws DukeException when the task is not found in the list
      */
     public String stringMarkDone(ArrayList<Task> tasks, boolean isGui) throws DukeException {
-        return Views.MARK_DONE_STRING.eng() + stringListRaw(tasks, isGui);
+        if (tasks.size() == 1) {
+            return Views.MARK_DONE_STRING.eng() + stringListRaw(tasks, isGui);
+        } else {
+            return Views.MARK_MANY_DONE_STRING.eng() + stringListRaw(tasks, isGui);
+        }
     }
 
     /**
@@ -219,7 +223,11 @@ public class Ui {
      * @throws DukeException when the task is not found in the list
      */
     public String stringUnmarkDone(ArrayList<Task> tasks, boolean isGui) throws DukeException {
-        return Views.UNMARK_DONE_STRING.eng() + stringListRaw(tasks, isGui);
+        if (tasks.size() == 1) {
+            return Views.UNMARK_DONE_STRING.eng() + stringListRaw(tasks, isGui);
+        } else {
+            return Views.UNMARK_MANY_DONE_STRING.eng() + stringListRaw(tasks, isGui);
+        }
     }
 
     /**
@@ -293,6 +301,9 @@ public class Ui {
      */
     public String stringDel(ArrayList<Task> delTask, TaskList task, Boolean isGui) throws DukeException {
         String returnString = Views.DELETE_DONE_STRING.eng();
+        if (delTask.size() > 1) {
+            returnString = Views.DELETE_MANY_DONE_STRING.eng();
+        }
         returnString += stringListRaw(delTask, isGui);
         returnString += "\n      ";
         returnString += Views.TASK_COUNT_1_STRING.eng();

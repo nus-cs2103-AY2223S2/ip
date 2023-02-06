@@ -1,6 +1,7 @@
 package duke.command;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import duke.DukeException;
 import duke.Storage;
@@ -20,8 +21,10 @@ public class DeleteCommand extends Command {
      *
      * @param taskNumbers int[] index of task in the ArrayList
      */
-    public DeleteCommand(int[] taskNumbers) {
+    public DeleteCommand(int... taskNumbers) {
+        assert taskNumbers.length != 0 : Views.NO_INT_ERR_STRING.eng();
         this.taskNumbers = taskNumbers;
+        Arrays.sort(this.taskNumbers);
     }
 
     /**
@@ -33,7 +36,6 @@ public class DeleteCommand extends Command {
      * @throws DukeException
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        assert taskNumbers.length != 0 : Views.NO_INT_ERR_STRING.eng();
         if (taskNumbers.length == 1) {
             Task delTask = tasks.get(0);
             execute(tasks, storage, 0);
@@ -42,8 +44,8 @@ public class DeleteCommand extends Command {
             ArrayList<Task> printTasks = new ArrayList<Task>();
             for (int taskNum : taskNumbers) {
                 printTasks.add(tasks.get(taskNum));
-                execute(tasks, storage, taskNum);
             }
+            execute(tasks, storage);
             ui.showDel(printTasks, tasks);
         }
     }
@@ -57,9 +59,25 @@ public class DeleteCommand extends Command {
      * @throws DukeException
      */
     private void execute(TaskList tasks, Storage storage, int taskNum) throws DukeException {
-        assert taskNumbers.length != 0 : Views.NO_INT_ERR_STRING.eng();
         tasks.remove(taskNum);
         storage.save(tasks);
+    }
+
+    /**
+     * Executes the command privately, abstract from previous two executes
+     *
+     * @param tasks   TaskList object to get and set the list
+     * @param storage object required when command writes to file
+     * @param taskNum task's number to operate on
+     * @throws DukeException
+     */
+    private void execute(TaskList tasks, Storage storage) throws DukeException {
+        // Assume array is sorted in ascending order, remove delete the items one at the
+        // time from the back, so that the correct order of items are being removed
+        for (int i = taskNumbers.length - 1; i >= 0; i--) {
+            int taskNum = taskNumbers[i];
+            execute(tasks, storage, taskNum);
+        }
     }
 
     /**
@@ -80,8 +98,8 @@ public class DeleteCommand extends Command {
             ArrayList<Task> printTasks = new ArrayList<Task>();
             for (int taskNum : taskNumbers) {
                 printTasks.add(tasks.get(taskNum));
-                execute(tasks, storage, taskNum);
             }
+            execute(tasks, storage);
             return ui.stringDel(printTasks, tasks, true);
         }
     }

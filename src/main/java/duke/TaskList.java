@@ -110,7 +110,7 @@ public class TaskList {
     /**
      * Utility method to remove empty String in an array of strings
      *
-     * @param input
+     * @param input String[] that may or may not have empty Strings
      * @return new String[] without empty Strings
      */
     public static String[] removeEmptyStrings(String[] input) {

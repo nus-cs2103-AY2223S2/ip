@@ -1,5 +1,6 @@
 package duke;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -150,7 +151,9 @@ public class Parser {
         }
         if (results.size() != 0) {
             // Convert it back to int array
-            return results.stream().mapToInt(Integer::intValue).toArray();
+            int[] converted = results.stream().mapToInt(Integer::intValue).toArray();
+            Arrays.sort(converted);
+            return converted;
         } else {
             throw new DukeException(Views.NO_INT_ERR_STRING.eng());
         }
@@ -159,7 +162,9 @@ public class Parser {
     private static int[] subtractInt(int[] input, int subtractAmt) {
         int[] results = new int[input.length];
         for (int i = 0; i < input.length; i++) {
-            results[i] = input[i] - subtractAmt;
+            int subtracted = input[i] - subtractAmt;
+            assert subtracted >= 0 : Views.OUT_RANGE_ERR_STRING.eng();
+            results[i] = subtracted;
         }
         return results;
     }

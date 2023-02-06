@@ -21,6 +21,7 @@ public class MarkCommand extends Command {
      * @param taskNumbers int index of task in the ArrayList
      */
     public MarkCommand(int... taskNumbers) {
+        assert taskNumbers.length != 0 : Views.NO_INT_ERR_STRING.eng();
         this.taskNumbers = taskNumbers;
     }
 
@@ -33,7 +34,6 @@ public class MarkCommand extends Command {
      * @throws DukeException
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        assert taskNumbers.length != 0 : Views.NO_INT_ERR_STRING.eng();
         if (taskNumbers.length == 1) {
             int taskNum = taskNumbers[0];
             execute(tasks, storage, taskNum);
@@ -71,7 +71,6 @@ public class MarkCommand extends Command {
      * @throws DukeException
      */
     public String executeString(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        assert taskNumbers.length != 0 : Views.NO_INT_ERR_STRING.eng();
         if (taskNumbers.length == 1) {
             int taskNum = taskNumbers[0];
             execute(tasks, storage, taskNum);
