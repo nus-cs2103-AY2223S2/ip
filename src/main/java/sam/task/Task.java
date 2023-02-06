@@ -3,10 +3,14 @@ package sam.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import sam.parser.Parser;
+
 /**
  * Represents a user task.
  */
 public abstract class Task {
+    private static final String DATE_PATTERN = "MMM d yyyy";
+
     protected String title;
     protected boolean isDone;
 
@@ -48,25 +52,25 @@ public abstract class Task {
     }
 
     /**
-     * Formats the specified date to the format "MMM d yyyy"
+     * Formats the specified date to the display format.
      *
      * @param date The date to be formatted
-     * @return A string representation of the date in the format "MMM d yyyy"
+     * @return A string representation of the date.
      */
     protected String formatDateDisplay(LocalDate date) {
         return date.format(
-                DateTimeFormatter.ofPattern("MMM d yyyy"));
+                DateTimeFormatter.ofPattern(DATE_PATTERN));
     }
 
     /**
-     * Formats the specified date to the format "d/M/yyyy"
+     * Formats the specified date to the parser's format.
      *
      * @param date The date to be formatted.
-     * @return A string representation of the date in the format "d/M/yyyy"
+     * @return A string representation of the date.
      */
     protected String formatDateSave(LocalDate date) {
         return date.format(
-                DateTimeFormatter.ofPattern("d/M/yyyy"));
+                DateTimeFormatter.ofPattern(Parser.DATE_PATTERN));
     }
 
     /**
