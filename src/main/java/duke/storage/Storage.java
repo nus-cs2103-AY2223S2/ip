@@ -93,6 +93,10 @@ public class Storage {
         replaceLineInFile(index, "");
     }
 
+    private Boolean pathNotEmpty(String path) {
+        return !path.isEmpty();
+    }
+
     private List<String> getSavedTasksAsList() {
         List<String> savedTaskList = new ArrayList<>();
         try {
@@ -128,11 +132,7 @@ public class Storage {
             throw new RuntimeException(e);
         }
     }
-    
-    private Boolean pathNotEmpty(String path) {
-      return !path.isEmpty();
-    }
-    
+
     private String getUpdatedLine(int lineToUpdate, int updateIndex, char newValue) {
         List<String> tasks = getSavedTasksAsList();
         StringBuilder sb = new StringBuilder(tasks.get(lineToUpdate));
