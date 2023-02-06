@@ -14,10 +14,8 @@ import pix.ui.Ui;
  */
 public class Pix {
     /**
-     * Gets response eventStart duke based on user's input.
-     *
-     * @param input User's input
-     * @return String of duke's reply based on user's input.
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
         assert input != null:"Input cannot be null";
