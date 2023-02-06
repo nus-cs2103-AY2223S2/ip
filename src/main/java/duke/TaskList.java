@@ -33,6 +33,7 @@ public class TaskList {
         this.taskList = new ArrayList<>();
         Task toAdd;
         for (String[] fileCommand : dataFileTasks) {
+            assert fileCommand.length > 0;
             switch (fileCommand[0]) {
             case "T":
                 toAdd = new ToDo(fileCommand[2]);
