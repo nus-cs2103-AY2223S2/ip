@@ -11,10 +11,10 @@ import java.time.temporal.Temporal;
  */
 public abstract class DateTime {
     /**
-     * Returns a <code>Temporal</code> that encapsulates date and or time information.
+     * Returns a {@code Temporal} that encapsulates date and or time information.
      *
      * @param rawDateString The raw String that contains date and or time information.
-     * @return the <code>Temporal</code> with the date and or time information.
+     * @return the {@code Temporal} with the date and or time information.
      * @throws DateTimeParseException if the raw String is not of the correct date format
      *                                as requested in the command list of the bot.
      */
@@ -43,8 +43,8 @@ public abstract class DateTime {
     /**
      * Determines if two dates specify a valid duration.
      *
-     * @param start The <code>Temporal</code> encapsulating the start date and time.
-     * @param end The <code>Temporal</code> encapsulating the end date and time.
+     * @param start The {@code Temporal} encapsulating the start date and time.
+     * @param end The {@code Temporal} encapsulating the end date and time.
      * @return true if start happens before or is equal to end, else false.
      */
     public static boolean isValidDuration(Temporal start, Temporal end) {

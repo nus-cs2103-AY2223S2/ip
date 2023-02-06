@@ -35,7 +35,7 @@ public abstract class Task {
     /**
      * Gets the status of the task with the task name.
      *
-     * @return a <code>String</code> indicating the type and status of the task.
+     * @return a {@code String} indicating the type and status of the task.
      */
     public abstract String getStatusOfTaskInString();
 

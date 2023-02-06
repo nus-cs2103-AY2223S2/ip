@@ -30,7 +30,7 @@ public class Parser {
     private TaskList tasks;
 
     /**
-     * Constructs a <code>Parser</code> instance.
+     * Constructs a {@code Parser} instance.
      *
      * @param tasks Task list of the user
      */
@@ -329,9 +329,9 @@ public class Parser {
     }
 
     /**
-     * Checks if a string can be converted into an <code>Integer</code>.
+     * Checks if a string can be converted into an {@code Integer}.
      *
-     * @param stringToCheck <code>String</code> to check whether the conversion is possible.
+     * @param stringToCheck {@code String} to check whether the conversion is possible.
      * @return true if it can be converted, else return false.
      */
     public boolean isInteger(String stringToCheck) {

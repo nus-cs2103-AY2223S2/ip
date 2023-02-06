@@ -22,7 +22,7 @@ public class HelpCommand extends Command {
                     + "Please enter dates in the format of either yyyy-MM-dd hh:mm or yyyy-MM-dd.";
 
     /**
-     * Constructs a <code>HelpCommand</code>.
+     * Constructs a {@code HelpCommand}.
      */
     public HelpCommand() {
         super();

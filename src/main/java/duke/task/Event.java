@@ -5,7 +5,7 @@ import java.time.temporal.Temporal;
 import duke.datetime.DateTime;
 
 /**
- * Represents an event <code>Task</code> that can be kept track of, starting and ending at a specific date/time.
+ * Represents an event {@code Task} that can be kept track of, starting and ending at a specific date/time.
  */
 public class Event extends Task {
 
@@ -31,13 +31,13 @@ public class Event extends Task {
     private String formattedEndDate;
 
     /**
-     * Constructs an <code>Event</code> task.
+     * Constructs an {@code Event} task.
      *
      * @param taskName The name of the task.
      * @param rawStartDate The raw start date from the user.
      * @param rawEndDate The raw end date from the user.
-     * @param startDate The start date <code>Temporal</code> object for this event.
-     * @param endDate The end date <code>Temporal</code> object for this event.
+     * @param startDate The start date {@code Temporal} object for this event.
+     * @param endDate The end date {@code Temporal} object for this event.
      */
     public Event(String taskName, String rawStartDate, String rawEndDate, Temporal startDate, Temporal endDate) {
         super(taskName);
@@ -52,7 +52,7 @@ public class Event extends Task {
     /**
      * Gets the status of the event task.
      *
-     * @return a <code>String</code> indicating the type, status and time period for the task.
+     * @return a {@code String} indicating the type, status and time period for the task.
      */
     @Override
     public String getStatusOfTaskInString() {
@@ -68,7 +68,7 @@ public class Event extends Task {
     /**
      * Gets the start date object of the task.
      *
-     * @return the <code>Temporal</code> encapsulating the date and time of the start date.
+     * @return the {@code Temporal} encapsulating the date and time of the start date.
      */
     public Temporal getStartDate() {
         return startDate;
@@ -77,7 +77,7 @@ public class Event extends Task {
     /**
      * Gets the end date object of the task.
      *
-     * @return the <code>Temporal</code> encapsulating the date and time of the end date.
+     * @return the {@code Temporal} encapsulating the date and time of the end date.
      */
     public Temporal getEndDate() {
         return endDate;
@@ -86,7 +86,7 @@ public class Event extends Task {
     /**
      * Gets the raw start date of the task.
      *
-     * @return the <code>String</code> containing the raw start date and time.
+     * @return the {@code String} containing the raw start date and time.
      */
     public String getRawStartDate() {
         return rawStartDate;
@@ -95,7 +95,7 @@ public class Event extends Task {
     /**
      * Gets the raw end date of the task.
      *
-     * @return the <code>String</code> containing the raw end date and time.
+     * @return the {@code String} containing the raw end date and time.
      */
     public String getRawEndDate() {
         return rawEndDate;

@@ -15,7 +15,7 @@ public class FindCommand extends Command {
 
 
     /**
-     * Constructs a <code>FindCommand</code>.
+     * Constructs a {@code FindCommand}.
      *
      * @param keyPhrase The phrase to look up in task names.
      * @param tasks The lists of all available tasks.

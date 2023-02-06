@@ -19,11 +19,11 @@ public class ToDoCommand extends Command {
     private Storage storage;
 
     /**
-     * Constructs a <code>ToDoCommand</code>.
+     * Constructs a {@code ToDoCommand}.
      *
      * @param taskName The name of the to-do task to be created.
-     * @param tasks The <code>TaskList</code> of all available tasks.
-     * @param storage The <code>Storage</code> object to allow local saving after adding the to-do task.
+     * @param tasks The {@code TaskList} of all available tasks.
+     * @param storage The {@code Storage} object to allow local saving after adding the to-do task.
      */
     public ToDoCommand(String taskName, TaskList tasks, Storage storage) {
         super();

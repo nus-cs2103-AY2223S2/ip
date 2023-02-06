@@ -5,7 +5,7 @@ package duke.command;
  */
 public class InvalidCommand extends Command {
     /**
-     * Constructs an <code>InvalidCommand</code>.
+     * Constructs an {@code InvalidCommand}.
      */
     public InvalidCommand() {
         super();

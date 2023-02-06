@@ -31,8 +31,8 @@ public class EventCommand extends Command {
      * @param taskName The name of the event task to be created.
      * @param startDate The start date of the task.
      * @param endDate The end date of the task.
-     * @param tasks The <code>TaskList</code>> of all available tasks.
-     * @param storage The <code>Storage</code> object to allow local saving after adding a new event task.
+     * @param tasks The {@code TaskList} of all available tasks.
+     * @param storage The {@code Storage} object to allow local saving after adding a new event task.
      */
     public EventCommand(String taskName, String startDate, String endDate, TaskList tasks, Storage storage) {
         super();
@@ -44,7 +44,7 @@ public class EventCommand extends Command {
     }
 
     /**
-     * Creates an <code>Event</code> task and updates the local data file.
+     * Creates an {@code Event} task and updates the local data file.
      *
      * @return a string that informs the user that the task has been created.
      */

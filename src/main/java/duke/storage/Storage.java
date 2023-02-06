@@ -32,7 +32,7 @@ public class Storage {
     //CHECKSTYLE.ON: Checker
 
     /**
-     * Constructs a <code>Storage</code> instance.
+     * Constructs a {@code Storage} instance.
      *
      * @param folderName Name of the folder to be created to store data file.
      * @param fileName Name of the data file to be created.
@@ -78,7 +78,7 @@ public class Storage {
     /**
      * Reads and loads task history from the data file.
      *
-     * @param tasks <code>TaskList</code> to store the tasks read from the data file.
+     * @param tasks {@code TaskList} to store the tasks read from the data file.
      * @return true if loading was successful, else return false.
      */
     public boolean loadTasksFromFile(TaskList tasks) {
@@ -162,7 +162,7 @@ public class Storage {
     /**
      * Saves the tasks stored in the list into the data file.
      *
-     * @param tasks <code>TaskList</code> that contains the tasks to be saved.
+     * @param tasks {@code TaskList} that contains the tasks to be saved.
      * @return true if save is successful, else false.
      */
     public boolean saveTasks(TaskList tasks) {

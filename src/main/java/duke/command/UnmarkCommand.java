@@ -22,8 +22,8 @@ public class UnmarkCommand extends Command {
      * Constructs an UnmarkCommand.
      *
      * @param taskNumber The number of the task which is to be marked as undone.
-     * @param tasks The <code>TaskList</code> of all available tasks.
-     * @param storage The <code>Storage</code> object to allow local saving of the unmark operation.
+     * @param tasks The {@code TaskList} of all available tasks.
+     * @param storage The {@code Storage} object to allow local saving of the unmark operation.
      */
     public UnmarkCommand(int taskNumber, TaskList tasks, Storage storage) {
         super();

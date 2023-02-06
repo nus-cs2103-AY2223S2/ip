@@ -23,7 +23,7 @@ public class DeadlineCommand extends Command {
     private Storage storage;
 
     /**
-     * Constructs a <code>DeadlineCommand</code>.
+     * Constructs a {@code DeadlineCommand}.
      *
      * @param taskName The name of the deadline task to be created.
      * @param deadline The deadline of the task.

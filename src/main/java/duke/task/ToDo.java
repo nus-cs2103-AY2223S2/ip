@@ -1,7 +1,7 @@
 package duke.task;
 
 /**
- * Represents a to-do <code>Task</code> that can be kept track of, having no date or time attached to it.
+ * Represents a to-do {@code Task} that can be kept track of, having no date or time attached to it.
  */
 public class ToDo extends Task {
     /**
@@ -16,7 +16,7 @@ public class ToDo extends Task {
     /**
      * Gets the status of the task with the task name.
      *
-     * @return a <code>String</code> indicating the type and status of the task.
+     * @return a {@code String} indicating the type and status of the task.
      */
     @Override
     public String getStatusOfTaskInString() {

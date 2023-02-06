@@ -21,7 +21,7 @@ public class OnCommand extends Command {
     /**
      * Constructs an OnCommand
      *
-     * @param tasks The <code>TaskList</code>> of all available tasks.
+     * @param tasks The {@code TaskList} of all available tasks.
      * @param date The date to be checked.
      */
     public OnCommand(String date, TaskList tasks) {

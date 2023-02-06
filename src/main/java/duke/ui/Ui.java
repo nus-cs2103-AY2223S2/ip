@@ -45,11 +45,11 @@ public class Ui {
             + "\nHave a great day! :)";
 
 
-    /** <code>Scanner</code>to take in user input. */
+    /** {@code Scanner} to take in user input. */
     private Scanner sc;
 
     /**
-     * Constructs an <code>Ui</code> instance to read in user input and display output.
+     * Constructs an {@code Ui} instance to read in user input and display output.
      */
     public Ui() {
         printIntroductoryMessage();

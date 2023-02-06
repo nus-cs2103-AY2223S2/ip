@@ -9,7 +9,7 @@ public class ListCommand extends Command {
     private TaskList tasks;
 
     /**
-     * Constructs a <code>ListCommand</code>.
+     * Constructs a {@code ListCommand}.
      */
     public ListCommand(TaskList tasks) {
         this.tasks = tasks;

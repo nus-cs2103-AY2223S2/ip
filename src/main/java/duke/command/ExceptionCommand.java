@@ -8,7 +8,7 @@ public class ExceptionCommand extends Command {
 
 
     /**
-     * Constructs an <code>ExceptionCommand</code>.
+     * Constructs an {@code ExceptionCommand}.
      */
     public ExceptionCommand(String exceptionMessage) {
         super();

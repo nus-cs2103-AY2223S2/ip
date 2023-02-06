@@ -6,7 +6,7 @@ import duke.task.Task;
 import duke.ui.Ui;
 
 /**
- * Represents the list of <code>Tasks</code> that the user has entered into the chatbot.
+ * Represents the list of {@code Tasks} that the user has entered into the chatbot.
  */
 public class TaskList {
     /**
@@ -15,7 +15,7 @@ public class TaskList {
     private ArrayList<Task> tasks;
 
     /**
-     * Constructs a <code>TaskList</code> instance.
+     * Constructs a {@code TaskList} instance.
      */
     public TaskList() {
         this.tasks = new ArrayList<Task>();
@@ -40,14 +40,14 @@ public class TaskList {
     }
 
     /**
-     * Adds a <code>Task</code>into the task list.
+     * Adds a {@code Task} into the task list.
      */
     public void addTask(Task taskToAdd) {
         this.tasks.add(taskToAdd);
     }
 
     /**
-     * Deletes a <code>Task</code> from the task List, at a specified index.
+     * Deletes a {@code Task} from the task List, at a specified index.
      *
      * @param index Index of the task which is to be deleted.
      */

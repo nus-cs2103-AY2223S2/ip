@@ -8,7 +8,7 @@ public abstract class Command {
     protected boolean isExit = false;
 
     /**
-     * Constructs a <code>Command</code> instance.
+     * Constructs a {@code Command} instance.
      */
     public Command() {
         //Empty constructor
