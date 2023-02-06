@@ -110,7 +110,7 @@ public class ReminderCommand extends Command {
         }
 
         if (count == 1) {
-            sb.append("\n\nNo upcoming tasks. Yay! Let's relax!");
+            sb.append("\nNo upcoming tasks. Yay! Let's relax!");
         }
 
         return sb.toString();
