@@ -21,7 +21,6 @@ public class AddEventCommand extends Command {
     public String execute(TaskList tasks, Storage storage, Ui ui) throws DukeException {
         Event newEvent = new Event(this.description, this.by, this.to);
         tasks.addTask(newEvent);
-        ui.showTaskAdded(newEvent, tasks);
-        return newEvent.toString();
+        return ui.showTaskAdded(newEvent, tasks);
     }
 }

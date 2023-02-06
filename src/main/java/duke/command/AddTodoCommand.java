@@ -17,7 +17,6 @@ public class AddTodoCommand extends Command {
     public String execute(TaskList tasks, Storage storage, Ui ui) throws DukeException {
         ToDo newTodo = new ToDo(this.description);
         tasks.addTask(newTodo);
-        ui.showTaskAdded(newTodo, tasks);
-        return newTodo.toString();
+        return ui.showTaskAdded(newTodo, tasks);
     }
 }

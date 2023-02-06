@@ -21,7 +21,6 @@ public class FindCommand extends Command {
                 newTasks.add(task);
             }
         }
-        ui.showAll(newTasks);
-        return newTasks.toFormattedString();
+        return ui.showAll(newTasks);
     }
 }

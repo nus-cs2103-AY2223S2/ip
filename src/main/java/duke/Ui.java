@@ -24,91 +24,115 @@ public class Ui {
 
     /**
      * Prints the welcome page of the chatbot
+     * @return returns welcome string
      */
-    public void showWelcome() {
+    public String showWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("What can I do for you?");
+        String output = String.format("Hello from\n%s\nWhat can I do for you", logo);
+        System.out.println(output);
+        return output;
     }
 
     /**
      * Print the delimiter between each command and outputs
+     * @return the line
      */
-    public void showLine() {
-        System.out.println("-".repeat(20));
+    public String showLine() {
+        String output = "-".repeat(20);
+        System.out.println(output);
+        return output;
     }
 
     /**
      * Print string to inform user that the task has been marked
      * @param task the task that has been marked
+     * @return string of the task that has been marked
      */
-    public void showMarked(Task task) {
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(task);
+    public String showMarked(Task task) {
+        String output = String.format("Nice! I've marked this task as done:%s", task);
+        System.out.println(output);
+        return output;
     }
 
     /**
      * Print the task that has been added
      * @param task the task that has been added
      * @param tasks the list of all the tasks
+     * @return task added
      */
-    public void showTaskAdded(Task task, TaskList tasks) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task);
-        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+    public String showTaskAdded(Task task, TaskList tasks) {
+        String output = String.format("Got it. I've added this task:\n%s", task.toString());
+        output += String.format("\nNow you have %d tasks in the list.", tasks.size());
+        System.out.println(output);
+        return output;
     }
 
     /**
      * Prints the task that has been deleted
      * @param task the task that has been deleted
+     * @return formatted string of stored file
      */
-    public void showDeleted(Task task) {
-        System.out.println("This task has been deleted successfully");
-        System.out.println(task);
+    public String showDeleted(Task task) {
+        String output = String.format("This task has been deleted successfully\n%s", task.toString());
+        System.out.println(output);
+        return output;
     }
 
     /**
      * Formats and Prints the tasks that has been stored
      * @param tasks the list of all the tasks
+     * @return formatted string of stored file
      */
-    public void showStored(TaskList tasks) {
-        System.out.println("File has been stored!");
-        System.out.println(tasks);
+    public String showStored(TaskList tasks) {
+        String output = String.format("File has been stored!\n%s",tasks.toFormattedString());
+        System.out.println(output);
+        return output;
     }
 
     /**
      * Print the command exception and the command that caused the exception
      * @param word command that the user input
      * @param exception the command exception that was thrown
+     * @return formatted string of command exception
      */
-    public void showCommandError(String word, Exception exception) {
-        System.out.println(exception.toString());
-        System.out.println("duke.Command: " + word);
+    public String showCommandError(String word, Exception exception) {
+        String output = String.format("%s\nCommand: %s", exception.toString(), word);
+        System.out.println(output);
+        return output;
     }
 
     /**
      * Print string to inform the user of a wrong command
+     * @return formatted string of loading error
      */
-    public void showLoadingError() {
-        System.out.println("☹ OOPS!!! I'm sorry, but I cannot find the directory!");
+    public String showLoadingError() {
+        String output = "☹ OOPS!!! I'm sorry, but I cannot find the directory!";
+        System.out.println(output);
+        return output;
     }
 
     /**
      * Prints the ending
+     * @return formatted string to end chatbot
      */
-    public void showGoodbye() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String showGoodbye() {
+        String output = "Bye. Hope to see you again soon!";
+        System.out.println(output);
+        return output;
     }
 
     /**
      * Prints all task in tasks
      * @param tasks list of all tasks
+     * @return all the task in tasks
      */
-    public void showAll(TaskList tasks) {
-        System.out.println(tasks.toFormattedString());
+    public String showAll(TaskList tasks) {
+        String output = tasks.toFormattedString();
+        System.out.println(output);
+        return output;
     }
 }

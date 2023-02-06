@@ -10,13 +10,14 @@ public class ExitCommand extends Command{
     @Override
     public String execute(TaskList tasks, Storage storage, Ui ui) {
         exit = true;
+        String output;
         try {
             storage.store(tasks);
-            ui.showStored(tasks);
+            output = ui.showStored(tasks);
         } catch (IOException ignored) {
-            ui.showLoadingError();
+            output = ui.showLoadingError();
         }
-        ui.showGoodbye();
-        return "";
+        output += ui.showGoodbye();
+        return output;
     }
 }

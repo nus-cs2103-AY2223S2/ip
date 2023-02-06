@@ -4,15 +4,13 @@ import duke.command.Command;
 import duke.exception.CommandException;
 import duke.exception.DukeException;
 import duke.task.TaskList;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
+
+import java.io.IOException;
 
 /**
  * Main class for Duke chatbot
  */
-public class Duke extends Application {
+public class Duke {
     private Storage storage;
     private TaskList tasks;
     private final Ui ui;
@@ -42,22 +40,6 @@ public class Duke extends Application {
     }
 
     /**
-     * Initialise the launcher
-     * @param stage the primary stage for this application, onto which
-     * the application scene can be set.
-     * Applications may create other stages, if needed, but they will not be
-     * primary stages.
-     */
-    @Override
-    public void start(Stage stage) {
-        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
-        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
-
-        stage.setScene(scene); // Setting the stage to show our screen
-        stage.show(); // Render the stage.
-    }
-
-    /**
      * Method that abstracts the running of the program
      */
     public void run() {
@@ -77,6 +59,22 @@ public class Duke extends Application {
             } finally {
                 ui.showLine();
             }
+        }
+    }
+
+    public String getResponse(String input) {
+        if (this.tasks == null) {
+            try {
+                tasks = new TaskList(storage.load());
+            } catch (DukeException | IOException exception) {
+                System.out.println(exception.toString());
+            }
+        }
+        try {
+            Command command = Parser.parse(input);
+            return command.execute(tasks, storage, ui);
+        } catch (DukeException exception) {
+            return exception.toString();
         }
     }
 }
