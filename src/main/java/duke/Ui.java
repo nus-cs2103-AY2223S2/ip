@@ -2,27 +2,21 @@ package duke;
 
 import duke.tasks.Task;
 
-import java.util.Scanner;
-
 public class Ui {
     public Ui() {
-    }
-
-    public String readCommand() {
-        Scanner bucky = new Scanner(System. in);
-        return bucky.nextLine();
     }
 
     public String showWelcome() {
         return "Hello! I'm Duke.\nWhat can I do for you?";
     }
 
-    public String showError(Exception e) {
-        return e.toString();
+    public String showWelcome(Exception e) {
+        return e.toString() +
+                "\nCreated new empty File.\n\nHello! I'm Duke.\nWhat can I do for you?";
     }
 
-    public String showLoadingError() { // ADD STUFF
-        return "File not found";
+    public String showError(Exception e) {
+        return e.toString();
     }
 
     public String showAdded(TaskList l) {
@@ -43,7 +37,7 @@ public class Ui {
         StringBuilder s = new StringBuilder();
         s.append("Here are the tasks in your list:\n");
         for (int i = 0 ; i < l.size() ; i++) {
-            s.append((i+1) + ". " + l.get(i) + "\n");
+            s.append(i + 1).append(". ").append(l.get(i)).append("\n");
         }
         return s.toString();
     }
@@ -52,7 +46,7 @@ public class Ui {
         StringBuilder s = new StringBuilder();
         s.append("Here are the matching tasks in your list:\n");
         for (int i = 0 ; i < l.size() ; i++) {
-            s.append((i+1) + ". " + l.get(i) + "\n");
+            s.append(i + 1).append(". ").append(l.get(i)).append("\n");
         }
         return s.toString();
     }

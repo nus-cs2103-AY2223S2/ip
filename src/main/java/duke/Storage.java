@@ -1,5 +1,6 @@
 package duke;
 
+import duke.exceptions.IncorrectFileFormatException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
@@ -16,22 +17,18 @@ public class Storage {
 
     private String filePath;
     private File f;
-    private String text;
 
     /**
      * Constructor which creates a Storage instance.
      * Creates a File instance with the given file path whether the file exists or not.
      *
      * @param filePath path in computer directory to the file.
-     * @return Storage instance with File object created.
      */
     public Storage(String filePath) {
         this.filePath = filePath;
         f = new File(filePath);
         try {
-            if(!f.exists()) {
-                f.createNewFile();
-            }
+            f.createNewFile(); //no need for f.exists() chk
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -44,15 +41,15 @@ public class Storage {
      * @return TaskList instance.
      * @throws FileNotFoundException  If File is not found by Scanner.
      */
-    public TaskList load() throws FileNotFoundException {
+    public TaskList load() throws FileNotFoundException, IncorrectFileFormatException {
         Scanner s = new Scanner(f);
         TaskList l = new TaskList();
 
         while (s.hasNext()) {
             String str = s.nextLine();
-            String parts[] = str.split("~", 5);
+            String[] parts = str.split("~", 5);
 
-            switch (parts[0]) {
+            switch (parts[0]) { // add assert
             case "T":
                 l.add(new ToDo(parts[2], parts[1].equals("1")));
                 break;
@@ -62,6 +59,8 @@ public class Storage {
             case "E":
                 l.add(new Event(parts[2], parts[1].equals("1"), parts[3], parts[4]));
                 break;
+            default:
+                throw new IncorrectFileFormatException();
             }
         }
         return l;
