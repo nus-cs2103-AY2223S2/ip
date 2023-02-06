@@ -4,19 +4,20 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 
-import pix.commands.ByeCommand;
+import pix.commands.AddDeadline;
+import pix.commands.AddEvent;
+import pix.commands.AddToDo;
+import pix.commands.Bye;
 import pix.commands.Command;
-import pix.commands.DeadlineCommand;
-import pix.commands.DeleteCommand;
-import pix.commands.EventCommand;
-import pix.commands.FindCommand;
-import pix.commands.ListCommand;
-import pix.commands.ListDateCommand;
-import pix.commands.MarkCommand;
-import pix.commands.ToDoCommand;
-import pix.commands.UnmarkCommand;
+import pix.commands.Delete;
+import pix.commands.Find;
+import pix.commands.List;
+import pix.commands.ListDate;
+import pix.commands.Mark;
+import pix.commands.Unmark;
 import pix.data.MyData;
 import pix.exceptions.PixException;
+import pix.ui.Ui;
 
 /**
  * Parser class to parse commands by the user.
@@ -33,30 +34,30 @@ public class Parser {
     public Parser(MyData data) {
         this.data = data;
     }
-
+    
     /**
      * Parses bye command.
      *
-     * @return ByeCommand object.
+     * @return Bye object.
      */
     public Command parseBye() {
-        return new ByeCommand();
+        return new Bye();
     }
 
     /**
      * Parses list command.
      *
-     * @return ListCommand object.
+     * @return List object.
      */
     public Command parseList() {
-        return new ListCommand();
+        return new List();
     }
 
     /**
      * Parses listdate command.
      *
-     * @param commandArr Array of user input split by a space character.
-     * @return ListDateCommand object.
+     * @param commandArr Date of tasks to be displayed.
+     * @return ListDate object.
      * @throws PixException If no date given or if invalid date given.
      */
     public Command parseListDate(String[] commandArr) throws PixException {
@@ -64,9 +65,8 @@ public class Parser {
             throw new PixException("Please enter a date.\n\n e.g. listdate 'yyyy-MM-dd'");
         }
         try {
-            String dateString = commandArr[1];
-            LocalDate date = LocalDate.parse(dateString);
-            return new ListDateCommand(date);
+            LocalDate date = LocalDate.parse(commandArr[1]);
+            return new ListDate(date);
         } catch (DateTimeParseException e) {
             throw new PixException("Please enter a date.\n\n e.g. listdate 'yyyy-MM-dd'");
         }
@@ -75,8 +75,8 @@ public class Parser {
     /**
      * Parses mark command.
      *
-     * @param commandArr Array of user input split by a space character.
-     * @return MarkCommand object.
+     * @param commandArr Index to be marked.
+     * @return Mark object.
      * @throws PixException If index not given or index not in valid range.
      */
     public Command parseMark(String[] commandArr) throws PixException {
@@ -85,11 +85,10 @@ public class Parser {
         }
         try {
             int id = Integer.parseInt(commandArr[1]);
-            boolean indexOutOfBounds = id > data.len() || id < 0;
-            if (indexOutOfBounds) {
+            if (id > data.len() || id < 0) {
                 throw new PixException("Please enter a valid number.");
             }
-            return new MarkCommand(id - 1);
+            return new Mark(id - 1);
         } catch (NumberFormatException e) {
             throw new PixException(("Please enter an index to mark."));
         }
@@ -98,8 +97,8 @@ public class Parser {
     /**
      * Parses unmark command.
      *
-     * @param commandArr Array of user input split by a space character.
-     * @return UnmarkCommand object.
+     * @param commandArr Index to be un-marked.
+     * @return Unmark object.
      * @throws PixException If index not given or index not in valid range.
      */
     public Command parseUnmark(String[] commandArr) throws PixException {
@@ -108,11 +107,10 @@ public class Parser {
         }
         try {
             int id = Integer.parseInt(commandArr[1]);
-            boolean indexOutOfBounds = id > data.len() || id < 0;
-            if (indexOutOfBounds) {
+            if (id > data.len() || id < 0) {
                 throw new PixException("Please enter a valid number.");
             }
-            return new UnmarkCommand(id - 1);
+            return new Unmark(id - 1);
         } catch (NumberFormatException e) {
             throw new PixException(("Please enter an index to mark."));
         }
@@ -130,27 +128,23 @@ public class Parser {
         if (description.isEmpty()) {
             throw new PixException("Cannot have an empty task.");
         }
-        return new ToDoCommand(description);
+        return new AddToDo(description);
     }
 
     /**
      * Parses deadline command.
      *
      * @param slashed Array of description and due date.
-     * @return DeadlineCommand object.
+     * @return AddDeadline object.
      * @throws PixException If no description, due date or invalid format of date given.
      */
     public Command parseDeadline(String[] slashed) throws PixException {
-        String description = removeCommand(slashed[0]);
-        String dueDate = removeCommand(slashed[1]);
-        boolean inputNotValidLength = slashed.length != 2;
-        boolean inputEmptyValue = description.isEmpty() || dueDate.isEmpty();
-        if (inputNotValidLength || inputEmptyValue) {
+        if (slashed.length != 2 || removeCommand(slashed[0]).isEmpty() || removeCommand(slashed[1]).isEmpty()) {
             throw new PixException("Invalid format.\n\n"
                     + "e.g. deadline 'description' / 'yyyy-MM-dd HH-mm'");
         }
         try {
-            return new DeadlineCommand(description, dueDate);
+            return new AddDeadline(removeCommand(slashed[0]), removeCommand(slashed[1]));
         } catch (DateTimeParseException e) {
             throw new PixException("Invalid format.\n\n"
                     + "e.g. deadline 'description' / 'yyyy-MM-dd HH-mm'");
@@ -160,58 +154,51 @@ public class Parser {
     /**
      * Parses event command.
      *
-     * @param slashed Array of description, eventStart date and eventEnd date.
-     * @return EventCommand object.
-     * @throws PixException If no description, eventStart date, eventEnd date, or invalid format of date given.
+     * @param slashed Array of description, from date and to date.
+     * @return AddEvent object.
+     * @throws PixException If no description, from date, to date, or invalid format of date given.
      */
     public Command parseEvent(String[] slashed) throws PixException {
-        String description = removeCommand(slashed[0]);
-        String eventStart = removeCommand(slashed[1]);
-        String eventEnd = removeCommand(slashed[2]);
-        boolean inputNotValidLength = slashed.length != 3;
-        boolean inputEmptyValue = slashed.length != 3
-                || description.isEmpty()
-                || eventStart.isEmpty()
-                || eventEnd.isEmpty();
-        if (inputNotValidLength || inputEmptyValue) {
+        if (slashed.length != 3
+                || removeCommand(slashed[0]).isEmpty()
+                || removeCommand(slashed[1]).isEmpty()
+                || removeCommand(slashed[2]).isEmpty()) {
             throw new PixException("Invalid format.\n\nFrom and To formatted as 'yyyy-MM-dd HH-mm'"
                     + "\n\ne.g. event 'description' / 'From' / 'To'");
         }
         try {
-            return new EventCommand(description, eventStart, eventEnd);
+            return new AddEvent(removeCommand(slashed[0]),
+                    removeCommand(slashed[1]),
+                    removeCommand(slashed[2]));
         } catch (DateTimeParseException e) {
             throw new PixException("Invalid format.\n\nFrom and To formatted as 'yyyy-MM-dd HH-mm'"
                     + "\n\ne.g. event 'description' / 'From' / 'To'");
         }
+
     }
 
     /**
      * Parses delete command.
      *
-     * @param commandArr Array of user input split by a space character.
-     * @return DeleteCommand object.
+     * @param commandArr Index of task to be deleted.
+     * @return Delete object.
      * @throws PixException If index not given or index not in valid range.
      */
     public Command parseDelete(String[] commandArr) throws PixException {
         if (commandArr.length <= 1) {
             throw new PixException("Please enter an index to delete.");
         }
-        try {
-            int id = Integer.parseInt(commandArr[1]);
-            boolean indexOutOfBounds = id > data.len() || id < 0;
-            if (indexOutOfBounds) {
-                throw new PixException("Please enter a valid number.");
-            }
-            return new DeleteCommand(id - 1);
-        } catch (NumberFormatException e) {
+        int id = Integer.parseInt(commandArr[1]);
+        if (id > data.len() || id < 0) {
             throw new PixException("Please enter a valid number.");
         }
+        return new Delete(id - 1);
     }
 
     /**
      * Parses find command.
      *
-     * @param commandArr Array of user input split by a space character.
+     * @param commandArr Keyword to seach task by.
      * @return Tasks if keyword is in the description.
      * @throws PixException If no keyword is given.
      */
@@ -220,7 +207,7 @@ public class Parser {
             throw new PixException("Please enter a keyword");
         }
         String keyword = commandArr[1];
-        return new FindCommand(keyword);
+        return new Find(keyword);
     }
 
     /**
@@ -240,7 +227,7 @@ public class Parser {
      *
      * @param command Command that the user inputs.
      * @return The corresponding command that is parsed.
-     * @throws PixException If any errors related eventEnd formatting and indexing occurs.
+     * @throws PixException If any errors related to formatting and indexing occurs.
      */
     public Command parse(String command) throws PixException {
         String[] commandArr = command.split(" ");
