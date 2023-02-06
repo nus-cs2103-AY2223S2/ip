@@ -47,7 +47,8 @@ public class EventCommand extends Command {
             tasks.add(e);
             storage.saveTaskList(tasks);
             return ui.confirmationMessage("added", tasks, e);
-
+        } catch (AssertionError ae) {
+            return ae.getMessage();
         } catch (DukeException de) {
             return de.getMessage();
         } catch (DateTimeParseException date_time_e) {

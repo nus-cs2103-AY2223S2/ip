@@ -44,6 +44,8 @@ public class DeadlineCommand extends Command {
             tasks.add(d);
             storage.saveTaskList(tasks);
             return ui.confirmationMessage("added", tasks, d);
+        } catch (AssertionError ae) {
+            return ae.getMessage();
         } catch (DukeException de) {
             return de.getMessage();
         } catch (DateTimeParseException date_time_e) {

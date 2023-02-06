@@ -49,8 +49,6 @@ public class Duke {
             return c.execute(this.tasks, this.ui, this.storage);
         } catch (IllegalArgumentException e) {
             return "Unrecognised command. Try again.";
-        } catch (DateTimeParseException e) {
-            return "Key in date and time in this format. yyyy-mm-ddThh:mm";
         } catch (Exception e) {
             return e.getMessage();
         }
