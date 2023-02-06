@@ -43,16 +43,19 @@ public class Storage {
 
             this.dataFile = new File(this.dukeDataDir + fileName);
             boolean isCreated = true;
+
             if (!this.dataFile.exists()) {
                 isCreated = this.dataFile.createNewFile();
             }
+
             if (!isCreated) {
                 throw new DukeException("Failed to create storage file!");
             }
+
             Scanner sc = new Scanner(this.dataFile);
             while (sc.hasNextLine()) {
                 String input = sc.nextLine();
-                parseFile(input, tasks);
+                parseLine(input, tasks);
             }
 
         } catch (FileNotFoundException | DukeException e) {
@@ -83,7 +86,7 @@ public class Storage {
      * @param tasks TaskList to store tasks
      * @throws DukeException If fail to create task from invalid input
      */
-    public static void parseFile(String input, TaskList tasks) throws DukeException {
+    public static void parseLine(String input, TaskList tasks) throws DukeException {
         String[] inputList = input.split(",");
         String taskType = inputList[0];
         String taskName = inputList[1];

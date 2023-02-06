@@ -9,7 +9,7 @@ public class ListCommand extends Command {
 
     @Override
     public void execute(UI ui, TaskList tasks, Storage storage) throws DukeException {
-        if (tasks.size() == 0) {
+        if (tasks.isEmpty()) {
             this.commandStatus = "You currently have 0 tasks added. Add one now!";
         } else {
             this.commandStatus = tasks.toString();

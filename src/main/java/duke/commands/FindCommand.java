@@ -15,10 +15,11 @@ public class FindCommand extends Command {
 
     @Override
     public void execute(UI ui, TaskList tasks, Storage storage) throws DukeException {
-        if (tasks.size() == 0) {
+        if (tasks.isEmpty()) {
             this.commandStatus = "You have no tasks in your list! \n";
         } else {
             TaskList temp = tasks.find(searchTerm);
+            
             if (!temp.isEmpty()) {
                 this.commandStatus = "Here are the matching tasks in your list: \n" + temp;
             } else {

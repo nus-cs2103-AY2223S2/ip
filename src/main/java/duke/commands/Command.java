@@ -11,7 +11,6 @@ import duke.views.UI;
 public abstract class Command {
     /** The status of the command after execution. **/
     protected String commandStatus;
-    protected boolean isExit = false;
 
     /**
      * Executes the respective command.
@@ -26,7 +25,4 @@ public abstract class Command {
         return this.commandStatus;
     };
 
-    public boolean isExit() {
-        return isExit;
-    }
 }

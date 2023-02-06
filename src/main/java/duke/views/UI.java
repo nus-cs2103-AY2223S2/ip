@@ -6,20 +6,14 @@ import duke.commands.Command;
  * Handles display of program output to user.
  */
 public class UI {
-    private static final String DATE_FORMAT = "dd/mm/yyyy";
+    private static final String DATE_FORMAT = "dd/mm/yyyy HHmm";
 
     public String getInitMessage() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-
         return "Hello. I'm Duke, your personal assistant.\n"
                 + "How may I help you today?";
     }
 
-    private String indentString(String s) {
+    private String newlineAndIndentString(String s) {
         return "\n\t" + s;
     }
 
@@ -29,24 +23,20 @@ public class UI {
      */
     public String getAvailableCommands() {
         return "Here is the list of available commands I can do:"
-                        + indentString("bye")
-                        + indentString("todo [name]")
-                        + indentString("deadline [name] /by [" + DATE_FORMAT + "]")
-                        + indentString("event [name] /from [" + DATE_FORMAT + "] /to [" + DATE_FORMAT + "]")
-                        + indentString("list")
-                        + indentString("mark [index]")
-                        + indentString("unmark [index]")
-                        + indentString("delete [index]")
-                        + indentString("find [search term]")
-                        + indentString("bye");
+                        + newlineAndIndentString("bye")
+                        + newlineAndIndentString("todo [name]")
+                        + newlineAndIndentString("deadline [name] /by [" + DATE_FORMAT + "]")
+                        + newlineAndIndentString("event [name] /from [" + DATE_FORMAT + "] /to [" + DATE_FORMAT + "]")
+                        + newlineAndIndentString("list")
+                        + newlineAndIndentString("mark [index]")
+                        + newlineAndIndentString("unmark [index]")
+                        + newlineAndIndentString("delete [index]")
+                        + newlineAndIndentString("find [search term]")
+                        + newlineAndIndentString("bye");
     }
 
     public void printCommandOutput(Command c) {
         System.out.println(c.getCommandStatus());
-    }
-
-    public void printErrorMessage(String e) {
-        System.out.println(e);
     }
 
 }
