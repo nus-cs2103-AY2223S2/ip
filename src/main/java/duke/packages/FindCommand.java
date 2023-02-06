@@ -16,7 +16,7 @@ import duke.Ui;
 public class FindCommand implements Command {
 
     /**
-     * Returns a Tasklist object which is the current taskList after executing the find command and find all tasks
+     * Returns a String message of the tasks that match the search input. Executes the find command and find all tasks
      * description and statuses that match the given string.
      *
      * @param parsedCmd ArrayList of String type that contains parsed information about the task description and
@@ -24,10 +24,10 @@ public class FindCommand implements Command {
      * @param tasks Duke's TaskList object that stores all Tasks objects.
      * @param storage Duke's Storage object to allow file access.
      * @param ui Duke's Ui object to display and print messages to the user. Acts as a screen.
-     * @return TaskList, containing all tasks after execution of command.
+     * @return String message of all tasks description and statueses that match the given string.
      */
     @Override
-    public TaskList execute(ArrayList<String> parsedCmd, TaskList tasks, Storage storage, Ui ui) {
+    public String execute(ArrayList<String> parsedCmd, TaskList tasks, Storage storage, Ui ui) {
         String message;
         StringBuilder sb = new StringBuilder();
         ArrayList<Task> taskList = tasks.getTaskList();
@@ -62,6 +62,6 @@ public class FindCommand implements Command {
         message = sb.toString();
         sb.setLength(0);
         ui.printCommand(message);
-        return tasks;
+        return message;
     }
 }
