@@ -87,7 +87,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[D]%s (From: %02d %s %d %02d:%02d To: %02d %s %d %02d:%02d)",
+        return String.format("[E]%s (From: %02d %s %d %02d:%02d To: %02d %s %d %02d:%02d)",
                 super.toString(),
                 startDateTime.getDayOfMonth(), startDateTime.getMonth(), startDateTime.getYear(),
                 startDateTime.getHour(), startDateTime.getMinute(),
