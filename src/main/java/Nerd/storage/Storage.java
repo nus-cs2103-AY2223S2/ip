@@ -48,6 +48,7 @@ public class Storage {
      * @throws FileNotFoundException if file does not exist.
      */
     public boolean load(TaskList list) throws FileNotFoundException {
+        assert list != null : "Cannot load data into a non existing tasklist";
         Scanner sc = new Scanner(file);
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
@@ -65,6 +66,7 @@ public class Storage {
      * @param list A TaskList object.
      */
     public void save(TaskList list) {
+        assert list != null : "Cannot save data from a non existing tasklist";
         try {
             FileWriter myWriter = new FileWriter(file);
             for (int i = 0; i < list.getSize(); i++) {

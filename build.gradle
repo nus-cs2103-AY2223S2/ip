@@ -42,7 +42,7 @@ test {
 }
 
 application {
-    mainClassName = "Nerd"
+    mainClassName = "gui.Launcher"
 }
 
 shadowJar {

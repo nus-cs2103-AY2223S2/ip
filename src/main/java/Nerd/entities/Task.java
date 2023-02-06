@@ -22,6 +22,7 @@ public abstract class Task {
     }
 
     public String getDescription() {
+        assert !this.description.equals("") : "description should not be empty!";
         return this.description;
     }
 
