@@ -3,20 +3,7 @@ package boo.parser;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.Temporal;
 
-import boo.command.ByeCommand;
-import boo.command.Command;
-import boo.command.DeadlineCommand;
-import boo.command.DeleteCommand;
-import boo.command.EventCommand;
-import boo.command.ExceptionCommand;
-import boo.command.FindCommand;
-import boo.command.HelpCommand;
-import boo.command.InvalidCommand;
-import boo.command.ListCommand;
-import boo.command.MarkCommand;
-import boo.command.OnCommand;
-import boo.command.ToDoCommand;
-import boo.command.UnmarkCommand;
+import boo.command.*;
 import boo.datetime.DateTime;
 import boo.exception.BooException;
 import boo.storage.Storage;
@@ -79,6 +66,8 @@ public class Parser {
             return validateOn(rawCommand);
         case "find":
             return validateFind(rawCommand);
+        case "reminder":
+            return validateReminder(inputArray);
         default:
             return CommandType.INVALID;
         }
@@ -114,6 +103,8 @@ public class Parser {
             return new HelpCommand();
         case FIND:
             return new FindCommand(command.getKeyPhrase(), tasks);
+        case REMINDER:
+            return new ReminderCommand(command.getReminderDuration(), tasks);
         case INVALID:
             return new InvalidCommand();
         default:
@@ -412,6 +403,30 @@ public class Parser {
         CommandType ctFind = CommandType.FIND;
         ctFind.setKeyPhrase(rawCommand.substring(5));
         return ctFind;
+    }
+
+
+    /**
+     * Validates the 'reminder' input of the user.
+     *
+     * @param inputArray The array containing the words from the user's raw command.
+     */
+    private CommandType validateReminder(String[] inputArray) {
+        try {
+            boolean hasValidNumberOfSubcommands = inputArray.length == 2;
+            boolean isValidKeyword = inputArray[1].equals("day") || inputArray[1].equals("week")
+                    || inputArray[1].equals("month");
+            if (!hasValidNumberOfSubcommands || !isValidKeyword) {
+                throw new BooException("Please enter one of the following: day, week or month.");
+            }
+            CommandType ctReminder = CommandType.REMINDER;
+            ctReminder.setReminderDuration(inputArray[1]);
+            return ctReminder;
+        } catch (BooException booException) {
+            CommandType ctException = CommandType.EXCEPTION;
+            ctException.setExceptionMessage(booException.getMessage());
+            return ctException;
+        }
     }
 
     /**
