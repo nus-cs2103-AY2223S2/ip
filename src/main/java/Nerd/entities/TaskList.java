@@ -34,10 +34,12 @@ public class TaskList {
     }
 
     public Task getTask(int index) {
+        assert index < 0 : "Invalid index";
         return this.list.get(index);
     }
 
     public void deleteTask(int index) {
+        assert index < 0 : "Invalid index";
         this.list.remove(index);
     }
 
