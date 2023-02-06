@@ -30,7 +30,7 @@ public class ParserTest {
             assertEquals(
                     "Sorry, I don't know what that line means. You could try typing from our list of commands:\n"
                             +
-                    "[todo, deadline, event, mark, unmark, list, bye, delete]", e.getMessage());
+                    "[todo, deadline, event, mark, unmark, list, bye, delete, help]", e.getMessage());
         }
     }
 }

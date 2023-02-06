@@ -56,6 +56,10 @@ public class Parser {
             return bye(split);
         case "find":
             return find(split);
+        case "help":
+            return Ui.help();
+        case "usage":
+            return Ui.helpDetailed();
         default:
             throw new InvalidCommandException();
         }

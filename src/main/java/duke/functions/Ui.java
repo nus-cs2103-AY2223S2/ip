@@ -19,7 +19,7 @@ import duke.tasks.TaskList;
  */
 public class Ui {
     public static ArrayList<String> commandList = new ArrayList<>(Arrays.asList
-            ("todo", "deadline", "event", "mark", "unmark", "list", "bye", "delete", "find"));
+            ("todo", "deadline", "event", "mark", "unmark", "list", "bye", "delete", "find", "help"));
 
     /**
      * Main method to start interaction between user and interface.
@@ -67,7 +67,29 @@ public class Ui {
      */
     public void greet() {
         String greeting = format("if it isn't your favourite astronaut lawyer doctor plumber cleaner, Johnny Sins."
-                + "\n Ready to go on a self-exploration adventure?");
+                + "\n Ready to go on a self-exploration adventure?"
+                + "\n For more information on the commands available, type help.");
         System.out.println(greeting);
+    }
+
+    public static String help() {
+        String help = "The available commands are todo, deadline, event, mark, unmark, list, bye, delete, find, help.\n"
+                + "For more information on the usage of the commands, please type usage.";
+        return help;
+    }
+    public static String helpDetailed() {
+        String help = format("Hi."
+                    + "The commands available are: \n"
+                    + "todo task - add a task to your todo list\n"
+                    + "deadline task /by time - add a task with deadline\n"
+                    + "event task /from time /to time - add an event\n"
+                    + "mark 1 - marks first item in the list as done\n"
+                    + "unmark 5 - marks 5th item in the list as undone\n"
+                    + "list - shows all tasks in the list\n"
+                    + "delete 1 - deletes first task from the list\n"
+                    + "find task - finds all tasks containing the name\n"
+                    + "bye - exit this application."
+        );
+        return help;
     }
 }
