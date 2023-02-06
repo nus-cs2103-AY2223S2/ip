@@ -13,8 +13,6 @@ import duke.tasks.TaskList;
  * Command format: "unmark &lt;list_index&gt;"
  */
 public class UnmarkCmd extends Command {
-    private int index;
-    private Task task;
 
     /**
      * Constructor method.
@@ -28,10 +26,10 @@ public class UnmarkCmd extends Command {
 
     // Changes the status of the specified task to incomplete.
     public void execute() throws ListIndexMissing {
-        this.index = Parser.parseMarkUnmarkDeleteIndex(this.lineInput);
-        this.task = taskList.get(this.index).unmarkDone();
-
+        int index = Parser.parseMarkUnmarkDeleteIndex(lineInput);
+        Task taskToUnmark = taskList.get(index).markDone();
+        assert taskToUnmark.getIsDone() == false;
         String output = "Ok, I've marked this task as not done yet:";
-        this.response = output + "\n" + Ui.indentString(this.task.toString(), 1);
+        this.response = output + "\n" + Ui.indentString(taskToUnmark.toString(), 1);
     }
 }

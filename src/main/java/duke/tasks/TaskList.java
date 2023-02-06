@@ -36,7 +36,10 @@ public class TaskList {
      * @return Removed task
      */
     public Task removeTask(int index) {
-        return this.tasks.remove(index);
+        int sizeBeforeRemove = this.countTasks();
+        Task removedTask = this.tasks.remove(index);
+        assert sizeBeforeRemove - this.countTasks() == 1;
+        return removedTask;
     }
 
     /**
@@ -44,7 +47,10 @@ public class TaskList {
      * @param task Task to add
      */
     public void add(Task task) {
+        int sizeBeforeAdd = this.countTasks();
         this.tasks.add(task);
+        assert this.countTasks() - sizeBeforeAdd == 1;
+
     }
 
     /**

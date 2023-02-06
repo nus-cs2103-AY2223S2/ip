@@ -13,8 +13,6 @@ import duke.tasks.TaskList;
  * Command format: "mark &lt;list_index&gt;"
  */
 public class MarkCmd extends Command {
-    private int index;
-    private Task task;
 
     /**
      * Constructor method.
@@ -27,10 +25,10 @@ public class MarkCmd extends Command {
 
     // Marks the specified task as completed.
     public void execute() throws ListIndexMissing {
-        this.index = Parser.parseMarkUnmarkDeleteIndex(lineInput);
-        this.task = taskList.get(this.index).markDone();
-
+        int index = Parser.parseMarkUnmarkDeleteIndex(lineInput);
+        Task taskToMark = taskList.get(index).markDone();
+        assert taskToMark.getIsDone() == true;
         String output = "Nice! I've marked this task as done:";
-        this.response = output + "\n" + Ui.indentString(this.task.toString(), 1);
+        this.response = output + "\n" + Ui.indentString(taskToMark.toString(), 1);
     }
 }
