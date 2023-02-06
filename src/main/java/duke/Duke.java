@@ -12,6 +12,7 @@ public class Duke {
 
     /**
      * Returns duke object.
+     *
      * @param filePath path for backup file.
      */
     public Duke(String filePath) {
@@ -28,28 +29,25 @@ public class Duke {
     /**
      * Runs the duke chatbot.
      */
-    public void run() {
-        ui.greet();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                //ui.showError(e.getMessage());
-            } finally {
-                //ui.showLine();
-            }
-        }
+    public String greet() {
+        return ui.greet();
     }
 
-    /**
-     * Starts the duke chatbot.
-     * @param args input arguments.
-     */
-    public static void main(String[] args) {
-        new Duke("duke.txt").run();
+    public String bye() {
+        return ui.bye();
     }
+
+    public String getResponse(String fullCommand) {
+        try {
+            Command c = Parser.parse(fullCommand);
+            return c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            //ui.showError(e.getMessage());
+        } finally {
+            //ui.showLine();
+        }
+        return "I do not understand your command, please try again.";
+    }
+
+
 }

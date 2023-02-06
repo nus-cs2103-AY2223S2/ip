@@ -27,12 +27,13 @@ public class CommandFind extends Command {
      * @param storage deals with loading and saving tasks from file.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        System.out.println("Here are the matching tasks in your list:\n");
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        String returnString = "Here are the matching tasks in your list:\n";
         for (int i = 0; i < taskList.getLength(); i++) {
             if (taskList.getTask(i).getDesc().contains(word)) {
-                System.out.printf("%d.%s\n", i + 1, taskList.getTask(i).toString());
+                returnString += String.format("%d.%s\n", i + 1, taskList.getTask(i).toString());
             }
         }
+        return returnString;
     }
 }

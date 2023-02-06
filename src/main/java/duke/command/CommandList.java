@@ -23,10 +23,11 @@ public class CommandList extends Command {
      * @param storage deals with loading and saving tasks from file.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        String returnString = "";
         for (int i = 0; i < taskList.getLength(); i++) {
-            System.out.printf("%d.%s\n", i + 1, taskList.getTask(i).toString());
+            returnString += String.format("%d.%s\n", i + 1, taskList.getTask(i).toString());
         }
-        System.out.println();
+        return returnString;
     }
 }

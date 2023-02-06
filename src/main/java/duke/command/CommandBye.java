@@ -23,8 +23,8 @@ public class CommandBye extends Command {
      * @param storage deals with loading and saving tasks from file.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.bye();
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        return ui.bye();
     }
 
     /**

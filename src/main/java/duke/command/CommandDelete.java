@@ -27,13 +27,14 @@ public class CommandDelete extends Command {
      * @param storage deals with loading and saving tasks from file.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        System.out.println("Noted. I've removed this task:");
-        System.out.printf(taskList.getTask(index).toString() + "\n");
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        String returnString = "Noted. I've removed this task:\n";
+        returnString += (taskList.getTask(index).toString() + "\n");
         taskList.deleteTask(index);
         String len = (taskList.getLength() == 1 ? taskList.getLength() + " task" : taskList.getLength() + " tasks");
-        System.out.println("Now you have " + len + " in the list.");
+        returnString += ("Now you have " + len + " in the list.\n");
 
         storage.writeArray(taskList);
+        return returnString;
     }
 }

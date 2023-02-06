@@ -32,7 +32,7 @@ public abstract class Command {
      * @param ui deals with interactions with the user.
      * @param storage deals with loading and saving tasks from file.
      */
-    public abstract void execute(TaskList taskList, Ui ui, Storage storage);
+    public abstract String execute(TaskList taskList, Ui ui, Storage storage);
 
     public boolean isExit() {
         return false;
