@@ -34,6 +34,7 @@ public class Storage {
         if (!directory.exists()) {
             directory.mkdirs();
         }
+        assert directory.exists();
         try {
             File file = new File(filePath);
             Scanner sc = new Scanner(file);

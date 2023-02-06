@@ -51,10 +51,10 @@ shadowJar {
     archiveClassifier = null
 }
 
-run{
-    standardInput = System.in
+run {
     enableAssertions = true
 }
+
 
 checkstyle {
     toolVersion = '10.2'

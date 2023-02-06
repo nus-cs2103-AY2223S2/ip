@@ -53,7 +53,6 @@ public class Deadline extends Task {
      */
     String dateFormatter() {
         return "by: " + date.format(DateTimeFormatter.ofPattern("d MMM yyyy"));
-
     }
 
     /**
