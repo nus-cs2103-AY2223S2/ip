@@ -28,7 +28,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parseRawCommand_invalidCommands_outputEXCEPTION() {
+    public void parseRawCommand_invalidCommands_outputException() {
         Parser ps = new Parser(new TaskListStub());
 
         assertEquals(ps.parseRawCommand("mark -1"), CommandType.EXCEPTION);
