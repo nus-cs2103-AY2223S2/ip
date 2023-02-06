@@ -1,6 +1,7 @@
 package sam.command;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.Map;
 
 import sam.Ui;
@@ -40,27 +41,37 @@ public class AddCommand extends Command {
             throws SamMissingTaskTitleException, SamMissingTaskValueException,
             SamMissingTaskArgException, SamInvalidDateException, SamSaveFailedException,
             SamUnknownCommandException {
-        Map<String, String> taskArgs = Parser.parseTaskArgs(args);
-        String title = taskArgs.get("title");
-        Task task = null;
+        String input = args.strip();
+        if (input.isEmpty() || input.charAt(0) == '/') {
+            throw new SamMissingTaskTitleException();
+        }
 
+        String[] titleArgs = input.split(" +/", 2);
+        String title = titleArgs[0];
+
+        Map<String, String> argsMap = new HashMap<>();
+        if (titleArgs.length > 1) {
+            argsMap = Parser.parseTaskArgs(argsMap, titleArgs[1]);
+        }
+
+        Task task = null;
         switch (taskType) {
         case 'T':
             task = new ToDo(title);
             break;
         case 'E':
-            if (!taskArgs.containsKey("from") || !taskArgs.containsKey("to")) {
+            if (!argsMap.containsKey("from") || !argsMap.containsKey("to")) {
                 throw new SamMissingTaskArgException();
             }
-            LocalDate from = Parser.parseDate(taskArgs.get("from"));
-            LocalDate to = Parser.parseDate(taskArgs.get("to"));
+            LocalDate from = Parser.parseDate(argsMap.get("from"));
+            LocalDate to = Parser.parseDate(argsMap.get("to"));
             task = new Event(title, from, to);
             break;
         case 'D':
-            if (!taskArgs.containsKey("by")) {
+            if (!argsMap.containsKey("by")) {
                 throw new SamMissingTaskArgException();
             }
-            LocalDate by = Parser.parseDate(taskArgs.get("by"));
+            LocalDate by = Parser.parseDate(argsMap.get("by"));
             task = new Deadline(title, by);
             break;
         default:

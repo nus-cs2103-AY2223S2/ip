@@ -1,6 +1,10 @@
 package sam.task;
 
 import java.time.LocalDate;
+import java.util.Map;
+
+import sam.parser.Parser;
+import sam.parser.SamInvalidDateException;
 
 /**
  * Represents a task with a start and end date.
@@ -25,6 +29,19 @@ public class Event extends Task {
         super(title, isDone);
         this.from = from;
         this.to = to;
+    }
+
+    @Override
+    public void update(Map<String, String> argsMap) throws SamInvalidDateException {
+        super.update(argsMap);
+
+        if (argsMap.containsKey("from")) {
+            this.from = Parser.parseDate(argsMap.get("from"));
+        }
+
+        if (argsMap.containsKey("to")) {
+            this.to = Parser.parseDate(argsMap.get("to"));
+        }
     }
 
     @Override

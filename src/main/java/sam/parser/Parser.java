@@ -3,17 +3,16 @@ package sam.parser;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.HashMap;
 import java.util.Map;
 
 import sam.command.AddCommand;
 import sam.command.Command;
 import sam.command.DeleteCommand;
+import sam.command.EditCommand;
 import sam.command.ExitCommand;
 import sam.command.FindCommand;
 import sam.command.ListCommand;
 import sam.command.MarkCommand;
-import sam.task.SamMissingTaskTitleException;
 import sam.task.SamMissingTaskValueException;
 
 /**
@@ -54,34 +53,22 @@ public class Parser {
 
     /**
      * Parses a string of task arguments into a Map.
-     * Task arguments should be in the form 'title /key1 val1 /key2 val2 ...'
+     * Task arguments should be in the form '/key1 val1 /key2 val2 ...'
      *
      * @param input The string to be parsed.
      * @return A Map of the task arguments.
-     * @throws SamMissingTaskTitleException If a title is not provided.
      * @throws SamMissingTaskValueException If any key is missing a value.
      */
-    public static Map<String, String> parseTaskArgs(String input)
-            throws SamMissingTaskTitleException, SamMissingTaskValueException {
-        input = input.strip();
-        if (input.isEmpty() || input.charAt(0) == '/') {
-            throw new SamMissingTaskTitleException();
-        }
-
-        Map<String, String> taskArgs = new HashMap<>();
-        String[] args = input.split(" +/", 2);
-        taskArgs.put("title", args[0]);
-
-        if (args.length > 1) {
-            for (String arg : args[1].split(" +/")) {
-                String[] keyValue = splitFirst(arg);
-                if (keyValue.length <= 1) {
-                    throw new SamMissingTaskValueException();
-                }
-                taskArgs.put(keyValue[0], keyValue[1]);
+    public static Map<String, String> parseTaskArgs(Map<String, String> argsMap, String input)
+            throws SamMissingTaskValueException {
+        for (String arg : input.strip().split(" +/")) {
+            String[] keyValue = splitFirst(arg);
+            if (keyValue.length <= 1) {
+                throw new SamMissingTaskValueException();
             }
+            argsMap.put(keyValue[0], keyValue[1]);
         }
-        return taskArgs;
+        return argsMap;
     }
 
     /**
@@ -133,6 +120,9 @@ public class Parser {
             break;
         case "find":
             c = new FindCommand(args);
+            break;
+        case "edit":
+            c = new EditCommand(args);
             break;
         default:
             throw new SamUnknownCommandException();

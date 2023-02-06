@@ -2,6 +2,9 @@ package sam.task;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
+import sam.parser.SamInvalidDateException;
 
 /**
  * Represents a list of tasks.
@@ -64,6 +67,23 @@ public class TaskList {
         }
         getTask(id).setDone(isDone);
         return true;
+    }
+
+    /**
+     * Updates the task with the specified id.
+     *
+     * @param id      The id of the task to update.
+     * @param argsMap A Map of the task arguments to replace.
+     * @return {@code true} if successful.
+     * @throws SamInvalidDateException If a date string is in the wrong format.
+     */
+    public Task updateTask(int id, Map<String, String> argsMap) throws SamInvalidDateException {
+        if (!isValidId(id)) {
+            return null;
+        }
+        Task task = getTask(id);
+        task.update(argsMap);
+        return task;
     }
 
     /**

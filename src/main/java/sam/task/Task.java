@@ -2,8 +2,10 @@ package sam.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Map;
 
 import sam.parser.Parser;
+import sam.parser.SamInvalidDateException;
 
 /**
  * Represents a user task.
@@ -39,6 +41,18 @@ public abstract class Task {
 
     public boolean matchTitle(String subString) {
         return title.contains(subString);
+    }
+
+    /**
+     * Updates details of the task.
+     *
+     * @param argsMap A Map of the task arguments.
+     * @throws SamInvalidDateException If a date string is in the wrong format.
+     */
+    public void update(Map<String, String> argsMap) throws SamInvalidDateException {
+        if (argsMap.containsKey("title")) {
+            this.title = argsMap.get("title");
+        }
     }
 
     /**
