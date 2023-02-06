@@ -38,6 +38,9 @@ public class Parser {
             return new MarkDoneCommand(false, number);
         }
         case "todo": {
+            if (split.length < 2) {
+                throw new TaskCreationException("Description cannot be empty");
+            }
             return new AddToDoCommand(split[1]);
         }
         case "deadline": {

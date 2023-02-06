@@ -40,6 +40,7 @@ public class TaskList implements Serializable {
 
     /**
      * Finds all events with description fitting the paramter
+     *
      * @param desc desc to search by
      * @return new TaskList with searched results
      */
@@ -56,14 +57,11 @@ public class TaskList implements Serializable {
      * @param desc Description of event
      * @param from start time of event
      * @param to   end time of event
+     * @throws TaskCreationException failure to create event
      */
-    public void addEvent(String desc, String from, String to) {
-        try {
-            list.add(new Event(desc, from, to));
-            System.out.println("Added: " + desc);
-        } catch (TaskCreationException e) {
-            System.out.println(e.getMessage());
-        }
+    public void addEvent(String desc, String from, String to) throws TaskCreationException {
+        list.add(new Event(desc, from, to));
+
     }
 
     /**
@@ -71,26 +69,23 @@ public class TaskList implements Serializable {
      *
      * @param desc     Description of to-do
      * @param deadline deadline of task
+     * @throws TaskCreationException failure to create event
      */
-    public void addDeadline(String desc, String deadline) {
-        try {
-            list.add(new Deadline(desc, deadline));
-            System.out.println("Added: " + desc);
-        } catch (TaskCreationException e) {
-            System.out.println(e.getMessage());
-        }
+    public void addDeadline(String desc, String deadline) throws TaskCreationException {
+        list.add(new Deadline(desc, deadline));
     }
 
     /**
      * Marks a task as done
      *
      * @param index index of task
+     * @throws TaskException failure to mark as done
      */
-    public void mark(int index) {
+    public void mark(int index) throws TaskException {
         try {
             list.get(index).setIsDone(true);
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Item does not exist");
+            throw new TaskException("Item not found");
         }
     }
 
@@ -98,12 +93,13 @@ public class TaskList implements Serializable {
      * Marks a task as not done
      *
      * @param index index of task
+     * @throws TaskException failure to mark as not done
      */
-    public void unmark(int index) {
+    public void unmark(int index) throws TaskException {
         try {
             list.get(index).setIsDone(false);
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Item does not exist");
+            throw new TaskException("Item not found");
         }
     }
 

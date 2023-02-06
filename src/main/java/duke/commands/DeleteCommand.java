@@ -1,6 +1,7 @@
 package duke.commands;
 
 import duke.Storage;
+import duke.TaskDeletionException;
 import duke.TaskList;
 
 /**
@@ -14,13 +15,13 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) throws TaskDeletionException {
         try {
             tasks.delete(index - 1);
             storage.store(tasks);
             return "Removal successful. New list:\n" + listAll(tasks);
         } catch (IndexOutOfBoundsException e) {
-            return "Item does not exist";
+            throw new TaskDeletionException("Item not found");
         }
     }
 }

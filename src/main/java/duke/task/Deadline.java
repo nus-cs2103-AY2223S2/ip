@@ -2,8 +2,8 @@ package duke.task;
 
 import duke.TaskCreationException;
 
-import java.time.format.DateTimeParseException;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 /**
  * Represents a task with a deadline.
@@ -13,7 +13,8 @@ public class Deadline extends Task {
 
     /**
      * Creates a deadline
-     * @param desc description of task
+     *
+     * @param desc     description of task
      * @param deadline deadline of task
      * @throws TaskCreationException when creation fails due to date parsing
      */

@@ -1,6 +1,7 @@
 package duke.commands;
 
 import duke.Storage;
+import duke.TaskCreationException;
 import duke.TaskList;
 
 /**
@@ -21,7 +22,7 @@ public class AddToDoCommand extends Command {
 
 
     @Override
-    public String execute(TaskList tl, Storage storage) {
+    public String execute(TaskList tl, Storage storage) throws TaskCreationException {
         tl.addTodo(desc);
         storage.store(tl);
         return listAll(tl);

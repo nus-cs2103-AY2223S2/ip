@@ -1,6 +1,7 @@
 package duke.commands;
 
 import duke.Storage;
+import duke.TaskException;
 import duke.TaskList;
 
 /**
@@ -22,7 +23,7 @@ public class MarkDoneCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) throws TaskException {
         if (isDone) {
             tasks.mark(index - 1);
         } else {
