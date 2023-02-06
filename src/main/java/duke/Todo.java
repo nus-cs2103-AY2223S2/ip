@@ -10,7 +10,7 @@ public class Todo extends Task {
      * constructor for a new Todo instance
      * 
      * @param description description of task
-     * @throws MissingDescriptionException
+     * @throws MissingDescriptionException missing description
      */
     public Todo(String description) throws MissingDescriptionException {
         super(description);

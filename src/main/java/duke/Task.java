@@ -11,7 +11,7 @@ public class Task {
      * creates a Task instance with the specified description
      * 
      * @param description description of the task
-     * @throws MissingDescriptionException
+     * @throws MissingDescriptionException missing description
      */
     public Task(String description) throws MissingDescriptionException {
         if (description.equals("") || description.equals(" ")) {

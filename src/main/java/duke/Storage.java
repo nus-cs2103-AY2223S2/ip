@@ -9,14 +9,28 @@ import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
 
+/**
+ * deals with loading and saving tasks to/from the tasklist in Duke
+ */
 public class Storage {
 
     private String filePath;
 
+    /**
+     * constructor for new Storage instance
+     * 
+     * @param filePath path to the file for read from/ write to
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * obtains the lists of tasks from the text file and copies it into an arraylist
+     * 
+     * @return new Arraylist of tasks
+     * @throws DukeException error reading tasks from the file
+     */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
         File f = new File(filePath);
@@ -85,6 +99,12 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * writes the tasks from the current Duke program into the text file
+     * 
+     * @param taskList TaskList containing current list of tasks
+     * @throws DukeException error writing tasks into the text file
+     */
     public void save(TaskList taskList) throws DukeException {
         try {
             FileWriter fw = new FileWriter(filePath, false);
