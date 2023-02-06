@@ -45,6 +45,9 @@ public class Parser {
 
         if (s.length <= 1) { throw new InvalidArgumentException();}
 
+        assert(s.length == 2);
+        assert(strCommandList.contains(firstWord));
+
         switch (firstWord) { // add assert here
         case "mark":
             return new MarkCommand(1, Integer.parseInt(s[1]) - 1);
