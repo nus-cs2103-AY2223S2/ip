@@ -5,14 +5,26 @@ import duke.task.Task;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Analogous to the TaskList class suggested by the 2103T module coordinators.
+ * Which is encapsulates a List which stores Task objects.
+ */
 public class TaskStorage {
     private List<Task> taskStorage;
     // Tasks are indexed from 0 in taskstorage.
     private int ind = 0; //Number of Current Tasks
 
+    /**
+     * Constructs an empty TaskStorage object.
+     */
     public TaskStorage() {
         taskStorage = new ArrayList<Task>();
     }
+
+    /**
+     * Add a task to the TaskStorage object with printing effects.
+     * @param t The task.
+     */
     public void addTask(Task t) {
         System.out.println("Got it. I've added this task:");
         System.out.println("  " + t);
@@ -21,18 +33,36 @@ public class TaskStorage {
         System.out.println("Now you have " + this.ind + " task(s) in the list.");
     }
 
+    /**
+     * Add a task to the TaskStorage object without printing effects.
+     * @param t The task.
+     */
     public void addTaskWithoutPrinting(Task t) {
         this.taskStorage.add(t);
         this.ind++;
     }
 
+    /**
+     * Return the number of tasks in the taskStorage object.
+     * @return The number of tasks in the taskStorage object.
+     */
     public int noTasks() {
         return ind;
     }
 
+    /**
+     * Return the task based on the given index in the taskStorage object.
+     * @param i The given index.
+     * @return The task at the given index.
+     */
     public Task getTask(int i) {
         return this.taskStorage.get(i);
     }
+
+    /**
+     * The given task will be deleted in the taskStorage object.
+     * @param t The given task.
+     */
     public void deleteTask(Task t) {
         System.out.println("Noted. I've removed this task:");
         System.out.println("  " + t);
@@ -41,6 +71,9 @@ public class TaskStorage {
         System.out.println("Now you have " + ind + " task(s) in the list.");
     }
 
+    /**
+     * Prints out the list of tasks in the taskStorage object.
+     */
     public void listTask() {
         System.out.println("Tasks:");
         for (int i = 0; i < this.noTasks(); i++) {
