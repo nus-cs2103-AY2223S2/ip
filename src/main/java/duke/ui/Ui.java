@@ -63,6 +63,23 @@ public class Ui {
         return errorMsg;
     }
 
+    public String showHelp() {
+        String availableHelp = "These are the commands ShinChan recognise given his age:\n"
+                + "- todo [task description]: add a task of type Todo\n"
+                + "- deadline [task description] /by [due date]: add a task of type Deadline, "
+                + "shinchan only can comprehend date of format dd-mm-yyyy HHmm :(\n"
+                + "- event [task description] /from [from when] /by [by when]: add a task of type Event\n"
+                + "- delete [task number to be deleted]: to delete a task\n"
+                + "- find [keyword]: to find a task that contain certain work\n"
+                + "- list: to list out all your tasks\n"
+                + "- mark [task number you wish to mark]: mark a task completed\n"
+                + "- unmark [task number you wish to unmark]: mark a task as incompleted\n"
+                + "- edit /[task number u want to edit] /[desc/from/to/by] /[content you want change to]: edit task\n"
+                + "- bye: shinchan pangkang!\n";
+
+        return availableHelp;
+    }
+
     /**
      * Print the message when the user type "list" command.
      */
