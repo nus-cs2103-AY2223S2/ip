@@ -51,17 +51,7 @@ public class Storage {
     public void add(Task task) {
         try {
             FileWriter fw = new FileWriter(this.file, true);
-            String data;
-            if (task instanceof Todo) {
-                Todo td = (Todo) task;
-                data = "T |   | " + td.getDescription();
-            } else if (task instanceof Deadline) {
-                Deadline dl = (Deadline) task;
-                data = "D |   | " + dl.getDescription() + " | " + dl.getDateTime();
-            } else {
-                Event evt = (Event) task;
-                data = "E |   | " + evt.getDescription() + " | " + evt.getStartDt() + " | " + evt.getEndDt();
-            }
+            String data = processTaskToData(task);
             fw.write(data + System.lineSeparator());
             fw.flush();
             fw.close();
@@ -76,11 +66,10 @@ public class Storage {
      * @param index the index of the task to mark
      */
     public void mark(int index) {
-        List<String> tasks = getSavedTasksAsList();
-        StringBuilder sb = new StringBuilder(tasks.get(index));
         int markIndex = 4;
-        sb.setCharAt(markIndex, 'X');
-        replaceLineInFile(index, sb.toString());
+        char newValue = 'X';
+        String updateLine = getUpdatedLine(index, markIndex, newValue);
+        replaceLineInFile(index, updateLine);
     }
 
     /**
@@ -89,11 +78,10 @@ public class Storage {
      * @param index the index of the task to unmark
      */
     public void unmark(int index) {
-        List<String> tasks = getSavedTasksAsList();
-        StringBuilder sb = new StringBuilder(tasks.get(index));
         int markIndex = 4;
-        sb.setCharAt(markIndex, ' ');
-        replaceLineInFile(index, sb.toString());
+        char newValue = ' ';
+        String updateLine = getUpdatedLine(index, markIndex, newValue);
+        replaceLineInFile(index, updateLine);
     }
 
     /**
@@ -140,8 +128,30 @@ public class Storage {
             throw new RuntimeException(e);
         }
     }
-
+    
     private Boolean pathNotEmpty(String path) {
-        return !path.isEmpty();
+      return !path.isEmpty();
+    }
+    
+    private String getUpdatedLine(int lineToUpdate, int updateIndex, char newValue) {
+        List<String> tasks = getSavedTasksAsList();
+        StringBuilder sb = new StringBuilder(tasks.get(lineToUpdate));
+        sb.setCharAt(updateIndex, newValue);
+        return sb.toString();
+    }
+
+    private String processTaskToData(Task task) {
+        String data;
+        if (task instanceof Todo) {
+            Todo td = (Todo) task;
+            data = "T |   | " + td.getDescription();
+        } else if (task instanceof Deadline) {
+            Deadline dl = (Deadline) task;
+            data = "D |   | " + dl.getDescription() + " | " + dl.getDateTime();
+        } else {
+            Event evt = (Event) task;
+            data = "E |   | " + evt.getDescription() + " | " + evt.getStartDt() + " | " + evt.getEndDt();
+        }
+        return data;
     }
 }
