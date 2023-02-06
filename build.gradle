@@ -51,6 +51,24 @@ application {
     mainClassName = "kira.KiraLauncher"
 }
 
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+
+task shadowJarCLI(type: ShadowJar) {
+  archiveName = 'KiraCLI.jar'
+  manifest {
+      attributes('Main-Class': 'kira.KiraBot')
+  }
+  from zipTree(shadowJar.archivePath)
+}
+
+task shadowJarGUI(type: ShadowJar) {
+  archiveName = 'KiraGUI.jar'
+  manifest {
+      attributes('Main-Class': 'kira.KiraLauncher')
+  }
+  from zipTree(shadowJar.archivePath)
+}
+
 shadowJar {
     archiveBaseName = "kira"
     archiveClassifier = null
@@ -60,3 +78,6 @@ run{
     standardInput = System.in
     enableAssertions = true
 }
+
+build.finalizedBy(shadowJarCLI)
+build.finalizedBy(shadowJarGUI)
