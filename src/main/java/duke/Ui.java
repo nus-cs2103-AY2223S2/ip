@@ -47,6 +47,9 @@ public class Ui {
         System.out.print("Noted. I've removed this task:\n" + 
         t.toString() + "\n" + "Now you have " + number_of_tasks + " tasks in the list.\n");
     }
+    public void printFindTask() {
+        System.out.println("Here are the matching tasks in your list:\n");
+    }
 
     public void showError(String error) {
         System.out.println(error);
