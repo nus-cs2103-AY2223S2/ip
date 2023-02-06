@@ -6,7 +6,7 @@ import java.util.Optional;
 import aqua.util.DateUtils;
 
 
-/** An {@code UserTask} to represent a deadline. */
+/** A {@code UserTask} to represent a deadline. */
 public class UserDeadline extends UserTask {
     /** Tag of {@code dueTime} parameter when parsing. */
     public static final String TAG_DUE_TIME = "by";
