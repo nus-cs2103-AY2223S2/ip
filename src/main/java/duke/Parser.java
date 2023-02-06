@@ -10,6 +10,7 @@ import exception.EmptyDescriptionException;
 public class Parser {
     private DukeList dukelist;
     private Storage storage;
+    private Ui ui;
 
     /**
      * Creates a Parser object
@@ -17,9 +18,10 @@ public class Parser {
      * @param dukeList a DukeList that can be accessed by this Parser
      * @param storage a Storage that is used to read and write
      */
-    public Parser (DukeList dukeList, Storage storage ) {
+    public Parser (DukeList dukeList, Storage storage , Ui ui) {
         this.dukelist = dukeList;
         this.storage = storage;
+        this.ui = ui;
     }
 
     /**
@@ -34,9 +36,9 @@ public class Parser {
         try {
             String first = array[0];
             if (inputText.equals("bye")) {
-                return new ExitCommand(this.dukelist, this.storage);
+                return new ExitCommand(this.dukelist, this.storage, this.ui);
             } else if (first.equals("list")){
-                return new ListCommand(this.dukelist);
+                return new ListCommand(this.dukelist, this.ui);
             } else if (first.equals("mark")) {
                 return new MarkCommand(array[1], true, dukelist);
             } else if (first.equals("unmark")) {

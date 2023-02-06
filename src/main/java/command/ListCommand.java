@@ -1,21 +1,23 @@
 package command;
 
 import duke.DukeList;
-import duke.TextBorder;
+import duke.Ui;
 
 public class ListCommand extends Command{
     private DukeList dukeList;
+    private Ui ui;
 
-    public ListCommand(DukeList dukeList) {
+    public ListCommand(DukeList dukeList, Ui ui) {
         this.dukeList = dukeList;
+        this.ui = ui;
     }
 
     @Override
     public void execute() {
         if (this.dukeList.isEmpty()) {
-            System.out.println(new TextBorder("Yo there's nothing in the list."));
+            this.ui.addStatement("Yo there's nothing in the list.");
         } else {
-            System.out.println(new TextBorder(this.dukeList.toString()));
+            this.ui.addStatement(this.dukeList.toString());
         }
     }
 

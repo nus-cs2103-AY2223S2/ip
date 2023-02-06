@@ -21,13 +21,6 @@ public class FindCommand extends Command{
 
     @Override
     public void execute() {
-        DukeList foundList = this.dukeList.findSubString(task);
-        if (foundList.isEmpty()) {
-            System.out.println("Sorry man, couldn't find anything with [" + task + "]");
-        } else {
-            System.out.println(new TextBorder("So I've found these:"));
-            System.out.println(foundList);
-        }
-
+        this.dukeList.findSubString(task);
     }
 }
