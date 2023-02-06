@@ -9,6 +9,11 @@ import duke.utils.BooleanUtils;
 public class ToDo extends Task {
     private static final char SYMBOL = 'T';
 
+    private static final int EXPECTED_ARG_COUNT = 3;
+
+    private static final int DONE_ARG_INDEX = 1;
+    private static final int DESCRIPTION_ARG_INDEX = 2;
+
     /**
      * Creates a ToDo object.
      *
@@ -32,7 +37,7 @@ public class ToDo extends Task {
         String[] formattedArgs = Task.formatStrsFromStorage(args);
 
         boolean isDone = extractValidIsDone(formattedArgs);
-        String description = formattedArgs[2];
+        String description = formattedArgs[DESCRIPTION_ARG_INDEX];
 
         return new ToDo(isDone, description);
     }
@@ -62,9 +67,9 @@ public class ToDo extends Task {
 
     private static boolean extractValidIsDone(String[] formattedArgs) throws DukeException {
         assert formattedArgs != null;
-        assert formattedArgs.length >= 2;
+        assert formattedArgs.length >= DONE_ARG_INDEX + 1;
 
-        if (!BooleanUtils.isBooleanStr(formattedArgs[1])) {
+        if (!BooleanUtils.isBooleanStr(formattedArgs[DONE_ARG_INDEX])) {
             throw new DukeException("A to-do in storage has an incorrect data type!");
         }
 

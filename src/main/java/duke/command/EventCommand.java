@@ -13,6 +13,10 @@ import java.time.format.DateTimeParseException;
  * Represents an add event command for adding an event to a task list.
  */
 public class EventCommand extends AddCommand {
+    private static final int DESCRIPTION_ARG_INDEX = 0;
+    private static final int START_ARG_INDEX = 1;
+    private static final int END_ARG_INDEX = 2;
+
     /**
      * Creates an event using the specified input, adds it to tasks, and returns an acknowledgement message.
      *
@@ -79,37 +83,37 @@ public class EventCommand extends AddCommand {
 
     private void validateNonEmptyDescription(String[] args) throws DukeException {
         assert args != null;
-        assert args.length >= 1;
+        assert args.length >= DESCRIPTION_ARG_INDEX + 1;
 
-        if (args[0].isEmpty()) {
+        if (args[DESCRIPTION_ARG_INDEX].isEmpty()) {
             throw new DukeException("The description of an event cannot be empty!");
         }
     }
 
     private void validateNonEmptyStart(String[] args) throws DukeException {
         assert args != null;
-        assert args.length >= 2;
+        assert args.length >= START_ARG_INDEX + 1;
 
-        if (args[1].isEmpty()) {
+        if (args[START_ARG_INDEX].isEmpty()) {
             throw new DukeException("The start of an event must be specified!");
         }
     }
 
     private void validateNonEmptyEnd(String[] args) throws DukeException {
         assert args != null;
-        assert args.length >= 3;
+        assert args.length >= END_ARG_INDEX + 1;
 
-        if (args[2].isEmpty()) {
+        if (args[END_ARG_INDEX].isEmpty()) {
             throw new DukeException("The end of an event must be specified!");
         }
     }
 
     private void validateStartAndEndFormat(String[] args) throws DukeException {
         assert args != null;
-        assert args.length >= 3;
+        assert args.length >= END_ARG_INDEX + 1;
 
-        if (!args[1].matches(LocalDateTimeUtils.INPUT_DATE_TIME_REGEX)
-                || !args[2].matches(LocalDateTimeUtils.INPUT_DATE_TIME_REGEX)) {
+        if (!args[START_ARG_INDEX].matches(LocalDateTimeUtils.INPUT_DATE_TIME_REGEX)
+                || !args[END_ARG_INDEX].matches(LocalDateTimeUtils.INPUT_DATE_TIME_REGEX)) {
 
             throw new DukeException(String.format("Start and end of event should be of the format:\n  %s",
                     LocalDateTimeUtils.INPUT_DATE_TIME_FORMAT));
@@ -118,9 +122,9 @@ public class EventCommand extends AddCommand {
 
     private Event createEvent(String[] args) throws DukeException {
         assert args != null;
-        assert args.length >= 1;
+        assert args.length >= DESCRIPTION_ARG_INDEX + 1;
 
-        String description = args[0];
+        String description = args[DESCRIPTION_ARG_INDEX];
         LocalDateTime start = extractValidStart(args);
         LocalDateTime end = extractValidEnd(args);
 
@@ -129,10 +133,10 @@ public class EventCommand extends AddCommand {
 
     private LocalDateTime extractValidStart(String[] args) throws DukeException {
         assert args != null;
-        assert args.length >= 2;
+        assert args.length >= START_ARG_INDEX + 1;
 
         try {
-            return LocalDateTime.parse(args[1], LocalDateTimeUtils.INPUT_DATE_TIME_FORMATTER);
+            return LocalDateTime.parse(args[START_ARG_INDEX], LocalDateTimeUtils.INPUT_DATE_TIME_FORMATTER);
         } catch (DateTimeParseException e) {
             throw new DukeException("The start of the event provided is an invalid date and time!");
         }
@@ -140,10 +144,10 @@ public class EventCommand extends AddCommand {
 
     private LocalDateTime extractValidEnd(String[] args) throws DukeException {
         assert args != null;
-        assert args.length >= 3;
+        assert args.length >= END_ARG_INDEX + 1;
 
         try {
-            return LocalDateTime.parse(args[2], LocalDateTimeUtils.INPUT_DATE_TIME_FORMATTER);
+            return LocalDateTime.parse(args[END_ARG_INDEX], LocalDateTimeUtils.INPUT_DATE_TIME_FORMATTER);
         } catch (DateTimeParseException e) {
             throw new DukeException("The end of the event provided is an invalid date and time!");
         }

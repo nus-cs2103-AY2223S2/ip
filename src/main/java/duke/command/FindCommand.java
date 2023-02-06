@@ -10,6 +10,8 @@ import java.util.List;
  * Represents a find command for finding a task by searching for a keyword or keyphrase.
  */
 public class FindCommand implements Command {
+    private static final int KEYPHRASE_ARG_INDEX = 1;
+
     /**
      * Returns a message listing out each task whose description contains the keyword or keyphrase specified in input.
      *
@@ -34,7 +36,7 @@ public class FindCommand implements Command {
 
         validateNonEmptyKeyphrase(args);
 
-        return args[1].trim();
+        return args[KEYPHRASE_ARG_INDEX].trim();
     }
 
     private String[] extractArgs(String input) {
@@ -46,7 +48,7 @@ public class FindCommand implements Command {
     private void validateNonEmptyKeyphrase(String[] args) throws DukeException {
         assert args != null;
 
-        if (args.length != 2 || args[1].trim().isEmpty()) {
+        if (args.length != KEYPHRASE_ARG_INDEX + 1 || args[KEYPHRASE_ARG_INDEX].trim().isEmpty()) {
             throw new DukeException("The keyphrase to search for cannot be empty!");
         }
     }

@@ -10,6 +10,8 @@ import java.util.List;
  * Represents a task list.
  */
 public class TaskList {
+    private static final int TASK_SYMBOL_ARG_INDEX = 0;
+
     private List<Task> tasks;
 
     private final Storage storage;
@@ -174,9 +176,9 @@ public class TaskList {
 
     private Task createTask(String[] args) throws DukeException {
         assert args != null;
-        assert args.length >= 1;
+        assert args.length >= TASK_SYMBOL_ARG_INDEX + 1;
 
-        switch (args[0]) {
+        switch (args[TASK_SYMBOL_ARG_INDEX]) {
         case "T":
             return ToDo.createFromStorage(args);
         case "D":

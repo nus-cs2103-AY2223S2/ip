@@ -13,6 +13,13 @@ import java.time.format.DateTimeParseException;
 public class Event extends Task {
     private static final char SYMBOL = 'E';
 
+    private static final int EXPECTED_ARG_COUNT = 5;
+
+    private static final int DONE_ARG_INDEX = 1;
+    private static final int DESCRIPTION_ARG_INDEX = 2;
+    private static final int START_ARG_INDEX = 3;
+    private static final int END_ARG_INDEX = 4;
+
     private final LocalDateTime start;
     private final LocalDateTime end;
 
@@ -47,7 +54,7 @@ public class Event extends Task {
         String[] formattedArgs = Task.formatStrsFromStorage(args);
 
         boolean isDone = extactValidIsDone(formattedArgs);
-        String description = formattedArgs[2];
+        String description = formattedArgs[DESCRIPTION_ARG_INDEX];
         LocalDateTime start = extractValidStart(formattedArgs);
         LocalDateTime end = extactValidEnd(formattedArgs);
 
@@ -79,17 +86,17 @@ public class Event extends Task {
     private static void validateNoMissingData(String[] args) throws DukeException {
         assert args != null;
 
-        if (args.length != 5) {
+        if (args.length != EXPECTED_ARG_COUNT) {
             throw new DukeException("An event in storage has missing data!");
         }
     }
 
     private static LocalDateTime extractValidStart(String[] formattedArgs) throws DukeException {
         assert formattedArgs != null;
-        assert formattedArgs.length >= 4;
+        assert formattedArgs.length >= START_ARG_INDEX + 1;
 
         try {
-            return LocalDateTime.parse(formattedArgs[3]);
+            return LocalDateTime.parse(formattedArgs[START_ARG_INDEX]);
         } catch (DateTimeParseException e) {
             throw new DukeException("An event in storage has an incorrectly formatted start of event!");
         }
@@ -97,10 +104,10 @@ public class Event extends Task {
 
     private static LocalDateTime extactValidEnd(String[] formattedArgs) throws DukeException {
         assert formattedArgs != null;
-        assert formattedArgs.length >= 5;
+        assert formattedArgs.length >= END_ARG_INDEX + 1;
 
         try {
-            return LocalDateTime.parse(formattedArgs[4]);
+            return LocalDateTime.parse(formattedArgs[END_ARG_INDEX]);
         } catch (DateTimeParseException e) {
             throw new DukeException("An event in storage has an incorrectly formatted end of event!");
         }
@@ -108,12 +115,12 @@ public class Event extends Task {
 
     private static boolean extactValidIsDone(String[] formattedArgs) throws DukeException {
         assert formattedArgs != null;
-        assert formattedArgs.length >= 2;
+        assert formattedArgs.length >= DONE_ARG_INDEX + 1;
 
-        if (!BooleanUtils.isBooleanStr(formattedArgs[1])) {
+        if (!BooleanUtils.isBooleanStr(formattedArgs[DONE_ARG_INDEX])) {
             throw new DukeException("An event in storage has an incorrect data type!");
         }
 
-        return Boolean.parseBoolean(formattedArgs[1]);
+        return Boolean.parseBoolean(formattedArgs[DONE_ARG_INDEX]);
     }
 }

@@ -13,6 +13,12 @@ import java.time.format.DateTimeParseException;
 public class Deadline extends Task {
     private static final char SYMBOL = 'D';
 
+    private static final int EXPECTED_ARG_COUNT = 4;
+
+    private static final int DONE_ARG_INDEX = 1;
+    private static final int DESCRIPTION_ARG_INDEX = 2;
+    private static final int CUTOFF_ARG_INDEX = 3;
+
     private final LocalDateTime cutoff;
 
     /**
@@ -45,7 +51,7 @@ public class Deadline extends Task {
         boolean isDone = extractValidIsDone(formattedArgs);
         LocalDateTime cutoff = extractValidCutoff(formattedArgs);
 
-        return new Deadline(isDone, formattedArgs[2], cutoff);
+        return new Deadline(isDone, formattedArgs[DESCRIPTION_ARG_INDEX], cutoff);
     }
 
     @Override
@@ -69,28 +75,28 @@ public class Deadline extends Task {
     private static void validateNoMissingData(String[] args) throws DukeException {
         assert args != null;
 
-        if (args.length != 4) {
+        if (args.length != EXPECTED_ARG_COUNT) {
             throw new DukeException("A deadline in storage has missing data!");
         }
     }
 
     private static boolean extractValidIsDone(String[] formattedArgs) throws DukeException {
         assert formattedArgs != null;
-        assert formattedArgs.length >= 2;
+        assert formattedArgs.length >= DONE_ARG_INDEX + 1;
 
-        if (!BooleanUtils.isBooleanStr(formattedArgs[1])) {
+        if (!BooleanUtils.isBooleanStr(formattedArgs[DONE_ARG_INDEX])) {
             throw new DukeException("A deadline in storage has an incorrect data type!");
         }
 
-        return Boolean.parseBoolean(formattedArgs[1]);
+        return Boolean.parseBoolean(formattedArgs[DONE_ARG_INDEX]);
     }
 
     private static LocalDateTime extractValidCutoff(String[] formattedArgs) throws DukeException {
         assert formattedArgs != null;
-        assert formattedArgs.length >= 4;
+        assert formattedArgs.length >= CUTOFF_ARG_INDEX + 1;
 
         try {
-            return LocalDateTime.parse(formattedArgs[3]);
+            return LocalDateTime.parse(formattedArgs[CUTOFF_ARG_INDEX]);
         } catch (DateTimeParseException e) {
             throw new DukeException("A deadline in storage has an incorrectly formatted cutoff date and time!");
         }
