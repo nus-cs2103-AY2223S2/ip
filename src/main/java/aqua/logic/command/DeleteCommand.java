@@ -1,6 +1,5 @@
 package aqua.logic.command;
 
-import aqua.aquatask.AquaTask;
 import aqua.exception.SyntaxException;
 import aqua.exception.ProcedureException;
 import aqua.logic.ArgumentMap;
@@ -9,6 +8,7 @@ import aqua.logic.ExecutionService;
 import aqua.logic.ExecutionTask;
 import aqua.manager.IoManager;
 import aqua.manager.LogicManager;
+import aqua.usertask.UserTask;
 
 
 /**
@@ -40,7 +40,7 @@ public class DeleteCommand extends CommandController {
     }
 
 
-    private AquaTask deleteTask(ArgumentMap args, LogicManager manager)
+    private UserTask deleteTask(ArgumentMap args, LogicManager manager)
                 throws SyntaxException, ProcedureException {
         try {
             // get task index string
@@ -64,14 +64,14 @@ public class DeleteCommand extends CommandController {
 
 
 
-    private class DeleteTask extends ExecutionTask<AquaTask> {
+    private class DeleteTask extends ExecutionTask<UserTask> {
         DeleteTask(ArgumentMap args, LogicManager manager) {
             super(args, manager);
         }
 
 
         @Override
-        public AquaTask process(ArgumentMap args, LogicManager manager)
+        public UserTask process(ArgumentMap args, LogicManager manager)
                     throws SyntaxException, ProcedureException {
             return deleteTask(args, manager);
         }
@@ -81,21 +81,21 @@ public class DeleteCommand extends CommandController {
 
 
 
-    private class DeleteDisplayerTask extends ExecutionDisplayerTask<AquaTask> {
+    private class DeleteDisplayerTask extends ExecutionDisplayerTask<UserTask> {
         DeleteDisplayerTask(ArgumentMap args, LogicManager logicManager, IoManager ioManager) {
             super(args, logicManager, ioManager);
         }
 
 
         @Override
-        protected AquaTask process(ArgumentMap args, LogicManager manager)
+        protected UserTask process(ArgumentMap args, LogicManager manager)
                     throws SyntaxException, ProcedureException {
             return deleteTask(args, manager);
         }
 
 
         @Override
-        protected void display(AquaTask task, IoManager manager) {
+        protected void display(UserTask task, IoManager manager) {
             manager.reply(String.format(String.join("\n",
                             "I have deleted the task:",
                             "  %s"),

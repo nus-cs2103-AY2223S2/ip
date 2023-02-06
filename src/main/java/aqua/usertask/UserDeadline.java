@@ -1,4 +1,4 @@
-package aqua.aquatask;
+package aqua.usertask;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -7,7 +7,7 @@ import aqua.util.DateUtils;
 
 
 /** An {@code AquaTask} to represent a deadline. */
-public class AquaDeadline extends AquaTask {
+public class UserDeadline extends UserTask {
     /** Tag of {@code by} parameter when parsing. */
     public static final String TAG_BY = "by";
 
@@ -24,7 +24,7 @@ public class AquaDeadline extends AquaTask {
      * @param name - the name of the task.
      * @param by - the time the task is due.
      */
-    public AquaDeadline(String name, LocalDateTime by) {
+    public UserDeadline(String name, LocalDateTime by) {
         this(name, false, by);
     }
 
@@ -35,7 +35,7 @@ public class AquaDeadline extends AquaTask {
      * @param isComplete - if the task is completed.
      * @param by - the time the task is due.
      */
-    public AquaDeadline(String name, boolean isComplete, LocalDateTime by) {
+    public UserDeadline(String name, boolean isComplete, LocalDateTime by) {
         super(name);
         this.isComplete = isComplete;
         this.by = by;
@@ -43,8 +43,8 @@ public class AquaDeadline extends AquaTask {
 
 
     @Override
-    public AquaDeadline mark(boolean isComplete) {
-        return new AquaDeadline(getName(), isComplete, by);
+    public UserDeadline mark(boolean isComplete) {
+        return new UserDeadline(getName(), isComplete, by);
     }
 
 

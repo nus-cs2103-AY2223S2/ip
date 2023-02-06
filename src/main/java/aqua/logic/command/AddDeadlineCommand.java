@@ -2,9 +2,9 @@ package aqua.logic.command;
 
 import java.time.LocalDateTime;
 
-import aqua.aquatask.AquaDeadline;
 import aqua.exception.SyntaxException;
 import aqua.logic.ArgumentMap;
+import aqua.usertask.UserDeadline;
 import aqua.util.DateUtils;
 
 
@@ -16,7 +16,7 @@ public class AddDeadlineCommand extends AddTaskCommand {
      * Specifically, an {@code AquaDeadline}.
      */
     @Override
-    public AquaDeadline createTask(ArgumentMap args) throws SyntaxException {
+    public UserDeadline createTask(ArgumentMap args) throws SyntaxException {
         // get name
         String name = args.getMainInput()
                 .filter(n -> !n.isBlank())
@@ -28,12 +28,12 @@ public class AddDeadlineCommand extends AddTaskCommand {
         LocalDateTime by = DateUtils.parse(byString);
 
         // get is complete
-        boolean isCompleted = args.get(AquaDeadline.TAG_IS_COMPLETE)
+        boolean isCompleted = args.get(UserDeadline.TAG_IS_COMPLETE)
                 .map(isComp -> Boolean.parseBoolean(isComp))
                 .orElse(false);
 
         // return formed deadline
-        return new AquaDeadline(name, isCompleted, by);
+        return new UserDeadline(name, isCompleted, by);
     }
 
 

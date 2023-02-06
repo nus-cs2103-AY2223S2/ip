@@ -1,8 +1,8 @@
-package aqua.aquatask;
+package aqua.usertask;
 
 
 /** An {@code AquaTask} to represent a todo. */
-public class AquaToDo extends AquaTask {
+public class UserTodo extends UserTask {
     /** If the task is completed. */
     private final boolean isComplete;
 
@@ -13,7 +13,7 @@ public class AquaToDo extends AquaTask {
      *
      * @param name - the name of the task.
      */
-    public AquaToDo(String name) {
+    public UserTodo(String name) {
         this(name, false);
     }
 
@@ -24,15 +24,15 @@ public class AquaToDo extends AquaTask {
      * @param name - the name of the task.
      * @param isCompleted - if the task is completed.
      */
-    public AquaToDo(String name, boolean isComplete) {
+    public UserTodo(String name, boolean isComplete) {
         super(name);
         this.isComplete = isComplete;
     }
 
 
     @Override
-    public AquaToDo mark(boolean isComplete) {
-        return new AquaToDo(getName(), isComplete);
+    public UserTodo mark(boolean isComplete) {
+        return new UserTodo(getName(), isComplete);
     }
 
 

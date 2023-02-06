@@ -4,10 +4,10 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import aqua.aquatask.AquaTask;
 import aqua.graphic.schedule.ScheduleComponent;
 import aqua.graphic.schedule.ScheduleTimeable;
 import aqua.manager.TaskFilterReport;
+import aqua.usertask.UserTask;
 import javafx.css.PseudoClass;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -40,7 +40,7 @@ public class TaskView extends UiComponent<VBox> {
     }
 
 
-    private void initialiseSchedule(LocalDateTime startTime, List<AquaTask> tasks) {
+    private void initialiseSchedule(LocalDateTime startTime, List<UserTask> tasks) {
         List<ScheduleTimeable> timeables = tasks.stream()
                 .map(task -> new TimeableAquaTask(task))
                 .collect(Collectors.toList());
@@ -48,8 +48,8 @@ public class TaskView extends UiComponent<VBox> {
     }
 
 
-    private void initialiseTodoView(List<AquaTask> tasks) {
-        for (AquaTask task : tasks) {
+    private void initialiseTodoView(List<UserTask> tasks) {
+        for (UserTask task : tasks) {
             todoDisplayArea.getChildren().add(new TodoLabel(task));
         }
     }
@@ -59,10 +59,10 @@ public class TaskView extends UiComponent<VBox> {
 
 
     private static class TimeableAquaTask extends ScheduleTimeable {
-        private final AquaTask task;
+        private final UserTask task;
 
 
-        TimeableAquaTask(AquaTask task) {
+        TimeableAquaTask(UserTask task) {
             this.task = task;
         }
 
@@ -112,7 +112,7 @@ public class TaskView extends UiComponent<VBox> {
         private static final Insets MARGIN = new Insets(10, 10, 10, 10);
 
 
-        TodoLabel(AquaTask task) {
+        TodoLabel(UserTask task) {
             setMaxWidth(MAX_WIDTH);
             getStyleClass().add("todo-label");
             if (task.isComplete()) {

@@ -1,6 +1,5 @@
 package aqua.logic.command;
 
-import aqua.aquatask.AquaTask;
 import aqua.exception.SyntaxException;
 import aqua.exception.ProcedureException;
 import aqua.logic.ArgumentMap;
@@ -9,11 +8,12 @@ import aqua.logic.ExecutionService;
 import aqua.logic.ExecutionTask;
 import aqua.manager.IoManager;
 import aqua.manager.LogicManager;
+import aqua.usertask.UserTask;
 import aqua.util.Kaomoji;
 
 /** A {@code CommandController} to mark {@code AquaTask} as complete. */
 public class MarkTaskCommand extends CommandController {
-    /** Value to pass {@link AquaTask#mark(boolean)} when marking a task. */
+    /** Value to pass {@link UserTask#mark(boolean)} when marking a task. */
     private boolean isCompletedMarker;
 
 
@@ -57,7 +57,7 @@ public class MarkTaskCommand extends CommandController {
     }
 
 
-    private AquaTask markTask(ArgumentMap args, LogicManager manager)
+    private UserTask markTask(ArgumentMap args, LogicManager manager)
                 throws SyntaxException, ProcedureException {
         try {
             // get index String
@@ -81,14 +81,14 @@ public class MarkTaskCommand extends CommandController {
 
 
 
-    private class MarkTask extends ExecutionTask<AquaTask> {
+    private class MarkTask extends ExecutionTask<UserTask> {
         MarkTask(ArgumentMap args, LogicManager manager) {
             super(args, manager);
         }
 
 
         @Override
-        public AquaTask process(ArgumentMap args, LogicManager manager)
+        public UserTask process(ArgumentMap args, LogicManager manager)
                     throws SyntaxException, ProcedureException {
             return markTask(args, manager);
         }
@@ -98,21 +98,21 @@ public class MarkTaskCommand extends CommandController {
 
 
 
-    private class MarkDisplayerTask extends ExecutionDisplayerTask<AquaTask> {
+    private class MarkDisplayerTask extends ExecutionDisplayerTask<UserTask> {
         MarkDisplayerTask(ArgumentMap args, LogicManager logicManager, IoManager ioManager) {
             super(args, logicManager, ioManager);
         }
 
 
         @Override
-        protected AquaTask process(ArgumentMap args, LogicManager manager)
+        protected UserTask process(ArgumentMap args, LogicManager manager)
                     throws SyntaxException, ProcedureException {
             return markTask(args, manager);
         }
 
 
         @Override
-        protected void display(AquaTask task, IoManager manager) {
+        protected void display(UserTask task, IoManager manager) {
             String message;
             if (isCompletedMarker) {
                 message = String.format(String.join("\n",

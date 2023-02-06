@@ -1,4 +1,4 @@
-package aqua.aquatask;
+package aqua.usertask;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -7,7 +7,7 @@ import aqua.util.DateUtils;
 
 
 /** An {@code AquaTask} to represent an Event */
-public class AquaEvent extends AquaTask {
+public class UserEvent extends UserTask {
     /** Tag of {@code from} argument when parsing. */
     public static final String TAG_FROM = "from";
     /** Tag of {@code to} argument when parsing. */
@@ -29,7 +29,7 @@ public class AquaEvent extends AquaTask {
      * @param from - the time the event starts.
      * @param to - the time the event ends.
      */
-    public AquaEvent(String name, LocalDateTime from, LocalDateTime to) {
+    public UserEvent(String name, LocalDateTime from, LocalDateTime to) {
         this(name, false, from, to);
     }
 
@@ -41,7 +41,7 @@ public class AquaEvent extends AquaTask {
      * @param from - the time the event starts.
      * @param to - the time the event ends.
      */
-    public AquaEvent(String name, boolean isComplete, LocalDateTime from, LocalDateTime to) {
+    public UserEvent(String name, boolean isComplete, LocalDateTime from, LocalDateTime to) {
         super(name);
         this.isComplete = isComplete;
         this.from = from;
@@ -50,8 +50,8 @@ public class AquaEvent extends AquaTask {
 
 
     @Override
-    public AquaEvent mark(boolean isComplete) {
-        return new AquaEvent(getName(), isComplete, from, to);
+    public UserEvent mark(boolean isComplete) {
+        return new UserEvent(getName(), isComplete, from, to);
     }
 
 

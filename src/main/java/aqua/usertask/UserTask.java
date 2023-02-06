@@ -1,4 +1,4 @@
-package aqua.aquatask;
+package aqua.usertask;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -7,7 +7,7 @@ import aqua.storage.Reloadable;
 
 
 /** Represents a task that the user wishes to track. */
-public abstract class AquaTask implements Reloadable {
+public abstract class UserTask implements Reloadable {
     /** Tag of {@code isCompleted} argument when parsing. */
     public static final String TAG_IS_COMPLETE = "completed";
 
@@ -20,7 +20,7 @@ public abstract class AquaTask implements Reloadable {
      *
      * @param name - the name of the task.
      */
-    public AquaTask(String name) {
+    public UserTask(String name) {
         this.name = name;
     }
 
@@ -30,7 +30,7 @@ public abstract class AquaTask implements Reloadable {
      *
      * @param task - the task to construct the new task from.
      */
-    public AquaTask(AquaTask task) {
+    public UserTask(UserTask task) {
         this(task.name);
     }
 
@@ -41,7 +41,7 @@ public abstract class AquaTask implements Reloadable {
      * @param isComplete - if the task is completed.
      * @return a task of this task with its completion status set as specified.
      */
-    public abstract AquaTask mark(boolean isComplete);
+    public abstract UserTask mark(boolean isComplete);
 
 
     /**

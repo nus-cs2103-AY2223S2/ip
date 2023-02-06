@@ -15,7 +15,7 @@ import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
-import aqua.aquatask.AquaTask;
+import aqua.usertask.UserTask;
 
 
 public class TaskManagerTest {
@@ -34,7 +34,7 @@ public class TaskManagerTest {
     public void markTest() {
         TaskManager manager = new TaskManager();
         manager.add(new MarkedTask());
-        AquaTask task = manager.mark(0, false);
+        UserTask task = manager.mark(0, false);
         assertEquals("-", task.toString());
         assertEquals(
             "1. -",
@@ -47,7 +47,7 @@ public class TaskManagerTest {
     public void deleteTest() {
         TaskManager manager = new TaskManager();
         manager.add(new MarkedTask());
-        AquaTask task = manager.delete(0);
+        UserTask task = manager.delete(0);
         assertEquals("+", task.toString());
         assertEquals(
             "",
@@ -97,7 +97,7 @@ public class TaskManagerTest {
         manager.add(new MarkedTask());
         manager.add(new MarkedTask());
         manager.add(new UnMarkedTask());
-        LinkedHashMap<Integer, AquaTask> map = manager.filter("44.5");
+        LinkedHashMap<Integer, UserTask> map = manager.filter("44.5");
         assertTrue(map.isEmpty());
     }
 
@@ -113,12 +113,12 @@ public class TaskManagerTest {
         /* 6 */ manager.add(new MarkedTask());
         /* 7 */ manager.add(new MarkedTask());
         /* 8 */ manager.add(new UnMarkedTask());
-        LinkedHashMap<Integer, AquaTask> map = manager.filter("+");
+        LinkedHashMap<Integer, UserTask> map = manager.filter("+");
         List<Integer> numList = List.of(1, 2, 6, 7);
         assertEquals(4, map.size());
         // check for order as well
         int i = 0;
-        for (Map.Entry<Integer, AquaTask> entry : map.entrySet()) {
+        for (Map.Entry<Integer, UserTask> entry : map.entrySet()) {
             assertEquals(numList.get(i), entry.getKey());
             assertEquals("+", entry.getValue().getName());
             i++;
@@ -129,14 +129,14 @@ public class TaskManagerTest {
 
 
 
-    private static class MarkedTask extends AquaTask {
+    private static class MarkedTask extends UserTask {
         MarkedTask() {
             super("+");
         }
 
 
         @Override
-        public AquaTask mark(boolean isComplete) {
+        public UserTask mark(boolean isComplete) {
             if (isComplete) {
                 return new MarkedTask();
             }
@@ -166,14 +166,14 @@ public class TaskManagerTest {
 
 
 
-    private static class UnMarkedTask extends AquaTask {
+    private static class UnMarkedTask extends UserTask {
         UnMarkedTask() {
             super("-");
         }
 
 
         @Override
-        public AquaTask mark(boolean isComplete) {
+        public UserTask mark(boolean isComplete) {
             if (isComplete) {
                 return new MarkedTask();
             }
