@@ -53,6 +53,14 @@ public class DaySchedule extends HBox {
     }
 
 
+    /**
+     * Separates a list of {@code ScheduleTimeables} such that none of them are
+     * conflicting. The return type is in the structure of a list of a list of
+     * unconflicting {@code ScheduleTimeable}.
+     * 
+     * @param timeables - the list of {@code ScheduleTimeable} to separate.
+     * @return a list of a list of unconflicting {@code ScheduleTimeable}.
+     */
     private List<? extends List<ScheduleTimeable>> separateConflicting(List<ScheduleTimeable> timeables) {
         double threshold = (MIN_BLOCK_WIDTH / rowWidth) * MINUTES_IN_A_DAY;
         ArrayList<ArrayList<ScheduleTimeable>> sepTimeables = new ArrayList<>();
@@ -89,7 +97,8 @@ public class DaySchedule extends HBox {
     /**
      * Creates an empty row.
      * 
-     * @return the graphical representation of a row of {@code Timeable}.
+     * @return the graphical representation of a row of
+     *      {@code ScheduleTimeable}.
      */
     private Pane createRow() {
         Pane pane = new Pane();
@@ -101,11 +110,13 @@ public class DaySchedule extends HBox {
 
 
     /**
-     * Creates a row populated with blocks of {@code Timeable} as specified.
+     * Creates a row populated with blocks of {@code ScheduleTimeable} as
+     * specified.
      * 
      * @param startTime - the start time of the day.
-     * @param timeables - the list of {@code Timeable} to display.
-     * @return the graphical representation of a row of {@code Timeable}.
+     * @param timeables - the list of {@code ScheduleTimeable} to display.
+     * @return the graphical representation of a row of
+     *      {@code ScheduleTimeable}.
      */
     private Pane createRow(LocalDateTime startTime, List<ScheduleTimeable> timeables) {
         Pane rowPane = createRow();
@@ -157,6 +168,14 @@ public class DaySchedule extends HBox {
     }
 
 
+    /**
+     * Creates a block to represent a {@code ScheduleTimeable} graphically.
+     * 
+     * @param timeable - the {@code ScheduleTimeable} to display.
+     * @param width - the width of the block.
+     * @return a {@code Pane} that represents the {@code ScheduleTimeable}
+     *      graphically.
+     */
     private Pane createDisplayBlock(ScheduleTimeable timeable, double width) {
         Pane block = new Pane();
         block.setMinHeight(ROW_HEIGHT);
