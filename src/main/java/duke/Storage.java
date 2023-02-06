@@ -13,7 +13,7 @@ public class Storage {
     private boolean doesDirectoryExist;
 
     public Storage() {
-        this.path = Paths.get(".", "src", "main", "ToDoListCS2103.txt");
+        this.path = Paths.get("src", "main", "ToDoListCS2103.txt");
         this.doesDirectoryExist = java.nio.file.Files.exists(path);
     }
 
@@ -31,6 +31,10 @@ public class Storage {
                 previousToDoList.createNewFile();
                 return new TodoList();
             }
+        } catch (IOException ex) {
+            this.path = Paths.get("ToDoListCS2103.txt");
+            doesDirectoryExist = java.nio.file.Files.exists(path);
+            return load();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -39,6 +43,7 @@ public class Storage {
 
     public void save(TodoList todoList) {
         try{
+
             FileOutputStream fos = new FileOutputStream(path.toFile());
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(todoList);
