@@ -135,6 +135,7 @@ public class Parser {
         default:
             throw new SamUnknownCommandException();
         }
+        assert c != null : "command shouldn't be null";
         return c;
     }
 }

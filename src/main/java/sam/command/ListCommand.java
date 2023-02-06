@@ -20,6 +20,7 @@ public class ListCommand extends Command {
             ui.respond("Your list is empty!");
         } else {
             List<String> list = tasks.getTasks();
+            assert !list.isEmpty() : "list shouldn't be empty";
             list.add(0, "Here is your list:");
             ui.respond(list.toArray(new String[0]));
         }
