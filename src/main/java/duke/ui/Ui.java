@@ -51,5 +51,4 @@ public class Ui {
     public void somethingWentWrong() {
         System.out.println("Invalid response. Please try: todo, deadline or event. :)");
     }
-
 }
