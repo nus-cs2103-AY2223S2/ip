@@ -22,6 +22,7 @@ public class FindCommand extends Command {
     /**
      * Finds tasks with a description that contains the query string.
      * @param tasks The existing task list.
+     * @return The return status of the result from executing this command in the form of a text message.
      */
     @Override
     public String execute(TaskList tasks) {
@@ -43,6 +44,15 @@ public class FindCommand extends Command {
         }
 
         return response.toString();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    String undo(TaskList tasks) {
+        /* Just a placeholder. undo is not applicable here. */
+        return null;
     }
 
     /**

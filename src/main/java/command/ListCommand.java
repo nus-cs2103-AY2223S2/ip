@@ -12,6 +12,7 @@ public class ListCommand extends Command {
     /**
      * Lists all tasks currently recorded in the chat session.
      * @param tasks The existing task list.
+     * @return The return status of the result from executing this command in the form of a text message.
      */
     @Override
     public String execute(TaskList tasks) {
@@ -33,6 +34,15 @@ public class ListCommand extends Command {
         }
 
         return response.toString();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    String undo(TaskList tasks) {
+        /* Just a placeholder. undo is not applicable here. */
+        return null;
     }
 
     /**

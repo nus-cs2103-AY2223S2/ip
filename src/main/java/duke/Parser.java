@@ -12,6 +12,7 @@ import command.ExitCommand;
 import command.FindCommand;
 import command.ListCommand;
 import command.MarkCommand;
+import command.UndoCommand;
 import command.UnmarkCommand;
 import task.Deadline;
 import task.Event;
@@ -34,6 +35,7 @@ public class Parser {
         UNMARK_TASK("unmark[\\s]*[0-9]+[\\s]*"),
         FIND_TASK("find\\s.*"),
         LIST_TASKS("list"),
+        UNDO("undo"),
         END_CHAT("bye");
 
         /**
@@ -147,14 +149,17 @@ public class Parser {
             /* list tasks */
             return new ListCommand();
         } else if (CommandPattern.FIND_TASK.match(userCommand)) {
+            /* find tasks */
             String query = userCommand.substring(5);
             return new FindCommand(query);
+        } else if (CommandPattern.UNDO.match(userCommand)) {
+            /* undo previous command */
+            return new UndoCommand();
         } else if (CommandPattern.END_CHAT.match(userCommand)) {
             /* End the session */
             return new ExitCommand();
         } else {
             throw new DukeException("Huh? I don't understand you...");
         }
-
     }
 }

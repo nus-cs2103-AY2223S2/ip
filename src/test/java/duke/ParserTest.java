@@ -7,6 +7,7 @@ import command.ExitCommand;
 import command.FindCommand;
 import command.ListCommand;
 import command.MarkCommand;
+import command.UndoCommand;
 import command.UnmarkCommand;
 
 import org.junit.jupiter.api.Test;
@@ -86,7 +87,15 @@ public class ParserTest {
             fail();
         }
 
-        /* Test Case 9: end chat session */
+        /* Test Case 9: undo previous command */
+        try {
+            Command undoPreviousCommand = Parser.parse("undo");
+            assertEquals(UndoCommand.class, undoPreviousCommand.getClass());
+        } catch (DukeException e) {
+            fail();
+        }
+
+        /* Test Case 10: end chat session */
         try {
             Command endChat = Parser.parse("bye");
             assertEquals(ExitCommand.class, endChat.getClass());
