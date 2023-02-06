@@ -61,5 +61,9 @@ public class Task {
     public String getTaskType() {
         return "";
     }
+
+    public void editInfo(String content) {
+        this.description = content;
+    }
 }
 

@@ -46,6 +46,10 @@ public class TaskList {
         tasks.remove(taskNum);
     }
 
+    public void set(int taskNum, Task content) {
+        tasks.set(taskNum, content);
+    }
+
     /**
      * Get the number of the tasks in the TaskList.
      *

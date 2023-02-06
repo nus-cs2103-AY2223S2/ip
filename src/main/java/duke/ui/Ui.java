@@ -41,6 +41,10 @@ public class Ui {
         return "Hello from\n" + logo + "Hello! I'm Duke\nWhat can I do for you?";
     }
 
+    public String showEditedMsg(Task task) {
+        return task + " has been edited!";
+    }
+
     /**
      * Get the input typed by the user.
      *

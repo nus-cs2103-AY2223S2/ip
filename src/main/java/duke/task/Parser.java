@@ -1,13 +1,6 @@
 package duke.task;
 
-import duke.command.AddCommand;
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.ExitCommand;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
-import duke.command.MarkCommand;
-import duke.command.UnmarkCommand;
+import duke.command.*;
 
 /**
  * Class for Parser object.
@@ -27,6 +20,7 @@ public class Parser {
     private static final String UNMARK = "unmark";
     private static final String BYE = "bye";
     private static final String FIND = "find";
+    private static final String EDIT = "edit";
 
     /**
      * Split the command into different parts.
@@ -36,24 +30,36 @@ public class Parser {
      */
 
     public static String[] splitCommand(String command) {
-        if (command.contains("/")) {
-            String[] temp2;
-            String[] temp = command.split(" ", 2);
+        String[] temp = command.split(" ", 2);
 
-            if (temp[0].equals("deadline")) {
-                temp2 = temp[1].split("/", 2);
-            } else {
-                temp2 = temp[1].split("/");
-            }
-
-            temp2[1] = temp2[1].replace("/", "-");
-            arr = new String[temp.length + temp2.length - 1];
-            arr[0] = temp[0];
-            System.arraycopy(temp2, 0, arr, temp.length - 1, temp2.length);
+        if (command.contains("/") && temp[0].equals("deadline")) {
+            splitDeadlineCommand(temp);
+        } else if (command.contains("/") && temp[0].equals("event")) {
+            splitEventCommand(temp);
+        } else if (temp[0].equals("edit")) {
+            arr = command.split("/");
         } else {
             arr = command.split(" ", 2);
         }
         return arr;
+    }
+
+    public static void splitDeadlineCommand(String[] tempArr) {
+        String[] temp2;
+        temp2 = tempArr[1].split("/", 2);
+
+        temp2[1] = temp2[1].replace("/", "-");
+        arr = new String[tempArr.length + temp2.length - 1];
+        arr[0] = tempArr[0];
+        System.arraycopy(temp2, 0, arr, tempArr.length - 1, temp2.length);
+    }
+
+    public static void splitEventCommand(String[] tempArr) {
+        String[] temp2;
+        temp2 = tempArr[1].split("/");
+        arr = new String[tempArr.length + temp2.length - 1];
+        arr[0] = tempArr[0];
+        System.arraycopy(temp2, 0, arr, tempArr.length - 1, temp2.length);
     }
 
     /**
@@ -103,6 +109,9 @@ public class Parser {
             break;
         case LIST:
             parsedCommand = new ListCommand();
+            break;
+        case EDIT:
+            parsedCommand = new EditCommand(arr[1].trim(), arr[2].trim(), arr[3].trim());
             break;
         default:
             System.out.println("No such command!");

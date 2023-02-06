@@ -23,6 +23,23 @@ public class Event extends Task {
         this.from = from;
         this.to = to;
     }
+
+    public void editInfo(String partToBeEdited, String content) {
+        switch (partToBeEdited) {
+        case "desc":
+            this.description = content;
+            break;
+        case "from":
+            this.from = content;
+            break;
+        case "to":
+            this.to = content;
+            break;
+        default:
+            break;
+        }
+    }
+
     @Override
     public String getTaskType() {
         return this.taskType;

@@ -29,6 +29,21 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    public void editInfo(String partToBeEdited, String content) {
+        switch (partToBeEdited) {
+            case "desc":
+                this.description = content;
+                break;
+            case "by":
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
+                LocalDateTime dueDate = LocalDateTime.parse(content, formatter);
+                this.by = dueDate;
+                break;
+            default:
+                break;
+        }
+    }
+
     @Override
     public String getTaskType() {
         return this.taskType;

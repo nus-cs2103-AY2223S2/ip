@@ -1,5 +1,8 @@
 package duke.task;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Class for Todo object.
  *
@@ -17,9 +20,14 @@ public class Todo extends Task {
     public Todo(String description) {
         super(description);
     }
+
     @Override
     public String getTaskType() {
         return this.taskType;
+    }
+
+    public void editInfo(String content) {
+        this.description = content;
     }
 
     /**
