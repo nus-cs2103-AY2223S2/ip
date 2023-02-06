@@ -21,10 +21,10 @@ public class TaskList {
      * @return The Task object with the specified id.
      */
     public Task getTask(int id) {
-        if (isValidId(id)) {
-            return tasks.get(id - 1);
+        if (!isValidId(id)) {
+            return null;
         }
-        return null;
+        return tasks.get(id - 1);
     }
 
     /**
@@ -45,10 +45,10 @@ public class TaskList {
      * @return The task that was removed from the list.
      */
     public Task removeTask(int id) {
-        if (isValidId(id)) {
-            return tasks.remove(id - 1);
+        if (!isValidId(id)) {
+            return null;
         }
-        return null;
+        return tasks.remove(id - 1);
     }
 
     /**
@@ -59,11 +59,11 @@ public class TaskList {
      * @return {@code true} if successful.
      */
     public boolean setTaskDone(int id, boolean isDone) {
-        if (isValidId(id)) {
-            getTask(id).setDone(isDone);
-            return true;
+        if (!isValidId(id)) {
+            return false;
         }
-        return false;
+        getTask(id).setDone(isDone);
+        return true;
     }
 
     /**
