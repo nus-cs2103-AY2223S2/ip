@@ -38,12 +38,8 @@ public class Duke {
 
         boolean isExit = false;
         while (!isExit) {
-            //inp = br.readLine();
             inp = ui.readCommand();
-            //System.out.println(inp);
-            String[] input = inp.split(" ");
             ui.showLine();
-            //isExit = Parser.parse(inp);
             Parser parser = new Parser(this.taskStorage);
             isExit = parser.execute(inp);
             taskManager.save(parser.getTaskStorage());

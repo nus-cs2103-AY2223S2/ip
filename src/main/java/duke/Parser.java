@@ -5,17 +5,34 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+/**
+ * Makes sense of the user command.
+ */
 public class Parser {
     private TaskStorage taskStorage;
 
+    /**
+     * Constructs a Parser object with the given taskStorage.
+     * @param taskStorage The given taskStorage.
+     */
     public Parser(TaskStorage taskStorage) {
         this.taskStorage = taskStorage;
     }
 
+    /**
+     * Returns the taskStorage of the Parser object.
+     * @return The taskStorage of the Parser object.
+     */
     public TaskStorage getTaskStorage() {
         return this.taskStorage;
     }
 
+    /**
+     * The main logic of the program,
+     * execute a command based on the string input given.
+     * @param inp The string input given.
+     * @return False if the input contains "Bye", otherwise return True.
+     */
     public boolean execute(String inp) {
         String[] input = inp.split(" ");
         boolean isExit = false;
