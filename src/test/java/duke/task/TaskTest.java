@@ -33,6 +33,6 @@ public class TaskTest {
     @Test
     public void testToString() throws DukeException {
         Task task = new Event("Test event", "01012023 1200", "02012023 1800");
-        assertEquals("[E][ ] Test event (from: Jan 01 2023 12:00 to: Jan 02 2023 18:00)", task.toString());
+        assertEquals("[E][   ] Test event (from: Jan 01 2023 12:00 to: Jan 02 2023 18:00)", task.toString());
     }
 }

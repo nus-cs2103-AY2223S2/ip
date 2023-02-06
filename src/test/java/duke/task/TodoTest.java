@@ -9,6 +9,6 @@ public class TodoTest {
     @Test
     void testToString() {
         Todo t = new Todo("Buy groceries");
-        assertEquals("[T][ ] Buy groceries", t.toString());
+        assertEquals("[T][   ] Buy groceries", t.toString());
     }
 }

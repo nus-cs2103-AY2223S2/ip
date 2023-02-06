@@ -28,6 +28,6 @@ public class DeadlineTest {
     @Test
     public void testToString() throws DukeException {
         Deadline deadline = new Deadline("Test deadline", "01012023 1200");
-        assertEquals("[D][ ] Test deadline (by: Jan 01 2023 12:00)", deadline.toString());
+        assertEquals("[D][   ] Test deadline (by: Jan 01 2023 12:00)", deadline.toString());
     }
 }
