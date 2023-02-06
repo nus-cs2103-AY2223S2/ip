@@ -79,15 +79,13 @@ public class ReminderCommand extends Command {
             Task currentTask = tasks.getTask(i);
             if (currentTask instanceof ToDo) {
                 //Do nothing as a to-do task is not time-sensitive
-            }
-            else if (currentTask instanceof Deadline) {
+            } else if (currentTask instanceof Deadline) {
                 Temporal taskDeadline = ((Deadline) currentTask).getDeadline();
                 if (DateTime.fallWithinPeriod(currentDateTime, cutOff, taskDeadline)) {
                     sb.append(count).append(". ").append(currentTask.getStatusOfTaskInString()).append("\n");
                     count += 1;
                 }
-            }
-            else if (currentTask instanceof Event) {
+            } else if (currentTask instanceof Event) {
                 Temporal eventStartDate = ((Event) currentTask).getStartDate();
                 Temporal eventEndDate = ((Event) currentTask).getEndDate();
                 if (DateTime.isStrictlyBefore(eventEndDate, currentDateTime)) {

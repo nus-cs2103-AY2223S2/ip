@@ -129,8 +129,8 @@ public abstract class DateTime {
         if (dateToCheck instanceof LocalDateTime) {
             boolean isAfterOrEqualToStart = start.isBefore((LocalDateTime) dateToCheck)
                     || start.isEqual((LocalDateTime) dateToCheck);
-            boolean isBeforeOrEqualToEnd = end.isAfter((LocalDateTime) dateToCheck) ||
-                    end.isEqual((LocalDateTime) dateToCheck);
+            boolean isBeforeOrEqualToEnd = end.isAfter((LocalDateTime) dateToCheck)
+                    || end.isEqual((LocalDateTime) dateToCheck);
             return isAfterOrEqualToStart && isBeforeOrEqualToEnd;
 
         } else if (dateToCheck instanceof LocalDate) {
@@ -148,8 +148,8 @@ public abstract class DateTime {
 
             boolean isAfterOrEqualToStart = startDateOnly.isBefore((LocalDate) dateToCheck)
                     || startDateOnly.isEqual((LocalDate) dateToCheck);
-            boolean isBeforeOrEqualToEnd = endDateOnly.isAfter((LocalDate) dateToCheck) ||
-                    endDateOnly.isEqual((LocalDate) dateToCheck);
+            boolean isBeforeOrEqualToEnd = endDateOnly.isAfter((LocalDate) dateToCheck)
+                    || endDateOnly.isEqual((LocalDate) dateToCheck);
             return isAfterOrEqualToStart && isBeforeOrEqualToEnd;
         }
         return true;

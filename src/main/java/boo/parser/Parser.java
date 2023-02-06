@@ -3,7 +3,21 @@ package boo.parser;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.Temporal;
 
-import boo.command.*;
+import boo.command.ByeCommand;
+import boo.command.Command;
+import boo.command.DeadlineCommand;
+import boo.command.DeleteCommand;
+import boo.command.EventCommand;
+import boo.command.ExceptionCommand;
+import boo.command.FindCommand;
+import boo.command.HelpCommand;
+import boo.command.InvalidCommand;
+import boo.command.ListCommand;
+import boo.command.MarkCommand;
+import boo.command.OnCommand;
+import boo.command.ReminderCommand;
+import boo.command.ToDoCommand;
+import boo.command.UnmarkCommand;
 import boo.datetime.DateTime;
 import boo.exception.BooException;
 import boo.storage.Storage;
@@ -414,7 +428,7 @@ public class Parser {
     private CommandType validateReminder(String[] inputArray) {
         try {
             boolean hasValidNumberOfSubcommands = inputArray.length == 2;
-            if (! hasValidNumberOfSubcommands) {
+            if (!hasValidNumberOfSubcommands) {
                 throw new BooException("Please enter one of the following after reminder: day, week or month.");
             }
             boolean isValidKeyword = inputArray[1].equals("day") || inputArray[1].equals("week")

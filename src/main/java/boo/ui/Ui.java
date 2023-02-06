@@ -28,8 +28,8 @@ public class Ui {
                     + "7.   delete X -> Deletes task number X from the list.\n"
                     + "8.   on givenDate -> Displays all the tasks that occur on givenDate.\n"
                     + "9.   find keyPhrase -> Displays all the tasks whose names contain any words from keyPhrase.\n"
-                    + "10. reminder day/week/month -> Provides a reminder for upcoming or due tasks, either within \n" +
-                      "     1 day, 1 week or 1 month from the current date and time.\n"
+                    + "10. reminder day/week/month -> Provides a reminder for upcoming or due tasks, either within \n"
+                    + "     1 day, 1 week or 1 month from the current date and time.\n"
                     + "11. help -> Prints the list of commands supported by this bot.\n"
                     + "12. bye -> Exits the bot.\n\n"
                     + "Please enter dates in the format of either yyyy-MM-dd hh:mm or yyyy-MM-dd.";
