@@ -9,20 +9,20 @@ import java.time.LocalDateTime;
  */
 public class Event extends Task {
 
-    protected LocalDateTime startDt;
-    protected LocalDateTime endDt;
+    protected LocalDateTime startDateTime;
+    protected LocalDateTime endDateTime;
 
     /**
      * Class constructor of an event task.
      *
-     * @param description the description of the task
-     * @param startDt     the starting date and time
-     * @param endDt       the ending date and time
+     * @param description   the description of the task
+     * @param startDateTime the starting date and time
+     * @param endDateTime   the ending date and time
      */
-    public Event(String description, LocalDateTime startDt, LocalDateTime endDt) {
+    public Event(String description, LocalDateTime startDateTime, LocalDateTime endDateTime) {
         super(description);
-        this.startDt = startDt;
-        this.endDt = endDt;
+        this.startDateTime = startDateTime;
+        this.endDateTime = endDateTime;
     }
 
     /**
@@ -31,7 +31,7 @@ public class Event extends Task {
      * @return the starting date and time
      */
     public LocalDateTime getStartDt() {
-        return this.startDt;
+        return this.startDateTime;
     }
 
     /**
@@ -40,7 +40,7 @@ public class Event extends Task {
      * @return the ending date and time
      */
     public LocalDateTime getEndDt() {
-        return this.endDt;
+        return this.endDateTime;
     }
 
     /**
@@ -51,7 +51,7 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString()
-                + " (from: " + this.startDt.toLocalDate() + " " + this.startDt.toLocalTime()
-                + " to: " + this.endDt.toLocalDate() + " " + this.endDt.toLocalTime() + ")";
+                + " (from: " + this.startDateTime.toLocalDate() + " " + this.startDateTime.toLocalTime()
+                + " to: " + this.endDateTime.toLocalDate() + " " + this.endDateTime.toLocalTime() + ")";
     }
 }
