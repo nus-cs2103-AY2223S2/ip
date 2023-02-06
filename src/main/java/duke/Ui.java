@@ -53,7 +53,7 @@ public class Ui {
      * Returns a String of this print cache (messages printed to console) by the Ui
      * @return String of this print cache
      */
-    public String getRecentMessage() {
+    public String getRecentMessages() {
         String recentMessage = printCache.toString();
         printCache = new StringBuilder(); // reset cache
         return recentMessage;

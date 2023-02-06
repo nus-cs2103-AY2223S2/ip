@@ -29,9 +29,9 @@ public class Duke extends Application {
 
     public final Ui ui;
 
-    final TaskList taskList;
-    final Storage storage;
-    final Parser parser;
+    private final TaskList taskList;
+    private final Storage storage;
+    private final Parser parser;
 
     /**
      * Constructs an instance of Duke.
@@ -52,7 +52,7 @@ public class Duke extends Application {
         Duke.flags = flags;
     }
 
-    private static void assertThis(boolean expectsTrue, String failureMessage) throws DukeException {
+    private static void ifNotTrue(boolean expectsTrue, String failureMessage) throws DukeException {
         if (!expectsTrue) {
             throw new DukeException(failureMessage);
         }
@@ -112,37 +112,37 @@ public class Duke extends Application {
 
             case "deadline":
                 // Checks for missing due date
-                Duke.assertThis(userCmd.contains(" /by "), "Missing due date.");
+                Duke.ifNotTrue(userCmd.contains(" /by "), "Missing due date.");
 
                 descIdx = userCmd.indexOf("deadline "); // 9 chars
                 int dueIdx = userCmd.indexOf(" /by "); // 5 chars
-                Duke.assertThis((descIdx + 9) < dueIdx, "Task description cannot be empty.");
+                Duke.ifNotTrue((descIdx + 9) < dueIdx, "Task description cannot be empty.");
 
                 taskDescription = userCmd.substring(descIdx + 9, dueIdx).trim();
                 String duedate = userCmd.substring(dueIdx + 5).trim();
-                Duke.assertThis(!taskDescription.isEmpty(), "Task description cannot be empty.");
-                Duke.assertThis(!duedate.isEmpty(), "Due date cannot be empty.");
+                Duke.ifNotTrue(!taskDescription.isEmpty(), "Task description cannot be empty.");
+                Duke.ifNotTrue(!duedate.isEmpty(), "Due date cannot be empty.");
 
                 addNewTask(new Deadline(taskDescription, parser.parseDateTime(duedate)));
                 break;
 
             case "event":
                 // Checks for missing inputs
-                Duke.assertThis(userCmd.contains(" /from "), "Missing start date/time.");
-                Duke.assertThis(userCmd.contains(" /to "), "Missing end date/time.");
+                Duke.ifNotTrue(userCmd.contains(" /from "), "Missing start date/time.");
+                Duke.ifNotTrue(userCmd.contains(" /to "), "Missing end date/time.");
 
                 descIdx = userCmd.indexOf("event "); // 6 chars
                 int fromIdx = userCmd.indexOf(" /from "); // 7 chars
                 int toIdx = userCmd.indexOf(" /to "); // 5 chars
-                Duke.assertThis((descIdx + 6) < fromIdx, "Task description cannot be empty.");
-                Duke.assertThis((fromIdx + 7) < toIdx, "Start date/time cannot be empty.");
+                Duke.ifNotTrue((descIdx + 6) < fromIdx, "Task description cannot be empty.");
+                Duke.ifNotTrue((fromIdx + 7) < toIdx, "Start date/time cannot be empty.");
 
                 taskDescription = userCmd.substring(descIdx + 6, fromIdx).trim();
                 String start = userCmd.substring(fromIdx + 7, toIdx).trim();
                 String end = userCmd.substring(toIdx + 5).trim();
-                Duke.assertThis(!taskDescription.isEmpty(), "Task description cannot be empty.");
-                Duke.assertThis(!start.isEmpty(), "Start date/time cannot be empty.");
-                Duke.assertThis(!end.isEmpty(), "End date/time cannot be empty.");
+                Duke.ifNotTrue(!taskDescription.isEmpty(), "Task description cannot be empty.");
+                Duke.ifNotTrue(!start.isEmpty(), "Start date/time cannot be empty.");
+                Duke.ifNotTrue(!end.isEmpty(), "End date/time cannot be empty.");
 
                 addNewTask(new Event(
                         taskDescription,
@@ -161,7 +161,7 @@ public class Duke extends Application {
                 boolean isMark = cmd.compareTo("mark") == 0;
 
                 inputs = userCmd.split(" ");
-                Duke.assertThis(inputs.length > 1, "Please indicate which task(s) to apply to.");
+                Duke.ifNotTrue(inputs.length > 1, "Please indicate which task(s) to apply to.");
 
                 if (isMark) {
                     ui.println("Nice I've marked the task(s) as done:");
@@ -177,7 +177,7 @@ public class Duke extends Application {
 
                     try {
                         taskIdx = Integer.parseInt(inputs[i]) - 1;
-                        Duke.assertThis(taskIdx >= 0 && taskIdx < taskList.size(), "");
+                        Duke.ifNotTrue(taskIdx >= 0 && taskIdx < taskList.size(), "");
 
                         activeTask = taskList.get(taskIdx);
                         activeTask.setDone(isMark); // Note: false means unmark
@@ -193,7 +193,7 @@ public class Duke extends Application {
 
             case "delete":
                 inputs = userCmd.split(" ");
-                Duke.assertThis(inputs.length > 1, "Please indicate which task(s) to apply to.");
+                Duke.ifNotTrue(inputs.length > 1, "Please indicate which task(s) to apply to.");
 
                 ArrayList<Integer> markedDelete = new ArrayList<>();
 
@@ -207,7 +207,7 @@ public class Duke extends Application {
                     try {
                         // Parse input to int
                         taskIdx = Integer.parseInt(inputs[i]) - 1;
-                        Duke.assertThis(taskIdx >= 0 && taskIdx < taskList.size(), "");
+                        Duke.ifNotTrue(taskIdx >= 0 && taskIdx < taskList.size(), "");
 
                         markedDelete.add(taskIdx);
                     } catch (NumberFormatException e) {
