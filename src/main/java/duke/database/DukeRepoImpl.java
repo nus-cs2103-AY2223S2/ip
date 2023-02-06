@@ -1,7 +1,10 @@
 package duke.database;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
+import duke.constant.Message;
 import duke.task.Task;
 
 /**
@@ -64,9 +67,16 @@ public class DukeRepoImpl extends DukeRepo {
      * {@inheritDoc}
      */
     @Override
-    public Task removeTask(int taskId) {
-        assert taskId > 0;
-        return local.removeTask(taskId);
+    public List<Task> removeTask(int... taskId) {
+        List<Task> res = new ArrayList<Task>();
+        for (int i : taskId) {
+            try {
+                res.add(local.removeTask(i)); 
+            } catch (IndexOutOfBoundsException e) {
+                System.err.println(Message.EXCEPTION_INVALID_TASK_ID_ACCESS);
+            }
+        }
+        return res;
     }
 
     /**

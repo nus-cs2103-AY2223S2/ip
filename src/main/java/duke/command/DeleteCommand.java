@@ -1,9 +1,11 @@
 package duke.command;
 
+import java.util.List;
 import java.util.function.Consumer;
 
 import duke.constant.Message;
 import duke.database.DukeRepo;
+import duke.task.Task;
 import duke.ui.Ui;
 
 /**
@@ -11,15 +13,15 @@ import duke.ui.Ui;
  */
 public class DeleteCommand extends Command {
 
-    private int taskId;
+    private int[] taskIds;
 
     /**
      * Default constructor
      *
-     * @param taskId int
+     * @param taskIds int[]
      */
-    public DeleteCommand(int taskId) {
-        this.taskId = taskId;
+    public DeleteCommand(int... taskIds) {
+        this.taskIds = taskIds;
     }
 
     /**
@@ -30,9 +32,19 @@ public class DeleteCommand extends Command {
     @Override
     public void execute(DukeRepo db, Ui ui) {
         try {
-            ui.printConsole(Message.DELETE_TASK);
-            ui.printConsole("\t" + db.removeTask(taskId));
-            ui.printConsole(String.format(Message.COUNT_TASK, db.count()));
+            List<Task> deleted = db.removeTask(taskIds);
+
+            if (deleted.size() > 0) {
+                ui.printConsole(Message.DELETE_TASK + "\n");
+                for (Task task : deleted) {
+                    ui.printConsole("\t" + task + "\n");
+                }
+            }
+
+            if (deleted.size() != taskIds.length) {
+                ui.printConsole(String.format(Message.PARTIAL_DELETE + "\n\n", taskIds.length - deleted.size()));
+            }
+            ui.printConsole(String.format(Message.COUNT_TASK, db.count()) + "\n");
         } catch (IndexOutOfBoundsException e) {
             ui.printConsole(Message.EXCEPTION_INVALID_TASK_ID_ACCESS);
         }
@@ -45,8 +57,18 @@ public class DeleteCommand extends Command {
     public void execute(DukeRepo db, Consumer<String> con) {
         StringBuilder sb = new StringBuilder();
         try {
-            sb.append(Message.DELETE_TASK + "\n");
-            sb.append("\t" + db.removeTask(taskId) + "\n");
+            List<Task> deleted = db.removeTask(taskIds);
+
+            if (deleted.size() > 0) {
+                sb.append(Message.DELETE_TASK + "\n");
+                for (Task task : deleted) {
+                    sb.append("\t" + task + "\n");
+                }
+            }
+
+            if (deleted.size() != taskIds.length) {
+                sb.append(String.format(Message.PARTIAL_DELETE + "\n\n", taskIds.length - deleted.size()));
+            }
             sb.append(String.format(Message.COUNT_TASK, db.count()) + "\n");
         } catch (IndexOutOfBoundsException e) {
             sb.append(Message.EXCEPTION_INVALID_TASK_ID_ACCESS);

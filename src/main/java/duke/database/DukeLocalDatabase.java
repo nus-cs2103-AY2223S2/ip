@@ -88,7 +88,7 @@ class DukeLocalDatabase {
      * @param taskId
      * @return {@link Task} object
      */
-    public Task removeTask(int taskId) {
+    public Task removeTask(int taskId) throws IndexOutOfBoundsException {
         assert taskId > 0;
         return tasks.remove(taskId - 1);
     }

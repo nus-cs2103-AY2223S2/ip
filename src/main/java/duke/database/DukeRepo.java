@@ -47,7 +47,7 @@ public abstract class DukeRepo {
      * @param taskId
      * @return {@link Task} object
      */
-    public abstract Task removeTask(int taskId);
+    public abstract List<Task> removeTask(int... taskId);
 
     /**
      * The number of entries in database.
