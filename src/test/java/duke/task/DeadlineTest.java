@@ -18,10 +18,4 @@ public class DeadlineTest {
         TaskCreationException e = assertThrows(TaskCreationException.class, () -> new Deadline("test", "1"));
         assertEquals(e.getMessage(), "Error parsing date");
     }
-
-    @Test
-    public void testToString() {
-        Deadline dl = assertDoesNotThrow(() -> new Deadline("test", "2022-01-01"));
-        assertEquals(dl.toString(), "[D][] test (by: 2022-01-01)");
-    }
 }

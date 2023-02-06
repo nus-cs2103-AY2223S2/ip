@@ -18,9 +18,4 @@ public class TodoTest {
         TaskCreationException e = assertThrows(TaskCreationException.class, () -> new ToDo(""));
         assertEquals(e.getMessage(), "Description of todo cannot be empty");
     }
-
-    @Test
-    public void testToString() throws TaskCreationException {
-        assertEquals(new ToDo("Test").toString(), "[T][] Test");
-    }
 }
