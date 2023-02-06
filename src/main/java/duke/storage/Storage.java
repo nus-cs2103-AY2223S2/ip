@@ -75,38 +75,41 @@ public class Storage {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy HHmm");
 
         switch (taskType) {
-            case "[T]":
-                ToDo toDo = new ToDo(details);
-                if (marked.equals("[X]")) {
-                    toDo.markUnmark(true);
-                }
-                return toDo;
-            case "[D]":
-                String description = details.substring(0, details.indexOf(" (by:"));
-                String byString = details.substring(details.indexOf(" (by:") + " (by:".length() + 1, details.indexOf(")"));
+        case "[T]":
+            ToDo toDo = new ToDo(details);
+            if (marked.equals("[X]")) {
+                toDo.markUnmark(true);
+            }
+            return toDo;
+        case "[D]":
+            String description = details.substring(0, details.indexOf(" (by:"));
+            String byString = details.substring(details.indexOf(" (by:") + " (by:".length() + 1,
+                    details.indexOf(")"));
 
-                LocalDateTime by = LocalDateTime.parse(byString, formatter);
+            LocalDateTime by = LocalDateTime.parse(byString, formatter);
 
-                Deadline deadline = new Deadline(description, by);
-                if (marked.equals("[X]")) {
-                    deadline.markUnmark(true);
-                }
-                return deadline;
-            case "[E]":
-                String eventDescription = details.substring(0, details.indexOf(" (from:"));
-                String fromString = details.substring(details.indexOf(" (from:") + " (from:".length() + 1, details.indexOf(" to: "));
-                String toString = details.substring(details.indexOf(" to:") + " to:".length() + 1, details.indexOf(")"));
+            Deadline deadline = new Deadline(description, by);
+            if (marked.equals("[X]")) {
+                deadline.markUnmark(true);
+            }
+            return deadline;
+        case "[E]":
+            String eventDescription = details.substring(0, details.indexOf(" (from:"));
+            String fromString = details.substring(details.indexOf(" (from:") + " (from:".length() + 1,
+                    details.indexOf(" to: "));
+            String toString = details.substring(details.indexOf(" to:") + " to:".length() + 1,
+                    details.indexOf(")"));
 
-                LocalDateTime from = LocalDateTime.parse(fromString, formatter);
-                LocalDateTime to = LocalDateTime.parse(toString, formatter);
+            LocalDateTime from = LocalDateTime.parse(fromString, formatter);
+            LocalDateTime to = LocalDateTime.parse(toString, formatter);
 
-                Event event = new Event(eventDescription, from, to);
-                if (marked.equals("[X]")) {
-                    event.markUnmark(true);
-                }
-                return event;
-            default:
-                return null;
+            Event event = new Event(eventDescription, from, to);
+            if (marked.equals("[X]")) {
+                event.markUnmark(true);
+            }
+            return event;
+        default:
+            return null;
         }
     }
 

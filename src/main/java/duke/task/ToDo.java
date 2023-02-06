@@ -27,7 +27,7 @@ public class ToDo extends Task {
      * @param details user input details for creating the ToDo.
      * @return the newly constructed ToDo object.
      */
-    public static ToDo addToDo(String description) {
-        return new ToDo(description);
+    public static ToDo addToDo(String details) {
+        return new ToDo(details);
     }
 }
