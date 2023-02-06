@@ -1,0 +1,20 @@
+#dialogContainer{
+    -fx-background-color: "#dce1ec";
+}
+
+#dialog {
+    -fx-text-alignment: left;
+}
+
+#speechBubble {
+    -fx-background-color: "white";
+    -fx-border-radius: 10 , 10;
+    -fx-background-radius: 10, 10;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 10, 0, 0, 0);
+    -fx-padding: 10 50 10 10;
+    -fx-fill-height: false;
+}
+
+#sendButton {
+    -fx-background-color: "5496f5";
+}

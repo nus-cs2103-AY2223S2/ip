@@ -3,7 +3,7 @@ package duke.command;
 import duke.exception.DukeException;
 import duke.task.TaskList;
 import duke.task.ToDo;
-import duke.util.Ui;
+import duke.ui.Ui;
 
 /**
  * Executable command to create todo.
@@ -11,16 +11,16 @@ import duke.util.Ui;
  * @author Guo-KeCheng
  */
 public class TodoCommand extends Command {
-    private String command;
-    private TaskList taskList;
-    private Ui ui;
+    private final String command;
+    private final TaskList taskList;
+    private final Ui ui;
 
     /**
      * TodoCommand constructor
      *
-     * @param command Entire line of user input
+     * @param command  Entire line of user input
      * @param taskList Existing taskList
-     * @param ui Shared Ui object
+     * @param ui       Shared Ui object
      */
     public TodoCommand(String command, TaskList taskList, Ui ui) {
         this.command = command;
@@ -35,11 +35,10 @@ public class TodoCommand extends Command {
      * @throws DukeException if input is incorrect
      */
     @Override
-    public boolean execute() throws DukeException {
+    public String execute() throws DukeException {
         ToDo toDo = new ToDo(getTaskName("todo", command));
         taskList.add(toDo);
-        ui.printAddedTask(toDo, taskList);
+        return ui.printAddedTask(toDo, taskList);
 
-        return false;
     }
 }

@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.exception.DukeException;
 import duke.task.TaskList;
-import duke.util.Ui;
+import duke.ui.Ui;
 
 /**
  * Executable command to print out existing task list.
@@ -10,14 +10,14 @@ import duke.util.Ui;
  * @author Guo-KeCheng
  */
 public class ListCommand extends Command {
-    private TaskList taskList;
-    private Ui ui;
+    private final TaskList taskList;
+    private final Ui ui;
 
     /**
      * ListCommand constructor
      *
      * @param taskList Existing taskList
-     * @param ui Shared Ui object
+     * @param ui       Shared Ui object
      */
     public ListCommand(TaskList taskList, Ui ui) {
         this.taskList = taskList;
@@ -29,9 +29,7 @@ public class ListCommand extends Command {
      * and prints out the status of each individual tasks
      */
     @Override
-    public boolean execute() throws DukeException {
-        ui.printList(taskList);
-
-        return false;
+    public String execute() throws DukeException {
+        return ui.printList(taskList);
     }
 }

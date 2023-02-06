@@ -3,7 +3,7 @@ package duke.command;
 import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.util.Ui;
+import duke.ui.Ui;
 
 /**
  * Executable command to find task based on given keyword.
@@ -19,9 +19,9 @@ public class FindCommand extends Command {
     /**
      * FindCommand constructor
      *
-     * @param command Entire line of user input
+     * @param command  Entire line of user input
      * @param taskList Existing taskList
-     * @param ui Shared Ui object
+     * @param ui       Shared Ui object
      */
     public FindCommand(String command, TaskList taskList, Ui ui) throws DukeException {
         this.keyword = getKeyword(command);
@@ -34,7 +34,7 @@ public class FindCommand extends Command {
      * deadline requires taskName and EndDate
      */
     @Override
-    public boolean execute() throws DukeException {
+    public String execute() throws DukeException {
         TaskList foundList = new TaskList();
 
         for (Task task : taskList) {
@@ -44,11 +44,10 @@ public class FindCommand extends Command {
         }
 
         if (foundList.isEmpty()) {
-            ui.printNoTaskWithKeywordFound(keyword);
+            return ui.printNoTaskWithKeywordFound(keyword);
         } else {
-            ui.printFoundList(foundList);
+            return ui.printFoundList(foundList);
         }
 
-        return false;
     }
 }

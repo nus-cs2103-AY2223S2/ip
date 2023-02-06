@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.exception.DukeException;
 import duke.task.TaskList;
-import duke.util.Ui;
+import duke.ui.Ui;
 
 /**
  * Executable command to mark an existing task as completed.
@@ -10,16 +10,16 @@ import duke.util.Ui;
  * @author Guo-KeCheng
  */
 public class MarkCommand extends Command {
-    private String command;
-    private TaskList taskList;
-    private Ui ui;
+    private final String command;
+    private final TaskList taskList;
+    private final Ui ui;
 
     /**
      * MarkCommand constructor
      *
-     * @param command Entire line of user input
+     * @param command  Entire line of user input
      * @param taskList Existing taskList
-     * @param ui Shared Ui object
+     * @param ui       Shared Ui object
      */
     public MarkCommand(String command, TaskList taskList, Ui ui) {
         this.command = command;
@@ -34,7 +34,7 @@ public class MarkCommand extends Command {
      * @throws DukeException if input is incorrect
      */
     @Override
-    public boolean execute() throws DukeException {
+    public String execute() throws DukeException {
         String[] inputs = command.split(" ");
 
         if (inputs.length == 2) {
@@ -47,11 +47,10 @@ public class MarkCommand extends Command {
 
             taskList.get(ind).markCompleted();
 
-            ui.printMarkedTask(taskList.get(ind));
+            return ui.printMarkedTask(taskList.get(ind));
 
         } else {
             throw new DukeException("Incorrect command: mark <valid task index>");
         }
-        return false;
     }
 }

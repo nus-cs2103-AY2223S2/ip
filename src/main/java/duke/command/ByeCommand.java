@@ -5,7 +5,7 @@ import java.io.IOException;
 import duke.exception.DukeException;
 import duke.task.TaskList;
 import duke.util.Storage;
-import duke.util.Ui;
+import duke.ui.Ui;
 
 /**
  * Executable command to exit the program.
@@ -13,17 +13,17 @@ import duke.util.Ui;
  * @author Guo-KeCheng
  */
 public class ByeCommand extends Command {
-    private TaskList taskList;
-    private Storage storage;
+    private final TaskList taskList;
+    private final Storage storage;
 
-    private Ui ui;
+    private final Ui ui;
 
     /**
      * ByeCommand constructor
      *
      * @param taskList Existing taskList
-     * @param ui Shared Ui object
-     * @param storage Shared storage object
+     * @param ui       Shared Ui object
+     * @param storage  Shared storage object
      */
     public ByeCommand(TaskList taskList, Ui ui, Storage storage) {
         this.taskList = taskList;
@@ -32,14 +32,14 @@ public class ByeCommand extends Command {
     }
 
     @Override
-    public boolean execute() throws DukeException {
+    public String execute() throws DukeException {
         try {
             storage.save(taskList);
         } catch (IOException e) {
             ui.showError(e.getMessage());
         }
 
-        ui.printBye();
-        return true;
+        return ui.printBye();
+
     }
 }

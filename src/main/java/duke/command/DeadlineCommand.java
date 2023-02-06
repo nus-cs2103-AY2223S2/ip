@@ -5,7 +5,7 @@ import java.time.format.DateTimeParseException;
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.TaskList;
-import duke.util.Ui;
+import duke.ui.Ui;
 
 /**
  * Executable command to create deadline.
@@ -13,16 +13,16 @@ import duke.util.Ui;
  * @author Guo-KeCheng
  */
 public class DeadlineCommand extends Command {
-    private String command;
-    private TaskList taskList;
-    private Ui ui;
+    private final String command;
+    private final TaskList taskList;
+    private final Ui ui;
 
     /**
      * DeadlineCommand constructor
      *
-     * @param command Entire line of user input
+     * @param command  Entire line of user input
      * @param taskList Existing taskList
-     * @param ui Shared Ui object
+     * @param ui       Shared Ui object
      */
     public DeadlineCommand(String command, TaskList taskList, Ui ui) {
         this.command = command;
@@ -38,17 +38,16 @@ public class DeadlineCommand extends Command {
      * @throws DukeException if input is incorrect
      */
     @Override
-    public boolean execute() throws DukeException {
+    public String execute() throws DukeException {
         String taskName = getTaskName("deadline", command);
         String endDate = getEndDate("deadline", command);
 
         try {
             Deadline deadline = new Deadline(taskName, endDate);
             taskList.add(deadline);
-            ui.printAddedTask(deadline, taskList);
+            return ui.printAddedTask(deadline, taskList);
         } catch (DateTimeParseException e) {
-            ui.showInvalidTimeError();
+            return ui.showInvalidTimeError();
         }
-        return false;
     }
 }
