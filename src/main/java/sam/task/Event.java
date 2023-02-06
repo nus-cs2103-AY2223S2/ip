@@ -31,13 +31,13 @@ public class Event extends Task {
     public String toSaveFormat() {
         return String.format(
                 "E | %d | %s | %s | %s",
-                getStatusNo(), title, formatDateSave(from), formatDateSave(to));
+                getStatusNo(), getTitle(), formatDateSave(from), formatDateSave(to));
     }
 
     @Override
     public String toString() {
         return String.format(
                 "[E][%c] %s (from: %s to: %s)",
-                getStatusIcon(), title, formatDateDisplay(from), formatDateDisplay(to));
+                getStatusIcon(), getTitle(), formatDateDisplay(from), formatDateDisplay(to));
     }
 }

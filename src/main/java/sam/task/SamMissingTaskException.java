@@ -1,6 +1,7 @@
 package sam.task;
 
 import sam.SamException;
+import sam.Ui;
 
 /**
  * A SamException thrown when a required task id
@@ -8,6 +9,6 @@ import sam.SamException;
  */
 public class SamMissingTaskException extends SamException {
     public SamMissingTaskException() {
-        super("Oops, you forgot to specify a task!");
+        super(Ui.Dialog.MISSING_TASK.getDialog());
     }
 }

@@ -1,6 +1,7 @@
 package sam.task;
 
 import sam.SamException;
+import sam.Ui;
 
 /**
  * A SamException thrown when a required task argument
@@ -8,6 +9,6 @@ import sam.SamException;
  */
 public class SamMissingTaskArgException extends SamException {
     public SamMissingTaskArgException() {
-        super("Oops, you're missing an argument!");
+        super(Ui.Dialog.MISSING_TASK_ARG.getDialog());
     }
 }

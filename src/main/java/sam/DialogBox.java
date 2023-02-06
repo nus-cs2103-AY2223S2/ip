@@ -8,10 +8,19 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 
+/**
+ * Represents a dialog with an avatar.
+ */
 public class DialogBox extends HBox {
     private Label text;
     private Label avatar;
 
+    /**
+     * Constructs a new DialogBox.
+     *
+     * @param t The dialog label.
+     * @param a The avatar label.
+     */
     public DialogBox(Label t, Label a) {
         text = t;
         avatar = a;
@@ -24,7 +33,7 @@ public class DialogBox extends HBox {
         this.setAlignment(Pos.BOTTOM_RIGHT);
         this.getChildren().addAll(t, a);
     }
-    
+
     private void flip() {
         this.setAlignment(Pos.BOTTOM_LEFT);
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());

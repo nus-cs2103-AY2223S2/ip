@@ -70,9 +70,9 @@ public class AddCommand extends Command {
         assert task != null : "task shouldn't be null";
         tasks.addTask(task);
 
-        ui.respond("Gotcha, I'll add the task to your list:",
+        ui.respond(Ui.Dialog.ADD.getDialog(),
                 task.toString(),
-                String.format("Now you have %d tasks in the list", tasks.count()));
+                String.format(Ui.Dialog.ADD_COUNT.getDialog(), tasks.count()));
 
         storage.save(tasks);
     }

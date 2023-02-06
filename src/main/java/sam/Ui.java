@@ -1,26 +1,57 @@
 package sam;
 
-import java.util.Scanner;
-
-import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import sam.command.Command;
-import sam.parser.Parser;
 
 /**
  * Handles user interaction.
  */
 public class Ui {
+    /**
+     * The list of Sam's dialogs.
+     */
+    public enum Dialog {
+        GREETING("Hello, I am Sam!"),
+        BYE("Goodbye!"),
+        LIST("Here is your list:"),
+        LIST_EMPTY("Your list is empty!"),
+        MARK("Great! I'll check the task:"),
+        UNMARK("Okay, I'll uncheck the task:"),
+        ADD("Gotcha, I'll add the task to your list:"),
+        ADD_COUNT("Now you have %d tasks in the list"),
+        DELETE("Ok, I'll remove the task from your list:"),
+        FIND("I found %d matching tasks:"),
+        FIND_EMPTY("None of your tasks match!"),
+        INVALID_DATE("Please write dates as 'd/M/yyyy'!"),
+        INVALID_INT("Oops, I was expecting an integer!"),
+        INVALID_TASK("Oops, that task does not exist!"),
+        UNKNOWN_COMMAND("Sorry, I don't know what that means"),
+        MISSING_TASK("Oops, you forgot to specify a task!"),
+        MISSING_TASK_TITLE("Oops, you forgot a title for your task!"),
+        MISSING_TASK_ARG("Oops, you're missing an argument!"),
+        MISSING_TASK_VALUE("Oops, an argument is missing a value!"),
+        LOAD_FAILED("Oh no, there was a problem loading your list!"),
+        SAVE_FAILED("Oh no, there was a problem saving your list!");
+
+        private String dialog;
+
+        private Dialog(String dialog) {
+            this.dialog = dialog;
+        }
+
+        public String getDialog() {
+            return dialog;
+        }
+    }
+
     private static final String LOGO =
               " ██████╗ █████╗ ███╗   ███╗\n"
             + "██╔════╝██╔══██╗████╗ ████║\n"
@@ -46,6 +77,9 @@ public class Ui {
     private Button sendButton;
     private Scene scene;
 
+    /**
+     * Constructs a Ui instance.
+     */
     public Ui() {
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
@@ -56,26 +90,32 @@ public class Ui {
 
     /**
      * Sets up the application's stage.
-     * 
+     *
      * @param stage The stage to set up.
      */
     public void setStage(Stage stage) {
+        double windowHeight = 600.0;
+        double windowWidth = 400.0;
+        double inputHeight = 60.0;
+        double inputWidth = 340.0;
+        double padding = 16.0;
+
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
         scene = new Scene(mainLayout);
         stage.setScene(scene);
-        
+
         // formatting
 
         stage.setTitle("Sam");
         stage.setResizable(false);
-        stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
+        stage.setMinHeight(windowHeight);
+        stage.setMinWidth(windowWidth);
 
-        mainLayout.setPrefSize(400.0, 600.0);
+        mainLayout.setPrefSize(windowWidth, windowHeight);
 
-        scrollPane.setPrefSize(400.0, 540.0);
+        scrollPane.setPrefSize(windowWidth, windowHeight - inputHeight);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
@@ -83,12 +123,12 @@ public class Ui {
         scrollPane.setFitToWidth(true);
 
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
-        dialogContainer.setPadding(new Insets(16));
+        dialogContainer.setPadding(new Insets(padding));
 
-        userInput.setPrefWidth(340.0);
-        userInput.setPrefHeight(60.0);
-        sendButton.setPrefWidth(60.0);
-        sendButton.setPrefHeight(60.0);
+        userInput.setPrefWidth(inputWidth);
+        userInput.setPrefHeight(inputHeight);
+        sendButton.setPrefWidth(windowWidth - inputWidth);
+        sendButton.setPrefHeight(inputHeight);
 
         AnchorPane.setTopAnchor(scrollPane, 1.0);
         AnchorPane.setBottomAnchor(sendButton, 1.0);
@@ -104,7 +144,7 @@ public class Ui {
         dialogContainer.heightProperty().addListener(observable -> scrollPane.setVvalue(1.0));
 
         showLogo();
-        respond("Hello, I am Sam!");
+        respond(Dialog.GREETING.getDialog());
     }
 
     /**
@@ -114,7 +154,7 @@ public class Ui {
         Label userText = new Label(userInput.getText());
         Label userChar = new Label(USER);
         dialogContainer.getChildren().add(DialogBox.getUserDialog(userText, userChar));
-        
+
         Sam.getSamInstance().issueCommand(userInput.getText());
         userInput.clear();
     }
@@ -130,7 +170,7 @@ public class Ui {
 
     /**
      * Adds a dialogue from Sam formed by the given strings.
-     * 
+     *
      * @param messages A list of strings representing lines of dialogue.
      */
     public void respond(String... messages) {

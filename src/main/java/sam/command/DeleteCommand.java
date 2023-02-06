@@ -30,7 +30,7 @@ public class DeleteCommand extends Command {
         if (task == null) {
             throw new SamInvalidTaskException();
         }
-        ui.respond("Ok, I'll remove the task from your list:",
+        ui.respond(Ui.Dialog.DELETE.getDialog(),
                 task.toString());
         storage.save(tasks);
     }

@@ -22,13 +22,13 @@ public class ToDo extends Task {
     public String toSaveFormat() {
         return String.format(
                 "T | %d | %s",
-                getStatusNo(), title);
+                getStatusNo(), getTitle());
     }
 
     @Override
     public String toString() {
         return String.format(
                 "[T][%c] %s",
-                getStatusIcon(), title);
+                getStatusIcon(), getTitle());
     }
 }

@@ -7,7 +7,6 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
 import sam.command.Command;
 import sam.command.ExitCommand;
 import sam.parser.Parser;
@@ -20,10 +19,6 @@ import sam.task.TaskList;
  */
 public class Sam extends Application {
     private static Sam samInstance;
-
-    public static Sam getSamInstance() {
-        return samInstance;
-    }
 
     private Ui ui;
     private Storage storage;
@@ -46,16 +41,19 @@ public class Sam extends Application {
         }
     }
 
-    private void exitApp() {
-        ui.disable();
-        PauseTransition delay = new PauseTransition(Duration.seconds(1));
-        delay.setOnFinished(event -> Platform.exit());
-        delay.play();
+
+    /**
+     * Returns the instance of the Sam class.
+     *
+     * @return The instance of the Sam class.
+     */
+    public static Sam getSamInstance() {
+        return samInstance;
     }
 
     /**
      * Parses the input into a command and executes it.
-     * 
+     *
      * @param input The command to execute.
      */
     public void issueCommand(String input) {
@@ -68,6 +66,13 @@ public class Sam extends Application {
         } catch (SamException e) {
             ui.respond(e.getMessage());
         }
+    }
+
+    private void exitApp() {
+        ui.disable();
+        PauseTransition delay = new PauseTransition(Duration.seconds(1));
+        delay.setOnFinished(event -> Platform.exit());
+        delay.play();
     }
 
     @Override

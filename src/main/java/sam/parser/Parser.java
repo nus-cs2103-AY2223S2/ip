@@ -20,6 +20,8 @@ import sam.task.SamMissingTaskValueException;
  * Handles deciphering user inputs.
  */
 public class Parser {
+    public static final String DATE_PATTERN = "d/M/yyyy";
+
     /**
      * Parses a string with the format "d/M/yyyy" as a LocalDate.
      *
@@ -30,7 +32,7 @@ public class Parser {
     public static LocalDate parseDate(String input) throws SamInvalidDateException {
         try {
             return LocalDate.parse(input,
-                    DateTimeFormatter.ofPattern("d/M/yyyy"));
+                    DateTimeFormatter.ofPattern(DATE_PATTERN));
         } catch (DateTimeParseException e) {
             throw new SamInvalidDateException();
         }

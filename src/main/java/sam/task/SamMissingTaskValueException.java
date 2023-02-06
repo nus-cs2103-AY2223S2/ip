@@ -1,6 +1,7 @@
 package sam.task;
 
 import sam.SamException;
+import sam.Ui;
 
 /**
  * A SamException thrown when a an argument from the user input
@@ -8,6 +9,6 @@ import sam.SamException;
  */
 public class SamMissingTaskValueException extends SamException {
     public SamMissingTaskValueException() {
-        super("Oops, an argument is missing a value!");
+        super(Ui.Dialog.MISSING_TASK_VALUE.getDialog());
     }
 }
