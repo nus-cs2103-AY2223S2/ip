@@ -4,6 +4,7 @@ import commands.CommandBye;
 import commands.CommandDeadline;
 import commands.CommandDelete;
 import commands.CommandEvent;
+import commands.CommandFact;
 import commands.CommandFind;
 import commands.CommandList;
 import commands.CommandMark;
@@ -28,6 +29,10 @@ public class Parser {
         switch (inputs[0]) {
         case ("bye"):
             return new CommandBye().handle(inputs);
+
+        // Duke lists out all Tasks.Task names in TaskList when input is "list"
+        case ("fact"):
+            return new CommandFact().handle(inputs);
 
         // Duke lists out all Tasks.Task names in TaskList when input is "list"
         case ("list"):
