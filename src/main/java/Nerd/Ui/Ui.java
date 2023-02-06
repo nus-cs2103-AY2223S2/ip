@@ -11,12 +11,11 @@ public class Ui {
     /**
      * Prints the welcome message.
      */
-    public void showWelcome() {
-        System.out.println("Hello! I'm NerdBot\nWhat can I do for you?");
-        printDivider();
+    public String showWelcome() {
+        return("Hello! I'm NerdBot\nWhat can I do for you?");
     }
 
-    public void showCommandList() {
+    public String showCommandList() {
         String availableCommands = "Available commands:\n"
                 + "todo [description]\n"
                 + "event [description] /from [date] /to [date]\n"
@@ -26,8 +25,7 @@ public class Ui {
                 + "list\n"
                 + "delete [index]\n"
                 + "date [date]";
-        System.out.println(availableCommands);
-        printDivider();
+        return availableCommands;
     }
 
     public void printDivider() {

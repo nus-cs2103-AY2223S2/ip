@@ -1,6 +1,8 @@
 package gui;
 
 import Nerd.Nerd;
+import Nerd.Ui.Ui;
+import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -8,6 +10,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import javafx.util.Duration;
+
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -22,6 +28,8 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Nerd nerd;
+    private Stage stage;
+    private Ui ui;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/amoonguss.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/nerd.jpg"));
@@ -31,8 +39,16 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setDuke(Nerd d) {
+    public void setDuke(Nerd d, Ui ui) {
         nerd = d;
+        this.ui = ui;
+    }
+
+    public void setDefaultMessage() {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(ui.showWelcome(), dukeImage),
+                DialogBox.getDukeDialog(ui.showCommandList(), dukeImage)
+        );
     }
 
     /**
@@ -48,5 +64,15 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+
+        if (input.equals("bye")) {
+            PauseTransition delay = new PauseTransition(Duration.seconds(5));
+            delay.setOnFinished(event -> stage.close() );
+            delay.play();
+        }
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
 }
