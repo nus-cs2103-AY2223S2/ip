@@ -18,9 +18,11 @@ public class Ui {
 
     /**
      * Prints out the list of tasks
+     * @return
      */
     public void showList() {
         System.out.println("Here are the tasks in your list:\n");
+
         int listCount = 1;
         for (Task element: Task.tasks) {
             if (element != null) {
@@ -28,6 +30,7 @@ public class Ui {
                 listCount += 1;
             }
         }
+
     }
 
     /**

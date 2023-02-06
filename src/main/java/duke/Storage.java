@@ -9,6 +9,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Storage {
     private String path;
+    File file;
 
     /**
      * This is the constructor for Storage
@@ -16,6 +17,7 @@ public class Storage {
      */
     public Storage(String path) {
         this.path = path;
+        this.file = new File("text-ui-test/saved-tasks.txt");
     }
 
     /**
@@ -23,7 +25,7 @@ public class Storage {
      * @throws IOException
      */
     public void handleLoad() throws IOException {
-        BufferedReader taskLoader = new BufferedReader(new FileReader(".//text-ui-test/saved-tasks.txt"));
+        BufferedReader taskLoader = new BufferedReader(new FileReader(this.file));
         String words = taskLoader.readLine();
         while (words != null) {
             String[] keywords = words.split(" \\|\\| ");
@@ -70,5 +72,6 @@ public class Storage {
         taskWriter.write(taskInString);
         taskWriter.close();
     }
+
 }
 
