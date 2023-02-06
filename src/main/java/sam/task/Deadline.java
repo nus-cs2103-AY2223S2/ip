@@ -28,13 +28,13 @@ public class Deadline extends Task {
     public String toSaveFormat() {
         return String.format(
                 "D | %d | %s | %s",
-                getStatusNo(), title, formatDateSave(by));
+                getStatusNo(), getTitle(), formatDateSave(by));
     }
 
     @Override
     public String toString() {
         return String.format(
                 "[D][%c] %s (by: %s)",
-                getStatusIcon(), title, formatDateDisplay(by));
+                getStatusIcon(), getTitle(), formatDateDisplay(by));
     }
 }

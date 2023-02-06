@@ -11,8 +11,8 @@ import sam.parser.Parser;
 public abstract class Task {
     private static final String DATE_PATTERN = "MMM d yyyy";
 
-    protected String title;
-    protected boolean isDone;
+    private String title;
+    private boolean isDone;
 
     public Task(String title) {
         this(title, false);
@@ -33,7 +33,15 @@ public abstract class Task {
         this.isDone = isDone;
     }
 
-    /**
+    public String getTitle() {
+        return title;
+    }
+
+    public boolean matchTitle(String subString) {
+        return title.contains(subString);
+    }
+
+     /**
      * Returns a char representing the status of the task.
      *
      * @return An X if the task is done, or a blank space otherwise.
