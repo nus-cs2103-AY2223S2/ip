@@ -29,7 +29,7 @@ public class Duke {
     }
 
     /**
-     * run and start the Duke bot
+     * Runs and starts the Duke bot
      */
     public void run() {
         ui.showWelcome();

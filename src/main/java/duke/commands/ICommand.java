@@ -13,7 +13,7 @@ public abstract class ICommand {
     private final Parser parser;
 
     /**
-     * To create a ICommand object which manipulate the task
+     * Creates a ICommand object which manipulate the task
      *
      * @param parser in-charge to convert user input to valid program input command
      */
@@ -26,7 +26,7 @@ public abstract class ICommand {
     }
 
     /**
-     * Set the task message once the task is done
+     * Sets the task message once the task is done
      *
      * @throws DukeException IF error occur during execution of task.
      */

@@ -32,7 +32,7 @@ public class Storage {
     }
 
     /**
-     * load the tasks from local database
+     * Loads the tasks from local database
      *
      * @throws DukeException IF error occur during loading of task.
      */
@@ -50,13 +50,16 @@ public class Storage {
 
                 if (line.contains("[T]")) {
                     if (line.contains("[X]")) {
-                        result.add(new Todo(line.substring(markIndex).trim(), true));
+                        result.add(new Todo(line.substring(markIndex).trim(),
+                                true));
                     } else {
-                        result.add(new Todo(line.substring(unmarkIndex).trim(), false));
+                        result.add(new Todo(line.substring(unmarkIndex).trim(),
+                                false));
                     }
                 } else if (line.contains("[D]")) {
 
-                    String by = line.substring(line.indexOf("/by:") + 4, line.indexOf("/content:")).trim();
+                    String by = line.substring(line.indexOf("/by:") + 4,
+                            line.indexOf("/content:")).trim();
                     if (line.contains("[X]")) {
                         result.add(new Deadline(line.substring(markIndex).trim(),
                                 new Date(Long.parseLong(by)), true));
@@ -66,15 +69,19 @@ public class Storage {
                     }
 
                 } else if (line.contains("[E]")) {
-                    String from = line.substring(line.indexOf("/from:") + 6, line.indexOf("/to:")).trim();
-                    String to = line.substring(line.indexOf("/to:") + 4, line.indexOf("/content:")).trim();
+                    String from = line.substring(line.indexOf("/from:") + 6,
+                            line.indexOf("/to:")).trim();
+                    String to = line.substring(line.indexOf("/to:") + 4,
+                            line.indexOf("/content:")).trim();
 
                     if (line.contains("[X]")) {
                         result.add(new Event(line.substring(markIndex).trim(),
-                                new Date(Long.parseLong(from)), new Date(Long.parseLong(to)), true));
+                                new Date(Long.parseLong(from)),
+                                new Date(Long.parseLong(to)), true));
                     } else {
                         result.add(new Event(line.substring(unmarkIndex).trim(),
-                                new Date(Long.parseLong(from)), new Date(Long.parseLong(to)), false));
+                                new Date(Long.parseLong(from)),
+                                new Date(Long.parseLong(to)), false));
                     }
                 }
             }
@@ -87,7 +94,7 @@ public class Storage {
     }
 
     /**
-     * save the tasks from local database
+     * Saves the tasks from local database
      *
      * @param tasks task to save
      * @throws DukeException IF error occur during save of task.

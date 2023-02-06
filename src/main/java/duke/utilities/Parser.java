@@ -97,7 +97,7 @@ public class Parser {
 
 
     /**
-     * Convert the user input to valid program input for a deadline
+     * Converts the user input to valid program input for a deadline
      * task
      *
      * @throws DukeException IF error occur
@@ -125,7 +125,7 @@ public class Parser {
     }
 
     /**
-     * Return the 'from' date of event task
+     * Returns the 'from' date of event task
      *
      * @throws DukeException IF error occur
      */
@@ -137,7 +137,7 @@ public class Parser {
     }
 
     /**
-     * Return the 'to' date of event task
+     * Returns the 'to' date of event task
      *
      * @throws DukeException IF error occur
      */
@@ -150,14 +150,14 @@ public class Parser {
 
 
     /**
-     * Return the enum type of task
+     * Returns the enum type of task
      */
     public ITask.TaskTypes getType() {
         return type;
     }
 
     /**
-     * Return the task manager
+     * Returns the task manager
      */
 
     public TaskManager getTaskManager() {
@@ -165,7 +165,7 @@ public class Parser {
     }
 
     /**
-     * Return the index of task for a mark or unmark task
+     * Returns the index of task for a mark or unmark task
      * task
      *
      * @throws DukeException IF error occur
@@ -186,7 +186,7 @@ public class Parser {
     }
 
     /**
-     * Return the description of task
+     * Returns the description of task
      *
      * @throws DukeException IF error occur
      */
@@ -199,7 +199,7 @@ public class Parser {
 
 
     /**
-     * Convert the user input to valid program input for an event
+     * Converts the user input to valid program input for an event
      * task
      *
      * @throws DukeException IF error occur
@@ -231,7 +231,7 @@ public class Parser {
     }
 
     /**
-     * Convert the user input to valid program input for a todo
+     * Converts the user input to valid program input for a todos
      * task
      */
     public void forTodo() {
@@ -240,7 +240,7 @@ public class Parser {
     }
 
     /**
-     * Convert the user input to valid program input for a Find
+     * Converts the user input to valid program input for a Find
      * task
      */
     public void forFind() {

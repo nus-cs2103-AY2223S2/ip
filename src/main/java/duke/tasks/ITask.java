@@ -48,7 +48,7 @@ public abstract class ITask {
 
 
     /**
-     * To Convert String command to enum TaskTypes
+     * Converts String command to enum TaskTypes
      *
      * @param cmd String command
      */
@@ -69,27 +69,27 @@ public abstract class ITask {
 
 
     /**
-     * To mark the task as done
+     * Marks the task as done
      */
     public void markAsDone() {
         isDone = true;
     }
 
     /**
-     * To mark the task as undone
+     * Marks the task as undone
      */
-    public void markAsUnDone() {
+    public void markAsUndone() {
         isDone = false;
     }
 
 
     /**
-     * To convert the task into string for export the local file
+     * Converts the task into string for export the local file
      */
     public abstract String toSaveFormat();
 
     /**
-     * To convert the task status to a String icon representation
+     * Converts the task status to a String icon representation
      */
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
