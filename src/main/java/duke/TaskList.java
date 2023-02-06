@@ -7,6 +7,12 @@ import java.util.ArrayList;
 import duke.task.Task;
 
 
+/**
+ * Creates a new task list.
+ *
+ * @author Evan Lee
+ * @version CS2103 AY22/23 Semester 2
+ */
 public class TaskList {
     private ArrayList<Task> tasks;
     private boolean isInitializingData = true;
@@ -27,6 +33,7 @@ public class TaskList {
 
     /** Adds new task to task list and outputs success message. */
     protected void finishInitialization() {
+        assert this.isInitializingData : "Duke has already been initialized.";
         this.isInitializingData = false;
     }
 
@@ -61,6 +68,8 @@ public class TaskList {
             return "initializing";
         }
 
+        assert this.tasks.size() != 0 : "Task list is empty.";
+
         return Ui.addTaskMsg(task, this.tasks.size());
     }
 
@@ -73,7 +82,6 @@ public class TaskList {
     protected String removeTask(int taskIndex) {
         Task task = this.tasks.remove(taskIndex);
         return Ui.removeTaskMsg(task, this.tasks.size());
-
     }
 
     /**

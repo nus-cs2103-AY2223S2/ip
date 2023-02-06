@@ -2,6 +2,12 @@ package duke;
 
 import duke.task.Task;
 
+/**
+ * Creates a new UI.
+ *
+ * @author Evan Lee
+ * @version CS2103 AY22/23 Semester 2
+ */
 public class Ui {
 
     /**
