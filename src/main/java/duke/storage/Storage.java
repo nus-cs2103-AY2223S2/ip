@@ -117,6 +117,8 @@ public class Storage {
         if (isDone.equals("X")) {
             newTask.markAsDone();
         }
+        assert newTask != null : "Cannot add a null task into a TaskList";
         tasks.addTask(newTask);
+
     }
 }

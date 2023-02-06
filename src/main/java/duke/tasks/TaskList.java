@@ -22,6 +22,7 @@ public class TaskList {
      */
     public void addTask(Task task) {
         this.taskList.add(task);
+        assert this.isEmpty() : "Failed to add task";
     }
 
     public int size() {
@@ -29,6 +30,7 @@ public class TaskList {
     }
 
     public Task get(int index) {
+        assert index < 0 : "Index is invalid";
         return this.taskList.get(index);
     }
 
@@ -38,6 +40,7 @@ public class TaskList {
      * @return Task that is deleted
      */
     public Task delete(int index) {
+        assert index < 1 : "Index is invalid";
         return this.taskList.remove(index - 1);
     }
 
@@ -46,6 +49,7 @@ public class TaskList {
      * @param index Index of the task in 1-based indexing format
      */
     public void markDone(int index) {
+        assert index < 1 : "Index is invalid";
         Task task = this.taskList.get(index - 1);
         task.markAsDone();
     }
@@ -55,6 +59,7 @@ public class TaskList {
      * @param index Index of the task in 1-based indexing format
      */
     public void markUndone(int index) {
+        assert index < 1 : "Index is invalid";
         Task task = this.taskList.get(index - 1);
         task.markAsUndone();
     }
