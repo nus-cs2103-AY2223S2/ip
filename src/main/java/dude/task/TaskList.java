@@ -32,6 +32,7 @@ public class TaskList {
      * @return Task at given task index.
      */
     public Task getTask(int taskIndex) {
+        assert taskIndex > 0 : "Task index should be more than 0";
         return tasks.get(taskIndex - 1);
     }
 
@@ -41,6 +42,7 @@ public class TaskList {
      * @param task Task object to be added into TaskList.
      */
     public void addTask(Task task) {
+        assert task != null : "New task should not be null";
         tasks.add(task);
         Task.addTaskCount();
     }
@@ -51,6 +53,7 @@ public class TaskList {
      * @param taskIndex Index of Task to be deleted from TaskList.
      */
     public void deleteTask(int taskIndex) {
+        assert taskIndex > 0 : "Task index should be more than 0";
         tasks.remove(taskIndex - 1);
         Task.decreaseTaskCount();
     }
@@ -76,6 +79,7 @@ public class TaskList {
     @Override
     public String toString() {
         StringBuilder result;
+        assert tasks.size() > 0 : "Number of tasks should be more than 0";
         if (tasks.size() != 0) {
             result = new StringBuilder("Here are the tasks in your list: \n");
             for (int i = 0; i < tasks.size(); i++) {

@@ -80,6 +80,7 @@ public class Ui {
      */
     public String showFind(List<Task> tasks) {
         StringBuilder result = new StringBuilder();
+        assert tasks.size() > 0 : "Number of tasks should be more than 0";
         if (tasks.size() != 0) {
             result.append("Okay come, here are the task I found containing your keyword: ");
             for (int i = 0; i < tasks.size(); i++) {
@@ -89,7 +90,6 @@ public class Ui {
         } else {
             return "I cannot find any task containing your keyword sia\n";
         }
-
     }
 
     /**

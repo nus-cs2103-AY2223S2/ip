@@ -78,6 +78,7 @@ public abstract class Task {
      * @return Boolean if Task contains keyword
      */
     public boolean contains(String[] keywords) {
+        assert keywords != null : "Keywords should not be null";
         for (String keyword : keywords) {
             if (this.description.toLowerCase().contains(keyword.toLowerCase())) {
                 return true;
