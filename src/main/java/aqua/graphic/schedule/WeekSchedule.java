@@ -23,10 +23,10 @@ public class WeekSchedule extends VBox {
 
 
     /**
-     * Constructs a {@code ScheduleComponent} from the given parameters.
+     * Constructs a {@code WeekSchedule} from the given parameters.
      *
      * @param startTime - the start time of the week.
-     * @param timeabels - the list of {@code ScheduleTimeable} to display.
+     * @param timeables - the list of {@code ScheduleTimeable} to display.
      */
     public WeekSchedule(LocalDateTime startTime, List<? extends ScheduleTimeable> timeables) {
         List<? extends List<ScheduleTimeable>> rows = split(startTime, timeables);
@@ -37,6 +37,13 @@ public class WeekSchedule extends VBox {
     }
 
 
+    /**
+     * Splits a list of {@code ScheduleTimeable} into their day in the week.
+     * The return type is a list of 7 lists of {@code ScheduleTimeable}.
+     * 
+     * @param startTime - the time of the start of the week.
+     * @param timeables - the list of {@code ScheduleTimeable} to split.
+     */
     private List<? extends List<ScheduleTimeable>> split(
                 LocalDateTime startTime, List<? extends ScheduleTimeable> timeables) {
         ArrayList<ArrayList<ScheduleTimeable>> sepTimeables = new ArrayList<>(DAYS_IN_WEEK);
@@ -56,6 +63,14 @@ public class WeekSchedule extends VBox {
     }
 
 
+    /**
+     * Creates and adds a {@code DaySchedule}.
+     * 
+     * @param startTime - the time of the start of the day to create.
+     * @param timeables - the list {@code ScheduleTimeable} to include in the
+     *      day.
+     * @param index - the index of the day.
+     */
     private void addRow(LocalDateTime startTime, List<ScheduleTimeable> timeables, int index) {
         HBox box = new HBox();
         box.setAlignment(Pos.CENTER_LEFT);
