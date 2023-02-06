@@ -104,8 +104,9 @@ public class TaskList {
         int sizeOfList = listOfTasks.size();
         return Stream.iterate(0, i -> i + 1)
                 .limit(sizeOfList)
-                .map(x -> String.format("\n\t%d%s", x + 1, listOfTasks.get(x).toString()))
+                .map(x -> String.format("\n\t%d%s", x + 1, listOfTasks.get(x)))
                 .reduce("\n\tHere are the tasks in your list:", (y, z) -> y + z);
+
     }
 
     /**
@@ -125,6 +126,23 @@ public class TaskList {
         }
         this.listOfFindTasks = matchingTasks;
         return matchingTasks;
+    }
+
+    /**
+     * Stores tasks with deadlines or start date into an ArrayList.
+     *
+     * @return ArrayList consisting of tasks with deadlines or start date.
+     */
+    public ArrayList<Task> getTasksWithDeadlines() {
+        ArrayList<Task> taskWithDatesList = new ArrayList<>();
+        for (Task task : listOfTasks) {
+            if (task instanceof Deadline || task instanceof Event) {
+                if (!task.isDone()) {
+                    taskWithDatesList.add((task));
+                }
+            }
+        }
+        return taskWithDatesList;
     }
 
     /**

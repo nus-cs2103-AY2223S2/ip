@@ -1,9 +1,11 @@
 package duke;
 
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Scanner;
 
+import duke.tasks.Deadline;
+import duke.tasks.Event;
 import duke.tasks.Task;
 import javafx.animation.PauseTransition;
 import javafx.stage.Stage;
@@ -14,8 +16,7 @@ import javafx.util.Duration;
  * Ui class deals with interactions with the user.
  */
 public class Ui {
-    private Scanner sc;
-    private Stage stage;
+    private final Stage stage;
 
     /**
      * Constructor for the Ui class.
@@ -28,92 +29,92 @@ public class Ui {
 
     /**
      * Prints welcome message to user of Duke.
+     *
+     * @return Welcome message.
      */
-
     public static String welcomeMessage() {
-        String message = "\tHello! I'm Duke\n"
+        return "\tHello! I'm Duke\n"
                 + "\tWhat can I do for you?\n";
-        return message;
     }
 
     /**
      * Prints bye message to user of Duke and closes Duke.
+     *
+     * @return bye message.
      */
     public String byeMessage() {
         PauseTransition delay = new PauseTransition(Duration.seconds(2));
         delay.setOnFinished(event -> stage.close());
         delay.play();
-        String message = "\t Bye. Hope to see you again soon!\n";
-        return message;
+        return "\t Bye. Hope to see you again soon!\n";
     }
 
     /**
      * Outputs mark message to user.
      *
      * @param task Task to be marked Done.
+     * @return mark message.
      */
     public String showMark(Task task) {
-        String message = "\tNice! I've marked this task as done:\n\t  " + task.toString();
-        return message;
+        return "\tNice! I've marked this task as done:\n\t  " + task.toString();
     }
 
     /**
      * Outputs unmark message to user.
      *
      * @param task Task to be marked Undone.
+     * @return unmark message.
      */
     public String showUnmark(Task task) {
-        String message = "\tOK, I've marked this task as not done yet:\n\t  " + task.toString();
-        return message;
+        return "\tOK, I've marked this task as not done yet:\n\t  " + task.toString();
     }
 
     /**
      * Outputs add message to user.
      *
      * @param task Task to be added.
-     * @param size Size of the tasklist
+     * @param size Size of the taskList
+     * @return Add task message
      */
     public String showAdd(Task task, int size) {
-        String message = "\tGot it. I've added this task:\n\t  "
+        return "\tGot it. I've added this task:\n\t  "
                 + task.toString() + "\n\tNow you have "
                 + size + " task(s) in the list.";
-        return message;
     }
 
     /**
      * Outputs deleted message to user.
      *
      * @param task Task to be deleted.
-     * @param size Size of the tasklist.
+     * @param size Size of the taskList.
+     * @return Deletion message.
      */
     public String showDelete(Task task, int size) {
-        String message = "\tNoted. I've removed this task:\n\t  "
+        return "\tNoted. I've removed this task:\n\t  "
                 + task.toString() + "\n\tNow you have "
                 + size + " task(s) in the list.";
-        return message;
     }
     /**
      * Outputs deleted message to user.
      *
      * @param task Task to be deleted from findList.
+     * @return Deletion message.
      */
     public String showFindDelete(Task task) {
-        String message = "\tNoted. I've removed this task:\n\t  "
+        return "\tNoted. I've removed this task:\n\t  "
                 + task.toString();
-        return message;
     }
     /**
      * Outputs the taskList to user.
      *
      * @param taskList TaskList which contains the list of tasks.
+     * @return String representation of list of tasks.
      */
     public String showList(TaskList taskList) {
         if (taskList.getSize() == 0) {
-            String message = "\tThere is nothing in ur list currently";
-            return message;
+            return "\tThere is nothing in ur list currently";
         } else {
-            String message = taskList.printList();
-            return message;
+            return taskList.printList();
         }
     }
 
@@ -121,21 +122,41 @@ public class Ui {
      * Prints the list of tasks found using the FindCommand.
      *
      * @param listOfTasksFound ArrayList consisting of strings of tasks found using FindCommand.
+     * @return String representation of task in find list.
      */
     public String printFindList(ArrayList<Task> listOfTasksFound) {
         int i = 1;
-        String s = "";
-        s = "\tHere are the matching tasks in your list:";
+        StringBuilder s;
+        s = new StringBuilder("\tHere are the matching tasks in your list:");
         for (Task task : listOfTasksFound) {
-            s += "\n\t"
-                    + i
-                    + ". "
-                    + task.toString();
+            s.append("\n\t").append(i).append(". ").append(task.toString());
             i++;
         }
-        s += "\n\tThere are "
-                + listOfTasksFound.size()
-                + " matching task(s) in your list.";
-        return s;
+        s.append("\n\tThere are ").append(listOfTasksFound.size()).append(" matching task(s) in your list.");
+        return s.toString();
+    }
+
+    /**
+     * Prints the list of tasks with deadlines, if a task has deadline, it will output the number of days to deadline.
+     * @param deadlineList list of tasks with deadlines.
+     * @return String message
+     */
+
+    public String printDeadlineList(ArrayList<Task> deadlineList) {
+        int size = deadlineList.size();
+        if (size == 0) {
+            return "\tYou do not have any task with deadlines!";
+        }
+        StringBuilder s = new StringBuilder("\tHere are your tasks with deadlines: \n");
+        for (Task task: deadlineList) {
+            if (task instanceof Deadline) {
+                s.append(task).append(" - This is due in ").append(LocalDate.now().until(((Deadline) task)
+                        .getDeadline()).getDays()).append(" day(s) ! \n");
+            } else {
+                s.append(task.toString()).append(" - This event starts in ").append(LocalDate.now().until(((Event) task)
+                        .getStartDate()).getDays()).append(" day(s) ! \n");
+            }
+        }
+        return String.format("%s \tYou have %d task(s) that have deadlines/start dates", s, size);
     }
 }

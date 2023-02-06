@@ -18,7 +18,7 @@ public class Task {
      */
     public Task(String description, boolean isDone) {
         this.description = description;
-        this.isDone = false;
+        this.isDone = isDone;
     }
 
     /**
@@ -48,6 +48,10 @@ public class Task {
         this.isDone = false;
     }
 
+    public boolean isDone() {
+        return isDone;
+    }
+
     /**
      * Converts the Task into its string representation.
      *
@@ -75,7 +79,7 @@ public class Task {
      */
     public static Task loadTask(String data) throws DukeException {
         String[] dataSplit = data.trim().split("\\|", 4);
-        boolean isDone = dataSplit[1].equals("1");
+        boolean isDone = dataSplit[1].trim().equals("1");
         char taskType = dataSplit[0].charAt(0);
         String description = dataSplit[2].trim();
         switch (taskType) {

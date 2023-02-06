@@ -33,6 +33,10 @@ public class Deadline extends Task {
         }
     }
 
+    public LocalDate getDeadline() {
+        return this.dateTime;
+    }
+
     /**
      * A method that converts the Deadline into its String representation.
      *
