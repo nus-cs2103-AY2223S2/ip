@@ -22,6 +22,7 @@ public class Duke {
      */
     public Duke(String dataFilePath) {
         ui = new Ui();
+        assert dataFilePath != null && !dataFilePath.equals("") : "dataFilePath is null or empty";
         storage = new Storage(dataFilePath);
         try {
             tasks = new TaskList(storage.load());
