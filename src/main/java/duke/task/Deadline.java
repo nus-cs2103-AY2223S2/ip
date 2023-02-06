@@ -63,10 +63,9 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString()
-                + " (By: "
-                + dueBy.getDayOfMonth() + " " + dueBy.getMonth() + " " + dueBy.getYear() + " "
-                + dueBy.getHour() + dueBy.getMinute() // TODO: bugalert (may not always be 4-digits)
-                + ")";
+        return String.format("[D]%s (By: %02d %s %d %02d:%02d)",
+                super.toString(),
+                dueBy.getDayOfMonth(), dueBy.getMonth(), dueBy.getYear(),
+                dueBy.getHour(), dueBy.getMinute());
     }
 }

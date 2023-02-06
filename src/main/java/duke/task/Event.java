@@ -87,13 +87,11 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString()
-                + " (From: "
-                + startDateTime.getDayOfMonth() + " " + startDateTime.getMonth() + " " + startDateTime.getYear() + " "
-                + startDateTime.getHour() + startDateTime.getMinute() // TODO: bugalert (may not always be 4-digits)
-                + " To: "
-                + endDateTime.getDayOfMonth() + " " + endDateTime.getMonth() + " " + endDateTime.getYear() + " "
-                + endDateTime.getHour() + endDateTime.getMinute() // TODO: bugalert (may not always be 4-digits)
-                + ")";
+        return String.format("[D]%s (From: %02d %s %d %02d:%02d To: %02d %s %d %02d:%02d)",
+                super.toString(),
+                startDateTime.getDayOfMonth(), startDateTime.getMonth(), startDateTime.getYear(),
+                startDateTime.getHour(), startDateTime.getMinute(),
+                endDateTime.getDayOfMonth(), endDateTime.getMonth(), endDateTime.getYear(),
+                endDateTime.getHour(), endDateTime.getMinute());
     }
 }
