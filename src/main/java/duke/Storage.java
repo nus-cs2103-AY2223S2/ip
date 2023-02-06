@@ -35,7 +35,9 @@ public class Storage {
                 System.out.println("Error when creating file: " + e);
             }
         }
+
         TaskList taskList = new TaskList();
+
         try {
             Scanner myReader = new Scanner(file);
             while (myReader.hasNextLine()) {
@@ -46,6 +48,7 @@ public class Storage {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
+
         return taskList;
     }
 
@@ -56,6 +59,7 @@ public class Storage {
      */
     public Task parseStringToTask(String string) {
         String[] inputArray = string.split(",");
+
         if (inputArray[0].equals("T")) {
             return new ToDo(inputArray[2], inputArray[1].equals("1"));
         } else if (inputArray[0].equals("D")) {
@@ -73,6 +77,7 @@ public class Storage {
      *
      */
     public void saveTaskListToStorage(TaskList taskList) {
+
         try {
             FileWriter myWriter = new FileWriter(file); // this truncates the duke.txt to size 0
             for (int i = 0; i < taskList.getArraySize(); i++) {
@@ -85,5 +90,4 @@ public class Storage {
             e.printStackTrace();
         }
     }
-
 }

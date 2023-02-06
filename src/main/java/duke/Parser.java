@@ -19,6 +19,7 @@ public class Parser {
         String command;
         String body;
         assert userInput != null : "No user input detected";
+
         if (userInput.contains(" ")) {
             command = userInput.substring(0, userInput.indexOf(" "));
             body = userInput.substring(userInput.indexOf(" ") + 1);
