@@ -43,5 +43,6 @@ public class MainWindow extends AnchorPane {
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(new Label(input), new Label(response));
         userInput.clear();
+        assert userInput.getText().equals("");
     }
 }
