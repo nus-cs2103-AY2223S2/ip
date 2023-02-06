@@ -9,8 +9,12 @@ import duke.exception.DukeException;
 public class Ui {
     private TaskList tasks;
     private static final String GREETINGS_MESSAGE = "Hello! I'm Duke\nWhat can I do for you?";
-    private static final String GOODBYE_MESSAGE = "Bye. Hope to see you soon!";
 
+    /**
+     * Constructor for Ui.
+     *
+     * @param tasks TaskList loaded from file or empty TaskList
+     */
     public Ui(TaskList tasks) {
         this.tasks = tasks;
     }
@@ -18,6 +22,10 @@ public class Ui {
     String acceptCommand(String command) throws DukeException {
         String printable = Parser.processCommand(command, tasks);
         return printable;
+    }
+
+    static String showGreetingsMessage() {
+        return GREETINGS_MESSAGE;
     }
 
     String showErrorMessage(Exception e) {

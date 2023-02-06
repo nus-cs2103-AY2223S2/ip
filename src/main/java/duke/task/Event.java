@@ -11,6 +11,7 @@ public class Event extends Task {
 
     /**
      * Constructor for Event.
+     *
      * @param description Task description.
      * @param start Starting time of event.
      * @param end Ending time of event.
@@ -23,6 +24,7 @@ public class Event extends Task {
 
     /**
      * Constructor for Event.
+     *
      * @param description Task description.
      * @param isDone Completed status of task.
      * @param start Starting time of event.
