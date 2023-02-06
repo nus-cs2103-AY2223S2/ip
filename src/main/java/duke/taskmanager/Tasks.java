@@ -1,5 +1,8 @@
 package duke.taskmanager;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Parent class of different types of Tasks
  */
@@ -7,10 +10,15 @@ public class Tasks {
     final protected String desc;
     protected Boolean done;
 
+
     /*Constructor for generic task*/
-    public Tasks(String str) throws Exception {
+    public Tasks(String str) {
         this.desc = str;
         this.done = false;
+    }
+
+    public void tag(String d, Tasks tsk) {
+        Tag.tag(d, tsk);
     }
 
     /*returns description of task as is overwritten by inheritors*/

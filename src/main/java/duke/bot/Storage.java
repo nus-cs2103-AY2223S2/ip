@@ -34,6 +34,7 @@ public class Storage {
             while(sc.hasNextLine()) {
                 String taskDesc = sc.nextLine();
                 String[] taskArr = taskDesc.split(" ∵ ");
+
                 switch (taskArr[0]) {
                     case "[T]":
                         Tasks t = new ToDo("todo " + taskArr[2]);

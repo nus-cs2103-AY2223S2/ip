@@ -1,5 +1,6 @@
 package duke.bot;
 
+import duke.taskmanager.Tag;
 import duke.taskmanager.TaskList;
 
 import java.io.IOException;
@@ -22,6 +23,7 @@ public class Duke {
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
+        Tag.load();
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -31,6 +33,7 @@ public class Duke {
     }
     public Duke() {
         storage = new Storage(FILE_PATH);
+        Tag.load();
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {

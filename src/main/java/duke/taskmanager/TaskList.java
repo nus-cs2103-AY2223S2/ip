@@ -38,7 +38,6 @@ public class TaskList {
     public void add(Tasks t) {
         //write to file data/tasks
         assert lst != null;
-
         lst.add(t);
         File file = new File(FILE_PATH);
         if (!file.exists()) {
@@ -55,7 +54,7 @@ public class TaskList {
             io.close();
         } catch(IOException e){
             try {
-                BufferedWriter io = new BufferedWriter(new FileWriter(FILE_PATH));
+                BufferedWriter io = new BufferedWriter(new FileWriter(FILE_PATH, true));
                 io.newLine();
                 io.append(t.icon()).append(" ∵ ").append(" ").append(" ∵ ").append(t.desc.split(" ", 2)[1]);
                 io.close();

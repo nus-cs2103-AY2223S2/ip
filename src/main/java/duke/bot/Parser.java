@@ -18,13 +18,13 @@ public class Parser {
         StringBuilder res = new StringBuilder();
         if (str.equals("bye")) {
             Exit();
-        } else if(str.contains("delete")) {
-            if(tasks.isEmpty()) {
+        } else if (str.contains("delete")) {
+            if (tasks.isEmpty()) {
                 res.append("There is nothing on your list to delete");
                 return res.toString();
             } else {
                 int index = Integer.parseInt((str.substring(7)));
-                Tasks t = tasks.get(index-1);
+                Tasks t = tasks.get(index - 1);
                 tasks.remove(index - 1);
                 TaskList.rewrite(tasks);
                 res.append("\nNow you have ").append(tasks.size()).append(" tasks in the list");
@@ -37,6 +37,11 @@ public class Parser {
         } else if (str.contains("find")) {
             System.out.println("Here are the tasks matching the description:");
             res.append("Here are the tasks matching the description:");
+            if(str.split(" ",2 ).length == 1) {
+                System.out.println("enter description you're looking for");
+                res.append("enter description you're looking for");
+                return res.toString();
+            }
             String keyword = str.split(" ", 2)[1];
             int n = 1;
             for (Tasks t : tasks.getList()) {
@@ -51,6 +56,31 @@ public class Parser {
                             + t.getDesc());
                     n++;
                 }
+            }
+            return res.toString();
+        } else if (str.contains("tag")) {
+            if (str.contains("ged")) {
+                String k = str.split(" ", 2)[1];
+                System.out.println("Here are the items tagged as " + k);
+                res.append("Here are the items tagged as " + k + "\n");
+                System.out.println(Tag.returnTagged(k));
+                res.append(Tag.returnTagged(k));
+                return res.toString();
+            }
+            System.out.println("Nice I've tagged this item as: ");
+            res.append("Nice I've tagged this item as:");
+            Tasks taggedTask = tasks.get(Integer.parseInt(str.substring(3, 4))-1);
+            if(str.split(" ",2 ).length == 1) {
+                System.out.println("enter your tags(eg: fun, important...)");
+                res.append("enter your tags(eg: fun, important...)");
+                return res.toString();
+            }
+            String tags = str.split(" ", 2)[1];
+            int n = 1;
+            for (String t : tags.split(", ")) {
+                taggedTask.tag(t, taggedTask);
+                System.out.println(t + ", ");
+                res.append(t + ", ");
             }
             return res.toString();
         } else {
