@@ -14,15 +14,18 @@ public class TaskList {
         this.tasks = new ArrayList<Task>();
     }
 
-    public void displayTasks() {
+    public String displayTasks() {
+        String s = "";
         if (tasks.isEmpty()) {
-            System.out.println("    No tasks");
+            s += "    No tasks";
         } else {
             for (int i = 0; i < tasks.size(); i++) {
                 Task task = tasks.get(i);
-                System.out.println("    " + (i + 1) + ". " + task);
+                s += "    " + (i + 1) + ". " + task;
+                s += i != tasks.size() ? "\n" : "";
             }
         }
+        return s;
     }
 
     public ArrayList<Task> getTasks() {
