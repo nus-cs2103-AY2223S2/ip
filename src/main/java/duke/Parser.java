@@ -4,41 +4,27 @@ public class Parser {
 
     public Command parseInput(String input) throws DukeException {
         if (input.equals("bye")) {
-
             return new Command("bye", null);
-
         } else if (input.equals("list")) {
-
             return new Command("list", null);
-
         } else if (input.startsWith("mark")) {
-
             String index = input.split(" ", 2)[1];
             String[] markData = { index };
             return new Command("mark", markData);
-
         } else if (input.startsWith("unmark")) {
-
             String index = input.split(" ", 2)[1];
             String[] markData = { index };
             return new Command("unmark", markData);
-
         } else if (input.startsWith("todo")) {
-
             return createTodo(input);
-
         } else if (input.startsWith("deadline")) {
-
             return createDeadline(input);
-
         } else if (input.startsWith("event")) {
-
             return createEvent(input);
-
         } else if (input.startsWith("delete")) {
-
             return deleteTask(input);
-
+        } else if (input.startsWith("find")) {
+            return findTasks(input);
         } else {
             throw new DukeException("I DON'T UNDERSTAND THAT!");
         }
@@ -116,6 +102,19 @@ public class Parser {
         String[] deleteData = { index };
 
         return new Command("deleteTask", deleteData);
+    }
+
+    private Command findTasks(String input) throws DukeException {
+        // Error handling
+        if (input.length() <= 5) {
+            throw new DukeException("FIND NEEDS A TASK NUMBER!");
+        }
+
+        // Get find keyword
+        String keyword = input.split(" ", 2)[1];
+        String[] findData = { keyword };
+
+        return new Command("find", findData);
     }
 
 }

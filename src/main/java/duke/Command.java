@@ -1,5 +1,7 @@
 package duke;
 
+import java.util.ArrayList;
+
 /**
  * Class that represents a Command consisting of a type and data.
  * Type refers to todo, deadline or event.
@@ -71,7 +73,9 @@ public class Command {
                 taskList.saveList();
                 break;
             case "find":
-
+                String keyword = data[0];
+                ArrayList<Task> matchingTasks = taskList.findTasks(keyword);
+                ui.showFindList(matchingTasks);
                 break;
         }
     }

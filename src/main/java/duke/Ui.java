@@ -1,5 +1,6 @@
 package duke;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -101,6 +102,23 @@ public class Ui {
                     "[" + taskList.getTask(i).getIcon() + "]" +
                     "[" + taskList.getTask(i).getStatusIcon() + "] " +
                     taskList.getTask(i));
+        }
+        System.out.println(horizontalLine);
+    }
+
+    /**
+     * Displays the list of tasks given in the input (for find feature)
+     *
+     * @param taskList The task list to show
+     */
+    public void showFindList(ArrayList<Task> taskList) {
+        System.out.println(horizontalLine);
+        System.out.println("HERE ARE THE MATCHING TASKS!");
+        for (int i = 0; i < taskList.size(); i++) {
+            System.out.println("" + (i+1) + ". " +
+                    "[" + taskList.get(i).getIcon() + "]" +
+                    "[" + taskList.get(i).getStatusIcon() + "] " +
+                    taskList.get(i));
         }
         System.out.println(horizontalLine);
     }
