@@ -63,6 +63,14 @@ public class Parser {
             } catch (ArrayIndexOutOfBoundsException e) {
                 System.out.println("Please give the index of the task you wish to delete!");
             }
+        } else if (command.startsWith("find")) {
+            try {
+                String keyword = command.split(" ", 2)[1];
+                tasks.findTask(keyword);
+
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("Please input the keyword!");
+            }
         } else {
             throw new UnknownCommandException();
         }
