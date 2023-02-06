@@ -25,7 +25,7 @@ public abstract class UserTask implements Reloadable {
 
 
     /**
-     * Constructs an {@code UserTask} that is a copy of the given task.
+     * Constructs a {@code UserTask} that is a copy of the given task.
      *
      * @param task - the reference task.
      */
