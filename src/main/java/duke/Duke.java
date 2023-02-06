@@ -6,6 +6,7 @@ public class Duke{
     private TaskList tasks;
     private Ui ui;
     
+    // Loads up the previous tasks if there are any.
     public Duke(String filepath) {
         this.ui = new Ui();
         this.storage = new Storage(filepath);
@@ -17,6 +18,10 @@ public class Duke{
         }
     }
 
+    /**
+     * The function runs a loop that reads a command from the user, parses it, executes it, and then
+     * checks if the command is an exit command
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

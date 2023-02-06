@@ -1,5 +1,8 @@
 package duke.tasks;
 
+/**
+ * The Event class extends the Task class and adds a start and end time to the description.
+ */
 public class Event extends Task{
     protected String start;
     protected String end;
@@ -8,7 +11,6 @@ public class Event extends Task{
         super(description);
         this.start = start;
         this.end = end;
-
     }
 
     @Override 
