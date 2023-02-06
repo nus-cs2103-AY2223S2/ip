@@ -31,6 +31,9 @@ public class Event extends Task {
             throw new DukeException("\tPlease enter a valid date in e.g /from yyyy-mm-dd /to yyyy-mm-dd format!");
         }
     }
+    public LocalDate getStartDate() {
+        return this.from;
+    }
 
     /**
      * A method that converts the Event into its String representation.

@@ -8,6 +8,7 @@ import duke.command.EventCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
+import duke.command.ReminderCommand;
 import duke.command.ToDoCommand;
 import duke.command.UnmarkCommand;
 
@@ -25,7 +26,8 @@ public class Parser {
         event,
         todo,
         delete,
-        find
+        find,
+        reminders
     }
     private static boolean isFine;
     /**
@@ -97,6 +99,8 @@ public class Parser {
                     isFine = true;
                     return new FindCommand(splitString[1].split(" "));
                 }
+            case reminders:
+                return new ReminderCommand();
             default:
                 throw new DukeException("\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
