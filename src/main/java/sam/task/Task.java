@@ -41,7 +41,7 @@ public abstract class Task {
         return title.contains(subString);
     }
 
-     /**
+    /**
      * Returns a char representing the status of the task.
      *
      * @return An X if the task is done, or a blank space otherwise.
