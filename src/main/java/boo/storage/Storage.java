@@ -10,7 +10,7 @@ import java.time.temporal.Temporal;
 import java.util.Scanner;
 
 import boo.datetime.DateTime;
-import boo.exception.DukeException;
+import boo.exception.BooException;
 import boo.task.Deadline;
 import boo.task.Event;
 import boo.task.Task;
@@ -120,7 +120,7 @@ public class Storage {
                         Temporal start = DateTime.getDateTimeObject(currentTaskArray[3]);
                         Temporal end = DateTime.getDateTimeObject(currentTaskArray[4]);
                         if (!DateTime.isValidDuration(start, end)) {
-                            throw new DukeException("Start date must be before end date.");
+                            throw new BooException("Start date must be before end date.");
                         }
                         Task eventTask = new Event(currentTaskArray[2], currentTaskArray[3], currentTaskArray[4],
                                 start, end);
@@ -129,8 +129,8 @@ public class Storage {
                         }
                         tasks.addTask(eventTask);
                         break;
-                    } catch (DukeException dukeException) {
-                        System.out.println(dukeException.getMessage());
+                    } catch (BooException booException) {
+                        System.out.println(booException.getMessage());
                         return false;
                     } catch (DateTimeParseException e) {
                         System.out.println("Dates stored are corrupted. Cannot read from data file.");

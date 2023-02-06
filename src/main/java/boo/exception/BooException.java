@@ -1,15 +1,15 @@
 package boo.exception;
 
 /**
- * Represents an exception related to the Duke chatbot.
+ * Represents an exception related to the Boo chatbot.
  */
-public class DukeException extends Exception {
+public class BooException extends Exception {
     /**
      * Constructs an exception message indicating the reason for exception.
      *
      * @param exceptionMessage Message to be displayed when the exception occurs.
      */
-    public DukeException(String exceptionMessage) {
+    public BooException(String exceptionMessage) {
         super(exceptionMessage);
     }
 }
