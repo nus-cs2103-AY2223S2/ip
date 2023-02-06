@@ -16,18 +16,17 @@ public class Commands {
     public static String executeListCommand(TaskList taskList) {
         if (taskList.isEmpty()) {
             return "You currently have no task.";
-        } else {
-            StringBuilder outputString = new StringBuilder("Here are the tasks in your list:\n");
-            for (int i = 0; i < taskList.getArraySize(); i++) {
-                Task currentTask = taskList.getTask(i);
-                int taskIndex = i + 1;
-                String currentString = taskIndex + ". " + currentTask + "\n";
-                outputString.append(currentString);
-            }
-            return outputString.toString();
         }
-    }
 
+        StringBuilder outputString = new StringBuilder("Here are the tasks in your list:\n");
+        for (int i = 0; i < taskList.getArraySize(); i++) {
+            Task currentTask = taskList.getTask(i);
+            int taskIndex = i + 1;
+            String currentString = taskIndex + ". " + currentTask + "\n";
+            outputString.append(currentString);
+        }
+        return outputString.toString();
+    }
     /**
      * Executes the find command.
      *
@@ -37,23 +36,26 @@ public class Commands {
     public static String executeFindCommand(String searchTerm, TaskList taskList) {
         if (taskList.isEmpty()) {
             return "You currently have no task.";
-        } else {
-            StringBuilder outputString = new StringBuilder("Here are the matching tasks in your list:\n");
-            int countLabel = 1;
-            for (int i = 0; i < taskList.getArraySize(); i++) {
-                String currentTaskDescription = taskList.getTask(i).getDescription();
-                if (currentTaskDescription.contains(searchTerm)) {
-                    String currentString = countLabel + ". " + taskList.getTask(i) + "\n";
-                    outputString.append(currentString);
-                    countLabel++;
-                }
-            }
-            if (countLabel == 1) {
-                // there is no task with the keyword.
-                return "Here are no matching task in your list.\n";
-            }
-            return outputString.toString();
         }
+
+        StringBuilder outputString = new StringBuilder("Here are the matching tasks in your list:\n");
+
+        int countLabel = 1;
+        for (int i = 0; i < taskList.getArraySize(); i++) {
+            String currentTaskDescription = taskList.getTask(i).getDescription();
+            if (currentTaskDescription.contains(searchTerm)) {
+                String currentString = countLabel + ". " + taskList.getTask(i) + "\n";
+                outputString.append(currentString);
+                countLabel++;
+            }
+        }
+
+        if (countLabel == 1) {
+            // there is no task with the keyword.
+            return "Here are no matching task in your list.\n";
+        }
+
+        return outputString.toString();
     }
 
     /**
@@ -92,15 +94,16 @@ public class Commands {
     public static String executeUnmarkCommand(String input, TaskList taskList, Storage storage)
             throws DukeException {
         int indexToUnmark = Integer.parseInt(input) - 1;
-        if (indexToUnmark < taskList.getArraySize()) {
-            Task toUnmark = taskList.getTask(indexToUnmark);
-            toUnmark.markAsUndone();
-            storage.saveTaskListToStorage(taskList);
-            assert toUnmark.isDone() : "Un-marking of the task failed.";
-            return "OK, I've marked this task as not done yet:\n" + toUnmark;
-        } else {
+
+        if (indexToUnmark >= taskList.getArraySize()) {
             throw new DukeException("Invalid, there is no such task");
         }
+
+        Task toUnmark = taskList.getTask(indexToUnmark);
+        toUnmark.markAsUndone();
+        storage.saveTaskListToStorage(taskList);
+        assert toUnmark.isDone() : "Un-marking of the task failed.";
+        return "OK, I've marked this task as not done yet:\n" + toUnmark;
     }
 
     /**
@@ -116,13 +119,15 @@ public class Commands {
     public static String executeDeleteCommand(String input, TextUi textUi, TaskList taskList, Storage storage)
             throws DukeException {
         int indexToDelete = Integer.parseInt(input) - 1;
-        if (indexToDelete < taskList.getArraySize()) {
-            taskList.removeTask(indexToDelete);
-            storage.saveTaskListToStorage(taskList);
-            return textUi.getTaskRemovedMessage(taskList.getTask(indexToDelete), taskList.getArraySize() - 1);
-        } else {
+
+        if (indexToDelete >= taskList.getArraySize()) {
             throw new DukeException("Invalid, there is no such task");
         }
+
+        taskList.removeTask(indexToDelete);
+        storage.saveTaskListToStorage(taskList);
+        return textUi.getTaskRemovedMessage(taskList.getTask(indexToDelete), taskList.getArraySize() - 1);
+
     }
 
     /**
@@ -141,7 +146,10 @@ public class Commands {
         if (processedString.equals("todo")) {
             throw new DukeException("The description of a todo cannot be empty.");
         }
+
         Task newTask = new ToDo(input);
+        assert newTask != null : "Something went wrong when creating a new todo task.";
+
         taskList.addTask(newTask);
         storage.saveTaskListToStorage(taskList);
         return textUi.getTaskAddedMessage(newTask, taskList.getArraySize());
@@ -163,13 +171,15 @@ public class Commands {
         if (processedString.equals("deadline")) {
             throw new DukeException("The description of a deadline cannot be empty.");
         }
+
         String[] str = input.split("/");
         Task newTask = new Deadline(str[0].substring(0, str[0].length() - 1),
                 LocalDate.parse(str[1].substring(3)));
+        assert newTask != null : "Something went wrong when creating a new deadline task.";
+
         taskList.addTask(newTask);
         storage.saveTaskListToStorage(taskList);
         return textUi.getTaskAddedMessage(newTask, taskList.getArraySize());
-
     }
 
     /**
@@ -188,10 +198,13 @@ public class Commands {
         if (processedString.equals("event")) {
             throw new DukeException("The description of a event cannot be empty.");
         }
+
         String[] str = input.split("/");
         Task newTask = new Event(str[0].substring(0, str[0].length() - 1),
                 LocalDate.parse(str[1].substring(5, str[1].length() - 1)),
                 LocalDate.parse(str[2].substring(3)));
+        assert newTask != null : "Something went wrong when creating a new Event task.";
+
         taskList.addTask(newTask);
         storage.saveTaskListToStorage(taskList);
         return textUi.getTaskAddedMessage(newTask, taskList.getArraySize());
