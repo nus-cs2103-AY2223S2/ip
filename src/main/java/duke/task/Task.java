@@ -34,7 +34,7 @@ public abstract class Task implements Serializable {
 
     @Override
     public String toString() {
-        return String.format("%s%s %s", getStatusIcon(), getType(), desc);
+        return String.format("%s%s[%s] %s", getStatusIcon(), getType(), priority, desc);
     }
 
     protected String getStatusIcon() {
