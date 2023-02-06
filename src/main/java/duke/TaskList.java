@@ -29,7 +29,7 @@ public class TaskList implements Serializable {
      *
      * @param desc Description of to-do
      */
-    void addTodo(String desc) {
+    public void addTodo(String desc) {
         try {
             list.add(new ToDo(desc));
             System.out.println("Added: " + desc);
@@ -38,7 +38,12 @@ public class TaskList implements Serializable {
         }
     }
 
-    TaskList find(String desc) {
+    /**
+     * Finds all events with description fitting the paramter
+     * @param desc desc to search by
+     * @return new TaskList with searched results
+     */
+    public TaskList find(String desc) {
         return new TaskList(list
                 .stream()
                 .filter((task) -> task.desc.contains(desc))
@@ -52,7 +57,7 @@ public class TaskList implements Serializable {
      * @param from start time of event
      * @param to   end time of event
      */
-    void addEvent(String desc, String from, String to) {
+    public void addEvent(String desc, String from, String to) {
         try {
             list.add(new Event(desc, from, to));
             System.out.println("Added: " + desc);
@@ -67,7 +72,7 @@ public class TaskList implements Serializable {
      * @param desc     Description of to-do
      * @param deadline deadline of task
      */
-    void addDeadline(String desc, String deadline) {
+    public void addDeadline(String desc, String deadline) {
         try {
             list.add(new Deadline(desc, deadline));
             System.out.println("Added: " + desc);
@@ -81,7 +86,7 @@ public class TaskList implements Serializable {
      *
      * @param index index of task
      */
-    void mark(int index) {
+    public void mark(int index) {
         try {
             list.get(index).setIsDone(true);
         } catch (IndexOutOfBoundsException e) {
@@ -94,7 +99,7 @@ public class TaskList implements Serializable {
      *
      * @param index index of task
      */
-    void unmark(int index) {
+    public void unmark(int index) {
         try {
             list.get(index).setIsDone(false);
         } catch (IndexOutOfBoundsException e) {
@@ -107,11 +112,11 @@ public class TaskList implements Serializable {
      *
      * @param index index of task
      */
-    void delete(int index) {
+    public void delete(int index) {
         list.remove(index);
     }
 
-    List<Task> getList() {
+    public List<Task> getList() {
         return list;
     }
 

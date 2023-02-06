@@ -1,6 +1,7 @@
 package duke.ui;
 
 import duke.Duke;
+import duke.TaskException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -21,7 +22,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private TextField userInput;
     @FXML
-    Button sendButton;
+    private Button sendButton;
 
 
     /**
@@ -40,9 +41,14 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
-        dialogContainer.getChildren().addAll(new Label(input), new Label(response));
-        userInput.clear();
-        assert userInput.getText().equals("");
+        try {
+            String response = duke.getResponse(input);
+            dialogContainer.getChildren().addAll(new Label(input), new Label(response));
+        } catch (TaskException e) {
+            dialogContainer.getChildren().addAll(new Label(input), new Label(e.getMessage()));
+        } finally {
+            userInput.clear();
+            assert userInput.getText().equals("");
+        }
     }
 }
