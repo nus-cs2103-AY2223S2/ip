@@ -37,7 +37,11 @@ public class Parser {
 
         if (firstWord.equals("mark") || firstWord.equals("unmark") || firstWord.equals("delete") || firstWord.equals("todo") ||
                 firstWord.equals("deadline") || firstWord.equals("event") || firstWord.equals("find")) {
+            assert(s.length > 0 && s.length <= 2);
             if (s.length <= 1) { throw new InvalidArgumentException();} //might wanna chk for firstWord first
+
+            assert (firstWord.equals("mark") || firstWord.equals("unmark") || firstWord.equals("delete") || firstWord.equals("todo") ||
+                    firstWord.equals("deadline") || firstWord.equals("event") || firstWord.equals("find"));
 
             switch (firstWord) {
             case "mark":
