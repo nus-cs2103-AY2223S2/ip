@@ -62,12 +62,13 @@ public class TaskList {
      * @param isDone Indicates whether the task is done.
      * @return {@code true} if successful.
      */
-    public boolean setTaskDone(int id, boolean isDone) {
+    public Task setTaskDone(int id, boolean isDone) {
         if (!isValidId(id)) {
-            return false;
+            return null;
         }
-        getTask(id).setDone(isDone);
-        return true;
+        Task task = getTask(id);
+        task.setDone(isDone);
+        return task;
     }
 
     /**

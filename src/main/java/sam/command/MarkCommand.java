@@ -7,6 +7,7 @@ import sam.parser.SamInvalidTaskException;
 import sam.storage.SamSaveFailedException;
 import sam.storage.Storage;
 import sam.task.SamMissingTaskException;
+import sam.task.Task;
 import sam.task.TaskList;
 
 /**
@@ -34,15 +35,15 @@ public class MarkCommand extends Command {
             throw new SamMissingTaskException();
         }
         int id = Parser.parseInt(args);
-        boolean isSuccessful = tasks.setTaskDone(id, isDone);
-        if (!isSuccessful) {
+        Task task = tasks.setTaskDone(id, isDone);
+        if (task == null) {
             throw new SamInvalidTaskException();
         }
         String message = isDone
                 ? Ui.Dialog.MARK.getDialog()
                 : Ui.Dialog.UNMARK.getDialog();
         ui.respond(message,
-                tasks.getTask(id).toString());
+                task.toString());
         storage.save(tasks);
     }
 }
