@@ -128,7 +128,7 @@
 .schedule-box {
     -fx-background-color: -fx-shadow-highlight-color, -fx-outer-border, -fx-inner-border, -fx-body-color;
     -fx-background-insets: 1 1 0 1, 1, 2, 3;
-    -fx-background-radius : 10, 10, 9, 8;
+    -fx-background-radius : 3, 3, 2, 1;
 }
 
 .schedule-box:complete {

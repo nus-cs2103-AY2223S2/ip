@@ -22,7 +22,6 @@ public class DaySchedule extends HBox {
     private static final double ROW_HEIGHT = 20;
     private static final double HOURS_IN_A_DAY = 24;
     private static final double MINUTES_IN_A_DAY = 1440;
-    private static final double MICRO_IN_MINUTE = 6E7;
     private static final double MIN_BLOCK_WIDTH = ROW_HEIGHT;
     private static final double TOOLTIP_SHOW_DELAY = 0;
     private static final double TOOLTIP_HIDE_DELAY = 0;
@@ -125,11 +124,14 @@ public class DaySchedule extends HBox {
             double startOffset = startTime.until(timeable.getStart(), ChronoUnit.MINUTES);
             double startX = convertMinsToRowPix(startOffset);
 
-            double durationMins = timeable.duration() / MICRO_IN_MINUTE;
-            double width = convertMinsToRowPix(durationMins);
+            double endOffset = startTime.until(timeable.getEnd(), ChronoUnit.MINUTES);
+            double endX = convertMinsToRowPix(endOffset);
 
+            double width = endX - startX;
             if (width <= MIN_BLOCK_WIDTH) {
                 startX -= MIN_BLOCK_WIDTH / 2;
+                startX = Math.max(0D, startX);
+                startX = Math.min(rowWidth - MIN_BLOCK_WIDTH, startX);
                 width = MIN_BLOCK_WIDTH;
             }
 
