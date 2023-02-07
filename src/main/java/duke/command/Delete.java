@@ -19,7 +19,9 @@ public class Delete extends Command {
             throw new DukeException("Please specify a valid task number.");
         }
         Task t = tasks.get(index-1);
+        Integer size = tasks.size();
         tasks.remove(index-1);
+        assert size - 1 == tasks.size();
         return ui.showDelete(t, tasks.size());
     }
 }
