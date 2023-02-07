@@ -1,8 +1,8 @@
 package duke.commands;
 
-import duke.Parser;
 import duke.Ui;
 import duke.exceptions.ListIndexMissing;
+import duke.parsing.Parser;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 

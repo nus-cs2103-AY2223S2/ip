@@ -1,7 +1,7 @@
 package duke.commands;
 
-import duke.Parser;
 import duke.exceptions.CommandExecutionError;
+import duke.parsing.Parser;
 import duke.tasks.TaskList;
 
 public class FindCmd extends Command {
