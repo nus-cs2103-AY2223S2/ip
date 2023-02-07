@@ -32,7 +32,6 @@ public class Parser {
      * @return Task object specified by the user command.
      * @throws DukeException User provide invalid command.
      */
-
     public Task getTaskToAdd(String[] command) throws DukeException {
         if (command.length < 2) {
             throw new DukeException("Invalid input");

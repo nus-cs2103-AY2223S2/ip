@@ -71,30 +71,41 @@ public class Duke {
     public String getResponse(String input) {
         String[] command = input.split(" ", 2);
         try {
-            if (command[0].equals("bye")) {
+            switch (command[0]) {
+            case "bye":
                 saveTasksToFile();
                 return "";
-            } else if (command[0].equals("list")) {
+            case "list":
                 return taskList.listTasks();
-            } else if (command[0].equals("mark")) {
+            case "mark": {
                 int taskNum = parser.getTaskNum(command);
                 taskList.markTask(parser.getTaskNum(command));
-                return ui.formatSuccessMessage("Nice! I've marked this task as done:", taskList.getTask(taskNum));
-            } else if (command[0].equals("unmark")) {
+                return ui.formatSuccessMessage("Nice! I've marked this task as done:",
+                        taskList.getTask(taskNum));
+            }
+            case "unmark": {
                 int taskNum = parser.getTaskNum(command);
                 taskList.unmarkTask(taskNum);
-                return ui.formatSuccessMessage("OK, I've marked this task as not done yet:", taskList.getTask(taskNum));
-            } else if (command[0].equals("delete")) {
+                return ui.formatSuccessMessage("OK, I've marked this task as not done yet:",
+                        taskList.getTask(taskNum));
+            }
+            case "delete": {
                 int taskNum = parser.getTaskNum(command);
                 Task removedTask = taskList.deleteTask(taskNum);
-                return ui.formatTaskMessage("Noted. I've removed this task:", removedTask, taskList.getSize());
-            } else if (command[0].equals("find")) {
+                return ui.formatTaskMessage("Noted. I've removed this task:",
+                        removedTask, taskList.getSize());
+            }
+            case "find":
                 String keyword = parser.getKeyword(command);
                 return ui.formatFindResult(taskList.getTasksWithKeyword(keyword));
-            } else {
+            case "todo":
+            case "deadline":
+            case "event":
                 taskList.addTask(parser.getTaskToAdd(command));
                 return ui.formatTaskMessage("Got it. I've added this task:",
                         taskList.getLatestTask(), taskList.getSize());
+            default:
+                throw new DukeException("I do not understand");
             }
         } catch (DukeException e) {
             return e.getMessage();
