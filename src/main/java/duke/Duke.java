@@ -19,17 +19,13 @@ public class Duke {
     public Duke() {
         this.storage = new Storage();
         this.tasks = new TaskList();
+        this.storage.updateTasks(this.tasks);
         this.parser = new Parser();
     }
 
-    /**
-     * Starts program and stores data into log after done.
-     */
-    public void run() {
-        this.storage.update(tasks.print());
-    }
-
     public String getResponse(String input) {
-        return this.parser.readCommand(input, this.tasks);
+        String str = this.parser.readCommand(input, this.tasks);
+        this.storage.update(tasks.print());
+        return str;
     }
 }

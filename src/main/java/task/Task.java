@@ -1,7 +1,7 @@
 package task;
 
 /**
- * Represents an entry in the to-do list
+ * Represents an entry in the to-do list.
  */
 public class Task {
     private String instruction;

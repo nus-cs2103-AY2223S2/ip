@@ -1,5 +1,7 @@
 package task;
 
+import support.DateConverter;
+
 import java.util.ArrayList;
 
 /**
@@ -11,12 +13,12 @@ public class TaskList {
     // default constructor
     public String add(Task task) {
         records.add(task);
-        return "B: " + task.toString() + "has been added";
+        return "B: " + task.toString() + " has been added";
     }
 
     public String delete(int x) {
         Task temp = records.remove(x-1);
-        return "B: " + temp.toString() + "has been removed";
+        return "B: " + temp.toString() + " has been removed";
     }
 
     public String print() {
@@ -72,5 +74,39 @@ public class TaskList {
         }
 
         return ans;
+    }
+
+    /**
+     * Reads tasks from previous record as string and adds to current list.
+     * @param str Output format of task
+     */
+    public void addFromFile(String str) {
+        char tasktype = str.charAt(4);
+        char marked = str.charAt(7);
+        String name = str.substring(10);
+
+        switch (tasktype) {
+            case 'T':
+                this.records.add(new Todo(name));
+                break;
+
+            case 'D':
+                int idx = str.indexOf("(by:");
+                String dueDate = DateConverter.dateFormatter(str.substring(idx + 5));
+                this.records.add(new Deadline("deadline " + str.substring(10, idx-1), dueDate));
+                break;
+
+            case 'E':
+                int startIdx = str.indexOf("(from: ");
+                int endIdx = str.indexOf("to: ");
+                String startDate = DateConverter.dateFormatter(str.substring(startIdx + 7));
+                String endDate = DateConverter.dateFormatter(str.substring(endIdx + 4));
+                this.records.add(new Event("event " + str.substring(10, startIdx), startDate, endDate));
+        }
+
+        if (marked == 'X') {
+            int last = this.records.size();
+            mark(last);
+        }
     }
 }

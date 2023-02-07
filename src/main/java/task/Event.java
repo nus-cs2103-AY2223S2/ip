@@ -1,6 +1,11 @@
 package task;
 
 import java.time.LocalDate;
+
+/**
+ * One of the three types of task a user can add.
+ * Consist of 2 date elements (beginning and end).
+ */
 public class Event extends Task {
     private LocalDate start;
     private LocalDate end;

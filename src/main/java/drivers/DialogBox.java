@@ -5,6 +5,10 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
+/**
+ * Contains message components for GUI
+ */
+
 public class DialogBox extends HBox {
 
     private Label text;

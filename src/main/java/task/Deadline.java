@@ -1,6 +1,11 @@
 package task;
 
 import java.time.LocalDate;
+
+/**
+ * One of the three types of task a user can add.
+ * Consist of 1 date element.
+ */
 public class Deadline extends Task {
     private LocalDate date;
 
