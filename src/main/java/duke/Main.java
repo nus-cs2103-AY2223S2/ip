@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     private String home = System.getProperty("user.home");
-    private Duke duke = new Duke(home);
+    private Duke duke;
 
     @Override
     public void start(Stage stage) {
@@ -23,6 +23,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            this.duke = new Duke(home);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
         } catch (IOException e) {

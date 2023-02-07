@@ -92,18 +92,14 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     protected String getResponse(String input) {
-        if (input.equals("bye")) {
-            return "OK bye.";
-        } else {
-            try {
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                System.setOut(new PrintStream(baos));
-                parser.parse(input);
-                storage.save(tasks.tasks);
-                return baos.toString();
-            } catch (DukeException e) {
-                return e.getMessage();
-            }
+        try {
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            System.setOut(new PrintStream(baos));
+            parser.parse(input);
+            storage.save(tasks.tasks);
+            return baos.toString();
+        } catch (DukeException e) {
+            return e.getMessage();
         }
     }
 
