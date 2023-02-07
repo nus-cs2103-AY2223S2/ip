@@ -23,7 +23,7 @@ public class Gui extends Application  {
     private VBox dialogContainer;
     private TextField userInput;
     private Button sendButton;
-    private final Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private final Image user = new Image(this.getClass().getResourceAsStream("/images/Hank.png"));
     private final Image duke = new Image(this.getClass().getResourceAsStream("/images/Connor.png"));
     private Connor connor;
     private Label getDialogLabel(String text) {
