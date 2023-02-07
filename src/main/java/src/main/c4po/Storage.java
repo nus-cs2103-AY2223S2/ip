@@ -52,7 +52,7 @@ public class Storage {
 
     /**
      * Loads the tasks from the given file path, into a ArrayList<Task>
-     * to be accepted by TaskList constructor
+     * to be accepted byRec TaskList constructor
      */
     public ArrayList<Task> load() throws FileNotFoundException {
 
