@@ -19,6 +19,10 @@ public class Duke {
     static final String FROM_SUBSTRING = " /from ";
     static final String TO_SUBSTRING = " /to ";
     static final String BY_SUBSTRING = " /by ";
+    static final String BLANK_ERROR_MSG = "BLANK-ERROR-69";
+    static final String TODO_FORMAT = "todo [task]";
+    static final String EVENT_FORMAT = "event [task] /from [YYYY-MM-DD] /to [YYYY-MM-DD]";
+    static final String DEADLINE_FORMAT = "deadline [task] /by [YYYY-MM-DD]";
 
     /**
      * Handles identifying task type.
@@ -44,6 +48,7 @@ public class Duke {
         this.storage = new Storage(taskList);
         this.parser = new Parser();
         storage.initializeList();
+        taskList.sort();
     }
 
     /**
@@ -74,8 +79,7 @@ public class Duke {
                 ui.displayText("Now you have " + taskList.size() + " tasks in the list.");
                 break;
             } catch (Exception e) {
-                ui.displayText("Invalid format, please try again using [task] "
-                        + "/from [YYYY-MM-DD] /to [YYYY-MM-DD]");
+                ui.displayText("Invalid format, please try again, type '" + EVENT_FORMAT + "'");
                 break;
             }
         case DEADLINE:
@@ -89,12 +93,13 @@ public class Duke {
                 ui.displayText("Now you have " + taskList.size() + " tasks in the list.");
                 break;
             } catch (Exception e) {
-                ui.displayText("Invalid format, please try again using [task] /by [YYYY-MM-DD]");
+                ui.displayText("Invalid format, please try again, type '" + DEADLINE_FORMAT + "'");
                 break;
             }
         default:
             break;
         }
+        taskList.sort();
         storage.saveToFile();
     }
 
@@ -105,7 +110,8 @@ public class Duke {
      */
     public void mark(int itemNo) throws DukeException {
         if (taskList.size() <= itemNo || itemNo < 0) {
-            throw new DukeException("Task number is invalid, please enter a valid task number!");
+            throw new DukeException("Task number is invalid, please enter a valid task number from 1 to "
+                    + taskList.size() + "!");
         }
         assert taskList.size() > itemNo;
         taskList.get(itemNo).setDone(true);
@@ -121,7 +127,8 @@ public class Duke {
      */
     public void unmark(int itemNo) throws DukeException {
         if (taskList.size() <= itemNo || itemNo < 0) {
-            throw new DukeException("Task number is invalid, please enter a valid task number!");
+            throw new DukeException("Task number is invalid, please enter a valid task number from 1 to "
+                    + taskList.size() + "!");
         }
         assert taskList.size() > itemNo;
         taskList.get(itemNo).setDone(false);
@@ -138,7 +145,8 @@ public class Duke {
     public void delete(int itemNo) throws DukeException {
         int initialSize = taskList.size();
         if (taskList.size() <= itemNo || itemNo < 0) {
-            throw new DukeException("Task number is invalid, please enter a valid task number!");
+            throw new DukeException("Task number is invalid, please enter a valid task number from 1 to "
+                    + taskList.size() + "!");
         }
         assert taskList.size() > itemNo;
         ui.displayText("Noted. I've removed this task: "
@@ -178,16 +186,53 @@ public class Duke {
     /**
      * List out all tasks.
      */
-    public void list() {
+    public void getList() {
         if (taskList.size() == 0) {
-            ui.displayText("Congrats! You have 0 tasks!!");
+            ui.displayText("Congrats! You have 0 tasks left!!");
         } else {
             assert taskList.size() > 0;
             ui.displayText("Here are the tasks in your list:");
             for (int i = 0; i < taskList.size(); i++) {
-                ui.displayText(String.format("%d. %s", i + 1,
-                        taskList.get(i).toString()));
+                ui.displayText(String.format("%d. %s", i + 1, taskList.get(i).toString()));
             }
+        }
+    }
+
+    /**
+     * Provide details of given command.
+     * If given command is invalid, brief details of all commands will be provided.
+     *
+     * @param cmd User's given command.
+     */
+    public void getHelp(String cmd) {
+        switch (cmd) {
+        case "list":
+            ui.displayText("Type 'list' - returns all tasks");
+            break;
+        case "todo":
+            ui.displayText("Type '" + TODO_FORMAT + "' - add todo task to list");
+            break;
+        case "deadline":
+            ui.displayText("Type '" + DEADLINE_FORMAT + "' - add deadline task to list");
+            break;
+        case "event":
+            ui.displayText("Type '" + EVENT_FORMAT + "' - add event task to list");
+            break;
+        case "mark":
+            ui.displayText("Type 'mark [task #]' - mark task from list");
+            break;
+        case "unmark":
+            ui.displayText("Type 'unmark [task #]' - unmark task from list");
+            break;
+        case "delete":
+            ui.displayText("Type 'delete [task #]' - deletes task from list");
+            break;
+        case "find":
+            ui.displayText("Type 'find [keyword]' - returns all tasks containing keyword");
+            break;
+        default:
+            ui.displayText("Here are a list of commands, for more info type 'help [cmd]':\n"
+                    + "- list\n- todo\n- deadline\n- event\n- mark\n- unmark\n- delete\n- find");
         }
     }
 
@@ -207,13 +252,22 @@ public class Duke {
         try {
             String cmd = parser.getCmd(userInput);
             switch (cmd) {
+            case "help":
+                getHelp(parser.getDescription(userInput));
+                break;
             case "list":
-                list();
+                getList();
                 break;
             case "mark":
+                if (parser.getDescription(userInput).equals(BLANK_ERROR_MSG)) {
+                    throw new DukeException("Please provide a task number to mark!");
+                }
                 mark(Integer.parseInt(parser.getDescription(userInput)) - 1);
                 break;
             case "unmark":
+                if (parser.getDescription(userInput).equals(BLANK_ERROR_MSG)) {
+                    throw new DukeException("Please provide a task number to unmark!");
+                }
                 unmark(Integer.parseInt(parser.getDescription(userInput)) - 1);
                 break;
             case "todo":
@@ -226,6 +280,9 @@ public class Duke {
                 addTask(parser.getDescription(userInput, DEADLINE_LENGTH), TaskType.DEADLINE);
                 break;
             case "delete":
+                if (parser.getDescription(userInput).equals(BLANK_ERROR_MSG)) {
+                    throw new DukeException("Please provide a task number to delete!");
+                }
                 delete(Integer.parseInt(parser.getDescription(userInput)) - 1);
                 break;
             case "find":

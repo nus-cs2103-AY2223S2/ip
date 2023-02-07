@@ -3,7 +3,7 @@ package duke.task;
 /**
  * Handles task object to encapsulate commonalities in subclasses.
  */
-public class Task {
+public class Task implements Comparable<Task> {
     protected String description;
     protected boolean isDone;
 
@@ -53,6 +53,11 @@ public class Task {
      */
     public void setDone(boolean status) {
         this.isDone = status;
+    }
+
+    @Override
+    public int compareTo(Task otherTask) {
+        return this.toString().compareTo(otherTask.toString());
     }
 
     /**

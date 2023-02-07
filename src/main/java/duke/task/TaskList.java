@@ -1,6 +1,7 @@
 package duke.task;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Handles storing of the tasks to task list.
@@ -51,5 +52,9 @@ public class TaskList {
      */
     public void remove(int index) {
         this.taskList.remove(index);
+    }
+
+    public void sort() {
+        Collections.sort(this.taskList);
     }
 }
