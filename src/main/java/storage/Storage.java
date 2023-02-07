@@ -52,6 +52,8 @@ public class Storage {
             if (!(new File(filePath).exists())) {
                 Files.createDirectories(Paths.get(directory));
             }
+            assert new File(filePath).exists() : String.format("The file path %s does not exist", filePath);
+
             File file = new File(filePath);
             file.createNewFile();
 
