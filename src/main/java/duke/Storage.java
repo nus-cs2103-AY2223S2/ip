@@ -44,7 +44,6 @@ public class Storage {
     /**
      * Loads all the task from the previous run.
      * Tasks are all saved in a separate file.
-     * Asserts that the file must exist at the point of loading tasks.
      *
      * @param taskList the current tasklist
      * @throws IOException catch for Input and Output inconsistencies.
@@ -59,8 +58,6 @@ public class Storage {
         if (!file.exists()) {
             file.createNewFile();
         }
-
-        assert file.exists(): "File that is to save Tasks does not exist!";
 
         Scanner sc = new Scanner(file);
 
