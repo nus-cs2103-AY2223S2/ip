@@ -6,19 +6,19 @@ import java.io.IOException;
 
 public class Parser {
 
-    private static int TASK_TYPE_INDEX = 0;
-    private static int TASK_IS_DONE_INDEX = 1;
-    private static int TASK_DESCRIPTION = 2;
-    private static int START_TIME_INDEX = 3;
-    private static int END_TIME_INDEX = 4;
-    private static int TODO_TASK_DESCRIPTION_INDEX = 5;
-    private static int DEADLINE_TASK_DESCRIPTION_INDEX = 9;
-    private static int EVENT_TASK_DESCRIPTION_INDEX = 6;
-    private static int TASK_NAME_INDEX = 0;
-    private static int TASK_START_TIME_INDEX = 1;
-    private static int TASK_END_TIME_INDEX = 2;
-    private static int TO_REMOVE_LEADING_FOUR_LETTERS = 5;
-    private static int TO_REMOVE_LEADING_TWO_LETTERS = 3;
+    private final static int TASK_TYPE_INDEX = 0;
+    private final static int TASK_IS_DONE_INDEX = 1;
+    private final static int TASK_DESCRIPTION = 2;
+    private final static int START_TIME_INDEX = 3;
+    private final static int END_TIME_INDEX = 4;
+    private final static int TODO_TASK_DESCRIPTION_INDEX = 5;
+    private final static int DEADLINE_TASK_DESCRIPTION_INDEX = 9;
+    private final static int EVENT_TASK_DESCRIPTION_INDEX = 6;
+    private final static int TASK_NAME_INDEX = 0;
+    private final static int TASK_START_TIME_INDEX = 1;
+    private final static int TASK_END_TIME_INDEX = 2;
+    private final static int TO_REMOVE_LEADING_FOUR_LETTERS = 5;
+    private final static int TO_REMOVE_LEADING_TWO_LETTERS = 3;
 
     /**
      * Converts a task from the task list format
@@ -86,8 +86,7 @@ public class Parser {
     }
 
     public static String getSearchWord(String line) {
-        String searchWord = line.substring(TO_REMOVE_LEADING_FOUR_LETTERS);
-        return searchWord;
+        return line.substring(TO_REMOVE_LEADING_FOUR_LETTERS);
     }
 
     public static String handleInput(String command, Ui ui, TaskList tasks, Storage storage) throws DukeException,
@@ -131,7 +130,6 @@ public class Parser {
         case "find":
             String searchWord = Parser.getSearchWord(command);
             TaskList tasksFound = tasks.makeTaskFinder(searchWord);
-            storage.updateTaskList(tasks);
             return ui.showFindingTask(tasksFound);
         default:
             throw new DukeException("Command not recognised.");
