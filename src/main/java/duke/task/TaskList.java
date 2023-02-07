@@ -81,8 +81,8 @@ public class TaskList {
         Task taskToRemove = taskList.get(taskNum);
         String removedTaskStr = taskToRemove.toString();
         taskList.remove(taskNum);
-        System.out.println("Noted. I've removed this task: \n  " + removedTaskStr +
-                "\nNow you have " + taskList.size() + " tasks in the list.");
+        System.out.println("Noted. I've removed this task: \n  " + removedTaskStr
+                + "\nNow you have " + taskList.size() + " tasks in the list.");
     }
 
     /**
@@ -103,8 +103,9 @@ public class TaskList {
      * @throws WrongCommandException If command does not exist
      */
     public void wrongCommand(String command) throws WrongCommandException {
-        if (!(command.equals("mark") || command.equals("unmark") || command.equals("todo") ||
-                command.equals("deadline") || command.equals("event") || command.equals("delete"))) {
+        if (!(command.equals("mark") || command.equals("unmark")
+                || command.equals("todo") || command.equals("deadline")
+                || command.equals("event") || command.equals("delete"))) {
             throw new WrongCommandException();
         }
     }

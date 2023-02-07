@@ -37,7 +37,9 @@ public class Event extends Task {
      * @return String of a formatted timeline
      */
     public String getTimeline() {
-        return this.startDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " to " + this.endDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return this.startDate.format(
+                DateTimeFormatter.ofPattern("MMM d yyyy")) + " to "
+                + this.endDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
     @Override

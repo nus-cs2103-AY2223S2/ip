@@ -31,7 +31,7 @@ public class Storage {
     /**
      * Load tasks from file
      * @return List of tasks
-     * @throws IOException In unable to read file
+     * @throws IOException If unable to read file
      */
     public List<Task> load() {
         List<Task> taskList = new ArrayList<>();
@@ -76,7 +76,7 @@ public class Storage {
 
     /**
      * Save the list of tasks in the file
-     * @param taskList
+     * @param taskList List of tasks to be saved
      * @throws IOException When tasks cannot be saved
      */
     public void save(TaskList taskList) {

@@ -55,16 +55,19 @@ public class Parser {
                             break;
 
                         case "deadline":
-                            LocalDate deadline = LocalDate.parse(input.substring(input.indexOf("/") + 4));
+                            LocalDate deadline = LocalDate.parse(
+                                    input.substring(input.indexOf("/") + 4));
                             Task taskDeadline = new Deadline(input, deadline);
                             taskList.addTask(taskDeadline);
                             taskList.printAddComment(taskDeadline);
                             break;
 
                         case "event":
-                            LocalDate startDate = LocalDate.parse(input.substring(input.indexOf("/") + 6,
+                            LocalDate startDate = LocalDate.parse(
+                                    input.substring(input.indexOf("/") + 6,
                                     input.lastIndexOf("/") - 1));
-                            LocalDate endDate = LocalDate.parse(input.substring(input.lastIndexOf("/") + 4));
+                            LocalDate endDate = LocalDate.parse(
+                                    input.substring(input.lastIndexOf("/") + 4));
                             Task taskEvent = new Event(input, startDate, endDate);
                             taskList.addTask(taskEvent);
                             taskList.printAddComment(taskEvent);
