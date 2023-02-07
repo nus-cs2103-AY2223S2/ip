@@ -9,8 +9,9 @@ public class Deadline extends Task {
 
     /**
      * Constructor for Deadline instance.
-     * @param description a simple description of this Deadline Task
-     * @param by a string indicating the time or date this item is due
+     *
+     * @param description a simple description of this Deadline Task.
+     * @param by a string indicating the time or date this item is due.
      */
     public Deadline(String description, String by) {
         super(description);
@@ -19,6 +20,7 @@ public class Deadline extends Task {
 
     /**
      * Returns the string representation of a Deadline instance in MMM d yyyy format.
+     *
      * @return the desired string representation of a Deadline instance.
      */
     @Override
@@ -29,6 +31,7 @@ public class Deadline extends Task {
 
     /**
      * Returns the string representation of a Deadline instance in YYYY-MM-DD format.
+     *
      * @return the desired string representation of a Deadline instance.
      */
     public String parse() {

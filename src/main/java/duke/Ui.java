@@ -2,16 +2,24 @@ package duke;
 
 import javafx.scene.control.Label;
 
-import java.util.ArrayList;
-
 public class Ui {
-    
+
+    /**
+     * Creates a Label with the introductory message.
+     *
+     * @return the Label with the introductory message.
+     */
     public Label introduce() {
         String introString = "Hello! I'm Pearl, your friendly chatbot.\n";
         introString += instruct();
         return new Label(introString);
     }
 
+    /**
+     * Provides instructions on what this chatbot can do.
+     *
+     * @return a Label with the instructions.
+     */
     public String instruct() {
         String instructString = "There are various commands you can instruct me to do.\n";
         instructString += ("A. If you want to see your list of tasks, type 'list'\n");
@@ -29,6 +37,8 @@ public class Ui {
 
     /**
      * Prints the goodbye message upon termination of the chatbot.
+     *
+     * @return a Label with the goodbye message.
      */
     public String terminate() {
         return("Bye. Hope to see you again!\n");

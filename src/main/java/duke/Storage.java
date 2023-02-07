@@ -14,7 +14,8 @@ public class Storage {
 
     /**
      * Constructor for a Storage instance.
-     * @param filePath the filePath where the previous data is stored
+     *
+     * @param filePath the filePath where the previous data is stored.
      */
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -22,6 +23,7 @@ public class Storage {
 
     /**
      * Checks if the file in the given filePath exists.
+     *
      * @return true if the file exists, or false otherwise.
      */
     public boolean isExistFile() {
@@ -34,6 +36,7 @@ public class Storage {
      * Returns the desired File in the filePath.
      * If there was originally no File, a new empty File with a "0" is created.
      * Otherwise, the previously saved File at that filePath is returned.
+     *
      * @return the desired File in the filePath.
      */
 
@@ -72,6 +75,7 @@ public class Storage {
 
     /**
      * Adds and saves the user's tasks into the File at the filePath.
+     *
      * @param tasks the user's list of tasks before termination of the chatbot.
      */
     public void addToFile(TaskList tasks) {

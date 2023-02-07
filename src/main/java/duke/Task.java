@@ -5,8 +5,9 @@ public class Task {
     private boolean isCompleted;
 
     /**
-     * Constructor for a Task instance
-     * @param name the name of this Task as a simple description
+     * Constructor for a Task instance.
+     *
+     * @param name the name of this Task as a simple description.
      */
     public Task(String name) {
         this.name = name;
@@ -24,6 +25,7 @@ public class Task {
     /**
      * Returns the string representation of the task.
      * A [ ] indicates an uncompleted task, while a [X] indicates a completed task.
+     *
      * @return the desired string representation of the task with its description.
      */
     @Override
@@ -42,6 +44,7 @@ public class Task {
     /**
      * Returns the string representation of the task.
      * A [ ] indicates an uncompleted task, while a [X] indicates a completed task.
+     *
      * @return the desired string representation of the task with its description.
      */
     public String parse() {
