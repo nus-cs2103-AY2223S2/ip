@@ -2,6 +2,7 @@ package duke;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TaskList {
     private final ArrayList<Task> taskList;
@@ -65,6 +66,10 @@ public class TaskList {
     public int getSize() {
         return this.taskList.size();
         // return "\nNow you have " + taskList.size() + " items on your list.";
+    }
+
+    public List<Task> findAllTasksWithKeyword(String keyword) {
+        return this.taskList.stream().filter(task -> task.doesDescriptionContain(keyword)).collect(Collectors.toList());
     }
 
     /**
