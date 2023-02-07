@@ -13,12 +13,13 @@ public class UnmarkCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (this.unmarkIdx >= tasks.size()) {
             throw new DukeException(
                 "The task with the given index does not exist.");
         }
-        tasks.get(this.unmarkIdx).unmark(true);
+        String res = tasks.get(this.unmarkIdx).unmark();
+        return res;
     }
 
     @Override

@@ -9,8 +9,9 @@ public class GuideCommand extends Command {
     public GuideCommand() {}
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        ui.showGuide();
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        String res = ui.showGuide();
+        return res;
     }
 
     @Override

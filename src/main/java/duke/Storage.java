@@ -34,7 +34,6 @@ public class Storage {
             rawData.add(sc.nextLine());
         }
         if (rawData.isEmpty()) {
-            System.out.println("There is no task in the list!\n");
             sc.close();
             return tasks;
         }
@@ -43,9 +42,9 @@ public class Storage {
             switch(taskData[0]) {
             case "T":
                 try {
-                    tasks.add(taskData[2], false);
+                    tasks.add(taskData[2]);
                     if (taskData[1].equals("1")) {
-                        tasks.get(i + 1).markDone(false);
+                        tasks.get(i + 1).markDone();
                     }
                 } catch (DukeException e) {
                     System.out.println(e);
@@ -53,9 +52,9 @@ public class Storage {
                 break;
             case "D":
                 try {
-                    tasks.add(taskData[2], taskData[3], false);
+                    tasks.add(taskData[2], taskData[3]);
                     if (taskData[1].equals("1")) {
-                        tasks.get(i + 1).markDone(false);
+                        tasks.get(i + 1).markDone();
                     }
                 } catch (DukeException e) {
                     System.out.println(e);
@@ -64,15 +63,18 @@ public class Storage {
             case "E":
                 String[] duration = taskData[3].split("-");
                 try {
-                    tasks.add(taskData[2], duration[0], duration[1], false);
+                    tasks.add(taskData[2], duration[0], duration[1]);
                     if (taskData[1].equals("1")) {
-                        tasks.get(i + 1).markDone(false);
+                        tasks.get(i + 1).markDone();
                     }
                 } catch (DukeException e) {
                     System.out.println(e);
                 }
                 break;
+            default:
+                break;
             }
+
         }
         sc.close();
         return tasks;

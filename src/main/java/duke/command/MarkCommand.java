@@ -13,12 +13,13 @@ public class MarkCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (this.markIdx >= tasks.size()) {
             throw new DukeException(
                 "The task with the given index does not exist.");
         }
-        tasks.get(this.markIdx).markDone(true);
+        String res = tasks.get(this.markIdx).markDone();
+        return res;
     }
 
     @Override
