@@ -8,20 +8,17 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.stream.Stream;
 
-import aqua.aquatask.AquaTask;
 import aqua.storage.Reloadable;
+import aqua.usertask.UserTask;
 import aqua.util.DateUtils;
 import aqua.util.FileUtils;
 
 /** Manager of tasks. */
 public class TaskManager implements Reloadable {
-    /** Path of save directory. */
     private static final String SAVE_DIRECTORY = "SAVE_DATA";
-    /** Path of save file relative to save directory. */
     private static final String SAVE_FILE = "Goshujin-sama you promised to never touch this.txt";
 
-    /** Array list containing tasks. */
-    private final ArrayList<AquaTask> tasks = new ArrayList<>();
+    private final ArrayList<UserTask> tasks = new ArrayList<>();
 
 
     /**
@@ -29,7 +26,7 @@ public class TaskManager implements Reloadable {
      *
      * @param task - the task to add.
      */
-    public void add(AquaTask task) {
+    public void add(UserTask task) {
         tasks.add(task);
     }
 
@@ -43,7 +40,7 @@ public class TaskManager implements Reloadable {
      * @return the modified task.
      * @throws IndexOutOfBoundsException if taskNum is out of range.
      */
-    public AquaTask mark(int taskNum, boolean isComplete) throws IndexOutOfBoundsException {
+    public UserTask mark(int taskNum, boolean isComplete) throws IndexOutOfBoundsException {
         tasks.set(taskNum, tasks.get(taskNum).mark(isComplete));
         return tasks.get(taskNum);
     }
@@ -56,7 +53,7 @@ public class TaskManager implements Reloadable {
      * @return the deleted task.
      * @throws IndexOutOfBoundsException if taskNum is out of range.
      */
-    public AquaTask delete(int taskNum) throws IndexOutOfBoundsException {
+    public UserTask delete(int taskNum) throws IndexOutOfBoundsException {
         return tasks.remove(taskNum);
     }
 
@@ -71,9 +68,9 @@ public class TaskManager implements Reloadable {
      *      filtered.
      */
     public TaskFilterReport filterWithin(LocalDateTime start, LocalDateTime end) {
-        ArrayList<AquaTask> filtered = new ArrayList<>();
-        ArrayList<AquaTask> unknown = new ArrayList<>();
-        for (AquaTask task : tasks) {
+        ArrayList<UserTask> filtered = new ArrayList<>();
+        ArrayList<UserTask> unknown = new ArrayList<>();
+        for (UserTask task : tasks) {
             if (!task.getEnd().isPresent()) {
                 unknown.add(task);
                 continue;
@@ -102,8 +99,8 @@ public class TaskManager implements Reloadable {
      * @return a LinkedHashMap of task number - task pair containing the
      *      filtered tasks.
      */
-    public LinkedHashMap<Integer, AquaTask> filter(String pattern) {
-        LinkedHashMap<Integer, AquaTask> taskMap = new LinkedHashMap<>();
+    public LinkedHashMap<Integer, UserTask> filter(String pattern) {
+        LinkedHashMap<Integer, UserTask> taskMap = new LinkedHashMap<>();
         Stream.iterate(0, i -> i + 1)
                 .limit(size())
                 .filter(i -> tasks.get(i).getName().contains(pattern))
@@ -149,7 +146,7 @@ public class TaskManager implements Reloadable {
     @Override
     public String getReloadString() {
         StringBuilder builder = new StringBuilder();
-        for (AquaTask task : tasks) {
+        for (UserTask task : tasks) {
             builder.append(task.getReloadString());
             builder.append("\n");
         }

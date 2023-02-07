@@ -11,7 +11,7 @@ public enum Command {
     LIST(new ListCommand()),
     MARK(new MarkTaskCommand(true)),
     UNMARK(new MarkTaskCommand(false)),
-    TODO(new AddToDoCommand()),
+    TODO(new AddTodoCommand()),
     DEADLINE(new AddDeadlineCommand()),
     EVENT(new AddEventCommand()),
     DELETE(new DeleteCommand()),
@@ -44,12 +44,12 @@ public enum Command {
      * Returns the {@code ExecutionService} of the command.
      *
      * @param args - the arguments for the command to work on.
-     * @param manager - the {@code LogicManager} for the command to work on.
+     * @param logicManager - the {@code LogicManager} for the command to work on.
      * @param ioManager - the {@code IoManager} to display results through.
      * @return the {@code ExecutionService} to execute.
      */
-    public ExecutionService getService(ArgumentMap args, LogicManager manager, IoManager ioManager) {
-        return controller.getService(args, manager, ioManager);
+    public ExecutionService getService(ArgumentMap args, LogicManager logicManager, IoManager ioManager) {
+        return controller.getService(args, logicManager, ioManager);
     }
 
 

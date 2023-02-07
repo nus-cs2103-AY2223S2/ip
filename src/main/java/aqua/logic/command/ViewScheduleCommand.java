@@ -2,7 +2,7 @@ package aqua.logic.command;
 
 import java.time.LocalDateTime;
 
-import aqua.exception.IllegalSyntaxException;
+import aqua.exception.SyntaxException;
 import aqua.graphic.TaskView;
 import aqua.logic.ArgumentMap;
 import aqua.logic.ExecutionDisplayerTask;
@@ -20,7 +20,7 @@ public class ViewScheduleCommand extends CommandController {
     public ExecutionService getService(ArgumentMap args, LogicManager manager) {
         return ExecutionService.of(new ExecutionTask<DisplayData>(args, manager) {
             @Override
-            protected DisplayData process(ArgumentMap args, LogicManager manager) throws IllegalSyntaxException {
+            protected DisplayData process(ArgumentMap args, LogicManager manager) throws SyntaxException {
                 return filterTasks(args, manager);
             }
         });
@@ -31,7 +31,7 @@ public class ViewScheduleCommand extends CommandController {
     public ExecutionService getService(ArgumentMap args, LogicManager logicManager, IoManager ioManager) {
         return ExecutionService.of(new ExecutionDisplayerTask<DisplayData>(args, logicManager, ioManager) {
             @Override
-            protected DisplayData process(ArgumentMap args, LogicManager manager) throws IllegalSyntaxException {
+            protected DisplayData process(ArgumentMap args, LogicManager manager) throws SyntaxException {
                 return filterTasks(args, manager);
             }
 
@@ -43,7 +43,7 @@ public class ViewScheduleCommand extends CommandController {
     }
 
 
-    private DisplayData filterTasks(ArgumentMap args, LogicManager manager) throws IllegalSyntaxException {
+    private DisplayData filterTasks(ArgumentMap args, LogicManager manager) throws SyntaxException {
         LocalDateTime start = DateUtils.getStartOfWeek(LocalDateTime.now());
         if (args.getMainInput().isPresent()) {
             LocalDateTime time = DateUtils.parse(args.getMainInput().get());

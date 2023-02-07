@@ -1,7 +1,7 @@
 package aqua.logic;
 
-import aqua.exception.IllegalSyntaxException;
-import aqua.exception.ProcedureExecutionException;
+import aqua.exception.ProcedureException;
+import aqua.exception.SyntaxException;
 import aqua.manager.IoManager;
 import aqua.manager.LogicManager;
 
@@ -38,7 +38,7 @@ public abstract class ExecutionDisplayerTask<T> extends ExecutionTask<T> {
 
 
     @Override
-    protected Void call() throws IllegalSyntaxException, ProcedureExecutionException {
+    protected Void call() throws SyntaxException, ProcedureException {
         T data = process();
         display(data, ioManager);
         return null;

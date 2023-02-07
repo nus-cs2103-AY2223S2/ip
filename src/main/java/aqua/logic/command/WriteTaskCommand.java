@@ -2,7 +2,7 @@ package aqua.logic.command;
 
 import java.io.IOException;
 
-import aqua.exception.ProcedureExecutionException;
+import aqua.exception.ProcedureException;
 import aqua.logic.ArgumentMap;
 import aqua.logic.ExecutionDisplayerTask;
 import aqua.logic.ExecutionService;
@@ -12,17 +12,17 @@ import aqua.manager.LogicManager;
 import aqua.util.Kaomoji;
 
 
-/** A {@code CommandController} to save {@code AquaTask} state. */
+/** A {@code CommandController} to save {@code UserTask} state. */
 public class WriteTaskCommand extends CommandController {
     @Override
     public ExecutionService getService(ArgumentMap args, LogicManager manager) {
         return ExecutionService.of(new ExecutionTask<Void>(args, manager) {
             @Override
-            public Void process(ArgumentMap args, LogicManager manager) throws ProcedureExecutionException {
+            public Void process(ArgumentMap args, LogicManager manager) throws ProcedureException {
                 try {
                     manager.getTaskManager().saveToFile();
                 } catch (IOException ioEx) {
-                    throw new ProcedureExecutionException("Failed to save data", ioEx);
+                    throw new ProcedureException("Failed to save data", ioEx);
                 }
                 return null;
             }

@@ -2,38 +2,32 @@ package aqua.logic.command;
 
 import java.time.LocalDateTime;
 
-import aqua.aquatask.AquaDeadline;
-import aqua.exception.IllegalSyntaxException;
+import aqua.exception.SyntaxException;
 import aqua.logic.ArgumentMap;
+import aqua.usertask.UserDeadline;
 import aqua.util.DateUtils;
 
 
-/** An {@code AddTaskCommand} to add {@code AquaDeadline}. */
+/** An {@code AddTaskCommand} to add {@code UserDeadline}. */
 public class AddDeadlineCommand extends AddTaskCommand {
-    /**
-     * {@inheritDoc}
-     * <p>
-     * Specifically, an {@code AquaDeadline}.
-     */
     @Override
-    public AquaDeadline createTask(ArgumentMap args) throws IllegalSyntaxException {
+    public UserDeadline createTask(ArgumentMap args) throws SyntaxException {
         // get name
         String name = args.getMainInput()
                 .filter(n -> !n.isBlank())
-                .orElseThrow(() -> new IllegalSyntaxException("Name disappeared!"));
+                .orElseThrow(() -> new SyntaxException("Name disappeared!"));
 
-        // get by date
-        String byString = args.get("by")
-                .orElseThrow(() -> new IllegalSyntaxException("[by] disappeared!"));
-        LocalDateTime by = DateUtils.parse(byString);
+        // get due time
+        String dueString = args.get(UserDeadline.TAG_DUE_TIME)
+                .orElseThrow(() -> new SyntaxException("[by] disappeared!"));
+        LocalDateTime dueTime = DateUtils.parse(dueString);
 
         // get is complete
-        boolean isCompleted = args.get(AquaDeadline.TAG_IS_COMPLETE)
+        boolean isCompleted = args.get(UserDeadline.TAG_IS_COMPLETE)
                 .map(isComp -> Boolean.parseBoolean(isComp))
                 .orElse(false);
 
-        // return formed deadline
-        return new AquaDeadline(name, isCompleted, by);
+        return new UserDeadline(name, isCompleted, dueTime);
     }
 
 

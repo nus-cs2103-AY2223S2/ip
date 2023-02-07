@@ -1,6 +1,6 @@
 package aqua.logic.parser;
 
-import aqua.exception.IllegalSyntaxException;
+import aqua.exception.SyntaxException;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 
@@ -27,7 +27,7 @@ public class ParserService<T> extends Service<T> {
     protected Task<T> createTask() {
         return new Task<>() {
             @Override
-            public T call() throws IllegalSyntaxException {
+            public T call() throws SyntaxException {
                 return parser.parse(input);
             }
         };

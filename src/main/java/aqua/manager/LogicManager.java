@@ -4,25 +4,25 @@ import java.io.FileNotFoundException;
 import java.nio.file.Path;
 import java.util.Scanner;
 
-import aqua.exception.IllegalSyntaxException;
 import aqua.exception.LoadException;
-import aqua.exception.ProcedureExecutionException;
+import aqua.exception.ProcedureException;
+import aqua.exception.SyntaxException;
 import aqua.logic.CommandLineInput;
 import aqua.logic.parser.ArgumentParser;
 import aqua.logic.parser.CommandLineInputParser;
 import aqua.logic.parser.Parser;
 import aqua.storage.Loadable;
 
+
 /** Manager of the application's logical processes. */
 public class LogicManager implements Loadable {
     private final Parser<CommandLineInput> inputParser;
     private final TaskManager taskManager;
 
-    private boolean isClosed = false;
-
 
     /**
-     * Constructs a LogicManager that uses the default CommandLineInputParser.
+     * Constructs a {@code LogicManager} that uses the default
+     * {@code CommandLineInputParser}.
      */
     public LogicManager() {
         this(new CommandLineInputParser(new ArgumentParser()));
@@ -30,9 +30,9 @@ public class LogicManager implements Loadable {
 
 
     /**
-     * Construcs a LogicManager that uses the specified CommandLineInputParser.
+     * Construcs a {@code LogicManager}.
      *
-     * @param inputParser - the CommandLineInputParser to use.
+     * @param inputParser - the {@code CommandLineInputParser} to use.
      */
     public LogicManager(Parser<CommandLineInput> inputParser) {
         this.inputParser = inputParser;
@@ -54,7 +54,7 @@ public class LogicManager implements Loadable {
                 String line = scanner.nextLine();
                 parser.parse(line).getService(this).process();
             }
-        } catch (IllegalSyntaxException | ProcedureExecutionException ex) {
+        } catch (SyntaxException | ProcedureException ex) {
             throw new LoadException(ex);
         } catch (FileNotFoundException fnfEx) {
             // no save data just return
@@ -80,27 +80,5 @@ public class LogicManager implements Loadable {
      */
     public TaskManager getTaskManager() {
         return taskManager;
-    }
-
-
-    /**
-     * Sets the close state of the application as specified.
-     *
-     * @param isClosed - {@code true} to set the close state to close and
-     *      {@code false} otherwise.
-     */
-    public void setClose(boolean isClosed) {
-        this.isClosed = isClosed;
-    }
-
-
-    /**
-     * Returns if the application is closed.
-     *
-     * @return {@code true} if the application is closed and {@code false}
-     *      otherwise.
-     */
-    public boolean isClosed() {
-        return isClosed;
     }
 }

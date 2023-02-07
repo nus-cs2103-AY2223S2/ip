@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import aqua.util.DateUtils;
-import aqua.util.Timeable;
+import aqua.util.Period;
 import javafx.css.PseudoClass;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -19,18 +19,19 @@ import javafx.util.Duration;
 
 /** A graphical display of a day's schedule. */
 public class DaySchedule extends HBox {
-    private static final double ROW_WIDTH = 1000;
     private static final double ROW_HEIGHT = 20;
     private static final double HOURS_IN_A_DAY = 24;
     private static final double MINUTES_IN_A_DAY = 1440;
-    private static final double MIN_WIDTH_PIXS = ROW_HEIGHT;
-    private static final double MIN_WIDTH_MINS = (MIN_WIDTH_PIXS / ROW_WIDTH) * MINUTES_IN_A_DAY;
+    private static final double MICRO_IN_MINUTE = 6E7;
+    private static final double MIN_BLOCK_WIDTH = ROW_HEIGHT;
     private static final double TOOLTIP_SHOW_DELAY = 0;
     private static final double TOOLTIP_HIDE_DELAY = 0;
 
     private static final PseudoClass PSEUDO_CLASS_HOVER = PseudoClass.getPseudoClass("hover");
 
     private final VBox rowDisplayArea = new VBox();
+
+    private final double rowWidth;
 
 
     /**
@@ -39,10 +40,11 @@ public class DaySchedule extends HBox {
      * @param startTime - the start time of the day.
      * @param timeables - the list of {@code ScheduleTimeable} to display.
      */
-    public DaySchedule(LocalDateTime startTime, List<ScheduleTimeable> timeables) {
+    public DaySchedule(LocalDateTime startTime, List<SchedulePeriod> timeables, double rowWidth) {
+        this.rowWidth = rowWidth;
         getChildren().addAll(rowDisplayArea);
-        List<? extends List<ScheduleTimeable>> sepTimeable = separateConflicting(timeables);
-        for (List<ScheduleTimeable> row : sepTimeable) {
+        List<? extends List<SchedulePeriod>> sepTimeable = separateConflicting(timeables);
+        for (List<SchedulePeriod> row : sepTimeable) {
             rowDisplayArea.getChildren().add(createRow(startTime, row));
         }
         if (sepTimeable.isEmpty()) {
@@ -51,32 +53,40 @@ public class DaySchedule extends HBox {
     }
 
 
-    private List<? extends List<ScheduleTimeable>> separateConflicting(List<ScheduleTimeable> timeables) {
-        ArrayList<ArrayList<ScheduleTimeable>> sepTimeables = new ArrayList<>();
-        for (ScheduleTimeable timeable : timeables) {
+    /**
+     * Separates a list of {@code ScheduleTimeables} such that none of them are
+     * conflicting. The return type is in the structure of a list of a list of
+     * unconflicting {@code ScheduleTimeable}.
+     *
+     * @param timeables - the list of {@code ScheduleTimeable} to separate.
+     * @return a list of a list of unconflicting {@code ScheduleTimeable}.
+     */
+    private List<? extends List<SchedulePeriod>> separateConflicting(List<SchedulePeriod> timeables) {
+        double threshold = (MIN_BLOCK_WIDTH / rowWidth) * MINUTES_IN_A_DAY;
+        ArrayList<ArrayList<SchedulePeriod>> sepTimeables = new ArrayList<>();
+        for (SchedulePeriod timeable : timeables) {
             boolean isAdded = false;
-            for (List<ScheduleTimeable> timeableSet : sepTimeables) {
-                if (!hasConflict(timeable, timeableSet)) {
+            for (List<SchedulePeriod> timeableSet : sepTimeables) {
+                if (!hasConflict(timeable, timeableSet, threshold)) {
                     timeableSet.add(timeable);
                     isAdded = true;
                     break;
                 }
             }
-            if (isAdded) {
-                continue;
+            if (!isAdded) {
+                sepTimeables.add(new ArrayList<>(List.of(timeable)));
             }
-            sepTimeables.add(new ArrayList<>(List.of(timeable)));
         }
         return sepTimeables;
     }
 
 
-    private boolean hasConflict(Timeable timeable, List<? extends Timeable> timeables) {
-        for (Timeable storedTimeable : timeables) {
+    private boolean hasConflict(Period timeable, List<? extends Period> timeables, double threshold) {
+        for (Period storedTimeable : timeables) {
             if (DateUtils.isIntersecting(
                         timeable.getStart(), timeable.getEnd(),
                         storedTimeable.getStart(), storedTimeable.getEnd(),
-                        MIN_WIDTH_MINS)) {
+                        threshold)) {
                 return true;
             }
         }
@@ -84,56 +94,66 @@ public class DaySchedule extends HBox {
     }
 
 
+    /**
+     * Creates an empty row.
+     *
+     * @return the graphical representation of a row of
+     *      {@code ScheduleTimeable}.
+     */
     private Pane createRow() {
         Pane pane = new Pane();
-        pane.setMinWidth(ROW_WIDTH);
+        pane.setMinWidth(rowWidth);
         pane.setMaxHeight(ROW_HEIGHT);
-        pane.getChildren().add(drawMarkings());
+        pane.getChildren().add(createMarkings());
         return pane;
     }
 
 
-    private Pane createRow(LocalDateTime startTime, List<ScheduleTimeable> timeables) {
-        Pane pane = createRow();
+    /**
+     * Creates a row populated with blocks of {@code ScheduleTimeable} as
+     * specified.
+     *
+     * @param startTime - the start time of the day.
+     * @param timeables - the list of {@code ScheduleTimeable} to display.
+     * @return the graphical representation of a row of
+     *      {@code ScheduleTimeable}.
+     */
+    private Pane createRow(LocalDateTime startTime, List<SchedulePeriod> timeables) {
+        Pane rowPane = createRow();
 
-        for (ScheduleTimeable timeable : timeables) {
-            double startX = (startTime.until(timeable.getStart(), ChronoUnit.MINUTES) / MINUTES_IN_A_DAY)
-                    * ROW_WIDTH;
-            startX = Math.max(0, (int) startX);
-            double endX = (startTime.until(timeable.getEnd(), ChronoUnit.MINUTES) / MINUTES_IN_A_DAY)
-                    * ROW_WIDTH;
-            endX = Math.min(ROW_WIDTH, (int) endX);
+        for (SchedulePeriod timeable : timeables) {
+            double startOffset = startTime.until(timeable.getStart(), ChronoUnit.MINUTES);
+            double startX = convertMinsToRowPix(startOffset);
 
-            if (Math.abs(endX - startX) <= MIN_WIDTH_PIXS) {
-                startX -= MIN_WIDTH_PIXS / 2;
-                endX += MIN_WIDTH_PIXS / 2;
+            double durationMins = timeable.duration() / MICRO_IN_MINUTE;
+            double width = convertMinsToRowPix(durationMins);
+
+            if (width <= MIN_BLOCK_WIDTH) {
+                startX -= MIN_BLOCK_WIDTH / 2;
+                width = MIN_BLOCK_WIDTH;
             }
 
-            Pane scheduleBox = new Pane();
-            scheduleBox.setMinHeight(ROW_HEIGHT);
-            scheduleBox.setMinWidth(endX - startX);
-            scheduleBox.getStyleClass().setAll(timeable.getStyleClass());
-            Tooltip.install(scheduleBox, createTooltip(timeable));
-            for (PseudoClass pseudoClass : timeable.getPseudoClass()) {
-                scheduleBox.pseudoClassStateChanged(pseudoClass, true);
-            }
-            scheduleBox.setOnMouseEntered(e -> scheduleBox.pseudoClassStateChanged(PSEUDO_CLASS_HOVER, true));
-            scheduleBox.setOnMouseExited(e -> scheduleBox.pseudoClassStateChanged(PSEUDO_CLASS_HOVER, false));
+            Pane block = createDisplayBlock(timeable, width);
 
-            pane.getChildren().add(scheduleBox);
-            scheduleBox.setLayoutX(startX);
+            rowPane.getChildren().add(block);
+            block.setLayoutX(startX);
         }
 
-        return pane;
+        return rowPane;
     }
 
 
-    private Canvas drawMarkings() {
-        Canvas canvas = new Canvas(ROW_WIDTH, ROW_HEIGHT);
+    /**
+     * Creates the marking display for a row.
+     *
+     * @return the marking display for a row.
+     */
+    private Canvas createMarkings() {
+        Canvas canvas = new Canvas(rowWidth, ROW_HEIGHT);
         GraphicsContext context = canvas.getGraphicsContext2D();
 
         for (int i = 0; i <= HOURS_IN_A_DAY; i++) {
-            double xMark = ((int) ((i / HOURS_IN_A_DAY) * ROW_WIDTH)) + 0.5;
+            double xMark = ((int) ((i / HOURS_IN_A_DAY) * rowWidth)) + 0.5;
             context.strokeLine(xMark, 0, xMark, ROW_HEIGHT);
         }
 
@@ -141,7 +161,37 @@ public class DaySchedule extends HBox {
     }
 
 
-    private Tooltip createTooltip(ScheduleTimeable timeable) {
+    private double convertMinsToRowPix(double mins) {
+        double dayFrac = mins / MINUTES_IN_A_DAY;
+        dayFrac = Math.min(Math.max(0D, dayFrac), 1D);
+        return dayFrac * rowWidth;
+    }
+
+
+    /**
+     * Creates a block to represent a {@code ScheduleTimeable} graphically.
+     *
+     * @param timeable - the {@code ScheduleTimeable} to display.
+     * @param width - the width of the block.
+     * @return a {@code Pane} that represents the {@code ScheduleTimeable}
+     *      graphically.
+     */
+    private Pane createDisplayBlock(SchedulePeriod timeable, double width) {
+        Pane block = new Pane();
+        block.setMinHeight(ROW_HEIGHT);
+        block.setMinWidth(width);
+        block.getStyleClass().setAll(timeable.getStyleClass());
+        Tooltip.install(block, createTooltip(timeable));
+        for (PseudoClass pseudoClass : timeable.getPseudoClass()) {
+            block.pseudoClassStateChanged(pseudoClass, true);
+        }
+        block.setOnMouseEntered(e -> block.pseudoClassStateChanged(PSEUDO_CLASS_HOVER, true));
+        block.setOnMouseExited(e -> block.pseudoClassStateChanged(PSEUDO_CLASS_HOVER, false));
+        return block;
+    }
+
+
+    private Tooltip createTooltip(SchedulePeriod timeable) {
         Tooltip tooltip = new Tooltip(timeable.toString());
         tooltip.setShowDelay(Duration.seconds(TOOLTIP_SHOW_DELAY));
         tooltip.setHideDelay(Duration.seconds(TOOLTIP_HIDE_DELAY));

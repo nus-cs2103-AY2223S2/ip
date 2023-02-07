@@ -2,8 +2,8 @@ package aqua.logic;
 
 import java.util.Optional;
 
-import aqua.exception.IllegalSyntaxException;
-import aqua.exception.ProcedureExecutionException;
+import aqua.exception.ProcedureException;
+import aqua.exception.SyntaxException;
 import javafx.concurrent.Service;
 
 
@@ -12,7 +12,6 @@ import javafx.concurrent.Service;
  * encapsulated {@link ExecutionTask}.
  */
 public abstract class ExecutionService extends Service<Void> {
-    /** The task to dispatch. */
     private final ExecutionTask<?> task;
 
 
@@ -22,29 +21,9 @@ public abstract class ExecutionService extends Service<Void> {
 
 
     /**
-     * Creates dispatchers that dispatches the given tasks in the given
-     * order. The follow up tasks of the dispatchers is set to the
-     * dispatcher created from the next task in the given tasks.
+     * Creates a {@code ExecutionService}.
      *
-     * @param tasks - the tasks to dispatch.
-     * @return a ExecutionDispatcher that dispatches the given tasks in
-     *      the given order.
-     */
-    public static ExecutionService of(ExecutionTask<?> ... tasks) {
-        ExecutionService startingDispatcher = null;
-        for (int i = 0; i < tasks.length; i++) {
-            ExecutionTask<?> task = tasks[tasks.length - i - 1];
-            startingDispatcher = ExecutionService.of(task).setFollowUp(startingDispatcher);
-        }
-        return startingDispatcher;
-    }
-
-
-    /**
-     * Creates a dispatcher that will dispatch and execute the specified task.
-     * Created dispatcher will have no follow up dispatchers.
-     *
-     * @param task - the task to dispatch and execute.
+     * @param task - the task to execute.
      * @return a dispatcher that will dispatch the specifed task without follow
      *      up dispatchers.
      */
@@ -57,13 +36,14 @@ public abstract class ExecutionService extends Service<Void> {
         };
     }
 
+
     /**
-     * Returns the follow up dispatcher, that should be dispatched if the task
-     * of this dispatcher is dispatched and executed successfully, wrapped in
-     * an {@code Optinoal}. If there is no follow dispatcher,
+     * Returns the follow up service, that should be started if the task
+     * of this service is started and executed successfully. Return result is
+     * wrapped in an {@code Optinoal}. If there are no follow services,
      * {@code Optional.empty} is returned.
      *
-     * @return the follow up dispatcher wrapped around an {@code Optional}.
+     * @return the follow up service wrapped in an {@code Optional}.
      */
     public abstract Optional<ExecutionService> followUpDispatcher();
 
@@ -71,11 +51,11 @@ public abstract class ExecutionService extends Service<Void> {
     /**
      * Executes the encapsulated task process.
      *
-     * @throws IllegalSyntaxException if there are syntax errors.
+     * @throws SyntaxException if there are syntax errors.
      * @throws ProcedureExecutionExecution if the task fail to execute
      *      completely.
      */
-    public void process() throws IllegalSyntaxException, ProcedureExecutionException {
+    public void process() throws SyntaxException, ProcedureException {
         task.process();
     }
 
@@ -87,17 +67,16 @@ public abstract class ExecutionService extends Service<Void> {
 
 
     /**
-     * Sets the follow up dispatcher.
+     * Sets the follow up service.
      *
-     * @param dispatcher - the follow up dispatcher to set to.
-     * @return a dispatcher of this dispatcher with its follow up task set to
-     *      the dispatcher specified.
+     * @param service - the follow up service to set to.
+     * @return this service when its follow up service is set as specified.
      */
-    public ExecutionService setFollowUp(ExecutionService dispatcher) {
+    public ExecutionService setFollowUp(ExecutionService service) {
         return new ExecutionService(this.task) {
             @Override
             public Optional<ExecutionService> followUpDispatcher() {
-                return Optional.ofNullable(dispatcher);
+                return Optional.ofNullable(service);
             }
         };
     }

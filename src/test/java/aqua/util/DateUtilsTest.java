@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
 
-import aqua.exception.IllegalSyntaxException;
+import aqua.exception.SyntaxException;
 
 public class DateUtilsTest {
     @Test
@@ -16,7 +16,7 @@ public class DateUtilsTest {
             LocalDateTime actual = DateUtils.parse("2023-03-05T04:55");
             LocalDateTime expected = LocalDateTime.parse("2023-03-05T04:55");
             assertEquals(expected, actual);
-        } catch (IllegalSyntaxException syntaxEx) {
+        } catch (SyntaxException syntaxEx) {
             fail(syntaxEx);
         }
     }
@@ -28,7 +28,7 @@ public class DateUtilsTest {
             LocalDateTime actual = DateUtils.parse("2023-03-05 0455");
             LocalDateTime expected = LocalDateTime.parse("2023-03-05T04:55");
             assertEquals(expected, actual);
-        } catch (IllegalSyntaxException syntaxEx) {
+        } catch (SyntaxException syntaxEx) {
             fail(syntaxEx);
         }
     }
@@ -40,7 +40,7 @@ public class DateUtilsTest {
             LocalDateTime actual = DateUtils.parse("2023-03-05");
             LocalDateTime expected = LocalDateTime.parse("2023-03-05T00:00");
             assertEquals(expected, actual);
-        } catch (IllegalSyntaxException syntaxEx) {
+        } catch (SyntaxException syntaxEx) {
             fail(syntaxEx);
         }
     }
@@ -51,7 +51,7 @@ public class DateUtilsTest {
         try {
             DateUtils.parse("random day");
             fail("No exception thrown");
-        } catch (IllegalSyntaxException syntaxEx) {
+        } catch (SyntaxException syntaxEx) {
             assertEquals("I do not understand when this is [random day]", syntaxEx.getMessage());
         }
     }
@@ -62,7 +62,7 @@ public class DateUtilsTest {
         try {
             DateUtils.parse("0000-00-00 0000");
             fail("No exception thrown");
-        } catch (IllegalSyntaxException syntaxEx) {
+        } catch (SyntaxException syntaxEx) {
             assertEquals("I do not understand when this is [0000-00-00 0000]", syntaxEx.getMessage());
         }
     }

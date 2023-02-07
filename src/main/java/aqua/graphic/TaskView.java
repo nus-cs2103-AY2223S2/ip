@@ -4,10 +4,10 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import aqua.aquatask.AquaTask;
-import aqua.graphic.schedule.ScheduleComponent;
-import aqua.graphic.schedule.ScheduleTimeable;
+import aqua.graphic.schedule.SchedulePeriod;
+import aqua.graphic.schedule.WeekSchedule;
 import aqua.manager.TaskFilterReport;
+import aqua.usertask.UserTask;
 import javafx.css.PseudoClass;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -16,7 +16,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 
 
-/** A {@code UiComponent} to display a view of tasks. */
+/** A {@code UiComponent} to display a view of tasks as a schedule. */
 public class TaskView extends UiComponent<VBox> {
     private static final String PATH_FXML_FILE = "TaskView.fxml";
 
@@ -40,29 +40,32 @@ public class TaskView extends UiComponent<VBox> {
     }
 
 
-    private void initialiseSchedule(LocalDateTime startTime, List<AquaTask> tasks) {
-        List<ScheduleTimeable> timeables = tasks.stream()
-                .map(task -> new TimeableAquaTask(task))
+    private void initialiseSchedule(LocalDateTime startTime, List<UserTask> tasks) {
+        List<SchedulePeriod> timeables = tasks.stream()
+                .map(task -> new TimedTask(task))
                 .collect(Collectors.toList());
-        scheduleDisplayArea.getChildren().add(new ScheduleComponent(startTime, timeables));
+        scheduleDisplayArea.getChildren().add(new WeekSchedule(startTime, timeables));
     }
 
 
-    private void initialiseTodoView(List<AquaTask> tasks) {
-        for (AquaTask task : tasks) {
-            todoDisplayArea.getChildren().add(new TodoLabel(task));
+    private void initialiseTodoView(List<UserTask> tasks) {
+        for (UserTask task : tasks) {
+            todoDisplayArea.getChildren().add(new UntimedTaskDisplay(task));
         }
     }
 
 
 
 
+    /**
+     * A {@code ScheduleTimeable} of a {@code UserTask} that has minimally
+     * an end time.
+     */
+    private static class TimedTask extends SchedulePeriod {
+        private final UserTask task;
 
-    private static class TimeableAquaTask extends ScheduleTimeable {
-        private final AquaTask task;
 
-
-        TimeableAquaTask(AquaTask task) {
+        TimedTask(UserTask task) {
             this.task = task;
         }
 
@@ -107,12 +110,16 @@ public class TaskView extends UiComponent<VBox> {
 
 
 
-    private static class TodoLabel extends VBox {
+    /**
+     * Graphical representation of a task that does not have start and end
+     * times.
+     */
+    private static class UntimedTaskDisplay extends VBox {
         private static final double MAX_WIDTH = 600;
         private static final Insets MARGIN = new Insets(10, 10, 10, 10);
 
 
-        TodoLabel(AquaTask task) {
+        UntimedTaskDisplay(UserTask task) {
             setMaxWidth(MAX_WIDTH);
             getStyleClass().add("todo-label");
             if (task.isComplete()) {

@@ -4,9 +4,9 @@ import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-import aqua.exception.IllegalSyntaxException;
 import aqua.exception.LoadException;
-import aqua.exception.ProcedureExecutionException;
+import aqua.exception.ProcedureException;
+import aqua.exception.SyntaxException;
 import aqua.util.Kaomoji;
 import javafx.application.Platform;
 import javafx.scene.Parent;
@@ -55,7 +55,7 @@ public class IoManager {
 
 
     /**
-     * Constructs an IoManager from the specified parameters.
+     * Constructs an {@code IoManager}.
      *
      * @param inputSupplier - the supplier to get user input from.
      * @param outputConsumer - the consumer to display messages to the user.
@@ -67,9 +67,9 @@ public class IoManager {
 
 
     /**
-     * Reads a line from the set input stream.
+     * Reads a line.
      *
-     * @return a line in the set input stream.
+     * @return the contents the next line.
      */
     public String readLine() {
         String msg = inputSupplier.get();
@@ -95,9 +95,9 @@ public class IoManager {
     private String getExceptionReply(Throwable ex) {
         try {
             throw ex;
-        } catch (IllegalSyntaxException syntaxEx) {
+        } catch (SyntaxException syntaxEx) {
             return String.format(EXCEPTION_FORMAT_SYNTAX, ex.getMessage());
-        } catch (ProcedureExecutionException cmdExeEx) {
+        } catch (ProcedureException cmdExeEx) {
             return String.format(EXCEPTION_FORMAT_EXECUTION, ex.getMessage());
         } catch (LoadException loadEx) {
             return String.format(EXCEPTION_FORMAT_LOAD, ex.getMessage());
@@ -108,14 +108,14 @@ public class IoManager {
     }
 
 
-    /** Prints the greeting message. */
+    /** Displays the greeting message. */
     public void greet() {
         reply(MESSAGE_GREETING);
     }
 
 
     /**
-     * Prints the message to signal that tasks have successfully been loaded.
+     * Displays the message to signal that tasks have successfully been loaded.
      */
     public void replyLoadSuccess() {
         reply(MESSAGE_LOAD_SUCCESS);
@@ -123,15 +123,20 @@ public class IoManager {
 
 
     /**
-     * Formats and prints the message.
+     * Displays a message.
      *
-     * @param msg - the message to print.
+     * @param msg - the message to display.
      */
     public void reply(String msg) {
         outputConsumer.accept(msg);
     }
 
 
+    /**
+     * Shows a popup window.
+     *
+     * @param root - the root node to show.
+     */
     public void popup(Parent root) {
         Platform.runLater(() -> showPopup(root));
     }

@@ -10,7 +10,7 @@ import aqua.manager.TaskManager;
 import aqua.util.Kaomoji;
 
 
-/** A {@code CommandController} to list {@code AquaTask}. */
+/** A {@code CommandController} to list {@code UserTask}. */
 public class ListCommand extends CommandController {
     @Override
     public ExecutionService getService(ArgumentMap args, LogicManager manager) {

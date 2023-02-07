@@ -1,38 +1,37 @@
-package aqua.aquatask;
+package aqua.usertask;
 
 
-/** An implementation of AquaTask to represent a todo. */
-public class AquaToDo extends AquaTask {
-    /** If the task is completed. */
+/** A {@code UserTask} to represent a todo. */
+public class UserTodo extends UserTask {
     private final boolean isComplete;
 
 
     /**
-     * Constructs an AquaToDo with the given name while setting the task
-     * completion status to {@code false}.
+     * Constructs a {@code UserTask} with the given name while setting the
+     * task completion status to {@code false}.
      *
      * @param name - the name of the task.
      */
-    public AquaToDo(String name) {
+    public UserTodo(String name) {
         this(name, false);
     }
 
 
     /**
-     * Constructs an AquaToDo with the given parameters.
+     * Constructs a {@code UserTask} with the given parameters.
      *
      * @param name - the name of the task.
      * @param isCompleted - if the task is completed.
      */
-    public AquaToDo(String name, boolean isComplete) {
+    public UserTodo(String name, boolean isComplete) {
         super(name);
         this.isComplete = isComplete;
     }
 
 
     @Override
-    public AquaToDo mark(boolean isComplete) {
-        return new AquaToDo(getName(), isComplete);
+    public UserTodo mark(boolean isComplete) {
+        return new UserTodo(getName(), isComplete);
     }
 
 
