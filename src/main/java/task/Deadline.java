@@ -1,14 +1,20 @@
 package task;
 
-import task.Task;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Deadline class that extends from the Task class.
+ * It has an additional deadline attribute.
+ */
 public class Deadline extends Task {
     protected LocalDate ddl;
     protected String name;
 
+    /**
+     *
+     * @param name The content of the deadline command.
+     */
     public Deadline(String name) {
         super(name);
         this.name = name.substring("deadline".length() + 1, name.indexOf("/by") - 1);

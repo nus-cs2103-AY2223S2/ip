@@ -9,14 +9,29 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Storage class that can do data saving and data loading.
+ */
 public class Storage {
     protected String directoryPath;
     protected String filePath;
 
+    /**
+     * Constructor.
+     *
+     * @param directoryPath The path of the directory for storage.
+     * @param filePath The path of the file for storage.
+     */
     public Storage(String directoryPath, String filePath) {
         this.directoryPath = directoryPath;
         this.filePath = filePath;
     }
+
+    /**
+     * Saves the command message to the disk.
+     *
+     * @param commandMsg The command message to save to the disk.
+     */
     public void saveToDisk(String commandMsg) {
         try {
             if (new File(filePath).exists() == false) {
@@ -32,6 +47,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads the data from the disk.
+     *
+     * @param commandList The ArrayList we use to store the output data.
+     */
     public void loadData(ArrayList<String> commandList) {
         try {
             File file = new File(filePath);
