@@ -55,10 +55,9 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getHelloMessage(Image img) {
-        var db = new DialogBox("Hello, I'm Dupe! How can I help you today?", img);
-        db.flip();
-        return db;
+        return getDukeDialog("Hello, I'm Duke! How can I help you today?", img);
     }
+
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
