@@ -6,6 +6,9 @@ import alfred.parser.Parser;
 import alfred.storage.Storage;
 import alfred.task.TaskList;
 import alfred.ui.Ui;
+import javafx.application.Platform;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * Represents a Personal Assistant Chat-bot that helps a person to keep track of various things.
@@ -17,6 +20,13 @@ public class Alfred {
     private Storage storage;
     private TaskList tasks;
     private Parser parser;
+
+    private boolean isExit;
+
+    // How to pass file path inside here? javaFx requires this constructor
+    public Alfred() {
+        this("data/alfred.txt");
+    }
 
     /**
      * Constructs an Alfred object that takes in a String that represents the filepath.
@@ -33,10 +43,9 @@ public class Alfred {
         }
     }
 
-    /**
-     * Runs the Alfred object to interact with the users.
-     */
-    public void run() {
+    public String runIntro() {
+        return ui.getOpening();
+        /*
         ui.displayOpening();
         boolean isExit = false;
         while (!isExit) {
@@ -49,6 +58,39 @@ public class Alfred {
                 ui.displayError(e);
             }
         }
+         */
+    }
+
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        try {
+            Command c = parser.parse(input);
+            String output = c.execute(tasks, ui, storage);
+            isExit = c.isExit();
+            storage.write(tasks);
+            return output;
+        } catch (AlfredException e) {
+            return ui.getErrorMessage(e);
+        }
+    }
+
+    public boolean isExit() {
+        return isExit;
+    }
+
+
+    public void handleExit() {
+        try {
+            TimeUnit.SECONDS.sleep(3);
+        } catch (InterruptedException e) {
+            System.out.println(e.getMessage()); // how to show an error?
+        } finally {
+            Platform.exit();
+        }
     }
 
     /**
@@ -57,6 +99,5 @@ public class Alfred {
      */
     public static void main(String[] args) {
         Alfred alfred = new Alfred("data/alfred.txt");
-        alfred.run();
     }
 }

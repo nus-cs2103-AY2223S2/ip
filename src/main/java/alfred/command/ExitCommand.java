@@ -14,9 +14,9 @@ public class ExitCommand extends Command {
      * {@inheritDoc}
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws AlfredException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws AlfredException {
         storage.write(tasks);
-        ui.displayBye();
+        return ui.getByeMessage();
     }
 
     /**

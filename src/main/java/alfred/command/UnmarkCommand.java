@@ -24,14 +24,14 @@ public class UnmarkCommand extends Command {
      * {@inheritDoc}
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws AlfredException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws AlfredException {
         try {
             Task task = tasks.getTask(taskIndex);
             task.unmarkTask();
             String output = "I have un-mark this task. Remember to complete "
                     + "your task on time!\n";
             output += String.format("      %s\n", task);
-            ui.displayCommand(output);
+            return ui.getCommandMessage(output);
         } catch (NumberFormatException e) {
             throw new AlfredException("To mark, item you need to pass a valid integer!\n");
         } catch (IndexOutOfBoundsException e) {

@@ -1,2 +1,5 @@
 D | 1 | return book  | 12/12/2023 1200
-E | 0 | project meeting  | 12/12/2023 1200-12/12/2023 1400
+E | 1 | project meeting  | 12/12/2023 1200-12/12/2023 1400
+D | 0 | return book  | 12/12/2023 1200
+T | 0 | HAHA
+T | 0 | LOL la

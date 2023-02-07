@@ -29,70 +29,81 @@ public class Ui {
     /**
      * Displays the opening introduction by the program.
      */
-    public void displayOpening() {
-        System.out.println("*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*");
-        System.out.println("| Your favourite personal assistant:  |");
-        System.out.println("*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*");
-        displayLogo();
-        displayIntro();
+    public String getOpening() {
+        StringBuilder opening = new StringBuilder();
+        opening.append("*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*\n");
+        opening.append("\"| Your favourite personal assistant:  |\"\n");
+        opening.append("*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*\n");
+        opening.append(getLogo());
+        opening.append(getIntro());
+        return opening.toString();
     }
 
     /**
      * Displays the command given.
      * @param command The command written by the user.
      */
-    public void displayCommand(String command) {
-        displayLine();
+    public String getCommandMessage(String command) {
+        StringBuilder message = new StringBuilder();
+        message.append(getLines());
         command = "    " + command;
-        System.out.println(command);
-        displayLine();
+        message.append(command);
+        message.append(getLines());
+        return message.toString();
     }
 
     /**
      * Displays the error given.
      * @param e The AlfredException that was thrown in the program.
      */
-    public void displayError(AlfredException e) {
-        displayLine();
+    public String getErrorMessage(AlfredException e) {
+        StringBuilder message = new StringBuilder();
+        message.append(getLines());
         String output = "     " + e.getMessage();
-        System.out.println(output);
-        displayLine();
+        message.append(output);
+        message.append(getLines());
+        return message.toString();
     }
 
     /**
      * Displays the goodbye message by the program.
      */
-    public void displayBye() {
+    public String getByeMessage() {
         String command = "Bye. Hope to see you again soon!";
-        displayCommand(command);
+        return getCommandMessage(command);
     }
 
     /**
      * Displays the logo of the program.
      */
-    public void displayLogo() {
-        System.out.println(" _____ __     ______ _____ ____ ___ ");
-        System.out.println("|  -  |  |   |  ____|  _  |  __| _ \\     ");
-        System.out.println("| | | |  |   | |___ | |_|_| |__|| | |  ");
-        System.out.println("|  -  |  |___|  ___||  _ \\  |__||_| |");
-        System.out.println("|_| |_| ____ |__|   |_| \\_|____|__ /   ");
+    public String getLogo() {
+        StringBuilder logo = new StringBuilder();
+        logo.append(" _____ __     ______ _____ ____ ___ \n");
+        logo.append("|  -  |  |   |  ____|  _  |  __| _ \\     \n");
+        logo.append("| | | |  |   | |___ | |_|_| |__|| | |  \n");
+        logo.append("|  -  |  |___|  ___||  _ \\  |__||_| |\n");
+        logo.append("|_| |_| ____ |__|   |_| \\_|____|__ /   \n");
+        return logo.toString();
     }
 
     /**
      * Displays the opening message from the program.
      */
-    public void displayIntro() {
-        String intro = "Hello! I'm Alfred :>\n"
-                + "How can I help you today?";
-        displayLine();
-        System.out.println(intro);
-        displayLine();
+    public String getIntro() {
+        StringBuilder intro = new StringBuilder();
+        intro.append(getLines());
+        intro.append("Hello! I'm Alfred :>\n"
+                + "How can I help you today?\n");
+        intro.append(getLines());
+        return intro.toString();
     }
 
     /**
      * Displays an empty line that separates commands.
      */
-    public void displayLine() {
-        System.out.println("    ____________________________________________________________");
+    public String getLines() {
+        String lines = "    ";
+        lines = lines + "-".repeat(70);
+        return lines + "\n";
     }
 }

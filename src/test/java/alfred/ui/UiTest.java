@@ -33,7 +33,7 @@ public class UiTest {
     @Test
     public void displayLine() {
         System.setOut(ps);
-        ui.displayLine();
+        ui.getLines();
         String actual = outputStream.toString();
         String test = "    ____________________________________________________________"
                 + "\n";
@@ -45,13 +45,13 @@ public class UiTest {
     @Test
     public void displayCommand_emptyString() {
         System.setOut(ps);
-        ui.displayCommand("");
+        ui.getCommandMessage("");
         String actual = outputStream.toString();
         outputStream.reset();
 
-        ui.displayLine();
+        ui.getLines();
         System.out.println("    " + "");
-        ui.displayLine();
+        ui.getLines();
         String test = outputStream.toString();
 
         assertEquals(actual, test);
@@ -61,13 +61,13 @@ public class UiTest {
     @Test
     public void displayCommand_nonEmptyString() {
         System.setOut(ps);
-        ui.displayCommand("Hello World!");
+        ui.getCommandMessage("Hello World!");
         String actual = outputStream.toString();
         outputStream.reset();
 
-        ui.displayLine();
+        ui.getLines();
         System.out.println("    " + "Hello World!");
-        ui.displayLine();
+        ui.getLines();
         String test = outputStream.toString();
 
         assertEquals(actual, test);

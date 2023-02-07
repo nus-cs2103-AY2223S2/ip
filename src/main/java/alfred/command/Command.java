@@ -20,7 +20,7 @@ public abstract class Command {
      * @param storage The storage that handle the loading and writing of the tasks.
      * @throws AlfredException The error that is thrown when the command fails to execute.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws AlfredException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws AlfredException;
 
     /**
      * Checks if the command will result in the end of the program.

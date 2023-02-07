@@ -25,14 +25,14 @@ public class DeleteCommand extends Command {
      * {@inheritDoc}
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws AlfredException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws AlfredException {
         try {
             Task task = tasks.getTask(taskIndex);
             tasks.removeTask(taskIndex);
             String output = "Noted. I've removed this task. Remember to clear your "
                     + "remaining tasks!\n";
             output += String.format("      %s\n", task);
-            ui.displayCommand(output);
+            return ui.getCommandMessage(output);
         } catch (NumberFormatException e) {
             throw new AlfredException("To delete, item you need to pass a valid integer!\n");
         } catch (IndexOutOfBoundsException e) {

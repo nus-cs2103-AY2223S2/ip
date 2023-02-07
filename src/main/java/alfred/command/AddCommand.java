@@ -29,7 +29,7 @@ public class AddCommand extends Command {
      * {@inheritDoc}
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws AlfredException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws AlfredException {
         String[] fullCommandArr = fullCommand.split(" ", 2);
         String typeTask = fullCommandArr[0];
         String[] descriptionArr;
@@ -88,7 +88,7 @@ public class AddCommand extends Command {
         String numTasks = tasks.getSize() == 1 ? "task" : "tasks";
         String output = String.format("Noted, task added: \n      %s\n"
                 + "    Number of %s in the list: %d\n", task, numTasks, tasks.getSize());
-        ui.displayCommand(output);
+        return ui.getCommandMessage(output);
     }
 
     /**

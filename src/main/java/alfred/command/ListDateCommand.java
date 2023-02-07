@@ -26,16 +26,15 @@ public class ListDateCommand extends Command {
      * {@inheritDoc}
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws AlfredException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws AlfredException {
         int itemIndex = 1;
         String initial = String.format("Here are your pending tasks on %s: \n", date);
         StringBuilder output = new StringBuilder(initial);
         if (tasks.isEmpty()) {
-            ui.displayCommand("Woohoo! You have no pending tasks\n");
-            return;
+            return ui.getCommandMessage("Woohoo! You have no pending tasks\n");
         }
         String itemDateList = tasks.getList(date);
-        ui.displayCommand(output.append(itemDateList).toString());
+        return ui.getCommandMessage(output.append(itemDateList).toString());
     }
 
     /**

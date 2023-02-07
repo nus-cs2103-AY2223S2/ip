@@ -25,14 +25,14 @@ public class MarkCommand extends Command {
      * {@inheritDoc}
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws AlfredException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws AlfredException {
         try {
             Task task = tasks.getTask(taskIndex);
             task.markAsDone();
             String output = "Well done! Good job "
                     + "for completing your task!\n";
             output += String.format("      %s\n", task);
-            ui.displayCommand(output);
+            return ui.getCommandMessage(output);
         } catch (NumberFormatException e) {
             throw new AlfredException("To mark, item you need to pass a valid integer!\n");
         } catch (IndexOutOfBoundsException e) {
