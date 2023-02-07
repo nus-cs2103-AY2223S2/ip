@@ -3,8 +3,9 @@ package duke;
 public class Todo extends Task {
 
     /**
-     * Constructor for a Task instance
-     * @param description a simple description of this Task
+     * Constructor for a Task instance.
+     *
+     * @param description a simple description of this Task.
      */
     public Todo(String description) {
         super(description);
@@ -12,6 +13,7 @@ public class Todo extends Task {
 
     /**
      * Returns the string representation of a To-do instance with a [T] indicator.
+     *
      * @return the desired string representation of a To-do instance.
      */
     @Override
@@ -21,6 +23,7 @@ public class Todo extends Task {
 
     /**
      * Returns the string representation of a To-do instance with a [T] indicator.
+     *
      * @return the desired string representation of a To-do instance.
      */
     public String parse() {
