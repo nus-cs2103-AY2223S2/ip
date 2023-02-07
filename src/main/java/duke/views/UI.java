@@ -32,6 +32,7 @@ public class UI {
                         + newlineAndIndentString("unmark [index]")
                         + newlineAndIndentString("delete [index]")
                         + newlineAndIndentString("find [search term]")
+                        + newlineAndIndentString("free")
                         + newlineAndIndentString("bye");
     }
 

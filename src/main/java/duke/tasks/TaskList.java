@@ -1,5 +1,8 @@
 package duke.tasks;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -82,6 +85,29 @@ public class TaskList {
                 .collect(Collectors.toList());
 
         return new TaskList(new ArrayList<>(taskList));
+    }
+
+    public String findFreeDay() {
+        LocalDateTime startingDate = LocalDateTime.now();
+        while (true) {
+            LocalDateTime currentDate = startingDate;
+            List<Event> taskList = this.taskList
+                    .stream()
+                    .filter(task -> task instanceof Event)
+                    .map(Event.class::cast)
+                    .filter(event -> event.hasDateClash(currentDate))
+                    .collect(Collectors.toList());
+
+            if (taskList.isEmpty()) {
+                if (currentDate.equals(LocalDateTime.now())) {
+                    return "You are free as you have no pending events!";
+                }
+                return "Your closest free day is in "
+                        + startingDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+                        + ", " + Duration.between(LocalDateTime.now(), currentDate).toDays() + " days from now!";
+            }
+            startingDate = startingDate.plusDays(1);
+        }
     }
 
     @Override

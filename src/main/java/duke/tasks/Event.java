@@ -1,5 +1,7 @@
 package duke.tasks;
 
+import com.sun.prism.shader.AlphaOne_Color_AlphaTest_Loader;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -32,6 +34,10 @@ public class Event extends Task {
 
     public String getEndDate() {
         return this.endDate.format(DateTimeFormatter.ofPattern("HHmm, MMM d yyyy"));
+    }
+
+    public boolean hasDateClash(LocalDateTime searchDate) {
+        return !(searchDate.isBefore(startDate) || searchDate.isAfter(endDate));
     }
 
     public String toSaveFormat() {
