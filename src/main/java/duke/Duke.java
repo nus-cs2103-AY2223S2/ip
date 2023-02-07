@@ -35,9 +35,9 @@ public class Duke {
      */
 
     public String getResponse(String input) {
-        Task chosen;
-        Task created;
+        Task selected;
         String response = null;
+
         try {
             Parser.parseUserResponse(input);
             switch (Parser.getCommand()) {
@@ -56,42 +56,42 @@ public class Duke {
                 break;
             }
             case MARK: {
-                int id = Parser.parseTask(Parser.getArgs());
-                chosen = tasks.getTask(id);
-                chosen.mark();
-                response = ui.markTaskMessage(chosen);
+                int id = Parser.parseTask();
+                selected = tasks.getTask(id);
+                selected.mark();
+                response = ui.markTaskMessage(selected);
                 break;
             }
             case UNMARK: {
-                int id = Parser.parseTask(Parser.getArgs());
-                chosen = tasks.getTask(id);
-                chosen.unmark();
-                response = ui.unmarkTaskMessage(chosen);
+                int id = Parser.parseTask();
+                selected = tasks.getTask(id);
+                selected.unmark();
+                response = ui.unmarkTaskMessage(selected);
                 break;
             }
             case DELETE: {
-                int id = Parser.parseTask(Parser.getArgs());
-                chosen = tasks.getTask(id);
-                tasks.deleteTask(chosen);
-                response = ui.deleteTaskMessage(chosen, tasks);
+                int id = Parser.parseTask();
+                selected = tasks.getTask(id);
+                tasks.deleteTask(selected);
+                response = ui.deleteTaskMessage(selected, tasks);
                 break;
             }
             case TODO: {
-                created = Parser.parseTodo(Parser.getArgs());
-                tasks.addTask(created);
-                response = ui.addedTaskMessage(created, tasks);
+                selected = Parser.parseTodo();
+                tasks.addTask(selected);
+                response = ui.addedTaskMessage(selected, tasks);
                 break;
             }
             case DEADLINE: {
-                created = Parser.parseDeadline(Parser.getArgs());
-                tasks.addTask(created);
-                response = ui.addedTaskMessage(created, tasks);
+                selected = Parser.parseDeadline();
+                tasks.addTask(selected);
+                response = ui.addedTaskMessage(selected, tasks);
                 break;
             }
             case EVENT: {
-                created = Parser.parseEvent(Parser.getArgs());
-                tasks.addTask(created);
-                response = ui.addedTaskMessage(created, tasks);
+                selected = Parser.parseEvent();
+                tasks.addTask(selected);
+                response = ui.addedTaskMessage(selected, tasks);
                 break;
             }
             default:
