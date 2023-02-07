@@ -22,7 +22,7 @@ public class Event extends Task {
     }
 
     /**
-     * Identifier of the type of task.
+     * Identifier of the type of task for storage.
      *
      * @return The type of task in a string.
      */

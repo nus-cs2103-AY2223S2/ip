@@ -34,7 +34,7 @@ public class TodoCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
-            taskList.addTasks(todo);
+            taskList.addTask(todo);
             storage.updateStorage(taskList);
             return ui.printAddTask(taskList, todo);
     }
