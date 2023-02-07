@@ -57,8 +57,7 @@ public class Ui {
      * @return String object to be written to the command line.
      */
     public static String format(String input) {
-        String s = "____________________________________";
-        return String.format("%s\n%s\n%s", s, input, s);
+        return input;
     }
 
     /**

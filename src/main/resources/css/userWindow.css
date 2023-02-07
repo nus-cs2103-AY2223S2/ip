@@ -1,6 +1,6 @@
 .scroll-pane .viewport {
-    -fx-background-image: url('../img/room.jpeg');
-    -fx-background-size: 400;
+    -fx-background-image: url('../img/ocean.jpeg');
+    -fx-background-size: cover;
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
 }
@@ -16,7 +16,7 @@
 .userWindow {
     -fx-background-color: rgba(135, 206, 235, 0.8);
     -fx-background-radius: 20px;
-    -fx-border-color: rgb(202, 182, 255);
+    -fx-border-color: rgb(202, 178, 255);
     -fx-border-width: 2;
     -fx-border-radius: 20px;
     -fx-padding: 20;
