@@ -5,9 +5,10 @@ import clippy.command.Parser;
 import clippy.exception.ClippyException;
 import clippy.storage.Storage;
 import clippy.task.TaskList;
-import clippy.ui.Gui;
+import clippy.ui.GuiLinker;
 import clippy.ui.Ui;
 import javafx.application.Application;
+import javafx.application.Platform;
 
 
 /**
@@ -31,33 +32,10 @@ public class Clippy {
     /**
      * Sets up the UI, storage and TaskList components for Clippy to run.
      */
-    public Clippy() {
-        this.ui = new Ui(">>>", "###");
+    public Clippy(Ui ui) {
+        this.ui = ui;
         this.storage = new Storage(this.ui);
         this.taskList = new TaskList(storage.loadState());
-    }
-
-    /**
-     * Accepts user input and handles them appropriately until the user exits.
-     */
-    public void run() {
-        boolean shouldContinue = true;
-        ui.prettyPrint("Hello! I'm Clippy, your lightweight personal assistant.");
-        ui.prettyPrint("What can I do for you today?");
-
-        while (shouldContinue) {
-            try {
-                String command = ui.readCommand();
-                Command c = Parser.parse(command);
-                c.execute(ui, taskList, storage);
-                shouldContinue = c.shouldContinue();
-            } catch (ClippyException e) {
-                ui.systemPrint(e.toString());
-            } catch (Exception e) {
-                ui.systemPrint("System error: " + e.toString());
-                shouldContinue = false;
-            }
-        }
     }
 
     /**
@@ -66,14 +44,22 @@ public class Clippy {
      * @param args Command line arguments.
      */
     public static void main(String[] args) {
-        // System.out.println("Hello from\n" + logo);
-        //new Clippy().run();
-        Application.launch(Gui.class, args);
+        Application.launch(GuiLinker.class, args);
     }
 
-    // TODO: update with proper parser response
-    public String getResponse(String input) {
-        return "Clippy heard: " + input;
+    public void handleCommand(String input) {
+        try {
+            Command command = Parser.parse(input);
+            command.execute(ui, taskList, storage);
+            if (command.shouldContinue() == false) {
+                Platform.exit();
+            }
+        } catch (ClippyException e) {
+            ui.prettyPrint(e.toString());
+        } catch (Exception e) {
+            ui.systemPrint(e.toString());
+            Platform.exit();
+        }
     }
 
 }

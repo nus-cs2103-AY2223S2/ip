@@ -12,22 +12,24 @@ import javafx.stage.Stage;
 /**
  * A 'linker' between the FXML controllers and the main Clippy program.
  */
-public class Gui extends Application {
+public class GuiLinker extends Application {
     private Clippy clippy;
 
     @Override
     public void start(Stage stage) {
         try {
-            clippy = new Clippy();
-            FXMLLoader fxmlLoader = new FXMLLoader(Gui.class.getResource("/view/MainWindow.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(GuiLinker.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setClippy(clippy);
+            MainWindow gui = fxmlLoader.<MainWindow>getController();
+            clippy = new Clippy(gui);
+            gui.setClippy(clippy);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 
 }

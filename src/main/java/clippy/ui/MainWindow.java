@@ -8,11 +8,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
-public class MainWindow extends AnchorPane {
+public class MainWindow extends AnchorPane implements Ui {
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -37,17 +38,36 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Creates one dialog box, echoing user input, before passing the input
+     * to Clippy to handle. Clears user input after done.
      */
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = clippy.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.createUserDialog(input, userImage),
-                DialogBox.createClippyDialog(response, clippyImage)
-        );
+        showUserTextbox(input);
+        clippy.handleCommand(input);
         userInput.clear();
+    }
+
+    public void showUserTextbox(String text) {
+        dialogContainer.getChildren().add(DialogBox.createUserDialog(text, userImage));
+    }
+    public void showClippyTextbox(String text) {
+        dialogContainer.getChildren().add(DialogBox.createClippyDialog(text, clippyImage));
+    }
+
+    @Override
+    public void prettyPrint(String text) {
+        showClippyTextbox(text);
+    }
+    @Override
+    public void systemPrint(String text) {
+        showClippyTextbox(text);
+    }
+
+    @Override
+    public void exit() {
+        Stage stage = (Stage) this.getScene().getWindow();
+        stage.close();
     }
 }
