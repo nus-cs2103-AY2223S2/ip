@@ -13,6 +13,15 @@ public class Storage {
     private Path homeDir;
     private Path dataFile;
 
+    /**
+     * Constructor for Storage class.
+     * Manages Duke's directory and file location for its data.
+     * Creates new directory /data/ if directory does not exist.
+     *
+     * Returns Storage object.
+     * @param homeDir Directory path for Duke program.
+     * @throws RuntimeException If directory creation fails.
+     */
     public Storage(String homeDir) {
         Path dir = Paths.get(homeDir, "data");
         if (!Files.exists(dir)) {
@@ -26,6 +35,13 @@ public class Storage {
         this.homeDir = dir;
     }
 
+    /**
+     * Loads saved tasks from previous execution of Duke.
+     * Attempt to create data.txt data file if not found.
+     *
+     * @return ArrayList<Task> that is either empty or filled with loaded tasks.
+     * @throws DukeException If data file creation or loading fails.
+     */
     public ArrayList<Task> load() throws DukeException {
 
         Path dataFile = Paths.get(String.valueOf(this.homeDir), "data.txt");
@@ -68,6 +84,11 @@ public class Storage {
         return loadedTasks;
     }
 
+    /**
+     * Saves currently registered tasks into the data file.
+     *
+     * @param tasks ArrayList<Task> of currently registered tasks by Duke.
+     */
     public void save(ArrayList<Task> tasks) {
         try {
             FileWriter saveWriter = new FileWriter(dataFile.toFile(), false);

@@ -4,6 +4,12 @@ public class Task {
     protected String description;
     protected TaskStatus status;
 
+    /**
+     * Enumeration for TaskStatus.
+     * DONE: Task is done.
+     * NOT_DONE: Task is not done.
+     * DOING: Task is currently in progress.
+     */
     public enum TaskStatus {
         DONE {
             public String toString() {

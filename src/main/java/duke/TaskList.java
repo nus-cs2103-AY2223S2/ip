@@ -7,16 +7,29 @@ public class TaskList {
     private int numOfTasks;
     protected ArrayList<Task> tasks;
 
+    /**
+     * Constructor for TaskList mainly used by Storage to return loaded tasks.
+     * Returns TaskList object with loaded tasks.
+     *
+     * @param loadedTasks ArrayList<Task> of tasks loaded by Storage.
+     */
     public TaskList(ArrayList<Task> loadedTasks) {
         this.numOfTasks = loadedTasks.size();
         this.tasks = loadedTasks;
     }
 
+    /**
+     * Constructor for TaskList in very first initialization of Duke or when data file is corrupted or does not exist.
+     * Returns empty TaskList object.
+     */
     public TaskList() {
         this.numOfTasks = 0;
         this.tasks = new ArrayList<>();
     }
 
+    /**
+     * Prints all tasks that are currently registered.
+     */
     public void printList() {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < numOfTasks; i++) {
@@ -24,6 +37,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Marks specified task as done.
+     *
+     * @param arg Index starting from 1 for the specific task to be marked done.
+     * @throws DukeException If arg is out of bounds or not an integer.
+     */
     public void markTask(String arg) throws DukeException {
         try {
             int num = Integer.parseInt(arg);
@@ -37,6 +56,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Marks specified task as not done.
+     *
+     * @param arg Index starting from 1 for the specific task to be marked not done.
+     * @throws DukeException If arg is out of bounds or not an integer.
+     */
     public void unmarkTask(String arg) throws DukeException {
         try {
             int num = Integer.parseInt(arg);
@@ -50,6 +75,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds a Todo task into the TaskList.
+     *
+     * @param args Array of inputs for constructing Todo. Each element refers to each word of Todo's description.
+     */
     public void addTodo(String[] args) {
         int len = args.length;
         StringBuilder taskName = new StringBuilder(args[1]);
@@ -63,6 +93,13 @@ public class TaskList {
         System.out.println("Now you have " + numOfTasks + " tasks in the list.");
     }
 
+    /**
+     * Adds a Deadline task into the TaskList.
+     *
+     * @param args Array of inputs for constructing Deadline task. First few elements up to {by} refers to each word of
+     *         Deadline's description. Remaining elements refer to the deadline date.
+     * @param by Index where the argument for LocalDate deadline begins.
+     */
     public void addDeadline(String[] args, int by) throws DukeException {
         int len = args.length;
         StringBuilder taskName = new StringBuilder(args[1]);
@@ -80,6 +117,15 @@ public class TaskList {
         System.out.println("Now you have " + numOfTasks + " tasks in the list.");
     }
 
+    /**
+     * Adds an Event task into the TaskList.
+     *
+     * @param args Array of inputs for constructing Event task. First few elements up to from refers to each word of
+     *         Event's description. Remaining elements up to {to} refers to start date of Event. Remaining elements
+     *         refers to the end date of Event.
+     * @param from Index where the argument for LocalDate start date begins.
+     * @param to Index where the argument for LocalDate end date begins.
+     */
     public void addEvent(String[] args, int from, int to) throws DukeException {
         int len = args.length;
         StringBuilder taskName = new StringBuilder(args[1]);
@@ -101,6 +147,12 @@ public class TaskList {
         System.out.println("Now you have " + numOfTasks + " tasks in the list.");
     }
 
+    /**
+     * Deletes task in the TaskList specified by the argument.
+     *
+     * @param arg Index starting from 1 for the specific task to be deleted.
+     * @throws DukeException If arg is out of bounds or is not an integer.
+     */
     public void deleteTask(String arg) throws DukeException {
         try {
             int num = Integer.parseInt(arg);

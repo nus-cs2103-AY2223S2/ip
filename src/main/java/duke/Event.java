@@ -11,6 +11,15 @@ public class Event extends Task {
     protected LocalDate fromDate;
     protected LocalDate toDate;
 
+    /**
+     * Constructor for Event class.
+     * Returns Event task with status set as NOT_DONE.
+     *
+     * @param description String description of Event task.
+     * @param from Event start date in the format for LocalDate.
+     * @param to Event end date in the format for LocalDate.
+     * @throws DukeException If by is not parsable as LocalDate.
+     */
     public Event(String description, String from, String to) throws DukeException {
         super(description);
         this.from = from;
@@ -24,6 +33,16 @@ public class Event extends Task {
 
     }
 
+    /**
+     * Constructor for Event class to be mainly used by Storage class to load tasks from data.txt file.
+     * Returns Event task with specified status.
+     *
+     * @param description String description of Event task.
+     * @param from Event start date in the format for LocalDate.
+     * @param to Event end in the format for LocalDate.
+     * @param status Status of the task.
+     * @throws DukeException If by is not parsable as LocalDate.
+     */
     public Event(String description, String from, String to, String status) throws DukeException {
         super(description, status);
         this.from = from;
@@ -42,6 +61,10 @@ public class Event extends Task {
                 + " to: " + this.toDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
+    /**
+     * Converts Event data into String to be used to save task data.
+     * Returns String of Event in a format to be saved and loaded in the future.
+     */
     @Override
     public String toData() {
         return "E|" + super.toData() + "|" + this.from + "|" + this.to;

@@ -6,10 +6,22 @@ public class Parser {
 
     TaskList tasks;
 
+    /**
+     * Constructor for Parser class.
+     * Returns Parser for Duke to parse user input.
+     *
+     * @param tasks TaskList object to reference for executing parsed commands.
+     */
     public Parser(TaskList tasks) {
         this.tasks = tasks;
     }
 
+    /**
+     * Parses user input and executes it.
+     *
+     * @param commandLine User input in String.
+     * @throws DukeException If user inputs a wrong command that is not specified or implemented.
+     */
     public void parse(String commandLine) throws DukeException {
 
         System.out.printf(Duke.DIV_OPEN);

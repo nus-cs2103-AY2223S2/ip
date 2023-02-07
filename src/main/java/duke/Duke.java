@@ -18,6 +18,12 @@ public class Duke {
     private Ui ui;
     private Parser parser;
 
+    /**
+     * Constructor for Duke class.
+     * Returns Duke object which runs the program.
+     *
+     * @param filePath File path which Duke will use for file creation and management.
+     */
     public Duke(String filePath) {
         System.out.println("Loading Duke...");
         ui = new Ui();
@@ -31,7 +37,7 @@ public class Duke {
         this.parser = new Parser(this.tasks);
     }
 
-    public void run() {
+    private void run() {
         boolean isRunning = true;
         Scanner sc = new Scanner(System.in);
         while (isRunning) {
@@ -50,7 +56,7 @@ public class Duke {
         sc.close();
     }
 
-    public void terminate() {
+    private void terminate() {
         storage.save(tasks.tasks);
         ui.sayBye();
     }
