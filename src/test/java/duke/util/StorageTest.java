@@ -24,7 +24,7 @@ public class StorageTest {
         parser.parse(testInput1);
         String[] testInput2 = "bye".split(" ", 2);
         parser.parse(testInput2);
-        
+
         assertEquals(Files.readAllLines(file), singletonList(new Event("blackpink concert", new String[] {"2023-05-13T19:30", "2023-05-13T22:30"}).toData()));
     }
 }
