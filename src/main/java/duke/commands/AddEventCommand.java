@@ -35,15 +35,16 @@ public class AddEventCommand extends Command {
      * @param tasks Existing TaskList used by the main Duke class.
      * @param ui Existing Ui used by the main Duke class.
      * @param storage Existing Storage used by the main Duke class.
+     * @return output to be shown to user
      * @throws DukeException if something happened to task storage file during runtime
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        Task newTask = new Event(description, from, to);
-        tasks.add(newTask);
-        ui.showToUser("You have added: " + newTask, "You have " + tasks.getSize() + " tasks in the list.");
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
+            Task newTask = new Event(description, from, to);
+            tasks.add(newTask);
             storage.appendToFile(newTask);
+            return ui.showToUser("You have added: " + newTask, "You have " + tasks.getSize() + " tasks in the list.");
         } catch (IOException e) {
             throw new DukeException("Unable to write to file. Please run Duke again.");
         }

@@ -29,15 +29,16 @@ public class DeleteCommand extends Command {
      * @param tasks Existing TaskList used by the main Duke class.
      * @param ui Existing Ui used by the main Duke class.
      * @param storage Existing Storage used by the main Duke class.
+     * @return output to be shown to user
      * @throws DukeException if something happened to task storage file during runtime or task specified does not exist.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             Task deletedTask = tasks.delete(this.index);
-            ui.showToUser("You have deleted: " + deletedTask.toString(),
-                    "You have " + tasks.getSize() + " tasks in the list.");
             storage.writeToFile(tasks);
+            return ui.showToUser("You have deleted: " + deletedTask.toString(),
+                    "You have " + tasks.getSize() + " tasks in the list.");
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Task does not exist at specified index.");
         } catch (IOException e) {

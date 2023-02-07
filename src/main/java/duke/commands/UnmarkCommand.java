@@ -27,15 +27,16 @@ public class UnmarkCommand extends Command {
      * @param tasks Existing TaskList used by the main Duke class.
      * @param ui Existing Ui used by the main Duke class.
      * @param storage Existing Storage used by the main Duke class.
+     * @return output to be shown to user
      * @throws DukeException if something happened to task storage file during runtime or task specified does not exist.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             tasks.unmark(this.index);
             int taskNum = index + 1;
             storage.writeToFile(tasks);
-            ui.showToUser("You have marked task " + taskNum + " as undone.");
+            return ui.showToUser("You have marked task " + taskNum + " as undone.");
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Task does not exist at specified index.");
         } catch (IOException e) {

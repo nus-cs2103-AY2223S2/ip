@@ -28,15 +28,15 @@ public class FindCommand extends Command {
      * @param tasks Existing TaskList used by the main Duke class.
      * @param ui Existing Ui used by the main Duke class.
      * @param storage Existing Storage used by the main Duke class.
+     * @return output to be shown to user
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         ArrayList<Task> matchingTasks = tasks.find(this.keyword);
         if (matchingTasks.size() > 0) {
-            ui.showToUser("Here are the matching tasks in your list: ");
-            ui.showIndexedList(matchingTasks);
+            return ui.showToUser("Here are the matching tasks in your list: ", ui.showIndexedList(matchingTasks));
         } else {
-            ui.showToUser("No matching tasks were found.");
+            return ui.showToUser("No matching tasks were found.");
         }
     }
 }

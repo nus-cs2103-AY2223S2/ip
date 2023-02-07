@@ -21,7 +21,7 @@ public class ExitCommand extends Command {
      * @param storage Existing Storage used by the main Duke class.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return "";
     }
 }

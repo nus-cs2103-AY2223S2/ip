@@ -59,43 +59,39 @@ public class Ui {
         return userInput;
     }
 
-    public void showWelcome() {
-        showToUser(GREETING, DIVIDER);
+    public String showWelcome() {
+        return showToUser(GREETING);
     }
 
-    public void showGoodBye() {
-        showToUser(GOODBYE, DIVIDER);
+    public String showError(String errorMessage) {
+        return showToUser(errorMessage);
     }
 
-    public void showError(String errorMessage) {
-        showToUser(errorMessage, DIVIDER);
-    }
-
-    public void showLine() {
-        showToUser(DIVIDER);
-    }
-
-    public void showLoadingError() {
-        showToUser(LOADING_ERROR);
+    public String showLoadingError() {
+        return showToUser(LOADING_ERROR);
     }
 
     /**
      * Calls Ui to show an indexed list of tasks
      * @param tasks task list
      */
-    public void showIndexedList(ArrayList<Task> tasks) {
+    public String showIndexedList(ArrayList<Task> tasks) {
+        String[] output = new String[tasks.size()];
         int count = 1;
         for (Task t : tasks) {
-            showToUser(count + ". " + t.toString());
+            output[count-1] = (count + ". " + t.toString());
             count++;
         }
+        return showToUser(output);
     }
 
     /** Shows a variable number of messages to user */
-    public void showToUser(String... message) {
+    public String showToUser(String... message) {
+        StringBuilder output = new StringBuilder();
         for (String m : message) {
-            this.out.println(m.replace("\n", LS));
+            output.append(m).append('\n');
         }
+        return output.toString();
     }
 
 }
