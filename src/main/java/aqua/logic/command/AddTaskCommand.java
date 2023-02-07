@@ -32,7 +32,7 @@ public abstract class AddTaskCommand extends CommandController {
     @Override
     public ExecutionService getService(ArgumentMap args, LogicManager logicManager, IoManager ioManager) {
         return ExecutionService.of(new AddDisplayerTask(args, logicManager, ioManager))
-                .setFollowUp(new WriteTaskCommand().getService(args, logicManager));
+                .setFollowUp(new WriteTaskCommand().getService(args, logicManager, ioManager));
     }
 
 
