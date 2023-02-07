@@ -32,6 +32,7 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        assert tasks != null;
         ArrayList<Task> matchingTasks = tasks.find(this.keyword);
         if (matchingTasks.size() > 0) {
             return ui.showToUser("Here are the matching tasks in your list: ", ui.showIndexedList(matchingTasks));
