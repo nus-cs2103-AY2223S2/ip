@@ -2,19 +2,6 @@ package src.main.c4po;
 
 public class HelpCommand extends Command {
 
-    /**
-     * Executes the command with actions specific to each extension of this
-     * class Command
-     *
-     * @param tasks   are the list of tasks
-     * @param ui      is the instance of UI
-     * @param storage the instance of Storage which holds and writes to the data file
-     * @throws BotException
-     */
-    @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws BotException {
-
-    }
 
     /**
      * Executes the command with actions specific to each extension of this

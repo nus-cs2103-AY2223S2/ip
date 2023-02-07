@@ -1,14 +1,11 @@
 package src.main.c4po;
 
-public class ListCommand extends Command{
 
-    /**
-     * An executable Command which lists all tasks in the task list
-     */
-    public ListCommand() {
-
-    }
-
+/**
+ * Creates an executable which on execution, returns the response containing
+ * the task-list, sorted by priority.
+ */
+public class GetPrioritySortedCommand extends Command {
 
 
     /**
@@ -23,12 +20,15 @@ public class ListCommand extends Command{
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage, boolean isStringOutput) throws BotException {
-        return tasks.printList(true,true);
+
+        return "Sorted by priority: " + "\n" + new TaskList(tasks.getPrioritySortedTasks()).printList(true,true);
+
     }
 
     /**
-     * {@inheritDoc}
-     * @return boolean
+     * Returns whether a command should cause bot to end interaction
+     *
+     * @return boolean to be used in the main loop
      */
     @Override
     public boolean isExit() {

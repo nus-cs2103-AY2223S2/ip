@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class EventTest {
     @Test
     public void getTaskInlineFormatTest(){
-        Event newEvent = new Event("dummydesc", "1pm", "3pm");
+        Event newEvent = new Event("dummydesc", "1pm", "3pm", 0);
 
         String expected = "1. [E][ ] dummydesc (from: 1pm to: 3pm)";
         assertEquals(expected, newEvent.getTaskInline(1));

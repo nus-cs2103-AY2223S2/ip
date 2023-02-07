@@ -51,31 +51,7 @@ public class C4PO {
         }
     }
 
-    /**
-     * Runs the main loop of the bot interaction, run this to start bot
-     */
-    public void run() {
 
-        //Introduce the bot
-        Ui.showIntroduction();
-
-        //Main Loop
-        //From here, append newly added Tasks to the file
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String receive = ui.getNextInput(); //reads user input
-                Command c = parser.parse(receive);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (Exception e) {
-                Ui.print(e.getMessage());
-                Ui.showCommandError();
-            } finally {
-                Ui.printDashLine(1);
-            }
-        }
-    }
 
     /**
      * Starts the run of the bot
@@ -103,9 +79,11 @@ public class C4PO {
             isExit = c.isExit();
             return response;
         } catch (Exception e) {
-            throw new BotException(Ui.UNABLE_TO_UNDERSTAND_QUOTE
-                    + "\n"
-                    + Ui.showCommandError(true));
+            System.out.println(e.getMessage());
+            throw new BotException(Ui.APOLOGIES_QUOTE
+                    + e.getMessage()
+                    + "\n" + Ui.GET_COMMANDS_QUOTE
+                    + " " + Ui.showCommandError(true));
         }
     }
 }

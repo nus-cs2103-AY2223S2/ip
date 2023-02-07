@@ -16,36 +16,7 @@ public class FindCommand extends Command {
         this.keywordsSplit = keywords;
     }
 
-    /**
-     * Executes the command with actions specific to each extension of this
-     * class Command
-     *
-     * @param tasks   are the list of tasks
-     * @param ui      is the instance of UI
-     * @param storage the instance of Storage which holds and writes to the data file
-     * @throws BotException
-     */
-    @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws BotException {
-        Ui.showTasksFound();
-        ArrayList<Task> tasksFound = new ArrayList<>();
 
-        for ( String keyword: keywordsSplit ) {
-            //Search for tasks
-            Ui.print("keyword(s) typed: " + keyword);
-            ArrayList<Task> foundTasks = tasks.findTask(keyword);
-            if (!(foundTasks == null || foundTasks.isEmpty())) {
-                tasksFound.addAll(foundTasks);
-            }
-        }
-        if (tasksFound.isEmpty()) {
-            Ui.showNoTasksFound();
-        } else {
-            TaskList tempTaskList = new TaskList(tasksFound);
-            tempTaskList.printList(false);
-        }
-
-    }
 
     /**
      * Executes the command with actions specific to each extension of this

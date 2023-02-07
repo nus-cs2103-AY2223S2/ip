@@ -10,8 +10,8 @@ public class Event extends Task{
      * @param start String of start time
      * @param end String of end time
      */
-    public Event(String description, String start, String end) {
-        super(description, false);
+    public Event(String description, String start, String end, Integer priority) {
+        super(description, false, priority);
         this.start = start;
         this.end = end;
     }
@@ -23,12 +23,13 @@ public class Event extends Task{
      * @param end String of end time
      * @param isDone boolean of whether task is done
      */
-    public Event(String description, String start, String end, boolean isDone) {
-        super(description, isDone);
+    public Event(String description, String start, String end, boolean isDone, Integer priority) {
+        super(description, isDone , priority);
         this.start = start;
         this.end = end;
-
     }
+
+
 
 
     @Override

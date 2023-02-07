@@ -7,16 +7,7 @@ public class QuitCommand extends Command {
         toQuit = true;
     }
 
-    /**
-     * {@inheritDoc}
-     * @param tasks are the list of tasks
-     * @param ui is the instance of UI
-     * @param storage the instance of Storage which holds and writes to the data file
-     */
-    @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        Ui.showFarewell();
-    }
+
 
     /**
      * Executes the command with actions specific to each extension of this

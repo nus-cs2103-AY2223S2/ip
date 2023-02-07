@@ -12,7 +12,7 @@ public class TaskListTest {
     @Test
     public void testAddedTask() throws BotException {
         TaskList tasks = new TaskList();
-        ToDo newTodo = new ToDo("testTodo");
+        ToDo newTodo = new ToDo("testTodo", 10);
         tasks.addItem(newTodo);
         assertEquals(newTodo, tasks.getItem(1));
     }

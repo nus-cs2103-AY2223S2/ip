@@ -22,7 +22,7 @@ public class Deadline extends Task {
     protected LocalDate byDate;
     protected LocalTime byTime = LocalTime.now();
     public static String dateTimeParseErrMsg = "Could not parse date time format, please write yyyy-MM-dd [HHmm]. " +
-            "Include 0s in the tenths place. Optionally include time, separated byRec a space";
+            "Include 0s in the tenths place. Optionally include time, separated by a space";
 
     /**
      * Instantiates a instance of Deadline Task object with description and a deadline
@@ -31,8 +31,8 @@ public class Deadline extends Task {
      * @param byRec details the deadline in yyyy-mm-dd hhmm
      * @param isDone specifies whether the deadline task is done
      */
-    public Deadline(String description, String byRec, boolean isDone) {
-        super(description, isDone);
+    public Deadline(String description, String byRec, boolean isDone, Integer priority) {
+        super(description, isDone, priority);
         this.byRec = byRec;
         ArrayList<String> arr = new ArrayList<>(List.of(byRec.split(" ")));
 
@@ -55,8 +55,8 @@ public class Deadline extends Task {
      * @param byRec a String which details the deadline date-time in yyyy-mm-dd hhmm format
      * @throws BotException if the datetime cannot be parsed
      */
-    public Deadline(String description, String byRec) throws BotException {
-        super(description, false);
+    public Deadline(String description, String byRec, Integer priority) throws BotException {
+        super(description, false, priority);
         this.byRec = byRec;
         ArrayList<String> arr = new ArrayList<>(List.of(byRec.split(" ")));
 
@@ -99,11 +99,11 @@ public class Deadline extends Task {
      */
     @Override
     public String getTaskInline(Integer index) {
-        return index.toString() + ". [D]" + super.getTaskInline() + " (byRec: " + byStr + " " + byTimeStr + ")";
+        return index.toString() + ". [D]" + super.getTaskInline() + " (by: " + byStr + " " + byTimeStr + ")";
     }
 
     @Override
     public String toString() {
-        return "[D] " + super.toString() + " (byRec: " + byStr + " " + byTimeStr + ")";
+        return "[D] " + super.toString() + " (by: " + byStr + " " + byTimeStr + ")";
     }
 }

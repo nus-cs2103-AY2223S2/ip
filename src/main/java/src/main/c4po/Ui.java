@@ -24,8 +24,11 @@ public class Ui {
 
     private static final String NO_SUCH_TASK_QUOTE = "No such item exists in list";
 
-    public static final String UNABLE_TO_UNDERSTAND_QUOTE = "My apologies sir, my program forbids me from translating anything other than command words." + "\n"
-            + "input /commands for the list of available commands!";
+    public static final String APOLOGIES_QUOTE = "My apologies sir. ";
+
+    public static final String UNABLE_TO_UNDERSTAND_QUOTE = "My programming only allows me to translate command words!";
+
+    public static final String GET_COMMANDS_QUOTE = "- enter /help for the list of available commands!";
     private static final String MARKED_DONE_QUOTE = "Great work sir! I've marked this task as done. Task:";
     public static final String MARK_ERR = "Failed to delete! Index for deletion may be empty or does not exist.";
     private static final String UNMARKED_QUOTE = "Ahhh I see ...  I shall unmark that task then. *beep* Done. Task:";
@@ -45,7 +48,8 @@ public class Ui {
             + "\n" + "Deleting task | delete {task_index}"
             + "\n" + "Finding tasks with keywords | find {task_keyword}"
             + "\n" + "Mark or Unmark tasks | mark {task_index} | unmark {task_index}"
-            + "\n" + "Help | /commands ";
+            + "\n" + "Help | /help "
+            + "\n" + "Show Priority List | priority";
 
 
     public Ui() {
