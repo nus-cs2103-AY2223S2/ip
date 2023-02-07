@@ -1,5 +1,7 @@
 package duke;
 
+import javafx.application.Platform;
+
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -76,7 +78,7 @@ public class Duke {
                     break;
                 }
                 storage.updateTaskList(tasks);
-                ui.askForNextCommand();
+                Ui.askForNextCommand();
             }
         } catch (DukeException e) {
             System.out.println(e.getMessage());
@@ -84,6 +86,62 @@ public class Duke {
             System.out.println("Something went wrong while handling this task.");
         } catch (IOException e) {
             System.out.println("Something went wrong. ):");
+        }
+    }
+
+    protected String getResponse(String command) {
+        try {
+            String typeOfCommand = command.split(" ")[0];
+            switch (typeOfCommand) {
+            case "bye":
+                ui.sayBye();
+                Platform.exit();
+            case "list":
+                return ui.showTaskList(tasks);
+            case "mark":
+                int indexOfTaskToMarkDone = Integer.parseInt(command.split(" ")[1]) - 1;
+                Task markedTask = tasks.markTaskAsDone(indexOfTaskToMarkDone);
+                storage.updateTaskList(tasks);
+                return ui.showMarkingTaskDone(markedTask);
+            case "unmark":
+                int indexOfTaskToMarkUndone = Integer.parseInt(command.split(" ")[1]) - 1;
+                Task unmarkedTask = tasks.markTaskAsUndone(indexOfTaskToMarkUndone);
+                storage.updateTaskList(tasks);
+                return ui.showMarkingTaskUndone(unmarkedTask);
+            case "todo":
+                Task newTodo = Parser.makeTodoFromCommand(command);
+                tasks.addTask(newTodo);
+                storage.updateTaskList(tasks);
+                return ui.showAddingNewTask(newTodo, tasks);
+            case "deadline":
+                Task newDeadline = Parser.makeDeadlineFromCommand(command);
+                tasks.addTask(newDeadline);
+                storage.updateTaskList(tasks);
+                return ui.showAddingNewTask(newDeadline, tasks);
+            case "event":
+                Task newEvent = Parser.makeEventFromCommand(command);
+                tasks.addTask(newEvent);
+                storage.updateTaskList(tasks);
+                return ui.showAddingNewTask(newEvent, tasks);
+            case "delete":
+                int indexOfTaskToDelete = Integer.parseInt(command.split(" ")[1]);
+                Task taskToDelete = tasks.deleteTask(indexOfTaskToDelete);
+                storage.updateTaskList(tasks);
+                return ui.showDeletingTask(taskToDelete, tasks);
+            case "find":
+                String searchWord = Parser.getSearchWord(command);
+                TaskList tasksFound = tasks.makeTaskFinder(searchWord);
+                storage.updateTaskList(tasks);
+                return ui.showFindingTask(tasksFound);
+            default:
+                throw new DukeException("Command not recognised.");
+            }
+        } catch (DukeException e) {
+            return e.getMessage();
+        } catch (IndexOutOfBoundsException e) {
+            return "Something went wrong while handling this task.";
+        } catch (NullPointerException | IOException e) {
+            return "Something went wrong";
         }
     }
 

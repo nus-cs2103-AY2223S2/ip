@@ -2,60 +2,64 @@ package duke;
 
 public class Ui {
 
-    public void sayHello() {
-        System.out.println("Sup, I'm Dupe. How can I help you?");
+    public Ui() {}
+
+    public String sayHello() {
+        return "Hello! How can I help you?";
     }
 
-    public void sayBye() {
-        System.out.println("Goodbye.");
+    public String sayBye() {
+        return "Goodbye!";
     }
 
-    public void showLoadingError() {
-        System.out.println("Currently no task in task list. Creating new task list...");
+    public String showLoadingError() {
+        return "Currently no task in task list. Creating new task list..." + askForNextCommand();
     }
 
-    public void showDeletingTask(Task task, TaskList taskList) {
-        System.out.printf("Got it! I have removed this task: \n%s\n "
+    public String showDeletingTask(Task task, TaskList taskList) {
+        return String.format("Got it! I have removed this task: \n%s\n "
                         + "Now you have %d tasks in the list.%n", task.getDescription(),
-                taskList.getTaskListSize());
+                taskList.getTaskListSize()) + askForNextCommand();
     }
 
-    public void showAddingNewTask(Task task, TaskList taskList) {
-        System.out.printf("Got it! I have added a new task: \n%s\n" +
+    public String showAddingNewTask(Task task, TaskList taskList) {
+        return String.format("Got it! I have added a new task: \n%s\n" +
                         "Now you have %d tasks in the list%n", task.getDescription(),
-                taskList.getTaskListSize());
+                taskList.getTaskListSize()) + askForNextCommand();
     }
 
-    public void showMarkingTaskDone(Task task) {
-        System.out.printf("Nice! I've marked this task as done:\n %s%n",
-                task.getDescription());
+    public String showMarkingTaskDone(Task task) {
+        return String.format("Nice! I've marked this task as done:\n %s%n",
+                task.getDescription()) + askForNextCommand();
     }
 
-    public void showMarkingTaskUndone(Task task) {
-        System.out.printf("Alright! I've marked this task as not done yet:\n %s%n",
-                task.getDescription());
+    public String showMarkingTaskUndone(Task task) {
+        return String.format("Alright! I've marked this task as not done yet:\n %s%n",
+                task.getDescription()) + askForNextCommand();
     }
 
-    public void showTaskList(TaskList tasks) {
+    public String showTaskList(TaskList tasks) {
+        if (tasks.isEmpty()) {
+            return "No tasks in task list." + askForNextCommand();
+        }
+        String taskList = "";
         for (int i = 0; i < tasks.getTaskListSize(); i++) {
             Task currTask = tasks.getTaskByIndex(i);
-            System.out.printf("%d. %s\n", i + 1, currTask.description());
+            taskList = String.format("%s%d. %s\n", taskList, i + 1, currTask.getDescription());
         }
-        if (tasks.isEmpty()) {
-            System.out.println("No tasks in task list.");
-        }
+        return String.format("Here are the tasks in your list: \n%s", taskList + askForNextCommand());
     }
 
-    public void showFindingTask(TaskList tasks) {
+    public String showFindingTask(TaskList tasks) {
         if (tasks.isEmpty()) {
-            System.out.println("No matching tasks found.");
+            return "No matching tasks found." + askForNextCommand();
         } else {
-            System.out.println("Here are the matching tasks in your list:");
-            this.showTaskList(tasks);
+            return String.format("Here are the matching tasks in your list:\n", this.showTaskList(tasks))
+                    + askForNextCommand();
         }
     }
 
-    public void askForNextCommand() {
-        System.out.println("What would you like me to do next?");
+    public static String askForNextCommand() {
+        return "\nWhat would you like me to do next?";
     }
 }
