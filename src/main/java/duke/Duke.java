@@ -52,6 +52,7 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
+        assert !input.isEmpty();
         try {
             String message = parser.dispatch(input, ui, taskList);
             store.saveTasks(taskList);
