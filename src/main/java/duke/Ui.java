@@ -1,3 +1,5 @@
+package duke;
+
 import java.awt.*;
 import java.util.Scanner;
 
