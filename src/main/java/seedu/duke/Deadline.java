@@ -31,6 +31,11 @@ public class Deadline extends Task {
         return String.format("%s (by: %s)", super.toString(), getDeadlineDate());
     }
 
+    /**
+     * Generates a string that is to be saved into the save file. The string is formatted such that
+     * the TaskList can simply read this string and recreate the Deadline
+     * @return a string used to represent this deadline
+     */
     public String getBreakdown() {
         String day = Integer.toString(by.getDayOfMonth());
         String month = Integer.toString(by.getMonthValue());
