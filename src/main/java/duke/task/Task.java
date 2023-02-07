@@ -1,3 +1,5 @@
+package duke.task;
+
 public class Task {
     public String taskString;
     public boolean isCompleted;

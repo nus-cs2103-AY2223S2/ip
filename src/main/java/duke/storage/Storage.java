@@ -1,0 +1,81 @@
+package duke.storage;
+
+import duke.task.*;
+
+import java.io.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Storage {
+    private String filePath;
+    private File taskSaved;
+
+    public Storage() {
+        this.filePath = "C:/Users/linwe/Documents/TaskSaved.txt";
+        try {
+            this.taskSaved = new File(this.filePath);
+            FileWriter myWriter = new FileWriter(this.filePath);
+            myWriter.close();
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
+
+    public List<Task> load() {
+
+        List<Task> taskList = new ArrayList<>();
+
+        try {
+            BufferedReader myReader = new BufferedReader(new FileReader(this.taskSaved));
+            String line = myReader.readLine();
+
+            while (line != null) {
+                String[] str = line.split(" | ");
+                String taskType = str[0];
+                String isCompleted = str[1];
+                String taskDes = str[2];
+                Task task = null;
+
+                switch (taskType) {
+                    case "T":
+                        task = new ToDo(taskDes);
+                        break;
+
+                    case "D":
+                        task = new Deadline(taskDes, LocalDate.parse(str[3]));
+                        break;
+
+                    case "E":
+                        task = new Event(taskDes, LocalDate.parse(str[3]), LocalDate.parse(str[4]));
+                        break;
+                }
+                if (isCompleted.equals("[X]")) {
+                    task.markTask();
+                }
+
+                taskList.add(task);
+            }
+            myReader.close();
+        } catch (IOException e) {
+            System.out.print(e);
+        }
+
+        return taskList;
+
+    }
+
+    public void save(TaskList taskList) {
+        try {
+            BufferedWriter myWriter = new BufferedWriter(new FileWriter(this.taskSaved));
+            for (Task task: taskList.getTaskList()) {
+                myWriter.write(task.toString() + "\n");
+            }
+            myWriter.close();
+        } catch (IOException e) {
+            System.out.println("There is an error in saving tasks.");
+        }
+    }
+
+
+}
