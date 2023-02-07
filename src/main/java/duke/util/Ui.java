@@ -2,6 +2,7 @@ package duke.util;
 
 import duke.task.Task;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -59,6 +60,22 @@ public class Ui {
             String toDisplay = "Here are the tasks in your list:";
             for (int i = 0; i < taskList.getSize(); i++) {
                 toDisplay += String.format("\n%s. %s", i + 1, taskList.getTask(i));
+            }
+            displayMessage(toDisplay);
+        }
+    }
+
+    /**
+     * Lets the user know what are the tasks that match.
+     * @param matchedTasks An ArrayList containing matched tasks.
+     */
+    public void displayMatchedTasks(ArrayList<Task> matchedTasks) {
+        if (matchedTasks.size() == 0) {
+            displayMessage("No tasks found!");
+        } else {
+            String toDisplay = "Here are the matching tasks in your list:";
+            for (int i = 0; i < matchedTasks.size(); i++) {
+                toDisplay += String.format("\n%s. %s", i + 1, matchedTasks.get(i));
             }
             displayMessage(toDisplay);
         }

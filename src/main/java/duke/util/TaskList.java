@@ -2,6 +2,7 @@ package duke.util;
 
 import duke.task.Task;
 
+import java.security.Key;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -66,5 +67,16 @@ public class TaskList {
      */
     public void unmarkTask(int index) {
         this.taskList.get(index).markAsUndone();
+    }
+
+    public ArrayList<Task> findMatchingTasks(String keyword) {
+        ArrayList<Task> matchedTasks = new ArrayList<>();
+        for (Task currentTask : taskList) {
+            String taskDescription = currentTask.getDescription();
+            if (taskDescription.contains(keyword)) {
+                matchedTasks.add(currentTask);
+            }
+        }
+        return matchedTasks;
     }
 }
