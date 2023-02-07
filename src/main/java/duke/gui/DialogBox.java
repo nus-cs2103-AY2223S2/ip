@@ -32,6 +32,9 @@ public class DialogBox extends HBox {
     private DialogBox(String text, Image img) {
         loadFxml();
         dialog.setText(text);
+        dialog.setPrefWidth(350);
+        dialog.setStyle("-fx-border-color: #349beb; -fx-border-width: 3px; -fx-border-style: solid;"
+                + "-fx-border-radius: 5px;");
         displayPicture.setImage(img);
     }
 
@@ -68,7 +71,8 @@ public class DialogBox extends HBox {
      * @return DialogBox with the text and image in it
      */
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        DialogBox usrDialog = new DialogBox(text, img);
+        return usrDialog;
     }
 
     /**
