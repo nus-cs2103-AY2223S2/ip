@@ -19,7 +19,9 @@ public class CreateDeadline extends Command {
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        Integer size = tasks.size();
         tasks.add(new Deadline(desc, by, false));
+        assert size + 1 == tasks.size();
         return ui.showAdd(tasks.get(tasks.size() - 1), tasks.size());
     }
 
