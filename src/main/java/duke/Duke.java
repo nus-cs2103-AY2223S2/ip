@@ -20,7 +20,7 @@ public class Duke {
      * The default and only constructor of Duke class.
      * Initialize UI, Storage, and the list to store tasks.
      *
-     * @param filePath
+     * @param filePath the path of the file to store the task list
      */
     public Duke(String filePath) {
         this.ui = new Ui();

@@ -14,8 +14,8 @@ public class Task implements Serializable {
      * @param cont the content of the task
      */
     public Task(String cont) {
-        this.cont=cont;
-        this.finished=false;
+        this.cont = cont;
+        this.finished = false;
     }
 
     /**

@@ -26,6 +26,7 @@ public class Storage {
      */
     public void save(TaskList lst) {
         try {
+
             FileOutputStream fos = new FileOutputStream(this.filePath);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(lst);
@@ -57,8 +58,9 @@ public class Storage {
             return lst;
         } else {
             try {
-                f.createNewFile();
+                assert(f.createNewFile());
             } catch (IOException e) {
+                e.printStackTrace();
             }
             return new TaskList();
         }
