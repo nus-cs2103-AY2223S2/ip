@@ -59,6 +59,7 @@ public class MainWindow extends AnchorPane {
 
         if (input.equals("bye")) {
             System.exit(0);
+            assert false;
         }
     }
 }

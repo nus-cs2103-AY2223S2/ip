@@ -87,7 +87,7 @@ public class TaskList {
 
         switch (tasktype) {
             case 'T':
-                this.records.add(new Todo(name));
+                this.records.add(new Todo("todo " + name));
                 break;
 
             case 'D':
