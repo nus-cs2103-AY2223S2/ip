@@ -31,7 +31,7 @@ public class StorageTest {
             fw.write("D | 1 | test | 2020-01-01" + System.lineSeparator());
             fw.write("E | 0 | test | 2020-01-01 | 2020-01-02" + System.lineSeparator());
             fw.close();
-            Storage storage = new Storage("data/test.txt");
+            Storage storage = new Storage("test.txt");
             ArrayList<Task> list = storage.load();
             assertEquals(3, list.size());
             assertEquals("T | 0 | test", list.get(0).toFile());
