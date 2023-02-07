@@ -1,7 +1,7 @@
 package duke.command;
 
-import duke.DukeRuntimeException;
 import duke.TaskList;
+import duke.exception.DukeRuntimeException;
 
 /**
  * Abstract implementation of a {@code Command} in the application.

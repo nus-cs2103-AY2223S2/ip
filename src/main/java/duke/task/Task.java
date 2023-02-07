@@ -3,7 +3,7 @@ package duke.task;
 import java.io.Serializable;
 import java.util.Objects;
 
-import duke.DukeIllegalStateException;
+import duke.exception.DukeIllegalStateException;
 
 /**
  * Abstract implementation of a {@code Task}.
