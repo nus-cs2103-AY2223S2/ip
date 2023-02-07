@@ -24,7 +24,7 @@ public class Storage {
     private java.nio.file.Path filePath;
 
     /**
-     * Main constructor (for invocation by classes that require updating data to the storage and taking data
+     * kuromi.MainWindow.kuromi.KuromiException.Main constructor (for invocation by classes that require updating data to the storage and taking data
      * from the storage.
      *
      * @param filePath The file path to the file stored with data from previous Kuromi session.

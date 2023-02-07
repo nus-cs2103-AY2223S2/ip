@@ -13,7 +13,7 @@ public class UnmarkCommand extends Command {
     private int idx;
 
     /**
-     * Main constructor.
+     * kuromi.MainWindow.kuromi.KuromiException.Main constructor.
      *
      * @param idx Index of the task to be unmarked.
      */
@@ -30,10 +30,10 @@ public class UnmarkCommand extends Command {
      * @param storage Storage to update when there is an update with the task list.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task cur = tasks.unmark(this.idx - 1);
         String msg = "OK, I've marked this task as not done yet:\n";
         msg += cur;
-        ui.show(msg);
+        return ui.show(msg);
     }
 }

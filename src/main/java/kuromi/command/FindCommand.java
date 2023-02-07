@@ -12,7 +12,7 @@ public class FindCommand extends Command {
     private String keyword;
 
     /**
-     * Main constructor
+     * kuromi.MainWindow.kuromi.KuromiException.Main constructor
      * @param keyword The keyword to be searched.
      */
     public FindCommand(String keyword) {
@@ -28,10 +28,10 @@ public class FindCommand extends Command {
      * @param storage Storage to update when there is an update with the task list.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         TaskList filtered = tasks.find(this.keyword);
         String msg = "Here are the matching tasks in your list:\n";
         msg += filtered.toString();
-        ui.show(msg);
+        return ui.show(msg);
     }
 }

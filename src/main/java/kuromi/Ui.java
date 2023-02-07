@@ -1,5 +1,9 @@
 package kuromi;
 
+import javafx.animation.PauseTransition;
+import javafx.stage.Stage;
+import javafx.util.Duration;
+
 import java.util.Scanner;
 
 /**
@@ -7,6 +11,12 @@ import java.util.Scanner;
  */
 public class Ui {
     private String lines = "____________________________________________________________";
+
+    private Stage stage;
+
+    public Ui(Stage stage) {
+        this.stage = stage;
+    }
 
     /**
      * Read user's inputs.
@@ -21,46 +31,50 @@ public class Ui {
      * Show errors occurred to the user.
      * @param msg Error message to be shown.
      */
-    public void showError(String msg) {
-        System.out.println(msg);
+    public String showError(String msg) {
+        return (msg);
     }
 
     /**
      * Show the lines for separation.
      */
-    public void showLine() {
-        System.out.println(this.lines);
+    public String showLine() {
+        return (this.lines);
     }
 
     /**
      * Show new line.
      */
-    public void showEnter() {
-        System.out.println();
+    public String showEnter() {
+        return "\n";
     }
 
     /**
      * Show error if cannot load the file that is in the hard disk.
      */
-    public void showLoadingError() {
-        System.out.println("Cannot load file. :(\n");
+    public String showLoadingError() {
+        return ("Cannot load file. :(\n");
     }
 
     /**
      * Show welcome message.
      */
-    public void showWelcome() {
-        this.showLine();
-        System.out.println("Hello! I'm Kuromi\nWhat can I do for you?");
-        this.showLine();
-        this.showEnter();
+    public String showWelcome() {
+        return ("Hello! I'm Kuromi\nWhat can I do for you?\n");
     }
 
     /**
      * Show a message to the user.
      * @param msg Message to be shown.
      */
-    public void show(String msg) {
-        System.out.println(msg);
+    public String show(String msg) {
+        return (msg);
+    }
+
+    public String showBye(String msg) {
+        PauseTransition delay = new PauseTransition(Duration.seconds(1.5));
+        delay.setOnFinished(event -> stage.close());
+        delay.play();
+        return (msg);
     }
 }

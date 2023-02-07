@@ -1,5 +1,6 @@
 package kuromi;
 
+import javafx.stage.Stage;
 import kuromi.command.Command;
 import kuromi.task.TaskList;
 
@@ -15,14 +16,16 @@ public class Kuromi {
     /** UI of the application **/
     private Ui ui;
 
+    private Stage stage;
+
     /**
-     * Main constructor (for invocation by main method).
+     * kuromi.MainWindow.kuromi.KuromiException.Main constructor (for invocation by main method).
      * Get stored data from previous session.
      *
      * @param filePath The file path to the file stored with data from previous Kuromi session.
      */
-    public Kuromi(java.nio.file.Path filePath) {
-        ui = new Ui();
+    public Kuromi(java.nio.file.Path filePath, Stage stage) {
+        ui = new Ui(stage);
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
@@ -53,15 +56,16 @@ public class Kuromi {
         }
     }
 
-    /**
-     * Main method of Kuromi class.
-     * When Kuromi is created, the compilation starts from the main method.
-     *
-     * @param args The command line arguments for the application.
-     */
-    public static void main(String[] args) {
-        String home = System.getProperty("user.home");
-        java.nio.file.Path path = java.nio.file.Paths.get(home, "Documents", "kuromi.txt");
-        new Kuromi(path).run();
+    String getResponse(String inp) {
+        try {
+            Command c = Parser.parse(inp, ui, tasks);
+            return c.execute(tasks, ui, storage);
+        } catch (KuromiException e) {
+           return e.getMessage();
+        }
+    }
+
+    String getWelcomeMessage() {
+        return "Hello! I'm Kuromi\nWhat can I do for you?\n";
     }
 }

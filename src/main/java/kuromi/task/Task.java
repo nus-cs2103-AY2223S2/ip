@@ -11,7 +11,7 @@ public class Task {
     protected boolean isDone;
 
     /**
-     * Main constructor (for invocation by most classes)
+     * kuromi.MainWindow.kuromi.KuromiException.Main constructor (for invocation by most classes)
      *
      * @param description Description of the task
      */
