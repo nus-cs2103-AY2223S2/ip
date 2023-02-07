@@ -230,9 +230,12 @@ public class Duke {
         case "find":
             ui.displayText("Type 'find [keyword]' - returns all tasks containing keyword");
             break;
+        case "bye":
+            ui.displayText("Type 'bye' - quit program");
+            break;
         default:
             ui.displayText("Here are a list of commands, for more info type 'help [cmd]':\n"
-                    + "- list\n- todo\n- deadline\n- event\n- mark\n- unmark\n- delete\n- find");
+                    + "- list\n- todo\n- deadline\n- event\n- mark\n- unmark\n- delete\n- find\n- bye");
         }
     }
 
