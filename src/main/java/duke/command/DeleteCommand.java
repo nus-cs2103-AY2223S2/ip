@@ -19,14 +19,13 @@ public class DeleteCommand extends Command {
      * Deletes task and updates the task list in the local storage.
      *
      * @param tasks List of tasks.
-     * @param ui Ui object that handles all Ui actions.
      * @param storage Storage object that handles all Storage actions.
      * @throws DukeException Throws exception from the methods called in this method.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         String taskString = tasks.deleteTask(taskIndex - 1);
         storage.saveTasks(tasks);
-        return ui.getDeleteOutput(taskString, tasks);
+        return Ui.getDeleteOutput(taskString, tasks);
     }
 }

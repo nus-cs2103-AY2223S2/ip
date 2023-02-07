@@ -31,20 +31,12 @@ public class Storage {
      */
     public ArrayList<Task> load() throws DukeException {
         File f = new File(filePath);
-        ArrayList<Task> tasks = new ArrayList<>();
+        ArrayList<Task> tasks;
         try {
             Scanner s = new Scanner(f);
-            while (s.hasNext()) {
-                Task task = Parser.processTask(s.nextLine());
-                tasks.add(task);
-            }
+            tasks = readTasks(s);
         } catch (FileNotFoundException fnfe) {
-            try {
-                f.getParentFile().mkdirs();
-                f.createNewFile();
-            } catch (IOException ioe) {
-                throw new DukeException("Fake Duke can't create the file.");
-            }
+            createFileAndDir(f);
             throw new DukeException(String.format("Fake Duke can't find the file. I have created the file (%s) :D",
                     filePath));
         }
@@ -66,6 +58,24 @@ public class Storage {
             fw.close();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private ArrayList<Task> readTasks(Scanner s) throws DukeException {
+        ArrayList<Task> tasks = new ArrayList<>();
+        while (s.hasNext()) {
+            Task task = Parser.processTask(s.nextLine());
+            tasks.add(task);
+        }
+        return tasks;
+    }
+
+    private void createFileAndDir(File f) throws DukeException {
+        try {
+            f.getParentFile().mkdirs();
+            f.createNewFile();
+        } catch (IOException ioe) {
+            throw new DukeException("Fake Duke can't create the file.");
         }
     }
 }

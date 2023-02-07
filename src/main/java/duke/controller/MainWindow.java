@@ -30,8 +30,8 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/FakeDuke.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/FakeDuke.png"));
 
     /**
      * Initializes the main window and displays welcome message.
@@ -39,9 +39,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        dialogContainer.getChildren().addAll(
-                new DialogBox(new Ui().getWelcome(), dukeImage).getDukeDialog()
-        );
+        createDukeDialogBox(Ui.getWelcome(), dukeImage);
     }
 
     public void setDuke(Duke duke) {
@@ -56,15 +54,11 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         try {
             String response = getResponse(input);
-            dialogContainer.getChildren().addAll(
-                    new DialogBox(input, userImage).getUserDialog(),
-                    new DialogBox(response, dukeImage).getDukeDialog()
-            );
+            createUserDialogBox(input, userImage);
+            createDukeDialogBox(response, dukeImage);
         } catch (DukeException e) {
-            dialogContainer.getChildren().addAll(
-                    new DialogBox(input, userImage).getUserDialog(),
-                    new DialogBox(e.getMessage(), dukeImage).getDukeDialog()
-            );
+            createUserDialogBox(input, userImage);
+            createDukeDialogBox(e.getMessage(), dukeImage);
         }
         userInput.clear();
     }
@@ -76,12 +70,40 @@ public class MainWindow extends AnchorPane {
      * @throws DukeException Exception thrown from Duke package methods.
      */
     private String getResponse(String input) throws DukeException {
-        String fullCommand = duke.getUi().readCommand(input);
+        String fullCommand = Ui.readCommand(input);
         Command c = Parser.parse(fullCommand);
-        if (c instanceof ExitCommand) {
+        boolean isExitCommand = c instanceof ExitCommand;
+        if (isExitCommand) {
+            System.out.println(c.execute(duke.getTasks(), duke.getStorage()));
             Stage stage = (Stage) dialogContainer.getScene().getWindow();
             stage.close();
+            return "";
+        } else {
+            return c.execute(duke.getTasks(), duke.getStorage());
         }
-        return c.execute(duke.getTasks(), duke.getUi(), duke.getStorage());
+    }
+
+    /**
+     * Creates a user dialog box using the label and image passed into this method.
+     *
+     * @param label Text to be displayed on the dialog box.
+     * @param image Image to be displayed on the dialog box.
+     */
+    private void createUserDialogBox(String label, Image image) {
+        dialogContainer.getChildren().addAll(
+                new DialogBox(label, image).getUserDialog()
+        );
+    }
+
+    /**
+     * Creates a duke dialog box using the label and image passed into this method.
+     *
+     * @param label Text to be displayed on the dialog box.
+     * @param image Image to be displayed on the dialog box.
+     */
+    private void createDukeDialogBox(String label, Image image) {
+        dialogContainer.getChildren().addAll(
+                new DialogBox(label, image).getDukeDialog()
+        );
     }
 }

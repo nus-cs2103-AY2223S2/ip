@@ -76,9 +76,11 @@ public class Task {
     public String urgentMessage(LocalDateTime dateTime) {
         LocalDateTime currentDateTime = LocalDateTime.now();
         int diff = currentDateTime.compareTo(dateTime);
-        if (diff > 0) {
+        boolean isTaskExpired = (diff > 0);
+        boolean isTaskExpiringSoon = (diff == -1);
+        if (isTaskExpired) {
             return "!! TASK EXPIRED! !!";
-        } else if (diff == -1) {
+        } else if (isTaskExpiringSoon) {
             return "!! TASK EXPIRING SOON! !!";
         } else {
             return "";
@@ -86,8 +88,10 @@ public class Task {
     }
 
     protected void markTaskIfNeeded(String taskStatus, Task task) {
-        assert taskStatus.equals("0") || taskStatus.equals("1") : "Task Status must be 0 or 1";
-        if (taskStatus.equals("1")) {
+        boolean isTaskStatusUnmarkValid = taskStatus.equals("0");
+        boolean isTaskStatusMarkValid = taskStatus.equals("1");
+        assert isTaskStatusUnmarkValid || isTaskStatusMarkValid: "Task Status must be 0 or 1";
+        if (isTaskStatusMarkValid) {
             task.mark();
         }
     }

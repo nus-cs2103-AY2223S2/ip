@@ -46,9 +46,8 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        Ui ui = new Ui();
         return String.format("[E][%c] %s (from: %s to: %s) %s", getStatusIcon(), description,
-                ui.getStringDateTime(startDateTime), ui.getStringDateTime(endDateTime),
+                Ui.getStringDateTime(startDateTime), Ui.getStringDateTime(endDateTime),
                 super.urgentMessage(startDateTime));
     }
 
@@ -58,7 +57,7 @@ public class Event extends Task {
             startDateTime = Parser.parseDateTime(dateTimes.split(" /to ")[0]);
             endDateTime = Parser.parseDateTime(dateTimes.split(" /to ")[1]);
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("☹ I'm sorry, but Fake Duke doesn't know what that means :-(");
+            throw new DukeException("I'm sorry, but Fake Duke doesn't know what that means :-(");
         } catch (DateTimeParseException dtpe) {
             throw new DukeException("Invalid datetime format. Please use yyyy-mm-dd HH:mm (E.g. 2019-10-15 18:00).");
         }

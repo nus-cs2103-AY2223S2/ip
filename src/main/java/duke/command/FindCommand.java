@@ -21,12 +21,11 @@ public class FindCommand extends Command {
      * Finds task from the list of tasks using the keyword provided.
      *
      * @param tasks List of tasks.
-     * @param ui Ui object that handles all Ui actions.
      * @param storage Storage object that handles all Storage actions.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         ArrayList<Task> foundTasks = tasks.findTask(keyword);
-        return ui.getFindOutput(foundTasks);
+        return Ui.getFindOutput(foundTasks);
     }
 }
