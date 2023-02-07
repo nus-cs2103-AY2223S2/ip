@@ -20,7 +20,7 @@ public class Duke {
 
     public void chatDuke() {
 
-        List<String> commandList = new ArrayList<>();
+        List<Task> allTasks = new ArrayList<>();
 
         this.printGreetingMessage();
 
@@ -28,10 +28,23 @@ public class Duke {
         while (!saidBye) {
             String command = sc.nextLine();
             if (command.equals("list")) {
-                this.printCommandList(commandList);
+                this.printCommandList(allTasks);
+            } else if (command.startsWith("mark")) {
+                String[] str = command.split(" ");
+                int taskIndex = Integer.parseInt(str[1]) - 1;
+                Task task = new Task(taskIndex + 1, true, allTasks.get(taskIndex).getTask());
+                allTasks.set(taskIndex, task);
+                task.markAsDone();
+            } else if (command.startsWith("unmark")) {
+                String[] str = command.split(" ");
+                int taskIndex = Integer.parseInt(str[1]) - 1;
+                Task task = new Task(taskIndex + 1, false, allTasks.get(taskIndex).getTask());
+                allTasks.set(taskIndex, task);
+                task.unmarkAsUndone();
             } else if (!command.equals("bye")) {
                 this.echoCommand(command);
-                commandList.add(command);
+                Task task = new Task(allTasks.size(), false, command);
+                allTasks.add(task);
             } else {
                 saidBye = true;
                 this.printByeMessage();
@@ -41,23 +54,24 @@ public class Duke {
 
     public void printGreetingMessage() {
         System.out.println("\t____________________________________________________________" +
-                "\n\tHello! I'm Duke\n" +
-                "\tWhat can I do for you?" +
+                "\n\t Hello! I'm Duke\n" +
+                "\t What can I do for you?" +
                 "\n\t____________________________________________________________");
     }
 
     public void echoCommand(String command) {
         System.out.println("\t____________________________________________________________" +
-                "\n\t" + "added: " + command +
+                "\n\t" + " added: " + command +
                 "\n\t____________________________________________________________");
     }
 
-    public void printCommandList(List<String> commandList) {
+    public void printCommandList(List<Task> allTasks) {
         System.out.println("\t____________________________________________________________");
-
-        for (int i = 0; i < commandList.size(); i++) {
+        System.out.println("\t Here are the tasks in your list:");
+        for (int i = 0; i < allTasks.size(); i++) {
             int numbering = i + 1;
-            System.out.println("\t" + numbering + ". " + commandList.get(i));
+            Task task = allTasks.get(i);
+            System.out.println("\t " + numbering + "." + task.getTaskStatus() + " " + task.getTask());
         }
 
         System.out.println("\t____________________________________________________________");
@@ -65,7 +79,7 @@ public class Duke {
 
     public void printByeMessage() {
         System.out.println("\t____________________________________________________________" +
-                "\n\tBye. Hope to see you again soon!" +
+                "\n\t Bye. Hope to see you again soon!" +
                 "\n\t____________________________________________________________");
     }
 
