@@ -112,19 +112,19 @@ public class Parser {
 
     private String mark(String[] split) throws InvalidCommandException {
         try {
-            if (split.length > 1) {
+            if (split.length != 2) {
                 throw new MultipleArgumentsException();
             }
             Integer index = Integer.parseInt(split[1]);
             return this.list.mark(index);
         } catch (NumberFormatException | MultipleArgumentsException e) {
-           return "Please input a number after the command.";
+            return "Please input a number after the command.";
         }
     }
 
     private String unmark(String[] split) throws InvalidCommandException {
         try {
-            if (split.length > 1) {
+            if (split.length != 2) {
                 throw new MultipleArgumentsException();
             }
             Integer index = Integer.parseInt(split[1]);
@@ -136,7 +136,7 @@ public class Parser {
 
     private String delete(String[] split) {
         try {
-            if (split.length > 1) {
+            if (split.length != 2) {
                 throw new MultipleArgumentsException();
             }
             Integer index = Integer.parseInt(split[1]);

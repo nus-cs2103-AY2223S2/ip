@@ -21,6 +21,8 @@ public class TaskList {
     private static final int size = 100;
     private ArrayList<Task> records;
     private final String filePath = "./data/duke.txt";
+
+    private int count = 0;
     private Path path = Paths.get(filePath);
     private DatabaseWriter dw = new DatabaseWriter(path);
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy HHmm");
@@ -76,6 +78,7 @@ public class TaskList {
         Task t = new Task(name);
         this.records.add(t);
         dw.addToDb(t);
+        this.count += 1;
         return Ui.format("added: " + t);
     }
 
@@ -88,7 +91,11 @@ public class TaskList {
         TaskToDo t = new TaskToDo(name);
         this.records.add(t);
         dw.addToDb(t);
-        return Ui.format("Got it. I've added this task:\n" + t.toString());
+        this.count += 1;
+        return Ui.format("Got it. I've added this task:\n"
+                        + t.toString()
+                        + String.format("\nYou now have %s tasks left.", this.count)
+        );
     }
 
     /**
@@ -99,6 +106,7 @@ public class TaskList {
      */
     public void insertToDo(String name, boolean isInitial) {
         TaskToDo t = new TaskToDo(name);
+        this.count += 1;
         this.records.add(t);
     }
 
@@ -118,7 +126,11 @@ public class TaskList {
             TaskDeadline d = new TaskDeadline(time, dateTime);
             this.records.add(d);
             dw.addToDb(d);
-            return Ui.format("Got it. I've added this task:\n" + d.toString());
+            this.count += 1;
+            return Ui.format("Got it. I've added this task:\n"
+                    + d.toString()
+                    + String.format("\nYou now have %s tasks left.", this.count)
+            );
         } catch (DateTimeFormatException e) {
             return e.getMessage();
         }
@@ -139,7 +151,7 @@ public class TaskList {
             LocalDateTime dateTime = LocalDateTime.parse(time, formatter);
             TaskDeadline d = new TaskDeadline(time, dateTime);
             this.records.add(d);
-            System.out.println(Ui.format("Got it. I've added this task:\n" + d.toString()));
+            this.count += 1;
         } catch (DateTimeFormatException e) {
             System.out.println(e.getMessage());
         }
@@ -164,7 +176,11 @@ public class TaskList {
             TaskEvent e = new TaskEvent(name, start, end);
             this.records.add(e);
             dw.addToDb(e);
-            return Ui.format("Got it. I've added this task:\n" + e.toString());
+            this.count += 1;
+            return Ui.format("Got it. I've added this task:\n"
+                    + e.toString()
+                    + String.format("\nYou now have %s tasks left.", this.count)
+            );
         } catch (DateTimeFormatException e) {
             return e.getMessage();
         }
@@ -188,7 +204,7 @@ public class TaskList {
             LocalDateTime end = LocalDateTime.parse(endString, formatter);
             TaskEvent e = new TaskEvent(name, start, end);
             this.records.add(e);
-            System.out.println(Ui.format("Got it. I've added this task:\n" + e.toString()));
+            this.count += 1;
         } catch (DateTimeFormatException e) {
             System.out.println(e.getMessage());
         }
@@ -203,7 +219,11 @@ public class TaskList {
         Task t = this.records.get(index);
         this.records.remove(index);
         dw.removeFromDb(index);
-        return Ui.format("Noted. I've removed this task:\n" + t.toString());
+        this.count -= 1;
+        return Ui.format("Got it. I've removed this task:\n"
+                + t.toString()
+                + String.format("\nYou now have %s tasks left.", this.count)
+        );
     }
 
 
