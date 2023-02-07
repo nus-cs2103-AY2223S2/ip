@@ -8,6 +8,7 @@ import java.util.List;
 import aqua.util.DateUtils;
 import aqua.util.Period;
 import javafx.css.PseudoClass;
+import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Tooltip;
@@ -187,9 +188,17 @@ public class DaySchedule extends HBox {
         for (PseudoClass pseudoClass : timeable.getPseudoClass()) {
             block.pseudoClassStateChanged(pseudoClass, true);
         }
-        block.setOnMouseEntered(e -> block.pseudoClassStateChanged(PSEUDO_CLASS_HOVER, true));
-        block.setOnMouseExited(e -> block.pseudoClassStateChanged(PSEUDO_CLASS_HOVER, false));
+        block.setOnMouseEntered(e -> setBlockHoverState(timeable, true));
+        block.setOnMouseExited(e -> setBlockHoverState(timeable, false));
+        timeable.addLink(block);
         return block;
+    }
+
+
+    private void setBlockHoverState(SchedulePeriod period, boolean isHover) {
+        for (Node block : period.getLinks()) {
+            block.pseudoClassStateChanged(PSEUDO_CLASS_HOVER, isHover);
+        }
     }
 
 
