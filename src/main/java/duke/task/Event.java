@@ -23,7 +23,6 @@ public class Event extends Task {
      */
     public Event(String description, String from, String to) throws DateTimeParseException {
         super(description);
-        boolean saved = false;
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
         this.from = LocalDateTime.parse(from, formatter);

@@ -1,5 +1,0 @@
-D/1/testDeadline/2023-01-24 1800
-E/1/testEvent/2019-10-10 1900/2019-10-11 1900
-T/1/read book
-D/0/return book/2019-10-10 1700
-T/0/test

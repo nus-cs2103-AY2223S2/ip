@@ -19,7 +19,7 @@ import duke.task.Todo;
  */
 public class Storage {
     /** The file used to write/load data */
-    private File list;
+    private File file;
     /** The ArrayList used to store the loaded data*/
     private ArrayList<Task> outputList = new ArrayList<>();
 
@@ -51,14 +51,14 @@ public class Storage {
         }
 
         // File object representing the list file.
-        this.list = new File(filepath);
+        this.file = new File(filepath);
         System.out.println("    Checking for saved file...");
-        if (list.exists()) {
+        if (file.exists()) {
             System.out.println("    Saved list exists.");
         } else {
             System.out.println("    Saved list does not exist. Creating list file.");
             try {
-                if (list.createNewFile()) {
+                if (file.createNewFile()) {
                     System.out.println("    List file created.");
                 } else {
                     throw new DukeException("    List file cannot be created.");
@@ -77,7 +77,7 @@ public class Storage {
         System.out.println("    Loading data from file...");
 
         try {
-            Scanner input = new Scanner(list);
+            Scanner input = new Scanner(file);
             while (input.hasNext()) {
                 String task = input.nextLine();
                 String[] items = task.split("/", 5);

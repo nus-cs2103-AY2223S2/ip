@@ -21,7 +21,7 @@ public class EventTest {
     }
 
     @Test
-    public void construtor_wrongDateFormat_exceptionThrown() {
+    public void constructor_wrongDateFormat_exceptionThrown() {
         try {
             Event example = new Event("description", "2019/10/10 1859", "2019-10-15 0700");
             fail();
