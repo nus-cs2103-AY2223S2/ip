@@ -45,6 +45,8 @@ public class DeleteCommand extends Command {
             throw new InvalidCommandInputException("Task number is invalid!", "delete");
         }
 
+        assert idx < tl.numberOfTasks() && idx >= 0 : "Index out of range!";
+
         // Delete task and save changes
         Task t = tl.deleteTask(idx);
         storage.save(tl);

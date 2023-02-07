@@ -51,6 +51,8 @@ public class Ui {
             // Execute the command.
             Response output = c.execute(tasks, this, storage);
 
+            assert output.getMessage() != null : "No message printed";
+
             System.out.println(output);
 
             return output;
