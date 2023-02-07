@@ -12,13 +12,14 @@ public class Storage {
 
     public void saveList (DukeList dukeList, Ui ui) {
         try {
-            FileOutputStream fos = new FileOutputStream("./data/Duke.Duke.DukeList.ser");
+            FileOutputStream fos = new FileOutputStream(path);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(dukeList);
             oos.flush();
             oos.close();
             fos.close();
             ui.addStatement("Sweet, seeya.");
+            assert ui.getStatements().size() > 0 : "Number of statements in Ui should be more than 0";
         } catch (IOException e) {
             ui.addStatement("Hold on, something's wrong with your input");
         }
@@ -27,8 +28,8 @@ public class Storage {
 
     public DukeList retrieveList (Ui ui) {
         try {
-            if ((new File("./data/Duke.Duke.DukeList.ser")).exists()) {
-                FileInputStream fis = new FileInputStream("./data/Duke.Duke.DukeList.ser");
+            if ((new File(path)).exists()) {
+                FileInputStream fis = new FileInputStream(path);
                 ObjectInputStream ois = new ObjectInputStream(fis);
                 try {
                     DukeList savedDukeList = (DukeList) ois.readObject();

@@ -29,7 +29,7 @@ public class Gui extends Application {
     private Image duncan = new Image(this.getClass().getResourceAsStream("/images/Basketball.jpg"));
     private Image user = new Image(this.getClass().getResourceAsStream("/images/Football.jpg"));
 
-    private Duke duke = new Duke("./data/Duke.Duke.DukeList.ser", this);
+    private Duke duke = new Duke("./data/duke.DukeList.ser", this);
 
 
     @Override
