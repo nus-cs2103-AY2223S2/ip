@@ -36,9 +36,11 @@ public class Chattime {
             if (cmd != null) {
                 response = cmd.execute(ui, tasks, storage);
             }
+
         } catch (ChattimeException e) {
             return ui.printError(e.getMessage());
         }
+
         return response;
     }
 

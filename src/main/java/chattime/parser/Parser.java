@@ -25,16 +25,16 @@ import chattime.task.Todo;
  */
 public class Parser {
 
-    private static final String NO_DESCRIPTION = "OOPS!!! The description of %s cannot be empty.";
-    private static final String MISSED_PARAM = "OOPS!!! %s should be in the form of\n%s.";
-    private static final String NO_INDEX = "OOPS!!! The index to %1$s cannot be empty.";
-    private static final String NEED_INT = "OOPS!!! The index to %1$s must be positive integer.";
-    private static final String IDX_OUT_OF_BOUND = "OOPS!!! The index is invalid! We currently have %d task(s).";
+    private static final String NO_DESCRIPTION = "The description of %s cannot be empty.";
+    private static final String MISSED_PARAM = "%s should be in the form of\n%s.";
+    private static final String NO_INDEX = "The index to %1$s cannot be empty.";
+    private static final String NEED_INT = "The index to %1$s must be positive integer.";
+    private static final String IDX_OUT_OF_BOUND = "The index is invalid! We currently have %d task(s).";
     private static final String UNRECOGNISED_COMMAND = "Sorry... but I don't understand what you said >,<\n\n"
             + "Type `help` if you need me!";
     private static final String CLEAN_COMMAND_ALERT = "@^@ I'm sorry but your message should not contain any \"@\" .";
     private static final String EVENT_FORMAT = "event (task) /from (yyyy-mm-dd hh:mm) /to (yyyy-mm-dd hh:mm)";
-    private static final String DATETIME_FORMAT = "OOPS!!! Please enter both date and time in format yyyy-mm-dd hh:mm"
+    private static final String DATETIME_FORMAT = "Please enter both date and time in format yyyy-mm-dd hh:mm"
             + "or yyyy-mm-dd";
 
     private static String userInput;
@@ -63,39 +63,21 @@ public class Parser {
         case "list":
             return parseList();
 
-        case "todo":
-            checkAddCommand();
-            return parseTodo();
-
-        case "deadline":
-            checkAddCommand();
-            return parseDeadline();
-
-        case "event":
-            checkAddCommand();
-            return parseEvent();
-
         case "listTime":
             return parseListTime();
 
         case "find":
             return parseFind();
 
+        case "todo":
+        case "deadline":
+        case "event":
+            return parseAddCommand();
+
         case "mark":
         case "unmark":
         case "delete":
-
-            int index = checkIndexCommand();
-
-            if (command.equals("mark")) {
-                return new MarkCommand(index, true);
-
-            } else if (command.equals("unmark")) {
-                return new MarkCommand(index, false);
-
-            } else {
-                return new DeleteCommand(index);
-            }
+            return parseIndexCommand();
 
         default:
             throw new ChattimeException(UNRECOGNISED_COMMAND);
@@ -142,6 +124,40 @@ public class Parser {
     }
 
     /**
+     * Process user command for type 'add task' e.g. todo, deadline and event.
+     */
+    private static Command parseAddCommand() throws ChattimeException {
+        checkAddCommand();
+
+        if (command.equals("todo")) {
+            return parseTodo();
+
+        } else if (command.equals("deadline")) {
+            return parseDeadline();
+
+        } else {
+            return parseEvent();
+        }
+    }
+
+    /**
+     * Process user command relating to index input e.g. mark, unmark and delete.
+     */
+    private static Command parseIndexCommand() throws ChattimeException {
+        int index = checkIndexCommand();
+
+        if (command.equals("mark")) {
+            return new MarkCommand(index, true);
+
+        } else if (command.equals("unmark")) {
+            return new MarkCommand(index, false);
+
+        } else {
+            return new DeleteCommand(index);
+        }
+    }
+
+    /**
      * Parses string description into int and checks true int type of inputted description.
      *
      * @return Index parsed if the type check passed.
@@ -172,7 +188,7 @@ public class Parser {
      */
     private static ListCommand parseList() throws ChattimeException {
         if (description != null) {
-            throw new ChattimeException("OOPS!!! list does not take any description.");
+            throw new ChattimeException("list does not take any description.");
         }
 
         return new ListCommand(null);
