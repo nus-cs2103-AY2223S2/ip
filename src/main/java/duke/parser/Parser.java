@@ -11,7 +11,8 @@ public class Parser {
      */
     public enum Command {
         TODO, DEADLINE, EVENT, LIST, FIND,
-        MARK, UNMARK, DELETE, BYE, UNKNOWN
+        MARK, UNMARK, DELETE, BYE, UNKNOWN,
+        UPDATE
     }
 
     /**
@@ -39,6 +40,8 @@ public class Parser {
             return Command.DELETE;
         } else if (input.matches("find(.*)")) {
             return Command.FIND;
+        } else if (input.matches("update(.*)")) {
+            return Command.UPDATE;
         } else {
             return Command.UNKNOWN;
         }
@@ -53,35 +56,41 @@ public class Parser {
      */
     public static String[] contents(String input) throws DukeException {
         Command type = parse(input);
-
+        String output;
         switch (type) {
         case DEADLINE:
-            input = input.replace("deadline ", "");
-            if (input.equals("deadline")) {
+            output = input.replace("deadline ", "");
+            if (output.equals("deadline")) {
                 // Checks if deadline is empty.
                 throw new DukeException("deadline");
             } else {
-                return input.split(" /by ", 2);
+                return output.split(" /by ", 2);
             }
         case EVENT:
-            input = input.replace("event ", "");
-            if (input.equals("event")) {
+            output = input.replace("event ", "");
+            if (output.equals("event")) {
                 // Checks if event is empty.
                 throw new DukeException("event");
             } else {
-                String[] inputs = input.split(" /", 3);
-                inputs[1] = inputs[1].replace("from ", "");
-                inputs[2] = inputs[2].replace("to ", "");
-                return inputs;
+                String[] outputText = output.split(" /", 3);
+                outputText[1] = outputText[1].replace("from ", "");
+                outputText[2] = outputText[2].replace("to ", "");
+                return outputText;
             }
         case TODO:
-            input = input.replace("todo ", "");
-            if (input.equals("todo")) {
+            output = input.replace("todo ", "");
+            if (output.equals("todo")) {
                 // Checks if todo is empty.
                 throw new DukeException("todo");
             } else {
                 return new String[]{input};
             }
+        case UPDATE:
+            String[] outputText = input.split(" ", 3);
+            if (outputText.length < 3) {
+                throw new DukeException("update");
+            }
+            return outputText;
         case MARK:
         case UNMARK:
         case FIND:
