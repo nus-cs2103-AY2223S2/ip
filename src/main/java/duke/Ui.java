@@ -50,10 +50,9 @@ public class Ui {
      * @param list the list of tasks to display.
      */
     public String showList(TaskList list) {
-        String ret = "Here are the tasks in your list:\n";
-        for (int i = 0; i < list.size(); i++) {
-            ret = ret + (i+1) + ". " + list.get(i) + "\n";
-        }
+        String ret = list.stream()
+            .map(task -> (list.indexOf(task) + 1) + ". " + task + "\n")
+            .reduce("Here are the tasks in your list:\n", (a, b) -> a + b);
         return ret;
     }
 
@@ -96,10 +95,9 @@ public class Ui {
     }
 
     public String showFind(TaskList list) {
-        String ret = "Here are the matching tasks in your list:\n";
-        for (int i = 0; i < list.size(); i++) {
-            ret = ret + (i+1) + ". " + list.get(i) + "\n";
-        }
+        String ret = list.stream()
+            .map(task -> (list.indexOf(task) + 1) + ". " + task + "\n")
+            .reduce("Here are the matching tasks in your list:\n", (a, b) -> a + b);
         return ret;
     }
 
