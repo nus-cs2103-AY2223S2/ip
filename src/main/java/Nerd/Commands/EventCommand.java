@@ -37,7 +37,7 @@ public class EventCommand extends Command {
     public String processCommand(TaskList list, Ui ui) {
         Event event = new Event(description, from, to);
         list.addTask(event);
-        return String.format("Sure!, I've added the following events:\n %s\nNow you have %d tasks in the list.",
-                event.toString(), list.getSize());
+        String response = ui.printEventResponse(event.toString(), list.getSize());
+        return response;
     }
 }
