@@ -101,6 +101,7 @@ public class Parser {
             return new DisplayListCommand();
         default:
             return null;
+
         }
     }
 
@@ -159,6 +160,7 @@ public class Parser {
                 throw new EmptyArgumentDukeException();
             }
         default:
+            assert false : "Should not reach this point";
         }
 
         return null;
