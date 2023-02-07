@@ -31,7 +31,7 @@ public class StorageTest {
             fw.write("D | 1 | test | 2020-01-01" + System.lineSeparator());
             fw.write("E | 0 | test | 2020-01-01 | 2020-01-02" + System.lineSeparator());
             fw.close();
-            Storage storage = new Storage("test.txt");
+            Storage storage = new Storage("data/test.txt");
             ArrayList<Task> list = storage.load();
             assertEquals(3, list.size());
             assertEquals("T | 0 | test", list.get(0).toFile());
@@ -41,18 +41,20 @@ public class StorageTest {
             fail("IOException thrown");
         } catch (DukeException e) {
             fail("DukeException thrown");
+        } finally {
+            testFile.delete();
         }
     }
 
     @Test
     public void testSave() throws IOException{
-        File testFile = new File("data/test.txt");
+        File testFile = new File("test.txt");
         if (testFile.exists()) {
             testFile.delete();
         }
         try {
             testFile.createNewFile();
-            Storage storage = new Storage("data/test.txt");
+            Storage storage = new Storage("test.txt");
             TaskList list = new TaskList(new ArrayList<Task>());
             list.add(new Todo("test", false));
             list.add(new Deadline("test", LocalDate.parse("2020-01-01"), true));
@@ -67,6 +69,8 @@ public class StorageTest {
         //     fail("IOException thrown");
         } catch (DukeException e) {
             fail("DukeException thrown");
+        } finally {
+            testFile.delete();
         }
     }
 }
