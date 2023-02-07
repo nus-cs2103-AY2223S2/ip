@@ -19,6 +19,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 
@@ -37,22 +39,9 @@ public class Duke extends Application {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/User.jpeg"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/Duke.jpeg"));
 
-    public Duke(String filePath) {
-        ui = new Ui();
-        storage = new Storage(filePath);
-        tasks = new TaskList(storage.load());
-        parser = new Parser();
-    }
-
     public Duke() {
         super();
     }
-
-    /*
-    public static void main(String[] args) {
-        new Duke("src/data/duke.txt").run();
-    }
-     */
 
     @Override
     public void start(Stage stage) {
@@ -131,11 +120,13 @@ public class Duke extends Application {
         userInput.setOnAction((event) -> {
             handleUserInput();
         });
+
     }
 
     /**
      * Iteration 1:
      * Creates a label with the specified text and adds it to the dialog container.
+     *
      * @param text String containing text to add
      * @return a label with the specified text that has word wrap enabled.
      */
@@ -159,7 +150,15 @@ public class Duke extends Application {
                 DialogBox.getUserDialog(userText, new ImageView(user)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
         );
-        userInput.clear();
+
+        if (userInput.getText().equals("bye")) {
+            sendButton.setVisible(false);
+            userInput.setDisable(true);
+            userInput.setFont(Font.font("Verdana", FontWeight.BOLD, 14));
+            userInput.setText("Come back soon! Pearl misses you :(");
+        } else {
+            userInput.clear();
+        }
     }
 
     /**
@@ -239,7 +238,6 @@ public class Duke extends Application {
             storage.addToFile(tasks);
             response += ui.terminate();
         }
-
         return response;
     }
 }
