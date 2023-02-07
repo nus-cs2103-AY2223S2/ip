@@ -69,19 +69,25 @@ public class Parser {
             if (!isEmptyCommand(split)) {
                 return new DeleteCommand(parseIndex(input));
             } else {
-                throw new NerdException("Sorry! you can't have empty descriptions!");
+                throw new NerdException("Sorry! you can't have empty indexes!");
             }
         case DATE:
             if (!isEmptyCommand(split)) {
                 return new SearchDateCommand(parseDescription(input));
             } else {
-                throw new NerdException("Sorry! you can't have empty descriptions!");
+                throw new NerdException("Sorry! you can't have empty dates!");
             }
         case FIND:
             if (!isEmptyCommand(split)) {
                 return new FindCommand(parseDescription(input), this);
             } else {
                 throw new NerdException("Sorry! you can't have empty descriptions!");
+            }
+        case REMINDER:
+            if (!isEmptyCommand(split)) {
+                return new ReminderCommand(parseIndex(input));
+            } else {
+                throw new NerdException("Sorry! you can't have an empty date range!");
             }
         case BYE:
             return new ExitCommand();
