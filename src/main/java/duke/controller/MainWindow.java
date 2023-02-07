@@ -75,7 +75,7 @@ public class MainWindow extends AnchorPane {
      */
     private String getResponse(String input) throws DukeException {
         String fullCommand = duke.getUi().readCommand(input);
-        Command c = new Parser().parse(fullCommand);
+        Command c = Parser.parse(fullCommand);
         if (c instanceof ExitCommand) {
             Stage stage = (Stage) dialogContainer.getScene().getWindow();
             stage.close();

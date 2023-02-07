@@ -122,7 +122,7 @@ public class Parser {
      * @param input One task to be processed.
      * @throws DukeException Throws exception if input format is invalid.
      */
-    public Task processTask(String input) throws DukeException {
+    public static Task processTask(String input) throws DukeException {
         String[] splitInputs = input.split(" ~ ");
 
         TaskType taskType;
@@ -174,7 +174,7 @@ public class Parser {
      * @param input Datetime input provided by user.
      * @return Datetime of Task in valid format.
      */
-    public LocalDateTime parseDateTime(String input) throws DateTimeParseException {
+    public static LocalDateTime parseDateTime(String input) throws DateTimeParseException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         return LocalDateTime.parse(input, formatter);
     }

@@ -24,14 +24,14 @@ public class Task {
      * Marks task as done.
      */
     public void mark() {
-        this.isDone = true;
+        isDone = true;
     }
 
     /**
      * Unmarks task as undone.
      */
     public void unmark() {
-        this.isDone = false;
+        isDone = false;
     }
 
     /**
@@ -55,7 +55,7 @@ public class Task {
      */
     @Override
     public String toString() {
-        return String.format("[%c] %s", this.getStatusIcon(), this.description);
+        return String.format("[%c] %s", getStatusIcon(), description);
     }
 
     /**
@@ -64,7 +64,7 @@ public class Task {
      * @return Raw String representation of a Task in this format: T ~ {status} ~ {description}.
      */
     public String getRawTask() {
-        return String.format("T ~ %d ~ %s\n", isDone ? 1 : 0, this.description);
+        return String.format("T ~ %d ~ %s\n", isDone ? 1 : 0, description);
     }
 
     /**

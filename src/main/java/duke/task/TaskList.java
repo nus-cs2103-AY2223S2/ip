@@ -19,12 +19,12 @@ public class TaskList {
     }
 
     public int getSize() {
-        return this.TASK_LIST.size();
+        return TASK_LIST.size();
     }
 
     public Task getTask(int taskIndex) throws DukeException {
         try {
-            return this.TASK_LIST.get(taskIndex);
+            return TASK_LIST.get(taskIndex);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Unable to get task.");
         }
@@ -36,7 +36,7 @@ public class TaskList {
      * @param task Task added by user.
      */
     public void addTask(Task task) {
-        this.TASK_LIST.add(task);
+        TASK_LIST.add(task);
     }
 
     /**
@@ -48,7 +48,7 @@ public class TaskList {
      */
     public String deleteTask(int taskIndex) throws DukeException {
         try {
-            return this.TASK_LIST.remove(taskIndex).toString();
+            return TASK_LIST.remove(taskIndex).toString();
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Task index given is invalid :( Unable to delete.");
         }
@@ -62,7 +62,7 @@ public class TaskList {
      * @throws DukeException Throws exception if the given task index is invalid.
      */
     public String markTask(int taskIndex) throws DukeException {
-        Task task = this.getTask(taskIndex);
+        Task task = getTask(taskIndex);
         task.mark();
         return task.toString();
     }
@@ -75,7 +75,7 @@ public class TaskList {
      * @throws DukeException Throws exception if the given task index is invalid.
      */
     public String unmarkTask(int taskIndex) throws DukeException {
-        Task task = this.getTask(taskIndex);
+        Task task = getTask(taskIndex);
         task.unmark();
         return task.toString();
     }
@@ -88,7 +88,7 @@ public class TaskList {
      */
     public ArrayList<Task> findTask(String keyword) {
         ArrayList<Task> foundTasks = new ArrayList<>();
-        for (Task task : this.TASK_LIST) {
+        for (Task task : TASK_LIST) {
             if (task.getDescription().contains(keyword)) {
                 foundTasks.add(task);
             }

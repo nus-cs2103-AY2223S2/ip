@@ -17,7 +17,6 @@ import duke.task.TaskList;
  */
 public class Storage {
     private final String FILEPATH;
-    private final Parser PARSER = new Parser();
 
     public Storage(String FILEPATH) {
         this.FILEPATH = FILEPATH;
@@ -31,12 +30,12 @@ public class Storage {
      * @throws DukeException Throws exception if file cannot be found locally or created.
      */
     public ArrayList<Task> load() throws DukeException {
-        File f = new File(this.FILEPATH);
+        File f = new File(FILEPATH);
         ArrayList<Task> tasks = new ArrayList<>();
         try {
             Scanner s = new Scanner(f);
             while (s.hasNext()) {
-                Task task = PARSER.processTask(s.nextLine());
+                Task task = Parser.processTask(s.nextLine());
                 tasks.add(task);
             }
         } catch (FileNotFoundException fnfe) {
@@ -47,7 +46,7 @@ public class Storage {
                 throw new DukeException("Fake Duke can't create the file.");
             }
             throw new DukeException(String.format("Fake Duke can't find the file. I have created the file (%s) :D",
-                    this.FILEPATH));
+                    FILEPATH));
         }
         return tasks;
     }
@@ -60,7 +59,7 @@ public class Storage {
      */
     public void saveTasks(TaskList tasks) throws DukeException {
         try {
-            FileWriter fw = new FileWriter(this.FILEPATH);
+            FileWriter fw = new FileWriter(FILEPATH);
             for (int i = 0; i < tasks.getSize(); i++) {
                 fw.write(tasks.getTask(i).getRawTask());
             }
