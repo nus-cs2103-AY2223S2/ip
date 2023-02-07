@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 /**
  * Task object that is not to be instantiated.
  */
-public abstract class Task {
+public abstract class Task implements Comparable<Task> {
 
     /** String that represents the name of the task. */
     protected String taskName;
@@ -86,32 +86,7 @@ public abstract class Task {
         return month + " " + day + " " + year + " " + hour + minute;
     }
 
-    /**
-     * Returns a String in a parseable format into LocalDateTime.
-     *
-     * @param input substring from user input containing date and time.
-     * @return String that is parseable into LocalDateTime.
-     */
-    public String dateTimeFormat(String input) {
-        String[] dateTimePair = input.split(" ");
-        String date = dateTimePair[0];
-        String time = dateTimePair[1];
-        String hrStr = time.substring(0, 2);
-        String minStr = time.substring(2, 4);
-        return date + "T" + hrStr + ":" + minStr + ":00";
-    }
 
-    /**
-     * Returns a LocalDateTime object that has the date and time of the input.
-     *
-     * @param input substring from user input containing date and time.
-     * @return LocalDateTime with the date and time of the input.
-     * @throws DateTimeException when the input is an invalid format that cannot be parsed.
-     */
-    public LocalDateTime parseDateTime(String input) throws DateTimeException {
-        String formattedDateTime = dateTimeFormat(input);
-        return LocalDateTime.parse(formattedDateTime);
-    }
 
     /**
      * Returns a String in a format that is meant to be stored in the memory.
@@ -122,6 +97,8 @@ public abstract class Task {
         assert (!this.taskName.equals(""));
         return this.isDone + "|" + this.taskName;
     }
+
+    public abstract int compareTo(Task task);
 
     /**
      * Returns a String which is a concatenation of if the task is done and the taskName.

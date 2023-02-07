@@ -1,5 +1,7 @@
 package connor.task;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedList;
 
 import connor.ui.Ui;
@@ -135,6 +137,16 @@ public class TaskList {
             }
         }
         return str.toString();
+    }
+
+    public String sort(Ui ui) {
+        Collections.sort(this.tasks, new Comparator<Task>() {
+            @Override
+            public int compare(Task task1, Task task2) {
+                return task1.compareTo(task2);
+            }
+        });
+        return ui.sortMessage();
     }
 
     public int getSize() {

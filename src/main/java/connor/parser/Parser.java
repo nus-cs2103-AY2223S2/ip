@@ -8,6 +8,10 @@ import connor.task.TaskList;
 import connor.task.Todo;
 import connor.ui.Ui;
 
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 /**
  * Parser object that parses information from input and memory.
  */
@@ -23,6 +27,33 @@ public class Parser {
         if (input.trim().length() < 1) {
             throw new InvalidTaskException();
         }
+    }
+
+    /**
+     * Returns a String in a parseable format into LocalDateTime.
+     *
+     * @param input substring from user input containing date and time.
+     * @return String that is parseable into LocalDateTime.
+     */
+    public String dateTimeFormat(String input) {
+        String[] dateTimePair = input.split(" ");
+        String date = dateTimePair[0];
+        String time = dateTimePair[1];
+        String hrStr = time.substring(0, 2);
+        String minStr = time.substring(2, 4);
+        return date + "T" + hrStr + ":" + minStr + ":00";
+    }
+
+    /**
+     * Returns a LocalDateTime object that has the date and time of the input.
+     *
+     * @param input substring from user input containing date and time.
+     * @return LocalDateTime with the date and time of the input.
+     * @throws DateTimeException when the input is an invalid format that cannot be parsed.
+     */
+    public LocalDateTime parseDateTime(String input) throws DateTimeException {
+        String formattedDateTime = dateTimeFormat(input);
+        return LocalDateTime.parse(formattedDateTime);
     }
 
     /**
@@ -42,6 +73,7 @@ public class Parser {
         pair[0] = input.substring(0, byIndex - 1);
         validateName(pair[0]);
         pair[1] = input.substring(byIndex + 4);
+
         return pair;
     }
 
@@ -85,11 +117,14 @@ public class Parser {
 
         case "DEADLINE":
             String[] pair = getNameDeadlinePair(information);
-            return new Deadline(pair[0], pair[1]);
+            LocalDateTime deadline = parseDateTime(pair[1]);
+            return new Deadline(pair[0], deadline);
 
         case "EVENT":
             String[] tuple = getNameStartEndTuple(information);
-            return new Event(tuple[0], tuple[1], tuple[2]);
+            LocalDateTime start = parseDateTime(tuple[1]);
+            LocalDateTime end = parseDateTime(tuple[2]);
+            return new Event(tuple[0], start, end);
 
         default:
             throw new InvalidTaskException();
@@ -132,7 +167,7 @@ public class Parser {
      * @param input Full user input String.
      * @param tasks current collection of Tasks.
      * @param ui UI to print messages.
-     * @return String response in regards to user input.
+     * @return String response with regards to user input.
      */
     public String parse(String input, TaskList tasks, Ui ui) {
         String command = getCommand(input).trim();
@@ -170,6 +205,8 @@ public class Parser {
             case FIND:
                 return tasks.find(getTask(input));
 
+            case SORT:
+                return tasks.sort(ui);
             default:
                 return ("INVALID COMMAND");
             }

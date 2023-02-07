@@ -60,7 +60,7 @@ public class Storage {
             try {
                 tasks.add(interpretLine(sc.nextLine()));
             } catch (CorruptedDataException e) {
-                System.out.println("        " + e.getMessage());
+                System.out.println(e.getMessage());
             }
         }
         return tasks;

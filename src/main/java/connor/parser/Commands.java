@@ -14,5 +14,6 @@ public enum Commands {
         EVENT,
         DELETE,
         DELETEALL,
-        FIND
+        FIND,
+        SORT
 }

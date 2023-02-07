@@ -52,4 +52,8 @@ public class Ui {
                 + "  "
                 + message;
     }
+
+    public String sortMessage() {
+        return "I have successfully sorted the tasks";
+    }
 }
