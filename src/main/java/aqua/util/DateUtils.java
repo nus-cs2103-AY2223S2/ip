@@ -77,7 +77,8 @@ public class DateUtils {
      * @return {@code true} if the given time ranges are intersecting and
      *      {@code false} otherwise.
      */
-    public static boolean isIntersecting(LocalDateTime s1, LocalDateTime e1, LocalDateTime s2, LocalDateTime e2) {
+    public static boolean isIntersecting(
+                LocalDateTime s1, LocalDateTime e1, LocalDateTime s2, LocalDateTime e2) {
         boolean isStartEndIntersecting = s1.isEqual(s2) || e1.isEqual(e2);
         return !(s1.isEqual(e2) || e1.isEqual(s2) || s1.isAfter(e2) || e1.isBefore(s2)) || isStartEndIntersecting;
     }
