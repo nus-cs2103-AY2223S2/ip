@@ -14,6 +14,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
 
 /**
  * The dialog session class representing either a user's input or the system's
@@ -51,6 +52,7 @@ public class DialogBox extends HBox {
         dialog.setText(text);
         dialog.setTranslateX(isFlipped ? 15 : -15);
         dialog.setTranslateY(20);
+
         userFrame.setFill(new ImagePattern(img));
     }
 
@@ -72,7 +74,11 @@ public class DialogBox extends HBox {
      * @return The resultant DialogBox.
      */
     public static DialogBox getMortyDialog(String text, Image img) {
-        return new DialogBox(text, img, false);
+        var db = new DialogBox(text, img, false);
+        Font displayFont = FontLoader.getFont(FontLoader.FontStyle.REGULAR);
+        assert displayFont != null;
+        db.dialog.setFont(displayFont);
+        return db;
     }
 
     /**
@@ -84,6 +90,9 @@ public class DialogBox extends HBox {
      */
     public static DialogBox getRickDialog(String text, Image img) {
         var db = new DialogBox(text, img, true);
+        Font displayFont = FontLoader.getFont(FontLoader.FontStyle.ITALIC);
+        assert displayFont != null;
+        db.dialog.setFont(displayFont);
         db.flip();
         return db;
     }

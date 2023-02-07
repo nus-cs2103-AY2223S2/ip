@@ -2,10 +2,6 @@ package rick.command;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.ArrayList;
-
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import rick.Parser;
@@ -29,35 +25,6 @@ import rick.task.TodoTask;
  *         AY2223-S2 CS2103T
  */
 public class QueryCommandTest extends CommandTest {
-    private static final ArrayList<RickTask> currentTasks = new ArrayList<>();
-
-    /**
-     * Temporarily stores existing tasks in the Storage to isolate them from
-     * the test environment.
-     */
-    @BeforeAll
-    public static void clearStorage() {
-        int size = Integer.parseInt(String.valueOf(STORAGE.size()));
-        while (size > 0) {
-            currentTasks.add(STORAGE.delete(size - 1));
-            size -= 1;
-        }
-    }
-
-    /**
-     * Repopulates the storage and reinstates its original state.
-     */
-    @AfterAll
-    public static void repopulate() {
-        while (currentTasks.size() > 0) {
-            try {
-                TASK_LIST.add(currentTasks.remove(currentTasks.size() - 1));
-            } catch (TaskListFullException e) {
-                return;
-            }
-        }
-    }
-
     /**
      * Tests the {@code ListCommand} class.
      */
@@ -176,6 +143,7 @@ public class QueryCommandTest extends CommandTest {
                 + "Try again. No tasks have this term.";
         assertEquals(expectedNoResUi, actualNoResUi);
 
+        Parser.setTaskList(TASK_LIST);
         Command emptySearch = Parser.parse("find");
         String actualEmptyUi = emptySearch.execute(TASK_LIST, UI);
         String expectedEmptyUi = "An empty search was attempted. Valid Usage: find {search term}";

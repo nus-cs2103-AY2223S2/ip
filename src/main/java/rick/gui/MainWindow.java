@@ -1,5 +1,7 @@
 package rick.gui;
 
+import java.util.ArrayList;
+
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -11,6 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import rick.Rick;
+
 
 /**
  * The main window for the app.
@@ -66,15 +69,27 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = rick.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getMortyDialog(input, mortyImage),
-                DialogBox.getRickDialog(response, rickImage)
-        );
+        if (response.startsWith("$$MULTI$$")) {
+            response = response.replaceFirst("\\$\\$MULTI\\$\\$\n", "");
+            String[] responses = response.split("/\\$\\$SEP/\\$\\$");
+            ArrayList<DialogBox> dialogs = new ArrayList<>();
+            dialogs.add(DialogBox.getMortyDialog(input, mortyImage));
+
+            for (int i = 0; i < responses.length; i++) {
+                dialogs.add(DialogBox.getRickDialog(responses[i], rickImage));
+            }
+            dialogContainer.getChildren().addAll(dialogs);
+        } else {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getMortyDialog(input, mortyImage),
+                    DialogBox.getRickDialog(response, rickImage)
+            );
+        }
 
         userInput.clear();
 
         if (rick.isCloseAppTime()) {
-            PauseTransition exitDelay = new PauseTransition(Duration.seconds(1.5));
+            PauseTransition exitDelay = new PauseTransition(Duration.seconds(1.0));
             exitDelay.setOnFinished(e -> Platform.exit());
             exitDelay.play();
         }

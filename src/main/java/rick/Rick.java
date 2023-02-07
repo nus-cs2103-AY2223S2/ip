@@ -39,6 +39,7 @@ public class Rick {
      * @return The UI response from the system.
      */
     public String getResponse(String input) {
+        Parser.setTaskList(tasks);
         Command cmd = Parser.parse(input);
         isTimeToExit = cmd.isExit();
         return cmd.execute(tasks, ui);

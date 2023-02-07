@@ -2,7 +2,9 @@ package rick;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import rick.exceptions.RickException;
 import rick.exceptions.TaskListFullException;
@@ -188,5 +190,18 @@ public class TaskList {
     @Override
     public String toString() {
         return this.storage.toString();
+    }
+
+    /**
+     * Returns a list of all tasks in the Storage that fulfil the given
+     * predicate.
+     *
+     * @param p The predicate to filter the Storage by
+     * @return The list of tasks.
+     */
+    public Stream<RickTask> filter(Predicate<RickTask> p) {
+        return this.storage
+                .toList()
+                .stream().filter(p);
     }
 }
