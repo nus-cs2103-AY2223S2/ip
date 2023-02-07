@@ -71,15 +71,12 @@ public class Parser {
         case "delete":
             c = new DeleteCommand(this.singleQueryInteger(line));
             break;
-
         case "mark":
             c = new MarkCommand(this.singleQueryInteger(line), true);
             break;
-
         case "unmark":
             c = new MarkCommand(this.singleQueryInteger(line), false);
             break;
-
         case "todo":
             if (line.length == 1) {
                 throw new NoArgsException("deadline");
@@ -87,13 +84,12 @@ public class Parser {
             String description = this.queries(line, Todos.KEYWORDS).get(0);
             c = new TodoCommand(new Todos(description));
             break;
-        case "event":
+        case "event"
             if (line.length == 1) {
                 throw new NoArgsException("deadline");
             } else if (joined.split("/").length != 3) {
                 throw new InvalidException();
             }
-
             queries = this.queries(line, Events.KEYWORDS);
             Events event = new Events(queries);
             c = new EventCommand(event);
@@ -104,18 +100,15 @@ public class Parser {
             } else if (joined.split("/").length != 2) {
                 throw new InvalidException();
             }
-
             queries = this.queries(line, Deadlines.KEYWORDS);
             c = new DeadLineCommand(new Deadlines(queries));
             break;
-
         case "bye":
             c = new ByeCommand();
 
 
             assert c.isBye();
             break;
-
         case "find":
             if (line.length == 1) {
                 throw new NoArgsException("deadline");
@@ -123,7 +116,6 @@ public class Parser {
             String query = this.queries(line, List.<String>of()).get(0);
             c = new FindCommand(query);
             break;
-
         default:
             throw new UnrecognisableException();
         }

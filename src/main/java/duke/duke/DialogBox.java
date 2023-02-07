@@ -19,7 +19,6 @@ public class DialogBox extends HBox {
 
     private Label text;
 
-
     public DialogBox(Label l, ImageView iv) {
 
         text = l;
