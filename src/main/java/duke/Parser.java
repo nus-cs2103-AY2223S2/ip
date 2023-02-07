@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-enum Query { LIST, FIND, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE }
+enum Query { LIST, FIND, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, HELP }
 public class Parser {
     /**
      * Get input string, parses it and run corresponding functions.
@@ -37,6 +37,8 @@ public class Parser {
             return addEvent(tasks, tokens[1]);
         case DELETE:
             return delete(tasks, tokens[1]);
+        case HELP:
+            return help();
         default:
             return "";
         }
@@ -161,5 +163,9 @@ public class Parser {
     private static LocalDate parseDate(String dateString) throws DateTimeParseException {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         return LocalDate.parse(dateString, format);
+    }
+
+    private static String help() {
+        return Ui.help();
     }
 }
