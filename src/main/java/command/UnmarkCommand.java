@@ -14,6 +14,7 @@ import task.TaskList;
  * Represents the command to unmark a task and save the changes.
  */
 public class UnmarkCommand extends Command {
+
     private String input;
 
     /**
@@ -36,20 +37,18 @@ public class UnmarkCommand extends Command {
      */
     @Override
     public Response execute(TaskList tl, Ui ui, Storage storage) throws DukeException {
-        // Get index to unmark
-        Integer idx = Integer.valueOf(input.split(" ")[1]) - 1;
 
-        // Verify if task number is invalid:
-        if (idx < 0 || idx >= tl.numberOfTasks()) {
+        Integer taskIndex = Integer.valueOf(input.split(" ")[1]) - 1;
+
+        if (taskIndex < 0 || taskIndex >= tl.numberOfTasks()) {
             throw new InvalidCommandInputException("task.Task number is invalid!", "unmark");
         }
 
         // Unmark task and save changes
-        tl.unmarkTask(idx);
+        tl.unmarkTask(taskIndex);
         storage.save(tl);
 
-        // Print statement
-        String message = "OK, I've marked this task as not done yet:\n" + tl.getTask(idx);
+        String message = "OK, I've marked this task as not done yet:\n" + tl.getTask(taskIndex);
 
         return new Response(message, tl);
     }

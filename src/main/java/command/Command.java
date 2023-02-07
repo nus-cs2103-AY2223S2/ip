@@ -14,6 +14,7 @@ import task.TaskList;
  * Represents the command given by the user.
  */
 public abstract class Command {
+
     private String regex;
 
     /**

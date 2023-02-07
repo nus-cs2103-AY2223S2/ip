@@ -15,6 +15,7 @@ import task.Task;
  * Represents a command to delete a task from the task list.
  */
 public class DeleteCommand extends Command {
+
     private String input;
 
     /**
@@ -37,21 +38,19 @@ public class DeleteCommand extends Command {
      */
     @Override
     public Response execute(TaskList tl, Ui ui, Storage storage) throws DukeException {
-        // Find index of task to delete
-        Integer idx = Integer.valueOf(input.split(" ")[1]) - 1;
 
-        // Verify if task number is invalid:
-        if (idx < 0 || idx >= tl.numberOfTasks()) {
+        Integer taskIndex = Integer.valueOf(input.split(" ")[1]) - 1;
+
+        if (taskIndex < 0 || taskIndex >= tl.numberOfTasks()) {
             throw new InvalidCommandInputException("Task number is invalid!", "delete");
         }
 
-        assert idx < tl.numberOfTasks() && idx >= 0 : "Index out of range!";
+        assert taskIndex < tl.numberOfTasks() && taskIndex >= 0 : "Index out of range!";
 
         // Delete task and save changes
-        Task t = tl.deleteTask(idx);
+        Task t = tl.deleteTask(taskIndex);
         storage.save(tl);
 
-        // Print statement
         String message = "Noted. I've removed this task:\n" + t
                 + "\nNow you have " + tl.numberOfTasks()
                 + (tl.numberOfTasks() > 1 ? " tasks" : " task")

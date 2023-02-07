@@ -14,6 +14,7 @@ import task.TaskList;
  * Represents a command to add a task to the task list.
  */
 public class AddCommand extends Command {
+
     private String input;
 
     /**
@@ -36,7 +37,7 @@ public class AddCommand extends Command {
      */
     @Override
     public Response execute(TaskList tl, Ui ui, Storage storage) throws DukeException {
-        // Add and save task
+
         Task t = tl.addTask(input);
         storage.save(tl);
 

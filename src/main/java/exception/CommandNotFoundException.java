@@ -4,6 +4,7 @@ package exception;
  * Represents the exception where the command given is not valid.
  */
 public class CommandNotFoundException extends DukeException {
+
     private String command;
 
     /**

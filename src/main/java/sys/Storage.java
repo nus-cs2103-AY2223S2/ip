@@ -36,7 +36,6 @@ public class Storage {
         TaskList tasks = new TaskList();
 
         try {
-            // Read the specified path.
             File f = new File(path);
             Scanner s = new Scanner(f);
 
@@ -60,7 +59,6 @@ public class Storage {
      */
     public void save(TaskList tasks) {
         try {
-            // Write to the specified path.
             FileWriter fw = new FileWriter(path);
 
             // Remove enumeration.
@@ -69,17 +67,15 @@ public class Storage {
 
             // Only add to storage file if line is not empty.
             if (!lines[0].equals("")) {
-                // Add every task as a new line.
                 for (String line: lines) {
                     newContent.append(line.substring(3));
                     newContent.append('\n');
                 }
 
-                // Remove last new line.
+                // Remove last new line character ('\n').
                 newContent.deleteCharAt(newContent.length() - 1);
             }
 
-            // Write to file.
             fw.write(newContent.toString());
             fw.close();
         } catch (IOException e) {

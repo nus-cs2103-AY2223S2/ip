@@ -11,6 +11,7 @@ import task.TaskList;
  * Represents a command used to find tasks by searching for a keyword.
  */
 public class FindCommand extends Command {
+
     private String input;
 
     /**
@@ -32,10 +33,11 @@ public class FindCommand extends Command {
      */
     @Override
     public Response execute(TaskList tl, Ui ui, Storage storage) {
-        // Handle find
+
         String word = input.substring(5);
 
         String message = "Found tasks containing: " + word;
+
         TaskList result = tl.findTasksWithWord(word);
 
         return new Response(message, result);

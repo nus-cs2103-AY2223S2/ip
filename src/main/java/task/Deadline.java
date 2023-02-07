@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
  * Represents a deadline task that should be done by a given time.
  */
 public class Deadline extends Task {
+
     private LocalDateTime deadline;
 
     /**
