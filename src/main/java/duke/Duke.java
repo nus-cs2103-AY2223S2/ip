@@ -1,10 +1,9 @@
 package duke;
 
+
 import duke.functions.Parser;
 import duke.functions.Storage;
-import duke.functions.Ui;
-
-import java.util.Scanner;
+import duke.functions.Reply;
 
 /**
  * The main class that the Duke program will run on.
@@ -12,43 +11,39 @@ import java.util.Scanner;
  * and decoding user inputs and shut down.
  */
 public class Duke {
-    public static void main(String[] args) {
-        Storage storage = new Storage("./ip-data/ip-data.txt");
-        Scanner sc = new Scanner(System.in);
-        ToDoList list;
+    private Storage storage;
+    private ToDoList list;
 
-        list = Duke.startUp(storage);
-        Duke.input(sc, list);
-        Duke.shutDown(storage, list);
+    public Duke(String path) {
+        this.storage = new Storage(path);
+        this.list = startUp();
     }
 
-    private static ToDoList startUp(Storage storage) {
+    private ToDoList startUp() {
         try {
-            Ui.welcomeMessage();
-            return storage.load();
+            return this.storage.load();
         } catch (Exception e) {
             return new ToDoList();
         }
     }
 
-    private static void shutDown(Storage storage, ToDoList list) {
+    public String shutDown() {
         try {
-            storage.save(list);
-            Ui.exitMessage();
+            this.storage.save(this.list);
+            return Reply.getExitMessage();
         } catch (Exception e) {
-
+            return  Reply.getErrorMessage(e.getMessage());
         }
     }
 
-    private static void input(Scanner sc, ToDoList list) {
-        boolean isProgramDone = false;
-        while (!isProgramDone) {
-            try {
-                String[] inputs = Parser.handleInput(sc.nextLine(), " ", 2, 1);
-                isProgramDone = Parser.handleCommand(inputs, list);
-            } catch (Exception e) {
-                Ui.errorMessage(e.getMessage());
-            }
+    public String getResponse(String userInput) {
+        String response;
+        try {
+            String[] inputs = Parser.handleInput(userInput, " ", 2, 1);
+            response = Parser.handleCommand(inputs, this.list, this);
+        } catch (Exception e) {
+            response = Reply.getErrorMessage(e.getMessage());
         }
+        return response;
     }
 }

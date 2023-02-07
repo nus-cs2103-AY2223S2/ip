@@ -1,5 +1,6 @@
 package duke.functions;
 
+import duke.Duke;
 import duke.ToDoList;
 
 import duke.exceptions.DukeException;
@@ -43,54 +44,55 @@ public class Parser {
     /**
      * The method reads an array of String input and uses the first value of the array
      * to determine which operations shall be performed on the ToDoList object.
-     * Returns a boolean value indicating if the main program should shut down
-     * or continue running.
+     * Returns a String that is the output message of the command performed.
      *
      * @param inputs The Array of String containing the operation to be performed
      *              and its additional parameters. The first value of the array
      *              should contain the type of operation to be carried out.
      * @param list The ToDoList object that the operations should be performed on.
-     * @return A boolean value indicating if the program should end or continue.
+     * @return A String that is the output message of the command performed.
      * @throws Exception If the given array of String contains insufficient or wrong
      *                   parameters or values not part of the possible commands.
      */
-    public static boolean handleCommand(String[] inputs, ToDoList list) throws Exception {
+    public static String handleCommand(String[] inputs, ToDoList list, Duke duke) throws Exception {
         String command = inputs[0];
         int index;
+        String reply;
 
         switch (command) {
         case "bye":
-            return true;
+            reply = duke.shutDown();
+            break;
         case "list":
-            Ui.listMessage(list.toString());
+            reply = Reply.getListMessage(list.toString());
             break;
         case "mark":
             index = Integer.parseInt(inputs[1]);
             list.markTask(index);
-            Ui.taskMarking(list, index, command);
+            reply = Reply.getTaskMarkMessage(list, index, command);
             break;
         case "unmark":
             index = Integer.parseInt(inputs[1]);
             list.unmarkTask(index);
-            Ui.taskMarking(list, index, command);
+            reply = Reply.getTaskMarkMessage(list, index, command);
             break;
         case "delete":
             index = Integer.parseInt(inputs[1]);
             Task removed = list.delete(index);
-            Ui.taskAddDelete(list, removed, command);
+            reply = Reply.getAddDeleteMessage(list, removed, command);
             break;
         case "todo":
         case "event":
         case "deadline":
-            Parser.handleTaskCommand(inputs, list);
+            reply = Parser.handleTaskCommand(inputs, list);
             break;
         case "find":
-            Ui.findResultMessage(list.find(inputs[1]), inputs[1]);
+            reply = Reply.getFindResultMessage(list.find(inputs[1]), inputs[1]);
             break;
         default:
             throw new DukeException("The Duke does not understand your words!");
         }
-        return false;
+        return reply;
     }
 
     /**
@@ -101,10 +103,11 @@ public class Parser {
      *              and its additional parameters. The first value of the array should
      *              contain the type of Task object to be added to the ToDoList object.
      * @param list The ToDoList object that the newly created Task object should be added to.
+     * @return A String that specifies the operation carried out on which Task object.
      * @throws DukeException If the given array of String contains insufficient or wrong
      *                       parameters or values not part of the possible commands.
      */
-    public static void handleTaskCommand(String[] inputs, ToDoList list) throws DukeException {
+    public static String handleTaskCommand(String[] inputs, ToDoList list) throws DukeException {
         String command = inputs[0];
 
         if (inputs.length < 2) {
@@ -113,15 +116,13 @@ public class Parser {
         if (command.equals("todo")) {
             ToDoTask toAdd = new ToDoTask(inputs[1]);
             list.add(toAdd);
-            Ui.taskAddDelete(list, toAdd, "add");
-            return;
+            return Reply.getAddDeleteMessage(list, toAdd, "add");
         }
         if (command.equals("deadline")) {
             String[] subInputs = Parser.handleInput(inputs[1], " /by ", 2, 2);
             DeadlineTask toAdd = new DeadlineTask(subInputs[0], subInputs[1]);
             list.add(toAdd);
-            Ui.taskAddDelete(list, toAdd, "add");
-            return;
+            return Reply.getAddDeleteMessage(list, toAdd, "add");
         }
         if (command.equals("event")) {
             String[] subInputs = Parser.handleInput(inputs[1], " /from ", 2, 2);
@@ -130,7 +131,8 @@ public class Parser {
                     subInputDurations[0],
                     subInputDurations[1]);
             list.add(toAdd);
-            Ui.taskAddDelete(list, toAdd, "add");
+            return Reply.getAddDeleteMessage(list, toAdd, "add");
         }
+        throw new InputDukeException();
     }
 }

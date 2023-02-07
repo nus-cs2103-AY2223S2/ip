@@ -2,6 +2,8 @@ package duke.functions;
 
 import duke.ToDoList;
 
+import duke.exceptions.SaveDukeException;
+
 import duke.tasks.DeadlineTask;
 import duke.tasks.EventTask;
 import duke.tasks.Task;
@@ -101,8 +103,10 @@ public class Storage {
      * to the file pointed to by the path stored in the Storage object.
      *
      * @param list The ToDoList that is to have its state saved.
+     * @throws SaveDukeException If an error occurred while saving the contents of
+     *                           the ToDoList object to the file.
      */
-    public void save(ToDoList list)  {
+    public void save(ToDoList list) throws SaveDukeException {
         try {
             FileWriter fw = new FileWriter(path.toString());
             int count = list.getToDoCount();
@@ -111,6 +115,7 @@ public class Storage {
             }
             fw.close();
         } catch (Exception e) {
+            throw new SaveDukeException();
         }
     }
 
