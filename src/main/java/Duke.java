@@ -1,15 +1,9 @@
-import duke.Storage;
-import duke.task.TaskList;
-import duke.Ui;
 import duke.DukeException;
-import duke.command.Parser;
+import duke.Storage;
+import duke.Ui;
 import duke.command.Command;
-
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
+import duke.command.Parser;
+import duke.task.TaskList;
 
 /**
  * The type Duke.

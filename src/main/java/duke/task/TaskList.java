@@ -1,11 +1,11 @@
 package duke.task;
 
-import duke.DukeException;
-import duke.command.Parser;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.DukeException;
+import duke.command.Parser;
 
 /**
  * The type Task list.
@@ -15,7 +15,7 @@ public class TaskList {
     /**
      * The Tasks.
      */
-    ArrayList<Task> tasks = new ArrayList<>();
+    private ArrayList<Task> tasks = new ArrayList<>();
 
     /**
      * Instantiates a new Task list.
@@ -34,20 +34,20 @@ public class TaskList {
         for (String task: storedTasks) {
             String[] parsedTask = Parser.parseTask(task);
             switch (parsedTask[0]) {
-                case "T":
-                    tasks.add(new Todo(parsedTask[2]));
-                    break;
-                case "D":
-                    tasks.add(new Deadline(parsedTask[2], LocalDate.parse(parsedTask[3])));
-                    break;
-                case "E":
-                    tasks.add(new Event(parsedTask[2], parsedTask[3], parsedTask[4]));
-                    break;
-                default:
-                    throw new DukeException("encountered invalid saved task");
+            case "T":
+                tasks.add(new Todo(parsedTask[2]));
+                break;
+            case "D":
+                tasks.add(new Deadline(parsedTask[2], LocalDate.parse(parsedTask[3])));
+                break;
+            case "E":
+                tasks.add(new Event(parsedTask[2], parsedTask[3], parsedTask[4]));
+                break;
+            default:
+                throw new DukeException("encountered invalid saved task");
             }
             if (parsedTask[1].equals("1")) {
-               tasks.get(tasks.size() - 1).mark();
+                tasks.get(tasks.size() - 1).mark();
             }
         }
 
@@ -59,8 +59,8 @@ public class TaskList {
      * @param description the description
      * @throws DukeException the duke exception
      */
-    public void addTodo(String description) throws DukeException{
-        if (description.equals("")){
+    public void addTodo(String description) throws DukeException {
+        if (description.equals("")) {
             throw new DukeException("The description of a todo cannot be empty.");
         }
         Todo newTodo = new Todo(description);
@@ -116,7 +116,7 @@ public class TaskList {
      * @param taskNo the task no
      * @return the string
      */
-    public String markTask(int taskNo){
+    public String markTask(int taskNo) {
         tasks.get(taskNo).mark();
         String result = "Nice! I've marked this task as done:\n";
         result += tasks.get(taskNo);
@@ -129,7 +129,7 @@ public class TaskList {
      * @param taskNo the task no
      * @return the string
      */
-    public String unmarkTask(int taskNo){
+    public String unmarkTask(int taskNo) {
         tasks.get(taskNo).unmark();
         String result = "OK, I've marked this task as not done yet:\n";
         result += tasks.get(taskNo);
@@ -142,7 +142,7 @@ public class TaskList {
      * @param taskNo the task no
      * @return the string
      */
-    public String delete(int taskNo){
+    public String delete(int taskNo) {
         Task deleted = tasks.remove(taskNo);
         return String.format("OK, I've deleted: %s\n", deleted);
     }
@@ -154,7 +154,7 @@ public class TaskList {
      */
     public List<String> getTasksToSave() {
         List<String> toSave = new ArrayList<>();
-        for(int i = 0; i < size(); i++) {
+        for (int i = 0; i < size(); i++) {
             Task taskToSave = tasks.get(i);
             toSave.add(taskToSave.toSaveableString());
         }
@@ -179,7 +179,7 @@ public class TaskList {
     public String find(String search) {
         String result = "Here are the matching tasks in your list:\n";
         int numOfResultsFound = 0;
-        for(int i = 0; i < size(); i++) {
+        for (int i = 0; i < size(); i++) {
             Task taskMatch = tasks.get(i);
             if (taskMatch.toString().contains(search)) {
                 result += String.format("%d. %s\n", ++numOfResultsFound,

@@ -1,5 +1,7 @@
 package duke.command;
 
+import java.time.LocalDate;
+
 import duke.DukeException;
 import duke.Storage;
 import duke.Ui;
@@ -8,12 +10,10 @@ import duke.task.Event;
 import duke.task.TaskList;
 import duke.task.Todo;
 
-import java.time.LocalDate;
-
 /**
  * The type Add command.
  */
-public class AddCommand extends Command{
+public class AddCommand extends Command {
 
     private String type;
 
@@ -67,16 +67,17 @@ public class AddCommand extends Command{
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         switch (this.type) {
-            case "E":
-                tasks.addEvent(description, from, to);
-                return ui.showTask(new Event(description, from, to), tasks.size());
-            case "D":
-                tasks.addDeadline(description, by);
-                return ui.showTask(new Deadline(description, LocalDate.parse(by)), tasks.size());
-            case "T":
-                tasks.addTodo(description);
-                return ui.showTask(new Todo(description), tasks.size());
+        case "E":
+            tasks.addEvent(description, from, to);
+            return ui.showTask(new Event(description, from, to), tasks.size());
+        case "D":
+            tasks.addDeadline(description, by);
+            return ui.showTask(new Deadline(description, LocalDate.parse(by)), tasks.size());
+        case "T":
+            tasks.addTodo(description);
+            return ui.showTask(new Todo(description), tasks.size());
+        default:
+            throw new DukeException("could not add task");
         }
-        throw new DukeException("could not add task");
     }
 }

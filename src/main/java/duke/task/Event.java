@@ -3,7 +3,7 @@ package duke.task;
 /**
  * The type Event.
  */
-public class Event extends Task{
+public class Event extends Task {
 
     private String to;
     private String from;
