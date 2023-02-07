@@ -68,6 +68,10 @@ public class Parser {
             return ui.print(taskList.addTask(makeTaskFromInput(command)));
         case "find":
             return ui.print(taskList.findTask(command.split(" ")[1]));
+        case "reminder":
+            return ui.print(taskList.getReminders());
+        case "bye":
+            return ui.printBye();
         default:
             throw new InvalidCommandException("Invalid command nya!\n"
                     + " Do it again and I will scratch you!\n");
