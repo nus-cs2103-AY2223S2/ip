@@ -8,7 +8,7 @@ import task.TaskList;
  * List commands
  */
 public class ListCommand extends Command {
-    static int NUM_COMPONENTS = 1;
+    private static int NUM_COMPONENTS = 1;
 
     /**
      * Default constructor, saves the command

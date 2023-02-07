@@ -9,8 +9,8 @@ import ui.TextUi;
  * An abstract class for all commands
  */
 public abstract class Command {
-    static String STRING_LIST = "list";
-    static String STRING_SPACE = " ";
+    protected static String STRING_LIST = "list";
+    protected static String STRING_SPACE = " ";
 
     protected final String command;
     protected final boolean doesPrint;

@@ -8,7 +8,7 @@ import task.TaskList;
  * Command for exiting from the program
  */
 public class ExitCommand extends Command {
-    static int NUM_COMPONENTS = 1;
+    private static int NUM_COMPONENTS = 1;
 
     /**
      * Default constructor

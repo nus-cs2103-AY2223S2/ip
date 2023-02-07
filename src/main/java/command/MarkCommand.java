@@ -11,7 +11,7 @@ import task.TaskList;
  * Mark a task as done
  */
 public class MarkCommand extends Command {
-    static int NUM_COMPONENTS = 2;
+    private static int NUM_COMPONENTS = 2;
 
     /**
      * Default constructor, saves the command

@@ -6,7 +6,7 @@ import duke.DukeException;
  * Class for calling event command
  */
 public class EventCommand extends TaskCommand {
-    static int NUM_COMPONENTS = 6;
+    private static int NUM_COMPONENTS = 6;
 
     /**
      * Default constructor

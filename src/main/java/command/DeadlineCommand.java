@@ -6,7 +6,7 @@ import duke.DukeException;
  * Command for deadline task.
  */
 public class DeadlineCommand extends TaskCommand {
-    static int NUM_COMPONENTS = 4;
+    private static int NUM_COMPONENTS = 4;
 
     /**
      * Constructor

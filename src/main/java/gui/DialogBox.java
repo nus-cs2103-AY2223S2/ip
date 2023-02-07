@@ -12,8 +12,8 @@ import javafx.scene.layout.HBox;
  * An object to show a dialog box
  */
 public class DialogBox extends HBox {
-    static double WIDTH = 100.0;
-    static double HEIGHT = 100.0;
+    private static double WIDTH = 100.0;
+    private static double HEIGHT = 100.0;
 
     private Label text;
     private ImageView displayPicture;
