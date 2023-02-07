@@ -14,9 +14,6 @@ import duke.tasks.Events;
 import duke.tasks.Task;
 import duke.tasks.Todos;
 
-
-
-
 /**
  * A class which handles reading and writing data onto a file.
  * This is needed for saving the task list.
@@ -36,24 +33,24 @@ public class Storage {
      */
     public TaskList loadFile() throws LoadException {
 
-        ArrayList<Task> loadData;
+        ArrayList<Task> taskList;
         try {
             File f = new File(this.filePath);
             Scanner s = new Scanner(f);
-            loadData = new ArrayList<>();
+            taskList = new ArrayList<>();
             while (s.hasNext()) {
                 String[] inputs = s.nextLine().split(" \\| ");
 
                 boolean isDone = inputs[1].equals("1") ? true : false;
                 switch(inputs[0]) {
                 case "T":
-                    loadData.add(new Todos(isDone, inputs[2]));
+                    taskList.add(new Todos(isDone, inputs[2]));
                     break;
                 case "D":
-                    loadData.add(new Deadlines(isDone, inputs[2], inputs[3]));
+                    taskList.add(new Deadlines(isDone, inputs[2], inputs[3]));
                     break;
                 case "E":
-                    loadData.add(new Events(isDone, inputs[2], inputs[3], inputs[4]));
+                    taskList.add(new Events(isDone, inputs[2], inputs[3], inputs[4]));
                     break;
                 default:
                     throw new LoadException();
