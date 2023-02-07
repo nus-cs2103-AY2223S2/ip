@@ -31,4 +31,11 @@ public abstract class Task implements Serializable{
         this.isDone = false;
     }
 
+    public boolean containsString(String keyword) {
+        if (this.description.contains(keyword)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
