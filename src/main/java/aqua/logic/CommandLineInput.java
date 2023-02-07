@@ -5,17 +5,14 @@ import aqua.manager.IoManager;
 import aqua.manager.LogicManager;
 
 
-/**
- * Represents the user's command line input that create ExecutionServices. An
- * association class of a {@code Command} and its corresponding arguments.
- */
+/** Represents the user's command line input. */
 public class CommandLineInput {
     private final Command command;
     private final ArgumentMap args;
 
 
     /**
-     * Constructs a CommandLineInput.
+     * Constructs a {@code CommandLineInput}.
      *
      * @param command - the command.
      * @param args - the argument map.
@@ -27,11 +24,11 @@ public class CommandLineInput {
 
 
     /**
-     * Returns the ExecutionService to execute the command.
-     * {@code isLoading} is set to {@code false}.
+     * Returns the {@code ExecutionService} to execute the command. The service
+     * returned does not display its results.
      *
-     * @param manager - the LogicManager for the command to work on.
-     * @return the ExecutionService of the command.
+     * @param manager - the {@code LogicManager} for the command to work on.
+     * @return the {@code ExecutionService} of the command.
      */
     public ExecutionService getService(LogicManager manager) {
         return command.getService(args, manager);
@@ -39,12 +36,15 @@ public class CommandLineInput {
 
 
     /**
-     * Returns the ExecutionService to execute the command.
+     * Returns the {@code ExecutionService} to execute the command. The service
+     * returned may display its results.
      *
-     * @param manager - the LogicManager for the command to work on.
-     * @return the ExecutionService of the command.
+     * @param logicManager - the {@code LogicManager} for the command to work
+     *      on.
+     * @param ioManager - the {@code IoManager} to display through.
+     * @return the {@code ExecutionService} of the command.
      */
-    public ExecutionService getService(LogicManager manager, IoManager ioManager) {
-        return command.getService(args, manager, ioManager);
+    public ExecutionService getService(LogicManager logicManager, IoManager ioManager) {
+        return command.getService(args, logicManager, ioManager);
     }
 }
