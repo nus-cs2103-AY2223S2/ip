@@ -2,7 +2,10 @@ package duke;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
+import duke.tasks.Deadline;
+import duke.tasks.Event;
 import duke.tasks.Task;
 
 
@@ -54,6 +57,50 @@ public class TaskList implements Serializable {
      */
     public void remove(int i) {
         this.tasks.remove(i);
+    }
+
+    /**
+     * Filters the tasks in the list by their description.
+     * @param input The user input.
+     * @return ArrayList of the filtered tasks.
+     */
+    public ArrayList<Task> filter(String input) {
+        ArrayList<Task> filtered = this.tasks.stream()
+                .filter(task -> task.contains(input))
+                .collect(Collectors.toCollection(ArrayList::new));
+        return filtered;
+    }
+
+    /**
+     * Filters the tasks in the list by their dates.
+     * @param input The user input.
+     * @return ArrayList of the filtered tasks.
+     */
+    public ArrayList<Task> filterDate(String input) {
+        ArrayList<Task> filtered = this.tasks.stream()
+                .filter(task -> isDeadlineHasWord(task, input) || isEventHasWord(task, input))
+                .collect(Collectors.toCollection(ArrayList::new));
+        return filtered;
+    }
+
+    /**
+     * Checks if the task is an Event and contains the word in their date.
+     * @param t The Task.
+     * @param keyword The input string.
+     * @return Boolean
+     */
+    private boolean isEventHasWord(Task t, String keyword) {
+        return (t instanceof Event) && ((Event) t).dateContains(keyword);
+    }
+
+    /**
+     * Checks if the task is an Deadline and contains the word in their date.
+     * @param t The Task.
+     * @param keyword The input string.
+     * @return Boolean
+     */
+    private boolean isDeadlineHasWord(Task t, String keyword) {
+        return (t instanceof Deadline) && ((Deadline) t).dateContains(keyword);
     }
 
     /**
