@@ -32,13 +32,14 @@ public class Chattime {
         String response = "";
         try {
             Command cmd = Parser.parse(input);
-
+            
             assert cmd != null : "Parsing process went wrong unexpectedly!";
             response = cmd.execute(ui, tasks, storage);
 
         } catch (ChattimeException e) {
             return ui.printError(e.getMessage());
         }
+
         return response;
     }
 

@@ -69,10 +69,8 @@ public class Storage {
      * @throws IOException When directory cannot be created.
      */
     private void checkAndCreateDirectory(File file) throws IOException {
-        if (!file.getParentFile().exists()) {
-            if (!file.getParentFile().mkdirs()) {
-                throw new IOException("New directory cannot be created!");
-            }
+        if (!file.getParentFile().exists() && !file.getParentFile().mkdirs()) {
+            throw new IOException("New directory cannot be created!");
         }
     }
 
@@ -102,27 +100,7 @@ public class Storage {
 
             while (task != null) {
                 String[] taskSplit = task.split(" @ ", 7);
-                Task inputTask = null;
-
-                switch (taskSplit[0]) {
-                case "T":
-                    assert taskSplit.length == 3 : "Todo task data error!";
-                    inputTask = new Todo(taskSplit[2]);
-                    break;
-
-                case "D":
-                    assert taskSplit.length == 5 : "Deadline task data error!";
-                    inputTask = createDeadlineObject(taskSplit);
-                    break;
-
-                case "E":
-                    assert taskSplit.length == 7 : "Deadline task data error!";
-                    inputTask = createEventObject(taskSplit);
-                    break;
-
-                default:
-                    throw new ChattimeException("Task type error : " + taskSplit[0]);
-                }
+                Task inputTask = createTaskFromStorage(taskSplit[0], taskSplit);
 
                 if (taskSplit[1].equals("1")) {
                     inputTask.markAsDone();
@@ -140,6 +118,29 @@ public class Storage {
     }
 
     /**
+     * Create task of different types from data storage.
+     *
+     * @param taskCode Code of task types.
+     * @param taskSplit Processed storage data by splitting separation.
+     * @return An arraylist of stored data to be imported into current TaskList object.
+     */
+    private Task createTaskFromStorage(String taskCode, String[] taskSplit) throws ChattimeException {
+        switch (taskCode) {
+        case "T":
+            return new Todo(taskSplit[2]);
+
+        case "D":
+            return createDeadlineObject(taskSplit);
+
+        case "E":
+            return createEventObject(taskSplit);
+
+        default:
+            throw new ChattimeException("Task type error : " + taskSplit[0]);
+        }
+    }
+
+    /**
      * Creates deadline object from storage string.
      *
      * @param taskSplit Processed storage string.
@@ -153,7 +154,7 @@ public class Storage {
 
             return new Deadline(taskSplit[2], byDate, byTime);
         } catch (DateTimeParseException e) {
-            throw new ChattimeException("OOPS!!! Datetime error in storage!");
+            throw new ChattimeException("Datetime error in storage!");
         }
     }
 
@@ -174,7 +175,7 @@ public class Storage {
             return new Event(taskSplit[2], fromDate, fromTime, toDate, toTime);
 
         } catch (DateTimeParseException e) {
-            throw new ChattimeException("OOPS!!! Datetime error in storage!");
+            throw new ChattimeException("Datetime error in storage!");
         }
     }
 
@@ -205,7 +206,6 @@ public class Storage {
             StringBuilder updateString = new StringBuilder();
 
             while (content != null) {
-
                 if (lineCount == index) {
                     try {
                         content = task[0].toDataString();
@@ -222,7 +222,6 @@ public class Storage {
 
             if (lineCount < index) {
                 throw new IndexOutOfBoundsException("Task not saved in storage!");
-
             } else {
                 writeToFile(updateString.toString(), false);
             }

@@ -35,30 +35,40 @@ public class FindCommand extends Command {
             return ui.warnEmptyList();
 
         } else {
-            int i = 1;
-            int total = 0;
-            int pending = 0;
-            String message = "I've matched the task(s) with your search keyword for you:";
+            return findIn(taskList);
+        }
+    }
 
-            for (Task task : taskList.getList()) {
-                if (task.isMatchDescription(keyword)) {
-                    message = message.concat(String.format("\n     %d. %s", i, task));
-                    i++;
-                    total++;
-                    if (!task.getTaskStatus()) {
-                        pending++;
-                    }
+    /**
+     * Find tasks in tasklist relevant to the given keyword.
+     *
+     * @param taskList Current task list storing tasks.
+     * @return The find result of given keyword.
+     */
+    private String findIn(TaskList taskList) {
+        int i = 1;
+        int total = 0;
+        int pending = 0;
+        String message = "I've matched the task(s) with your search keyword for you:";
+
+        for (Task task : taskList.getList()) {
+            if (task.isMatchDescription(keyword)) {
+                message = message.concat(String.format("\n     %d. %s", i, task));
+                i++;
+                total++;
+                if (!task.getTaskStatus()) {
+                    pending++;
                 }
             }
-
-            message += "Here have " + total + " result(s) with keyword \""
-                    + keyword + "\". Still have" + pending + " task(s) to go.";
-
-            if (total == 0) {
-                message = "Whoo! Seems that you don't have any task related to \"" + keyword + "\" currently.";
-            }
-
-            return message;
         }
+
+        message += "Here have " + total + " result(s) with keyword \"" + keyword + "\"."
+                + " Still have" + pending + " task(s) to go.";
+
+        if (total == 0) {
+            message = "Whoo! Seems that you don't have any task related to \"" + keyword + "\" currently.";
+        }
+
+        return message;
     }
 }
