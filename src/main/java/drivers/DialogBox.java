@@ -14,6 +14,11 @@ public class DialogBox extends HBox {
     private Label text;
     private ImageView displayPicture;
 
+    /**
+     * Returns an object to represent a message for GUI
+     * @param l text to be displayed
+     * @param iv image representing user who sent the message
+     */
     public DialogBox(Label l, ImageView iv) {
         text = l;
         displayPicture = iv;

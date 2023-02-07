@@ -1,10 +1,9 @@
 package duke;
 
+import drivers.Parser;
 import support.Storage;
-
 import task.TaskList;
 
-import drivers.Parser;
 /**
  * Contains main method and starts the program.
  */
