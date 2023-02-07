@@ -142,6 +142,7 @@ public class TaskList {
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).toString().contains(contents[1])) {
                 taskCount++;
+                assert taskCount <= list.size() : "task count exceeded";
                 if (taskCount == 1) {
                     output = "Here are the matching tasks in your list:";
                 }
