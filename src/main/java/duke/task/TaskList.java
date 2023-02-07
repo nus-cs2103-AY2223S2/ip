@@ -27,13 +27,27 @@ public class TaskList {
     }
 
     /**
-     * Adds a task object directly to the task list.
+     * Adds a task object to the task list if it is unique.
      *
      * @param t Task to add to the list.
+     * @return true if task is successfully added; or false if task already exists.
      */
-    public void addTask(Task t) {
+    public boolean addTask(Task t) {
         assert t != null;
+        if (checkTaskAlreadyExist(t)) {
+            return false;
+        }
         tasks.add(t);
+        return true;
+    }
+
+    private boolean checkTaskAlreadyExist(Task newTask) {
+        for (Task t : tasks) {
+            if (newTask.toString().equals(t.toString())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

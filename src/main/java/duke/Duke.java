@@ -101,9 +101,12 @@ public class Duke {
             case "todo":
             case "deadline":
             case "event":
-                taskList.addTask(parser.getTaskToAdd(command));
-                return ui.formatTaskMessage("Got it. I've added this task:",
-                        taskList.getLatestTask(), taskList.getSize());
+                if (taskList.addTask(parser.getTaskToAdd(command))) {
+                    return ui.formatTaskMessage("Got it. I've added this task:",
+                            taskList.getLatestTask(), taskList.getSize());
+                } else {
+                    throw new DukeException("Task already exists!");
+                }
             default:
                 throw new DukeException("I do not understand");
             }
