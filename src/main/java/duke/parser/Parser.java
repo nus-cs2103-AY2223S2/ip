@@ -59,6 +59,9 @@ public class Parser {
         MinimumLengths(int length) {
             this.length = length;
         }
+
+    public static String[] getIndexes(String[] splitInputs) {
+        return Arrays.stream(splitInputs, 1, splitInputs.length).toArray(String[]::new);
     }
 
     /**
@@ -107,13 +110,13 @@ public class Parser {
         case mark:
             checkInputFormat(splitInputs.length, MinimumLengths.USER_INPUT_MARK.length,
                     "The task index cannot be empty.");
-            String[] markIndexes = Arrays.copyOfRange(splitInputs, 1, splitInputs.length);
+            String[] markIndexes = getIndexes(splitInputs);
             c = new MarkCommand(markIndexes);
             break;
         case unmark:
             checkInputFormat(splitInputs.length, MinimumLengths.USER_INPUT_UNMARK.length,
                     "The task index cannot be empty.");
-            String[] unmarkIndexes = Arrays.copyOfRange(splitInputs, 1, splitInputs.length);
+            String[] unmarkIndexes = getIndexes(splitInputs);
             c = new UnmarkCommand(unmarkIndexes);
             break;
         case delete:
