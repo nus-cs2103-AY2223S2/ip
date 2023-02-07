@@ -1,6 +1,7 @@
 package task;
 
 import java.time.LocalDate;
+import java.time.Month;
 
 /**
  * One of the three types of task a user can add.
@@ -18,8 +19,15 @@ public class Event extends Task {
 
     @Override
     public String toString() {
+        Month startMonth = this.start.getMonth();
+        int startDate = this.start.getDayOfMonth();
+        int startYear = this.start.getYear();
+
+        Month endMonth = this.end.getMonth();
+        int endDate = this.end.getDayOfMonth();
+        int endYear = this.end.getYear();
         return "[E]" + super.toString() +
-                " (from: " + this.start.getMonth() + " " + this.start.getDayOfMonth() + ", " + this.start.getYear() +
-                " to: " + this.end.getMonth() + " " + this.end.getDayOfMonth() + ", " + this.end.getYear() + ")";
+                " (from: " + startMonth + " " +startDate + ", " + startYear +
+                " to: " +endMonth + " " + endDate + ", " + endYear + ")";
     }
 }

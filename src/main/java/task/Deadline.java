@@ -1,6 +1,7 @@
 package task;
 
 import java.time.LocalDate;
+import java.time.Month;
 
 /**
  * One of the three types of task a user can add.
@@ -16,7 +17,9 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.date.getMonth() + " "
-                + this.date.getDayOfMonth() + ", " + this.date.getYear() + ")";
+        Month month = this.date.getMonth();
+        int dayOfMonth = this.date.getDayOfMonth();
+        int year = this.date.getYear();
+        return "[D]" + super.toString() + " (by: " + month + " " + dayOfMonth + ", " + year + ")";
     }
 }

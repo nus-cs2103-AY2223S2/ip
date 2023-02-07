@@ -48,10 +48,6 @@ public class TaskList {
         return records.get(x-1).setIncomplete();
     }
 
-    public int size() {
-        return this.records.size();
-    }
-
     /**
      * Finds and prints out missions that contain the keyword specified by user.
      * @param s keyword that user inputs
@@ -59,21 +55,28 @@ public class TaskList {
     public String find(String s) {
         String ans = "These are what I found:";
 
-        int x = 1;
+        int idx = 1;
         int n = this.records.size();
 
         for (int i = 0; i < n; i++) {
-            if (this.records.get(i).contains(s)) {
-                ans +="\n" + x + ". " + this.records.get(i).toString();
-                x++;
+            if (containsKeyword(i, s)) {
+                ans += "\n" + idx + ". " + this.records.get(i).toString();
+                idx++;
             }
         }
 
-        if (x == 1) {
+        if (idx == 1) {
             ans = "No missions contain this keyword.";
         }
 
         return ans;
+    }
+
+    private boolean containsKeyword(int x, String keyword) {
+        if (this.records.get(x).contains(keyword)) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -81,27 +84,29 @@ public class TaskList {
      * @param str Output format of task
      */
     public void addFromFile(String str) {
-        char tasktype = str.charAt(4);
+        char taskType = str.charAt(4);
         char marked = str.charAt(7);
         String name = str.substring(10);
 
-        switch (tasktype) {
+        switch (taskType) {
             case 'T':
                 this.records.add(new Todo("todo " + name));
                 break;
 
             case 'D':
                 int idx = str.indexOf("(by:");
+                String task = str.substring(10, idx-1);
                 String dueDate = DateConverter.dateFormatter(str.substring(idx + 5));
-                this.records.add(new Deadline("deadline " + str.substring(10, idx-1), dueDate));
+                this.records.add(new Deadline("deadline " + task, dueDate));
                 break;
 
             case 'E':
                 int startIdx = str.indexOf("(from: ");
                 int endIdx = str.indexOf("to: ");
+                String taskName = str.substring(10, startIdx);
                 String startDate = DateConverter.dateFormatter(str.substring(startIdx + 7));
                 String endDate = DateConverter.dateFormatter(str.substring(endIdx + 4));
-                this.records.add(new Event("event " + str.substring(10, startIdx), startDate, endDate));
+                this.records.add(new Event("event " + taskName, startDate, endDate));
         }
 
         if (marked == 'X') {
