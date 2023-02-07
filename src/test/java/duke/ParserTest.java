@@ -9,8 +9,8 @@ public class ParserTest {
     @Test
     public void parseTask_wrongType_exceptionThrown() {
         try {
-            String[] input = {"delete", "string"};
-            Parser.parseTask(input);
+            Parser.parseUserResponse("delete string");
+            Parser.parseTask();
         } catch (DukeException e) {
             assertEquals("Given task number is invalid!", e.getMessage());
         }
