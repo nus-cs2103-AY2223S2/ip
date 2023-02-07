@@ -11,6 +11,7 @@ public class Parser {
     private static Function<String, HashMap<String, String>> todoParser = createTodoParser();
     private static Function<String, HashMap<String, String>> deadlineParser = createDeadlineParser();
     private static Function<String, HashMap<String, String>> eventParser = createEventParser();
+    private static Function<String, HashMap<String, String>> tagParser = createTagParser();
 
     /**
      * Creates a parser that is able to take in a String and parse it into components.
@@ -69,6 +70,11 @@ public class Parser {
         return createParser(toParse);
     }
 
+    private static Function<String, HashMap<String, String>> createTagParser() {
+        ArrayList<String> toParse = new ArrayList<>(Arrays.asList("/tag"));
+        return createParser(toParse);
+    }
+
     public static HashMap<String, String> parseTodo(String chat) {
         return todoParser.apply(chat);
     }
@@ -79,6 +85,10 @@ public class Parser {
 
     public static HashMap<String, String> parseEvent(String chat) {
         return eventParser.apply(chat);
+    }
+
+    public static HashMap<String, String> parseTag(String chat) {
+        return tagParser.apply(chat);
     }
 
     public static LocalDateTime stringToDate(String by) {

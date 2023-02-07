@@ -56,6 +56,12 @@ public class TaskList {
         return newEvent;
     }
 
+    public Task addTag(int index, Tag tag) {
+        Task task = list.get(index);
+        task.addTag(tag);
+        return task;
+    }
+
     public int getSize() {
         return list.size();
     }
