@@ -21,112 +21,192 @@ public class Parser {
      */
     public static Command parse(String str) {
         Command command;
-        boolean todoCheck = str.startsWith("todo ");
-        boolean deadlineCheck = str.startsWith("deadline ");
-        boolean eventCheck = str.startsWith("event ");
-        boolean deleteCheck = str.startsWith("delete ");
-        boolean markCheck = str.startsWith("mark ");
-        boolean unMarkCheck = str.startsWith("unmark ");
-        boolean listCheck = str.equals("list");
-        boolean findCheck = str.startsWith("find ");
-        boolean exitCheck = str.equals("bye");
-        boolean nothingCheck = str.equals("");
-        if (str.equals("todo") || str.equals("todo ") || str.equals("deadline") || str.equals("event")
-                || str.equals("delete") || str.equals("mark") || str.equals("unmark")
-                || str.equals("find")) {
-            throw new RuntimeException("This command's field cannot be left blank!");
-        } else if (todoCheck || deadlineCheck || eventCheck) {
-            if (deadlineCheck) {
-                String target = " /by ";
-                if (!str.contains(target)) {
-                    throw new RuntimeException("Unable to create Deadline! Deadline commands need a /by field!");
-                }
-                int index = str.indexOf(target);
-                String description = str.substring(0, index);
-                if (description.equals("")) {
-                    throw new RuntimeException("Unable to create Deadline! "
-                            + "Description for deadline cannot be left blank!");
-                }
-                String deadline = str.substring(index + 5);
-                int dateTimeLength = deadline.length();
-                if (!(dateTimeLength > 12 && dateTimeLength < 16)) {
-                    throw new RuntimeException("Unable to create Deadline! "
-                            + "Check your date and time. They have to be in the format of dd/mm/yyyy hhmm");
-                }
-                int firstSlash = deadline.indexOf("/");
-                int secondSlash = deadline.indexOf("/", firstSlash + 1);
-                if (firstSlash == -1 || secondSlash == -1) {
-                    throw new RuntimeException("Unable to create Deadline! "
-                            + "Check your date format. Use / to separate day, month and year.");
-                }
-            } else if (eventCheck) {
-                String target1 = " /from ";
-                String target2 = " /to ";
-                if (!(str.contains(target1) && str.contains(target2))) {
-                    throw new RuntimeException("Unable to create Event! Event commands need a /from and /to field!");
-                }
-                int index1 = str.indexOf(target1);
-                int index2 = str.indexOf(target2);
-                if (index2 - index1 < 0) {
-                    throw new RuntimeException("Unable to create event! "
-                            + "The /from field has to be before the /to field.");
-                } else if (index2 - index1 < 20) {
-                    throw new RuntimeException("Unable to create event! Please enter a valid /from field.");
-                }
-                String description = str.substring(0, index1);
-                if (description.equals("")) {
-                    throw new RuntimeException("Unable to create event! Description for event cannot be left blank");
-                }
-                String start = str.substring(index1 + 7, index2);
-                String end = str.substring(index2 + 5);
-                int startFirstSlash = start.indexOf("/");
-                int startSecondSlash = start.indexOf("/", startFirstSlash + 1);
-                int endFirstSlash = end.indexOf("/");
-                int endSecondSlash = end.indexOf("/", endFirstSlash + 1);
-                if (startFirstSlash == -1 || startSecondSlash == -1 || endFirstSlash == -1 || endSecondSlash == -1) {
-                    throw new RuntimeException("Unable to create Deadline! Check your date and time format!");
-                }
-            }
-            command = new AddCommand(str);
-        } else if (deleteCheck) {
-            try {
-                String deletedIndex = str.substring(7);
-                int index = Integer.parseInt(deletedIndex) - 1;
-                command = new DeleteCommand(index);
-            } catch (NumberFormatException e) {
-                throw new RuntimeException("Target was not a number!");
-            }
-        } else if (markCheck) {
-            try {
-                String markedIndex = str.substring(5);
-                int index = Integer.parseInt(markedIndex) - 1;
-                command = new MarkCommand(index);
-            } catch (NumberFormatException e) {
-                throw new RuntimeException("Target was not a number!");
-            }
-        } else if (unMarkCheck) {
-            try {
-                String unmarkedIndex = str.substring(7);
-                int index = Integer.parseInt(unmarkedIndex) - 1;
-                command = new UnMarkCommand(index);
-            } catch (NumberFormatException e) {
-                throw new RuntimeException("Target was not a number!");
-            }
-        } else if (listCheck) {
-            command = new ListCommand();
-        } else if (findCheck) {
-            String keyword = str.substring(5);
-            if (keyword.equals("")) {
-                throw new RuntimeException("What would you like me to find?");
-            }
-            command = new FindCommand(keyword);
-        } else if (exitCheck) {
-            command = new ExitCommand();
-        } else if (nothingCheck) {
-            throw new RuntimeException("Please enter a command!");
+        String firstWord;
+
+        int indexOfFirstSpace = str.indexOf(" ");
+        if (indexOfFirstSpace == -1) {
+            firstWord = str;
         } else {
-            throw new RuntimeException("Huh? I don't know what that means :(");
+            firstWord = str.substring(0, indexOfFirstSpace);
+        }
+        switch (firstWord) {
+            case ("todo"):
+                Parser.checkToDoCommand(str);
+                command = new AddCommand(str);
+                break;
+            case ("deadline"):
+                Parser.checkDeadlineCommand(str);
+                command = new AddCommand(str);
+                break;
+            case ("event"):
+                Parser.checkEventCommand(str);
+                command = new AddCommand(str);
+                break;
+            case ("delete"):
+                int deleteIndex = Parser.checkDeleteCommand(str);
+                command = new DeleteCommand(deleteIndex);
+                break;
+            case ("mark"):
+                int markIndex = Parser.checkMarkCommand(str);
+                command = new MarkCommand(markIndex);
+                break;
+            case ("unmark"):
+                int unMarkIndex = Parser.checkUnMarkCommand(str);
+                command = new UnMarkCommand(unMarkIndex);
+                break;
+            case ("list"):
+                Parser.checkListCommand(str);
+                command = new ListCommand();
+                break;
+            case ("find"):
+                String keyword = Parser.checkFindCommand(str);
+                command = new FindCommand(keyword);
+                break;
+            case ("bye"):
+                Parser.checkExitCommand(str);
+                command = new ExitCommand();
+                break;
+            default:
+                throw new RuntimeException("Huh? I don't know what that means :(");
         }
         return command;
+    }
+
+    public static void checkToDoCommand(String str) {
+        if (str.equals("todo") || str.equals("todo ")) {
+            throw new RuntimeException("This command's field can't be left blank!");
+        }
+    }
+
+    public static void checkDeadlineCommand(String str) {
+        if (str.equals("deadline") || str.equals("deadline ")) {
+            throw new RuntimeException("This command's field can't be left blank!");
+        }
+        final var target = " /by ";
+        final var targetLength = 5;
+        if (!str.contains(target)) {
+            throw new RuntimeException("Unable to create Deadline! Deadline commands need a /by field!");
+        }
+        int index = str.indexOf(target);
+        final var deadlineDescriptionStartIndex = 9;
+        if (index <= deadlineDescriptionStartIndex) {
+            throw new RuntimeException("Unable to create Deadline! "
+                    + "Description for deadline cannot be left blank!");
+        }
+        String deadline = str.substring(index + targetLength);
+        int dateTimeLength = deadline.length();
+        final var minDateTimeLength = 13;
+        final var maxDateTimeLength = 15;
+        if (!(dateTimeLength >= minDateTimeLength && dateTimeLength <= maxDateTimeLength)) {
+            throw new RuntimeException("Unable to create Deadline! "
+                    + "Check your date and time. They have to be in the format of dd/mm/yyyy hhmm");
+        }
+        int firstSlash = deadline.indexOf("/");
+        int secondSlash = deadline.indexOf("/", firstSlash + 1);
+        if (firstSlash == -1 || secondSlash == -1) {
+            throw new RuntimeException("Unable to create Deadline! "
+                    + "Check your date format. Use / to separate day, month and year.");
+        }
+    }
+
+    public static void checkEventCommand(String str) {
+        if (str.equals("event") || str.equals("event ")) {
+            throw new RuntimeException("This command's field can't be left blank!");
+        }
+        final String target1 = " /from ";
+        final String target2 = " /to ";
+        final var target1Length = target1.length();
+        final var target2Length = target2.length();
+        if (!(str.contains(target1) && str.contains(target2))) {
+            throw new RuntimeException("Unable to create Event! Event commands need a /from and /to field!");
+        }
+        int index1 = str.indexOf(target1);
+        int index2 = str.indexOf(target2);
+        final var minCharBetweenTargets = 20;
+        if (index2 - index1 < 0) {
+            throw new RuntimeException("Unable to create event! "
+                    + "The /from field has to be before the /to field.");
+        } else if (index2 - index1 < minCharBetweenTargets) {
+            throw new RuntimeException("Unable to create event! Please enter a valid /from field.");
+        }
+        final int eventDescriptionStartIndex = 6;
+        if (index1 <= eventDescriptionStartIndex) {
+            throw new RuntimeException("Unable to create event! Description for event cannot be left blank");
+        }
+        String start = str.substring(index1 + target1Length, index2);
+        String end = str.substring(index2 + target2Length);
+        int startFirstSlash = start.indexOf("/");
+        int startSecondSlash = start.indexOf("/", startFirstSlash + 1);
+        int endFirstSlash = end.indexOf("/");
+        int endSecondSlash = end.indexOf("/", endFirstSlash + 1);
+        if (startFirstSlash == -1 || startSecondSlash == -1 || endFirstSlash == -1 || endSecondSlash == -1) {
+            throw new RuntimeException("Unable to create Deadline! Check your date and time format!");
+        }
+    }
+
+    public static int checkDeleteCommand(String str) {
+        try {
+            if (str.equals("delete") || str.equals("delete ")) {
+                throw new RuntimeException("This command's field can't be left blank!");
+            }
+            final var deleteStartIndex = 7;
+            String deletedIndex = str.substring(deleteStartIndex);
+            int index = Integer.parseInt(deletedIndex) - 1;
+            return index;
+        } catch (NumberFormatException e) {
+            throw new RuntimeException("Target was not a number!");
+        }
+    }
+
+    public static int checkMarkCommand(String str) {
+        try {
+            if (str.equals("mark") || str.equals("mark ")) {
+                throw new RuntimeException("This command's field can't be left blank!");
+            }
+            final var markStartIndex = 5;
+            String markedIndex = str.substring(markStartIndex);
+            int index = Integer.parseInt(markedIndex) - 1;
+            return index;
+        } catch (NumberFormatException e) {
+            throw new RuntimeException("Target was not a number!");
+        }
+    }
+
+    public static int checkUnMarkCommand(String str) {
+        try {
+            if (str.equals("unmark") || str.equals("unmark ")) {
+                throw new RuntimeException("This command's field can't be left blank!");
+            }
+            final var unMarkStartIndex = 7;
+            String unmarkedIndex = str.substring(unMarkStartIndex);
+            int index = Integer.parseInt(unmarkedIndex) - 1;
+            return index;
+        } catch (NumberFormatException e) {
+            throw new RuntimeException("Target was not a number!");
+        }
+    }
+
+    public static void checkListCommand(String str) {
+        if (!str.equals("list")) {
+            throw new RuntimeException("List commands do not have a field!");
+        }
+    }
+
+    public static String checkFindCommand(String str) {
+        if (str.equals("find") || str.equals("find ")) {
+            throw new RuntimeException("This command's field can't be left blank!");
+        }
+        final var findStartIndex = 5;
+        String keyword = str.substring(findStartIndex);
+        if (keyword.equals("")) {
+            throw new RuntimeException("What would you like me to find?");
+        }
+        return keyword;
+    }
+
+    public static void checkExitCommand(String str) {
+        if (!str.equals("bye")) {
+            throw new RuntimeException("Exit commands do not have a field!");
+        }
     }
 }
