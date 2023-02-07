@@ -3,7 +3,6 @@ package duke.tasklist.task_types;
 /**
  * Represents a <code>task</code> object with the todo tag into it.
  * 
- * 
  * @author Brian Quek
  */
 public class ToDo extends Task {

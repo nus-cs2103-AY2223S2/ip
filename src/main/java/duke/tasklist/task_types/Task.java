@@ -3,10 +3,12 @@ package duke.tasklist.task_types;
 import java.io.Serializable;
 
 /**
- * Represents a <code>task</code> object that contains a string holding the <code>name</code> of the
- * task and the <code>status</code> of the task. Represents a <code>task</code> object that contains
- * a string holding the <code>name</code> of the task and the <code>status</code> of the task.
- * 
+ * Represents a <code>task</code> object that contains a string holding the
+ * <code>name</code> of the
+ * task and the <code>status</code> of the task. Represents a <code>task</code>
+ * object that contains
+ * a string holding the <code>name</code> of the task and the
+ * <code>status</code> of the task.
  * 
  * @author Brian Quek
  */

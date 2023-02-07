@@ -6,7 +6,8 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * Represents a <code>Date</code> object that holds a Local Date Object together with parsing
+ * Represents a <code>Date</code> object that holds a Local Date Object together
+ * with parsing
  * operations between a String and Date.
  * 
  * @author Brian Quek
@@ -21,7 +22,6 @@ public class Date implements Serializable {
     public Date(String dateStr) throws DateTimeParseException {
         this.date = LocalDate.parse(dateStr);
     }
-
 
     /**
      * Returns a string of the Date object based on the <code>format</format> field.
