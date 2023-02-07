@@ -31,7 +31,7 @@ public enum CommandType {
      * @param input the input to compare with this CommandType's value
      * @return whether this CommandType's value is equal to the specified input, ignoring case
      */
-    public boolean equals(String input) {
+    public boolean isEqual(String input) {
         return this.value.equalsIgnoreCase(input);
     }
 }

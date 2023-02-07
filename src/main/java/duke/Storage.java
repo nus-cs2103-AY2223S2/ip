@@ -1,8 +1,14 @@
 package duke;
 
-import tasks.*;
+import tasks.Task;
+import tasks.Todo;
+import tasks.Deadline;
+import tasks.Event;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +36,7 @@ public class Storage {
      * @throws Exception
      */
     public List<Task> loadFile() throws Exception {
-        List<Task> initList = new ArrayList<>();
+        List<Task> initTasks = new ArrayList<>();
         BufferedReader reader = new BufferedReader(new FileReader(filePath));
         String line = reader.readLine().trim();
         while (line != null) {
@@ -40,19 +46,19 @@ public class Storage {
             String taskDesc = strArr[2];
 
             switch (type) {
-                case "T":
-                    initList.add(new Todo(taskDesc, isCompleted));
-                    break;
-                case "D":
-                    initList.add(new Deadline(taskDesc, isCompleted, strArr[3]));
-                    break;
-                case "E":
-                    initList.add(new Event(taskDesc, isCompleted, strArr[3], strArr[4]));
-                    break;
+            case "T":
+                initTasks.add(new Todo(taskDesc, isCompleted));
+                break;
+            case "D":
+                initTasks.add(new Deadline(taskDesc, isCompleted, strArr[3]));
+                break;
+            case "E":
+                initTasks.add(new Event(taskDesc, isCompleted, strArr[3], strArr[4]));
+                break;
             }
             line = reader.readLine();
         }
-        return initList;
+        return initTasks;
     }
 
     /**

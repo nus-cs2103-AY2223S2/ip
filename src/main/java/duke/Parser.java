@@ -1,8 +1,16 @@
 package duke;
 
-import commands.*;
+import commands.Command;
+import commands.CommandType;
+import commands.ListCommand;
+import commands.MarkCommand;
+import commands.AddCommand;
+import commands.DeleteCommand;
+import commands.ByeCommand;
 import exceptions.DukeException;
-import tasks.*;
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Todo;
 
 /**
  * Represents the Parser that helps to parse input commands
@@ -18,7 +26,7 @@ public class Parser {
      */
     public static CommandType getCommandType(String input) {
         for (CommandType c : CommandType.values()) {
-            if (c.equals(input)) {
+            if (c.isEqual(input)) {
                 return c;
             }
         }
@@ -51,47 +59,47 @@ public class Parser {
         String taskInput = "";
 
         switch (commandType) {
-            case LIST:
-                return new ListCommand();
-            case MARK:
-            case UNMARK:
-                index = Integer.parseInt(inputArr[1]) - 1;
-                return new MarkCommand(commandType, index);
-            case DELETE:
-                index = Integer.parseInt(inputArr[1]) - 1;
-                return new DeleteCommand(index);
-            case TODO:
-                if (isDescriptionEmpty(inputArr)) {
-                    throw new DukeException("Hey now.. The description of a todo cannot be empty. >:(");
-                }
-                taskInput = inputArr[1];
-                Todo todo = new Todo(taskInput);
-                return new AddCommand(CommandType.TODO, todo);
-            case DEADLINE:
-                if (isDescriptionEmpty(inputArr)) {
-                    throw new DukeException("Hey now.. The description of a deadline cannot be empty. >:(");
-                }
-                taskInput = inputArr[1];
-                String[] dArr = taskInput.split("/by", 2);
-                String deadlineDesc = dArr[0].trim();
-                String by = dArr[1].trim();
-                Deadline deadline = new Deadline(deadlineDesc, by);
-                return new AddCommand(CommandType.DEADLINE, deadline);
-            case EVENT:
-                if (isDescriptionEmpty(inputArr)) {
-                    throw new DukeException("Hey now.. The description of an event cannot be empty. >:(");
-                }
-                taskInput = inputArr[1];
-                String[] eArr = taskInput.split("/");
-                String eventDesc = eArr[0].trim();
-                String from = eArr[1].trim().substring(5);
-                String to = eArr[2].trim().substring(3);
-                Event event = new Event(eventDesc, from, to);
-                return new AddCommand(CommandType.EVENT, event);
-            case BYE:
-                return new ByeCommand();
-            default:
-                throw new DukeException("Huh? What do you mean? :o");
+        case LIST:
+            return new ListCommand();
+        case MARK:
+        case UNMARK:
+            index = Integer.parseInt(inputArr[1]) - 1;
+            return new MarkCommand(commandType, index);
+        case DELETE:
+            index = Integer.parseInt(inputArr[1]) - 1;
+            return new DeleteCommand(index);
+        case TODO:
+            if (isDescriptionEmpty(inputArr)) {
+                throw new DukeException("Hey now.. The description of a todo cannot be empty. >:(");
+            }
+            taskInput = inputArr[1];
+            Todo todo = new Todo(taskInput);
+            return new AddCommand(CommandType.TODO, todo);
+        case DEADLINE:
+            if (isDescriptionEmpty(inputArr)) {
+                throw new DukeException("Hey now.. The description of a deadline cannot be empty. >:(");
+            }
+            taskInput = inputArr[1];
+            String[] deadlineInputArr = taskInput.split("/by", 2);
+            String deadlineDesc = deadlineInputArr[0].trim();
+            String by = deadlineInputArr[1].trim();
+            Deadline deadline = new Deadline(deadlineDesc, by);
+            return new AddCommand(CommandType.DEADLINE, deadline);
+        case EVENT:
+            if (isDescriptionEmpty(inputArr)) {
+                throw new DukeException("Hey now.. The description of an event cannot be empty. >:(");
+            }
+            taskInput = inputArr[1];
+            String[] eArr = taskInput.split("/");
+            String eventDesc = eArr[0].trim();
+            String from = eArr[1].trim().substring(5);
+            String to = eArr[2].trim().substring(3);
+            Event event = new Event(eventDesc, from, to);
+            return new AddCommand(CommandType.EVENT, event);
+        case BYE:
+            return new ByeCommand();
+        default:
+            throw new DukeException("Huh? What do you mean? :o");
         }
     }
 }
