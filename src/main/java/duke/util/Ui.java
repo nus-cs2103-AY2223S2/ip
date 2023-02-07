@@ -13,7 +13,7 @@ public class Ui {
     private boolean isRunning = true;
     private Scanner sc;
 
-    public Ui () { //handle interaction with user
+    public Ui () {
         this.sc = new Scanner(System.in);
     }
 
@@ -53,11 +53,11 @@ public class Ui {
      * @param taskList Contains the list of current tasks.
      */
     public void displayTasks(TaskList taskList) {
-        if (taskList.size() == 0) {
+        if (taskList.getSize() == 0) {
             displayMessage("You currently have no tasks!");
         } else {
             String toDisplay = "Here are the tasks in your list:";
-            for (int i = 0; i < taskList.size(); i++) {
+            for (int i = 0; i < taskList.getSize(); i++) {
                 toDisplay += String.format("\n%s. %s", i + 1, taskList.getTask(i));
             }
             displayMessage(toDisplay);
@@ -71,7 +71,7 @@ public class Ui {
      */
     public void displayAddedTask(Task newTask, TaskList tasks) {
         String toDisplay = String.format("Gotcha! I have added this task:\n%s\nNow you have %d tasks in the list.",
-                newTask.toString(), tasks.size());
+                newTask.toString(), tasks.getSize());
         displayMessage(toDisplay);
     }
 
@@ -82,7 +82,7 @@ public class Ui {
      */
     public void displayDeletedTask(Task taskToDelete, TaskList tasks) {
         String toDisplay = String.format("Alright, I have removed this task:\n%s\nNow you have %d tasks in the list.",
-                taskToDelete.toString(), tasks.size());
+                taskToDelete.toString(), tasks.getSize());
         displayMessage(toDisplay);
     }
 
