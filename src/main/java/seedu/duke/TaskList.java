@@ -56,6 +56,12 @@ public class TaskList {
         return newEvent;
     }
 
+    /**
+     * Adds the given tag to the Task in the TaskList corresponding to the index provided
+     * @param index The Task to add the tag to
+     * @param tag The Tag to add to the Task
+     * @return The Task that had a Tag added to it
+     */
     public Task addTag(int index, Tag tag) {
         Task task = list.get(index);
         task.addTag(tag);
