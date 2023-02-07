@@ -49,10 +49,11 @@ public class Duke {
      * @param task The task we want to add to the list.
      * @return Message of successful adding.
      */
-    public String msg_of_add(Task task) {
+    public String messageOfAdd(Task task) {
         return "Got it. I've added this task:\n " + task.toString() + "\nNow you have " +
                 taskList.size() + " tasks in the list:D";
     }
+
 
     /**
      * Marks a task as done.
@@ -61,7 +62,7 @@ public class Duke {
      * @return Message of marking a task as done.
      * @throws DukeException When any DukeException happens.
      */
-    public String mark_as_done(int index) throws DukeException {
+    public String markAsDone(int index) throws DukeException {
         if (taskList.size() <= index) {
             throw new WrongIndexException();
         }
@@ -77,7 +78,7 @@ public class Duke {
      * @return Message of marking a task as undone.
      * @throws DukeException When any DukeException happens.
      */
-    public String mark_as_undone(int index) throws DukeException {
+    public String markAsUndone(int index) throws DukeException {
         if (taskList.size() <= index) {
             throw new WrongIndexException();
         }
@@ -93,7 +94,7 @@ public class Duke {
      * @return Message of deletion.
      * @throws WrongIndexException If the index is out of bound.
      */
-    public String delete_msg(int index) throws WrongIndexException {
+    public String deleteMessage(int index) throws WrongIndexException {
         if (taskList.size() <= index) {
             throw new WrongIndexException();
         }
@@ -120,34 +121,34 @@ public class Duke {
                     parser.checkEmpty(userInput, command);
                     String[] words = userInput.split(" ");
                     int index = Integer.parseInt(words[1]) - 1;
-                    String tmp = mark_as_done(index);
+                    String tmp = markAsDone(index);
                 } else if (command.equals(parser.convertEnum(Command.UNMARK))) {
                     parser.checkEmpty(userInput, command);
                     String[] words = userInput.split(" ");
                     int index = Integer.parseInt(words[1]) - 1;
-                    String tmp = mark_as_undone(index);
+                    String tmp = markAsUndone(index);
                 } else if (userInput.equals(parser.convertEnum(Command.BYE))) {
                     continue;
                 } else if (command.equals(parser.convertEnum(Command.TODO))) {
                     parser.checkEmpty(userInput, command);
                     Todo todo_task = new Todo(userInput);
                     addTask(todo_task);
-                    String tmp = msg_of_add(todo_task);
+                    String tmp = messageOfAdd(todo_task);
                 } else if (command.equals(parser.convertEnum(Command.DEADLINE))) {
                     parser.checkEmpty(userInput, command);
                     Deadline ddl_task = new Deadline(userInput);
                     addTask(ddl_task);
-                    String tmp = msg_of_add(ddl_task);
+                    String tmp = messageOfAdd(ddl_task);
                 } else if (command.equals(parser.convertEnum(Command.EVENT))) {
                     parser.checkEmpty(userInput, command);
                     Event event_task = new Event(userInput);
                     addTask(event_task);
-                    String tmp = msg_of_add(event_task);
+                    String tmp = messageOfAdd(event_task);
                 } else if (command.equals(parser.convertEnum(Command.DELETE))) {
                     parser.checkEmpty(userInput, command);
                     String[] words = userInput.split(" ");
                     int index = Integer.parseInt(words[1]) - 1;
-                    String tmp = delete_msg(index);
+                    String tmp = deleteMessage(index);
                 } else {
                     throw new WeirdInputException();
                 }
@@ -184,39 +185,39 @@ public class Duke {
 
             try {
                 if (userInput.equals(parser.convertEnum(Command.LIST))) {
-                    System.out.println(ui.separate(taskList.print_curr_tasks()));
+                    System.out.println(ui.separate(taskList.printCurrentTasks()));
                 } else if (command.equals(parser.convertEnum(Command.MARK))) {
                     parser.checkEmpty(userInput, command);
                     String[] words = userInput.split(" ");
                     int index = Integer.parseInt(words[1]) - 1;
-                    System.out.println(ui.separate(mark_as_done(index)));
+                    System.out.println(ui.separate(markAsDone(index)));
                 } else if (command.equals(parser.convertEnum(Command.UNMARK))) {
                     parser.checkEmpty(userInput, command);
                     String[] words = userInput.split(" ");
                     int index = Integer.parseInt(words[1]) - 1;
-                    System.out.println(ui.separate(mark_as_undone(index)));
+                    System.out.println(ui.separate(markAsDone(index)));
                 } else if (userInput.equals(parser.convertEnum(Command.BYE))) {
                     break;
                 } else if (command.equals(parser.convertEnum(Command.TODO))) {
                     parser.checkEmpty(userInput, command);
                     Todo todo_task = new Todo(userInput);
                     addTask(todo_task);
-                    System.out.println(ui.separate(msg_of_add(todo_task)));
+                    System.out.println(ui.separate(messageOfAdd(todo_task)));
                 } else if (command.equals(parser.convertEnum(Command.DEADLINE))) {
                     parser.checkEmpty(userInput, command);
                     Deadline ddl_task = new Deadline(userInput);
                     addTask(ddl_task);
-                    System.out.println(ui.separate(msg_of_add(ddl_task)));
+                    System.out.println(ui.separate(messageOfAdd(ddl_task)));
                 } else if (command.equals(parser.convertEnum(Command.EVENT))) {
                     parser.checkEmpty(userInput, command);
                     Event event_task = new Event(userInput);
                     addTask(event_task);
-                    System.out.println(ui.separate(msg_of_add(event_task)));
+                    System.out.println(ui.separate(messageOfAdd(event_task)));
                 } else if (command.equals(parser.convertEnum(Command.DELETE))) {
                     parser.checkEmpty(userInput, command);
                     String[] words = userInput.split(" ");
                     int index = Integer.parseInt(words[1]) - 1;
-                    System.out.println(ui.separate(delete_msg(index)));
+                    System.out.println(ui.separate(deleteMessage(index)));
                 } else {
                     throw new WeirdInputException();
                 }

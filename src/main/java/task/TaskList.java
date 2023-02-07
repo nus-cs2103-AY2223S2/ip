@@ -11,7 +11,7 @@ public class TaskList extends ArrayList<Task> {
      *
      * @return All tasks stored in the list.
      */
-    public String print_curr_tasks() {
+    public String printCurrentTasks() {
         String res = "";
         if (this.size() == 0) {
             res = "Sorry this list is empty T^T";
