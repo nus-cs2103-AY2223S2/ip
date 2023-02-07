@@ -19,21 +19,6 @@ public class Ui {
     }
 
     /**
-     * Scans for user input.
-     * @return string that user inputs
-     */
-    public String getNextTask() {
-        return this.myScanner.nextLine();
-    }
-
-    /**
-     * Greets user with a custom greeting.
-     */
-    public void greetUser() {
-        System.out.println("  Insert ingenious greeting here");
-    }
-
-    /**
      * Prints a task to standard output.
      * @param t any task
      */
@@ -46,6 +31,8 @@ public class Ui {
             temp.add("  new deadline added!");
         } else if (t instanceof ToDo) {
             temp.add("  new todo added!");
+        } else {
+            throw new java.lang.Error("currTask should be either a ToDo, Event or Deadline");
         }
         temp.add("    " + t.toString());
         temp.add("  Now you have " + String.valueOf(this.myTaskList.countTasks()) +
@@ -57,7 +44,7 @@ public class Ui {
      * Prints a reply to standard output when the user does not enter a task.
      * @param inputCommand What the user inputs
      */
-    public ArrayList<String> printReply(String inputCommand) {
+    public ArrayList<String> printReply(String inputCommand) throws NotTaskException {
         ArrayList<String> temp = new ArrayList<>();
         switch (inputCommand) {
         case "list":
@@ -69,8 +56,7 @@ public class Ui {
             temp.add("  See you again");
             break;
         default:
-            temp.add("  this is not a task, contact admin");
-            break;
+            throw new NotTaskException("this is not a task, contact admin");
         }
         return temp;
     }

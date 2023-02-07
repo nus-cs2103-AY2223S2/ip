@@ -1,12 +1,21 @@
-import duke.*;
+import duke.Deadline;
+import duke.EmptyDescriptionException;
+import duke.Event;
+import duke.NotTaskException;
+import duke.Parser;
+import duke.Storage;
+import duke.Task;
+import duke.TaskList;
+import duke.ToDo;
+import duke.Ui;
 
 import java.io.IOException;
+import java.lang.Error;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -15,7 +24,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import org.w3c.dom.Text;
 import javafx.scene.control.Label;
 
 import javafx.scene.image.Image;
@@ -30,6 +38,14 @@ public class Duke extends Application {
      */
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+
+    static final double WINDOW_MIN_HEIGHT = 600.0;
+    static final double WINDOW_MIN_WIDTH = 400.0;
+    static final double SCROLL_PANE_HEIGHT = 535.0;
+    static final double SCROLL_PANE_WIDTH = 385.0;
+    static final double USER_INPUT_WIDTH = 325.0;
+    static final double BUTTON_WIDTH = 55.0;
+    static final double ANCHOR_OFFSET = 1.0;
 
     TaskList mainTaskList;
     Storage mainStorage;
@@ -47,6 +63,10 @@ public class Duke extends Application {
         return completedTask;
     }
 
+    /**
+     * Starting point for JavaFX where the GUI is set up.
+     * @param stage
+     */
     @Override
     public void start(Stage stage) {
         //Step 1. Setting up required components
@@ -70,12 +90,12 @@ public class Duke extends Application {
         //Step 2. Formatting the window to look as expected
         stage.setTitle("Duke");
         stage.setResizable(false);
-        stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
+        stage.setMinHeight(WINDOW_MIN_HEIGHT);
+        stage.setMinWidth(WINDOW_MIN_WIDTH);
 
-        mainLayout.setPrefSize(400.0, 600.0);
+        mainLayout.setPrefSize(WINDOW_MIN_WIDTH, WINDOW_MIN_HEIGHT);
 
-        scrollPane.setPrefSize(385, 535);
+        scrollPane.setPrefSize(SCROLL_PANE_WIDTH, SCROLL_PANE_HEIGHT);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
@@ -85,17 +105,17 @@ public class Duke extends Application {
         // You will need to import `javafx.scene.layout.Region` for this.
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
-        userInput.setPrefWidth(325.0);
+        userInput.setPrefWidth(USER_INPUT_WIDTH);
 
-        sendButton.setPrefWidth(55.0);
+        sendButton.setPrefWidth(BUTTON_WIDTH);
 
-        AnchorPane.setTopAnchor(scrollPane, 1.0);
+        AnchorPane.setTopAnchor(scrollPane, ANCHOR_OFFSET);
 
-        AnchorPane.setBottomAnchor(sendButton, 1.0);
-        AnchorPane.setRightAnchor(sendButton, 1.0);
+        AnchorPane.setBottomAnchor(sendButton, ANCHOR_OFFSET);
+        AnchorPane.setRightAnchor(sendButton, ANCHOR_OFFSET);
 
-        AnchorPane.setLeftAnchor(userInput , 1.0);
-        AnchorPane.setBottomAnchor(userInput, 1.0);
+        AnchorPane.setLeftAnchor(userInput , ANCHOR_OFFSET);
+        AnchorPane.setBottomAnchor(userInput, ANCHOR_OFFSET);
 
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
@@ -109,16 +129,22 @@ public class Duke extends Application {
             handleUserInput(userInput, dialogContainer);
         });
     }
+
+    /**
+     * Greets the user upon startup.
+     * @param dialogContainer
+     */
     private void greetUser(VBox dialogContainer) {
         Label helloText = new Label("insert ingenious greeting here");
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(helloText, new ImageView(duke))
         );
     }
+
     /**
-     * Iteration 2:
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Helper function to handle user input.
+     * @param userInput
+     * @param dialogContainer
      */
     private void handleUserInput(TextField userInput, VBox dialogContainer) {
         try {
@@ -128,20 +154,28 @@ public class Duke extends Application {
                     DialogBox.getUserDialog(userText, new ImageView(user)),
                     DialogBox.getDukeDialog(dukeText, new ImageView(duke))
             );
-        } catch (Exception ignored) {}
+        } catch (Exception e) {
+            throw new Error("this exception should not be here");
+        }
         userInput.clear();
     }
 
 
+    /**
+     * Exits the program upon the "bye" command.
+     */
     private void closeStage() {
         Platform.exit();
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Gets a response given a command which is then sent to the chat box.
+     * @param command Command the user takes in
+     * @return Output which is printed to the screen
+     * @throws NotTaskException
+     * @throws IOException
      */
-    public String getResponse(String command) throws EmptyDescriptionException, IOException {
+    public String getResponse(String command) throws EmptyDescriptionException, IOException, NotTaskException {
         String[] toFindFirstWord = Parser.parse(command, Parser.ParseFunctions.SPLIT_ALL); // take a comment
 
         String first = toFindFirstWord[0];

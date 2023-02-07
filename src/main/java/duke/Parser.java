@@ -32,7 +32,7 @@ public class Parser {
             String[] toTime = taskAndTime[1].split(" /to ", 2);
             return new String[]{otherArgs[0], taskAndTime[0], toTime[0], toTime[1]};
         default:
-            return null;
+            throw new java.lang.Error("Will not reach here");
         }
     }
 }
