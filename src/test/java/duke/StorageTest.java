@@ -52,7 +52,7 @@ public class StorageTest {
         }
         try {
             testFile.createNewFile();
-            Storage storage = new Storage("test.txt");
+            Storage storage = new Storage("data/test.txt");
             TaskList list = new TaskList(new ArrayList<Task>());
             list.add(new Todo("test", false));
             list.add(new Deadline("test", LocalDate.parse("2020-01-01"), true));
