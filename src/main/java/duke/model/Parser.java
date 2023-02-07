@@ -1,8 +1,9 @@
-package duke;
+package duke.model;
 
 import java.time.LocalDate;
 import java.util.function.Supplier;
 
+import duke.DukeUtils;
 import duke.command.AddTaskCommand;
 import duke.command.Command;
 import duke.command.ExitCommand;

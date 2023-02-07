@@ -9,7 +9,7 @@ public class DeadlineTask extends Task {
 
     private static final long serialVersionUID = 7701406742949264888L;
 
-    protected LocalDate by;
+    private LocalDate by;
 
     public DeadlineTask(String description, LocalDate by) {
         super(description);

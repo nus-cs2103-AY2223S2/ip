@@ -2,6 +2,7 @@ package duke.controller;
 
 import java.io.IOException;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -10,6 +11,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
+import duke.model.ExecutionResult;
+import duke.model.Model;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -28,10 +32,11 @@ public class MainWindow extends AnchorPane {
     @FXML
     private VBox dialogContainer;
 
+    private Model model;
     private Image userImage = new Image(getClass().getResourceAsStream("/images/Reimu_1.jpg"));
     private Image dukeImage = new Image(getClass().getResourceAsStream("/images/Patchouli_2.jpg"));
 
-    public MainWindow() {
+    public MainWindow(Model model) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/MainWindow.fxml"));
             fxmlLoader.setController(this);
@@ -41,6 +46,7 @@ public class MainWindow extends AnchorPane {
             ex.printStackTrace();
         }
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        this.model = model;
     }
 
     /**
@@ -50,12 +56,16 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = "FUCKK";
+        ExecutionResult result = model.execute(input);
         DialogBox userBox = new DialogBox(input, userImage);
-        DialogBox dukeBox = new DialogBox(response, dukeImage);
+        DialogBox dukeBox = new DialogBox(result.getMessage(), dukeImage);
         dukeBox.flip();
         dialogContainer.getChildren().addAll(userBox, dukeBox);
         userInput.clear();
+        boolean shouldExit = result.getExitStatus();
+        if (shouldExit) {
+            Platform.exit();
+        }
     }
 }
 

@@ -1,22 +1,33 @@
-package duke;
+package duke.controller;
 
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-public class UI {
+import duke.model.ExecutionResult;
+import duke.model.Model;
+
+public class CliController {
 
     private static final String LINE =
             " ".repeat(4) + "____________________________________________________________";
     private static final String INDENTATION = " ".repeat(5);
     private static final Scanner sc = new Scanner(System.in);
+    private static Model model = null;
+    private static boolean exitStatus = false;
+
+    private CliController() {}
+
+    public static void setModel(Model model) {
+        CliController.model = model;
+    }
 
     /**
      * Prints a message to the output.
      *
      * @param msg the message to be printed to the output
      */
-    public static void echo(String msg) {
+    private static void echo(String msg) {
         String displayedMsg = Arrays.stream(msg.split("\n")).map(line -> INDENTATION + line)
                 .collect(Collectors.joining("\n"));
         System.out.println(LINE);
@@ -31,12 +42,14 @@ public class UI {
         echo("Hello! I'm Duke\nWhat can I do for you?");
     }
 
-    /**
-     * Reads the next command from the user.
-     *
-     * @return a string representing the command
-     */
-    public static String readCommand() {
-        return sc.nextLine();
+    public static void handleUserInput() {
+        String input = sc.nextLine();
+        ExecutionResult result = model.execute(input);
+        echo(result.getMessage());
+        exitStatus = result.getExitStatus();
+    }
+
+    public static boolean shouldExit() {
+        return exitStatus;
     }
 }

@@ -5,12 +5,21 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import duke.controller.MainWindow;
+import duke.model.Model;
 
-public class GuiApp extends Application {
+public class DukeGui extends Application {
+
+    Model model;
+    MainWindow window;
+
+    @Override
+    public void init() {
+        model = new Model(Storage.readTaskList());
+        window = new MainWindow(model);
+    }
 
     @Override
     public void start(Stage stage) {
-        MainWindow window = new MainWindow();
         Scene scene = new Scene(window);
         stage.setScene(scene);
         stage.show();
@@ -19,5 +28,6 @@ public class GuiApp extends Application {
     @Override
     public void stop() {
         System.out.println("Quit...");
+        Storage.writeTaskList(model.getTaskList());
     }
 }

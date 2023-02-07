@@ -6,8 +6,8 @@ public class EventTask extends Task {
 
     private static final long serialVersionUID = -150197333726686918L;
 
-    protected String from;
-    protected String to;
+    private String from;
+    private String to;
 
     public EventTask(String description, String from, String to) {
         super(description);

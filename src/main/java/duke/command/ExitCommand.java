@@ -1,11 +1,11 @@
 package duke.command;
 
-import duke.TaskList;
+import duke.model.TaskList;
 
 public class ExitCommand extends Command {
 
     @Override
-    String tryExecute(TaskList list) {
+    public String execute(TaskList list) {
         return "Bye. Hope to see you again soon!";
     }
 

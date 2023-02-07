@@ -2,7 +2,7 @@ package duke.command;
 
 import java.util.Objects;
 
-import duke.TaskList;
+import duke.model.TaskList;
 import duke.task.Task;
 
 public class AddTaskCommand extends Command {
@@ -14,7 +14,7 @@ public class AddTaskCommand extends Command {
     }
 
     @Override
-    String tryExecute(TaskList list) {
+    public String execute(TaskList list) {
         list.add(task);
         return String.format(
                 "Got it. I've added this task:\n" + "  %s\n" + "Now you have %s in the list.", task,

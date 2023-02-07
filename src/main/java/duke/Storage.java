@@ -9,16 +9,11 @@ import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+import duke.model.TaskList;
+
 public class Storage {
 
-    private static final Path PATH_TO_FILE = Path.of(".data", "tasklist.txt");
-
-    /**
-     * Initializes an instance.
-     * <p>
-     * Note that the utilities provided by this class can be implemented by {@code static} methods.
-     */
-    public Storage() {}
+    private static final Path PATH_TO_FILE = Path.of(".duke", "tasklist.bin");
 
     /**
      * Checks whether the log file exists or not. If the log file does not exists, a new log file
@@ -26,7 +21,7 @@ public class Storage {
      *
      * @return {@code true} if the log file exists, otherwise {@code false}.
      */
-    private boolean createFileIfNotExists() {
+    private static boolean createFileIfNotExists() {
         File file = PATH_TO_FILE.toFile();
         if (file.exists()) {
             return false;
@@ -35,7 +30,7 @@ public class Storage {
             file.getParentFile().mkdirs();
             file.createNewFile();
         } catch (IOException ex) {
-            UI.echo("Cannot create new file...");
+            System.out.println("Cannot create new file...");
         }
         return true;
     }
@@ -46,7 +41,7 @@ public class Storage {
      *
      * @return a {@code TaskList} instance
      */
-    public TaskList readTaskList() {
+    public static TaskList readTaskList() {
         if (createFileIfNotExists()) {
             return new TaskList();
         }
@@ -54,7 +49,7 @@ public class Storage {
                 ObjectInputStream objIn = new ObjectInputStream(in)) {
             return (TaskList) objIn.readObject();
         } catch (IOException | ClassNotFoundException ex) {
-            UI.echo("Something goes wrong with saved log. A new log will be created...");
+            System.out.println("Something goes wrong with saved log. A new log will be created...");
             return new TaskList();
         }
     }
@@ -65,13 +60,13 @@ public class Storage {
      *
      * @param list the {@code TaskList} to be written into the log file
      */
-    public void writeTaskList(TaskList list) {
+    public static void writeTaskList(TaskList list) {
         createFileIfNotExists();
         try (OutputStream out = Files.newOutputStream(PATH_TO_FILE);
                 ObjectOutputStream objOut = new ObjectOutputStream(out)) {
             objOut.writeObject(list);
         } catch (IOException ex) {
-            UI.echo("Something goes wrong, cannot write log into file...");
+            System.out.println("Something goes wrong, cannot write log into file...");
         }
     }
 }

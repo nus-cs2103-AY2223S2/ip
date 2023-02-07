@@ -1,4 +1,4 @@
-package duke;
+package duke.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+import duke.DukeUtils;
 import duke.command.AddTaskCommand;
 import duke.command.ExitCommand;
 import duke.command.FindTaskCommand;

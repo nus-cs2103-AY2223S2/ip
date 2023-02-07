@@ -1,11 +1,11 @@
 package duke.command;
 
-import duke.TaskList;
+import duke.model.TaskList;
 
 public class ListCommand extends Command {
 
     @Override
-    String tryExecute(TaskList list) {
+    public String execute(TaskList list) {
         return "Here are the tasks in your list:\n" + list.listAllTasks();
     }
 
