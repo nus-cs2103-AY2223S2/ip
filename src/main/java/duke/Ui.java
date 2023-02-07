@@ -5,21 +5,7 @@ import javafx.scene.control.Label;
 import java.util.ArrayList;
 
 public class Ui {
-
-    /**
-     * Prints the introduction message when the chatbot is first booted up.
-     */
-    public void introduce(StringBuilder allResponses) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        allResponses.append("Hello from\n" + logo);
-        allResponses.append("Hello! I'm Duke, your friendly chatbot.\n");
-        allResponses.append("What can I do for you?\n");
-    }
-
+    
     public Label introduce() {
         String introString = "Hello! I'm Pearl, your friendly chatbot.\n";
         introString += instruct();

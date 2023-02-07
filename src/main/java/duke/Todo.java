@@ -2,6 +2,10 @@ package duke;
 
 public class Todo extends Task {
 
+    /**
+     * Constructor for a Task instance
+     * @param description a simple description of this Task
+     */
     public Todo(String description) {
         super(description);
     }

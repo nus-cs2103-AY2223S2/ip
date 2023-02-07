@@ -9,6 +9,10 @@ public class TaskList {
 
     private ArrayList<Task> lstOfItems;
 
+    /**
+     * Constructor for a TaskList instance
+     * @param file the file where the previous list of items is stored
+     */
     public TaskList(File file) {
         this.lstOfItems = new ArrayList<>();
         try {

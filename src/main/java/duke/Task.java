@@ -4,6 +4,10 @@ public class Task {
     private String name;
     private boolean isCompleted;
 
+    /**
+     * Constructor for a Task instance
+     * @param name the name of this Task as a simple description
+     */
     public Task(String name) {
         this.name = name;
         this.isCompleted = false;

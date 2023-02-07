@@ -12,6 +12,10 @@ public class Storage {
 
     protected String filePath;
 
+    /**
+     * Constructor for a Storage instance.
+     * @param filePath the filePath where the previous data is stored
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
