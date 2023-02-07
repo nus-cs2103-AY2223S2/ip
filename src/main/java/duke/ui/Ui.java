@@ -16,7 +16,7 @@ public class Ui {
      */
     public String printWelcomeMessage() {
         return "\t____________________________________________________________\n"
-                + "\tHello! I'm Duke\n"
+                + "\tHello! I'm NoDuKo\n"
                 + "\tWhat can I do for you?\n"
                 + "\t____________________________________________________________";
     }

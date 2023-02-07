@@ -2,7 +2,7 @@ package duke.parser;
 
 enum Action {
     DEADLINE("deadline"), DELETE("delete"), ERROR("error"), EVENT("event"),
-    LIST("list"), MARK("mark"), TODO("todo"), UNMARK("unmark"), FIND("find");
+    LIST("list"), MARK("mark"), TODO("todo"), UNMARK("unmark"), FIND("find"), BYE("bye");
 
     private final String action;
 
