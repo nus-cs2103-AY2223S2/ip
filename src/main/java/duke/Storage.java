@@ -27,13 +27,17 @@ public class Storage {
      */
     public TaskList load() throws DukeException {
         TaskList tasks = new TaskList();
+
         try {
+            // Create the file and directory for storing the tasks txt file.
             File dir = new File(DIR_PATH);
             dir.mkdirs();
             File taskFile = new File(DIR_PATH + filePath);
             if (!taskFile.exists()) {
                 taskFile.createNewFile();
             }
+
+            // Read the current tasks txt file into the TaskList object.
             Scanner fileScanner = new Scanner(taskFile);
             while (fileScanner.hasNext()) {
                 String input = fileScanner.nextLine();
@@ -74,8 +78,9 @@ public class Storage {
         String[] parsed = input.split(" \\| ");
         Task task;
         int len = parsed.length;
+
         switch (len) {
-        case 3: // this is a task
+        case 3: // this is a todo
             Todo todo = new Todo(parsed[2]);
             if (parsed[1].equals("1")) {
                 todo.mark();

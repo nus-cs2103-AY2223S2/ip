@@ -59,8 +59,9 @@ public class TaskList {
      */
     public String getMatchingTasksString(String keyword) {
         StringBuilder res = new StringBuilder();
+
         for (Task task: tasks) {
-            if (task.toString().contains(keyword)) {
+            if (isMatch(task, keyword)) {
                 int idx = tasks.indexOf(task) + 1;
                 res.append(String.format("%d.%s", idx, task));
             }
@@ -72,6 +73,10 @@ public class TaskList {
         }
     }
 
+    public boolean isMatch(Task task, String keyword) {
+        return task.toString().contains(keyword);
+    }
+
     public int size() {
         return tasks.size();
     }
@@ -80,6 +85,7 @@ public class TaskList {
     public String toString() {
         StringBuilder result = new StringBuilder();
         int idx = 1;
+
         for (Task task : tasks) {
             result.append(String.format("%d.%s", idx, task));
             idx++;
@@ -94,6 +100,7 @@ public class TaskList {
      */
     public String saveString() {
         StringBuilder result = new StringBuilder();
+
         for (Task task: tasks) {
             result.append(task.getText());
             result.append("\n");
