@@ -25,6 +25,8 @@ import javafx.stage.Stage;
  */
 public class Duke extends Application {
 
+    private static final String MAIN_WINDOW_FXML = "/view/MainWindow.fxml";
+
     private static ArrayList<Flag> flags = new ArrayList<>();
 
     public final Ui ui;
@@ -69,11 +71,13 @@ public class Duke extends Application {
     private void displayTasks() {
         if (taskList.size() == 0) {
             ui.println("Your list is empty.");
-        } else {
+        } else if (taskList.size() > 0) {
             ui.println("You have the following task(s):");
             for (int i = 0; i < taskList.size(); i++) {
                 ui.println("\t" + (i + 1) + ". " + taskList.get(i));
             }
+        } else {
+            assert false : "taskList has negative number of tasks!!";
         }
     }
 
@@ -279,14 +283,16 @@ public class Duke extends Application {
         return true;
     }
 
+    /**
+     * Start Duke program as a Command Line Interface.
+     */
     void startAsCli() {
-        Scanner sc = new Scanner(System.in);
-
         // Program Intro
         ui.println("Hello! I'm Duke! :D");
         ui.println("What can I do for you today?");
 
         //Initialise variables used inside the program loop
+        Scanner sc = new Scanner(System.in);
         boolean isContinue = true;
         String userInput;
 
@@ -306,7 +312,7 @@ public class Duke extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Duke.class.getResource("/view/MainWindow.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Duke.class.getResource(MAIN_WINDOW_FXML));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setTitle("Duke");
