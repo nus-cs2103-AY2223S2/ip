@@ -25,7 +25,7 @@ public class Ui {
      */
     public String showTasksMessage(TaskList tasks) {
         if (tasks.size() != 0) {
-            return tasks.toString();
+            return "Here are the tasks in your list:\n" + tasks;
         } else {
             return "There are no tasks currently!";
         }
