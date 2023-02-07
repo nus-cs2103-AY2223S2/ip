@@ -39,9 +39,8 @@ public class Duke extends Application {
     private Image muse = new Image(this.getClass().getResourceAsStream("/images/muse.jfif"));
 
     @Override
-    public void start(Stage stage) {
+    public void start(Stage stage) throws IOException {
         try {
-
             scrollPane = new ScrollPane();
             dialogContainer = new VBox();
             scrollPane.setContent(dialogContainer);
@@ -99,11 +98,25 @@ public class Duke extends Application {
             Storage.loadData(textDir, file, tasks);
 
             sendButton.setOnMouseClicked((event) -> {
+                if (userInput.getText().equals("bye")) {
+                    try {
+                        handleClose(pw, textDir, tasks);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
                 Parser.handleInputs(dialogContainer, tasks, userInput, user, muse);
                 userInput.clear();
             });
 
             userInput.setOnAction((event) -> {
+                if (userInput.getText().equals("bye")) {
+                    try {
+                        handleClose(pw, textDir, tasks);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
                 Parser.handleInputs(dialogContainer, tasks, userInput, user, muse);
                 userInput.clear();
             });
@@ -122,6 +135,11 @@ public class Duke extends Application {
             e.printStackTrace();
         }
 
+    }
+
+    private void handleClose(PrintWriter pw, String textDir, TaskList tasks) throws IOException {
+        Storage.saveData(pw, textDir, tasks);
+        Ui.doFarewell();
     }
 
     private Label getDialogLabel(String text) {
