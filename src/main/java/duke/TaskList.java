@@ -89,13 +89,9 @@ public class TaskList {
     public String toString() {
         String tasksStr = "";
         for (int i = 0; i < tasks.size(); i++) {
-            if (i == tasks.size() - 1) {
-                tasksStr = tasksStr + (i + 1) + ". " + tasks.get(i);
-            } else {
-                tasksStr = tasksStr + (i + 1) + ". " + tasks.get(i) + "\n";
-            }
+            tasksStr = tasksStr + (i + 1) + ". " + tasks.get(i) + "\n";
         }
-        return tasksStr;
+        return tasksStr.trim();
     }
 
     public TaskList findKeywordTasks(String keyword) {

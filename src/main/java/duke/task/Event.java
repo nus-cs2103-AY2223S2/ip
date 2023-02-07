@@ -3,12 +3,12 @@ package duke.task;
 public class Event extends Task{
     protected String time;
 
-    public Event (String description, String time) {
+    public Event(String description, String time) {
         super(description);
         this.time = time;
     }
 
-    public Event (boolean isDone, String description, String time) {
+    public Event(boolean isDone, String description, String time) {
         super(description);
         this.time = time;
         this.isDone = isDone;
