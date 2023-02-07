@@ -21,8 +21,8 @@ public class Parser {
     public String convertEnum(Command c) {
         String res = "";
         switch (c) {
-            case LIST:case MARK:case TODO:case EVENT:
-            case DELETE:case UNMARK:case DEADLINE: case BYE:
+            case LIST: case MARK: case TODO: case EVENT: case FIND:
+            case DELETE: case UNMARK: case DEADLINE: case BYE:
                 res = c.name().toLowerCase();
         }
         return res;

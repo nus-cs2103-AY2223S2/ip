@@ -70,6 +70,9 @@ public class Duke {
 
     }
 
+    public String findMessage(String keyword) {
+        return "Here are the matching tasks in your list:\n" + taskList.getTasksWanted(keyword);
+    }
     public void loadDataFromDisk() {
         storage.loadData(commandList);
         for (String userInput: commandList) {
@@ -111,6 +114,10 @@ public class Duke {
                     String[] words = userInput.split(" ");
                     int index = Integer.parseInt(words[1]) - 1;
                     String tmp = delete_msg(index);
+                } else if (command.equals(parser.convertEnum(Command.FIND))) {
+                    parser.checkEmpty(userInput, command);
+                    String keyword = userInput.substring(5);
+                    String tmp = findMessage(keyword);
                 } else {
                     throw new WeirdInputException();
                 }
@@ -177,6 +184,10 @@ public class Duke {
                     String[] words = userInput.split(" ");
                     int index = Integer.parseInt(words[1]) - 1;
                     System.out.println(ui.separate(delete_msg(index)));
+                } else if (command.equals(parser.convertEnum(Command.FIND))) {
+                    parser.checkEmpty(userInput, command);
+                    String keyword = userInput.substring(5);
+                    System.out.println(ui.separate(findMessage(keyword)));
                 } else {
                     throw new WeirdInputException();
                 }

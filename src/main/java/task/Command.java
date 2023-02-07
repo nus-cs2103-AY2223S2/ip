@@ -1,5 +1,5 @@
 package task;
 
 public enum Command {
-    LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, BYE
+    LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, BYE, FIND
 }
