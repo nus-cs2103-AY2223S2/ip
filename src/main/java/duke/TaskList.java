@@ -84,6 +84,13 @@ public class TaskList {
         return list;
     }
 
+    /**
+     * Iterates through the existing TaskList in order to find tasks with descriptions
+     * that match the specified keyword, storing them in a new TaskList and then returning
+     * the TaskList containing the results of the search
+     *
+     * @param keyword the keyword of the task description to be searched in the tasklist
+     */
     public TaskList search(String keyword) {
         List<Task> resultList = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
