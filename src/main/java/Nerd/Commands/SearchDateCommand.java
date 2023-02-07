@@ -34,19 +34,7 @@ public class SearchDateCommand extends Command {
     @Override
     public String processCommand(TaskList list, Ui ui) {
         LocalDate now = LocalDate.parse(date.trim());
-        String output = "Tasks occurring on " + now.toString() + ":\n";
-        for (int i = 0; i < list.getSize(); i++) {
-            Task currTask = list.getTask(i);
-            if (currTask instanceof Deadline) {
-                if (now.equals(((Deadline) currTask).getBy())) {
-                    output = output + currTask.toString() + "\n";
-                }
-            } else if (currTask instanceof Event) {
-                if (now.equals(((Event) currTask).getEndDate()) || now.equals(((Event) currTask).getStartDate())) {
-                    output = output + currTask.toString() + "\n";
-                }
-            }
-        }
+        String output = ui.printSearchDate(now.toString(), list);
         return output;
     }
 }

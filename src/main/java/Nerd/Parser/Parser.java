@@ -1,12 +1,9 @@
 package Nerd.Parser;
 
 import Nerd.Commands.*;
-import Nerd.entities.Deadline;
-import Nerd.entities.Event;
-import Nerd.entities.Todo;
+import Nerd.entities.*;
 import Nerd.enums.CommandEnums;
 import Nerd.exceptions.NerdException;
-import Nerd.entities.TaskList;
 
 /**
  * Represents the Parser of the Chat bot that parses the commands.
@@ -78,7 +75,7 @@ public class Parser {
             }
         case FIND:
             if (!isEmptyCommand(split)) {
-                return new FindCommand(parseDescription(input));
+                return new FindCommand(parseDescription(input), this);
             } else {
                 throw new NerdException("Sorry! you can't have empty descriptions!");
             }
@@ -147,14 +144,31 @@ public class Parser {
         }
     }
 
+    public String searchDescription(TaskList list, String description) {
+        String output = "";
+        for (int i = 0; i < list.getSize(); i++) {
+            boolean toPrint = false;
+            Task currentTask = list.getTask(i);
+            String[] split = currentTask.getDescription().split(" ");
+            for (int j = 0; j < split.length; j++) {
+                if(split[j].equals(description)) {
+                    toPrint = true;
+                }
+            }
+            if(toPrint) {
+                output += String.format("%s\n",currentTask.toString());
+            }
+        }
+        return output;
+    }
+
     /**
      * Parses the input string into indices.
      *
      * @param input The full line of the command and arguments.
      * @return The index.
-     * @throws NerdException if the input is empty.
      */
-    public int parseIndex(String input) throws NerdException {
+    public int parseIndex(String input) {
         String[] split = input.split(" ");
         return Integer.parseInt(split[1]) - 1;
     }
@@ -193,6 +207,4 @@ public class Parser {
             return false;
         }
     }
-
-
 }

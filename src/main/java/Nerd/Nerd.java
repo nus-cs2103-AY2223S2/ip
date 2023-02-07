@@ -7,6 +7,8 @@ import Nerd.exceptions.NerdException;
 import Nerd.storage.Storage;
 import Nerd.Commands.*;
 
+import java.io.IOException;
+
 /**
  * Represents the Duke.Duke Chat bot.
  * Running a duke object loads data from the specified file into memory,
@@ -58,10 +60,12 @@ public class Nerd {
         try {
             Command command = parser.parseCommand(input);
             output = command.processCommand(this.list, this.ui);
+            storage.save(this.list);
         } catch (NerdException e) {
             return e.getMessage();
+        } catch (IOException e) {
+            return e.getMessage();
         }
-        storage.save(this.list);
         return output;
     }
 }

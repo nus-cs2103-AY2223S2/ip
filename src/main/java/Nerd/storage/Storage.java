@@ -57,25 +57,22 @@ public class Storage {
             }
         }
         return true;
-
     }
 
     /**
      * Saves the current TaskList to the file.
      *
      * @param list A TaskList object.
+     * @throws IOException if file cannot be written
      */
-    public void save(TaskList list) {
+    public void save(TaskList list) throws IOException{
         assert list != null : "Cannot save data from a non existing tasklist";
-        try {
-            FileWriter myWriter = new FileWriter(file);
-            for (int i = 0; i < list.getSize(); i++) {
-                String line = list.getTask(i).toSave();
-                myWriter.write(line);
-            }
-            myWriter.close();
-        } catch (IOException e) {
-            System.out.println("Error! I cannot write to the file!");
+        FileWriter myWriter = new FileWriter(file);
+        for (int i = 0; i < list.getSize(); i++) {
+            Task task = list.getTask(i);
+            String line = task.toSave();
+            myWriter.write(line);
         }
+        myWriter.close();
     }
 }
