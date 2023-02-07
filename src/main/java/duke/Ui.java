@@ -114,4 +114,19 @@ public class Ui {
         String result = "I have removed this task\n";
         return result + task;
     }
+
+    /**
+     * Print out help.
+     * @return help string
+     */
+    public static String help() {
+        return "Here are the commands LIST, FIND, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, HELP\n"
+                + "only the list an help command do not have any arguments or additional inputs\n"
+                + "Here are some examples on how the rest of the commands are called\n"
+                + "find work -> looks through your list to find a task with a string word in it\n"
+                + "mark/unmark/delete 4 -> mark, unmark or delete the fourth task\n"
+                + "todo work -> adds a todo called work\n"
+                + "deadline work /by 2023-08-30 -> adds a deadline called work\n"
+                + "event work /from 2023-08-30 /to 2023-09-30-> adds a todo called work\n";
+    }
 }
