@@ -3,15 +3,7 @@ package duke.duke;
 import java.util.ArrayList;
 import java.util.List;
 
-import duke.commands.ByeCommand;
-import duke.commands.Command;
-import duke.commands.DeadLineCommand;
-import duke.commands.DeleteCommand;
-import duke.commands.EventCommand;
-import duke.commands.FindCommand;
-import duke.commands.ListCommand;
-import duke.commands.MarkCommand;
-import duke.commands.TodoCommand;
+import duke.commands.*;
 import duke.exceptions.DukeException;
 import duke.exceptions.IncompleteException;
 import duke.exceptions.InvalidException;
@@ -27,7 +19,9 @@ import duke.tasks.Todos;
  */
 public class Parser {
 
-    public Parser() {
+    private final String filePath;
+    public Parser(String filePath) {
+        this.filePath = filePath;
 
     }
 
@@ -51,9 +45,6 @@ public class Parser {
         }
         return s;
     }
-
-
-
     /**
      * Parses a processed form of the user input and matches it to the correct command.
      * @param line A string array split by 1 whitespace when the input is read.
@@ -105,8 +96,6 @@ public class Parser {
             break;
         case "bye":
             c = new ByeCommand();
-
-
             assert c.isBye();
             break;
         case "find":
@@ -116,6 +105,15 @@ public class Parser {
             String query = this.queries(line, List.<String>of()).get(0);
             c = new FindCommand(query);
             break;
+
+        case "undo":
+            if (line.length == 1) {
+                throw new NoArgsException("undo command");
+            }
+            int index = this.singleQueryInteger(line);
+            c = new UndoCommand(index, this.filePath);
+            break;
+
         default:
             throw new UnrecognisableException();
         }

@@ -104,4 +104,8 @@ public class TaskList {
         }
     }
 
+    public void replace(TaskList replacement) {
+        this.storer = replacement.storer;
+    }
+
 }

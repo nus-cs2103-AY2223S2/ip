@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 import java.util.stream.Stream;
 
+import duke.exceptions.DukeException;
 import duke.exceptions.LoadException;
 import duke.tasks.Deadlines;
 import duke.tasks.Events;
@@ -21,26 +22,43 @@ import duke.tasks.Todos;
  */
 public class Storage {
     private final String filePath;
+    private static final String DELIMITER = ";;";
+    private static final int DELIMITER_COUNT = 10;
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
     /**
-     * Reads and loads the data from data.txt.
+     * Reads and loads the latest task list data from data.txt.
      * Each line is read and a corresponding task is created.
      * From there, a new task list is constructed.
      * @return A list of tasks.
      * @throws FileNotFoundException If file is not found.
      */
-    public TaskList loadFile() throws LoadException {
+    public TaskList loadFile(int index) throws LoadException {
 
         ArrayList<Task> taskList;
         try {
             File f = new File(this.filePath);
             Scanner s = new Scanner(f);
             taskList = new ArrayList<>();
-            while (s.hasNext()) {
-                String[] inputs = s.nextLine().split(" \\| ");
+            String nextLine = "";
+
+            while (s.hasNext() && index > 0) {
+                nextLine = s.nextLine();
+                if (nextLine.equals(DELIMITER)) {
+                    index--;
+                }
+            }
+
+            nextLine = "";
+            while (!nextLine.equals(DELIMITER)) {
+                nextLine = s.nextLine();
+                if (nextLine.equals(DELIMITER)) {
+                    break;
+                }
+                System.out.println(nextLine);
+                String[] inputs = nextLine.split(" \\| ");
 
                 boolean isDone = inputs[1].equals("1") ? true : false;
                 switch(inputs[0]) {
@@ -57,6 +75,7 @@ public class Storage {
                     throw new LoadException();
 
                 }
+
             }
 
         } catch (FileNotFoundException err) {
@@ -73,6 +92,7 @@ public class Storage {
             taskList = new ArrayList<Task>();
 
         } catch (Exception err) {
+            System.out.println(err.getMessage());
             throw new LoadException();
         }
 
@@ -86,15 +106,49 @@ public class Storage {
      * @param tasks A list of tasks to be dumped.
      * @throws IOException If an error is encountered while accessing information.
      */
-    public void dumpFile(TaskList tasks) throws IOException {
+    public void dumpFile(TaskList tasks) throws Exception {
+
+        Stream<String> log = readAll();
+
         FileWriter fw = new FileWriter(this.filePath);
         String text = tasks.getStorer()
                 .stream()
                 .map(t -> t.formatText() + "\n")
-                .reduce("", (x, y) -> x + y);
+                .reduce("", (x, y) -> x + y)
+                + String.format("%s\n", DELIMITER);
 
         fw.write(text);
         fw.close();
+
+        writeAll(log);
+    }
+
+    private Stream<String> readAll() throws FileNotFoundException {
+        Scanner sc = new Scanner(new File(this.filePath));
+        ArrayList<String> arr = new ArrayList<>();
+        int delimiterCount = DELIMITER_COUNT;
+        while (sc.hasNextLine() && delimiterCount > 0) {
+            String line = sc.nextLine();
+            arr.add(line);
+            if (line.equals(DELIMITER)) {
+                delimiterCount--;
+            }
+
+        }
+        return arr.stream();
+    }
+
+    private void writeAll(Stream<String> log) throws IOException {
+
+        FileWriter fwriter = new FileWriter(this.filePath, true);
+        log.forEach(x -> {
+            try {
+                fwriter.write(x + "\n");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        fwriter.close();
     }
 
 }

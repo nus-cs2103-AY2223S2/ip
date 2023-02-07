@@ -31,8 +31,8 @@ public class EventCommand extends Command {
         ui.display(message);
         try {
             storage.dumpFile(tasks);
-        } catch (IOException err) {
-            throw new DukeException("IO Exception occurred!");
+        } catch (Exception err) {
+            throw new DukeException("Error while saving file!");
         }
         return message;
 

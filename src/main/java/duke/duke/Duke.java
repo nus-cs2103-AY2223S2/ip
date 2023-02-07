@@ -27,7 +27,7 @@ public class Duke {
         this.storage = new Storage(filePath);
         TaskList temp;
         try {
-            temp = this.storage.loadFile();
+            temp = this.storage.loadFile(0);
         } catch (DukeException e) {
             this.ui.display(e.getMessage());
             temp = new TaskList();
@@ -43,17 +43,17 @@ public class Duke {
     public static void main(String[] args) {
         String txtDir = System.getProperty("user.dir") + "/data/tasks.txt";
         Duke instance = new Duke(txtDir);
-        instance.run();
+        instance.run(txtDir);
     }
 
     /**
      * Runs the Duke programme.
      */
-    public void run() {
+    public void run(String filePath) {
         ui.showLogo();
         ui.showWelcome();
 
-        Parser parser = new Parser();
+        Parser parser = new Parser(filePath);
         boolean isBye = false;
         while (!isBye) {
             try {
@@ -78,7 +78,7 @@ public class Duke {
 
 
     public String getResponse(String input) {
-        Parser parser = new Parser();
+        Parser parser = new Parser(DEFAULT_PATH);
         String[] processedLines = input.split(" ");
         Command c;
         try {
