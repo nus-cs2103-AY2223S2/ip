@@ -5,6 +5,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.LinkedList;
+import java.util.stream.Collectors;
 
 import membot.storage.Outputable;
 
@@ -84,11 +85,7 @@ public abstract class Task {
      * @return A string array of all the <code>Task</code> titles.
      */
     public static String[] listAll() {
-        ArrayList<String> tasks = new ArrayList<>();
-        for (int i = 0; i < Task.tasks.size(); ++i) {
-            tasks.add(String.format("%s", Task.tasks.get(i).toString()));
-        }
-        return tasks.toArray(new String[Task.tasks.size()]);
+        return Task.tasks.stream().map(Task::toString).toArray(String[]::new);
     }
 
     /**
@@ -129,7 +126,6 @@ public abstract class Task {
         Base64.Encoder encoder = Base64.getEncoder();
         StringBuilder sb = new StringBuilder();
         for (Task t : Task.tasks) {
-
             String s = String.format("%s | %s | %s | %s | %s | %s",
                     encoder.encodeToString(t.getTaskType().toString().getBytes(StandardCharsets.UTF_8)),
                     encoder.encodeToString(t.title.getBytes(StandardCharsets.UTF_8)),
@@ -189,14 +185,9 @@ public abstract class Task {
      * @return The list of <code>Task</code> objects that have titles containing the keyword.
      */
     public static ArrayList<Task> find(String keyword) {
-        ArrayList<Task> res = new ArrayList<>();
-        for (Task t : Task.tasks) {
-            if (t.title.contains(keyword)) {
-                res.add(t);
-            }
-        }
-
-        return res;
+        return Task.tasks.stream()
+                .filter(x -> x.title.contains(keyword))
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
     /**
