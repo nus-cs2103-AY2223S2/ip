@@ -3,6 +3,9 @@ package duke.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a Deadline that is a Task.
+ */
 public class Deadline extends Task {
     private String doBy;
     private LocalDateTime deadline;
@@ -14,6 +17,10 @@ public class Deadline extends Task {
         this.deadline = LocalDateTime.parse(deadline);
     }
 
+    /**
+     * Translates the task into data format.
+     * @return A String that represents the task in data format.
+     */
     public String toData() {
         return String.format("D | %s | %s | %s", this.getStatusIcon(), this.getDescription(), this.doBy);
     }

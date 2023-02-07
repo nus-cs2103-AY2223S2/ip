@@ -11,6 +11,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Responsible for both loading and storing data from a specified file.
+ */
 public class Storage {
     private String filePath;
 
@@ -18,6 +21,10 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Retrieves the current tasks from the data file.
+     * @return An ArrayList of current tasks.
+     */
     public ArrayList<Task> loadData() {
         ArrayList<Task> tasks = new ArrayList<>();
         File file = new File(this.filePath);
@@ -71,6 +78,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Stores the current tasks as data into data file.
+     * @param tasks An ArrayList of current tasks.
+     * @throws DukeException If file cannot be located or created.
+     */
     public void saveData(ArrayList<Task> tasks) throws DukeException {
         try {
             FileWriter fileWriter = new FileWriter(this.filePath);
