@@ -45,4 +45,17 @@ public class Ui {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
+    public static void showResponse(String response) {
+        System.out.println(response);
+    }
+
+    /**
+     * Welcomes user on GUI.
+     * @return default welcome message.
+     */
+    public static String guiWelcome() {
+        return "Hi! I'm Squirtle (aka the DUKE)!\nHow may I be of service?";
+    }
+
+
 }

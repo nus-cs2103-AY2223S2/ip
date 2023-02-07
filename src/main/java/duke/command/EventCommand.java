@@ -5,7 +5,7 @@ import duke.TaskList;
 import duke.Storage;
 import duke.task.Event;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * EventCommand that has description, start date and end date.
@@ -13,8 +13,8 @@ import java.time.LocalDate;
 public class EventCommand extends AddCommand {
     public static final String COMMAND_WORD = "event";
     private String desc;
-    private LocalDate from;
-    private  LocalDate to;
+    private LocalDateTime from;
+    private  LocalDateTime to;
 
     /**
      * Constructor for EventCommand.
@@ -22,20 +22,20 @@ public class EventCommand extends AddCommand {
      * @param from
      * @param to
      */
-    public EventCommand(String desc,LocalDate from,LocalDate to) {
+    public EventCommand(String desc,LocalDateTime from,LocalDateTime to) {
         this.desc = desc;
         this.from = from;
         this.to = to;
     }
 
-    /**
-     * Executes adding of event task to tasklist.
-     * @param tasks
-     * @param ui
-     * @param storage
-     */
+    @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         Event newTask = new Event(desc,from,to);
         tasks.addTask(newTask);
+        String response = "OK! I've added:\n" + newTask.toString() +
+                String.format("\nNow you have %d task(s) in the list.", tasks.getSize());
+        Ui.showResponse(response);
+        this.responseFromDukeAfterExecution = response;
     }
+
 }

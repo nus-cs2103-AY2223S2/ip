@@ -20,15 +20,14 @@ public class ToDoCommand extends AddCommand {
         this.desc = desc;
     }
 
-    /**
-     * Executes adding of todo task to task list.
-     * @param tasks
-     * @param ui
-     * @param storage
-     */
+    @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         Todo newTask = new Todo(desc);
         tasks.addTask(newTask);
+        String response = "OK! I've added:\n" + newTask.toString() +
+                String.format("\nNow you have %d task(s) in the list.", tasks.getSize());
+        Ui.showResponse(response);
+        this.responseFromDukeAfterExecution = response;
     }
 
 }

@@ -1,8 +1,6 @@
 package duke.command;
 
-import duke.Ui;
-import duke.TaskList;
-import duke.Storage;
+import duke.*;
 
 /**
  * MarkCommand that has task index.
@@ -19,13 +17,16 @@ public class MarkCommand extends Command {
         this.taskIndex = taskIndex;
     }
 
-    /**
-     * Executes marking of task.
-     * @param tasks
-     * @param ui
-     * @param storage
-     */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        tasks.markTask(taskIndex);
+    @Override
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        String response = "DEFAULT MESSAGE";
+        try {
+            tasks.markTask(taskIndex);
+            response = "Nice! I've marked this task as done:\n" + tasks.getTaskAtIndex(taskIndex).toString();
+        } catch (DukeException e) {
+            response = e.getMessage();
+        }
+        Ui.showResponse(response);
+        this.responseFromDukeAfterExecution = response;
     }
 }

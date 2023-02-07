@@ -1,13 +1,14 @@
 package duke;
 import duke.command.Command;
 
+
 /**
  * Duke class with storage,tasks and ui.
  */
 public class Duke {
-    private Storage storage;
-    private TaskList tasks;
-    private Ui ui;
+    protected Storage storage;
+    protected TaskList tasks;
+    protected Ui ui;
 
     /**
      * Constructor for Duke.
@@ -49,4 +50,9 @@ public class Duke {
             }
         }
     }
+
+    public String getResponse(String input) {
+        return String.format("Duke heard: %s", input);
+    }
+
 }

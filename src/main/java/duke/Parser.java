@@ -2,7 +2,8 @@ package duke;
 
 import duke.command.*;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
@@ -44,7 +45,7 @@ public class Parser {
         case DeadlineCommand.COMMAND_WORD:
             try {
                 String desc = getDescDeadline(userInput);
-                LocalDate byWhen = getDeadline(userInput);
+                LocalDateTime byWhen = getDeadline(userInput);
                 return new DeadlineCommand(desc, byWhen);
             } catch (DukeException e) {
                 Ui.showError(e.getMessage());
@@ -53,8 +54,8 @@ public class Parser {
         case EventCommand.COMMAND_WORD:
             try {
                 String desc = getDescEvent(userInput);
-                LocalDate from = getFrom(userInput);
-                LocalDate to = getTo(userInput);
+                LocalDateTime from = getFrom(userInput);
+                LocalDateTime to = getTo(userInput);
                 return new EventCommand(desc,from,to);
             } catch (DukeException e) {
                 Ui.showError(e.getMessage());
@@ -166,14 +167,15 @@ public class Parser {
      * @return deadline of task
      * @throws DukeException
      */
-    public static LocalDate getDeadline(String userInput) throws DukeException {
-        String[] arrOfStr = userInput.split("/by")[1].split(" ");
-        String strDate = arrOfStr[1];
+    public static LocalDateTime getDeadline(String userInput) throws DukeException {
+        String[] arrOfStr = userInput.split("/by");
+        String strDate = arrOfStr[1].substring(1);
         try {
-            LocalDate date = LocalDate.parse(strDate);
-            return date;
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+            LocalDateTime dateTime = LocalDateTime.parse(strDate,formatter);
+            return dateTime;
         } catch (DateTimeParseException e) {
-            throw new DukeException("INVALID DATE!!! Please enter date in YYYY/MM/DD format");
+            throw new DukeException("INVALID DATE!!! Please enter date in YYYY-MM-DD HHMM format");
         }
     }
 
@@ -183,13 +185,15 @@ public class Parser {
      * @return start date of task
      * @throws DukeException
      */
-    public static LocalDate getFrom(String userInput) throws DukeException {
-        String[] arrOfStr = userInput.split("/from")[1].split(" ");
+    public static LocalDateTime getFrom(String userInput) throws DukeException {
+        String[] arrOfStr = userInput.split("/from ")[1].split(" /to");
+        String strFrom = arrOfStr[0];
         try {
-            LocalDate from = LocalDate.parse(arrOfStr[1]);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+            LocalDateTime from = LocalDateTime.parse(strFrom,formatter);
             return from;
         } catch (DateTimeParseException e) {
-            throw new DukeException("INVALID 'From' DATE!!! Please enter date in YYYY/MM/DD format");
+            throw new DukeException("INVALID 'From' DATE!!! Please enter date in YYYY-MM-DD HHMM format");
         }
     }
 
@@ -199,13 +203,15 @@ public class Parser {
      * @return end date of task
      * @throws DateTimeParseException
      */
-    public static LocalDate getTo(String userInput) throws DukeException {
-        String[] arrOfStr = userInput.split("/from")[1].split(" ");
+    public static LocalDateTime getTo(String userInput) throws DukeException {
+        String[] arrOfStr = userInput.split("/to ");
+        String strTo = arrOfStr[1];
         try {
-            LocalDate to = LocalDate.parse((arrOfStr[3]));
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+            LocalDateTime to = LocalDateTime.parse(strTo,formatter);
             return to;
         } catch (DateTimeParseException e) {
-            throw new DukeException("INVALID 'To' DATE!!! Please enter date in YYYY/MM/DD format");
+            throw new DukeException("INVALID 'To' DATE!!! Please enter date in YYYY-MM-DD HHMM format");
         }
     }
 

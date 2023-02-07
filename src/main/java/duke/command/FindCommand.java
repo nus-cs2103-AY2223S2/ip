@@ -6,21 +6,17 @@ import duke.Ui;
 
 public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
-
     private String keyword;
 
     public FindCommand(String keyword) {
         this.keyword = keyword;
     }
 
-    /**
-     * Executes finding of tasks in task list that matches keyword.
-     * @param tasks
-     * @param ui
-     * @param storage
-     */
+    @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        tasks.findKeywordMatches(keyword);
+        String response = tasks.findKeywordMatches(keyword);
+        Ui.showResponse(response);
+        this.responseFromDukeAfterExecution = response;
     }
 
 }

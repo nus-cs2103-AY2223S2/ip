@@ -8,19 +8,16 @@ import duke.Storage;
  * UnknownCommand.
  */
 public class UnknownCommand extends Command {
+    private final String ERROR_MESSAGE = "OOPS!!! I'm sorry, but I don't know what that means :-(";
     /**
      * Constructor for UnknownCommand.
      */
     public UnknownCommand() {
     }
 
-    /**
-     * Executes printing of error.
-     * @param tasks
-     * @param ui
-     * @param storage
-     */
+    @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showError("OOPS!!! I'm sorry, but I don't know what that means :-(");
+        Ui.showResponse(ERROR_MESSAGE);
+        this.responseFromDukeAfterExecution = ERROR_MESSAGE;
     }
 }

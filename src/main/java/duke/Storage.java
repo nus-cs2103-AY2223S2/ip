@@ -10,6 +10,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -52,12 +53,12 @@ public class Storage {
                     storeTasks.add(new Todo(desc));
                     break;
                 case "D": //D|desc|X|byWhen
-                    LocalDate byWhen = LocalDate.parse(arrOfDetails[3]);
+                    LocalDateTime byWhen = LocalDateTime.parse(arrOfDetails[3]);
                     storeTasks.add(new Deadline(desc,byWhen));
                     break;
                 case "E": //D|desc|X|from|to
-                    LocalDate from = LocalDate.parse(arrOfDetails[3]);
-                    LocalDate to = LocalDate.parse(arrOfDetails[4]);
+                    LocalDateTime from = LocalDateTime.parse(arrOfDetails[3]);
+                    LocalDateTime to = LocalDateTime.parse(arrOfDetails[4]);
                     storeTasks.add(new Event(desc,from,to));
                     break;
             }
