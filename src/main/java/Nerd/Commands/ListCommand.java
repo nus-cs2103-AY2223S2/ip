@@ -19,11 +19,6 @@ public class ListCommand extends Command {
      */
     @Override
     public String processCommand(TaskList list, Ui ui) {
-        String output = "";
-        for (int i = 0; i < list.getSize(); i++) {
-            Task t = list.getTask(i);
-            output += String.format("%d.%s\n", i + 1, t.toString());
-        }
-        return output;
+        return ui.printListResponse(list);
     }
 }

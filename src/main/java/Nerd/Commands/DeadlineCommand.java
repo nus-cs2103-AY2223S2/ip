@@ -34,7 +34,7 @@ public class DeadlineCommand extends Command {
     public String processCommand(TaskList list, Ui ui) {
         Deadline deadline = new Deadline(description, by);
         list.addTask(deadline);
-        return String.format("Received, I've added the following deadlines:\n %s\nNow you have %d tasks in the list."
-                , deadline.toString(), list.getSize());
+        String response = ui.printDeadlineResponse(deadline.toString(), list.getSize());
+        return response;
     }
 }
