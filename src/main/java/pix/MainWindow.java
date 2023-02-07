@@ -33,7 +33,8 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().add(
-                DialogBox.getPixDialog("Hello, this is Pix!\n\nHow can I help you?", dukeImage));
+                DialogBox.getPixDialog("Hello, this is Pix! How can I help you?\n\n "
+                        + "type 'help' to get the list of commands.", dukeImage));
     }
 
     public void setPix(Pix p) {

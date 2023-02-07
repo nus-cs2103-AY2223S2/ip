@@ -14,10 +14,10 @@ import pix.ui.Ui;
  */
 public class Pix {
     /**
-     * Gets response eventStart duke based on user's input.
+     * Gets response from Pix based on user's input.
      *
      * @param input User's input
-     * @return String of duke's reply based on user's input.
+     * @return String of Pix's reply based on user's input.
      */
     public String getResponse(String input) {
         assert input != null : "Input cannot be null";

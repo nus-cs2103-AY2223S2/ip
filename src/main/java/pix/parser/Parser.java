@@ -10,6 +10,7 @@ import pix.commands.DeadlineCommand;
 import pix.commands.DeleteCommand;
 import pix.commands.EventCommand;
 import pix.commands.FindCommand;
+import pix.commands.HelpCommand;
 import pix.commands.ListCommand;
 import pix.commands.ListDateCommand;
 import pix.commands.MarkCommand;
@@ -223,6 +224,10 @@ public class Parser {
         return new FindCommand(keyword);
     }
 
+    public Command parseHelp() {
+        return new HelpCommand();
+    }
+
     /**
      * Removes the command word from user input.
      *
@@ -266,6 +271,8 @@ public class Parser {
             return parseDelete(commandArr);
         case "find":
             return parseFind(commandArr);
+        case "help":
+            return parseHelp();
         default:
             throw new PixException("I am not sure what that means.");
         }

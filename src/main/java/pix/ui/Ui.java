@@ -125,4 +125,28 @@ public class Ui {
         }
         return findStringToDisplay.toString();
     }
+
+    /**
+     * Return list of commands, their description and formatting.
+     *
+     * @return String of list of commands, their description and formatting.
+     */
+    public String help() {
+        StringBuilder listOfCommands = new StringBuilder();
+        listOfCommands.append("todo - Adds a todo task.\nFormat: todo <Description>\n\n");
+        listOfCommands.append("dline - Adds a deadline task. dueDate to be specified as yyyy-MM-dd HH:mm.\n"
+                + "Format: dline <Description> / <dueDate>\n\n");
+        listOfCommands.append("event - Adds an Event task. "
+                + "eventStart and eventEnd to be specified as yyyy-MM-dd HH:mm.\n"
+                + "Format: event <Description> / <eventStart> / <eventEnd>\n\n");
+        listOfCommands.append("ls - Lists all the tasks.\nFormat: ls\n\n");
+        listOfCommands.append("lsd - Lists deadlines that are due by the date and events that area "
+                + "ongoing during the date. Date format as yyyy-MM-dd\nFormat: lsd <Date>\n\n");
+        listOfCommands.append("mk - Marks a task as done.\nFormat: mk <Index>\n\n");
+        listOfCommands.append("unmk - Unmarks a task.\nFormat: unmk <Index>\n\n");
+        listOfCommands.append("rm - Removes a task from the list.\nFormat: rm <Index>\n\n");
+        listOfCommands.append("find - Find tasks that contains a keyword.\nFormat: find <Keyword>\n\n");
+        listOfCommands.append("bye - Exits pix.\nFormat: bye");
+        return listOfCommands.toString();
+    }
 }
