@@ -1,4 +1,5 @@
-package duke.taskType;
+package duke.tasktype;
+
 import java.io.Serializable;
 
 /**

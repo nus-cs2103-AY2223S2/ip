@@ -1,10 +1,8 @@
 package duke.commands;
 
-import duke.DukeException;
-import duke.taskType.TaskList;
-import duke.Ui;
 import duke.Storage;
-import duke.taskType.TaskList;
+import duke.Ui;
+import duke.tasktype.TaskList;
 
 /**
  * The abstract class for commands.
@@ -16,6 +14,7 @@ public abstract class Command {
      * @param lst the task list to be operated
      * @param ui the UI object the program is using
      * @param storage the Storage object the program is using
+     * @return the response from the bot
      */
     public abstract String operate(TaskList lst, Ui ui, Storage storage);
 

@@ -24,7 +24,7 @@ public class Ui {
      *
      * @return the user's input
      */
-    public String readCMD() {
+    public String readCommand() {
         Scanner sc = new Scanner(System.in);
         return sc.nextLine();
     }

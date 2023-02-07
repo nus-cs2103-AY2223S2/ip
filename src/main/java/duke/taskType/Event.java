@@ -1,4 +1,4 @@
-package duke.taskType;
+package duke.tasktype;
 
 /**
  * The class for Event tasks.
@@ -14,7 +14,7 @@ public class Event extends Task {
      * @param time1 the start time of the task
      * @param time2 the end time of the task
      */
-    public Event(String cont, String time1, String time2){
+    public Event(String cont, String time1, String time2) {
         super(cont);
         this.time1 = time1;
         this.time2 = time2;

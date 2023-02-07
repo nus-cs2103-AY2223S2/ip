@@ -3,9 +3,12 @@ package duke.commands;
 import duke.DukeException;
 import duke.Storage;
 import duke.Ui;
-import duke.taskType.Event;
-import duke.taskType.TaskList;
+import duke.tasktype.Event;
+import duke.tasktype.TaskList;
 
+/**
+ * The class for event commands.
+ */
 public class CreateEvent extends Command {
     private String cmdLine;
 
@@ -13,6 +16,14 @@ public class CreateEvent extends Command {
         this.cmdLine = cmdLine;
     }
 
+    /**
+     * Creates an event task for the user.
+     *
+     * @param lst the task list to be operated
+     * @param ui the UI object the program is using
+     * @param storage the Storage object the program is using
+     * @return the response from the bot
+     */
     public String operate(TaskList lst, Ui ui, Storage storage) {
         try {
             if (cmdLine.length() <= 6) {

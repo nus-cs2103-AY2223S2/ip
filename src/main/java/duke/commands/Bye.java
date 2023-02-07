@@ -1,8 +1,8 @@
 package duke.commands;
 
-import duke.Ui;
 import duke.Storage;
-import duke.taskType.TaskList;
+import duke.Ui;
+import duke.tasktype.TaskList;
 
 /**
  * The class for bye commands.
@@ -15,11 +15,12 @@ public class Bye extends Command {
     }
 
     /**
-     * Say goodbye to the user.
+     * Says goodbye to the user.
      *
      * @param lst the task list to be operated
      * @param ui the UI object the program is using
      * @param storage the Storage object the program is using
+     * @return the response from the bot
      */
     public String operate(TaskList lst, Ui ui, Storage storage) {
         storage.save(lst);

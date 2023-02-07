@@ -3,8 +3,11 @@ package duke.commands;
 import duke.DukeException;
 import duke.Storage;
 import duke.Ui;
-import duke.taskType.TaskList;
+import duke.tasktype.TaskList;
 
+/**
+ * The class for the find commands.
+ */
 public class Find extends Command {
     private String cmdLine;
 
@@ -12,6 +15,14 @@ public class Find extends Command {
         this.cmdLine = cmdLine;
     }
 
+    /**
+     * Find the tasks including the word the user typed (may be partially included).
+     *
+     * @param lst the task list to be operated
+     * @param ui the UI object the program is using
+     * @param storage the Storage object the program is using
+     * @return the response from the bot
+     */
     public String operate(TaskList lst, Ui ui, Storage storage) {
         try {
             if (lst.size() == 0) {
@@ -37,7 +48,7 @@ public class Find extends Command {
             String response = "";
             response += "Roarrrrrrrrrrrrrrrrrr! Are you searching for these tasks?\n";
             for (int i = 1; i <= findResult.size(); ++i) {
-                response += i + "." + findResult.get(i-1).toString() + "\n";
+                response += i + "." + findResult.get(i - 1).toString() + "\n";
             }
             return response;
         } catch (DukeException e) {

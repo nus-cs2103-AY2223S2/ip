@@ -1,4 +1,4 @@
-package duke.taskType;
+package duke.tasktype;
 
 /**
  * The class for the Todo tasks.
@@ -14,7 +14,7 @@ public class Todo extends Task {
     }
 
     /**
-     * Override the toString() method to show the information of the Todo task.
+     * Overrides the toString() method to show the information of the Todo task.
      *
      * @return a String that shows the information of the Todo task
      */

@@ -1,10 +1,14 @@
 package duke.commands;
 
-import duke.taskType.*;
-import duke.*;
-import duke.commands.*;
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
+import duke.Storage;
+import duke.Ui;
+import duke.tasktype.TaskList;
+import duke.tasktype.Todo;
+
 public class CreateTodoTest {
     @Test
     public void operateTest() {
@@ -15,6 +19,6 @@ public class CreateTodoTest {
         ct.operate(lst, ui, storage);
         TaskList testList = new TaskList();
         testList.add(new Todo("lash"));
-        assertEquals(lst.toString(),testList.toString());
+        assertEquals(lst.toString(), testList.toString());
     }
 }

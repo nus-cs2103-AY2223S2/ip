@@ -1,8 +1,13 @@
 package duke;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
-import duke.taskType.TaskList;
+import duke.tasktype.TaskList;
 
 /**
  * The class used to store and load task list in the local disk.
@@ -20,7 +25,7 @@ public class Storage {
     }
 
     /**
-     * Save the task list in the local disk.
+     * Saves the task list in the local disk.
      *
      * @param lst the task list to save in the local disk.
      */
@@ -38,7 +43,7 @@ public class Storage {
     }
 
     /**
-     * Load the task list stored in the local disk.
+     * Loads the task list stored in the local disk.
      *
      * @return the task list stored in the local disk.
      */

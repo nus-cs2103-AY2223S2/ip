@@ -1,10 +1,14 @@
 package duke.commands;
 
-import duke.taskType.*;
-import duke.*;
-import duke.commands.*;
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
+import duke.Storage;
+import duke.Ui;
+import duke.tasktype.TaskList;
+import duke.tasktype.Todo;
+
 public class UnmarkTest {
     @Test
     public void operateTest() {
@@ -18,6 +22,6 @@ public class UnmarkTest {
         lst.add(t);
         Unmark u = new Unmark("unmark 1");
         u.operate(lst, ui, storage);
-        assertEquals(lst.toString(),testList.toString());
+        assertEquals(lst.toString(), testList.toString());
     }
 }
