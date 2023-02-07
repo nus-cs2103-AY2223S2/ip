@@ -5,6 +5,8 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+import java.util.ArrayList;
+
 public class Parser {
     private Storage storage;
     private TaskList tasks;
@@ -104,6 +106,11 @@ public class Parser {
             } catch (Exception e) {
                 throw new DukeException("Enter a valid task number!");
             }
+            break;
+        case "find":
+            String keyword = userInput[1];
+            ArrayList<Task> matchedTasks = tasks.findMatchingTasks(keyword);
+            ui.displayMatchedTasks(matchedTasks);
             break;
         default:
             throw new DukeException("Enter a valid task!");
