@@ -73,6 +73,8 @@ public abstract class Command {
                 return new DeadlineCommand(input, ui);
             case EVENT:
                 return new EventCommand(input, ui);
+            case SORT:
+                return new SortCommand(input, ui);
             default:
                 assert false : "Unknown command";
             }
@@ -81,15 +83,6 @@ public abstract class Command {
         }
 
         throw new InvalidCommandException(String.format("%s is not a valid command!", inputArr[0]));
-    }
-
-    /**
-     * Returns true if the <code>Command</code> causes the application to exit, false otherwise.
-     *
-     * @return True if the <code>Command</code> causes the application to exit, false otherwise.
-     */
-    public boolean isExit() {
-        return this.isExit;
     }
 
     /**
@@ -111,5 +104,6 @@ enum CommandType {
     TODO,
     DEADLINE,
     EVENT,
+    SORT,
     BYE
 }

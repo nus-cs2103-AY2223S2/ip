@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.stream.Collectors;
 
@@ -103,7 +104,12 @@ public abstract class Task {
         return Task.tasks.get(id - 1).toString();
     }
 
-    private String printStatus() {
+    /**
+     * Prints out the <code>Task</code> status.
+     *
+     * @return The <code>Task</code> status.
+     */
+    public String printStatus() {
         switch (this.status) {
         case NEW:
             return " ";
@@ -191,6 +197,24 @@ public abstract class Task {
     }
 
     /**
+     * Sorts the current list of <code>Task</code> with a specified <code>Comparator</code>.
+     *
+     * @param c <code>Comparator</code> used to sort the <code>Task</code> list.
+     */
+    public static void sort(Comparator<? super Task> c) {
+        Task.tasks.sort(c);
+    }
+
+    /**
+     * Retrieves the <code>Task</code> title.
+     *
+     * @return Title of the task.
+     */
+    public String getTitle() {
+        return this.title;
+    }
+
+    /**
      * Returns the <code>Task</code> type.
      *
      * @return The <code>Task</code> type.
@@ -234,8 +258,3 @@ enum TaskStatus {
     COMPLETED
 }
 
-enum TaskType {
-    TODO,
-    DEADLINE,
-    EVENT
-}
