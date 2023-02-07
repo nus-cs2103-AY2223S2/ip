@@ -11,7 +11,7 @@ public enum Command {
     LIST(new ListCommand()),
     MARK(new MarkTaskCommand(true)),
     UNMARK(new MarkTaskCommand(false)),
-    TODO(new AddTodoCommand()),
+    TODO(new Somethig()),
     DEADLINE(new AddDeadlineCommand()),
     EVENT(new AddEventCommand()),
     DELETE(new DeleteCommand()),

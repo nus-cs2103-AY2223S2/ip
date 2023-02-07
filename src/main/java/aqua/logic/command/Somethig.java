@@ -6,7 +6,7 @@ import aqua.usertask.UserTodo;
 
 
 /** An {@code AddTaskCommand} to add {@code UserTodo}. */
-public class AddTodoCommand extends AddTaskCommand {
+public class Somethig extends AddTaskCommand {
     @Override
     public UserTodo createTask(ArgumentMap args) throws SyntaxException {
         // get name
