@@ -1,11 +1,8 @@
 package Week2.src.main;
 import java.io.FileNotFoundException;
-import java.nio.file.Files;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 import java.io.File;
-import java.util.Scanner;
 
 /**
  * List of tasks
@@ -63,7 +60,7 @@ public class TaskList<Task> {
      * It returns the size of the list
      * @return size of the list
      */
-    public int size() {
+    public int length() {
         return this.size;
     }
 

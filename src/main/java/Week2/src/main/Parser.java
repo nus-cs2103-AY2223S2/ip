@@ -32,7 +32,7 @@ public class Parser {
         String c = input;
         if (c.equals("list")) {
             String rstr = "Here are the tasks in your list:";
-            for (int i = 0; i < tasklist.size(); i++) {
+            for (int i = 0; i < tasklist.length(); i++) {
                 Task current = (Task) tasklist.get(i);
                 int curnum = i + 1;
                 String liststr = curnum + "." + current.toString();
@@ -64,7 +64,7 @@ public class Parser {
             tasklist.remove(marking - 1);
             String str1 = "Noted. I've removed this task:";
             String str2 = current.toString();
-            String str3 = "Now you have " + tasklist.size() + " tasks in the list";
+            String str3 = "Now you have " + tasklist.length() + " tasks in the list";
             return str1 + "\n" + str2 + "\n" + str3;
         } else if (c.startsWith("todo")) {
             String doit = c.substring(5, c.length());
@@ -72,7 +72,7 @@ public class Parser {
             tasklist.add(current);
             String str1 = "Got it. I've added this task:";
             String str2 = current.toString();
-            String str3 = "Now you have " + tasklist.size() + " tasks in the list";
+            String str3 = "Now you have " + tasklist.length() + " tasks in the list";
             Duke.writeOn(current);
             return str1 + "\n" + str2 + "\n" + str3;
         } else if (c.startsWith("deadline")) {
@@ -82,7 +82,7 @@ public class Parser {
             tasklist.add(current);
             String str1 = "Got it. I've added this task:";
             String str2 = current.toString();
-            String str3 = "Now you have " + tasklist.size() + " tasks in the list";
+            String str3 = "Now you have " + tasklist.length() + " tasks in the list";
             Duke.writeOn(current);
             return str1 + "\n" + str2 + "\n" + str3;
         } else if (c.startsWith("event")) {

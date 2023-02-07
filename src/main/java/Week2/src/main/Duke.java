@@ -36,6 +36,7 @@ public class Duke extends Application {
     private Image bot = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpg"));
 
     static TaskList tasklist = new TaskList();
+    assert tasklist.length() < 100 : "Task list is too long";
     static FileWriter fw;
 
     static {
