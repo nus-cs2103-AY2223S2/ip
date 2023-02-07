@@ -49,6 +49,7 @@ application {
 shadowJar {
     archiveBaseName = "membot"
     archiveClassifier = null
+    archiveVersion = "v0.2"
 }
 
 checkstyle {
