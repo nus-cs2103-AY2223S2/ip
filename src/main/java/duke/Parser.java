@@ -4,8 +4,18 @@ import commands.*;
 import exceptions.DukeException;
 import tasks.*;
 
+/**
+ * Represents the Parser that helps to parse input commands
+ * into recognisable commands that Sirius can execute
+ */
 public class Parser {
 
+    /**
+     * Returns the CommandType based on the String input given
+     * by iterating through the existing CommandType values
+     *
+     * @return the CommandType based on the String input given
+     */
     public static CommandType getCommandType(String input) {
         for (CommandType c : CommandType.values()) {
             if (c.equals(input)) {
@@ -15,10 +25,25 @@ public class Parser {
         return CommandType.UNKNOWN;
     }
 
+    /**
+     * Returns a boolean indicating if the description is empty or not
+     *
+     * @param arr an array representation of the user's input line
+     * @return if the description given by the user is empty
+     */
     public static boolean isDescriptionEmpty(String[] arr) {
         return arr.length == 1 || arr[1].trim().isEmpty();
     }
 
+    /**
+     * Parses the user's input and returns a command that is recognised and
+     * executable by Sirius. It will also handle unknown commands by throwing a
+     * DukeException
+     *
+     * @param input User's input from the scanner
+     * @return A command that represents the input
+     * @throws DukeException if the input command is not recognised
+     */
     public static Command parse(String input) throws DukeException {
         String[] inputArr = input.split(" ", 2);
         CommandType commandType = getCommandType(inputArr[0]);
