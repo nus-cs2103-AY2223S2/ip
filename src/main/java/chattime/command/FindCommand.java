@@ -1,5 +1,8 @@
 package chattime.command;
 
+import java.util.function.Supplier;
+import java.util.stream.Stream;
+
 import chattime.TaskList;
 import chattime.storage.Storage;
 import chattime.task.Task;
@@ -35,26 +38,23 @@ public class FindCommand extends Command {
             return ui.warnEmptyList();
 
         } else {
-            int i = 1;
-            int total = 0;
-            int pending = 0;
             String message = "I've matched the task(s) with your search keyword for you:";
 
-            for (Task task : taskList.getList()) {
-                if (task.isMatchDescription(keyword)) {
-                    message = message.concat(String.format("\n     %d. %s", i, task));
-                    i++;
-                    total++;
-                    if (!task.getTaskStatus()) {
-                        pending++;
-                    }
-                }
-            }
+            Supplier<Stream<Task>> filteredTask = () -> taskList.getList().stream()
+                    .filter(task -> task.isMatchDescription(keyword));
 
-            message += "Here have " + total + " result(s) with keyword \""
-                    + keyword + "\". Still have" + pending + " task(s) to go.";
+            message += filteredTask.get().map(Task::toString)
+                    .reduce("\n", (prevMsg, task) -> prevMsg + "\n     > " + task);
 
-            if (total == 0) {
+            int pending = (int) filteredTask.get().filter(task -> !task.getTaskStatus()).count();
+            int totalResult = (int) filteredTask.get().count();
+
+            message += "\n\nHere have " + totalResult + " result(s) with keyword \"" + keyword + "\".";
+            message += (pending == 0
+                    ? "\n**Congrats on finishing all the tasks!**"
+                    : "\nStill have " + pending + " task(s) to go. @*@");
+
+            if (totalResult == 0) {
                 message = "Whoo! Seems that you don't have any task related to \"" + keyword + "\" currently.";
             }
 
