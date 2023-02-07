@@ -31,8 +31,8 @@ public class TodoCommand extends Command {
     public String processCommand(TaskList list, Ui ui) {
         Todo task = new Todo(description);
         list.addTask(task);
-        String output = ui.printTodoResponse(task.toString(), list.getSize());
-        return output;
+        return String.format("alright, I've added the following task:\n %s\nNow you have %d tasks in the list."
+                ,task.toString(), list.getSize());
     }
 
 }

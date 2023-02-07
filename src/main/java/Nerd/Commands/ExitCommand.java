@@ -16,6 +16,6 @@ public class ExitCommand extends Command {
      */
     @Override
     public String processCommand(TaskList list, Ui ui) {
-        return ui.printBye();
+        return "See you next time!";
     }
 }

@@ -31,7 +31,6 @@ public class UnmarkCommand extends Command {
     public String processCommand(TaskList list, Ui ui) {
         Task task = list.getTask(index);
         task.setUndone();
-        String output = ui.printUnmarkResponse(task.toString());
-        return output;
+        return String.format("Nice, this task has been marked as done:\n %s", task.toString());
     }
 }

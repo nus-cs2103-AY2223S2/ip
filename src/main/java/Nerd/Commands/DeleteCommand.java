@@ -29,9 +29,9 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String processCommand(TaskList list, Ui ui) {
-        Task task = list.getTask(index);
+        Task t = list.getTask(index);
         list.deleteTask(index);
-        String response = ui.printDeleteResponse(task.toString(), list.getSize());
-        return response;
+        return String.format("ok, this task has been removed:\n %s\nNow you have %d tasks in the list",
+                t.toString(), list.getSize());
     }
 }

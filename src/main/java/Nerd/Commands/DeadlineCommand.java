@@ -15,7 +15,7 @@ public class DeadlineCommand extends Command {
      * Constructor for a deadline command.
      *
      * @param description The description of the task.
-     * @param by          The date of the deadline.
+     * @param by The date of the deadline.
      */
     public DeadlineCommand(String description, String by) {
         this.description = description;
@@ -34,7 +34,7 @@ public class DeadlineCommand extends Command {
     public String processCommand(TaskList list, Ui ui) {
         Deadline deadline = new Deadline(description, by);
         list.addTask(deadline);
-        String response = ui.printDeadlineResponse(deadline.toString(), list.getSize());
-        return response;
+        return String.format("Received, I've added the following deadlines:\n %s\nNow you have %d tasks in the list."
+                , deadline.toString(), list.getSize());
     }
 }

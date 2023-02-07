@@ -31,7 +31,6 @@ public class MarkCommand extends Command {
     public String processCommand(TaskList list, Ui ui) {
         Task task = list.getTask(index);
         task.setDone();
-        String output = ui.printMarkResponse(task.toString());
-        return output;
+        return String.format("Nice, this task has been marked as done:\n %s", task.toString());
     }
 }
