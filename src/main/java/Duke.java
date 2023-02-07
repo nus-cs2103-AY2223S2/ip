@@ -131,7 +131,6 @@ public class Duke extends Application {
      * @return a label with the specified text that has word wrap enabled.
      */
     private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);
 
@@ -151,7 +150,7 @@ public class Duke extends Application {
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
         );
 
-        if (userInput.getText().equals("bye")) {
+        if (parser.checkEnd(userInput.getText())) {
             sendButton.setVisible(false);
             userInput.setDisable(true);
             userInput.setFont(Font.font("Verdana", FontWeight.BOLD, 14));
