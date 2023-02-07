@@ -3,7 +3,7 @@ package duke.command;
 import duke.DukeException;
 import duke.Parser;
 import duke.TaskList;
-import duke.Ui;
+import duke.gui.Ui;
 import duke.Values;
 import duke.task.Event;
 import duke.task.Task;
@@ -13,7 +13,7 @@ import duke.task.Task;
  */
 public class EventCommand extends Command {
     @Override
-    public void execute(Ui ui, TaskList list, String command) throws DukeException {
+    public String execute(Ui ui, TaskList list, String command) throws DukeException {
         String[] parts = command.split(Values.SPACEX);
         int fromIndex = Parser.getIndexOf(parts, "/from");
         int toIndex = Parser.getIndexOf(parts, "/to");
@@ -44,7 +44,7 @@ public class EventCommand extends Command {
 
         Task task = new Event(taskName.toString(), startDate.toString(), endDate.toString());
         list.addTask(task);
-        ui.pixlPrint("Added new event!\n"
+        return ui.pixlPrint("Added new event!\n"
                 + "\t" + task.formatTask()
                 + "\nYou now have " + list.getSize() + " task(s) in the list.");
     }

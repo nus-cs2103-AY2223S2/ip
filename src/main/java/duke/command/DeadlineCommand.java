@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import duke.DukeException;
 import duke.Parser;
 import duke.TaskList;
-import duke.Ui;
+import duke.gui.Ui;
 import duke.Values;
 import duke.task.Deadline;
 import duke.task.Task;
@@ -16,7 +16,7 @@ import duke.task.Task;
 public class DeadlineCommand extends Command {
 
     @Override
-    public void execute(Ui ui, TaskList list, String command) throws DukeException {
+    public String execute(Ui ui, TaskList list, String command) throws DukeException {
         String[] parts = command.split(Values.SPACEX);
         int byIndex = Parser.getIndexOf(parts, "/by");
 
@@ -48,7 +48,7 @@ public class DeadlineCommand extends Command {
 
         Task task = new Deadline(taskName.toString(), localDate);
         list.addTask(task);
-        ui.pixlPrint("Added new deadline!\n"
+        return ui.pixlPrint("Added new deadline!\n"
                 + "\t" + task.formatTask()
                 + "\nYou now have " + list.getSize() + " task(s) in the list.");
     }

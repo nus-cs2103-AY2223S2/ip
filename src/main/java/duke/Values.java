@@ -12,7 +12,7 @@ public final class Values {
             + "                   \\/           \\/             ";
 
     /** String for a horizontal line. */
-    public static final String HLINE = "--------------------";
+    public static final String HLINE = "-------------------------";
 
     // Color support obtained from https://stackoverflow.com/a/45444716
     /** ANSI value for color purple. */
