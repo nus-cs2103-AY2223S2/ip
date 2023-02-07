@@ -76,16 +76,17 @@ public class TaskList extends ArrayList<Task> {
      */
     @Override
     public String toString() {
-        String output = "";
+        StringBuilder sb = new StringBuilder();
         if (!taskList.isEmpty()) {
-            output = "Here are the tasks in your list: \n";
+            sb.append("Here are the tasks in your list: \n");
             int count = 1;
             for (Task t : taskList) {
-                output += count++ + "." + t.toString() + "\n";
+                sb.append(count++);
+                sb.append("." + t.toString() + "\n");
             }
         } else {
-            output = "You have no tasks";
+            sb.append("You have no tasks");
         }
-        return output;
+        return sb.toString();
     }
 }
