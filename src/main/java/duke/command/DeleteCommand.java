@@ -7,7 +7,7 @@ import duke.storage.Storage;
 
 public class DeleteCommand extends Command {
     /**
-     * Handles the appropriate tasks when performing an AddCommand by Duke.
+     * Handles the appropriate tasks when performing an DeleteCommand by Duke.
      */
     private int taskID;
 
