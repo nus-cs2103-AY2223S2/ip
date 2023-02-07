@@ -9,7 +9,7 @@ public class Deadline extends Task {
 
     public Deadline(HashMap<String, String> parsed) throws DukeException {
         super(parsed.get("deadline"));
-        this.by = Parser.parseDate(parsed.get("/by"));
+        this.by = Parser.stringToDate(parsed.get("/by"));
         abbreviation = 'D';
     }
 

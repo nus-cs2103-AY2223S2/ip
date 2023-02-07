@@ -91,7 +91,7 @@ public class Parser {
         return tagParser.apply(chat);
     }
 
-    public static LocalDateTime parseDate(String by) {
+    public static LocalDateTime stringToDate(String by) {
         String[] date = by.split(" ")[0].split("/");
         int day = Integer.valueOf(date[0]);
         int month = Integer.valueOf(date[1]);
