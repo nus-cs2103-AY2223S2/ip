@@ -239,6 +239,7 @@ public class Storage {
     private void writeToFile(String content, boolean append) {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(file, append));
+            assert !content.equals("") : "Storing empty data!";
             writer.write(content);
             writer.close();
 
