@@ -36,6 +36,8 @@ public class Duke {
      * Loads tasks from data file and print success/error message.
      */
     public void loadTasksFromFile() {
+        assert storage != null;
+        assert taskList != null;
         try {
             storage.loadTasks(taskList);
             System.out.println("Successfully loaded from data file");
@@ -50,6 +52,8 @@ public class Duke {
      * Saves tasks to data file and print success/error message.
      */
     public void saveTasksToFile() {
+        assert storage != null;
+        assert taskList != null;
         try {
             storage.saveTasks(taskList);
             System.out.println("Successfully saved data to file");

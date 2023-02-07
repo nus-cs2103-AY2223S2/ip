@@ -39,6 +39,8 @@ public class Storage {
      * @throws IOException If the tasks cannot be saved to file.
      */
     public void saveTasks(TaskList taskList) throws IOException {
+        assert taskList != null;
+
         File dir = new File(directory);
         if (!dir.exists()) {
             dir.mkdirs();
@@ -66,6 +68,8 @@ public class Storage {
      * @throws DukeException If storage file is in the wrong format.
      */
     public void loadTasks(TaskList taskList) throws IOException, DukeException {
+        assert taskList != null;
+
         Scanner fileReader = new Scanner(new File(path));
         while (fileReader.hasNextLine()) {
             String data = fileReader.nextLine();

@@ -37,7 +37,6 @@ public class Parser {
         if (command.length < 2) {
             throw new DukeException("Invalid input");
         }
-
         switch (command[0]) {
         case "todo":
             return new Todo(command[1]);

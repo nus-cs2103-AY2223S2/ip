@@ -32,6 +32,7 @@ public class TaskList {
      * @param t Task to add to the list.
      */
     public void addTask(Task t) {
+        assert t != null;
         tasks.add(t);
     }
 
@@ -108,6 +109,7 @@ public class TaskList {
      * @return task task that is the latest.
      */
     public Task getLatestTask() {
+        assert !tasks.isEmpty();
         return tasks.get(tasks.size() - 1);
     }
 
@@ -118,6 +120,7 @@ public class TaskList {
      * @return tasks task according to the index.
      */
     public Task getTask(int taskNum) {
+        assert !tasks.isEmpty();
         return tasks.get(taskNum);
     }
 
