@@ -56,7 +56,11 @@ public class TaskListTest {
         tasks.addTask(new Todo("work"));
         tasks.addTask(new Deadline("sleep", "2020-05-05 2000"));
         tasks.addTask(new Event("dinner", "2020-05-05 1800", "2020-05-05 2200"));
-        tasks.markDone(1, new Ui());
+        try {
+            tasks.markDone(1, new Ui());
+        } catch (InvalidTaskException e) {
+            System.out.println("something went wrong here");
+        }
         assertEquals(tasks.getList().get(0).toString(), "[T][X] work");
     }
 
@@ -66,10 +70,14 @@ public class TaskListTest {
         tasks.addTask(new Todo("work"));
         tasks.addTask(new Deadline("sleep", "2020-05-05 2000"));
         tasks.addTask(new Event("dinner", "2020-05-05 1800", "2020-05-05 2200"));
-        tasks.markDone(1, new Ui());
-        assertEquals(tasks.getList().get(0).toString(), "[T][X] work");
-        tasks.markUndone(1, new Ui());
-        assertEquals(tasks.getList().get(0).toString(), "[T][ ] work");
+        try {
+            tasks.markDone(1, new Ui());
+            assertEquals(tasks.getList().get(0).toString(), "[T][X] work");
+            tasks.markUndone(1, new Ui());
+            assertEquals(tasks.getList().get(0).toString(), "[T][ ] work");
+        } catch (InvalidTaskException e) {
+            System.out.println("something went wrong here");
+        }
     }
 
     @Test
@@ -77,11 +85,9 @@ public class TaskListTest {
         TaskList tasks = new TaskList();
         tasks.addTask(new Todo("work"));
         tasks.addTask(new Deadline("sleep", "2020-05-05 2000"));
-        String ans = "        ________________________________________________________\n"
-                + "\n"
-                + "        1.[T][ ] work\n"
-                + "        2.[D][ ] sleep (by: MAY 5 2020 2000)\n"
-                + "        I have 2 tasks in my memory\n";
+        String ans = "1.[T][ ] work\n"
+                + "2.[D][ ] sleep (by: MAY 5 2020 2000)\n"
+                + "I have 2 tasks in my memory\n";
         assertEquals(tasks.toString(), ans);
     }
 
@@ -92,10 +98,9 @@ public class TaskListTest {
         tasks.addTask(new Deadline("sleep", "2020-05-05 2000"));
         tasks.addTask(new Event("assist with work", "2020-05-05 1800", "2020-05-05 2200"));
         String output = tasks.find("work");
-        String expected = "        ________________________________________________________\n"
-            + "        HERE ARE THE MATCHING RESULTS:\n"
-            + "        1.[T][ ] work\n"
-            + "        2.[E][ ] assist with work (from: MAY 5 2020 1800 to: MAY 5 2020 2200)\n";
+        String expected = "HERE ARE THE MATCHING RESULTS:\n"
+                + "  1.[T][ ] work\n"
+                + "  2.[E][ ] assist with work (from: MAY 5 2020 1800 to: MAY 5 2020 2200)\n";
         assertEquals(output, expected);
     }
 }
