@@ -25,14 +25,9 @@ public class FxUi {
     }
 
     /**
-     * This method does not display anything on the GUI.
-     */
-    public void displayEmptyLine() { /* Don't show line on GUI */ }
-
-    /**
      * Displays startup text on the GUI.
      */
     public void displayIntro() {
-        mainWindow.displayReply("Welcome to MEL!!!");
+        mainWindow.displayReply("Welcome to MEL!!! Type 'help' to get help");
     }
 }

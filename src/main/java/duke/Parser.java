@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
  * Parses user input into usable terms for duke.Duke.
  */
 public class Parser {
+    static final String BLANK_ERROR_MSG = "BLANK-ERROR-69";
     /**
      * Constructor for Parser class.
      */
@@ -29,7 +30,11 @@ public class Parser {
      * @return Description of task as String.
      */
     public String getDescription(String input) {
-        return input.split(" ")[1];
+        try {
+            return input.split(" ")[1];
+        } catch (Exception e) {
+            return BLANK_ERROR_MSG;
+        }
     }
 
     /**
