@@ -12,6 +12,8 @@ import javafx.scene.layout.HBox;
  * An object to show a dialog box
  */
 public class DialogBox extends HBox {
+    private static double WIDTH = 100.0;
+    private static double HEIGHT = 100.0;
 
     private Label text;
     private ImageView displayPicture;
@@ -26,8 +28,8 @@ public class DialogBox extends HBox {
         displayPicture = iv;
 
         text.setWrapText(true);
-        displayPicture.setFitWidth(100.0);
-        displayPicture.setFitHeight(100.0);
+        displayPicture.setFitWidth(WIDTH);
+        displayPicture.setFitHeight(HEIGHT);
 
         this.setAlignment(Pos.TOP_RIGHT);
         this.getChildren().addAll(text, displayPicture);

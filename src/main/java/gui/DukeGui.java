@@ -21,13 +21,15 @@ import java.util.Objects;
  * The class that starts the GUI application and interacts with the user.
  */
 public class DukeGui extends Application {
+    private static String SEND_BUTTON_TEXT = "Send";
+    private static String STAGE_TITLE = "Duke";
+
     private final Image userImage = new Image(Objects.requireNonNull(
             this.getClass().getResourceAsStream("/images/DaUser.png")));
     private final Image dukeImage = new Image(Objects.requireNonNull(
             this.getClass().getResourceAsStream("/images/DaDuke.png")));
     private TextField userInput;
     private VBox dialogContainer;
-    private String name = "Duke";
     private Duke duke = new Duke();
 
     /**
@@ -47,14 +49,14 @@ public class DukeGui extends Application {
         TextField userInput = new TextField();
         this.userInput = userInput;
 
-        Button sendButton = new Button("Send");
+        Button sendButton = new Button(SEND_BUTTON_TEXT);
 
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
         Scene scene = new Scene(mainLayout);
 
-        stage.setTitle("Duke");
+        stage.setTitle(STAGE_TITLE);
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);

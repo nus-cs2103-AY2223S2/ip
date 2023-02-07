@@ -9,13 +9,15 @@ import task.TaskList;
  * A command for finding a class
  */
 public class FindCommand extends TaskCommand {
+    private static int NUM_COMPONENTS = 2;
+
     /**
      * Default constructor
      * @param command the user-input command
      * @param doesPrint whether to print messaegs
      */
     public FindCommand(String command, boolean doesPrint) throws DukeException {
-        super(command, doesPrint, 2);
+        super(command, doesPrint, NUM_COMPONENTS);
     }
 
     /**
@@ -26,8 +28,7 @@ public class FindCommand extends TaskCommand {
      */
     @Override
     public String execute(TaskList taskList) throws DukeException {
-        String[] stringsToSearch = getCommandContent(command).split(" ");
-
+        String[] stringsToSearch = getCommandContent(command).split(STRING_SPACE);
         String taskListString = "Here are the matching tasks in your list:\n"
                 + taskList
                 .getTaskNameContains(stringsToSearch)

@@ -11,6 +11,7 @@ import task.TaskList;
  * Mark a task as done
  */
 public class MarkCommand extends Command {
+    private static int NUM_COMPONENTS = 2;
 
     /**
      * Default constructor, saves the command
@@ -18,7 +19,7 @@ public class MarkCommand extends Command {
      * @param command the user-input command
      */
     public MarkCommand(String command, boolean doesPrint) throws DukeException {
-        super(command, doesPrint, 2);
+        super(command, doesPrint, NUM_COMPONENTS);
     }
 
     /**

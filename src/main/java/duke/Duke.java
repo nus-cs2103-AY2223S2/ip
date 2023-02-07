@@ -15,22 +15,20 @@ import ui.TextUi;
  * to users.
  */
 public class Duke {
-    protected final TextUi ui;
-    protected final TaskList taskList;
-    protected final String myName;
-    protected final ArrayList<String> commandList;
+    protected final String NAME = "Duke";
     protected final String RECORD_DIR = "./data";
     protected final String RECORD_NAME = "/duke.txt";
+    protected final TextUi ui;
+    protected final TaskList taskList;
+    protected final ArrayList<String> commandList;
     protected final Storage storage;
     protected boolean hasExited;
-
 
     /**
      * Constructor
      */
     public Duke() {
-        this.myName = "Duke";
-        this.ui = new TextUi(myName);
+        this.ui = new TextUi(NAME);
         this.taskList = new TaskList();
         this.storage = new Storage(RECORD_DIR, RECORD_NAME);
         this.commandList = new ArrayList<>();
@@ -104,7 +102,7 @@ public class Duke {
      * @return the name
      */
     public String getName() {
-        return myName;
+        return NAME;
     }
 
     /**
@@ -169,6 +167,6 @@ public class Duke {
      * @return welcome message
      */
     public String getWelcomeMessage() {
-        return String.format("Hello! I'm %s\nWhat can I do for you?", myName);
+        return String.format("Hello! I'm %s\nWhat can I do for you?", NAME);
     }
 }
