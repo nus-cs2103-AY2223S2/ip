@@ -8,13 +8,8 @@ import aqua.usertask.UserDeadline;
 import aqua.util.DateUtils;
 
 
-/** An {@code AddTaskCommand} to add {@code AquaDeadline}. */
+/** An {@code AddTaskCommand} to add {@code UserDeadline}. */
 public class AddDeadlineCommand extends AddTaskCommand {
-    /**
-     * {@inheritDoc}
-     * <p>
-     * Specifically, an {@code AquaDeadline}.
-     */
     @Override
     public UserDeadline createTask(ArgumentMap args) throws SyntaxException {
         // get name
@@ -22,18 +17,17 @@ public class AddDeadlineCommand extends AddTaskCommand {
                 .filter(n -> !n.isBlank())
                 .orElseThrow(() -> new SyntaxException("Name disappeared!"));
 
-        // get by date
-        String byString = args.get("by")
+        // get due time
+        String dueString = args.get(UserDeadline.TAG_DUE_TIME)
                 .orElseThrow(() -> new SyntaxException("[by] disappeared!"));
-        LocalDateTime by = DateUtils.parse(byString);
+        LocalDateTime dueTime = DateUtils.parse(dueString);
 
         // get is complete
         boolean isCompleted = args.get(UserDeadline.TAG_IS_COMPLETE)
                 .map(isComp -> Boolean.parseBoolean(isComp))
                 .orElse(false);
 
-        // return formed deadline
-        return new UserDeadline(name, isCompleted, by);
+        return new UserDeadline(name, isCompleted, dueTime);
     }
 
 

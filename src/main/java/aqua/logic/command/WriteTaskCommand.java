@@ -12,7 +12,7 @@ import aqua.manager.LogicManager;
 import aqua.util.Kaomoji;
 
 
-/** A {@code CommandController} to save {@code AquaTask} state. */
+/** A {@code CommandController} to save {@code UserTask} state. */
 public class WriteTaskCommand extends CommandController {
     @Override
     public ExecutionService getService(ArgumentMap args, LogicManager manager) {

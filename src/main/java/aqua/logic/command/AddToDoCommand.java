@@ -5,13 +5,8 @@ import aqua.logic.ArgumentMap;
 import aqua.usertask.UserTodo;
 
 
-/** An {@code AddTaskCommand} to add {@code AquaToDo}. */
-public class AddToDoCommand extends AddTaskCommand {
-    /**
-     * {@inheritDoc}
-     * <p>
-     * Specifically, an {@code AquaToDo}.
-     */
+/** An {@code AddTaskCommand} to add {@code UserTodo}. */
+public class AddTodoCommand extends AddTaskCommand {
     @Override
     public UserTodo createTask(ArgumentMap args) throws SyntaxException {
         // get name
@@ -24,7 +19,6 @@ public class AddToDoCommand extends AddTaskCommand {
                     .map(isComp -> Boolean.parseBoolean(isComp))
                     .orElse(false);
 
-        // return formed todo task
         return new UserTodo(name, isComplete);
     }
 

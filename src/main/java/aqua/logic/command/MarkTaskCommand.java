@@ -11,15 +11,14 @@ import aqua.manager.LogicManager;
 import aqua.usertask.UserTask;
 import aqua.util.Kaomoji;
 
-/** A {@code CommandController} to mark {@code AquaTask} as complete. */
+/** A {@code CommandController} to mark {@code UserTask} as complete. */
 public class MarkTaskCommand extends CommandController {
     /** Value to pass {@link UserTask#mark(boolean)} when marking a task. */
     private boolean isCompletedMarker;
 
 
     /**
-     * Constructs a MarkTaskCommand that will produce executor dispatchers that
-     * will mark tasks as specified.
+     * Constructs a {@code MarkTaskCommand}.
      *
      * @param isCompleteMarker - {@code true} to mark task as complete and
      *      {@code false} as incomplete.
@@ -60,14 +59,11 @@ public class MarkTaskCommand extends CommandController {
     private UserTask markTask(ArgumentMap args, LogicManager manager)
                 throws SyntaxException, ProcedureException {
         try {
-            // get index String
+            // get task index
             String indexString = args.getMainInput().filter(num -> !num.isBlank())
                     .orElseThrow(() -> new SyntaxException("Task number disappered!"));
-
-            // parse index String (minus 1 as user enters 1 based index)
             int index = Integer.parseInt(indexString) - 1;
 
-            // mark and return marked task
             return manager.getTaskManager().mark(index, isCompletedMarker);
         } catch (NumberFormatException numEx) {
             throw new SyntaxException("Task number given was not an integer");

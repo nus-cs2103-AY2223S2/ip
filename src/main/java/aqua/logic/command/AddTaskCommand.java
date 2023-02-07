@@ -11,7 +11,7 @@ import aqua.usertask.UserTask;
 import aqua.util.Kaomoji;
 
 
-/** A {@code CommandController} to add {@code AquaTask}. */
+/** A {@code CommandController} to add {@code UserTask}. */
 public abstract class AddTaskCommand extends CommandController {
     /**
      * Creates an {@code AquaTask} from the given argument map.
@@ -20,7 +20,7 @@ public abstract class AddTaskCommand extends CommandController {
      * @return the task created from the given arguments.
      * @throws SyntaxException if the arguments are of invalid syntax.
      */
-    public abstract UserTask createTask(ArgumentMap args) throws SyntaxException;
+    protected abstract UserTask createTask(ArgumentMap args) throws SyntaxException;
 
 
     @Override

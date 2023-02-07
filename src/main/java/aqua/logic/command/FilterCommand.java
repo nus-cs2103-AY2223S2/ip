@@ -11,7 +11,7 @@ import aqua.manager.IoManager;
 import aqua.manager.LogicManager;
 import aqua.usertask.UserTask;
 
-/** A {@code CommandController} to filter {@code AquaTask}. */
+/** A {@code CommandController} to filter {@code UserTask}. */
 public class FilterCommand extends CommandController {
     @Override
     public ExecutionService getService(ArgumentMap args, LogicManager manager) {

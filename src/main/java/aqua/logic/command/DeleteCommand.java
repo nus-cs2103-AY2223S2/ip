@@ -11,9 +11,7 @@ import aqua.manager.LogicManager;
 import aqua.usertask.UserTask;
 
 
-/**
- * An implementation of CommandController to delete an AquaTask.
- */
+/** A {@code CommandController} to delete {@code UserTask}. */
 public class DeleteCommand extends CommandController {
     @Override
     public ExecutionService getService(ArgumentMap args, LogicManager manager) {
@@ -43,14 +41,11 @@ public class DeleteCommand extends CommandController {
     private UserTask deleteTask(ArgumentMap args, LogicManager manager)
                 throws SyntaxException, ProcedureException {
         try {
-            // get task index string
+            // get task index
             String indexString = args.getMainInput().filter(num -> !num.isBlank())
                     .orElseThrow(() -> new SyntaxException("Task number disappered!"));
-
-            // parse index string
             int index = Integer.parseInt(indexString) - 1;
 
-            // delete and return deleted task
             return manager.getTaskManager().delete(index);
         } catch (NumberFormatException numEx) {
             throw new SyntaxException("Task number given was not an integer");
