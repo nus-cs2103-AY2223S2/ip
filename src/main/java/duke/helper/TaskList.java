@@ -1,6 +1,10 @@
 package duke.helper;
 
+import duke.task.Deadline;
+import duke.task.Event;
 import duke.task.Task;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -71,5 +75,31 @@ public class TaskList {
             }
         }
         return "Here are your matched tasks nya!\n" + output;
+    }
+
+    public String getReminders() {
+        String output = "";
+        int count = 0;
+        for (int i = 0; i < tasks.size(); i++) {
+            Task currTask = tasks.get(i);
+            if (currTask instanceof Deadline) {
+                LocalDate by = ((Deadline) currTask).getBy();
+                LocalDate now = LocalDate.now();
+                LocalDate sevenDaysAfter = LocalDate.now().plusDays(7);
+                if (now.isBefore(by) && by.isBefore(sevenDaysAfter)) {
+                    output += " " + (count + 1) + ". " + currTask + "\n";
+                    count++;
+                }
+            } else if (currTask instanceof Event) {
+                LocalDate startTime = ((Event) currTask).getStartTime();
+                LocalDate now = LocalDate.now();
+                LocalDate sevenDaysAfter = LocalDate.now().plusDays(7);
+                if (now.isBefore(startTime) && startTime.isBefore(sevenDaysAfter)) {
+                    output += " " + (count + 1) + ". " + currTask + "\n";
+                    count++;
+                }
+            }
+        }
+        return "Reminder: Here are your the tasks due within 1 week nya!\n" + output;
     }
 }
