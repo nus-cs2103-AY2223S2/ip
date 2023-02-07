@@ -36,11 +36,12 @@ public class DeleteCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, UI ui, Storage storage) throws RedException {
+        boolean isTaskListEmpty = tasks.getTaskListSize() < 1;
+        boolean isIndexOutOfRange = tasks.getTaskListSize() < this.taskIndex;
 
-        if (tasks.getTaskListSize() < 1) {
+        if (isTaskListEmpty) {
             throw new RedException("There are no tasks to be removed");
-        }
-        if (tasks.getTaskListSize() < this.taskIndex) {
+        } else if (isIndexOutOfRange) {
             throw new RedException("The task with the specified index does not exist");
         } else {
             Task deletedTask = tasks.deleteTask(this.taskIndex);

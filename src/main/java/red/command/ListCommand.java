@@ -21,7 +21,8 @@ public class ListCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, UI ui, Storage storage) {
-        if (tasks.getTaskListSize() == 0) {
+        boolean isTaskListEmpty = tasks.getTaskListSize() == 0;
+        if (isTaskListEmpty) {
             System.out.println("There are no tasks in your list.");
             return;
         }

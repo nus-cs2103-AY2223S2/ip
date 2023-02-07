@@ -36,8 +36,8 @@ public class DeadlineTask extends Task {
 
         } else if(altDateStr.length == 3) {
             LocalDate temp = LocalDate.parse(date);
-            LocalTime temptime = LocalTime.of(Integer.valueOf(time.substring(0,2)), Integer.valueOf(time.substring(2)));
-            this.dateTime = LocalDateTime.of(temp,temptime);
+            LocalTime tempTime = LocalTime.of(Integer.valueOf(time.substring(0,2)), Integer.valueOf(time.substring(2)));
+            this.dateTime = LocalDateTime.of(temp,tempTime);
 
         }
     }

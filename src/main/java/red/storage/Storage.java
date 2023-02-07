@@ -95,8 +95,8 @@ public class Storage {
                 if(Character.compare(str.charAt(4),todo) == 0) {
                     String[] arrOfStr= str.split("] ", 2);
                     ToDoTask currentTask = new ToDoTask(arrOfStr[1]);
-                    Command CurrentCommand = new AddCommand(currentTask);
-                    CurrentCommand.execute(this.tasks,this.ui,this);
+                    Command currentCommand = new AddCommand(currentTask);
+                    currentCommand.execute(this.tasks,this.ui,this);
                     
                 } else if(Character.compare(str.charAt(4),event) == 0) {
                     String[] arrOfStr= str.split("] ", 2);
@@ -104,8 +104,8 @@ public class Storage {
                     String[] arrOfStrStrStr= arrOfStrStr[1].split("To: ", 2);
                     String[] arrOfStrStrStrStr= arrOfStrStrStr[1].split("\\)", 2);
                     EventTask currentTask = new EventTask(arrOfStrStr[0],arrOfStrStrStr[0],arrOfStrStrStrStr[0]);
-                    Command CurrentCommand = new AddCommand(currentTask);
-                    CurrentCommand.execute(this.tasks,this.ui,this);
+                    Command currentCommand = new AddCommand(currentTask);
+                    currentCommand.execute(this.tasks,this.ui,this);
 
 
                 } else if(Character.compare(str.charAt(4),deadline) == 0) {
@@ -123,8 +123,8 @@ public class Storage {
                         currentTask = new DeadlineTask(arrOfStrStr[0], dateTime);
                     }
 
-                    Command CurrentCommand = new AddCommand(currentTask);
-                    CurrentCommand.execute(this.tasks,this.ui,this);
+                    Command currentCommand = new AddCommand(currentTask);
+                    currentCommand.execute(this.tasks,this.ui,this);
 
                 }
             }
