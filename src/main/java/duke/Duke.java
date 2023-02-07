@@ -3,6 +3,8 @@ package duke;
 import duke.command.Command;
 import duke.exceptions.EmptyCommandException;
 import duke.exceptions.IncorrectFileFormatException;
+import duke.exceptions.InvalidArgumentException;
+import duke.exceptions.InvalidCommandException;
 
 import java.io.FileNotFoundException;
 
@@ -13,6 +15,12 @@ public class Duke { // a guy who receives user input, and gives duke reply
     private Ui ui;
     private String welcomeMsg;
 
+    /**
+     * Duke Constructor. Sets up Duke, by creating Ui, Storage instance,
+     * and loading stored tasks into TaskList.
+     * Catches Exceptions and only exposes error message to GUI.
+     *
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -28,10 +36,22 @@ public class Duke { // a guy who receives user input, and gives duke reply
         }
     }
 
+    /**
+     * Getter method for Welcome Message.
+     *
+     * @return Duke's Welcome Message, inclusive of error message if exception is thrown
+     */
     public String getWelcomeMsg() {
         return welcomeMsg;
     }
 
+    /**
+     * Returns Duke's reply to be displayed by Gui after sending user's message for processing.
+     *
+     * @param fullCommand String version of the command, user's input message
+     * @return Duke's reply
+     * @throws EmptyCommandException If param fullCommand is empty.
+     */
     public String process(String fullCommand) throws EmptyCommandException{
         try {
             Command c = Parser.parse(fullCommand);

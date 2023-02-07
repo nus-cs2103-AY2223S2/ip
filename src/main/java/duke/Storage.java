@@ -16,7 +16,7 @@ import java.util.Scanner;
 public class Storage {
 
     private String filePath;
-    private File f;
+    private File file;
 
     /**
      * Constructor which creates a Storage instance.
@@ -26,9 +26,9 @@ public class Storage {
      */
     public Storage(String filePath) {
         this.filePath = filePath;
-        f = new File(filePath);
+        file = new File(filePath);
         try {
-            f.createNewFile(); //no need for f.exists() chk
+            file.createNewFile(); //no need for f.exists() chk
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -42,7 +42,7 @@ public class Storage {
      * @throws FileNotFoundException  If File is not found by Scanner.
      */
     public TaskList load() throws FileNotFoundException, IncorrectFileFormatException {
-        Scanner s = new Scanner(f);
+        Scanner s = new Scanner(file);
         TaskList l = new TaskList();
 
         while (s.hasNext()) {
