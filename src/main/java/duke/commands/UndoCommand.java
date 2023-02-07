@@ -14,7 +14,9 @@ public class UndoCommand extends Command {
     }
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Storage store = new Storage(this.filePath);
+
         tasks.replace(store.loadFile(this.index));
+        store.deleteBefore(this.index);
         return "Okay, I have undone what you did by " + index + " step.";
     }
 

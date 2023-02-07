@@ -29,9 +29,10 @@ public class Storage {
     }
 
     /**
-     * Reads and loads the latest task list data from data.txt.
+     * Reads and loads a task list data from data.txt, given its index.
      * Each line is read and a corresponding task is created.
      * From there, a new task list is constructed.
+     * @param index The index of the file to load.
      * @return A list of tasks.
      * @throws FileNotFoundException If file is not found.
      */
@@ -50,7 +51,6 @@ public class Storage {
                     index--;
                 }
             }
-
             nextLine = "";
             while (!nextLine.equals(DELIMITER)) {
                 nextLine = s.nextLine();
@@ -59,7 +59,6 @@ public class Storage {
                 }
                 System.out.println(nextLine);
                 String[] inputs = nextLine.split(" \\| ");
-
                 boolean isDone = inputs[1].equals("1") ? true : false;
                 switch(inputs[0]) {
                 case "T":
@@ -77,7 +76,6 @@ public class Storage {
                 }
 
             }
-
         } catch (FileNotFoundException err) {
             String[] folders = this.filePath.split("/");
 
@@ -92,7 +90,7 @@ public class Storage {
             taskList = new ArrayList<Task>();
 
         } catch (Exception err) {
-            System.out.println(err.getMessage());
+
             throw new LoadException();
         }
 
@@ -104,33 +102,60 @@ public class Storage {
      * Each task in a task list is converted into a readable format.
      * The task list is then dumped into the file.
      * @param tasks A list of tasks to be dumped.
-     * @throws IOException If an error is encountered while accessing information.
+     * @throws DukeException If an error is encountered while accessing information.
      */
-    public void dumpFile(TaskList tasks) throws Exception {
+    public void dumpFile(TaskList tasks) throws DukeException {
 
-        Stream<String> log = readAll();
+        try {
+            Stream<String> log = readAll(0);
 
-        FileWriter fw = new FileWriter(this.filePath);
-        String text = tasks.getStorer()
-                .stream()
-                .map(t -> t.formatText() + "\n")
-                .reduce("", (x, y) -> x + y)
-                + String.format("%s\n", DELIMITER);
+            FileWriter fw = new FileWriter(this.filePath);
+            String text = tasks.getStorer()
+                    .stream()
+                    .map(t -> t.formatText() + "\n")
+                    .reduce("", (x, y) -> x + y)
+                    + String.format("%s\n", DELIMITER);
 
-        fw.write(text);
-        fw.close();
+            fw.write(text);
+            fw.close();
 
-        writeAll(log);
+            writeAll(log);
+        } catch (Exception err) {
+            throw new LoadException();
+        }
+
     }
 
-    private Stream<String> readAll() throws FileNotFoundException {
+    public void deleteBefore(int index) throws DukeException {
+        try {
+            Stream<String> tasks = readAll(index);
+            writeAll(tasks, false);
+
+        } catch (Exception err) {
+            throw new LoadException();
+        }
+
+    }
+
+    /**
+     * Reads all tasks in text form after the appropriate index.
+     * @param index An index after which all tasks will be read.
+     * @return A stream of strings.
+     * @throws FileNotFoundException If the file is not found.
+     */
+    private Stream<String> readAll(int index) throws FileNotFoundException {
         Scanner sc = new Scanner(new File(this.filePath));
         ArrayList<String> arr = new ArrayList<>();
         int delimiterCount = DELIMITER_COUNT;
+        int count = 0;
+
         while (sc.hasNextLine() && delimiterCount > 0) {
             String line = sc.nextLine();
-            arr.add(line);
+            if (count >= index) {
+                arr.add(line);
+            }
             if (line.equals(DELIMITER)) {
+                count++;
                 delimiterCount--;
             }
 
@@ -138,9 +163,11 @@ public class Storage {
         return arr.stream();
     }
 
-    private void writeAll(Stream<String> log) throws IOException {
 
-        FileWriter fwriter = new FileWriter(this.filePath, true);
+
+    private void writeAll(Stream<String> log, boolean append) throws IOException {
+
+        FileWriter fwriter = new FileWriter(this.filePath, append);
         log.forEach(x -> {
             try {
                 fwriter.write(x + "\n");
@@ -149,6 +176,11 @@ public class Storage {
             }
         });
         fwriter.close();
+    }
+
+    private void writeAll(Stream<String> log) throws IOException {
+
+        writeAll(log, true);
     }
 
 }

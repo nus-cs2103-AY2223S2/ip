@@ -22,7 +22,6 @@ public class Parser {
     private final String filePath;
     public Parser(String filePath) {
         this.filePath = filePath;
-
     }
 
     public String readCommand(String[] readLine) {
@@ -111,6 +110,9 @@ public class Parser {
                 throw new NoArgsException("undo command");
             }
             int index = this.singleQueryInteger(line);
+            if (index < 0) {
+                throw new InvalidException();
+            }
             c = new UndoCommand(index, this.filePath);
             break;
 
