@@ -3,8 +3,6 @@ package duke;
 import duke.command.Command;
 import duke.exceptions.EmptyCommandException;
 import duke.exceptions.IncorrectFileFormatException;
-import duke.exceptions.InvalidArgumentException;
-import duke.exceptions.InvalidCommandException;
 
 import java.io.FileNotFoundException;
 
