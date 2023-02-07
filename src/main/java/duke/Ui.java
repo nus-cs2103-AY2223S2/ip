@@ -14,13 +14,6 @@ public class Ui {
     }
 
     /**
-     * Print closing statement.
-     */
-    public static void close() {
-        System.out.println("Bye! Hope to see you again <3!");
-    }
-
-    /**
      * Show invallid Command.
      */
     public static String invalidCommand() {
@@ -36,31 +29,31 @@ public class Ui {
 
     /**
      * List out task content.
-     * @param tasks
+     * @param tasks ArrayList of Task to be iterated
      */
     public static String list(ArrayList<Task> tasks) {
         String result = "Here are the tasks in your list:\n";
         for (int i = 0; i < tasks.size(); i++) {
-            result += String.format("%d.%s%n", i + 1, tasks.get(i));
+            result = result.concat(String.format("%d.%s%n", i + 1, tasks.get(i)));
         }
         return result;
     }
     /**
      * Show found tasks
-     * @param tasks
+     * @param tasks ArrayList of Task to be iterated
      */
     public static String find(ArrayList<Task> tasks) {
         String result = "Here are the matching tasks in your list:\n";
         for (int i = 0; i < tasks.size(); i++) {
-            String.format("%d.%s%n", i + 1, tasks.get(i));
+            result = result.concat(String.format("%d.%s%n", i + 1, tasks.get(i)));
         }
         return result;
     }
 
     /**
      * Show marked task.
-     * @param isMark
-     * @param task
+     * @param isMark to mark done or undone
+     * @param task task to be marked
      */
     public static String mark(boolean isMark, Task task) {
         String result = "";
@@ -88,8 +81,8 @@ public class Ui {
 
     /**
      * Show added Task.
-     * @param type
-     * @param task
+     * @param type type of task
+     * @param task task to be added
      */
     public static String addTask(String type, Task task) {
         String result = String.format("Got it I've added a %s%n", type);
@@ -98,12 +91,12 @@ public class Ui {
 
     /**
      * Show missing args.
-     * @param option
+     * @param option option to be shown
      */
     public static String missingOptions(String option) {
         return String.format(
                 "ensure %s option(s) and %s option's argument exist (in that order if command has multiple option(s))%n",
-                option);
+                option, option);
     }
 
     /**
@@ -115,7 +108,7 @@ public class Ui {
 
     /**
      * Show deleted task.
-     * @param task
+     * @param task task to be deleted
      */
     public static String delete(Task task) {
         String result = "I have removed this task\n";

@@ -11,10 +11,10 @@ public class Parser {
     /**
      * Get input string, parses it and run corresponding functions.
      * some corresponding function modifies TaskList object
-     * @param input
-     * @param tasks
-     * @throws IllegalArgumentException
-     * @throws IndexOutOfBoundsException
+     * @param input raw input from user
+     * @param tasks TaskList object
+     * @throws IllegalArgumentException command is not in enums
+     * @throws IndexOutOfBoundsException commands missing corresponding tokens
      */
     public static String parseRawString(String input, TaskList tasks) throws IllegalArgumentException,
             IndexOutOfBoundsException {
@@ -43,7 +43,7 @@ public class Parser {
     }
     /**
      * Pass ArrayList of Task to UI.
-     * @param tasks
+     * @param tasks TaskList Object
      */
     private static String list(TaskList tasks) {
         return Ui.list(tasks.get());
@@ -51,24 +51,23 @@ public class Parser {
 
     /**
      * Find task containing search string.
-     * @param tasks
-     * @param searchString
+     * @param tasks TaskList object
+     * @param searchString string to find task
      */
     private static String find(TaskList tasks, String searchString) {
         List<Task> listTask = tasks
                 .get()
                 .stream()
-                .filter(task -> task.toString()
-                .contains(searchString))
+                .filter(task -> task.toString().contains(searchString))
                 .collect(Collectors.toList());
-        return Ui.find(new ArrayList<Task>(listTask));
+        return Ui.find(new ArrayList<>(listTask));
     }
 
     /**
      * Mark or unmark a task based on input.
-     * @param isMark
-     * @param tasks
-     * @param numString
+     * @param isMark to mark or unmark
+     * @param tasks TaskList object
+     * @param numString task number
      */
     private static String mark(boolean isMark, TaskList tasks, String numString) {
         try {
@@ -84,8 +83,8 @@ public class Parser {
     }
     /**
      * Adds a todo.
-     * @param tasks
-     * @param nameString
+     * @param tasks TaskList object
+     * @param nameString name of todo
      */
     private static String addTodo(TaskList tasks, String nameString) {
         Todo task = new Todo(nameString);
@@ -95,8 +94,8 @@ public class Parser {
 
     /**
      * Adds a deadline.
-     * @param tasks
-     * @param paramString
+     * @param tasks TaskList object
+     * @param paramString by option
      */
     private static String addDeadline(TaskList tasks, String paramString) {
         try {
@@ -115,8 +114,8 @@ public class Parser {
 
     /**
      * Adds an event.
-     * @param tasks
-     * @param paramString
+     * @param tasks TaskList object
+     * @param paramString to and from option
      */
     private static String addEvent(TaskList tasks, String paramString) {
         try {
@@ -138,8 +137,8 @@ public class Parser {
 
     /**
      * Deletes a task.
-     * @param tasks
-     * @param numString
+     * @param tasks TaskList object
+     * @param numString task number to delete
      */
     private static String delete(TaskList tasks, String numString) {
         try {
@@ -155,9 +154,9 @@ public class Parser {
 
     /**
      * Parses dateString to a given format.
-     * @param dateString
+     * @param dateString date in String format to be parsed
      * @return parsed LocalDate object from given string
-     * @throws DateTimeParseException
+     * @throws DateTimeParseException date string wrong format
      */
     private static LocalDate parseDate(String dateString) throws DateTimeParseException {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");

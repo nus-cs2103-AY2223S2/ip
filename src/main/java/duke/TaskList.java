@@ -17,10 +17,10 @@ public class TaskList {
     /**
      * Mark a task done or undone by 0th based index.
      * after marking, make a save to "save" file
-     * @param isMark
-     * @param index
+     * @param isMark to mark or unmark
+     * @param index index of task
      * @return the Task object that is marked
-     * @throws IndexOutOfBoundsException
+     * @throws IndexOutOfBoundsException index of marked task does not exist
      */
     public Task mark(boolean isMark, int index) throws IndexOutOfBoundsException {
         Task task = tasks.get(index);
@@ -31,7 +31,7 @@ public class TaskList {
 
     /**
      * Add Task object.
-     * @param task
+     * @param task task to be added
      */
     public void add(Task task) {
         tasks.add(task);
@@ -40,9 +40,9 @@ public class TaskList {
 
     /**
      * Delete Task object.
-     * @param index
+     * @param index index of task to be deleted
      * @return deleted task object
-     * @throws IndexOutOfBoundsException
+     * @throws IndexOutOfBoundsException deleted task number does not exist
      */
     public Task delete(int index) throws IndexOutOfBoundsException {
         Task task = tasks.remove(index);
