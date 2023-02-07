@@ -67,6 +67,7 @@ public abstract class Task {
      * @return String of the taskName.
      */
     public String getTaskName() {
+        assert (!this.taskName.equals(""));
         return this.taskName;
     }
 
@@ -118,6 +119,7 @@ public abstract class Task {
      * @return String that represents the Task instance in the memory.
      */
     public String dataFormat() {
+        assert (!this.taskName.equals(""));
         return this.isDone + "|" + this.taskName;
     }
 

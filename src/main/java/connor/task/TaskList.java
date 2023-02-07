@@ -65,8 +65,13 @@ public class TaskList {
      * @param number the task to be marked done (list starts at 1).
      * @param ui prints the message.
      * @return String that indicates a task is marked done.
+     * @throws InvalidTaskException if the specified number is invalid.
      */
-    public String markDone(int number, Ui ui) {
+    public String markDone(int number, Ui ui) throws InvalidTaskException {
+        if (number > this.tasks.size()) {
+            throw new InvalidTaskException();
+        }
+        assert(number - 1 < this.tasks.size());
         this.tasks.get(number - 1).mark();
         return ui.markDoneMessage(this.tasks.get(number - 1).toString());
     }
@@ -77,8 +82,13 @@ public class TaskList {
      * @param number the task to be marked undone (list starts at 1).
      * @param ui prints the message.
      * @return String that indicates a task is marked undone.
+     * @throws InvalidTaskException if the specified number is invalid.
      */
-    public String markUndone(int number, Ui ui) {
+    public String markUndone(int number, Ui ui) throws InvalidTaskException {
+        if (number > this.tasks.size()) {
+            throw new InvalidTaskException();
+        }
+        assert(number - 1 < this.tasks.size());
         this.tasks.get(number - 1).unmark();
         return ui.markUndoneMessage(this.tasks.get(number - 1).toString());
     }
