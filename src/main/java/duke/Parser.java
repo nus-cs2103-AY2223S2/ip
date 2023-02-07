@@ -1,5 +1,9 @@
 package duke;
 
+import javafx.application.Platform;
+
+import java.io.IOException;
+
 public class Parser {
 
     private static int TASK_TYPE_INDEX = 0;
@@ -84,5 +88,53 @@ public class Parser {
     public static String getSearchWord(String line) {
         String searchWord = line.substring(TO_REMOVE_LEADING_FOUR_LETTERS);
         return searchWord;
+    }
+
+    public static String handleInput(String command, Ui ui, TaskList tasks, Storage storage) throws DukeException,
+            IOException, IndexOutOfBoundsException {
+        String typeOfCommand = command.split(" ")[0];
+        switch (typeOfCommand) {
+        case "bye":
+            Platform.exit();
+        case "list":
+            return ui.showTaskList(tasks);
+        case "mark":
+            int indexOfTaskToMarkDone = Integer.parseInt(command.split(" ")[1]) - 1;
+            Task markedTask = tasks.markTaskAsDone(indexOfTaskToMarkDone);
+            storage.updateTaskList(tasks);
+            return ui.showMarkingTaskDone(markedTask);
+        case "unmark":
+            int indexOfTaskToMarkUndone = Integer.parseInt(command.split(" ")[1]) - 1;
+            Task unmarkedTask = tasks.markTaskAsUndone(indexOfTaskToMarkUndone);
+            storage.updateTaskList(tasks);
+            return ui.showMarkingTaskUndone(unmarkedTask);
+        case "todo":
+            Task newTodo = Parser.makeTodoFromCommand(command);
+            tasks.addTask(newTodo);
+            storage.updateTaskList(tasks);
+            return ui.showAddingNewTask(newTodo, tasks);
+        case "deadline":
+            Task newDeadline = Parser.makeDeadlineFromCommand(command);
+            tasks.addTask(newDeadline);
+            storage.updateTaskList(tasks);
+            return ui.showAddingNewTask(newDeadline, tasks);
+        case "event":
+            Task newEvent = Parser.makeEventFromCommand(command);
+            tasks.addTask(newEvent);
+            storage.updateTaskList(tasks);
+            return ui.showAddingNewTask(newEvent, tasks);
+        case "delete":
+            int indexOfTaskToDelete = Integer.parseInt(command.split(" ")[1]);
+            Task taskToDelete = tasks.deleteTask(indexOfTaskToDelete);
+            storage.updateTaskList(tasks);
+            return ui.showDeletingTask(taskToDelete, tasks);
+        case "find":
+            String searchWord = Parser.getSearchWord(command);
+            TaskList tasksFound = tasks.makeTaskFinder(searchWord);
+            storage.updateTaskList(tasks);
+            return ui.showFindingTask(tasksFound);
+        default:
+            throw new DukeException("Command not recognised.");
+        }
     }
 }
