@@ -36,7 +36,7 @@ public class Duke {
      * Runs the main logic of the chatbot.
      * Supports 3 tasks: Todo, Event and Deadline.
      * Supports commands: adding, deletion, marking,
-     * unmarking, listing, finding.
+     * unmarking, listing, finding, updating.
      * @param input The user input
      * @return The output of the chatbot.
      */
@@ -77,6 +77,9 @@ public class Duke {
             case BYE:
                 output = "Bye. Hope to see you soon!";
                 break;
+            case UPDATE:
+                output = tasks.updateTask(Parser.contents(input));
+                break;
             default:
                 output = tasks.addTask(command, Parser.contents(input));
                 break;
@@ -88,6 +91,9 @@ public class Duke {
                 return "OOPS!!! Index out of range.";
             } else if (e.getMessage().equals("unknown")) {
                 return "OOPS!!! I'm sorry, but I don't know what that means :-(";
+            } else if (e.getMessage().equals("update")) {
+                return "Incorrect format detected." + "\nPlease enter update in the following format:"
+                        + "\n    update index description";
             } else {
                 return "OOPS!!! The description of a " + e.getMessage() + " cannot be empty.";
             }

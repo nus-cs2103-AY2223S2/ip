@@ -65,4 +65,12 @@ public class Task {
     public String printData() {
         return "Task" + "/" + (isDone ? "1" : "0") + "/" + description;
     }
+
+    /**
+     * Updates teh description of the task.
+     * @param description The new description to be updated to.
+     */
+    public void updateDescription(String description) {
+        this.description = description;
+    }
 }

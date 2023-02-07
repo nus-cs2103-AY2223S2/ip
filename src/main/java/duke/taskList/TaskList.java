@@ -154,4 +154,25 @@ public class TaskList {
         }
         return output;
     }
+
+    /**
+     * Updates the description of the task.
+     * @param contents The index and new description provided.
+     * @return The string representation of the updated task.
+     * @throws DukeException If the index is out of bounds, an exception is thrown.
+     */
+    public String updateTask(String[] contents) throws DukeException {
+        // Converts provided index to respective ArrayList index.
+        int index = Integer.parseInt(contents[1].replaceAll("[^0-9]", "")) - 1;
+        String output;
+        if ((index < 0) | (index > (list.size() - 1))) {
+            // Checks if provided index is in range.
+            throw new DukeException("index");
+        } else {
+            list.get(index).updateDescription(contents[2]);
+            output = "OK, I've updated the description of this task:";
+            output += "\n    " + list.get(index).toString();
+            return output;
+        }
+    }
 }
