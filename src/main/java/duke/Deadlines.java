@@ -36,10 +36,6 @@ public class Deadlines extends Task {
         return ddl;
     }
 
-    public void getDeadline() {
-        System.out.println("The deadline is on" + by.format(format));
-    }
-
     @Override
     public String toString() {
         return "[D]" + super.toString() + "(by: " + by.format(format) + ")";

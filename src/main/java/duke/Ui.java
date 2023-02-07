@@ -1,13 +1,9 @@
 package duke;
 
-import java.util.Scanner;
-
 /**
  * User interface of the application.
  */
 public class Ui {
-    private static final Scanner SCANNER = new Scanner(System.in);
-
     /**
      * Return the welcome message upon start of the application.
      *
@@ -33,12 +29,12 @@ public class Ui {
      * @return message for list command.
      */
     public String responseToListCommand(TaskList taskList) {
-        String msg = "Here are the tasks in your list:";
+        StringBuilder msg = new StringBuilder("Here are the tasks in your list:");
         for (int i = 0; i < taskList.size(); i++) {
             int tmp = i + 1;
-            msg += "\n" + tmp + "." + taskList.getTaskAt(i);
+            msg.append("\n").append(tmp).append(".").append(taskList.getTaskAt(i));
         }
-        return msg;
+        return msg.toString();
     }
 
 
@@ -98,22 +94,12 @@ public class Ui {
      * @return message for find task command.
      */
     public String responseToFindTaskCommand(TaskList taskList) {
-        String msg = "";
+        StringBuilder msg = new StringBuilder();
         for (int i = 0; i < taskList.size(); i++) {
             int index = i + 1;
-            msg += "\n" + index + "." + taskList.getTaskAt(i).toString();
+            msg.append("\n").append(index).append(".").append(taskList.getTaskAt(i).toString());
         }
-        return msg;
-    }
-
-    /**
-     * Return loading error message
-     * If the file given doesn't exit, it will print this error.
-     *
-     * @return message for loading error.
-     */
-    public String showLoadingError() {
-        return "OOPS!!! Unable to load data from the file";
+        return msg.toString();
     }
 
     /**
@@ -124,15 +110,5 @@ public class Ui {
      */
     public String showError(String errorMsg) {
         return "OOPS!!! " + errorMsg;
-    }
-
-    /**
-     * Prompts for the command and reads the text entered by the user.
-     *
-     * @return command entered by the user.
-     */
-    public String requestForUserInput() {
-        System.out.println("\tEnter Command: ");
-        return SCANNER.nextLine();
     }
 }

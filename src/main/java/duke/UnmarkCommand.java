@@ -3,12 +3,12 @@ package duke;
 /**
  * Command to mark a task as not done yet.
  */
-
 public class UnmarkCommand extends Command {
     private final int TOGGLE_LINE_NUMBER;
 
     /**
      * Constructor to create an unmark command.
+     *
      * @param fullCommand User input command.
      * @throws DukeEmptyArgumentException indicate that a command has been passed an empty argument.
      * @throws DukeInvalidArgumentException indicate that a command has been passed an illegal argument.
@@ -34,8 +34,8 @@ public class UnmarkCommand extends Command {
             throw new DukeInvalidArgumentException("There are only " + task.size()
                     + " tasks in list, but want to unmark " + (TOGGLE_LINE_NUMBER + 1) + "th task.");
         }
-
         Task t = task.getTaskAt(TOGGLE_LINE_NUMBER);
+
         t.setDone(false);
         storage.updateData(TOGGLE_LINE_NUMBER, 0);
         return ui.responseToUnmarkTaskCommand(t);
