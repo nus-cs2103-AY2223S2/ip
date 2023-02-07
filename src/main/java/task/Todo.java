@@ -7,7 +7,7 @@ package task;
 public class Todo extends Task {
 
     public Todo(String instruction) {
-        super(instruction);
+        super(instruction.substring(5));
     }
 
     @Override

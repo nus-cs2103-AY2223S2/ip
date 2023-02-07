@@ -47,9 +47,11 @@ public class Parser {
                 return l.mark(Integer.parseInt(parts[1]));
 
             case todo:
-                return l.add(new Todo(userinput.substring(5)));
+                assert userinput.length() > 4: "Wrong instruction passed in";
+                return l.add(new Todo(userinput));
 
             case deadline:
+                assert userinput.length() > 8 : "Wrong instruction passed in";
                 parts = userinput.split("/");
                 if (parts.length != 2) {
                     throw new DukeException("Please enter valid end date.");
@@ -57,6 +59,7 @@ public class Parser {
                 return l.add(new Deadline(parts[0], parts[1]));
 
             case event:
+                assert userinput.length() > 5 : "Wrong instruction passed in";
                 parts = userinput.split("/");
                 if (parts.length != 3) {
                     throw new DukeException("Please enter valid start and end dates.");
@@ -73,6 +76,7 @@ public class Parser {
                 return "B: " + Instructions.generate();
 
             default:
+                assert false;
                 return "Something has gone wrong!";
             }
         } catch (DukeException e) {

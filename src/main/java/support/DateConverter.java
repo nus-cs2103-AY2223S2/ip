@@ -12,6 +12,8 @@ public class DateConverter {
      * @return input format string
      */
     public static String dateFormatter(String s) {
+        assert s.length() >= 3: "Invalid date received";
+
         String month = s.substring(0, 3);
         String date;
         String year;
@@ -77,6 +79,7 @@ public class DateConverter {
             return year + "-12-" + date;
 
         default:
+            assert true: "Invalid date received";
             return "0000-00-00";
         }
     }
