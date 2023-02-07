@@ -64,6 +64,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parse a command to expect a keyword.
+     *
+     * @param command Command given by user.
+     * @return keyword specified by the user command.
+     * @throws DukeException User provide invalid command.
+     */
     public String getKeyword(String[] command) throws DukeException {
         if (command.length < 2) {
             throw new DukeException("Keyword required");
