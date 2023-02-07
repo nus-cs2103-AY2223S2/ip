@@ -1,11 +1,19 @@
 package duke;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import java.util.Scanner;
 
 /**
  * Duke class which initiates the program and execute it.
  */
-public class Duke {
+public class Duke extends Application {
     protected static final String DIV_OPEN = "____________________________________________________________\n";
     protected static final String DIV_CLOSE = "____________________________________________________________\n";
     protected static final String LOGO = ""
@@ -20,6 +28,19 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
     private Parser parser;
+
+    private ScrollPane scrollPane;
+    private VBox dialogContainer;
+    private TextField userInput;
+    private Button sendButton;
+    private Scene scene;
+
+    /**
+     * Empty Constructor for Duke class.
+     */
+    public Duke() {
+
+    }
 
     /**
      * Constructor for Duke class.
@@ -62,6 +83,29 @@ public class Duke {
     private void terminate() {
         storage.save(tasks.tasks);
         ui.printByeMsg();
+    }
+
+    @Override
+    public void start(Stage stage) {
+        //Step 1. Setting up required components
+
+        //The container for the content of the chat to scroll.
+        scrollPane = new ScrollPane();
+        dialogContainer = new VBox();
+        scrollPane.setContent(dialogContainer);
+
+        userInput = new TextField();
+        sendButton = new Button("Send");
+
+        AnchorPane mainLayout = new AnchorPane();
+        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
+
+        scene = new Scene(mainLayout);
+
+        stage.setScene(scene);
+        stage.show();
+
+        // more code to be added here later
     }
 
     /**
