@@ -32,6 +32,9 @@ public class TaskList {
         }
     }
 
+
+
+
     /**
      * Identify the task from its number and mark it as incomplete.
      *
@@ -93,7 +96,7 @@ public class TaskList {
      * Output the statement for the number of tasks in the list.
      */
     public String getLengthMessage() {
-        return "Now you have " + this.getLengthOfList() + " tasks in your list.\n";
+        return "\nNow you have " + this.getLengthOfList() + " tasks in your list.\n";
     }
 
     /**
@@ -111,5 +114,20 @@ public class TaskList {
 
         }
         return arrStr;
+    }
+
+    /**
+     * Tag the indicated task with the input tag name.
+     *
+     * @param taskNum Task number to add tag to.
+     * @param tagName Tag task with name.
+     * @throws DukeException
+     */
+    public void tagTask(int taskNum, String tagName) throws DukeException {
+        try {
+            list.get(taskNum - 1).addTag(tagName);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Task number not in list, please fill again");
+        }
     }
 }

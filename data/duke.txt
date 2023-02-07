@@ -1,11 +1,4 @@
-[T][X] eat and sleep
-[T][X] bye
-[T][X] work
-[T][ ] bye
-[D][ ] eat chicken (by: Jan 12 2012 06:00 PM)
-[T][ ] bye
-[T][ ] bye
-[T][ ] can
-[T][ ] do work
-[T][ ] can
-[T][ ] work
+[T][ ] eat #bz
+[D][ ] to hw #hi
+[E][ ] finish hw #ok
+[T][X] finish code #can

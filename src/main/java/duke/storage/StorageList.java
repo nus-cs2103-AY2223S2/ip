@@ -39,12 +39,23 @@ public class StorageList {
         try {
             File file = new File(this.path);
             Scanner scanner = new Scanner(file);
+            String tag;
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
                 String[] descriptionAndCommandArray = line.split("\\] ");
                 String[] commandType = descriptionAndCommandArray[0].split("\\]");
-                this.list.add(new Task(descriptionAndCommandArray[1],
-                        commandType[0].substring(1), commandType[1].substring(1)));
+                String[] tags = descriptionAndCommandArray[1].split("#");
+
+                if (tags.length > 1) {
+                    tag = tags[1];
+                    this.list.add(new Task(tags[0].strip(),
+                            commandType[0].substring(1), commandType[1].substring(1), tag));
+                } else {
+                    tag = "";
+                    this.list.add(new Task(descriptionAndCommandArray[1],
+                            commandType[0].substring(1), commandType[1].substring(1), tag));
+                }
+
             }
             scanner.close();
             return this.list;

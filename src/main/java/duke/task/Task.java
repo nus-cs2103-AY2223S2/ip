@@ -9,6 +9,8 @@ public class Task {
     protected boolean isDone;
     protected String typeofTask = "";
     protected String doneString;
+    private String tag = "";
+    private Tag tagObj;
 
     /**
      * Constructor for the task class with description,
@@ -18,10 +20,12 @@ public class Task {
      * @param typeOfTask  Type of task indicated.
      * @param doneStr     Tasks is marked complete.
      */
-    public Task(String description, String typeOfTask, String doneStr) {
+    public Task(String description, String typeOfTask, String doneStr, String tagName) {
         this.description = description;
         this.doneString = doneStr;
         this.typeofTask = typeOfTask;
+        this.tag = tagName;
+        this.tagObj = new Tag(tagName);
         isTaskDone();
 
 
@@ -34,6 +38,7 @@ public class Task {
      */
     public Task(String description) {
         this.description = description;
+        this.tagObj = new Tag("");
         this.isDone = false;
     }
 
@@ -81,10 +86,24 @@ public class Task {
      */
     public String toString() {
         if (typeofTask.equals("")) {
-            return "[" + this.getStatusIcon() + "]" + " " + this.description;
+            return "[" + this.getStatusIcon() + "]" + " " + this.description + " " + getTagStatus();
         } else {
-            return "[" + typeofTask + "]" + "[" + this.getStatusIcon() + "]" + " " + this.description;
+            return "[" + typeofTask + "]" + "[" + this.getStatusIcon() + "]" + " "
+                    + this.description + " " + getTagStatus();
         }
+    }
+
+    /**
+     * Adds the tag to the task object.
+     *
+     * @param tagDescription The tag name.
+     */
+    public void addTag(String tagDescription) {
+        this.tagObj.putTag(tagDescription);
+    }
+
+    public String getTagStatus() {
+        return tagObj.toString();
     }
 
 }

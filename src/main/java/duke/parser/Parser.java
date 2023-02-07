@@ -8,6 +8,7 @@ import duke.command.EventCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
+import duke.command.TagCommand;
 import duke.command.TodoCommand;
 import duke.command.UnmarkCommand;
 import duke.exception.DukeException;
@@ -26,7 +27,8 @@ public class Parser {
         bye,
         delete,
         find,
-        event;
+        event,
+        tag;
     }
 
     /**
@@ -66,6 +68,9 @@ public class Parser {
 
         case find:
             return new FindCommand(input);
+
+        case tag:
+            return new TagCommand(commandSeparated[1], commandSeparated[2]);
 
         default:
             throw new DukeException("Error has Occured.");
