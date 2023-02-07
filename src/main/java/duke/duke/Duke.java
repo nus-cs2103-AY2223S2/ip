@@ -21,7 +21,10 @@ public class Duke {
     private Storage storage;
     private TaskList list;
 
-
+    /**
+     * Creates a Duke which handles responses to user inputs.
+     * @param filePath A string which denotes the path to store Duke's data.
+     */
     public Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
@@ -42,7 +45,6 @@ public class Duke {
 
     public static void main(String[] args) {
         String txtDir = System.getProperty("user.dir") + "/data/tasks.txt";
-
         Duke instance = new Duke(txtDir);
         instance.run();
     }
