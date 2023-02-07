@@ -70,6 +70,7 @@ public class TaskList {
                 matchingTasks.add(task);
             }
         }
+        assert matchingTasks != null : "matchingTasks should not be null";
         return matchingTasks;
     }
 
