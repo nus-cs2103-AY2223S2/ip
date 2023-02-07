@@ -106,6 +106,16 @@ public class Duke {
     }
 
     /**
+     * Prints the matching tasks in the taskList.
+     *
+     * @param keyword Keyword used for searching.
+     * @return Tasks that contains the keyword.
+     */
+    public String findMessage(String keyword) {
+        return "Here are the matching tasks in your list:\n" + taskList.getTasksWanted(keyword);
+    }
+
+    /**
      * Loads the data stored in the disk.
      */
     public void loadDataFromDisk() {
@@ -149,6 +159,10 @@ public class Duke {
                     String[] words = userInput.split(" ");
                     int index = Integer.parseInt(words[1]) - 1;
                     String tmp = deleteMessage(index);
+                } else if (command.equals(parser.convertEnum(Command.FIND))) {
+                    parser.checkEmpty(userInput, command);
+                    String keyword = userInput.substring(5);
+                    String tmp = findMessage(keyword);
                 } else {
                     throw new WeirdInputException();
                 }
@@ -218,6 +232,10 @@ public class Duke {
                     String[] words = userInput.split(" ");
                     int index = Integer.parseInt(words[1]) - 1;
                     System.out.println(ui.separate(deleteMessage(index)));
+                } else if (command.equals(parser.convertEnum(Command.FIND))) {
+                    parser.checkEmpty(userInput, command);
+                    String keyword = userInput.substring(5);
+                    System.out.println(ui.separate(findMessage(keyword)));
                 } else {
                     throw new WeirdInputException();
                 }
