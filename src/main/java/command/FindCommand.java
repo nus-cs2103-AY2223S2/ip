@@ -29,9 +29,14 @@ public class FindCommand extends TaskCommand {
     @Override
     public String execute(TaskList taskList) throws DukeException {
         String[] stringsToSearch = getCommandContent(command).split(STRING_SPACE);
-        String taskListString = "Here are the matching tasks in your list:\n"
+        String taskListString = "Here are the fully matched tasks in your list:\n"
                 + taskList
-                .getTaskNameContains(stringsToSearch)
+                .getFullyMatchedTaskNames(stringsToSearch)
+                .getTaskListString(true);
+        taskListString = taskListString
+                + "\n\nAdditionally, here are some partially matched tasks:\n"
+                + taskList
+                .getOnlyPartiallyMatchedTaskNames(stringsToSearch)
                 .getTaskListString(true);
         return taskListString;
     }

@@ -49,16 +49,36 @@ public class TaskList extends ArrayList<Task> {
     }
 
     /**
-     * Get the task list that all tasks whose names contain the given strings
+     * Get the task list that all tasks whose names contain at least one of the given strings
+     * but do not contain all strings.
      * @param strings the strings to search for
      * @return a task list
      */
-    public TaskList getTaskNameContains(String... strings) {
+    public TaskList getOnlyPartiallyMatchedTaskNames(String... strings) {
         assert strings.length > 0 : "cannot search for empty string array";
 
         List<Task> filteredTasks = this
                 .stream()
-                .filter(t -> Stream.of(strings).anyMatch(t::containString))
+                .filter(t ->
+                        Stream.of(strings).anyMatch(t::containString)
+                                & (!Stream.of(strings).allMatch(t::containString))
+                        )
+                .collect(Collectors.toList());
+
+        return new TaskList(new ArrayList<>(filteredTasks));
+    }
+
+    /**
+     * Get the task list that all tasks whose names contain all given strings
+     * @param strings the strings to search for
+     * @return a task list
+     */
+    public TaskList getFullyMatchedTaskNames(String... strings) {
+        assert strings.length > 0 : "cannot search for empty string array";
+
+        List<Task> filteredTasks = this
+                .stream()
+                .filter(t -> Stream.of(strings).allMatch(t::containString))
                 .collect(Collectors.toList());
 
         return new TaskList(new ArrayList<>(filteredTasks));
