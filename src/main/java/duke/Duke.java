@@ -14,11 +14,6 @@ import java.nio.file.Paths;
  */
 public class Duke extends Application {
     /**
-     * Duke's UI feature
-     */
-    private UI ui = new UI();
-
-    /**
      * filePath of file to be accessed or edited
      */
     private Path path;
@@ -59,12 +54,12 @@ public class Duke extends Application {
             storage = new Storage(path);
             taskList = new TaskList(storage.loadLines());
         } catch (InvalidPathException err) {
-            ui.showLoadingError();
+            gui.showLoadingError();
         } catch (IOException errIO) {
             System.out.println("Unable to create File!");
             System.exit(-1);
         } catch (DukeException dukeErr) {
-            ui.displayError(dukeErr);
+            gui.displayError(dukeErr);
         }
     }
 
@@ -76,34 +71,5 @@ public class Duke extends Application {
     public void start(Stage stage) {
         gui.startUpProgram(stage);
         gui.runEvent(taskList, storage);
-    }
-
-    /**
-     * runs Duke program
-     */
-    public void run() {
-        ui.welcome();
-        try {
-            Storage store = new Storage(path);
-            while (true) {
-                try {
-                    Parser parser = new Parser(ui.getInput());
-                    Command commandHandler = parser.parseArgs();
-                    commandHandler.execArgs(taskList);
-                    store.editFile(this.taskList.loadTaskList());
-                } catch (DukeException err) {
-                    ui.displayError(err);
-                }
-            }
-        } catch (DukeException err) {
-            ui.displayError(err);
-        }
-    }
-
-    /**
-     * @param args array of command line arguments if any
-     */
-    public static void main(String[] args) {
-        new Duke(System.getProperty("user.dir")).run();
     }
 }
