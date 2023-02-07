@@ -33,18 +33,20 @@ public class TaskList {
      * Marks specified task as done
      * @param index required to find specified task
      */
-    public void mark(int index) {
+    public Task mark(int index) {
         Task currentTask = list.get(index);
         currentTask.markAsDone();
+        return currentTask;
     }
 
     /**
      * Marks specified task as undone
      * @param index required to find specified task
      */
-    public void unmark(int index) {
+    public Task unmark(int index) {
         Task currentTask = list.get(index);
         currentTask.markAsUndone();
+        return currentTask;
     }
 
     /**
