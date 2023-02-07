@@ -36,29 +36,38 @@ public class FindCommand extends Command {
     public String execute(Ui ui, TaskList taskList, Storage storage) {
         if (taskList.getList().size() == 0) {
             return ui.warnEmptyList();
-
         } else {
-            String message = "I've matched the task(s) with your search keyword for you:";
-
-            Supplier<Stream<Task>> filteredTask = () -> taskList.getList().stream()
-                    .filter(task -> task.isMatchDescription(keyword));
-
-            message += filteredTask.get().map(Task::toString)
-                    .reduce("\n", (prevMsg, task) -> prevMsg + "\n     > " + task);
-
-            int pending = (int) filteredTask.get().filter(task -> !task.getTaskStatus()).count();
-            int totalResult = (int) filteredTask.get().count();
-
-            message += "\n\nHere have " + totalResult + " result(s) with keyword \"" + keyword + "\".";
-            message += (pending == 0
-                    ? "\n**Congrats on finishing all the tasks!**"
-                    : "\nStill have " + pending + " task(s) to go. @*@");
-
-            if (totalResult == 0) {
-                message = "Whoo! Seems that you don't have any task related to \"" + keyword + "\" currently.";
-            }
-
-            return message;
+            return findIn(taskList);
         }
+    }
+
+    /**
+     * Find tasks in tasklist relevant to the given keyword.
+     *
+     * @param taskList Current task list storing tasks.
+     * @return The find result of given keyword.
+     */
+    private String findIn(TaskList taskList) {
+        String message = "I've matched the task(s) with your search keyword for you:";
+
+        Supplier<Stream<Task>> filteredTask = () -> taskList.getList().stream()
+                .filter(task -> task.isMatchDescription(keyword));
+
+        message += filteredTask.get().map(Task::toString)
+                .reduce("\n", (prevMsg, task) -> prevMsg + "\n     > " + task);
+
+        int pending = (int) filteredTask.get().filter(task -> !task.getTaskStatus()).count();
+        int totalResult = (int) filteredTask.get().count();
+
+        message += "\n\nHere have " + totalResult + " result(s) with keyword \"" + keyword + "\".";
+        message += (pending == 0
+                ? "\n**Congrats on finishing all the tasks!**"
+                : "\nStill have " + pending + " task(s) to go. @*@");
+
+        if (totalResult == 0) {
+            message = "Whoo! Seems that you don't have any task related to \"" + keyword + "\" currently.";
+        }
+
+        return message;
     }
 }

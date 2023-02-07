@@ -26,7 +26,7 @@ public class ListCommand extends Command {
 
     /**
      * Implements and executes main logic of ListCommand object.
-     * Assign cases into displayList and listTime.
+     * Assign cases into displayList and listTime according to the availability of requestedDate.
      *
      * @param ui UI instance of bot.
      * @param taskList Current task list storing tasks.

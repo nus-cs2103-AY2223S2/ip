@@ -24,7 +24,7 @@ public class ChattimeException extends Exception {
      */
     @Override
     public String toString() {
-        return errMsg;
+        return "OOPS!!! " + errMsg;
     }
 
 }
