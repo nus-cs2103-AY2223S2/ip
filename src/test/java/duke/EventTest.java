@@ -20,7 +20,7 @@ public class EventTest {
     @Test
     public void markTest() {
         Event event = new Event("test", "2020-05-12 1800", "2020-12-25 2200");
-        event.mark();
+        event.marked();
         assertEquals("[E][X] test (from: May 12 2020 18:00 to: Dec 25 2020 22:00)", event.toString());
     }
 }

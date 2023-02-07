@@ -12,11 +12,11 @@ public abstract class Task {
         return (isDone ? "X" : " ");
     }
 
-    public void mark() {
+    public void marked() {
         this.isDone = true;
     }
 
-    public void unmark() {
+    public void unmarked() {
         this.isDone = false;
     }
 

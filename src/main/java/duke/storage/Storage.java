@@ -16,13 +16,25 @@ import java.io.IOException;
 import java.io.FileNotFoundException;
 
 public class Storage {
+    /**
+     * Storage class to handle all files related activities such as creation of duke.txt,
+     * loading and saving data from duke.txt.
+     */
     private String filePath;
 
+    /**
+     * Constructor method for Storage.
+     * @param filePath path to duke.txt
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
         checkFile(filePath);
     }
-    
+
+    /**
+     * check if duke.txt exists, creates it otherwise
+     * @param filePath relative/absolute path to duke.txt
+     */
     private void checkFile(String filePath) {
         File file = new File(filePath);
         if (!file.isFile()) {
@@ -34,6 +46,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Handles the saving of data from the list of tasks to duke.txt
+     * @param taskList the list of tasks
+     */
     public void saveData(TaskList taskList) {
         try {
             FileWriter fileWriter = new FileWriter(filePath);
@@ -48,6 +64,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Handles the loading of data from duke.txt to the list of tasks
+     * @return a list of tasks
+     * @throws FileNotFoundException if the file does not exist in the filePath given
+     */
     public List<Task> loadFile() throws FileNotFoundException {
         List<Task> taskList = new ArrayList<>();
         File file = new File(filePath);
@@ -69,7 +90,7 @@ public class Storage {
                 }
 
                 if (data[1].equals("1")) {
-                    task.mark();
+                    task.marked();
                 }
 
                 taskList.add(task);
@@ -78,5 +99,5 @@ public class Storage {
         }
 
         return taskList;
-     }
+    }
 }
