@@ -1,15 +1,16 @@
 package duke.command;
 
 import java.io.IOException;
-import duke.task.TaskList;
-import duke.Ui;
-import duke.Storage;
+
 import duke.DukeException;
+import duke.Storage;
+import duke.Ui;
+import duke.task.TaskList;
 
 /**
  * The type Exit command.
  */
-public class ExitCommand extends Command{
+public class ExitCommand extends Command {
 
     @Override
     public boolean isExit() {

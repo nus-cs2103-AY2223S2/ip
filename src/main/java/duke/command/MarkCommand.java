@@ -1,14 +1,14 @@
 package duke.command;
 
-import duke.task.TaskList;
-import duke.Ui;
-import duke.Storage;
 import duke.DukeException;
+import duke.Storage;
+import duke.Ui;
+import duke.task.TaskList;
 
 /**
  * The type Mark command.
  */
-public class MarkCommand extends Command{
+public class MarkCommand extends Command {
 
     private int index;
     private boolean isMarked;

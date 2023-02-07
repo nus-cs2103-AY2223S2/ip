@@ -7,8 +7,46 @@ import duke.DukeException;
  */
 public class Parser {
 
+    /**
+     * The enum Keyword.
+     */
     public enum Keyword {
-        bye, list, mark, unmark, todo, deadline, event, delete, find
+        /**
+         * Bye keyword.
+         */
+        bye,
+        /**
+         * List keyword.
+         */
+        list,
+        /**
+         * Mark keyword.
+         */
+        mark,
+        /**
+         * Unmark keyword.
+         */
+        unmark,
+        /**
+         * Todo keyword.
+         */
+        todo,
+        /**
+         * Deadline keyword.
+         */
+        deadline,
+        /**
+         * Event keyword.
+         */
+        event,
+        /**
+         * Delete keyword.
+         */
+        delete,
+        /**
+         * Find keyword.
+         */
+        find
     }
 
     /**
@@ -22,32 +60,33 @@ public class Parser {
         try {
             Keyword command = Keyword.valueOf(parsedInput[0]);
             switch (command) {
-                case bye:
-                    return new ExitCommand();
-                case list:
-                    return new ListCommand();
-                case mark:
-                    return new MarkCommand(processMarkUnmarkDel(input), true);
-                case unmark:
-                    return new MarkCommand(processMarkUnmarkDel(input), false);
-                case todo:
-                    return new AddCommand(parsedInput[1]);
-                case deadline:
-                    String[] parsedDeadline = processDeadline(input);
-                    return new AddCommand(parsedDeadline[0], parsedDeadline[1]);
-                case event:
-                    String[] parsedEvent = processEvent(input);
-                    return new AddCommand(parsedEvent[0], parsedEvent[1],
-                            parsedEvent[2]);
-                case delete:
-                    return new DeleteCommand(processMarkUnmarkDel(input));
-                case find:
-                    return new FindCommand(parsedInput[1]);
+            case bye:
+                return new ExitCommand();
+            case list:
+                return new ListCommand();
+            case mark:
+                return new MarkCommand(processMarkUnmarkDel(input), true);
+            case unmark:
+                return new MarkCommand(processMarkUnmarkDel(input), false);
+            case todo:
+                return new AddCommand(parsedInput[1]);
+            case deadline:
+                String[] parsedDeadline = processDeadline(input);
+                return new AddCommand(parsedDeadline[0], parsedDeadline[1]);
+            case event:
+                String[] parsedEvent = processEvent(input);
+                return new AddCommand(parsedEvent[0], parsedEvent[1],
+                        parsedEvent[2]);
+            case delete:
+                return new DeleteCommand(processMarkUnmarkDel(input));
+            case find:
+                return new FindCommand(parsedInput[1]);
+            default:
+                throw new DukeException("unknown command detected");
             }
         } catch (Exception e) {
             return new UnknownCommand();
         }
-        return new UnknownCommand();
     }
 
     /**
@@ -87,7 +126,7 @@ public class Parser {
      * @return the string [ ]
      * @throws DukeException the duke exception
      */
-    public static String[] processDeadline(String input) throws DukeException{
+    public static String[] processDeadline(String input) throws DukeException {
         String raw = input.split("deadline", 2)[1];
         if (raw.equals("")) {
             throw new DukeException("The description of a deadline cannot be empty.");
@@ -110,7 +149,7 @@ public class Parser {
      * @return the string [ ]
      * @throws DukeException the duke exception
      */
-    public static String[] processEvent(String input) throws DukeException{
+    public static String[] processEvent(String input) throws DukeException {
         String raw = input.split("event", 2)[1];
         if (raw.equals("")) {
             throw new DukeException("The description of a event cannot be empty.");

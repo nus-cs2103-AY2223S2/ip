@@ -8,7 +8,7 @@ import duke.task.TaskList;
 /**
  * The type Find command.
  */
-public class FindCommand extends Command{
+public class FindCommand extends Command {
 
     private String searchWord;
 

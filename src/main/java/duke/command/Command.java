@@ -1,9 +1,9 @@
 package duke.command;
 
-import duke.task.TaskList;
-import duke.Ui;
-import duke.Storage;
 import duke.DukeException;
+import duke.Storage;
+import duke.Ui;
+import duke.task.TaskList;
 
 /**
  * The type Command.
@@ -22,11 +22,11 @@ public abstract class Command {
     /**
      * Execute command.
      *
-     * @param Tasks   the tasks
+     * @param tasks   the tasks
      * @param ui      the ui
      * @param storage the storage
      * @throws DukeException the duke exception
      */
-    public abstract String execute(TaskList Tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
 }
