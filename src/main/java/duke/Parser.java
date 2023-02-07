@@ -66,14 +66,17 @@ public class Parser {
             break;
         case (Parser.DELETE):
             int deleteIndex = Parser.checkDeleteCommand(str);
+            assert !(deleteIndex < TaskList.MIN_INDEX && deleteIndex > TaskList.MAX_INDEX);
             command = new DeleteCommand(deleteIndex);
             break;
         case (Parser.MARK):
             int markIndex = Parser.checkMarkCommand(str);
+            assert !(markIndex < TaskList.MIN_INDEX && markIndex > TaskList.MAX_INDEX);
             command = new MarkCommand(markIndex);
             break;
         case (Parser.UNMARK):
             int unMarkIndex = Parser.checkUnMarkCommand(str);
+            assert !(unMarkIndex < TaskList.MIN_INDEX && unMarkIndex > TaskList.MAX_INDEX);
             command = new UnMarkCommand(unMarkIndex);
             break;
         case (Parser.LIST):
