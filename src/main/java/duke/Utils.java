@@ -1,5 +1,7 @@
 package duke;
 
+import java.io.IOException;
+import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -14,6 +16,8 @@ import java.util.Optional;
 import java.util.StringJoiner;
 import java.util.function.BiFunction;
 import java.util.function.Function;
+
+import javafx.fxml.FXMLLoader;
 
 public final class Utils {
     /**
@@ -117,5 +121,12 @@ public final class Utils {
         }
 
         return joiner.toString();
+    }
+
+    public static <T, U> T loadFxmlFile(URL path, U controller) throws IOException {
+        FXMLLoader loader = new FXMLLoader(path);
+        loader.setController(controller);
+        T loaded = loader.<T>load();
+        return loaded;
     }
 }
