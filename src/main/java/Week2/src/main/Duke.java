@@ -36,18 +36,6 @@ public class Duke extends Application {
     private Image bot = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpg"));
 
     static TaskList tasklist = new TaskList();
-
-    /**
-     * Constructor of Duke.
-     * /
-    public Duke() {
-
-    }
-
-    /**
-     * Prints out a line
-     * @return a line to divide outcomes.
-     */
     static FileWriter fw;
 
     static {
@@ -131,7 +119,6 @@ public class Duke extends Application {
 
     private String getResponse(String input) throws IOException {
         return run(input);
-
     }
 
     @Override

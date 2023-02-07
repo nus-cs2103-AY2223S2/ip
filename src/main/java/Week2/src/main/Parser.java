@@ -15,11 +15,18 @@ public class Parser {
 
     /**
      * Parser constructor
+     * It receives a TaskList from Duke
      */
     public Parser(TaskList tasklist) {
         this.tasklist = tasklist;
     }
 
+    /**
+     * Uses input from user and execute it
+     * @param input
+     * @return the message to show
+     * @throws IOException
+     */
     public String runParser(String input) throws IOException {
         isBegin = true;
         String c = input;
@@ -102,6 +109,9 @@ public class Parser {
 
     }
 
+    /**
+     * Updates the main TaskList as changed
+     */
     public void updateTL() {
         Duke.tasklist = this.tasklist;
     }
