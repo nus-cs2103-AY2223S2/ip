@@ -13,6 +13,16 @@ import duke.command.UnMarkCommand;
  * Makes sense of the user's commands.
  */
 public class Parser {
+    public static final String TODO = "todo";
+    public static final String DEADLINE = "deadline";
+    public static final String EVENT = "event";
+    private static final String DELETE = "delete";
+    private static final String MARK = "mark";
+    private static final String UNMARK = "unmark";
+    private static final String LIST = "list";
+    private static final String FIND = "find";
+    private static final String BYE = "bye";
+
     /**
      * Returns corresponding command objects from user commands given in strings.
      * @param str User command
@@ -22,6 +32,7 @@ public class Parser {
     public static Command parse(String str) {
         Command command;
         String firstWord;
+        final int strLength = str.length();
 
         int indexOfFirstSpace = str.indexOf(" ");
         if (indexOfFirstSpace == -1) {
@@ -30,56 +41,69 @@ public class Parser {
             firstWord = str.substring(0, indexOfFirstSpace);
         }
         switch (firstWord) {
-            case ("todo"):
-                Parser.checkToDoCommand(str);
-                command = new AddCommand(str);
-                break;
-            case ("deadline"):
-                Parser.checkDeadlineCommand(str);
-                command = new AddCommand(str);
-                break;
-            case ("event"):
-                Parser.checkEventCommand(str);
-                command = new AddCommand(str);
-                break;
-            case ("delete"):
-                int deleteIndex = Parser.checkDeleteCommand(str);
-                command = new DeleteCommand(deleteIndex);
-                break;
-            case ("mark"):
-                int markIndex = Parser.checkMarkCommand(str);
-                command = new MarkCommand(markIndex);
-                break;
-            case ("unmark"):
-                int unMarkIndex = Parser.checkUnMarkCommand(str);
-                command = new UnMarkCommand(unMarkIndex);
-                break;
-            case ("list"):
-                Parser.checkListCommand(str);
-                command = new ListCommand();
-                break;
-            case ("find"):
-                String keyword = Parser.checkFindCommand(str);
-                command = new FindCommand(keyword);
-                break;
-            case ("bye"):
-                Parser.checkExitCommand(str);
-                command = new ExitCommand();
-                break;
-            default:
-                throw new RuntimeException("Huh? I don't know what that means :(");
+        case (Parser.TODO):
+            Parser.checkToDoCommand(str);
+            final var toDoFormatLength = 5;
+            assert strLength > toDoFormatLength;
+            command = new AddCommand(str);
+            break;
+        case (Parser.DEADLINE):
+            Parser.checkDeadlineCommand(str);
+            final var deadlineFormatLength = 28;
+            final var deadlineField = " /by ";
+            assert strLength > deadlineFormatLength;
+            assert str.contains(deadlineField);
+            command = new AddCommand(str);
+            break;
+        case (Parser.EVENT):
+            Parser.checkEventCommand(str);
+            final var eventFormatLength = 44;
+            final var eventField1 = " /from ";
+            final var eventField2 = " /to ";
+            assert strLength > eventFormatLength;
+            assert str.contains(eventField1) && str.contains(eventField2);
+            command = new AddCommand(str);
+            break;
+        case (Parser.DELETE):
+            int deleteIndex = Parser.checkDeleteCommand(str);
+            command = new DeleteCommand(deleteIndex);
+            break;
+        case (Parser.MARK):
+            int markIndex = Parser.checkMarkCommand(str);
+            command = new MarkCommand(markIndex);
+            break;
+        case (Parser.UNMARK):
+            int unMarkIndex = Parser.checkUnMarkCommand(str);
+            command = new UnMarkCommand(unMarkIndex);
+            break;
+        case (Parser.LIST):
+            Parser.checkListCommand(str);
+            command = new ListCommand();
+            break;
+        case (Parser.FIND):
+            String keyword = Parser.checkFindCommand(str);
+            command = new FindCommand(keyword);
+            break;
+        case (Parser.BYE):
+            Parser.checkExitCommand(str);
+            command = new ExitCommand();
+            break;
+        default:
+            throw new RuntimeException("Huh? I don't know what that means :(");
         }
         return command;
     }
 
-    public static void checkToDoCommand(String str) {
-        if (str.equals("todo") || str.equals("todo ")) {
+    private static void checkToDoCommand(String str) {
+        String toDoSpace = Parser.TODO + " ";
+        if (str.equals(Parser.TODO) || str.equals(toDoSpace)) {
             throw new RuntimeException("This command's field can't be left blank!");
         }
     }
 
-    public static void checkDeadlineCommand(String str) {
-        if (str.equals("deadline") || str.equals("deadline ")) {
+    private static void checkDeadlineCommand(String str) {
+        String deadlineSpace = Parser.DEADLINE + " ";
+        if (str.equals(Parser.DEADLINE) || str.equals(deadlineSpace)) {
             throw new RuntimeException("This command's field can't be left blank!");
         }
         final var target = " /by ";
@@ -109,8 +133,9 @@ public class Parser {
         }
     }
 
-    public static void checkEventCommand(String str) {
-        if (str.equals("event") || str.equals("event ")) {
+    private static void checkEventCommand(String str) {
+        String eventSpace = Parser.EVENT + " ";
+        if (str.equals(Parser.EVENT) || str.equals(eventSpace)) {
             throw new RuntimeException("This command's field can't be left blank!");
         }
         final String target1 = " /from ";
@@ -123,7 +148,8 @@ public class Parser {
         int index1 = str.indexOf(target1);
         int index2 = str.indexOf(target2);
         final var minCharBetweenTargets = 20;
-        if (index2 - index1 < 0) {
+        boolean isTarget1BehindTarget2 = index2 - index1 < 0;
+        if (isTarget1BehindTarget2) {
             throw new RuntimeException("Unable to create event! "
                     + "The /from field has to be before the /to field.");
         } else if (index2 - index1 < minCharBetweenTargets) {
@@ -144,56 +170,69 @@ public class Parser {
         }
     }
 
-    public static int checkDeleteCommand(String str) {
+    private static int checkDeleteCommand(String str) {
         try {
-            if (str.equals("delete") || str.equals("delete ")) {
+            String deleteSpace = Parser.DELETE + " ";
+            if (str.equals(Parser.DELETE) || str.equals(deleteSpace)) {
                 throw new RuntimeException("This command's field can't be left blank!");
             }
             final var deleteStartIndex = 7;
             String deletedIndex = str.substring(deleteStartIndex);
             int index = Integer.parseInt(deletedIndex) - 1;
+            if (index < TaskList.MIN_INDEX || index > TaskList.MAX_INDEX) {
+                throw new RuntimeException("Task does not exist!");
+            }
             return index;
         } catch (NumberFormatException e) {
             throw new RuntimeException("Target was not a number!");
         }
     }
 
-    public static int checkMarkCommand(String str) {
+    private static int checkMarkCommand(String str) {
         try {
-            if (str.equals("mark") || str.equals("mark ")) {
+            String markSpace = Parser.MARK + " ";
+            if (str.equals(Parser.MARK) || str.equals(markSpace)) {
                 throw new RuntimeException("This command's field can't be left blank!");
             }
             final var markStartIndex = 5;
             String markedIndex = str.substring(markStartIndex);
             int index = Integer.parseInt(markedIndex) - 1;
+            if (index < TaskList.MIN_INDEX || index > TaskList.MAX_INDEX) {
+                throw new RuntimeException("Task does not exist!");
+            }
             return index;
         } catch (NumberFormatException e) {
             throw new RuntimeException("Target was not a number!");
         }
     }
 
-    public static int checkUnMarkCommand(String str) {
+    private static int checkUnMarkCommand(String str) {
         try {
-            if (str.equals("unmark") || str.equals("unmark ")) {
+            String unMarkSpace = Parser.UNMARK + " ";
+            if (str.equals(Parser.UNMARK) || str.equals(unMarkSpace)) {
                 throw new RuntimeException("This command's field can't be left blank!");
             }
             final var unMarkStartIndex = 7;
             String unmarkedIndex = str.substring(unMarkStartIndex);
             int index = Integer.parseInt(unmarkedIndex) - 1;
+            if (index < TaskList.MIN_INDEX || index > TaskList.MAX_INDEX) {
+                throw new RuntimeException("Task does not exist!");
+            }
             return index;
         } catch (NumberFormatException e) {
             throw new RuntimeException("Target was not a number!");
         }
     }
 
-    public static void checkListCommand(String str) {
-        if (!str.equals("list")) {
+    private static void checkListCommand(String str) {
+        if (!str.equals(Parser.LIST)) {
             throw new RuntimeException("List commands do not have a field!");
         }
     }
 
-    public static String checkFindCommand(String str) {
-        if (str.equals("find") || str.equals("find ")) {
+    private static String checkFindCommand(String str) {
+        String findSpace = Parser.FIND + " ";
+        if (str.equals(Parser.FIND) || str.equals(findSpace)) {
             throw new RuntimeException("This command's field can't be left blank!");
         }
         final var findStartIndex = 5;
@@ -204,8 +243,8 @@ public class Parser {
         return keyword;
     }
 
-    public static void checkExitCommand(String str) {
-        if (!str.equals("bye")) {
+    private static void checkExitCommand(String str) {
+        if (!str.equals(Parser.BYE)) {
             throw new RuntimeException("Exit commands do not have a field!");
         }
     }

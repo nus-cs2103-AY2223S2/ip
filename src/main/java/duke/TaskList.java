@@ -6,6 +6,8 @@ import duke.task.Task;
  * Stores the list of Task objects.
  */
 public class TaskList {
+    public static final int MIN_INDEX = 0;
+    public static final int MAX_INDEX = 99;
     private int index;
     private Task[] tasks;
 
@@ -16,7 +18,7 @@ public class TaskList {
     public TaskList(Task[] tasks) {
         this.index = 0;
         this.tasks = tasks;
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < TaskList.MAX_INDEX + 1; i++) {
             if (tasks[i] == null) {
                 this.index = i;
                 break;
@@ -29,7 +31,7 @@ public class TaskList {
      */
     public TaskList() {
         this.index = 0;
-        this.tasks = new Task[100];
+        this.tasks = new Task[TaskList.MAX_INDEX + 1];
     }
 
     /**
@@ -53,7 +55,7 @@ public class TaskList {
      * @return The Duke chatbot's reply after deleting a task.
      */
     public String deleteTask(int index) {
-        if (index < 0 || index > 99 || tasks[index] == null) {
+        if (this.tasks[index] == null) {
             throw new RuntimeException("Task does not exist!");
         }
         String str = "Got it! This task has been removed:\n";
@@ -61,10 +63,10 @@ public class TaskList {
         this.index--;
         String sp = this.index == 1 ? "task" : "tasks";
         str += "You now have " + this.index + " " + sp + " in the list.";
-        for (int i = index; i < 99; i++) {
+        for (int i = index; i < TaskList.MAX_INDEX; i++) {
             this.tasks[i] = this.tasks[i + 1];
         }
-        this.tasks[99] = null;
+        this.tasks[TaskList.MAX_INDEX] = null;
         return str;
     }
 
@@ -74,7 +76,7 @@ public class TaskList {
      * @return The Duke chatbot's reply after marking a task as done.
      */
     public String markTask(int index) {
-        if (index < 0 || index > 99 || tasks[index] == null) {
+        if (this.tasks[index] == null) {
             throw new RuntimeException("Task does not exist!");
         }
         this.tasks[index].mark();
@@ -89,7 +91,7 @@ public class TaskList {
      * @return The Duke chatbot's reply after marking a task as undone.
      */
     public String unMarkTask(int index) {
-        if (index < 0 || index > 99 || tasks[index] == null) {
+        if (this.tasks[index] == null) {
             throw new RuntimeException("Task does not exist!");
         }
         this.tasks[index].unMark();

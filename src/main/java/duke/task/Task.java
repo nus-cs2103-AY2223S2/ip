@@ -29,27 +29,18 @@ public abstract class Task {
      * @return Task object that could be a ToDo, Deadline or Event object.
      */
     public static Task makeTask(String str) {
-        int strLength = str.length();
         if (str.startsWith("todo ")) {
-            final var toDoFormatLength = 5;
             final var toDoStartIndex = 5;
-            assert strLength > toDoFormatLength;
-            return ToDo.to(str.substring(toDoStartIndex));
+            String withoutCommand = str.substring(toDoStartIndex);
+            return ToDo.to(withoutCommand);
         } else if (str.startsWith("deadline ")) {
-            final var deadlineFormatLength = 28;
             final var deadlineStartIndex = 9;
-            final var deadlineField = " /by ";
-            assert strLength > deadlineFormatLength;
-            assert str.contains(deadlineField);
-            return Deadline.to(str.substring(deadlineStartIndex));
+            String withoutCommand = str.substring(deadlineStartIndex);
+            return Deadline.to(withoutCommand);
         } else {
-            final var eventFormatLength = 44;
-            final var eventField1 = " /from ";
-            final var eventField2 = " /to ";
             final var eventStartIndex = 6;
-            assert strLength > eventFormatLength;
-            assert str.contains(eventField1) && str.contains(eventField2);
-            return Event.to(str.substring(eventStartIndex));
+            String withoutCommand = str.substring(eventStartIndex);
+            return Event.to(withoutCommand);
         }
     }
 
