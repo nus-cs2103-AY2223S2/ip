@@ -28,6 +28,32 @@ public class TaskList {
     }
 
     /**
+     * Find out number of mark tasks
+     *
+     * @return Number of mark tasks
+     * @throws DukeException
+     */
+    public int getSizeOfMarkedTasks() throws DukeException {
+        int sizeOfMarkTasks = 0;
+        for(int i = 0; i < this.getSize(); i ++) {
+            if (this.getTask(i).getStatusIcon().equals("X")) {
+                sizeOfMarkTasks = sizeOfMarkTasks + 1;
+            }
+        }
+        return sizeOfMarkTasks;
+    }
+
+    /**
+     * Find out number of unmark tasks
+     *
+     * @return Number of unmark tasks
+     * @throws DukeException
+     */
+    public int getSizeOfUnmarkedTasks() throws DukeException {
+        return this.getSize() - this.getSizeOfMarkedTasks();
+    }
+
+    /**
      * Obtain task based on given index
      *
      * @param index

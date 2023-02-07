@@ -137,4 +137,12 @@ public class Ui {
     public String getUnknownMessage() {
         return "I'm sorry, but I don't know what that means :-(";
     }
+
+    public String getStatsMessage(TaskList tasks) throws DukeException {
+        String s = "Here are the stats\n";
+        s = s + "Total number of tasks: " + tasks.getSize() + "\n";
+        s = s + "Total number of marked tasks: " + tasks.getSizeOfMarkedTasks() + "\n";
+        s = s + "Total number of unmarked tasks: " + tasks.getSizeOfUnmarkedTasks() + "\n";
+        return s;
+    }
 }

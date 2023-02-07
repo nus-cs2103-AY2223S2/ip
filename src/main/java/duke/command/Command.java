@@ -78,6 +78,8 @@ public class Command {
             return response;
         case BYE:
             return ui.getGoodByeMessage();
+        case STATS:
+            return ui.getStatsMessage(tasks);
         default:
             return "I'm sorry, but I don't know what that means :-(";
         }

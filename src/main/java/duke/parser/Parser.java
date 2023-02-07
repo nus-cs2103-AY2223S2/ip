@@ -21,6 +21,7 @@ public class Parser {
         DELETE,
         FIND,
         BYE,
+        STATS,
         UNKNOWN
     };
 
@@ -49,6 +50,8 @@ public class Parser {
             return Action.FIND;
         } else if (s.equals("bye")) {
             return Action.BYE;
+        } else if (s.equals("stats")) {
+            return Action.STATS;
         }
         return Action.UNKNOWN;
     }
