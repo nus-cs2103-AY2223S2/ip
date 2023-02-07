@@ -109,7 +109,7 @@ public class Parser {
     public static Todo parseTodo() throws DukeException {
         if (args.length < 2) {
             throw new DukeException("The description of a todo cannot be empty!");
-
+        }
         assert args.length == 2;
         String desc = args[1];
         return new Todo(desc);
@@ -136,7 +136,6 @@ public class Parser {
             throw new DukeException("Give deadline in YYYY-MM-DD format!");
         }
     }
-
 
     /**
      * Parses the stored arguments and returns an Event object.
