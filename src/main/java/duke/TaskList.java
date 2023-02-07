@@ -3,7 +3,7 @@ import duke.task.Task;
 import java.util.ArrayList;
 
 public class TaskList {
-    ArrayList<Task> tasks;
+    private ArrayList<Task> tasks;
 
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
@@ -79,8 +79,8 @@ public class TaskList {
 
     public String createTaskSaveData() {
         String saveData = "";
-        for (int i = 0; i < tasks.size(); i++) {
-            saveData = saveData + tasks.get(i).save();
+        for (Task task : tasks) {
+            saveData = saveData + task.save();
         }
         return saveData;
     }
@@ -100,8 +100,7 @@ public class TaskList {
 
     public TaskList findKeywordTasks(String keyword) {
         TaskList keywordTasks = new TaskList();
-        for (int i = 0; i < this.tasks.size(); i++) {
-            Task task = tasks.get(i);
+        for (Task task : this.tasks) {
             if (task.hasKeyword(keyword)) {
                 keywordTasks.addTask(task);
             }
