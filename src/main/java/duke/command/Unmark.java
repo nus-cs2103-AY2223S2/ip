@@ -1,5 +1,8 @@
 package duke.command;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
@@ -7,6 +10,7 @@ import duke.Ui;
 import duke.task.Task;
 
 public class Unmark extends Command {
+    protected static ArrayList<String> aliases = new ArrayList<>(Arrays.asList("unmark", "u"));
     private Integer index;
 
     public Unmark(Integer i) {
@@ -22,5 +26,8 @@ public class Unmark extends Command {
         t.setNotDone();
         return ui.showUnmark(t);
     }
-    
+
+    public static boolean checkAlias(String alias) {
+       return aliases.contains(alias);
+    } 
 }

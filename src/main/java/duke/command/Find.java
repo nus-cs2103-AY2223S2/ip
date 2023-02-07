@@ -1,12 +1,15 @@
 package duke.command;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.task.Task;
 
 public class Find extends Command {
+    protected static ArrayList<String> aliases = new ArrayList<>(Arrays.asList("find", "f"));
     private String keyword;
 
     public Find(String keyword) {
@@ -19,4 +22,7 @@ public class Find extends Command {
         return ui.showFind(matches);
     };
     
+    public static boolean checkAlias(String alias) {
+       return aliases.contains(alias);
+    } 
 }

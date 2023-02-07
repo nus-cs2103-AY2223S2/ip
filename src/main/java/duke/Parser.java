@@ -4,11 +4,12 @@ import duke.command.Command;
 import duke.command.CreateDeadline;
 import duke.command.CreateEvent;
 import duke.command.CreateTodo;
-import duke.command.Delete;
+import duke.command.Remove;
 import duke.command.Exit;
 import duke.command.Find;
 import duke.command.List;
 import duke.command.Mark;
+import duke.command.Set;
 import duke.command.Unmark;
 
 import java.time.LocalDate;
@@ -27,13 +28,14 @@ public class Parser {
      */
     public static Command parse(String fullCommand) throws DukeException {
         String[] split = fullCommand.split(" ", 2);
+        String command = split[0];
         boolean hasOneArg = split.length == 1;
 
-        if (split[0].equals("bye") && hasOneArg) {
+        if (Exit.checkAlias(command) && hasOneArg) {
             return new Exit();
-        } else if (split[0].equals("list") && hasOneArg) {
+        } else if (List.checkAlias(command) && hasOneArg) {
             return new List();
-        } else if (split[0].equals("mark")) {
+        } else if (Mark.checkAlias(command)) {
             if (hasOneArg) {
                 handleInsufficientArgs("mark");
             }
@@ -43,7 +45,7 @@ public class Parser {
             } catch (NumberFormatException e) {
                 handleWrongTaskNumber();
             }
-        } else if (split[0].equals("unmark")) {
+        } else if (Unmark.checkAlias(command)) {
             if (hasOneArg) {
                 handleInsufficientArgs("unmark");
             }
@@ -53,27 +55,27 @@ public class Parser {
             } catch (NumberFormatException e) {
                 handleWrongTaskNumber();
             }
-        } else if (split[0].equals("delete")) {
+        } else if (Remove.checkAlias(command)) {
             if (hasOneArg) {
-                handleInsufficientArgs("delete");
+                handleInsufficientArgs("remove");
             }
             try {
                 Integer i = Integer.parseInt(split[1]);
-                return new Delete(i);
+                return new Remove(i);
             } catch (NumberFormatException e) {
                 handleWrongTaskNumber();
             }
-        } else if (split[0].equals("find")) {
+        } else if (Find.checkAlias(command)) {
             if (hasOneArg) {
                 handleInsufficientArgs("find");
             }
             return new Find(split[1]);
-        } else if (split[0].equals("todo")) {
+        } else if (CreateTodo.checkAlias(command)) {
             if (hasOneArg) {
                 handleInsufficientArgs("todo");
             }
             return new CreateTodo(split[1]);
-        } else if (split[0].equals("deadline")) {
+        } else if (CreateDeadline.checkAlias(command)) {
             if (hasOneArg) {
                 handleInsufficientArgs("deadline");
             }
@@ -82,7 +84,7 @@ public class Parser {
                 handleInsufficientArgs("deadline1");
             }
             return new CreateDeadline(tokens[0], parseDate(tokens[1]));
-        } else if (split[0].equals("event")) {
+        } else if (CreateEvent.checkAlias(command)) {
             if (hasOneArg) {
                 handleInsufficientArgs("event");
             }
@@ -95,6 +97,15 @@ public class Parser {
                 handleInsufficientArgs("event2");
             }
             return new CreateEvent(tokens[0], parseDate(tokens2[0]), parseDate(tokens2[1]));
+        } else if (Set.checkAlias(command)) {
+            if (hasOneArg) {
+                handleInsufficientArgs("set");
+            }
+            String[] tokens = split[1].split(" ", 2);
+            if (tokens.length == 1) {
+                handleInsufficientArgs("set1");
+            }
+            return new Set(tokens[0], tokens[1]);
         } else {
             handleUnknownCommand();
         }
@@ -144,6 +155,10 @@ public class Parser {
             throw new DukeException("Please specify the task you want to delete.");
         case "find":
             throw new DukeException("Please specify the keyword you want to find.");
+        case "set":
+            throw new DukeException("Please specify the command you want to change.");
+        case "set1":
+            throw new DukeException("Please specify the new value.");
         default:
             handleUnknownCommand();
         }

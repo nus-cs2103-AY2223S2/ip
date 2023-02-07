@@ -1,6 +1,8 @@
 package duke.command;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import duke.DukeException;
 import duke.Storage;
@@ -9,6 +11,7 @@ import duke.Ui;
 import duke.task.Event;
 
 public class CreateEvent extends Command {
+    protected static ArrayList<String> aliases = new ArrayList<>(Arrays.asList("event", "e"));
     private String description;
     private LocalDate start;
     private LocalDate end;
@@ -26,4 +29,8 @@ public class CreateEvent extends Command {
         assert size + 1 == tasks.size();
         return ui.showAdd(tasks.get(tasks.size() - 1), tasks.size());
     }
+
+    public static boolean checkAlias(String alias) {
+       return aliases.contains(alias);
+    } 
 }

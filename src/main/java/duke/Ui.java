@@ -90,7 +90,7 @@ public class Ui {
      * @param task the task that was deleted.
      * @param size the size of the list after the deletion.
      */
-    public String showDelete(Task task, int size) {
+    public String showRemove(Task task, int size) {
         return "Noted. I've removed this task:\n" + task + "\nNow you have " + size + " tasks in the list.\n";
     }
 
@@ -101,6 +101,19 @@ public class Ui {
         return ret;
     }
 
+    /**
+     * Display the succesful addition of a command alias.
+     * 
+     * @param existing the existing command.
+     * @param alias the alias of the command.
+     */
+    public String showSet(String existing, String alias) {
+        return "Got it. I've added the alias \"" + alias + "\" for the command \"" + existing + "\".\n";
+    }
+
+    /**
+     * Display the error message for loading the file.
+     */
     public String showLoadingError() {
         return "Error loading file!\n";
     }

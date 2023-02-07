@@ -1,15 +1,19 @@
 package duke.command;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.task.Task;
 
-public class Delete extends Command {
+public class Remove extends Command {
+    protected static ArrayList<String> aliases = new ArrayList<>(Arrays.asList("remove", "r"));
     private Integer index;
 
-    public Delete(Integer i) {
+    public Remove(Integer i) {
         this.index = i;
     }
 
@@ -22,6 +26,10 @@ public class Delete extends Command {
         Integer size = tasks.size();
         tasks.remove(index-1);
         assert size - 1 == tasks.size();
-        return ui.showDelete(t, tasks.size());
+        return ui.showRemove(t, tasks.size());
     }
+
+    public static boolean checkAlias(String alias) {
+       return aliases.contains(alias);
+    } 
 }

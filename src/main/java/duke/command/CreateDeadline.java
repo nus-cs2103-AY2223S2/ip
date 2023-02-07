@@ -1,6 +1,8 @@
 package duke.command;
 
 import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.ArrayList;
 
 import duke.DukeException;
 import duke.Storage;
@@ -9,6 +11,7 @@ import duke.Ui;
 import duke.task.Deadline;
 
 public class CreateDeadline extends Command {
+    protected static ArrayList<String> aliases = new ArrayList<>(Arrays.asList("deadline", "dl"));
     private String desc;
     private LocalDate by;
 
@@ -25,4 +28,7 @@ public class CreateDeadline extends Command {
         return ui.showAdd(tasks.get(tasks.size() - 1), tasks.size());
     }
 
+   public static boolean checkAlias(String alias) {
+      return aliases.contains(alias);
+   } 
 }

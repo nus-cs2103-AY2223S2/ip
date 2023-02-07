@@ -1,11 +1,16 @@
 package duke.command;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
 public class Exit extends Command {
+    protected static ArrayList<String> aliases = new ArrayList<>(Arrays.asList("bye", "b"));
+
     public Exit() {
         super();
     }
@@ -20,4 +25,8 @@ public class Exit extends Command {
     public boolean isExit() {
         return true;
     }
+
+    public static boolean checkAlias(String alias) {
+       return aliases.contains(alias);
+    } 
 }

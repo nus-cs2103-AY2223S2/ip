@@ -1,5 +1,8 @@
 package duke.command;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
@@ -7,6 +10,7 @@ import duke.Ui;
 import duke.task.Task;
 
 public class Mark extends Command {
+    protected static ArrayList<String> aliases = new ArrayList<>(Arrays.asList("mark", "m"));
     private Integer index;
 
     public Mark(Integer i) {
@@ -22,4 +26,8 @@ public class Mark extends Command {
         t.setDone();
         return ui.showMark(t);
     }
+
+    public static boolean checkAlias(String alias) {
+       return aliases.contains(alias);
+    } 
 }
