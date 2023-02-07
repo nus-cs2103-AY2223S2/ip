@@ -33,54 +33,49 @@ public class TaskList {
      * @throws InvalidCommandInputException If command argument is invalid.
      */
     public Task addTask(String input) throws CommandNotFoundException, InvalidCommandInputException {
+        // Check for empty command or arguments.
         if (input != null && (input.equals("todo") || input.equals("deadline") || input.equals("event"))) {
             throw new InvalidCommandInputException("Empty argument", input);
         } else if (input.matches("deadline .* /by .*")) {
-            // Break apart input string.
+            // Parse content from input.
             String[] arr = input.split(" /by ");
             String content = arr[0].substring(9, arr[0].length());
 
-            // Check if argument exists.
             if (content.length() == 0 || arr[1].length() == 0) {
                 throw new InvalidCommandInputException("Empty argument", "deadline");
             }
 
-            // Add new deadline task to the list.
             try {
                 tasks.add(new Deadline(content, arr[1]));
             } catch (InvalidDateFormatException e) {
                 System.out.println(e.getMessage());
             }
         } else if (input.matches("event .* /from .* /to .*")) {
-            // Break apart input string.
+            // Parse content from input.
             String[] arr = input.split(" /from ");
             String content = arr[0].substring(6, arr[0].length());
             String[] startEnd = arr[1].split(" /to ");
 
-            // Check if arguments exists.
             if (content.length() == 0 || startEnd[0].length() == 0 || startEnd[1].length() == 0) {
                 throw new InvalidCommandInputException("Empty argument", "event");
             }
 
-            // Add new event task to the list.
             try {
                 tasks.add(new Event(content, startEnd[0], startEnd[1]));
             } catch (InvalidDateFormatException e) {
                 System.out.println(e.getMessage());
             }
         } else if (input.matches("todo .*")) {
-            // Check if argument exists.
             if (input.length() == 5) {
                 throw new InvalidCommandInputException("Empty argument", "todo");
             }
 
-            // Add new todo task to the list.
             tasks.add(new ToDo(input.substring(5, input.length())));
         } else {
             throw new CommandNotFoundException("Duke command is invalid.", input);
         }
 
-        // Return the added task.
+        // Return the added task (last element).
         return tasks.get(tasks.size() - 1);
     }
 
@@ -101,7 +96,6 @@ public class TaskList {
      * @param i Index of the task to be deleted.
      */
     public Task deleteTask(int i) {
-        // Find and remove the task at the given index.
         Task res = this.getTask(i);
         tasks.remove(i);
 
@@ -161,12 +155,12 @@ public class TaskList {
      * @throws InvalidDateFormatException If the date given does not follow the specified format.
      */
     public TaskList findTasksOnDate(String input) throws InvalidDateFormatException {
-        // Convert string to LocalDateTime object.
+
         LocalDateTime datetime = DateTimeHelper.parse(input);
 
         TaskList result = new TaskList();
 
-        // Find all valid tasks by iterating through them.
+        // Find all valid tasks that occur on the deadline or within the Event period.
         for (Task t: tasks) {
             if (t instanceof Deadline) {
                 Deadline d = (Deadline) t;

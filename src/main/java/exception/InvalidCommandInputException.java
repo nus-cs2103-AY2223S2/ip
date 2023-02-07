@@ -4,6 +4,7 @@ package exception;
  * Represents the exception when a command receives an invalid input.
  */
 public class InvalidCommandInputException extends DukeException {
+
     private String command;
 
     /**

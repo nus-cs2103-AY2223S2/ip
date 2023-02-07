@@ -20,8 +20,8 @@ public class Duke {
     public Duke() {
         this.ui = new Ui();
         this.storage = new Storage("tasks.txt");
-        this.tasks = this.storage.load();
-        this.ui.setContext(this.storage, this.tasks);
+        this.tasks = storage.load();
+        this.ui.setContext(storage, tasks);
     }
 
     /**
@@ -30,6 +30,6 @@ public class Duke {
      * @return Response from the UI.
      */
     public Response getResponse(String input) {
-        return this.ui.send(input);
+        return ui.send(input);
     }
 }

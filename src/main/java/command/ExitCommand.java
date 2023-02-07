@@ -28,10 +28,9 @@ public class ExitCommand extends Command {
      */
     @Override
     public Response execute(TaskList tl, Ui ui, Storage storage) {
-        // Print goodbye statement
+
         System.out.println("Bye. Hope to see you again soon!");
 
-        // Exit program
         System.exit(0);
 
         return new Response("EXIT", tl);

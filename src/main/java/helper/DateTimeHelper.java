@@ -23,6 +23,7 @@ public class DateTimeHelper {
      * @throws InvalidDateFormatException If the string does not follow the specified format.
      */
     public static LocalDateTime parse(String dateTimeString) throws InvalidDateFormatException {
+
         // Check if string is in the correct format.
         if (!dateTimeString.matches("\\d{1,3}/\\d{1,3}/\\d+ \\d{4}")) {
             throw new InvalidDateFormatException("Incorrect date format!");
@@ -58,6 +59,7 @@ public class DateTimeHelper {
      * @throws InvalidDateFormatException If the string does not follow the specified format.
      */
     public static LocalDateTime parseFormattedDateTime(String dateTimeString) throws InvalidDateFormatException {
+
         // Check if string is in the correct format.
         if (!dateTimeString.matches(".{3} \\d{1,3} \\d{4} \\d{2}:\\d{2}")) {
             throw new InvalidDateFormatException("Incorrect date format!");
@@ -89,6 +91,7 @@ public class DateTimeHelper {
      * @throws InvalidDateFormatException If the string does not follow the specified format.
      */
     public static Integer convertMonth(String month) throws InvalidDateFormatException {
+
         // Generate HashMap to map months to their numerical values.
         HashMap<String, Integer> monthToNumber = new HashMap<>();
 

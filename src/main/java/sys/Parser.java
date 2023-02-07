@@ -27,13 +27,10 @@ public class Parser {
      * @return Command object representing the input.
      */
     public Command parse(String input) {
-        // Handle control flow
         switch (input) {
         case "bye":
-            // Exit Duke
             return new ExitCommand();
         case "list":
-            // List tasks
             return new ListCommand();
         default:
             if (input.matches("occurs .*")) {

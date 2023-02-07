@@ -14,6 +14,7 @@ import task.TaskList;
  * Represents the command to list all the tasks that occur within the given period.
  */
 public class OccursCommand extends Command {
+
     private String input;
 
     /**
@@ -36,7 +37,7 @@ public class OccursCommand extends Command {
      */
     @Override
     public Response execute(TaskList tl, Ui ui, Storage storage) throws DukeException {
-        // Handle occurs
+
         String dateTime = input.substring(7);
 
         try {

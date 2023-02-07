@@ -14,6 +14,7 @@ import task.TaskList;
  * Represents the command to mark a task as completed and save the changes.
  */
 public class MarkCommand extends Command {
+
     private String input;
 
     /**
@@ -36,19 +37,18 @@ public class MarkCommand extends Command {
      */
     @Override
     public Response execute(TaskList tl, Ui ui, Storage storage) throws DukeException {
-        // Find index to mark
-        Integer idx = Integer.valueOf(input.split(" ")[1]) - 1;
 
-        // Verify if task number is invalid:
-        if (idx < 0 || idx >= tl.numberOfTasks()) {
+        Integer taskIndex = Integer.valueOf(input.split(" ")[1]) - 1;
+
+        if (taskIndex < 0 || taskIndex >= tl.numberOfTasks()) {
             throw new InvalidCommandInputException("Task number is invalid!", "mark");
         }
 
         // Mark task and save changes
-        tl.markTask(idx);
+        tl.markTask(taskIndex);
         storage.save(tl);
 
-        String message = "Nice! I've marked this task as done:\n" + tl.getTask(idx);
+        String message = "Nice! I've marked this task as done:\n" + tl.getTask(taskIndex);
 
         return new Response(message, tl);
     }
