@@ -14,17 +14,12 @@ import javafx.stage.Stage;
 import red.Red;
 
 /**
- * A GUI for Red using FXML.
+ * A GUI for Duke using FXML.
  */
 public class Main extends Application {
 
     private Red duke = new Red();
 
-    /**
-     * Loads the application for interaction with the user
-     *
-     * @param stage the image we show the user
-     */
     @Override
     public void start(Stage stage) {
         try {
