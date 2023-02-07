@@ -101,6 +101,7 @@ public class Duke extends Application {
                 if (userInput.getText().equals("bye")) {
                     try {
                         handleClose(pw, textDir, tasks);
+                        stage.close();
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
@@ -113,6 +114,7 @@ public class Duke extends Application {
                 if (userInput.getText().equals("bye")) {
                     try {
                         handleClose(pw, textDir, tasks);
+                        stage.close();
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
