@@ -3,7 +3,6 @@ package duke.command;
 import java.util.Objects;
 
 import duke.TaskList;
-import duke.UI;
 import duke.task.Task;
 
 public class AddTaskCommand extends Command {
@@ -15,12 +14,12 @@ public class AddTaskCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList list) {
+    public CommandResult execute(TaskList list) {
         list.add(task);
-        String displayedMsg = String.format(
+        String msg = String.format(
                 "Got it. I've added this task:\n" + "  %s\n" + "Now you have %s in the list.", task,
                 list.countTaskAsString());
-        UI.echo(displayedMsg);
+        return new CommandResult(msg);
     }
 
     @Override

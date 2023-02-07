@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.TaskList;
-import duke.UI;
 import duke.task.Task;
 
 public class MarkCommand extends Command {
@@ -13,10 +12,10 @@ public class MarkCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList list) {
+    public CommandResult execute(TaskList list) {
         Task task = list.get(index);
         task.markAsDone();
-        UI.echo("Nice! I've marked this task as done:\n  " + task);
+        return new CommandResult("Nice! I've marked this task as done:\n  " + task);
     }
 
     @Override

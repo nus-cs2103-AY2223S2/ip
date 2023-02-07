@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.TaskList;
-import duke.UI;
 import duke.task.Task;
 
 public class RemoveTaskCommand extends Command {
@@ -13,12 +12,12 @@ public class RemoveTaskCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList list) {
+    public CommandResult execute(TaskList list) {
         Task task = list.remove(index);
         String msg = String.format(
                 "Noted. I've removed this task:\n" + "  %s\n" + "Now you have %s in the list", task,
                 list.countTaskAsString());
-        UI.echo(msg);
+        return new CommandResult(msg);
     }
 
     @Override

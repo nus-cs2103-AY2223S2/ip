@@ -3,7 +3,6 @@ package duke.command;
 import java.util.Objects;
 
 import duke.TaskList;
-import duke.UI;
 
 public class FindTaskCommand extends Command {
 
@@ -14,10 +13,10 @@ public class FindTaskCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList list) {
+    public CommandResult execute(TaskList list) {
         String msg = "Here are the matching tasks in your list:\n"
                 + list.listTasksContainKeyword(keyword);
-        UI.echo(msg);
+        return new CommandResult(msg);
     }
 
     @Override

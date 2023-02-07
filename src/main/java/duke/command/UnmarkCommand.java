@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.TaskList;
-import duke.UI;
 import duke.task.Task;
 
 public class UnmarkCommand extends Command {
@@ -13,10 +12,10 @@ public class UnmarkCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList list) {
+    public CommandResult execute(TaskList list) {
         Task task = list.get(index);
         task.unmarkAsDone();
-        UI.echo("OK, I've marked this task as not done yet:\n  " + task);
+        return new CommandResult("OK, I've marked this task as not done yet:\n  " + task);
     }
 
     @Override

@@ -12,7 +12,7 @@ public abstract class Command {
      *
      * @param list the {@code TaskList} that this {@code Command} may operate on.
      */
-    public abstract void execute(TaskList list);
+    public abstract CommandResult execute(TaskList list);
 
     /**
      * Checks whether this {@code Command} signals the exit of the application.

@@ -1,6 +1,7 @@
 package duke;
 
 import duke.command.Command;
+import duke.command.CommandResult;
 
 public class Duke {
 
@@ -12,7 +13,8 @@ public class Duke {
             try {
                 String input = UI.readCommand();
                 Command cmd = Parser.parseCommand(input);
-                cmd.execute(list);
+                CommandResult cmdResult = cmd.execute(list);
+                UI.echo(cmdResult.getResult());
                 if (cmd.isExit()) {
                     break;
                 }
