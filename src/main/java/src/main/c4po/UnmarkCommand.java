@@ -3,6 +3,7 @@ public class UnmarkCommand extends Command {
 
     private Integer indexToUnmark;
     public UnmarkCommand(Integer index) {
+        assert(index > 0) : "index must be larger than 0";
         this.indexToUnmark = index;
     }
 

@@ -7,6 +7,11 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Deadline task keeps tracks of deadlines using date-time format
+ * The constructor takes in a string of Date {yyyy-mm-dd}
+ *  and optionally {HHmm} as time after including a space separator
+ */
 public class Deadline extends Task {
 
     protected String by;

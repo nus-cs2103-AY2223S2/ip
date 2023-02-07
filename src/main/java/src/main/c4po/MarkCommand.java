@@ -6,6 +6,7 @@ public class MarkCommand extends Command {
     Integer indexToMark;
 
     public MarkCommand(Integer index) {
+        assert(index > 0) : "index must be larger than 0";
         indexToMark = index;
     }
 
