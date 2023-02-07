@@ -22,8 +22,9 @@ public class Parser {
      * @throws MeggyNfException    If args string's first word is not a signed 32-bit {@link Integer}.
      */
     public static int parseIdx(String args) throws MeggyException {
+        assert args != null;
         final String arg = get1stArg(args);
-        if ("".equals(arg)) {
+        if (arg.isEmpty()) {
             throw new MeggyNoArgException();
         }
         final int idx;
@@ -39,9 +40,16 @@ public class Parser {
      * Parses text line into command, arguments, and finds job according to job table. All continuous whitespaces are
      * replaced with a single whitespace.
      *
+     * @param <E>      The return type of job functions in job table.
+     * @param jobTable Non-null. The mapping from command name to command job function.
+     * @param line     Non-null. Unprocessed User's input line.
      * @return Parsed command, job, and argument encapsulated in an {@code JobAndArg} object.
      */
     public static <E> JobAndArg<E> parseJobAndArg(Map<String, Function<String, E>> jobTable, String line) {
+        assert jobTable != null;
+        assert !jobTable.containsKey(null);
+        assert !jobTable.containsValue(null);
+        assert line != null;
         //Multiple whitespace characters are treated as 1 whitespace.
         line = line.replaceAll("[ \t\r\n\f]+", " ").trim();
         //Parse command and args
@@ -61,6 +69,7 @@ public class Parser {
      * @return The substring before the 1st whitespace character, or original string if no whitespace exists.
      */
     public static String get1stArg(String args) {
+        assert args != null;
         final int whiteSpaceIdx = args.indexOf(' ');
         return whiteSpaceIdx < 0 ? args : args.substring(0, whiteSpaceIdx);
     }

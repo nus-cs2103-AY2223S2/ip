@@ -35,6 +35,7 @@ public final class Util {
      * @return Notification message.
      */
     public static String usageIdxCmd(String cmd) {
+        assert cmd != null;
         return Resource.NOTIF_USAGE + cmd + " <idx: integer between 1 and list size (inclusive)>\n";
     }
 }

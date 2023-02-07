@@ -14,7 +14,8 @@ public abstract class UserTask {
 
     /** @param desc Non-null. Description string of task with command removed. */
     public UserTask(String desc) throws MeggyException {
-        if ("".equals(desc)) { // No arguments
+        assert desc != null;
+        if (desc.isEmpty()) { // No arguments
             throw new MeggyNoArgException();
         }
         this.desc = desc;
@@ -28,6 +29,7 @@ public abstract class UserTask {
      * @return Task-type-specific label.
      */
     public static String getTaskTypeLabel(String taskType) {
+        assert taskType != null;
         return Util.parenthesize(Character.toUpperCase(taskType.charAt(0)));
     }
 
@@ -38,12 +40,13 @@ public abstract class UserTask {
      * @return Command-syntax-marking time keyword.
      */
     public static String formatKeyword(String keyword) {
+        assert keyword != null;
         return '/' + keyword + ' ';
     }
 
     /** Update the completion status of this task. */
     public void setDone(boolean done) {
-        this.isDone = done;
+        isDone = done;
     }
 
     /**

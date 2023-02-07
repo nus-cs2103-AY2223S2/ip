@@ -27,6 +27,8 @@ public class EventTask extends UserTask {
      */
     private EventTask(String desc, MeggyTime start, MeggyTime end) throws MeggyException {
         super(desc);
+        assert start != null;
+        assert end != null;
         this.start = start;
         this.end = end;
     }
@@ -37,6 +39,7 @@ public class EventTask extends UserTask {
      * @param args Non-null. User input line with command removed.
      */
     public static EventTask of(String args) throws MeggyException {
+        assert args != null;
         final int argLen = args.length();
         // All positions of keywords.
         final ArrayList<KwIdxPair> kwIdxs = new ArrayList<>();

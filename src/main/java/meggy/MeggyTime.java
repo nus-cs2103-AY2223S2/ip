@@ -54,27 +54,34 @@ public class MeggyTime {
 
     /** @param time Non-null. The trimmed time value to be interpreted. */
     private MeggyTime(String time) {
-        this.formatted = parseTime(time);
-        this.customized = this.formatted == null ? time : null;
+        assert time != null;
+        formatted = parseTime(time);
+        customized = formatted == null ? time : null;
     }
 
     /**
-     * Factory method. Trims none-null strings. It also accepts {@code null} value, in which case it returns the cached
+     * Factory method. Trims string if non-null. It also accepts {@code null} value, in which case it returns the cached
      * {@code NA} value.
      *
      * @param time Untrimmed time value to be interpreted or {@code null} if {@code NA} value is intended.
      */
     public static MeggyTime of(String time) {
-        return time == null ? NA : new MeggyTime(time.trim());
+        final MeggyTime ans = time == null ? NA : new MeggyTime(time.trim());
+        assert ans != null && (ans.customized == null ^ ans.formatted == null);
+        return ans;
     }
 
-    /** @return parsed date-time or {@code null} if no formatter can parse correctly. */
+    /**
+     * @param time Non-null. The raw string to attempt to parsed.
+     * @return parsed date-time or {@code null} if no formatter can parse correctly.
+     */
     public static LocalDateTime parseTime(String time) {
+        assert time != null;
         for (DateTimeFormatter format : FORMATTERS) {
             try {
                 return LocalDateTime.parse(time, format);
             } catch (DateTimeException ignored) {
-            } // try next formatter if unsuccessful
+            } // Try next formatter if unsuccessful
         }
         return null;
     }

@@ -12,11 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 /**
@@ -46,6 +42,9 @@ public class DialogBox extends HBox {
             // If FXML file IO causes an error, program must crash.
             throw new RuntimeException(e);
         }
+        assert dialog != null;
+        assert profilePic != null;
+
         dialog.setText(text);
         profilePic.setImage(img);
         final double profPicRad = Math.max(profilePic.getFitHeight(), profilePic.getFitWidth()) / 2;
@@ -59,6 +58,7 @@ public class DialogBox extends HBox {
      * @return User's dialog box with avatar on the right
      */
     public static DialogBox ofUser(String text) {
+        assert text != null;
         return new DialogBox(text, GuiUtil.USER_PROF_PIC);
     }
 
@@ -69,15 +69,16 @@ public class DialogBox extends HBox {
      * @return Meggy's dialog box with avatar on the right.
      */
     public static DialogBox ofMeggy(String text) {
-        var db = new DialogBox(text, GuiUtil.MEGGY_PROF_PIC);
+        assert text != null;
+        final DialogBox db = new DialogBox(text, GuiUtil.MEGGY_PROF_PIC);
         db.flipToLeft();
-        db.setBackground(new Background(new BackgroundFill(Color.ORANGE, new CornerRadii(20), null)));
+        db.setBackground(GuiUtil.MEGGY_DIALOG_BG);
         return db;
     }
 
     /** Flips the dialog box such that the ImageView is on the left and text on the right. */
     private void flipToLeft() {
-        ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
+        final ObservableList<Node> tmp = FXCollections.observableArrayList(getChildren());
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
