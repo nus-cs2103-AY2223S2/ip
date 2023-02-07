@@ -80,7 +80,7 @@ public class Ui {
         }
         case("find"): {
             String search = chat.split(" ")[1];
-            assert search !== null : "Searching keyword cannot be null";
+            assert search != null : "Searching keyword cannot be null";
             ArrayList<Task> list = new ArrayList<>();
             for (Task task : ls.getList()) {
                 if (task.contains(search)) {

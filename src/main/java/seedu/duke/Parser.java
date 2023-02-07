@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -80,4 +81,15 @@ public class Parser {
         return eventParser.apply(chat);
     }
 
+    public static LocalDateTime parseDate(String by) {
+        String[] date = by.split(" ")[0].split("/");
+        int day = Integer.valueOf(date[0]);
+        int month = Integer.valueOf(date[1]);
+        int year = Integer.valueOf(date[2]);
+        String time = by.split(" ")[1];
+        int hour = Integer.valueOf(time.substring(0, 2));
+        int minute = Integer.valueOf(time.substring(2, 4));
+        LocalDateTime dateTime = LocalDateTime.of(year, month, day, hour, minute);
+        return dateTime;
+    }
 }

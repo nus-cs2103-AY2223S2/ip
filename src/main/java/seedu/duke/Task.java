@@ -36,11 +36,8 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        String status = " ";
-        if (isDone) {
-            status = "X";
-        }
-        String response = "[" + abbreviation + "][" + status + "] " + task;
+        String status = isDone ? "X" : " ";
+        String response = String.format("[%s][%s] %s", abbreviation, status, task);
         return response.trim();
     }
 
