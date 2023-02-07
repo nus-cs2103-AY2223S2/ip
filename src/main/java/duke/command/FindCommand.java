@@ -15,7 +15,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.reply(taskList.find(keyword));
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        return taskList.find(keyword);
     }
 }

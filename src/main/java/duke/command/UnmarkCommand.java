@@ -13,12 +13,15 @@ public class UnmarkCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        String response;
         try {
-            ui.reply(taskList.unmark(index));
+            response = taskList.unmark(index);
             storage.saveState(taskList);
+            return response;
         } catch (DukeException e) {
-            ui.reply(e.toString());
+            response = e.toString();
+            return response;
         }
     }
 }

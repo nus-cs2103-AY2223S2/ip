@@ -24,10 +24,12 @@ public class AddEventCommand extends Command {
      * @param taskList Tasklist containing current tasks.
      * @param ui Ui Component for input and output.
      * @param storage Storage component for persistent storage of Tasks.
+     * @return String to displayed by duke.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.reply(taskList.addEvent(description, from, to));
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        String response = taskList.addEvent(description, from, to);
         storage.saveState(taskList);
+        return response;
     }
 }

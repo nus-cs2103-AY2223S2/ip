@@ -6,7 +6,7 @@ import duke.Ui;
 
 public class UnknownCommand extends Command {
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.reply("Unknown command, please try again");
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        return "Unknown command, please try again";
     }
 }

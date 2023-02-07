@@ -11,8 +11,8 @@ public class ExitCommand extends Command {
         return true;
     }
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.signOff();
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        return "Bye. Hope to see you again!";
     }
 
 }

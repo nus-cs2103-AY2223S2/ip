@@ -13,12 +13,15 @@ public class DeleteCommand extends Command {
         this.index = index;
     }
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        String response;
         try {
-            ui.reply(taskList.deleteTask(index));
+            response = taskList.deleteTask(index);
             storage.saveState(taskList);
+            return response;
         } catch (DukeException e) {
-            ui.reply(e.toString());
+            response = e.toString();
+            return response;
         }
     }
 }

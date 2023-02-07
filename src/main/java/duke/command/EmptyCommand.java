@@ -6,7 +6,7 @@ import duke.Ui;
 
 public class EmptyCommand extends Command {
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.reply("Please input a command");
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        return "Please input a command";
     }
 }
