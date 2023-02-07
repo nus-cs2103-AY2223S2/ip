@@ -1,17 +1,20 @@
 package drivers;
 
+import java.util.Scanner;
+
 import support.Instructions;
 import task.TaskList;
-
-import java.util.Scanner;
 
 /**
  * Deprecated. Converted to GUI.
  */
 public class Ui {
     private Scanner sc = new Scanner(System.in);
-    private Parser parser= new Parser();
+    private Parser parser = new Parser();
 
+    /**
+     * Print greetings
+     */
     public Ui() {
         System.out.println("Echo! I'm Bond.");
         System.out.println("---------------");

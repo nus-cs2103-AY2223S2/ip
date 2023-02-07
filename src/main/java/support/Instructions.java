@@ -1,5 +1,8 @@
 package support;
 
+/**
+ * Contains instructions to user.
+ */
 public class Instructions {
 
     /**

@@ -1,18 +1,16 @@
 package support;
 
-import task.TaskList;
-
-import java.io.FileNotFoundException;
-import java.util.Scanner;
-
 import java.io.File;
-
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
-
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Scanner;
+
+import task.TaskList;
+
 /**
  * Represents a database.
  */
@@ -30,7 +28,7 @@ public class Storage {
         try {
             if (Files.exists(data)) {
                 this.file = new File(String.valueOf(data));
-            } else if (Files.exists(dir)){
+            } else if (Files.exists(dir)) {
                 this.file = new File("data/duke.txt");
             } else {
                 Files.createDirectories(dir);
