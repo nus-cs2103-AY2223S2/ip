@@ -4,6 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+import duke.Ui;
 import duke.dukeexceptions.DukeExceptions;
 import duke.tasklist.TaskList;
 import duke.tasks.Task;
@@ -14,6 +15,7 @@ import duke.tasks.Task;
 public class Storage {
     private File file;
     private final String path;
+    private Ui ui;
 
     /**
      * Constructor for storage abstraction.
@@ -62,7 +64,9 @@ public class Storage {
             }
             scanner.close();
         } catch (IOException e) {
-            throw new DukeExceptions("Error when loading from save");
+            System.out.println(e.getMessage());
+        } catch (DukeExceptions exceptions) {
+            ui.showError(exceptions);
         }
         return result;
     }
@@ -82,7 +86,5 @@ public class Storage {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
-
     }
-
 }

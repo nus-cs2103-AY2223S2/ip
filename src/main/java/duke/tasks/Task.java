@@ -76,13 +76,13 @@ public abstract class Task {
             break;
 
         case "E":
-            String[]fromToSplit = taskStringSplit[3].split(" - ");
+            String[] fromToSplit = taskStringSplit[3].split(" - ");
             currTask = new Event(taskStringSplit[2], fromToSplit[0], fromToSplit[1]);
             break;
-        }
 
-        // default:
-        // throw new DukeExceptions("Loading of file failed.");
+        default:
+            throw new DukeExceptions("Loading of file failed.");
+        }
 
         if (taskStringSplit[1].equals("1")) {
             currTask.setDone();
