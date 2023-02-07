@@ -53,4 +53,14 @@ public abstract class Task {
     public String toString() {
         return "[" + getStatusIcon() + "] " + this.description;
     }
+
+    /**
+     * Returns true if task description contains a certain keyword.
+     *
+     * @param keyword Keyword to search for in task description
+     * @return true if description contains keyword and false otherwise
+     */
+    public boolean doesDescriptionContain(String keyword) {
+        return this.description.contains(keyword);
+    }
 }

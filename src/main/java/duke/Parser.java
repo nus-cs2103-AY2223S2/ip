@@ -4,6 +4,7 @@ import duke.command.AddCommand;
 import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
 
@@ -98,6 +99,14 @@ public class Parser {
                     throw new DukeException("WAKANDEYO!!! >:(");
                 }
                 return new DeleteCommand(idx);
+            case "find":
+                if (!args.hasNext()) {
+                    throw new DukeException("WAKANDEYO!!! >:(");
+                }
+
+                String keyword = args.next();
+                return new FindCommand(keyword);
+
             default:
                 throw new DukeException();
                 // printErrorMessage(ErrorEnum.UNKNOWN_INPUT);
