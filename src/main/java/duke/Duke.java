@@ -27,6 +27,7 @@ public class Duke {
             ui.showLoadingError();
             Storage.setDefaultStorage();
             tasks = new TaskList();
+            greetingMsg = ui.showWelcomeMessage();
         }
     }
 
