@@ -17,7 +17,7 @@ public enum CommandType {
         this.value = value;
     }
 
-    public boolean equals(String input) {
+    public boolean isEqual(String input) {
         return this.value.equalsIgnoreCase(input);
     }
 }
