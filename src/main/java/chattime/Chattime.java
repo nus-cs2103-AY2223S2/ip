@@ -33,9 +33,9 @@ public class Chattime {
         try {
             Command cmd = Parser.parse(input);
 
-            if (cmd != null) {
-                response = cmd.execute(ui, tasks, storage);
-            }
+            assert cmd != null : "Parsing process went wrong unexpectedly!";
+            response = cmd.execute(ui, tasks, storage);
+
         } catch (ChattimeException e) {
             return ui.printError(e.getMessage());
         }

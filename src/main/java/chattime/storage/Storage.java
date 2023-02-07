@@ -106,14 +106,17 @@ public class Storage {
 
                 switch (taskSplit[0]) {
                 case "T":
+                    assert taskSplit.length == 3 : "Todo task data error!";
                     inputTask = new Todo(taskSplit[2]);
                     break;
 
                 case "D":
+                    assert taskSplit.length == 5 : "Deadline task data error!";
                     inputTask = createDeadlineObject(taskSplit);
                     break;
 
                 case "E":
+                    assert taskSplit.length == 7 : "Deadline task data error!";
                     inputTask = createEventObject(taskSplit);
                     break;
 
@@ -237,6 +240,7 @@ public class Storage {
     private void writeToFile(String content, boolean append) {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(file, append));
+            assert !content.equals("") : "Storing empty data!";
             writer.write(content);
             writer.close();
 
