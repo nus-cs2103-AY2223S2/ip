@@ -19,7 +19,7 @@ import java.util.Scanner;
  */
 public class Storage {
     private final String filePath;
-    private ArrayList<Task> list;
+    private final ArrayList<Task> list;
 
     /**
      * Constructor to instantiate the file path

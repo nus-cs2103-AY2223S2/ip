@@ -3,14 +3,8 @@ package lele;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-
 import java.io.IOException;
 
 /**
@@ -18,18 +12,9 @@ import java.io.IOException;
  * to handle the GUI.
  */
 public class Main extends Application {
-
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
-
     public Main() {}
 
-    private Lele lele = new Lele("./data/lele.txt");
+    private final Lele lele = new Lele("./data/lele.txt");
 
     @Override
     public void start(Stage stage) {

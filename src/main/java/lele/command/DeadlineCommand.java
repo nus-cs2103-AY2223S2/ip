@@ -36,7 +36,7 @@ public class DeadlineCommand extends Command {
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
         try {
-            taskList.addTasks(deadline);
+            taskList.addTask(deadline);
             storage.updateStorage(taskList);
             return ui.printAddTask(taskList, deadline);
         } catch  (IOException e) {

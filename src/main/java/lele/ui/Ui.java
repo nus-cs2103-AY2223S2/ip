@@ -202,7 +202,7 @@ public class Ui {
     public String printFind(TaskList taskList, String regex) {
         clearBuffer();
         sb.append("Here are the matching tasks in your list:\n");
-        sb.append(taskList.findTasks(regex));
+        sb.append(taskList.findTask(regex));
         return sb.toString();
     }
 }

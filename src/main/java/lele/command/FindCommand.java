@@ -9,7 +9,7 @@ import lele.ui.Ui;
  * executes the actions to take upon a find command.
  */
 public class FindCommand extends Command {
-    private String regex;
+    private final String regex;
 
     /**
      * Instantiates the regex queried by the user.
