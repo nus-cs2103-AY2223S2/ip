@@ -9,6 +9,9 @@ import ui.TextUi;
  * An abstract class for all commands
  */
 public abstract class Command {
+    static String STRING_LIST = "list";
+    static String STRING_SPACE = " ";
+
     protected final String command;
     protected final boolean doesPrint;
     protected boolean isExit = false;
@@ -68,11 +71,11 @@ public abstract class Command {
      * Get the sub-string after the command key word
      * @param string the command
      * @return the sub-string after the command keyword
-     * @throws DukeException
+     * @throws DukeException if command is incomplete
      */
     public String getCommandContent(String string, String commandName) throws DukeException {
         String commandString = commandName.toLowerCase();
-        if ((!commandString.equals("list")) && string.length() <= commandString.length() + 1) {
+        if ((!commandString.equals(STRING_LIST)) && string.length() <= commandString.length() + 1) {
             throw new DukeException("The command argument is not complete.");
         }
         return string.substring(string.indexOf(commandString) + commandString.length() + " ".length());
@@ -82,7 +85,7 @@ public abstract class Command {
      * Throws exceptions if the user-input is not a complete command.
      */
     protected void checkInputComponents() throws DukeException {
-        String[] splits = command.split(" ");
+        String[] splits = command.split(STRING_SPACE);
         if (splits.length < numComponents) {
             throw new DukeException(String.format("Input is not a complete command. "
                             + "It should contain %d components. \nPlease try again. ",

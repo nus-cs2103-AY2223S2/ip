@@ -10,7 +10,7 @@ public class DukeException extends Exception {
     protected String errorMessage;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param errorMessage the error message of the exception
      */

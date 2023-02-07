@@ -21,7 +21,7 @@ public class TaskCommand extends Command {
      */
     public TaskCommand(String command, boolean doesPrint, int numComponents) throws DukeException {
         super(command, doesPrint, numComponents);
-        this.commandName = captalizeFirstChar(command.split(" ")[0]);
+        this.commandName = captalizeFirstChar(command.split(STRING_SPACE)[0]);
     }
 
     /**
@@ -31,7 +31,8 @@ public class TaskCommand extends Command {
      * @return a new string whose first character is capitalized
      */
     protected String captalizeFirstChar(String string) {
-        return string.substring(0, 1).toUpperCase() + string.substring(1);
+        int SECOND_CHAR_INDEX = 1;
+        return string.substring(0, SECOND_CHAR_INDEX).toUpperCase() + string.substring(SECOND_CHAR_INDEX);
     }
 
     /**

@@ -11,6 +11,7 @@ import task.TaskList;
  * Command for deleting a task
  */
 public class DeleteCommand extends TaskCommand {
+    static int NUM_COMPONENTS = 2;
 
     /**
      * Default constructor
@@ -18,7 +19,7 @@ public class DeleteCommand extends TaskCommand {
      * @param doesPrint whether to print messages
      */
     public DeleteCommand(String command, boolean doesPrint) throws DukeException {
-        super(command, doesPrint, 2);
+        super(command, doesPrint, NUM_COMPONENTS);
     }
 
     /**

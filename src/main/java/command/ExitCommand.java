@@ -8,6 +8,7 @@ import task.TaskList;
  * Command for exiting from the program
  */
 public class ExitCommand extends Command {
+    static int NUM_COMPONENTS = 1;
 
     /**
      * Default constructor
@@ -15,7 +16,7 @@ public class ExitCommand extends Command {
      * @param doesPrint whether to print messages
      */
     public ExitCommand(String command, boolean doesPrint) throws DukeException {
-        super(command, doesPrint, 1);
+        super(command, doesPrint, NUM_COMPONENTS);
         isExit = true;
     }
 

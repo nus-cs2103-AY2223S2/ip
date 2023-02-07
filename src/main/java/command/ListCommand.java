@@ -8,6 +8,7 @@ import task.TaskList;
  * List commands
  */
 public class ListCommand extends Command {
+    static int NUM_COMPONENTS = 1;
 
     /**
      * Default constructor, saves the command
@@ -15,7 +16,7 @@ public class ListCommand extends Command {
      * @param command the user-input command
      */
     public ListCommand(String command, boolean doesPrint) throws DukeException {
-        super(command, doesPrint, 1);
+        super(command, doesPrint, NUM_COMPONENTS);
     }
 
     /**

@@ -7,6 +7,10 @@ import java.util.Scanner;
  * The text UI interface that processes user input and prints outputs
  */
 public class TextUi {
+    private static String BYE_STRING = "bye";
+    private static String WELCOME_STRING = "Hello! I'm %s\nWhat can I do for you?";
+    private static String BYE_REPLY_STRING = "Bye. Hope to see you again soon!\n";
+
     protected final String name;
     protected final Scanner scanner;
 
@@ -24,7 +28,7 @@ public class TextUi {
      * Prints a welcome message when starting up
      */
     public void showWelcome() {
-        printStructuredString(String.format("Hello! I'm %s\nWhat can I do for you?", name));
+        printStructuredString(String.format(WELCOME_STRING, name));
     }
 
     /**
@@ -52,7 +56,7 @@ public class TextUi {
      *
      */
     public void sayGoodbye() {
-        printStructuredString("Bye. Hope to see you again soon!");
+        printStructuredString(BYE_REPLY_STRING);
     }
 
     /**
@@ -62,6 +66,6 @@ public class TextUi {
      * @return if the string marks the end of the conversation
      */
     public boolean isEnd(String string) {
-        return Objects.equals(string.toLowerCase(), "bye");
+        return Objects.equals(string.toLowerCase(), BYE_STRING);
     }
 }
