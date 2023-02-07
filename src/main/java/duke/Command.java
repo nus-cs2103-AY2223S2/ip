@@ -70,6 +70,9 @@ public class Command {
         if (this.args.length() == 0) {
             throw new DukeException("What is the ToDo task???");
         } else {
+            // Check if number of arguments returns non-negative value
+            assert this.args.length() > 0;
+
             Task taskToAdd = new ToDo(this.args.trim());
             taskList.addTask(taskToAdd);
             System.out.println();
@@ -92,6 +95,8 @@ public class Command {
         if (args.length() == 0) {
             throw new DukeException("What is the Deadline task???");
         } else {
+            // Check if number of arguments returns non-negative value
+            assert this.args.length() > 0;
             Pattern deadlinePattern = Pattern.compile(".+/by \\d{2}/\\d{2}/\\d{4} \\d{4}");
             Matcher matchDeadline = deadlinePattern.matcher(this.args);
             if (matchDeadline.find()) {
@@ -126,6 +131,8 @@ public class Command {
         if (args.length() == 0) {
             throw new DukeException("What is the Event task???");
         } else {
+            // Check if number of arguments returns non-negative value
+            assert this.args.length() > 0;
             Pattern eventPattern = Pattern
                     .compile(".+/from \\d{2}/\\d{2}/\\d{4} \\d{4} /to \\d{2}/\\d{2}/\\d{4} \\d{4}");
             Matcher matchEvent = eventPattern.matcher(this.args);
@@ -165,6 +172,9 @@ public class Command {
      * @throws DukeException when index given is less than 0 or greater than size of taskList - 1
      */
     private String mark(TaskList taskList) throws DukeException {
+        //Checks if argument is numeric
+        assert Pattern.compile("\\d+").matcher(this.args).find();
+
         return taskList.markTask(Integer.parseInt(this.args));
     }
 
@@ -174,6 +184,9 @@ public class Command {
      * @throws DukeException when index given is less than 0 or greater than size of taskList - 1
      */
     private String unmark(TaskList taskList) throws DukeException {
+        //Checks if argument is numeric
+        assert Pattern.compile("\\d+").matcher(this.args).find();
+
         return taskList.unMarkTask(Integer.parseInt(this.args));
     }
 
@@ -183,6 +196,9 @@ public class Command {
      * @throws DukeException when index given is less than 0 or greater than size of taskList - 1
      */
     private String deleteTask(TaskList taskList) throws DukeException {
+        //Checks if argument is numeric
+        assert Pattern.compile("\\d+").matcher(this.args).find();
+
         taskList.removeTask(Integer.parseInt(this.args));
         return "Deleted Task no. " + this.args ;
     }

@@ -36,6 +36,10 @@ public class TaskList {
     private void fillStorage(List<String> lines) {
         for (String line: lines) {
             String[] arguments = line.split (" | ");
+
+            //Checks if line has been segmented into exactly 4 sections
+            assert arguments.length == 4;
+
             switch(arguments[1]) {
                 case "T":
                     storeTodoTask(arguments);
@@ -195,7 +199,7 @@ public class TaskList {
      * @return list of strings that contains key word or key phrase
      */
     public List<String> getMatchingDesc(String argument) {
-        List<String> descriptions = new ArrayList<>(100);
+        List<String> descriptions = new ArrayList<>();
         for (Task task: this.storage) {
             if (task.toString().contains(argument)) {
                 descriptions.add(this.storage.indexOf(task) + " | "
