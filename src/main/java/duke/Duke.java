@@ -95,6 +95,7 @@ public class Duke {
                 break;
             }
             default:
+                assert false;
                 break;
             }
         } catch (DukeException e) {

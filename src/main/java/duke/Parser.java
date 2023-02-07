@@ -109,7 +109,8 @@ public class Parser {
     public static Todo parseTodo() throws DukeException {
         if (args.length < 2) {
             throw new DukeException("The description of a todo cannot be empty!");
-        }
+
+        assert args.length == 2;
         String desc = args[1];
         return new Todo(desc);
     }
@@ -128,6 +129,7 @@ public class Parser {
             throw new DukeException("Deadline needs to include a specific end date!");
         }
         try {
+            assert separated.length == 2;
             LocalDate date = LocalDate.parse(separated[1]);
             return new Deadline(separated[0], date);
         } catch (DateTimeParseException e) {
@@ -148,6 +150,7 @@ public class Parser {
         if (separated.length < 3) {
             throw new DukeException("Event needs to include a start date/time and a end date/time!");
         }
+        assert separated.length == 3;
         return new Event(separated[0], separated[1], separated[2]);
     }
 
