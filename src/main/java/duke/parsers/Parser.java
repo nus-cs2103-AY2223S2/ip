@@ -5,7 +5,6 @@ import duke.commands.DeadlineCommand;
 import duke.commands.DeleteCommand;
 import duke.commands.EndCommand;
 import duke.commands.EventCommand;
-import duke.commands.FindCommand;
 import duke.commands.ListCommand;
 import duke.commands.MarkCommand;
 import duke.commands.ToDoCommand;
@@ -69,9 +68,6 @@ public class Parser {
             }
             int index = Integer.parseInt(requestContent.trim()) - 1;
             return new DeleteCommand(index);
-
-        case "find":
-            return new FindCommand(requestContent);
 
         default:
             return new UnknownCommand();
