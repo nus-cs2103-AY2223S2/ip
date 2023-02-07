@@ -36,6 +36,7 @@ public abstract class Task {
      *
      */
     public String getDescription() {
+        assert !this.description.equals(""): "Empty description!";
         return this.description;
     }
 
