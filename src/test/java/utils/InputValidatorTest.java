@@ -14,7 +14,7 @@ import membot.utils.InvalidCommandException;
 
 public class InputValidatorTest {
     @Test
-    public void isCheckInputValidTest() {
+    public void isSingleInputValidTest() {
         String input1 = "done 1";
         String input2 = "done one";
         String input3 = "done 1 2";
@@ -26,18 +26,24 @@ public class InputValidatorTest {
         String input9 = "delete 9";
         String input10 = "delete 0";
         String input11 = "somerandomcommand 0";
+        String input12 = "find something";
+        String input13 = "find something i havent do";
+        String input14 = "find";
 
-        assertTrue(InputValidator.isCheckInputValid(input1));
-        assertFalse(InputValidator.isCheckInputValid(input2));
-        assertFalse(InputValidator.isCheckInputValid(input3));
-        assertFalse(InputValidator.isCheckInputValid(input4));
-        assertFalse(InputValidator.isCheckInputValid(input5));
-        assertTrue(InputValidator.isCheckInputValid(input6));
-        assertFalse(InputValidator.isCheckInputValid(input7));
-        assertFalse(InputValidator.isCheckInputValid(input8));
-        assertTrue(InputValidator.isCheckInputValid(input9));
-        assertTrue(InputValidator.isCheckInputValid(input10));
-        assertTrue(InputValidator.isCheckInputValid(input11));
+        assertTrue(InputValidator.isSingleInputValid(input1, false, true));
+        assertFalse(InputValidator.isSingleInputValid(input2, false, true));
+        assertFalse(InputValidator.isSingleInputValid(input3, false, true));
+        assertFalse(InputValidator.isSingleInputValid(input4, false, true));
+        assertFalse(InputValidator.isSingleInputValid(input5, false, true));
+        assertTrue(InputValidator.isSingleInputValid(input6, false, true));
+        assertFalse(InputValidator.isSingleInputValid(input7, false, true));
+        assertFalse(InputValidator.isSingleInputValid(input8, false, true));
+        assertTrue(InputValidator.isSingleInputValid(input9, false, true));
+        assertTrue(InputValidator.isSingleInputValid(input10, false, true));
+        assertTrue(InputValidator.isSingleInputValid(input11, false, true));
+        assertTrue(InputValidator.isSingleInputValid(input12, true, false));
+        assertTrue(InputValidator.isSingleInputValid(input13, true, false));
+        assertFalse(InputValidator.isSingleInputValid(input14, true, false));
     }
 
     @Test
