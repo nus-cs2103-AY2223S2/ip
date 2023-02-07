@@ -5,10 +5,12 @@ import duke.commands.DeadlineCommand;
 import duke.commands.DeleteCommand;
 import duke.commands.EventCommand;
 import duke.commands.FindCommand;
+import duke.commands.FindDateCommand;
 import duke.commands.ListCommand;
 import duke.commands.MarkCommand;
 import duke.commands.TodoCommand;
 import duke.commands.UnmarkCommand;
+
 
 /**
  * The class to generate Command objects.
@@ -16,7 +18,7 @@ import duke.commands.UnmarkCommand;
 public class Parser {
 
     private enum Type {
-        BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, FIND
+        BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, FIND, FINDDATE
     }
 
     /**
@@ -52,6 +54,9 @@ public class Parser {
 
         case FIND:
             return new FindCommand(input);
+
+        case FINDDATE:
+            return new FindDateCommand(input);
 
         case BYE:
             return new ByeCommand(input);

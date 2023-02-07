@@ -1,4 +1,5 @@
 package duke;
+import java.util.ArrayList;
 
 import duke.tasks.Task;
 
@@ -117,5 +118,23 @@ public class Ui {
      */
     public String noTasksMessage() {
         return "There are no tasks.";
+    }
+
+    /**
+     * Return tasks in the list.
+     * @param tasks The tasks.
+     * @return String The message.
+     */
+    public String printTasks(ArrayList<Task> tasks) {
+        String result = "Here are the tasks in your list:\n";
+        for (int i = 0; i < tasks.size(); i++) {
+            int num = i + 1;
+            result += "    "
+                    + num
+                    + ". "
+                    + tasks.get(i)
+                    + "\n";
+        }
+        return result;
     }
 }
