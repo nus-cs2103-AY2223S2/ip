@@ -3,17 +3,13 @@ package duke.task;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class TaskList extends ArrayList<Task>{
-
-    /**
-     * Constructs task list.
-     */
-    public TaskList(ArrayList<Task> tasks) {
-        super(tasks);
-    }
+    /** Consistent serialVersionUID value */
+    private static final long serialVersionUID = 6529685098267757690L;
 
     /**
      * Constructs empty task list.
@@ -102,5 +98,63 @@ public class TaskList extends ArrayList<Task>{
             }
         }
         return list;
+    }
+
+    public void sort() {
+        Collections.sort(this);
+    }
+
+    public void sortDate() {
+        this.sort((task1, task2) -> {
+            int comparison;
+            if (task1 instanceof Deadline && task2 instanceof Deadline) {
+                comparison = ((Deadline) task1).getDeadline().compareTo(((Deadline) task2).getDeadline());
+            } else if (task1 instanceof Deadline && task2 instanceof Event) {
+                comparison = ((Deadline) task1).getDeadline().compareTo(((Event) task2).getStartDateTime());
+            } else if (task1 instanceof Event && task2 instanceof Deadline) {
+                comparison = ((Event) task1).getStartDateTime().compareTo(((Deadline) task2).getDeadline());
+            } else if (task1 instanceof Event && task2 instanceof Event) {
+                comparison = ((Event) task1).getStartDateTime().compareTo(((Event) task2).getStartDateTime());
+            } else if (task1 instanceof Todo && !(task2 instanceof Todo)) {
+                comparison = 1;
+            } else if (task2 instanceof Todo && !(task1 instanceof Todo)) {
+                comparison = -1;
+            } else {
+                comparison = task1.compareTo(task2);
+            }
+            return comparison;
+        });
+    }
+
+    public void sortTask() {
+        this.sort((task1, task2) -> {
+            int comparison;
+            if (task1 instanceof Todo && !(task2 instanceof Todo)) {
+                comparison = -1;
+            } else if (task2 instanceof Todo && !(task1 instanceof Todo)) {
+                comparison = 1;
+            } else if (task1 instanceof Deadline && !(task2 instanceof Deadline)) {
+                comparison = -1;
+            } else if (task2 instanceof Deadline && !(task1 instanceof Deadline)) {
+                comparison = 1;
+            } else {
+                comparison = task1.compareTo(task2);
+            }
+            return comparison;
+        });
+    }
+
+    public void sortDone() {
+        this.sort((task1, task2) -> {
+            int comparison;
+            if (task1.isDone() && !(task2.isDone())) {
+                comparison = 1;
+            } else if (task2.isDone() && !(task1.isDone())) {
+                comparison = -1;
+            } else {
+                comparison = task1.compareTo(task2);
+            }
+            return comparison;
+        });
     }
 }

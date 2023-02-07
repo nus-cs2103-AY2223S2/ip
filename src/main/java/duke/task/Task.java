@@ -2,7 +2,7 @@ package duke.task;
 
 import java.io.Serializable;
 
-public abstract class Task implements Serializable{
+public abstract class Task implements Serializable, Comparable<Task> {
     /** Description of task */
     private String description;
     /** Status of task */
@@ -71,5 +71,10 @@ public abstract class Task implements Serializable{
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + description;
+    }
+
+    @Override
+    public int compareTo(Task o) {
+        return description.compareTo(o.description);
     }
 }

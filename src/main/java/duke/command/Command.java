@@ -51,6 +51,7 @@ public abstract class Command {
         @Override
         public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
             tasks.add(task);
+            tasks.sort();
             storage.save(tasks);
             ui.showAdded(task);
             ui.showListSize(tasks);
@@ -262,6 +263,82 @@ public abstract class Command {
         public void execute(TaskList tasks, Ui ui, Storage storage) {
             TaskList filteredTasks = tasks.filterDate(dates);
             ui.showFilteredByDates(dates, filteredTasks);
+        }
+    }
+
+    public static class SortCommand extends Command {
+
+        /**
+         * Constructs SortCommand class.
+         */
+        public SortCommand() {
+            Command.isExit =false;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public void execute(TaskList tasks, Ui ui, Storage storage) {
+            tasks.sort();
+            ui.showList(tasks);
+        }
+    }
+
+    public static class SortDateCommand extends Command {
+
+        /**
+         * Constructs SortDateCommand class.
+         */
+        public SortDateCommand() {
+            Command.isExit =false;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public void execute(TaskList tasks, Ui ui, Storage storage) {
+            tasks.sortDate();
+            ui.showList(tasks);
+        }
+    }
+
+    public static class SortTaskCommand extends Command {
+
+        /**
+         * Constructs SortTaskCommand class.
+         */
+        public SortTaskCommand() {
+            Command.isExit =false;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public void execute(TaskList tasks, Ui ui, Storage storage) {
+            tasks.sortTask();
+            ui.showList(tasks);
+        }
+    }
+
+    public static class SortDoneCommand extends Command {
+
+        /**
+         * Constructs SortDoneCommand class.
+         */
+        public SortDoneCommand() {
+            Command.isExit =false;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public void execute(TaskList tasks, Ui ui, Storage storage) {
+            tasks.sortDone();
+            ui.showList(tasks);
         }
     }
 

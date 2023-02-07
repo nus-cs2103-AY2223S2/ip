@@ -3,7 +3,6 @@ package duke.command;
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
-import duke.task.Task;
 import duke.task.Todo;
 
 import java.time.LocalDate;
@@ -195,6 +194,14 @@ public class Parser {
                     validDates[i] = stringToDate(stringDates[i].trim());
                 }
                 return new Command.FilterDateCommand(validDates);
+            case "sort":
+                return new Command.SortCommand();
+            case "sortdate":
+                return new Command.SortDateCommand();
+            case "sorttask":
+                return new Command.SortTaskCommand();
+            case "sortdone":
+                return new Command.SortDoneCommand();
             case "bye":
                 return new Command.ExitCommand();
             default:
