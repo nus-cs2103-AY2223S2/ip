@@ -1,5 +1,7 @@
 package duke.tasks;
 
+import duke.Duke;
+import duke.DukeException;
 import duke.Parser;
 
 import java.time.LocalDateTime;
@@ -11,10 +13,13 @@ public class Events extends Task {
     protected LocalDateTime startDate;
     protected LocalDateTime endDate;
 
-    public Events(String description, String startDate, String endDate) {
+    public Events(String description, String startDate, String endDate) throws DukeException {
         super(description);
         this.startDate = Parser.stringToDateTime(startDate);
         this.endDate = Parser.stringToDateTime(endDate);
+        if (this.endDate.isBefore(this.startDate)) {
+            throw new DukeException("Event is Invalid! Your Start Date is after your EndDate!");
+        }
     }
 
     public String getStart() {

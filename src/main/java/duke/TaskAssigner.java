@@ -109,7 +109,6 @@ public class TaskAssigner {
         } catch (DateTimeParseException e) {
             throw new DukeException("Improper Event Format! Follow:\n"
                     + "event {desc} /from yyyy-mm-dd hhmm /to yyyy-mm-dd hhmm\n");
-
         }
     }
 }

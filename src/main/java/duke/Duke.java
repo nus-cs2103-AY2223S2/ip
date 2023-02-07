@@ -18,7 +18,7 @@ public class Duke {
 
         try {
             storage.loadTasks(taskList);
-        } catch (IOException e) {
+        } catch (IOException | DukeException e) {
             System.out.println(e.getMessage());
         }
     }

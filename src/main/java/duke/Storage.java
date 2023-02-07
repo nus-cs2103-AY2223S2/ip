@@ -48,7 +48,7 @@ public class Storage {
      * @param taskList the current tasklist
      * @throws IOException catch for Input and Output inconsistencies.
      */
-    public void loadTasks(TaskList taskList) throws IOException {
+    public void loadTasks(TaskList taskList) throws IOException, DukeException {
         File folder = new File(dirPath);
         if (!folder.exists()) {
             folder.mkdirs();
