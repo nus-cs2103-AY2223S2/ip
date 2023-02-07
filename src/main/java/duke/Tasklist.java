@@ -28,30 +28,33 @@ public class Tasklist {
      * @param request  the type of request that the user requested for.
      * @param position position of the current task in the tasklist.
      */
-    public void updateTask(String request, int position) {
+    public String updateTask(String request, int position) {
         switch (request) {
         case "mark":
             storage.get(position).markAsDone();
-            System.out.println("Nice! I've marked this task as done:\n" + "[" + storage.get(position).getStatusIcon() + "] " + storage.get(position).description);
-            break;
+            return "Nice! I've marked this task as done:\n" + "[" + storage.get(position).getStatusIcon() + "] " + storage.get(position).description;
         case "unmark":
             storage.get(position).markAsNotDone();
-            System.out.println("OK, I've marked this task as not done yet:\n" + "[" + storage.get(position).getStatusIcon() + "] " + storage.get(position).description);
-            break;
+            return "OK, I've marked this task as not done yet:\n" + "[" + storage.get(position).getStatusIcon() + "] " + storage.get(position).description;
         case "delete":
-            System.out.println("Noted. I've removed this task:\n" + storage.get(position - 1).toString() + "\nNow you have " + (storage.size() - 1) + " tasks in the list");
+            Task deletedTask = storage.get(position);
             storage.remove(position);
+            return "Noted. I've removed this task:\n" + deletedTask.toString() + "\nNow you have " + (storage.size()) + " " +
+                    "tasks in the list";
         }
+        return "";
     }
 
     /**
      * Prints all the tasks that are available in the current Tasklist to console.
      */
-    public void printList() {
-        System.out.println("Here are the tasks in your list:");
+    public String printList() {
+        String list = "Here are the tasks in your list:\n";
         for (int i = 0; i < storage.size(); i++) {
-            System.out.println((i + 1) + "." + storage.get(i).toString());
+            list = list + (i + 1) + "." + storage.get(i).toString() + "\n";
         }
+        list = list + " ";
+        return list;
     }
 
     /**
@@ -60,47 +63,50 @@ public class Tasklist {
      * @param type    the type of task to be added.
      * @param content the user input that they typed in the command line.
      */
-    public void addingActivities(String type, String content) {
+    public String addingActivities(String type, String content) {
         switch (type) {
         case "todo":
             Todo todoTask = new Todo(content.substring(5), content);
             storage.add(todoTask);
-            System.out.println("Got it. I've added this task:\n  " + todoTask.toString() + "\nNow you have " + storage.size() + " tasks in the list");
-            break;
+            return "Got it. I've added this task:\n  " + todoTask.toString() + "\nNow you have " + storage.size() +
+                    " tasks in the list";
         case "deadline":
             int position = content.indexOf("/by ");
             Deadline deadlineTask = new Deadline(content.substring(9, position), content, content.substring(position + 4));
             storage.add(deadlineTask);
-            System.out.println("Got it. I've added this task:\n  " + deadlineTask.toString() + "\nNow you have " + storage.size() + " tasks in the list");
-            break;
+            return "Got it. I've added this task:\n  " + deadlineTask.toString() + "\nNow you have " + storage.size() +
+                " tasks in the list";
         case "event":
             int position1 = content.indexOf("/from ");
             int position2 = content.indexOf("/to ");
             Event eventTask = new Event(content.substring(6, position1), content, content.substring(position1 + 6, position2), content.substring(position2 + 4));
             storage.add(eventTask);
-            System.out.println("Got it. I've added this task:\n  " + eventTask.toString() + "\nNow you have " + storage.size() + " tasks in the list");
-            break;
+            return "Got it. I've added this task:\n  " + eventTask.toString() + "\nNow you have " + storage.size() +
+                    " tasks in the list";
         }
+        return "";
     }
 
-    public void findingActivities(String content) {
+    public String findingActivities(String content) {
         int index = 1;
-        System.out.println("Here are the matching tasks in your list:");
+        String found = "Here are the matching tasks in your list:\n";
         for (int i = 0; i < storage.size(); i++) {
             Task taskObtained = storage.get(i);
             if (taskObtained.getDescription().contains(content)) {
                 if (taskObtained instanceof Todo) {
-                    System.out.println(index + "." + ((Todo) taskObtained).toString());
+                    found = found + (index + "." + ((Todo) taskObtained).toString()) + "\n";
                     index++;
                 } else if (taskObtained instanceof Deadline) {
-                    System.out.println(index + "." + ((Deadline) taskObtained).toString());
+                    found = found + (index + "." + ((Deadline) taskObtained).toString()) + "\n";
                     index++;
                 } else {
-                    System.out.println(index + "." + ((Event) taskObtained).toString());
+                    found = found + index + "." + ((Event) taskObtained).toString() + "\n";
                     index++;
                 }
             }
         }
+        found = found + " ";
+        return found;
     }
 
     /**
