@@ -1,7 +1,5 @@
 package main;
 
-import java.util.Scanner;
-
 import task.Task;
 
 /**
@@ -14,11 +12,20 @@ public class Ui {
         this.output = new StringBuilder();
     }
 
+    public String printHello() {
+            String logo = " ____        _        \n"
+                    + "|  _ \\ _   _| | _____ \n"
+                    + "| | | | | | | |/ / _ \\\n"
+                    + "| |_| | |_| |   <  __/\n"
+                    + "|____/ \\__,_|_|\\_\\___|\n";
+            appendToOutput("Hello from\n" + logo + "Hello! I'm Duke\nWhat can I do for you?");
+            return print();
+    }
     private void resetOutput() {
         output.setLength(0);
     }
 
-    public String showLine() {
+    public String print() {
         String temp = output.toString();
         resetOutput();
         return temp;
