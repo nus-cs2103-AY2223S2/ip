@@ -27,8 +27,6 @@ public class Parser {
      */
     public void parse(String commandLine) throws DukeException {
 
-        System.out.printf(Duke.DIV_OPEN);
-
         String[] command = commandLine.split(" ");
 
         switch (command[0]) {
@@ -100,8 +98,6 @@ public class Parser {
         default:
             throw new DukeException("Invalid/Unknown command.");
         }
-
-        System.out.println(Duke.DIV_CLOSE); // DIV_CLOSE for output
 
     }
 

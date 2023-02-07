@@ -3,17 +3,24 @@ package duke;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.Scanner;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 /**
  * Duke class which initiates the program and execute it.
  */
-public class Duke extends Application {
+public class Duke {
     protected static final String DIV_OPEN = "____________________________________________________________\n";
     protected static final String DIV_CLOSE = "____________________________________________________________\n";
     protected static final String LOGO = ""
@@ -34,13 +41,8 @@ public class Duke extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-
-    /**
-     * Empty Constructor for Duke class.
-     */
-    public Duke() {
-
-    }
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/User.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/Duke.png"));
 
     /**
      * Constructor for Duke class.
@@ -85,27 +87,24 @@ public class Duke extends Application {
         ui.printByeMsg();
     }
 
-    @Override
-    public void start(Stage stage) {
-        //Step 1. Setting up required components
-
-        //The container for the content of the chat to scroll.
-        scrollPane = new ScrollPane();
-        dialogContainer = new VBox();
-        scrollPane.setContent(dialogContainer);
-
-        userInput = new TextField();
-        sendButton = new Button("Send");
-
-        AnchorPane mainLayout = new AnchorPane();
-        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-
-        scene = new Scene(mainLayout);
-
-        stage.setScene(scene);
-        stage.show();
-
-        // more code to be added here later
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    protected String getResponse(String input) {
+        if (input.equals("bye")) {
+            return "OK bye.";
+        } else {
+            try {
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                System.setOut(new PrintStream(baos));
+                parser.parse(input);
+                storage.save(tasks.tasks);
+                return baos.toString();
+            } catch (DukeException e) {
+                return e.getMessage();
+            }
+        }
     }
 
     /**
