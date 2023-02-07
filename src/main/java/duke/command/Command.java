@@ -28,6 +28,6 @@ public abstract class Command {
 
     public abstract boolean equals(Object obj);
 
-    public abstract void execute() throws DukeException;
+    public abstract String execute() throws DukeException;
 
 }

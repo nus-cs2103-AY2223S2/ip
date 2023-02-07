@@ -10,6 +10,6 @@ public class Main {
      * The main method of the Duke program.
      */
     public static void main(String[] args) throws DukeException {
-        new Duke();
+        JavaFxUi.main();
     }
 }

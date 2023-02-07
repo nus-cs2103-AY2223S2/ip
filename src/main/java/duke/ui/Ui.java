@@ -1,7 +1,6 @@
 package duke.ui;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import duke.DukeException;
 import duke.task.Task;
@@ -12,115 +11,115 @@ import duke.task.TaskList;
  * Handles all user input and output.
  */
 public class Ui {
-    private final Scanner in = new Scanner(System.in);
-
     /**
      * Prints the welcome message.
      */
-    public void printWelcomeMessage() {
-        System.out.println("\t____________________________________________________________");
-        System.out.println("\tHello! I'm Duke");
-        System.out.println("\tWhat can I do for you?");
-        System.out.println("\t____________________________________________________________");
+    public String printWelcomeMessage() {
+        return "\t____________________________________________________________\n"
+                + "\tHello! I'm Duke\n"
+                + "\tWhat can I do for you?\n"
+                + "\t____________________________________________________________";
     }
 
     /**
      * Prints the bye message.
      */
-    public void printByeMessage() {
-        System.out.println("\t____________________________________________________________");
-        System.out.println("\tBye. Hope to see you again soon!");
-        System.out.println("\t____________________________________________________________");
-        in.close();
+    public String printByeMessage() {
+        return "\t____________________________________________________________\n"
+                + "\tBye. Hope to see you again soon!\n"
+                + "\t____________________________________________________________";
     }
 
     /**
      * Prints the task added message.
+     * 
      * @param task      The task that was added.
      * @param taskCount The number of tasks in the task list after addition.
      */
-    public void printTaskAdded(Task task, int taskCount) {
-        System.out.println("\tGot it. I've added this task:");
-        System.out.println("\t\t" + task);
-        System.out.println("\tNow you have " + taskCount + " tasks in the list.");
+    public String printTaskAdded(Task task, int taskCount) {
+        return "\tGot it. I've added this task:\n"
+                + "\t\t" + task + "\n"
+                + "\tNow you have " + taskCount + " tasks in the list.";
     }
 
     /**
      * Prints the task marked message.
+     * 
      * @param task The task that was marked.
      */
-    public void printTaskMarked(Task task) {
-        System.out.println("\tNice! I've marked this task as done:");
-        System.out.println("\t\t" + task);
+    public String printTaskMarked(Task task) {
+        return "\tNice! I've marked this task as done:\n"
+                + "\t\t" + task;
     }
 
     /**
      * Prints the task unmarked message.
+     * 
      * @param task The task that was unmarked.
      */
-    public void printTaskUnmarked(Task task) {
-        System.out.println("\tNice! I've marked this task as not done:");
-        System.out.println("\t\t" + task);
+    public String printTaskUnmarked(Task task) {
+        return "\tNice! I've marked this task as not done:\n"
+                + "\t\t" + task;
     }
 
     /**
      * Prints the task deleted message.
+     * 
      * @param task      The task that was deleted.
      * @param taskCount The number of tasks in the task list after deletion.
      */
-    public void printTaskDeleted(Task task, int taskCount) {
-        System.out.println("\tNoted. I've removed this task:");
-        System.out.println("\t\t" + task);
-        System.out.println("\tNow you have " + taskCount + " tasks in the list.");
+    public String printTaskDeleted(Task task, int taskCount) {
+        return "\tNoted. I've removed this task:\n"
+                + "\t\t" + task + "\n"
+                + "\tNow you have " + taskCount + " tasks in the list.";
     }
 
     /**
      * Prints the task list.
+     * 
      * @param taskList The task list to be printed.
      */
-    public void printTaskList(TaskList taskList) {
-        System.out.println("\tHere are the tasks in your list:");
+    public String printTaskList(TaskList taskList) {
+        String output = "\tHere are the tasks in your list:";
         for (int i = 0; i < taskList.getSize(); i++) {
             Task t = taskList.getTask(i);
-            System.out.println("\t\t" + (i + 1) + "." + t);
+            output += "\n\t\t" + (i + 1) + "." + t;
         }
+        return output;
     }
 
     /**
      * Prints the found tasks.
+     * 
      * @param foundTasks The list of found tasks.
      */
-    public void printFoundTasks(ArrayList<Task> foundTasks) {
-        System.out.println("\tHere are the matching tasks in your list:");
+    public String printFoundTasks(ArrayList<Task> foundTasks) {
+        String output = "\tHere are the matching tasks in your list:";
         for (int i = 0; i < foundTasks.size(); i++) {
             Task t = foundTasks.get(i);
-            System.out.println("\t\t" + (i + 1) + "." + t);
+            output += "\n\t\t" + (i + 1) + "." + t;
         }
+        return output;
     }
+
     /**
      * Prints the error message for a DukeException.
+     * 
      * @param e The DukeException to be printed.
      */
-    public void printError(DukeException e) {
-        // System.out.println("\t____________________________________________________________");
-        System.out.println("\t" + e.getMessage());
-        // System.out.println("\t____________________________________________________________");
+    public String printError(DukeException e) {
+        return "\t____________________________________________________________\n"
+                + "\t" + e.getMessage() + "\n"
+                + "\t____________________________________________________________";
     }
 
     /**
      * Prints the error message for an unknown command.
      */
-    public void printErrorActionMessage() {
-        // System.out.println("\t____________________________________________________________");
-        System.out.println("\tI'm sorry, but I don't know what that means :-(");
-        // System.out.println("\t____________________________________________________________");
+    public String printErrorActionMessage() {
+        return "\t____________________________________________________________\n"
+                + "\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
+                + "\t____________________________________________________________";
     }
 
-    /**
-     * Reads the command from the user.
-     * @return The command entered by the user.
-     */
-    public String readCommand() {
-        return in.nextLine();
-    }
 }

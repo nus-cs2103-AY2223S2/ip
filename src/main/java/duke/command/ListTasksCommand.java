@@ -8,8 +8,8 @@ public class ListTasksCommand extends Command {
     }
 
     @Override
-    public void execute() {
-        ui.printTaskList(taskList);
+    public String execute() {
+        return ui.printTaskList(taskList);
     }
 
     @Override

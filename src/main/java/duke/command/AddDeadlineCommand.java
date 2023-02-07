@@ -21,9 +21,9 @@ public class AddDeadlineCommand extends Command {
     }
 
     @Override
-    public void execute() {
+    public String execute() {
         taskList.addTask(deadline);
-        ui.printTaskAdded(deadline, taskList.getSize());
+        return ui.printTaskAdded(deadline, taskList.getSize());
     }
 
     @Override

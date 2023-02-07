@@ -23,19 +23,19 @@ public class Duke {
         TaskList taskList = storage.readFromFile();
 
         ui.printWelcomeMessage();
-        String userInput = ui.readCommand();
+        // String userInput = ui.readCommand();
 
-        while (!userInput.equals("bye")) {
-            try {
-                Command command = parser.parseCommand(userInput);
-                command.assign(taskList, ui);
-                command.execute();
-            } catch (DukeException e) {
-                ui.printError(e);
-            } finally {
-                userInput = ui.readCommand();
-            }
-        }
+        // while (!userInput.equals("bye")) {
+        // try {
+        // Command command = parser.parseCommand(userInput);
+        // command.assign(taskList, ui);
+        // command.execute();
+        // } catch (DukeException e) {
+        // ui.printError(e);
+        // } finally {
+        // userInput = ui.readCommand();
+        // }
+        // }
         storage.writeToFile(taskList);
         ui.printByeMessage();
     }

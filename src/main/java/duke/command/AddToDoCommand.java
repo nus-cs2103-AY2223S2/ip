@@ -26,9 +26,9 @@ public class AddToDoCommand extends Command {
     }
 
     @Override
-    public void execute() {
+    public String execute() {
         taskList.addTask(toDo);
-        ui.printTaskAdded(toDo, taskList.getSize());
+        return ui.printTaskAdded(toDo, taskList.getSize());
     }
 
 }

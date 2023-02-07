@@ -14,13 +14,13 @@ public class UnmarkTaskCommand extends Command {
     }
 
     @Override
-    public void execute() throws DukeException {
+    public String execute() throws DukeException {
         if (index >= taskList.getSize()) {
             throw new DukeException("Task number is out of range!");
         }
         Task task = taskList.getTask(index);
         task.markAsNotDone();
-        ui.printTaskUnmarked(task);
+        return ui.printTaskUnmarked(task);
     }
 
     @Override

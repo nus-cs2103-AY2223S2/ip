@@ -14,12 +14,12 @@ public class RemoveTaskCommand extends Command {
     }
 
     @Override
-    public void execute() throws DukeException {
+    public String execute() throws DukeException {
         if (index >= taskList.getSize()) {
             throw new DukeException("Task number is out of range!");
         }
         Task removedTask = taskList.deleteTask(index);
-        ui.printTaskDeleted(removedTask, taskList.getSize());
+        return ui.printTaskDeleted(removedTask, taskList.getSize());
     }
 
     @Override
