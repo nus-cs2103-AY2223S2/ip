@@ -47,6 +47,11 @@ public class Clippy {
         Application.launch(GuiLinker.class, args);
     }
 
+    /**
+     * Performs the appropriate command handler.
+     *
+     * @param input The command to be parsed.
+     */
     public void handleCommand(String input) {
         try {
             Command command = Parser.parse(input);

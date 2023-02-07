@@ -1,7 +1,5 @@
 package clippy.ui;
 
-import java.util.Scanner;
-
 /**
  * An abstraction encapsulating the user input/output interfaces.
  *
