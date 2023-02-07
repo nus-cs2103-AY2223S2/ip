@@ -1,26 +1,38 @@
-public class Task {
-    private final int taskNumber;
-    private final boolean taskStatus;
-    private final String task;
+import java.util.Objects;
 
-    Task(int taskNumber, boolean taskStatus, String task) {
+public class Task {
+    protected final int taskNumber;
+    protected final boolean taskStatus;
+    protected final String task;
+    protected final int totalNumOfTasks;
+
+    Task(int taskNumber, boolean taskStatus, String task, int totalNumOfTasks) {
         this.taskNumber = taskNumber;
         this.taskStatus = taskStatus;
         this.task = task;
+        this.totalNumOfTasks = totalNumOfTasks;
     }
 
     public void markAsDone() {
         System.out.println("\t____________________________________________________________" +
                 "\n\t Nice! I've marked this task as done:\n" +
-                "\t  [X]" + " " + this.task +
+                "\t  " + "[X]" + " " + this.task +
                 "\n\t____________________________________________________________");
     }
 
     public void unmarkAsUndone() {
         System.out.println("\t____________________________________________________________" +
                 "\n\t OK, I've marked this task as not done yet:\n" +
-                "\t  [ ]" + " " + this.task +
+                "\t  " + "[ ]" + " " + this.task +
                 "\n\t____________________________________________________________");
+    }
+
+    public int getTaskNumber() {
+        return this.taskNumber;
+    }
+
+    public String getTaskType() {
+        return "";
     }
 
     public String getTaskStatus() {
@@ -33,5 +45,17 @@ public class Task {
 
     public String getTask() {
         return this.task;
+    }
+
+    public String getDeadline() {
+        return "";
+    }
+
+    public String getEventStartTime() {
+        return "";
+    }
+
+    public String getEventEndTime() {
+        return "";
     }
 }

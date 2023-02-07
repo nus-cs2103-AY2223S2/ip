@@ -1,0 +1,35 @@
+class Todo extends Task {
+    private final String taskType;
+
+    Todo(int taskNumber, boolean taskStatus, String task, int totalNumOfTasks) {
+        super(taskNumber, taskStatus, task, totalNumOfTasks);
+        this.taskType = "[T]";
+    }
+
+    public void markAsDone() {
+        System.out.println("\t____________________________________________________________" +
+                "\n\t Nice! I've marked this task as done:\n" +
+                "\t  " + this.taskType + "[X]" + " " + this.task +
+                "\n\t____________________________________________________________");
+    }
+
+    public void unmarkAsUndone() {
+        System.out.println("\t____________________________________________________________" +
+                "\n\t OK, I've marked this task as not done yet:\n" +
+                "\t  " + this.taskType + "[ ]" + " " + this.task +
+                "\n\t____________________________________________________________");
+    }
+
+    public void printToDoTask() {
+        System.out.println("\t____________________________________________________________" +
+                "\n\t Got it. I've added this task:" +
+                "\n\t   [T]" + super.getTaskStatus() + " " + super.task +
+                "\n\t Now you have " + super.totalNumOfTasks + " tasks in the list." +
+                "\n\t____________________________________________________________");
+    }
+
+    @Override
+    public String getTaskType() {
+        return this.taskType;
+    }
+}
