@@ -45,14 +45,24 @@ public class UI {
 
     }
 
+
+    /**
+     * Removes any words from redReply making it ready to except new replies
+     */
     public void clear() {
         this.redReply = new StringBuilder();
     }
 
+    /**
+     * Returns the replies from the tasks we run
+     */
     public String getCurrentReply() {
         return String.valueOf(this.redReply);
     }
 
+    /**
+     * Adds the replies from the tasks we run to redReply
+     */
     public void addCurrentReply(String reply) {
         this.redReply.append(reply);
     }
