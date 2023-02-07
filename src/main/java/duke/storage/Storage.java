@@ -1,7 +1,6 @@
 package duke.storage;
 
 import duke.exception.DukeException;
-import duke.task.Task;
 import duke.task.TaskList;
 
 import java.io.File;
@@ -12,7 +11,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 
 public class Storage {
     /** Filepath of TaskList */
@@ -49,23 +47,20 @@ public class Storage {
      * @throws DukeException If file cannot be found or if classes from the file cannot be found.
      */
     public TaskList load() throws DukeException {
-        TaskList tasks = null;
+        TaskList tasks = new TaskList();
         File file = filename.toFile();
         if (!file.exists()) {
             try {
                 file.getParentFile().mkdirs();
                 file.createNewFile();
-                tasks = new TaskList();
             } catch (IOException e) {
                 throw new DukeException(e.getMessage());
             }
         }
-        if(file.length() != 0) {
+        if (file.length() != 0) {
             try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filename.toString()))) {
-                tasks = new TaskList((ArrayList<Task>) ois.readObject());
-            } catch (ClassNotFoundException e) {
-                throw new DukeException(e.getMessage());
-            } catch (IOException e) {
+                tasks = (TaskList) ois.readObject();
+            } catch (ClassNotFoundException | IOException e) {
                 throw new DukeException(e.getMessage());
             }
         }
