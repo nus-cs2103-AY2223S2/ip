@@ -1,4 +1,4 @@
-package duke;
+package duke.Exceptions;
 
 /**
  * Class of exceptions that inherit from Exception

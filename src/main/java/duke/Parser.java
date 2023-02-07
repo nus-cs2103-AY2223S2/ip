@@ -1,11 +1,13 @@
 package duke;
 
+import duke.Exceptions.*;
+
 /**
  * Handles the reading and execution of inputs
  */
 public class Parser {
 
-    enum Types { LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, BYE, FIND }
+    enum Types { LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, BYE, FIND, RESCHEDULE }
 
     Parser() { }
 
@@ -34,8 +36,7 @@ public class Parser {
                     currTask.setAsDone();
                     return ui.printMarkedTaskMessage(currTask.toString());
                 } catch (IndexOutOfBoundsException e) {
-                    throw new NeroException("Please add the correct index from 0 to "
-                            + taskList.getSize());
+                    throw new IncorrectIndexException(taskList.getSize());
                 }
             }
             case UNMARK: {
@@ -45,8 +46,7 @@ public class Parser {
                     currTask.setAsUndone();
                     return ui.printUnmarkedTaskMessage(currTask.toString());
                 } catch (IndexOutOfBoundsException e) {
-                    throw new NeroException("Please add the correct index from 0 to "
-                            + taskList.getSize());
+                    throw new IncorrectIndexException(taskList.getSize());
                 }
             }
             case TODO:
@@ -57,7 +57,7 @@ public class Parser {
                     taskList.addTask(newTask);
                     return ui.printAddedTasks(newTask.toString(), taskList.getSize());
                 } catch (IndexOutOfBoundsException e) {
-                    throw new NeroException("Description cannot be empty!!!");
+                    throw new IncorrectToDoException();
                 }
             case DEADLINE:
                 try {
@@ -68,7 +68,7 @@ public class Parser {
                     taskList.addTask(newTask);
                     return ui.printAddedTasks(newTask.toString(), taskList.getSize());
                 } catch (IndexOutOfBoundsException e) {
-                    throw new NeroException("Add a task description and deadline in yyyy-mm-dd format!!!");
+                    throw new IncorrectFormatException();
                 }
             case EVENT:
                 try {
@@ -80,7 +80,7 @@ public class Parser {
                     taskList.addTask(newTask);
                     return ui.printAddedTasks(newTask.toString(), taskList.getSize());
                 } catch (IndexOutOfBoundsException e) {
-                    throw new NeroException("Add a task description, from and to date in yyyy-mm-dd format!!!");
+                    throw new IncorrectFormatException();
                 }
             case DELETE:
                 try {
@@ -89,7 +89,7 @@ public class Parser {
                     taskList.removeTask(toDelete);
                     return ui.printDeletedTasks(removedTask.toString(), taskList.getSize());
                 } catch (IndexOutOfBoundsException e) {
-                    throw new NeroException("Add a correct task number");
+                    throw new IncorrectIndexException(taskList.getSize());
                 }
             case FIND:
                 TaskList<Task> newTaskList = new TaskList<>();
@@ -103,11 +103,35 @@ public class Parser {
                 } else {
                     return ui.printNoMatchingTasks();
                 }
+            case RESCHEDULE:
+                try {
+                    int taskIndex = Integer.parseInt(input[1]) - 1;
+                    if (taskIndex >= taskList.getSize() || taskIndex < 0) {
+                        throw new IncorrectIndexException(taskList.getSize());
+                    }
+                    Task currTask = taskList.get(taskIndex);
+                    if (currTask instanceof ToDo) {
+                        return ui.printFailedReschedule();
+                    } else if (currTask instanceof Deadline) {
+                        String newDuration = input[3];
+                        Task newDeadline = new Deadline(currTask.getDescription(), newDuration);
+                        taskList.set(taskIndex, newDeadline);
+                        return ui.printSuccessfulReschedule(newDeadline.toString());
+                    } else {
+                        String startDate = input[3];
+                        String endDate = input[5];
+                        Task newEvent = new Event(currTask.getDescription(), startDate, endDate);
+                        taskList.set(taskIndex, newEvent);
+                        return ui.printSuccessfulReschedule(newEvent.toString());
+                    }
+                } catch (IndexOutOfBoundsException e) {
+                    throw new RescheduleException();
+                }
             default:
-                return "Command not detected! Please retry";
+                return ui.printCommandNotDetected();
             }
         } catch (IllegalArgumentException e) {
-            throw new NeroException("Wrong input!! Command not found!!");
+            throw new IncorrectInputException();
         }
     }
 

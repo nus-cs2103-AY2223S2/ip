@@ -1,7 +1,3 @@
-T | 1 | eat food
-T | 1 | run around
-D | 1 |  tern  | 2022-01-02
-T | 0 | listen
-D | 0 |  run around the zoo  | 2000-03-01
-D | 0 |  term  | 2000-01-01
-E | 0 |  eatandsleep  | 2022-01-04 2011-03-01
+T | 0 | run
+E | 0 |  cycle  | 2022-05-05 2033-06-06
+D | 0 |  drive  | 2033-02-02

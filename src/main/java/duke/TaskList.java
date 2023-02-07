@@ -1,4 +1,6 @@
 package duke;
+import duke.Exceptions.NeroException;
+
 import java.util.ArrayList;
 
 /**
@@ -35,10 +37,18 @@ public class TaskList<Task> {
      */
     void removeTask(int index) throws NeroException {
         try {
-            this.taskList.remove(index);
+            taskList.remove(index);
         } catch (IndexOutOfBoundsException e) {
             throw new NeroException("Please enter a valid index from 0 to "
-                    + (this.taskList.size() - 1));
+                    + (taskList.size() - 1));
+        }
+    }
+    void set(int index, Task newTask) throws NeroException {
+        try {
+            taskList.set(index, newTask);
+        } catch (IndexOutOfBoundsException e) {
+            throw new NeroException("Please enter a valid index from 0 to "
+                    + (taskList.size() - 1));
         }
     }
 

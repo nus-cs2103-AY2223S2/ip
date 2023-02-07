@@ -19,18 +19,6 @@ public class Ui {
                 "What would you like to do?";
     }
 
-    boolean hasNextLine() {
-        return sc.hasNextLine();
-    }
-
-    /**
-     * Prints welcome message to user when user first starts
-     * the program
-     */
-    String printWelcomeMessage() {
-        return "Hi, I'm Nero and I am an automated chat bot"
-                + "\n" + "What would you like to do?";
-    }
 
 
 
@@ -106,6 +94,19 @@ public class Ui {
      * @return Goodbye message and exit instructions
      */
     String printExitInstructions() {
-        return "Goodbye! Hope to see you again XOXO" + "\n" + "Click on the box on the top left to exit!";
+        return "Goodbye! Hope to see you again XOXO\n Click on the box on the top left to exit!";
+    }
+
+    public String printFailedReschedule() {
+        return "Unable to reschedule ToDo as there is no deadline!!";
+    }
+
+    public String printSuccessfulReschedule(String changedTask) {
+        return String.format("I have successfully changed this task \n %s", changedTask);
+    }
+
+
+    public String printCommandNotDetected() {
+        return "Command not detected! Please retry";
     }
 }
