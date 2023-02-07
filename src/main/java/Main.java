@@ -22,6 +22,7 @@ public class Main extends Application {
             stage.setScene(scene);
             stage.setTitle("RubiRyo");
             fxmlLoader.<MainWindow>getController().setDuke(duke);
+            assert duke != null;
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

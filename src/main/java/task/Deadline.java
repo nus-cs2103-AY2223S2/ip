@@ -13,16 +13,18 @@ public class Deadline extends Task {
     public Deadline(String description, boolean status, String by) throws DukeException {
         super(description, status);
         this.by = by;
+        assert super.dateFormatter(this.by) != null;
         this.byFormatted = super.dateFormatter(this.by);
     }
 
     public String serialise() {
+        assert super.getStatus() != null;
         return String.format("Deadline,%s,%s,%s", super.getStatus(),
                 super.getDescription(), this.by);
     }
     public static Task deserialise(String data) throws DukeException {
-        String arr[] = data.split(",");
-
+        String[] arr = data.split(",");
+        assert arr.length != 0;
         boolean isDone = Boolean.parseBoolean(arr[1]);
         String description = arr[2];
         String by = arr[3];

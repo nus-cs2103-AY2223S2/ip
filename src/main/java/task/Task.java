@@ -53,7 +53,9 @@ public class Task {
         //"d/M/y H:mm" for auto detection of AM/PM d/M/yy h:mma for manual but in 12hr time
         try {
             LocalDateTime localDateTime = LocalDateTime.parse(str, DateTimeFormatter.ofPattern("d/M/yy Hmm"));
+            assert localDateTime != null;
             String dt = localDateTime.format(DateTimeFormatter.ofPattern("d MMM yyyy hh:mm a"));
+            assert dt != null;
             return dt;
         } catch (DateTimeException e) {
             throw new DukeException("Please enter date in dd/mm/yy and time in hhmm 24hr format!");
@@ -79,6 +81,7 @@ public class Task {
      */
     public static Task deserialise(String data) throws DukeException {
         String[] arr = data.split(",");
+        assert arr.length != 0;
         boolean isDone = Boolean.parseBoolean(arr[1]);
         String desc = arr[2];
 

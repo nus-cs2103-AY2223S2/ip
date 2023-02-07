@@ -19,6 +19,7 @@ public class Duke {
         this.taskManager = new TaskManager();
         this.fileManager = new FileManager();
         this.fileManager.loadDataToArrayList(this.taskManager);
+        assert this.fileManager.loadDataToArrayList(this.taskManager) != -1;
         this.parser = new Parser(fileManager);
     }
 
@@ -48,6 +49,7 @@ public class Duke {
                 Command command = parser.parse(ip);
                 command.executeCommand(taskManager);
                 isExit = command.isExit();
+                assert isExit = false;
             } catch (DukeException e) {
                 System.out.println(e);
             } catch (NullPointerException e) {
@@ -72,11 +74,11 @@ public class Duke {
     public String getResponse(String input) {
         try {
             Command command = parser.parse(input.trim());
+            assert command != null;
             String res = command.executeCommand(taskManager);
+            assert res != null;
             return res;
         } catch (DukeException e) {
-            return e.toString();
-        } catch (NullPointerException e) {
             return e.toString();
         }
     }

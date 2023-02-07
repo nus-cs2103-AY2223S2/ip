@@ -37,6 +37,7 @@ public class CheckCommand extends Command {
     @Override
     public String executeCommand(TaskManager taskManager) throws DukeException {
         try {
+            assert taskManager != null;
             taskManager.checkTask(this.index);
             String str = "Great job! I have checked this task off the list:";
             return str + System.lineSeparator() + taskManager.printTask(this.index);

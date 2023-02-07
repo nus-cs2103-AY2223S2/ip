@@ -38,6 +38,7 @@ public class EventCommand extends Command {
             String start = time[0];
             String end = time[1];
             Event event = new Event(arr[0], false, start, end);
+            assert taskManager != null;
             taskManager.addTaskToList(event);
             String str = String.format("I have added: %s !", event);
             String str2 = "There are currently " + taskManager.getTaskArraySize() + " task(s) in the list!";

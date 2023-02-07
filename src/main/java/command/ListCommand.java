@@ -28,6 +28,7 @@ public class ListCommand extends Command {
      */
     @Override
     public String executeCommand(TaskManager taskManager) throws DukeException {
+        assert taskManager != null;
         taskManager.displayList();
         return "";
     }

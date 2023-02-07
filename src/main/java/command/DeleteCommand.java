@@ -40,6 +40,7 @@ public class DeleteCommand extends Command {
     @Override
     public String executeCommand(TaskManager taskManager) throws DukeException {
         try {
+            assert taskManager != null;
             taskManager.deleteTask(this.index);
             String str = "Okay! I have removed the task!";
             System.out.println("There are currently " + taskManager.getTaskArraySize() + " task(s) in the list!");

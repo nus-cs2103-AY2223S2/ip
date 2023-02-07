@@ -17,7 +17,9 @@ public class Event extends Task {
         super(description, status);
         this.start = start;
         this.end = end;
+        assert super.dateFormatter(start) != null;
         this.startFormatted = super.dateFormatter(start);
+        assert super.dateFormatter(end) != null;
         this.endFormatted = super.dateFormatter(end);
     }
 
@@ -27,7 +29,8 @@ public class Event extends Task {
     }
 
     public static Task deserialise(String data) throws DukeException {
-        String arr[] = data.split(",");
+        String[] arr = data.split(",");
+        assert arr.length != 0;
 
         boolean isDone = Boolean.parseBoolean(arr[1]);
         String description = arr[2];

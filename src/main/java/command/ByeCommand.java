@@ -12,6 +12,7 @@ public class ByeCommand extends Command {
     private FileManager fileManager;
     public ByeCommand(FileManager fileManager) {
         this.fileManager = fileManager;
+        assert fileManager != null;
     }
 
 
