@@ -1,7 +1,5 @@
 package duke.helper;
 
-import java.util.Scanner;
-
 public class Ui {
     /**
      * helper method to print proper indentation.
