@@ -58,7 +58,7 @@ public class Duke {
 
     private void terminate() {
         storage.save(tasks.tasks);
-        ui.sayBye();
+        ui.printByeMsg();
     }
 
     public static void main(String[] args) {
@@ -67,7 +67,7 @@ public class Duke {
         Duke duke = new Duke(home);
         System.out.println("Loading complete.\n");
 
-        duke.ui.sayHello();
+        duke.ui.printHelloMsg();
 
         duke.run();
 

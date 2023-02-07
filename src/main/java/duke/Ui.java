@@ -25,7 +25,7 @@ public class Ui {
     /**
      * Prints greeting message for Duke.
      */
-    public void sayHello() {
+    public void printHelloMsg() {
         System.out.println(Duke.logo);
         System.out.println("Hello! I'm Duke\n" + "What can I do for you?\n");
     }
@@ -33,7 +33,7 @@ public class Ui {
     /**
      * Prints closing message for Duke.
      */
-    public void sayBye() {
+    public void printByeMsg() {
         System.out.printf(Duke.DIV_OPEN + "Bye. Hope to see you again soon!\n"+ Duke.DIV_CLOSE);
     }
 
