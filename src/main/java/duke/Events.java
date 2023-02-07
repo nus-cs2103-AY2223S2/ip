@@ -1,23 +1,24 @@
 package duke;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Events extends Task {
 
-    protected LocalDate startDate;
-    protected LocalDate endDate;
+    protected LocalDateTime startDate;
+    protected LocalDateTime endDate;
 
     public Events(String name, String startDate, String endDate) {
         super(name, "E");
-        this.startDate = LocalDate.parse(startDate);
-        this.endDate = LocalDate.parse(endDate);
+        this.startDate = makeDateTime(startDate);
+        this.endDate = makeDateTime(endDate);
     }
 
     public Events(String name, String startDate, String endDate, boolean isDone) {
         super(name, "E", isDone);
-        this.startDate = LocalDate.parse(startDate);
-        this.endDate = LocalDate.parse(endDate);
+        this.startDate = makeDateTime(startDate);
+        this.endDate = makeDateTime(endDate);
     }
 
     /**
@@ -28,8 +29,7 @@ public class Events extends Task {
     @Override
     public String getDescription() {
         return String.format("%s (from: %s to: %s)", super.getDescription(),
-                this.startDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")),
-                this.endDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+                formatDateTime(this.startDate), formatDateTime(this.endDate));
     }
 
     /**
@@ -41,7 +41,7 @@ public class Events extends Task {
     @Override
     public String formatDescription() {
         return super.formatDescription()
-                + String.format(" | %s | %s", startDate.toString(),
-                endDate.toString());
+                + String.format(" | %s | %s", formatDateTimeForTaskList(startDate),
+                formatDateTimeForTaskList(endDate));
     }
 }

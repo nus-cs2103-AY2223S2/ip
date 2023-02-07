@@ -3,6 +3,7 @@ package duke;
 import javafx.application.Platform;
 
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 
 public class Parser {
 
@@ -90,7 +91,7 @@ public class Parser {
     }
 
     public static String handleInput(String command, Ui ui, TaskList tasks, Storage storage) throws DukeException,
-            IOException, IndexOutOfBoundsException {
+            IOException, IndexOutOfBoundsException, DateTimeParseException {
         String typeOfCommand = command.split(" ")[0];
         switch (typeOfCommand) {
         case "bye":

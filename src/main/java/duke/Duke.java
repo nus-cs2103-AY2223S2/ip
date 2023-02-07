@@ -1,6 +1,7 @@
 package duke;
 
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 
 public class Duke {
 
@@ -28,6 +29,9 @@ public class Duke {
             return "Something went wrong while handling this task.";
         } catch (IOException e) {
             return "Something went wrong";
+        } catch (DateTimeParseException e) {
+            return "Format of date given is wrong. Please ensure format of date is yyyy-MM-dd HH:mm " +
+                    "(e.g. 2022-03-30 14:30)";
         }
     }
 

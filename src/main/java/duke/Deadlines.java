@@ -1,23 +1,25 @@
 package duke;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Represents a Task that has a date it should be done by.
  */
 public class Deadlines extends Task {
 
-    protected LocalDate dueDate;
+    protected LocalDateTime dueDate;
 
     public Deadlines(String name, String dueDate) {
         super(name, "D");
-        this.dueDate = LocalDate.parse(dueDate);
+        this.dueDate = makeDateTime(dueDate);
     }
 
     public Deadlines(String name, String dueDate, boolean isDone) {
         super(name, "D", isDone);
-        this.dueDate = LocalDate.parse(dueDate);
+        this.dueDate = makeDateTime(dueDate);
     }
 
     /**
@@ -28,7 +30,7 @@ public class Deadlines extends Task {
     @Override
     public String getDescription() {
         return String.format("%s (by: %s)", super.getDescription(),
-                this.dueDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+                formatDateTime(this.dueDate));
     }
 
     /**
@@ -40,6 +42,6 @@ public class Deadlines extends Task {
     @Override
     public String formatDescription() {
         return super.formatDescription()
-                + String.format(" | %s", dueDate.toString());
+                + String.format(" | %s", formatDateTimeForTaskList(this.dueDate));
     }
 }
