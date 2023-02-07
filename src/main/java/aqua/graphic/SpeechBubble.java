@@ -15,7 +15,7 @@ public class SpeechBubble extends UiComponent<Region> {
     private static final String PATH_FXML_LEFT_SIDE = "SpeechBubbleLeft.fxml";
     private static final String PATH_FXML_RIGHT_SIDE = "SpeechBubbleRight.fxml";
 
-    private final boolean isUser;
+    private final Region root;
 
     @FXML private ImageView iconView;
     @FXML private VBox bubbleDisplayArea;
@@ -29,7 +29,7 @@ public class SpeechBubble extends UiComponent<Region> {
      */
     public SpeechBubble(boolean isUser) {
         super(getPath(isUser));
-        this.isUser = isUser;
+        this.root = initialiseRoot(isUser);
         iconView.setClip(new Circle(
                 iconView.getFitWidth() / 2,
                 iconView.getFitHeight() / 2,
@@ -39,6 +39,14 @@ public class SpeechBubble extends UiComponent<Region> {
 
     private static String getPath(boolean isUser) {
         return (isUser) ? PATH_FXML_RIGHT_SIDE : PATH_FXML_LEFT_SIDE;
+    }
+
+
+    private Region initialiseRoot(boolean isUser) {
+        Region bubble = super.getRoot();
+        HBox box = new HBox(bubble);
+        box.setAlignment((isUser) ? Pos.CENTER_RIGHT : Pos.CENTER_LEFT);
+        return box;
     }
 
 
@@ -57,9 +65,6 @@ public class SpeechBubble extends UiComponent<Region> {
 
     @Override
     public Region getRoot() {
-        Region bubble = super.getRoot();
-        HBox box = new HBox(bubble);
-        box.setAlignment((isUser) ? Pos.CENTER_RIGHT : Pos.CENTER_LEFT);
-        return box;
+        return root;
     }
 }
