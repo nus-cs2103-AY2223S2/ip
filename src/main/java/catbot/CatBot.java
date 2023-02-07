@@ -7,7 +7,7 @@ import catbot.parser.Parser;
 import catbot.storage.Storage;
 import catbot.tasklist.TaskList;
 import catbot.ui.Ui;
-
+import javafx.scene.text.Text;
 
 
 /**
@@ -19,6 +19,12 @@ public class CatBot {
     private Storage storage;
     private TaskList tasks;
     private final Ui ui;
+    private String logo =
+            "Welcome from: \n"
+            + " ____ ____ ____ ____ ____ ____\n"
+            + "||C |||a |||t |||B |||o |||t ||\n"
+            + "||__|||__|||__|||__|||__|||__||\n"
+            + "|/__\\|/__\\|/__\\|/__\\|/__\\|/__\\|\n";
 
     /**
      * Initialises a new CatBot instance and loads from the save file.
@@ -30,34 +36,28 @@ public class CatBot {
             storage = new Storage(saveFile);
             tasks = new TaskList(storage.load());
         } catch (CatBotException e) {
-            ui.displayError("Error loading from save file.");
+            logo += "\n Error loading from save file. A new task list will be initiated for this session.";
             tasks = new TaskList(new ArrayList<>());
         }
     }
 
-    /**
-     * Interacts with the user and handles commands.
-     */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (CatBotException e) {
-                ui.displayError(e.getMessage());
-            } finally {
-                ui.showNext();
-            }
-        }
+    public String getLogo() {
+        return logo;
     }
 
-
-    public static void main(String[] args) {
-        new CatBot("./data/tasklist.txt").run();
+    /**
+     * Get CatBot's response for a given input command.
+     * @param input is the command the user input
+     * @return CatBot's output
+     */
+    public Text getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            c.execute(tasks, ui, storage);
+            return ui.getNextOutput();
+        } catch (CatBotException e) {
+            return ui.getError(e.getMessage());
+        }
     }
 
 }

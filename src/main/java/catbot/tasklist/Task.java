@@ -1,7 +1,5 @@
 package catbot.tasklist;
 
-import catbot.ui.ConsoleColors;
-
 /**
  * The parent class of all tasks.
  */
@@ -44,7 +42,7 @@ public abstract class Task {
      * @return a string that should be placed in the slot indicating whether this task is marked
      */
     protected String getStatusIcon() {
-        return isDone ? ConsoleColors.GREEN + "✓" + ConsoleColors.RESET : " ";
+        return isDone ? "✓" : " ";
     }
 
     @Override

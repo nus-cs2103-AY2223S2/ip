@@ -24,7 +24,7 @@ public class DeleteCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws CatBotException {
-        tasks.delete(index - 1);
+        tasks.delete(index);
         ui.setNextOutput("Deleted task.");
         storage.writeToSaveFile("delete " + (index + 1) + "\n");
     }
