@@ -4,9 +4,9 @@ import java.io.FileNotFoundException;
 import java.nio.file.Path;
 import java.util.Scanner;
 
-import aqua.exception.SyntaxException;
 import aqua.exception.LoadException;
 import aqua.exception.ProcedureException;
+import aqua.exception.SyntaxException;
 import aqua.logic.CommandLineInput;
 import aqua.logic.parser.ArgumentParser;
 import aqua.logic.parser.CommandLineInputParser;

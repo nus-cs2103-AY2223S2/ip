@@ -4,9 +4,9 @@ import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-import aqua.exception.SyntaxException;
 import aqua.exception.LoadException;
 import aqua.exception.ProcedureException;
+import aqua.exception.SyntaxException;
 import aqua.util.Kaomoji;
 import javafx.application.Platform;
 import javafx.scene.Parent;

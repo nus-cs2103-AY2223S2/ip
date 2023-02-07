@@ -2,8 +2,8 @@ package aqua.logic;
 
 import java.util.Optional;
 
-import aqua.exception.SyntaxException;
 import aqua.exception.ProcedureException;
+import aqua.exception.SyntaxException;
 import javafx.concurrent.Service;
 
 

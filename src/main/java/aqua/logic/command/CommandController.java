@@ -21,7 +21,7 @@ public abstract class CommandController {
      * Creates an {@code ExecutionService} that may display its results.
      *
      * @param args - the argument map to work on.
-     * @param manager - the {@code LogicManager} to work on.
+     * @param logicManager - the {@code LogicManager} to work on.
      * @param ioManager - the {@code IoManager} to display through
      */
     public abstract ExecutionService getService(

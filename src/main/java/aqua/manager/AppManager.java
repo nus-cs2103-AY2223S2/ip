@@ -32,9 +32,7 @@ public class AppManager {
     }
 
 
-    /**
-     * Performs the starting processes.
-     */
+    /** Performs the starting processes. */
     public void start() {
         ioManager.greet();
         try {
@@ -47,9 +45,7 @@ public class AppManager {
     }
 
 
-    /**
-     * Queues the user's input for execution.
-     */
+    /** Queues the user's input for execution. */
     public synchronized void processInput() {
         String userInput = ioManager.readLine();
         executionQueue.add(new ParserService<>(logicManager.getInputParser(), userInput));

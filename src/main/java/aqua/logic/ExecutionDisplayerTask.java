@@ -1,7 +1,7 @@
 package aqua.logic;
 
-import aqua.exception.SyntaxException;
 import aqua.exception.ProcedureException;
+import aqua.exception.SyntaxException;
 import aqua.manager.IoManager;
 import aqua.manager.LogicManager;
 

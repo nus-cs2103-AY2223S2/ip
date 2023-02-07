@@ -14,7 +14,7 @@ public class ScheduleHeader extends AnchorPane {
 
     /**
      * Constructs a {@code ScheduleHeader} from the given parameters.
-     * 
+     *
      * @param offsetWidth - the width offset in pixel before the start of the
      *      header.
      * @param width - the width of the header in pixels.

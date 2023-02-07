@@ -4,8 +4,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import aqua.graphic.schedule.WeekSchedule;
 import aqua.graphic.schedule.SchedulePeriod;
+import aqua.graphic.schedule.WeekSchedule;
 import aqua.manager.TaskFilterReport;
 import aqua.usertask.UserTask;
 import javafx.css.PseudoClass;

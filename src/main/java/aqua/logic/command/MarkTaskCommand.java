@@ -1,7 +1,7 @@
 package aqua.logic.command;
 
-import aqua.exception.SyntaxException;
 import aqua.exception.ProcedureException;
+import aqua.exception.SyntaxException;
 import aqua.logic.ArgumentMap;
 import aqua.logic.ExecutionDisplayerTask;
 import aqua.logic.ExecutionService;
