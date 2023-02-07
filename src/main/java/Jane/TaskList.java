@@ -37,7 +37,6 @@ public class TaskList {
                 String action = s[1];
                 for (jane.task.Task i : tasks) {
                     if (i.description.contains(action)) {
-                        count += 1;
                         System.out.println(i.toString());
 
                     }
