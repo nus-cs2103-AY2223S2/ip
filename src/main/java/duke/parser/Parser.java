@@ -74,7 +74,7 @@ public class Parser {
      */
     public static Command parse(String input) throws DukeException {
         String[] splitInputs = input.split(" ");
-        checkInputFormat(splitInputs.length, MinimumLengths.EMPTY_USER_INPUT.length,
+        checkUserInputFormat(splitInputs.length, MinimumLengths.EMPTY_USER_INPUT.length,
                 "Sorry, Fake Duke wants you to enter something.");
         Command c;
 
@@ -87,19 +87,19 @@ public class Parser {
 
         switch (action) {
         case todo:
-            checkInputFormat(splitInputs.length, MinimumLengths.USER_INPUT_TODO.length,
+            checkUserInputFormat(splitInputs.length, MinimumLengths.USER_INPUT_TODO.length,
                     "The description of a todo cannot be empty.");
             Todo todo = new Todo(input.split(" ", 2)[1]);
             c = new AddCommand(todo);
             break;
         case deadline:
-            checkInputFormat(splitInputs.length, MinimumLengths.USER_INPUT_DEADLINE.length,
+            checkUserInputFormat(splitInputs.length, MinimumLengths.USER_INPUT_DEADLINE.length,
                     "Deadline must follow this format: deadline {description} /by {YYYY-MM-DD} {HH:MM}");
             Deadline deadline = new Deadline(input.split(" ", 2)[1]);
             c = new AddCommand(deadline);
             break;
         case event:
-            checkInputFormat(splitInputs.length, MinimumLengths.USER_INPUT_EVENT.length,
+            checkUserInputFormat(splitInputs.length, MinimumLengths.USER_INPUT_EVENT.length,
                     "Event must follow this format: event {description} /from {YYYY-MM-DD} {HH:MM} "
                     + "/to {YYYY-MM-DD} {HH:MM}");
             Event event = new Event(input.split(" ", 2)[1]);
@@ -109,19 +109,19 @@ public class Parser {
             c = new ListCommand();
             break;
         case mark:
-            checkInputFormat(splitInputs.length, MinimumLengths.USER_INPUT_MARK.length,
+            checkUserInputFormat(splitInputs.length, MinimumLengths.USER_INPUT_MARK.length,
                     "The task index cannot be empty.");
             String[] markIndexes = getIndexes(splitInputs);
             c = new MarkCommand(markIndexes);
             break;
         case unmark:
-            checkInputFormat(splitInputs.length, MinimumLengths.USER_INPUT_UNMARK.length,
+            checkUserInputFormat(splitInputs.length, MinimumLengths.USER_INPUT_UNMARK.length,
                     "The task index cannot be empty.");
             String[] unmarkIndexes = getIndexes(splitInputs);
             c = new UnmarkCommand(unmarkIndexes);
             break;
         case delete:
-            checkInputFormat(splitInputs.length, MinimumLengths.USER_INPUT_DELETE.length,
+            checkUserInputFormat(splitInputs.length, MinimumLengths.USER_INPUT_DELETE.length,
                     "The task index cannot be empty.");
             c = new DeleteCommand(Integer.parseInt(splitInputs[1]));
             break;
@@ -129,7 +129,7 @@ public class Parser {
             c = new ExitCommand();
             break;
         case find:
-            checkInputFormat(splitInputs.length, MinimumLengths.USER_INPUT_FIND.length,
+            checkUserInputFormat(splitInputs.length, MinimumLengths.USER_INPUT_FIND.length,
                     "You must include the keyword you wish to search.");
             c = new FindCommand(input.split(" ", 2)[1]);
             break;
@@ -158,15 +158,15 @@ public class Parser {
 
         switch (taskType) {
         case T:
-            checkInputFormat(splitInputs.length, MinimumLengths.FILE_INPUT_TODO.length,
+            checkFileInputFormat(splitInputs.length, MinimumLengths.FILE_INPUT_TODO.length,
                     "Todo task is of invalid format in the file.");
             return new Todo(splitInputs[2], splitInputs[1]);
         case D:
-            checkInputFormat(splitInputs.length, MinimumLengths.FILE_INPUT_DEADLINE.length,
+            checkFileInputFormat(splitInputs.length, MinimumLengths.FILE_INPUT_DEADLINE.length,
                     "Deadline task is of invalid format in the file.");
             return new Deadline(String.format("%s /by %s", splitInputs[2], splitInputs[3]), splitInputs[1]);
         case E:
-            checkInputFormat(splitInputs.length, MinimumLengths.FILE_INPUT_EVENT.length,
+            checkFileInputFormat(splitInputs.length, MinimumLengths.FILE_INPUT_EVENT.length,
                     "Event task is of invalid format in the file.");
             return new Event(String.format("%s /from %s /to %s", splitInputs[2], splitInputs[3],
                     splitInputs[4]), splitInputs[1]);
@@ -176,22 +176,32 @@ public class Parser {
     }
 
     /**
-     * Checks the format of the input entered by user or task in the local file.
+     * Checks the format of the input entered by user.
      *
-     * @param inputLength Length of the input entered by the user or task in the local file.
+     * @param inputLength Length of the input entered by the user.
      * @param minimumLength Valid minimum length of the input.
      * @param errorMessage Error message to be printed on the program.
      * @throws DukeException Throws exception if input length does not meet minimum length.
      */
-    public static void checkInputFormat(int inputLength, int minimumLength, String errorMessage) throws DukeException {
-        boolean isValidMinimumLengthForFileInput = minimumLength != 0;
-        boolean isInvalidLengthForFileInput = inputLength < minimumLength;
-        boolean isValidMinimumLengthForUserInput = minimumLength == 0;
-        assert (isValidMinimumLengthForFileInput && !isInvalidLengthForFileInput) || isValidMinimumLengthForUserInput
-                : "Local file data/tasks.txt does not have valid format";
-        if (isInvalidLengthForFileInput) {
+    public static void checkUserInputFormat(int inputLength, int minimumLength, String errorMessage)
+            throws DukeException {
+        boolean isInvalidLength = inputLength < minimumLength;
+        if (isInvalidLength) {
             throw new DukeException(errorMessage);
         }
+    }
+
+    /**
+     * Checks the format of the input in the local file.
+     *
+     * @param inputLength Length of the task in the local file.
+     * @param minimumLength Valid minimum length of the input.
+     * @param errorMessage Error message to be printed on the program.
+     */
+    public static void checkFileInputFormat(int inputLength, int minimumLength, String errorMessage) {
+        boolean isValidLength = inputLength >= minimumLength;
+        assert isValidLength : String.format("Local file data/tasks.txt does not have valid format. %s",
+                errorMessage);
     }
 
     /**
