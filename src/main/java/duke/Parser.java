@@ -3,6 +3,7 @@ package duke;
 public class Parser {
     /**
      * Checks if the user wants to terminate the chatbot.
+     *
      * @param userInput the input keyed in by the user.
      * @return true if the user keyed in "bye" or false otherwise.
      */
@@ -16,6 +17,7 @@ public class Parser {
 
     /**
      * Checks if the user wants to see his/her list of tasks.
+     *
      * @param userInput the input keyed in by the user.
      * @return true if the user keyed in "list" or false otherwise.
      */
