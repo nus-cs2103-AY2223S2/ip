@@ -14,17 +14,21 @@ import java.util.Scanner;
 public class Storage {
     private File f;
 
-    public Storage(TaskList tl) throws IOException {
-        File dir = new File("data");
-        if (!dir.exists()) {
-            dir.mkdir();
+    public Storage(TaskList tl) {
+        try {
+            File dir = new File("data");
+            if (!dir.exists()) {
+                dir.mkdir();
+            }
+            File f = new File("data/taskData.txt");
+            if (!f.exists()) {
+                f.createNewFile();
+            }
+            this.f = f;
+            loadTasks(tl, f);
+        } catch (IOException e) {
+
         }
-        File f = new File("data/taskData.txt");
-        if (!f.exists()) {
-            f.createNewFile();
-        }
-        this.f = f;
-        loadTasks(tl, f);
     }
 
     /**
@@ -60,11 +64,14 @@ public class Storage {
         }
     }
 
-    public void saveTasks(TaskList tl) throws IOException {
-        FileWriter fw = new FileWriter(f);
-        for (Task t : tl.getTasks()) {
-            fw.write(t.fileOutput() + "\n");
+    public void saveTasks(TaskList tl) {
+        try {
+            FileWriter fw = new FileWriter(f);
+            for (Task t : tl.getTasks()) {
+                fw.write(t.fileOutput() + "\n");
+            }
+            fw.close();
+        } catch (IOException e) {
         }
-        fw.close();
     }
 }

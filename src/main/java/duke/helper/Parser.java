@@ -52,28 +52,22 @@ public class Parser {
      * @param taskList
      * @throws InvalidCommandException
      */
-    public void dispatch(String command, Ui ui, TaskList taskList) throws InvalidCommandException {
+    public String dispatch(String command, Ui ui, TaskList taskList) throws InvalidCommandException {
         switch (command.split(" ")[0]) {
         case "list":
-            ui.print(taskList.listTasks());
-            break;
+            return ui.print(taskList.listTasks());
         case "mark":
-            ui.print(taskList.markTask(Integer.parseInt(command.split(" ")[1])));
-            break;
+            return ui.print(taskList.markTask(Integer.parseInt(command.split(" ")[1])));
         case "unmark":
-            ui.print(taskList.unmarkTask(Integer.parseInt(command.split(" ")[1])));
-            break;
+            return ui.print(taskList.unmarkTask(Integer.parseInt(command.split(" ")[1])));
         case "delete":
-            ui.print(taskList.deleteTask(Integer.parseInt(command.split(" ")[1])));
-            break;
+            return ui.print(taskList.deleteTask(Integer.parseInt(command.split(" ")[1])));
         case "todo":
         case "deadline":
         case "event":
-            ui.print(taskList.addTask(makeTaskFromInput(command)));
-            break;
+            return ui.print(taskList.addTask(makeTaskFromInput(command)));
         case "find":
-            ui.print(taskList.findTask(command.split(" ")[1]));
-            break;
+            return ui.print(taskList.findTask(command.split(" ")[1]));
         default:
             throw new InvalidCommandException("Invalid command nya!\n"
                     + " Do it again and I will scratch you!\n");
