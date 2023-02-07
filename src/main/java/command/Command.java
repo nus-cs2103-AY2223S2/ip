@@ -23,6 +23,7 @@ public abstract class Command {
      * @param command the user-input command
      */
     public Command(String command, boolean doesPrint, int numComponents) throws DukeException {
+        assert numComponents >= 0 : "number of components for any command should be larger than zero";
         this.command = command;
         this.doesPrint = doesPrint;
         this.numComponents = numComponents;

@@ -53,6 +53,8 @@ public class TaskList extends ArrayList<Task> {
      * @return a task list
      */
     public TaskList getTaskNameContains(String... strings) {
+        assert strings.length > 0 : "cannot search for empty string array";
+
         List<Task> filteredTasks = this
                 .stream()
                 .filter(
@@ -64,6 +66,7 @@ public class TaskList extends ArrayList<Task> {
                             return isContained;
                         })
                 .collect(Collectors.toList());
+
         return new TaskList(new ArrayList<>(filteredTasks));
     }
 }
