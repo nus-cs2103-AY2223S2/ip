@@ -12,12 +12,11 @@ public class RemoveTaskCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(TaskList list) {
+    String tryExecute(TaskList list) {
         Task task = list.remove(index);
-        String msg = String.format(
+        return String.format(
                 "Noted. I've removed this task:\n" + "  %s\n" + "Now you have %s in the list", task,
                 list.countTaskAsString());
-        return new CommandResult(msg);
     }
 
     @Override

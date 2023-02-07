@@ -5,8 +5,8 @@ import duke.TaskList;
 public class ListCommand extends Command {
 
     @Override
-    public CommandResult execute(TaskList list) {
-        return new CommandResult("Here are the tasks in your list:\n" + list.listAllTasks());
+    String tryExecute(TaskList list) {
+        return "Here are the tasks in your list:\n" + list.listAllTasks();
     }
 
     @Override

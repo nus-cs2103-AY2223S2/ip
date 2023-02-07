@@ -13,10 +13,9 @@ public class FindTaskCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(TaskList list) {
-        String msg = "Here are the matching tasks in your list:\n"
+    String tryExecute(TaskList list) {
+        return "Here are the matching tasks in your list:\n"
                 + list.listTasksContainKeyword(keyword);
-        return new CommandResult(msg);
     }
 
     @Override

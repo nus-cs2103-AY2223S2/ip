@@ -1,6 +1,9 @@
-package duke.component;
+package duke.controller;
+
+import java.io.IOException;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -14,19 +17,29 @@ import javafx.scene.layout.VBox;
 public class MainWindow extends AnchorPane {
 
     @FXML
-    private ScrollPane scrollPane;
-    @FXML
-    private VBox dialogContainer;
-    @FXML
     private TextField userInput;
+
     @FXML
     private Button sendButton;
+
+    @FXML
+    private ScrollPane scrollPane;
+
+    @FXML
+    private VBox dialogContainer;
 
     private Image userImage = new Image(getClass().getResourceAsStream("/images/Reimu_1.jpg"));
     private Image dukeImage = new Image(getClass().getResourceAsStream("/images/Patchouli_2.jpg"));
 
-    @FXML
-    public void initialize() {
+    public MainWindow() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/MainWindow.fxml"));
+            fxmlLoader.setController(this);
+            fxmlLoader.setRoot(this);
+            fxmlLoader.load();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 

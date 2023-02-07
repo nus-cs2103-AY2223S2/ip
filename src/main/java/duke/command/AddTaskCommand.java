@@ -14,12 +14,11 @@ public class AddTaskCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(TaskList list) {
+    String tryExecute(TaskList list) {
         list.add(task);
-        String msg = String.format(
+        return String.format(
                 "Got it. I've added this task:\n" + "  %s\n" + "Now you have %s in the list.", task,
                 list.countTaskAsString());
-        return new CommandResult(msg);
     }
 
     @Override

@@ -12,10 +12,10 @@ public class UnmarkCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(TaskList list) {
+    String tryExecute(TaskList list) {
         Task task = list.get(index);
         task.unmarkAsDone();
-        return new CommandResult("OK, I've marked this task as not done yet:\n  " + task);
+        return "OK, I've marked this task as not done yet:\n  " + task;
     }
 
     @Override

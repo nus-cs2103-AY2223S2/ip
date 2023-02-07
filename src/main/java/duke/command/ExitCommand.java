@@ -5,8 +5,8 @@ import duke.TaskList;
 public class ExitCommand extends Command {
 
     @Override
-    public CommandResult execute(TaskList list) {
-        return new CommandResult("Bye. Hope to see you again soon!");
+    String tryExecute(TaskList list) {
+        return "Bye. Hope to see you again soon!";
     }
 
     @Override

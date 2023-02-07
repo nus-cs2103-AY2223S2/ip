@@ -39,13 +39,4 @@ public class UI {
     public static String readCommand() {
         return sc.nextLine();
     }
-
-    /**
-     * Prints the message of an error to the ouput.
-     *
-     * @param ex a error of the application
-     */
-    public static void echoError(DukeRuntimeException ex) {
-        echo(ex.getMessage());
-    }
 }

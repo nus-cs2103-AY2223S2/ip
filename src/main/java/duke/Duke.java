@@ -10,16 +10,12 @@ public class Duke {
         TaskList list = storage.readTaskList();
         UI.greet();
         do {
-            try {
-                String input = UI.readCommand();
-                Command cmd = Parser.parseCommand(input);
-                CommandResult cmdResult = cmd.execute(list);
-                UI.echo(cmdResult.getResult());
-                if (cmd.isExit()) {
-                    break;
-                }
-            } catch (DukeRuntimeException ex) {
-                UI.echoError(ex);
+            String input = UI.readCommand();
+            Command cmd = Parser.parseCommand(input);
+            CommandResult cmdResult = cmd.execute(list);
+            UI.echo(cmdResult.getResult());
+            if (cmd.isExit()) {
+                break;
             }
         } while (true);
         storage.writeTaskList(list);
