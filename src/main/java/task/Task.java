@@ -108,6 +108,7 @@ public class Task {
      * @return a boolean value
      */
     public boolean containString(String string) {
+        assert string.length() > 0 : "input string length should not be zero";
         return toString().contains(string);
     }
 }
