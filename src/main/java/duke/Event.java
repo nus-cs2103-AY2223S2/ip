@@ -6,10 +6,11 @@ public class Event extends Task {
     protected String to;
 
     /**
-     * Constructor for an Event instance
-     * @param description a simple description of this event
-     * @param from the starting date or time of this event
-     * @param to the ending date or time of this event
+     * Constructor for an Event instance.
+     *
+     * @param description a simple description of this event.
+     * @param from the starting date or time of this event.
+     * @param to the ending date or time of this event.
      */
     public Event(String description, String from, String to) {
         super(description);
@@ -19,6 +20,7 @@ public class Event extends Task {
 
     /**
      * Returns the string representation of an Event instance with the "from" and "to" periods.
+     *
      * @return the desired string representation of an Event instance.
      */
     @Override
@@ -28,6 +30,7 @@ public class Event extends Task {
 
     /**
      * Returns the string representation of an Event instance with the "from" and "to" periods.
+     *
      * @return the desired string representation of an Event instance.
      */
     public String parse() {
