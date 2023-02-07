@@ -27,101 +27,100 @@ public class Duke {
         boolean saidBye = false;
         while (!saidBye) {
             String command = sc.nextLine();
-            if (command.equals("list")) {
-                this.printCommandList(allTasks);
-            } else if (command.startsWith("mark")) {
-                String[] str = command.split(" ");
-                int taskIndex = Integer.parseInt(str[1]) - 1;
-                Task oldTask = allTasks.get(taskIndex);
-                if (oldTask.getTaskType().equals("[T]")) {
-                    Todo todo = new Todo(oldTask.getTaskNumber(),
-                            true, oldTask.getTask(),
-                            allTasks.size());
-                    allTasks.set(taskIndex, todo);
-                    todo.markAsDone();
-                } else if (oldTask.getTaskType().equals("[D]")) {
-                    Deadline deadline = new Deadline(oldTask.getTaskNumber(),
-                            true, oldTask.getTask(),
-                            oldTask.getDeadline(), allTasks.size());
-                    allTasks.set(taskIndex, deadline);
-                    deadline.markAsDone();
-                } else if (oldTask.getTaskType().equals("[E]")) {
-                    Event event = new Event(oldTask.getTaskNumber(),
-                            true, oldTask.getTask(),
-                            oldTask.getEventStartTime(),
-                            oldTask.getEventEndTime(), allTasks.size());
-                    allTasks.set(taskIndex, event);
-                    event.markAsDone();
+
+            try {
+                if (command.equals("list")) {
+                    this.printCommandList(allTasks);
+                } else if (command.startsWith("mark")) {
+                    missingIndexException(command);
+                    invalidIndexException(command, allTasks.size());
+                    String[] str = command.split(" ");
+                    int taskIndex = Integer.parseInt(str[1]) - 1;
+                    Task oldTask = allTasks.get(taskIndex);
+                    if (oldTask.getTaskType().equals("[T]")) {
+                        Todo todo = new Todo(oldTask.getTaskNumber(),
+                                true, oldTask.getTask(),
+                                allTasks.size());
+                        allTasks.set(taskIndex, todo);
+                        todo.markAsDone();
+                    } else if (oldTask.getTaskType().equals("[D]")) {
+                        Deadline deadline = new Deadline(oldTask.getTaskNumber(),
+                                true, oldTask.getTask(),
+                                oldTask.getDeadline(), allTasks.size());
+                        allTasks.set(taskIndex, deadline);
+                        deadline.markAsDone();
+                    } else if (oldTask.getTaskType().equals("[E]")) {
+                        Event event = new Event(oldTask.getTaskNumber(),
+                                true, oldTask.getTask(),
+                                oldTask.getEventStartTime(),
+                                oldTask.getEventEndTime(), allTasks.size());
+                        allTasks.set(taskIndex, event);
+                        event.markAsDone();
+                    }
+                } else if (command.startsWith("unmark")) {
+                    missingIndexException(command);
+                    invalidIndexException(command, allTasks.size());
+                    String[] str = command.split(" ");
+                    int taskIndex = Integer.parseInt(str[1]) - 1;
+                    Task oldTask = allTasks.get(taskIndex);
+                    if (oldTask.getTaskType().equals("[T]")) {
+                        Todo todo = new Todo(oldTask.getTaskNumber(),
+                                false, oldTask.getTask(),
+                                allTasks.size());
+                        allTasks.set(taskIndex, todo);
+                        todo.unmarkAsUndone();
+                    } else if (oldTask.getTaskType().equals("[D]")) {
+                        Deadline deadline = new Deadline(oldTask.getTaskNumber(),
+                                false, oldTask.getTask(),
+                                oldTask.getDeadline(), allTasks.size());
+                        allTasks.set(taskIndex, deadline);
+                        deadline.unmarkAsUndone();
+                    } else if (oldTask.getTaskType().equals("[E]")) {
+                        Event event = new Event(oldTask.getTaskNumber(),
+                                false, oldTask.getTask(),
+                                oldTask.getEventStartTime(),
+                                oldTask.getEventEndTime(), allTasks.size());
+                        allTasks.set(taskIndex, event);
+                        event.unmarkAsUndone();
+                    }
+                } else if (command.startsWith("todo")) {
+                    emptyCommandException(command);
+                    String[] str = command.split("todo");
+                    String taskName = str[1];
+                    Todo todo = new Todo(allTasks.size(), false,
+                            taskName, allTasks.size() + 1);
+                    allTasks.add(todo);
+                    todo.printToDoTask();
+                } else if (command.startsWith("deadline")) {
+                    emptyCommandException(command);
+                    missingTimingException(command);
+                    String[] str = command.split("/by");
+                    String taskName = str[0].split("deadline")[1];
+                    String taskDeadline = str[1];
+                    Deadline deadline = new Deadline(allTasks.size(), false,
+                            taskName, taskDeadline, allTasks.size() + 1);
+                    allTasks.add(deadline);
+                    deadline.printDeadlineTask();
+                } else if (command.startsWith("event")) {
+                    emptyCommandException(command);
+                    missingTimingException(command);
+                    String[] str = command.split("/from");
+                    String taskName = str[0].split("event")[1];
+                    String[] eventStartEndTime = str[1].split("/to");
+                    String eventStartTime = eventStartEndTime[0];
+                    String eventEndTime = eventStartEndTime[1];
+                    Event event = new Event(allTasks.size(), false,
+                            taskName, eventStartTime, eventEndTime, allTasks.size() + 1);
+                    allTasks.add(event);
+                    event.printEventTask();
+                } else if (command.equals("bye")){
+                    saidBye = true;
+                    this.printByeMessage();
                 } else {
-                    Task task = new Task(oldTask.getTaskNumber(),
-                            true, oldTask.getTask(),
-                            allTasks.size());
-                    allTasks.set(taskIndex, task);
-                    task.markAsDone();
+                    invalidCommandException(command);
                 }
-            } else if (command.startsWith("unmark")) {
-                String[] str = command.split(" ");
-                int taskIndex = Integer.parseInt(str[1]) - 1;
-                Task oldTask = allTasks.get(taskIndex);
-                if (oldTask.getTaskType().equals("[T]")) {
-                    Todo todo = new Todo(oldTask.getTaskNumber(),
-                            false, oldTask.getTask(),
-                            allTasks.size());
-                    allTasks.set(taskIndex, todo);
-                    todo.markAsDone();
-                } else if (oldTask.getTaskType().equals("[D]")) {
-                    Deadline deadline = new Deadline(oldTask.getTaskNumber(),
-                            false, oldTask.getTask(),
-                            oldTask.getDeadline(), allTasks.size());
-                    allTasks.set(taskIndex, deadline);
-                    deadline.markAsDone();
-                } else if (oldTask.getTaskType().equals("[E]")) {
-                    Event event = new Event(oldTask.getTaskNumber(),
-                            false, oldTask.getTask(),
-                            oldTask.getEventStartTime(),
-                            oldTask.getEventEndTime(), allTasks.size());
-                    allTasks.set(taskIndex, event);
-                    event.markAsDone();
-                } else {
-                    Task task = new Task(oldTask.getTaskNumber(),
-                            false, oldTask.getTask(),
-                            allTasks.size());
-                    allTasks.set(taskIndex, task);
-                    task.markAsDone();
-                }
-            } else if (command.startsWith("todo")) {
-                String[] str = command.split("todo");
-                String taskName = str[1];
-                Todo todo = new Todo(allTasks.size(), false,
-                        taskName, allTasks.size() + 1);
-                allTasks.add(todo);
-                todo.printToDoTask();
-            } else if (command.startsWith("deadline")) {
-                String[] str = command.split("/by");
-                String taskName = str[0].split("deadline")[1];
-                String taskDeadline = str[1];
-                Deadline deadline = new Deadline(allTasks.size(), false,
-                        taskName, taskDeadline, allTasks.size() + 1);
-                allTasks.add(deadline);
-                deadline.printDeadlineTask();
-            } else if (command.startsWith("event")) {
-                String[] str = command.split("/from");
-                String taskName = str[0].split("event")[1];
-                String[] eventStartEndTime = str[1].split("/to");
-                String eventStartTime = eventStartEndTime[0];
-                String eventEndTime = eventStartEndTime[1];
-                Event event = new Event(allTasks.size(), false,
-                        taskName, eventStartTime, eventEndTime, allTasks.size() + 1);
-                allTasks.add(event);
-                event.printEventTask();
-            } else if (!command.equals("bye")) {
-                this.echoCommand(command);
-                Task task = new Task(allTasks.size(), false,
-                        command, allTasks.size());
-                allTasks.add(task);
-            } else {
-                saidBye = true;
-                this.printByeMessage();
+            } catch (DukeException d) {
+                System.out.println(d.getMessage());
             }
         }
     }
@@ -164,6 +163,82 @@ public class Duke {
         System.out.println("\t____________________________________________________________" +
                 "\n\t Bye. Hope to see you again soon!" +
                 "\n\t____________________________________________________________");
+    }
+
+    public void emptyCommandException(String command) throws DukeException {
+        switch (command) {
+            case "todo":
+                throw new DukeException("\t____________________________________________________________" +
+                        "\n\t ☹ OOPS!!! The description of a todo cannot be empty." +
+                        "\n\t____________________________________________________________");
+            case "deadline":
+                throw new DukeException("\t____________________________________________________________" +
+                        "\n\t ☹ OOPS!!! The description of a deadline cannot be empty." +
+                        "\n\t____________________________________________________________");
+            case "event":
+                throw new DukeException("\t____________________________________________________________" +
+                        "\n\t ☹ OOPS!!! The description of an event cannot be empty." +
+                        "\n\t____________________________________________________________");
+        }
+    }
+
+    public void missingTimingException(String command) throws DukeException {
+        if (command.startsWith("deadline") && !command.contains("/by")) {
+            throw new DukeException("\t____________________________________________________________" +
+                    "\n\t ☹ OOPS!!! The timing of a deadline cannot be empty." +
+                    "\n\t____________________________________________________________");
+        } else if (command.startsWith("event") && !command.contains("/from")) {
+            throw new DukeException("\t____________________________________________________________" +
+                    "\n\t ☹ OOPS!!! The start time of an event cannot be empty." +
+                    "\n\t____________________________________________________________");
+        } else if (command.startsWith("event") && !command.contains("/to")) {
+            throw new DukeException("\t____________________________________________________________" +
+                    "\n\t ☹ OOPS!!! The end time of an event cannot be empty." +
+                    "\n\t____________________________________________________________");
+        }
+    }
+
+    public void missingIndexException(String command) throws DukeException {
+        if (command.equals("mark")) {
+            throw new DukeException("\t____________________________________________________________" +
+                    "\n\t ☹ OOPS!!! The task index to mark a task as done cannot be empty." +
+                    "\n\t____________________________________________________________");
+        } else if (command.equals("unmark")) {
+            throw new DukeException("\t____________________________________________________________" +
+                    "\n\t ☹ OOPS!!! The task index to unmark a task as not done cannot be empty." +
+                    "\n\t____________________________________________________________");
+        }
+    }
+
+    public void invalidIndexException(String command, int taskSize) throws DukeException {
+        if (command.startsWith("mark") || command.startsWith("unmark")) {
+            String index = command.split(" ")[1];
+            int index1 = Integer.parseInt(index);
+            if (index1 <= 0) {
+                throw new DukeException("\t____________________________________________________________" +
+                        "\n\t ☹ OOPS!!! The task index to mark a task as done cannot be zero or less." +
+                        "\n\t____________________________________________________________");
+            } else if (index.equals("")) {
+                throw new DukeException("\t____________________________________________________________" +
+                        "\n\t ☹ OOPS!!! The task index to mark a task as done cannot be empty." +
+                        "\n\t____________________________________________________________");
+            } else if (index1 > taskSize) {
+                throw new DukeException("\t____________________________________________________________" +
+                        "\n\t ☹ OOPS!!! The task index to mark a task as done cannot be more than" +
+                        " number of tasks." +
+                        "\n\t____________________________________________________________");
+            }
+        }
+    }
+
+    public void invalidCommandException(String command) throws DukeException {
+        if (!command.startsWith("event") || !(command.startsWith("deadline")) ||
+                !command.startsWith("todo") || command.startsWith("mark") ||
+                !command.startsWith("unmark")) {
+            throw new DukeException("\t____________________________________________________________" +
+                    "\n\t ☹ OOPS!!! I'm sorry, but I don't know what that means :-(" +
+                    "\n\t____________________________________________________________");
+        }
     }
 
 }
