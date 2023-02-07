@@ -5,14 +5,24 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+import java.util.Arrays;
+
 /**
  * Deletes task from list of tasks when user input indicates delete.
  */
 public class DeleteCommand extends Command {
-    private final int taskIndex;
+    private Integer[] taskIndexes;
+    private static final String ERROR_MESSAGE = "Invalid task index found. Unable to delete.";
 
-    public DeleteCommand(int taskIndex) {
-        this.taskIndex = taskIndex;
+    public DeleteCommand(String ... taskIndexes) {
+        try {
+            this.taskIndexes = Arrays.stream(taskIndexes)
+                    .map(Integer::parseInt)
+                    .toArray(Integer[]::new);
+            Arrays.sort(this.taskIndexes);
+        } catch (NumberFormatException e) {
+            System.out.println(ERROR_MESSAGE);
+        }
     }
 
     /**
@@ -24,7 +34,16 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage) throws DukeException {
-        String taskString = tasks.deleteTask(taskIndex - 1);
+        if (taskIndexes == null) {
+            return ERROR_MESSAGE;
+        }
+        String taskString = "";
+        int deleteOffset = 1;
+        for (int taskIndex: taskIndexes) {
+            taskString = String.format("%s%s\n", taskString,
+                    tasks.deleteTask(taskIndex - deleteOffset));
+            deleteOffset++;
+        }
         storage.saveTasks(tasks);
         return Ui.getDeleteOutput(taskString, tasks);
     }

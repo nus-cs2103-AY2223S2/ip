@@ -123,7 +123,7 @@ public class Parser {
         case delete:
             checkUserInputFormat(splitInputs.length, MinimumLengths.USER_INPUT_DELETE.length,
                     "The task index cannot be empty.");
-            c = new DeleteCommand(Integer.parseInt(splitInputs[1]));
+            c = new DeleteCommand(getIndexes(splitInputs));
             break;
         case bye:
             c = new ExitCommand();
