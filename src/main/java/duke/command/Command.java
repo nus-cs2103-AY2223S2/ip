@@ -17,6 +17,7 @@ public abstract class Command {
     /**
      * Assigns the taskList and ui to the command.
      * This is done after the command is created.
+     *
      * @param taskList The list of tasks in the program.
      * @param ui       The ui interface of the program.
      */
