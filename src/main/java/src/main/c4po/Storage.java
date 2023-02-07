@@ -62,24 +62,26 @@ public class Storage {
         while (s.hasNext()) {
             String line = s.nextLine();
             String[] lineItems = line.split(Task.delimiter);
+            Integer priority = Integer.valueOf(lineItems[1]);
             String tag = lineItems[0];
-            String isDone = lineItems[1];
+            String isDone = lineItems[2];
             boolean isDoneBool = isDone.equals("1");
-            String desc = lineItems[2];
+            String desc = lineItems[3];
+
             switch (tag) {
                 case "D":
                     String by = lineItems[3];
-                    Deadline newDl = new Deadline(desc, by, isDoneBool);
+                    Deadline newDl = new Deadline(desc, by, isDoneBool, priority);
                     taskItems.add(newDl);
                     break;
                 case "E":
                     String start = lineItems[3];
                     String end = lineItems[4];
-                    Event newEv = new Event(desc, start, end, isDoneBool);
+                    Event newEv = new Event(desc, start, end, isDoneBool, priority);
                     taskItems.add(newEv);
                     break;
                 case "T":
-                    ToDo newTd = new ToDo(desc, isDoneBool);
+                    ToDo newTd = new ToDo(desc, isDoneBool, priority);
                     taskItems.add(newTd);
                     break;
                 default:

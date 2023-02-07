@@ -12,25 +12,7 @@ public class DeleteCommand extends Command {
     public DeleteCommand(Integer index) {
         this.toDeletePosition = index;
     }
-    @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws BotException {
-        try {
-            Task toDelete = tasks.getItem(toDeletePosition);
 
-            boolean isSuccess = tasks.deleteItem(toDelete);
-            if (isSuccess) {
-                Ui.showTaskDeletedQuote();
-                Ui.printTask(toDelete);
-            } else {
-                Ui.showNoSuchTask();
-            }
-
-            Ui.print(tasks.getTaskCount());
-            storage.writeToFile(tasks);
-        } catch (Exception e) {
-            throw new BotException(e.getMessage() + "Delete Failed");
-        }
-    }
 
     /**
      * Executes the command with actions specific to each extension of this
@@ -48,7 +30,7 @@ public class DeleteCommand extends Command {
         StringBuilder deleteTaskResponse = new StringBuilder();
         try {
             Task toDelete = tasks.getItem(toDeletePosition);
-
+            System.out.println(tasks.taskListByPriority);
             boolean isSuccess = tasks.deleteItem(toDelete);
             if (isSuccess) {
                 deleteTaskResponse.append(Ui.showTaskDeletedQuote(true))

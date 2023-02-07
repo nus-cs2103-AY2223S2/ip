@@ -1,13 +1,18 @@
 package src.main.c4po;
+import java.sql.Time;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public class Task {
+public class Task implements Comparable<Task> {
     protected String description;
     protected boolean isDone;
 
+    protected LocalDateTime timeCreated;
 
+    protected Integer priority;
 
     protected static Integer listSize = 0; //or just increment accordingly
 
@@ -19,12 +24,39 @@ public class Task {
      * @param description
      * @param isDone
      */
-    public Task(String description, boolean isDone) {
+    public Task(String description, boolean isDone, Integer priority) {
         this.description = description;
         this.isDone = isDone;
         this.index = listSize + 1;
         //add to taskList
         listSize++;
+        this.timeCreated = LocalDateTime.now();
+
+        this.priority = priority;
+    }
+
+//    /**
+//     * Task item with a description and a boolean representing the done status of the task
+//     * Default priority of 0
+//     * @param description
+//     * @param isDone
+//     */
+//    public Task(String description, boolean isDone) {
+//        this.description = description;
+//        this.isDone = isDone;
+//        this.index = listSize + 1;
+//        //add to taskList
+//        listSize++;
+//        this.timeCreated = LocalDateTime.now();
+//        this.priority = 0;
+//    }
+
+    private Integer getPriority() {
+        return this.priority;
+    }
+
+    protected LocalDateTime getTimeCreated() {
+        return this.timeCreated;
     }
 
 
@@ -36,7 +68,7 @@ public class Task {
     protected String getTaskFileFormat() {
         String statusIcon = this.getStatusIcon();
         String isDone = statusIcon.equals("X") ? "1" : "0";
-        return isDone + " | " + this.description;
+        return this.getPriority().toString() + " | " + isDone + " | " + this.description;
     }
 
 
@@ -88,15 +120,27 @@ public class Task {
 
     public String getTaskInline() {
         String statusIcon = this.getStatusIcon();
-        return "[" + statusIcon + "] " + this.description;
+        return "[" + statusIcon + "] " + this.description + " (priority: " + this.getPriority().toString() + ")";
     }
 
     public String toString() {
-        return this.description;
+        return this.description + " (priority: " + this.getPriority().toString() + ")";
     }
 
 
-
-
-
+    /**
+     * Compares this object with the specified object for order.  Returns a
+     * negative integer, zero, or a positive integer as this object is less
+     * than, equal to, or greater than the specified object.
+     * @param o the object to be compared.
+     * @return a negative integer, zero, or a positive integer as this object
+     * is less than, equal to, or greater than the specified object.
+     * @throws NullPointerException if the specified object is null
+     * @throws ClassCastException   if the specified object's type prevents it
+     *                              from being compared to this object.
+     */
+    @Override
+    public int compareTo(Task o) {
+        return -Integer.compare(this.getPriority(), o.getPriority());
+    }
 }

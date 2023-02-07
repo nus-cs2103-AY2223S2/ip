@@ -5,12 +5,12 @@ public class ToDo extends Task {
      * Instantiates a To.Do task
      * @param description a String describing the task
      */
-    public ToDo(String description) {
-        super(description, false);
+    public ToDo(String description, Integer priority) {
+        super(description, false, priority);
     }
 
-    public ToDo(String description, boolean isDone) {
-        super(description, isDone);
+    public ToDo(String description, boolean isDone, Integer priority) {
+        super(description, isDone, priority);
     }
 
     /**

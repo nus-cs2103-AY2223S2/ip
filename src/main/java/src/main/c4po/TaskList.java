@@ -1,11 +1,15 @@
 package src.main.c4po;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.PriorityQueue;
 
 public class TaskList {
 
     protected ArrayList<Task> taskList;
+    protected PriorityQueue<Task> taskListByPriority;
 
     private HashMap<String,ArrayList<Task>> keywordMap;
 
@@ -18,11 +22,34 @@ public class TaskList {
     public TaskList(ArrayList<Task> taskListInput) {
         this.taskList = new ArrayList<>();
         this.keywordMap = new HashMap<>();
+        this.taskListByPriority = new PriorityQueue<>();
         for (Task task: taskListInput) {
             this.addItem(task);
         }
         this.taskCount = taskList.size();
     }
+
+    /**
+     * Returns a copy of the tasklist priority queue, sorted by priority
+     * @return an ArrayListTask sorted
+     */
+    protected ArrayList<Task> getPrioritySortedTasks() {
+        PriorityQueue<Task> newPQ = new PriorityQueue<>();
+        ArrayList<Task> sortedPriorityTasks = new ArrayList<>();
+        while (!this.taskListByPriority.isEmpty()) {
+            Task task = this.taskListByPriority.poll();
+            sortedPriorityTasks.add(task);
+            newPQ.add(task);
+        }
+        this.taskListByPriority = newPQ;
+
+        return sortedPriorityTasks;
+    }
+
+
+
+
+
 
     /**
      * Creates new instance of Task List, with empty input.
@@ -31,6 +58,7 @@ public class TaskList {
     public TaskList() {
         this.taskList = new ArrayList<>();
         this.keywordMap = new HashMap<>();
+        this.taskListByPriority = new PriorityQueue<>();
     }
 
     /**
@@ -39,14 +67,8 @@ public class TaskList {
      * Prints the list of found tasks using TaskList.printList()
      */
     public ArrayList<Task> findTask(String keyword) {
-        ArrayList<Task> tasksFound = keywordMap.get(keyword);
         //return tasksFound or ui print
-        return tasksFound;
-//        if (tasksFound == null || tasksFound.isEmpty()) {
-//
-//        } else {
-//
-//        }
+        return keywordMap.get(keyword);
     }
 
     /**
@@ -70,8 +92,11 @@ public class TaskList {
      * @param task is a task object
      */
     public void addItem(Task task) {
-        taskList.add(task);
-        taskCount += 1;
+//        System.out.println("Adding Task");
+//        System.out.println(taskListByPriority);
+        this.taskList.add(task);
+        this.taskListByPriority.add(task);
+        this.taskCount += 1;
 
         //Calls getDescInArray to get keywords to add,
         //then add task to the relevant arraylists
@@ -118,11 +143,14 @@ public class TaskList {
      */
     public boolean deleteItem(Task toDelete) throws BotException {
         try {
+
             this.removeFromKeywords(toDelete);
-            taskList.remove(toDelete);
+            this.taskList.remove(toDelete);
+            this.taskListByPriority.remove(toDelete);
             decrementTaskCount();
             return true;
         } catch (Exception e) {
+            System.out.println(e);
             throw new BotException("Task may not exist");
         }
     }
