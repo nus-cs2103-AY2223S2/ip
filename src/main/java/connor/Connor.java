@@ -82,15 +82,15 @@ public class Connor extends Application {
         Path dataPath = Paths.get(homeDir, "data", "connor.Connor.txt");
         try {
             if (Files.exists(dataPath)) {
-                Ui.printMessage("Existing data detected, loading data.");
+                System.out.println("Existing data detected, loading data.");
                 return new File(String.valueOf(dataPath));
             } else {
-                Ui.printMessage("No existing data detected, creating new save file.");
+                System.out.println("No existing data detected, creating new save file.");
                 Files.createDirectories(directoryPath);
                 return new File("data/connor.Connor.txt");
             }
         } catch (IOException e) {
-            Ui.printMessage("ALERT! FAILED TO CREATE DIRECTORY!");
+            System.out.println("ALERT! FAILED TO CREATE DIRECTORY!");
         }
         return new File("data/connor.Connor.txt");
     }

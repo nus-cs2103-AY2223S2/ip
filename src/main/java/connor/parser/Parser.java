@@ -128,13 +128,13 @@ public class Parser {
     }
 
     /**
-     * Returns true if the input command is valid.
-     * Else, returns false and print the corresponding error message.
+     * Returns a String response if the input command is valid.
+     * Else, print the corresponding error message.
      *
      * @param input Full user input String.
      * @param tasks current collection of Tasks.
      * @param ui UI to print messages.
-     * @return true if valid command, false otherwise.
+     * @return String response in regards to user input.
      */
     public String parse(String input, TaskList tasks, Ui ui) {
         String command = getCommand(input).trim();

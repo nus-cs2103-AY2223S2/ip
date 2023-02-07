@@ -4,15 +4,10 @@ import connor.task.Task;
 
 public class Ui {
 
-//    public static final String LINE = "        ________________________________________________________\n";
-
-    public static String printMessage(String response) {
-        return response;
-    }
 
     public String greet() {
         return ("Hello! I'm Connor, the android sent by Cyberlife.\n"
-                + "        Please type in your command below.");
+                + "Please type in your command below.");
     }
 
     public String greetings(String responseType) {
