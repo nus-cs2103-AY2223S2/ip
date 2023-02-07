@@ -32,21 +32,24 @@ public abstract class Task {
         int strLength = str.length();
         if (str.startsWith("todo ")) {
             final var toDoFormatLength = 5;
+            final var toDoStartIndex = 5;
             assert strLength > toDoFormatLength;
-            return ToDo.to(str.substring(5));
+            return ToDo.to(str.substring(toDoStartIndex));
         } else if (str.startsWith("deadline ")) {
             final var deadlineFormatLength = 28;
+            final var deadlineStartIndex = 9;
             final var deadlineField = " /by ";
             assert strLength > deadlineFormatLength;
             assert str.contains(deadlineField);
-            return Deadline.to(str.substring(9));
+            return Deadline.to(str.substring(deadlineStartIndex));
         } else {
             final var eventFormatLength = 44;
             final var eventField1 = " /from ";
             final var eventField2 = " /to ";
+            final var eventStartIndex = 6;
             assert strLength > eventFormatLength;
             assert str.contains(eventField1) && str.contains(eventField2);
-            return Event.to(str.substring(6));
+            return Event.to(str.substring(eventStartIndex));
         }
     }
 
