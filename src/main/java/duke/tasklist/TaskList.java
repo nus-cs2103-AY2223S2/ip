@@ -35,7 +35,7 @@ public class TaskList {
      */
     public int getSizeOfMarkedTasks() throws DukeException {
         int sizeOfMarkTasks = 0;
-        for(int i = 0; i < this.getSize(); i ++) {
+        for (int i = 0; i < this.getSize(); i++) {
             if (this.getTask(i).getStatusIcon().equals("X")) {
                 sizeOfMarkTasks = sizeOfMarkTasks + 1;
             }
