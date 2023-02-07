@@ -86,6 +86,14 @@ public class Parser {
             tasks.deleteTask(command[1]);
             break;
 
+        case "find":
+            StringBuilder keyword = new StringBuilder(command[1]);
+            for (int i = 2; i < command.length; i++) {
+                keyword.append(" ").append(command[i]);
+            }
+            tasks.find(keyword.toString());
+            break;
+
         default:
             throw new DukeException("Invalid/Unknown command.");
         }

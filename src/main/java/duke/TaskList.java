@@ -1,5 +1,6 @@
 package duke;
 
+import java.sql.Array;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -165,6 +166,28 @@ public class TaskList {
             System.out.println("Now you have " + (numOfTasks) + " tasks in the list.");
         } catch (NumberFormatException ex) {
             throw new DukeException("Invalid number");
+        }
+    }
+
+    /**
+     * Finds tasks with matching keyword amongst currently registered tasks.
+     *
+     * @param arg String keyword to search for.
+     */
+    public void find(String arg) {
+        ArrayList<Task> foundTasks = new ArrayList<Task>();
+        for (Task task : this.tasks) {
+            if (task.getDescription().indexOf(arg) >= 0) {
+                foundTasks.add(task);
+            }
+        }
+        if (foundTasks.size() == 0) {
+            System.out.println("There are no matching tasks!");
+        } else {
+            System.out.println("Here are the matching tasks in your list:");
+            for (int i = 0; i < foundTasks.size(); i++) {
+                System.out.println((i + 1) + ". " + foundTasks.get(i));
+            }
         }
     }
 }

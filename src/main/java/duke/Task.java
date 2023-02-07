@@ -72,4 +72,8 @@ public class Task {
     public void markDoing() {
         this.status = TaskStatus.DOING;
     }
+
+    public String getDescription() {
+        return this.description;
+    }
 }
