@@ -18,7 +18,7 @@ public class EventTask extends Task {
     public EventTask(String description, String start, String end) {
         super(description);
         this.start = start;
-        this.start = end;
+        this.end = end;
     }
 
     @Override

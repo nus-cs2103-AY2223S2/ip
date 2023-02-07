@@ -12,7 +12,6 @@ import red.task.TaskList;
 
 import red.ui.UI;
 
-import red.ui.DialogBox;
 
 /**
  * The main Red class to run
