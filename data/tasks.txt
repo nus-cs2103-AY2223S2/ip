@@ -1,2 +1,2 @@
-T | 0 | brush teeth
+T | 1 | brush teeth
 E | 0 |  sleep  | now  | tomorrow
