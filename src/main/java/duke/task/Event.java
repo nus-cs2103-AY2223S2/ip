@@ -17,7 +17,8 @@ public class Event extends Task {
     }
 
     public String toData() {
-        return String.format("E | %s | %s | %s to %s",this.getStatusIcon(), this.getDescription(), this.period[0], this.period[1]);
+        return String.format("E | %s | %s | %s to %s",this.getStatusIcon(),
+                this.getDescription(), this.period[0], this.period[1]);
     }
 
     @Override
