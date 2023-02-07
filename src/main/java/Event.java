@@ -9,6 +9,12 @@ public class Event extends Task {
     }
 
     @Override
+    public String makeSaveFormat() {
+        return String.format("E|%1$s|%2$s", this.isMarked ? "1" : "0", this.description
+                + "|" + this.startTime + "|" + this.endTime);
+    }
+
+    @Override
     public String toString(){
         return this.isMarked
                 ? String.format("[E][X] %1$s (from:%2$s to:%3$s)", this.description, this.startTime, this.endTime)

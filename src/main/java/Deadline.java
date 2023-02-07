@@ -7,6 +7,12 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String makeSaveFormat() {
+        return String.format("D|%1$s|%2$s", (this.isMarked ? "1" : "0"), this.description
+                + "|" + this.dueDate);
+    }
+
+    @Override
     public String toString() {
         return this.isMarked
                 ? String.format("[D][X] %1$s (by: %2$s)", this.description, this.dueDate)
