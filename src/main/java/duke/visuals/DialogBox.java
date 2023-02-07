@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.geometry.Insets;
 
 public class DialogBox extends HBox {
     private Label text;
@@ -15,10 +16,11 @@ public class DialogBox extends HBox {
     public DialogBox(Label l, ImageView iv) {
         text = l;
         displayPicture = iv;
-
+        text.setPadding(new Insets(0, 4, 0, 4));
+        text.setMaxWidth(300);
         text.setWrapText(true);
-        displayPicture.setFitWidth(100.0);
-        displayPicture.setFitHeight(100.0);
+        displayPicture.setFitHeight(65.0);
+        displayPicture.setFitWidth(65.0);
 
         this.setAlignment(Pos.TOP_RIGHT);
         this.getChildren().addAll(text, displayPicture);

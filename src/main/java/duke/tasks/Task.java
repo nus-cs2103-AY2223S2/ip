@@ -37,7 +37,7 @@ public class Task {
     /**
      * Allows for changing of the "mark" field within the Task class. Inverts the mark.
      */
-    public void setMark() {
+    public String setMark() {
         this.mark = !this.mark;
         String outputStr;
         if (mark == true) {
@@ -47,7 +47,7 @@ public class Task {
             outputStr = "Ok, you have undone this: \n"
                     + "[" + markSign(this.mark) + "] " + this.content;
         }
-        System.out.println(Ui.formatStr(outputStr));
+        return Ui.formatStr(outputStr);
     }
 
     /**

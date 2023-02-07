@@ -107,8 +107,8 @@ public class TaskList {
      * @param marked Redundant input
      * @param index Passes in index of Task element for TaskList to change the mark boolean.
      */
-    public void mark(String marked, int index) {
-        this.tasks.get(index).setMark();
+    public String mark(String marked, int index) {
+        return this.tasks.get(index).setMark();
     }
 
     /**
