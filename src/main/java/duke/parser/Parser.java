@@ -3,13 +3,7 @@ package duke.parser;
 import duke.Deadline;
 import duke.Event;
 import duke.Todo;
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.AddCommand;
-import duke.command.ExitCommand;
-import duke.command.ListCommand;
-import duke.command.MarkCommand;
-import duke.command.UnmarkCommand;
+import duke.command.*;
 import duke.exception.DukeException;
 
 public class Parser {
@@ -17,7 +11,7 @@ public class Parser {
      * Represents Duke's parser to parse all userInputs and validate them before performing appropriate actions.
      */
     public enum ValidCommands {
-        LIST, TODO, DEADLINE, EVENT, MARKED, UNMARKED, DELETE, BYE
+        LIST, TODO, DEADLINE, EVENT, MARKED, UNMARKED, DELETE, BYE, FIND
     }
 
     /**
@@ -60,6 +54,9 @@ public class Parser {
                 return new UnmarkCommand(Integer.parseInt(output[1]));
             case DELETE:
                 return new DeleteCommand(Integer.parseInt(output[1]));
+            case FIND:
+                return new FindCommand(output[1]);
+
             default:
                 throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }

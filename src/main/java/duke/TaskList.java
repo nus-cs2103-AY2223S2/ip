@@ -2,6 +2,7 @@ package duke;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class TaskList extends ArrayList<Task> {
@@ -68,6 +69,10 @@ public class TaskList extends ArrayList<Task> {
     @Override
     public boolean isEmpty() {
         return taskList.isEmpty();
+    }
+
+    public List<Task> find(String keyword) {
+        return this.taskList.stream().filter(x -> x.description.contains(keyword)).collect(Collectors.toList());
     }
 
     /**
