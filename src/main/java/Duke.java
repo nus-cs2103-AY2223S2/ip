@@ -1,10 +1,19 @@
-public class Duke {
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+import duke.Storage;
+import duke.gui.Ui;
+import duke.TaskList;
+import duke.Parser;
+import duke.gui.Start;
+
+import javafx.application.Application;
+
+public class Duke{
+    private Ui ui;
+    private Storage storage;
+    private TaskList tasks;
+    private Parser parser;
+
+    public static void main(String[] args){
+        Application.launch(Start.class);
     }
+
 }
