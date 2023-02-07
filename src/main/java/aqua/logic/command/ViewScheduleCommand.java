@@ -16,6 +16,9 @@ import aqua.util.DateUtils;
 
 /** A {@code CommandController} to view schedule. */
 public class ViewScheduleCommand extends CommandController {
+    private static final int DAYS_IN_WEEK = 7;
+
+
     @Override
     public ExecutionService getService(ArgumentMap args, LogicManager manager) {
         return ExecutionService.of(new ExecutionTask<DisplayData>(args, manager) {
@@ -49,7 +52,7 @@ public class ViewScheduleCommand extends CommandController {
             LocalDateTime time = DateUtils.parse(args.getMainInput().get());
             start = DateUtils.getStartOfWeek(time);
         }
-        LocalDateTime end = start.plusDays(7);
+        LocalDateTime end = start.plusDays(DAYS_IN_WEEK);
         TaskFilterReport report = manager.getTaskManager().filterWithin(start, end);
         return new DisplayData(report, start);
     }

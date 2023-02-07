@@ -8,7 +8,7 @@ import javafx.css.PseudoClass;
 import javafx.scene.Node;
 
 
-/** A {@code Timeable} that can be displayed. */
+/** A {@code Period} that can be displayed. */
 public abstract class SchedulePeriod extends Period {
     private final ArrayList<Node> linkedNodes = new ArrayList<>();
 
@@ -35,7 +35,7 @@ public abstract class SchedulePeriod extends Period {
 
     /**
      * Returns the list of CSS styleclasses that should be added to this
-     * {@code Timeable}.
+     * {@code Period}.
      *
      * @return a list of CSS styleclasses.
      */
@@ -43,7 +43,7 @@ public abstract class SchedulePeriod extends Period {
 
 
     /**
-     * Return a list of CSS pseudo classes to add to this {@code Timeable}.
+     * Return a list of CSS pseudo classes to add to this {@code Period}.
      *
      * @return a list of CSS pseudoclasses.
      */

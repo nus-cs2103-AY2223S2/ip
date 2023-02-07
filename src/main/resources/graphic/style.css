@@ -125,17 +125,17 @@
     -fx-background-color : derive(-fx-color, -10%);
 }
 
-.schedule-box {
+.event-box {
     -fx-background-color: -fx-shadow-highlight-color, -fx-outer-border, -fx-inner-border, -fx-body-color;
     -fx-background-insets: 1 1 0 1, 1, 2, 3;
     -fx-background-radius : 3, 3, 2, 1;
 }
 
-.schedule-box:complete {
+.event-box:complete {
     -fx-color: rgb(173, 216, 171);
 }
 
-.schedule-box:incomplete {
+.event-box:incomplete {
     -fx-color: rgb(187, 213, 212);
 }
 
@@ -154,7 +154,7 @@
     -fx-color: rgb(216, 199, 171);
 }
 
-.schedule-box:hover,
+.event-box:hover,
 .deadline-box:hover {
     -fx-color: -fx-hover-base;
 }
