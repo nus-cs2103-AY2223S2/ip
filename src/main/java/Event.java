@@ -8,6 +8,12 @@ public class Event extends Task {
         this.endTime = endTime;
     }
 
+    public Event(boolean isMarked, String description, String startTime, String endTime) {
+        super(isMarked, description);
+        this.startTime = startTime;
+        this.endTime = endTime;
+    }
+
     @Override
     public String makeSaveFormat() {
         return String.format("E|%1$s|%2$s\n", this.isMarked ? "1" : "0", this.description

@@ -6,6 +6,12 @@ public abstract class Task {
         this.description = description;
         this.isMarked = false;
     }
+
+    public Task(boolean isMarked, String description) {
+        this.description = description;
+        this.isMarked = isMarked;
+    }
+
     public void mark() {
         this.isMarked = true;
     }

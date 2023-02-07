@@ -3,6 +3,9 @@ public class ToDo extends Task{
     public ToDo(String description) {
         super(description);
     }
+    public ToDo(boolean isMarked, String description) {
+        super(isMarked, description);
+    }
 
     @Override
     public String makeSaveFormat() {

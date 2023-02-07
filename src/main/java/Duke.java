@@ -1,7 +1,17 @@
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.EOFException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -36,13 +46,58 @@ public class Duke {
             if (new File(SAVE_DIR_STRING).mkdirs()) { // returns true if directory was made as it did not exist
                 return new ArrayList<Task>(); // no save file can possibly exist if directory does not exist
             }
-            if  (new File(SAVE_DIR_STRING + SAVE_FILE_STRING).exists()) {
-                //Todo: Parse file into list of Tasks
-                return new ArrayList<Task>();
+            File saveFile = new File(SAVE_FILE_STRING);
+            if  (saveFile.exists()) {
+                try {
+                    ArrayList<Task> savedTasks = new ArrayList<>();
+                    Scanner saveFileScanner = new Scanner(saveFile);
+
+                    while (saveFileScanner.hasNextLine()) {
+                        populateTaskListFromSave(savedTasks, saveFileScanner.nextLine());
+                    }
+                    return savedTasks;
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
             }
             return new ArrayList<Task>();
         } catch (SecurityException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    private static void populateTaskListFromSave(ArrayList<Task> taskList, String taskData) {
+        Task task = buildTask(taskData.split("\\|"));
+        if (task == null) {
+            return;
+        }
+        taskList.add(task);
+    }
+
+    private static Task buildTask(String[] savedTaskFields) {
+        System.out.println(Arrays.toString(savedTaskFields));
+        boolean isMarked;
+        if (savedTaskFields[1].equals("1")) {
+            isMarked = true;
+        } else if (savedTaskFields[1].equals("0")) {
+            isMarked = false;
+        } else {
+            System.out.println("Corrupted data!");
+            return null;
+        }
+
+        switch (savedTaskFields[0]) {
+            case "E":
+                return new Event(isMarked, savedTaskFields[2], savedTaskFields[3], savedTaskFields[4]);
+
+            case "D":
+                return new Deadline(isMarked, savedTaskFields[2], savedTaskFields[3]);
+
+            case "T":
+                return new ToDo(isMarked, savedTaskFields[2]);
+
+            default:
+                return null;
         }
     }
 
@@ -68,11 +123,6 @@ public class Duke {
         }
     }
 
-//    private static boolean hasSavedFile() {
-//        File savedFile = new File("./src/main/data/CluckSave.txt");
-//        return savedFile.exists();
-//    }
-
     public static void main(String[] args) {
         String logo = " _____  _               _____   _\n"
                 + "|  ___|| |     _    _  |  ___| | |  _\n"
@@ -85,9 +135,6 @@ public class Duke {
                 "    What can I cluck-a-doodle-do for you?");
 
         boolean loop = true;
-        //try to read cluckSave.txt, then populate the arraylist with save data
-        //if cluckSave.txt does not exist
-
         ArrayList<Task> toDoList = readSave();
         Scanner sc = new Scanner(System.in);
 
