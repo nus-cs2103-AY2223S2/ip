@@ -9,23 +9,11 @@ public class Deadline extends Task {
 
     public Deadline(HashMap<String, String> parsed) throws DukeException {
         super(parsed.get("deadline"));
-        this.by = parseDate(parsed.get("/by"));
+        this.by = Parser.parseDate(parsed.get("/by"));
         abbreviation = 'D';
     }
 
-    private LocalDateTime parseDate(String by) {
-        String[] date = by.split(" ")[0].split("/");
-        int day = Integer.valueOf(date[0]);
-        int month = Integer.valueOf(date[1]);
-        int year = Integer.valueOf(date[2]);
-        String time = by.split(" ")[1];
-        int hour = Integer.valueOf(time.substring(0, 2));
-        int minute = Integer.valueOf(time.substring(2, 4));
-        LocalDateTime dateTime = LocalDateTime.of(year, month, day, hour, minute);
-        return dateTime;
-    }
-
-    private String getBy() {
+    private String getDeadlineDate() {
         String month = by.getMonth().toString().substring(0, 3);
         String day = Integer.toString(by.getDayOfMonth());
         String year = Integer.toString(by.getYear());
@@ -40,7 +28,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return super.toString() + " (by: " + getBy() + ")";
+        return String.format("%s (by: %s)", super.toString(), getDeadlineDate());
     }
 
     public String getBreakdown() {

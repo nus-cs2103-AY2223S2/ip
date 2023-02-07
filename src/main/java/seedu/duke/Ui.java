@@ -35,6 +35,7 @@ public class Ui {
         case("todo"): {
             try {
                 Task task = ls.addToDo(chat);
+                assert task != null : "Todo should not be null";
                 String response = "Got it. I've added this task:\n";
                 response += task.toString() + "\n";
                 response += "Now you have " + ls.getSize() + " tasks in the list.";
@@ -46,6 +47,7 @@ public class Ui {
         case("deadline"): {
             try {
                 Task task = ls.addDeadline(chat);
+                assert task != null : "Deadline should not be null";
                 String response = "Got it. I've added this task:\n";
                 response += task.toString() + "\n";
                 response += "Now you have " + ls.getSize() + " tasks in the list.";
@@ -57,6 +59,7 @@ public class Ui {
         case("event"): {
             try {
                 Task task = ls.addEvent(chat);
+                assert task != null : "Event should not be null";
                 String response = "Got it. I've added this task:\n";
                 response += task.toString() + "\n";
                 response += "Now you have " + ls.getSize() + " tasks in the list.";
@@ -77,6 +80,7 @@ public class Ui {
         }
         case("find"): {
             String search = chat.split(" ")[1];
+            assert search != null : "Searching keyword cannot be null";
             ArrayList<Task> list = new ArrayList<>();
             for (Task task : ls.getList()) {
                 if (task.contains(search)) {

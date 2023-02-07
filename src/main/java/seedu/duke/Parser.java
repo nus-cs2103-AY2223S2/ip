@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -34,6 +35,7 @@ public class Parser {
                 }
             }
             parsed.put(currentKey, currentValue.trim());
+            assert parsed.size() == keywords.size() - 1 : "Parser should be of length (keywords - 1)";
             return parsed;
         };
     }
@@ -44,6 +46,7 @@ public class Parser {
      */
     private static Function<String, HashMap<String, String>> createTodoParser() {
         ArrayList<String> toParse = new ArrayList<>(Arrays.asList("todo"));
+        assert toParse.size() == 2 : "TodoParser should be of length 2";
         return createParser(toParse);
     }
 
@@ -53,6 +56,7 @@ public class Parser {
      */
     private static Function<String, HashMap<String, String>> createDeadlineParser() {
         ArrayList<String> toParse = new ArrayList<>(Arrays.asList("deadline", "/by"));
+        assert toParse.size() == 3 : "DeadlineParser should be of length 3";
         return createParser(toParse);
     }
 
@@ -62,6 +66,7 @@ public class Parser {
      */
     private static Function<String, HashMap<String, String>> createEventParser() {
         ArrayList<String> toParse = new ArrayList<>(Arrays.asList("event", "/from", "/to"));
+        assert toParse.size() == 4 : "EventParser should be of length 4";
         return createParser(toParse);
     }
 
@@ -86,4 +91,15 @@ public class Parser {
         return tagParser.apply(chat);
     }
 
+    public static LocalDateTime parseDate(String by) {
+        String[] date = by.split(" ")[0].split("/");
+        int day = Integer.valueOf(date[0]);
+        int month = Integer.valueOf(date[1]);
+        int year = Integer.valueOf(date[2]);
+        String time = by.split(" ")[1];
+        int hour = Integer.valueOf(time.substring(0, 2));
+        int minute = Integer.valueOf(time.substring(2, 4));
+        LocalDateTime dateTime = LocalDateTime.of(year, month, day, hour, minute);
+        return dateTime;
+    }
 }

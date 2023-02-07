@@ -73,6 +73,7 @@ public class TaskList {
      */
     public Task mark(String taskNumberString) {
         Integer taskNumber = Integer.valueOf(taskNumberString) - 1;
+        assert taskNumber < list.size() : "taskNumber is greater than the index of list";
         Task task = list.get(taskNumber);
         task.mark();
         return task;
@@ -85,6 +86,7 @@ public class TaskList {
      */
     public Task unmark(String taskNumberString) {
         Integer taskNumber = Integer.valueOf(taskNumberString) - 1;
+        assert taskNumber < list.size() : "taskNumber is greater than the index of list";
         Task task = list.get(taskNumber);
         task.unmark();
         return task;
@@ -97,6 +99,7 @@ public class TaskList {
      */
     public Task delete(String taskNumberString) {
         int taskNumber = Integer.valueOf(taskNumberString) - 1;
+        assert taskNumber < list.size() : "taskNumber is greater than the index of list";
         Task task = list.remove(taskNumber);
         return task;
     }
