@@ -45,7 +45,7 @@ public class StorageTest {
     }
 
     @Test
-    public void testSave() {
+    public void testSave() throws IOException{
         File testFile = new File("data/test.txt");
         if (testFile.exists()) {
             testFile.delete();
@@ -63,8 +63,8 @@ public class StorageTest {
             assertEquals("D | 1 | test | 2020-01-01", s.nextLine());
             assertEquals("E | 0 | test | 2020-01-01 | 2020-01-02", s.nextLine());
             s.close();
-        } catch (IOException e) {
-            fail("IOException thrown");
+        // } catch (IOException e) {
+        //     fail("IOException thrown");
         } catch (DukeException e) {
             fail("DukeException thrown");
         }
