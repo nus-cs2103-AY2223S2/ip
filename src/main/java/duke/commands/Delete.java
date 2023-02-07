@@ -14,7 +14,10 @@ public class Delete extends Command {
 
     public String operate(TaskList lst, Ui ui, Storage storage) {
         try {
-            if (cmdLine.length() <= 7) throw new DukeException("Roarrrrrrrrrrrrrrrrrrr! Do you want to delete any task or not?");
+            if (cmdLine.length() <= 7) {
+                throw new DukeException("Roarrrrrrrrrrrrrrrrrrr! Do you want to delete any task or not?");
+            }
+
             int i = Integer.parseInt(cmdLine.substring(7));
             String response = "";
             response += "Fine! This task is deleted. Roarrrrrrrrrrrrrr!\n";

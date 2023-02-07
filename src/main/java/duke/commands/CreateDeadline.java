@@ -15,14 +15,25 @@ public class CreateDeadline extends Command {
 
     public String operate(TaskList lst, Ui ui, Storage storage) {
         try {
-            if (cmdLine.length()<=9) throw new DukeException("Roarrrrrrrrrrrrrrrrr! Do you really have this Deadline task or not?");
+            if (cmdLine.length()<=9) {
+                throw new DukeException("Roarrrrrrrrrrrrrrrrr! Do you really have this Deadline task or not?");
+            }
+
             String task = cmdLine.substring(9);
             int pos = task.indexOf("/by");
-            if (pos==-1) throw new DukeException("Roarrrrrrrrrrrrrrrrr! Do you have a deadline for this task or not?");
+            if (pos==-1) {
+                throw new DukeException("Roarrrrrrrrrrrrrrrrr! Do you have a deadline for this task or not?");
+            }
+
             String time = task.substring(pos + 4);
             task = task.substring(0, pos - 1);
-            if (task.isEmpty()) throw new DukeException("Roarrrrrrrrrrrrrrrrr! Do you really have this Deadline task or not?");
-            if (time.isEmpty()) throw new DukeException("Roarrrrrrrrrrrrrrrrr! Do you have a deadline for this task or not?");
+            if (task.isEmpty()) {
+                throw new DukeException("Roarrrrrrrrrrrrrrrrr! Do you really have this Deadline task or not?");
+            }
+            if (time.isEmpty()) {
+                throw new DukeException("Roarrrrrrrrrrrrrrrrr! Do you have a deadline for this task or not?");
+            }
+
             lst.add(new Deadline(task, time));
             String response = "";
             response += "New Deadline task is added. Roarrrrrrrrrrrrrrrrrrrrrrrrr!\n";

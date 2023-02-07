@@ -29,6 +29,7 @@ public class Storage {
 
             FileOutputStream fos = new FileOutputStream(this.filePath);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
+
             oos.writeObject(lst);
             oos.close();
             fos.close();
@@ -44,19 +45,7 @@ public class Storage {
      */
     public TaskList load() {
         File f = new File(filePath);
-        if (f.exists()) {
-            TaskList lst = new TaskList();
-            try {
-                FileInputStream fis = new FileInputStream(filePath);
-                ObjectInputStream ois = new ObjectInputStream(fis);
-                lst = (TaskList) ois.readObject();
-                ois.close();
-                fis.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return lst;
-        } else {
+        if (!f.exists()) {
             try {
                 assert(f.createNewFile());
             } catch (IOException e) {
@@ -64,5 +53,17 @@ public class Storage {
             }
             return new TaskList();
         }
+
+        TaskList lst = new TaskList();
+        try {
+            FileInputStream fis = new FileInputStream(filePath);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            lst = (TaskList) ois.readObject();
+            ois.close();
+            fis.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return lst;
     }
 }
