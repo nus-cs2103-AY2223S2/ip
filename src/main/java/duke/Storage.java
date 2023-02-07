@@ -26,7 +26,6 @@ public class Storage {
      */
     public void save(TaskList lst) {
         try {
-
             FileOutputStream fos = new FileOutputStream(this.filePath);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
 
