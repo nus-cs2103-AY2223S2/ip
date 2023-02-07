@@ -32,14 +32,15 @@ public class Command {
     }
 
     /**
-     * Executes action based on command given
+     * Executes action based on command given and returns message
+     * when executed successfully
      * @param taskList {@code TaskList} object which keeps track of tasks
      * @throws DukeException when command cannot be executed due to incorrect format
      */
     public String execArgs(TaskList taskList) throws DukeException {
         switch(this.command.toLowerCase()) {
             case "bye":
-                return UI.end();
+                return this.command.toLowerCase();
             case "list":
                 return taskList.generate();
             case "todo":
@@ -57,7 +58,7 @@ public class Command {
             case "find":
                 return findTasks(taskList);
             default:
-                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 
@@ -76,10 +77,11 @@ public class Command {
             Task taskToAdd = new ToDo(this.args.trim());
             taskList.addTask(taskToAdd);
             System.out.println();
-            String taskAddedMsg = "Got it. I've added this task:\n"
+            String taskAddedMsg = UI.BORDERLINE
+                    + "Got it. I've added this task:\n"
                     + taskToAdd + "\n"
                     + "Now you have " + taskList.taskCount()
-                    + "in the list.\n";
+                    + "in the list.\n" + UI.BORDERLINE;
 
             return taskAddedMsg;
         }
@@ -109,14 +111,15 @@ public class Command {
                 );
                 Task taskToAdd = new Deadline(desc, by);
                 taskList.addTask(taskToAdd);
-                String taskAddedMsg = "Got it. I've added this task:\n"
+                String taskAddedMsg = UI.BORDERLINE
+                        + "Got it. I've added this task:\n"
                         + taskToAdd + "\n" 
                         + "Now you have " + taskList.taskCount() 
-                        + "in the list.\n";
+                        + "in the list.\n" + UI.BORDERLINE;
                 return taskAddedMsg;
             } else {
                 throw new DukeException("Incorrect format!\n" 
-                        + "Format should be: <desc> /by dd/MM/yy HHmm");
+                        + "Format should be: <desc> /by <dd/MM/yy> <HHmm>");
             }
         }
     }
@@ -152,15 +155,16 @@ public class Command {
 
                 Task taskToAdd = new Events(desc, from, to);
                 taskList.addTask(taskToAdd);
-                String taskAddedMsg = "Got it. I've added this task:\n"
+                String taskAddedMsg = UI.BORDERLINE
+                        + "Got it. I've added this task:\n"
                         + taskToAdd + "\n" 
                         + "Now you have " + taskList.taskCount() 
-                        + "in the list.\n";
+                        + "in the list.\n" + UI.BORDERLINE;
                 return taskAddedMsg;
             } else {
                 String errMessage = "Incorrect format!\n"
-                        + "Format should be: <desc> /from dd/MM/yy HHmm"
-                        + " /to dd/MM/yy HHmm";
+                        + "Format should be: <desc> /from <dd/MM/yy> <HHmm>"
+                        + " /to <dd/MM/yy> <HHmm>";
                 throw new DukeException(errMessage);
             }
         }

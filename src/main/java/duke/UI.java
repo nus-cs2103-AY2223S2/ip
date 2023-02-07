@@ -12,6 +12,8 @@ public class UI {
      */
     private static Scanner sc = new Scanner(System.in);
 
+    static final String BORDERLINE =  "_____________________________________\n";
+
     /**
      * Empty constructor method for UI class
      */
@@ -30,10 +32,10 @@ public class UI {
         System.out.println("Hello from\n" + logo);
 
 
-        String intro = "_____________________________________\n"
+        String intro = BORDERLINE
                 + "Hello! I'm Duke\n"
                 + "What can I do for you?\n"
-                + "_____________________________________\n";
+                + BORDERLINE;
         System.out.println(intro);
     }
 
@@ -53,17 +55,13 @@ public class UI {
         System.out.println(dukeError.errorMessage);
     }
 
+    /*
     /**
      * Stops prompting user for input and terminates the program
-     */
-    public static String end() {
-        String endMessage = "_____________________________________\n"
-                        + "Bye. Hope to see you again soon!\n"
-                        + "_____________________________________\n"
-        ;
+     *
+    public static void end() {
         sc.close();
-        return endMessage;
-    }
+    } */
 
     /**
      * Prompts user to give input on command line

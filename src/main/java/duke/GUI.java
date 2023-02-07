@@ -1,5 +1,6 @@
 package duke;
 
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -55,6 +56,10 @@ public class GUI extends UI {
      */
     private Image duke = new Image(this.getClass().getResourceAsStream("/DaDuke.png"));
 
+    /**
+     * dukeProgram to access and modify taskList and storage
+     */
+    private Duke dukeProgram = new Duke(System.getProperty("user.dir"));
 
     /**
      * Sets up the required components for Duke program
@@ -144,10 +149,13 @@ public class GUI extends UI {
         Label userText = new Label(text);
         String dukeReply = getResponse(text, taskList, storage);
         Label dukeText = new Label(dukeReply);
+
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
         );
+
+        userInput.clear();
     }
 
     /**
@@ -162,9 +170,19 @@ public class GUI extends UI {
             Parser parser = new Parser(input);
             Command cmdHandler = parser.parseArgs();
             String output = cmdHandler.execArgs(taskList);
+
+            if (output.equals("bye")) {
+                Platform.exit();
+                System.exit(0);
+            }
+
+            storage.editFile(taskList.loadTaskList());
             return output;
         } catch (DukeException err) {
-            return err.errorMessage;
+            String errMsg = UI.BORDERLINE
+                    + err.errorMessage.trim() + "\n"
+                    + UI.BORDERLINE;
+            return errMsg;
         }
     }
 }
