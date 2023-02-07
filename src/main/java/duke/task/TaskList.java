@@ -89,9 +89,7 @@ public class TaskList {
         if (taskNum < 0 || taskNum >= tasks.size()) {
             throw new DukeException("Task number invalid");
         }
-        Task removedTask = tasks.get(taskNum);
-        tasks.remove(taskNum);
-        return removedTask;
+        return tasks.remove(taskNum);
     }
 
     /**
