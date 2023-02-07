@@ -3,6 +3,7 @@ package task;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 /**
@@ -55,14 +56,7 @@ public class TaskList extends ArrayList<Task> {
     public TaskList getTaskNameContains(String... strings) {
         List<Task> filteredTasks = this
                 .stream()
-                .filter(
-                        t -> {
-                            boolean isContained = false;
-                            for (String string: strings) {
-                                isContained = isContained || t.containString(string);
-                            }
-                            return isContained;
-                        })
+                .filter(t -> Stream.of(strings).anyMatch(t::containString))
                 .collect(Collectors.toList());
         return new TaskList(new ArrayList<>(filteredTasks));
     }

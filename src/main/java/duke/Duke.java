@@ -112,13 +112,13 @@ public class Duke {
      */
     public void loadRecord() {
         storage.loadRecordIfExists(commandList);
-        for (String s : commandList) {
+        commandList.forEach(x -> {
             try {
-                handleCommandReturnStatus(s, true);
+                handleCommandReturnStatus(x, true);
             } catch (DukeException e) {
                 System.out.println(e.toString());
             }
-        }
+        });
     }
 
     /**
@@ -157,11 +157,8 @@ public class Duke {
      * @return the string containing all commands
      */
     public String getCommandListString() {
-        String string = "";
-        for (String s : commandList) {
-            string = string + s + "\n";
-        }
-        return string;
+        return commandList.stream()
+                .reduce("", (cumulativeString, string) -> cumulativeString + string + "\n");
     }
 
     /**
