@@ -43,7 +43,7 @@ test {
 }
 
 application {
-    mainClassName = "beebeeoii.membot.Membot"
+    mainClassName = "membot.Launcher"
 }
 
 shadowJar {

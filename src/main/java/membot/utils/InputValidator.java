@@ -13,15 +13,21 @@ public class InputValidator {
     private static final String DELIMITER_SPACE = " ";
 
     /**
-     * Validates if commands in the form of <code>[command] [integer]</code> is valid.
+     * Validates if commands in the form of <code>[command] [input]</code> is valid.
      *
      * @param input The command to be validated.
+     * @param isMulti True if the input contains multiple words delimited by `space` characters.
+     * @param isInt True if the input is an integer.
      * @return True if command is valid, else false.
      */
-    public static boolean isSingleInputValid(String input, boolean isInt) {
+    public static boolean isSingleInputValid(String input, boolean isMulti, boolean isInt) {
         String[] split = input.split(DELIMITER_SPACE);
 
-        if (split.length != MIN_INPUT_LENGTH) {
+        if (split.length == 1) {
+            return false;
+        }
+
+        if (!isMulti && split.length != MIN_INPUT_LENGTH) {
             return false;
         }
 

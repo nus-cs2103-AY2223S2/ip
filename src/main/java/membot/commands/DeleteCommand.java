@@ -23,7 +23,7 @@ public class DeleteCommand extends Command {
      */
     @Override
     public void execute() {
-        if (InputValidator.isSingleInputValid(this.input, true)) {
+        if (InputValidator.isSingleInputValid(this.input, false, true)) {
             int taskId = Integer.parseInt(input.split(" ")[1]);
             try {
                 Task deletedTask = Task.delete(taskId);
