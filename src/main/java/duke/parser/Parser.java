@@ -67,6 +67,7 @@ public class Parser {
      * @throws DukeException if user input is invalid.
      */
     public static Command parseFromUser(String fullCommand) throws DukeException {
+        assert !fullCommand.isBlank() ;
         String[] splitCommand = fullCommand.split(" ", 2);
         String keyword = splitCommand[0];
         switch (keyword) {
