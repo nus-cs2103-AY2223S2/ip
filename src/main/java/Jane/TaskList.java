@@ -12,7 +12,8 @@ public class TaskList {
         TaskList(ArrayList<jane.task.Task> tasks) {
             this.tasks = tasks;
         }
-        /**
+
+    /**
      * Processes input commands
      * @param output is user's input
      * @throws JaneException if input format is wrong

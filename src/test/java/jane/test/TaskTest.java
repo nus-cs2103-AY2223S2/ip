@@ -11,8 +11,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TaskTest {
     Todo todo = new Todo(1,"run");
-    LocalDateTime hi = LocalDateTime.of(2017, Month.APRIL ,6, 10, 30);
-    Deadline d = new Deadline(2, "meeting", hi );
+    LocalDateTime testDate = LocalDateTime.of(2017, Month.APRIL ,6, 10, 30);
+    Deadline d = new Deadline(2, "meeting", testDate );
     @Test
     public void todoTestName() {
         assertEquals(todo.description, "run");
