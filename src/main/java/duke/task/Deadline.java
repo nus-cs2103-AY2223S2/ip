@@ -21,7 +21,6 @@ public class Deadline extends Task {
         super(description);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
         this.by = LocalDateTime.parse(by, formatter);
-
     }
 
     /**
