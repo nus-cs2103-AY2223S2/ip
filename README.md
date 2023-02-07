@@ -1,25 +1,20 @@
 # Shao
 
-Shao is a `chat bot application` that allows one to manage tasks via the command line interface.
+Shao is a `chat bot application` that allows one to manage tasks via an GUI.
 
 ## Setting up in VS code
 
-Prerequisites: JDK 19
+Prerequisites: JDK 11
 
 1. Open Visual Studio Code (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into VS Code as follows:
+2. Open the project into VS Code as follows:
 
    1. Click `File` -> `Open Folder`.
-   1. Select the project directory, and click `OK`.
+   2. Select the project directory, and click `OK`.
 
-1. After that, locate the `src/main/java/Shao.java` file, right-click it, and choose `Run Java` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
+3. After that, locate the `src/main/java/Shao.java` file, right-click it, and choose `Run Java` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see an application popup with a display of:
 
-```Text
-________________________________________________________
-  Hi There! I'm Shao
-  What can I do for you?
-________________________________________________________
-```
+![Todo Image](https://i.ibb.co/Q8JWyDP/Screenshot-2023-02-07-183222.png)
 
 ---
 
