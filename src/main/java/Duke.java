@@ -1,11 +1,25 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.lang.Math;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.io.FileWriter;
+import java.nio.file.Paths;
+import java.io.FileNotFoundException;
+
 
 public class Duke {
-    public static ArrayList<Task> taskList = new ArrayList<>();
+    private static ArrayList<Task> taskList = new ArrayList<>();
     static int tasksDone = 0;
+
     public static void main(String[] args) throws DukeException {
+        try {
+            readFromFile();
+        } catch (IOException exception) {
+            System.out.println("Error: " + exception.getMessage());
+        }
+
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -27,6 +41,13 @@ public class Duke {
 
             // check if user inputs "bye"
             if (command.equalsIgnoreCase("bye")) {
+                try {
+                    writeToFile();
+                }
+                catch (IOException e) {
+                    System.out.println("Error: " + e.getMessage());
+                }
+
                 System.out.println(byeStr);
                 return;
             }
@@ -139,6 +160,61 @@ public class Duke {
 
             System.out.println("You have " + taskList.size() + " tasks in your list. | " +
                       (taskList.size() - Math.abs(tasksDone)) + " tasks to be completed.");
+        }
+    }
+
+    public static void readFromFile() throws IOException {
+        try {
+            File f = new File("./data/duke.txt");
+            Scanner s = new Scanner(f);
+            while (s.hasNext()) {
+                String task = s.nextLine();
+                char taskType = task.charAt(4);
+                char taskStatus = task.charAt(7);
+                Task newTask = null;
+
+                if (taskType == 'T') {
+                    newTask = new ToDo(task.substring(10));
+                }
+                else if (taskType == 'D') {
+                    newTask = new Deadline(task.substring(10, task.indexOf(" (by:")), task.substring(task.indexOf("(by: ")));
+                }
+                else if (taskType == 'E'){
+                    newTask = new Event(task.substring(10, task.indexOf(" (from:")),
+                            task.substring(task.indexOf("(from: "), task.indexOf("to:")),
+                            task.substring(task.indexOf("to: ")));
+                }
+                else {
+                    System.out.println("There is no such option!");
+                }
+
+                if (taskStatus == 'X') {
+                    newTask.mark();
+                }
+
+                taskList.add(newTask);
+            }
+            s.close();
+        } catch (FileNotFoundException e) {
+            try {
+                Files.createDirectories(Paths.get("./data"));
+                File file = new File("./data/duke.txt");
+            } catch (IOException exception) {
+                System.out.println("Error: " + exception.getMessage());
+            }
+        }
+    }
+    
+    public static void writeToFile() throws IOException {
+        try {
+            FileWriter file = new FileWriter("./data/duke.txt");
+            for (Task task : taskList) {
+                file.write(task + System.lineSeparator());
+            }
+            file.close();
+            System.out.println("Your list is stored in the file.");
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
         }
     }
 }
