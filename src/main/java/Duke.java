@@ -1,5 +1,11 @@
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class Duke {
 
@@ -31,7 +37,8 @@ public class Duke {
                 throw new DukeException("\t ☹ OOPS!!! Please input a valid number.\n");
             }
             tasks.get(index).mark();
-        } catch (NumberFormatException ex) {
+            editData(index, "1");
+        } catch (NumberFormatException | IOException ex) {
             System.out.println("\t ☹ OOPS!!! Please input a valid number.\n");
         }
     }
@@ -48,7 +55,8 @@ public class Duke {
                 throw new DukeException("\t ☹ OOPS!!! This task has not been marked yet.\n");
             }
             tasks.get(index).unmark();
-        } catch (NumberFormatException ex) {
+            editData(index, "0");
+        } catch (NumberFormatException | IOException ex) {
             System.out.println("\t ☹ OOPS!!! Please input a valid number.\n");
         }
     }
@@ -62,6 +70,7 @@ public class Duke {
 
     public void addTask(Task task) {
         tasks.add(task);
+        save(task);
         System.out.println("\t Got it. I've added this task:\n"
                 + "\t\t "+ tasks.get(tasks.size() - 1).toString()
                 + "\n\t Now you have " + tasks.size() + " tasks in the list.\n");
@@ -120,7 +129,7 @@ public class Duke {
         addTask(event);
     }
 
-    public void delete(String command) throws DukeException {
+    public void delete(String command) throws DukeException, IOException {
         command = command.trim();
         if (command.equals("delete")) {
             throw new DukeException("\t ☹ OOPS!!! The description of a delete cannot be empty.\n");
@@ -138,10 +147,113 @@ public class Duke {
                 + "\t\t " + tasks.get(index - 1).toString());
         tasks.remove(index - 1);
         System.out.println("\t Now you have " + tasks.size() + " tasks in the list.\n");
+        deleteData(index);
+    }
+
+    public void editData(int taskIndex, String data) throws IOException {
+        Path file = Paths.get(".", ".\\data\\duke.txt");
+        List<String> records = Files.readAllLines(file);
+        String[] str = records.get(taskIndex).split(" \\| ");
+        str[1] = data;
+        String record = String.join(" | ", str);
+        records.set(taskIndex, record);
+        Files.write(file, records);
+    }
+
+    public void deleteData(int taskIndex) throws IOException {
+        Path file = Paths.get(".", ".\\data\\duke.txt");
+
+        try {
+            List<String> datas = Files.readAllLines(file);
+            datas.remove(taskIndex - 1);
+            Files.write(file, datas);
+        } catch (IOException e) {
+            System.out.println("\t Invalid Path.");
+        }
+    }
+
+    public void save(Task task) {
+        Path file = Paths.get(".", ".\\data\\duke.txt");
+        String data = "";
+        if (task instanceof Todo) {
+            data = ("T | ");
+        } else if (task instanceof Deadline) {
+            data = "D | ";
+        } else {
+            data = "E | ";
+        }
+        if (task.getStatusIcon().equals("X")) {
+            data += "1 | ";
+        } else {
+            data += "0 | ";
+        }
+        data += task.getDescription();
+        if (task instanceof Deadline) {
+            data += " | " + ((Deadline) task).getBy();
+        } else if (task instanceof Event) {
+            data += " | " + ((Event) task).getFrom() + "-" + ((Event) task).getTo();
+        }
+        data += "\n";
+
+        try {
+            Files.writeString(file, data, StandardOpenOption.APPEND);
+        } catch (IOException e) {
+            System.out.println("\t Invalid Path");
+        }
+    }
+
+    public void loadData() {
+        Path file = Paths.get(".", ".\\data\\duke.txt");
+        try {
+            List<String> datas = Files.readAllLines(file);
+            for (int i = 0; i < datas.size(); i++) {
+                String[] content = datas.get(i).split(" \\| ");
+                String isDone = content[1];
+                String description = content[2];
+                if (content[0].equals("T")) {
+                    Todo task = new Todo(description);
+                    tasks.add(task);
+                } else if (content[0].equals("D")) {
+                    String endDate = content[3];
+                    Deadline task = new Deadline(description, endDate);
+                    tasks.add(task);
+                } else {
+                    String times = content[3];
+                    String date[] = times.split("-", 2);
+                    String startTime = date[0];
+                    String endTime = date[1];
+                    Event task = new Event(description, startTime, endTime);
+                    tasks.add(task);
+                }
+                if (isDone.equals("1")) {
+                    tasks.get(i).setDone(true);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("\t Invalid Path.");
+        }
+    }
+
+    public void checkFileExit() {
+        try {
+            Path file = Paths.get(".", ".\\data\\duke.txt");
+
+            if (Files.exists(file)) {
+                loadData();
+            } else {
+                Files.createDirectories(file.getParent());
+                Files.createFile(file);
+            }
+        } catch (IOException e) {
+            System.out.println("Invalid Path");
+            e.printStackTrace();
+        }
     }
 
     public void run() {
         start();
+        display();
+        checkFileExit();
         while (true) {
             String command = input.nextLine();
             try {
@@ -174,13 +286,15 @@ public class Duke {
                     display();
                     System.out.println("\t ☹ OOPS!!! I'm sorry, but I don't know what that means.\n");
                 }
-            } catch (DukeException e) {
+            } catch (DukeException | IOException e) {
                 System.out.println(e.getMessage());
             }
         }
     }
+
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.run();
     }
 }
+
