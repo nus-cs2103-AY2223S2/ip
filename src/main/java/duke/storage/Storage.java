@@ -69,13 +69,13 @@ public class Storage {
                 folderDir.mkdirs();
             }
             File file = new File(this.filePath);
-            loadData = new ArrayList<Task>();
+            taskList = new ArrayList<Task>();
 
         } catch (Exception err) {
             throw new LoadException();
         }
 
-        return new TaskList(loadData);
+        return new TaskList(taskList);
     }
 
     /**

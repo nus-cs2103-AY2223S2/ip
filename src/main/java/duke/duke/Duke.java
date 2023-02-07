@@ -7,9 +7,6 @@ import duke.storage.Storage;
 import duke.storage.TaskList;
 import javafx.scene.control.Label;
 
-
-
-
 /**
  * The main class of the programme.
  */
