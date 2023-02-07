@@ -25,6 +25,12 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    /**
+     * Creates DialogBox object based on the text and img passed into this constructor.
+     *
+     * @param text Text to be displayed on the DialogBox.
+     * @param img Image to be printed on the DialogBox.
+     */
     public DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -55,7 +61,8 @@ public class DialogBox extends HBox {
 
     public DialogBox getDukeDialog() {
         this.flip();
-        dialog.setStyle("-fx-border-color: black; -fx-border-radius: 5; -fx-label-padding: 5; -fx-background-color: D4C5E2;");
+        dialog.setStyle("-fx-border-color: black; -fx-border-radius: 5; -fx-label-padding: 5; " +
+                "-fx-background-color: D4C5E2;");
         return this;
     }
 }

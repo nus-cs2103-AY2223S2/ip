@@ -9,24 +9,23 @@ import duke.ui.Ui;
  * Unmarks task when user input indicates unmark.
  */
 public class UnmarkCommand extends Command {
-    private final String[] TASK_INDEXES;
+    private final String[] taskIndexes;
 
     public UnmarkCommand(String ... taskIndexes) {
-        this.TASK_INDEXES = taskIndexes;
+        this.taskIndexes = taskIndexes;
     }
 
     /**
      * Unmarks task and updates the task list in the local storage.
      *
      * @param tasks List of tasks.
-     * @param ui Ui object that handles all Ui actions.
      * @param storage Storage object that handles all Storage actions.
      * @throws DukeException Throws exception from the methods called in this method.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         String taskString = "";
-        for (String taskIndex: TASK_INDEXES) {
+        for (String taskIndex: taskIndexes) {
             try {
                 taskString = String.format("%s%s\n", taskString,
                         tasks.unmarkTask(Integer.parseInt(taskIndex) - 1));
@@ -35,6 +34,6 @@ public class UnmarkCommand extends Command {
             }
         }
         storage.saveTasks(tasks);
-        return ui.getUnmarkOutput(taskString);
+        return Ui.getUnmarkOutput(taskString);
     }
 }
