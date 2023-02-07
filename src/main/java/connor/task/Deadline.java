@@ -1,6 +1,7 @@
 package connor.task;
 
 import java.time.DateTimeException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
@@ -18,17 +19,14 @@ public class Deadline extends Task {
      * Constructor to instantiate a new Deadline using only taskName and DateTime.
      *
      * @param taskName name of the task.
-     * @param dateTime the due date of this task.
+     * @param deadline the due date of this task.
      */
-    public Deadline(String taskName, String dateTime) {
+    public Deadline(String taskName, LocalDateTime deadline) {
         super(taskName);
         this.taskName = taskName;
-        try {
-            this.deadline = parseDateTime(dateTime);
-            this.dataFormat = dateTimeFormat(dateTime);
-        } catch (DateTimeException e) {
-            System.out.println("        " + e.getMessage());
-        }
+        this.deadline = deadline;
+        this.dataFormat = deadline.toString();
+
     }
 
     /**
@@ -55,6 +53,21 @@ public class Deadline extends Task {
         return "D|" + super.dataFormat() + "|" + this.dataFormat;
     }
 
+    @Override
+    public int compareTo(Task task) {
+        if (task instanceof Todo) {
+            return 1;
+        } else if (task instanceof Event) {
+            return -1;
+        }
+        Deadline newTask = (Deadline) task;
+        if (this.deadline.equals(newTask.deadline)) {
+            return this.taskName.compareTo(newTask.taskName);
+        } else {
+            return this.deadline.compareTo(newTask.deadline);
+        }
+    }
+
     /**
      * Returns a String which is a concatenation of task type, if the task is done, taskName and deadline.
      *
@@ -65,7 +78,7 @@ public class Deadline extends Task {
         return "[D]"
                 + super.toString()
                 + " (by: "
-                + this.formatDateTime(this.deadline)
+                + formatDateTime(this.deadline)
                 + ")";
     }
 }

@@ -1,6 +1,7 @@
 package connor.task;
 
 import java.time.DateTimeException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
@@ -12,7 +13,7 @@ public class Event extends Task {
     private LocalDateTime startDateTime;
 
     /** LocalDateTime representing the end date/time */
-    private LocalDateTime startEndTime;
+    private LocalDateTime EndDateTime;
 
     /** String representation of the dateformat for start dateTime */
     private String dataFormat1;
@@ -27,16 +28,12 @@ public class Event extends Task {
      * @param taskStart dateTime of when the task start.
      * @param taskEnd endTime of when the task end.
      */
-    public Event(String taskName, String taskStart, String taskEnd) {
+    public Event(String taskName, LocalDateTime taskStart, LocalDateTime taskEnd) {
         super(taskName);
-        try {
-            this.startDateTime = parseDateTime(taskStart);
-            this.startEndTime = parseDateTime(taskEnd);
-        } catch (DateTimeException e) {
-            System.out.println("        " + e.getMessage());
-        }
-        this.dataFormat1 = dateTimeFormat(taskStart);
-        this.dataFormat2 = dateTimeFormat(taskEnd);
+        this.startDateTime = taskStart;
+        this.EndDateTime = taskEnd;
+        this.dataFormat1 = taskStart.toString();
+        this.dataFormat2 = taskEnd.toString();
     }
 
     /**
@@ -50,7 +47,7 @@ public class Event extends Task {
     public Event(String taskName, Boolean isDone, String startDateFormat, String endDataFormat) {
         super(taskName, isDone);
         this.startDateTime = LocalDateTime.parse(startDateFormat);
-        this.startEndTime = LocalDateTime.parse(endDataFormat);
+        this.EndDateTime = LocalDateTime.parse(endDataFormat);
         this.dataFormat1 = startDateFormat;
         this.dataFormat2 = endDataFormat;
     }
@@ -65,6 +62,25 @@ public class Event extends Task {
         return "E|" + super.dataFormat() + "|" + this.dataFormat1 + "|" + this.dataFormat2;
     }
 
+    @Override
+    public int compareTo(Task task) {
+        if (task instanceof Todo) {
+            return 1;
+        } else if (task instanceof Deadline) {
+            return 1;
+        }
+        Event newTask = (Event) task;
+        if (this.startDateTime.equals(newTask.startDateTime)) {
+            if (this.EndDateTime.equals(newTask.EndDateTime)) {
+                return this.taskName.compareTo(newTask.taskName);
+            } else {
+                return this.EndDateTime.compareTo(newTask.EndDateTime);
+            }
+        } else {
+            return this.startDateTime.compareTo(newTask.startDateTime);
+        }
+    }
+
     /**
      * Returns a String which is a concatenation of task type, if the task is done, taskName, start and end dateTime.
      *
@@ -74,9 +90,9 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.toString()
                 + " (from: "
-                + this.formatDateTime(this.startDateTime)
+                + formatDateTime(this.startDateTime)
                 + " to: "
-                + this.formatDateTime(this.startEndTime)
+                + formatDateTime(this.EndDateTime)
                 + ")";
     }
 }

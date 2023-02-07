@@ -36,6 +36,16 @@ public class Todo extends Task {
         return "T|" + super.dataFormat();
     }
 
+    @Override
+    public int compareTo(Task task) {
+        if (task instanceof Deadline) {
+            return -1;
+        } else if (task instanceof Event) {
+            return -1;
+        }
+        return this.taskName.compareTo(task.taskName);
+    }
+
     /**
      * Returns a String which is a concatenation of task type, if the task is done and taskName.
      *
