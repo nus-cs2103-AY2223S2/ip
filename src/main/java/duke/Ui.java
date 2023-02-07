@@ -1,11 +1,10 @@
 package duke;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Scanner;
 
-public class Ui {
+public class Ui implements Serializable{
 
-    private Scanner scanner = new Scanner(System.in);
     private ArrayList<String> statementList = new ArrayList<>();
     private String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
