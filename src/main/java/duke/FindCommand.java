@@ -15,6 +15,7 @@ public class FindCommand extends Command {
     public FindCommand(String[] fullCommand) throws DukeEmptyArgumentException {
         try {
             keyword = fullCommand[1];
+            assert keyword != null : "Find command with empty keyword";
         } catch (IndexOutOfBoundsException e) {
             throw new DukeEmptyArgumentException("The description of delete command cannot be empty.");
         }

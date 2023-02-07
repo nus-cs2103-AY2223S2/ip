@@ -36,6 +36,7 @@ public class UnmarkCommand extends Command {
         }
 
         Task t = task.getTaskAt(TOGGLE_LINE_NUMBER);
+        assert t != null: "Attempt to unmark an empty task";
         t.setDone(false);
         storage.updateData(TOGGLE_LINE_NUMBER, 0);
         return ui.responseToUnmarkTaskCommand(t);

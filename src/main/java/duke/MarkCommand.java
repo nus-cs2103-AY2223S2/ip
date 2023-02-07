@@ -4,7 +4,7 @@ package duke;
  * Command to mark a task as done.
  */
 public class MarkCommand extends Command {
-    private final int TOGGLE_LINENUMBER;
+    private final int TOGGLE_LINE_NUMBER;
 
     /**
      * Constructor to create a mark command.
@@ -15,7 +15,7 @@ public class MarkCommand extends Command {
      */
     public MarkCommand(String[] fullCommand) throws DukeEmptyArgumentException, DukeInvalidArgumentException {
         try {
-            TOGGLE_LINENUMBER = Integer.parseInt(fullCommand[1]) - 1;
+            TOGGLE_LINE_NUMBER = Integer.parseInt(fullCommand[1]) - 1;
         } catch (IndexOutOfBoundsException e) {
             throw new DukeEmptyArgumentException("The description of mark command cannot be empty.");
         } catch (NumberFormatException e) {
@@ -30,14 +30,15 @@ public class MarkCommand extends Command {
 
     @Override
     public String execute(TaskList task, Ui ui, Storage storage) throws DukeIoException, DukeInvalidArgumentException {
-        if (TOGGLE_LINENUMBER >= task.size()) {
+        if (TOGGLE_LINE_NUMBER >= task.size()) {
             throw new DukeInvalidArgumentException("There are only " + task.size()
-                    + " tasks in list, but want to mark " + (TOGGLE_LINENUMBER + 1) + "th task.");
+                    + " tasks in list, but want to mark " + (TOGGLE_LINE_NUMBER + 1) + "th task.");
         }
 
-        Task t = task.getTaskAt(TOGGLE_LINENUMBER);
+        Task t = task.getTaskAt(TOGGLE_LINE_NUMBER);
+        assert t != null : "Attempt to mark empty task";
         t.setDone(true);
-        storage.updateData(TOGGLE_LINENUMBER, 1);
+        storage.updateData(TOGGLE_LINE_NUMBER, 1);
         return ui.responseToMarkTaskCommand(t);
     }
 }

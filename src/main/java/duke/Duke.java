@@ -18,6 +18,7 @@ public class Duke {
      * @param filePath description of the file path.
      */
     public Duke(String filePath) {
+        assert filePath != null : "Empty filepath";
         try {
             ui = new Ui();
             storage = new Storage(filePath);
