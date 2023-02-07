@@ -20,13 +20,13 @@ public class Mark implements Command {
      * {@inheritDoc}
      */
     @Override
-    public void execute(TaskList taskList, Storage<TaskList> storage) {
+    public void execute(TaskList taskList, Ui ui, Storage<TaskList> storage) {
         if (this.taskNum < 1 || this.taskNum > taskList.size()) {
-            Ui.showReply(ERROR);
+            ui.showReply(ERROR);
             return;
         }
         taskList.markTask(this.taskNum);
-        Ui.showReply(SUCCESS + taskList.get(this.taskNum));
+        ui.showReply(SUCCESS + taskList.get(this.taskNum));
     }
 
     /**

@@ -22,8 +22,8 @@ public class FindByDate implements Command {
     /**
      * {@inheritDoc}}
      */
-    public void execute(TaskList taskList, Storage<TaskList> storage) {
-        Ui.showReply(taskList.findByDate(this.date));
+    public void execute(TaskList taskList, Ui ui, Storage<TaskList> storage) {
+        ui.showReply(taskList.findByDate(this.date));
     }
 
     /**

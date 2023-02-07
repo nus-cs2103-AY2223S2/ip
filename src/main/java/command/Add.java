@@ -29,9 +29,9 @@ public class Add implements Command {
      * {@inheritDoc}
      */
     @Override
-    public void execute(TaskList taskList, Storage<TaskList> storage) {
+    public void execute(TaskList taskList, Ui ui, Storage<TaskList> storage) {
         taskList.addTask(this.task);
-        Ui.showReply(String.format(SUCCESS, taskList.getLast()));
+        ui.showReply(String.format(SUCCESS, taskList.getLast()));
     }
 
     /**

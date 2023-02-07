@@ -14,8 +14,8 @@ public class List implements Command {
     /**
      * {@inheritDoc}
      */
-    public void execute(TaskList taskList, Storage<TaskList> storage) {
-        Ui.showReply("Tasks: " + taskList.toString());
+    public void execute(TaskList taskList, Ui ui, Storage<TaskList> storage) {
+        ui.showReply("Tasks: " + taskList.toString());
     }
 
     /**

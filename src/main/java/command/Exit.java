@@ -31,10 +31,10 @@ public class Exit implements Command {
      * {@inheritDoc}
      */
     @Override
-    public void execute(TaskList taskList, Storage<TaskList> storage) {
+    public void execute(TaskList taskList,Ui ui, Storage<TaskList> storage) {
         String reply = storage.save(taskList).match(
                 ok -> "Tasks saved successfully.\nBye.",
                 err -> "Failed to save tasks.\nBye.");
-        Ui.showReply(reply);
+        ui.showReply(reply);
     }
 }

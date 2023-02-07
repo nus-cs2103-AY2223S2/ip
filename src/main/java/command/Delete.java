@@ -23,13 +23,13 @@ public class Delete implements Command {
      * {@inheritDoc}
      */
     @Override
-    public void execute(TaskList taskList, Storage<TaskList> storage) {
+    public void execute(TaskList taskList, Ui ui, Storage<TaskList> storage) {
         if (this.taskNum < 1 || this.taskNum > taskList.size()) {
-            Ui.showReply(ERROR);
+            ui.showReply(ERROR);
             return;
         }
         taskList.deleteTask(this.taskNum);
-        Ui.showReply(String.format(SUCCESS, this.taskNum, taskList.toString()));
+        ui.showReply(String.format(SUCCESS, this.taskNum, taskList.toString()));
     }
 
     /**

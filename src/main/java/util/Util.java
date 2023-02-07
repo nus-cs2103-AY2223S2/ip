@@ -68,4 +68,5 @@ public class Util {
     public static String listToString(List<Character> s) {
         return s.stream().map(c -> c.toString()).reduce("", (a, b) -> a + b);
     }
+
 }

@@ -25,8 +25,8 @@ public class Find implements Command {
      * {@inheritDoc}
      */
     @Override
-    public void execute(TaskList taskList, Storage<TaskList> storage) {
-        Ui.showReply(String.format(SUCCESS, taskList.findByKeywords(this.keywords)));
+    public void execute(TaskList taskList, Ui ui, Storage<TaskList> storage) {
+        ui.showReply(String.format(SUCCESS, taskList.findByKeywords(this.keywords)));
     }
 
     /**

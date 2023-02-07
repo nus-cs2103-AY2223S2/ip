@@ -25,7 +25,7 @@ public class Error implements Command {
     /**
      * {@inheritDoc}
      */
-    public void execute(TaskList taskList, Storage<TaskList> storage) {
-        Ui.showReply(msg);
+    public void execute(TaskList taskList, Ui ui, Storage<TaskList> storage) {
+        ui.showReply(msg);
     }
 }

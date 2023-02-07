@@ -1,6 +1,7 @@
 package command;
 
 import io.Storage;
+import io.Ui;
 import parsing.Parser;
 import task.TaskList;
 
@@ -16,7 +17,7 @@ public interface Command {
      * @see TaskList
      * @see Storage
      */
-    public void execute(TaskList taskList, Storage<TaskList> storage);
+    public void execute(TaskList taskList, Ui ui, Storage<TaskList> storage);
 
     /**
      * @return true if Duke should exit after executing this command.
