@@ -58,7 +58,7 @@ public class Storage {
         }
 
         fileWriter.close();
-        Ui.showSavedDataMessage();
+//        Ui.showSavedDataMessage();
     }
 
     /**

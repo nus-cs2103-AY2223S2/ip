@@ -38,26 +38,27 @@ public class Parser {
      * @throws DukeException Thrown when unexpected behaviour occurs.
      * @throws IOException Thrown when file system encounters an error.
      */
-    public boolean readInput(String input) throws DukeException, IOException {
+    public String readInput(String input) throws DukeException, IOException {
         String firstInput = input.split(" ")[0];
         LocalDate currentTime = LocalDate.now();
 
         try {
             switch (firstInput) {
             case "list":
-                System.out.println("Here are the tasks you asked for!");
+                String listOutput = "Here are the tasks you asked for!\n";
 
                 for (int i = 0; i < taskList.size(); i += 1) {
                     int currItem = i + 1;
-                    System.out.println(currItem + ": " + taskList.get(i));
+                    listOutput += currItem + ": " + taskList.get(i);
+                    listOutput += "\n";
                 }
 
-                System.out.println("You now have " + taskList.size() + " items in your list.");
-                return true;
+                listOutput += "You now have " + taskList.size() + " items in your list.";
+                return listOutput;
 
             case "bye":
-                System.out.println("It was a pleasure to help, goodbye!");
-                return false;
+//                String byeOutput = "It was a pleasure to help, goodbye!";
+                return "";
 
             case "mark":
                 if (input.split(" ").length < 2) {
@@ -67,10 +68,12 @@ public class Parser {
                 try {
                     int taskIndex = Integer.parseInt(input.split(" ")[1]) - 1;
                     Task selectedTask = taskList.get(taskIndex);
-                    System.out.println("Done! I've marked this task as done :D");
+//                    System.out.println("Done! I've marked this task as done :D");
                     selectedTask.check();
-                    System.out.println(selectedTask);
-                    return true;
+//                    System.out.println(selectedTask);
+                    String markOutput = "Done! I've marked this task as done :D\n";
+                    markOutput += selectedTask;
+                    return markOutput;
                 } catch (IndexOutOfBoundsException e) {
                     throw new DukeException("Oops, that task number does not exist");
                 }
@@ -81,12 +84,14 @@ public class Parser {
                 }
 
                 try {
-                    int untaskIndex = Integer.parseInt(input.split(" ")[1]) - 1;
-                    Task unselectedTask = taskList.get(untaskIndex);
-                    System.out.println("This task is apparently not done huh D:");
+                    int unmarkIndex = Integer.parseInt(input.split(" ")[1]) - 1;
+                    Task unselectedTask = taskList.get(unmarkIndex);
+//                    System.out.println("This task is apparently not done huh D:");
+                    String unmarkOutput = "This task is apparently not done huh D:\n";
                     unselectedTask.unCheck();
-                    System.out.println(unselectedTask);
-                    return true;
+//                    System.out.println(unselectedTask);
+                    unmarkOutput += unselectedTask;
+                    return unmarkOutput;
                 } catch (IndexOutOfBoundsException e) {
                     throw new DukeException("Oops, that task number does not exist");
                 }
@@ -95,8 +100,7 @@ public class Parser {
                 try {
                     String todoTaskName = input.substring(5);
                     TodoTask todoTask = new TodoTask(todoTaskName);
-                    addTask(todoTask, todoTaskName);
-                    return true;
+                    return addTask(todoTask, todoTaskName);
                 } catch (StringIndexOutOfBoundsException e) {
                     throw new DukeException("Oops, you can't enter an empty task!");
                 }
@@ -118,8 +122,7 @@ public class Parser {
                 }
 
                 DeadlineTask deadlineTask = new DeadlineTask(deadlineName, deadlineDate);
-                addTask(deadlineTask, deadlineName);
-                return true;
+                return addTask(deadlineTask, deadlineName);
 
             case "event":
                 String eventDetails = input.substring(6);
@@ -145,8 +148,7 @@ public class Parser {
                 }
 
                 EventTask eventTask = new EventTask(eventName, eventStart, eventEnd);
-                addTask(eventTask, eventName);
-                return true;
+                return addTask(eventTask, eventName);
 
             case "delete":
                 if (input.split(" ").length < 2) {
@@ -156,15 +158,15 @@ public class Parser {
                 try {
                     int deleteIndex = Integer.parseInt(input.split(" ")[1]) - 1;
                     Task deleteTask = taskList.get(deleteIndex);
-                    System.out.println("Done! " + deleteTask + " has been deleted for good.");
+                    String deleteOutput = "Done! " + deleteTask + " has been deleted for good.";
                     taskList.remove(deleteIndex);
-                    return true;
+                    return deleteOutput;
                 } catch (IndexOutOfBoundsException e) {
                     throw new DukeException("Oops, that task number does not exist");
                 }
             case "save":
                 storage.save(taskList);
-                return true;
+                return "Data was saved successfully!";
 
             case "find":
                 String keyword = input.substring(5);
@@ -175,12 +177,14 @@ public class Parser {
 
                 ArrayList<Task> filteredList = taskList.filterByKeyword(keyword);
 
+                String findOutput = "";
                 for (int i = 0; i < filteredList.size(); i += 1) {
                     int currItem = i + 1;
-                    System.out.println(currItem + ": " + filteredList.get(i));
+                    findOutput += (currItem + ": " + filteredList.get(i));
+                    findOutput += "\n";
                 }
 
-                return true;
+                return findOutput;
 
             default:
                 throw new DukeException("Oops I do not recognise this command...");
@@ -193,8 +197,8 @@ public class Parser {
         }
     }
 
-    private void addTask(Task task, String name) {
+    private String addTask(Task task, String name) {
         taskList.add(task);
-        System.out.println("Item added: " + name);
+        return "Item added: " + name;
     }
 }

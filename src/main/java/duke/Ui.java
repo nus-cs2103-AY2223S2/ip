@@ -48,13 +48,13 @@ public class Ui {
     /**
      * Prints the Duke logo and introduces Duke.
      */
-    public void showWelcomeMessage() {
+    public String showWelcomeMessage() {
         String projName = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Yo! The name is\n" + projName);
+        return "Yo! The name is\n" + projName;
     }
 
     public static void showSavedDataMessage() {
