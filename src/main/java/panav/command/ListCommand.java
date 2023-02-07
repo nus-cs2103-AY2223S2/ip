@@ -19,11 +19,13 @@ public class ListCommand extends Command {
      * @param storage storage to read/write text in file.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showLine();
-        System.out.println("Here are the tasks in your list:");
-        tasks.printAllTasks();
-        ui.showLine();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        //ui.showLine();
+        //System.out.println("Here are the tasks in your list:");
+        String text = "Here are the tasks in your list:\n";
+        text += tasks.printAllTasks();
+        //ui.showLine();
+        return text;
     }
 
     @Override

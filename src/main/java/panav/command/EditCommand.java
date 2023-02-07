@@ -33,19 +33,21 @@ public class EditCommand extends Command {
      * @param storage storage to read/write text in file.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showLine();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        String text = "";
+        //ui.showLine();
         try {
             int num = readNumber(fullCommand, tasks.getLength());
             if (isMark) {
-                tasks.markTask(num - 1);
+                text = tasks.markTask(num - 1);
             } else {
-                tasks.unmarkTask(num - 1);
+                text = tasks.unmarkTask(num - 1);
             }
         } catch (DukeException e) {
             System.out.println(e.getMessage());
         }
-        ui.showLine();
+        return text;
+        //ui.showLine();
 
     }
 

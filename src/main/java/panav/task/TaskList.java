@@ -23,10 +23,12 @@ public class TaskList {
     /**
      * Method to print all the tasks in the list.
      */
-    public void printAllTasks() {
+    public String printAllTasks() {
+        String text = "";
         for (Task task : this.tasks) {
-            System.out.println(task);
+            text += task + "\n";
         }
+        return text;
     }
 
     /**
@@ -58,22 +60,28 @@ public class TaskList {
      * Method to mark a task as done in the list.
      * @param index the index of task to be marked.
      */
-    public void markTask(int index) {
-        System.out.println("Nice! I've marked this task as done:");
+    public String markTask(int index) {
+        String text = "Nice! I've marked this task as done:\n";
+        //System.out.println("Nice! I've marked this task as done:");
         Task task = tasks.get(index);
         task.markAsDone();
-        System.out.println(task);
+        //System.out.println(task);
+        text += task.toString() + "\n";
+        return text;
     }
 
     /**
      * Method to mark a task as not done in the list.
      * @param index the index of task to be unmarked.
      */
-    public void unmarkTask(int index) {
-        System.out.println("OK, I've marked this task as not done yet:");
+    public String unmarkTask(int index) {
+        String text = "Nice! I've marked this task as not done yet:\n";
+        //System.out.println("OK, I've marked this task as not done yet:");
         Task task = tasks.get(index);
         task.markAsNotDone();
-        System.out.println(task);
+        //System.out.println(task);
+        text += task.toString() + "\n";
+        return text;
     }
 
     /**
@@ -89,13 +97,16 @@ public class TaskList {
      * Method to print all tasks in the list which contain a particular word.
      * @param keyWord the word to be searched.
      */
-    public void printTasksContainingKeyword(String keyWord) {
+    public String printTasksContainingKeyword(String keyWord) {
         int counter = 0;
+        String text = "";
         for (Task task : this.tasks) {
             if (task.toString().matches("(.*)" + keyWord + "(.*)")) {
                 counter++;
-                System.out.println(counter + "." + task);
+                //System.out.println(counter + "." + task);
+                text += counter + "." + task + "\n";
             }
         }
+        return text;
     }
 }

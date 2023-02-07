@@ -76,7 +76,7 @@ public class Parser {
                 String keyWord = fullCommand.replace("find", "").trim();
                 return new FindCommand(keyWord);
             default:
-                throw new InvalidInputException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                throw new InvalidInputException("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         } catch (InvalidInputException e) {
             System.out.println(e.getMessage());

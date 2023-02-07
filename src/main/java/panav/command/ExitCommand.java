@@ -19,11 +19,11 @@ public class ExitCommand extends Command {
      * @param storage storage to read/write text in file.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showLine();
-        System.out.println("Bye. Hope to see you again soon!");
-        ui.showLine();
-        System.exit(0);
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+
+        return "Bye. Hope to see you again soon!";
+
+
     }
 
     /**

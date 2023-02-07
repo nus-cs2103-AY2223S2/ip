@@ -19,7 +19,7 @@ public abstract class Command {
      * @param storage storage to read/write text in file.
      * @throws DukeException to catch any possible exception.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
     /**
      * Method to check if the command is 'bye' or not.
