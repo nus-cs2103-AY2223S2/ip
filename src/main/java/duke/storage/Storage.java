@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.stream.Stream;
 
 import duke.exceptions.LoadException;
 import duke.tasks.Deadlines;
@@ -87,11 +88,12 @@ public class Storage {
      */
     public void dumpFile(TaskList tasks) throws IOException {
         FileWriter fw = new FileWriter(this.filePath);
-        String txt = "";
-        for (Task t: tasks.getStorer()) {
-            txt = txt + t.formatText() + "\n";
-        }
-        fw.write(txt);
+        String text = tasks.getStorer()
+                .stream()
+                .map(t -> t.formatText() + "\n")
+                .reduce("", (x, y) -> x + y);
+
+        fw.write(text);
         fw.close();
     }
 
