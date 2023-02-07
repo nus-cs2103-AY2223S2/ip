@@ -15,3 +15,6 @@ bin/
 
 /text-ui-test/ACTUAL.TXT
 text-ui-test/EXPECTED-UNIX.TXT
+
+# duke.txt file which saves the task list
+data/duke.txt
