@@ -14,6 +14,7 @@ import duke.task.Todo;
  * in the task list.
  */
 public class TaskList {
+    private static final String TASK_ADDED = "Got it. I've added this task:";
     /** Arraylist to store the tasks */
     private ArrayList<Task> list;
 
@@ -37,26 +38,21 @@ public class TaskList {
         String output;
         switch (type) {
         case TODO:
-            output = "Got it. I've added this task:";
             list.add(new Todo(contents[0]));
-            output += "\n    " + list.get(list.size() - 1).toString();
-            output += "\nNow you have " + list.size() + " tasks in the list.";
-            return output;
+            break;
         case DEADLINE:
             list.add(new Deadline(contents[0], contents[1]));
-            output = "Got it. I've added this task:";
-            output += "\n    " + list.get(list.size() - 1).toString();
-            output += "\nNow you have " + list.size() + " tasks in the list.";
-            return output;
+            break;
         case EVENT:
             list.add(new Event(contents[0], contents[1], contents[2]));
-            output = "Got it. I've added this task:";
-            output += "\n    " + list.get(list.size() - 1).toString();
-            output += "\nNow you have " + list.size() + " tasks in the list.";
-            return output;
+            break;
         default:
             throw new DukeException("unknown");
         }
+        output = TASK_ADDED;
+        output += "\n    " + list.get(list.size() - 1).toString();
+        output += "\nNow you have " + list.size() + " tasks in the list.";
+        return output;
     }
 
     /**

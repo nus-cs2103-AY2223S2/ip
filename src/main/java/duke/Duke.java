@@ -46,38 +46,46 @@ public class Duke {
      */
     public String run(String input) {
         Command inputType = Parser.parse(input);
+        return runCommand(inputType, input);
+    }
+
+    /**
+     * Calls the relevant method in tasklist and returns
+     * the String.
+     * @param command The type of command.
+     * @param input The string command from user.
+     * @return The output of executing the command.
+     */
+    public String runCommand(Command command, String input) {
         String output;
         try {
-            switch (inputType) {
+            switch (command) {
             case LIST:
                 output = tasks.listTasks();
-                storage.writeData();
-                return output;
+                break;
             case FIND:
                 output = tasks.findTasks(Parser.contents(input));
-                storage.writeData();
-                return output;
+                break;
             case MARK:
                 output = tasks.markTask(Parser.contents(input));
-                storage.writeData();
-                return output;
+                break;
             case UNMARK:
                 output = tasks.unmarkTask(Parser.contents(input));
-                storage.writeData();
-                return output;
+                break;
             case DELETE:
                 output = tasks.deleteTask(Parser.contents(input));
-                storage.writeData();
-                return output;
+                break;
             case UNKNOWN:
                 throw new DukeException("unknown");
             case BYE:
+                output = "Bye. Hope to see you soon!";
                 break;
             default:
-                output = tasks.addTask(inputType, Parser.contents(input));
-                storage.writeData();
-                return output;
+                output = tasks.addTask(command, Parser.contents(input));
+                break;
             }
+            storage.writeData();
+            return output;
         } catch (DukeException e) {
             if (e.getMessage().equals("index")) {
                 return "OOPS!!! Index out of range.";
@@ -90,8 +98,5 @@ public class Duke {
             return "Incorrect format detected." + "\nPlease enter date/time in the following format:"
                     + "\n    yyyy-MM-dd HHmm";
         }
-
-        storage.writeData();
-        return "Bye. Hope to see you soon!";
     }
 }
