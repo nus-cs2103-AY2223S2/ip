@@ -5,17 +5,31 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+/**
+ * Responsible for interpreting user inputs.
+ */
 public class Parser {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Class constructor that takes in a Storage, TaskList and Ui
+     * @param storage Interacts with the specified data file.
+     * @param tasks Contains all current tasks.
+     * @param ui Interacts with user.
+     */
     public Parser(Storage storage, TaskList tasks, Ui ui) {
         this.tasks = tasks;
         this.storage = storage;
         this.ui = ui;
     }
 
+    /**
+     * Takes in an input from the user and executes the command.
+     * @param userInput Input from user stored in a String array.
+     * @throws DukeException If the user input is invalid.
+     */
     public void parse(String[] userInput) throws DukeException {
         String command = userInput[0];
         switch (command) {

@@ -3,6 +3,9 @@ package duke.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents an Event that is a Task.
+ */
 public class Event extends Task {
     private String[] period;
     private LocalDateTime fromDateTime;
@@ -16,6 +19,10 @@ public class Event extends Task {
         this.toDateTime = LocalDateTime.parse(period[1]);
     }
 
+    /**
+     * Translates the task into data format.
+     * @return A String that represents the task in data format.
+     */
     public String toData() {
         return String.format("E | %s | %s | %s to %s",this.getStatusIcon(), this.getDescription(), this.period[0], this.period[1]);
     }
