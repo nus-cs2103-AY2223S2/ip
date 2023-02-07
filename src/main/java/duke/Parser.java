@@ -1,10 +1,21 @@
 package duke;
 
-import duke.command.*;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.command.Command;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.EventCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
+import duke.command.TerminateCommand;
+import duke.command.ToDoCommand;
+import duke.command.UnknownCommand;
+import duke.command.UnmarkCommand;
+
 
 /**
  * Parser handles making sense of user command.
@@ -30,7 +41,7 @@ public class Parser {
             taskIndex = getTaskIndex(userInput);
             return new UnmarkCommand(taskIndex);
         case DeleteCommand.COMMAND_WORD:
-        taskIndex = getTaskIndex(userInput);
+            taskIndex = getTaskIndex(userInput);
             return new DeleteCommand(taskIndex);
         case TerminateCommand.COMMAND_WORD:
             return new TerminateCommand();
@@ -56,7 +67,7 @@ public class Parser {
                 String desc = getDescEvent(userInput);
                 LocalDateTime from = getFrom(userInput);
                 LocalDateTime to = getTo(userInput);
-                return new EventCommand(desc,from,to);
+                return new EventCommand(desc, from, to);
             } catch (DukeException e) {
                 Ui.showError(e.getMessage());
                 break;
@@ -172,7 +183,7 @@ public class Parser {
         String strDate = arrOfStr[1].substring(1);
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-            LocalDateTime dateTime = LocalDateTime.parse(strDate,formatter);
+            LocalDateTime dateTime = LocalDateTime.parse(strDate, formatter);
             return dateTime;
         } catch (DateTimeParseException e) {
             throw new DukeException("INVALID DATE!!! Please enter date in YYYY-MM-DD HHMM format");
@@ -190,7 +201,7 @@ public class Parser {
         String strFrom = arrOfStr[0];
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-            LocalDateTime from = LocalDateTime.parse(strFrom,formatter);
+            LocalDateTime from = LocalDateTime.parse(strFrom, formatter);
             return from;
         } catch (DateTimeParseException e) {
             throw new DukeException("INVALID 'From' DATE!!! Please enter date in YYYY-MM-DD HHMM format");
@@ -208,7 +219,7 @@ public class Parser {
         String strTo = arrOfStr[1];
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-            LocalDateTime to = LocalDateTime.parse(strTo,formatter);
+            LocalDateTime to = LocalDateTime.parse(strTo, formatter);
             return to;
         } catch (DateTimeParseException e) {
             throw new DukeException("INVALID 'To' DATE!!! Please enter date in YYYY-MM-DD HHMM format");
@@ -224,7 +235,7 @@ public class Parser {
         try {
             String keyword = userInput.substring(5);
             return keyword;
-        } catch (Exception e){
+        } catch (Exception e) {
             throw new DukeException(e.getMessage());
         }
     }

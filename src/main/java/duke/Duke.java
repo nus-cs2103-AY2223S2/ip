@@ -50,9 +50,4 @@ public class Duke {
             }
         }
     }
-
-    public String getResponse(String input) {
-        return String.format("Duke heard: %s", input);
-    }
-
 }

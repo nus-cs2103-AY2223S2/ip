@@ -11,6 +11,10 @@ public class Ui {
     public Ui() {
         this.sc = new Scanner(System.in);
     }
+
+    /**
+     * Shows welcome message in Duke's text-based UI
+     */
     public void showWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"

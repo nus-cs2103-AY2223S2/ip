@@ -1,13 +1,13 @@
 package duke.command;
 
 import duke.DukeException;
-import duke.Ui;
-import duke.TaskList;
 import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 import duke.task.Task;
 
 /**
- * DeleteCommand that has task index.
+ * DeleteCommand to represent command to delete task at a specific index in the task list.
  */
 public class DeleteCommand extends AddCommand {
     public static final String COMMAND_WORD = "delete";
@@ -27,8 +27,8 @@ public class DeleteCommand extends AddCommand {
         try {
             Task taskRemoved = tasks.getTaskAtIndex(taskIndex);
             tasks.deleteTask(taskIndex);
-            response = "Noted. I've removed this task: \n" + taskRemoved +
-                    String.format("\nNow you have %d tasks in the list.", tasks.getSize());
+            response = "Noted. I've removed this task: \n" + taskRemoved
+                    + String.format("\nNow you have %d tasks in the list.", tasks.getSize());
         } catch (DukeException e) {
             response = e.getMessage();
         }

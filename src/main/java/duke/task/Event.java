@@ -7,8 +7,8 @@ import java.time.format.DateTimeFormatter;
  * Event task that has description of task, start date and end date
  */
 public class Event extends Task {
-    LocalDateTime from;
-    LocalDateTime to;
+    private LocalDateTime from;
+    private LocalDateTime to;
 
     /**
      * Constructor for Event
@@ -16,8 +16,8 @@ public class Event extends Task {
      * @param from
      * @param to
      */
-    public Event(String desc,LocalDateTime from, LocalDateTime to) {
-        super(desc,"E");
+    public Event(String desc, LocalDateTime from, LocalDateTime to) {
+        super(desc, "E");
         this.from = from;
         this.to = to;
     }
@@ -43,8 +43,8 @@ public class Event extends Task {
      * @return string representation of event task
      */
     public String toString() {
-        return super.toString() +
-                String.format("[from: %s to: %s]", this.from.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm")),
+        return super.toString()
+                + String.format("[from: %s to: %s]", this.from.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm")),
                         this.to.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm")));
     }
 }

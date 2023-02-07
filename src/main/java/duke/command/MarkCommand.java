@@ -1,9 +1,12 @@
 package duke.command;
 
-import duke.*;
+import duke.DukeException;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 
 /**
- * MarkCommand that has task index.
+ * MarkCommand that represents command to mark a certain task as done.
  */
 public class MarkCommand extends Command {
     public static final String COMMAND_WORD = "mark";

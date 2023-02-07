@@ -1,11 +1,13 @@
 package duke.command;
 
-import duke.Ui;
-import duke.TaskList;
-import duke.Storage;
 import duke.DukeException;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 
-
+/**
+ * Abstract class Command for specific commands to inherit from.
+ */
 public abstract class Command {
     protected String responseFromDukeAfterExecution = "No response because this has not been executed.";
     /**

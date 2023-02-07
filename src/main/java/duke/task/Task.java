@@ -7,9 +7,9 @@ package duke.task;
  * Task that has description, type and variable to determine if it is done or not.
  */
 public class Task {
-    String desc;
-    String type;
-    boolean isDone;
+    private String desc;
+    private String type;
+    private boolean isDone;
 
     /**
      * Constructor for Task.
@@ -26,7 +26,7 @@ public class Task {
      * @param desc
      * @param type
      */
-    public Task(String desc,String type) {
+    public Task(String desc, String type) {
         this.desc = desc;
         this.isDone = false;
         this.type = type;
@@ -75,6 +75,6 @@ public class Task {
      * @return string representation of task
      */
     public String toString() {
-        return String.format("[%s][%s] %s", this.type,this.getStatusIcon(),this.getDesc());
+        return String.format("[%s][%s] %s", this.type, this.getStatusIcon(), this.getDesc());
     }
 }

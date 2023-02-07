@@ -1,14 +1,14 @@
 package duke.command;
 
-import duke.Ui;
-import duke.TaskList;
 import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 
 /**
- * UnknownCommand.
+ * UnknownCommand that represents a command that Duke does not recognise.
  */
 public class UnknownCommand extends Command {
-    private final String ERROR_MESSAGE = "OOPS!!! I'm sorry, but I don't know what that means :-(";
+    private static final String ERROR_MESSAGE = "OOPS!!! I'm sorry, but I don't know what that means :-(";
     /**
      * Constructor for UnknownCommand.
      */

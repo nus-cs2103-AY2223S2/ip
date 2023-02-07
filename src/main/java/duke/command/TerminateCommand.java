@@ -1,11 +1,12 @@
 package duke.command;
 
-import duke.Ui;
-import duke.TaskList;
+import duke.DukeException;
 import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 
 /**
- * TerminateCommand.
+ * TerminateCommand that represents command to end the program.
  */
 public class TerminateCommand extends Command {
     public static final String COMMAND_WORD = "bye";
@@ -18,9 +19,14 @@ public class TerminateCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        storage.saveTasks(tasks.getArrayList());
-        ui.showGoodBye();
-        this.responseFromDukeAfterExecution = "Bye. Hope to see you again soon!";
+        try {
+            storage.saveTasks(tasks.getArrayList());
+            ui.showGoodBye();
+            this.responseFromDukeAfterExecution = "Bye. Hope to see you again soon!";
+        } catch (DukeException e) {
+            Ui.showResponse("Error in saving tasks");
+            this.responseFromDukeAfterExecution = "Error in saving tasks";
+        }
     }
 
     public boolean isExit() {

@@ -9,7 +9,7 @@ public class Todo extends Task {
      * @param desc
      */
     public Todo(String desc) {
-        super(desc,"T");
+        super(desc, "T");
     }
 
 }

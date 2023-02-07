@@ -1,8 +1,8 @@
 package duke;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
+
+import duke.task.Task;
 
 /**
  * TaskList contains the task list and handles operations related to the list.
@@ -40,7 +40,7 @@ public class TaskList {
         return this.tasks.size();
     }
 
-    public Task getTaskAtIndex(int index) throws DukeException{
+    public Task getTaskAtIndex(int index) throws DukeException {
         try {
             return tasks.get(index);
         } catch (Exception e) {
@@ -58,12 +58,11 @@ public class TaskList {
             output += "\nYou do not have any tasks for now!";
         } else {
             for (int i = 0; i < numTasks; i++) {
-                output += String.format("\n%d. %s",i+1,tasks.get(i));
+                output += String.format("\n%d. %s", i + 1, tasks.get(i));
             }
         }
         return output;
     }
-
 
     /**
      * Marks task as done.
@@ -75,7 +74,6 @@ public class TaskList {
         } catch (Exception e) {
             throw new DukeException(e.getMessage());
         }
-//        System.out.println("Nice! I've marked this task as done:\n" + tasks.get(taskIndex).toString());
     }
 
     /**
@@ -88,7 +86,6 @@ public class TaskList {
         } catch (Exception e) {
             throw new DukeException(e.getMessage());
         }
-//        System.out.println("OK, I've marked this task as not done yet:\n" + tasks.get(taskIndex).toString());
     }
 
     /**
@@ -118,7 +115,7 @@ public class TaskList {
             String taskDesc = tasks.get(i).getDesc();
             if (taskDesc.contains(keyword)) {
                 numMatch++;
-                output += String.format("\n%d. %s",numMatch,tasks.get(i));
+                output += String.format("\n%d. %s", numMatch, tasks.get(i));
             }
         }
         if (numMatch == 0) {

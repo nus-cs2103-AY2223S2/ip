@@ -1,11 +1,11 @@
 package duke.command;
 
-import duke.Ui;
-import duke.TaskList;
 import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 
 /**
- * ListCommand.
+ * ListCommand class that represents command to list all the current tasks in the task list.
  */
 public class ListCommand extends Command {
     public static final String COMMAND_WORD = "list";
