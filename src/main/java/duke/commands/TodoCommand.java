@@ -25,7 +25,9 @@ public class TodoCommand extends Command {
      * @throws DukeException
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        int previousLength = tasks.size();
         tasks.add(this.todo);
+        assert tasks.size() - previousLength == 1;
         String message = "Got it. I've added this task:\n" + this.todo
                 + String.format("\nNow you have %s tasks in the list.", tasks.size());
         ui.display(message);

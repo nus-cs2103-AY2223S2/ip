@@ -4,6 +4,7 @@ package duke.commands;
 import java.util.ArrayList;
 
 import duke.duke.Ui;
+import duke.exceptions.DukeException;
 import duke.storage.Storage;
 import duke.storage.TaskList;
 import duke.tasks.Task;
@@ -26,7 +27,7 @@ public class FindCommand extends Command {
      * @param storage
      * @throws Exception
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         ArrayList<String> searchWords = new ArrayList<>();
         for (int i = 1; i <= tasks.size(); i++) {
             Task curr = tasks.get(i);

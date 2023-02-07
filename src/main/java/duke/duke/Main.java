@@ -27,11 +27,11 @@ public class Main extends Application {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
-            Scene scene = new Scene(ap);
+            assert ap != null;
 
+            Scene scene = new Scene(ap);
             stage.setScene(scene);
             stage.setTitle("DukeyGPT0.01");
-
 
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
