@@ -1,17 +1,17 @@
 package duke;
 
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.List;
+
 import duke.tasks.Deadline;
 import duke.tasks.Events;
 import duke.tasks.Task;
 import duke.tasks.ToDos;
 
-import java.time.format.DateTimeParseException;
-import java.util.List;
-import java.util.ArrayList;
-
 public class TaskAssigner {
 
-    public static ArrayList<String> task_t = new ArrayList<>(List.of("todo", "event", "deadline"));
+    private static ArrayList<String> taskTypes = new ArrayList<>(List.of("todo", "event", "deadline"));
 
 
     /**
@@ -32,13 +32,13 @@ public class TaskAssigner {
         String[] seq = command.split(" ");
         String keyWord = seq[0];
 
-        if (!task_t.contains(keyWord)) {
+        if (!taskTypes.contains(keyWord)) {
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(\n");
         }
 
         if (seq.length == 1) {
-            throw new DukeException("OOPS!!! I'm sorry, but the description of a task cannot" +
-                    " be empty \n");
+            throw new DukeException("OOPS!!! I'm sorry, but the description of a task cannot"
+                    + " be empty \n");
         }
 
         if (keyWord.equals("todo")) {
@@ -79,8 +79,8 @@ public class TaskAssigner {
             String deadline = command.substring(dateIndex);
             System.out.println(deadline);
             String updatedDeadline = TimeChecker.updateTime(deadline);
-            String d_desc = command.substring(9, dateIndex - 4);
-            return new Deadline(d_desc, updatedDeadline);
+            String deadlineDescription = command.substring(9, dateIndex - 4);
+            return new Deadline(deadlineDescription, updatedDeadline);
         } catch (DateTimeParseException e) {
             throw new DukeException("Improper Deadline Format! deadline {desc} /by yyyy-mm-dd hhmm\n");
         }
@@ -96,19 +96,19 @@ public class TaskAssigner {
     public Task assignEvent(String command) throws DukeException {
         String[] timestampsAsString = command.split("/from | /to ");
         if (timestampsAsString.length != 3) {
-            throw new DukeException("Improper Event Format! Follow:\n" +
-                    "event {desc} /from yyyy-mm-dd hhmm /to yyyy-mm-dd hhmm\n");
+            throw new DukeException("Improper Event Format! Follow:\n"
+                    + "event {desc} /from yyyy-mm-dd hhmm /to yyyy-mm-dd hhmm\n");
         }
         try {
             int startIndex = command.indexOf("/from") + 6;
             int endIndex = command.indexOf("/to") + 4;
             String startDate = TimeChecker.updateTime(command.substring(startIndex, endIndex - 5));
             String endDate = TimeChecker.updateTime(command.substring(endIndex));
-            String e_desc = command.substring(6, startIndex - 6);
-            return new Events(e_desc, startDate, endDate);
+            String eventDescription = command.substring(6, startIndex - 6);
+            return new Events(eventDescription, startDate, endDate);
         } catch (DateTimeParseException e) {
-            throw new DukeException("Improper Event Format! Follow:\n" +
-                    "event {desc} /from yyyy-mm-dd hhmm /to yyyy-mm-dd hhmm\n");
+            throw new DukeException("Improper Event Format! Follow:\n"
+                    + "event {desc} /from yyyy-mm-dd hhmm /to yyyy-mm-dd hhmm\n");
 
         }
     }

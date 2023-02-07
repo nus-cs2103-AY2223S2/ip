@@ -1,11 +1,11 @@
 package duke.command;
 
-import duke.tasks.Task;
-import duke.TaskAssigner;
 import duke.DukeException;
 import duke.Storage;
+import duke.TaskAssigner;
 import duke.TaskList;
 import duke.Ui;
+import duke.tasks.Task;
 
 public class AddCommand extends Command {
 
@@ -17,8 +17,8 @@ public class AddCommand extends Command {
 
     @Override
     public String execute(Ui ui, Storage storage, TaskList taskList) throws DukeException {
-        Task to_add = taskAssigner.assignTask(textCmd);
-        taskList.add(to_add);
-        return ui.printAddTask(to_add, taskList.getNumTasks());
+        Task addedTask = taskAssigner.assignTask(textCmd);
+        taskList.add(addedTask);
+        return ui.printAddTask(addedTask, taskList.getNumTasks());
     }
 }

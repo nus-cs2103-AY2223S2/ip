@@ -1,22 +1,23 @@
 package duke;
 
-import duke.command.DeleteCommand;
-import duke.command.ErrorCommand;
-import duke.command.ExitCommand;
-import duke.command.ListCommand;
-import duke.command.UnmarkCommand;
-import duke.command.MarkCommand;
-import duke.command.Command;
-import duke.command.AddCommand;
-import duke.command.FindCommand;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.ErrorCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
+import duke.command.UnmarkCommand;
+
+
 public class Parser {
 
-    public static DateTimeFormatter strFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-    public static DateTimeFormatter ldtFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy HHmm");
+    private static DateTimeFormatter strFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+    private static DateTimeFormatter ldtFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy HHmm");
 
 
     /**
@@ -51,7 +52,7 @@ public class Parser {
             return new ExitCommand("bye");
         } else if (command.startsWith("find")) {
             return new FindCommand(command);
-        } else  {
+        } else {
             return new ErrorCommand("error");
         }
     }

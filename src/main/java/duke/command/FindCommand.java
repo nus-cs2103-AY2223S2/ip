@@ -1,12 +1,9 @@
 package duke.command;
 
-import duke.tasks.Task;
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-
-import java.util.ArrayList;
 
 public class FindCommand extends Command {
 
@@ -20,8 +17,8 @@ public class FindCommand extends Command {
         String typeOfCommand = commandSplit[0];
 
         if (!typeOfCommand.equals("find")) {
-            throw new DukeException("The Formatting of your Find Command Task is incorrect!\n" +
-                    "Please follow this format: find {keyword}");
+            throw new DukeException("The Formatting of your Find Command Task is incorrect!\n"
+                    + "Please follow this format: find {keyword}");
         }
 
         if (commandSplit.length == 1) {

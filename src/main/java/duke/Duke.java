@@ -1,8 +1,8 @@
 package duke;
 
-import duke.command.Command;
-
 import java.io.IOException;
+
+import duke.command.Command;
 
 public class Duke {
 
@@ -38,17 +38,16 @@ public class Duke {
     public void exitDuke() {
         isExit = true;
     }
-
     public String getResponse(String input) {
         try {
             Command c = Parser.stringToCommand(input);
-            String to_Return = c.execute(ui, storage, taskList);
+            String toReturn = c.execute(ui, storage, taskList);
             storage.saveTasks(taskList);
 
             if (c.isExit()) {
                 this.exitDuke();
             }
-            return to_Return;
+            return toReturn;
         } catch (DukeException e) {
             return ui.showError(e.getMessage());
         }

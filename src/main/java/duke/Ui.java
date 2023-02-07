@@ -1,15 +1,17 @@
 package duke;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import duke.tasks.Task;
 
-import javax.print.DocFlavor;
-import java.util.Scanner;
-import java.util.ArrayList;
-
 public class Ui {
-    public static String GREET_MSG = "Hello! I am Duke Nice To Meet You\n";
-    public static String BYE_MSG = "Bye! Hope to See You Again!";
-    public static String ADD_MSG = "Got it fam! I've added this task:\n ";
+    @SuppressWarnings("checkstyle:VisibilityModifier")
+    private static String GREET_MSG = "Hello! I am Duke Nice To Meet You\n";
+    @SuppressWarnings("checkstyle:VisibilityModifier")
+    private static String BYE_MSG = "Bye! Hope to See You Again!";
+    @SuppressWarnings("checkstyle:VisibilityModifier")
+    private static String ADD_MSG = "Got it fam! I've added this task:\n ";
 
     private Scanner sc;
 
@@ -32,10 +34,10 @@ public class Ui {
     /**
      * Displays the various error messages to the user.
      *
-     * @param e_message DukeException's error messages.
+     * @param errorMessage DukeException's error messages.
      */
-    public String showError(String e_message) {
-        return e_message;
+    public String showError(String errorMessage) {
+        return errorMessage;
     }
 
     /**
@@ -81,11 +83,11 @@ public class Ui {
      * Prints the task that's been added by the user.
      * Prints the total number of tasks in his TaskList after adding the recent task.
      *
-     * @param num_tasks number of total tasks after addition.
-     * @param to_add the task that's to be added .
+     * @param numTasks number of total tasks after addition.
+     * @param addedTask the task that's to be added .
      */
-    public String printAddTask(Task to_add, Integer num_tasks) {
-        return ADD_MSG + to_add.toString() + "\nYou currently have " + num_tasks + " tasks in this list!\n";
+    public String printAddTask(Task addedTask, Integer numTasks) {
+        return ADD_MSG + addedTask.toString() + "\nYou currently have " + numTasks + " tasks in this list!\n";
     }
 
     /**
@@ -94,20 +96,20 @@ public class Ui {
      * @param unmarkedTask the task thats been unmarked by user.
      */
     public String printUnmarkTask(Task unmarkedTask) {
-        return "Ok! I have marked this task as not done yet:\n" +
-                unmarkedTask.toString() + "\n";
+        return "Ok! I have marked this task as not done yet:\n"
+               + unmarkedTask.toString() + "\n";
     }
 
     /**
      * Prints the task that's been deleted by the user.
      *
      * @param removedTask the tasks that's removed.
-     * @param num_tasks number of total tasks after deletion.
+     * @param numTasks number of total tasks after deletion.
      */
-    public String printDeleteTask(Task removedTask, Integer num_tasks) {
-        return "Noted!I have deleted the task for you:\n " +
-                removedTask.toString() + "\nyou currently have " + num_tasks +
-                " tasks in this list!\n";
+    public String printDeleteTask(Task removedTask, Integer numTasks) {
+        return "Noted!I have deleted the task for you:\n "
+                + removedTask.toString() + "\nyou currently have " + numTasks
+                 + " tasks in this list!\n";
     }
 
     public String printTaskByKeyWord(TaskList taskList, String keyWord) throws DukeException {

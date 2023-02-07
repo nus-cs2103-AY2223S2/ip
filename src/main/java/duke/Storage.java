@@ -1,19 +1,19 @@
 package duke;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
+
 import duke.tasks.Deadline;
 import duke.tasks.Events;
 import duke.tasks.Task;
 import duke.tasks.ToDos;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.FileWriter;
-import java.util.Scanner;
-
 public class Storage {
 
-    public static String path = "DukeData/tasks.txt";
-    public static String dirPath = "DukeData";
+    private static String path = "DukeData/tasks.txt";
+    private static String dirPath = "DukeData";
 
     /**
      * Creates Storage for Duke to load tasks from previous run
@@ -67,18 +67,18 @@ public class Storage {
             Task curr = new Task("");
 
             switch (text[0]) {
-                case ("T"):
-                    curr = new ToDos(text[2]);
-                    break;
-                case ("D"):
-                    curr = new Deadline(text[2], text[3]);
-                    break;
-                case ("E"):
-                    curr = new Events(text[2], text[3], text[4]);
-                    break;
-                default:
-                    System.out.println("Error while Loading up the file");
-                    break;
+            case "T":
+                curr = new ToDos(text[2]);
+                break;
+            case "D":
+                curr = new Deadline(text[2], text[3]);
+                break;
+            case "E":
+                curr = new Events(text[2], text[3], text[4]);
+                break;
+            default:
+                System.out.println("Error while Loading up the file");
+                break;
             }
 
             if (!curr.emptyTask()) {
