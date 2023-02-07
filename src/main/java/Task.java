@@ -1,5 +1,3 @@
-import java.util.Objects;
-
 public class Task {
     protected final int taskNumber;
     protected final boolean taskStatus;
@@ -25,6 +23,13 @@ public class Task {
                 "\n\t OK, I've marked this task as not done yet:\n" +
                 "\t  " + "[ ]" + " " + this.task +
                 "\n\t____________________________________________________________");
+    }
+
+    public void printDelete() {
+        System.out.println("\t____________________________________________________________" +
+                "\n\t Noted. I've removed this task:" + "\n\t   " +
+                this.getTaskStatus() + " " + this.task +
+                "\n\t Now you have " + this.totalNumOfTasks + " tasks in the list.");
     }
 
     public int getTaskNumber() {

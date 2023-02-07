@@ -113,6 +113,14 @@ public class Duke {
                             taskName, eventStartTime, eventEndTime, allTasks.size() + 1);
                     allTasks.add(event);
                     event.printEventTask();
+                } else if (command.startsWith("delete")) {
+                    missingIndexException(command);
+                    invalidIndexException(command, allTasks.size());
+                    String[] str = command.split(" ");
+                    int taskIndex = Integer.parseInt(str[1]) - 1;
+                    Task task = allTasks.get(taskIndex);
+                    task.printDelete();
+                    allTasks.remove(taskIndex);
                 } else if (command.equals("bye")){
                     saidBye = true;
                     this.printByeMessage();
@@ -121,6 +129,10 @@ public class Duke {
                 }
             } catch (DukeException d) {
                 System.out.println(d.getMessage());
+            } catch (NumberFormatException nfe) {
+                System.out.println("\t____________________________________________________________" +
+                        "\n\t ☹ OOPS!!! The task index to delete or un/mark a task cannot be a non-integer." +
+                        "\n\t____________________________________________________________");
             }
         }
     }
@@ -151,12 +163,6 @@ public class Duke {
         }
 
         System.out.println("\t____________________________________________________________");
-    }
-
-    public void echoCommand(String command) {
-        System.out.println("\t____________________________________________________________" +
-                "\n\t" + " added: " + command +
-                "\n\t____________________________________________________________");
     }
 
     public void printByeMessage() {
@@ -207,24 +213,29 @@ public class Duke {
             throw new DukeException("\t____________________________________________________________" +
                     "\n\t ☹ OOPS!!! The task index to unmark a task as not done cannot be empty." +
                     "\n\t____________________________________________________________");
+        } else if (command.equals("delete")) {
+            throw new DukeException("\t____________________________________________________________" +
+                    "\n\t ☹ OOPS!!! The task index to delete a task as not done cannot be empty." +
+                    "\n\t____________________________________________________________");
         }
     }
 
     public void invalidIndexException(String command, int taskSize) throws DukeException {
-        if (command.startsWith("mark") || command.startsWith("unmark")) {
+        if (command.startsWith("mark") || command.startsWith("unmark")
+                ||command.startsWith("delete")) {
             String index = command.split(" ")[1];
             int index1 = Integer.parseInt(index);
             if (index1 <= 0) {
                 throw new DukeException("\t____________________________________________________________" +
-                        "\n\t ☹ OOPS!!! The task index to mark a task as done cannot be zero or less." +
+                        "\n\t ☹ OOPS!!! The task index to delete or un/mark a task cannot be zero or less." +
                         "\n\t____________________________________________________________");
             } else if (index.equals("")) {
                 throw new DukeException("\t____________________________________________________________" +
-                        "\n\t ☹ OOPS!!! The task index to mark a task as done cannot be empty." +
+                        "\n\t ☹ OOPS!!! The task index to delete or un/mark a task cannot be empty." +
                         "\n\t____________________________________________________________");
             } else if (index1 > taskSize) {
                 throw new DukeException("\t____________________________________________________________" +
-                        "\n\t ☹ OOPS!!! The task index to mark a task as done cannot be more than" +
+                        "\n\t ☹ OOPS!!! The task index to delete or un/mark a task cannot be more than" +
                         " number of tasks." +
                         "\n\t____________________________________________________________");
             }
@@ -240,5 +251,4 @@ public class Duke {
                     "\n\t____________________________________________________________");
         }
     }
-
 }

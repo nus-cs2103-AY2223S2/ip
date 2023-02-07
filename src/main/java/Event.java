@@ -41,6 +41,18 @@ class Event extends Task {
     }
 
     @Override
+    public void printDelete() {
+        int newTotalNumOfTasks = super.totalNumOfTasks - 1;
+        System.out.println("\t____________________________________________________________" +
+                "\n\t Noted. I've removed this task:" +
+                "\n\t   " + this.taskType +
+                super.getTaskStatus() + " " + super.task + " (from: " + this.eventStartTime +
+                " to: " + this.eventEndTime + ")" + "\n\t Now you have " +
+                newTotalNumOfTasks + " tasks in the list." +
+                "\n\t____________________________________________________________");
+    }
+
+    @Override
     public String getTaskType() {
         return this.taskType;
     }
