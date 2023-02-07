@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 import exception.DukeException;
 import parser.Parser;
 import response.Response;
@@ -30,6 +28,9 @@ public class Duke {
      * @return Duke's response to the user input as a String.
      */
     public String getResponse(String input) {
+        if (input.equalsIgnoreCase("bye")) {
+            return ui.getExtStr();
+        }
         // Parse the user input
         Parser parser = new Parser(input);
         String out;
