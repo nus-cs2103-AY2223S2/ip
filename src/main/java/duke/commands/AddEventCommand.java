@@ -7,7 +7,16 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
+/**
+ * This is the AddEventCommand class to represent add event commands passed to Duke.
+ * Encapsulates the information needed to add an Event object to the TaskList.
+ */
 public class AddEventCommand extends AddCommand {
+    /**
+     * Creates a new AddEventCommand.
+     * @param tokens {@inheritDoc}
+     * @throws DukeException when exceptions are encountered in creating the Event.
+     */
     public AddEventCommand(ArrayList<String> tokens) throws DukeException, DateTimeParseException {
         super(tokens);
         int fromId = tokens.indexOf("/from");

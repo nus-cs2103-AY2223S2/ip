@@ -7,16 +7,36 @@ import java.time.DateTimeException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Parser {
-    public Parser() {
+/***
+ * This is the Parser class for Duke, the CLI task manager.
+ * This class handles parsing of user commands from the CLI
+ * and handles Command creation.
+ */
 
-    }
+public class Parser {
+
+    /**
+     * Returns an ArrayList of processed user input for parsing.
+     *
+     * @param input text input from CLI from user.
+     * @return ArrayList of the user input with whitespace removed.
+     */
     private static ArrayList<String> tokenize(String input) {
         ArrayList<String> tokens = new ArrayList<>(Arrays.asList(input.split(" ")));
         tokens.removeIf(s -> s.equals(" ") || s.equals(""));
         tokens.forEach(s -> s = s.trim());
         return tokens;
     }
+
+    /**
+     * Returns a Command depending on the first word in
+     * user's text input.
+     *
+     * @param userIn user input of type String.
+     * @return Command depending on keyword.
+     * @throws DateTimeException if DateTime parsing unsuccessful.
+     * @throws DukeException if userIn does not follow specified command syntax.
+     */
     public static Command parse(String userIn) throws DateTimeException, DukeException {
         ArrayList<String> tokens = tokenize(userIn);
         String key = tokens.get(0);
