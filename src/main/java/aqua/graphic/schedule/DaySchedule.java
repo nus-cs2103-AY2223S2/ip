@@ -23,7 +23,7 @@ public class DaySchedule extends HBox {
     private static final double ROW_HEIGHT = 20;
     private static final double HOURS_IN_A_DAY = 24;
     private static final double MINUTES_IN_A_DAY = 1440;
-    private static final double MIN_BLOCK_WIDTH = ROW_HEIGHT;
+    private static final double MIN_BLOCK_WIDTH = 7;
     private static final double TOOLTIP_SHOW_DELAY = 0;
     private static final double TOOLTIP_HIDE_DELAY = 0;
 
