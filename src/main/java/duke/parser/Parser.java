@@ -59,6 +59,7 @@ public class Parser {
         MinimumLengths(int length) {
             this.length = length;
         }
+    }
 
     public static String[] getIndexes(String[] splitInputs) {
         return Arrays.stream(splitInputs, 1, splitInputs.length).toArray(String[]::new);

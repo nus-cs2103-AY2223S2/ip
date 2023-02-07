@@ -90,7 +90,7 @@ public class Task {
     protected void markTaskIfNeeded(String taskStatus, Task task) {
         boolean isTaskStatusUnmarkValid = taskStatus.equals("0");
         boolean isTaskStatusMarkValid = taskStatus.equals("1");
-        assert isTaskStatusUnmarkValid || isTaskStatusMarkValid: "Task Status must be 0 or 1";
+        assert isTaskStatusUnmarkValid || isTaskStatusMarkValid : "Task Status must be 0 or 1";
         if (isTaskStatusMarkValid) {
             task.mark();
         }
