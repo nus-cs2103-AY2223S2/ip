@@ -12,12 +12,10 @@ public class ExitCommand extends Command {
      * Exits from main program.
      *
      * @param tasks List of tasks.
-     * @param ui Ui object that handles all Ui actions.
      * @param storage Storage object that handles all Storage actions.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
-        super.isExit = true;
-        return ui.getExitOutput();
+    public String execute(TaskList tasks, Storage storage) {
+        return Ui.getExitOutput();
     }
 }

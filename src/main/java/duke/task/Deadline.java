@@ -22,7 +22,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description) throws DukeException {
         super(description.split(" /by ")[0]);
-        this.setDeadline(description);
+        setDeadline(description);
     }
 
     /**
@@ -33,7 +33,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String taskStatus) throws DukeException {
         super(description.split(" /by ")[0]);
-        this.setDeadline(description);
+        setDeadline(description);
         markTaskIfNeeded(taskStatus, this);
     }
 
@@ -45,15 +45,15 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[D][%c] %s (by: %s) %s", this.getStatusIcon(), this.description,
-                new Ui().getStringDateTime(this.deadline), super.urgentMessage(this.deadline));
+        return String.format("[D][%c] %s (by: %s) %s", getStatusIcon(), description,
+                Ui.getStringDateTime(deadline), super.urgentMessage(deadline));
     }
 
     private void setDeadline(String description) throws DukeException {
         try {
-            this.deadline = new Parser().parseDateTime(description.split(" /by ")[1]);
+            deadline = Parser.parseDateTime(description.split(" /by ")[1]);
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("☹ I'm sorry, but Fake Duke doesn't know what that means :-(");
+            throw new DukeException("I'm sorry, but Fake Duke doesn't know what that means :-(");
         } catch (DateTimeParseException dtpe) {
             throw new DukeException("Invalid datetime format. Please use yyyy-mm-dd HH:mm (E.g. 2019-10-15 18:00).");
         }
@@ -67,6 +67,6 @@ public class Deadline extends Task {
     @Override
     public String getRawTask() {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        return String.format("D ~ %d ~ %s ~ %s\n", isDone ? 1 : 0, this.description, dtf.format(this.deadline));
+        return String.format("D ~ %d ~ %s ~ %s\n", isDone ? 1 : 0, description, dtf.format(deadline));
     }
 }

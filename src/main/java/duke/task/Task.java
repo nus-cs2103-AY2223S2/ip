@@ -24,14 +24,14 @@ public class Task {
      * Marks task as done.
      */
     public void mark() {
-        this.isDone = true;
+        isDone = true;
     }
 
     /**
      * Unmarks task as undone.
      */
     public void unmark() {
-        this.isDone = false;
+        isDone = false;
     }
 
     /**
@@ -55,7 +55,7 @@ public class Task {
      */
     @Override
     public String toString() {
-        return String.format("[%c] %s", this.getStatusIcon(), this.description);
+        return String.format("[%c] %s", getStatusIcon(), description);
     }
 
     /**
@@ -64,7 +64,7 @@ public class Task {
      * @return Raw String representation of a Task in this format: T ~ {status} ~ {description}.
      */
     public String getRawTask() {
-        return String.format("T ~ %d ~ %s\n", isDone ? 1 : 0, this.description);
+        return String.format("T ~ %d ~ %s\n", isDone ? 1 : 0, description);
     }
 
     /**
@@ -76,9 +76,11 @@ public class Task {
     public String urgentMessage(LocalDateTime dateTime) {
         LocalDateTime currentDateTime = LocalDateTime.now();
         int diff = currentDateTime.compareTo(dateTime);
-        if (diff > 0) {
+        boolean isTaskExpired = (diff > 0);
+        boolean isTaskExpiringSoon = (diff == -1);
+        if (isTaskExpired) {
             return "!! TASK EXPIRED! !!";
-        } else if (diff == -1) {
+        } else if (isTaskExpiringSoon) {
             return "!! TASK EXPIRING SOON! !!";
         } else {
             return "";
@@ -86,8 +88,10 @@ public class Task {
     }
 
     protected void markTaskIfNeeded(String taskStatus, Task task) {
-        assert taskStatus.equals("0") || taskStatus.equals("1") : "Task Status must be 0 or 1";
-        if (taskStatus.equals("1")) {
+        boolean isTaskStatusUnmarkValid = taskStatus.equals("0");
+        boolean isTaskStatusMarkValid = taskStatus.equals("1");
+        assert isTaskStatusUnmarkValid || isTaskStatusMarkValid: "Task Status must be 0 or 1";
+        if (isTaskStatusMarkValid) {
             task.mark();
         }
     }

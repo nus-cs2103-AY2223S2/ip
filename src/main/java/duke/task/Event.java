@@ -46,20 +46,18 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        Ui ui = new Ui();
-        return String.format("[E][%c] %s (from: %s to: %s) %s", this.getStatusIcon(), this.description,
-                ui.getStringDateTime(this.startDateTime), ui.getStringDateTime(this.endDateTime),
-                super.urgentMessage(this.startDateTime));
+        return String.format("[E][%c] %s (from: %s to: %s) %s", getStatusIcon(), description,
+                Ui.getStringDateTime(startDateTime), Ui.getStringDateTime(endDateTime),
+                super.urgentMessage(startDateTime));
     }
 
     private void setEventDateTimes(String description) throws DukeException {
-        Parser parser = new Parser();
         try {
             String dateTimes = description.split(" /from ")[1];
-            this.startDateTime = parser.parseDateTime(dateTimes.split(" /to ")[0]);
-            this.endDateTime = parser.parseDateTime(dateTimes.split(" /to ")[1]);
+            startDateTime = Parser.parseDateTime(dateTimes.split(" /to ")[0]);
+            endDateTime = Parser.parseDateTime(dateTimes.split(" /to ")[1]);
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("☹ I'm sorry, but Fake Duke doesn't know what that means :-(");
+            throw new DukeException("I'm sorry, but Fake Duke doesn't know what that means :-(");
         } catch (DateTimeParseException dtpe) {
             throw new DukeException("Invalid datetime format. Please use yyyy-mm-dd HH:mm (E.g. 2019-10-15 18:00).");
         }
@@ -74,7 +72,7 @@ public class Event extends Task {
     @Override
     public String getRawTask() {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        return String.format("E ~ %d ~ %s ~ %s ~ %s\n", isDone ? 1 : 0, this.description,
-                dtf.format(this.startDateTime), dtf.format(this.endDateTime));
+        return String.format("E ~ %d ~ %s ~ %s ~ %s\n", isDone ? 1 : 0, description,
+                dtf.format(startDateTime), dtf.format(endDateTime));
     }
 }
