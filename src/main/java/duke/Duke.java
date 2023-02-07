@@ -1,8 +1,7 @@
 package duke;
 
 import duke.commands.Command;
-import duke.taskType.TaskList;
-import duke.commands.*;
+import duke.tasktype.TaskList;
 import javafx.application.Platform;
 
 /**
@@ -18,7 +17,7 @@ public class Duke {
 
     /**
      * The default and only constructor of Duke class.
-     * Initialize UI, Storage, and the list to store tasks.
+     * Initializes UI, Storage, and the list to store tasks.
      *
      * @param filePath the path of the file to store the task list
      */
@@ -28,6 +27,12 @@ public class Duke {
         this.lst = storage.load();
     }
 
+    /**
+     * Deals with the user commands.
+     *
+     * @param cmd the command typed by the user
+     * @return the response from the bot
+     */
     public String dealWithCommand(String cmd) {
         Command command = Parser.parse(cmd);
         if (command.isBye()) {
@@ -36,6 +41,12 @@ public class Duke {
         return command.operate(lst, ui, storage);
     }
 
+    /**
+     * Gets the response from the bot.
+     *
+     * @param input the input from the user
+     * @return the output from the bot
+     */
     public String getResponse(String input) {
         return dealWithCommand(input);
     }

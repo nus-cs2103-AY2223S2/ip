@@ -7,6 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -49,6 +50,9 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
     }
 
+    /**
+     * Sends the greeting message in the GUI to the user.
+     */
     public void hello() {
         String greeting = "Hello! I'm T-Rex. Roarrrrrrrrrrrrrr!\nWhat do you need from me?";
         dialogContainer.getChildren().addAll(

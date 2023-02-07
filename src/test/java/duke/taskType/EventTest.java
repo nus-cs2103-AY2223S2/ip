@@ -1,14 +1,13 @@
-package duke.taskType;
+package duke.tasktype;
 
-import duke.taskType.*;
-import duke.*;
-import duke.commands.*;
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
 public class EventTest {
     @Test
-    public void Eventtest() {
-        Event e = new Event("lash","lapapa","papala");
+    public void eventTest() {
+        Event e = new Event("lash", "lapapa", "papala");
         assertEquals("[E][ ]lash (from: lapapa to: papala)", e.toString());
     }
 }

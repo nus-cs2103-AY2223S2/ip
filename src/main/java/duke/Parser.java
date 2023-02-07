@@ -1,24 +1,34 @@
 package duke;
 
-import duke.commands.*;
+import duke.commands.Bye;
+import duke.commands.Command;
+import duke.commands.CreateDeadline;
+import duke.commands.CreateEvent;
+import duke.commands.CreateTodo;
+import duke.commands.Delete;
+import duke.commands.Find;
+import duke.commands.List;
+import duke.commands.Mark;
+import duke.commands.NotACommand;
+import duke.commands.Unmark;
 
 /**
  * The class used to identify user commands.
  */
 public class Parser {
-    private enum cmds {
+    private enum Order {
         BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, FIND;
     }
 
     /**
-     * To identify which command the user typed.
+     * Identifies which command the user typed.
      *
      * @param cmdLine the whole line of command the user typed
      * @return a Command object that is the command the user meant to type
      */
     public static Command parse(String cmdLine) {
         try {
-            cmds order = cmds.valueOf(cmdLine.split(" ")[0].toUpperCase());
+            Order order = Order.valueOf(cmdLine.split(" ")[0].toUpperCase());
             switch (order) {
             case BYE:
                 return new Bye();
@@ -48,11 +58,11 @@ public class Parser {
                 return new Find(cmdLine);
                 // Fallthrough
             default:
-                return new notACommand();
+                return new NotACommand();
                 // Fallthrough
             }
         } catch (IllegalArgumentException e) {
-            return new notACommand();
+            return new NotACommand();
         }
     }
 }
