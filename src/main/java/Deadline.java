@@ -1,5 +1,6 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task {
     protected LocalDateTime by;
@@ -10,20 +11,34 @@ public class Deadline extends Task {
     }
 
     public LocalDateTime transferTOLocalDateTime(String by) {
+        LocalDateTime dateTime = null;
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-        LocalDateTime dateTime = LocalDateTime.parse(by, dateTimeFormatter);
+        try {
+            dateTime = LocalDateTime.parse(by, dateTimeFormatter);
+            return dateTime;
+        } catch (DateTimeParseException | NullPointerException e) {
+            System.out.println("\t Wrong Wrong Date Format!\n");
+        }
         return dateTime;
     }
 
     public String deadlineDateTime() {
+        String deadline = "";
+        String dayOfWeek = "";
         DateTimeFormatter format = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
-        String deadline = this.by.format(format);
-        String dayOfWeek = this.by.getDayOfWeek().toString();
+        try {
+            deadline = this.by.format(format);
+            dayOfWeek = this.by.getDayOfWeek().toString();
+            return dayOfWeek + ", " + deadline;
+        } catch (DateTimeParseException | NullPointerException e) {
+            System.out.println("\t Wrong Wrong Date Format!\n");
+        }
         return dayOfWeek + ", " + deadline;
     }
 
     public String getBy() {
-        return this.by;
+        String deadline = deadlineDateTime();
+        return deadline;
     }
     @Override
     public String toString() {
