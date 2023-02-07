@@ -30,6 +30,7 @@ public class Parser {
      */
     public static Command parse(String input) throws RedException {
         String[] arrOfStr = input.split(" ", 2);
+        assert arrOfStr.length >= 1;
 
 
         if (input.equals("bye")) {
