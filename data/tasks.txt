@@ -1,4 +1,4 @@
-T | 1 | akjd
+T | 0 | akjd
 D | 0 | aksndd  | 2022-01-01 00:00
 D | 1 | oapd | 2022-01-01 00:11
 T | 0 | asjldn
