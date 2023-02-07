@@ -39,7 +39,7 @@ public class Ui {
     private static final String COMMAND_LIST = "(command follows after '|', { } encloses your input, [ ] refers to optional inputs)"
             + "\n" + "Adding Tasks: "
             + "\n" + "  Todo | todo {desc}"
-            + "\n" + "  Deadline | deadline {desc} /by {yyyy-mm-dd} [{HHmm}]"
+            + "\n" + "  Deadline | deadline {desc} /byRec {yyyy-mm-dd} [{HHmm}]"
             + "\n" + "  Event | event {desc} /from {start_desc} /to {end_desc}"
             + "\n" + "Listing all tasks: | list"
             + "\n" + "Deleting task | delete {task_index}"

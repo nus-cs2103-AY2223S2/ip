@@ -11,7 +11,7 @@
 /build/
 src/main/resources/docs/
 
-# MacOS custom attributes files created by Finder
+# MacOS custom attributes files created byRec Finder
 .DS_Store
 *.iml
 bin/

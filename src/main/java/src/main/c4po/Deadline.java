@@ -15,26 +15,26 @@ import java.util.List;
  */
 public class Deadline extends Task {
 
-    protected String by;
+    protected String byRec;
 
     protected String byStr;
     protected String byTimeStr = "";
     protected LocalDate byDate;
     protected LocalTime byTime = LocalTime.now();
     public static String dateTimeParseErrMsg = "Could not parse date time format, please write yyyy-MM-dd [HHmm]. " +
-            "Include 0s in the tenths place. Optionally include time, separated by a space";
+            "Include 0s in the tenths place. Optionally include time, separated byRec a space";
 
     /**
      * Instantiates a instance of Deadline Task object with description and a deadline
      * which will be parsed into a DateTime format
      * @param description describes the task
-     * @param by details the deadline in yyyy-mm-dd hhmm
+     * @param byRec details the deadline in yyyy-mm-dd hhmm
      * @param isDone specifies whether the deadline task is done
      */
-    public Deadline(String description, String by, boolean isDone) {
+    public Deadline(String description, String byRec, boolean isDone) {
         super(description, isDone);
-        this.by = by;
-        ArrayList<String> arr = new ArrayList<>(List.of(by.split(" ")));
+        this.byRec = byRec;
+        ArrayList<String> arr = new ArrayList<>(List.of(byRec.split(" ")));
 
         try {
             this.byDate = LocalDate.parse(arr.get(0));
@@ -52,13 +52,13 @@ public class Deadline extends Task {
     /**
      * Creates a new Deadline task with description and formatted-time input
      * @param description describes the task details
-     * @param by a String which details the deadline date-time in yyyy-mm-dd hhmm format
+     * @param byRec a String which details the deadline date-time in yyyy-mm-dd hhmm format
      * @throws BotException if the datetime cannot be parsed
      */
-    public Deadline(String description, String by) throws BotException {
+    public Deadline(String description, String byRec) throws BotException {
         super(description, false);
-        this.by = by;
-        ArrayList<String> arr = new ArrayList<>(List.of(by.split(" ")));
+        this.byRec = byRec;
+        ArrayList<String> arr = new ArrayList<>(List.of(byRec.split(" ")));
 
         try {
             this.byDate = LocalDate.parse(arr.get(0));
@@ -78,7 +78,7 @@ public class Deadline extends Task {
 
     @Override
     protected String getTaskFileFormat() {
-        return "D" + " | " + super.getTaskFileFormat() + " | " + by;
+        return "D" + " | " + super.getTaskFileFormat() + " | " + byRec;
     }
 
 
@@ -99,11 +99,11 @@ public class Deadline extends Task {
      */
     @Override
     public String getTaskInline(Integer index) {
-        return index.toString() + ". [D]" + super.getTaskInline() + " (by: " + byStr + " " + byTimeStr + ")";
+        return index.toString() + ". [D]" + super.getTaskInline() + " (byRec: " + byStr + " " + byTimeStr + ")";
     }
 
     @Override
     public String toString() {
-        return "[D] " + super.toString() + " (by: " + byStr + " " + byTimeStr + ")";
+        return "[D] " + super.toString() + " (byRec: " + byStr + " " + byTimeStr + ")";
     }
 }

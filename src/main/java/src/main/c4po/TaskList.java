@@ -135,7 +135,7 @@ public class TaskList {
 
 
     /**
-     * Returns String of all tasks, line-by-line formatted
+     * Returns String of all tasks, line-byRec-line formatted
      * for writing to file
      * @return
      */
