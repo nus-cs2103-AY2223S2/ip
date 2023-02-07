@@ -21,6 +21,7 @@ public class Parser {
     public static void parseUserResponse(String userInput) throws DukeException {
         String[] tokens = userInput.split(" ", 2);
         String command = tokens[0];
+
         switch (command) {
         case "bye": {
             if (tokens.length != 1) {
@@ -102,29 +103,27 @@ public class Parser {
     /**
      * Parses the stored arguments and returns a Todo object.
      *
-     * @param args Arguments following the main command.
      * @return Todo object.
      * @throws DukeException if description of Todo is not present.
      */
-    public static Todo parseTodo(String[] args) throws DukeException {
+    public static Todo parseTodo() throws DukeException {
         if (args.length < 2) {
             throw new DukeException("The description of a todo cannot be empty!");
-        } else {
-            String desc = args[1];
-            return new Todo(desc);
         }
+        String desc = args[1];
+        return new Todo(desc);
     }
 
 
     /**
      * Parses the stored arguments and returns a Deadline object.
      *
-     * @param args Arguments following the main command.
      * @return Deadline object.
      * @throws DukeException if end date/time not present or wrong format of end date/time.
      */
-    public static Deadline parseDeadline(String[] args) throws DukeException {
+    public static Deadline parseDeadline() throws DukeException {
         String[] separated = args[1].split("/by ");
+
         if (separated.length < 2) {
             throw new DukeException("Deadline needs to include a specific end date!");
         }
@@ -140,12 +139,12 @@ public class Parser {
     /**
      * Parses the stored arguments and returns an Event object.
      *
-     * @param args Arguments following the main command.
      * @return Event object.
      * @throws DukeException if start and end date/time not present.
      */
-    public static Event parseEvent(String[] args) throws DukeException {
+    public static Event parseEvent() throws DukeException {
         String[] separated = args[1].split("/from |/to ");
+
         if (separated.length < 3) {
             throw new DukeException("Event needs to include a start date/time and a end date/time!");
         }
@@ -155,11 +154,10 @@ public class Parser {
     /**
      * Parses the stored arguments to get referenced Task ID.
      *
-     * @param args Arguments following the main command.
      * @return Task ID.
      * @throws DukeException if task ID is of the wrong type.
      */
-    public static int parseTask(String[] args) throws DukeException {
+    public static int parseTask() throws DukeException {
         try {
             return Integer.parseInt(args[1]);
         } catch (NumberFormatException e) {
