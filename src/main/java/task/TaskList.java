@@ -1,10 +1,16 @@
 package task;
 
-import task.Task;
-
 import java.util.ArrayList;
 
+/**
+ * The ArrayList of tasks.
+ */
 public class TaskList extends ArrayList<Task> {
+    /**
+     * Prints the tasks in the list.
+     *
+     * @return All tasks stored in the list.
+     */
     public String print_curr_tasks() {
         String res = "";
         if (this.size() == 0) {

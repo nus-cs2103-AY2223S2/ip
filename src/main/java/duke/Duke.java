@@ -12,6 +12,9 @@ import task.Todo;
 import storage.Storage;
 import ui.Ui;
 
+/**
+ * Duke is the body part of the chatbot we designed.
+ */
 public class Duke {
     protected final TaskList taskList;
     protected final ArrayList<String> commandList;
@@ -31,16 +34,33 @@ public class Duke {
         this.ui = new Ui();
     }
 
-    // methods
+    /**
+     * Adds the task to the taskList.
+     *
+     * @param task_given The task we want to add to the list.
+     */
     public void addTask(Task task_given) {
         this.taskList.add(task_given);
     }
 
+    /**
+     * Returns the message of successfully adding a task to the taskList.
+     *
+     * @param task The task we want to add to the list.
+     * @return Message of successful adding.
+     */
     public String msg_of_add(Task task) {
         return "Got it. I've added this task:\n " + task.toString() + "\nNow you have " +
                 taskList.size() + " tasks in the list:D";
     }
 
+    /**
+     * Marks a task as done.
+     *
+     * @param index The index of the task we want to mark as done.
+     * @return Message of marking a task as done.
+     * @throws DukeException When any DukeException happens.
+     */
     public String mark_as_done(int index) throws DukeException {
         if (taskList.size() <= index) {
             throw new WrongIndexException();
@@ -50,6 +70,13 @@ public class Duke {
         return "Nice! I've marked this task as done:\n" + task.toString();
     }
 
+    /**
+     * Marks a task as undone.
+     *
+     * @param index The index of the task we want to mark as undone.
+     * @return Message of marking a task as undone.
+     * @throws DukeException When any DukeException happens.
+     */
     public String mark_as_undone(int index) throws DukeException {
         if (taskList.size() <= index) {
             throw new WrongIndexException();
@@ -59,6 +86,13 @@ public class Duke {
         return "OK, I've marked this task as not done yet:\n" + task.toString();
     }
 
+    /**
+     * Deletes a task from the taskList.
+     *
+     * @param index The index of the task we want to delete.
+     * @return Message of deletion.
+     * @throws WrongIndexException If the index is out of bound.
+     */
     public String delete_msg(int index) throws WrongIndexException {
         if (taskList.size() <= index) {
             throw new WrongIndexException();
@@ -70,6 +104,9 @@ public class Duke {
 
     }
 
+    /**
+     * Loads the data stored in the disk.
+     */
     public void loadDataFromDisk() {
         storage.loadData(commandList);
         for (String userInput: commandList) {
@@ -122,6 +159,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the program and outputs corresponding results.
+     */
     public void run() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"

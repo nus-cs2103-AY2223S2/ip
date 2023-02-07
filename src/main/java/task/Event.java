@@ -1,12 +1,19 @@
 package task;
 
-import java.time.LocalDate;
-
+/**
+ * Event class that extends from the Task class.
+ * It has additional attributes starting time and ending time.
+ */
 public class Event extends Task {
     protected String start;
     protected String end;
     protected String name;
 
+    /**
+     * Constructor
+     *
+     * @param name The content of the event command.
+     */
     public Event(String name) {
         super(name);
         this.start = name.substring(name.indexOf("/from") + "/from ".length(), name.indexOf("/to") - 1);

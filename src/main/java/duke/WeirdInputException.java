@@ -1,6 +1,5 @@
 package duke;
 
-import duke.DukeException;
 
 public class WeirdInputException extends DukeException {
     public WeirdInputException() {
