@@ -58,7 +58,7 @@ public class TaskList {
             task.makeCompleted();
         }
         assert task != null : "No Task created!";
-        lstOfItems.add(task);
+        lstOfTasks.add(task);
 
     }
 
@@ -72,9 +72,8 @@ public class TaskList {
         if (lstOfTasks.size() == 0) {
             response += ("Nothing here yet. Add your 1st item!\n");
         } else {
-            assert lstOfItems.size() > 0 : "List is empty!";
-            for (int i = 0; i < lstOfItems.size(); i++) {
-
+            assert lstOfTasks.size() > 0 : "List is empty!";
+            for (int i = 0; i < lstOfTasks.size(); i++) {
                 response += (String.valueOf(i + 1) + ".");
                 response += (lstOfTasks.get(i) + "\n");
             }
@@ -110,7 +109,7 @@ public class TaskList {
      */
     public String addTask(Task newTask) {
         String response = "Adding new task in progress...\n";
-        assert lstOfItems != null : "No list present!";
+        assert lstOfTasks != null : "No list present!";
         response += ("Got it. I have added: ");
         response += (newTask + "\n");
         lstOfTasks.add(newTask);
@@ -130,8 +129,8 @@ public class TaskList {
      * A stub Task with a simple "Test" description is added into the list of tasks.
      */
     public void addTask() {
-        assert lstOfItems != null : "No List created!";
-        lstOfItems.add(new Task("Test"));
+        assert lstOfTasks != null : "No List created!";
+        lstOfTasks.add(new Task("Test"));
     }
 
     /**
@@ -140,14 +139,14 @@ public class TaskList {
      * @param number the task number to be marked as completed.
      */
     public String markTask(int number) {
-        assert lstOfItems != null : "No List present!";
+        assert lstOfTasks != null : "No List present!";
         String response = "Marking task in progress...\n";
         try {
             if (number > lstOfTasks.size()) {
                 throw new DukeException("No such item!");
             } else {
-                assert lstOfItems.size() >= number : "List too small!";
-                lstOfItems.get(number - 1).makeCompleted();
+                assert lstOfTasks.size() >= number : "List too small!";
+                lstOfTasks.get(number - 1).makeCompleted();
                 response += ("Ok, I've marked this Task as completed: \n");
                 response += (lstOfTasks.get(number - 1) + "\n");
             }
@@ -163,13 +162,13 @@ public class TaskList {
      * @param number the task number to be deleted.
      */
     public String deleteTask(int number) {
-        assert lstOfItems != null : "No List created!";
+        assert lstOfTasks != null : "No List created!";
         String response = "Deleting task in progress...\n";
         try {
             if (number > lstOfTasks.size()) {
                 throw new DukeException("No such item!");
             } else {
-                assert lstOfItems.size() >= number : "List too small!";
+                assert lstOfTasks.size() >= number : "List too small!";
                 response += ("Ok, I've removed this Task: \n");
                 response += (lstOfTasks.get(number - 1) + "\n");
                 lstOfTasks.remove(number - 1);
@@ -189,8 +188,8 @@ public class TaskList {
      * @return the list of tasks currently present.
      */
     public ArrayList<Task> getTasks() {
-        assert lstOfItems != null : "No List created!";
-        return lstOfItems;
+        assert lstOfTasks != null : "No List created!";
+        return lstOfTasks;
     }
 
     /**
@@ -199,12 +198,12 @@ public class TaskList {
      * @return the number of tasks currently in the list.
      */
     public int getSize() {
-        assert lstOfItems != null : "No List created!";
-        return lstOfItems.size();
+        assert lstOfTasks != null : "No List created!";
+        return lstOfTasks.size();
     }
 
     public String find(String keyword) {
-        assert lstOfItems != null : "No List created!";
+        assert lstOfTasks != null : "No List created!";
         String response = "Finding " + keyword + " in progress...\n";
         int found = 0;
         ArrayList<Task> foundTasks = new ArrayList<>();
