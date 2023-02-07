@@ -82,17 +82,6 @@ public class Task {
     }
 
     /**
-     * Overrides the original toString method. The status and the task content
-     * are reflected in the string representation.
-     *
-     * @return the task string
-     */
-    @Override
-    public String toString() {
-        return String.format("[%s] %s", getStatusIcon(), name);
-    }
-
-    /**
      * Return the type of the task, which is a character,
      * such as "D" for deadline and "E" for event
      *
@@ -110,5 +99,16 @@ public class Task {
     public boolean containString(String string) {
         assert string.length() > 0 : "input string length should not be zero";
         return toString().contains(string);
+    }
+
+    /**
+     * Overrides the original toString method. The status and the task content
+     * are reflected in the string representation.
+     *
+     * @return the task string
+     */
+    @Override
+    public String toString() {
+        return String.format("[%s] %s", getStatusIcon(), name);
     }
 }
