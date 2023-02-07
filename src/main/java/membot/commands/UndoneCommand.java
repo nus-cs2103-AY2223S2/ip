@@ -23,7 +23,7 @@ public class UndoneCommand extends Command {
      */
     @Override
     public void execute() {
-        if (InputValidator.isSingleInputValid(this.input, true)) {
+        if (InputValidator.isSingleInputValid(this.input, false, true)) {
             int taskId = Integer.parseInt(this.input.split(" ")[1]);
             try {
                 Task.setStatusNew(taskId);
