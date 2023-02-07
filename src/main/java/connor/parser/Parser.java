@@ -1,7 +1,5 @@
 package connor.parser;
 
-import connor.Connor;
-import connor.parser.Commands;
 import connor.task.Deadline;
 import connor.task.Event;
 import connor.task.InvalidTaskException;
