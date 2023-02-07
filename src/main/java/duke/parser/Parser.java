@@ -82,19 +82,30 @@ public class Parser {
      */
     public Command parseCommand(String input) throws DukeException {
         String[] parts = input.split(" ", 2);
-        String command = parts[0];
-        CommandType commandType = CommandType.getCommandType(command);
-        // duke.commands with no arguments
+        String commandString = parts[0];
+        CommandType commandType = CommandType.getCommandType(commandString);
+
+        Command command = parseCommandWithNoArgument(commandType);
+        if (command != null) {
+            return command;
+        }
+
+        return parseCommandWithArgument(commandType, parts);
+    }
+
+    private Command parseCommandWithNoArgument(CommandType commandType) {
         switch (commandType) {
         case EXIT:
             return new ExitCommand();
         case DISPLAY_LIST:
             return new DisplayListCommand();
         default:
-            // Do nothing
-        }
+            return null;
 
-        // Commands with arguments
+        }
+    }
+
+    private Command parseCommandWithArgument(CommandType commandType, String[] parts) throws DukeException {
         if (parts.length < 2) {
             throw new EmptyArgumentDukeException();
         }

@@ -6,6 +6,9 @@ import duke.storage.Storage;
  * Represents a task.
  */
 public abstract class Task {
+    private static final String DONE_ICON = "X";
+    private static final String NOT_DONE_ICON = " ";
+
     protected String description;
     protected boolean isDone = false;
     private String eventSymbol;
@@ -28,7 +31,7 @@ public abstract class Task {
      */
     public String getStatusIcon() {
         // mark done task with X
-        return (isDone ? "X" : " ");
+        return (isDone ? DONE_ICON : NOT_DONE_ICON);
     }
 
     /**
