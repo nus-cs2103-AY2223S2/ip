@@ -37,7 +37,11 @@ public class MarkCommand extends Command {
     public void execute(TaskList tasks, UI ui, Storage storage) throws RedException {
         int taskListSize = tasks.getTaskListSize();
         assert taskListSize > -1;
-        if (taskListSize == 0 || taskListSize < taskIndex) {
+        boolean isEqualToZero =  taskListSize == 0;
+        boolean isLessThanIndex = taskListSize < taskIndex;
+        boolean isInvalidIndex = isEqualToZero || isLessThanIndex;
+
+        if (isInvalidIndex) {
             throw new RedException("Task specified does not exist");
         } else {
             Task currentTask = tasks.indexOf(this.taskIndex);

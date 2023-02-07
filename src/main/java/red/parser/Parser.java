@@ -60,7 +60,7 @@ public class Parser {
             return  new UnmarkCommand(index);
 
         } else if (arrOfStr[0].equals("deadline")) {
-            DeadlineTask NewDeadlineTask = null;
+            DeadlineTask newDeadlineTask = null;
             if (arrOfStr.length <= 1) {
                 throw new RuntimeException("Specification of the DeadlineTask is missing\n");
             }
@@ -74,15 +74,15 @@ public class Parser {
             }
 
             if (timestr.length == 2 && timestr[1].isEmpty()) {
-                NewDeadlineTask = new DeadlineTask(deadstr[0],timestr[0]);
+                newDeadlineTask = new DeadlineTask(deadstr[0],timestr[0]);
             } else if (timestr.length == 2) {
                 System.out.println(timestr[1].isEmpty());
-                NewDeadlineTask = new DeadlineTask(deadstr[0],timestr[0],timestr[1]);
+                newDeadlineTask = new DeadlineTask(deadstr[0],timestr[0],timestr[1]);
             } else if (timestr.length == 1) {
-                NewDeadlineTask = new DeadlineTask(deadstr[0],timestr[0]);
+                newDeadlineTask = new DeadlineTask(deadstr[0],timestr[0]);
             }
 
-            return new AddCommand(NewDeadlineTask);
+            return new AddCommand(newDeadlineTask);
 
         } else if(arrOfStr[0].equals("todo")) {
             if(arrOfStr.length <= 1) {

@@ -65,7 +65,6 @@ public class Red {
             command.execute(this.tasks, this.ui, this.storage);
             return this.ui.getCurrentReply();
         } catch (RedException e) {
-            // append the error message to the ui's response
             this.ui.addCurrentReply(e.getMessage());
             return this.ui.getCurrentReply();
         }

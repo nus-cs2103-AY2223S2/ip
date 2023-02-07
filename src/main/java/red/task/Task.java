@@ -52,9 +52,9 @@ public class Task {
 
     @Override
     public String toString() {
-        String statusicon = this.getStatusIcon();
+        String statusIcon = this.getStatusIcon();
         String str = "";
-        str = String.format("[" + statusicon + "] " + this.description);
+        str = String.format("[" + statusIcon + "] " + this.description);
         return str;
     }
 }
