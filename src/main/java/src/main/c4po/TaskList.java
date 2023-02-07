@@ -101,6 +101,7 @@ public class TaskList {
      * @return
      */
     public Task getItem(Integer index) throws BotException {
+        assert(index > 0) : "index must be larger than 0";
         try {
             Task res = taskList.get(index - 1);
             return res;
@@ -154,7 +155,8 @@ public class TaskList {
      * @return
      */
     public boolean mark(Integer index, String markOption) {
-        if (index > taskList.size() || index < 0) {
+        assert(index > 0) : "index must be larger than 0";
+        if (index > taskList.size()) {
             return false;
         }
         Task task = taskList.get(index - 1);
