@@ -107,7 +107,6 @@ public class Storage {
                     Command currentCommand = new AddCommand(currentTask);
                     currentCommand.execute(this.tasks,this.ui,this);
 
-
                 } else if(Character.compare(str.charAt(4),deadline) == 0) {
                     DeadlineTask currentTask = null;
                     String[] arrOfStr= str.split("] ", 2);
