@@ -31,6 +31,7 @@ public class MarkCmd extends Command {
         this.task = taskList.get(this.index).markDone();
 
         String output = "Nice! I've marked this task as done:";
-        this.response = output + "\n" + Ui.indentString(this.task.toString(), 1);
+        this.response = String.format("%s\n%s", output,
+                Ui.indentString(this.task.toString(), 1));
     }
 }

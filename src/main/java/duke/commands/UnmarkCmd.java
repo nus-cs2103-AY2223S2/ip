@@ -32,6 +32,7 @@ public class UnmarkCmd extends Command {
         this.task = taskList.get(this.index).unmarkDone();
 
         String output = "Ok, I've marked this task as not done yet:";
-        this.response = output + "\n" + Ui.indentString(this.task.toString(), 1);
+        this.response = String.format("%s\n%s", output,
+                Ui.indentString(this.task.toString(), 1));
     }
 }
