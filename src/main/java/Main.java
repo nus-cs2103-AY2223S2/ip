@@ -1,13 +1,4 @@
 import commands.Command;
-
-import parser.Parser;
-
-import storage.Storage;
-
-import tasklist.TaskList;
-
-import ui.Ui;
-
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -16,12 +7,17 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import parser.Parser;
+import storage.Storage;
+import tasklist.TaskList;
+import ui.Ui;
 
 public class Main extends Application {
 
@@ -91,6 +87,9 @@ public class Main extends Application {
 
         stage.setScene(scene);
         stage.show();
+
+        // Attach the icon to the stage/window
+        stage.getIcons().add(new Image("https://cdn-icons-png.flaticon.com/512/1786/1786548.png"));
 
         // Step 2. Formatting the window to look as expected
         stage.setTitle(APP_TITLE);

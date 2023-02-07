@@ -31,7 +31,7 @@ public class Storage {
 
 	private String dataFilePath = dataDirectory + File.separator + "shao.txt";
 
-	private String imageFilePath = "assets" + File.separator + "images" + File.separator;
+	private String imageFilePath = "src" + File.separator + "main" + File.separator + "resources" + File.separator;
 
 	private File myDir = new File(dataDirectory);
 
