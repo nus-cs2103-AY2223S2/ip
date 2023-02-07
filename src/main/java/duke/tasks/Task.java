@@ -1,11 +1,18 @@
 package duke.tasks;
 
+/**
+ * Class that models all Tasks
+ */
 public class Task {
     /** Description of the task*/
     protected String desc;
     /** if task is completed*/
     protected boolean isDone;
 
+    /**
+     * Constructor for Task
+     * @param description task
+     */
     public Task(String description) {
         this.desc = description;
         this.isDone = false;
@@ -16,8 +23,9 @@ public class Task {
     public void setIsDone(boolean status) {
         this.isDone = status;
     }
-    public String getDesc() { return this.desc; }
-
+    public String getDesc() {
+        return this.desc;
+    }
     /**
      * Process Task to String to store in duke.txt
      * @return Processed String

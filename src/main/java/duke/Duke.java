@@ -2,7 +2,14 @@ package duke;
 
 import java.util.Scanner;
 
+/**
+ * Main class
+ */
 public class Duke {
+
+    /**
+     * Main method
+     */
     public static void main(String[] args) throws DukeExceptions {
         Ui.intro();
         Storage.createDataDir();

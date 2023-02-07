@@ -1,10 +1,15 @@
 package duke;
 
-import duke.tasks.*;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.ToDo;
+
+/**
+ * Class for parsing all user inputs
+ */
 public class Parser {
     /**
      * Parses user input to a ToDo object
@@ -50,7 +55,7 @@ public class Parser {
             if (desc.equals("")) {
                 throw new DukeExceptions("Input cannot be empty!");
             }
-        } catch (DukeExceptions e){
+        } catch (DukeExceptions e) {
             System.out.println("Description cannot be empty!");
         }
         String deadline = inp[1].substring(3);
@@ -60,6 +65,11 @@ public class Parser {
         return new Deadline(desc, date);
     }
 
+    /**
+     * Parses user input for creating event
+     * @param input user's input
+     * @return an Event object
+     */
     public static Event parseEvent(String input) {
         try { //catching no desc and no deadline
             if (input.substring(6).equals("")) {
@@ -77,14 +87,14 @@ public class Parser {
             System.out.println("Format is task, /start, /end!");
         }
         String start = inp[1].substring(5);
-        String[] DnT = start.split(" "); //[2000-10-23,10:15]
-        String startDate = DnT[0];
-        String startTime = DnT[1];
+        String[] dnt = start.split(" ");
+        String startDate = dnt[0];
+        String startTime = dnt[1];
         LocalDateTime startDnT = LocalDateTime.parse(String.join("T", startDate, startTime));
         String end = inp[2].substring(3);
-        String[] DateAndTime = end.split(" ");
-        String endDate = DateAndTime[0];
-        String endTime = DateAndTime[1];
+        String[] dateAndTime = end.split(" ");
+        String endDate = dateAndTime[0];
+        String endTime = dateAndTime[1];
         LocalDateTime endDnT = LocalDateTime.parse(String.join("T", endDate, endTime));
         String undesc = inp[0];
         String desc = undesc.substring(6);

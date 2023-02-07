@@ -1,9 +1,11 @@
 package duke;
 
-import duke.tasks.*;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
+
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.ToDo;
 
 /** List containing all Tasks*/
 public class TaskList {
@@ -110,7 +112,7 @@ public class TaskList {
                 tasksFound.add(tsk);
             }
         }
-        for(int i = 0; i < tasksFound.size(); i++) {
+        for (int i = 0; i < tasksFound.size(); i++) {
             System.out.println(i + 1 + ". " + tasksFound.get(i));
         }
     }

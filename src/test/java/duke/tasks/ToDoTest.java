@@ -1,13 +1,13 @@
 package duke.tasks;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 public class ToDoTest {
 
     //test setup
-    ToDo td = new ToDo("run");
+    private ToDo td = new ToDo("run");
 
     @Test
     public void toFile_format_returnFormatted() {

@@ -1,13 +1,20 @@
 package duke.tasks;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
-import java.util.Date;
 
+/**
+ * Class for Event Objects
+ */
 public class Event extends Task {
     protected LocalDateTime start;
     protected LocalDateTime end;
 
+    /**
+     * Constructor for Events
+     * @param description task for the event
+     * @param start start time for the event
+     * @param end end time for the event
+     */
     public Event(String description, LocalDateTime start, LocalDateTime end) {
         super(description);
         this.start = start;
