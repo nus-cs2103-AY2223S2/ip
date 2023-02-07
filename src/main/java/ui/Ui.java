@@ -11,4 +11,8 @@ public class Ui {
     public String getExtStr() {
         return extStr;
     }
+
+    public String getIntro() {
+        return intro;
+    }
 }

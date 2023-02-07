@@ -50,4 +50,8 @@ public class Duke {
         }
         return out;
     }
+
+    public String getWelcomeMessage() {
+        return ui.getIntro();
+    }
 }
