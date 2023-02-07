@@ -8,23 +8,23 @@ import duke.exception.DukeException;
  * Contains the task list and the operations that can be performed on the tasks.
  */
 public class TaskList {
-    private final ArrayList<Task> TASK_LIST;
+    private final ArrayList<Task> taskList;
 
     public TaskList() {
-        this.TASK_LIST = new ArrayList<>();
+        this.taskList = new ArrayList<>();
     }
 
     public TaskList(ArrayList<Task> taskList) {
-        this.TASK_LIST = taskList;
+        this.taskList = taskList;
     }
 
     public int getSize() {
-        return TASK_LIST.size();
+        return taskList.size();
     }
 
     public Task getTask(int taskIndex) throws DukeException {
         try {
-            return TASK_LIST.get(taskIndex);
+            return taskList.get(taskIndex);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Unable to get task.");
         }
@@ -36,7 +36,7 @@ public class TaskList {
      * @param task Task added by user.
      */
     public void addTask(Task task) {
-        TASK_LIST.add(task);
+        taskList.add(task);
     }
 
     /**
@@ -48,7 +48,7 @@ public class TaskList {
      */
     public String deleteTask(int taskIndex) throws DukeException {
         try {
-            return TASK_LIST.remove(taskIndex).toString();
+            return taskList.remove(taskIndex).toString();
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Task index given is invalid :( Unable to delete.");
         }
@@ -88,7 +88,7 @@ public class TaskList {
      */
     public ArrayList<Task> findTask(String keyword) {
         ArrayList<Task> foundTasks = new ArrayList<>();
-        for (Task task : TASK_LIST) {
+        for (Task task : taskList) {
             if (task.getDescription().contains(keyword)) {
                 foundTasks.add(task);
             }

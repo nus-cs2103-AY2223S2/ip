@@ -16,10 +16,10 @@ import duke.task.TaskList;
  * Deals with loading tasks from the file and saving tasks in the file.
  */
 public class Storage {
-    private final String FILEPATH;
+    private final String filePath;
 
-    public Storage(String FILEPATH) {
-        this.FILEPATH = FILEPATH;
+    public Storage(String filePath) {
+        this.filePath = filePath;
     }
 
     /**
@@ -30,7 +30,7 @@ public class Storage {
      * @throws DukeException Throws exception if file cannot be found locally or created.
      */
     public ArrayList<Task> load() throws DukeException {
-        File f = new File(FILEPATH);
+        File f = new File(filePath);
         ArrayList<Task> tasks = new ArrayList<>();
         try {
             Scanner s = new Scanner(f);
@@ -46,7 +46,7 @@ public class Storage {
                 throw new DukeException("Fake Duke can't create the file.");
             }
             throw new DukeException(String.format("Fake Duke can't find the file. I have created the file (%s) :D",
-                    FILEPATH));
+                    filePath));
         }
         return tasks;
     }
@@ -59,7 +59,7 @@ public class Storage {
      */
     public void saveTasks(TaskList tasks) throws DukeException {
         try {
-            FileWriter fw = new FileWriter(FILEPATH);
+            FileWriter fw = new FileWriter(filePath);
             for (int i = 0; i < tasks.getSize(); i++) {
                 fw.write(tasks.getTask(i).getRawTask());
             }

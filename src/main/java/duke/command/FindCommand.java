@@ -11,10 +11,10 @@ import duke.ui.Ui;
  * Finds task when user input indicates find.
  */
 public class FindCommand extends Command {
-    private final String KEYWORD;
+    private final String keyword;
 
     public FindCommand(String keyword) {
-        this.KEYWORD = keyword;
+        this.keyword = keyword;
     }
 
     /**
@@ -26,7 +26,7 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        ArrayList<Task> foundTasks = tasks.findTask(KEYWORD);
+        ArrayList<Task> foundTasks = tasks.findTask(keyword);
         return ui.getFindOutput(foundTasks);
     }
 }

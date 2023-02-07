@@ -58,7 +58,6 @@ public class Parser {
         try {
             action = Action.valueOf(splitInputs[0]);
         } catch (IllegalArgumentException e) {
-//            return new ListCommand();
             throw new DukeException("I'm sorry, but Fake Duke doesn't know what that means :-(");
         }
 
@@ -160,8 +159,8 @@ public class Parser {
      * @throws DukeException Throws exception if input length does not meet minimum length.
      */
     public static void checkInputFormat(int inputLength, int minimumLength, String errorMessage) throws DukeException {
-        assert (minimumLength != 0 && inputLength >= minimumLength) || (minimumLength == 0):
-                "Local file data/tasks.txt does not have valid format";
+        assert (minimumLength != 0 && inputLength >= minimumLength) || (minimumLength == 0)
+                : "Local file data/tasks.txt does not have valid format";
         if (inputLength < minimumLength) {
             throw new DukeException(errorMessage);
         }

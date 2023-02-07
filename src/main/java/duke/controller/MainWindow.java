@@ -1,7 +1,6 @@
 package duke.controller;
 
 import duke.Duke;
-
 import duke.command.Command;
 import duke.command.ExitCommand;
 import duke.exception.DukeException;
@@ -34,6 +33,9 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/FakeDuke.png"));
 
+    /**
+     * Initializes the main window and displays welcome message.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());

@@ -9,10 +9,10 @@ import duke.ui.Ui;
  * Deletes task from list of tasks when user input indicates delete.
  */
 public class DeleteCommand extends Command {
-    private final int TASK_INDEX;
+    private final int taskIndex;
 
     public DeleteCommand(int taskIndex) {
-        this.TASK_INDEX = taskIndex;
+        this.taskIndex = taskIndex;
     }
 
     /**
@@ -25,7 +25,7 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        String taskString = tasks.deleteTask(TASK_INDEX - 1);
+        String taskString = tasks.deleteTask(taskIndex - 1);
         storage.saveTasks(tasks);
         return ui.getDeleteOutput(taskString, tasks);
     }

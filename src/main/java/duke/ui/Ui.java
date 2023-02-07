@@ -3,7 +3,6 @@ package duke.ui;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import duke.exception.DukeException;
 import duke.task.Task;
@@ -13,8 +12,7 @@ import duke.task.TaskList;
  * Handles interactions with the user.
  */
 public class Ui {
-    private final Scanner SCANNER = new Scanner(System.in);
-    private final String SEPARATOR = "=====================================\n";
+    private static final String SEPARATOR = "=====================================\n";
 
     /**
      * Reads command from scanner object.
@@ -33,7 +31,7 @@ public class Ui {
      * Prints out the greeting for Fake Duke.
      */
     public String getWelcome() {
-       return "Hello!~ I'm the one and only ! FAKE DUKE !\nWhat can I do for you?\n";
+        return "Hello!~ I'm the one and only ! FAKE DUKE !\nWhat can I do for you?\n";
     }
 
     /**
