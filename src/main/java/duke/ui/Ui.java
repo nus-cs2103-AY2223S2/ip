@@ -62,7 +62,9 @@ public class Ui {
      * @param taskString Task in String that has been marked as done.
      */
     public static String getMarkOutput(String taskString) {
-        return String.format("Nice! I've marked this task as done:\n%s", taskString);
+        return taskString.equals("")
+                ? "I marked nothing...\n"
+                : String.format("Nice! I've marked this task as done:\n%s", taskString);
     }
 
     /**
@@ -71,7 +73,9 @@ public class Ui {
      * @param taskString Task in String that has been unmarked as undone.
      */
     public static String getUnmarkOutput(String taskString) {
-        return String.format("OK, I've marked this task as not done yet:\n%s", taskString);
+        return taskString.equals("")
+                ? "I unmarked nothing...\n"
+                : String.format("OK, I've marked this task as not done yet:\n%s", taskString);
     }
 
     /**
