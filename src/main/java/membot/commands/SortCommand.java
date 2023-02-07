@@ -31,37 +31,37 @@ public class SortCommand extends Command {
 
         try {
             switch (SortOption.valueOf(this.input.split(" ")[1].toUpperCase())) {
-                case TITLE:
-                    Task.sort(Comparator.comparing(Task::getTitle));
-                    break;
-                case DATE:
-                    Task.sort((t1, t2) -> {
-                        LocalDateTime t1DT;
-                        LocalDateTime t2DT;
+            case TITLE:
+                Task.sort(Comparator.comparing(Task::getTitle));
+                break;
+            case DATE:
+                Task.sort((t1, t2) -> {
+                    LocalDateTime t1DT;
+                    LocalDateTime t2DT;
 
-                        try {
-                            t1DT = DateTimeParser.parse(t1.getDeadline());
-                        } catch (DateTimeParseException e) {
-                            return 1;
-                        }
+                    try {
+                        t1DT = DateTimeParser.parse(t1.getDeadline());
+                    } catch (DateTimeParseException e) {
+                        return 1;
+                    }
 
-                        try {
-                            t2DT = DateTimeParser.parse(t2.getDeadline());
-                        } catch (DateTimeParseException e) {
-                            return -1;
-                        }
+                    try {
+                        t2DT = DateTimeParser.parse(t2.getDeadline());
+                    } catch (DateTimeParseException e) {
+                        return -1;
+                    }
 
-                        return t1DT.compareTo(t2DT);
-                    });
-                    break;
-                case STATUS:
-                    Task.sort(Comparator.comparing(Task::printStatus));
-                    break;
-                case TYPE:
-                    Task.sort(Comparator.comparing(Task::getTaskType));
-                    break;
-                default:
-                    assert false : "Available options are: date, status, title, type";
+                    return t1DT.compareTo(t2DT);
+                });
+                break;
+            case STATUS:
+                Task.sort(Comparator.comparing(Task::printStatus));
+                break;
+            case TYPE:
+                Task.sort(Comparator.comparing(Task::getTaskType));
+                break;
+            default:
+                assert false : "Available options are: date, status, title, type";
             }
         } catch (IllegalArgumentException e) {
             this.ui.printlnError(
