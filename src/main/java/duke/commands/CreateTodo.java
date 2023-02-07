@@ -15,7 +15,10 @@ public class CreateTodo extends Command {
 
     public String operate(TaskList lst, Ui ui, Storage storage) {
         try {
-            if (cmdLine.length() <= 5) throw new DukeException("Roarrrrrrrrrrrrrrrrr! Do you really have this Todo task or not?");
+            if (cmdLine.length() <= 5) {
+                throw new DukeException("Roarrrrrrrrrrrrrrrrr! Do you really have this Todo task or not?");
+            }
+
             String task = cmdLine.substring(5);
             lst.add(new Todo(task));
             String response = "";

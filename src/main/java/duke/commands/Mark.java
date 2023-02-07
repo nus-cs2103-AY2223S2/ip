@@ -14,7 +14,10 @@ public class Mark extends Command {
 
     public String operate(TaskList lst, Ui ui, Storage storage) {
         try {
-            if (cmdLine.length() <= 5) throw new DukeException("Roarrrrrrrrrrrrrrrrr! Do you want to mark any task or not?");
+            if (cmdLine.length() <= 5) {
+                throw new DukeException("Roarrrrrrrrrrrrrrrrr! Do you want to mark any task or not?");
+            }
+
             int i = Integer.parseInt(cmdLine.substring(5));
             lst.get(i - 1).mark();
             String response = "";

@@ -14,7 +14,10 @@ public class Unmark extends Command {
 
     public String operate(TaskList lst, Ui ui, Storage storage) {
         try {
-            if (cmdLine.length() <= 7) throw new DukeException("Roarrrrrrrrrrrrrrrrr! Do you want to unmark any task or not?");
+            if (cmdLine.length() <= 7) {
+                throw new DukeException("Roarrrrrrrrrrrrrrrrr! Do you want to unmark any task or not?");
+            }
+
             int i = Integer.parseInt(cmdLine.substring(7));
             lst.get(i - 1).unmark();
             String response = "";
