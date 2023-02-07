@@ -1,15 +1,63 @@
+import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.FileWriter;
+import java.io.FileNotFoundException;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
 
-        Scanner sc = new Scanner(System.in);
+
         System.out.println("Hello! I'm Duke\n");
         System.out.println("What can I do for you?\n");
 
         List<Task> lst = new ArrayList<>();
 
+        /* load duke.txt into task list */
+        File f = new File("./data/duke.txt");
+        Scanner scannerTxtFile = new Scanner(f);
+        while (scannerTxtFile.hasNext()) {
+            String txt = scannerTxtFile.nextLine();
+            if (txt.substring(1,2).equals("T")) {
+                String details = txt.substring(7);
+                Task t = new Todo(details);
+                if (txt.substring(4, 5).equals("X")) {
+                    t.mark();
+                }
+                lst.add(t);
+            } else if (txt.substring(1,2).equals("D")) {
+                String[] detailsAndDueDate = txt.substring(7).split(" \\(");
+                String details = detailsAndDueDate[0];
+                DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                LocalDate dueDate = LocalDate.parse(detailsAndDueDate[1].substring(0, detailsAndDueDate[1].length() - 1), dateFormatter);
+                Task t = new Deadline(details, dueDate);
+                if (txt.substring(4, 5).equals("X")) {
+                    t.mark();
+                }
+                lst.add(t);
+            } else if (txt.substring(1,2).equals("E")) {
+                String[] detailsAndDate = txt.substring(7).split(" \\(");
+                String details = detailsAndDate[0];
+                String[] tmp = detailsAndDate[1].split(" to: ");
+                String to = tmp[1].substring(0, tmp[1].length() - 1);
+                String from = tmp[0].split("from: ")[1];
+                Task t = new Event(details, from, to);
+                if (txt.substring(4, 5).equals("X")) {
+                    t.mark();
+                }
+                lst.add(t);
+            }
+        }
+        scannerTxtFile.close();
+
+        /* take in user input */
+        Scanner sc = new Scanner(System.in);
 
 
         while (true) {
@@ -50,7 +98,7 @@ public class Duke {
                 } else if (action.equals("deadline")) {
                     String[] detailsAndDate = inputArr[1].split(" /by ");
                     String details = detailsAndDate[0];
-                    String date = detailsAndDate[1];
+                    LocalDate date = LocalDate.parse(detailsAndDate[1]);
                     Deadline newDeadline = new Deadline(details, date);
                     lst.add(newDeadline);
                     System.out.println("Got it. I've added this task:" + '\n' + newDeadline + '\n' + "Now you have " + lst.size() + " tasks in the list");
@@ -73,7 +121,9 @@ public class Duke {
                     throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             } catch (DukeException e) {
-                    System.out.println(e.getMessage());
+                System.out.println(e.getMessage());
+            } catch (DateTimeParseException e) {
+                System.out.println("Date format should be in YYYY-MM-DD!");
             }
 
         }
