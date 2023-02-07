@@ -27,6 +27,20 @@ public class TaskList {
         this.list = initList;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < list.size(); i++) {
+            int count = i + 1;
+            String res = count + "." + getTask(i).toString();
+            if (i != getSize() - 1) {
+                res += "\n\t ";
+            }
+            sb.append(res);
+        }
+        return sb.toString();
+    }
+
     /**
      * Retrieves a task from the TaskList at the specified index.
      *
@@ -68,5 +82,16 @@ public class TaskList {
 
     public List<Task> getTaskList() {
         return list;
+    }
+
+    public TaskList search(String keyword) {
+        List<Task> resultList = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+            Task currTask = list.get(i);
+            if (currTask.toString().contains(keyword)) {
+                resultList.add(currTask);
+            }
+        }
+        return new TaskList(resultList);
     }
 }

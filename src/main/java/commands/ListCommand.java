@@ -28,14 +28,7 @@ public class ListCommand extends Command {
     public void execute(TaskList list, Ui ui, Storage storage) {
         StringBuilder sb = new StringBuilder();
         sb.append("Here are the tasks in your list:\n\t ");
-        for (int i = 0; i < list.getSize(); i++) {
-            int count = i + 1;
-            String res = count + "." + list.getTask(i).toString();
-            if (i != list.getSize() - 1) {
-                res += "\n\t ";
-            }
-            sb.append(res);
-        }
+        sb.append(list.toString());
         ui.printOutput(sb.toString());
     }
 }

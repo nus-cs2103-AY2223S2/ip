@@ -7,6 +7,7 @@ import commands.MarkCommand;
 import commands.AddCommand;
 import commands.DeleteCommand;
 import commands.ByeCommand;
+import commands.FindCommand;
 import exceptions.DukeException;
 import tasks.Deadline;
 import tasks.Event;
@@ -96,6 +97,8 @@ public class Parser {
             String to = eArr[2].trim().substring(3);
             Event event = new Event(eventDesc, from, to);
             return new AddCommand(CommandType.EVENT, event);
+        case FIND:
+            return new FindCommand(inputArr[1]);
         case BYE:
             return new ByeCommand();
         default:
