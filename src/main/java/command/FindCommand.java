@@ -23,6 +23,7 @@ public class FindCommand {
      * the keyword in tasks.
      */
     public String find() {
+        assert inputs[0].equalsIgnoreCase("FIND") : "Contact developer on Find bug";
         String keyword = "";
         if (inputs.length != 2) {
             mw.printDuke(Ui.printEnterKeyword());

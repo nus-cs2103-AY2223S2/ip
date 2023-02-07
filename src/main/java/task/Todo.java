@@ -40,6 +40,6 @@ public class Todo extends Task {
      */
     @Override
     public String toWrite() {
-        return "T | " + super.toWrite() + " |\n";
+        return "T | " + super.toWrite() + " \n";
     }
 }

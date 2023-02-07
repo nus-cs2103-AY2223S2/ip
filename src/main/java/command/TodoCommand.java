@@ -29,6 +29,7 @@ public class TodoCommand {
      *
      */
     public String create() {
+        assert inputs[0].equalsIgnoreCase("TODO") : "Contact developer on Todo bug";
         if (inputs.length == 1) {
             return Ui.printMissingName();
         } else {
