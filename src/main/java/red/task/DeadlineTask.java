@@ -25,8 +25,6 @@ public class DeadlineTask extends Task {
         super(description);
         String[] dateStr = date.split("/", 3);
         String[] altDateStr = date.split("-", 3);
-        assert altDateStr.length == 3;
-        assert dateStr.length == 3;
         if(altDateStr.length != 3 && dateStr.length != 3) {
             throw new RuntimeException("Specification of the DeadlineTask date is incorrect\n");
         } else if (dateStr.length == 3) {
@@ -76,8 +74,6 @@ public class DeadlineTask extends Task {
         super(description);
         String[] dateStr = date.split("/", 3);
         String[] altDateStr = date.split("-", 3);
-        assert altDateStr.length == 3;
-        assert dateStr.length == 3;
         if(altDateStr.length != 3 && dateStr.length != 3) {
             System.out.println(date);
             throw new RuntimeException("Specification of the DeadlineTask date is incorrect\n");
