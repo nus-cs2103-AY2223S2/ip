@@ -2,6 +2,7 @@ package duke;
 
 import duke.tasks.Task;
 
+import javax.print.DocFlavor;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -33,22 +34,24 @@ public class Ui {
      *
      * @param e_message DukeException's error messages.
      */
-    public void showError(String e_message) {
-        System.out.println(e_message);
+    public String showError(String e_message) {
+        return e_message;
     }
 
     /**
      * Greets the user.
+     *
+     * @return
      */
-    public void printGreet() {
-        System.out.println(GREET_MSG);
+    public String printGreet() {
+        return GREET_MSG;
     }
 
     /**
      * Says goodbye to the user.
      */
-    public void printBye() {
-        System.out.println(BYE_MSG);
+    public String printBye() {
+        return BYE_MSG;
     }
 
 
@@ -57,13 +60,12 @@ public class Ui {
      *
      * @param taskList his current TaskList.
      */
-    public void showList(TaskList taskList) {
+    public String showList(TaskList taskList) throws DukeException {
         try {
-            taskList.printTasks();
+            return taskList.printTasks();
         } catch (DukeException e) {
-            this.showError(e.getMessage());
+            return this.showError(e.getMessage());
         }
-        System.out.println("");
     }
 
     /**
@@ -71,8 +73,8 @@ public class Ui {
      *
      * @param markedTask task that is to be marked by the user
      */
-    public void printMarkTask(Task markedTask) {
-        System.out.println("Nice! I have marked this task as Done:\n" + markedTask.toString() + "\n");
+    public String printMarkTask(Task markedTask) {
+        return "Nice! I have marked this task as Done:\n" + markedTask.toString() + "\n";
     }
 
     /**
@@ -82,9 +84,8 @@ public class Ui {
      * @param num_tasks number of total tasks after addition.
      * @param to_add the task that's to be added .
      */
-    public void printAddTask(Task to_add, Integer num_tasks) {
-        System.out.println(ADD_MSG + to_add.toString());
-        System.out.println("You currently have " + num_tasks + " tasks in this list!\n");
+    public String printAddTask(Task to_add, Integer num_tasks) {
+        return ADD_MSG + to_add.toString() + "\nYou currently have " + num_tasks + " tasks in this list!\n";
     }
 
     /**
@@ -92,9 +93,9 @@ public class Ui {
      *
      * @param unmarkedTask the task thats been unmarked by user.
      */
-    public void printUnmarkTask(Task unmarkedTask) {
-        System.out.println("Ok! I have marked this task as not done yet:\n" +
-                unmarkedTask.toString() + "\n");
+    public String printUnmarkTask(Task unmarkedTask) {
+        return "Ok! I have marked this task as not done yet:\n" +
+                unmarkedTask.toString() + "\n";
     }
 
     /**
@@ -103,19 +104,20 @@ public class Ui {
      * @param removedTask the tasks that's removed.
      * @param num_tasks number of total tasks after deletion.
      */
-    public void printDeleteTask(Task removedTask, Integer num_tasks) {
-        System.out.println("Noted!I have deleted the task for you:\n " +
+    public String printDeleteTask(Task removedTask, Integer num_tasks) {
+        return "Noted!I have deleted the task for you:\n " +
                 removedTask.toString() + "\nyou currently have " + num_tasks +
-                " tasks in this list!\n");
+                " tasks in this list!\n";
     }
 
-    public void printTaskByKeyWord(TaskList taskList, String keyWord) throws DukeException {
+    public String printTaskByKeyWord(TaskList taskList, String keyWord) throws DukeException {
         ArrayList<Task> allFoundTasks = taskList.getTasksByKeyWord(keyWord);
-        System.out.println("Here are the matching tasks in your list:");
         int index = 1;
+        StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:\n");
         for (Task task : allFoundTasks) {
-            System.out.println(String.format("%d.%s", index, task.toString()));
+            sb.append(String.format("%d.%s\n", index, task.toString()));
             index++;
         }
+        return sb.toString();
     }
 }

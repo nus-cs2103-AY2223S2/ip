@@ -13,9 +13,9 @@ public class DeleteCommand extends Command {
         super(textCmd);
     }
 
-    public void execute(Ui ui, Storage storage, TaskList taskList) throws DukeException {
+    public String execute(Ui ui, Storage storage, TaskList taskList) throws DukeException {
         Task removedTask = taskList.deleteTask(
                 Parser.stringToInt(textCmd.substring(7)));
-        ui.printDeleteTask(removedTask, taskList.getNumTasks());
+        return ui.printDeleteTask(removedTask, taskList.getNumTasks());
     }
 }

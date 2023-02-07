@@ -13,8 +13,8 @@ public class MarkCommand extends Command {
     }
 
     @Override
-    public void execute(Ui ui, Storage storage, TaskList taskList) throws DukeException {
+    public String execute(Ui ui, Storage storage, TaskList taskList) throws DukeException {
         Task markedTask = taskList.markTask(Parser.stringToInt(textCmd.substring(5)));
-        ui.printMarkTask(markedTask);
+        return ui.printMarkTask(markedTask);
     }
 }

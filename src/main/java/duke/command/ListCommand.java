@@ -10,7 +10,7 @@ public class ListCommand extends Command {
         super(textCmd);
     }
 
-    public void execute(Ui ui, Storage storage, TaskList taskList) throws DukeException {
-        ui.showList(taskList);
+    public String execute(Ui ui, Storage storage, TaskList taskList) throws DukeException {
+        return ui.showList(taskList);
     }
 }

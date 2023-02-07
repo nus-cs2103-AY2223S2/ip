@@ -15,7 +15,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(Ui ui, Storage storage, TaskList taskList) throws DukeException {
+    public String execute(Ui ui, Storage storage, TaskList taskList) throws DukeException {
         String[] commandSplit = textCmd.split(" ");
         String typeOfCommand = commandSplit[0];
 
@@ -29,6 +29,6 @@ public class FindCommand extends Command {
         }
 
         String keyWord = textCmd.substring(5);
-        ui.printTaskByKeyWord(taskList, keyWord);
+        return ui.printTaskByKeyWord(taskList, keyWord);
     }
 }

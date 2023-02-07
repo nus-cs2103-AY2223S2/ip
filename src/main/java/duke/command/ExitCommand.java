@@ -12,8 +12,8 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    public void execute(Ui ui, Storage storage, TaskList taskList) throws DukeException {
-        this.isExit = false;
-        ui.printBye();
+    public String execute(Ui ui, Storage storage, TaskList taskList) throws DukeException {
+        this.isExit = true;
+        return ui.printBye();
     }
 }

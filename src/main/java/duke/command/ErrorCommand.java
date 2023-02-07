@@ -11,7 +11,7 @@ public class ErrorCommand extends Command {
     }
 
     @Override
-    public void execute(Ui ui, Storage storage, TaskList taskList) throws DukeException {
+    public String execute(Ui ui, Storage storage, TaskList taskList) throws DukeException {
         throw new DukeException("I have no idea whats that command mate!\n");
     }
 }

@@ -88,14 +88,18 @@ public class TaskList {
     /**
      * Prints all the tasks in the TaskList.
      */
-    public void printTasks() throws DukeException {
+    public String printTasks() throws DukeException {
         if (num_tasks == 0) {
             throw new DukeException("You currently have no tasks mate!");
         }
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < num_tasks; i++) {
             Task ref = tasks.get(i);
-            System.out.println((i + 1) + "." + ref.toString());
+            String taskToPrint = String.format("%d.%s\n", (i + 1) , ref.toString());
+            sb.append(taskToPrint);
         }
+
+        return sb.toString();
     }
 
     public ArrayList<Task> getTasksByKeyWord(String keyWord) throws DukeException {

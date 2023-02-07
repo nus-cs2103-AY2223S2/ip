@@ -11,10 +11,10 @@ public abstract class Command {
 
     public Command(String textCmd) {
         this.textCmd = textCmd;
-        this.isExit = true;
+        this.isExit = false;
     }
 
-    public void execute(Ui ui, Storage storage, TaskList taskList) throws DukeException {}
+    public abstract String execute(Ui ui, Storage storage, TaskList taskList) throws DukeException;
     public boolean isExit() {
         return isExit;
     }
