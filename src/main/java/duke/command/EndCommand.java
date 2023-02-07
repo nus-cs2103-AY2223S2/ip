@@ -10,13 +10,13 @@ public class EndCommand extends Command {
     public EndCommand() {}
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             storage.writeToFile(tasks.toTxtString());
         } catch (IOException e) {
             System.out.println("Error during saving");
         }
-        ui.end();
+        return ui.end();
     }
 
     @Override

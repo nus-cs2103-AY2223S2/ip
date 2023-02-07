@@ -23,40 +23,38 @@ public class TaskList {
     /**
      * Add a Todo Task to the TaskList.
      * @param input the content of the new Todo Task
-     * @param needPrint the indicator that shows whether the message needs to be printed
      * @throws DukeException if the content is empty
      */
-    public void add(String input, boolean needPrint) throws DukeException {
+    public String add(String input) throws DukeException {
         if (isEmpty(input)) {
             throw new DukeException("The description of a todo cannot be empty.");
         }
         ToDo newTask = new ToDo(input);
+        String res = "";
         this.list.add(newTask);
-        if (needPrint) {
-            System.out.println("Got it. I've added this task:");
-            System.out.println(newTask.toString());
-            System.out.println("Now you have " + (this.list.size() - 1) + " tasks in the list.");
-        }
+        res += "Got it. I've added this task:\n";
+        res += newTask.toString() + "\n";
+        res += "Now you have " + (this.list.size() - 1) + " tasks in the list.\n";
+        return res;
     }
 
     /**
      * Add a Deadline Task to the TaskList.
      * @param input the content of the new Deadline Task
      * @param deadline the deadline date and time of the new Deadline Task
-     * @param needPrint the indicator that shows whether the message needs to be printed
      * @throws DukeException if the content is empty
      */
-    public void add(String input, String deadline, boolean needPrint) throws DukeException {
+    public String add(String input, String deadline) throws DukeException {
         if (isEmpty(input) || isEmpty(deadline)) {
             throw new DukeException("The description and deadline of a deadline cannot be empty.");
         }
         Deadline newTask = new Deadline(input, deadline);
+        String res = "";
         this.list.add(newTask);
-        if (needPrint) {
-            System.out.println("Got it. I've added this task:");
-            System.out.println(newTask.toString());
-            System.out.println("Now you have " + (this.list.size() - 1) + " tasks in the list.");
-        }
+        res += "Got it. I've added this task:\n";
+        res += newTask.toString() + "\n";
+        res += "Now you have " + (this.list.size() - 1) + " tasks in the list.\n";
+        return res;
     }
 
     /**
@@ -64,20 +62,19 @@ public class TaskList {
      * @param input the content of the new Event Task
      * @param from the start date and time of the new Event Task
      * @param to the end date and time of the new Event Task
-     * @param needPrint the indicator that shows whether the message needs to be printed
      * @throws DukeException if the content is empty
      */
-    public void add(String input, String from, String to, boolean needPrint) throws DukeException {
+    public String add(String input, String from, String to) throws DukeException {
         if (input.equals("") || from.equals("") || to.equals("")) {
             throw new DukeException("The description and duration of an event cannot be empty.");
         }
         Event newTask = new Event(input, from, to);
+        String res = "";
         this.list.add(newTask);
-        if (needPrint) {
-            System.out.println("Got it. I've added this task:");
-            System.out.println(newTask.toString());
-            System.out.println("Now you have " + (this.list.size() - 1) + " tasks in the list.");
-        }
+        res += "Got it. I've added this task:";
+        res += newTask.toString() + "\n";
+        res += "Now you have " + (this.list.size() - 1) + " tasks in the list.\n";
+        return res;
     }
 
     /**
@@ -97,12 +94,14 @@ public class TaskList {
      * Deletes a Task from the TaskList.
      * @param index the index of the Task to be deleted
      */
-    public void delete(int index) {
+    public String delete(int index) {
+        String res = "";
         Task removedTask = this.list.get(index);
         this.list.remove(index);
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(removedTask.toString());
-        System.out.println("Now you have " + (this.list.size() - 1) + " tasks in the list.");
+        res += "Noted. I've removed this task:\n";
+        res += removedTask.toString() + "\n";
+        res += "Now you have " + (this.list.size() - 1) + " tasks in the list.\n";
+        return res;
     }
 
     /**
@@ -118,18 +117,20 @@ public class TaskList {
      * Finds tasks that contains the target string.
      * @param target the target string to find
      */
-    public void find(String target) {
+    public String find(String target) {
+        String res = "";
         ArrayList<Task> foundTasks = new ArrayList<>();
         foundTasks.add(new ToDo("zeroth"));
-        System.out.println("Here are the matching tasks in your list:");
+        res += "Here are the matching tasks in your list:\n";
         for (int i = 1; i < this.list.size(); i++) {
             if (this.list.get(i).getTask().contains(target)) {
                 foundTasks.add(list.get(i));
             }
         }
         for (int i = 1; i < foundTasks.size(); i++) {
-            System.out.println(i + ". " + foundTasks.get(i).toString());
+            res += i + ". " + foundTasks.get(i).toString() + "\n";
         }
+        return res;
     }
 
     /**

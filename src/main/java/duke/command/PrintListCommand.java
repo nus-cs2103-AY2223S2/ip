@@ -9,8 +9,9 @@ public class PrintListCommand extends Command {
     public PrintListCommand() {}
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        System.out.println(tasks.toString());
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        String res = tasks.toString();
+        return res;
     }
 
     @Override

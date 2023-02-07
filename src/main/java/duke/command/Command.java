@@ -16,7 +16,7 @@ public abstract class Command {
      * @param storage the storage of the Duke
      * @throws DukeException if error occurs during execution of the command
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
     /**
      * Returns true when the command indicates the closure of the software.

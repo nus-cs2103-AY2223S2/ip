@@ -14,11 +14,12 @@ public class EventCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (!FormatChecker.isCorrectEventCmd(this.content)) {
             throw new DukeException(
                 "Please use the correct format to add an event.");
         }
+        String res = "";
         String[] eventTask = content.split("/from|/to");
         eventTask[0] = eventTask[0].trim();
         eventTask[1] = eventTask[1].trim();
@@ -27,10 +28,11 @@ public class EventCommand extends Command {
             throw new DukeException("Please use the correct format for date (dd/MM/yyyy HH:mm)");
         }
         try {
-            tasks.add(eventTask[0], eventTask[1], eventTask[2], true);
+            res += tasks.add(eventTask[0], eventTask[1], eventTask[2]);
         } catch (DukeException e) {
             throw e;
         }
+        return res;
     }
 
     @Override

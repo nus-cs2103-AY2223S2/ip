@@ -14,11 +14,12 @@ public class DeadlineCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (!FormatChecker.isCorrectDeadlineCmd(this.content)) {
             throw new DukeException(
                     "Please use the correct format to add a deadline.");
         }
+        String res = "";
         String[] dlTask = content.split("/by");
         dlTask[0] = dlTask[0].trim();
         dlTask[1] = dlTask[1].trim();
@@ -26,10 +27,11 @@ public class DeadlineCommand extends Command {
             throw new DukeException("Please use the correct format for date (dd/MM/yyyy HH:mm)");
         }
         try {
-            tasks.add(dlTask[0], dlTask[1], true);
+            res = tasks.add(dlTask[0], dlTask[1]);
         } catch (DukeException e) {
             throw e;
         }
+        return res;
     }
 
     @Override

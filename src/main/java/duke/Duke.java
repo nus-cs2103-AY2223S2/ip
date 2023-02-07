@@ -12,12 +12,12 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private String filePath = "./src/main/java/duke/data.txt";
 
     /**
      * Class constructor of Duke.
-     * @param filePath the path of the data file.
      */
-    public Duke(String filePath) {
+    public Duke() {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
@@ -29,36 +29,23 @@ public class Duke {
     }
 
     /**
-     * Main method of Duke. Sets the path of the data file saved.
-     */
-    public static void main(String[] args) {
-        new Duke("./src/main/java/duke/data.txt").run();
-    }
-
-    /**
      * Runs Duke by using ui to read command and execute the command.
      * Continues running until the ui reads EndCommand.
      */
-    public void run() {
-        ui.greeting();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e);
-            } finally {
-                ui.showLine();
-            }
+    public String getResponse(String input) {
+        String res = "";
+        try {
+            Command c = Parser.parse(input);
+            res += c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            res += ui.showError(e);
+        } finally {
         }
         try {
             storage.writeToFile(tasks.toTxtString());
         } catch (IOException e) {
             System.out.println("Error during saving");
         }
+        return res;
     }
 }

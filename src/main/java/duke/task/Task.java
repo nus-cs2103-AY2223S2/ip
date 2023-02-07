@@ -18,34 +18,24 @@ public abstract class Task {
 
     /**
      * Marks the state of the Task as done.
-     * @param needPrint the indicator that shows whether the message needs to be printed
      */
-    public void markDone(boolean needPrint) {
+    public String markDone() {
+        String res = "";
         this.isDone = true;
-        if (needPrint) {
-            System.out.println("Nice! I've marked this task as done:");
-            System.out.println(this.toString());
-        }
+        res += "Nice! I've marked this task as done:\n";
+        res += this.toString();
+        return res;
     }
 
     /**
      * Mark the state of the Task as not done yet.
-     * @param needPrint the indicator that shows whether the message needs to be printed
      */
-    public void unmark(boolean needPrint) {
+    public String unmark() {
+        String res = "";
         this.isDone = false;
-        if (needPrint) {
-            System.out.println("OK, I've marked this task as not done yet:");
-            System.out.println(this.toString());
-        }
-    }
-
-    /**
-     * Returns the state of the Task.
-     * @return the state of the Task
-     */
-    public boolean checkDone() {
-        return this.isDone;
+        res += "OK, I've marked this task as not done yet:\n";
+        res += this.toString();
+        return res;
     }
 
     /**

@@ -13,9 +13,10 @@ public class TodoCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         content = content.trim();
-        tasks.add(content, true);
+        String res = tasks.add(content);
+        return res;
     }
 
     @Override
