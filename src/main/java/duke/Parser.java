@@ -74,6 +74,7 @@ public class Parser {
         try {
             int num = Integer.parseInt(numString);
             Task task = tasks.mark(isMark, num - 1);
+            assert num - 1 < tasks.get().size();
             return Ui.mark(isMark, task);
         } catch (NumberFormatException exception) {
             return Ui.notANumber();
