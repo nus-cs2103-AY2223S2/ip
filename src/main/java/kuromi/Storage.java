@@ -20,14 +20,14 @@ import kuromi.task.Todo;
  * current task list.
  */
 public class Storage {
-    /** The file path to the file stored with data from previous Duke session. **/
+    /** The file path to the file stored with data from previous Kuromi session. **/
     private java.nio.file.Path filePath;
 
     /**
      * Main constructor (for invocation by classes that require updating data to the storage and taking data
      * from the storage.
      *
-     * @param filePath The file path to the file stored with data from previous Duke session.
+     * @param filePath The file path to the file stored with data from previous Kuromi session.
      */
     public Storage(java.nio.file.Path filePath) {
         this.filePath = filePath;

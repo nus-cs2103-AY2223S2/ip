@@ -4,7 +4,7 @@ import kuromi.command.Command;
 import kuromi.task.TaskList;
 
 /**
- * The main class of Duke where the application is instantiated through this class. A <code>Duke</code> object
+ * The main class of Kuromi where the application is instantiated through this class. A <code>Kuromi</code> object
  * has three attributes: Storage, TaskList, and Ui that is needed to run the application.
  */
 public class Kuromi {
@@ -19,7 +19,7 @@ public class Kuromi {
      * Main constructor (for invocation by main method).
      * Get stored data from previous session.
      *
-     * @param filePath The file path to the file stored with data from previous Duke session.
+     * @param filePath The file path to the file stored with data from previous Kuromi session.
      */
     public Kuromi(java.nio.file.Path filePath) {
         ui = new Ui();
@@ -33,7 +33,7 @@ public class Kuromi {
     }
 
     /**
-     * Runs Duke application to interact with the user.
+     * Runs Kuromi application to interact with the user.
      */
     public void run() {
         ui.showWelcome();
@@ -54,14 +54,14 @@ public class Kuromi {
     }
 
     /**
-     * Main method of Duke class.
-     * When Duke is created, the compilation starts from the main method.
+     * Main method of Kuromi class.
+     * When Kuromi is created, the compilation starts from the main method.
      *
      * @param args The command line arguments for the application.
      */
     public static void main(String[] args) {
         String home = System.getProperty("user.home");
-        java.nio.file.Path path = java.nio.file.Paths.get(home, "Documents", "duke.txt");
+        java.nio.file.Path path = java.nio.file.Paths.get(home, "Documents", "kuromi.txt");
         new Kuromi(path).run();
     }
 }

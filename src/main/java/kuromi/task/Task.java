@@ -55,6 +55,7 @@ public class Task {
      * Get the status of a task.
      *
      * @return Status of a task.
+     * @return Status of a task.
      */
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
