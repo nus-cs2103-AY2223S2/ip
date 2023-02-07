@@ -29,6 +29,8 @@ public class TaskList {
      */
     public boolean addTask(Task e) {
         items.add(e);
+        System.out.println("New Task Added: " + e.getDescription());
+        System.out.println("There are now " + this.items.size() + " task(s) awaiting completion\n");
         return true;
     }
 

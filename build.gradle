@@ -26,9 +26,6 @@ dependencies {
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'win'
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'mac'
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
-
-
-
 }
 
 test {
@@ -46,11 +43,11 @@ test {
 }
 
 application {
-    mainClassName = "red.ui.Launcher"
+    mainClassName = "seedu.duke.Duke"
 }
 
 shadowJar {
-    archiveBaseName = "Red"
+    archiveBaseName = "duke"
     archiveClassifier = null
 }
 
