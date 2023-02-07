@@ -36,7 +36,7 @@ public class ParserTest {
         try {
             String[] input = {"bye"};
 
-            assertEquals(true, Parser.handleCommand(input, new ToDoListStub()));
+            assertEquals("Goodbye, feel free to call the Duke again whenever you need.", Parser.handleCommand(input, new ToDoListStub()));
         } catch (Exception e) {
             fail(e.getMessage());
         }
@@ -44,7 +44,7 @@ public class ParserTest {
         try {
             String[] input = {"list"};
 
-            assertEquals(false, Parser.handleCommand(input, new ToDoListStub()));
+            assertEquals("TO DO LIST:\n", Parser.handleCommand(input, new ToDoListStub()));
         } catch (Exception e) {
             fail();
         }
@@ -52,7 +52,8 @@ public class ParserTest {
         try {
             String[] input = {"todo"};
 
-            assertEquals(false, Parser.handleCommand(input, new ToDoListStub()));
+            assertEquals("The Duke has add the following task:\n - \nYou now have 1 task!\n",
+                    Parser.handleCommand(input, new ToDoListStub()));
             fail();
         } catch (Exception e) {
 
