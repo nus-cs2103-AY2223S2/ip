@@ -13,13 +13,15 @@ public class Parser {
     /**
      * Parses the user input and returns the corresponding Command object.
      *
-     * @param fullCommand A string array that contains the user input.
+     * @param input The user input as a string.
      * @return The corresponding Command object based on the user input.
      * @throws SundayException If the user input is not a valid command.
      */
-    public static Command parse(String[] fullCommand) throws SundayException {
+    public static Command parse(String input) throws SundayException {
         try {
-            return Command.valueOf(fullCommand[0].toUpperCase());
+            String command = input.split(" ")[0];
+            System.out.println(command.toUpperCase());
+            return Command.valueOf(command.toUpperCase());
         } catch (IllegalArgumentException e) {
             throw new SundayException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
