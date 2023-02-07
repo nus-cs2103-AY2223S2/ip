@@ -1,6 +1,6 @@
 package duke.commands;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
@@ -17,6 +17,9 @@ public class TodoCommandTest {
         Storage storage = new Storage("taskListTest.txt");
         TodoCommand tdc = new TodoCommand("todo test");
 
-        assertTrue(tdc.execute(tl, ui, storage));
+        assertEquals(tdc.execute(tl, ui, storage),
+                "Got it. I've added this task:\n"
+                        + "  [T] [ ] test\n"
+                        + "Now you have 1 tasks in the list.");
     }
 }

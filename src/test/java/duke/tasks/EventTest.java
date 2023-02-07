@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 public class EventTest {
     @Test
     public void eventTest() {
-        Event e = new Event("meeting", "mon 1pm", "mon 2pm");
-        assertEquals("[E][ ] meeting (from: mon 1pm to: mon 2pm)", e.toString());
+        Event e = new Event("meeting", "2024-01-20 1400", "2024-01-21 1400");
+        assertEquals("[E] [ ] meeting\n (from: Jan 20 2024 02:00 PM to: Jan 21 2024 02:00 PM)", e.toString());
     }
 }
