@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Todo class that is an extension of Task class.
+ */
 public class Todo extends Task {
 
     /**

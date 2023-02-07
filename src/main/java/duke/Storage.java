@@ -8,6 +8,9 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class which manages Duke's directory and file location for its data.
+ */
 public class Storage {
 
     private Path homeDir;
@@ -15,10 +18,9 @@ public class Storage {
 
     /**
      * Constructor for Storage class.
-     * Manages Duke's directory and file location for its data.
      * Creates new directory /data/ if directory does not exist.
-     *
      * Returns Storage object.
+     *
      * @param homeDir Directory path for Duke program.
      * @throws RuntimeException If directory creation fails.
      */
@@ -39,7 +41,7 @@ public class Storage {
      * Loads saved tasks from previous execution of Duke.
      * Attempt to create data.txt data file if not found.
      *
-     * @return ArrayList<Task> that is either empty or filled with loaded tasks.
+     * @return ArrayList of Task that is either empty or filled with loaded tasks.
      * @throws DukeException If data file creation or loading fails.
      */
     public ArrayList<Task> load() throws DukeException {
@@ -87,7 +89,7 @@ public class Storage {
     /**
      * Saves currently registered tasks into the data file.
      *
-     * @param tasks ArrayList<Task> of currently registered tasks by Duke.
+     * @param tasks ArrayList of Task with currently registered tasks by Duke.
      */
     public void save(ArrayList<Task> tasks) {
         try {

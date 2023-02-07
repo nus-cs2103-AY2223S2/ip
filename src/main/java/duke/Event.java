@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Event class for tasks which have start and end dates.
+ */
 public class Event extends Task {
 
     protected String from;

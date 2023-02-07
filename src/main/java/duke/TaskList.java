@@ -1,18 +1,20 @@
 package duke;
 
-import java.sql.Array;
 import java.util.ArrayList;
 
+/**
+ * TaskList class that contains information about currently registered tasks.
+ */
 public class TaskList {
 
-    private int numOfTasks;
     protected ArrayList<Task> tasks;
+    private int numOfTasks;
 
     /**
      * Constructor for TaskList mainly used by Storage to return loaded tasks.
      * Returns TaskList object with loaded tasks.
      *
-     * @param loadedTasks ArrayList<Task> of tasks loaded by Storage.
+     * @param loadedTasks ArrayList of Task with tasks loaded by Storage.
      */
     public TaskList(ArrayList<Task> loadedTasks) {
         this.numOfTasks = loadedTasks.size();

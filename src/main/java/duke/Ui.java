@@ -2,6 +2,9 @@ package duke;
 
 import java.util.Scanner;
 
+/**
+ * Ui class to handle interaction with user such as I/O.
+ */
 public class Ui {
 
     public Ui() {
@@ -26,7 +29,7 @@ public class Ui {
      * Prints greeting message for Duke.
      */
     public void printHelloMsg() {
-        System.out.println(Duke.logo);
+        System.out.println(Duke.LOGO);
         System.out.println("Hello! I'm Duke\n" + "What can I do for you?\n");
     }
 
@@ -34,7 +37,7 @@ public class Ui {
      * Prints closing message for Duke.
      */
     public void printByeMsg() {
-        System.out.printf(Duke.DIV_OPEN + "Bye. Hope to see you again soon!\n"+ Duke.DIV_CLOSE);
+        System.out.printf(Duke.DIV_OPEN + "Bye. Hope to see you again soon!\n" + Duke.DIV_CLOSE);
     }
 
     /**

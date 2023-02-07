@@ -2,9 +2,12 @@ package duke;
 
 import java.util.Arrays;
 
+/**
+ * Class that handles parsing of user input.
+ */
 public class Parser {
 
-    TaskList tasks;
+    private TaskList tasks;
 
     /**
      * Constructor for Parser class.

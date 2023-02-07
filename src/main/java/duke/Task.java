@@ -1,5 +1,9 @@
 package duke;
 
+/**
+ * Superclass for all Tasks.
+ * Contains basic description of tasks and its status.
+ */
 public class Task {
     protected String description;
     protected TaskStatus status;
@@ -28,12 +32,20 @@ public class Task {
         }
     }
 
-
+    /**
+     * Constructor for Task.
+     * @param description String description of Task.
+     */
     public Task(String description) {
         this.description = description;
         this.status = TaskStatus.NOT_DONE;
     }
 
+    /**
+     * Constructor for Task to be mainly used by Storage class to load tasks from data.txt file.
+     * @param description String description of Task.
+     * @param status Status of the task.
+     */
     public Task(String description, String status) {
         this.description = description;
         this.status = TaskStatus.valueOf(status);
@@ -50,29 +62,42 @@ public class Task {
 
     public String getStatusIcon() {
         switch(status) {
-            case DONE:
-                return "X";
-            case NOT_DONE:
-                return " ";
-            case DOING:
-                return "~";
-            default:
-                return "?";
+        case DONE:
+            return "X";
+        case NOT_DONE:
+            return " ";
+        case DOING:
+            return "~";
+        default:
+            return "?";
         }
     }
 
+    /**
+     * Marks itself done.
+     */
     public void markDone() {
         this.status = TaskStatus.DONE;
     }
 
+    /**
+     * Marks itself not done.
+     */
     public void markUndone() {
         this.status = TaskStatus.NOT_DONE;
     }
 
+    /**
+     * Marks itself as in progress.
+     */
     public void markDoing() {
         this.status = TaskStatus.DOING;
     }
 
+    /**
+     * Returns description of itself.
+     * @return String description.
+     */
     public String getDescription() {
         return this.description;
     }

@@ -2,10 +2,13 @@ package duke;
 
 import java.util.Scanner;
 
+/**
+ * Duke class which initiates the program and execute it.
+ */
 public class Duke {
     protected static final String DIV_OPEN = "____________________________________________________________\n";
     protected static final String DIV_CLOSE = "____________________________________________________________\n";
-    protected static final String logo = ""
+    protected static final String LOGO = ""
             + " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
@@ -61,6 +64,9 @@ public class Duke {
         ui.printByeMsg();
     }
 
+    /**
+     * Method that executes on start up.
+     */
     public static void main(String[] args) {
 
         String home = System.getProperty("user.home");
