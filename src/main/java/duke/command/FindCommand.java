@@ -6,7 +6,6 @@ import duke.main.Tasklist;
 import duke.main.Ui;
 
 public class FindCommand extends Command{
-
     private final String keyword;
 
     public FindCommand(String keyword) {
@@ -14,11 +13,11 @@ public class FindCommand extends Command{
     }
 
     @Override
-    public void execute(Tasklist tasklist, Ui ui, Storage storage) {
+    public String execute(Tasklist tasklist, Ui ui, Storage storage) {
         try {
-            ui.printFoundTasks(tasklist.findTask(keyword));
+            return ui.printFoundTasks(tasklist.findTask(keyword));
         } catch (DukeException de) {
-            ui.printDukeException(de);
+            return ui.printException(de);
         }
     }
 }

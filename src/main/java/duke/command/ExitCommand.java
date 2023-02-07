@@ -5,7 +5,9 @@ import duke.main.Tasklist;
 import duke.main.Ui;
 
 public class ExitCommand extends Command {
-    public void execute(Tasklist taskList, Ui ui, Storage storage) {
+
+    public String execute(Tasklist taskList, Ui ui, Storage storage) {
         super.switchExitCondition();
+        return ui.printBye();
     }
 }

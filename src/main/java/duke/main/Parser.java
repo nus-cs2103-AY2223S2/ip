@@ -1,6 +1,13 @@
 package duke.main;
 
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
+import duke.command.UnmarkCommand;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
@@ -21,9 +28,9 @@ public class Parser {
      * @throws DukeException when input is invalid
      */
     public static Command parseCommand(String fullCommand) throws DukeException {
-        String[] splits = fullCommand.split(" ", 2 );
+        String[] first = fullCommand.split(" ", 2 );
 
-        switch (splits[0]) {
+        switch (first[0]) {
         case ("bye"):
             return new ExitCommand();
         //Fallthrough
@@ -31,80 +38,107 @@ public class Parser {
             return new ListCommand();
         //Fallthrough
         case ("todo"):
-            if (splits.length == 1) {
+            if (first.length == 1) {
                 throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
             }
-            if (splits[1].isBlank()) {
+            if (first[1].isBlank()) {
                 throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
             }
-            return new AddCommand(new Todo(splits[1]));
+            return new AddCommand(new Todo(first[1]));
         //Fallthrough
         case ("event"):
-            if (splits.length == 1) {
+            if (first.length == 1) {
                 throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
             }
-            if (splits[1].isBlank() ) {
+            if (first[1].isBlank() ) {
                 throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
             }
             if (!fullCommand.contains(" /from") || !fullCommand.contains(" /to")) {
-                throw new DukeException("☹ OOPS!!! Please use format: event <description> /from <datetime> /to <datetime>");
+                throw new DukeException("☹ OOPS!!! Invalid input format. Please use format: event <description> /from <datetime> /to <datetime>");
             }
             try {
-                String[] secondsplits = splits[1].split("/from", 2);
-                String[] thirdsplits = secondsplits[1].split("/to", 2);
+                String[] second = first[1].split("/from", 2);
+                String[] third = second[1].split("/to", 2);
 
-                if (secondsplits[0].isBlank()) {
+                if (second[0].isBlank()) {
                     throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
                 }
-                return new AddCommand(new Event(secondsplits[0].trim(),
-                        LocalDateTime.parse(thirdsplits[0].trim(), DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm")),
-                        LocalDateTime.parse(thirdsplits[1].trim(), DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"))));
+                return new AddCommand(new Event(second[0].trim(),
+                        LocalDateTime.parse(third[0].trim(), DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm")),
+                        LocalDateTime.parse(third[1].trim(), DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"))));
             } catch (DateTimeParseException e) {
                 throw new DukeException("☹ OOPS!!! Invalid date time format. Please use DD/MM/YYYY HHMM format");
             }
             //Fallthrough
         case ("deadline"):
-            if (splits.length == 1) {
+            if (first.length == 1) {
                 throw new DukeException(" ☹ OOPS!!! The description of a deadline cannot be empty.");
             }
-            if (splits[1].isBlank()) {
+            if (first[1].isBlank()) {
                 throw new DukeException(" ☹ OOPS!!! The description of a deadline cannot be empty.");
             }
             if (!fullCommand.contains(" /by")) {
-                throw new DukeException("☹ OOPS!!! Please use format: deadline <description> /by <datetime>");
+                throw new DukeException("☹ OOPS!!! Invalid input format. Please use format: deadline <description> /by <datetime>");
             }
             try {
-                String[] secondsplits = splits[1].split("/by");
+                String[] second = first[1].split("/by");
 
-                if (secondsplits[0].isBlank()) {
+                if (second[0].isBlank()) {
                     throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
                 }
-                return new AddCommand(new Deadline(secondsplits[0].trim(),
-                        LocalDateTime.parse(secondsplits[1].trim(), DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"))));
+                return new AddCommand(new Deadline(second[0].trim(),
+                        LocalDateTime.parse(second[1].trim(), DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"))));
             } catch (DateTimeParseException e) {
                 throw new DukeException("☹ OOPS!!! Invalid date time format. Please use <DD/MM/YYYY HHMM> format");
             }
             //Fallthrough
         case ("mark"):
-            return new MarkCommand(Integer.parseInt(splits[1]));
+            if (first.length == 1) {
+                throw new DukeException("☹ OOPS!!! The task number to be marked as done cannot be empty.");
+            }
+            if (first[1].isBlank()) {
+                throw new DukeException("☹ OOPS!!! The task number to be marked as done cannot be empty.");
+            }
+            if (first[1].equals("0")) {
+                throw new DukeException("☹ OOPS!!! The task number to be marked as done cannot be 0.");
+            }
+            return new MarkCommand(Integer.parseInt(first[1]));
         //Fallthrough
         case("unmark"):
-            return new UnmarkCommand(Integer.parseInt(splits[1]));
+            if (first.length == 1) {
+                throw new DukeException("☹ OOPS!!! The task number to be unmarked cannot be empty.");
+            }
+            if (first[1].isBlank()) {
+                throw new DukeException("☹ OOPS!!! The task number to be unmarked cannot be empty.");
+            }
+            if (first[1].equals("0")) {
+                throw new DukeException("☹ OOPS!!! The task number to be unmarked cannot be 0.");
+            }
+            return new UnmarkCommand(Integer.parseInt(first[1]));
         //Fallthrough
         case ("delete"):
-            return new DeleteCommand(Integer.parseInt(splits[1]));
+            if (first.length == 1) {
+                throw new DukeException("☹ OOPS!!! The task number to be deleted cannot be empty.");
+            }
+            if (first[1].isBlank()) {
+                throw new DukeException("☹ OOPS!!! The task number to be deleted cannot be empty.");
+            }
+            if (first[1].equals("0")) {
+                throw new DukeException("☹ OOPS!!! The task number to be deleted cannot be 0.");
+            }
+            return new DeleteCommand(Integer.parseInt(first[1]));
         //Fallthrough
         case("find"):
-            if (splits.length == 1) {
+            if (first.length == 1) {
                 throw new DukeException("☹ OOPS!!! The keyword for the find cannot be empty.");
             }
-            if (splits[1].isBlank()) {
+            if (first[1].isBlank()) {
                 throw new DukeException("☹ OOPS!!! The keyword for the find cannot be empty.");
             }
-            return new FindCommand(splits[1]);
+            return new FindCommand(first[1]);
         //Fallthrough
         default:
-            throw new DukeException("☹ OOPS!!! Unknown command received. Please enter valid command");
+            throw new DukeException("☹ OOPS!!! Unknown command received. Please enter valid command.");
             //Fallthrough
         }
     }
