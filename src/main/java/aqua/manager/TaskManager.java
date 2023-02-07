@@ -15,12 +15,9 @@ import aqua.util.FileUtils;
 
 /** Manager of tasks. */
 public class TaskManager implements Reloadable {
-    /** Path of save directory. */
     private static final String SAVE_DIRECTORY = "SAVE_DATA";
-    /** Path of save file relative to save directory. */
     private static final String SAVE_FILE = "Goshujin-sama you promised to never touch this.txt";
 
-    /** Array list containing tasks. */
     private final ArrayList<UserTask> tasks = new ArrayList<>();
 
 
