@@ -2,6 +2,7 @@ package duke.storage;
 
 import java.util.ArrayList;
 
+import duke.exceptions.InvalidException;
 import duke.exceptions.StorerEmptyException;
 import duke.tasks.Task;
 
@@ -55,16 +56,25 @@ public class TaskList {
      * Marks a task as done.
      * @param index index of task in the list by 1-base indexing.
      */
-    public void markTask(int index) {
-        this.storer.get(index - 1).mark();
+    public void markTask(int index) throws InvalidException {
+        try {
+            this.storer.get(index - 1).mark();
+        } catch (Exception e) {
+            throw new InvalidException();
+        }
+
     }
 
     /**
      * Unmarks a task as done.
      * @param index index of task in the list by 1-base indexing.
      */
-    public void unmarkTask(int index) {
-        this.storer.get(index - 1).unmark();
+    public void unmarkTask(int index) throws InvalidException {
+        try {
+            this.storer.get(index - 1).unmark();
+        } catch (Exception e) {
+            throw new InvalidException();
+        }
     }
 
     /**
@@ -72,8 +82,14 @@ public class TaskList {
      * @param index index of task in the list by 1-base indexing.
      * @return the task at the given index.
      */
-    public Task get(int index) {
-        return this.storer.get(index - 1);
+    public Task get(int index) throws InvalidException {
+        try {
+            return this.storer.get(index - 1);
+        } catch (Exception e) {
+            throw new InvalidException();
+        }
+
+
     }
 
     /**

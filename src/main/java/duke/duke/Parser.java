@@ -111,6 +111,9 @@ public class Parser {
 
         case "bye":
             c = new ByeCommand();
+
+
+            assert c.isBye();
             break;
 
         case "find":
