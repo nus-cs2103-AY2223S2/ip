@@ -22,7 +22,9 @@ public class Ui {
         for (int i = 1; i <= taskList.size(); i++) {
             System.out.println(i + ". " + taskList.get(i));
         }
-        System.out.println("End of task list. (currently contains " + taskList.size() + " tasks)");
+        System.out.println("End of task list. (currently contains "
+                + taskList.size()
+                + " tasks)");
     }
 
 
@@ -67,7 +69,9 @@ public class Ui {
     }
 
     public void showNumTasks(TaskList tasks) {
-        System.out.println("\nNow you have " + tasks.size() + " tasks in the list.");
+        System.out.println("\nNow you have "
+                + tasks.size()
+                + " tasks in the list.");
     }
 
     public void showMarkCompletion(MarkCommand markCommand, Task taskMarked) {
