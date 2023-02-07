@@ -11,8 +11,9 @@ import javafx.scene.text.Font;
 public class DialogBox extends HBox {
 
     // user images
-    private static final Image userImage = new Image(DialogBox.class.getResourceAsStream("/images/red.png"));
-    private static final Image dukeImage = new Image(DialogBox.class.getResourceAsStream("/images/cyan.png"));
+    private static final Image USER_IMAGE = new Image(DialogBox.class.getResourceAsStream("/images/red.png"));
+    private static final Image DUKE_IMAGE = new Image(
+            DialogBox.class.getResourceAsStream("/images/cyan.png"));
 
     // javafx component default settings
     private static final int FONT_SIZE = 16;
@@ -45,7 +46,7 @@ public class DialogBox extends HBox {
      * @return The created DialogBox
      */
     public static DialogBox makeUserDialog(String text) {
-        DialogBox dialogBox = new DialogBox("You said: " + text, DialogBox.userImage);
+        DialogBox dialogBox = new DialogBox("You said: " + text, DialogBox.USER_IMAGE);
         dialogBox.getChildren().addAll(dialogBox.displayPicture, dialogBox.text);
         dialogBox.setAlignment(Pos.TOP_LEFT);
         return dialogBox;
@@ -58,7 +59,7 @@ public class DialogBox extends HBox {
      * @return The created DialogBox
      */
     public static DialogBox makeDukeDialog(String text) {
-        DialogBox dialogBox = new DialogBox(text, DialogBox.dukeImage);
+        DialogBox dialogBox = new DialogBox(text, DialogBox.DUKE_IMAGE);
         dialogBox.getChildren().addAll(dialogBox.text, dialogBox.displayPicture);
         dialogBox.setAlignment(Pos.TOP_RIGHT);
         return dialogBox;
