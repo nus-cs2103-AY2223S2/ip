@@ -42,7 +42,7 @@ public class TaskListTest {
         } catch (DukeException err) {
             System.out.println("Ignore exception: For testing purposes");
         }
-        assertEquals("X", taskList.tasks.get(0).getStatusIcon());
+        assertEquals("X", taskList.getTasks().get(0).getStatusIcon());
 
     }
 }

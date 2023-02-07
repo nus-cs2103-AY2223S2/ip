@@ -3,8 +3,15 @@ package duke;
 import duke.command.Command;
 import duke.task.TaskList;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
+//public class Duke extends Application {
 public class Duke {
-    private Storage storage;
+
+        private Storage storage;
     private TaskList taskList;
     private Ui ui;
 
@@ -17,7 +24,14 @@ public class Duke {
             System.out.println(err.getMessage());
         }
     }
-
+//    @Override
+//    public void start(Stage stage) {
+//        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+//        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+//
+//        stage.setScene(scene); // Setting the stage to show our screen
+//        stage.show(); // Render the stage.
+//    }
     public void run() {
         ui.showWelcomeMessage();
         boolean isExit = false;
@@ -30,13 +44,13 @@ public class Duke {
                 isExit = inputCommand.isExit();
                 ui.showLine();
             } catch (DukeException err) {
-                System.out.println(err.getMessage());
+                ui.showMessage(err.getMessage());
             }
         }
 
     }
 
     public static void main(String[] args) {
-        new Duke("../../../data/duke.txt").run();
+        new Duke("./data/duke.txt").run();
     }
 }

@@ -1,2 +1,3 @@
-E,true,meeting,Feb 10 2023 1800 to Feb 11 2023 2100
-T,false,buy apples
+T,true,buy apples
+D,false,submit homework,2023-02-10
+E,false,concert,Feb 05 2023 1800 to Feb 05 2023 2130
