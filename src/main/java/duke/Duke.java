@@ -51,7 +51,7 @@ public class Duke {
                 if (isRunning) {
                     commandList.add(inMsg);
                 }
-            } catch (DukeException e) {
+            } catch (DukeException | AssertionError e) {
                 ui.printStructuredString(e.toString());
             } catch (NumberFormatException e) {
                 ui.printStructuredString("Please specify the index.");

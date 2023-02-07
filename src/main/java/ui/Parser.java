@@ -4,6 +4,7 @@ import static java.util.Map.entry;
 
 import duke.DukeException;
 
+import java.io.File;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.time.LocalDate;
@@ -16,6 +17,8 @@ import command.Command;
  * A string parser that processes user-input commands.
  */
 public class Parser {
+    private static String RUNNING_DIRECTORY = "ip";
+
     private static Map<String, String> stringToCommandClass = Map.ofEntries(
             entry("list", "ListCommand"),
             entry("mark", "MarkCommand"),
@@ -51,6 +54,7 @@ public class Parser {
      */
     public static Command parseCommand(String command, boolean suppressPrint) throws DukeException {
         Object object = null;
+        assert getCurrentDirectoryName().equals(RUNNING_DIRECTORY) : "You should run the program in the Main class folder";
         try {
             Class<?> c = Class.forName("command." + stringToCommandClass.get(command.split(" ")[0]));
             Constructor<?> cons = c.getConstructor(String.class, boolean.class);
@@ -64,5 +68,13 @@ public class Parser {
             throw new DukeException(t.toString());
         }
         return (Command) object;
+    }
+
+    /**
+     * Returns the name of the current directory.
+     * @return current directory name
+     */
+    public static String getCurrentDirectoryName() {
+        return new File(System.getProperty("user.dir")).getName();
     }
 }
