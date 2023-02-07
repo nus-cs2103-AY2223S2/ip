@@ -85,6 +85,24 @@ public class TaskList {
                 + "\nNow you have " + taskList.size() + " tasks in the list.");
     }
 
+    public void find(String targetString) {
+        List<Task> targetList = new ArrayList<>();
+        for (Task t : taskList) {
+            if (t.getTask().contains(targetString)) {
+                targetList.add(t);
+            }
+        }
+
+        if (targetList.isEmpty()) {
+            System.out.println("Oops! :( There are no matching tasks found.");
+        } else {
+            System.out.println("Here are the matching tasks in your list:");
+            for (int i = 1; i < targetList.size() + 1; i++) {
+                System.out.println(i + "." + (targetList.get(i - 1)).toString());
+            }
+        }
+    }
+
     /**
      * Check if the task description is empty or not
      * @param input user input
@@ -105,7 +123,8 @@ public class TaskList {
     public void wrongCommand(String command) throws WrongCommandException {
         if (!(command.equals("mark") || command.equals("unmark")
                 || command.equals("todo") || command.equals("deadline")
-                || command.equals("event") || command.equals("delete"))) {
+                || command.equals("event") || command.equals("delete")
+                || command.equals("find"))) {
             throw new WrongCommandException();
         }
     }

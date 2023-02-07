@@ -76,6 +76,9 @@ public class Parser {
                         case "delete":
                             taskList.deleteTask(input.substring(7));
                             break;
+
+                        case "find":
+                            taskList.find(input.substring(5));
                     }
                 }
             } catch (EmptyDescriptionException | WrongCommandException e) {
