@@ -7,18 +7,27 @@ import duke.task.*;
 import java.time.LocalDate;
 import java.util.Scanner;
 
+/**
+ * A parser to understand and perform user command
+ */
 public class Parser {
     public TaskList taskList;
     public Scanner sc;
 
+    /**
+     * Constructor for Parser
+     * @param taskList
+     */
     public Parser(TaskList taskList) {
         this.taskList = taskList;
         this.sc = new Scanner(System.in);
     }
 
-
-
-
+    /**
+     * Perform the user command and create the tasks
+     * @throws EmptyDescriptionException If no description of task after the command word
+     * @throws WrongCommandException If wrong command word is being entered
+     */
     public void performCommand() {
         String input = this.sc.nextLine();
         while (!input.equals("bye")) {

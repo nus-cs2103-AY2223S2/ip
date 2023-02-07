@@ -7,10 +7,16 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Storage class that manage loading of tasks from file and saving of tasks in file
+ */
 public class Storage {
     private String filePath;
     private File taskSaved;
 
+    /**
+     * Constructor of Storage
+     */
     public Storage() {
         this.filePath = "C:/Users/linwe/Documents/TaskSaved.txt";
         try {
@@ -22,10 +28,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Load tasks from file
+     * @return List of tasks
+     * @throws IOException In unable to read file
+     */
     public List<Task> load() {
-
         List<Task> taskList = new ArrayList<>();
-
         try {
             BufferedReader myReader = new BufferedReader(new FileReader(this.taskSaved));
             String line = myReader.readLine();
@@ -65,6 +74,11 @@ public class Storage {
 
     }
 
+    /**
+     * Save the list of tasks in the file
+     * @param taskList
+     * @throws IOException When tasks cannot be saved
+     */
     public void save(TaskList taskList) {
         try {
             BufferedWriter myWriter = new BufferedWriter(new FileWriter(this.taskSaved));
