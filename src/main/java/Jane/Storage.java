@@ -24,7 +24,11 @@ import java.util.List;
         }
 
     }
-
+        /**
+         * Creates JaneList.txt if it doesn't exist. Reads data from JaneList.txt otherwise
+         * @return ArrayList of all Tasks in duke.txt
+         * @throws IOException if JaneList.txt cannot be created
+         */
     public static ArrayList<jane.task.Task> loadList() {
         if (Files.notExists(filePath)) {
             try {
@@ -64,7 +68,7 @@ import java.util.List;
         }
         return tasks;
     }
-
+    //Writes into JaneList.txt
     public static void updateList(ArrayList<jane.task.Task> tasks) {
         ArrayList<String> list = new ArrayList<String>();
         for (jane.task.Task t : tasks) {

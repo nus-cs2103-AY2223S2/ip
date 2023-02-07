@@ -1,6 +1,7 @@
 package jane;
 
 public class Ui {
+    //Introduces itself
     public static void start() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
