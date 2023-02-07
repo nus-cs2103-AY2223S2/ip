@@ -89,7 +89,6 @@ public class TaskList {
             throw new InvalidException();
         }
 
-
     }
 
     /**
@@ -97,8 +96,12 @@ public class TaskList {
      * @param index The index of task in the list by 1-base indexing.
      * @return The removed task.
      */
-    public Task remove(int index) {
-        return this.storer.remove(index - 1);
+    public Task remove(int index) throws InvalidException {
+        try {
+            return this.storer.remove(index - 1);
+        } catch (Exception e) {
+            throw new InvalidException();
+        }
     }
 
 }
