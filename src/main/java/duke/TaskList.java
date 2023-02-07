@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.stream.IntStream;
 
 import duke.exception.InvalidTaskNumberException;
 import duke.task.Task;
@@ -82,11 +83,8 @@ public class TaskList {
      */
     public TaskList findTasks(String keyword) {
         TaskList tasksFound = new TaskList();
-        for (Task task : tasks) {
-            if (task.getDescription().indexOf(keyword) != -1) {
-                tasksFound.addTask(task);
-            }
-        }
+        tasks.stream().filter(x -> x.getDescription().contains(keyword))
+                .forEach(y -> tasksFound.addTask(y));
         return tasksFound;
     }
 
@@ -109,11 +107,10 @@ public class TaskList {
     public int getNumOfTasks() {
         return tasks.size();
     }
+
     String getSavedListOfTasks() {
         StringBuilder listString = new StringBuilder();
-        for (int i = 0; i < tasks.size(); i++) {
-            listString.append(String.format("%s\n", tasks.get(i).getSaveTaskString()));
-        }
+        tasks.stream().map(x -> String.format("%s\n", x.getSaveTaskString())).forEach(y -> listString.append(y));
         return listString.toString();
     }
 
@@ -124,9 +121,8 @@ public class TaskList {
      */
     public String getListOfTasks() {
         StringBuilder listOfTasks = new StringBuilder();
-        for (int i = 0; i < tasks.size(); i++) {
-            listOfTasks.append(String.format("%d. %s\n", i + 1, tasks.get(i)));
-        }
+        IntStream.range(0, tasks.size()).mapToObj(x -> String.format("%d. %s\n", x + 1, tasks.get(x)))
+                .forEach(y -> listOfTasks.append(y));
         return listOfTasks.toString();
     }
 

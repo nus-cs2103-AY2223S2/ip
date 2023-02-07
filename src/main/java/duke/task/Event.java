@@ -34,6 +34,7 @@ public class Event extends Task {
         super(description, isDone);
         this.start = start;
         this.end = end;
+        //start date after end date;
     }
 
     /**
