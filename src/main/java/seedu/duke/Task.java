@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -8,6 +9,7 @@ public abstract class Task {
     protected String task;
     protected Boolean isDone;
     protected Character abbreviation;
+    protected ArrayList<Tag> tags;
 
     /**
      * Constructor for the Task Object
@@ -48,6 +50,10 @@ public abstract class Task {
         Pattern pattern = Pattern.compile(search);
         Matcher matcher = pattern.matcher(task);
         return matcher.find();
+    }
+
+    public void addTag(Tag tag) {
+        this.tags.add(tag);
     }
 
     public abstract String getBreakdown();

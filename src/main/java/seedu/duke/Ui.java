@@ -88,6 +88,14 @@ public class Ui {
             response += filteredList.toString();
             return response;
         }
+        case("tag"): {
+            int index = Integer.valueOf(chat.split(" ")[1]);
+            Tag tag = new Tag(chat.split(" ")[2]);
+            Task task = ls.addTag(index, tag);
+            String response = "Noted. I've added the tag to this task:\n";
+            response += task.toString() + "\n";
+            return response;
+        }
         default:
             return "OOPS!!! I'm sorry, but I don't know what that means :-(";
         }
