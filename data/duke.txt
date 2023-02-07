@@ -1,6 +1,5 @@
 [T][ ] benji
-[D][X] hello (6pm)
 [T][X] test
 [T][ ] walaaao
-[D][X] walao (4fewajp)
 [E][ ] hello (from: 2pm to: 5pm)
+[D][ ] hello (02/01/2019)

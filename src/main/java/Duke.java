@@ -1,8 +1,12 @@
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.io.File;
 import java.io.IOException;
 import java.io.FileWriter;
 import java.io.FileNotFoundException;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 
 
@@ -48,7 +52,8 @@ public class Duke {
             } else if (txt.substring(1,2).equals("D")) {
                 String[] detailsAndDueDate = txt.substring(7).split(" \\(");
                 String details = detailsAndDueDate[0];
-                String dueDate = detailsAndDueDate[1].substring(0, detailsAndDueDate[1].length() - 1);
+                DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                LocalDate dueDate = LocalDate.parse(detailsAndDueDate[1].substring(0, detailsAndDueDate[1].length() - 1), dateFormatter);
                 Task t = new Deadline(details, dueDate);
                 if (txt.substring(4, 5).equals("X")) {
                     t.mark();
@@ -112,7 +117,7 @@ public class Duke {
                 } else if (action.equals("deadline")) {
                     String[] detailsAndDate = inputArr[1].split(" /by ");
                     String details = detailsAndDate[0];
-                    String date = detailsAndDate[1];
+                    LocalDate date = LocalDate.parse(detailsAndDate[1]);
                     Deadline newDeadline = new Deadline(details, date);
                     lst.add(newDeadline);
                     System.out.println("Got it. I've added this task:" + '\n' + newDeadline + '\n' + "Now you have " + lst.size() + " tasks in the list");
@@ -141,7 +146,9 @@ public class Duke {
                     System.out.println("oops!");
                 }
             } catch (DukeException e) {
-                    System.out.println(e.getMessage());
+                System.out.println(e.getMessage());
+            } catch (DateTimeParseException e) {
+                System.out.println("Date format should be in YYYY-MM-DD!");
             }
 
         }
