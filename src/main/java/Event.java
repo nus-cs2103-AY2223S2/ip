@@ -10,7 +10,7 @@ public class Event extends Task {
 
     @Override
     public String makeSaveFormat() {
-        return String.format("E|%1$s|%2$s", this.isMarked ? "1" : "0", this.description
+        return String.format("E|%1$s|%2$s\n", this.isMarked ? "1" : "0", this.description
                 + "|" + this.startTime + "|" + this.endTime);
     }
 
