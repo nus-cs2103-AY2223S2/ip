@@ -36,7 +36,7 @@ public class AddCommand implements Command {
         StringBuilder sb = new StringBuilder();
         Task newTask = null;
         boolean hasIssue = false;
-        String message = "";
+        String message;
 
         switch (parsedCmd.size()) {
         case 2: // new ToDos task
