@@ -28,10 +28,10 @@ public class Storage {
         this.directory = Paths.get(root);
         this.filePath = Paths.get(root, filePath);
 
-        int index = filePath.lastIndexOf("/") - 1;
+        int index = filePath.lastIndexOf("/") + 1;
         if (index > 0) {
             this.directory = Paths.get(root,
-                    filePath.substring(0, index + 1));
+                    filePath.substring(0, index));
         }
     }
 
