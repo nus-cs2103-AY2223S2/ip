@@ -18,10 +18,24 @@ import java.util.Scanner;
 public class Storage {
     private String filePath;
     private final String ERROR_MSG = "Unsuccessful... Something went wrong... :(";
+
+    /**
+     * Constructor of Storage class.
+     *
+     * @param filePath file path to where persistent storage reside.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Sets up storage using path.
+     * If data exist in file path,load, construct and return list of tasks.
+     * otherwise, set up structure based on file path and return empty list.
+     *
+     * @return list of tasks constructed from file in file path.
+     * @throws DukeException when file I/O is unsuccessful.
+     */
     public ArrayList<Task> load() throws DukeException {
         String[] splitPath = filePath.split("/");
         if (splitPath.length != 1) {
@@ -71,6 +85,12 @@ public class Storage {
         }
     } // end of load()
 
+    /**
+     * Saves string into persistent storage.
+     *
+     * @param entry an entry to be added to file in file path.
+     * @throws DukeException when file I/O is unsuccessful.
+     */
     public void save(String entry) throws DukeException {
         try {
             File dukeFile = new File(this.filePath);
@@ -81,6 +101,13 @@ public class Storage {
             throw new DukeException(ERROR_MSG);
         }
     }
+
+    /**
+     * Delete entry in persistent storage.
+     *
+     * @param taskId id that identifies the task in the file.
+     * @throws DukeException when file I/O is unsuccessful.
+     */
     public void delete(int taskId) throws DukeException {
         try {
             File dukeFile = new File(this.filePath);
@@ -107,6 +134,14 @@ public class Storage {
         }
 
     }
+
+    /**
+     * Updates entry in persistent storage.
+     *
+     * @param taskId id that identifies the task in the file.
+     * @param isMark determines whether to mark entry as complete or incomplete.
+     * @throws DukeException when file I/O is unsuccessful.
+     */
     public void markEntry(int taskId, boolean isMark) throws DukeException {
         try {
             File dukeFile = new File(this.filePath);

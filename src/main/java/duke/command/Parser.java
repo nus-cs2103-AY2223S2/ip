@@ -11,6 +11,12 @@ import java.time.format.DateTimeParseException;
 
 public class Parser {
 
+    /**
+     * Determines whether command is valid and return appropriate <code>Command</code>.
+     *
+     * @param inputCommand string that to be checked.
+     * @return the appropriate Command enum.
+     */
     public static Command validateCommand(String inputCommand) {
         Command[] allCommands = Command.values();
         for (int i = 0; i < allCommands.length; i++) {
@@ -24,6 +30,13 @@ public class Parser {
         return Command.INVALID;
     }
 
+    /**
+     * Construct a Todo based on user input.
+     *
+     * @param input user input to be parsed.
+     * @return a todo constructed from user input.
+     * @throws DukeException when user input is invalid.
+     */
     public static Todo parseTodo(String[] input) throws DukeException { //return task
         if (input.length == 1 || input[1].isEmpty()) {
             throw new DukeException(" ☹ OOPS!!! The description of a todo cannot be empty.");
@@ -32,6 +45,13 @@ public class Parser {
         return tempTodo;
     }
 
+    /**
+     * Construct a Deadline based on user input.
+     *
+     * @param input user input to be parsed.
+     * @return a deadline constructed from user input.
+     * @throws DukeException when user input is invalid.
+     */
     public static Deadline parseDeadline(String[] input) throws DukeException {
         if (input.length == 1 || input[1].isEmpty()) {
             throw new DukeException(" ☹ OOPS!!! The description and due date of a deadline cannot be empty.");
@@ -55,6 +75,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Construct an Event based on user input.
+     *
+     * @param input user input to be parsed.
+     * @return an event constructed from user input.
+     * @throws DukeException when user input is invalid.
+     */
     public static Event parseEvent(String[] input) throws DukeException {
         if (input.length == 1 || input[1].isEmpty()) {
             throw new DukeException(" ☹ OOPS!!! The description of an event cannot be empty.");
@@ -85,6 +112,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Extracts task id from user input
+     *
+     * @param input user input to be parsed.
+     * @return task id to identify task to be marked
+     * @throws DukeException when user input is invalid
+     */
     public static int parseMarkTask(String[] input) throws DukeException { // returns task id
         if (input.length == 1 || input[1].isEmpty()) {
             throw new DukeException(" ☹ OOPS!!! The item number is required to mark.");
@@ -93,6 +127,13 @@ public class Parser {
         return taskNum;
     }
 
+    /**
+     * Extracts task id from user input.
+     *
+     * @param input user input to be parsed.
+     * @return task id to identify task to be unmarked.
+     * @throws DukeException when user input is invalid.
+     */
     public static int parseUnmarkTask(String[] input) throws DukeException { // returns task id
         if (input.length == 1 || input[1].isEmpty()) {
             throw new DukeException(" ☹ OOPS!!! The item number is required to unmark.");
@@ -101,6 +142,13 @@ public class Parser {
         return taskNum;
     }
 
+    /**
+     * Extracts task id from user input.
+     *
+     * @param input user input to be parsed.
+     * @return task id to identify task to be deleted.
+     * @throws DukeException when user input is invalid.
+     */
     public static int parseDeleteTask(String[] input) throws DukeException{ // returns task id
         if (input.length == 1 || input[1].isEmpty()) {
             throw new DukeException(" ☹ OOPS!!! The item number is required to delete.");

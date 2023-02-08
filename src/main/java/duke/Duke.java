@@ -16,6 +16,11 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor of Duke class.
+     *
+     * @param filePath file path to where persistent storage reside.
+     */
     public Duke(String filePath) {
         storage = new Storage(filePath);
         ui = new Ui();
@@ -27,10 +32,21 @@ public class Duke {
         }
     }
 
+    /**
+     *  Duke Application's entry point.
+     *  Creates a Duke object and calls <code>run()</code>.
+     *
+     * @param args command line arguments.
+     */
     public static void main(String[] args) {
         new Duke("data/duke.txt").run();
     }
 
+    /**
+     * Starts Duke application.
+     * Sets up persistent storage and user interface. Begins to receive and process input form user.
+     * Terminates based on user input.
+     */
     public void run() {
 
         ui.showWelcome();
@@ -77,7 +93,13 @@ public class Duke {
     }
 
 
-
+    /**
+     * Creates and stores user Todo based on user input.
+     * Saves to persistent storage and in <code>TaskList</code>.
+     *
+     * @param input User input separated into {command, description}.
+     * @throws DukeException If user input is invalid, e.g. empty description.
+     */
     private void addTodo(String[] input) throws DukeException {
         Todo tempTodo = Parser.parseTodo(input);
         String saveString = "T | 0 | " + tempTodo.getDescription();
@@ -89,6 +111,7 @@ public class Duke {
         message += "\nNow you have " + tasks.numTasks() + " tasks in the list.";
         ui.dukeSpeak(message);
     }
+
 
     private void addDeadline(String[] input) throws DukeException {
         Deadline tempDeadline = Parser.parseDeadline(input);
