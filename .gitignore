@@ -1,3 +1,6 @@
+#txt Data files
+*/tasks.txt
+
 # IDEA files
 /.idea/
 /out/
@@ -8,10 +11,18 @@
 /build/
 src/main/resources/docs/
 
-# MacOS custom attributes files created by Finder
+# MacOS custom attributes files created byRec Finder
 .DS_Store
 *.iml
 bin/
 
-/text-ui-test/ACTUAL.TXT
-text-ui-test/EXPECTED-UNIX.TXT
+#/text-ui-test/ACTUAL.TXT
+#text-ui-test/EXPECTED-UNIX.TXT
+
+
+# Markdown files
+*.md
+
+
+# Class files
+*.class
