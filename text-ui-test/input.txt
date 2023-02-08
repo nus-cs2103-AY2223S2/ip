@@ -1,8 +1,0 @@
-todo borrow book
-mark 1
-event
-gibberish stuff this should throw an error
-event project meeting /from Mon 2pm /to 4pm
-deadline return book /by 2/12/2019 1800
-list
-bye
