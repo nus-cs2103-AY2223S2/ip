@@ -109,6 +109,7 @@ public class TaskList {
     public int getNumOfTasks() {
         return tasks.size();
     }
+
     String getSavedListOfTasks() {
         StringBuilder listString = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {

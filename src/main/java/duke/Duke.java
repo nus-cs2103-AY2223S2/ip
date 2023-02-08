@@ -45,6 +45,7 @@ public class Duke {
         } catch (DukeException | IOException e) {
             response = ui.showErrorMessage(e);
         }
+        assert !response.equals("") : "Response should not be empty";
         return response;
     }
 
