@@ -2,7 +2,6 @@ package duke.commands;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
-import duke.utils.Formatter;
 import org.junit.jupiter.api.Test;
 
 import duke.exception.DukeException;
@@ -14,7 +13,6 @@ public class DeleteCommandTest {
     public void deleteCommand_deleteFromEmptyTaskList_throwsException() {
         TaskList tasklist = new TaskList();
         StorageStub stub = new StorageStub();
-        Formatter ui = new Formatter();
 
         try {
             Command c = new DeleteCommand(0);

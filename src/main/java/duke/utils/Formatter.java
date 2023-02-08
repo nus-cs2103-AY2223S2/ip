@@ -35,7 +35,7 @@ public class Formatter {
         String[] output = new String[tasks.size()];
         int count = 1;
         for (Task t : tasks) {
-            output[count-1] = (count + ". " + t.toString());
+            output[count - 1] = (count + ". " + t.toString());
             count++;
         }
         return formatMultipleMessages(output);
