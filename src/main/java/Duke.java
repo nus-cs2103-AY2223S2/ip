@@ -61,8 +61,7 @@ public class Duke extends Application {
             scrollPane.setContent(dialogContainer);
             mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
-            int tester = 1;
-            assert false;
+
             //initializing of scene
             scene = new Scene(mainLayout);
             stage.setScene(scene);
