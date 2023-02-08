@@ -1,6 +1,6 @@
 package seedu.duke;
 
-import seedu.duke.tasks.*;
+import seedu.duke.tasks.Task;
 
 import java.util.ArrayList;
 
@@ -58,7 +58,7 @@ public class TaskList {
      * @return Updated TaskList
      */
     public TaskList addTask(Task newTask) {
-        ArrayList<Task> updatedTasks = this.tasks;
+        ArrayList<Task> updatedTasks = new ArrayList<>(this.tasks);
         updatedTasks.add(newTask);
         return new TaskList(updatedTasks);
     }
@@ -70,7 +70,7 @@ public class TaskList {
      * @return Updated TaskList
      */
     public TaskList deleteTask(int index) {
-        ArrayList<Task> updatedTasks = this.tasks;
+        ArrayList<Task> updatedTasks = new ArrayList<>(this.tasks);
         updatedTasks.remove(index);
         return new TaskList(updatedTasks);
     }
@@ -82,7 +82,7 @@ public class TaskList {
      * @return Updated TaskList
      */
     public TaskList markTask(int index) throws DukeException {
-        ArrayList<Task> updatedTasks = this.tasks;
+        ArrayList<Task> updatedTasks = new ArrayList<>(this.tasks);
         Task unmarkedTask = updatedTasks.get(index);
         Task markedTask = unmarkedTask.markTask();
         updatedTasks.set(index, markedTask);
@@ -96,7 +96,7 @@ public class TaskList {
      * @return Updated TaskList
      */
     public TaskList unmarkTask(int index) throws DukeException {
-        ArrayList<Task> updatedTasks = this.tasks;
+        ArrayList<Task> updatedTasks = new ArrayList<>(this.tasks);
         Task markedTask = updatedTasks.get(index);
         Task unmarkedTask = markedTask.unmarkTask();
         updatedTasks.set(index, unmarkedTask);
@@ -114,7 +114,7 @@ public class TaskList {
         for (int index = 0; index < getSize(); index++) {
             Task task = get(index);
             if (task.toString().contains(keywords)) {
-                matchingTasks.addTask(task);
+                matchingTasks = matchingTasks.addTask(task);
             }
         }
         if (matchingTasks.getSize() == 0) {

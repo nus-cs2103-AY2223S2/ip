@@ -37,8 +37,13 @@ public class Duke {
      */
     public String getResponse(String input) {
         try {
+            this.tasks = storage.readFile();
             String[] inputStrings = input.split(" ");
-            return this.parser.executeCommand(inputStrings, LIST_OF_COMMANDS, this.tasks, this.storage, this.ui);
+            assert inputStrings.length != 0 : "There should be an input given";
+            String response = this.parser.executeCommand(inputStrings,
+                    LIST_OF_COMMANDS, this.tasks, this.storage, this.ui);
+            assert !response.equals("") : "Response should not be empty!";
+            return response;
         } catch (DukeException err)  {
             return err.getErrorMessage();
         }

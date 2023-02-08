@@ -135,7 +135,7 @@ public class Parser {
      *  @param timestamp String of the timestamp given
      *  @return LocalDateTime object of timestamp
      */
-    private static LocalDateTime convertTimestamp(String timestamp) throws DukeException {
+    private LocalDateTime convertTimestamp(String timestamp) throws DukeException {
         if (timestamp.equals("")) {
             throw new DukeException("There was no time period given!");
         }
@@ -158,6 +158,150 @@ public class Parser {
     }
 
     /**
+     * Handles message to be printed for TD tasks
+     *
+     * @param inputStrings String array of each word input by the user
+     * @param taskList Current state of TaskList
+     * @param storage Storage to overwrite save file
+     * @param ui Ui to print lines for user to see and interact with
+     * @return message for user to see when a TD task is added.
+     */
+    private String handleTodo(String[] inputStrings, TaskList taskList, Storage storage, Ui ui) throws DukeException {
+        String description = String.join(" ", Arrays.copyOfRange(inputStrings, 1, inputStrings.length));
+        checkDescription(description);
+        Task newTask = new Todo(description);
+        TaskList updatedList = taskList.addTask(newTask);
+        assert updatedList.getSize() == (taskList.getSize() + 1) : "Task is not added!";
+        storage.writeFile(updatedList);
+        return ui.sayAddedTask(newTask, updatedList);
+    }
+
+    /**
+     * Handles message to be printed for Deadline Tasks
+     *
+     * @param inputStrings String array of each word input by the user
+     * @param taskList Current state of TaskList
+     * @param storage Storage to overwrite save file
+     * @param ui Ui to print lines for user to see and interact with
+     * @return message for user to see when a deadline task is added
+     */
+    private String handleDeadline(String[] inputStrings, TaskList taskList, Storage storage, Ui ui) throws DukeException {
+        int byIndex = checkDeadline(inputStrings);
+        String description = String.join(" ", Arrays.copyOfRange(inputStrings, 1, byIndex));
+        checkDescription(description);
+        String deadline = String.join(" ", Arrays.copyOfRange(inputStrings,
+                byIndex + 1, inputStrings.length));
+        LocalDateTime formattedDeadline = convertTimestamp(deadline);
+        Task newTask = new Deadline(description, formattedDeadline);
+        TaskList updatedList = taskList.addTask(newTask);
+        assert updatedList.getSize() == taskList.getSize() + 1 : "Task is not added!";
+        storage.writeFile(updatedList);
+        return ui.sayAddedTask(newTask, updatedList);
+    }
+
+    /**
+     * Handles message to be printed for Event Tasks
+     *
+     * @param inputStrings String array of each word input by the user
+     * @param taskList Current state of TaskList
+     * @param storage Storage to overwrite save file
+     * @param ui Ui to print lines for user to see and interact with
+     * @return message for user to see when an event task is added
+     */
+    private String handleEvent(String[] inputStrings, TaskList taskList, Storage storage, Ui ui) throws DukeException {
+        int fromIndex = checkStarting(inputStrings);
+        int toIndex = checkEnding(inputStrings);
+        String description = String.join(" ", Arrays.copyOfRange(inputStrings, 1, fromIndex));
+        checkDescription(description);
+        String from = String.join(" ",
+                Arrays.copyOfRange(inputStrings, fromIndex + 1, toIndex));
+        LocalDateTime formattedFrom = convertTimestamp(from);
+        String to = String.join(" ",
+                Arrays.copyOfRange(inputStrings, toIndex + 1, inputStrings.length));
+        LocalDateTime formattedTo = convertTimestamp(to);
+        Task newTask = new Event(description, formattedFrom, formattedTo);
+        TaskList updatedList = taskList.addTask(newTask);
+        assert updatedList.getSize() == taskList.getSize() + 1 : "Task is not added!";
+        storage.writeFile(updatedList);
+        return ui.sayAddedTask(newTask, updatedList);
+    }
+
+    /**
+     * Handles message to be printed for marking Tasks
+     *
+     * @param inputStrings String array of each word input by the user
+     * @param taskList Current state of TaskList
+     * @param storage Storage to overwrite save file
+     * @param ui Ui to print lines for user to see and interact with
+     * @return message for user to see when task is marked
+     */
+    private String handleMark(String[] inputStrings, TaskList taskList, Storage storage, Ui ui) throws DukeException {
+        // taskNumber in 1-indexing
+        String taskNumber = getTaskNumber(inputStrings);
+        // index in 0-indexing
+        int index = checkTaskNumber(taskList, taskNumber);
+        TaskList updatedList = taskList.markTask(index);
+        assert updatedList.equals(taskList) : "Task is not marked!";
+        Task newTask = updatedList.get(index);
+        storage.writeFile(updatedList);
+        return ui.sayMarkedTask(newTask);
+    }
+
+    /**
+     * Handles message to be printed for unmarking Tasks
+     *
+     * @param inputStrings String array of each word input by the user
+     * @param taskList Current state of TaskList
+     * @param storage Storage to overwrite save file
+     * @param ui Ui to print lines for user to see and interact with
+     * @return message for user to see when task is unmarked
+     */
+    private String handleUnmark(String[] inputStrings, TaskList taskList, Storage storage, Ui ui) throws DukeException {
+        String taskNumber = getTaskNumber(inputStrings);
+        int index = checkTaskNumber(taskList, taskNumber);
+        TaskList updatedList = taskList.unmarkTask(index);
+        assert updatedList.equals(taskList) : "Task is not marked!";
+        Task newTask = updatedList.get(index);
+        storage.writeFile(updatedList);
+        return ui.sayUnmarkedTask(newTask);
+    }
+
+    /**
+     * Handles message to be printed for deleting Tasks
+     *
+     * @param inputStrings String array of each word input by the user
+     * @param taskList Current state of TaskList
+     * @param storage Storage to overwrite save file
+     * @param ui Ui to print lines for user to see and interact with
+     * @return message for user to see when task is deleted
+     */
+    private String handleDelete(String[] inputStrings, TaskList taskList, Storage storage, Ui ui) throws DukeException {
+        // taskNumber in 1-indexing
+        String taskNumber = getTaskNumber(inputStrings);
+        // index in 0-indexing
+        int index = checkTaskNumber(taskList, taskNumber);
+        Task deletedTask = taskList.get(index);
+        TaskList updatedList = taskList.deleteTask(index);
+        assert updatedList.getSize() == taskList.getSize() - 1 : "Task is not added!";
+        storage.writeFile(updatedList);
+        return ui.sayDeletedTask(deletedTask, updatedList);
+    }
+
+    /**
+     * Handles message to be printed for findings Tasks
+     *
+     * @param inputStrings String array of each word input by the user
+     * @param taskList Current state of TaskList
+     * @param ui Ui to print lines for user to see and interact with
+     * @return list of all matching tasks
+     */
+    private String handleFind(String[] inputStrings, TaskList taskList, Ui ui) throws DukeException {
+        String keywords = getKeywords(inputStrings);
+        TaskList matchingTasks = taskList.findTask(keywords);
+        return ui.sayMatchingTasks(matchingTasks);
+    }
+
+    /**
      *  Converts String timestamp into LocalDateTime object
      *
      *  @param inputStrings String array of each word input by the user
@@ -171,13 +315,8 @@ public class Parser {
                                         Storage storage, Ui ui) throws DukeException {
         String commandStr = inputStrings[0];
         Duke.Commands command = Duke.Commands.valueOf(checkCommand(commandStr, listOfCommands));
-        String output = "";
+        String output;
         try {
-            String description;
-            String taskNumber;
-            Task newTask;
-            TaskList updatedList;
-            int index;
             switch (command) {
             case list:
                 output = ui.showList(taskList);
@@ -186,73 +325,28 @@ public class Parser {
                 output = ui.sayGoodbye();
                 break;
             case todo:
-                description = String.join(" ", Arrays.copyOfRange(inputStrings, 1, inputStrings.length));
-                checkDescription(description);
-                newTask = new Todo(description);
-                updatedList = taskList.addTask(newTask);
-                storage.writeFile(updatedList);
-                output = ui.sayAddedTask(newTask, updatedList);
+                output = handleTodo(inputStrings, taskList, storage, ui);
                 break;
             case deadline:
-                int byIndex = checkDeadline(inputStrings);
-                description = String.join(" ", Arrays.copyOfRange(inputStrings, 1, byIndex));
-                checkDescription(description);
-                String deadline = String.join(" ", Arrays.copyOfRange(inputStrings,
-                        byIndex + 1, inputStrings.length));
-                LocalDateTime formattedDeadline = convertTimestamp(deadline);
-                newTask = new Deadline(description, formattedDeadline);
-                updatedList = taskList.addTask(newTask);
-                storage.writeFile(updatedList);
-                output = ui.sayAddedTask(newTask, updatedList);
+                output = handleDeadline(inputStrings, taskList, storage, ui);
                 break;
             case event:
-                int fromIndex = checkStarting(inputStrings);
-                int toIndex = checkEnding(inputStrings);
-                description = String.join(" ", Arrays.copyOfRange(inputStrings, 1, fromIndex));
-                checkDescription(description);
-                String from = String.join(" ",
-                        Arrays.copyOfRange(inputStrings, fromIndex + 1, toIndex));
-                LocalDateTime formattedFrom = convertTimestamp(from);
-                String to = String.join(" ",
-                        Arrays.copyOfRange(inputStrings, toIndex + 1, inputStrings.length));
-                LocalDateTime formattedTo = convertTimestamp(to);
-                newTask = new Event(description, formattedFrom, formattedTo);
-                updatedList = taskList.addTask(newTask);
-                storage.writeFile(updatedList);
-                output = ui.sayAddedTask(newTask, updatedList);
+                output = handleEvent(inputStrings, taskList, storage, ui);
                 break;
             case mark:
-                // taskNumber in 1-indexing
-                taskNumber = getTaskNumber(inputStrings);
-                // index in 0-indexing
-                index = checkTaskNumber(taskList, taskNumber);
-                updatedList = taskList.markTask(index);
-                newTask = updatedList.get(index);
-                storage.writeFile(updatedList);
-                output = ui.sayMarkedTask(newTask);
+                output = handleMark(inputStrings, taskList, storage, ui);
                 break;
             case unmark:
-                taskNumber = getTaskNumber(inputStrings);
-                index = checkTaskNumber(taskList, taskNumber);
-                updatedList = taskList.unmarkTask(index);
-                newTask = updatedList.get(index);
-                output = ui.sayUnmarkedTask(newTask);
+                output = handleUnmark(inputStrings, taskList, storage, ui);
                 break;
             case delete:
-                // taskNumber in 1-indexing
-                taskNumber = getTaskNumber(inputStrings);
-                // index in 0-indexing
-                index = checkTaskNumber(taskList, taskNumber);
-                Task deletedTask = taskList.get(index);
-                updatedList = taskList.deleteTask(index);
-                storage.writeFile(updatedList);
-                output = ui.sayDeletedTask(deletedTask, updatedList);
+                output = handleDelete(inputStrings, taskList, storage, ui);
                 break;
             case find:
-                String keywords = getKeywords(inputStrings);
-                TaskList matchingTasks = taskList.findTask(keywords);
-                output = ui.sayMatchingTasks(matchingTasks);
+                output = handleFind(inputStrings, taskList, ui);
                 break;
+            default:
+                output = "";
             }
         } catch (DukeException err) {
             output = err.getErrorMessage();

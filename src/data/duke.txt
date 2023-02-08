@@ -1,5 +1,1 @@
-T|true|borrow book
-T|true|cook
-T|true|sleep
-T|true|kek
-T|false|lol
+T|true|dadwadcx

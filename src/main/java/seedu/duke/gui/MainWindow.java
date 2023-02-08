@@ -70,10 +70,6 @@ public class MainWindow extends AnchorPane {
         }
     }
 
-    public void greet() {
-
-    }
-
     /**
      * Idea of splitting into two dialogue boxes for long replies from @mynameizzhafeez
      * @param message message to be shown
