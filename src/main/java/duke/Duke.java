@@ -17,16 +17,18 @@ public class Duke {
      * Generates a Duke object.
      * Stores saved data in specified filepath.
      *
-     * @param args Filepath, UI type.
+     * @param filepath Filepath of storage.
      */
-    public Duke(String... args) {
-        if (args.length > 0) {
-            storage = new Storage(args[0]);
+    public Duke(String... filepath) {
+        if (filepath.length > 0) {
+            assert filepath.length == 1 : "More than 1 filepath provided";
+            storage = new Storage(filepath[0]);
         }
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
             ui.showLoadingError();
+            assert tasks.size() == 0 : "TaskList started with undefined task";
         }
     }
 
@@ -47,8 +49,10 @@ public class Duke {
             try {
                 String fullCommand = ui.readCommand();
                 ui.showLine();
+                assert fullCommand != null : "User's command is null";
                 Command c = Parser.parse(fullCommand);
                 String response = c.execute(tasks, ui, storage);
+                assert response != null : "Response is null";
                 ui.echo(response);
                 isExit = c.isExit();
             } catch (DukeException e) {
@@ -66,7 +70,9 @@ public class Duke {
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
-            return c.execute(tasks, ui, storage);
+            String response = c.execute(tasks, ui, storage);
+            assert response != null : "Response is null";
+            return response;
         } catch (DukeException e) {
             return e.getMessage();
         }

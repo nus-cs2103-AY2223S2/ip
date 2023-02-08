@@ -34,6 +34,7 @@ public class TaskList {
      */
     public Task get(int index) throws DukeException {
         try {
+            assert index >= 0 : "Index given is negative";
             return tasks.get(index);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Index is not in the list of task");
@@ -46,6 +47,7 @@ public class TaskList {
      * @param task duke.task.Task to be added
      */
     public void add(Task task) {
+        assert task != null : "Task given is null";
         tasks.add(task);
     }
 
@@ -57,6 +59,7 @@ public class TaskList {
      */
     public Task delete(int index) throws DukeException {
         try {
+            assert index > 0 : "Index given is less than 1";
             return tasks.remove(index - 1);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Index of task to be removed is not in the list of task");
@@ -71,6 +74,7 @@ public class TaskList {
      */
     public Task mark(int index) throws DukeException {
         try {
+            assert index > 0 : "Index given is less than 1";
             Task task = tasks.get(index - 1);
             task.mark();
             return task;
@@ -87,18 +91,12 @@ public class TaskList {
      */
     public Task unmark(int index) throws DukeException {
         try {
+            assert index > 0 : "Index given is less than 1";
             Task task = tasks.get(index - 1);
             task.unmark();
             return task;
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Index of task to be unmarked is not in the list of task");
         }
-    }
-
-    /**
-     * Shows the list of tasks
-     */
-    public Task[] toArray() {
-        return tasks.toArray(new Task[0]);
     }
 }

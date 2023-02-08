@@ -100,7 +100,11 @@ public class Storage {
             TaskList tasks = new TaskList();
             for (String line: saveData) {
                 String[] data = line.split(" \\| ", 3);
+                if (data.length == 3) {
+                    throw new DukeException("Saved data corrupted");
+                }
                 boolean isDone = data[1].equals("X");
+                assert data[1].equals("X") || data[1].equals(" ") : "Unknown character used for status";
                 switch (data[0]) {
                 case "T":
                     tasks.add(Todo.load(data[2], isDone));
@@ -112,7 +116,7 @@ public class Storage {
                     tasks.add(Event.load(data[2], isDone));
                     break;
                 default:
-                    break;
+                    throw new DukeException("Unknown saved data: " + line);
                 }
             }
             return tasks;
