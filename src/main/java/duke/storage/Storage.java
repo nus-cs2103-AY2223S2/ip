@@ -27,6 +27,12 @@ public class Storage {
 
     private static String DATE_FORMAT = "dd MMM yyyy";
 
+    private static int MARK_INDEX = 11;
+
+    private static int TYPE_INDEX = 7;
+
+    private static int DESC_INDEX = 14;
+
     public Storage() {
         try {
             currRelativeFilePath = new File(".").getCanonicalPath();
@@ -42,10 +48,12 @@ public class Storage {
         try {
             List<String> lines = Files.readAllLines(filePath);
             for (String line : lines) {
-                char type = line.charAt(1);
+                char type = line.charAt(TYPE_INDEX);
+                int hashtagIndex = line.indexOf('#');
+                int numAsterisks = line.length() - line.replace("*", "").length();
                 Task task = null;
                 if (type == 'T') {
-                    String desc = line.substring(7);
+                    String desc = line.substring(DESC_INDEX, hashtagIndex - 1);
                     task = new Todo(desc);
                 } else if (type == 'D') {
                     task = getDeadlineToLoad(line);
@@ -53,9 +61,32 @@ public class Storage {
                 } else if (type == 'E') {
                     task = getEventToLoad(line);
                 }
-                if (line.charAt(4) == 'X') {
+                // set priority of task
+                if (numAsterisks == 3) {
+                    task.setPriority("high");
+                } else if (numAsterisks == 2) {
+                    task.setPriority("medium");
+                } else if (numAsterisks == 1) {
+                    task.setPriority("low");
+                } else {
+                    task.setPriority("");
+                }
+
+                // mark task
+                if (line.charAt(MARK_INDEX) == 'X') {
                     task.mark();
                 }
+
+                // set tags
+                if (hashtagIndex != -1) {
+                    String[] tags = line.substring(hashtagIndex).split(" ");
+                    List<String> tagsArr = new ArrayList<>();
+                    for (int i = 0; i < tags.length; i++) {
+                        tagsArr.add(tags[i].substring(1));
+                    }
+                    task.setAllTags(tagsArr);
+                }
+
                 list.add(task);
             }
         } catch (IOException e) {
@@ -66,7 +97,8 @@ public class Storage {
     }
 
     public Task getDeadlineToLoad(String line) {
-        String sub = line.substring(7);
+        int hashtagIndex = line.indexOf('#');
+        String sub = line.substring(DESC_INDEX, hashtagIndex - 1);
         int openBraceIndex = sub.indexOf('(');
         int closeBraceIndex = sub.indexOf(')');
         String date = sub.substring(openBraceIndex + 5, closeBraceIndex);
@@ -76,7 +108,8 @@ public class Storage {
     }
 
     public Task getEventToLoad(String line) {
-        String sub = line.substring(7);
+        int hashtagIndex = line.indexOf('#');
+        String sub = line.substring(DESC_INDEX, hashtagIndex - 1);
         String[] segments = sub.split("from: ", 2);
         String desc = segments[0].substring(0, segments[0].length() - 2);
         String[] dateTime = segments[1].split(" to: ", 2);

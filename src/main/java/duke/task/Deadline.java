@@ -25,6 +25,8 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.by.format(FORMATTER) + ")";
+        String priority = this.getPrioritySign();
+        return priority + " [D]" + super.toString() + " (by: " + this.by.format(FORMATTER) + ") " +
+                this.tagsToString();
     }
 }

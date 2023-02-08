@@ -9,6 +9,7 @@ import javafx.application.Application;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -31,8 +32,8 @@ public class DukeApp extends Application {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
     private String WELCOME_MSG = "Hello from Duke!\nWhat can I do for you?";
-    private String FONT_NAME = "Arial";
-    private int FONT_SIZE = 12;
+    private String FONT_NAME = "Liberation Mono";
+    private int FONT_SIZE = 14;
 
 
     @Override
@@ -45,8 +46,8 @@ public class DukeApp extends Application {
 
         userInput = new TextField();
         sendButton = new Button("Send");
-        userInput.setFont(new Font(FONT_NAME, FONT_SIZE));
-        sendButton.setFont(new Font(FONT_NAME, FONT_SIZE));
+        userInput.setFont(Font.font("Courier New", FontWeight.SEMI_BOLD, 14));
+        sendButton.setFont(Font.font("Courier New", FontWeight.SEMI_BOLD, 14));
 
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);

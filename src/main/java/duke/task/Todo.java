@@ -16,7 +16,8 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        String priority = this.getPrioritySign();
+        return priority + " [T]" + super.toString() + " " + this.tagsToString();
     }
 
 }

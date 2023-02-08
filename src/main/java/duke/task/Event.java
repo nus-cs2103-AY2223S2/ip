@@ -28,7 +28,9 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString()
-                + " (from: " + start.format(FORMATTER) + " to: " + end.format(FORMATTER) + ")";
+        String priority = this.getPrioritySign();
+        return priority + " [E]" + super.toString()
+                + " (from: " + start.format(FORMATTER) + " to: " + end.format(FORMATTER) + ") "
+                    + this.tagsToString();
     }
 }

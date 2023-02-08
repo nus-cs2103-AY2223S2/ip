@@ -30,6 +30,7 @@ public class TodoCommand extends Command {
     @Override
     public String execute(TaskList taskList, Storage storage, TextUi ui) {
         Task t = new Todo(desc);
+        System.out.println(t.getPrioritySign());
         taskList.addTask(t);
         storage.save(taskList);
         return ui.printTaskAdded(t, taskList);

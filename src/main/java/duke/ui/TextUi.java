@@ -4,6 +4,7 @@ import duke.Duke;
 import duke.task.Task;
 import duke.task.TaskList;
 
+import java.util.Locale;
 import java.util.Scanner;
 
 public class TextUi {
@@ -67,6 +68,22 @@ public class TextUi {
                 + t.toString() + NEXT_RESPONSE);
     }
 
+    public String printPrioritizedTask(Task t, TaskList tasks) {
+        String priority = t.getPriority();
+        System.out.println("Okay, I've marked this task as " + priority.toLowerCase() +
+                " priority:");
+        System.out.println("    " + t + NEXT_RESPONSE);
+        return ("Okay, I've marked this task as " + priority.toLowerCase() +
+                " priority:\n" + "    " + t + NEXT_RESPONSE);
+    }
+
+    public String printTaggedTask(Task t, TaskList tasks) {
+        String tagName = t.getLatestTag();
+        System.out.println("Great, I've tagged this task as #" + tagName + ":");
+        System.out.println("    " + t + NEXT_RESPONSE);
+        return ("Great, I've tagged this task as #" + tagName + ":\n" + "    " + t + NEXT_RESPONSE);
+    }
+
     public String printSearched(String keyword, TaskList matched) {
         System.out.println("Here are the matching tasks in your list:");
         System.out.println(matched + NEXT_RESPONSE);
@@ -74,8 +91,14 @@ public class TextUi {
     }
 
     public String printTaskList(TaskList tasks) {
-        System.out.println(tasks + NEXT_RESPONSE);
-        return (tasks + NEXT_RESPONSE);
+        if (tasks.getNumTasks() == 0) {
+            String str = "You have no tasks in your list!";
+            System.out.println(str);
+            return str;
+        } else {
+            System.out.println(tasks + NEXT_RESPONSE);
+            return (tasks.toString() + NEXT_RESPONSE);
+        }
     }
 
     public String printNext() {
@@ -94,4 +117,5 @@ public class TextUi {
         String input = in.nextLine();
         return input;
     }
+
 }

@@ -1,16 +1,6 @@
 package duke.parser;
 
-import duke.commands.Command;
-import duke.commands.DeadlineCommand;
-import duke.commands.DeleteCommand;
-import duke.commands.InvalidCommand;
-import duke.commands.MarkCommand;
-import duke.commands.ListCommand;
-import duke.commands.UnmarkCommand;
-import duke.commands.EventCommand;
-import duke.commands.TodoCommand;
-import duke.commands.ExitCommand;
-import duke.commands.FindCommand;
+import duke.commands.*;
 import duke.exception.DukeException;
 
 import java.time.LocalDate;
@@ -67,6 +57,12 @@ public class Parser {
         case FindCommand.COMMAND_WORD:
             return prepareFind(arguments);
 
+        case PrioritizeCommand.COMMAND_WORD:
+            return preparePrioritize(arguments);
+
+        case TagCommand.COMMAND_WORD:
+            return prepareTag(arguments);
+
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
@@ -75,8 +71,40 @@ public class Parser {
         }
     }
 
+    private static Command preparePrioritize(String args) {
+        try {
+            String[] taskNumPriority = args.substring(1).split("\\s+");
+            final int targetIndex = parseArgsAsDisplayedIndex(taskNumPriority[0]);
+            final String priority = taskNumPriority[1];
+            if (priority.equals("high") || priority.equals("medium") || priority.equals("low")) {
+                return new PrioritizeCommand(targetIndex, priority);
+            } else {
+                return new InvalidCommand();
+            }
+        } catch (DukeException e) {
+            return new InvalidCommand(e.getMessage());
+        } catch (StringIndexOutOfBoundsException e) {
+            return new InvalidCommand("Please specify the task number and level u would like me to " +
+                    "prioritize it!");
+        }
+    }
+
+    private static Command prepareTag(String args) {
+        try {
+            String[] taskNumTagName = args.substring(1).split("\\s+");
+            final int targetIndex = parseArgsAsDisplayedIndex(taskNumTagName[0]);
+            final String tagName = taskNumTagName[1];
+            return new TagCommand(targetIndex, tagName);
+        } catch (DukeException e) {
+            return new InvalidCommand(e.getMessage());
+        } catch (StringIndexOutOfBoundsException e) {
+            return new InvalidCommand("Please specify the task number and level u would like me to " +
+                    "tag!");
+        }
+    }
 
     private static Command prepareDelete(String args) {
+        System.out.println(args);
         try {
             final int targetIndex = parseArgsAsDisplayedIndex(args);
             return new DeleteCommand(targetIndex);

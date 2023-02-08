@@ -8,6 +8,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 
 
 public class DialogBox extends HBox {
@@ -22,7 +24,7 @@ public class DialogBox extends HBox {
         text.setWrapText(true);
         displayPicture.setFitWidth(100.0);
         displayPicture.setFitHeight(100.0);
-        text.setFont(new Font("Arial", 12));
+        text.setFont(Font.font("Courier New", FontWeight.SEMI_BOLD, 14));
         this.setAlignment(Pos.TOP_RIGHT);
         this.getChildren().addAll(text, displayPicture);
     }
