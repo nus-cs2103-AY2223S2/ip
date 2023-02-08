@@ -46,4 +46,17 @@ public class TaskList {
         }
         return listString;
     }
+
+    public String getMatchingTasks(String searchStr) {
+        String listString = "";
+        for (int i = 0; i < taskList.size(); i++) {
+            Task oneTask = taskList.get(i);
+            if (oneTask.getDescription().contains(searchStr)) {
+                // Index maintained for easy reference for user
+                listString += "\n" + (i + 1) + ". " + oneTask.toString();
+            }
+        }
+        return listString;
+    }
+
 }

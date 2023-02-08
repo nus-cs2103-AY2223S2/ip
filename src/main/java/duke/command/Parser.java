@@ -109,4 +109,10 @@ public class Parser {
         return taskNum;
     }
 
+    public static String parseSearch(String[] input) throws DukeException {
+        if (input.length == 1 || input[1].isEmpty()) {
+            throw new DukeException("You didn't say what you're looking for.");
+        }
+        return input[1];
+    }
 }

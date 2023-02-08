@@ -62,6 +62,9 @@ public class Duke {
                 case EVENT:
                     addEvent(splitInput);
                     break;
+                case FIND:
+                    findTask(splitInput);
+                    break;
                 default:
                     throw new DukeException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 } //end of switch-case
@@ -117,6 +120,13 @@ public class Duke {
     private void listTask() {
         String message = "Here are the tasks in your list:";
         message += tasks.getTaskList();
+        ui.dukeSpeak(message);
+    }
+
+    private void findTask(String[] input) throws DukeException {
+        String searchString = Parser.parseSearch(input);
+        String message = "Here are the matching tasks in your list:";
+        message += tasks.getMatchingTasks(searchString);
         ui.dukeSpeak(message);
     }
 
