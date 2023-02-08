@@ -38,7 +38,7 @@ public class Parser {
         for (Command c : Command.values()) {
             if (c.matches(input)) {
                 this.command = c;
-                this.text = c.getText(input);
+                this.text = c.extractText(input);
                 matchFound = true;
                 break;
             }

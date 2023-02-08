@@ -100,12 +100,12 @@ public enum Command {
      *
      * @param str The command keyword.
      * @param bools (Optional) Whether more text after the keyword is expected, and
-     *        whetrher the file needs to be saved after the command is run.
+     *        whether the file needs to be saved after the command is run.
      */
     Command(String str, boolean ... bools) {
         this.str = str;
-        this.hasText = bools.length >= 1 && bools[0];
-        this.needSave = bools.length >= 2 && bools[1];
+        this.hasText = (bools.length >= 1) ? bools[0] : false;
+        this.needSave = (bools.length >= 2) ? bools[1] : false;
     }
 
     /**
@@ -148,7 +148,7 @@ public enum Command {
      * @param input The full input.
      * @return The 'body' of the input.
      */
-    String getText(String input) {
+    String extractText(String input) {
         if (this.hasText) {
             return input.substring(getLen()).trim();
         }
