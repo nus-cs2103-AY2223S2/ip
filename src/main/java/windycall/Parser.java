@@ -109,6 +109,7 @@ public class Parser {
      * @return formatted LocalDate
      */
     public static LocalDate processDate(String deadline) {
+
         deadline = deadline.trim();
         LocalDate dateTime;
         try {
