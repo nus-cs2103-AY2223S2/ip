@@ -23,24 +23,6 @@ public class Peppa {
         storage.loadData(tasks, screen);
     }
 
-    public void run() {
-        screen.greetUser();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = screen.readCommand();
-                Command c = Parser.parseCommand(fullCommand);
-                assert (c != null);
-                System.out.println(c.execute(tasks, screen, storage));
-                isExit = c.isExit();
-            } catch (PeppaException e) {
-                Ui.displayMessage(e.getMessage());
-            } finally {
-                screen.insertDivider();
-            }
-        }
-    }
-
     public String getResponse(String input) {
         try {
             Command c = Parser.parseCommand(input);
@@ -49,9 +31,5 @@ public class Peppa {
         } catch (PeppaException e) {
             return e.getMessage();
         }
-    }
-
-    public static void main(String[] args) {
-        new Peppa(FILE_PATH).run();
     }
 }
