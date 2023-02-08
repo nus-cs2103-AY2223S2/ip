@@ -1,10 +1,11 @@
 package roody;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 import javafx.application.Application;
+import roody.exceptions.RoodyException;
+import roody.exceptions.TaskNotFoundException;
 import roody.gui.RoodyMain;
 
 /**
@@ -35,7 +36,7 @@ public class Roody {
     // toggles completion status of tasks
     private Task toggleTask(int index, boolean complete) throws RoodyException {
         if (index > list.size() - 1 || list.get(index) == null) {
-            throw new RoodyException("Sorry, that task doesn't exist");
+            throw new TaskNotFoundException();
         }
         Task task = list.get(index);
         if (complete) {
@@ -65,7 +66,7 @@ public class Roody {
 
     private Task deleteTask(int index) throws RoodyException {
         if (index > list.size() - 1 || list.get(index) == null) {
-            throw new RoodyException("Sorry, that task doesn't exist");
+            throw new TaskNotFoundException();
         } else {
             Task task = list.get(index);
             list.remove(index);
@@ -73,33 +74,16 @@ public class Roody {
         }
     }
 
-    private Task makeTodo(String[] commands) throws RoodyException {
-        if (commands.length < 2) {
-            throw new RoodyException("Tasks require a description");
-        }
+    private Task makeTodo(String[] commands) {
         return new Todo(commands[1]);
     }
 
-    private Task makeDeadline(String[] commands) throws RoodyException {
-        if (commands.length < 2) {
-            throw new RoodyException("Tasks require a description");
-        }
-        try {
-            return new Deadline(commands[1], LocalDate.parse(commands[2]));
-        } catch (DateTimeParseException e) {
-            throw new RoodyException("Accepted date format is yyyy-mm-dd.");
-        }
+    private Task makeDeadline(String[] commands) {
+        return new Deadline(commands[1], LocalDate.parse(commands[2]));
     }
 
-    private Task makeEvent(String[] commands) throws RoodyException {
-        if (commands.length < 2) {
-            throw new RoodyException("Tasks require a description");
-        }
-        try {
-            return new Event(commands[1], LocalDate.parse(commands[2]), LocalDate.parse(commands[3]));
-        } catch (DateTimeParseException e) {
-            throw new RoodyException("Accepted date format is yyyy-mm-dd.");
-        }
+    private Task makeEvent(String[] commands) {
+        return new Event(commands[1], LocalDate.parse(commands[2]), LocalDate.parse(commands[3]));
     }
 
     public String getResponse(String input) {
@@ -131,27 +115,15 @@ public class Roody {
                 message += ui.showAddTask(task, list.size());
                 break;
             case "delete":
-                if (commands.length != 2) {
-                    throw new RoodyException("Please enter an index number"
-                            + " - \"{command} {index}\"");
-                }
-                task = deleteTask(Integer.parseInt(commands[0]) - 1);
+                task = deleteTask(Integer.parseInt(commands[1]) - 1);
                 message += ui.showDeleteTask(task, list.size());
                 break;
             case "mark":
             case "unmark":
-                if (commands.length != 2) {
-                    throw new RoodyException("Please enter an index number"
-                            + " - \"{command} {index}\"");
-                }
                 task = toggleTask(Integer.parseInt(commands[1]) - 1, commands[0].equals("mark"));
                 message += ui.showMarkStatus(commands[0].equals("mark"), task);
                 break;
             case "find":
-                if (commands.length != 2) {
-                    throw new RoodyException("Please enter a keyword to be searched"
-                            + " - \"find {keyword}\"");
-                }
                 message += ui.showFoundTasks(findTaskByKeyword(commands[1]));
                 break;
             case "bye":
@@ -159,7 +131,7 @@ public class Roody {
                 message += ui.bye();
                 break;
             default:
-                throw new RoodyException("I don't quite understand that.");
+                // no default here since parser has checked for only correct input
             }
         } catch (RoodyException e) {
             ui.showLine();

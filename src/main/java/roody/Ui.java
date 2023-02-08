@@ -2,6 +2,8 @@ package roody;
 
 import java.util.ArrayList;
 
+import roody.exceptions.RoodyException;
+
 /**
  * Represents a User Interface.
  */

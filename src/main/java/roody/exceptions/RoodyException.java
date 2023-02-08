@@ -1,4 +1,4 @@
-package roody;
+package roody.exceptions;
 
 /**
  * Represents a custom exception for Roody chatbot.
