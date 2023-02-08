@@ -57,6 +57,15 @@ class Events extends Task {
         this.from = from;
         this.to = to;
     }
+
+    String getFrom() {
+        return this.from;
+    }
+
+    String getTo() {
+        return this.to;
+    }
+
     /**
      * Process the user's from and to date as a LocalDate into String if the
      * user keys in a valid format for LocalDate to process (MMM dd YYYY) in

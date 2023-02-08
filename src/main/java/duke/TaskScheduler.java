@@ -7,7 +7,7 @@ import java.util.concurrent.PriorityBlockingQueue;
 
 
 //Bealdung
-public class TaskScheduler {
+public class TaskScheduler extends TaskList<Recur> {
 
     private PriorityBlockingQueue<Recur> priorityQueue;
 

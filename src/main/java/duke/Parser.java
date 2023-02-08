@@ -1,8 +1,10 @@
 package duke;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.PriorityBlockingQueue;
 
 /**
  * The Parser class stores all responses that Duke will display on the
@@ -33,6 +35,7 @@ class Parser {
     static String EVENT = "event";
     static String DELETE = "delete";
     static String FIND = "find";
+    static String RECUR = "recur";
     //List starts numbering from 1 not from 0
     static int DECREMENT = 1;
     //Symbols to display the state of the task to the user beside the type of Task
@@ -282,6 +285,25 @@ class Parser {
          System.out.println(FIND_COMMAND);
          tasks.listFindTasks(sc.nextLine(), tasks);
          return tasks;
+    }
+
+    static TaskList<Task> addRecur(Scanner sc, TaskScheduler recurList, TaskList<Task> tasks) {
+        String description = sc.nextLine();
+        if (description.trim().length() == 0) {
+            throw new DukeException("Event must not be empty");
+        }
+        String[] dateRange = description.split("/from");
+        String actualDescription = dateRange[0];
+        String startTime = dateRange[1].split("/to")[0];
+        String endTime = dateRange[1].split("/to")[1].split("/repeat")[0];
+        String repeatString = dateRange[1].split("/to")[1].split("/repeat")[1];
+        repeatString = repeatString.substring(1,repeatString.length() -1);
+        Integer repeat = Integer.parseInt(repeatString);
+        Recur newTask = new Recur(actualDescription, startTime, endTime, repeat);
+        System.out.println("recur task " + newTask.toString());
+        recurList.addRecurringEvent(newTask);
+        return tasks.add(new Events(actualDescription, startTime, endTime));
+        //return recurList;
     }
 
     /*

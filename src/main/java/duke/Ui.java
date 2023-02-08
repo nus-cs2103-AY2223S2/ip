@@ -1,6 +1,9 @@
 package duke;
 
+import java.util.Comparator;
 import java.util.Scanner;
+import java.util.concurrent.PriorityBlockingQueue;
+
 /**
  * Ui is a class to handle the intial greetings, final greetings, and all
  * the deciphering of the user's input. Ui invokes the appropriate classes
@@ -14,6 +17,7 @@ class Ui {
     private Scanner scanner;
     private String description;
     private TaskList<Task> tasks;
+    private final TaskScheduler recurList = new TaskScheduler(1, new PriorityBlockingQueue<>(100, Comparator.comparing(Recur::getMockRemainingTime)));;
     /**
      * Default constructor instantiates the scanner to read from the user
      * machine's keyboard
@@ -68,6 +72,9 @@ class Ui {
             this.tasks = Parser.delete(scanner, tasks);
         } else if (description.equals(Parser.FIND)) {
             this.tasks = Parser.find(scanner, tasks);
+        } else if (description.equals(Parser.RECUR)) {
+            System.out.println("recur");
+            this.tasks = Parser.addRecur(scanner, recurList, tasks);
         } else {
             dukeExceptionWarning(description, tasks);
         }
