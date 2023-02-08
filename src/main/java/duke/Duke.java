@@ -29,32 +29,17 @@ public class Duke {
     /**
      * The Main method that starts Duke.
      * Upon boot, TaskList is loaded form save file.
-     * Outputs "Nothing to Load" if save file does not exist.
-     * @param args The command line arguments. Currently, no arguments accepted.
-     * @throws InvalidCommandException Occurs when user enters an InvalidCommand.
-     * @throws IOException Runtime Exception due to issues with standadrd input and/or standard output.
-     * @throws ClassNotFoundException Occurs when Task class is not loaded by Java.
      */
-    public static void main(String[] args)
-            throws InvalidCommandException, IOException, ClassNotFoundException {
+    public Duke() {
         duke.init();
-        try {
-            taskList.loadFrom(storage.load());
-        } catch (FileNotFoundException p) {
-            // save file has not been created.
-            dukeIo.echoMessage("Nothing to load");
-        } catch (EOFException e) {
-            // save file is corrupted or does not work
-            dukeIo.echoMessage("Unable to load from save file.");
-        }
-        runCommands();
+        taskList.loadFrom(storage.load());
     }
 
     /**
      * Restricted method that accepts user inputs until the application is quit.
      * Saves TaskList to a .txt file upon quit.
      * @throws InvalidCommandException Occurs when user enters an unrecognised command.
-     */
+
     private static void runCommands() throws InvalidCommandException {
         boolean isBye = false;
         dukeIo.showPrompt();
@@ -66,7 +51,8 @@ public class Duke {
             }
         }
     }
-
+    */
+    
     /**
      * Returns true if "bye" command is entered.
      * @param tokens tokens entered into the Command Line Interface
@@ -74,17 +60,16 @@ public class Duke {
      * @return true if user inputs "bye"
      * @throws InvalidCommandException
      */
-    private static boolean handle(String[] tokens, TaskList taskList) throws InvalidCommandException {
+    private static String handle(String[] tokens, TaskList taskList) throws InvalidCommandException {
         String cmd = tokens[0];
-        // Allows user to press "Enter" continuously
-        if (cmd.length() == 0) {
-            return false;
-        } else if (cmd.equals("bye")) {
-            duke.quit();
-            return true;
-        } else {
-            duke.exec(tokens, taskList);
+        if (cmd.equals("bye")) {
+            return duke.quit();
         }
-        return false;
+        return duke.exec(tokens, taskList);
+    }
+
+    public String getResponse(String input) throws InvalidCommandException {
+        String[] tokens = input.split(" "); 
+        return handle(tokens, taskList);
     }
 }
