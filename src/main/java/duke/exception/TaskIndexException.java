@@ -1,7 +1,8 @@
 package duke.exception;
 
-public class TaskIndexException extends DukeException {
+public class TaskIndexException extends CommandException {
     private int max;
+    private String string = "Sorry! Index is out of bounds...";
     public TaskIndexException() {
     }
 
@@ -9,28 +10,18 @@ public class TaskIndexException extends DukeException {
         this.max = max;
     }
 
-    public TaskIndexException(String message) {
-        super(message);
-    }
-
-    public TaskIndexException(String message, Throwable cause) {
-        super(message, cause);
-    }
-
-    public TaskIndexException(Throwable cause) {
-        super(cause);
-    }
-
-    public TaskIndexException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-        super(message, cause, enableSuppression, writableStackTrace);
-    }
-
     @Override
     public String toString() {
-        String result = "Sorry! Index is out of bounds...";
+        String result = this.string;
         if (this.max != 0) {
             result += "\nMaximum value: " + this.max;
         }
         return result;
+    }
+
+    @Override
+    public void printStackTrace() {
+        this.string = this.toString();
+        System.out.println(this.string);
     }
 }

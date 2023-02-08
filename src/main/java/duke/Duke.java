@@ -5,7 +5,6 @@ import duke.exception.CommandException;
 import duke.exception.DukeException;
 import duke.task.TaskList;
 
-import java.io.IOException;
 
 /**
  * Main class for Duke chatbot
@@ -55,7 +54,7 @@ public class Duke {
             } catch (CommandException commandException) {
                 ui.showCommandError(input, commandException);
             } catch (DukeException dukeException) {
-                System.out.println(dukeException);
+                dukeException.printStackTrace();
             } finally {
                 ui.showLine();
             }
@@ -66,8 +65,8 @@ public class Duke {
         if (this.tasks == null) {
             try {
                 tasks = new TaskList(storage.load());
-            } catch (DukeException | IOException exception) {
-                System.out.println(exception.toString());
+            } catch (DukeException dukeException) {
+                dukeException.printStackTrace();
             }
         }
         try {
