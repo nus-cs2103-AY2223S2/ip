@@ -1,9 +1,9 @@
 package duke;
 
-import duke.task.Task;
 import duke.task.Event;
-import duke.task.Todo;
 import duke.task.Deadline;
+import duke.task.Task;
+import duke.task.Todo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -13,6 +13,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
+
+/**
+ * Store the changes made to the task list to a file
+ */
 public class Storage {
     private final String STORAGE_PATH;
 
@@ -53,59 +57,59 @@ public class Storage {
 
     public ArrayList<Task> readFile(File file) throws FileNotFoundException {
         ArrayList<Task> tasksList = new ArrayList<>();
-        Scanner sc =new Scanner(file);
+        Scanner sc = new Scanner(file);
         while (sc.hasNext()) {
             String nextLine = sc.nextLine();
             String[] actionArray = nextLine.split("]");
             String[] actionNextArray = actionArray[1].split(":");
             String action = actionNextArray[0].strip();
             switch(action) {
-                case "Todo": {
-                    String[] taskArray = nextLine.split(":");
-                    String task = taskArray[1].strip();
-                    Task savedTask = new Todo(task);
-                    if (nextLine.substring(1, 2).equals("X")) {
-                        savedTask.check();
-                    }
-                    tasksList.add(savedTask);
-                    break;
+            case "Todo": {
+                String[] taskArray = nextLine.split(":");
+                String task = taskArray[1].strip();
+                Task savedTask = new Todo(task);
+                if (nextLine.substring(1, 2).equals("X")) {
+                    savedTask.check();
                 }
-                case "Deadline": {
-                    String[] frontTaskArray = nextLine.split(":");
-                    String[] backTaskArray = frontTaskArray[1].split("\\[");
-                    String task = backTaskArray[0].strip();
-                    String[] frontByArray = nextLine.split("\\[");
-                    String[] backByArray = frontByArray[1].split("]");
-                    String by = backByArray[0].strip();
-                    LocalDate storageBy = LocalDate.parse(by, DateTimeFormatter.ofPattern("MMM dd yyyy"));
-                    String outputBy = storageBy.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-                    Task savedTask = new Deadline(task, outputBy);
-                    if (nextLine.substring(1, 2).equals("X")) {
-                        savedTask.check();
-                    }
-                    tasksList.add(savedTask);
-                    break;
+                tasksList.add(savedTask);
+                break;
+            }
+            case "Deadline": {
+                String[] frontTaskArray = nextLine.split(":");
+                String[] backTaskArray = frontTaskArray[1].split("\\[");
+                String task = backTaskArray[0].strip();
+                String[] frontByArray = nextLine.split("\\[");
+                String[] backByArray = frontByArray[1].split("]");
+                String by = backByArray[0].strip();
+                LocalDate storageBy = LocalDate.parse(by, DateTimeFormatter.ofPattern("MMM dd yyyy"));
+                String outputBy = storageBy.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                Task savedTask = new Deadline(task, outputBy);
+                if (nextLine.substring(1, 2).equals("X")) {
+                    savedTask.check();
                 }
-                case "Event": {
-                    String[] frontTaskArray = nextLine.split(":");
-                    String[] backTaskArray = frontTaskArray[1].split("\\[");
-                    String task = backTaskArray[0].strip();
-                    String[] frontFromArray = nextLine.substring(3).split("\\[");
-                    String[] backFromArray = frontFromArray[1].split("-");
-                    String from = backFromArray[0].strip();
-                    String[] frontToArray = nextLine.split("-");
-                    String[] backToArray = frontToArray[1].split("]");
-                    String to = backToArray[0].strip();
-                    LocalDate storageFrom = LocalDate.parse(from, DateTimeFormatter.ofPattern("MMM dd yyyy"));
-                    String outputFrom = storageFrom.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-                    LocalDate storageTo = LocalDate.parse(to, DateTimeFormatter.ofPattern("MMM dd yyyy"));
-                    String outputTo = storageTo.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-                    Task savedTask = new Event(task, outputFrom, outputTo);
-                    if (nextLine.substring(1, 2).equals("X")) {
-                        savedTask.check();
-                    }
-                    tasksList.add(savedTask);
-                    break;
+                tasksList.add(savedTask);
+                break;
+            }
+            case "Event": {
+                String[] frontTaskArray = nextLine.split(":");
+                String[] backTaskArray = frontTaskArray[1].split("\\[");
+                String task = backTaskArray[0].strip();
+                String[] frontFromArray = nextLine.substring(3).split("\\[");
+                String[] backFromArray = frontFromArray[1].split("-");
+                String from = backFromArray[0].strip();
+                String[] frontToArray = nextLine.split("-");
+                String[] backToArray = frontToArray[1].split("]");
+                String to = backToArray[0].strip();
+                LocalDate storageFrom = LocalDate.parse(from, DateTimeFormatter.ofPattern("MMM dd yyyy"));
+                String outputFrom = storageFrom.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                LocalDate storageTo = LocalDate.parse(to, DateTimeFormatter.ofPattern("MMM dd yyyy"));
+                String outputTo = storageTo.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                Task savedTask = new Event(task, outputFrom, outputTo);
+                if (nextLine.substring(1, 2).equals("X")) {
+                    savedTask.check();
+                }
+                tasksList.add(savedTask);
+                break;
                 }
             }
         }

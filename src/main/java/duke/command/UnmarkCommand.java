@@ -6,6 +6,10 @@ import duke.TaskList;
 import duke.TextUi;
 import duke.task.Task;
 
+/**
+ * Marks a task as undone upon execution
+ */
+
 public class UnmarkCommand extends Command {
     private final int TASK_NUM;
 

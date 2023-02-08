@@ -5,6 +5,10 @@ import duke.TaskList;
 import duke.TextUi;
 import duke.task.Task;
 
+/**
+ * Finds task(s) that matches the given input keyword upon execution
+ */
+
 public class FindCommand extends Command {
     private final String DETAILS;
 
