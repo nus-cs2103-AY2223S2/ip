@@ -189,20 +189,15 @@ public class TaskList {
      * @return matching tasks from list or failure message
      */
     public String find(String search) {
-        String result = "Here are the matching tasks in your list:\n";
-        int numOfResultsFound = 0;
-        for (int i = 0; i < size(); i++) {
-            Task taskMatch = tasks.get(i);
-            if (taskMatch.toString().contains(search)) {
-                result += String.format("%d. %s\n", ++numOfResultsFound,
-                        taskMatch);
-            }
+        String filteredTasks = tasks.stream().filter(x -> x.toString().trim().contains(search))
+                .map(x -> x.toString() + "\n")
+                .reduce("", (a, b) -> a + b);
+        if (filteredTasks.isEmpty()) {
+            String failedSearchMessage = "Sorry I found no matching tasks.";
+            return failedSearchMessage;
         }
-        if (numOfResultsFound == 0) {
-            result = "Sorry, there are no matching tasks in your list.\n";
-        }
-
-        return result;
+        String searchResultHeader = "Here are the matching tasks in your list:\n";
+        return searchResultHeader + filteredTasks;
     }
 
 }
