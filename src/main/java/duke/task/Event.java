@@ -2,6 +2,7 @@ package duke.task;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Objects;
 
 /**
  * A subclass of Task that represents
@@ -25,6 +26,7 @@ public class Event extends Task {
      */
     public Event(String description, String startTime, String endTime) {
         super(description);
+        assert !description.equals("");
         this.startTime = startTime;
         this.endTime = endTime;
         this.wordsInDescription.addAll(Arrays.asList(description.split(" ")));

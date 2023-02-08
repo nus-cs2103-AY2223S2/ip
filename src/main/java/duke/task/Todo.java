@@ -2,6 +2,7 @@ package duke.task;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Objects;
 
 /**
  * A subclass of Task that represents
@@ -20,6 +21,7 @@ public class Todo extends Task {
      */
     public Todo(String description) {
         super(description);
+        assert !description.equals("");
         this.wordsInDescription.addAll(Arrays.asList(description.split(" ")));
     }
 
