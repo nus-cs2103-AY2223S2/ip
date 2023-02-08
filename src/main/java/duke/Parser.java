@@ -1,3 +1,5 @@
+package duke;
+
 public class Parser {
     public boolean checkEnd(String command) {
         if (command.equalsIgnoreCase("bye")) {

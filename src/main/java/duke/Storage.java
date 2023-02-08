@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -10,16 +12,16 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Storage {
-    private String filename;
+    private String filePath;
 
-    public Storage(String filename) {
-        this.filename = filename;
+    public Storage(String filePath) {
+        this.filePath = filePath;
     }
 
     public ArrayList<Task> readFromFile() throws IOException {
         ArrayList<Task> taskList = new ArrayList<>();
         try {
-            File f = new File(this.filename);
+            File f = new File(this.filePath);
             Scanner s = new Scanner(f);
             while (s.hasNext()) {
                 String task = s.nextLine();
@@ -57,8 +59,8 @@ public class Storage {
             s.close();
         } catch (FileNotFoundException e) {
             try {
-                Files.createDirectories(Paths.get(filename));
-                File file = new File(filename);
+                Files.createDirectories(Paths.get(filePath));
+                File file = new File(filePath);
             } catch (IOException exception) {
                 System.out.println("Error: " + exception.getMessage());
             }
@@ -68,7 +70,7 @@ public class Storage {
 
     public void writeToFile(TaskList taskList) {
         try {
-            FileWriter file = new FileWriter(this.filename);
+            FileWriter file = new FileWriter(this.filePath);
             for (int i = 0; i < taskList.getSize(); i++) {
                 file.write(taskList.getTask(i) + System.lineSeparator());
             }

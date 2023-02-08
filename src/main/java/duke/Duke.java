@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.IOException;
 
 public class Duke {
@@ -33,7 +35,7 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) throws DukeException {
-        new Duke("data/duke.txt").run();
+    public static void main(String[] args) {
+        new Duke("./data/duke.txt").run();
     }
 }
