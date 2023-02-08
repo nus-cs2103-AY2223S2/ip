@@ -38,7 +38,7 @@ public abstract class Task implements Storable {
      *
      * @return Description of task.
      */
-    String getDescription() {
+    public String getDescription() {
         return description;
     }
 

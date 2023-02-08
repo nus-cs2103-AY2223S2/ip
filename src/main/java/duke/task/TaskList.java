@@ -63,20 +63,8 @@ public class TaskList {
         return sb.toString();
     }
 
-    /**
-     * Returns a list of Task in this TaskList which Task description contains the specified search words.
-     *
-     * @param searchStr String of words to search for in the Task description.
-     * @return List of matching Tasks.
-     */
-    public ArrayList<Task> search(String searchStr) {
-        ArrayList<Task> results = new ArrayList<>();
-        for (Task t : tasks) {
-            if (t.getDescription().contains(searchStr)) {
-                results.add(t);
-            }
-        }
-        return results;
+    public boolean isValidIndex(int idx) {
+        return idx >= 0 && idx < tasks.size();
     }
 
     /**

@@ -1,6 +1,10 @@
 package duke.gui;
 
 import duke.Duke;
+import duke.DukeException;
+import duke.command.Command;
+import duke.command.Command.ReturnCode;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -45,9 +49,14 @@ public class MainWindow extends AnchorPane {
 
     @FXML
     private void handleUserInput() {
+        ReturnCode code = null;
         String input = userInput.getText();
 
-        duke.executeCommand(input);
+        try {
+            code = Command.parseCommand(input).execute(duke);
+        } catch (DukeException e) {
+            duke.ui.warn(e.getMessage());
+        }
         String response = duke.ui.getRecentMessages();
 
         dialogContainer.getChildren().addAll(
@@ -56,5 +65,9 @@ public class MainWindow extends AnchorPane {
         );
 
         userInput.clear();
+
+        if (code == ReturnCode.EXIT) {
+            Platform.exit();
+        }
     }
 }
