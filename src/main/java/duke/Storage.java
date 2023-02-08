@@ -1,9 +1,15 @@
 package duke;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
 /** Handles the storage and retrieval of tasks. */
 public class Storage {
-    TaskList taskList;
+    private TaskList taskList;
     /** Creates storage object. */
     public Storage(TaskList taskList) {
         this.taskList = taskList;

@@ -3,7 +3,7 @@ package duke;
 /**
  * Represents an event object with a "from date" and a "to date".
  */
-public class Event extends Task{
+public class Event extends Task {
     private String from;
     private String to;
 

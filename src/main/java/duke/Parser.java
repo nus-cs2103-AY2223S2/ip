@@ -1,8 +1,8 @@
 package duke;
 
-import java.util.Arrays;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 /** Parser to parse the commands by the user */
 public class Parser {
     private String[] parseTodo(String command) throws ZeroLengthDescriptionException {
@@ -74,20 +74,20 @@ public class Parser {
         String[] splitCommand = command.split(" ");
         String[] parsedCommand;
         switch (splitCommand[0]) {
-            case "todo":
-                parsedCommand = parseTodo(command);
-                break;
-            case "deadline":
-                parsedCommand = parseDeadline(command);
-                break;
-            case "event":
-                parsedCommand = parseEvent(command);
-                break;
-            case "find":
-                parsedCommand = parseFind(command);
-                break;
-            default:
-                return splitCommand;
+        case "todo":
+            parsedCommand = parseTodo(command);
+            break;
+        case "deadline":
+            parsedCommand = parseDeadline(command);
+            break;
+        case "event":
+            parsedCommand = parseEvent(command);
+            break;
+        case "find":
+            parsedCommand = parseFind(command);
+            break;
+        default:
+            return splitCommand;
         }
         return parsedCommand;
     }

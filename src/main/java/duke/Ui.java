@@ -1,7 +1,7 @@
 package duke;
 /** Handles the interface to interact with the user */
 public class Ui {
-    /**Prints DUKE to console to welcome user. */
+    /** Prints DUKE to console to welcome user. */
     public void greet() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -23,8 +23,8 @@ public class Ui {
     public String formatAddTaskReply(TaskList taskList, Task task) {
         String formattedReply;
         formattedReply = String.format(
-                "Got it. I've added this task:\n\t%s\n" +
-                        "Now you have %d task(s) in the list.",
+                "Got it. I've added this task:\n\t%s\n"
+                        + "Now you have %d task(s) in the list.",
                 task.toString(),
                 taskList.getListSize());
         return formattedReply;

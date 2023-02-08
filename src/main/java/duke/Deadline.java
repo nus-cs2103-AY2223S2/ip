@@ -1,6 +1,7 @@
 package duke;
 
-/** Represents Deadline object with
+/**
+ * Represents Deadline object with
  * a task name string and date to complete.
  */
 public class Deadline extends Task {
