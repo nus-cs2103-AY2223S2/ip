@@ -1,6 +1,7 @@
 package dudu.command;
 
 import dudu.exception.DuduException;
+import dudu.exception.DuplicateException;
 import dudu.exception.EmptyDescriptionException;
 import dudu.task.Event;
 import dudu.task.TaskList;
@@ -31,6 +32,12 @@ public class EventCommand extends Command {
         String[] inputStr = input.split(" /from ");
         String[] dateStr = inputStr[1].split(" /to ");
         Event event = new Event(inputStr[0], dateStr[0], dateStr[1]);
+        boolean isDuplicate = list.getList().stream()
+                .map(x -> x.getDescription())
+                .anyMatch(task -> task.equals(event.getDescription()));
+        if (isDuplicate) {
+            throw new DuplicateException();
+        }
         storage.saveTask(list.addTask(event));
         return "Got it. I've added this task:\n  " + event + "\n" + list.getTotalTask();
     }

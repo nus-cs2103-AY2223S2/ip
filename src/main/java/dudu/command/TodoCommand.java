@@ -1,6 +1,7 @@
 package dudu.command;
 
 import dudu.exception.DuduException;
+import dudu.exception.DuplicateException;
 import dudu.task.TaskList;
 import dudu.task.Todo;
 import dudu.util.Storage;
@@ -25,6 +26,12 @@ public class TodoCommand extends Command {
         assert list != null;
         assert storage != null;
         Todo todo = new Todo(desc);
+        boolean isDuplicate = list.getList().stream()
+                .map(x -> x.getDescription())
+                .anyMatch(task -> task.equals(todo.getDescription()));
+        if (isDuplicate) {
+            throw new DuplicateException();
+        }
         storage.saveTask(list.addTask(todo));
         return "Got it. I've added this task:\n  " + todo + "\n" + list.getTotalTask();
     }
