@@ -82,7 +82,7 @@ public class Duke {
         Todo tempTodo = Parser.parseTodo(input);
         String saveString = "T | 0 | " + tempTodo.getDescription();
 
-        this.storage.save(saveString);
+        this.storage.saveEntry(saveString);
         this.tasks.addTask(tempTodo);
 
         String message = "Got it. I've added this task:\n " + tempTodo.toString();
@@ -93,7 +93,7 @@ public class Duke {
     private void addDeadline(String[] input) throws DukeException {
         Deadline tempDeadline = Parser.parseDeadline(input);
         String saveString = "D | 0 | " + tempDeadline.getDescription() + " | " + tempDeadline.getByDate();
-        storage.save(saveString);
+        storage.saveEntry(saveString);
         tasks.addTask(tempDeadline);
         String message = "Got it. I've added this task:\n " + tempDeadline.toString();
         message += "\nNow you have " + tasks.numTasks() + " tasks in the list.";
@@ -106,7 +106,7 @@ public class Duke {
         String saveString = "E | 0 | " + tempEvent.getDescription() + " | "
                 + tempEvent.getStartDate() + ">" + tempEvent.getEndDate();
 
-        storage.save(saveString);
+        storage.saveEntry(saveString);
         tasks.addTask(tempEvent);
         String message = "Got it. I've added this task:\n " + tempEvent.toString();
         message += "\nNow you have " + tasks.numTasks() + " tasks in the list.";
@@ -157,7 +157,7 @@ public class Duke {
             throw new DukeException(" ☹ OOPS!!! The item number is out of range.");
         }
 
-        storage.delete(taskNum-1);
+        storage.deleteEntry(taskNum-1);
 
         Task delTask = tasks.getTask(taskNum-1);
         tasks.deleteTask(taskNum-1);
