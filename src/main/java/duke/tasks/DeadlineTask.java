@@ -13,7 +13,8 @@ public class DeadlineTask extends Task {
 
     public DeadlineTask(String title, String by) {
         super(title);
-        this.by = formatIfDate(by, byDate);
+        this.by = formatIfDate(by, this.byDate);
+        assert this.by != null : "by String in DeadlineTask should not be null";
     }
 
     private String formatIfDate(String input, LocalDate date) {

@@ -36,6 +36,7 @@ public class ToDoList {
         if (index < 1 || index > toDoCount) {
             throw new IndexDukeException();
         }
+        assert index > 0 : "index should be greater than 0";
         return this.tasks.get(index);
     }
 
@@ -60,6 +61,7 @@ public class ToDoList {
         if (index < 1 || index > toDoCount) {
             throw new IndexDukeException();
         }
+        assert index > 0 : "index should be greater than 0";
         Task rm = tasks.get(index);
         tasks.remove(index);
         --this.toDoCount;
@@ -77,6 +79,7 @@ public class ToDoList {
         if (index < 1 || index > toDoCount) {
             throw new IndexDukeException();
         }
+        assert index > 0 : "index should be greater than 0";
         tasks.get(index).markNotDone();
     }
 
@@ -90,6 +93,7 @@ public class ToDoList {
         if (index < 1 || index > toDoCount) {
             throw new IndexDukeException();
         }
+        assert index > 0 : "index should be greater than 0";
         tasks.get(index).markDone();
     }
 

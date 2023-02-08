@@ -17,7 +17,9 @@ public class EventTask extends Task {
     public EventTask(String title, String from, String to) {
         super(title);
         this.from = formatIfDate(from, fromDate);
+        assert this.from != null : "from String in EventTask should not be null";
         this.to = formatIfDate(to, toDate);
+        assert this.to != null : "to String in EventTask should not be null";
     }
 
     private String formatIfDate(String input, LocalDate date) {
