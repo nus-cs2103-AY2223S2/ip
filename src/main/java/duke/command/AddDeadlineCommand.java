@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import duke.exception.InvalidArgumentException;
 import duke.exception.MissingArgumentException;
 import duke.parser.DateTimeParser;
+import duke.parser.InputValidator;
 import duke.storage.TaskList;
 import duke.task.Deadline;
 
@@ -24,31 +25,28 @@ public class AddDeadlineCommand extends Command {
         this.request = request;
     }
 
+    /**
+     * Execute the <code>Deadline</code> task.
+     *
+     * @param tasks the list to store new task.
+     * @return Response after added deadline into task list.
+     * @throws MissingArgumentException
+     * @throws InvalidArgumentException
+     */
     @Override
     public String execute(TaskList tasks) throws MissingArgumentException, InvalidArgumentException {
 
-        String[] req = request.split("deadline ");
-
-        // check presence of task description
-        if (req.length < 2) {
-            throw new MissingArgumentException("☹ OOPS!!! You're missing the task description");
-        }
-
-        req = req[1].split("/by ");
-
-        // check presence of argument
-        if (req.length < 2) {
-            throw new MissingArgumentException("☹ OOPS!!! You're missing the task deadline");
-        }
-
-        String task = req[0].strip();
-        String deadline = req[1].strip();
+        String[] normalisedRequest = InputValidator.normaliseDeadlineRequest(request);
+        String description = normalisedRequest[0];
+        String deadline = normalisedRequest[1];
 
         LocalDateTime dueDate = DateTimeParser.parse(deadline);
-        Deadline newDeadline = tasks.addDeadline(task, dueDate);
+        Deadline newDeadline = tasks.addDeadline(description, dueDate);
 
-        return "Great! I've added this task for you \n" + newDeadline
-                + "\nYou have " + tasks.numOfTask() + " tasks in the list";
+        String response = String.format("Great! I've added this task for you\n %s \n"
+                + "You have %d tasks in the list.", newDeadline, tasks.numOfTask());
+
+        return response;
 
 
     }

@@ -29,6 +29,7 @@ public class Event extends Task {
         String[] toDate = this.from.toString().split("T");
         String toDateData = toDate[0] + " " + toDate[1].replace(":", "");
         String status = this.completed ? "1" : "0";
+
         return "E | " + status + " | " + this.task + " | " + fromDateData + " | " + toDateData;
     }
 
@@ -37,6 +38,7 @@ public class Event extends Task {
         String statusIcon = this.completed ? "X" : " ";
         String formattedStart = from.format(DateTimeFormatter.ofPattern("MMM dd yyyy, h:mma"));
         String formattedEnd = to.format(DateTimeFormatter.ofPattern("MMM dd yyyy, h:mma"));
+
         return "[E][" + statusIcon + "] " + this.task + " (from: " + formattedStart + " to: " + formattedEnd + ")";
     }
 }
