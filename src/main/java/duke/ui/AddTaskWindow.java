@@ -83,7 +83,6 @@ public class AddTaskWindow extends ControllerBase implements Initializable {
                 Alert alert = new Alert(AlertType.ERROR, error, new ButtonType[] { ButtonType.OK });
                 alert.show();
                 event.consume();
-                return;
             } 
         });
 

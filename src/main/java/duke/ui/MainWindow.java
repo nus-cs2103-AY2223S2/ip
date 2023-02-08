@@ -4,15 +4,16 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
-import duke.Duke;
-import duke.main.Storage;
-import duke.task.Task;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuBar;
+
+import duke.Duke;
+import duke.main.Storage;
+import duke.task.Task;
 
 public class MainWindow extends ControllerBase {
     @FXML
@@ -25,7 +26,17 @@ public class MainWindow extends ControllerBase {
     public void setDuke(Duke duke) {
         super.setDuke(duke);
         taskListView.setCellFactory((task) -> {
-            return new ListCell<>();
+            return new ListCell<>() {
+                @Override
+                public void updateItem(Task t, boolean empty) {
+                    super.updateItem(t, empty);
+                    if (empty || t == null) {
+                        setText(null);
+                    } else {
+                        setText(t.toString());
+                    }
+                }
+            };
         });
     }
 
@@ -42,8 +53,12 @@ public class MainWindow extends ControllerBase {
     @FXML
     private void onOpenTaskWindow() throws IOException {
         Dialog<Optional<Task>> diag = AddTaskWindow.getAddTaskDialog();
-        diag.show();
-        diag.getResult().ifPresent((task) -> getDuke().getTaskList().add(task));
+        diag.showAndWait().ifPresent((taskOptional) -> {
+            taskOptional.ifPresent((task) ->  { 
+                getDuke().getTaskList().add(task);
+                taskListView.itemsProperty().get().add(task);
+            });
+        });
     }
 
     @FXML
@@ -56,4 +71,5 @@ public class MainWindow extends ControllerBase {
         List<Task> savedTasks = Storage.loadFromDisk("data.dat");
         setTasks(savedTasks);
     }
+
 }

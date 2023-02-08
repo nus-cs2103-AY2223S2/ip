@@ -5,12 +5,15 @@ import java.io.IOException;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import duke.main.Storage;
 import duke.ui.MainWindow;
+import duke.ui.UI;
 
 public class App extends Application {
     private Duke instance;
@@ -29,8 +32,20 @@ public class App extends Application {
         controller.setDuke(instance);
 
         Scene scene = new Scene(box);
-
         primaryStage.setScene(scene);
         primaryStage.show();
+        scene.getWindow()
+            .addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, (e) -> {
+                while (true) {
+                    try {
+                        Storage.saveToDisk("data.dat", instance.getTaskList());
+                        ButtonType res = UI.showRetryDialog(AlertType.ERROR, "Failed to save your tasks! Try again?");
+                        if (res == ButtonType.NO) {
+                            break;
+                        }
+                    } catch (IOException ex) {
+                    }
+                }
+            });
     }
 }
