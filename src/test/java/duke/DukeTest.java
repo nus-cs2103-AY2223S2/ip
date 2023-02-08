@@ -1,31 +1,27 @@
 package duke;
 
+import duke.exceptions.DukeException;
 import org.junit.jupiter.api.Test;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+
 
 public class DukeTest {
     @Test
-    public void initExitTest() {
-        ByteArrayOutputStream printedString = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(printedString));
-        ByteArrayInputStream inputString = new ByteArrayInputStream(("bye\n").getBytes());
-        System.setIn(inputString);
+    public void addTodoTest() {
         Duke duke = new Duke();
-//        duke.run();
-
-        assertEquals("-----------------------------------------------------------" +
-                        "Hello! I'm BobWhat can I do for you?" +
-                        "----------------------------------------------------------------" +
-                        "------------------------------------------------------" +
-                        "Bye. Hope to see you again soon!" +
-                        "-----------------------------------------------------------",
-                printedString.toString()
-                        .replace("\n", "")
-                        .replace("\r", ""));
+        Message msg = new Message("todo return book");
+        try {
+            Message response = duke.respondToMessage(msg);
+            assertEquals("""
+                    Got it. I've added this task:
+                    [T][ ] return book
+                    Now you have 1 tasks in the list
+                    """, response.getMessage());
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+            fail();
+        }
     }
 }

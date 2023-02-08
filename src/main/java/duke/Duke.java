@@ -52,7 +52,7 @@ public class Duke extends Application {
      * @param msg A <code>Message</code> object representing the user's request
      * @return A <code>Message</code> object containing the response of the bot to the user's request
      */
-    public Message respondToMessage(Message msg) {
+    public Message respondToMessage(Message msg) throws DukeException {
         assert(msg != null);
         String input = msg.getMessage();
         String[] tokens = parser.parseUserInput(input);
@@ -61,70 +61,46 @@ public class Duke extends Application {
             exit();
             return new Message("This message should never show up");
 
-        } else if (tokens.length == 1 && tokens[0].equals("list")) {
-            return new Message(taskList.getItemListAsResponseString());
-
-        } else if (tokens[0].equals("mark")) {
-            try {
-                Task updatedTask = taskList.markListItem(tokens);
-                return new Message("Nice! I've marked this task as done:\n"
-                        + updatedTask.toString() + "\n");
-            } catch (DukeException e) {
-                return new Message(e.getMessage());
+        }
+        switch(tokens[0]) {
+        case "list":
+            if (tokens.length == 1) {
+                return new Message(taskList.getItemListAsResponseString());
             }
 
-        } else if (tokens[0].equals("unmark")) {
-            try {
-                Task updatedTask = taskList.unmarkListItem(tokens);
-                return new Message("OK, I've marked this task as not done yet:\n"
-                        + updatedTask.toString() + "\n");
-            } catch (DukeException e) {
-                return new Message(e.getMessage());
-            }
+        case "mark":
+            Task updatedTask = taskList.markListItem(tokens);
+            return new Message("Nice! I've marked this task as done:\n"
+                    + updatedTask.toString() + "\n");
 
-        } else if (tokens[0].equals("todo")) {
-            try {
-                Task addedTask = taskList.addToDo(tokens);
-                return new Message(taskAddedMessage(addedTask));
-            } catch (DukeException e) {
-                return new Message(e.getMessage());
-            }
+        case "unmark":
+            Task unmarkedTask = taskList.unmarkListItem(tokens);
+            return new Message("OK, I've marked this task as not done yet:\n"
+                    + unmarkedTask.toString() + "\n");
 
-        } else if (tokens[0].equals("deadline")) {
-            try {
-                Task addedTask = taskList.addDeadline(tokens);
-                return new Message(taskAddedMessage(addedTask));
-            } catch (DukeException e) {
-                return new Message(e.getMessage());
-            }
+        case "todo":
+            Task addedTodoTask = taskList.addToDo(tokens);
+            return new Message(taskAddedMessage(addedTodoTask));
 
-        } else if (tokens[0].equals("event")) {
-            try {
-                Task addedTask = taskList.addEvent(tokens);
-                return new Message(taskAddedMessage(addedTask));
-            } catch (DukeException e) {
-                return new Message(e.getMessage());
-            }
+        case "deadline":
+            Task addedDeadlineTask = taskList.addDeadline(tokens);
+            return new Message(taskAddedMessage(addedDeadlineTask));
 
-        } else if (tokens[0].equals("delete")) {
-            try {
-                Task removedTask = taskList.deleteItem(tokens, ui);
-                return new Message("Noted. I've removed this task:\n" +
-                        removedTask +
-                        "\nNow you have " + taskList.size() + " tasks in the list\n");
-            } catch (DukeException e) {
-                return new Message(e.getMessage());
-            }
+        case "event":
+            Task addedEventTask = taskList.addEvent(tokens);
+            return new Message(taskAddedMessage(addedEventTask));
 
-        } else if (tokens[0].equals("find")) {
-            try {
-                List<Integer> indexList = taskList.getMatchingItemsIndices(tokens);
-                return new Message(taskList.getItemListAsResponseString(indexList));
-            } catch (DukeException e) {
-                return new Message(e.getMessage());
-            }
+        case "delete":
+            Task removedTask = taskList.deleteItem(tokens, ui);
+            return new Message("Noted. I've removed this task:\n" +
+                    removedTask +
+                    "\nNow you have " + taskList.size() + " tasks in the list\n");
 
-        } else {
+        case "find":
+            List<Integer> indexList = taskList.getMatchingItemsIndices(tokens);
+            return new Message(taskList.getItemListAsResponseString(indexList));
+
+        default:
             return new Message("unknown command\n");
         }
     }

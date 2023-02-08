@@ -1,8 +1,10 @@
 package duke;
 
+import duke.exceptions.DukeException;
 import duke.task.Task;
 import duke.task.ToDo;
 import duke.ui.UiController;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
@@ -14,28 +16,24 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class TaskListTest {
 
     @Test
-    public void parseEventFromFileTest() {
-        TaskList lst = new TaskList();
-        String[] input = new String[]{"T", "X", "this is a test task"};
-        lst.parseEventFromFile(input);
-        assertEquals(lst.tasks.get(0).getName(), "this is a test task");
-        assertEquals("X", lst.tasks.get(0).getStatus());
-        assertTrue(lst.tasks.get(0) instanceof ToDo);
-    }
+    public void addTodoToListTest() {
+        TaskList taskList = new TaskList();
+        try {
+            taskList.addToDo(new String[]{"this is not a todo"});
+            Assertions.fail();
+        } catch (DukeException e) {
+            Assertions.fail();
+        } catch (AssertionError e) {
+            assertTrue(true);
+        }
 
-    @Test
-    public void addTaskToListTest() {
-        ByteArrayOutputStream printedString = new ByteArrayOutputStream(); //buf to capture stdout
-        PrintStream console = System.out; //saving console buffer
-        System.setOut(new PrintStream(printedString));
-        TaskList lst = new TaskList();
-        Task task = new ToDo("this is a test task");
-//        UiController ui = new UiController();
-//        lst.addTaskToList(task, ui);
-        assertEquals(1, lst.size());
-        assertTrue(lst.tasks.get(0) instanceof ToDo);
-        assertEquals(lst.tasks.get(0).getName(), "this is a test task");
-        System.setOut(console); //restoring stdout to console
+        try {
+            taskList.addToDo(new String[]{"todo", "return", "book"});
+            assertEquals(1, taskList.size());
+        } catch (DukeException e) {
+            Assertions.fail();
+        }
+
     }
 
 }
