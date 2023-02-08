@@ -8,7 +8,7 @@ import cbot.task.Deadline;
 import cbot.task.Event;
 import cbot.task.Task;
 import cbot.task.TaskList;
-import cbot.time.TimeStuff;
+import cbot.util.TimeStuff;
 
 @FunctionalInterface
 interface ThrowingBiFunction<T, U, R> {

@@ -1,4 +1,4 @@
-package cbot.time;
+package cbot.util;
 
 import org.junit.jupiter.api.Test;
 

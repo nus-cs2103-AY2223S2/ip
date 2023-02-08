@@ -94,7 +94,7 @@ public class Task implements Comparable<Task> {
      * This provides its type, status, description, and time (if applicable).
      *
      * @return The string representation of the task, for saving.
-     * @see cbot.io.FileStuff
+     * @see cbot.util.FileStuff
      */
     public String makeFileFriendly() {
         return String.format("%s%s%s%s%s",

@@ -182,7 +182,7 @@ public class TaskList {
      *
      * @return A string representation of the TaskList, for saving.
      * @see cbot.task.Task#makeFileFriendly()
-     * @see cbot.io.FileStuff#saveFile(TaskList)
+     * @see cbot.util.FileStuff#saveFile(TaskList)
      */
     public String makeFileFriendly() {
         StringBuilder sb = new StringBuilder();

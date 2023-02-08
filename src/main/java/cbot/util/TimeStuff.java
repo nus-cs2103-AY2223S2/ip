@@ -1,4 +1,4 @@
-package cbot.time;
+package cbot.util;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

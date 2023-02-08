@@ -4,11 +4,11 @@ import java.io.FileNotFoundException;
 import java.time.format.DateTimeParseException;
 
 import cbot.io.BadInputException;
-import cbot.io.FileStuff;
 import cbot.io.Parser;
 import cbot.io.PoorInputException;
 import cbot.io.Talker;
 import cbot.task.TaskList;
+import cbot.util.FileStuff;
 
 /**
  * Your very own Personal Assistant Chatbot. Use Cbot to keep track of your tasks,

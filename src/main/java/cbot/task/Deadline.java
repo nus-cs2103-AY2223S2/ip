@@ -2,7 +2,7 @@ package cbot.task;
 
 import java.time.LocalDateTime;
 
-import cbot.time.TimeStuff;
+import cbot.util.TimeStuff;
 
 /**
  * Task with a due date. Stores the description of the task, whether it has been completed or not,
