@@ -1,3 +1,5 @@
+package utils;
+
 import java.time.LocalDateTime;
 import java.util.HashMap;
 
@@ -9,7 +11,6 @@ import task.Event;
 import task.ToDo;
 import ui.Format;
 import ui.Response;
-import utils.Utility;
 
 /**
  * Responsible for the high-level parsing of user inputs and delegating relevant actions
