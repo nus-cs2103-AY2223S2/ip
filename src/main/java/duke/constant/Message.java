@@ -22,7 +22,7 @@ public class Message {
     public static final String EXCEPTION_INVALID_DATE_FORMAT = "Invalid date argument format.";
 
     /* Normal messages */
-    public static final String WELCOME = "Hello from\n"
+    public static final String WELCOME = "Hello from Agent™\n"
                                         + " ____       _\n"
                                         + "|  _ \\ _  _| | ____ _\n"
                                         + "| | | | | |  | |/ / _ \\\n"
@@ -39,5 +39,6 @@ public class Message {
     public static final Object LIST_EMPTY = "No task found in the list.";
     public static final Object FIND_TASKS = "Here are the matching tasks in your list:";
     public static final String PARTIAL_DELETE = "[Warning] %d task not found, no action taken.";
+    public static final String UI_TITLE = "Agent™ Duke";
 
 }

@@ -65,7 +65,7 @@ public class MarkCommand extends Command {
                 sb.append(Message.UNMARK_TASK + "\n");
             }
 
-            sb.append("\t" + tk);
+            sb.append(tk);
         } catch (IndexOutOfBoundsException e) {
             sb.append(Message.EXCEPTION_INVALID_TASK_ID_ACCESS);
         }

@@ -73,7 +73,7 @@ public class AddCommand extends Command {
     @Override
     public void execute(DukeRepo db, Ui ui) throws InvalidTaskTypeException {
         ui.printConsole(Message.ADD_TASK);
-        ui.printConsole("\t" + db.addTask(getTask()));
+        ui.printConsole(db.addTask(getTask()));
         ui.printConsole(String.format(Message.COUNT_TASK, db.count()));
     }
 
@@ -84,7 +84,7 @@ public class AddCommand extends Command {
     public void execute(DukeRepo db, Consumer<String> con) throws DukeException {
         StringBuilder sb = new StringBuilder();
         sb.append(Message.ADD_TASK + "\n");
-        sb.append("\t" + db.addTask(getTask()) + "\n");
+        sb.append(db.addTask(getTask()) + "\n");
         sb.append(String.format(Message.COUNT_TASK, db.count()) + "\n");
         con.accept(sb.toString());
     }

@@ -2,6 +2,7 @@ package duke.utils;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
@@ -54,6 +55,9 @@ public class DateUtil {
     }
 
     public static String dateToPrettyString(LocalDateTime date) {
+        if (date.toLocalTime().equals(LocalTime.of(0,0))) {
+            return date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        }
         return date.format(DateTimeFormatter.ofPattern("MMM d yyyy H:m"));
     }
 }

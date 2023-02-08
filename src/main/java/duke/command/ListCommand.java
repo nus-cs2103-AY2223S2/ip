@@ -88,7 +88,7 @@ public class ListCommand extends Command {
             }
 
             for (int i = 0; i < filtered.size(); i++) {
-                ui.printConsole(String.format("\t%d. %s", i + 1, filtered.get(i)));
+                ui.printConsole(String.format("%d. %s", i + 1, filtered.get(i)));
             }
         } else {
             ui.printConsole(Message.LIST_EMPTY);
@@ -116,7 +116,7 @@ public class ListCommand extends Command {
         }
 
         for (int i = 0; i < filtered.size(); i++) {
-            sb.append(String.format("\t%d. %s", i + 1, filtered.get(i)) + "\n");
+            sb.append(String.format("%d. %s", i + 1, filtered.get(i)) + "\n");
         }
 
         con.accept(sb.toString());

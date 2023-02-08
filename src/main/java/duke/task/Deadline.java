@@ -46,8 +46,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: "
+        return "⌛ " + super.toString() + "\n   ↳ 📅 "
             + DateUtil.dateToPrettyString(by)
-            + ")";
+            + ".";
     }
 }

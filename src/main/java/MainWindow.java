@@ -47,6 +47,7 @@ public class MainWindow extends AnchorPane {
         }
 
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        scrollPane.setPannable(true);
         duke = d;
     }
 
@@ -62,6 +63,10 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
+        if (input.isEmpty()) {
+            return;
+        }
+        
         dialogContainer.getChildren().add(DialogBox.getUserDialog(input, userImage));
         duke.getResponse(input, (reply) -> {
             dialogContainer.getChildren().add(

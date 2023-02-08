@@ -165,10 +165,10 @@ public class Parser {
             return Optional.of(new MarkCommand(Integer.parseInt(ops[1]), false));
         case DELETE:
             assert ops.length == 2 : Message.EXCEPTION_INVALID_DELETE_CMD;
-            
-            String strArray[] = ops[1].split(" ");
+
+            String[] strArray = ops[1].split(" ");
             int[] taskIds = new int[strArray.length];
-            for(int i = 0; i < strArray.length; i++) {
+            for (int i = 0; i < strArray.length; i++) {
                 taskIds[i] = Integer.parseInt(strArray[i]);
             }
 

@@ -1,5 +1,7 @@
 import duke.Duke;
+import duke.constant.Message;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -17,6 +19,15 @@ public class Main extends Application {
     public void start(Stage stage) {
         Scene scene = new Scene(new MainWindow(duke));
         stage.setScene(scene);
+        
+        stage.setTitle(Message.UI_TITLE);
+        stage.setMinWidth(300);
+        stage.setMaxWidth(600);
+
+        stage.setOnCloseRequest(e -> {
+            Platform.exit();
+        });
+
         stage.show();
     }
 

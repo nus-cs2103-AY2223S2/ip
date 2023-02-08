@@ -55,10 +55,10 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: "
+        return "🎈 " + super.toString() + "\n   ↳ 📅 "
             + DateUtil.dateToPrettyString(startDate)
-            + " to: "
+            + " -> "
             + DateUtil.dateToPrettyString(endDate)
-            + ")";
+            + ".";
     }
 }
