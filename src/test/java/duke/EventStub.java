@@ -2,6 +2,10 @@ package duke;
 
 import duke.task.Task;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 /**
  * Stub created so that TaskList class can be tested in isolation.
  */
@@ -35,6 +39,33 @@ public class EventStub extends Task {
     @Override
     public void unMark() {
         this.isDone = false;
+    }
+
+    /**
+     * Update /by field.
+     * @param date The update.
+     */
+    @Override
+    public void updateByField(String date) {
+        throw new RuntimeException("Unable to update! Task not a deadline!");
+    }
+
+    /**
+     * Update /from field.
+     * @param date The update.
+     */
+    @Override
+    public void updateFromField(String date) {
+        return;
+    }
+
+    /**
+     * Update /to field.
+     * @param date The update.
+     */
+    @Override
+    public void updateToField(String date) {
+        return;
     }
 
     @Override
