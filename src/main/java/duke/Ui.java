@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class Ui {
     private final Scanner sc;
+    private MainWindow mainWindow;
 
     /**
      * constructor of the Ui class
@@ -18,6 +19,7 @@ public class Ui {
      */
     public void greet() {
         System.out.println("Hello I'm duke.\nWhat can I do for you?");
+        mainWindow.passDukeResponse("Hello I'm duke.\nWhat can I do for you?");
     }
 
     /**
@@ -52,9 +54,15 @@ public class Ui {
      * @param text to be print
      */
     public void printText(String text) {
+
         System.out.println(text);
+        mainWindow.passDukeResponse(text);
     }
 
 
+    public void setMainWindow(MainWindow mainWindow) {
+        this.mainWindow = mainWindow;
+        greet();
+    }
 }
 
