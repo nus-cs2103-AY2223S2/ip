@@ -3,7 +3,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.Random;
-
 import org.junit.jupiter.api.Test;
 
 import meggy.MeggyTime;
@@ -15,7 +14,7 @@ import meggy.task.TodoTask;
 /** For testing purpose only. */
 public class MeggyTest {
     private static final Random RAND = new Random();
-    private static final int N_TEST = 1024;
+    private static final int N_TEST = 6400;
 
     /** @return String that will never be entirely whitespace. */
     private static String randString() {

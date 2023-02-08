@@ -26,9 +26,7 @@ public class Meggy {
     /** Location to save cross-session data. */
     private final Storage storage;
 
-    /**
-     * Creates a chatbot agent instance.
-     */
+    /** Creates a chatbot agent instance. */
     public Meggy() {
         tasks = new TaskList();
         usrCmdToJob = Map.of(
@@ -50,11 +48,12 @@ public class Meggy {
     /**
      * Updates the status of the user task specified by index.
      *
-     * @param args      Non-null. Index (start with 1) string of task to be updated.
+     * @param args      Non-null. Index (start with 1) string of task to be updated or invalid input.
      * @param newStatus The task's updated status.
      * @return Response to 'mark/unmark' command.
      */
     private String markTaskStatus(String args, boolean newStatus) {
+        assert args != null;
         final int idx;
         try {
             idx = Parser.parseIdx(args);
@@ -75,6 +74,8 @@ public class Meggy {
      * @return Response to "todo/ddl/event" command.
      */
     private String addTask(String args, Function<String, UserTask> newTask) throws MeggyException {
+        assert args != null;
+        assert newTask != null;
         final UserTask task = newTask.apply(args);
         tasks.add(task);
         storage.save(tasks);
@@ -89,6 +90,7 @@ public class Meggy {
      * @throws MeggyException If storage file IO throws {@link IOException}.
      */
     private String deleteTask(String arg) throws MeggyException {
+        assert arg != null;
         final int idx;
         try {
             idx = Parser.parseIdx(arg);
@@ -107,6 +109,7 @@ public class Meggy {
      * @param task Non-null. The recently modified task.
      */
     private String reportChangedTaskAndList(UserTask task) {
+        assert task != null;
         return Resource.TASK_STRING_INDENT + task + '\n' + Resource.nTaskFmt(tasks.size());
     }
 
@@ -118,7 +121,8 @@ public class Meggy {
      * @throws MeggyNoArgException If user search keyword is blank.
      */
     private String find(String substring) throws MeggyNoArgException {
-        if ("".equals(substring)) {
+        assert substring != null;
+        if (substring.isEmpty()) {
             throw new MeggyNoArgException();
         }
         final TaskList ans = new TaskList();
@@ -137,6 +141,7 @@ public class Meggy {
      * @return Complete response of this chatbot. Either the response of a valid query or error message.
      */
     public String getResponse(String in) {
+        assert in != null;
         try {
             final Parser.JobAndArg<String> jobAndArg = Parser.parseJobAndArg(usrCmdToJob, in);
             final Function<String, String> job = jobAndArg.job == null ? unknownCmdBehavior : jobAndArg.job;
@@ -144,5 +149,6 @@ public class Meggy {
         } catch (MeggyException e) {
             return e.getMessage();
         }
+        // TODO Bye command functionality discontinued
     }
 }

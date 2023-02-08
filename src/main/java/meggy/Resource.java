@@ -86,6 +86,7 @@ public final class Resource {
      * @return Error message.
      */
     public static String errNfe(String arg) {
+        assert arg != null;
         return "Can't interpret \"" + arg + "\" as an index number.\n";
     }
 
@@ -96,7 +97,8 @@ public final class Resource {
      * @return Message about empty input or unknown command or empty input.
      */
     public static String errUnknownCmd(String cmd) {
-        return "".equals(cmd) ? "Umm that's all blank? Say something! Speak to me!\n" : "Don't know what \""
+        assert cmd != null;
+        return cmd.isEmpty() ? "Umm that's all blank? Say something! Speak to me!\n" : "Don't know what \""
                 + cmd + "\" means.\n";
     }
 

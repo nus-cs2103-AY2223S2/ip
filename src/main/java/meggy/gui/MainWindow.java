@@ -27,6 +27,8 @@ public class MainWindow extends AnchorPane {
     /** WHAT DOES THIS DO? WHEN IS THIS CALLED? */
     @FXML
     public void initialize() {
+        assert scrollPane != null;
+        assert dialogContainer != null;
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
@@ -36,6 +38,7 @@ public class MainWindow extends AnchorPane {
      * @param m Non-null. The new chatbot.
      */
     public void setChatbot(Meggy m) {
+        assert m != null;
         meggy = m;
     }
 
@@ -45,6 +48,8 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
+        assert userInput != null;
+        assert dialogContainer != null;
         String input = userInput.getText();
         String response = meggy.getResponse(input);
         dialogContainer.getChildren().addAll(
