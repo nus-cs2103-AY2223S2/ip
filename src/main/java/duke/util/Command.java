@@ -81,6 +81,8 @@ public class Command {
     public String execute(TaskList taskList, UI ui, Storage storage) throws DukeException {
         String output = "";
 
+        assert taskList != null;
+
         switch (this.commandType) {
             case EXIT:
                 ui.exit();
@@ -88,6 +90,7 @@ public class Command {
             case LIST:
                 output = "Here are the tasks in your list:";
                 for (int i = 0; i < taskList.size(); ++i) {
+                    assert taskList.get(i) != null;
                     output += String.format("\n%d.%s", i + 1, taskList.get(i).toString());
                 }
                 break;
@@ -119,6 +122,7 @@ public class Command {
                 TaskList results = taskList.findTasks(param);
                 output = FIND_TASK_OUTPUT;
                 for (int i = 0; i < results.size(); ++i) {
+                    assert taskList.get(i) != null;
                     output += String.format("\n%d.%s", i + 1, results.get(i).toString());
                 }
                 break;
