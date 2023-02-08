@@ -20,7 +20,7 @@ public abstract class Task {
     /**
      * Marks a task as done.
      */
-    public String markAsDone() {
+    public String markTaskAsDone() {
         this.isDone = true;
         return this.toString();
     }
@@ -28,7 +28,7 @@ public abstract class Task {
     /**
      * Marks a task as not done.
      */
-    public String markAsNotDone() {
+    public String markTaskAsNotDone() {
         this.isDone = false;
         return this.toString();
     }
@@ -44,7 +44,7 @@ public abstract class Task {
 
     /** Checks if the task description contains the keyword.
      *
-     *  @param keyword the string to check if description contains it
+     * @param keyword the string to check if description contains it
      * @return true if keyword is contained
      */
     public boolean hasKeyword(String ... keyword) {
@@ -71,15 +71,21 @@ public abstract class Task {
      * @return a task class which is interpreted based on the file input
      */
     public static Task interpretTextToTask(String s) {
-        String isDoneStatus = s.split(" \\| ")[1];
+        String[] listOfVariables = s.split(" \\| ");
+        int numOfVariables = listOfVariables.length;
+
+        String isDoneStatus = listOfVariables[1];
         boolean isDone = isDoneStatus.equals("X") ? true : false;
-        if (s.split(" \\| ").length == NUMBER_VAR_IN_STORAGE_TODO) {
-            return new Todo(s.split(" \\| ")[2], isDone);
-        } else if (s.split(" \\| ").length == NUMBER_VAR_IN_STORAGE_DEADLINE) {
-            return new Deadline(s.split(" \\| ")[2], isDone, s.split(" \\| ")[3]);
-        } else if (s.split(" \\| ").length == NUMBER_VAR_IN_STORAGE_EVENT) {
-            return new Event(s.split(" \\| ")[2], isDone, s.split(" \\| ")[3], s.split(" \\| ")[4]);
+
+        if (numOfVariables == NUMBER_VAR_IN_STORAGE_TODO) {
+            return new Todo(listOfVariables[2], isDone);
+        } else if (numOfVariables == NUMBER_VAR_IN_STORAGE_DEADLINE) {
+            return new Deadline(listOfVariables[2], isDone, listOfVariables[3]);
+        } else if (numOfVariables == NUMBER_VAR_IN_STORAGE_EVENT) {
+            return new Event(listOfVariables[2], isDone, listOfVariables[3], listOfVariables[4]);
         }
+        assert numOfVariables < 0 || numOfVariables > 5 : "Storage text file is corrupted. Unreadable contents.";
+        return null;
     }
 
     @Override

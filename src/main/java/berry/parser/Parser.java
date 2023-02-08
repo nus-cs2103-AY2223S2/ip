@@ -4,16 +4,15 @@ import berry.command.Command;
 import berry.command.AddTaskCommand;
 import berry.command.DeleteCommand;
 import berry.command.ExitCommand;
+import berry.command.FindCommand;
 import berry.command.ListCommand;
 import berry.command.MarkCommand;
 import berry.command.UnmarkCommand;
-import berry.command.FindCommand;
 import berry.exception.BerryException;
 import berry.exception.EmptyClauseException;
 import berry.exception.EmptyDescriptionException;
-import berry.exception.UnknownCommandException;
 import berry.exception.MissingClauseException;
-
+import berry.exception.UnknownCommandException;
 import berry.task.Deadline;
 import berry.task.Event;
 import berry.task.Todo;
@@ -37,6 +36,9 @@ public class Parser {
      * @throws BerryException if the given string cannot be parsed
      */
     public static Command parseInput(String userInput) throws BerryException {
+        assert userInput != null : "Input cannot be null";
+        assert userInput.length() > 0 : "Input must contain at least one element";
+
         String[] splitDescriptionAndDetails = userInput.split(" ", 2);
         String[] splitDetails;
         CommandType commandType;
@@ -51,6 +53,7 @@ public class Parser {
 
         switch (commandType) {
         case BYE:
+
             return new ExitCommand();
         case LIST:
             return new ListCommand();
@@ -90,9 +93,9 @@ public class Parser {
     private static void validateCommand(CommandType commandType, String input) throws BerryException {
         String command = input.split(" ")[0];
 
-        if (!(commandType == CommandType.TODO ||
-                commandType == CommandType.DEADLINE ||
-                commandType == CommandType.EVENT)) {
+        if (!(commandType == CommandType.TODO
+                || commandType == CommandType.DEADLINE
+                || commandType == CommandType.EVENT)) {
             return;
         }
 

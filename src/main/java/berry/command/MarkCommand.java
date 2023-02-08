@@ -1,17 +1,17 @@
 package berry.command;
 
-import berry.task.TaskList;
-import berry.ui.Ui;
-import berry.storage.Storage;
 import berry.exception.BerryException;
 import berry.exception.IndexOutOfRangeException;
+import berry.storage.Storage;
+import berry.task.TaskList;
+import berry.ui.Ui;
 
 /**
  * Marks the task as done as identified by its last displayed index from the task list.
  */
 public class MarkCommand extends Command {
 
-    /** The index of the task to be marked */
+    // The index of the task to be marked
     private static int taskIndex;
 
     public MarkCommand(int taskIndex) {

@@ -27,6 +27,7 @@ public class TaskList {
      * @param task is the task to be added
      */
     public String addTask(Task task) {
+        assert task != null : "Task should not be null";
         listOfTasks.add(task);
         return task.toString();
     }
@@ -37,6 +38,7 @@ public class TaskList {
      * @param index is the number identifying the task given by the user as seen from the task list
      */
     public String deleteTask(int index) {
+        assert index > 0 : "Task index should be bigger than 0";
         String output = listOfTasks.get(index - 1).toString();
         listOfTasks.remove(index - 1);
         output += getNumberOfTasks();
@@ -49,8 +51,9 @@ public class TaskList {
      * @param index is the number identifying the task given by the user as seen from the task list
      */
     public String markTaskDone(int index) {
+        assert index > 0 : "Task index should be bigger than 0";
         Task t = listOfTasks.get(index - 1);
-        return t.markAsDone();
+        return t.markTaskAsDone();
     }
 
     /**
@@ -59,8 +62,9 @@ public class TaskList {
      * @param index is the number identifying the task given by the user as seen from the task list
      */
     public String markTaskNotDone(int index) {
+        assert index > 0 : "Task index should be bigger than 0";
         Task t = listOfTasks.get(index - 1);
-        return t.markAsNotDone();
+        return t.markTaskAsNotDone();
     }
 
     /**
