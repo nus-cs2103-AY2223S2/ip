@@ -55,6 +55,44 @@ public class Deadline extends Task {
     }
 
     /**
+     * Update /by field.
+     * @param date The update.
+     */
+    @Override
+    public void updateByField(String date) {
+        LocalDateTime newDateTime;
+        int firstSlash = date.indexOf("/");
+        int secondSlash = date.indexOf("/", firstSlash + 1);
+        String day = firstSlash == 1 ? "d" : "dd";
+        String month = secondSlash - firstSlash == 2 ? "M" : "MM";
+        DateTimeFormatter inFormatter = DateTimeFormatter.ofPattern(day + "/" + month + "/yyyy HHmm");
+        try {
+            newDateTime = LocalDateTime.parse(date, inFormatter);
+        } catch (DateTimeParseException e) {
+            throw new RuntimeException("Invalid date and time! Please try again!");
+        }
+        this.deadline = newDateTime;
+    }
+
+    /**
+     * Update /from field.
+     * @param date The update.
+     */
+    @Override
+    public void updateFromField(String date) {
+        throw new RuntimeException("Unable to update! Task not an event!");
+    }
+
+    /**
+     * Update /to field.
+     * @param date The update.
+     */
+    @Override
+    public void updateToField(String date) {
+        throw new RuntimeException("Unable to update! Task not an event!");
+    }
+
+    /**
      * Creates custom string containing Deadline object's description and date and time of deadline.
      * @return String representing Deadline object.
      */

@@ -22,6 +22,9 @@ public abstract class Task {
     }
 
     public abstract String taskToSavedForm();
+    public abstract void updateByField(String date);
+    public abstract void updateFromField(String date);
+    public abstract void updateToField(String date);
 
     /**
      * Static method that creates ToDo, Deadline or Event object depending on command in string.
@@ -72,6 +75,14 @@ public abstract class Task {
      */
     public void unMark() {
         this.isDone = false;
+    }
+
+    /**
+     * Change description of Task object.
+     * @param str New description.
+     */
+    public void changeDescription(String str) {
+        this.description = str;
     }
 
     /**

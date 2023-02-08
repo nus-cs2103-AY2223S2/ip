@@ -121,6 +121,55 @@ public class TaskList {
         return result;
     }
 
+    public String update(int index, String body) {
+        if (this.tasks[index] == null) {
+            throw new RuntimeException("Task does not exist!");
+        }
+        Task task = this.tasks[index];
+        final String byField = "/by";
+        final String fromField = "/from";
+        final String toField = "/to";
+        final int bodyLength = body.length();
+        int firstSpaceIndex = body.indexOf(" ");
+        String firstWord;
+        if (firstSpaceIndex == -1) {
+            firstWord = body;
+        } else {
+            firstWord = body.substring(0, firstSpaceIndex);
+        }
+        switch (firstWord) {
+        case (byField):
+            final int bySpaceLength = byField.length() + 1;
+            if (bodyLength <= bySpaceLength) {
+                throw new RuntimeException("Please fill in the /by field!");
+            }
+            String newBy = body.substring(bySpaceLength);
+            task.updateByField(newBy);
+            break;
+        case (fromField):
+            final int fromSpaceLength = fromField.length() + 1;
+            if (bodyLength <= fromSpaceLength) {
+                throw new RuntimeException("Please fill in the /from field!");
+            }
+            String newFrom = body.substring(fromSpaceLength);
+            task.updateFromField(newFrom);
+            break;
+        case (toField):
+            final int toSpaceLength = toField.length() + 1;
+            if (bodyLength <= toSpaceLength) {
+                throw new RuntimeException("Please fill in the /to field!");
+            }
+            String newTo = body.substring(toSpaceLength);
+            task.updateToField(newTo);
+            break;
+        default:
+            task.changeDescription(body);
+        }
+        String reply = "Ok! This task has been updated:\n";
+        reply += task;
+        return reply;
+    }
+
     public String printTask(int index) {
         return tasks[index].toString();
     }
@@ -143,6 +192,9 @@ public class TaskList {
      */
     @Override
     public String toString() {
+        if (this.index == 0) {
+            return "There are currently no tasks! Yay!";
+        }
         String str = "";
         for (int i = 0; i < this.index; i++) {
             if (i == this.index - 1) {

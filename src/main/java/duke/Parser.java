@@ -8,6 +8,7 @@ import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
 import duke.command.UnMarkCommand;
+import duke.command.UpdateCommand;
 
 /**
  * Makes sense of the user's commands.
@@ -21,6 +22,7 @@ public class Parser {
     private static final String UNMARK = "unmark";
     private static final String LIST = "list";
     private static final String FIND = "find";
+    private static final String UPDATE = "update";
     private static final String BYE = "bye";
 
     /**
@@ -43,7 +45,7 @@ public class Parser {
         switch (firstWord) {
         case (Parser.TODO):
             Parser.checkToDoCommand(str);
-            final var toDoFormatLength = 5;
+            final var toDoFormatLength = Parser.TODO.length() + 1;
             assert strLength > toDoFormatLength;
             command = new AddCommand(str);
             break;
@@ -65,17 +67,17 @@ public class Parser {
             command = new AddCommand(str);
             break;
         case (Parser.DELETE):
-            int deleteIndex = Parser.checkDeleteCommand(str);
+            int deleteIndex = Parser.getDeleteIndex(str);
             assert !(deleteIndex < TaskList.MIN_INDEX && deleteIndex > TaskList.MAX_INDEX);
             command = new DeleteCommand(deleteIndex);
             break;
         case (Parser.MARK):
-            int markIndex = Parser.checkMarkCommand(str);
+            int markIndex = Parser.getMarkIndex(str);
             assert !(markIndex < TaskList.MIN_INDEX && markIndex > TaskList.MAX_INDEX);
             command = new MarkCommand(markIndex);
             break;
         case (Parser.UNMARK):
-            int unMarkIndex = Parser.checkUnMarkCommand(str);
+            int unMarkIndex = Parser.getUnMarkIndex(str);
             assert !(unMarkIndex < TaskList.MIN_INDEX && unMarkIndex > TaskList.MAX_INDEX);
             command = new UnMarkCommand(unMarkIndex);
             break;
@@ -84,8 +86,13 @@ public class Parser {
             command = new ListCommand();
             break;
         case (Parser.FIND):
-            String keyword = Parser.checkFindCommand(str);
+            String keyword = Parser.getKeyword(str);
             command = new FindCommand(keyword);
+            break;
+        case (Parser.UPDATE):
+            int updateIndex = Parser.getUpdateIndex(str);
+            String body = Parser.getUpdateBody(str);
+            command = new UpdateCommand(updateIndex, body);
             break;
         case (Parser.BYE):
             Parser.checkExitCommand(str);
@@ -110,12 +117,12 @@ public class Parser {
             throw new RuntimeException("This command's field can't be left blank!");
         }
         final var target = " /by ";
-        final var targetLength = 5;
+        final var targetLength = target.length();
         if (!str.contains(target)) {
             throw new RuntimeException("Unable to create Deadline! Deadline commands need a /by field!");
         }
         int index = str.indexOf(target);
-        final var deadlineDescriptionStartIndex = 9;
+        final var deadlineDescriptionStartIndex = Parser.DEADLINE.length() + 1;
         if (index <= deadlineDescriptionStartIndex) {
             throw new RuntimeException("Unable to create Deadline! "
                     + "Description for deadline cannot be left blank!");
@@ -158,7 +165,7 @@ public class Parser {
         } else if (index2 - index1 < minCharBetweenTargets) {
             throw new RuntimeException("Unable to create event! Please enter a valid /from field.");
         }
-        final int eventDescriptionStartIndex = 6;
+        final int eventDescriptionStartIndex = Parser.EVENT.length() + 1;
         if (index1 <= eventDescriptionStartIndex) {
             throw new RuntimeException("Unable to create event! Description for event cannot be left blank");
         }
@@ -173,13 +180,13 @@ public class Parser {
         }
     }
 
-    private static int checkDeleteCommand(String str) {
+    private static int getDeleteIndex(String str) {
         try {
             String deleteSpace = Parser.DELETE + " ";
             if (str.equals(Parser.DELETE) || str.equals(deleteSpace)) {
                 throw new RuntimeException("This command's field can't be left blank!");
             }
-            final var deleteStartIndex = 7;
+            final var deleteStartIndex = Parser.DELETE.length() + 1;
             String deletedIndex = str.substring(deleteStartIndex);
             int index = Integer.parseInt(deletedIndex) - 1;
             if (index < TaskList.MIN_INDEX || index > TaskList.MAX_INDEX) {
@@ -191,13 +198,13 @@ public class Parser {
         }
     }
 
-    private static int checkMarkCommand(String str) {
+    private static int getMarkIndex(String str) {
         try {
             String markSpace = Parser.MARK + " ";
             if (str.equals(Parser.MARK) || str.equals(markSpace)) {
                 throw new RuntimeException("This command's field can't be left blank!");
             }
-            final var markStartIndex = 5;
+            final var markStartIndex = Parser.MARK.length() + 1;
             String markedIndex = str.substring(markStartIndex);
             int index = Integer.parseInt(markedIndex) - 1;
             if (index < TaskList.MIN_INDEX || index > TaskList.MAX_INDEX) {
@@ -209,13 +216,13 @@ public class Parser {
         }
     }
 
-    private static int checkUnMarkCommand(String str) {
+    private static int getUnMarkIndex(String str) {
         try {
             String unMarkSpace = Parser.UNMARK + " ";
             if (str.equals(Parser.UNMARK) || str.equals(unMarkSpace)) {
                 throw new RuntimeException("This command's field can't be left blank!");
             }
-            final var unMarkStartIndex = 7;
+            final var unMarkStartIndex = Parser.UNMARK.length() + 1;
             String unmarkedIndex = str.substring(unMarkStartIndex);
             int index = Integer.parseInt(unmarkedIndex) - 1;
             if (index < TaskList.MIN_INDEX || index > TaskList.MAX_INDEX) {
@@ -233,12 +240,12 @@ public class Parser {
         }
     }
 
-    private static String checkFindCommand(String str) {
+    private static String getKeyword(String str) {
         String findSpace = Parser.FIND + " ";
         if (str.equals(Parser.FIND) || str.equals(findSpace)) {
             throw new RuntimeException("This command's field can't be left blank!");
         }
-        final var findStartIndex = 5;
+        final var findStartIndex = Parser.FIND.length() + 1;
         String keyword = str.substring(findStartIndex);
         if (keyword.equals("")) {
             throw new RuntimeException("What would you like me to find?");
@@ -246,6 +253,38 @@ public class Parser {
         return keyword;
     }
 
+    private static int getUpdateIndex(String str) {
+        String updateSpace = Parser.UPDATE + " ";
+        if (str.equals(Parser.UPDATE) || str.equals(updateSpace)) {
+            throw new RuntimeException("This command's field can't be left blank!");
+        }
+        int updateStartIndex = updateSpace.length();
+        try {
+            int secondSpaceIndex = str.indexOf(" ", updateStartIndex);
+            if (secondSpaceIndex == -1) {
+                throw new RuntimeException("Please follow the update command format!");
+            }
+            String updateIndexString = str.substring(updateStartIndex, secondSpaceIndex);
+            int updateIndex = Integer.parseInt(updateIndexString) - 1;
+            if (updateIndex < TaskList.MIN_INDEX || updateIndex > TaskList.MAX_INDEX) {
+                throw new RuntimeException("Task does not exist!");
+            }
+            return updateIndex;
+        } catch (NumberFormatException e) {
+            throw new RuntimeException("Target was not a number!");
+        }
+    }
+
+    private static String getUpdateBody(String str) {
+        int strLength = str.length();
+        int updateStartIndex = Parser.UPDATE.length() + 1;
+        int secondSpaceIndex = str.indexOf(" ", updateStartIndex);
+        if (strLength <= secondSpaceIndex + 1) {
+            throw new RuntimeException("Please enter what you want to update!");
+        }
+        String body = str.substring(secondSpaceIndex + 1);
+        return body;
+    }
     private static void checkExitCommand(String str) {
         if (!str.equals(Parser.BYE)) {
             throw new RuntimeException("Exit commands do not have a field!");

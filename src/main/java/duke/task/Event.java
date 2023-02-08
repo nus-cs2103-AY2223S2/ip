@@ -72,6 +72,61 @@ public class Event extends Task {
     }
 
     /**
+     * Update /by field.
+     * @param date The update.
+     */
+    @Override
+    public void updateByField(String date) {
+        throw new RuntimeException("Unable to update! Task not a deadline!");
+    }
+
+    /**
+     * Update /from field.
+     * @param date The update.
+     */
+    @Override
+    public void updateFromField(String date) {
+        LocalDateTime newDateTime;
+        int firstSlash = date.indexOf("/");
+        int secondSlash = date.indexOf("/", firstSlash + 1);
+        String day = firstSlash == 1 ? "d" : "dd";
+        String month = secondSlash - firstSlash == 2 ? "M" : "MM";
+        DateTimeFormatter inFormatter = DateTimeFormatter.ofPattern(day + "/" + month + "/yyyy HHmm");
+        try {
+            newDateTime = LocalDateTime.parse(date, inFormatter);
+        } catch (DateTimeParseException e) {
+            throw new RuntimeException("Invalid date and time! Please try again!");
+        }
+        if (newDateTime.isAfter(this.end)) {
+            throw new RuntimeException("Starting date and time cannot be after ending date and time!");
+        }
+        this.start = newDateTime;
+    }
+
+    /**
+     * Update /to field.
+     * @param date The update.
+     */
+    @Override
+    public void updateToField(String date) {
+        LocalDateTime newDateTime;
+        int firstSlash = date.indexOf("/");
+        int secondSlash = date.indexOf("/", firstSlash + 1);
+        String day = firstSlash == 1 ? "d" : "dd";
+        String month = secondSlash - firstSlash == 2 ? "M" : "MM";
+        DateTimeFormatter inFormatter = DateTimeFormatter.ofPattern(day + "/" + month + "/yyyy HHmm");
+        try {
+            newDateTime = LocalDateTime.parse(date, inFormatter);
+        } catch (DateTimeParseException e) {
+            throw new RuntimeException("Invalid date and time! Please try again!");
+        }
+        if (newDateTime.isBefore(this.start)) {
+            throw new RuntimeException("Ending date and time cannot be before starting date and time!");
+        }
+        this.end = newDateTime;
+    }
+
+    /**
      * Creates custom string containing Event object's description and start and end dates and times.
      * @return String representing Event object.
      */
