@@ -49,8 +49,8 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Creates two dialog boxes, one echoing user input and the other containing JeoBot's reply and then appends them to
+     * the dialog container. Clears the user input after processing. Exits if necessary.
      */
     @FXML
     private void handleUserInput() {
@@ -61,6 +61,14 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getJeoDialog(response, jeoImage)
         );
         userInput.clear();
+        handleExit(response);
+    }
+
+    /**
+     * Exits the GUI if "bye" command is given as input.
+     * @param response String representing JeoBot's reply to the input.
+     */
+    private void handleExit(String response) {
         String rawResponse = response.split("\\n")[2];
         if (rawResponse.equals(ui.exitMessage())) {
             Stage sb = (Stage) scrollPane.getScene().getWindow();

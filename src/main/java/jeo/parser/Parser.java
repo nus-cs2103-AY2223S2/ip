@@ -158,21 +158,21 @@ public class Parser {
         while (i < s.length()) {
             if (s.charAt(i) != '/') {
                 sb.append(s.charAt(i));
-            } else {
-                String temp1 = s.substring(i + 3).trim();
-                if (c.equals("deadline") && s.startsWith("/by", i)) {
-                    first = sb.toString().trim();
-                    second = temp1;
-                } else if (c.equals("event1") && s.startsWith("/from", i)) {
-                    first = sb.toString().trim();
-                    second = s.substring(i + 5).trim();
-                } else if ((c.equals("event1") || c.equals("event2")) && s.startsWith("/to", i)) {
-                    first = sb.toString().trim();
-                    second = temp1;
-                } else if (c.equals("event2") && s.startsWith("/from", i)) {
-                    first = s.substring(i + 5).trim();
-                    second = sb.toString().trim();
-                }
+            } else if (c.equals("deadline") && s.startsWith("/by", i)) {
+                first = sb.toString().trim();
+                second = s.substring(i + 3).trim();
+                break;
+            } else if (c.equals("event1") && s.startsWith("/from", i)) {
+                first = sb.toString().trim();
+                second = s.substring(i + 5).trim();
+                break;
+            } else if ((c.equals("event1") || c.equals("event2")) && s.startsWith("/to", i)) {
+                first = sb.toString().trim();
+                second = s.substring(i + 3).trim();
+                break;
+            } else if (c.equals("event2") && s.startsWith("/from", i)) {
+                first = s.substring(i + 5).trim();
+                second = sb.toString().trim();
                 break;
             }
             i++;
