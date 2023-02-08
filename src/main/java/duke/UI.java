@@ -51,8 +51,33 @@ public class UI extends Application {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        return "Hello from\n" + logo + "\n What can I do for you?";
 
+        return "Hello from\n" + logo + "\n What can I do for you?";
+    }
+
+    private void setStage(Stage stage) {
+        stage.setTitle("Duke");
+        stage.setResizable(false);
+        stage.setMinHeight(600.0);
+        stage.setMinWidth(400.0);
+    }
+
+    private void setScrollPane(ScrollPane scrollPane) {
+        scrollPane.setPrefSize(385, 535);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+
+        scrollPane.setVvalue(1.0);
+        scrollPane.setFitToWidth(true);
+    }
+
+    private void setAnchorPane(ScrollPane scrollPane, TextField userInput, Button sendButton) {
+
+        AnchorPane.setTopAnchor(scrollPane, 1.0);
+        AnchorPane.setBottomAnchor(sendButton, 1.0);
+        AnchorPane.setRightAnchor(sendButton, 1.0);
+        AnchorPane.setLeftAnchor(userInput, 1.0);
+        AnchorPane.setBottomAnchor(userInput, 1.0);
     }
 
     /**
@@ -71,34 +96,19 @@ public class UI extends Application {
 
         AnchorPane mainLayout = new AnchorPane();
 
-        stage.setTitle("Duke");
-        stage.setResizable(false);
-        stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
+        setStage(stage);
 
         mainLayout.setPrefSize(400.0, 600.0);
 
-        scrollPane.setPrefSize(385, 535);
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        setScrollPane(scrollPane);
 
-        scrollPane.setVvalue(1.0);
-        scrollPane.setFitToWidth(true);
-
-        // You will need to import `javafx.scene.layout.Region` for this.
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
         userInput.setPrefWidth(325.0);
 
         sendButton.setPrefWidth(55.0);
 
-        AnchorPane.setTopAnchor(scrollPane, 1.0);
-
-        AnchorPane.setBottomAnchor(sendButton, 1.0);
-        AnchorPane.setRightAnchor(sendButton, 1.0);
-
-        AnchorPane.setLeftAnchor(userInput, 1.0);
-        AnchorPane.setBottomAnchor(userInput, 1.0);
+        setAnchorPane(scrollPane, userInput, sendButton);
 
         Label introText = new Label(this.getIntroduction());
 
@@ -123,16 +133,10 @@ public class UI extends Application {
     }
 
     private void handleUserInput() {
-
         String input = userInput.getText();
         Label userText = new Label(input);
-        String response;
 
-        try {
-            response = this.parser.parseInput(input, this.taskList);
-        } catch (DukeException e) {
-            response = e.getMessage();
-        }
+        String response = this.parser.parseInput(input, this.taskList);
 
         this.storage.writeToFile(this.taskList);
 
