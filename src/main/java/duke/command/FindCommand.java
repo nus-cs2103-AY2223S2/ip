@@ -37,10 +37,10 @@ public class FindCommand extends Command {
             return "No matching tasks, please try again!";
         } else {
             StringBuilder sb = new StringBuilder();
-            sb.append("Here are the matching tasks in your list:");
+            sb.append("Here are the matching tasks in your list:\n");
             int count = 1;
             for (Task t : matchingTasks) {
-                sb.append(count++  + "." + t.toString());
+                sb.append(count++  + "." + t.toString() + "\n");
             }
             return sb.toString();
         }
