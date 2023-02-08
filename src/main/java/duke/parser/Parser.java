@@ -12,6 +12,7 @@ import duke.command.FindTasksCommand;
 import duke.command.ListTasksCommand;
 import duke.command.MarkTaskCommand;
 import duke.command.RemoveTaskCommand;
+import duke.command.SortCommand;
 import duke.command.UnmarkTaskCommand;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -90,6 +91,7 @@ public class Parser {
             throw new DukeException("Please use time format: d/MM/yyyy HHmm");
         }
     }
+
     /**
      * Parses the user input and returns the appropriate command.
      * @param input The user input.
@@ -115,6 +117,8 @@ public class Parser {
             return new AddEventCommand(parseEventTask(input));
         case FIND:
             return new FindTasksCommand(parseTask(input));
+        case SORT:
+            return new SortCommand();
         case BYE:
             return new ByeCommand();
         default:

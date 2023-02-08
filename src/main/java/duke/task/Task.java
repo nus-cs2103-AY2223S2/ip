@@ -3,7 +3,7 @@ package duke.task;
 /**
  * The task class.
  */
-public class Task {
+public class Task implements Comparable<Task> {
     private boolean done;
     private final String task;
 
@@ -47,6 +47,16 @@ public class Task {
             return task.equals(((Task) obj).task) && done == ((Task) obj).done;
         }
         return false;
+    }
+
+    @Override
+    public int compareTo(Task o) {
+        if (done && !o.done) {
+            return 1;
+        } else if (!done && o.done) {
+            return -1;
+        }
+        return task.compareTo(o.task);
     }
 
 }

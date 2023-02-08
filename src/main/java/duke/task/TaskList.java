@@ -38,6 +38,16 @@ public class TaskList {
     }
 
     /**
+     * Sorts the task list.
+     * @return The sorted task list.
+     */
+    public ArrayList<Task> sort() {
+        ArrayList<Task> sortedTasks = new ArrayList<>(taskList);
+        sortedTasks.sort(Task::compareTo);
+        return sortedTasks;
+    }
+
+    /**
      * Finds tasks that contain the keyword.
      * @param keyword The keyword to search for.
      * @return The list of tasks that contain the keyword.

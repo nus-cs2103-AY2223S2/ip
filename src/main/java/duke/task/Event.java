@@ -13,7 +13,6 @@ public class Event extends Task {
 
     /**
      * Constructor for Event.
-     *
      * @param task The task description.
      * @param from The start time of the event.
      * @param to   The end time of the event.
@@ -59,6 +58,26 @@ public class Event extends Task {
                     && to.equals(((Event) obj).to);
         }
         return super.equals(obj);
+    }
+
+    @Override
+    public int compareTo(Task o) {
+        if (o instanceof Event) {
+            if (from.equals(((Event) o).from)) {
+                if (to.equals(((Event) o).to)) {
+                    return super.compareTo(o);
+                }
+                if (to.isBefore(((Event) o).to)) {
+                    return -1;
+                }
+                return 1;
+            }
+            if (from.isBefore(((Event) o).from)) {
+                return -1;
+            }
+            return 1;
+        }
+        return super.compareTo(o);
     }
 
 }
