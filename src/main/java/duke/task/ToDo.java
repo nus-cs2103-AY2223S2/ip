@@ -5,8 +5,8 @@ public class ToDo extends Task {
         super(name);
     }
 
-    public ToDo(String name, String status) {
-        super(name, status);
+    public ToDo(String name, String status, String tag) {
+        super(name, status, tag);
     }
 
     @Override

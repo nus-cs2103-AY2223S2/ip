@@ -14,8 +14,8 @@ public class Event extends Task {
         this.to = LocalDateTime.parse(to, DateTimeFormatter.ofPattern("yyyy-MM-dd/HH:mm"));
     }
 
-    public Event(String name, String from, String to, String status) {
-        super(name, status);
+    public Event(String name, String from, String to, String status, String tag) {
+        super(name, status, tag);
         try {
             this.from = LocalDateTime.parse(from, DateTimeFormatter.ofPattern("yyyy-MM-dd/HH:mm"));
             this.to = LocalDateTime.parse(to, DateTimeFormatter.ofPattern("yyyy-MM-dd/HH:mm"));

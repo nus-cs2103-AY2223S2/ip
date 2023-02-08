@@ -12,8 +12,8 @@ public class Deadline extends Task {
         this.dl = LocalDateTime.parse(deadline, DateTimeFormatter.ofPattern("yyyy-MM-dd/HH:mm"));
     }
 
-    public Deadline(String name, String deadline, String status) {
-        super(name, status);
+    public Deadline(String name, String deadline, String status, String tag) {
+        super(name, status, tag);
         try {
             this.dl = LocalDateTime.parse(deadline, DateTimeFormatter.ofPattern("yyyy-MM-dd/HH:mm"));
         } catch (DateTimeParseException e) {
