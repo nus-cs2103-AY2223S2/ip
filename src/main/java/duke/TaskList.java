@@ -40,22 +40,29 @@ public class TaskList {
     public void parseTask(String currentTask) {
         Task task = null;
         if (currentTask.charAt(1) == 'T') {
-            task = new Todo(currentTask.substring(7));
+            task = new Todo(currentTask.substring(7, currentTask.length() - 2));
         } else if (currentTask.charAt(1) == 'D') {
             String[] split = currentTask.split("by: ");
             String description = split[0].substring(7, split[0].length() - 2);
-            String date = split[1].substring(0, split[1].length() - 1);
+            String date = split[1].substring(0, split[1].length() - 3);
             task = new Deadline(description, date);
         } else {
             String[] split = currentTask.split("from: ");
             String description = split[0].substring(7, split[0].length() - 2);
             String[] dateSplit = split[1].split(" to: ");
             String from = dateSplit[0];
-            String to = dateSplit[1].substring(0, dateSplit[1].length() - 1);
+            String to = dateSplit[1].substring(0, dateSplit[1].length() - 3);
             task = new Event(description, from, to);
         }
         if (currentTask.charAt(4) == 'X') {
             task.makeCompleted();
+        }
+        char lastChar = currentTask.charAt(currentTask.length() - 1);
+        if (lastChar == 'M') {
+            task.increasePriority();
+        } else if (lastChar == 'H') {
+            task.increasePriority();
+            task.increasePriority();
         }
         assert task != null : "No Task created!";
         lstOfTasks.add(task);
@@ -156,6 +163,39 @@ public class TaskList {
         return response;
     }
 
+    public String increasePriorityOfTask(int number) {
+        assert lstOfTasks != null : "No List present!";
+        String response = "Increasing priority of task in progress...\n";
+        try {
+            if (number > lstOfTasks.size()) {
+                throw new DukeException("No such item!");
+            } else {
+                assert lstOfTasks.size() >= number : "List too small!";
+                response += lstOfTasks.get(number - 1).increasePriority();
+                response += (lstOfTasks.get(number - 1) + "\n");
+            }
+        } catch (DukeException err) {
+            response += (err + "\n");
+        }
+        return response;
+    }
+
+    public String decreasePriorityOfTask(int number) {
+        assert lstOfTasks != null : "No List present!";
+        String response = "Decreasing priority of task in progress...\n";
+        try {
+            if (number > lstOfTasks.size()) {
+                throw new DukeException("No such item!");
+            } else {
+                assert lstOfTasks.size() >= number : "List too small!";
+                response += lstOfTasks.get(number - 1).decreasePriority();
+                response += (lstOfTasks.get(number - 1) + "\n");
+            }
+        } catch (DukeException err) {
+            response += (err + "\n");
+        }
+        return response;
+    }
     /**
      * Deletes a task.
      *

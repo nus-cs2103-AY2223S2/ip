@@ -30,6 +30,33 @@ public class Task {
         this.isCompleted = true;
     }
 
+    public String increasePriority() {
+        String result = "";
+        if (this.priority == PriorityLevel.LOW) {
+            this.priority = PriorityLevel.MEDIUM;
+            result += "Task is now at priority level Medium\n";
+        } else if (this.priority == PriorityLevel.MEDIUM) {
+            this.priority = PriorityLevel.HIGH;
+            result += "Task is now at priority level High\n";
+        } else {
+            result += "Task is of highest priority level already!\n";
+        }
+        return result;
+    }
+
+    public String decreasePriority() {
+        String result = "";
+        if (this.priority == PriorityLevel.HIGH) {
+            this.priority = PriorityLevel.MEDIUM;
+            result += "Task is now at priority level Medium\n";
+        } else if (this.priority == PriorityLevel.MEDIUM) {
+            this.priority = PriorityLevel.LOW;
+            result += "Task is now at priority level Low\n";
+        } else {
+            result += "Task is of lowest priority level already!\n";
+        }
+        return result;
+    }
     /**
      * Returns the string representation of the task.
      * A [ ] indicates an uncompleted task, while a [X] indicates a completed task.
@@ -64,8 +91,18 @@ public class Task {
             completedString += "[ ] ";
         }
 
-        completedString += this.name;
+        completedString += this.name + " ";
         return completedString;
+    }
+
+    public String addOn() {
+        if (this.priority == PriorityLevel.LOW) {
+            return "L";
+        } else if (this.priority == PriorityLevel.MEDIUM) {
+            return "M";
+        } else {
+            return "H";
+        }
     }
 
     public boolean contains(String keyword) {

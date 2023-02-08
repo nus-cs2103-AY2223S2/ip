@@ -27,6 +27,6 @@ public class Todo extends Task {
      * @return the desired string representation of a To-do instance.
      */
     public String parse() {
-        return "[T]" + super.parse();
+        return "[T]" + super.parse() + super.addOn();
     }
 }

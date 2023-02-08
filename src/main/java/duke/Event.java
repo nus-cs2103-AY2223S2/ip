@@ -34,6 +34,6 @@ public class Event extends Task {
      * @return the desired string representation of an Event instance.
      */
     public String parse() {
-        return "[E]" + super.parse() + " (from: " + from + " to: " + to + ")";
+        return "[E]" + super.parse() + " (from: " + from + " to: " + to + ") " + super.addOn();
     }
 }
