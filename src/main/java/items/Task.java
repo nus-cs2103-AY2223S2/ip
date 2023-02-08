@@ -20,13 +20,21 @@ public abstract class Task {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
-    public String getTaskType(){ return this.taskType;}
+    public String getTaskType() {
+        return this.taskType;
+    }
 
-    public void setDone(){this.isDone = true;}
+    public void setDone() {
+        this.isDone = true;
+    }
 
-    public void setNotDone(){this.isDone = false;}
+    public void setNotDone() {
+        this.isDone = false;
+    }
 
-    public String getDescription(){return this.description;}
+    public String getDescription() {
+        return this.description;
+    }
 
     public abstract String generateStorageForm();
 

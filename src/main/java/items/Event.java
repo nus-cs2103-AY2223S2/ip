@@ -1,16 +1,18 @@
 package items;
 
-public class Event extends Task{
-    private String startDate;
-    private String endDate;
+import java.time.LocalDate;
 
-    public Event(String description, String startDate, String endDate) {
+public class Event extends Task{
+    private final LocalDate startDate;
+    private final LocalDate endDate;
+
+    public Event(String description, LocalDate startDate, LocalDate endDate) {
         super(description, "E");
         this.startDate = startDate;
         this.endDate = endDate;
     }
 
-    public Event(String description, boolean done, String startDate, String endDate) {
+    public Event(String description, boolean done, LocalDate startDate, LocalDate endDate) {
         super(description, "E", done);
         this.startDate = startDate;
         this.endDate = endDate;

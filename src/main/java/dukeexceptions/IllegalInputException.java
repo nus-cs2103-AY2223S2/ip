@@ -1,6 +1,6 @@
 package dukeexceptions;
 
-public class IllegalInputException extends IllegalArgumentException{
+public class IllegalInputException extends DukeException{
     public IllegalInputException(String s) {
         super(s);
     }

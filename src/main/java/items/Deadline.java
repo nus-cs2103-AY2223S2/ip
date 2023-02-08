@@ -3,7 +3,7 @@ package items;
 import java.time.LocalDate;
 
 public class Deadline extends Task{
-    private LocalDate endDate;
+    private final LocalDate endDate;
     public Deadline(String description, LocalDate endDate) {
         super(description, "D");
         this.endDate = endDate;
