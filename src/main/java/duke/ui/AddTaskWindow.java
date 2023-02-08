@@ -33,7 +33,7 @@ import duke.task.ToDo;
 public class AddTaskWindow extends ControllerBase implements Initializable {
     private static Map<String, TaskCreator> taskCreators = Map.of(
         "ToDo", (desc, a, b) -> new ToDo(desc),
-        "Deadline", (desc, due, a) -> new Deadline(desc, due),
+        "Deadline", (desc, a, due) -> new Deadline(desc, due),
         "Event", (desc, start, end) -> new Event(desc, start, end)
     );
 
@@ -67,8 +67,10 @@ public class AddTaskWindow extends ControllerBase implements Initializable {
                 error = "A valid description for the task must be provided!";
             }
 
-            if (typeToAdd.equals("Deadline") && controller.startDatePicker.getValue() == null) {
-                error = "Need a deadline!";
+            if (typeToAdd.equals("Deadline")) {
+                if (controller.endDatePicker.getValue() == null) {
+                    error = "Need a deadline!";
+                }
             } else if (typeToAdd.equals("Event")) {
                 if (controller.startDatePicker.getValue() == null) {
                     error = "Need a start time for event!";
@@ -95,8 +97,8 @@ public class AddTaskWindow extends ControllerBase implements Initializable {
         LocalDate endDate = endDatePicker.getValue();
         LocalTime time = LocalTime.now();
 
-        LocalDateTime start = LocalDateTime.of(startDate, time);
-        LocalDateTime end = LocalDateTime.of(endDate, time);
+        LocalDateTime start = startDate == null ? null : LocalDateTime.of(startDate, time);
+        LocalDateTime end = endDate == null ? null : LocalDateTime.of(endDate, time);
         return taskCreators.get(typeToAdd).createTask(taskDesc, start, end);
     }
 
@@ -153,5 +155,7 @@ public class AddTaskWindow extends ControllerBase implements Initializable {
             .addListener((option, oldValue, newValue) -> onTaskTypeChanged());
         startDatePicker.setDisable(true);
         endDatePicker.setDisable(true);
+        startTimePicker.setDisable(true);
+        endTimePicker.setDisable(true);
     }
 }

@@ -22,9 +22,9 @@
         </columnConstraints>
         <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -39,7 +39,7 @@
             <DatePicker fx:id="startDatePicker" prefHeight="26.0" prefWidth="150.0" GridPane.rowIndex="5" />
             <Label text="End Date" GridPane.rowIndex="6" />
             <DatePicker fx:id="endDatePicker" prefHeight="26.0" prefWidth="150.0" GridPane.rowIndex="7" />
-            <Label fx:id="startTimePicker" text="Start Time" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label text="Start Time" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <DatePicker fx:id="startTimePicker" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <Label text="End Time" GridPane.columnIndex="1" GridPane.rowIndex="6" />
             <DatePicker fx:id="endTimePicker" GridPane.columnIndex="1" GridPane.rowIndex="7" />
