@@ -1,5 +1,6 @@
 package command;
 
+import duke.DukeException;
 import duke.MainWindow;
 import duke.Ui;
 
@@ -23,13 +24,13 @@ public class UnMarkCommand {
     /**
      * This method is used to unmark a certain task.
      */
-    public String unmark() {
+    public String unmark() throws DukeException {
         try {
             Task curr = TaskList.get(number);
             curr.unmark();
             return Ui.printUnmark(curr);
         } catch (Exception m){
-            return Ui.printWrongNumber();
+            throw new DukeException(Ui.printWrongNumber());
         }
     }
 }

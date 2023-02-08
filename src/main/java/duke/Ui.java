@@ -72,7 +72,7 @@ public class Ui {
      * when using find function.
      */
     public static String printEnterKeyword() {
-        return("Please enter only one keyword:");
+        return("Please enter a keyword");
     }
 
     /**

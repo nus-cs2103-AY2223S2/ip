@@ -24,14 +24,14 @@ public class DeleteCommand {
     /**
      * This method is used to delete a certain task from TaskList.
      */
-    public String delete() {
+    public String delete() throws DukeException{
         try {
             Task curr = TaskList.get(number);
             curr.minus();
             TaskList.remove(number);
             return Ui.printDelete(curr);
         } catch (Exception m){
-            return Ui.printWrongNumber();
+            throw new DukeException(Ui.printWrongNumber());
         }
     }
 }

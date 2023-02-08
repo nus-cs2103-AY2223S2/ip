@@ -1,5 +1,7 @@
 package command;
 
+import duke.Duke;
+import duke.DukeException;
 import duke.MainWindow;
 import duke.Ui;
 
@@ -28,10 +30,10 @@ public class TodoCommand {
      * Parsing as well as creation of Todo object is done here.
      *
      */
-    public String create() {
+    public String create() throws DukeException {
         assert inputs[0].equalsIgnoreCase("TODO") : "Contact developer on Todo bug";
         if (inputs.length == 1) {
-            return Ui.printMissingName();
+            throw new DukeException(Ui.printMissingName());
         } else {
             for (int i = 1; i < inputs.length; i++) {
                 strBuild.append(inputs[i]);

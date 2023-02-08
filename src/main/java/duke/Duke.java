@@ -24,14 +24,11 @@ public class Duke {
     }
 
     public String getInitMsg() {
-        return storage.init();
+        return storage.initFile();
     }
 
-    public static void main(String[] args) throws Exception {
-        //new Duke().run();
-    }
 
-    public String getResponse(String input) {
+    public String getResponse(String input) throws Exception{
         return parser.parse(input);
     }
 

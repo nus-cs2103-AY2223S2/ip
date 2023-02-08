@@ -29,7 +29,7 @@ public class Storage {
      * for future reference.
      *
      */
-    public String init() {
+    public String initFile() {
         try {
             Files.createDirectory(Paths.get(DIRPATH));
             File file = new File(Files.createFile(Paths.get(FILEPATH)).toString());
