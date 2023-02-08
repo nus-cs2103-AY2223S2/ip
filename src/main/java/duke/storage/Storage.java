@@ -66,6 +66,9 @@ public class Storage {
                 String[] taskInTxt = sc.nextLine().split("#");
                 Command c = parser.parseStorage(taskInTxt);
                 c.execute(tasks, ui, storage);
+                if (taskInTxt[taskInTxt.length-1].equals("[X]")) {
+                    tasks.get(tasks.size()-1).markAsDone();
+                }
             }
             sc.close();
         }

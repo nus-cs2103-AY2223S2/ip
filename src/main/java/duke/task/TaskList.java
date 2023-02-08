@@ -3,6 +3,7 @@ package duke.task;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -15,7 +16,7 @@ import java.util.Scanner;
  * @since 0.1
  */
 public class TaskList {
-    private List<Task> taskList = new LinkedList<>();
+    private List<Task> taskList = new ArrayList<>();
 
     /**
      * Constructor of TaskList.
