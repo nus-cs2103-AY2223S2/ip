@@ -1,12 +1,12 @@
 package duke.command;
 
 import duke.exception.IndexOutOfBoundException;
-import duke.exception.MissingArgumentException;
+import duke.parser.InputValidator;
 import duke.storage.TaskList;
 
 /**
  * Class use to handle command: unmark duke.task.
- * Allows user to unmark specific duke.task in the duke.task list.
+ * Allows user to unmark specific task in the task list.
  */
 public class UnmarkCommand extends Command {
     private String request;
@@ -19,25 +19,27 @@ public class UnmarkCommand extends Command {
         this.request = request;
     }
 
+    /**
+     * Execute the <code>Unmark</code> task.
+     *
+     * @param tasks the list to store new task.
+     * @return Response after unmarking the indicated task.
+     * @throws IndexOutOfBoundException
+     */
     @Override
     public String execute(TaskList tasks) throws IndexOutOfBoundException {
+        String requestType = "unmark";
+        String indexString = InputValidator.normaliseIndexRequest(request, requestType);
+        Integer idx = Integer.parseInt(indexString) - 1;
 
-        String[] req = this.request.split("unmark ");
-
-        // check missing index
-        if (req.length < 2) {
-            throw new MissingArgumentException("Missing index!");
-        }
-
-        Integer idx = Integer.parseInt(req[1]) - 1;
-
-        // check valid index
+        /* Checks for valid index, i.e., within the range of task list */
         if (idx >= tasks.numOfTask()) {
             throw new IndexOutOfBoundException();
         }
 
         tasks.getTask(idx).unmarkComplete();
+        String response = String.format("Aww! One more task on the list \n %s", tasks.getTask(idx));
 
-        return "Aww! One more task on the list \n" + tasks.getTask(idx);
+        return response;
     }
 }

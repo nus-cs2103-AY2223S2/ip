@@ -2,7 +2,7 @@ package duke.command;
 
 import java.util.ArrayList;
 
-import duke.exception.MissingArgumentException;
+import duke.parser.InputValidator;
 import duke.storage.TaskList;
 import duke.task.Task;
 
@@ -21,17 +21,17 @@ public class FindCommand extends Command {
         this.request = request;
     }
 
+    /**
+     * Execute the <code>Find</code> task.
+     *
+     * @param tasks the list to store new task.
+     * @return Response after getting all tasks.
+     */
     @Override
     public String execute(TaskList tasks) {
+        String keyword = InputValidator.normaliseFindRequest(request);
 
-        String[] inquiry = request.trim().split("find");
-
-        // check missing enquiry
-        if (inquiry.length == 0) {
-            throw new MissingArgumentException("What do you wish to find?");
-        }
-
-        ArrayList<Task> result = tasks.find(inquiry[1].strip());
+        ArrayList<Task> result = tasks.find(keyword);
 
         // no task with enquired keyword in the task list
         if (result.size() == 0) {

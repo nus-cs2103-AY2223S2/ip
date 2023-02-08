@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import duke.exception.InvalidArgumentException;
 import duke.exception.MissingArgumentException;
 import duke.parser.DateTimeParser;
+import duke.parser.InputValidator;
 import duke.storage.TaskList;
 import duke.task.Event;
 
@@ -24,53 +25,34 @@ public class AddEventCommand extends Command {
         this.request = request;
     }
 
+    /**
+     * Execute the <code>Event</code> task.
+     *
+     * @param tasks the list to store new task.
+     * @return Response after added the task into task list.
+     * @throws MissingArgumentException
+     * @throws InvalidArgumentException
+     */
     @Override
     public String execute(TaskList tasks) throws MissingArgumentException, InvalidArgumentException {
+        String[] processedRequest = InputValidator.normaliseEventRequest(request);
 
-        String[] req = request.split("event ");
-
-        // check missing `task description`
-        if (req.length < 2) {
-            throw new MissingArgumentException("Missing task description!");
-        }
-
-        req = req[1].split("/from ");
-        String task = req[0].strip();
-
-        // check missing `task description` and `start date`
-        if (task.equals("")) {
-            throw new MissingArgumentException("Missing task description!");
-        } else if (req.length < 2) {
-            throw new MissingArgumentException("Please insert an start date.");
-        }
-
-        String[] duration = req[1].split(" /to ");
-
-        // check missing `end date`
-        if (duration.length < 2) {
-            throw new MissingArgumentException("Please insert an end date.");
-        }
-
-        String from = duration[0].strip();
-        String to = duration[1].strip();
-
-        // check missing `start date` and ` end date`
-        if (from.equals("")) {
-            throw new MissingArgumentException("Please insert a start date.");
-        } else if (duration.length < 2 || to.equals("")) {
-            throw new MissingArgumentException("Please insert an end date.");
-        }
+        String description = processedRequest[0];
+        String from = processedRequest[1];
+        String to = processedRequest[2];
 
         LocalDateTime startDate = DateTimeParser.parse(from);
         LocalDateTime endDate = DateTimeParser.parse(to);
-        Event newEvent = tasks.addEvent(task, startDate, endDate);
+        Event newEvent = tasks.addEvent(description, startDate, endDate);
 
-        // check valid `duration`
+        // checks valid `duration`
         if (startDate.isAfter(endDate)) {
             throw new InvalidArgumentException("Your start date should be before your end date!");
         }
 
-        return "Great! I've added this task for you \n" + newEvent
-                + "\nYou have " + tasks.numOfTask() + " tasks in the list";
+        String response = String.format("Great! I've added this task for you\n %s \n"
+                + "You have %d tasks in the list.", newEvent, tasks.numOfTask());
+
+        return response;
     }
 }

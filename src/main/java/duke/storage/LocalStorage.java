@@ -111,6 +111,7 @@ public class LocalStorage {
                                     + "YYYY-MM-DD HHmm (e.g. 2000-01-01 2311)");
                         }
                     default:
+                        assert false: "Invalid data inserted into duke.txt file";
                         break;
                     }
                     line = reader.readLine();
