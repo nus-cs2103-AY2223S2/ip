@@ -26,6 +26,7 @@ public class EventCommand {
      *
      */
     public String create() {
+        assert inputs[0].equalsIgnoreCase("EVENT") : "Contact developer on Event bug";
         boolean isName = true;
         boolean isStart = false;
         boolean isEnd = false;

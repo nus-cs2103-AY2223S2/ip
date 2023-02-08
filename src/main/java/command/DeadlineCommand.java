@@ -26,6 +26,7 @@ public class DeadlineCommand {
      * Parsing as well as creation of Deadline object is done here.
      */
     public String create() {
+        assert inputs[0].equalsIgnoreCase("DEADLINE") : "Contact developer on Deadline bug";
         boolean isName = true;
         String name = " ", end = " ";
         for (int i = 1; i < inputs.length; i++) {
