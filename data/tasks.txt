@@ -1,4 +1,4 @@
 E |   |  hello |f n |t n
-D |   |  hi |by  ten
+D |   |  hi |by   ten
 T |   |  wow
 T |   |  hello
