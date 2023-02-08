@@ -75,18 +75,23 @@ public class Ui {
 
     public String printList(TaskList taskList) {
 
-        if (taskList.isEmpty()) {
-            return "You have nothing in your tasklist";
+        try {
+            if (taskList.isEmpty()) {
+                return "You have nothing in your tasklist";
+            }
+
+            String output = "Here are the tasks in your list: \n";
+
+            for (int i = 0; i < taskList.size(); i++) {
+                Task toDo = taskList.get(i);
+                output += (i + 1) + "." + toDo + "\n";
+            }
+
+            return output;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("hi");
         }
-
-        String output = "Here are the tasks in your list: \n";
-
-        for (int i = 0; i < taskList.size(); i++) {
-            Task toDo = taskList.get(i);
-            output += (i + 1) + "." + toDo + "\n";
-        }
-
-        return output;
+        return "";
     }
 
     public String printNoTaskWithKeywordFound(List<String> keyword) {

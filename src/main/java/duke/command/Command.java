@@ -20,20 +20,11 @@ public abstract class Command {
      */
     public abstract String execute() throws DukeException;
 
-    /*
-     * getTaskName checks the command line for the correct taskName syntax
+    /**
+     * Check the command line for the correct taskName syntax
      * throws exceptions for missing name or wrong keyword
      */
     public static String getTaskName(String type, String input) throws DukeException {
-
-        if (type.equals("todo")) {
-            if (input.trim().isEmpty()) {
-                throw new DukeException("OOPS!!! Missing Task Name.");
-            } else {
-                return input;
-            }
-        }
-
         String endWord = type.equals("deadline") ? "/by" : "/from";
 
         int startIndex = 0;
@@ -85,19 +76,16 @@ public abstract class Command {
         return input.substring(startIndex);
     }
 
-    public static ArrayList<String> getKeyword(String... inputs) throws DukeException {
+    public static ArrayList<String> getKeyword(String... inputs) {
 
-        if (inputs[0] == "") {
-            throw new DukeException("OOPS!!! Missing Keyword.");
-        } else {
-            ArrayList<String> keywords = new ArrayList<>();
+        ArrayList<String> keywords = new ArrayList<>();
 
-            Collections.addAll(keywords, inputs);
+        Collections.addAll(keywords, inputs);
 
-            System.out.println(keywords.size());
+        System.out.println(keywords.size());
 
-            return keywords;
-        }
+        return keywords;
+
 
     }
 }

@@ -15,12 +15,14 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 
 /**
- * Parser class: handles user inputs
+ * Parser class handles user inputs.
+ *
+ * @author Guo-KeCheng
  */
 public class Parser {
 
     /**
-     * Enum CommandType to identify different commands
+     * Enum CommandType to identify different commands.
      */
     private enum CommandType {
         BYE,
@@ -35,7 +37,7 @@ public class Parser {
     }
 
     /**
-     * Parse user input into an executable command
+     * Parse user input into an executable command.
      *
      * @param input    User inputs as String
      * @param taskList Existing TaskList
@@ -47,19 +49,19 @@ public class Parser {
     public static Command parse(String input, TaskList taskList, Ui ui, Storage storage)
             throws DukeException {
 
-        checkForEmptyInput(input);
-        return convertToCommand(input, taskList, ui, storage);
+        checkForEmptyInput(input.trim());
+        return convertToCommand(input.trim(), taskList, ui, storage);
 
     }
 
     /**
-     * Handles empty inputs
+     * Handles empty inputs.
      *
      * @param input Entire String input from user
      * @throws DukeException If input is empty
      */
     private static void checkForEmptyInput(String input) throws DukeException {
-        if (input.trim().isEmpty()) {
+        if (input.isEmpty()) {
             throw new DukeException("Empty Input");
         }
     }
@@ -70,7 +72,7 @@ public class Parser {
             String[] inputs = input.split(" ");
             CommandType commandType = CommandType.valueOf(inputs[0].toUpperCase());
 
-            // Removes the commandType string from input
+            // Filter out any invalid inputs to always instantiate command with correct inputs
             String filtered_input = filterInput(input);
 
             switch (commandType) {
@@ -109,11 +111,37 @@ public class Parser {
         }
     }
 
-    private static String filterInput(String input) {
+    private static String filterInput(String input) throws DukeException {
         String[] result = input.split(" ", 2);
+        CommandType commandType = CommandType.valueOf(result[0].toUpperCase());
 
         if (result.length == 1) {
-            return "";
+            switch (commandType) {
+            case MARK:
+                throw new DukeException("Incorrect command: mark <valid task index>");
+
+            case UNMARK:
+                throw new DukeException("Incorrect command: unmark <valid task index>");
+
+            case DELETE:
+                throw new DukeException("Incorrect command: delete <valid task index>");
+
+            case TODO:
+                throw new DukeException("OOPS!!! Missing Todo Name.");
+
+            case DEADLINE:
+                throw new DukeException("OOPS!!! Missing Deadline Name.");
+
+            case EVENT:
+                throw new DukeException("OOPS!!! Missing Event Name.");
+
+            case FIND:
+                throw new DukeException("OOPS!!! Missing Keyword.");
+
+            default:
+                return "";
+            // Will not reach here
+            }
         } else {
             return result[1];
         }

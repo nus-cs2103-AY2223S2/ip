@@ -36,7 +36,6 @@ public class Duke {
      */
     public Duke() {
         ui = new Ui();
-        ui.printWelcome();
         String filePath = "./data/duke.txt";
         storage = new Storage(filePath, ui);
         try {

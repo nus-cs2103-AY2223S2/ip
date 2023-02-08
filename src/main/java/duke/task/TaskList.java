@@ -4,17 +4,17 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
- * A list of Tasks
+ * A list of Tasks.
  *
- * author Guo-KeCheng
+ * @author Guo-KeCheng
  */
 public class TaskList implements Iterable<Task> {
 
     private final ArrayList<Task> taskList;
 
     /**
-     * TaskList class constructor
-     * Instantiates taskList to be an empty ArrayList
+     * TaskList class constructor.
+     * Instantiates taskList to be an empty ArrayList.
      */
     public TaskList() {
         this.taskList = new ArrayList<>();

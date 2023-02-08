@@ -15,7 +15,7 @@ import duke.ui.Ui;
 
 /**
  * Storage solely handles any activities related to storage
- * including loading and saving data to a file
+ * including loading and saving data to a file.
  *
  * @author Guo-KeCheng
  */
@@ -31,7 +31,7 @@ public class Storage {
     }
 
     /**
-     * Storage constructor
+     * Storage constructor.
      *
      * @param filePath String representation of a filepath
      * @param ui       Shared Ui Object
@@ -44,10 +44,10 @@ public class Storage {
     }
 
     /**
-     * Saves Task in TaskList to a file
+     * Saves Task in TaskList to a file.
      *
      * @param taskList Existing TaskList
-     * @throws IOException if file does not exist and cannot be created
+     * @throws IOException If file does not exist and cannot be created
      */
     public void save(TaskList taskList) throws IOException {
         File file = new File(filePath);
@@ -68,22 +68,22 @@ public class Storage {
             fw.write(str);
             fw.write(System.lineSeparator());
         }
-        ui.printTaskSaved();
+
         fw.close();
     }
 
     /**
-     * Load data into a TaskList from a file
+     * Load data into a TaskList from a file.
      *
      * @param filePath String representation of filepath to load from
      * @return TaskList with previously saved data
      * @throws FileNotFoundException If source is not found
      */
     public TaskList load(String filePath) throws FileNotFoundException {
-        File file = new File(filePath); // create a File for the given file path
+        File file = new File(filePath);
         TaskList taskList = new TaskList();
 
-        Scanner sc = new Scanner(file); // create a Scanner using the File as the source
+        Scanner sc = new Scanner(file);
 
         while (sc.hasNext()) {
 
@@ -97,17 +97,14 @@ public class Storage {
             switch (taskType) {
             case TODO:
                 Task todo = new ToDo(task, status);
-                ui.printTask(todo);
                 taskList.add(todo);
                 break;
             case DEADLINE:
                 Task deadline = new Deadline(task, status, inputs[3]);
-                ui.printTask(deadline);
                 taskList.add(deadline);
                 break;
             case EVENT:
                 Task event = new Event(task, status, inputs[3], inputs[4]);
-                ui.printTask(event);
                 taskList.add(event);
                 break;
             default:
