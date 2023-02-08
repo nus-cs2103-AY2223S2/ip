@@ -15,6 +15,8 @@ public class UnmarkTaskCommand extends Command {
 
     @Override
     public String execute() throws DukeException {
+        assert taskList != null : "TaskList cannot be null";
+        assert ui != null : "Ui cannot be null";
         if (index >= taskList.getSize()) {
             throw new DukeException("Task number is out of range!");
         }

@@ -16,6 +16,7 @@ public class ByeCommand extends Command {
 
     @Override
     public String execute() {
+        assert ui != null : "Ui cannot be null";
         return ui.printByeMessage();
     }
 }

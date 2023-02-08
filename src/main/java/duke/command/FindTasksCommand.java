@@ -12,6 +12,8 @@ public class FindTasksCommand extends Command {
 
     @Override
     public String execute() {
+        assert taskList != null : "TaskList cannot be null";
+        assert ui != null : "Ui cannot be null";
         return ui.printFoundTasks(taskList.findTasks(keyword));
     }
 

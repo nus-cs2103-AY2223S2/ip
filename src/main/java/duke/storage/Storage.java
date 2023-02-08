@@ -33,6 +33,7 @@ public class Storage {
             if (!file.exists()) {
                 file.getParentFile().mkdirs();
                 file.createNewFile();
+                assert file.exists() : "File creation failed.";
             }
         } catch (IOException e) {
             e.printStackTrace();

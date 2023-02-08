@@ -39,6 +39,9 @@ public class JavaFxUi extends Application {
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setUi(new JavaFxUi());
             stage.show();
+            assert ap != null : "AnchorPane cannot be null";
+            assert scene != null : "Scene cannot be null";
+            assert fxmlLoader != null : "FXMLLoader cannot be null";
         } catch (IOException e) {
             e.printStackTrace();
         }
