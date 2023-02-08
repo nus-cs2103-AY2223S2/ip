@@ -36,6 +36,9 @@ public class ToDoCommand extends AddTaskCommand {
      */
     @Override
     public void run(Ui ui, TaskList taskList, Storage storage, String... args) throws DukeException {
+        // Assert arguments has only 1 item: description.
+        assert args.length == 1;
+
         String description = args[0];
 
         addTask(new ToDo(description), ui, taskList, storage);

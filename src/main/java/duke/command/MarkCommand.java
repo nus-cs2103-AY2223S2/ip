@@ -36,6 +36,9 @@ public class MarkCommand implements Command {
      */
     @Override
     public void run(Ui ui, TaskList taskList, Storage storage, String... args) throws DukeException {
+        // Assert arguments has only 1 item: task number.
+        assert args.length == 1;
+
         int taskNo = Integer.parseInt(args[0]);
 
         if (taskNo > 0 && taskNo <= taskList.getTotalTasks()) {

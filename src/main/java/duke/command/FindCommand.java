@@ -27,8 +27,21 @@ public class FindCommand implements Command {
         return "find <text>";
     }
 
+    /**
+     * Find tasks containing text.
+     *
+     * @param ui       User interface.
+     * @param taskList Task list.
+     * @param storage  Storage.
+     * @param args     Argument list in order: text to find.
+     * @throws DukeException If failed to save new task list to storage or invalid date time
+     *                       format.
+     */
     @Override
     public void run(Ui ui, TaskList taskList, Storage storage, String... args) throws DukeException {
+        // Assert arguments has only 1 item: text to find.
+        assert args.length == 1;
+
         String textToFind = args[0];
 
         ui.showLine();
