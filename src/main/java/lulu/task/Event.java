@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 public class Event extends Task {
+    final int NUMBER_HYPHENS_IN_DATE = 3;
     private LocalDate fromDate;
     private String from;
     private LocalDate toDate;
@@ -12,12 +13,12 @@ public class Event extends Task {
     public Event(String description, String from, String to) {
         super(description);
         try {
-            if (from.split("-").length == 3) {
+            if (from.split("-").length == NUMBER_HYPHENS_IN_DATE) {
                 this.fromDate = LocalDate.parse(from.substring(1, 11));
             } else {
                 this.from = from;
             }
-            if (to.split("-").length == 3) {
+            if (to.split("-").length == NUMBER_HYPHENS_IN_DATE) {
                 this.toDate = LocalDate.parse(to.substring(1, 11));
             } else {
                 this.to = to;

@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task {
+    final int NUMBER_HYPHENS_IN_DATE = 3;
 
     private LocalDate byDate;
     private String by;
@@ -11,7 +12,7 @@ public class Deadline extends Task {
     public Deadline(String description, String by) {
         super(description);
         try {
-            if (by.split("-").length == 3) {
+            if (by.split("-").length == NUMBER_HYPHENS_IN_DATE) {
                 this.byDate = LocalDate.parse(by.substring(1, 11));
             } else {
                 this.by = by;
