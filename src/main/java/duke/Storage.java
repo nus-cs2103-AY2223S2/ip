@@ -45,6 +45,7 @@ public class Storage {
      * @return reader object for the file
      */
     public BufferedReader load() {
+        assert this.fileReader != null && this.filepath != null && this.file != null;
         if (this.content != null) {
             return content;
         }

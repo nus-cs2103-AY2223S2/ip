@@ -42,6 +42,7 @@ public class Duke {
      * Method that abstracts the running of the program
      */
     public void run() {
+        assert this.storage != null && this.tasks != null && this.ui != null;
         this.ui.showWelcome();
         boolean isExit = false;
         while (!isExit) {
