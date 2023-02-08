@@ -19,6 +19,7 @@ public class TaskList {
     }
 
     public void remove(int taskNumber) {
+        assert (taskNumber > 0);
         list.remove(taskNumber - 1);
     }
 
@@ -26,23 +27,28 @@ public class TaskList {
         return this.list.size();
     }
 
-    public Task get(int i) {
-        return this.list.get(i);
+    public Task get(int index) {
+        assert (index >= 0);
+        return this.list.get(index);
     }
 
     public String getRecentTaskDescription() {
+        assert (list.size() - 1 >= 0);
         return this.list.get(list.size() - 1).toString();
     }
 
     public String getTaskDescription(int taskNumber) {
+        assert (taskNumber > 0);
         return this.list.get(taskNumber - 1).toString();
     }
 
     public void markTask(int taskNumber) {
+        assert (taskNumber > 0);
         this.list.get(taskNumber - 1).markAsDone();
     }
 
     public void unmarkTask(int taskNumber) {
+        assert (taskNumber > 0);
         list.get(taskNumber - 1).markAsUndone();
     }
 
@@ -74,6 +80,7 @@ public class TaskList {
      */
     public void load(String s) {
         String[] command = s.split("`");
+        assert (command[0] == "D" || command[0] == "E" || command[0] == "T");
         switch (command[0]) {
         case "D":
             this.add(new Deadline(command[2], command[3]));
