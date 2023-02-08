@@ -1,6 +1,5 @@
 package duke.ui;
 
-import duke.DialogBox;
 import duke.Duke;
 import javafx.fxml.FXML;
 

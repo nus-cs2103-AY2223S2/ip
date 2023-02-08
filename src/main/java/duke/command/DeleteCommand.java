@@ -3,7 +3,7 @@ package duke.command;
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
+import duke.ui.Ui;
 
 import duke.task.Task;
 
@@ -41,21 +41,24 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Removes task from list
-     * Saves changes made to list in the hard disk
+     * Removes specified task from list
+     * Save changes made to list in the hard disk
+     * Returns response for removing specified task.
      *
-     * @param tasks List of tasks
-     * @param ui Handles user interaction
-     * @param storage Handles saving and loading tasks
+     * @param tasks List of tasks.
+     * @param ui Handles user interaction.
+     * @param storage Handles saving and loading tasks.
+     * @return Response for adding specified task.
      * @throws DukeException If encountering an I/O interrupt while saving data
      * @throws DukeException If given index is not in the list of tasks
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task task = tasks.delete(index);
-        ui.echo("Noted. I've removed this task:");
-        ui.showTask(task);
-        ui.showTaskCount(tasks);
         storage.save(tasks);
+
+        return ui.getDeleteMessage()
+                + "  " + task
+                + ui.getTasksCountMessage(tasks.size());
     }
 }

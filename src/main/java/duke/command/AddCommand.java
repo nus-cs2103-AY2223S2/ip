@@ -3,7 +3,7 @@ package duke.command;
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
+import duke.ui.Ui;
 
 import duke.task.Task;
 
@@ -23,20 +23,23 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Adds task to list
-     * Saves changes made to list in the hard disk
+     * Adds specified task to list.
+     * Save changes made to list in the hard disk.
+     * Returns response for adding specified task.
      *
-     * @param tasks List of tasks
-     * @param ui Handles user interaction
-     * @param storage Handles saving and loading tasks
-     * @throws DukeException If encountering an I/O interrupt while saving data
+     * @param tasks List of tasks.
+     * @param ui Handles user interaction.
+     * @param storage Handles saving and loading tasks.
+     * @return Response for adding specified task.
+     * @throws DukeException if encountering an exception specific to Duke.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.add(task);
-        ui.echo("Got it. I've added this task:");
-        ui.showTask(task);
-        ui.showTaskCount(tasks);
         storage.save(tasks);
+
+        return ui.getAddMessage()
+                + "  " + task
+                + ui.getTasksCountMessage(tasks.size());
     }
 }

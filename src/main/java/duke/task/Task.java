@@ -58,7 +58,7 @@ public class Task {
      * @return The task's saved data in string format
      */
     public String save() {
-        return "  | " +  getStatusIcon()
+        return "  | " + getStatusIcon()
                 + " | " + description;
     }
 

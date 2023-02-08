@@ -1,26 +1,30 @@
 package duke;
 
 import duke.command.Command;
-
-
+import duke.ui.Ui;
 
 /**
- * Generates a Duke object
+ * Duke task management
  */
 public class Duke {
     public static final String DEFAULT_FILEPATH = "data/tasks.txt";
 
-    private final Storage storage;
-    private TaskList tasks;
-    private Ui ui;
+    private Storage storage = new Storage(DEFAULT_FILEPATH);
+    private TaskList tasks = new TaskList();
+    private Ui ui = new Ui();
 
     /**
      * Generates a Duke object.
-     * Stores saved data in default filepath.
+     * Stores saved data in specified filepath.
+     *
+     * @param args Filepath, UI type.
      */
-    public Duke() {
+    public Duke(String... args) {
         ui = new Ui();
         storage = new Storage(DEFAULT_FILEPATH);
+        if (args.length > 0) {
+            storage = new Storage(args[0]);
+        }
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -30,24 +34,10 @@ public class Duke {
     }
 
     /**
-     * Generates a Duke object.
-     * Stores saved data in specified filepath.
-     *
-     * @param filePath Location of saved data.
+     * Creates and run Duke.
      */
-    public Duke(String... filePath) {
-        ui = new Ui();
-        if (filePath.length > 0) {
-            storage = new Storage(filePath[0]);
-        } else {
-            storage = new Storage("data/tasks.txt");
-        }
-        try {
-            tasks = new TaskList(storage.load());
-        } catch (DukeException e) {
-            ui.showLoadingError();
-            tasks = new TaskList();
-        }
+    public static void main(String[] args) {
+        new Duke("data/tasks.txt").run();
     }
 
     /**
@@ -61,7 +51,8 @@ public class Duke {
                 String fullCommand = ui.readCommand();
                 ui.showLine();
                 Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
+                String response = c.execute(tasks, ui, storage);
+                ui.echo(response);
                 isExit = c.isExit();
             } catch (DukeException e) {
                 ui.showError(e.getMessage());
@@ -71,14 +62,12 @@ public class Duke {
         }
     }
 
-    /**
-     * Creates and run Duke.
-     */
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
-    }
-
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
 }

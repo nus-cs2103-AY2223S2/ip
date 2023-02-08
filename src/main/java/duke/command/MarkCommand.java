@@ -3,7 +3,7 @@ package duke.command;
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
+import duke.ui.Ui;
 
 import duke.task.Task;
 
@@ -41,20 +41,23 @@ public class MarkCommand extends Command {
     }
 
     /**
-     * Marks task as done
-     * Saves changes made to list in the hard disk
+     * Changes completion status of task to done
+     * Save changes made to list in the hard disk
+     * Returns response for changing the status of specified task to done.
      *
-     * @param tasks List of tasks
-     * @param ui Handles user interaction
-     * @param storage Handles saving and loading tasks
+     * @param tasks List of tasks.
+     * @param ui Handles user interaction.
+     * @param storage Handles saving and loading tasks.
+     * @return Response for adding specified task.
      * @throws DukeException If encountering an I/O interrupt while saving data
      * @throws DukeException If given index is not in the list of tasks
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task task = tasks.mark(index);
-        ui.echo("Nice! I've marked this task as done:");
-        ui.showTask(task);
         storage.save(tasks);
+
+        return ui.getMarkMessage()
+                + "  " + task;
     }
 }

@@ -1,6 +1,13 @@
 package duke;
 
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
+import duke.command.UnmarkCommand;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
@@ -10,7 +17,7 @@ import duke.task.Todo;
  */
 public class Parser {
 
-    protected enum COMMAND {BYE, LIST, TODO, DEADLINE, EVENT, MARK, UNMARK, DELETE, FIND}
+    protected enum CommandType { BYE, LIST, TODO, DEADLINE, EVENT, MARK, UNMARK, DELETE, FIND }
 
     /**
      * Generates command from user command input
@@ -20,8 +27,10 @@ public class Parser {
      */
     public static Command parse(String fullCommand) throws DukeException {
         try {
-            String[] input = fullCommand.trim().split(" ", 2);
-            COMMAND cmd = COMMAND.valueOf(input[0].toUpperCase());
+            CommandType cmd = CommandType.valueOf(fullCommand
+                    .trim()
+                    .split(" ", 2)[0]
+                    .toUpperCase());
 
             switch (cmd) {
             case BYE:

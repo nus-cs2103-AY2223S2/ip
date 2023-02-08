@@ -2,26 +2,28 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
+import duke.ui.Ui;
 
 /**
- * Handles exiting the program
+ * Handles tasks with exiting Duke
  */
 public class ExitCommand extends Command {
 
     /**
-     * Exits Duke
+     * Exits Duke.
+     * Returns farewell message.
      *
-     * @param tasks List of tasks
-     * @param ui Handles user interaction
-     * @param storage Handles saving and loading tasks
+     * @param tasks List of tasks.
+     * @param ui Handles user interaction.
+     * @param storage Handles saving and loading tasks.
+     * @return farewell message.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showFarewell();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.getFarewellMessage();
     }
 
-    /** Specifies that Duke should exit */
+    /** Checks if Duke should exit */
     @Override
     public boolean isExit() {
         return true;
