@@ -7,6 +7,8 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 
 public class DialogBox extends HBox {
 
@@ -17,7 +19,15 @@ public class DialogBox extends HBox {
         text = l;
         displayPicture = iv;
 
+        // Set padding
+        setSpacing(10);
+        setFillHeight(false);
+        setMinHeight(0);
+
         text.setWrapText(true);
+        text.setFont(Font.font("Helvetica", 12));
+        text.setTextFill(Color.color(1, 1, 1));
+
         displayPicture.setFitWidth(100.0);
         displayPicture.setFitHeight(100.0);
 

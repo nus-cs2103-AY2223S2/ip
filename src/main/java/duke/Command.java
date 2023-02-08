@@ -22,40 +22,40 @@ public class Command {
      * Executes the Command instance using a given task list and UI
      *
      * @param taskList taskList object to modify tasks in if command requires
-     * @param ui UI object to show command execution on
+     * @param response UI object to show command execution on
      */
-    public void execute(TaskList taskList, Ui ui) {
+    public void execute(TaskList taskList, Response response) {
         switch(type) {
             case "bye":
                 isExit = true;
-                ui.showBye();
+                response.showBye();
                 break;
             case "list":
-                ui.showList(taskList);
+                response.showList(taskList);
                 break;
             case "mark":
                 int markIndex = Integer.parseInt(data[0]) - 1;
                 taskList.getTask(markIndex).setDone(true);
-                ui.showMark(markIndex);
+                response.showMark(markIndex);
                 taskList.saveList();
                 break;
             case "unmark":
                 int unmarkIndex = Integer.parseInt(data[0]) - 1;
                 taskList.getTask(unmarkIndex).setDone(false);
-                ui.showUnmark(unmarkIndex);
+                response.showUnmark(unmarkIndex);
                 taskList.saveList();
                 break;
             case "addTodo":
                 String todoDescrip = data[0];
                 Task newTodo = taskList.addTodo(todoDescrip);
-                ui.showAddTask(newTodo);
+                response.showAddTask(newTodo);
                 taskList.saveList();
                 break;
             case "addDeadline":
                 String deadlineDescrip = data[0];
                 String by = data[1];
                 Deadline newDeadline = taskList.addDeadline(deadlineDescrip, by);
-                ui.showAddTask(newDeadline);
+                response.showAddTask(newDeadline);
                 taskList.saveList();
                 break;
             case "addEvent":
@@ -63,19 +63,19 @@ public class Command {
                 String from = data[1];
                 String to = data[2];
                 Event newEvent = taskList.addEvent(eventDescrip, from, to);
-                ui.showAddTask(newEvent);
+                response.showAddTask(newEvent);
                 taskList.saveList();
                 break;
             case "deleteTask":
                 int index = Integer.parseInt(data[0]) - 1;
                 taskList.removeTask(index);
-                ui.showDeleteTask(index);
+                response.showDeleteTask(index);
                 taskList.saveList();
                 break;
             case "find":
                 String keyword = data[0];
                 ArrayList<Task> matchingTasks = taskList.findTasks(keyword);
-                ui.showFindList(matchingTasks);
+                response.showFindList(matchingTasks);
                 break;
         }
     }

@@ -5,30 +5,44 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
-import javafx.scene.layout.Region;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class DukeGui {
 
+    private Duke duke;
+
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
+    private Stage stage;
 
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/wall_e.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/eve.png"));
+    private Image userImg = new Image(this.getClass().getResourceAsStream("/images/wall_e.png"));
+    private Image dukeImg = new Image(this.getClass().getResourceAsStream("/images/eve.png"));
+    private Image spaceImg = new Image(this.getClass().getResourceAsStream("/images/space_bg.png"));
+
+    public DukeGui(Duke duke) {
+        this.duke = duke;
+    }
 
     public void start(Stage stage) {
+        this.stage = stage;
+
         // Creating window
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
+
+        // Set background
+        scrollPane.setStyle("-fx-background: #121c2b");
+        BackgroundImage bgImage = new BackgroundImage(spaceImg, BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+        dialogContainer.setBackground(new Background(bgImage));
 
         userInput = new TextField();
         sendButton = new Button("Send");
@@ -46,14 +60,14 @@ public class DukeGui {
 
         mainLayout.setPrefSize(450.0, 500.0);
 
-        scrollPane.setPrefSize(450, 435);
+        scrollPane.setPrefSize(450, 470);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
 
-        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+        dialogContainer.setMinHeight(470);
+        dialogContainer.setSpacing(10);
         userInput.setPrefWidth(385.0);
         sendButton.setPrefWidth(55.0);
 
@@ -76,35 +90,33 @@ public class DukeGui {
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
+        showIntro();
+
         stage.setScene(scene); // Setting the stage to show our screen
         stage.show(); // Render the stage.
     }
 
-    /**
-     * Creates a label with the specified text and adds it to the dialog container
-     *
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
+    private void showIntro() {
+        String intro = duke.getIntro();
+        Label dukeText = new Label(intro);
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(dukeText, new ImageView(dukeImg))
+        );
     }
 
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
+        Label dukeText = new Label(duke.getDukeResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+                DialogBox.getUserDialog(userText, new ImageView(userImg)),
+                DialogBox.getDukeDialog(dukeText, new ImageView(dukeImg))
         );
         userInput.clear();
-    }
 
-    private String getResponse(String input) {
-        return "Duke heard: " + input;
+        // If user wants to close program
+        if (duke.getIsExit()) {
+            stage.close();
+        }
     }
 
 }
