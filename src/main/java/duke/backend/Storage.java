@@ -1,9 +1,13 @@
+package duke.backend;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.tasks.*;
 
 public class Storage {
     File prevTasks;
@@ -69,7 +73,7 @@ public class Storage {
         }
         try {
             FileWriter fw = new FileWriter(prevTasks);
-//            System.out.println("saving the following tasks: \n" + encoding);
+            System.out.println("saving the following tasks: \n" + encoding);
             fw.write(encoding);
             fw.flush();
             fw.close();

@@ -1,7 +1,9 @@
+package duke.tasks;
+
 public class Event extends Task {
 
-    protected String start;
-    protected String end;
+    public final String start;
+    public final String end;
 
     public Event(String description, String start, String end) {
         super(description);

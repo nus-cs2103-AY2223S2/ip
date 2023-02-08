@@ -1,9 +1,14 @@
+package duke.backend;
+
+import duke.exceptions.NoArgumentException;
+import duke.tasks.*;
+
 import java.time.format.DateTimeParseException;
 import java.util.StringTokenizer;
 
 public class Parser {
 
-    //TODO: make static import from UI.
+    //TODO: make static import from duke.backend.UI.
     public static final String DIVIDER = "____________________________________________________________\n";
     private final UI ui;
     private final TaskList taskManager;
@@ -18,12 +23,11 @@ public class Parser {
         switch (instr) {
         case "list":  //List down
         ui.list();
-//            taskManager.add(null;
         break;
 
         case "bye":   //Exit
             ui.bye();
-//            taskManager.add(null;
+            break;
 
         default:                                      //Instructions with arguments
             StringTokenizer tokens = new StringTokenizer(instr, " ");

@@ -1,9 +1,10 @@
-import java.io.File;
+package duke.backend;
+
 import java.io.IOException;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.StringTokenizer;
+
+import duke.tasks.*;
 
 public class UI {
     public static final String DIVIDER = "____________________________________________________________\n";
@@ -31,13 +32,7 @@ public class UI {
         if (sc.hasNext()) {
             String instr = sc.nextLine();
             parser.parse(instr);
-//            if (next == null) {     //Either LIST, BYE, DELETE, MARK/UNMARK commands
-//                return isEnded;
-//            } else {
-//                tasks.add(next);
-//                return false;           //Return true iff command is BYE
-//            }
-            return false;
+            return isEnded;
         }
         return true;
     }

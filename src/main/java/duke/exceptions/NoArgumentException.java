@@ -1,6 +1,8 @@
+package duke.exceptions;
+
 public class NoArgumentException extends DukeException {
 
-    NoArgumentException() {
+    public NoArgumentException() {
         super("No arguments found.");
     }
 }
