@@ -2,7 +2,7 @@ package duke.commands;
 
 import java.io.File;
 
-import duke.exceptions.InvalidCmdValueException;
+import duke.exceptions.InvalidCommandValueException;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
@@ -21,18 +21,19 @@ public class DeleteCommand extends Command {
 
     /**
      * Creates a DeleteCommand to delete a ToDo, Event or Deadline from the TaskList.
+     *
      * @param ui The ui used
      * @param taskList The TaskList to delete the task from.
      * @param index The specified task to be deleted.
      * @param storage The storage to store the changes.
      * @param file The specified file to store the changes.
-     * @throws InvalidCmdValueException If a delete command specify a wrong index.
+     * @throws InvalidCommandValueException If a delete command specify a wrong index.
      */
     public DeleteCommand(Ui ui, TaskList taskList, int index,
                          Storage storage, File file)
-            throws InvalidCmdValueException {
+            throws InvalidCommandValueException {
         if (index + 1 > taskList.getSize() || index < 0) {
-            throw new InvalidCmdValueException();
+            throw new InvalidCommandValueException();
         }
         this.ui = ui;
         this.taskList = taskList;

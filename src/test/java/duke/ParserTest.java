@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import duke.commands.ByeCommand;
 import duke.exceptions.EmptyCommandException;
-import duke.exceptions.InvalidCmdValueException;
+import duke.exceptions.InvalidCommandValueException;
 import duke.exceptions.InvalidDateException;
 import duke.exceptions.InvalidTaskTypeException;
 import duke.exceptions.InvalidTimeException;
@@ -40,7 +40,7 @@ public class ParserTest {
 
     @Test
     public void parseTest() throws EmptyCommandException, InvalidTimeException,
-            InvalidDateException, InvalidTaskTypeException, InvalidCmdValueException {
+            InvalidDateException, InvalidTaskTypeException, InvalidCommandValueException {
         String bye = "bye";
         assertEquals(parser.parse(bye, taskList, storage, ui, savedFile).getClass(),
                 ByeCommand.class);

@@ -5,7 +5,7 @@ import java.io.IOException;
 
 import duke.commands.Command;
 import duke.exceptions.EmptyCommandException;
-import duke.exceptions.InvalidCmdValueException;
+import duke.exceptions.InvalidCommandValueException;
 import duke.exceptions.InvalidDateException;
 import duke.exceptions.InvalidTaskTypeException;
 import duke.exceptions.InvalidTimeException;
@@ -18,6 +18,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+
 
 
 /**
@@ -57,16 +58,17 @@ public class Duke extends Application {
     /**
      * Performs an action in response to the command and return the response.
      *
-     * @return The Response to be displayed.
+     * @param input The command that is to be parsed.
+     * @return The response to be displayed.
      */
     public String getResponse(String input) {
         try {
             Command command = parser.parse(input, commandList, storage, ui, savedFile);
             String response = command.action();
             return response;
-        } catch (InvalidCmdValueException | InvalidTaskTypeException
+        } catch (InvalidCommandValueException | InvalidTaskTypeException
                  | EmptyCommandException | InvalidTimeException | InvalidDateException e) {
-            return Ui.HORIZONTAL_LINE + "\n" + e.getMessage() + "\n" + Ui.HORIZONTAL_LINE;
+            return Ui.formatString(e.getMessage());
         }
     }
 }
