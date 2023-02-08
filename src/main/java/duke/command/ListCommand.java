@@ -11,6 +11,7 @@ import duke.task.TaskList;
 public class ListCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        // gets concatenated String of tasks in the format {task number}. {task string}
         return tasks.showList();
     }
 }

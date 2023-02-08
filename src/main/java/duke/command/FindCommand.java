@@ -23,6 +23,7 @@ public class FindCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        //returns if search result if successful or failure message
         return tasks.find(searchWord);
     }
 }

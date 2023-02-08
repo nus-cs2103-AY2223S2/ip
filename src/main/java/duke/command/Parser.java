@@ -133,19 +133,24 @@ public class Parser {
      * @throws DukeException the duke exception
      */
     public static String[] processDeadline(String input) throws DukeException {
-        String raw = input.split("deadline", 2)[1];
-        if (raw.equals("")) {
+        //get deadline details from input
+        String deadlineDetails = input.split("deadline", 2)[1];
+        if (deadlineDetails.equals("")) {
             throw new DukeException("The description of a deadline cannot be empty.");
         }
 
-        String[] parsed = raw.split("/by ", 2);
-        if (parsed.length < 2) {
+        //get the date of the deadline from the deadline details
+        String[] parsedDeadline = deadlineDetails.split("/by ", 2);
+        if (parsedDeadline.length < 2) {
             throw new DukeException("When the deadline should be completed by should be specified using /by.");
         }
-        if (!parsed[1].matches("\\d{4}-\\d{2}-\\d{2}")) {
+        /*ensure the date of deadline matches the format of a Local Date object so
+            that it can be made into a deadline object*/
+        if (!parsedDeadline[1].matches("\\d{4}-\\d{2}-\\d{2}")) {
             throw new DukeException("Please specify deadline in the format '{description} /by {yyyy-mm-dd}");
         }
-        return parsed;
+
+        return parsedDeadline;
     }
 
     /**
@@ -156,18 +161,27 @@ public class Parser {
      * @throws DukeException the duke exception
      */
     public static String[] processEvent(String input) throws DukeException {
-        String raw = input.split("event", 2)[1];
-        if (raw.equals("")) {
+        //get event details from input
+        String eventDetails = input.split("event", 2)[1];
+        if (eventDetails.equals("")) {
             throw new DukeException("The description of a event cannot be empty.");
         }
-        String[] parsed1 = raw.split("/from ", 2);
+
+        //get the time from which the event starts
+        String[] parsed1 = eventDetails.split("/from ", 2);
         if (parsed1.length < 2) {
             throw new DukeException("The event's timeline should be specified using /from and /to.");
         }
+        String description = parsed1[0];
+
+        //get the time when the event ends
         String[] parsed2 = parsed1[1].split("/to ", 2);
         if (parsed2.length < 2) {
             throw new DukeException("The event's timeline should be specified using /from and /to.");
         }
-        return new String[]{parsed1[0], parsed2[0], parsed2[1]};
+        String from = parsed2[0];
+        String to = parsed2[1];
+
+        return new String[]{description, from, to};
     }
 }
