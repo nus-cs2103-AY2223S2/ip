@@ -33,6 +33,33 @@ public class ToDo extends Task {
     }
 
     /**
+     * Update /by field.
+     * @param date The update.
+     */
+    @Override
+    public void updateByField(String date) {
+        throw new RuntimeException("Unable to update! Task not a deadline!");
+    }
+
+    /**
+     * Update /from field.
+     * @param date The update.
+     */
+    @Override
+    public void updateFromField(String date) {
+        throw new RuntimeException("Unable to update! Task not an event!");
+    }
+
+    /**
+     * Update /to field.
+     * @param date The update.
+     */
+    @Override
+    public void updateToField(String date) {
+        throw new RuntimeException("Unable to update! Task not an event!");
+    }
+
+    /**
      * Creates custom string containing ToDo object's description.
      * @return String representing ToDo object.
      */
