@@ -13,7 +13,7 @@ import berry.ui.Ui;
  * Initialises the application and starts the interaction with the user.
  */
 public class Berry {
-    /* Default path for if given file path throws an {@code InvalidStorageFilePathException} */
+    // Default path for if given file path throws an {@code InvalidStorageFilePathException}
     public static final String DEFAULT_PATH = "data/tasks.txt";
 
     // Functionality

@@ -9,6 +9,7 @@ public class FindCommand extends Command {
     private static String[] listOfKeywords;
 
     public FindCommand(String[] listOfKeywords) {
+        assert listOfKeywords != null : "listOfKeywords should not be null";
         this.listOfKeywords = listOfKeywords;
     }
 

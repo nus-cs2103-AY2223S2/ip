@@ -16,17 +16,17 @@ public class TaskTest {
         Deadline deadlineTask = new Deadline("some deadline", someDate);
         Event eventTask = new Event("some event", someDate, someDate);
 
-        todoTask.markAsDone();
-        deadlineTask.markAsDone();
-        eventTask.markAsDone();
+        todoTask.markTaskAsDone();
+        deadlineTask.markTaskAsDone();
+        eventTask.markTaskAsDone();
 
         assertEquals(marked, todoTask.getStatusIcon());
         assertEquals(marked, deadlineTask.getStatusIcon());
         assertEquals(marked, eventTask.getStatusIcon());
 
-        todoTask.markAsNotDone();
-        deadlineTask.markAsNotDone();
-        eventTask.markAsNotDone();
+        todoTask.markTaskAsNotDone();
+        deadlineTask.markTaskAsNotDone();
+        eventTask.markTaskAsNotDone();
 
         assertEquals(unmarked, todoTask.getStatusIcon());
         assertEquals(unmarked, deadlineTask.getStatusIcon());
