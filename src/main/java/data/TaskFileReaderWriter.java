@@ -101,8 +101,8 @@ public class TaskFileReaderWriter {
     public boolean updateTaskFile(TaskManager taskManager) {
         File taskFile = new File(DIRECTORY_NAME + File.separator + FILE_NAME);
 
-        String taskString = "";
-        String details = "";
+        String taskString = null;
+        String details;
         boolean isCompleted;
 
         try (FileWriter fileWriter = new FileWriter(taskFile)) {
@@ -128,6 +128,7 @@ public class TaskFileReaderWriter {
                     isCompleted = toDoTask.isCompleted();
                     taskString = "To-Do|" + isCompleted + "|" + details;
                 }
+                assert taskString != null;
                 fileWriter.write(taskString + System.getProperty("line.separator"));
             }
         } catch (IOException e) {

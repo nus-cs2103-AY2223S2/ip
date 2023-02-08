@@ -36,7 +36,7 @@ public class Parser {
         int result;
         try {
             result = Integer.parseInt(segments[1]) - 1;
-        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e1) {
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
             throw new DukeInvalidCommandException(Response.INVALID_COMMAND.toString());
         }
         return result;
@@ -54,7 +54,7 @@ public class Parser {
         String result;
         try {
             result = segments[1];
-        } catch (ArrayIndexOutOfBoundsException e1) {
+        } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeInvalidCommandException(Response.INVALID_COMMAND.toString());
         }
         return result;
@@ -262,6 +262,7 @@ public class Parser {
             output = Response.DEFAULT.toString();
             break;
         }
+        assert output != null;
         return output;
     }
 
