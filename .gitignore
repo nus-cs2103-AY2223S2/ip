@@ -20,3 +20,4 @@ text-ui-test/EXPECTED-UNIX.TXT
 # Duke Ignored
 duke.txt
 /data/
+/archive/
