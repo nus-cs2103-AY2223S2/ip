@@ -3,6 +3,8 @@ package duke;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class TaskList {
@@ -84,6 +86,17 @@ public class TaskList {
                 response += (String.valueOf(i + 1) + ".");
                 response += (lstOfTasks.get(i) + "\n");
             }
+        }
+        return response;
+    }
+
+    public String sortTasks() {
+        String response = "Sorting tasks according to highest priority level to lowest...\n";
+        ArrayList<Task> sortedTasks = new ArrayList<>(this.lstOfTasks);
+        Collections.sort(sortedTasks);
+
+        for (int i = 0; i < sortedTasks.size(); i++) {
+            response += sortedTasks.get(i) + "\n";
         }
         return response;
     }
