@@ -59,18 +59,19 @@ public class Storage {
      * @param storage storage of Duke.
      */
     public void loadToDuke(TaskList tasks, Ui ui, Storage storage) throws FileNotFoundException {
-        if (this.taskStorage.exists()) {
-            Scanner sc = new Scanner(this.taskStorage);
-            Parser parser = new Parser();
-            while (sc.hasNextLine()) {
-                String[] taskInTxt = sc.nextLine().split("#");
-                Command c = parser.parseStorage(taskInTxt);
-                c.execute(tasks, ui, storage);
-                if (taskInTxt[taskInTxt.length-1].equals("[X]")) {
-                    tasks.get(tasks.size()-1).markAsDone();
-                }
-            }
-            sc.close();
+        if (!this.taskStorage.exists()) {
+            return;
         }
+        Scanner sc = new Scanner(this.taskStorage);
+        Parser parser = new Parser();
+        while (sc.hasNextLine()) {
+            String[] taskInTxt = sc.nextLine().split("#");
+            Command c = parser.parseStorage(taskInTxt);
+            c.execute(tasks, ui, storage);
+            if (taskInTxt[taskInTxt.length - 1].equals("[X]")) {
+                tasks.get(tasks.size() - 1).markAsDone();
+            }
+        }
+        sc.close();
     }
 }

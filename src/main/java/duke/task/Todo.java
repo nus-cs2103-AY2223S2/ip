@@ -2,7 +2,6 @@ package duke.task;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Objects;
 
 /**
  * A subclass of Task that represents

@@ -1,12 +1,7 @@
 package duke.task;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Scanner;
 
 /**
  * Class that represents a list that keep tracks
