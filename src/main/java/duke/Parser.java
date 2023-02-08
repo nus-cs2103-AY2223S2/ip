@@ -73,15 +73,15 @@ public class Parser {
             command = new FindCommand(args[0]);
             break;
         case "todo":
-            args = Parser.getArgs(commandName, argString, 1, new String[] {});
+            args = Parser.getArgs(commandName, argString, 1, ToDoCommand.FLAGS);
             command = new ToDoCommand(args[0]);
             break;
         case "deadline":
-            args = Parser.getArgs(commandName, argString, 2, new String[] { "/by" });
+            args = Parser.getArgs(commandName, argString, 2, DeadlineCommand.FLAGS);
             command = new DeadlineCommand(args[0], args[1]);
             break;
         case "event":
-            args = Parser.getArgs(commandName, argString, 3, new String[] { "/from", "/to" });
+            args = Parser.getArgs(commandName, argString, 3, EventCommand.FLAGS);
             command = new EventCommand(args[0], args[1], args[2]);
             break;
         default:
@@ -126,7 +126,8 @@ public class Parser {
     public static String[] getArgs(String commandName, String argString, int numArgs, String[] flags)
             throws InvalidArgumentException {
         String[] args = new String[numArgs];
-        if (numArgs - 1 != flags.length) {
+        boolean hasWrongNumberOfFlags = numArgs - 1 != flags.length;
+        if (hasWrongNumberOfFlags) {
             // function was called incorrectly:
             // numArgs and given flags do not match
             throw new InvalidArgumentException(commandName);
@@ -135,6 +136,8 @@ public class Parser {
         for (int i = 0; i < flags.length; i++) {
             String[] split = argString.split(flags[i], 2);
 
+            // if the flag exists in the argument string, we should be able
+            // to split it into 2 parts: before and after the flag
             if (split.length != 2) {
                 // flag was not found -- invalid input
                 throw new InvalidArgumentException(commandName);
