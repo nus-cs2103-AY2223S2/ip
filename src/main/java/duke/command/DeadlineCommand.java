@@ -9,6 +9,8 @@ import duke.task.Task;
 /** A representation of the "deadline" command in Duke. */
 public class DeadlineCommand extends Command {
 
+    public static final String[] FLAGS = { "/by" };
+
     private String title;
     private String deadline;
 

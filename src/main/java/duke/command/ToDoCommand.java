@@ -9,6 +9,8 @@ import duke.task.ToDo;
 /** A representation of the "todo" command in Duke. */
 public class ToDoCommand extends Command {
 
+    public static final String[] FLAGS = {};
+
     private String title;
 
     /**

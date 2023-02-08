@@ -9,6 +9,8 @@ import duke.task.Task;
 /** A representation of the "event" command in Duke. */
 public class EventCommand extends Command {
 
+    public static final String[] FLAGS = { "/from", "/to" };
+
     private String title;
     private String from;
     private String to;
