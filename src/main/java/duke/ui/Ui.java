@@ -37,15 +37,29 @@ public class Ui {
     }
 
     /**
+     * Format messages to a decided standard.
+     *
+     * @param string The string that needs to be formatted.
+     */
+    public static String formatString(String string) {
+        return HORIZONTAL_LINE + "\n" + string + "\n" + HORIZONTAL_LINE;
+    }
+
+    /**
      * Prints a response to List command to the user.
+     *
+     * @param list The list to print from.
      */
     public String listResponse(TaskList list) {
-        return "Here are the tasks in your list:\n"
-                + list.toString();
+        return formatString("Here are the tasks in your list:\n"
+                + list.toString());
     }
 
     /**
      * Prints a response to Delete command to the user.
+     *
+     * @param task The task to be deleted.
+     * @param taskList The remaining taskList after deletion.
      */
     public String deleteResponse(Task task, TaskList taskList) {
         return HORIZONTAL_LINE + "\n"
@@ -56,6 +70,8 @@ public class Ui {
 
     /**
      * Prints a response to Mark command to the user.
+     *
+     * @param task The task to be marked.
      */
     public String markResponse(Task task) {
         return HORIZONTAL_LINE + "\n"
@@ -65,6 +81,8 @@ public class Ui {
 
     /**
      * Prints a response to Unmark command to the user.
+     *
+     * @param task The task to be unmarked.
      */
     public String unmarkResponse(Task task) {
         return HORIZONTAL_LINE + "\n"
@@ -74,6 +92,7 @@ public class Ui {
 
     /**
      * Prints a response to Todo, Event or Deadline command to the user.
+     *
      * @param task The task added.
      * @param taskList The task list the task is added to.
      */
@@ -85,6 +104,7 @@ public class Ui {
 
     /**
      * Prints a response to Find command to the user.
+     *
      * @param taskList The filtered task list
      */
     public String findResponse(List<Task> taskList) {

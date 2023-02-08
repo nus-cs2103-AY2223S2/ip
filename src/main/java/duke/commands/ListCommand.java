@@ -12,6 +12,7 @@ public class ListCommand extends Command {
 
     /**
      * Creates a ListCommand to list all task of the TaskList.
+     *
      * @param ui The ui used.
      * @param taskList The TaskList to list the tasks.
      */

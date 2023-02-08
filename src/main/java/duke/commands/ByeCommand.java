@@ -11,6 +11,7 @@ public class ByeCommand extends Command {
 
     /**
      * Creates a ByeCommand to say bye.
+     *
      * @param ui The ui used.
      */
     public ByeCommand(Ui ui) {

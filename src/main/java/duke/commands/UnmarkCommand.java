@@ -2,7 +2,7 @@ package duke.commands;
 
 import java.io.File;
 
-import duke.exceptions.InvalidCmdValueException;
+import duke.exceptions.InvalidCommandValueException;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
@@ -21,6 +21,7 @@ public class UnmarkCommand extends Command {
 
     /**
      * Creates a UnmarkCommand to unmark a ToDo, Event or Deadline on the TaskList.
+     *
      * @param ui The ui used.
      * @param taskList The TaskList to unmark the task.
      * @param index The specified task to be unmarked.
@@ -29,9 +30,9 @@ public class UnmarkCommand extends Command {
      */
     public UnmarkCommand(Ui ui, TaskList taskList, int index,
                          Storage storage, File file)
-            throws InvalidCmdValueException {
+            throws InvalidCommandValueException {
         if (index + 1 > taskList.getSize() || index < 0) {
-            throw new InvalidCmdValueException();
+            throw new InvalidCommandValueException();
         }
         this.ui = ui;
         this.taskList = taskList;

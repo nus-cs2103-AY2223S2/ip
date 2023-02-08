@@ -12,6 +12,7 @@ public class TaskList {
 
     /**
      * Returns a list of tasks saved.
+     *
      * @return List of tasks.
      */
     public List<Task> getTaskList() {
@@ -20,6 +21,7 @@ public class TaskList {
 
     /**
      * Edit a list of tasks.
+     *
      * @param taskList New list of the tasks.
      */
     public void setTaskList(List<Task> taskList) {
@@ -28,6 +30,7 @@ public class TaskList {
 
     /**
      * Return a task from a list of tasks.
+     *
      * @param index Index of task to retrieve.
      * @return A specified task.
      */
@@ -37,6 +40,7 @@ public class TaskList {
 
     /**
      * Return size of list of tasks.
+     *
      * @return number of tasks in list.
      */
     public int getSize() {
@@ -45,6 +49,7 @@ public class TaskList {
 
     /**
      * Add task to list of tasks.
+     *
      * @param newTask Add new task.
      */
     public void addTask(Task newTask) {

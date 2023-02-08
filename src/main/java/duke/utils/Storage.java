@@ -31,6 +31,7 @@ public class Storage {
 
     /**
      * Edit existing storage given a task list.
+     *
      * @param taskList The edited task list.
      */
     public void editStorage(List<Task> taskList) {
@@ -40,6 +41,7 @@ public class Storage {
 
     /**
      * Return task list from existing storage.
+     *
      * @return The task list stored in storage
      */
     public List<Task> getStorage() {
@@ -48,6 +50,7 @@ public class Storage {
 
     /**
      * Load storage with the specified file.
+     *
      * @param file The file that stores required data.
      */
     public void loadFromFile(File file) {
@@ -74,6 +77,7 @@ public class Storage {
 
     /**
      * Writes the tasks into the Storage file.
+     *
      * @param file The file to write tasks in.
      */
     public void saveToFile(File file) {

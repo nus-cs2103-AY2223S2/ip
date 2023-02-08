@@ -20,6 +20,7 @@ public class AddCommand extends Command {
 
     /**
      * Creates a AddCommand to add a ToDo, Event or Deadline to the TaskList.
+     *
      * @param ui The ui used.
      * @param taskList The TaskList to add the task to.
      * @param task The task to be added.

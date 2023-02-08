@@ -20,6 +20,7 @@ public class FindCommand extends Command {
     /**
      * Creates a FindCommand to find all tasks on the Task list
      * based on similarity of a given string.
+     *
      * @param ui The ui used.
      * @param taskList The TaskList to find the task.
      * @param string The specified string to find.

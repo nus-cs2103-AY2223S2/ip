@@ -11,7 +11,7 @@ import duke.commands.ListCommand;
 import duke.commands.MarkCommand;
 import duke.commands.UnmarkCommand;
 import duke.exceptions.EmptyCommandException;
-import duke.exceptions.InvalidCmdValueException;
+import duke.exceptions.InvalidCommandValueException;
 import duke.exceptions.InvalidDateException;
 import duke.exceptions.InvalidTaskTypeException;
 import duke.exceptions.InvalidTimeException;
@@ -37,7 +37,7 @@ public class Parser {
      * @param ui The ui used for the bot.
      * @param file The file that data is read and written from.
      * @return The command corresponding to the user input.
-     * @throws InvalidCmdValueException If a delete, mark or unmark command specify a wrong index.
+     * @throws InvalidCommandValueException If a delete, mark or unmark command specify a wrong index.
      * @throws InvalidTaskTypeException If no such task type exists.
      * @throws EmptyCommandException If the existing command is empty.
      * @throws InvalidTimeException If the format of event or deadline is unrecognised.
@@ -46,7 +46,7 @@ public class Parser {
 
     public Command parse(String userCommands, TaskList commandList,
                          Storage storage, Ui ui, File file)
-            throws InvalidCmdValueException, InvalidTaskTypeException,
+            throws InvalidCommandValueException, InvalidTaskTypeException,
             EmptyCommandException, InvalidTimeException, InvalidDateException {
         String[] strArray = userCommands.split(" ", 2);
         String action = strArray[0];
@@ -66,7 +66,7 @@ public class Parser {
                     Integer.parseInt(strArray[1]) - 1, storage, file);
         } else if (action.equalsIgnoreCase("find")) {
             if (strArray.length < 2 || strArray[1].trim().equals("")) {
-                throw new EmptyCommandException(strArray[0]);
+                throw new EmptyCommandException(action);
             }
             return new FindCommand(ui, commandList, strArray[1]);
         } else {

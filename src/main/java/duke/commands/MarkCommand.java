@@ -2,7 +2,7 @@ package duke.commands;
 
 import java.io.File;
 
-import duke.exceptions.InvalidCmdValueException;
+import duke.exceptions.InvalidCommandValueException;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
@@ -22,6 +22,7 @@ public class MarkCommand extends Command {
 
     /**
      * Creates a MarkCommand to mark a ToDo, Event or Deadline on the TaskList.
+     *
      * @param ui The ui used.
      * @param taskList The TaskList to mark the task.
      * @param index The specified task to be marked.
@@ -30,9 +31,9 @@ public class MarkCommand extends Command {
      */
     public MarkCommand(Ui ui, TaskList taskList, int index,
                        Storage storage, File file)
-            throws InvalidCmdValueException {
+            throws InvalidCommandValueException {
         if (index + 1 > taskList.getSize() || index < 0) {
-            throw new InvalidCmdValueException();
+            throw new InvalidCommandValueException();
         }
         this.ui = ui;
         this.taskList = taskList;

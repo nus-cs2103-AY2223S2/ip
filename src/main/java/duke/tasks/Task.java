@@ -23,6 +23,7 @@ public abstract class Task {
 
     /**
      * Creates a Task object from a storage String.
+     *
      * @param data The Storage String representing the Task.
      * @return The Task represented by the Storage String.
      */
@@ -74,6 +75,7 @@ public abstract class Task {
 
     /**
      * Returns the boolean representation of the task completion.
+     *
      * @return  True if task is done else return false.
      */
     public boolean isDone() {
@@ -82,6 +84,7 @@ public abstract class Task {
 
     /**
      * Returns the String representation of the task.
+     *
      * @return string task.
      */
     public String getTask() {
