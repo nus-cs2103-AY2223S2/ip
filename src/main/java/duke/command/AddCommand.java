@@ -26,7 +26,7 @@ public class AddCommand extends Command {
     private String to;
 
     /**
-     * Instantiates a new Add command.
+     * Instantiates a new Add command for a Todo object.
      *
      * @param description the description
      */
@@ -37,7 +37,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Instantiates a new Add command.
+     * Instantiates a new Add command for a Deadline object.
      *
      * @param description the description
      * @param by          the by
@@ -50,7 +50,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Instantiates a new Add command.
+     * Instantiates a new Add command for an Event object.
      *
      * @param description the description
      * @param from        the from
@@ -68,14 +68,14 @@ public class AddCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         switch (this.type) {
         case "E":
-            tasks.addEvent(description, from, to);
-            return ui.showTask(new Event(description, from, to), tasks.size());
+            String newEventString = tasks.addEvent(description, from, to);
+            return ui.showTask(newEventString, tasks.size());
         case "D":
-            tasks.addDeadline(description, by);
-            return ui.showTask(new Deadline(description, LocalDate.parse(by)), tasks.size());
+            String newDeadlineString = tasks.addDeadline(description, by);
+            return ui.showTask(newDeadlineString, tasks.size());
         case "T":
-            tasks.addTodo(description);
-            return ui.showTask(new Todo(description), tasks.size());
+            String newTodoString = tasks.addTodo(description);
+            return ui.showTask(newTodoString, tasks.size());
         default:
             throw new DukeException("could not add task");
         }
