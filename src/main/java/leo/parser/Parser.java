@@ -27,6 +27,15 @@ public class Parser {
     }
 
     /**
+     * Parses the user input into a String array.
+     * @param request
+     * @return String array of user input.
+     */
+    public String[] parseRequest(String request) {
+        return request.split(" ", 2);
+    }
+
+    /**
      * Parses the task ID from the user input.
      * @param taskID
      * @return
