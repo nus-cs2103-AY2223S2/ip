@@ -36,9 +36,6 @@ jobs:
       - name: Build and check with Gradle
         run: ./gradlew check
 
-      - name: Change run test permissions
-        run: chmod +x ./runtest.sh
-
       - name: Perform IO redirection test (*NIX)
         if: runner.os == 'Linux'
         working-directory:  ${{ github.workspace }}/text-ui-test
