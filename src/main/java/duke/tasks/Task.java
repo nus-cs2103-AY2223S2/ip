@@ -20,6 +20,10 @@ public class Task implements Serializable {
         this.isDone = false;
     }
 
+    public boolean contains(String keyword) {
+        return description.contains(keyword);
+    }
+
     protected String getStatus() {
         return (isDone ? "X" : " "); // mark done task with X
     }

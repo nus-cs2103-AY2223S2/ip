@@ -3,6 +3,8 @@ package duke.tasks;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
 import duke.storage.Storage;
 
 public class TaskList implements Serializable {
@@ -14,12 +16,17 @@ public class TaskList implements Serializable {
         return taskList.size();
     }
 
+    public TaskList() {}
+
+    private TaskList(List<Task> taskList) {
+        this.taskList = taskList;
+    }
+
     public void printAll() {
         for (int i = 0; i < taskList.size(); i++) {
             String printedString = String.format("%d. %s ", i + 1, taskList.get(i).toString());
             System.out.println(printedString);
         }
-
     }
 
     public void addTask(Task task) {
@@ -49,4 +56,11 @@ public class TaskList implements Serializable {
         Storage.writeTaskList(this);
         return targetTask.toString();
     }
+
+    public TaskList find(String keyword) {
+        List<Task> filteredTaskList = taskList.stream().filter((task) -> task.contains(keyword))
+                .collect(Collectors.toList());
+        return new TaskList(filteredTaskList);
+    }
+
 }
