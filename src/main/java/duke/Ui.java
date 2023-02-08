@@ -27,7 +27,7 @@ public class Ui {
      * @return Crafted message
      */
     public static String numTaskToString(int numTask) {
-        return "Now you have " + numTask + " task" + (numTask == 1 ? "" : "s") + " in the list.";
+        return String.format("Now you have %d task%s in the list", numTask, numTask == 1 ? "" : "s");
     }
 
     // Greets user with welcome message, and gets the first command.

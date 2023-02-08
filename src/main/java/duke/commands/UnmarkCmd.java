@@ -27,12 +27,12 @@ public class UnmarkCmd extends Command {
     }
 
     // Changes the status of the specified task to incomplete.
-    public void execute() throws ListIndexMissing {
+    public String execute() throws ListIndexMissing {
         this.index = Parser.parseMarkUnmarkDeleteIndex(this.lineInput);
         this.task = taskList.get(this.index).unmarkDone();
 
         String output = "Ok, I've marked this task as not done yet:";
-        this.response = String.format("%s\n%s", output,
+        return String.format("%s\n%s", output,
                 Ui.indentString(this.task.toString(), 1));
     }
 }

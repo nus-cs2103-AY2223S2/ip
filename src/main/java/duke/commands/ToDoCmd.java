@@ -25,11 +25,11 @@ public class ToDoCmd extends Command {
     }
 
     // Adds the ToDo task to the task list.
-    public void execute() throws CommandExecutionError {
+    public String execute() throws CommandExecutionError {
         this.toDo = ToDo.create(this.lineInput);
         taskList.add(this.toDo);
 
-        this.response = String.format("Got it. I've added this task:\n%s\n%s",
+        return String.format("Got it. I've added this task:\n%s\n%s",
                 Ui.indentString(this.toDo.toString(), 1),
                 Ui.numTaskToString(taskList.countTasks()));
     };

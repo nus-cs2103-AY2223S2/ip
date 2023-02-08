@@ -17,11 +17,11 @@ public class FindCmd extends Command {
     }
 
     /** Searches for specified keyword in the task list */
-    public void execute() throws CommandExecutionError {
+    public String execute() throws CommandExecutionError {
         String[] findKeywords = Parser.parseFindKeyword(this.lineInput);
         this.findResult = this.taskList.find(findKeywords);
 
-        this.response = String.format("Here are matching tasks in your list:\n%s", this.findResult.toString());
+        return String.format("Here are matching tasks in your list:\n%s", this.findResult.toString());
     }
 
     public TaskList getFindResult() {

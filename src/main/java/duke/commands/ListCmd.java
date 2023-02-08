@@ -20,7 +20,7 @@ public class ListCmd extends Command {
     }
 
     // Executes UI reply
-    public void execute() {
-        this.response = String.format("Here are the tasks in your list:\n%s", taskList.toString());
+    public String execute() {
+        return String.format("Here are the tasks in your list:\n%s", taskList.toString());
     }
 }

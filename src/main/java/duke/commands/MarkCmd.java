@@ -26,12 +26,12 @@ public class MarkCmd extends Command {
     }
 
     // Marks the specified task as completed.
-    public void execute() throws ListIndexMissing {
+    public String execute() throws ListIndexMissing {
         this.index = Parser.parseMarkUnmarkDeleteIndex(lineInput);
         this.task = taskList.get(this.index).markDone();
 
         String output = "Nice! I've marked this task as done:";
-        this.response = String.format("%s\n%s", output,
+        return String.format("%s\n%s", output,
                 Ui.indentString(this.task.toString(), 1));
     }
 }

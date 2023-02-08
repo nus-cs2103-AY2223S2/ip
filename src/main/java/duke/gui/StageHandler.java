@@ -110,8 +110,8 @@ public class StageHandler {
         Command command = CommandInput.getCommandFromInput(commandInput, tasks);
         userInput.clear();
         try {
-            command.execute();
-            displayMessage(Profile.DUKE, command.getResponse());
+            String response = command.execute();
+            displayMessage(Profile.DUKE, response);
         } catch (CommandExecutionError e) {
             displayMessage(Profile.DUKE, "Couldn't execute command :/ \n" + e.toString());
         }

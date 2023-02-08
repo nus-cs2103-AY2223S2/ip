@@ -12,7 +12,7 @@ public class ByeCmd extends Command {
         super(taskList, lineInput);
     }
 
-    public void execute() throws CommandExecutionError {
+    public String execute() throws CommandExecutionError {
         Ui.shutDown();
         try {
             Storage.saveToFile(taskList);
@@ -20,6 +20,6 @@ public class ByeCmd extends Command {
         } catch (IOException e) {
             // Ui.showSavingError()
         }
-        this.response = "Bye. Hope to see you again soon!";
+        return "Bye. Hope to see you again soon!";
     }
 }
