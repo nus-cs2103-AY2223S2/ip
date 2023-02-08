@@ -78,7 +78,7 @@ public class DukeParser {
             break;
         }
         case EVENT: {
-            int offset = DukeCommand.DEADLINE.text.length();
+            int offset = DukeCommand.EVENT.text.length();
             int fromIndex = inputString.indexOf("/from", offset);
             int toIndex = inputString.indexOf("/to", offset);
 

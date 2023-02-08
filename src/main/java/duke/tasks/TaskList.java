@@ -59,10 +59,14 @@ public class TaskList implements Serializable {
      * @return The string representation of the deleted task.
      */
     public String deleteTask(int taskIndex) {
-        Task targetTask = taskList.get(taskIndex - 1);
-        taskList.remove(taskIndex - 1);
-        Storage.writeTaskList(this);
-        return targetTask.toString();
+        try {
+            Task targetTask = taskList.get(taskIndex - 1);
+            taskList.remove(taskIndex - 1);
+            Storage.writeTaskList(this);
+            return targetTask.toString();
+        } catch (IndexOutOfBoundsException e) {
+            throw new Error("The index is out of bound!");
+        }
     }
 
     /**
@@ -72,11 +76,16 @@ public class TaskList implements Serializable {
      * @return The string representation of the marked task.
      */
     public String markTask(int taskIndex) {
-        Task targetTask = taskList.get(taskIndex - 1);
-        targetTask.mark();
-        taskList.set(taskIndex - 1, targetTask);
-        Storage.writeTaskList(this);
-        return targetTask.toString();
+        try {
+
+            Task targetTask = taskList.get(taskIndex - 1);
+            targetTask.mark();
+            taskList.set(taskIndex - 1, targetTask);
+            Storage.writeTaskList(this);
+            return targetTask.toString();
+        } catch (IndexOutOfBoundsException e) {
+            throw new Error("The index is out of bound!");
+        }
     }
 
     /**
@@ -86,11 +95,15 @@ public class TaskList implements Serializable {
      * @return The string representation of the unmarked task.
      */
     public String unmarkTask(int taskIndex) {
-        Task targetTask = taskList.get(taskIndex - 1);
-        targetTask.unmark();
-        taskList.set(taskIndex - 1, targetTask);
-        Storage.writeTaskList(this);
-        return targetTask.toString();
+        try {
+            Task targetTask = taskList.get(taskIndex - 1);
+            targetTask.unmark();
+            taskList.set(taskIndex - 1, targetTask);
+            Storage.writeTaskList(this);
+            return targetTask.toString();
+        } catch (IndexOutOfBoundsException e) {
+            throw new Error("The index is out of bound!");
+        }
     }
 
     public TaskList find(String keyword) {

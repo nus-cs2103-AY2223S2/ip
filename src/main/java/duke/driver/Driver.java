@@ -89,8 +89,13 @@ public class Driver {
                 }
                 case MARK: {
                     int taskIndex = Integer.parseInt(commandArgs[0]);
-                    Ui.prettyPrint("Nice! I've marked this task as done:",
-                            taskList.markTask(taskIndex));
+                    try {
+                        Ui.prettyPrint("Nice! I've marked this task as done:",
+                                taskList.markTask(taskIndex));
+                    } catch (Exception e) {
+                        // TODO : remove pokemon exception
+                        Ui.prettyPrint(e.getMessage());
+                    }
                     break;
                 }
                 case UNMARK: {

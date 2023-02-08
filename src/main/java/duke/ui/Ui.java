@@ -10,11 +10,11 @@ public class Ui {
     private static final String INDENTATION = "     ";
     // private static final String NEW_LINE = "\n";
 
-    private static void printBar() {
+    public static void printBar() {
         System.out.println(BAR);
     }
 
-    private static void printWithIndentation(String text) {
+    public static void printWithIndentation(String text) {
         System.out.println(INDENTATION + text);
     }
 

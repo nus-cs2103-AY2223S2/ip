@@ -30,6 +30,6 @@ public class Task implements Serializable {
 
     @Override
     public String toString() {
-        return String.format(" [%s] %s\n", getStatus(), this.description);
+        return String.format("[%s] %s\n", getStatus(), this.description);
     }
 }

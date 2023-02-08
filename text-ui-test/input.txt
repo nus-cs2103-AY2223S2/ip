@@ -1,0 +1,27 @@
+list
+todo
+todo todo1
+todo todo 2
+deadline homework /by 2023-10-10
+deadline homework /by hello world
+error command
+list
+to do mispelled command
+event event one /from wrong-date /to wrong-date
+event event two /from 2023-01-31 /to 2023-01-32
+event event two /from 2023-01-31 /to 2023-01-30
+event event two /from 2023-01-31 /to 2023-01-31
+event event two /from 2023-01-30 /to 2023-01-31
+bye
+
+event /from 2023-01-30
+list
+delete 1
+list
+mark 1
+mark 1
+unmark 1
+list
+unmark 69
+delete 1
+bye
