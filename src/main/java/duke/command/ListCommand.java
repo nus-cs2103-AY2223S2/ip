@@ -2,7 +2,14 @@ package duke.command;
 
 import duke.Duke;
 
+/**
+ * Handles a request to list all task in the current tasklist.
+ */
 public class ListCommand extends Command {
+
+    /**
+     * @inheritDoc
+     */
     @Override
     public ReturnCode execute(Duke duke) {
         if (duke.taskList.size() == 0) {

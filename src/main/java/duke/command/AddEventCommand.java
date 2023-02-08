@@ -4,9 +4,14 @@ import duke.Duke;
 import duke.DukeException;
 import duke.task.Event;
 
+/**
+ * Handles a request to add an event. Parameters of event should be provided.
+ */
 public class AddEventCommand extends Command {
 
+    /** Keyword of this command */
     private static final String CMD_KEYWORD = "event";
+
     private static final String FROM_KEYWORD = "/from";
     private static final String TO_KEYWORD = "/to";
 
@@ -14,6 +19,16 @@ public class AddEventCommand extends Command {
     private final String fromStr;
     private final String toStr;
 
+    /**
+     * Constructs an instance of AddEventCommand.
+     *
+     * @param userInput String containing the whole input provided by the user.
+     * @throws DukeException If missing FROM_KEYWORD.
+     *                       If missing TO_KEYWORD.
+     *                       If task description is empty.
+     *                       If start time is empty.
+     *                       If end time is empty.
+     */
     public AddEventCommand(String userInput) throws DukeException {
         String taskInfo = userInput.replaceFirst(CMD_KEYWORD, "").trim();
 
@@ -44,6 +59,9 @@ public class AddEventCommand extends Command {
 
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public ReturnCode execute(Duke duke) {
         duke.addNewTask(new Event(

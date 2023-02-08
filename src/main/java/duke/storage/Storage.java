@@ -100,7 +100,7 @@ public class Storage {
     private void writeToFile(String filePath, String fileContent) {
         assert !filePath.isBlank() : "Cannot write file: file path blank";
         assert !fileContent.isBlank() : "Cannot write file: nothing to write";
-        
+
         try {
             Path f = Paths.get(filePath);
             Files.createDirectories(f.getParent()); // Automatically create any non-existent parent directories

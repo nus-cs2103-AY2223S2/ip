@@ -1,18 +1,31 @@
 package duke.command;
 
+import java.util.ArrayList;
+
 import duke.Duke;
 import duke.DukeException;
 import duke.task.Task;
 
-import java.util.ArrayList;
-
+/**
+ * Handles a request to unmark one or more tasks.
+ */
 public class UnmarkCommand extends Command {
 
+    /** Keyword of this command */
     private static final String CMD_KEYWORD = "unmark";
+
+    /** Separator used between task index */
     private static final String SEPARATOR = " ";
 
     private final String[] markList;
 
+    /**
+     * Constructs an instance of UnmarkCommand.
+     * Using the specified user input, extract which task(s) to unmark.
+     *
+     * @param userInput String containing the whole input provided by the user.
+     * @throws DukeException If did not indicate which task(s) to unmark.
+     */
     public UnmarkCommand(String userInput) throws DukeException {
         String taskInfo = userInput.replaceFirst(CMD_KEYWORD, "").trim();
 
@@ -22,6 +35,12 @@ public class UnmarkCommand extends Command {
         }
     }
 
+    /**
+     * @inheritDoc
+     * @throws DukeException If Index is out of bounds.
+     *                       If all provided inputs are invalid.
+     *                       If one or more inputs are invalid.
+     */
     @Override
     public ReturnCode execute(Duke duke) throws DukeException {
         // TODO: need to DRY this code
@@ -53,7 +72,7 @@ public class UnmarkCommand extends Command {
             if (tasksToMark.contains(i)) {
                 Task task = duke.taskList.get(i);
                 task.setDone(false);
-                duke.ui.println("\t" + (i+1) + ". " + task);
+                duke.ui.println("\t" + (i + 1) + ". " + task);
             }
         }
 

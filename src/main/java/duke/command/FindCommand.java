@@ -1,20 +1,32 @@
 package duke.command;
 
 import duke.Duke;
-import duke.DukeException;
 import duke.task.Task;
 
+/**
+ * Handles a request to find task which description contains specified search words.
+ */
 public class FindCommand extends Command {
 
+    /** Keyword of this command */
     static final String CMD_KEYWORD = "find";
 
     private final String searchWords;
+
+    /**
+     * Constructs an instance of FindCommand.
+     *
+     * @param userInput String containing the whole input provided by the user.
+     */
     public FindCommand(String userInput) {
         searchWords = userInput.replaceFirst(CMD_KEYWORD, "").trim();
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
-    public ReturnCode execute(Duke duke) throws DukeException {
+    public ReturnCode execute(Duke duke) {
 
         StringBuilder sb = new StringBuilder();
 
@@ -22,7 +34,7 @@ public class FindCommand extends Command {
         for (int i = 0; i < duke.taskList.size(); i++) {
             Task task = duke.taskList.get(i);
             if (task.getDescription().contains(searchWords)) {
-                sb.append("\t").append(i+1).append(". ").append(task).append("\n");
+                sb.append("\t").append(i + 1).append(". ").append(task).append("\n");
             }
         }
 

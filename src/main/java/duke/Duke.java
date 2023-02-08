@@ -53,6 +53,9 @@ public class Duke extends Application {
         Duke.flags = flags;
     }
 
+    /**
+     * Display the number of task in taskList to user.
+     */
     public void displayTaskCount() {
         assert taskList != null : "Duke has no taskList instance";
 
@@ -77,6 +80,11 @@ public class Duke extends Application {
         }
     }
 
+    /**
+     * Adds the specified task the taskList.
+     *
+     * @param task The new Task to be added to the taskList.
+     */
     public void addNewTask(Task task) {
         assert taskList != null : "Duke has no taskList instance";
         assert storage != null : "Duke has no storage instance";

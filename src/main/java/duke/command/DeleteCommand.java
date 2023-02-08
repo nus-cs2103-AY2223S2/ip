@@ -1,18 +1,31 @@
 package duke.command;
 
-import duke.Duke;
-import duke.DukeException;
-
 import java.util.ArrayList;
 import java.util.Collections;
 
+import duke.Duke;
+import duke.DukeException;
+
+/**
+ * Handles a request to delete one or more tasks.
+ */
 public class DeleteCommand extends Command {
 
+    /** Keyword of this command */
     private static final String CMD_KEYWORD = "delete";
+
+    /** Separator used between task index */
     private static final String SEPARATOR = " ";
 
     private final String[] deleteList;
 
+    /**
+     * Constructs an instance of DeleteCommand.
+     * Using the specified user input, extract which task(s) to delete.
+     *
+     * @param userInput String containing the whole input provided by the user.
+     * @throws DukeException If user did not indicate which task(s) to delete.
+     */
     public DeleteCommand(String userInput) throws DukeException {
         String taskInfo = userInput.replaceFirst(CMD_KEYWORD, "").trim();
 
@@ -23,6 +36,12 @@ public class DeleteCommand extends Command {
 
     }
 
+    /**
+     * @inheritDoc
+     * @throws DukeException If Index is out of bounds.
+     *                       If all provided inputs are invalid.
+     *                       If one or more inputs are invalid.
+     */
     @Override
     public ReturnCode execute(Duke duke) throws DukeException {
         // TODO: need to DRY this code
