@@ -27,6 +27,7 @@ public class Commands {
         }
         return outputString.toString();
     }
+
     /**
      * Executes the find command.
      *
@@ -57,7 +58,30 @@ public class Commands {
 
         return outputString.toString();
     }
+    /**
+     * Executes the mark command.
+     *
+     * @param input Input String.
+     * @param taskList TaskList for Duke.
+     * @param storage Storage for Duke.
+     * @return String to display.
+     * @throws DukeException If there is no such task.
+     */
+    public static String executeTagCommand(
+            String input, TaskList taskList, Storage storage)
+            throws DukeException {
 
+        int indexToTag = Integer.parseInt(input.substring(0, 1)) - 1;
+        String tagToAdd = input.substring(1);
+        if (indexToTag < taskList.getArraySize()) {
+            Task toTag = taskList.getTask(indexToTag);
+            toTag.addTag(tagToAdd);
+            storage.saveTaskListToStorage(taskList);
+            return "Nice! I've tagged this task:\n" + toTag;
+        } else {
+            throw new DukeException("Invalid, there is no such task");
+        }
+    }
     /**
      * Executes the mark command.
      *

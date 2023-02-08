@@ -45,6 +45,8 @@ public class Parser {
             return Commands.executeEventCommand(body, textUi, taskList, storage);
         case "find":
             return Commands.executeFindCommand(body, taskList);
+        case "tag":
+            return Commands.executeTagCommand(body, taskList, storage);
         default:
             throw new DukeException("I'm sorry, I don't know what that means!");
         }

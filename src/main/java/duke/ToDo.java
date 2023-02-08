@@ -1,5 +1,7 @@
 package duke;
 
+import java.util.ArrayList;
+
 /**
  * This class is a ToDo task. It contains
  * the description of the task.
@@ -21,20 +23,21 @@ public class ToDo extends Task {
      * @param description Description of the ToDo task.
      * @param isDone      Whether the ToDo task is done.
      */
-    public ToDo(String description, boolean isDone) {
-        super(description, isDone);
+    public ToDo(String description, boolean isDone, ArrayList<String> tags) {
+        super(description, isDone, tags);
     }
 
     @Override
     public String toString() {
-        return String.format("[T]%s", super.toString());
+        return String.format("[T]%s %s", super.toString(), this.getStringOfTags());
     }
 
     @Override
     public String convertToStorableString() {
-        return String.format("T,%s,%s",
+        return String.format("T|%s|%s|%s",
                 this.isDone() ? "1" : "0",
-                this.getDescription()
+                this.getDescription(),
+                this.getTags()
         );
     }
 
