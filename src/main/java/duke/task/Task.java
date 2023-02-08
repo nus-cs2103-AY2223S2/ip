@@ -115,9 +115,9 @@ public abstract class Task {
     @Override
     public String toString() {
         if (isMarked) {
-            return " [X] " + desc;
+            return "[X] " + desc;
         } else {
-            return " [  ] " + desc;
+            return "[ ] " + desc;
         }
     }
 
