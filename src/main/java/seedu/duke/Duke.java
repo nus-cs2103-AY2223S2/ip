@@ -8,6 +8,11 @@ public class Duke {
     private Ui ui;
     private Parser parser;
 
+    /**
+     * Loads the list of tasks stored in the text file given by 'filepath'.
+     *
+     * @param filePath the path of the stored text file
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -19,6 +24,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Executes the program managing tasks until user inputs "bye".
+     */
     public void run() {
         boolean isEnd = false;
         ui.showWelcome();

@@ -1,6 +1,12 @@
 package seedu.duke;
 
 public class Parser {
+    /**
+     * Returns true if user input is "bye".
+     *
+     * @param command user input
+     * @return true if user input is "bye", false otherwise
+     */
     public boolean checkEnd(String command) {
         if (command.equalsIgnoreCase("bye")) {
             return true;

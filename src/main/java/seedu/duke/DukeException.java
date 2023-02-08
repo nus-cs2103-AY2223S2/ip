@@ -1,18 +1,32 @@
 package seedu.duke;
 
+/**
+ * Exception for handling possible Duke problems.
+ */
 public class DukeException extends Exception {
     private String task;
 
+    /**
+     * Class constructor.
+     *
+     * @param task the description of the task
+     */
     public DukeException(String task) {
         this.task = task;
     }
 
+    /**
+     * Exception for handling wrong user input.
+     */
     public void WrongCommandException() {
         if (this.task.equals("wrong")) {
             System.out.println("OOPS!!! I'm sorry, but I don't know what that means.");
         }
     }
 
+    /**
+     * Exception for handling user input with empty task description.
+     */
     public void EmptyDescriptionException() {
         switch (this.task) {
             case "todo":
@@ -27,6 +41,9 @@ public class DukeException extends Exception {
         }
     }
 
+    /**
+     * Exception for handling already marked/unmarked tasks.
+     */
     public void MarkedException() {
         switch (this.task) {
             case "marked":
@@ -38,6 +55,9 @@ public class DukeException extends Exception {
         }
     }
 
+    /**
+     * Exception for handling user input with empty task duration.
+     */
     public void EmptyTimeException() {
         if (this.task.equals("empty time")) {
             System.out.println("Please specify the time the time period for this task.");

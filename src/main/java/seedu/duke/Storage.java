@@ -14,10 +14,21 @@ import java.time.format.DateTimeFormatter;
 public class Storage {
     private String filePath;
 
+    /**
+     * Class constructor.
+     *
+     * @param filePath the path of the text file to read/store tasks
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Reads data from a file, creates new Task objects and stores them in an ArrayList<Task>.
+     *
+     * @return the arrayList<Task> of Tasks stored in the file
+     * @throws IOException if an error occurs during reading the file
+     */
     public ArrayList<Task> readFromFile() throws IOException {
         ArrayList<Task> taskList = new ArrayList<>();
         try {
@@ -68,6 +79,11 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Writes the data stored in ArrayList<Task> to a file specified by 'filepath'.
+     *
+     * @param taskList contains the Tasks to be written in the file
+     */
     public void writeToFile(TaskList taskList) {
         try {
             FileWriter file = new FileWriter(this.filePath);
