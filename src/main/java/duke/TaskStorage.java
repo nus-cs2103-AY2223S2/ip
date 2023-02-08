@@ -25,12 +25,18 @@ public class TaskStorage {
      * Add a task to the TaskStorage object with printing effects.
      * @param t The task.
      */
-    public void addTask(Task t) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println("  " + t);
+    public String addTask(Task t) {
+        StringBuilder chunkOfText = new StringBuilder();
+        chunkOfText.append("Got it. I've added this task:\n");
+        //System.out.println("Got it. I've added this task:");
+        chunkOfText.append(" " + t);
+        chunkOfText.append('\n');
+        //System.out.println("  " + t);
         this.taskStorage.add(t);
         this.ind++;
-        System.out.println("Now you have " + this.ind + " task(s) in the list.");
+        chunkOfText.append("Now you have " + this.ind + " task(s) in the list.\n");
+        //System.out.println("Now you have " + this.ind + " task(s) in the list.");
+        return chunkOfText.toString();
     }
 
     /**
@@ -63,22 +69,34 @@ public class TaskStorage {
      * The given task will be deleted in the taskStorage object.
      * @param t The given task.
      */
-    public void deleteTask(Task t) {
-        System.out.println("Noted. I've removed this task:");
-        System.out.println("  " + t);
+    public String deleteTask(Task t) {
+        StringBuilder chunkOfText = new StringBuilder();
+        chunkOfText.append("Noted. I've removed this task:\n");
+        //System.out.println("Noted. I've removed this task:");
+        chunkOfText.append("  " + t + "\n");
+        //System.out.println("  " + t);
         this.taskStorage.remove(t);
         ind--;
-        System.out.println("Now you have " + ind + " task(s) in the list.");
+        chunkOfText.append("Now you have " + ind + " task(s) in the list.\n");
+        //System.out.println("Now you have " + ind + " task(s) in the list.");
+        return chunkOfText.toString();
     }
 
     /**
      * Prints out the list of tasks in the taskStorage object.
      */
-    public void listTask() {
-        System.out.println("Tasks:");
+    public String listTask() {
+        StringBuilder chunkOfText = new StringBuilder();
+        chunkOfText.append("Tasks:");
+        chunkOfText.append("\n");
+        //System.out.println("Tasks:");
         for (int i = 0; i < this.noTasks(); i++) {
-            System.out.print(i + 1 + ".");
-            System.out.println(this.getTask(i));
+            chunkOfText.append((i + 1) + ".");
+            //System.out.print(i + 1 + ".");
+            chunkOfText.append(this.getTask(i).toString());
+            chunkOfText.append("\n");
+            //System.out.println(this.getTask(i));
         }
+        return chunkOfText.toString();
     }
 }

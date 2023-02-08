@@ -27,23 +27,36 @@ public class Parser {
         return this.taskStorage;
     }
 
+    public boolean isTerminate(String inp) {
+        String[] input = inp.split(" ");
+        boolean isExit = false;
+        switch(input[0]) {
+        case "bye":
+            //System.out.println("Byeee! Hope to see you again! Signing off, duke.");
+            isExit = true;
+            break;
+
+        }
+        return isExit;
+    }
+
     /**
      * The main logic of the program,
      * execute a command based on the string input given.
      * @param inp The string input given.
      * @return False if the input contains "Bye", otherwise return True.
      */
-    public boolean execute(String inp) {
+    public String execute(String inp) {
         String[] input = inp.split(" ");
         boolean isExit = false;
+        String response = "";
         switch(input[0]) {
             case "list":
-                taskStorage.listTask();
+                response = taskStorage.listTask();
                 break;
 
             case "bye":
-                System.out.println("Byeee! Hope to see you again! Signing off, duke.");
-                isExit = true;
+                response = "Byeee! Hope to see you again! Signing off, duke.";
                 break;
 
             case "mark":
@@ -51,13 +64,17 @@ public class Parser {
                 try {
                     int taskNo = Integer.parseInt(input[1]);
                     if (taskNo > taskStorage.noTasks() || taskNo <= 0) {
+
                         throw new DukeException("Give a vaild number");
                     }
-                    taskStorage.getTask(taskNo - 1).markAsDone();
+                    response = taskStorage.getTask(taskNo - 1).markAsDone();
                 } catch (NumberFormatException e) {
-                    System.out.println("Number should be typed in");
+                    //System.out.println("Number should be typed in");
+                    response =  "Number should be typed in";
                 } catch (DukeException e){
-                    System.out.println(e.getMessage());
+
+                    //System.out.println(e.getMessage());
+                    response = e.getMessage();
                 } finally {
                     break;
                 }
@@ -68,11 +85,13 @@ public class Parser {
                     if (taskNoUnmark > taskStorage.noTasks() || taskNoUnmark <= 0) {
                         throw new DukeException("Give a valid number");
                     }
-                    taskStorage.getTask(taskNoUnmark - 1).markAsUnDone();
+                    response = taskStorage.getTask(taskNoUnmark - 1).markAsUnDone();
                 } catch (NumberFormatException e) {
-                    System.out.println("Number should be typed in");
+                    response =  "Number should be typed in";
+                    //System.out.println("Number should be typed in");
                 } catch (DukeException e) {
-                    System.out.println(e.getMessage());
+                    response = e.getMessage();
+                    //System.out.println(e.getMessage());
                 } finally {
                     break;
                 }
@@ -85,10 +104,10 @@ public class Parser {
                     }
                     String todoTask = inp.substring(5);
                     Task todo = new Todo(todoTask);
-                    taskStorage.addTask(todo);
-                    break;
+                    response = taskStorage.addTask(todo);
                 } catch (DukeException e) {
-                    System.out.println(e.getMessage());
+                    //System.out.println(e.getMessage());
+                    response = e.getMessage();
                 } finally {
                     break;
                 }
@@ -108,9 +127,10 @@ public class Parser {
                     String end = inputDeadline[1].substring(3);
                     Task deadLineTask = new Deadline(deadLineTaskStr, end);
                     //System.out.println(end);
-                    taskStorage.addTask(deadLineTask);
+                    response = taskStorage.addTask(deadLineTask);
                 } catch (DukeException e) {
-                    System.out.println(e.getMessage());
+                    response = e.getMessage();
+                    //System.out.println(e.getMessage());
                 } finally {
                     break;
                 }
@@ -132,9 +152,10 @@ public class Parser {
                     eventBegin = eventBegin.substring(0, eventBegin.length() - 1);
                     String eventEnd = eventStrsplit[2].substring(3);
                     Task eventTask = new Event(eventTaskStr, eventBegin, eventEnd);
-                    taskStorage.addTask(eventTask);
+                    response = taskStorage.addTask(eventTask);
                 } catch (DukeException e) {
-                    System.out.println(e.getMessage());
+                    //System.out.println(e.getMessage());
+                    response = e.getMessage();
                 } finally {
                     break;
                 }
@@ -146,18 +167,21 @@ public class Parser {
                         throw new DukeException("Give a vaild number");
                     }
                     Task eventTask = taskStorage.getTask(taskNo - 1);
-                    taskStorage.deleteTask(eventTask);
+                    response = taskStorage.deleteTask(eventTask);
                 } catch (NumberFormatException e) {
-                    System.out.println("Number should be typed in");
+                    response = "Number should be typed in";
                 } catch (DukeException e){
-                    System.out.println(e.getMessage());
+                    response = e.getMessage();
+                    //System.out.println(e.getMessage());
                 } finally {
                     break;
                 }
 
             case "find":
                 try {
-                    System.out.println("Here are the matching tasks in your list:");
+                    StringBuilder chunkOfText = new StringBuilder();
+                    chunkOfText.append("Here are the matching tasks in your list:\n");
+                    //System.out.println("Here are the matching tasks in your list:");
                     String findString = inp.substring(5);
                     TaskStorage findStorage = new TaskStorage();
                     for (int i = 0; i < taskStorage.noTasks(); i++) {
@@ -166,7 +190,7 @@ public class Parser {
                             findStorage.addTaskWithoutPrinting(t);
                         }
                     }
-                    findStorage.listTask();
+                    response = findStorage.listTask();
                 } catch (Exception e) {
 
                 } finally {
@@ -175,9 +199,11 @@ public class Parser {
 
             default:
                 DukeException dukeException = new DukeException();
-                System.out.println(dukeException.getMessage());
+                response = dukeException.getMessage();
+                //System.out.println(dukeException.getMessage());
         }
-        return isExit;
+        return response;
+        //return isExit;
     }
 
 }

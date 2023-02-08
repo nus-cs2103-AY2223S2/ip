@@ -9,7 +9,7 @@ public class DukeException extends Exception {
      * Constructs a DukeException object with the default message.
      */
     public DukeException() {
-        super("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        super("OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
     /**

@@ -16,24 +16,30 @@ public class Ui {
     /**
      * Displays the welcome sign.
      */
-    public void showWelcome() {
+    public static String showWelcome() {
+        StringBuilder chunkOfText = new StringBuilder();
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        this.showLine();
-        System.out.println("Hiii Im\n" + logo);
-        System.out.println("What can I do for you hmm?");
-        this.showLine();
+        //showLine();
+        chunkOfText.append(showLine());
+        chunkOfText.append("\n");
+        chunkOfText.append("Hiii Im\n" + logo);
+        chunkOfText.append("What can I do for you hmm?\n");
+        chunkOfText.append(showLine());
+        //showLine();
+        return chunkOfText.toString();
     }
 
     /**
      * Displays a long line for visual effects.
      */
-    public void showLine() {
+    public static String showLine() {
         String line = "-------------------------------";
-        System.out.println(line);
+        return line;
+        //System.out.println(line);
     }
 
     /**
@@ -48,13 +54,18 @@ public class Ui {
      * @return The input the user typed in.
      * @throws IOException When the user type in invalid input.
      */
-    public String readCommand() throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
-        StringBuilder sb = new StringBuilder();
-        String inp;
-        inp = br.readLine();
-        return inp;
+    public String readCommand() {
+        try {
+            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+            PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
+            StringBuilder sb = new StringBuilder();
+            String inp;
+            inp = br.readLine();
+            return inp;
+        } catch (IOException e) {
+            return e.getMessage();
+        }
+
     }
 
 }

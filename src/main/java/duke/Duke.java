@@ -23,6 +23,14 @@ public class Duke {
     private TaskStorage taskStorage;
     private Ui ui;
 
+
+
+    public Duke() {
+        ui = new Ui();
+        taskManager = new TaskManagement();
+        taskStorage = new TaskStorage();
+    }
+
     /**
      * Constructs a Duke object with the given filepath. The file which
      * stores all the tasks of a user will be stored in that filepath.
@@ -37,6 +45,30 @@ public class Duke {
             ui.showLoadingError();
             taskManager = new TaskManagement();
         }
+    }
+
+    String getResponse(String inp) {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
+        StringBuilder sb = new StringBuilder();
+
+        //ui.showWelcome();
+        String line = "-------------------------------";
+        //String inp;
+        String response = "";
+        //boolean isExit = false;
+        //while (!isExit) {
+            //inp = ui.readCommand();
+            ui.showLine();
+            Parser parser = new Parser(this.taskStorage);
+            //isExit = parser.isTerminate(inp);
+            //isExit = parser.execute(inp);
+            response = parser.execute(inp);
+            //System.out.println(response);
+            taskManager.save(parser.getTaskStorage());
+            ui.showLine();
+        //}
+        return response;
     }
 
     /**
@@ -57,11 +89,16 @@ public class Duke {
             inp = ui.readCommand();
             ui.showLine();
             Parser parser = new Parser(this.taskStorage);
-            isExit = parser.execute(inp);
+            isExit = parser.isTerminate(inp);
+            //isExit = parser.execute(inp);
+            String response = parser.execute(inp);
+            System.out.println(response);
             taskManager.save(parser.getTaskStorage());
             ui.showLine();
         }
     }
+
+
 
     /**
      * The main method of the program.
