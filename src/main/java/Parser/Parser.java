@@ -1,5 +1,9 @@
 package parser;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import commands.Command;
 import commands.DeadlineCommand;
 import commands.DeleteCommand;
@@ -10,6 +14,7 @@ import commands.MarkCommand;
 import commands.ReadCommand;
 import commands.TodoCommand;
 import commands.UnmarkCommand;
+import exceptions.InvalidDateFormatException;
 import exceptions.InvalidInputException;
 import exceptions.NoDateException;
 import exceptions.NoDescriptionException;
@@ -18,7 +23,7 @@ import exceptions.NoDescriptionException;
  * This class is used to parse the user input into the correct command.
  */
 public class Parser {
-
+    private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
     /**
      * The enum for all the commands available.
      */
@@ -57,9 +62,11 @@ public class Parser {
             return new EndCommand();
         case MARK:
             checkForDescription(userInput);
+            checkForNumber(userInput);
             return new MarkCommand(userInput);
         case UNMARK:
             checkForDescription(userInput);
+            checkForNumber(userInput);
             return new UnmarkCommand(userInput);
         case TODO:
             checkForDescription(userInput);
@@ -74,12 +81,31 @@ public class Parser {
             return new EventCommand(userInput);
         case DELETE:
             checkForDescription(userInput);
+            checkForNumber(userInput);
             return new DeleteCommand(userInput);
         case FIND:
             checkForDescription(userInput);
             return new FindCommand(userInput);
         default:
             throw new InvalidInputException(null);
+        }
+    }
+
+    /**
+     * Convert the string into the correct LocalDateTime.
+     * @param userInput The user input.
+     * @return The LocalDateTime.
+     * @throws InvalidDateFormatException Throws if date format is incorrect.
+     */
+    public static LocalDateTime parseDate(String userInput) throws InvalidDateFormatException{
+        String[] temp = userInput.split(" ");
+        if (temp.length == 1) {
+            userInput += " 0000";
+        }
+        try {
+            return LocalDateTime.parse(userInput, formatter);
+        } catch (DateTimeParseException e) {
+            throw new InvalidDateFormatException(e);
         }
     }
 
@@ -93,6 +119,20 @@ public class Parser {
         if (temp.length == 1) {
             throw new NoDescriptionException(temp[0], null);
         }
+    }
+
+    /**
+     * Checks to ensure that there is a description.
+     * @param message The message to be checked.
+     * @throws NoDescriptionException Throws if no description is found.
+     */
+    private static void checkForNumber(String message) throws InvalidInputException {
+        String[] temp = message.split(" ");
+        try {  
+            Double.parseDouble(temp[1]);  
+        } catch (NumberFormatException e){  
+            throw new InvalidInputException(e);
+        }  
     }
 
     /**

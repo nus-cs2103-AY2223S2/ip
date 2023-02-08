@@ -23,6 +23,7 @@ public class Duke {
      * @throws IOException Throws if there is an I/O error.
      */
     public Duke(String filePath) {
+        assert filePath != null;
         this.ui = new Ui();
         this.storage = new Storage(filePath);
         this.tasks = new TaskList(storage.load());

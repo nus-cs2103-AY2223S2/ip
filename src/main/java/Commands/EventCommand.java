@@ -19,6 +19,7 @@ public class EventCommand extends Command {
      * @param userInput The user input.
      */
     public EventCommand(String userInput) {
+        assert userInput != null;
         this.description = getDescription(userInput);
         this.from = getFrom(userInput);
         this.to = getUntil(userInput);
@@ -68,6 +69,9 @@ public class EventCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
+        assert tasks != null;
+        assert ui != null;
+        assert storage != null;
         Event event = new Event(this.description, this.from, this.to);
         tasks.addTask(event);
         return ui.showAddTask(event, tasks.getSize());

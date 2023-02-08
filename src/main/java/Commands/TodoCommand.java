@@ -16,6 +16,7 @@ public class TodoCommand extends Command {
      * @param userInput The user input.
      */
     public TodoCommand(String userInput) {
+        assert userInput != null;
         this.description = getDescription(userInput);
     }
 
@@ -37,6 +38,9 @@ public class TodoCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
+        assert tasks != null;
+        assert ui != null;
+        assert storage != null;
         ToDo toDo = new ToDo(this.description);
         tasks.addTask(toDo);
         return ui.showAddTask(toDo, tasks.getSize());
