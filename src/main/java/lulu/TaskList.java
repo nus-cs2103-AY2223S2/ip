@@ -1,5 +1,6 @@
 package lulu;
 
+import lulu.exception.LuluException;
 import lulu.task.Deadline;
 import lulu.task.Event;
 import lulu.task.Task;
@@ -66,6 +67,10 @@ public class TaskList {
         return this.list.stream()
                 .map(task -> String.format("\n%d. %s", list.indexOf(task) + 1, task.toString()))
                 .reduce("", String::concat);
+    }
+
+    public void update(int taskNumber, String updateText) {
+        list.get(taskNumber - 1).update(updateText);
     }
 
     /** this method may be in the wrong spot but will be left here for now */

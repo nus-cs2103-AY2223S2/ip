@@ -16,4 +16,15 @@ public class Todo extends Task {
         int i = this.isDone ? 1 : 0;
         return ("T`" + i + "`" + this.description + '\n');
     }
+
+    @Override
+    public void update(String text) {
+        String[] updateInformation = text.split(" ");
+        String update = updateInformation[0].toUpperCase();
+        switch (update) {
+        case "DESCRIPTION":
+            this.description = updateInformation[1];
+            break;
+        }
+    }
 }

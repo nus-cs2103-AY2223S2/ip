@@ -46,4 +46,18 @@ public class Deadline extends Task {
         }
         return ("D`" + i + "`" + this.description + "`" + s + '\n');
     }
+
+    @Override
+    public void update(String text) {
+        String[] updateInformation = text.split(" ");
+        String update = updateInformation[0].toUpperCase();
+        switch (update) {
+        case "DESCRIPTION":
+            this.description = updateInformation[1];
+            break;
+        case "BY":
+            this.by = updateInformation[1];
+            break;
+        }
+    }
 }
