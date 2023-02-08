@@ -1,7 +1,6 @@
 package chattime.task;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 /**
@@ -12,7 +11,7 @@ public class Task {
 
     private static int tasksCount = 0;
 
-    String description;
+    protected String description;
     private boolean isDone;
 
     /**

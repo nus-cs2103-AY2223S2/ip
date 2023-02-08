@@ -10,7 +10,7 @@ public class ChattimeExceptionTest {
         try {
             throw new ChattimeException("Test");
         } catch (ChattimeException e) {
-            assertEquals("Test", e.toString());
+            assertEquals("OOPS!!! Test", e.toString());
         }
     }
 }
