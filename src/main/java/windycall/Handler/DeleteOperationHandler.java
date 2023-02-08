@@ -18,6 +18,7 @@ public class DeleteOperationHandler extends OperationHandler {
         Pair<Integer, String> info = parser.getDeleteIndex(parts);
         int num = info.getKey();
         String message = info.getValue();
+        assert num >= 1 && num <= tasks.size();
         if (num >= 1 && num <= tasks.size()) {
             String returnedMessage = "Noted. I've removed this task:\n";
             returnedMessage += tasks.get(num - 1) + "\n";

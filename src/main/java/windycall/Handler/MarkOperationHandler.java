@@ -18,6 +18,7 @@ public class MarkOperationHandler extends OperationHandler {
         Pair<Integer, String> info = parser.getMarkIndex(parts);
         int num = info.getKey();
         String message = info.getValue();
+        assert num >= 1 && num <= tasks.size();
         if (num >= 1 && num <= tasks.size()) {
             tasks.get(num - 1).markAsDone();
             String returnedMessage = "Good job! I've marked this task as done:\n";

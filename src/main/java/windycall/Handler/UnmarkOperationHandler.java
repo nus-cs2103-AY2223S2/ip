@@ -18,6 +18,7 @@ public class UnmarkOperationHandler extends OperationHandler {
         Pair<Integer, String> info = parser.getUnmarkIndex(parts);
         int num = info.getKey();
         String message = info.getValue();
+        assert num >= 1 && num <= tasks.size();
         if (num >= 1 && num <= tasks.size()) {
             tasks.get(num - 1).unmark();
             String returnedMessage = "Good job! I've unmarked this task as not done yet:\n";
