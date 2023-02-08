@@ -20,18 +20,13 @@ public class TaskList implements Serializable {
     private void addTask(String[] parsedRequest) throws LeoTaskException {
         try {
             Task task = Task.createTask(parsedRequest);
-
-            if (task == null) {
-                throw new LeoTaskException("I'm sorry, I don't know what you want. ¿Que miras bobo?");
-            }
-
             tasks.add(task);
-
             Ui.printDivider();
             System.out.printf("Alright, I've added: %s to your task list.\n", tasks.get(tasks.size() - 1));
             System.out.printf("You have %d tasks in your list, vamos, get moving!\n", tasks.size());
             Ui.printDivider();
         } catch (LeoTaskException e) {
+            Ui.printError(e);
             return;
         }
     }
@@ -48,11 +43,14 @@ public class TaskList implements Serializable {
     private String addTaskGUI(String[] parsedRequest) throws LeoTaskException {
         try {
             Task task = Task.createTask(parsedRequest);
-            if (task == null) {
-                throw new LeoTaskException("I'm sorry, I don't know what you want. ¿Que miras bobo?");
-            }
             tasks.add(task);
             return String.format("Alright, I've added: %s to your task list.\nYou have %d tasks in your list, vamos, get moving!\n", tasks.get(tasks.size() - 1), tasks.size());
+        } catch (MissingDeadlineException e) {
+            return e.getMessage();
+        } catch (MissingTimelineException e) {
+            return e.getMessage();
+        } catch (EmptyFieldException e) {
+            return e.getMessage();
         } catch (LeoTaskException e) {
             return e.getMessage();
         }
@@ -132,8 +130,8 @@ public class TaskList implements Serializable {
         }
     }
 
-    public String processRequestGUI(String[] parsedRequest) throws LeoTaskException {
-        String response = " ";
+    public String processRequestGUI(String[] parsedRequest){
+        String response = "";
         try {
             if (!Task.commands.contains(parsedRequest[0])) {
                 throw new InvalidCommandException();
@@ -142,7 +140,6 @@ public class TaskList implements Serializable {
             else if (Task.descCommands.contains(parsedRequest[0]) && parsedRequest.length <= 1) {
                 throw new EmptyFieldException();
             }
-
             switch (parsedRequest[0]) {
                 case "bye":
                     response = "It was nice talking, see you soon!\n";
@@ -181,7 +178,7 @@ public class TaskList implements Serializable {
                     break;
             }
         } catch (LeoTaskException e) {
-            return e.toString();
+            response = e.getMessage();
         }
         return response;
     }

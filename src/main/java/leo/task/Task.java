@@ -52,31 +52,25 @@ public class Task implements Serializable {
      * @throws LeoTaskException
      */
     public static Task createTask(String[] taskArray) throws LeoTaskException {
+        if (!commands.contains(taskArray[0])) {
+            throw new InvalidCommandException();
+        }
 
-        try {
+        if (taskArray.length < 2 && descCommands.contains(taskArray[0])) {
+                throw new EmptyFieldException();
+        }
 
-            if (!commands.contains(taskArray[0])) {
-                throw new InvalidCommandException();
-            }
+        String cmd = taskArray[0], desc = taskArray[1];
 
-            if (taskArray.length < 2 && descCommands.contains(taskArray[0])) {
-                    throw new EmptyFieldException();
-            } 
-            
-            String cmd = taskArray[0], desc = taskArray[1];
-
-            switch (cmd) {
-            case "deadline":
-                return Deadline.createDeadline(desc, cmd);
-            case "event":
-                return Event.createEvent(desc, cmd);
-            case "todo":
-                return new Todo(desc, cmd);
-            default:
-                throw new InvalidCommandException();
-            }
-        } catch (LeoTaskException e) {
-            return null;
+        switch (cmd) {
+        case "deadline":
+            return Deadline.createDeadline(desc, cmd);
+        case "event":
+            return Event.createEvent(desc, cmd);
+        case "todo":
+            return new Todo(desc, cmd);
+        default:
+            throw new InvalidCommandException();
         }
     }
 
@@ -138,15 +132,14 @@ public class Task implements Serializable {
             try {
                 Deadline dl = new Deadline(taskDesc.split(" ", 2)[0], cmd);
                 String[] dlDetails = taskDesc.split("/by", 2);
-                if (dlDetails.length < 2) {
+                if (dlDetails.length < 2 || dlDetails[1].equals("")) {
                     throw new MissingDeadlineException();
                 }
-
                 dl.by = Parser.stringToDate(dlDetails[1]);
                 return dl;
             } catch (MissingDeadlineException e) {
                 Ui.printError(e);
-                return null;
+                throw e;
             }
         }
 
@@ -188,7 +181,7 @@ public class Task implements Serializable {
                 return ev;
             } catch (MissingTimelineException e) {
                 Ui.printError(e);
-                return null;
+                throw e;
             }
         }
 

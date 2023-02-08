@@ -82,14 +82,10 @@ public class Leo extends Application {
         if (taskList == null) {
             taskList = new TaskList();
         }
-        try {
-            response = taskList.processRequestGUI(request);
-            if (response.equals("It was nice talking, see you soon!\n")) {
-                Storage.writeObjectToFile(taskList);
-                parser.close();
-            }
-        } catch (LeoTaskException e) {
-            response = e.getMessage();
+        response = taskList.processRequestGUI(request);
+        if (response.equals("It was nice talking, see you soon!\n")) {
+            Storage.writeObjectToFile(taskList);
+            parser.close();
         }
         return response;
     }

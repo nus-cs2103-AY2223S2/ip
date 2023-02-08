@@ -17,6 +17,14 @@ public class Ui {
     }
 
     /**
+     * Returns a user greeting message.
+     * @return User greeting String
+     */
+    public static String greetUserGUI() {
+        return String.format("Hello! I'm Leo\nWhat can I do for you?\n");
+    }
+
+    /**
      * Prints a divider.
      */
     public static void printDivider() {

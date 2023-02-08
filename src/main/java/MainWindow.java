@@ -6,6 +6,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import leo.task.LeoTaskException;
+import leo.ui.Ui;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -28,6 +29,9 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().addAll(
+                DialogBox.getLeoDialog(Ui.greetUserGUI(), leoImage)
+        );
     }
 
     public void setLeo(Leo l) {
@@ -39,7 +43,7 @@ public class MainWindow extends AnchorPane {
      * the dialog container. Clears the user input after processing.
      */
     @FXML
-    private void handleUserInput() throws LeoTaskException {
+    private void handleUserInput() {
         String input = userInput.getText();
         String response = leo.getResponse(input);
         dialogContainer.getChildren().addAll(
