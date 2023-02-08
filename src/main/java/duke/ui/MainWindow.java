@@ -10,7 +10,7 @@ import javafx.scene.control.Dialog;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuBar;
-
+import duke.App;
 import duke.Duke;
 import duke.main.Storage;
 import duke.task.Task;
@@ -47,7 +47,7 @@ public class MainWindow extends ControllerBase {
     @FXML
     private void quit() {
         // Run cleanup tasks
-        System.exit(0);
+        App.sendCloseRequest();
     }
 
     @FXML
@@ -58,6 +58,8 @@ public class MainWindow extends ControllerBase {
                 getDuke().getTaskList().add(task);
                 taskListView.itemsProperty().get().add(task);
             });
+            // Task optional should not be empty
+            assert taskOptional.isPresent();
         });
     }
 
