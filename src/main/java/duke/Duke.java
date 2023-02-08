@@ -144,6 +144,7 @@ public class Duke {
                 break;
             }
         }
+        assert commandInfoList.size() > 0 : "Assertion Error has occurred";
         assert !message.equals("");
         return message;
     }

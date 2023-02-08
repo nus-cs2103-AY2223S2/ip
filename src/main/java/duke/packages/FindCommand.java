@@ -33,7 +33,7 @@ public class FindCommand implements Command {
         ArrayList<Task> taskList = tasks.getTaskList();
         int taskIndex = 1; // Used to number the tasks found
         String subString = parsedCmd.get(1);
-        assert subString.equals("");
+        assert !subString.equals("");
         String[] words = subString.split(" ");
         sb.append("    ____________________________________________________________\n")
                 .append("    Here are the matching tasks in your list:\n");

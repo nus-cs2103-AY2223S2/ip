@@ -104,7 +104,7 @@ public class Storage {
      */
     public void writeToFile(String taskInfo, ArrayList<Task> taskList) throws IOException {
         ArrayList<String> fileTasks = new ArrayList<>();
-        assert taskInfo.equals("");
+        assert !taskInfo.equals("");
         try {
             fileTasks = load();
         } catch (IOException e) {
