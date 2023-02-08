@@ -133,7 +133,6 @@ public class TaskList implements Serializable {
 
     @Override
     public String toString() {
-        return String.format("TaskList: %s", tasks);
+        return "TaskList:\n" + listAllTasks();
     }
-
 }
