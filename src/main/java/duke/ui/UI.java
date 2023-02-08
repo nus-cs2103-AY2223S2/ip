@@ -1,5 +1,8 @@
 package duke.ui;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Scanner;
 
 /**
@@ -7,36 +10,54 @@ import java.util.Scanner;
  */
 public class UI {
 
+    private final String logo = "██████   █████  ██████   █████  \n"
+            + "██   ██ ██   ██ ██   ██ ██   ██ \n"
+            + "██   ██ ██   ██ ██████  ███████ \n"
+            + "██   ██ ██   ██ ██   ██ ██   ██ \n"
+            + "██████   █████  ██   ██ ██   ██ \n\n";
+    private final String intro = "Hola! Soy \n";
+    private final String icebreaker = "What can I do for you?";
+    private final String breakLine = "________________________________________________________________";
+    private final String border = "================================================================";
+    private BufferedReader br;
+
+    /**
+     * Constructor to instantiate new UI.
+     */
+    public UI() {
+        br = new BufferedReader(new InputStreamReader(System.in));
+    }
+
+    /**
+     * Ui to read input for user.
+     * @return User's input.
+     * @throws IOException
+     */
+    public String readInput() throws IOException {
+        return br.readLine();
+    }
+
     /**
      * Prints response
      * @param res duke.Duke's response(String) to print
      */
-    public static void printRes(String res) {
-        System.out.println("================================================================");
-        System.out.println(res);
-        System.out.println("================================================================\n");
+    public void printRes(String res) {
+        System.out.println(border + res + border + "\n");
     }
 
     /**
      * Greet the user
      */
-    public static void greet() {
-        final String logo = "██████   █████  ██████   █████  \n"
-                    + "██   ██ ██   ██ ██   ██ ██   ██ \n"
-                    + "██   ██ ██   ██ ██████  ███████ \n"
-                    + "██   ██ ██   ██ ██   ██ ██   ██ \n"
-                    + "██████   █████  ██   ██ ██   ██ \n\n";
-        final String intro = "Hola! Soy \n";
-        final String icebreaker = "What can I do for you?";
+    public void greet() {
         System.out.println(intro + logo + icebreaker);
-        System.out.println("________________________________________________________________");
+        System.out.println(breakLine);
         System.out.println();
     }
 
     /**
      * Echo the user's response
      */
-    public static void echo() {
+    public void echo() {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
 
@@ -51,11 +72,15 @@ public class UI {
     /**
      * Exit the program with an outro
      */
-    public static void exit() {
+    public void exit() {
         String outro = "bella ciao";
         printRes(outro);
     }
 
+    /**
+     * return String for introduction
+     * @return Hello message: String
+     */
     public static String showWelcomeMsg() {
         return "Hola! Soy Dora";
     }

@@ -1,5 +1,6 @@
 package duke;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 import duke.command.Command;
@@ -10,16 +11,18 @@ import duke.storage.TaskList;
 import duke.ui.UI;
 
 /**
- * duke.Duke Chat Bot!
+ * Duke Chat Bot!
  */
 public class Duke {
     private TaskList tasks;
     private LocalStorage localStorage;
+    private UI ui;
 
     /**
      * Constructor for duke.Duke
      */
     public Duke() {
+        this.ui = new UI();
         this.tasks = new TaskList();
     }
 
@@ -29,6 +32,7 @@ public class Duke {
      */
     public Duke(String filePath) {
         TaskList tasks = new TaskList();
+        this.ui = new UI();
         this.localStorage = new LocalStorage(filePath);
         this.localStorage.loadTasks(tasks);
         this.tasks = tasks;
@@ -39,28 +43,35 @@ public class Duke {
      */
     public void run() {
 
-        UI.greet();
+        ui.greet();
 
-        Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine();
-
-        while (!input.equalsIgnoreCase("bye")) {
+        while (true) {
             try {
-                Command com = new Parser(input, tasks).processRequest();
+                String request = ui.readInput();
+
+                if (request.equals("bye")) {
+                    break;
+                }
+
+                Command com = new Parser(request, tasks).processRequest();
                 String response = com.execute(tasks);
-                UI.printRes(response);
+                ui.printRes(response);
             } catch (DukeException error) {
-                UI.printRes(error.getMessage());
+                ui.printRes(error.getMessage());
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-            input = sc.nextLine();
         }
 
         localStorage.saveFile(tasks);
-        sc.close();
-
-        UI.exit();
+        ui.exit();
     }
 
+    /**
+     * Get response function for GUI.
+     * @param request User's request.
+     * @return Response after processing user's request.
+     */
     public String getResponse(String request) {
         try {
             Command com = new Parser(request, tasks).processRequest();
@@ -74,7 +85,7 @@ public class Duke {
     /**
      * Function to handle the user's request
      */
-    public static void handleRequest() {
+    public void handleRequest() {
 
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
@@ -84,7 +95,7 @@ public class Duke {
         while (!input.equalsIgnoreCase("bye")) {
             Command com = new Parser(input, tasks).processRequest();
             String response = com.execute(tasks);
-            UI.printRes(response);
+            ui.printRes(response);
             input = sc.nextLine();
         }
 
@@ -92,6 +103,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("./data/duke.txt").run();;
+        new Duke("./data/duke.txt").run();
     }
 }
