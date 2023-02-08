@@ -181,6 +181,14 @@ public class Duke extends Application {
             } else if (parser.checkFindRequest(userInput)) {
                 String toBeFound = userInput.substring(5);
                 response += tasks.find(toBeFound);
+            } else if (userInput.startsWith("increase")) {
+                int itemNo = Integer.parseInt(userInput.substring(9));
+                response += tasks.increasePriorityOfTask(itemNo);
+            } else if (userInput.startsWith("decrease")) {
+                int itemNo = Integer.parseInt(userInput.substring(9));
+                response += tasks.decreasePriorityOfTask(itemNo);
+            } else if (userInput.startsWith("sort")) {
+                response += tasks.sortTasks();
             }
             else {
                 String[] terms = userInput.split(" ");
