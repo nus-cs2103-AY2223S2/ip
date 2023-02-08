@@ -13,7 +13,7 @@ import duke.command.Command;
 public class TaskListTest {
 
     @Test
-    public void taskList_findAll() {
+    public void findAll() {
         TaskList tasks = new TaskList();
         LinkedHashMap<Command.Argument, String> args1 = new LinkedHashMap<>();
         args1.put(Command.Argument.TODO, "task with kword");
@@ -38,7 +38,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void taskList_givenDuplicate_rejectsCommand() {
+    public void addTask_givenDuplicate_rejectsCommand() {
         TaskList tasks = new TaskList();
         LinkedHashMap<Command.Argument, String> args1 = new LinkedHashMap<>();
         args1.put(Command.Argument.TODO, "todo task");
