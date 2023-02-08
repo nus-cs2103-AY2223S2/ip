@@ -41,8 +41,7 @@ public class TodoCommand extends Command {
         }
 
         //Get 'duke.task.ToDo' description
-        String[] descriptionArray = Arrays.copyOfRange(splitted, 1, splitted.length);
-        String description = String.join(" ", descriptionArray);
+        String description = Command.getTaskDescription(splitted, splitted.length);
 
         //Make Todo
         ToDo currentTask = new ToDo(description);
