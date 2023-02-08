@@ -1,5 +1,6 @@
 package duke;
 
+import duke.exception.FileException;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -23,15 +24,19 @@ public class Storage {
     /**
      * A constructor to specify the path
      * @param filepath the path to save the file and load the file from
-     * @throws IOException If the path input is invalid
+     * @throws FileException If the path input is invalid
      */
-    public Storage(String filepath) throws IOException {
-        this.filepath = filepath;
-        this.file = new File(filepath);
-        if (this.file.createNewFile()) {
-            System.out.println("Creating File...");
+    public Storage(String filepath) throws FileException {
+        try {
+            this.filepath = filepath;
+            this.file = new File(filepath);
+            if (this.file.createNewFile()) {
+                System.out.println("Creating File...");
+            }
+            this.fileReader = new FileReader(this.file);
+        } catch (IOException ioException) {
+            throw new FileException();
         }
-        this.fileReader = new FileReader(this.file);
     }
 
     /**
@@ -51,16 +56,20 @@ public class Storage {
     /**
      * Updates the file and stores the tasklist into the file
      * @param tasks The tasks to be written in the file
-     * @throws IOException If the file cannot be created or written in
+     * @throws FileException If the file cannot be created or written in
      */
-    public void store(TaskList tasks) throws IOException {
-        assert this.fileReader != null && this.filepath != null && this.file != null;
-        //noinspection ResultOfMethodCallIgnored
-        this.file.createNewFile();
-        FileWriter writer = new FileWriter(this.filepath);
-        for (Task task: tasks) {
-            writer.write(task.toString() + "\n");
+    public void store(TaskList tasks) throws FileException {
+        try {
+            //noinspection ResultOfMethodCallIgnored
+            this.file.createNewFile();
+            FileWriter writer = new FileWriter(this.filepath);
+            for (Task task: tasks) {
+                writer.write(task.toString() + "\n");
+            }
+            writer.close();
+        } catch (IOException ioException) {
+            throw new FileException();
         }
-        writer.close();
+
     }
 }

@@ -1,27 +1,17 @@
 package duke.exception;
 
 public class CommandException extends DukeException {
+    private static final String STRING = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
     public CommandException() {
-    }
-
-    public CommandException(String message) {
-        super(message);
-    }
-
-    public CommandException(String message, Throwable cause) {
-        super(message, cause);
-    }
-
-    public CommandException(Throwable cause) {
-        super(cause);
-    }
-
-    public CommandException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-        super(message, cause, enableSuppression, writableStackTrace);
     }
 
     @Override
     public String toString() {
-        return "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+        return STRING;
+    }
+
+    @Override
+    public void printStackTrace() {
+        System.out.println(STRING);
     }
 }

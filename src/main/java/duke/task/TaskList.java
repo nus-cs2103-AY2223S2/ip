@@ -2,6 +2,7 @@ package duke.task;
 
 import duke.exception.CommandException;
 import duke.exception.DescriptionException;
+import duke.exception.FileException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -22,14 +23,19 @@ public class TaskList extends ArrayList<Task> {
      * Instantiates an array list of tasks and filling with tasks from buffered reader
      * @param strTasks buffered reader with all the tasks in string
      * @throws CommandException if there are problems with converting the strings to a task
-     * @throws IOException if the buffered reader is not working as intended
+     * @throws FileException if the buffered reader is not working as intended eg file is corrupted and cannot be read
      */
-    public TaskList(BufferedReader strTasks) throws CommandException, IOException {
+    public TaskList(BufferedReader strTasks) throws FileException, CommandException {
         super();
         String str;
-        while ((str = strTasks.readLine()) != null) {
-            this.add(Task.strToTask(str));
+        try {
+            while ((str = strTasks.readLine()) != null) {
+                this.add(Task.strToTask(str));
+            }
+        } catch (IOException ioException) {
+            throw new FileException();
         }
+
     }
 
     /**
