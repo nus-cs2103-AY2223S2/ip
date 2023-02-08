@@ -25,7 +25,7 @@ public class EventCommand extends Command {
      * @param storage A Storage class which represents the storage of file
      */
     @Override
-    public void execute(TaskList tasksList, TextUi ui, Storage storage) {
+    public String execute(TaskList tasksList, TextUi ui, Storage storage) {
         String[] detailArray = DETAILS.split("/");
         String description = detailArray[0].strip();
         String from = detailArray[1].strip();
@@ -33,8 +33,8 @@ public class EventCommand extends Command {
         System.out.println(from);
         Task event = new Event(description, from, to);
         tasksList.addToTaskList(event);
-        ui.showAddTaskMessage(event);
         storage.saveToFile(tasksList.getList());
+        return ui.showAddTaskMessage(event);
     }
 
     /**

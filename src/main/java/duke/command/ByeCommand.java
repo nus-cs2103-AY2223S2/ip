@@ -13,8 +13,8 @@ public class ByeCommand extends Command {
      * @param storage A Storage class which represents the storage of file
      */
     @Override
-    public void execute(TaskList tasksList, TextUi ui, Storage storage) {
-        ui.showExitMessage();
+    public String execute(TaskList tasksList, TextUi ui, Storage storage) {
+        return ui.showExitMessage();
     }
 
     /**

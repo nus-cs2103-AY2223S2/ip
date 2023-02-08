@@ -23,11 +23,11 @@ public class DeleteCommand extends Command {
      * @param storage A Storage class which represents the storage of file
      */
     @Override
-    public void execute(TaskList tasksList, TextUi ui, Storage storage) {
+    public String execute(TaskList tasksList, TextUi ui, Storage storage) {
         Task deletedTask = tasksList.get(TASK_NUM);
         tasksList.deleteFromTaskList(TASK_NUM);
-        ui.showDeleteTaskMessage(deletedTask);
         storage.saveToFile(tasksList.getList());
+        return ui.showDeleteTaskMessage(deletedTask);
     }
 
     /**
