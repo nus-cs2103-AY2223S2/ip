@@ -1,7 +1,7 @@
 todo CS2103T ip
-deadline CS2109S Problem set /by 28 Jan
+deadline CS2109S Problem set /by 2021-11-11 2311
 list
-event CS2103T Lecture /from Friday 2pm /to Friday 4pm
+event CS2103T Lecture /from Friday 2021-11-11 2311 /to Friday 2021-12-11 2311
 list
 mark 1
 mark 2
