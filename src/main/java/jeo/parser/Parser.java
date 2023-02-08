@@ -1,5 +1,6 @@
 package jeo.parser;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import jeo.exception.JeoException;
@@ -30,10 +31,16 @@ public class Parser {
         } else if (str.toLowerCase().startsWith("todo")) {
             hm.put("command", "todo");
             str = str.substring(4).trim();
-            hm.put("description", str);
             if (str.isEmpty()) {
                 throw new JeoException("Please enter a task description.");
             }
+            if (str.startsWith("/tag")) {
+                throw new JeoException("Please enter a task description before any tags.");
+            }
+            ArrayList<String> tags = resolveTags(str);
+            hm.put("description", tags.get(0));
+            tags.remove(0);
+            hm.put("tags", String.join("\\", tags));
         } else if (str.toLowerCase().startsWith("deadline")) {
             hm.put("command", "deadline");
             str = str.substring(8).trim();
@@ -42,6 +49,13 @@ public class Parser {
                         ? "Please enter a task description."
                         : "Please follow the format: deadline <description> /by <yyyy-MM-dd HH:mm>");
             }
+            if (str.startsWith("/tag")) {
+                throw new JeoException("Please enter a task description before any tags.");
+            }
+            ArrayList<String> tags = resolveTags(str);
+            str = tags.get(0);
+            tags.remove(0);
+            hm.put("tags", String.join("\\", tags));
             String[] arr = parseSubstringTasks(str, "deadline");
             String desc = arr[0];
             String by = arr[1];
@@ -63,6 +77,13 @@ public class Parser {
                         : "Please follow the format: event <description> "
                         + "/from <yyyy-MM-dd HH:mm> /to <yyyy-MM-dd HH:mm>");
             }
+            if (str.startsWith("/tag")) {
+                throw new JeoException("Please enter a task description before any tags.");
+            }
+            ArrayList<String> tags = resolveTags(str);
+            str = tags.get(0);
+            tags.remove(0);
+            hm.put("tags", String.join("\\", tags));
             String[] arr = parseSubstringTasks(str, "event1");
             String desc = arr[0];
             str = arr[1];
@@ -117,6 +138,32 @@ public class Parser {
             hm.put("command", "");
         }
         return hm;
+    }
+
+    /**
+     * Parses each section denoting tags and returns an array of tags, with index 0 representing the resultant
+     * string after removing all tags.
+     * @param str String representing the input string minus the command.
+     * @return ArrayList of tags, with index 0 representing the resultant string after removing all tags.
+     */
+    public static ArrayList<String> resolveTags(String str) {
+        String tempString = str;
+        ArrayList<String> tags = new ArrayList<>();
+        while (tempString.contains("/tag")) {
+            String tempSubstring = tempString.substring(tempString.lastIndexOf("/tag"));
+            String tagString = tempSubstring.substring(4);
+            String tag;
+            if (!tagString.contains("/")) {
+                tag = tagString.trim();
+                tempString = tempString.replace(tempSubstring, "");
+            } else {
+                tag = tagString.substring(0, tagString.indexOf("/")).trim();
+                tempString = tempString.replace(tempSubstring.substring(0, tagString.indexOf("/") + 4), "");
+            }
+            tags.add(0, tag);
+        }
+        tags.add(0, tempString.trim());
+        return tags;
     }
 
     /**

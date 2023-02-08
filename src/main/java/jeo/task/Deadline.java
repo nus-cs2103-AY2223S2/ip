@@ -20,8 +20,8 @@ public class Deadline extends Task {
      * @param description String describing the task.
      * @param by String representing the date-time when the task is due.
      */
-    public Deadline(String description, String by) throws DateTimeParseException {
-        super(description);
+    public Deadline(String description, String by, String tags) throws DateTimeParseException {
+        super(description, tags);
         DateTimeFormatter formatterParse = DateTimeFormatter.ofPattern(DATE_TIME_TO_PARSE);
         DateTimeFormatter formatterPrint = DateTimeFormatter.ofPattern(DATE_TIME_TO_PRINT);
         this.byDateTime = LocalDateTime.parse(by, formatterParse);

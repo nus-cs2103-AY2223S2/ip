@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 import jeo.task.Deadline;
@@ -62,19 +63,23 @@ public class Storage {
                     .append(task.getDescription())
                     .append("\\");
             if (task instanceof ToDo) {
-                sb.append("T");
+                sb.append("T").append("\\").append(task.getTags());
                 fw.write(sb + System.lineSeparator());
             } else if (task instanceof Deadline) {
                 sb.append("D")
                         .append("\\")
-                                .append(((Deadline) task).getDateTimeBy().format(formatterParse));
+                                .append(((Deadline) task).getDateTimeBy().format(formatterParse))
+                                        .append("\\")
+                                                .append(task.getTags());
                 fw.write(sb + System.lineSeparator());
             } else {
                 sb.append("E")
                         .append("\\")
                                 .append(((Event) task).getDateTimeFrom().format(formatterParse))
                                         .append("\\")
-                                                .append(((Event) task).getDateTimeTo().format(formatterParse));
+                                                .append(((Event) task).getDateTimeTo().format(formatterParse))
+                                                        .append("\\")
+                                                                .append(task.getTags());
                 fw.write(sb + System.lineSeparator());
             }
 
@@ -92,13 +97,28 @@ public class Storage {
         String[] arr = str.split("\\\\");
         switch (arr[2]) {
         case "T":
-            task = new ToDo(arr[1]);
+            if (arr.length == 3) {
+                task = new ToDo(arr[1], "");
+            } else {
+                String[] tagArr = Arrays.copyOfRange(arr, 3, arr.length);
+                task = new ToDo(arr[1], String.join("\\", tagArr));
+            }
             break;
         case "D":
-            task = new Deadline(arr[1], arr[3]);
+            if (arr.length == 4) {
+                task = new Deadline(arr[1], arr[3], "");
+            } else {
+                String[] tagArr = Arrays.copyOfRange(arr, 4, arr.length);
+                task = new Deadline(arr[1], arr[3], String.join("\\", tagArr));
+            }
             break;
         case "E":
-            task = new Event(arr[1], arr[3], arr[4]);
+            if (arr.length == 5) {
+                task = new Event(arr[1], arr[3], arr[4], "");
+            } else {
+                String[] tagArr = Arrays.copyOfRange(arr, 5, arr.length);
+                task = new Event(arr[1], arr[3], arr[4], String.join("\\", tagArr));
+            }
             break;
         default:
             throw new IllegalStateException();

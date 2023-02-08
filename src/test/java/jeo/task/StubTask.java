@@ -13,7 +13,7 @@ public class StubTask extends Task {
      * @param description Describes the task
      */
     public StubTask(String description) {
-        super(description);
+        super(description, "");
         stubDescription = description;
     }
 

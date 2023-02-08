@@ -89,7 +89,8 @@ public class JeoBot {
             case TODO:
                 assert hm.containsKey("description");
                 String desc = hm.get("description");
-                task = new ToDo(desc);
+                String tags = hm.get("tags");
+                task = new ToDo(desc, tags);
                 taskList.addTask(task);
                 sb.append(ui.taskAddedMessage(task, taskList.getNumberOfTasks()));
                 break;
@@ -98,7 +99,8 @@ public class JeoBot {
                 assert hm.containsKey("by");
                 desc = hm.get("description");
                 String by = hm.get("by");
-                task = new Deadline(desc, by);
+                tags = hm.get("tags");
+                task = new Deadline(desc, by, tags);
                 taskList.addTask(task);
                 sb.append(ui.taskAddedMessage(task, taskList.getNumberOfTasks()));
                 break;
@@ -109,7 +111,8 @@ public class JeoBot {
                 desc = hm.get("description");
                 String from = hm.get("from");
                 String to = hm.get("to");
-                task = new Event(desc, from, to);
+                tags = hm.get("tags");
+                task = new Event(desc, from, to, tags);
                 taskList.addTask(task);
                 sb.append(ui.taskAddedMessage(task, taskList.getNumberOfTasks()));
                 break;

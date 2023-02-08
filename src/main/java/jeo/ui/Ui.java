@@ -30,7 +30,7 @@ public class Ui {
      * @return a divider for command response messages.
      */
     public String bodyDivider() {
-        return "__________________________________________________________";
+        return "________________________________________________________";
     }
 
     /**

@@ -11,8 +11,8 @@ public class ToDo extends Task {
      * Creates a ToDo task object with the specified description.
      * @param description String describing the task.
      */
-    public ToDo(String description) {
-        super(description);
+    public ToDo(String description, String tags) {
+        super(description, tags);
     }
 
     /**
