@@ -207,7 +207,7 @@ public class Parser {
                 break;
 
             default:
-                throw new DukeException("Arii does not recognise this command...");
+                throw new DukeException("Use a command I understand won't you?");
             }
 
         } catch (DateTimeParseException e) {
@@ -215,7 +215,7 @@ public class Parser {
         } catch (NumberFormatException e) {
             throw new DukeException("That's not a number! Go count your numbers before trying again.");
         } catch (IllegalArgumentException e) {
-            throw new DukeException("Arii does not recognise this command...");
+            throw new DukeException("Use a command I understand won't you?");
         }
         return command;
     }

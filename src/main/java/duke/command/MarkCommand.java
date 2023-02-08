@@ -34,7 +34,7 @@ public class MarkCommand extends Command {
         if (isDone) {
             stringBuilder.append("This task is now done, what's next?\n");
         } else {
-            stringBuilder.append("This task is now not done, how disappointing...\n");
+            stringBuilder.append("This task is now not done, get to work!\n");
         }
         stringBuilder.append(taskList.get(taskIndex));
 
