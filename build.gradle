@@ -34,7 +34,7 @@ test {
 }
 
 application {
-    mainClassName = "chattime.Chattime"
+    mainClassName = "chattime.Launcher"
 }
 
 shadowJar {

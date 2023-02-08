@@ -32,6 +32,43 @@ public class Deadline extends Task {
     }
 
     /**
+     * Getter for byDate.
+     *
+     * @return Field byDate.
+     */
+    public LocalDate getByDate() {
+        return byDate;
+    }
+
+    /**
+     * Getter for byTime.
+     *
+     * @return Field byTime.
+     */
+    public LocalTime getByTime() {
+        return byTime;
+    }
+
+    /**
+     * Checks whether the new task is already existed.
+     *
+     * @return Is duplicate exist.
+     */
+    @Override
+    public boolean isDuplicate(Task task) {
+        Deadline testTask = (Deadline) task;
+        boolean testTime;
+        if (byTime != null && testTask.getByTime() != null) {
+            testTime = testTask.getByTime().equals(byTime);
+        } else {
+            testTime = byTime == null && testTask.getByTime() == null;
+        }
+        return testTask.getDescription().equals(getDescription())
+                && testTask.getByDate().isEqual(byDate)
+                && testTime;
+    }
+
+    /**
      * Returns comparison result of input time with task relevant time.
      *
      * @param time User's input time.
@@ -76,7 +113,7 @@ public class Deadline extends Task {
      */
     @Override
     public String taskWithCode() {
-        return "[" + TaskType.DEADLINE + "] " + description;
+        return "[" + TaskType.DEADLINE + "] " + getDescription();
     }
 
     /**

@@ -11,7 +11,7 @@ public class Task {
 
     private static int tasksCount = 0;
 
-    protected String description;
+    private String description;
     private boolean isDone;
 
     /**
@@ -41,6 +41,14 @@ public class Task {
         description = content;
         isDone = false;
         tasksCount++;
+    }
+
+    /**
+     * Getter for task description.
+     * @return Task description.
+     */
+    public String getDescription() {
+        return description;
     }
 
     /**
@@ -146,6 +154,22 @@ public class Task {
      */
     public String taskWithCode() {
         return toString();
+    }
+
+    /**
+     * Checks whether the new task is already existed.
+     *
+     * @return Is duplicate exist.
+     */
+    public boolean isDuplicate(Task task) {
+        return task.getDescription().equals(getDescription());
+    }
+
+    /**
+     * Removes duplicated items.
+     */
+    public static void removeDuplicate() {
+        tasksCount--;
     }
 
     /**

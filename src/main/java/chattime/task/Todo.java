@@ -31,7 +31,7 @@ public class Todo extends Task {
      */
     @Override
     public String taskWithCode() {
-        return "[" + TaskType.TODO + "] " + description;
+        return "[" + TaskType.TODO + "] " + getDescription();
     }
 
     /**

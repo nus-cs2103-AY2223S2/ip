@@ -32,6 +32,10 @@ public class AddCommand extends Command {
      */
     @Override
     public String execute(Ui ui, TaskList taskList, Storage storage) {
+        if (taskList.isDuplicates(task, task.getClass())) {
+            Task.removeDuplicate();
+            return ui.alertDuplicate();
+        }
         taskList.addTask(task);
         storage.saveToFile(task);
         return ui.printAddTask(task, Task.printTotalTask());

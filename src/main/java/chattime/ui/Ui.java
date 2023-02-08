@@ -137,4 +137,12 @@ public class Ui {
     public String printGuide() {
         return GUIDE;
     }
+
+    /**
+     * Returns user guide.
+     */
+    public String alertDuplicate() {
+        return "AHH?! Seems that this job is added before ><";
+    }
+
 }

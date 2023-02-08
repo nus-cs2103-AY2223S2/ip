@@ -1,8 +1,12 @@
 package chattime;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
+import chattime.task.Deadline;
 import chattime.task.Task;
+import chattime.task.Todo;
 
 /**
  * Represents a list object to store user's tasks.
@@ -54,5 +58,24 @@ public class TaskList {
      */
     public ArrayList<Task> getList() {
         return tasks;
+    }
+
+    /**
+     * Gets the current entire task list.
+     *
+     * @param taskType Task type code.
+     * @return Current task list.
+     */
+    public boolean isDuplicates(Task testTask, Class<?> taskType) {
+        List<Task> filteredList = tasks.stream()
+                .filter(task -> task.getClass().equals(taskType)).collect(Collectors.toList());
+
+        for (Task task : filteredList) {
+            if (testTask.isDuplicate(task)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

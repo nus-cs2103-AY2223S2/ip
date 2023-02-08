@@ -34,6 +34,55 @@ public class Event extends Task {
     }
 
     /**
+     * Getter for fromDate.
+     *
+     * @return Field fromDate.
+     */
+    public LocalDate getFromDate() {
+        return fromDate;
+    }
+
+    /**
+     * Getter for fromTime.
+     *
+     * @return Field fromTime.
+     */
+    public LocalTime getFromTime() {
+        return fromTime;
+    }
+
+    /**
+     * Getter for toDate.
+     *
+     * @return Field toDate.
+     */
+    public LocalDate getToDate() {
+        return toDate;
+    }
+
+    /**
+     * Getter for toTime.
+     *
+     * @return Field toTime.
+     */
+    public LocalTime getToTime() {
+        return toTime;
+    }
+
+    /**
+     * Checks whether the new task is already existed.
+     *
+     * @return Is duplicate exist.
+     */
+    @Override
+    public boolean isDuplicate(Task task) {
+        Event testTask = (Event) task;
+        boolean checkFrom = testTask.getFromDate().isEqual(fromDate) && testTask.getFromTime().equals(fromTime);
+        boolean checkTo = testTask.getToDate().isEqual(toDate) && testTask.getToTime().equals(toTime);
+        return task.getDescription().equals(getDescription()) && checkFrom && checkTo;
+    }
+
+    /**
      * Returns comparison result of input time with task relevant time.
      *
      * @param time User's input time.
@@ -80,7 +129,7 @@ public class Event extends Task {
      */
     @Override
     public String taskWithCode() {
-        return "[" + TaskType.EVENT + "] " + description;
+        return "[" + TaskType.EVENT + "] " + getDescription();
     }
 
     /**
