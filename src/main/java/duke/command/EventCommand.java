@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.exception.DukeBadInstructionFormatException;
+import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.Event;
 import duke.tasklist.TaskList;
@@ -33,6 +34,7 @@ public class EventCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage)
             throws DukeBadInstructionFormatException {
         String[] splitted = this.fullCommand.split(" ");
+        assert splitted[0].equals(Parser.EVENT_STRING) : "Wrong command made an event";
         //Get 'duke.task.Deadline' description, 'from' and 'to' index
         int fromStartIndex = -1;
         int toStartIndex = -1;

@@ -3,6 +3,7 @@ package duke.command;
 import java.util.Arrays;
 
 import duke.exception.DukeBadInstructionFormatException;
+import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.ToDo;
 import duke.tasklist.TaskList;
@@ -39,6 +40,7 @@ public class TodoCommand extends Command {
             throw new DukeBadInstructionFormatException(
                     "The description of a todo cannot be empty.");
         }
+        assert splitted[0].equals(Parser.TODO_STRING) : "Wrong command made a todo";
 
         //Get 'duke.task.ToDo' description
         String description = Command.getTaskDescription(splitted, splitted.length);
