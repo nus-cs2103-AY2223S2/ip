@@ -17,7 +17,7 @@ public class UpdateCommand extends Command {
 
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        String str = taskList.update(this.index, this.command);
+        String str = taskList.updateTask(this.index, this.command);
         storage.save(taskList);
         return str;
     }

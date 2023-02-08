@@ -121,7 +121,7 @@ public class TaskList {
         return result;
     }
 
-    public String update(int index, String body) {
+    public String updateTask(int index, String body) {
         if (this.tasks[index] == null) {
             throw new RuntimeException("Task does not exist!");
         }
