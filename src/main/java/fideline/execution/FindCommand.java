@@ -34,12 +34,12 @@ public class FindCommand extends Command {
      * @param ui          Handler for display messages to the user.
      */
     @Override
-    public void execute(TaskManager taskManager, Storage storage, Ui ui) {
+    public String execute(TaskManager taskManager, Storage storage, Ui ui) {
         String s = taskManager.findTask(findString);
         if (s.equals("")) {
-            ui.emptyFindMsg();
+            return ui.getEmptyFindMsg();
         } else {
-            ui.findMsg(s);
+            return ui.getFindMsg(s);
         }
     }
 }

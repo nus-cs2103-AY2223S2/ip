@@ -23,12 +23,12 @@ public class ListCommand extends Command {
      * @param ui          Handler for display messages to the user.
      */
     @Override
-    public void execute(TaskManager taskManager, Storage storage, Ui ui) {
+    public String execute(TaskManager taskManager, Storage storage, Ui ui) {
         String s = taskManager.getTaskListString();
         if (s.equals("")) {
-            ui.emptyListMsg();
+            return ui.getEmptyListMsg();
         } else {
-            ui.listMsg(s);
+            return ui.getListMsg(s);
         }
     }
 }

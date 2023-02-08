@@ -26,12 +26,12 @@ public class MarkCommand extends Command {
      * @param ui          Handler for display messages to the user.
      */
     @Override
-    public void execute(TaskManager taskManager, Storage storage, Ui ui)
+    public String execute(TaskManager taskManager, Storage storage, Ui ui)
             throws DataFileInteractionException, InvalidArgumentException {
         if (taskManager.checkTask(taskNum)) {
             String s = taskManager.markTask(taskNum);
             storage.editTaskStatus(taskNum, true);
-            ui.markMsg(s);
+            return ui.getMarkMsg(s);
         } else {
             throw new InvalidArgumentException("task! (the one given does not exist!)");
         }

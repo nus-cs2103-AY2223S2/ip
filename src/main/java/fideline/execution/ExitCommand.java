@@ -29,8 +29,8 @@ public class ExitCommand extends Command {
      * @param ui Handler for display messages to the user.
      */
     @Override
-    public void execute(TaskManager taskManager, Storage storage, Ui ui) {
-        ui.goodbye();
+    public String execute(TaskManager taskManager, Storage storage, Ui ui) {
+        return ui.getGoodbyeMsg();
     }
 
 }

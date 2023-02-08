@@ -26,12 +26,12 @@ public class UnmarkCommand extends Command {
      * @param ui          Handler for display messages to the user.
      */
     @Override
-    public void execute(TaskManager taskManager, Storage storage, Ui ui)
+    public String execute(TaskManager taskManager, Storage storage, Ui ui)
             throws DataFileInteractionException, InvalidArgumentException {
         if (taskManager.checkTask(taskNum)) {
             String s = taskManager.unmarkTask(taskNum);
             storage.editTaskStatus(taskNum, false);
-            ui.unmarkMsg(s);
+            return ui.getUnmarkMsg(s);
         } else {
             throw new InvalidArgumentException("task! (the one given does not exist!)");
         }

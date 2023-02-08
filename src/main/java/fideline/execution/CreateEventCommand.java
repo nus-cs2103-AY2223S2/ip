@@ -45,12 +45,12 @@ public class CreateEventCommand extends Command {
      * @param ui          Handler for display messages to the user.
      */
     @Override
-    public void execute(TaskManager taskManager, Storage storage, Ui ui) throws DataFileInteractionException {
+    public String execute(TaskManager taskManager, Storage storage, Ui ui) throws DataFileInteractionException {
         String taskString = taskManager.addEvent(taskDescription,
                 startTime, endTime);
         storage.addLine("E| |" + taskDescription + "|" + startTime
                 + "|" + endTime);
-        ui.addTaskMsg(taskString, taskManager.getTaskCount());
+        return ui.getAddTaskMsg(taskString, taskManager.getTaskCount());
     }
 
 }

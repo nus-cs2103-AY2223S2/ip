@@ -26,12 +26,12 @@ public class DeleteCommand extends Command {
      * @param ui          Handler for display messages to the user.
      */
     @Override
-    public void execute(TaskManager taskManager, Storage storage, Ui ui)
+    public String execute(TaskManager taskManager, Storage storage, Ui ui)
             throws DataFileInteractionException, InvalidArgumentException {
         if (taskManager.checkTask(taskNum)) {
             String s = taskManager.deleteTask(taskNum);
             storage.deleteLine(taskNum);
-            ui.deleteMsg(s, taskManager.getTaskCount());
+            return ui.getDeleteMsg(s, taskManager.getTaskCount());
         } else {
             throw new InvalidArgumentException("task!\n(the one given does not exist!)");
         }

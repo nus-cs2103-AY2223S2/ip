@@ -26,6 +26,8 @@ public class Fideline {
     /** Handler for display messages to the user */
     private Ui ui;
 
+    private boolean isOn;
+
     /**
      * Boots up Fideline. Attempts to load existing saved data.
      *
@@ -42,40 +44,35 @@ public class Fideline {
         storage = new Storage(filePath);
         try {
             taskManager = new TaskManager(storage.load());
+            isOn = true;
         } catch (DataFileNotFoundException e) {
-            ui.loadError(e.getMessage());
+            ui.showLoadError(e.getMessage());
             taskManager = new TaskManager();
             storage.createDataFile();
         }
     }
 
+    public String getIntroduction() {
+        return ui.getHello();
+    }
+
     /**
-     * Starts Fideline's program. Fideline takes in the user's input
-     * until it is turned off with a "bye" command.
+     * Gets Fideline's response to user input.
      */
-    public void run() {
-        ui.showLine();
-        ui.hello();
-        ui.showLine();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String userInput = ui.getNextCommand();
-                ui.showLine();
-                Command c = Parser.getCommand(userInput);
-                c.execute(taskManager, storage, ui);
-                isExit = c.isExit();
-            } catch (FidelineException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
+    public String getResponse(String userInput) {
+        try {
+            Command c = Parser.getCommand(userInput);
+            isOn = !c.isExit();
+            return c.execute(taskManager, storage, ui);
+        } catch (FidelineException e) {
+            return ui.getErrorMsg(e.getMessage());
         }
     }
 
-    public static void main(String[] args) throws CorruptedDataFileException,
-            UnableToCreateDataFileException {
-        new Fideline("./task-data.txt").run();
+    public boolean isTerminated() {
+        return !isOn;
     }
+
+    // how to print intro
 
 }

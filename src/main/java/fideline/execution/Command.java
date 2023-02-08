@@ -31,7 +31,7 @@ public abstract class Command {
      * @param ui Handler for display messages to the user.
      * @throws FidelineException Custom exception raised while the program is running.
      */
-    public abstract void execute(TaskManager taskManager, Storage storage, Ui ui) throws FidelineException;
+    public abstract String execute(TaskManager taskManager, Storage storage, Ui ui) throws FidelineException;
 
 }
 

@@ -34,10 +34,10 @@ public class CreateTodoCommand extends Command {
      * @param ui          Handler for display messages to the user.
      */
     @Override
-    public void execute(TaskManager taskManager, Storage storage, Ui ui) throws DataFileInteractionException {
+    public String execute(TaskManager taskManager, Storage storage, Ui ui) throws DataFileInteractionException {
         String taskString = taskManager.addTodo(taskDescription);
         storage.addLine("T| |" + taskDescription);
-        ui.addTaskMsg(taskString, taskManager.getTaskCount());
+        return ui.getAddTaskMsg(taskString, taskManager.getTaskCount());
     }
 
 }
