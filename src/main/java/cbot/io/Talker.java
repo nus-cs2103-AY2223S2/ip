@@ -5,14 +5,14 @@ import java.util.ArrayList;
 /**
  * Manages printing to and receiving from the user, mainly via the Command Line Interface.
  */
-public class UI {
+public class Talker {
 
     //CHECKSTYLE.OFF: SingleSpaceSeparator
 
     // Frequently Used Strings
     private static final String BLANK     = "";
-    private static final String INDENT    = " ~ ";
-    private static final String WARNING   = "!! ";
+    private static final String INDENT    = BLANK + " ~ ";
+    private static final String WARNING   = BLANK + "!! ";
     private static final String ERROR     = WARNING + "<Error> ";
 
     //CHECKSTYLE.ONL SingleSpaceSeparator
@@ -94,7 +94,9 @@ public class UI {
         StringBuilder sb = new StringBuilder();
 
         for (String s : arr) {
-            sb.append(BLANK).append(s).append("\n");
+            sb.append(BLANK);
+            sb.append(s);
+            sb.append("\n");
         }
 
         if (!arr.isEmpty()) {

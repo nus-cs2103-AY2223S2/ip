@@ -14,7 +14,6 @@ public class TimeStuff {
     // checkstyle doesn't like the 8-space indentation here
     private static final String[] D_FORMS = {"y-M-d", "d/M/y", "d MMM y", "MMM d y"};
     private static final String[] T_FORMS = {" Hmm", " H:m", " ha", " h a", " h.ma", " h.m a", " h:ma", " h:m a"};
-
     private static final DateTimeFormatter UI_FORM = DateTimeFormatter.ofPattern("dd/MM/yy, HHmm");
 
     /**
@@ -25,24 +24,33 @@ public class TimeStuff {
      * @return The corresponding datetime.
      * @throws DateTimeParseException If dtStr is not in a recognized format.
      */
-    public static LocalDateTime parseDT(String dtStr) throws DateTimeParseException {
+    public static LocalDateTime textToDT(String dtStr)
+            throws DateTimeParseException {
         String str = dtStr.trim();
 
-        for (String df : D_FORMS) {
+        for (String dForm : D_FORMS) {
             try {
-                return LocalDate.parse(str, DateTimeFormatter.ofPattern(df)).atStartOfDay();
-            } catch (DateTimeParseException e) {
-                for (String tf : T_FORMS) {
-                    try {
-                        return LocalDateTime.parse(str, DateTimeFormatter.ofPattern(df + tf));
-                    } catch (DateTimeParseException ignore) {
-                        // no handling, continue
-                    }
-                }
+                return tryAllForms(str, dForm);
+            } catch (DateTimeParseException ignore) {
+                // no handling, continue to next dForm
             }
         }
 
         return LocalDateTime.parse(str);
+    }
+
+    private static LocalDateTime tryAllForms(String str, String dForm)
+            throws DateTimeParseException {
+        for (String tForm : T_FORMS) {
+            try {
+                String fullForm = dForm + tForm;
+                return LocalDateTime.parse(str, DateTimeFormatter.ofPattern(fullForm));
+            } catch (DateTimeParseException ignore) {
+                // no handling, continue to next tForm
+            }
+        }
+
+        return LocalDate.parse(str, DateTimeFormatter.ofPattern(dForm)).atStartOfDay();
     }
 
     /**
@@ -51,7 +59,7 @@ public class TimeStuff {
      * @param dt The datetime to be re-written.
      * @return A read-friendly form of datetime.
      */
-    public static String text(LocalDateTime dt) {
+    public static String dtToText(LocalDateTime dt) {
         return dt.format(UI_FORM);
     }
 }

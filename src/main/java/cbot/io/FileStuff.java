@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -76,36 +77,43 @@ public class FileStuff {
      * @throws FileNotFoundException If the save file does not exist in the expected location.
      * @see TaskList
      */
-    public TaskList loadFile() throws FileNotFoundException {
+    public TaskList loadFile()
+            throws FileNotFoundException {
         Scanner s = new Scanner(this.file);
-
         ArrayList<Task> tdl = new ArrayList<>();
 
         while (s.hasNext()) {
-            String[] taskStr = s.nextLine().split(Task.SEP);
-
-            // type SEP done SEP desc SEP due/from SEP to
-
-            boolean isDone = taskStr[1].equals(Task.DONE_TRUE);
-            String desc = taskStr[2];
-
-            switch (taskStr[0]) {
-            case Task.TODO_SYMBOL:
-                tdl.add(new Task(desc, isDone));
-                break;
-
-            case Deadline.DEADLINE_SYMBOL:
-                tdl.add(new Deadline(desc, LocalDateTime.parse(taskStr[3]), isDone));
-                break;
-
-            case Event.EVENT_SYMBOL:
-                tdl.add(new Event(desc, LocalDateTime.parse(taskStr[3]), LocalDateTime.parse(taskStr[4]), isDone));
-                break;
-
-            default:
-            }
+            String taskSave = s.nextLine();
+            tdl.add(restoreTask(taskSave));
         }
 
         return new TaskList(tdl);
+    }
+
+    private Task restoreTask(String taskSave) {
+        String[] splitSave = taskSave.split(Task.SEP);
+        // type SEP done SEP desc SEP due/from SEP to
+
+        try {
+            boolean isDone = splitSave[1].equals(Task.DONE_TRUE);
+            String desc = splitSave[2];
+
+            switch (splitSave[0]) {
+            case Task.TODO_SYMBOL:
+                return new Task(desc, isDone);
+
+            case Deadline.DEADLINE_SYMBOL:
+                return new Deadline(desc, LocalDateTime.parse(splitSave[3]), isDone);
+
+            case Event.EVENT_SYMBOL:
+                return new Event(desc, LocalDateTime.parse(splitSave[3]), LocalDateTime.parse(splitSave[4]), isDone);
+
+            default:
+                throw new UncheckedIOException(new IOException("Unknown task type symbol: " + splitSave[0]));
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            // Change to assert
+            throw new UncheckedIOException(new IOException("Missing SEP (" + Task.SEP + ") in save file"));
+        }
     }
 }

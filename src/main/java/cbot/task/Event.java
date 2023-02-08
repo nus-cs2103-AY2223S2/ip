@@ -49,7 +49,7 @@ public class Event extends Task {
     @Override
     public String toString() {
         return String.format("%s (%s - %s)",
-                super.toString(), TimeStuff.text(this.fromTime), TimeStuff.text(this.toTime));
+                super.toString(), TimeStuff.dtToText(this.fromTime), TimeStuff.dtToText(this.toTime));
     }
 
     @Override

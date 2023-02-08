@@ -26,7 +26,7 @@ public class Task implements Comparable<Task> {
      */
     public Task(String desc, boolean ... isDone) {
         this.desc = desc;
-        this.isDone = isDone.length != 0 && isDone[0];
+        this.isDone = (isDone.length != 0) ? isDone[0] : false;
     }
 
     /**
@@ -37,7 +37,6 @@ public class Task implements Comparable<Task> {
     public String getDesc() {
         return this.desc;
     }
-
 
     /**
      * Returns the symbol corresponding to the task type.

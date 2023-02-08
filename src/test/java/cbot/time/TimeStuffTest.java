@@ -11,47 +11,47 @@ public class TimeStuffTest {
     
     @Test
     public void testParseDT0_() {
-        assertEquals(TimeStuff.parseDT("2001-01-01"), one);
+        assertEquals(TimeStuff.textToDT("2001-01-01"), one);
     }
     
     @Test
     public void testParseDT00() {
-        assertEquals(TimeStuff.parseDT("2001-01-01 0000"), one);
+        assertEquals(TimeStuff.textToDT("2001-01-01 0000"), one);
     }
     
     @Test
     public void testParseDT01() {
-        assertEquals(TimeStuff.parseDT("2001-01-01 00:00"), one);
+        assertEquals(TimeStuff.textToDT("2001-01-01 00:00"), one);
     }
     
     @Test
     public void testParseDT02() {
-        assertEquals(TimeStuff.parseDT("2001-01-01 12am"), one);
+        assertEquals(TimeStuff.textToDT("2001-01-01 12am"), one);
     }
     
     @Test
     public void testParseDT03() {
-        assertEquals(TimeStuff.parseDT("2001-01-01 12 am"), one);
+        assertEquals(TimeStuff.textToDT("2001-01-01 12 am"), one);
     }
     
     @Test
     public void testParseDT04() {
-        assertEquals(TimeStuff.parseDT("2001-01-01 12.00am"), one);
+        assertEquals(TimeStuff.textToDT("2001-01-01 12.00am"), one);
     }
     
     @Test
     public void testParseDT05() {
-        assertEquals(TimeStuff.parseDT("2001-01-01 12.00 am"), one);
+        assertEquals(TimeStuff.textToDT("2001-01-01 12.00 am"), one);
     }
     
     @Test
     public void testParseDT06() {
-        assertEquals(TimeStuff.parseDT("2001-01-01 12:00am"), one);
+        assertEquals(TimeStuff.textToDT("2001-01-01 12:00am"), one);
     }
     
     @Test
     public void testParseDT07() {
-        assertEquals(TimeStuff.parseDT("2001-01-01 12:00 am"), one);
+        assertEquals(TimeStuff.textToDT("2001-01-01 12:00 am"), one);
     }
     
     //
@@ -59,21 +59,21 @@ public class TimeStuffTest {
     @Test
     public void testParseDT1_() {
         // interesting, can't do 1/1/1
-        assertEquals(TimeStuff.parseDT("1/1/2001"), one);
+        assertEquals(TimeStuff.textToDT("1/1/2001"), one);
     }
     
     @Test
     public void testParseDT2_() {
-        assertEquals(TimeStuff.parseDT("1 Jan 2001"), one);
+        assertEquals(TimeStuff.textToDT("1 Jan 2001"), one);
     }
     
     @Test
     public void testParseDT3_() {
-        assertEquals(TimeStuff.parseDT("Jan 1 2001"), one);
+        assertEquals(TimeStuff.textToDT("Jan 1 2001"), one);
     }
     
     @Test
     public void testText() {
-        assertEquals(TimeStuff.text(one), "01/01/01, 0000");
+        assertEquals(TimeStuff.dtToText(one), "01/01/01, 0000");
     }
 }

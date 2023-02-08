@@ -204,10 +204,17 @@ public enum Command {
      * @see Parser
      */
     boolean matches(String input) {
-        if (this.hasText && input.length() > getLen()) {
-            return input.substring(0, getLen()).toLowerCase().equals(this.str);
+        String lowText = input.toLowerCase();
+
+        if (!this.hasText) {
+            // should match exactly
+            return lowText.equals(this.str);
+        } else if (input.length() > getLen()) {
+            // not too short to check
+            return lowText.substring(0, getLen()).equals(this.str);
         } else {
-            return input.toLowerCase().equals(this.str);
+            // too short to match
+            return false;
         }
     }
 
@@ -218,11 +225,9 @@ public enum Command {
      * @return The 'body' of the input.
      */
     String extractText(String input) {
-        if (!this.hasText) {
-            return "";
-        }
-
-        return input.substring(getLen()).trim();
+        return (this.hasText)
+                ? input.substring(getLen()).trim()
+                : "";
     }
 
     /**
@@ -233,14 +238,27 @@ public enum Command {
      * @return Whether there is missing body text, given the Command type.
      */
     boolean isMissingText(String text) {
-        return (this.hasText && text.length() == 0);
+        return (this.hasText)
+                ? (text.length() > 0)
+                : false;
     }
 
-    public String runCommand(TaskList tl, String str) throws PoorInputException, DateTimeParseException {
-        return this.f.apply(tl, str);
+    /**
+     * Runs the functionality of the respective command with the given list of tasks and text.
+     *
+     * @param tl The list of tasks to process.
+     * @param text The instruction details for the command.
+     * @return The output of running the command.
+     * @throws PoorInputException If the input text is improper or erroneous.
+     * @throws DateTimeParseException If some provided datetime is not in a recognized format.
+     */
+    public String runCommand(TaskList tl, String text)
+            throws PoorInputException, DateTimeParseException {
+        return this.f.apply(tl, text);
     }
 
-    private static int checkKeyword(String text, String keyword) throws PoorInputException {
+    private static int checkKeyword(String text, String keyword)
+            throws PoorInputException {
         if (!text.contains(keyword)) {
             throw new PoorInputException("Missing \"" + keyword.trim() + "\" keyword");
         }
@@ -248,25 +266,27 @@ public enum Command {
         return text.indexOf(keyword);
     }
 
-    private static void checkFilterCount(TaskList tl) throws PoorInputException {
+    private static void checkFilterCount(TaskList tl)
+            throws PoorInputException {
         if (tl.getCount() == 0) {
             throw new PoorInputException("Eh? You have no tasks to filter");
         }
     }
 
-    // Command static methods to be called by Parser
-    private static String doNoInput(TaskList tl, String str) throws PoorInputException {
+    // Command static methods to be called by Parser, and run by runCommand
+    private static String doNoInput(TaskList tl, String str)
+            throws PoorInputException {
         throw new PoorInputException("That command needs an input");
     }
 
     private static String doBye(TaskList tl, String str) {
-        return UI.sayBye();
+        return Talker.sayBye();
     }
 
     private static String doList(TaskList tl, String str) {
         return (tl.getCount() == 0)
-                ? UI.say("Freedom! You have no tasks :D")
-                : UI.say("Here's what you have:\n") + UI.printMany(tl.listTasks());
+                ? Talker.say("Freedom! You have no tasks :D")
+                : Talker.say("Here's what you have:\n") + Talker.printMany(tl.listTasks());
     }
 
     private static String doMark(TaskList tl, String text)
@@ -275,10 +295,10 @@ public enum Command {
             int num = Integer.parseInt(text);
 
             if (tl.notInRange(num)) {
-                throw new PoorInputException(tl.rangeError(num));
+                throw new PoorInputException(tl.getRangeErrorMsg(num));
             }
 
-            return UI.say(tl.mark(num));
+            return Talker.say(tl.mark(num));
 
         } catch (NumberFormatException e) {
             throw new BadInputException("Invalid index!");
@@ -291,10 +311,10 @@ public enum Command {
             int num = Integer.parseInt(text);
 
             if (tl.notInRange(num)) {
-                throw new PoorInputException(tl.rangeError(num));
+                throw new PoorInputException(tl.getRangeErrorMsg(num));
             }
 
-            return UI.say(tl.unmark(num));
+            return Talker.say(tl.unmark(num));
 
         } catch (NumberFormatException e) {
             throw new BadInputException("Invalid index!");
@@ -307,10 +327,10 @@ public enum Command {
             int num = Integer.parseInt(text);
 
             if (tl.notInRange(num)) {
-                throw new PoorInputException(tl.rangeError(num));
+                throw new PoorInputException(tl.getRangeErrorMsg(num));
             }
 
-            return UI.say(tl.delTask(num));
+            return Talker.say(tl.delTask(num));
 
         } catch (NumberFormatException e) {
             throw new BadInputException("Invalid index!");
@@ -318,7 +338,7 @@ public enum Command {
     }
 
     private static String doTodo(TaskList tl, String text) {
-        return UI.say(tl.addTask(new Task(text)));
+        return Talker.say(tl.addTask(new Task(text)));
     }
 
     private static String doDeadline(TaskList tl, String text)
@@ -339,8 +359,8 @@ public enum Command {
         String dlDesc = text.substring(0, byIndex);
         String dlDueStr = text.substring(byIndex + byLength);
 
-        LocalDateTime dlDue = TimeStuff.parseDT(dlDueStr);
-        return UI.say(tl.addTask(new Deadline(dlDesc, dlDue)));
+        LocalDateTime dlDue = TimeStuff.textToDT(dlDueStr);
+        return Talker.say(tl.addTask(new Deadline(dlDesc, dlDue)));
     }
 
     private static String doEvent(TaskList tl, String text)
@@ -371,14 +391,14 @@ public enum Command {
         String eStartStr = text.substring(fromIndex + fromLength, toIndex);
         String eEndStr = text.substring(toIndex + toLength);
 
-        LocalDateTime eStart = TimeStuff.parseDT(eStartStr);
-        LocalDateTime eEnd = TimeStuff.parseDT(eEndStr);
+        LocalDateTime eStart = TimeStuff.textToDT(eStartStr);
+        LocalDateTime eEnd = TimeStuff.textToDT(eEndStr);
 
         if (eStart.isAfter(eEnd)) {
             throw new BadInputException("Hey! You have to start *before* you end...");
         }
 
-        return UI.say(tl.addTask(new Event(eDesc, eStart, eEnd)));
+        return Talker.say(tl.addTask(new Event(eDesc, eStart, eEnd)));
     }
 
     private static String doSort(TaskList tl, String text)
@@ -388,34 +408,34 @@ public enum Command {
         }
 
         tl.sort();
-        return UI.say("Okay! I've sorted your tasks by date:\n")
-                + UI.printMany(tl.listTasks());
+        return Talker.say("Okay! I've sorted your tasks by date:\n")
+                + Talker.printMany(tl.listTasks());
     }
 
     private static String doBefore(TaskList tl, String text)
             throws PoorInputException, DateTimeParseException {
         checkFilterCount(tl);
 
-        LocalDateTime bef = TimeStuff.parseDT(text);
+        LocalDateTime bef = TimeStuff.textToDT(text);
         ArrayList<String> arrBef = tl.listFilter(t ->
                 t.hasTime() && t.compareTo(new Deadline("", bef)) < 0);
 
         return (arrBef.isEmpty())
-                ? UI.say("You don't have any tasks before " + text.trim())
-                : UI.say("Here are your tasks before " + text.trim() + ":\n") + UI.printMany(arrBef);
+                ? Talker.say("You don't have any tasks before " + text.trim())
+                : Talker.say("Here are your tasks before " + text.trim() + ":\n") + Talker.printMany(arrBef);
     }
 
     private static String doAfter(TaskList tl, String text)
             throws PoorInputException, DateTimeParseException {
         checkFilterCount(tl);
 
-        LocalDateTime aft = TimeStuff.parseDT(text);
+        LocalDateTime aft = TimeStuff.textToDT(text);
         ArrayList<String> arrAft = tl.listFilter(t ->
                 t.hasTime() && t.compareTo(new Deadline("", aft)) > 0);
 
         return (arrAft.isEmpty())
-                ? UI.say("You don't have any tasks after " + text.trim())
-                : UI.say("Here are your tasks after " + text.trim() + ":\n") + UI.printMany(arrAft);
+                ? Talker.say("You don't have any tasks after " + text.trim())
+                : Talker.say("Here are your tasks after " + text.trim() + ":\n") + Talker.printMany(arrAft);
     }
 
     private static String doFilter(TaskList tl, String text) throws PoorInputException {
@@ -479,8 +499,8 @@ public enum Command {
         }
 
         return (arrFilter.isEmpty())
-                ? UI.say("You don't have any of those :/")
-                : UI.say(msg) + UI.printMany(arrFilter);
+                ? Talker.say("You don't have any of those :/")
+                : Talker.say(msg) + Talker.printMany(arrFilter);
     }
 
     private static String doFind(TaskList tl, String text) throws PoorInputException {
@@ -491,7 +511,7 @@ public enum Command {
                 t.getDesc().toLowerCase().contains(lowText));
 
         return (arrFind.isEmpty())
-                ? UI.say("Nope, nothing matches your search!")
-                : UI.say("Here! I found these:\n") + UI.printMany(arrFind);
+                ? Talker.say("Nope, nothing matches your search!")
+                : Talker.say("Here! I found these:\n") + Talker.printMany(arrFind);
     }
 }

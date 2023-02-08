@@ -7,7 +7,7 @@ import cbot.io.BadInputException;
 import cbot.io.FileStuff;
 import cbot.io.Parser;
 import cbot.io.PoorInputException;
-import cbot.io.UI;
+import cbot.io.Talker;
 import cbot.task.TaskList;
 
 /**
@@ -59,10 +59,10 @@ public class Cbot {
      * Returns Cbot's greeting.
      *
      * @return Cbot's greeting.
-     * @see UI#sayHi()
+     * @see Talker#sayHi()
      */
     public static String sayHi() {
-        return UI.sayHi();
+        return Talker.sayHi();
     }
 
     /**
@@ -73,33 +73,30 @@ public class Cbot {
      * @see Parser
      */
     public String getResponse(String input) {
-        String output;
-        Parser p;
-
         try {
-            p = new Parser(input);
+            Parser p = new Parser(input);
 
             if (p.isBye()) {
                 this.isBye = true;
             }
 
-            output = p.respond(tl);
+            String output = p.respond(tl);
             this.prevWasBad = false;
 
             if (p.needSave()) {
                 this.fs.saveFile(tl);
             }
+
+            return output;
         } catch (BadInputException e) {
             this.prevWasBad = true;
-            return UI.warnBad(e);
+            return Talker.warnBad(e);
         } catch (PoorInputException e) {
             this.prevWasBad = true;
-            return UI.warn(e);
+            return Talker.warn(e);
         } catch (DateTimeParseException e) {
             this.prevWasBad = true;
-            return UI.warnTime();
+            return Talker.warnTime();
         }
-
-        return output;
     }
 }

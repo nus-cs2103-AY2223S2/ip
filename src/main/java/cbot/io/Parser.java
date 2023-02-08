@@ -20,20 +20,19 @@ public class Parser {
      * @throws PoorInputException If the input command is not recognized.
      * @see Command
      */
-    public Parser(String input) throws PoorInputException {
-        this.command = null;
-        this.text = "";
-
-        boolean matchFound = false;
-
+    public Parser(String input)
+            throws PoorInputException {
         if (input.contains(Task.SEP)) {
             throw new BadInputException("Please avoid using: \"" + Task.SEP + "\"");
         }
 
+        String trimmed = input.trim();
+        boolean matchFound = false;
+
         for (Command c : Command.values()) {
-            if (c.matches(input)) {
+            if (c.matches(trimmed)) {
                 this.command = c;
-                this.text = c.extractText(input);
+                this.text = c.extractText(trimmed);
                 matchFound = true;
                 break;
             }
@@ -71,7 +70,8 @@ public class Parser {
      * @throws PoorInputException If the input text is improper or erroneous.
      * @throws DateTimeParseException If some provided datetime is not in a recognized format.
      */
-    public String respond(TaskList tl) throws PoorInputException, DateTimeParseException {
+    public String respond(TaskList tl)
+            throws PoorInputException, DateTimeParseException {
         if (this.command.isMissingText(this.text)) {
             throw new PoorInputException("That command needs an input");
         }

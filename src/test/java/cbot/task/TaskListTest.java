@@ -77,17 +77,17 @@ public class TaskListTest {
     
     @Test
     public void testRangeError1() {
-        assertEquals(tlFive.rangeError(0), "wadahek pls");
+        assertEquals(tlFive.getRangeErrorMsg(0), "wadahek pls");
     }
     
     @Test
     public void testRangeError2() {
-        assertEquals(tlFive.rangeError(6), "Hm, you don't have that many tasks!");
+        assertEquals(tlFive.getRangeErrorMsg(6), "Hm, you don't have that many tasks!");
     }
     
     @Test
     public void testRangeError3() {
-        assertEquals(tlFive.rangeError(3), "All's good! That index is in range :D");
+        assertEquals(tlFive.getRangeErrorMsg(3), "All's good! That index is in range :D");
     }
     
     @Test

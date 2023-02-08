@@ -1,7 +1,7 @@
 package cbot.gui;
 
 import cbot.Cbot;
-import cbot.io.UI;
+import cbot.io.Talker;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -50,7 +50,7 @@ public class MainWindow extends AnchorPane {
      * Displays Cbot's friendly greeting.
      *
      * @see Cbot#sayHi()
-     * @see UI#sayHi()
+     * @see Talker#sayHi()
      */
     public void greetUser() {
         dialogContainer.getChildren().add(DialogBox.getCbotDialog(Cbot.sayHi(), CBOT_IMG));

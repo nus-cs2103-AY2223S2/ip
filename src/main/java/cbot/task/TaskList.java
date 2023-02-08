@@ -88,7 +88,10 @@ public class TaskList {
      * @return Whether the number is more than the number of tasks, or less than one.
      */
     public boolean notInRange(int num) {
-        return (num <= 0 || num > getCount());
+        boolean lessThanOne = (num <= 0);
+        boolean moreThanLen = (num > getCount());
+
+        return (lessThanOne || moreThanLen);
     }
 
     /**
@@ -99,10 +102,13 @@ public class TaskList {
      * @return The corresponding message.
      * @see #notInRange(int)
      */
-    public String rangeError(int num) {
-        if (num <= 0) {
+    public String getRangeErrorMsg(int num) {
+        boolean lessThanOne = (num <= 0);
+        boolean moreThanLen = (num > getCount());
+
+        if (lessThanOne) {
             return "wadahek pls";
-        } else if (num > getCount()) {
+        } else if (moreThanLen) {
             return "Hm, you don't have that many tasks!";
         } else {
             return "All's good! That index is in range :D";
@@ -118,14 +124,15 @@ public class TaskList {
      */
     public String mark(int num) {
         int index = num - 1;
+        boolean wasChanged = tasks.get(index).mark();
 
-        if (tasks.get(index).mark()) {
-            return "Woohoo! You've completed:\n" + GAP
-                    + tasks.get(index).toString();
-        } else {
+        if (!wasChanged) {
             return "You've already done:\n" + GAP
                     + tasks.get(index).toString();
         }
+
+        return "Woohoo! You've completed:\n" + GAP
+                + tasks.get(index).toString();
     }
 
     /**
@@ -137,14 +144,15 @@ public class TaskList {
      */
     public String unmark(int num) {
         int index = num - 1;
+        boolean wasChanged = tasks.get(index).unmark();
 
-        if (tasks.get(index).unmark()) {
-            return "Aw, okay :( I've unmarked:\n" + GAP
-                    + tasks.get(index).toString();
-        } else {
-            return "Hm, you haven't yet done:\n" + GAP
-                    + tasks.get(index).toString();
+        if (!wasChanged) {
+            return "Hm, you haven't yet done:\n"
+                    + GAP + tasks.get(index).toString();
         }
+
+        return "Aw, okay :( I've unmarked:\n"
+                + GAP + tasks.get(index).toString();
     }
 
     /**
@@ -154,8 +162,10 @@ public class TaskList {
      * @return A confirmation message.
      */
     public String delTask(int num) {
-        return "Got it! Deleted:\n" + GAP
-                + tasks.remove(num - 1).toString();
+        int index = num - 1;
+        Task removedTask = tasks.remove(index);
+        return "Got it! Deleted:\n"
+                + GAP + removedTask.toString();
     }
 
     /**
