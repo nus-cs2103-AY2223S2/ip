@@ -28,14 +28,11 @@ public class TaskStorage {
     public String addTask(Task t) {
         StringBuilder chunkOfText = new StringBuilder();
         chunkOfText.append("Got it. I've added this task:\n");
-        //System.out.println("Got it. I've added this task:");
         chunkOfText.append(" " + t);
         chunkOfText.append('\n');
-        //System.out.println("  " + t);
         this.taskStorage.add(t);
         this.ind++;
         chunkOfText.append("Now you have " + this.ind + " task(s) in the list.\n");
-        //System.out.println("Now you have " + this.ind + " task(s) in the list.");
         return chunkOfText.toString();
     }
 
@@ -72,13 +69,10 @@ public class TaskStorage {
     public String deleteTask(Task t) {
         StringBuilder chunkOfText = new StringBuilder();
         chunkOfText.append("Noted. I've removed this task:\n");
-        //System.out.println("Noted. I've removed this task:");
         chunkOfText.append("  " + t + "\n");
-        //System.out.println("  " + t);
         this.taskStorage.remove(t);
         ind--;
         chunkOfText.append("Now you have " + ind + " task(s) in the list.\n");
-        //System.out.println("Now you have " + ind + " task(s) in the list.");
         return chunkOfText.toString();
     }
 
@@ -89,13 +83,10 @@ public class TaskStorage {
         StringBuilder chunkOfText = new StringBuilder();
         chunkOfText.append("Tasks:");
         chunkOfText.append("\n");
-        //System.out.println("Tasks:");
         for (int i = 0; i < this.noTasks(); i++) {
             chunkOfText.append((i + 1) + ".");
-            //System.out.print(i + 1 + ".");
             chunkOfText.append(this.getTask(i).toString());
             chunkOfText.append("\n");
-            //System.out.println(this.getTask(i));
         }
         return chunkOfText.toString();
     }

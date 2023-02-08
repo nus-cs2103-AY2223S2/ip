@@ -33,10 +33,8 @@ public class Task {
         this.isDone = true;
         StringBuilder chunkOfText = new StringBuilder();
         chunkOfText.append("Nice! I've marked this task as done:\n");
-        //System.out.println("Nice! I've marked this task as done:");
         chunkOfText.append(this.toString());
         chunkOfText.append('\n');
-        //System.out.println(this);
         return chunkOfText.toString();
     }
 
@@ -54,14 +52,10 @@ public class Task {
      */
     public String markAsUnDone() {
         this.isDone = false;
-        //System.out.println("Ok, I've marked this task as not done yet:");
-        //System.out.println(this);
         StringBuilder chunkOfText = new StringBuilder();
         chunkOfText.append("Ok, I've marked this task as not done yet:\n");
-        //System.out.println("Nice! I've marked this task as done:");
         chunkOfText.append(this.toString());
         chunkOfText.append('\n');
-        //System.out.println(this);
         return chunkOfText.toString();
     }
 

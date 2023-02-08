@@ -42,6 +42,11 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
+    private Stage stage;
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
     @FXML private javafx.scene.control.Button closeButton;
 
     @FXML
@@ -82,15 +87,17 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
         try {
-            if (response.equals(new Parser(new TaskStorage()).execute("bye"))) {
-                //closeButtonAction();
+            Parser p = new Parser(new TaskStorage());
+            if (p.isTerminate(input)) {
+                userInput.setDisable(true);
+                sendButton.setDisable(true);
                 Thread.sleep(1000);
                 Platform.exit();
             }
         } catch (InterruptedException e) {
             response = e.getMessage();
         }
-
     }
+
 
 }

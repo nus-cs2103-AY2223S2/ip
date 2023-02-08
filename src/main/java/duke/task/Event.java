@@ -24,8 +24,6 @@ public class Event extends Task {
         super(description);
         this.start = start;
         this.end = end;
-        //System.out.println(start);
-        //System.out.println(end);
         this.startDate = LocalDate.parse(start);
         this.endDate = LocalDate.parse(end);
 

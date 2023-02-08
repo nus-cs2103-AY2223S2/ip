@@ -51,24 +51,16 @@ public class Duke {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
         StringBuilder sb = new StringBuilder();
-
-        //ui.showWelcome();
-        String line = "-------------------------------";
-        //String inp;
-        String response = "";
-        //boolean isExit = false;
-        //while (!isExit) {
-            //inp = ui.readCommand();
-            ui.showLine();
-            Parser parser = new Parser(this.taskStorage);
-            //isExit = parser.isTerminate(inp);
-            //isExit = parser.execute(inp);
-            response = parser.execute(inp);
-            //System.out.println(response);
-            taskManager.save(parser.getTaskStorage());
-            ui.showLine();
-        //}
-        return response;
+        StringBuilder response = new StringBuilder();
+        response.append(Ui.showLine());
+        response.append('\n');
+        Parser parser = new Parser(this.taskStorage);
+        response.append(parser.execute(inp));
+        response.append("\n");
+        taskManager.save(parser.getTaskStorage());
+        response.append(Ui.showLine());
+        response.append('\n');
+        return response.toString();
     }
 
     /**
@@ -90,7 +82,6 @@ public class Duke {
             ui.showLine();
             Parser parser = new Parser(this.taskStorage);
             isExit = parser.isTerminate(inp);
-            //isExit = parser.execute(inp);
             String response = parser.execute(inp);
             System.out.println(response);
             taskManager.save(parser.getTaskStorage());

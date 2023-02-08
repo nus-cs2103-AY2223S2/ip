@@ -32,7 +32,6 @@ public class Parser {
         boolean isExit = false;
         switch(input[0]) {
         case "bye":
-            //System.out.println("Byeee! Hope to see you again! Signing off, duke.");
             isExit = true;
             break;
 
@@ -60,7 +59,6 @@ public class Parser {
                 break;
 
             case "mark":
-                //System.out.println("Nice! I've marked this task as done:");
                 try {
                     int taskNo = Integer.parseInt(input[1]);
                     if (taskNo > taskStorage.noTasks() || taskNo <= 0) {
@@ -69,11 +67,8 @@ public class Parser {
                     }
                     response = taskStorage.getTask(taskNo - 1).markAsDone();
                 } catch (NumberFormatException e) {
-                    //System.out.println("Number should be typed in");
                     response =  "Number should be typed in";
                 } catch (DukeException e){
-
-                    //System.out.println(e.getMessage());
                     response = e.getMessage();
                 } finally {
                     break;
@@ -88,10 +83,8 @@ public class Parser {
                     response = taskStorage.getTask(taskNoUnmark - 1).markAsUnDone();
                 } catch (NumberFormatException e) {
                     response =  "Number should be typed in";
-                    //System.out.println("Number should be typed in");
                 } catch (DukeException e) {
                     response = e.getMessage();
-                    //System.out.println(e.getMessage());
                 } finally {
                     break;
                 }
@@ -106,7 +99,6 @@ public class Parser {
                     Task todo = new Todo(todoTask);
                     response = taskStorage.addTask(todo);
                 } catch (DukeException e) {
-                    //System.out.println(e.getMessage());
                     response = e.getMessage();
                 } finally {
                     break;
@@ -126,11 +118,9 @@ public class Parser {
                     String deadLineTaskStr = inputDeadline[0];
                     String end = inputDeadline[1].substring(3);
                     Task deadLineTask = new Deadline(deadLineTaskStr, end);
-                    //System.out.println(end);
                     response = taskStorage.addTask(deadLineTask);
                 } catch (DukeException e) {
                     response = e.getMessage();
-                    //System.out.println(e.getMessage());
                 } finally {
                     break;
                 }
@@ -154,7 +144,6 @@ public class Parser {
                     Task eventTask = new Event(eventTaskStr, eventBegin, eventEnd);
                     response = taskStorage.addTask(eventTask);
                 } catch (DukeException e) {
-                    //System.out.println(e.getMessage());
                     response = e.getMessage();
                 } finally {
                     break;
@@ -172,7 +161,6 @@ public class Parser {
                     response = "Number should be typed in";
                 } catch (DukeException e){
                     response = e.getMessage();
-                    //System.out.println(e.getMessage());
                 } finally {
                     break;
                 }
@@ -181,7 +169,6 @@ public class Parser {
                 try {
                     StringBuilder chunkOfText = new StringBuilder();
                     chunkOfText.append("Here are the matching tasks in your list:\n");
-                    //System.out.println("Here are the matching tasks in your list:");
                     String findString = inp.substring(5);
                     TaskStorage findStorage = new TaskStorage();
                     for (int i = 0; i < taskStorage.noTasks(); i++) {
@@ -200,10 +187,8 @@ public class Parser {
             default:
                 DukeException dukeException = new DukeException();
                 response = dukeException.getMessage();
-                //System.out.println(dukeException.getMessage());
         }
         return response;
-        //return isExit;
     }
 
 }

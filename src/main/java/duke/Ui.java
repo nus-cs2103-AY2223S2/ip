@@ -23,13 +23,11 @@ public class Ui {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        //showLine();
         chunkOfText.append(showLine());
         chunkOfText.append("\n");
         chunkOfText.append("Hiii Im\n" + logo);
         chunkOfText.append("What can I do for you hmm?\n");
         chunkOfText.append(showLine());
-        //showLine();
         return chunkOfText.toString();
     }
 
@@ -39,7 +37,6 @@ public class Ui {
     public static String showLine() {
         String line = "-------------------------------";
         return line;
-        //System.out.println(line);
     }
 
     /**
