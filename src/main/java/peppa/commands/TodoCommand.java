@@ -27,7 +27,10 @@ public class TodoCommand implements Command {
     @Override
     public String execute(TaskList taskList, Ui screen, Storage storage) {
         Task task = new Todo(taskDescription);
+        int initialLength = taskList.getLength();
+        assert (initialLength = taskList.getLength()) >= 0;
         taskList.addTask(task);
+        assert taskList.getLength() == initialLength + 1 : "Size of tasklist should increase by 1";
         storage.saveChanges(taskList);
         return Ui.getAddTaskMessage(task) + Ui.getTaskSummary(taskList);
     }
