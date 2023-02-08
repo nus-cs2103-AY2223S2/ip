@@ -62,7 +62,7 @@ public class Storage {
         if (this.taskStorage.exists()) {
             Scanner sc = new Scanner(this.taskStorage);
             Parser parser = new Parser();
-            while (sc.hasNext()) {
+            while (sc.hasNextLine()) {
                 String[] taskInTxt = sc.nextLine().split("#");
                 Command c = parser.parseStorage(taskInTxt);
                 c.execute(tasks, ui, storage);

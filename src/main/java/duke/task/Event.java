@@ -61,7 +61,7 @@ public class Event extends Task {
         return "event#"
                 + description + "#"
                 + "/from#" + startTime
-                + "/to#" + endTime
+                + "#/to#" + endTime
                 + "#" + getStatusIcon();
     }
 }
