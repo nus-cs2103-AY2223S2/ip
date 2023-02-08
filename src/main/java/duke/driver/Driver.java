@@ -1,6 +1,8 @@
 package duke.driver;
 
 import java.util.Scanner;
+
+import duke.command.DukeCommand;
 import duke.parser.DukeParser;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
@@ -8,15 +10,15 @@ import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.tasks.ToDo;
 import duke.ui.Ui;
-import duke.command.DukeCommand;
+
+
 
 public class Driver {
-    TaskList taskList;
 
     public Driver() {}
 
 
-    Scanner scanner = new Scanner(System.in);
+    private Scanner scanner = new Scanner(System.in);
 
     /**
      * Executes the series of commands, and returns the updated input {@code taskList}.

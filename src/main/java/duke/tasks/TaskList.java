@@ -12,15 +12,16 @@ public class TaskList implements Serializable {
 
     private List<Task> taskList = new ArrayList<>();
 
-    public int getNumTasks() {
-        return taskList.size();
-    }
-
     public TaskList() {}
 
     private TaskList(List<Task> taskList) {
         this.taskList = taskList;
     }
+
+    public int getNumTasks() {
+        return taskList.size();
+    }
+
 
     public String toString() {
         String taskListString = "";

@@ -2,6 +2,9 @@ package duke.ui;
 
 import duke.tasks.Task;
 
+/**
+ * A class providing commonly used print functions.
+ */
 public class Ui {
 
     private static final String BAR =
@@ -10,10 +13,18 @@ public class Ui {
     private static final String INDENTATION = "     ";
     // private static final String NEW_LINE = "\n";
 
+    /**
+     * Prints an indented bar of line.
+     */
     public static void printBar() {
         System.out.println(BAR);
     }
 
+    /**
+     * Prints {@code text} with indentation.
+     * 
+     * @param text
+     */
     public static void printWithIndentation(String text) {
         System.out.println(INDENTATION + text);
     }

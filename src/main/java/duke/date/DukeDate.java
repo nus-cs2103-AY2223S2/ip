@@ -3,6 +3,10 @@ package duke.date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * A utility class to convert date in {@code String} format to {@code LocalDate} format and
+ * vice-versa.
+ */
 public class DukeDate {
     private static final DateTimeFormatter INPUT_DATE_FORMAT =
             DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -22,7 +26,7 @@ public class DukeDate {
     /**
      * Returns the String representation of the {@code LocalDate} instance.
      * 
-     * @param dateString
+     * @param date
      * @return The {@code String} representation of the {@code date} instance in the format of MMM
      *         dd yyyy.
      */

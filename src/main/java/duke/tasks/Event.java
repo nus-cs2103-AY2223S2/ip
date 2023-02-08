@@ -1,12 +1,13 @@
 package duke.tasks;
 
 import java.time.LocalDate;
+
 import duke.date.DukeDate;
 
 public class Event extends Task {
     private static final long serialVersionUID = 7664438936982546960L;
-    LocalDate from;
-    LocalDate to;
+    private LocalDate from;
+    private LocalDate to;
 
     public Event(String description, String from, String to) {
         super(description);
