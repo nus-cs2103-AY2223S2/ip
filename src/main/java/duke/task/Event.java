@@ -32,4 +32,9 @@ public class Event extends Task {
         String printToDateTime = this.toDate.format(DateTimeFormatter.ofPattern("HHmm MMM d yyyy"));
         return String.format("[E]%s (from: %s to: %s)", super.toString(), printFromDateTime, printToDateTime);
     }
+
+    @Override
+    public LocalDateTime getStartDate() {
+        return fromDate;
+    }
 }

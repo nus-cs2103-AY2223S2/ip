@@ -3,6 +3,7 @@ package duke.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Locale;
 
 import duke.exception.InvalidTodoException;
@@ -36,6 +37,18 @@ public class TaskList {
         String listString = "";
         for (int i = 0; i < list.size(); i++) {
             Task task = list.get(i);
+            listString += String.format("%d.%s\n", i + 1, task.toString());
+        }
+        return listString;
+    }
+
+    public String toSortedString() {
+        String listString = "";
+        ArrayList<Task> sortedList = new ArrayList<>(list);
+        sortedList.sort(Comparator.comparing(Task::getStartDate));
+
+        for (int i = 0; i < sortedList.size(); i++) {
+            Task task = sortedList.get(i);
             listString += String.format("%d.%s\n", i + 1, task.toString());
         }
         return listString;

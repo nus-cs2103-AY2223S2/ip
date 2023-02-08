@@ -20,4 +20,9 @@ public class Deadline extends Task {
         String printDateTime = this.dueDate.format(DateTimeFormatter.ofPattern("HHmm MMM d yyyy"));
         return String.format("[D]%s (by: %s)", super.toString(), printDateTime);
     }
+
+    @Override
+    public LocalDateTime getStartDate() {
+        return dueDate;
+    }
 }

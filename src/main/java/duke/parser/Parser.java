@@ -58,6 +58,8 @@ public class Parser {
             status = MessageStatus.END;
         } else if (message.equals("list")) {
             status = MessageStatus.LIST;
+        } else if (message.equals("sort")) {
+            status = MessageStatus.SORT;
         } else if (isMark(message)) {
             status = MessageStatus.MARK;
         } else if (isAdd(message)) {

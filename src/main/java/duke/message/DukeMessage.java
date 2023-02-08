@@ -26,6 +26,7 @@ public class DukeMessage extends Message {
 
         switch (this.status) {
         case ADD:
+        case SORT:
         case MARK:
         case LIST:
         case DELETE:

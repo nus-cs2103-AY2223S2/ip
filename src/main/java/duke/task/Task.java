@@ -1,9 +1,11 @@
 package duke.task;
 
+import java.time.LocalDateTime;
+
 /**
  * Represents a parent class for the different categories of tasks
  */
-public class Task {
+public abstract class Task {
     private String content;
     boolean done = false;
 
@@ -28,4 +30,6 @@ public class Task {
     public String getContent() {
         return this.content;
     }
+
+    public abstract LocalDateTime getStartDate();
 }

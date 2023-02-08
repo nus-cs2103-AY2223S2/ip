@@ -74,6 +74,11 @@ public class MessageGenerator {
         return heading + this.taskList.toString();
     }
 
+    String generateSortMessage() {
+        String heading = "Here are the sorted tasks in your list:\n";
+        return heading + this.taskList.toSortedString();
+    }
+
     ArrayList<Task> filterTaskList(String message) {
         String[] messageSplit = message.split(" ");
         String messageToFilterBy = messageSplit[1];
@@ -113,6 +118,9 @@ public class MessageGenerator {
         switch (status) {
         case LIST:
             message = generateListMessage();
+            break;
+        case SORT:
+            message = generateSortMessage();
             break;
         case MARK:
             task = processMark(message);
