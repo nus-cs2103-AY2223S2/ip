@@ -1,11 +1,7 @@
 package duke.command;
 
 import duke.exception.InvalidCmdException;
-import duke.tasklist.Deadline;
-import duke.tasklist.Task;
-import duke.tasklist.TaskList;
-import duke.tasklist.Todo;
-import duke.tasklist.Event;
+import duke.tasklist.*;
 
 /**
  * Represents the class of command which adds into the taskList.
@@ -46,6 +42,11 @@ public class AddCommand {
             String[] ev = cmd[1].split("/from");
             String[] time = ev[1].split("/to");
             task = new Event(ev[0], time[0], time[1]);
+            break;
+        case "within":
+            String[] within = cmd[1].split("/between");
+            String[] timeFrame = within[1].split("/and");
+            task = new DoWithin(within[0], timeFrame[0], timeFrame[1]);
             break;
         default:
             return "An error has occurred!";

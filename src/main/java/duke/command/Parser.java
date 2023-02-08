@@ -69,6 +69,7 @@ public class Parser {
             case "todo":
             case "deadline":
             case "event":
+            case "within":
                 AddCommand toAdd = new AddCommand(this.tasks, arrOfStr);
                 toReturn = toAdd.execute();
                 return toReturn;
