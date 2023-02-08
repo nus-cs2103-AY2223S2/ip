@@ -38,8 +38,7 @@ public class Parser {
             } else if (command.startsWith("find")) {
                 return tasks.findTasks(command);
             }
-        }
-        catch (DukeException e) {
+        } catch (DukeException e) {
             return e.toString();
         }
         return "Sorry I do not understand your command :(";
