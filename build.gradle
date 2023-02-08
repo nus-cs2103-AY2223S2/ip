@@ -1,9 +1,11 @@
 plugins {
     id 'java'
     id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.13'
     id 'checkstyle'
     id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
+
 
 checkstyle {
     toolVersion = '10.2'
