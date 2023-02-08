@@ -36,11 +36,11 @@ public class DeleteCommand implements Command {
 
         if ((taskNumber <= taskList.size()) && (taskNumber > 0)) { // checks if the task to delete is within list
             Task tempTask = taskList.remove(taskNumber - 1);
-            sb.append("    ____________________________________________________________\n")
+            sb.append("    ____________________________________________________________________________________\n")
                     .append("    Noted. I've removed this task:\n")
                     .append("      ").append(tempTask.getTaskInfoStatus())
-                    .append("\n    Now you have ").append(taskList.size()).append(" tasks in the list.\n")
-                    .append("    ____________________________________________________________\n");
+                    .append("\n    Now you have ").append(taskList.size()).append(" tasks in the list.\n");
+            sb.append("    ____________________________________________________________________________________\n");
             message = sb.toString();
             sb.setLength(0);
             try {
@@ -49,9 +49,9 @@ public class DeleteCommand implements Command {
                 message = "An unexpected error has occurred: " + e.getMessage();
             }
         } else {
-            sb.append("    ____________________________________________________________\n")
-                    .append("    The task you are trying to delete is out of range! Try again!\n")
-                    .append("    ____________________________________________________________\n");
+            sb.append("    ____________________________________________________________________________________\n");
+            sb.append("    The task you are trying to delete is out of range! Try again!\n");
+            sb.append("    ____________________________________________________________________________________\n");
             message = sb.toString();
             sb.setLength(0);
         }

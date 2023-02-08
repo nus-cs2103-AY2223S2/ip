@@ -35,7 +35,7 @@ public class FindCommand implements Command {
         String subString = parsedCmd.get(1);
         assert !subString.equals("");
         String[] words = subString.split(" ");
-        sb.append("    ____________________________________________________________\n")
+        sb.append("    ____________________________________________________________________________________\n")
                 .append("    Here are the matching tasks in your list:\n");
 
         switch (words.length) { // Searches the list for tasks that matches the String input by user
@@ -59,7 +59,7 @@ public class FindCommand implements Command {
             break;
         }
 
-        sb.append("    ____________________________________________________________\n");
+        sb.append("    ____________________________________________________________________________________\n");
         message = sb.toString();
         sb.setLength(0);
         ui.printCommand(message);

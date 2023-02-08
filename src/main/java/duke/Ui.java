@@ -39,11 +39,11 @@ public class Ui {
                 .append("|  _ \\ _   _| | _____ \n")
                 .append("| | | | | | | |/ / _ \\\n")
                 .append("| |_| | |_| |   <  __/\n")
-                .append("|____/ \\__,_|_|\\_\\___|\n")
-                .append("    ____________________________________________________________\n")
-                .append("    Hello! I'm Duke.\n")
-                .append("    What can I do for you?\n")
-                .append("    ____________________________________________________________\n");
+                .append("|____/ \\__,_|_|\\_\\___|\n");
+        sb.append("    ____________________________________________________________________________________\n");
+        sb.append("    Hello! I'm Duke.\n");
+        sb.append("    What can I do for you?\n");
+        sb.append("    ____________________________________________________________________________________\n");
         String message = sb.toString();
         this.printCommand(message);
         return message;
@@ -56,9 +56,9 @@ public class Ui {
      * @see IOException
      */
     public String showFarewellMessage() throws IOException {
-        sb.append("    ____________________________________________________________\n")
-                .append("    Bye. Hope to see you again soon!\n")
-                .append("    ____________________________________________________________\n");
+        sb.append("    ____________________________________________________________________________________\n");
+        sb.append("    Bye. Hope to see you again soon!\n");
+        sb.append("    ____________________________________________________________________________________\n");
         String message = sb.toString();
         this.printCommand(message);
         pw.close();
@@ -82,9 +82,11 @@ public class Ui {
      * format and informs them of the correct format.
      */
     public String printInvalidDateError() {
-        sb.append("Invalid inputs!\n");
-        sb.append("Please enter your date & time in the format: YYYY-MM-DD HH:MM \n");
-        sb.append("Please also ensure they are valid values!\n");
+        sb.append("    _______________________________________________________________________________________\n");
+        sb.append("    Invalid inputs!\n");
+        sb.append("    Please enter your date & time in the format: YYYY-MM-DD HH:MM \n");
+        sb.append("    Please also ensure they are valid values!\n");
+        sb.append("    _______________________________________________________________________________________\n");
         String message = sb.toString();
         this.printCommand(message);
         return message;

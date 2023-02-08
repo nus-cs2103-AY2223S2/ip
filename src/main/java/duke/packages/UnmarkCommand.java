@@ -37,9 +37,9 @@ public class UnmarkCommand implements Command {
         if ((taskNumber <= taskList.size()) && (taskNumber > 0)) { // checks if the task to unmark is within list
             Task tempTask = taskList.get(taskNumber - 1);
             String oldTaskInfo = tempTask.getTaskInfo();
-            sb.append("    ____________________________________________________________\n")
-                    .append(tempTask.setIncomplete())
-                    .append("\n    ____________________________________________________________\n");
+            sb.append("    ____________________________________________________________________________________\n");
+            sb.append(tempTask.setIncomplete()).append("\n");
+            sb.append("    ____________________________________________________________________________________\n");
             taskList.set(taskNumber - 1, tempTask);
             message = sb.toString();
             sb.setLength(0);
@@ -49,9 +49,9 @@ public class UnmarkCommand implements Command {
                 message = "An unexpected error has occurred: " + e.getMessage();
             }
         } else {
-            sb.append("    ____________________________________________________________\n")
-                    .append("    The task you are trying to unmark is out of range! Try again!\n")
-                    .append("    ____________________________________________________________\n");
+            sb.append("    ____________________________________________________________________________________\n");
+            sb.append("    The task you are trying to unmark is out of range! Try again!\n");
+            sb.append("    ____________________________________________________________________________________\n");
             message = sb.toString();
             sb.setLength(0);
         }

@@ -30,13 +30,13 @@ public class ListCommand implements Command {
         String message;
         StringBuilder sb = new StringBuilder();
         ArrayList<Task> taskList = tasks.getTaskList();
-        sb.append("    ____________________________________________________________\n")
+        sb.append("    ____________________________________________________________________________________\n")
                 .append("    Here are the tasks in your list:\n");
         for (int i = 0; i < taskList.size(); i++) {
             sb.append("    ").append(i + 1).append(".").append(taskList.get(i).getTaskInfoStatus())
                     .append("\n");
         }
-        sb.append("    ____________________________________________________________\n");
+        sb.append("    ____________________________________________________________________________________\n");
         message = sb.toString();
         sb.setLength(0);
         ui.printCommand(message);

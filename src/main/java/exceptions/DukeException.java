@@ -31,10 +31,10 @@ public class DukeException {
             expectedArgs = 1;
         }
         if (testPortion.length != expectedArgs) {
-            sb.append("\n    ____________________________________________________________\n")
+            sb.append("\n    ____________________________________________________________________________________\n")
                     .append("     ☹ OOPS!!! You have provided incorrect number of arguments for the command '")
-                    .append(command).append("'.\n     Please try again after checking!\n")
-                    .append("    ____________________________________________________________\n");
+                    .append(command).append("'.\n     Please try again after checking!\n");
+            sb.append("    ____________________________________________________________________________________\n");
             throw new IncorrectNoOfArgumentException(sb.toString());
         }
         if (hasToEvaluate) {
@@ -53,10 +53,10 @@ public class DukeException {
         // Checking for blank spaces
         StringBuilder sb = new StringBuilder();
         if ((testText.equals("")) || (testText.isBlank())) {
-            sb.append("\n    ____________________________________________________________\n")
+            sb.append("\n    ____________________________________________________________________________________\n")
                     .append("     ☹ OOPS!!! You have provided incorrect number of arguments for the command '")
-                    .append(command).append("'.\n     Please try again after checking!\n")
-                    .append("    ____________________________________________________________\n");
+                    .append(command).append("'.\n     Please try again after checking!\n");
+            sb.append("    ____________________________________________________________________________________\n");
             throw new IncorrectNoOfArgumentException(sb.toString());
         }
     }
@@ -69,10 +69,10 @@ public class DukeException {
      */
     public static void validate2() throws InvalidCommandException {
         StringBuilder sb = new StringBuilder();
-        sb.append("\n    ____________________________________________________________\n")
+        sb.append("\n    ____________________________________________________________________________________\n")
                 .append("     ☹ OOPS!!! This is an incorrect command!\n")
-                .append("     Please try again with a valid command!\n")
-                .append("    ____________________________________________________________\n");
+                .append("     Please try again with a valid command!\n");
+        sb.append("    ____________________________________________________________________________________\n");
         throw new InvalidCommandException(sb.toString());
     }
 
@@ -89,11 +89,11 @@ public class DukeException {
         File tempFolder = new File(directory);
         if ((!tempFolder.isDirectory()) || (!tempFolder.exists())) {
             StringBuilder sb = new StringBuilder();
-            sb.append("\n    ____________________________________________________________\n")
+            sb.append("\n    ____________________________________________________________________________________\n")
                     .append("     Folder '").append(directory).append("' cannot be found.\n")
                     .append("     A new folder '").append(directory).append("' has been created for you!\n")
-                    .append("     A new file 'storage' for storing the tasks has been created for you as well!\n")
-                    .append("    ____________________________________________________________\n");
+                    .append("     A new file 'storage' for storing the tasks has been created for you as well!\n");
+            sb.append("    ____________________________________________________________________________________\n");
             throw new FolderNotFoundException(sb.toString());
         }
     }

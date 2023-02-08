@@ -46,11 +46,11 @@ public class AddCommand implements Command {
             taskList.add(newTask);
             try {
                 storage.writeToFile(newTask.getTaskInfo() + "\n", taskList);
-                sb.append("    ____________________________________________________________\n")
-                        .append("    Got it. I've added this task to the list:\n")
-                        .append("      ").append(newTask.getTaskInfoStatus())
-                        .append("\n    Now you have ").append(taskList.size()).append(" tasks in the list.\n")
-                        .append("    ____________________________________________________________\n");
+                sb.append("    ____________________________________________________________________________________\n");
+                sb.append("    Got it. I've added this task to the list:\n");
+                sb.append("      ").append(newTask.getTaskInfoStatus());
+                sb.append("\n    Now you have ").append(taskList.size()).append(" tasks in the list.\n");
+                sb.append("    ____________________________________________________________________________________\n");
                 message = sb.toString();
                 sb.setLength(0);
             } catch (IOException e) {
