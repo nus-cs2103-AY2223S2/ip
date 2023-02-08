@@ -64,4 +64,21 @@ public class Event extends Task {
         }
         return ("E`" + i + "`" + this.description + "`" + s1 + "`" + s2 + '\n');
     }
+
+    @Override
+    public void update(String text) {
+        String[] updateInformation = text.split(" ");
+        String update = updateInformation[0].toUpperCase();
+        switch (update) {
+        case "DESCRIPTION":
+            this.description = updateInformation[1];
+            break;
+        case "FROM":
+            this.from = updateInformation[1];
+            break;
+        case "TO":
+            this.to = updateInformation[1];
+            break;
+        }
+    }
 }

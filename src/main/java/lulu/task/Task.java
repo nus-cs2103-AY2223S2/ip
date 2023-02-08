@@ -1,6 +1,8 @@
 package lulu.task;
 
-public class Task {
+import lulu.exception.LuluException;
+
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -33,4 +35,6 @@ public class Task {
     public String toMemory() {
         return ("[" + this.getStatusIcon() + "] " + this.description);
     }
+
+    public abstract void update(String updateInformation);
 }
