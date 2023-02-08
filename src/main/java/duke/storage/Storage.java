@@ -42,6 +42,7 @@ public class Storage {
      */
     public void markTask(String message) {
         String[] messageSplit = message.split(" ");
+        assert messageSplit.length >= 2;
         int taskNum = Integer.parseInt(messageSplit[1]);
         String markStatus = messageSplit[0];
 
@@ -62,6 +63,7 @@ public class Storage {
      */
     public void deleteTask(String message) {
         String[] messageSplit = message.split(" ");
+        assert messageSplit.length >= 2;
         int taskNum = Integer.parseInt(messageSplit[1]);
 
         // remove task from arraylist
