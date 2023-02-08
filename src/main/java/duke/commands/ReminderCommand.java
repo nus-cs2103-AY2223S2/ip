@@ -9,7 +9,7 @@ import duke.uitext.UiText;
  */
 public class ReminderCommand extends Command {
     // The maximum number of days between today and the event start or deadline for reminder command to display it.
-    private static long DAYS_TO_TASK_FOR_REMINDER = 2;
+    private static final long DAYS_TO_TASK_FOR_REMINDER = 2;
 
     @Override
     public String execute(TaskList taskList, UiText uiText, Storage storage) {
