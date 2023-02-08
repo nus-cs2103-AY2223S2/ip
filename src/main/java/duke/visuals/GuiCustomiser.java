@@ -1,7 +1,5 @@
 package duke.visuals;
 
-import javafx.application.Application;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -9,13 +7,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.layout.Region;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 public class GuiCustomiser {
-    public static void setMuseAnchorPaneVisuals(
-            AnchorPane mainLayout, ScrollPane scrollPane, Button sendButton, TextField userInput) {
+    public static void setMuseAnchorPaneVisuals
+            (AnchorPane mainLayout, ScrollPane scrollPane, Button sendButton, TextField userInput) {
         mainLayout.setTopAnchor(scrollPane, 1.0);
         mainLayout.setBottomAnchor(sendButton, 1.0);
         mainLayout.setRightAnchor(sendButton, 1.0);
@@ -39,9 +34,11 @@ public class GuiCustomiser {
         stage.setMinWidth(400.0);
     }
 
-    public static void boxDimensionChange(AnchorPane mainLayout, TextField userInput, Button sendButton) {
+    public static void boxDimensionChange
+            (AnchorPane mainLayout, TextField userInput, Button sendButton, VBox dialogContainer) {
         mainLayout.setPrefSize(400.0, 600.0);
         userInput.setPrefWidth(325.0);
         sendButton.setPrefWidth(55.0);
+        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
     }
 }
