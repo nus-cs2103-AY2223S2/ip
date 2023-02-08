@@ -11,7 +11,7 @@ import tasks.Task;
 import ui.Ui;
 
 /**
- * This class helps to update details of a tasks.
+ * This class helps to update details of a task.
  */
 public class UpdateCommand extends Command {
     private int taskNumber;
@@ -40,7 +40,7 @@ public class UpdateCommand extends Command {
     }
 
     /**
-     * Returns which detail to edit.
+     * Returns which detail of the task to edit.
      * @param userInput The user input.
      * @return The detail to edit.
      */
@@ -49,7 +49,7 @@ public class UpdateCommand extends Command {
     }
 
     /**
-     * Returns the new details after edit.
+     * Returns the new details of the task after edit.
      * @param userInput The user input.
      * @return The new details.
      */
