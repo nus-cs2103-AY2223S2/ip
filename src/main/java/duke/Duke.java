@@ -9,6 +9,7 @@ import duke.exceptions.InvalidCommandValueException;
 import duke.exceptions.InvalidDateException;
 import duke.exceptions.InvalidTaskTypeException;
 import duke.exceptions.InvalidTimeException;
+import duke.exceptions.InvalidUndoException;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 import duke.utils.Parser;
@@ -67,8 +68,9 @@ public class Duke extends Application {
             String response = command.action();
             return response;
         } catch (InvalidCommandValueException | InvalidTaskTypeException
-                 | EmptyCommandException | InvalidTimeException | InvalidDateException e) {
-            return Ui.formatString(e.getMessage());
+                 | EmptyCommandException | InvalidTimeException | InvalidDateException
+                 | InvalidUndoException e) {
+            return ui.formatString(e.getMessage());
         }
     }
 }

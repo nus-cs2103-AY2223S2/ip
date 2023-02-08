@@ -115,6 +115,7 @@ public class TaskList {
             sb.append("\n");
             ++i;
         }
+        sb.setLength(sb.length() - 1);
         return sb.toString();
     }
 

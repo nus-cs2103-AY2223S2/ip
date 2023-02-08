@@ -36,6 +36,14 @@ public class AddCommand extends Command {
         this.file = file;
     }
 
+    @Override
+    public String undo() {
+        Task deletedTask = taskList.removeTask(taskList.getSize() - 1);
+        storage.editStorage(taskList.getTaskList());
+        storage.saveToFile(file);
+        return ui.deleteResponse(deletedTask, taskList);
+    }
+
     /**
      * Adds the task to the TaskList.
      */
@@ -44,6 +52,7 @@ public class AddCommand extends Command {
         taskList.addTask(task);
         storage.editStorage(taskList.getTaskList());
         storage.saveToFile(file);
+        Command.addPastCommand(this);
         return ui.addResponse(task, taskList);
     }
 }

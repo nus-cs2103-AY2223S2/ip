@@ -118,4 +118,8 @@ public class Ui {
         return HORIZONTAL_LINE + "\n" + sb + HORIZONTAL_LINE + "\n";
     }
 
+    public String undoResponse(String string) {
+        return formatString("The previous command has been undone by: " + string);
+    }
+
 }
