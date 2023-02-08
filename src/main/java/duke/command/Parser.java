@@ -59,7 +59,7 @@ public class Parser {
             command.append(storageTask[i]);
             if (spaceCount < storageTask.length - 1) {
                 command.append(" ");
-                spaceCount+=1;
+                spaceCount += 1;
             }
         }
         return parse(command.toString());

@@ -1,12 +1,12 @@
 package duke;
 
+import java.io.FileNotFoundException;
+
 import duke.command.Command;
 import duke.command.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
-
-import java.io.FileNotFoundException;
 
 /**
  * Duke program implements an interactive chatbot with the
