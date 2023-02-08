@@ -1,7 +1,7 @@
 package duke.command;
 
 import duke.exception.IndexOutOfBoundException;
-import duke.exception.MissingArgumentException;
+import duke.parser.InputValidator;
 import duke.storage.TaskList;
 
 /**
@@ -19,27 +19,28 @@ public class RemoveCommand extends Command {
         this.request = request;
     }
 
+    /**
+     * Execute the <code>Remove</code> task.
+     *
+     * @param tasks the list to store new task.
+     * @return response after deleted indicated task.
+     * @throws IndexOutOfBoundException
+     */
     @Override
     public String execute(TaskList tasks) throws IndexOutOfBoundException {
+        String requestType = "delete";
+        String idxString = InputValidator.normaliseIndexRequest(request, requestType);
+        Integer idx = Integer.parseInt(idxString) - 1;
 
-        String[] req = request.trim().split("delete ");
-
-        // check missing index
-        if (req.length < 2) {
-            throw new MissingArgumentException("Missing index for deletion!");
-        }
-
-        Integer idx = Integer.parseInt(req[1]) - 1;
-
-        // check valid index
         if (idx >= tasks.numOfTask()) {
             throw new IndexOutOfBoundException();
         }
 
         String deletedTask = tasks.getTask(idx).toString();
         tasks.deleteTask(idx);
+        String response = String.format("Noted. I've removed this task:\n %s \n"
+                + "Now you have %d tasks in the list.", deletedTask, tasks.numOfTask());
 
-        return "Noted. I've removed this task:\n" + deletedTask
-                + "\nNow you have " + tasks.numOfTask() + " in the list.";
+        return response;
     }
 }

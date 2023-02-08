@@ -24,6 +24,7 @@ public class Deadline extends Task {
         String[] dateTime = this.dueDate.toString().split("T");
         String dueDateData = dateTime[0] + " " + dateTime[1].replace(":", "");
         String status = this.completed ? "1" : "0";
+
         return "D | " + status + " | " + this.task + " | " + dueDateData;
     }
 
@@ -31,6 +32,7 @@ public class Deadline extends Task {
     public String toString() {
         String statusIcon = this.completed ? "X" : " ";
         String formattedDueDate = dueDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy, h:mma"));
+
         return "[D][" + statusIcon + "] " + this.task + " (by: " + formattedDueDate + ")";
     }
 }

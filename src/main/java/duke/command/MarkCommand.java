@@ -1,7 +1,7 @@
 package duke.command;
 
 import duke.exception.IndexOutOfBoundException;
-import duke.exception.MissingArgumentException;
+import duke.parser.InputValidator;
 import duke.storage.TaskList;
 
 /**
@@ -19,25 +19,27 @@ public class MarkCommand extends Command {
         this.request = request;
     }
 
+    /**
+     * Execute the <code>Mark</code> task.
+     *
+     * @param tasks the list to store new task.
+     * @return Response after marking the indicated task as done.
+     * @throws IndexOutOfBoundException
+     */
     @Override
     public String execute(TaskList tasks) throws IndexOutOfBoundException {
+        String requestType = "mark";
+        String indexString = InputValidator.normaliseIndexRequest(request, requestType);
+        Integer idx = Integer.parseInt(indexString) - 1;
 
-        String[] req = this.request.split("mark ");
-
-        // check missing index
-        if (req.length < 2) {
-            throw new MissingArgumentException("Missing index!");
-        }
-
-        Integer idx = Integer.parseInt(req[1]) - 1;
-
-        // check valid index
+        /* Checks for valid index, i.e., within the range of task list */
         if (idx >= tasks.numOfTask()) {
             throw new IndexOutOfBoundException();
         }
 
         tasks.getTask(idx).markComplete();
+        String response = String.format("Nice! I have marked this task as done \n %s", tasks.getTask(idx));
 
-        return "Nice! I have marked this task as done \n" + tasks.getTask(idx);
+        return response;
     }
 }
