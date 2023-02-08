@@ -15,4 +15,13 @@ public class ToDoTask extends Task {
         super(description, EVENT_SYMBOL);
     }
 
+    /**
+     * Returns false. To-Do task is never upcoming.
+     * @param maxDays Number of days to the task from now in which this method should return true.
+     * @return False.
+     */
+    @Override
+    public boolean isUpcoming(long maxDays) {
+        return false;
+    }
 }

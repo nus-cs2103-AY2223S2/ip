@@ -15,6 +15,7 @@ import duke.commands.ExitCommand;
 import duke.commands.FindCommand;
 import duke.commands.MarkTaskAsDoneCommand;
 import duke.commands.MarkTaskAsUndoneCommand;
+import duke.commands.ReminderCommand;
 import duke.exception.CannotReadFileDukeException;
 import duke.exception.DukeException;
 import duke.exception.EmptyArgumentDukeException;
@@ -99,6 +100,8 @@ public class Parser {
             return new ExitCommand();
         case DISPLAY_LIST:
             return new DisplayListCommand();
+        case REMINDERS:
+            return new ReminderCommand();
         default:
             return null;
 

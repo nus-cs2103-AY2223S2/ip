@@ -1,5 +1,6 @@
 package duke.task;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,6 +73,17 @@ public class TaskList {
         }
         assert matchingTasks != null : "matchingTasks should not be null";
         return matchingTasks;
+    }
+
+    public TaskList getUpcomingTasks(long days) {
+        TaskList upcomingTasks = new TaskList();
+        for (Task task : list) {
+            if (task.isUpcoming(days)) {
+                upcomingTasks.add(task);
+            }
+        }
+        assert upcomingTasks != null : "upcomingTasks should not be null";
+        return upcomingTasks;
     }
 
     private int getIndexFromNumber(int number) {

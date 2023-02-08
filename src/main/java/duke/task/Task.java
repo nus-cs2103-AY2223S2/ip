@@ -46,11 +46,18 @@ public abstract class Task {
     /**
      * Returns true if this task's description contains the keyword, false otherwise.
      * @param keyword A keyword, which can contain spaces.
-     * @return True if if this task's description contains the keyword, false otherwise.
+     * @return True if this task's description contains the keyword, false otherwise.
      */
     public boolean matchesKeyword(String keyword) {
         return description.contains(keyword);
     }
+
+    /**
+     * Returns true if the days to the task from now is within the given days, false otherwise.
+     * @param maxDays Number of days to the task from now in which this method should return true.
+     * @return True if the days to the task from now is within the given days, false otherwise.
+     */
+    public abstract boolean isUpcoming(long maxDays);
 
     /**
      * Returns the string representation of the task.
