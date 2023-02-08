@@ -10,7 +10,7 @@ import utilities.DateTimeParser;
  */
 public class Deadline extends Task {
     protected static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-    private final LocalDateTime before;
+    private LocalDateTime before;
 
     private Deadline(String n, String d) {
         super(n, "D");
@@ -25,6 +25,10 @@ public class Deadline extends Task {
      */
     public static Deadline create(String n, String d) {
         return new Deadline(n, d);
+    }
+
+    public void reschedule(LocalDateTime newBefore) {
+        before = newBefore;
     }
 
     /**
