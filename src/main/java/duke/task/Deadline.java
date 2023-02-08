@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Objects;
 
 /**
  * A subclass of Task that represents
@@ -33,6 +34,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String endTime) throws DateTimeParseException {
         super(description);
+        assert !description.equals("");
         this.endTimeString = endTime;
         this.endTime = LocalDateTime.parse(endTime, INPUT_DATE_FORMAT);
         this.wordsInDescription.addAll(Arrays.asList(description.split(" ")));
