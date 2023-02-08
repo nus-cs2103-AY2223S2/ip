@@ -48,8 +48,6 @@ public class Duke extends Application {
         AnchorPane mainLayout = new AnchorPane();
         scene = new Scene(mainLayout);
 
-        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-
         stage.setScene(scene);
         stage.show();
         stage.setTitle("Duke");
@@ -66,6 +64,7 @@ public class Duke extends Application {
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
+        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
         // You will need to import `javafx.scene.layout.Region` for this.
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);

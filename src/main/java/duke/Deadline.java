@@ -2,6 +2,7 @@ package duke;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 /**
  * This class is a deadline task. It contains
@@ -30,24 +31,26 @@ public class Deadline extends Task {
      * @param isDone Whether the deadline task is done.
      * @param by The deadline.
      */
-    public Deadline(String description, boolean isDone, LocalDate by) {
-        super(description, isDone);
+    public Deadline(String description, boolean isDone, LocalDate by , ArrayList<String> tags) {
+        super(description, isDone, tags);
         this.by = by;
     }
 
     @Override
     public String toString() {
-        return String.format("[D]%s  (by: %s)",
+        return String.format("[D]%s  (by: %s) %s",
                 super.toString(),
-                this.by.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+                this.by.format(DateTimeFormatter.ofPattern("MMM d yyyy")),
+                this.getStringOfTags());
     }
 
     @Override
     public String convertToStorableString() {
-        return String.format("D,%s,%s,%s",
+        return String.format("D|%s|%s|%s|%s",
                 this.isDone() ? "1" : "0",
                 this.getDescription(),
-                this.by.toString()
+                this.by.toString(),
+                this.getTags()
                 );
     }
 }

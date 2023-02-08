@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -58,26 +59,48 @@ public class Storage {
      * @return Task.
      */
     public Task parseStringToTask(String string) {
-        String[] inputArray = string.split(",");
+        String[] inputArray = string.split("\\|");
 
         if (inputArray[0].equals("T")) {
-            return new ToDo(inputArray[2], inputArray[1].equals("1"));
+            return new ToDo(inputArray[2],
+                    inputArray[1].equals("1"),
+                    parseStringToTags(inputArray[3]));
         } else if (inputArray[0].equals("D")) {
-            return new Deadline(inputArray[2], inputArray[1].equals("1"), LocalDate.parse(inputArray[3]));
-        } else {
-            return new Event(inputArray[2], inputArray[1].equals("1"),
+            return new Deadline(inputArray[2],
+                    inputArray[1].equals("1"),
                     LocalDate.parse(inputArray[3]),
-                    LocalDate.parse(inputArray[4]));
+                    parseStringToTags(inputArray[4]));
+        } else {
+            return new Event(inputArray[2],
+                    inputArray[1].equals("1"),
+                    LocalDate.parse(inputArray[3]),
+                    LocalDate.parse(inputArray[4]),
+                    parseStringToTags(inputArray[5]));
         }
     }
-
     /**
-     * Saves tasklist to file.
+     * Takes in a String and returns an Arraylist of tags.
+     * @param string tags in string form.
+     * @return ArrayList
+     */
+    public ArrayList<String> parseStringToTags(String string) {
+        String temp = string.replace("[", "");
+        String str = temp.replace("]", "");
+        String[] tagsArray = str.split(",");
+        ArrayList<String> tags = new ArrayList<>();
+        for (String s : tagsArray) {
+            tags.add(s);
+        }
+
+        return tags;
+    }
+    /**
+     * Saves taskList to file.
      * @param taskList Lists of tasks in use by the app.
      *
      */
-    public void saveTaskListToStorage(TaskList taskList) {
 
+    public void saveTaskListToStorage(TaskList taskList) {
         try {
             FileWriter myWriter = new FileWriter(file); // this truncates the duke.txt to size 0
             for (int i = 0; i < taskList.getArraySize(); i++) {
