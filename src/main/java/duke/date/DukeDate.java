@@ -9,10 +9,23 @@ public class DukeDate {
     private static final DateTimeFormatter OUTPUT_DATE_FORMAT =
             DateTimeFormatter.ofPattern("MMM dd yyyy");
 
+    /**
+     * Parses a {@code String} representation of date into a {@code LocalDate} instance.
+     * 
+     * @param dateString
+     * @return A {@code LocalDate} instance.
+     */
     public static LocalDate parseDateString(String dateString) {
         return LocalDate.parse(dateString, INPUT_DATE_FORMAT);
     }
 
+    /**
+     * Returns the String representation of the {@code LocalDate} instance.
+     * 
+     * @param dateString
+     * @return The {@code String} representation of the {@code date} instance in the format of MMM
+     *         dd yyyy.
+     */
     public static String convertDateToString(LocalDate date) {
         return date.format(OUTPUT_DATE_FORMAT);
     }
