@@ -5,7 +5,7 @@ package leo.leoexception;
  */
 public class IncorrectMarkException extends LeoException {
 
-    public IncorrectMarkException(String message) {
-        super(message);
+    public IncorrectMarkException() {
+        super("This task was already marked previously.");
     }
 }

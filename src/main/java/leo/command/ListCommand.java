@@ -1,5 +1,6 @@
 package leo.command;
 
+import leo.leoexception.LeoException;
 import leo.storage.Storage;
 
 /**
@@ -15,7 +16,11 @@ public class ListCommand extends Command {
      */
     public ListCommand(Storage s, String c) {
         super(s, c);
-        s.showList();
+    }
+
+    @Override
+    public String execute() {
+        return storage.showList();
     }
 
 }

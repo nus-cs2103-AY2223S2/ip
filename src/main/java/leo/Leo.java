@@ -1,5 +1,6 @@
 package leo;
 
+import leo.command.Command;
 import leo.command.Parser;
 import leo.leoexception.LeoException;
 import leo.storage.Storage;
@@ -11,20 +12,35 @@ import leo.ui.Ui;
 public class Leo {
 
     private final Ui ui;
+    private Parser parser;
 
     public Leo(String filePath) {
         ui = new Ui();
         run();
         try {
             Storage storage = new Storage(filePath);
-            Parser parser = new Parser(storage);
-            parser.readCommand();
+            parser = new Parser(storage);
         } catch (LeoException e) {
-            Ui.displayMessage(e.getMessage());
+            System.out.println(e.getMessage());
         }
     }
 
     private void run() {
         ui.greetings();
+    }
+
+    /**
+     * Gets the response from Duke
+     *
+     * @param input User input
+     * @return Response from Duke
+     */
+    public String getResponse(String input) {
+        try {
+            Command command = this.parser.readCommand(input);
+            return command.execute();
+        } catch (LeoException e) {
+            return e.getMessage();
+        }
     }
 }

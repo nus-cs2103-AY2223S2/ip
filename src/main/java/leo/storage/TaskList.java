@@ -60,10 +60,12 @@ public class TaskList {
     /**
      * Constructor for displaying the list of Tasks.
      */
-    public void display() {
+    public String display() {
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < size(); i++) {
-            Ui.displayMessage((i + 1) + ". " + getTask(i).toString());
+            sb.append(i + 1).append(". ").append(getTask(i).toString()).append("\n");
         }
+        return sb.toString();
     }
 
 }

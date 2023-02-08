@@ -5,7 +5,7 @@ package leo.leoexception;
  */
 public class EmptyDescriptionException extends LeoException {
 
-    public EmptyDescriptionException(String message) {
-        super(message);
+    public EmptyDescriptionException() {
+        super("Uh oh! Description of task is empty :-(");
     }
 }

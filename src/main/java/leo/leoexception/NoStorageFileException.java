@@ -5,7 +5,7 @@ package leo.leoexception;
  */
 public class NoStorageFileException extends LeoException {
 
-    public NoStorageFileException(String message) {
-        super(message);
+    public NoStorageFileException() {
+        super("No file found!! >:-(");
     }
 }

@@ -15,8 +15,12 @@ public class UnmarkCommand extends Command {
      */
     public UnmarkCommand(Storage s, String c) {
         super(s, c);
+    }
+
+    @Override
+    public String execute() {
         int num = extractTaskNum();
-        s.unmark(num);
+        return storage.unmark(num);
     }
 
 }

@@ -49,7 +49,7 @@ public class Task {
      */
     public void mark() throws IncorrectMarkException {
         if (this.done) {
-            throw new IncorrectMarkException("This task was already marked previously.");
+            throw new IncorrectMarkException();
         }
         this.done = true;
     }
@@ -61,7 +61,7 @@ public class Task {
      */
     public void unmark() throws IncorrectUnmarkException {
         if (!this.done) {
-            throw new IncorrectUnmarkException("This task has not been marked.");
+            throw new IncorrectUnmarkException();
         }
         this.done = false;
     }

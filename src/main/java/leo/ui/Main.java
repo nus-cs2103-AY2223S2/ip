@@ -1,22 +1,39 @@
 package leo.ui;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-
 import leo.Leo;
 
+import java.io.IOException;
+
+/**
+ * A GUI for Duke using FXML.
+ */
 public class Main extends Application {
 
-    private Leo leo = new Leo("/data/leo.txt");
+    private final Leo leo = new Leo("/data/leo.txt");
 
     @Override
     public void start(Stage stage) {
-        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
-        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+            AnchorPane ap = fxmlLoader.load();
+            Scene scene = new Scene(ap);
+            stage.setScene(scene);
 
-        stage.setScene(scene); // Setting the stage to show our screen
-        stage.show(); // Render the stage.
+            fxmlLoader.<MainWindow>getController().setLeo(leo);
+
+            stage.getIcons().add(new Image("/images/lion.png"));
+            stage.setTitle("Leo");
+            stage.isResizable();
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
 }

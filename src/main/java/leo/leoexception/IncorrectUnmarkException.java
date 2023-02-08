@@ -5,8 +5,8 @@ package leo.leoexception;
  */
 public class IncorrectUnmarkException extends LeoException {
 
-    public IncorrectUnmarkException(String message) {
-        super(message);
+    public IncorrectUnmarkException() {
+        super("This task has not been marked.");
     }
 
 }

@@ -5,8 +5,8 @@ package leo.leoexception;
  */
 public class IncompleteDurationException extends LeoException {
 
-    public IncompleteDurationException(String message) {
-        super(message);
+    public IncompleteDurationException() {
+        super("Uh oh! The duration of the event is incomplete :-(");
     }
 
 }

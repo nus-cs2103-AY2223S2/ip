@@ -1,11 +1,9 @@
 package leo.command;
 
 import java.util.Objects;
-import java.util.Scanner;
 
 import leo.leoexception.LeoException;
 import leo.storage.Storage;
-import leo.ui.Ui;
 
 /**
  * Represents a Parser make sense of commands from user input.
@@ -25,34 +23,24 @@ public class Parser {
 
     /**
      * Reads user inputs line by line.
+     * @return Command input by user.
      */
-    public void readCommand() {
-        Scanner scanner = new Scanner(System.in);
-        String command = scanner.nextLine();
-        while (!command.contains("bye")) {
-            if (Objects.equals(command, "list")) {
-                new ListCommand(s, command);
-            } else if (command.contains("mark")) {
-                if (command.contains("unmark")) {
-                    new UnmarkCommand(s, command);
-                } else {
-                    new MarkCommand(s, command);
-                }
-            } else if (command.contains("delete")) {
-                new DeleteCommand(s, command);
-            } else if (command.contains("find")) {
-                new FindCommand(s, command);
-            } else {
-                try {
-                    new AddCommand(s, command);
-                } catch (LeoException e) {
-                    Ui.displayMessage(Ui.leoResponse(e.getMessage()));
-                }
-            }
-            command = scanner.nextLine();
+    public Command readCommand(String input) throws LeoException {
+        if (Objects.equals(input, "list")) {
+            return new ListCommand(s, input);
+        } else if (input.startsWith("mark")) {
+            return new MarkCommand(s, input);
+        } else if (input.startsWith("unmark")) {
+            return new UnmarkCommand(s, input);
+        } else if (input.contains("delete")) {
+            return new DeleteCommand(s, input);
+        } else if (input.contains("find")) {
+            return new FindCommand(s, input);
+        } else if (input.contains("bye")) {
+            return new ExitCommand(s, input);
+        } else {
+            return new AddCommand(s, input);
         }
-
-        new ExitCommand(s, command);
     }
 
 }

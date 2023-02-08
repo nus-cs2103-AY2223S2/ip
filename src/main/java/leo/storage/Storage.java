@@ -92,12 +92,12 @@ public class Storage {
                         }
                     }
                 } catch (LeoException e) {
-                    throw new IncorrectMarkException("This task was already marked previously.");
+                    throw new IncorrectMarkException();
                 }
             }
             return taskList;
         } catch (FileNotFoundException e) {
-            throw new NoStorageFileException("No file found!! >:-(");
+            throw new NoStorageFileException();
         }
     }
 
@@ -107,17 +107,17 @@ public class Storage {
      *
      * @param task Task to be added into the list.
      */
-    public void addTask(Task task) {
+    public String addTask(Task task) {
         data.addTask(task);
-        Ui.displayMessage(Ui.leoResponse("added " + task.getTask() + " to your tasks :-) !"));
+        return "Added " + task.getTask() + " to your tasks :-) !";
     }
 
     /**
      * Prints the list of tasks stored in the data.
      *
      */
-    public void showList() {
-        data.display();
+    public String showList() {
+        return data.display();
     }
 
     /**
@@ -126,13 +126,12 @@ public class Storage {
      *
      * @param num Index of task to be marked.
      */
-    public void mark(int num) {
+    public String mark(int num) {
         try {
             getTask(num - 1).mark();
-            Ui.displayMessage(Ui.leoResponse("Good work! You have completed task " + num + ":"));
-            Ui.displayMessage(Ui.notFirstLine(getTask(num - 1).toString()));
+            return "Good work! You have completed task " + num + ":\n" + getTask(num - 1).toString();
         } catch (LeoException e) {
-            Ui.displayMessage(Ui.leoResponse(e.getMessage()));
+            return e.getMessage();
         }
     }
 
@@ -142,13 +141,12 @@ public class Storage {
      *
      * @param num Index of task to be unmarked.
      */
-    public void unmark(int num) {
+    public String unmark(int num) {
         try {
             getTask(num - 1).unmark();
-            Ui.displayMessage(Ui.leoResponse("No worries! I have unmarked task " + num + ":"));
-            Ui.displayMessage(Ui.notFirstLine(getTask(num - 1).toString()));
+            return "No worries! I have unmarked task " + num + ":\n" + getTask(num - 1).toString();
         } catch (LeoException e) {
-            Ui.displayMessage(Ui.leoResponse(e.getMessage()));
+            return e.getMessage();
         }
     }
 
@@ -158,16 +156,15 @@ public class Storage {
      *
      * @param num Index of task to be deleted.
      */
-    public void delete(int num) {
+    public String delete(int num) {
         Task removed;
         try {
             removed = getTask(num - 1);
             data.removeTask(num - 1);
-            Ui.displayMessage(Ui.leoResponse("I have removed task " + num + ":"));
             assert removed != null;
-            Ui.displayMessage(Ui.notFirstLine(removed.toString()));
+            return "I have removed task " + num + ":\n" + removed;
         } catch (LeoException e) {
-            Ui.displayMessage(Ui.leoResponse(e.getMessage()));
+            return e.getMessage();
         }
     }
 
@@ -182,7 +179,7 @@ public class Storage {
         try {
             return data.getTask(num);
         } catch (Exception e) {
-            throw new NoTaskFoundException("Hm, this task does not exist...");
+            throw new NoTaskFoundException();
         }
     }
 
@@ -220,7 +217,7 @@ public class Storage {
 
             fileWriter.close();
         } catch (IOException e) {
-            throw new NoStorageFileException("No file found!! >:-(");
+            throw new NoStorageFileException();
         }
     }
 

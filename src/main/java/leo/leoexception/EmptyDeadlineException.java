@@ -5,7 +5,7 @@ package leo.leoexception;
  */
 public class EmptyDeadlineException extends LeoException {
 
-    public EmptyDeadlineException(String message) {
-        super(message);
+    public EmptyDeadlineException() {
+        super("Uh oh! There is no deadline indicated :-(");
     }
 }

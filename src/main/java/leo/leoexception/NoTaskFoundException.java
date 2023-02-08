@@ -5,7 +5,7 @@ package leo.leoexception;
  */
 public class NoTaskFoundException extends LeoException {
 
-    public NoTaskFoundException(String message) {
-        super(message);
+    public NoTaskFoundException() {
+        super("There are no matching tasks!");
     }
 }

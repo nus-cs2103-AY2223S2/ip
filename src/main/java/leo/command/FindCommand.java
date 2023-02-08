@@ -9,7 +9,6 @@ import leo.leoexception.NoTaskFoundException;
 import leo.storage.Storage;
 import leo.storage.Task;
 import leo.storage.TaskList;
-import leo.ui.Ui;
 
 /**
  * Represents a find command input by user.
@@ -24,13 +23,6 @@ public class FindCommand extends Command {
      */
     public FindCommand(Storage storage, String task) {
         super(storage, task);
-        try {
-            TaskList taskList = findTasks(storage, task);
-            Ui.displayMessage(Ui.leoResponse("Here's the matching task(s):"));
-            taskList.display();
-        } catch (LeoException e) {
-            Ui.displayMessage(Ui.leoResponse(e.getMessage()));
-        }
     }
 
     /**
@@ -46,7 +38,7 @@ public class FindCommand extends Command {
         List<Task> foundList = new ArrayList<>();
         int dataLength = storage.getDataLength();
         if (dataLength == 0) {
-            throw new NoTaskFoundException("There are no matching tasks!");
+            throw new NoTaskFoundException();
         }
         try {
             String keyword = task.substring(5);
@@ -58,9 +50,15 @@ public class FindCommand extends Command {
             }
             return new TaskList(foundList);
         } catch (Exception e) {
-            throw new NoKeywordException("Oops! I do not know what I should be searching for...");
+            throw new NoKeywordException();
         }
 
+    }
+
+    @Override
+    public String execute() throws LeoException {
+        TaskList taskList = findTasks(storage, command);
+        return "Here's the matching task(s):" + taskList.display();
     }
 
 }

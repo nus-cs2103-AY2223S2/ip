@@ -5,7 +5,7 @@ package leo.leoexception;
  */
 public class NoKeywordException extends LeoException {
 
-    public NoKeywordException(String message) {
-        super(message);
+    public NoKeywordException() {
+        super("Oops! I do not know what I should be searching for...");
     }
 }

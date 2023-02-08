@@ -5,7 +5,7 @@ package leo.leoexception;
  */
 public class InvalidInputException extends LeoException {
 
-    public InvalidInputException(String message) {
-        super(message);
+    public InvalidInputException() {
+        super("Ohno! I do not know what you mean...");
     }
 }

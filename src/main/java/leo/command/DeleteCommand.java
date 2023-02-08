@@ -15,8 +15,12 @@ public class DeleteCommand extends Command {
      */
     public DeleteCommand(Storage s, String c) {
         super(s, c);
+    }
+
+    @Override
+    public String execute() {
         int num = extractTaskNum();
-        s.delete(num);
+        return storage.delete(num);
     }
 
 }
