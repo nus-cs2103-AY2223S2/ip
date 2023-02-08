@@ -15,7 +15,11 @@ public class ExitCommand extends Command {
      */
     public ExitCommand(Storage s, String c) {
         super(s, c);
-        exit();
+    }
+
+    @Override
+    public String execute() {
+        return exit();
     }
 
 }

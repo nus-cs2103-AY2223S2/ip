@@ -1,7 +1,7 @@
 [D][ ] project | 29102023 12:00
 [E][ ] meeting | 29012023 20:00 | 29012023 22:00
-[E][ ] staycay | 29012023 18:00 | 30012023 11:00
 [T][X] run
 [T][ ] eat acai
 [T][ ] eat fruits
 [T][X] sleeping
+[D][ ] presentation | 10022023 17:00

@@ -18,6 +18,6 @@ public class StorageTest {
     @Test
     public void testDataLength_success() throws NoStorageFileException, IncorrectMarkException {
         Storage storage = new Storage("data/leo.txt");
-        assertEquals(5, storage.getDataLength());
+        assertEquals(7, storage.getDataLength());
     }
 }
