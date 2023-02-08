@@ -47,7 +47,7 @@ public class Parser {
                 return l.mark(Integer.parseInt(parts[1]));
 
             case todo:
-                assert userinput.length() > 4: "Wrong instruction passed in";
+                assert userinput.length() > 4 : "Wrong instruction passed in";
                 return l.add(new Todo(userinput));
 
             case deadline:

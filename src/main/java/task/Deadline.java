@@ -10,6 +10,11 @@ import java.time.Month;
 public class Deadline extends Task {
     private LocalDate date;
 
+    /**
+     * Creates a new task of type deadline
+     * @param instruction name user inputs for task
+     * @param date string representation of date
+     */
     public Deadline(String instruction, String date) {
         super(instruction.substring(9));
         this.date = LocalDate.parse(date);

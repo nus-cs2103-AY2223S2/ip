@@ -1,8 +1,8 @@
 package task;
 
-import support.DateConverter;
-
 import java.util.ArrayList;
+
+import support.DateConverter;
 
 /**
  * Abstraction for data structure and operations used to maintain to do list.
@@ -11,16 +11,31 @@ public class TaskList {
     private ArrayList<Task> records = new ArrayList<>();
 
     // default constructor
+
+    /**
+     * Adds a task to the arraylist
+     * @param task to be added
+     * @return message representing success
+     */
     public String add(Task task) {
         records.add(task);
         return "B: " + task.toString() + " has been added";
     }
 
+    /**
+     * Deletes a record from the arraylist
+     * @param x index of number to be deleted (1-based)
+     * @return string message representing success
+     */
     public String delete(int x) {
-        Task temp = records.remove(x-1);
+        Task temp = records.remove(x - 1);
         return "B: " + temp.toString() + " has been removed";
     }
 
+    /**
+     * Prints all tasks in the list
+     * @return String representation of tasks to be printed
+     */
     public String print() {
         String s = "";
         int n = this.records.size();
@@ -40,12 +55,22 @@ public class TaskList {
         return s;
     }
 
+    /**
+     * marks a task as completed
+     * @param x index of task to modify
+     * @return string representing success
+     */
     public String mark(int x) {
-        return records.get(x-1).setComplete();
+        return records.get(x - 1).setComplete();
     }
 
+    /**
+     * marks a task as incomplete
+     * @param x index of task to modify
+     * @return string representing success
+     */
     public String unmark(int x) {
-        return records.get(x-1).setIncomplete();
+        return records.get(x - 1).setIncomplete();
     }
 
     /**
@@ -89,24 +114,27 @@ public class TaskList {
         String name = str.substring(10);
 
         switch (taskType) {
-            case 'T':
-                this.records.add(new Todo("todo " + name));
-                break;
+        case 'T':
+            this.records.add(new Todo("todo " + name));
+            break;
 
-            case 'D':
-                int idx = str.indexOf("(by:");
-                String task = str.substring(10, idx-1);
-                String dueDate = DateConverter.dateFormatter(str.substring(idx + 5));
-                this.records.add(new Deadline("deadline " + task, dueDate));
-                break;
+        case 'D':
+            int idx = str.indexOf("(by:");
+            String task = str.substring(10, idx - 1);
+            String dueDate = DateConverter.dateFormatter(str.substring(idx + 5));
+            this.records.add(new Deadline("deadline " + task, dueDate));
+            break;
 
-            case 'E':
-                int startIdx = str.indexOf("(from: ");
-                int endIdx = str.indexOf("to: ");
-                String taskName = str.substring(10, startIdx);
-                String startDate = DateConverter.dateFormatter(str.substring(startIdx + 7));
-                String endDate = DateConverter.dateFormatter(str.substring(endIdx + 4));
-                this.records.add(new Event("event " + taskName, startDate, endDate));
+        case 'E':
+            int startIdx = str.indexOf("(from: ");
+            int endIdx = str.indexOf("to: ");
+            String taskName = str.substring(10, startIdx);
+            String startDate = DateConverter.dateFormatter(str.substring(startIdx + 7));
+            String endDate = DateConverter.dateFormatter(str.substring(endIdx + 4));
+            this.records.add(new Event("event " + taskName, startDate, endDate));
+            break;
+        default:
+            System.out.println("This should have never happened");
         }
 
         if (marked == 'X') {

@@ -11,6 +11,12 @@ public class Event extends Task {
     private LocalDate start;
     private LocalDate end;
 
+    /**
+     * Creates a new task of type event
+     * @param instruction name given by user
+     * @param start string representation of start date
+     * @param end string representation of end date
+     */
     public Event(String instruction, String start, String end) {
         super(instruction.substring(6));
         this.start = LocalDate.parse(start.trim());
@@ -26,8 +32,7 @@ public class Event extends Task {
         Month endMonth = this.end.getMonth();
         int endDate = this.end.getDayOfMonth();
         int endYear = this.end.getYear();
-        return "[E]" + super.toString() +
-                " (from: " + startMonth + " " +startDate + ", " + startYear +
-                " to: " +endMonth + " " + endDate + ", " + endYear + ")";
+        return "[E]" + super.toString() + " (from: " + startMonth + " " + startDate + ", " + startYear + " to: "
+            + endMonth + " " + endDate + ", " + endYear + ")";
     }
 }
