@@ -1,15 +1,22 @@
 package duke.command;
-import duke.Storage;
-import duke.Ui;
-import duke.TaskList;
 import duke.DukeException;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 import duke.task.Task;
 
-public class UnmarkCommand extends Command{
+/**
+ * Command that unmarks a task at an index as done when executed.
+ */
+public class UnmarkCommand extends Command {
     private int index;
 
     public UnmarkCommand(int index) {
         this.index = index;
+    }
+
+    public UnmarkCommand() {
+        super();
     }
 
     /**
@@ -28,6 +35,22 @@ public class UnmarkCommand extends Command{
     @Override
     public boolean isExit() {
         return false;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public String commandHelp() {
+        return "Showing help for command: unmark\n"
+                + Ui.showSepLine()
+                + "Sets a task's state to undone\n"
+                + Ui.showSepLine()
+                + "Usage:\n"
+                + "unmark [(int) INDEX]\n\n"
+                + "Example:\n"
+                + "unmark 1\n"
+                + Ui.showSepLine();
     }
 
     @Override

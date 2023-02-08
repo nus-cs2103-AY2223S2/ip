@@ -26,9 +26,9 @@ public class Ui {
                 + "|____/ \\__,_|_|\\_\\___|\n";
 
         return "Hello from\n" + logo + "\n"
-                + this.showSepLine()
+                + showSepLine()
                 + "Hello! I'm Duke, what can I do for you?\n"
-                + this.showSepLine()
+                + showSepLine()
                 + this.showHelp();
     }
 
@@ -39,14 +39,13 @@ public class Ui {
      */
     public String showHelp() {
         return "Commands:\n"
-                + "Adding tasks: todo, event (requires date), deadline "
-                + "(requires date in yyyy-mm-dd format)\n"
-                + "To specify date, task description should be followed by"
-                + " /[date]\n"
-                + "Marking completion: mark (index), unmark (index)\n"
-                + "Removing tasks: remove (index)\n"
+                + "Adding tasks: todo, event, deadline\n"
+                + "Marking completion: mark, unmark\n"
+                + "Removing tasks: remove\n"
                 + "List all tasks: list\n"
-                + "Exit Duke: exit";
+                + "Find tasks with keyword: find\n"
+                + "Exit Duke: exit\n\n"
+                + "help <command> for more info.";
     }
 
     /**
@@ -63,8 +62,8 @@ public class Ui {
      *
      * @return String of a separation line.
      */
-    public String showSepLine() {
-        return "----------------------------\n";
+    public static String showSepLine() {
+        return "========================================\n";
     }
 
     /**

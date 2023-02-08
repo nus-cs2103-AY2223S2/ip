@@ -6,6 +6,8 @@ import duke.DukeException;
 
 public abstract class Command {
 
+
+
     /**
      * Executes the command according to its specifications.
      *
@@ -22,6 +24,8 @@ public abstract class Command {
      * @return true if Command is an ExitCommand, false otherwise.
      */
     public abstract boolean isExit();
+
+    public abstract String commandHelp();
 
     @Override
     public abstract String toString();

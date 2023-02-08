@@ -5,11 +5,15 @@ import duke.TaskList;
 import duke.DukeException;
 import duke.task.Task;
 
-public class DeleteCommand extends Command{
+public class DeleteCommand extends Command {
     private int index;
 
     public DeleteCommand(int index) {
         this.index = index;
+    }
+
+    public DeleteCommand() {
+        super();
     }
 
     /**
@@ -28,6 +32,22 @@ public class DeleteCommand extends Command{
     @Override
     public boolean isExit() {
         return false;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public String commandHelp() {
+        return "Showing help for command: remove\n"
+                + Ui.showSepLine()
+                + "Removes a task from the list\n"
+                + Ui.showSepLine()
+                + "Usage:\n"
+                + "remove [(int) INDEX]\n\n"
+                + "Example:\n"
+                + "remove 1\n"
+                + Ui.showSepLine();
     }
 
     @Override
