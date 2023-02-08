@@ -6,11 +6,11 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
-<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="TOP_RIGHT" maxHeight="Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
     <children>
       <BorderPane>
          <top>
-              <Label fx:id="dialog" alignment="CENTER" minHeight="-Infinity" rotate="5.0" style="-fx-background-color: #e03d2b;" text="Label" textFill="WHITE" wrapText="true" BorderPane.alignment="CENTER">
+              <Label fx:id="dialog" alignment="CENTER" maxHeight="Infinity" minHeight="-Infinity" style="-fx-background-color: #e03d2b;" text="Label" textFill="WHITE" wrapText="true" BorderPane.alignment="CENTER">
                <font>
                   <Font name="Consolas" size="12.0" />
                </font>
