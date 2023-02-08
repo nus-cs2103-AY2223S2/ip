@@ -1,96 +1,71 @@
 package bob;
 
-import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Ui {
-    private final Scanner scanner = new Scanner(System.in);
-
-    private int spacing;
-
     private String wrapper;
 
-    public Ui(int spacing, String deco, int length) {
-        this.spacing = spacing;
-        this.wrapper = padLeft(deco.repeat(length));
-    }
-
-    private String padLeft (String s) {
-        return " ".repeat(spacing) + s;
+    public Ui(String deco, int length) {
+        this.wrapper = deco.repeat(length);
     }
 
     private String getTaskDescription(Task t) {
         return String.format("[%s][%s] %s", t.getTaskType(), t.getStatusIcon(), t);
     }
 
-    private void printList(ArrayList<Task> list) {
+    private String wrapString(String s) {
+        return String.format("%s\n%s\n%s\n", wrapper, s, wrapper);
+    }
+
+    public String printList(ArrayList<Task> list) {
+        if (list.size() == 0) {
+            return "No tasks currently!";
+        }
+
+        StringBuilder string = new StringBuilder();
         // Iterate through list items sequentially
         for (int i = 0, n = list.size(); i < n; i++) {
             Task t = list.get(i);
             String s = String.format("%d. %s", i + 1, getTaskDescription(t));
-            System.out.println(padLeft(s));
+            string.append(s + "\n");
         }
+        return string.toString();
     }
 
-    public String readCommand() {
-        return scanner.nextLine();
+    public String errorPrint(BobException e) {
+        return wrapString("Sorry! An error has occurred :(") + e.getMessage();
     }
 
-    public void errorPrint(BobException e) {
-        formattedPrint("Sorry! An error has occured :(\n"
-            + e.getMessage());
+    public String printFilteredTasks(ArrayList<Task> list) {
+        return wrapString("Matching tasks:") + printList(list);
     }
 
-    // Accepts string that can be separated by \n
-    private void formattedPrint(String s) {
-        String[] lines = s.split("\n");
-        System.out.println(wrapper);
-        for (String line : lines) {
-            System.out.println(padLeft(line));
-        }
-        System.out.println(wrapper);
+    public String printTasks(ArrayList<Task> list) {
+        return wrapString("Current task list: ") + printList(list);
     }
 
-    public void printFilteredTasks(ArrayList<Task> list) {
-        System.out.println(wrapper);
-        System.out.println(padLeft("Here are the matching tasks: "));
-
-        // Iterate through list items sequentially
-        printList(list);
-        System.out.println(wrapper);
+    public String printIntroduction() {
+        return "Hi, my name is Bob :)\n"
+                + "How may I help you?";
     }
 
-    public void printTasks(ArrayList<Task> list) {
-        System.out.println(wrapper);
-        System.out.println(padLeft("Current task list: "));
-        printList(list);
-        System.out.println(wrapper);
+    public String printTaskAdded(Task t) {
+        return wrapString("Successfully added a new task :)")
+                + getTaskDescription(t);
     }
 
-    public void printIntroduction() {
-        formattedPrint("Hi, my name is Bob :)\n"
-                + "How may I help you?");
+    public String printMarkTask(Task t) {
+        return wrapString("Successfully marked a task :)")
+                + getTaskDescription(t);
     }
 
-    public void printTaskAdded(Task t) {
-        formattedPrint("Successfully added a new task :)\n"
-                + getTaskDescription(t));
+    public String printUnmarkTask(Task t) {
+        return wrapString("Successfully unmarked a task :)")
+                + getTaskDescription(t);
     }
 
-    public void printMarkTask(Task t) {
-        formattedPrint("Successfully marked a task :)\n"
-                + getTaskDescription(t));
-    }
-
-    public void printUnmarkTask(Task t) {
-        formattedPrint("Successfully unmarked a task :)\n"
-                + getTaskDescription(t));
-    }
-    public void printDeleteTask(Task t) {
-        formattedPrint("Successfully deleted a task :)\n"
-                + getTaskDescription(t));
-    }
-    public void printGoodbye() {
-        formattedPrint("Goodbye :)");
+    public String printDeleteTask(Task t) {
+        return wrapString("Successfully deleted a task :)")
+                + getTaskDescription(t);
     }
 }
