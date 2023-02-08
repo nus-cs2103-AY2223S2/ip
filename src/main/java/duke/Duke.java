@@ -2,7 +2,9 @@ package duke;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.Comparator;
 import java.util.Scanner;
+import java.util.concurrent.PriorityBlockingQueue;
 
 import javafx.fxml.FXML;
 
@@ -91,8 +93,10 @@ public class Duke {
         this.taskList = storage.getTasks();
         storage.createDirectory();
 
-        TaskScheduler taskScheduler = new TaskScheduler(1);
-        taskScheduler.addRecurringEvent();
+        TaskScheduler taskScheduler = new TaskScheduler(1, new PriorityBlockingQueue<>(100, Comparator.comparing(Recur::getMockRemainingTime)));
+        taskScheduler.addRecurringEvent(new Recur("First zoom meeting","Monday","Monday",1000));
+        taskScheduler.addRecurringEvent(new Recur("First zoom meeting","Monday","Monday",2000));
+        taskScheduler.addRecurringEvent(new Recur("First zoom meeting","Monday","Monday",3000));
 
         ByteArrayOutputStream storeString = new ByteArrayOutputStream();
         PrintStream printStream = new PrintStream(storeString);
