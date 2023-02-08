@@ -25,6 +25,7 @@ public class Ui {
     protected static final String UNDONE_TASK = "Nice! I've marked this task as not done yet:";
     protected static final String DELETED_TASK = "Noted. I've removed this task:";
     protected static final String ADDED_TASK = "Got it. I've added this task:";
+    protected static final String UPDATE_TASK = "Got it. I've updated this task:";
 
     private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
@@ -153,5 +154,16 @@ public class Ui {
         }
         System.out.print(str);
         return output + "\n" + str;
+    }
+
+    /**
+     * Print the message for updating a task.
+     * @param task Task that is updated.
+     * @return Message for updating a task.
+     */
+    public String showUpdatedTask(Task task) {
+        output = UPDATE_TASK + "\n" + task;
+        System.out.println(output);
+        return output;
     }
 }

@@ -40,6 +40,22 @@ public class Event extends Task {
     }
 
     /**
+     * Sets the starting date of the Event to the user input.
+     * @param userInput The new starting date.
+     */
+    public void setFrom(LocalDateTime userInput) {
+        this.from = userInput;
+    }
+
+    /**
+     * Sets the ending date of the Event to the user input.
+     * @param userInput The new ending date.
+     */
+    public void setUntil(LocalDateTime userInput) {
+        this.until = userInput;
+    }
+
+    /**
      * Returns the string representation of the Event.
      * @return The string representation of the Event.
      */

@@ -29,6 +29,14 @@ public class Deadline extends Task {
     }
 
     /**
+     * Sets the deadline of the task to the user input.
+     * @param userInput The new deadline.
+     */
+    public void setBy(LocalDateTime userInput) {
+        this.by = userInput;
+    }
+
+    /**
      * Returns the string representation of the Deadline.
      * @return The string representation of the Deadline.
      */
