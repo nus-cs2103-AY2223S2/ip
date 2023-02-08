@@ -21,6 +21,46 @@ import duke.command.UnmarkCommand;
  */
 public class Parser {
     /**
+    * String to register a list command.
+     */
+    public static final String LIST_STRING = "list";
+    /**
+     * String to register a mark command.
+     */
+    public static final String MARK_STRING = "mark";
+    /**
+     * String to register an unmark command.
+     */
+    public static final String UNMARK_STRING = "unmark";
+    /**
+     * String to register a todo command.
+     */
+    public static final String TODO_STRING = "todo";
+    /**
+     * String to register a deadline command.
+     */
+    public static final String DEADLINE_STRING = "deadline";
+    /**
+     * String to register an event command.
+     */
+    public static final String EVENT_STRING = "event";
+    /**
+     * String to register a delete command.
+     */
+    public static final String DELETE_STRING = "delete";
+    /**
+     * String to register a bye command.
+     */
+    public static final String BYE_STRING = "bye";
+    /**
+     * String to register a clear command.
+     */
+    public static final String CLEAR_STRING = "clear";
+    /**
+     * String to register a find command.
+     */
+    public static final String FIND_STRING = "find";
+    /**
      * Parsers the user's input to return the respective <code>Command</code>.
      * @param fullCommand A <code>String</code> of the user's full input.
      * @return The <code>Command</code> corresponding to what the user gave.
@@ -29,43 +69,43 @@ public class Parser {
         String[] splitted = fullCommand.split(" ");
         switch (splitted[0]) {
 
-        case "list":
+        case LIST_STRING:
             Command listC = new ListCommand(fullCommand);
             return listC;
 
-        case "mark":
+        case MARK_STRING:
             Command markC = new MarkCommand(fullCommand);
             return markC;
 
-        case "unmark":
+        case UNMARK_STRING:
             Command unmarkC = new UnmarkCommand(fullCommand);
             return unmarkC;
 
-        case "todo":
+        case TODO_STRING:
             Command todoC = new TodoCommand(fullCommand);
             return todoC;
 
-        case "deadline":
+        case DEADLINE_STRING:
             Command deadlineC = new DeadlineCommand(fullCommand);
             return deadlineC;
 
-        case "event":
+        case EVENT_STRING:
             Command eventC = new EventCommand(fullCommand);
             return eventC;
 
-        case "delete":
+        case DELETE_STRING:
             Command deleteC = new DeleteCommand(fullCommand);
             return deleteC;
 
-        case "bye":
+        case BYE_STRING:
             Command byeC = new ByeCommand(fullCommand);
             return byeC;
 
-        case "clear":
+        case CLEAR_STRING:
             Command clearC = new ClearCommand(fullCommand);
             return clearC;
 
-        case "find":
+        case FIND_STRING:
             Command findC = new FindCommand(fullCommand);
             return findC;
 

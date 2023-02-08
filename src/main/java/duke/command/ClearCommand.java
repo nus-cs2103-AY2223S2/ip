@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.exception.DukeBadInstructionFormatException;
+import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
@@ -36,6 +37,7 @@ public class ClearCommand extends Command {
             throw new DukeBadInstructionFormatException(
                     "Usage of *clear* command: clear");
         }
+        assert splitted[0].equals(Parser.CLEAR_STRING) : "Wrong command made a clear";
         tasks.clearAllTasks();
         storage.clearAllTasks();
         return ui.showClearTasksMessage();
