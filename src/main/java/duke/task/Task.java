@@ -61,6 +61,6 @@ public abstract class Task implements Serializable {
             return false;
         }
         Task task = (Task) obj;
-        return Objects.equals(description, task.description) && isDone == task.isDone;
+        return Objects.equals(description, task.description);
     }
 }
