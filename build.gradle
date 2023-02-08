@@ -43,13 +43,13 @@ test {
 }
 
 application {
-    mainClassName = "windycall.WindyCall"
+    mainClassName = "javafx.Launcher"
 }
 
 shadowJar {
     archiveBaseName = "windycall"
     archiveClassifier = null
-    archiveVersion = '1.0'
+    archiveVersion = '1.1'
 }
 
 checkstyle {
