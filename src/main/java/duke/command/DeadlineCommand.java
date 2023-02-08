@@ -40,6 +40,9 @@ public class DeadlineCommand extends AddTaskCommand {
      */
     @Override
     public void run(Ui ui, TaskList taskList, Storage storage, String... args) throws DukeException {
+        // Assert arguments has only 2 items: description, by.
+        assert args.length == 2;
+
         String description = args[0];
         String by = args[1];
 

@@ -41,6 +41,9 @@ public class EventCommand extends AddTaskCommand {
      */
     @Override
     public void run(Ui ui, TaskList taskList, Storage storage, String... args) throws DukeException {
+        // Assert arguments has only 3 items: description, from, to.
+        assert args.length == 3;
+
         String description = args[0];
         String from = args[1];
         String to = args[2];

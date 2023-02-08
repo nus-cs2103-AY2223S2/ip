@@ -33,6 +33,9 @@ public class ListCommand implements Command {
      */
     @Override
     public void run(Ui ui, TaskList taskList, Storage storage, String... args) {
+        // Assert arguments has no items.
+        assert args.length == 0;
+
         ui.showLine();
         ui.showText("Here are the tasks in your list:");
         for (int taskNo = 1; taskNo <= taskList.getTotalTasks(); taskNo++) {
