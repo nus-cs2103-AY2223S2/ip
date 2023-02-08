@@ -95,7 +95,7 @@ public class Parser {
         case BYE:
             return new ExitCommand();
         default:
-            assert false: "Should not reach here since unknown command exception is handled.";
+            assert false : "Should not reach here since unknown command exception is handled.";
             throw new UnknownCommandException();
         }
     }

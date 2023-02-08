@@ -4,7 +4,6 @@ import java.io.File;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import duke.task.Deadline;
 import duke.task.Event;
