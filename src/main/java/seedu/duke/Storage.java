@@ -44,19 +44,19 @@ public class Storage {
                 boolean isDone = Boolean.parseBoolean(taskDetails[1]);
                 switch (taskType) {
                 case "T":
-                    data.addTask(new Todo(taskDetails[2], isDone, taskType));
+                    data = data.addTask(new Todo(taskDetails[2], isDone, taskType));
                     break;
                 case "D":
                     String deadline = taskDetails[3];
                     LocalDateTime formattedDeadline = formatTimeStamp(deadline);
-                    data.addTask(new Deadline(taskDetails[2], isDone, taskType, formattedDeadline));
+                    data = data.addTask(new Deadline(taskDetails[2], isDone, taskType, formattedDeadline));
                     break;
                 case "E":
                     String from = taskDetails[3];
                     LocalDateTime formattedFrom = formatTimeStamp(from);
                     String to = taskDetails[4];
                     LocalDateTime formattedTo = formatTimeStamp(to);
-                    data.addTask(new Event(taskDetails[2], isDone, taskType, formattedFrom, formattedTo));
+                    data = data.addTask(new Event(taskDetails[2], isDone, taskType, formattedFrom, formattedTo));
                     break;
                 }
             }
