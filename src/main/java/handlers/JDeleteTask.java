@@ -1,5 +1,6 @@
 package handlers;
 
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -20,6 +21,7 @@ public class JDeleteTask implements IHandler {
 
     @Override
     public String take(String s) {
+        assert Objects.nonNull(ts);
         Matcher m = PATTERN.matcher(s);
         if (!m.matches()) {
             return "";
@@ -27,12 +29,12 @@ public class JDeleteTask implements IHandler {
         int no = Integer.parseInt(m.group(1));
         if (no <= 0 || no > ts.getTaskCount()) {
             return "Invalid task number.\n";
-        } else {
-            Task removed = ts.getTaskByNo(no);
-            ts.deleteByNo(no);
-            return String.format("Noted. I've removed this task:\n%s\nNow you have %d task(s) in the list.\n", removed,
-                    ts.getTaskCount());
         }
+
+        Task removed = ts.getTaskByNo(no);
+        ts.deleteByNo(no);
+        return String.format("Noted. I've removed this task:\n%s\nNow you have %d task(s) in the list.\n", removed,
+                ts.getTaskCount());
     }
 
     @Override

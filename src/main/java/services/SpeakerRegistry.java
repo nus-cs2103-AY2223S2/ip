@@ -23,8 +23,6 @@ public final class SpeakerRegistry {
      * @param str String to say.
      */
     public void broadcast(String str) {
-        for (ISpeaker s : speakerRegistry) {
-            s.speak(str);
-        }
+        speakerRegistry.forEach(s -> s.speak(str));
     }
 }
