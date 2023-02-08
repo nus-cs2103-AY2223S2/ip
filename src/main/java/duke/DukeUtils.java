@@ -28,6 +28,7 @@ public class DukeUtils {
      * @return a string, representing the {@code LocalDate} instance
      */
     public static String convertDateToString(LocalDate date) {
+        assert date != null;
         return date.format(OUTPUT_FORTMAT);
     }
 
@@ -39,6 +40,7 @@ public class DukeUtils {
      * @return an {@code Optional} instance holding the conversion result
      */
     public static Optional<LocalDate> convertStringToDate(String input) {
+        assert input != null;
         try {
             return Optional.of(LocalDate.parse(input, INPUT_FORMAT));
         } catch (DateTimeParseException ex) {
@@ -54,6 +56,7 @@ public class DukeUtils {
      * @return an {@code OptionalInt} holding the result of the conversion
      */
     public static OptionalInt convertStringToInt(String input) {
+        assert input != null;
         try {
             return OptionalInt.of(Integer.parseInt(input));
         } catch (NumberFormatException ex) {
