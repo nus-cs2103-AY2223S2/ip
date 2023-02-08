@@ -34,6 +34,44 @@ public class FileStorage implements Storage {
         this.fileName = fileName;
     }
 
+    private ToDo getToDoFromLineTokens(String[] lineTokens) {
+        boolean isDone = Integer.parseInt(lineTokens[1]) == 1;
+        String description = lineTokens[2];
+
+        ToDo todo = new ToDo(description);
+        todo.setIsDone(isDone);
+
+        return todo;
+    }
+
+    private Deadline getDeadlineFromLineTokens(String[] lineTokens) {
+        boolean isDone = Integer.parseInt(lineTokens[1]) == 1;
+        String description = lineTokens[2];
+        String by = lineTokens[3];
+
+        LocalDateTime byDateTime = LocalDateTime.parse(by, DateTimeUtils.DATE_TIME_FORMAT_INPUT);
+
+        Deadline deadline = new Deadline(description, byDateTime);
+        deadline.setIsDone(isDone);
+
+        return deadline;
+    }
+
+    private Event getEventFromLineTokens(String[] lineTokens) {
+        boolean isDone = Integer.parseInt(lineTokens[1]) == 1;
+        String description = lineTokens[2];
+        String from = lineTokens[3];
+        String to = lineTokens[4];
+
+        LocalDateTime fromDateTime = LocalDateTime.parse(from, DateTimeUtils.DATE_TIME_FORMAT_INPUT);
+        LocalDateTime toDateTime = LocalDateTime.parse(to, DateTimeUtils.DATE_TIME_FORMAT_INPUT);
+
+        Event event = new Event(description, fromDateTime, toDateTime);
+        event.setIsDone(isDone);
+
+        return event;
+    }
+
     /**
      * Loads saved tasks from file.
      *
@@ -51,34 +89,13 @@ public class FileStorage implements Storage {
             while (fileScanner.hasNextLine()) {
                 String[] lineTokens = fileScanner.nextLine().split(";");
                 String taskType = lineTokens[0];
-                boolean isDone = Integer.parseInt(lineTokens[1]) == 1;
-                String description = lineTokens[2];
 
                 if (taskType.equals("T")) {
-                    ToDo todo = new ToDo(description);
-                    todo.setIsDone(isDone);
-
-                    savedTasks.add(todo);
+                    savedTasks.add(getToDoFromLineTokens(lineTokens));
                 } else if (taskType.equals("D")) {
-                    String by = lineTokens[3];
-
-                    LocalDateTime byDateTime = LocalDateTime.parse(by, DateTimeUtils.DATE_TIME_FORMAT_INPUT);
-
-                    Deadline deadline = new Deadline(description, byDateTime);
-                    deadline.setIsDone(isDone);
-
-                    savedTasks.add(deadline);
+                    savedTasks.add(getDeadlineFromLineTokens(lineTokens));
                 } else if (taskType.equals("E")) {
-                    String from = lineTokens[3];
-                    String to = lineTokens[4];
-
-                    LocalDateTime fromDateTime = LocalDateTime.parse(from, DateTimeUtils.DATE_TIME_FORMAT_INPUT);
-                    LocalDateTime toDateTime = LocalDateTime.parse(to, DateTimeUtils.DATE_TIME_FORMAT_INPUT);
-
-                    Event event = new Event(description, fromDateTime, toDateTime);
-                    event.setIsDone(isDone);
-
-                    savedTasks.add(event);
+                    savedTasks.add(getEventFromLineTokens(lineTokens));
                 }
             }
 
@@ -89,6 +106,21 @@ public class FileStorage implements Storage {
         }
 
         return savedTasks;
+    }
+
+    private void writeToDoToFile(ToDo todo, FileWriter fileWriter) throws IOException {
+        fileWriter.write(String.format("T;%d;%s\n", todo.isDone() ? 1 : 0, todo.getDescription()));
+    }
+
+    private void writeDeadlineToFile(Deadline deadline, FileWriter fileWriter) throws IOException {
+        fileWriter.write(String.format("D;%d;%s;%s\n", deadline.isDone() ? 1 : 0, deadline.getDescription(),
+                deadline.getBy().format(DateTimeUtils.DATE_TIME_FORMAT_INPUT)));
+    }
+
+    private void writeEventToFile(Event event, FileWriter fileWriter) throws IOException {
+        fileWriter.write(String.format("E;%d;%s;%s;%s\n", event.isDone() ? 1 : 0, event.getDescription(),
+                event.getFrom().format(DateTimeUtils.DATE_TIME_FORMAT_INPUT),
+                event.getTo().format(DateTimeUtils.DATE_TIME_FORMAT_INPUT)));
     }
 
     /**
@@ -104,22 +136,13 @@ public class FileStorage implements Storage {
             for (Task task : tasks) {
                 switch (task.getTypeOfTask()) {
                 case TODO:
-                    ToDo todo = (ToDo) task;
-                    fileWriter.write(String.format("T;%d;%s\n", todo.isDone() ? 1 : 0, todo.getDescription()));
-
+                    writeToDoToFile((ToDo) task, fileWriter);
                     break;
                 case DEADLINE:
-                    Deadline deadline = (Deadline) task;
-                    fileWriter.write(String.format("D;%d;%s;%s\n", deadline.isDone() ? 1 : 0, deadline.getDescription(),
-                            deadline.getBy().format(DateTimeUtils.DATE_TIME_FORMAT_INPUT)));
-
+                    writeDeadlineToFile((Deadline) task, fileWriter);
                     break;
                 case EVENT:
-                    Event event = (Event) task;
-                    fileWriter.write(String.format("E;%d;%s;%s;%s\n", event.isDone() ? 1 : 0, event.getDescription(),
-                            event.getFrom().format(DateTimeUtils.DATE_TIME_FORMAT_INPUT),
-                            event.getTo().format(DateTimeUtils.DATE_TIME_FORMAT_INPUT)));
-
+                    writeEventToFile((Event) task, fileWriter);
                     break;
                 default:
                 }
