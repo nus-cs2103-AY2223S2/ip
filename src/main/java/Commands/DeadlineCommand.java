@@ -18,6 +18,7 @@ public class DeadlineCommand extends Command {
      * @param userInput The user input.
      */
     public DeadlineCommand(String userInput) {
+        assert userInput != null;
         this.description = getDescription(userInput);
         this.by = getBy(userInput);
     }
@@ -53,6 +54,9 @@ public class DeadlineCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
+        assert tasks != null;
+        assert ui != null;
+        assert storage != null;
         Deadline deadline = new Deadline(this.description, this.by);
         tasks.addTask(deadline);
         return ui.showAddTask(deadline, tasks.getSize());
