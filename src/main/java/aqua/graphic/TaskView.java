@@ -20,8 +20,11 @@ import javafx.scene.text.TextAlignment;
 public class TaskView extends UiComponent<VBox> {
     private static final String PATH_FXML_FILE = "TaskView.fxml";
 
+    private static final String STYLECLASS_DEADLINE = "deadline-box";
+    private static final String STYLECLASS_EVENT = "event-box";
+    private static final String STYLECLASS_TODO = "todo-label";
+
     private static final PseudoClass PSEUDO_CLASS_COMPLETE = PseudoClass.getPseudoClass("complete");
-    private static final PseudoClass PSEUDO_CLASS_INCOMPLETE = PseudoClass.getPseudoClass("incomplete");
 
     @FXML private VBox scheduleDisplayArea;
     @FXML private VBox todoDisplayArea;
@@ -41,10 +44,10 @@ public class TaskView extends UiComponent<VBox> {
 
 
     private void initialiseSchedule(LocalDateTime startTime, List<UserTask> tasks) {
-        List<SchedulePeriod> timeables = tasks.stream()
+        List<SchedulePeriod> periods = tasks.stream()
                 .map(task -> new TimedTask(task))
                 .collect(Collectors.toList());
-        scheduleDisplayArea.getChildren().add(new WeekSchedule(startTime, timeables));
+        scheduleDisplayArea.getChildren().add(new WeekSchedule(startTime, periods));
     }
 
 
@@ -58,7 +61,7 @@ public class TaskView extends UiComponent<VBox> {
 
 
     /**
-     * A {@code ScheduleTimeable} of a {@code UserTask} that has minimally
+     * A {@code SchedulePeriod} of a {@code UserTask} that has minimally
      * an end time.
      */
     private static class TimedTask extends SchedulePeriod {
@@ -85,9 +88,9 @@ public class TaskView extends UiComponent<VBox> {
         @Override
         public List<String> getStyleClass() {
             if (getStart().isEqual(getEnd())) {
-                return List.of("deadline-box");
+                return List.of(STYLECLASS_DEADLINE);
             }
-            return List.of("schedule-box");
+            return List.of(STYLECLASS_EVENT);
         }
 
 
@@ -96,7 +99,7 @@ public class TaskView extends UiComponent<VBox> {
             if (task.isComplete()) {
                 return List.of(PSEUDO_CLASS_COMPLETE);
             }
-            return List.of(PSEUDO_CLASS_INCOMPLETE);
+            return List.of();
         }
 
 
@@ -121,11 +124,11 @@ public class TaskView extends UiComponent<VBox> {
 
         UntimedTaskDisplay(UserTask task) {
             setMaxWidth(MAX_WIDTH);
-            getStyleClass().add("todo-label");
+            getStyleClass().add(STYLECLASS_TODO);
             if (task.isComplete()) {
                 pseudoClassStateChanged(PSEUDO_CLASS_COMPLETE, true);
             } else {
-                pseudoClassStateChanged(PSEUDO_CLASS_INCOMPLETE, true);
+                pseudoClassStateChanged(PSEUDO_CLASS_COMPLETE, false);
             }
             initialiseLabel(task.toString());
         }
