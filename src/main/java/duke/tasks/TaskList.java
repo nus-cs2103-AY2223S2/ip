@@ -22,11 +22,24 @@ public class TaskList implements Serializable {
         this.taskList = taskList;
     }
 
-    public void printAll() {
+    public String toString() {
+        String taskListString = "";
+        for (int i = 0; i < taskList.size(); i++) {
+            String printedString = String.format("%d. %s \n", i + 1, taskList.get(i).toString());
+            taskListString.concat(printedString);
+        }
+        return taskListString;
+    }
+
+    public String[] getPrintableTaskList() {
+
+        List<String> printableStringList = new ArrayList<>();
         for (int i = 0; i < taskList.size(); i++) {
             String printedString = String.format("%d. %s ", i + 1, taskList.get(i).toString());
-            System.out.println(printedString);
+            printableStringList.add(printedString);
         }
+        return printableStringList.toArray(new String[0]);
+
     }
 
     /**
@@ -45,7 +58,7 @@ public class TaskList implements Serializable {
      * @param taskIndex the index of the {@code Task} instance obtained through list command.
      * @return The string representation of the deleted task.
      */
-    public String deleteTasks(int taskIndex) {
+    public String deleteTask(int taskIndex) {
         Task targetTask = taskList.get(taskIndex - 1);
         taskList.remove(taskIndex - 1);
         Storage.writeTaskList(this);

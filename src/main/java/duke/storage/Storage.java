@@ -70,14 +70,5 @@ public class Storage {
         }
     }
 
-    // public static void main(String[] args) {
-    // Storage storage = new Storage();
-    // TaskList taskList = storage.readTaskList();
-    // taskList.addTask(new ToDo("1"));
-    // taskList.addTask(new ToDo("2"));
-    // taskList.addTask(new ToDo("3"));
-    // storage.writeTaskList(taskList);
-    // TaskList taskList2 = storage.readTaskList();
-    // taskList2.printAll();
-    // }
+
 }

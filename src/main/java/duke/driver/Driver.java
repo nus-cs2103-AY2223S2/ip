@@ -7,6 +7,7 @@ import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.tasks.ToDo;
+import duke.ui.Ui;
 import duke.command.DukeCommand;
 
 public class Driver {
@@ -14,21 +15,6 @@ public class Driver {
 
     public Driver() {}
 
-    private static final String BAR =
-            "    ____________________________________________________________";
-
-    private static final String INDENTATION = "     ";
-    private static final String NEW_LINE = "\n";
-
-
-    private static void echo(String... texts) {
-        System.out.println(BAR);
-        for (String text : texts) {
-            System.out.println(INDENTATION + text);
-        }
-        System.out.println(BAR);
-        System.out.print(NEW_LINE);
-    }
 
     Scanner scanner = new Scanner(System.in);
 
@@ -47,21 +33,19 @@ public class Driver {
                 DukeCommand command = parser.getCommand();
 
                 if (command.equals(DukeCommand.BYE)) {
-                    echo("Bye. Hope to see you again soon!");
+                    Ui.prettyPrint("Bye. Hope to see you again soon!");
                     scanner.close();
                     return taskList;
                 }
 
                 switch (command) {
                 case LIST: {
-                    System.out.println(BAR);
-                    System.out.println(INDENTATION + "list");
-                    taskList.printAll();
-                    System.out.println(BAR);
+                    String[] taskStringList = taskList.getPrintableTaskList();
+                    Ui.prettyPrint(taskStringList);
                     break;
                 }
                 case BYE: {
-                    echo("Bye. Hope to see you again soon!");
+                    Ui.prettyPrint("Bye. Hope to see you again soon!");
                     scanner.close();
                     break;
                 }
@@ -71,8 +55,8 @@ public class Driver {
                     Deadline deadline = new Deadline(description, by);
                     taskList.addTask(deadline);
                     int numTasks = taskList.getNumTasks();
-                    echo("Got it. I've added this task:", "  " + deadline.toString(),
-                            "Now you have " + numTasks + " tasks in the list.");
+
+                    Ui.printAddTask(deadline, numTasks);
                     break;
                 }
                 case EVENT: {
@@ -80,10 +64,11 @@ public class Driver {
                     String from = commandArgs[1];
                     String to = commandArgs[2];
                     Event event = new Event(description, from, to);
+
                     taskList.addTask(event);
                     int numTasks = taskList.getNumTasks();
-                    echo("Got it. I've added this task:", "  " + event.toString(),
-                            "Now you have " + numTasks + " tasks in the list.");
+
+                    Ui.printAddTask(event, numTasks);
                     break;
                 }
                 case TODO: {
@@ -91,36 +76,38 @@ public class Driver {
                     Task task = new ToDo(description);
                     taskList.addTask(task);
                     int numTasks = taskList.getNumTasks();
-                    echo("Got it. I've added this task:", "  " + task.toString(),
-                            "Now you have " + numTasks + " tasks in the list.");
+
+                    Ui.printAddTask(task, numTasks);
                     break;
                 }
                 case FIND: {
                     String keyword = commandArgs[0];
-                    echo("Here are the matching tasks in your list:");
-                    taskList.find(keyword).printAll();
+
+                    Ui.prettyPrint("Here are the matching tasks in your list:",
+                            taskList.find(keyword).toString());
                     break;
                 }
                 case MARK: {
                     int taskIndex = Integer.parseInt(commandArgs[0]);
-                    echo("Nice! I've marked this task as done:",
-                            " " + taskList.markTask(taskIndex));
+                    Ui.prettyPrint("Nice! I've marked this task as done:",
+                            taskList.markTask(taskIndex));
                     break;
                 }
                 case UNMARK: {
                     int taskIndex = Integer.parseInt(commandArgs[0]);
-                    echo("OK, I've marked this task as not done yet:",
-                            " " + taskList.unmarkTask(taskIndex));
+                    Ui.prettyPrint("OK, I've marked this task as not done yet:",
+                            taskList.unmarkTask(taskIndex));
                     break;
                 }
                 case DELETE: {
                     int taskIndex = Integer.parseInt(commandArgs[0]);
-                    echo("Noted. I've removed this task:", " " + taskList.deleteTasks(taskIndex));
+                    Ui.prettyPrint("Noted. I've removed this task:",
+                            taskList.deleteTask(taskIndex));
                     break;
                 }
                 }
             } catch (Error e) {
-                echo(e.getMessage());
+                Ui.prettyPrint(e.getMessage());
             }
         }
     }
