@@ -39,6 +39,7 @@ public class Storage {
      *              calling this method.
      */
     void updateData(TaskList tasks) {
+        assert(tasks != null);
         File file = new File(PATHNAME);
         file.getParentFile().mkdirs();
         try {

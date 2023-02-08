@@ -53,11 +53,12 @@ public class Duke extends Application {
      * @return A <code>Message</code> object containing the response of the bot to the user's request
      */
     public Message respondToMessage(Message msg) {
+        assert(msg != null);
         String input = msg.getMessage();
         String[] tokens = parser.parseUserInput(input);
 
         if (tokens.length == 1 && tokens[0].equals("bye")) {
-            exit();//todo
+            exit();
             return new Message("This message should never show up");
 
         } else if (tokens.length == 1 && tokens[0].equals("list")) {
@@ -65,7 +66,7 @@ public class Duke extends Application {
 
         } else if (tokens[0].equals("mark")) {
             try {
-                Task updatedTask = taskList.markListItem(tokens, ui);
+                Task updatedTask = taskList.markListItem(tokens);
                 return new Message("Nice! I've marked this task as done:\n"
                         + updatedTask.toString() + "\n");
             } catch (DukeException e) {
@@ -74,7 +75,7 @@ public class Duke extends Application {
 
         } else if (tokens[0].equals("unmark")) {
             try {
-                Task updatedTask = taskList.unmarkListItem(tokens, ui);
+                Task updatedTask = taskList.unmarkListItem(tokens);
                 return new Message("OK, I've marked this task as not done yet:\n"
                         + updatedTask.toString() + "\n");
             } catch (DukeException e) {
@@ -99,7 +100,7 @@ public class Duke extends Application {
 
         } else if (tokens[0].equals("event")) {
             try {
-                Task addedTask = taskList.addEvent(tokens, ui);
+                Task addedTask = taskList.addEvent(tokens);
                 return new Message(taskAddedMessage(addedTask));
             } catch (DukeException e) {
                 return new Message(e.getMessage());

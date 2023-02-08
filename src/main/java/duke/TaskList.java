@@ -58,6 +58,7 @@ public class TaskList {
      * @return The added <code>ToDo</code>.
      */
     ToDo addToDo(String[] tokens) throws DukeException {
+        assert(tokens[0].equals("todo"));
         StringBuilder sb = new StringBuilder();
         if (tokens.length < 2) {
             throw new DukeException("The description of a todo cannot be empty");
@@ -79,6 +80,8 @@ public class TaskList {
      * @return The added <code>Deadline</code>.
      */
     Deadline addDeadline(String[] tokens) throws DukeException {
+        assert(tokens[0].equals("Deadline"));
+        assert(tokens.length >= 4);
         StringBuilder sb = new StringBuilder();
         int idxDelimiter = Arrays.asList(tokens).indexOf("/by");
         if (idxDelimiter == -1) {
@@ -110,12 +113,12 @@ public class TaskList {
     /**
      * Checks the validity of the format of a <code>DeadLine</code> task, and adds it to the list.
      * @param tokens <code>String[]</code> of arguments from <code>Parser</code>.
-     * @param ui Instance of <code>Ui</code> associated with the calling instance of <code>Duke</code>.
      * @throws DukeException In the event that the name of the task is not specified, or the from and to date times are
      * not specified in the correct format with <code>/from</code> and <code>/to</code> tags.
      * @return The added <code>Event</code>.
      */
-    Event addEvent(String[] tokens, UiController ui) throws DukeException {
+    Event addEvent(String[] tokens) throws DukeException {
+        assert(tokens[0].equals("event"));
         StringBuilder sb = new StringBuilder();
         int idxFrom = Arrays.asList(tokens).indexOf("/from");
         int idxTo = Arrays.asList(tokens).indexOf("/to");
@@ -159,10 +162,9 @@ public class TaskList {
     /**
      * Marks specified <code>Task</code> in the list.
      * @param tokens <code>String[]</code> of arguments from <code>Parser</code>, specifying the index to mark.
-     * @param ui Instance of <code>Ui</code> associated with the calling instance of <code>Duke</code>.
      * @return The marked <code>Task</code>
      */
-    Task markListItem(String[] tokens, UiController ui) throws DukeException {
+    Task markListItem(String[] tokens) throws DukeException {
         try {
             int listIndex = Integer.parseInt(tokens[1])-1;
             tasks.get(listIndex).setStatus("X");
@@ -177,10 +179,9 @@ public class TaskList {
     /**
      * Unmarks specified <code>Task</code> in list.
      * @param tokens <code>String[]</code> of arguments from <code>Parser</code>, specifying the index to unmark.
-     * @param ui Instance of <code>Ui</code> associated with the calling instance of <code>Duke</code>.
      * @return The unmarked <code>Task</code>.
      */
-    Task unmarkListItem(String[] tokens, UiController ui) throws DukeException {
+    Task unmarkListItem(String[] tokens) throws DukeException {
         try {
             int listIndex = Integer.parseInt(tokens[1]) - 1;
             tasks.get(listIndex).setStatus(" ");
@@ -224,6 +225,7 @@ public class TaskList {
      * <code>TaskList</code>.
      */
     List<Integer> getMatchingItemsIndices(String[] tokens) throws DukeException {
+        assert(tokens != null);
         if (tokens.length == 1) {
             throw new DukeException("please provide a keyword or keywords to search for");
         }
@@ -265,6 +267,7 @@ public class TaskList {
      * @return Formatted <code>String</code> representation of the desired items in list.
      */
     public String getItemListAsResponseString(List<Integer> indices) {
+        assert(indices != null);
         StringBuilder sb = new StringBuilder();
         sb.append("Here are the wanted tasks in your list:\n");
         for (int i : indices) {
