@@ -102,7 +102,7 @@ public class Parser {
      * @return The LocalDateTime.
      * @throws InvalidDateFormatException Throws if date format is incorrect.
      */
-    public static LocalDateTime parseDate(String userInput) throws InvalidDateFormatException{
+    public static LocalDateTime parseDate(String userInput) throws InvalidDateFormatException {
         String[] temp = userInput.split(" ");
         if (temp.length == 1) {
             userInput += " 0000";
@@ -133,11 +133,11 @@ public class Parser {
      */
     private static void checkForNumber(String message) throws InvalidInputException {
         String[] temp = message.split(" ");
-        try {  
-            Double.parseDouble(temp[1]);  
-        } catch (NumberFormatException e){  
+        try {
+            Double.parseDouble(temp[1]);
+        } catch (NumberFormatException e) {
             throw new InvalidInputException(e);
-        }  
+        }
     }
 
     /**

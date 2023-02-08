@@ -55,13 +55,13 @@ public class UpdateCommand extends Command {
      */
     public String getNewDetail(String userInput) {
         String[] temp = userInput.split("/")[1].split(" ");
-        String output =  "";
+        String output = "";
         for (int i = 1; i < temp.length; i++) {
             output += temp[i] + " ";
         }
         return output.trim();
     }
-    
+
     /**
      * Updates the respective detail of the task.
      * @param task The task to update.
