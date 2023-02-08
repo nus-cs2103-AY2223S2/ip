@@ -100,7 +100,7 @@ public class Storage {
             TaskList tasks = new TaskList();
             for (String line: saveData) {
                 String[] data = line.split(" \\| ", 3);
-                if (data.length == 3) {
+                if (data.length != 3) {
                     throw new DukeException("Saved data corrupted");
                 }
                 boolean isDone = data[1].equals("X");
