@@ -7,6 +7,12 @@ import java.util.stream.Collectors;
 import duke.model.ExecutionResult;
 import duke.model.Model;
 
+/**
+ * Controller of the cli-based version of the application.
+ * <p>
+ * All methods in this class are static methods, as there is no need to create multiple instances of
+ * {@code CliController}. Singleton pattern is unnecessary here.
+ */
 public class CliController {
 
     private static final String LINE =
@@ -18,6 +24,11 @@ public class CliController {
 
     private CliController() {}
 
+    /**
+     * Sets the model that controls the logic of the application.
+     * 
+     * @param model the model to be used by this controller
+     */
     public static void setModel(Model model) {
         CliController.model = model;
     }
@@ -42,6 +53,9 @@ public class CliController {
         echo("Hello! I'm Duke\nWhat can I do for you?");
     }
 
+    /**
+     * Waits for the next input from the user, and handles that input.
+     */
     public static void handleUserInput() {
         String input = sc.nextLine();
         ExecutionResult result = model.execute(input);
@@ -49,6 +63,12 @@ public class CliController {
         exitStatus = result.getExitStatus();
     }
 
+    /**
+     * Checks the exit status of the application.
+     * 
+     * @return {@code true} if the application should be terminated (after the user enters a "bye"
+     *         command), otherwise {@code false}
+     */
     public static boolean shouldExit() {
         return exitStatus;
     }

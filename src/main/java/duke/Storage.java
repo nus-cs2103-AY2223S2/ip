@@ -19,7 +19,7 @@ public class Storage {
      * Checks whether the log file exists or not. If the log file does not exists, a new log file
      * will be created.
      *
-     * @return {@code true} if the log file exists, otherwise {@code false}.
+     * @return {@code true} if the log file exists, otherwise {@code false}
      */
     private static boolean createFileIfNotExists() {
         File file = PATH_TO_FILE.toFile();
