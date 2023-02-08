@@ -58,6 +58,6 @@ public class Event extends Task {
                 .format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         String toDateString = this.chronoToDate.isEmpty() ? this.toDate : this.chronoToDate.get()
                 .format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        return String.format(" (from: %s to %s)", fromDateString, toDateString);
+        return String.format(" (from: %s to: %s)", fromDateString, toDateString);
     }
 }
