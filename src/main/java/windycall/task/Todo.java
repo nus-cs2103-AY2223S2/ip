@@ -1,4 +1,4 @@
-package windycall;
+package windycall.task;
 
 public class Todo extends Task {
 

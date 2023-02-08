@@ -1,6 +1,8 @@
 package windycall;
 
 import org.junit.jupiter.api.Test;
+import windycall.parser.Parser;
+import windycall.task.Deadline;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

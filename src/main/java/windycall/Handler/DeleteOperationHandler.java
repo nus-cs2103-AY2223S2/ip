@@ -1,6 +1,9 @@
-package windycall;
+package windycall.Handler;
 
 import javafx.util.Pair;
+import windycall.parser.Parser;
+import windycall.storage.Storage;
+import windycall.task.Task;
 
 import java.util.List;
 
@@ -12,7 +15,7 @@ public class DeleteOperationHandler extends OperationHandler {
     }
 
     public static String handle(Parser parser, List<Task> tasks, String[] parts, Storage storage) {
-        Pair<Integer, String> info = parser.getMarkIndex(parts);
+        Pair<Integer, String> info = parser.getDeleteIndex(parts);
         int num = info.getKey();
         String message = info.getValue();
         if (num >= 1 && num <= tasks.size()) {

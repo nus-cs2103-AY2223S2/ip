@@ -1,8 +1,14 @@
 package windycall;
 
+import windycall.Handler.*;
+import windycall.exception.WindyCallException;
+import windycall.parser.Parser;
+import windycall.storage.Storage;
+import windycall.task.Task;
+import windycall.ui.Ui;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 /**
  * Serves as a trigger of the whole WindyCall chatBox application.
@@ -50,7 +56,7 @@ public class WindyCall {
             default:
                 String returnedMessage;
                 try {
-                    returnedMessage = AddTaskHandler.addTask(userCommand, tasks, storage);
+                    returnedMessage = AddTaskHandler.addTask(userCommand, tasks, storage, parser);
                 } catch (WindyCallException e) {
                     returnedMessage = e.getMessage();
                 }

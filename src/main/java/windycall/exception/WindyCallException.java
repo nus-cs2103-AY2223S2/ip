@@ -1,4 +1,4 @@
-package windycall;
+package windycall.exception;
 
 public class WindyCallException extends Exception {
     public WindyCallException(String message) {
