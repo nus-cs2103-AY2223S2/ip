@@ -1,11 +1,9 @@
 package duke.ui;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
 
-import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -28,11 +26,6 @@ public class Ui {
         br = new BufferedReader(new InputStreamReader(System.in));
     }
 
-    public void printWelcome() {
-        System.out.println("           Hello! I am\n" + logo);
-        System.out.println("    What can I do for you?");
-    }
-
     public void printLine() {
         System.out.println(line);
     }
@@ -43,22 +36,6 @@ public class Ui {
 
     public String showInvalidTimeError() {
         return "Invalid datetime. Syntax: YYYY-MM-DD";
-    }
-
-    public String readCommand() throws DukeException {
-        String command;
-
-        try {
-            command = br.readLine().trim();
-        } catch (IOException e) {
-            command = "";
-        }
-
-        if (command.isEmpty()) {
-            throw new DukeException("☹ OOPS!!! I'm sorry, but input cannot be empty");
-        } else {
-            return command;
-        }
     }
 
     public String printTaskSaved() {
@@ -73,27 +50,34 @@ public class Ui {
         return task.toString();
     }
 
+    /**
+     * Prints out the list of existing tasks
+     *
+     * @param taskList List of existing tasks
+     * @return String representation of list of tasks
+     */
     public String printList(TaskList taskList) {
 
-        try {
-            if (taskList.isEmpty()) {
-                return "You have nothing in your tasklist";
-            }
-
-            String output = "Here are the tasks in your list: \n";
-            output += taskList.printList();
-
-            return output;
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("hi");
+        if (taskList.isEmpty()) {
+            return "You have nothing in your tasklist";
         }
-        return "";
+
+        String output = "Here are the tasks in your list: \n";
+        output += taskList.listify();
+
+        return output;
     }
 
     public String printNoTaskWithKeywordFound(List<String> keyword) {
         return String.format("Sorry. No tasks were found to contain '%s' keyword.", keyword);
     }
 
+    /**
+     * Print out list of tasks that matches with keyword
+     *
+     * @param taskList TaskList to be compared against
+     * @return String representation of list of matching tasks
+     */
     public String printFoundList(TaskList taskList) {
         String output = "Here are the matching tasks in your list: \n";
 
@@ -117,6 +101,13 @@ public class Ui {
         return "Noted. I've removed this task:\n" + task;
     }
 
+    /**
+     * Print when added task successfully
+     *
+     * @param task     Task to be added
+     * @param taskList List of existing tasks
+     * @return String output to be seen by users
+     */
     public String printAddedTask(Task task, TaskList taskList) {
         String output = "Got it. I've added this task: \n" + task + "\n";
         output += "Now you have " + taskList.size() + " tasks in the list.";
