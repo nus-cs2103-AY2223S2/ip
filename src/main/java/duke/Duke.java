@@ -10,6 +10,9 @@ import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.Todo;
 
+/**
+ * Main class of Duke Application
+ */
 public class Duke {
 
     private Storage storage;
@@ -190,10 +193,10 @@ public class Duke {
             throw new DukeException(" ☹ OOPS!!! The item number is out of range.");
         }
 
-        storage.deleteEntry(taskNum-1);
+        storage.deleteEntry(taskNum - 1);
 
-        Task delTask = tasks.getTask(taskNum-1);
-        tasks.deleteTask(taskNum-1);
+        Task delTask = tasks.getTask(taskNum - 1);
+        tasks.deleteTask(taskNum - 1);
         String message = "Noted. I've removed this task:\n " + delTask.toString();
         message += "\nNow you have " + tasks.numTasks() + " tasks in the list.";
         ui.dukeSpeak(message);

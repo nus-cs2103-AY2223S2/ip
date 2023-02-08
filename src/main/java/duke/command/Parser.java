@@ -1,14 +1,17 @@
 package duke.command;
 
-import duke.command.Command;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
+
 import duke.exception.DukeException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Todo;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
 
+/**
+ * Processes user input.
+ */
 public class Parser {
 
     /**
@@ -23,7 +26,7 @@ public class Parser {
             if (allCommands[i] == Command.INVALID) {
                 break;
             }
-            if (allCommands[i].toString().equals(inputCommand.toUpperCase())){
+            if (allCommands[i].toString().equals(inputCommand.toUpperCase())) {
                 return allCommands[i];
             }
         }
@@ -67,10 +70,11 @@ public class Parser {
             if (dateTimeString.length == 2) {
                 timeString = dateTimeString[1].substring(0, 2) + ":" + dateTimeString[1].substring(2);
             }
-            LocalDateTime dueDate = LocalDateTime.parse(dateTimeString[0] + "T" + timeString); // format: 2007-12-03T10:15:30
+            // format: 2007-12-03T10:15:30
+            LocalDateTime dueDate = LocalDateTime.parse(dateTimeString[0] + "T" + timeString);
             Deadline tempDeadline = new Deadline(dlString[0], dueDate);
-            return  tempDeadline;
-        } catch(DateTimeParseException dateTimeParseException) {
+            return tempDeadline;
+        } catch (DateTimeParseException dateTimeParseException) {
             throw new DukeException("Hey! Incorrect format for date-time! Try:  yyyy-mm-dd hhmm");
         }
     }
@@ -150,7 +154,7 @@ public class Parser {
      * @return task id to identify task to be deleted.
      * @throws DukeException when user input is invalid.
      */
-    public static int parseDeleteTask(String[] input) throws DukeException{ // returns task id
+    public static int parseDeleteTask(String[] input) throws DukeException { // returns task id
         if (input.length == 1 || input[1].isEmpty()) {
             throw new DukeException(" ☹ OOPS!!! The item number is required to delete.");
         }
@@ -158,6 +162,12 @@ public class Parser {
         return taskNum;
     }
 
+    /**
+     * Extracts search term from user input
+     * @param input user input to eb parsed
+     * @return the extracted search term.
+     * @throws DukeException when user input is invalid.
+     */
     public static String parseSearch(String[] input) throws DukeException {
         if (input.length == 1 || input[1].isEmpty()) {
             throw new DukeException("You didn't say what you're looking for.");

@@ -1,11 +1,5 @@
 package duke.repository;
 
-import duke.exception.DukeException;
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.Task;
-import duke.tasks.Todo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -15,6 +9,15 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.exception.DukeException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.Todo;
+
+/**
+ * Saves tasks in persistent storage.
+ */
 public class Storage {
     private String filePath;
     private final String ERROR_MSG = "Unsuccessful... Something went wrong... :(";

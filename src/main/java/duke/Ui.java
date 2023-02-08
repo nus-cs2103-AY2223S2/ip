@@ -1,8 +1,11 @@
 package duke;
 
-import java.awt.*;
+
 import java.util.Scanner;
 
+/**
+ * Deals with interactions with the user
+ */
 public class Ui {
     private Scanner scan;
     private final String DIVIDER = "____________________________________________________________";

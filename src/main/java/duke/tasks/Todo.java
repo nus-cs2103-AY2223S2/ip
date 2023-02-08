@@ -1,7 +1,8 @@
 package duke.tasks;
 
-import duke.tasks.Task;
-
+/**
+ * Represents user todo task.
+ */
 public class Todo extends Task {
 
     /**

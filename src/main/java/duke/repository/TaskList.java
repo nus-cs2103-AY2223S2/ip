@@ -1,9 +1,12 @@
 package duke.repository;
 
-import duke.tasks.Task;
-
 import java.util.ArrayList;
 
+import duke.tasks.Task;
+
+/**
+ * Holds all user tasks.
+ */
 public class TaskList {
     private ArrayList<Task> taskList;
 

@@ -1,5 +1,8 @@
 package duke.exception;
 
+/**
+ * Handles error in Duke Application.
+ */
 public class DukeException extends Exception {
     private String message;
 

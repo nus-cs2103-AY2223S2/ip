@@ -1,5 +1,8 @@
 package duke.tasks;
 
+/**
+ * Represents user task.
+ */
 public class Task {
     private String description;
     private boolean isDone;
@@ -10,9 +13,9 @@ public class Task {
      * @param description Description of the task.
      */
     public Task(String description) {
-            this.description = description;
-            this.isDone = false;
-        }
+        this.description = description;
+        this.isDone = false;
+    }
 
     /**
      * Returns status icon of the task.
@@ -42,7 +45,7 @@ public class Task {
     /**
      * Marks task as incomplete.
      */
-    public void unmarkTask(){
+    public void unmarkTask() {
         this.isDone = false;
     }
 
@@ -53,6 +56,6 @@ public class Task {
      */
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() +"] " + this.getDescription();
+        return "[" + this.getStatusIcon() + "] " + this.getDescription();
     }
 }
