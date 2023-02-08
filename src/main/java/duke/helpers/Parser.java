@@ -54,6 +54,9 @@ public class Parser {
         String[] splitArr = input.split(" ");
         try {
 
+            assert (!hasHandledInput) : "The program thinks it's done processing the commands!\n" +
+                    "This is dangerous, please take a look @ Parser.java. \n";
+
             if (input.equals("bye") && !hasHandledInput) {
                 outputString = Ui.doFarewell();
                 hasHandledInput = setCaseHandled();
