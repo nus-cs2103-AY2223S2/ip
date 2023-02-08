@@ -71,7 +71,7 @@ public class Storage {
         }
     } // end of load()
 
-    public void save(String entry) throws DukeException {
+    public void saveEntry(String entry) throws DukeException {
         try {
             File dukeFile = new File(this.filePath);
             FileWriter dukeWriter = new FileWriter(dukeFile, true);
@@ -81,7 +81,7 @@ public class Storage {
             throw new DukeException(ERROR_MSG);
         }
     }
-    public void delete(int taskId) throws DukeException {
+    public void deleteEntry(int taskId) throws DukeException {
         try {
             File dukeFile = new File(this.filePath);
             Scanner scan = new Scanner(dukeFile);

@@ -73,7 +73,8 @@ public class Parser {
             if (dateTimeString.length == 2) {
                 startTimeString = dateTimeString[1].substring(0, 2) + ":" + dateTimeString[1].substring(2);
             }
-            LocalDateTime startDate = LocalDateTime.parse(dateTimeString[0] + "T" + startTimeString); // format: 2007-12-03T10:15:30
+            // format: 2007-12-03T10:15:30
+            LocalDateTime startDate = LocalDateTime.parse(dateTimeString[0] + "T" + startTimeString);
             String endTimeString = timeSplit[1].substring(0, 2) + ":" + timeSplit[1].substring(2);
             LocalDateTime endDate = LocalDateTime.parse(dateTimeString[0] + "T" + endTimeString);
 
