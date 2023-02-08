@@ -19,7 +19,7 @@ public class GuiCustomiser {
     }
 
     public static void setMuseScrollPaneVisuals(ScrollPane scrollPane) {
-        scrollPane.setPrefSize(385, 535);
+        scrollPane.setPrefSize(485, 535);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
@@ -31,13 +31,13 @@ public class GuiCustomiser {
         stage.setTitle("Muse");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
+        stage.setMinWidth(500.0);
     }
 
     public static void boxDimensionChange
             (AnchorPane mainLayout, TextField userInput, Button sendButton, VBox dialogContainer) {
-        mainLayout.setPrefSize(400.0, 600.0);
-        userInput.setPrefWidth(325.0);
+        mainLayout.setPrefSize(500.0, 600.0);
+        userInput.setPrefWidth(425.0);
         sendButton.setPrefWidth(55.0);
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
     }

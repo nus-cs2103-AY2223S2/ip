@@ -17,7 +17,7 @@ public class DialogBox extends HBox {
         text = l;
         displayPicture = iv;
         text.setPadding(new Insets(0, 4, 0, 4));
-        text.setMaxWidth(300);
+        text.setMaxWidth(400);
         text.setWrapText(true);
         displayPicture.setFitHeight(65.0);
         displayPicture.setFitWidth(65.0);

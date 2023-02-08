@@ -61,6 +61,13 @@ public class Parser {
 
             //bye case is now handled, if handled a case, will skip the rest of the conditionals.
 
+            if (input.equals("help") && !hasHandledInput) {
+                outputString = Ui.formatStr(Ui.generateHelpSheet());
+                hasHandledInput = setCaseHandled();
+            }
+
+            //help, in case user needs help is handled here.
+
             if (input.equals("list") && !hasHandledInput) {
                outputString = Ui.formatStr(tasks.listThings());
                hasHandledInput = setCaseHandled();
