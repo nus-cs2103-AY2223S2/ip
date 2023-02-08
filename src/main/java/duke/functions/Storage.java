@@ -2,6 +2,7 @@ package duke.functions;
 
 import duke.ToDoList;
 
+import duke.exceptions.LoadDukeException;
 import duke.exceptions.SaveDukeException;
 
 import duke.tasks.DeadlineTask;
@@ -49,13 +50,13 @@ public class Storage {
     }
 
     /**
-     * Returns an instance of a ToDoList object that contains the specific tasks in their correct state
-     * based on the given path stored in the Storage object.
+     * Returns an instance of a ToDoList object that contains the specific tasks
+     * in their correct state based on the given path stored in the Storage object.
      *
-     * @return A ToDoList object with the Task objects in it based on the information given in the
-     *         file that the path in the Storage object points to.
+     * @throws LoadDukeException If an error occurred while loading the contents of
+     *                           the file from the path stored in this Storage object.
      */
-    public ToDoList load() {
+    public ToDoList load() throws LoadDukeException {
         try {
             if (!Files.exists(path)) {
                 createDirectory(path.getParent());
@@ -94,7 +95,7 @@ public class Storage {
             }
             return list;
         } catch (Exception e) {
-            return new ToDoList();
+            throw new LoadDukeException();
         }
     }
 

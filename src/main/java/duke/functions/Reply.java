@@ -19,7 +19,7 @@ public class Reply {
      * @return A String that is the welcome message.
      */
     public static String getWelcomeMessage() {
-        return "The Duke welcomes you!\nWhat can the Duke help you with today?";
+        return "What can the Duke help you with today?";
     }
 
     /**
@@ -72,6 +72,17 @@ public class Reply {
      */
     public static String getListMessage(String message) {
         return "TO DO LIST:\n" + message;
+    }
+
+    /**
+     * Returns a message that shows the list of Task objects that is about to happen.
+     *
+     * @param message The list of Task objects to be printed with the reminder message.
+     * @return A String that is a reminder that shows the list of Task objects that is
+     *         about to happen.
+     */
+    public static String getReminderMessage(String message) {
+        return "The following tasks are about to happen!!!\n\n" + message + "\n";
     }
 
     /**

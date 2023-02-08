@@ -36,6 +36,8 @@ abstract public class Task {
      */
     abstract public String save();
 
+    abstract public String remind(int dayRange);
+
     /**
      * Returns a boolean indicating whether the title of the Task object
      * contains the given keyword.

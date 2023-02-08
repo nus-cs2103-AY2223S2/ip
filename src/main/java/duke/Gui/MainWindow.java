@@ -35,15 +35,12 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke d) {
         duke = d;
+        String welcomeMessage = duke.startUpAndGetMessage();
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(Reply.getWelcomeMessage(), dukeImage)
+                DialogBox.getDukeDialog(welcomeMessage, dukeImage)
         );
     }
 
-    /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
-     */
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
