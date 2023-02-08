@@ -58,7 +58,7 @@ public class Storage {
             try {
                 fw.close();
             } catch (IOException ignored) {
-            }
+            } // We can't do anything if file close fails.
         }
     }
 
@@ -84,7 +84,7 @@ public class Storage {
                 try {
                     tasks.add(taskNew.apply(jobAndArg.args));
                 } catch (MeggyException ignored) {
-                }
+                } // If parsing fails for at a line, that line is skipped.
             }
         }
         fileIn.close();

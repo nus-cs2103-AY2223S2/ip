@@ -71,7 +71,9 @@ public class DialogBox extends HBox {
     public static DialogBox ofMeggy(String text) {
         var db = new DialogBox(text, GuiUtil.MEGGY_PROF_PIC);
         db.flipToLeft();
-        db.setBackground(new Background(new BackgroundFill(Color.ORANGE, new CornerRadii(20), null)));
+        db.setBackground(new Background(
+                new BackgroundFill(Color.ORANGE, new CornerRadii(GuiUtil.DIALOG_BOX_CORNER_RADIUS), null)
+        ));
         return db;
     }
 

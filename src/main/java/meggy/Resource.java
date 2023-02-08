@@ -52,12 +52,6 @@ public final class Resource {
     public static final String NOTIF_DEL = "OK. Removed this task:\n";
     /** Notification message after 'find' command. */
     public static final String NOTIF_FIND = "Here are the matching tasks in your list:\n";
-    /** Front page wallpaper. */
-    public static final String MEGGY_LOGO = " __  __\n|  \\/  |\n| \\  / | ___  __ _  __ _ _   _\n| |\\/| |/ _ \\/ _` |"
-            + "/ _` | | | |\n| |  | |  __/ (_| | (_| | |_| |\n|_|  |_|\\___|\\__, |\\__, |\\__, |\n              __/ | "
-            + "__/ | __/ |\n             |___/ |___/ |___/\n";
-    /** Front page greetings. */
-    public static final String GREETINGS = "Wommy! Get REKT by the upcoming star of Inkopolis, Meggy!\n";
     /** Notification message after 'bye' command. */
     public static final String FAREWELL = "OK gotta go play more Turf Wars. Have a nice day!\n";
     /** Icon for tasks marked 'done'. */

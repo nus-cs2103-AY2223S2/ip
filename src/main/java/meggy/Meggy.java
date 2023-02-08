@@ -144,6 +144,5 @@ public class Meggy {
         } catch (MeggyException e) {
             return e.getMessage();
         }
-        // if (Resource.CMD_EXIT.equals(jobAndArg.cmd)) return;
     }
 }

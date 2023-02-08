@@ -74,7 +74,7 @@ public class MeggyTime {
             try {
                 return LocalDateTime.parse(time, format);
             } catch (DateTimeException ignored) {
-            } // try next formatter if unsuccessful
+            } // Try next formatter if unsuccessful
         }
         return null;
     }

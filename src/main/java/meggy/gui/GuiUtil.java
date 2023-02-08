@@ -9,12 +9,16 @@ import javafx.scene.image.WritableImage;
 public class GuiUtil {
     static final Image USER_PROF_PIC;
     static final Image MEGGY_PROF_PIC;
+    static final int DIALOG_BOX_CORNER_RADIUS = 20;
+    private static final int DEFAULT_IMG_SIZE = 1;
 
     static {
         final InputStream userImageIn = MainWindow.class.getResourceAsStream("/images/User.jpg");
-        USER_PROF_PIC = userImageIn == null ? new WritableImage(1, 1) : new Image(userImageIn);
+        USER_PROF_PIC = userImageIn == null ? new WritableImage(DEFAULT_IMG_SIZE, DEFAULT_IMG_SIZE)
+                : new Image(userImageIn);
         final InputStream dukeImageIn = MainWindow.class.getResourceAsStream("/images/Meggy.png");
-        MEGGY_PROF_PIC = dukeImageIn == null ? new WritableImage(1, 1) : new Image(dukeImageIn);
+        MEGGY_PROF_PIC = dukeImageIn == null ? new WritableImage(DEFAULT_IMG_SIZE, DEFAULT_IMG_SIZE)
+                : new Image(dukeImageIn);
     }
 
     /** @deprecated Class stores all values statically should not be initialized. */
