@@ -4,72 +4,100 @@ package duke.task;
  * The type Task.
  */
 public abstract class Task {
-  /**
-   * The Task name.
-   */
-  public String taskName;
-  /**
-   * The Message add.
-   */
-  public String messageAdd;
-  /**
-   * The Message marked.
-   */
-  public String messageMarked;
-  /**
-   * The Message unmarked.
-   */
-  public String messageUnmarked;
-  /**
-   * The Message display.
-   */
-  public String messageDisplay;
-  /**
-   * The Message delete.
-   */
-  public String messageDelete;
-  /**
-   * The Done.
-   */
-  public boolean done;
+    /**
+     * The Task name.
+     */
+    protected String taskName;
+    /**
+     * The Message add.
+     */
+    protected String messageAdd;
+    /**
+     * The Message marked.
+     */
+    protected String messageMarked;
+    /**
+     * The Message unmarked.
+     */
+    protected String messageUnmarked;
+    /**
+     * The Message display.
+     */
+    protected String messageDisplay;
+    /**
+     * The Message delete.
+     */
+    protected String messageDelete;
+    /**
+     * The Done.
+     */
+    protected boolean done;
 
-  /**
-   * Instantiates a new Task.
-   *
-   * @param name the name
-   * @param done the done
-   */
-  Task(String name, boolean done) {
-    this.taskName = name;
-    this.done = done;
-    this.messageAdd = "";
-    this.messageMarked = "";
-    this.messageUnmarked = "";
-    this.messageDelete = "";
-  }
+    /**
+     * Instantiates a new Task.
+     *
+     * @param name the name
+     * @param done the done
+     */
+    Task(String name, boolean done) {
+        this.taskName = name;
+        this.done = done;
+        this.messageAdd = "";
+        this.messageMarked = "";
+        this.messageUnmarked = "";
+        this.messageDelete = "";
+    }
 
-  /**
-   * Add.
-   */
-  public abstract void add();
+    public String getTaskName() {
+        return taskName;
+    }
 
-  /**
-   * Marked.
-   */
-  public abstract void marked();
+    public String getMessageAdd() {
+        return messageAdd;
+    }
 
-  /**
-   * Unmarked.
-   */
-  public abstract void unmarked();
+    public String getMessageMarked() {
+        return messageMarked;
+    }
 
-  /**
-   * Display.
-   */
-  public abstract void display();
+    public String getMessageUnmarked() {
+        return messageUnmarked;
+    }
 
-  /**
-   * Delete.
-   */
-  public abstract void delete();
+    public String getMessageDisplay() {
+        return messageDisplay;
+    }
+
+    public String getMessageDelete() {
+        return messageDelete;
+    }
+
+    public boolean isDone() {
+        return done;
+    }
+
+    /**
+     * Add.
+     */
+    public abstract void add();
+
+    /**
+     * Marked.
+     */
+    public abstract void marked();
+
+    /**
+     * Unmarked.
+     */
+    public abstract void unmarked();
+
+    /**
+     * Display.
+     */
+    public abstract void display();
+
+    /**
+     * Delete.
+     */
+    public abstract void delete();
 }
