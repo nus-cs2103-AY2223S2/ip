@@ -10,6 +10,6 @@ public class DukeTest {
     public void testMsgOfAdd() {
         Task task = new Task("todo borrow book");
         Duke duke = new Duke();
-        assertEquals(duke.msg_of_add(task), "Got it. I've added this task:\n " + task + "\nNow you have 0 tasks in the list:D");
+        assertEquals(duke.messageOfAdd(task), "Got it. I've added this task:\n " + task + "\nNow you have 0 tasks in the list:D");
     }
 }
