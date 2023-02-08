@@ -27,11 +27,11 @@ public class Storage {
 
     private static String DATE_FORMAT = "dd MMM yyyy";
 
-    private static int MARK_INDEX = 11;
+    private static int MARK_INDEX = 10;
 
     private static int TYPE_INDEX = 7;
 
-    private static int DESC_INDEX = 14;
+    private static int DESC_INDEX = 13;
 
     public Storage() {
         try {
@@ -53,7 +53,9 @@ public class Storage {
                 int numAsterisks = line.length() - line.replace("*", "").length();
                 Task task = null;
                 if (type == 'T') {
-                    String desc = line.substring(DESC_INDEX, hashtagIndex - 1);
+                    String desc = hashtagIndex == -1
+                            ? line.substring(DESC_INDEX)
+                            : line.substring(DESC_INDEX, hashtagIndex - 1);
                     task = new Todo(desc);
                 } else if (type == 'D') {
                     task = getDeadlineToLoad(line);
