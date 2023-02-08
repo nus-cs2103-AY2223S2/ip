@@ -16,7 +16,7 @@ public abstract class Command {
      * @param ui A TextUi class that represents the ui
      * @param storage A Storage class which represents the storage of file
      */
-    public abstract void execute(TaskList tasksList, TextUi ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList tasksList, TextUi ui, Storage storage) throws DukeException;
 
     /**
      * An abstract method to indicate whether to exit the program

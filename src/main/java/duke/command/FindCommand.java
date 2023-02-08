@@ -17,14 +17,14 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasksList, TextUi ui, Storage storage) {
+    public String execute(TaskList tasksList, TextUi ui, Storage storage) {
         ui.showFindMessage();
         for (Task task: tasksList.getList()) {
             if (task.toString().contains(this.DETAILS)) {
                 System.out.println(task);
             }
         }
-        ui.showBorder();
+        return ui.showBorder();
     }
 
     @Override

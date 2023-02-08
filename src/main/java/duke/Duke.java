@@ -52,4 +52,14 @@ public class Duke {
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
     }
+
+    public String getResponse(String input) {
+        try {
+            Command inputCommand = Parser.parse(input);
+            return inputCommand.execute(this.tasks, this.ui, this.storage);
+        } catch (DukeException e) {
+            return ui.showErrorMessage(e.getMessage());
+        }
+    }
+
 }

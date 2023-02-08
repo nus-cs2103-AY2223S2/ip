@@ -28,14 +28,14 @@ public class DeadlineCommand extends Command {
      * @param storage A Storage class which represents the storage of file
      */
     @Override
-    public void execute(TaskList tasksList, TextUi ui, Storage storage) {
+    public String execute(TaskList tasksList, TextUi ui, Storage storage) {
         String[] detailArray = DETAILS.split("/");
         String description = detailArray[0].strip();
         String by = detailArray[1].strip();
         Task deadline = new Deadline(description, by);
         tasksList.addToTaskList(deadline);
-        ui.showAddTaskMessage(deadline);
         storage.saveToFile(tasksList.getList());
+        return ui.showAddTaskMessage(deadline);
     }
 
     /**

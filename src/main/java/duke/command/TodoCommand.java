@@ -23,12 +23,12 @@ public class TodoCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasksList, TextUi ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasksList, TextUi ui, Storage storage) throws DukeException {
         Task todo = new Todo(DETAIL);
         tasksList.addToTaskList(todo);
         storage.saveToFile(tasksList.getList());
-        ui.showAddTaskMessage(todo);
-        ui.showTotalCountMessage(tasksList);
+        return ui.showAddTaskMessage(todo) + '\n'
+                + ui.showTotalCountMessage(tasksList);
     }
 
     /**
