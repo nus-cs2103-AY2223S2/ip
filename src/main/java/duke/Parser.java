@@ -44,10 +44,10 @@ public class Parser {
         return index;
     }
 
-    public static String execute(TaskHandler handler, UIText ui, Storage storage)
+    public static String execute(String input, TaskHandler handler, UIText ui, Storage storage)
             throws UnknownInputException, EmptyContentException, InvalidTaskAccessException {
-        String input = ui.getInput();
-        System.out.println(ui.separate());
+//        String input = ui.getInput();
+//        System.out.println(ui.separate());
         if (input.equals("bye")) {
             return ui.exit();
         } else if (input.equals("list")) {

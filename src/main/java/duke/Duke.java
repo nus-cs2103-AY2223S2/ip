@@ -1,6 +1,8 @@
 package duke;
 
 import exceptions.DukeException;
+import exceptions.EmptyContentException;
+import exceptions.InvalidTaskAccessException;
 import exceptions.UnknownInputException;
 
 import java.io.IOException;
@@ -23,27 +25,34 @@ public class Duke {
             System.out.println(e);
         }
     }
-    public static void main(String[] args) {
-        new Duke().run();
-
-    }
-
-    /**
-     * Method to run the Duke program.
-     */
-    public void run() {
-        boolean isClosed = false;
-        TaskHandler handler = new TaskHandler(taskList);
-
-        System.out.println(ui.greet());
-        while (!isClosed) {
-            try {
-                System.out.println(Parser.execute(handler, ui, storage));
-                System.out.println(ui.separate());
-            } catch (DukeException e) {
-                System.out.println(e.getMessage() + "\n");
-            }
+//    public static void main(String[] args) {
+//        new Duke().run();
+//
+//    }
+//
+//    /**
+//     * Method to run the Duke program.
+//     */
+//    public void run() {
+//        boolean isClosed = false;
+//        TaskHandler handler = new TaskHandler(taskList);
+//
+//        System.out.println(ui.greet());
+//        while (!isClosed) {
+//            try {
+//                System.out.println(Parser.execute(handler, ui, storage));
+//                System.out.println(ui.separate());
+//            } catch (DukeException e) {
+//                System.out.println(e.getMessage() + "\n");
+//            }
+//        }
+//    }
+    public String getResponse(String input) {
+        try {
+            TaskHandler handler = new TaskHandler(taskList);
+            return Parser.execute(input, handler, ui, storage);
+        } catch (DukeException e) {
+            return e.getMessage() + "\n";
         }
     }
-    
 }
