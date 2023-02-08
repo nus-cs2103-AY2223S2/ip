@@ -26,6 +26,7 @@ public class TaskList {
      * @param index Index of task to be marked as done
      */
     public void markTaskAsDone(int index) {
+        assert index >= 0 && index < list.size() : "Given index should be valid";
         Task task = this.list.get(index);
         task.markAsDone();
         this.ui.addToMessage("Nice! I've marked this task as done:");
@@ -38,6 +39,7 @@ public class TaskList {
      * @param index Index of task to be marked as undone
      */
     public void markTaskAsUndone(int index) {
+        assert index >= 0 && index < list.size() : "Given index should be valid";
         Task task = this.list.get(index);
         task.unmarkAsDone();
         this.ui.addToMessage("Ok, I've marked this task as not done yet:");
@@ -50,10 +52,12 @@ public class TaskList {
      * @param task Task to be added to the task list
      */
     public void addTask(Task task) {
+        int listSize = list.size();
         this.list.add(task);
         this.ui.addToMessage("Got it. I've added this task:");
         this.ui.addToMessage(task.toString());
         this.ui.addToMessage(String.format("Now you have %d tasks in the list.", list.size()));
+        assert list.size() == listSize + 1 : "List size should increase after adding a task";
     }
 
     /**
@@ -62,10 +66,13 @@ public class TaskList {
      * @param index Task to be deleted from the task list
      */
     public void deleteTask(int index) {
+        assert index >= 0 && index < list.size() : "Given index should be valid";
+        int listSize = list.size();
         Task currentTask = list.get(index);
         list.remove(index);
         this.ui.addToMessage("Noted. I've removed this task:");
         this.ui.addToMessage(currentTask.toString());
+        assert list.size() == listSize - 1 : "List size should decrease after deleting a task";
     }
 
     /**

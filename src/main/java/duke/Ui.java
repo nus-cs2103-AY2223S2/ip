@@ -111,6 +111,7 @@ public class Ui {
     /** Clears the stored message. */
     public void clearMessage() {
         this.message.setLength(0);
+        assert this.message.length() == 0 : "Message length should be 0 after clearing message";
     }
 
     /**
