@@ -34,7 +34,7 @@ public class DeleteCommand implements Command {
         ArrayList<Task> taskList = tasks.getTaskList();
         int taskNumber = Integer.parseInt(parsedCmd.get(1));
 
-        if ((taskNumber <= taskList.size()) && (taskNumber > 0)) {
+        if ((taskNumber <= taskList.size()) && (taskNumber > 0)) { // checks if the task to delete is within list
             Task tempTask = taskList.remove(taskNumber - 1);
             sb.append("    ____________________________________________________________\n")
                     .append("    Noted. I've removed this task:\n")

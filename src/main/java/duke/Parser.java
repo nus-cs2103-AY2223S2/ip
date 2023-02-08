@@ -23,12 +23,11 @@ public class Parser {
      *
      * @param taskInfo Command information obtained from user's input via the CLI.
      * @return ArrayList of String type, containing processed command information.
-     * @throws IncorrectNoOfArgumentException When there is insufficient arguments provided by the user.
      * @see ArrayList
      */
-    protected static ArrayList<String> parse(String taskInfo) throws IncorrectNoOfArgumentException {
+    protected static ArrayList<String> parse(String taskInfo) {
         ArrayList<String> parseInfoList = new ArrayList<>(); // stores in the format "command" followed by "args"
-        boolean isFnAvailable = false; // indicates whether user is calling a supported function provided by Duke
+        boolean isFnAvailable; // indicates whether user is calling a supported function provided by Duke
         String tempCmd; // stores function call by user (eg todos, mark, etc)
         String[] tempTaskInfo = taskInfo.split("] ");
 
@@ -63,127 +62,200 @@ public class Parser {
             tempTaskInfo = taskInfo.split(" ", 2);
             tempCmd = tempTaskInfo[0].toLowerCase();
         }
-        if ((tempCmd.equals("mark")) || (tempCmd.equals("unmark")) || (tempCmd.equals("delete")) || (tempCmd
-                .equals("todo")) || (tempCmd.equals("deadline")) || (tempCmd.equals("event")) || (tempCmd
-                .equals("find"))) {
-            isFnAvailable = true;
-        }
+        isFnAvailable = isAvailable(tempCmd);
+        parseInfoList = parse2(isFnAvailable, tempCmd, parseInfoList, tempTaskInfo);
+        return parseInfoList;
+    }
 
+    /**
+     * Returns an ArrayList of String type that contains the processed command information,
+     * derived from the user input via the CLI.
+     * <p></p>
+     * This method acts as a helper method for parse() to parse the command information.
+     *
+     * @param isFnAvailable Boolean value indicating whether the command getting called is supported.
+     * @param cmd String representing the command.
+     * @param partialCmd ArrayList of String type, containing command information, used to store parsed command.
+     * @param tempTaskInfo String array containing the user input via CLI.
+     * @return ArrayList of String type containing parse command information.
+     * @see ArrayList
+     */
+    private static ArrayList<String> parse2(boolean isFnAvailable, String cmd, ArrayList<String> partialCmd,
+                                            String[] tempTaskInfo) {
         try { // determine function called by the user has required arguments and does not have blank spaces
-            DukeException.validate(isFnAvailable, tempCmd, tempTaskInfo);
-            parseInfoList.add(tempCmd); // save function call (command) into parseInfo
+            DukeException.validate(isFnAvailable, cmd, tempTaskInfo);
+            partialCmd.add(cmd); // save function call (command) into parseInfo
         } catch (IncorrectNoOfArgumentException ex) {
             System.out.println(ex);
-            parseInfoList = new ArrayList<>();
-            parseInfoList.add(ex.getMessage());
-            return parseInfoList;
+            partialCmd = new ArrayList<>();
+            partialCmd.add(ex.getMessage());
+            return partialCmd;
         }
 
-        switch (tempCmd) { // retrieving arguments required by the commands
+        switch (cmd) { // retrieving arguments required by the commands
         case "bye": // format: bye
             break;
         case "list": // format: list
             break;
         case "find":
-            parseInfoList.add(tempTaskInfo[1].toLowerCase());
+            partialCmd.add(tempTaskInfo[1].toLowerCase());
             break;
         case "mark": // format: mark | index
-            parseInfoList.add(tempTaskInfo[1]);
+            partialCmd.add(tempTaskInfo[1]);
             break;
         case "unmark": // format: unmark | index
-            parseInfoList.add(tempTaskInfo[1]); // index
+            partialCmd.add(tempTaskInfo[1]); // index
             break;
         case "delete": // format: delete | index
-            parseInfoList.add(tempTaskInfo[1]); // index
+            partialCmd.add(tempTaskInfo[1]); // index
             break;
         case "todo": // format: done (optional) | String.toString(to+do) | taskInfo
-            parseInfoList.add(tempTaskInfo[1]); // taskInfo
+            partialCmd.add(tempTaskInfo[1]); // taskInfo
             break;
         case "deadline": // format: done (optional) | deadline | taskInfo | date | time
-            String[] tempTaskInfo2 = tempTaskInfo[1].split("/by", 2);
-            try { // checking the element "cccc" in ".../by cccc"
-                DukeException.validate(true, tempCmd, tempTaskInfo2);
-            } catch (IncorrectNoOfArgumentException ex) {
-                System.out.println(ex);
-                parseInfoList = new ArrayList<>();
-                parseInfoList.add(ex.getMessage());
-                break;
-            }
-
-            String time;
-            String[] dateTime = tempTaskInfo2[1].split(" ");
-            if (dateTime.length != 3) {
-                time = "";
-            } else {
-                time = dateTime[2];
-            }
-
-            parseInfoList.add(tempTaskInfo2[0]); // taskInfo
-            parseInfoList.add(dateTime[1]); // date
-            parseInfoList.add(time); // time
+            partialCmd = deadlineParser(cmd, partialCmd, tempTaskInfo);
             break;
         case "event": // format: done (optional) | event | taskInfo | startDate | startTime | endDate | endTime
-            String[] tempTaskInfo3 = tempTaskInfo[1].split("/from", 2);
-            try { // checking the element "bbbb" in ".../from bbbb /to aaaa"
-                DukeException.validate(true, tempCmd, tempTaskInfo3);
-            } catch (IncorrectNoOfArgumentException ex) {
-                System.out.println(ex);
-                parseInfoList = new ArrayList<>();
-                parseInfoList.add(ex.getMessage());
-                break;
-            }
-            String startTime;
-            String[] startDateTime = tempTaskInfo3[1].split(" ");
-            if (startDateTime.length > 2) { // check if given a startDate
-                if (startDateTime[2].equals("/to")) {
-                    startTime = "";
-                } else {
-                    startTime = startDateTime[2];
-                }
-            } else {
-                DukeException.validate("", "event");
-                break;
-            }
-
-            String[] testPortion = tempTaskInfo3[1].split("/to", 2);
-            try { // checking the element "aaaa" in ".../to aaaa"
-                DukeException.validate(true, tempCmd, testPortion);
-            } catch (IncorrectNoOfArgumentException ex) {
-                System.out.println(ex);
-                parseInfoList = new ArrayList<>();
-                parseInfoList.add(ex.getMessage());
-                break;
-            }
-
-            String endTime;
-            String[] endDateTime = testPortion[1].split(" ");
-            if (endDateTime.length > 1) { // check if given a endDate
-                if (endDateTime.length != 3) {
-                    endTime = "";
-                } else {
-                    endTime = endDateTime[2];
-                }
-            } else {
-                DukeException.validate("", "event");
-                break;
-            }
-
-            parseInfoList.add(tempTaskInfo3[0]); // taskInfo
-            parseInfoList.add(startDateTime[1]); // startDate
-            parseInfoList.add(startTime); // startTime
-            parseInfoList.add(endDateTime[1]); // endDate
-            parseInfoList.add(endTime); // endTime
+            partialCmd = eventParser(cmd, partialCmd, tempTaskInfo);
             break;
         default: // throw an error as the user is trying to call a function that does not exist
             try {
                 DukeException.validate2();
             } catch (InvalidCommandException ex) {
                 System.out.println(ex);
-                parseInfoList.set(0, "error");
-                parseInfoList.add(ex.getMessage());
+                partialCmd.set(0, "error");
+                partialCmd.add(ex.getMessage());
                 break;
             }
         }
-        return parseInfoList;
+        return partialCmd;
+    }
+
+    /**
+     * Returns ArrayList of String type containing the parsed command, used for parsing deadLine command.
+     *
+     * @param cmd String representing the command.
+     * @param partialCmd ArrayList of String type, containing command information, used to store parsed command.
+     * @param tempTaskInfo String array containing the user input via CLI.
+     * @return ArrayList of String type containing the parsed command, used for parsing deadLine command.
+     */
+    private static ArrayList<String> deadlineParser(String cmd, ArrayList<String> partialCmd, String[] tempTaskInfo) {
+        String[] tempTaskInfo2 = tempTaskInfo[1].split("/by", 2);
+        try { // checking the element "cccc" in ".../by cccc"
+            DukeException.validate(true, cmd, tempTaskInfo2);
+        } catch (IncorrectNoOfArgumentException ex) {
+            System.out.println(ex);
+            partialCmd = new ArrayList<>();
+            partialCmd.add(ex.getMessage());
+            return partialCmd;
+        }
+        String time;
+        String[] dateTime = tempTaskInfo2[1].split(" ");
+        if (dateTime.length != 3) {
+            time = "";
+        } else {
+            time = dateTime[2];
+        }
+        partialCmd.add(tempTaskInfo2[0]); // taskInfo
+        partialCmd.add(dateTime[1]); // date
+        partialCmd.add(time); // time
+        return partialCmd;
+    }
+
+    /**
+     * Returns ArrayList of String type containing the parsed command, used for parsing event command.
+     *
+     * @param cmd String representing the command.
+     * @param partialCmd ArrayList of String type, containing command information, used to store parsed command.
+     * @param tempTaskInfo String array containing the user input via CLI.
+     * @return ArrayList of String type containing the parsed command, used for parsing event command.
+     */
+    private static ArrayList<String> eventParser(String cmd, ArrayList<String> partialCmd, String[] tempTaskInfo) {
+        String[] tempTaskInfo3 = tempTaskInfo[1].split("/from", 2);
+        try { // checking the element "bbbb" in ".../from bbbb /to aaaa"
+            DukeException.validate(true, cmd, tempTaskInfo3);
+        } catch (IncorrectNoOfArgumentException ex) {
+            System.out.println(ex);
+            partialCmd = new ArrayList<>();
+            partialCmd.add(ex.getMessage());
+            return partialCmd;
+        }
+        String startTime = "";
+        String endTime = "";
+        String[] startDateTime = tempTaskInfo3[1].split(" ");
+        if (startDateTime.length > 2) { // check if given a startTime
+            if (startDateTime[2].equals("/to")) {
+                startTime = "";
+            } else {
+                startTime = startDateTime[2];
+            }
+        } else {
+            try {
+                DukeException.validate("", "event");
+            } catch (IncorrectNoOfArgumentException ex) {
+                System.out.println(ex);
+                partialCmd = new ArrayList<>();
+                partialCmd.add(ex.getMessage());
+                return partialCmd;
+            }
+        }
+        String[] testPortion = tempTaskInfo3[1].split("/to", 2);
+        try { // checking the element "aaaa" in ".../to aaaa"
+            DukeException.validate(true, cmd, testPortion);
+        } catch (IncorrectNoOfArgumentException ex) {
+            System.out.println(ex);
+            partialCmd = new ArrayList<>();
+            partialCmd.add(ex.getMessage());
+            return partialCmd;
+        }
+        String[] endDateTime = testPortion[1].split(" ");
+        if (endDateTime.length > 1) { // check if given a endDate
+            if (endDateTime.length != 3) {
+                endTime = "";
+            } else {
+                endTime = endDateTime[2];
+            }
+        } else {
+            try {
+                DukeException.validate("", "event");
+            } catch (IncorrectNoOfArgumentException ex) {
+                System.out.println(ex);
+                partialCmd = new ArrayList<>();
+                partialCmd.add(ex.getMessage());
+                return partialCmd;
+            }
+        }
+        partialCmd.add(tempTaskInfo3[0]); // taskInfo
+        partialCmd.add(startDateTime[1]); // startDate
+        partialCmd.add(startTime); // startTime
+        partialCmd.add(endDateTime[1]); // endDate
+        partialCmd.add(endTime); // endTime
+        return partialCmd;
+    }
+
+    /**
+     * Returns a boolean value which indicates whether the command is available.
+     *
+     * @param cmd String indicating the command name.
+     * @return Boolean value indicating command available or not.
+     */
+    private static boolean isAvailable(String cmd) {
+        if (cmd.equals("mark")) {
+            return true;
+        } else if (cmd.equals("unmark")) {
+            return true;
+        } else if (cmd.equals("delete")) {
+            return true;
+        } else if (cmd.equals("todo")) {
+            return true;
+        } else if (cmd.equals("deadline")) {
+            return true;
+        } else if (cmd.equals("event")) {
+            return true;
+        } else if (cmd.equals("find")) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
