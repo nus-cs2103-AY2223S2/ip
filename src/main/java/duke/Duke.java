@@ -136,7 +136,7 @@ public class Duke {
                 message = new DeleteCommand().execute(commandInfoList, this.tasks, this.storage, this.ui);
                 break;
             case "reminder":
-                new ReminderCommand().execute(commandInfoList, this.tasks, this.storage, this.ui);
+                message = new ReminderCommand().execute(commandInfoList, this.tasks, this.storage, this.ui);
                 break;
             case "error":
                 message = commandInfoList.get(1);
