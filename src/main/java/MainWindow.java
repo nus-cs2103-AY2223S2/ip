@@ -2,6 +2,7 @@ import duke.DukeException;
 import duke.ui.Ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -18,8 +19,6 @@ public class MainWindow extends AnchorPane {
     private VBox dialogContainer;
     @FXML
     private TextField userInput;
-    @FXML
-    private Button sendButton;
 
     private JavaFxUi javaUi;
 
@@ -36,8 +35,7 @@ public class MainWindow extends AnchorPane {
 
     public void setUi(JavaFxUi ui) {
         javaUi = ui;
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(new Ui().printWelcomeMessage(), dukeImage));
+        getDialogs(DialogBox.getUserDialog(new Ui().printWelcomeMessage(), dukeImage));
     }
 
     /**
@@ -46,12 +44,14 @@ public class MainWindow extends AnchorPane {
      * the dialog container. Clears the user input after processing.
      */
     @FXML
-    private void handleUserInput() throws DukeException {
+    private void handleUserInput() {
         String input = userInput.getText();
         String response = javaUi.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage));
+        getDialogs(DialogBox.getUserDialog(input, userImage), DialogBox.getDukeDialog(response, dukeImage));
         userInput.clear();
+    }
+
+    private void getDialogs(DialogBox... dialogBoxes) {
+        dialogContainer.getChildren().addAll(dialogBoxes);
     }
 }
