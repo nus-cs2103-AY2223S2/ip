@@ -23,11 +23,7 @@ public class Parser {
         }
         String action = messageSplit[0];
 
-        if ((action.equals("mark") || action.equals("unmark"))) {
-            return true;
-        }
-        return false;
-
+        return (action.equals("mark") || action.equals("unmark"));
     }
 
     private boolean isAdd(String message) {

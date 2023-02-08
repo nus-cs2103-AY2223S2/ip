@@ -48,7 +48,9 @@ public class Storage {
         String task = this.getTask(taskNum);
         String[] taskSplit = task.split(" ", 2);
 
-        this.list.set(taskNum - 1, String.format("%s %s", markStatus, taskSplit[1]));
+        int taskIndex = taskNum - 1;
+        String updatedTask = String.format("%s %s", markStatus, taskSplit[1]);
+        this.list.set(taskIndex, updatedTask);
 
         updateStorage();
     }
@@ -94,24 +96,25 @@ public class Storage {
      */
     public ArrayList<String> load() {
         File taskFile = new File("data/tasklist.txt");
-        if (taskFile.exists()) {
-            try {
-                Scanner s = new Scanner(taskFile);
-                while (s.hasNext()) {
-                    this.list.add(s.nextLine());
-                }
-                s.close();
-            } catch (FileNotFoundException e) {
-                System.out.println(e);
-            }
 
-        } else {
+        if (!taskFile.exists()) {
             new File("data").mkdirs();
             try {
                 taskFile.createNewFile();
             } catch (IOException err) {
                 System.out.println(err);
             }
+            return this.list;
+        }
+
+        try {
+            Scanner s = new Scanner(taskFile);
+            while (s.hasNext()) {
+                this.list.add(s.nextLine());
+            }
+            s.close();
+        } catch (FileNotFoundException e) {
+            System.out.println(e);
         }
 
         return this.list;
