@@ -57,7 +57,7 @@ public class TaskList {
             }
         }
         TaskList toReturn = new TaskList(matchingTasks);
-        assert toReturn.size() <= this.arrList.size() : "Search operation resulted in undefined behaviour!"
+        assert toReturn.size() <= this.arrList.size() : "Search operation resulted in undefined behaviour!";
         return toReturn;
     }
 
