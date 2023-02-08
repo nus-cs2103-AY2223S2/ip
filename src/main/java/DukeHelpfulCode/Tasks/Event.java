@@ -1,4 +1,4 @@
-package DukeHelpfulCode;
+package DukeHelpfulCode.Tasks;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -27,10 +27,28 @@ public class Event extends Task{
             "HHmm yy-MM-dd", "HHmm yy/MM/dd",
             "HHmm dd-MM-yy", "HHmm dd/MM/yy",
             "hh:mm a yy-MM-dd", "hh:mm a yy/MM/dd",
-            "hh:mm a dd-MM-yy", "hh:mm a dd/MM/yy"};
+            "hh:mm a dd-MM-yy", "hh:mm a dd/MM/yy",
+            "dd MMM yyyy hh:mm a"};
 
     public Event(String name, String startDateTime, String endDateTime) {
-        super(name);
+        super(name,"event");
+        this.startDateTime = formatDateTime(startDateTime);
+        while (this.startDateTime == null){
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Sorry, I don't understand when this Event starts.\nPlease enter the Date and Time:\n");
+            String dueTime = scanner.nextLine();
+            this.startDateTime = formatDateTime(dueTime);
+        }
+        this.endDateTime = formatDateTime(endDateTime);
+        while (this.endDateTime == null){
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Sorry, I don't understand when this Event ends.\nPlease enter the Date and Time:\n");
+            String dueTime = scanner.nextLine();
+            this.endDateTime = formatDateTime(dueTime);
+        }
+    }
+    public Event(String name, String startDateTime, String endDateTime, boolean isDone){
+        super(name, "event",isDone);
         this.startDateTime = formatDateTime(startDateTime);
         while (this.startDateTime == null){
             Scanner scanner = new Scanner(System.in);
@@ -62,7 +80,7 @@ public class Event extends Task{
     }
 
     public String toString() {
-        DateTimeFormatter dtFormatter = DateTimeFormatter.ofPattern("dd MMM yy HHmm");
+        DateTimeFormatter dtFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy hh:mm a");
         return "[E] " + super.toString() + " (from: " + this.startDateTime.format(dtFormatter) + " to: " + this.endDateTime.format(dtFormatter) + ")";
     }
 

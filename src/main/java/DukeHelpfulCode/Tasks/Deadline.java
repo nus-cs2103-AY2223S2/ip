@@ -1,4 +1,4 @@
-package DukeHelpfulCode;
+package DukeHelpfulCode.Tasks;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -24,10 +24,22 @@ public class Deadline extends Task{
             "HHmm yy-MM-dd", "HHmm yy/MM/dd",
             "HHmm dd-MM-yy", "HHmm dd/MM/yy",
             "hh:mm a yy-MM-dd", "hh:mm a yy/MM/dd",
-            "hh:mm a dd-MM-yy", "hh:mm a dd/MM/yy"};
+            "hh:mm a dd-MM-yy", "hh:mm a dd/MM/yy",
+            "dd MMM yyyy hh:mm a"};
 
     public Deadline(String name, String dueDate) {
-        super(name);
+        super(name,"deadline");
+        this.dateTime = formatDateTime(dueDate);
+        while (this.dateTime == null){
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Sorry, I don't understand when you need this by.\nPlease enter the Date and Time:\n");
+            String dueTime = scanner.nextLine();
+            this.dateTime = formatDateTime(dueTime);
+        }
+    }
+
+    public Deadline(String name, String dueDate, boolean isDone) {
+        super(name, "deadline", isDone);
         this.dateTime = formatDateTime(dueDate);
         while (this.dateTime == null){
             Scanner scanner = new Scanner(System.in);
@@ -52,7 +64,7 @@ public class Deadline extends Task{
     }
 
     public String toString(){
-        DateTimeFormatter dtFormatter = DateTimeFormatter.ofPattern("dd MMM yy HHmm");
+        DateTimeFormatter dtFormatter = DateTimeFormatter.ofPattern("dd MMM yy hh:mm a");
         return "[D] " + super.toString() + " (by: " + this.dateTime.format(dtFormatter) + ")";
     }
 

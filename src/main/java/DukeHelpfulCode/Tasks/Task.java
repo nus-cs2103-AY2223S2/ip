@@ -1,18 +1,27 @@
-package DukeHelpfulCode;
+package DukeHelpfulCode.Tasks;
 
 public class Task {
     /**
-     * Task class for things added to the UserList
+     * Task class for things added to the TaskList
      * Methods:
      *      markAsDone -> mark Task as done if not done and vice versa.
      */
 
     private static String LINEBREAK = "_________________________________________________________________\n";
     private String name;
-    private Boolean isDone = false;
+    private Boolean isDone;
+    private String type;
 
-    public Task (String name) {
+    public Task (String name, String type) {
         this.name = name;
+        this.isDone = false;
+        this.type = type;
+    }
+
+    public Task (String name, String type, boolean isDone){
+        this.name = name;
+        this.type = type;
+        this.isDone = isDone;
     }
 
     public String getName() {
