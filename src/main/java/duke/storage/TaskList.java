@@ -3,6 +3,8 @@ package duke.storage;
 import java.io.File;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import duke.task.Deadline;
 import duke.task.Event;
@@ -126,13 +128,9 @@ public class TaskList {
      * @return list of tasks that contain the keyword.
      */
     public ArrayList<Task> find(String keyword) {
-        ArrayList<Task> result = new ArrayList<>();
-        for (Task task : tasks) {
-            if (task.toString().contains(keyword)) {
-                result.add(task);
-            }
-        }
-        return result;
+        return tasks.stream()
+                .filter(task -> task.toString().contains(keyword))
+                .collect(Collectors.toCollection(ArrayList::new));
     }
     /**
      * Get the number of tasks in the list

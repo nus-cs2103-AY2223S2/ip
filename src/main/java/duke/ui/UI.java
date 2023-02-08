@@ -18,7 +18,7 @@ public class UI {
     private final String intro = "Hola! Soy \n";
     private final String icebreaker = "What can I do for you?";
     private final String breakLine = "________________________________________________________________";
-    private final String border = "================================================================";
+    private final String border = "\n================================================================\n";
     private BufferedReader br;
 
     /**
@@ -42,7 +42,7 @@ public class UI {
      * @param res duke.Duke's response(String) to print
      */
     public void printRes(String res) {
-        System.out.println(border + res + border + "\n");
+        System.out.println(border + res + border);
     }
 
     /**
