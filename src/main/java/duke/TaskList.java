@@ -18,12 +18,21 @@ public class TaskList {
     }
 
     /**
-     * Adds task to the TaskList.
+     * Adds a newly created Task to the TaskList.
      *
-     * @param task Task to be added.
+     * @param newTask the newly created task to be added.
+     * @throws DukeException if an existing Task has the same description as this new Task.
      */
-    public void addTask(Task task) {
-        this.tasks.add(task);
+    public void addTask(Task newTask) throws DukeException {
+        String description = newTask.getDescription().strip();
+
+        for (Task task: tasks) {
+            String taskDescription = task.getDescription();
+            if (taskDescription.equals(description)) {
+                throw new DukeException("An existing task has the same description!");
+            }
+        }
+        tasks.add(newTask);
     }
 
     /**

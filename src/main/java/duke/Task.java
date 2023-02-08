@@ -26,7 +26,16 @@ public class Task {
      * @return Status of Task.
      */
     public String getStatusIcon() {
-        return (isDone ? "X" : " ");
+        return (this.isDone ? "X" : " ");
+    }
+
+    /**
+     * Returns string representation of the description of the Task.
+     *
+     * @return description of Task.
+     */
+    public String getDescription() {
+        return this.description;
     }
 
     /**
