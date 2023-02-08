@@ -66,30 +66,36 @@ public class JeoBot {
                 sb.append(ui.showAllTasks(taskList));
                 break;
             case MARK:
+                assert hm.containsKey("index");
                 int index = Integer.parseInt(hm.get("index"));
                 Task task = taskList.getTaskAtIndex(index);
                 taskList.markTask(index);
                 sb.append(ui.taskMarkedMessage(task));
                 break;
             case UNMARK:
+                assert hm.containsKey("index");
                 index = Integer.parseInt(hm.get("index"));
                 task = taskList.getTaskAtIndex(index);
                 taskList.unmarkTask(index);
                 sb.append(ui.taskUnmarkedMessage(task));
                 break;
             case DELETE:
+                assert hm.containsKey("index");
                 index = Integer.parseInt(hm.get("index"));
                 task = taskList.getTaskAtIndex(index);
                 taskList.deleteTask(index);
                 sb.append(ui.taskDeletedMessage(task, taskList.getNumberOfTasks()));
                 break;
             case TODO:
+                assert hm.containsKey("description");
                 String desc = hm.get("description");
                 task = new ToDo(desc);
                 taskList.addTask(task);
                 sb.append(ui.taskAddedMessage(task, taskList.getNumberOfTasks()));
                 break;
             case DEADLINE:
+                assert hm.containsKey("description");
+                assert hm.containsKey("by");
                 desc = hm.get("description");
                 String by = hm.get("by");
                 task = new Deadline(desc, by);
@@ -97,6 +103,9 @@ public class JeoBot {
                 sb.append(ui.taskAddedMessage(task, taskList.getNumberOfTasks()));
                 break;
             case EVENT:
+                assert hm.containsKey("description");
+                assert hm.containsKey("from");
+                assert hm.containsKey("to");
                 desc = hm.get("description");
                 String from = hm.get("from");
                 String to = hm.get("to");
@@ -105,12 +114,14 @@ public class JeoBot {
                 sb.append(ui.taskAddedMessage(task, taskList.getNumberOfTasks()));
                 break;
             case DUE:
+                assert hm.containsKey("by");
                 by = hm.get("by");
                 DateTimeFormatter formatterParse = DateTimeFormatter.ofPattern(DATE_PARSE);
                 LocalDate byDate = LocalDate.parse(by, formatterParse);
                 sb.append(ui.showTasksDue(byDate, taskList));
                 break;
             case FIND:
+                assert hm.containsKey("key");
                 String keyword = hm.get("key");
                 sb.append(ui.showTasksWithKeyword(keyword, taskList));
                 break;
