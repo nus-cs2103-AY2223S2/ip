@@ -32,8 +32,7 @@ public class DukeApp extends Application {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
     private String WELCOME_MSG = "Hello from Duke!\nWhat can I do for you?";
-    private String FONT_NAME = "Liberation Mono";
-    private int FONT_SIZE = 14;
+    private Font FONT = Font.font("Courier New", 14);
 
 
     @Override
@@ -46,8 +45,8 @@ public class DukeApp extends Application {
 
         userInput = new TextField();
         sendButton = new Button("Send");
-        userInput.setFont(Font.font("Courier New", FontWeight.SEMI_BOLD, 14));
-        sendButton.setFont(Font.font("Courier New", FontWeight.SEMI_BOLD, 14));
+        userInput.setFont(FONT);
+        sendButton.setFont(FONT);
 
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);

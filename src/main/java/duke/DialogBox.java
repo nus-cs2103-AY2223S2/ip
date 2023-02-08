@@ -24,7 +24,7 @@ public class DialogBox extends HBox {
         text.setWrapText(true);
         displayPicture.setFitWidth(100.0);
         displayPicture.setFitHeight(100.0);
-        text.setFont(Font.font("Courier New", FontWeight.SEMI_BOLD, 14));
+        text.setFont(Font.font("Courier New", 14));
         this.setAlignment(Pos.TOP_RIGHT);
         this.getChildren().addAll(text, displayPicture);
     }
