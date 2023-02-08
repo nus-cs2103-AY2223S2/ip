@@ -46,7 +46,11 @@ public class Parser {
         /**
          * Find keyword.
          */
-        find
+        find,
+        /**
+         * Stats keyword.
+         */
+        stats
     }
 
     /**
@@ -87,6 +91,8 @@ public class Parser {
                 return new DeleteCommand(indexToDelete);
             case find:
                 return new FindCommand(parsedInput[1]);
+            case stats:
+                return new StatsCommand();
             default:
                 throw new DukeException("unknown command detected");
             }

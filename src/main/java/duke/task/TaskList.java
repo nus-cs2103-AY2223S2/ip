@@ -57,6 +57,7 @@ public class TaskList {
      * Add todo.
      *
      * @param description the description
+     * @return the string
      * @throws DukeException the duke exception
      */
     public String addTodo(String description) throws DukeException {
@@ -73,6 +74,7 @@ public class TaskList {
      *
      * @param description the description
      * @param by          the by
+     * @return the string
      * @throws DukeException the duke exception
      */
     public String addDeadline(String description, String by) throws DukeException {
@@ -87,6 +89,7 @@ public class TaskList {
      * @param description the description
      * @param from        the from
      * @param to          the to
+     * @return the string
      * @throws DukeException the duke exception
      */
     public String addEvent(String description, String from, String to) throws DukeException {
@@ -199,6 +202,21 @@ public class TaskList {
         }
         String searchResultHeader = "Here are the matching tasks in your list:\n";
         return searchResultHeader + filteredTasks;
+    }
+
+    /**
+     * Number of tasks string.
+     *
+     * @param isMarked boolean to indicate which type of tasks to return
+     * @return the string
+     */
+    public String numberOfTasks(boolean isMarked) {
+        String markSymbol = isMarked ? "[X]" : "[ ]";
+        long numOfMarkedTasks = tasks.stream()
+                .filter(x -> x.getStatusIcon() == markSymbol)
+                .count();
+        return String.format("You have %s %d tasks at the moment.\n", isMarked ? "completed" : "not done",
+                numOfMarkedTasks);
     }
 
 }
