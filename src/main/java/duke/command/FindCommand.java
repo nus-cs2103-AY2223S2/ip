@@ -48,13 +48,9 @@ public class FindCommand implements Command {
 
         ui.showText("Here are the matching tasks in your list:");
 
-        List<Task> tasks = taskList.getAllTasks();
-        for (int i = 0; i < tasks.size(); i++) {
-            Task task = tasks.get(i);
-            if (task.getDescription().contains(textToFind)) {
-                ui.showText(String.format("%d.%s", i + 1, task));
-            }
-        }
+        taskList.getAllTasks().stream()
+                .filter(task -> task.getDescription().contains(textToFind))
+                .forEach(task -> ui.showText(String.format("%s", task)));
 
         ui.showLine();
     }
