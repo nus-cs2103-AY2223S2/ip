@@ -41,8 +41,15 @@ public abstract class Task {
     }
 
     /**
+     * Sets the description to the user input.
+     * @param userInput The new description.
+     */
+    public void setDescription(String userInput) {
+        this.description = userInput;
+    }
+
+    /**
      * Returns the description of the task.
-     *
      * @return The description of the task.
      */
     public String getDescription() {
@@ -51,7 +58,6 @@ public abstract class Task {
 
     /**
      * Returns the string representation of the task.
-     *
      * @return The description of the task.
      */
     @Override

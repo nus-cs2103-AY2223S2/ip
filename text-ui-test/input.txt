@@ -13,4 +13,7 @@ delete 3
 mark 4
 unmark 1
 find book
+update 1 /description borrow money
+update 2 /by 2021-10-12 1200
+list
 bye
