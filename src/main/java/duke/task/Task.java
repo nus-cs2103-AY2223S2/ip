@@ -12,6 +12,10 @@ public abstract class Task {
     public static final DateTimeFormatter DT_INPUT_FORMATTER = DateTimeFormatter.ofPattern(DT_INPUT_FORMAT);
     public static final DateTimeFormatter DT_PRINT_FORMATTER = DateTimeFormatter.ofPattern(DT_PRINT_FORMAT);
 
+    // status icons
+    public static final String STATUS_ICON_DONE = "x";
+    public static final String STATUS_ICON_NOT_DONE = " ";
+
     protected boolean isDone;
     protected String name;
 
@@ -50,7 +54,7 @@ public abstract class Task {
     }
 
     protected String getStatusIcon() {
-        return (isDone ? "x" : " ");
+        return (isDone ? Task.STATUS_ICON_DONE : Task.STATUS_ICON_NOT_DONE);
     }
 
     /**
