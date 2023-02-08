@@ -34,12 +34,13 @@ public class Duke{
     }
 
     /**
-     * Returns the response given a user input
+     * Returns the response when given a non null user input
      *
      * @param input User input string
      * @return Output string
      */
     public String getResponse(String input) {
+        assert input != null;
         try {
             Command command = this.parser.parse(input);
             if (Objects.equals(command, null)) {
