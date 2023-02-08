@@ -69,6 +69,7 @@ public class TaskList {
      */
     public Task markTask(int index) {
         Task task = taskList.get(index);
+        assert task != null;
         task.mark();
         return task;
     }
@@ -81,6 +82,7 @@ public class TaskList {
      */
     public Task unmarkTask(int index) {
         Task task = taskList.get(index);
+        assert task != null;
         task.unmark();
         return task;
     }

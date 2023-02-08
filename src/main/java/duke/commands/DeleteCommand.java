@@ -47,6 +47,7 @@ public class DeleteCommand extends Command {
     @Override
     public String action() {
         Task task = taskList.removeTask(index);
+        assert task != null;
         storage.editStorage(taskList.getTaskList());
         storage.saveToFile(file);
         return ui.deleteResponse(task, taskList);
