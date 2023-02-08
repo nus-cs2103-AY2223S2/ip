@@ -1,4 +1,6 @@
-package windycall;
+package windycall.task;
+
+import windycall.parser.Parser;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

@@ -1,4 +1,10 @@
-package windycall;
+package windycall.Handler;
+
+import windycall.OperationType;
+import windycall.storage.Storage;
+import windycall.task.Task;
+import windycall.exception.WindyCallException;
+import windycall.parser.Parser;
 
 import java.util.List;
 
@@ -11,18 +17,24 @@ public abstract class AddTaskHandler extends OperationHandler {
      * @param message message input by users
      * @throws WindyCallException If user input command is invalid
      */
-    public static String addTask(String message, List<Task> tasks, Storage storage) throws WindyCallException {
+    public static String addTask(String message, List<Task> tasks, Storage storage, Parser parser) throws WindyCallException {
         String[] parts = message.split(" ");
 
         Task newTask;
-        if (parts[0].equals("todo")) {
+        OperationType addTaskType = parser.getAddTaskType(message);
+        switch (addTaskType) {
+        case TODO:
             newTask = AddTodoHandler.handleAddTodo(message);
-        } else if (parts[0].equals("deadline")) {
+            break;
+        case DEADLINE:
             newTask = AddDeadlineHandler.handleAddDeadline(message);
-        } else if (parts[0].equals("event")) {
+            break;
+        case EVENT:
             newTask = AddEventHandler.handleAddEvent(message);
-        } else {
+            break;
+        default:
             throw new WindyCallException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+//            break;
         }
         String returnedMessage = "Got it. I've added this task:\n";
         returnedMessage += newTask + "\n";

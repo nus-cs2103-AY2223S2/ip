@@ -1,4 +1,6 @@
-package windycall;
+package windycall.ui;
+
+import windycall.task.Task;
 
 import java.util.List;
 

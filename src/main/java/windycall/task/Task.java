@@ -1,4 +1,4 @@
-package windycall;
+package windycall.task;
 
 /**
  * Serves as an abstraction of different types of tasks

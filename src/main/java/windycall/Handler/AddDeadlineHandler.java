@@ -1,4 +1,8 @@
-package windycall;
+package windycall.Handler;
+
+import windycall.task.Deadline;
+import windycall.task.Task;
+import windycall.exception.WindyCallException;
 
 public class AddDeadlineHandler extends AddTaskHandler {
 

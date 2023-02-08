@@ -1,9 +1,13 @@
-package windycall;
+package windycall.Handler;
+
+import javafx.util.Pair;
+import windycall.parser.Parser;
+import windycall.storage.Storage;
+import windycall.task.Task;
 
 import java.util.List;
-import javafx.util.Pair;
 
-public class MarkOperationHandler extends OperationHandler {
+public class DeleteOperationHandler extends OperationHandler {
 
     @Override
     public void handle(String userCommand) {
@@ -11,15 +15,15 @@ public class MarkOperationHandler extends OperationHandler {
     }
 
     public static String handle(Parser parser, List<Task> tasks, String[] parts, Storage storage) {
-//        int num = parser.getMarkIndex(parts);
-        Pair<Integer, String> info = parser.getMarkIndex(parts);
+        Pair<Integer, String> info = parser.getDeleteIndex(parts);
         int num = info.getKey();
         String message = info.getValue();
         assert num >= 1 && num <= tasks.size();
         if (num >= 1 && num <= tasks.size()) {
-            tasks.get(num - 1).markAsDone();
-            String returnedMessage = "Good job! I've marked this task as done:\n";
-            returnedMessage += tasks.get(num - 1);
+            String returnedMessage = "Noted. I've removed this task:\n";
+            returnedMessage += tasks.get(num - 1) + "\n";
+            tasks.remove(num - 1);
+            returnedMessage += "Now you have " + tasks.size() + " tasks in the list.";
             storage.handleTaskChange(tasks);
             return returnedMessage;
         } else if (num > tasks.size()) {
@@ -28,6 +32,4 @@ public class MarkOperationHandler extends OperationHandler {
             return message;
         }
     }
-
-
 }
