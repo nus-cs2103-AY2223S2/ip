@@ -47,6 +47,10 @@ public abstract class Task {
         return this.isMarked;
     }
 
+    /**
+     * Sets the priority of this task to the level.
+     * @param level The priority level of this task.
+     */
     public void setPriority(String level) {
         if (level != null) {
             if (level.equals("high")) {

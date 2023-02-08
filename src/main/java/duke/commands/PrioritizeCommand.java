@@ -5,12 +5,20 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.TextUi;
 
+/**
+ * Represents a prioritize command.
+ */
 public class PrioritizeCommand extends Command {
     public static final String COMMAND_WORD = "prioritize";
     protected int taskNumber;
     protected String priority;
 
-
+    /**
+     * A constructor to initialize a prioritize command.
+     *
+     * @param taskNumber The task number of the task to be marked.
+     * @param priority The priority level of the task.
+     */
     public PrioritizeCommand(int taskNumber, String priority) {
         this.taskNumber = taskNumber;
         this.priority = priority;

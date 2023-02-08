@@ -117,5 +117,4 @@ public class TextUi {
         String input = in.nextLine();
         return input;
     }
-
 }
