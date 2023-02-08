@@ -1,7 +1,9 @@
 package duke.command;
 
-public class ByeCommand extends Command{
-    
+/**
+ * The command to terminate the UI.
+ */
+public class ByeCommand extends Command {
     @Override
     public String toString() {
         return String.format("ByeCommand");

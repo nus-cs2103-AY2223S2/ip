@@ -32,7 +32,6 @@ public class Ui {
 
     /**
      * Prints the task added message.
-     * 
      * @param task      The task that was added.
      * @param taskCount The number of tasks in the task list after addition.
      */
@@ -44,7 +43,6 @@ public class Ui {
 
     /**
      * Prints the task marked message.
-     * 
      * @param task The task that was marked.
      */
     public String printTaskMarked(Task task) {
@@ -54,7 +52,6 @@ public class Ui {
 
     /**
      * Prints the task unmarked message.
-     * 
      * @param task The task that was unmarked.
      */
     public String printTaskUnmarked(Task task) {
@@ -64,7 +61,6 @@ public class Ui {
 
     /**
      * Prints the task deleted message.
-     * 
      * @param task      The task that was deleted.
      * @param taskCount The number of tasks in the task list after deletion.
      */
@@ -76,7 +72,6 @@ public class Ui {
 
     /**
      * Prints the task list.
-     * 
      * @param taskList The task list to be printed.
      */
     public String printTaskList(TaskList taskList) {
@@ -90,7 +85,6 @@ public class Ui {
 
     /**
      * Prints the found tasks.
-     * 
      * @param foundTasks The list of found tasks.
      */
     public String printFoundTasks(ArrayList<Task> foundTasks) {
@@ -104,7 +98,6 @@ public class Ui {
 
     /**
      * Prints the error message for a DukeException.
-     * 
      * @param e The DukeException to be printed.
      */
     public String printError(DukeException e) {
