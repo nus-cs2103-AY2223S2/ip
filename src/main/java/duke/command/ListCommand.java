@@ -4,6 +4,8 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+import java.util.stream.IntStream;
+
 /**
  * Command to list all tasks.
  */
@@ -35,9 +37,10 @@ public class ListCommand implements Command {
     public void run(Ui ui, TaskList taskList, Storage storage, String... args) {
         ui.showLine();
         ui.showText("Here are the tasks in your list:");
-        for (int taskNo = 1; taskNo <= taskList.getTotalTasks(); taskNo++) {
-            ui.showText(String.format("%d. %s", taskNo, taskList.getTask(taskNo).toString()));
-        }
+
+        IntStream.rangeClosed(1, taskList.getTotalTasks())
+                .forEach(taskNo -> ui.showText(
+                        String.format("%d. %s", taskNo, taskList.getTask(taskNo).toString())));
         ui.showLine();
     }
 }
