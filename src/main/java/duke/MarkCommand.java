@@ -16,12 +16,12 @@ public class MarkCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
+    public String execute(TaskList tasks, Response response, Storage storage) throws IOException {
         List<Task> taskList = tasks.getTasks();
         Task currTask = taskList.get(taskNumber - 1);
 
         currTask.setDone(true);
         storage.save(taskList);
-        ui.showTaskMarkDone(currTask);
+        return response.showTaskMarkDone(currTask);
     }
 }

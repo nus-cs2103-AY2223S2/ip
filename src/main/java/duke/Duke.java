@@ -5,20 +5,20 @@ import java.io.IOException;
 
 import java.time.format.DateTimeParseException;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
     private Storage storage;
     private TaskList tasks;
-    private Ui ui;
+    private Response response;
 
     /**
      * Represents the Duke program.
+     *
      * @param filePath File path of task list in storage.
      */
     public Duke(String filePath) {
-        ui = new Ui();
+        response = new Response();
         storage = new Storage(filePath);
 
         try {
@@ -29,44 +29,25 @@ public class Duke {
     }
 
     /**
-     * Runs the Duke program.
+     * Returns Duke's response to user input.
+     *
+     * @param input User input.
+     * @return Duke's response.
      */
-    public void run() {
-        Scanner sc = new Scanner(System.in);
-
-        // Greeting
-        ui.showGreeting();
-
-        // Commands
-        String command = sc.nextLine();
-
-        while (!command.equals("bye")) {
-            ui.showKaren();
-
-            try {
-                Command c = Parser.parse(command);
-                c.execute(tasks, ui, storage);
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } catch (IndexOutOfBoundsException e) {
-                ui.showError("Can you please double check your task number?");
-            } catch (NumberFormatException e) {
-                ui.showError("Can you please pass in a number?");
-            } catch (DateTimeParseException e) {
-                ui.showError("Can you please ensure your dates are valid? (hint: yyyy-mm-dd)");
-            } catch (IOException e) {
-                ui.showError("Sorry, something went wrong with saving");
-            }
-
-            ui.printHorizontalLine();
-            command = sc.nextLine();
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, response, storage);
+        } catch (DukeException e) {
+            return response.showError(e.getMessage());
+        } catch (IndexOutOfBoundsException e) {
+            return response.showError("Can you please double check your task number?");
+        } catch (NumberFormatException e) {
+            return response.showError("Can you please pass in a number?");
+        } catch (DateTimeParseException e) {
+            return response.showError("Can you please ensure your dates are valid? (hint: yyyy-mm-dd)");
+        } catch (IOException e) {
+            return response.showError("Sorry, something went wrong with saving");
         }
-
-        // Exit
-        ui.showExit();
-    }
-
-    public static void main(String[] args) {
-        new Duke("data/data.txt").run();
     }
 }

@@ -15,10 +15,10 @@ public class TodoCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
+    public String execute(TaskList tasks, Response response, Storage storage) throws IOException {
         Todo todo = new Todo(description);
         tasks.add(todo);
         storage.save(tasks.getTasks());
-        ui.showAddTask(todo, tasks.getTasks());
+        return response.showAddTask(todo, tasks.getTasks());
     }
 }

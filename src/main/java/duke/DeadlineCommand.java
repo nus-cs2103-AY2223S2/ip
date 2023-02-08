@@ -18,10 +18,10 @@ public class DeadlineCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
+    public String execute(TaskList tasks, Response response, Storage storage) throws IOException {
         Deadline deadline = new Deadline(description, by);
         tasks.add(deadline);
         storage.save(tasks.getTasks());
-        ui.showAddTask(deadline, tasks.getTasks());
+        return response.showAddTask(deadline, tasks.getTasks());
     }
 }

@@ -2,7 +2,7 @@ package duke;
 
 public class ListCommand extends Command {
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showTaskList(tasks.getTasks());
+    public String execute(TaskList tasks, Response response, Storage storage) {
+        return response.showTaskList(tasks.getTasks());
     }
 }

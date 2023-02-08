@@ -16,12 +16,12 @@ public class UnmarkCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
+    public String execute(TaskList tasks, Response response, Storage storage) throws IOException {
         List<Task> taskList = tasks.getTasks();
         Task currTask = taskList.get(taskNumber - 1);
 
         currTask.setDone(false);
         storage.save(taskList);
-        ui.showTaskMarkUndone(currTask);
+        return response.showTaskMarkUndone(currTask);
     }
 }

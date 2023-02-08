@@ -21,10 +21,10 @@ public class EventCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
+    public String execute(TaskList tasks, Response response, Storage storage) throws IOException {
         Event event = new Event(description, from, to);
         tasks.add(event);
         storage.save(tasks.getTasks());
-        ui.showAddTask(event, tasks.getTasks());
+        return response.showAddTask(event, tasks.getTasks());
     }
 }
