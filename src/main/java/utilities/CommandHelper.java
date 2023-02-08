@@ -2,16 +2,15 @@ package utilities;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import services.SpeakerRegistry;
 import types.IHandler;
-
 
 /**
  * A helper class to deal with Handlers.
  */
 public final class CommandHelper {
-
     /**
      * Iterates through a given handler list to find
      * one that takes the string given.
@@ -23,14 +22,12 @@ public final class CommandHelper {
      */
     public static boolean checkAndRun(SpeakerRegistry sr, List<IHandler> handlers, String expr) {
         assert Objects.nonNull(sr);
-        for (IHandler c : handlers) {
-            if (c.canTake(expr)) {
-                sr.broadcast(c.take(expr));
-                return true;
-            }
-        }
+        List<String> a = handlers.parallelStream()
+                .filter(c -> c.canTake(expr))
+                .map(c -> c.take(expr)).collect(Collectors.toList());
+        a.forEach(sr::broadcast);
 
-        return false;
+        return !a.isEmpty();
     }
 
     /**
@@ -41,11 +38,11 @@ public final class CommandHelper {
      * @return Whether the handler is suitable.
      */
     public static boolean checkAndRun(SpeakerRegistry sr, IHandler c, String expr) {
-        if (c.canTake(expr)) {
-            sr.broadcast(c.take(expr));
-            return true;
+        if (!c.canTake(expr)) {
+            return false;
         }
 
-        return false;
+        sr.broadcast(c.take(expr));
+        return true;
     }
 }
