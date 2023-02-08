@@ -1,8 +1,15 @@
 package duke;
 
 public class Task {
+
+    enum PriorityLevel {
+        LOW,
+        MEDIUM,
+        HIGH
+    }
     private String name;
     private boolean isCompleted;
+    private PriorityLevel priority;
 
     /**
      * Constructor for a Task instance.
@@ -12,6 +19,7 @@ public class Task {
     public Task(String name) {
         this.name = name;
         this.isCompleted = false;
+        this.priority = PriorityLevel.LOW;
     }
 
     /**
@@ -31,12 +39,13 @@ public class Task {
     @Override
     public String toString() {
         String completedString = "";
+
         if (this.isCompleted) {
             completedString += "[X] ";
         } else {
             completedString += "[ ] ";
         }
-
+        completedString += "[Priority Level: " + priority + "] ";
         completedString += this.name;
         return completedString;
     }
