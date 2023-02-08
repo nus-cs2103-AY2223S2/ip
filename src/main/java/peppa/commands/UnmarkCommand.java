@@ -25,14 +25,14 @@ public class UnmarkCommand implements Command {
 
     @Override
     public String execute(TaskList taskList, Ui screen, Storage storage) throws PeppaException {
-        if (this.taskIndex < 0 || this.taskIndex >= taskList.getLength()) {
-            throw new PeppaException("Boink! Peppa could not find the requested task. "
-                    + "Please enter a valid integer and try again.");
-        } else {
+        if (this.taskIndex >= 0 && this.taskIndex < taskList.getLength()) {
             Task task = taskList.retrieveTask(taskIndex);
             task.setDone(false);
             storage.saveChanges(taskList);
             return Ui.getUnmarkDoneMessage(task);
+        } else {
+            throw new PeppaException("Boink! Peppa could not find the requested task. "
+                    + "Please enter a valid integer and try again.");
         }
     }
 

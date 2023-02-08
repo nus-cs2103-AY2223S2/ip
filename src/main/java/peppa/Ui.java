@@ -1,11 +1,18 @@
 package peppa;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
-import peppa.commands.*;
+import peppa.commands.DeadlineCommand;
+import peppa.commands.DeleteCommand;
+import peppa.commands.EventCommand;
+import peppa.commands.ExitCommand;
+import peppa.commands.FindCommand;
+import peppa.commands.ListCommand;
+import peppa.commands.MarkCommand;
+import peppa.commands.TodoCommand;
+import peppa.commands.UnmarkCommand;
 
 /**
  * Represents a user interface screen for reading in user inputs and displaying messages in terminal.
@@ -90,14 +97,14 @@ public class Ui {
             ArrayList<Task> matchingTasks = map.get(keyword);
             if (matchingTasks.size() == 0) {
                 response.append("No tasks found which match \"" + keyword + "\".\n\n");
-            } else {
-                response.append("Peppa found " + matchingTasks.size()
-                        + " tasks that match \"" + keyword + "\":\n");
-                for (int i = 0; i < matchingTasks.size(); i++) {
-                    response.append((i + 1) + ". " + matchingTasks.get(i) + "\n");
-                }
-                response.append("\n");
+                continue;
             }
+            response.append("Peppa found " + matchingTasks.size()
+                    + " tasks that match \"" + keyword + "\":\n");
+            for (int i = 0; i < matchingTasks.size(); i++) {
+                response.append((i + 1) + ". " + matchingTasks.get(i) + "\n");
+            }
+            response.append("\n");
         }
         return response.toString();
     }

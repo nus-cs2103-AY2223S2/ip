@@ -26,14 +26,14 @@ public class DeleteCommand implements Command {
 
     @Override
     public String execute(TaskList taskList, Ui screen, Storage storage) throws PeppaException {
-        if (this.taskIndex < 0 || this.taskIndex >= taskList.getLength()) {
-            throw new PeppaException("Boink! Peppa could not find the requested task. "
-                    + "Please enter a valid integer and try again.");
-        } else {
+        if (this.taskIndex >= 0 && this.taskIndex < taskList.getLength()) {
             Task task = taskList.retrieveTask(taskIndex);
             taskList.deleteTask(task);
             storage.saveChanges(taskList);
             return Ui.getDeleteTaskMessage(task) + Ui.getTaskSummary(taskList);
+        } else {
+            throw new PeppaException("Boink! Peppa could not find the requested task. "
+                    + "Please enter a valid integer and try again.");
         }
     }
 
