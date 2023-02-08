@@ -36,8 +36,8 @@ public class Task {
      * @return String representation of Task.
      */
     public String toString() {
-        String var10000 = this.getStatusIcon();
-        return "[" + var10000 + "] " + this.description;
+        String toReturn = this.getStatusIcon();
+        return "[" + toReturn + "] " + this.description;
     }
 
     /**

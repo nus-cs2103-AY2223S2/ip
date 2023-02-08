@@ -91,12 +91,14 @@ public class Storage {
             break;
         case 'D':
             toCheck = currTask.split("by: ", 2);
+            assert toCheck.length == 2 : "Too few arguments.";
             String desc = toCheck[0].substring(7, toCheck[0].length() - 2);
             String date = toCheck[1].substring(0, toCheck[1].length() - 1);
             task = new Deadline(desc, date);
             break;
         case 'E':
             toCheck = currTask.split("from:", 2);
+            assert toCheck.length == 2 : "Too few arguments.";
             String descEvent = toCheck[0].substring(7, toCheck[0].length() - 1);
             String[] fromTo = toCheck[1].split("to:", 2);
             String from = fromTo[0].substring(0, fromTo[0].length() - 1);
