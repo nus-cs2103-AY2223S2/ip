@@ -135,6 +135,7 @@ public class Parser {
      */
     public static void parseFileEntry(String line, TaskList tasks) throws PeppaException {
         String[] fields = line.split(" \\| ");
+        assert fields.length >= 3 : "fields should have 3 or more elements";
         String taskType = fields[0];
         String done = fields[1];
         String taskDesc = fields[2];

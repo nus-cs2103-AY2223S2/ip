@@ -26,6 +26,7 @@ public class Peppa {
     public String getResponse(String input) {
         try {
             Command c = Parser.parseCommand(input);
+            assert (c != null);
             return c.execute(tasks, screen, storage);
         } catch (PeppaException e) {
             return e.getMessage();
