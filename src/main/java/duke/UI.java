@@ -1,6 +1,7 @@
 package duke;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -126,22 +127,39 @@ public class UI extends Application {
 
         String input = userInput.getText();
         Label userText = new Label(input);
+
+        
         String response;
 
-        try {
-            response = this.parser.parseInput(input, this.taskList);
-        } catch (DukeException e) {
-            response = e.getMessage();
+        if(input.equals("bye")){
+            Label dukeText = new Label("Bye. Hope to see you again soon!");
+
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(userText, new ImageView(user)),
+                    DialogBox.getDukeDialog(dukeText, new ImageView(duke)));
+            userInput.clear();   
+
+            Platform.exit();
         }
+        
+        else{
+            try {
+                response = this.parser.parseInput(input, this.taskList);
+            } catch (DukeException e) {
+                response = e.getMessage();
+            }
 
-        this.storage.writeToFile(this.taskList);
+            this.storage.writeToFile(this.taskList);
 
-        Label dukeText = new Label(response);
+            Label dukeText = new Label(response);
 
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke)));
-        userInput.clear();
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(userText, new ImageView(user)),
+                    DialogBox.getDukeDialog(dukeText, new ImageView(duke)));
+            userInput.clear();
+    
+        }
+        
     }
 
 }
