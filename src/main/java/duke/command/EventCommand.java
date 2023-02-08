@@ -1,7 +1,5 @@
 package duke.command;
 
-import java.util.Arrays;
-
 import duke.exception.DukeBadInstructionFormatException;
 import duke.parser.Parser;
 import duke.storage.Storage;
@@ -51,21 +49,17 @@ public class EventCommand extends Command {
             }
         }
         //Handle invalid from or to start index
-        if (fromStartIndex == -1 || toStartIndex == -1
-                || fromStartIndex > toStartIndex) {
+        boolean invalidFromOrTo = fromStartIndex == -1 || toStartIndex == -1
+                || fromStartIndex > toStartIndex;
+        if (invalidFromOrTo) {
             throw new DukeBadInstructionFormatException("Usage of duke.task.Event: "
                     + "event [description] /from[date] /to[date]");
         }
 
-        //Make description and by string
-        String[] descriptionArray = Arrays.copyOfRange(splitted, 1, fromStartIndex);
-        String[] fromArray = Arrays.copyOfRange(splitted, fromStartIndex + 1,
-                toStartIndex);
-        String[] toArray = Arrays.copyOfRange(splitted, toStartIndex + 1,
-                splitted.length);
-        String description = String.join(" ", descriptionArray);
-        String from = String.join(" ", fromArray);
-        String to = String.join(" ", toArray);
+        //Make description and from and to string
+        String description = Command.getTaskDescription(splitted, fromStartIndex);
+        String from = Command.getEventFrom(splitted, fromStartIndex, toStartIndex);
+        String to = Command.getEventToOrDeadlineBy(splitted, toStartIndex);
 
         //Handle no description for an duke.task.Event
         if (description.equals("")) {
