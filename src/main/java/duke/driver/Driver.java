@@ -30,9 +30,9 @@ public class Driver {
         while (true) {
             try {
                 String inputString = scanner.nextLine();
-                DukeParser parser = new DukeParser(inputString);
-                String[] commandArgs = parser.parse();
-                DukeCommand command = parser.getCommand();
+                DukeCommand command = DukeParser.parseCommand(inputString);
+                String[] commandArgs = DukeParser.parseCommandArgs(command, inputString);
+
 
                 if (command.equals(DukeCommand.BYE)) {
                     Ui.prettyPrint("Bye. Hope to see you again soon!");

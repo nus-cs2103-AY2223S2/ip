@@ -1,39 +1,18 @@
 package duke.parser;
 
 import duke.command.DukeCommand;
+import duke.date.DukeDate;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class DukeParser {
-    String inputString;
-    DukeCommand command;
 
-    final DateTimeFormatter INPUT_DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-    public DukeParser(String inputString) {
-        this.inputString = inputString;
-    }
-
-    public DukeCommand getCommand() {
-        return this.command;
-    }
-
-    /**
-     * Parses the {@code inputString} field then return the command and arguments.
-     * 
-     * @return {@code String[]} the command arguments needed for the command.
-     */
-    public String[] parse() {
-        parseCommand();
-        return parseCommandArgs();
-    }
-
-    private void parseCommand() {
+    public static DukeCommand parseCommand(String inputString) {
         // First split by space to get each individual word of the inputString
         String[] splittedString = inputString.split(" ");
 
@@ -43,15 +22,14 @@ public class DukeParser {
         // Check whether the command is valid.
         for (DukeCommand dukeCmd : DukeCommand.values()) {
             if (dukeCmd.text.equals(command)) {
-                this.command = dukeCmd;
-                return;
+                return dukeCmd;
             }
         }
         // If command is invalid:
         throw new Error("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
-    private String[] parseCommandArgs() {
+    public static String[] parseCommandArgs(DukeCommand command, String inputString) {
         List<String> commandArgs = new ArrayList<>();
         switch (command) {
         case LIST:
@@ -69,7 +47,8 @@ public class DukeParser {
 
 
             try {
-                LocalDate.parse(deadline, INPUT_DATE_FORMAT);
+
+                DukeDate.parseDateString(deadline);
                 commandArgs.add(description);
                 commandArgs.add(deadline);
             } catch (DateTimeParseException e) {
@@ -92,8 +71,8 @@ public class DukeParser {
                 String from =
                         inputString.substring(fromIndex + ("/from".length()), toIndex).strip();
                 String to = inputString.substring(toIndex + ("/to".length())).strip();
-                LocalDate fromDate = LocalDate.parse(from, INPUT_DATE_FORMAT);
-                LocalDate toDate = LocalDate.parse(to, INPUT_DATE_FORMAT);
+                LocalDate fromDate = DukeDate.parseDateString(from);
+                LocalDate toDate = DukeDate.parseDateString(to);
 
                 boolean isValidFromDate = fromDate.isBefore(toDate) || fromDate.isEqual(toDate);
 
