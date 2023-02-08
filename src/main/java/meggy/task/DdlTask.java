@@ -21,6 +21,7 @@ public class DdlTask extends UserTask {
      */
     private DdlTask(String desc, MeggyTime due) throws MeggyException {
         super(desc);
+        assert due != null;
         this.due = due;
     }
 
@@ -30,6 +31,7 @@ public class DdlTask extends UserTask {
      * @param args Non-null. User input line with command removed.
      */
     public static DdlTask of(String args) throws MeggyException {
+        assert args != null;
         final int kwIdx = args.indexOf(DUE_KEYWORD_FORMATTED);
         // If no key word in args, time is set to "N/A".
         final String desc;

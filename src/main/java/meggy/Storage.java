@@ -28,6 +28,7 @@ public class Storage {
      */
     public Storage(File dataFile) {
         this.dataFile = dataFile;
+        assert dataFile != null;
     }
 
     /**
@@ -71,6 +72,7 @@ public class Storage {
      * @param tasks Non-null. The task list to load in data.
      */
     public void load(ArrayList<UserTask> tasks) {
+        assert tasks != null;
         final Scanner fileIn;
         try {
             fileIn = new Scanner(dataFile);
