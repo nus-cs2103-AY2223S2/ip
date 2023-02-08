@@ -43,6 +43,7 @@ public class Duke {
      * Method that abstracts the running of the program
      */
     public void run() {
+        assert this.storage != null && this.tasks != null && this.ui != null;
         this.ui.showWelcome();
         boolean isExit = false;
         while (!isExit) {
@@ -55,7 +56,7 @@ public class Duke {
             } catch (CommandException commandException) {
                 ui.showCommandError(input, commandException);
             } catch (DukeException dukeException) {
-                System.out.println(dukeException);
+                dukeException.printStackTrace();
             } finally {
                 ui.showLine();
             }
@@ -67,7 +68,7 @@ public class Duke {
             try {
                 tasks = new TaskList(storage.load());
             } catch (DukeException | IOException exception) {
-                System.out.println(exception.toString());
+                exception.printStackTrace();
             }
         }
         try {

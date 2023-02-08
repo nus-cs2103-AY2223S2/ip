@@ -76,6 +76,7 @@ public abstract class Task {
      * @throws CommandException If there is something wrong with creation of command
      */
     public static Command taskToCommand(String strTask) throws CommandException {
+        assert strTask != null;
         if (strTask.startsWith(Commands.deadline.label)) {
             Pattern pattern = Pattern.compile("deadline (.+) /by (.+)");
             Matcher matcher = pattern.matcher(strTask);
@@ -105,6 +106,7 @@ public abstract class Task {
      * @throws CommandException If there is something wrong with creation of task
      */
     public static Task strToTask(String strTask) throws CommandException {
+        assert strTask != null;
         Task result;
         String[] strings = strTask.split(" \\| ");
         if (strTask.startsWith("T")) {
@@ -128,6 +130,7 @@ public abstract class Task {
     }
 
     protected static LocalDateTime getLocalDateTime(String strDate) {
+        assert strDate != null;
         for (DateTimeFormat format : DateTimeFormat.values()) {
             try {
                 return LocalDateTime.parse(strDate, format.formatter);

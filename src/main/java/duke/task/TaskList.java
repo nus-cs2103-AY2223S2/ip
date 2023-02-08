@@ -62,6 +62,7 @@ public class TaskList extends ArrayList<Task> {
     }
 
     public void addTask(Task task) throws DescriptionException {
+        assert !task.isEmpty();
         if (task.isEmpty()) {
             throw new DescriptionException();
         } else {

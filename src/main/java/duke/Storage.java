@@ -40,6 +40,7 @@ public class Storage {
      * @return reader object for the file
      */
     public BufferedReader load() {
+        assert this.fileReader != null && this.filepath != null && this.file != null;
         if (this.content != null) {
             return content;
         }
@@ -53,6 +54,7 @@ public class Storage {
      * @throws IOException If the file cannot be created or written in
      */
     public void store(TaskList tasks) throws IOException {
+        assert this.fileReader != null && this.filepath != null && this.file != null;
         //noinspection ResultOfMethodCallIgnored
         this.file.createNewFile();
         FileWriter writer = new FileWriter(this.filepath);
