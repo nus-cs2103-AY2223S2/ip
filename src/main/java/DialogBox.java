@@ -76,6 +76,12 @@ public class DialogBox extends HBox {
         return db;
     }
 
+    public static Node getDukeWarningDialog(String text, Image img) {
+        var db = getDukeDialog(text, img);
+        db.dialog.setTextFill(Color.ORANGE);;
+        return db;
+    }
+
     public static Node getDukeErrorDialog(String text, Image img) {
         var db = getDukeDialog(text, img);
         db.dialog.setTextFill(Color.RED);;

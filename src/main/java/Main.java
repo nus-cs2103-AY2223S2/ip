@@ -22,7 +22,6 @@ public class Main extends Application {
         
         stage.setTitle(Message.UI_TITLE);
         stage.setMinWidth(300);
-        stage.setMaxWidth(600);
 
         stage.setOnCloseRequest(e -> {
             Platform.exit();

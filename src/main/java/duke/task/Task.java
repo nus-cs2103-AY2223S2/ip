@@ -35,7 +35,7 @@ public class Task {
      * @return {@link String} object
      */
     private String getStatusIcon() {
-        return (isDone ? "✓" : "  "); // mark done task with X
+        return (isDone ? "✓" : "   "); // mark done task with X
     }
 
     /**

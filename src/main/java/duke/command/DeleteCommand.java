@@ -2,7 +2,6 @@ package duke.command;
 
 import java.util.List;
 import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 
 import duke.constant.DialogType;
 import duke.constant.Message;
@@ -64,7 +63,7 @@ public class DeleteCommand extends Command {
             if (deleted.size() > 0) {
                 sb.append(Message.DELETE_TASK + "\n");
                 for (Task task : deleted) {
-                    sb.append("\t" + task + "\n");
+                    sb.append(task + "\n");
                 }
             }
 

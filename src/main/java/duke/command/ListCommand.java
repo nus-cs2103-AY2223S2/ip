@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 import duke.constant.DialogType;
@@ -113,8 +112,16 @@ public class ListCommand extends Command {
             sb.append(Message.FIND_TASKS + "\n");
             filtered = filter(db, filterString.get());
         } else {
-            sb.append(Message.LIST_TASKS + "\n");
+            
             filtered = db.getAllTask();
+
+            if (filtered.isEmpty()) {
+                sb.append(Message.LIST_EMPTY + "\n");
+                con.accept(DialogType.WARNING, sb.toString());
+                return;
+            } else {
+                sb.append(Message.LIST_TASKS + "\n");
+            }
         }
 
         for (int i = 0; i < filtered.size(); i++) {

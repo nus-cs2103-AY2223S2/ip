@@ -16,7 +16,7 @@
     </ScrollPane>
       <AnchorPane prefHeight="50.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
-          <TextField fx:id="userInput" onAction="#handleUserInput" prefHeight="40.0" prefWidth="310.0" style="-fx-background-radius: 20;" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="85.0" AnchorPane.topAnchor="5.0">
+          <TextField fx:id="userInput" onAction="#handleUserInput" onKeyPressed="#onKeyPressed" prefHeight="40.0" prefWidth="310.0" style="-fx-background-radius: 20;" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="85.0" AnchorPane.topAnchor="5.0">
                <font>
                   <Font size="16.0" />
                </font>

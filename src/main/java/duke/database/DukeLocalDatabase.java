@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import duke.command.AddCommand;
+import duke.constant.Message;
 import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.task.Task;
@@ -88,9 +89,16 @@ class DukeLocalDatabase {
      * @param taskId
      * @return {@link Task} object
      */
-    public Task removeTask(int taskId) throws IndexOutOfBoundsException {
-        assert taskId > 0;
-        return tasks.remove(taskId - 1);
+    public List<Task> removeTask(int... taskIds) throws IndexOutOfBoundsException {
+        List<Task> res = new ArrayList<Task>();
+        for (int i = taskIds.length - 1; i >= 0; i--) {
+            try {
+                res.add(tasks.remove(taskIds[i] - 1));
+            } catch (IndexOutOfBoundsException e) {
+                System.err.println(Message.EXCEPTION_INVALID_TASK_ID_ACCESS);
+            }
+        }
+        return res;
     }
 
     /**

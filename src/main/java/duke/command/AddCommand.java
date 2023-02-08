@@ -2,7 +2,6 @@ package duke.command;
 
 import java.time.LocalDateTime;
 import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 
 import duke.constant.DialogType;
 import duke.constant.DukeCommand;

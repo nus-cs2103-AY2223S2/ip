@@ -1,14 +1,17 @@
 import java.io.IOException;
+import java.util.Stack;
+import java.util.function.Consumer;
 
 import duke.Duke;
-import duke.constant.DialogType;
 import duke.constant.Message;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 /**
@@ -28,6 +31,9 @@ public class MainWindow extends AnchorPane {
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+
+    private Stack<String> keyLog;
+    private String originalText = "";
 
     /**
      * Default constructor
@@ -49,7 +55,9 @@ public class MainWindow extends AnchorPane {
 
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         scrollPane.setPannable(true);
+
         duke = d;
+        keyLog = new Stack<>();
     }
 
     @FXML
@@ -67,12 +75,15 @@ public class MainWindow extends AnchorPane {
         if (input.isEmpty()) {
             return;
         }
-
+        keyLog.push(input);
         dialogContainer.getChildren().add(DialogBox.getUserDialog(input, userImage));
         duke.getResponse(input, (ty, reply) -> {
             switch (ty) {
             case ERROR:
                 dialogContainer.getChildren().add(DialogBox.getDukeErrorDialog(reply, dukeImage));
+                break;
+            case WARNING:
+                dialogContainer.getChildren().add(DialogBox.getDukeWarningDialog(reply, dukeImage));
                 break;
             default:
                 dialogContainer.getChildren().add(DialogBox.getDukeDialog(reply, dukeImage));
@@ -80,7 +91,33 @@ public class MainWindow extends AnchorPane {
             }
             
         });
+        originalText = "";
         userInput.clear();
+    }
+
+    @FXML
+    private void onKeyPressed(KeyEvent e) {
+        switch (e.getCode()) {
+            case UP:
+                getLog(log -> {
+                    originalText = userInput.getText();
+                    userInput.setText(log);
+                });
+                break;
+            case DOWN:
+                if (!originalText.isEmpty()) {
+                    userInput.setText(originalText);
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void getLog(Consumer<String> log) {
+        if (!keyLog.empty()) {
+            log.accept(keyLog.pop());
+        }
     }
 
 }

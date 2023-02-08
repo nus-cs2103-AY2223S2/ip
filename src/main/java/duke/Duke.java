@@ -1,7 +1,6 @@
 package duke;
 
 import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 
 import duke.command.Command;
 import duke.constant.DialogType;
@@ -9,6 +8,7 @@ import duke.database.DukeRepo;
 import duke.database.DukeRepoImpl;
 import duke.exception.DukeException;
 import duke.parser.Parser;
+
 import javafx.application.Platform;
 
 /**
