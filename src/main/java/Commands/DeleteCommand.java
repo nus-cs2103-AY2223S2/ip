@@ -16,6 +16,7 @@ public class DeleteCommand extends Command {
      * @param userInput The user input.
      */
     public DeleteCommand(String userInput) {
+        assert userInput != null;
         this.taskNumber = getTaskNumber(userInput);
     }
 
@@ -38,6 +39,9 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
+        assert tasks != null;
+        assert ui != null;
+        assert storage != null;
         Task task = tasks.removeTaskByIndex(this.taskNumber - 1);
         return ui.showDeleteTask(task, tasks.getSize());
     }

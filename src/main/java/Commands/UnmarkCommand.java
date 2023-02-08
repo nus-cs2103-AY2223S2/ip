@@ -16,6 +16,7 @@ public class UnmarkCommand extends Command {
      * @param userInput The user input.
      */
     public UnmarkCommand(String userInput) {
+        assert userInput != null;
         this.taskNumber = getTaskNumber(userInput);
     }
 
@@ -38,6 +39,9 @@ public class UnmarkCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
+        assert tasks != null;
+        assert ui != null;
+        assert storage != null;
         Task task = tasks.getTaskByIndex(this.taskNumber - 1);
         task.setUndone();
         return ui.showUnmarkTask(task);
