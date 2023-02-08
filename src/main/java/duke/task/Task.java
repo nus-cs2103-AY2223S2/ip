@@ -42,6 +42,7 @@ public class Task {
      * Changes completion status to done
      */
     public void mark() {
+        assert !isDone : "Task was already done";
         this.isDone = true;
     }
 
@@ -49,6 +50,7 @@ public class Task {
      * Changes completion status to not done
      */
     public void unmark() {
+        assert isDone : "Task was not done";
         this.isDone = false;
     }
 
