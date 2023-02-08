@@ -39,9 +39,9 @@ public class TaskListTest {
     public void shouldListAllTasksWithCorrectIndicies() {
         // @formatter:off
         Task[] tasks = {
-                new TodoTask("Bad Apple"), 
-                new TodoTask("The Woman Who Sold the Moon"),
-                new TodoTask("Maiden's Capriccio")
+            new TodoTask("Bad Apple"),
+            new TodoTask("The Woman Who Sold the Moon"),
+            new TodoTask("Maiden's Capriccio")
         };
         // @formatter:on
         TaskList lst = createTaskList(tasks);

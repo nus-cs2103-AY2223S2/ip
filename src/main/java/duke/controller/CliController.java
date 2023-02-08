@@ -26,7 +26,7 @@ public class CliController {
 
     /**
      * Sets the model that controls the logic of the application.
-     * 
+     *
      * @param model the model to be used by this controller
      */
     public static void setModel(Model model) {
@@ -65,7 +65,7 @@ public class CliController {
 
     /**
      * Checks the exit status of the application.
-     * 
+     *
      * @return {@code true} if the application should be terminated (after the user enters a "bye"
      *         command), otherwise {@code false}
      */

@@ -3,7 +3,6 @@
     "#",
     "java",
     "javax",
-    "javafx",
     "org",
     "com",
     ""
@@ -18,5 +17,6 @@
     "editor.formatOnSave": true,
     "editor.formatOnPaste": true,
     "editor.trimAutoWhitespace": true
-  }
+  },
+  "files.trimTrailingWhitespace": true
 }

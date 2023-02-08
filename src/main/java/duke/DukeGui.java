@@ -1,16 +1,15 @@
 package duke;
 
+import duke.controller.MainWindow;
+import duke.model.Model;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import duke.controller.MainWindow;
-import duke.model.Model;
-
 public class DukeGui extends Application {
 
-    Model model;
-    MainWindow window;
+    private Model model;
+    private MainWindow window;
 
     @Override
     public void init() {

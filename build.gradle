@@ -52,7 +52,7 @@ checkstyle {
 }
 
 checkstyleMain
-    .exclude('duke/Parser.java')
+    .exclude('duke/model/Parser.java')
 
 shadowJar {
     archiveBaseName = "duke"

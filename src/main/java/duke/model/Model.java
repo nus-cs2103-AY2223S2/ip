@@ -12,7 +12,7 @@ public class Model {
 
     /**
      * Creates a new {@code Model} to control the application.
-     * 
+     *
      * @param taskList the underlying {@code TaskList} that stores the managed tasks
      */
     public Model(TaskList taskList) {
@@ -25,7 +25,7 @@ public class Model {
 
     /**
      * Executes a command, given as an input string.
-     * 
+     *
      * @param input the given command, as a string
      * @return the result of executing the command
      */

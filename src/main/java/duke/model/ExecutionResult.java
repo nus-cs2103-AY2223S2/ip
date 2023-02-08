@@ -12,7 +12,7 @@ public class ExecutionResult {
 
     /**
      * Creates a new {@code ExecutionResult} instance.
-     * 
+     *
      * @param message the message generated after executing a command
      * @param exitStatus the exit status generated after executing a command
      */
