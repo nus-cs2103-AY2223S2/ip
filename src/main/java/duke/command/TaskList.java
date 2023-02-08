@@ -51,7 +51,7 @@ public class TaskList {
    * @param input the input
    * @return the string
    */
-  public String add(Task input) {
+  private String add(Task input) {
     try {
       String str;
       if (input.taskName.equals("") || input.taskName.isBlank()) {
@@ -113,7 +113,7 @@ public class TaskList {
    * @param index the index
    * @return the string
    */
-  public String mark(int index) {
+  private String mark(int index) {
     try {
 
       String str;
@@ -123,7 +123,8 @@ public class TaskList {
         str = temp.messageMarked;
         storage.markAt(index);
       } else {
-        str = index + 1 + ") " + temp.taskName + ": " + Parser.MARKED_DUPLICATE_TASKS;
+        str = index + 1 + ") " + temp.taskName
+                + ": " + Parser.MARKED_DUPLICATE_TASKS;
       }
       return str;
     } catch (IndexOutOfBoundsException e) {
@@ -137,7 +138,7 @@ public class TaskList {
    * @param index the index
    * @return the string
    */
-  public String unmark(int index) {
+  private String unmark(int index) {
     try {
       String str;
       Task temp = tasks.get(index);
@@ -161,7 +162,7 @@ public class TaskList {
    * @param index the index
    * @return the string
    */
-  public String delete(int index) {
+  private String delete(int index) {
     try {
       String str;
       Task temp = tasks.get(index);
@@ -180,7 +181,7 @@ public class TaskList {
    * Init.
    * Init and Load in Tasks from Txt file
    */
-  void init() {
+  private void init() {
     storage.read();
     if (!storage.records.isEmpty()) {
       for (int x = 0; x < storage.records.size(); x++) {
@@ -235,13 +236,13 @@ public class TaskList {
    * @param end   the end
    * @return the string
    */
-  public String markList(int start, int end) {
+  private String markList(int start, int end) {
     StringBuilder str = new StringBuilder();
     for (int x = start; x <= end; x++) {
       str.append(mark(x));
     }
     String next = str.toString();
-    return  next.contains(Parser.MARKED_THESE_TASKS_AS_DONE)
+    return next.contains(Parser.MARKED_THESE_TASKS_AS_DONE)
             ? str.toString().replace(Parser.MARKED_THIS_TASK_AS_DONE, "\n")
             + "\n" + Parser.MARKED_THESE_TASKS_AS_DONE
             : next;
@@ -253,7 +254,7 @@ public class TaskList {
    * @param a the a
    * @return the string
    */
-  public String markMulti(String[] a) {
+  private String markMulti(String[] a) {
     StringBuilder str = new StringBuilder();
     if (a.length - 1 > tasks.size()) {
       str.append("Out of range Buddy \n");
@@ -273,13 +274,13 @@ public class TaskList {
    * @param end   the end
    * @return the string
    */
-  public String unmarkList(int start, int end) {
+  private String unmarkList(int start, int end) {
     StringBuilder str = new StringBuilder();
     for (int x = start; x <= end; x++) {
       str.append(unmark(x));
     }
     String next = str.toString();
-    return  next.contains(Parser.MARKED_THESE_TASKS_AS_DONE)
+    return next.contains(Parser.MARKED_THESE_TASKS_AS_DONE)
             ? str.toString().replace(Parser.MARKED_THIS_TASK_AS_DONE, "\n")
             + "\n" + Parser.MARKED_THESE_TASKS_AS_DONE
             : next;
@@ -291,7 +292,7 @@ public class TaskList {
    * @param a the a
    * @return the string
    */
-  public String unmarkMulti(String[] a) {
+  private String unmarkMulti(String[] a) {
     StringBuilder str = new StringBuilder();
     if (a.length - 1 > tasks.size()) {
       str.append("Out of range Buddy \n");
@@ -311,7 +312,7 @@ public class TaskList {
    * @param end   the end
    * @return the string
    */
-  public String deleteList(int start, int end) {
+  private String deleteList(int start, int end) {
     StringBuilder str = new StringBuilder();
     for (int x = end; x >= start; x--) {
       str.append(delete(x));
@@ -328,7 +329,7 @@ public class TaskList {
    * @param a the a
    * @return the string
    */
-  public String deleteMulti(String[] a) {
+  private String deleteMulti(String[] a) {
 
     List<String> strs = Arrays.asList(a);
     List<Integer> integers =
@@ -340,5 +341,104 @@ public class TaskList {
       str.append(delete(integers.get(x) - 1));
     }
     return str.toString();
+  }
+
+  /**
+   * Ops mark string.
+   *
+   * @param tokens the tokens
+   * @return the string
+   */
+  public String opsMark(String[] tokens) {
+    if (tokens.length == 2) {
+      //mark 1-3
+      if (tokens[1].contains("-")) {
+        String[] indexes = tokens[1].split("-");
+        return markList(Integer.parseInt(indexes[0]) - 1,
+                Integer.parseInt(indexes[1]) - 1);
+      } else {
+        return mark(Integer.parseInt(tokens[1]) - 1);
+      }
+    } else {
+      return markMulti(tokens);
+    }
+  }
+
+  /**
+   * Ops unmark string.
+   *
+   * @param tokens the tokens
+   * @return the string
+   */
+  public String opsUnmark(String[] tokens) {
+    //unmark 1-3 or mark 1
+    if (tokens.length == 2) {
+      //unmark 1-3
+      if (tokens[1].contains("-")) {
+        String[] indexes = tokens[1].split("-");
+        return unmarkList(Integer.parseInt(indexes[0]) - 1,
+                Integer.parseInt(indexes[1]) - 1);
+      } else {
+        return unmark(Integer.parseInt(tokens[1]) - 1);
+      }
+    } else {
+      return unmarkMulti(tokens);
+    }
+  }
+
+  /**
+   * Ops delete string.
+   *
+   * @param tokens the tokens
+   * @param input  the input
+   * @return the string
+   */
+  public String opsDelete(String[] tokens, String input) {
+    if (tokens.length == 2) {
+      //delete 1-3
+      if (tokens[1].contains("-")) {
+        String[] indexes = tokens[1].split("-");
+        return deleteList(Integer.parseInt(indexes[0]) - 1,
+                Integer.parseInt(indexes[1]) - 1);
+      } else {
+        return delete(Integer.parseInt(tokens[1]) - 1);
+      }
+    } else {
+      String[] filtered = input.replace("delete", "-1").split(" ");
+      return deleteMulti(filtered);
+    }
+  }
+
+  /**
+   * Ops add todo string.
+   *
+   * @param name the name
+   * @return the string
+   */
+  public String opsAddTodo(String name) {
+    ToDo todo = new ToDo(name, false);
+    return add(todo);
+  }
+
+  /**
+   * Ops add deadline string.
+   *
+   * @param name the name
+   * @return the string
+   */
+  public String opsAddDeadline(String name) {
+    Deadlines deadlines = new Deadlines(name, false);
+    return add(deadlines);
+  }
+
+  /**
+   * Ops add event string.
+   *
+   * @param name the name
+   * @return the string
+   */
+  public String opsAddEvent(String name) {
+    Events events = new Events(name, false);
+    return add(events);
   }
 }
