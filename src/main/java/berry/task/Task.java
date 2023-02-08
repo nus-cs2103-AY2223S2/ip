@@ -4,8 +4,11 @@ package berry.task;
  * Represents a task class.
  */
 public abstract class Task {
+    private static int NUMBER_VAR_IN_STORAGE_TODO = 3;
+    private static int NUMBER_VAR_IN_STORAGE_DEADLINE = 4;
+    private static int NUMBER_VAR_IN_STORAGE_EVENT = 5;
 
-    /** Indicates if the task is done */
+    // Indicates if the task is done
     protected boolean isDone;
     protected String description;
 
@@ -46,7 +49,10 @@ public abstract class Task {
      */
     public boolean hasKeyword(String ... keyword) {
         for (String word : keyword) {
-            if (description.contains(word)) return true;
+            if (description.contains(word)) {
+                return true;
+
+            }
         }
         return false;
     }
@@ -67,11 +73,11 @@ public abstract class Task {
     public static Task interpretTextToTask(String s) {
         String isDoneStatus = s.split(" \\| ")[1];
         boolean isDone = isDoneStatus.equals("X") ? true : false;
-        if (s.split(" \\| ").length == 3) {
+        if (s.split(" \\| ").length == NUMBER_VAR_IN_STORAGE_TODO) {
             return new Todo(s.split(" \\| ")[2], isDone);
-        } else if (s.split(" \\| ").length == 4) {
+        } else if (s.split(" \\| ").length == NUMBER_VAR_IN_STORAGE_DEADLINE) {
             return new Deadline(s.split(" \\| ")[2], isDone, s.split(" \\| ")[3]);
-        } else {
+        } else if (s.split(" \\| ").length == NUMBER_VAR_IN_STORAGE_EVENT) {
             return new Event(s.split(" \\| ")[2], isDone, s.split(" \\| ")[3], s.split(" \\| ")[4]);
         }
     }

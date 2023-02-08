@@ -17,10 +17,10 @@ import java.util.Scanner;
  */
 public class Storage {
 
-    /** Default file path used if the user doesn't provide the file name. */
+    // Default file path used if the user doesn't provide the file name.
     public static final String DEFAULT_STORAGE_FILEPATH = "berry.txt";
 
-    /** The filePath given by Berry */
+    // The filePath given by Berry
     private String filePath;
 
     /**
@@ -90,7 +90,7 @@ public class Storage {
      */
     private File createFile() {
         File dataFile = new File(filePath);
-        File folder =  new File(filePath.split("/")[0]);
+        File folder = new File(filePath.split("/")[0]);
         try {
             folder.mkdir();
             dataFile.createNewFile();

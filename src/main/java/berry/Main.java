@@ -28,7 +28,6 @@ public class Main extends Application {
             Scene scene = new Scene(anchorPane);
             stage.setScene(scene);
 
-//            fxmlLoader.<MainWindow>getController().setBerry(berry);
             MainWindow mainWindow = fxmlLoader.getController();
             mainWindow.setBerry(berry);
             mainWindow.setStage(stage);

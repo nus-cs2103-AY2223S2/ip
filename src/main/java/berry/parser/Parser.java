@@ -43,7 +43,7 @@ public class Parser {
 
         try {
             commandType = CommandType.valueOf(splitDescriptionAndDetails[0].toUpperCase());
-        } catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             throw new UnknownCommandException();
         }
 
