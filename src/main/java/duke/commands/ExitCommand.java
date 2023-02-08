@@ -2,7 +2,6 @@ package duke.commands;
 
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.Ui;
 
 /**
  * Represents a Command to exit from Duke.
@@ -17,11 +16,10 @@ public class ExitCommand extends Command {
     /**
      * Exit command does not execute anything and Duke will close after exit command.
      * @param tasks Existing TaskList used by the main Duke class.
-     * @param ui Existing Ui used by the main Duke class.
      * @param storage Existing Storage used by the main Duke class.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
-        return "";
+    public String execute(TaskList tasks, Storage storage) {
+        return "Please click the X button on the top right to close Duke. Thank you for using Duke!";
     }
 }

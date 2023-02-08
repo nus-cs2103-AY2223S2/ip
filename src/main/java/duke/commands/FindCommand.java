@@ -6,7 +6,7 @@ import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.ui.Ui;
+import duke.utils.Formatter;
 
 /**
  * Represents FindCommand that will display tasks matching a specific keyword
@@ -26,18 +26,18 @@ public class FindCommand extends Command {
      * Calls TaskList find method to get the list with matching tasks.
      * Prompts Ui to display list as an indexed list.
      * @param tasks Existing TaskList used by the main Duke class.
-     * @param ui Existing Ui used by the main Duke class.
      * @param storage Existing Storage used by the main Duke class.
      * @return output to be shown to user
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         assert tasks != null;
         ArrayList<Task> matchingTasks = tasks.find(this.keyword);
         if (matchingTasks.size() > 0) {
-            return ui.showToUser("Here are the matching tasks in your list: ", ui.showIndexedList(matchingTasks));
+            return Formatter.formatMultipleMessages("Here are the matching tasks: ",
+                    Formatter.formatIndexedList(matchingTasks));
         } else {
-            return ui.showToUser("No matching tasks were found.");
+            return "No matching tasks were found. \n";
         }
     }
 }

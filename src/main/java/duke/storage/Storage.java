@@ -1,9 +1,10 @@
 package duke.storage;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -31,6 +32,7 @@ public class Storage {
     public ArrayList<Task> load() throws DukeException {
         //if file is found successfully
         try {
+            Files.createDirectories(Path.of(this.path).getParent()); //create parent directories if none exists
             File fileTxt = new File(this.path);
             Scanner scanner = new Scanner(fileTxt);
             ArrayList<Task> taskArrayList = new ArrayList<>();
@@ -40,7 +42,7 @@ public class Storage {
                 taskArrayList.add(savedTask);
             }
             return taskArrayList;
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             throw new DukeException("Failed to load task file");
         }
     }
