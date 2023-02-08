@@ -1,6 +1,7 @@
 package utilities;
 
 import java.util.List;
+import java.util.Objects;
 
 import services.SpeakerRegistry;
 import types.IHandler;
@@ -21,6 +22,7 @@ public final class CommandHelper {
      * @return Whether any handlers in the list is suitable.
      */
     public static boolean checkAndRun(SpeakerRegistry sr, List<IHandler> handlers, String expr) {
+        assert Objects.nonNull(sr);
         for (IHandler c : handlers) {
             if (c.canTake(expr)) {
                 sr.broadcast(c.take(expr));

@@ -2,7 +2,6 @@ package gui;
 
 import containers.FileContainer;
 import javafx.application.Application;
-
 import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -16,18 +15,19 @@ import javafx.stage.Stage;
 import services.Dispatcher;
 import services.SpeakerRegistry;
 import services.TaskList;
-import speakers.StdOut;
 import types.ISpeaker;
 import utilities.DispatcherProvider;
 
+/**
+ * The GUI runner.
+ */
 public class JavaFxGuiOut extends Application implements ISpeaker {
-
-
+    private static final SpeakerRegistry sp = new SpeakerRegistry();
+    private static final TaskList ts = new TaskList(FileContainer.ofLocation("./data/tasks.txt", true));
     private final Dispatcher dispatcher = DispatcherProvider.getDefaultDispatcher(() -> {
         Platform.exit();
-        System.exit(0);}, this);
-    private static final TaskList ts = new TaskList(FileContainer.ofLocation("./data/tasks.txt", true));
-    private static final SpeakerRegistry sp = new SpeakerRegistry();
+        System.exit(0);
+    }, this);
 
     private ScrollPane scrollPane;
     private VBox dialogContainer;

@@ -1,5 +1,6 @@
 package handlers;
 
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 import services.TaskList;
@@ -19,6 +20,7 @@ public final class JShowTaskList implements IHandler {
 
     @Override
     public String take(String s) {
+        assert Objects.nonNull(ts);
         int no = 1;
         StringBuilder sb = new StringBuilder(20 * ts.getTaskCount());
         for (Task i : ts.getTasks()) {
