@@ -1,6 +1,7 @@
 package duke.ui;
 import duke.Duke;
 import duke.Message;
+import duke.exceptions.DukeException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -63,6 +64,10 @@ public class UiController {
      * @return Duke's response.
      */
     Message getResponse(Message msg) {
-        return context.respondToMessage(msg);
+        try {
+            return context.respondToMessage(msg);
+        } catch (DukeException e) {
+            return new Message(e.getMessage());
+        }
     }
 }
