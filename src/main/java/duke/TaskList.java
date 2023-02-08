@@ -35,11 +35,11 @@ public class TaskList {
     void parseEventFromFile(String[] tokens) {
         String taskType = tokens[0];
         if (Objects.equals(taskType, "T")) {
-            tasks.add(new ToDo(tokens[2], tokens[1]));
+            tasks.add(new ToDo(tokens[3], tokens[1], tokens[2]));
         } else if (Objects.equals(taskType, "D")) {
-            tasks.add(new Deadline(tokens[2], tokens[3], tokens[1]));
+            tasks.add(new Deadline(tokens[3], tokens[4], tokens[1], tokens[2]));
         } else if (Objects.equals(taskType, "E")) {
-            tasks.add(new Event(tokens[2], tokens[3], tokens[4], tokens[1]));
+            tasks.add(new Event(tokens[3], tokens[4], tokens[5], tokens[1], tokens[2]));
         }
     }
 
@@ -278,6 +278,21 @@ public class TaskList {
                     .append("\n");
         }
         return sb.toString();
+    }
+
+    public Task addTag(String[] tokens) throws DukeException {
+        try {
+            int index = Integer.parseInt(tokens[1]) - 1;
+            String tag = tokens[2];
+            if (index < 0 || index >= tasks.size()) {
+                throw new DukeException("Please specify a valid index");
+            }
+            Task task = tasks.get(index);
+            task.setTag(tag);
+            return task;
+        } catch (NumberFormatException e) {
+            throw new DukeException("Please specify a valid index to tag");
+        }
     }
 
     /**

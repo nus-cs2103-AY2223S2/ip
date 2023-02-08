@@ -47,6 +47,11 @@ public class Duke extends Application {
                 " tasks in the list\n";
     }
 
+    private String taskTaggedMessage(Task task) {
+        return "Got it. I've tagged this task:\n" +
+                task.toString() + "\n";
+    }
+
     /**
      * Returns a <code>Message</code> that represents the response of the chatbot when prompted by an input by user.
      * @param msg A <code>Message</code> object representing the user's request
@@ -99,6 +104,10 @@ public class Duke extends Application {
         case "find":
             List<Integer> indexList = taskList.getMatchingItemsIndices(tokens);
             return new Message(taskList.getItemListAsResponseString(indexList));
+
+        case "tag":
+            Task taggedTask = taskList.addTag(tokens);
+            return new Message(taskTaggedMessage(taggedTask));
 
         default:
             return new Message("unknown command\n");
