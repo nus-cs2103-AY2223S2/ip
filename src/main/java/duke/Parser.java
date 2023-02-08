@@ -1,5 +1,9 @@
 package duke;
 
+import exceptions.EmptyContentException;
+import exceptions.InvalidTaskAccessException;
+import exceptions.UnknownInputException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -38,5 +42,39 @@ public class Parser {
         String[] splitCommand = input.split(" ", 2);
         int index = Integer.parseInt(splitCommand[1]) - 1;
         return index;
+    }
+
+    public static String execute(TaskHandler handler, UIText ui, Storage storage)
+            throws UnknownInputException, EmptyContentException, InvalidTaskAccessException {
+        String input = ui.getInput();
+        System.out.println(ui.separate());
+        if (input.equals("bye")) {
+            return ui.exit();
+        } else if (input.equals("list")) {
+            return handler.display();
+        } else if (input.startsWith("mark")) {
+            storage.saveTasks();
+            return handler.markAsDone(input);
+        } else if (input.startsWith("unmark")) {
+            storage.saveTasks();
+            return handler.markAsUndone(input);
+        } else if (input.startsWith("event")) {
+            storage.saveTasks();
+            return handler.eventHandler(input);
+        } else if (input.startsWith("todo")) {
+            storage.saveTasks();
+            return handler.todoHandler(input);
+        } else if (input.startsWith("deadline")) {
+            storage.saveTasks();
+            return handler.deadlineHandler(input);
+        } else if (input.startsWith("delete")) {
+            storage.saveTasks();
+            return handler.deleteHandler(input);
+        } else if (input.startsWith("find")) {
+            storage.saveTasks();
+            return handler.findHandler(input);
+        } else {
+            throw new UnknownInputException();
+        }
     }
 }
