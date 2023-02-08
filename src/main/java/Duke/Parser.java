@@ -20,6 +20,18 @@ public class Parser {
 
     private static boolean flag = true;
 
+    /**
+     * The method for listOut
+     * @param listOfTasks the TasklistOfTasks where tasks are stored in
+     */
+    private static String listOut(TaskList listOfTasks) {
+        System.out.println(Ui.Underline());
+        String listString = "";
+        for (int i = 0; i < listOfTasks.size(); i++) {
+            listString += String.format("\t" + (i + 1) + ".%s\n", listOfTasks.get(i + 1).toString());
+        }
+        return String.format(Ui.listMsg() + "\n" + "%s\n" + Ui.Underline(), listString);
+    }
 
     /**
      * The method for addTodo
@@ -73,8 +85,8 @@ public class Parser {
 
     /**
      * The method for delete
-     * @param number the
-     * @param listOfTasks
+     * @param number the index of task to delete + 1
+     * @param listOfTasks list of task task is deleted from
      */
     public static String delete(String number, TaskList listOfTasks) {
         int lenBefore = listOfTasks.size();
@@ -123,22 +135,19 @@ public class Parser {
     public static String parse(String instct, TaskList listOfTasks) throws IOException  {
 
         try {
-            if (instct.split(" ")[0].equals("list") ) {
-                System.out.println(Ui.Underline());
-                String listString = "";
-                for (int i = 0; i < listOfTasks.size(); i++) {
-                    listString += String.format("\t" + (i + 1) + ".%s\n", listOfTasks.get(i + 1).toString());
-                }
-                return String.format(Ui.listMsg() + "\n" + "%s\n" + Ui.Underline(), listString);
+             if((instct.split(" ").length) == 1) {
+                 if (instct.split(" ")[0].equals("list")) {
+                     String response = listOut(listOfTasks);
+                     return response;
 
-
-            }
-            else if (instct.split(" ")[0].equals("bye")) {
-                System.out.println(Ui.Underline());
-                flag = false;
-                return Ui.sayBye();
-            }
-            else if ((instct.split(" ").length) > 1 && !instct.split(" ")[0].equals("list")) {
+                 } else if (instct.split(" ")[0].equals("bye")) {
+                     System.out.println(Ui.Underline());
+                     flag = false;
+                     return Ui.sayBye();
+                 }
+                 throw new unknownCommandException();
+             }
+            else if ((instct.split(" ").length) > 1 ) {
                 if (instct.split(" ")[0].equals("mark")) {
                     System.out.println(Ui.Underline());
                     int numbering = Integer.parseInt(instct.split(" ")[1]) ;
