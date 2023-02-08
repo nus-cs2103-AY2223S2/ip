@@ -23,12 +23,13 @@ public abstract class Command {
     /**
      * Executes commands based on user input.
      *
-     * @param taskList Stores all tasks.
-     * @param ui Handles all user interaction.
-     * @param storage Handles all storage of tasks in a file.
+     * @param tasks Stores all tasks.
+     * @param ui       Handles all user interaction.
+     * @param storage  Handles all storage of tasks in a file.
+     * @return Returns string output.
      * @throws DukeException Checks if input is valid.
      */
-    public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
     /**
      * @return Boolean to exit program.

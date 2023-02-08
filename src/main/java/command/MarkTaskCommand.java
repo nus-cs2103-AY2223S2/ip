@@ -28,15 +28,15 @@ public class MarkTaskCommand extends Command {
     /**
      * Mark or unmark task depending on boolean passed from constructor.
      *
-     * @param taskList Stores all tasks.
+     * @param tasks Stores all tasks.
      * @param ui       Handles all user interaction.
      * @param storage  Handles all storage of tasks in a file.
+     * @return Returns string output.
      * @throws DukeException Checks if input is valid.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        taskList.markTask(isMarked, this.getInputArr(), ui);
-        storage.writeData(taskList);
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        return tasks.markTask(isMarked, this.getInputArr(), ui, storage);
     }
 
     /**

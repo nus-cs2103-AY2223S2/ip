@@ -6,7 +6,6 @@ import store.Storage;
 import store.TaskList;
 import userinteraction.Parser;
 import userinteraction.Ui;
-import utils.DateTimeUtils;
 
 /**
  * Runs the whole application for users to store and track tasks.
@@ -16,6 +15,7 @@ public class Duke {
     private static final String DIRECTORY_PATH = "src/data";
     private final Ui ui;
     private final Storage storage;
+    private final TaskList tasks;
 
     /**
      * Public constructor for Duke.
@@ -23,32 +23,48 @@ public class Duke {
     public Duke() {
         ui = new Ui();
         storage = new Storage(FILE_PATH, DIRECTORY_PATH);
-
+        tasks = storage.readData();
     }
 
     /**
      * Runs entire program
      */
     public void run() {
-        ui.printWelcomeMsg();
-        ui.printLine();
-        TaskList taskList = storage.readData();
+        ui.welcomeMsg();
+        ui.lineString();
         boolean isBye = false;
         while (!isBye) {
             try {
-                DateTimeUtils.dateFormatter("2023-12-03");
                 String input = ui.readCommand();
                 Command command = Parser.parse(input);
                 if (command != null) {
-                    command.execute(taskList, ui, storage);
+                    command.execute(tasks, ui, storage);
                     isBye = command.isExit();
                 }
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
             }
         }
-        ui.printByeMsg();
+        ui.byeMsg();
     }
+
+    public String getResponse(String input) {
+        try {
+            Command command = Parser.parse(input);
+            return command.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            return e.getMessage();
+        } catch (NullPointerException e) {
+            return "Something is missing!";
+        } catch (Exception e) {
+            return "Unknown error, please try again!";
+        }
+    }
+
+    public Ui getUi() {
+        return ui;
+    }
+
     public static void main(String[] args) {
         new Duke().run();
     }

@@ -22,16 +22,17 @@ public class AddDeadLineCommand extends AddTaskCommand {
     /**
      * Generates deadline task, adds to tasklist and saves data to file.
      *
-     * @param taskList Stores all tasks.
+     * @param tasks Stores all tasks.
      * @param ui       Handles all user interaction.
      * @param storage  Handles all storage of tasks in a file.
+     * @return Returns string output.
      * @throws DukeException Checks if input is valid.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         DeadLine deadLine = DeadLine.generate(this.getInputArr());
-        taskList.addTask(deadLine);
-        storage.writeData(taskList);
-        ui.printAddTaskMsg(taskList, deadLine);
+        tasks.addTask(deadLine);
+        storage.writeData(tasks);
+        return ui.addTaskMsg(tasks, deadLine);
     }
 }
