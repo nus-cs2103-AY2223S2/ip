@@ -1,144 +1,131 @@
 package roody;
+
 import java.util.ArrayList;
-import java.util.List;
 
 /**
- * Represents a CLI User Interface.
+ * Represents a User Interface.
  */
 public class Ui {
-    /** Stores a list of strings to be printed */
-    private List<String> printBuffer;
+
 
     /**
-     * Creates a User Interface that prompts the user from CLI
+     * Creates a User Interface.
      */
-    public Ui() {
-        this.printBuffer = new ArrayList<String>();
+    public Ui() {}
+
+    /**
+     * Returns basic line.
+     * @return A Line.
+     */
+    public String showLine() {
+        return "____________________________________________________________\n";
     }
 
     /**
-     * Prints basic line
+     * Returns start of line
+     * @return An arrow for start of line.
      */
-    public void showLine() {
-        System.out.println("____________________________________________________________");
+    public String startNextLine() {
+        return "=> ";
     }
 
     /**
-     * Prints start of line
-     */
-    public void startNextLine() {
-        System.out.print("=> ");
-    }
-
-    /**
-     * Prints output to console using specified input.
-     * @param input Input string to be printed.
-     */
-    public void speak(String input) {
-        showLine();
-        System.out.println(input);
-    }
-
-    /**
-     * Prints output to console using specified input.
-     * @param inputs List of input to be printed.
-     */
-    public void speak(List<String> inputs) {
-        showLine();
-        inputs.forEach(x -> System.out.println(x));
-        inputs.clear();
-    }
-
-    /**
-     * Prints a successful task addition to console for user.
+     * Returns a successful task addition message.
      * @param task  Task that has been added.
      * @param listLength Length of the current list after addition.
+     * @return Delete task message.
      */
-    public void showAddTask(Task task, int listLength) {
-        printBuffer.add("Got it. I've added this task:");
-        printBuffer.add(task.toString());
-        printBuffer.add("Now you have " + listLength + " tasks in the list.");
-        speak(printBuffer);
+    public String showAddTask(Task task, int listLength) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Got it. I've added this task:\n");
+        stringBuilder.append(task.toString() + '\n');
+        stringBuilder.append("Now you have " + listLength + " tasks in the list.\n");
+        return stringBuilder.toString();
     }
 
     /**
-     * Prints a successful task deletion to console for user.
+     * Returns a successful task deletion message.
      * @param task  Task that has been added.
      * @param listLength Length of the current list after deletion.
+     * @return Delete task message.
      */
-    public void showDeleteTask(Task task, int listLength) {
-        printBuffer.add("Noted. I've removed this task:");
-        printBuffer.add(task.toString());
-        printBuffer.add("Now you have " + listLength + " tasks in the list.");
-        speak(printBuffer);
+    public String showDeleteTask(Task task, int listLength) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Noted. I've removed this task:\n");
+        stringBuilder.append(task.toString() + '\n');
+        stringBuilder.append("Now you have " + listLength + " tasks in the list.\n");
+        return stringBuilder.toString();
     }
 
     /**
-     * Prints a successful marking/unmarking of task to console for user.
+     * Returns a successful marking/unmarking of task message.
      * @param complete New status of task.
      * @param task  Task that has been added.
+     * @return Marking message.
      */
-    public void showMarkStatus(boolean complete, Task task) {
+    public String showMarkStatus(boolean complete, Task task) {
+        StringBuilder stringBuilder = new StringBuilder();
         if (complete) {
-            printBuffer.add("Nice! I've marked this task as done:");
+            stringBuilder.append("Nice! I've marked this task as done:\n");
         } else {
-            printBuffer.add("OK, I've marked this task as not done yet:");
+            stringBuilder.append("OK, I've marked this task as not done yet:\n");
         }
-        printBuffer.add(task.toString());
-        speak(printBuffer);
+        stringBuilder.append(task.toString() + '\n');
+        return stringBuilder.toString();
     }
 
     /**
-     * Shows tasks that are found with relevant keywords to console.
-     * @param list  List of found tasks.
+     * Shows tasks that are found with relevant keywords in a String.
+     * @param list List of found tasks.
+     * @return Tasks with keywords in List.
      * @throws RoodyException If no matching tasks found.
      */
-    public void showFoundTasks(ArrayList<Task> list) throws RoodyException {
+    public String showFoundTasks(ArrayList<Task> list) throws RoodyException {
         if (list.size() == 0) {
             throw new RoodyException("No matching tasks in your list!");
         }
-        printBuffer.add("Here are the matching tasks in your list:");
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Here are the matching tasks in your list:\n");
         Integer listIndex = 0;
         for (Task task : list) {
             listIndex++;
-            printBuffer.add(listIndex.toString() + '.' + task.toString());
+            stringBuilder.append(listIndex.toString() + '.' + task.toString() + '\n');
         }
-        speak(printBuffer);
+        return stringBuilder.toString();
     }
 
+
     /**
-     * Prints tasks in given list to console.
+     * Returns tasks in given list as a String.
      * @param list List of tasks to be printed.
+     * @return Tasks in List.
      * @throws RoodyException If not tasks in list.
      */
-    public void printList(ArrayList<Task> list) throws RoodyException {
+    public String printList(ArrayList<Task> list) throws RoodyException {
         if (list.size() == 0) {
             throw new RoodyException("There doesn't seem to be any tasks in your list.");
         }
-        printBuffer.add("Here are the tasks in your list:");
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Here are the tasks in your list:\n");
         Integer listIndex = 0;
         for (Task task : list) {
             listIndex++;
-            printBuffer.add(listIndex.toString() + '.' + task.toString());
+            stringBuilder.append(listIndex.toString() + '.' + task.toString() + '\n');
         }
-        speak(printBuffer);
+        return stringBuilder.toString();
     }
 
     /**
-     * Prints basic greeting.
+     * Returns basic greeting string.
      */
-    public void greet() {
-        this.printBuffer.add("Hello, I'm Roody!");
-        this.printBuffer.add("What can I do for you?");
-        speak(this.printBuffer);
-        showLine();
+    public String greet() {
+        return "Hello, I'm Roody!\nWhat can I do for you?\n";
     }
 
     /**
-     * Prints basic farewell.
+     * Prints basic farewell string.
      */
-    public void bye() {
-        speak("Bye. Hope to see you again soon!");
-        showLine();
+    public String bye() {
+        return "Bye. Hope to see you again soon!\n";
     }
 }

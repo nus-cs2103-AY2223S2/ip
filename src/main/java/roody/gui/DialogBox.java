@@ -1,3 +1,5 @@
+package roody.gui;
+
 import java.io.IOException;
 import java.util.Collections;
 
@@ -11,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+
 
 /**
  * An example of a custom control using FXML.
@@ -51,9 +54,9 @@ public class DialogBox extends HBox {
         return new DialogBox(text, img);
     }
 
-    public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
-        db.flip();
-        return db;
+    public static DialogBox getRoodyDialog(String text, Image img) {
+        var rd = new DialogBox(text, img);
+        rd.flip();
+        return rd;
     }
 }

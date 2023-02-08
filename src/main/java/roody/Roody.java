@@ -3,7 +3,9 @@ package roody;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.Scanner;
+
+import javafx.application.Application;
+import roody.gui.RoodyMain;
 
 /**
  * Represents a CLI chatbot named Roody.
@@ -27,24 +29,24 @@ public class Roody {
         this.list = new ArrayList<Task>();
         this.ui = new Ui();
         this.storage = new Storage(filepath);
+        list = storage.loadFile();
     }
 
     // toggles completion status of tasks
-    private void completeTask(int index, boolean complete) throws RoodyException {
+    private Task toggleTask(int index, boolean complete) throws RoodyException {
         if (index > list.size() - 1 || list.get(index) == null) {
             throw new RoodyException("Sorry, that task doesn't exist");
-        } else {
-            Task task = list.get(index);
-            if (complete) {
-                task.setDone();
-            } else {
-                task.setUnDone();
-            }
-            ui.showMarkStatus(complete, task);
         }
+        Task task = list.get(index);
+        if (complete) {
+            task.setDone();
+        } else {
+            task.setUnDone();
+        }
+        return task;
     }
 
-    private void findTaskByKeyword(String keyword) throws RoodyException {
+    private ArrayList<Task> findTaskByKeyword(String keyword) throws RoodyException {
         ArrayList<Task> foundTasks = new ArrayList<>();
         for (Task task : list) {
             // Splits by "|"
@@ -58,108 +60,120 @@ public class Roody {
                 }
             }
         }
-        ui.showFoundTasks(foundTasks);
+        return foundTasks;
     }
 
-    private void deleteTask(int index) throws RoodyException {
+    private Task deleteTask(int index) throws RoodyException {
         if (index > list.size() - 1 || list.get(index) == null) {
             throw new RoodyException("Sorry, that task doesn't exist");
         } else {
             Task task = list.get(index);
             list.remove(index);
-            ui.showDeleteTask(task, list.size());
+            return task;
         }
     }
 
-    /**
-     * Runs the main process of chatbot
-     */
-    public void run() {
-        // Sends initial greeting
-        ui.greet();
-        list = storage.loadFile();
-        Scanner scanner = new Scanner(System.in);
-        boolean isExit = false;
+    private Task makeTodo(String[] commands) throws RoodyException {
+        if (commands.length < 2) {
+            throw new RoodyException("Tasks require a description");
+        }
+        return new Todo(commands[1]);
+    }
+
+    private Task makeDeadline(String[] commands) throws RoodyException {
+        if (commands.length < 2) {
+            throw new RoodyException("Tasks require a description");
+        }
+        try {
+            return new Deadline(commands[1], LocalDate.parse(commands[2]));
+        } catch (DateTimeParseException e) {
+            throw new RoodyException("Accepted date format is yyyy-mm-dd.");
+        }
+    }
+
+    private Task makeEvent(String[] commands) throws RoodyException {
+        if (commands.length < 2) {
+            throw new RoodyException("Tasks require a description");
+        }
+        try {
+            return new Event(commands[1], LocalDate.parse(commands[2]), LocalDate.parse(commands[3]));
+        } catch (DateTimeParseException e) {
+            throw new RoodyException("Accepted date format is yyyy-mm-dd.");
+        }
+    }
+
+    public String getResponse(String input) {
         Task task;
-        while (!isExit) {
-            ui.startNextLine();
-            try {
-                String command = scanner.nextLine();
-                String[] commands = Parser.parse(command);
-                switch (commands[0]) {
-                case "list":
-                    ui.printList(list);
-                    break;
-                case "todo":
-                    if (commands.length < 2) {
-                        throw new RoodyException("Tasks require a description");
-                    }
-                    task = new Todo(commands[1]);
-                    list.add(task);
-                    ui.showAddTask(task, list.size());
-                    break;
-                case "deadline":
-                    if (commands.length < 2) {
-                        throw new RoodyException("Tasks require a description");
-                    }
-                    try {
-                        task = new Deadline(commands[1], LocalDate.parse(commands[2]));
-                        list.add(task);
-                        ui.showAddTask(task, list.size());
-                    } catch (DateTimeParseException e) {
-                        throw new RoodyException("Accepted date format is yyyy-mm-dd.");
-                    }
-                    break;
-                case "event":
-                    if (commands.length < 2) {
-                        throw new RoodyException("Tasks require a description");
-                    }
-                    try {
-                        task = new Event(commands[1], LocalDate.parse(commands[2]), LocalDate.parse(commands[3]));
-                        list.add(task);
-                        ui.showAddTask(task, list.size());
-                    } catch (DateTimeParseException e) {
-                        throw new RoodyException("Accepted date format is yyyy-mm-dd.");
-                    }
-                    break;
-                case "delete":
-                case "mark":
-                case "unmark":
-                    if (commands.length != 2) {
-                        throw new RoodyException("Please enter a index number to be marked/unmarked/deleted"
-                                + " - \"mark/unmark/delete {index}\"");
-                    }
-                    int index = Integer.parseInt(commands[0]) - 1;
-                    if (commands[0].equals("delete")) {
-                        deleteTask(index);
-                    } else {
-                        completeTask(index, commands[0].equals("mark"));
-                    }
-                    break;
-                case "bye":
-                    isExit = true;
-                    break;
-                default:
-                    throw new RoodyException("I don't quite understand that.");
+        String message = ui.showLine();
+        try {
+            String[] commands = Parser.parse(input);
+            switch (commands[0]) {
+            // special command, to greet user
+            case "start":
+                message += ui.greet();
+                break;
+            case "list":
+                message += ui.printList(list);
+                break;
+            case "todo":
+                task = makeTodo(commands);
+                list.add(task);
+                message += ui.showAddTask(task, list.size());
+                break;
+            case "deadline":
+                task = makeDeadline(commands);
+                list.add(task);
+                message += ui.showAddTask(task, list.size());
+                break;
+            case "event":
+                task = makeEvent(commands);
+                list.add(task);
+                message += ui.showAddTask(task, list.size());
+                break;
+            case "delete":
+                if (commands.length != 2) {
+                    throw new RoodyException("Please enter an index number"
+                            + " - \"{command} {index}\"");
                 }
-            } catch (RoodyException e) {
-                ui.showLine();
-                System.out.println(e.getMessage());
-            } finally {
-                ui.showLine();
+                task = deleteTask(Integer.parseInt(commands[0]) - 1);
+                message += ui.showDeleteTask(task, list.size());
+                break;
+            case "mark":
+            case "unmark":
+                if (commands.length != 2) {
+                    throw new RoodyException("Please enter an index number"
+                            + " - \"{command} {index}\"");
+                }
+                task = toggleTask(Integer.parseInt(commands[1]) - 1, commands[0].equals("mark"));
+                message += ui.showMarkStatus(commands[0].equals("mark"), task);
+                break;
+            case "find":
+                if (commands.length != 2) {
+                    throw new RoodyException("Please enter a keyword to be searched"
+                            + " - \"find {keyword}\"");
+                }
+                message += ui.showFoundTasks(findTaskByKeyword(commands[1]));
+                break;
+            case "bye":
+                storage.saveFile(list);
+                message += ui.bye();
+                break;
+            default:
+                throw new RoodyException("I don't quite understand that.");
             }
+        } catch (RoodyException e) {
+            ui.showLine();
+            message += e.getMessage() + '\n';
+        } finally {
+            message += ui.showLine();
         }
-        ui.bye();
-        scanner.close();
-        storage.saveFile(list);
+        return message;
     }
-
     /**
      * Runs Roody's main process.
      * @param args Args.
      */
     public static void main(String[] args) {
-        Roody roody = new Roody("./data/Roody.txt");
-        roody.run();
+        Application.launch(RoodyMain.class, args);
     }
 }
