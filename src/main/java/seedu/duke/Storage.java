@@ -14,6 +14,13 @@ import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class Storage {
+
+    private static final int DESCRIPTION_INDEX = 2;
+    private static final int BY_INDEX = 3;
+    private static final int FROM_INDEX = 3;
+
+    private static final int TO_INDEX = 4;
+
     private final Path path;
 
     /**
@@ -27,21 +34,21 @@ public class Storage {
     }
 
     private TaskList handleTodo(TaskList data, String[] taskDetails, boolean isDone, String taskType) {
-        return data.addTask(new Todo(taskDetails[2], isDone, taskType));
+        return data.addTask(new Todo(taskDetails[DESCRIPTION_INDEX], isDone, taskType));
     }
 
     private TaskList handleDeadline(TaskList data, String[] taskDetails, boolean isDone, String taskType) {
-        String deadline = taskDetails[3];
+        String deadline = taskDetails[BY_INDEX];
         LocalDateTime formattedDeadline = formatTimeStamp(deadline);
-        return data.addTask(new Deadline(taskDetails[2], isDone, taskType, formattedDeadline));
+        return data.addTask(new Deadline(taskDetails[DESCRIPTION_INDEX], isDone, taskType, formattedDeadline));
     }
 
     private TaskList handleEvent(TaskList data, String[] taskDetails, boolean isDone, String taskType) {
-        String from = taskDetails[3];
+        String from = taskDetails[FROM_INDEX];
         LocalDateTime formattedFrom = formatTimeStamp(from);
-        String to = taskDetails[4];
+        String to = taskDetails[TO_INDEX];
         LocalDateTime formattedTo = formatTimeStamp(to);
-        return data.addTask(new Event(taskDetails[2], isDone, taskType, formattedFrom, formattedTo));
+        return data.addTask(new Event(taskDetails[DESCRIPTION_INDEX], isDone, taskType, formattedFrom, formattedTo));
     }
 
     /**
