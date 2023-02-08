@@ -73,6 +73,10 @@ public class Dudu {
         }
     }
 
+    public static void main(String[] args) {
+        new Dudu("data/tasks.txt").run();
+    }
+
     /**
      * Gets the response from dudu.
      * @param input Command from the user
