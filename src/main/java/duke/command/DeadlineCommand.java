@@ -3,6 +3,7 @@ package duke.command;
 import java.util.Arrays;
 
 import duke.exception.DukeBadInstructionFormatException;
+import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.Deadline;
 import duke.tasklist.TaskList;
@@ -35,6 +36,7 @@ public class DeadlineCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage)
             throws DukeBadInstructionFormatException {
         String[] splitted = this.fullCommand.split(" ");
+        assert splitted[0].equals(Parser.DEADLINE_STRING) : "Wrong command made a deadline";
         //Get 'duke.task.Deadline' description and 'by' index
         int byStartIndex = -1;
 

@@ -29,7 +29,10 @@ public class Duke {
      * The <code>Ui</code> object Duke accesses.
      */
     private Ui ui;
-
+    /**
+     * Boolean to track whether we should close the Duke GUI.
+     */
+    private boolean isExit = false;
     /**
      * Constructor for Duke.
      *
@@ -38,6 +41,7 @@ public class Duke {
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
+
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -72,17 +76,17 @@ public class Duke {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Returns a string of the response for the Duke GUI.
+     * @param input User's input
+     * @return Duke's response to input
      */
     public String getResponse(String input) {
-        boolean isExit = false;
         String ret = "";
         System.out.println(input);
         try {
             Command c = Parser.parse(input);
             ret = c.execute(tasks, ui, storage);
-            isExit = c.isExit();
+            this.isExit = c.isExit();
             System.out.println(ret);
             return ret;
         } catch (DukeException e) {
@@ -93,8 +97,12 @@ public class Duke {
 
     }
 
-    //public static void main(String[] args) {
-    //    new Duke("data/tasks.txt").run();
-    //}
+    /**
+     * Returns true if the Duke program should be closing. False otherwise.
+     * @return True if the Duke program should be closing. False otherwise.
+     */
+    public boolean checkIfExit() {
+        return this.isExit;
+    }
 
 }
