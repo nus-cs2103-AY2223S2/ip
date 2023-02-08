@@ -1,5 +1,6 @@
 package leo.command;
 
+import leo.leoexception.LeoException;
 import leo.storage.Storage;
 
 /**
@@ -18,8 +19,9 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public String execute() {
+    public String execute() throws LeoException {
         int num = extractTaskNum();
+        assert storage.getTask(num) != null;
         return storage.delete(num);
     }
 
