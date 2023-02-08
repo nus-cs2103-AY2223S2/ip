@@ -18,6 +18,9 @@ public class Duke {
     private static Storage storage;
     private static UiText uiText = new UiText();
 
+    /**
+     * Constructor. Required for JavaFX.
+     */
     public Duke() {
 
     }
