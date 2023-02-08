@@ -31,7 +31,7 @@ public class TaskList {
      * @param index index of task to retrieve
      * @return Task at the index
      */
-    public Task get(int index) {
+    public Task get(int index) throws IndexOutOfBoundsException{
         return this.tasks.get(index);
     }
 

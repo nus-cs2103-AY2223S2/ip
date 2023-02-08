@@ -51,6 +51,7 @@ public class Task {
     public Boolean contains(String searchString) {
         return this.description.contains(searchString);
     }
+    
 
     @Override
     public String toString() {
@@ -64,7 +65,6 @@ public class Task {
         if (this.deadline == null) {
             dateString = "";
         } else {
-
             dateString = " by " + this.deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         }
 
