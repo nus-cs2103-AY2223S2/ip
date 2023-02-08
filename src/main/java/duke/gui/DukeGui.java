@@ -117,7 +117,10 @@ public class DukeGui extends Application {
             DialogBox.getDukeDialog(output, duke)
     );
     userInput.clear();
-    //close();
+    if(input.equalsIgnoreCase("bye")){
+      close();
+    }
+
   }
 
   private void welcome() {
