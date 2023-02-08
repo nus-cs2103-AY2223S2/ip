@@ -59,22 +59,26 @@ public class Parser {
                 if (task.length() == 4) {
                     throw new DukeException("Description cannot be empty!");
                 }
+                assert inpArr.length > 1: "input array elements are wrong";
                 ToDo newToDo = new ToDo(task.substring(5), task);
                 taskList.add(newToDo);
                 return "Added :)";
             } else if (inpArr[0].equals("deadline")) { // need to handle exception
+                assert inpArr.length > 1: "input array elements are wrong";
                 String[] processedString = stringProcessor(true, task.substring(9));
                 Deadline newDeadline = new Deadline(processedString[0], task,
                         LocalDate.parse(processedString[1]));
                 taskList.add(newDeadline);
                 return "Added :)";
             } else if (inpArr[0].equals("event")){ // need to handle exception
+                assert inpArr.length > 1: "input array elements are wrong";
                 String[] processedString = stringProcessor(false, task.substring(6));
                 Event newEvent = new Event(processedString[0], task, LocalDate.parse(processedString[1]),
                         LocalDate.parse(processedString[2]));
                 taskList.add(newEvent);
                 return "Added :)";
             } else if (inpArr[0].equals("delete")){ // need to handle exception
+                assert inpArr.length > 1: "input array elements are wrong";
                 taskList.remove(Integer.parseInt(inpArr[1])-1);
                 return "Deleted for you";
             } else if (inpArr[0].equals("find")) {
