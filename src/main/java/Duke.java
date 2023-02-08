@@ -135,7 +135,7 @@ public class Duke extends Application {
      * @param dialogContainer
      */
     private void greetUser(VBox dialogContainer) {
-        Label helloText = new Label("insert ingenious greeting here");
+        Label helloText = new Label("  insert ingenious greeting here");
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(helloText, new ImageView(duke))
         );
@@ -147,19 +147,14 @@ public class Duke extends Application {
      * @param dialogContainer
      */
     private void handleUserInput(TextField userInput, VBox dialogContainer) {
-        try {
-            Label userText = new Label(userInput.getText());
-            Label dukeText = new Label(getResponse(userInput.getText()));
-            dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(userText, new ImageView(user)),
-                    DialogBox.getDukeDialog(dukeText, new ImageView(duke))
-            );
-        } catch (Exception e) {
-            throw new Error("this exception should not be here");
-        }
+        Label userText = new Label(userInput.getText());
+        Label dukeText = new Label(getResponse(userInput.getText()));
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(userText, new ImageView(user)),
+                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+        );
         userInput.clear();
     }
-
 
     /**
      * Exits the program upon the "bye" command.
@@ -175,78 +170,83 @@ public class Duke extends Application {
      * @throws NotTaskException
      * @throws IOException
      */
-    public String getResponse(String command) throws EmptyDescriptionException, IOException, NotTaskException {
-        String[] toFindFirstWord = Parser.parse(command, Parser.ParseFunctions.SPLIT_ALL); // take a comment
-
-        String first = toFindFirstWord[0];
-
+    public String getResponse(String command) {
         ArrayList<String> reply = null;
+        try {
+            String[] toFindFirstWord = Parser.parse(command, Parser.ParseFunctions.SPLIT_ALL); // take a comment
 
-        switch (first) {
-        case "bye":
-            System.out.println(first);
-            reply = mainUi.printReply("bye");
-            closeStage();
-            break;
-        case "mark":
-            Task completedTask = getTaskForMarking(toFindFirstWord, mainTaskList);
-            completedTask.setCompletion();
-            reply = mainUi.printReply("mark", completedTask);
+            String first = toFindFirstWord[0];
 
-            String[] parsed = Parser.parse(command, Parser.ParseFunctions.TODO);
-            mainStorage.changeTaskCompletion(Integer.parseInt(parsed[1]));
-            break;
-        case "unmark":
-            completedTask = getTaskForMarking(toFindFirstWord, mainTaskList);
-            completedTask.setCompletion();
-            reply = mainUi.printReply("unmark", completedTask);
+            switch (first) {
+            case "bye":
+                System.out.println(first);
+                reply = mainUi.printReply("bye");
+                closeStage();
+                break;
+            case "mark":
+                Task completedTask = getTaskForMarking(toFindFirstWord, mainTaskList);
+                completedTask.setCompletion();
+                reply = mainUi.printReply("mark", completedTask);
 
-            parsed = Parser.parse(command, Parser.ParseFunctions.TODO);
-            mainStorage.changeTaskCompletion(Integer.parseInt(parsed[1]));
-            break;
-        case "delete":
-            Task toDelete = getTaskForMarking(toFindFirstWord, mainTaskList);
+                String[] parsed = Parser.parse(command, Parser.ParseFunctions.TODO);
+                mainStorage.changeTaskCompletion(Integer.parseInt(parsed[1]));
+                break;
+            case "unmark":
+                completedTask = getTaskForMarking(toFindFirstWord, mainTaskList);
+                completedTask.setCompletion();
+                reply = mainUi.printReply("unmark", completedTask);
 
-            parsed = Parser.parse(command, Parser.ParseFunctions.TODO);
-            mainStorage.deleteTask(Integer.parseInt(parsed[1]));
+                parsed = Parser.parse(command, Parser.ParseFunctions.TODO);
+                mainStorage.changeTaskCompletion(Integer.parseInt(parsed[1]));
+                break;
+            case "delete":
+                Task toDelete = getTaskForMarking(toFindFirstWord, mainTaskList);
 
-            reply = mainUi.printReply("delete", toDelete);
-            break;
-        case "deadline":
-            parsed = Parser.parse(command, Parser.ParseFunctions.DEADLINE);
-            Task newDeadline = new Deadline(parsed[1], LocalDate.parse(parsed[2]));
-            mainStorage.addTask(newDeadline);
-            reply = mainUi.printReply("deadline", newDeadline);
-            break;
-        case "event":
-            parsed = Parser.parse(command, Parser.ParseFunctions.EVENT);
-            Task newEvent = new Event(parsed[1], LocalDate.parse(parsed[2]), LocalDate.parse(parsed[3]));
-            mainStorage.addTask(newEvent);
-            reply = mainUi.printReply("event", newEvent);
-            break;
-        case "find":
-            parsed = Parser.parse(command, Parser.ParseFunctions.TODO);
+                parsed = Parser.parse(command, Parser.ParseFunctions.TODO);
+                mainStorage.deleteTask(Integer.parseInt(parsed[1]));
 
-            // ask mainStorage to return an ArrayList of matching tasks
-            ArrayList<Task> matchingTasks = mainStorage.getMatchingTasks(parsed[1]);
+                reply = mainUi.printReply("delete", toDelete);
+                break;
+            case "deadline":
+                parsed = Parser.parse(command, Parser.ParseFunctions.DEADLINE);
+                Task newDeadline = new Deadline(parsed[1], LocalDate.parse(parsed[2]));
+                mainStorage.addTask(newDeadline);
+                reply = mainUi.printReply("deadline", newDeadline);
+                break;
+            case "event":
+                parsed = Parser.parse(command, Parser.ParseFunctions.EVENT);
+                Task newEvent = new Event(parsed[1], LocalDate.parse(parsed[2]), LocalDate.parse(parsed[3]));
+                mainStorage.addTask(newEvent);
+                reply = mainUi.printReply("event", newEvent);
+                break;
+            case "find":
+                parsed = Parser.parse(command, Parser.ParseFunctions.TODO);
 
-            // ask mainUi to print out each task one by one
-            reply = mainUi.printMatchingTasks(matchingTasks);
-            break;
-        case "todo":
-            try {
+                // ask mainStorage to return an ArrayList of matching tasks
+                ArrayList<Task> matchingTasks = mainStorage.getMatchingTasks(parsed[1]);
+
+                // ask mainUi to print out each task one by one
+                reply = mainUi.printMatchingTasks(matchingTasks);
+                break;
+            case "todo":
                 parsed = Parser.parse(command, Parser.ParseFunctions.TODO);
                 ToDo newToDo = new ToDo(parsed[1]);
                 mainStorage.addTask(newToDo);
                 reply = mainUi.printReply("todo", newToDo);
                 break;
-            } catch (EmptyDescriptionException e) {
-                reply.add("  Add an argument");
+            default:
+                reply = mainUi.printReply(first);
+                break;
             }
-        default:
-            reply = mainUi.printReply(first);
-            break;
+        } catch (EmptyDescriptionException e) {
+            reply = new ArrayList<>();
+            reply.add("  add a description");
+        } catch (NotTaskException e) {
+            reply = new ArrayList<>();
+            reply.add("  This is not a task, contact admin");
+        } catch (IOException ignored) {
         }
+
         assert reply.size() > 0;
         StringBuilder finalString = new StringBuilder();
         for (String s : reply) {
@@ -254,5 +254,4 @@ public class Duke extends Application {
         }
         return finalString.toString();
     }
-
 }
