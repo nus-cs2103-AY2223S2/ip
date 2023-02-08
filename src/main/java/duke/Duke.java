@@ -18,8 +18,10 @@ public class Duke {
 
     public Duke() throws IOException, InvalidFormatException {
         parser = new Parser("yyyy-MM-dd", "dd-MMM-yyyy (EEE)");
-        tasks = new TaskList(new Storage("data", "duke.txt"));
-        tasks.loadFromStorage(parser);
+        tasks = new TaskList(
+                parser,
+                new Storage("data", "duke.txt"));
+        tasks.loadFromStorage();
     }
 
     public void run(String[] args) {

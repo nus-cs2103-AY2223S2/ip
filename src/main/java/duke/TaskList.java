@@ -10,30 +10,29 @@ import java.util.LinkedList;
 public class TaskList {
     private final Storage storage;
     private static LinkedList<Task> tasks;
+    public final Parser parser;
 
     /**
      * Constructs an empty Task List.
      *
      * @param storage a permanent storage that TaskList maintains
      */
-    public TaskList (Storage storage) {
+    public TaskList (Parser parser, Storage storage) {
+        this.parser = parser;
         this.storage = storage;
         tasks = new LinkedList<>();
     }
 
     /**
      * Adds tasks from the storage
-     *
-     * @param p A parser is required to process the input files
      */
-    public void loadFromStorage(Parser p) throws FileNotFoundException, InvalidFormatException {
+    public void loadFromStorage() throws FileNotFoundException, InvalidFormatException {
         for (String row : storage.retrieveContents()) {
-
             tasks.add(Task.factoryMethod(
                     row.charAt(1),
                     row.charAt(4),
                     row.substring(7),
-                    p
+                    parser
             ));
         }
     }
@@ -123,7 +122,7 @@ public class TaskList {
      */
     private String getStatus(String text, Task t) {
         try {
-            storage.updateLogFile(tasks);
+            storage.updateLogFile(tasks, parser);
             return String.format("%s\n%s\nNow you have %d task(s) in the list.", text, t.toString(), tasks.size());
         } catch (IOException e) {
             return "Error: No permissions to edit log file";

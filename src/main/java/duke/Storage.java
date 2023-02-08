@@ -68,10 +68,10 @@ public class Storage {
      * @param tasks linked list of tasks to write to the log file
      * @throws IOException if unable to detect log file
      */
-    public void updateLogFile(LinkedList<Task> tasks) throws IOException {
+    public void updateLogFile(LinkedList<Task> tasks, Parser parser) throws IOException {
         FileWriter fw = new FileWriter(logFile);
         for (Task item : tasks) {
-            fw.write(item.toString() + "\n");
+            fw.write(item.toString(parser) + "\n");
         }
         fw.close();
     }

@@ -8,7 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Deadline extends Task {
-    public static final Pattern pattern = Pattern.compile("(.+) /by (.+)");
+    public static final Pattern PATTERN = Pattern.compile("(.+) /by (.+)");
     protected LocalDate by;
 
     public static InvalidFormatException getInvalidFormatException() {
@@ -25,7 +25,7 @@ public class Deadline extends Task {
      * @throws InvalidFormatException if the input cannot be parsed
      */
     public static Deadline factoryMethod(String input, Parser parser, boolean isDone) throws InvalidFormatException{
-        Matcher m = pattern.matcher(input);
+        Matcher m = Pattern.compile("(.+) (.+)").matcher(input);
         if (!m.find()) {
             throw getInvalidFormatException();
         }

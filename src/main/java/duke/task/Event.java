@@ -8,16 +8,16 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Event extends Task {
-    public static final Pattern pattern = Pattern.compile("(.+) /from (.+) /to (.+)");
+    public static final Pattern PATTERN = Pattern.compile("(.+) /from (.+) /to (.+)");
     protected LocalDate to;
     protected LocalDate from;
 
     public static InvalidFormatException getInvalidFormatException() {
-        return new InvalidFormatException("deadline name /from yyyy-MM-dd /to yyyy-MM-dd");
+        return new InvalidFormatException("event name /from yyyy-MM-dd /to yyyy-MM-dd");
     }
 
-    public static Event factoryMethod(String input, Parser parser, boolean isDone) throws InvalidFormatException{
-        Matcher m = pattern.matcher(input);
+    public static Event factoryMethod(String input, Parser parser, boolean isDone) throws InvalidFormatException {
+        Matcher m = Pattern.compile("(.+) (.+) (.+)").matcher(input);
         if (!m.find()) {
             throw getInvalidFormatException();
         }
