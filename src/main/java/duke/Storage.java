@@ -32,8 +32,7 @@ public class Storage {
             new File(directoryPath).mkdirs();
             new File(filePath);
             throw new FileNotFoundException();
-        }
-        if (!Files.exists(Path.of(filePath))) {
+        } else if (!Files.exists(Path.of(filePath))) {
             new File(filePath);
             throw new FileNotFoundException();
         }
