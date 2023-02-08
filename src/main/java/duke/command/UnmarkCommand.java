@@ -15,6 +15,8 @@ public class UnmarkCommand extends Command {
 
     public String execute(Tasklist tasklist, Ui ui, Storage storage) throws IOException, DukeException {
         try {
+            int initialSize = tasklist.getTasksNum();
+            assert taskNum > 0 && taskNum <= initialSize : "task number must be > 0 and <= to size of tasklist";
             tasklist.markUndone(this.taskNum - 1);
             storage.update(tasklist);
             return ui.printUnmarkTaskMessage(tasklist.getTasks().get(this.taskNum - 1));

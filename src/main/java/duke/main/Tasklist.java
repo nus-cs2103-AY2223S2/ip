@@ -32,6 +32,10 @@ public class Tasklist {
         return this.tasks;
     }
 
+    public int getTasksNum() {
+        return this.tasks.size();
+    }
+
     /**
      * adder method to add a task
      * @param task task to be added
