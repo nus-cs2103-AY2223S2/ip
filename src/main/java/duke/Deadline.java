@@ -18,7 +18,6 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String by) throws DateTimeParseException {
         super(description);
-        System.out.println(by);
         this.by = LocalDateTime.parse(by, formatter);
     }
 

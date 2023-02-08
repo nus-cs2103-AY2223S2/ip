@@ -33,7 +33,6 @@ public class Duke {
      */
     public void run() {
         Scanner sc = new Scanner(System.in);
-        List<Task> taskList = tasks.getTasks();
 
         // Greeting
         ui.showGreeting();
