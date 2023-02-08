@@ -38,6 +38,9 @@ public class Storage {
      * Writes the data of TaskList to file.
      */
     public void saveDataToFile() {
+        assert tasklist != null : "Storage has no reference to taskList instance";
+
+        // Prepare data into string format for saving
         String fileDataStr = tasklist.prepareFileSave();
         writeToFile(DEFAULT_SAVE_PATH, fileDataStr);
     }
@@ -47,6 +50,7 @@ public class Storage {
      * Does nothing if save file does not exist.
      */
     public void loadDataFromFile() {
+        assert tasklist != null : "Storage has no reference to taskList instance";
 
         Parser parser = new Parser();
         Path f = Paths.get(DEFAULT_SAVE_PATH);
@@ -94,6 +98,9 @@ public class Storage {
      * @param fileContent What to write to file.
      */
     private void writeToFile(String filePath, String fileContent) {
+        assert !filePath.isBlank() : "Cannot write file: file path blank";
+        assert !fileContent.isBlank() : "Cannot write file: nothing to write";
+        
         try {
             Path f = Paths.get(filePath);
             Files.createDirectories(f.getParent()); // Automatically create any non-existent parent directories

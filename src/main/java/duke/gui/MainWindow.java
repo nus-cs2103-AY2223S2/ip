@@ -49,6 +49,8 @@ public class MainWindow extends AnchorPane {
 
     @FXML
     private void handleUserInput() {
+        assert duke != null : "No reference to duke";
+
         ReturnCode code = null;
         String input = userInput.getText();
 

@@ -41,6 +41,8 @@ public class Duke extends Application {
         parser = new Parser();
         ui = new Ui();
 
+        assert Duke.flags != null : "Duke flags is null";
+
         // Retrieve saved data (if any)
         if (!Duke.flags.contains(Flag.NO_LOAD_SAVES)) {
             storage.loadDataFromFile();
@@ -51,8 +53,9 @@ public class Duke extends Application {
         Duke.flags = flags;
     }
 
-
     public void displayTaskCount() {
+        assert taskList != null : "Duke has no taskList instance";
+
         if (taskList.isEmpty()) {
             ui.println("You do not have any task!");
         } else {
@@ -60,7 +63,25 @@ public class Duke extends Application {
         }
     }
 
+    private void displayTasks() {
+        assert taskList != null : "Duke has no taskList instance";
+        assert ui != null : "Duke has no ui instance";
+
+        if (taskList.size() == 0) {
+            ui.println("Your list is empty.");
+        } else {
+            ui.println("You have the following task(s):");
+            for (int i = 0; i < taskList.size(); i++) {
+                ui.println("\t" + (i + 1) + ". " + taskList.get(i));
+            }
+        }
+    }
+
     public void addNewTask(Task task) {
+        assert taskList != null : "Duke has no taskList instance";
+        assert storage != null : "Duke has no storage instance";
+        assert ui != null : "Duke has no ui instance";
+
         taskList.add(task);
         ui.println("Got it. I've added this task:");
         ui.println("\t" + task);
@@ -125,6 +146,8 @@ public class Duke extends Application {
     @Override
     public void stop() throws Exception {
         super.stop();
+
+        assert storage != null : "Duke has no storage instance";
         storage.saveDataToFile();
     }
 }
