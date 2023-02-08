@@ -11,9 +11,9 @@ import java.time.format.DateTimeParseException;
  */
 public class Event extends Task {
 
-    /** The date the task will range from and to */
-    protected LocalDate from;
-    protected LocalDate to;
+    // The date the task will range from and to
+    private LocalDate from;
+    private LocalDate to;
 
     public Event(String description, String from, String to) throws IncorrectDateException {
         super(description);

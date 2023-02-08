@@ -25,7 +25,7 @@ public class UnmarkCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) throws BerryException {
         String output = "";
         if (tasks.isIndexWithinRange(taskIndex)) {
-            output += ui.showUnmark() + tasks.markNotDone(taskIndex);
+            output += ui.showUnmark() + tasks.markTaskNotDone(taskIndex);
         } else {
             throw new IndexOutOfRangeException();
         }

@@ -25,7 +25,7 @@ public class MarkCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) throws BerryException {
         String output = "";
         if (tasks.isIndexWithinRange(taskIndex)) {
-            output += ui.showMark() + tasks.markDone(taskIndex);
+            output += ui.showMark() + tasks.markTaskDone(taskIndex);
         } else {
             throw new IndexOutOfRangeException();
         }

@@ -12,7 +12,7 @@ import java.time.format.DateTimeParseException;
 public class Deadline extends Task {
 
     /** The date to do the task by */
-    protected LocalDate by;
+    private LocalDate by;
 
     public Deadline(String description, String by) throws IncorrectDateException {
         super(description);

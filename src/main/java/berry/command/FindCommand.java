@@ -6,16 +6,16 @@ import berry.storage.Storage;
 import berry.exception.BerryException;
 
 public class FindCommand extends Command {
-    private static String[] keyword;
+    private static String[] listOfKeywords;
 
-    public FindCommand(String[] keyword) {
-        this.keyword = keyword;
+    public FindCommand(String[] listOfKeywords) {
+        this.listOfKeywords = listOfKeywords;
     }
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         String output = ui.showFind();
-        String listOfTasksWithKeyword = tasks.findTaskIndexWithKeyword(keyword);
+        String listOfTasksWithKeyword = tasks.findTaskIndexWithKeyword(listOfKeywords);
         return output + listOfTasksWithKeyword;
 
     }

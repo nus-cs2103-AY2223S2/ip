@@ -48,7 +48,7 @@ public class TaskList {
      *
      * @param index is the number identifying the task given by the user as seen from the task list
      */
-    public String markDone(int index) {
+    public String markTaskDone(int index) {
         Task t = listOfTasks.get(index - 1);
         return t.markAsDone();
     }
@@ -58,7 +58,7 @@ public class TaskList {
      *
      * @param index is the number identifying the task given by the user as seen from the task list
      */
-    public String markNotDone(int index) {
+    public String markTaskNotDone(int index) {
         Task t = listOfTasks.get(index - 1);
         return t.markAsNotDone();
     }

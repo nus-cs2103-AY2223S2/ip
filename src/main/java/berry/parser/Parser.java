@@ -47,7 +47,7 @@ public class Parser {
             throw new UnknownCommandException();
         }
 
-        validate(commandType, userInput);
+        validateCommand(commandType, userInput);
 
         switch (commandType) {
         case BYE:
@@ -87,7 +87,7 @@ public class Parser {
      * @param input is the full user input string
      * @throws BerryException if the given string has missing or incomplete arguments
      */
-    private static void validate(CommandType commandType, String input) throws BerryException {
+    private static void validateCommand(CommandType commandType, String input) throws BerryException {
         String command = input.split(" ")[0];
 
         if (!(commandType == CommandType.TODO ||
