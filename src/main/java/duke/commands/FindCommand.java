@@ -31,6 +31,11 @@ public class FindCommand extends Command {
         this.string = string;
     }
 
+    @Override
+    public String undo() {
+        return "";
+    }
+
     /**
      * Finds all the tasks on the TaskList with string.
      */
@@ -40,4 +45,5 @@ public class FindCommand extends Command {
         assert matchedTasks != null;
         return ui.findResponse(matchedTasks);
     }
+
 }

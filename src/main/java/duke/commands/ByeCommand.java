@@ -18,6 +18,10 @@ public class ByeCommand extends Command {
         this.ui = ui;
     }
 
+    @Override
+    public String undo() {
+        return "";
+    }
 
     /**
      * Says bye and exit.

@@ -19,6 +19,8 @@ public class DeleteCommand extends Command {
     private Storage storage;
     private File file;
 
+    private Task task;
+
     /**
      * Creates a DeleteCommand to delete a ToDo, Event or Deadline from the TaskList.
      *
@@ -42,15 +44,25 @@ public class DeleteCommand extends Command {
         this.file = file;
     }
 
+    @Override
+    public String undo() {
+        taskList.addTask(this.task);
+        storage.editStorage(taskList.getTaskList());
+        storage.saveToFile(file);
+        return ui.addResponse(this.task, taskList);
+    }
+
     /**
      * Delete the task from the TaskList.
      */
     @Override
     public String action() {
         Task task = taskList.removeTask(index);
+        this.task = task;
         assert task != null;
         storage.editStorage(taskList.getTaskList());
         storage.saveToFile(file);
+        Command.addPastCommand(this);
         return ui.deleteResponse(task, taskList);
     }
 }

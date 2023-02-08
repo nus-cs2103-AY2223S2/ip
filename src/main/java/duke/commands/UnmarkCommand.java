@@ -41,6 +41,14 @@ public class UnmarkCommand extends Command {
         this.file = file;
     }
 
+    @Override
+    public String undo() {
+        Task task = taskList.markTask(index);
+        storage.editStorage(taskList.getTaskList());
+        storage.saveToFile(file);
+        return ui.markResponse(task);
+    }
+
     /**
      * Unmark the task on the TaskList.
      */
@@ -49,6 +57,7 @@ public class UnmarkCommand extends Command {
         Task task = taskList.unmarkTask(index);
         storage.editStorage(taskList.getTaskList());
         storage.saveToFile(file);
+        Command.addPastCommand(this);
         return ui.unmarkResponse(task);
     }
 }

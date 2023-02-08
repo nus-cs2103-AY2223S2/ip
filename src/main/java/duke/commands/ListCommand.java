@@ -21,6 +21,11 @@ public class ListCommand extends Command {
         this.taskList = taskList;
     }
 
+    @Override
+    public String undo() {
+        return "";
+    }
+
     /**
      * List all task of the TaskList.
      */

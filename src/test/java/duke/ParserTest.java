@@ -13,6 +13,7 @@ import duke.exceptions.InvalidCommandValueException;
 import duke.exceptions.InvalidDateException;
 import duke.exceptions.InvalidTaskTypeException;
 import duke.exceptions.InvalidTimeException;
+import duke.exceptions.InvalidUndoException;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 import duke.utils.Parser;
@@ -40,7 +41,8 @@ public class ParserTest {
 
     @Test
     public void parseTest() throws EmptyCommandException, InvalidTimeException,
-            InvalidDateException, InvalidTaskTypeException, InvalidCommandValueException {
+            InvalidDateException, InvalidTaskTypeException, InvalidCommandValueException,
+            InvalidUndoException {
         String bye = "bye";
         assertEquals(parser.parse(bye, taskList, storage, ui, savedFile).getClass(),
                 ByeCommand.class);

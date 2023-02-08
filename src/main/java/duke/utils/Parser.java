@@ -9,12 +9,14 @@ import duke.commands.DeleteCommand;
 import duke.commands.FindCommand;
 import duke.commands.ListCommand;
 import duke.commands.MarkCommand;
+import duke.commands.UndoCommand;
 import duke.commands.UnmarkCommand;
 import duke.exceptions.EmptyCommandException;
 import duke.exceptions.InvalidCommandValueException;
 import duke.exceptions.InvalidDateException;
 import duke.exceptions.InvalidTaskTypeException;
 import duke.exceptions.InvalidTimeException;
+import duke.exceptions.InvalidUndoException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
@@ -47,7 +49,8 @@ public class Parser {
     public Command parse(String userCommands, TaskList commandList,
                          Storage storage, Ui ui, File file)
             throws InvalidCommandValueException, InvalidTaskTypeException,
-            EmptyCommandException, InvalidTimeException, InvalidDateException {
+            EmptyCommandException, InvalidTimeException, InvalidDateException,
+            InvalidUndoException {
         String[] strArray = userCommands.split(" ", 2);
         String action = strArray[0];
 
@@ -69,6 +72,11 @@ public class Parser {
                 throw new EmptyCommandException(action);
             }
             return new FindCommand(ui, commandList, strArray[1]);
+        } else if (action.equalsIgnoreCase("undo")) {
+            if (Command.isEmpty()) {
+                throw new InvalidUndoException();
+            }
+            return new UndoCommand(ui);
         } else {
             TaskTypes type = getTaskType(action);
             Task task = getTask(type, strArray);
