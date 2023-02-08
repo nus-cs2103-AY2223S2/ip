@@ -1,3 +1,6 @@
+import java.time.DateTimeException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -6,6 +9,8 @@ import java.util.regex.Pattern;
 public class Duke {
     static final Pattern DEADLINE_PATTERN = Pattern.compile("(.+)/by (.+)");
     static final Pattern EVENT_PATTERN = Pattern.compile("(.+)/from (.+) /to (.+)");
+
+    static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy/MM/dd HHmm");
 
     public static ArrayList<Task> tasks = new ArrayList<>();
     public static void main(String[] args) {
@@ -38,8 +43,9 @@ public class Duke {
                         try {
                             body = body.substring(1);
                             int i = Integer.parseInt(body) - 1;
-                            printDelete(tasks.get(i));
-                            tasks.remove(i);
+                            Task temp = tasks.get(i);
+                            tasks.remove(temp);
+                            printDelete(temp);
                             break;
                         } catch (Exception e) {
                             System.out.println("ERROR: input a number to delete or item does not exist");
@@ -61,8 +67,9 @@ public class Duke {
                         if(dlMatcher.matches()) {
                             String desc = dlMatcher.group(1);
                             String deadlineDay = dlMatcher.group(2);
+                            LocalDateTime deadlineDayParsed = LocalDateTime.parse(deadlineDay, DATE_TIME_FORMATTER);
 
-                            Deadline dl = new Deadline(desc, false, deadlineDay);
+                            Deadline dl = new Deadline(desc, false, deadlineDayParsed);
                             tasks.add(dl);
                             printNotif(dl);
                         }
@@ -75,7 +82,10 @@ public class Duke {
                             String from = eMatcher.group(2);
                             String to = eMatcher.group(3);
 
-                            Event dl = new Event(desc, false, from, to);
+                            LocalDateTime fromParsed = LocalDateTime.parse(from, DATE_TIME_FORMATTER);
+                            LocalDateTime toParsed = LocalDateTime.parse(to, DATE_TIME_FORMATTER);
+
+                            Event dl = new Event(desc, false, fromParsed, toParsed);
                             tasks.add(dl);
                             printNotif(dl);
                         }

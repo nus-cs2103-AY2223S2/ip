@@ -1,3 +1,6 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Task {
     String desc;
     boolean done;
@@ -13,6 +16,11 @@ public class Task {
 
     String getDoness(){
         return done ? "X" : " ";
+    }
+
+    String formatDate(LocalDateTime dateTime) {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm a");
+        return dateTime.format(dtf);
     }
 
     @Override

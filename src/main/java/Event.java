@@ -1,8 +1,10 @@
-public class Event extends Task {
-    String from;
-    String to;
+import java.time.LocalDateTime;
 
-    Event(String desc, boolean done, String from, String to) {
+public class Event extends Task {
+    LocalDateTime from;
+    LocalDateTime to;
+
+    Event(String desc, boolean done, LocalDateTime from, LocalDateTime to) {
         super(desc, done);
         this.from = from;
         this.to = to;
@@ -10,6 +12,6 @@ public class Event extends Task {
 
     @Override
     public String toString(){
-        return "[E]" + super.toString() + " (from: " + this.from + " to " + this.to + ")";
+        return "[E]" + super.toString() + " (from: " + formatDate(this.from) + " to " + formatDate(this.to) + ")";
     }
 }
