@@ -1,27 +1,18 @@
 package duke.exception;
 
 public class DescriptionException extends CommandException {
+
+    private static final String STRING = "☹ OOPS!!! The description of a task cannot be empty.";
     public DescriptionException() {
-    }
-
-    public DescriptionException(String message) {
-        super(message);
-    }
-
-    public DescriptionException(String message, Throwable cause) {
-        super(message, cause);
-    }
-
-    public DescriptionException(Throwable cause) {
-        super(cause);
-    }
-
-    public DescriptionException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-        super(message, cause, enableSuppression, writableStackTrace);
     }
 
     @Override
     public String toString() {
-        return "☹ OOPS!!! The description of a task cannot be empty.";
+        return STRING;
+    }
+
+    @Override
+    public void printStackTrace() {
+        System.out.println(STRING);
     }
 }

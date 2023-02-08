@@ -4,7 +4,6 @@ import duke.command.AddDeadlineCommand;
 import duke.command.AddTodoCommand;
 import duke.command.AddEventCommand;
 import duke.command.Command;
-import duke.command.Commands;
 import duke.exception.CommandException;
 import duke.exception.DescriptionException;
 import duke.DateTimeFormat;
@@ -41,6 +40,11 @@ public abstract class Task {
         return this.description == null || this.description.trim().isEmpty();
     }
 
+    /**
+     * Checks if the input string is a substring of the description
+     * @param testStr input string to test
+     * @return whether the input string is a substring of the description
+     */
     public boolean isMatch(String testStr) {
         return this.description.contains(testStr);
     }
@@ -76,19 +80,19 @@ public abstract class Task {
      * @throws CommandException If there is something wrong with creation of command
      */
     public static Command taskToCommand(String strTask) throws CommandException {
-        if (strTask.startsWith(Commands.deadline.label)) {
+        if (strTask.startsWith("deadline")) {
             Pattern pattern = Pattern.compile("deadline (.+) /by (.+)");
             Matcher matcher = pattern.matcher(strTask);
             if (matcher.find()) {
                 return new AddDeadlineCommand(matcher.group(1), matcher.group(2));
             }
-        } else if (strTask.startsWith(Commands.todo.label)) {
+        } else if (strTask.startsWith("todo")) {
             Pattern pattern = Pattern.compile("todo (.+)");
             Matcher matcher = pattern.matcher(strTask);
             if (matcher.find()) {
                 return new AddTodoCommand(matcher.group(1));
             }
-        } else if (strTask.startsWith(Commands.event.label)) {
+        } else if (strTask.startsWith("event")) {
             Pattern pattern = Pattern.compile("event (.+) /from (.+) /to (.+)");
             Matcher matcher = pattern.matcher(strTask);
             if (matcher.find()) {
