@@ -18,18 +18,17 @@ public class Task {
         return done ? "X" : " ";
     }
 
-<<<<<<< HEAD
     String formatDate(LocalDateTime dateTime) {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm a");
         return dateTime.format(dtf);
-=======
-    boolean getDone() {
+    }
+
+    boolean isDone() {
         return this.done;
     }
 
     String getDesc(){
         return this.desc;
->>>>>>> branch-Level-8
     }
 
     @Override

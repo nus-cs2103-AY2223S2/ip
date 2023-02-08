@@ -2,11 +2,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
-<<<<<<< HEAD
     LocalDateTime deadlineDay;
-=======
-    private String deadlineDay;
->>>>>>> branch-Level-8
 
     Deadline(String desc, boolean done, LocalDateTime deadlineDay) {
         super(desc, done);
@@ -14,7 +10,7 @@ public class Deadline extends Task {
     }
 
     String getDeadlineDay(){
-        return this.deadlineDay;
+        return this.deadlineDay.toString();
     }
 
     @Override

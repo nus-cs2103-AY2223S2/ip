@@ -1,13 +1,8 @@
 import java.time.LocalDateTime;
 
 public class Event extends Task {
-<<<<<<< HEAD
     LocalDateTime from;
     LocalDateTime to;
-=======
-    private String from;
-    private String to;
->>>>>>> branch-Level-8
 
     Event(String desc, boolean done, LocalDateTime from, LocalDateTime to) {
         super(desc, done);
@@ -16,11 +11,11 @@ public class Event extends Task {
     }
 
     String getFrom(){
-        return this.from;
+        return this.from.toString();
     }
 
     String getTo(){
-        return this.to;
+        return this.to.toString();
     }
 
     @Override

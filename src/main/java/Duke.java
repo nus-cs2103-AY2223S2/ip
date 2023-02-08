@@ -1,10 +1,14 @@
-<<<<<<< HEAD
-import java.time.DateTimeException;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-=======
-import java.io.*;
->>>>>>> branch-Level-8
+
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -17,7 +21,7 @@ public class Duke {
     static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy/MM/dd HHmm");
 
     public static ArrayList<Task> tasks = new ArrayList<>();
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         try (Scanner sc = new Scanner(System.in)) {
             readFile();
             printASCII();
@@ -188,11 +192,14 @@ public class Duke {
                         break;
                     case ("D"):
                         done = currArr[1].equals("1");
-                        tasks.add(new Deadline(currArr[2], done, currArr[3]));
+                        LocalDateTime by = LocalDateTime.parse(currArr[3], DATE_TIME_FORMATTER);
+                        tasks.add(new Deadline(currArr[2], done, by));
                         break;
                     case ("E"):
                         done = currArr[1].equals("1");
-                        tasks.add(new Event(currArr[2], done, currArr[3], currArr[4]));
+                        LocalDateTime from = LocalDateTime.parse(currArr[3], DATE_TIME_FORMATTER);
+                        LocalDateTime to = LocalDateTime.parse(currArr[4], DATE_TIME_FORMATTER);
+                        tasks.add(new Event(currArr[2], done, from, to));
                         break;
                 }
             }
@@ -208,13 +215,13 @@ public class Duke {
             for (Task t : tasks) {
                 int done;
                 if (t instanceof ToDo) {
-                    done = t.getDone() ? 1 : 0;
+                    done = t.isDone() ? 1 : 0;
                     bw.write("T|" + done + "|" + t.getDesc());
                 } else if (t instanceof Deadline) {
-                    done = t.getDone() ? 1 : 0;
+                    done = t.isDone() ? 1 : 0;
                     bw.write("D|" + done + "|" + t.getDesc() + "|" + ((Deadline) t).getDeadlineDay());
                 } else if (t instanceof Event) {
-                    done = t.getDone() ? 1 : 0;
+                    done = t.isDone() ? 1 : 0;
                     bw.write("E|" + done + "|" + t.getDesc() + "|" +
                             ((Event) t).getFrom() + "|" + ((Event) t).getTo());
                 }
