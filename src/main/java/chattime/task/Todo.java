@@ -25,6 +25,16 @@ public class Todo extends Task {
     }
 
     /**
+     * Returns code and task name in a string.
+     *
+     * @return A string of code and task name for schedule use.
+     */
+    @Override
+    public String taskWithCode() {
+        return "[" + TaskType.TODO + "] " + description;
+    }
+
+    /**
      * Returns current data of todo task.
      *
      * @return Current situation of todo task.

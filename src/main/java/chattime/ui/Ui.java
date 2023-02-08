@@ -30,6 +30,7 @@ public class Ui {
             + " -- to add event with start datetime to end datetime\n\n"
             + "list -- to list all current stored tasks\n\n"
             + "listTime <date in yyyy-mm-dd> -- to list all current tasks within the specified date\n\n"
+            + "schedule <date in yyyy-mm-dd> -- to list all sorted unmarked tasks in the specified date\n\n"
             + "mark <index of task> -- to mark the specified task as done\n\n"
             + "unmark <index of task> -- to unmark the specified task\n\n"
             + "delete <index of task> -- to delete the specified task from list\n\n"

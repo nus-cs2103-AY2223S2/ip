@@ -5,14 +5,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.regex.Pattern;
 
-import chattime.command.AddCommand;
-import chattime.command.ByeCommand;
-import chattime.command.Command;
-import chattime.command.DeleteCommand;
-import chattime.command.FindCommand;
-import chattime.command.HelpCommand;
-import chattime.command.ListCommand;
-import chattime.command.MarkCommand;
+import chattime.command.*;
 import chattime.exception.ChattimeException;
 import chattime.task.Deadline;
 import chattime.task.Event;
@@ -41,7 +34,6 @@ public class Parser {
     private static String[] splitCommand;
     private static String command;
     private static String description;
-
     /**
      * Returns suitable Command object for further execution.
      *
@@ -64,7 +56,10 @@ public class Parser {
             return parseList();
 
         case "listTime":
-            return parseListTime();
+            return parseTime(false);
+
+        case "schedule":
+            return parseTime(true);
 
         case "find":
             return parseFind();
@@ -320,20 +315,21 @@ public class Parser {
     }
 
     /**
-     * Processes listTime command, parses description to LocalDate type and generate a ListCommand object.
+     * Processes listTime command, parses description to LocalDate type and generate a ListCommand object
+     * or a View Schedules object.
      *
-     * @return ListCommand object.
+     * @return ListCommand object or ViewSchedules object.
      * @throws ChattimeException If wrong-formatted input detected, returns error message with instructions to user.
      */
-    private static ListCommand parseListTime() throws ChattimeException {
+    private static Command parseTime(boolean isScheduleRequired) throws ChattimeException {
         if (description == null) {
             throw new ChattimeException(
-                    String.format(MISSED_PARAM, command, "listTime yyyy-mm-dd"));
+                    String.format(MISSED_PARAM, command, "date yyyy-mm-dd"));
         }
 
         try {
             LocalDate date = LocalDate.parse(description);
-            return new ListCommand(date);
+            return (isScheduleRequired ? new ScheduleCommand(date) : new ListCommand(date));
 
         } catch (DateTimeParseException e) {
             throw new ChattimeException(DATETIME_FORMAT);

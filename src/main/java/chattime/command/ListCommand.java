@@ -79,7 +79,7 @@ public class ListCommand extends Command {
             int i = 1;
             int total = 0;
             int pending = 0;
-            String message = "I've sorted the task(s) that have deadlines / take place on "
+            String message = "I've found the task(s) that have deadlines / take place on "
                     + requestedDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy ")) + "for you:";
 
             for (Task task : taskList.getList()) {

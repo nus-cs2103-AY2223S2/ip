@@ -1,6 +1,7 @@
 package chattime.task;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
@@ -21,11 +22,29 @@ public class Deadline extends Task {
      */
     public Deadline(String description, LocalDate bDate, LocalTime... bTime) {
         super(description);
+
         byDate = bDate;
         try {
             byTime = bTime[0];
         } catch (IndexOutOfBoundsException e) {
             byTime = null;
+        }
+    }
+
+    /**
+     * Returns comparison result of input time with task relevant time.
+     *
+     * @param time User's input time.
+     * @return true if the input time and task deadline are the same, otherwise false.
+     */
+    @Override
+    public boolean isOnTime(LocalDate date, LocalTime time) {
+        if (byTime == null) {
+            return true;
+        } else {
+            LocalDateTime deadline = LocalDateTime.of(byDate, byTime);
+            LocalDateTime test = LocalDateTime.of(date, time);
+            return test.isBefore(deadline);
         }
     }
 
@@ -40,14 +59,24 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns comparison result of input time with task relevant time.
+     * Returns comparison result of input date with task relevant date.
      *
-     * @param date User's input time.
-     * @return true if the input time and task deadline are the same, otherwise false.
+     * @param date User's input date.
+     * @return true if the input date and task deadline are the same, otherwise false.
      */
     @Override
     public boolean isOnDate(LocalDate date) {
         return byDate.isEqual(date);
+    }
+
+    /**
+     * Returns code and task name in a string.
+     *
+     * @return A string of code and task name for schedule use.
+     */
+    @Override
+    public String taskWithCode() {
+        return "[" + TaskType.DEADLINE + "] " + description;
     }
 
     /**

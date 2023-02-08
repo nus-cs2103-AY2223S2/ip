@@ -1,6 +1,7 @@
 package chattime.task;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
@@ -33,6 +34,21 @@ public class Event extends Task {
     }
 
     /**
+     * Returns comparison result of input time with task relevant time.
+     *
+     * @param time User's input time.
+     * @return true if the input time and task deadline are the same, otherwise false.
+     */
+    @Override
+    public boolean isOnTime(LocalDate date, LocalTime time) {
+        LocalDateTime start = LocalDateTime.of(fromDate, fromTime);
+        LocalDateTime end = LocalDateTime.of(toDate, toTime);
+        LocalDateTime test = LocalDateTime.of(date, time);
+        boolean isInRange = test.isBefore(end) && test.isAfter(start);
+        return isInRange || test.isEqual(start);
+    }
+
+    /**
      * Generates a data string of event task to be stored in storage file.
      *
      * @return Data string of event task.
@@ -44,10 +60,10 @@ public class Event extends Task {
     }
 
     /**
-     * Returns comparison result of input time with task relevant time.
+     * Returns comparison result of input date with task relevant date.
      *
-     * @param date User's input time.
-     * @return true if the input time is between the task start time and the task deadline, otherwise false.
+     * @param date User's input date.
+     * @return true if the input date is in task time, otherwise false.
      */
     @Override
     public boolean isOnDate(LocalDate date) {
@@ -55,6 +71,16 @@ public class Event extends Task {
         Boolean isInDateRange = (fromDate.isBefore(date) && toDate.isAfter(date));
 
         return isOnSameDate || isInDateRange;
+    }
+
+    /**
+     * Returns code and task name in a string.
+     *
+     * @return A string of code and task name for schedule use.
+     */
+    @Override
+    public String taskWithCode() {
+        return "[" + TaskType.EVENT + "] " + description;
     }
 
     /**

@@ -1,6 +1,8 @@
 package chattime.task;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 /**
  * Represents task objects created by user's command.
@@ -10,7 +12,7 @@ public class Task {
 
     private static int tasksCount = 0;
 
-    private String description;
+    String description;
     private boolean isDone;
 
     /**
@@ -120,11 +122,31 @@ public class Task {
     /**
      * Returns comparison result of input time with task relevant time.
      *
-     * @param date User's input time.
+     * @param date User's input date.
      * @return false as default.
      */
     public boolean isOnDate(LocalDate date) {
         return false;
+    }
+
+    /**
+     * Returns comparison result of input time with task relevant time.
+     *
+     * @param time User's input time.
+     * @return true if the input time and task deadline are the same, otherwise false.
+     */
+    public boolean isOnTime(LocalDate date, LocalTime time) {
+        return false;
+    }
+
+
+    /**
+     * Returns code and task name in a string.
+     *
+     * @return A string of code and task name for schedule use.
+     */
+    public String taskWithCode() {
+        return toString();
     }
 
     /**

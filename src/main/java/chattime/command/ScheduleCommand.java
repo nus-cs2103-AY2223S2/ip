@@ -12,24 +12,26 @@ import chattime.task.Task;
 import chattime.ui.Ui;
 
 /**
- * Represents ViewSchedulesCommand object that handles main logic of matching date with current tasks and return
+ * Represents ScheduleCommand object that handles main logic of matching date with current tasks and return
  * sorted one-day-tasks.
  */
-public class ViewSchedulesCommand extends Command {
+public class ScheduleCommand extends Command {
 
     private LocalDate date;
 
     /**
-     * Creates ViewSchedulesCommand object to filter and sort task list according to the date.
+     * Creates ScheduleCommand object to filter and sort task list according to the date.
      *
      * @param input Specific date to sort relevant tasks.
      */
-    public ViewSchedulesCommand(LocalDate input) {
+    public ScheduleCommand(LocalDate input) {
         date = input;
     }
 
     /**
      * Executes logic of displaying sorted task list by filtering task objects on given date.
+     * Only event and deadline tasks are scheduled.
+     * Event is scheduled to time span, deadline is scheduled before its end.
      *
      * @param ui UI instance of bot.
      * @param taskList Current task list storing tasks.
@@ -41,26 +43,28 @@ public class ViewSchedulesCommand extends Command {
         if (taskList.getList().size() == 0) {
             return ui.warnEmptyList();
         } else {
-            StringBuilder message = new StringBuilder("I've scheduled the task(s) on "
-                    + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy ")) + "for you:\n");
+            StringBuilder message = new StringBuilder("This is your schedule on "
+                    + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy ")) + ":\n");
 
             Supplier<Stream<Task>> filteredTask = () -> taskList.getList().stream()
                     .filter(task -> task.isOnDate(date) && !task.getTaskStatus());
 
-            for (LocalTime i = LocalTime.MIN; i.isBefore(LocalTime.MAX); i = i.plusHours(1)) {
-                LocalTime currTime = i;
+            LocalTime time = LocalTime.MIN;
+            for (int i = 0; i < 24; i++) {
+                LocalTime currTime = time;
+                time = time.plusHours(1);
 
-                message.append(currTime.format(DateTimeFormatter.ofPattern("hh:mm a :")));
+                message.append(currTime.format(DateTimeFormatter.ofPattern("\nhh:mm a :")));
 
                 String taskSchedule = filteredTask.get()
                         .filter(task -> task.isOnTime(date, currTime)).map(Task::taskWithCode)
-                        .reduce(" ", (prevTask, task) -> prevTask + "\n           ");
+                        .reduce("", (prevTask, task) -> prevTask + "\n           " + task);
 
                 message.append(taskSchedule);
             }
 
             int total = (int) filteredTask.get().count();
-            message.append("\n     You have ").append(total).append(" unmarked task(s) on this day.");
+            message.append("\nYou have ").append(total).append(" unmarked task(s) on this day.");
 
             return message.toString();
 
