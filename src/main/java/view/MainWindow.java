@@ -37,6 +37,8 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke d) {
         duke = d;
+        String helloMsg = d.startUpMsg();
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(helloMsg, dukeImage));
     }
 
     /**
@@ -57,6 +59,6 @@ public class MainWindow extends AnchorPane {
             //System.out.println(e.toString());
             duke.getResponse("I am sorry I don't understand.");
         }
-
+        duke.saveFile();
     }
 }

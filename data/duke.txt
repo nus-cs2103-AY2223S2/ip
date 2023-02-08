@@ -1,3 +1,5 @@
 todo borrow book@0
 deadline watch lecture video /by 2019-12-23@0
 todo poop@1
+todo borrow book@1
+todo yo@0

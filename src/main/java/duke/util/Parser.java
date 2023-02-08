@@ -60,19 +60,22 @@ public class Parser {
                     throw new DukeException("Description cannot be empty!");
                 }
                 assert inpArr.length > 1: "input array elements are wrong";
-                ToDo newToDo = new ToDo(task.substring(5), task);
+                int todoLength = 5;
+                ToDo newToDo = new ToDo(task.substring(todoLength), task);
                 taskList.add(newToDo);
                 return "Added :)";
             } else if (inpArr[0].equals("deadline")) { // need to handle exception
                 assert inpArr.length > 1: "input array elements are wrong";
-                String[] processedString = stringProcessor(true, task.substring(9));
+                int deadlineLength = 9;
+                String[] processedString = stringProcessor(true, task.substring(deadlineLength));
                 Deadline newDeadline = new Deadline(processedString[0], task,
                         LocalDate.parse(processedString[1]));
                 taskList.add(newDeadline);
                 return "Added :)";
             } else if (inpArr[0].equals("event")){ // need to handle exception
                 assert inpArr.length > 1: "input array elements are wrong";
-                String[] processedString = stringProcessor(false, task.substring(6));
+                int eventLength = 6;
+                String[] processedString = stringProcessor(false, task.substring(eventLength));
                 Event newEvent = new Event(processedString[0], task, LocalDate.parse(processedString[1]),
                         LocalDate.parse(processedString[2]));
                 taskList.add(newEvent);
@@ -115,10 +118,8 @@ public class Parser {
         } else {
             String[] processedArr = new String[3];
             String tempString = "";
-            //String processedDate = "";
             for (int i=0; i<s.length(); i++){
                 if (s.charAt(i) == '/') {
-                    //processedDate = s.substring(i+4);
                     String[] processedDate = stringProcessor(true, s.substring(i+6));
                     processedArr[1] = processedDate[0];
                     processedArr[2] = processedDate[1];
@@ -157,9 +158,9 @@ public class Parser {
     /**
      * Saves the current list to a file.
      */
-    public static void saveFile(){
+    public static void saveFile(String filePath){
         try {
-            FileWriter myWriter = new FileWriter("data/duke.txt");
+            FileWriter myWriter = new FileWriter(filePath);
             for (int i=0; i<taskList.size(); i++) {
                 Task tempTask = taskList.get(i);
                 myWriter.write(tempTask.toStringForFile());

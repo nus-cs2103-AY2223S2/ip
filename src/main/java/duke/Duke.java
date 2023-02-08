@@ -47,6 +47,10 @@ public class Duke extends Application {
 
     public Duke() {}
 
+    public void saveFile() {
+        Parser.saveFile("data/duke.txt");
+    }
+
     /**
      * Run the loop of the chat bot.
      */

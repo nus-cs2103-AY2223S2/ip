@@ -13,7 +13,7 @@ import view.MainWindow;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke();
+    private Duke duke = new Duke("data/duke.txt");
 
     @Override
     public void start(Stage stage) {
@@ -27,5 +27,8 @@ public class Main extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
     }
+
 }
