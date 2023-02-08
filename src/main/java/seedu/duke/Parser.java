@@ -1,6 +1,9 @@
 package seedu.duke;
 
-import seedu.duke.tasks.*;
+import seedu.duke.tasks.Task;
+import seedu.duke.tasks.Todo;
+import seedu.duke.tasks.Deadline;
+import seedu.duke.tasks.Event;
 
 import java.time.*;
 import java.time.format.DateTimeParseException;
