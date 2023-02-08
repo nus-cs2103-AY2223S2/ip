@@ -1,15 +1,6 @@
 package lele.parser;
 
-import lele.command.ByeCommand;
-import lele.command.Command;
-import lele.command.DeadlineCommand;
-import lele.command.DeleteCommand;
-import lele.command.EventCommand;
-import lele.command.FindCommand;
-import lele.command.ListCommand;
-import lele.command.MarkCommand;
-import lele.command.TodoCommand;
-import lele.command.UnmarkCommand;
+import lele.command.*;
 import lele.exception.EmptyDescException;
 import lele.exception.UnknownCommandException;
 import lele.task.Deadline;
@@ -34,7 +25,8 @@ public class Parser {
         UNMARK,
         DELETE,
         LIST,
-        BYE
+        BYE,
+        UNDO,
 
     }
     /**
@@ -126,6 +118,8 @@ public class Parser {
                     throw new EmptyDescException("☹ OOPS!!! You need to specify what you want to find!");
                 }
                 return new FindCommand(inputArr[1]);
+            case  UNDO:
+                return new UndoCommand();
             default:
                 assert false; // Execution should never reach this point!
                 throw new UnknownCommandException("☹ OOPS!!! You need to give me an input :-(");
