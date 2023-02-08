@@ -5,8 +5,6 @@ package duke;
  */
 public class Parser {
 
-    private static Ui ui = new Ui();
-
     /**
      * Interprets the user input and executes the corresponding actions
      * 
@@ -14,62 +12,62 @@ public class Parser {
      * @param tasks   the tasklist to be changed according to the user input
      * @throws DukeException invalid input
      */
-    public static void parse(String command, TaskList tasks) throws DukeException {
+    public static String parse(String command, TaskList tasks) throws DukeException {
         if (command.equals("bye")) {
 
-            ui.exit();
+            return "Bye. Hope to see you again soon!";
 
         } else if (command.equals("list")) {
 
-            ui.printMessage("Here are the tasks in your list:\n" + tasks.toString());
+            return "Here are the tasks in your list:\n" + tasks.toString();
 
         } else if (command.startsWith("mark")) {
             try {
                 String str = command.split(" ", 2)[1];
                 int index = Integer.parseInt(str);
-                tasks.markTask(index);
+                return tasks.markTask(index);
             } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println("Please give the index of the task you wish to mark!");
+                return "Please give the index of the task you wish to mark!";
             }
         } else if (command.startsWith("unmark")) {
             try {
                 String str = command.split(" ", 2)[1];
                 int index = Integer.parseInt(str);
-                tasks.unmarkTask(index);
+                return tasks.unmarkTask(index);
             } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println("Please give the index of the task you wish to unmark!");
+                return "Please give the index of the task you wish to unmark!";
             }
 
         } else if (command.startsWith("todo")) {
 
             String description = command.replace("todo", "");
-            tasks.addTask(description, "todo");
+            return tasks.addTask(description, "todo");
 
         } else if (command.startsWith("deadline")) {
 
             String description = command.replace("deadline", "");
-            tasks.addTask(description, "deadline");
+            return tasks.addTask(description, "deadline");
 
         } else if (command.startsWith("event")) {
 
             String description = command.replace("event", "");
-            tasks.addTask(description, "event");
+            return tasks.addTask(description, "event");
 
         } else if (command.startsWith("delete")) {
             try {
                 String str = command.split(" ", 2)[1];
                 int index = Integer.parseInt(str);
-                tasks.deleteTask(index);
+                return tasks.deleteTask(index);
             } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println("Please give the index of the task you wish to delete!");
+                return "Please give the index of the task you wish to delete!";
             }
         } else if (command.startsWith("find")) {
             try {
                 String keyword = command.split(" ", 2)[1];
-                tasks.findTask(keyword);
+                return tasks.findTask(keyword);
 
             } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println("Please input the keyword!");
+                return "Please input the keyword!";
             }
         } else {
             throw new UnknownCommandException();

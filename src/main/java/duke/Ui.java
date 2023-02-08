@@ -8,22 +8,22 @@ public class Ui {
     /**
      * greets the user when Duke starts up
      */
-    public void greet() {
-        System.out.println("Hello! I'm Somebody\n" + "What can I do for you?");
+    public String greet() {
+        return "Hello! I'm Somebody\n" + "What can I do for you?";
     }
 
     /**
      * bids the user goodbye when shutting down Duke
      */
-    public void exit() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String exit() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
      * prints an error when there is an issue in loading text file
      */
-    public void showLoadingError() {
-        System.out.println("Error occured in loading file.");
+    public String showLoadingError() {
+        return "Error occurred in loading file.";
     }
 
     /**
@@ -31,8 +31,8 @@ public class Ui {
      * 
      * @param msg message to be printed
      */
-    public void printMessage(String msg) {
-        System.out.println(msg);
+    public String printMessage(String msg) {
+        return msg;
     }
 
 }

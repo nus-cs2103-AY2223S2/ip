@@ -33,16 +33,17 @@ public class TaskList {
      * @param type            type of the new task to be added ie ToDo, Event or
      *                        Deadline
      */
-    public void addTask(String taskDescription, String type) {
 
+    public String addTask(String taskDescription, String type) {
+        String message = "";
         if (type.equals("todo")) {
             try {
                 Todo todo = new Todo(taskDescription);
                 tasks.add(todo);
-                System.out.println("Got it. I've added this task:\n" + todo.toString() + "\nNow you have "
-                        + tasks.size() + " tasks in the list.");
+                message = "Got it. I've added this task:\n" + todo.toString() + "\nNow you have "
+                        + tasks.size() + " tasks in the list.";
             } catch (MissingDescriptionException e) {
-                System.out.print(e.toString());
+                message = e.toString();
             }
         } else if (type.equals("deadline")) {
             try {
@@ -52,14 +53,14 @@ public class TaskList {
                 LocalDate dateString = LocalDate.parse(date);
                 Deadline deadline = new Deadline(description, dateString);
                 tasks.add(deadline);
-                System.out.println("Got it. I've added this task:\n" + deadline.toString() + "\nNow you have "
-                        + tasks.size() + " tasks in the list.");
+                message = "Got it. I've added this task:\n" + deadline.toString() + "\nNow you have "
+                        + tasks.size() + " tasks in the list.";
             } catch (MissingDescriptionException e) {
-                System.out.print(e.toString());
+                message = e.toString();
             } catch (DateTimeParseException e) {
-                System.out.println("Please input date in YYYY-MM-DD format!");
+                message = "Please input date in YYYY-MM-DD format!";
             } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println("Please fill in all details (task description and date)!");
+                message = "Please fill in all details (task description and date)!";
             }
 
         } else if (type.equals("event")) {
@@ -71,15 +72,16 @@ public class TaskList {
                 String to = remainder[1];
                 Event event = new Event(description, from, to);
                 tasks.add(event);
-                System.out.println("Got it. I've added this task:\n" + event.toString() + "\nNow you have "
-                        + tasks.size() + " tasks in the list.");
+                message = "Got it. I've added this task:\n" + event.toString() + "\nNow you have "
+                        + tasks.size() + " tasks in the list.";
 
             } catch (MissingDescriptionException e) {
-                System.out.print(e.toString());
+                message = e.toString();
             } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println("Please fill in all details (task description, start and end time)!");
+                message = "Please fill in all details (task description, start and end time)!";
             }
         }
+        return message;
     }
 
     /**
@@ -88,13 +90,15 @@ public class TaskList {
      * @param index index of the task to mark as completed
      * @throws IndexOutOfBoundsException
      */
-    public void markTask(int index) throws IndexOutOfBoundsException {
+    public String markTask(int index) throws IndexOutOfBoundsException {
+        String message = "";
         try {
             tasks.get(index - 1).mark();
-            System.out.println("Nice! I've marked this task as done:\n" + tasks.get(index - 1).toString());
+            message = "Nice! I've marked this task as done:\n" + tasks.get(index - 1).toString();
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("There is no such task in the list!");
+            message = "There is no such task in the list!";
         }
+        return message;
     }
 
     /**
@@ -103,13 +107,15 @@ public class TaskList {
      * @param index index of the task to unmark
      * @throws IndexOutOfBoundsException
      */
-    public void unmarkTask(int index) throws IndexOutOfBoundsException {
+    public String unmarkTask(int index) throws IndexOutOfBoundsException {
+        String message = "";
         try {
             tasks.get(index - 1).unmark();
-            System.out.println("OK, I've marked this task as not done yet:\n" + tasks.get(index - 1).toString());
+            message = "OK, I've marked this task as not done yet:\n" + tasks.get(index - 1).toString();
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("There is no such task in the list!");
+            message = "There is no such task in the list!";
         }
+        return message;
     }
 
     /**
@@ -118,17 +124,18 @@ public class TaskList {
      * @param index index of the task to be removed from the arraylist
      * @throws IndexOutOfBoundsException
      */
-    public void deleteTask(int index) throws IndexOutOfBoundsException {
+    public String deleteTask(int index) throws IndexOutOfBoundsException {
+        String message = "";
         try {
-
             Task task = tasks.get(index - 1);
             tasks.remove(index - 1);
-            System.out.println("Noted. I've removed this task:\n" + task.toString() + "\nNow you have "
-                    + tasks.size() + " tasks in the list.");
+            message = "Noted. I've removed this task:\n" + task.toString() + "\nNow you have "
+                    + tasks.size() + " tasks in the list.";
 
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("There is no such task in the list!");
+            message = "There is no such task in the list!";
         }
+        return message;
     }
 
     /**
@@ -136,7 +143,7 @@ public class TaskList {
      * 
      * @param keyword the keyword the user is looking for in the tasks
      */
-    public void findTask(String keyword) {
+    public String findTask(String keyword) {
         ArrayList<Task> matchingTasks = new ArrayList<Task>();
         for (Task task : tasks) {
             if (task.toString().contains(keyword)) {
@@ -144,7 +151,7 @@ public class TaskList {
             }
         }
         TaskList matches = new TaskList(matchingTasks);
-        System.out.println("Here are the matching tasks in your list:\n" + matches.toString());
+        return "Here are the matching tasks in your list:\n" + matches.toString();
     }
 
     /**

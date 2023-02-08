@@ -1,4 +1,6 @@
 [T]// // read book
-[T]// // write essay
-[D]// // watch movie //2 Dec 2019
-[T]// // rate movie
+[T]//X// write essay
+[D]//X// watch movie //2 Dec 2019
+[T]//X// rate movie
+[T]// // test2
+[D]// // todo //12 Feb 2019

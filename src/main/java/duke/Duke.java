@@ -1,6 +1,11 @@
 package duke;
 
 import java.util.Scanner;
+import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 /**
  * Duke is a program that helps users keep track of their tasks
@@ -26,39 +31,59 @@ public class Duke {
         }
     }
 
+    public Duke() {}
+
     /**
      * starts the Duke program
      */
-    public void run() {
-        ui.greet();
-        Scanner scn = new Scanner(System.in);
+//    public void run() {
+//        ui.greet();
+//        Scanner scn = new Scanner(System.in);
+//
+//        while (scn.hasNext()) {
+//            String userInput = scn.nextLine();
+//
+//            try {
+//                Parser.parse(userInput, tasks);
+//            } catch (DukeException e) {
+//                System.out.println(e.toString());
+//            }
+//
+//            try {
+//                storage.save(tasks);
+//            } catch (DukeException e) {
+//                System.out.println(e.toString());
+//            }
+//
+//            if (userInput.equals("bye")) {
+//                break;
+//            }
+//
+//        }
+//
+//        scn.close();
+//
+//    }
 
-        while (scn.hasNext()) {
-            String userInput = scn.nextLine();
-
+    public String getResponse(String input) {
+        String response = "";
+        if (!input.equals("bye")) {
             try {
-                Parser.parse(userInput, tasks);
-            } catch (DukeException e) {
-                System.out.println(e.toString());
-            }
-
-            try {
+                response = Parser.parse(input, tasks);
                 storage.save(tasks);
             } catch (DukeException e) {
-                System.out.println(e.toString());
+                response = e.toString();
             }
-
-            if (userInput.equals("bye")) {
-                break;
+        } else {
+            try {
+                response = Parser.parse(input, tasks);
+            } catch (DukeException e) {
+                response = e.toString();
             }
-
         }
-
-        scn.close();
-
+        return response;
     }
-
-    public static void main(String[] args) {
-        new Duke("./data/duke.txt").run();
-    }
+//    public static void main(String[] args) {
+//        new Duke("./data/duke.txt").run();
+//    }
 }
