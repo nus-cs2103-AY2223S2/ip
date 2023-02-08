@@ -11,7 +11,7 @@ public class Duke {
 
     private Storage storage = new Storage(DEFAULT_FILEPATH);
     private TaskList tasks = new TaskList();
-    private Ui ui = new Ui();
+    private final Ui ui = new Ui();
 
     /**
      * Generates a Duke object.
@@ -20,8 +20,6 @@ public class Duke {
      * @param args Filepath, UI type.
      */
     public Duke(String... args) {
-        ui = new Ui();
-        storage = new Storage(DEFAULT_FILEPATH);
         if (args.length > 0) {
             storage = new Storage(args[0]);
         }
@@ -29,7 +27,6 @@ public class Duke {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
             ui.showLoadingError();
-            tasks = new TaskList();
         }
     }
 
@@ -60,6 +57,10 @@ public class Duke {
                 ui.showLine();
             }
         }
+    }
+
+    public String getWelcome() {
+        return ui.getWelcomeMessage();
     }
 
     public String getResponse(String input) {

@@ -37,10 +37,9 @@ public class FindCommand extends Command {
      * @param ui Handles user interaction.
      * @param storage Handles saving and loading tasks.
      * @return List of tasks.
-     * @throws DukeException if encountering an exception specific to Duke.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         int count = 0;
         StringBuilder response = new StringBuilder(ui.getFindMessage());
         for (Task task: tasks.getTasks()) {

@@ -3,24 +3,14 @@ package duke.command;
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
-import duke.ui.Ui;
-
 import duke.task.Task;
+import duke.ui.Ui;
 
 /**
  * Handles the marking task as done
  */
 public class MarkCommand extends Command {
     private final int index;
-
-    /**
-     * Stores the index of the task to be marked as completed
-     *
-     * @param index Index of the task to be marked as completed
-     */
-    public MarkCommand(int index) {
-        this.index = index;
-    }
 
     /**
      * Stores the index of the task to be marked as completed
@@ -58,6 +48,7 @@ public class MarkCommand extends Command {
         storage.save(tasks);
 
         return ui.getMarkMessage()
-                + "  " + task;
+                + "\n  "
+                + task;
     }
 }

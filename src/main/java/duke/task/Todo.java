@@ -73,7 +73,7 @@ public class Todo extends Task {
 
     /**
      * @inherit
-     * Returns the ToDo task's saved data in string format
+     * @return The ToDo task's saved data in string format
      */
     @Override
     public String save() {

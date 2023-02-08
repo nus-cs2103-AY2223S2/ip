@@ -1,10 +1,10 @@
 package duke.task;
 
-import duke.DukeException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.DukeException;
 
 /**
  * Contains information of an event
@@ -61,7 +61,7 @@ public class Event extends Task {
     }
 
     /**
-     * Generate a Event object from user's command input
+     * Generate an Event object from user's command input
      *
      * @param input The user's command input
      * @throws DukeException If the input from the user is missing some fields
@@ -106,8 +106,7 @@ public class Event extends Task {
      * Returns type of task, completion status, description, and duration of
      * the event
      *
-     * @return Type of task, completion status, description, and duration of
-     * the event
+     * @return Task type, status, description, and duration of the event
      */
     @Override
     public String toString() {
@@ -123,7 +122,7 @@ public class Event extends Task {
 
     /**
      * @inherit
-     * Returns the Event task's saved data in string format
+     * @return Returns the Event task's saved data in string format.
      */
     @Override
     public String save() {

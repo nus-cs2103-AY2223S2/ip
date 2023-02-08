@@ -1,15 +1,15 @@
 package duke;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
+
+import duke.task.Task;
 
 /**
  * Contains the task list
  * Has operations to man tasks in the list
  */
 public class TaskList {
-    ArrayList<Task> tasks;
+    private final ArrayList<Task> tasks;
     public TaskList() {
         tasks = new ArrayList<>();
     }

@@ -2,13 +2,10 @@ package duke.ui;
 
 import duke.Duke;
 import javafx.fxml.FXML;
-
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-
 import javafx.scene.image.Image;
-
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
@@ -25,14 +22,23 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Duke duke;
+    private Duke duke = new Duke();
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private final Image userImage = new Image(this.getClass()
+            .getResourceAsStream("/images/DaUser.png"));
+    private final Image dukeImage = new Image(this.getClass()
+            .getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * Initializes the gui for Duke.
+     * Displays the welcome message on startup.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(duke.getWelcome(), dukeImage)
+        );
     }
 
     public void setDuke(Duke d) {

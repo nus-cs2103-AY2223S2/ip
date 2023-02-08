@@ -3,24 +3,14 @@ package duke.command;
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
-import duke.ui.Ui;
-
 import duke.task.Task;
+import duke.ui.Ui;
 
 /**
  * Handles the changing the status of task to not done
  */
 public class UnmarkCommand extends Command {
     private final int index;
-
-    /**
-     * Stores the index of the task to be marked as not done
-     *
-     * @param index Index of the task to be marked as not done
-     */
-    public UnmarkCommand(int index) {
-        this.index = index;
-    }
 
     /**
      * Stores the index of the task to be marked as not done
@@ -57,6 +47,7 @@ public class UnmarkCommand extends Command {
         storage.save(tasks);
 
         return ui.getUnmarkMessage()
-                + "  " + task;
+                + "\n  "
+                + task;
     }
 }

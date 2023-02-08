@@ -3,24 +3,14 @@ package duke.command;
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
-import duke.ui.Ui;
-
 import duke.task.Task;
+import duke.ui.Ui;
 
 /**
  * Handles the deletion of task from list of tasks
  */
 public class DeleteCommand extends Command {
     private final int index;
-
-    /**
-     * Stores the index of the task to be deleted
-     *
-     * @param index Index of the task to be deleted
-     */
-    public DeleteCommand(int index) {
-        this.index = index;
-    }
 
     /**
      * Stores the index of the task to be deleted
@@ -58,7 +48,9 @@ public class DeleteCommand extends Command {
         storage.save(tasks);
 
         return ui.getDeleteMessage()
-                + "  " + task
+                + "\n  "
+                + task
+                + "\n"
                 + ui.getTasksCountMessage(tasks.size());
     }
 }

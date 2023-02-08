@@ -3,9 +3,8 @@ package duke.command;
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
-import duke.ui.Ui;
-
 import duke.task.Task;
+import duke.ui.Ui;
 
 /**
  * Handles the adding task to list of tasks
@@ -39,7 +38,9 @@ public class AddCommand extends Command {
         storage.save(tasks);
 
         return ui.getAddMessage()
-                + "  " + task
+                + "\n  "
+                + task
+                + "\n"
                 + ui.getTasksCountMessage(tasks.size());
     }
 }

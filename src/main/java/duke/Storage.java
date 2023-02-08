@@ -1,15 +1,14 @@
 package duke;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
-
-import java.io.IOException;
-
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.Files;
 
 /**
  * Deals with loading tasks from the file and saving tasks in the file.
@@ -101,7 +100,6 @@ public class Storage {
             TaskList tasks = new TaskList();
             for (String line: saveData) {
                 String[] data = line.split(" \\| ", 3);
-                String type = data[0];
                 boolean isDone = data[1].equals("X");
                 switch (data[0]) {
                 case "T":
@@ -112,6 +110,8 @@ public class Storage {
                     break;
                 case "E":
                     tasks.add(Event.load(data[2], isDone));
+                    break;
+                default:
                     break;
                 }
             }
