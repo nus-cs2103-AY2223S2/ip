@@ -165,16 +165,13 @@ public class Ui {
         StringBuilder sb = new StringBuilder("Here are the task(s) due on " + formattedDueDate + " :");
         for (int i = 0; i < list.getNumberOfTasks(); i++) {
             Task currTask = list.getTaskAtIndex(i);
-            if (currTask instanceof Deadline) {
-                if (((Deadline) currTask).getDateTimeBy().toLocalDate().compareTo(byDate) == 0) {
-                    sb.append("\n").append(j).append(".").append(currTask);
-                    j++;
-                }
-            } else if (currTask instanceof Event) {
-                if (((Event) currTask).getDateTimeTo().toLocalDate().compareTo(byDate) == 0) {
-                    sb.append("\n").append(j).append(".").append(currTask).append("\n");
-                    j++;
-                }
+            boolean deadlineDueDateMatch = currTask instanceof Deadline
+                    && ((Deadline) currTask).getDateTimeBy().toLocalDate().compareTo(byDate) == 0;
+            boolean eventDueDateMatch = currTask instanceof Event
+                    && ((Event) currTask).getDateTimeTo().toLocalDate().compareTo(byDate) == 0;
+            if (deadlineDueDateMatch || eventDueDateMatch) {
+                sb.append("\n").append(j).append(".").append(currTask);
+                j++;
             }
         }
         return sb.toString();
