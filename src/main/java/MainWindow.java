@@ -21,31 +21,35 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private JavaFxUi duke;
+    private JavaFxUi javaUi;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * Initialises the main window.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setDuke(JavaFxUi d) {
-        duke = d;
+    public void setUi(JavaFxUi ui) {
+        javaUi = ui;
+        assert javaUi != null : "JavaFxUi cannot be null";
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(new Ui().printWelcomeMessage(), dukeImage));
     }
 
-    // /**
-    // * Creates two dialog boxes, one echoing user input and the other containing
-    // Duke's reply and then appends them to
-    // * the dialog container. Clears the user input after processing.
-    // */
+    /**
+     * Creates two dialog boxes, one echoing user input and the other containing
+     * Duke's reply and then appends them to
+     * the dialog container. Clears the user input after processing.
+     */
     @FXML
     private void handleUserInput() throws DukeException {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
+        String response = javaUi.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage));

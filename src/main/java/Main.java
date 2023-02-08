@@ -1,4 +1,3 @@
-import duke.Duke;
 import duke.DukeException;
 
 /**
