@@ -51,15 +51,15 @@ public class Ui {
     /**
      * Prints welcome message.
      */
-    public void printWelcomeMsg() {
-        System.out.println("Hello from\n" + LOGO + "\nWhat can I do for you?");
+    public String welcomeMsg() {
+        return "Hello from\n" + LOGO + "\nWhat can I do for you?";
     }
 
     /**
      * Prints divider line.
      */
-    public void printLine() {
-        System.out.println(DIVIDER_LINE);
+    public String lineString() {
+        return DIVIDER_LINE;
     }
 
     /**
@@ -68,9 +68,9 @@ public class Ui {
      * @param taskList Stores all tasks.
      * @param task Task user just added.
      */
-    public void printAddTaskMsg(TaskList taskList, Task task) {
-        System.out.println("Got it. I've added this task:\n  "
-                + task.toString() + "\n Now you have " + taskList.getSize() + " tasks in the list");
+    public String addTaskMsg(TaskList taskList, Task task) {
+        return "Got it. I've added this task:\n  "
+                + task.toString() + "\n Now you have " + taskList.getSize() + " tasks in the list";
     }
 
     /**
@@ -79,11 +79,11 @@ public class Ui {
      * @param isMarked Boolean for whether task is marked or unamrked.
      * @param task Task specified by user.
      */
-    public void printMarkTaskMsg(boolean isMarked, Task task) {
+    public String markTaskMsg(boolean isMarked, Task task) {
         if (isMarked) {
-            System.out.println("Nice! I've marked this task as done: \n" + "[x] " + task.getStr());
+            return "Nice! I've marked this task as done: \n" + "[x] " + task.getStr();
         } else {
-            System.out.println("OK, I've marked this task as not done yet: \n" + "[ ] " + task.getStr());
+            return "OK, I've marked this task as not done yet: \n" + "[ ] " + task.getStr();
         }
     }
 
@@ -93,17 +93,17 @@ public class Ui {
      * @param task Task specified by user.
      * @param size Number of tasks left in the taskList.
      */
-    public void printDeleteTaskMsg(Task task, int size) {
-        System.out.println("Noted. I've removed this task:\n  "
+    public String deleteTaskMsg(Task task, int size) {
+       return "Noted. I've removed this task:\n  "
                 + task.toString()
-                + "\nNow you have " + size + " tasks in the list.");
+                + "\nNow you have " + size + " tasks in the list.";
     }
 
     /**
      * Prints bye message.
      */
-    public void printByeMsg() {
-        System.out.println(BYE_MSG);
+    public String byeMsg() {
+        return BYE_MSG;
     }
 
 }

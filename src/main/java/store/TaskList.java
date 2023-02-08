@@ -36,15 +36,17 @@ public class TaskList {
      * @param inputLine User input.
      * @throws DukeException Checks valid input from user.
      */
-    public void listTask(String[] inputLine) throws DukeException {
+    public String listTask(String[] inputLine) throws DukeException {
         if (inputLine.length > 1) {
             throw new DukeException("Invalid format");
         }
         int number = 1;
+        StringBuilder output = new StringBuilder();
         for (Task stored : tasks) {
-            System.out.println(number + ". " + stored.toString());
+            output.append(number).append(". ").append(stored.toString()).append("\n");
             number++;
         }
+        return output.toString();
     }
 
     /**
@@ -63,7 +65,7 @@ public class TaskList {
      * @param ui Handles all user interaction.
      * @throws DukeException Checks valid input from user.
      */
-    public void deleteTask(String[] inputArr, Ui ui) throws DukeException {
+    public String deleteTask(String[] inputArr, Ui ui, Storage storage) throws DukeException {
         if (inputArr.length < 2) {
             throw new DukeException("Invalid format, please give numbers");
         }
@@ -73,8 +75,9 @@ public class TaskList {
             throw new DukeException("Index out of bounds");
         }
         Task task = tasks.get(index);
-        ui.printDeleteTaskMsg(task, size - 1);
         tasks.remove(index);
+        storage.writeData(this);
+        return ui.deleteTaskMsg(task, size - 1);
     }
 
     /**
@@ -85,7 +88,7 @@ public class TaskList {
      * @param ui Handles all user interaction.
      * @throws DukeException Checks valid input from user.
      */
-    public void markTask(boolean isMarked, String[] input, Ui ui) throws DukeException {
+    public String markTask(boolean isMarked, String[] input, Ui ui, Storage storage) throws DukeException {
         if (input.length < 2) {
             throw new DukeException("Invalid format, please give numbers");
         }
@@ -96,7 +99,8 @@ public class TaskList {
         }
         Task task = tasks.get(index);
         task.setChecked(isMarked);
-        ui.printMarkTaskMsg(isMarked, task);
+        storage.writeData(this);
+        return ui.markTaskMsg(isMarked, task);
     }
 
     /**
@@ -105,17 +109,19 @@ public class TaskList {
      * @param inputArr Input from user.
      * @throws DukeException Checks for valid input from user.
      */
-    public void findTask(String[] inputArr) throws DukeException {
+    public String findTask(String[] inputArr) throws DukeException {
         if (inputArr.length < 2) {
             throw new DukeException("Invalid format, please give search hint");
         }
         int number = 1;
+        StringBuilder output = new StringBuilder();
         for (Task stored : tasks) {
             if (stored.getStr().equals(inputArr[1])) {
-                System.out.println(number + ". " + stored.toString());
+                output.append(number).append(". ").append(stored.toString()).append("\n");
                 number++;
             }
         }
+        return output.toString();
 
     }
 
