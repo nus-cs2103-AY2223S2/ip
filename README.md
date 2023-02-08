@@ -1,6 +1,6 @@
 # NoDuKo
 
-> "God save the Queen." - Albert Einstein, probably ([(source)] (https://www.google.com)) 👀👀
+> "God save the Queen." - Albert Einstein, probably ([(source)] (https://www.google.com)) 👀👀 😉
 
 NoDuKo - Say No to Duke. ~~Be Free.~~
 
