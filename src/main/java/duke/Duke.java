@@ -1,8 +1,10 @@
 package duke;
 
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 import duke.command.Command;
+import duke.constant.DialogType;
 import duke.database.DukeRepo;
 import duke.database.DukeRepoImpl;
 import duke.exception.DukeException;
@@ -26,7 +28,7 @@ public class Duke {
     /**
      * Generates a response to user input.
      */
-    public void getResponse(String input, Consumer<String> con) {
+    public void getResponse(String input, BiConsumer<DialogType, String> con) {
         try {
             Command c = Parser.parse(input);
             c.execute(db, con);
@@ -34,7 +36,7 @@ public class Duke {
                 close();
             }
         } catch (DukeException e) {
-            con.accept(e.getMessage());
+            con.accept(DialogType.ERROR, e.getMessage());
         }
     }
 

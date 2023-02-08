@@ -1,7 +1,9 @@
 package duke.command;
 
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
+import duke.constant.DialogType;
 import duke.constant.Message;
 import duke.database.DukeRepo;
 import duke.exception.DukeException;
@@ -52,7 +54,7 @@ public class MarkCommand extends Command {
     }
 
     @Override
-    public void execute(DukeRepo db, Consumer<String> con) throws DukeException {
+    public void execute(DukeRepo db, BiConsumer<DialogType, String> con) throws DukeException {
         StringBuilder sb = new StringBuilder();
         try {
             Task tk = db.getTask(taskId);
@@ -69,7 +71,7 @@ public class MarkCommand extends Command {
         } catch (IndexOutOfBoundsException e) {
             sb.append(Message.EXCEPTION_INVALID_TASK_ID_ACCESS);
         }
-        con.accept(sb.toString());
+        con.accept(DialogType.NORMAL, sb.toString());
     }
 
     /**

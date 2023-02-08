@@ -3,9 +3,11 @@ package duke.command;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
+import duke.constant.DialogType;
 import duke.constant.Message;
 import duke.database.DukeRepo;
 import duke.task.Deadline;
@@ -100,7 +102,7 @@ public class ListCommand extends Command {
      * {@inheritDoc}
      */
     @Override
-    public void execute(DukeRepo db, Consumer<String> con) {
+    public void execute(DukeRepo db, BiConsumer<DialogType, String> con) {
         List<Task> filtered;
         StringBuilder sb = new StringBuilder();
 
@@ -119,7 +121,7 @@ public class ListCommand extends Command {
             sb.append(String.format("%d. %s", i + 1, filtered.get(i)) + "\n");
         }
 
-        con.accept(sb.toString());
+        con.accept(DialogType.NORMAL, sb.toString());
     }
 
     /**

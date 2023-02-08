@@ -1,6 +1,7 @@
 import java.io.IOException;
 
 import duke.Duke;
+import duke.constant.DialogType;
 import duke.constant.Message;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -66,12 +67,18 @@ public class MainWindow extends AnchorPane {
         if (input.isEmpty()) {
             return;
         }
-        
+
         dialogContainer.getChildren().add(DialogBox.getUserDialog(input, userImage));
-        duke.getResponse(input, (reply) -> {
-            dialogContainer.getChildren().add(
-                DialogBox.getDukeDialog(reply, dukeImage)
-            );
+        duke.getResponse(input, (ty, reply) -> {
+            switch (ty) {
+            case ERROR:
+                dialogContainer.getChildren().add(DialogBox.getDukeErrorDialog(reply, dukeImage));
+                break;
+            default:
+                dialogContainer.getChildren().add(DialogBox.getDukeDialog(reply, dukeImage));
+                break;
+            }
+            
         });
         userInput.clear();
     }

@@ -1,8 +1,10 @@
 package duke.command;
 
 import java.time.LocalDateTime;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
+import duke.constant.DialogType;
 import duke.constant.DukeCommand;
 import duke.constant.Message;
 import duke.database.DukeRepo;
@@ -81,12 +83,12 @@ public class AddCommand extends Command {
      * {@inheritDoc}
      */
     @Override
-    public void execute(DukeRepo db, Consumer<String> con) throws DukeException {
+    public void execute(DukeRepo db, BiConsumer<DialogType, String> con) throws DukeException {
         StringBuilder sb = new StringBuilder();
         sb.append(Message.ADD_TASK + "\n");
         sb.append(db.addTask(getTask()) + "\n");
         sb.append(String.format(Message.COUNT_TASK, db.count()) + "\n");
-        con.accept(sb.toString());
+        con.accept(DialogType.NORMAL, sb.toString());
     }
 
     /**

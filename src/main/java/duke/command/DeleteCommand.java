@@ -1,8 +1,10 @@
 package duke.command;
 
 import java.util.List;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
+import duke.constant.DialogType;
 import duke.constant.Message;
 import duke.database.DukeRepo;
 import duke.task.Task;
@@ -54,7 +56,7 @@ public class DeleteCommand extends Command {
      * {@inheritDoc}
      */
     @Override
-    public void execute(DukeRepo db, Consumer<String> con) {
+    public void execute(DukeRepo db, BiConsumer<DialogType, String> con) {
         StringBuilder sb = new StringBuilder();
         try {
             List<Task> deleted = db.removeTask(taskIds);
@@ -73,7 +75,7 @@ public class DeleteCommand extends Command {
         } catch (IndexOutOfBoundsException e) {
             sb.append(Message.EXCEPTION_INVALID_TASK_ID_ACCESS);
         }
-        con.accept(sb.toString());
+        con.accept(DialogType.NORMAL, sb.toString());
     }
 
     /**

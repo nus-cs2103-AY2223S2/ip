@@ -1,7 +1,9 @@
 package duke.command;
 
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
+import duke.constant.DialogType;
 import duke.constant.Message;
 import duke.database.DukeRepo;
 import duke.ui.Ui;
@@ -26,9 +28,9 @@ public class ExitCommand extends Command {
      * {@inheritDoc}
      */
     @Override
-    public void execute(DukeRepo db, Consumer<String> con) {
+    public void execute(DukeRepo db, BiConsumer<DialogType, String> con) {
         db.close();
-        con.accept(Message.BYE);
+        con.accept(DialogType.NORMAL, Message.BYE);
     }
 
     /**
