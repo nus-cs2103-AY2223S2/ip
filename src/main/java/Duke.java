@@ -3,6 +3,7 @@ import duke.helpers.Storage;
 import duke.helpers.TaskList;
 import duke.helpers.Ui;
 import duke.visuals.DialogBox;
+import duke.visuals.GuiCustomiser;
 
 import java.io.PrintWriter;
 import java.util.Scanner;
@@ -10,6 +11,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.FileWriter;
 
+import duke.visuals.GuiCustomiser;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -41,61 +43,41 @@ public class Duke extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         try {
+
+            //this block does the initialization of needed components and helpers,
+            //to load saved data, and to initialize visual components.
             scrollPane = new ScrollPane();
             dialogContainer = new VBox();
-            scrollPane.setContent(dialogContainer);
-
             userInput = new TextField();
             sendButton = new Button("Send");
-
             AnchorPane mainLayout = new AnchorPane();
-            mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-
-            scene = new Scene(mainLayout);
-
-            stage.setScene(scene); //We are setting up our stage to show screen.
-            stage.show(); //We are rendering the stage.
-
-            //More visual customization beyond this point
-
-            //These 4 lines are for stage customization.
-            stage.setTitle("Muse");
-            stage.setResizable(false);
-            stage.setMinHeight(600.0);
-            stage.setMinWidth(400.0);
-
-            mainLayout.setPrefSize(400.0, 600.0);
-
-            scrollPane.setPrefSize(385, 535);
-            scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-            scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-
-            scrollPane.setVvalue(1.0);
-            scrollPane.setFitToWidth(true);
-
-            dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
-
-            userInput.setPrefWidth(325.0);
-            sendButton.setPrefWidth(55.0);
-
-            AnchorPane.setTopAnchor(scrollPane, 1.0);
-            AnchorPane.setBottomAnchor(sendButton, 1.0);
-            AnchorPane.setRightAnchor(sendButton, 1.0);
-            AnchorPane.setLeftAnchor(userInput, 1.0);
-            AnchorPane.setBottomAnchor(userInput, 1.0);
-
-            //this has to be said at the start
-            dialogContainer.getChildren().add(
-                    DialogBox.getDukeDialog(new Label(Ui.doGreeting()), new ImageView(muse))
-            );
-
             Scanner sc = new Scanner(System.in);
             String textDir = System.getProperty("user.dir") + "/duke.txt";
             File file = new File(textDir);
             TaskList tasks = new TaskList();
             PrintWriter pw = new PrintWriter(new FileWriter(textDir, true));
-
             Storage.loadData(textDir, file, tasks);
+
+            
+            scrollPane.setContent(dialogContainer);
+            mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
+
+            //initializing of scene
+            scene = new Scene(mainLayout);
+            stage.setScene(scene);
+            stage.show();
+
+            //using GuiCustomiser to change dimensions and look of components.
+            GuiCustomiser.setMuseStage(stage);
+            GuiCustomiser.boxDimensionChange(mainLayout, userInput, sendButton);
+            GuiCustomiser.setMuseScrollPaneVisuals(scrollPane);
+            GuiCustomiser.setMuseAnchorPaneVisuals(mainLayout, scrollPane, sendButton, userInput);
+
+            dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+            //this has to be said at the start
+            dialogContainer.getChildren().add(
+                    DialogBox.getDukeDialog(new Label(Ui.doGreeting()), new ImageView(muse))
+            );
 
             sendButton.setOnMouseClicked((event) -> {
                 if (userInput.getText().equals("bye")) {
@@ -128,7 +110,7 @@ public class Duke extends Application {
             }));
 
 
-            //these have to be done when the application ends (closes?)
+            //these have to be done when the application ends
             Storage.saveData(pw, textDir, tasks);
             Ui.doFarewell();
 

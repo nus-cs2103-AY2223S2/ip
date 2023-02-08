@@ -165,7 +165,11 @@ public class Parser {
 
             //handles all the remaining cases, that will be invalid.
 
-        } catch (VagueInputException ex) {
+        }
+
+        //end of try loop, we will now address errors and print the response of muse.
+
+        catch (VagueInputException ex) {
             outputString = Ui.formatStr(ex.getMessage());
         } catch (OutOfIndexException ex) {
             outputString = Ui.formatStr(ex.getMessage());
