@@ -15,10 +15,10 @@ public class Parser {
     protected final DateTimeFormatter outputFormat;
 
     /**
-     * Creates a parser that can decipher many Strings
+     * Constructs a parsers that can decipher Strings for Duke
      *
-     * @param inputFormat A DateTimeFormatter to process user inputs
-     * @param outputFormat A DateTimeFormatter to format date outputs to users
+     * @param inputFormat a DateTimeFormatter pattern to process inputs
+     * @param outputFormat a DateTimeFormatter pattern to format date outputs to users
      */
     public Parser(String inputFormat, String outputFormat) {
         this.inputFormat = DateTimeFormatter.ofPattern(inputFormat);

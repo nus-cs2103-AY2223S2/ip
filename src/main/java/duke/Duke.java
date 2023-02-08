@@ -18,7 +18,7 @@ public class Duke {
 
     public Duke() throws IOException, InvalidFormatException {
         parser = new Parser("yyyy-MM-dd", "dd-MMM-yyyy (EEE)");
-        tasks = new TaskList(new Storage("/data", "duke.txt"));
+        tasks = new TaskList(new Storage("data", "duke.txt"));
         tasks.loadFromStorage(parser);
     }
 
@@ -103,10 +103,8 @@ public class Duke {
     public static void main(String[] args) {
         try {
             new Duke().run(args);
-        } catch (IOException exception) {
+        } catch (IOException | InvalidFormatException exception) {
             System.out.println(exception.getMessage());
-        } catch (InvalidFormatException exception) {
-            System.out.println("Contents in log file cannot be understood. Consider rewriting or deleting it.");
         }
     }
 }

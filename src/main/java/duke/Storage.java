@@ -10,27 +10,48 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Storage {
-    protected File logFile;
+    private File logFile;
 
     /**
-     * Creates a storage - an abstraction to maintain the logfile
+     * Creates an IOException
+     * The message informs the user that the log file could neither be detected nor created
      *
-     * @param parent The location of the direction of the child file
-     * @param child The name of the child file
+     * @return IOException with a message
+     */
+    private static IOException getIoException(){
+        return new IOException("Unable to detect or create log file");
+    }
+
+    /**
+     * Constructs a wrapper for the log file
+     *
+     * @param parent location of the directory of the log file
+     * @param child filename of log file
+     * @throws IOException if unable to detect or create log file
      */
     public Storage (String parent, String child) throws IOException {
+        File parentFolder = new File(parent);
         logFile = new File(parent, child);
-        if (!logFile.exists()) {
-            File parentFolder = new File(parent);
-            parentFolder.mkdirs();
-            logFile.createNewFile();
+
+        if (!parentFolder.exists()) {
+            if (!parentFolder.mkdirs()) {
+                throw getIoException();
+            }
         }
+
+        if (!logFile.exists()) {
+            if (logFile.createNewFile()) {
+                throw getIoException();
+            }
+        }
+
     }
 
     /**
      * Retrieves the contents of the log file
      *
-     * @return A Linked list containing the contents of the log file
+     * @return linked list containing the contents of the log file
+     * @throws FileNotFoundException if unable to detect log file
      */
     public LinkedList<String> retrieveContents() throws FileNotFoundException {
         LinkedList<String> contents = new LinkedList<>();
@@ -42,11 +63,12 @@ public class Storage {
     }
 
     /**
-     * Edit the file to ensure it is up-to-date
+     * Rewrite the contents of the log file to match a given linked list
      *
-     * @param tasks TaskList used to update the log file
+     * @param tasks linked list of tasks to write to the log file
+     * @throws IOException if unable to detect log file
      */
-    public void update(LinkedList<Task> tasks) throws IOException {
+    public void updateLogFile(LinkedList<Task> tasks) throws IOException {
         FileWriter fw = new FileWriter(logFile);
         for (Task item : tasks) {
             fw.write(item.toString() + "\n");

@@ -33,12 +33,13 @@ public abstract class Task {
             case 'E':
                 return Event.factoryMethod(text, parser, isDone);
             default:
-                throw new InvalidFormatException();
+                throw getInvalidFormatException();
         }
     }
 
     public static InvalidFormatException getInvalidFormatException() {
-        return new InvalidFormatException("task name");
+        return new InvalidFormatException(
+                "Contents in log file cannot be understood. Consider rewriting or deleting it.");
     }
 
     /**
@@ -53,7 +54,7 @@ public abstract class Task {
     }
 
     /**
-     * Sets the isDone value of the task
+     * Setter method of the task's isDone field
      *
      * @param isDone boolean value to set to
      */
