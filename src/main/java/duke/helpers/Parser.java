@@ -30,11 +30,15 @@ import javafx.scene.image.ImageView;
 public class Parser {
 
     /**
-     * Handles inputs, and outputs the according string.
+     * Handles text inputs, and manages the respective Scene elements according to what ever
+     * text input from the user.
      *
-     * @param sc Scans the inputs of the user.
+     * @param dialogContainer this is an GUI entry shown on the screen can be showing
+     *                        either user/muse's side of the conversation.
      * @param tasks Stores the Tasks objects into
-     * @param pw Writes to the screen for the user to comprehend.
+     * @param userInput this contains the text, String info of whatever is being input from the user.
+     * @param user contains the image file of the user's profile.
+     * @param muse contains the image file of muse's profile.
      */
     public static void handleInputs(VBox dialogContainer, TaskList tasks, TextField userInput, Image user, Image muse) {
         String input = userInput.getText();
@@ -89,15 +93,16 @@ public class Parser {
                 boolean hasFoundAnyTerms = false;
                 String outputResults = "";
                 for (int i = 0; i < tasks.getSize(); i++) {
-                    if (tasks.getTask(i).getContent().contains(searchTerm)) {
-                        if (outputResults == "") {
-                            outputResults += (i + 1) + tasks.getTask(i).toString();
-                            hasFoundAnyTerms = true;
-                        } else {
-                            outputResults += "\n" + (i + 1) + tasks.getTask(i).toString();
-                            hasFoundAnyTerms = true;
-                        }
+                    if (!tasks.getTask(i).getContent().contains(searchTerm)) {
+                        continue;
                     }
+                    if (outputResults == "") {
+                        outputResults += (i + 1) + tasks.getTask(i).toString();
+                        hasFoundAnyTerms = true;
+                        continue;
+                    }
+                    outputResults += "\n" + (i + 1) + tasks.getTask(i).toString();
+                    hasFoundAnyTerms = true;
                 }
                 outputString = Ui.outputSearchResults(hasFoundAnyTerms, outputResults);
             } else if (splitArr[0].equals("todo")) {
