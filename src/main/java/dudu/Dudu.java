@@ -56,6 +56,7 @@ public class Dudu {
      */
     public void run() {
         ui.showWelcome();
+        Command command;
         while (!isExit && scanner.hasNext()) {
             String input = scanner.nextLine().strip();
             // skip the empty lines
@@ -63,9 +64,8 @@ public class Dudu {
                 continue;
             }
             try {
-                Parser.parse(input);
-            } catch (InvalidCommandException ex) {
-                System.out.println(ex);
+                command = Parser.parse(input);
+                Ui.print(command.execute(list, storage));
             } catch (DuduException ex) {
                 System.out.println(ex);
             }

@@ -22,4 +22,8 @@ public class Ui {
     public void showWelcome() {
         System.out.print(GREETING);
     }
+
+    public static void print(String msg) {
+        System.out.print(msg);
+    }
 }
