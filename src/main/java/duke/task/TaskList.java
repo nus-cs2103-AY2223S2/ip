@@ -2,10 +2,11 @@ package duke.task;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.stream.Collectors;
 
 /**
  * A list of Tasks
- *
+ * <p>
  * author Guo-KeCheng
  */
 public class TaskList implements Iterable<Task> {
@@ -67,6 +68,12 @@ public class TaskList implements Iterable<Task> {
 
     public boolean isEmpty() {
         return this.taskList.isEmpty();
+    }
+
+    public String printList() {
+        return taskList.stream()
+                .map(Task::toString)
+                .collect(Collectors.joining("\n"));
     }
 
 

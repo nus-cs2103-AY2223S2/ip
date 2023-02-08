@@ -80,11 +80,7 @@ public class Ui {
         }
 
         String output = "Here are the tasks in your list: \n";
-
-        for (int i = 0; i < taskList.size(); i++) {
-            Task toDo = taskList.get(i);
-            output += (i + 1) + "." + toDo + "\n";
-        }
+        output += taskList.printList();
 
         return output;
     }
