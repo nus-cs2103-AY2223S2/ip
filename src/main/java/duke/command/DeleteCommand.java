@@ -16,8 +16,11 @@ public class DeleteCommand extends Command {
 
     public String execute(Tasklist tasklist, Ui ui, Storage storage) throws IOException, DukeException {
         try {
+            int initialSize = tasklist.getTasksNum();
+            assert taskNum > 0 && taskNum <= initialSize : "task number must be > 0 and <= to size of tasklist";
             Task task = tasklist.getTasks().get(this.taskNum - 1);
             tasklist.deleteTask(this.taskNum - 1);
+            assert tasklist.getTasksNum() == initialSize - 1 : "tasklist size must decrement after deletion of task";
             storage.update(tasklist);
             return ui.printDeleteTaskMessage(task, tasklist);
         } catch (IndexOutOfBoundsException e) {
