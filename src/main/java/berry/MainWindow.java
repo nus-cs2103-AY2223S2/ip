@@ -3,7 +3,6 @@ package berry;
 import berry.ui.Ui;
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;

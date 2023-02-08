@@ -4,8 +4,11 @@ package berry.task;
  * Represents a task class.
  */
 public abstract class Task {
+    private static int NUMBER_VAR_IN_STORAGE_TODO = 3;
+    private static int NUMBER_VAR_IN_STORAGE_DEADLINE = 4;
+    private static int NUMBER_VAR_IN_STORAGE_EVENT = 5;
 
-    /** Indicates if the task is done */
+    // Indicates if the task is done
     protected boolean isDone;
     protected String description;
 
@@ -46,7 +49,10 @@ public abstract class Task {
      */
     public boolean hasKeyword(String ... keyword) {
         for (String word : keyword) {
-            if (description.contains(word)) return true;
+            if (description.contains(word)) {
+                return true;
+
+            }
         }
         return false;
     }
@@ -71,11 +77,11 @@ public abstract class Task {
         String isDoneStatus = listOfVariables[1];
         boolean isDone = isDoneStatus.equals("X") ? true : false;
 
-        if (numOfVariables == 3) {
+        if (numOfVariables == NUMBER_VAR_IN_STORAGE_TODO) {
             return new Todo(listOfVariables[2], isDone);
-        } else if (numOfVariables == 4) {
+        } else if (numOfVariables == NUMBER_VAR_IN_STORAGE_DEADLINE) {
             return new Deadline(listOfVariables[2], isDone, listOfVariables[3]);
-        } else if (numOfVariables == 5) {
+        } else if (numOfVariables == NUMBER_VAR_IN_STORAGE_EVENT) {
             return new Event(listOfVariables[2], isDone, listOfVariables[3], listOfVariables[4]);
         }
         assert numOfVariables < 0 || numOfVariables > 5 : "Storage text file is corrupted. Unreadable contents.";
