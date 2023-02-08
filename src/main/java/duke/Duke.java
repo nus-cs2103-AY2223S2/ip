@@ -104,7 +104,7 @@ public class Duke {
     private void addEvent(String[] input) throws DukeException {
         Event tempEvent = Parser.parseEvent(input);
         String saveString = "E | 0 | " + tempEvent.getDescription() + " | "
-                + tempEvent.getFromDate() + ">" + tempEvent.getToDate();
+                + tempEvent.getStartDate() + ">" + tempEvent.getEndDate();
 
         storage.save(saveString);
         tasks.addTask(tempEvent);

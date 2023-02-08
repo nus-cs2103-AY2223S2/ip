@@ -13,11 +13,11 @@ public class Event extends Task {
         this.endDate = to;
     }
 
-    public String getFromDate() {
+    public String getStartDate() {
         return this.startDate.toString();
     }
 
-    public String getToDate() {
+    public String getEndDate() {
         return this.endDate.toString();
     }
 
