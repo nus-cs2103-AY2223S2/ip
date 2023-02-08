@@ -3,6 +3,7 @@ package duke;
 import duke.exception.InvalidFormatException;
 import duke.exception.UnrecognisedCommandException;
 import duke.gui.Gui;
+import duke.gui.Main;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
@@ -23,7 +24,7 @@ public class Duke {
 
     public void run(String[] args) {
         Gui.setDuke(this);
-        Application.launch(Gui.class, args);
+        Application.launch(Main.class, args);
     }
 
     public String getResponse(String userInput) {
