@@ -23,6 +23,11 @@ public class DukeParser {
         return this.command;
     }
 
+    /**
+     * Parses the {@code inputString} field then return the command and arguments.
+     * 
+     * @return {@code String[]} the command arguments needed for the command.
+     */
     public String[] parse() {
         parseCommand();
         return parseCommandArgs();

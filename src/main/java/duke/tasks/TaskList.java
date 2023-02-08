@@ -29,11 +29,22 @@ public class TaskList implements Serializable {
         }
     }
 
+    /**
+     * Adds a new task into the list of tasks.
+     * 
+     * @param task a {@code Task} instance.
+     */
     public void addTask(Task task) {
         taskList.add(task);
         Storage.writeTaskList(this);
     }
 
+    /**
+     * Deletes an existing task from the list of tasks.
+     * 
+     * @param taskIndex the index of the {@code Task} instance obtained through list command.
+     * @return The string representation of the deleted task.
+     */
     public String deleteTasks(int taskIndex) {
         Task targetTask = taskList.get(taskIndex - 1);
         taskList.remove(taskIndex - 1);
@@ -41,6 +52,12 @@ public class TaskList implements Serializable {
         return targetTask.toString();
     }
 
+    /**
+     * Marks an existing task as done from the list of tasks.
+     * 
+     * @param taskIndex the index of the {@code Task} instance obtained through list command.
+     * @return The string representation of the marked task.
+     */
     public String markTask(int taskIndex) {
         Task targetTask = taskList.get(taskIndex - 1);
         targetTask.mark();
@@ -49,6 +66,12 @@ public class TaskList implements Serializable {
         return targetTask.toString();
     }
 
+    /**
+     * Marks an existing task as not done from the list of tasks.
+     * 
+     * @param taskIndex the index of the {@code Task} instance obtained through list command.
+     * @return The string representation of the unmarked task.
+     */
     public String unmarkTask(int taskIndex) {
         Task targetTask = taskList.get(taskIndex - 1);
         targetTask.unmark();
