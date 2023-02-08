@@ -29,24 +29,32 @@ public class EventCommand extends TaskCommand<Event> {
 
         validate(fromIndex != -1, "Expected a /from directive!");
         validate(toIndex != -1, "Expected a /to directive!");
-        validate(fromIndex != 1, "Expected a task!");
-        validate(fromIndex <= toIndex, "Expected /from to come before /to!");
-        validate(toIndex != args.length - 1, "Expected a time after /to!");
-        validate(toIndex - fromIndex > 1, "Expected a time after /from!");
+        int fromLength, toLength;
+        if (fromIndex > toIndex) {
+            fromLength = args.length - fromIndex - 1;
+            toLength = fromIndex - toIndex  - 1;
+        } else {
+            toLength = args.length - toIndex - 1;
+            fromLength = toIndex - fromIndex  - 1;
+        }
+
+        validate(Math.min(fromIndex, toIndex) > 1, "Expected a task!");
+        validate(toLength > 0, "Expected a time after /to!");
+        validate(fromLength > 0, "Expected a time after /from!");
 
         try {
             LocalDateTime fromTime = Utils.parseDateTime(
                 args[fromIndex + 1],
-                toIndex - fromIndex == 2 ? null : args[fromIndex + 2]
+                fromLength < 2 ? null : args[fromIndex + 2]
             );
             LocalDateTime toTime = Utils.parseDateTime(
                 args[toIndex + 1], 
-                toIndex + 2 >= args.length ? null : args[toIndex + 2]
+                toLength < 2 ? null : args[toIndex + 2]
             );
 
             validate(fromTime.isBefore(toTime), " I can't create an event that ends before it starts!");
 
-            String taskStr = Utils.stringJoiner(args, 1, fromIndex);
+            String taskStr = Utils.stringJoiner(args, 1, Math.min(fromIndex, toIndex));
             return new Event(taskStr, fromTime, toTime);
         } catch (DateTimeParseException e) {
             throw new ValidationException("Failed to parse the date you've given: %s\n", e.getParsedString());
