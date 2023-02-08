@@ -53,7 +53,7 @@ public class MainWindow extends AnchorPane {
      * @see UI#sayHi()
      */
     public void greetUser() {
-        dialogContainer.getChildren().add(CbotBox.getCbotDialog(Cbot.sayHi(), CBOT_IMG));
+        dialogContainer.getChildren().add(DialogBox.getCbotDialog(Cbot.sayHi(), CBOT_IMG));
     }
 
     /**
@@ -65,8 +65,8 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response = cbot.getResponse(input);
         dialogContainer.getChildren().addAll(
-                UserBox.getUserDialog(input, USER_IMG),
-                CbotBox.getCbotDialog(response, cbot.isBad() ? CBOT_BAD_IMG : CBOT_IMG)
+                DialogBox.getUserDialog(input, USER_IMG),
+                DialogBox.getCbotDialog(response, cbot.isBad() ? CBOT_BAD_IMG : CBOT_IMG)
         );
         userInput.clear();
 

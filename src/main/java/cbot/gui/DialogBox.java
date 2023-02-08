@@ -21,13 +21,13 @@ import javafx.scene.shape.Circle;
  * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
  * containing text from the speaker.
  */
-public class CbotBox extends HBox {
+public class DialogBox extends HBox {
     @FXML
     private Label dialog;
     @FXML
     private ImageView displayPicture;
 
-    private CbotBox(String text, Image img, String viewPath) {
+    private DialogBox(String text, Image img, String viewPath) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource(viewPath));
             fxmlLoader.setController(this);
@@ -55,15 +55,26 @@ public class CbotBox extends HBox {
     }
 
     /**
-     * Constructs a CbotBox representing Cbot's response.
+     * Constructs a DialogBox representing Cbot's response.
      *
      * @param text Cbot's output.
      * @param img Cbot's image.
-     * @return A new CbotBox, for Cbot.
+     * @return A new DialogBox, for Cbot.
      */
-    public static CbotBox getCbotDialog(String text, Image img) {
-        var db = new CbotBox(text, img, "/view/CbotBox.fxml");
+    public static DialogBox getCbotDialog(String text, Image img) {
+        var db = new DialogBox(text, img, "/view/CbotBox.fxml");
         db.flip();
         return db;
+    }
+
+    /**
+     * Constructs a DialogBox echoing the user's input.
+     *
+     * @param text The user's input.
+     * @param img The user's Image.
+     * @return A new DialogBox, for the user.
+     */
+    public static DialogBox getUserDialog(String text, Image img) {
+        return new DialogBox(text, img, "/view/UserBox.fxml");
     }
 }
