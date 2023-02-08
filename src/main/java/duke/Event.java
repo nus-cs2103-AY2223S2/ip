@@ -8,7 +8,7 @@ import java.time.format.FormatStyle;
  * Event is a task that inherit Tasks, and it represents a task that has a certain start
  * date and time, and a certain end date and time
  */
-public class Event extends Tasks{
+public class Event extends Tasks {
     protected LocalDateTime from;
     protected LocalDateTime to;
 
@@ -31,8 +31,9 @@ public class Event extends Tasks{
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + this.from.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT)) 
-        + " to: " + this.to.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT)) +")";
+        return "[E]" + super.toString() + " (from: " 
+            + this.from.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT)) 
+                + " to: " + this.to.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT)) + ")";
     }
 
     /**
@@ -40,6 +41,6 @@ public class Event extends Tasks{
      */
     @Override
     public String log() {
-        return "E" + super.log() + " | " + this.from + " - " + this.to +"\n";
+        return "E" + super.log() + " | " + this.from + " - " + this.to + "\n";
     }
 }

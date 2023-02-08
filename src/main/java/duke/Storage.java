@@ -6,11 +6,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Scanner;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
+import java.util.Scanner;
 
 /**
  * Storage is a class that finds, loads and saves data into the file data/duke.txt
@@ -68,7 +66,7 @@ public class Storage {
                     String from = dateTimeFormat(split[0]);
                     String by = dateTimeFormat(split[1]);
                     LocalDateTime formattedstartTime = LocalDateTime.parse(from, dateTimeFormatter);
-                    LocalDateTime formattedendTime= LocalDateTime.parse(by, dateTimeFormatter);
+                    LocalDateTime formattedendTime = LocalDateTime.parse(by, dateTimeFormatter);
                     task = new Event(input[2], formattedstartTime, formattedendTime);
                 }
                 if (input[1].equals("1")) {
@@ -105,11 +103,11 @@ public class Storage {
      * @return formatted string of date and time
      */
     private String dateTimeFormat(String datetime) {
-        String year = datetime.substring(0,4);
-        String month = datetime.substring(5,7);
-        String day = datetime.substring(8,10);
-        String hour = datetime.substring(11,13);
-        String min = datetime.substring(14,16);
+        String year = datetime.substring(0, 4);
+        String month = datetime.substring(5, 7);
+        String day = datetime.substring(8, 10);
+        String hour = datetime.substring(11, 13);
+        String min = datetime.substring(14, 16);
         String newDateTime = day + "/" + month + "/" + year + " " + hour + min;
         return newDateTime;
     }

@@ -24,7 +24,7 @@ public class UI {
     public void showList(TasksList list) {
         System.out.println("Here are the task(s) in your list:");
         for (int i = 1; i <= list.getSize(); i++) {
-            System.out.println(i + "." + list.getTask(i-1).toString());
+            System.out.println(i + "." + list.getTask(i - 1).toString());
         }
     }
 
@@ -38,7 +38,7 @@ public class UI {
             
             String[] taskDescription = list.getTask(i).getDescription().split(" ");
             for (String word : taskDescription) {
-                if(keyword.equals(word)) {
+                if (keyword.equals(word)) {
                     System.out.println(counter + "." + list.getTask(i).toString());
                     counter++;
                     break;
@@ -104,7 +104,7 @@ public class UI {
     public void addEvent(TasksList list, String name, String start, String end) {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
         LocalDateTime formattedstartTime = LocalDateTime.parse(start, dateTimeFormatter);
-        LocalDateTime formattedendTime= LocalDateTime.parse(end, dateTimeFormatter);
+        LocalDateTime formattedendTime = LocalDateTime.parse(end, dateTimeFormatter);
         list.addTask(new Event(name, formattedstartTime, formattedendTime));
         System.out.println("Got it. I've added this task:");
         System.out.println("  " + list.getTask(list.getSize() - 1).toString());

@@ -1,16 +1,15 @@
 package duke;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.*;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
 
+/**
+ * Duke is a program that helps you keep track of tasks
+ */
 public class Duke {
-
+    /**
+     * Initializes the Duke program and calls start function to start the program
+     * @param args
+     */
     public static void main(String[] args) {
         TasksList list = new TasksList(100);
         UI ui = new UI();
@@ -22,16 +21,22 @@ public class Duke {
         start(ui, storage, parser, list);
     }
 
+    /**
+     * Starts the duke program and checks for various commands
+     * @param ui UI onject responsible for User interactions
+     * @param storage Stores your tasks in the program
+     * @param parser formats your commands that helps Duke read
+     * @param list list of Tasks
+     */
     public static void start(UI ui, Storage storage, Parser parser, TasksList list) {
         Scanner input = new Scanner(System.in);
         String command;
-    
-        while(true) {
+        while (true) {
             command = input.nextLine();
             String[] commandArr = command.split(" ");
             try {
                 DukeExceptions.checkCommand(commandArr);
-                if(commandArr[0].equals("todo")) {
+                if (commandArr[0].equals("todo")) {
                     try {
                         DukeExceptions.checkEmptyDescription(commandArr);
                         ui.addTodo(list, parser.getTodoDescription(command));
@@ -49,7 +54,7 @@ public class Duke {
                     try {
                         DukeExceptions.checkEmptyDescription(commandArr);
                         ui.addEvent(list, parser.getEventDescription(command),
-                        parser.getEventFrom(command), parser.getEventEnd(command));
+                            parser.getEventFrom(command), parser.getEventEnd(command));
                     } catch (EmptyDescriptionException e) {
                         System.out.println(e.getMessage());
                     }
@@ -87,7 +92,9 @@ public class Duke {
                     storage.saveData();
                     ui.showExit();
                     return;
-                } else {}
+                } else {
+                    System.out.println("Should not reach this condition");
+                }
             } catch (DontKnowWhatThatMeansException e) {
                 System.out.println(e.getMessage());
             }

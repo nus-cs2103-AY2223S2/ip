@@ -17,7 +17,7 @@ public class Parser {
      * @return int index of the command
      */
     public int getMarkNum(String input, boolean isMark) {
-        if(isMark) {
+        if (isMark) {
             return Integer.valueOf(input.substring(5));
         } else {
             return Integer.valueOf(input.substring(7));
@@ -79,9 +79,9 @@ public class Parser {
         if (arr.length == 1) {
             return "";
         } else {
-            for(int i = 0; i < arr.length; i++) {
-                if(arr[i] == "/from") {
-                    return String.join(" ", Arrays.copyOfRange(arr, 1, i+1));
+            for (int i = 0; i < arr.length; i++) {
+                if (arr[i] == "/from") {
+                    return String.join(" ", Arrays.copyOfRange(arr, 1, i + 1));
                 }
             }
             return "";
