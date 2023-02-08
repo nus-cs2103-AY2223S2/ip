@@ -23,6 +23,7 @@ public class DeleteCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        //removes task with task number of indexOfTaskToDelete from tasks and returns its string
         return tasks.delete(indexOfTaskToDelete);
     }
 }

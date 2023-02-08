@@ -156,6 +156,7 @@ public class TaskList {
         List<String> toSave = new ArrayList<>();
         for (int i = 0; i < size(); i++) {
             Task taskToSave = tasks.get(i);
+            // add task string in the format {Task Type} | {marked} | {description} | {by}/{from} | {to}
             toSave.add(taskToSave.toSaveableString());
         }
         return toSave;
