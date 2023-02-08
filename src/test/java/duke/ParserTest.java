@@ -25,6 +25,7 @@ public class ParserTest {
 
     @Test
     public void testParseCommandArg() {
+        // TODO : Add more test cases
         String inpuString = "todo something";
         DukeCommand cmd = DukeParser.parseCommand("todo something");
         String description = DukeParser.parseCommandArgs(cmd, inpuString)[0];
