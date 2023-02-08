@@ -1,5 +1,6 @@
 package duke;
 
+import duke.command.ArchiveCommand;
 import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.command.DeadlineCommand;
@@ -44,6 +45,9 @@ public class Parser {
 
         // create commands depending on the command name
         switch (commandName) {
+        case "archive":
+            command = new ArchiveCommand(argString);
+            break;
         case "bye":
             command = new ByeCommand();
             break;
@@ -149,4 +153,5 @@ public class Parser {
         args[numArgs - 1] = argString.trim();
         return args;
     }
+
 }
