@@ -20,9 +20,9 @@ public class DeleteCommand extends Command {
     private final Storage storage;
 
     /**
-     * DeleteCommand constructor
+     * DeleteCommand constructor.
      *
-     * @param input    Entire line of user input
+     * @param input    String representation of task number
      * @param taskList Existing taskList
      * @param ui       Shared Ui object
      * @param storage  Shared storage object
@@ -34,34 +34,27 @@ public class DeleteCommand extends Command {
         this.storage = storage;
     }
 
-    /*
-     * delete task by removing the Task at the corresponding index
-     * throws exception for wrong syntax and invalid task number
+    /**
+     * Delete task by removing the Task at the corresponding index.
+     *
+     * @throws DukeException if input is incorrect
      */
     @Override
     public String execute() throws DukeException {
-        String[] inputs = input.split(" ");
-        if (inputs.length == 1) {
-
-            int ind = Integer.parseInt(inputs[0]) - 1;
-            if (ind >= taskList.size() || ind < 0) {
-                throw new DukeException("OOPS!!! Invalid task number");
-            }
-
-            String result = ui.printDeletedTask(taskList.get(ind));
-            taskList.remove(ind);
-
-            try {
-                storage.save(taskList);
-            } catch (IOException e) {
-                return ui.showError(e.getMessage());
-            }
-
-            return result;
-
-        } else {
-            throw new DukeException("Incorrect command: delete <valid task index>");
+        int ind = Integer.parseInt(input) - 1;
+        if (ind >= taskList.size() || ind < 0) {
+            throw new DukeException("OOPS!!! Invalid task number");
         }
 
+        String result = ui.printDeletedTask(taskList.get(ind));
+        taskList.remove(ind);
+
+        try {
+            storage.save(taskList);
+        } catch (IOException e) {
+            return ui.showError(e.getMessage());
+        }
+
+        return result;
     }
 }

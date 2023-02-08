@@ -40,16 +40,16 @@ public class FindCommand extends Command {
     public String execute() throws DukeException {
         TaskList foundList = new TaskList();
 
-        if (foundList.isEmpty()) {
-            return ui.printNoTaskWithKeywordFound(keywords);
-        }
-
         for (Task task : taskList) {
             for (String keyword : keywords) {
                 if (task.containsKeyword(keyword)) {
                     foundList.add(task);
                 }
             }
+        }
+
+        if (foundList.isEmpty()) {
+            return ui.printNoTaskWithKeywordFound(keywords);
         }
 
         return ui.printFoundList(foundList);

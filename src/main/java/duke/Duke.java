@@ -36,7 +36,6 @@ public class Duke {
      */
     public Duke() {
         ui = new Ui();
-        ui.printWelcome();
         String filePath = "./data/duke.txt";
         storage = new Storage(filePath, ui);
         try {
@@ -45,7 +44,7 @@ public class Duke {
             taskList = new TaskList();
         }
     }
-    
+
 
     /**
      * Generate a response to user input.
