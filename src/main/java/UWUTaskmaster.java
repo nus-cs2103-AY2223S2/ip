@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import ui.FXChatPane;
 
+import java.io.InputStream;
 import java.util.Objects;
 
 import static javafx.application.Platform.exit;
@@ -35,12 +36,15 @@ public class UWUTaskmaster extends Application {
 
         this.parser = new Parser(taskManager);
 
-        Image userImage = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/profile.jpg")));
-        Image taskMasterImage = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/uwu.jpg")));
+        InputStream userImageStream = this.getClass().getResourceAsStream("/images/profile.jpg");
+        InputStream taskMasterStream = this.getClass().getResourceAsStream("/images/uwu.jpg");
+        assert userImageStream != null;
+        assert taskMasterStream != null;
+
+        Image userImage = new Image(userImageStream);
+        Image taskMasterImage = new Image(taskMasterStream);
 
         this.chatPane = FXChatPane.createChatPane(userImage, taskMasterImage);
-        System.out.println("created chat pane");
-
     }
 
 
@@ -96,7 +100,6 @@ public class UWUTaskmaster extends Application {
         }
 
         String botResponse = parser.processInput(input);
-
         chatPane.addChatToChatPane(input, botResponse);
         userInput.clear();
     }
