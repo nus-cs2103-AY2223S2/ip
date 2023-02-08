@@ -51,4 +51,17 @@ public class Event extends Task {
                 + startTime + " to: "
                 + endTime + ")";
     }
+
+    /**
+     * Method that returns String representation
+     * of event in txt file.
+     * @return String representation of event in txt file.
+     */
+    public String toStorage() {
+        return "event#"
+                + description + "#"
+                + "/from#" + startTime
+                + "/to#" + endTime
+                + "#" + getStatusIcon();
+    }
 }

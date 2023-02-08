@@ -54,7 +54,7 @@ public class DeadlineCommand extends Command {
                     stringBuilder.append(" ");
                 }
             }
-            if (endTime.length() == 0) {
+            if (endTime.length() != 15) {
                 throw new DukeException(null, null);
             }
             tasks.add(new Deadline(stringBuilder.toString(), endTime.toString()));

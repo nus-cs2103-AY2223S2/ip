@@ -46,4 +46,22 @@ public class Parser {
             return new NoCommand(command);
         }
     }
+
+    /**
+     * Method to parse tasks in storage file.
+     * @param storageTask Line in storage txt file.
+     * @return command for parser.
+     */
+    public Command parseStorage(String[] storageTask) {
+        StringBuilder command = new StringBuilder();
+        int spaceCount = 0;
+        for (int i = 0; i < storageTask.length - 1; i++) {
+            command.append(storageTask[i]);
+            if (spaceCount < storageTask.length - 1) {
+                command.append(" ");
+                spaceCount+=1;
+            }
+        }
+        return parse(command.toString());
+    }
 }

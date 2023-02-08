@@ -41,4 +41,15 @@ public class Todo extends Task {
     public String toString() {
         return "[T]" + getStatusIcon() + " " + description;
     }
+
+    /**
+     * Method that returns String representation
+     * of todo in txt file.
+     * @return String representation of todo in txt file.
+     */
+    public String toStorage() {
+        return "todo#"
+                + description + "#"
+                + getStatusIcon();
+    }
 }

@@ -6,6 +6,8 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+import java.io.FileNotFoundException;
+
 /**
  * Duke program implements an interactive chatbot with the
  * function to keep track of tasks.
@@ -47,5 +49,16 @@ public class Duke {
     public String getResponse(String input) {
         Command c = parser.parse(input);
         return c.execute(tasks, ui, storage);
+    }
+
+    /**
+     * Load stored task into Duke.
+     */
+    public void loadTasks() {
+        try {
+            storage.loadToDuke(this.tasks, this.ui, this.storage);
+        } catch (FileNotFoundException e) {
+            System.out.println(e);
+        }
     }
 }

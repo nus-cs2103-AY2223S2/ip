@@ -68,4 +68,13 @@ public class Task {
     public String toString() {
         return "";
     }
+
+    /**
+     * Returns String representation of task
+     * in txt file.
+     * @return String representation in txt file
+     */
+    public String toStorage() {
+        return "";
+    }
 }

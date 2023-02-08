@@ -22,6 +22,7 @@ public class Deadline extends Task {
     protected static final DateTimeFormatter OUTPUT_DATE_FORMAT = DateTimeFormatter.ofPattern("dd MMM"
             + " yyyy h:mm a");
     protected LocalDateTime endTime;
+    protected String endTimeString;
     protected HashSet<String> wordsInDescription = new HashSet<>();
 
     /**
@@ -32,6 +33,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String endTime) throws DateTimeParseException {
         super(description);
+        this.endTimeString = endTime;
         this.endTime = LocalDateTime.parse(endTime, INPUT_DATE_FORMAT);
         this.wordsInDescription.addAll(Arrays.asList(description.split(" ")));
     }
@@ -48,12 +50,26 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns a string representation of Deadline
-     * @return String
+     * Returns a string representation of Deadline.
+     * @return String.
      */
     public String toString() {
         return "[D]" + getStatusIcon()
                 + " " + description + " (by: "
                 + endTime.format(OUTPUT_DATE_FORMAT) + ")";
+    }
+
+    /**
+     * Method that returns String representation
+     * of deadline in txt file.
+     * @return String representation of Deadline in txt file.
+     */
+    public String toStorage() {
+        // deadline read book /by ????
+        return "deadline#"
+                + description + "#"
+                + "/by#"
+                + this.endTimeString + "#"
+                + getStatusIcon();
     }
 }

@@ -1,10 +1,15 @@
 package duke.storage;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Scanner;
 
+import duke.command.Command;
+import duke.command.Parser;
 import duke.task.TaskList;
+import duke.ui.Ui;
 
 /**
  * Storage handles the loading and saving of
@@ -37,13 +42,32 @@ public class Storage {
         }
         try {
             this.taskStorage.createNewFile();
-            FileWriter fw = new FileWriter(this.taskStorage);
+            FileWriter fileWriter = new FileWriter(this.taskStorage);
             for (int i = 0; i < tasks.size(); i++) {
-                fw.write(tasks.get(i).toString() + "\n");
+                fileWriter.write(tasks.get(i).toStorage() + "\n");
             }
-            fw.close();
+            fileWriter.close();
         } catch (IOException e) {
             System.out.println(e);
+        }
+    }
+
+    /**
+     * Load existing txt file to tasklist.
+     * @param tasks TaskList of Duke.
+     * @param ui ui of Duke.
+     * @param storage storage of Duke.
+     */
+    public void loadToDuke(TaskList tasks, Ui ui, Storage storage) throws FileNotFoundException {
+        if (this.taskStorage.exists()) {
+            Scanner sc = new Scanner(this.taskStorage);
+            Parser parser = new Parser();
+            while (sc.hasNext()) {
+                String[] taskInTxt = sc.nextLine().split("#");
+                Command c = parser.parseStorage(taskInTxt);
+                c.execute(tasks, ui, storage);
+            }
+            sc.close();
         }
     }
 }
