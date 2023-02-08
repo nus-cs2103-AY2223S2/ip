@@ -15,7 +15,7 @@ public class DeadlineTest {
 
 	@Test
 	public void toStringTest() {
-		String expected = "[D][ ] Attend field camp (by: Jan 19 2023 10:30 pm)";
+		String expected = "[D][ ] Attend field camp (by: Jan 19 2023 10:30 PM)";
 		assertEquals(expected, deadline.toString());
 	}
 
