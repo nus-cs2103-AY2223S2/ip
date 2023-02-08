@@ -48,18 +48,34 @@ public class Parser {
         );
 
         String outputString = "";
+        boolean hasHandledInput = false;
 
 
         String[] splitArr = input.split(" ");
         try {
-            if (input.equals("bye")) {
+
+            if (input.equals("bye") && !hasHandledInput) {
                 outputString = Ui.doFarewell();
-            } else if (input.equals("list")) {
+                hasHandledInput = setCaseHandled();
+            }
+
+            //bye case is now handled, if handled a case, will skip the rest of the conditionals.
+
+            if (input.equals("list") && !hasHandledInput) {
                outputString = Ui.formatStr(tasks.listThings());
-            } else if (splitArr.length == 1) {
+               hasHandledInput = setCaseHandled();
+            }
+
+            //list case is now handled
+
+            if (splitArr.length == 1 && !hasHandledInput) {
                 throw new VagueInputException("Oh no! What do you mean? \n" +
                         "I'm confused. Please specify... @.@");
-            } else if (splitArr[0].equals("mark") || splitArr[0].equals("unmark")) {
+            }
+
+            //case where invalid input is entered is handled here.
+
+            if ((splitArr[0].equals("mark") || splitArr[0].equals("unmark")) && !hasHandledInput) {
                 if ((Integer.parseInt(splitArr[1])) > tasks.getSize()) {
                     throw new OutOfIndexException("Help! \n" +
                             "The number has to be within range of our task-list!\n" +
@@ -78,8 +94,14 @@ public class Parser {
                             "This is undone. You can't mark it undone again. :0 \n" +
                             "try again.");
                 }
+                hasHandledInput = setCaseHandled();
                 outputString = tasks.mark(splitArr[0], (Integer.parseInt(splitArr[1]) - 1));
-            } else if (splitArr[0].equals("delete")) {
+            }
+
+            //the mark input case has been handled, throws exception when boolean logic fails.
+            // e.g. entering mark when the entry has clearly been marked.
+
+            if (splitArr[0].equals("delete") && !hasHandledInput) {
                 if ((Integer.parseInt(splitArr[1])) > tasks.getSize()) {
                     throw new OutOfIndexException("Help! \n" +
                             "The number has to be within range of our task-list!\n" +
@@ -88,7 +110,12 @@ public class Parser {
                 Task newTask = tasks.getTask(Integer.parseInt(splitArr[1]) - 1);
                 tasks.removeTask(Integer.parseInt(splitArr[1]) - 1);
                 outputString = Ui.formatStr(tasks.deleteReport(newTask));
-            } else if (splitArr[0].equals("find")) {
+                hasHandledInput = setCaseHandled();
+            }
+
+            //delete input has been handled
+
+            if (splitArr[0].equals("find") && !hasHandledInput) {
                 String searchTerm = input.substring(5);
                 boolean hasFoundAnyTerms = false;
                 String outputResults = "";
@@ -105,22 +132,39 @@ public class Parser {
                     hasFoundAnyTerms = true;
                 }
                 outputString = Ui.outputSearchResults(hasFoundAnyTerms, outputResults);
-            } else if (splitArr[0].equals("todo")) {
+                hasHandledInput = setCaseHandled();
+            }
+
+            //has handled the find entry input.
+
+            if (splitArr[0].equals("todo") && !hasHandledInput) {
                 Todo newTodo = new Todo(input);
                 tasks.addTask(newTodo);
                 outputString = Ui.formatStr(tasks.addReport(newTodo));
-            } else if (splitArr[0].equals("deadline")) {
+                hasHandledInput = setCaseHandled();
+            }
+            if (splitArr[0].equals("deadline") && !hasHandledInput) {
                 Deadline newDead = new Deadline(input);
                 tasks.addTask(newDead);
                 outputString = Ui.formatStr(tasks.addReport(newDead));
-            } else if (splitArr[0].equals("event")) {
+                hasHandledInput = setCaseHandled();
+            }
+            if (splitArr[0].equals("event") && !hasHandledInput) {
                 Event newEvent = new Event(input);
                 tasks.addTask(newEvent);
                 outputString = Ui.formatStr(tasks.addReport(newEvent));
-            } else {
+                hasHandledInput = setCaseHandled();
+            }
+
+            //handling the todo, deadline and event tasks to the list scenarios.
+
+            if (hasHandledInput == false){
                 throw new VagueInputException("Oh no! What do you mean? \n" +
                         "I'm confused. Please specify... @.@");
             }
+
+            //handles all the remaining cases, that will be invalid.
+
         } catch (VagueInputException ex) {
             outputString = Ui.formatStr(ex.getMessage());
         } catch (OutOfIndexException ex) {
@@ -128,8 +172,16 @@ public class Parser {
         } catch (WrongBooleanException ex) {
             outputString = Ui.formatStr(ex.getMessage());
         }
+
+        //we handle all the possible exceptions here, and catch them, updating
+        //muse's input to reflect addressing the error.
+
         dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog(new Label(outputString), new ImageView(muse))
         );
+    }
+
+    private static boolean setCaseHandled() {
+        return true;
     }
 }
