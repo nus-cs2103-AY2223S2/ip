@@ -119,8 +119,9 @@ public class TaskList {
         }
         if (matchingTasks.getSize() == 0) {
             throw new DukeException("There are no matching tasks!");
+        } else {
+            return matchingTasks;
         }
-        return matchingTasks;
     }
 
     /**
@@ -133,11 +134,8 @@ public class TaskList {
     public boolean equals (Object o) {
         if (o instanceof TaskList) {
             TaskList taskList = (TaskList) o;
-            if(taskList.tasks.equals(this.tasks)) {
-                return true;
-            }
-            return true;
+            return taskList.tasks.equals(this.tasks);
         }
-        return  false;
+        return false;
     }
 }

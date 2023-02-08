@@ -26,6 +26,24 @@ public class Storage {
         this.path = Paths.get(currPath, "src", "data", fileName);
     }
 
+    private TaskList handleTodo(TaskList data, String[] taskDetails, boolean isDone, String taskType) {
+        return data.addTask(new Todo(taskDetails[2], isDone, taskType));
+    }
+
+    private TaskList handleDeadline(TaskList data, String[] taskDetails, boolean isDone, String taskType) {
+        String deadline = taskDetails[3];
+        LocalDateTime formattedDeadline = formatTimeStamp(deadline);
+        return data.addTask(new Deadline(taskDetails[2], isDone, taskType, formattedDeadline));
+    }
+
+    private TaskList handleEvent(TaskList data, String[] taskDetails, boolean isDone, String taskType) {
+        String from = taskDetails[3];
+        LocalDateTime formattedFrom = formatTimeStamp(from);
+        String to = taskDetails[4];
+        LocalDateTime formattedTo = formatTimeStamp(to);
+        return data.addTask(new Event(taskDetails[2], isDone, taskType, formattedFrom, formattedTo));
+    }
+
     /**
      *  Coverts the text in save file into a TaskList object
      *
@@ -44,20 +62,16 @@ public class Storage {
                 boolean isDone = Boolean.parseBoolean(taskDetails[1]);
                 switch (taskType) {
                 case "T":
-                    data = data.addTask(new Todo(taskDetails[2], isDone, taskType));
+                    data = handleTodo(data, taskDetails, isDone, taskType);
                     break;
                 case "D":
-                    String deadline = taskDetails[3];
-                    LocalDateTime formattedDeadline = formatTimeStamp(deadline);
-                    data = data.addTask(new Deadline(taskDetails[2], isDone, taskType, formattedDeadline));
+                    data = handleDeadline(data, taskDetails, isDone, taskType);
                     break;
                 case "E":
-                    String from = taskDetails[3];
-                    LocalDateTime formattedFrom = formatTimeStamp(from);
-                    String to = taskDetails[4];
-                    LocalDateTime formattedTo = formatTimeStamp(to);
-                    data = data.addTask(new Event(taskDetails[2], isDone, taskType, formattedFrom, formattedTo));
+                    data = handleEvent(data, taskDetails, isDone, taskType);
                     break;
+                default:
+                    throw new DukeException("Type of task detected is not registered!");
                 }
             }
         } catch (FileNotFoundException err) {
