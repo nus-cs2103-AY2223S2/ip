@@ -1,8 +1,7 @@
 package duke.command;
 
-import java.util.Arrays;
-
 import duke.exception.DukeBadInstructionFormatException;
+import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.Event;
 import duke.tasklist.TaskList;
@@ -35,6 +34,7 @@ public class EventCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage)
             throws DukeBadInstructionFormatException {
         String[] splitted = this.fullCommand.split(" ");
+        assert splitted[0].equals(Parser.EVENT_STRING) : "Wrong command made an event";
         //Get 'duke.task.Deadline' description, 'from' and 'to' index
         int fromStartIndex = -1;
         int toStartIndex = -1;
@@ -49,21 +49,17 @@ public class EventCommand extends Command {
             }
         }
         //Handle invalid from or to start index
-        if (fromStartIndex == -1 || toStartIndex == -1
-                || fromStartIndex > toStartIndex) {
+        boolean invalidFromOrTo = fromStartIndex == -1 || toStartIndex == -1
+                || fromStartIndex > toStartIndex;
+        if (invalidFromOrTo) {
             throw new DukeBadInstructionFormatException("Usage of duke.task.Event: "
                     + "event [description] /from[date] /to[date]");
         }
 
-        //Make description and by string
-        String[] descriptionArray = Arrays.copyOfRange(splitted, 1, fromStartIndex);
-        String[] fromArray = Arrays.copyOfRange(splitted, fromStartIndex + 1,
-                toStartIndex);
-        String[] toArray = Arrays.copyOfRange(splitted, toStartIndex + 1,
-                splitted.length);
-        String description = String.join(" ", descriptionArray);
-        String from = String.join(" ", fromArray);
-        String to = String.join(" ", toArray);
+        //Make description and from and to string
+        String description = Command.getTaskDescription(splitted, fromStartIndex);
+        String from = Command.getEventFrom(splitted, fromStartIndex, toStartIndex);
+        String to = Command.getEventToOrDeadlineBy(splitted, toStartIndex);
 
         //Handle no description for an duke.task.Event
         if (description.equals("")) {

@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.exception.DukeBadInstructionFormatException;
+import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
@@ -35,6 +36,7 @@ public class ByeCommand extends Command {
         if (splitted.length != 1) {
             throw new DukeBadInstructionFormatException("To exit, type *bye*");
         }
+        assert splitted[0].equals(Parser.BYE_STRING) : "Wrong command made a bye";
         return ui.showByeMessage();
     }
     /**

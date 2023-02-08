@@ -1,5 +1,7 @@
 package duke.command;
 
+import java.util.Arrays;
+
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
@@ -58,5 +60,44 @@ public abstract class Command {
     public static String getFindKeyword(String command) {
         String[] splitted = command.split(" ");
         return splitted[1];
+    }
+
+    /**
+     * Returns a <code>Task</code>'s description.
+     * @param splitted <code>String[]</code> of input
+     * @param index End index of description
+     * @return Description of <code>Task</code>
+     */
+    public static String getTaskDescription(String[] splitted, int index) {
+        String[] descriptionArray = Arrays.copyOfRange(splitted, 1, index);
+        String description = String.join(" ", descriptionArray);
+        return description;
+    }
+
+    /**
+     * Returns an <code>Event</code>'s From.
+     * @param splitted <code>String[]</code> of input
+     * @param startIndex Start index of from
+     * @param endIndex End Index of from
+     * @return From of an <code>Event</code>.
+     */
+    public static String getEventFrom(String[] splitted, int startIndex, int endIndex) {
+        String[] fromArray = Arrays.copyOfRange(splitted, startIndex + 1,
+                endIndex);
+        String from = String.join(" ", fromArray);
+        return from;
+    }
+
+    /**
+     * Returns <code>Deadline</code>'s by or <code>Event</code>'s to
+     * @param splitted <code>String[]</code> of input
+     * @param startIndex Start index of by or to
+     * @return By or to of deadline or event.
+     */
+    public static String getEventToOrDeadlineBy(String[] splitted, int startIndex) {
+        String[] toArray = Arrays.copyOfRange(splitted, startIndex + 1,
+                splitted.length);
+        String toOrBy = String.join(" ", toArray);
+        return toOrBy;
     }
 }

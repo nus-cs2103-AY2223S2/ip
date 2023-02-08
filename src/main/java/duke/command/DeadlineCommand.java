@@ -3,6 +3,7 @@ package duke.command;
 import java.util.Arrays;
 
 import duke.exception.DukeBadInstructionFormatException;
+import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.Deadline;
 import duke.tasklist.TaskList;
@@ -35,6 +36,7 @@ public class DeadlineCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage)
             throws DukeBadInstructionFormatException {
         String[] splitted = this.fullCommand.split(" ");
+        assert splitted[0].equals(Parser.DEADLINE_STRING) : "Wrong command made a deadline";
         //Get 'duke.task.Deadline' description and 'by' index
         int byStartIndex = -1;
 
@@ -53,11 +55,8 @@ public class DeadlineCommand extends Command {
         }
 
         //Make description and by string
-        String[] descriptionArray = Arrays.copyOfRange(splitted, 1, byStartIndex);
-        String[] byArray = Arrays.copyOfRange(splitted, byStartIndex + 1,
-                splitted.length);
-        String description = String.join(" ", descriptionArray);
-        String by = String.join(" ", byArray);
+        String description = Command.getTaskDescription(splitted, byStartIndex);
+        String by = Command.getEventToOrDeadlineBy(splitted, byStartIndex);
 
         //Handle no description for a duke.task.Deadline
         if (description.equals("")) {
