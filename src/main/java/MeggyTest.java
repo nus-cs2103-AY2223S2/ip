@@ -18,12 +18,14 @@ public class MeggyTest {
 
     /** @return String that will never be entirely whitespace. */
     private static String randString() {
+        final int strLenMax = 50;
+        final int printableCharRange = 95;
         while (true) {
-            final int n = 1 + RAND.nextInt(50);
-            char[] s = new char[n];
+            final int len = 1 + RAND.nextInt(strLenMax);
+            char[] s = new char[len];
             boolean allSpace = true;
-            for (int i = 0; i < n; i++) {
-                final char c = (char) (' ' + RAND.nextInt(95));
+            for (int i = 0; i < len; i++) {
+                final char c = (char) (' ' + RAND.nextInt(printableCharRange));
                 s[i] = c;
                 allSpace &= c == ' ';
             }
@@ -34,7 +36,8 @@ public class MeggyTest {
     }
 
     private static MeggyTime randMeggyTime() {
-        return MeggyTime.of(RAND.nextDouble() < 0.5 ? randString()
+        final double randStrProb = 0.5;
+        return MeggyTime.of(RAND.nextDouble() < randStrProb ? randString()
                 : LocalDateTime.ofEpochSecond(RAND.nextInt(), 0, ZoneOffset.UTC).format(MeggyTime.ENCODE_FORMAT));
     }
 
