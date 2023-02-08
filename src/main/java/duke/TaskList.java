@@ -40,10 +40,10 @@ public class TaskList {
         StringBuilder sb = new StringBuilder();
         int taskIndex;
         String taskName;
-
         for (int i = 0; i < taskList.size(); i++) {
             taskIndex = i + 1;
             taskName = taskList.get(i).toString();
+            System.out.println(taskName);
             sb.append(String.format("%d. %s\n", taskIndex, taskName));
         }
         return sb.toString();

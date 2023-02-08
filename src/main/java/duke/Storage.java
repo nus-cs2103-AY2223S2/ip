@@ -52,10 +52,10 @@ public class Storage {
      * Creates data folder and task file if it does not exist.
      * @throws IOException Thrown when there's an issue writing to the file.
      */
-    public void saveTasks() throws IOException {
-        FileWriter taskFileWriter = new FileWriter("C:\\Users\\jedng\\Documents\\CS2103T\\ip\\ip\\data\\tasks.txt");
+    public void saveTasks() {
         Task task;
-        try (BufferedWriter bw = new BufferedWriter(taskFileWriter)) {
+        try (FileWriter taskFileWriter = new FileWriter("C:\\Users\\jedng\\Documents\\CS2103T\\ip\\ip\\data\\tasks.txt")) {
+            BufferedWriter bw = new BufferedWriter(taskFileWriter);
             for (int i = 0; i < taskList.getListSize(); i++) {
                 task = taskList.getTask(i);
                 bw.write(task.getParsedTaskDataString());
