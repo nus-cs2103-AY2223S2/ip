@@ -1,5 +1,7 @@
 package dudu.util;
 
+import java.util.Arrays;
+
 import dudu.command.ByeCommand;
 import dudu.command.Command;
 import dudu.command.DeadlineCommand;
@@ -14,9 +16,6 @@ import dudu.command.UnMarkCommand;
 import dudu.command.UnknownCommand;
 import dudu.exception.DuduException;
 import dudu.exception.EmptyDescriptionException;
-import dudu.task.TaskList;
-
-import java.util.Arrays;
 
 /**
  * Parser class on parsing the input.
