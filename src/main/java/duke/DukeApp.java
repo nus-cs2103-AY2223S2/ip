@@ -59,11 +59,11 @@ public class DukeApp extends Application {
         stage.setTitle("Duke");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
+        stage.setMinWidth(500.0);
 
-        mainLayout.setPrefSize(400.0, 600.0);
+        mainLayout.setPrefSize(500.0, 600.0);
 
-        scrollPane.setPrefSize(385, 535);
+        scrollPane.setPrefSize(495, 535);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
@@ -76,7 +76,7 @@ public class DukeApp extends Application {
         DialogBox firstDialogBox = DialogBox.getDukeDialog(firstLabel, new ImageView(duke));
         dialogContainer.getChildren().add(firstDialogBox);
 
-        userInput.setPrefWidth(325.0);
+        userInput.setPrefWidth(440.0);
 
         sendButton.setPrefWidth(55.0);
 
