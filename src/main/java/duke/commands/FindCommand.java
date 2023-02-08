@@ -36,6 +36,7 @@ public class FindCommand extends Command {
     @Override
     public String action() {
         List<Task> matchedTasks = taskList.findTask(string);
+        assert matchedTasks != null;
         return ui.findResponse(matchedTasks);
     }
 }
