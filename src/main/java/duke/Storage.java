@@ -1,15 +1,14 @@
 package duke;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
-import java.util.Date;
 
 /**
  * A storage class to help load tasks from and
@@ -37,7 +36,7 @@ public class Storage {
     public void writeTasksToFile(String taskListStrings) {
         try {
             FileWriter fw = new FileWriter(this.path);
-            fw.write(taskListStrings.substring(1, taskListStrings.length()-1));
+            fw.write(taskListStrings.substring(1, taskListStrings.length() - 1));
             fw.close();
         } catch (IOException e) {
             System.out.println(e);
@@ -50,13 +49,10 @@ public class Storage {
      * @return ArrayList of tasks read from file.
      * @throws DukeException If filepath does not exist.
      */
-    public ArrayList<Task> readTasksFromFile(Ui ui) throws DukeException{
+    public ArrayList<Task> readTasksFromFile(Ui ui) throws DukeException {
         try {
-            String path = "../duke.txt";//System.getProperty("../duke.txt");
+            String path = "../duke.txt";
             Scanner scanner = new Scanner(new File(path));
-//            if (!scanner.hasNext()) {
-//                return this.tasks;
-//            }
             String contentsOfFile = scanner.nextLine();
             String[] fileContentsArray = contentsOfFile.split(", ");
             for (String task: fileContentsArray) {
@@ -67,7 +63,6 @@ public class Storage {
             this.makeDirectory();
             return this.tasks;
         }
-//        return this.tasks;
     }
 
     void makeDirectory() {

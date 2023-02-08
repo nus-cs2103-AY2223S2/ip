@@ -31,9 +31,9 @@ public class EventCommand extends Command {
 
         String[] descSplit = input.split("/");
         String description = descSplit[0].substring(
-                0,descSplit[0].length()-1);
+                0, descSplit[0].length() - 1);
         String start = descSplit[1].substring(
-                5,descSplit[1].length()-1);
+                5, descSplit[1].length() - 1);
         String end = descSplit[2].substring(3);
         Event taskEvent = new Event(description, start, end);
 

@@ -1,10 +1,5 @@
 package duke;
 
-import duke.TaskList;
-import duke.Ui;
-import duke.Storage;
-import duke.DukeException;
-
 /**
  * A command class that is abstract.
  */

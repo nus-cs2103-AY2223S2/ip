@@ -66,11 +66,11 @@ public class TaskList {
      *
      * @param num Task number starting from 1.
      * @return Task deleted.
-     * @throws DukeException If task list is empty or
+     * @throws DukeException If task list is empty,
      * given task number below 1 or given task number
      * greater than total number of tasks in task list.
      */
-    public Task deleteTask(int num) throws DukeException{
+    public Task deleteTask(int num) throws DukeException {
         int numTasks = this.tasks.size();
         if (numTasks == 0) {
             throw new DukeException("Can't delete anything since no tasks in list! "

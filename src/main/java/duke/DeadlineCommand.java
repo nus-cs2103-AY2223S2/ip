@@ -31,7 +31,7 @@ public class DeadlineCommand extends Command {
 
         String[] descSplit = input.split("/");
         Deadline taskDeadline = new Deadline(
-                descSplit[0].substring(0,descSplit[0].length()-1),
+                descSplit[0].substring(0, descSplit[0].length() - 1),
                 descSplit[1].substring(3));
 
         taskList.addTask(taskDeadline);
@@ -48,7 +48,7 @@ public class DeadlineCommand extends Command {
 
         String[] descSplit = input.split("/");
         Deadline taskDeadline = new Deadline(
-                descSplit[0].substring(0,descSplit[0].length()-1),
+                descSplit[0].substring(0, descSplit[0].length() - 1),
                 descSplit[1].substring(3));
 
         taskList.addTask(taskDeadline);
