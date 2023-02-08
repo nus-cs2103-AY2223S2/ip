@@ -27,6 +27,9 @@ public class AddEventCommand extends Command {
 
     @Override
     public String execute() {
+        assert event != null : "Event cannot be null";
+        assert taskList != null : "TaskList cannot be null";
+        assert ui != null : "Ui cannot be null";
         taskList.addTask(event);
         return ui.printTaskAdded(event, taskList.getSize());
     }

@@ -9,6 +9,8 @@ public class ListTasksCommand extends Command {
 
     @Override
     public String execute() {
+        assert taskList != null : "TaskList cannot be null";
+        assert ui != null : "Ui cannot be null";
         return ui.printTaskList(taskList);
     }
 

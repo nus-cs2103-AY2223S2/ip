@@ -27,6 +27,9 @@ public class AddToDoCommand extends Command {
 
     @Override
     public String execute() {
+        assert toDo != null : "ToDo cannot be null";
+        assert taskList != null : "TaskList cannot be null";
+        assert ui != null : "Ui cannot be null";
         taskList.addTask(toDo);
         return ui.printTaskAdded(toDo, taskList.getSize());
     }

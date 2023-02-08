@@ -36,6 +36,9 @@ public class MainWindow extends AnchorPane {
     public void setUi(JavaFxUi ui) {
         javaUi = ui;
         getDialogs(DialogBox.getUserDialog(new Ui().printWelcomeMessage(), dukeImage));
+
+        assert javaUi != null : "JavaFxUi cannot be null";
+     
     }
 
     /**
