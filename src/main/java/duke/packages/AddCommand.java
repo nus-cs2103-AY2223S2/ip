@@ -34,10 +34,44 @@ public class AddCommand implements Command {
     public String execute(ArrayList<String> parsedCmd, TaskList tasks, Storage storage, Ui ui) {
         ArrayList<Task> taskList = tasks.getTaskList();
         StringBuilder sb = new StringBuilder();
-        Task newTask = null;
         boolean hasIssue = false;
         String message;
+        Task newTask;
 
+        newTask = this.getTask(parsedCmd); // creates a new task
+        if (newTask == null) {
+            hasIssue = true;
+        }
+        if (!hasIssue) {
+            taskList.add(newTask);
+            try {
+                storage.writeToFile(newTask.getTaskInfo() + "\n", taskList);
+                sb.append("    ____________________________________________________________\n")
+                        .append("    Got it. I've added this task to the list:\n")
+                        .append("      ").append(newTask.getTaskInfoStatus())
+                        .append("\n    Now you have ").append(taskList.size()).append(" tasks in the list.\n")
+                        .append("    ____________________________________________________________\n");
+                message = sb.toString();
+                sb.setLength(0);
+            } catch (IOException e) {
+                message = "An unexpected error has occurred: " + e.getMessage();
+            }
+            ui.printCommand(message);
+            tasks.updateTaskList(taskList);
+        } else {
+            message = parsedCmd.get(0);
+        }
+        return message;
+    }
+
+    /**
+     * Creates a new Task object (ToDos, Deadline or Event) based on the parsed command information.
+     *
+     * @param parsedCmd ArrayList of String type containing the parsed command.
+     * @return Task object which can be one of the following types: ToDos, Deadline or Event.
+     */
+    private Task getTask(ArrayList<String> parsedCmd) {
+        Task newTask = null;
         switch (parsedCmd.size()) {
         case 2: // new ToDos task
             newTask = new ToDo(parsedCmd.get(1));
@@ -63,28 +97,8 @@ public class AddCommand implements Command {
             newTask.setDone();
             break;
         default:
-            hasIssue = true;
             break;
         }
-        if (!hasIssue) {
-            taskList.add(newTask);
-            try {
-                storage.writeToFile(newTask.getTaskInfo() + "\n", taskList);
-                sb.append("    ____________________________________________________________\n")
-                        .append("    Got it. I've added this task to the list:\n")
-                        .append("      ").append(newTask.getTaskInfoStatus())
-                        .append("\n    Now you have ").append(taskList.size()).append(" tasks in the list.\n")
-                        .append("    ____________________________________________________________\n");
-                message = sb.toString();
-                sb.setLength(0);
-            } catch (IOException e) {
-                message = "An unexpected error has occurred: " + e.getMessage();
-            }
-            ui.printCommand(message);
-            tasks.updateTaskList(taskList);
-        } else {
-            message = parsedCmd.get(0);
-        }
-        return message;
+        return newTask;
     }
 }

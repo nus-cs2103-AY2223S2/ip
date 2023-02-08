@@ -34,7 +34,7 @@ public class UnmarkCommand implements Command {
         ArrayList<Task> taskList = tasks.getTaskList();
         int taskNumber = Integer.parseInt(parsedCmd.get(1));
 
-        if ((taskNumber <= taskList.size()) && (taskNumber > 0)) {
+        if ((taskNumber <= taskList.size()) && (taskNumber > 0)) { // checks if the task to unmark is within list
             Task tempTask = taskList.get(taskNumber - 1);
             String oldTaskInfo = tempTask.getTaskInfo();
             sb.append("    ____________________________________________________________\n")

@@ -2,8 +2,6 @@ package duke;
 
 import java.util.ArrayList;
 
-import exceptions.IncorrectNoOfArgumentException;
-
 /**
  * Represents a list used for storing all task information on Duke.
  * <p></p>
@@ -41,47 +39,56 @@ public class TaskList {
         ArrayList<Task> newTaskList = new ArrayList<>();
         for (int i = 0; i < fileTasks.size(); i++) {
             taskInfo = fileTasks.get(i);
-            Task newTask = null;
+            Task newTask;
             ArrayList<String> parsedInfoList;
-            try {
-                parsedInfoList = Parser.parse(taskInfo);
-            } catch (IncorrectNoOfArgumentException e) {
-                System.out.println(e);
-                continue;
-            }
-            switch (parsedInfoList.size()) {
-            case 2: // new ToDos task
-                newTask = new ToDo(parsedInfoList.get(1));
-                break;
-            case 3: // new ToDos (COMPLETED) task
-                newTask = new ToDo(parsedInfoList.get(2));
-                newTask.setDone();
-                break;
-            case 4: // new Deadline task
-                newTask = new Deadline(parsedInfoList.get(1), parsedInfoList.get(2), parsedInfoList.get(3));
-                break;
-            case 5: // new Deadline (COMPLETED) task
-                newTask = new Deadline(parsedInfoList.get(2), parsedInfoList.get(3), parsedInfoList.get(4));
-                newTask.setDone();
-                break;
-            case 6: // new Event task
-                newTask = new Event(parsedInfoList.get(1), parsedInfoList.get(2), parsedInfoList.get(4),
-                        parsedInfoList.get(3), parsedInfoList.get(5));
-                break;
-            case 7: // new Event (COMPLETED) task
-                newTask = new Event(parsedInfoList.get(2), parsedInfoList.get(3), parsedInfoList.get(5),
-                        parsedInfoList.get(4), parsedInfoList.get(6));
-                newTask.setDone();
-                break;
-            default:
+            parsedInfoList = Parser.parse(taskInfo);
+            newTask = getTask(parsedInfoList); // creates a new task
+            if (newTask == null) {
                 hasIssue = true;
-                break;
             }
             if (!hasIssue) {
                 newTaskList.add(newTask);
             }
         }
         return newTaskList;
+    }
+
+    /**
+     * Creates a new Task object (ToDos, Deadline or Event) based on the parsed command information.
+     *
+     * @param parsedCmd ArrayList of String type containing the parsed command.
+     * @return Task object which can be one of the following types: ToDos, Deadline or Event.
+     */
+    private static Task getTask(ArrayList<String> parsedCmd) {
+        Task newTask = null;
+        switch (parsedCmd.size()) {
+        case 2: // new ToDos task
+            newTask = new ToDo(parsedCmd.get(1));
+            break;
+        case 3: // new ToDos (COMPLETED) task
+            newTask = new ToDo(parsedCmd.get(2));
+            newTask.setDone();
+            break;
+        case 4: // new Deadline task
+            newTask = new Deadline(parsedCmd.get(1), parsedCmd.get(2), parsedCmd.get(3));
+            break;
+        case 5: // new Deadline (COMPLETED) task
+            newTask = new Deadline(parsedCmd.get(2), parsedCmd.get(3), parsedCmd.get(4));
+            newTask.setDone();
+            break;
+        case 6: // new Event task
+            newTask = new Event(parsedCmd.get(1), parsedCmd.get(2), parsedCmd.get(4),
+                    parsedCmd.get(3), parsedCmd.get(5));
+            break;
+        case 7: // new Event (COMPLETED) task
+            newTask = new Event(parsedCmd.get(2), parsedCmd.get(3), parsedCmd.get(5),
+                    parsedCmd.get(4), parsedCmd.get(6));
+            newTask.setDone();
+            break;
+        default:
+            break;
+        }
+        return newTask;
     }
 
     /**

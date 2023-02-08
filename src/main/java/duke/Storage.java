@@ -145,8 +145,9 @@ public class Storage {
             FileWriter fw = new FileWriter("data/storage.txt");
             if (fileTasks.size() != 0) { // file not empty
                 for (int i = 0; i < fileTasks.size(); i++) {
+                    // ensures correct element is being amended
                     if ((fileTasks.get(i).equals(currTaskInfo)) && (i == taskNumber)) {
-                        if (!newTaskInfo.equals("")) {
+                        if (!newTaskInfo.equals("")) { // if content is not to be deleted
                             fw.write(newTaskInfo + "\n");
                         }
                         continue;
@@ -155,8 +156,8 @@ public class Storage {
                 }
             } else { // file is empty
                 for (int i = 0; i < taskList.size(); i++) {
-                    if (i == taskNumber) {
-                        if (newTaskInfo.equals("")) {
+                    if (i == taskNumber) { // ensures correct element is being amended
+                        if (newTaskInfo.equals("")) { // if content is to be deleted
                             continue;
                         }
                         fw.write(newTaskInfo + "\n");

@@ -31,15 +31,15 @@ public class FindCommand implements Command {
         String message;
         StringBuilder sb = new StringBuilder();
         ArrayList<Task> taskList = tasks.getTaskList();
-        int taskIndex = 1;
+        int taskIndex = 1; // Used to number the tasks found
         String subString = parsedCmd.get(1);
         assert subString.equals("");
         String[] words = subString.split(" ");
         sb.append("    ____________________________________________________________\n")
                 .append("    Here are the matching tasks in your list:\n");
 
-        switch (words.length) {
-        case 1:
+        switch (words.length) { // Searches the list for tasks that matches the String input by user
+        case 1: // when string is made up of one word
             for (int i = 0; i < taskList.size(); i++) {
                 if (taskList.get(i).getTaskInfo().toLowerCase().contains(subString)) {
                     sb.append("    ").append(taskIndex++).append(".").append(taskList.get(i).getTaskInfoStatus())
@@ -47,7 +47,7 @@ public class FindCommand implements Command {
                 }
             }
             break;
-        default:
+        default: // when string is made up of multiple words
             for (String word: words) {
                 for (int i = 0; i < taskList.size(); i++) {
                     if (taskList.get(i).getTaskInfo().toLowerCase().contains(word)) {
