@@ -22,16 +22,15 @@ public class JFind implements IHandler {
     @Override
     public String take(String s) {
         Matcher m = PATTERN.matcher(s);
-        m.matches();
+        boolean isOkay = m.matches();
+        assert isOkay;
         String keyword = m.group(1);
         List<Task> allTasks = ts.getTasks();
         ArrayList<Task> matchedTasks = new ArrayList<>(ts.getTaskCount() / 5);
 
-        for (Task t : allTasks) {
-            if (t.getName().contains(keyword)) {
-                matchedTasks.add(t);
-            }
-        }
+        allTasks.stream().parallel()
+                .filter(t -> t.getName().contains(keyword))
+                .forEach(matchedTasks::add);
 
         int j = 1;
         StringBuilder sb = new StringBuilder(20 * matchedTasks.size());
