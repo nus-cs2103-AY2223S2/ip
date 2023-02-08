@@ -51,9 +51,8 @@ public class JavaFxUi extends Application {
      * Returns response from Duke.
      * @param input user input
      * @return response from Duke
-     * @throws DukeException if there is an error
      */
-    String getResponse(String input) throws DukeException {
+    String getResponse(String input) {
         try {
             Command command = parser.parseCommand(input);
             command.assign(taskList, ui);
@@ -66,9 +65,8 @@ public class JavaFxUi extends Application {
 
     /**
      * Main method to run Duke.
-     * @throws DukeException if there is an error
      */
-    public static void main() throws DukeException {
+    public static void main() {
         Application.launch(JavaFxUi.class);
 
     }
