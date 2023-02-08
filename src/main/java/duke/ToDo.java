@@ -36,4 +36,23 @@ public class ToDo extends Task {
     public String getTaskInfo() {
         return "[T]" + super.getTaskInfoStatus();
     }
+
+    /**
+     * Return boolean value indicating the task is ONGOING as it is a ToDo task.
+     *
+     * @return Boolean value indicating the task is ONGOING as it is a ToDo task.
+     */
+    @Override
+    public boolean isOngoing() {
+        return true;
+    }
+
+    /**
+     * Returns a boolean value indicating the completion status of the Task.
+     *
+     * @return Boolean value indicating the completion status of the Task.
+     */
+    public boolean getStatus() {
+        return super.getStatus();
+    }
 }

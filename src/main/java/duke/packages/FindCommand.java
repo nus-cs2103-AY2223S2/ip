@@ -24,7 +24,7 @@ public class FindCommand implements Command {
      * @param tasks Duke's TaskList object that stores all Tasks objects.
      * @param storage Duke's Storage object to allow file access.
      * @param ui Duke's Ui object to display and print messages to the user. Acts as a screen.
-     * @return String message of all tasks description and statueses that match the given string.
+     * @return String message of all tasks description and statues that match the given string.
      */
     @Override
     public String execute(ArrayList<String> parsedCmd, TaskList tasks, Storage storage, Ui ui) {

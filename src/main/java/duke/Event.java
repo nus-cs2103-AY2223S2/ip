@@ -59,6 +59,27 @@ public class Event extends Task {
     }
 
     /**
+     * Return boolean value indicating whether the current Task is ongoing.
+     *
+     * @return Boolean value indicating whether the current Task is ongoing.
+     */
+    @Override
+    public boolean isOngoing() {
+        LocalDate currDate = LocalDate.now();
+        LocalTime currTime = LocalTime.now();
+        if (endDate.compareTo(currDate) >= 0) {
+            if (endTime == null) {
+                return true;
+            } else if (endTime.compareTo(currTime) >= 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Returns a LocalTime object that corresponds to the parsed String time given.
      *
      * @param time String which represents the time that needs to be parsed into a LocalTime object.
@@ -121,5 +142,14 @@ public class Event extends Task {
     public String getTaskInfo() {
         return "[E]" + super.getTaskInfoStatus() + "/from " + this.originalStartDate + this.originalStartTime + " /to "
                 + this.originalEndDate + this.originalEndTime;
+    }
+
+    /**
+     * Returns a boolean value indicating the completion status of the Task.
+     *
+     * @return Boolean value indicating the completion status of the Task.
+     */
+    public boolean getStatus() {
+        return super.getStatus();
     }
 }

@@ -27,7 +27,7 @@ public class Parser {
      */
     protected static ArrayList<String> parse(String taskInfo) {
         ArrayList<String> parseInfoList = new ArrayList<>(); // stores in the format "command" followed by "args"
-        boolean isFnAvailable; // indicates whether user is calling a supported function provided by Duke
+        boolean hasMoreArgs; // indicates whether user is calling a supported function that needs multiple arguments
         String tempCmd; // stores function call by user (eg todos, mark, etc)
         String[] tempTaskInfo = taskInfo.split("] ");
 
@@ -62,8 +62,8 @@ public class Parser {
             tempTaskInfo = taskInfo.split(" ", 2);
             tempCmd = tempTaskInfo[0].toLowerCase();
         }
-        isFnAvailable = isAvailable(tempCmd);
-        parseInfoList = parse2(isFnAvailable, tempCmd, parseInfoList, tempTaskInfo);
+        hasMoreArgs = isAvailable(tempCmd);
+        parseInfoList = parse2(hasMoreArgs, tempCmd, parseInfoList, tempTaskInfo);
         return parseInfoList;
     }
 
@@ -73,17 +73,17 @@ public class Parser {
      * <p></p>
      * This method acts as a helper method for parse() to parse the command information.
      *
-     * @param isFnAvailable Boolean value indicating whether the command getting called is supported.
+     * @param hasMoreArgs Boolean value indicating whether the command getting called is supported.
      * @param cmd String representing the command.
      * @param partialCmd ArrayList of String type, containing command information, used to store parsed command.
      * @param tempTaskInfo String array containing the user input via CLI.
      * @return ArrayList of String type containing parse command information.
      * @see ArrayList
      */
-    private static ArrayList<String> parse2(boolean isFnAvailable, String cmd, ArrayList<String> partialCmd,
+    private static ArrayList<String> parse2(boolean hasMoreArgs, String cmd, ArrayList<String> partialCmd,
                                             String[] tempTaskInfo) {
         try { // determine function called by the user has required arguments and does not have blank spaces
-            DukeException.validate(isFnAvailable, cmd, tempTaskInfo);
+            DukeException.validate(hasMoreArgs, cmd, tempTaskInfo);
             partialCmd.add(cmd); // save function call (command) into parseInfo
         } catch (IncorrectNoOfArgumentException ex) {
             System.out.println(ex);
@@ -96,6 +96,8 @@ public class Parser {
         case "bye": // format: bye
             break;
         case "list": // format: list
+            break;
+        case "reminder": // format: reminder
             break;
         case "find":
             partialCmd.add(tempTaskInfo[1].toLowerCase());
@@ -235,10 +237,10 @@ public class Parser {
     }
 
     /**
-     * Returns a boolean value which indicates whether the command is available.
+     * Returns a boolean value which indicates whether the command requires more arguments.
      *
      * @param cmd String indicating the command name.
-     * @return Boolean value indicating command available or not.
+     * @return Boolean value indicating whether the command requires more arguments.
      */
     private static boolean isAvailable(String cmd) {
         if (cmd.equals("mark")) {

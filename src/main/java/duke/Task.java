@@ -23,6 +23,15 @@ public abstract class Task {
     }
 
     /**
+     * Returns a boolean value indicating the completion status of the Task.
+     *
+     * @return Boolean value indicating the completion status of the Task.
+     */
+    public boolean getStatus() {
+        return !this.hasCompleted;
+    }
+
+    /**
      * Returns a string that indicates the Task has been completed.
      *
      * @return String message that indicates the completion of a Task.
@@ -63,4 +72,11 @@ public abstract class Task {
      * @return String message of the Task description and status..
      */
     public abstract String getTaskInfo();
+
+    /**
+     * Return boolean value indicating whether the current Task is ongoing.
+     *
+     * @return Boolean value indicating whether the current Task is ongoing.
+     */
+    public abstract boolean isOngoing();
 }

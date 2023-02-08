@@ -10,6 +10,7 @@ import duke.packages.DeleteCommand;
 import duke.packages.FindCommand;
 import duke.packages.ListCommand;
 import duke.packages.MarkCommand;
+import duke.packages.ReminderCommand;
 import duke.packages.UnmarkCommand;
 import javafx.application.Platform;
 
@@ -83,6 +84,9 @@ public class Duke {
                 case "delete":
                     new DeleteCommand().execute(commandInfoList, this.tasks, this.storage, this.ui);
                     break;
+                case "reminder":
+                    new ReminderCommand().execute(commandInfoList, this.tasks, this.storage, this.ui);
+                    break;
                 case "error":
                     break;
                 default:
@@ -130,6 +134,9 @@ public class Duke {
                 break;
             case "delete":
                 message = new DeleteCommand().execute(commandInfoList, this.tasks, this.storage, this.ui);
+                break;
+            case "reminder":
+                new ReminderCommand().execute(commandInfoList, this.tasks, this.storage, this.ui);
                 break;
             case "error":
                 message = commandInfoList.get(1);
