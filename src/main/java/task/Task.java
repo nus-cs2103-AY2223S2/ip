@@ -7,6 +7,10 @@ public class Task {
     private String instruction;
     private boolean status;
 
+    /**
+     * Creates a new task without any deadlines
+     * @param instruction name user gives
+     */
     public Task(String instruction) {
         this.instruction = instruction;
         this.status = false;
