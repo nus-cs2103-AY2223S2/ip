@@ -51,7 +51,7 @@ test {
 
 application {
     sourceSets.main.java.srcDirs = ['src/main/java']
-    mainClassName = "duke.Duke"
+    mainClassName = "duke.Launcher"
 }
 
 shadowJar {
