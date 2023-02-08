@@ -55,9 +55,9 @@ public class TaskList {
 
     public ArrayList<Task> search(String searchString) {
         ArrayList<Task> foundTasks = new ArrayList<Task>();
-        
+
         for (int i = 0; i < this.tasks.size(); i++) {
-            if(tasks.get(i).contains(searchString)){
+            if (tasks.get(i).contains(searchString)) {
                 foundTasks.add(tasks.get(i));
             }
         }
