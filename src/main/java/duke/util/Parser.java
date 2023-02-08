@@ -67,7 +67,7 @@ public class Parser {
             } else if (inpArr[0].equals("deadline")) { // need to handle exception
                 assert inpArr.length > 1: "input array elements are wrong";
                 int deadlineLength = 9;
-                String[] processedString = stringProcessor(true, task.substring(deadlineLength));
+                String[] processedString = stringProcessorForDatedTasks(true, task.substring(deadlineLength));
                 Deadline newDeadline = new Deadline(processedString[0], task,
                         LocalDate.parse(processedString[1]));
                 taskList.add(newDeadline);
@@ -75,7 +75,7 @@ public class Parser {
             } else if (inpArr[0].equals("event")){ // need to handle exception
                 assert inpArr.length > 1: "input array elements are wrong";
                 int eventLength = 6;
-                String[] processedString = stringProcessor(false, task.substring(eventLength));
+                String[] processedString = stringProcessorForDatedTasks(false, task.substring(eventLength));
                 Event newEvent = new Event(processedString[0], task, LocalDate.parse(processedString[1]),
                         LocalDate.parse(processedString[2]));
                 taskList.add(newEvent);
@@ -102,7 +102,7 @@ public class Parser {
      * @param s String string for processing.
      * @return String[] processed String.
      */
-    private static String[] stringProcessor(boolean isDeadline, String s){
+    private static String[] stringProcessorForDatedTasks(boolean isDeadline, String s){
         if (isDeadline){
             String[] processedArr = new String[2];
             String tempString = "";
@@ -120,7 +120,7 @@ public class Parser {
             String tempString = "";
             for (int i=0; i<s.length(); i++){
                 if (s.charAt(i) == '/') {
-                    String[] processedDate = stringProcessor(true, s.substring(i+6));
+                    String[] processedDate = stringProcessorForDatedTasks(true, s.substring(i+6));
                     processedArr[1] = processedDate[0];
                     processedArr[2] = processedDate[1];
                     break;
