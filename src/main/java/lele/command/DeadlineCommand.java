@@ -1,10 +1,12 @@
 package lele.command;
 
+import java.io.IOException;
+
 import lele.storage.Storage;
 import lele.task.Deadline;
 import lele.task.TaskList;
 import lele.ui.Ui;
-import java.io.IOException;
+
 
 /**
  * Handles the actions taken for a
@@ -39,7 +41,7 @@ public class DeadlineCommand extends Command {
             taskList.addTask(deadline);
             storage.updateStorage(taskList);
             return ui.printAddTask(taskList, deadline);
-        } catch  (IOException e) {
+        } catch (IOException e) {
             return e.getMessage();
         }
     }

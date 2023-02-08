@@ -1,20 +1,21 @@
 package lele;
 
+import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.stage.Stage;
 import javafx.scene.layout.AnchorPane;
-import java.io.IOException;
+import javafx.stage.Stage;
+
 
 /**
  * Credits to @SPWwj for the idea of creating a separate class
  * to handle the GUI.
  */
 public class Main extends Application {
-    public Main() {}
-
     private final Lele lele = new Lele("./data/lele.txt");
+    public Main() {}
 
     @Override
     public void start(Stage stage) {

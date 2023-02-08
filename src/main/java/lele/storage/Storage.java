@@ -1,5 +1,11 @@
 package lele.storage;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import lele.exception.EmptyStorageException;
 import lele.exception.LoadingFailureException;
 import lele.task.Deadline;
@@ -7,11 +13,7 @@ import lele.task.Event;
 import lele.task.Task;
 import lele.task.TaskList;
 import lele.task.Todo;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
+
 
 /**
  * Handles user data by creating, loading, updating the task list
@@ -79,23 +81,24 @@ public class Storage {
      */
     public void loadTasks(String[] inputArr, String taskType) throws LoadingFailureException {
         switch (taskType) {
-            case "T":
-                Todo todo = new Todo(inputArr[2]);
-                this.list.add(todo);
-                todo.markStatus(inputArr[1]);
-                break;
-            case "D":
-                String[] dateTime = inputArr[3].split(" ");
-                Deadline deadline = new Deadline(inputArr[2], dateTime[0], dateTime[1]);
-                this.list.add(deadline);
-                deadline.markStatus(inputArr[1]);
-                break;
-            case "E":
-                Event ev = new Event(inputArr[2], inputArr[3], inputArr[4]);
-                this.list.add(ev);
-                ev.markStatus(inputArr[1]);
-            default:
-                throw new LoadingFailureException("File couldn't be loaded: Possibly due to wrong format");
+        case "T":
+            Todo todo = new Todo(inputArr[2]);
+            this.list.add(todo);
+            todo.markStatus(inputArr[1]);
+            break;
+        case "D":
+            String[] dateTime = inputArr[3].split(" ");
+            Deadline deadline = new Deadline(inputArr[2], dateTime[0], dateTime[1]);
+            this.list.add(deadline);
+            deadline.markStatus(inputArr[1]);
+            break;
+        case "E":
+            Event ev = new Event(inputArr[2], inputArr[3], inputArr[4]);
+            this.list.add(ev);
+            ev.markStatus(inputArr[1]);
+            break;
+        default:
+            throw new LoadingFailureException("File couldn't be loaded: Possibly due to wrong format");
         }
     }
 

@@ -1,10 +1,12 @@
 package lele.command;
 
+import java.io.IOException;
+
 import lele.storage.Storage;
 import lele.task.Task;
 import lele.task.TaskList;
 import lele.ui.Ui;
-import java.io.IOException;
+
 
 /**
  * Handles actions to take when user requests
@@ -30,8 +32,8 @@ public class DeleteCommand extends Command {
      * @param taskList Current task list instance.
      * @param ui Current ui instance.
      * @param storage Current storage instance.
-     * @throws IOException When there is a problem with writing to the file.
      * @return Output to user.
+     * @throws IOException When there is a problem with writing to the file.
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws IOException {

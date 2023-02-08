@@ -1,10 +1,12 @@
 package lele.command;
 
+import java.io.IOException;
+
 import lele.storage.Storage;
 import lele.task.Event;
 import lele.task.TaskList;
 import lele.ui.Ui;
-import java.io.IOException;
+
 
 /**
  * Handles actions taken when user requests
@@ -37,7 +39,7 @@ public class EventCommand extends Command {
             taskList.addTask(event);
             storage.updateStorage(taskList);
             return ui.printAddTask(taskList, event);
-        } catch  (IOException e) {
+        } catch (IOException e) {
             return e.getMessage();
         }
     }

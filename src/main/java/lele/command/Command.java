@@ -1,10 +1,12 @@
 package lele.command;
 
+import java.io.IOException;
+
 import lele.exception.LeleException;
 import lele.storage.Storage;
 import lele.task.TaskList;
 import lele.ui.Ui;
-import java.io.IOException;
+
 
 /**
  * An abstract class to enforce a structure

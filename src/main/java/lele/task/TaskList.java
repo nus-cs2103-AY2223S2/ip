@@ -1,6 +1,5 @@
 package lele.task;
 
-import java.lang.StringBuilder;
 import java.util.ArrayList;
 
 /**
@@ -35,7 +34,7 @@ public class TaskList {
     public String printList() {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < this.list.size(); i++) {
-            sb.append((i+1) + "." + this.list.get(i) + "\n");
+            sb.append((i + 1) + "." + this.list.get(i) + "\n");
         }
         return sb.toString();
     }
@@ -93,9 +92,9 @@ public class TaskList {
      * @param index The location of the task in the array list
      */
     public void markStatus(int index) {
-        assert list.get(index-1) == null : "Object called should be of type task.";
-//        Use an exception instead of assert to handle the code below
-//        assert list.contains(list.get(index-1)) : "The task list should contain the task being marked.";
+        assert list.get(index - 1) == null : "Object called should be of type task.";
+        // Use an exception instead of assert to handle the code below
+        // assert list.contains(list.get(index - 1)) : "The task list should contain the task being marked.";
         list.get(index - 1).markStatus(true);
     }
 
@@ -123,8 +122,8 @@ public class TaskList {
      * @param inputIndex The location of the task in the array list.
      */
     public Task deleteTask(int inputIndex) {
-//        Use an exception instead of assert to handle the code below
-//        assert this.listSize() >= inputIndex : "Index parameter queried should be within the task size";
+        // Use an exception instead of assert to handle the code below
+        // assert this.listSize() >= inputIndex : "Index parameter queried should be within the task size";
         Task task = this.list.get(inputIndex - 1);
         this.list.remove(inputIndex - 1);
 

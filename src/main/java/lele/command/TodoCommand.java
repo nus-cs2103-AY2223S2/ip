@@ -1,10 +1,12 @@
 package lele.command;
 
+import java.io.IOException;
+
 import lele.storage.Storage;
 import lele.task.TaskList;
 import lele.task.Todo;
 import lele.ui.Ui;
-import java.io.IOException;
+
 
 /**
  * Handless actions taken when user
@@ -29,14 +31,14 @@ public class TodoCommand extends Command {
      * @param taskList Current task list instance.
      * @param ui Current ui instance.
      * @param storage Current storage instance.
-     * @throws IOException An error with writing to storage.
      * @return Output to user.
+     * @throws IOException An error with writing to storage.
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
-            taskList.addTask(todo);
-            storage.updateStorage(taskList);
-            return ui.printAddTask(taskList, todo);
+        taskList.addTask(todo);
+        storage.updateStorage(taskList);
+        return ui.printAddTask(taskList, todo);
     }
 
     /**

@@ -1,12 +1,14 @@
 package lele;
 
+import java.io.IOException;
+
 import lele.command.Command;
 import lele.exception.LeleException;
 import lele.parser.Parser;
 import lele.storage.Storage;
 import lele.task.TaskList;
 import lele.ui.Ui;
-import java.io.IOException;
+
 
 /**
  * The main class that represents the chatbot, Lele, which helps

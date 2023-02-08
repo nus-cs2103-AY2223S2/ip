@@ -1,9 +1,11 @@
 package lele.command;
 
+import java.io.IOException;
+
 import lele.storage.Storage;
 import lele.task.TaskList;
 import lele.ui.Ui;
-import java.io.IOException;
+
 
 /**
  * Handles the response for a status
@@ -27,15 +29,14 @@ public class UnmarkCommand extends Command {
      * @param taskList Current task list instance.
      * @param ui Current ui instance.
      * @param storage Current storage instance.
-     * @throws IOException When there is a problem with
-     * writing to the storage.
      * @return Output to user
+     * @throws IOException When there is a problem with writing to the storage.
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
-            taskList.unMarkStatus(index);
-            storage.updateStorage(taskList);
-            return ui.printUnMarkStatus(taskList, index);
+        taskList.unMarkStatus(index);
+        storage.updateStorage(taskList);
+        return ui.printUnMarkStatus(taskList, index);
     }
 
     /**
