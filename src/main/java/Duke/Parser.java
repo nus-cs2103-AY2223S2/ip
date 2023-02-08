@@ -27,8 +27,10 @@ public class Parser {
      * @param listOfTasks the TasklistOfTasks where tasks are stored in
      */
     private static String addTodo(String description, TaskList listOfTasks) {
+        int lenBefore = listOfTasks.size();
         ToDo tdItem = new ToDo(description);
         listOfTasks.addTask(tdItem);
+        assert listOfTasks.size() == lenBefore + 1;
         return String.format("\tGot it. I have added this task:\n"
                              + "\t%s\n"
                              + "\tNow you have %d tasks in the list.\n" + Ui.Underline(),tdItem.toString(), listOfTasks.size());
@@ -43,7 +45,9 @@ public class Parser {
      */
     private static String addEvents(String description, TaskList listOfTasks, LocalDateTime start, LocalTime end) {
         Events evItem = new Events(description, start, end);
+        int lenBefore = listOfTasks.size();
         listOfTasks.addTask(evItem);
+        assert listOfTasks.size() == lenBefore + 1;
         return String.format("\tGot it. I have added this task:\n "
                              + "\t%s\n"
                              + "\tNow you have %d tasks in the listOfTasks.\n" + Ui.Underline(), evItem.toString(), listOfTasks.size());
@@ -58,8 +62,10 @@ public class Parser {
      */
 
     private static String addDeadline(String description, TaskList listOfTasks, LocalDateTime doneBy) {
+        int lenBefore = listOfTasks.size();
         Deadline dlItem = new Deadline(description, doneBy);
         listOfTasks.addTask(dlItem);
+        assert listOfTasks.size() == lenBefore + 1;
         return String.format("\tGot it. I have added this task:\n "
                              + "\t%s\n"
                              + "\tYou have %d tasks in the listOfTasks.\n" + Ui.Underline(), dlItem.toString(), listOfTasks.size());
@@ -71,9 +77,11 @@ public class Parser {
      * @param listOfTasks
      */
     public static String delete(String number, TaskList listOfTasks) {
+        int lenBefore = listOfTasks.size();
         Task removed = listOfTasks.get(Integer.parseInt(number.split(" ")[1]) );
         int nummbering = Integer.parseInt(number.split(" ")[1]);
         listOfTasks.removeTask(nummbering);
+        assert listOfTasks.size() == lenBefore - 1;
         Ui.Underline();
         return String.format(Ui.Underline()
                              + "\n%s\n"
