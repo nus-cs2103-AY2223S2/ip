@@ -23,4 +23,12 @@ public class ToDo extends Task {
     public boolean equals(Object obj) {
         return super.equals(obj);
     }
+
+    @Override
+    public int compareTo(Task o) {
+        if (o instanceof ToDo) {
+            return super.compareTo(o);
+        }
+        return super.compareTo(o);
+    }
 }

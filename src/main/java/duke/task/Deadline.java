@@ -45,4 +45,18 @@ public class Deadline extends Task {
         }
         return super.equals(obj);
     }
+
+    @Override
+    public int compareTo(Task o) {
+        if (o instanceof Deadline) {
+            if (deadline.equals(((Deadline) o).deadline)) {
+                return super.compareTo(o);
+            }
+            if (deadline.isBefore(((Deadline) o).deadline)) {
+                return -1;
+            }
+            return 1;
+        }
+        return super.compareTo(o);
+    }
 }
