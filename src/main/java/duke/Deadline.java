@@ -35,4 +35,9 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString();
     }
+
+    @Override
+    public String toFileSaveFormat() {
+        return "[D]###" + super.toFileSaveFormat();
+    }
 }

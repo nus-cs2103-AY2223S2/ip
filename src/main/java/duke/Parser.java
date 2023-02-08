@@ -3,7 +3,6 @@ package duke;
 import java.time.LocalDate;
 
 import java.util.Arrays;
-
 import java.util.ArrayList;
 
 import java.lang.StringBuilder;
@@ -58,6 +57,22 @@ public class Parser {
         for (int i = 0; i < foundTasks.size(); i++) {
             response.append(i + 1 + "." + foundTasks.get(i).toString() + "\n");
         }
+        return response.toString();
+    }
+
+    private String getUpComingDeadlines(TaskList toDoList) {
+        StringBuilder response = new StringBuilder();
+
+        response.append("Here are the upcoming deadlines");
+        int counter = 1;
+        for (int i = 0; i < toDoList.size(); i++){
+            if(toDoList.get(i).isUpcomingDeadline()){
+                response.append(counter + 1 + "." + toDoList.get(i).toString() + "\n");
+                counter += 1;
+            }
+
+        }
+
         return response.toString();
     }
 
@@ -241,6 +256,9 @@ public class Parser {
         String command = splitInput[0];
 
         switch (command) {
+            case "upcoming" :
+                return getUpComingDeadlines(toDoList);
+
             case "find":
                 return findTask(input, toDoList);
 

@@ -4,8 +4,12 @@ import java.io.File;
 import java.io.IOException;
 import java.io.FileWriter;
 
+import java.time.LocalDate;
+
 import java.util.ArrayList;
 import java.util.Scanner;
+
+
 
 /**
  * Represents a storage system that read or stores information from hard disk to program
@@ -23,32 +27,42 @@ public class Storage {
 
 
     private void readTask(Scanner scanner,ArrayList<Task> toDoList) {
-        String currentTask = scanner.nextLine();
-        String typeOfTask = currentTask.substring(0, 3);
-        boolean isMarked = currentTask.substring(3, 6).equals("[X]");
+        String currentTaskInput = scanner.nextLine();
+
+        String[] splitCurrentTaskInput = currentTaskInput.split("###");
+        
+        String typeOfTask = splitCurrentTaskInput[0];
+        boolean isMarked = splitCurrentTaskInput[1].equals("[X]");
+
+        Task newTask;
+
         switch (typeOfTask) {
             case "[E]":
-                Task newEvent = new Event(currentTask.substring(7));
-                toDoList.add(newEvent);
-                if (isMarked) {
-                    newEvent.mark();
-                }
+                newTask = new Event(splitCurrentTaskInput[2]);
+                
                 break;
             case "[T]":
-                Task newTodo = new Todo(currentTask.substring(7));
-                toDoList.add(newTodo);
-                if (isMarked) {
-                    newTodo.mark();
-                }
+                newTask = new Todo(splitCurrentTaskInput[2]);
+                
                 break;
             case "[D]":
-                Task newDeadline = new Deadline(currentTask.substring(7));
-                toDoList.add(newDeadline);
-                if (isMarked) {
-                    newDeadline.mark();
-                }
+                newTask = new Deadline(splitCurrentTaskInput[2]);
                 break;
+
+            default:
+                return;
         }
+
+        toDoList.add(newTask);
+        if (isMarked) {
+            newTask.mark();
+        }
+
+        if(splitCurrentTaskInput.length > 3){
+            LocalDate deadline = LocalDate.parse(splitCurrentTaskInput[3]);  
+            newTask.setDeadline(deadline);
+        }
+
     }
 
     /**
@@ -76,7 +90,7 @@ public class Storage {
     }
 
     /**
-     * stores tasks from program to harddisk
+     * stores tasks from program to hard disk
      * 
      * @param toDoList ArrayList of all tasks
      */
@@ -84,7 +98,7 @@ public class Storage {
         try {
             FileWriter saveFileWriter = new FileWriter(this.filePath + "/duke.txt", false);
             for (int i = 0; i < toDoList.size(); i++) {
-                saveFileWriter.write(toDoList.get(i).toString() + "\n");
+                saveFileWriter.write(toDoList.get(i).toFileSaveFormat() + "\n");
             }
 
             saveFileWriter.close();

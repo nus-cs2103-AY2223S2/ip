@@ -51,7 +51,22 @@ public class Task {
     public Boolean contains(String searchString) {
         return this.description.contains(searchString);
     }
-    
+
+    public Boolean isUpcomingDeadline() {
+        if (this.deadline == null) {
+            return false;
+        }
+
+        if (this.deadline.isBefore(LocalDate.now())) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public void setDeadline(LocalDate deadline) {
+        this.deadline = deadline;
+    }
 
     @Override
     public String toString() {
@@ -69,5 +84,24 @@ public class Task {
         }
 
         return doneString + " " + description + dateString;
+    }
+
+    public String toFileSaveFormat() {
+        String doneString;
+        if (isDone) {
+            doneString = "[X]";
+        } else {
+            doneString = "[ ]";
+        }
+
+        String dateString;
+
+        if (this.deadline == null) {
+            dateString = "";
+        } else {
+            dateString = "###" + this.deadline.toString();
+        }
+
+        return doneString + "###" + description + dateString;
     }
 }

@@ -35,4 +35,9 @@ public class Todo extends Task {
         return "[T]" + super.toString();
     }
 
+    @Override
+    public String toFileSaveFormat() {
+        return "[T]###" + super.toFileSaveFormat();
+    }
+
 }
