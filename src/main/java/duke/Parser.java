@@ -184,6 +184,7 @@ public class Parser {
                 break;
             }
         }
+        assert parseInfoList.size() > 0;
         return parseInfoList;
     }
 }

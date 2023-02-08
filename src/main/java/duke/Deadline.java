@@ -38,14 +38,35 @@ public class Deadline extends Task {
         this.formatDate = DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)
                 .format(date);
 
-        if (dueTime.equals("")) {
-            this.time = null;
-            this.formatTime = "";
-        } else {
-            this.time = LocalTime.parse(dueTime);
-            this.formatTime = " | " + DateTimeFormatter.ofLocalizedTime(FormatStyle.MEDIUM)
-                    .format(time);
+        this.time = this.localTimeParser(dueTime);
+        this.formatTime = this.formatTime(this.time);
+    }
+
+    /**
+     * Returns a LocalTime object that corresponds to the parsed String time given.
+     *
+     * @param time String which represents the time that needs to be parsed into a LocalTime object.
+     * @return LocalTime object storing the parsed time.
+     */
+    private LocalTime localTimeParser(String time) {
+        if (time.equals("")) {
+            return null;
         }
+        return LocalTime.parse(time);
+    }
+
+    /**
+     * Returns a String that corresponds to the time given in the LocalTime object after formatting.
+     *
+     * @param time LocalTime object storing the time.
+     * @return String which represents the time.
+     */
+    private String formatTime(LocalTime time) {
+        if (time == null) {
+            return "";
+        }
+        return " | " + DateTimeFormatter.ofLocalizedTime(FormatStyle.MEDIUM)
+                .format(time);
     }
 
     /**

@@ -67,6 +67,7 @@ public class Duke {
                 System.out.println(e);
                 continue;
             }
+            assert commandInfoList.size() > 0 : "Assertion Error has occurred";
             if (commandInfoList.size() != 0) {
                 switch (commandInfoList.get(0)) {
                 case "bye":
@@ -116,6 +117,7 @@ public class Duke {
             if (isExit) {
                 Platform.exit();
             }
+            assert commandInfoList.size() > 0 : "Assertion Error has occurred";
             if (commandInfoList.size() != 0) {
                 switch (commandInfoList.get(0)) {
                 case "bye":
@@ -150,6 +152,7 @@ public class Duke {
                     break;
                 }
             }
+            assert !message.equals("");
             return message;
         } catch (IncorrectNoOfArgumentException e) {
             return e.getMessage();
