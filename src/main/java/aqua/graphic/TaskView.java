@@ -25,7 +25,6 @@ public class TaskView extends UiComponent<VBox> {
     private static final String STYLECLASS_TODO = "todo-label";
 
     private static final PseudoClass PSEUDO_CLASS_COMPLETE = PseudoClass.getPseudoClass("complete");
-    private static final PseudoClass PSEUDO_CLASS_INCOMPLETE = PseudoClass.getPseudoClass("incomplete");
 
     @FXML private VBox scheduleDisplayArea;
     @FXML private VBox todoDisplayArea;
@@ -100,7 +99,7 @@ public class TaskView extends UiComponent<VBox> {
             if (task.isComplete()) {
                 return List.of(PSEUDO_CLASS_COMPLETE);
             }
-            return List.of(PSEUDO_CLASS_INCOMPLETE);
+            return List.of();
         }
 
 
@@ -129,7 +128,7 @@ public class TaskView extends UiComponent<VBox> {
             if (task.isComplete()) {
                 pseudoClassStateChanged(PSEUDO_CLASS_COMPLETE, true);
             } else {
-                pseudoClassStateChanged(PSEUDO_CLASS_INCOMPLETE, true);
+                pseudoClassStateChanged(PSEUDO_CLASS_COMPLETE, false);
             }
             initialiseLabel(task.toString());
         }
