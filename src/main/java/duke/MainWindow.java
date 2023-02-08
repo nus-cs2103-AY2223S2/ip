@@ -37,28 +37,20 @@ public class MainWindow extends AnchorPane {
     }
 
     @FXML
-    private void handleUserInput() {
+    private void handleUserInput() throws Exception{
         String input = userInput.getText();
-        String response = duke.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
-        );
-        userInput.clear();
-    }
-
-    @FXML
-    public void printDuke(String str) {
-        dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(str, dukeImage)
-        );
-    }
-
-    @FXML
-    public void printUser(String str) {
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(str, userImage)
-        );
+        try {
+            String response = duke.getResponse(input);
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getDukeDialog(response, dukeImage)
+            );
+            userInput.clear();
+        } catch (DukeException e) {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getDukeDialog(e.getMsg(), dukeImage)
+            );
+        }
     }
 
 }

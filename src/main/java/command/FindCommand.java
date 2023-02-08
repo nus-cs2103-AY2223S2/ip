@@ -1,5 +1,6 @@
 package command;
 
+import duke.DukeException;
 import duke.MainWindow;
 import duke.Ui;
 import task.TaskList;
@@ -11,7 +12,7 @@ import task.TaskList;
 public class FindCommand {
 
     private String[] inputs;
-    private MainWindow mw = new MainWindow();
+    private MainWindow mw;
     private static StringBuilder strBuild = new StringBuilder();
 
     public FindCommand(String[] inputs) {
@@ -22,13 +23,11 @@ public class FindCommand {
      * This method invokes the find function to search
      * the keyword in tasks.
      */
-    public String find() {
+    public String find() throws DukeException {
         assert inputs[0].equalsIgnoreCase("FIND") : "Contact developer on Find bug";
         String keyword = "";
         if (inputs.length != 2) {
-            mw.printDuke(Ui.printEnterKeyword());
-            keyword = Ui.readCommand();
-            mw.printUser(keyword);
+            throw new DukeException(Ui.printEnterKeyword());
         } else {
             keyword = inputs[1];
         }

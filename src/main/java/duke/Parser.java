@@ -15,7 +15,7 @@ import task.TaskList;
  */
 public class Parser {
 
-    public String parse(String command) {
+    public String parse(String command) throws Exception{
 
         String[] splitCommand = command.split(" ");
         switch(splitCommand[0].toUpperCase()) {

@@ -1,5 +1,7 @@
 package command;
 
+import duke.Duke;
+import duke.DukeException;
 import duke.MainWindow;
 import duke.Ui;
 
@@ -24,13 +26,13 @@ public class MarkCommand {
     /**
      * This method is used to mark a certain task.
      */
-    public String mark() {
+    public String mark() throws DukeException{
         try {
             Task curr = TaskList.get(number);
             curr.mark();
             return Ui.printMark(curr);
         } catch (Exception m){
-            return Ui.printWrongNumber();
+            throw new DukeException(Ui.printWrongNumber());
         }
     }
 }
