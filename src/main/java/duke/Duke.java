@@ -65,7 +65,7 @@ public class Duke {
         while(!hasExit) {
             String input = ui.getInput();
             ui.showLine();
-            Command c = parser.parse(input, listOfTasks);
+            Command c = parser.parse(input, listOfTasks, ui);
             c.executeCommand(listOfTasks, storage, ui);
             ui.showLine();
 
@@ -80,7 +80,7 @@ public class Duke {
     public void runInput(String input) throws FileNotFoundException {
 
         ui.showLine();
-        Command c = parser.parse(input, listOfTasks);
+        Command c = parser.parse(input, listOfTasks, ui);
         c.executeCommand(listOfTasks, storage, ui);
         ui.showLine();
 

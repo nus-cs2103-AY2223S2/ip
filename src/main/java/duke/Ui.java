@@ -12,6 +12,7 @@ public class Ui {
      */
     public Ui() {
         sc = new Scanner(System.in);
+        mainWindow = null;
     }
 
     /**
@@ -56,7 +57,10 @@ public class Ui {
     public void printText(String text) {
 
         System.out.println(text);
-        mainWindow.passDukeResponse(text);
+
+        if(mainWindow!=null) {
+            mainWindow.passDukeResponse(text);
+        }
     }
 
 

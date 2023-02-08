@@ -21,7 +21,7 @@ public class Parser {
      * @param tasklist is where all the tasks are stored
      * @return a new Command object based on the user input
      */
-    public Command parse(String input, TaskList tasklist) {
+    public Command parse(String input, TaskList tasklist, Ui ui) {
 
         String[] instruction = input.split(" ", 2);
 
