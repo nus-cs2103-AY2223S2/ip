@@ -1,8 +1,8 @@
 package runner;
-import components.Deadline;
-import components.Event;
-import components.Task;
-import components.Todo;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.Todo;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;

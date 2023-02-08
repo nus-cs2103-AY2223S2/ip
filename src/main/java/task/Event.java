@@ -1,4 +1,4 @@
-package components;
+package task;
 
 /**
  * Class for Event object.

@@ -34,4 +34,8 @@ public class Duke {
             new Parser(this).handle(info);
         }
     }
+
+    public String getResponse(String input) {
+        return "Duke heard: " + input;
+    }
 }
