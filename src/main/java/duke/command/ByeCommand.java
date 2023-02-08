@@ -4,8 +4,9 @@ import java.io.IOException;
 
 import duke.exception.DukeException;
 import duke.task.TaskList;
-import duke.util.Storage;
 import duke.ui.Ui;
+import duke.util.Storage;
+
 
 /**
  * Executable command to exit the program.

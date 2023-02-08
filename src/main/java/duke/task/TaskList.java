@@ -70,7 +70,12 @@ public class TaskList implements Iterable<Task> {
         return this.taskList.isEmpty();
     }
 
-    public String printList() {
+    /**
+     * Use streams to iterate through the list of Task
+     *
+     * @return String representation of list of tasks
+     */
+    public String listify() {
         return taskList.stream()
                 .map(Task::toString)
                 .collect(Collectors.joining("\n"));

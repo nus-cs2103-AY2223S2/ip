@@ -1,11 +1,11 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.exception.DukeException;
 import duke.task.TaskList;
 import duke.ui.Ui;
 import duke.util.Storage;
-
-import java.io.IOException;
 
 /**
  * Executable command to mark an existing task as completed.

@@ -24,9 +24,11 @@ public class ListCommand extends Command {
         this.ui = ui;
     }
 
-    /*
-     * execute in printCommand iterates through the taskList
-     * and prints out the status of each individual tasks
+    /**
+     * Iterate through the taskList
+     * and prints out the status of each individual tasks.
+     *
+     * @throws DukeException if input is incorrect
      */
     @Override
     public String execute() throws DukeException {

@@ -1,10 +1,9 @@
 package duke.command;
 
-import duke.exception.DukeException;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
+
+import duke.exception.DukeException;
 
 /**
  * Executable commands based on user input

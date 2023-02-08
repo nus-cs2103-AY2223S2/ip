@@ -2,18 +2,17 @@ package duke;
 
 import java.io.FileNotFoundException;
 
+import duke.command.Command;
+import duke.exception.DukeException;
+import duke.task.TaskList;
+import duke.ui.Ui;
+import duke.util.Parser;
+import duke.util.Storage;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
-
-import duke.command.Command;
-import duke.exception.DukeException;
-import duke.task.TaskList;
-import duke.util.Parser;
-import duke.util.Storage;
-import duke.ui.Ui;
 
 
 /**
