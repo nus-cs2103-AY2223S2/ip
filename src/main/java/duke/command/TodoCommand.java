@@ -21,9 +21,9 @@ public class TodoCommand extends Command {
     private final Storage storage;
 
     /**
-     * TodoCommand constructor
+     * TodoCommand constructor.
      *
-     * @param input    Entire line of user input
+     * @param input    ToDo Name
      * @param taskList Existing taskList
      * @param ui       Shared Ui object
      * @param storage  Shared storage object
@@ -43,7 +43,7 @@ public class TodoCommand extends Command {
      */
     @Override
     public String execute() throws DukeException {
-        ToDo toDo = new ToDo(getTaskName("todo", input));
+        ToDo toDo = new ToDo(input);
         taskList.add(toDo);
 
         try {

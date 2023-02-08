@@ -20,9 +20,9 @@ public class MarkCommand extends Command {
     private final Storage storage;
 
     /**
-     * MarkCommand constructor
+     * MarkCommand constructor.
      *
-     * @param input    Entire line of user input
+     * @param input    String representation of task number
      * @param taskList Existing taskList
      * @param ui       Shared Ui object
      * @param storage  Shared storage object
@@ -35,35 +35,28 @@ public class MarkCommand extends Command {
     }
 
     /**
-     * Mark corresponding task as completed
-     * Checking for out of bounds as well as invalid syntax
+     * Mark corresponding task as completed.
+     * Check for out of bounds as well as invalid syntax.
      *
      * @throws DukeException if input is incorrect
      */
     @Override
     public String execute() throws DukeException {
-        String[] inputs = input.split(" ");
+        int ind = Integer.parseInt(input) - 1;
 
-        if (inputs.length == 1) {
-            int ind = Integer.parseInt(inputs[0]) - 1;
-
-            // If index falls out of bounds
-            if (ind >= taskList.size() || ind < 0) {
-                throw new DukeException("OOPS!!! Invalid task number :(");
-            }
-
-            taskList.get(ind).markCompleted();
-
-            try {
-                storage.save(taskList);
-            } catch (IOException e) {
-                return ui.showError(e.getMessage());
-            }
-
-            return ui.printMarkedTask(taskList.get(ind));
-
-        } else {
-            throw new DukeException("Incorrect command: mark <valid task index>");
+        // If index falls out of bounds
+        if (ind >= taskList.size() || ind < 0) {
+            throw new DukeException("OOPS!!! Invalid task number :(");
         }
+
+        taskList.get(ind).markCompleted();
+
+        try {
+            storage.save(taskList);
+        } catch (IOException e) {
+            return ui.showError(e.getMessage());
+        }
+
+        return ui.printMarkedTask(taskList.get(ind));
     }
 }

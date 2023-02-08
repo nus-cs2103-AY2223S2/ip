@@ -75,14 +75,19 @@ public class Ui {
 
     public String printList(TaskList taskList) {
 
-        if (taskList.isEmpty()) {
-            return "You have nothing in your tasklist";
+        try {
+            if (taskList.isEmpty()) {
+                return "You have nothing in your tasklist";
+            }
+
+            String output = "Here are the tasks in your list: \n";
+            output += taskList.printList();
+
+            return output;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("hi");
         }
-
-        String output = "Here are the tasks in your list: \n";
-        output += taskList.printList();
-
-        return output;
+        return "";
     }
 
     public String printNoTaskWithKeywordFound(List<String> keyword) {

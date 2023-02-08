@@ -5,17 +5,17 @@ import java.util.Iterator;
 import java.util.stream.Collectors;
 
 /**
- * A list of Tasks
- * <p>
- * author Guo-KeCheng
+ * A list of Tasks.
+ *
+ * @author Guo-KeCheng
  */
 public class TaskList implements Iterable<Task> {
 
     private final ArrayList<Task> taskList;
 
     /**
-     * TaskList class constructor
-     * Instantiates taskList to be an empty ArrayList
+     * TaskList class constructor.
+     * Instantiates taskList to be an empty ArrayList.
      */
     public TaskList() {
         this.taskList = new ArrayList<>();
