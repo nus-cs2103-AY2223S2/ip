@@ -7,12 +7,9 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
 /**
  * Represents a storage system that read or stores information from hard disk to program
  */
-
-
 public class Storage {
     private String filePath;
 
@@ -22,6 +19,36 @@ public class Storage {
 
     public Storage() {
         this.filePath = "./data";
+    }
+
+
+    private void readTask(Scanner scanner,ArrayList<Task> toDoList) {
+        String currentTask = scanner.nextLine();
+        String typeOfTask = currentTask.substring(0, 3);
+        boolean isMarked = currentTask.substring(3, 6).equals("[X]");
+        switch (typeOfTask) {
+            case "[E]":
+                Task newEvent = new Event(currentTask.substring(7));
+                toDoList.add(newEvent);
+                if (isMarked) {
+                    newEvent.mark();
+                }
+                break;
+            case "[T]":
+                Task newTodo = new Todo(currentTask.substring(7));
+                toDoList.add(newTodo);
+                if (isMarked) {
+                    newTodo.mark();
+                }
+                break;
+            case "[D]":
+                Task newDeadline = new Deadline(currentTask.substring(7));
+                toDoList.add(newDeadline);
+                if (isMarked) {
+                    newDeadline.mark();
+                }
+                break;
+        }
     }
 
     /**
@@ -37,33 +64,7 @@ public class Storage {
             savedFile.createNewFile();
             Scanner scanner = new Scanner(savedFile);
             while (scanner.hasNextLine()) {
-                String currentTask = scanner.nextLine();
-                String typeOfTask = currentTask.substring(0, 3);
-                boolean isMarked = currentTask.substring(3, 6).equals("[X]");
-                switch (typeOfTask) {
-                    case "[E]":
-                        Task newEvent = new Event(currentTask.substring(7));
-                        toDoList.add(newEvent);
-                        if (isMarked) {
-                            newEvent.mark();
-                        }
-                        break;
-                    case "[T]":
-                        Task newTodo = new Todo(currentTask.substring(7));
-                        toDoList.add(newTodo);
-                        if (isMarked) {
-                            newTodo.mark();
-                        }
-                        break;
-                    case "[D]":
-                        Task newDeadline = new Deadline(currentTask.substring(7));
-                        toDoList.add(newDeadline);
-                        if (isMarked) {
-                            newDeadline.mark();
-                        }
-
-                        break;
-                }
+                readTask(scanner, toDoList);
             }
             scanner.close();
 
@@ -79,12 +80,9 @@ public class Storage {
      * 
      * @param toDoList ArrayList of all tasks
      */
-
     public void writeToFile(TaskList toDoList) {
-
         try {
             FileWriter saveFileWriter = new FileWriter(this.filePath + "/duke.txt", false);
-
             for (int i = 0; i < toDoList.size(); i++) {
                 saveFileWriter.write(toDoList.get(i).toString() + "\n");
             }
