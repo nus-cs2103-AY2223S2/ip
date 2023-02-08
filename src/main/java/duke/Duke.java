@@ -32,7 +32,7 @@ public class Duke {
     public Duke(String filePath) {
         assert pathNotEmpty(filePath);
         this.storage = new Storage(filePath);
-        this.tasks = new TaskList(storage.load());
+        this.tasks = new TaskList(this.storage.load());
         this.ui = new Ui();
     }
 
