@@ -59,12 +59,13 @@ public class TaskList {
      * @param description the description
      * @throws DukeException the duke exception
      */
-    public void addTodo(String description) throws DukeException {
+    public String addTodo(String description) throws DukeException {
         if (description.equals("")) {
             throw new DukeException("The description of a todo cannot be empty.");
         }
         Todo newTodo = new Todo(description);
         tasks.add(newTodo);
+        return newTodo.toString();
     }
 
     /**
@@ -74,9 +75,10 @@ public class TaskList {
      * @param by          the by
      * @throws DukeException the duke exception
      */
-    public void addDeadline(String description, String by) throws DukeException {
+    public String addDeadline(String description, String by) throws DukeException {
         Deadline newDd = new Deadline(description, LocalDate.parse(by));
         tasks.add(newDd);
+        return newDd.toString();
     }
 
     /**
@@ -87,9 +89,10 @@ public class TaskList {
      * @param to          the to
      * @throws DukeException the duke exception
      */
-    public void addEvent(String description, String from, String to) throws DukeException {
+    public String addEvent(String description, String from, String to) throws DukeException {
         Event newEvent = new Event(description, from, to);
         tasks.add(newEvent);
+        return newEvent.toString();
     }
 
     /**
@@ -117,6 +120,9 @@ public class TaskList {
      * @return the string
      */
     public String markTask(int taskNo) {
+
+        assert taskNo < size() && taskNo >= 0;
+
         tasks.get(taskNo).mark();
         String result = "Nice! I've marked this task as done:\n";
         result += tasks.get(taskNo);
@@ -130,6 +136,9 @@ public class TaskList {
      * @return the string
      */
     public String unmarkTask(int taskNo) {
+
+        assert taskNo < size() && taskNo >= 0;
+
         tasks.get(taskNo).unmark();
         String result = "OK, I've marked this task as not done yet:\n";
         result += tasks.get(taskNo);
@@ -143,6 +152,9 @@ public class TaskList {
      * @return the string
      */
     public String delete(int taskNo) {
+
+        assert taskNo < size() && taskNo >= 0;
+
         Task deleted = tasks.remove(taskNo);
         return String.format("OK, I've deleted: %s\n", deleted);
     }

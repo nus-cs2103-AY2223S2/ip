@@ -27,6 +27,9 @@ public class MarkCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        if (index >= tasks.size() || index < 0) {
+            throw new DukeException("invalid task number provided");
+        }
         if (isMarked) {
             return tasks.markTask(index);
         } else {
