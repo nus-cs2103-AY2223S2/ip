@@ -136,6 +136,13 @@ public class Parser {
         }
     }
 
+    private Task markIfDone(Task task, boolean isDone) {
+        if (isDone) {
+            task.markAsDone();
+        }
+        return task;
+    }
+
     /**
      * Determines if an Add[Task]Command is valid.
      * Since command is split with a limit of 2, splitCommand array should have two elements.

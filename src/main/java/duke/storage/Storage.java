@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -33,7 +33,7 @@ public class Storage {
     public ArrayList<Task> load() throws DukeException {
         //if file is found successfully
         try {
-            Files.createDirectories(Paths.get(path)); //create parent directories if none exists
+            Files.createDirectories(Path.of(this.path).getParent()); //create parent directories if none exists
             File fileTxt = new File(this.path);
             Scanner scanner = new Scanner(fileTxt);
             ArrayList<Task> taskArrayList = new ArrayList<>();

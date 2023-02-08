@@ -11,9 +11,6 @@ public class Formatter {
     /** Simple greeting message */
     private static final String GREETING = "Welcome to Duke. How may I help you?";
 
-    /** */
-    private static final String LOADING_ERROR = "Failed to find existing Task list. Creating new list...";
-
     public static String formatAddTask(Task newTask, int listSize) {
         return String.format("You have added: %s\n You have %d tasks in the list", newTask.toString(), listSize);
     }
@@ -31,7 +28,7 @@ public class Formatter {
     }
 
     /**
-     * Calls Ui to show an indexed list of tasks
+     * Formats task arraylist to an indexed list of tasks
      * @param tasks task list
      */
     public static String formatIndexedList(ArrayList<Task> tasks) {

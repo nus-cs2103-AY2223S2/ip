@@ -2,6 +2,7 @@ package duke;
 
 import java.io.IOException;
 
+import duke.exception.DukeException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -31,10 +32,15 @@ public class Gui extends Application {
             stage.setScene(scene);
             mainWindow = fxmlLoader.<MainWindow>getController();
             mainWindow.setDuke(duke);
-            mainWindow.showDukeMessage(GREETING);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+        try {
+            duke.loadTasks();
+            mainWindow.showDukeMessage(GREETING);
+        } catch (DukeException e) {
+            mainWindow.showDukeMessage(GREETING + "\nFailed to load tasks. Empty task list has been created.");
         }
     }
 

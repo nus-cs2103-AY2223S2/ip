@@ -22,11 +22,11 @@ public class Duke {
      */
     public Duke() {
         storage = new Storage(PATH_TO_FILE);
-        try {
-            this.tasks = new TaskList(storage.load());
-        } catch (DukeException e) {
-            this.tasks = new TaskList();
-        }
+        this.tasks = new TaskList();
+    }
+
+    public void loadTasks() throws DukeException {
+        this.tasks = new TaskList(storage.load());
     }
 
     public String getResponse(String input) {
