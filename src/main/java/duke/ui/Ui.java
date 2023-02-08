@@ -24,8 +24,20 @@ public class Ui {
     /**
      * <code>Scanner</code> to take user input.
      */
+    private static final String GREETING_MESSAGE = "\tHello! I'm Duke\n"
+            + "\tWhat can I do for you?";
     private final Scanner scanner;
-
+    private final String init_message = "Hello from\n" + Ui.LOGO;
+    private final String marked_task_message = "\tNice! I've marked this task as done:\n\t  ";
+    private final String unmarked_task_message = "\tOK, I've marked this task as not done yet:"
+            + "\n\t  ";
+    private final String added_task_message = "\tGot it. I've added this task:\n\t  ";
+    private final String deleted_task_message = "\tNoted. I've removed this task:\n\t  ";
+    private final String clear_task_message = "\tI have cleared the task list.";
+    private final String bye_message = "\tBye. Hope to see you again soon!";
+    private final String line_seperation = "\t___________________________________"
+            + "_________________________";
+    private final String loading_error_message = "Error loading file from storage.";
     /**
      * Constructor for <code>Duke</code>'s <code>Ui</code>.
      */
@@ -47,75 +59,72 @@ public class Ui {
         return null;
     }
     /**
-     * Prints <code>Duke</code>'s init message.
+     * Returns and prints <code>Duke</code>'s init message.
+     * @return <code>Duke</code>'s init message
      */
-    public void showInitMessage() {
-
-        System.out.println("Hello from\n" + Ui.LOGO);
+    public String showInitMessage() {
+        System.out.println(init_message);
+        return init_message;
     }
     /**
      * Returns and prints the greeting message and a line separation.
+     * @return <code>Duke</code>'s greeting message
      */
     public static String showGreeting() {
-        System.out.println("\tHello! I'm Duke\n"
-                + "\tWhat can I do for you?");
-        return "\tHello! I'm Duke\n"
-                + "\tWhat can I do for you?";
+        System.out.println(GREETING_MESSAGE);
+        return GREETING_MESSAGE;
     }
     /**
-     * Prints <code>Duke</code>'s marked-task message.
-     * @return
+     * Returns and prints <code>Duke</code>'s marked-task message.
+     * @return <code>Duke</code>'s marked-task message
      */
     public String showMarkedTask(String taskDescription) {
-        System.out.println("\tNice! I've marked this task as done:\n\t  "
-                + taskDescription);
-        return "\tNice! I've marked this task as done:\n\t  "
-                + taskDescription;
+        String message = marked_task_message + taskDescription;
+        System.out.println(message);
+        return message;
     }
     /**
-     * Prints <code>Duke</code>'s unmarked-task message.
+     * Returns and prints <code>Duke</code>'s unmarked-task message.
+     * @return <code>Duke</code>'s unmarked-task message
      */
     public String showUnmarkedTask(String taskDescription) {
-        System.out.println("\tOK, I've marked this task as not done yet:\n\t  "
-                + taskDescription);
-        return "\tOK, I've marked this task as not done yet:\n\t  "
-                + taskDescription;
+        String message = unmarked_task_message + taskDescription;
+        System.out.println(message);
+        return message;
     }
     /**
-     * Prints <code>Duke</code>'s added-task message.
+     * Returns and prints <code>Duke</code>'s added-task message.
+     * @return <code>Duke</code>'s added-task message
      */
     public String showAddedTask(Task t, TaskList tl) {
-        System.out.println("\tGot it. I've added this task:\n\t  " + t
-                + "\n\t" + String.format("Now you have %d tasks in the list.",
-                tl.getLength()));
-        return "\tGot it. I've added this task:\n\t  " + t
-                + "\n\t" + String.format("Now you have %d tasks in the list.",
-                tl.getLength());
+        String message = added_task_message + t + getTaskListLengthString(tl);
+        System.out.println(message);
+        return message;
     }
     /**
-     * Prints <code>Duke</code>'s deleted-task message.
+     * Returns and prints <code>Duke</code>'s deleted-task message.
+     * @return <code>Duke</code>'s deleted-task message
      */
     public String showDeletedTask(Task t, TaskList tl) {
-        System.out.println("\tNoted. I've removed this task:\n\t  "
-                + t.toString() + String.format("\n\tNow you have %d tasks in the list.",
-                tl.getLength()));
-        return "\tNoted. I've removed this task:\n\t  "
-                + t.toString() + String.format("\n\tNow you have %d tasks in the list.",
-                tl.getLength());
+        String message = deleted_task_message + t + getTaskListLengthString(tl);
+        System.out.println(message);
+        return message;
     }
     /**
-     * Prints <code>Duke</code>'s cleared-tasks message.
+     * Returns and prints <code>Duke</code>'s cleared-tasks message.
+     * @return <code>Duke</code>'s cleared-tasks message
      */
     public String showClearTasksMessage() {
-        System.out.println("\tI have cleared the task list.");
-        return "\tI have cleared the task list.";
+        System.out.println(clear_task_message);
+        return clear_task_message;
     }
     /**
-     * Prints <code>Duke</code>'s goodbye message.
+     * Returns and prints <code>Duke</code>'s goodbye message.
+     * @return <code>Duke</code>'s goodbye message
      */
     public String showByeMessage() {
-        System.out.println("\tBye. Hope to see you again soon!");
-        return "\tBye. Hope to see you again soon!";
+        System.out.println(bye_message);
+        return bye_message;
     }
 
     /**
@@ -146,13 +155,23 @@ public class Ui {
      * Prints out a line separation.
      */
     public void makeSeperation() {
-        System.out.println("\t____________________________________________________________");
+        System.out.println(line_seperation);
     }
     /**
      * Prints <code>Duke</code>'s loading-error-from-tasks.txt message.
      */
     public void showLoadingError() {
-        System.out.println("Error loading file from storage.");
+        System.out.println(loading_error_message);
         makeSeperation();
+    }
+
+    /**
+     * Returns a formatted string of the number of items in a <code>TaskList</code>.
+     * @param tl <code>TaskList</code> whose length to be measured
+     * @return Formatted string of the number of items in a <code>TaskList</code>
+     */
+    public String getTaskListLengthString(TaskList tl) {
+        return String.format("Now you have %d tasks in the list.",
+                tl.getLength());
     }
 }

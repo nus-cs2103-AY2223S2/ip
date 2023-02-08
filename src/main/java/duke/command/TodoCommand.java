@@ -43,8 +43,7 @@ public class TodoCommand extends Command {
         assert splitted[0].equals(Parser.TODO_STRING) : "Wrong command made a todo";
 
         //Get 'duke.task.ToDo' description
-        String[] descriptionArray = Arrays.copyOfRange(splitted, 1, splitted.length);
-        String description = String.join(" ", descriptionArray);
+        String description = Command.getTaskDescription(splitted, splitted.length);
 
         //Make Todo
         ToDo currentTask = new ToDo(description);
