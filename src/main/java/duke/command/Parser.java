@@ -65,9 +65,13 @@ public class Parser {
             case list:
                 return new ListCommand();
             case mark:
-                return new MarkCommand(processMarkUnmarkDel(input), true);
+                //extract task number to mark from input
+                int indexToMark = processMarkUnmarkDel(input);
+                return new MarkCommand(indexToMark, true);
             case unmark:
-                return new MarkCommand(processMarkUnmarkDel(input), false);
+                //extract task number to unmark from input
+                int indexToUnmark = processMarkUnmarkDel(input);
+                return new MarkCommand(indexToUnmark, false);
             case todo:
                 return new AddCommand(parsedInput[1]);
             case deadline:
@@ -78,7 +82,9 @@ public class Parser {
                 return new AddCommand(parsedEvent[0], parsedEvent[1],
                         parsedEvent[2]);
             case delete:
-                return new DeleteCommand(processMarkUnmarkDel(input));
+                //extract task number to delete from input
+                int indexToDelete = processMarkUnmarkDel(input);
+                return new DeleteCommand(indexToDelete);
             case find:
                 return new FindCommand(parsedInput[1]);
             default:

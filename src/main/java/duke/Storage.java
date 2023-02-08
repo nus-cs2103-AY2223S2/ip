@@ -39,6 +39,9 @@ public class Storage {
                 existingList.getParentFile().mkdirs();
                 existingList.createNewFile();
             }
+
+            assert existingList.exists();
+
             taskList = existingList;
             loadedFile = Files.readAllLines(Paths.get(taskList.getAbsolutePath()), StandardCharsets.UTF_8);
         } catch (IOException e) {

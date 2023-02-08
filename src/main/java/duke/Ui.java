@@ -2,8 +2,6 @@ package duke;
 
 import java.util.Scanner;
 
-import duke.task.Task;
-
 /**
  * The type Ui.
  */
@@ -55,12 +53,12 @@ public class Ui {
     /**
      * Shows added task.
      *
-     * @param newTask    the new task
+     * @param newTaskString    the new task
      * @param numOfTasks the num of tasks
      */
-    public static String showTask(Task newTask, int numOfTasks) {
+    public static String showTask(String newTaskString, int numOfTasks) {
         return String.format("Got it. I've added this task:\n %s\n Now you have %d tasks in the list.",
-                newTask, numOfTasks);
+                newTaskString, numOfTasks);
     }
 
     /**
