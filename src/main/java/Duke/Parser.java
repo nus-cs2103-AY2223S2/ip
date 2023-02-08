@@ -143,16 +143,16 @@ public class Parser {
                 if (instct.split(" ")[0].equals("mark")) {
                     System.out.println(Ui.Underline());
                     int numbering = Integer.parseInt(instct.split(" ")[1]) ;
-                    listOfTasks.markDone(numbering);
-                    return String.format("%s\n" + "\t%s\n" + Ui.Underline(), Ui.markedMessage(),listOfTasks.get(numbering).toString());
+                    return listOfTasks.markDone(numbering);
+
 
 
                 } else if (instct.split(" ")[0].equals("unmark")) {
                     System.out.println(Ui.Underline());
                     int numbering = Integer.parseInt(instct.split(" ")[1]);
-                    listOfTasks.markNotDone(numbering);
+                    return listOfTasks.markNotDone(numbering);
 
-                    return String.format("%s\n" + "\t%s\n" + Ui.Underline(), Ui.unMarkedMessage(),listOfTasks.get(numbering).toString());
+
 
 
                 } else if (instct.split(" ")[0].equals("todo")) {

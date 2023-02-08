@@ -1,3 +1,2 @@
-T / 1 / eat
-D / 0 / return book / 2010-01-01 1800
-E / 0 / meeting  / 2010-01-01 1800 / 1900
+T / 0 / eat
+D / 1 / return book / 2010-01-01 1800

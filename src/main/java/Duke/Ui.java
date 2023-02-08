@@ -9,7 +9,7 @@ import java.lang.String;
  * Contains Ui object that deals with interactions with the user
  */
 public class Ui {
-    private final static String UNDERLINE = "________________________________________________________________";
+    private final static String UNDERLINE = "________________________________________________________";
     private final static String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
