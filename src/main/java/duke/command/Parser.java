@@ -1,12 +1,7 @@
 package duke.command;
 
 import duke.exception.MissingDescriptionException;
-import duke.exception.InvalidCmdException;
-import duke.tasklist.Todo;
-import duke.tasklist.Task;
 import duke.tasklist.TaskList;
-import duke.tasklist.Event;
-import duke.tasklist.Deadline;
 
 /**
  * Represents an input Parser.
@@ -18,23 +13,27 @@ public class Parser {
     public Parser(TaskList arrList) {
         this.tasks = arrList;
     }
-
+    /**
+     * Checks if the command is equals to the exit command
+     * to enable the program to exit.
+     *
+     * @param command String representation of User input.
+     * @return boolean that determines whether Duke continues to run.
+     */
     public boolean isExit(String command) {
         if (command.equals("bye")) {
             return true;
         }
         return false;
     }
-        /**
-     * Returns a boolean value after parsing User input, to indicate whether
-     * the program should keep running.
+    /**
+     * Returns a String representation of the text to return to the user
+     * upon parsing the input.
      *
      * @param command String representation of User input.
-     * @return boolean that determines whether Duke continues to run.
+     * @return String that represents the program output.
      */
     public String parse(String command) {
-        Task task;
-        int indx;
         String toReturn;
         switch(command) {
         case "bye":
@@ -52,55 +51,26 @@ public class Parser {
             }
             switch (arrOfStr[0]) {
             case "delete":
-                indx = Integer.parseInt(arrOfStr[1]);
-                task = this.tasks.delete(indx);
-                toReturn = "Noted. I've removed this task:";
-                toReturn = toReturn.concat(task.toString());
-                toReturn = toReturn + System.lineSeparator() +
-                        "Now you have " + this.tasks.size() + " tasks in the list.";
+                DeleteCommand toDelete = new DeleteCommand(this.tasks);
+                toReturn = toDelete.execute(arrOfStr[1]);
                 return toReturn;
             case "unmark":
-                indx = Integer.parseInt(arrOfStr[1]);
-                task = this.tasks.get(indx);
-                this.tasks.setToUnmark(indx);
-                toReturn = "OK, I've marked this task as not done yet:\n" + task;
+                UnmarkCommand toUnmark = new UnmarkCommand(this.tasks);
+                toReturn = toUnmark.execute(arrOfStr[1]);
                 return toReturn;
             case "mark":
-                indx = Integer.parseInt(arrOfStr[1]);
-                task = this.tasks.get(indx);
-                this.tasks.setToMark(indx);
-                toReturn = "Nice! I've marked this task as done:\n" + task;
+                MarkCommand toMark = new MarkCommand(this.tasks);
+                toReturn = toMark.execute(arrOfStr[1]);
                 return toReturn;
             case "find":
-                String toSearch = arrOfStr[1];
-                TaskList toPrint = this.tasks.search(toSearch);
-                toReturn = "Here are the matching tasks in your list:" + toPrint.printList();
+                FindCommand toFind = new FindCommand(this.tasks);
+                toReturn = toFind.execute(arrOfStr[1]);
                 return toReturn;
             case "todo":
-                task = new Todo(arrOfStr[1]);
-                toReturn = "Very nice. I've added this task:" + System.lineSeparator() + task
-                        + System.lineSeparator();
-                this.tasks.add(task);
-                toReturn = toReturn + "Now you have " + this.tasks.size() + " tasks in the list.";
-                return toReturn;
             case "deadline":
-                String[] dl = arrOfStr[1].split("/by ");
-                try {
-                    validateDate(dl);
-                } catch (InvalidCmdException e) {
-                    System.out.println(e.getMessage());
-                }
-                task = new Deadline(dl[0], dl[1]);
-                toReturn = "Very nice. I've added this task:" + System.lineSeparator() + task;
-                this.tasks.add(task);
-                return toReturn;
             case "event":
-                String[] ev = arrOfStr[1].split("/from");
-                String[] time = ev[1].split("/to");
-                task = new Event(ev[0], time[0], time[1]);
-                toReturn = "Very nice. I've added this task:" + System.lineSeparator() + task;
-                this.tasks.add(task);
-                toReturn = toReturn + "Now you have " + this.tasks.size() + " tasks in the list.";
+                AddCommand toAdd = new AddCommand(this.tasks, arrOfStr);
+                toReturn = toAdd.execute();
                 return toReturn;
             default:
                 toReturn = "Sorry your command is invalid";
@@ -121,18 +91,6 @@ public class Parser {
                     "be more specific");
         }
 
-    }
-
-    /**
-     * Ensures that of User inputs date as necessary for Events and Deadlines
-     *
-     * @param cmd String array representation of the command.
-     * @throws InvalidCmdException If User fails to provide a Date.
-     */
-    public static void validateDate(String[] cmd) throws InvalidCmdException {
-        if (cmd.length == 1) {
-            throw new InvalidCmdException("Please specify date.");
-        }
     }
 }
 
