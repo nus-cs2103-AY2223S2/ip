@@ -1,7 +1,9 @@
 package duke.tasklist;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
+import duke.storage.Storage;
 import duke.task.Task;
 
 /**
@@ -55,5 +57,12 @@ public class TaskList {
      */
     public void unmark(int index) {
         this.tasks.get(index).setIsCompleted(false);
+    }
+
+    public void sortTaskList(Storage storage) {
+        Collections.sort(this.tasks);
+        for (int i = 0; i < this.tasks.size(); i++) {
+            storage.modify(storage.getStorageTaskString(this.tasks.get(i)), i + 1);
+        }
     }
 }

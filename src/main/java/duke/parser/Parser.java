@@ -3,15 +3,7 @@ package duke.parser;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-import duke.command.AddDeadlineCommand;
-import duke.command.AddEventCommand;
-import duke.command.AddTodoCommand;
-import duke.command.Command;
-import duke.command.DeleteTaskCommand;
-import duke.command.FindTaskCommand;
-import duke.command.GetAllTaskCommand;
-import duke.command.MarkTaskCommand;
-import duke.command.UnmarkTaskCommand;
+import duke.command.*;
 import duke.datetime.DateTime;
 import duke.dukeexception.DukeException;
 import duke.task.Deadline;
@@ -103,7 +95,18 @@ public class Parser {
         if (!Objects.equals(command, null)) {
             return command;
         }
+        command = this.isSort(str);
+        if (!Objects.equals(command, null)) {
+            return command;
+        }
         throw new DukeException("I'm sorry, but I don't know what that means :-(");
+    }
+
+    private Command isSort(String s) throws DukeException {
+        if (s.length() == 4 && Objects.equals(s, "sort")) {
+            return new SortCommand();
+        }
+        return null;
     }
 
     /**
