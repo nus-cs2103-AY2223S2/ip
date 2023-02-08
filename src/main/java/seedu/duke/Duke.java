@@ -75,41 +75,53 @@ public class Duke {
         try {
             Commands userCommand = userParse.checkCommand(userParse.command);
             switch(userCommand) {
-            case bye:
+            case bye: {
                 dukeText += byeCommand(ui, storage);
                 break;
-            case mark:
+            }
+            case mark: {
                 dukeText += markCommand(ui, userParse, storage);
                 break;
-            case unmark:
+            }
+            case unmark: {
                 dukeText += unmarkCommand(ui, userParse, storage);
                 break;
-            case list:
+            }
+            case list: {
                 dukeText += listCommand(ui);
                 break;
-            case todo:
+            }
+            case todo: {
                 dukeText += todoCommand(ui, storage, userParse, description);
                 break;
-            case deadline:
+            }
+            case deadline: {
                 dukeText += deadlineCommand(ui, storage, userParse, description);
                 break;
-            case event:
+            }
+            case event: {
                 dukeText += eventCommand(ui, storage, userParse, description);
                 break;
-            case delete:
+            }
+            case delete: {
                 dukeText += deleteCommand(ui, storage, userParse);
                 break;
-            case tag:
+            }
+            case tag: {
                 dukeText += addTagCommand(ui, storage, userParse);
                 break;
-            case find:
+            }
+            case find: {
                 dukeText += findCommand(ui, userParse);
                 break;
-            case originalList:
+            }
+            case originalList: {
                 dukeText += originalListCommand(ui, storage);
                 break;
-            default:
+            }
+            default: {
                 break;
+            }
             }
         } catch (DukeException e) {
             dukeText += e.getMessage();
