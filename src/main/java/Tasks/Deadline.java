@@ -1,16 +1,13 @@
 package tasks;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
-import exceptions.InvalidDateFormatException;
+import parser.Parser;
 
 /**
  * This class is used to represent the Deadline task.
  */
 public class Deadline extends Task {
-    private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
     protected LocalDateTime by;
 
     /**
@@ -20,15 +17,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String by) {
         super(description);
-        String[] temp = by.split(" ");
-        if (temp.length == 1) {
-            by += " 0000";
-        }
-        try {
-            this.by = LocalDateTime.parse(by, formatter);
-        } catch (DateTimeParseException e) {
-            throw new InvalidDateFormatException(e);
-        }
+        this.by = Parser.parseDate(by);
     }
 
     /**

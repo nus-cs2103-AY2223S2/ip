@@ -1,5 +1,2 @@
-T |   | borrow book
-D | X | return book | 2022-10-12 0000
-D |   | do homework | 2023-12-12 1600
-T |   | borrow money
-E |   | project meeting | 2022-01-12 1500 | 2022-02-22 0000
+T |   | Read Book 1
+D |   | Borrow Money | 2022-12-03 0000

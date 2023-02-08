@@ -1,16 +1,13 @@
 package tasks;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
-import exceptions.InvalidDateFormatException;
+import parser.Parser;
 
 /**
  * This class is used to represent an Event task.
  */
 public class Event extends Task {
-    private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
     protected LocalDateTime from;
     protected LocalDateTime until;
 
@@ -22,25 +19,8 @@ public class Event extends Task {
      */
     public Event(String description, String from, String until) {
         super(description);
-        String[] temp = from.split(" ");
-        if (temp.length == 1) {
-            from += " 0000";
-        }
-        try {
-            this.from = LocalDateTime.parse(from, formatter);
-        } catch (DateTimeParseException e) {
-            throw new InvalidDateFormatException(e);
-        }
-
-        temp = until.split(" ");
-        if (temp.length == 1) {
-            until += " 0000";
-        }
-        try {
-            this.until = LocalDateTime.parse(until, formatter);
-        } catch (DateTimeParseException e) {
-            throw new InvalidDateFormatException(e);
-        }
+        this.from = Parser.parseDate(from);
+        this.until = Parser.parseDate(until);
     }
 
     /**
