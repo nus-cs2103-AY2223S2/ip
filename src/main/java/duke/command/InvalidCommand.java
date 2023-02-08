@@ -17,7 +17,7 @@ public class InvalidCommand extends Command{
      */
     @Override
     public void executeCommand(TaskList taskList, Storage storage, Ui ui) {
-        ui.printText("Invalid command please try again");
+        //do nothing
     }
 
     /**

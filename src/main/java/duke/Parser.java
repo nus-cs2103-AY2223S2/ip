@@ -166,9 +166,9 @@ public class Parser {
             }
 
         } catch (ArgumentException ex2) {
-            System.out.println(ex2.getMessage());
+            ui.printText(ex2.getMessage());
         } catch (ParseException e) {
-            System.out.println("Please enter the time of the format dd/MM/yyyy HH:mm");
+           ui.printText("Please enter the time of the format dd/MM/yyyy HH:mm");
         }
 
         return new InvalidCommand();

@@ -64,7 +64,7 @@ public class Storage {
      * @param entireList A list in which all tasks are stored
      */
 
-    public ArrayList<Task> loadFile(ArrayList<Task> entireList) throws FileNotFoundException {
+    public ArrayList<Task> loadFile(ArrayList<Task> entireList, Ui ui) throws FileNotFoundException {
         try {
             BufferedReader br = new BufferedReader(new FileReader(filePath));
             String oneline;
@@ -101,11 +101,11 @@ public class Storage {
             }
 
         } catch (IOException i) {
-            System.out.println("File not found! Proceeding without a saved file.\nPlease note that you will not be able" +
-                    " to save your progress either\n but you can still use me as you wish :>\n");
+            ui.printText("File not found! Proceeding without a saved file.\nPlease note that you will not be able" +
+                    " to save your progress either but you can still use me as you wish :>\n");
 
         } catch (ParseException e) {
-            System.out.println("Unable to load file. Please check your that the item's date where it should be in the form of" +
+            ui.printText("Unable to load file. Please check your that the item's date where it should be in the form of" +
                     " dd/MM/yyyy HH:mm");
         }
 

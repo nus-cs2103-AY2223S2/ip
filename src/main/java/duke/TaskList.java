@@ -36,7 +36,7 @@ public class TaskList {
         }
 
         if (allTasks.size() == 0) {
-            return "Your list is currently empty, :)";
+            return "Your list is currently empty :)";
         }
 
         return printedList;
@@ -71,7 +71,7 @@ public class TaskList {
      * @param index of the task to be deleted
      */
     public void deleteTask(int index, Ui ui) {
-        ui.printText(" " + allTasks.get(index-1).toString());
+//        ui.printText(" " + allTasks.get(index-1).toString());
         allTasks.remove(index-1);
     }
 
@@ -99,7 +99,7 @@ public class TaskList {
         }
 
         if (index == 0) {
-            return "Unable to find task with the word+ " + word;
+            return "Unable to find task with the word: " + word;
         }
 
         return tasksWithWord;

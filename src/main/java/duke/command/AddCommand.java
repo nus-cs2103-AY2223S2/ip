@@ -28,11 +28,12 @@ public class AddCommand extends Command {
      */
     @Override
     public void executeCommand(TaskList taskList, Storage storage, Ui ui) {
-        ui.printText("Got it. I've added this task:");
+        String output = "Got it. I've added this task:";
         taskList.addTask(task);
-        ui.printText(" " + task);
 
-        ui.printText("Now you have " + taskList.getNumberOfTask() + " tasks in the list.");
+        output = output + "\n " + task;
+
+        ui.printText(output + "\n" + taskList.getNumberOfTask() + " tasks in the list.");
 
     }
 

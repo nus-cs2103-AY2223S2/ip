@@ -66,7 +66,6 @@ public class Ui {
 
     public void setMainWindow(MainWindow mainWindow) {
         this.mainWindow = mainWindow;
-        greet();
     }
 }
 

@@ -48,30 +48,16 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates one dialog box echoing user input reflecting and then appends them to
      * the dialog container. Clears the user input after processing.
      */
-//    @FXML
-//    private void handleUserInput() {
-//        String input = userInput.getText();
-//        String response = duke.getResponse(input);
-//        dialogContainer.getChildren().addAll(
-//                DialogBox.getUserDialog(input, userImage),
-//                DialogBox.getDukeDialog(response, dukeImage)
-//        );
-//        userInput.clear();
-//    }
-
     @FXML
     private void handleUserInput() throws FileNotFoundException {
         String input = userInput.getText();
-//        String response = duke.getResponse(input);
 
         if (!input.trim().isEmpty()) {
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage)
-                    //                ,
-                    //                DialogBox.getDukeDialog(response, dukeImage)
             );
 
             duke.runInput(input);
@@ -79,6 +65,10 @@ public class MainWindow extends AnchorPane {
         }
     }
 
+    /**
+     * Creates one dialog box containing Duke's reply and then appends them to
+     * the dialog container.
+     */
     public void passDukeResponse(String response) {
         if (!response.trim().isEmpty()) {
             dialogContainer.getChildren().addAll(
