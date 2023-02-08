@@ -57,7 +57,7 @@ public class Ui {
      * Returns a String of this print cache (messages printed to console) by the Ui
      * @return String of this print cache
      */
-    public String getRecentMessage() {
+    public String getRecentMessages() {
         assert printCache != null : "printCache is null";
 
         String recentMessage = printCache.toString();

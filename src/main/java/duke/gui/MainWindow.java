@@ -1,6 +1,10 @@
 package duke.gui;
 
 import duke.Duke;
+import duke.DukeException;
+import duke.command.Command;
+import duke.command.Command.ReturnCode;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -12,6 +16,19 @@ import javafx.scene.layout.VBox;
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+
+    /** Relative path to folder containing image assets. */
+    private static final String IMG_FOLDER = "/images/";
+
+    /** Name of the image representing user. */
+    private static final String USER_IMG = "nigiri-with-shrimp.jpeg";
+
+    /** Name of the image representing duke. */
+    private static final String DUKE_IMG = "potato_chips.jpg";
+
+    private final Image userImage = new Image(this.getClass().getResourceAsStream(IMG_FOLDER + USER_IMG));
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream(IMG_FOLDER + DUKE_IMG));
+
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -20,10 +37,6 @@ public class MainWindow extends AnchorPane {
     private TextField userInput;
 
     private Duke duke;
-
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/"
-            + "nigiri-with-shrimp.jpeg"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/potato_chips.jpg"));
 
     @FXML
     public void initialize() {
@@ -36,13 +49,17 @@ public class MainWindow extends AnchorPane {
 
     @FXML
     private void handleUserInput() {
-
         assert duke != null : "No reference to duke";
 
+        ReturnCode code = null;
         String input = userInput.getText();
 
-        boolean isContinue = duke.executeCommand(input);
-        String response = duke.ui.getRecentMessage();
+        try {
+            code = Command.parseCommand(input).execute(duke);
+        } catch (DukeException e) {
+            duke.ui.warn(e.getMessage());
+        }
+        String response = duke.ui.getRecentMessages();
 
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
@@ -51,8 +68,8 @@ public class MainWindow extends AnchorPane {
 
         userInput.clear();
 
-        if (!isContinue) {
-
+        if (code == ReturnCode.EXIT) {
+            Platform.exit();
         }
     }
 }

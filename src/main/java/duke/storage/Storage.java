@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 
 import duke.Parser;
 import duke.Ui;
@@ -19,7 +20,7 @@ import duke.task.Todo;
 public class Storage {
 
     /** Relative path of save file. */
-    private static final String TASKS_FILE_PATH = "./data/duke/tasks.csv";
+    private static final String DEFAULT_SAVE_PATH = "./data/duke/tasks.csv";
 
     private final TaskList tasklist;
 
@@ -41,9 +42,7 @@ public class Storage {
 
         // Prepare data into string format for saving
         String fileDataStr = tasklist.prepareFileSave();
-
-        // Write to file
-        writeToFile(TASKS_FILE_PATH, fileDataStr);
+        writeToFile(DEFAULT_SAVE_PATH, fileDataStr);
     }
 
     /**
@@ -54,9 +53,9 @@ public class Storage {
         assert tasklist != null : "Storage has no reference to taskList instance";
 
         Parser parser = new Parser();
-        Path f = Paths.get(TASKS_FILE_PATH);
+        Path f = Paths.get(DEFAULT_SAVE_PATH);
 
-        // No saved data file, do nothing
+        // No saved data file -> do nothing
         if (!Files.exists(f)) {
             return;
         }
@@ -65,27 +64,24 @@ public class Storage {
         tasklist.removeAllTask();
 
         try {
-            BufferedReader br = Files.newBufferedReader(f);
             String currentLine;
+            BufferedReader br = Files.newBufferedReader(f);
 
             while ((currentLine = br.readLine()) != null) {
                 String[] taskInfo = currentLine.split(",");
+                String taskType = taskInfo[0];
+                boolean taskIsDone = Boolean.parseBoolean(taskInfo[1]);
+                String taskDescription = taskInfo[2];
 
-                if (taskInfo[0].compareTo("T") == 0) {
-                    tasklist.add(new Todo(
-                            Boolean.parseBoolean(taskInfo[1]),
-                            taskInfo[2]));
-                } else if (taskInfo[0].compareTo("D") == 0) {
-                    tasklist.add(new Deadline(
-                            Boolean.parseBoolean(taskInfo[1]),
-                            taskInfo[2],
-                            parser.parseDateTime(taskInfo[3], 'T')));
-                } else if (taskInfo[0].compareTo("E") == 0) {
-                    tasklist.add(new Event(
-                            Boolean.parseBoolean(taskInfo[1]),
-                            taskInfo[2],
-                            parser.parseDateTime(taskInfo[3], 'T'),
-                            parser.parseDateTime(taskInfo[4], 'T')));
+                if (taskType.compareTo("T") == 0) {
+                    tasklist.add(new Todo(taskIsDone, taskDescription));
+                } else if (taskType.compareTo("D") == 0) {
+                    LocalDateTime dueDate = parser.parseDateTime(taskInfo[3], 'T');
+                    tasklist.add(new Deadline(taskIsDone, taskDescription, dueDate));
+                } else if (taskType.compareTo("E") == 0) {
+                    LocalDateTime startDateTime = parser.parseDateTime(taskInfo[3], 'T');
+                    LocalDateTime endDateTime = parser.parseDateTime(taskInfo[4], 'T');
+                    tasklist.add(new Event(taskIsDone, taskDescription, startDateTime, endDateTime));
                 }
             } // while loop
         } catch (IOException e) {
@@ -107,9 +103,9 @@ public class Storage {
         
         try {
             Path f = Paths.get(filePath);
-            Files.createDirectories(f.getParent()); // Create directory (if not exist)
+            Files.createDirectories(f.getParent()); // Automatically create any non-existent parent directories
             if (!Files.exists(f)) {
-                Files.createFile(f); // Create non-existing file
+                Files.createFile(f); // Create non-existent file
             }
             Files.writeString(f, fileContent); // Write to file
         } catch (IOException e) {

@@ -44,7 +44,7 @@ public class Main {
         Ui.printProgramInfo();
         System.out.println("Initialising system . . .");
 
-        // Process varargs for flags
+        // Process varargs for environment flags
         ArrayList<Flag> envFlags = setEnvironment(args);
         Duke.setFlags(envFlags);
 
