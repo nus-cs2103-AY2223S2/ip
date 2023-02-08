@@ -1,4 +1,4 @@
-package duke;
+package seedu.duke;
 
 public class Parser {
     public boolean checkEnd(String command) {
