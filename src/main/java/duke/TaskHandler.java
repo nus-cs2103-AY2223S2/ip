@@ -143,7 +143,7 @@ public class TaskHandler {
             throw new EmptyContentException("delete");
         }
         int index = Parser.findIndex(input);
-        if (index > content.size() || index < 1) {
+        if (index > content.size() || index < 0) {
             throw new InvalidTaskAccessException();
         } else {
             String taskContent = content.get(index).toString();
