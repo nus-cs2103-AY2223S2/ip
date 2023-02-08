@@ -1,12 +1,22 @@
 package utilities;
 
 import containers.FileContainer;
-import handlers.*;
+import handlers.ETodoEmptyDescription;
+import handlers.JAddTask;
+import handlers.JBye;
+import handlers.JDeleteTask;
+import handlers.JFind;
+import handlers.JMarkTask;
+import handlers.JShowTaskList;
+import handlers.JThrowException;
 import services.Dispatcher;
 import services.SpeakerRegistry;
 import services.TaskList;
 import types.ISpeaker;
 
+/**
+ * Provides dispatcher on user need.
+ */
 public class DispatcherProvider {
     public static Dispatcher getDefaultDispatcher(Runnable stopperLambda, ISpeaker ... speakers) {
         Dispatcher dispatcher = new Dispatcher();

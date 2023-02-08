@@ -1,5 +1,6 @@
 package handlers;
 
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -20,6 +21,7 @@ public class JDeleteTask implements IHandler {
 
     @Override
     public String take(String s) {
+        assert Objects.nonNull(ts);
         Matcher m = PATTERN.matcher(s);
         if (!m.matches()) {
             return "";

@@ -66,6 +66,7 @@ public class FileContainer implements IContainer<Task> {
 
     @Override
     public void flush() {
+        assert file.canWrite();
         try {
             bw.flush();
         } catch (IOException e) {
@@ -75,6 +76,7 @@ public class FileContainer implements IContainer<Task> {
 
     @Override
     public void push(List<Task> records) {
+        assert file.canWrite();
         try {
             bw.write("");
             for (Task i : records) {
