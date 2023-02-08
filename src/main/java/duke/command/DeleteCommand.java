@@ -24,17 +24,18 @@ public class DeleteCommand extends Command {
      * @param tasks a list of tasks.
      * @param ui Ui class to handle display messages.
      * @param storage Storage to handle saving/loading of data to/from the list of task.
+     * @return Duke's response message
      */
     @Override
-    public void initCommand(TaskList tasks, Ui ui, Storage storage) {
+    public String initCommand(TaskList tasks, Ui ui, Storage storage) {
         if (tasks.size() >= taskID && !tasks.isEmpty()) {
             Task currentTask = tasks.getTask(taskID);
             tasks.deleteTask(taskID);
             storage.saveData(tasks);
-            ui.displayDeleteTaskMessage(currentTask, tasks);
+            return ui.displayDeleteTaskMessage(currentTask, tasks);
 
         } else {
-            ui.displayMsg("Invalid taskID entered!");
+            return ui.displayMsg("Invalid taskID entered!");
         }
     }
 

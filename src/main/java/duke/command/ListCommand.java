@@ -10,9 +10,10 @@ public class ListCommand extends Command{
      * @param tasks a list of tasks.
      * @param ui Ui class to handle display messages.
      * @param storage Storage to handle saving/loading of data to/from the list of task.
+     * @return Duke's response message
      */
     @Override
-    public void initCommand(TaskList tasks, Ui ui, Storage storage) {
-        ui.displayTaskList(tasks);
+    public String initCommand(TaskList tasks, Ui ui, Storage storage) {
+        return ui.displayTaskList(tasks);
     }
 }

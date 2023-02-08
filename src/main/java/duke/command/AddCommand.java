@@ -25,11 +25,12 @@ public class AddCommand extends Command {
      * @param tasks a list of tasks.
      * @param ui Ui class to handle display messages.
      * @param storage Storage to handle saving/loading of data to/from the list of task.
+     * @return Duke's response message
      */
     @Override
-    public void initCommand(TaskList tasks, Ui ui, Storage storage) {
+    public String initCommand(TaskList tasks, Ui ui, Storage storage) {
         tasks.addTask(this.task);
         storage.saveData(tasks);
-        ui.displayAddTaskMessage(task, tasks);
+        return ui.displayAddTaskMessage(task, tasks);
     }
 }

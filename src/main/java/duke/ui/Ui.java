@@ -11,79 +11,89 @@ public class Ui {
     /**
      * Duke's own display logo.
      */
-    public void displayLogo() {
+    public String displayLogo() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-    }
-
-    public void displayLine() {
-        System.out.println(" _______________________________________________________________");
+        return ("Hello from\n" + logo);
     }
 
     /**
      * Prints out all of Duke's tasks.
      * @param tasks list of tasks.
      */
-    public void displayTaskList(TaskList tasks) {
-        System.out.println(tasks);
+    public String displayTaskList(TaskList tasks) {
+        return tasks.toString();
     }
 
     /**
      * Prints out the appropriate message when adding task to the list
      * @param task task to be added
      * @param taskList list of task
+     * @return Duke's response message
      */
-    public void displayAddTaskMessage(Task task, TaskList taskList) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task);
-        System.out.printf("Now you have %d tasks in the list.\n", taskList.size());
+    public String displayAddTaskMessage(Task task, TaskList taskList) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Got it. I've added this task:\n");
+        sb.append(task.toString());
+        sb.append("\nNow you have " + taskList.size() + " tasks in the list.\n");
+        return sb.toString();
     }
 
     /**
      * Prints out the appropriate message when adding task to the list
      * @param task task to be added
      * @param taskList list of task
+     * @return Duke's response message
      */
-    public void displayDeleteTaskMessage(Task task, TaskList taskList) {
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(task);
-        System.out.printf("Now you have %d tasks in the list.\n", taskList.size());
+    public String displayDeleteTaskMessage(Task task, TaskList taskList) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Noted. I've removed this task:\n");
+        sb.append(task.toString());
+        sb.append("\nNow you have " + taskList.size() + " tasks in the list.\n");
+        return sb.toString();
     }
 
     /**
      * Prints out the appropriate message when adding task to the list
      * @param task task to be added
+     * @return Duke's response message
      */
-    public void displayMarkMessage(Task task) {
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(task);
+    public String displayMarkMessage(Task task) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Nice! I've marked this task as done:\n");
+        sb.append(task.toString());
+        return sb.toString();
     }
 
     /**
      * Prints out the appropriate message when unmarking a task
      * @param task task to be added
+     * @return Duke's response message
      */
-    public void displayUnmarkedMessage(Task task) {
-        System.out.println("OK, I've marked this task as not done yet:");
-        System.out.println(task);
+    public String displayUnmarkedMessage(Task task) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("OK, I've marked this task as not done yet:\n");
+        sb.append(task.toString());
+        return sb.toString();
     }
 
     /**
      * Prints out Duke's goodbye message
+     * @return Duke's response message
      */
-    public void displayGoodbyeMessage() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String displayGoodbyeMessage() {
+        return "Bye. Hope to see you again soon!";
+
     }
 
     /**
      * Prints out the appropriate misc message
+     * @return Duke's response message
      */
-    public void displayMsg(String output) {
-        System.out.println(output);
+    public String displayMsg(String output) {
+        return output;
     }
-
 }

@@ -24,23 +24,25 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Overridden method to handle the specific tasks to be carried out when finding all task with matching task description
+     * Overridden method to handle the specific tasks to be carried out when performing deletion.
      * @param tasks a list of tasks.
      * @param ui Ui class to handle display messages.
      * @param storage Storage to handle saving/loading of data to/from the list of task.
+     * @return Duke's response message.
      */
     @Override
-    public void initCommand(TaskList tasks, Ui ui, Storage storage) {
+    public String initCommand(TaskList tasks, Ui ui, Storage storage) {
         List<Task> matchingTasks = tasks.find(keyword);
         if (matchingTasks.isEmpty()) {
-            System.out.println("No matching tasks, please try again!");
+            return "No matching tasks, please try again!";
         } else {
             StringBuilder sb = new StringBuilder();
             sb.append("Here are the matching tasks in your list:");
             int count = 1;
             for (Task t : matchingTasks) {
-                System.out.println(count++  + "." + t.toString());
+                sb.append(count++  + "." + t.toString());
             }
+            return sb.toString();
         }
     }
 }

@@ -21,17 +21,18 @@ public class UnmarkCommand extends Command {
      * @param tasks a list of tasks.
      * @param ui Ui class to handle display messages.
      * @param storage Storage to handle saving/loading of data to/from the list of task.
+     * @return Duke's response message
      */
     @Override
-    public void initCommand(TaskList tasks, Ui ui, Storage storage) {
+    public String initCommand(TaskList tasks, Ui ui, Storage storage) {
         if (tasks.size() >= taskID && !tasks.isEmpty()) {
             Task currentTask = tasks.getTask(taskID);
             currentTask.unmarked();
             storage.saveData(tasks);
-            ui.displayUnmarkedMessage(currentTask);
+            return ui.displayUnmarkedMessage(currentTask);
 
         } else {
-            ui.displayMsg("Invalid taskID entered!");
+            return ui.displayMsg("Invalid taskID entered!");
         }
     }
 
