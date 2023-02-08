@@ -45,6 +45,7 @@ public class TaskList extends ArrayList<Task> {
      */
     public Task deleteTask(int index) throws DukeException {
         checkValidIndex(index);
+        assert index >= 1 && index <= super.size();
         Task task = super.get(index - 1);
         super.remove(index - 1);
         return task;
@@ -59,7 +60,9 @@ public class TaskList extends ArrayList<Task> {
      */
     public Task markTask(int index) throws DukeException {
         checkValidIndex(index);
+        assert index >= 1 && index <= super.size();
         Task task = super.get(index - 1);
+        assert task != null;
         task.markAsDone();
         return task;
     }
@@ -73,7 +76,9 @@ public class TaskList extends ArrayList<Task> {
      */
     public Task unmarkTask(int index) throws DukeException {
         checkValidIndex(index);
+        assert index >= 1 && index <= super.size();
         Task task = super.get(index - 1);
+        assert task != null;
         task.markAsUndone();
         return task;
     }
@@ -103,6 +108,7 @@ public class TaskList extends ArrayList<Task> {
 
         for (int i = 0; i < super.size(); ++i) {
             Task task = super.get(i);
+            assert task != null;
             if (task.toString().substring(7).contains(toFind)) {
                 results.addTask(task);
             }

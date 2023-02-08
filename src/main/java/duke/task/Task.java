@@ -43,6 +43,7 @@ public abstract class Task {
                 throw new DukeException(ERROR.DEADLINE_EMPTY.getMessage());
             }
             String[] params = desc.split(" /by ");
+            assert params.length == 2;
             task = new Deadline(params[0], params[1]);
         } else if (s.startsWith("event")) {
             String desc = s.replace("event", "").trim();
@@ -50,8 +51,11 @@ public abstract class Task {
                 throw new DukeException(ERROR.EVENT_EMPTY.getMessage());
             }
             String[] params = desc.split("( /from | /to )");
+            assert params.length == 3;
             task = new Event(params[0], params[1], params[2]);
         }
+
+        assert task != null;
 
         return task;
     }
@@ -68,16 +72,21 @@ public abstract class Task {
         s = s.trim();
         Task task = null;
 
+        assert s.length() >= 8;
+        assert s.charAt(4) == 'X' || s.charAt(4) == ' ';
+
         if (s.charAt(1) == 'T') {
             String desc = s.substring(7);
             task = new Todo(desc);
         } else if (s.charAt(1) == 'D') {
             String desc = s.substring(7);
             String[] params = desc.split("( \\(by: |\\))");
+            assert params.length == 2;
             task = new Deadline(params[0], params[1]);
         } else if (s.charAt(1) == 'E') {
             String desc = s.substring(7);
             String[] params = desc.split("( \\(from: | to: |\\))");
+            assert params.length == 3;
             task = new Event(params[0], params[1], params[2]);
         } else {
             throw new DukeException(ERROR.CORRUPTED_TASK_DATA.getMessage());

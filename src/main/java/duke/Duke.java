@@ -24,23 +24,9 @@ public class Duke {
         }
     }
 
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String input = ui.readCommand();
-                Command c = Parser.parse(input);
-                c.execute(taskList, ui, storage);
-                isExit = c.getCommandType() == Command.CommandType.EXIT;
-            } catch (DukeException e) {
-                ui.printFormattedOutput(e.getMessage());
-            }
-        }
-    }
-
     public String getResponse(String input) {
         Command c = Parser.parse(input);
+        assert c != null;
         String response = "";
         try {
             response = c.execute(taskList, ui, storage);

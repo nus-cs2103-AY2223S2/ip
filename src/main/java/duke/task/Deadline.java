@@ -40,6 +40,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
+        assert !this.isDate || (this.deadline != null);
         String dateToPrint = this.isDate ? this.date.format(DATE_OUTPUT_FORMAT) : this.deadline;
         return String.format("[D]%s (by: %s)", super.toString(), dateToPrint);
     }
