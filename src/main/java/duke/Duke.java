@@ -1,7 +1,7 @@
 package duke;
 
 import java.util.Scanner;
-
+// Dummy Change
 public class Duke {
     protected static final String DIV_OPEN = "____________________________________________________________\n";
     protected static final String DIV_CLOSE = "____________________________________________________________\n";
