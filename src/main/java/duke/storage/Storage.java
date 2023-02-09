@@ -18,7 +18,7 @@ import duke.task.TaskList;
  */
 public class Storage {
 
-    public String path;
+    private String path;
 
     public Storage(String path) {
         this.path = path;

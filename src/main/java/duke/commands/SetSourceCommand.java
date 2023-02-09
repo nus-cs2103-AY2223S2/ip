@@ -11,9 +11,13 @@ import duke.utils.Formatter;
 /**
  * Represents a command that changes the data source of Duke
  */
-public class SetSourceCommand extends Command{
+public class SetSourceCommand extends Command {
     private final String filePath;
 
+    /**
+     * Constructs a SetSourceCommand that sets data source of Duke to a new file
+     * @param filePath String representation of the new source file path
+     */
     public SetSourceCommand(String filePath) {
         assert filePath != null;
         this.filePath = filePath;

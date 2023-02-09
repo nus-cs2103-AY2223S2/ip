@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
-import duke.exception.DukeException;
 import duke.task.TaskList;
 import storage.StorageStub;
 
@@ -14,12 +13,11 @@ public class DeleteCommandTest {
         TaskList tasklist = new TaskList();
         StorageStub stub = new StorageStub();
 
-        try {
-            Command c = new DeleteCommand(0);
-            c.execute(tasklist, stub);
-        } catch (DukeException e) {
+        Command c = new DeleteCommand(0);
+        String response = c.execute(tasklist, stub);
+        if (response.equals("Task does not exist at specified index.")) {
             return;
         }
-        fail("Deleted from empty list.");
+        fail("Succeeded deleting from empty list.");
     }
 }

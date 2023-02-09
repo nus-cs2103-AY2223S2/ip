@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
-import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import storage.StorageStub;
@@ -25,10 +24,9 @@ public class AddDeadlineCommandTest {
 
     public void assertExecutingInvalidAddDeadlineThrowsException(String description, String date, TaskList taskList,
                                                                  Storage stub) {
-        try {
-            Command c = new AddDeadlineCommand(description, date);
-            c.execute(taskList, stub);
-        } catch (DukeException e) {
+        Command c = new AddDeadlineCommand(description, date);
+        String response = c.execute(taskList, stub);
+        if (response.equals("Date must be in yyyy-mm-dd format.")) {
             return;
         }
         String error = String.format("An addDeadlineCommand was executed successfully with invalid date: %s", date);

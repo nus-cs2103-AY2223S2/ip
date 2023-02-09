@@ -2,7 +2,6 @@ package duke.commands;
 
 import java.io.IOException;
 
-import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -29,7 +28,6 @@ public class DeleteCommand extends Command {
      * @param tasks Existing TaskList used by the main Duke class.
      * @param storage Existing Storage used by the main Duke class.
      * @return output to be shown to user
-     * @throws DukeException if something happened to task storage file during runtime or task specified does not exist.
      */
     @Override
     public String execute(TaskList tasks, Storage storage) {

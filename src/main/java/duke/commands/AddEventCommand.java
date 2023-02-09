@@ -2,7 +2,6 @@ package duke.commands;
 
 import java.io.IOException;
 
-import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.Event;
 import duke.task.Task;
@@ -35,10 +34,9 @@ public class AddEventCommand extends Command {
      * @param tasks Existing TaskList used by the main Duke class.
      * @param storage Existing Storage used by the main Duke class.
      * @return output to be shown to user
-     * @throws DukeException if something happened to task storage file during runtime
      */
     @Override
-    public String execute(TaskList tasks, Storage storage){
+    public String execute(TaskList tasks, Storage storage) {
         assert tasks != null;
         try {
             Task newTask = new Event(description, from, to);
