@@ -42,6 +42,8 @@ public class Storage {
      * @throws IOException
      */
     public ArrayList<Task> load() throws IOException {
+        assert directory != null;
+        assert filePath != null;
         ArrayList<Task> al = new ArrayList<>();
         File dir = new File(directory);
         if (!dir.exists()) {
@@ -120,6 +122,8 @@ public class Storage {
      * @param taskList
      */
     public void writeFile(TaskList taskList) {
+        assert directory != null;
+        assert filePath != null;
         try {
             String fullFile = directory + File.separator + filePath;
             File newFile = new File(fullFile);

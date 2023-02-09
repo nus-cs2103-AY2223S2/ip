@@ -64,6 +64,7 @@ public class Parser {
             case ("mark"):
                 checkIfBlank(c);
                 checkIfValidInteger(c);
+                assert !command.substring(5).isEmpty();
                 String number = command.substring(5);
                 int taskNum = Integer.parseInt(number);
                 com = new MarkCommand(taskNum);
@@ -71,6 +72,7 @@ public class Parser {
             case ("unmark"):
                 checkIfBlank(c);
                 checkIfValidInteger(c);
+                assert !command.substring(7).isEmpty();
                 number = command.substring(7);
                 int index = Integer.parseInt(number);
                 com = new UnmarkCommand(index);
@@ -82,6 +84,7 @@ public class Parser {
             case ("deadline"):
                 checkIfBlank(c);
                 String[] limit = c[1].split(" /by ");
+                assert !command.substring(9).isEmpty();
                 checkIfBlank(limit);
                 com = new DeadlineCommand(command);
                 break;
@@ -94,6 +97,7 @@ public class Parser {
             case ("delete"):
                 checkIfBlank(c);
                 checkIfValidInteger(c);
+                assert !command.substring(7).isEmpty();
                 int taskNum2 = Integer.parseInt(c[1]);
                 com = new DeleteCommand(taskNum2);
                 break;

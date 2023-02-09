@@ -1,7 +1,7 @@
 package exceptions;
 
 /**
- * Exception class handles if description is empty
+ * Exception class that handles when command description is empty
  */
 public class BlankException extends DukeException {
     public BlankException() {
