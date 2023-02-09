@@ -59,6 +59,28 @@ public class Parser {
                 Task tempTask = taskList.getTask(index);
                 taskList.deleteTask(index);
                 System.out.println("Noted. I've removed this task:" + "\n" + tempTask.toString());
+            } else if (command.toLowerCase().startsWith("find ")){
+                String keyword = command.substring(command.indexOf(" ") + 1);
+                int[] indexArray = new int[taskList.getSize()];
+                boolean iscontained = false;
+
+                for (int i = 0; i < taskList.getSize(); i++) {
+                    if (taskList.getTask(i).description.contains(keyword)) {
+                        indexArray[i] = 1;
+                        iscontained = true;
+                    }
+                }
+
+                if (!iscontained) {
+                    System.out.println("There are no such items in your list!");
+                } else {
+                    System.out.println("Here are the matching tasks in your list:");
+                    for (int i = 0; i < taskList.getSize(); i++) {
+                        if (indexArray[i] == 1) {
+                            System.out.println(taskList.getTask(i));
+                        }
+                    }
+                }
             } else {
                 try {
                     Task newTask;
