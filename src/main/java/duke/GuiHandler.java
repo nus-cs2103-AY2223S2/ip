@@ -19,8 +19,12 @@ public class GuiHandler extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userHappy = new Image(this.getClass().getResourceAsStream("/images/happy.png"));
+    private Image userSmile = new Image(this.getClass().getResourceAsStream("/images/smile.png"));
+    private Image userNeutral = new Image(this.getClass().getResourceAsStream("/images/neutral.png"));
+    private Image userScared = new Image(this.getClass().getResourceAsStream("/images/scared.png"));
+    private Image userCmi = new Image(this.getClass().getResourceAsStream("/images/cmi.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/duke2.png"));
     private Parser parser = new Parser();
     private CommandHandler commandHandler = new CommandHandler();
     private final Storage storage = new Storage("./data/duke.txt");
@@ -94,6 +98,20 @@ public class GuiHandler extends Application {
     }
 
     private void handleUserInput() {
+        Image user;
+        int numTasks = tasks.size();
+        if (numTasks <= 1) {
+            user = userHappy;
+        } else if (numTasks == 2) {
+            user = userSmile;
+        } else if (numTasks == 3) {
+            user = userNeutral;
+        } else if (numTasks == 4) {
+            user = userScared;
+        } else {
+            user = userCmi;
+        }
+
         Label userText = new Label("You: \n" + userInput.getText());
         Label dukeText = new Label("Duke: \n" + getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
