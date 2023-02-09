@@ -5,9 +5,11 @@ import duke.task.ToDo;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -18,6 +20,9 @@ import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
+import duke.ui.Ui;
+
+import java.util.ArrayList;
 
 /**
  * Encapsulates the related fields and behavior of Duke.
@@ -25,6 +30,7 @@ import duke.task.TaskList;
 public class Duke extends Application {
     private Storage storage;
     private TaskList tasks;
+    private Ui ui;
     private Parser parser;
 
     private ScrollPane scrollPane;
@@ -32,10 +38,8 @@ public class Duke extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-    private Image userIcon = new Image(this.getClass()
-            .getResourceAsStream("/images/UserIcon.png"));
-    private Image dukeIcon = new Image(this.getClass()
-            .getResourceAsStream("/images/DukeIcon.png"));
+    private Image userIcon = new Image(this.getClass().getResourceAsStream("/images/UserIcon.png"));
+    private Image dukeIcon = new Image(this.getClass().getResourceAsStream("/images/DukeIcon.png"));
 
     /**
      * Instantiates Duke.
@@ -45,12 +49,13 @@ public class Duke extends Application {
      */
     public Duke(String dirPath, String fileName) {
         this.storage = new Storage(dirPath, fileName);
+        this.ui = new Ui();
         this.parser = new Parser();
         try {
-            this.tasks = new TaskList(this.storage.read());
+            tasks = new TaskList(storage.read());
         } catch (DukeException e) {
-            System.out.println(e.getMessage());
-            this.tasks = new TaskList();
+            ui.printMsg(e.getMessage());
+            tasks = new TaskList();
         }
     }
 
@@ -80,8 +85,7 @@ public class Duke extends Application {
         this.sendButton = new Button("Send");
 
         AnchorPane mainLayout = new AnchorPane();
-        mainLayout.getChildren().addAll(this.scrollPane,
-                this.userInput, this.sendButton);
+        mainLayout.getChildren().addAll(this.scrollPane, this.userInput, this.sendButton);
 
         this.scene = new Scene(mainLayout);
 
@@ -120,7 +124,7 @@ public class Duke extends Application {
 
         //A handler on the VBox that react to its own size changing and scrolling the ScrollPane down.
         //Scroll down to the end every time dialogContainer's height changes.
-        this.dialogContainer.heightProperty().addListener(observable -> this.scrollPane.setVvalue(1.0));
+        this.dialogContainer.heightProperty().addListener(observable -> scrollPane.setVvalue(1.0));
 
         //handle user input
         this.sendButton.setOnMouseClicked((event) -> {
@@ -157,7 +161,7 @@ public class Duke extends Application {
     protected String getResponse(String input) {
         try {
             Command cmd = this.parser.parseCommand(input);
-            return cmd.execute(this.tasks, this.storage);
+            return cmd.execute(this.tasks, this.storage, this.ui);
         } catch (DukeException e) {
             return e.getMessage();
         }

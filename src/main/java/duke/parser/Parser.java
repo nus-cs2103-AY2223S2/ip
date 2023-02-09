@@ -29,15 +29,14 @@ public class Parser {
     }
 
     /**
-     * Checks if description of tasks (eg, name, index) were given
+     * Checks if name of tasks is given in the given input
      * by checking the length of String array of the split input
      * and checking that the portion of the given input behind the command name is not empty.
      * @param splitInputs The given user input that was split into 2 sections using " ".
      * @param cmdType The type of the command given by user.
      * @throws IncompleteDescException If there is no name of task given.
      */
-    private void checkTaskDescPresence(String splitInputs[], String cmdType)
-            throws IncompleteDescException {
+    private void checkName(String splitInputs[], String cmdType) throws IncompleteDescException {
         if (splitInputs.length <= 1 || splitInputs[1].isBlank()) {
             throw new IncompleteDescException(
                     "The description of a " + cmdType + " cannot be empty!");
@@ -51,7 +50,7 @@ public class Parser {
      * @throws IncompleteDescException If name of the task is not given.
      */
     private ToDo getTodo(String[] splitInputs) throws IncompleteDescException {
-        checkTaskDescPresence(splitInputs, "todo");
+        checkName(splitInputs, "todo");
         return new ToDo(splitInputs[1]);
     }
 
@@ -75,8 +74,7 @@ public class Parser {
      * @return The index of the given keyword in the given string.
      * @throws IncompleteDescException If keyword is not found.
      */
-    private int getKeywordIndex(String input, String keyword,
-                                String keywordType) throws IncompleteDescException {
+    private int getKeywordIndex(String input, String keyword, String keywordType) throws IncompleteDescException {
         int index = input.indexOf(keyword);
         if (index < 0) {
             throw new IncompleteDescException(
@@ -95,8 +93,7 @@ public class Parser {
      * @return The extracted name.
      * @throws IncompleteDescException If no name can be found using the given indexes.
      */
-    private String getName(String input, int startIndex, int endIndex,
-                           String nameType) throws IncompleteDescException {
+    private String getName(String input, int startIndex, int endIndex, String nameType) throws IncompleteDescException {
         String name = input.substring(startIndex, endIndex).strip();
         if (name.isBlank()) {
             throw new IncompleteDescException(
@@ -117,8 +114,7 @@ public class Parser {
      * @throws InvalidInputException If given date is not in the yyyy/mm/dd format
      *                               or if the given date is not a valid date in the calendar.
      */
-    private LocalDate getLocalDate(String input, int startIndex, int endIndex, String dateType)
-            throws IncompleteDescException, InvalidInputException {
+    private LocalDate getLocalDate(String input, int startIndex, int endIndex, String dateType) throws IncompleteDescException, InvalidInputException {
         String date = input.substring(startIndex, endIndex).strip();
         if (date.isBlank()) {
             throw new IncompleteDescException(
@@ -140,13 +136,11 @@ public class Parser {
      * @param dateType The type of dateInput given (what the dateInput represents).
      * @throws InvalidInputException If dateInput is not before the dateToCheckWith.
      */
-    private void checkDateIsBefore(LocalDate dateInput, LocalDate dateToCheckWith,
-                                   String dateType) throws InvalidInputException {
+    private void checkDateIsBefore(LocalDate dateInput, LocalDate dateToCheckWith, String dateType) throws InvalidInputException {
         if (dateInput.isBefore(dateToCheckWith)) {
             String dateFormatted = Formatter.formatDateForPrint(dateInput);
             throw new InvalidInputException(
-                    "The given " + dateType + " (yyyy/mm/dd) "
-                            + dateFormatted + " has passed.");
+                    "The given " + dateType + " (yyyy/mm/dd) " + dateFormatted + " has passed.");
         }
     }
 
@@ -156,13 +150,11 @@ public class Parser {
      * @param endDate The end date.
      * @throws InvalidInputException If endDate given is before startDate given.
      */
-    private void checkEndIsAfterStart(LocalDate startDate, LocalDate endDate)
-            throws InvalidInputException {
-        if (startDate.isAfter(endDate)) {
+    private void checkEndIsAfterStart(LocalDate startDate, LocalDate endDate) throws InvalidInputException {
+        if (endDate.isAfter(startDate)) {
             String dateFormatted = Formatter.formatDateForPrint(startDate);
             throw new InvalidInputException(
-                    "The given start date " + dateFormatted
-                            + " (yyyy/mm/dd) should be before the end date (yyyy/mm/dd).");
+                    "The given start date " + dateFormatted + " (yyyy/mm/dd) should be before the end date (yyyy/mm/dd).");
         }
     }
 
@@ -173,18 +165,14 @@ public class Parser {
      * @throws IncompleteDescException If name or due date/time or both is/are not provided.
      * @throws InvalidInputException If due date/time is given in the wrong format.
      */
-    private Deadline getDeadline(String[] splitInputs)
-            throws IncompleteDescException, InvalidInputException {
-        checkTaskDescPresence(splitInputs, "deadline");
-
+    private Deadline getDeadline(String[] splitInputs) throws IncompleteDescException, InvalidInputException {
+        checkName(splitInputs, "deadline");
         int endIndex = getKeywordIndex(splitInputs[1], "/by", "due date/time");
 
         String name = getName(splitInputs[1], 0, endIndex, "deadline");
-
         LocalDate endLocalDate = getLocalDate(splitInputs[1], endIndex + 3,
                 splitInputs[1].length(), "due date/time");
         checkDateIsBefore(endLocalDate, LocalDate.now(), "deadline");
-
         return new Deadline(name, endLocalDate);
     }
 
@@ -196,14 +184,10 @@ public class Parser {
      * @throws InvalidInputException If any of the date/time are given
      *                               in a format different from "yyyy/MM/dd".
      */
-    private Event getEvent(String[] splitInputs)
-            throws IncompleteDescException, InvalidInputException {
-        checkTaskDescPresence(splitInputs, "event");
-
-        int startIndex = getKeywordIndex(splitInputs[1],
-                "/from", "start date/time");
+    private Event getEvent(String[] splitInputs) throws IncompleteDescException, InvalidInputException {
+        checkName(splitInputs, "event");
+        int startIndex = getKeywordIndex(splitInputs[1], "/from", "start date/time");
         int endIndex = getKeywordIndex(splitInputs[1], "/to", "end date/time");
-
         String name = getName(splitInputs[1], 0, startIndex, "event");
 
         LocalDate startLocalDate = getLocalDate(splitInputs[1], startIndex + 5,
@@ -213,24 +197,7 @@ public class Parser {
 
         checkEndIsAfterStart(startLocalDate, endLocalDate);
         checkDateIsBefore(endLocalDate, LocalDate.now(), "end date");
-
         return new Event(name, startLocalDate, endLocalDate);
-    }
-
-    /**
-     * Checks if index of list items were given
-     * by checking the length of String array of the split input
-     * and checking that the portion of the given input behind the command name is not empty.
-     * @param splitInputs The given user input that was split into 2 sections using " ".
-     * @param cmdType The type of the command given by user.
-     * @throws IncompleteDescException If there is no index was given.
-     */
-    private void checkIndexPresence(String splitInputs[], String cmdType)
-            throws IncompleteDescException {
-        if (splitInputs.length <= 1 || splitInputs[1].isBlank()) {
-            throw new IncompleteDescException(
-                    "Please give the index of the item to " + cmdType + ".");
-        }
     }
 
     /**
@@ -241,8 +208,7 @@ public class Parser {
      * @throws IncompleteDescException If command given is incomplete.
      * @throws InvalidInputException If command is invalid.
      */
-    public Command parseCommand(String input)
-            throws IncompleteDescException, InvalidInputException {
+    public Command parseCommand(String input) throws IncompleteDescException, InvalidInputException {
         String[] splitInputs = input.split(" ", 2);
         CommandEnum commandType;
         try {
@@ -253,13 +219,22 @@ public class Parser {
             case LIST:
                 return new ListCommand();
             case MARK:
-                checkIndexPresence(splitInputs, "mark");
+                if (splitInputs.length <= 1) {
+                    throw new InvalidInputException(
+                            "Please give the index of the item to be marked.");
+                }
                 return new MarkCommand(Integer.parseInt(splitInputs[1]) - 1);
             case UNMARK:
-                checkIndexPresence(splitInputs, "unmark");
+                if (splitInputs.length <= 1) {
+                    throw new InvalidInputException(
+                            "Please give the index of the item to be unmarked.");
+                }
                 return new UnmarkCommand(Integer.parseInt(splitInputs[1]) - 1);
             case DELETE:
-                checkIndexPresence(splitInputs, "delete");
+                if (splitInputs.length <= 1) {
+                    throw new InvalidInputException(
+                            "Please give the index of the item to be deleted.");
+                }
                 return new DeleteCommand(Integer.parseInt(splitInputs[1]) - 1);
             case TODO:
                 Task task = this.getTodo(splitInputs);
