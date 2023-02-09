@@ -1,22 +1,15 @@
-import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.EOFException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
+
+import Tasks.Deadline;
+import Tasks.Event;
+import Tasks.Task;
+import Tasks.ToDo;
 
 public class Duke {
     private static final String MAKE_DEADLINE = "deadline";
@@ -47,7 +40,7 @@ public class Duke {
                 return new ArrayList<Task>(); // no save file can possibly exist if directory does not exist
             }
             File saveFile = new File(SAVE_FILE_STRING);
-            if  (saveFile.exists()) {
+            if (saveFile.exists()) {
                 try {
                     ArrayList<Task> savedTasks = new ArrayList<>();
                     Scanner saveFileScanner = new Scanner(saveFile);
@@ -87,17 +80,17 @@ public class Duke {
         }
 
         switch (savedTaskFields[0]) {
-            case "E":
-                return new Event(isMarked, savedTaskFields[2], savedTaskFields[3], savedTaskFields[4]);
+        case "E":
+            return new Event(isMarked, savedTaskFields[2], savedTaskFields[3], savedTaskFields[4]);
 
-            case "D":
-                return new Deadline(isMarked, savedTaskFields[2], savedTaskFields[3]);
+        case "D":
+            return new Deadline(isMarked, savedTaskFields[2], savedTaskFields[3]);
 
-            case "T":
-                return new ToDo(isMarked, savedTaskFields[2]);
+        case "T":
+            return new ToDo(isMarked, savedTaskFields[2]);
 
-            default:
-                return null;
+        default:
+            return null;
         }
     }
 
@@ -117,7 +110,7 @@ public class Duke {
                 writer.write(t.makeSaveFormat());
             }
             writer.close();
-        } catch (IOException e){
+        } catch (IOException e) {
             System.out.println("Buh oh! An error occurred!!");
             e.printStackTrace();
         }
@@ -131,8 +124,8 @@ public class Duke {
                 + "|_____||_____||______| |_____| |_| \\_\\\n";
 
         System.out.println(logo);
-        System.out.println("    Howdy! I'm Cluck!\n" +
-                "    What can I cluck-a-doodle-do for you?");
+        System.out.println("    Howdy! I'm Cluck!\n"
+                + "    What can I cluck-a-doodle-do for you?");
 
         boolean loop = true;
         ArrayList<Task> toDoList = readSave();
@@ -143,109 +136,108 @@ public class Duke {
             System.out.println(input);
             String[] words = input.split(" ");
 
-                switch (words[0]) {
-                case "bye":
-                    writeSave(toDoList);
-                    System.out.println("    Buh-cluck, see ya!");
-                    loop = false;
-                    break;
+            switch (words[0]) {
+            case "bye":
+                writeSave(toDoList);
+                System.out.println("    Buh-cluck, see ya!");
+                loop = false;
+                break;
 
-                case "list":
-                    System.out.println("    Here are the tasks in your list:");
-                    for (int i = 0; i < toDoList.size(); i++) {
-                        System.out.println("    " + (i + 1) + ": " + toDoList.get(i).toString());
-                    }
-                    break;
+            case "list":
+                System.out.println("    Here are the tasks in your list:");
+                for (int i = 0; i < toDoList.size(); i++) {
+                    System.out.println("    " + (i + 1) + ": " + toDoList.get(i).toString());
+                }
+                break;
 
-                case "mark":
-                    if (words.length == 1) {
-                        System.out.println("    Mucka blucka - Buh cluck! Which task do you wanna mark?");
-                    }
-                    else if (isNumeric(words[1])) {
-                        Integer itemNumber = Integer.parseInt(words[1]);
-                        if (itemNumber > toDoList.size() || itemNumber <= 0) {
-                                System.out.println("    That's not...? In the list...? Buh caw?");
-                            } else {
-                            toDoList.get(itemNumber - 1).mark();
-                                System.out.println(String.format("    Marked it! Cluck-a-doodle-done!\n     %s", toDoList.get(itemNumber - 1).toString()));
-                            }
+            case "mark":
+                if (words.length == 1) {
+                    System.out.println("    Mucka blucka - Buh cluck! Which task do you wanna mark?");
+                } else if (isNumeric(words[1])) {
+                    Integer itemNumber = Integer.parseInt(words[1]);
+                    if (itemNumber > toDoList.size() || itemNumber <= 0) {
+                        System.out.println("    That's not...? In the list...? Buh caw?");
                     } else {
-                        System.out.println("    Ya gotta give me a working number, bucko!");
+                        toDoList.get(itemNumber - 1).mark();
+                        System.out.println("    Marked it! Cluck-a-doodle-done!\n"
+                                + toDoList.get(itemNumber - 1).toString());
                     }
-                    break;
+                } else {
+                    System.out.println("    Ya gotta give me a working number, bucko!");
+                }
+                break;
 
-                case "unmark":
-                    if (words.length == 1) {
-                        System.out.println("    Which task do you wanna unmark? Muckah buck!");
-                    } else if (isNumeric(words[1])) {
-                        Integer itemNumber = Integer.parseInt(words[1]);
-                        if (itemNumber > toDoList.size() || itemNumber <= 0) {
-                                System.out.println("    That's not...? In the list...? Buh caw?");
-                            } else {
-                            toDoList.get(itemNumber - 1).unmark();
-                                System.out.println(String.format("    Unmarked it! Cluckiddy cluck!\n     %s", toDoList.get(itemNumber - 1).toString()));
-                            }
+            case "unmark":
+                if (words.length == 1) {
+                    System.out.println("    Which task do you wanna unmark? Muckah buck!");
+                } else if (isNumeric(words[1])) {
+                    Integer itemNumber = Integer.parseInt(words[1]);
+                    if (itemNumber > toDoList.size() || itemNumber <= 0) {
+                        System.out.println("    That's not...? In the list...? Buh caw?");
                     } else {
-                        System.out.println("    Ya gotta give me a working number, bucko!");
+                        toDoList.get(itemNumber - 1).unmark();
+                        System.out.println("    Unmarked it! Cluckiddy cluck!\n"
+                                + toDoList.get(itemNumber - 1).toString());
                     }
-                    break;
+                } else {
+                    System.out.println("    Ya gotta give me a working number, bucko!");
+                }
+                break;
 
-                case MAKE_TODO:
-                    Task newTodo = new ToDo(input.substring(5));
-                    toDoList.add(newTodo);
-                    System.out.println("    added todo:\n    " + newTodo.toString());
+            case MAKE_TODO:
+                Task newTodo = new ToDo(input.substring(5));
+                toDoList.add(newTodo);
+                System.out.println("    added todo:\n    " + newTodo.toString());
+                System.out.println("    Now there's " + toDoList.size() + " items in your list!");
+                break;
+
+            case MAKE_DEADLINE:
+                String body = input.substring(9);
+                if (body.contains(DUE_DATE_FLAG)) {
+                    String[] fields = body.split(" " + DUE_DATE_FLAG);
+                    String description = fields[0];
+                    String dueDate = fields[1];
+                    Task currDeadline = new Deadline(description, dueDate);
+                    toDoList.add(currDeadline);
+                    System.out.println("    added deadline: " + currDeadline.toString());
                     System.out.println("    Now there's " + toDoList.size() + " items in your list!");
                     break;
-
-                case MAKE_DEADLINE:
-                    String body = input.substring(9);
-                    if (body.contains(DUE_DATE_FLAG)) {
-                        String[] fields = body.split(" " + DUE_DATE_FLAG);
-                        String description = fields[0];
-                        String dueDate = fields[1];
-                        Task currDeadline = new Deadline(description, dueDate);
-                        toDoList.add(currDeadline);
-                        System.out.println("    added deadline: " + currDeadline.toString());
-                        System.out.println("    Now there's " + toDoList.size() + " items in your list!");
-                        break;
-                    }
-                    System.out.println("    You're missing the '/by' flag, bucko!");
-                    break;
-
-                case MAKE_EVENT:
-                    String substring = input.substring(6);
-                    if (substring.contains(EVENT_START_FLAG) && substring.contains(EVENT_END_FLAG)) {
-                        String[] fields = substring.split("\\s/\\w{2,4}\\s");
-//                        System.out.println(Arrays.toString(fields));
-                        Task currEvent = new Event(fields[0], fields[1], fields[2]);
-                        toDoList.add(currEvent);
-                        System.out.println("    added event: " + currEvent.toString());
-                        System.out.println("    Now there's " + toDoList.size() + " items in your list!");
-                        break;
-                    }
-                    System.out.println("    You're missing the either the '/from' or '/to' flag, or both! Buhcock!");
-                    break;
-
-                case "delete":
-                    if (words.length == 1) {
-                        System.out.println("    Mucka blucka - Buh cluck! Which task do you wanna delete?");
-                    }
-                    else if (isNumeric(words[1])) {
-                        Integer itemNumber = Integer.parseInt(words[1]);
-                        if (itemNumber > toDoList.size() || itemNumber <= 0) {
-                                System.out.println("    That's not...? In the list...? Buh caw?");
-                            } else {
-                                System.out.println(String.format("   Buh cuck! Removed the following:\n     %s", toDoList.get(itemNumber - 1).toString()));
-                                toDoList.remove(itemNumber - 1);
-                        }
-                    } else {
-                        System.out.println("    Ya gotta give me a working number, bucko!");
-                    }
-                    break;
-
-                default:
-                    System.out.println("    You gotta give me a command!");
                 }
+                System.out.println("    You're missing the '/by' flag, bucko!");
+                break;
+
+            case MAKE_EVENT:
+                String substring = input.substring(6);
+                if (substring.contains(EVENT_START_FLAG) && substring.contains(EVENT_END_FLAG)) {
+                    String[] fields = substring.split("\\s/\\w{2,4}\\s");
+                    Task currEvent = new Event(fields[0], fields[1], fields[2]);
+                    toDoList.add(currEvent);
+                    System.out.println("    added event: " + currEvent.toString());
+                    System.out.println("    Now there's " + toDoList.size() + " items in your list!");
+                    break;
+                }
+                System.out.println("    You're missing the either the '/from' or '/to' flag, or both! Buhcock!");
+                break;
+
+            case "delete":
+                if (words.length == 1) {
+                    System.out.println("    Mucka blucka - Buh cluck! Which task do you wanna delete?");
+                } else if (isNumeric(words[1])) {
+                    Integer itemNumber = Integer.parseInt(words[1]);
+                    if (itemNumber > toDoList.size() || itemNumber <= 0) {
+                        System.out.println("    That's not...? In the list...? Buh caw?");
+                    } else {
+                        System.out.println("   Buh cuck! Removed the following:\n"
+                                + toDoList.get(itemNumber - 1).toString());
+                    }
+                } else {
+                    System.out.println("    Ya gotta give me a working number, bucko!");
+                }
+                break;
+
+            default:
+                System.out.println("    You gotta give me a command!");
+            }
         }
     }
 }
