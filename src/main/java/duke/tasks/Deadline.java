@@ -4,9 +4,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
-import duke.Parser;
 import duke.exceptions.DeadlineByNotSpecified;
 import duke.exceptions.TaskNameNotSpecified;
+import duke.parsing.Parser;
 
 
 /**
@@ -48,6 +48,6 @@ public class Deadline extends Task {
     public String stringFields() {
         String dateString = this.chornoDueDate.isEmpty() ? dueDate
                 : chornoDueDate.get().format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        return " (by: " + dateString + ")";
+        return String.format(" (by: %s)", dateString);
     }
 }

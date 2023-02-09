@@ -4,9 +4,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
-import duke.Parser;
 import duke.exceptions.EventFromToNotSpecified;
 import duke.exceptions.TaskNameNotSpecified;
+import duke.parsing.Parser;
 
 /**
  * Wrapper class for 'Event' tasks
@@ -58,6 +58,6 @@ public class Event extends Task {
                 .format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         String toDateString = this.chronoToDate.isEmpty() ? this.toDate : this.chronoToDate.get()
                 .format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        return " (from: " + fromDateString + " to: " + toDateString + ")";
+        return String.format(" (from: %s to: %s)", fromDateString, toDateString);
     }
 }
