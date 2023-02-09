@@ -41,4 +41,9 @@ public abstract class Command {
     public boolean isSave() {
         return this.isSave;
     }
+
+    protected int parseIndex(String s) throws NumberFormatException {
+        int i = Integer.parseInt(s) - 1;
+        return i;
+    }
 }

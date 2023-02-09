@@ -1,6 +1,7 @@
 package app.task;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
     private final LocalDateTime deadline;
@@ -22,6 +23,7 @@ public class Deadline extends Task {
                     + "yyyy-MM-dd HHmm or yyyy/MM/dd HHmm format");
         }
         this.deadline = parseDate(deadline);
+        this.fieldToValueMap.put("by", this.deadline.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
     }
 
     @Override

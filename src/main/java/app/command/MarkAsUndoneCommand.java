@@ -6,7 +6,7 @@ import app.chatbot.Ui;
 import app.task.TaskList;
 
 public class MarkAsUndoneCommand extends Command {
-    private String unmarkAtIndex;
+    private final String unmarkAtIndex;
 
     public MarkAsUndoneCommand(String index) {
         this.isExit = false;
@@ -27,12 +27,11 @@ public class MarkAsUndoneCommand extends Command {
     public String execute(TaskList tl, Ui ui, Storage storage) throws Exception {
         boolean alreadyMarked;
         try {
-            int i = Integer.parseInt(this.unmarkAtIndex) - 1;
-            alreadyMarked = tl.unmarkDone(i);
+            alreadyMarked = tl.unmarkDone(unmarkAtIndex);
             if (alreadyMarked) {
-                return new Response(tl.getTask(i).getDesc() + " is already undone!").toString();
+                return new Response(tl.getTask(unmarkAtIndex).getDesc() + " is already undone!").toString();
             } else {
-                return new Response("Unmarked " + tl.getTask(i).getDesc() + ".").toString();
+                return new Response("Unmarked " + tl.getTask(unmarkAtIndex).getDesc() + ".").toString();
             }
         } catch (NumberFormatException e) {
             throw new Exception("Please specify the task by its index number.");

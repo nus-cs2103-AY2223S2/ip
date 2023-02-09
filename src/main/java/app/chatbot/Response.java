@@ -20,11 +20,16 @@ public class Response {
      * message is delivered to the user.
      * @param input
      */
-    public void addLine(String input) {
+    public Response addLine(String input) {
         this.sb.append(input);
         this.sb.append(System.lineSeparator());
+        return this;
     }
 
+    public Response addBlankLine() {
+        this.sb.append(System.lineSeparator());
+        return this;
+    }
     @Override
     public String toString() {
         return this.sb.toString();

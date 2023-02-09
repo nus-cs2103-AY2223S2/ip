@@ -1,6 +1,7 @@
 package app.task;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
     private final LocalDateTime from;
@@ -25,6 +26,9 @@ public class Event extends Task {
         }
         this.from = parseDate(from);
         this.to = parseDate(to);
+
+        this.fieldToValueMap.put("from", this.from.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
+        this.fieldToValueMap.put("to", this.from.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
     }
 
     /**

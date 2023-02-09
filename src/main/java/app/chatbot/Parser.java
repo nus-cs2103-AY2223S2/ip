@@ -9,6 +9,7 @@ import app.command.AddCommand;
 import app.command.Command;
 import app.command.CommandNotFoundException;
 import app.command.DeleteCommand;
+import app.command.EditCommand;
 import app.command.ExitCommand;
 import app.command.FindCommand;
 import app.command.ListCommand;
@@ -95,10 +96,12 @@ public class Parser {
             return new FindCommand(argValues.get(command));
         case "bye":
             return new ExitCommand();
+        case "edit":
+            return new EditCommand(argValues.get(command),argValues);
         default:
             if (TaskTypes.inputToTask.getValue().containsKey(command)) { // check if command is to add a task
                 String desc = argValues.get(command);
-                argValues.put("Description", desc); // change the for description from the name of Command
+                argValues.put("description", desc); // change the for description from the name of Command
                 return new AddCommand(TaskTypes.inputToTask.getValue().get(command), argValues);
             }
             throw new CommandNotFoundException("I'm sorry, I don't recognise this command :/");

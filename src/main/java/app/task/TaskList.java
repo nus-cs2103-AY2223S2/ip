@@ -1,6 +1,7 @@
 package app.task;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -24,8 +25,32 @@ public class TaskList implements Iterable<Task> {
         this.tasks = new ArrayList<>();
     }
 
-    public Task getTask(int listIndex) {
-        return this.tasks.get(listIndex);
+    /**
+     * Getter for a task at a given listIndex, according to the index when
+     * doing the List or Find Command
+     * @param listIndex
+     * @return
+     * @throws NumberFormatException
+     * @throws IndexOutOfBoundsException
+     */
+    public Task getTask(String listIndex)
+            throws NumberFormatException, IndexOutOfBoundsException {
+        int i = Integer.parseInt(listIndex) - 1;
+        return this.tasks.get(i);
+    }
+
+    /**
+     * Getter for task through list index (first item is at 0).
+     * @param i
+     * @return
+     * @throws IndexOutOfBoundsException
+     */
+    public Task getTask(int i) throws IndexOutOfBoundsException {
+        return this.tasks.get(i);
+    }
+
+    private int parseStringIndex(String listIndex) {
+        return Integer.parseInt(listIndex) - 1;
     }
 
     public List<Task> getAllTasks() {
@@ -37,20 +62,18 @@ public class TaskList implements Iterable<Task> {
     }
 
     /**
-     * Adds a task to the TaskList. Requires a task type as specified by TaskTypes,
-     * and the correct mappings of the task. Throws exceptions for if the inputs are invalid.
-     * <br>
-     * Tasks are always added to the end of the TaskList.
-     * @param type one of the available task types provided in TaskTypes.
-     * @param args map of argument names to their values.
-     * @return the same Task object that was added into the TaskList
-     * @throws InvalidDateTimeException
+     * Makes a new Task. Requires a task type as specified by TaskTypes,
+     * and the correct mappings of the task.
+     * @param type the type of task.
+     * @param args mapping of task fields to their values.
+     * @return
      * @throws InvalidInputException
+     * @throws InvalidDateTimeException
      */
-    public Task addTask(TaskTypes.Type type, Map<String, String> args)
-            throws InvalidDateTimeException, InvalidInputException {
+    private Task makeNewTask(TaskTypes.Type type, Map<String, String> args)
+            throws InvalidInputException, InvalidDateTimeException {
         Task newTask;
-        String desc = args.get("Description");
+        String desc = args.get("description");
         switch (type) {
         case TODO:
             newTask = new ToDo(desc);
@@ -67,6 +90,20 @@ public class TaskList implements Iterable<Task> {
         default:
             throw new InvalidInputException("Task not recognised");
         }
+        return newTask;
+    }
+
+    /**
+     * Adds a task to the TaskList. Tasks are always added to the end of the TaskList.
+     * @param type one of the available task types provided in TaskTypes.
+     * @param args map of argument names to their values.
+     * @return the same Task object that was added into the TaskList
+     * @throws InvalidDateTimeException
+     * @throws InvalidInputException
+     */
+    public Task addTask(TaskTypes.Type type, Map<String, String> args)
+            throws InvalidInputException, InvalidDateTimeException {
+        Task newTask = makeNewTask(type, args);
         this.tasks.add(this.tasks.size(), newTask); // always adds to the end
         return newTask;
     }
@@ -83,10 +120,64 @@ public class TaskList implements Iterable<Task> {
     public Task addDoneTask(TaskTypes.Type type, Map<String, String> args)
             throws InvalidDateTimeException, InvalidInputException {
         Task newTask = addTask(type, args); // add to end of list
-        int index = this.tasks.size() - 1; // mark the last/latest item as done
-        markAsDone(index);
-        assert newTask.isDone();
+        newTask.markAsDone();
+        assert newTask.equals(this.tasks.get(this.tasks.size()-1));
         return newTask;
+    }
+
+
+    /**
+     * Edits a Task in place, given a mapping of the new fields and their values.
+     * The index of the task doesn't change.
+     * The fields specified must exist in the Task.
+     * <br>
+     * Under the hood, a new Task instance is created, and the old one deleted.
+     * Any field that is not specified to be edited will take on the original value.
+     * @param listIndex
+     * @param args mapping of the name of the edited field(s) and the value
+     * @return the new edited Task
+     * @throws InvalidInputException
+     */
+    public Task editTask(String listIndex, Map<String, String> args)
+            throws InvalidInputException, InvalidDateTimeException {
+        Task toBeEdited = getTask(listIndex);
+        try {
+            TaskTypes.Type type = toBeEdited.getType();
+            Map<String, String> previousMappings = toBeEdited.getMapping();
+            Map<String, String> editedMappings = new HashMap<>();
+            /*
+            Check if fields in args are fields in the Task
+            If yes, add them into the new mappings
+            */
+            for (String key : args.keySet()) {
+                if (!toBeEdited.containsField(key)) {
+                    throw new InvalidInputException("This task doesn't contain the fields you've chosen");
+                } else {
+                    editedMappings.put(key, args.get(key));
+                }
+            }
+            System.out.println(editedMappings);
+            /*
+            Add all previous mappings that have not been edited
+            to the new editedMappings map.
+             */
+            for (String key : previousMappings.keySet()) {
+                if (!editedMappings.containsKey(key)) {
+                    editedMappings.put(key, previousMappings.get(key));
+                }
+            }
+
+            Task afterEdited = makeNewTask(type, editedMappings);
+            replaceTaskAt(listIndex, afterEdited);
+            return afterEdited;
+        } catch (IndexOutOfBoundsException e) {
+            throw new InvalidInputException("This task doesn't exist in your list");
+        }
+    }
+
+    private void replaceTaskAt(String index, Task t) {
+        int i = parseStringIndex(index);
+        this.tasks.set(i, t);
     }
 
     /**
@@ -118,9 +209,9 @@ public class TaskList implements Iterable<Task> {
      * @return returns true if task is already marked done, false if not.
      * @throws IndexOutOfBoundsException
      */
-    public boolean markAsDone(int index) throws IndexOutOfBoundsException {
+    public boolean markAsDone(String index) throws IndexOutOfBoundsException {
         boolean isAlreadyMarked = false;
-        Task task = this.tasks.get(index);
+        Task task = this.getTask(index);
         if (task.isDone()) {
             isAlreadyMarked = true;
         }
@@ -135,9 +226,9 @@ public class TaskList implements Iterable<Task> {
      * @return returns true if task is already marked UNdone, false if not.
      * @throws IndexOutOfBoundsException
      */
-    public boolean unmarkDone(int index) throws IndexOutOfBoundsException {
+    public boolean unmarkDone(String index) throws IndexOutOfBoundsException {
         boolean isAlreadyMarked = false;
-        Task task = this.tasks.get(index);
+        Task task = this.getTask(index);
         if (!task.isDone()) {
             isAlreadyMarked = true;
         }

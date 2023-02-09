@@ -27,12 +27,11 @@ public class MarkAsDoneCommand extends Command {
     public String execute(TaskList tl, Ui ui, Storage storage) throws Exception {
         boolean alreadyMarked;
         try {
-            int i = Integer.parseInt(this.markAtIndex) - 1;
-            alreadyMarked = tl.markAsDone(i);
+            alreadyMarked = tl.markAsDone(markAtIndex);
             if (alreadyMarked) {
-                return new Response(tl.getTask(i).getDesc() + " already marked as done!").toString();
+                return new Response(tl.getTask(markAtIndex).getDesc() + " already marked as done!").toString();
             } else {
-                return new Response("Marked " + tl.getTask(i).getDesc() + " as done!").toString();
+                return new Response("Marked " + tl.getTask(markAtIndex).getDesc() + " as done!").toString();
             }
         } catch (NumberFormatException e) {
             throw new Exception("Please specify the task by its index number.");

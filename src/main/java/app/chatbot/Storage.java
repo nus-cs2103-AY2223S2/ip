@@ -155,7 +155,7 @@ public class Storage {
 
         Map<String, String> argValues = new HashMap<>();
         try {
-            argValues.put("Description", args.get(DESC_INDEX));
+            argValues.put("description", args.get(DESC_INDEX));
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidStorageException("Missing description");
         }

@@ -4,7 +4,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import app.chatbot.Storage;
@@ -24,10 +26,10 @@ import app.chatbot.Storage;
 public abstract class Task {
     protected static final List<DateTimeFormatter> SUPPORTED_DATE_TIME_INPUT = new ArrayList<>();
     protected static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("EEE, dd MMM yy hh:mma");
-
     protected String description;
     protected boolean isDone;
     protected String symbol;
+    protected final Map<String, String> fieldToValueMap = new HashMap<>();
     static {
         SUPPORTED_DATE_TIME_INPUT.add(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
         SUPPORTED_DATE_TIME_INPUT.add(DateTimeFormatter.ofPattern("yyyy/MM/dd HHmm"));
@@ -45,6 +47,7 @@ public abstract class Task {
         }
         this.description = description;
         this.isDone = false;
+        this.fieldToValueMap.put("description", description);
     }
 
     /**
@@ -97,6 +100,17 @@ public abstract class Task {
         return this.description;
     }
 
+    public TaskTypes.Type getType() {
+        return TaskTypes.symbolToTask.getValue().get(this.symbol);
+    }
+
+    protected Map<String, String> getMapping() {
+        return this.fieldToValueMap;
+    }
+
+    protected boolean containsField(String s) {
+        return this.fieldToValueMap.containsKey(s);
+    }
     /**
      * Marks task as done
      */
