@@ -108,7 +108,6 @@ public class Storage {
             // 1. If the directory does not exist.
             if (!doesDirectoryExists) {
                 try {
-                    // 1a. creates a new file from the given data path.
                     new File(this.dataPathString).createNewFile();
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -122,7 +121,6 @@ public class Storage {
             // 3. Loops through the lines in the file.
             while (scanner.hasNextLine()) {
                 String data = scanner.nextLine();
-                // 3a. deserialises the line.
                 Task task = this.deserialise(data);
                 tasks.add(task);
             }
@@ -145,7 +143,6 @@ public class Storage {
         // 1. If the directory does not exist.
         if (!doesDirectoryExists) {
             try {
-                // 1a. creates a new file from the given data path.
                 new File(this.dataPathString).createNewFile();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -155,7 +152,7 @@ public class Storage {
         // 2. Writes task into file.
         try {
             FileWriter writerObj = new FileWriter(this.dataPathString, false);
-            // 2a. serialise task into string to write into the file.
+            // 2a. Serialise task into string to write into the file.
             for (int i = 0; i < tasks.size(); i++) {
                 writerObj.write(this.serialise(tasks.get(i)) + "\n");
             }
