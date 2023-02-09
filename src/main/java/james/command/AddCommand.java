@@ -33,8 +33,16 @@ public class AddCommand extends Command {
     public AddCommand(String userCommand) {
         this.userCommand = userCommand;
         String[] taskData = userCommand.split(" ", 2);
-        this.taskType = taskData[0];
-        this.description = taskData[1];
+        taskType = taskData[0];
+        description = taskData[1];
+    }
+
+    private String splitTask(String input) {
+        return input.split(" ", 2)[1];
+    }
+
+    private String splitDescription(String input) {
+        return splitTask(input).split(" /by ")[0];
     }
 
     /**
@@ -62,9 +70,7 @@ public class AddCommand extends Command {
             response = ui.addTask(todo, tasks.size());
             break;
         case "deadline":
-            // Fallthrough.
-        case "event":
-            String descriptor = taskType.equals("deadline") ? "/by" : "/at";
+            String descriptor = "/by";
 
             if (!description.contains(descriptor)) {
                 throw new JamesException("please make sure your task contains the keyword "
@@ -77,26 +83,57 @@ public class AddCommand extends Command {
                         + " in this format:" + "d/MM/yyyy HHmm");
             }
 
-            int startIndex = userCommand.indexOf(descriptor + " ");
+            int startIndexDeadline = userCommand.indexOf(descriptor + " ");
             int userCmdLen = userCommand.length();
-            String description = userCommand.substring(taskType.length(), startIndex).trim();
+            description = userCommand.substring(taskType.length(), startIndexDeadline).trim();
 
             if (description.isBlank()) {
                 throw new JamesException("your task description is empty TT");
             }
 
-            String start = userCommand.substring(startIndex + 3, userCmdLen).trim();
+            String startDeadline = userCommand.substring(startIndexDeadline + 3, userCmdLen).trim();
 
-            Task task = taskType.equals("deadline") ? new Deadline(description, start) : new Event(description, start);
-            tasks.add(task);
+
+            Task taskDeadline = new Deadline(description, startDeadline);
+            tasks.add(taskDeadline);
             storage.save(tasks.taskListToStoreString());
-            response = ui.addTask(task, tasks.size());
+            response = ui.addTask(taskDeadline, tasks.size());
+            break;
+        case "event":
+            String descriptor_1 = "/from";
+            String descriptor_2 = "/to";
+
+            if (!description.contains(descriptor_1) || !description.contains(descriptor_2)) {
+                throw new JamesException("please make sure your task contains the keyword "
+                        + descriptor_1 + " and" + descriptor_2);
+            }
+
+            if (description.trim().endsWith(descriptor_1) || description.trim().endsWith(descriptor_2)) {
+                throw new JamesException("Looks like the date is missing"
+                        + "\nplease enter a date after the " + descriptor_1 + "and"
+                        + descriptor_2 + " in this format: d/MM/yyyy HHmm");
+            }
+
+            int startIndexEvent = userCommand.indexOf(descriptor_1 + " ");
+            int endIndexEvent = userCommand.indexOf(descriptor_2 + " ");
+            int userCmdLenEvent = userCommand.length();
+            description = userCommand.substring(taskType.length(), startIndexEvent).trim();
+
+            if (description.isBlank()) {
+                throw new JamesException("your task description is empty");
+            }
+
+            String startEvent = userCommand.substring(startIndexEvent + 5, endIndexEvent).trim();
+            String endEvent = userCommand.substring(endIndexEvent + 3, userCmdLenEvent).trim();
+
+            Task taskEvent = new Event(description, startEvent, endEvent);
+            tasks.add(taskEvent);
+            storage.save(tasks.taskListToStoreString());
+            response = ui.addTask(taskEvent, tasks.size());
             break;
         }
-
         return response;
     }
-
     /**
      * Returns whether AddCommand exits the program.
      *

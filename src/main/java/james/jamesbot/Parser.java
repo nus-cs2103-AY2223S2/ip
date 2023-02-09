@@ -36,8 +36,8 @@ public class Parser {
             if (userCommand.trim().endsWith("todo")
                     || userCommand.trim().endsWith("deadline")
                     || userCommand.trim().endsWith("event")) {
-                throw new JamesException("your task description is empty TT\n"
-                        + "feed me a task description to get started! <:");
+                throw new JamesException("your task description is empty\n"
+                        + "feed me a task description to get started!");
             }
             return new AddCommand(userCommand);
         } else if (userCommand.startsWith("delete")) {
@@ -45,7 +45,7 @@ public class Parser {
         } else if (userCommand.startsWith("find")) {
             return new FindCommand(userCommand);
         } else {
-            throw new JamesException("sorry \ni don't know what that means ");
+            throw new JamesException("sorry \nI do not understand what does that mean.");
         }
     }
 }

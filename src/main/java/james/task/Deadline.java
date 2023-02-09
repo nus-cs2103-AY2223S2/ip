@@ -28,7 +28,7 @@ public class Deadline extends Task {
     @Override
     public String toStoreString() {
         String dateFormat = this.by.format(DateTimeFormatter.ofPattern("d/MM/yyyy HHmm"));
-        return "D | " + super.toStoreString() + " | " + dateFormat + "\n";
+        return "D | " + super.toStoreString() + " | " + dateFormat;
     }
 
 }

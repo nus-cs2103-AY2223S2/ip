@@ -16,16 +16,24 @@ import james.task.ToDo;
  * Represents the file used to store task list data.
  */
 public class Storage {
-    /** The path to the file where the task list is stored. */
-    protected String filePath;
+
+    protected File file;
+    String filePath = "data/james.txt";
 
     /**
      * Constructor for Storage object.
-     *
-     * @param filePath The path to the file where the task list is stored.
      */
-    public Storage(String filePath) {
-        this.filePath = filePath;
+    public Storage() throws JamesException {
+        try {
+            file = new File(filePath);
+            if (!file.exists()) {
+                file.getParentFile().mkdirs();
+                file.createNewFile();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new JamesException("File could not be created.");
+        }
     }
 
     /**
@@ -35,7 +43,7 @@ public class Storage {
      */
     public void save(String taskList) {
         try {
-            FileWriter fileWriter = new FileWriter("data/james.txt");
+            FileWriter fileWriter = new FileWriter(filePath);
             fileWriter.write(taskList);
             fileWriter.close();
         } catch (IOException e) {
@@ -51,46 +59,38 @@ public class Storage {
      * @throws JamesException If there are any problems loading the file.
      */
     public TaskList load() throws JamesException {
-        TaskList result = new TaskList();
+        TaskList taskList = new TaskList();
 
         try {
-            File directory = new File("data/james.txt");
-            if (!directory.exists()) {
-                directory.mkdir();
-            }
-
-            File taskFile = new File(filePath);
-            if (!taskFile.exists()) {
-                taskFile.createNewFile();
-            }
-
-            Scanner scanner = new Scanner(taskFile);
-            while (scanner.hasNextLine()) {
-                String task = scanner.nextLine();
-                String[] taskData = task.split(",");
-
-                switch (taskData[0]) {
+            Scanner scan = new Scanner(file);
+            while (scan.hasNextLine()) {
+                String[] task = scan.nextLine().split(" \\| ");
+                switch (task[0]) {
                 case "T":
-                    ToDo todo = new ToDo(taskData[2]);
-                    todo.setIsDone(taskData[1].equals("1"));
-                    result.add(todo);
+                    ToDo todo = new ToDo(task[2]);
+                    todo.setIsDone(task[1].equals("1"));
+                    taskList.add(todo);
                     break;
                 case "D":
-                    Deadline deadline = new Deadline(taskData[2],taskData[3]);
-                    deadline.setIsDone(taskData[1].equals("1"));
-                    result.add(deadline);
+                    Deadline deadline = new Deadline(task[2],task[3]);
+                    deadline.setIsDone(task[1].equals("1"));
+                    taskList.add(deadline);
                     break;
                 case "E":
-                    Event event = new Event(taskData[2], taskData[3]);
-                    event.setIsDone(taskData[1].equals("1"));
-                    result.add(event);
+                    Event event = new Event(task[2], task[3], task[4]);
+                    event.setIsDone(task[1].equals("1"));
+                    taskList.add(event);
                     break;
                 }
+                if (task[1].equals("1")) {
+                    taskList.markTask(taskList.getTaskList().size() - 1);
+                }
             }
+            scan.close();
         } catch (IOException e) {
-            throw new JamesException("OOPS, unable to load file");
+            e.printStackTrace();
+            throw new JamesException("File could not be loaded.");
         }
-
-        return result;
+        return taskList;
     }
 }

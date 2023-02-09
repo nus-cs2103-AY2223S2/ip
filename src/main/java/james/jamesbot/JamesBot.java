@@ -21,7 +21,7 @@ public class JamesBot {
      * Constructs an JamesBot object.
      */
     public JamesBot() throws JamesException {
-        storage = new Storage("data/james.txt");
+        storage = new Storage();
         try {
             tasks = storage.load();
         } catch (JamesException e) {

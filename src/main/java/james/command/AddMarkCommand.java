@@ -45,11 +45,11 @@ public class AddMarkCommand extends Command {
      */
     public String execute (TaskList tasks, Ui ui, Storage storage) throws JamesException {
         if (index >= tasks.size()) {
-            throw new JamesException("Looks like task " + String.valueOf(index + 1) + "does not exist"
+            throw new JamesException("Looks like task " + (index + 1) + "does not exist"
                     + "please check that you have keyed in the right task number");
         }
 
-        String response = "oops something went wrong while marking your task";
+        String response = "OOPS! something went wrong while marking your task";
 
         switch (taskType) {
         case "mark":
