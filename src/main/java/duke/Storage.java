@@ -32,6 +32,8 @@ public class Storage {
         } catch (IOException e){
             e.printStackTrace();
         }
+        assert savedFileDir.exists(): "saved file directory does not exist.";
+        assert savedTaskFile.exists(): "saved task file does not exist.";
         this.saveFile = savedTaskFile;
     }
 
