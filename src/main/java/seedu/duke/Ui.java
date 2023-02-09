@@ -19,7 +19,7 @@ public class Ui {
     }
 
     public static void indentedPrintln(String ... messages) {
-        int len = messages.length
+        int len = messages.length;
         for (int i = 0; i < len; i++) {
             String indentedMessage = "     " + messages[i];
             System.out.println(indentedMessage);

@@ -27,6 +27,7 @@ public class TaskList {
     }
 
     public void mark(int taskNumber, Storage storage) {
+        assert taskNumber >= 0 : "taskNumber is non-negative";
         Task task = tasks.get(taskNumber - 1);
         task.markAsDone();
         String message = "Nice! I've marked this task as done:";
@@ -40,6 +41,7 @@ public class TaskList {
     }
 
     public void unmark(int taskNumber, Storage storage) {
+        assert taskNumber >= 0 : "taskNumber is non-negative";
         Task task = tasks.get(taskNumber - 1);
         task.markAsNotDone();
         String message = "OK, I've marked this task as not done yet:";
@@ -53,6 +55,7 @@ public class TaskList {
     }
 
     public void deleteTask(int taskNumber) {
+        assert taskNumber >= 0 : "taskNumber is non-negative";
         Task task = tasks.get(taskNumber - 1);
         tasks.remove(taskNumber - 1);
         Ui.indentedPrintln("Noted. I've removed this task:");
@@ -106,6 +109,7 @@ public class TaskList {
     }
 
     public void searchTask(String str) {
+        assert str != "" : "str is supposed to be non-empty";
         ArrayList<Task> results = new ArrayList<>();
         ArrayList<Integer> indices = new ArrayList<>();
         int index = 1;
