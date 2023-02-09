@@ -43,10 +43,6 @@ public class Parser {
         if (!matchFound) {
             throw new PoorInputException("Sorry, I don't recognize that command :<");
         }
-
-        if (this.text.isEmpty()) {
-            throw new PoorInputException("That command needs an input");
-        }
     }
 
     /**

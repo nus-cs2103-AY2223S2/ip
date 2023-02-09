@@ -270,7 +270,7 @@ public enum Command {
     // Command static methods to be called by Parser, and run by runCommand
     private static String doNoInput(TaskList tl, String text)
             throws PoorInputException {
-        throw new PoorInputException("That command needs an input");
+        throw new PoorInputException(text.toUpperCase() + " needs an input");
     }
 
     private static String doBye(TaskList tl, String text) {
