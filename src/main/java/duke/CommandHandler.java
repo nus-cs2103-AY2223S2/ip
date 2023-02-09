@@ -1,7 +1,6 @@
 package duke;
 
 import java.time.format.DateTimeParseException;
-import java.util.List;
 
 public class CommandHandler {
     CommandHandler() {}
@@ -17,54 +16,49 @@ public class CommandHandler {
         String s;
         switch (command.getDescription()) {
         case "bye":
-            return endDuke();
-        //Fallthrough (java doesn't let me compile if I add a break)
+            s = endDuke();
+            break;
         case "list":
-            return showTasks(tasks);
-        //Fallthrough
+            s = showTasks(tasks);
+            break;
         case "mark":
             s = markTask(command.getArguments()[0], tasks);
             storage.saveData(tasks);
-            return s;
-        //Fallthrough
+            break;
         case "unmark":
             s = unmarkTask(command.getArguments()[0], tasks);
             storage.saveData(tasks);
-            return s;
-        //Fallthrough
+            break;
         case "todo":
             s = addTodo(command.getArguments()[0], tasks);
             storage.saveData(tasks);
-            return s;
-        //Fallthrough
+            break;
         case "deadline":
             s = addDeadline(command.getArguments()[0], command.getArguments()[1], tasks);
             storage.saveData(tasks);
-            return s;
-        //Fallthrough
+            break;
         case "event":
             s = addEvent(command.getArguments()[0],
                     command.getArguments()[1], command.getArguments()[2], tasks);
             storage.saveData(tasks);
-            return s;
-        //Fallthrough
+            break;
         case "delete":
             s = deleteEvent(command.getArguments()[0], tasks);
             storage.saveData(tasks);
-            return s;
-        //Fallthrough
+            break;
         case "noMatch":
-            return noMatch();
-        //Fallthrough
+            s = noMatch();
+            break;
         case "invalid":
-            return invalid(command.getArguments()[0]);
-        //Fallthrough
+            s = invalid(command.getArguments()[0]);
+            break;
         case "find":
-            return findTasks(command.getArguments()[0], tasks);
+            s = findTasks(command.getArguments()[0], tasks);
+            break;
         default:
-            return "";
-            //Fallthrough
+            throw new IllegalArgumentException("Command is not valid and was not caught!");
         }
+        return s;
     }
 
     /**
