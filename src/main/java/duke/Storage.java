@@ -37,6 +37,7 @@ public class Storage {
             new File(filePath);
             throw new FileNotFoundException();
         }
+        assert Files.exists(Path.of(filePath)) : "File path does not exist";
         return parseFile(new File(filePath));
     }
 
