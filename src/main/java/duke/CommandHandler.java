@@ -1,7 +1,6 @@
 package duke;
 
 import java.time.format.DateTimeParseException;
-import java.util.List;
 
 public class CommandHandler {
     CommandHandler() {}
@@ -62,7 +61,7 @@ public class CommandHandler {
         case "find":
             return findTasks(command.getArguments()[0], tasks);
         default:
-            return "";
+            throw new AssertionError("No command found!");
             //Fallthrough
         }
     }
