@@ -30,7 +30,6 @@ public class Parser {
      * Handles User interaction.
      */
     protected static Ui ui;
-
     /**
      * Constructor.
      *
@@ -46,7 +45,7 @@ public class Parser {
      * parse the instruction accordingly based on first word in the string
      * @param command
      * @return Command
-     * @throws DukeException
+     * @throws DukeException sth
      */
     public static Command parse(String command) throws DukeException {
         String[] c = command.split(" ", 2);

@@ -30,7 +30,6 @@ public class Duke {
         try {
             tasks = new TaskList(storage.load());
         } catch (IOException e) {
-            // print some error
             ui.showLoadingError();
             tasks = new TaskList();
         }
@@ -58,7 +57,6 @@ public class Duke {
         boolean isExit = false;
         while (!isExit) {
             try {
-                // ui should scan for input.
                 String fullCommand = ui.readCommand();
                 ui.showLine();
                 Command c = Parser.parse(fullCommand);

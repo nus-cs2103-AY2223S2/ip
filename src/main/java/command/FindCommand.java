@@ -34,8 +34,6 @@ public class FindCommand extends Command {
      * @param storage
      * @throws DukeException
      */
-
-    // a space before the for loop todo
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         ArrayList<Task> res = new ArrayList<>();
