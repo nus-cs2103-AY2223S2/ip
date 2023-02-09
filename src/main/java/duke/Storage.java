@@ -37,6 +37,45 @@ public class Storage {
         this.saveFile = savedTaskFile;
     }
 
+    private void processAndAddTodo(String taskDescription, boolean completed, ArrayList<Task> userTasks) {
+        Todo newTodo = new Todo(taskDescription, completed);
+        userTasks.add(newTodo);
+    }
+
+    private void processAndAddDeadline(String[] parts, String taskDescription, boolean completed, ArrayList<Task> userTasks) {
+        try {
+            String[] deadlineParts = parts[3].split(" ");
+            String deadlineDate = deadlineParts[0];
+            String deadlineTime = deadlineParts[1];
+            LocalDate parsedDate = LocalDate.parse(deadlineDate);
+            Date parsedTime = new SimpleDateFormat("hh:mm").parse(deadlineTime);
+            Deadline newDeadline = new Deadline(taskDescription, parsedDate, parsedTime, completed);
+            userTasks.add(newDeadline);
+        } catch (DateTimeParseException | ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void processAndAddEvent(String[] parts, String taskDescription, boolean completed, ArrayList<Task> userTasks) {
+        try {
+            String[] eventStartParts = parts[3].split(" ");
+            String[] eventEndParts = parts[4].split(" ");
+            String eventStartDate = eventStartParts[0];
+            String eventStartTime = eventStartParts[1];
+            String eventEndDate = eventEndParts[0];
+            String eventEndTime = eventEndParts[1];
+            LocalDate parsedStartDate = LocalDate.parse(eventStartDate);
+            LocalDate parsedEndDate = LocalDate.parse(eventEndDate);
+            Date parsedStartTime = new SimpleDateFormat("hh:mm").parse(eventStartTime);
+            Date parsedEndTime = new SimpleDateFormat("hh:mm").parse(eventEndTime);
+            Event newEvent = new Event(taskDescription, parsedStartDate, parsedStartTime,
+                    parsedEndDate, parsedEndTime, completed);
+            userTasks.add(newEvent);
+        } catch(DateTimeParseException | ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
     public ArrayList<Task> load() {
         ArrayList<Task> userTasks = new ArrayList<>();
         BufferedReader reader;
@@ -48,40 +87,13 @@ public class Storage {
                 boolean completed = parts[1].equals("1");
                 String taskDescription = parts[2];
                 if (parts.length == 3) {
-                    Todo newTodo = new Todo(taskDescription, completed);
-                    userTasks.add(newTodo);
+                   processAndAddTodo(taskDescription, completed, userTasks);
                 }
                 if (parts.length == 4) {
-                    try {
-                        String[] deadlineParts = parts[3].split(" ");
-                        String deadlineDate = deadlineParts[0];
-                        String deadlineTime = deadlineParts[1];
-                        LocalDate parsedDate = LocalDate.parse(deadlineDate);
-                        Date parsedTime = new SimpleDateFormat("hh:mm").parse(deadlineTime);
-                        Deadline newDeadline = new Deadline(taskDescription, parsedDate, parsedTime, completed);
-                        userTasks.add(newDeadline);
-                    } catch (DateTimeParseException | ParseException e) {
-
-                    }
+                   processAndAddDeadline(parts, taskDescription, completed, userTasks);
                 }
                 if (parts.length == 5) {
-                    try {
-                        String[] eventStartParts = parts[3].split(" ");
-                        String[] eventEndParts = parts[4].split(" ");
-                        String eventStartDate = eventStartParts[0];
-                        String eventStartTime = eventStartParts[1];
-                        String eventEndDate = eventEndParts[0];
-                        String eventEndTime = eventEndParts[1];
-                        LocalDate parsedStartDate = LocalDate.parse(eventStartDate);
-                        LocalDate parsedEndDate = LocalDate.parse(eventEndDate);
-                        Date parsedStartTime = new SimpleDateFormat("hh:mm").parse(eventStartTime);
-                        Date parsedEndTime = new SimpleDateFormat("hh:mm").parse(eventEndTime);
-                        Event newEvent = new Event(taskDescription, parsedStartDate, parsedStartTime,
-                                parsedEndDate, parsedEndTime, completed);
-                        userTasks.add(newEvent);
-                    } catch(DateTimeParseException | ParseException e) {
-
-                    }
+                   processAndAddEvent(parts, taskDescription, completed, userTasks);
                 }
                 taskStr = reader.readLine();
             }
