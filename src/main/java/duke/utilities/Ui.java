@@ -49,6 +49,8 @@ public class Ui {
      * @return A string indicating the number of tasks in the task list.
      */
     public String formatNumberOfTasksAsString(int numTasks) {
+        assert numTasks >= 0;
+
         if (numTasks == 1) {
             return "There is 1 task in the list";
         } else {
