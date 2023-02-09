@@ -1,11 +1,9 @@
 package duke.bot;
 
-import duke.exceptions.emptyDescException;
-import duke.exceptions.unrecogException;
-import duke.exceptions.unspecTimeException;
+import duke.exceptions.EmptyDescException;
+import duke.exceptions.UnrecogException;
+import duke.exceptions.UnspecTimeException;
 import duke.taskmanager.*;
-
-import java.io.IOException;
 
 /**
  * Parser class containing storage of previously saved tasks.
@@ -37,7 +35,7 @@ public class Parser {
         } else if (str.contains("find")) {
             System.out.println("Here are the tasks matching the description:");
             res.append("Here are the tasks matching the description:");
-            if(str.split(" ",2 ).length == 1) {
+            if (str.split(" ", 2).length == 1) {
                 System.out.println("enter description you're looking for");
                 res.append("enter description you're looking for");
                 return res.toString();
@@ -58,6 +56,13 @@ public class Parser {
                 }
             }
             return res.toString();
+        } else if (str.contains("cleartags")){
+            int index = Integer.parseInt(str.split(" ",2 )[1]);
+            Tasks t = tasks.get(index - 1);
+            Tag.clearTags(t);
+            Tag.rewrite();
+            System.out.println("You've cleared tags for item" + index);
+            res.append("You've cleared tags for item" + index);
         } else if (str.contains("tag")) {
             if (str.contains("ged")) {
                 String k = str.split(" ", 2)[1];
@@ -175,15 +180,15 @@ public class Parser {
                             return res.toString();
                     }
 
-                } catch (unrecogException e) {
+                } catch (UnrecogException e) {
                     System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
                     res.append("☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
                     return res.toString();
-                } catch (emptyDescException e) {
+                } catch (EmptyDescException e) {
                     System.out.println("☹ OOPS!!! The description of a " + type + " cannot be empty.\n");
                     res.append("☹ OOPS!!! The description of a " + type + " cannot be empty.\n");
                     return res.toString();
-                } catch (unspecTimeException e) {
+                } catch (UnspecTimeException e) {
                     if (type.equals("event")) {
                         System.out.println(" Please specify a timeframe (from/ ... to/ ...)\n");
                         res.append(" Please specify a timeframe (from/ ... to/ ...)\n");

@@ -52,11 +52,13 @@ public class MainWindow extends AnchorPane {
         if (input == "bye") {
             Platform.exit();
         }
-        dialogContainer.getChildren().add(DialogBox.getUserDialog("Hello! I'm duke.Duke\nWhat can I do for you? "+
+        dialogContainer.getChildren().add(DialogBox.getUserDialog("Hello! I'm ditto\nWhat can I do for you? "+
         "\n('bye' to terminate duke.Duke)" +
                 "\n('list' to access list of tasks)" +
                 "\n('un/mark X' to un/mark X task on list)" +
-                "\n('todo/deadline/event' for keeping note of different tasks)", dukeImage));
+                "\n('todo/deadline/event' for keeping note of different tasks)" +
+                "\n('tagi tag' to tag ith item with tag, 'tagged desc' to view items tagged with desc and 'cleartags i' to clear" +
+                "tags for ith item", dukeImage));
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)

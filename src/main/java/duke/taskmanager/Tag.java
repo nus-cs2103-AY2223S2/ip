@@ -26,6 +26,78 @@ public class Tag {
         }
     }
 
+    public static String returnTagged(String key) {
+        String res = " ";
+        if(!uniTagsList.keySet().contains(key)) {
+            return "no such tag";
+        } else {
+            for (String t : uniTagsList.get(key)) {
+                res += t;
+                res += ", ";
+            }
+            return res;
+        }
+    }
+
+    public static void clearTags(Tasks t) {
+        for(String k: uniTagsList.keySet()) {
+            if(uniTagsList.get(k).contains(t.getDesc())) {
+                uniTagsList.get(k).remove(t.getDesc());
+            }
+            if(uniTagsList.get(k).isEmpty()) {
+                uniTagsList.remove(k);
+            }
+        }
+    }
+
+    public static void rewrite() {
+        //rewrite file when un/mark or un/mark specific line if possible
+        PrintWriter writer;
+        File file = new File(FILE_PATH);
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+        try {
+            writer = new PrintWriter("duke/bot/data/tasks.txt");
+            writer.close();
+        } catch (FileNotFoundException e) {
+            try {
+                writer = new PrintWriter(FILE_PATH);
+                writer.close();
+            } catch (FileNotFoundException IGNORED) {
+
+            }
+        }
+        Set<String> tags = uniTagsList.keySet();
+        BufferedWriter bw = null;
+        try {
+            bw = new BufferedWriter(new FileWriter("duke/bot/data/tasks.txt", true));
+        } catch (IOException e) {
+            try {
+                bw = new BufferedWriter(new FileWriter(FILE_PATH, true));
+            } catch (IOException IGNORED) {
+
+            }
+        }
+        for(String k : tags) {
+            for (String i : uniTagsList.get(k)) {
+                assert bw != null;
+                try {
+                    bw.newLine();
+                    bw.append(k + ":" + i);
+                } catch (IOException e) {
+
+                }
+            }
+            try {
+                assert bw != null;
+                bw.close();
+            } catch (NullPointerException | IOException ignored) {
+
+            }
+        }
+    }
+
     public static void save(String str, Tasks t) {
         File file = new File(FILE_PATH);
         if (!file.exists()) {
@@ -76,18 +148,7 @@ public class Tag {
     }
 
 
-    public static String returnTagged(String key) {
-        String res = " ";
-        if(!uniTagsList.keySet().contains(key)) {
-            return "no such tag";
-        } else {
-            for (String t : uniTagsList.get(key)) {
-                res += t;
-                res += ", ";
-            }
-            return res;
-        }
-     }
+
 }
 
 

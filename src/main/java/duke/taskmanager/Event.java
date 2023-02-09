@@ -1,8 +1,8 @@
 package duke.taskmanager;
 
-import duke.exceptions.emptyDescException;
-import duke.exceptions.unrecogException;
-import duke.exceptions.unspecTimeException;
+import duke.exceptions.EmptyDescException;
+import duke.exceptions.UnrecogException;
+import duke.exceptions.UnspecTimeException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -21,14 +21,14 @@ public class Event extends Tasks{
         super(str);
 
         if(!str.contains("event")) {
-            throw new unrecogException("");
+            throw new UnrecogException("");
         }
         if (str.equals("event")) {
-            throw new emptyDescException("");
+            throw new EmptyDescException("");
         }
 
         if ((super.getDesc().split("/", 2)).length == 1) {
-            throw new unspecTimeException("Please specify a timeframe (from/ ... to/ ...)");
+            throw new UnspecTimeException("Please specify a timeframe (from/ ... to/ ...)");
         }
 
         String evnt = super.getDesc().split("/", 2)[1];

@@ -1,7 +1,7 @@
 package duke.taskmanager;
 
-import duke.exceptions.emptyDescException;
-import duke.exceptions.unrecogException;
+import duke.exceptions.EmptyDescException;
+import duke.exceptions.UnrecogException;
 
 /**
  * ToDo class of parent Tasks class
@@ -14,10 +14,10 @@ public class ToDo extends Tasks {
     public ToDo(String str) throws Exception {
         super(str);
         if(!str.contains("todo")) {
-            throw new unrecogException("");
+            throw new UnrecogException("");
         }
         if (str.equals("todo")) {
-            throw new emptyDescException("");
+            throw new EmptyDescException("");
         }
         this.desc = str.split(" ", 2)[1];
     }
