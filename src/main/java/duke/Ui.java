@@ -35,4 +35,5 @@ public class Ui {
         System.out.println("Bye. Hope to see you again!");
         System.out.println("--------------------------------\n");
     }
+
 }

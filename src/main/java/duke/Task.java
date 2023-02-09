@@ -23,15 +23,6 @@ public class Task {
         this.taskType = taskType;
     }
 
-    /**
-     *Constructor for invalid input that throws general DukeException
-     *
-     * @throws DukeException
-     */
-    public Task() throws DukeException {
-        throw new DukeException();
-    }
-
     // Methods:
     public String toString() {
         if (this.isCompleted) {
@@ -40,16 +31,22 @@ public class Task {
         return "[" + taskType + "]" + " [ ] " + title;
     }
 
-    public void setCompleted(boolean setting) {
+    /**
+     *  Sets the isCompleted to be True or False
+     * @param setting boolean representing the completion status of the task
+     * @return String to inform the user that the task has been marked complete/incomplete
+     */
+    public String setCompleted(boolean setting) {
         this.isCompleted = setting;
+        String result = "";
         if (setting) {
-            System.out.println("Nice! I've marked this task as completed:");
-            System.out.println(" " + this.toString() + "\n");
+            result += "Nice! I've marked this task as completed:\n";
         }
         else {
-            System.out.println("OK, I've marked this task as incomplete:");
-            System.out.println(" " + this.toString() + "\n");
+            result += "OK, I've marked this task as incomplete:\n";
         }
+        result += " " + this.toString() + "\n";
+        return result;
     }
 
     /**

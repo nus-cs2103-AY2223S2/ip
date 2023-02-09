@@ -10,95 +10,77 @@ public class Parser {
      * @param userInput String of user input read from command line
      * @param taskList TaskList object to which tasks are added to or deleted from
      * @param fileManager Storage object that deals with loading tasks from file and saving tasks in file
+     * @return String that is Duke's response to the user's input
      */
-    public void parse(String userInput, TaskList taskList, Storage fileManager) {
-        if (!userInput.equals("list")) {
-
-            // If input = "find x" return all tasks that contain keyword: x
-            if (userInput.startsWith("find ")) {
-                String keyword = userInput.substring(5);
-                TaskList tempTaskList = taskList.findTasks(keyword);
-                System.out.println("Here are the matching tasks in your list:");
-                tempTaskList.printList();
-            }
-
-            // If input = "mark x" set task x completed? to True
-            else if (userInput.startsWith("mark ")) {
-                int taskNum = Integer.parseInt(userInput.substring(5));
-                taskList.getTask(taskNum - 1).setCompleted(true);
-            }
-
-            // If input = "unmark x" set task x completed? to False
-            else if (userInput.startsWith("unmark ")) {
-                int taskNum = Integer.parseInt(userInput.substring(7));
-                taskList.getTask(taskNum - 1).setCompleted(false);
-            }
-
-            // If input is a deadline, create deadline and add to task list
-            else if (userInput.startsWith("deadline ")) {
-                if (userInput.contains("/by ")) {
-                    Duke.addToList(new Deadline(false, userInput));
-                } else {
-                    try {
-                        Duke.throwException("deadline");
-                    } catch (DukeException de) {
-                        System.out.println(de.toString());
-                    }
-                }
-            }
-
-            // If input is an event, create event and add to task list
-            else if (userInput.startsWith("event ")) {
-                if (userInput.contains("/from ") && userInput.contains("/to ")) {
-                    Duke.addToList(new Event(false, userInput));
-                } else {
-                    try {
-                        Duke.throwException("event");
-                    } catch (DukeException de) {
-                        System.out.println(de.toString());
-                    }
-                }
-            }
-
-            // If input is a ToDos item, create ToDos item and add to task list
-            else if (userInput.startsWith("todo ")) {
-                if (userInput.length() > 5) {
-                    Duke.addToList(new Todo(false, userInput));
-                } else {
-                    try {
-                        Duke.throwException("todo");
-                    } catch (DukeException de) {
-                        System.out.println(de.toString());
-                    }
-                }
-            }
-
-            // If command is delete, then remove from task list and return deleted task
-            else if (userInput.startsWith("delete ")) {
-                // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!___________handle non-int input
+    public String parse(String userInput, TaskList taskList, Storage fileManager) {
+        String result = "";
+        String[] splitInput = userInput.split(" ");
+        switch (splitInput[0]) {
+        case "bye":
+            result += "Bye, hope to see you again soon!\nClick on the 'close window' icon to exit";
+            Ui.exit();
+            break;
+        case "list":
+            result += Duke.displayList();
+            break;
+        case "find":
+            String keyword = userInput.substring(5);
+            TaskList tempTaskList = taskList.findTasks(keyword);
+            result += "Here are the matching tasks in your list:\n";
+            result += tempTaskList.printList();
+            break;
+        case "mark":
+            int markTaskNum = Integer.parseInt(userInput.substring(5));
+            result += taskList.getTask(markTaskNum - 1).setCompleted(true);
+            break;
+        case "unmark":
+            int unmarkTaskNum = Integer.parseInt(userInput.substring(7));
+            result += taskList.getTask(unmarkTaskNum - 1).setCompleted(false);
+            break;
+        case "deadline":
+            if (userInput.contains("/by ")) {
+                result += Duke.addToList(new Deadline(false, userInput));
+            } else {
                 try {
-                    int num = Integer.parseInt(userInput.substring(7));
-                    Duke.removeFromList(num);
-                } catch (NumberFormatException ex) {
-                    ex.printStackTrace();
+                    throw new DukeException("deadline");
+                } catch (DukeException de) {
+                    result += de.toString();
                 }
-
             }
-
-            // Else create and add task to list
-            else {
+            break;
+        case "event":
+            if (userInput.contains("/from ") && userInput.contains("/to ")) {
+                result += Duke.addToList(new Event(false, userInput));
+            } else {
                 try {
-                    Duke.addToList(new Task());
-                }
-                catch (DukeException de){
-                    System.out.println(de.toString());
+                    throw new DukeException("event");
+                } catch (DukeException de) {
+                    result += de.toString();
                 }
             }
-            // Insert call on method that writes curr version of taskList to data/duke.txt
-            fileManager.writeToFile(taskList);
+            break;
+        case "todo":
+            if (userInput.length() > 5) {
+                result += Duke.addToList(new Todo(false, userInput));
+            } else {
+                try {
+                    throw new DukeException("todo");
+                } catch (DukeException de) {
+                    result += de.toString();
+                }
+            }
+            break;
+        case "delete":
+            try {
+                int num = Integer.parseInt(userInput.substring(7));
+                result += Duke.removeFromList(num);
+            } catch (NumberFormatException ex) { // To handle non-int input
+                ex.printStackTrace();
+            }
+            break;
         }
-        else {
-            Duke.displayList();
-        }
+        fileManager.writeToFile(taskList);
+        return result;
     }
+
 }

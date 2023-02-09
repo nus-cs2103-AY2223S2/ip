@@ -1,63 +1,171 @@
 package duke;
 
 import java.util.Scanner;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import javafx.scene.layout.Region;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 
 /**
  * Class that defines the Duke task list manager
  */
-public class Duke {
+public class Duke extends Application {
 
-    /** Array of tasks */
-    private static TaskList taskList = new TaskList();
-    /** Number of tasks in list */
-    private static int listIndex = 0;
+    private static Storage fileManager = new Storage();
+    private static Parser parser = new Parser();
+    private static TaskList taskList = fileManager.read();
+    private ScrollPane scrollPane;
+    private VBox dialogContainer;
+    private TextField userInput;
+    private Button sendButton;
+    private Scene scene;
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/user_img.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/Duke_img.png"));
+
+    @Override
+    public void start(Stage stage) {
+        //Step 1. Setting up required components
+
+        //The container for the content of the chat to scroll.
+        scrollPane = new ScrollPane();
+        dialogContainer = new VBox();
+        scrollPane.setContent(dialogContainer);
+
+        userInput = new TextField();
+        sendButton = new Button("Send");
+
+        AnchorPane mainLayout = new AnchorPane();
+        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
+
+        scene = new Scene(mainLayout);
+
+        stage.setScene(scene);
+        stage.show();
+
+        //Step 2. Formatting the window to look as expected
+        stage.setTitle("Duke");
+        stage.setResizable(false);
+        stage.setMinHeight(600.0);
+        stage.setMinWidth(400.0);
+
+        mainLayout.setPrefSize(400.0, 600.0);
+
+        scrollPane.setPrefSize(385, 535);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+
+        scrollPane.setVvalue(1.0);
+        scrollPane.setFitToWidth(true);
+
+        // You will need to import `javafx.scene.layout.Region` for this.
+        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+
+        userInput.setPrefWidth(325.0);
+
+        sendButton.setPrefWidth(55.0);
+
+        AnchorPane.setTopAnchor(scrollPane, 1.0);
+
+        AnchorPane.setBottomAnchor(sendButton, 1.0);
+        AnchorPane.setRightAnchor(sendButton, 1.0);
+
+        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setBottomAnchor(userInput, 1.0);
+
+        //Step 3. Add functionality to handle user input.
+        sendButton.setOnMouseClicked((event) -> {
+            handleUserInput();
+        });
+
+        userInput.setOnAction((event) -> {
+            handleUserInput();
+        });
+
+    }
+
+    /**
+     * Iteration 1:
+     * Creates a label with the specified text and adds it to the dialog container.
+     * @param text String containing text to add
+     * @return a label with the specified text that has word wrap enabled.
+     */
+    private Label getDialogLabel(String text) {
+        // You will need to import `javafx.scene.control.Label`.
+        Label textToAdd = new Label(text);
+        textToAdd.setWrapText(true);
+
+        return textToAdd;
+    }
+
+    /**
+     * Iteration 2:
+     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * the dialog container. Clears the user input after processing.
+     */
+    private void handleUserInput() {
+        Label userText = new Label(userInput.getText());
+        Label dukeText = new Label(getResponse(userInput.getText()));
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(userText, new ImageView(user)),
+                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+        );
+        userInput.clear();
+    }
+
+    /**
+     *  Returns a response based on the user's input
+     * @param input The user's input
+     * @return String that is Duke's response based on the user's input
+     */
+    private String getResponse(String input) {
+        return parser.parse(input, taskList, fileManager);
+    }
 
     /**
      * Adds a task to the taskList.
      *
      * @param listItem Task to be added to taskList
+     * @return String to inform the user that the specified task has been added to the taskList
      */
-    public static void addToList(Task listItem) {
+    public static String addToList(Task listItem) {
         taskList.addTask(listItem);
-        listIndex++;
-        System.out.println("> Duke's response:");
-        System.out.println("I've added the following task to your list:");
-        System.out.println(listItem.toString());
-        System.out.println("Current tasks count: " + (listIndex));
-        System.out.println("--------------------------------\n");
+        String result = "> Duke's response:\n" + "I've added the following task to your list:\n";
+        result += listItem.toString() + "\nCurrent tasks count: " + (taskList.size()) +
+                "\n--------------------------------\n";
+        return result;
     }
 
     /**
      * Removes the task at a specified position in taskList
      *
      * @param pos Position in taskList at which the task to be removed is stored
+     * @return String to inform the user that the specified task has been removed from the taskList
      */
-    public static void removeFromList(int pos) {
+    public static String removeFromList(int pos) {
         Task curr = taskList.deleteTask(pos - 1);
-        listIndex--;
-        System.out.println("> Duke's response:");
-        System.out.println("I've removed the following task from your list:");
-        System.out.println(curr.toString());
-        System.out.println("Current tasks count: " + (listIndex));
-        System.out.println("--------------------------------\n");
+        String result = "> Duke's response:\n" + "I've removed the following task from your list:\n";
+        result += curr.toString() + "\nCurrent tasks count: " + (taskList.size()) +
+                "\n--------------------------------\n";
+        return result;
     }
 
     /**
      * Prints the contents of the taskList
-     */
-    public static void displayList() {
-        System.out.println("Here are the tasks in your list:");
-        taskList.printList();
-    }
-
-    /**
-     * Throws an exception
      *
-     * @param exceptionType Describes the type of DukeException to be thrown
-     * @throws DukeException If input is invalid
+     * @return String listing the tasks in taskList
      */
-    public static void throwException(String exceptionType) throws DukeException {
-        throw new DukeException(exceptionType);
+    public static String displayList() {
+        return "Here are the tasks in your list:\n" + taskList.printList();
     }
 
     /**
@@ -66,22 +174,18 @@ public class Duke {
      * @param args Commands from user, to interact with taskList
      */
     public static void main(String[] args) {
-        Storage fileManager = new Storage();
-        Parser parser = new Parser();
         Scanner sc = new Scanner(System.in);
 
-        taskList = fileManager.read();
-        listIndex = taskList.size();
         Ui.greet();
 
         String userInput =  sc.nextLine();
         String exitCommand = "bye";
 
         while (!userInput.equals(exitCommand)) {
-            parser.parse(userInput, taskList, fileManager);
+            System.out.println(parser.parse(userInput, taskList, fileManager));
             userInput = sc.nextLine();
         }
         Ui.exit();
-
+        System.exit(0);
     }
 }

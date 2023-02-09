@@ -33,7 +33,7 @@ public class TaskList {
      * @return deleted Task
      */
     public Task deleteTask(int taskPosition) {
-        return this.taskList.remove(taskPosition - 1);
+        return this.taskList.remove(taskPosition);
     }
 
     /**
@@ -71,13 +71,15 @@ public class TaskList {
 
     /**
      * Prints the tasks in taskList in an indexed manner
+     * @return String that describes the tasks in the taskList and their completion status
      */
-    public void printList() {
+    public String printList() {
         int pos = 0;
+        StringBuilder result = new StringBuilder();
         while (pos < this.taskList.size()) {
-            System.out.println((pos + 1) + ". " + this.taskList.get(pos).toString());
+            result.append(pos + 1).append(". ").append(this.taskList.get(pos).toString()).append("\n");
             pos++;
         }
-        System.out.println("End of list!\n");
+        return result.append("End of list!\n").toString();
     }
 }
