@@ -1,0 +1,4 @@
+todo bake cake
+deadline do homework /by Monday 5pm
+event fireworks day /from Friday 4pm /to Wednesday 3pm
+bye
