@@ -56,7 +56,7 @@ public class Duke<Ui> {
           + "| |_| | |_| |   <  __/\n"
           + "|____/ \\__,_|_|\\_\\___|\n";
       String sayHi = "Hello from\n" + logo +
-          "\nHello! I'm OriginalDuke.Duke\n What can I do for you?";
+          "\nHello! I'm Duke\n What can I do for you?";
       System.out.println(sayHi);
   }
 }
