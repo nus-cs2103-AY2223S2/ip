@@ -19,14 +19,22 @@ public class ToDoList {
     /**
      * Lists all tasks.
      */
-    public void list() {
-        System.out.println("\tTasks for Tony Stark:");
-        System.out.println("\t--------------------------");
+    public String list() {
+        String res = "\tTasks for Tony Stark:\n";
+        res += "\t--------------------------\n";
+        //System.out.println("\tTasks for Tony Stark:");
+        //System.out.println("\t--------------------------");
         for (int i = 0; i < count; i++) {
+            /*
             System.out.println("\t" + (i + 1) + "."
                     + todolist.get(i).printTask());
+            */
+            String temp = "\t" + (i + 1) + todolist.get(i).printTask() + "\n";
+            res += temp;
         }
-        System.out.println("\t--------------------------");
+        res += "\t--------------------------\n";
+        //System.out.println("\t--------------------------");
+        return res;
     }
 
     /**

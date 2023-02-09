@@ -19,7 +19,7 @@ public class Parser {
      * @param storage the storage associated with the current ToDoList
      * @return isBye boolean indicated the ending 'bye' command
      */
-    public boolean parse(String command, ToDoList todolist, Storage storage) {
+    public String parse(String command, ToDoList todolist, Storage storage) {
 
         if (command.equals("bye")) {
             try {
@@ -28,10 +28,10 @@ public class Parser {
                 System.out.println(e);
             }
             System.out.println("\tHave a nice day sir.");
-            return true;
+            return "bye!";
 
         } else if (command.equals("list")) {
-            todolist.list();
+            return todolist.list();
         } else if (command.matches("mark(.*)")) {
             try {
                 int spacer = command.indexOf(" ");
@@ -43,7 +43,7 @@ public class Parser {
             } catch (NoTaskFoundException e) {
                 System.out.println("Sir, that task does not exist.");
             }
-
+            return todolist.list();
         } else if (command.matches("unmark(.*)")) {
             try {
                 int spacer = command.indexOf(" ");
@@ -55,7 +55,7 @@ public class Parser {
             } catch (NoTaskFoundException e) {
                 System.out.println("Sir, that task does not exist.");
             }
-
+            return todolist.list();
         } else if (command.matches("find(.*)")) {
             int spacer = command.indexOf(" ");
             String task = command.substring(spacer + 1);
@@ -72,7 +72,7 @@ public class Parser {
             } catch (JarvisException e) {
                 System.out.println("\tPlease enter in format 'todo <task>'");
             }
-
+            return todolist.list();
         } else if (command.matches("deadline(.*)")) {
 
             // check format
@@ -91,7 +91,7 @@ public class Parser {
                     System.out.println("Input date format 'event <task> /<YYYY-MM-DD>'");
                 }
             }
-
+            return todolist.list();
         } else if (command.matches("event(.*)")) {
             int firstSlash = command.indexOf("/");
 
@@ -113,7 +113,7 @@ public class Parser {
                     System.out.println("Input date format 'event <task> /<YYYY-MM-DD>/<YYYY-MM-DD>'");
                 }
             }
-
+            return todolist.list();
         } else if (command.matches("delete(.*)")) {
             try {
                 int spacer = command.indexOf(" ");
@@ -121,16 +121,18 @@ public class Parser {
                 validateTask(todolist, taskNum);
                 todolist.delete(taskNum);
             } catch (NumberFormatException e) {
-                System.out.println("Which task would you like to delete, sir?");
+                return "Which task would you like to delete, sir?";
+                //System.out.println("Which task would you like to delete, sir?");
             } catch (NoTaskFoundException e) {
-                System.out.println("Sir, you may not delete nonexistent tasks.");
+                return "Sir, you may not delete nonexistent tasks.";
+                //System.out.println("Sir, you may not delete nonexistent tasks.");
             }
-
+            return todolist.list();
         } else {
-            System.out.println("I do not know that command, sir.");
-            System.out.println("Perhaps you can add that functionality for J.A.R.V.I.S(v2.0).");
+            return ("I do not know that command, sir.");
+            //System.out.println("Perhaps you can add that functionality for J.A.R.V.I.S(v2.0).");
         }
-        return false;
+        return ("I do not know that command, sir.");
     }
 
     /**
