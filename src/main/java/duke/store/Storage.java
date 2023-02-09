@@ -48,7 +48,6 @@ public class Storage {
     /**
      * Saves all the tasks in the duke.task.TaskList objects by writing it into the savePath directory.
      *
-     * @param tasks is a duke.task.TaskList object.
      * @throws IOException if the directory is invalid.
      */
     public static void autoSave(TaskList tasks) throws IOException {
@@ -78,7 +77,7 @@ public class Storage {
      */
     private static String readerFriendly(Task task) {
         String status = task.getStatus()
-            ? "    ๑(◕‿◕)๑ COMPLETED! ๑(◕‿◕)๑    " : "    (｡-_-｡ ) INCOMPLETE ( ｡-_-｡)    git ";
+            ? "    ๑(◕‿◕)๑ COMPLETED! ๑(◕‿◕)๑    " : "    (｡-_-｡ ) INCOMPLETE ( ｡-_-｡)    ";
         if (task instanceof Todo) {
             Todo t = (Todo) task;
             return "Todo: " + t.getDescription() + " " + status;

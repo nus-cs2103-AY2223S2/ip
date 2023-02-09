@@ -7,11 +7,12 @@ package duke.ui;
  */
 public class Ui {
     private final String LINE = "____________________________________________________________";
-    private final String LOGO = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
+    private final String LOGO = "\n"
+            + "     _               _       \n"
+            + "  _ | | __ _  _ __  (_) ___  \n"
+            + " | || |/ _` || '  \\ | |/ -_) \n"
+            + "  \\__/ \\__,_||_|_|_||_|\\___| \n"
+            + "                             \n";
 
     /**
      * Prints a line separator.
@@ -27,7 +28,7 @@ public class Ui {
         line();
         System.out.println("Hello from\n" + LOGO);
         line();
-        System.out.println("Hello! I'm duke.main.Duke");
+        System.out.println("Hello! I'm Jamie");
         System.out.println("What can I do for you?");
         line();
     }
@@ -36,7 +37,7 @@ public class Ui {
      * Prints an exit message to the user.
      */
     public void farewell() {
-        System.out.println("Bye. Hope to see you again soon!");
+        System.out.println("Bye. Hope to se:e you again soon!");
         line();
     }
 
@@ -50,5 +51,4 @@ public class Ui {
     public void somethingWentWrong() {
         System.out.println("Invalid response. Please try: todo, deadline or event. :)");
     }
-
 }
