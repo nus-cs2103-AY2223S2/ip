@@ -11,6 +11,7 @@ import java.nio.file.Paths;
 
 public class Storage {
 
+    private static final String FILEPATH_DIRECTORY = "data/";
     private String filePath;
 
     public Storage(String filePath) {
@@ -21,9 +22,10 @@ public class Storage {
         TaskList taskList = new TaskList();
 
         try (BufferedReader br = new BufferedReader(new FileReader(this.filePath))) {
-            String line = null;
-            while ((line = br.readLine()) != null) {
+            String line = br.readLine();
+            while (line != null) {
                 taskList.add(Task.parseTaskFromDB(line));
+                line = br.readLine();
             }
         } catch (FileNotFoundException ex) {
             throw new DukeException(ERROR.CORRUPTED_TASK_DATA.getMessage());
@@ -37,7 +39,7 @@ public class Storage {
     public boolean save(TaskList list) {
         try {
             // Create data dir if it doesn't exist
-            Files.createDirectories(Paths.get("data/"));
+            Files.createDirectories(Paths.get(FILEPATH_DIRECTORY));
 
             PrintWriter pw = new PrintWriter(this.filePath);
             for (Task task: list) {
@@ -45,6 +47,7 @@ public class Storage {
             }
             pw.close();
             return true;
+
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
         } catch (IOException ex) {

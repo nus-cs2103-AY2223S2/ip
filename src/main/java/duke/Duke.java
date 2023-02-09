@@ -5,22 +5,22 @@ import duke.task.TaskList;
 import duke.util.Command;
 import duke.util.Parser;
 import duke.util.Storage;
-import duke.util.UI;
 
 public class Duke {
-    private UI ui;
+
     private Storage storage;
-    private static TaskList taskList;
+    private boolean isTaskListLoaded;
+    private TaskList taskList;
 
 
     public Duke(String filePath) {
-        ui = new UI();
         storage = new Storage(filePath);
         try {
             taskList = new TaskList(storage.load());
+            isTaskListLoaded = true;
         } catch (DukeException e) {
-            ui.showLoadingError();
             taskList = new TaskList();
+            isTaskListLoaded = false;
         }
     }
 
@@ -29,11 +29,15 @@ public class Duke {
         assert c != null;
         String response = "";
         try {
-            response = c.execute(taskList, ui, storage);
+            response = c.execute(taskList, storage);
         } catch (DukeException e) {
             return e.getMessage();
         }
         return response;
+    }
+
+    public boolean getLoadedStatus() {
+        return isTaskListLoaded;
     }
 
 }

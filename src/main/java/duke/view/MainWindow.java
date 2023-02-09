@@ -29,6 +29,9 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/userIcon.jpg")));
     private Image dukeImage = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/dukeIcon.jpg")));
 
+    private static final String WELCOME_MESSAGE = "Hello I'm Duke, your personal task manager!";
+    private static final String LOADING_ERROR_MESSAGE = "Unable to load tasks from database!";
+
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -51,5 +54,19 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+    }
+
+    @FXML
+    public void showWelcomeMessage() {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(WELCOME_MESSAGE, dukeImage)
+        );
+    }
+
+    @FXML
+    public void showLoadingErrorMessage() {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(LOADING_ERROR_MESSAGE, dukeImage)
+        );
     }
 }
