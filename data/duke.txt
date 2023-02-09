@@ -1,2 +1,4 @@
 T |   | Read Book 1
 D |   | Borrow Money | 2022-12-03 0000
+T |   | Borrow Money
+E |   | Career Fair | 2023-03-02 1000 | 2023-03-03 1000
