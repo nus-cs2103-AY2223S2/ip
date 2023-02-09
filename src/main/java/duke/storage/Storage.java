@@ -38,7 +38,7 @@ public class Storage {
         try {
             FileOutputStream fos = new FileOutputStream(this.filePath);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
-            for (int i = 0; i < taskList.size(); i++) {
+            for (int i = 0; i < taskList.getSize(); i++) {
                 oos.writeObject(taskList.get(i));
             }
             oos.close();

@@ -59,7 +59,7 @@ public class TaskList implements Serializable {
      *
      * @return The size of the tasks list.
      */
-    public int size() {
+    public int getSize() {
         return this.tasks.size();
     }
 

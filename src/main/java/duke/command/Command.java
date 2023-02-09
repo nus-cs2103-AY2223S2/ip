@@ -107,7 +107,7 @@ public class Command {
 
         case LIST:
             StringBuilder listOfTasks = new StringBuilder("Here are your tasks: \n");
-            for (int i = 0; i < tasks.size(); i++) {
+            for (int i = 0; i < tasks.getSize(); i++) {
                 listOfTasks.append(i + 1).append(". ").append(tasks.get(i)).append("\n");
             }
             return listOfTasks.toString();
@@ -135,19 +135,19 @@ public class Command {
             tasks.delete(index);
             storage.saveTasks(tasks);
             return "Noted. I've removed this task: \n" + task +
-                    "\nNow you have " + tasks.size() + " tasks in the list.";
+                    "\nNow you have " + tasks.getSize() + " tasks in the list.";
 
         case TODO:
             Todo todo = new Todo(taskName);
             tasks.add(todo);
             storage.saveTasks(tasks);
             return "Got it. I've added this task: \n" + todo +
-                    "\nNow you have " + tasks.size() + " tasks in the list.";
+                    "\nNow you have " + tasks.getSize() + " tasks in the list.";
 
         case FIND:
             int counter = 0;
             StringBuilder matchingTasks = new StringBuilder("Here are the matching tasks in your list:");
-            for (int i = 0; i < tasks.size(); i++) {
+            for (int i = 0; i < tasks.getSize(); i++) {
                 Task findTask = tasks.get(i);
                 if (findTask.contains(taskName)) {
                     counter++;
@@ -161,14 +161,14 @@ public class Command {
             tasks.add(deadline);
             storage.saveTasks(tasks);
             return "Got it. I've added this task: \n" + deadline +
-                    "\nNow you have " + tasks.size() + " tasks in the list.";
+                    "\nNow you have " + tasks.getSize() + " tasks in the list.";
 
         case EVENT:
             Event event = new Event(taskName, from, to);
             tasks.add(event);
             storage.saveTasks(tasks);
             return "Got it. I've added this task: " + event +
-                    "\now you have " + tasks.size() + " tasks in the list.";
+                    "\now you have " + tasks.getSize() + " tasks in the list.";
 
         default:
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");

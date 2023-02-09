@@ -7,7 +7,7 @@ import java.io.Serializable;
  */
 public class Task implements Serializable {
     private String taskName;
-    private boolean done;
+    private boolean isDone;
 
     /**
      * Constructor for Task object.
@@ -16,21 +16,21 @@ public class Task implements Serializable {
      */
     public Task(String taskName) {
         this.taskName = taskName;
-        this.done = false;
+        this.isDone = false;
     }
 
     /**
      * Mark the task as done.
      */
     public void mark() {
-        this.done = true;
+        this.isDone = true;
     }
 
     /**
      * Unmark the task as not done.
      */
     public void unmark() {
-        this.done = false;
+        this.isDone = false;
     }
 
     /**
@@ -49,7 +49,7 @@ public class Task implements Serializable {
      */
     @Override
     public String toString() {
-        if (this.done) {
+        if (this.isDone) {
             return "[X] " + this.taskName;
         } else {
             return "[ ] " + this.taskName;
