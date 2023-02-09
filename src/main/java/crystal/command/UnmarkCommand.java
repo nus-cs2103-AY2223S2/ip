@@ -1,16 +1,17 @@
 package crystal.command;
 
+import crystal.Storage;
 import crystal.TaskList;
 import crystal.Ui;
-import crystal.Storage;
+
 
 /**
  * Represents the unmark command when the user enters "unmark".
  *
  */
-public class UnmarkCommand extends Command{
+public class UnmarkCommand extends Command {
 
-    public int num;
+    private int num;
 
     /**
      * Constructor for UnmarkCommand class.
@@ -31,7 +32,7 @@ public class UnmarkCommand extends Command{
      * @param storage storage.
      *
      */
-    public String execute(TaskList tasks, Ui ui,Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         storage.saveFile(tasks);
         return ui.printUnmark(tasks, this.num);
     }

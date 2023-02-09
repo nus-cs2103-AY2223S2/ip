@@ -1,19 +1,19 @@
 package crystal.command;
 
 import crystal.CrystalException;
+import crystal.Storage;
 import crystal.TaskList;
 import crystal.Ui;
-import crystal.Storage;
 import crystal.task.Event;
 
 /**
  * Represents the event command when the user enters "event".
  *
  */
-public class EventCommand extends Command{
-    public String from;
-    public String to;
-    public String description;
+public class EventCommand extends Command {
+    private String from;
+    private String to;
+    private String description;
 
     /**
      * Constructor for EventCommand class.
@@ -37,7 +37,7 @@ public class EventCommand extends Command{
      * @param storage storage.
      *
      */
-    public String execute(TaskList tasks, Ui ui,Storage storage) throws CrystalException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws CrystalException {
         Event event = new Event(description, from, to);
         tasks.add(event);
         storage.saveFile(tasks);

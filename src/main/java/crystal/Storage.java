@@ -4,14 +4,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-
-import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Scanner;
 
-import crystal.task.Task;
-import crystal.task.Todo;
 import crystal.task.Deadline;
 import crystal.task.Event;
+import crystal.task.Task;
+import crystal.task.Todo;
+
 
 /**
  * Represents the Storage task.
@@ -19,7 +19,7 @@ import crystal.task.Event;
  */
 
 public class Storage {
-    String filepath;
+    private String filepath;
 
     /**
      * Constructor for Storage class.
@@ -40,7 +40,7 @@ public class Storage {
      *
      */
     //Save to file
-    public void writeToFile(String filepath,String textToAdd) throws IOException {
+    public void writeToFile(String filepath, String textToAdd) throws IOException {
         FileWriter fw = new FileWriter(filepath);
         fw.write(textToAdd);
         fw.close();
@@ -113,7 +113,7 @@ public class Storage {
      *
      */
     //Load file
-    public ArrayList<Task> readFileContents() throws CrystalException{
+    public ArrayList<Task> readFileContents() throws CrystalException {
 
         File file = new File(this.filepath); // create a File for the given file path
         ArrayList<Task> temp = new ArrayList<Task>();
@@ -125,12 +125,12 @@ public class Storage {
                     if (nextInput.contains("| 0 |")) {
                         String description = nextInput.replace("T | 0 |", "");
                         Task newTask = new Todo(description.trim());
-                        newTask.isDone = true;
+                        newTask.setIsDone(true);
                         temp.add(newTask);
                     } else {
                         String description = nextInput.replace("T | 1 |", "");
                         Task newTask = new Todo(description.trim());
-                        newTask.isDone = false;
+                        newTask.setIsDone(false);
                         temp.add(newTask);
                     }
 
@@ -142,7 +142,7 @@ public class Storage {
                         description = description.replace(description.substring(index), "");
                         try {
                             Task newTask = new Deadline(description.trim(), time.trim());
-                            newTask.isDone = true;
+                            newTask.setIsDone(true);
                             temp.add(newTask);
                         } catch (CrystalException e) {
                             System.out.println("Wrong date format! Please change!");
@@ -155,7 +155,7 @@ public class Storage {
                         description = description.replace(description.substring(index), "");
                         try {
                             Task newTask = new Deadline(description.trim(), time.trim());
-                            newTask.isDone = false;
+                            newTask.setIsDone(false);
                             temp.add(newTask);
                         } catch (CrystalException e) {
                             System.out.println("Wrong date format! Please change!");
@@ -173,7 +173,7 @@ public class Storage {
                         String endTime = description.substring(description.lastIndexOf(" - ") + 3);
                         description = description.replace(description.substring(index), "");
                         Task newTask = new Event(description.trim(), time.trim(), endTime.trim());
-                        newTask.isDone = true;
+                        newTask.setIsDone(true);
                         temp.add(newTask);
                     } else {
                         String description = nextInput.replace("E | 1 |", "");
@@ -185,7 +185,7 @@ public class Storage {
                         String endTime = description.substring(description.lastIndexOf(" - ") + 3);
                         description = description.replace(description.substring(index), "");
                         Task newTask = new Event(description.trim(), time.trim(), endTime.trim());
-                        newTask.isDone = false;
+                        newTask.setIsDone(false);
                         temp.add(newTask);
                     }
                 }
