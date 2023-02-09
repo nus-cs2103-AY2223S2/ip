@@ -74,6 +74,7 @@ public class Task {
      */
     public String formatForStorage() {
         String status = this.isDone ? "1" : "0";
+        assert status == "1" || status == "0" : "Status not set properly.";
         return (String.format("%s | %s", status, this.name));
     }
 
