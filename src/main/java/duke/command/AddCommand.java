@@ -11,11 +11,11 @@ import duke.task.Task;
  * Represents the command to add Todo, Deadline and Event tasks.
  */
 public class AddCommand extends Command {
-    private Task t;
+    private Task task;
 
-    public AddCommand(Task t) {
+    public AddCommand(Task task) {
         super();
-        this.t = t;
+        this.task = task;
     }
 
     /**
@@ -30,9 +30,9 @@ public class AddCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
-        tasks.add(this.t);
+        tasks.add(this.task);
         String msg = "Ok, I've added this task: \n";
-        msg += t.toString();
+        msg += task.toString();
         msg += "\n";
         msg += String.format("You now have %d task(s) in your list! \n", tasks.size());
         storage.saveTasks(tasks.getTasks());

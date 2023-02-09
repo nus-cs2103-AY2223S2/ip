@@ -35,15 +35,15 @@ public class DeleteCommand extends Command {
         if (taskIndex >= tasks.size()) {
             String errorMessage = String.format("Task %d does not exist!", taskIndex + 1);
             throw new DukeException(errorMessage);
-        } else {
-            Task task = tasks.get(this.taskIndex);
-            String msg = "Ok, I've deleted the following task for you: \n";
-            msg += task.toString();
-            msg += "\n";
-            tasks.remove(this.taskIndex);
-            msg += String.format("You now have %d task(s) in your list! \n", tasks.size());
-            storage.saveTasks(tasks.getTasks());
-            return msg;
         }
+
+        Task task = tasks.get(this.taskIndex);
+        String msg = "Ok, I've deleted the following task for you: \n";
+        msg += task.toString();
+        msg += "\n";
+        tasks.remove(this.taskIndex);
+        msg += String.format("You now have %d task(s) in your list! \n", tasks.size());
+        storage.saveTasks(tasks.getTasks());
+        return msg;
     }
 }

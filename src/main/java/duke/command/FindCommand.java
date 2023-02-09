@@ -28,10 +28,10 @@ public class FindCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         TaskList matchingTasks = new TaskList();
         for (int i = 0; i < tasks.size(); i++) {
-            Task t = tasks.get(i);
-            boolean hasKeyword = t.toString().contains(this.keyword);
+            Task task = tasks.get(i);
+            boolean hasKeyword = task.toString().contains(this.keyword);
             if (hasKeyword) {
-                matchingTasks.add(t);
+                matchingTasks.add(task);
             }
         }
 

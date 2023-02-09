@@ -38,20 +38,20 @@ public class MarkCommand extends Command {
         if (taskIndex >= tasks.size()) {
             String errorMessage = String.format("Task %d does not exist!", taskIndex + 1);
             throw new DukeException(errorMessage);
-        } else {
-            Task t = tasks.get(taskIndex);
-            String msg;
-            if (isMark) {
-                t.mark();
-                msg = "Congratulations for completing the task ^^ I've marked it as done: \n";
-            } else {
-                t.unmark();
-                msg = "Ok, I've unmarked the task for you: \n";
-            }
-            storage.saveTasks(tasks.getTasks());
-            msg += t.toString();
-            msg += "\n";
-            return msg;
         }
+
+        Task task = tasks.get(taskIndex);
+        String msg;
+        if (isMark) {
+            task.mark();
+            msg = "Congratulations for completing the task ^^ I've marked it as done: \n";
+        } else {
+            task.unmark();
+            msg = "Ok, I've unmarked the task for you: \n";
+        }
+        storage.saveTasks(tasks.getTasks());
+        msg += task.toString();
+        msg += "\n";
+        return msg;
     }
 }
