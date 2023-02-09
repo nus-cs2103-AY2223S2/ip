@@ -9,7 +9,6 @@ import util.TaskList;
  * @author Merrick
  */
 public class ToDo extends Task {
-
     /**
      * Constructor for ToDo
      * @param taskName Description of ToDo task.
@@ -26,7 +25,6 @@ public class ToDo extends Task {
     public ToDo(String taskName, boolean isCompleted) {
         super(taskName, isCompleted);
     }
-
 
     /**
      * Creates a ToDo Task from user input.
@@ -54,5 +52,4 @@ public class ToDo extends Task {
     public String toString() {
         return String.format("%s", super.toString());
     }
-
 }

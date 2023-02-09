@@ -10,26 +10,25 @@ import java.time.LocalDateTime;
 
 
 /**
- * Subclass of Task which has a start and end datetime.
+ * Subclass of Task which has a start and deadline datetime.
  *
  * @author Merrick
  */
 public class Event extends Task {
     protected LocalDateTime start;
-    protected LocalDateTime end;
 
     /**
      * Constructor of Event.
      * @param taskName Description of Event Task.
      * @param start Start datetime for the Event.
-     * @param end End datetime for the Event.
+     * @param deadline End datetime for the Event.
      */
-    public Event(String taskName, LocalDateTime start, LocalDateTime end) {
+    public Event(String taskName, LocalDateTime start, LocalDateTime deadline) {
         super(taskName);
         assert start != null : "Start Time is not valid";
-        assert end != null : "End Time is not valid";
+        assert deadline != null : "End Time is not valid";
         this.start = start;
-        this.end = end;
+        this.deadline = deadline;
         this.taskType = "E";
     }
 
@@ -37,13 +36,13 @@ public class Event extends Task {
      * Constructor of Event.
      * @param taskName Description of Event Task.
      * @param start Start datetime for the Event.
-     * @param end End datetime for the Event.
+     * @param deadline End datetime for the Event.
      * @param isCompleted Completion status for the Event.
      */
-    public Event(String taskName, LocalDateTime start, LocalDateTime end, boolean isCompleted) {
+    public Event(String taskName, LocalDateTime start, LocalDateTime deadline, boolean isCompleted) {
         super(taskName, isCompleted);
         this.start = start;
-        this.end = end;
+        this.deadline = deadline;
         this.taskType = "E";
     }
 
@@ -62,7 +61,7 @@ public class Event extends Task {
         int toIndex = input.indexOf("/to");
         StringBuilder taskName = new StringBuilder();
         String start = "";
-        StringBuilder end = new StringBuilder();
+        StringBuilder deadline = new StringBuilder();
         for (int i = 1; i < input.size(); i++) {
             if (i < fromIndex) {
                 taskName.append(input.get(i));
@@ -75,25 +74,38 @@ public class Event extends Task {
                     start += " ";
                 }
             } else if (i > toIndex) {
-                end.append(input.get(i));
+                deadline.append(input.get(i));
                 if (i < input.size() - 1) {
-                    end.append(" ");
+                    deadline.append(" ");
                 }
             }
         }
         Event e = new Event(taskName.toString(), DateTimeParser.dateTimeParser(start.stripTrailing()),
-                DateTimeParser.dateTimeParser(end.toString()));
+                DateTimeParser.dateTimeParser(deadline.toString()));
         return t.addTask(e);
     }
 
     @Override
     public String saveTaskString() {
-        return String.format(super.saveTaskString() + "|%s|%s", this.start, this.end);
+        return String.format(super.saveTaskString() + "|%s|%s", this.start, this.deadline);
     }
 
     @Override
     public String toString() {
         return String.format("%s (from: %s to: %s)", super.toString(),
-                DateTimeParser.datetimeFormatter(this.start), DateTimeParser.datetimeFormatter(this.end));
+                DateTimeParser.datetimeFormatter(this.start), DateTimeParser.datetimeFormatter(this.deadline));
+    }
+
+    @Override
+    public String snoozeDeadline(int days, int hours, int minutes) {
+        this.deadline = this.deadline.plusDays(days);
+        this.deadline = this.deadline.plusHours(hours);
+        this.deadline = this.deadline.plusMinutes(minutes);
+        return String.format("New deadline is %s!", DateTimeParser.datetimeFormatter(this.deadline));
+    }
+
+    @Override
+    public String snoozeDeadline() {
+        return this.snoozeDeadline(0, 0, 5);
     }
 }

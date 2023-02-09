@@ -9,7 +9,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-
+import java.util.Arrays;
 
 
 /**
@@ -54,7 +54,7 @@ public class TaskList {
      */
     public String listTasks() {
         StringBuilder sb = new StringBuilder();
-        sb.append("    Here are the tasks in your list:");
+        sb.append("Here are the tasks in your list:\n");
         int counter = 1;
         for (Task t : taskList) {
             sb.append(counter + ". " + t.toString() + "\n");
@@ -71,7 +71,6 @@ public class TaskList {
      * @param command Keyword to check with the tasks in the TaskList.
      */
     public String findTasks(String command) {
-        System.out.println("  Here are the matching tasks in your list:");
         String[] keyword = command.split(" ");
         StringBuilder sb = new StringBuilder();
         int counter = 1;
@@ -79,15 +78,56 @@ public class TaskList {
             // Iterate through the ArrayList to find if a Task matches
             if (t.containsKeyword(keyword[1])) {
                 if (counter == taskList.size()) {
-                    sb.append(counter + ". " + t.toString());
+                    sb.append(counter + ". " + t);
                     break;
                 }
-                sb.append(counter + ". " + t.toString() + "\n");
+                sb.append(counter + ". " + t + "\n");
                 counter++;
             }
         }
-        return sb.toString();
+        return "Here are the matching tasks in your list:\n" + sb.toString();
     }
+
+    public String snoozeTask(String command) throws DukeException {
+        // "snooze 1 /day 10 /hour 10 /minutes 20"
+        ArrayList<String> input = new ArrayList<>(Arrays.asList(command.split(" ")));
+        int dayIndex = input.indexOf("/day");
+        int hourIndex = input.indexOf("/hour");
+        int minutesIndex = input.indexOf("/minutes");
+
+        if (dayIndex == -1 || hourIndex == -1 || minutesIndex == -1) {
+            throw new DukeException("Invalid Input!\n" + "Usage should be:\n" +
+                    "snooze {taskNumber} /day {days} /hour {hour} /minutes {minutes}");
+        }
+        int taskNumber = Integer.parseInt(input.get(1)) - 1;
+        int days = Integer.parseInt(input.get(dayIndex + 1));
+        int hours = Integer.parseInt(input.get(hourIndex + 1));
+        int minutes = Integer.parseInt(input.get(minutesIndex + 1));
+
+        Task task = taskList.get(taskNumber);
+
+        return task.snoozeDeadline(days, hours, minutes);
+    }
+
+
+
+
+
+//        ArrayList<String> input = new ArrayList<>(Arrays.asList(command.split(" ")));
+//        try {
+//            if (input.size() < 8) {
+//                throw new DukeException("Invalid input provided!");
+//            }
+//            int shiftDayValue = input.indexOf("/day") + 1;
+//            int shiftHourValue = input.indexOf("/hour") + 1;
+//            int shiftMinuteValue = input.indexOf("/minutes") + 1;
+//
+//            // shift deadline according to input
+////            return String.format("%d %d %d", shiftDayValue, shiftHourValue, shiftMinuteValue)
+//            return "ok";
+//        } catch (ArrayIndexOutOfBoundsException e) {
+//            throw new DukeException("Invalid input provided!");
+//        }
 
     /**
      * Loads the tasks stored in the BufferedReader object into the task list.
