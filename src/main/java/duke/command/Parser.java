@@ -40,7 +40,11 @@ public class Parser {
                             taskList.find(parts);
                             break;
                         case "todo":
+                            taskList.createTask(parts);
+                            break;
                         case "deadline":
+                            taskList.createTask(parts);
+                            break;
                         case "event":
                             taskList.createTask(parts);
                             break;
@@ -54,6 +58,6 @@ public class Parser {
             input = scanner.nextLine();
         }
 
-        System.out.println("Bye. Hope to see you again soon!");
+        System.out.println("Bye! See you again soon.");
     }
 }

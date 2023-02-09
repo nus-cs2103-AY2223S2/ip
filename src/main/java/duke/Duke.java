@@ -3,10 +3,7 @@ import duke.command.Parser;
 import duke.task.TaskList;
 import duke.ui.Ui;
 import duke.storage.Storage;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
+
 
 /**
  * Duke is a todo-list task tracker bot
@@ -40,9 +37,19 @@ public class Duke {
         parser.getTaskType();
         storage.save(taskList);
     }
+
+
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.run();
+
+    }
+
+    public String getResponse(String input) {
+        if (input.equals("bye")) {
+            System.exit(0);
+        }
+        return input;
     }
 }
 
