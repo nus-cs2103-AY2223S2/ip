@@ -103,6 +103,10 @@ public class Task {
         return this.description;
     }
 
+    public String getTag() {
+        return this.tag;
+    }
+
     public void tagTask(String tag) {
         this.tag = tag;
     }

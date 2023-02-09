@@ -172,22 +172,40 @@ public class TaskList {
 
     /**
      * Finds tasks with matching keyword amongst currently registered tasks.
+     * Searches for matching tag if argument begins with '#'.
      *
      * @param arg String keyword to search for.
      */
     public void find(String arg) {
         boolean isTag = arg.charAt(0) == '#';
-        List<Task> foundTasks = tasks.stream().filter(task -> {
-            if (isTag) {
-                task.getDescription().contains(arg.substring(1));
-            } else {
-                task.getDescription().contains(arg);
-            }
-        }).collect(Collectors.toList());
-        if (foundTasks.size() == 0) {
-            System.out.println("There are no matching tasks!");
+        String keyword = arg;
+        if (isTag) {
+            findTag(arg.substring(1));
         } else {
-            System.out.println("Here are the matching tasks in your list:");
+            findKeyword(arg);
+        }
+    }
+
+    private void findKeyword(String keyWord) {
+        List<Task> foundTasks = tasks.stream().filter(task -> task.getDescription().contains(keyWord))
+                .collect(Collectors.toList());
+        if (foundTasks.size() == 0) {
+            System.out.println("There are no tasks with matching keyword!");
+        } else {
+            System.out.println("Here are the tasks with matching keyword in your list:");
+            for (int i = 0; i < foundTasks.size(); i++) {
+                System.out.println((i + 1) + ". " + foundTasks.get(i));
+            }
+        }
+    }
+
+    private void findTag(String tagName) {
+        List<Task> foundTasks = tasks.stream().filter(task -> task.getTag().contains(tagName))
+                .collect(Collectors.toList());
+        if (foundTasks.size() == 0) {
+            System.out.println("There are no tasks with matching tag!");
+        } else {
+            System.out.println("Here are the tasks with matching tag in your list:");
             for (int i = 0; i < foundTasks.size(); i++) {
                 System.out.println((i + 1) + ". " + foundTasks.get(i));
             }
