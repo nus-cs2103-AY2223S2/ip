@@ -97,63 +97,70 @@ public class Parser {
         }
 
         switch (taskType) {
-        case "T": {
-            String[] taskNameArray = Arrays.copyOfRange(tokens, 2, tokens.length);
-            String taskName = String.join("|", taskNameArray);
-            TodoTask todoTask = new TodoTask(taskName);
-
-            if (isDone) {
-                todoTask.markDone();
-            }
-
-            return todoTask;
-        }
-        case "D": {
-
-            if (tokens.length < 4) {
-                throw new DukeInvalidFileFormatException();
-            }
-
-            String[] taskNameArray = Arrays.copyOfRange(tokens, 2, tokens.length - 1);
-            String taskName = String.join("|", taskNameArray);
-            String by = tokens[tokens.length - 1];
-
-            LocalDate byDate;
-
-            try {
-                byDate = LocalDate.parse(by, DateTimeFormatter.ISO_LOCAL_DATE);
-            } catch (DateTimeParseException e) {
-                throw new DukeInvalidFileFormatException();
-            }
-
-            DeadlineTask deadlineTask = new DeadlineTask(taskName, byDate);
-
-            if (isDone) {
-                deadlineTask.markDone();
-            }
-
-            return deadlineTask;
-        }
-        case "E": {
-
-            if (tokens.length < 5) {
-                throw new DukeInvalidFileFormatException();
-            }
-
-            String[] taskNameArray = Arrays.copyOfRange(tokens, 2, tokens.length - 2);
-            String taskName = String.join("|", taskNameArray);
-            String from = tokens[tokens.length - 2];
-            String to = tokens[tokens.length - 1];
-            EventTask eventTask = new EventTask(taskName, from, to);
-
-            if (isDone) {
-                eventTask.markDone();
-            }
-
-            return eventTask;
-        }
+        case "T":
+            return parseTodoTask(tokens, isDone);
+        case "D":
+            return parseDeadlineTask(tokens, isDone);
+        case "E":
+            return parseEventTask(tokens, isDone);
         default:
             throw new DukeInvalidFileFormatException();
         }
+    }
+
+    private static Task parseTodoTask(String[] tokens, boolean isDone) {
+        String[] taskNameArray = Arrays.copyOfRange(tokens, 2, tokens.length);
+        String taskName = String.join("|", taskNameArray);
+        TodoTask todoTask = new TodoTask(taskName);
+
+        if (isDone) {
+            todoTask.markDone();
+        }
+
+        return todoTask;
+    }
+
+    private static Task parseDeadlineTask(String[] tokens, boolean isDone) throws DukeInvalidFileFormatException {
+        if (tokens.length < 4) {
+            throw new DukeInvalidFileFormatException();
+        }
+
+        String[] taskNameArray = Arrays.copyOfRange(tokens, 2, tokens.length - 1);
+        String taskName = String.join("|", taskNameArray);
+        String by = tokens[tokens.length - 1];
+
+        LocalDate byDate;
+
+        try {
+            byDate = LocalDate.parse(by, DateTimeFormatter.ISO_LOCAL_DATE);
+        } catch (DateTimeParseException e) {
+            throw new DukeInvalidFileFormatException();
+        }
+
+        DeadlineTask deadlineTask = new DeadlineTask(taskName, byDate);
+
+        if (isDone) {
+            deadlineTask.markDone();
+        }
+
+        return deadlineTask;
+    }
+
+    private static Task parseEventTask(String[] tokens, boolean isDone) throws DukeInvalidFileFormatException {
+        if (tokens.length < 5) {
+            throw new DukeInvalidFileFormatException();
+        }
+
+        String[] taskNameArray = Arrays.copyOfRange(tokens, 2, tokens.length - 2);
+        String taskName = String.join("|", taskNameArray);
+        String from = tokens[tokens.length - 2];
+        String to = tokens[tokens.length - 1];
+        EventTask eventTask = new EventTask(taskName, from, to);
+
+        if (isDone) {
+            eventTask.markDone();
+        }
+
+        return eventTask;
     }
 }
