@@ -8,15 +8,15 @@ import duke.tasks.Task;
 import duke.ui.Ui;
 
 /**
- * UnMarkCommand class extends Command
+ * UnmarkCommand class extends Command
  */
-public class UnMarkComamnd extends Command {
+public class UnmarkComamnd extends Command {
 
     /**
      * Constructor.
      * @param input the user input
      */
-    public UnMarkComamnd(String input) {
+    public UnmarkComamnd(String input) {
         super(input);
     }
 

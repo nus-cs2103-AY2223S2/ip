@@ -56,8 +56,8 @@ public abstract class Command {
     }
 
     /**
-     * Retuns a boolean to tell if the command is an exist command.
-     * @return a boolean to tell if the command is an exist command
+     * Retuns a boolean to tell if the command is an exit command.
+     * @return a boolean to tell if the command is an exit command
      */
     public boolean isExit() {
         return this.isExit;
