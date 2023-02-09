@@ -17,6 +17,7 @@ class Storage {
     }
 
     public ArrayList<Task> load() {
+        assert this.filePath.length() > 0 : "filePath should not be empty";
         System.out.println("    . . . Loading . . . ");
         File file = new File(this.filePath);
         ArrayList<Task> tasks = new ArrayList<Task>();
@@ -42,6 +43,7 @@ class Storage {
     }
 
     public static void loadSaved(String s, ArrayList<Task> tasks) {
+        assert tasks.size() >= 0 : "Number of tasks should be a positive number";
         if (s.substring(0, 1).equals("T")) {
             Todo newTodo = new Todo(s.substring(8));
             if (s.substring(4, 5).equals("1")) {
@@ -72,6 +74,7 @@ class Storage {
 
     public void saveData(TaskList t) {
         ArrayList<Task> tasks = t.getTasks();
+        assert tasks.size() >= 0 : "Number of tasks should be a positive number";
         try {
             FileWriter fWriter = new FileWriter(this.filePath);
             for (int i = 0; i < tasks.size(); i++) {
