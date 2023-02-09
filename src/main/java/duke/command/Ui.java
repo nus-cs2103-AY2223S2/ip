@@ -3,7 +3,11 @@ package duke.command;
 import java.io.IOException;
 import java.util.Scanner;
 
-import duke.exception.*;
+import duke.exception.DukeException;
+import duke.exception.InvalidDeadlineDateException;
+import duke.exception.InvalidEventDateTimeException;
+import duke.exception.InvalidIndexException;
+import duke.exception.MissingContentException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
@@ -41,7 +45,7 @@ public class Ui {
      * @return error message
      */
     public String showError(String message) {
-        return(message);
+        return (message);
     }
 
     /**
@@ -49,7 +53,7 @@ public class Ui {
      * @return file not existed error message
      */
     public String showLoadingError() {
-        return("File not existed");
+        return ("File not existed");
     }
 
     /**
@@ -57,7 +61,7 @@ public class Ui {
      * @return unknown message.
      */
     public String showUnknownError() {
-        return("WOOF!!! I'm sorry boss, "
+        return ("WOOF!!! I'm sorry boss, "
                 + "but I don't know what that means :-(");
     }
 
@@ -66,7 +70,7 @@ public class Ui {
      * @return goodbye message
      */
     public String bye() {
-        return("WOOF WOOF WOOF! Kyle is sad to see you leave!");
+        return ("WOOF WOOF WOOF! Kyle is sad to see you leave!");
     }
 
     /**
@@ -85,15 +89,15 @@ public class Ui {
      * @return appropriate message
      * @throw MissingContentException if input array is empty.
      */
-    public String findWordIntro(TaskList taskList,String[] arr, boolean containsKeyword) {
+    public String findWordIntro(TaskList taskList, String[] arr, boolean containsKeyword) {
         if (arr.length >= 1) {
             if (containsKeyword) {
-                return(taskList.findWord(arr[1]));
+                return (taskList.findWord(arr[1]));
             } else {
-                return("Sorry boss! No task found!");
+                return ("Sorry boss! No task found!");
             }
         }
-        return(new DukeException("WOOF WOOF! The content can not be left empty!").getMessage());
+        return (new DukeException("WOOF WOOF! The content can not be left empty!").getMessage());
     }
 
     /**
@@ -103,9 +107,9 @@ public class Ui {
      */
     public String list(TaskList taskList) {
         if (taskList.isEmpty()) {
-            return("WOOF! You do not have any tasks in your task list!");
+            return ("WOOF! You do not have any tasks in your task list!");
         }
-        return(taskList.list());
+        return (taskList.list());
     }
 
     /**
@@ -115,6 +119,7 @@ public class Ui {
     public String[] getInput() {
         Scanner sc = new Scanner(System.in);
         String newLine = sc.nextLine();
+        assert newLine != "" : "Empty input from user";
         String[] arr = newLine.split(" ");
         return arr;
     }
@@ -138,9 +143,9 @@ public class Ui {
     public String mark(TaskList listOfAction, String[] commands) {
         try {
             int index = Parser.getTaskIndex(listOfAction, commands);
-            return(listOfAction.mark(index - 1));
+            return (listOfAction.mark(index - 1));
         } catch (MissingContentException | InvalidIndexException | IOException e) {
-            return(e.getMessage());
+            return (e.getMessage());
         }
     }
 
@@ -154,9 +159,9 @@ public class Ui {
     public String unmark(TaskList listOfAction, String[] commands) {
         try {
             int index = Parser.getTaskIndex(listOfAction, commands) - 1;
-            return(listOfAction.unmark(index));
+            return (listOfAction.unmark(index));
         } catch (MissingContentException | InvalidIndexException | IOException e) {
-            return(e.getMessage());
+            return (e.getMessage());
         }
     }
 
@@ -170,12 +175,12 @@ public class Ui {
         try {
             int index = Parser.getTaskIndex(listOfAction, command) - 1;
             try {
-                return(listOfAction.delete(index));
+                return (listOfAction.delete(index));
             } catch (IOException e) {
-                return(new InvalidIndexException().getMessage());
+                return (new InvalidIndexException().getMessage());
             }
         } catch (MissingContentException | InvalidIndexException e) {
-            return(e.getMessage());
+            return (e.getMessage());
         }
     }
 
@@ -186,12 +191,17 @@ public class Ui {
      * @return new updated task list
      */
     public String addToDo(TaskList listOfAction, String[] command) {
-        String remaining = Parser.toDo(command);
+        String remaining = "";
+        try {
+            remaining = Parser.toDo(command);
+        } catch (MissingContentException e) {
+            return e.getMessage();
+        }
         if (remaining.equals("")) {
-            return(new MissingContentException().getMessage());
+            return (new MissingContentException().getMessage());
         }
         Todo newTask = new Todo(command[0], remaining, false);
-        return(listOfAction.add(newTask));
+        return (listOfAction.add(newTask));
     }
 
     /**
@@ -205,12 +215,18 @@ public class Ui {
             String detail = new Parser().deadlineDetail(command);
             String remaining = new Parser().getDeadlineFull(command);
             Deadline newTaskDeadline = new Deadline(command[0], detail, remaining);
-            return(listOfAction.add(newTaskDeadline));
+            return (listOfAction.add(newTaskDeadline));
         } catch (MissingContentException | InvalidDeadlineDateException e) {
-            return(e.getMessage());
+            return (e.getMessage());
         }
     }
 
+    /**
+     * Add new event to tasklist
+     * @param listOfAction original tasklist
+     * @param command from user's input
+     * @return Duke's response to user's input
+     */
     public String addEvent(TaskList listOfAction, String[] command) {
         try {
             try {
@@ -225,15 +241,15 @@ public class Ui {
                 String end = (new Parser()
                         .getEventTime(command, startIndex, endIndex))[1];
                 System.out.println("Got it. I've added this task:");
-                return(listOfAction.add(new Event("event",
+                return (listOfAction.add(new Event("event",
                         detail, start, end)));
             } catch (MissingContentException | InvalidEventDateTimeException e) {
-                return(e.getMessage());
+                return (e.getMessage());
             } catch (IndexOutOfBoundsException e) {
                 throw new InvalidEventDateTimeException();
             }
         } catch (InvalidEventDateTimeException e) {
-            return(e.getMessage());
+            return (e.getMessage());
         }
     }
 }

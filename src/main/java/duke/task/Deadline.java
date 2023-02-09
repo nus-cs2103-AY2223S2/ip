@@ -1,10 +1,10 @@
 package duke.task;
 
-import duke.exception.InvalidDeadlineDateException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.exception.InvalidDeadlineDateException;
 
 /**
  * Represents deadlines

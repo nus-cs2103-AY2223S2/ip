@@ -1,18 +1,11 @@
 package duke;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Scanner;
 
-import duke.command.Parser;
 import duke.command.Storage;
 import duke.command.TaskList;
 import duke.command.Ui;
-import duke.exception.DukeException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Todo;
 
 enum Action {
     Bye,
@@ -46,6 +39,9 @@ public class Duke {
         tasks = new TaskList(storage.load());
     }
 
+    /**
+     * Represent a new Duke
+     */
     public Duke() {
         ui = new Ui();
         storage = new Storage("data/duke.txt");
@@ -104,11 +100,10 @@ public class Duke {
 
                 case Event:
                     ui.says(ui.addEvent(listOfAction, arr));
-
-                default:
-                    ui.showUnknownError();
                     break;
 
+                default:
+                     ui.says(ui.showUnknownError());
                 }
             } catch (IllegalArgumentException e) {
                 ui.showUnknownError();
@@ -122,7 +117,8 @@ public class Duke {
     }
 
     public String getResponse(String input) {
-        ui.showWelcome();
+        int i = 1;
+        //ui.showWelcome();
         TaskList listOfAction = tasks;
         Storage file = storage;
         String[] arr = ui.getInput(input);
@@ -131,35 +127,35 @@ public class Duke {
             Action myAction = Action.valueOf(String.valueOf(s.charAt(0)).toUpperCase()
                     + s.substring(1));
             switch (myAction) {
-                case Find:
-                    return(ui.findWordIntro(listOfAction, arr, listOfAction.checkWord(arr[1])));
+            case Find:
+                return (ui.findWordIntro(listOfAction, arr, listOfAction.checkWord(arr[1])));
 
-                case Bye:
-                    return(ui.bye());
+            case Bye:
+                return (ui.bye());
 
-                case List:
-                    return(ui.list(listOfAction));
+            case List:
+                return (ui.list(listOfAction));
 
-                case Mark:
-                    return(ui.mark(listOfAction, arr));
+            case Mark:
+                return (ui.mark(listOfAction, arr));
 
-                case Unmark:
-                    return(ui.unmark(listOfAction, arr));
+            case Unmark:
+                return (ui.unmark(listOfAction, arr));
 
-                case Delete:
-                    return(ui.delete(listOfAction, arr));
+            case Delete:
+                return (ui.delete(listOfAction, arr));
 
-                case Todo:
-                    return(ui.addToDo(listOfAction, arr));
+            case Todo:
+                return (ui.addToDo(listOfAction, arr));
 
-                case Deadline:
-                    return(ui.addDeadline(listOfAction, arr));
+            case Deadline:
+                return (ui.addDeadline(listOfAction, arr));
 
-                case Event:
-                    return(ui.addEvent(listOfAction, arr));
+            case Event:
+                return (ui.addEvent(listOfAction, arr));
 
-                default:
-                    ui.showUnknownError();
+            default:
+                return (ui.showUnknownError());
             }
         } catch (IllegalArgumentException e) {
             ui.showUnknownError();
