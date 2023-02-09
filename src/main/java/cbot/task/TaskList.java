@@ -126,6 +126,8 @@ public class TaskList {
      * @see Task#mark()
      */
     public String mark(int num) {
+        assert !notInRange(num) : "Invalid index to mark";
+
         boolean wasChanged = getTask(num).mark();
 
         if (!wasChanged) {
@@ -145,6 +147,8 @@ public class TaskList {
      * @see Task#unmark()
      */
     public String unmark(int num) {
+        assert !notInRange(num) : "Invalid index to unmark";
+
         boolean wasChanged = getTask(num).unmark();
 
         if (!wasChanged) {
@@ -163,6 +167,8 @@ public class TaskList {
      * @return A confirmation message.
      */
     public String delTask(int num) {
+        assert !notInRange(num) : "Invalid index to delete";
+
         Task removedTask = tasks.remove(num - 1);
         return "Got it! Deleted:\n"
                 + GAP + removedTask.toString();

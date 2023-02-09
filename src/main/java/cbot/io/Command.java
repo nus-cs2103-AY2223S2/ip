@@ -274,16 +274,20 @@ public enum Command {
     }
 
     // Command static methods to be called by Parser, and run by runCommand
-    private static String doNoInput(TaskList tl, String str)
+    private static String doNoInput(TaskList tl, String text)
             throws PoorInputException {
         throw new PoorInputException("That command needs an input");
     }
 
-    private static String doBye(TaskList tl, String str) {
+    private static String doBye(TaskList tl, String text) {
+        assert text.isEmpty() : "BYE should not have additional input text";
+
         return Talker.sayBye();
     }
 
-    private static String doList(TaskList tl, String str) {
+    private static String doList(TaskList tl, String text) {
+        assert text.isEmpty() : "LIST should not have additional input text";
+
         return (tl.getCount() == 0)
                 ? Talker.say("Freedom! You have no tasks :D")
                 : Talker.say("Here's what you have:\n") + Talker.printMany(tl.listTasks());
@@ -291,6 +295,8 @@ public enum Command {
 
     private static String doMark(TaskList tl, String text)
             throws PoorInputException {
+        assert !text.isEmpty() : "MARK should have input text";
+
         try {
             int num = Integer.parseInt(text);
 
@@ -307,6 +313,8 @@ public enum Command {
 
     private static String doUnmark(TaskList tl, String text)
             throws PoorInputException {
+        assert !text.isEmpty() : "UNMARK should have input text";
+
         try {
             int num = Integer.parseInt(text);
 
@@ -323,6 +331,8 @@ public enum Command {
 
     private static String doRemove(TaskList tl, String text)
             throws PoorInputException {
+        assert !text.isEmpty() : "DELETE/REMOVE should have input text";
+
         try {
             int num = Integer.parseInt(text);
 
@@ -338,11 +348,15 @@ public enum Command {
     }
 
     private static String doTodo(TaskList tl, String text) {
+        assert !text.isEmpty() : "TODO should have input text";
+
         return Talker.say(tl.addTask(new Task(text)));
     }
 
     private static String doDeadline(TaskList tl, String text)
             throws PoorInputException, DateTimeParseException {
+        assert !text.isEmpty() : "DEADLINE should have input text";
+
         String byKeyword = "/by ";
         int byLength = byKeyword.length();
 
@@ -365,6 +379,8 @@ public enum Command {
 
     private static String doEvent(TaskList tl, String text)
             throws PoorInputException, DateTimeParseException {
+        assert !text.isEmpty() : "EVENT should have input text";
+
         String fromKeyword = "/from ";
         String toKeyword = "/to ";
         int fromLength = fromKeyword.length();
@@ -403,6 +419,8 @@ public enum Command {
 
     private static String doSort(TaskList tl, String text)
             throws PoorInputException {
+        assert text.isEmpty() : "SORT should not have additional input text";
+
         if (tl.getCount() == 0) {
             throw new PoorInputException("You have no tasks to sort :P");
         }
@@ -414,6 +432,7 @@ public enum Command {
 
     private static String doBefore(TaskList tl, String text)
             throws PoorInputException, DateTimeParseException {
+        assert !text.isEmpty() : "BEFORE should have input text";
         checkFilterCount(tl);
 
         LocalDateTime bef = TimeStuff.textToDT(text);
@@ -427,6 +446,7 @@ public enum Command {
 
     private static String doAfter(TaskList tl, String text)
             throws PoorInputException, DateTimeParseException {
+        assert !text.isEmpty() : "AFTER should have input text";
         checkFilterCount(tl);
 
         LocalDateTime aft = TimeStuff.textToDT(text);
@@ -439,6 +459,7 @@ public enum Command {
     }
 
     private static String doFilter(TaskList tl, String text) throws PoorInputException {
+        assert !text.isEmpty() : "FILTER should have input text";
         checkFilterCount(tl);
 
         String msg;
@@ -504,6 +525,7 @@ public enum Command {
     }
 
     private static String doFind(TaskList tl, String text) throws PoorInputException {
+        assert !text.isEmpty() : "FIND should have input text";
         checkFilterCount(tl);
 
         String lowText = text.toLowerCase();
