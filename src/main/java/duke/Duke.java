@@ -43,7 +43,7 @@ public class Duke {
      */
     public void run() {
         assert this.storage != null && this.tasks != null && this.ui != null;
-        this.ui.showWelcome();
+        Ui.showWelcome();
         boolean isExit = false;
         while (!isExit) {
             String input = this.ui.readCommand();
