@@ -1,6 +1,8 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * TaskList class that contains information about currently registered tasks.
@@ -177,12 +179,8 @@ public class TaskList {
      * @param arg String keyword to search for.
      */
     public void find(String arg) {
-        ArrayList<Task> foundTasks = new ArrayList<Task>();
-        for (Task task : this.tasks) {
-            if (task.getDescription().indexOf(arg) >= 0) {
-                foundTasks.add(task);
-            }
-        }
+        List<Task> foundTasks = new ArrayList<Task>();
+        foundTasks = tasks.stream().filter(task -> task.getDescription().indexOf(arg) >= 0).collect(Collectors.toList());
         if (foundTasks.size() == 0) {
             System.out.println("There are no matching tasks!");
         } else {
