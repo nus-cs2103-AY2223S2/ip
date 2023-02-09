@@ -8,10 +8,31 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
+/**
+ * DialogBox is an object that encapsulate the dialog box in the GUI.
+ */
 public class DialogBox extends HBox {
 
     private Label text;
     private ImageView displayPicture;
+
+    /**
+     * Constructor for a Dialog Box object.
+     *
+     * @param l Label necessary for an instance of a dialog box.
+     * @param iv ImageView necessary for an instance of a dialog box.
+     */
+    public DialogBox(Label l, ImageView iv) {
+        text = l;
+        displayPicture = iv;
+
+        text.setWrapText(true);
+        displayPicture.setFitWidth(100.0);
+        displayPicture.setFitHeight(100.0);
+
+        this.setAlignment(Pos.TOP_RIGHT);
+        this.getChildren().addAll(text, displayPicture);
+    }
 
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
@@ -33,15 +54,5 @@ public class DialogBox extends HBox {
         return db;
     }
 
-    public DialogBox(Label l, ImageView iv) {
-        text = l;
-        displayPicture = iv;
 
-        text.setWrapText(true);
-        displayPicture.setFitWidth(100.0);
-        displayPicture.setFitHeight(100.0);
-
-        this.setAlignment(Pos.TOP_RIGHT);
-        this.getChildren().addAll(text, displayPicture);
-    }
 }

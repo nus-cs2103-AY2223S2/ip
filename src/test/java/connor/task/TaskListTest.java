@@ -2,11 +2,11 @@ package connor.task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.time.LocalDateTime;
+
 import org.junit.jupiter.api.Test;
 
 import connor.ui.Ui;
-
-import java.time.LocalDateTime;
 
 /**
  * Testcases for the methods present in TaskList.

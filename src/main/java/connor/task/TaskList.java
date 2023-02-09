@@ -139,6 +139,12 @@ public class TaskList {
         return str.toString();
     }
 
+    /**
+     * Sorts the list according to the priority of each task.
+     *
+     * @param ui
+     * @return
+     */
     public String sort(Ui ui) {
         Collections.sort(this.tasks, new Comparator<Task>() {
             @Override

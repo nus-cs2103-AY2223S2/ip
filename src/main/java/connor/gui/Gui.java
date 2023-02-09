@@ -18,7 +18,7 @@ import javafx.stage.Stage;
 /**
  * Gui object that encapsulates all gui functions and logic.
  */
-public class Gui extends Application  {
+public class Gui extends Application {
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;

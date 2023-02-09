@@ -1,5 +1,8 @@
 package connor.parser;
 
+import java.time.DateTimeException;
+import java.time.LocalDateTime;
+
 import connor.task.Deadline;
 import connor.task.Event;
 import connor.task.InvalidTaskException;
@@ -7,10 +10,6 @@ import connor.task.Task;
 import connor.task.TaskList;
 import connor.task.Todo;
 import connor.ui.Ui;
-
-import java.time.DateTimeException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 /**
  * Parser object that parses information from input and memory.
