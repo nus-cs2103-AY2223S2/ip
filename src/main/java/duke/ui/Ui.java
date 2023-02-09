@@ -1,26 +1,16 @@
 package duke.ui;
 
-import java.util.Scanner;
-
 import duke.exceptions.TaskException;
 
 /**
  * Acts as the class to response to user inputs
  */
 public class Ui {
-    private Scanner sc;
-
-    /**
-     * Constructs for ui class
-     */
-    public Ui() {
-        this.sc = new Scanner(System.in);
-    }
 
     /**
      * Represents the start-up message
      *
-     * @return a start up message
+     * @return a start-up message
      */
     public static String welcomeMessage() {
         String logo = " ____        _        \n"
@@ -30,15 +20,6 @@ public class Ui {
                 + "|____/ \\__,_|_|\\_\\___|\n";
 
         return ("Hello I'm \n" + logo + "What can I do for you?\n");
-    }
-
-    /**
-     * Collects user inputs
-     *
-     * @return user inputs for each command
-     */
-    public String readCommand() {
-        return sc.nextLine();
     }
 
     /**
@@ -74,7 +55,7 @@ public class Ui {
      * @param code read type of commands in String
      * @throws TaskException return a custom error message if there is such error
      */
-    public String error(String code) throws TaskException {
+    public static void error(String code) throws TaskException {
         switch (code) {
         case "todo":
             throw new TaskException("Please enter an to-do item");

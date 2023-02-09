@@ -1,10 +1,13 @@
 package duke.tasks;
 
+import duke.exceptions.TaskException;
+import duke.ui.Ui;
+
 /**
  * Represents task types
  */
 public class Task {
-    private final String name;
+    private String name;
     private boolean isMarked;
 
     /**
@@ -30,6 +33,16 @@ public class Task {
     public void toBeUnmarked() {
         this.isMarked = false;
     }
+
+    /**
+     * Updates name of the item
+     */
+    public void updateTask(String input) throws TaskException {
+        Ui.error("default");
+        System.out.println("Enter the item name: ");
+        this.name = input;
+    }
+
     /**
      * Displays name, date and time of the task
      *

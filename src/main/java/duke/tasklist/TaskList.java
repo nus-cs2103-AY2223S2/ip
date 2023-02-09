@@ -8,19 +8,15 @@ import duke.ui.Ui;
  * Contains task actions
  */
 public class TaskList {
-
     private Storage storage;
-    private Ui ui;
 
     /**
      * Contains sets of task
      *
      * @param storage stores data
-     * @param ui      responds to user inputs
      */
-    public TaskList(Storage storage, Ui ui) {
+    public TaskList(Storage storage) {
         this.storage = storage;
-        this.ui = ui;
     }
 
     /**
@@ -66,6 +62,19 @@ public class TaskList {
     }
 
     /**
+     * Updates item in the list of the same task type
+     *
+     * @param index location of the item is stored in the list
+     * @param input string contains item information
+     * @return message about updated item
+     * @throws TaskException return a exception with a custom message
+     */
+    public String updateTask(int index, String input) throws TaskException {
+        String newInput = input.substring((index < 10 ? 9 : 10), input.length());
+        return this.storage.updateItem(index, newInput);
+    }
+
+    /**
      * Adds list item
      *
      * @param instruction command entered by user
@@ -76,29 +85,29 @@ public class TaskList {
             switch (instruction) {
             case "TODO":
                 if (input.length() <= 5) {
-                    return this.ui.error("todo");
+                    Ui.error("todo");
                 }
                 this.storage.addTodoItem(input);
                 break;
 
             case "DEADLINE":
-                if (!input.contains("/by")) {
-                    return this.ui.error("deadline");
+                if (!input.contains("-by")) {
+                    Ui.error("deadline");
                 }
-                final String[] deadline_part = input.substring(9, input.length()).split("/by ");
+                final String[] deadline_part = input.substring(9, input.length()).split("-by ");
                 this.storage.addDeadlineItem(deadline_part[0], deadline_part[1]);
                 break;
 
             case "EVENT":
-                boolean from = input.contains("/from");
-                boolean to = input.contains("/to");
+                boolean from = input.contains("-from");
+                boolean to = input.contains("-to");
 
                 if ((!from || !to) || !(from && to)) {
-                    return this.ui.error("event");
+                    Ui.error("event");
                 }
-                final String[] event_part = input.substring(6, input.length()).split("/from ");
-                String[] range = event_part[1].split("/to ");
-                this.storage.addEventItem(event_part[0], range[0], range[1]);
+                final String[] event_part = input.substring(6, input.length()).split("-from ");
+                String[] periodRange = event_part[1].split("-to ");
+                this.storage.addEventItem(event_part[0], periodRange[0], periodRange[1]);
                 break;
 
             default:

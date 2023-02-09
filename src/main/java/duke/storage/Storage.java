@@ -7,6 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import duke.exceptions.TaskException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
@@ -35,6 +36,7 @@ public class Storage {
 
     /**
      * Prints list items according to list index
+     *
      * @return print display list
      */
     public String displayList() {
@@ -120,6 +122,20 @@ public class Storage {
             }
         }
         return "Following are the results found from searching " + input + ": \n" + itemNumber;
+    }
+
+    /**
+     * Updates item in the list of the same task type
+     *
+     * @param index location of the item is stored in the list
+     * @param input string contains item information
+     * @return alert message about updated item
+     * @throws TaskException return a exception with a custom message
+     */
+    public String updateItem(int index, String input) throws TaskException {
+        Task temp = list.get(index);
+        temp.updateTask(input);
+        return "The selected item has been updated";
     }
 
     //Code extracted from https://www.codejava.net/java-se/file-io/how-to-read-and-write-text-file-in-java

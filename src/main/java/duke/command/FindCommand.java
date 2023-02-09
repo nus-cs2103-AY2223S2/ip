@@ -8,7 +8,7 @@ import duke.ui.Ui;
  * Gives command to find items in the list
  */
 public class FindCommand extends Command {
-    private String input;
+    private final String input;
 
     public FindCommand(String input) {
         this.input = input;

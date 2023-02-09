@@ -26,7 +26,7 @@ public class Duke {
     public Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath, this.ui);
-        this.tasks = new TaskList(this.storage, this.ui);
+        this.tasks = new TaskList(this.storage);
         this.parser = new Parser();
         this.exitStatus = false;
     }
@@ -43,7 +43,7 @@ public class Duke {
         this.storage.loadFileData();
 
         try {
-            Command c = this.parser.parse(input);
+            Command c = this.parser.parse(input.replaceAll("/", "-"));
             assert c != null : "Command is null";
             this.exitStatus = c.isExit();
             this.storage.writeToFile();

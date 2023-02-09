@@ -8,8 +8,8 @@ import duke.ui.Ui;
  * Gives command to add item
  */
 public class AddCommand extends Command {
-    private String instruction;
-    private String input;
+    private final String instruction;
+    private final String input;
 
     /**
      * Initialises add class

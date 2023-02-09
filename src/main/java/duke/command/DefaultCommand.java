@@ -23,6 +23,7 @@ public class DefaultCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Storage storage, Ui ui) throws TaskException {
-        return ui.error("default");
+        ui.error("default");
+        return "Try again";
     }
 }

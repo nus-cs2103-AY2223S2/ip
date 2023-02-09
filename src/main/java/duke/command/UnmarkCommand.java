@@ -8,7 +8,7 @@ import duke.ui.Ui;
  * Gives command to unmark item as incomplete
  */
 public class UnmarkCommand extends Command {
-    private int index;
+    private final int index;
 
     /**
      * Initialises unmark class

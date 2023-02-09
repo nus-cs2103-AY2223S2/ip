@@ -2,15 +2,7 @@ package duke.parser;
 
 import java.util.Arrays;
 
-import duke.command.AddCommand;
-import duke.command.ByeCommand;
-import duke.command.Command;
-import duke.command.DefaultCommand;
-import duke.command.DeleteCommand;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
-import duke.command.MarkCommand;
-import duke.command.UnmarkCommand;
+import duke.command.*;
 import duke.exceptions.TaskException;
 
 
@@ -23,7 +15,7 @@ public class Parser {
      * Contains instructions to be entered by user to control system
      */
     public enum Instructions {
-        BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, FIND
+        BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, FIND, UPDATE
     }
 
     /**
@@ -36,7 +28,8 @@ public class Parser {
         int index = 0;
         String first_word = part[0].toUpperCase();
 
-        if (part[0].equals("mark") || part[0].equals("unmark") || part[0].equals("delete")) {
+        if (part[0].equals("mark") || part[0].equals("unmark") ||
+                part[0].equals("delete") || part[0].equals("update")) {
             index = Integer.parseInt(part[1]) - 1;
         }
 
@@ -70,6 +63,9 @@ public class Parser {
 
         case FIND:
             return new FindCommand(part[1]);
+
+        case UPDATE:
+            return new UpdateCommand(index, input);
 
         default:
             return new DefaultCommand();

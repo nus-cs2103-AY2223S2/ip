@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.exceptions.TaskException;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
@@ -7,16 +8,18 @@ import duke.ui.Ui;
 /**
  * Gives command to delete item
  */
-public class DeleteCommand extends Command {
-    private final int index;
+public class UpdateCommand extends Command {
+    private int index;
+    private final String input;
 
     /**
      * Initialises delete class
      *
      * @param index task sequences in task list
      */
-    public DeleteCommand(int index) {
+    public UpdateCommand(int index, String input) {
         this.index = index;
+        this.input = input;
     }
 
     /**
@@ -31,8 +34,7 @@ public class DeleteCommand extends Command {
      * {@inheritDoc}
      */
     @Override
-    public String execute(TaskList taskList, Storage storage, Ui ui) {
-
-        return taskList.deleteTask(index);
+    public String execute(TaskList taskList, Storage storage, Ui ui) throws TaskException {
+        return taskList.updateTask(index, input);
     }
 }

@@ -8,7 +8,7 @@ import duke.ui.Ui;
  * Gives command to mark item as complete
  */
 public class MarkCommand extends Command {
-    private int index;
+    private final int index;
 
     /**
      * Initialises mark class

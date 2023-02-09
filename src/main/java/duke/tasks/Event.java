@@ -1,5 +1,8 @@
 package duke.tasks;
 
+import duke.exceptions.TaskException;
+import duke.ui.Ui;
+
 import java.time.LocalDate;
 
 /**
@@ -7,12 +10,12 @@ import java.time.LocalDate;
  */
 public class Event extends Task {
 
-    private final LocalDate startDate;
-    private final LocalDate endDate;
-    private final String startTime;
-    private final String endTime;
-    private final String[] startingPeriod;
-    private final String[] endingPeriod;
+    private LocalDate startDate;
+    private LocalDate endDate;
+    private String startTime;
+    private String endTime;
+    private String[] startingPeriod;
+    private String[] endingPeriod;
 
     /**
      * Splits inputs into smaller parts and initialises its variables
@@ -25,19 +28,34 @@ public class Event extends Task {
         super(name);
         startingPeriod = startingTime.split(" ");
         endingPeriod = endTime.split(" ");
-        if (startingPeriod[0].contains("/")) {
-            this.startDate = LocalDate.parse(startingPeriod[0].replaceAll("/", "-"));
-        } else {
-            this.startDate = LocalDate.parse(startingPeriod[0]);
-        }
 
-        if (endingPeriod[0].contains("/")) {
-            this.endDate = LocalDate.parse(endingPeriod[0].replaceAll("/", "-"));
-        } else {
-            this.endDate = LocalDate.parse(endingPeriod[0]);
-        }
+        this.startDate = LocalDate.parse(startingPeriod[0]);
+        this.endDate = LocalDate.parse(endingPeriod[0]);
 
         this.startTime = startingPeriod[1];
+        this.endTime = endingPeriod[1];
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void updateTask(String input) throws TaskException {
+        boolean from = input.contains("-from");
+        boolean to = input.contains("-to");
+
+        if ((!from || !to) || !(from && to)) {
+            Ui.error("event");
+        }
+        String[] inputPart = input.split("-from ");
+        String[] periodRange = inputPart[1].split("-to ");
+        startingPeriod = periodRange[0].split(" ");
+        endingPeriod = periodRange[1].split(" ");
+        System.out.println("You are now updating item in Event task");
+        super.updateTask(inputPart[0]);
+        this.startDate = LocalDate.parse(startingPeriod[0]);
+        this.startTime = startingPeriod[1];
+        this.endDate = LocalDate.parse(endingPeriod[0]);
         this.endTime = endingPeriod[1];
     }
 
