@@ -63,7 +63,7 @@ public class Storage {
             bf.close();
         } catch (IOException e) {
             result = new ArrayList<>();
-            System.out.println("Unable to open "+ BACKUP_FILE_DIR + " \\ " + BACKUP_FILE_NAME);
+            System.out.println("Unable to open " + BACKUP_FILE_DIR + " \\ " + BACKUP_FILE_NAME);
         }
         return result;
     }
@@ -89,7 +89,7 @@ public class Storage {
                     bw.close();
                 }
             } catch (IOException e) {
-                System.out.println("Unable to save to "+ BACKUP_FILE_DIR + " \\ " + BACKUP_FILE_NAME);
+                System.out.println("Unable to save to " + BACKUP_FILE_DIR + " \\ " + BACKUP_FILE_NAME);
             }
         }
     }

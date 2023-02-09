@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import duke.exceptions.DukeInvalidArgumentException;
@@ -77,6 +78,23 @@ public class TaskList {
             );
         }
         return this.userTasks.remove(index);
+    }
+
+    public List<Task> popMultipleTasks(List<Integer> indexes) throws DukeInvalidArgumentException {
+        for (Integer index: indexes) {
+            if (index < 0 || index > this.userTasks.size() - 1) {
+                throw new DukeInvalidArgumentException(
+                        String.format("There are only %d tasks. There is no task "
+                                + "with index %d\n", this.userTasks.size(), index)
+                );
+            }
+        }
+        indexes.sort(Collections.reverseOrder());
+        List<Task> result = new ArrayList<>();
+        for (int index: indexes) {
+            result.add(this.userTasks.remove(index));
+        }
+        return result;
     }
 
     /**
