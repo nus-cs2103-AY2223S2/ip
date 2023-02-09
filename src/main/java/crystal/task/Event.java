@@ -29,7 +29,7 @@ public class Event extends Task {
         } catch (Exception e) {
             throw new CrystalException("Please change the input date format to yyyy-MMM-dThh:mm!");
         }
-
+        assert this.to.isAfter(this.from): "to: date should not be before from: date";
     }
 
     /**
