@@ -38,6 +38,7 @@ public class Ui {
     public String getFarewellMessage() {
         return "Bye. Hope to see you again soon!";
     }
+
     public String getAddMessage() {
         return "Got it. I've added this task:";
     }
@@ -61,6 +62,10 @@ public class Ui {
     }
     public String getTasksCountMessage(int i) {
         return "Now you have " + i + " tasks in the list.";
+    }
+
+    public String getLoadingErrorMessage() {
+        return "There was an error while loading from save file";
     }
 
     /**

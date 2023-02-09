@@ -39,6 +39,13 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(duke.getWelcome(), dukeImage)
         );
+        String loadErrorMessage = duke.getLoadErrorMessage();
+        if (loadErrorMessage != null) {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getDukeDialog(loadErrorMessage, dukeImage)
+            );
+        }
+
     }
 
     public void setDuke(Duke d) {

@@ -62,6 +62,25 @@ public class Todo extends Task {
     }
 
     /**
+     * Checks if specified task is a duplicate.
+     *
+     * @param task Task to compare to.
+     * @return True or False.
+     */
+    public boolean isDup(Task task) {
+        boolean isSameClass = getClass()
+                .equals(task.getClass());
+        boolean isSameDescription = description
+                .equals(task.getDescription());
+        boolean isSameStatus = getStatusIcon()
+                .equals(task.getStatusIcon());
+
+        return isSameClass
+                && isSameDescription
+                && isSameStatus;
+    }
+
+    /**
      * Returns type of task, completion status, description of the task
      *
      * @return Type of task, completion status, description of the task

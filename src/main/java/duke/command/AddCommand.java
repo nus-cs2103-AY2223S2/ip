@@ -34,6 +34,11 @@ public class AddCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        for (Task task: tasks.getTasks()) {
+            if (task.isDup(this.task)) {
+                throw new DukeException("Task is already in the TaskList");
+            }
+        }
         tasks.add(task);
         storage.save(tasks);
 

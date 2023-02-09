@@ -42,6 +42,10 @@ public class Deadline extends Task {
         this.by = LocalDate.parse(by);
     }
 
+    public LocalDate getDeadline() {
+        return by;
+    }
+
     /**
      * Generate a Deadline object from user's command input
      *
@@ -106,6 +110,31 @@ public class Deadline extends Task {
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Deadline missing deadline");
         }
+    }
+
+    /**
+     * Checks if specified task is a duplicate.
+     *
+     * @param task Task to compare to.
+     * @return True or False.
+     */
+    public boolean isDup(Task task) {
+        boolean isSameClass = getClass()
+                .equals(task.getClass());
+        boolean isSameDescription = description
+                .equals(task.getDescription());
+        boolean isSameStatus = getStatusIcon()
+                .equals(task.getStatusIcon());
+
+        Deadline deadline = (Deadline) task;
+        boolean isSameDeadline = getDeadline()
+                .equals(deadline.getDeadline());
+
+        return isSameClass
+                && isSameDescription
+                && isSameStatus
+                && isSameDeadline;
+
     }
 
     /**

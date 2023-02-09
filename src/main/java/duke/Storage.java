@@ -17,6 +17,7 @@ public class Storage {
 
     protected Path directory;
     protected Path filePath;
+    protected boolean isLoadError = false;
 
     /**
      * Initialises the location where save data will be stored.
@@ -33,6 +34,14 @@ public class Storage {
             this.directory = Paths.get(root,
                     filePath.substring(0, index));
         }
+    }
+
+    public boolean isLoadError() {
+        return isLoadError;
+    }
+
+    public void setLoadError(boolean isLoadError) {
+        this.isLoadError = isLoadError;
     }
 
     /**

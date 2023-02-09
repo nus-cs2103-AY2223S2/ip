@@ -60,6 +60,14 @@ public class Event extends Task {
         }
     }
 
+    public LocalDate getStartTime() {
+        return from;
+    }
+
+    public LocalDate getEndTime() {
+        return to;
+    }
+
     /**
      * Generate an Event object from user's command input
      *
@@ -100,6 +108,34 @@ public class Event extends Task {
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Event missing fields");
         }
+    }
+
+    /**
+     * Checks if specified task is a duplicate.
+     *
+     * @param task Task to compare to.
+     * @return True or False.
+     */
+    public boolean isDup(Task task) {
+        boolean isSameClass = getClass()
+                .equals(task.getClass());
+        boolean isSameDescription = description
+                .equals(task.getDescription());
+        boolean isSameStatus = getStatusIcon()
+                .equals(task.getStatusIcon());
+
+        Event event = (Event) task;
+        boolean isSameStart = getStartTime()
+                .equals(event.getStartTime());
+        boolean isSameEnd = getEndTime()
+                .equals(event.getEndTime());
+
+        return isSameClass
+                && isSameDescription
+                && isSameStatus
+                && isSameStart
+                && isSameEnd;
+
     }
 
     /**

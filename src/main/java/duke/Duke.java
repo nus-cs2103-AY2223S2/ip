@@ -27,7 +27,7 @@ public class Duke {
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            ui.showLoadingError();
+            storage.setLoadError(true);
             assert tasks.size() == 0 : "TaskList started with undefined task";
         }
     }
@@ -44,6 +44,11 @@ public class Duke {
      */
     public void run() {
         ui.showWelcome();
+
+        if (storage.isLoadError()) {
+            ui.echo(ui.getLoadingErrorMessage());
+        }
+
         boolean isExit = false;
         while (!isExit) {
             try {
@@ -65,6 +70,13 @@ public class Duke {
 
     public String getWelcome() {
         return ui.getWelcomeMessage();
+    }
+
+    public String getLoadErrorMessage() {
+        if (storage.isLoadError()) {
+            return ui.getLoadingErrorMessage();
+        }
+        return null;
     }
 
     public String getResponse(String input) {
