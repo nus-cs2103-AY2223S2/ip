@@ -19,6 +19,8 @@ public class EventTask extends Task {
         this.from = from;
         this.to = to;
         formatIfEventDate(from, to);
+        assert this.from != null : "from String in EventTask should not be null";
+        assert this.to != null : "to String in EventTask should not be null";
     }
 
 
@@ -82,15 +84,16 @@ public class EventTask extends Task {
         LocalDate today = LocalDate.now();
         int dayLeftFrom = today.until(this.fromDate).getDays();
         int dayLeftTo = today.until(this.toDate).getDays();
-        if (dayLeftFrom >= 0
-                && dayLeftFrom <= dayRange
-                && !this.isDone) {
+
+        boolean isFromDateOver = dayLeftFrom < 0;
+        boolean isFromDateSoon = dayLeftFrom <= dayRange;
+        if (!isFromDateOver && isFromDateSoon && !this.isDone) {
             return "[E] " + title + " (Starting in " + dayLeftFrom + " day!)";
         }
-        if (dayLeftFrom < 0
-                && dayLeftTo >= 0
-                && dayLeftTo <= dayRange
-                && !this.isDone) {
+
+        boolean isToDateOver = dayLeftTo < 0;
+        boolean isToDateSoon = dayLeftTo <= dayRange;
+        if (isFromDateOver && !isToDateOver && isToDateSoon && !this.isDone) {
             return "[E] " + title + " (Ending in " + dayLeftTo + " day!)";
         }
         return "";

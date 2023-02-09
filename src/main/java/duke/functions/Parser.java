@@ -6,6 +6,7 @@ import duke.ToDoList;
 import duke.exceptions.DukeException;
 import duke.exceptions.InputDukeException;
 
+import duke.exceptions.IntParseDukeException;
 import duke.tasks.DeadlineTask;
 import duke.tasks.EventTask;
 import duke.tasks.Task;
@@ -38,6 +39,8 @@ public class Parser {
      */
     public static String[] handleInput(
             String input, String regex, int limit, int minSize) throws DukeException {
+        assert limit > 0 : "limit should be greater than 0";
+        assert minSize > 0 : "minSize should be greater than 0";
         String[] subInputs = input.split(regex, limit);
         if (subInputs.length < minSize) {
             throw new InputDukeException();
@@ -46,7 +49,7 @@ public class Parser {
     }
 
     /**
-     * The method reads an array of String input and uses the first value of the array
+     * The method reads an array of String inputs and uses the first value of the array
      * to determine which operations shall be performed on the ToDoList object.
      * Returns a String that is the output message of the command performed.
      *
@@ -71,17 +74,17 @@ public class Parser {
             reply = Reply.getListMessage(list.toString());
             break;
         case "mark":
-            index = Integer.parseInt(inputs[1]);
+            index = Parser.handleIntParse(inputs[1]);
             list.markTask(index);
             reply = Reply.getTaskMarkMessage(list, index, command);
             break;
         case "unmark":
-            index = Integer.parseInt(inputs[1]);
+            index = Parser.handleIntParse(inputs[1]);
             list.unmarkTask(index);
             reply = Reply.getTaskMarkMessage(list, index, command);
             break;
         case "delete":
-            index = Integer.parseInt(inputs[1]);
+            index = Parser.handleIntParse(inputs[1]);
             Task removed = list.delete(index);
             reply = Reply.getAddDeleteMessage(list, removed, command);
             break;
@@ -143,7 +146,22 @@ public class Parser {
     }
 
     /**
-     * The method reads an array of String input and uses the first value of the array
+     * The method reads a String input and returns the integer representation of that String.
+     *
+     * @param input The String to be parsed into an integer.
+     * @return An integer that is obtained from parsing the given input.
+     * @throws IntParseDukeException If the given String cannot be parsed as an integer value.
+     */
+    public static int handleIntParse(String input) throws IntParseDukeException {
+        try {
+            return Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            throw new IntParseDukeException();
+        }
+    }
+
+    /**
+     * The method reads an array of String inputs and uses the first value of the array
      * to determine which type of Task object should be added to the given ToDoList object.
      *
      * @param inputs The Array of String containing the operation to be performed

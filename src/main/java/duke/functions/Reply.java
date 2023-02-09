@@ -42,6 +42,7 @@ public class Reply {
      * @return A String that specifies the operation carried out on which Task object.
      */
     public static String getAddDeleteMessage(ToDoList list, Task task, String command) {
+        assert command.equals("add") || command.equals("delete") : "command should be add or delete only";
         return "The Duke has " + command + " the following task:\n"
                 + " - " + task + "\n"
                 + "You now have " + list.getToDoCount() + " task!\n";
@@ -59,6 +60,8 @@ public class Reply {
      */
     public static String getTaskMarkMessage(
             ToDoList list, int index, String command) throws IndexDukeException {
+        assert command.equals("mark") || command.equals("unmark") : "command should be mark or unmark only";
+        assert index > 0 : "index should be greater than 0";
         return "The Duke has " + command + " the following task:\n"
                 + " - " + list.getTask(index) + "\n";
     }
