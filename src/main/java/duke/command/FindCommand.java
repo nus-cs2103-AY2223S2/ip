@@ -2,6 +2,8 @@ package duke.command;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import duke.dukeexception.CommandException;
 import duke.storage.Storage;
@@ -36,12 +38,14 @@ public class FindCommand extends Command {
             System.out.println("Here are the tasks in your list:");
             List<Task> immutableTaskList = tasks.getList();
 
-            ArrayList<Task> resultList = new ArrayList<Task>();
-            immutableTaskList.forEach(task -> {
-                if (task.getDescription().contains(description)) {
-                    resultList.add(task);
-                }
-            });
+            Stream<Task> filteredList = immutableTaskList
+                    .stream()
+                    .filter(task -> task.getDescription().contains(description));
+
+            ArrayList<Task> resultList = new ArrayList<Task>(
+                    filteredList
+                            .collect(Collectors.toList())
+                    );
 
             String result = "Here are the tasks in your list:";
             int index = 1;
