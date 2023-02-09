@@ -1,9 +1,9 @@
-package duke;
+package duke.tasks;
 
 /**
  * A task with no deadline.
  */
-class ToDo extends Task {
+public class ToDo extends Task {
 
     /**
      * Constructs a new ToDo task.

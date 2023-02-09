@@ -1,8 +1,8 @@
-package duke;
+package duke.tasks;
 /**
  * Encapsulates a task
  */
-class Task {
+public class Task {
     /**
      * Status of the task.
      */

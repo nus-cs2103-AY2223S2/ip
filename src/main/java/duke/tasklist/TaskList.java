@@ -1,11 +1,11 @@
-package duke;
-import java.lang.reflect.Array;
+package duke.tasklist;
 import java.util.ArrayList;
+import duke.tasks.Task;
 
 /**
  * Encapsulates a list of Tasks.
  */
-class TaskList {
+public class TaskList {
     /** An ArrayList of Tasks.*/
     ArrayList<Task> tasks;
 

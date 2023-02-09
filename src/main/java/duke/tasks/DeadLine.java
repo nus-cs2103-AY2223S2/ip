@@ -1,11 +1,11 @@
-package duke;
+package duke.tasks;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
  * A task with one deadline.
  */
-class DeadLine extends Task {
+public class DeadLine extends Task {
 
     /** The date of the deadline.*/
     LocalDate localDate;

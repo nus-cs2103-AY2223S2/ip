@@ -1,4 +1,13 @@
-package duke;
+package duke.parser;
+
+import duke.tasks.Task;
+import duke.tasks.DeadLine;
+import duke.tasks.Event;
+import duke.tasks.ToDo;
+import duke.ui.Ui;
+import duke.tasklist.TaskList;
+import duke.storage.Storage;
+import duke.exceptions.DukeException;
 
 /**
  * Makes sense of user input and reacts accordingly.
@@ -12,19 +21,19 @@ public class Parser {
      * @param storage The class that loads and stores the tasks in the hard drive.
      * @param userInput The user input.
      */
-    public static void parse(Ui ui, TaskList tasks, Storage storage, String userInput) {
+    public static String parse(Ui ui, TaskList tasks, Storage storage, String userInput) {
         try {
             String firstWord = userInput.split(" ", 2)[0];
             if (userInput.equals("bye")) {
-                ui.respond("Goodbye! Have a nice day ahead.\n");
+                return ui.respond("Goodbye! Have a nice day ahead.\n");
             } else if (userInput.equals("list")) {
-                ui.listTasks(tasks);
+                return ui.listTasks(tasks);
             } else if (userInput.equals("help")) {
-                ui.showHelpMessage();
+                return ui.showHelpMessage();
             } else if (firstWord.equals("find")) {
                 //Body message should be a keyword to search for a task
                 String secondWord = userInput.split(" ", 2)[1];
-                ui.findTasks(tasks.findTask(secondWord));
+                return ui.findTasks(tasks.findTask(secondWord));
             } else if (firstWord.equals("mark")) {
                 //Second word should be an integer dictating which Task to mark.
                 String secondWord = userInput.split(" ", 2)[1];
@@ -32,7 +41,7 @@ public class Parser {
                 Task task = tasks.getTask(taskNumber);
                 storage.changeTaskStatus(task.getStorageLine());
                 tasks.mark(taskNumber);
-                ui.respond("I have marked this task as done! \n" + task.provideDetails());
+                return ui.respond("I have marked this task as done! \n" + task.provideDetails());
             } else if (firstWord.equals("unmark")) {
                 //Second word should be an integer dictating which Task to unmark.
                 String secondWord = userInput.split(" ", 2)[1];
@@ -40,14 +49,14 @@ public class Parser {
                 Task task = tasks.getTask(taskNumber);
                 storage.changeTaskStatus(task.getStorageLine());
                 tasks.unmark(taskNumber);
-                ui.respond("I have marked this task as undone! \n" + task.provideDetails());
+               return ui.respond("I have marked this task as undone! \n" + task.provideDetails());
             } else if (firstWord.equals("todo")) {
                 //Rest of message describes the Task.
                 String body = userInput.split(" ", 2)[1];
                 ToDo task = new ToDo("todo", body, false);
                 tasks.addTask(task);
                 storage.addTask(task.getStorageLine());
-                ui.respond("I have added this new task:\n" + task.provideDetails()
+               return ui.respond("I have added this new task:\n" + task.provideDetails()
                         + "\nYou now currently have "
                         + tasks.getTaskCount() + " tasks.");
             } else if (firstWord.equals("deadline")) {
@@ -56,7 +65,7 @@ public class Parser {
                 DeadLine newTask = new DeadLine("deadline", body, false);
                 tasks.addTask(newTask);
                 storage.addTask(newTask.getStorageLine());
-                ui.respond("I have added this new task:\n" + newTask.provideDetails()
+                return ui.respond("I have added this new task:\n" + newTask.provideDetails()
                         + "\nYou now currently have "
                         + tasks.getTaskCount() + " tasks.");
             } else if (firstWord.equals("event")) {
@@ -65,7 +74,7 @@ public class Parser {
                 Event newTask = new Event("event", body, false);
                 tasks.addTask(newTask);
                 storage.addTask(newTask.getStorageLine());
-                ui.respond("I have added this new task:\n" + newTask.provideDetails()
+                return ui.respond("I have added this new task:\n" + newTask.provideDetails()
                         + "\nYou now currently have "
                         + tasks.getTaskCount() + " tasks.");
             } else if (firstWord.equals("delete")) {
@@ -75,15 +84,15 @@ public class Parser {
                 Task task = tasks.getTask(taskNumber);
                 tasks.deleteTask(taskNumber);
                 storage.deleteTask(task.getStorageLine());
-                ui.respond("We have removed this task: " + task.provideDetails() + "\nYou now have "
+                return ui.respond("We have removed this task: " + task.provideDetails() + "\nYou now have "
                         + tasks.getTaskCount() + " tasks remaining");
             } else {
-                ui.respond("Oops! I don't know what this means.");
+                return ui.respond("Oops! I don't know what this means.");
             }
         } catch (DukeException e) {
-            ui.showCommandError();
+            return ui.showCommandError();
         } catch (Exception e) {
-            ui.showCommandError();
+            return ui.showCommandError();
         }
     }
 }

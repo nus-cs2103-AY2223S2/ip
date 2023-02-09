@@ -1,9 +1,9 @@
-package duke;
+package duke.tasks;
 
 /**
  * A task which lasts for a time period, with a start time and end time.
  */
-class Event extends Task {
+public class Event extends Task {
 
     /**
      * Constructs a new Event.

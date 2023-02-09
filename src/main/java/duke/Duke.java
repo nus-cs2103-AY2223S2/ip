@@ -1,12 +1,27 @@
 package duke;
 import java.util.Scanner;
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
+import duke.ui.DialogBox;
+import duke.parser.Parser;
+import duke.exceptions.DukeException;
 
-import java.io.IOException;
-import java.io.File;
-import java.io.FileWriter;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.layout.Region;
+import javafx.stage.Stage;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
-import java.time.LocalDate
-        ;
+
+
 /** Encapsulates the Duke chat bot.
  * @author Hee Jia Yuan
  */
@@ -19,6 +34,16 @@ public class Duke {
 
     /** Handles interactions with the User. */
     private Ui ui;
+    private ScrollPane scrollPane;
+    private VBox dialogContainer;
+    private TextField userInput;
+    private Button sendButton;
+    private Scene scene;
+
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+
+
 
     /**
      * Constructs a new Duke session.
@@ -34,6 +59,7 @@ public class Duke {
             tasks = new TaskList();
         }
     }
+
     /**
      * Runs the Duke bot.
      */
@@ -45,8 +71,14 @@ public class Duke {
             Parser.parse(ui, tasks, storage, userInput);
         }
     }
-    public static void main(String[] args) {
-        new Duke("duke.txt").run();
+
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        return Parser.parse(ui, tasks, storage, input);
     }
 }
 

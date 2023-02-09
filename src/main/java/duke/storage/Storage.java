@@ -1,10 +1,15 @@
-package duke;
+package duke.storage;
 import java.io.File;
 import java.io.FileWriter;
-
 import java.util.Scanner;
-
 import java.util.ArrayList;
+
+import duke.exceptions.DukeException;
+import duke.tasks.Task;
+import duke.tasks.DeadLine;
+import duke.tasks.Event;
+import duke.tasks.ToDo;
+
 
 /**
  * Handles storing of Tasks in hard drive.
