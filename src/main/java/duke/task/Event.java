@@ -38,6 +38,11 @@ public class Event extends Task {
         markTaskIfNeeded(taskStatus, this);
     }
 
+    @Override
+    public LocalDateTime getDate() {
+        return startDateTime;
+    }
+
     /**
      * Returns the String representation of an Event.
      *

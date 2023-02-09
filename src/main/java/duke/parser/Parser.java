@@ -4,15 +4,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
+import java.util.Locale;
 
-import duke.command.AddCommand;
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.ExitCommand;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
-import duke.command.MarkCommand;
-import duke.command.UnmarkCommand;
+import duke.command.*;
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -32,6 +26,7 @@ public class Parser {
         unmark,
         delete,
         find,
+        sort,
         bye
     }
 
@@ -49,6 +44,7 @@ public class Parser {
         USER_INPUT_MARK(2),
         USER_INPUT_UNMARK(2),
         USER_INPUT_DELETE(2),
+        USER_INPUT_SORT(2),
         USER_INPUT_FIND(2),
         FILE_INPUT_TODO(3),
         FILE_INPUT_DEADLINE(4),
@@ -132,6 +128,19 @@ public class Parser {
             checkUserInputFormat(splitInputs.length, MinimumLengths.USER_INPUT_FIND.length,
                     "You must include the keyword you wish to search.");
             c = new FindCommand(input.split(" ", 2)[1]);
+            break;
+        case sort:
+            checkUserInputFormat(splitInputs.length, MinimumLengths.USER_INPUT_SORT.length,
+                    "You must include the type of task you wish to search.");
+            if (splitInputs.length > MinimumLengths.USER_INPUT_SORT.length) {
+                throw new DukeException("You can only sort 1 type of task once.");
+            }
+            String taskType = input.split(" ", 2)[1].toLowerCase();
+            if (!taskType.equals("d") && !taskType.equals("e")) {
+                throw new DukeException("You can only sort deadlines or events.\n"
+                        + "Valid input format: sort {d/e}");
+            }
+            c = new SortCommand(taskType);
             break;
         default:
             c = new Command();

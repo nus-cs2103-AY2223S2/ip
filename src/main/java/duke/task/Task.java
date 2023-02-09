@@ -34,6 +34,11 @@ public class Task {
         isDone = false;
     }
 
+    public LocalDateTime getDate() {
+        // does nothing
+        return null;
+    }
+
     /**
      * Returns X if task is marked done.
      * If task is unmarked, a space is returned.

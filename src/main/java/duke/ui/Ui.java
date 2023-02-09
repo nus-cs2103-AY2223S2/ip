@@ -113,6 +113,14 @@ public class Ui {
         return str;
     }
 
+    public static String getSortOutput(ArrayList<Task> filteredTasks) {
+        String str = "Here are the matching tasks in your list:\n";
+        for (int i = 1; i <= filteredTasks.size(); i++) {
+            str = String.format("%s%d.%s\n", str, i, filteredTasks.get(i - 1));
+        }
+        return str;
+    }
+
     /**
      * Returns datetime in String for printing.
      *
