@@ -3,6 +3,10 @@ import duke.command.Parser;
 import duke.task.TaskList;
 import duke.ui.Ui;
 import duke.storage.Storage;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 /**
  * Duke is a todo-list task tracker bot
@@ -16,6 +20,7 @@ public class Duke {
     private Ui ui;
     private TaskList taskList;
     private Storage storage;
+
 
     /**
      * Constructor for Duke.
