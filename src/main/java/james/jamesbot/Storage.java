@@ -54,7 +54,7 @@ public class Storage {
         TaskList result = new TaskList();
 
         try {
-            File directory = new File("data");
+            File directory = new File("data/james.txt");
             if (!directory.exists()) {
                 directory.mkdir();
             }
@@ -81,7 +81,7 @@ public class Storage {
                     result.add(deadline);
                     break;
                 case "E":
-                    Event event = new Event(taskData[2], taskData[3], taskData[4]);
+                    Event event = new Event(taskData[2], taskData[3]);
                     event.setIsDone(taskData[1].equals("1"));
                     result.add(event);
                     break;

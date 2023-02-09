@@ -64,7 +64,7 @@ public class AddCommand extends Command {
         case "deadline":
             // Fallthrough.
         case "event":
-            String descriptor = taskType.equals("deadline") ? "/by" : "/from /to";
+            String descriptor = taskType.equals("deadline") ? "/by" : "/at";
 
             if (!description.contains(descriptor)) {
                 throw new JamesException("please make sure your task contains the keyword "
@@ -86,9 +86,8 @@ public class AddCommand extends Command {
             }
 
             String start = userCommand.substring(startIndex + 3, userCmdLen).trim();
-            String end = userCommand.substring(startIndex + 3, userCmdLen).trim();
 
-            Task task = taskType.equals("deadline") ? new Deadline(description, start) : new Event(description, start, end);
+            Task task = taskType.equals("deadline") ? new Deadline(description, start) : new Event(description, start);
             tasks.add(task);
             storage.save(tasks.taskListToStoreString());
             response = ui.addTask(task, tasks.size());
