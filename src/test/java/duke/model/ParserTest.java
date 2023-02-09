@@ -28,9 +28,9 @@ public class ParserTest {
         assertEquals(Parser.parseCommand("list"), new ListCommand());
         assertEquals(Parser.parseCommand("bye"), new ExitCommand());
         assertEquals(Parser.parseCommand("todo eat"), new AddCommand(new TodoTask("eat")));
-        assertEquals(Parser.parseCommand("deadline homework /by 2023-01-01"), new AddCommand(
+        assertEquals(Parser.parseCommand("deadline homework --by 2023-01-01"), new AddCommand(
                 new DeadlineTask("homework", DukeUtils.convertStringToDate("2023-01-01").get())));
-        assertEquals(Parser.parseCommand("event live /from current /to future"),
+        assertEquals(Parser.parseCommand("event live --from current --to future"),
                 new AddCommand(new EventTask("live", "current", "future")));
         assertEquals(Parser.parseCommand("mark 10"), new MarkCommand(10));
         assertEquals(Parser.parseCommand("unmark 10"), new UnmarkCommand(10));
@@ -43,10 +43,10 @@ public class ParserTest {
         DukeRuntimeException ex;
         ex = assertThrows(exceptionClass, () -> Parser.parseCommand("todo"));
         assertTrue(ex.getMessage().contains("description cannot be empty"));
-        ex = assertThrows(exceptionClass, () -> Parser.parseCommand("deadline /by 2023-01-01"));
+        ex = assertThrows(exceptionClass, () -> Parser.parseCommand("deadline --by 2023-01-01"));
         assertTrue(ex.getMessage().contains("description cannot be empty"));
         ex = assertThrows(exceptionClass,
-                () -> Parser.parseCommand("event /from current /to future"));
+                () -> Parser.parseCommand("event --from current --to future"));
         assertTrue(ex.getMessage().contains("description cannot be empty"));
     }
 

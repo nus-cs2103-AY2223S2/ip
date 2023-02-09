@@ -2,6 +2,7 @@ package duke.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.function.Function;
@@ -9,6 +10,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import duke.exception.DukeIndexOutOfBoundsException;
+import duke.task.DeadlineTask;
 import duke.task.Task;
 
 /**
@@ -146,6 +148,12 @@ public class TaskList implements Serializable {
                     return String.format("%s (appeared %d time%s)", description, count,
                             count < 2 ? "" : "s");
                 }));
+    }
+
+    public String listSortedDeadlineTasks() {
+        return listFromStreamWithIndicies(
+                tasks.stream().filter(DeadlineTask.class::isInstance).map(DeadlineTask.class::cast)
+                        .sorted(Comparator.comparing(DeadlineTask::getDeadline)));
     }
 
     @Override

@@ -9,16 +9,21 @@ public class DeadlineTask extends Task {
 
     private static final long serialVersionUID = 7701406742949264888L;
 
-    private LocalDate by;
+    private LocalDate deadline;
 
-    public DeadlineTask(String description, LocalDate by) {
+    public DeadlineTask(String description, LocalDate deadline) {
         super(description);
-        this.by = by;
+        this.deadline = deadline;
+    }
+
+    public LocalDate getDeadline() {
+        return deadline;
     }
 
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(), DukeUtils.convertDateToString(by));
+        return String.format("[D]%s (by: %s)", super.toString(),
+                DukeUtils.convertDateToString(deadline));
     }
 
     @Override
@@ -27,6 +32,6 @@ public class DeadlineTask extends Task {
             return false;
         }
         DeadlineTask task = (DeadlineTask) obj;
-        return super.equals(obj) && Objects.equals(by, task.by);
+        return super.equals(obj) && Objects.equals(deadline, task.deadline);
     }
 }
