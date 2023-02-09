@@ -1,5 +1,8 @@
 package duke.task;
 
+import duke.Duke;
+import duke.DukeException;
+
 public abstract class Task {
     public enum TaskIcon {
         TODO ("T"),
@@ -19,6 +22,7 @@ public abstract class Task {
         }
     };
     protected String description;
+    protected String tags;
     protected boolean isDone;
     protected TaskIcon taskIcon;
 
@@ -26,10 +30,18 @@ public abstract class Task {
      * Returns a Task object.
      * @param description Description of the task.
      */
-    protected Task(String description, TaskIcon taskIcon) {
+    protected Task(String description, TaskIcon taskIcon) throws DukeException {
         this.description = description;
         this.isDone = false;
         this.taskIcon = taskIcon;
+        if (this.description.equals("")) {
+            throw new DukeException("The description of a Task cannot be empty.");
+        }
+    }
+
+    protected Task (String description, TaskIcon taskIcon, String tags) throws DukeException {
+        this(description, taskIcon);
+        this.tags = tags;
     }
 
     public String getStatusIcon() {

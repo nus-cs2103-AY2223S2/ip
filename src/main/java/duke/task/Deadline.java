@@ -21,10 +21,16 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String byStr) throws DukeException {
         super(description.trim(), TaskIcon.DEADLINE);
+        setByDate(byStr);
+    }
+
+    public Deadline(String description, String byStr, String todos) throws DukeException {
+        super(description, TaskIcon.DEADLINE, todos);
+        setByDate(byStr);
+    }
+
+    private void setByDate(String byStr) throws DukeException {
         this.byStr = byStr.trim();
-        if (this.description.equals("")) {
-            throw new DukeException("The description of a deadline cannot be empty.");
-        }
         if (this.byStr.equals("")) {
             throw new DukeException("The 'by' date of a deadline cannot be empty.");
         }

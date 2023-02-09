@@ -24,18 +24,32 @@ public class Event extends Task {
      */
     public Event(String description, String startStr, String endStr) throws DukeException {
         super(description.trim(), TaskIcon.EVENT);
+        setStartTime(startStr);
+        setEndTime(endStr);
+    }
+
+    public Event(String description, String startStr, String endStr, String tags) throws DukeException {
+        super(description.trim(), TaskIcon.EVENT, tags);
+        setStartTime(startStr);
+        setEndTime(endStr);
+    }
+
+    protected void setStartTime(String startStr) throws DukeException {
         this.startStr = startStr.trim();
-        this.endStr = endStr.trim();
-        if (this.description.equals("")) {
-            throw new DukeException("The description of an event cannot be empty.");
-        }
-        if (this.startStr.equals("") || this.endStr.equals("")) {
-            throw new DukeException("The start and/or end time of an event cannot be empty.");
+        if (this.startStr.equals("")) {
+            throw new DukeException("The start time of an event cannot be empty.");
         }
         try {
             startDateTime = LocalDateTime.parse(startStr, inputFormatter);
         } catch (DateTimeParseException e) {
             startDateTime = null;
+        }
+    }
+
+    protected void setEndTime(String endStr) throws DukeException {
+        this.endStr = endStr.trim();
+        if (this.endStr.equals("")) {
+            throw new DukeException("The end time of an event cannot be empty.");
         }
         try {
             endDateTime = LocalDateTime.parse(endStr, inputFormatter);

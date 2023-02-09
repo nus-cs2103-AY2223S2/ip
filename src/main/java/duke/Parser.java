@@ -9,7 +9,7 @@ import javafx.util.Pair;
 import java.util.HashMap;
 
 public class Parser {
-    private static final BadCommandException INSUFFICIENT_PARAMS_ERROR =
+    private static final BadCommandException BAD_PARAMS_ERROR =
             new BadCommandException("There are insufficient or invalid parameters!");
     private static final BadCommandException UNKNOWN_COMMAND_ERROR =
             new BadCommandException("I'm sorry, but I don't know what that means :-(");
@@ -56,7 +56,7 @@ public class Parser {
         try {
             idx = Integer.parseInt(paramsStr);
         } catch (NumberFormatException e) {
-            throw INSUFFICIENT_PARAMS_ERROR;
+            throw BAD_PARAMS_ERROR;
         }
         return idx;
     }
@@ -85,7 +85,7 @@ public class Parser {
         for (int i = startingIdx; i < paramsSplit.length; i++) {
             String[] paramArgSplit = paramsSplit[i].split(" ", 2);
             if (paramArgSplit.length == 0) {
-                throw INSUFFICIENT_PARAMS_ERROR;
+                throw BAD_PARAMS_ERROR;
             }
             paramToArgMap.put(
                     paramArgSplit[0].trim(),
@@ -93,6 +93,51 @@ public class Parser {
             );
         }
         return new Pair<>(defaultArgument, paramToArgMap);
+    }
+
+
+    private Task createNewTask(Command commandEnum,
+                               String description,
+                               HashMap<String, String> paramToArgMap) throws BadCommandException {
+        boolean hasTagsArg = paramToArgMap.containsKey("tag");
+        String tags = paramToArgMap.get("tag");
+        try {
+            Task newTask = null;
+            switch (commandEnum) {
+            case TODO:
+                newTask = hasTagsArg ? new Todo(description, tags) : new Todo(description);
+                break;
+            case DEADLINE:
+                if (!paramToArgMap.containsKey("by")) {
+                    throw BAD_PARAMS_ERROR;
+                }
+                newTask = hasTagsArg ?
+                        new Deadline(description, paramToArgMap.get("by"), tags) :
+                        new Deadline(description, paramToArgMap.get("by"));
+                break;
+            case EVENT:
+                if (!paramToArgMap.containsKey("from") || !paramToArgMap.containsKey("to")) {
+                    throw BAD_PARAMS_ERROR;
+                }
+                newTask = hasTagsArg ? new Event(
+                        description,
+                        paramToArgMap.get("from"),
+                        paramToArgMap.get("to"),
+                        tags
+                ) : new Event(
+                        description,
+                        paramToArgMap.get("from"),
+                        paramToArgMap.get("to")
+                );
+                break;
+            default:
+                throw UNKNOWN_COMMAND_ERROR;
+            }
+            return newTask;
+        } catch (DukeException e) {
+            throw new BadCommandException(e.getMessage());
+        }
+
     }
 
     /**
@@ -110,81 +155,58 @@ public class Parser {
         String commandStr = inputSplit.length < 1 ? "" : inputSplit[0].trim();
         String paramsStr = inputSplit.length < 2 ? "" : inputSplit[1].trim();
         Command commandEnumValue = Command.valueOfCommandStr(commandStr);
+
         if (commandEnumValue == null) {
             throw UNKNOWN_COMMAND_ERROR;
         }
-        Task newTask = null;
-        try {
-            switch (commandEnumValue) {
-            case LIST:
-                return ui.showNormalMessage(String.format(
-                        "Here are the tasks in your list:\n%s",
-                        tasks
-                ));
-            case FIND: {
-                TaskList matchingTasks = tasks.getTasksByKeyword(paramsStr);
-                return ui.showNormalMessage(String.format(
-                        "Here are the matching tasks in your list:\n%s",
-                        matchingTasks
-                ));
-            }
-            case MARK: {
-                int idx = getIntegerFromParamsStr(paramsStr) - 1;
-                tasks.markTaskAsDone(idx);
-                return ui.showNormalMessage(String.format(
-                        "Nice! I've marked this task as done:\n\t%s",
-                        tasks.getTask(idx)
-                ));
-            }
-            case UNMARK: {
-                int idx = getIntegerFromParamsStr(paramsStr) - 1;
-                tasks.unmarkTaskAsDone(idx);
-                return ui.showNormalMessage(String.format(
-                        "OK, I've marked this task as not done yet:\n\t%s",
-                        tasks.getTask(idx)
-                ));
-            }
-            case DELETE: {
-                int idx = getIntegerFromParamsStr(paramsStr) - 1;
-                Task deletedTask = tasks.removeTask(idx);
-                return ui.showNormalMessage(String.format(
-                        "Got it. I've removed this task:\n\t%s\nNow you have %d task%s in the list.",
-                        deletedTask,
-                        tasks.getSize(),
-                        tasks.getSize() > 1 ? "s" : ""
-                ));
-            }
-            case TODO: {
-                newTask = new Todo(paramsStr);
-                break;
-            }
-            case DEADLINE:
-            case EVENT: {
-                Pair<String, HashMap<String, String>> descriptionMappingPair =
-                        getMappingFromParamsStr(paramsStr, true);
-                String description = descriptionMappingPair.getKey();
-                HashMap<String, String> paramToArgMap = descriptionMappingPair.getValue();
 
-                if (commandEnumValue == Command.DEADLINE) {
-                    if (!paramToArgMap.containsKey("by")) {
-                        throw INSUFFICIENT_PARAMS_ERROR;
-                    }
-                    newTask = new Deadline(description, paramToArgMap.get("by"));
-                } else {
-                    if (!paramToArgMap.containsKey("from") || !paramToArgMap.containsKey("to")) {
-                        throw INSUFFICIENT_PARAMS_ERROR;
-                    }
-                    newTask = new Event(
-                            description,
-                            paramToArgMap.get("from"),
-                            paramToArgMap.get("to")
-                    );
-                }
-                break;
-            }
-            default:
-                throw UNKNOWN_COMMAND_ERROR;
-            }
+        switch (commandEnumValue) {
+        case LIST:
+            return ui.showNormalMessage(String.format(
+                    "Here are the tasks in your list:\n%s",
+                    tasks
+            ));
+        case FIND: {
+            TaskList matchingTasks = tasks.getTasksByKeyword(paramsStr);
+            return ui.showNormalMessage(String.format(
+                    "Here are the matching tasks in your list:\n%s",
+                    matchingTasks
+            ));
+        }
+        case MARK: {
+            int idx = getIntegerFromParamsStr(paramsStr) - 1;
+            tasks.markTaskAsDone(idx);
+            return ui.showNormalMessage(String.format(
+                    "Nice! I've marked this task as done:\n\t%s",
+                    tasks.getTask(idx)
+            ));
+        }
+        case UNMARK: {
+            int idx = getIntegerFromParamsStr(paramsStr) - 1;
+            tasks.unmarkTaskAsDone(idx);
+            return ui.showNormalMessage(String.format(
+                    "OK, I've marked this task as not done yet:\n\t%s",
+                    tasks.getTask(idx)
+            ));
+        }
+        case DELETE: {
+            int idx = getIntegerFromParamsStr(paramsStr) - 1;
+            Task deletedTask = tasks.removeTask(idx);
+            return ui.showNormalMessage(String.format(
+                    "Got it. I've removed this task:\n\t%s\nNow you have %d task%s in the list.",
+                    deletedTask,
+                    tasks.getSize(),
+                    tasks.getSize() > 1 ? "s" : ""
+            ));
+        }
+        case TODO:
+        case DEADLINE:
+        case EVENT: {
+            Pair<String, HashMap<String, String>> descriptionMappingPair =
+                    getMappingFromParamsStr(paramsStr, true);
+            String description = descriptionMappingPair.getKey();
+            HashMap<String, String> paramToArgMap = descriptionMappingPair.getValue();
+            Task newTask = createNewTask(commandEnumValue, description, paramToArgMap);
             assert newTask != null : "newTask should not be null";
             tasks.addTask(newTask);
             return ui.showNormalMessage(String.format(
@@ -193,8 +215,9 @@ public class Parser {
                     tasks.getSize(),
                     tasks.getSize() > 1 ? "s" : ""
             ));
-        } catch (DukeException e) {
-            return ui.showErrorMessage(e.getMessage());
+        }
+        default:
+            throw UNKNOWN_COMMAND_ERROR;
         }
     }
 }
