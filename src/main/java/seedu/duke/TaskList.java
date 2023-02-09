@@ -91,7 +91,6 @@ public class TaskList {
      */
     public void addEvent(String[] echoSplit, int print){
         String task = "";
-        branch-A-CodeQuality
         int fromIndex = 0;
         int toIndex = 0;
         String fromDate = "";
