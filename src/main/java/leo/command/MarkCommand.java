@@ -1,6 +1,5 @@
 package leo.command;
 
-import leo.leoexception.LeoException;
 import leo.storage.Storage;
 
 /**

@@ -2,7 +2,6 @@ package leo.command;
 
 import leo.leoexception.LeoException;
 import leo.storage.Storage;
-import leo.ui.Ui;
 
 /**
  * Represents a command input by user.
@@ -23,14 +22,8 @@ public class Command {
         this.command = command;
     }
 
-    /**
-     * Returns index of a task in the list.
-     *
-     * @return Index of task.
-     */
-    public int extractTaskNum() {
-        String num = command.replaceAll("[^0-9]", "");
-        return Integer.parseInt(num);
+    public String execute() throws LeoException {
+        return "";
     }
 
     /**
@@ -46,7 +39,13 @@ public class Command {
         }
     }
 
-    public String execute() throws LeoException {
-        return "";
+    /**
+     * Returns index of a task in the list.
+     *
+     * @return Index of task.
+     */
+    public int extractTaskNum() {
+        String num = command.replaceAll("[^0-9]", "");
+        return Integer.parseInt(num);
     }
 }

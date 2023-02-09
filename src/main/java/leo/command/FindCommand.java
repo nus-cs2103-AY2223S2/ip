@@ -40,6 +40,7 @@ public class FindCommand extends Command {
         if (dataLength == 0) {
             throw new NoTaskFoundException();
         }
+
         try {
             String keyword = task.substring(5);
             for (int i = 0; i < dataLength; i++) {

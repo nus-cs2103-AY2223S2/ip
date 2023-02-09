@@ -2,8 +2,6 @@ package leo.storage;
 
 import java.util.List;
 
-import leo.ui.Ui;
-
 /**
  * Represents a list of Tasks.
  */
