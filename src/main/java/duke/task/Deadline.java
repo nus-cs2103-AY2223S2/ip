@@ -37,6 +37,11 @@ public class Deadline extends Task {
         markTaskIfNeeded(taskStatus, this);
     }
 
+    @Override
+    public LocalDateTime getDate() {
+        return deadline;
+    }
+
     /**
      * Returns the String representation of a Deadline.
      *

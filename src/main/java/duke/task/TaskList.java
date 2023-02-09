@@ -95,4 +95,26 @@ public class TaskList {
         }
         return foundTasks;
     }
+
+    public ArrayList<Task> getDeadlines() throws DukeException {
+        ArrayList<Task> filteredTask = new ArrayList<>();
+        for (int i = 0; i < this.getSize(); i++) {
+            Task task = getTask(i);
+            if (task instanceof Deadline) {
+                filteredTask.add(task);
+            }
+        }
+        return filteredTask;
+    }
+
+    public ArrayList<Task> getEvents() throws DukeException {
+        ArrayList<Task> filteredTask = new ArrayList<>();
+        for (int i = 0; i < this.getSize(); i++) {
+            Task task = getTask(i);
+            if (task instanceof Event) {
+                filteredTask.add(task);
+            }
+        }
+        return filteredTask;
+    }
 }
