@@ -29,9 +29,23 @@ public class TaskList implements Iterable<Task> {
         return taskList.size();
     }
 
+    public boolean hasTask(int i) {
+        return i > -1 && i < taskList.size();
+    }
+
     @Override
     public Iterator<Task> iterator() {
         return taskList.iterator();
+    }
+
+    @Override
+    public String toString() {
+        String output = "";
+        for (int i = 0; i != taskList.size(); ++i) {
+            Task t = taskList.get(i);
+            output += (i + 1) + ". " + t.toString() + "\n";
+        };
+        return output;
     }
 
     public String toStorageString() {

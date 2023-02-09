@@ -1,5 +1,7 @@
 package duke;
 
+import duke.exception.DukeException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
@@ -13,7 +15,7 @@ public class Event extends Task {
     protected boolean fromHasTime;
     protected boolean toHasTime;
 
-    public Event(String description, LocalDateTime from, LocalDateTime to, boolean fromHasTime, boolean toHasTime) {
+    public Event(String description, LocalDateTime from, boolean fromHasTime, LocalDateTime to, boolean toHasTime) {
         super(description);
         this.from = from;
         this.to = to;
@@ -72,64 +74,6 @@ public class Event extends Task {
         }
     }
 
-    /**
-     * Returns a Deadline object after parsing an add event task command.
-     *
-     * @param stringStream contains the add event command to be parsed
-     * @return an Event object from the given add event command
-     * @throws DukeException if the task description is empty or the /from or /to fields are missing
-     * @throws DateTimeParseException if the given date and time is not in a suitable format
-     */
-    public static Event parseEventCommand(Scanner stringStream) throws DukeException, DateTimeParseException {
-        String taskDesc = "";
-        String fromString = "";
-        String toString = "";
-
-        boolean foundFrom = false;
-        boolean foundTo = false;
-
-        while (stringStream.hasNext()) {
-            String temp = stringStream.next();
-
-            if (temp.equalsIgnoreCase("/from")) {
-                foundFrom = true;
-                continue;
-            } else if (temp.equalsIgnoreCase("/to")) {
-                foundTo = true;
-                continue;
-            }
-
-            if (foundTo) {
-                toString += temp + " ";
-            } else if (foundFrom) {
-                fromString += temp + " ";
-            } else {
-                taskDesc += temp + " ";
-            }
-        }
-
-        if (taskDesc.isEmpty()) {
-            throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
-        }
-
-        if (!foundFrom || !foundTo || fromString.isEmpty() || toString.isEmpty()) {
-            throw new DukeException("☹ OOPS!!! Event tasks require a /from and /to.");
-        }
-
-        fromString = fromString.trim();
-        toString = toString.trim();
-        LocalDateTime from = DateTimeParser.parse(fromString);
-        LocalDateTime to = DateTimeParser.parse(toString);
-
-        String[] fromParts = fromString.split(" ");
-        boolean fromHasTime = fromParts.length == 2;
-
-        String[] toParts = toString.split(" ");
-        boolean toHasTime = toParts.length == 2;
-
-        Event newTask = new Event(taskDesc.trim(), from, to, fromHasTime, toHasTime);
-        return newTask;
-    }
 
     /**
      * Returns an Event object after parsing an Event's storage string produced by DateTimeParser's
@@ -153,8 +97,8 @@ public class Event extends Task {
 
         Event task = new Event(taskDesc,
                 DateTimeParser.parse(fromString),
-                DateTimeParser.parse(toString),
                 fromHasTime,
+                DateTimeParser.parse(toString),
                 toHasTime);
 
         if (Integer.parseInt(parts[1]) == 1) {

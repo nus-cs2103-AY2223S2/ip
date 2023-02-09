@@ -1,5 +1,7 @@
 package duke;
 
+import duke.exception.DukeException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
@@ -46,49 +48,6 @@ public class Deadline extends Task {
         return "[D]" + super.toString() + " (by: " + this.getBy() + ")";
     }
 
-    /**
-     * Returns a Deadline object after parsing an add deadline task command.
-     *
-     * @param stringStream contains the add deadline command to be parsed
-     * @return a Deadline object from the given add deadline command
-     * @throws DukeException if the task description is empty or the /by field is missing
-     * @throws DateTimeParseException if the given date and time is not in a suitable format
-     */
-    public static Deadline parseDeadlineCommand(Scanner stringStream) throws DukeException, DateTimeParseException {
-        String taskDesc = "";
-        String byString = "";
-        boolean foundBy = false;
-        while (stringStream.hasNext()) {
-            String temp = stringStream.next();
-            if (temp.equalsIgnoreCase("/by")) {
-                foundBy = true;
-                continue;
-            }
-
-            if (foundBy) {
-                byString += temp + " ";
-            } else {
-                taskDesc += temp + " ";
-            }
-        }
-
-        if (taskDesc.isEmpty()) {
-            throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
-        }
-
-        if (!foundBy || byString.isEmpty()) {
-            throw new DukeException("☹ OOPS!!! Deadline tasks require a /by.");
-        }
-
-        byString = byString.trim();
-        LocalDateTime by = DateTimeParser.parse(byString);
-
-        String[] parts = byString.split(" ");
-        boolean hasTime = parts.length == 2;
-
-        Deadline newTask = new Deadline(taskDesc.trim(), by, hasTime);
-        return newTask;
-    }
 
     /**
      * Returns a Deadline object after parsing a Deadline's storage string produced by DateTimeParser's

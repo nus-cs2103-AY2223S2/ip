@@ -1,5 +1,7 @@
 package duke;
 
+import duke.command.Command;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -25,7 +27,8 @@ public class Duke {
     }
 
     public String genResponse(String userInput) {
-        return Parser.parseAndExecute(userInput, taskList);
+        Command command = Parser.parse(userInput, taskList);
+        return command.execute();
     }
 
     public void saveTaskList() {
