@@ -58,6 +58,7 @@ public class FindCommand extends Command {
     @Override
     public String execute() throws LeoException {
         TaskList taskList = findTasks(storage, command);
+        assert taskList != null;
         return "Here's the matching task(s):" + taskList.display();
     }
 
