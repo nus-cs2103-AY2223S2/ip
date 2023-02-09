@@ -29,9 +29,10 @@ public class TodoCommand extends Command {
      * @throws DukeEmptyInputException
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeInvalidInputException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeInvalidInputException {
         String response = tasks.add(Todo.createTodo(input));
         storage.saveState(tasks);
-        ui.printResponse(response);
+//        ui.printResponse(response);
+        return response;
     }
 }

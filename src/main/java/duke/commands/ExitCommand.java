@@ -1,6 +1,7 @@
 package duke.commands;
 
 import duke.exceptions.DukeEmptyInputException;
+import duke.exceptions.DukeException;
 import duke.exceptions.DukeInvalidInputException;
 import duke.Storage;
 import duke.TaskList;
@@ -28,10 +29,12 @@ public class ExitCommand extends Command {
      * @throws DukeEmptyInputException
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeInvalidInputException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeInvalidInputException {
         if (!input.equals("")) {
-            throw new DukeInvalidInputException("Say bye properly by typing only bye!");
+            DukeException e =  new DukeInvalidInputException("Say bye properly by typing only bye!");
+            return e.toString();
         }
+        return "Bye! Hope to see you again soon!";
     }
 
     /**

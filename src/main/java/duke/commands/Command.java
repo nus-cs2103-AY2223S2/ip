@@ -21,7 +21,7 @@ public abstract class Command {
         this.input = input;
     }
 
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeInvalidInputException, DukeEmptyInputException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeInvalidInputException, DukeEmptyInputException;
 
     /**
      * Returns whether the command is an exit command.

@@ -1,6 +1,7 @@
 package duke.commands;
 
 import duke.exceptions.DukeEmptyInputException;
+import duke.exceptions.DukeException;
 import duke.exceptions.DukeInvalidInputException;
 import duke.Storage;
 import duke.TaskList;
@@ -28,12 +29,14 @@ public class ListCommand extends Command {
      * @throws DukeEmptyInputException
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeInvalidInputException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeInvalidInputException {
         if (!input.equals("")) {
-            throw new DukeInvalidInputException("If you would like to see the items in the list, " +
+            DukeException e =  new DukeInvalidInputException("If you would like to see the items in the list, " +
                     "please type just list");
+            return e.toString();
         }
         String response = tasks.listItems();
-        ui.printResponse(response);
+//        ui.printResponse(response);
+        return response;
     }
 }
