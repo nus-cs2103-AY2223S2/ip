@@ -2,12 +2,12 @@ package duke;
 
 import java.io.IOException;
 
+import duke.commands.Command;
 import duke.exceptions.DukeException;
 import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.tasks.TaskList;
 import duke.ui.Ui;
-import duke.commands.*;
-import duke.storage.*;
-import duke.tasks.*;
 
 public class Duke {
 
@@ -36,6 +36,8 @@ public class Duke {
 
         return ui.getResponses();
     }
+
+    public Ui getUi() { return ui;}
 
 }
 

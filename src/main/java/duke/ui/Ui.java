@@ -25,14 +25,9 @@ public class Ui {
         responses = new ArrayList<>();
     }
 
-    public void showWelcome() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        String message = "Hello from\n" + logo + "\nWhat can I do for you?";
-        showToUser(message);
+    public String showWelcome() {
+        String message = "Hello from Duke,\n What can I do for you?";
+        return message;
     }
 
     public void showToUser(String... message) {
@@ -50,7 +45,7 @@ public class Ui {
         responses.clear();
         return concatenatedResponse;
     }
-    
+
 
     public void showGoodbyeMessage() {
         showToUser("Bye. Hope to see you again soon!");

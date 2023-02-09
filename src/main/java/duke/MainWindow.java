@@ -29,11 +29,12 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
-    public String getResponse(String input) {
-        return "Duke heard: " + input;
-    }
+
     public void setDuke(Duke d) {
         duke = d;
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(d.getUi().showWelcome(), dukeImage)
+        );
     }
 
     /**
