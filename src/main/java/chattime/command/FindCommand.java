@@ -48,7 +48,7 @@ public class FindCommand extends Command {
      * @return The find result of given keyword.
      */
     private String findIn(TaskList taskList) {
-        String message = "I've matched the task(s) with your search keyword for you:";
+        String message = "Are you looking for this:";
 
         Supplier<Stream<Task>> filteredTask = () -> taskList.getList().stream()
                 .filter(task -> task.isMatchDescription(keyword));
@@ -65,7 +65,7 @@ public class FindCommand extends Command {
                 : "\nStill have " + pending + " task(s) to go. @*@");
 
         if (totalResult == 0) {
-            message = "Whoo! Seems that you don't have any task related to \"" + keyword + "\" currently.";
+            message = "Yay holidayy! Seems that you don't have any task related to \"" + keyword + "\" currently.";
         }
 
         return message;

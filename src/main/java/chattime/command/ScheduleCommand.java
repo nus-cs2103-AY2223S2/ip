@@ -43,7 +43,7 @@ public class ScheduleCommand extends Command {
         if (taskList.getList().size() == 0) {
             return ui.warnEmptyList();
         } else {
-            StringBuilder message = new StringBuilder("This is your schedule on "
+            StringBuilder message = new StringBuilder("Look! These things are happening on  "
                     + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy ")) + ":\n");
 
             Supplier<Stream<Task>> filteredTask = () -> taskList.getList().stream()
@@ -64,7 +64,7 @@ public class ScheduleCommand extends Command {
             }
 
             int total = (int) filteredTask.get().count();
-            message.append("\nYou have ").append(total).append(" unmarked task(s) on this day.");
+            message.append("\nYou have ").append(total).append(" unmarked task(s) on this day :(");
 
             return message.toString();
 
