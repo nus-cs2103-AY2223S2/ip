@@ -2,7 +2,6 @@ package iris.command;
 
 import iris.TaskList;
 import iris.TaskStore;
-import iris.Ui;
 
 /**
  * closes the chat
@@ -14,15 +13,8 @@ public class ExitCommand extends Command {
      * {@inheritDoc}
      */
     @Override
-    public boolean isEnd() {
-        return true;
-    }
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void execute(TaskList tasks, Ui ui, TaskStore taskStore) {
-        Ui.output(EXIT_TEXT);
+    public String getResponse(TaskList tasks, TaskStore taskStore) {
+        return EXIT_TEXT;
     }
 
     /**

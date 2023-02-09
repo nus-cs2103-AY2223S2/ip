@@ -2,7 +2,6 @@ package iris.command;
 
 import iris.TaskList;
 import iris.TaskStore;
-import iris.Ui;
 import iris.exception.IrisException;
 import iris.exception.UnknownTaskException;
 import iris.task.Task;
@@ -11,6 +10,7 @@ import iris.task.Task;
  * Marks the task at given index as not done
  */
 public class UnmarkTaskCommand extends Command {
+    private Task task;
     private final int index;
 
     public UnmarkTaskCommand(int i) {
@@ -20,8 +20,7 @@ public class UnmarkTaskCommand extends Command {
      * {@inheritDoc}
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, TaskStore taskStore) throws IrisException {
-        Task task;
+    public void execute(TaskList tasks, TaskStore taskStore) throws IrisException {
         try {
             task = tasks.get(index);
         } catch (IndexOutOfBoundsException e) {
@@ -29,9 +28,16 @@ public class UnmarkTaskCommand extends Command {
         }
         task.unmark();
         taskStore.updateTasks(tasks);
-        Ui.output("Bummer! Have fun doing this:");
-        Ui.output(task.toString());
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getResponse(TaskList tasks, TaskStore taskStore) throws IrisException {
+        return "Bummer! Have fun doing this:\n" + task;
+    }
+
     /**
      * {@inheritDoc}
      */

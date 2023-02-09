@@ -2,7 +2,6 @@ package iris.command;
 
 import iris.TaskList;
 import iris.TaskStore;
-import iris.Ui;
 
 /**
  * displays the help message with all commands
@@ -32,8 +31,8 @@ public class HelpCommand extends Command {
             + "Have fun!";
 
     @Override
-    public void execute(TaskList tasks, Ui ui, TaskStore taskStore) {
-        Ui.output(HELP_TEXT);
+    public String getResponse(TaskList tasks, TaskStore taskStore) {
+        return HELP_TEXT;
     }
 
     /**

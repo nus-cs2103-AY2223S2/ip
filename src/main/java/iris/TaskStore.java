@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import iris.exception.IrisException;
+import iris.exception.StorageException;
 import iris.task.Task;
 
 /**
@@ -18,7 +19,7 @@ public class TaskStore {
     /**
      * initiates the file and created one if it's not present
      */
-    public TaskStore() {
+    public TaskStore() throws IrisException {
         File dir = new File("./data");
         this.taskFile = new File("./data/TaskList.txt");
         try {
@@ -29,7 +30,7 @@ public class TaskStore {
                 this.taskFile.createNewFile();
             }
         } catch (IOException e) {
-            Ui.output("Something went wrong while creating the task file: " + e.getMessage());
+            throw new StorageException(e.getMessage());
         }
     }
 
@@ -37,13 +38,13 @@ public class TaskStore {
      * adds a tasks to the stored file
      * @param task the task to be added
      */
-    public void addTask(Task task) {
+    public void addTask(Task task) throws IrisException {
         try {
             FileWriter fw = new FileWriter(taskFile, true);
             fw.write(task.storageFormat());
             fw.close();
         } catch (IOException e) {
-            Ui.output("Something went wrong while adding the task: " + e.getMessage());
+            throw new StorageException(e.getMessage());
         }
     }
 
@@ -51,26 +52,26 @@ public class TaskStore {
      * updates the file to contain the given task list
      * @param tasks the task list to be updated
      */
-    public void updateTasks(TaskList tasks) {
+    public void updateTasks(TaskList tasks) throws IrisException {
         try {
             FileWriter fw = new FileWriter(this.taskFile);
             fw.write(tasks.storageFormat());
             fw.close();
         } catch (IOException e) {
-            Ui.output("Something went wrong while updating the task: " + e.getMessage());
+            throw new StorageException(e.getMessage());
         }
     }
 
     /**
      * clears all tasks from the stored task list
      */
-    public void reset() {
+    public void reset() throws IrisException {
         try {
             FileWriter fw = new FileWriter(this.taskFile);
             fw.write("");
             fw.close();
         } catch (IOException e) {
-            Ui.output("Something went wrong while resetting the file: " + e.getMessage());
+            throw new StorageException(e.getMessage());
         }
     }
 
@@ -91,7 +92,7 @@ public class TaskStore {
                 this.taskFile.createNewFile();
             }
         } catch (IOException e) {
-            Ui.output("Something went wrong while reading the task file: " + e.getMessage());
+            throw new StorageException(e.getMessage());
         }
         return tasks;
     }

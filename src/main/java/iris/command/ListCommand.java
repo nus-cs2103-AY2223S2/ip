@@ -2,7 +2,6 @@ package iris.command;
 
 import iris.TaskList;
 import iris.TaskStore;
-import iris.Ui;
 
 /**
  * lists all tasks, events and deadlines
@@ -12,9 +11,9 @@ public class ListCommand extends Command {
      * {@inheritDoc}
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, TaskStore taskStore) {
+    public String getResponse(TaskList tasks, TaskStore taskStore) {
         if (tasks.size() == 0) {
-            Ui.output("You have no tasks.");
+            return "You have no tasks.";
         }
 
         String str = tasks.size() < 10
@@ -22,7 +21,7 @@ public class ListCommand extends Command {
                 : "(So many >:O)\n";
         str = String.join(" ", "You have the following tasks:", str);
 
-        Ui.output(str + tasks + "You have " + tasks.size() + " tasks.");
+        return str + tasks + "You have " + tasks.size() + " tasks.";
     }
 
     /**

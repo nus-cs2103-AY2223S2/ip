@@ -2,7 +2,7 @@ package iris.command;
 
 import iris.TaskList;
 import iris.TaskStore;
-import iris.Ui;
+import iris.exception.IrisException;
 import iris.task.Task;
 
 /**
@@ -19,17 +19,24 @@ public class AddTaskCommand extends Command {
      * {@inheritDoc}
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, TaskStore taskStore) {
+    public void execute(TaskList tasks, TaskStore taskStore) throws IrisException {
         tasks.add(this.task);
         taskStore.addTask(this.task);
+    }
 
-        String out = tasks.size() < 4
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getResponse(TaskList tasks, TaskStore taskStore) {
+        String response = tasks.size() < 4
                 ? ""
                 : tasks.size() > 10
-                ? "What?!! You're going to dieee!\n"
-                : "Another task? Phew >:(.\n";
-        Ui.output(out + "Added your task: " + this.task);
-        Ui.output("You have " + tasks.size() + " tasks.");
+                        ? "What?!! You're going to dieee!\n"
+                        : "Another task? Phew >:(.\n";
+        response += response + "Added your task: " + this.task + "\n";
+        response += "You have " + tasks.size() + " tasks.";
+        return response;
     }
     /**
      * {@inheritDoc}

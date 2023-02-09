@@ -2,7 +2,6 @@ package iris.command;
 
 import iris.TaskList;
 import iris.TaskStore;
-import iris.Ui;
 import iris.exception.IrisException;
 
 /**
@@ -13,10 +12,17 @@ public class ResetCommand extends Command {
      * {@inheritDoc}
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, TaskStore taskStore) throws IrisException {
+    public void execute(TaskList tasks, TaskStore taskStore) throws IrisException {
         tasks.clear();
         taskStore.reset();
-        Ui.output("Your task list has been resetted. You have no commands.");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getResponse(TaskList tasks, TaskStore taskStore) throws IrisException {
+        return "Your task list has been resetted. You have no commands.";
     }
 
     /**

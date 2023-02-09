@@ -7,9 +7,7 @@ import java.time.format.DateTimeParseException;
 
 import iris.TaskList;
 import iris.TaskStore;
-import iris.Ui;
 import iris.exception.DateTimeException;
-import iris.exception.IrisException;
 
 /**
  * filters deadlines and events that fall in a certain period or on a certain date
@@ -28,8 +26,7 @@ public class FilterCommand extends Command {
             start = LocalDate.parse(str, DateTimeFormatter.ofPattern("dd-MM-yyyy")).atStartOfDay().minusNanos(1);
             end = LocalDate.parse(str, DateTimeFormatter.ofPattern("dd-MM-yyyy")).plusDays(1).atStartOfDay();
         } catch (DateTimeParseException e) {
-            Ui.output(e.getMessage());
-            throw new DateTimeException();
+            throw new DateTimeException(e.getMessage());
         }
     }
 
@@ -44,8 +41,7 @@ public class FilterCommand extends Command {
             start = LocalDateTime.parse(str1, DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm")).minusNanos(1);
             end = LocalDateTime.parse(str2, DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm")).plusNanos(1);
         } catch (DateTimeParseException e) {
-            Ui.output(e.getMessage());
-            throw new DateTimeException();
+            throw new DateTimeException(e.getMessage());
         }
     }
 
@@ -53,8 +49,8 @@ public class FilterCommand extends Command {
      * {@inheritDoc}
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, TaskStore taskStore) throws IrisException {
-        Ui.output("In this period: " + tasks.dateFilter(start, end).toString());
+    public String getResponse(TaskList tasks, TaskStore taskStore) {
+        return "In this period: " + tasks.dateFilter(start, end).toString();
     }
 
     /**

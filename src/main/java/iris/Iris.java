@@ -11,46 +11,61 @@ import iris.exception.IrisException;
  * @version 1.0
  */
 public class Iris {
+    private static final String GREETING = "Welcome to Lavender Network!\n"
+            + "I'm Iris, your favourite teenage chatbot.\n"
+            + "I'm here to keep track of your tasks so you don't have to :)\n"
+            + "Type \"help\" to see the commands.\n"
+            + "What are you waiting for? Let's get started!";
     private TaskList tasks = null;
-    private final TaskStore taskStore;
-    private final Ui ui;
+    private TaskStore taskStore = null;
+    private IrisException initializingException = null;
+
 
     /**
      * Constructor that initiates the UI, task storage and task list for the bot
      */
     public Iris() {
-        this.ui = new Ui();
-        this.taskStore = new TaskStore();
         try {
+            this.taskStore = new TaskStore();
             this.tasks = this.taskStore.parse();
         } catch (IrisException e) {
-            Ui.output("Error while parsing stores file: " + e.getMessage() + "\nResetting the task list.");
-            if (this.tasks == null) {
-                this.tasks = new TaskList();
-                this.taskStore.reset();
-            }
+            System.out.println("here");
+            this.initializingException = e;
         }
     }
 
     /**
-     * runs the chatbot
+     * gets a response for a given input
+     * @param input the input to get the response for
      */
-    private void run() {
-        ui.greet();
-        boolean isEnd = false;
-        while (!isEnd) {
-            try {
-                String input = this.ui.readInput();
-                Command command = Parser.parse(input);
-                command.execute(this.tasks, this.ui, this.taskStore);
-                isEnd = command.isEnd();
-            } catch (IrisException e) {
-                Ui.output(e.getMessage());
-            }
+    public String getResponse(String input) {
+        try {
+            Command command = Parser.parse(input);
+            command.execute(this.tasks, this.taskStore);
+            return command.getResponse(this.tasks, this.taskStore);
+        } catch (IrisException e) {
+            return e.getMessage();
         }
     }
 
-    public static void main(String[] args) {
-        new Iris().run();
+    /**
+     *
+     */
+    public String startingMessage() {
+        if (initializingException == null) {
+            return GREETING;
+        } else {
+            try {
+                if (this.tasks == null) {
+                    this.tasks = new TaskList();
+                    this.taskStore.reset();
+                }
+            } catch (IrisException e) {
+                return "There was an error while resetting the task list. Please restart the application.";
+            }
+
+            return "Error while parsing stores file: " + initializingException.getMessage()
+                    + "\nResetting the task list.\n" + GREETING;
+        }
     }
 }
