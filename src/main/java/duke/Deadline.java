@@ -1,47 +1,35 @@
-package duke.task;
-
-import duke.task.Task;
+package duke;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.util.Locale;
 
+// class Deadline - Type of task with description and a date to finish it by
 public class Deadline extends Task {
 
-    private LocalDateTime deadline;
+    protected LocalDate by;
 
-    public Deadline(String content, String deadline) {
-        super(content);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        try {
-            this.deadline = LocalDateTime.parse(deadline.trim(), formatter);
-        } catch (DateTimeParseException e) {
-            System.out.println("Invalid date format should be yyyy-MM-dd HH:mm");
-        }
-    }
-
-    public Deadline(boolean isMarked, String content, String deadline) {
-        super(isMarked, content);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        try {
-            this.deadline = LocalDateTime.parse(deadline.trim(), formatter);
-        } catch (DateTimeParseException e) {
-            System.out.println("Invalid date format should be yyyy-MM-dd HH:mm");
-        }
+    public Deadline(String description, String by) {
+        super(description);
+        DateTimeFormatter df = new DateTimeFormatterBuilder().parseCaseInsensitive().appendPattern("dd-MM-yyyy")
+                .toFormatter(Locale.ENGLISH);
+        this.by = LocalDate.parse(by, df);
     }
 
     @Override
-    public String addDivider() {
-        String d = " | ";
-        int marked = this.isMarked() ? 1 : 0;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        return "D" + d + marked + d + get_content() + d + deadline.format(formatter);
+    public String toSavedString() {
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd-MM-yyyy").withLocale(Locale.ENGLISH);
+        return "D | " + super.toSavedString() + " | " + this.by.format(df);
     }
 
     @Override
     public String toString() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH a");
-        return "[D] " + super.toString() + "(by: " + this.deadline.format(formatter) + ")";
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd-MM-yyyy").withLocale(Locale.ENGLISH);
+        return "[D]" + super.toString() + " (by: " + by.format(df) + ")";
     }
 }

@@ -1,8 +1,5 @@
 package duke;
 
-import duke.task.Deadline;
-import duke.task.Event;
-
 /**
  * Handles the processing of inputs in the terminal through string processing
  * @author oliverloo
@@ -139,7 +136,6 @@ public class Parser {
         return false;
     }
 
-<<<<<<< HEAD
     public static boolean is_Find(String input) {
         String[] firstword_Arr = input.split(" ", 2);
         if (firstword_Arr.length == 2 ) {
@@ -154,13 +150,6 @@ public class Parser {
         return input.split(" ", 2)[1];
     }
 
-=======
-    /**
-     * Checks if input is unmark command
-     * @param input
-     * @return true if input is unmark, else false
-     */
->>>>>>> branch-A-JavaDoc
     public static boolean is_Unmark(String input) {
         String[] firstword_Arr = input.split(" ", 2);
         if (firstword_Arr.length == 2 ) {

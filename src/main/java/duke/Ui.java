@@ -1,121 +1,119 @@
 package duke;
 
-import duke.task.Task;
+import java.util.ArrayList;
 
-/**
- * Handles the user interface and overall appearance of the duke program
- * @author oliverloo
- * @version 1.0
- *
- */
+// class Ui - handles all the lines to be printed and all the user inputs (commands)
 public class Ui {
-    static String line = "      _____________________________________________________________________";
 
-    /**
-     * Greet user interface: Duke greets the user
-     */
-    public static void greet () {
-        System.out.println(line);
-        System.out.println("\n      Hello! I'm Oli\n" + "       What can I do for you?");
-        System.out.println(line);
+    public Ui() {
+
     }
 
-    /**
-     * Displays list to the user in a numbered format
-     */
-    public static void displayList(Tasklist list) {
-        System.out.println(line);
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println("        " + (i + 1) + ". " + list.get(i));
+    // prints out welcome greeting to user when Duke is run
+    public String showWelcome() {
+        return "    Hi! I'm Duke\n    How can I help?";
+    }
+
+/*    public void takeCommands(TaskList t) {
+        Scanner sc = new Scanner(System.in);
+        String s = sc.nextLine();
+
+        ArrayList<Task> tasks = t.getTasks();
+        int taskCounter = tasks.size();
+        while (!s.equals("bye")) {
+            try {
+                // method handleCommand handles current command, returns updated taskCounter variable
+                taskCounter = handleCommand(s, tasks, taskCounter);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+
+            // take in next command
+            s = sc.nextLine();
         }
-        System.out.println(line);
-    }
 
-    /**
-     * Displays a task that is just marked
-     * @param task
-     */
-    public static void displayMark(Task task) {
-        System.out.println("        Nice! I've marked this task as done:");
-        System.out.println("        " + task);
-    }
+        System.out.println("    Bye. Hope to see you soon!");
+    }*/
 
-    /**
-     * Displays a task that is just unmarked
-     * @param task
-     */
-    public static void displayUnmark(Task task) {
-        System.out.println("        OK, I've marked this task as not done yet:");
-        System.out.println("        " + task);
-    }
+    public static String handleCommand(String s, TaskList t) {
+        ArrayList<Task> tasks = t.getTasks();
+        // user enters list command
+        if (s.contains("list")) {
+            TaskList taskListing = new TaskList(tasks);
+            return taskListing.displayTasks();
+            // return string of tasks -> make displayTasks() return string first
 
-    /**
-     * Bids the user farewell before terminating the duke program
-     */
-    public static void displayByeMessage() {
-        System.out.println(line);
-        System.out.println("        byebye! Have an exquisite day");
-        System.out.println(line);
-    }
+            // user enters mark or unmark command
+        } else if (s.contains("mark") || s.contains("unmark")) {
+            int taskNumber = Integer.parseInt(s.substring(s.length() - 1)) - 1;
+            tasks.get(taskNumber).toggleMarked();
+            String output = "";
+            if (s.contains("unmark")) {
+                output += "    OK, I've marked this task as not done yet:";
+            } else {
+                output += "    Nice! I've marked this task as done:";
+            }
+            return output + "  " + tasks.get(taskNumber).toString();
 
+            // user enters a new task
+        } else if (s.contains("todo")) {
+            if (s.substring(4).isBlank()) {
+                return "    OOPS!!! The description of a todo cannot be empty.";
+            } else {
+                Task newTask = new Todo(s.substring(5));
+                tasks.add(newTask);
+                return "    added: " + newTask;
+            }
 
-    public static void displayInvalidIndexMessage() {
-        System.out.println("Invalid Index!");
-    }
+        } else if (s.contains("deadline")) {
+            if (s.substring(8).isBlank()) {
+                return "    OOPS!!! The description of a deadline cannot be empty.";
+            } else {
+                String by = s.substring(s.indexOf("/") + 4);
+                Task newTask = new Deadline(s.substring(9, s.indexOf("/") - 1), by);
+                tasks.add(newTask);
+                return "    added: " + newTask;
+            }
 
-    public static void displayDeadlineError() {
-        System.out.println("Duke.Deadline Input Error! You need to specify date or content is empty!");
-    }
+        } else if (s.contains("event")) {
+            if (s.substring(5).isBlank()) {
+                return "    OOPS!!! The description of a event cannot be empty.";
+            } else {
+                String from = s.substring(s.indexOf("/") + 6, s.lastIndexOf("/") - 1);
+                String to = s.substring(s.lastIndexOf("/") + 4);
+                Task newTask = new Event(s.substring(6, s.indexOf("/") - 1), from, to);
+                tasks.add(newTask);
+                return "    added: " + newTask;
+            }
 
-    public static void displayEventError() {
-        System.out.println("Invalid Input! You need to specify a /from and /to or content is empty!");
-    }
+        } else if (s.contains("delete")) {
+            if (s.substring(6).isBlank()) {
+                return "    OOPS!!! You have not entered anything to delete.";
+            } else {
+                int taskNumber = Integer.parseInt(s.substring(s.length() - 1)) - 1;
+                Task deletedTask = tasks.get(taskNumber);
+                tasks.remove(taskNumber);
+                return "    Noted. I've removed this task:\n      " + deletedTask +
+                        "\n    Now you have " + tasks.size()+ " tasks in the list";
 
-    /**
-     * Displays a task that is just added to a specified Tasklist
-     * @param task
-     * @param list
-     */
-    public static void displayAddTask(Task task, Tasklist list) {
-        System.out.println(line);
-        System.out.println("        Got it. I've added this task:");
-        System.out.println("        " + task);
-        displayUpdatedList(list);
-    }
+            }
+        } else if (s.contains("find")) {
+            String findString = s.substring(5);
+            ArrayList<Task> foundTasks = new ArrayList<Task>();
+            for (Task task : tasks) {
+                if (task.toString().contains(findString)) {
+                    foundTasks.add(task);
+                }
+            }
+            TaskList searchResults = new TaskList(foundTasks);
+            return "Here are the tasks I found!\n" + searchResults.displayTasks();
 
-    /**
-     * Displays an updated Tasklist
-     */
-    public static void displayUpdatedList(Tasklist list) {
-        System.out.println("        Now you have " + list.size() + " tasks in the list.");
-        System.out.println(line);
-    }
-
-    /**
-     * Displays information of task that is just removed from Tasklist
-     */
-    public static void displayDelete(int i, Tasklist list){
-        System.out.println(line);
-        System.out.println("        Got it. I've removed this task:");
-        System.out.println("        " + list.get(i));
-        list.delete(i);
-        System.out.println("        Now you have " + list.size() + " tasks in the list.");
-        System.out.println(line);
-    }
-
-    /**
-     * Informs user that list is just cleared
-     */
-    public static void displayClear() {
-        System.out.println("        Got it. I have cleared the task-list.\n" + line);
-    }
-
-    public static void displayFindHeader() {
-        System.out.println(line);
-        System.out.println("Here are the matching tasks in your list:");
-    }
-
-    public static void displayMatchedTask(Task task, int count) {
-        System.out.println(count + ". " + task);
+            // make displayTasks return a String
+        } else if (s.contains("bye")) {
+            return "    Bye. Hope to see you soon!";
+        } else {
+            //throw new duke.DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+            return "    OOPS!!! I'm sorry, but I don't know what that means :-(";
+        }
     }
 }

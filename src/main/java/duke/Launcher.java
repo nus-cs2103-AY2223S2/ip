@@ -1,4 +1,4 @@
-package com.example.demo1;
+package duke;
 
 import javafx.application.Application;
 
