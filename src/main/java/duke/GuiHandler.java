@@ -8,13 +8,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
-import static java.lang.Thread.sleep;
 
 public class GuiHandler extends Application {
     private ScrollPane scrollPane;
@@ -28,7 +25,6 @@ public class GuiHandler extends Application {
     private CommandHandler commandHandler = new CommandHandler();
     private final Storage storage = new Storage("./data/duke.txt");
     private TaskList tasks = this.storage.loadData();
-
 
 
 
@@ -81,6 +77,10 @@ public class GuiHandler extends Application {
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
+        //Step 2.1. Add Duke starting dialog
+        dialogContainer.getChildren().add(DialogBox.getStartingDialog(duke));
+
+
         //Step 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
@@ -97,12 +97,13 @@ public class GuiHandler extends Application {
         Label userText = new Label("You: \n" + userInput.getText());
         Label dukeText = new Label("Duke: \n" + getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+                DialogBox.getUserDialog(userText, user),
+                DialogBox.getDukeDialog(dukeText, duke)
         );
 
         if (userInput.getText().equalsIgnoreCase("bye")) {
             Platform.exit();
+            System.exit(0);
         }
         userInput.clear();
     }

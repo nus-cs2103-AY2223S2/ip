@@ -6,8 +6,8 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.TextAlignment;
 
@@ -26,6 +26,7 @@ public class DialogBox extends HBox {
 
         this.setAlignment(Pos.TOP_RIGHT);
         this.getChildren().addAll(text, displayPicture);
+        this.setPadding(new Insets(20, 0, 20, 0));
     }
 
     /**
@@ -38,17 +39,28 @@ public class DialogBox extends HBox {
         this.getChildren().setAll(tmp);
     }
 
-    public static DialogBox getUserDialog(Label l, ImageView iv) {
-        l.setPadding(new Insets(10));
+    public static DialogBox getUserDialog(Label l, Image i) {
+        l.setPadding(new Insets(0, 10, 0, 10));
         l.setTextAlignment(TextAlignment.RIGHT);
+        ImageView iv = new ImageView();
+        iv.setImage(i);
         DialogBox d = new DialogBox(l, iv);
         return d;
     }
 
-    public static DialogBox getDukeDialog(Label l, ImageView iv) {
-        l.setPadding(new Insets(10));
+    public static DialogBox getDukeDialog(Label l, Image i) {
+        l.setPadding(new Insets(0, 10, 0, 10));
+        ImageView iv = new ImageView();
+        iv.setImage(i);
         var d = new DialogBox(l, iv);
         d.flip();
         return d;
+    }
+
+    public static DialogBox getStartingDialog(Image i) {
+        return getDukeDialog(
+                new Label("Duke: \n" +
+                        "Hello! I am Duke! How may I help you today?"),
+                i);
     }
 }
