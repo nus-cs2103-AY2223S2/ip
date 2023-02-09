@@ -1,3 +1,5 @@
+package task;
+
 public class ToDo extends Task {
     public ToDo(String description, boolean isDone) {
         super(description, isDone);
@@ -13,7 +15,7 @@ public class ToDo extends Task {
     }
 
     @Override
-    public String saveAsStr() {
-        return "T" + super.saveAsStr();
+    public String saveAsStr(String separator) {
+        return "T" + super.saveAsStr(separator) + "\n";
     }
 }

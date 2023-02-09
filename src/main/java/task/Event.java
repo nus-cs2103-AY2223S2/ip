@@ -1,3 +1,5 @@
+package task;
+
 import java.time.LocalDateTime;
 
 public class Event extends Task {
@@ -28,7 +30,7 @@ public class Event extends Task {
     }
 
     @Override
-    public String saveAsStr() {
-        return "E" + super.saveAsStr() + "~%~" + from + "~%~" + to;
+    public String saveAsStr(String separator) {
+        return "E" + super.saveAsStr(separator) + separator + from + separator + to + "\n";
     }
 }
