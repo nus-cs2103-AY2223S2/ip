@@ -1,3 +1,4 @@
 [ T ][ Y ] Bench Press WR 
 [ D ][ Y ] Squat car by: 2023-02-03 
 [ T ][ Y ] Drink Protein Shake 
+[ T ][ N ] eat 
