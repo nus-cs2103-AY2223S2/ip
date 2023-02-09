@@ -21,6 +21,11 @@ public class ByeCommand extends Command {
     @Override
     public boolean execute(Ui ui, TaskList tasklist) {
         ui.endMsg();
+        sleepAndExit();
+        return false;
+    }
+
+    public void sleepAndExit() {
         CompletableFuture.runAsync(() -> {
             try {
                 Thread.sleep(1000);
@@ -30,7 +35,6 @@ public class ByeCommand extends Command {
         }).thenRun(() -> {
             Platform.exit();
         });
-        return false;
     }
 
 }

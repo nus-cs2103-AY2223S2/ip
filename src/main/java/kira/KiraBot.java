@@ -25,15 +25,17 @@ public class KiraBot {
 
     private void run() {
         UI.startMsg();
+        loadFile();
+        listenForCommand();
+    }
 
+    private void loadFile() {
         try {
             this.taskList = new TaskList(SaveLoad.load(FILEPATH));
         } catch (KiraException e) {
             UI.errMsg(e.getMessage());
             this.taskList = new TaskList();
-        } finally {
-            listenForCommand();
-        }
+        } 
     }
 
     private void listenForCommand() {
