@@ -9,6 +9,7 @@ public class Parser {
     private final static String UNMARK = "unmark";
     private final static String DELETE = "delete";
     private final static String SEARCH = "search";
+    private final static String CHECK_DUPLICATE = "check_duplicate";
 
     private void list(TaskList tasks) {
         Ui.indentedPrintln("Here are the tasks in your list:");
@@ -52,6 +53,8 @@ public class Parser {
             tasks.mark(Character.getNumericValue(str.charAt(5)), storage);
         } else if (str.length() >= 6 && str.substring(0, 6).equals(UNMARK)) {
             tasks.unmark(Character.getNumericValue(str.charAt(7)), storage);
+        } else if (str.length() >= 15 && str.substring(0, 15).equals(CHECK_DUPLICATE)){
+            tasks.checkDuplicate();
         } else if (isValidTask(str)) {
             tasks.addTask(str, storage);
         } else if (str.length() >= 6 && str.substring(0, 6).equals(DELETE)) {
