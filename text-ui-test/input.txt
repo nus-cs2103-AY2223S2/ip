@@ -1,0 +1,23 @@
+wrong duke.command
+todo Borrow book
+deadline return book /by 23/01/2023 03:22
+
+event project meeting /from 30/12/2023 12:33 /to 12/12/2024 23:59
+event /from /to
+event Tennis /from Friday
+event /from 28 Jan 2023 /to 30 Jan 2023
+event Tennis /to Friday /from Monday
+list
+mark 1
+mark 2
+mark 5
+list
+unmark 2
+list
+delete 1
+list
+delete 10
+delete -2
+delete 1
+delete 1
+bye
