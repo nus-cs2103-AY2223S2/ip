@@ -15,6 +15,10 @@ public class FindCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
+        assert tasks != null : "Tasks should not be null";
+        assert ui != null : "Ui should not be null";
+        assert storage != null : "Storage should not be null";
+
         String output = ui.showFind();
         String listOfTasksWithKeyword = tasks.findTaskIndexWithKeyword(listOfKeywords);
         return output + listOfTasksWithKeyword;
