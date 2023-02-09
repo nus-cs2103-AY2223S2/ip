@@ -1,11 +1,10 @@
 package Duke;
 
-import Command.Parser;
-import Exceptions.*;
-import storage.Storage;
-import task.Task;
-import task.TaskList;
-import ui.UI;
+import Duke.Command.Parser;
+import Duke.Exceptions.*;
+import Duke.storage.Storage;
+import Duke.task.TaskList;
+import Duke.ui.UI;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -57,7 +56,7 @@ public class Duke<Ui> {
           + "| |_| | |_| |   <  __/\n"
           + "|____/ \\__,_|_|\\_\\___|\n";
       String sayHi = "Hello from\n" + logo +
-          "\nHello! I'm Duke\n What can I do for you?";
+          "\nHello! I'm OriginalDuke.Duke\n What can I do for you?";
       System.out.println(sayHi);
   }
 }
