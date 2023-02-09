@@ -6,18 +6,11 @@ import java.util.Scanner;
  * Ui represents the user interface, which in this case is the console.
  */
 public class Ui {
+    private static final String DELIMITER = "\t---";
     private Scanner scanner;
     public Ui() {
         this.scanner = new Scanner(System.in);
     }
-    public void println(String string) {
-        System.out.println("\t" + string + "\n");
-    }
-
-    public void println(Object object) {
-        System.out.println("\t" + object.toString() + "\n");
-    }
-
     /**
      * Prints the start message.
      */
@@ -36,18 +29,18 @@ public class Ui {
      * @param string String to print.
      */
     public void printBlock(String string) {
-        System.out.println("\t---");
+        System.out.println(DELIMITER);
         System.out.println("\t" + string.replace("\n", "\n\t").replaceAll("\\t$", ""));
-        System.out.println("\t---");
+        System.out.println(DELIMITER);
     }
 
     /**
      * Prints the goodbye message.
      */
     public void printEnd() {
-        System.out.println("\t---");
+        System.out.println(DELIMITER);
         System.out.println("\tBye. Hope to see you again soon!");
-        System.out.println("\t---");
+        System.out.println(DELIMITER);
     }
 
     public String readCommand() {
