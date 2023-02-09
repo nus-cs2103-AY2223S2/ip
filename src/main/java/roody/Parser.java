@@ -7,6 +7,7 @@ import roody.commands.Command;
 import roody.commands.DeleteCommand;
 import roody.commands.EndCommand;
 import roody.commands.FindCommand;
+import roody.commands.HelpCommand;
 import roody.commands.ListCommand;
 import roody.commands.MakeDeadlineCommand;
 import roody.commands.MakeEventCommand;
@@ -97,8 +98,11 @@ public class Parser {
                 throw new InputFormatException(InputFormatException.CMD_KEY);
             }
             break;
+        case "help":
+            // nothing since help can have multiple inputs
+            break;
         default:
-            throw new RoodyException("I don't quite understand that.");
+            throw new RoodyException("I don't quite understand that. Type \"help\" for assistance!");
         }
         // create command
         switch (commands[0]) {
@@ -122,6 +126,12 @@ public class Parser {
             return new UnmarkCommand(Integer.parseInt(commands[1]) - 1);
         case "find":
             return new FindCommand(commands[1]);
+        case "help":
+            if (commands.length == 1) {
+                return new HelpCommand("start");
+            } else {
+                return new HelpCommand(commands[1]);
+            }
         default:
             throw new RoodyException("Error in Parser");
         }
