@@ -108,6 +108,35 @@ public class Duke extends Application {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
+            if (logic.isTaskCommand(input)) {
+                Task task = logic.toTask(input);
+                TaskList.addTask(task);
+                display.line();
+            } else if (input.equals("bye")) {
+                display.farewell();
+                break;
+            } else if (input.equals("list")) {
+                tasks.printTaskList();
+                display.line();
+            } else if (input.startsWith("mark")) {
+                int taskNumber = logic.indexToMark(input);
+                tasks.taskMarkedAtIndex(--taskNumber);
+                display.line();
+            } else if (input.startsWith("unmark")) {
+                int taskNumber = logic.indexToUnmark(input);
+                tasks.taskUnmarkedAtIndex(--taskNumber);
+                display.line();
+            } else if (input.startsWith("delete")) {
+                int taskNumber = logic.indexToDelete(input);
+                tasks.deleteTaskAtIndex(--taskNumber);
+                display.line();
+            } else {
+                String description = logic.commandToDescription(input); // find command
+                display.announceFindResult();
+                tasks.matchDescription(description);
+                display.line();
+            }
+            store.autoSave(tasks);
         });
 
         userInput.setOnAction((event) -> {

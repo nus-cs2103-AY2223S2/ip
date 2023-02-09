@@ -17,6 +17,8 @@ import duke.task.Todo;
  *      Description: duke.store.Storage class deals with loading tasks from the file and saving tasks in the file.
  */
 public class Storage {
+    private static final String COMPLETE_MSG = "    ๑(◕‿◕)๑ COMPLETED! ๑(◕‿◕)๑    ";
+    private static final String INCOMPLETE_MSG = "    (｡-_-｡ ) INCOMPLETE ( ｡-_-｡)    ";
     private static String savePath;
     private static String loadPath;
 
@@ -77,7 +79,7 @@ public class Storage {
      */
     private static String readerFriendly(Task task) {
         String status = task.getStatus()
-            ? "    ๑(◕‿◕)๑ COMPLETED! ๑(◕‿◕)๑    " : "    (｡-_-｡ ) INCOMPLETE ( ｡-_-｡)    ";
+            ? COMPLETE_MSG : INCOMPLETE_MSG;
         if (task instanceof Todo) {
             Todo t = (Todo) task;
             return "Todo: " + t.getDescription() + " " + status;
