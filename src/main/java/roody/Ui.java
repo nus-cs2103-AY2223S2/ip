@@ -2,6 +2,9 @@ package roody;
 
 import java.util.ArrayList;
 
+import roody.exceptions.RoodyException;
+import roody.tasks.Task;
+
 /**
  * Represents a User Interface.
  */
@@ -58,18 +61,25 @@ public class Ui {
     }
 
     /**
-     * Returns a successful marking/unmarking of task message.
-     * @param complete New status of task.
+     * Returns a successful marking of task message.
      * @param task  Task that has been added.
      * @return Marking message.
      */
-    public String showMarkStatus(boolean complete, Task task) {
+    public String showMarkStatus(Task task) {
         StringBuilder stringBuilder = new StringBuilder();
-        if (complete) {
-            stringBuilder.append("Nice! I've marked this task as done:\n");
-        } else {
-            stringBuilder.append("OK, I've marked this task as not done yet:\n");
-        }
+        stringBuilder.append("Nice! I've marked this task as done:\n");
+        stringBuilder.append(task.toString() + '\n');
+        return stringBuilder.toString();
+    }
+
+    /**
+     * Returns a successful unmarking of task message..
+     * @param task  Task that has been added.
+     * @return Marking message.
+     */
+    public String showUnmarkStatus(Task task) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("OK, I've marked this task as not done yet:\n");
         stringBuilder.append(task.toString() + '\n');
         return stringBuilder.toString();
     }
