@@ -3,6 +3,17 @@ package roody;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+import roody.commands.Command;
+import roody.commands.DeleteCommand;
+import roody.commands.EndCommand;
+import roody.commands.FindCommand;
+import roody.commands.ListCommand;
+import roody.commands.MakeDeadlineCommand;
+import roody.commands.MakeEventCommand;
+import roody.commands.MakeTodoCommand;
+import roody.commands.MarkCommand;
+import roody.commands.StartCommand;
+import roody.commands.UnmarkCommand;
 import roody.exceptions.DateFormatException;
 import roody.exceptions.InputFormatException;
 import roody.exceptions.RoodyException;
@@ -22,7 +33,7 @@ public class Parser {
      * @return Commands.
      * @throws RoodyException If faulty input is detected.
      */
-    public static String[] parse(String command) throws RoodyException {
+    public static Command parse(String command) throws RoodyException {
         // splits once by whitespace to filter by first input
         String[] commands = command.toLowerCase().split("\\s", SPLIT_ONCE);
         if (commands[0].equals("event")) {
@@ -30,28 +41,29 @@ public class Parser {
         } else if (commands[0].equals("deadline")) {
             commands = parseDeadline(command);
         }
+        // checks for overall input length
         String[] formatCommands = command.toLowerCase().split("\\s", SPLIT_ALL);
+        // checks for '/' input count
         String[] splitCmds = command.split("/", SPLIT_ALL);
-        // checks formatting of remaining commands
+        // checks formatting of commands
         switch (formatCommands[0]) {
         case "start":
         case "list":
         case "bye":
             if (formatCommands.length != 1) {
-                throw new InputFormatException("I expected \"{Command}\" but got something else");
+                throw new InputFormatException(InputFormatException.CMD);
             }
             break;
         case "todo":
             if (splitCmds.length != 1) {
-                throw new InputFormatException("I expected \"{Command} {Desc}\" but got something else");
+                throw new InputFormatException(InputFormatException.CMD_TODO);
             }
             break;
         case "deadline":
             if (splitCmds.length != 2) {
-                throw new InputFormatException("I expected \"{Command} {Desc} /by {DateTime}\" but got something else");
+                throw new InputFormatException(InputFormatException.CMD_DEADLINE);
             }
             try {
-                // checks the expected date if it matches the correct format
                 LocalDate.parse(commands[2]);
             } catch (DateTimeParseException e) {
                 throw new DateFormatException();
@@ -59,11 +71,9 @@ public class Parser {
             break;
         case "event":
             if (splitCmds.length != 3) {
-                throw new InputFormatException("I expected \"{Command} {Desc} /from {DateTime} /to {DateTime}\" "
-                        + "but got something else");
+                throw new InputFormatException(InputFormatException.CMD_EVENT);
             }
             try {
-                // checks the expected date if it matches the correct format
                 LocalDate.parse(commands[2]);
                 LocalDate.parse(commands[3]);
             } catch (DateTimeParseException e) {
@@ -74,30 +84,50 @@ public class Parser {
         case "mark":
         case "unmark":
             if (formatCommands.length != 2) {
-                throw new InputFormatException("I expected \"{Command} {Index}\" but got something else");
+                throw new InputFormatException(InputFormatException.CMD_INDEX);
             }
             try {
                 Integer.parseInt(commands[1]);
             } catch (NumberFormatException e) {
-                throw new InputFormatException("I expected \"{Command} {Index}\" but got something else");
+                throw new InputFormatException(InputFormatException.CMD_INDEX);
             }
             break;
         case "find":
             if (formatCommands.length != 2) {
-                throw new InputFormatException("I expected \"{Command} {Keyword}\" but got something else");
+                throw new InputFormatException(InputFormatException.CMD_KEY);
             }
             break;
         default:
             throw new RoodyException("I don't quite understand that.");
         }
-        for (int i = 0; i < commands.length; i++) {
-            commands[i] = commands[i].trim();
+        // create command
+        switch (commands[0]) {
+        case "start":
+            return new StartCommand();
+        case "list":
+            return new ListCommand();
+        case "bye":
+            return new EndCommand();
+        case "todo":
+            return new MakeTodoCommand(commands[1]);
+        case "deadline":
+            return new MakeDeadlineCommand(commands[1], LocalDate.parse(commands[2]));
+        case "event":
+            return new MakeEventCommand(commands[1], LocalDate.parse(commands[2]), LocalDate.parse(commands[3]));
+        case "delete":
+            return new DeleteCommand(Integer.parseInt(commands[1]) - 1);
+        case "mark":
+            return new MarkCommand(Integer.parseInt(commands[1]) - 1);
+        case "unmark":
+            return new UnmarkCommand(Integer.parseInt(commands[1]) - 1);
+        case "find":
+            return new FindCommand(commands[1]);
+        default:
+            throw new RoodyException("Error in Parser");
         }
-        return commands;
     }
 
     private static String[] parseEvent(String command) throws RoodyException {
-        String[] commands = command.toLowerCase().split("\\s", SPLIT_ONCE);
         // split by /
         String[] splitCmd = command.split("/", SPLIT_ALL);
 
@@ -108,7 +138,7 @@ public class Parser {
         }
 
         // seperates command from description
-        commands = new String[splitCmd.length + 1];
+        String[] commands = new String[splitCmd.length + 1];
         for (int i = 1; i < splitCmd.length; i++) {
             commands[i + 1] = splitCmd[i];
         }
@@ -124,7 +154,6 @@ public class Parser {
     }
 
     private static String[] parseDeadline(String command) throws RoodyException {
-        String[] commands = command.toLowerCase().split("\\s", SPLIT_ONCE);
         // split by /
         String[] splitCmd = command.split("/", SPLIT_ALL);
 
@@ -135,7 +164,7 @@ public class Parser {
         }
 
         // seperates command from description
-        commands = new String[splitCmd.length + 1];
+        String[] commands = new String[splitCmd.length + 1];
         for (int i = 1; i < splitCmd.length; i++) {
             commands[i + 1] = splitCmd[i];
         }

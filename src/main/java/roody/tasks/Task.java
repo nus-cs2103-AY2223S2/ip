@@ -1,4 +1,4 @@
-package roody;
+package roody.tasks;
 
 /**
  * Represents a Task.
