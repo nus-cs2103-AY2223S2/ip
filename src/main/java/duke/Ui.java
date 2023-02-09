@@ -65,6 +65,7 @@ public class Ui {
      * @param task Task that is added.
      */
     public String showAddTask(Task task) {
+
         return "Meow! Just added: \n" + task;
     }
 

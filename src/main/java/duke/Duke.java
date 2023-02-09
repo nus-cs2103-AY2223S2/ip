@@ -60,34 +60,42 @@ public class Duke  {
 
             if (answer.startsWith("find ")) {
                 String keyword = parser.getFindKeyword();
+                assert !keyword.isEmpty() : "find keyword should not be empty";
                 tasks.find(keyword);
                 return tasks.find(keyword).toString();
             }
             if (answer.startsWith("mark ")) {
                 Integer index = parser.getMarkIndex(length);
+                assert index > 0 && index <= length : "index should be in bounds";
                 return ui.showMarked(tasks.mark(index));
             }
             if (answer.startsWith("unmark ")) {
                 Integer index = parser.getUnmarkIndex(length);
+                assert index > 0 && index <= length : "index should be in bounds";
                 return ui.showUnmarked(tasks.unmark(index));
             }
             if (answer.startsWith("delete ")) {
                 Integer index = parser.getDeleteIndex(length);
+                assert index > 0 && index <= length : "index should be in bounds";
                 return ui.showDeleted(tasks.delete(index));
             }
             if (answer.startsWith("todo ")) {
                 String description = parser.getTodoDescription();
-                return ui.showAddTask(tasks.addTodo(answer));
+                assert !description.isEmpty() : "find keyword should not be empty";
+                return ui.showAddTask(tasks.addTodo(description));
             }
             if (answer.startsWith("deadline ")) {
                 String[] descriptionList = parser.getDeadlineDescription();
-
+                assert !descriptionList[0].isEmpty() && !descriptionList[1].isEmpty()
+                        : "description should not be empty";
                 LocalDateTime by = parser.getAsLocalDate(descriptionList[1]);
 
                 return ui.showAddTask(tasks.addDeadline(descriptionList[0], by));
             }
             if (answer.startsWith("event ")) {
                 String[] descriptionList = parser.getEventDescription();
+                assert !descriptionList[0].isEmpty() && !descriptionList[1].isEmpty()
+                        : "description should not be empty";
                 LocalDateTime from = parser.getAsLocalDate(descriptionList[1]);
                 LocalDateTime to = parser.getAsLocalDate(descriptionList[2]);
                 return ui.showAddTask(tasks.addEvent(descriptionList[0], from, to));
