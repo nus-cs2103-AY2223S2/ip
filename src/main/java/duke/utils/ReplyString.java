@@ -23,6 +23,17 @@ public class ReplyString {
         return PROMPT_QUESTION;
     }
 
+    public static String getGoodbyeString() {
+        return GOODBYE;
+    }
+
+    /**
+     * Outputs the string representation of all tasks within the
+     * task list provided as input.
+     *
+     * @param taskList the TaskList containing relevant tasks.
+     * @return A string representation of all tasks within the provided task list.
+     */
     public static String getTaskListString(TaskList taskList) {
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < taskList.size(); i++) {
@@ -35,7 +46,10 @@ public class ReplyString {
     }
 
     /**
-     * Prints the string representation of all tasks in the TaskList to the output.
+     * Outputs the string representation of all tasks within the user's task list.
+     *
+     * @param allTasks the TaskList containing all tasks logged by the user.
+     * @return A string representation of all tasks within the user's task list.
      */
     public static String getAllTasksString(TaskList allTasks) {
         if (allTasks.size() == 0) {

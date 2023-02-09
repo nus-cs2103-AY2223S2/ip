@@ -40,73 +40,122 @@ public class Parser {
             result = ReplyString.getAllTasksString(allTasks);
             break;
         case "mark":
-            try {
-                int markIndex = Integer.parseInt(arguments) - 1;
-                result = allTasks.changeTaskCompletionStatus(markIndex, true);
-            } catch (Throwable e) {
-                throw new IllegalCommandException(Commands.MARK);
-            }
+            result = processMarkCommand(arguments, allTasks);
             break;
         case "unmark":
-            try {
-                int unmarkIndex = Integer.parseInt(arguments) - 1;
-                result = allTasks.changeTaskCompletionStatus(unmarkIndex, false);
-            } catch (Throwable e) {
-                throw new IllegalCommandException(Commands.UNMARK);
-            }
+            result = processUnmarkCommand(arguments, allTasks);
             break;
         case "todo":
-            if (arguments.trim().equals("")) {
-                throw new IllegalCommandException(Commands.TODO);
-            }
-            result = allTasks.addToList(arguments, TaskType.TODO, null, null, false, true);
+            result = processTodoCommand(arguments, allTasks);
             break;
         case "deadline":
-            try {
-                int slashIndex = arguments.indexOf('/');
-                String dateByString = arguments.substring(slashIndex + 4);
-                DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-                LocalDateTime dateBy = LocalDateTime.parse(dateByString, dateFormat);
-                result = allTasks.addToList(arguments.substring(0, slashIndex - 1), TaskType.DEADLINE,
-                        null, dateBy, false, true);
-            } catch (Throwable e) {
-                throw new IllegalCommandException(Commands.DEADLINE);
-            }
+            result = processDeadlineCommand(arguments, allTasks);
             break;
         case "event":
-            try {
-                int firstSlashIndex = arguments.indexOf('/');
-                String startAndEnd = arguments.substring(firstSlashIndex + 6);
-                int secondSlashIndex = startAndEnd.indexOf('/');
-                String startString = startAndEnd.substring(0, secondSlashIndex - 1);
-                String endString = startAndEnd.substring(secondSlashIndex + 4);
-                DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-                LocalDateTime start = LocalDateTime.parse(startString, dateFormat);
-                LocalDateTime end = LocalDateTime.parse(endString, dateFormat);
-                // TODO: Check if start date is after end date
-                result = allTasks.addToList(arguments.substring(0, firstSlashIndex - 1), TaskType.EVENT,
-                        start, end, false, true);
-            } catch (Throwable e) {
-                throw new IllegalCommandException(Commands.EVENT);
-            }
+            result = processEventCommand(arguments, allTasks);
             break;
         case "delete":
-            try {
-                int deleteIndex = Integer.parseInt(arguments) - 1;
-                result = allTasks.deleteTask(deleteIndex);
-            } catch (Throwable e) {
-                throw new IllegalCommandException(Commands.DELETE);
-            }
+            result = processDeleteCommand(arguments, allTasks);
             break;
         case "find":
-            try {
-                result = allTasks.find(arguments);
-            } catch (Throwable e) {
-                throw new IllegalCommandException(Commands.FIND);
-            }
+            result = processFindCommand(arguments, allTasks);
             break;
         default:
             throw new IllegalCommandException(Commands.UNRECOGNIZED);
+        }
+        return result;
+    }
+
+    private static String processMarkCommand(String arguments, TaskList allTasks)
+            throws IllegalCommandException {
+        String result;
+        try {
+            int markIndex = Integer.parseInt(arguments) - 1;
+            result = allTasks.changeTaskCompletionStatus(markIndex, true);
+        } catch (Throwable e) {
+            throw new IllegalCommandException(Commands.MARK);
+        }
+        return result;
+    }
+
+    private static String processUnmarkCommand(String arguments, TaskList allTasks)
+            throws IllegalCommandException {
+        String result;
+        try {
+            int unmarkIndex = Integer.parseInt(arguments) - 1;
+            result = allTasks.changeTaskCompletionStatus(unmarkIndex, false);
+        } catch (Throwable e) {
+            throw new IllegalCommandException(Commands.UNMARK);
+        }
+        return result;
+    }
+
+    private static String processTodoCommand(String arguments, TaskList allTasks)
+            throws IllegalCommandException {
+        if (arguments.trim().equals("")) {
+            throw new IllegalCommandException(Commands.TODO);
+        }
+        String result = allTasks.addToList(arguments, TaskType.TODO, null,
+                null, false, true);
+        return result;
+    }
+
+    private static String processDeadlineCommand(String arguments, TaskList allTasks)
+            throws IllegalCommandException {
+        String result;
+        try {
+            int slashIndex = arguments.indexOf('/');
+            String dateByString = arguments.substring(slashIndex + 4);
+            DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            LocalDateTime dateBy = LocalDateTime.parse(dateByString, dateFormat);
+            result = allTasks.addToList(arguments.substring(0, slashIndex - 1), TaskType.DEADLINE,
+                    null, dateBy, false, true);
+        } catch (Throwable e) {
+            throw new IllegalCommandException(Commands.DEADLINE);
+        }
+        return result;
+    }
+
+    private static String processEventCommand(String arguments, TaskList allTasks)
+            throws IllegalCommandException {
+        String result;
+        try {
+            int firstSlashIndex = arguments.indexOf('/');
+            String startAndEnd = arguments.substring(firstSlashIndex + 6);
+            int secondSlashIndex = startAndEnd.indexOf('/');
+            String startString = startAndEnd.substring(0, secondSlashIndex - 1);
+            String endString = startAndEnd.substring(secondSlashIndex + 4);
+            DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            LocalDateTime start = LocalDateTime.parse(startString, dateFormat);
+            LocalDateTime end = LocalDateTime.parse(endString, dateFormat);
+            // TODO: Check if start date is after end date
+            result = allTasks.addToList(arguments.substring(0, firstSlashIndex - 1), TaskType.EVENT,
+                    start, end, false, true);
+        } catch (Throwable e) {
+            throw new IllegalCommandException(Commands.EVENT);
+        }
+        return result;
+    }
+
+    private static String processDeleteCommand(String arguments, TaskList allTasks)
+            throws IllegalCommandException {
+        String result;
+        try {
+            int deleteIndex = Integer.parseInt(arguments) - 1;
+            result = allTasks.deleteTask(deleteIndex);
+        } catch (Throwable e) {
+            throw new IllegalCommandException(Commands.DELETE);
+        }
+        return result;
+    }
+
+    private static String processFindCommand(String arguments, TaskList allTasks)
+            throws IllegalCommandException {
+        String result;
+        try {
+            result = allTasks.find(arguments);
+        } catch (Throwable e) {
+            throw new IllegalCommandException(Commands.FIND);
         }
         return result;
     }
