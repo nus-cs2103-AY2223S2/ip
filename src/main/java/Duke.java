@@ -26,7 +26,6 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
         TaskFileReaderWriter taskReaderWriter = new TaskFileReaderWriter();
 
-
         TaskManager taskManager = taskReaderWriter.loadDataFromFile();
 
         if (!taskReaderWriter.createTaskFile()) {

@@ -54,7 +54,7 @@ public class Event extends Task {
      *
      * @return The current value of 'start' formatted as a string.
      */
-    public String getStart() {
+    public String getStartString() {
         return Utility.convertDateTimeToString(this.start);
     }
 
@@ -63,8 +63,18 @@ public class Event extends Task {
      *
      * @return The current value of 'end' formatted as a string.
      */
-    public String getEnd() {
+    public String getEndString() {
         return Utility.convertDateTimeToString(this.end);
+    }
+
+
+    public LocalDateTime getStartTime() {
+        return this.start;
+    }
+
+
+    public LocalDateTime getEndTime() {
+        return this.end;
     }
 
     /**
@@ -125,5 +135,17 @@ public class Event extends Task {
         result.put("from", from);
         result.put("to", to);
         return result;
+    }
+
+
+
+
+    private boolean hasOverlapWith(Event event) {
+        return event.getStartTime().compareTo(this.getEndTime()) < 0;
+    }
+
+    public boolean isExceededWithOverlapBy(Event event) {
+        return (this.hasOverlapWith(event) && (event.getEndTime()
+                .compareTo(this.getEndTime()) > 0));
     }
 }

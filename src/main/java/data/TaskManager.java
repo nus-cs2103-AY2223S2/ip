@@ -1,9 +1,15 @@
 package data;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.stream.Collectors;
 
 import errors.DukeInvalidCommandException;
+import task.Event;
 import task.Task;
+import timeslot.FreeTimeBlock;
 import ui.Response;
 
 
@@ -99,4 +105,75 @@ public class TaskManager {
         return taskView;
     }
 
+    private ArrayList<Event> getEventsAfterNow() {
+        LocalDateTime currentTime = LocalDateTime.now();
+        // note that this is temporary
+        LocalDateTime dateTime = LocalDateTime.of(2023, 2, 10, 9, 30);
+        return taskList.stream()
+                .filter(task -> {
+            if (task instanceof Event) {
+                LocalDateTime endTime = ((Event) task).getEndTime();
+                return endTime.compareTo(dateTime) > 0;
+            }
+            return false;
+        }).map(task -> (Event) task)
+                .sorted(Comparator.comparing(Event::getStartTime))
+                .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+
+    public ArrayList<FreeTimeBlock> getFreeTimes(int desiredFreeTime) {
+        ArrayList<Event> eventsList = getEventsAfterNow();
+//        eventsList.forEach(event -> System.out.println(event.toString()));
+        ArrayList<FreeTimeBlock> freeTimeBlocks = new ArrayList<>();
+        LocalDateTime dateTime = LocalDateTime.of(2023, 2, 10, 9, 30);
+
+        if (
+                (eventsList.size() > 0) &&
+                (eventsList.get(0)
+                .getStartTime()
+                .compareTo(dateTime) > 0)) {
+            freeTimeBlocks.add(new FreeTimeBlock(null, eventsList.get(0).getStartTime()));
+        }
+
+        if (eventsList.size() < 2) {
+
+            if (eventsList.isEmpty()) {
+                freeTimeBlocks.add(new FreeTimeBlock(null, null));
+                freeTimeBlocks.forEach(freeTimeBlock -> System.out.println(freeTimeBlock.toString()));
+                return freeTimeBlocks;
+            }
+
+            Event event = eventsList.get(0);
+            freeTimeBlocks.add(new FreeTimeBlock(event.getEndTime(), null));
+            freeTimeBlocks.forEach(freeTimeBlock -> System.out.println(freeTimeBlock.toString()));
+            return freeTimeBlocks;
+        }
+
+        LocalDateTime freeBlockStart = eventsList.get(0).getEndTime();
+        assert freeBlockStart != null;
+        LocalDateTime freeBlockEnd;
+
+        for (Event event: eventsList.subList(1, eventsList.size())) {
+
+            if (freeBlockStart.compareTo(event.getStartTime()) < 0) {
+                freeBlockEnd = event.getStartTime();
+                freeTimeBlocks.add(new FreeTimeBlock(freeBlockStart, freeBlockEnd));
+            }
+
+            if (event.getEndTime().compareTo(freeBlockStart) > 0) {
+                freeBlockStart = event.getEndTime();
+            }
+        }
+
+        freeTimeBlocks.add(new FreeTimeBlock(freeBlockStart, null));
+
+        ArrayList<FreeTimeBlock> filteredFreeTimeBlocks = freeTimeBlocks.stream()
+                .filter((freeTimeBlock -> freeTimeBlock.isValidSlot(desiredFreeTime)))
+                .collect(Collectors.toCollection(ArrayList::new));
+
+//        filteredFreeTimeBlocks.forEach(freeTimeBlock -> System.out.println(freeTimeBlock.toString()));
+
+        return filteredFreeTimeBlocks;
+    }
 }
