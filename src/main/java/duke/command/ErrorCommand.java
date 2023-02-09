@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.DukeResponse;
 import duke.exception.DukeException;
 
 public class ErrorCommand extends Command {
@@ -10,7 +11,7 @@ public class ErrorCommand extends Command {
     }
 
     @Override
-    public String execute() {
-        return error;
+    public DukeResponse execute() {
+        return new DukeResponse(error);
     }
 }

@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.DukeResponse;
 import duke.Event;
 import duke.TaskList;
 
@@ -25,9 +26,9 @@ public class EventCommand extends Command {
 
 
     @Override
-    public String execute() {
+    public DukeResponse execute() {
         Event event = new Event(taskDesc, from, fromHasTime, to, toHasTime);
         taskList.add(event);
-        return "Added event";
+        return new DukeResponse("added event");
     }
 }

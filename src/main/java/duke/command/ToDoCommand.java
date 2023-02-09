@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.DukeResponse;
 import duke.TaskList;
 import duke.ToDo;
 
@@ -14,9 +15,9 @@ public class ToDoCommand extends Command {
 
 
     @Override
-    public String execute() {
+    public DukeResponse execute() {
         ToDo todo = new ToDo(taskDesc);
         taskList.add(todo);
-        return "added todo";
+        return new DukeResponse("added todo");
     }
 }

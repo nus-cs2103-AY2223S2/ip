@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.DukeResponse;
 import duke.Task;
 import duke.TaskList;
 import duke.exception.DukeException;
@@ -18,15 +19,15 @@ public class MarkOrUnmarkCommand extends Command {
 
 
     @Override
-    public String execute() {
+    public DukeResponse execute() {
         Task task = taskList.get(taskIdx);
 
         if (isMark) {
             task.mark();
-            return "Placeholder: marked the task";
+            return new DukeResponse("marked task");
         } else {
             task.unmark();
-            return "Placeholder: unmarked the task";
+            return new DukeResponse("unmarked task");
         }
     }
 

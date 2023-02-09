@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.DukeResponse;
 import duke.Task;
 import duke.TaskList;
 
@@ -15,7 +16,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public String execute() {
+    public DukeResponse execute() {
         TaskList tasksOfInterest = new TaskList();
 
         for (Task t : taskList) {
@@ -26,7 +27,6 @@ public class FindCommand extends Command {
         }
 
         ListCommand listCommand = new ListCommand(tasksOfInterest);
-        String filteredList = listCommand.execute();
-        return "Here are your results\n" + filteredList;
+        return new DukeResponse("Here are your results\n" + tasksOfInterest.toString());
     }
 }

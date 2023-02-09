@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.Deadline;
+import duke.DukeResponse;
 import duke.TaskList;
 
 import java.time.LocalDateTime;
@@ -20,9 +21,9 @@ public class DeadlineCommand extends Command{
 
 
     @Override
-    public String execute() {
+    public DukeResponse execute() {
         Deadline deadline = new Deadline(taskDesc, by, hasTime);
         taskList.add(deadline);
-        return "Added deadline";
+        return new DukeResponse("added deadline");
     }
 }

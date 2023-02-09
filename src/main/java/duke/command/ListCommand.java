@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.DukeResponse;
 import duke.TaskList;
 
 public class ListCommand extends Command{
@@ -12,7 +13,7 @@ public class ListCommand extends Command{
 
 
     @Override
-    public String execute() {
-        return taskList.toString();
+    public DukeResponse execute() {
+        return new DukeResponse(taskList.toString());
     }
 }

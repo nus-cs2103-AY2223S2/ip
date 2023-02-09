@@ -28,7 +28,7 @@ public class Parser {
 
         switch (command) {
         case "bye":
-            break;
+            return new ByeCommand();
         case "list":
             return handleList(taskList);
         case "mark":
@@ -48,7 +48,6 @@ public class Parser {
         default:
             return new ErrorCommand("unknown command");
         }
-        return new ErrorCommand("unknown command");
     }
 
 

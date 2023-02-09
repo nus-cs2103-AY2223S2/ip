@@ -1,6 +1,8 @@
 package duke.command;
 
+import duke.DukeResponse;
+
 public abstract class Command {
 
-    public abstract String execute();
+    public abstract DukeResponse execute();
 }

@@ -26,7 +26,7 @@ public class Duke {
         }
     }
 
-    public String genResponse(String userInput) {
+    public DukeResponse genResponse(String userInput) {
         Command command = Parser.parse(userInput, taskList);
         return command.execute();
     }
