@@ -84,6 +84,8 @@ public class AddCommand extends Command {
             throw new AlfredException("I'm sorry, but I don't know what that means :<\n");
         }
 
+        assert tasks.getSize() > 0 : "Failed to add task";
+
         // Alfred's response to remaining tasks
         String numTasks = tasks.getSize() == 1 ? "task" : "tasks";
         String output = String.format("Noted, task added: \n      %s\n"

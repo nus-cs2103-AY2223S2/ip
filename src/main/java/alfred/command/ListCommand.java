@@ -18,6 +18,8 @@ public class ListCommand extends Command {
         if (tasks.isEmpty()) {
             return ui.getCommandMessage("Woohoo! You have no pending tasks\n");
         }
+        assert tasks.getSize() > 0 : "Tasks should not be empty";
+
         String itemList = tasks.getList();
         return ui.getCommandMessage(command.append(itemList).toString());
     }
