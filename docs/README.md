@@ -10,6 +10,10 @@ Keep an organised list of tasks! Add or delete things to do, tasks with deadline
 
 Have a long list of tasks? You can easily find the task you're looking for by providing a keyword!
 
+### Autosave
+
+Your list is automatically saved :smile: Simply reopen Duke to revisit your list!
+
 ## Usage
 
 ### `todo` or `t` - Adds a todo task
