@@ -7,6 +7,8 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
+import javafx.scene.shape.Circle;
 
 public class DialogBox extends HBox {
 
@@ -16,13 +18,21 @@ public class DialogBox extends HBox {
     public DialogBox(Label l, ImageView iv) {
         text = l;
         displayPicture = iv;
+        Region leftSpacer = new Region();
+        leftSpacer.setPrefWidth(10);
+        Region centerSpacer = new Region();
+        centerSpacer.setPrefWidth(20);
+        Region rightSpacer = new Region();
+        rightSpacer.setPrefWidth(10);
 
         text.setWrapText(true);
         displayPicture.setFitWidth(100.0);
         displayPicture.setFitHeight(100.0);
+        Circle clip = new Circle(50, 50, 50);
+        displayPicture.setClip(clip);
 
         this.setAlignment(Pos.TOP_RIGHT);
-        this.getChildren().addAll(text, displayPicture);
+        this.getChildren().addAll(leftSpacer, text, centerSpacer, displayPicture, rightSpacer);
     }
 
     /**
