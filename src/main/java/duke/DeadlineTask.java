@@ -16,8 +16,6 @@ import java.util.Arrays;
  * @author Merrick
  */
 public class DeadlineTask extends Task {
-    private LocalDateTime deadline;
-
     /**
      * Constructor of DeadlineTask.
      * @param taskName Description of DeadlineTask
@@ -90,7 +88,7 @@ public class DeadlineTask extends Task {
     public String toString() {
         return String.format("%s (by: %s)", super.toString(), formatDateTime());
     }
-    @Override
+
     public String snoozeDeadline(int days, int hours, int minutes) {
         this.deadline = this.deadline.plusDays(days);
         this.deadline = this.deadline.plusHours(hours);
@@ -98,7 +96,6 @@ public class DeadlineTask extends Task {
         return String.format("New deadline is %s!", DateTimeParser.datetimeFormatter(this.deadline) );
     }
 
-    @Override
     public String snoozeDeadline() {
         return this.snoozeDeadline(0, 0, 5);
     }

@@ -9,7 +9,6 @@ import util.TaskList;
  * @author Merrick
  */
 public class ToDo extends Task {
-
     /**
      * Constructor for ToDo
      * @param taskName Description of ToDo task.
@@ -55,4 +54,11 @@ public class ToDo extends Task {
         return String.format("%s", super.toString());
     }
 
+    public String snoozeDeadline(int days, int hours, int minutes) {
+        return this.snoozeDeadline();
+    }
+
+    public String snoozeDeadline() {
+        return "ToDo task has no deadline!";
+    }
 }

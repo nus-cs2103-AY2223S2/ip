@@ -9,7 +9,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-
+import java.util.Arrays;
 
 
 /**
@@ -171,5 +171,26 @@ public class TaskList {
      */
     public String numTasks() {
         return String.format("Now you have %d tasks in the list", taskList.size());
+    }
+
+    public String snoozeTask(String command) throws DukeException {
+        // "snooze 1 /day 10 /hour 10 /minutes 20"
+        ArrayList<String> input = new ArrayList<>(Arrays.asList(command.split(" ")));
+        int dayIndex = input.indexOf("/day");
+        int hourIndex = input.indexOf("/hour");
+        int minutesIndex = input.indexOf("/minutes");
+
+        if (dayIndex == -1 || hourIndex == -1 || minutesIndex == -1) {
+            throw new DukeException("Invalid Input!\n" + "Usage should be:\n" +
+                    "snooze {taskNumber} /day {days} /hour {hour} /minutes {minutes}");
+        }
+        int taskNumber = Integer.parseInt(input.get(1)) - 1;
+        int days = Integer.parseInt(input.get(dayIndex + 1));
+        int hours = Integer.parseInt(input.get(hourIndex + 1));
+        int minutes = Integer.parseInt(input.get(minutesIndex + 1));
+
+        Task task = taskList.get(taskNumber);
+
+        return task.snoozeDeadline(days, hours, minutes);
     }
 }

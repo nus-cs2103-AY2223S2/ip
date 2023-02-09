@@ -1,5 +1,7 @@
 package duke;
 
+import java.time.LocalDateTime;
+
 /**
  * Abstract class which specifies the structure of a Task.
  * <p>
@@ -9,10 +11,11 @@ package duke;
  * <li>Event </p>
  * @author Merrick
  */
-public abstract class Task {
+public abstract class Task implements Snoozable {
     protected String taskType = "T";
     private final String taskName;
     private boolean isCompleted = false;
+    protected LocalDateTime deadline = LocalDateTime.now();
     /**
      * Constructor for Task class.
      *
