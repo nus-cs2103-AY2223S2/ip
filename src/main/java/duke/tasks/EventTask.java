@@ -19,6 +19,8 @@ public class EventTask extends Task {
         this.from = from;
         this.to = to;
         formatIfEventDate(from, to);
+        assert this.from != null : "from String in EventTask should not be null";
+        assert this.to != null : "to String in EventTask should not be null";
     }
 
 

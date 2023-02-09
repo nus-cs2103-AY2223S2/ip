@@ -15,6 +15,7 @@ public class DeadlineTask extends Task {
         super(title);
         this.by = by;
         formatIfDeadlineDate(by);
+        assert this.by != null : "by String in DeadlineTask should not be null";
     }
 
 
