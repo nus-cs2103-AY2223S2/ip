@@ -24,9 +24,9 @@ So Many Things to Do:
 Graduation Timeline Feature:
 - [x] *4* years to graduate
 - [x] *3* years to graduate
-- [] *2* years to graduate
-- [] *1* year to graduate
-- [] **Graduate?**
+- [ ] *2* years to graduate
+- [ ] *1* year to graduate
+- [ ] **Graduate?**
 
 Code 
 
