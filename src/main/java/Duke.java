@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +29,10 @@ public class Duke {
         boolean saidBye = false;
         while (!saidBye) {
             String command = sc.nextLine();
+            DateTimeFormatter dateTimeFormatter =
+                    DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+            DateTimeFormatter dateTimeFormatter1 =
+                    DateTimeFormatter.ofPattern("MMM dd yyyy HHmm");
 
             try {
                 if (command.equals("list")) {
@@ -94,9 +100,9 @@ public class Duke {
                 } else if (command.startsWith("deadline")) {
                     emptyCommandException(command);
                     missingTimingException(command);
-                    String[] str = command.split("/by");
+                    String[] str = command.split("/by ");
                     String taskName = str[0].split("deadline")[1];
-                    String taskDeadline = str[1];
+                    LocalDateTime taskDeadline = LocalDateTime.parse(str[1], dateTimeFormatter);
                     Deadline deadline = new Deadline(allTasks.size(), false,
                             taskName, taskDeadline, allTasks.size() + 1);
                     allTasks.add(deadline);
@@ -104,11 +110,11 @@ public class Duke {
                 } else if (command.startsWith("event")) {
                     emptyCommandException(command);
                     missingTimingException(command);
-                    String[] str = command.split("/from");
+                    String[] str = command.split("/from ");
                     String taskName = str[0].split("event")[1];
-                    String[] eventStartEndTime = str[1].split("/to");
-                    String eventStartTime = eventStartEndTime[0];
-                    String eventEndTime = eventStartEndTime[1];
+                    String[] eventStartEndTime = str[1].split("/to ");
+                    LocalDateTime eventStartTime = LocalDateTime.parse(eventStartEndTime[0], dateTimeFormatter);
+                    LocalDateTime eventEndTime = LocalDateTime.parse(eventStartEndTime[1], dateTimeFormatter);
                     Event event = new Event(allTasks.size(), false,
                             taskName, eventStartTime, eventEndTime, allTasks.size() + 1);
                     allTasks.add(event);
@@ -145,6 +151,8 @@ public class Duke {
     }
 
     public void printCommandList(List<Task> allTasks) {
+        DateTimeFormatter dateTimeFormatter1 =
+                DateTimeFormatter.ofPattern("MMM dd yyyy HHmm a");
         System.out.println("\t____________________________________________________________");
         System.out.println("\t Here are the tasks in your list:");
         for (int i = 0; i < allTasks.size(); i++) {
@@ -152,10 +160,14 @@ public class Duke {
             Task task = allTasks.get(i);
             String time = "";
             if (task.getTaskType().equals("[D]")) {
-                time = " (by: " + task.getDeadline() + ")";
+                time = " (by: " +
+                        task.getDeadline().format(dateTimeFormatter1) + ")";
             } else if (task.getTaskType().equals("[E]")) {
-                time = " (from: " + task.getEventStartTime() + " to: "
-                        + task.getEventEndTime() + ")";
+                time = " (from: " +
+                        task.getEventStartTime().format(dateTimeFormatter1)
+                        + " to: "
+                        + task.getEventEndTime().format(dateTimeFormatter1)
+                        + ")";
             }
             System.out.println("\t " + numbering + "." +
                     task.getTaskType() + task.getTaskStatus() + " "
