@@ -32,14 +32,4 @@ public class MarkCommand extends Command {
     public String execute(TaskList tasks, Storage storage, Ui ui) throws DukeException {
         return tasks.markIsDone(this.index);
     }
-
-    /**
-     * Returns whether the command requires the program to exit.
-     *
-     * @return False indicating that program should not exit.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }
