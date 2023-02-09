@@ -49,6 +49,7 @@ public class EventCommand extends Command {
         String startDate = getStartDate(input);
         String endDate = getEndDate("event", input);
 
+
         try {
             Event event = new Event(taskName, startDate, endDate);
             taskList.add(event);

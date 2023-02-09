@@ -1,15 +1,6 @@
 package duke.util;
 
-import duke.command.ByeCommand;
-import duke.command.Command;
-import duke.command.DeadlineCommand;
-import duke.command.DeleteCommand;
-import duke.command.EventCommand;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
-import duke.command.MarkCommand;
-import duke.command.TodoCommand;
-import duke.command.UnmarkCommand;
+import duke.command.*;
 import duke.exception.DukeException;
 import duke.task.TaskList;
 import duke.ui.Ui;
@@ -27,6 +18,8 @@ public class Parser {
     private enum CommandType {
         BYE,
         LIST,
+        SORT,
+        SEEK,
         MARK,
         UNMARK,
         DELETE,
@@ -82,6 +75,12 @@ public class Parser {
             case LIST:
                 return new ListCommand(taskList, ui);
 
+            case SORT:
+                return new SortCommand(taskList, ui, storage);
+
+            case SEEK:
+                return new SeekCommand(filtered_input, taskList, ui, storage);
+
             case MARK:
                 return new MarkCommand(filtered_input, taskList, ui, storage);
 
@@ -125,6 +124,9 @@ public class Parser {
 
             case DELETE:
                 throw new DukeException("Incorrect command: delete <valid task index>");
+
+            case SEEK:
+                throw new DukeException("Incorrect command: seek <valid duration>");
 
             case TODO:
                 throw new DukeException("OOPS!!! Missing Todo Name.");

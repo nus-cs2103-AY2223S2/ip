@@ -2,6 +2,9 @@ package duke.ui;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import duke.task.Task;
@@ -63,7 +66,16 @@ public class Ui {
         }
 
         String output = "Here are the tasks in your list: \n";
-        output += taskList.listify();
+        output += taskList.toList();
+
+        return output;
+    }
+
+    public String printSortedList(TaskList taskList) {
+
+        TaskList sortedList = taskList.sortList();
+        String output = "Here are the sorted tasks in your list: \n";
+        output += sortedList.toList();
 
         return output;
     }
@@ -117,5 +129,9 @@ public class Ui {
 
     public String printBye() {
         return "Bye. Hope to see you again soon!";
+    }
+
+    public String printAvailability(LocalDateTime date, String input) {
+        return "You are free for " + input + " from " + date.format(DateTimeFormatter.ofPattern("HHmm MMM d yyyy"));
     }
 }
