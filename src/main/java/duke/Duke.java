@@ -63,9 +63,10 @@ public class Duke {
         sc.close();
     }
 
-    private void terminate() {
+    protected void terminate() {
         storage.save(tasks.tasks);
         ui.printByeMsg();
+        System.exit(0);
     }
 
     /**

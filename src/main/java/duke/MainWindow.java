@@ -29,7 +29,7 @@ public class MainWindow extends AnchorPane {
         public void run() {
             try {
                 Thread.sleep(2000);
-                System.exit(0);
+                duke.terminate();
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }

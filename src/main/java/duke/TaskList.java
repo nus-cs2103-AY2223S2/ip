@@ -218,7 +218,8 @@ public class TaskList {
      * @param tagName Name of tag.
      */
     public void tag(int index, String tagName) {
-        tasks.get(index).tagTask(tagName);
+        tasks.get(index - 1).tagTask(tagName);
+        System.out.println("Tagged task " + index + " with #" + tagName);
     }
 
     /**

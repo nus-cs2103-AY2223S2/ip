@@ -38,7 +38,13 @@ public class Task {
      * @param description String description of Task.
      */
     public Task(String description) {
-        this.description = description;
+        String[] nameAndTag = description.split("#", 2);
+        this.description = nameAndTag[0];
+        if (nameAndTag.length == 1) {
+            this.tag = "NA";
+        } else {
+            this.tag = nameAndTag[1];
+        }
         this.status = TaskStatus.NOT_DONE;
     }
 
@@ -48,7 +54,9 @@ public class Task {
      * @param status Status of the task.
      */
     public Task(String description, String status) {
-        this.description = description;
+        String[] nameAndTag = description.split("#");
+        this.description = nameAndTag[0];
+        this.tag = nameAndTag[1];
         this.status = TaskStatus.valueOf(status);
     }
 
@@ -58,7 +66,7 @@ public class Task {
     }
 
     public String toData() {
-        return this.status.toString() + "|" + this.description + " #" + this.tag;
+        return this.status.toString() + "|" + this.description + "#" + this.tag;
     }
 
     public String getStatusIcon() {
