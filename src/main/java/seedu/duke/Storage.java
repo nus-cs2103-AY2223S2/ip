@@ -63,21 +63,7 @@ public class Storage {
         TaskList tasks = new TaskList(new ArrayList<>());
         for (int i = 0; i < lineNumber; i++) {
             String[] s = readFromDataFile(i);
-            Task task;
-            switch (s[0]) {
-            case "T":
-                task = new Todo(s[2]);
-                break;
-            case "D":
-                task = new Deadline(s[2], Ui.parseDateTime(s[3]));
-                break;
-            case "E":
-                String[] date = s[3].split(" to "); // to be improved
-                task = new Event(s[2], Ui.parseDateTime(date[0]), Ui.parseDateTime(date[1]));
-                break;
-            default:
-                throw new DukeException("Invalid type of task");
-            }
+            Task task = convertStringToTask(s);
             if (Integer.parseInt(s[1]) == 1) {
                 task.markAsDone();
             } else if (Integer.parseInt(s[1]) == 0) {
@@ -88,6 +74,25 @@ public class Storage {
             tasks.add(task);
         }
         return tasks;
+    }
+
+    private Task convertStringToTask(String[] s) {
+        Task task;
+        switch (s[0]) {
+        case "T":
+            task = new Todo(s[2]);
+            break;
+        case "D":
+            task = new Deadline(s[2], Ui.parseDateTime(s[3]));
+            break;
+        case "E":
+            String[] date = s[3].split(" to "); // to be improved
+            task = new Event(s[2], Ui.parseDateTime(date[0]), Ui.parseDateTime(date[1]));
+            break;
+        default:
+            throw new DukeException("Invalid type of task");
+        }
+        return task;
     }
 
     /**
