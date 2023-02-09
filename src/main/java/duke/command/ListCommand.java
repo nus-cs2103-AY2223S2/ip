@@ -1,7 +1,6 @@
 package duke.command;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
@@ -22,7 +21,6 @@ public class ListCommand extends Command {
 
     /**
      * Displays the list of task.
-     * 
      * @param tasks   the task list
      * @param ui      the ui instance
      * @param storage the storage instance

@@ -38,7 +38,13 @@ public class EventCommand extends Command {
             tasks.add(task);
             storage.save(tasks);
 
-            return "Got it. I've added this task:\n" + task + "\nNow you have " + tasks.size() + " tasks in the list.\n";
+            String message = "Got it. I've added this task:\n"
+                + task
+                + "\nNow you have "
+                + tasks.size()
+                + " tasks in the list.\n";
+
+            return message;
         } catch (CommandException error) {
             return error.getMessage();
         }

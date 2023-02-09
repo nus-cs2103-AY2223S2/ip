@@ -37,7 +37,7 @@ public class UnMarkComamnd extends Command {
             Task task = tasks.get(index);
             task.markAsNotDone();
             storage.save(tasks);
-            
+
             return String.format("OK, I've marked this task as not done yet:\n%s\n", task);
         } catch (CommandException | UnmarkIndexDoesNotExistException error) {
             return error.getMessage();

@@ -2,8 +2,6 @@ package duke.command;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import duke.dukeexception.CommandException;
 import duke.storage.Storage;
@@ -18,7 +16,6 @@ public class FindCommand extends Command {
 
     /**
      * Constructor.
-     * 
      * @param request the request of the user.
      */
     public FindCommand(String request) {
@@ -27,7 +24,6 @@ public class FindCommand extends Command {
 
     /**
      * Displays the tasks that matches the keyword
-     * 
      * @param tasks   the task list
      * @param ui      the ui instance
      * @param storage the storage instance
