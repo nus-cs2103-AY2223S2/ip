@@ -1,4 +1,4 @@
-package alfred;
+package alfred.components;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

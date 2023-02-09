@@ -1,5 +1,7 @@
 package alfred;
 
+import java.util.concurrent.TimeUnit;
+
 import alfred.command.Command;
 import alfred.exceptions.AlfredException;
 import alfred.parser.Parser;
@@ -7,8 +9,6 @@ import alfred.storage.Storage;
 import alfred.task.TaskList;
 import alfred.ui.Ui;
 import javafx.application.Platform;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * Represents a Personal Assistant Chat-bot that helps a person to keep track of various things.
