@@ -47,9 +47,9 @@ public class Storage {
         }
         //create file if it does not already exist
         try {
-            this.myFile = new File(this.filePath);
-            if (!this.myFile.exists()) {
-                this.myFile.createNewFile();
+            myFile = new File(this.filePath);
+            if (!myFile.exists()) {
+                myFile.createNewFile();
             }
         } catch (IOException e) {
             System.out.println(e + "\nNew storage file cannot be created.");
@@ -67,26 +67,26 @@ public class Storage {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
             this.createFile();
-            Scanner sc = new Scanner(this.myFile);
+            Scanner sc = new Scanner(myFile);
             while (sc.hasNextLine()) {
                 String data = sc.nextLine();
                 String[] dataArr = data.split(" \\| ");
                 String type = dataArr[0];
                 boolean isDone = dataArr[1].equals("1");
-                Task task;
+
                 if (type.equals("T")) {
-                    task = new ToDo(dataArr[2], isDone);
+                    ToDo t = new ToDo(dataArr[2], isDone);
+                    tasks.add(t);
                 } else if (type.equals("D")) {
                     LocalDate end = Parser.parseDate(dataArr[3]);
-                    task = new Deadline(dataArr[2], end, isDone);
+                    Deadline d = new Deadline(dataArr[2], end, isDone);
+                    tasks.add(d);
                 } else {
-                    assert type.equals("E") : "Task is not of correct type";
                     LocalDate start = Parser.parseDate(dataArr[3]);
                     LocalDate end = Parser.parseDate(dataArr[4]);
-                    task = new Event(dataArr[2], start, end, isDone);
+                    Event e = new Event(dataArr[2], start, end, isDone);
+                    tasks.add(e);
                 }
-                assert task != null : "Task is not created";
-                tasks.add(task);
             }
             sc.close();
             return tasks;
@@ -103,7 +103,7 @@ public class Storage {
     public void write(Task... tasks) {
         try {
             FileWriter fileWriter = new FileWriter(this.filePath);
-            for (Task t : tasks) {
+            for (Task t:tasks) {
                 fileWriter.write(t.formatForStorage());
                 fileWriter.write("\n");
             }

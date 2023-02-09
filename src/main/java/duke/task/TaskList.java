@@ -53,21 +53,6 @@ public class TaskList {
     }
 
     /**
-     * Check if the index given is valid by checking if
-     * the index is more than 0 and less than the index of the last list item.
-     * @param index The given index to check.
-     * @throws OutOfBoundsException If index is less than 0
-     *                              or more than the index of the last list item.
-     */
-    private void checkIndexValidity(int index) throws OutOfBoundsException {
-        if (index < 0 || index >= this.tasks.size()) {
-            throw new OutOfBoundsException("Item at given index does not exist! "
-                    + "Please enter a valid index.");
-        }
-        assert index > 0 && index < this.tasks.size() : "Index given is out of bounds";
-    }
-
-    /**
      * Deletes task at the given index.
      *
      * @param index The index of task to be deleted.
@@ -76,7 +61,12 @@ public class TaskList {
      *                              or more than the index of the last list element.
      */
     public String delete(int index) throws OutOfBoundsException {
-        checkIndexValidity(index);
+        if (index < 0 || index >= this.tasks.size()) {
+            throw new OutOfBoundsException("Item at given index does not exist! "
+                    + "Please enter a valid index.");
+        }
+        assert index > 0 && index < this.tasks.size() : "Index given is out of bounds";
+
         Task removed = this.tasks.remove(index);
         assert removed != null : "Task at index not removed.";
 
@@ -94,7 +84,12 @@ public class TaskList {
      *                              or more than the index of the last list element.
      */
     public String markIsDone(int index) throws OutOfBoundsException {
-        checkIndexValidity(index);
+        if (index < 0 || index >= this.tasks.size()) {
+            throw new OutOfBoundsException("Item at given index does not exist! "
+                    + "Please enter a valid index.");
+        }
+        assert index > 0 && index < this.tasks.size() : "Index given is out of bounds";
+
         this.tasks.get(index).markIsDone();
         return "Nice! I've marked this task as done:\n "
                 + this.tasks.get(index) + "\n";
@@ -109,7 +104,12 @@ public class TaskList {
      *                              or more than the index of the last list element.
      */
     public String unmarkIsDone(int index) throws OutOfBoundsException {
-        checkIndexValidity(index);
+        if (index < 0 || index >= this.tasks.size()) {
+            throw new OutOfBoundsException("Item at given index does not exist! "
+                    + "Please enter a valid index.");
+        }
+        assert index > 0 && index < this.tasks.size() : "Index given is out of bounds";
+
         this.tasks.get(index).unmarkIsDone();
         return "OK, I've marked this task as not done:\n "
                 + this.tasks.get(index) + "\n";
