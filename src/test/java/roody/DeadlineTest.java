@@ -19,7 +19,7 @@ public class DeadlineTest {
     public void testLocalDateConversion() {
         LocalDate date = LocalDate.now();
         Task deadline = new Deadline("", date);
-        String testString = " (by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        String testString = "[D][ ]  (by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
         assertEquals(deadline.toString(), testString);
     }
 
