@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 import duke.exception.DukeException;
-import duke.parser.Parser;
+import duke.parser.DateTimeParser;
 import duke.ui.Ui;
 
 /**
@@ -56,7 +56,7 @@ public class Deadline extends Task {
 
     private void setDeadline(String description) throws DukeException {
         try {
-            deadline = Parser.parseDateTime(description.split(" /by ")[1]);
+            deadline = DateTimeParser.parse(description.split(" /by ")[1]);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("I'm sorry, but Fake Duke doesn't know what that means :-(");
         } catch (DateTimeParseException dtpe) {

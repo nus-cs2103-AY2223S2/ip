@@ -24,6 +24,19 @@ public class MarkCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage) throws DukeException {
+        String partialOutputString = markTasks(tasks);
+        storage.saveTasks(tasks);
+        return Ui.getMarkOutput(partialOutputString);
+    }
+
+    /**
+     * Mark the tasks indicated in taskIndexes.
+     *
+     * @param tasks List of all tasks.
+     * @return String of tasks that have been marked.
+     * @throws DukeException Thrown if there is a problem with markTask.
+     */
+    private String markTasks(TaskList tasks) throws DukeException {
         String taskString = "";
         for (String taskIndex: taskIndexes) {
             try {
@@ -33,7 +46,6 @@ public class MarkCommand extends Command {
                 System.out.println("Invalid task index, skipping the marking of this task");
             }
         }
-        storage.saveTasks(tasks);
-        return Ui.getMarkOutput(taskString);
+        return taskString;
     }
 }

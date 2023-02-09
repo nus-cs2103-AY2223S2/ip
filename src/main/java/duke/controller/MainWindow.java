@@ -4,7 +4,7 @@ import duke.Duke;
 import duke.command.Command;
 import duke.command.ExitCommand;
 import duke.exception.DukeException;
-import duke.parser.Parser;
+import duke.parser.UserInputParser;
 import duke.ui.Ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -71,16 +71,26 @@ public class MainWindow extends AnchorPane {
      */
     private String getResponse(String input) throws DukeException {
         String fullCommand = Ui.readCommand(input);
-        Command c = Parser.parse(fullCommand);
+        Command c = UserInputParser.parse(fullCommand);
         boolean isExitCommand = c instanceof ExitCommand;
         if (isExitCommand) {
-            System.out.println(c.execute(duke.getTasks(), duke.getStorage()));
-            Stage stage = (Stage) dialogContainer.getScene().getWindow();
-            stage.close();
+            closeApp(c);
             return "";
         } else {
             return c.execute(duke.getTasks(), duke.getStorage());
         }
+    }
+
+    /**
+     * Closes app when called.
+     *
+     * @param c Command object.
+     * @throws DukeException Error thrown from Command object.
+     */
+    private void closeApp(Command c) throws DukeException {
+        System.out.println(c.execute(duke.getTasks(), duke.getStorage()));
+        Stage stage = (Stage) dialogContainer.getScene().getWindow();
+        stage.close();
     }
 
     /**

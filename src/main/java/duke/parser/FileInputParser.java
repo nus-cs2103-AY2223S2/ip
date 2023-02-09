@@ -1,9 +1,5 @@
 package duke.parser;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -11,9 +7,9 @@ import duke.task.Task;
 import duke.task.Todo;
 
 /**
- * Makes sense of the user command entered into Duke.
+ * Makes sense of the file input from the local file.
  */
-public class Parser {
+public class FileInputParser {
     private enum TaskType {
         T,
         D,
@@ -40,8 +36,7 @@ public class Parser {
      */
     public static Task parse(String input) throws DukeException {
         String[] splitInputs = input.split(" ~ ");
-        TaskType taskType = getTaskType(splitInputs);
-        return getTask(taskType, splitInputs);
+        return getTask(getTaskType(splitInputs), splitInputs);
     }
 
     private static TaskType getTaskType(String[] splitInputs) throws DukeException {
@@ -93,17 +88,5 @@ public class Parser {
         boolean isValidLength = inputLength >= minimumLength;
         assert isValidLength : String.format("Local file data/tasks.txt does not have valid format. %s",
                 errorMessage);
-    }
-
-    /**
-     * Returns the valid format of the datetime of the Task.
-     * Valid format: {yyyy-MM-dd HH:mm}
-     *
-     * @param input Datetime input provided by user.
-     * @return Datetime of Task in valid format.
-     */
-    public static LocalDateTime parseDateTime(String input) throws DateTimeParseException {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        return LocalDateTime.parse(input, formatter);
     }
 }

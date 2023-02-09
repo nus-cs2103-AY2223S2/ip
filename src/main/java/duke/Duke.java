@@ -18,6 +18,7 @@ public class Duke {
      */
     public Duke(String filePath) {
         storage = new Storage(filePath);
+
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {

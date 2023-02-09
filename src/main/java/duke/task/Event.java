@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 import duke.exception.DukeException;
-import duke.parser.Parser;
+import duke.parser.DateTimeParser;
 import duke.ui.Ui;
 
 /**
@@ -59,8 +59,8 @@ public class Event extends Task {
     private void setEventDateTimes(String description) throws DukeException {
         try {
             String dateTimes = description.split(" /from ")[1];
-            startDateTime = Parser.parseDateTime(dateTimes.split(" /to ")[0]);
-            endDateTime = Parser.parseDateTime(dateTimes.split(" /to ")[1]);
+            startDateTime = DateTimeParser.parse(dateTimes.split(" /to ")[0]);
+            endDateTime = DateTimeParser.parse(dateTimes.split(" /to ")[1]);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("I'm sorry, but Fake Duke doesn't know what that means :-(");
         } catch (DateTimeParseException dtpe) {

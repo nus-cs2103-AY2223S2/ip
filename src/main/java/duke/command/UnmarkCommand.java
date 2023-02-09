@@ -24,6 +24,19 @@ public class UnmarkCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage) throws DukeException {
+        String partialOutputString = unmarkTasks(tasks);
+        storage.saveTasks(tasks);
+        return Ui.getUnmarkOutput(partialOutputString);
+    }
+
+    /**
+     * Unmark the tasks indicated in taskIndexes.
+     *
+     * @param tasks List of all tasks.
+     * @return String of tasks that have been unmarked.
+     * @throws DukeException Thrown if there is a problem with unmarkTask.
+     */
+    private String unmarkTasks(TaskList tasks) throws DukeException {
         String taskString = "";
         for (String taskIndex: taskIndexes) {
             try {
@@ -33,7 +46,6 @@ public class UnmarkCommand extends Command {
                 System.out.println("Invalid task index, skipping the unmarking of this task");
             }
         }
-        storage.saveTasks(tasks);
-        return Ui.getUnmarkOutput(taskString);
+        return taskString;
     }
 }

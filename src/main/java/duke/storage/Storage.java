@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import duke.exception.DukeException;
-import duke.parser.Parser;
+import duke.parser.FileInputParser;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -64,7 +64,7 @@ public class Storage {
     private ArrayList<Task> readTasks(Scanner s) throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
         while (s.hasNext()) {
-            Task task = Parser.processTask(s.nextLine());
+            Task task = FileInputParser.parse(s.nextLine());
             tasks.add(task);
         }
         return tasks;

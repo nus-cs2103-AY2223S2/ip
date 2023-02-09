@@ -1,19 +1,24 @@
 package duke.command;
 
+import java.util.Arrays;
+
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
-import java.util.Arrays;
-
 /**
  * Deletes task from list of tasks when user input indicates delete.
  */
 public class DeleteCommand extends Command {
-    private Integer[] taskIndexes;
     private static final String ERROR_MESSAGE = "Invalid task index found. Unable to delete.";
+    private Integer[] taskIndexes;
 
+    /**
+     * Constructor for DeleteCommand.
+     *
+     * @param taskIndexes String of indexes of tasks to be deleted.
+     */
     public DeleteCommand(String ... taskIndexes) {
         try {
             this.taskIndexes = Arrays.stream(taskIndexes)
@@ -37,6 +42,20 @@ public class DeleteCommand extends Command {
         if (taskIndexes == null) {
             return ERROR_MESSAGE;
         }
+
+        String partialOutputString = deleteTasks(tasks);
+        storage.saveTasks(tasks);
+        return Ui.getDeleteOutput(partialOutputString, tasks);
+    }
+
+    /**
+     * Deletes the tasks indicated in taskIndexes.
+     *
+     * @param tasks List of all tasks.
+     * @return String of tasks that have been deleted.
+     * @throws DukeException Thrown if there is a problem with deleteTask.
+     */
+    private String deleteTasks(TaskList tasks) throws DukeException {
         String taskString = "";
         int deleteOffset = 1;
         for (int taskIndex: taskIndexes) {
@@ -44,7 +63,6 @@ public class DeleteCommand extends Command {
                     tasks.deleteTask(taskIndex - deleteOffset));
             deleteOffset++;
         }
-        storage.saveTasks(tasks);
-        return Ui.getDeleteOutput(taskString, tasks);
+        return taskString;
     }
 }
