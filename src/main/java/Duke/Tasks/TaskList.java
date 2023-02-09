@@ -4,7 +4,7 @@ package Duke.Tasks;
 
 
 import Duke.Ui;
-
+import Duke.Exceptions.duplicateException;
 import  java.util.ArrayList;
 
 public class TaskList {
@@ -24,7 +24,12 @@ public class TaskList {
      * method to add task to list of Tasks
      *
      */
-    public void addTask(Task t) {
+    public void addTask(Task t) throws duplicateException {
+        for (Task task : arrayListOfTasks) {
+            if(t.equals(task)){
+                throw new duplicateException();
+          }
+        }
         arrayListOfTasks.add(t);
     }
 
