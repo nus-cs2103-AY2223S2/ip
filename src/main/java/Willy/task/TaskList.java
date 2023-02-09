@@ -133,11 +133,10 @@ public class TaskList {
         // System.out.println("Successfully added an event"); // chaneg this later
     }
 
-
     /**
-     * Converts the tasklist into a combined string representation (need to check)
+     * print all tasks in a list of strings that contains the keyword
+     * @param keyword
      */
-
     public void findTasks(String keyword) {
         System.out.println("Here are the matching tasks in your list");
         String str = "", msg = "";
@@ -159,6 +158,10 @@ public class TaskList {
         }
         System.out.println(str);
     }
+
+    /**
+     * Converts the tasklist into a combined string representation (need to check)
+     */
     @Override
     public String toString() {
         String str = "";
