@@ -26,12 +26,12 @@ public class DeadlineCmd extends Command {
     }
 
     /** Adds the Deadline task to the task list. */
-    public void execute() throws CommandExecutionError {
+    public String execute() throws CommandExecutionError {
         this.deadline = Deadline.create(this.lineInput);
         taskList.add(this.deadline);
 
-        this.response = "Got it. I've added this task:\n"
-                + Ui.indentString(this.deadline.toString(), 1)
-                + "\n" + Ui.numTaskToString(taskList.countTasks());
-    };
+        return String.format("Got it. I've added this task:\n%s\n%s",
+                Ui.indentString(this.deadline.toString(), 1),
+                Ui.numTaskToString(taskList.countTasks()));
+    }
 }

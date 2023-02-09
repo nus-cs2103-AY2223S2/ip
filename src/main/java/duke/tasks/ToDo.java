@@ -1,7 +1,7 @@
 package duke.tasks;
 
-import duke.Parser;
 import duke.exceptions.TaskNameNotSpecified;
+import duke.parsing.Parser;
 
 /**
  * Wrapper class for 'To do' tasks

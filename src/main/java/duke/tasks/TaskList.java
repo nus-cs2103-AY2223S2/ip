@@ -63,14 +63,13 @@ public class TaskList {
      */
     public TaskList find(String... keywords) {
         TaskList result = new TaskList();
-        for (int i = 0; i < this.tasks.size(); i++) {
-            Task curTask = this.tasks.get(i);
+        tasks.stream().forEach(task -> {
             for (String keyword : keywords) {
-                if (curTask.taskName.contains(keyword)) {
-                    result.add(curTask);
+                if (task.taskName.contains(keyword)) {
+                    result.add(task);
                 }
             }
-        }
+        });
         return result;
     }
 

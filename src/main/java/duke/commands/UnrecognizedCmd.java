@@ -8,7 +8,7 @@ public class UnrecognizedCmd extends Command {
         super(taskList, lineInput);
     }
 
-    public void execute() throws CommandExecutionError {
-        this.response = "OOPS!!! I'm sorry, but I don't know what that means :-(";
+    public String execute() throws CommandExecutionError {
+        return "OOPS!!! I'm sorry, but I don't know what that means :-(";
     }
 }
