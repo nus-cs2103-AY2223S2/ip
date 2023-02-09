@@ -17,6 +17,13 @@ import duke.task.Todo;
  */
 public class Parser {
 
+    /**
+     * Parses user inputs to create a corresponding task.
+     *
+     * @param inputs from the user input
+     * @return Task that user wants to add
+     * @throws DukeException when user input does not follow expected format
+     */
     private static Task parseTaskCommands(String[] inputs) throws DukeException {
         String taskType = inputs[0];
         if (inputs.length <= 1) {
@@ -61,6 +68,13 @@ public class Parser {
 
     }
 
+    /**
+     * Parses user inputs to create a Mark or Delete command.
+     *
+     * @param inputs from the user input
+     * @return a Mark or Delete Command
+     * @throws DukeException when user input does not follow expected format
+     */
     private static Command parseMarkAndDeleteCommands(String[] inputs, String command) throws DukeException {
         if (inputs.length <= 1) {
             throw new DukeException("Please input the numbering of the task you want to " + command + " as well!");
@@ -77,6 +91,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses user inputs to create a Find Command.
+     *
+     * @param inputs from the user input
+     * @return a Find Command with user-given keyword
+     * @throws DukeException when user input does not follow expected format
+     */
     private static Command parseFindCommands(String[] inputs) throws DukeException {
         if (inputs.length <= 1) {
             throw new DukeException("Please indicate the keyword you want to search with!");
