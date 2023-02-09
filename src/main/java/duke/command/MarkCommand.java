@@ -28,6 +28,10 @@ public class MarkCommand extends Command {
      * @return string
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
+        assert tasks != null;
+        assert ui != null;
+        assert storage != null;
+        
         try {
             int id = Integer.parseInt(this.unwrap()[0]);
             int index = id - 1;

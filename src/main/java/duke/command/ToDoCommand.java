@@ -28,6 +28,10 @@ public class ToDoCommand extends Command {
      * @return string
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
+        assert tasks != null;
+        assert ui != null;
+        assert storage != null;
+        
         try {
             String[] values = this.unwrap();
             String description = values[0];
