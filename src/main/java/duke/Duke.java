@@ -30,18 +30,21 @@ public class Duke {
     }
 
     private String markCommand(List<String> tokens) throws DukeException {
+        assert tokens.size() == 2;
         int index = Integer.parseInt(tokens.get(1)) - 1;
         this.taskApplication.markTask(index);
         return String.format("Nice! I've marked this task as done:\n%s", this.taskApplication.getTask(index));
     }
 
     private String unmarkCommand(List<String> tokens) throws DukeException {
+        assert tokens.size() == 2;
         int index = Integer.parseInt(tokens.get(1)) - 1;
         this.taskApplication.unmarkTask(index);
         return String.format("OK, I've marked this task as not done yet:\n%s", this.taskApplication.getTask(index));
     }
 
     private String todoCommand(List<String> tokens) {
+        assert tokens.size() == 2;
         Task newTask = new ToDo(tokens.get(1));
         this.taskApplication.addTask(newTask);
         return String.format(
@@ -51,6 +54,7 @@ public class Duke {
     }
 
     private String deadlineCommand(List<String> tokens) {
+        assert tokens.size() == 3;
         Task newTask = new Deadline(tokens.get(1), tokens.get(2));
         this.taskApplication.addTask(newTask);
         return String.format(
@@ -60,6 +64,7 @@ public class Duke {
     }
 
     private String eventCommand(List<String> tokens) {
+        assert tokens.size() == 4;
         Task newTask = new Event(tokens.get(1), tokens.get(2), tokens.get(3));
         this.taskApplication.addTask(newTask);
         return String.format(
@@ -69,6 +74,7 @@ public class Duke {
     }
 
     private String deleteCommand(List<String> tokens) throws DukeException {
+        assert tokens.size() == 2;
         int index = Integer.parseInt(tokens.get(1)) - 1;
         Task t = this.taskApplication.popTask(index);
         return String.format(
@@ -77,6 +83,7 @@ public class Duke {
         );
     }
     private String findCommand(List<String> tokens) {
+        assert tokens.size() == 2;
         String keyword = tokens.get(1);
         List<Task> tasks = this.taskApplication.getTaskByKeyword(keyword);
         StringBuilder result = new StringBuilder();
