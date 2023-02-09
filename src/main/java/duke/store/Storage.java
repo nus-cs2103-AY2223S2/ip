@@ -78,8 +78,7 @@ public class Storage {
      * @return string that is to be saved.
      */
     private static String readerFriendly(Task task) {
-        String status = task.getStatus()
-                ? COMPLETE_MSG : INCOMPLETE_MSG;
+        String status = task.getStatus() ? COMPLETE_MSG : INCOMPLETE_MSG;
         if (task instanceof Todo) {
             Todo t = (Todo) task;
             return "Todo: " + t.getDescription() + " " + status;

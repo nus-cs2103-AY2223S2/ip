@@ -51,7 +51,17 @@ public class Task {
         System.out.println(SEPARATOR);
         isDone = true;
     }
-
+    /**
+     * Identical to taskDone() but returns a String instead.
+     * @return String message
+     */
+    public String taskDoneString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Nice! I've marked this task as done:\n");
+        sb.append(this.toString() + "\n");
+        isDone = true;
+        return sb.toString();
+    }
     /**
      * Sets the status of the Task object as being incomplete.
      */
@@ -60,6 +70,18 @@ public class Task {
         System.out.println(this.toString());
         System.out.println(SEPARATOR);
         isDone = false;
+    }
+
+    /**
+     * Identical to taskNotDone() but returns a String instead.
+     * @return String message
+     */
+    public String taskNotDoneString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("\"OK, I've marked this task as not done yet:\"\n");
+        sb.append(this.toString() + "\n");
+        isDone = false;
+        return sb.toString();
     }
 
 
