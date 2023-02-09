@@ -1,16 +1,15 @@
 package duke;
 
-import duke.task.Task;
-
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Storage {
-    private File logFile;
+    private final File logFile;
 
     /**
      * Creates an IOException
@@ -65,14 +64,15 @@ public class Storage {
     /**
      * Rewrite the contents of the log file to match a given linked list
      *
-     * @param tasks linked list of tasks to write to the log file
+     * @param texts linked list of strings that will overwrite the log file
      * @throws IOException if unable to detect log file
      */
-    public void updateLogFile(LinkedList<Task> tasks, Parser parser) throws IOException {
-        FileWriter fw = new FileWriter(logFile);
-        for (Task item : tasks) {
-            fw.write(item.toString(parser) + "\n");
+
+    public void update(LinkedList<String> texts) throws IOException {
+        PrintWriter pw = new PrintWriter(logFile);
+        for (String row : texts) {
+            pw.println(row);
         }
-        fw.close();
+        pw.close();
     }
 }

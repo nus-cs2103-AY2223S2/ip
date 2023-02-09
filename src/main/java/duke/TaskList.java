@@ -5,12 +5,13 @@ import duke.task.Task;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+
 import java.util.LinkedList;
 
 public class TaskList {
+    private final LinkedList<Task> tasks;
     private final Storage storage;
-    private static LinkedList<Task> tasks;
-    public final Parser parser;
+    private final Parser parser;
 
     /**
      * Constructs an empty Task List.
@@ -18,9 +19,9 @@ public class TaskList {
      * @param storage a permanent storage that TaskList maintains
      */
     public TaskList (Parser parser, Storage storage) {
-        this.parser = parser;
-        this.storage = storage;
         tasks = new LinkedList<>();
+        this.storage = storage;
+        this.parser = parser;
     }
 
     /**
@@ -122,10 +123,18 @@ public class TaskList {
      */
     private String getStatus(String text, Task t) {
         try {
-            storage.updateLogFile(tasks, parser);
+            updateLogFile();
             return String.format("%s\n%s\nNow you have %d task(s) in the list.", text, t.toString(), tasks.size());
         } catch (IOException e) {
             return "Error: No permissions to edit log file";
         }
+    }
+
+    private void updateLogFile() throws IOException {
+        LinkedList<String> texts = new LinkedList<>();
+        for (Task t : tasks) {
+            texts.add(t.toString(parser));
+        }
+        storage.update(texts);
     }
 }
