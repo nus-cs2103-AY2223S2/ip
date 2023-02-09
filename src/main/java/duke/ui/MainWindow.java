@@ -59,15 +59,21 @@ public class MainWindow extends AnchorPane {
         String input = inputField.getText();
         String response = duke.getResponse(input);
         String dukeHeardThis = "Duke heard: " + input;
+        displayViewBox.getChildren().addAll(
+                DialogBox.getUserDialog(input, userImage),
+                DialogBox.getDukeDialog(dukeHeardThis, dukeImage)
+        );
+
         if (Objects.equals(response, "")) {
             // TODO: Check if application exits properly
+            displayViewBox.getChildren().addAll(
+                    DialogBox.getDukeDialog(ReplyString.getGoodbyeString(), dukeImage)
+            );
             duke.saveTasks();
             Platform.exit();
             return;
         }
         displayViewBox.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(dukeHeardThis, dukeImage),
                 DialogBox.getDukeDialog(response, dukeImage),
                 DialogBox.getDukeDialog(ReplyString.getPromptQuestionString(), dukeImage)
         );
