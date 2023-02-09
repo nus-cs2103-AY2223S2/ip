@@ -1,3 +1,5 @@
+import java.util.List;
+
 class Event extends Task {
     private final String taskType;
     private final String eventStartTime;
@@ -17,7 +19,7 @@ class Event extends Task {
                 "\n\t Nice! I've marked this task as done:\n" +
                 "\t  " + this.taskType + "[X]" + " " + super.task +
                 " (from: " + this.eventStartTime + " to: "
-                + this.eventEndTime +
+                + this.eventEndTime + ")" +
                 "\n\t____________________________________________________________");
     }
 
@@ -41,8 +43,8 @@ class Event extends Task {
     }
 
     @Override
-    public void printDelete() {
-        int newTotalNumOfTasks = super.totalNumOfTasks - 1;
+    public void printDelete(List<Task> allTasks) {
+        int newTotalNumOfTasks = allTasks.size() - 1;
         System.out.println("\t____________________________________________________________" +
                 "\n\t Noted. I've removed this task:" +
                 "\n\t   " + this.taskType +

@@ -1,3 +1,4 @@
+import java.util.List;
 public class Task {
     protected final int taskNumber;
     protected final boolean taskStatus;
@@ -25,11 +26,12 @@ public class Task {
                 "\n\t____________________________________________________________");
     }
 
-    public void printDelete() {
+    public void printDelete(List<Task> allTasks) {
+        int allTaskSize = allTasks.size() - 1;
         System.out.println("\t____________________________________________________________" +
                 "\n\t Noted. I've removed this task:" + "\n\t   " +
                 this.getTaskStatus() + " " + this.task +
-                "\n\t Now you have " + this.totalNumOfTasks + " tasks in the list.");
+                "\n\t Now you have " + allTaskSize + " tasks in the list.");
     }
 
     public int getTaskNumber() {

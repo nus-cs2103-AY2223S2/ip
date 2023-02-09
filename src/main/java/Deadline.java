@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class Deadline extends Task {
     private final String taskType;
     private final String taskDeadline;
@@ -36,8 +38,8 @@ public class Deadline extends Task {
     }
 
     @Override
-    public void printDelete() {
-        int newTotalNumOfTasks = super.totalNumOfTasks - 1;
+    public void printDelete(List<Task> allTasks) {
+        int newTotalNumOfTasks = allTasks.size() - 1;
         System.out.println("\t____________________________________________________________" +
                 "\n\t Noted. I've removed this task:" +
                 "\n\t   " + this.taskType +
