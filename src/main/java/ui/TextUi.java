@@ -2,7 +2,7 @@ package ui;
 
 import dukeexeption.DukeException;
 
-public class Ui {
+public class TextUi {
     private final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
