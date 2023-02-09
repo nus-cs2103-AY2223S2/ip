@@ -2,6 +2,7 @@ package duke.task;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -32,6 +33,7 @@ public class TaskList {
      */
     public void add(Task task) {
         this.taskList.add(task);
+        Collections.sort(this.taskList);
     }
 
     /**
@@ -59,6 +61,15 @@ public class TaskList {
      */
     public void unmark(int index) {
         getTask(index).unmarkDone();
+    }
+
+    /**
+     * Returns all tasks from the task list.
+     *
+     * @return all tasks from the task list
+     */
+    public ArrayList<Task> get() {
+        return this.taskList;
     }
 
     /**

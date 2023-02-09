@@ -1,6 +1,10 @@
 package duke.commands;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import duke.storage.Storage;
+import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
@@ -32,15 +36,25 @@ public class FindCommand extends Command {
      */
     @Override
     public void execute(Storage storage, TaskList tasks, Ui ui) {
+        List<Task> filteredTasks = filter(tasks);
+        setUiResponse(filteredTasks, ui);
+    }
+
+    private List<Task> filter(TaskList tasks) {
+        return tasks.get()
+                .stream()
+                .filter(task -> task.toString().contains(this.keyword))
+                .collect(Collectors.toList());
+    }
+
+    private void setUiResponse(List<Task> tasks, Ui ui) {
         int index = 0;
         StringBuilder sb = new StringBuilder();
         sb.append("Here are the matching tasks in your list:\n");
-        for (int i = 0; i < tasks.getSize(); i++) {
-            if (tasks.getTask(i).toString().contains(this.keyword)) {
-                String s = (index + 1) + ". " + tasks.getTask(i) + "\n";
-                sb.append(s);
-                index++;
-            }
+        for (Task t : tasks) {
+            String s = (index + 1) + ". " + t + "\n";
+            sb.append(s);
+            index++;
         }
         ui.setResponse(sb.toString());
     }

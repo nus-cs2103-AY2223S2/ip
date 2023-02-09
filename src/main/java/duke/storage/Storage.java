@@ -46,17 +46,19 @@ public class Storage {
     /**
      * Adds the task into storage.
      *
-     * @param task the task to be added into storage
+     * @param tasks the tasks to be added into storage
      */
-    public void add(Task task) {
+    public void add(ArrayList<Task> tasks) {
         try {
-            FileWriter fw = new FileWriter(this.file, true);
-            String data = processTaskToData(task);
-            fw.write(data + System.lineSeparator());
-            fw.flush();
+            FileWriter fw = new FileWriter(this.file);
+            for (Task t : tasks) {
+                String data = processTaskToData(t);
+                fw.write(data + System.lineSeparator());
+                fw.flush();
+            }
             fw.close();
         } catch (IOException e) {
-            System.out.println("Fail to add to repository.");
+            System.out.println("Fail to add to storage.");
         }
     }
 

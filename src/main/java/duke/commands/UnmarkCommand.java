@@ -31,8 +31,20 @@ public class UnmarkCommand extends Command {
      */
     @Override
     public void execute(Storage storage, TaskList tasks, Ui ui) {
+        unmarkTaskList(tasks);
+        unmarkStorage(storage);
+        setUiResponse(tasks, ui);
+    }
+
+    private void unmarkTaskList(TaskList tasks) {
         tasks.unmark(this.index);
+    }
+
+    private void unmarkStorage(Storage storage) {
         storage.unmark(this.index);
+    }
+
+    private void setUiResponse(TaskList tasks, Ui ui) {
         ui.setResponse("OK, I've marked this task as not done yet:\n" + tasks.getTask(this.index));
     }
 }

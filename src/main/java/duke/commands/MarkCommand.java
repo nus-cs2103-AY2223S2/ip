@@ -31,8 +31,20 @@ public class MarkCommand extends Command {
      */
     @Override
     public void execute(Storage storage, TaskList tasks, Ui ui) {
+        markTaskList(tasks);
+        markStorage(storage);
+        setUiResponse(tasks, ui);
+    }
+
+    private void markTaskList(TaskList tasks) {
         tasks.mark(this.index);
+    }
+
+    private void markStorage(Storage storage) {
         storage.mark(this.index);
+    }
+
+    private void setUiResponse(TaskList tasks, Ui ui) {
         ui.setResponse("Nice! I've marked this task as done:\n" + tasks.getTask(this.index));
     }
 }
