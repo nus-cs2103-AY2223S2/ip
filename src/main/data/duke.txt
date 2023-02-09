@@ -1,6 +1,3 @@
-T | go toilet
-D | return book (by:Dec 2 2019 0600pm)
-D | return book (by:Dec 2 2019 0600pm)
-T | borrow book
-T | go toilet
-T | go toilet
+D|T|return book (by:Dec 2 2019 0600pm)
+T|F|brush teeth
+T|F| print my books

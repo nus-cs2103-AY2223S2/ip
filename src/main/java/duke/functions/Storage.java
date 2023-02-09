@@ -1,4 +1,4 @@
-package duke;
+package duke.functions;
 import duke.dukeexceptions.TaskListEmpty;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -38,19 +38,31 @@ public class Storage {
             Scanner scanner = new Scanner(new File(this.path));
             while (scanner.hasNext()) {
                 String taskDetails = scanner.nextLine();
-                String[] details = taskDetails.split(" |", 2);
+                String[] details = taskDetails.split("\\|");
+                for (int i = 0; i < details.length ; i++) {
+                    System.out.println(details[i]);
+                }
+
                 String taskType = details[0];
-                String taskName = details[1];
+                String taskStatus = details[1];
+                String taskName = details[2];
+                taskStatus = taskStatus.replace("|", "");
                 taskName = taskName.replace("|", "");
+                boolean isDone;
+                if (taskStatus.equals("T")) {
+                    isDone = true;
+                } else {
+                    isDone = false;
+                }
                 switch (taskType) {
                 case "T":
-                    actions.add(new ToDo(taskName));
+                    actions.add(new ToDo(taskName, isDone));
                     break;
                 case "E":
-                    actions.add(new Event(taskName));
+                    actions.add(new Event(taskName, isDone));
                     break;
                 case "D":
-                    actions.add(new Deadline(taskName));
+                    actions.add(new Deadline(taskName, isDone));
                     break;
                 }
             }
@@ -69,7 +81,7 @@ public class Storage {
     public void writeToFile(String input , String type) {
         try {
             FileWriter filewriter =  new FileWriter(this.path, true);
-            String text = type + " |" + input;
+            String text = type + "|" + "F" + "|" + input;
             filewriter.write(System.lineSeparator());
             filewriter.write(text);
             filewriter.close();
@@ -77,5 +89,8 @@ public class Storage {
             System.out.println(e.getMessage());
         }
     }
+
+
+
 
 }

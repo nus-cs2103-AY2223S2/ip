@@ -12,10 +12,22 @@ public class Task {
     /**
      * Constructor of Task.
      *
-     * @param name
+     * @param name name of the task
      */
     public Task(String name) {
         this.name = name;
+        this.total++;
+    }
+
+    /**
+     * Constructor of Task
+     *
+     * @param name name of the task
+     * @param isDone indicates whether the task is done
+     */
+    public Task(String name, boolean isDone) {
+        this.name = name;
+        this.isDone = isDone;
         this.total++;
     }
 

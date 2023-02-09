@@ -9,6 +9,16 @@ public class ToDo extends Task {
     /**
      * A constructor for ToDo.
      *
+     * @param name name of the task.
+     * @param isDone status of the task.
+     */
+    public ToDo(String name, boolean isDone) {
+        super(name, isDone);
+    }
+
+    /**
+     * A constructor for ToDo.
+     *
      * @param name name of the task
      */
     public ToDo(String name) {

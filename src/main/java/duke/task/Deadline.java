@@ -10,6 +10,16 @@ public class Deadline extends Task {
      * A constructor for Deadline.
      *
      * @param name name of the task.
+     * @param isDone status of the task.
+     */
+    public Deadline(String name, boolean isDone) {
+        super(name, isDone);
+    }
+
+    /**
+     * A constructor for Deadline.
+     *
+     * @param name name of the task.
      */
     public Deadline(String name) {
         super(name);

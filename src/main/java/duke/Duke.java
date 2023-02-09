@@ -1,5 +1,8 @@
 package duke;
 import duke.dukeexceptions.DukeException;
+import duke.functions.Parser;
+import duke.functions.Storage;
+import duke.task.TaskList;
 
 /**
  * Class that runs the application.
@@ -7,7 +10,11 @@ import duke.dukeexceptions.DukeException;
 public class Duke {
     private Storage storage;
     private TaskList taskList;
-    private Ui appInterface;
+
+
+    public Duke() {
+        this("src/main/data/duke.txt");
+    }
 
     /**
      * Constructor of a Duke application
@@ -16,39 +23,28 @@ public class Duke {
      */
     public Duke(String filePath) {
         storage =  new Storage(filePath);
-        appInterface = new Ui();
 
         try {
             taskList = new TaskList(storage.load());
         } catch (DukeException e) {
-            appInterface.showError(e);
             taskList = new TaskList();
         }
     }
 
-    /**
-     * Runs the application based
-     * on commands from user.
-     */
-    public void run() {
-        boolean isDone = false;
 
-        appInterface.greetUser();
-        while (!isDone) {
-            try {
-                String fullCommand = appInterface.readCommand();
-                appInterface.showLine();
-                String reply = Parser.understandInput(fullCommand, fullCommand.split(" "), taskList, storage);
-                isDone = appInterface.replyUser(reply);
-            } catch (DukeException e) {
-                appInterface.showError(e);
-            } finally {
-                appInterface.showLine();
-            }
+    /**
+     * Runs the application based on the given input read
+     */
+    public String run(String s) {
+        String result = null;
+        try {
+            String reply = Parser.understandInput(s, s.split(" "), taskList, storage);
+            result = reply;
+        } catch (DukeException e) {
+            result = e.getMessage();
+        } finally {
+            return result;
         }
     }
 
-    public static void main(String[] args) {
-        new Duke("src/main/data/duke.txt").run();
-    }
 }

@@ -10,6 +10,17 @@ public class Event extends Task {
      * A constructor for Event.
      *
      * @param name name of the task.
+     * @param isDone status of the task.
+     */
+    public Event(String name, boolean isDone) {
+        super(name, isDone);
+    }
+
+    /**
+     * A constructor for Event.
+     *
+     * @param name name of the task.
+     * @param name name of the task
      */
     public Event(String name) {
         super(name);
