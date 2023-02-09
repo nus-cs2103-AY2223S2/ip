@@ -22,9 +22,7 @@ public class Ui {
         assert s.length() >= 0 : "Number of letters in a command should be a positive number";
         // user enters list command
         if (s.contains("list")) {
-            TaskList taskListing = new TaskList(tasks);
-            return taskListing.displayTasks();
-            // return string of tasks -> make displayTasks() return string first
+            return t.displayTasks();
 
             // user enters mark or unmark command
         } else if (s.contains("mark") || s.contains("unmark")) {

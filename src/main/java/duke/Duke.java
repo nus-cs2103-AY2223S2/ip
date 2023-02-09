@@ -31,7 +31,8 @@ public class Duke extends Application{
 
     @Override
     public void start(Stage stage) {
-        storage = new Storage(System.getProperty("user.dir") +"/data/duke.txt");
+        String filePath = System.getProperty("user.dir") +"/data/duke.txt";
+        storage = new Storage(filePath);
         tasks = new TaskList(storage.load());
 
         //Step 1. Setting up required components

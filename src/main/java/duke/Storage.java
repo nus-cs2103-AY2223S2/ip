@@ -18,7 +18,6 @@ class Storage {
 
     public ArrayList<Task> load() {
         assert this.filePath.length() > 0 : "filePath should not be empty";
-        System.out.println("    . . . Loading . . . ");
         File file = new File(this.filePath);
         ArrayList<Task> tasks = new ArrayList<Task>();
         File dir = new File(System.getProperty("user.dir") + "/data");

@@ -9,11 +9,13 @@ public class Todo extends Task {
 
     @Override
     public String toSavedString() {
-        return "T | " + super.toSavedString();
+        String savedString = "T | " + super.toSavedString();
+        return savedString;
     }
 
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        String outputString = "[T]" + super.toString();
+        return outputString;
     }
 }
