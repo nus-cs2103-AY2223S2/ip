@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -96,17 +97,30 @@ public class Storage {
     }
 
     /**
+     * Write the given string input to file using given fileWriter.
+     * @param fileWriter The fileWriter to use to write input.
+     * @param input The input to write into file
+     */
+    private void writeUsingFileWriter(FileWriter fileWriter, String input) {
+        try {
+            fileWriter.write(input + "\n");
+        } catch (IOException e) {
+            System.out.println(e + "\nUnable to write to data file.");
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * Updates the storage file in hard disk with the given list of tasks.
      *
      * @param tasks Varargs of tasks.
      */
-    public void write(Task... tasks) {
+    public void writeToFile(Task... tasks) {
         try {
             FileWriter fileWriter = new FileWriter(this.filePath);
-            for (Task t:tasks) {
-                fileWriter.write(t.formatForStorage());
-                fileWriter.write("\n");
-            }
+            Arrays.stream(tasks)
+                    .map(t -> t.formatForStorage())
+                    .forEach(t -> writeUsingFileWriter(fileWriter, t));
             fileWriter.close();
         } catch (IOException e) {
             System.out.println(e + "\nUnable to write to data file.");

@@ -63,8 +63,8 @@ public class Duke extends Application {
      * Stores the tasks in a file in hard drive.
      */
     public void store() {
-        Task[] t = {new ToDo("a")};
-        this.storage.write(this.tasks.getTaskList().toArray(t));
+        Task[] t = { new ToDo("a") };
+        this.storage.writeToFile(this.tasks.getTaskList().toArray(t));
     }
 
     /**
