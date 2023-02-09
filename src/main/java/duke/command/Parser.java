@@ -8,6 +8,9 @@ import duke.exception.MissingContentException;
  * Makes sense of what users say
  */
 public class Parser {
+    static final String inSecond = "00";
+    static final int secondToEndIndex = 2;
+    static final int minSize = 0;
 
     /**
      * Makes sense of adding to do command from users
@@ -26,7 +29,7 @@ public class Parser {
         } catch (IndexOutOfBoundsException | NullPointerException e) {
             throw new MissingContentException();
         }
-        assert (remaining.length() != 0) : "Parser could not process todo task as description is empty";
+        assert (remaining.length() != minSize) : "Parser could not process todo task as description is empty";
         return remaining;
     }
 
@@ -96,7 +99,7 @@ public class Parser {
                 break;
             }
         }
-        if (pointer == 0) {
+        if (pointer == minSize) {
             throw new MissingContentException();
         }
         return pointer;
@@ -137,14 +140,14 @@ public class Parser {
      * @throws MissingContentException if arr is empty.
      */
     public int getEventStartTimeIndex(String[] arr) throws MissingContentException {
-        int startIndex = 0;
+        int startIndex = minSize;
         for (int j = 1; j < arr.length; j++) {
             if (String.valueOf(arr[j]).equals("/from")) {
                 startIndex = j + 1;
                 break;
             }
         }
-        if (startIndex == 0) {
+        if (startIndex == minSize) {
             throw new MissingContentException();
         }
         return startIndex;
@@ -170,7 +173,7 @@ public class Parser {
             detail += arr[j];
             detail += " ";
         }
-        assert (detail.length() != 0) : "Parser could not process event task as its detail is empty";
+        assert (detail.length() != minSize) : "Parser could not process event task as its detail is empty";
         return detail;
     }
 
@@ -183,14 +186,14 @@ public class Parser {
      * @return the index of ending time.
      */
     public int getEventEndTimeIndex(String[] arr, int startIndex) throws MissingContentException {
-        int endIndex = 0;
+        int endIndex = minSize;
         for (int j = startIndex; j < arr.length; j++) {
             if (String.valueOf(arr[j]).equals("/to")) {
                 endIndex = j + 1;
                 break;
             }
         }
-        if (endIndex == 0) {
+        if (endIndex == minSize) {
             throw new MissingContentException();
         }
         return endIndex;
@@ -215,7 +218,7 @@ public class Parser {
             } else {
                 start += arr[j];
             }
-            if (j != endIndex - 2) {
+            if (j != endIndex - secondToEndIndex) {
                 start += " ";
             }
         }
@@ -235,13 +238,13 @@ public class Parser {
     }
 
     private static String getTime(String s) throws IndexOutOfBoundsException {
-        String track = String.valueOf(s.charAt(0));
-        int tracker = 0;
+        String track = String.valueOf(s.charAt(minSize));
+        int tracker = minSize;
         while (!track.equals(" ")) {
             tracker++;
             track = String.valueOf(s.charAt(tracker));
         }
-        assert tracker != 0 : "Cannot get event time - missing input from user";
+        assert tracker != minSize : "Cannot get event time - missing input from user";
         String date = String.valueOf(s.substring(0, tracker));
         String time = String.valueOf(s.substring(tracker + 1));
         String timeFormatted = "";
@@ -249,7 +252,7 @@ public class Parser {
             timeFormatted += String.valueOf(time.substring(i, i + 2));
             timeFormatted += ":";
         }
-        timeFormatted += "00";
+        timeFormatted += inSecond;
         return date + "T" + timeFormatted;
     }
 }
