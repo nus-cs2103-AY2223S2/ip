@@ -17,7 +17,7 @@ public class Storage {
      *
      * @return IOException with a message
      */
-    private static IOException getIoException(){
+    private static IOException getIOException(){
         return new IOException("Unable to detect or create log file");
     }
 
@@ -34,13 +34,13 @@ public class Storage {
 
         if (!parentFolder.exists()) {
             if (!parentFolder.mkdirs()) {
-                throw getIoException();
+                throw getIOException();
             }
         }
 
         if (!logFile.exists()) {
             if (logFile.createNewFile()) {
-                throw getIoException();
+                throw getIOException();
             }
         }
 
