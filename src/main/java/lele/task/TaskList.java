@@ -1,5 +1,7 @@
 package lele.task;
 
+import lele.exception.NoPreviousCommandException;
+
 import java.util.ArrayList;
 
 /**
@@ -8,15 +10,54 @@ import java.util.ArrayList;
  *
  */
 public class TaskList {
-    protected ArrayList<Task> list;
+    protected ArrayList<Task> list; // Always contain the most updated list
+    private ArrayList<ArrayList<Task>> cache;
 
+    /**
+     * Important note: Cache the list FIRST before committing to any
+     * operations on this.list. THis is so that the original cache
+     * does not get overridden by the operations, then caching that
+     * wrong version!
+     *
+     */
+    public void cacheList() {
+        ArrayList<Task> toBeStored = new ArrayList<>();
+        for (Task task: this.list) {
+            toBeStored.add(task);
+        }
+        this.list = toBeStored;
+        this.cache.add(toBeStored);
+    }
+
+    public void restorePreviousList(int index) throws NoPreviousCommandException {
+        // Don't do anything if number of versions to undo is 0
+        if (index == 0) {
+            return;
+        }
+        // Need to add 1 to account for the original list at index 0
+        int versionToBeRestoredTo = this.cache.size() - index - 1;
+        if (versionToBeRestoredTo < 0) {
+            throw new NoPreviousCommandException("Not possible, that's too far back into history!");
+        }
+        this.list = this.cache.get(versionToBeRestoredTo);
+        /*  Clears all versions in the cache after the calculated index.
+            If cache size is equals to 1, it'll mean that the cache has
+            only 1 item, which implies that it is at its original version.
+         */
+        if (this.cache.size() > 1) {
+            this.cache.subList(versionToBeRestoredTo + 1, this.cache.size()).clear();
+        }
+    }
     /**
      * Loads the task list provided from storage.
      *
-     * @param taskList Loaded with tasks from storage
+     * @param storageList Loaded with tasks from storage
      */
-    public TaskList(ArrayList<Task> taskList) {
-        this.list = taskList;
+    public TaskList(ArrayList<Task> storageList) {
+        this.list = storageList;
+        this.cache = new ArrayList<>();
+        // Adds the original task list in the storage to the cache
+        this.cache.add(storageList);
     }
 
     /**
@@ -25,6 +66,8 @@ public class TaskList {
      */
     public TaskList() {
         this.list = new ArrayList<>();
+        this.cache = new ArrayList<>();
+        this.cache.add(new ArrayList<>());
     }
 
     /**
@@ -95,6 +138,7 @@ public class TaskList {
         assert list.get(index - 1) == null : "Object called should be of type task.";
         // Use an exception instead of assert to handle the code below
         // assert list.contains(list.get(index - 1)) : "The task list should contain the task being marked.";
+        cacheList();
         list.get(index - 1).markStatus(true);
     }
 
@@ -104,6 +148,7 @@ public class TaskList {
      * @param index The location of the task in the array list.
      */
     public void unMarkStatus(int index) {
+        cacheList();
         list.get(index - 1).markStatus(false);
     }
 
@@ -113,6 +158,7 @@ public class TaskList {
      * @param task Task to be added.
      */
     public void addTask(Task task) {
+        cacheList();
         this.list.add(task);
     }
 
@@ -124,9 +170,9 @@ public class TaskList {
     public Task deleteTask(int inputIndex) {
         // Use an exception instead of assert to handle the code below
         // assert this.listSize() >= inputIndex : "Index parameter queried should be within the task size";
+        cacheList();
         Task task = this.list.get(inputIndex - 1);
         this.list.remove(inputIndex - 1);
-
         return task;
     }
 

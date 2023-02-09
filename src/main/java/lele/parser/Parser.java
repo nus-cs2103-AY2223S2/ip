@@ -1,15 +1,6 @@
 package lele.parser;
 
-import lele.command.ByeCommand;
-import lele.command.Command;
-import lele.command.DeadlineCommand;
-import lele.command.DeleteCommand;
-import lele.command.EventCommand;
-import lele.command.FindCommand;
-import lele.command.ListCommand;
-import lele.command.MarkCommand;
-import lele.command.TodoCommand;
-import lele.command.UnmarkCommand;
+import lele.command.*;
 import lele.exception.EmptyDescException;
 import lele.exception.UnknownCommandException;
 import lele.task.Deadline;
@@ -21,6 +12,7 @@ import lele.task.Todo;
  * format for the other classes.
  */
 public class Parser {
+    private static int index;
 
     /**
      * Represents all the valid commands that the user can input.
@@ -34,7 +26,8 @@ public class Parser {
         UNMARK,
         DELETE,
         LIST,
-        BYE
+        BYE,
+        UNDO,
 
     }
     /**
@@ -57,7 +50,7 @@ public class Parser {
             switch (command) {
             case TODO:
                 if (inputArr.length == 1) {
-                    throw new EmptyDescException("☹ OOPS!!! The description of a todo cannot be empty.");
+                    throw new EmptyDescException("OOPS!!! The description of a todo cannot be empty.");
                 }
                 for (int i = 1; i < inputArr.length; i++) {
                     sb.append(inputArr[i]);
@@ -69,7 +62,7 @@ public class Parser {
                 return new TodoCommand(todo);
             case DEADLINE:
                 if (inputArr.length == 1) {
-                    throw new EmptyDescException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                    throw new EmptyDescException("OOPS!!! The description of a deadline cannot be empty.");
                 }
                 for (int i = 1; i < inputArr.length; i++) {
                     if (inputArr[i].equals("/by")) {
@@ -88,7 +81,7 @@ public class Parser {
                 return new DeadlineCommand(deadline);
             case EVENT:
                 if (inputArr.length == 1) {
-                    throw new EmptyDescException("☹ OOPS!!! The description of an event cannot be empty.");
+                    throw new EmptyDescException("OOPS!!! The description of an event cannot be empty.");
                 }
                 String from = "local variable not initialised";
                 for (int i = 1; i < inputArr.length; i++) {
@@ -111,27 +104,32 @@ public class Parser {
                 Event event = new Event(desc, from, sb.toString().trim());
                 return new EventCommand(event);
             case MARK:
-                return new MarkCommand(Integer.parseInt(inputArr[1]));
+                index = Integer.parseInt(inputArr[1]);
+                return new MarkCommand(index);
             case UNMARK:
-                return new UnmarkCommand(Integer.parseInt(inputArr[1]));
+                index = Integer.parseInt(inputArr[1]);
+                return new UnmarkCommand(index);
             case DELETE:
-                int inputIndex = Integer.parseInt(inputArr[1]);
-                return new DeleteCommand(inputIndex);
+                index = Integer.parseInt(inputArr[1]);
+                return new DeleteCommand(index);
             case LIST:
                 return new ListCommand();
             case BYE:
                 return new ByeCommand();
             case FIND:
                 if (inputArr.length == 1) {
-                    throw new EmptyDescException("☹ OOPS!!! You need to specify what you want to find!");
+                    throw new EmptyDescException("OOPS!!! You need to specify what you want to find!");
                 }
                 return new FindCommand(inputArr[1]);
+            case UNDO:
+                int index = Integer.parseInt(inputArr[1]);
+                return new UndoCommand(index);
             default:
                 assert false; // Execution should never reach this point!
-                throw new UnknownCommandException("☹ OOPS!!! You need to give me an input :-(");
+                throw new UnknownCommandException("OOPS!!! You need to give me an input :-(");
             }
         } catch (IllegalArgumentException e) {
-            throw new UnknownCommandException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new UnknownCommandException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
 
     }

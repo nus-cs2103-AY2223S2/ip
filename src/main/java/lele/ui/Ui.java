@@ -190,4 +190,11 @@ public class Ui {
         sb.append(taskList.findTask(regex));
         return sb.toString();
     }
+
+    public String printUndo(TaskList taskList, int index) {
+        if (index <= 1) {
+            return "Your list has been undone by 1 version :)";
+        }
+        return "Your list has been undone by " + index + " versions :)";
+    }
 }
