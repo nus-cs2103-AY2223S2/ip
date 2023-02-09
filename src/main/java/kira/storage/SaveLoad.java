@@ -55,7 +55,8 @@ public class SaveLoad {
             while (scanner.hasNextLine()) {
                 String task = scanner.nextLine();
                 String[] parsedTasks = task.split("\",\"");
-                switch (TaskType.valueOf(parsedTasks[0])) {
+                TaskType taskType = TaskType.valueOf(parsedTasks[0]);
+                switch (taskType) {
                 case TODO:
                     parseAndAddTodo(taskList, parsedTasks);
                     break;
@@ -66,6 +67,7 @@ public class SaveLoad {
                     parseAndAddEvent(taskList, parsedTasks);
                     break;
                 default:
+                    assert false : taskType;
                     // Should never reach here. Programmer error!
                     throw new KiraException("Unexpected Error!");
                 }
