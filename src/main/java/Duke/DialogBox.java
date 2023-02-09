@@ -2,7 +2,7 @@ package Duke;
 
 import java.io.IOException;
 import java.util.Collections;
-
+import javafx.scene.shape.Circle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -14,6 +14,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
+import javafx.scene.paint.Color;
 
 /**
  * An example of a custom control using FXML.
@@ -39,6 +40,7 @@ public class DialogBox extends HBox {
         dialog.setText(text);
         dialog.setFont(Font.font("Helvetica"));
         displayPicture.setImage(img);
+
     }
 
     /**

@@ -3,19 +3,21 @@ package Duke.Tasks;
 
 
 
+import Duke.Ui;
+
 import  java.util.ArrayList;
 
 public class TaskList {
-    private static ArrayList<Task> listOfTasks;
+    private static ArrayList<Task> arrayListOfTasks;
 
     /**
      * The contructor for ToDo Task
      *
-     * @param listOfTasks
+     * @param arrayListOfTasks
      *
      */
-    public TaskList(ArrayList<Task> listOfTasks) {
-        this.listOfTasks = listOfTasks;
+    public TaskList(ArrayList<Task> arrayListOfTasks) {
+        this.arrayListOfTasks = arrayListOfTasks;
     }
 
     /**
@@ -23,7 +25,7 @@ public class TaskList {
      *
      */
     public void addTask(Task t) {
-        listOfTasks.add(t);
+        arrayListOfTasks.add(t);
     }
 
     /**
@@ -31,23 +33,25 @@ public class TaskList {
      *
      */
     public Task removeTask(int i) {
-        return listOfTasks.remove(i - 1);
+        return arrayListOfTasks.remove(i - 1);
     }
 
     /**
      * method to mark task as done in list of Tasks
      *
      */
-    public void markDone(int i) {
-        listOfTasks.get(i - 1).markDone();
+    public String markDone(int i) {
+        arrayListOfTasks.get(i ).markDone();
+        return String.format("%s\n" + "\t%s\n" + Ui.Underline(), Ui.markedMessage(),arrayListOfTasks.get(i).toString());
     }
 
     /**
      * method to unmark task as done in list of Tasks
      *
      */
-    public void markNotDone(int i) {
-        listOfTasks.get(i - 1).markNotDone();
+    public String markNotDone(int i) {
+        arrayListOfTasks.get(i - 1).markNotDone();
+        return String.format("%s\n" + "\t%s\n" + Ui.Underline(), Ui.unMarkedMessage(),arrayListOfTasks.get(i - 1).toString());
     }
 
     /**
@@ -55,7 +59,7 @@ public class TaskList {
      *
      */
     public Task get(int i) {
-        return listOfTasks.get(i - 1);
+        return arrayListOfTasks.get(i - 1);
     }
 
     /**
@@ -63,7 +67,7 @@ public class TaskList {
      *
      */
     public int size() {
-        return listOfTasks.size();
+        return arrayListOfTasks.size();
     }
 
 
