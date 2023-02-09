@@ -23,6 +23,7 @@ public class Duke extends Application {
     static protected final String DATA_FILENAME = "duke.txt";
     static protected final String WELCOME_MESSAGE = "Hello! I'm Duke!\nWhat can I do for you?";
     static protected final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
+    static protected final String EXIT_COMMAND = "bye";
 
     // For javaFX UI
     private double STAGE_WIDTH = 500;
@@ -39,7 +40,6 @@ public class Duke extends Application {
         this(DATA_DIR + DATA_FILENAME);
     }
     /**
-     * [DEPRECATED]
      * Returns a Duke object.
      * @param filePath The file path where the data file is located.
      */
@@ -54,27 +54,6 @@ public class Duke extends Application {
             tasks = new TaskList();
         }
         assert tasks != null : "tasks should not be null";
-    }
-
-    /**
-     * [DEPRECATED]
-     * Runs the task bot on the command line.
-     */
-    public void run() {
-        ui.showNormalMessage(WELCOME_MESSAGE);
-        Scanner inputScanner = new Scanner(System.in);
-        String inputStr = inputScanner.nextLine().trim();
-        while (!inputStr.equals("bye")) {
-            try {
-                parser.parseString(inputStr, tasks, ui);
-                storage.save(tasks);
-            } catch (BadCommandException | DukeException e) {
-                ui.showErrorMessage(e.getMessage());
-            }
-            inputStr = inputScanner.nextLine().trim();
-        }
-        inputScanner.close();
-        ui.showNormalMessage(EXIT_MESSAGE);
     }
 
     @Override
@@ -133,11 +112,11 @@ public class Duke extends Application {
 
         // Add functionality
         sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
+            handleUserInput(stage);
         });
 
         userInput.setOnAction((event) -> {
-            handleUserInput();
+            handleUserInput(stage);
         });
         // Scroll down to the end every time dialogContainer's height changes
         dialogContainer.heightProperty().addListener((observable -> scrollPane.setVvalue(1.0)));
@@ -152,8 +131,15 @@ public class Duke extends Application {
     /**
      * Handles the text input given by the user through the GUI.
      */
-    private void handleUserInput() {
+    private void handleUserInput(Stage stage) {
         String userInputStr = userInput.getText().trim();
+        if (userInputStr.equalsIgnoreCase(EXIT_COMMAND)) {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getDukeDialog(new Label(EXIT_MESSAGE), new ImageView(duke))
+            );
+            stage.close();
+            return;
+        }
         Label userText = new Label(userInputStr);
         String dukeResponseStr;
         try {
