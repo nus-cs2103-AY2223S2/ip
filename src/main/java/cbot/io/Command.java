@@ -239,7 +239,7 @@ public enum Command {
      */
     boolean isMissingText(String text) {
         return (this.hasText)
-                ? (text.length() > 0)
+                ? (text.length() == 0)
                 : false;
     }
 
@@ -491,7 +491,7 @@ public enum Command {
             // Fallthrough
         case "undone":
             msg = "Ok! Here are the Tasks you haven't completed yet:\n";
-            arrFilter = tl.listFilter(t -> !t.getStatus().equals(Task.DONE_TRUE));
+            arrFilter = tl.listFilter(t -> t.getStatus().equals(Task.DONE_FALSE));
             break;
 
         default:
