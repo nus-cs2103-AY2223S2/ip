@@ -37,7 +37,7 @@ public class Ui {
      * Prints an exit message to the user.
      */
     public void farewell() {
-        System.out.println("Bye. Hope to see you again soon!");
+        System.out.println("Bye. Hope to se:e you again soon!");
         line();
     }
 

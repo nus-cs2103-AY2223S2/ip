@@ -24,7 +24,7 @@ test {
 }
 
 application {
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "duke.launcher.Launcher"
 }
 
 shadowJar {
