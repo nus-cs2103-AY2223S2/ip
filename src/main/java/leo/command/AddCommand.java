@@ -1,7 +1,15 @@
 package leo.command;
 
-import leo.leoexception.*;
-import leo.storage.*;
+import leo.leoexception.EmptyDeadlineException;
+import leo.leoexception.EmptyDescriptionException;
+import leo.leoexception.IncompleteDurationException;
+import leo.leoexception.InvalidInputException;
+import leo.leoexception.LeoException;
+import leo.storage.DeadlineTask;
+import leo.storage.EventTask;
+import leo.storage.Storage;
+import leo.storage.Task;
+import leo.storage.ToDoTask;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -19,17 +27,6 @@ public class AddCommand extends Command {
      */
     public AddCommand(Storage s, String task) {
         super(s, task);
-    }
-
-    /**
-     * Converts String object to LocalDateTime.
-     *
-     * @param str String representation of date and time.
-     * @return LocalDateTime object.
-     */
-    private LocalDateTime convertString(String str) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyyyy HH:mm");
-        return LocalDateTime.parse(str, formatter);
     }
 
     @Override
@@ -63,7 +60,7 @@ public class AddCommand extends Command {
                 } catch (ArrayIndexOutOfBoundsException e) {
                     throw new IncompleteDurationException();
                 }
-            } else if (command.contains("hello") || command.contains("hi") || command.contains("hey")) {
+            } else if (command.contains("hello") || command.contains("hi")) {
                 return "Well hello to you too! :-D";
             } else {
                 throw new InvalidInputException();
@@ -71,5 +68,16 @@ public class AddCommand extends Command {
         } catch (StringIndexOutOfBoundsException e) {
             throw new EmptyDescriptionException();
         }
+    }
+
+    /**
+     * Converts String object to LocalDateTime.
+     *
+     * @param str String representation of date and time.
+     * @return LocalDateTime object.
+     */
+    private LocalDateTime convertString(String str) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyyyy HH:mm");
+        return LocalDateTime.parse(str, formatter);
     }
 }

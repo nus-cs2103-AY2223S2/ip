@@ -15,7 +15,6 @@ import leo.leoexception.IncorrectMarkException;
 import leo.leoexception.LeoException;
 import leo.leoexception.NoStorageFileException;
 import leo.leoexception.NoTaskFoundException;
-import leo.ui.Ui;
 
 /**
  * Represents a storage place containing a list Tasks. A <code>Storage</code> object corresponds to
