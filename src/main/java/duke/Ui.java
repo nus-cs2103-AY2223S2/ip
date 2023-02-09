@@ -90,6 +90,8 @@ public class Ui {
             return "Here are the tasks I found!\n" + searchResults.displayTasks();
 
             // make displayTasks return a String
+        } else if (s.contains("sort")) {
+            return t.displaySorted();
         } else if (s.contains("bye")) {
             return "    Bye. Hope to see you soon!";
         } else {
