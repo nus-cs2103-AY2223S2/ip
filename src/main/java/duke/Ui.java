@@ -15,29 +15,11 @@ public class Ui {
         return "    Hi! I'm Samantha\n    How can I help?";
     }
 
-/*    public void takeCommands(TaskList t) {
-        Scanner sc = new Scanner(System.in);
-        String s = sc.nextLine();
-
-        ArrayList<Task> tasks = t.getTasks();
-        int taskCounter = tasks.size();
-        while (!s.equals("bye")) {
-            try {
-                // method handleCommand handles current command, returns updated taskCounter variable
-                taskCounter = handleCommand(s, tasks, taskCounter);
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-
-            // take in next command
-            s = sc.nextLine();
-        }
-
-        System.out.println("    Bye. Hope to see you soon!");
-    }*/
-
     public static String handleCommand(String s, TaskList t) {
         ArrayList<Task> tasks = t.getTasks();
+        int numTasks = tasks.size();
+        assert numTasks >= 0 : "Number of tasks should be a positive number";
+        assert s.length() >= 0 : "Number of letters in a command should be a positive number";
         // user enters list command
         if (s.contains("list")) {
             TaskList taskListing = new TaskList(tasks);

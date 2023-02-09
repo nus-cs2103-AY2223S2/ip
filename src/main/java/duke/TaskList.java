@@ -16,6 +16,7 @@ public class TaskList {
 
     public String displayTasks() {
         String s = "";
+        assert s.length() == 0 : "String s should be empty";
         if (tasks.isEmpty()) {
             s += "    No tasks";
         } else {
