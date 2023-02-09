@@ -44,6 +44,7 @@ public class TaskList {
      * @param i Index in the arraylist.
      */
     public Task get(int i) {
+        assert i >= 0: "Index cannot be negative";
         return this.arr.get(i);
     }
 
@@ -60,6 +61,7 @@ public class TaskList {
      *
      */
     public void remove(int i) {
+        assert i >= 0: "Index cannot be negative";
         this.arr.remove(i);
     }
 
