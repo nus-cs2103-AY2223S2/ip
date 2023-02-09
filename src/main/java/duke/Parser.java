@@ -6,6 +6,7 @@ import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
+import duke.command.StoreCommand;
 import duke.exception.DukeException;
 import duke.exception.TaskIndexException;
 import duke.task.Task;
@@ -44,6 +45,8 @@ public class Parser {
             }
         case "find":
             return new FindCommand(inputs[1]);
+        case "save":
+            return new StoreCommand(inputs[1]);
         default:
             return Task.taskToCommand(line);
         }
