@@ -2,10 +2,7 @@ package duke;
 
 import duke.exception.DukeException;
 import duke.task.TaskList;
-import duke.util.Command;
-import duke.util.Parser;
-import duke.util.Storage;
-import duke.util.UI;
+import duke.util.*;
 
 public class Duke {
     private UI ui;
@@ -14,8 +11,7 @@ public class Duke {
 
 
     public Duke(String filePath) {
-        ui = new UI();
-        storage = new Storage(filePath);
+        storage = Storage.createStorage(filePath);
         try {
             taskList = new TaskList(storage.load());
         } catch (DukeException e) {

@@ -4,8 +4,6 @@ import duke.exception.DukeException;
 import duke.exception.ERROR;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.util.Storage;
-import duke.util.UI;
 
 /**
  * Class to encapsulate a parsed command which has a defined command type and specific parameters.
@@ -71,14 +69,14 @@ public class Command {
     }
 
     /**
-     * Executes the current command using a given TaskList, UI, and Storage.
+     * Executes the current command using a given TaskList, UI, and StorageTextFile.
      *
      * @param taskList TaskList containing tasks to use for this command.
      * @param ui The UI to print output to.
-     * @param storage Storage to save the TaskList to if this command changes the TaskList.
+     * @param storage StorageTextFile to save the TaskList to if this command changes the TaskList.
      * @throws DukeException
      */
-    public String execute(TaskList taskList, UI ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, UI ui, StorageTextFile storage) throws DukeException {
         String output = "";
 
         assert taskList != null;

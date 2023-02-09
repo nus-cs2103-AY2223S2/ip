@@ -9,7 +9,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class Storage {
+public abstract class Storage {
 
     private String filePath;
 
@@ -17,40 +17,36 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    public TaskList load() throws DukeException {
-        TaskList taskList = new TaskList();
+    public static Storage createStorage(String filePath) {
+        String extension = getFileExtension(filePath);
+        Storage storage = null;
 
-        try (BufferedReader br = new BufferedReader(new FileReader(this.filePath))) {
-            String line = null;
-            while ((line = br.readLine()) != null) {
-                taskList.add(Task.parseTaskFromDB(line));
-            }
-        } catch (FileNotFoundException ex) {
-            throw new DukeException(ERROR.CORRUPTED_TASK_DATA.getMessage());
-        } catch (IOException ex) {
-            throw new DukeException(ERROR.CORRUPTED_TASK_DATA.getMessage());
+        switch (extension) {
+            case "txt":
+                storage = new StorageTextFile(filePath);
+                break;
+            case "csv":
+                storage = new StorageCsvFile(filePath);
+                break;
         }
 
-        return taskList;
+        return storage;
     }
 
-    public boolean save(TaskList list) {
-        try {
-            // Create data dir if it doesn't exist
-            Files.createDirectories(Paths.get("data/"));
-
-            PrintWriter pw = new PrintWriter(this.filePath);
-            for (Task task: list) {
-                pw.println(task.toString());
-            }
-            pw.close();
-            return true;
-        } catch (FileNotFoundException ex) {
-            ex.printStackTrace();
-        } catch (IOException ex) {
-            ex.printStackTrace();
+    private static String getFileExtension(String filePath) {
+        String extension = "";
+        int index = filePath.lastIndexOf(".");
+        if (index > 0) {
+            extension = filePath.substring(index + 1);
         }
-
-        return false;
+        return extension;
     }
+
+    public String getFilePath() {
+        return filePath;
+    }
+
+    public abstract TaskList load() throws DukeException;
+
+    public abstract boolean save(TaskList list);
 }
