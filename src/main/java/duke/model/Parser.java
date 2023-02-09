@@ -61,14 +61,14 @@ public class Parser {
                 break;
             }
             case DEADLINE: {
-                String description = p.parseDescription(() -> p.parseUntil("/by"));
+                String description = p.parseDescription(() -> p.parseUntil("--by"));
                 LocalDate by = p.parseDateArgument();
                 cmd = new AddTaskCommand(new DeadlineTask(description, by));
                 break;
             }
             case EVENT: {
-                String description = p.parseDescription(() -> p.parseUntil("/from"));
-                String from = p.parseUntil("/to");
+                String description = p.parseDescription(() -> p.parseUntil("--from"));
+                String from = p.parseUntil("--to");
                 String to = p.parseUntilEol();
                 cmd = new AddTaskCommand(new EventTask(description, from, to));
                 break;

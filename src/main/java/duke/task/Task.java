@@ -26,6 +26,10 @@ public abstract class Task implements Serializable {
         this.isDone = false;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     /**
      * Marks this {@code Task} as done.
      */
@@ -61,6 +65,6 @@ public abstract class Task implements Serializable {
             return false;
         }
         Task task = (Task) obj;
-        return Objects.equals(description, task.description);
+        return Objects.equals(description, task.description) && isDone == task.isDone;
     }
 }

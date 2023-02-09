@@ -1,11 +1,24 @@
 package duke.command;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import duke.model.TaskList;
 
 /**
  * Abstract implementation of a {@code Command} in the application.
  */
 public abstract class Command {
+
+    protected Map<String, String> arguments;
+
+    protected Command() {
+        this(new HashMap<>());
+    }
+
+    protected Command(Map<String, String> arguments) {
+        this.arguments = arguments;
+    }
 
     /**
      * Executes this {@code Command}.

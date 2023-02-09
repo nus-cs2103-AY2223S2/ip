@@ -2,6 +2,7 @@ package duke.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -98,13 +99,13 @@ public class TaskList implements Serializable {
         return String.format("%d task%s", n, n < 2 ? "" : "s");
     }
 
-    private String listTasksFrom(Stream<Task> stream) {
-        return stream.map(new Function<Task, String>() {
+    private <T> String listFromStreamWithIndicies(Stream<T> stream) {
+        return stream.map(new Function<T, String>() {
             private int index = 1;
 
             @Override
-            public String apply(Task task) {
-                String out = String.format("%d.%s", index, task);
+            public String apply(T element) {
+                String out = String.format("%d.%s", index, element);
                 index++;
                 return out;
             }
@@ -117,7 +118,7 @@ public class TaskList implements Serializable {
      * @return a string showing the contents of all tasks, with indicies.
      */
     public String listAllTasks() {
-        return listTasksFrom(tasks.stream());
+        return listFromStreamWithIndicies(tasks.stream());
     }
 
     /**
@@ -128,7 +129,20 @@ public class TaskList implements Serializable {
      * @return a string showing the contents of all tasks that contain the keyword, with indicies
      */
     public String listTasksContainKeyword(String keyword) {
-        return listTasksFrom(tasks.stream().filter(task -> task.contains(keyword)));
+        return listFromStreamWithIndicies(tasks.stream().filter(task -> task.contains(keyword)));
+    }
+
+    /**
+     * Lists all unique descriptions, with counts and indicies.
+     *
+     * @return a string showing the descriptions and their counts
+     */
+    public String listUniqueTaskDescriptionsWithCounts() {
+        return listFromStreamWithIndicies(tasks.stream()
+                .collect(Collectors.groupingBy(Task::getDescription, LinkedHashMap::new,
+                        Collectors.counting()))
+                .entrySet().stream().map(entry -> String.format("%s - appeared %d time%s",
+                        entry.getKey(), entry.getValue(), entry.getValue() < 2 ? "" : "s")));
     }
 
     @Override
