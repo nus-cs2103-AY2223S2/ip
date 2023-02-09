@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.Duke;
 import duke.exceptions.InvalidArgumentException;
 import duke.Storage;
 import duke.TaskList;
@@ -15,7 +16,8 @@ public class MarkCommand extends Command {
         this.index = index;
     }
 
-    public String execute(TaskList l, Ui ui, Storage s) throws InvalidArgumentException {
+    public String execute(TaskList l, Ui ui, Storage s, Command prevCommand, Duke duke) throws InvalidArgumentException {
+        saveToFile(s, l, ui, prevCommand);
         if (mark == 1) {
             l.get(index).markAsDone();
             return ui.showMark(1, l.get(index));

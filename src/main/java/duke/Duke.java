@@ -13,6 +13,8 @@ public class Duke { // a guy who receives user input, and gives duke reply
     private Ui ui;
     private String welcomeMsg;
 
+    private Command prevCommand;
+
     /**
      * Duke Constructor. Sets up Duke, by creating Ui, Storage instance,
      * and loading stored tasks into TaskList.
@@ -53,12 +55,17 @@ public class Duke { // a guy who receives user input, and gives duke reply
     public String process(String fullCommand) throws EmptyCommandException{
         try {
             Command c = Parser.parse(fullCommand);
-            return c.execute(tasks, ui, storage);
+            prevCommand = c;
+            return c.execute(tasks, ui, storage, prevCommand, this);
             // deal with bye
         } catch (EmptyCommandException e) {
             throw e;
         } catch (Exception e) { // CATCH ALL EXCEPTION BAD
             return ui.showError(e); // or e.getMessage()
         }
+    }
+
+    public void setTaskList(TaskList l) {
+        tasks = l;
     }
 }

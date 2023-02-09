@@ -1,13 +1,11 @@
 package duke.command;
 
+import duke.*;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.ToDo;
-import duke.Storage;
-import duke.TaskList;
-import duke.TaskType;
-import duke.Ui;
 
+import java.io.IOException;
 import java.time.LocalDate;
 
 public class AddCommand extends Command{
@@ -40,14 +38,17 @@ public class AddCommand extends Command{
         this.eventTo = eventTo;
     }
 
-    public String execute(TaskList l, Ui ui, Storage s) {
+    public String execute(TaskList l, Ui ui, Storage s, Command prevCommand, Duke duke) {
+        saveToFile(s, l, ui, prevCommand);
+
         if (t == TaskType.ToDo) {
             l.add(new ToDo(desc, isDone));
         } else if (t == TaskType.Deadline) {
             l.add(new Deadline(desc, isDone, deadlineBy));
         } else if (t == TaskType.Event) {
             l.add(new Event(desc, isDone, eventFrom, eventTo));
-        }
+        } //CODE QUALITY
+
         return ui.showAdded(l);
     }
 
