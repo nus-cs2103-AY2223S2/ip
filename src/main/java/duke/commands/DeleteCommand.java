@@ -32,9 +32,25 @@ public class DeleteCommand extends Command {
      */
     @Override
     public void execute(Storage storage, TaskList tasks, Ui ui) {
-        Task task = tasks.getTask(index);
-        tasks.delete(index);
-        storage.delete(index);
+        Task task = getDeleteTask(tasks);
+        deleteFromTaskList(tasks);
+        deleteFromStorage(storage);
+        setUiResponse(task, tasks, ui);
+    }
+
+    private Task getDeleteTask(TaskList tasks) {
+        return tasks.getTask(this.index);
+    }
+
+    private void deleteFromTaskList(TaskList tasks) {
+        tasks.delete(this.index);
+    }
+
+    private void deleteFromStorage(Storage storage) {
+        storage.delete(this.index);
+    }
+
+    private void setUiResponse(Task task, TaskList tasks, Ui ui) {
         ui.setResponse("Noted. I've removed this task:\n"
                 + task + "\n"
                 + "Now you have " + tasks.getSize() + " tasks in the list.");

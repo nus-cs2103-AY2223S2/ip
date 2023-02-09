@@ -58,8 +58,20 @@ public class AddCommand extends Command {
      */
     @Override
     public void execute(Storage storage, TaskList tasks, Ui ui) {
+        addToTaskList(tasks);
+        addToStorage(storage, tasks);
+        setUiResponse(tasks, ui);
+    }
+
+    private void addToTaskList(TaskList tasks) {
         tasks.add(this.task);
-        storage.add(this.task);
+    }
+
+    private void addToStorage(Storage storage, TaskList tasks) {
+        storage.add(tasks.get());
+    }
+
+    private void setUiResponse(TaskList tasks, Ui ui) {
         ui.setResponse("Got it. I've added this task:\n"
                 + this.task + "\n"
                 + "Now you have " + tasks.getSize() + " tasks in the list.");
