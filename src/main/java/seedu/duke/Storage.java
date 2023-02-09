@@ -42,6 +42,7 @@ public class Storage {
     }
 
     private String[] readFromDataFile(int lineNumber) throws IOException {
+        assert lineNumber >= 0 : "lineNumber must be non-negative";
         String line = Files.readAllLines(filePath).get(lineNumber);
         String[] lineArray = line.split(delimiter);
         int len = lineArray.length;
@@ -112,6 +113,7 @@ public class Storage {
      * @throws IOException If appending the task to the file fails.
      */
     public void addTaskToFile(Task task) throws IOException {
+        assert task != null : "task is non-empty";
         FileWriter fw = new FileWriter(filePath.toString(), true);
         fw.write(task.taskInFileFormat());
         fw.write(System.lineSeparator());
