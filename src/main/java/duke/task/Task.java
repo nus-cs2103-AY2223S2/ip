@@ -73,7 +73,7 @@ public class Task {
      * @return A string representation of this task.
      */
     public String formatForStorage() {
-        String status = isDone ? "1" : "0";
+        String status = this.isDone ? "1" : "0";
         return (String.format("%s | %s", status, this.name));
     }
 

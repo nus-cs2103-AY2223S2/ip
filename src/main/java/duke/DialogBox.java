@@ -48,10 +48,10 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
-        dialog.setText(text);
-        displayPicture.setImage(img);
+        this.dialog.setText(text);
+        this.displayPicture.setImage(img);
 
-        dialog.setMinHeight(Region.USE_PREF_SIZE);
+        this.dialog.setMinHeight(Region.USE_PREF_SIZE);
     }
 
     /**

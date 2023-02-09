@@ -13,11 +13,10 @@ public class ByeCommand extends Command {
      *
      * @param tasks The ArrayList of tasks.
      * @param storage The class that reads and write program data to hard drive.
-     * @param ui The class that handles interaction with the users.
      * @return The goodbye message.
      */
     @Override
-    public String execute(TaskList tasks, Storage storage, Ui ui) {
+    public String execute(TaskList tasks, Storage storage) {
         return "Bye! Hope to see you again soon!";
     }
 
