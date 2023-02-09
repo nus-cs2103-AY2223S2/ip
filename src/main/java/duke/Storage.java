@@ -56,7 +56,6 @@ public class Storage {
         while (s.hasNext()) {
             taskList.add(this.parser.parseTask(s.nextLine()));
         }
-        assert (! s.hasNext()) : "File still not fully read!";
         return taskList;
     }
 

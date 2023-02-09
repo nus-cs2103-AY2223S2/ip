@@ -96,15 +96,15 @@ public class Parser {
      */
     public Task parseTask(String data) {
         String[] arguments = data.split("~-~-~");
-        assert arguments[0].matches("todo|deadline|event|");
+        assert arguments[0].matches("(todo|deadline|event)");
         if (arguments[0].equals("todo")) {
-            assert arguments.length == 1;
+            assert arguments.length == 3 : "Todo has incorrect arguments";
             return new Todo(arguments[1], arguments[2].equals("X"));
         } else if (arguments[0].equals("deadline")) {
-            assert arguments.length == 2;
+            assert arguments.length == 4;
             return new Deadline(arguments[1], arguments[3].equals("X"), arguments[2]);
         } else if (arguments[0].equals("event")) {
-            assert arguments.length == 3;
+            assert arguments.length == 5;
             return new Event(arguments[1], arguments[4].equals("X"), arguments[2], arguments[3]);
         } else {
             throw new RuntimeException("Unable to parse tasks from saved file!");
