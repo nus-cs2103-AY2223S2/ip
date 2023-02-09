@@ -7,10 +7,21 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Deal with loading tasks from the file and saving tasks in the file
+ */
 public class Storage {
 
+    /**
+     * Location of task list in hard disk
+     */
     private String dukeFilePath;
 
+    /**
+     * Constructor to instantiate a new Storage object and creates a tasks.txt file to store tasks if
+     * one does not already exist in the given file path
+     * @param filePath location of task list in hard disk
+     */
     public Storage(String filePath) {
         try {
             this.dukeFilePath = filePath;

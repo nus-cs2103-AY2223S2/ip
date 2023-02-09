@@ -90,45 +90,44 @@ public class Parser {
         return line.substring(TO_REMOVE_LEADING_FOUR_LETTERS);
     }
 
+    public static int getIndexFromCommand(String command) {
+        return Integer.parseInt(command.split(" ")[1]) - 1;
+    }
+
+    public static String getTypeOfCommand(String command) {
+        return command.split(" ")[0];
+    }
+
     public static String handleInput(String command, Ui ui, TaskList tasks, Storage storage) throws DukeException,
             IOException, IndexOutOfBoundsException, DateTimeParseException {
-        String typeOfCommand = command.split(" ")[0];
+        String typeOfCommand = getTypeOfCommand(command)
         switch (typeOfCommand) {
         case "bye":
             Platform.exit();
         case "list":
             return ui.showTaskList(tasks);
         case "mark":
-            int indexOfTaskToMarkDone = Integer.parseInt(command.split(" ")[1]) - 1;
-            Task markedTask = tasks.markTaskAsDone(indexOfTaskToMarkDone);
+            Task markedTask = tasks.markTaskAsDone(getIndexFromCommand(command), storage);
             assert markedTask.getTaskStatus() : "Task is wrongly marked.";
-            storage.updateTaskList(tasks);
             return ui.showMarkingTaskDone(markedTask);
         case "unmark":
-            int indexOfTaskToMarkUndone = Integer.parseInt(command.split(" ")[1]) - 1;
-            Task unmarkedTask = tasks.markTaskAsUndone(indexOfTaskToMarkUndone);
+            Task unmarkedTask = tasks.markTaskAsUndone(getIndexFromCommand(command), storage);
             assert !unmarkedTask.getTaskStatus() : "Task is wrongly marked.";
-            storage.updateTaskList(tasks);
             return ui.showMarkingTaskUndone(unmarkedTask);
         case "todo":
             Task newTodo = Parser.makeTodoFromCommand(command);
-            tasks.addTask(newTodo);
-            storage.updateTaskList(tasks);
+            tasks.addTask(newTodo, storage);
             return ui.showAddingNewTask(newTodo, tasks);
         case "deadline":
             Task newDeadline = Parser.makeDeadlineFromCommand(command);
-            tasks.addTask(newDeadline);
-            storage.updateTaskList(tasks);
+            tasks.addTask(newDeadline, storage);
             return ui.showAddingNewTask(newDeadline, tasks);
         case "event":
             Task newEvent = Parser.makeEventFromCommand(command);
-            tasks.addTask(newEvent);
-            storage.updateTaskList(tasks);
+            tasks.addTask(newEvent, storage);
             return ui.showAddingNewTask(newEvent, tasks);
-        case "delete":
-            int indexOfTaskToDelete = Integer.parseInt(command.split(" ")[1]);
-            Task taskToDelete = tasks.deleteTask(indexOfTaskToDelete);
-            storage.updateTaskList(tasks);
+        case "delete": ;
+            Task taskToDelete = tasks.deleteTask(getIndexFromCommand(command), storage);
             return ui.showDeletingTask(taskToDelete, tasks);
         case "find":
             String searchWord = Parser.getSearchWord(command);

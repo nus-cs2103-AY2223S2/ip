@@ -1,12 +1,10 @@
 package duke;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
+
 
 /**
- * Represents a Task that has a date it should be done by.
+ * Represents a Task that has a due date.
  */
 public class Deadlines extends Task {
 
