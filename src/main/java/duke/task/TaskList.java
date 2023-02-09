@@ -45,7 +45,8 @@ public class TaskList {
      * @return A string message to signify the success or failure of task executed.
      */
     public String add(Task task) {
-        this.tasks.add(task);
+        boolean hasAdded = this.tasks.add(task);
+        assert hasAdded : "Task is not added to the task list successfully.";
         String output = "Got it. I've added this task:\n " + task + "\nNow you have "
                 + this.tasks.size() + " task(s) in your list.\n";
         return output;
@@ -63,6 +64,7 @@ public class TaskList {
             throw new OutOfBoundsException("Item at given index does not exist! "
                     + "Please enter a valid index.");
         }
+        assert index > 0 && index < this.tasks.size() : "Index given is out of bounds";
     }
 
     /**
@@ -76,6 +78,8 @@ public class TaskList {
     public String delete(int index) throws OutOfBoundsException {
         checkIndexValidity(index);
         Task removed = this.tasks.remove(index);
+        assert removed != null : "Task at index not removed.";
+
         return "Noted. I've removed this task:\n " + " "
                 + removed + "\nNow you have " + this.tasks.size()
                 + " task(s) in the list.\n";
@@ -121,6 +125,8 @@ public class TaskList {
         if (size == 0) {
             return "There are no items in the list.\n";
         }
+        assert size != 0 : "List size is 0";
+
         StringBuilder sb = new StringBuilder();
         sb.append("Here are the tasks in your list:");
         for (int i = 0; i < size; i++) {
@@ -153,6 +159,7 @@ public class TaskList {
         if (printIndex == 1) {
             return "None of the items in your list matches with \"" + keyword + "\"";
         }
+        assert printIndex > 1 : "Item could not be found.";
         return sb.toString();
     }
 }
