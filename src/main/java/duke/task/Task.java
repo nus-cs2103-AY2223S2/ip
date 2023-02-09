@@ -1,5 +1,8 @@
 package duke.task;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Program that represents a task.
  *
@@ -9,6 +12,7 @@ package duke.task;
  */
 public class Task {
     protected String description;
+    protected List<String> tag;
     protected boolean isDone;
 
     /**
@@ -17,6 +21,7 @@ public class Task {
      */
     public Task(String description) {
         this.description = description;
+        this.tag = new ArrayList<>();
         this.isDone = false;
     }
 
@@ -76,5 +81,45 @@ public class Task {
      */
     public String toStorage() {
         return "";
+    }
+
+    /**
+     * Method to add tags to tasks.
+     * @param tag Tag name.
+     */
+    public void tagTask(String tag) {
+        this.tag.add(tag);
+    }
+
+    /**
+     * Method to convert list of tags
+     * into a string for printing.
+     * @return List of tag as string
+     */
+    public String listTag() {
+        StringBuilder listOfTag = new StringBuilder();
+        for (String tag : this.tag) {
+            listOfTag.append("#");
+            listOfTag.append(tag);
+        }
+        return listOfTag.toString();
+    }
+
+    /**
+     * Method to convert a list of tags
+     * into a string for storage
+     * @return List of tags for as strings storage
+     */
+    public String tagStorage() {
+        StringBuilder listOfTag = new StringBuilder();
+        int spaceCount = 0;
+        for (int i = 0; i < this.tag.size(); i++) {
+            listOfTag.append(this.tag.get(i));
+            if (spaceCount < this.tag.size() - 1) {
+                listOfTag.append("#");
+                spaceCount += 1;
+            }
+        }
+        return listOfTag.toString();
     }
 }

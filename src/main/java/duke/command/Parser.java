@@ -42,6 +42,8 @@ public class Parser {
             return new DeleteCommand(command);
         case "find":
             return new FindCommand(command);
+        case "tag":
+            return new TagCommand(command);
         default:
             return new NoCommand(command);
         }

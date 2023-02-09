@@ -61,7 +61,12 @@ public class Ui {
     public String showList(TaskList tasks) {
         StringBuilder listTask = new StringBuilder("Here are the tasks in your list:\n");
         for (int i = 0; i < tasks.size(); i++) {
-            listTask.append(i + 1).append(".").append(tasks.get(i).toString()).append("\n");
+            listTask.append(i + 1)
+                    .append(".")
+                    .append(tasks.get(i).toString())
+                    .append(" ")
+                    .append(tasks.get(i).listTag())
+                    .append("\n");
         }
         return listTask.toString();
     }
@@ -219,6 +224,31 @@ public class Ui {
      */
     public String unknownMsg() {
         return "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+    }
+
+    /**
+     * Methods to confirm the tags
+     * that are added to the task.
+     * @param tasks The task list.
+     * @param index The index of chosen task.
+     * @return Confirmation message.
+     */
+    public String updateTag(TaskList tasks, int index) {
+        return "Ok, I've added 1 new tag to the task:\n"
+                + tasks.get(index).toString()
+                + tasks.get(index).listTag()
+                + "\n";
+    }
+
+    /**
+     * Method to notify the user
+     * that there was an error when tagging
+     * the task.
+     * @return The error message.
+     */
+    public String tagError() {
+        return "☹ OOPS!!! The tag command needs should be in the following form:\n"
+                + "tag {index} {tag1 tag2 ..}";
     }
 
     /**

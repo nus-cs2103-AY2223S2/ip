@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Scanner;
 
 import duke.command.Command;
@@ -45,6 +46,7 @@ public class Storage {
             FileWriter fileWriter = new FileWriter(this.taskStorage);
             for (int i = 0; i < tasks.size(); i++) {
                 fileWriter.write(tasks.get(i).toStorage() + "\n");
+                fileWriter.write(tasks.get(i).tagStorage() + "\n");
             }
             fileWriter.close();
         } catch (IOException e) {
@@ -66,12 +68,16 @@ public class Storage {
         Parser parser = new Parser();
         while (sc.hasNextLine()) {
             String[] taskInTxt = sc.nextLine().split("#");
+            String tags = sc.nextLine();
             Command c = parser.parseStorage(taskInTxt);
             c.execute(tasks, ui, storage);
-            if (taskInTxt[taskInTxt.length - 1].equals("[X]")) {
-                tasks.get(tasks.size() - 1).markAsDone();
+            tasks.updateStatusFromStorage(tasks.size() - 1, taskInTxt[taskInTxt.length - 1]);
+            if (tags.length() > 0) {
+                String[] listOfTag = tags.split("#");
+                tasks.updateTag(tasks.size() - 1, listOfTag);
             }
         }
+        saveToDisk(tasks);
         sc.close();
     }
 }

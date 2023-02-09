@@ -1,6 +1,7 @@
 package duke.task;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -52,5 +53,30 @@ public class TaskList {
      */
     public void remove(int index) {
         this.taskList.remove(index);
+    }
+
+    /**
+     * Method to update status of task when
+     * loading txt file from storage.
+     * @param index Index of task.
+     * @param status Status of task from storage.
+     */
+    public void updateStatusFromStorage(int index, String status) {
+        if (status.equals("[X]")) {
+            this.get(index).markAsDone();
+        }
+    }
+
+    /**
+     * Method to update tags when loading
+     * txt file from storage.
+     * @param index Index of task.
+     * @param tags Tags of task.
+     */
+    public void updateTag(int index, String[] tags) {
+        Task task = this.get(index);
+        for (String tag : tags) {
+            task.tagTask(tag);
+        }
     }
 }
