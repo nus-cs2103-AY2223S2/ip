@@ -51,6 +51,10 @@ public class Duke extends Application {
         System.out.print(greetingsFromSkittles);
     }
 
+    public String getGreetingsFromSkittles() {
+        return greetingsFromSkittles;
+    }
+
     public static void adios() {
         System.out.print(adiosFromSkittles);
     }
