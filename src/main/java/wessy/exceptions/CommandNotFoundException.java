@@ -1,4 +1,4 @@
-package exceptions;
+package wessy.exceptions;
 
 public class CommandNotFoundException extends WessyException {
     public CommandNotFoundException() {

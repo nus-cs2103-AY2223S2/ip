@@ -1,4 +1,6 @@
-import exceptions.int_exceptions.NotPositiveIntegerException;
+package wessy;
+
+import wessy.exceptions.int_exceptions.NotPositiveIntegerException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 

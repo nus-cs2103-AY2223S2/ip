@@ -1,4 +1,4 @@
-package exceptions;
+package wessy.exceptions;
 
 public class UnspecifiedTimeException extends WessyException {
     public UnspecifiedTimeException(String keyword, boolean isBefore) {

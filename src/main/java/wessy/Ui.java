@@ -1,5 +1,7 @@
+package wessy;
+
 import java.util.Scanner;
-import task.Task;
+import wessy.task.Task;
 
 public class Ui {
     private final Scanner sc;

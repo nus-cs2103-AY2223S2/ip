@@ -1,4 +1,4 @@
-package exceptions;
+package wessy.exceptions;
 
 public class MissingSpacingException extends WessyException {
     public MissingSpacingException(String cmd) {

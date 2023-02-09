@@ -1,6 +1,6 @@
-package exceptions.num_of_input_exceptions;
+package wessy.exceptions.num_of_input_exceptions;
 
-import exceptions.WessyException;
+import wessy.exceptions.WessyException;
 
 public class TooManyInputException extends WessyException {
     public TooManyInputException(String cmd) {

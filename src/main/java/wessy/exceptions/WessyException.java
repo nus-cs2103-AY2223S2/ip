@@ -1,4 +1,4 @@
-package exceptions;
+package wessy.exceptions;
 
 public class WessyException extends Exception {
     private final String message;

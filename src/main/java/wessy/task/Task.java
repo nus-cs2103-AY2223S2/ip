@@ -1,4 +1,4 @@
-package task;
+package wessy.task;
 
 public class Task {
     protected final String description;

@@ -1,6 +1,6 @@
-package exceptions.int_exceptions;
+package wessy.exceptions.int_exceptions;
 
-import exceptions.WessyException;
+import wessy.exceptions.WessyException;
 
 public class NotPositiveIntegerException extends WessyException {
     public NotPositiveIntegerException() {

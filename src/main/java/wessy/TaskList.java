@@ -1,9 +1,12 @@
-import exceptions.int_exceptions.EmptyListException;
-import exceptions.int_exceptions.InvalidIntegerException;
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.ToDo;
+package wessy;
+
+import wessy.Parser;
+import wessy.exceptions.int_exceptions.EmptyListException;
+import wessy.exceptions.int_exceptions.InvalidIntegerException;
+import wessy.task.Deadline;
+import wessy.task.Event;
+import wessy.task.Task;
+import wessy.task.ToDo;
 
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;

@@ -1,9 +1,12 @@
-import exceptions.MissingSpacingException;
-import exceptions.TimeSpecifierException;
-import exceptions.UnspecifiedTimeException;
-import exceptions.int_exceptions.NotAnIntegerException;
-import exceptions.num_of_input_exceptions.MissingInputException;
-import exceptions.num_of_input_exceptions.TooManyInputException;
+package wessy;
+
+import wessy.Parser;
+import wessy.exceptions.MissingSpacingException;
+import wessy.exceptions.TimeSpecifierException;
+import wessy.exceptions.UnspecifiedTimeException;
+import wessy.exceptions.int_exceptions.NotAnIntegerException;
+import wessy.exceptions.num_of_input_exceptions.MissingInputException;
+import wessy.exceptions.num_of_input_exceptions.TooManyInputException;
 
 public class UserInputChecker {
     // Check for "Missing space after command"

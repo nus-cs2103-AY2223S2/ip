@@ -1,4 +1,4 @@
-package exceptions;
+package wessy.exceptions;
 
 public class TimeSpecifierException extends WessyException {
     public TimeSpecifierException(String specifier) {

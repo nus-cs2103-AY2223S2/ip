@@ -1,7 +1,10 @@
-import task.Deadline;
-import task.Event;
-import task.ToDo;
-import task.Task;
+package wessy;
+
+import wessy.Parser;
+import wessy.task.Deadline;
+import wessy.task.Event;
+import wessy.task.ToDo;
+import wessy.task.Task;
 import java.util.List;
 import java.util.ArrayList;
 import java.io.File;

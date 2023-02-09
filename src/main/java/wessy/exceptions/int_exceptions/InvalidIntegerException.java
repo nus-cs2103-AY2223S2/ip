@@ -1,6 +1,6 @@
-package exceptions.int_exceptions;
+package wessy.exceptions.int_exceptions;
 
-import exceptions.WessyException;
+import wessy.exceptions.WessyException;
 
 public class InvalidIntegerException extends WessyException {
     public InvalidIntegerException(String cmd, int taskNum, int total) {
