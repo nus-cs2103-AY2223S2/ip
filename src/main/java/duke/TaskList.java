@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 // class TaskList - handles lists of Task objects using an ArrayList
 public class TaskList {
@@ -27,6 +28,28 @@ public class TaskList {
             }
         }
         return s;
+    }
+
+    public String displaySorted() {
+        // array sorted output sortedStrings,
+        // index 0 for to do, index 1 for deadline, index 2 for events
+
+        String[] sortedStrings = {"Todos\n", "Deadlines\n", "Events\n"};
+        for (Task t : tasks) {
+            int category = 0;
+            if (t instanceof Todo) {
+                category = 0;
+            } else if (t instanceof Deadline) {
+                category = 1;
+            } else {
+                category = 3;
+            }
+            sortedStrings[category] += "\n" + t;
+        }
+
+        String sortedOutput = sortedStrings[0] + "\n" + sortedStrings[1]
+                + "\n" + sortedStrings[2];
+        return sortedOutput;
     }
 
     public ArrayList<Task> getTasks() {
