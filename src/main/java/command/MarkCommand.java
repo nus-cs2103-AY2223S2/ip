@@ -10,12 +10,12 @@ public class MarkCommand extends Command{
         this.index = index;
     }
     @Override
-    public void execute(TaskList taskList, Storage storage, Ui ui){
+    public String execute(TaskList taskList, Storage storage, Ui ui){
         taskList.markTask(index);
         //update storage
         storage.updateFile(taskList);
         //print correct lines
         Task task = taskList.get(index);
-        System.out.println(ui.markTaskMsg(task));
+        return ui.markTaskMsg(task);
     }
 }

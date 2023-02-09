@@ -10,10 +10,10 @@ public class UnmarkCommand extends Command{
         this.index = index;
     }
     @Override
-    public void execute(TaskList taskList, Storage storage, Ui ui){
+    public String execute(TaskList taskList, Storage storage, Ui ui){
         taskList.unmarkTask(index);
         storage.updateFile(taskList);
         Task task = taskList.get(index);
-        System.out.println(ui.unmarkTaskMsg(task));
+        return ui.unmarkTaskMsg(task);
     }
 }

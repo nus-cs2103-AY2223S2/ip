@@ -44,13 +44,22 @@ public class Duke {
                 ui.showLine();
                 //StringParser generates command
                 //Command is executed
-                Command c = sp.parse(answer, taskList);
+                Command c = sp.parse(answer);
                 c.execute(taskList, storage, ui);
                 isBye = c.isExit();
             } catch(DukeException e){
                 System.out.println(e.getMessage());
             }
             ui.showLine();
+        }
+    }
+
+    public String getResponse(String input){
+        try{
+            Command c = sp.parse(input);
+            return c.execute(taskList, storage, ui);
+        } catch(DukeException e){
+            return e.getMessage();
         }
     }
 

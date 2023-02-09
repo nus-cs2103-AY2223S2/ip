@@ -15,8 +15,8 @@ public class FindCommand extends Command{
         this.keyword = keyword;
     }
     @Override
-    public void execute(TaskList taskList, Storage storage, Ui ui){
-        System.out.println(ui.findMsg(keyword, taskList));
+    public String execute(TaskList taskList, Storage storage, Ui ui){
+        return ui.findMsg(keyword, taskList);
     }
     @Override
     public boolean isExit(){

@@ -12,10 +12,10 @@ public class DeadlineCommand extends Command{
         this.desc = desc;
         this.by = by;
     }
-    public void execute(TaskList taskList, Storage storage, Ui ui){
+    public String execute(TaskList taskList, Storage storage, Ui ui){
         Deadline task = new Deadline(desc, by);
         taskList.addTask(task);
         storage.updateFile(taskList);
-        System.out.println(ui.addTaskMsg(task, taskList.size()));
+        return ui.addTaskMsg(task, taskList.size());
     };
 }

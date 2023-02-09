@@ -15,10 +15,10 @@ public class EventCommand extends Command{
         this.to = to;
     }
 
-    public void execute(TaskList taskList, Storage storage, Ui ui){
+    public String execute(TaskList taskList, Storage storage, Ui ui){
         Event task = new Event(desc, from, to);
         taskList.addTask(task);
         storage.updateFile(taskList);
-        System.out.println(ui.addTaskMsg(task, taskList.size()));
+        return ui.addTaskMsg(task, taskList.size());
     };
 }

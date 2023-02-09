@@ -10,10 +10,10 @@ public class DeleteCommand extends Command{
     public DeleteCommand(int index){
         this.index = index;
     }
-    public void execute(TaskList taskList, Storage storage, Ui ui){
+    public String execute(TaskList taskList, Storage storage, Ui ui){
         Task task = taskList.get(index);
         taskList.deleteTask(index);
         storage.updateFile(taskList);
-        System.out.println(ui.deleteTaskMsg(task, taskList.getSize()));
+        return ui.deleteTaskMsg(task, taskList.getSize());
     };
 }

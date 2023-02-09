@@ -8,7 +8,7 @@ import ui.Ui;
  */
 public abstract class Command {
     boolean isExit = false;
-    public abstract void execute(TaskList taskList, Storage storage, Ui ui);
+    public abstract String execute(TaskList taskList, Storage storage, Ui ui);
     public boolean isExit(){
         return isExit;
     };

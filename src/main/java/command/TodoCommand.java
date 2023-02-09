@@ -11,10 +11,10 @@ public class TodoCommand extends Command{
         this.desc = desc;
     }
     @Override
-    public void execute(TaskList taskList, Storage storage, Ui ui){
+    public String execute(TaskList taskList, Storage storage, Ui ui){
         Todo todo = new Todo(desc);
         taskList.addTask(todo);
         storage.updateFile(taskList);
-        System.out.println(ui.addTaskMsg(todo, taskList.getSize()));
+        return ui.addTaskMsg(todo, taskList.getSize());
     }
 }

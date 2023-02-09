@@ -7,8 +7,8 @@ import ui.Ui;
 public class ListCommand extends Command{
     public ListCommand(){
     }
-    public void execute(TaskList taskList, Storage storage, Ui ui){
-        System.out.println(ui.listTasksMsg(taskList));
+    public String execute(TaskList taskList, Storage storage, Ui ui){
+        return ui.listTasksMsg(taskList);
     }
 
 }

@@ -4,7 +4,7 @@ import tasks.TaskList;
 import exception.DukeException;
 
 public class StringParser {
-    public Command parse(String answer, TaskList taskList) throws DukeException {
+    public Command parse(String answer) throws DukeException {
         String[] wordArr = answer.split(" ", 2);
         if (wordArr[0].equals("mark")) {
             int index = Integer.parseInt(wordArr[1]);
