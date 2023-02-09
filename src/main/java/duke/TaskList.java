@@ -37,6 +37,7 @@ public class TaskList {
      */
     public void addTask(Task task){
         this.tasks.add(task);
+        assert !tasks.isEmpty() : "Something went wrong when adding first task.";
     }
 
     /**
@@ -45,7 +46,7 @@ public class TaskList {
      * @return the task deleted
      */
     public Task deleteTask(int indexOfTask) {
-        return this.tasks.remove(indexOfTask - 1);
+        return this.tasks.remove(indexOfTask);
     }
 
     /**
