@@ -28,9 +28,10 @@ public class Parser {
     }
 
     /**
-     * Parses user inputs and reacts according to different keywords
+     * Parses user inputs and reacts according to different keywords.
      *
      * @param command Users' inputs
+     * @return Duke's response
      */
     public String parse(String command) {
         String[] commandArr;

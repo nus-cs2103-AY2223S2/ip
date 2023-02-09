@@ -1,6 +1,5 @@
 package duke;
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 import duke.tasks.Task;
 
@@ -17,16 +16,13 @@ public class TaskList {
         tasks = new ArrayList<>();
     }
 
-    public TaskList(ArrayList<Task> tasks) {
-        this.tasks = tasks;
-    }
-
     /**
      * Adds a task into task list. Notifications will be printed if this
      * is not an action done by auto save and load.
      *
      * @param task   Task to be added to the list
      * @param isLoad Indicates if the action is done by auto save and load
+     * @return Message of adding a new task.
      */
     public String addTask(Task task, boolean isLoad) {
         tasks.add(task);
@@ -43,6 +39,7 @@ public class TaskList {
      * Deletes a task from the task list
      *
      * @param taskId Id of the task to be deleted
+     * @return Message of deleting specified task.
      */
     public String deleteTask(int taskId) {
         String msg = "Noted. I've removed this task:\n"
@@ -72,7 +69,9 @@ public class TaskList {
     }
 
     /**
-     * Prints out all the tasks in the list
+     * Returns current task list in String.
+     *
+     * @return String of task list.
      */
     public String printList() {
         StringBuilder tasksList = new StringBuilder("Here are the tasks in your list:\n");
@@ -89,10 +88,10 @@ public class TaskList {
      * Filters tasks with the given keyword.
      *
      * @param keyword Keyword for searching tasks
-     * @return List of filtered Tasks
+     * @return String of matching task(s).
      */
     public String findMatchingTasks(String keyword) {
-        StringBuilder tasksList = new StringBuilder("Here are the matching task(s): ");
+        StringBuilder tasksList = new StringBuilder("Here are the matching task(s): \n");
         int count = 1;
         for (Task task : tasks) {
             if (task.toString().contains(keyword)) {
