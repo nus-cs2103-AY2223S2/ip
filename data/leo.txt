@@ -5,3 +5,6 @@
 [T][ ] eat fruits
 [T][X] sleeping
 [D][ ] presentation | 10022023 17:00
+[D][ ] project | 20022023 12:00
+[D][ ] presentation | 20022023 13:00
+[E][ ] birthday | 20022023 12:00 | 23022023 01:00

@@ -1,5 +1,6 @@
 package leo.storage;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -73,5 +74,11 @@ public class EventTask extends Task {
         String strFrom = formatter.format(this.from);
         String strTo = formatter.format(this.to);
         return typeAndStatus() + getTask() + " | " + strFrom + " | " + strTo + "\n";
+    }
+
+    public boolean withinDate(LocalDate day) {
+        LocalDate start = this.from.toLocalDate();
+        LocalDate end = this.to.toLocalDate();
+        return !(day.isBefore(start) || day.isAfter(end));
     }
 }

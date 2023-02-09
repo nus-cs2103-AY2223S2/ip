@@ -1,5 +1,6 @@
 package leo.storage;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -53,5 +54,10 @@ public class DeadlineTask extends Task {
     private String getDeadline() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE, MMM dd, hh:mm a");
         return formatter.format(this.deadline);
+    }
+
+    public boolean sameDay(LocalDate day) {
+        LocalDate deadlineDate = this.deadline.toLocalDate();
+        return deadlineDate.equals(day);
     }
 }

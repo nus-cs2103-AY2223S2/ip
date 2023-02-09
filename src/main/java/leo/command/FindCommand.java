@@ -53,7 +53,6 @@ public class FindCommand extends Command {
         } catch (Exception e) {
             throw new NoKeywordException();
         }
-
     }
 
     @Override

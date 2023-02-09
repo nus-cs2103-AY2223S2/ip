@@ -4,6 +4,8 @@ import leo.leoexception.IncorrectMarkException;
 import leo.leoexception.IncorrectUnmarkException;
 import leo.ui.Ui;
 
+import java.time.LocalDate;
+
 /**
  * Represents a Task. A <code>Task</code> object contains the String description.
  */
@@ -101,5 +103,4 @@ public class Task {
     public String typeAndStatus() {
         return Ui.type(this) + Ui.completion(this);
     }
-
 }

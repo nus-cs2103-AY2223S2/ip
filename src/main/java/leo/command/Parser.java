@@ -38,6 +38,8 @@ public class Parser {
             return new FindCommand(s, input);
         } else if (input.contains("bye")) {
             return new ExitCommand(s, input);
+        } else if (input.contains("view")) {
+            return new ViewCommand(s, input);
         } else {
             return new AddCommand(s, input);
         }
