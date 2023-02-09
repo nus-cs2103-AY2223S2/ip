@@ -13,9 +13,13 @@ public class Event extends Task {
 
     public Event(String description, String from, String to) {
         super(description);
-        DateTimeFormatter df = new DateTimeFormatterBuilder().parseCaseInsensitive().appendPattern("dd-MM-yyyy HH:mm")
+        DateTimeFormatter df = new DateTimeFormatterBuilder()
+                .parseCaseInsensitive()
+                .appendPattern("dd-MM-yyyy HH:mm")
                 .toFormatter(Locale.ENGLISH);
-        DateTimeFormatter df2 = new DateTimeFormatterBuilder().parseCaseInsensitive().appendPattern("HH:mm")
+        DateTimeFormatter df2 = new DateTimeFormatterBuilder()
+                .parseCaseInsensitive()
+                .appendPattern("HH:mm")
                 .toFormatter(Locale.ENGLISH);
         this.from = LocalDateTime.parse(from, df);
         this.to = LocalTime.parse(to, df2);
@@ -23,17 +27,29 @@ public class Event extends Task {
 
     @Override
     public String toSavedString() {
-        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm").withLocale(Locale.ENGLISH);
-        DateTimeFormatter df2 = DateTimeFormatter.ofPattern("HH:mm").withLocale(Locale.ENGLISH);
+        DateTimeFormatter df = DateTimeFormatter.
+                ofPattern("dd-MM-yyyy HH:mm")
+                .withLocale(Locale.ENGLISH);
+        DateTimeFormatter df2 = DateTimeFormatter
+                .ofPattern("HH:mm")
+                .withLocale(Locale.ENGLISH);
 
-        return "E | " + super.toSavedString() + " | " + this.from.format(df) + " | " + this.to.format(df2);
+        String savedString = "E | " + super.toSavedString() + " | "
+                + this.from.format(df) + " | " + this.to.format(df2);
+        return savedString;
     }
 
     @Override
     public String toString() {
-        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm").withLocale(Locale.ENGLISH);
-        DateTimeFormatter df2 = DateTimeFormatter.ofPattern("HH:mm").withLocale(Locale.ENGLISH);
-        return "[E]" + super.toString() + " (from: " + from.format(df) + " to: " + to.format(df2) + ")";
+        DateTimeFormatter df = DateTimeFormatter
+                .ofPattern("dd-MM-yyyy HH:mm")
+                .withLocale(Locale.ENGLISH);
+        DateTimeFormatter df2 = DateTimeFormatter
+                .ofPattern("HH:mm")
+                .withLocale(Locale.ENGLISH);
+        String outputString = "[E]" + super.toString()
+                + " (from: " + from.format(df) + " to: " + to.format(df2) + ")";
+        return outputString;
     }
 
 }

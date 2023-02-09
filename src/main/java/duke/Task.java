@@ -23,11 +23,13 @@ public class Task {
     }
 
     public String toSavedString() {
-        return this.isDone ? "1 | " + this.description : "0 | " + this.description;
+        String savedString = this.isDone ? "1 | " + this.description : "0 | " + this.description;
+        return savedString;
     }
 
     @Override
     public String toString() {
-        return this.getStatusIcon() + " " + this.description;
+        String outputString = this.getStatusIcon() + " " + this.description;
+        return outputString;
     }
 }
