@@ -16,22 +16,22 @@ public class Ui {
      */
     public Ui() {
         isStarted = true;
-        startUpSequence();
     }
 
     /**
      * Outputs startup sequence to console.
      */
-    public void startUpSequence() {
+    public static String startUpSequence() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println(logo);
 
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
+
+        logo += "Hello! I'm Duke\n";
+        logo += "What can I do for you?\n";
+        return logo;
     }
 
     /**
@@ -46,10 +46,12 @@ public class Ui {
      *
      * @param item Task that was added.
      */
-    public static void showAddedMessage(Task item) {
-        System.out.println("    Duke says:");
-        System.out.println("    Added");
-        System.out.println("    " + item.toString());
+    public static String showAddedMessage(Task item) {
+        String answer = "";
+        answer += "    Duke says:\n";
+        answer += "    Added\n";
+        answer += "    " + item.toString() + "\n";
+        return answer;
     }
 
     /**
@@ -57,9 +59,11 @@ public class Ui {
      *
      * @param item Task that was removed.
      */
-    public static void showRemovedMessage(Task item) {
-        System.out.println("    Noted. I have removed this task:");
-        System.out.println("    " + item.toString());
+    public static String showRemovedMessage(Task item) {
+        String answer = "";
+        answer += "    Noted. I have removed this task:\n";
+        answer += "    " + item.toString() + "\n";
+        return answer;
     }
 
     /**
@@ -67,9 +71,11 @@ public class Ui {
      *
      * @param item Task that was marked as done.
      */
-    public static void showMarkedMessage(Task item) {
-        System.out.println("    OK I've marked this task as done: ");
-        System.out.println("    " + item.toString());
+    public static String showMarkedMessage(Task item) {
+        String answer = "";
+        answer += "    OK I've marked this task as done:\n";
+        answer += "    " + item.toString() + "\n";
+        return answer;
     }
 
     /**
@@ -77,49 +83,61 @@ public class Ui {
      *
      * @param item Task that was marked as undone.
      */
-    public static void showUnmarkedMessage(Task item) {
-        System.out.println("    OK I've marked this task as not done yet:");
-        System.out.println("    " + item.toString());
+    public static String showUnmarkedMessage(Task item) {
+        String answer = "";
+        answer += "    OK I've marked this task as not done yet:\n";
+        answer += "    " + item.toString() + "\n";
+        return answer;
     }
 
     /**
      * Outputs SavedMessage to console, demonstrating completion of save to hard drive.
+     *
+     * @return String for Saved Message.
      */
-    public void showSavedMessage() {
-        System.out.println("    Save complete");
+    public String showSavedMessage() {
+        return "    Save complete\n";
     }
 
     /**
      * Outputs ClosingMessage to console, demonstrating exit of program.
+     *
+     * @return String for closing Message.
      */
-    public void showClosingMessage() {
-        System.out.println("    Duke says:");
-        System.out.println("    Bye. Hope you run this program again!");
+    public String showClosingMessage() {
+        String answer = "";
+        answer += "    Duke says:\n";
+        answer += "    Bye. Hope you run this program again!\n";
+        return answer;
     }
 
     /**
      * Prints the whole list of tasks given ArrayList of tasks.
      * @param list ArrayList of Tasks to be printed.
      */
-    public void printListNumber(ArrayList<Task> list) {
-        System.out.println("    Now you have " + list.size() + " task(s) in the list.");
+    public String printListNumber(ArrayList<Task> list) {
+        return "    Now you have " + list.size() + " task(s) in the list.\n";
     }
 
     /**
      * Outputs SavingMessage, demonstrating the commencement of saving.
+     *
+     * @return String for Saving Message.
      */
-    public void showSavingMessage() {
-        System.out.println("    Saving:");
+    public String showSavingMessage() {
+        return "    Saving:\n";
     }
 
     /**
      * Given an ArrayList, print all tasks in it.
      * @param list ArrayList of which contents to be printed.
      */
-    public static void printArrayList(ArrayList<Task> list) {
+    public static String printArrayList(ArrayList<Task> list) {
+        String answer = "";
         for (int i = 0; i < list.size(); i++) {
-            System.out.println("    " + (i + 1) + ". "
-                    + list.get(i).toString());
+            answer += "    " + (i + 1) + ". "
+                    + list.get(i).toString() + "\n";
         }
+        return answer;
     }
 }

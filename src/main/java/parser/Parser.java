@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import exception.DukeException;
 import exception.InvalidInputException;
 import exception.NoTaskDescriptionException;
+import storage.Storage;
 import task.Deadline;
 import task.Event;
 import task.Task;
@@ -91,61 +92,76 @@ public class Parser {
      * @param ui Ui Object to call Ui-related methods.
      * @return Boolean if any tasks are recognised and carried out.
      */
-    public static boolean parseCommands(String echo, TaskList tasks, Ui ui) {
+    public static String parseCommands(String echo, TaskList tasks, Ui ui, Storage storage) {
+        String answer = "";
+        if (echo.equals("bye")) {
+            answer += ui.showSavingMessage();
+            storage.save(tasks.getList());
+            answer += ui.showSavedMessage();
+            answer += ui.showClosingMessage();
+            return answer;
+        }
+
         if (echo.equals("list")) {
-            System.out.println("    OK, Here are the items in your list: ");
-            Ui.printArrayList(tasks.getList());
+            answer += "    OK, Here are the items in your list: \n";
+            answer += Ui.printArrayList(tasks.getList());
             // put in loop to read the list
-            return true;
+            return answer;
         }
 
         if (echo.startsWith("mark")) {
             try {
                 int taskToModify = Integer.parseInt(echo.replaceAll("[^0-9]", ""));
                 tasks.markDone(taskToModify - 1);
+                // Call ui marked
+                answer += Ui.showMarkedMessage(tasks.get(taskToModify - 1));
             } catch (Exception e) {
                 // TODO: handle exception
-                return false;
+                return "";
             }
-            return true;
+            return answer;
         }
 
         if (echo.startsWith("unmark")) {
             try {
                 int taskToModify = Integer.parseInt(echo.replaceAll("[^0-9]", ""));
                 tasks.markUndone(taskToModify - 1);
+                // Call UI unmarked
+                answer += Ui.showUnmarkedMessage(tasks.get(taskToModify - 1));
             } catch (Exception e) {
                 // TODO: handle exception
-                return false;
+                return "";
             }
-            return true;
+            return answer;
         }
 
         if (echo.startsWith("delete") || echo.startsWith("remove")) {
             try {
                 int taskToModify = Integer.parseInt(echo.replaceAll("[^0-9]", ""));
                 tasks.removeTask(taskToModify - 1);
-                ui.printListNumber(tasks.getList());
+                // Call ui removed
+                answer += Ui.showRemovedMessage(tasks.get(taskToModify - 1));
+                answer += ui.printListNumber(tasks.getList());
             } catch (Exception e) {
                 // TODO: handle exception
-                return false;
+                return "";
             }
-            return true;
+            return answer;
         }
 
         if (echo.startsWith("find")) {
             String taskToFind = echo.substring(4).trim();
             if (taskToFind.isEmpty()) {
-                System.out.println("    OPPS!! You can't find nothing");
-                return true;
+                answer += "    OPPS!! You can't find nothing\n";
+                return answer;
             }
             ArrayList<Task> foundList = tasks.findArray(taskToFind);
-            System.out.println("    Here are the matching tasks in your list:");
-            Ui.printArrayList(foundList);
-            return true;
+            answer += "    Here are the matching tasks in your list:\n";
+            answer += Ui.printArrayList(foundList);
+            return answer;
         }
 
-        return false;
+        return answer;
     }
 
 }

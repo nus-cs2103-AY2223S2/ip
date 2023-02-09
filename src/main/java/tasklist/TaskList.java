@@ -75,8 +75,7 @@ public class TaskList {
      */
     public void removeTask(int index) {
         this.taskList.remove(index);
-        // Call ui removed
-        Ui.showRemovedMessage(this.get(index));
+
     }
 
     /**
@@ -86,8 +85,6 @@ public class TaskList {
      */
     public void markDone(int index) {
         this.taskList.get(index).markDone();
-        // Call ui marked
-        Ui.showMarkedMessage(this.get(index));
     }
 
     /**
@@ -97,8 +94,6 @@ public class TaskList {
      */
     public void markUndone(int index) {
         this.taskList.get(index).markUndone();
-        // Call UI unmarked
-        Ui.showUnmarkedMessage(this.get(index));
     }
 
     /**

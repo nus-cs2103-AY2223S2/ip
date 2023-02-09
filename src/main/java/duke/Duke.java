@@ -1,8 +1,12 @@
 package duke;
 
-import java.util.Scanner;
-
 import exception.DukeException;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.layout.VBox;
 import parser.Parser;
 import storage.Storage;
 import task.Task;
@@ -18,6 +22,16 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    private ScrollPane scrollPane;
+    private VBox dialogContainer;
+    private TextField userInput;
+    private Button sendButton;
+    private Scene scene;
+
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+
+    
     /**
      * Constructor for a Duke Object.
      * Initializes the whole program as well as required objects.
@@ -36,59 +50,26 @@ public class Duke {
         }
     }
 
-    /**
-     * Function that runs while waiting for user input.
-     */
-    public void run() {
-        String echo;
-        Scanner scan = new Scanner(System.in);
 
-        while (true) {
-            echo = scan.nextLine();
-
-            if (echo.equals("bye")) {
-                break;
-            }
-
-            if (Parser.parseCommands(echo, tasks, ui)) {
-                continue;
-            }
-
-            Task item;
-
-            // Create a separate function in order to assign to item;
-            try {
-                item = Parser.parseEcho(echo);
-            } catch (DukeException e) {
-                // TODO: handle exception
-                System.out.println(e.getMessage());
-                continue;
-            }
-
-            tasks.addTask(item);
-
-            ui.showAddedMessage(item);
-            ui.printListNumber(tasks.getList());
+    public String getResponse(String input) {
+        // Supposed to change
+        String response = Parser.parseCommands(input, this.tasks, this.ui, this.storage);
+        if (!response.isEmpty()) {
+            return response;
+        }
+        Task item;
+        try {
+            item = Parser.parseEcho(input);
+        } catch (DukeException e) {
+            // TODO: handle exception
+            return e.getMessage();
         }
 
-        ui.showSavingMessage();
-
-        storage.save(tasks.getList());
-
-
-        ui.showSavedMessage();
-
-        scan.close();
-
-        ui.showClosingMessage();
+        tasks.addTask(item);
+        response += ui.showAddedMessage(item);
+        response += ui.printListNumber(tasks.getList());
+        return response;
     }
 
-    /**
-     * Main function of the whole program.
-     *
-     * @param args command line arguments that are not in use.
-     */
-    public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
-    }
+
 }
