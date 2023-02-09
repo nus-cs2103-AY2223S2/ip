@@ -25,7 +25,7 @@ public class ByeCommand extends Command {
         return false;
     }
 
-    public void sleepAndExit() {
+    private void sleepAndExit() {
         CompletableFuture.runAsync(() -> {
             try {
                 Thread.sleep(1000);

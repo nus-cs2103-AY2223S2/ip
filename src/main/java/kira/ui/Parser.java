@@ -2,10 +2,12 @@ package kira.ui;
 
 import kira.command.ByeCommand;
 import kira.command.Command;
+import kira.command.CommandString;
 import kira.command.DeadlineCommand;
 import kira.command.DeleteCommand;
 import kira.command.EventCommand;
 import kira.command.FindCommand;
+import kira.command.HelpCommand;
 import kira.command.ListCommand;
 import kira.command.MarkCommand;
 import kira.command.ToDoCommand;
@@ -16,13 +18,6 @@ import kira.task.Deadline;
 import kira.task.Event;
 import kira.task.TaskType;
 import kira.task.ToDo;
-
-/**
- * CommandString are all possible commands.
- */
-enum CommandString {
-    BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, TODAY, FIND
-}
 
 /**
  * Parser handles the parsing of user inputs into executable commands.
@@ -83,6 +78,12 @@ public class Parser {
                             + "Format: find <description>");
                 }
                 return new FindCommand(temp[1]);
+            case HELP:
+                if (temp.length == 1) {
+                    return new HelpCommand();
+                } else {
+                    return new HelpCommand(temp[1]);
+                }
             case TODO:
                 // Fallthrough
             case DEADLINE:

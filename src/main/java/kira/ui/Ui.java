@@ -53,7 +53,7 @@ public class Ui {
     }
 
     /**
-     * Formats and prints message for the list command.
+     * Formats and prints message for the find command.
      *
      * @param taskList
      */
@@ -133,6 +133,16 @@ public class Ui {
     public void unmarkMsg(Task task) {
         this.message = "This task has been reverted to incomplete~\n"
                 + task.toString();
+        Printer.printFormatReplyMsg(this.message);
+    }
+
+    /**
+     * Formats and prints the message for help command.
+     *
+     * @return
+     */
+    public void helpMsg(String msg) {
+        this.message = msg;
         Printer.printFormatReplyMsg(this.message);
     }
 

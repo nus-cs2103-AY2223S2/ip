@@ -35,7 +35,7 @@ public class KiraBot {
         } catch (KiraException e) {
             UI.errMsg(e.getMessage());
             this.taskList = new TaskList();
-        } 
+        }
     }
 
     private void listenForCommand() {
