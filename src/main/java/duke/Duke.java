@@ -2,6 +2,9 @@ package duke;
 
 import java.util.Scanner;
 
+/**
+ * Duke Class to handle execution of Duke program.
+ */
 public class Duke {
     protected static final String DIV_OPEN = "____________________________________________________________\n";
     protected static final String DIV_CLOSE = "____________________________________________________________\n";
