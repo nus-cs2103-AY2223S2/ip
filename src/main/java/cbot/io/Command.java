@@ -289,7 +289,7 @@ public enum Command {
 
     private static String doMark(TaskList tl, String text)
             throws PoorInputException {
-        assert !text.isEmpty() : "MARK should have input text";
+        assert (!text.isEmpty()) : "MARK must have input text. Error should have been caught";
 
         ArrayList<Integer> nums = splitNums(tl, text);
 
@@ -309,7 +309,7 @@ public enum Command {
 
     private static String doUnmark(TaskList tl, String text)
             throws PoorInputException {
-        assert !text.isEmpty() : "UNMARK should have input text";
+        assert (!text.isEmpty()) : "UNMARK must have input text. Error should have been caught";
 
         ArrayList<Integer> nums = splitNums(tl, text);
 
@@ -329,7 +329,7 @@ public enum Command {
 
     private static String doRemove(TaskList tl, String text)
             throws PoorInputException {
-        assert !text.isEmpty() : "DELETE should have input text";
+        assert (!text.isEmpty()) : "DELETE must have input text. Error should have been caught";
 
         ArrayList<Integer> nums = splitNums(tl, text);
 
@@ -350,14 +350,14 @@ public enum Command {
     }
 
     private static String doTodo(TaskList tl, String text) {
-        assert !text.isEmpty() : "TODO should have input text";
+        assert (!text.isEmpty()) : "TODO must have input text. Error should have been caught";
 
         return Talker.say(tl.addTask(new Task(text)));
     }
 
     private static String doDeadline(TaskList tl, String text)
             throws PoorInputException, DateTimeParseException {
-        assert !text.isEmpty() : "DEADLINE should have input text";
+        assert (!text.isEmpty()) : "DEADLINE must have input text. Error should have been caught";
 
         String byKeyword = "/by ";
         int byLength = byKeyword.length();
@@ -381,7 +381,7 @@ public enum Command {
 
     private static String doEvent(TaskList tl, String text)
             throws PoorInputException, DateTimeParseException {
-        assert !text.isEmpty() : "EVENT should have input text";
+        assert (!text.isEmpty()) : "EVENT must have input text. Error should have been caught";
 
         String fromKeyword = "/from ";
         String toKeyword = "/to ";
@@ -434,7 +434,7 @@ public enum Command {
 
     private static String doBefore(TaskList tl, String text)
             throws PoorInputException, DateTimeParseException {
-        assert !text.isEmpty() : "BEFORE should have input text";
+        assert (!text.isEmpty()) : "BEFORE must have input text. Error should have been caught";
         checkFilterCount(tl);
 
         LocalDateTime bef = TimeStuff.textToDT(text);
@@ -448,7 +448,7 @@ public enum Command {
 
     private static String doAfter(TaskList tl, String text)
             throws PoorInputException, DateTimeParseException {
-        assert !text.isEmpty() : "AFTER should have input text";
+        assert (!text.isEmpty()) : "AFTER must have input text. Error should have been caught";
         checkFilterCount(tl);
 
         LocalDateTime aft = TimeStuff.textToDT(text);
@@ -461,7 +461,7 @@ public enum Command {
     }
 
     private static String doFilter(TaskList tl, String text) throws PoorInputException {
-        assert !text.isEmpty() : "FILTER should have input text";
+        assert (!text.isEmpty()) : "FILTER must have input text. Error should have been caught";
         checkFilterCount(tl);
 
         String msg;
@@ -527,7 +527,7 @@ public enum Command {
     }
 
     private static String doFind(TaskList tl, String text) throws PoorInputException {
-        assert !text.isEmpty() : "FIND should have input text";
+        assert (!text.isEmpty()) : "FIND must have input text. Error should have been caught";
         checkFilterCount(tl);
 
         String lowText = text.toLowerCase();
@@ -540,7 +540,7 @@ public enum Command {
     }
 
     private static String doEdit(TaskList tl, String text) throws PoorInputException {
-        assert !text.isEmpty() : "EDIT should have input text";
+        assert (!text.isEmpty()) : "EDIT must have input text. Error should have been caught";
 
         int spaceIndex = checkKeyword(text, " ");
 
