@@ -14,7 +14,7 @@ public class TaskList {
   }
 
   public void delete(int index) {
-    tasks.remove(index - 1);
+    tasks.remove(index);
   }
 
   public int size() {

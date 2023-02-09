@@ -1,6 +1,5 @@
-deadline ip /by 2023-02-05 0000
+todo party
 mark 1
-todo party
-event exam /from 2022-02-02 0000  /to 2022-02-02 0001
+deadline ip /by 2023-02-09 0000
+event meeting /from 2023-02-09 0000  /to 2023-02-09 0010
 mark 3
-todo party
