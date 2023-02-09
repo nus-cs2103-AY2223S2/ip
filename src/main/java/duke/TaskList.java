@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class TaskList {
-    final static BadCommandException INDEX_OOB_ERROR =
+    protected final static BadCommandException INDEX_OOB_ERROR =
             new BadCommandException("Index given is out of bounds!");
     protected ArrayList<Task> tasks;
 
@@ -92,10 +92,12 @@ public class TaskList {
      * @return TaskList containing the matching tasks.
      */
     public TaskList getTasksByKeyword(String keyword) {
-        keyword = keyword.trim().toLowerCase();
+        String trimmedKeyword = keyword.trim().toLowerCase();
         TaskList matchingTasks = new TaskList();
         for (Task task: tasks) {
-            if (task.toString().toLowerCase().contains(keyword)) {
+            String taskString = task.toString().toLowerCase();
+            if (task.toString().toLowerCase().contains(trimmedKeyword)
+                || trimmedKeyword.contains(taskString)) {
                 matchingTasks.addTask(task);
             }
         }
