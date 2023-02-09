@@ -186,6 +186,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * Called by find method if searching for keyword.
+     * @param keyWord Matching keyword to search for in TaskList.
+     */
     private void findKeyword(String keyWord) {
         List<Task> foundTasks = tasks.stream().filter(task -> task.getDescription().contains(keyWord))
                 .collect(Collectors.toList());
@@ -199,6 +203,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * Called by find method if searching for tag.
+     * @param tagName Matching tag to search for in TaskList.
+     */
     private void findTag(String tagName) {
         List<Task> foundTasks = tasks.stream().filter(task -> task.getTag().contains(tagName))
                 .collect(Collectors.toList());
