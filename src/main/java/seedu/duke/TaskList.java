@@ -2,6 +2,7 @@ package seedu.duke;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class TaskList {
     private static ArrayList<Task> tasks;
@@ -120,5 +121,20 @@ public class TaskList {
         for (int i = 0; i < results.size(); i++) {
             Ui.indentedPrintln(indices.get(i) + ". " +results.get(i).toString());
         }
+    }
+
+    public void checkDuplicate() {
+        int taskNumber = 0;
+        HashMap<String, Integer> map = new HashMap<>();
+        for (Task t : tasks) {
+            if (map.get(t.toString()) != null) {
+                Ui.indentedPrintln("There exist duplicate tasks! Tasks "
+                        + map.get(t.toString()) + "and " + taskNumber + " are duplicates.");
+                return;
+            }
+            map.put(t.toString(), taskNumber);
+            taskNumber++;
+        }
+        Ui.indentedPrintln("There's no duplicate task :)");
     }
 }
