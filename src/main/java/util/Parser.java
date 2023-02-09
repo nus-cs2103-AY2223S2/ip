@@ -37,9 +37,6 @@ public class Parser {
                 return ToDo.createToDo(command, tasks);
             } else if (command.startsWith("find")) {
                 return tasks.findTasks(command);
-            } else if (command.startsWith("snooze")) {
-                // "snooze 1 /day 10 /hour 10 /minutes 20"
-                return tasks.snoozeTask(command);
             }
         } catch (DukeException e) {
             return e.toString();
