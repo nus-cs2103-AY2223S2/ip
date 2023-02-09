@@ -2,14 +2,16 @@ package duke.task;
 
 import duke.DukeException;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.temporal.TemporalAccessor;
 
 public class Deadline extends Task {
     protected String byStr;
     protected LocalDateTime byDateTime;
-    protected static DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d-M-yyyy HHmm");
+    protected static DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d-M-yyyy[ HHmm]");
     protected static DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM d yyyy, hh:mma");
 
     /**
@@ -35,7 +37,13 @@ public class Deadline extends Task {
             throw new DukeException("The 'by' date of a deadline cannot be empty.");
         }
         try {
-            byDateTime = LocalDateTime.parse(byStr, inputFormatter);
+            TemporalAccessor temporalAccessor = inputFormatter.parseBest(
+                    byStr, LocalDateTime::from, LocalDate::from);
+            if (temporalAccessor instanceof LocalDateTime) {
+                byDateTime = (LocalDateTime) temporalAccessor;
+            } else {
+                byDateTime = ((LocalDate) temporalAccessor).atStartOfDay();
+            }
         } catch (DateTimeParseException e) {
             byDateTime = null;
         }

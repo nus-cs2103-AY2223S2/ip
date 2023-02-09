@@ -85,7 +85,7 @@ public class Duke extends Application {
         scrollPane.setContent(dialogContainer);
 
         userInput = new TextField();
-        sendButton = new Button("send");
+        sendButton = new Button("Send");
 
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
@@ -168,9 +168,5 @@ public class Duke extends Application {
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
         );
         userInput.clear();
-    }
-
-    public static void main(String[] args) {
-        new Duke(DATA_DIR + DATA_FILENAME).run();
     }
 }

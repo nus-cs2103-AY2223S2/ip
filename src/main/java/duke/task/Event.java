@@ -2,16 +2,18 @@ package duke.task;
 
 import duke.DukeException;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.temporal.TemporalAccessor;
 
 public class Event extends Task {
     protected String startStr;
     protected LocalDateTime startDateTime;
     protected String endStr;
     protected LocalDateTime endDateTime;
-    protected static DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d-M-yyyy HHmm");
+    protected static DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d-M-yyyy[ HHmm]");
     protected static DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM d yyyy, hh:mma");
 
     /**
@@ -40,7 +42,13 @@ public class Event extends Task {
             throw new DukeException("The start time of an event cannot be empty.");
         }
         try {
-            startDateTime = LocalDateTime.parse(startStr, inputFormatter);
+            TemporalAccessor temporalAccessor = inputFormatter.parseBest(
+                    startStr, LocalDateTime::from, LocalDate::from);
+            if (temporalAccessor instanceof LocalDateTime) {
+                startDateTime = (LocalDateTime) temporalAccessor;
+            } else {
+                startDateTime = ((LocalDate) temporalAccessor).atStartOfDay();
+            }
         } catch (DateTimeParseException e) {
             startDateTime = null;
         }
@@ -52,7 +60,13 @@ public class Event extends Task {
             throw new DukeException("The end time of an event cannot be empty.");
         }
         try {
-            endDateTime = LocalDateTime.parse(endStr, inputFormatter);
+            TemporalAccessor temporalAccessor = inputFormatter.parseBest(
+                    endStr, LocalDateTime::from, LocalDate::from);
+            if (temporalAccessor instanceof LocalDateTime) {
+                endDateTime = (LocalDateTime) temporalAccessor;
+            } else {
+                endDateTime = ((LocalDate) temporalAccessor).atStartOfDay();
+            }
         } catch (DateTimeParseException e) {
             endDateTime = null;
         }

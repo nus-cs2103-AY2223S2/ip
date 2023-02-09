@@ -1,12 +1,6 @@
 package duke;
 
 public class Ui {
-//    final static String DIVIDER =
-//            "=======================";
-//    private String encloseWithDivider(String str) {
-//        return String.format("%s\n%s\n%s%n", DIVIDER, str, DIVIDER);
-//    }
-
     /**
      * Shows normal display message.
      * @param outputMsg The message to be displayed.

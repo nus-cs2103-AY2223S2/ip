@@ -12,3 +12,5 @@ D | 0 | Exam Preperation | 16-3-2002
 D | 0 | Another Exam Prep | 16-3-2002 2359
 T | 0 | new new homework | tag 1, tag 2, tag 3
 D | 0 | Thesis | 23-3-2023 2359 | Important, High Priority
+D | 0 | test date | 16-03-2002
+D | 0 | yet_another_test | 24-03-2002
