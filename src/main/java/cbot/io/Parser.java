@@ -30,9 +30,11 @@ public class Parser {
         boolean matchFound = false;
 
         for (Command c : Command.values()) {
-            if (c.matches(trimmed)) {
+            String match = c.getMatch(trimmed);
+
+            if (!match.isEmpty()) {
                 this.command = c;
-                this.text = c.extractText(trimmed);
+                this.text = match;
                 matchFound = true;
                 break;
             }
@@ -40,6 +42,10 @@ public class Parser {
 
         if (!matchFound) {
             throw new PoorInputException("Sorry, I don't recognize that command :<");
+        }
+
+        if (this.text.isEmpty()) {
+            throw new PoorInputException("That command needs an input");
         }
     }
 
@@ -72,10 +78,6 @@ public class Parser {
      */
     public String respond(TaskList tl)
             throws PoorInputException, DateTimeParseException {
-        if (this.command.isMissingText(this.text)) {
-            throw new PoorInputException("That command needs an input");
-        }
-
         return this.command.runCommand(tl, this.text);
     }
 }

@@ -3,7 +3,9 @@ package cbot.io;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import cbot.task.Deadline;
@@ -22,172 +24,148 @@ interface ThrowingBiFunction<T, U, R> {
  */
 public enum Command {
     /** Ends the Cbot session. */
-    BYE(
-            "bye",
-            Command::doBye),
+    BYE(Command::doBye,
+            false, false,
+            "bye", "close", "end", "exit"),
 
     /** Displays the current list of tasks. */
-    LIST(
-            "list",
-            Command::doList),
+    LIST(Command::doList,
+            false, false,
+            "list"),
 
     /** Marks the stipulated task as done. */
-    MARK(
-            "mark ",
-            Command::doMark,
-            true, true),
+    MARK(Command::doMark,
+            true, true,
+            "mark "),
 
     /** Catches MARK calls with no input. */
-    MARK_BAD(
-            "mark",
-            Command::doNoInput),
+    MARK_BAD(Command::doNoInput,
+            false, false,
+            "mark"),
 
     /** Marks the stipulated task as not done. */
-    UNMARK(
-            "unmark ",
-            Command::doUnmark,
-            true, true),
+    UNMARK(Command::doUnmark,
+            true, true,
+            "unmark "),
 
     /** Catches UNMARK calls with no input. */
-    UNMARK_BAD(
-            "unmark",
-            Command::doNoInput),
+    UNMARK_BAD(Command::doNoInput,
+            false, false,
+            "unmark"),
 
     /** Deletes the stipulated task from the list. */
-    DELETE(
-            "delete ",
-            Command::doRemove,
-            true, true),
+    DELETE(Command::doRemove,
+            true, true,
+            "del ", "delete ", "rem ", "remove ", "- "),
 
     /** Catches DELETE calls with no input. */
-    DELETE_BAD(
-            "delete",
-            Command::doNoInput),
-
-    /** Deletes the stipulated task from the list. Same as DELETE. */
-    REMOVE(
-            "remove ",
-            Command::doRemove,
-            true, true),
-
-    /** Catches REMOVE calls with no input. */
-    REMOVE_BAD(
-            "remove",
-            Command::doNoInput),
+    DELETE_BAD(Command::doNoInput,
+            false, false,
+            "del", "delete", "rem", "remove", "-"),
 
     /** Adds a To-Do task to the list. */
-    TODO(
-            "todo ",
-            Command::doTodo,
-            true, true),
+    TODO(Command::doTodo,
+            true, true,
+            "td ", "todo ", "+ "),
 
     /** Catches TODO calls with no input. */
-    TODO_BAD(
-            "todo",
-            Command::doNoInput),
+    TODO_BAD(Command::doNoInput,
+            false, false,
+            "td", "todo", "+"),
 
     /** Adds a Deadline task to the list. */
-    DEADLINE(
-            "deadline ",
-            Command::doDeadline,
-            true, true),
+    DEADLINE(Command::doDeadline,
+            true, true,
+            "deadline ", "dl "),
 
     /** Catches DEADLINE calls with no input. */
-    DEADLINE_BAD(
-            "deadline",
-            Command::doNoInput),
+    DEADLINE_BAD(Command::doNoInput,
+            false, false,
+            "deadline", "dl"),
 
     /** Adds an Event task to the list. */
-    EVENT(
-            "event ",
-            Command::doEvent,
-            true, true),
+    EVENT(Command::doEvent,
+            true, true,
+            "e ", "ev ", "event "),
 
     /** Catches EVENT calls with no input. */
-    EVENT_BAD(
-            "event",
-            Command::doNoInput),
+    EVENT_BAD(Command::doNoInput,
+            false, false,
+            "e", "ev", "event"),
 
     /** Sorts the list by date and description. */
-    SORT(
-            "sort",
-            Command::doSort,
-            false, true),
+    SORT(Command::doSort,
+            false, true,
+            "sort"),
 
     /** Displays the tasks that fall before the given date. */
-    BEFORE(
-            "before ",
-            Command::doBefore,
-            true),
+    BEFORE(Command::doBefore,
+            true, false,
+            "before "),
 
     /** Catches BEFORE calls with no input. */
-    BEFORE_BAD(
-            "before",
-            Command::doNoInput),
+    BEFORE_BAD(Command::doNoInput,
+            false, false,
+            "before"),
 
     /** Displays the tasks that fall after the given date. */
-    AFTER(
-            "after ",
-            Command::doAfter,
-            true),
+    AFTER(Command::doAfter,
+            true, false,
+            "after "),
 
     /** Catches AFTER calls with no input. */
-    AFTER_BAD(
-            "after",
-            Command::doNoInput),
+    AFTER_BAD(Command::doNoInput,
+            false, false,
+            "after"),
 
     /** Displays the tasks that match the given filter. */
-    FILTER(
-            "filter ",
-            Command::doFilter,
-            true),
+    FILTER(Command::doFilter,
+            true, false,
+            "filter "),
 
     /** Catches FILTER calls with no input. */
-    FILTER_BAD(
-            "filter",
-            Command::doNoInput),
+    FILTER_BAD(Command::doNoInput,
+            false, false,
+            "filter"),
 
     /** Displays the tasks that contain the input. */
-    FIND(
-            "find ",
-            Command::doFind,
-            true),
+    FIND(Command::doFind,
+            true, false,
+            "find "),
 
     /** Catches FIND calls with no input. */
-    FIND_BAD(
-            "find",
-            Command::doNoInput),
+    FIND_BAD(Command::doNoInput,
+            false, false,
+            "find"),
 
     /** Changes the description of the selected task. */
-    EDIT(
-            "edit ",
-            Command::doEdit,
-            true, true),
+    EDIT(Command::doEdit,
+            true, true,
+            "edit "),
 
     /** Catches EDIT calls with no input. */
-    EDIT_BAD(
-            "edit",
-            Command::doEdit);
+    EDIT_BAD(Command::doNoInput,
+            false, false,
+            "edit");
 
-    private final String str;
     private final ThrowingBiFunction<TaskList, String, String> f;
     private final boolean hasText;
     private final boolean needSave;
+    private final List<String> names;
 
     /**
-     * Constructs a Command type with the given keyword. The next two booleans are optional,
-     * and default to false. Respectively, they specify whether the Command expects additional input
-     * after the keyword, and whether the file needs to be saved after the Command is run.
+     * Constructs a Command type with the given behaviour and properties.
      *
-     * @param str The command keyword.
-     * @param bools (Optional) Whether more text after the keyword is expected, and
-     *        whether the file needs to be saved after the command is run.
+     * @param f The behaviour of this Command.
+     * @param hasText Whether the Command expects additional input after its name.
+     * @param needSave Whether the file needs to be saved after the Command is run.
+     * @param names The acceptable callable names for the Command.
      */
-    Command(String str, ThrowingBiFunction<TaskList, String, String> f, boolean ... bools) {
-        this.str = str;
+    Command(ThrowingBiFunction<TaskList, String, String> f, boolean hasText, boolean needSave, String ... names) {
         this.f = f;
-        this.hasText = (bools.length >= 1) ? bools[0] : false;
-        this.needSave = (bools.length >= 2) ? bools[1] : false;
+        this.hasText = hasText;
+        this.needSave = needSave;
+        this.names = Arrays.asList(names);
     }
 
     /**
@@ -200,60 +178,34 @@ public enum Command {
     }
 
     /**
-     * Returns the length of the keyword, including any whitespace after.
-     *
-     * @return The length of the Command keyword.
-     */
-    int getLen() {
-        return this.str.length();
-    }
-
-    /**
-     * Returns true if the start of the given String matches the Command keyword.
-     * e.g. "mark 1" matches the keyword "mark " in MARK.
+     * Returns the relevant text if the start of the given String matches the Command keyword.
+     * Else, the empty String "" is returned.
+     * e.g. "mark 1" matches the keyword "mark " in MARK, so "1" is returned.
      *
      * @param input The text to check.
-     * @return Whether the text means to call this Command.
+     * @return The extracted text, if any.
      * @see Parser
      */
-    boolean matches(String input) {
+    String getMatch(String input) {
         String lowText = input.toLowerCase();
 
         if (!this.hasText) {
             // should match exactly
-            return lowText.equals(this.str);
-        } else if (input.length() > getLen()) {
-            // not too short to check
-            return lowText.substring(0, getLen()).equals(this.str);
-        } else {
-            // too short to match
-            return false;
+            return (names.contains(lowText))
+                    ? lowText
+                    : "";
         }
-    }
 
-    /**
-     * Extracts the body of the input. That is, the text that comes after the Command keyword.
-     *
-     * @param input The full input.
-     * @return The 'body' of the input.
-     */
-    String extractText(String input) {
-        return (this.hasText)
-                ? input.substring(getLen()).trim()
-                : "";
-    }
+        for (String name : names) {
+            int nameLen = name.length();
+            boolean longEnough = (lowText.length() > nameLen);
+            if (longEnough
+                    && lowText.substring(0, nameLen).equals(name)) {
+                return input.substring(nameLen).trim();
+            }
+        }
 
-    /**
-     * Returns true if the Command expects body text but receives none.
-     * e.g. "mark  " with no task number specified.
-     *
-     * @param text The body text to check.
-     * @return Whether there is missing body text, given the Command type.
-     */
-    boolean isMissingText(String text) {
-        return (this.hasText)
-                ? (text.length() == 0)
-                : false;
+        return "";
     }
 
     /**
@@ -322,13 +274,13 @@ public enum Command {
     }
 
     private static String doBye(TaskList tl, String text) {
-        assert text.isEmpty() : "BYE should not have additional input text";
+        assert (!BYE.getMatch(text).isEmpty()) : "This should only be accessed by BYE";
 
         return Talker.sayBye();
     }
 
     private static String doList(TaskList tl, String text) {
-        assert text.isEmpty() : "LIST should not have additional input text";
+        assert (!LIST.getMatch(text).isEmpty()) : "This should only be accessed by LIST";
 
         return (tl.getCount() == 0)
                 ? Talker.say("Freedom! You have no tasks :D")
@@ -377,7 +329,7 @@ public enum Command {
 
     private static String doRemove(TaskList tl, String text)
             throws PoorInputException {
-        assert !text.isEmpty() : "DELETE/REMOVE should have input text";
+        assert !text.isEmpty() : "DELETE should have input text";
 
         ArrayList<Integer> nums = splitNums(tl, text);
 
@@ -469,7 +421,7 @@ public enum Command {
 
     private static String doSort(TaskList tl, String text)
             throws PoorInputException {
-        assert text.isEmpty() : "SORT should not have additional input text";
+        assert (!SORT.getMatch(text).isEmpty()) : "This should only be accessed by SORT";
 
         if (tl.getCount() == 0) {
             throw new PoorInputException("You have no tasks to sort :P");
