@@ -43,6 +43,9 @@ public class Parser {
         case "find":
             return OperationType.FIND;
             //break;
+        case "tag":
+            return OperationType.TAG;
+            //break;
         default:
             return OperationType.ADDTASK;
             //break;
@@ -105,6 +108,23 @@ public class Parser {
             return new Pair<>(-1, "☹ OOPS!!! You should input a number");
         }
         return new Pair<>(num, "Success");
+    }
+
+    public Pair<Integer, String> getTagIndex(String[] parts) {
+        if (parts.length == 1) {
+            return new Pair<>(-1, "You should input the index of task to add a tag");
+        }
+        int num = -1;
+        try {
+            num = Integer.parseInt(parts[1]);
+        } catch (NumberFormatException e) {
+            return new Pair<>(-1, "☹ OOPS!!! You should input a number");
+        }
+        if (parts.length > 2) {
+            return new Pair<>(num, parts[2]);
+        } else {
+            return new Pair<>(-1, "Please input a string you want to tag this task");
+        }
     }
 
     public OperationType getAddTaskType(String message) throws WindyCallException {

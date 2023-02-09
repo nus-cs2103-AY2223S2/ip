@@ -16,6 +16,11 @@ public class Deadline extends Task {
         this.deadline = Parser.processDate(deadline);
     }
 
+    public Deadline(String description, boolean status, String deadline, String tag) {
+        super(description, status, tag);
+        this.deadline = Parser.processDate(deadline);
+    }
+
     @Override
     public String getTaskTypeIcon() {
         return "D";
@@ -24,7 +29,7 @@ public class Deadline extends Task {
 
     @Override
     public String getFileFormat() {
-        return "D | " + getStatusIcon() + " | " + description + " | " + deadline + "\n";
+        return "D | " + getStatusIcon() + " | " + tag + " | " + description + " | " + deadline + "\n";
     }
 
     private String changeDateTimeFormat() {

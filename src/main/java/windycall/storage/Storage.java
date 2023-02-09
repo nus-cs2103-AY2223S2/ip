@@ -53,23 +53,53 @@ public class Storage {
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
                 if (data.charAt(0) == 'T') {
-                    String description = data.substring(8);
-                    Task task = new Todo(description, data.charAt(4) == 'X');
-                    tasks.add(task);
+                    if (data.charAt(9) == '|') {
+                        String description = data.substring(8);
+                        Task task = new Todo(description, data.charAt(4) == 'X');
+                        tasks.add(task);
+                    } else {
+                        int idx = data.indexOf("|", 7);
+                        String tag = data.substring(8, idx - 1);
+                        String description = data.substring(idx + 2);
+                        Task task = new Todo(description, data.charAt(4) == 'X', tag);
+                        tasks.add(task);
+                    }
                 } else if (data.charAt(0) == 'D') {
-                    int idx = data.indexOf("|", 8);
-                    String description = data.substring(8, idx - 1);
-                    String deadline = data.substring(idx + 2);
-                    Task task = new Deadline(description, data.charAt(4) == 'X', deadline);
-                    tasks.add(task);
+                    if (data.charAt(9) == '|') {
+                        int idx = data.indexOf("|", 8);
+                        String description = data.substring(8, idx - 1);
+                        String deadline = data.substring(idx + 2);
+                        Task task = new Deadline(description, data.charAt(4) == 'X', deadline);
+                        tasks.add(task);
+                    } else {
+                        int idx1 = data.indexOf("|", 7);
+                        int idx2 = data.indexOf("|", idx1 + 1);
+                        String description = data.substring(idx1 + 2, idx2 - 1);
+                        String deadline = data.substring(idx2 + 2);
+                        String tag = data.substring(8, idx1 - 1);
+                        Task task = new Deadline(description, data.charAt(4) == 'X', deadline, tag);
+                        tasks.add(task);
+                    }
                 } else {
-                    int idx1 = data.indexOf("|", 8);
-                    int idx2 = data.indexOf("|", idx1 + 1);
-                    String description = data.substring(8, idx1 - 1);
-                    String from = data.substring(idx1 + 2, idx2 - 1);
-                    String to = data.substring(idx2 + 2);
-                    Task task = new Event(description, data.charAt(4) == 'X', from, to);
-                    tasks.add(task);
+                    if (data.charAt(9) == '|') {
+                        int idx1 = data.indexOf("|", 8);
+                        int idx2 = data.indexOf("|", idx1 + 1);
+                        String description = data.substring(8, idx1 - 1);
+                        String from = data.substring(idx1 + 2, idx2 - 1);
+                        String to = data.substring(idx2 + 2);
+                        Task task = new Event(description, data.charAt(4) == 'X', from, to);
+                        tasks.add(task);
+                    } else {
+                        int idx1 = data.indexOf("|", 7);
+                        int idx2 = data.indexOf("|", idx1 + 1);
+                        int idx3 = data.indexOf("|", idx2 + 1);
+                        String description = data.substring(idx1 + 2, idx2 - 1);
+                        String from = data.substring(idx2 + 2, idx3 - 1);
+                        String to = data.substring(idx3 + 2);
+                        String tag = data.substring(8, idx1 - 1);
+                        Task task = new Event(description, data.charAt(4) == 'X', from, to, tag);
+                        tasks.add(task);
+                    }
                 }
             }
             myReader.close();

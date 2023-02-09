@@ -6,10 +6,17 @@ package windycall.task;
 public abstract class Task {
     protected String description;
     protected boolean isDone;
+    protected String tag = "";
 
-    public Task(String description, boolean status) {
+    public Task(String description, boolean isDone) {
         this.description = description;
-        this.isDone = status;
+        this.isDone = isDone;
+    }
+
+    public Task(String description, boolean isDone, String tag) {
+        this.description = description;
+        this.isDone = isDone;
+        this.tag = tag;
     }
 
     public boolean getStatus() {
@@ -43,8 +50,13 @@ public abstract class Task {
         return description.toLowerCase().indexOf(filterWord.toLowerCase()) != -1;
     }
 
+    public void changeTag(String tag) {
+        this.tag = tag;
+    }
+
 
     public String getCurrentDescription() {
-        return "[" + this.getStatusIcon() + "] " + this.description;
+        return "[" + this.getStatusIcon() + "]" + (tag.isEmpty() ? " " : "[#" + tag + "] ") +
+                this.description;
     }
 }
