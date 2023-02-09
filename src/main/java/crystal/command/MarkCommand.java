@@ -1,8 +1,9 @@
 package crystal.command;
 
+import crystal.Storage;
 import crystal.TaskList;
 import crystal.Ui;
-import crystal.Storage;
+
 
 /**
  * Represents the mark command when the user enters "mark".
@@ -10,7 +11,7 @@ import crystal.Storage;
  */
 
 public class MarkCommand extends Command {
-    public int num;
+    private int num;
 
     /**
      * Constructor for MarkCommand class.
@@ -32,7 +33,7 @@ public class MarkCommand extends Command {
      * @param storage storage.
      *
      */
-    public String execute(TaskList tasks, Ui ui,Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         storage.saveFile(tasks);
         return ui.printMark(tasks, this.num);
     }

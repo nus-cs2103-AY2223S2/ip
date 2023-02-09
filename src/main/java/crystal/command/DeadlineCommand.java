@@ -1,9 +1,9 @@
 package crystal.command;
 
 import crystal.CrystalException;
+import crystal.Storage;
 import crystal.TaskList;
 import crystal.Ui;
-import crystal.Storage;
 import crystal.task.Deadline;
 
 /**
@@ -11,9 +11,9 @@ import crystal.task.Deadline;
  *
  */
 
-public class DeadlineCommand extends Command{
-    public String by;
-    public String description;
+public class DeadlineCommand extends Command {
+    private String by;
+    private String description;
 
     /**
      * Constructor for DeadlineCommand class.

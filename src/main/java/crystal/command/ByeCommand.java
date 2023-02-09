@@ -1,8 +1,9 @@
 package crystal.command;
 
+import crystal.Storage;
 import crystal.TaskList;
 import crystal.Ui;
-import crystal.Storage;
+
 
 /**
  * Represents the bye command when the user enters "bye".

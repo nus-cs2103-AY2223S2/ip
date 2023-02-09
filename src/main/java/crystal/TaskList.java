@@ -1,8 +1,10 @@
 package crystal;
 
+import java.util.ArrayList;
+
 import crystal.task.Task;
 
-import java.util.ArrayList;
+
 
 /**
  * Represents the TaskList class.
@@ -10,7 +12,7 @@ import java.util.ArrayList;
  */
 public class TaskList {
 
-    public ArrayList<Task> arr;
+    private ArrayList<Task> arr;
 
     /**
      * Constructor for TaskList
@@ -18,7 +20,7 @@ public class TaskList {
      * @throws CrystalException When the date format is incorrect
      *
      */
-    public TaskList(ArrayList<Task> arr) throws CrystalException{
+    public TaskList(ArrayList<Task> arr) throws CrystalException {
         this.arr = arr;
     }
 

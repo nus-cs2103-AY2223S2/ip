@@ -1,16 +1,17 @@
 package crystal.command;
 
+import crystal.Storage;
 import crystal.TaskList;
 import crystal.Ui;
-import crystal.Storage;
+
 
 /**
  * Represents the delete command when the user enters "delete".
  *
  */
-public class DeleteCommand extends Command{
+public class DeleteCommand extends Command {
 
-    public int num;
+    private int num;
 
     /**
      * Constructor for DeleteCommand class.
@@ -30,7 +31,7 @@ public class DeleteCommand extends Command{
      * @param storage storage.
      *
      */
-    public String execute(TaskList tasks, Ui ui,Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         storage.saveFile(tasks);
         return ui.printDelete(tasks, this.num);
     }

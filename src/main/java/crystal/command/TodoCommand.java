@@ -1,18 +1,18 @@
 package crystal.command;
 
+import crystal.Storage;
 import crystal.TaskList;
 import crystal.Ui;
-import crystal.Storage;
 import crystal.task.Todo;
 
 /**
  * Represents the todo command when the user enters "todo".
  *
  */
-public class TodoCommand extends Command{
+public class TodoCommand extends Command {
 
 
-    public String task;
+    private String task;
 
     /**
      * Constructor for TodoCommand class.
@@ -32,7 +32,7 @@ public class TodoCommand extends Command{
      * @param storage storage.
      *
      */
-    public String execute(TaskList tasks, Ui ui,Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         Todo todo = new Todo(task);
         tasks.add(todo);
         storage.saveFile(tasks);
