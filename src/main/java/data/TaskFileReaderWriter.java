@@ -117,8 +117,8 @@ public class TaskFileReaderWriter {
                 } else if (task instanceof Event) {
                     Event eventTask = (Event) task;
                     details = eventTask.getDetails();
-                    String start = eventTask.getStart();
-                    String end = eventTask.getEnd();
+                    String start = eventTask.getStartString();
+                    String end = eventTask.getEndString();
                     isCompleted = eventTask.isCompleted();
                     taskString = "Event|" + isCompleted + "|" + details + "|" + start + "|" + end;
 
