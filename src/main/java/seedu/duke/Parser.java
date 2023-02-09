@@ -27,12 +27,12 @@ public class Parser {
             int index = Integer.valueOf(echoSplit[1]) - 1;
             assert index > 0 : "index should not be less than 0";
             tasks.mark(index);
-            return "Marked " + index;
+            return "Marked " + (index + 1);
         } else if (echoSplit[0].equals("unmark")) {
             int index = Integer.valueOf(echoSplit[1]) - 1;
             assert index > 0 : "index should not be less than 0";
             tasks.unmark(index);
-            return "Unmarked " + index;
+            return "Unmarked " + (index+1);
         } else {
 
             if (echoSplit[0].equals("todo")) {

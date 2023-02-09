@@ -91,33 +91,43 @@ public class TaskList {
      */
     public void addEvent(String[] echoSplit, int print){
         String task = "";
-        int fromI = 0;
-        int toI = 0;
-        String from = "";
-        String to = "";
+        branch-A-CodeQuality
+        int fromIndex = 0;
+        int toIndex = 0;
+        String fromDate = "";
+        String toDate = "";
         assert echoSplit.length > 0 : "task length should not be less than 0";
 
+      
+        
+
+
         for (int i = 1; i < echoSplit.length; i++) {
+            boolean isFromWord = echoSplit[i].equals("/from") || echoSplit[i].equals("from:");
+            boolean isToWord = echoSplit[i].equals("/to") || echoSplit[i].equals("to:");
 
-            if(echoSplit[i].equals("/from") || echoSplit[i].equals("from:")) {
-                fromI = i;
+            if(isFromWord) {
+                fromIndex = i;
             }
-            if(echoSplit[i].equals("/to") || echoSplit[i].equals("to:")) {
-                toI = i;
 
-                for (int j = fromI + 1; j < toI; j++) {
-                    if(j == toI - 1)
-                        from += echoSplit[j];
-                    else
-                        from += echoSplit[j]+ " ";
+            if(isToWord) {
+                toIndex = i;
+
+                for (int j = fromIndex + 1; j < toIndex; j++) {
+                    if(j == toIndex - 1) {
+                        fromDate += echoSplit[j];
+                    } else {
+                        fromDate += echoSplit[j] + " ";
+                    }
                 }
-                for (int j = toI + 1; j < echoSplit.length; j++) {
-                    if(j == echoSplit.length - 1)
-                        to += echoSplit[j];
-                    else
-                        to += echoSplit[j] + " ";
+                for (int j = toIndex + 1; j < echoSplit.length; j++) {
+                    if(j == echoSplit.length - 1) {
+                        toDate += echoSplit[j];
+                    } else {
+                        toDate += echoSplit[j] + " ";
+                    }
                 }
-                for (int j = 1; j < fromI; j++) {
+                for (int j = 1; j < fromIndex; j++) {
                     task += echoSplit[j] + " ";
                 }
                 break;
@@ -125,7 +135,7 @@ public class TaskList {
 
 
         }
-        list.add(new Event(task, from, to));
+        list.add(new Event(task, fromDate, toDate));
         if(print == 0)
             System.out.println("    -------------------------------------------\n    "
                     + "added: " + task
@@ -143,19 +153,22 @@ public class TaskList {
         String date = "";
 
         for (int i = 1; i < echoSplit.length; i++) {
-            if(echoSplit[i].equals("/by") || echoSplit[i].equals("by:")){
+            boolean isByWord = echoSplit[i].equals("/by") || echoSplit[i].equals("by:");
+            if(isByWord){
 
                 for (int j = 1; j < i; j++) {
-                    if(j == i-1)
+                    if(j == i-1) {
                         task += echoSplit[j];
-                    else
+                    } else {
                         task += echoSplit[j] + " ";
+                    }
                 }
                 for (int j = i + 1; j < echoSplit.length; j++) {
-                    if(j == echoSplit.length - 1)
+                    if(j == echoSplit.length - 1) {
                         date += echoSplit[j];
-                    else
+                    } else {
                         date += echoSplit[j] + " ";
+                    }
                 }
 
                 list.add(new Deadline(task, date));

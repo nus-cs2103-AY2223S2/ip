@@ -1,4 +1,4 @@
-[ T ][ Y ] Bench Press WR 
-[ D ][ Y ] Squat car by: 2023-02-03 
-[ T ][ Y ] Drink Protein Shake 
+[ T ][ Y ] eat 
+[ E ][ N ] eat from: 2018-01-01 to: 2019-01-01
+[ D ][ Y ] eat by: 2018-01-01 
 [ T ][ N ] eat 
