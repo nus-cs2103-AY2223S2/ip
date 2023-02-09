@@ -1,16 +1,19 @@
 package duke.parser;
 
+/**
+ * A class that encapsulates all the error messages.
+ */
 public class ErrorMessage {
 
     // Errors related to task description
     public static final String EMPTY_DEADLINE_ERROR = "OOPS!!! The description of a deadline task cannot be empty.";
     public static final String EMPTY_EVENT_ERROR = "OOPS!!! The description of an event task cannot be empty.";
     public static final String EMPTY_TODO_ERROR = "OOPS!!! The description of a todo task cannot be empty.";
-    public static final String EMPTY_FIXED_DURATION_DESCRIPTION_ERROR = "OOPS!!! The description of " +
-            "a fixed duration task cannot be empty.";
+    public static final String EMPTY_FIXED_DURATION_DESCRIPTION_ERROR = "OOPS!!! The description of "
+            + "a fixed duration task cannot be empty.";
     public static final String INVALID_DESCRIPTION_ERROR = "OOPS!!! The description cannot be empty.";
-    public static final String INVALID_HELP_COMMAND_ERROR = "OOPS!!! Unrecognized help Command.\nPlease try:\n" +
-            "- help\n- help date\n- help time";
+    public static final String INVALID_HELP_COMMAND_ERROR = "OOPS!!! Unrecognized help Command.\nPlease try:\n"
+            + "- help\n- help date\n- help time";
 
     // Errors related to task index
     public static final String INVALID_INDEX_ERROR = "OOPS!!! The input index is not within the range of [1, %d]. "
@@ -29,14 +32,17 @@ public class ErrorMessage {
             + "correct format. Example: deadline Assignment 1 /by 15/01/2023 1500";
     public static final String INVALID_EVENT_FORMAT_ERROR = "OOPS!!! Please input the event task in the "
             + "correct format. Example: event Team Meeting /from 16/01/2023 1500 /to 16/01/2023 1900";
-    public static final String INVALID_FIXED_DURATION_FORMAT_ERROR = "OOPS!!! Please input the fixed duration task in the "
-            + "correct format. Example: fixed Time Practice /within 200";
+    public static final String INVALID_FIXED_DURATION_FORMAT_ERROR = "OOPS!!! Please input the fixed duration "
+            + "task in the correct format. Example: fixed Time Practice /within PT15M";
     public static final String INVALID_FROM_AND_TO_ERROR = "OOPS!!! Start date can not be after than the End date";
+
+    // Storage errors
+    public static final String INVALID_TYPE_ERROR = "Type tag of event should be [T], [D], or [E]";
+    public static final String INVALID_STATUS_ERROR = "IsDone tag of event should be [ ], or [X]";
 
     // Other errors
     public static final String ADD_MORE_TASKS = "\nPlease add in more tasks";
     public static final String EMPTY_ERROR = "OOPS!!! The instruction cannot be empty";
-    public static final String NO_COMMAND_ERROR_MESSAGE = "No previous commands to undo.";
     public static final String STORAGE_ERROR = "OOPS!!! There's something wrong when reading the storage list";
     public static final String TASK_LIST_EMPTY_ERROR = "OOPS!!! Your task list is currently empty";
     public static final String UNRECOGNIZED_ERROR = "OOPS!!! I'm sorry, but I don't know what that means :-( "

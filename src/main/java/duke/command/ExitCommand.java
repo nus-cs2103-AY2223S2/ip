@@ -9,7 +9,8 @@ import duke.ui.Ui;
  */
 
 public class ExitCommand extends Command {
-    private final static String GOODBYE_MESSAGE = "Bye. Hope to see you again soon!";
+    private static final String GOODBYE_MESSAGE = "Bye. Hope to see you again soon!";
+
     /**
      * Displays the goodbye message and terminate the program.
      *
@@ -22,7 +23,6 @@ public class ExitCommand extends Command {
         // Send goodbye message to the user interface
         ui.appendResponse(GOODBYE_MESSAGE);
     }
-
 
     /**
      * Indicates that this Command is the exit Command.

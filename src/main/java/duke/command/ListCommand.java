@@ -9,8 +9,9 @@ import duke.ui.Ui;
  */
 
 public class ListCommand extends Command {
-    private final static String NO_TASKS_MESSAGE = "There are no tasks in your list.";
-    private final static String TASK_LIST_MESSAGE = "Here are the tasks in your list:\n";
+    private static final String NO_TASKS_MESSAGE = "There are no tasks in your list.";
+    private static final String TASK_LIST_MESSAGE = "Here are the tasks in your list:\n";
+
     /**
      * Displays all the tasks with their respective types and status.
      *

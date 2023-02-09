@@ -1,31 +1,34 @@
 package duke.parser;
 
-import duke.exception.InvalidInputException;
-
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import duke.exception.InvalidInputException;
+
+/**
+ * A TimeHandler class that encapsulates all the methods that related to handling the time related string.
+ */
 public class TimeHandler {
     //@@author Yufannn-reused
     //Reused from https://github.com/RussellDash332/ip/blob/master/src/main/java/stashy/parser/Parser.java
     //with minor modification, it is a pretty good way to organise and extend the acceptable date format.
-    private final static String[] ACCEPTABLE_DATETIME_FORMATS = {
-            "MMM dd yyyy HHmm", "MMM dd yyyy HH:mm",
-            "yyyy-MM-dd'T'HH:mm", "dd/MM/yyyy HHmm",
-            "dd/MM/yyyy HH:mm", "yyyy/MM/dd HHmm",
-            "yyyy/MM/dd HH:mm", "yyyy/MM/dd'T'HHmm",
-            "yyyy/MM/dd'T'HH:mm", "yyyy-MM-dd HHmm",
-            "yyyy-MM-dd HH:mm", "dd MMM yyyy HHmm",
-            "dd MMM yyyy HH:mm", "MMM dd, yyyy HHmm",
-            "MMM dd, yyyy HH:mm", "dd-mm-yyyy HHmm"
+    private static final String[] ACCEPTABLE_DATETIME_FORMATS = {
+        "MMM dd yyyy HHmm", "MMM dd yyyy HH:mm",
+        "yyyy-MM-dd'T'HH:mm", "dd/MM/yyyy HHmm",
+        "dd/MM/yyyy HH:mm", "yyyy/MM/dd HHmm",
+        "yyyy/MM/dd HH:mm", "yyyy/MM/dd'T'HHmm",
+        "yyyy/MM/dd'T'HH:mm", "yyyy-MM-dd HHmm",
+        "yyyy-MM-dd HH:mm", "dd MMM yyyy HHmm",
+        "dd MMM yyyy HH:mm", "MMM dd, yyyy HHmm",
+        "MMM dd, yyyy HH:mm", "dd-mm-yyyy HHmm"
     };
     //@@author
 
-    private final static String[] ACCEPTABLE_DATE_FORMATS = {
-            "MMM dd yyyy", "yyyy-MM-dd", "dd/MM/yyyy", "yyyy/MM/dd",
-            "dd MMM yyyy", "MMM dd, yyyy", "dd-mm-yyyy"
+    private static final String[] ACCEPTABLE_DATE_FORMATS = {
+        "MMM dd yyyy", "yyyy-MM-dd", "dd/MM/yyyy", "yyyy/MM/dd",
+        "dd MMM yyyy", "MMM dd, yyyy", "dd-mm-yyyy"
     };
 
     //@@author Yufannnn-reused
@@ -54,9 +57,8 @@ public class TimeHandler {
         throw new InvalidInputException(ErrorMessage.INVALID_DATE_ERROR);
     }
 
-
     /**
-     * Parsess a string to a LocalDateTime object using the acceptable date time formats defined
+     * Parses a string to a LocalDateTime object using the acceptable date time formats defined
      * in {@link #ACCEPTABLE_DATETIME_FORMATS}.
      *
      * @param date The date string to be parsed
@@ -91,6 +93,5 @@ public class TimeHandler {
                 .replaceAll("(\\d[HMS])(?!$)", "$1 ")
                 .toLowerCase();
     }
-
     //@@author
 }

@@ -4,18 +4,23 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * A DeadlineTask that encapsulates the information and starting and ending
+ * dates of a Deadline Task.
+ */
 public class DeadlineTask extends DukeTask {
     /**
      * The deadline date and time of the task
      */
-    public final LocalDateTime deadline;
     private static final String STORAGE_FORMAT = "[D] | %s | %s | %s";
     private static final String FORMAT = "[D]%s %s ( by: %s )";
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
+    public final LocalDateTime deadline;
 
     /**
      * Constructor for DeadlineTask that takes in the information of the task and its Deadline.
      *
-     * @param info     The information of the task
+     * @param info The information of the task
      * @param deadline The deadline of the task
      */
     public DeadlineTask(String info, LocalDateTime deadline) {
@@ -34,7 +39,6 @@ public class DeadlineTask extends DukeTask {
         LocalDate deadlineDate = this.deadline.toLocalDate();
         return date.isEqual(deadlineDate);
     }
-
 
     /**
      * Returns the deadline date and time of the task.
@@ -56,19 +60,18 @@ public class DeadlineTask extends DukeTask {
         // Format the task status, task information, and deadline into a single string
         String isCompleted = this.getStatus() ? "[X]" : "[ ]";
         return String.format(STORAGE_FORMAT, isCompleted, this.getInformation().trim(),
-                this.deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm")));
+                this.deadline.format(formatter));
     }
 
     /**
-     * Returns a string representation of the task in a specific format, indicating the task type, whether the task is
-     * done or not, the information of the task and the deadline.
+     * Returns a string representation of the task in a specific format,
+     * indicating the task type, whether the task is done or not, the information of the task and the deadline.
      *
      * @return A string representation of the task
      */
     @Override
     public String toString() {
         String status = this.getStatus() ? "[X]" : "[ ]";
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
-        return String.format(FORMAT, status ,this.getInformation(), this.deadline.format(formatter));
+        return String.format(FORMAT, status, this.getInformation(), this.deadline.format(formatter));
     }
 }

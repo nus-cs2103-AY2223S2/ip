@@ -1,5 +1,7 @@
 package duke.storage;
 
+import java.time.Duration;
+
 import duke.exception.InvalidInputException;
 import duke.parser.TimeHandler;
 import duke.task.DeadlineTask;
@@ -7,8 +9,6 @@ import duke.task.EventTask;
 import duke.task.FixedDurationTask;
 import duke.task.TaskList;
 import duke.task.TodoTask;
-
-import java.time.Duration;
 
 /**
  * The Decoder class is responsible for decoding the information provided in the storage file and creating the
@@ -85,7 +85,8 @@ public class Decoder {
     }
 
     /**
-     * Decodes the given description, done status, and duration into a FixedDurationTask and adds it to the given TaskList.
+     * Decodes the given description, done status, and duration into a FixedDurationTask
+     * and adds it to the given TaskList.
      *
      * @param list the TaskList to add the FixedDurationTask to
      * @param description the description of the FixedDurationTask
@@ -105,5 +106,4 @@ public class Decoder {
         // Add the FixedDurationTask to the given TaskList
         list.addTask(fixedDuration);
     }
-
 }

@@ -13,8 +13,9 @@ import duke.ui.Ui;
  */
 
 public class DeleteCommand extends Command {
+    private static final String TASK_REMOVED_MESSAGE = "Noted. I've removed this task:\n %s \n"
+            + "Now you have %d tasks in the list.";
     private final int taskIndex;
-    private final static String TASK_REMOVED_MESSAGE = "Noted. I've removed this task:\n %s \nNow you have %d tasks in the list.";
 
     /**
      * Constructor for DeleteCommand that takes in the index of the task to be deleted.

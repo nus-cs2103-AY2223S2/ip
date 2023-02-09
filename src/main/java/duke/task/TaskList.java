@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 /**
  * A TaskList class that encapsulates the information and actions of a task list.
  */
-public class TaskList implements Cloneable {
+public class TaskList {
     private ArrayList<DukeTask> tasks;
 
     /**
@@ -18,8 +18,7 @@ public class TaskList implements Cloneable {
         this.tasks = new ArrayList<>();
     }
 
-
-     /**
+    /**
      * Constructs a TaskList object with the given ArrayList of DukeTask.
      *
      * @param list ArrayList of DukeTask
@@ -29,7 +28,8 @@ public class TaskList implements Cloneable {
     }
 
     /**
-     * Constructs a TaskList object by copying the values from an existing TaskList object
+     * Constructs a TaskList object by copying the values from an existing TaskList object.
+     *
      * @param other the existing TaskList object
      */
     public TaskList(TaskList other) {
@@ -51,7 +51,6 @@ public class TaskList implements Cloneable {
      * @param taskIndex The index of the task to be removed
      * @return The task that was removed
      */
-
     public DukeTask deleteTask(int taskIndex) {
         DukeTask taskToDelete = tasks.get(taskIndex);
         this.tasks.remove(taskIndex);
@@ -130,15 +129,16 @@ public class TaskList implements Cloneable {
                 // collect the sorted tasks into a list
                 .collect(Collectors.toList());
 
-        // return a new tasklist containing the filtered and sorted tasks
+        // return a new taskList containing the filtered and sorted tasks
         return new TaskList(new ArrayList<>(result));
     }
 
     /**
-     * Categorizes the tasks in the task list into four different task lists: deadline, event, fixed duration, and to-do.
+     * Categorizes the tasks in the task list into four different task lists: deadline, event,
+     * fixed duration, and to-do.
      *
-     * @return an array of task lists containing the categorized tasks. The order of the task lists in the array is
-     * [deadline, event, fixed duration, to-do].
+     * @return an array of task lists containing the categorized tasks. The order of the task lists in the array
+     *      is [deadline, event, fixed duration, to-do].
      */
     public TaskList[] categorizeTask() {
         TaskList[] listOfLists = new TaskList[4];
@@ -155,7 +155,7 @@ public class TaskList implements Cloneable {
                 // Add task to deadline list if it is a deadline task
                 deadlineList.addTask(task);
             } else if (task.getType() == TaskType.EVENT) {
-                // Add task to event list if it is an event task
+                // Add task to eventList if it is an event task
                 eventList.addTask(task);
             } else if (task.getType() == TaskType.FIXED_DURATION) {
                 // Add task to fixed duration list if it is a fixed duration task
@@ -191,16 +191,5 @@ public class TaskList implements Cloneable {
         }
         // Return the final string representation of the task list
         return String.valueOf(listContent);
-    }
-
-    @Override
-    public TaskList clone() {
-        try {
-            TaskList clone = (TaskList) super.clone();
-            // TODO: copy mutable state here, so the clone can't change the internals of the original
-            return clone;
-        } catch (CloneNotSupportedException e) {
-            throw new AssertionError();
-        }
     }
 }

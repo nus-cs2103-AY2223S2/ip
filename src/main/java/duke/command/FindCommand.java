@@ -10,9 +10,9 @@ import duke.ui.Ui;
  * description.
  */
 public class FindCommand extends Command {
+    private static final String MATCHING_TASKS_MESSAGE = "Here are the tasks matching \"%s\" :\n";
+    private static final String NO_MATCHING_TASKS_MESSAGE = "No tasks matching \"%s\" were found.\n";
     private final String[] descriptions;
-    private final static String MATCHING_TASKS_MESSAGE = "Here are the tasks matching \"%s\" :\n";
-    private final static String NO_MATCHING_TASKS_MESSAGE = "No tasks matching \"%s\" were found.\n";
 
     /**
      * The constructor of FinaCommand that takes in the description of the tasks to be found.
@@ -59,7 +59,6 @@ public class FindCommand extends Command {
         }
         return matchedTaskList;
     }
-
 
     /**
      * Gets the message for matched tasks.

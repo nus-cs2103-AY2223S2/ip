@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import org.junit.jupiter.api.Test;
+
+import duke.command.Command;
 import duke.command.ExitCommand;
 import duke.command.FindFreeTimeCommand;
 import duke.command.HelpCommand;
@@ -11,9 +14,6 @@ import duke.command.ListCommand;
 import duke.command.MassDeleteCommand;
 import duke.command.ReminderCommand;
 import duke.command.SortCommand;
-import org.junit.jupiter.api.Test;
-
-import duke.command.Command;
 import duke.exception.DukeException;
 
 class ParserTest {
@@ -74,7 +74,8 @@ class ParserTest {
             Command command = Parser.parse(input);
             fail("Expected InvalidInputException to be thrown.");
         } catch (DukeException e) {
-            assertEquals(ErrorMessage.UNRECOGNIZED_ERROR, e.getMessage());
+            assertEquals("There is something wrong with the input ...\n"
+                    + ErrorMessage.UNRECOGNIZED_ERROR, e.getMessage());
         }
 
     }
@@ -86,7 +87,8 @@ class ParserTest {
             Command command = Parser.parse(input);
             fail("Expected InvalidInputException to be thrown.");
         } catch (DukeException e) {
-            assertEquals(ErrorMessage.EMPTY_ERROR, e.getMessage());
+            assertEquals("There is something wrong with the input ...\n"
+                    + ErrorMessage.EMPTY_ERROR, e.getMessage());
         }
     }
 }

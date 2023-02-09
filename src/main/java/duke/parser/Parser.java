@@ -16,7 +16,9 @@ import duke.exception.InvalidInputException;
 * A parser that parse the input String into a Duke Instruction with respective information encapsulated.
 */
 public class Parser {
-
+    /**
+     * An Instruction enum that encapsulates all types of Instruction.
+     */
     public enum Instruction {
         BYE,
         LIST,
@@ -47,8 +49,8 @@ public class Parser {
      */
     public static Command parse(String input) throws DukeException {
         Matcher instructionExtractor = extractInstructionAndInformation(input);
-        String instructionTag = instructionExtractor.group("instructionTag").strip();
-        String information = instructionExtractor.group("information").strip();
+        String instructionTag = instructionExtractor.group("instructionTag").trim();
+        String information = instructionExtractor.group("information").trim();
 
         Instruction instruction = matchInstructionTag(instructionTag);
         return createCommand(instruction, information);
@@ -97,12 +99,14 @@ public class Parser {
 
     /**
      * Creates a command based on the instruction and the information provided.
+     *
      * @param instruction The instruction to be executed by the command.
      * @param information The information needed by the command to execute the instruction.
      * @return A command that can execute the instruction with the given information.
      * @throws InvalidInputException If the instruction or the information is invalid.
      */
-    private static Command createCommand(Instruction instruction, String information) throws InvalidInputException {
+    private static Command createCommand(Instruction instruction, String information)
+            throws InvalidInputException {
         switch (instruction) {
         case BYE:
             //create and return ExitCommand
@@ -155,8 +159,8 @@ public class Parser {
         case UPDATE:
             //create and return command to update item using updateDecoder in Decipherer
             return Decipherer.parseUpdateCommand(information);
+        default:
+            throw new InvalidInputException(ErrorMessage.UNRECOGNIZED_ERROR);
         }
-        //if no case matched, return null
-        return null;
     }
 }

@@ -1,5 +1,8 @@
 package duke.storage;
 
+import static duke.parser.ErrorMessage.INVALID_STATUS_ERROR;
+import static duke.parser.ErrorMessage.INVALID_TYPE_ERROR;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -17,6 +20,8 @@ import duke.parser.ErrorMessage;
 import duke.task.DukeTask;
 import duke.task.TaskList;
 
+
+
 /**
  * A Storage object that handles the saving and loading of the TaskList.
  * Writes the TaskList in an external file whenever it is updated. Load the existing
@@ -24,15 +29,15 @@ import duke.task.TaskList;
  */
 
 public class Storage {
+    private static final String TODO_TAG = "[T]";
+    private static final String DEADLINE_TAG = "[D]";
+    private static final String EVENT_TAG = "[E]";
+    private static final String FIXED_DURATION_TAG = "[F]";
+    private static final String IS_DONE_TAG = "[X]";
+    private static final String NOT_DONE_TAG = "[ ]";
     private final String filePath;
     private final Path folder;
     private final File storageFile;
-    private final String TODO_TAG = "[T]";
-    private final String DEADLINE_TAG = "[D]";
-    private final String EVENT_TAG = "[E]";
-    private final String FIXED_DURATION_TAG = "[F]";
-    private final String IS_DONE_TAG = "[X]";
-    private final String NOT_DONE_TAG = "[ ]";
 
     /**
      * Constructor of that takes a path of the file and specify the file for
@@ -121,32 +126,32 @@ public class Storage {
      * @throws InvalidInputException if the input is invalid
      */
     private void processLine(TaskList list, String line) throws InvalidInputException {
-        String[] information = line.split("\\s\\|\\s");
+        String[] informationList = line.split("\\s\\|\\s");
 
-        String taskTag = information[0];
-        boolean isDone = information[1].equals(IS_DONE_TAG);
-        storageFormatChecker(information[0], information[1]);
+        String taskTag = informationList[0];
+        boolean isDone = informationList[1].equals(IS_DONE_TAG);
+        storageFormatChecker(informationList[0], informationList[1]);
 
         // Decode the task information based on the task tag
         switch (taskTag) {
-            case TODO_TAG:
-                // Decode the to-do task information
-                Decoder.decodeTodo(list, information[2], isDone);
-                break;
-            case DEADLINE_TAG:
-                // Decode the deadline task information
-                Decoder.decodeDeadline(list, information[2], isDone, information[3]);
-                break;
-            case EVENT_TAG:
-                // Decode the event task information
-                Decoder.decodeEvent(list, information[2], isDone, information[3], information[4]);
-                break;
-            case FIXED_DURATION_TAG:
-                Decoder.decodeFixedDuration(list, information[2], isDone, information[3]);
-                break;
-            default:
-                // Throw an exception if the task tag is not recognized
-                throw new InvalidInputException("Unrecognized task tag: " + taskTag);
+        case TODO_TAG:
+            // Decode the to-do task information
+            Decoder.decodeTodo(list, informationList[2], isDone);
+            break;
+        case DEADLINE_TAG:
+            // Decode the deadline task information
+            Decoder.decodeDeadline(list, informationList[2], isDone, informationList[3]);
+            break;
+        case EVENT_TAG:
+            // Decode the event task information
+            Decoder.decodeEvent(list, informationList[2], isDone, informationList[3], informationList[4]);
+            break;
+        case FIXED_DURATION_TAG:
+            Decoder.decodeFixedDuration(list, informationList[2], isDone, informationList[3]);
+            break;
+        default:
+            // Throw an exception if the task tag is not recognized
+            throw new InvalidInputException("Unrecognized task tag: " + taskTag);
         }
     }
 
@@ -158,15 +163,14 @@ public class Storage {
      */
     private void storageFormatChecker(String tag, String isDone) {
         // Type tag of event should be [T], [D], or [E]
-        String errorMessage = "Type tag of event should be [T], [D], or [E]";
+
         assert Objects.equals(tag, TODO_TAG) || Objects.equals(tag, DEADLINE_TAG)
                 || Objects.equals(tag, EVENT_TAG) || Objects.equals(tag, FIXED_DURATION_TAG)
-                : errorMessage;
+                : INVALID_TYPE_ERROR;
 
         // IsDone tag of event should be [ ], or [X]
-        errorMessage = "IsDone tag of event should be [ ], or [X]";
         assert Objects.equals(isDone, IS_DONE_TAG) || Objects.equals(isDone, NOT_DONE_TAG)
-                : errorMessage;
+                : INVALID_STATUS_ERROR;
     }
 
     //@@author Yufannnn-reused
@@ -187,7 +191,8 @@ public class Storage {
      * If the parent folder of the file does not exist, it will be created.
      *
      * @param taskList The task list to be saved.
-     * @throws StorageFileException Throws StorageFileException when encountering an IOException when writing to the file
+     * @throws StorageFileException Throws StorageFileException when encountering an
+     *      IOException when writing to the file.
      */
     public void saveTaskList(TaskList taskList) throws StorageFileException {
         // Create parent folder if it does not exist

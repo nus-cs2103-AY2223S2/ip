@@ -12,10 +12,9 @@ import duke.ui.Ui;
  * A UnmarkCommand class that encapsulates the actions of changing the status
  * of a Task to be not done.
  */
-
 public class UnmarkCommand extends Command {
-    private final int taskIndex;
     private static final String UNMARKED_TASK_MESSAGE = "OK, I've marked this task as not done yet:\n ";
+    private final int taskIndex;
 
     /**
      * Constructor of UnmarkCommand that takes in the index of the task to unmarked.

@@ -7,11 +7,11 @@ import java.time.LocalDate;
  * by more specific tasks like Events, toDos, etc.
  */
 public abstract class DukeTask {
+    private static final String DONE_FLAG = "[X] ";
+    private static final String UNDONE_FLAG = "[ ] ";
     private String information;
     private final TaskType type;
     private boolean isDone;
-    private final String DONE_FLAG = "[X] ";
-    private final String UNDONE_FLAG = "[ ] ";
 
     /**
      * Constructor for DukeTask that takes in the information of the task and its type.
@@ -106,7 +106,6 @@ public abstract class DukeTask {
      */
     @Override
     public String toString() {
-        return (getStatus() ?
-                DONE_FLAG : UNDONE_FLAG) + getInformation();
+        return (getStatus() ? DONE_FLAG : UNDONE_FLAG) + getInformation();
     }
 }

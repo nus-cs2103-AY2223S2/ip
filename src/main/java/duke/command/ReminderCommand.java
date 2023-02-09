@@ -4,7 +4,11 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
-public class ReminderCommand extends Command{
+/**
+ * A ReminderCommand class the encapsulates the action of displaying
+ * all the upcoming deadline task and event tasks.
+ */
+public class ReminderCommand extends Command {
     private static final String REMINDER_MESSAGE = "Here are the upcoming deadlines:\n";
 
     /**

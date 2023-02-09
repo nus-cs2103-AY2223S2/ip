@@ -1,48 +1,50 @@
 package duke.task;
 
-import duke.exception.InvalidInputException;
-import duke.parser.ErrorMessage;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Objects;
+
+import duke.exception.InvalidInputException;
+import duke.parser.ErrorMessage;
 
 /**
- * A DeadlineTask that encapsulates the information and starting and ending
- * dates of a Deadline Task.
+ * An Event that encapsulates the information and starting and ending times of an EventTask.
  */
 public class EventTask extends DukeTask {
-    private final LocalDateTime from;
-    private final LocalDateTime to;
     private static final String STORAGE_FORMAT = "[E] | %s %s | %s | %s";
-    private static final String FORMAT = "[E]%s %s ( from: %s to: %s )";
+    private static final String PRINT_FORMAT = "[E]%s %s ( from: %s to: %s )";
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
+    private final LocalDateTime startTime;
+    private final LocalDateTime endTime;
 
     /**
      * Constructor for EventTask that takes in the information of the task
      * and its starting date and ending date.
      *
-     * @param info The information of the task
-     * @param from The starting date of the task
-     * @param to   The ending date of the task
+     * @param information The information of the task
+     * @param startTime The starting date of the task
+     * @param endTime   The ending date of the task
      * @throws InvalidInputException Throws exception when the staring date is after the end date
      */
-    public EventTask(String info, LocalDateTime from, LocalDateTime to) throws InvalidInputException {
-        super(info, TaskType.EVENT);
-        this.from = from;
-        this.to = to;
-        if (from.isAfter(to)) {
+    public EventTask(String information, LocalDateTime startTime, LocalDateTime endTime)
+            throws InvalidInputException {
+        super(information, TaskType.EVENT);
+
+        this.startTime = startTime;
+        this.endTime = endTime;
+
+        if (startTime.isAfter(endTime)) {
             throw new InvalidInputException(ErrorMessage.INVALID_FROM_AND_TO_ERROR);
         }
     }
 
     /**
-     * Returns the starting date of the task
+     * Returns the starting date of the task.
      *
      * @return the starting date of the task
      */
     public LocalDateTime getStartDate() {
-        return this.from;
+        return this.startTime;
     }
 
     /**
@@ -51,7 +53,7 @@ public class EventTask extends DukeTask {
      * @return the ending date of the task
      */
     public LocalDateTime getEndDate() {
-        return this.to;
+        return this.endTime;
     }
 
     /**
@@ -62,20 +64,22 @@ public class EventTask extends DukeTask {
      */
     @Override
     public String storageString() {
-        String status = this.getStatus() ? "[X] | " : "[ ] | ";
-        return String.format(STORAGE_FORMAT, status, this.getInformation().trim(), this.from, this.to);
+        String isComplete = this.getStatus() ? "[X] | " : "[ ] | ";
+        return String.format(STORAGE_FORMAT, isComplete,
+                this.getInformation().trim(), this.startTime, this.endTime);
     }
 
     /**
-     * Returns true if the given date is equal to the start date or end date of the task or between start and end date.
+     * Returns true if the given date is equal endTime the start date
+     * or end date of the task or between start and end date.
      *
-     * @param date The date to check
-     * @return true if the date is equal to the start date or end date of the task or between start and end date.
+     * @param date The date endTime check
+     * @return true if the date is equal endTime the start date or end date of the task or between start and end date.
      */
     @Override
     public boolean matchesDate(LocalDate date) {
-        LocalDate fromDate = this.from.toLocalDate();
-        LocalDate toDate = this.to.toLocalDate();
+        LocalDate fromDate = this.startTime.toLocalDate();
+        LocalDate toDate = this.endTime.toLocalDate();
         return date.isEqual(fromDate) || date.isEqual(toDate)
                 || (date.isAfter(fromDate) && date.isBefore(toDate));
     }
@@ -89,38 +93,29 @@ public class EventTask extends DukeTask {
     @Override
     public String toString() {
         String status = this.getStatus() ? "[X]" : "[ ]";
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
-        return String.format(FORMAT, status,
-                this.getInformation(), this.from.format(formatter), this.to.format(formatter));
+        return String.format(PRINT_FORMAT, status,
+                this.getInformation(), this.startTime.format(formatter), this.endTime.format(formatter));
     }
 
     /**
-     * Returns true if the given object is equal to this EventTask.
+     * Returns true if the given object is equal endTime this EventTask.
      * Two EventTasks are considered equal if they have the same information, start date, and end date.
      *
-     * @param obj The object to compare to this EventTask
-     * @return true if the given object is equal to this EventTask
+     * @param obj The object endTime compare endTime this EventTask
+     * @return true if the given object is equal endTime this EventTask
      */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
         }
+
         if (obj == null || this.getClass() != obj.getClass()) {
             return false;
         }
-        EventTask other = (EventTask) obj;
-        return this.getInformation().equals(other.getInformation()) && this.from.equals(other.from)
-                && this.to.equals(other.to);
-    }
 
-    /**
-     * Returns the hash code value of this EventTask
-     *
-     * @return the hash code value of this EventTask
-     */
-    @Override
-    public int hashCode() {
-        return Objects.hash(this.getInformation(), this.from, this.to);
+        EventTask other = (EventTask) obj;
+        return this.getInformation().equals(other.getInformation()) && this.startTime.equals(other.startTime)
+                && this.endTime.equals(other.endTime);
     }
 }

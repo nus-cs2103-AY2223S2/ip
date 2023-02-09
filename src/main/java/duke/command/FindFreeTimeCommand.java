@@ -1,27 +1,28 @@
 package duke.command;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import duke.exception.InvalidInputException;
 import duke.storage.Storage;
 import duke.task.DeadlineTask;
 import duke.task.DukeTask;
 import duke.task.EventTask;
 import duke.task.TaskList;
+import duke.task.TaskType;
 import duke.ui.Ui;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 /**
  * The FindFreeTimeCommand class that finds the nearest date with no tasks
  */
 public class FindFreeTimeCommand extends Command {
-    private final static String NO_FREE_TIME_MESSAGE = "No free time found in the next month.";
-    private final static String NEAREST_FREE_TIME_MESSAGE = "The nearest free time is on %s.";
+    private static final String NEAREST_FREE_TIME_MESSAGE = "The nearest free time is on %s.";
+    private static final String NO_FREE_TIME_MESSAGE = "No free time found in the next month.";
 
     /**
-     * Execute the find free time command on the tasklist
+     * Executes the find free time command on the taskList
      *
-     * @param tasks tasklist
+     * @param tasks taskList
      * @param ui user interface
      * @param storage storage
      */
@@ -59,21 +60,21 @@ public class FindFreeTimeCommand extends Command {
      * Check whether the given date is free of tasks
      *
      * @param date the date to check
-     * @param tasks the tasklist to check against
+     * @param tasks the taskList to check against
      * @return true if the date is free of tasks, false otherwise
      */
     private boolean isDayFree(LocalDate date, TaskList tasks) {
         // Iterate through all tasks in the task list
         for (int i = 0; i < tasks.getNoOfTasks(); i++) {
             DukeTask task = tasks.getTask(i);
-            // Check if the task is a DeadlineTask
-            if (task instanceof DeadlineTask) {
+
+            if (task.getType() == TaskType.DEADLINE) {
+                // Check if the task is a DeadlineTask
                 if (isDeadlineTaskScheduledOnDate(date, (DeadlineTask) task)) {
                     return false;
                 }
-            }
-            // Check if the task is a EventTask
-            else if (task instanceof EventTask) {
+            } else if (task.getType() == TaskType.EVENT) {
+                // Check if the task is a EventTask
                 if (isEventTaskScheduledOnDate(date, (EventTask) task)) {
                     return false;
                 }
@@ -91,7 +92,7 @@ public class FindFreeTimeCommand extends Command {
      * @return true if the task is scheduled on the date, false otherwise
      */
     private boolean isDeadlineTaskScheduledOnDate(LocalDate date, DeadlineTask task) {
-        return task.getEndDate().equals(date);
+        return task.getEndDate().toLocalDate().equals(date);
     }
 
     /**
@@ -104,6 +105,7 @@ public class FindFreeTimeCommand extends Command {
     private boolean isEventTaskScheduledOnDate(LocalDate date, EventTask task) {
         LocalDateTime start = LocalDateTime.of(date, task.getStartDate().toLocalTime());
         LocalDateTime end = LocalDateTime.of(date, task.getEndDate().toLocalTime());
+
         // Check if the input date is between the start and end date of the event task
         return (start.isAfter(task.getStartDate()) || start.isEqual(task.getStartDate()))
                 && (end.isBefore(task.getEndDate()) || end.isEqual(task.getEndDate()));

@@ -29,5 +29,4 @@ public abstract class Command {
      * @throws DukeException if there is any error during the execution of the command
      */
     public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
-
 }

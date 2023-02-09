@@ -14,8 +14,8 @@ import duke.ui.Ui;
  */
 
 public class MarkAsDoneCommand extends Command {
+    private static final String MARKED_AS_DONE_MESSAGE = "Nice! I've marked this task as done:\n ";
     private final int taskIndex;
-    private final static String MARKED_AS_DONE_MESSAGE = "Nice! I've marked this task as done:\n ";
 
     /**
      * Constructor of MarkAsDoneCommand that takes in the index of the task to marked.

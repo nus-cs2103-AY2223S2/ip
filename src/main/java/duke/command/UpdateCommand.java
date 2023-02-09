@@ -8,10 +8,13 @@ import duke.task.DukeTask;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
-public class UpdateCommand extends Command{
+/**
+ * A UpdateCommand class that encapsulates the actions of updating the description of a given task.
+ */
+public class UpdateCommand extends Command {
+    private static final String UPDATE_TASK_MESSAGE = "Nice! I've updated the description of this task:\n %s";
     private final int taskIndex;
     private final String information;
-    private static final String UPDATE_TASK_MESSAGE = "Nice! I've updated the description of this task:\n %s";
 
     /**
      * Constructor of UpdateCommand that takes in the index of the task to marked.
@@ -45,7 +48,7 @@ public class UpdateCommand extends Command{
     }
 
     /**
-     * Execute the update command on the tasklist
+     * Execute the update command on the taskList
      *
      * @param ui user interface
      * @param storage storage

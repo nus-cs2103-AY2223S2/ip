@@ -1,13 +1,13 @@
 package duke.task;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
 
 class DeadlineTaskTest {
     @Test
@@ -43,7 +43,7 @@ class DeadlineTaskTest {
         LocalDateTime deadline = LocalDateTime.of(2022, 12, 31, 23, 59);
         DeadlineTask task = new DeadlineTask("Finish project", deadline);
 
-        String expectedString = "[D] | [ ] | Finish project | Dec 31 2022 11:59";
+        String expectedString = "[D] | [ ] | Finish project | Dec 31 2022 23:59";
         assertEquals(expectedString, task.storageString());
     }
 

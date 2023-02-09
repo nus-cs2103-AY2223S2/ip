@@ -1,21 +1,20 @@
 package duke.command;
 
+import java.time.LocalDate;
+
 import duke.exception.InvalidInputException;
 import duke.storage.Storage;
 import duke.task.DukeTask;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
-import java.time.LocalDate;
-
 /**
  * A ViewScheduleCommand class that takes in a date and finds all tasks that take place on that date.
  */
 public class ViewScheduleCommand extends Command {
-    private final LocalDate date;
     private static final String TASK_ON_DATE_MESSAGE = "Here are the tasks on the specified date:\n";
     private static final String NO_TASK_ON_DATE_ERROR = "There are no tasks on the specified date.";
-
+    private final LocalDate date;
 
     /**
      * The constructor of ViewScheduleCommand that takes in the date of the tasks to be found.
@@ -48,7 +47,6 @@ public class ViewScheduleCommand extends Command {
             ui.appendResponse(message);
         }
     }
-
 
     /**
      * Finds all tasks in the given {@code tasks} list that match the given {@code date}

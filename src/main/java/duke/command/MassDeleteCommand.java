@@ -5,9 +5,12 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * A MassDeleteCommand class that encapsulates the action of delete all the done events.
+ */
 public class MassDeleteCommand extends Command {
-    private final static String DELETE_MESSAGE = "I have deleted all the tasks that have been marked as done.\n";
-    private final static String REMAINING_TASKS_MESSAGE = "Here are the remaining tasks in your list:\n";
+    private static final String DELETE_MESSAGE = "I have deleted all the tasks that have been marked as done.\n";
+    private static final String REMAINING_TASKS_MESSAGE = "Here are the remaining tasks in your list:\n";
 
     /**
      * Executes the command to delete all tasks that have been marked as done.
@@ -63,5 +66,4 @@ public class MassDeleteCommand extends Command {
         //return the response message
         return responseMessage.toString();
     }
-
 }

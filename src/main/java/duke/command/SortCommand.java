@@ -11,8 +11,8 @@ import duke.ui.Ui;
  * The categories are: Deadline Task, Event Task, Fixed Duration Task, Todo Task.
  * The sorted tasks are then saved in storage, and the sorted tasks are displayed to the user.
  */
-public class SortCommand extends Command{
-    private final static String NO_TASKS_MESSAGE = "There are no tasks in your list.";
+public class SortCommand extends Command {
+    private static final String NO_TASKS_MESSAGE = "There are no tasks in your list.";
 
     /**
      * Executes the SortCommand.
@@ -32,8 +32,6 @@ public class SortCommand extends Command{
 
         // categorize all the tasks in the TaskList into different categories
         TaskList[] listOfList = tasks.categorizeTask();
-
-        // clear all the tasks in the TaskList
         tasks.clearTasks();
 
         // add the sorted tasks back to the TaskList

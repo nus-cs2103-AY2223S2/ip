@@ -7,8 +7,12 @@ import java.util.Objects;
  * A TodoTask class that encapsulates the information a Todo Task.
  */
 public class TodoTask extends DukeTask {
+    private static final String STORAGE_FORMAT = "[T] | %s | %s";
+    private static final String PRINT_FORMAT = "[T]%s %s";
+
     /**
      * Constructs a TodoTask object with the given task information.
+     *
      * @param info The task information.
      */
     public TodoTask(String info) {
@@ -17,19 +21,19 @@ public class TodoTask extends DukeTask {
 
     /**
      * Returns the task information in the format suitable for storage.
+     *
      * @return The task information in the storage format.
      */
     @Override
     public String storageString() {
-        String status = "[ ] | ";
-        if (this.getStatus()) {
-            status = "[X] | ";
-        }
-        return "[T] | " + status + this.getInformation().trim();
+        // Format the task status, task information into a single string
+        String isCompleted = this.getStatus() ? "[X]" : "[ ]";
+        return String.format(STORAGE_FORMAT, isCompleted, this.getInformation().trim());
     }
 
     /**
      * Determines whether the task matches the given date.
+     *
      * @param date The date to check against.
      * @return false, as TodoTasks do not have a date.
      */
@@ -40,11 +44,13 @@ public class TodoTask extends DukeTask {
 
     /**
      * Returns a string representation of the task.
+     *
      * @return A string representation of the task.
      */
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        String isCompleted = this.getStatus() ? "[X]" : "[ ]";
+        return String.format(PRINT_FORMAT, isCompleted, this.getInformation());
     }
 
     @Override
@@ -52,13 +58,13 @@ public class TodoTask extends DukeTask {
         if (obj == this) {
             return true;
         }
+
         if (!(obj instanceof TodoTask)) {
             return false;
         }
-        TodoTask todoObj = (TodoTask) obj;
 
+        TodoTask todoObj = (TodoTask) obj;
         return Objects.equals(this.getInformation(), todoObj.getInformation())
                 && this.getStatus() == todoObj.getStatus();
     }
-
 }

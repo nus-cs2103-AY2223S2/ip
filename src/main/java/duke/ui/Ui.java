@@ -7,11 +7,11 @@ package duke.ui;
 
 public class Ui {
     //Fields
-    private final int DEFUALT_LENGTH = 70;
-    private final int DEFUALT_SPACE = 4;
-    private final String UNDERSCORE = "_";
-    private final String SPACE = " ";
-    private final String LINE_SEPERATOR = "\n";
+    private static final int DEFAULT_LENGTH = 70;
+    private static final int DEFAULT_SPACE = 4;
+    private static final String UNDERSCORE = "_";
+    private static final String SPACE = " ";
+    private static final String LINE_SEPARATOR = "\n";
     private final int horizontalLineLength;
     private final int indentSpace;
     private StringBuilder response = new StringBuilder();
@@ -21,8 +21,8 @@ public class Ui {
      * Constructor that sets HorizontalLineLength to be 70 and IndentSpace to be 4 by default.
      */
     public Ui() {
-        this.horizontalLineLength = DEFUALT_LENGTH;
-        this.indentSpace = DEFUALT_SPACE;
+        this.horizontalLineLength = DEFAULT_LENGTH;
+        this.indentSpace = DEFAULT_SPACE;
     }
 
     /**
@@ -46,10 +46,10 @@ public class Ui {
      * @return the indented text
      */
     public String indent(String input) {
-        String delimiter = this.LINE_SEPERATOR + this.SPACE.repeat(this.indentSpace);
-        String[] splitString = input.split(this.LINE_SEPERATOR);
+        String delimiter = LINE_SEPARATOR + SPACE.repeat(this.indentSpace);
+        String[] splitString = input.split(LINE_SEPARATOR);
 
-        return this.SPACE.repeat(this.indentSpace) + String.join(delimiter, splitString);
+        return SPACE.repeat(this.indentSpace) + String.join(delimiter, splitString);
     }
 
     /**
@@ -58,9 +58,9 @@ public class Ui {
      * @param message the message to be display
      */
     public void displayWithBar(String message) {
-        String bar = this.SPACE.repeat(indentSpace) + this.UNDERSCORE.repeat(this.horizontalLineLength);
-        System.out.println(bar + this.LINE_SEPERATOR + indent(message)
-                + this.LINE_SEPERATOR + bar + this.LINE_SEPERATOR);
+        String bar = SPACE.repeat(indentSpace) + UNDERSCORE.repeat(this.horizontalLineLength);
+        System.out.println(bar + LINE_SEPARATOR + indent(message)
+                + LINE_SEPARATOR + bar + LINE_SEPARATOR);
     }
 
     /**
