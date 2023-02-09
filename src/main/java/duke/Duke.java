@@ -39,19 +39,28 @@ public class Duke {
     /**
      * Runs the Duke chatbot, prompts the user for inputs to perform certain actions.
      */
-    public void run() {
-        ui.welcomeMessage();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command c = parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e);
-            }
+    public String run() {
+        return ui.welcomeMessage();
+//        boolean isExit = false;
+//        while (!isExit) {
+//            try {
+//                String fullCommand = ui.readCommand();
+//                Command c = parser.parse(fullCommand);
+//                c.execute(tasks, ui, storage);
+//                isExit = c.isExit();
+//            } catch (DukeException e) {
+//                ui.showError(e);
+//            }
+//        }
+//        ui.sayBye();
+    }
+
+    public String getResponse(String input) {
+        try {
+            Command c = parser.parse(input);
+            return c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            return "Sorry Duke failed to understand";
         }
-        ui.sayBye();
     }
 }

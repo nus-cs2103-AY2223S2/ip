@@ -1,6 +1,7 @@
 package duke.commands;
 
 import duke.exceptions.DukeEmptyInputException;
+import duke.exceptions.DukeException;
 import duke.exceptions.DukeInvalidInputException;
 import duke.Storage;
 import duke.TaskList;
@@ -28,12 +29,14 @@ public class DeleteCommand extends Command {
      * @throws DukeEmptyInputException
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeInvalidInputException, DukeEmptyInputException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeInvalidInputException, DukeEmptyInputException {
         if (input.equals("")) {
-            throw new DukeEmptyInputException();
+            DukeException e = new DukeEmptyInputException();
+            return e.toString();
         }
         String response = tasks.delete(input);
         storage.saveState(tasks);
-        ui.printResponse(response);
+//        ui.printResponse(response);
+        return response;
     }
 }

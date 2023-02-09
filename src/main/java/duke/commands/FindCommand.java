@@ -20,8 +20,9 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeInvalidInputException, DukeEmptyInputException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeInvalidInputException, DukeEmptyInputException {
         String response = tasks.find(input);
-        ui.printResponse(response);
+//        ui.printResponse(response);
+        return response;
     }
 }
