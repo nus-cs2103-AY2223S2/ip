@@ -97,7 +97,7 @@ public class Alfred {
      */
     public void handleExit() {
         try {
-            TimeUnit.SECONDS.sleep(3);
+            TimeUnit.SECONDS.sleep(2);
         } catch (InterruptedException e) {
             System.out.println(e.getMessage()); // how to show an error?
         } finally {
