@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -30,6 +31,11 @@ public class Parser {
         return result;
     }
 
+    private List<String> splitStringIntoIntegers(String string) {
+        String[] array = string.trim().split("\\s+");
+        return Arrays.asList(array);
+    }
+
     private void assertTokenLength(List<String> tokens, int length) throws DukeWrongNumberOfArgumentsException {
         if (tokens.size() != length) {
             throw new DukeWrongNumberOfArgumentsException("Wrong number of arguments supplied. This command requires "
@@ -43,9 +49,19 @@ public class Parser {
         }
     }
 
-    public int assertIsNumber(String token) throws DukeInvalidArgumentException {
+    private void assertIsNumber(String token) throws DukeInvalidArgumentException {
         try {
-            return Integer.parseInt(token);
+            Integer.parseInt(token);
+        } catch (NumberFormatException e) {
+            throw new DukeInvalidArgumentException("The command requires integer arguments.");
+        }
+    }
+
+    private void assertAllNumbers(List<String> tokenList, int start, int end) throws DukeInvalidArgumentException {
+        try {
+            for (int i = start; i <= end; i++) {
+                Integer.parseInt(tokenList.get(i));
+            }
         } catch (NumberFormatException e) {
             throw new DukeInvalidArgumentException("The command requires integer arguments.");
         }
@@ -78,11 +94,15 @@ public class Parser {
                 break;
         case "mark":
         case "unmark":
-        case "delete":
             assertHasArguments(tokens);
             result.add(tokens[1].trim());
             assertTokenLength(result, 2);
             assertIsNumber(result.get(1));
+            break;
+        case "delete":
+            assertHasArguments(tokens);
+            result.addAll(splitStringIntoIntegers(tokens[1]));
+            assertAllNumbers(result, 1, result.size() - 1);
             break;
         case "todo":
         case "find":

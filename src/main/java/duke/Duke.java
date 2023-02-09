@@ -1,13 +1,14 @@
 package duke;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import duke.exceptions.DukeException;
 import duke.exceptions.DukeUnknownCommandException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
-
-import java.util.List;
 
 /**
  * Main entry point of the program.
@@ -25,6 +26,17 @@ public class Duke {
         this.parser = new Parser();
         this.isExit = false;
     }
+
+    private String getTasksAsString(List<Task> tasks) {
+        StringBuilder result = new StringBuilder();
+        int i = 1;
+        for (Task s: tasks) {
+            result.append(String.format("%d. %s\n", i, s));
+            i++;
+        }
+        return result.toString().replaceAll("\\n$", "");
+    }
+
     private String listTasksCommand() {
         return String.format("Here are the tasks in your list:\n%s", this.taskApplication.getAllTaskString());
     }
@@ -74,26 +86,23 @@ public class Duke {
     }
 
     private String deleteCommand(List<String> tokens) throws DukeException {
-        assert tokens.size() == 2;
-        int index = Integer.parseInt(tokens.get(1)) - 1;
-        Task t = this.taskApplication.popTask(index);
-        return String.format(
-                "Noted. I've removed this task:\n%s\nNow you have %d tasks in the list.",
-                t, this.taskApplication.getNoOfTasks()
-        );
+        assert tokens.size() > 1;
+        List<Integer> indexes = tokens
+                .stream()
+                .skip(1)
+                .map(s -> Integer.parseInt(s) - 1)
+                .collect(Collectors.toList());
+        List<Task> tasks = this.taskApplication.popMultipleTasks(indexes);
+        return String.format("Noted. I've removed this task:\n%s\nNow you have %d tasks in the list.",
+                getTasksAsString(tasks), this.taskApplication.getNoOfTasks());
     }
+
     private String findCommand(List<String> tokens) {
         assert tokens.size() == 2;
         String keyword = tokens.get(1);
         List<Task> tasks = this.taskApplication.getTaskByKeyword(keyword);
-        StringBuilder result = new StringBuilder();
-        int i = 1;
-        for (Task s: tasks) {
-            result.append(String.format("%d.%s\n", i, s));
-            i++;
-        }
-        String output = result.toString().replaceAll("\\n$", "");
-        return String.format("Here are the matching tasks in your list:\n%s", output);
+        return String.format("Here are the matching tasks in your list:\n%s",
+                getTasksAsString(tasks));
     }
 
     private String byeCommand() {
@@ -104,26 +113,26 @@ public class Duke {
     private String parseCommand(String command) throws DukeException {
         List<String> tokens = this.parser.parseCommand(command);
         switch(tokens.get(0)) {
-            case "list":
-                return this.listTasksCommand();
-            case "mark":
-                return this.markCommand(tokens);
-            case "unmark":
-                return this.unmarkCommand(tokens);
-            case "todo":
-                return this.todoCommand(tokens);
-            case "deadline":
-                return this.deadlineCommand(tokens);
-            case "event":
-                return this.eventCommand(tokens);
-            case "delete":
-                return this.deleteCommand(tokens);
-            case "find":
-                return this.findCommand(tokens);
-            case "bye":
-                return this.byeCommand();
-            default:
-                throw new DukeUnknownCommandException("Unknown command");
+        case "list":
+            return this.listTasksCommand();
+        case "mark":
+            return this.markCommand(tokens);
+        case "unmark":
+            return this.unmarkCommand(tokens);
+        case "todo":
+            return this.todoCommand(tokens);
+        case "deadline":
+            return this.deadlineCommand(tokens);
+        case "event":
+            return this.eventCommand(tokens);
+        case "delete":
+            return this.deleteCommand(tokens);
+        case "find":
+            return this.findCommand(tokens);
+        case "bye":
+            return this.byeCommand();
+        default:
+            throw new DukeUnknownCommandException("Unknown command");
         }
     }
     public boolean getIsExit() {
