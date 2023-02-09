@@ -23,7 +23,7 @@ public class Parser {
      *
      * @param input User input.
      */
-    public void parse(String input) {
+    public String parse(String input) {
         String[] arrNext = input.split(" ", 2);
         String next = arrNext[0];
         if (Objects.equals(next, "bye")) {
@@ -48,10 +48,7 @@ public class Parser {
             }
         } catch (EmptyDescription |
                 WrongTask e2) {
-            System.out.println(e2);
-            String nextLine = ui.userInput();
-            arrNext = nextLine.split(" ", 2);
-            next = arrNext[0];
+            return e2.getMessage();
         } finally {
             if (Objects.equals(next, "bye")) {
                 ui.exit();
@@ -69,53 +66,32 @@ public class Parser {
         case "todo": {
             inputTask = new Todo(after);
             taskList.addTask(inputTask);
-            System.out.println("Got it. I've added this task:\n" + "  " + inputTask);
-            System.out.println("Now you have " + taskList.getNumberOfTasks() + " tasks in the list.");
+//            System.out.println("Got it. I've added this task:\n" + "  " + inputTask);
+//            System.out.println("Now you have " + taskList.getNumberOfTasks() + " tasks in the list.");
             storage.appendToFile(inputTask);
-            break;
+            return ui.showTaskOutput(inputTask, taskList.getNumberOfTasks());
         }
         case "deadline": {
             String[] split = after.split("/by ");
             LocalDate d1 = LocalDate.parse(split[1]);
             inputTask = new Deadline(split[0], d1.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
             taskList.addTask(inputTask);
-            System.out.println("Got it. I've added this task:\n" + "  " + inputTask);
-            System.out.println("Now you have " + taskList.getNumberOfTasks() + " tasks in the list.");
             storage.appendToFile(inputTask);
-            break;
+            return ui.showTaskOutput(inputTask, taskList.getNumberOfTasks());
         }
         case "event": {
             String[] split = after.split("/");
             inputTask = new Event(split[0], split[1].substring(5), split[2].substring(3));
             taskList.addTask(inputTask);
-            System.out.println("Got it. I've added this task:\n" + "  " + inputTask);
-            System.out.println("Now you have " + taskList.getNumberOfTasks() + " tasks in the list.");
             storage.appendToFile(inputTask);
-            break;
+            return ui.showTaskOutput(inputTask, taskList.getNumberOfTasks());
         }
         case "mark": {
-            int number = Integer.parseInt(after);
-            try {
-                if (number > taskList.getNumberOfTasks()) {
-                    throw new OutOfBounds(" There is no such element :-p");
-                }
-            } catch (OutOfBounds e3) {
-                System.out.println(e3);
-                break;
-            }
-            Task toMarkDone = taskList.getTask(number - 1);
-            toMarkDone.markAsDone();
-            System.out.println("Nice! I've marked this task as done:");
-            System.out.println(" " + toMarkDone);
             storage.updateFile(taskList);
-            break;
+            return taskList.mark(after);
         }
         case "list": {
-            System.out.println("Here are the tasks in your list:");
-            for (int i = 0; i < taskList.getNumberOfTasks(); i++) {
-                System.out.println(i + 1 + "." + taskList.getTask(i));
-            }
-            break;
+            return taskList.getTaskList();
         }
         case "find": {
             TaskList matchingTasks = new TaskList();
@@ -129,47 +105,18 @@ public class Parser {
                     }
                 }
             }
-            System.out.println("Here are the matching tasks in your list:");
-            for (int k = 0; k < matchingTasks.getNumberOfTasks(); k++) {
-                System.out.println(k + 1 + "." + matchingTasks.getTask(k));
-            }
-            break;
+            return ui.filter(matchingTasks);
         }
         case "unmark": {
-            int number = Integer.parseInt(after);
-            try {
-                if (number > taskList.getNumberOfTasks()) {
-                    throw new OutOfBounds(" There is no such element :-p");
-                }
-            } catch (OutOfBounds e3) {
-                System.out.println(e3);
-                break;
-            }
-            Task toUnMarkDone = taskList.getTask(number - 1);
-            toUnMarkDone.unMarkAsDone();
-            System.out.println("OK, I've marked this task as not done yet:");
-            System.out.println(" " + toUnMarkDone);
             storage.updateFile(taskList);
-            break;
+            return taskList.unMark(after);
         }
         case "delete": {
-            int number = Integer.parseInt(after);
-            try {
-                if (number > taskList.getNumberOfTasks()) {
-                    throw new OutOfBounds(" There is no such element :-p");
-                }
-            } catch (OutOfBounds e3) {
-                System.out.println(e3);
-                break;
-            }
-            Task toDelete = taskList.getTask(number - 1);
-            taskList.deleteTask(number - 1);
-            System.out.println("Noted. I've removed this task:");
-            System.out.println(" " + toDelete);
-            System.out.println("Now you have " + taskList.getNumberOfTasks() + " tasks in the list.");
             storage.updateFile(taskList);
-            break;
+            return taskList.deleteTask(after);
         }
+        default:
+            return " I'm sorry, but I don't know what that means :-(";
         }
     }
 

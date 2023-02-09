@@ -16,19 +16,15 @@ public class Duke {
         taskList = storage.loadFile();
     }
 
-    /**
-     * Runs Duke program.
-     */
-    public void run() {
-        Parser parser = new Parser(taskList, ui, storage);
-        while (ui.hasNextInput()) {
-            parser.parse(ui.userInput());
-        }
+    public String greeting() {
+        return ui.dukeGreeting();
     }
 
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.run();
+    public String getResponse(String input) {
+        String output = "";
+        Parser parser = new Parser(taskList, ui, storage);
+        output = parser.parse(input);
+        return output;
     }
 }
 

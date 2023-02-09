@@ -16,37 +16,46 @@ public class Ui {
     /**
      * Prints out the initial duke greeting when the program first runs.
      */
-    public void dukeGreeting() {
+    public String dukeGreeting() {
+        String greeting = "";
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
+        greeting = "Hello from\n" + logo + "Hello! I'm Duke\n" + "What can I do for you?";
+        return greeting;
     }
 
-    /**
-     * Checks if the user has another input.
-     * @return True if the user has an input and false otherwise.
-     */
-    public boolean hasNextInput() {
-        return scanner.hasNext();
+    public String showMark(Task taskToMark) {
+        return "Nice! I've marked this task as done:\n" + taskToMark;
     }
 
-    /**
-     * Reads user input.
-     * @return User input.
-     */
-    public String userInput() {
-        return scanner.nextLine();
+    public String showUnmark(Task taskToUnmark) {
+        return "OK, I've marked this task as not done yet:\n" + taskToUnmark;
+    }
+
+    public String showTaskOutput(Task task, int size) {
+        return "Got it. I've added this task:\n" + task + "\nNow you have " + size + " tasks in the list.";
+    }
+
+    public String showDelete(Task task, int size) {
+        return "Noted. I've removed this task:\n" + task + "\nNow you have " + size + " tasks in the list.";
+    }
+
+    public String filter(TaskList tasklist) {
+        String result = "Here are the matching tasks in your list:\n";
+        for (int i = 1; i < tasklist.getNumberOfTasks() + 1; i++) {
+            result += i + ". " + tasklist.getTask(i - 1) + "\n";
+        }
+        return result;
     }
 
     /**
      * Terminates the program.
      */
-    public void exit() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String exit() {
         System.exit(0);
+        return "Bye. Hope to see you again soon!";
     }
 }

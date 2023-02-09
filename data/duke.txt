@@ -1,2 +1,2 @@
-T|  | read book
-D|X | return book | Oct 15 2019
+T|  | borrow book
+E|  | project meeting | 4pm - 6pm
