@@ -16,7 +16,6 @@ import java.util.Scanner;
 public class Storage {
     private final TaskList taskList;
 
-
     /**
      * Constructor for Storage.
      * @param taskList One taskList to manage.

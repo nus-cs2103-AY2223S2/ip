@@ -16,26 +16,10 @@ public class Duke {
         this.exit = 0;
         this.taskList = new TaskList();
         this.store = new Storage(taskList);
-    }
-
-    public static void main(String[] args) {
-        new Duke().run();
-    }
-
-    /**
-     * Run one Duke.
-     */
-    public void run() {
         store.loadList();
-        Ui.start();
-        while (exit != 1) {
-            Scanner sc = new Scanner(System.in);
-            String info = sc.nextLine();
-            new Parser(this).handle(info);
-        }
     }
 
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        return new Parser(this).handle(input);
     }
 }

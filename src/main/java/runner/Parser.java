@@ -19,24 +19,22 @@ public class Parser {
         this.duke = duke;
     }
 
-
     /**
      * @param info The information given by the user.
      */
-    public void handle(String info) {
+    public String handle(String info) {
         if (info.equals("bye")) {
-            terminate();
+            return terminate();
         } else if (info.equals("list")) {
-            Ui.showList(duke.taskList);
+            return Ui.showList(duke.taskList);
         } else {
-            read(info);
+            return read(info);
         }
     }
 
-    public void read(String info) {
+    public String read(String info) {
         if (!info.contains(" ")) {
-            System.out.println("Not Smart to Understand -_-");
-            return;
+            return "Not Smart to Understand -_-";
         }
         try {
             String[] segments = info.split(" ", 2);
@@ -44,68 +42,60 @@ public class Parser {
             String arg = segments[1];
             switch (first) {
                 case "mark":
-                    mark(arg);
-                    break;
+                    return mark(arg);
                 case "unmark":
-                    unmark(arg);
-                    break;
+                    return unmark(arg);
                 case "todo":
-                    add_todo(info);
-                    break;
+                    return add_todo(info);
                 case "deadline":
-                    add_deadline(arg);
-                    break;
+                    return add_deadline(arg);
                 case "event":
-                    add_event(arg);
-                    break;
+                    return add_event(arg);
                 case "find":
-                    find(arg);
-                    break;
+                    return find(arg);
                 case "delete":
-                    delete(arg);
-                    break;
+                    return delete(arg);
                 default:
-                    System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    return "OOPS!!! I'm sorry, but I don't know what that means :-(";
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("OOPS!!! Arguments not enough.");
+            return "OOPS!!! Arguments not enough.";
         }
     }
 
     /**
      * Terminate the Duke.
      */
-    public void terminate() {
-        Ui.ending();
-        duke.exit = 1;
+    public String terminate() {
+        return Ui.ending();
     }
 
     /**
      * Actions when finding keywords.
      * @param key Keyword input.
      */
-    public void find(String key) {
+    public String find(String key) {
         TaskList ans = new TaskList();
         for(Task tk: duke.taskList.get_list()) {
             if (tk.getMsg().contains(key)) {
                 ans.add(tk);
             }
         }
-        Ui.findList(ans);
+        return Ui.findList(ans);
     }
 
     /**
      * Actions when marking.
      * @param s String format of the Task index.
      */
-    public void mark(String s) {
+    public String mark(String s) {
         try {
             int n = Integer.parseInt(s) - 1;
-            Ui.markMSG(duke.taskList.get_task(n));
             duke.taskList.get_task(n).complete();
             duke.store.saveList();
+            return Ui.markMSG(duke.taskList.get_task(n));
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Index Out");
+            return "Index Out";
         }
     }
 
@@ -113,14 +103,14 @@ public class Parser {
      * Actions when unmarking.
      * @param s String format of the Task index.
      */
-    public void unmark(String s) {
+    public String unmark(String s) {
         try {
             int num = Integer.parseInt(s) - 1;
-            Ui.unmarkMSG(duke.taskList.get_task(num));
             duke.taskList.get_task(num).uncomplete();
             duke.store.saveList();
+            return Ui.unmarkMSG(duke.taskList.get_task(num));
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Index Out");
+            return "Index Out";
         }
     }
 
@@ -128,16 +118,17 @@ public class Parser {
      * Actions when deleting.
      * @param s String format of the Task index.
      */
-    public void delete(String s) {
+    public String delete(String s) {
         try {
             int index = Integer.parseInt(s) - 1;
-            Ui.deleteMSG(duke.taskList.get_task(index), duke.taskList.size()-1);
+            Task temp = duke.taskList.get_task(index);
             duke.taskList.remove(index);
             duke.store.saveList();
+            return Ui.deleteMSG(temp, duke.taskList.size());
         } catch (IndexOutOfBoundsException a) {
-            System.out.println("OOPS!!! You can not delete air~");
+            return "OOPS!!! You can not delete air~";
         } catch (NumberFormatException b) {
-            System.out.println("OOPS!!! Number Format Wrong");
+            return "OOPS!!! Number Format Wrong";
         }
     }
 
@@ -145,28 +136,28 @@ public class Parser {
      * Actions when adding a Todo.
      * @param info Description of a Todo.
      */
-    public void add_todo(String info) {
+    public String add_todo(String info) {
         String action = info.split(" ", 2)[1];
         Task t = new Todo(action);
         duke.taskList.add(t);
         duke.store.saveList();
-        Ui.addMSG(t, duke.taskList.size());
+        return Ui.addMSG(t, duke.taskList.size());
     }
 
     /**
      * Actions when adding a Deadline.
      * @param s Description of a Deadline.
      */
-    public void add_deadline(String s) {
+    public String add_deadline(String s) {
         try {
             String msg = s.split("/by ", 2)[0];
             String by = s.split("/by ", 2)[1];
             Task d = new Deadline(msg, by);
             duke.taskList.add(d);
             duke.store.saveList();
-            Ui.addMSG(d, duke.taskList.size());
+            return Ui.addMSG(d, duke.taskList.size());
         } catch (DateTimeParseException e) {
-            System.out.println("Date Unacceptable (YYYY-MM-DD PLZ)");
+            return "Date Unacceptable (YYYY-MM-DD PLZ)";
         }
     }
 
@@ -174,7 +165,7 @@ public class Parser {
      * Actions when adding an Event.
      * @param s Description of an Event.
      */
-    public void add_event(String s) {
+    public String add_event(String s) {
         String event = s.split("/from", 2)[0];
         String time = s.split("/from", 2)[1];
         String from = time.split("/to")[0];
@@ -182,6 +173,6 @@ public class Parser {
         Task e = new Event(event, from, to);
         duke.taskList.add(e);
         duke.store.saveList();
-        Ui.addMSG(e, duke.taskList.size());
+        return Ui.addMSG(e, duke.taskList.size());
     }
 }

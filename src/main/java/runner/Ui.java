@@ -5,44 +5,34 @@ import task.Task;
  * Class for Ui object.
  */
 public class Ui {
-    static String logo = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
-
     /**
      * Words shown when initiating.
      */
-    public static void start() {
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?" );
-        System.out.println(logo);
+    public static String start() {
+        return "Hello! I'm Duke\nWhat can I do for you?\n" ;
     }
 
     /**
      * Words shown when terminating.
      */
-    public static void ending() {
-        System.out.println("Bye. Hope to see you again soon!");
-        System.out.println(logo);
+    public static String ending() {
+        return "Bye. Hope to see you again soon!\n";
     }
 
     /**
      * Words shown when marking a Task.
      * @param t Task to be marked.
      */
-    public static void markMSG(Task t) {
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println("[X] " + t.getMsg());
+    public static String markMSG(Task t) {
+        return "Nice! I've marked this task as done:\n" + ("[X] " + t.getMsg());
     }
 
     /**
      * Words shown when unmarking a Task.
      * @param t Task to be unmarked.
      */
-    public static void unmarkMSG(Task t) {
-        System.out.println("OK, I've marked this task as not done yet:");
-        System.out.println("[ ] " + t.getMsg());
+    public static String unmarkMSG(Task t) {
+        return "OK, I've marked this task as not done yet:\n" + ("[ ] " + t.getMsg());
     }
 
 
@@ -51,10 +41,10 @@ public class Ui {
      * @param t Task to be deleted.
      * @param n Tasks in TaskList afterwards.
      */
-    public static void deleteMSG(Task t, int n) {
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(t);
-        System.out.println("Now you have " + n + " tasks in the list.");
+    public static String deleteMSG(Task t, int n) {
+        return "Noted. I've removed this task:\n"
+                + t + "\n"
+                + "Now you have " + n + " tasks in the list.";
     }
 
     /**
@@ -62,29 +52,33 @@ public class Ui {
      * @param t Task to be added.
      * @param n Tasks in TaskList afterwards.
      */
-    public static void addMSG(Task t, int n) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println(t);
-        System.out.println("Now you have " + n + " tasks in the list.");
+    public static String addMSG(Task t, int n) {
+        return "Got it. I've added this task:\n"
+                + t + "\n"
+                + "Now you have " + n + " tasks in the list.";
     }
 
     /**
      * Show the TaskList of a Duke.
      */
-    public static void showList(TaskList t) {
-        System.out.println("Here are the tasks in your list:");
+    public static String showList(TaskList t) {
+        StringBuilder ans = new StringBuilder("Here are the tasks in your list:\n");
         for (Task tk : t.get_list()) {
-            System.out.println( (t.get_list().indexOf(tk)+1) + "." + tk.toString());
+            String info = (t.get_list().indexOf(tk)+1) + "." + tk.toString() + "\n";
+            ans.append(info);
         }
+        return ans.toString();
     }
 
     /**
      * Show the TaskList after find keywords.
      */
-    public static void findList(TaskList t) {
-        System.out.println("Here are the matching tasks in your list:");
+    public static String findList(TaskList t) {
+        StringBuilder ans = new StringBuilder("Here are the matching tasks in your list:\n");
         for (Task tk : t.get_list()) {
-            System.out.println( (t.get_list().indexOf(tk)+1) + "." + tk.toString());
+            String info = (t.get_list().indexOf(tk)+1) + "." + tk.toString() + "\n";
+            ans.append(info);
         }
+        return ans.toString();
     }
 }
