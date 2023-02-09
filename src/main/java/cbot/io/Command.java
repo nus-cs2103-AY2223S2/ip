@@ -3,6 +3,8 @@ package cbot.io;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.stream.Collectors;
 
 import cbot.task.Deadline;
 import cbot.task.Event;
@@ -154,7 +156,18 @@ public enum Command {
     /** Catches FIND calls with no input. */
     FIND_BAD(
             "find",
-            Command::doNoInput);
+            Command::doNoInput),
+
+    /** Changes the description of the selected task. */
+    EDIT(
+            "edit ",
+            Command::doEdit,
+            true, true),
+
+    /** Catches EDIT calls with no input. */
+    EDIT_BAD(
+            "edit",
+            Command::doEdit);
 
     private final String str;
     private final ThrowingBiFunction<TaskList, String, String> f;
@@ -257,10 +270,39 @@ public enum Command {
         return this.f.apply(tl, text);
     }
 
+    private static int checkIndex(TaskList tl, String text) throws PoorInputException {
+        try {
+            int num = Integer.parseInt(text);
+
+            if (tl.notInRange(num)) {
+                throw new PoorInputException(tl.getRangeErrorMsg(num));
+            }
+
+            return num;
+
+        } catch (NumberFormatException e) {
+            throw new BadInputException("Invalid index \"" + text + "\"!");
+        }
+    }
+
+    private static ArrayList<Integer> splitNums(TaskList tl, String text) throws PoorInputException {
+        ArrayList<Integer> nums = new ArrayList<>();
+
+        String[] strings = text.split(" ");
+        for (String s : strings) {
+            int num = checkIndex(tl, s);
+            if (!nums.contains(num)) {
+                nums.add(num);
+            }
+        }
+
+        return nums;
+    }
+
     private static int checkKeyword(String text, String keyword)
             throws PoorInputException {
         if (!text.contains(keyword)) {
-            throw new PoorInputException("Missing \"" + keyword.trim() + "\" keyword");
+            throw new PoorInputException("Command is missing \"" + keyword.trim() + "\" keyword");
         }
 
         return text.indexOf(keyword);
@@ -297,54 +339,62 @@ public enum Command {
             throws PoorInputException {
         assert !text.isEmpty() : "MARK should have input text";
 
-        try {
-            int num = Integer.parseInt(text);
+        ArrayList<Integer> nums = splitNums(tl, text);
 
-            if (tl.notInRange(num)) {
-                throw new PoorInputException(tl.getRangeErrorMsg(num));
-            }
-
+        if (nums.size() == 1) {
+            int num = nums.get(0);
             return Talker.say(tl.mark(num));
-
-        } catch (NumberFormatException e) {
-            throw new BadInputException("Invalid index!");
         }
+
+        String markedTasks = nums.stream()
+                .map(i -> {
+                    tl.mark(i);
+                    return "\n" + TaskList.GAP + tl.getTask(i).toString();
+                })
+                .collect(Collectors.joining());
+        return Talker.say("That's great! I've marked:" + markedTasks);
     }
 
     private static String doUnmark(TaskList tl, String text)
             throws PoorInputException {
         assert !text.isEmpty() : "UNMARK should have input text";
 
-        try {
-            int num = Integer.parseInt(text);
+        ArrayList<Integer> nums = splitNums(tl, text);
 
-            if (tl.notInRange(num)) {
-                throw new PoorInputException(tl.getRangeErrorMsg(num));
-            }
-
+        if (nums.size() == 1) {
+            int num = nums.get(0);
             return Talker.say(tl.unmark(num));
-
-        } catch (NumberFormatException e) {
-            throw new BadInputException("Invalid index!");
         }
+
+        String unmarkedTasks = nums.stream()
+                .map(i -> {
+                    tl.unmark(i);
+                    return "\n" + TaskList.GAP + tl.getTask(i).toString();
+                })
+                .collect(Collectors.joining());
+        return Talker.say("Shucks D: I've unmarked:" + unmarkedTasks);
     }
 
     private static String doRemove(TaskList tl, String text)
             throws PoorInputException {
         assert !text.isEmpty() : "DELETE/REMOVE should have input text";
 
-        try {
-            int num = Integer.parseInt(text);
+        ArrayList<Integer> nums = splitNums(tl, text);
 
-            if (tl.notInRange(num)) {
-                throw new PoorInputException(tl.getRangeErrorMsg(num));
-            }
-
+        if (nums.size() == 1) {
+            int num = nums.get(0);
             return Talker.say(tl.delTask(num));
-
-        } catch (NumberFormatException e) {
-            throw new BadInputException("Invalid index!");
         }
+
+        String deletedTasks = nums.stream()
+                .map(i -> "\n" + TaskList.GAP + tl.getTask(i).toString())
+                .collect(Collectors.joining());
+
+        nums.stream()
+                .sorted(Comparator.reverseOrder())
+                .forEachOrdered(tl::delTask);
+
+        return Talker.say("Gotcha! I've deleted:" + deletedTasks);
     }
 
     private static String doTodo(TaskList tl, String text) {
@@ -535,5 +585,17 @@ public enum Command {
         return (arrFind.isEmpty())
                 ? Talker.say("Nope, nothing matches your search!")
                 : Talker.say("Here! I found these:\n") + Talker.printMany(arrFind);
+    }
+
+    private static String doEdit(TaskList tl, String text) throws PoorInputException {
+        assert !text.isEmpty() : "EDIT should have input text";
+
+        int spaceIndex = checkKeyword(text, " ");
+
+        String editIndexStr = text.substring(0, spaceIndex);
+        int editIndex = checkIndex(tl, editIndexStr);
+        String editDesc = text.substring(spaceIndex + 1);
+
+        return Talker.say(tl.editTaskDesc(editIndex, editDesc));
     }
 }

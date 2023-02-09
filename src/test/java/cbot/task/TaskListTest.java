@@ -77,12 +77,12 @@ public class TaskListTest {
 
     @Test
     public void testRangeError1() {
-        assertEquals(tlFive.getRangeErrorMsg(0), "wadahek pls");
+        assertEquals(tlFive.getRangeErrorMsg(0), "0?? wadahek pls");
     }
 
     @Test
     public void testRangeError2() {
-        assertEquals(tlFive.getRangeErrorMsg(6), "Hm, you don't have that many tasks!");
+        assertEquals(tlFive.getRangeErrorMsg(6), "6? Err... you don't have that many tasks");
     }
 
     @Test
