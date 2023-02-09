@@ -22,17 +22,23 @@ public class DateTimeParser {
     public static LocalDateTime parseInput(String dateTime) throws DateTimeParseException {
         try {
             return LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
-        } catch (DateTimeParseException e) { }
+        } catch (DateTimeParseException e) {
+            //Empty catch as can attempt to format as LocalTime
+        }
         try {
             LocalTime time = LocalTime.parse(dateTime, DateTimeFormatter.ofPattern("HHmm"));
             LocalDateTime dt = time.atDate(LocalDate.now());
             return dt;
-        } catch (DateTimeParseException e) { }
+        } catch (DateTimeParseException e) {
+            //Empty catch as can attempt to format as LocalDate
+        }
         try {
             LocalDate date = LocalDate.parse(dateTime, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
             LocalDateTime dt = date.atTime(LocalTime.of(0, 0));
             return dt;
-        } catch (DateTimeParseException e) { }
+        } catch (DateTimeParseException e) {
+            //Empty catch as function will raise a DateTimeParseException once it reaches the end.
+        }
         throw new DateTimeParseException("Unable to parse datetime", dateTime, 0);
     }
 
