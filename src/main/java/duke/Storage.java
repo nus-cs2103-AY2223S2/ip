@@ -19,7 +19,8 @@ import duke.task.ToDo;
  * for the subsequent sessions.
  */
 public class Storage {
-
+    private static final String BACKUP_FILE_NAME = "duke.txt";
+    private static final String BACKUP_FILE_DIR = "data";
     /**
      * Recreates a Task object from the disk format.
      * @param str A string that represents a Task in disk format.
@@ -48,9 +49,9 @@ public class Storage {
     public List<Task> loadData() {
         List<Task> result = new ArrayList<>();
         try {
-            Path path = Paths.get(System.getProperty("user.dir"), "data", "duke.txt");
+            Path path = Paths.get(System.getProperty("user.dir"), BACKUP_FILE_DIR, BACKUP_FILE_NAME);
             if (!Files.exists(path)) {
-                Files.createDirectories(Paths.get(System.getProperty("user.dir"), "data"));
+                Files.createDirectories(Paths.get(System.getProperty("user.dir"), BACKUP_FILE_DIR));
                 Files.createFile(path);
             }
             BufferedReader bf = Files.newBufferedReader(path);
@@ -62,7 +63,7 @@ public class Storage {
             bf.close();
         } catch (IOException e) {
             result = new ArrayList<>();
-            System.out.println("Unable to open data\\duke.txt");
+            System.out.println("Unable to open "+ BACKUP_FILE_DIR + " \\ " + BACKUP_FILE_NAME);
         }
         return result;
     }
@@ -71,7 +72,7 @@ public class Storage {
      * @param userTasks List of Task objects to save.
      */
     public void saveData(List<Task> userTasks) {
-        Path path = Paths.get(System.getProperty("user.dir"), "data", "duke.txt");
+        Path path = Paths.get(System.getProperty("user.dir"), BACKUP_FILE_DIR, BACKUP_FILE_NAME);
         BufferedWriter bw = null;
         // https://beginnersbook.com/2014/01/how-to-write-to-file-in-java-using-bufferedwriter/
         try {
@@ -88,7 +89,7 @@ public class Storage {
                     bw.close();
                 }
             } catch (IOException e) {
-                System.out.println("Unable to save to data\\duke.txt");
+                System.out.println("Unable to save to "+ BACKUP_FILE_DIR + " \\ " + BACKUP_FILE_NAME);
             }
         }
     }

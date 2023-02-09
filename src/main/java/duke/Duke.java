@@ -16,7 +16,6 @@ public class Duke {
 
     private TaskList taskApplication;
     private Parser parser;
-    private Ui ui;
     private boolean isExit;
     /**
      * Constructs an instance of the main application.
@@ -24,7 +23,6 @@ public class Duke {
     public Duke() {
         this.taskApplication = new TaskList();
         this.parser = new Parser();
-        this.ui = new Ui();
         this.isExit = false;
     }
     private String listTasksCommand() {
@@ -131,33 +129,5 @@ public class Duke {
             // Any duke.exceptions.DukeException is non-fatal, so we just print them
             return e.getMessage();
         }
-    }
-    /**
-     * Main loop for Duke program.
-     */
-    public void start() {
-        this.ui.printStart();
-        while (this.ui.hasNextCommand()) {
-            String command = this.ui.readCommand();
-            if (command.equals("bye")) {
-                this.ui.printEnd();
-                this.byeCommand();
-                break;
-            }
-            try {
-                this.parseCommand(command);
-            } catch (DukeException e) {
-                // Any duke.exceptions.DukeException is non-fatal, so we just print them
-                this.ui.printBlock(e.getMessage());
-            }
-        }
-    }
-    /**
-     * Main entry point of the program.
-     * @param args Command line arguments.
-     */
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.start();
     }
 }

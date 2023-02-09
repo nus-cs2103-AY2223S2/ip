@@ -93,6 +93,11 @@ public class TaskList {
         return result.toString().replaceAll("\\n$", "");
     }
 
+    /**
+     * Returns a list of all the tasks whose name contains the keyword.
+     * @param keyword Keyword to find tasks.
+     * @return List of tasks whose name contains the keyword.
+     */
     public List<Task> getTaskByKeyword(String keyword) {
         List<Task> result = new ArrayList<>();
         for (Task s: this.userTasks) {
