@@ -47,6 +47,7 @@ public class Storage {
     public ArrayList<Task> load() throws DukeException {
 
         Path dataFile = Paths.get(String.valueOf(this.homeDir), "data.txt");
+        // Attempt to create the data file if it does not exist.
         if (!Files.exists(dataFile)) {
             System.out.println("Data file not found! Creating new data file...");
             try {
@@ -64,6 +65,7 @@ public class Storage {
             throw new DukeException("Failed to parse data file! Maybe it is corrupted?");
         }
         ArrayList<Task> loadedTasks = new ArrayList<>();
+        // Parse saved data and load it to the ArrayList of tasks.
         for (String line : readFile) {
             String[] fileData = line.split("\\|");
             switch (fileData[0]) {

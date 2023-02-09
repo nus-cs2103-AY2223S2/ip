@@ -79,17 +79,29 @@ public class TaskList {
     }
 
     /**
+     * Method to merge parsed arguments into relevant string.
+     * @param strings Parsed argument as array of strings.
+     * @param from Index of first string to be merged.
+     * @param to Index of the string that should not be merged (end index).
+     * @return Merged string of arguments.
+     */
+    private String mergeStrings(String[] strings, int from, int to) {
+        StringBuilder mergedStrings = new StringBuilder(strings[from]);
+        for (int i = from + 1; i < to; i++) {
+            mergedStrings.append(" ").append(strings[i]);
+        }
+        return mergedStrings.toString();
+    }
+
+    /**
      * Adds a Todo task into the TaskList.
      *
      * @param args Array of inputs for constructing Todo. Each element refers to each word of Todo's description.
      */
     public void addTodo(String[] args) {
         int len = args.length;
-        StringBuilder taskName = new StringBuilder(args[1]);
-        for (int i = 2; i < len; i++) {
-            taskName.append(" ").append(args[i]);
-        }
-        Todo todo = new Todo(taskName.toString());
+        String taskName = mergeStrings(args, 1, len);
+        Todo todo = new Todo(taskName);
         tasks.add(todo);
         System.out.println("Got it. I've added this To Do:\n  " + tasks.get(numOfTasks));
         numOfTasks++;
@@ -105,15 +117,9 @@ public class TaskList {
      */
     public void addDeadline(String[] args, int by) throws DukeException {
         int len = args.length;
-        StringBuilder taskName = new StringBuilder(args[1]);
-        for (int i = 2; i < by; i++) {
-            taskName.append(" ").append(args[i]);
-        }
-        StringBuilder byWhen = new StringBuilder(args[by + 1]);
-        for (int i = by + 2; i < len; i++) {
-            byWhen.append(" ").append(args[i]);
-        }
-        Deadline deadline = new Deadline(taskName.toString(), byWhen.toString());
+        String taskName = mergeStrings(args, 1, by);
+        String byWhen = mergeStrings(args, by + 1, len);
+        Deadline deadline = new Deadline(taskName, byWhen);
         tasks.add(deadline);
         System.out.println("Got it. I've added this Deadline:\n  " + tasks.get(numOfTasks));
         numOfTasks++;
@@ -131,19 +137,10 @@ public class TaskList {
      */
     public void addEvent(String[] args, int from, int to) throws DukeException {
         int len = args.length;
-        StringBuilder taskName = new StringBuilder(args[1]);
-        for (int i = 2; i < from; i++) {
-            taskName.append(" ").append(args[i]);
-        }
-        StringBuilder fromWhen = new StringBuilder(args[from + 1]);
-        for (int i = from + 2; i < to; i++) {
-            fromWhen.append(" ").append(args[i]);
-        }
-        StringBuilder toWhen = new StringBuilder(args[to + 1]);
-        for (int i = to + 2; i < len; i++) {
-            toWhen.append(" ").append(args[i]);
-        }
-        Event event = new Event(taskName.toString(), fromWhen.toString(), toWhen.toString());
+        String taskName = mergeStrings(args, 1, from);
+        String startDate = mergeStrings(args, from + 1, to);
+        String endDate = mergeStrings(args, to + 1, len);
+        Event event = new Event(taskName, startDate, endDate);
         tasks.add(event);
         System.out.println("Got it. I've added this Event:\n  " + tasks.get(numOfTasks));
         numOfTasks++;
