@@ -2,6 +2,7 @@ package duke.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 import duke.storage.Storage;
 
@@ -25,6 +26,17 @@ public class EventTask extends Task {
         super(description, EVENT_SYMBOL);
         this.startTime = startTime;
         this.endTime = endTime;
+    }
+
+    /**
+     * Returns true if the days to this event's startTime from now is within the given days, false otherwise.
+     * @param maxDays Number of days to the startTime from now in which this method should return true.
+     * @return True if the days to the startTime of this event from now is within the given days, false otherwise.
+     */
+    @Override
+    public boolean isUpcoming(long maxDays) {
+        long daysBetween = LocalDateTime.now().until(startTime, ChronoUnit.DAYS);
+        return daysBetween <= maxDays && daysBetween >= 0;
     }
 
     /**

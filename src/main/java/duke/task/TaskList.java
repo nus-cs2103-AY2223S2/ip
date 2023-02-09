@@ -74,6 +74,17 @@ public class TaskList {
         return matchingTasks;
     }
 
+    public TaskList getUpcomingTasks(long days) {
+        TaskList upcomingTasks = new TaskList();
+        for (Task task : list) {
+            if (task.isUpcoming(days)) {
+                upcomingTasks.add(task);
+            }
+        }
+        assert upcomingTasks != null : "upcomingTasks should not be null";
+        return upcomingTasks;
+    }
+
     private int getIndexFromNumber(int number) {
         return number - 1;
     }
