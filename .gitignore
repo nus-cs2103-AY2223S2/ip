@@ -4,10 +4,9 @@
 /*.iml
 
 # Gradle build files
-/.gradle/
 /build/
-/config/
 src/main/resources/docs/
+/.gradle/
 
 # MacOS custom attributes files created by Finder
 .DS_Store
@@ -19,3 +18,4 @@ text-ui-test/EXPECTED-UNIX.TXT
 *.class
 token
 *.txt
+  
