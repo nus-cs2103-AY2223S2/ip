@@ -21,13 +21,13 @@ public class FindCommand extends Command {
         this.input = input;
     }
 
-    public String execute(TaskList toDoList, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             String keyword = this.input.substring(5, input.length());
             int n = 0;
             String msg = "   Here are the matching tasks in your list:";
-            for (int i = 0; i < toDoList.size(); i++) {
-                Task t = toDoList.get(i);
+            for (int i = 0; i < tasks.size(); i++) {
+                Task t = tasks.get(i);
                 if (t.toString().contains(keyword)) {
                     n++;
                     msg += "   " + n + ". " + t + "\n";

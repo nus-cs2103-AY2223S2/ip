@@ -22,20 +22,20 @@ public class UnmarkCommand extends Command {
         this.input = input;
     }
 
-    public String execute(TaskList toDoList, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             if (input.length() <= 7 || !Character.isDigit(input.charAt(7))) {
-                throw new HachiExceptions(separator + "\n" + "\n" + " Ohno! I don't know which task to mark/unmark :(");
+                throw new HachiExceptions(ui.invalidIndexMessage());
             }
             int index = Integer.parseInt(input.substring(7));
-            Task task = toDoList.get(index - 1);
+            Task task = tasks.get(index - 1);
             task.unmark();
-            storage.saveTaskList(toDoList);
+            storage.saveTaskList(tasks);
             return separator + "\n" + "\n" + "   okie dokie, I've marked this task as not done yet: " + "\n" + task;
         } catch (HachiExceptions e) {
             return e.getMessage();
         } catch (IndexOutOfBoundsException e1) {
-            return separator + "\n" + "\n" + " There is no task to be unmarked";
+            return ui.invalidIndexMessage();
         }
     }
 }

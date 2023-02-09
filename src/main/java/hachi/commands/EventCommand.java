@@ -11,7 +11,6 @@ import hachi.tasks.Event;
  */
 public class EventCommand extends Command {
     private String input;
-    static String separator = "‿୨♡୧‿‿‿‿୨♡୧‿‿‿‿୨♡୧‿";
 
     /**
      * EventCommand constructor.
@@ -22,26 +21,25 @@ public class EventCommand extends Command {
         this.input = input;
     }
 
-    public String execute(TaskList toDoList, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             int index_e1 = input.indexOf("/");
             int index_e2 = input.lastIndexOf("/");
             if (input.length() > 5 && !input.contains("/")) {
-                throw new HachiExceptions(separator + "\n" + "\n" + "Ohno! seems like you forgot to put the time of the event ");
+                throw new HachiExceptions(ui.noStartingTime());
             }
             if (!input.substring(index_e1 + 1, input.length()).contains("/")) {
-                throw new HachiExceptions(separator + "\n" + "\n" + " Ohno! seems like you forgot to put the ending time of the event ");
+                throw new HachiExceptions(ui.noEndingTime());
             }
             if (input.length() <= 5) {
-                throw new HachiExceptions(separator + "\n" + "\n" + "Ohno! The description cannot be empty.");
+                throw new HachiExceptions(ui.emptyDescription());
             }
             Event eventTask = new Event(input.substring(6, index_e1 - 1),
                     input.substring(index_e1 + 6, index_e2 - 1),
                     input.substring(index_e2 + 4, input.length()));
-            toDoList.add(eventTask);
-            storage.saveTaskList(toDoList);
-            return separator + "\n" + "\n" + "   okie dokie. I've added this task:" + "\n" + eventTask +
-                    "   Now you have " + toDoList.size() + " tasks in the list.";
+            tasks.add(eventTask);
+            storage.saveTaskList(tasks);
+            return ui.showAdded(tasks, eventTask);
         } catch (HachiExceptions e) {
             return e.getMessage();
         }
