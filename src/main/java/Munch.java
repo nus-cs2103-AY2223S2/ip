@@ -1,12 +1,30 @@
 import AddTasks.Task;
 import Exceptions.IncompleteInputException;
 import Exceptions.InvalidInputException;
-import Exceptions.MunchException;
+import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.scene.control.Label;
+import javafx.scene.layout.*;
+import javafx.scene.shape.Circle;
 import munch.Storage;
 import munch.TaskList;
 import munch.Ui;
 import java.util.ArrayList;
-import java.util.*;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 
 
 /**
@@ -37,25 +55,19 @@ public class Munch {
      * @param args String array input
      */
     public static void main(String[] args) {
-
-        ui.welcomeMessage();
-        String filePath = "src/main/java/data/SavedTaskList.txt";
-        new Munch(filePath);
-        Boolean exit = true;
-        while (exit) {
-            try {
-                String word = ui.readCommand();
-                String[] words = word.split(" ");
-                if (word.equals("bye")) {
-                    ui.exitMessage();
-                    exit = false;
-                } else {
-                    TaskList.run(tasks, word, words);
-                }
-                Storage.save(tasks, filePath);
-            } catch (IncompleteInputException | InvalidInputException e) {
-                System.out.println(e.getMessage());
-            }
-        }
+//        ui.welcomeMessage();
+//        String filePath = "src/main/java/data/SavedTaskList.txt";
+//        new Munch(filePath);
+//        Boolean stillRunning = true;
+//        while (stillRunning) {
+//            try {
+//                String word = ui.readCommand();
+//                String[] words = word.split(" ");
+//                stillRunning = TaskList.run(tasks, word, words);
+//                Storage.save(tasks, filePath);
+//            } catch (IncompleteInputException | InvalidInputException e) {
+//                System.out.println(e.getMessage());
+//            }
+//        }
     }
 }

@@ -1,8 +1,11 @@
 package munch;
-
 import AddTasks.Task;
+import AddTasks.Todo;
+
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Scanner;
+
 
 public class Storage {
 
@@ -10,6 +13,7 @@ public class Storage {
 
     /**
      * Constructor for Storage object.
+     *
      * @param path The path of the object file where the task objects are stored in.
      */
     public Storage(String path) {
@@ -19,28 +23,22 @@ public class Storage {
     /**
      * Loads the task objects stored in a file and store it in an ArrayList.
      * If file has not been created, creates a new file.
+     *
      * @param tasks Stores all the task objects obtained from the file into the arrayList tasks.
      * @param paths The path of the object file where the task objects are stored in.
      * @return An arrayList consisting of all the task objects previously stored in a file.
      */
     public static ArrayList<Task> load(ArrayList<Task> tasks, String paths) {
         try {
-            File storageFile = new File(paths);
-            if (!storageFile.exists()) {
-                storageFile.createNewFile();
-                System.out.println("File does not exist, but I have created a new file for you!");
-            } else {
-                FileReader munch = new FileReader(paths);
-                BufferedReader munchRead = new BufferedReader(munch);
-                String nextLine = munchRead.readLine();
-                while (nextLine != null) {
-                    tasks.add(new Task(nextLine));
-                    nextLine = munchRead.readLine();
-                }
-                munchRead.close();
-                return tasks;
+            File f = new File(paths); // create a File for the given file path
+            Scanner s = new Scanner(f); // create a Scanner using the File as the source
+            while (s.hasNext()) {
+                String nextLine = s.nextLine();
+                System.out.println(nextLine);
+                Task task = new Task(nextLine);
+                tasks.add(task);
             }
-        } catch (IOException e) {
+        } catch (FileNotFoundException e) {
             System.out.println("Apologies, file cannot be read!");
         }
         return tasks;
@@ -49,6 +47,7 @@ public class Storage {
     /**
      * Stores the task objects in an arrayList into a file.
      * If file has not been created, creates a new file.
+     *
      * @param tasks Stores all the task objects in tasks into a file.
      * @param paths The path of the object file where the task objects are stored in.
      */
@@ -62,15 +61,35 @@ public class Storage {
                 storageFile.delete();
                 storageFile.createNewFile();
             }
-            FileWriter munch = new FileWriter(paths);
-            BufferedWriter munchWrite = new BufferedWriter(munch);
-            for(int i = 0; i < tasks.size(); i++) {
-                munchWrite.write(tasks.get(i).toString());
-                munchWrite.newLine();
+            FileWriter fw = new FileWriter(paths);
+            for (int i = 0; i < tasks.size(); i++) {
+                fw.write(tasks.get(i).toString());
+                fw.write('\n');
             }
-            munchWrite.close();
+            fw.close();
         } catch (IOException e) {
-            System.out.println("Apologies, file cannot be read!");
+            System.out.println("Apologies, an error occurred.");
         }
     }
+
+//    public static Task convertStringToTask(String str) {
+//        Task task = null;
+//        if (str.contains("[T]")) {
+//            String separator = "[T][ ] ";
+//            int sepPos = str.indexOf(separator);
+//            String todoDescription = str.substring(sepPos + separator.length());
+//            task = new Todo(todoDescription);
+//        } else if (str.contains("[D]")) {
+//            String separator1 = "[D][ ] ";
+//            String separator2 = " (By: ";
+//            int sepPos1 = str.indexOf(separator1);
+//            int sepPos2 = str.indexOf(separator2);
+//            String des = str.substring(sepPos1 + separator1.length(), sepPos2);
+//            String date =
+//            task = new Todo(todoDescription);
+//        } else if (str.contains("[E]")) {
+//
+//        }
+//        return task;
+//    }
 }

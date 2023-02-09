@@ -44,16 +44,14 @@ public class Task {
      * Changes the task object's value of isDone according to the string input.
      * @param str The String word to be read from.
      */
-    public void marking(String str) {
+    public String marking(String str) {
         // converting string to integer
         if (str.equals("mark")) {
             this.markAsDone();
-            System.out.println("Okay! I've marked this task as done:");
-            System.out.println(this);
-        } else if (str.equals("unmark")) {
+            return "Okay! I've marked this task as done:" + "\n" + this;
+        } else {
             this.markAsUndone();
-            System.out.println("Aites cool, I've marked this task as not done yet:");
-            System.out.println(this);
+            return "Aites cool, I've marked this task as not done yet:" + "\n" + this;
         }
     }
 

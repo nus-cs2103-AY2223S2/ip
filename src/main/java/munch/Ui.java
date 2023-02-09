@@ -20,11 +20,14 @@ public class Ui {
 
     /**
      * Prints a welcome message when the program is first being started.
+     * @return
      */
-    public static void welcomeMessage() {
-        System.out.println("Hello! I am Munch! :)");
-        System.out.println("How may I help you?");
-        System.out.println("__________________________________");
+    public static String welcomeMessage() {
+        return "Eren Jaeger, it is me, Captain Levi. How may I be of assistance?";
+    }
+
+    public static String title() {
+        return "AOT chatbot";
     }
 
     /**
@@ -38,34 +41,43 @@ public class Ui {
      * Prints an error message when the input format for date is wrong.
      */
     public static void wrongDateFormatMessage() {
-        System.out.println("Wrong format for date! [Format: dd/MM/yyyy HHmm]");
+        System.out.println("Wrong format for date! [Format: dd/MM/yyyy]");
     }
 
     /**
      * Prints a message every time a new task has been added.
      */
-    public static void addTaskMessage() {
-        System.out.println("I've added this task for you!");
+    public static String addTaskMessage() {
+        return "I've added this task for you!";
     }
 
     /**
      * Prints an exit message when the program ends.
+     * @return
      */
-    public static void exitMessage() {
-        System.out.println("See ya champ! Enjoy your day!");
+    public static String exitMessage() {
+        return "See ya champ! Enjoy your day!";
     }
 
     /**
      * Prints the list of tasks in the arrayList.
      */
-    public static void listMessage() {
-        System.out.println("Here are the task(s) in your list:");
+    public static String listMessage() {
+        return "Here are the task(s) in your list:";
     }
 
     /**
      * Prints a message every time a task is deleted.
      */
-    public static void deleteMessage() {
-        System.out.println("I've deleted this task for you!");
+    public static String deleteMessage() {
+        return "I've deleted this task for you!";
+    }
+
+    public static String findMessage(String text) {
+        return "Task(s) that starts with " + "\"" + text + "\"" + ":";
+    }
+
+    public static String erenMessage(String text) {
+        return "Eren says: " + text;
     }
 }
