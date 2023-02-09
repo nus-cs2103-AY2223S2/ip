@@ -135,6 +135,7 @@ public class TaskList {
             resultString = "There are no matching tasks in your list!";
             return resultString;
         }
+        assert result.size() > 0 : "Number of results from search cannot be negative.";
         resultString = "Here are the matching tasks in your list:";
         resultString += ReplyString.getTaskListString(result);
         return resultString;
