@@ -140,6 +140,7 @@ public class Parser {
             }
             return new EventCommand(new Event(desc, format[0], format[1]));
         default:
+            assert false : type;
             // Should never reach here. Programmer error!
             throw new KiraException("Unexpected Error!");
         }
