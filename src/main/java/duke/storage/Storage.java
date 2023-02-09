@@ -36,24 +36,24 @@ public class Storage {
      */
     private String serialise(Task task) {
         String data = "";
-        String isDone = (task.getIsDone() ? "1" : "0");
+        String statusIcon = (task.getIsDone() ? "1" : "0");
         String description = task.getDescription();
 
         if (task instanceof Todo) {
-            data = String.join(" | ", "T", isDone, description);
+            data = String.join(" | ", "T", statusIcon, description);
         }
 
         if (task instanceof Deadline) {
             Deadline deadline = (Deadline) task;
             String by = deadline.getBy();
-            data = String.join(" | ", "D", isDone, description, by);
+            data = String.join(" | ", "D", statusIcon, description, by);
         }
 
         if (task instanceof Event) {
             Event event = (Event) task;
             String from = event.getFrom();
             String to = event.getTo();
-            data = String.join(" | ", "E", isDone, description, from, to);
+            data = String.join(" | ", "E", statusIcon, description, from, to);
         }
 
         return data;
@@ -103,12 +103,11 @@ public class Storage {
         TaskList tasks = new TaskList();
 
         try {
-            boolean directoryExists = java.nio.file.Files.exists(dataPath);
+            boolean doesDirectoryExists = java.nio.file.Files.exists(dataPath);
 
             // 1. If the directory does not exist.
-            if (!directoryExists) {
+            if (!doesDirectoryExists) {
                 try {
-                    // 1a. creates a new file from the given data path.
                     new File(this.dataPathString).createNewFile();
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -122,7 +121,6 @@ public class Storage {
             // 3. Loops through the lines in the file.
             while (scanner.hasNextLine()) {
                 String data = scanner.nextLine();
-                // 3a. deserialises the line.
                 Task task = this.deserialise(data);
                 tasks.add(task);
             }
@@ -140,12 +138,11 @@ public class Storage {
      * @param tasks the task list to be saved
      */
     public void save(TaskList tasks) {
-        boolean directoryExists = java.nio.file.Files.exists(dataPath);
+        boolean doesDirectoryExists = java.nio.file.Files.exists(dataPath);
 
         // 1. If the directory does not exist.
-        if (!directoryExists) {
+        if (!doesDirectoryExists) {
             try {
-                // 1a. creates a new file from the given data path.
                 new File(this.dataPathString).createNewFile();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -155,7 +152,7 @@ public class Storage {
         // 2. Writes task into file.
         try {
             FileWriter writerObj = new FileWriter(this.dataPathString, false);
-            // 2a. serialise task into string to write into the file.
+            // 2a. Serialise task into string to write into the file.
             for (int i = 0; i < tasks.size(); i++) {
                 writerObj.write(this.serialise(tasks.get(i)) + "\n");
             }

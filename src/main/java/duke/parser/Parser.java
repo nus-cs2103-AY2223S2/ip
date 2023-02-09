@@ -11,7 +11,7 @@ import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
 import duke.command.ToDoCommand;
-import duke.command.UnMarkComamnd;
+import duke.command.UnmarkComamnd;
 
 /**
  * An abstract class to make sense of the user command.
@@ -32,7 +32,7 @@ public abstract class Parser {
         case FIND:
             return new FindCommand(input);
         case UNMARK:
-            return new UnMarkComamnd(input);
+            return new UnmarkComamnd(input);
         case MARK:
             return new MarkCommand(input);
         case TODO:
