@@ -23,14 +23,10 @@ public abstract class Command {
         return Integer.parseInt(string);
     }
 
-    public boolean isExit() {
-        return true;
-    }
-
     /**
      * Abstract method to execute the command.
-     *
-     * @return
+     * @param taskManager
+     * @return Successful execution of command message
      * @throws DukeException
      */
     public abstract String executeCommand(TaskManager taskManager) throws DukeException;

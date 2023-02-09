@@ -4,22 +4,30 @@ import java.util.ArrayList;
 
 import task.Task;
 import task.TaskManager;
-
 import util.DukeException;
+import util.DukeUI;
 
+/**
+ * Executes find task in list command.
+ */
 public class FindCommand extends Command {
-    //private final TaskManager taskManager;
     private final String word;
+
+    /**
+     * Executes command to find a task in the list
+     * given an input keyword.
+     * @param input
+     */
     public FindCommand(String input) {
-        //this.taskManager = taskManager;
         this.word = input;
     }
 
-    @Override
-    public boolean isExit() {
-        return false;
-    }
-
+    /**
+     * Finds task in list using keyword provided by user.
+     * @param taskManager
+     * @return Successful tasks found message
+     * @throws DukeException
+     */
     @Override
     public String executeCommand(TaskManager taskManager) throws DukeException {
         try {
@@ -27,12 +35,12 @@ public class FindCommand extends Command {
             ArrayList<Task> arr = taskManager.getTaskArr();
             for (Task task : arr) {
                 if (task.getDescription().contains(this.word)) {
-                    System.out.println(task);
+                    return task.toString();
                 }
             }
             return "";
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Your list does not contain this task!");
+            throw new DukeException(DukeUI.missingTaskErrorMessage());
         }
     }
 }

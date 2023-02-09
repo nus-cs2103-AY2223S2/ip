@@ -5,30 +5,30 @@ import util.DukeException;
 import util.DukeUI;
 
 /**
- * Executes delete task command.
+ * Executes uncheck task from list command.
  */
-public class DeleteCommand extends Command {
+public class UnmarkCommand extends Command {
     private final int index;
 
     /**
      * Extracts and initialises list index from String input.
      * @param input
      */
-    public DeleteCommand(String input) {
+    public UnmarkCommand(String input) {
         this.index = super.extractIndex(input) - 1;
     }
 
     /**
-     * Executes deletion of task at index given by user.
+     * Unmarks task at index given by user as completed.
      * @param taskManager
-     * @return Successful task deletion message.
+     * @return Success message that task is uncompleted.
      * @throws DukeException
      */
     @Override
     public String executeCommand(TaskManager taskManager) throws DukeException {
         try {
-            taskManager.deleteTask(this.index);
-            return DukeUI.deleteTaskMessage(taskManager.getTaskArraySize());
+            taskManager.unmarkTask(this.index);
+            return DukeUI.unmarkTaskMessage() + taskManager.printTask(this.index);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException(DukeUI.indexErrorMessage());
         }
