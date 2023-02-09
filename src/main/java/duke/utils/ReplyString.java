@@ -56,7 +56,7 @@ public class ReplyString {
             return "You have zero tasks now!";
         }
         StringBuilder result = new StringBuilder();
-        result.append("Your tasks so far!!");
+        result.append("Your tasks so far!!\n\n");
         result.append(getTaskListString(allTasks));
         return result.toString();
     }
