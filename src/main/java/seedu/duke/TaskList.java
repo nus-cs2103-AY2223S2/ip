@@ -73,6 +73,7 @@ public class TaskList {
      */
     public void addToDo(String[] echoSplit){
         String task = "";
+        assert echoSplit.length > 0 : "task length should not be less than 0";
         for (int i = 1; i < echoSplit.length; i++) {
             task += echoSplit[i] + " ";
         }
@@ -94,6 +95,7 @@ public class TaskList {
         int toI = 0;
         String from = "";
         String to = "";
+        assert echoSplit.length > 0 : "task length should not be less than 0";
 
         for (int i = 1; i < echoSplit.length; i++) {
 
