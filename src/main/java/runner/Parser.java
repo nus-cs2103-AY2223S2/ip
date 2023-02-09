@@ -4,6 +4,7 @@ import task.Event;
 import task.Task;
 import task.Todo;
 import java.time.format.DateTimeParseException;
+import java.util.Objects;
 
 /**
  * Parser to parse the command process the necessary actions.
@@ -33,6 +34,9 @@ public class Parser {
     }
 
     public String read(String info) {
+        if (info.equals("hello")) {
+            return Ui.start();
+        }
         if (!info.contains(" ")) {
             return "Not Smart to Understand -_-";
         }
