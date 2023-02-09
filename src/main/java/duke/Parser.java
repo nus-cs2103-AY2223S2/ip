@@ -28,85 +28,107 @@ public class Parser {
      * @param input The string input to be parsed.
      * @throws DukeException Throws a DukeException if the input is invalid.
      */
-    public void parseInput(String input) throws DukeException {
-        try{
-            if (input.equals("bye")) {
-                this.storage.save(taskList);
-                ui.goodbyeMessage();
-            } else if (input.equals("list")){
-                ui.printList(taskList.getList());
-            } else if (input.startsWith("mark")) {
-                markInputChecker(input);
-                int taskNum = Integer.parseInt(input.split(" ")[1]);
-                taskList.markTaskAsDone(taskNum);
-                ui.markTaskAsDoneMessage(taskList.getTask(taskNum));
-            } else if (input.startsWith("unmark")) {
-                unmarkInputChecker(input);
-                int taskNum = Integer.parseInt(input.split(" ")[1]);
-                taskList.markTaskAsIncomplete(taskNum);
-                ui.markTaskAsIncompleteMessage(taskList.getTask(taskNum));
-            } else if (input.startsWith("delete")) {
-                deleteInputChecker(input);
-                int taskNum = Integer.parseInt(input.split(" ")[1]);
-                Task toDelete = taskList.getTask(taskNum);
-                taskList.deleteTaskFromList(taskNum);
-                ui.deletedTaskMessage(toDelete, taskList.numberOfTasks());
-            } else if (isEventTask(input)) {
-                eventInputChecker(input);
-                String[] eventConstructor = input.replace("event ", "").split("/at ");
-                String timeModified = eventConstructor[1].replace("from ", "");
-                inputEvent(eventConstructor[0], timeModified);
-            } else if (isDeadlineTask(input)) {
-                deadlineInputChecker(input);
-                addDeadlineFormatted(input);
-            } else if (isTodoTask(input)) {
-                todoInputChecker(input);
-                inputTodo(input.replace("todo ", ""));
-            } else if (isFindTask(input)) {
-                findTaskInputChecker(input);
-                findTasks(input);
-            } else {
-                throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
-            }
-        } catch (DukeException e) {
-            ui.printMessage(e.getMessage());
+    public String parseInput(String input) throws DukeException {
+        if (input.equals("bye")) {
+            this.storage.save(taskList);
+            return ui.goodbyeMessage();
+        }
+        if (input.equals("list")) {
+            return ui.printList(taskList.getList());
+        }
+        String[] parsedCommand = input.split(" ");
+        String cmd = parsedCommand[0];
+        switch (cmd) {
+        case "mark":
+            return markParser(input);
+        case "unmark":
+            return unmarkParser(input);
+        case "delete":
+            return deleteParser(input);
+        case "event":
+            return eventParser(input);
+        case "deadline":
+            return deadlineParser(input);
+        case "todo":
+            return todoParser(input);
+        case "find":
+            return findParser(input);
+        default:
+            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 
-    /**
-     * Checks if the input is trying to call a search function.
-     * @param s the input string.
-     * @return true if input describes a query function, else false.
-     */
-    public boolean isFindTask(String s) {
-        return s.startsWith("find");
+
+    public String markParser(String input) {
+        try {
+            markInputChecker(input);
+            int taskNum = Integer.parseInt(input.split(" ")[1]);
+            taskList.markTaskAsDone(taskNum);
+            return ui.markTaskAsDoneMessage(taskList.getTask(taskNum));
+        } catch (DukeException e) {
+            return ui.printMessage(e.getMessage());
+        }
     }
 
-    /**
-     * Checks if the input is describing a Deadline object.
-     * @param s The input string.
-     * @return true if input describes a Deadline object, else false.
-     */
-    public boolean isDeadlineTask(String s) {
-        return s.startsWith("deadline");
+    public String unmarkParser(String input) {
+        try {
+            unmarkInputChecker(input);
+            int taskNum = Integer.parseInt(input.split(" ")[1]);
+            taskList.markTaskAsIncomplete(taskNum);
+            return ui.markTaskAsIncompleteMessage(taskList.getTask(taskNum));
+        } catch (DukeException e) {
+            return ui.printMessage(e.getMessage());
+        }
     }
 
-    /**
-     * Checks if the input is describing a Todo object.
-     * @param s The input string.
-     * @return true if input describes a Todo object, else false.
-     */
-    public boolean isTodoTask(String s) {
-        return s.startsWith("todo");
+    public String deleteParser(String input) {
+        try {
+            deleteInputChecker(input);
+            int taskNum = Integer.parseInt(input.split(" ")[1]);
+            Task toDelete = taskList.getTask(taskNum);
+            taskList.deleteTaskFromList(taskNum);
+            return ui.deletedTaskMessage(toDelete, taskList.numberOfTasks());
+        } catch (DukeException e) {
+            return ui.printMessage(e.getMessage());
+        }
     }
 
-    /**
-     * Checks if the input is describing an Event object.
-     * @param s The input string.
-     * @return true if input describes an Event object, else false.
-     */
-    public boolean isEventTask(String s) {
-        return s.startsWith("event");
+    public String eventParser(String input) {
+        try {
+            eventInputChecker(input);
+        } catch (DukeException e) {
+            return ui.printMessage(e.getMessage());
+        }
+        String[] eventConstructor = input.replace("event ", "").split("/at ");
+        String timeModified = eventConstructor[1].replace("from ", "");
+        return inputEvent(eventConstructor[0], timeModified);
+    }
+
+    public String deadlineParser(String input) {
+        try {
+            deadlineInputChecker(input);
+            return addDeadlineFormatted(input);
+        } catch (DukeException e) {
+            return ui.printMessage(e.getMessage());
+        }
+    }
+
+    public String todoParser(String input) {
+        try {
+            todoInputChecker(input);
+        } catch (DukeException e) {
+            return ui.printMessage(e.getMessage());
+        }
+        return inputTodo(input.replace("todo ", ""));
+    }
+
+    public String findParser(String input) {
+        try {
+            findTaskInputChecker(input);
+            return findTasks(input);
+        } catch (DukeException e) {
+            return ui.printMessage(e.getMessage());
+        }
     }
 
     /**
@@ -226,7 +248,8 @@ public class Parser {
      * @param input The input string that is used to find tasks.
      * @throws DukeException if the input string does not match any task descriptions.
      */
-    public void findTasks(String input) throws DukeException {
+    public String findTasks(String input) throws DukeException {
+        StringBuilder sb = new StringBuilder();
         ArrayList<Integer> taskNumbers = new ArrayList<>();
         try {
             for (int i = 1; i <= this.taskList.numberOfTasks(); i++) {
@@ -238,11 +261,12 @@ public class Parser {
             if (taskNumbers.size() == 0) {
                 throw new DukeException("OOPS!!! No such task matches your description.");
             }
-            ui.findTasksMessage();
-            ui.printFoundTasks(this.taskList, taskNumbers);
+            sb.append(ui.findTasksMessage());
+            sb.append(ui.printFoundTasks(this.taskList, taskNumbers));
         } catch (Exception e) {
-            ui.printMessage(e.getMessage());
+            return ui.printMessage(e.getMessage());
         }
+        return sb.toString();
     }
 
     /**
@@ -250,11 +274,11 @@ public class Parser {
      * @param input The input string
      * @throws DukeException if the format of the date is wrong.
      */
-    public void addDeadlineFormatted(String input) throws DukeException {
+    public String addDeadlineFormatted(String input) throws DukeException {
         String[] constructor = input.replace("deadline ", "").split(" /by ");
         try {
             LocalDate temp = LocalDate.parse(constructor[1], DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-            inputDeadline(constructor[0], temp);
+            return inputDeadline(constructor[0], temp);
 
         } catch (Exception e) {
             throw new DukeException("Please input date in format of dd/MM/yyyy");
@@ -266,10 +290,10 @@ public class Parser {
      * @param s The description of the event.
      * @param time The time of the event.
      */
-    public void inputEvent(String s, String time) {
+    public String inputEvent(String s, String time) {
         Event event = new Event(s, time);
         taskList.add(event);
-        ui.addedTaskMessage(event, taskList.numberOfTasks());
+        return ui.addedTaskMessage(event, taskList.numberOfTasks());
     }
 
     /**
@@ -277,19 +301,19 @@ public class Parser {
      * @param s The description of the deadline.
      * @param d The date of the deadline.
      */
-    public void inputDeadline(String s, LocalDate d) {
+    public String inputDeadline(String s, LocalDate d) {
         Deadline deadline = new Deadline(s, d);
         taskList.add(deadline);
-        ui.addedTaskMessage(deadline, taskList.numberOfTasks());
+        return ui.addedTaskMessage(deadline, taskList.numberOfTasks());
     }
 
     /**
      * Inputs a new Todo object into the list.
      * @param s The description of the todo task.
      */
-    public void inputTodo(String s) {
+    public String inputTodo(String s) {
         Todo todo = new Todo(s);
         taskList.add(todo);
-        ui.addedTaskMessage(todo, taskList.numberOfTasks());
+        return ui.addedTaskMessage(todo, taskList.numberOfTasks());
     }
 }

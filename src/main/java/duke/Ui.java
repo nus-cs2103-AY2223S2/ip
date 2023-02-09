@@ -27,13 +27,13 @@ public class Ui {
      * Prints the Duke logo.
      */
 
-    void showDuke() {
+    String showDuke() {
         String logo = " ____        _\n"
                 + "|  _ \\ _   _| | _____\n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        return ("Hello from\n" + logo);
     }
 
     /**
@@ -43,48 +43,51 @@ public class Ui {
         scanner.close();
     }
 
-    /**
-     * Prints a long line
-     */
-    public void printLongLine() {
-        System.out.println("\t____________________________________________________________");
-    }
+//    /**
+//     * Prints a long line
+//     */
+//    public String printLongLine() {
+//        return ("\t____________________________________________________________");
+//    }
 
     /**
      * Prints a formatted message.
      * @param s The string input to be printed.
      */
-    public void printMessage(String s) {
-        printLongLine();
-        System.out.println("\t" + s);
-        printLongLine();
+    public String printMessage(String s) {
+//        printLongLine();
+        return ("\t" + s);
+//        printLongLine();
     }
 
     /**
      * Prints a greeting message to the user.
      */
-    public void greetingMessage() {
-        printMessage("Hello! I'm Duke\n\tWhat can I do for you?");
+    public String greetingMessage() {
+        return printMessage("Hello! I'm Duke\n\tWhat can I do for you?");
     }
 
     /**
      * Prints a goodbye message to the user.
+     * @return The goodbye message in String format.
      */
-    public void goodbyeMessage() {
-        printMessage("Bye. Hope to see you again soon!");
+    public String goodbyeMessage() {
+        return printMessage("Bye. Hope to see you again soon!");
     }
 
     /**
      * Prints a formatted message showing that a task has been added to the list.
      * @param t The Task object to be added to the list.
      * @param size The size of the list after adding the new Task.
+     * @return The message that tells user that a task has been added.
      */
-    public void addedTaskMessage(Task t, int size) {
-        printLongLine();
-        System.out.println("\tGot it. I've added this task:");
-        System.out.println("\t" + t);
-        System.out.println("\tNow you have " + size + " tasks in the list.");
-        printLongLine();
+    public String addedTaskMessage(Task t, int size) {
+//        printLongLine();
+        String s1 = ("\tGot it. I've added this task:");
+        String s2 = ("\t" + t);
+        String s3 = ("\tNow you have " + size + " tasks in the list.");
+//        printLongLine();
+        return s1 + s2 + s3;
     }
 
     /**
@@ -92,19 +95,20 @@ public class Ui {
      * @param t The Task object to be deleted from the list.
      * @param size The size of the list after the task has been deleted.
      */
-    public void deletedTaskMessage(Task t, int size) {
-        printLongLine();
-        System.out.println("\tNoted. I've removed this task:");
-        System.out.println("\t" + t);
-        System.out.println("\tNow you have " + size + " tasks in the list");
-        printLongLine();
+    public String deletedTaskMessage(Task t, int size) {
+//        printLongLine();
+        String s1 = ("\tNoted. I've removed this task:");
+        String s2 = ("\t" + t);
+        String s3 = ("\tNow you have " + size + " tasks in the list");
+//        printLongLine();
+        return s1 + s2 + s3;
     }
 
     /**
      * Prints a message that is displayed if there are any matching tasks to the query.
      */
-    public void findTasksMessage() {
-        System.out.println("Here are the matching tasks in your list:");
+    public String findTasksMessage() {
+       return ("Here are the matching tasks in your list:");
     }
 
     /**
@@ -112,29 +116,30 @@ public class Ui {
      * @param taskList The TaskList object containing the ArrayList of tasks
      * @param taskNumbers The Integer ArrayList containing the task numbers to retrieve from the TaskList.
      */
-    public void printFoundTasks(TaskList taskList, ArrayList<Integer> taskNumbers) {
+    public String printFoundTasks(TaskList taskList, ArrayList<Integer> taskNumbers) {
+        StringBuilder sb = new StringBuilder();
         for (int j = 0; j < taskNumbers.size(); j++) {
             int tempTaskNumber = taskNumbers.get(j);
             Task tempTask = taskList.getTask(tempTaskNumber);
-            System.out.println(String.format("\t%d. %s", tempTaskNumber, tempTask));
+            sb.append(String.format("\t%d. %s", tempTaskNumber, tempTask));
         }
-
+        return sb.toString();
     }
 
     /**
      * Prints a message to confirm that the task has been marked as done.
      * @param t The Task object to be marked as done.
      */
-    public void markTaskAsDoneMessage(Task t) {
-        printMessage("Nice! I've marked this task as done:\n\t" + t);
+    public String markTaskAsDoneMessage(Task t) {
+        return printMessage("Nice! I've marked this task as done:\n\t" + t);
     }
 
     /**
      * Prints a message to confirm that the task has been marked as incomplete.
      * @param t The Task object to be marked as incomplete.
      */
-    public void markTaskAsIncompleteMessage(Task t) {
-        printMessage("OK, I've marked this task as not done yet:\n\t" + t);
+    public String markTaskAsIncompleteMessage(Task t) {
+        return printMessage("OK, I've marked this task as not done yet:\n\t" + t);
 
     }
 
@@ -142,12 +147,14 @@ public class Ui {
      * Prints the content of ArrayList of Task objects.
      * @param tasks The ArrayList of Tasks to be printed.
      */
-    public void printList(ArrayList<Task> tasks) {
-        printLongLine();
+    public String printList(ArrayList<Task> tasks) {
+//        printLongLine();
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
             int taskNumber = i + 1;
-            System.out.printf("\t%d. %s\n", taskNumber, tasks.get(i));
+           sb.append(String.format("\t%d. %s\n", taskNumber, tasks.get(i)));
         }
-        printLongLine();
+//        printLongLine();
+        return sb.toString();
     }
 }
