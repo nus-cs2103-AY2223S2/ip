@@ -31,7 +31,7 @@ public class Hachi {
     /**
      * Generates a response to the user instruction.
      *
-     * @param The user's input string.
+     * @param input The user's input string.
      * @return A string of the response.
      */
     public String getResponse(String input) {
