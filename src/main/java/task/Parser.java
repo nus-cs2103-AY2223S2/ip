@@ -9,7 +9,7 @@ import command.AddTask;
 import command.Command;
 import command.Delete;
 import command.ExceptionPrint;
-import command.ExitPrint;
+import command.Exit;
 import command.Find;
 import command.ListTasks;
 import command.Load;
@@ -127,6 +127,16 @@ public class Parser {
         return cmdLine.split(" ")[0].equalsIgnoreCase("bye");
     }
 
+    public static boolean isListCommand(String cmdLine) {
+        switch (cmdLine.split(" ")[0].toLowerCase()) {
+        case "list":
+        case "find":
+            return true;
+        default:
+            return false;
+        }
+    }
+
     /**
      * Parses one supplied line of input String to create a <code>Command</code> action.
      *
@@ -143,7 +153,7 @@ public class Parser {
         try {
             switch (cmd) {
             case "bye":
-                return new ExitPrint();
+                return new Exit();
             case "list":
                 return parseList(args);
             case "mark":

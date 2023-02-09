@@ -26,13 +26,13 @@ public class Save implements Command {
         if (!path.equals("")) {
             try {
                 storage.save(path, tasks);
-                ui.print("done! i've written your list to: " + path);
+                ui.printMiki("done! i've written your list to: " + path);
             } catch (IOException ex) {
-                ui.print("umm... i can't write on that!");
-                ui.print("> " + ex.getMessage());
+                ui.printMiki("umm... i can't write on that!");
+                ui.printMiki("> " + ex.getMessage());
             }
         } else {
-            ui.print("tell me where to write!!!");
+            ui.printMiki("tell me where to write!!!");
         }
     }
 }

@@ -22,6 +22,6 @@ public class ExceptionPrint implements Command {
 
     @Override
     public void run(TaskList tasks, Ui ui, Storage storage) {
-        ui.print("?!?!? " + ex.getMessage());
+        ui.printMiki("?!?!? " + ex.getMessage());
     }
 }

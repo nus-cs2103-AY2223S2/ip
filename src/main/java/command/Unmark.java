@@ -24,10 +24,9 @@ public class Unmark implements Command {
     public void run(TaskList tasks, Ui ui, Storage storage) {
         try {
             tasks.get(idx).unmark();
-            ui.print("okay...! task unmarked as undone:");
-            ui.print("  " + tasks.get(idx));
+            ui.printMiki("okay...! task unmarked as undone:\n" + "  " + tasks.get(idx));
         } catch (TaskListIndexException ex) {
-            ui.print("?!?!? " + ex.getMessage());
+            ui.printMiki("?!?!? " + ex.getMessage());
         }
     }
 }

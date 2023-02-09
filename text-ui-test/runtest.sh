@@ -22,7 +22,7 @@ fi
 USER="user"
 
 # run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
-java -classpath ../bin Miki --ascii-only --no-autoload < input.txt > ACTUAL.TXT
+java -classpath ../bin Miki --ascii-only --no-autoload --cli < input.txt > ACTUAL.TXT
 
 # convert to UNIX format
 cp EXPECTED.TXT EXPECTED-UNIX.TXT

@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.PrintStream;
 
 import org.junit.jupiter.api.Test;
+import shigure.Cli;
 import shigure.Ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -15,7 +16,7 @@ public class UiTest {
     public void printIntro_ascii() {
         ByteArrayOutputStream outStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outStream));
-        Ui ui = new Ui(true);
+        Ui ui = new Cli(true);
         ui.printIntro();
         String out = outStream.toString();
         System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));
@@ -26,7 +27,7 @@ public class UiTest {
     public void printIntro() {
         ByteArrayOutputStream outStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outStream));
-        Ui ui = new Ui(false);
+        Ui ui = new Cli(false);
         ui.printIntro();
         String out = outStream.toString();
         System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));
@@ -40,10 +41,10 @@ public class UiTest {
         System.setIn(inStream);
         System.setOut(new PrintStream(outStream));
 
-        Ui ui = new Ui(false);
-        ui.print("hello world");
+        Cli ui = new Cli(false);
+        ui.printMiki("hello world");
         ui.printDiv();
-        ui.print("mint fantôme");
+        ui.printMiki("mint fantôme");
 
         String in = ui.readLine();
         String out = outStream.toString().replace("\r\n", "\n");
@@ -67,11 +68,11 @@ public class UiTest {
         System.setIn(inStream);
         System.setOut(new PrintStream(outStream));
 
-        Ui ui = new Ui(false);
-        ui.print("hello world");
-        ui.print("\u6587\u6708\u307F\u304D x fantôme");
+        Cli ui = new Cli(false);
+        ui.printMiki("hello world");
+        ui.printMiki("\u6587\u6708\u307F\u304D x fantôme");
         ui.printDiv();
-        ui.print("\u225D\u237C\u2A50\u2A69\u2368\u2118");
+        ui.printMiki("\u225D\u237C\u2A50\u2A69\u2368\u2118");
 
         String in = ui.readLine();
         String out = outStream.toString();
