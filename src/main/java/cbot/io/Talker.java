@@ -1,6 +1,7 @@
 package cbot.io;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 /**
  * Manages printing to and receiving from the user, mainly via the Command Line Interface.
@@ -91,18 +92,8 @@ public class Talker {
      * @return An indented String list.
      */
     static String printMany(ArrayList<String> arr) {
-        StringBuilder sb = new StringBuilder();
-
-        for (String s : arr) {
-            sb.append(BLANK);
-            sb.append(s);
-            sb.append("\n");
-        }
-
-        if (!arr.isEmpty()) {
-            sb.deleteCharAt(sb.length() - 1);
-        }
-
-        return sb.toString();
+        return arr.stream()
+                .map(s -> BLANK + s)
+                .collect(Collectors.joining("\n"));
     }
 }

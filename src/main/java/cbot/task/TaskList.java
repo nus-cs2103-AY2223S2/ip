@@ -3,6 +3,8 @@ package cbot.task;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Stores and manages a list of tasks.
@@ -40,6 +42,11 @@ public class TaskList {
         return this.tasks.size();
     }
 
+    private Task getTask(int num) {
+        // 1-based counting
+        return this.tasks.get(num - 1);
+    }
+
     /**
      * Adds a task to the list.
      *
@@ -69,16 +76,12 @@ public class TaskList {
      * @return The filtered list of tasks.
      */
     public ArrayList<String> listFilter(Predicate<Task> pred) {
-        ArrayList<String> arr = new ArrayList<>();
-
-        for (int i = 0; i < getCount(); i++) {
-            if (pred.test(this.tasks.get(i))) {
-                arr.add(String.format("%3d. %s",
-                        i + 1, this.tasks.get(i)));
-            }
-        }
-
-        return arr;
+        return Stream
+                .iterate(1, i -> i + 1).limit(getCount())
+                .filter(i -> pred.test(getTask(i)))
+                .map(i -> String.format("%3d. %s",
+                        i, getTask(i)))
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
     /**
@@ -123,16 +126,15 @@ public class TaskList {
      * @see Task#mark()
      */
     public String mark(int num) {
-        int index = num - 1;
-        boolean wasChanged = tasks.get(index).mark();
+        boolean wasChanged = getTask(num).mark();
 
         if (!wasChanged) {
-            return "You've already done:\n" + GAP
-                    + tasks.get(index).toString();
+            return "You've already done:\n"
+                    + GAP + getTask(num).toString();
         }
 
-        return "Woohoo! You've completed:\n" + GAP
-                + tasks.get(index).toString();
+        return "Woohoo! You've completed:\n"
+                + GAP + getTask(num).toString();
     }
 
     /**
@@ -143,16 +145,15 @@ public class TaskList {
      * @see Task#unmark()
      */
     public String unmark(int num) {
-        int index = num - 1;
-        boolean wasChanged = tasks.get(index).unmark();
+        boolean wasChanged = getTask(num).unmark();
 
         if (!wasChanged) {
             return "Hm, you haven't yet done:\n"
-                    + GAP + tasks.get(index).toString();
+                    + GAP + getTask(num).toString();
         }
 
         return "Aw, okay :( I've unmarked:\n"
-                + GAP + tasks.get(index).toString();
+                + GAP + getTask(num).toString();
     }
 
     /**
@@ -162,8 +163,7 @@ public class TaskList {
      * @return A confirmation message.
      */
     public String delTask(int num) {
-        int index = num - 1;
-        Task removedTask = tasks.remove(index);
+        Task removedTask = tasks.remove(num - 1);
         return "Got it! Deleted:\n"
                 + GAP + removedTask.toString();
     }
@@ -185,17 +185,8 @@ public class TaskList {
      * @see cbot.util.FileStuff#saveFile(TaskList)
      */
     public String makeFileFriendly() {
-        StringBuilder sb = new StringBuilder();
-
-        for (Task t : this.tasks) {
-            sb.append(t.makeFileFriendly());
-            sb.append("\n");
-        }
-
-        if (!tasks.isEmpty()) {
-            sb.deleteCharAt(sb.length() - 1);
-        }
-
-        return sb.toString();
+        return tasks.stream()
+                .map(Task::makeFileFriendly)
+                .collect(Collectors.joining("\n"));
     }
 }
