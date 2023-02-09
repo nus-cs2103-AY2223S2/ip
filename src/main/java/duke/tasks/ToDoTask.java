@@ -16,9 +16,20 @@ public class ToDoTask extends Task {
      *
      * @return A String that is used for loading the task into Duke on startup.
      */
+    @Override
     public String save() {
         String status = this.isDone ? "DONE/+/" : "NOTDONE/+/";
         return "TODO/+/" + status + this.title + "/+/" + "\n";
+    }
+
+    /**
+     * Returns an empty String as ToDoTask objects do not have a date to be compared to.
+     *
+     * @return An empty String.
+     */
+    @Override
+    public String remind(int dayRange) {
+        return "";
     }
 
     @Override

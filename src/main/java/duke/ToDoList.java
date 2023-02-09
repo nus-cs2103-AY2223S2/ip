@@ -97,11 +97,41 @@ public class ToDoList {
         tasks.get(index).markDone();
     }
 
+    /**
+     * Reads a String to search for Task objects in the ToDoList object
+     * with the given String in its title, returns a String containing
+     * the list of Task objects that has its title contain the given input.
+     *
+     * @param keyword The keyword used to search for the Task Objects.
+     * @return A String containing the lists of Task objects containing the
+     *         keyword in its title.
+     */
     public String find(String keyword) {
         String output = "";
         for (int i = 1; i <= this.toDoCount; i++) {
             if (tasks.get(i).contains(keyword)) {
                 output = output + i + "." + tasks.get(i) + "\n";
+            }
+        }
+        return output;
+    }
+
+    /**
+     * Returns a String containing the list of DeadlineTask objects if
+     * its due date is within the specified number of days from today
+     * and EventTask objects if its start date or end date is within
+     * the specified number of days from today.
+     *
+     * @return A String containing the lists of Task objects that has
+     *         either its due date or its start/end date within the
+     *         specified number of days from today.
+     */
+    public String remind() {
+        String output = "";
+        for (int i = 1; i <= this.toDoCount; i++) {
+            String reminder = tasks.get(i).remind(10);
+            if (!reminder.equals("")) {
+                output = output + i + "." + reminder + "\n";
             }
         }
         return output;

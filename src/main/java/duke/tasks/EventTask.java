@@ -16,21 +16,29 @@ public class EventTask extends Task {
 
     public EventTask(String title, String from, String to) {
         super(title);
-        this.from = formatIfDate(from, fromDate);
+        this.from = from;
+        this.to = to;
+        formatIfEventDate(from, to);
         assert this.from != null : "from String in EventTask should not be null";
-        this.to = formatIfDate(to, toDate);
         assert this.to != null : "to String in EventTask should not be null";
     }
 
-    private String formatIfDate(String input, LocalDate date) {
+
+    private void formatIfEventDate(String from, String to) {
         DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("d/M/uuuu");
         DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("dd LLL uuuu");
         try {
-            LocalDate output = LocalDate.parse(input, inputFormat);
-            date =  output;
-            return output.format(outputFormat);
+            LocalDate outputFrom = LocalDate.parse(from, inputFormat);
+            LocalDate outputTo = LocalDate.parse(to, inputFormat);
+            this.fromDate =  outputFrom;
+            this.toDate = outputTo;
+            this.from = outputFrom.format(outputFormat);
+            this.to = outputTo.format(outputFormat);
         } catch (DateTimeParseException e) {
-            return input;
+            this.fromDate = null;
+            this.toDate = null;
+            this.from = from;
+            this.to = to;
         }
     }
 
@@ -41,9 +49,54 @@ public class EventTask extends Task {
      *
      * @return A String that is used for loading the task into Duke on startup.
      */
+    @Override
     public String save() {
         String status = this.isDone ? "DONE/+/" : "NOTDONE/+/";
-        return "EVENT/+/" + status + this.title + "/+/" + this.from + "/+/" + this.to + "\n";
+        String fromToSave = this.from;
+        String toToSave = this.to;
+        DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("d/M/uuuu");
+        if (this.fromDate != null) {
+            fromToSave = this.fromDate.format(outputFormat);
+        }
+        if (this.toDate != null) {
+            toToSave = this.toDate.format(outputFormat);
+        }
+        return "EVENT/+/" + status + this.title + "/+/" + fromToSave + "/+/" + toToSave +"\n";
+    }
+
+    /**
+     * Returns a String indicating the number of days left to the from date
+     * or to date, whichever is earlier, in this EventTask should the number
+     * of days left from today to the earlier date be less than or equal
+     * to the input number of days, otherwise returns an empty String.
+     *
+     * @param dayRange The number of days from the from date or to date, whichever
+     *                 is earlier, to be compared to.
+     * @return A String with the number of days remaining to the from date
+     *         or to date, whichever is earlier, if today falls within the specified
+     *         number of days in the input from the date, otherwise an empty String.
+     */
+    @Override
+    public String remind(int dayRange) {
+        if (this.fromDate == null || this.toDate == null) {
+            return "";
+        }
+        LocalDate today = LocalDate.now();
+        int dayLeftFrom = today.until(this.fromDate).getDays();
+        int dayLeftTo = today.until(this.toDate).getDays();
+
+        boolean isFromDateOver = dayLeftFrom < 0;
+        boolean isFromDateSoon = dayLeftFrom <= dayRange;
+        if (!isFromDateOver && isFromDateSoon && !this.isDone) {
+            return "[E] " + title + " (Starting in " + dayLeftFrom + " day!)";
+        }
+
+        boolean isToDateOver = dayLeftTo < 0;
+        boolean isToDateSoon = dayLeftTo <= dayRange;
+        if (isFromDateOver && !isToDateOver && isToDateSoon && !this.isDone) {
+            return "[E] " + title + " (Ending in " + dayLeftTo + " day!)";
+        }
+        return "";
     }
 
     @Override

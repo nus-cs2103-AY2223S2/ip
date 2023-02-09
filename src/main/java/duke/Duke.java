@@ -1,6 +1,7 @@
 package duke;
 
 
+import duke.exceptions.LoadDukeException;
 import duke.functions.Parser;
 import duke.functions.Storage;
 import duke.functions.Reply;
@@ -16,14 +17,18 @@ public class Duke {
 
     public Duke(String path) {
         this.storage = new Storage(path);
-        this.list = startUp();
     }
 
-    private ToDoList startUp() {
+    public String startUpAndGetMessage() {
         try {
-            return this.storage.load();
-        } catch (Exception e) {
-            return new ToDoList();
+            this.list = this.storage.load();
+            String reminderMessage = Reply.getReminderMessage(this.list.remind());
+            return "Successfully loaded your tasks!\n\n"
+                    + reminderMessage
+                    + Reply.getWelcomeMessage();
+        } catch (LoadDukeException e) {
+            this.list = new ToDoList();
+            return e.getMessage() + Reply.getWelcomeMessage();
         }
     }
 
