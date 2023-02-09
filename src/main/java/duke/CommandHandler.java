@@ -16,64 +16,58 @@ public class CommandHandler {
         String s;
         switch (command.getDescription()) {
         case "bye":
-            assert command.getArguments().length == 0;
-            return endDuke();
-        //Fallthrough (java doesn't let me compile if I add a break)
+            s = endDuke();
+            break;
         case "list":
             assert command.getArguments().length == 0;
-            return showTasks(tasks);
-        //Fallthrough
+            s = showTasks(tasks);
+            break;
         case "mark":
             assert command.getArguments().length == 1;
             s = markTask(command.getArguments()[0], tasks);
             storage.saveData(tasks);
-            return s;
-        //Fallthrough
+            break;
         case "unmark":
             assert command.getArguments().length == 1;
             s = unmarkTask(command.getArguments()[0], tasks);
             storage.saveData(tasks);
-            return s;
-        //Fallthrough
+            break;
         case "todo":
             assert command.getArguments().length == 1;
             s = addTodo(command.getArguments()[0], tasks);
             storage.saveData(tasks);
-            return s;
-        //Fallthrough
+            break;
         case "deadline":
             assert command.getArguments().length == 2;
             s = addDeadline(command.getArguments()[0], command.getArguments()[1], tasks);
             storage.saveData(tasks);
-            return s;
-        //Fallthrough
+            break;
         case "event":
             assert command.getArguments().length == 3;
             s = addEvent(command.getArguments()[0],
                     command.getArguments()[1], command.getArguments()[2], tasks);
             storage.saveData(tasks);
-            return s;
-        //Fallthrough
+            break;
         case "delete":
             assert command.getArguments().length == 1;
             s = deleteEvent(command.getArguments()[0], tasks);
             storage.saveData(tasks);
-            return s;
-        //Fallthrough
+            break;
         case "noMatch":
-            return noMatch();
-        //Fallthrough
+            s = noMatch();
+            break;
         case "invalid":
             assert command.getArguments().length == 1;
-            return invalid(command.getArguments()[0]);
-        //Fallthrough
+            s = invalid(command.getArguments()[0]);
+            break;
         case "find":
             assert command.getArguments().length == 1;
-            return findTasks(command.getArguments()[0], tasks);
-            //Fallthrough
+            s = findTasks(command.getArguments()[0], tasks);
+            break;
         default:
-            throw new IllegalArgumentException("No command found!");
+            throw new IllegalArgumentException("Command is not valid and was not caught!");
         }
+        return s;
     }
 
     /**
