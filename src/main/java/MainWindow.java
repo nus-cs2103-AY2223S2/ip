@@ -9,6 +9,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
+import java.util.List;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -34,7 +36,8 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke d) {
         duke = d;
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(duke.getWelcomeMessage(), dukeImage));
+        List<DialogBox> welcomeMsgs = duke.getWelcomeMessages(dukeImage);
+        dialogContainer.getChildren().addAll(welcomeMsgs);
     }
 
     /**

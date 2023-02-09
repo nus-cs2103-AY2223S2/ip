@@ -1,9 +1,13 @@
 import exception.DukeException;
+import javafx.scene.image.Image;
 import parser.Parser;
 import response.Response;
 import storage.Storage;
 import storage.TaskList;
 import ui.Ui;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Represents the Duke class
@@ -51,7 +55,15 @@ public class Duke {
         return out;
     }
 
-    public String getWelcomeMessage() {
-        return ui.getIntro();
+    public List<DialogBox> getWelcomeMessages(Image dukeImage) {
+        ArrayList<DialogBox> res = new ArrayList<>();
+        DialogBox intro = DialogBox.getDukeDialog(ui.getIntro(), dukeImage);
+        res.add(intro);
+        if (taskList.count() != 0) {
+            String nxtMsg = ui.foundSomeTasks() + taskList.toString();
+            DialogBox nxtBox = DialogBox.getDukeDialog(nxtMsg, dukeImage);
+            res.add(nxtBox);
+        }
+        return res;
     }
 }
