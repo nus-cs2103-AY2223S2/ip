@@ -16,22 +16,22 @@ public class TaskList implements Serializable {
     private static final String REMOVE_TASK_RESPONSE = "Task removed:\n";
     private static final String LIST_INDEX_SEPARATOR = ". ";
 
-    private ArrayList<Task> list;
+    private ArrayList<Task> listOfTasks;
     public TaskList() {
-        list = new ArrayList<>();
+        listOfTasks = new ArrayList<>();
     }
 
     public String addTask(Task task) {
-        list.add(task);
+        listOfTasks.add(task);
 
-        int count = list.size() - 1;
-        return ADDED_TASK_RESPONSE + list.get(count) + REMAINING_TASK_RESPONSE
-                + list.size();
+        int count = listOfTasks.size() - 1;
+        return ADDED_TASK_RESPONSE + listOfTasks.get(count) + REMAINING_TASK_RESPONSE
+                + listOfTasks.size();
     }
 
     public String markTask(int taskIndex) throws DukeException {
         try {
-            return list.get(taskIndex - 1).mark();
+            return listOfTasks.get(taskIndex - 1).mark();
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException(INVALID_INDEX_EXCEPTION);
         }
@@ -39,7 +39,7 @@ public class TaskList implements Serializable {
 
     public String unmarkTask(int taskIndex) throws DukeException {
         try {
-            return list.get(taskIndex - 1).unmark();
+            return listOfTasks.get(taskIndex - 1).unmark();
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException(INVALID_INDEX_EXCEPTION);
         }
@@ -47,9 +47,9 @@ public class TaskList implements Serializable {
 
     public String deleteTask(int taskIndex) throws DukeException {
         try {
-            Task toRemove = list.get(taskIndex - 1);
-            list.remove(taskIndex - 1);
-            return REMOVE_TASK_RESPONSE + toRemove.toString() + REMAINING_TASK_RESPONSE + list.size();
+            Task toRemove = listOfTasks.get(taskIndex - 1);
+            listOfTasks.remove(taskIndex - 1);
+            return REMOVE_TASK_RESPONSE + toRemove.toString() + REMAINING_TASK_RESPONSE + listOfTasks.size();
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException(INVALID_INDEX_EXCEPTION);
         }
@@ -57,7 +57,7 @@ public class TaskList implements Serializable {
 
     public String search(String keyword) {
         TaskList filteredTasks = new TaskList();
-        for (Task task: list) {
+        for (Task task: listOfTasks) {
             if (task.hasKeyword(keyword)) {
                 filteredTasks.addTask(task);
             }
@@ -69,8 +69,8 @@ public class TaskList implements Serializable {
     public String toString() {
         StringBuilder result = new StringBuilder();
 
-        for (int i = 0; i < list.size(); i++) {
-            result.append("\n").append(i + 1).append(LIST_INDEX_SEPARATOR).append(list.get(i));
+        for (int i = 0; i < listOfTasks.size(); i++) {
+            result.append("\n").append(i + 1).append(LIST_INDEX_SEPARATOR).append(listOfTasks.get(i));
         }
         return result.toString();
     }
