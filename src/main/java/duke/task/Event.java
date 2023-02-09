@@ -1,9 +1,11 @@
 package duke.task;
 
-import duke.Parser;
 import duke.exception.InvalidFormatException;
 
+import duke.Parser;
+
 import java.time.LocalDate;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -29,10 +31,6 @@ public class Event extends Task {
         this.from = parser.parseDate(from);
         this.to = parser.parseDate(to);
         classIcon = "E";
-    }
-
-    public Event(String description, String from, String to, Parser parser) {
-        this(description, from, to, parser,false);
     }
 
     @Override

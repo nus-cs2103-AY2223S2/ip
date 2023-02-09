@@ -1,10 +1,8 @@
 package duke.task;
 
-import duke.Parser;
 import duke.exception.InvalidFormatException;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import duke.Parser;
 
 public abstract class Task {
     protected String classIcon;
@@ -17,23 +15,22 @@ public abstract class Task {
      * @param type of Task
      * @param done isDone boolean value
      * @param text Description [Date] [Date] as String
-     * @param p Parser required to create task
+     * @param parser Parser required to create task
      * @return Todo, Event or Date
      * @throws InvalidFormatException
      */
     public static Task factoryMethod(char type, char done, String text, Parser parser) throws InvalidFormatException {
         boolean isDone = done == 'X';
 
-        Matcher m;
         switch (type) {
-            case 'T':
-                return new Todo(text, isDone);
-            case 'D':
-                return Deadline.factoryMethod(text, parser, isDone);
-            case 'E':
-                return Event.factoryMethod(text, parser, isDone);
-            default:
-                throw getInvalidFormatException();
+        case 'T':
+            return new Todo(text, isDone);
+        case 'D':
+            return Deadline.factoryMethod(text, parser, isDone);
+        case 'E':
+            return Event.factoryMethod(text, parser, isDone);
+        default:
+            throw getInvalidFormatException();
         }
     }
 

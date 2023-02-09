@@ -1,9 +1,11 @@
 package duke.task;
 
-import duke.Parser;
 import duke.exception.InvalidFormatException;
 
+import duke.Parser;
+
 import java.time.LocalDate;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -36,10 +38,6 @@ public class Deadline extends Task {
         super(description, isDone);
         this.by = parser.parseDate(by);
         classIcon = "D";
-    }
-
-    public Deadline(String description, String by, Parser parser) {
-        this(description, by, parser, false);
     }
 
     @Override
