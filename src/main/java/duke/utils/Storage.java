@@ -16,7 +16,6 @@ import java.util.Scanner;
 import duke.exceptions.MemoryFailedException;
 import duke.tasks.Task;
 import duke.tasks.TaskType;
-import duke.ui.Ui;
 
 /**
  * Handles the loading of data from and storage of data to memory.

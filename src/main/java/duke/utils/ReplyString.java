@@ -4,16 +4,24 @@ import duke.tasks.Task;
 
 public class ReplyString {
 
-    public static String logo = " ____        _        \n"
+    private static final String LOGO = " ____        _        \n"
                                 + "|  _ \\ _   _| | _____ \n"
                                 + "| | | | | | | |/ / _ \\\n"
                                 + "| |_| | |_| |   <  __/\n"
                                 + "|____/ \\__,_|_|\\_\\___|\n";
-    public static String initialGreeting = "Hope you are doing great!\nWhat can I do for you?\n";
-    public static String dottedLine = "----------------------------------------------------\n";
-    public static String onStartup = logo + initialGreeting + dottedLine;
-    public static String promptQuestion = "Enter your prompt below:";
-    public static String goodbye = "Sad...Alright bye!";
+    private static final String INITIAL_GREETING = "Hope you are doing great!\nWhat can I do for you?\n";
+    private static final String DOTTED_LINE = "----------------------------------------------------\n";
+    private static final String ON_STARTUP = LOGO + INITIAL_GREETING + DOTTED_LINE;
+    private static final String PROMPT_QUESTION = "Enter your prompt below:";
+    private static final String GOODBYE = "Sad...Alright bye!";
+
+    public static String getOnStartupString() {
+        return ON_STARTUP;
+    }
+
+    public static String getPromptQuestionString() {
+        return PROMPT_QUESTION;
+    }
 
     public static String getTaskListString(TaskList taskList) {
         StringBuilder result = new StringBuilder();

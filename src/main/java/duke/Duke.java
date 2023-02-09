@@ -11,9 +11,10 @@ import duke.utils.TaskList;
  */
 public class Duke {
 
+    private static String[] defaultMemoryPathArray = {".", "memory.txt"};
+
     private Storage storage;
     private TaskList allTasks;
-    private static String[] defaultMemoryPathArray = {".", "memory.txt"};
 
     public Duke() {
         this(defaultMemoryPathArray);

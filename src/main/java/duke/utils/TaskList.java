@@ -8,7 +8,6 @@ import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.TaskType;
 import duke.tasks.ToDo;
-import duke.ui.Ui;
 
 /**
  * Contains the list of all tasks logged in by the user.

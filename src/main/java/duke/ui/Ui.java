@@ -2,9 +2,6 @@ package duke.ui;
 
 import java.util.Scanner;
 
-import duke.tasks.Task;
-import duke.utils.TaskList;
-
 public class Ui {
     //TODO: Reassess the value of this class
 

@@ -1,5 +1,7 @@
 package duke.ui;
 
+import java.util.Objects;
+
 import duke.Duke;
 import duke.utils.ReplyString;
 import javafx.application.Platform;
@@ -10,8 +12,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-
-import java.util.Objects;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -32,14 +32,16 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/userOne.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duke.png"));
+    private Image userImage = new Image(Objects.requireNonNull(
+            this.getClass().getResourceAsStream("/images/userOne" + ".png")));
+    private Image dukeImage = new Image(Objects.requireNonNull(
+            this.getClass().getResourceAsStream("/images/duke.png")));
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(displayViewBox.heightProperty());
         displayViewBox.getChildren().addAll(
-                DialogBox.getDukeDialog(ReplyString.onStartup, dukeImage)
+                DialogBox.getDukeDialog(ReplyString.getOnStartupString(), dukeImage)
         );
     }
 
@@ -67,7 +69,7 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(dukeHeardThis, dukeImage),
                 DialogBox.getDukeDialog(response, dukeImage),
-                DialogBox.getDukeDialog(ReplyString.promptQuestion, dukeImage)
+                DialogBox.getDukeDialog(ReplyString.getPromptQuestionString(), dukeImage)
         );
         inputField.clear();
     }
