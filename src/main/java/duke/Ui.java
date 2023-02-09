@@ -10,6 +10,11 @@ import java.util.Scanner;
  */
 public class Ui {
     private final Scanner scanner;
+    public final static String LOGO = " ____        _        \n"
+            + "|  _ \\ _  _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n";
     public Ui() {
         this.scanner = new Scanner(System.in);
     }
@@ -26,13 +31,8 @@ public class Ui {
      * Prints the welcome page of the chatbot
      * @return returns welcome string
      */
-    public String showWelcome() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        String output = String.format("Hello from\n%s\nWhat can I do for you", logo);
+    public static String showWelcome() {
+        String output = String.format("Hello from\n%s\nWhat can I do for you", LOGO);
         System.out.println(output);
         return output;
     }
