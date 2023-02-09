@@ -1,12 +1,15 @@
+package duke;
+
 import exception.DukeException;
 import storage.Storage;
 import ui.StringParser;
 import ui.Ui;
 import tasks.TaskList;
 import java.util.Scanner;
+import command.Command;
 
 /**
- * Represents the Duke chatbot
+ * Represents the duke.Duke chatbot
  */
 public class Duke {
     private Ui ui;
@@ -15,7 +18,7 @@ public class Duke {
     private StringParser sp;
 
     /**
-     * Constructor for Duke object
+     * Constructor for duke.Duke object
      */
     public Duke() {
         ui = new Ui();
@@ -29,7 +32,7 @@ public class Duke {
     }
 
     /**
-     * Begins Duke's interaction with user
+     * Begins duke.Duke's interaction with user
      */
     public void run(){
         boolean isBye = false;
@@ -39,14 +42,16 @@ public class Duke {
             try {
                 String answer = sc.nextLine();
                 ui.showLine();
-                isBye = sp.parse(answer, taskList);
-                storage.updateFile(taskList);
+                //StringParser generates command
+                //Command is executed
+                Command c = sp.parse(answer, taskList);
+                c.execute(taskList, storage, ui);
+                isBye = c.isExit();
             } catch(DukeException e){
                 System.out.println(e.getMessage());
             }
             ui.showLine();
         }
-
     }
 
     /**

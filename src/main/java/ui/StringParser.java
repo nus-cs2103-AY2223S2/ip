@@ -1,46 +1,43 @@
 package ui;
+import command.*;
 import tasks.TaskList;
 import exception.DukeException;
-import command.Find;
+
 public class StringParser {
-    public boolean parse(String answer, TaskList taskList) throws DukeException {
+    public Command parse(String answer, TaskList taskList) throws DukeException {
         String[] wordArr = answer.split(" ", 2);
         if (wordArr[0].equals("mark")) {
             int index = Integer.parseInt(wordArr[1]);
-            System.out.println(taskList.markTask(index - 1));
-            //submit index to hardrive object
+            return new MarkCommand(index - 1);
         } else if (wordArr[0].equals("unmark")) {
             int index = Integer.parseInt(wordArr[1]);
-            System.out.println(taskList.unmarkTask(index - 1));
+            return new UnmarkCommand(index - 1);
         } else if (answer.equals("bye")) {
-            System.out.println("Goodbye");
-            return true;
+            return new ByeCommand();
         } else if (wordArr[0].equals("delete")) {
-            String index = wordArr[1];
-            System.out.println(taskList.deleteTask(index));
+            int index = Integer.parseInt(wordArr[1]);
+            return new DeleteCommand(index - 1);
         } else if (answer.equals("list")) { //return list of tasks
-            System.out.println(taskList.listTasks());
+            return new ListCommand();
         } else if (wordArr[0].equals("todo")) {
             this.parseTodo(answer);
             String desc = wordArr[1];
-            System.out.println(taskList.addTask(desc));
+            return new TodoCommand(desc);
         } else if (wordArr[0].equals("deadline")) {
             String desc = wordArr[1].split(" /by ")[0];
             String by = wordArr[1].split(" /by ")[1];
-            System.out.println(taskList.addTask(desc, by));
+            return new DeadlineCommand(desc, by);
         } else if (wordArr[0].equals("event")) {
             String desc = wordArr[1].split(" ", 2)[0];
             String from = wordArr[1].split(" /from ")[1].split(" /to ")[0];
             String to = wordArr[1].split(" /to ", 2)[1];
-            System.out.println(taskList.addTask(desc, from, to));
+            return new EventCommand(desc, from, to);
         } else if (wordArr[0].equals("find")){
             String keyWord = wordArr[1];
-            Find f = new Find(keyWord, taskList);
-            System.out.println(f.searchForTasks());
+            return new FindCommand(keyWord);
         } else{
             throw new DukeException("Sorry, I don't know that command");
         }
-        return false;
     }
     public void parseTodo(String input) throws DukeException{
         try{

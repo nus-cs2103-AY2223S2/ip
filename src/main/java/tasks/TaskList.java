@@ -39,21 +39,24 @@ public class TaskList extends ArrayList<Task>{
                     //switch for all 3 events
                     switch (type){
                     case "T":
-                        this.addTask(splitLine[2]);
+                        Todo todo = new Todo(splitLine[2]);
+                        this.addTask(todo);
                         if (splitLine[1].equals("1")){
                             //mark task
                             this.markTask(this.getSize() - 1);
                         }
                         break;
                     case "D":
-                        this.addTask(splitLine[2], splitLine[3]);
+                        Deadline deadline = new Deadline(splitLine[2], splitLine[3]);
+                        this.addTask(deadline);
                         if (splitLine[1].equals("1")){
                             //mark task
                             this.markTask(this.getSize() - 1);
                         }
                         break;
                     case "E":
-                        this.addTask(splitLine[2], splitLine[3], splitLine[4]);
+                        Event event = new Event(splitLine[2], splitLine[3], splitLine[4]);
+                        this.addTask(event);
                         if (splitLine[1].equals("1")){
                             //mark task
                             this.markTask(this.getSize() - 1);
@@ -73,11 +76,8 @@ public class TaskList extends ArrayList<Task>{
      * @param taskNum Index of task
      * @return Delete task message
      */
-    public String deleteTask(String taskNum){
-        int index = Integer.parseInt(taskNum) - 1;
+    public void deleteTask(int index){
         Task task = this.remove(index);
-        return "Noted. I've removed this task:\n" + task.toString()
-                + "\nNow you have " + this.getSize() + " tasks in the list";
     }
 
     /**
@@ -95,48 +95,36 @@ public class TaskList extends ArrayList<Task>{
     /**
      * Returns add task message.
      * Generates new Todo object and adds it to itself.
-     * @param desc Description of the task
+     * @param task Task to add
      * @return Add task message
      */
-    public String addTask(String desc){
-        Task todo = new Todo(desc);
-        this.add(todo);
-        return addTaskMsg(todo);
+    public void addTask(Task task){
+        this.add(task);
     }
 
-    /**
-     * Returns add task message.
-     * Generates new Deadline object and adds it to itself.
-     * @param desc Description of the task
-     * @return Add task message
-     */
-    public String addTask(String desc, String by){
-        Task deadline = new Deadline(desc, by);
-        this.add(deadline);
-        return addTaskMsg(deadline);
-    }
-    /**
-     * Returns add task message.
-     * Generates new Event object and adds it to itself.
-     * @param desc Description of the task
-     * @return Add task message
-     */
-    public String addTask(String desc, String from, String to){
-        Task event = new Event(desc, from, to);
-        this.add(event);
-        return addTaskMsg(event);
-    }
+    ///**
+    // * Returns add task message.
+    // * Generates new Deadline object and adds it to itself.
+    // * @param desc Description of the task
+    // * @return Add task message
+    // */
+    //public String addTask(String desc, String by){
+    //    Task deadline = new Deadline(desc, by);
+    //    this.add(deadline);
+    //    return addTaskMsg(deadline);
+    //}
+    ///**
+    // * Returns add task message.
+    // * Generates new Event object and adds it to itself.
+    // * @param desc Description of the task
+    // * @return Add task message
+    // */
+    //public String addTask(String desc, String from, String to){
+    //    Task event = new Event(desc, from, to);
+    //    this.add(event);
+    //    return addTaskMsg(event);
+    //}
 
-    /**
-     * Returns a message about the newly added task
-     * @param task Task object to be added
-     * @return String message about task
-     */
-    private String addTaskMsg(Task task){
-        int totalTasks = this.getSize();
-        return "Got it, I have added this task:\n" + task.toString() + "\n" +
-        "Now you have " + totalTasks + " tasks in the list.";
-    }
 
     /**
      * Returns mark task message.
@@ -144,10 +132,9 @@ public class TaskList extends ArrayList<Task>{
      * @param index Task index
      * @return Mark task message
      */
-    public String markTask(int index){
+    public void markTask(int index){
         Task task = this.get(index);
         task.updateState();
-        return "Nice I have marked this task as done\n" + task.toString();
     }
     /**
      * Returns unmark task message.
@@ -155,10 +142,9 @@ public class TaskList extends ArrayList<Task>{
      * @param index Task index
      * @return Unmark task message
      */
-    public String unmarkTask(int index){
+    public void unmarkTask(int index){
         Task task = this.get(index);
         task.updateState();
-        return "Ok I have marked as not done\n" + task.toString();
     }
 
     /**
