@@ -54,7 +54,9 @@ public class Storage {
                 String task = "";
                 while (s.hasNextLine()) {
                     task = s.nextLine();
-                    String[] inputs = task.split("\\|", 5);
+                    String[] inputs = task.split("\\|");
+                    // inputs should be less than 5
+                    assert inputs.length <= 5: "Error while loading, too many arguments";
                     // filter by task
                     Task temp;
                     if (inputs[2].equals("T")) {

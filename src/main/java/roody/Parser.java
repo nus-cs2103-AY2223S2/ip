@@ -137,6 +137,9 @@ public class Parser {
             throw new RoodyException("No date was detected! - /from {date} /to {date}");
         }
 
+        // maximum length should be 3
+        assert splitCmd.length <= 3 : "Error while parsing, too many inputs";
+
         // seperates command from description
         String[] commands = new String[splitCmd.length + 1];
         for (int i = 1; i < splitCmd.length; i++) {
@@ -162,6 +165,9 @@ public class Parser {
         if (splitCmd.length != 2 || isWrongFlag) {
             throw new RoodyException("No date was detected! - /by {date}");
         }
+
+        // maximum length should be 3
+        assert splitCmd.length <= 2 : "Error while parsing, too many inputs";
 
         // seperates command from description
         String[] commands = new String[splitCmd.length + 1];

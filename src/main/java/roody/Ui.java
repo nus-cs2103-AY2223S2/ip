@@ -101,6 +101,7 @@ public class Ui {
             listIndex++;
             stringBuilder.append(listIndex.toString() + '.' + task.toString() + '\n');
         }
+        assert list.size() == listIndex : "Error while printing, task number mismatch";
         return stringBuilder.toString();
     }
 
@@ -122,6 +123,7 @@ public class Ui {
             listIndex++;
             stringBuilder.append(listIndex.toString() + '.' + task.toString() + '\n');
         }
+        assert list.size() == listIndex : "Error while printing, task number mismatch";
         return stringBuilder.toString();
     }
 
