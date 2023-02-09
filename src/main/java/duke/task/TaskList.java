@@ -55,15 +55,25 @@ public class TaskList {
      * @param description of a task.
      */
     public void matchDescription(String description) {
+        FuzzySearch search = new FuzzySearch();
         System.out.println("Here are the tasks matched in your list: ");
-        Integer j = 0;
+        Integer numMatches = 0;
+        Boolean noExactMatch = true;
+        // Look for exact matches first.
         for (int i = 0; i < tasks.size(); i++) {
             Task task = this.getTaskAtIndex(i);
             if (task.getDescription().equals(description)) {
-                System.out.println((++j) + ". " + task.toString());
+                noExactMatch = false;
+                System.out.println((++numMatches) + ". " + task.toString());
             }
         }
-        if (j == 0) {
+        // Look for similar matches.
+        Task similarTask = search.fuzzySearch(description, this, 5);
+        if (noExactMatch && similarTask != null) {
+            System.out.println("It seems that there are no exact matches. \n "
+                    + "Here's the most similar task I could find");
+            System.out.println(1 + ". " + similarTask.toString());
+        } else if (noExactMatch && numMatches == 0) {
             System.out.println("It seems that there are no matches.");
         }
     }
