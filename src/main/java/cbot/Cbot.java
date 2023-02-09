@@ -73,6 +73,8 @@ public class Cbot {
      * @see Parser
      */
     public String getResponse(String input) {
+        assert !this.isBye : "Cbot should have terminated already";
+
         try {
             Parser p = new Parser(input);
 
