@@ -4,13 +4,13 @@ package duke;
  * user can still create a task that is not todo, not deadline and not events.
  * It has only the description and whether it is marked as done or undone
  *
- * @author Muhammad Reyaaz 
+ * @author Muhammad Reyaaz
  * @version %I% %G%
  * @since 11
  */
 class Task {
-    
-    private final boolean isDone; 
+
+    private final boolean isDone;
     private final String description;
     /**
     * Sole constructor. (For invocation by subclass
@@ -35,7 +35,7 @@ class Task {
      * new task due to immutability of the Task
      *
      * @param description Title of the task
-     * @param isDone Whether the task is marked as done 
+     * @param isDone Whether the task is marked as done
      */
     Task(String description, boolean isDone) {
         this.description = description;
@@ -45,7 +45,7 @@ class Task {
      * Due to immutability, a new Task is returned once the user marks the
      * task as done
      *
-     * @return Task 
+     * @return Task
      */
     Task markAsDone() {
         return new Task(description, true);
@@ -54,7 +54,7 @@ class Task {
      * Due to immutability, a new Task is returned once the user marks the
      * task as undone
      *
-     * @return Task 
+     * @return Task
      */
     Task markAsUndone() {
         return new Task(description, false);
@@ -74,13 +74,13 @@ class Task {
      * @return description
      */
     String getDescription() {
+        assert(description != "");
         return description;
     }
 
-    @Override 
+    @Override
     public String toString() {
         return String.format("[%s] %s", getStatusIcon(), description);
     }
 
 }
-

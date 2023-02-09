@@ -25,7 +25,7 @@ public class Recur extends Events implements Runnable  {
         } catch (InterruptedException e) {
             System.out.println("Interrupted Exception");
         }
-        System.out.println("Scheduled task");
+        System.out.println("");
     }
 
 }

@@ -292,15 +292,19 @@ class Parser {
         if (description.trim().length() == 0) {
             throw new DukeException("Event must not be empty");
         }
+        assert(description.contains("/from"));
         String[] dateRange = description.split("/from");
         String actualDescription = dateRange[0];
+        assert(dateRange[1].contains("/to"));
         String startTime = dateRange[1].split("/to")[0];
+        assert(dateRange[1].split("/to")[1].contains("/repeat"));
         String endTime = dateRange[1].split("/to")[1].split("/repeat")[0];
         String repeatString = dateRange[1].split("/to")[1].split("/repeat")[1];
+        assert(repeatString.length() > 1);
         repeatString = repeatString.substring(1,repeatString.length() -1);
         Integer repeat = Integer.parseInt(repeatString);
         Recur newTask = new Recur(actualDescription, startTime, endTime, repeat);
-        System.out.println("recur task " + newTask.toString());
+        //System.out.println("recur task " + newTask.toString());
         recurList.addRecurringEvent(newTask);
         return tasks.add(new Events(actualDescription, startTime, endTime));
         //return recurList;

@@ -182,9 +182,15 @@ class Storage {
     void rephraseEvents(String input) {
         int indexOfFrom = input.indexOf("(from: ");
         int indexOfTo = input.indexOf("(to: ");
-        String task = input.substring(8, indexOfFrom);
-        String fromDate = input.substring(indexOfFrom + (2 * SIZE_OF_BOX) , indexOfTo - 1);
+        String task = input.substring(7, indexOfFrom);
+        String fromDate = input.substring(indexOfFrom + (2 * SIZE_OF_BOX), indexOfTo - 1);
         String toDate =  input.substring(indexOfTo + SIZE_OF_BOX + 1, input.length() - 1);
+
+        fromDate = fromDate.trim();
+        toDate = toDate.trim();
+
+        System.out.println("fromDate:" + fromDate);
+        System.out.println("toDate:" + toDate);
         this.tasks = Parser.events(task, fromDate, toDate, this.tasks);
         markTask(input);
     }

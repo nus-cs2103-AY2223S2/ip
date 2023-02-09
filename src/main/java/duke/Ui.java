@@ -30,6 +30,7 @@ class Ui {
         if (!description.endsWith(" ")) {
             description = description + " ";
         }
+        assert(description.length() > 1);
         scanner = new Scanner(description);
         this.description = scanner.next();
     }
@@ -73,7 +74,7 @@ class Ui {
         } else if (description.equals(Parser.FIND)) {
             this.tasks = Parser.find(scanner, tasks);
         } else if (description.equals(Parser.RECUR)) {
-            System.out.println("recur");
+            //System.out.println("recur");
             this.tasks = Parser.addRecur(scanner, recurList, tasks);
         } else {
             dukeExceptionWarning(description, tasks);
