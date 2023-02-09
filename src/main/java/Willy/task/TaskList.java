@@ -133,9 +133,32 @@ public class TaskList {
         // System.out.println("Successfully added an event"); // chaneg this later
     }
 
+
     /**
-     * Converts the tasklist into a combined string representation
+     * Converts the tasklist into a combined string representation (need to check)
      */
+
+    public void findTasks(String keyword) {
+        System.out.println("Here are the matching tasks in your list");
+        String str = "", msg = "";
+        int counter = 1;
+        for (int i = 0; i < getTaskCount(); i++) {
+            if (this.getTask(i).toString().contains(keyword)) {
+                msg = "#" + counter + ". " + this.getTask(i);
+
+                if (i == getTaskCount() - 1) {
+                    // Marks the end of the tList
+                    str += msg;
+                    counter++;
+                } else {
+                    str += msg + "\n";
+                    counter++;
+                }
+            }
+
+        }
+        System.out.println(str);
+    }
     @Override
     public String toString() {
         String str = "";
