@@ -38,6 +38,25 @@ public class Storage {
         }
     }
 
+    public Task processTask(String[] input) {
+        String type = input[0];
+        assert type == "T" || type == "D" || type == "E" : "Type of task should be T, D or E";
+        String mark = input[1];
+        assert mark == "1" || mark == "0" : "Task mark status should be 1 or 0";
+        Task x = null;
+        if (type.equals("T")) {
+            x = new Todo(input[2]);
+        } else if (type.equals("D")) {
+            x = new Deadline(input[2], input[3]);
+        } else if (type.equals("E")) {
+            x = new Event(input[2], input[3], input[4]);
+        }
+        if (mark.equals("1")) {
+            x.mark();
+        }
+        return x;
+    }
+
     /**
      * Loads in stored tasks from file.
      *
@@ -51,21 +70,7 @@ public class Storage {
             while (s.hasNext()) {
                 // convert text to duke.data.task.Task
                 String[] input = s.nextLine().split(" \\| ");
-                String type = input[0];
-                assert type == "T" || type == "D" || type == "E" : "Type of task should be T, D or E";
-                String mark = input[1];
-                assert mark == "1" || mark == "0" : "Task mark status should be 1 or 0";
-                Task x = null;
-                if (type.equals("T")) {
-                    x = new Todo(input[2]);
-                } else if (type.equals("D")) {
-                    x = new Deadline(input[2], input[3]);
-                } else if (type.equals("E")) {
-                    x = new Event(input[2], input[3], input[4]);
-                }
-                if (mark.equals("1")) {
-                    x.mark();
-                }
+                Task x = processTask(input);
                 tasks.add(x);
             }
             return tasks;
