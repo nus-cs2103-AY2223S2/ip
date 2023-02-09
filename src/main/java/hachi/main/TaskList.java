@@ -34,6 +34,7 @@ public class TaskList {
      * @param task New Task object to be added to the TaskList.
      */
     public void add(Task task) {
+        assert task != null;
         this.toDoList.add(task);
     }
 
