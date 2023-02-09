@@ -73,7 +73,7 @@ public class DeadlineTask extends Task {
             } else if (i > byIndex) {
                 deadline.append(input.get(i));
                 if (i < input.size() - 1) {
-                    deadline.append(" ");
+                    deadline.append(" "); 
                 }
             }
         }
