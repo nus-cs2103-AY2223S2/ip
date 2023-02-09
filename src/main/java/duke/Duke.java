@@ -60,8 +60,7 @@ public class Duke  {
 
             if (answer.startsWith("find ")) {
                 String keyword = parser.getFindKeyword();
-                tasks.find(keyword);
-                return tasks.find(keyword).toString();
+                return ui.showFind(tasks.find(keyword));
             }
             if (answer.startsWith("mark ")) {
                 Integer index = parser.getMarkIndex(length);
@@ -77,20 +76,16 @@ public class Duke  {
             }
             if (answer.startsWith("todo ")) {
                 String description = parser.getTodoDescription();
-                return ui.showAddTask(tasks.addTodo(answer));
+                return ui.showAddTask(tasks.addTodo(description));
             }
             if (answer.startsWith("deadline ")) {
                 String[] descriptionList = parser.getDeadlineDescription();
 
-                LocalDateTime by = parser.getAsLocalDate(descriptionList[1]);
-
-                return ui.showAddTask(tasks.addDeadline(descriptionList[0], by));
+                return ui.showAddTask(tasks.addDeadline(descriptionList[0], descriptionList[1]));
             }
             if (answer.startsWith("event ")) {
                 String[] descriptionList = parser.getEventDescription();
-                LocalDateTime from = parser.getAsLocalDate(descriptionList[1]);
-                LocalDateTime to = parser.getAsLocalDate(descriptionList[2]);
-                return ui.showAddTask(tasks.addEvent(descriptionList[0], from, to));
+                return ui.showAddTask(tasks.addEvent(descriptionList[0], descriptionList[1], descriptionList[2]));
 
             }
 
