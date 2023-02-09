@@ -7,7 +7,7 @@
 <?import javafx.scene.shape.Circle?>
 
 <fx:root alignment="TOP_RIGHT" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="86.0"
-         prefWidth="480.0" type="HBox" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" >
+         prefWidth="380.0" type="HBox" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" >
   <Label fx:id="dialog" text="Label" wrapText="true" />
   <padding>
     <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
