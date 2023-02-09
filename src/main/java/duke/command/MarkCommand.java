@@ -26,32 +26,32 @@ public class MarkCommand extends Command {
      * and updates the storage file accordingly.
      * Informs user of successful execution of command via the ui.
      *
-     * @param tasks TaskList that contains all the current tasks.
-     * @param ui Ui that communicates with the user.
-     * @param storage Storage that backups the saving of tasks.
-     * @return string reply to be shown to user after executing this command.
-     * @throws IOException when storage file cannot be read.
-     * @throws DukeException when user input does not comply with intended uses.
+     * @param tasks TaskList that contains all the current tasks
+     * @param ui Ui that communicates with the user
+     * @param storage Storage that backups the saving of tasks
+     * @return string reply to be shown to user after executing this command
+     * @throws IOException when storage file cannot be read
+     * @throws DukeException when user input does not comply with intended uses
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException, DukeException {
         if (taskIndex >= tasks.size()) {
             String errorMessage = String.format("Task %d does not exist!", taskIndex + 1);
             throw new DukeException(errorMessage);
-        } else {
-            Task t = tasks.get(taskIndex);
-            String msg;
-            if (isMark) {
-                t.mark();
-                msg = "Congratulations for completing the task ^^ I've marked it as done: \n";
-            } else {
-                t.unmark();
-                msg = "Ok, I've unmarked the task for you: \n";
-            }
-            storage.saveTasks(tasks.getTasks());
-            msg += t.toString();
-            msg += "\n";
-            return msg;
         }
+
+        Task task = tasks.get(taskIndex);
+        String msg;
+        if (isMark) {
+            task.mark();
+            msg = "Congratulations for completing the task ^^ I've marked it as done: \n";
+        } else {
+            task.unmark();
+            msg = "Ok, I've unmarked the task for you: \n";
+        }
+        storage.saveTasks(tasks.getTasks());
+        msg += task.toString();
+        msg += "\n";
+        return msg;
     }
 }
