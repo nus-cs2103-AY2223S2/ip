@@ -189,6 +189,7 @@ public class Duke extends Application {
             int taskNumber = logic.indexToDelete(input);
             return tasks.deleteTaskAtIndexString(--taskNumber);
         } else {
+            assert input.startsWith("find") == true : "Unhandled command";
             String description = logic.commandToDescription(input); // find command
             return tasks.matchDescriptionString(description);
         }

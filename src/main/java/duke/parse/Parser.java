@@ -80,6 +80,7 @@ public class Parser {
                 String by = temp[1];
                 task = new Deadline(taskDescription, by);
             } else { // (command.matches(EVENT_PATTERN)) {
+                assert command.matches(EVENT_PATTERN) == true : "Command is neither a todo, deadline nor event.";
                 String description = command.substring(6);
                 String[] temp = description.split("\\s*/from\\s*");
                 String taskDescription = temp[0];
