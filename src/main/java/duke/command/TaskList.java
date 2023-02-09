@@ -64,7 +64,7 @@ public class TaskList {
             res += String.format("%d.%s", j + 1, arr[j]);
             res += "\n";
         }
-        return("Here are the tasks in your list:" + "\n" + res);
+        return ("Here are the tasks in your list:" + "\n" + res);
     }
 
     /**
@@ -95,13 +95,13 @@ public class TaskList {
                     String original = arr[num];
                     arr[num] = new Task(String.valueOf(original.charAt(1)),
                             original.substring(7), true).toString();
-                    return("OK, I've marked this task as done:" + "\n" + arr[num]);
+                    return ("OK, I've marked this task as done:" + "\n" + arr[num]);
                 }
             } catch (IndexOutOfBoundsException e) {
                 throw new InvalidIndexException();
             }
         } catch (InvalidIndexException e) {
-            return(e.getMessage());
+            return (e.getMessage());
         }
         return "";
     }
@@ -117,20 +117,17 @@ public class TaskList {
     public String unmark(int num1) throws IOException {
         try {
             try {
-                //if (arr[num1] != null) {
-                    String original = arr[num1];
-                    Task newTask = new Task(String.valueOf(original.charAt(1)),
-                            original.substring(7), false);
-                    arr[num1] = newTask.toString();
-                    return("OK, I've marked this task as not done yet:" + "\n" + arr[num1]);
-                //}
+                String original = arr[num1];
+                Task newTask = new Task(String.valueOf(original.charAt(1)),
+                        original.substring(7), false);
+                arr[num1] = newTask.toString();
+                return ("OK, I've marked this task as not done yet:" + "\n" + arr[num1]);
             } catch (IndexOutOfBoundsException e) {
                 throw new InvalidIndexException();
             }
         } catch (InvalidIndexException e) {
-            return(e.getMessage());
+            return (e.getMessage());
         }
-        //return(""); //new TaskList(arr);
     }
 
     /**
@@ -170,7 +167,7 @@ public class TaskList {
                         arr[trace] = originalList[trace + 1];
                         trace++;
                     }
-                    return("Noted. I've removed this task:" + "\n" + original + "\n"
+                    return ("Noted. I've removed this task:" + "\n" + original + "\n"
                             + String.format("Now you have %d "
                             + "tasks in the list", this.getValidLen()));
                 }
@@ -178,10 +175,9 @@ public class TaskList {
                 throw new InvalidIndexException();
             }
         } catch (InvalidIndexException e) {
-            return(e.getMessage());
+            return (e.getMessage());
         }
         return new InvalidIndexException().getMessage();
-        //return this;
     }
 
 
@@ -195,11 +191,10 @@ public class TaskList {
     public String add(Task task) {
         int len = this.getValidLen();
         arr[len] = task.toString();
-        return("Got it. I've added this task:" + "\n" + task.toString()
+        return ("Got it. I've added this task:" + "\n" + task.toString()
                 + "\n"
                 + String.format("Now you have %d "
                 + "tasks in the list", this.getValidLen()));
-        //return new TaskList(arr);
     }
 
     /**
@@ -220,7 +215,7 @@ public class TaskList {
                 res += "\n";
             }
         }
-        return("WOOF! Here  are the matching tasks in your list:" + "\n" + res);
+        return ("WOOF! Here  are the matching tasks in your list:" + "\n" + res);
     }
 
     /**

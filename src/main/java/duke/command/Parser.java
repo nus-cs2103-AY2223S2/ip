@@ -1,8 +1,8 @@
 package duke.command;
 
 import duke.exception.DukeException;
-import duke.exception.MissingContentException;
 import duke.exception.InvalidIndexException;
+import duke.exception.MissingContentException;
 
 /**
  * Makes sense of what users say
@@ -14,22 +14,19 @@ public class Parser {
      * @param arr array of original array
      * @return full string command for users
      */
-    public static String toDo(String[] arr) {
+    public static String toDo(String[] arr) throws MissingContentException {
         String remaining = "";
         try {
-            try {
-                remaining = arr[1];
+            remaining = arr[1];
+            remaining += " ";
+            for (int j = 2; j < arr.length; j++) {
+                remaining += arr[j];
                 remaining += " ";
-                for (int j = 2; j < arr.length; j++) {
-                    remaining += arr[j];
-                    remaining += " ";
-                }
-            } catch (IndexOutOfBoundsException | NullPointerException e) {
-                throw new MissingContentException();
             }
-        } catch (MissingContentException e) {
-            System.out.println(e.getMessage());
+        } catch (IndexOutOfBoundsException | NullPointerException e) {
+            throw new MissingContentException();
         }
+        assert (remaining.length() != 0) : "Parser could not process todo task as description is empty";
         return remaining;
     }
 
@@ -41,7 +38,8 @@ public class Parser {
      * @throws MissingContentException if command does not specify index
      * @throws InvalidIndexException if task list does not have such index
      */
-    public static int getTaskIndex(TaskList listOfAction, String[] command) throws MissingContentException, InvalidIndexException {
+    public static int getTaskIndex(TaskList listOfAction, String[] command) throws MissingContentException,
+            InvalidIndexException {
         int taskIndex;
         try {
             taskIndex = Integer.parseInt(command[1]);
@@ -77,7 +75,6 @@ public class Parser {
             detail += " ";
         }
         return detail;
-
     }
 
     /**
@@ -173,6 +170,7 @@ public class Parser {
             detail += arr[j];
             detail += " ";
         }
+        assert (detail.length() != 0) : "Parser could not process event task as its detail is empty";
         return detail;
     }
 
@@ -237,22 +235,21 @@ public class Parser {
     }
 
     private static String getTime(String s) throws IndexOutOfBoundsException {
-        //String res = "";
-        //try {
-            String track = String.valueOf(s.charAt(0));
-            int tracker = 0;
-            while (!track.equals(" ")) {
-                tracker++;
-                track = String.valueOf(s.charAt(tracker));
-            }
-            String date = String.valueOf(s.substring(0, tracker));
-            String time = String.valueOf(s.substring(tracker + 1));
-            String timeFormatted = "";
-            for (int i = 0; i < time.length(); i += 2) {
-                timeFormatted += String.valueOf(time.substring(i, i + 2));
-                timeFormatted += ":";
-            }
-            timeFormatted += "00";
+        String track = String.valueOf(s.charAt(0));
+        int tracker = 0;
+        while (!track.equals(" ")) {
+            tracker++;
+            track = String.valueOf(s.charAt(tracker));
+        }
+        assert tracker != 0 : "Cannot get event time - missing input from user";
+        String date = String.valueOf(s.substring(0, tracker));
+        String time = String.valueOf(s.substring(tracker + 1));
+        String timeFormatted = "";
+        for (int i = 0; i < time.length(); i += 2) {
+            timeFormatted += String.valueOf(time.substring(i, i + 2));
+            timeFormatted += ":";
+        }
+        timeFormatted += "00";
         return date + "T" + timeFormatted;
     }
 }
