@@ -1,19 +1,39 @@
-# Duke project template
+# Duke 2.0
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+> "Fortune favors the bold" - Matt Damon
 
-## Setting up in Intellij
+- Ever found yourself locked outside the examination hall for coming an hour late? 
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+- Do you wish for someone to keep track of all those events?
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
+
+## Well now you can!
+
+With the all *new and improved* Duke chatbot, you will never miss another deadline ever again!:sunglasses:
+
+1. Create your own personalized tasks! We've got :
+- To-dos
+
+- Deadlines
+
+- Even timed events!
+
+2. Mark your compoleted tasks!
+
+3. Save and load your tasks!
+
+- [x] Manage your tasks
+- [ ] Reminders for your device
+- [ ] Share your schedule 
+
+Get the github link right [here!](https://github.com/jweeyh/ip.git)
+
+Here's how to start your journey with Duke!
+```java
+public static void main(String[] args) {
+        new Duke("FILEPATH").run();
+    }
+```
    ```
    Hello from
     ____        _        
