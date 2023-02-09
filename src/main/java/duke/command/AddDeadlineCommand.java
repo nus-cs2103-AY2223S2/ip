@@ -3,8 +3,13 @@ package duke.command;
 import duke.Parser;
 import duke.TaskList;
 import duke.exception.DukeException;
+import duke.exception.EmptyTaskDescriptionException;
+import duke.exception.InvalidDateTimeException;
 import duke.task.Deadline;
 import duke.task.Task;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 
 /**
  * A command representing the user adding a new Deadline to the task list.
@@ -28,11 +33,19 @@ public class AddDeadlineCommand extends Command {
      */
     @Override
     public String execute() throws DukeException {
-        int doneByIndex = contents.indexOf("/by");
-        String description = contents.substring(9, doneByIndex - 1);
-        String doneByString = contents.substring(doneByIndex + 4);
-        Task task = new Deadline(description, Parser.parseDateTime(doneByString));
-        tasks.addTask(task);
-        return tasks.addTaskText(task);
+        try {
+            int doneByIndex = contents.indexOf("/by");
+            String description = contents.substring(9, doneByIndex - 1);
+            String doneByString = contents.substring(doneByIndex + 4);
+            System.out.println("c");
+            LocalDateTime doneBy = Parser.parseDateTime(doneByString);
+            Task task = new Deadline(description, doneBy);
+            tasks.addTask(task);
+            return tasks.addTaskText(task);
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new EmptyTaskDescriptionException();
+        } catch (DateTimeParseException e ) {
+            throw new InvalidDateTimeException();
+        }
     }
 }

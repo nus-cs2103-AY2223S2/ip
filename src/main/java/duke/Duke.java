@@ -6,7 +6,6 @@ import java.io.IOException;
 import duke.command.Command;
 import duke.exception.DukeException;
 
-
 /**
  * Duke is a chatbot that helps with task management.
  *
@@ -18,6 +17,7 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private Parser parser;
 
     /**
      * Constructor for Duke.
@@ -27,12 +27,13 @@ public class Duke {
      */
     public Duke(String directoryPath, String filePath) {
         this.storage = new Storage(directoryPath, filePath);
+        this.parser = new Parser();
         try {
             this.tasks = storage.load();
-            this.ui = new Ui(tasks);
+            this.ui = new Ui(tasks, parser);
         } catch (FileNotFoundException | DukeException e) {
             this.tasks = new TaskList();
-            this.ui = new Ui(tasks);
+            this.ui = new Ui(tasks, parser);
         }
     }
 

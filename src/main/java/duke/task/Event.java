@@ -50,6 +50,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return String.format("E | %s | from: %s to: %s", super.toString(), formatDateTime(start), formatDateTime(end));
+        return String.format("E | %s | from: %s to: %s", super.toString(), displayDateTime(start), displayDateTime(end));
     }
 }
