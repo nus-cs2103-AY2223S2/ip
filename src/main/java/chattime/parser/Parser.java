@@ -121,6 +121,9 @@ public class Parser {
 
     /**
      * Process user command for type 'add task' e.g. todo, deadline and event.
+     *
+     * @return Add type command due to user input.
+     * @throws ChattimeException Returns error message.
      */
     private static Command parseAddCommand() throws ChattimeException {
         checkAddCommand();
@@ -138,6 +141,9 @@ public class Parser {
 
     /**
      * Process user command relating to index input e.g. mark, unmark and delete.
+     *
+     * @return Index type commands due to user input.
+     * @throws ChattimeException Returns error message.
      */
     private static Command parseIndexCommand() throws ChattimeException {
         int index = checkIndexCommand();

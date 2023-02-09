@@ -9,21 +9,23 @@ import java.time.LocalTime;
 import org.junit.jupiter.api.Test;
 
 public class EventTest {
+    private LocalDate from = LocalDate.of(2023, 1, 1);
+    private LocalDate to = LocalDate.of(2023, 2, 2);
+    private LocalTime time = LocalTime.of(10, 0);
+    private Event testTask = new Event("Test", from, time, to, time);
+
+    @Test
+    public void taskWithCodeTest() {
+        assertEquals("[E] Test", testTask.taskWithCode());
+    }
+
     @Test
     public void toDataStringTest() {
-        LocalDate from = LocalDate.of(2023, 1, 1);
-        LocalDate to = LocalDate.of(2023, 2, 2);
-        LocalTime time = LocalTime.of(10, 0);
-        Event testTask = new Event("Test", from, time, to, time);
         assertEquals("E @ 0 @ Test @ 2023-01-01 @ 10:00 @ 2023-02-02 @ 10:00", testTask.toDataString());
     }
 
     @Test
     public void isOnDateTest() {
-        LocalDate from = LocalDate.of(2023, 1, 1);
-        LocalDate to = LocalDate.of(2023, 2, 2);
-        LocalTime time = LocalTime.of(10, 0);
-        Event testTask = new Event("Test", from, time, to, time);
         assertFalse(testTask.isOnDate(LocalDate.of(2023, 3, 3)));
     }
 

@@ -3,7 +3,6 @@ package chattime.storage;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -36,6 +35,7 @@ public class Storage {
      *
      * @param passedUi UI object from bot to handle UI command.
      * @param path Storage path specified.
+     * @throws IOException When memory initialization error.
      */
     public Storage(Ui passedUi, String path) throws IOException {
         ui = passedUi;
@@ -48,6 +48,7 @@ public class Storage {
      * Opens file at storage path, creates one at the given path if the file is not found.
      *
      * @param filePath Specified storage path.
+     * @throws IOException When file cannot be opened.
      */
     public void openFile(String filePath) throws IOException {
         file = new File(filePath);
@@ -86,6 +87,7 @@ public class Storage {
      * Prepares loading data into current task list.
      *
      * @return An arraylist of stored data to be imported into current TaskList object.
+     * @throws ChattimeException Returns error message.
      */
     public ArrayList<Task> loadData() throws IOException, ChattimeException {
         BufferedReader loader = new BufferedReader(new FileReader(file));
@@ -115,6 +117,7 @@ public class Storage {
      * @param taskCode Code of task types.
      * @param taskSplit Processed storage data by splitting separation.
      * @return An arraylist of stored data to be imported into current TaskList object.
+     * @throws ChattimeException Returns error message.
      */
     private Task createTaskFromStorage(String taskCode, String[] taskSplit) throws ChattimeException {
         switch (taskCode) {
@@ -187,6 +190,7 @@ public class Storage {
      *
      * @param index Index of the removed or updated task.
      * @param task Updated task, takes no parameter in delete condition.
+     * @throws IOException When error taking input or saving file.
      */
     public void rewriteFile(int index, Task... task) throws IOException {
         StringBuilder updateString = checkWriteContent(index, task);
@@ -230,6 +234,7 @@ public class Storage {
      *
      * @param content Data to be written in.
      * @param append Flag that determines whether the content should append or replace the entire storage file.
+     * @throws IOException When error taking input or saving file.
      */
     private void writeToFile(String content, boolean append) throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(file, append));

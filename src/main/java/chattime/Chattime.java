@@ -1,12 +1,12 @@
 package chattime;
 
+import java.io.IOException;
+
 import chattime.command.Command;
 import chattime.exception.ChattimeException;
 import chattime.parser.Parser;
 import chattime.storage.Storage;
 import chattime.ui.Ui;
-
-import java.io.IOException;
 
 /**
  * A chatbot that receives user's input on various predetermined command types and performs relevant functions.
@@ -33,6 +33,8 @@ public class Chattime {
 
     /**
      * Runs the bot and handles user's input.
+     *
+     * @return Respond message to user based on the input.
      */
     String getResponse(String input) {
         if (!ui.getInitStatus()) {

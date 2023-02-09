@@ -1,11 +1,11 @@
 package chattime.command;
 
+import java.io.IOException;
+
 import chattime.TaskList;
 import chattime.storage.Storage;
 import chattime.task.Task;
 import chattime.ui.Ui;
-
-import java.io.IOException;
 
 /**
  * Represents DeleteCommand object that handles main logic of deleting task from task list.

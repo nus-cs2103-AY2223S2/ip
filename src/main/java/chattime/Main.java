@@ -9,7 +9,6 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
 // @@author Jeffry Lum
 // Adapted from Guides for SE Student Project- Java FX Tutorial part 4

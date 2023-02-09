@@ -47,6 +47,7 @@ public class ListCommand extends Command {
      *
      * @param ui UI instance of bot.
      * @param taskList Current task list storing tasks.
+     * @return List of tasks.
      */
     private String displayList(Ui ui, TaskList taskList) {
         if (taskList.getList().size() == 0) {
@@ -74,6 +75,7 @@ public class ListCommand extends Command {
      *
      * @param ui UI instance of bot.
      * @param taskList Current task list storing tasks.
+     * @return List of tasks in queried time.
      */
     private String listTime(Ui ui, TaskList taskList) {
         if (taskList.getList().size() == 0) {

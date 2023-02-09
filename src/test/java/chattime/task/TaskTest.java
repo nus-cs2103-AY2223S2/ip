@@ -29,6 +29,12 @@ public class TaskTest {
     }
 
     @Test
+    public void taskWithCodeTest() {
+        Task testTask = new Task("Test");
+        assertEquals(testTask.toString(), testTask.taskWithCode());
+    }
+
+    @Test
     public void toDataStringTest() {
         Task testTask = new Task("Test");
         assertEquals(" @ 0 @ Test", testTask.toDataString());
