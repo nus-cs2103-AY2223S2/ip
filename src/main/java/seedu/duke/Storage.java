@@ -17,7 +17,9 @@ public class Storage {
 
     public ArrayList<Task> load() throws IOException {
         ArrayList<Task> list = new ArrayList<Task>();
+
         try {
+            Parser parser = new Parser();
             fr = new FileReader(this.fileName);
             String task = "";
             int ch;
@@ -29,32 +31,21 @@ public class Storage {
             String[] taskSplit;
             for (int i = 0; i < lines.length; i++) {
                 taskSplit = lines[i].split(" ");
+                String taskLine = getTask(taskSplit);
+                String[] split = taskLine.split(" ");
+
                 if (taskSplit[1].equals("T")){
+                    list.add(new ToDo(taskLine));
+                }
 
-                    String description = "";
-
-                    for (int j = 5; j < taskSplit.length; j++) {
-                        description += taskSplit[j] + " ";
-                    }
-                    list.add(new ToDo(description));
-
-                } else if (taskSplit[1].equals("D")){
-
-                    String deadline = "deadline";
-                    for (int j = 5; j < taskSplit.length; j++) {
-                        deadline += " " + taskSplit[j];
-                    }
-                    String[] split = deadline.split(" ");
+                if (taskSplit[1].equals("D")){
                     addDeadline(split, list, 1);
+                }
 
-                } else if (taskSplit[1].equals("E")){
-                    String event = "event";
-                    for (int j = 5; j < taskSplit.length; j++) {
-                        event += " " + taskSplit[j];
-                    }
-                    String[] split = event.split(" ");
+                if (taskSplit[1].equals("E")){
                     addEvent(split, list, 1);
                 }
+
                 if (taskSplit[3].equals("Y")) {
                     list.get(list.size() - 1).isDone = true;
                 }
@@ -67,11 +58,38 @@ public class Storage {
         } catch(ArrayIndexOutOfBoundsException a) {
 //            System.out.println("array...creating the file");
             fw = new FileWriter("duke.txt");
+        } catch (DukeException e) {
+            throw new RuntimeException(e);
         } finally {
 //            System.out.println("err...creating the file");
             fw = new FileWriter("duke.txt");
         }
         return list;
+    }
+
+    public String getTask(String[] taskSplit){
+        String description = "";
+        if (taskSplit[1].equals("T")) {
+            description = "";
+        }
+        if (taskSplit[1].equals("D")) {
+            description = "deadline";
+        }
+        if (taskSplit[1].equals("E")) {
+            description = "event";
+        }
+        if(taskSplit[1].equals("T")) {
+            for (int j = 5; j < taskSplit.length; j++) {
+                description += taskSplit[j] + " ";
+            }
+
+        } else {
+            for (int j = 5; j < taskSplit.length; j++) {
+                description += " " + taskSplit[j];
+            }
+        }
+        return description;
+
     }
 
     public void updateFile(TaskList tasks) throws IOException {
