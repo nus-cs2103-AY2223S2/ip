@@ -27,11 +27,11 @@ public class DukeException extends Exception {
     }
 }
 
-class UnknownInputException extends DukeException {
+/*class UnknownInputException extends DukeException {
     public UnknownInputException() {
         super("Oh no, I am not sure what that means, could you try again?");
     }
-}
+}*/
 
 class MissingDescriptionException extends DukeException {
     public MissingDescriptionException(String taskType) {
@@ -48,5 +48,11 @@ class MissingNumberException extends DukeException {
 class TaskNotExistException extends DukeException {
     public TaskNotExistException() {
         super("Oh no, the task is not exist yet! Please try again.");
+    }
+}
+
+class CheckNotFindException extends DukeException {
+    public CheckNotFindException() {
+        super("Oh no, you can only check a deadline here. Please try again!");
     }
 }

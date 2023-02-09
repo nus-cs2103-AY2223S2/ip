@@ -60,8 +60,11 @@ shadowJar {
 jar {
     manifest {
         attributes(
-                'Main-Class': 'Duke'
+                'Main-Class': 'Launcher'
         )
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
     }
 }
 

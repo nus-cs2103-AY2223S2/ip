@@ -67,6 +67,8 @@ public class TaskList {
      * @throws TaskNotExistException If the task does not exist in the list.
      */
     public String mark(int index) throws TaskNotExistException {
+        assert index >= 1 : "User input index smaller than 1";
+        assert index <= lists.size() : "User input index larger than the current list size";
         if (index > lists.size() || index < 1) {
             throw new TaskNotExistException();
         }
@@ -81,6 +83,8 @@ public class TaskList {
      * @throws TaskNotExistException If the task does not exist in the list.
      */
     public String unmark(int index) throws TaskNotExistException {
+        assert index >= 1 : "User input index smaller than 1";
+        assert index <= lists.size() : "User input index larger than the current list size";
         if (index > lists.size() || index < 1) {
             throw new TaskNotExistException();
         }
@@ -134,6 +138,8 @@ public class TaskList {
      * @throws TaskNotExistException The selected task does not exist in the list.
      */
     public String delete(int index) throws TaskNotExistException {
+        assert index >= 1 : "User input index smaller than 1";
+        assert index <= lists.size() : "User input index larger than the current list size";
         if (index > lists.size() || index < 1) {
             throw new TaskNotExistException();
         }
