@@ -1,4 +1,4 @@
-package gui.mainWindow;
+package gui.mainwindow;
 
 import duke.Duke;
 import gui.dialogbox.DialogBox;

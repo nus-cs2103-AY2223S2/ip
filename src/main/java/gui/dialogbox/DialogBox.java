@@ -3,7 +3,7 @@ package gui.dialogbox;
 import java.io.IOException;
 import java.util.Collections;
 
-import gui.mainWindow.MainWindow;
+import gui.mainwindow.MainWindow;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
