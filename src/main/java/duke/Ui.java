@@ -1,6 +1,5 @@
 package duke;
 
-
 /**
  * Class for Ui
  */

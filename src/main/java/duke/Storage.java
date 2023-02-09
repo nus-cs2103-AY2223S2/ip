@@ -35,9 +35,8 @@ public class Storage {
         try {
             taskLogScanner = new Scanner(taskLog);
         } catch (FileNotFoundException e) {
-            System.out.println("duke.task.Task log file not found");
+            System.out.println("Task log file not found");
         }
-
         ArrayList<Task> tasks = new ArrayList<>();
         while (taskLogScanner.hasNextLine()) {
             String taskLogLine = taskLogScanner.nextLine();
