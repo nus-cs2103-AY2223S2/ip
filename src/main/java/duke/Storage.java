@@ -57,6 +57,7 @@ public class Storage {
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
             String[] inputs = line.split("]", 3);
+            assert inputs.length == 3 : "Too few arguments; likely storage of tasks in file was not done correctly.";
             String taskType = inputs[0];
             String status = inputs[1];
             boolean isDone = status.equals("[X");
@@ -72,6 +73,7 @@ public class Storage {
             } else if (taskType.equals("[D")) {
                 // then it is a Deadline
                 String[] restStrings = rest.split("by:", 2);
+                assert restStrings.length == 2 : "Not enough arguments to create deadline task.";
                 String description = restStrings[0].replaceAll("\\(", "").trim();
                 String by = restStrings[1].replaceAll("\\)", "").trim();
                 Task t = new Deadline(description, by);
@@ -82,6 +84,7 @@ public class Storage {
             } else {
                 // then it is an Event
                 String[] restStrings = rest.split("from:", 2);
+                assert restStrings.length == 2 : "Not enough arguments to create event task.";
                 String description = restStrings[0].replaceAll("\\(", "").trim();
                 String[] duration = restStrings[1].split("to:", 2);
                 String from = duration[0].trim();
