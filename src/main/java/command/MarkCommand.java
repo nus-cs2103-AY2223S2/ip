@@ -20,6 +20,7 @@ public class MarkCommand extends Command {
 
     @Override
     public String run(TaskList taskList) throws InvalidArgumentException {
+        assert this.index >= 0;
         try {
             taskList.markTask(this.index);
             return "Nice! I've marked this task as done:\n" + taskList.showTask(this.index);

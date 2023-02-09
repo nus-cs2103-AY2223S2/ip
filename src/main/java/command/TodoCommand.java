@@ -20,6 +20,7 @@ public class TodoCommand extends Command {
 
     @Override
     public String run(TaskList taskList) {
+        assert this.task.trim() != "";
         Todo newTodo = taskList.createTodo(this.task);
         return "Got it. I've added this task:\n" + newTodo + "\nNow you have " + taskList.countTask()
                 + " tasks in the list.";

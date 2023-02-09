@@ -20,6 +20,7 @@ public class DeleteCommand extends Command {
 
     @Override
     public String run(TaskList taskList) throws InvalidArgumentException {
+        assert this.index >= 0;
         try {
             String taskDescription = taskList.showTask(this.index).toString();
             taskList.deleteTask(this.index);
