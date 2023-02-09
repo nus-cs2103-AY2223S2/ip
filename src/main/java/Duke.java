@@ -18,6 +18,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
+import Tasks.Deadline;
+import Tasks.Event;
+import Tasks.Task;
+import Tasks.ToDo;
+
+
 public class Duke {
     private static final String MAKE_DEADLINE = "deadline";
     private static final String MAKE_TODO = "todo";
