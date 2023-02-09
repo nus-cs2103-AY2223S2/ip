@@ -37,6 +37,7 @@ public class Storage {
                 System.out.println("Unable to create new database file.");
             }
         }
+        assert file.exists() : "Storage file does not exist!";
     }
 
     /**
@@ -55,6 +56,7 @@ public class Storage {
         while (s.hasNext()) {
             taskList.add(this.parser.parseTask(s.nextLine()));
         }
+        assert (! s.hasNext()) : "File still not fully read!";
         return taskList;
     }
 
@@ -67,6 +69,7 @@ public class Storage {
         if (path == null) {
             return;
         }
+        assert file.exists() : "File does not exist!";
         try {
             FileWriter fw = new FileWriter(this.file);
 
