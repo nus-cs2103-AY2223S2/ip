@@ -72,7 +72,7 @@ public class TaskList {
     public Task popTask(int index) throws DukeInvalidArgumentException {
         if (index < 0 || index > this.userTasks.size() - 1) {
             throw new DukeInvalidArgumentException(
-                    String.format("\tThere are only %d tasks. There is no task "
+                    String.format("There are only %d tasks. There is no task "
                             + "with index %d\n", this.userTasks.size(), index)
             );
         }

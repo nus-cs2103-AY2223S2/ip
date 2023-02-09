@@ -31,53 +31,55 @@ public class Duke {
         return String.format("Here are the tasks in your list:\n%s", this.taskApplication.getAllTaskString());
     }
 
-    private String markCommand(int index) throws DukeException {
+    private String markCommand(List<String> tokens) throws DukeException {
+        int index = Integer.parseInt(tokens.get(1)) - 1;
         this.taskApplication.markTask(index);
         return String.format("Nice! I've marked this task as done:\n%s", this.taskApplication.getTask(index));
     }
 
-    private String unmarkCommand(int index) throws DukeException {
+    private String unmarkCommand(List<String> tokens) throws DukeException {
+        int index = Integer.parseInt(tokens.get(1)) - 1;
         this.taskApplication.unmarkTask(index);
-        return String.format("OK, I've marked this task as not done yet:\n%s",
-                this.taskApplication.getTask(index));
+        return String.format("OK, I've marked this task as not done yet:\n%s", this.taskApplication.getTask(index));
     }
 
-    private String todoCommand(String title) {
-        Task t = new ToDo(title);
-        this.taskApplication.addTask(t);
+    private String todoCommand(List<String> tokens) {
+        Task newTask = new ToDo(tokens.get(1));
+        this.taskApplication.addTask(newTask);
         return String.format(
                 "Got it. I've added this task:\n%s\nNow you have %d tasks in the list.",
-                t, this.taskApplication.getNoOfTasks()
+                newTask, this.taskApplication.getNoOfTasks()
         );
     }
 
-    private String deadlineCommand(String title, String deadline) {
-        Task t;
-        t = new Deadline(title, deadline);
-        this.taskApplication.addTask(t);
+    private String deadlineCommand(List<String> tokens) {
+        Task newTask = new Deadline(tokens.get(1), tokens.get(2));
+        this.taskApplication.addTask(newTask);
         return String.format(
                 "Got it. I've added this task:\n%s\nNow you have %d tasks in the list.",
-                t, this.taskApplication.getNoOfTasks()
+                newTask, this.taskApplication.getNoOfTasks()
         );
     }
 
-    private String eventCommand(String title, String start, String end) {
-        Task t = new Event(title, start, end);
-        this.taskApplication.addTask(t);
+    private String eventCommand(List<String> tokens) {
+        Task newTask = new Event(tokens.get(1), tokens.get(2), tokens.get(3));
+        this.taskApplication.addTask(newTask);
         return String.format(
                 "Got it. I've added this task:\n%s\nNow you have %d tasks in the list.",
-                t, this.taskApplication.getNoOfTasks()
+                newTask, this.taskApplication.getNoOfTasks()
         );
     }
 
-    private String deleteCommand(int index) throws DukeException {
+    private String deleteCommand(List<String> tokens) throws DukeException {
+        int index = Integer.parseInt(tokens.get(1)) - 1;
         Task t = this.taskApplication.popTask(index);
         return String.format(
                 "Noted. I've removed this task:\n%s\nNow you have %d tasks in the list.",
                 t, this.taskApplication.getNoOfTasks()
         );
     }
-    private String findCommand(String keyword) {
+    private String findCommand(List<String> tokens) {
+        String keyword = tokens.get(1);
         List<Task> tasks = this.taskApplication.getTaskByKeyword(keyword);
         StringBuilder result = new StringBuilder();
         int i = 1;
@@ -100,26 +102,36 @@ public class Duke {
             case "list":
                 return this.listTasksCommand();
             case "mark":
-                return this.markCommand(Integer.parseInt(tokens.get(1)) - 1);
+                return this.markCommand(tokens);
             case "unmark":
-                return this.unmarkCommand(Integer.parseInt(tokens.get(1)) - 1);
+                return this.unmarkCommand(tokens);
             case "todo":
-                return this.todoCommand(tokens.get(1));
+                return this.todoCommand(tokens);
             case "deadline":
-                return this.deadlineCommand(tokens.get(1), tokens.get(2));
+                return this.deadlineCommand(tokens);
             case "event":
-                return this.eventCommand(tokens.get(1), tokens.get(2), tokens.get(3));
+                return this.eventCommand(tokens);
             case "delete":
-                return this.deleteCommand(Integer.parseInt(tokens.get(1)) - 1);
+                return this.deleteCommand(tokens);
             case "find":
-                return this.findCommand(tokens.get(1));
+                return this.findCommand(tokens);
             case "bye":
                 return this.byeCommand();
             default:
                 throw new DukeUnknownCommandException("Unknown command");
         }
     }
-
+    public boolean getIsExit() {
+        return this.isExit;
+    }
+    public String getResponse(String input) {
+        try {
+            return this.parseCommand(input);
+        } catch (DukeException e) {
+            // Any duke.exceptions.DukeException is non-fatal, so we just print them
+            return e.getMessage();
+        }
+    }
     /**
      * Main loop for Duke program.
      */
@@ -140,7 +152,6 @@ public class Duke {
             }
         }
     }
-
     /**
      * Main entry point of the program.
      * @param args Command line arguments.
@@ -148,17 +159,5 @@ public class Duke {
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.start();
-    }
-
-    public boolean getIsExit() {
-        return this.isExit;
-    }
-    public String getResponse(String input) {
-        try {
-            return this.parseCommand(input);
-        } catch (DukeException e) {
-            // Any duke.exceptions.DukeException is non-fatal, so we just print them
-            return e.getMessage();
-        }
     }
 }

@@ -43,7 +43,7 @@ public class Parser {
         }
     }
 
-    public int tryParseNumber(String token) throws DukeInvalidArgumentException {
+    public int assertIsNumber(String token) throws DukeInvalidArgumentException {
         try {
             return Integer.parseInt(token);
         } catch (NumberFormatException e) {
@@ -82,7 +82,7 @@ public class Parser {
             assertHasArguments(tokens);
             result.add(tokens[1].trim());
             assertTokenLength(result, 2);
-            tryParseNumber(result.get(1));
+            assertIsNumber(result.get(1));
             break;
         case "todo":
         case "find":
