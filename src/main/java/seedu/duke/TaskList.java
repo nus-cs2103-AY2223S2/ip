@@ -73,6 +73,7 @@ public class TaskList {
      */
     public void addToDo(String[] echoSplit){
         String task = "";
+        assert echoSplit.length > 0 : "task length should not be less than 0";
         for (int i = 1; i < echoSplit.length; i++) {
             task += echoSplit[i] + " ";
         }
@@ -90,10 +91,16 @@ public class TaskList {
      */
     public void addEvent(String[] echoSplit, int print){
         String task = "";
+        branch-A-CodeQuality
         int fromIndex = 0;
         int toIndex = 0;
         String fromDate = "";
         String toDate = "";
+        assert echoSplit.length > 0 : "task length should not be less than 0";
+
+      
+        
+
 
         for (int i = 1; i < echoSplit.length; i++) {
             boolean isFromWord = echoSplit[i].equals("/from") || echoSplit[i].equals("from:");

@@ -48,7 +48,9 @@ test {
         showStandardStreams = false
     }
 }
-
+run {
+    enableAssertions = true
+}
 application {
     mainClassName = "seedu.duke.Launcher"
 }
