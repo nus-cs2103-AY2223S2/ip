@@ -22,11 +22,15 @@ public class Command {
         FIND_TASK,
         INVALID_COMMAND
     }
+    private static final String LIST_OUTPUT = "Here are the tasks in your list:";
+    private static final String MARK_TASK_OUTPUT = "Nice! I've marked this task as done:\n";
+    private static final String UNMARK_TASK_OUTPUT = "Okay! I've marked this task as undone:\n";
     private static final String ADD_TASK_OUTPUT = "Got it. I've added this task:\n\t%s\n" +
             "Now you have %d tasks in the list.";
     private static final String DELETE_TASK_OUTPUT = "Noted. I've removed this task:\n\t%s\n" +
             "Now you have %d tasks in the list.";
     private static final String FIND_TASK_OUTPUT = "Here are the matching tasks in your list:";
+    private static final String EXIT_OUTPUT = "Bye. Hope to see you again soon!";
     private CommandType commandType;
     private String param;
 
@@ -76,17 +80,17 @@ public class Command {
      * @param storage StorageTextFile to save the TaskList to if this command changes the TaskList.
      * @throws DukeException
      */
-    public String execute(TaskList taskList, UI ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Storage storage) throws DukeException {
         String output = "";
 
         assert taskList != null;
 
         switch (this.commandType) {
             case EXIT:
-                ui.exit();
+                output = EXIT_OUTPUT;
                 break;
             case LIST:
-                output = "Here are the tasks in your list:";
+                output = LIST_OUTPUT;
                 for (int i = 0; i < taskList.size(); ++i) {
                     assert taskList.get(i) != null;
                     output += String.format("\n%d.%s", i + 1, taskList.get(i).toString());
@@ -95,13 +99,13 @@ public class Command {
             case MARK:
                 int index = Integer.parseInt(param);
                 Task task = taskList.markTask(index);
-                output = "Nice! I've marked this task as done:\n" + task.toString();
+                output = MARK_TASK_OUTPUT + task.toString();
                 storage.save(taskList);
                 break;
             case UNMARK:
                 index = Integer.parseInt(param);
                 task = taskList.unmarkTask(index);
-                output = "Nice! I've marked this task as done:\n" + task.toString();
+                output = UNMARK_TASK_OUTPUT + task.toString();
                 storage.save(taskList);
                 break;
             case DELETE_TASK:

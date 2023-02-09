@@ -11,6 +11,7 @@ import java.nio.file.Paths;
 
 public abstract class Storage {
 
+    private static final String FILEPATH_DIRECTORY = "data/";
     private String filePath;
 
     public Storage(String filePath) {

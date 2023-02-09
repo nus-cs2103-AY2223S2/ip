@@ -2,12 +2,15 @@ package duke;
 
 import duke.exception.DukeException;
 import duke.task.TaskList;
-import duke.util.*;
+import duke.util.Command;
+import duke.util.Parser;
+import duke.util.Storage;
 
 public class Duke {
-    private UI ui;
+
     private Storage storage;
-    private static TaskList taskList;
+    private boolean isTaskListLoaded;
+    private TaskList taskList;
 
 
     public Duke(String filePath) {
@@ -18,11 +21,12 @@ public class Duke {
         storage = Storage.createStorage(filePath);
         try {
             taskList = new TaskList(storage.load());
-            return true;
+            isTaskListLoaded = true;
         } catch (DukeException e) {
             taskList = new TaskList();
+            isTaskListLoaded = false;
         }
-        return false;
+        return isTaskListLoaded;
     }
 
     public String getResponse(String input) {
@@ -30,11 +34,15 @@ public class Duke {
         assert c != null;
         String response = "";
         try {
-            response = c.execute(taskList, ui, storage);
+            response = c.execute(taskList, storage);
         } catch (DukeException e) {
             return e.getMessage();
         }
         return response;
+    }
+
+    public boolean getLoadedStatus() {
+        return isTaskListLoaded;
     }
 
 }
