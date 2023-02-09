@@ -14,9 +14,8 @@ public class Todo extends Task {
         super(msg);
         this.code = "[T]";
     }
-
-    
-    /** 
+    /**
+     * Get code
      * @return String
      */
     public String getCode() {

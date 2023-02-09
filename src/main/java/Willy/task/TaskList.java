@@ -1,15 +1,16 @@
 package Willy.task;
 
-import Willy.storage.Storage;
 import java.util.ArrayList;
 import java.util.List;
+
+import Willy.storage.Storage;
 
 /**
  * Represents a tasklist
  */
 public class TaskList {
+    private static Storage storage;
     protected List<Task> tasks = new ArrayList<Task>();
-    public Storage storage;
 
     /**
      * Creates a tasklist with a storage
@@ -30,8 +31,8 @@ public class TaskList {
         this.tasks = tmp;
     }
 
-    
-    /** 
+    /**
+     * Get task count
      * @return int
      */
     public int getTaskCount() {
@@ -67,8 +68,8 @@ public class TaskList {
         storage.save(this);
     }
 
-    
-    /** 
+    /**
+     * delete task
      * @param index
      */
     public void deleteTask(int index) {
@@ -137,7 +138,8 @@ public class TaskList {
      */
     @Override
     public String toString() {
-        String str = "", msg = "";
+        String str = "";
+        String msg = "";
         for (int i = 0; i < getTaskCount(); i++) {
             msg = "#" + (i + 1) + ". " + this.getTask(i);
 

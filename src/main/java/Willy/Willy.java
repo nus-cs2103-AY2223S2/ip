@@ -1,9 +1,9 @@
 package Willy;
 
-import Willy.parser.Parser;
-
 import java.io.IOException;
+
 import Willy.exception.WillyException;
+import Willy.parser.Parser;
 import Willy.storage.Storage;
 import Willy.task.TaskList;
 import Willy.ui.Ui;
@@ -29,7 +29,6 @@ public class Willy {
 
     /**
      * Run command to init parser and scan for next command
-     * 
      * @throws IOException
      * @throws WillyException
      */
@@ -47,7 +46,6 @@ public class Willy {
 
     /**
      * Main function loop to start the application
-     * 
      * @param args
      * @throws IOException
      * @throws WillyException

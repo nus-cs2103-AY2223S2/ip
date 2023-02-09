@@ -1,11 +1,5 @@
 package Willy.storage;
 
-import Willy.task.Deadline;
-import Willy.task.Event;
-import Willy.task.Todo;
-import Willy.task.Task;
-import Willy.task.TaskList;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -15,11 +9,17 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+import Willy.task.Deadline;
+import Willy.task.Event;
+import Willy.task.Task;
+import Willy.task.TaskList;
+import Willy.task.Todo;
+
 /**
  * Represents the storage 
  */
 public class Storage {
-    private static String DATA_PATH = "data/Willy.txt";
+    private static final String DATA_PATH = "data/Willy.txt";
     private Path filePath;
     private String relativeFilePath;
 
@@ -50,7 +50,6 @@ public class Storage {
             System.out.println(e);
         }
     }
-
     
     /** 
      * To load the data from the storage location text file and return as a list of tasks

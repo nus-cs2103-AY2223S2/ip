@@ -10,12 +10,12 @@ import java.io.InputStreamReader;
 public class Ui {
 
     private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    
-    /** 
+    /**
+     * To get and return the string collected by the BufferedReader
      * @return String
      * @throws IOException
      */
-    public String getCommand() throws IOException{
+    public String getCommand() throws IOException {
         String str = br.readLine();
         return str;
     }

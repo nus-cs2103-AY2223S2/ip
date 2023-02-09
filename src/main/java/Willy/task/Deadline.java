@@ -56,7 +56,6 @@ public class Deadline extends Task {
         System.out.println(time);
     }
 
-    
     /** 
      * Returns the string representation of the code
      * @return String

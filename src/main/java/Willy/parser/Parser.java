@@ -22,7 +22,6 @@ public class Parser {
         this.isExit = false;
     }
 
-    
     /** 
      * Displays the number of items in your task list
      * @param tList
@@ -38,7 +37,7 @@ public class Parser {
     }
 
     /**
-     * 
+     * get index based on the string helper function
      * @param input
      * @return the index of the task 
      */
@@ -47,7 +46,7 @@ public class Parser {
     }
 
     /**
-     * 
+     * return the boolean the exit status
      * @return the Exit status of the program
      */
     public boolean getExitStatus() {
@@ -67,10 +66,9 @@ public class Parser {
      * @param command
      * @throws WillyException
      */
-    public void parseCommand(String command) throws WillyException {    
+    public void parseCommand(String command) throws WillyException {
         String[] tempBySpace = command.split(" ");
         String[] tempBySlash = command.split("/");
-        
         if (tempBySpace[0].equals("mark")) {
             int index = getIndex(tempBySpace[1]);
             tList.markTask(index);

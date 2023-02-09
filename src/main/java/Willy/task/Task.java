@@ -24,7 +24,7 @@ public class Task {
     }
 
     /**
-     * 
+     * get msg in String
      * @return string representation of the msg only
      */
     public String getMsg() {

@@ -33,7 +33,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return code + super.toString() + "(" + from  + to + ")";
+        return code + super.toString() + "(" + from + to + ")";
     }
 
 }
