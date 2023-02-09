@@ -61,20 +61,9 @@ public class Ui {
     /**
      * Show the TaskList of a Duke.
      */
-    public static String showList(TaskList t) {
-        StringBuilder ans = new StringBuilder("Here are the tasks in your list:\n");
-        for (Task tk : t.get_list()) {
-            String info = (t.get_list().indexOf(tk)+1) + "." + tk.toString() + "\n";
-            ans.append(info);
-        }
-        return ans.toString();
-    }
-
-    /**
-     * Show the TaskList after find keywords.
-     */
-    public static String findList(TaskList t) {
-        StringBuilder ans = new StringBuilder("Here are the matching tasks in your list:\n");
+    public static String showList(TaskList t, int i) {
+        String find_show  = (i == 1) ? "Here are the tasks in your list:\n" : "Here are the matching tasks in your list:\n";
+        StringBuilder ans = new StringBuilder(find_show);
         for (Task tk : t.get_list()) {
             String info = (t.get_list().indexOf(tk)+1) + "." + tk.toString() + "\n";
             ans.append(info);

@@ -1,5 +1,4 @@
 package runner;
-import java.util.Scanner;
 
 /**
  * Class for Duke.

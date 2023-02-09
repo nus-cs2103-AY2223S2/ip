@@ -24,54 +24,43 @@ public class Parser {
      * @param info The information given by the user.
      */
     public String handle(String info) {
-        if (info.equals("bye")) {
-            return terminate();
-        } else if (info.equals("list")) {
-            return Ui.showList(duke.taskList);
-        } else {
-            return read(info);
-        }
-    }
-
-    public String read(String info) {
-        if (info.equals("hello")) {
-            return Ui.start();
-        }
         if (!info.contains(" ")) {
-            return "Not Smart to Understand -_-";
+            switch (info) {
+            case "hello":
+                return Ui.start();
+            case "bye":
+                return Ui.ending();
+            case "list":
+                return Ui.showList(duke.taskList, 1);
+            default:
+                return "Not Smart to Understand -_-";
+            }
         }
         try {
             String[] segments = info.split(" ", 2);
             String first = segments[0];
             String arg = segments[1];
             switch (first) {
-                case "mark":
-                    return mark(arg);
-                case "unmark":
-                    return unmark(arg);
-                case "todo":
-                    return add_todo(info);
-                case "deadline":
-                    return add_deadline(arg);
-                case "event":
-                    return add_event(arg);
-                case "find":
-                    return find(arg);
-                case "delete":
-                    return delete(arg);
-                default:
-                    return "OOPS!!! I'm sorry, but I don't know what that means :-(";
+            case "mark":
+                return mark(arg);
+            case "unmark":
+                return unmark(arg);
+            case "todo":
+                return add_todo(info);
+            case "deadline":
+                return add_deadline(arg);
+            case "event":
+                return add_event(arg);
+            case "find":
+                return find(arg);
+            case "delete":
+                return delete(arg);
+            default:
+                return "OOPS!!! I'm sorry, but I don't know what that means :-(";
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             return "OOPS!!! Arguments not enough.";
         }
-    }
-
-    /**
-     * Terminate the Duke.
-     */
-    public String terminate() {
-        return Ui.ending();
     }
 
     /**
@@ -85,7 +74,7 @@ public class Parser {
                 ans.add(tk);
             }
         }
-        return Ui.findList(ans);
+        return Ui.showList(ans, 0);
     }
 
     /**
