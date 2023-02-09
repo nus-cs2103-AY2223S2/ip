@@ -14,9 +14,9 @@ public class GuiUtil {
     static final Image USER_PROF_PIC;
     static final Image MEGGY_PROF_PIC;
     static final int DIALOG_BOX_CORNER_RADIUS = 20;
-    private static final int DEFAULT_IMG_SIZE = 1;
     static final Background MEGGY_DIALOG_BG =
             new Background(new BackgroundFill(Color.ORANGE, new CornerRadii(GuiUtil.DIALOG_BOX_CORNER_RADIUS), null));
+    private static final int DEFAULT_IMG_SIZE = 1;
 
     static {
         final InputStream userImageIn = MainWindow.class.getResourceAsStream("/images/User.jpg");

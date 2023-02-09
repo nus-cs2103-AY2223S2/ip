@@ -67,19 +67,25 @@ public class Meggy {
     }
 
     /**
-     * Adds task to the bottom of {@code tasks} list.
+     * Adds task to the bottom of {@code tasks} list if an equivalent task is not already in the list. Otherwise,
+     * nothing is changed. O(n) time complexity.
      *
      * @param args    Non-null. Unparsed task description string.
-     * @param newTask Non-null. Constructor of task to accept {@code args}.
+     * @param taskNew Non-null. Constructor of task to accept {@code args}.
      * @return Response to "todo/ddl/event" command.
      */
-    private String addTask(String args, Function<String, UserTask> newTask) throws MeggyException {
+    private String addTask(String args, Function<String, UserTask> taskNew) throws MeggyException {
         assert args != null;
-        assert newTask != null;
-        final UserTask task = newTask.apply(args);
-        tasks.add(task);
+        assert taskNew != null;
+        final UserTask newTask = taskNew.apply(args);
+        for (UserTask task : tasks) {
+            if (task.equals(newTask)) {
+                throw new MeggyException(Resource.ERR_DUPE_TASK + Resource.TASK_STRING_INDENT + task);
+            }
+        }
+        tasks.add(newTask);
         storage.save(tasks);
-        return Resource.NOTIF_ADD + reportChangedTaskAndList(task);
+        return Resource.NOTIF_ADD + reportChangedTaskAndList(newTask);
     }
 
     /**

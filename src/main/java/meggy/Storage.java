@@ -50,7 +50,7 @@ public class Storage {
         }
         try {
             for (UserTask t : tasks) {
-                fw.write(t.encode() + '\n');
+                fw.write(t.recreateCmd() + '\n');
             }
             fw.flush();
         } catch (IOException e) {

@@ -48,7 +48,7 @@ public class DdlTask extends UserTask {
 
     /** @inheritDoc */
     @Override
-    public String encode() {
+    public String recreateCmd() {
         return Resource.CMD_DDL + ' ' + desc + ' ' + DUE_KEYWORD_FORMATTED + due.encode();
     }
 

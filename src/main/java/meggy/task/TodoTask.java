@@ -15,7 +15,7 @@ public class TodoTask extends UserTask {
 
     /** @inheritDoc */
     @Override
-    public String encode() {
+    public String recreateCmd() {
         return Resource.CMD_TODO + ' ' + desc;
     }
 

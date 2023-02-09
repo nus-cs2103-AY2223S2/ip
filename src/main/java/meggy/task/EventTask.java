@@ -72,7 +72,7 @@ public class EventTask extends UserTask {
 
     /** @inheritDoc */
     @Override
-    public String encode() {
+    public String recreateCmd() {
         return Resource.CMD_EVENT + ' ' + desc + ' ' + START_KEYWORD_FORMATTED + start.encode() + ' '
                 + END_KEYWORD_FORMATTED + end.encode();
     }

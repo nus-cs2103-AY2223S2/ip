@@ -49,11 +49,8 @@ public abstract class UserTask {
         isDone = done;
     }
 
-    /**
-     * @return The string representation of this task in data file format. Currently: re-create the command that would
-     *         add the task.
-     */
-    public abstract String encode();
+    /** @return Re-create the command that would add the task. */
+    public abstract String recreateCmd();
 
     /** @return The string representation of this task in text UI. */
     @Override

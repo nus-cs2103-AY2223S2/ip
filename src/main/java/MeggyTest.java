@@ -3,6 +3,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.Random;
+
 import org.junit.jupiter.api.Test;
 
 import meggy.MeggyTime;
@@ -45,7 +46,7 @@ public class MeggyTest {
     public void todoTaskIntegrityTest() throws MeggyException {
         for (int k = 0; k < N_TEST; k++) {
             TodoTask a = new TodoTask(randString());
-            String data = a.encode();
+            String data = a.recreateCmd();
             TodoTask b = new TodoTask(data.substring(data.indexOf(' ') + 1));
             assertEquals(a, b);
         }
@@ -55,7 +56,7 @@ public class MeggyTest {
     public void ddlTaskIntegrityTest() throws MeggyException {
         for (int k = 0; k < N_TEST; k++) {
             DdlTask a = DdlTask.of(randString() + DdlTask.DUE_KEYWORD_FORMATTED + randMeggyTime());
-            String data = a.encode();
+            String data = a.recreateCmd();
             DdlTask b = DdlTask.of(data.substring(data.indexOf(' ') + 1));
             assertEquals(a, b);
         }
@@ -66,7 +67,7 @@ public class MeggyTest {
         for (int k = 0; k < N_TEST; k++) {
             EventTask a = EventTask.of(randString() + EventTask.START_KEYWORD_FORMATTED + randMeggyTime()
                     + EventTask.END_KEYWORD_FORMATTED + randMeggyTime());
-            String data = a.encode();
+            String data = a.recreateCmd();
             EventTask b = EventTask.of(data.substring(data.indexOf(' ') + 1));
             assertEquals(a, b);
         }

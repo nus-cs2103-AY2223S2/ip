@@ -12,6 +12,8 @@ public final class Resource {
     public static final String ERR_IO = "An IO error occurred.\n";
     /** Error message if an {@link SecurityException} prevents file interaction. */
     public static final String ERR_NO_FILE_ACCESS = "File access denied by system.\n";
+    /** Error message if a task to be inserted already have an equivalent existing in task list. */
+    public static final String ERR_DUPE_TASK = "Task already exist in list:\n";
     /** Indentation before task string when displaying in list. */
     public static final String TASK_STRING_INDENT = "    ";
     /** 'Exit' command. */
