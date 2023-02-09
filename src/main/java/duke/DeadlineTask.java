@@ -95,7 +95,7 @@ public class DeadlineTask extends Task {
         this.deadline = this.deadline.plusDays(days);
         this.deadline = this.deadline.plusHours(hours);
         this.deadline = this.deadline.plusMinutes(minutes);
-        return String.format("New deadline is %s!", DateTimeParser.datetimeFormatter(this.deadline));
+        return String.format("New deadline is %s!", DateTimeParser.datetimeFormatter(this.deadline) );
     }
 
     @Override
