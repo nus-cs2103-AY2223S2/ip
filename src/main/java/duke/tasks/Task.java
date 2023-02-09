@@ -45,6 +45,6 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        return "[" + this.type + "]" + "[" + (this.isDone ? "x" : " ") + "] " + this.taskName + this.stringFields();
+        return String.format("[%s][%s] %s", this.type, this.isDone ? "x" : " ", this.taskName + this.stringFields());
     }
 }

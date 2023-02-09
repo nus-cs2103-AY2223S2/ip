@@ -27,12 +27,12 @@ public class EventCmd extends Command {
     }
 
     // Adds the Event task to the list
-    public void execute() throws CommandExecutionError {
+    public String execute() throws CommandExecutionError {
         this.event = Event.create(this.lineInput);
         taskList.add(this.event);
 
-        this.response = "Got it. I've added this task:\n"
-                + Ui.indentString(this.event.toString(), 1) + "\n"
-                + Ui.numTaskToString(taskList.countTasks());
+        return String.format("Got it. I've added this task:\n%s\n%s",
+                Ui.indentString(this.event.toString(), 1),
+                Ui.numTaskToString(taskList.countTasks()));
     }
 }

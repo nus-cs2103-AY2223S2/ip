@@ -7,6 +7,7 @@ import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import duke.parsing.ParsedTask;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
@@ -54,7 +55,7 @@ public class Storage {
                 if (strTask.length() == 1) {
                     return; // for handling empty file, it still contains "\n"
                 }
-                ParsedLoadedTask parsedTaskInfo = Parser.parseLoadTask(strTask);
+                ParsedTask parsedTaskInfo = ParsedTask.parseLoadTask(strTask);
                 Task task;
 
                 switch (parsedTaskInfo.getTaskType()) {

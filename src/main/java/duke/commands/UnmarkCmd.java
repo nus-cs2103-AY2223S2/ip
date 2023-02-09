@@ -1,8 +1,8 @@
 package duke.commands;
 
-import duke.Parser;
 import duke.Ui;
 import duke.exceptions.ListIndexMissing;
+import duke.parsing.Parser;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 
@@ -25,11 +25,12 @@ public class UnmarkCmd extends Command {
     }
 
     // Changes the status of the specified task to incomplete.
-    public void execute() throws ListIndexMissing {
+    public String execute() throws ListIndexMissing {
         int index = Parser.parseMarkUnmarkDeleteIndex(lineInput);
         Task taskToUnmark = taskList.get(index).markDone();
         assert taskToUnmark.getIsDone() == false;
         String output = "Ok, I've marked this task as not done yet:";
-        this.response = output + "\n" + Ui.indentString(taskToUnmark.toString(), 1);
+        return String.format("%s\n%s", output,
+                Ui.indentString(taskToUnmark.toString(), 1));
     }
 }

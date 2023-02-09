@@ -3,7 +3,7 @@ package duke.commands;
 import java.util.Arrays;
 import java.util.Optional;
 
-import duke.Parser;
+import duke.parsing.Parser;
 import duke.tasks.TaskList;
 
 /**
