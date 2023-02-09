@@ -7,10 +7,24 @@ public class Task {
       this.isDone = false;
   }
 
+  public String toData() {
+    return "";
+  }
+
   public static class Todo extends Task {
 
     public Todo(String description) {
         super(description);
+    }
+
+    @Override
+    public String toData() {
+        int isDoneData = 0;
+        if (this.isDone) {
+            isDoneData = 1;
+        }
+        String result = String.format("T|%d|%s", isDoneData, this.description);
+        return result;
     }
 
     @Override
@@ -29,6 +43,16 @@ public class Task {
     }
 
     @Override
+    public String toData() {
+        int isDoneData = 0;
+        if (this.isDone) {
+            isDoneData = 1;
+        }
+        String result = String.format("D|%d|%s|%s", isDoneData, this.description, this.by);
+        return result;
+    }
+
+    @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";
     }
@@ -44,6 +68,16 @@ public class Task {
         this.from = from;
         this.to = to;
 
+    }
+
+    @Override
+    public String toData() {
+        int isDoneData = 0;
+        if (this.isDone) {
+            isDoneData = 1;
+        }
+        String result = String.format("E|%d|%s|%s|%s", isDoneData, this.description, this.from, this.to);
+        return result;
     }
 
     @Override

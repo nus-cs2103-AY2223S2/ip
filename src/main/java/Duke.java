@@ -1,96 +1,80 @@
-import java.util.ArrayList;
-import java.util.Scanner;
-
 public class Duke {
-    public static void main(String[] args) {
-        ArrayList<Task> taskList = new ArrayList<Task>();
-        System.out.println("Hello I'm Duke\nWhat can I do for you?");
-        Scanner scan = new Scanner(System.in);
+
+    private Ui ui;
+    private Storage storage;
+    private TaskList tasks;
+    private Parser parser;
+
+    public Duke(String filePath) {
+        this.ui = new Ui();
+        this.storage = new Storage(filePath);
+        this.tasks = new TaskList(storage.load());
+    }
+
+    public void run() {
+
+        this.ui.welcomeUser();
         
         while (true) {
-            String textInput = scan.nextLine();
+            String textInput = this.ui.readInput();
+            String response = "";
+            this.parser = new Parser();
+            this.parser.parse(textInput);
 
-            if (textInput.equalsIgnoreCase("bye")) {
-                System.out.println("Bye. Hope to see you again soon!");
-                scan.close();
+            if (this.parser.action == "bye") {
+                this.ui.goodbyeUser();
                 return;
             }
 
-            if (textInput.equalsIgnoreCase("list")) {
-                System.out.println("Here are the tasks in your list:");
-                for (int i = 0; i < taskList.size(); i++) {
-                    System.out.println(i + 1 + ". " + taskList.get(i).toString());
-                }
+            else if (this.parser.action == "list") {
+                this.ui.listTasks(tasks);
                 continue;
             }
 
-            if (textInput.length() >= 8 &&
-                    textInput.substring(0, 6).equalsIgnoreCase("delete")) {
-                int i = Integer.parseInt(textInput.substring(7));
-                Task t = taskList.get(i - 1);
-                taskList.remove(i - 1);
-                String output = String.format("Got it. I've removed this task:\n%s\nNow you have %d tasks in the list", t.toString(), taskList.size());
-                System.out.println(output);
-                continue;
+            else if (this.parser.action == "delete") {
+                response = this.tasks.delete(textInput);
+                this.storage.writeTxt(tasks);
             }
 
-            if (textInput.length() >= 6 && 
-                    textInput.substring(0, 4).equalsIgnoreCase("mark")) {
-                int i = Integer.parseInt(textInput.substring(5));
-                Task currTask = taskList.get(i - 1);
-                currTask.markDone();
-                System.out.println("Nice! I've marked this task as done\n" + currTask.toString());
-                continue;
+            else if (this.parser.action == "mark") {
+                response = this.tasks.mark(textInput);
+                this.storage.writeTxt(tasks);
             }
 
-            if (textInput.length() >= 8 &&
-                    textInput.substring(0, 6).equalsIgnoreCase("unmark")) {
-                int i = Integer.parseInt(textInput.substring(7));
-                Task currTask = taskList.get(i - 1);
-                currTask.markUndone();
-                System.out.println("OK, I've marked this task as not done yet:\n" + currTask.toString());
-                continue;
+            else if (this.parser.action == "unmark") {
+                response = this.tasks.unmark(textInput);
+                this.storage.writeTxt(tasks);
             }
 
-            if (textInput.length() >= 4 &&
-                    textInput.substring(0, 4).equalsIgnoreCase("todo")) {
+            else if (this.parser.action == "todo") {
                 try {
-                    String[] parts = textInput.split(" ", 2);
-                    if (parts.length == 1 || parts[1] == "") {
-                        throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
-                    }
-                    Task t = new Task.Todo(textInput.substring(5));
-                    taskList.add(t);
-                    String output = String.format("Got it. I've added this task:\n%s\nNow you have %d tasks in the list", t.toString(), taskList.size());
-                    System.out.println(output);
-                    continue;                
+                    response = this.tasks.todo(textInput);
+                    this.storage.writeTxt(tasks);             
                 } catch (DukeException e) {
                     System.out.println(e);
                     continue;
                 }
             }
 
-            if (textInput.length() >= 10 && 
-                    textInput.substring(0, 8).equalsIgnoreCase("deadline")) {
-                String[] parts = textInput.split("/");
-                Task t = new Task.Deadline(parts[0].substring(9), parts[1].substring(3));
-                taskList.add(t);
-                String output = String.format("Got it. I've added this task:\n%s\nNow you have %d tasks in the list", t.toString(), taskList.size());
-                System.out.println(output);
-                continue;
+            else if (this.parser.action == "deadline") {
+                response = this.tasks.deadline(textInput);
+                this.storage.writeTxt(tasks);
             }
 
-            if (textInput.length() >= 7 && 
-                    textInput.substring(0, 5).equalsIgnoreCase("event")) {
-                String[] parts = textInput.split("/");
-                Task t = new Task.Event(parts[0].substring(6), parts[1].substring(5), parts[2].substring(3));
-                taskList.add(t);
-                String output = String.format("Got it. I've added this task:\n%s\nNow you have %d tasks in the list", t.toString(), taskList.size());
-                System.out.println(output);
-                continue;
+            else if (this.parser.action == "event") {
+                response = this.tasks.event(textInput);
+                this.storage.writeTxt(tasks);
             }
             
-            System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            else {
+                response = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+            }
+
+            this.ui.printResponse(response);
         }
+    }
+    
+    public static void main(String[] args) {
+        new Duke("../../../data/duke.txt").run();
     }
 }
