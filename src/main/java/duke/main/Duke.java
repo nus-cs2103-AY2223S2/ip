@@ -59,6 +59,7 @@ public class Duke {
                 tasks.deleteTaskAtIndex(--taskNumber);
                 display.line();
             } else {
+                assert input.startsWith("find") == true : "Unable to handle command.";
                 String description = logic.commandToDescription(input); // find command
                 display.announceFindResult();
                 tasks.matchDescription(description);
