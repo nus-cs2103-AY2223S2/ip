@@ -93,6 +93,7 @@ public class Parser {
                 }
                 return parseTask(commandString.toString(), temp[1]);
             default:
+                assert false : commandString;
                 // Should never reach here. Programmer error!
                 throw new KiraException("Unexpected Error!");
             }
