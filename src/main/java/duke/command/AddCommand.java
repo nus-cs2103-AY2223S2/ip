@@ -5,11 +5,11 @@ import java.util.Objects;
 import duke.model.TaskList;
 import duke.task.Task;
 
-public class AddTaskCommand extends Command {
+public class AddCommand extends Command {
 
     private Task task;
 
-    public AddTaskCommand(Task task) {
+    public AddCommand(Task task) {
         this.task = task;
     }
 
@@ -23,10 +23,10 @@ public class AddTaskCommand extends Command {
 
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof AddTaskCommand)) {
+        if (!(obj instanceof AddCommand)) {
             return false;
         }
-        AddTaskCommand cmd = (AddTaskCommand) obj;
+        AddCommand cmd = (AddCommand) obj;
         return Objects.equals(task, cmd.task);
     }
 

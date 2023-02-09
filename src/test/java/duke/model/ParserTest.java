@@ -7,12 +7,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 import duke.DukeUtils;
-import duke.command.AddTaskCommand;
+import duke.command.AddCommand;
 import duke.command.ExitCommand;
-import duke.command.FindTaskCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
-import duke.command.RemoveTaskCommand;
+import duke.command.RemoveCommand;
 import duke.command.UnmarkCommand;
 import duke.exception.DukeRuntimeException;
 import duke.task.DeadlineTask;
@@ -27,15 +27,15 @@ public class ParserTest {
     public void shouldCorrectlyParseSomeCommand() {
         assertEquals(Parser.parseCommand("list"), new ListCommand());
         assertEquals(Parser.parseCommand("bye"), new ExitCommand());
-        assertEquals(Parser.parseCommand("todo eat"), new AddTaskCommand(new TodoTask("eat")));
-        assertEquals(Parser.parseCommand("deadline homework /by 2023-01-01"), new AddTaskCommand(
+        assertEquals(Parser.parseCommand("todo eat"), new AddCommand(new TodoTask("eat")));
+        assertEquals(Parser.parseCommand("deadline homework /by 2023-01-01"), new AddCommand(
                 new DeadlineTask("homework", DukeUtils.convertStringToDate("2023-01-01").get())));
         assertEquals(Parser.parseCommand("event live /from current /to future"),
-                new AddTaskCommand(new EventTask("live", "current", "future")));
+                new AddCommand(new EventTask("live", "current", "future")));
         assertEquals(Parser.parseCommand("mark 10"), new MarkCommand(10));
         assertEquals(Parser.parseCommand("unmark 10"), new UnmarkCommand(10));
-        assertEquals(Parser.parseCommand("delete 10"), new RemoveTaskCommand(10));
-        assertEquals(Parser.parseCommand("find money"), new FindTaskCommand("money"));
+        assertEquals(Parser.parseCommand("delete 10"), new RemoveCommand(10));
+        assertEquals(Parser.parseCommand("find money"), new FindCommand("money"));
     }
 
     @Test

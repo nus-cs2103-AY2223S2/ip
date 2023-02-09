@@ -4,13 +4,14 @@ import java.time.LocalDate;
 import java.util.function.Supplier;
 
 import duke.DukeUtils;
-import duke.command.AddTaskCommand;
+import duke.command.AddCommand;
 import duke.command.Command;
 import duke.command.ExitCommand;
-import duke.command.FindTaskCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
-import duke.command.RemoveTaskCommand;
+import duke.command.RemoveCommand;
+import duke.command.UniqueCommand;
 import duke.command.UnmarkCommand;
 import duke.exception.DukeRuntimeException;
 import duke.task.DeadlineTask;
@@ -27,7 +28,7 @@ public class Parser {
         // @formatter:off
         BYE("bye"), LIST("list"), TODO("todo"), DEADLINE("deadline"),
         EVENT("event"), MARK("mark"), UNMARK("unmark"), DELETE("delete"),
-        FIND("find"), UNKNOWN(null);
+        FIND("find"), UNIQUE("unique"), UNKNOWN(null);
         // @formatter:on
 
         private final String keyword;
@@ -57,20 +58,20 @@ public class Parser {
                 break;
             case TODO: {
                 String description = p.parseDescription(p::parseUntilEol);
-                cmd = new AddTaskCommand(new TodoTask(description));
+                cmd = new AddCommand(new TodoTask(description));
                 break;
             }
             case DEADLINE: {
                 String description = p.parseDescription(() -> p.parseUntil("--by"));
                 LocalDate by = p.parseDateArgument();
-                cmd = new AddTaskCommand(new DeadlineTask(description, by));
+                cmd = new AddCommand(new DeadlineTask(description, by));
                 break;
             }
             case EVENT: {
                 String description = p.parseDescription(() -> p.parseUntil("--from"));
                 String from = p.parseUntil("--to");
                 String to = p.parseUntilEol();
-                cmd = new AddTaskCommand(new EventTask(description, from, to));
+                cmd = new AddCommand(new EventTask(description, from, to));
                 break;
             }
             case MARK: {
@@ -85,12 +86,16 @@ public class Parser {
             }
             case DELETE: {
                 int index = p.parseIntArgument();
-                cmd = new RemoveTaskCommand(index);
+                cmd = new RemoveCommand(index);
                 break;
             }
             case FIND: {
                 String keyword = p.parseWordArgument();
-                cmd = new FindTaskCommand(keyword);
+                cmd = new FindCommand(keyword);
+                break;
+            }
+            case UNIQUE: {
+                cmd = new UniqueCommand();
                 break;
             }
             default:
@@ -204,5 +209,4 @@ public class Parser {
         }
         return word;
     }
-
 }

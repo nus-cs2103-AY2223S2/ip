@@ -3,11 +3,11 @@ package duke.command;
 import duke.model.TaskList;
 import duke.task.Task;
 
-public class RemoveTaskCommand extends Command {
+public class RemoveCommand extends Command {
 
     private int index;
 
-    public RemoveTaskCommand(int index) {
+    public RemoveCommand(int index) {
         this.index = index;
     }
 
@@ -21,10 +21,10 @@ public class RemoveTaskCommand extends Command {
 
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof RemoveTaskCommand)) {
+        if (!(obj instanceof RemoveCommand)) {
             return false;
         }
-        RemoveTaskCommand cmd = (RemoveTaskCommand) obj;
+        RemoveCommand cmd = (RemoveCommand) obj;
         return index == cmd.index;
     }
 

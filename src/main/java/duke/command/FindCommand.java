@@ -4,11 +4,11 @@ import java.util.Objects;
 
 import duke.model.TaskList;
 
-public class FindTaskCommand extends Command {
+public class FindCommand extends Command {
 
     private String keyword;
 
-    public FindTaskCommand(String keyword) {
+    public FindCommand(String keyword) {
         this.keyword = keyword;
     }
 
@@ -20,10 +20,10 @@ public class FindTaskCommand extends Command {
 
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof FindTaskCommand)) {
+        if (!(obj instanceof FindCommand)) {
             return false;
         }
-        FindTaskCommand cmd = (FindTaskCommand) obj;
+        FindCommand cmd = (FindCommand) obj;
         return Objects.equals(keyword, cmd.keyword);
     }
 }

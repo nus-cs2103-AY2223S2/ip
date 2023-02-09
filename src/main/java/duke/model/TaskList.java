@@ -138,11 +138,14 @@ public class TaskList implements Serializable {
      * @return a string showing the descriptions and their counts
      */
     public String listUniqueTaskDescriptionsWithCounts() {
-        return listFromStreamWithIndicies(tasks.stream()
-                .collect(Collectors.groupingBy(Task::getDescription, LinkedHashMap::new,
-                        Collectors.counting()))
-                .entrySet().stream().map(entry -> String.format("%s - appeared %d time%s",
-                        entry.getKey(), entry.getValue(), entry.getValue() < 2 ? "" : "s")));
+        return listFromStreamWithIndicies(tasks.stream().collect(Collectors
+                .groupingBy(Task::getDescription, LinkedHashMap::new, Collectors.counting()))
+                .entrySet().stream().map(entry -> {
+                    String description = entry.getKey();
+                    long count = entry.getValue();
+                    return String.format("%s (appeared %d time%s)", description, count,
+                            count < 2 ? "" : "s");
+                }));
     }
 
     @Override
