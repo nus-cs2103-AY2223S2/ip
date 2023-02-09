@@ -11,13 +11,18 @@ public class Duke {
 
 
     public Duke(String filePath) {
+        loadTasks(filePath);
+    }
+
+    public boolean loadTasks(String filePath) {
         storage = Storage.createStorage(filePath);
         try {
             taskList = new TaskList(storage.load());
+            return true;
         } catch (DukeException e) {
-            ui.showLoadingError();
             taskList = new TaskList();
         }
+        return false;
     }
 
     public String getResponse(String input) {

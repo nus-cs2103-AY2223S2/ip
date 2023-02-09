@@ -19,9 +19,9 @@ public class StorageCsvFile extends Storage {
         TaskList taskList = new TaskList();
 
         try (BufferedReader br = new BufferedReader(new FileReader(super.getFilePath()))) {
-            String line = null;
+            String line;
             while ((line = br.readLine()) != null) {
-                taskList.add(Task.parseTaskFromDB(line));
+                taskList.addTask(Task.parseTaskFromCsv(line));
             }
         } catch (FileNotFoundException ex) {
             throw new DukeException(ERROR.CORRUPTED_TASK_DATA.getMessage());
@@ -39,7 +39,7 @@ public class StorageCsvFile extends Storage {
 
             PrintWriter pw = new PrintWriter(super.getFilePath());
             for (Task task: list) {
-                pw.println(task.toString());
+                pw.println(task.toCsvString());
             }
             pw.close();
             return true;

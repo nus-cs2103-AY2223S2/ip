@@ -19,9 +19,9 @@ public class StorageTextFile extends Storage {
         TaskList taskList = new TaskList();
 
         try (BufferedReader br = new BufferedReader(new FileReader(super.getFilePath()))) {
-            String line = null;
+            String line;
             while ((line = br.readLine()) != null) {
-                taskList.add(Task.parseTaskFromDB(line));
+                taskList.add(Task.parseTaskFromText(line));
             }
         } catch (FileNotFoundException ex) {
             throw new DukeException(ERROR.CORRUPTED_TASK_DATA.getMessage());

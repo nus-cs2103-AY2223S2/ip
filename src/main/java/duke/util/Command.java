@@ -76,7 +76,7 @@ public class Command {
      * @param storage StorageTextFile to save the TaskList to if this command changes the TaskList.
      * @throws DukeException
      */
-    public String execute(TaskList taskList, UI ui, StorageTextFile storage) throws DukeException {
+    public String execute(TaskList taskList, UI ui, Storage storage) throws DukeException {
         String output = "";
 
         assert taskList != null;

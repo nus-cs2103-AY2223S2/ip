@@ -44,4 +44,10 @@ public class Deadline extends Task {
         String dateToPrint = this.isDate ? this.date.format(DATE_OUTPUT_FORMAT) : this.deadline;
         return String.format("[D]%s (by: %s)", super.toString(), dateToPrint);
     }
+
+    @Override
+    public String toCsvString() {
+        String dateToPrint = this.isDate ? this.date.format(DATE_OUTPUT_FORMAT) : this.deadline;
+        return String.format("D,%s,%s", super.toCsvString(), dateToPrint);
+    }
 }
