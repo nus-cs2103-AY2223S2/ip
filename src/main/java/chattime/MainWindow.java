@@ -2,6 +2,7 @@ package chattime;
 
 import java.util.Objects;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -10,9 +11,9 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-// @@author Jeffry Lum
-// Adapted from Guides for SE Student Project- Java FX Tutorial part 4
-
+// @@author Jeffry Lum-reused
+// Reused from Guides for SE Student Project- Java FX Tutorial part 4
+// with minor modification
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -62,16 +63,20 @@ public class MainWindow {
      */
     @FXML
     private void handleUserInput() {
-        if (!chattime.checkRunningStatus()) {
-            setBot(new Chattime(""));
-        }
         String input = userInput.getText();
         String response = chattime.getResponse(input);
+
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getBotDialog(response, botImage)
         );
-        userInput.clear();
-    }
 
+        userInput.clear();
+
+        if (!chattime.checkRunningStatus()) {
+            Platform.exit();
+        }
+    }
 }
+
+// @@author Jeffry Lum-reused

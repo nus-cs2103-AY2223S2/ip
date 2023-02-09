@@ -15,8 +15,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
-// @@author Jeffry Lum
-// Adapted from Guides for SE Student Project- Java FX Tutorial part 4
+// @@author Jeffry Lum-reused
+// Reused from Guides for SE Student Project- Java FX Tutorial part 4
+// with minor modification
 
 /**
  * An example of a custom control using FXML.
@@ -96,3 +97,5 @@ public class DialogBox extends HBox {
         return db;
     }
 }
+
+// @@author Jeffry Lum-reused

@@ -2,8 +2,9 @@ package chattime;
 
 import javafx.application.Application;
 
-// @@author Jeffry Lum
-// Adapted from Guides for SE Student Project- Java FX Tutorial part 4
+// @@author Jeffry Lum-reused
+// Reused from Guides for SE Student Project- Java FX Tutorial part 4
+// with minor modification
 
 /**
  * Launcher to start the application.
@@ -13,3 +14,5 @@ public class Launcher {
         Application.launch(Main.class, args);
     }
 }
+
+// @@author Jeffry Lum-reused

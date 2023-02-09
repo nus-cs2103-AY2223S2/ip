@@ -10,8 +10,9 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-// @@author Jeffry Lum
-// Adapted from Guides for SE Student Project- Java FX Tutorial part 4
+// @@author Jeffry Lum-reused
+// Reused from Guides for SE Student Project- Java FX Tutorial part 4
+// with minor modification
 
 /**
  * Class for GUI of bot.
@@ -40,3 +41,5 @@ public class Main extends Application {
     }
 
 }
+
+// @@author Jeffry Lum

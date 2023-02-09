@@ -8,34 +8,34 @@ import chattime.task.Task;
 public class Ui {
     private static final String LOGO = "      ___\n"
                         + "     /*  \\    \\(*.*)/\n"
-                        + "    /::\\   \\          __\n"
-                        + "   /:/::\\   \\     /*   \\\n"
-                        + "  /:/  \\:\\   \\   \\ : \\  \\\n"
-                        + " /:/__/\\:\\__\\  \\ : \\  \\\n"
-                        + " \\:\\ \\    \\/__/ / ::  \\   \\\n"
-                        + "  \\:\\ \\            /: /\\    \\__\\\n"
+                        + "    /::\\   \\           __\n"
+                        + "   /:/::\\   \\      /*   \\\n"
+                        + "  /:/  \\:\\   \\    \\ : \\  \\\n"
+                        + " /:/__/\\:\\__\\  \\  : \\  \\\n"
+                        + " \\:\\ \\    \\/__/  / ::  \\   \\\n"
+                        + "  \\:\\ \\             /: /\\    \\__\\\n"
                         + "   \\:\\ \\*H*A*T/ /  \\/__/*I*M*E\n"
-                        + "    \\:\\_\\    / :/  /\n"
-                        + "      \\/_/   \\/_/\n";
+                        + "    \\:\\_\\     / :/  /\n"
+                        + "      \\/_/    \\/_/\n";
 
-    private static final String GUIDE = "If you need my help, call me with these!\n\n"
-            + "todo <task> -- to add todo stuff\n\n"
-            + "deadline <task> /by <date in yyyy-mm-dd or yyyy-mm-dd hh:mm> -- to add todo stuff with deadline\n\n"
+    private static final String GUIDE = "If you need my help, call me with these! ^*^\n\n"
+            + "todo <task> \n-- to add todo stuff\n\n"
+            + "deadline <task> /by <date in yyyy-mm-dd or yyyy-mm-dd hh:mm> \n-- to add todo stuff with deadline\n\n"
             + "event <task> /from <date in yyyy-mm-dd or yyyy-mm-dd hh:mm> /to <date in yyyy-mm-dd or yyyy-mm-dd hh:mm>"
-            + " -- to add event with start datetime to end datetime\n\n"
-            + "list -- to list all current stored tasks\n\n"
-            + "listTime <date in yyyy-mm-dd> -- to list all current tasks within the specified date\n\n"
-            + "schedule <date in yyyy-mm-dd> -- to list all sorted unmarked tasks in the specified date\n\n"
-            + "mark <index of task> -- to mark the specified task as done\n\n"
-            + "unmark <index of task> -- to unmark the specified task\n\n"
-            + "delete <index of task> -- to delete the specified task from list\n\n"
-            + "bye -- to say goodbye to me and end our chat :(\n\n"
-            + "help -- to view this guide";
+            + "\n-- to add event with start datetime to end datetime\n\n"
+            + "list \n-- to list all current stored tasks\n\n"
+            + "listTime <date in yyyy-mm-dd> \n-- to list all current tasks within the specified date\n\n"
+            + "schedule <date in yyyy-mm-dd> \n-- to list all sorted unmarked tasks in the specified date\n\n"
+            + "mark <index of task> \n-- to mark the specified task as done\n\n"
+            + "unmark <index of task> \n-- to unmark the specified task\n\n"
+            + "delete <index of task> \n-- to delete the specified task from list\n\n"
+            + "bye \n-- to say goodbye to me and end our chat :(\n\n"
+            + "help \n-- to view this guide";
 
     private static final String GREET = "Hey! I'm your friend, Chattime!(# v #) /\n"
             + "How can I help you today *^*\n\nType `help` and I will come to you %v%";
 
-    private static final String BYE = "Bye bye >^<! Visit me again when you need me ~";
+    private static final String BYE = ">^<Bye>^<Bye>^<Bye>^<Bye>^<Bye>^<Bye>^<Bye>^<Bye>^<Bye>^<Bye>^<Bye>^<Bye>^<";
     private static final String SYSTEM_ERR_MSG = "Sorry I'm currently offline :,: \nI'm sick due to :\n";
     private static final String STORAGE_ERR_MSG = "My memory messed up @^@ I think I need to leave now #.#";
 
