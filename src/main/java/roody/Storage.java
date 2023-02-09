@@ -1,5 +1,7 @@
 package roody;
+
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -7,6 +9,12 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import roody.exceptions.RoodyException;
+import roody.tasks.Deadline;
+import roody.tasks.Event;
+import roody.tasks.Task;
+import roody.tasks.Todo;
 
 /**
  * Represents the data storage handler
@@ -36,15 +44,13 @@ public class Storage {
         try {
             File data = new File(filePath);
             File folder = new File(defaultFolderPath);
+            Scanner s = new Scanner(data);
             // check if file exists
             if (!folder.exists()) {
                 folder.mkdir();
             }
             if (data.createNewFile()) {
-                //System.out.println("File created: " + data.getName());
             } else {
-                //System.out.println("File already exists.");
-                Scanner s = new Scanner(data);
                 String task = "";
                 while (s.hasNextLine()) {
                     task = s.nextLine();
@@ -60,9 +66,7 @@ public class Storage {
                     } else if (inputs[2].equals("E")) {
                         temp = new Event(inputs[0], LocalDate.parse(inputs[3]), LocalDate.parse(inputs[4]));
                     } else {
-                        new RoodyException("Error loading text");
-                        s.close();
-                        return null;
+                        throw new RoodyException("Error loading text");
                     }
                     if (inputs[1].equals("true")) {
                         temp.setDone();
@@ -71,7 +75,9 @@ public class Storage {
                 }
                 s.close();
             }
-        } catch (IOException e) {
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        } catch (IOException | RoodyException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
