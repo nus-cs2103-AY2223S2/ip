@@ -21,13 +21,17 @@ public class Ui {
 
     /**
      * Prints formatted response to the console.
-     * @param s string that will be printed
+     * @param strings strings that will be printed
      */
-    public void printResponse(String s) {
-        String p = String.format("\t____________________________________________________________\n"
-                + "\t %s\n"
-                + "\t____________________________________________________________\n", s);
-        System.out.println(p);
+    public void printResponse(String... strings) {
+        String res = "";
+        String line = "\t____________________________________________________________\n";
+        res += line;
+        for (String s : strings) {
+            res += String.format("\t %s\n", s);
+        }
+        res += line;
+        System.out.println(res);
     }
 
     public void printError(DukeException e) {
