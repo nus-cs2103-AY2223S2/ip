@@ -2,17 +2,23 @@ package duke;
 
 import duke.exception.InvalidFormatException;
 import duke.exception.UnrecognisedCommandException;
+
 import duke.gui.Gui;
 import duke.gui.Main;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
+
 import javafx.application.Application;
 
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 
 public class Duke {
+    private static final String BYE_MSG = "To exit, click the X button on the top right of the UI";
+    private static final String CMD_NOT_FOUND_MSG = "Command not recognised. Please try again.";
+    private static final String WRONG_DT_FORMAT_MSG = "Wrong date time format, it should be yyyy-MM-dd";
     private final Parser parser;
     private final TaskList tasks;
 
@@ -34,7 +40,7 @@ public class Duke {
         try {
             switch (inputFragments[0]) {
             case "bye":
-                return ("To exit, click the X button on the top right of the UI");
+                return BYE_MSG;
             case "list":
                 return tasks.toString();
             case "mark":
@@ -42,26 +48,21 @@ public class Duke {
                     throw new InvalidFormatException("mark index");
                 } else {
                     return tasks.setDone(
-                            Integer.parseInt(inputFragments[1]),
-                            true,
-                            "Nice, I've marked this task as done:");
+                            Integer.parseInt(inputFragments[1]));
                 }
             case "unmark":
                 if (inputFragments.length < 2) {
                     throw new InvalidFormatException("unmark index");
                 } else {
-                    return tasks.setDone(
-                            Integer.parseInt(inputFragments[1]),
-                            false,
-                            "Ok, I've marked this task as not done:");
+                    return tasks.setNotDone(
+                            Integer.parseInt(inputFragments[1]));
                 }
             case "delete":
                 if (inputFragments.length < 2) {
                     throw new InvalidFormatException("delete index");
                 } else {
                     return tasks.delete(
-                            Integer.parseInt(inputFragments[1]),
-                            "Noted. I've removed this task:");
+                            Integer.parseInt(inputFragments[1]));
                 }
             case "find":
                 if (inputFragments.length < 2) {
@@ -96,9 +97,9 @@ public class Duke {
         } catch (InvalidFormatException exception) {
             return exception.getMessage();
         } catch (UnrecognisedCommandException exception) {
-            return "Command not recognised. Please try again.";
+            return CMD_NOT_FOUND_MSG;
         } catch (DateTimeParseException exception) {
-            return "Wrong date time format, it should be yyyy-MM-dd";
+            return WRONG_DT_FORMAT_MSG;
         }
     }
 

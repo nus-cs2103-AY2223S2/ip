@@ -9,6 +9,13 @@ import java.io.IOException;
 import java.util.LinkedList;
 
 public class TaskList {
+    private static final String ADD_MSG = "Got it. I've added this task:";
+    private static final String DELETE_MSG = "Noted. I've removed this task:";
+    private static final String MARK_T_MSG = "Nice, I've marked this task as done:";
+    private static final String MARK_F_MSG = "Ok, I've marked this task as not done:";
+    private static final String FIND_SUCCESS_MSG = "Here are the matching tasks in your list:";
+    private static final String FIND_FAILURE_MSG = "There were no tasks with that keyword";
+    private static final String LIST_HEADER_MSG = "Here are all your tasks:";
     private final LinkedList<Task> tasks;
     private final Storage storage;
     private final Parser parser;
@@ -46,19 +53,18 @@ public class TaskList {
      */
     public String add(Task t) {
         tasks.add(t);
-        return getStatus("Got it. I've added this task:", t);
+        return getStatus(ADD_MSG, t);
     }
 
     /**
      * Delete a chosen task from the task list
      *
      * @param index the index of the chosen task
-     * @param text string that prepends return the status message
      * @return An update of the changes to the task list
      */
-    public String delete(int index, String text) {
+    public String delete(int index) {
         Task t = tasks.remove(index - 1);
-        return getStatus(text, t);
+        return getStatus(DELETE_MSG, t);
     }
 
     /**
@@ -76,23 +82,44 @@ public class TaskList {
     }
 
     /**
+     * Sets a task of given index to true
+     *
+     * @param index the index of the chosen task
+     * @return An update of the changes to the task list
+     */
+    public String setDone(int index) {
+        return setDone(index, true, MARK_T_MSG);
+    }
+
+    /**
+     * Sets a task of given index to false
+     *
+     * @param index the index of the chosen task
+     * @return An update of the changes to the task list
+     */
+    public String setNotDone(int index) {
+        return setDone(index, false, MARK_F_MSG);
+    }
+
+    /**
      * Returns a string of tasks that contain a certain keyword
      *
      * @param keyword String used to find matches
      * @return String of matches
      */
     public String find(String keyword) {
-        int i = 0;
-        String tmp = "";
+        boolean success = false;
+        StringBuilder output = new StringBuilder(FIND_SUCCESS_MSG);
         for (Task curr : tasks) {
             if (curr.toString().contains(keyword)) {
-                tmp = tmp + "\n" + curr.toString();
+                output.append("\n");
+                output.append(curr.toString());
+                success = true;
             }
-            i++;
         }
-        return i == 0
-                ? "There were no tasks with that keyword"
-                : "Here are the matching tasks in your list:" + tmp;
+        return success
+            ? FIND_FAILURE_MSG
+            : output.toString();
     }
 
     /**
@@ -103,16 +130,17 @@ public class TaskList {
      */
     @Override
     public String toString() {
-        String output= "";
-
-        int n = 1 + (int) Math.floor(Math.log10(tasks.size()));
-        int i = 0;
+        StringBuilder output = new StringBuilder(LIST_HEADER_MSG);
+        int maxDigits = 1 + (int) Math.floor(Math.log10(tasks.size()));
+        int index = 0;
         for (Task task : tasks) {
-            output += String.format("%" + n + "d", i + 1).replace(' ', '0')
-                    + String.format(".%s\n", task.toString());
-            i++;
+
+            output.append("\n");
+            output.append(String.format("%" + maxDigits + "d", index + 1).replace(' ', '0'));
+            output.append(task.toString());
+            index++;
         }
-        return output;
+        return output.toString();
     }
 
     /**
@@ -126,7 +154,7 @@ public class TaskList {
             updateLogFile();
             return String.format("%s\n%s\nNow you have %d task(s) in the list.", text, t.toString(), tasks.size());
         } catch (IOException e) {
-            return "Error: No permissions to edit log file";
+            return "Warning: No permission to edit log file, changes will not persist between sessions";
         }
     }
 
