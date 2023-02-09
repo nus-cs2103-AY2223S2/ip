@@ -38,7 +38,6 @@ public class Task {
      * Updates name of the item
      */
     public void updateTask(String input) throws TaskException {
-        Ui.error("default");
         System.out.println("Enter the item name: ");
         this.name = input;
     }

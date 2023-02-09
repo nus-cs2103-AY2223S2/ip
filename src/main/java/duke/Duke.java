@@ -52,7 +52,7 @@ public class Duke {
         } catch (TaskException e) {
             return e.getMessage();
         } catch (IndexOutOfBoundsException e) {
-            return "Nothing to mark/unmark/delete!";
+            return "Nothing to mark or unmark or delete or update!";
         }
 
     }
