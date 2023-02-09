@@ -5,7 +5,7 @@ import java.io.PrintStream;
 import java.util.Scanner;
 
 /**
- * Duke class which initiates the program and execute it.
+ * Duke Class to handle execution of Duke program.
  */
 public class Duke {
     protected static final String DIV_OPEN = "____________________________________________________________\n";
