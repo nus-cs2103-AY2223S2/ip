@@ -9,6 +9,9 @@ import lele.task.Task;
 import lele.task.TaskList;
 import lele.ui.Ui;
 
+/**
+ * Undo the previous commands by x number of versions (Only for CRUD commands)
+ */
 public class UndoCommand extends Command {
     private int index;
 

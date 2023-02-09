@@ -29,6 +29,12 @@ public class TaskList {
         this.cache.add(toBeStored);
     }
 
+    /**
+     * Restores previous cache by index number of version.
+     *
+     * @param index number of versions to backtrack by.
+     * @throws NoPreviousCommandException Thrown if exceeded version
+     */
     public void restorePreviousList(int index) throws NoPreviousCommandException {
         // Don't do anything if number of versions to undo is 0
         if (index == 0) {
