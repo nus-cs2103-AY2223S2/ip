@@ -34,6 +34,10 @@ public abstract class Task {
         return this;
     }
 
+    public boolean getIsDone() {
+        return this.isDone;
+    }
+
 
     /**
      * Represent this task as a string
