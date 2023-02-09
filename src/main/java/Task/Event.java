@@ -35,6 +35,7 @@ public class Event extends Task {
     public static Event createEvent(String input) throws DukeException {
         int index1 = input.indexOf("/");
         int index2 = input.lastIndexOf("/");
+        // format is wrong, there are less than 2 "/"
         if (index1 == -1 || index2 == -1 || index1 == index2) {
             DukeException e = new TaskFormatException();
             throw e;

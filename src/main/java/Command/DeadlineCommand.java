@@ -1,7 +1,7 @@
 package Command;
 
-import Task.TaskList;
 import Task.Task;
+import Task.TaskList;
 
 /**
  * Command class for Deadline object

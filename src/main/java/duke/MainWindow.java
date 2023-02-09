@@ -52,11 +52,14 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
         if (duke.getIsExit()) {
+            assert duke.getIsExit() == true;
             // This code is gotten from
             // https://stackoverflow.com/questions/27334455/how-to-close-a-stage-after-a-certain-amount-of-time-javafx
             PauseTransition delay = new PauseTransition(Duration.seconds(3));
             delay.setOnFinished( event -> Platform.exit() );
             delay.play();
+            return;
         }
+        assert duke.getIsExit() == false;
     }
 }
