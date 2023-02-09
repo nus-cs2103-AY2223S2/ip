@@ -35,6 +35,8 @@ public class Duke {
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
+            // Assert that task numbers are not negative
+            assert tasks.getNumOfTasks() >= 0;
         } catch (DukeException e) {
             ui.showLoadingError();
             tasks = new TaskList();

@@ -192,4 +192,12 @@ public class TaskList {
             }
         }
     }
+
+    /**
+     * Getter for number of tasks currently registered
+     */
+    public int getNumOfTasks() {
+        return this.numOfTasks;
+    }
+
 }
