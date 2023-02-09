@@ -1,5 +1,6 @@
-package alfred;
+package alfred.components;
 
+import alfred.Alfred;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -8,6 +9,9 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+/**
+ * The MainWindow class represents the initial page of the Graphical User Interface when the user uses the application.
+ */
 public class MainWindow extends AnchorPane {
     @FXML
     private ScrollPane scrollPane;
@@ -50,9 +54,12 @@ public class MainWindow extends AnchorPane {
         if (alfred.isExit()) {
             alfred.handleExit();
         }
-
     }
 
+    /**
+     * Shows the Introductory message displayed by Alfred when the application is opened.
+     * @param intro The introductory message.
+     */
     public void showIntroduction(String intro) {
         dialogContainer.getChildren().add(
                 DialogBox.getAlfredDialog(intro, alfredImage)
