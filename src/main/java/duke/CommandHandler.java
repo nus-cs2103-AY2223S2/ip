@@ -1,7 +1,6 @@
 package duke;
 
 import java.time.format.DateTimeParseException;
-import java.util.List;
 
 public class CommandHandler {
     CommandHandler() {}
@@ -17,38 +16,46 @@ public class CommandHandler {
         String s;
         switch (command.getDescription()) {
         case "bye":
+            assert command.getArguments().length == 0;
             return endDuke();
         //Fallthrough (java doesn't let me compile if I add a break)
         case "list":
+            assert command.getArguments().length == 0;
             return showTasks(tasks);
         //Fallthrough
         case "mark":
+            assert command.getArguments().length == 1;
             s = markTask(command.getArguments()[0], tasks);
             storage.saveData(tasks);
             return s;
         //Fallthrough
         case "unmark":
+            assert command.getArguments().length == 1;
             s = unmarkTask(command.getArguments()[0], tasks);
             storage.saveData(tasks);
             return s;
         //Fallthrough
         case "todo":
+            assert command.getArguments().length == 1;
             s = addTodo(command.getArguments()[0], tasks);
             storage.saveData(tasks);
             return s;
         //Fallthrough
         case "deadline":
+            assert command.getArguments().length == 2;
             s = addDeadline(command.getArguments()[0], command.getArguments()[1], tasks);
             storage.saveData(tasks);
             return s;
         //Fallthrough
         case "event":
+            assert command.getArguments().length == 3;
             s = addEvent(command.getArguments()[0],
                     command.getArguments()[1], command.getArguments()[2], tasks);
             storage.saveData(tasks);
             return s;
         //Fallthrough
         case "delete":
+            assert command.getArguments().length == 1;
             s = deleteEvent(command.getArguments()[0], tasks);
             storage.saveData(tasks);
             return s;
@@ -57,13 +64,15 @@ public class CommandHandler {
             return noMatch();
         //Fallthrough
         case "invalid":
+            assert command.getArguments().length == 1;
             return invalid(command.getArguments()[0]);
         //Fallthrough
         case "find":
+            assert command.getArguments().length == 1;
             return findTasks(command.getArguments()[0], tasks);
-        default:
-            return "";
             //Fallthrough
+        default:
+            throw new IllegalArgumentException("No command found!");
         }
     }
 
@@ -90,6 +99,7 @@ public class CommandHandler {
         return response;
     }
     private String markTask(String index, TaskList tasks) {
+        assert index.matches("[0-9]+");
         String response = "";
         try {
             int taskIndex = Integer.parseInt(index) - 1;
@@ -102,6 +112,7 @@ public class CommandHandler {
         return response;
     }
     private String unmarkTask(String index, TaskList tasks) {
+        assert index.matches("[0-9]+");
         String response = "";
         try {
             int taskIndex = Integer.parseInt(index) - 1;
@@ -126,8 +137,7 @@ public class CommandHandler {
         try {
             newTask = new Deadline(description, by);
         } catch (DateTimeParseException e) {
-            return "Sorry, I didn't understand. Please enter a date or time in one of the following formats:\n" +
-                    ">>31/01/1970 2359\n>>2359\n>>31/01/1970\n";
+            return "Sorry, I didn't understand. Please enter a valid date or time.\n";
         }
         tasks.add(newTask);
         response = String.format("Added: %s\n", newTask.printTask());
@@ -139,8 +149,7 @@ public class CommandHandler {
         try {
             newTask = new Event(description, from, to);
         } catch (DateTimeParseException e) {
-            return "Sorry, I didn't understand. Please enter a date or time in one of the following formats:\n" +
-                    ">>31/01/1970 2359\n>>2359\n>>31/01/1970\n";
+            return "Sorry, I didn't understand. Please enter a valid date or time.\n";
         }
         tasks.add(newTask);
         response = String.format("Added: %s\n", newTask.printTask());
