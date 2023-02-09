@@ -35,8 +35,12 @@ public class TodoCommand extends Command {
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         Task task = new Todo(input);
-        taskList.add(task);
-        storage.writeFile(taskList);
-        return ui.printAddTask(taskList.size(), task);
+        if (taskList.checkDuplicate(task)) {
+            return ui.printDuplicates(task);
+        } else {
+            taskList.add(task);
+            storage.writeFile(taskList);
+            return ui.printAddTask(taskList.size(), task);
+        }
     }
 }

@@ -17,6 +17,7 @@ public class EventCommand extends Command {
 
     /**
      * constructor for eventCommand
+     *
      * @param input
      */
     public EventCommand(String input) {
@@ -41,8 +42,12 @@ public class EventCommand extends Command {
         String to = timing[1].trim();
         String description = s[0].trim();
         Task task = new Event(description, from, to);
-        taskList.add(task);
-        storage.writeFile(taskList);
-        return ui.printAddTask(taskList.size(), task);
+        if (taskList.checkDuplicate(task)) {
+            return ui.printDuplicates(task);
+        } else {
+            taskList.add(task);
+            storage.writeFile(taskList);
+            return ui.printAddTask(taskList.size(), task);
+        }
     }
 }

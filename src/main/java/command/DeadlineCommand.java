@@ -41,8 +41,12 @@ public class DeadlineCommand extends Command {
         String description = split[0].trim();
         String time = split[1].trim();
         Task task = new Deadline(description, time);
-        taskList.add(task);
-        storage.writeFile(taskList);
-        return ui.printAddTask(taskList.size(), task);
+        if (taskList.checkDuplicate(task)) {
+            return ui.printDuplicates(task);
+        } else {
+            taskList.add(task);
+            storage.writeFile(taskList);
+            return ui.printAddTask(taskList.size(), task);
+        }
     }
 }
