@@ -1,4 +1,3 @@
-[D][x] eat rice  (Due: Jan 23 2023)
 [E][ ] meeting  (Start: Jan 25 2023 | End: Jan 27 2023)
 [T][ ] bake cake
 [T][ ] bake cookies
