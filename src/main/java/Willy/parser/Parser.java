@@ -5,16 +5,27 @@ import java.util.Arrays;
 import Willy.exception.WillyException;
 import Willy.task.TaskList;
 
+/**
+ * Represents a parser
+ */
 public class Parser {
 
     private TaskList tList;
     private boolean isExit;
 
+    /**
+     * Creates a parser with a specified tasklist
+     * @param tList
+     */
     public Parser(TaskList tList) {
         this.tList = tList;
         this.isExit = false;
     }
 
+    /** 
+     * Displays the number of items in your task list
+     * @param tList
+     */
     public static void listCommand(TaskList tList) {
         int taskCount = tList.getTaskCount();
         if (taskCount == 0) {
@@ -25,24 +36,36 @@ public class Parser {
         }
     }
 
-    // public static void byeCommand() {
-    // System.out.println("Bye. Hope to see you again soon!");
-    // System.exit(0);
-    // }
-
+    /**
+     * get index based on the string helper function
+     * @param input
+     * @return the index of the task 
+     */
     public int getIndex(String input) {
         return Integer.parseInt(input) - 1;
     }
 
+    /**
+     * return the boolean the exit status
+     * @return the Exit status of the program
+     */
     public boolean getExitStatus() {
         return isExit;
     }
 
+    /**
+     * Runs the exit command which prints the bye msg and stops the program
+     */
     public void exitCommand() {
         System.out.println("Bye. Hope to see you again soon!");
         isExit = true;
     }
 
+    /**
+     * Main parser function that takes in a command and executes the command
+     * @param command
+     * @throws WillyException
+     */
     public void parseCommand(String command) throws WillyException {
         String[] tempBySpace = command.split(" ");
         String[] tempBySlash = command.split("/");

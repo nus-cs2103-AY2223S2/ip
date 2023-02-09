@@ -1,7 +1,14 @@
 package Willy.exception;
 
+/**
+ * This represents the WillyException
+ */
 public class WillyException extends Exception {
-    public WillyException(String message){
+    /**
+     * WillyException that throws a message
+     * @param message
+     */
+    public WillyException(String message) {
         super(message);
     }
 }
