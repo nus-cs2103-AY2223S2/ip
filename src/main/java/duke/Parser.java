@@ -99,7 +99,9 @@ public class Parser {
                 if (commandArr.length < 2) {
                     throw new DukeException("You must enter a keyword to find");
                 }
-                response = tasks.findMatchingTasks(command.substring(5));
+                command = command.substring(5);
+                String[] keywords = command.split(" ");
+                response = tasks.findMatchingTasks(keywords);
                 break;
             case BYE:
                 response = "Bye bye!";

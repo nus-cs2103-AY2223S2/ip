@@ -87,15 +87,18 @@ public class TaskList {
     /**
      * Filters tasks with the given keyword.
      *
-     * @param keyword Keyword for searching tasks
+//     * @param keyword Keyword for searching tasks
      * @return String of matching task(s).
      */
-    public String findMatchingTasks(String keyword) {
+    public String findMatchingTasks(String... keywords) {
         StringBuilder tasksList = new StringBuilder("Here are the matching task(s): \n");
         int count = 1;
         for (Task task : tasks) {
-            if (task.toString().contains(keyword)) {
-                tasksList.append(count++).append(". ").append(task.toString());
+            for (String kw : keywords) {
+                if (task.toString().contains(kw)) {
+                    tasksList.append(count++).append(". ").append(task.toString()).append("\n");
+                    break;
+                }
             }
         }
         return tasksList.toString();
