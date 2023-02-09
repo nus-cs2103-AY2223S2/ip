@@ -38,6 +38,7 @@ public class Duke {
         String response = "There was an error with your query!";
         try {
             response = Parser.handleCommands(command, this.allTasks);
+            assert response != null : "Response from parser should not be null!";
         } catch (DukeException e) {
             System.out.println(e.toString());
         }
