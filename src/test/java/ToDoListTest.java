@@ -1,5 +1,6 @@
 import duke.ToDoList;
 import duke.tasks.ToDoTask;
+
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -15,7 +16,7 @@ public class ToDoListTest {
             ls.add(new ToDoTask("slot 3"));
             assertEquals(expected, ls.delete(2));
         } catch (Exception e) {
-            fail();
+            fail(e.getMessage());
         }
     }
 
@@ -29,7 +30,7 @@ public class ToDoListTest {
             ls.add(new ToDoTask("slot 3"));
             assertEquals(expected, ls.getTask(1));
         } catch (Exception e) {
-            fail();
+            fail(e.getMessage());
         }
     }
 }

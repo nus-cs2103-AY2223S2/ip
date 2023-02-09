@@ -27,7 +27,7 @@ public class ParserTest {
             assertArrayEquals(expected, Parser.handleInput("testabestagestalest", "a", 3, 4));
             fail();
         } catch (Exception e) {
-
+            //test case passed
         }
     }
 
@@ -48,7 +48,7 @@ public class ParserTest {
 
             assertEquals("TO DO LIST:\n", Parser.handleCommand(input, new ToDoListStub(), new DukeStub()));
         } catch (Exception e) {
-            fail();
+            fail(e.getMessage());
         }
 
         try {
@@ -58,7 +58,7 @@ public class ParserTest {
                     Parser.handleCommand(input, new ToDoListStub(), new DukeStub()));
             fail();
         } catch (Exception e) {
-
+            //test case passed
         }
 
         try {
@@ -67,7 +67,7 @@ public class ParserTest {
             assertEquals(false, Parser.handleCommand(input, new ToDoListStub(), new DukeStub()));
             fail();
         } catch (Exception e) {
-
+            //test case passed
         }
     }
 }

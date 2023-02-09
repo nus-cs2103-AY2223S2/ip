@@ -12,8 +12,12 @@ import duke.tasks.EventTask;
 import duke.tasks.Task;
 import duke.tasks.ToDoTask;
 
+import java.util.Scanner;
+import java.util.regex.Pattern;
+
+
 /**
- * A class that contains different static methods to deal with user's input.
+ * A class that contains different static methods to deal with commands.
  */
 public class Parser {
     private Parser() {
@@ -99,6 +103,49 @@ public class Parser {
     }
 
     /**
+     * The method reads a scanner and uses it to read and load the contents of
+     * the file in the scanner to a ToDoList object. It returns the ToDoList
+     * object loaded with the file's content.
+     *
+     * @param sc The Scanner containing the file to be read to load the ToDoList
+     *           object.
+     * @return A ToDoList that is obtained from reading the file contents.
+     * @throws DukeException If the file contents contain invalid data.
+     */
+    public static ToDoList handleLoadCommand(Scanner sc) throws DukeException {
+        ToDoList list = new ToDoList();
+        while (sc.hasNext()) {
+            String[] inputs = Parser.handleInput(sc.nextLine(), Pattern.quote("/+/"), 5, 3);
+            String command = inputs[0];
+            Task task;
+            switch (command) {
+            case "TODO":
+                task = new ToDoTask(inputs[2]);
+                Parser.handleLoadMark(task, inputs[1]);
+                list.add(task);
+                break;
+            case "DEADLINE":
+                task = new DeadlineTask(inputs[2], inputs[3]);
+                Parser.handleLoadMark(task, inputs[1]);
+                list.add(task);
+                break;
+            case "EVENT":
+                task = new EventTask(inputs[2], inputs[3], inputs[4]);
+                Parser.handleLoadMark(task, inputs[1]);
+                list.add(task);
+                break;
+            }
+        }
+        return list;
+    }
+
+    private static void handleLoadMark(Task task, String command) {
+        if (command.equals("DONE")) {
+            task.markDone();
+        }
+    }
+
+    /**
      * The method reads a String input and returns the integer representation of that String.
      *
      * @param input The String to be parsed into an integer.
@@ -131,26 +178,27 @@ public class Parser {
         if (inputs.length < 2) {
             throw new InputDukeException();
         }
-        if (command.equals("todo")) {
-            ToDoTask toAdd = new ToDoTask(inputs[1]);
-            list.add(toAdd);
-            return Reply.getAddDeleteMessage(list, toAdd, "add");
-        }
-        if (command.equals("deadline")) {
-            String[] subInputs = Parser.handleInput(inputs[1], " /by ", 2, 2);
-            DeadlineTask toAdd = new DeadlineTask(subInputs[0], subInputs[1]);
-            list.add(toAdd);
-            return Reply.getAddDeleteMessage(list, toAdd, "add");
-        }
-        if (command.equals("event")) {
-            String[] subInputs = Parser.handleInput(inputs[1], " /from ", 2, 2);
-            String[] subInputDurations = Parser.handleInput(subInputs[1], " /to ", 2, 2);
-            EventTask toAdd = new EventTask(subInputs[0],
+
+        switch (command) {
+        case "todo":
+            ToDoTask toDoToAdd = new ToDoTask(inputs[1]);
+            list.add(toDoToAdd);
+            return Reply.getAddDeleteMessage(list, toDoToAdd, "add");
+        case "deadline":
+            String[] deadlineInputs = Parser.handleInput(inputs[1], " /by ", 2, 2);
+            DeadlineTask deadlineToAdd = new DeadlineTask(deadlineInputs[0], deadlineInputs[1]);
+            list.add(deadlineToAdd);
+            return Reply.getAddDeleteMessage(list, deadlineToAdd, "add");
+        case "event":
+            String[] eventInputs = Parser.handleInput(inputs[1], " /from ", 2, 2);
+            String[] subInputDurations = Parser.handleInput(eventInputs[1], " /to ", 2, 2);
+            EventTask eventToAdd = new EventTask(eventInputs[0],
                     subInputDurations[0],
                     subInputDurations[1]);
-            list.add(toAdd);
-            return Reply.getAddDeleteMessage(list, toAdd, "add");
+            list.add(eventToAdd);
+            return Reply.getAddDeleteMessage(list, eventToAdd, "add");
+        default:
+            throw new InputDukeException();
         }
-        throw new InputDukeException();
     }
 }
