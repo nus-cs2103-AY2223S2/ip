@@ -94,26 +94,27 @@ public class FileStuff {
         String[] splitSave = taskSave.split(Task.SEP);
         // type SEP done SEP desc SEP due/from SEP to
 
-        try {
-            boolean isDone = splitSave[1].equals(Task.DONE_TRUE);
-            String desc = splitSave[2];
+        String taskError = "Saved task \"" + taskSave + "\" ";
+        assert splitSave.length >= 3 : taskError + "is formatted incorrectly";
 
-            switch (splitSave[0]) {
-            case Task.TODO_SYMBOL:
-                return new Task(desc, isDone);
+        boolean isDone = splitSave[1].equals(Task.DONE_TRUE);
+        String desc = splitSave[2];
 
-            case Deadline.DEADLINE_SYMBOL:
-                return new Deadline(desc, LocalDateTime.parse(splitSave[3]), isDone);
+        switch (splitSave[0]) {
+        case Task.TODO_SYMBOL:
+            assert splitSave.length == 3 : taskError + "is not a ToDo task";
+            return new Task(desc, isDone);
 
-            case Event.EVENT_SYMBOL:
-                return new Event(desc, LocalDateTime.parse(splitSave[3]), LocalDateTime.parse(splitSave[4]), isDone);
+        case Deadline.DEADLINE_SYMBOL:
+            assert splitSave.length == 4 : taskError + "is not a Deadline task";
+            return new Deadline(desc, LocalDateTime.parse(splitSave[3]), isDone);
 
-            default:
-                throw new UncheckedIOException(new IOException("Unknown task type symbol: " + splitSave[0]));
-            }
-        } catch (ArrayIndexOutOfBoundsException e) {
-            // Change to assert
-            throw new UncheckedIOException(new IOException("Missing SEP (" + Task.SEP + ") in save file"));
+        case Event.EVENT_SYMBOL:
+            assert splitSave.length == 5 : taskError + "is not an Event task";
+            return new Event(desc, LocalDateTime.parse(splitSave[3]), LocalDateTime.parse(splitSave[4]), isDone);
+
+        default:
+            throw new UncheckedIOException(new IOException("Unknown task type symbol: " + splitSave[0]));
         }
     }
 }

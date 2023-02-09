@@ -123,16 +123,18 @@ public class TaskList {
      * @see Task#mark()
      */
     public String mark(int num) {
+        assert !notInRange(num) : "Invalid index to mark";
+
         int index = num - 1;
-        boolean wasChanged = tasks.get(index).mark();
+        boolean wasChanged = this.tasks.get(index).mark();
 
         if (!wasChanged) {
             return "You've already done:\n" + GAP
-                    + tasks.get(index).toString();
+                    + this.tasks.get(index).toString();
         }
 
         return "Woohoo! You've completed:\n" + GAP
-                + tasks.get(index).toString();
+                + this.tasks.get(index).toString();
     }
 
     /**
@@ -143,6 +145,8 @@ public class TaskList {
      * @see Task#unmark()
      */
     public String unmark(int num) {
+        assert !notInRange(num) : "Invalid index to unmark";
+
         int index = num - 1;
         boolean wasChanged = tasks.get(index).unmark();
 
@@ -162,6 +166,8 @@ public class TaskList {
      * @return A confirmation message.
      */
     public String delTask(int num) {
+        assert !notInRange(num) : "Invalid index to delete";
+
         int index = num - 1;
         Task removedTask = tasks.remove(index);
         return "Got it! Deleted:\n"
