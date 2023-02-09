@@ -97,14 +97,14 @@ deadline DESCRIPTION /by BY_DATE [/tag TAGS]
 Example usage:
 
 ```
-deadline Project Assignemnt /by 19-2-2023 /tag High Priority, Deadline Soon
+deadline Project Assignment /by 19-2-2023 /tag High Priority, Deadline Soon
 ```
 
 ### `event` - Adds a new Event item
 
 This command allows you to add a new "Event" item into the task list.
 
-A "Event" item must have the following:
+An "Event" item must have the following:
 
 - a non-empty description
 - a "start" date. This can be inputed as a arbitrary string, or a string of the following format: `day-month-year [HHmm]`. For example: `3-16-2002 1400` or `10-10-1995`
