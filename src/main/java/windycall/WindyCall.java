@@ -53,6 +53,9 @@ public class WindyCall {
             case FIND:
                 return FindOperationHandler.handle(parts, ui, tasks, userCommand);
 //                break;
+            case TAG:
+                return AddTagHandler.handleAddTag(parser, tasks, parts, storage);
+//                break;
             default:
                 String returnedMessage;
                 try {

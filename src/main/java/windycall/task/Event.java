@@ -18,6 +18,12 @@ public class Event extends Task {
         this.to = Parser.processDate(to);
     }
 
+    public Event(String description, boolean status, String from, String to, String tag) {
+        super(description, status, tag);
+        this.from = Parser.processDate(from);
+        this.to = Parser.processDate(to);
+    }
+
     @Override
     public String getTaskTypeIcon() {
         return "E";
@@ -26,7 +32,7 @@ public class Event extends Task {
 
     @Override
     public String getFileFormat() {
-        return "E | " + getStatusIcon() + " | " + description + " | " + from + " | " + to + "\n";
+        return "E | " + getStatusIcon() + " | " + tag + " | " + description + " | " + from + " | " + to + "\n";
     }
     private String changeDateTimeFormat(LocalDate date) {
         return date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
