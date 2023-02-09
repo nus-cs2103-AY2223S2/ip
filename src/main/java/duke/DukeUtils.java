@@ -1,8 +1,11 @@
 package duke;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.temporal.TemporalAdjusters;
+import java.util.Arrays;
 import java.util.Optional;
 import java.util.OptionalInt;
 
@@ -13,13 +16,11 @@ import java.util.OptionalInt;
  */
 public class DukeUtils {
 
-    private static final String INPUT_FORMAT_STRING = "yyyy-MM-dd";
-    private static final String OUTPUT_FORMAT_STRING = "MMM dd yyyy";
-
-    private static final DateTimeFormatter INPUT_FORMAT =
-            DateTimeFormatter.ofPattern(INPUT_FORMAT_STRING);
-    private static final DateTimeFormatter OUTPUT_FORTMAT =
-            DateTimeFormatter.ofPattern(OUTPUT_FORMAT_STRING);
+    private static final DateTimeFormatter DATE_INPUT_FORMAT =
+            DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private static final DateTimeFormatter DATE_OUTPUT_FORTMAT =
+            DateTimeFormatter.ofPattern("MMM dd yyyy");
+    private static final DateTimeFormatter DAY_INPUT_FORMAT = DateTimeFormatter.ofPattern("EEE");
 
     /**
      * Converts a {@code LocalDate} instance to a string, using {@code MMM dd yyyy} format.
@@ -27,9 +28,9 @@ public class DukeUtils {
      * @param date the {@code LocalDate} instance to be converted
      * @return a string, representing the {@code LocalDate} instance
      */
-    public static String convertDateToString(LocalDate date) {
+    public static String showDate(LocalDate date) {
         assert date != null;
-        return date.format(OUTPUT_FORTMAT);
+        return date.format(DATE_OUTPUT_FORTMAT);
     }
 
     /**
@@ -39,10 +40,21 @@ public class DukeUtils {
      * @param input the input string
      * @return an {@code Optional} instance holding the conversion result
      */
-    public static Optional<LocalDate> convertStringToDate(String input) {
+    public static Optional<LocalDate> parseDate(String input) {
         assert input != null;
         try {
-            return Optional.of(LocalDate.parse(input, INPUT_FORMAT));
+            LocalDate date = LocalDate.from(DATE_INPUT_FORMAT.parse(input));
+            return Optional.of(date);
+        } catch (DateTimeParseException ex) {
+            return Optional.empty();
+        }
+    }
+
+    public static Optional<LocalDate> parseDay(String input) {
+        try {
+            DayOfWeek day = DayOfWeek.from(DAY_INPUT_FORMAT.parse(input));
+            LocalDate date = LocalDate.now().with(TemporalAdjusters.next(day));
+            return Optional.of(date);
         } catch (DateTimeParseException ex) {
             return Optional.empty();
         }
@@ -55,12 +67,17 @@ public class DukeUtils {
      * @param input the input string
      * @return an {@code OptionalInt} holding the result of the conversion
      */
-    public static OptionalInt convertStringToInt(String input) {
+    public static OptionalInt parseInt(String input) {
         assert input != null;
         try {
             return OptionalInt.of(Integer.parseInt(input));
         } catch (NumberFormatException ex) {
             return OptionalInt.empty();
         }
+    }
+
+    @SafeVarargs
+    public static <T> Optional<T> choice(Optional<T>... opts) {
+        return Arrays.stream(opts).filter(Optional::isPresent).findFirst().orElse(Optional.empty());
     }
 }

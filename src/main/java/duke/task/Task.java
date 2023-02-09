@@ -3,6 +3,7 @@ package duke.task;
 import java.io.Serializable;
 import java.util.Objects;
 
+import duke.exception.DukeIllegalArgumentException;
 import duke.exception.DukeIllegalStateException;
 
 /**
@@ -22,12 +23,19 @@ public abstract class Task implements Serializable {
      * @param description a string describes the created task
      */
     public Task(String description) {
+        if (description.isEmpty()) {
+            throw new DukeIllegalArgumentException("description cannot be empty");
+        }
         this.description = description;
         this.isDone = false;
     }
 
     public String getDescription() {
         return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     /**

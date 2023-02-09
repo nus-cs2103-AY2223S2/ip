@@ -22,8 +22,7 @@ public class DeadlineTask extends Task {
 
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(),
-                DukeUtils.convertDateToString(deadline));
+        return String.format("[D]%s (by: %s)", super.toString(), DukeUtils.showDate(deadline));
     }
 
     @Override

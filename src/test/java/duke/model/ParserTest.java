@@ -21,7 +21,8 @@ import duke.task.TodoTask;
 
 public class ParserTest {
 
-    private static final Class<DukeRuntimeException> exceptionClass = DukeRuntimeException.class;
+    private static final Class<DukeRuntimeException> EXPECTED_EXCEPTION_CLASS =
+            DukeRuntimeException.class;
 
     @Test
     public void shouldCorrectlyParseSomeCommand() {
@@ -29,9 +30,10 @@ public class ParserTest {
         assertEquals(Parser.parseCommand("bye"), new ExitCommand());
         assertEquals(Parser.parseCommand("todo eat"), new AddCommand(new TodoTask("eat")));
         assertEquals(Parser.parseCommand("deadline homework --by 2023-01-01"), new AddCommand(
-                new DeadlineTask("homework", DukeUtils.convertStringToDate("2023-01-01").get())));
-        assertEquals(Parser.parseCommand("event live --from current --to future"),
-                new AddCommand(new EventTask("live", "current", "future")));
+                new DeadlineTask("homework", DukeUtils.parseDate("2023-01-01").get())));
+        assertEquals(Parser.parseCommand("event survive --from 2023-01-01 --to 2023-10-10"),
+                new AddCommand(new EventTask("survive", DukeUtils.parseDate("2023-01-01").get(),
+                        DukeUtils.parseDate("2023-10-10").get())));
         assertEquals(Parser.parseCommand("mark 10"), new MarkCommand(10));
         assertEquals(Parser.parseCommand("unmark 10"), new UnmarkCommand(10));
         assertEquals(Parser.parseCommand("delete 10"), new RemoveCommand(10));
@@ -41,21 +43,22 @@ public class ParserTest {
     @Test
     public void shouldThrowForEmptyDescription() {
         DukeRuntimeException ex;
-        ex = assertThrows(exceptionClass, () -> Parser.parseCommand("todo"));
+        ex = assertThrows(EXPECTED_EXCEPTION_CLASS, () -> Parser.parseCommand("todo"));
         assertTrue(ex.getMessage().contains("description cannot be empty"));
-        ex = assertThrows(exceptionClass, () -> Parser.parseCommand("deadline --by 2023-01-01"));
+        ex = assertThrows(EXPECTED_EXCEPTION_CLASS,
+                () -> Parser.parseCommand("deadline --by 2023-01-01"));
         assertTrue(ex.getMessage().contains("description cannot be empty"));
-        ex = assertThrows(exceptionClass,
-                () -> Parser.parseCommand("event --from current --to future"));
+        ex = assertThrows(EXPECTED_EXCEPTION_CLASS,
+                () -> Parser.parseCommand("event --from 2023-01-01 --to 2023-10-10"));
         assertTrue(ex.getMessage().contains("description cannot be empty"));
     }
 
     @Test
     public void shouldThrowForInvalidIntArgument() {
         DukeRuntimeException ex;
-        ex = assertThrows(exceptionClass, () -> Parser.parseCommand("mark 10v"));
+        ex = assertThrows(EXPECTED_EXCEPTION_CLASS, () -> Parser.parseCommand("mark 10v"));
         assertTrue(ex.getMessage().contains("expect an integer as argument"));
-        ex = assertThrows(exceptionClass, () -> Parser.parseCommand("delete 10v"));
+        ex = assertThrows(EXPECTED_EXCEPTION_CLASS, () -> Parser.parseCommand("delete 10v"));
         assertTrue(ex.getMessage().contains("expect an integer as argument"));
     }
 }

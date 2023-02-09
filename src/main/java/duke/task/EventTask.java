@@ -1,23 +1,27 @@
 package duke.task;
 
+import java.time.LocalDate;
 import java.util.Objects;
+
+import duke.DukeUtils;
 
 public class EventTask extends Task {
 
     private static final long serialVersionUID = -150197333726686918L;
 
-    private String from;
-    private String to;
+    private LocalDate startTime;
+    private LocalDate endTime;
 
-    public EventTask(String description, String from, String to) {
+    public EventTask(String description, LocalDate startTime, LocalDate endTime) {
         super(description);
-        this.from = from;
-        this.to = to;
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 
     @Override
     public String toString() {
-        return String.format("[E]%s (from: %s to: %s)", super.toString(), from, to);
+        return String.format("[E]%s (from: %s to: %s)", super.toString(),
+                DukeUtils.showDate(startTime), DukeUtils.showDate(endTime));
     }
 
     @Override
@@ -26,6 +30,7 @@ public class EventTask extends Task {
             return false;
         }
         EventTask task = (EventTask) obj;
-        return super.equals(obj) && Objects.equals(from, task.from) && Objects.equals(to, task.to);
+        return super.equals(obj) && Objects.equals(startTime, task.startTime)
+                && Objects.equals(endTime, task.endTime);
     }
 }

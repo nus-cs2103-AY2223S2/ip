@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.model.TaskList;
 
-public class SortCommand extends Command {
+public class ListDeadlinesCommand extends Command {
 
     @Override
     public String execute(TaskList list) {
@@ -11,6 +11,6 @@ public class SortCommand extends Command {
 
     @Override
     public boolean equals(Object obj) {
-        return obj instanceof SortCommand;
+        return obj instanceof ListDeadlinesCommand;
     }
 }
