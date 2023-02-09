@@ -1,14 +1,15 @@
 package crystal.command;
 
+import crystal.Storage;
 import crystal.TaskList;
 import crystal.Ui;
-import crystal.Storage;
+
 
 /**
  * Represents the list command when the user enters "list".
  *
  */
-public class ListCommand extends Command{
+public class ListCommand extends Command {
 
     /**
      * Executes the list command to print the list message.

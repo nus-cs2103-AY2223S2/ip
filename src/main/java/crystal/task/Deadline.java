@@ -1,9 +1,11 @@
 package crystal.task;
 
-import crystal.CrystalException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import crystal.CrystalException;
+
+
 
 /**
  * Represents the deadline task.
@@ -11,7 +13,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
 
-    public LocalDateTime by;
+    private LocalDateTime by;
 
 
     /**

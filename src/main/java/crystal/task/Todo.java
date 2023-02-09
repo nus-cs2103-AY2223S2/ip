@@ -4,7 +4,7 @@ package crystal.task;
  * Represents the Todo task.
  *
  */
-public class Todo extends Task{
+public class Todo extends Task {
 
     protected boolean isSet;
 
@@ -14,7 +14,7 @@ public class Todo extends Task{
      * @param description Task description
      *
      */
-    public Todo (String description) {
+    public Todo(String description) {
         super(description);
     }
 

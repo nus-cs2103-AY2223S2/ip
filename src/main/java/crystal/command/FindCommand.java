@@ -10,7 +10,7 @@ import crystal.Ui;
  */
 public class FindCommand extends Command {
 
-    public String word;
+    private String word;
 
     /**
      * Constructor for FindCommand class

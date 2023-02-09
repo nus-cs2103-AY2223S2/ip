@@ -1,18 +1,19 @@
 package crystal;
 
-import crystal.task.Task;
-import crystal.task.Todo;
+import java.util.Scanner;
+
 import crystal.task.Deadline;
 import crystal.task.Event;
+import crystal.task.Task;
+import crystal.task.Todo;
 
-import java.util.Scanner;
 
 /**
  * Represents the Ui task.
  */
 public class Ui {
-    Scanner sc = new Scanner(System.in);
-    String line = " ____________________________________________________________";
+    private Scanner sc = new Scanner(System.in);
+    private String line = " ____________________________________________________________";
 
 
     /**
@@ -29,9 +30,6 @@ public class Ui {
      *
      */
     public String showWelcome() {
-//        System.out.println(" ____________________________________________________________");
-//        System.out.println(" Hi! I am CRYSTAL.\n How may I be of assistance?");
-//        System.out.println(" ____________________________________________________________");
         StringBuilder temp = new StringBuilder();
         temp.append(line + "\n");
         temp.append(" Hi! I am CRYSTAL.\n How may I be of assistance?\n");
@@ -88,7 +86,7 @@ public class Ui {
         StringBuilder temp = new StringBuilder();
         temp.append(line + "\n");
         temp.append("Alright, I've marked this task as not done: \n");
-        unmarkTask.isDone = true;
+        unmarkTask.setIsDone(false);
         temp.append(unmarkTask.toString() + "\n");
         temp.append(line + "\n");
         return temp.toString();
@@ -106,7 +104,7 @@ public class Ui {
         StringBuilder temp = new StringBuilder();
         temp.append(line + "\n");
         temp.append("Alright, I've marked the task as done: \n");
-        markTask.isDone = true;
+        markTask.setIsDone(true);
         temp.append(markTask.toString() + "\n");
         temp.append(line + "\n");
         return temp.toString();
