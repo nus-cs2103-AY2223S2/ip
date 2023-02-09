@@ -19,30 +19,37 @@ public class CommandHandler {
             s = endDuke();
             break;
         case "list":
+            assert command.getArguments().length == 0;
             s = showTasks(tasks);
             break;
         case "mark":
+            assert command.getArguments().length == 1;
             s = markTask(command.getArguments()[0], tasks);
             storage.saveData(tasks);
             break;
         case "unmark":
+            assert command.getArguments().length == 1;
             s = unmarkTask(command.getArguments()[0], tasks);
             storage.saveData(tasks);
             break;
         case "todo":
+            assert command.getArguments().length == 1;
             s = addTodo(command.getArguments()[0], tasks);
             storage.saveData(tasks);
             break;
         case "deadline":
+            assert command.getArguments().length == 2;
             s = addDeadline(command.getArguments()[0], command.getArguments()[1], tasks);
             storage.saveData(tasks);
             break;
         case "event":
+            assert command.getArguments().length == 3;
             s = addEvent(command.getArguments()[0],
                     command.getArguments()[1], command.getArguments()[2], tasks);
             storage.saveData(tasks);
             break;
         case "delete":
+            assert command.getArguments().length == 1;
             s = deleteEvent(command.getArguments()[0], tasks);
             storage.saveData(tasks);
             break;
@@ -50,9 +57,11 @@ public class CommandHandler {
             s = noMatch();
             break;
         case "invalid":
+            assert command.getArguments().length == 1;
             s = invalid(command.getArguments()[0]);
             break;
         case "find":
+            assert command.getArguments().length == 1;
             s = findTasks(command.getArguments()[0], tasks);
             break;
         default:
@@ -84,6 +93,7 @@ public class CommandHandler {
         return response;
     }
     private String markTask(String index, TaskList tasks) {
+        assert index.matches("[0-9]+");
         String response = "";
         try {
             int taskIndex = Integer.parseInt(index) - 1;
@@ -96,6 +106,7 @@ public class CommandHandler {
         return response;
     }
     private String unmarkTask(String index, TaskList tasks) {
+        assert index.matches("[0-9]+");
         String response = "";
         try {
             int taskIndex = Integer.parseInt(index) - 1;
@@ -120,8 +131,7 @@ public class CommandHandler {
         try {
             newTask = new Deadline(description, by);
         } catch (DateTimeParseException e) {
-            return "Sorry, I didn't understand. Please enter a date or time in one of the following formats:\n" +
-                    ">>31/01/1970 2359\n>>2359\n>>31/01/1970\n";
+            return "Sorry, I didn't understand. Please enter a valid date or time.\n";
         }
         tasks.add(newTask);
         response = String.format("Added: %s\n", newTask.printTask());
@@ -133,8 +143,7 @@ public class CommandHandler {
         try {
             newTask = new Event(description, from, to);
         } catch (DateTimeParseException e) {
-            return "Sorry, I didn't understand. Please enter a date or time in one of the following formats:\n" +
-                    ">>31/01/1970 2359\n>>2359\n>>31/01/1970\n";
+            return "Sorry, I didn't understand. Please enter a valid date or time.\n";
         }
         tasks.add(newTask);
         response = String.format("Added: %s\n", newTask.printTask());
