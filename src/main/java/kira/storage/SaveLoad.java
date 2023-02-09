@@ -57,34 +57,13 @@ public class SaveLoad {
                 String[] parsedTasks = task.split("\",\"");
                 switch (TaskType.valueOf(parsedTasks[0])) {
                 case TODO:
-                    if (parsedTasks.length != 3) {
-                        throw new KiraException();
-                    }
-                    ToDo todo = new ToDo(parsedTasks[1]);
-                    if (parsedTasks[2].equals("y")) {
-                        todo.mark();
-                    }
-                    taskList.add(todo);
+                    parseAndAddTodo(taskList, parsedTasks);
                     break;
                 case DEADLINE:
-                    if (parsedTasks.length != 4) {
-                        throw new KiraException();
-                    }
-                    Deadline deadline = new Deadline(parsedTasks[1], parsedTasks[3]);
-                    if (parsedTasks[2].equals("y")) {
-                        deadline.mark();
-                    }
-                    taskList.add(deadline);
+                    parseAndAddDeadline(taskList, parsedTasks);
                     break;
                 case EVENT:
-                    if (parsedTasks.length != 5) {
-                        throw new KiraException();
-                    }
-                    Event event = new Event(parsedTasks[1], parsedTasks[3], parsedTasks[4]);
-                    if (parsedTasks[2].equals("y")) {
-                        event.mark();
-                    }
-                    taskList.add(event);
+                    parseAndAddEvent(taskList, parsedTasks);
                     break;
                 default:
                     // Should never reach here. Programmer error!
@@ -100,6 +79,39 @@ public class SaveLoad {
             throw new KiraException("It seems that the save file is corrupted...");
         }
         return taskList;
+    }
+
+    private static void parseAndAddEvent(List<Task> taskList, String[] data) throws KiraException {
+        if (data.length != 5) {
+            throw new KiraException();
+        }
+        Event event = new Event(data[1], data[3], data[4]);
+        if (data[2].equals("y")) {
+            event.mark();
+        }
+        taskList.add(event);
+    }
+
+    private static void parseAndAddDeadline(List<Task> taskList, String[] data) throws KiraException {
+        if (data.length != 4) {
+            throw new KiraException();
+        }
+        Deadline deadline = new Deadline(data[1], data[3]);
+        if (data[2].equals("y")) {
+            deadline.mark();
+        }
+        taskList.add(deadline);
+    }
+
+    private static void parseAndAddTodo(List<Task> taskList, String[] data) throws KiraException {
+        if (data.length != 3) {
+            throw new KiraException();
+        }
+        ToDo todo = new ToDo(data[1]);
+        if (data[2].equals("y")) {
+            todo.mark();
+        }
+        taskList.add(todo);
     }
 
 }
