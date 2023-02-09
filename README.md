@@ -3,7 +3,7 @@
 > 'He who fails to plan is planning to fail' -- Winston Churchill 
 
 DukePro is a task planner that is *free*, download it from [here](https://github.com/liujiayue314/ip/releases/tag/A-Jar). 
-Programmers can also use it in intelliJ, by running `Duke.main`.
+Programmers can also use it in intelliJ, by running `main` method.
 
 It frees your mind of having to remember things you need to do. It's
 + Fast to install
@@ -22,8 +22,9 @@ Currently, the features are
 
 
 ```Ruby
-____________________________________________________________
- Hello! I'm Duke, your task planner
- What can I do for you?
-____________________________________________________________
+public class Main {
+    public static void main(String[] args) {
+        Application.launch(MainApp.class, args);
+    }
+}
 ```
