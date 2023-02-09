@@ -20,7 +20,6 @@ public class Deadline extends Task{
      */
     public Deadline(String description, String a) {
         super(description);
-        System.out.println(date);
         this.date = LocalDate.parse(a);
     }
 
