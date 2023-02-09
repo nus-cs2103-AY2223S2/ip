@@ -68,22 +68,30 @@ public class Duke extends Application {
         this.textUi.printExitingMessage();
     }
 
-    @Override
-    public void start(Stage stage) {
+    public void runWithGui(Stage stage) {
         new Gui((String input) -> this.parseAndRespond(input)).start(stage);
     }
 
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
+    @Override
+    public void start(Stage stage) {
+        String filepath = getParameters().getUnnamed().get(0);
+
+        new Duke(filepath).runWithGui(stage);
+    }
+
     private String parseAndRespond(String input) {
         try {
+            if ("BYE".equalsIgnoreCase(input)) {
+                if (this.localTaskList != null) {
+                    this.localTaskList.writeFromProgramTaskList(this.tasks);
+                }
+                System.exit(0);
+            }
             Command command = new Request(input).parse();
             String reply = command.run(this.tasks);
-            return "Duke shouts:\n " + reply;
+            return "Duke shouts:\n" + reply;
         } catch (DukeException error) {
-            return "Duke shouts:\n " + error;
+            return "Duke shouts:\n" + error;
         }
     }
 }

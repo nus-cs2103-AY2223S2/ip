@@ -2,6 +2,7 @@ package ui;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -18,12 +19,6 @@ public class DialogBox extends HBox {
     public DialogBox(Label l, ImageView iv) {
         text = l;
         displayPicture = iv;
-        Region leftSpacer = new Region();
-        leftSpacer.setPrefWidth(10);
-        Region centerSpacer = new Region();
-        centerSpacer.setPrefWidth(20);
-        Region rightSpacer = new Region();
-        rightSpacer.setPrefWidth(10);
 
         text.setWrapText(true);
         displayPicture.setFitWidth(100.0);
@@ -32,7 +27,9 @@ public class DialogBox extends HBox {
         displayPicture.setClip(clip);
 
         this.setAlignment(Pos.TOP_RIGHT);
-        this.getChildren().addAll(leftSpacer, text, centerSpacer, displayPicture, rightSpacer);
+        this.setPadding(new Insets(5, 10, 5, 10));
+        this.setSpacing(20);
+        this.getChildren().addAll(text, displayPicture);
     }
 
     /**
