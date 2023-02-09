@@ -135,13 +135,7 @@ public class TaskList {
         for (int i = 1; i < inputArrLength; i++) {
             if (inputArr[i].charAt(0) == '/') {
                 i++;
-                while (i < inputArrLength) {
-                    deadline += inputArr[i];
-                    if (i != inputArrLength - 1) {
-                        deadline += " ";
-                    }
-                    i++;
-                }
+                deadline += deadlineBy(i, inputArr, inputArrLength);
                 break;
             }
             description = description + inputArr[i] + " ";
@@ -153,6 +147,28 @@ public class TaskList {
         } catch (DukeException e) {
             throw e;
         }
+    }
+
+    /**
+     * Returns the deadline string.
+     *
+     * @param start The starting number to increment.
+     * @param inputArr The command array.
+     * @param inputArrLength The command length.
+     * @return The deadline string.
+     */
+    public String deadlineBy(int start, String[] inputArr, int inputArrLength) {
+        String deadline = "";
+        int i = start;
+
+        while (i < inputArrLength) {
+            deadline += inputArr[i];
+            if (i != inputArrLength - 1) {
+                deadline += " ";
+            }
+            i++;
+        }
+        return deadline;
     }
 
     /**
@@ -170,21 +186,10 @@ public class TaskList {
         for (int i = 1; i < inputArrLength; i++) {
             if (inputArr[i].charAt(0) == '/') {
                 i++;
-                while (i < inputArrLength) {
-                    if (inputArr[i].charAt(0) == '/') {
-                        i++;
-                        while (i < inputArr.length) {
-                            to += inputArr[i];
-                            if (i != inputArr.length - 1) {
-                                to += " ";
-                            }
-                            i++;
-                        }
-                        break;
-                    }
-                    from += inputArr[i] + " ";
-                    i++;
-                }
+                String[] fromTo = new String[2];
+                fromTo = eventFrom(i, inputArr, inputArrLength);
+                from = fromTo[0];
+                to = fromTo[1];
                 break;
             }
             description = description + inputArr[i] + " ";
@@ -197,6 +202,50 @@ public class TaskList {
         } catch (DukeException e) {
             throw e;
         }
+    }
+
+    /**
+     * Returns a string array containing the from and to part.
+     *
+     * @param start The start of the loop.
+     * @param inputArr The input for the from and to part.
+     * @param inputArrLength The length of the input.
+     * @return The string array containing the from and to part.
+     */
+    public String[] eventFrom(int start, String[] inputArr, int inputArrLength) {
+        int i = start;
+        String[] returnString = {"", ""};
+        while (i < inputArrLength) {
+            if (inputArr[i].charAt(0) == '/') {
+                i++;
+                returnString = eventTo(i, inputArr, inputArrLength, returnString);
+                break;
+            }
+            returnString[0] += inputArr[i] + " ";
+            i++;
+        }
+        return returnString;
+    }
+
+    /**
+     * Returns the string array with the update to part.
+     *
+     * @param start The start of the loop.
+     * @param inputArr The input for the to part.
+     * @param inputArrLength The input length.
+     * @param res The string array consisting of the from part.
+     * @return The string array with the updated to part.
+     */
+    public String[] eventTo(int start, String[] inputArr, int inputArrLength, String[] res) {
+        int i = start;
+        while (i < inputArrLength) {
+            res[1] += inputArr[i];
+            if (i != inputArrLength - 1) {
+                res[1] += " ";
+            }
+            i++;
+        }
+        return res;
     }
 
     /**

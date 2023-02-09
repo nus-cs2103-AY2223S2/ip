@@ -61,7 +61,7 @@ public class Storage {
         try {
             writeToFile(tasks.tasksList, "data/duke.txt");
         } catch (IOException e) {
-            System.out.println("Something went wrong: " + e.getMessage());
+            throw new DukeException("Something went wrong: " + e.getMessage());
         }
     }
 
@@ -76,10 +76,10 @@ public class Storage {
     public void writeToFile(List<Task> storage, String filePath) throws IOException {
         assert filePath != "" : "File Path should not be empty!";
         FileWriter fw = new FileWriter(filePath);
-        String tagsString = "";
 
         for (Task element : storage) {
             String mark = "0";
+            String tagsString = "";
             if (element.getStatusIcon().equals("X")) {
                 mark = "1";
             }
@@ -140,8 +140,8 @@ public class Storage {
                 if (mark) {
                     d.mark();
                 }
-                if (currArray.length > 3) {
-                    for (int i = 3; i < currArray.length; i++) {
+                if (currArray.length > 4) {
+                    for (int i = 4; i < currArray.length; i++) {
                         d.addTag(currArray[i].trim());
                     }
                 }
@@ -151,8 +151,8 @@ public class Storage {
                 if (mark) {
                     e.mark();
                 }
-                if (currArray.length > 3) {
-                    for (int i = 3; i < currArray.length; i++) {
+                if (currArray.length > 5) {
+                    for (int i = 5; i < currArray.length; i++) {
                         e.addTag(currArray[i].trim());
                     }
                 }
