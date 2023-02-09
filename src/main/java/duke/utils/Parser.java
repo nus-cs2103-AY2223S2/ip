@@ -2,6 +2,7 @@ package duke.utils;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 import duke.commands.Commands;
 import duke.exceptions.DukeException;
@@ -108,6 +109,8 @@ public class Parser {
         default:
             throw new IllegalCommandException(Commands.UNRECOGNIZED);
         }
+        assert !Objects.equals(result, "")
+                : "Result from a valid command should not be an empty string";
         return result;
     }
 

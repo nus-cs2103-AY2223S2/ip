@@ -26,6 +26,8 @@ public class Storage {
     private File memory;
 
     public Storage(String[] memoryPathArray) {
+        assert memoryPathArray.length > 0 : "Memory Path Array should not be empty";
+
         this.memoryPath = Paths.get(memoryPathArray[0],
                 Arrays.copyOfRange(memoryPathArray, 1, memoryPathArray.length));
         this.memory = new File(String.valueOf(memoryPath));
