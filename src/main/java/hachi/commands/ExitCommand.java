@@ -9,7 +9,6 @@ import hachi.main.Ui;
  */
 public class ExitCommand extends Command {
     private String input;
-    static String separator = "‿୨♡୧‿‿‿‿୨♡୧‿‿‿‿୨♡୧‿";
 
     /**
      * ExitCommand constructor.
@@ -20,9 +19,9 @@ public class ExitCommand extends Command {
         this.input = input;
     }
 
-    public String execute(TaskList toDoList, Ui ui, Storage storage) {
-        storage.saveTaskList(toDoList);
-        return separator + "\n" + "\n" + "   Ciao ~ see you again soon!";
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        storage.saveTaskList(tasks);
+        return ui.showExitMessage();
 
     }
 

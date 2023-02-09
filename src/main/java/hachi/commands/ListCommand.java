@@ -20,16 +20,16 @@ public class ListCommand extends Command {
         this.input = input;
     }
 
-    public String execute(TaskList toDoList, Ui ui, Storage storage) {
-        if (toDoList.size() > 0) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        if (tasks.size() > 0) {
             String msg = separator + "\n" + "\n" + "   Here are the tasks in your list:\n";
-            for (int i = 0; i < toDoList.size(); i++) {
+            for (int i = 0; i < tasks.size(); i++) {
                 int num = i + 1;
-                msg += "    " + num + ". " + toDoList.get(i) + "\n";
+                msg += "    " + num + ". " + tasks.get(i) + "\n";
             }
             return msg;
         } else {
-            return separator + "\n" + "\n" + "   You don't have any tasks at the moment" + "\n";
+            return ui.noTasksMessage();
         }
     }
 }

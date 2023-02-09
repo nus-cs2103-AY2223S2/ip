@@ -11,7 +11,6 @@ import hachi.tasks.Task;
  */
 public class DeleteCommand extends Command {
     private String input;
-    static String separator = "‿୨♡୧‿‿‿‿୨♡୧‿‿‿‿୨♡୧‿";
 
     /**
      * DeleteCommand constructor.
@@ -22,22 +21,20 @@ public class DeleteCommand extends Command {
         this.input = input;
     }
 
-    public String execute(TaskList toDoList, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             if (input.length() < 7) {
-                throw new HachiExceptions(separator + "\n" + "\n" + "Ohno! I don't know which task to delete :(");
+                throw new HachiExceptions(ui.invalidIndexMessage());
             }
             int index_de = Integer.parseInt(input.substring(7));
-            Task task = toDoList.get(index_de - 1);
-            toDoList.remove(index_de - 1);
-            storage.saveTaskList(toDoList);
-            return separator + "\n" + "\n" + "   okie dokie. I've removed this task:\n" + task +
-                    "   Now you have " + toDoList.size() + " tasks in the list.";
-
+            Task task = tasks.get(index_de - 1);
+            tasks.remove(index_de - 1);
+            storage.saveTaskList(tasks);
+            return ui.showDeleted(tasks, task);
         } catch (HachiExceptions e) {
             return e.getMessage();
         } catch (IndexOutOfBoundsException e1) {
-            return separator + "\n" + "\n" + "There is no task to be deleted..";
+            return ui.noTasksMessage();
         }
     }
 }

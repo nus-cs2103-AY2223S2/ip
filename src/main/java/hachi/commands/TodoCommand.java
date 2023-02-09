@@ -12,7 +12,6 @@ import hachi.tasks.Todo;
  */
 public class TodoCommand extends Command {
     private String input;
-    static String separator = "‿୨♡୧‿‿‿‿୨♡୧‿‿‿‿୨♡୧‿";
 
     /**
      * TodoCommand constructor.
@@ -23,16 +22,15 @@ public class TodoCommand extends Command {
         this.input = input;
     }
 
-    public String execute(TaskList toDoList, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             if (input.length() <= 5) {
-                throw new HachiExceptions(separator + "\n" + "\n" + "Ohno! The description cannot be empty.");
+                throw new HachiExceptions(ui.emptyDescription());
             }
             Todo tdTask = new Todo(input.substring(5, input.length()));
-            toDoList.add(tdTask);
-            storage.saveTaskList(toDoList);
-            return separator + "\n" + "\n" +  "   okie dokie. I've added this task:" + "\n" + tdTask +
-            "   Now you have " + toDoList.size() + " tasks in the list.";
+            tasks.add(tdTask);
+            storage.saveTaskList(tasks);
+            return ui.showAdded(tasks, tdTask);
         } catch (HachiExceptions e) {
             return e.getMessage();
         }

@@ -22,21 +22,21 @@ public class MarkCommand extends Command {
         this.input = input;
     }
 
-    public String execute(TaskList toDoList, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             if (input.length() <= 5 || !Character.isDigit(input.charAt(5))) {
-                throw new HachiExceptions(separator + "\n" + "\n" + "Ohno! I don't know which task to mark/unmark :(");
+                throw new HachiExceptions(ui.invalidIndexMessage());
             }
             int index = Integer.parseInt(input.substring(5));
-            Task task = toDoList.get(index - 1);
+            Task task = tasks.get(index - 1);
             task.mark();
-            storage.saveTaskList(toDoList);
+            storage.saveTaskList(tasks);
             return separator + "\n" + "\n" + "   good job! I've marked this task as done: " + "\n" + task;
         } catch (HachiExceptions e) {
             return e.getMessage();
 
         } catch (IndexOutOfBoundsException e1) {
-            return separator + "\n" + "\n" + " There is no task to be marked";
+            return ui.invalidIndexMessage();
 
         }
     }

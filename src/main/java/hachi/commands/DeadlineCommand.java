@@ -13,7 +13,6 @@ import java.time.format.DateTimeParseException;
  */
 public class DeadlineCommand extends Command {
     private String input;
-    static String separator = "‿୨♡୧‿‿‿‿୨♡୧‿‿‿‿୨♡୧‿";
 
     /**
      * DeadlineCommand constructor.
@@ -24,24 +23,23 @@ public class DeadlineCommand extends Command {
         this.input = input;
     }
 
-    public String execute(TaskList toDoList, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             int index_ddl = input.indexOf("/");
             if (input.length() > 9 && !input.contains("/")) {
-                throw new HachiExceptions(separator + "\n" + "\n" + "Ohno! seems like you forgot to put a deadline.");
+                throw new HachiExceptions(ui.noDeadlineMessage());
             }
             if (index_ddl - 1 < 9) {
-                throw new HachiExceptions(separator + "\n" + "\n" + "Ohno! The description cannot be empty.");
+                throw new HachiExceptions(ui.emptyDescription());
             }
             Deadline ddlTask = new Deadline(input.substring(9, index_ddl - 1), input.substring(index_ddl + 4, input.length()));
-            toDoList.add(ddlTask);
-            storage.saveTaskList(toDoList);
-            return separator + "\n" + "\n" + " okie dokie. I've added this task:" + "\n" + ddlTask +
-                    "   Now you have " + toDoList.size() + " tasks in the list.";
+            tasks.add(ddlTask);
+            storage.saveTaskList(tasks);
+            return ui.showAdded(tasks, ddlTask);
         } catch (HachiExceptions e) {
             return e.getMessage();
         } catch (DateTimeParseException e1) {
-            return separator + "\n" + "\n" + "Key in deadline in the format of yyyy-mm-dd";
+            return ui.wrongDeadlineFormat();
         }
     }
 }
