@@ -38,10 +38,14 @@ public class TaskList {
      * @param storage
      * @throws IOException
      */
-    public void addTask(Task task, Storage storage) throws IOException{
+    public void addTask(Task task, Storage storage) throws IOException {
         this.tasks.add(task);
         assert !tasks.isEmpty() : "Something went wrong when adding first task.";
         storage.updateTaskList(this);
+    }
+
+    public void addTaskToSearchList(Task task) {
+        this.tasks.add(task);
     }
 
     /**
@@ -104,12 +108,15 @@ public class TaskList {
         TaskList taskFinder = new TaskList();
         for (Task task : tasks) {
             String[] taskName = task.getName().split(" ");
-            for (String s : taskName) {
-                if (s.equals(searchWord) && !taskFinder.contains(task)) {
-                    taskFinder.addTask(task);
+            for (int i = 0; i < taskName.length; i++) {
+                if (taskName[i].equals(searchWord) && !taskFinder.contains(task)) {
+                    taskFinder.addTaskToSearchList(task);
                 }
             }
         }
         return taskFinder;
     }
+
+    //public static TaskList
+
 }

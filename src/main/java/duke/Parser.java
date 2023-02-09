@@ -100,7 +100,7 @@ public class Parser {
 
     public static String handleInput(String command, Ui ui, TaskList tasks, Storage storage) throws DukeException,
             IOException, IndexOutOfBoundsException, DateTimeParseException {
-        String typeOfCommand = getTypeOfCommand(command)
+        String typeOfCommand = getTypeOfCommand(command);
         switch (typeOfCommand) {
         case "bye":
             Platform.exit();
@@ -136,5 +136,18 @@ public class Parser {
         default:
             throw new DukeException("Command not recognised.");
         }
+    }
+
+    /**
+     * Test functionality of finding
+     * @param args
+     */
+    public static void main(String[] args) {
+        TaskList tl = new TaskList();
+        Ui ui = new Ui();
+        tl.addTaskToSearchList(new ToDos("shower"));
+        tl.addTaskToSearchList(new ToDos("shower dog"));
+        tl.addTaskToSearchList(new ToDos("poop"));
+        System.out.println("search: " + ui.showFindingTask(tl.makeTaskFinder("shower")));
     }
 }

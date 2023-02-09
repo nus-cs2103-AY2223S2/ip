@@ -42,21 +42,24 @@ public class Ui {
         if (tasks.isEmpty()) {
             return "No tasks in task list." + askForNextCommand();
         }
-        String taskList = "";
-        for (int i = 0; i < tasks.getTaskListSize(); i++) {
-            Task currTask = tasks.getTaskByIndex(i);
-            taskList = String.format("%s%d. %s\n", taskList, i + 1, currTask.getDescription());
-        }
-        return String.format("Here are the tasks in your list: \n%s", taskList + askForNextCommand());
+        return String.format("Here are the tasks in your list: \n%s", showList(tasks) + askForNextCommand());
     }
 
     public String showFindingTask(TaskList tasks) {
         if (tasks.isEmpty()) {
             return "No matching tasks found." + askForNextCommand();
-        } else {
-            return String.format("Here are the matching tasks in your list:\n", this.showTaskList(tasks))
-                    + askForNextCommand();
         }
+        return String.format("Here are the matching tasks in your list:\n%s", showList(tasks))
+                + askForNextCommand();
+    }
+
+    public static String showList(TaskList tasks) {
+        String taskList = "";
+        for (int i = 0; i < tasks.getTaskListSize(); i++) {
+            Task currTask = tasks.getTaskByIndex(i);
+            taskList = String.format("%s%d. %s\n", taskList, i + 1, currTask.getDescription());
+        }
+        return taskList;
     }
 
     public static String askForNextCommand() {
