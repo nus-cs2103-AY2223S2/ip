@@ -14,7 +14,7 @@ public class Task implements Comparable<Task> {
     public static final String SEP = " ;; ";
     public static final String TODO_SYMBOL = "T";
 
-    private final String desc;
+    private String desc;
     private boolean isDone;
 
     /**
@@ -36,6 +36,15 @@ public class Task implements Comparable<Task> {
      */
     public String getDesc() {
         return this.desc;
+    }
+
+    /**
+     * Replace the current task description with a new description.
+     *
+     * @param newDesc The new task description.
+     */
+    public void editDesc(String newDesc) {
+        this.desc = newDesc;
     }
 
     /**

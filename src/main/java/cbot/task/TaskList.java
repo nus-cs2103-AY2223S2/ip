@@ -13,7 +13,7 @@ import java.util.stream.Stream;
  */
 public class TaskList {
     //private static final int GAPS = 3;
-    private static final String GAP = "   ";
+    public static final String GAP = "   ";
 
     private final ArrayList<Task> tasks;
 
@@ -42,7 +42,13 @@ public class TaskList {
         return this.tasks.size();
     }
 
-    private Task getTask(int num) {
+    /**
+     * Returns the task at the given position.
+     *
+     * @param num The 1-based index of the task.
+     * @return The requested task.
+     */
+    public Task getTask(int num) {
         // 1-based counting
         return this.tasks.get(num - 1);
     }
@@ -55,8 +61,7 @@ public class TaskList {
      */
     public String addTask(Task task) {
         this.tasks.add(task);
-        return String.format("\"%s\" added!",
-                task.toString());
+        return String.format("\"%s\" added!", task);
     }
 
     /**
@@ -110,9 +115,9 @@ public class TaskList {
         boolean moreThanLen = (num > getCount());
 
         if (lessThanOne) {
-            return "wadahek pls";
+            return num + "?? wadahek pls";
         } else if (moreThanLen) {
-            return "Hm, you don't have that many tasks!";
+            return num + "? Err... you don't have that many tasks";
         } else {
             return "All's good! That index is in range :D";
         }
@@ -132,11 +137,11 @@ public class TaskList {
 
         if (!wasChanged) {
             return "You've already done:\n"
-                    + GAP + getTask(num).toString();
+                    + GAP + getTask(num);
         }
 
         return "Woohoo! You've completed:\n"
-                + GAP + getTask(num).toString();
+                + GAP + getTask(num);
     }
 
     /**
@@ -153,11 +158,11 @@ public class TaskList {
 
         if (!wasChanged) {
             return "Hm, you haven't yet done:\n"
-                    + GAP + getTask(num).toString();
+                    + GAP + getTask(num);
         }
 
         return "Aw, okay :( I've unmarked:\n"
-                + GAP + getTask(num).toString();
+                + GAP + getTask(num);
     }
 
     /**
@@ -171,7 +176,25 @@ public class TaskList {
 
         Task removedTask = tasks.remove(num - 1);
         return "Got it! Deleted:\n"
-                + GAP + removedTask.toString();
+                + GAP + removedTask;
+    }
+
+    /**
+     * Edits the description of the task at the given position.
+     *
+     * @param num The 1-based index of the task.
+     * @param newDesc The new task description.
+     * @return A confirmation message.
+     * @see Task#editDesc(String)
+     */
+    public String editTaskDesc(int num, String newDesc) {
+        assert !notInRange(num) : "Invalid index to edit";
+        assert newDesc.length() > 0 : "New description is empty";
+
+        Task editedTask = getTask(num);
+        editedTask.editDesc(newDesc);
+        return "Done! It's been changed to:\n"
+                + GAP + editedTask;
     }
 
     /**
