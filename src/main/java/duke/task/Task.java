@@ -68,9 +68,9 @@ public abstract class Task {
      * @return The task with a type and parameters defined by the input line.
      * @throws DukeException
      */
-    public static Task parseTaskFromDB(String s) throws DukeException {
+    public static Task parseTaskFromText(String s) throws DukeException {
         s = s.trim();
-        Task task = null;
+        Task task;
 
         assert s.length() >= 8;
         assert s.charAt(4) == 'X' || s.charAt(4) == ' ';
@@ -93,6 +93,34 @@ public abstract class Task {
         }
 
         if (s.charAt(4) == 'X') {
+            task.markAsDone();
+        }
+
+        return task;
+    }
+
+    public static Task parseTaskFromCsv(String s) throws DukeException {
+        s = s.trim();
+        Task task;
+
+        String[] params = s.split(",");
+        assert params.length >= 3;
+
+        switch (params[0]) {
+            case "T":
+                task = new Todo(params[2]);
+                break;
+            case "D":
+                task = new Deadline(params[2], params[3]);
+                break;
+            case "E":
+                task = new Event(params[2], params[3], params[4]);
+                break;
+            default:
+                throw new DukeException(ERROR.CORRUPTED_TASK_DATA.getMessage());
+        }
+
+        if (params[1].equals("X")) {
             task.markAsDone();
         }
 
@@ -130,5 +158,9 @@ public abstract class Task {
     @Override
     public String toString() {
         return String.format("[%s] %s", this.getStatusIcon(), this.description);
+    }
+
+    public String toCsvString() {
+        return String.format("%s,%s", this.getStatusIcon(), this.description);
     }
 }

@@ -14,7 +14,11 @@ public class Duke {
 
 
     public Duke(String filePath) {
-        storage = new Storage(filePath);
+        loadTasks(filePath);
+    }
+
+    public boolean loadTasks(String filePath) {
+        storage = Storage.createStorage(filePath);
         try {
             taskList = new TaskList(storage.load());
             isTaskListLoaded = true;
@@ -22,6 +26,7 @@ public class Duke {
             taskList = new TaskList();
             isTaskListLoaded = false;
         }
+        return isTaskListLoaded;
     }
 
     public String getResponse(String input) {

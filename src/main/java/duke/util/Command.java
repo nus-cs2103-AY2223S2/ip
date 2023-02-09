@@ -73,11 +73,11 @@ public class Command {
     }
 
     /**
-     * Executes the current command using a given TaskList, UI, and Storage.
+     * Executes the current command using a given TaskList, UI, and StorageTextFile.
      *
      * @param taskList TaskList containing tasks to use for this command.
      * @param ui The UI to print output to.
-     * @param storage Storage to save the TaskList to if this command changes the TaskList.
+     * @param storage StorageTextFile to save the TaskList to if this command changes the TaskList.
      * @throws DukeException
      */
     public String execute(TaskList taskList, Storage storage) throws DukeException {
