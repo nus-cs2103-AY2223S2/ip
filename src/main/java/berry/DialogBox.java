@@ -7,12 +7,20 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 /**
  * An example of a custom control using FXML.
@@ -37,6 +45,7 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(img);
+        this.style();
     }
 
     /**
@@ -71,5 +80,23 @@ public class DialogBox extends HBox {
         var db = new DialogBox(text, img);
         db.flip();
         return db;
+    }
+
+    private void style() {
+        Rectangle r = new Rectangle();
+        r.setHeight(100.0);
+        r.setArcHeight(50.0);
+        r.setArcWidth(50.0);
+        r.setWidth(100.0);
+        displayPicture.setClip(r);
+
+        this.setSpacing(5);
+        this.setFillHeight(false);
+
+        BorderStroke borderStroke = new BorderStroke(Color.GRAY, BorderStrokeStyle.SOLID,
+                new CornerRadii(10.0), new BorderWidths(1.0));
+        Border dialogBorder = new Border(borderStroke);
+        dialog.setBorder(dialogBorder);
+        dialog.setPadding(new Insets(10, 10, 10, 10));
     }
 }
