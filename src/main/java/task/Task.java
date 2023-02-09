@@ -1,3 +1,5 @@
+package task;
+
 public class Task {
     protected final String description;
     protected boolean isDone;
@@ -20,9 +22,9 @@ public class Task {
         return "[" + getStatusIcon() + "] " + description;
     }
 
-    public String saveAsStr() {
+    public String saveAsStr(String separator) {
         String mark = isDone ? "1" : "0";
-        return "~%~" + mark + "~%~" + description;
+        return separator + mark + separator + description;
     }
 
     public void mark() {
@@ -31,5 +33,9 @@ public class Task {
 
     public void unmark() {
         isDone = false;
+    }
+
+    public boolean checkIsDone() {
+        return isDone;
     }
 }

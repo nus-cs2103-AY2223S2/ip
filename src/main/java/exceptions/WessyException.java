@@ -1,10 +1,10 @@
-package Exceptions;
+package exceptions;
 
 public class WessyException extends Exception {
     private final String message;
     static String OPENING = "☹ OOPS!!! ";
 
-    WessyException(String str) {
+    protected WessyException(String str) {
         this.message = OPENING + str;
     }
 

@@ -13,10 +13,18 @@ src/main/resources/docs/
 *.iml
 bin/
 
+
+/test-ui-test/
+text-ui-test/EXPECTED.TXT
 /text-ui-test/ACTUAL.TXT
 text-ui-test/EXPECTED-UNIX.TXT
+text-ui-test/data/
 
 *.class
 
 /src/main/java/checkstyle-8.2-all.jar
 /src/main/java/cs2030_checks.xml
+
+data/savedTasks.txt
+Event flow.txt
+src/main/java/exceptions/All wrong cmds.txt

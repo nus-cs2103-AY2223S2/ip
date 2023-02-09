@@ -1,4 +1,6 @@
-package Exceptions;
+package exceptions.int_exceptions;
+
+import exceptions.WessyException;
 
 public class EmptyListException extends WessyException {
     public EmptyListException(String cmd) {
