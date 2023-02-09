@@ -1,4 +1,4 @@
-package duke;
+package duke.parser;
 
 /**
  * Represents the type of Command when there is a String user input.

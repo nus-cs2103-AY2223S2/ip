@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
+import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.Todo;

@@ -4,8 +4,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
-import duke.DukeException;
-import duke.Parser;
+import duke.exception.DukeException;
+import duke.parser.Parser;
 
 /**
  * Represents a Deadline Task that has a description and a due date.

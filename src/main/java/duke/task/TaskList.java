@@ -2,7 +2,7 @@ package duke.task;
 
 import java.util.ArrayList;
 
-import duke.DukeException;
+import duke.exception.DukeException;
 
 /**
  * Represents the list of tasks in Duke. This task list will be saved into and loaded from a storage text file.
@@ -34,9 +34,9 @@ public class TaskList {
      * @param index The number of the task to delete.
      * @throws DukeException If the number specified is invalid (> Number of tasks in task list or <= 0).
      */
-    public void deleteTask(int index) throws DukeException {
+    public Task deleteTask(int index) throws DukeException {
         try {
-            tasks.remove(index - 1);
+            return tasks.remove(index - 1);
         } catch (IndexOutOfBoundsException err) {
             throw new DukeException("That task does not exist!");
         }
@@ -47,10 +47,11 @@ public class TaskList {
      * @param index The number of the task to unmark.
      * @throws DukeException If the number specified is invalid (> Number of tasks in task list or <= 0).
      */
-    public void unmarkTask(int index) throws DukeException {
+    public Task unmarkTask(int index) throws DukeException {
         try {
-            Task cur = tasks.get(index - 1);
-            cur.markUndone();
+            Task task = tasks.get(index - 1);
+            task.markUndone();
+            return task;
         } catch (IndexOutOfBoundsException err) {
             throw new DukeException("That task does not exist!");
         }
@@ -61,10 +62,11 @@ public class TaskList {
      * @param index The number of the task to mark.
      * @throws DukeException If the number specified is invalid (> Number of tasks in task list or <= 0).
      */
-    public void markTask(int index) throws DukeException {
+    public Task markTask(int index) throws DukeException {
         try {
             Task cur = tasks.get(index - 1);
             cur.markDone();
+            return cur;
         } catch (IndexOutOfBoundsException err) {
             throw new DukeException("That task does not exist!");
         }

@@ -1,4 +1,4 @@
-package duke;
+package duke.ui;
 
 import java.util.Scanner;
 
@@ -11,14 +11,8 @@ public class Ui {
     /**
      * Prints out a welcome message for the user.
      */
-    public void showWelcomeMessage() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|";
-        String line = "---------------------------------";
-        System.out.println("Hello from\n" + logo + "  managed by Wesley Teo.\n\nWhat can I do for you?\n" + line);
+    public static String showWelcomeMessage() {
+        return "Hello from Duke managed by Wesley Teo!\nWhat can I do for you?\n";
     }
 
     public void showMessage(String message) {

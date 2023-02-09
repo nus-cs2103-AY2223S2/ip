@@ -1,4 +1,4 @@
-package duke;
+package duke.parser;
 
 /**
  * Enumeration of the different types that a user input Command can refer to.

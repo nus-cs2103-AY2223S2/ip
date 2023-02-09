@@ -3,8 +3,8 @@ package duke.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import duke.DukeException;
-import duke.Parser;
+import duke.exception.DukeException;
+import duke.parser.Parser;
 
 /**
  * Represents an Event task that has a description, a start date and time as well as an end date and time.

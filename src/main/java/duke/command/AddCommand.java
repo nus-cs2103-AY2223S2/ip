@@ -1,7 +1,7 @@
 package duke.command;
 
-import duke.Storage;
-import duke.Ui;
+import duke.storage.Storage;
+import duke.ui.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -11,10 +11,9 @@ public class AddCommand extends Command {
     public AddCommand(Task task) {
         this.task = task;
     }
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.showMessage("Got it. I've added this task:");
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         taskList.addTask(this.task);
-        ui.showMessage("Now you have " + taskList.getNumTasks() + " tasks in your list");
+        return ("Got it. I've added this task: \n Now you have " + taskList.getNumTasks() + " tasks in your list");
     }
 
     public boolean isExit() {

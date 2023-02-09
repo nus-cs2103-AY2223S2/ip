@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.DukeException;
-import duke.Storage;
-import duke.Ui;
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.ui.Ui;
 import duke.task.TaskList;
 
 public abstract class Command {
@@ -14,7 +14,7 @@ public abstract class Command {
      * @param storage To access to storage file to save or load tasks.
      * @throws DukeException If execution of command is not successful.
      */
-    public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
 
     /**
      * Determines whether the program should exit after executing a command.

@@ -1,39 +1,30 @@
 package duke;
 
 import duke.command.Command;
+import duke.exception.DukeException;
+import duke.parser.Parser;
+import duke.storage.Storage;
 import duke.task.TaskList;
+import duke.ui.Ui;
+import javafx.application.Platform;
 
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
-
-//public class Duke extends Application {
 public class Duke {
 
-        private Storage storage;
+    private Storage storage;
     private TaskList taskList;
     private Ui ui;
 
-    public Duke(String filepath) {
+    public Duke() {
         try {
-            this.storage = new Storage(filepath);
+            this.storage = new Storage("/data/duke.txt");
             this.taskList = new TaskList(storage.loadTasks());
             this.ui = new Ui();
         } catch (DukeException err) {
             System.out.println(err.getMessage());
         }
     }
-//    @Override
-//    public void start(Stage stage) {
-//        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
-//        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
-//
-//        stage.setScene(scene); // Setting the stage to show our screen
-//        stage.show(); // Render the stage.
-//    }
+
     public void run() {
-        ui.showWelcomeMessage();
         boolean isExit = false;
         while (!isExit) {
             try {
@@ -50,7 +41,21 @@ public class Duke {
 
     }
 
+    public String getResponse(String input) {
+            try {
+                Command inputCommand = Parser.parse(input);
+                String response = inputCommand.execute(taskList, ui, storage);
+                if (input.equals("bye")) {
+                    Platform.exit();
+                }
+                return response;
+            } catch (DukeException err) {
+                return err.getMessage();
+            }
+    }
+
+
     public static void main(String[] args) {
-        new Duke("./data/duke.txt").run();
+        new Duke().run();
     }
 }

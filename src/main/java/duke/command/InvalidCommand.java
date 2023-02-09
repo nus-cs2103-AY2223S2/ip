@@ -1,15 +1,15 @@
 package duke.command;
 
-import duke.DukeException;
-import duke.Storage;
-import duke.Ui;
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.ui.Ui;
 import duke.task.TaskList;
 
 public class InvalidCommand extends Command {
 
 
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        throw new duke.DukeException("Invalid command, please try again");
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        return "Invalid command, please try again";
     }
 
     public boolean isExit() {

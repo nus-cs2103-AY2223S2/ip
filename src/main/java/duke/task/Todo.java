@@ -1,6 +1,6 @@
 package duke.task;
 
-import duke.DukeException;
+import duke.exception.DukeException;
 
 /**
  * Represents a 'To Do' task that has a description.

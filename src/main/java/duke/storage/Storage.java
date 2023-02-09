@@ -1,10 +1,11 @@
-package duke;
+package duke.storage;
 
 import java.io.*;
 import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.exception.DukeException;
 import duke.task.*;
 
 /**
