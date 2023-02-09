@@ -12,15 +12,6 @@ public class Parser {
         }
         return CmdType.getCmdType(userInput.substring(0, idx));
     }
-//        for (String str : CmdType.getKeys()) {
-//            if (userInput.substring(0, str.length()).equals(str)) {
-//                return CmdType.getCmdType(str);
-//            }
-//        }
-//        return null;
-//    }
-
-
 
     // Only for Deadline, Event & ToDo commands
     static String[] getTaskComponents(String userInput, CmdType cmd) {
