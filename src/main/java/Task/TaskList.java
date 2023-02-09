@@ -38,6 +38,7 @@ public class TaskList {
     public String mark(int i) {
         try {
             list.get(i).markAsDone();
+            assert i >= 0 && i < list.size();
             s.update(list);
             return ui.showMark(list.get(i));
         } catch (IndexOutOfBoundsException E) {
@@ -54,6 +55,7 @@ public class TaskList {
     public String unmark(int i) {
         try {
             list.get(i).markAsNotDone();
+            assert i >= 0 && i < list.size();
             s.update(list);
             return ui.showMarkNotDone(list.get(i));
         } catch (IndexOutOfBoundsException E) {
@@ -86,6 +88,7 @@ public class TaskList {
     public String delete(int deleteIndex) {
         try {
             Task temp = list.remove(deleteIndex);
+            assert deleteIndex >= 0 && deleteIndex < list.size();
             s.update(list);
             return ui.showDelete(temp, list);
         } catch (IndexOutOfBoundsException E) {
@@ -108,6 +111,7 @@ public class TaskList {
                 matches.add(t);
             }
         }
+        assert it.hasNext() == false;
         return ui.showFind(matches);
     }
 }

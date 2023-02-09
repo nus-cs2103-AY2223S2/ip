@@ -40,6 +40,10 @@ public class Ui {
      * @param list -> list of tasks
      */
     public String showList(ArrayList<Task> list) {
+        if (list.size() == 0) {
+            return "Excuse me, your list is still empty lei";
+        }
+        assert(list.size() > 0);
         StringBuilder str = new StringBuilder("Here are the tasks in your list:\n");
         for (int i = 1; i <= list.size(); i++) {
             str.append(i + ". " + list.get(i - 1) + "\n");
