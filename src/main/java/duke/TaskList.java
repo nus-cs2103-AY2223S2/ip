@@ -1,5 +1,6 @@
 package duke;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -34,40 +35,53 @@ public class TaskList {
     /**
      * Adds the given task into the task list.
      * @param task task to be added into the task list
+     * @param storage
+     * @throws IOException
      */
-    public void addTask(Task task){
+    public void addTask(Task task, Storage storage) throws IOException{
         this.tasks.add(task);
         assert !tasks.isEmpty() : "Something went wrong when adding first task.";
+        storage.updateTaskList(this);
     }
 
     /**
      * Deletes and returns the task deleted from the task list.
      * @param indexOfTask index of task to be deleted
+     * @param storage
      * @return the task deleted
+     * @throws IOException
      */
-    public Task deleteTask(int indexOfTask) {
-        return this.tasks.remove(indexOfTask);
+    public Task deleteTask(int indexOfTask, Storage storage) throws IOException{
+        Task taskToDelete = this.tasks.remove(indexOfTask);
+        storage.updateTaskList(this);
+        return taskToDelete;
     }
 
     /**
      * Marks the task given by its index as done.
      * @param indexOfTask index of the task to mark as done
+     * @param storage
      * @return the task after marking it as done
+     * @throws IOException
      */
-    public Task markTaskAsDone(int indexOfTask) {
+    public Task markTaskAsDone(int indexOfTask, Storage storage) throws IOException {
         Task toMarkDone = this.tasks.get(indexOfTask);
         toMarkDone.markDone();
+        storage.updateTaskList(this);
         return toMarkDone;
     }
 
     /**
      * Marks the task given by its index as undone.
      * @param indexOfTask index of the task to mark as undone
+     * @param storage
      * @return the task after marking it as undone
+     * @throws IOException
      */
-    public Task markTaskAsUndone(int indexOfTask) {
+    public Task markTaskAsUndone(int indexOfTask, Storage storage) throws IOException {
         Task toMarkUndone = this.tasks.get(indexOfTask);
         toMarkUndone.markUndone();
+        storage.updateTaskList(this);
         return toMarkUndone;
     }
 
