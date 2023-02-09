@@ -67,9 +67,9 @@ public class DeadlineTask extends Task {
         }
         LocalDate today = LocalDate.now();
         int dayLeft = today.until(this.byDate).getDays();
-        if (dayLeft >= 0
-                && dayLeft <= dayRange
-                && !this.isDone) {
+        boolean isByDateOver = dayLeft < 0;
+        boolean isByDateSoon = dayLeft <= dayRange;
+        if (!isByDateOver && isByDateSoon && !this.isDone) {
             return "[D] " + title + " (Due in " + dayLeft + " day!)";
         }
         return "";
