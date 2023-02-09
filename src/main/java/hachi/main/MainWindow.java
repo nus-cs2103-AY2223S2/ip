@@ -37,7 +37,10 @@ public class MainWindow extends AnchorPane {
     }
 
     public void setHachi(Hachi h) {
+<<<<<<< HEAD
         assert h != null;
+=======
+>>>>>>> master
         hachi = h;
     }
 
