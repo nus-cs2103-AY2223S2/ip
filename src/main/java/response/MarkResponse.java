@@ -35,7 +35,7 @@ public class MarkResponse extends Response {
     @Override
     public String exec(TaskList taskList) {
         Task currTask = taskList.mark(idxToMark);
-        return String.format("Nice! I've marked this task as done:\n\t\t%s", currTask.toString());
+        return String.format("Nice! I've marked this task as done:\n\t%s", currTask.toString());
     }
 
     /**

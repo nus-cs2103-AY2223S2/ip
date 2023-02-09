@@ -36,8 +36,8 @@ public class DeleteResponse extends Response {
         Task removedTask = taskList.delete(idxToDelete);
         return String.format(
                 "Noted. I've removed this task:"
-                        + "\n\t   %s"
-                        + "\n\t Now you have %d task(s) in the list.",
+                        + "\n\t%s"
+                        + "\nNow you have %d task(s) in the list.",
                 removedTask,
                 taskList.count());
     }

@@ -37,10 +37,10 @@ public class TaskList {
     public String toString() {
         StringBuilder res = new StringBuilder("Here are the tasks in your list:\n");
         if (taskList.size() == 0) {
-            return "There are currently no tasks in your to do list,\n\t create one now!";
+            return "There are currently no tasks in your to do list,\ncreate one now!";
         }
         for (int i = 0; i < taskList.size(); i++) {
-            res.append(String.format("\t %d.%s\n", i + 1, taskList.get(i).toString()));
+            res.append(String.format("\t%d.%s\n", i + 1, taskList.get(i).toString()));
         }
         return res.toString().trim();
     }
@@ -125,7 +125,7 @@ public class TaskList {
             return "There are currently no tasks in your to do list matching the keyword!";
         }
         for (int i = 0; i < found.taskList.size(); i++) {
-            res.append(String.format("\t %d.%s\n", i + 1, found.taskList.get(i).toString()));
+            res.append(String.format("\t%d.%s\n", i + 1, found.taskList.get(i).toString()));
         }
         return res.toString().trim();
     }

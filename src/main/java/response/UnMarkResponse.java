@@ -34,7 +34,7 @@ public class UnMarkResponse extends Response {
     @Override
     public String exec(TaskList taskList) {
         Task currTask = taskList.unmark(idxToUnMark);
-        return String.format("OK, I've marked this task as not done yet:\n\t\t%s", currTask.toString());
+        return String.format("OK, I've marked this task as not done yet:\n\t%s", currTask.toString());
     }
 
     /**

@@ -35,8 +35,8 @@ public class CreateResponse extends Response {
         taskList.createToDo(newTodo);
         return String.format(
                 "Alright! This task has been added into the list:"
-                        + "\n\t   %s"
-                        + "\n\t Now you have %d task(s) in the list.",
+                        + "\n\t%s"
+                        + "\nNow you have %d task(s) in the list.",
                 newTodo,
                 taskList.count());
     }
