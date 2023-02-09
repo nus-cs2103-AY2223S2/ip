@@ -36,12 +36,14 @@ public class ReplyString {
      */
     public static String getTaskListString(TaskList taskList) {
         StringBuilder result = new StringBuilder();
+        result.append("\n\n");
         for (int i = 0; i < taskList.size(); i++) {
             Task task = taskList.getTask(i);
             String taskString = String.format("%d. %s", i + 1, task.toString());
             result.append(taskString);
             result.append("\n");
         }
+        result.append("\n");
         return result.toString();
     }
 

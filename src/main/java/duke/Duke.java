@@ -35,12 +35,12 @@ public class Duke {
      * Takes in a command and outputs the appropriate response.
      */
     public String getResponse(String command) {
-        String response = "There was an error with your query!";
+        String response = "";
         try {
             response = Parser.handleCommands(command, this.allTasks);
             assert response != null : "Response from parser should not be null!";
         } catch (DukeException e) {
-            System.out.println(e.toString());
+            response = e.toString();
         }
         return response;
     }

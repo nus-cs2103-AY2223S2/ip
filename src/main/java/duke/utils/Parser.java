@@ -35,29 +35,38 @@ public class Parser {
 
         String result = "";
         switch (command) {
+        case "b":
         case "bye":
             return result;
+        case "ls":
         case "list":
             result = ReplyString.getAllTasksString(allTasks);
             break;
+        case "m":
         case "mark":
             result = processMarkCommand(arguments, allTasks);
             break;
+        case "um":
         case "unmark":
             result = processUnmarkCommand(arguments, allTasks);
             break;
+        case "t":
         case "todo":
             result = processTodoCommand(arguments, allTasks);
             break;
+        case "d":
         case "deadline":
             result = processDeadlineCommand(arguments, allTasks);
             break;
+        case "e":
         case "event":
             result = processEventCommand(arguments, allTasks);
             break;
+        case "del":
         case "delete":
             result = processDeleteCommand(arguments, allTasks);
             break;
+        case "f":
         case "find":
             result = processFindCommand(arguments, allTasks);
             break;
