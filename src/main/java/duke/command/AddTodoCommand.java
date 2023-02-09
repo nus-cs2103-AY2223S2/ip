@@ -28,12 +28,13 @@ public class AddTodoCommand extends Command {
      */
     @Override
     public String execute() throws DukeException {
-        if (contents.split(" ").length == 1) {
+        try {
+            String description = contents.substring(5);
+            Task task = new ToDo(description);
+            tasks.addTask(task);
+            return tasks.addTaskText(task);
+        } catch (StringIndexOutOfBoundsException e) {
             throw new EmptyTaskDescriptionException();
         }
-        String description = contents.substring(5);
-        Task task = new ToDo(description);
-        tasks.addTask(task);
-        return tasks.addTaskText(task);
     }
 }

@@ -15,6 +15,7 @@ import duke.command.MarkCommand;
 import duke.command.UnmarkCommand;
 import duke.exception.DukeException;
 import duke.exception.InvalidCommandException;
+import duke.exception.InvalidDateTimeException;
 
 
 /**
@@ -22,7 +23,9 @@ import duke.exception.InvalidCommandException;
  * a form that can be processed.
  */
 public class Parser {
-    static Command processCommand(String command, TaskList tasks) throws DukeException {
+    public static final String DATE_TIME_READ_FORMAT = "yyyy-MM-dd HH:mm";
+
+    Command processCommand(String command, TaskList tasks) throws DukeException {
         String[] commandArr = command.split(" ");
         switch (commandArr[0]) {
         case "list":
@@ -53,11 +56,15 @@ public class Parser {
      * @param dateTimeString String representing date and time to be parsed
      * @return LocalDateTime Object
      */
-    public static LocalDateTime parseDateTime(String dateTimeString) {
-        String[] dateTimeArray = dateTimeString.split(" ");
-        LocalDate date = LocalDate.parse(dateTimeArray[0]);
-        LocalTime time = LocalTime.parse(dateTimeArray[1]);
-        return LocalDateTime.of(date, time);
+    public static LocalDateTime parseDateTime(String dateTimeString) throws InvalidDateTimeException {
+        try {
+            String[] dateTimeArray = dateTimeString.split(" ");
+            LocalDate date = LocalDate.parse(dateTimeArray[0]);
+            LocalTime time = LocalTime.parse(dateTimeArray[1]);
+            return LocalDateTime.of(date, time);
+        } catch (ArrayIndexOutOfBoundsException e){
+            throw new InvalidDateTimeException();
+        }
     }
 
 }

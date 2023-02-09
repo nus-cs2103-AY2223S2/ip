@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.Parser;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -7,6 +9,8 @@ import java.time.format.DateTimeFormatter;
  * An abstract class Task
  */
 public abstract class Task {
+    private static final String DATE_TIME_DISPLAY_FORMAT =  "MMM dd yyyy HH:mm";
+
     protected String description;
     protected boolean isDone;
 
@@ -32,13 +36,13 @@ public abstract class Task {
     public void undoTask() {
         this.isDone = false;
     }
-    String formatDateTime(LocalDateTime dateTime) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
+    String displayDateTime(LocalDateTime dateTime) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_TIME_DISPLAY_FORMAT);
         return dateTime.format(formatter);
     }
 
     String formatSavedDateTime(LocalDateTime dateTime) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(Parser.DATE_TIME_READ_FORMAT);
         return dateTime.format(formatter);
     }
 

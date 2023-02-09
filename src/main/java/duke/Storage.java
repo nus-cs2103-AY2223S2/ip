@@ -49,7 +49,7 @@ public class Storage {
         return tasks;
     }
 
-    Task parseLine(String data) throws InvalidTaskException {
+    Task parseLine(String data) throws DukeException {
         String[] taskData = data.split("\\|");
         String taskType = taskData[0].trim();
         switch (taskType) {
