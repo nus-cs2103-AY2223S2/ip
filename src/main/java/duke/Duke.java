@@ -173,7 +173,7 @@ public class Duke {
         case "delete":
             try {
                 int index = Integer.parseInt(parser.getCommandDetails(userInput)) - 1;
-                response.append("i've removed this task:\n").append(tasks.get(index)).append("\n");
+                response.append("i've removed this task:\n" + tasks.get(index)).append("\n");
                 tasks = tasks.remove(index);
                 if (tasks.size() == 1) {
                     response.append("you have 1 task in the list");
