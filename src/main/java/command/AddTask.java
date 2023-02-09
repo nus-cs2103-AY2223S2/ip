@@ -23,7 +23,7 @@ public class AddTask implements Command {
     @Override
     public void run(TaskList tasks, Ui ui, Storage storage) {
         tasks.add(task);
-        ui.print("Added this thing! That makes " + tasks.size() + (tasks.size() == 1 ? " task" : " tasks") + ":");
-        ui.print("  " + task.toString());
+        ui.printMiki("Added this thing! That makes " + tasks.size()
+                + (tasks.size() == 1 ? " task" : " tasks") + ":\n" + "  " + task.toString());
     }
 }

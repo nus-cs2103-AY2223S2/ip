@@ -13,6 +13,7 @@ import task.TaskList;
  */
 public class Find implements Command {
     private String regex = "";
+    private boolean isRepeat = false;
 
     /**
      * Creates a find command.
@@ -31,9 +32,16 @@ public class Find implements Command {
                 outTasks.add(new SimpleEntry<>(i, tasks.get(i)));
             }
         }
-        ui.print("here's your " + outTasks.size() + (outTasks.size() == 1 ? " match:" : " matches:"));
+        ArrayList<String> outLines = new ArrayList<>();
         for (int i = 0; i < outTasks.size(); i++) {
-            ui.print(outTasks.get(i).getKey() + 1 + ". " + outTasks.get(i).getValue());
+            outLines.add((outTasks.get(i).getKey() + 1) + ". " + outTasks.get(i).getValue());
         }
+        if (!isRepeat) {
+            ui.printMiki("here's your " + outTasks.size() + (outTasks.size() == 1 ? " match:" : " matches:"));
+            ui.printTasks(outLines.toArray(new String[outLines.size()]));
+        } else {
+            ui.refreshTasks(outLines.toArray(new String[outLines.size()]));
+        }
+        isRepeat = true;
     }
 }

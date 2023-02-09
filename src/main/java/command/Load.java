@@ -26,22 +26,24 @@ public class Load implements Command {
         if (!path.equals("")) {
             try {
                 storage.load(path, tasks);
-                ui.print("done! i've taken your list from: " + path);
+                ui.printMiki("done! i've taken your list from: " + path);
             } catch (IOException ex) {
-                ui.print("umm... i can't read from that!");
-                ui.print("> " + ex.getMessage());
+                ui.printMiki("umm... i can't read from that!");
+                ui.printMiki("> " + ex.getMessage());
             } catch (Storage.MikiLoadException ex) {
-                ui.print(ex.getMessage());
+                ui.printMiki(ex.getMessage());
             }
         } else {
-            ui.print("tell me what to read!!!");
+            String output = "tell me what to read!!!";
             try {
                 String[] saves = storage.listSaves();
                 for (int i = 0; i < saves.length; i++) {
-                    ui.print("> " + saves[i]);
+                    output += "\n> " + saves[i];
                 }
             } catch (Storage.MikiLoadException ex) {
-                ui.print(ex.getMessage());
+                output += "\n" + ex.getMessage();
+            } finally {
+                ui.printMiki(output);
             }
         }
     }

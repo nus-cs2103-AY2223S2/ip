@@ -24,10 +24,9 @@ public class Mark implements Command {
     public void run(TaskList tasks, Ui ui, Storage storage) {
         try {
             tasks.get(idx).mark();
-            ui.print("Yay!! Task marked as done:");
-            ui.print("  " + tasks.get(idx));
+            ui.printMiki("Yay!! Task marked as done:\n" + "  " + tasks.get(idx));
         } catch (TaskListIndexException ex) {
-            ui.print("?!?!? " + ex.getMessage());
+            ui.printMiki("?!?!? " + ex.getMessage());
         }
     }
 }
