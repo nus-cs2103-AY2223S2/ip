@@ -95,6 +95,14 @@ public class Parser {
             tasks.find(keyword.toString());
             break;
 
+        case "tag":
+            if (command.length > 3) {
+                throw new DukeException("Please check that your command is in the format: tag {task index} {tag name}");
+            }
+            int index = Integer.valueOf(command[1]);
+            String tagName = command[2];
+            tasks.tag(index, tagName);
+
         default:
             throw new DukeException("Invalid/Unknown command.");
         }

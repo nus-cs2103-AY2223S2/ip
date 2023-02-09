@@ -176,8 +176,14 @@ public class TaskList {
      * @param arg String keyword to search for.
      */
     public void find(String arg) {
-        List<Task> foundTasks = new ArrayList<Task>();
-        foundTasks = tasks.stream().filter(task -> task.getDescription().indexOf(arg) >= 0).collect(Collectors.toList());
+        boolean isTag = arg.charAt(0) == '#';
+        List<Task> foundTasks = tasks.stream().filter(task -> {
+            if (isTag) {
+                task.getDescription().contains(arg.substring(1));
+            } else {
+                task.getDescription().contains(arg);
+            }
+        }).collect(Collectors.toList());
         if (foundTasks.size() == 0) {
             System.out.println("There are no matching tasks!");
         } else {
@@ -186,6 +192,15 @@ public class TaskList {
                 System.out.println((i + 1) + ". " + foundTasks.get(i));
             }
         }
+    }
+
+    /**
+     * Tags task at index with tagName.
+     * @param index Index of task in TaskList.
+     * @param tagName Name of tag.
+     */
+    public void tag(int index, String tagName) {
+        tasks.get(index).tagTask(tagName);
     }
 
     /**

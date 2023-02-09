@@ -7,6 +7,7 @@ package duke;
 public class Task {
     protected String description;
     protected TaskStatus status;
+    protected String tag = "NA";
 
     /**
      * Enumeration for TaskStatus.
@@ -53,11 +54,11 @@ public class Task {
 
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.description;
+        return "[" + this.getStatusIcon() + "] " + this.description + " #" + this.tag;
     }
 
     public String toData() {
-        return this.status.toString() + "|" + this.description;
+        return this.status.toString() + "|" + this.description + " #" + this.tag;
     }
 
     public String getStatusIcon() {
@@ -100,5 +101,9 @@ public class Task {
      */
     public String getDescription() {
         return this.description;
+    }
+
+    public void tagTask(String tag) {
+        this.tag = tag;
     }
 }
