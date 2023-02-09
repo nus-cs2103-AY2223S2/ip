@@ -27,6 +27,10 @@ public class UnMarkComamnd extends Command {
      * @param storage the storage instance
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
+        assert tasks != null;
+        assert ui != null;
+        assert storage != null;
+        
         try {
             int id = Integer.parseInt(this.unwrap()[0]);
             int index = id - 1;

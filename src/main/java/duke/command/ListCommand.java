@@ -27,6 +27,10 @@ public class ListCommand extends Command {
      * @return string
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
+        assert tasks != null;
+        assert ui != null;
+        assert storage != null;
+        
         if (tasks.size() == 0) {
             return "Your task list is empty!";
         }
