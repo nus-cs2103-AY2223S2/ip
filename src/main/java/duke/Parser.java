@@ -118,6 +118,7 @@ public class Parser {
      */
     public static Command parse(String input) throws DukeException, NumberFormatException {
         String[] inputs = input.split(" ", 2);
+        assert inputs.length > 0 : "No command detected when parsing.";
         String command = inputs[0];
 
         switch (command) {

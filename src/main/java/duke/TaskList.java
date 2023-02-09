@@ -23,10 +23,12 @@ public class TaskList {
     }
 
     public void remove(int index) {
+        assert index < this.tasks.size() : "Index out of bounds. Unable to delete task.";
         this.tasks.remove(index);
     }
 
     public Task get(int index) {
+        assert index < this.tasks.size() : "Index out of bounds. Unable to retrieve task.";
         return this.tasks.get(index);
     }
 
