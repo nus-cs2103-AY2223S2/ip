@@ -18,7 +18,7 @@ import duke.task.TaskList;
  */
 public class Storage {
 
-    public final String path;
+    public String path;
 
     public Storage(String path) {
         this.path = path;
@@ -45,6 +45,10 @@ public class Storage {
         } catch (IOException e) {
             throw new DukeException("Failed to load task file");
         }
+    }
+
+    public void setPath(String newPath) {
+        this.path = newPath;
     }
 
     /**

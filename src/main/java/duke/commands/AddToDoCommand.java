@@ -33,7 +33,7 @@ public class AddToDoCommand extends Command {
      * @throws DukeException if something happened to task storage file during runtime
      */
     @Override
-    public String execute(TaskList tasks, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Storage storage) {
         assert tasks != null;
         try {
             Task newTask = new ToDo(description);
@@ -41,7 +41,7 @@ public class AddToDoCommand extends Command {
             storage.appendToFile(newTask);
             return Formatter.formatAddTask(newTask, tasks.getSize());
         } catch (IOException e) {
-            throw new DukeException("Unable to write to file. Please run Duke again.");
+            return "Unable to write to file. Please run Duke again.";
         }
     }
 }

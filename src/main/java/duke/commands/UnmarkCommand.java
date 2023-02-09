@@ -31,7 +31,7 @@ public class UnmarkCommand extends Command {
      * @throws DukeException if something happened to task storage file during runtime or task specified does not exist.
      */
     @Override
-    public String execute(TaskList tasks, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Storage storage) {
         assert tasks != null;
         try {
             Task currentTask = tasks.unmark(this.index);
@@ -39,9 +39,9 @@ public class UnmarkCommand extends Command {
             storage.writeToFile(tasks);
             return Formatter.formatUnmarkTask(currentTask);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Task does not exist at specified index.");
+            return "Task does not exist at specified index.";
         } catch (IOException e) {
-            throw new DukeException("Unable to write to file. Please run Duke again.");
+            return "Unable to write to file. Please run Duke again.";
         }
     }
 }

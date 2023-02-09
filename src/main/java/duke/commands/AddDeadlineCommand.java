@@ -37,7 +37,7 @@ public class AddDeadlineCommand extends Command {
      *     in the correct format.
      */
     @Override
-    public String execute(TaskList tasks, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Storage storage) {
         assert tasks != null;
         try {
             Task newTask = new Deadline(description, deadline);
@@ -45,9 +45,9 @@ public class AddDeadlineCommand extends Command {
             storage.appendToFile(newTask);
             return Formatter.formatAddTask(newTask, tasks.getSize());
         } catch (IOException e) {
-            throw new DukeException("Unable to write to file. Please run Duke again.");
+            return "Unable to write to file. Please run Duke again.";
         } catch (DateTimeParseException e) {
-            throw new DukeException("Date must be in yyyy-mm-dd format.");
+            return "Date must be in yyyy-mm-dd format.";
         }
     }
 }

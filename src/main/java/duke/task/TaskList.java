@@ -6,15 +6,15 @@ import java.util.ArrayList;
  * Contains the list of tasks and operations to add/delete/mark/unmark the tasks in the list.
  */
 public class TaskList {
-    protected final ArrayList<Task> list;
+    protected ArrayList<Task> list;
 
     /** In the event that task list failed to load */
     public TaskList() {
         this.list = new ArrayList<>();
     }
 
-    public TaskList(ArrayList<Task> list) {
-        this.list = list;
+    public void setList(ArrayList<Task> newList) {
+        this.list = newList;
     }
 
     public void add(Task task) {
