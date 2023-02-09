@@ -16,7 +16,7 @@ public class ToDoList {
     private int toDoCount;
 
     public ToDoList() {
-        //arr uses 1-indexing, 0 position placed with a dummy Task
+        //tasks uses 1-indexing, 0 position placed with a dummy Task
         tasks.add(new ToDoTask("0index"));
         this.toDoCount = 0;
     }
@@ -60,10 +60,10 @@ public class ToDoList {
         if (index < 1 || index > toDoCount) {
             throw new IndexDukeException();
         }
-        Task rm = tasks.get(index);
+        Task removed = tasks.get(index);
         tasks.remove(index);
         --this.toDoCount;
-        return rm;
+        return removed;
     }
 
 

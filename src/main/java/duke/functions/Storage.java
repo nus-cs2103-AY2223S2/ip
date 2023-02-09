@@ -19,7 +19,6 @@ import java.nio.file.Paths;
 import java.nio.file.Path;
 
 import java.util.Scanner;
-import java.util.regex.Pattern;
 
 /**
  * A class that can hold a specified directory path with respect
@@ -50,6 +49,21 @@ public class Storage {
     }
 
     /**
+     * Creates the given file and its directories if it does not exist.
+     *
+     * @param filePath The file and directory path to be created if it
+     *                 does not exist.
+     * @throws IOException If the given path does not exist
+     *                     even after creating it in this method.
+     */
+    public void createFile(Path filePath) throws IOException{
+        if (!Files.exists(filePath)) {
+            createDirectory(filePath.getParent());
+            Files.createFile(filePath);
+        }
+    }
+
+    /**
      * Returns an instance of a ToDoList object that contains the specific tasks
      * in their correct state based on the given path stored in the Storage object.
      *
@@ -58,42 +72,10 @@ public class Storage {
      */
     public ToDoList load() throws LoadDukeException {
         try {
-            if (!Files.exists(path)) {
-                createDirectory(path.getParent());
-                Files.createFile(path);
-            }
+            createFile(path);
             File f = new File(path.toString());
-            ToDoList list = new ToDoList();
             Scanner sc = new Scanner(f);
-            while (sc.hasNext()) {
-                String[] inputs = sc.nextLine().split(Pattern.quote("/+/"));
-                String command = inputs[0];
-                Task task;
-                switch (command) {
-                case "TODO":
-                    task = new ToDoTask(inputs[2]);
-                    if (inputs[1].equals("DONE")) {
-                        task.markDone();
-                    }
-                    list.add(task);
-                    break;
-                case "DEADLINE":
-                    task = new DeadlineTask(inputs[2], inputs[3]);
-                    if (inputs[1].equals("DONE")) {
-                        task.markDone();
-                    }
-                    list.add(task);
-                    break;
-                case "EVENT":
-                    task = new EventTask(inputs[2], inputs[3], inputs[4]);
-                    if (inputs[1].equals("DONE")) {
-                        task.markDone();
-                    }
-                    list.add(task);
-                    break;
-                }
-            }
-            return list;
+            return Parser.handleLoadCommand(sc);
         } catch (Exception e) {
             throw new LoadDukeException();
         }

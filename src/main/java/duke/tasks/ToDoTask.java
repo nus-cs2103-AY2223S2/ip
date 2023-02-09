@@ -19,7 +19,7 @@ public class ToDoTask extends Task {
     @Override
     public String save() {
         String status = this.isDone ? "DONE/+/" : "NOTDONE/+/";
-        return "TODO/+/" + status + this.title + "/+/" + "\n";
+        return "TODO/+/" + status + this.title + "\n";
     }
 
     /**

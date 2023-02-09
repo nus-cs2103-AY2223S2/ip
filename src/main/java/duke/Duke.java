@@ -7,7 +7,7 @@ import duke.functions.Storage;
 import duke.functions.Reply;
 
 /**
- * The main class that the Duke program will run on.
+ * The class that the Duke program will run on.
  * It includes the operation for starting up, receiving
  * and decoding user inputs and shut down.
  */
