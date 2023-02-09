@@ -36,7 +36,6 @@ public class Duke {
                 display.somethingWentWrong();
                 break;
             }
-
             if (logic.isTaskCommand(input)) {
                 Task task = logic.toTask(input);
                 TaskList.addTask(task);
@@ -65,7 +64,6 @@ public class Duke {
                 tasks.matchDescription(description);
                 display.line();
             }
-            // Auto-save state in file
             store.autoSave(tasks);
         }
     }

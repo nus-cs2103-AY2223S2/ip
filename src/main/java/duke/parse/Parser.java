@@ -69,27 +69,26 @@ public class Parser {
      */
     public static Task toTask(String command) throws DukeException {
         Task task;
-        if (Parser.isTaskCommand(command)) {
-            if (command.matches(TODO_PATTERN)) {
-                String taskDescription = command.substring(5);
-                task = new Todo(taskDescription);
-            } else if (command.matches(DEADLINE_PATTERN)) {
-                String description = command.substring(9);
-                String[] temp = description.split("\\s*/by\\s*");
-                String taskDescription = temp[0];
-                String by = temp[1];
-                task = new Deadline(taskDescription, by);
-            } else { // (command.matches(EVENT_PATTERN)) {
-                String description = command.substring(6);
-                String[] temp = description.split("\\s*/from\\s*");
-                String taskDescription = temp[0];
-                String[] time = temp[1].split("\\s*/to\\s*");
-                String from = time[0];
-                String to = time[1];
-                task = new Event(taskDescription, from, to);
-            }
-        } else {
+        if (!Parser.isTaskCommand(command)) {
             throw new DukeException("☹ OOPS!!! You cannot convert a non-task command into a task.");
+        }
+        if (command.matches(TODO_PATTERN)) {
+            String taskDescription = command.substring(5);
+            task = new Todo(taskDescription);
+        } else if (command.matches(DEADLINE_PATTERN)) {
+            String description = command.substring(9);
+            String[] temp = description.split("\\s*/by\\s*");
+            String taskDescription = temp[0];
+            String by = temp[1];
+            task = new Deadline(taskDescription, by);
+        } else { // (command.matches(EVENT_PATTERN)) {
+            String description = command.substring(6);
+            String[] temp = description.split("\\s*/from\\s*");
+            String taskDescription = temp[0];
+            String[] time = temp[1].split("\\s*/to\\s*");
+            String from = time[0];
+            String to = time[1];
+            task = new Event(taskDescription, from, to);
         }
         return task;
     }
