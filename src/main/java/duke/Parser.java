@@ -10,7 +10,7 @@ import java.util.HashMap;
 
 public class Parser {
     private static final BadCommandException BAD_PARAMS_ERROR =
-            new BadCommandException("There are insufficient or invalid parameters!");
+            new BadCommandException("There are insufficient or invalid arguments!");
     private static final BadCommandException UNKNOWN_COMMAND_ERROR =
             new BadCommandException("I'm sorry, but I don't know what that means :-(");
     private static final String PARAMS_DELIMITER =  "/";
@@ -95,7 +95,14 @@ public class Parser {
         return new Pair<>(defaultArgument, paramToArgMap);
     }
 
-
+    /**
+     * Returns new task based on the given params.
+     * @param commandEnum Command enum value of the command.
+     * @param description Description of the task.
+     * @param paramToArgMap Parameter to argument map given.
+     * @return New task based on the above parameters.
+     * @throws BadCommandException If insufficient or invalid arguments are given.
+     */
     private Task createNewTask(Command commandEnum,
                                String description,
                                HashMap<String, String> paramToArgMap) throws BadCommandException {
@@ -111,23 +118,17 @@ public class Parser {
                 if (!paramToArgMap.containsKey("by")) {
                     throw BAD_PARAMS_ERROR;
                 }
-                newTask = hasTagsArg ?
-                        new Deadline(description, paramToArgMap.get("by"), tags) :
-                        new Deadline(description, paramToArgMap.get("by"));
+                newTask = hasTagsArg
+                        ? new Deadline(description, paramToArgMap.get("by"), tags)
+                        : new Deadline(description, paramToArgMap.get("by"));
                 break;
             case EVENT:
                 if (!paramToArgMap.containsKey("from") || !paramToArgMap.containsKey("to")) {
                     throw BAD_PARAMS_ERROR;
                 }
-                newTask = hasTagsArg ? new Event(
-                        description,
-                        paramToArgMap.get("from"),
-                        paramToArgMap.get("to"),
-                        tags
-                ) : new Event(
-                        description,
-                        paramToArgMap.get("from"),
-                        paramToArgMap.get("to")
+                newTask = hasTagsArg
+                        ? new Event(description, paramToArgMap.get("from"), paramToArgMap.get("to"), tags)
+                        : new Event(description, paramToArgMap.get("from"), paramToArgMap.get("to")
                 );
                 break;
             default:

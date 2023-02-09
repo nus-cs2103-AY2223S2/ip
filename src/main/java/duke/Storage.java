@@ -48,26 +48,40 @@ public class Storage {
                 }
                 try {
                     Task newTask = null;
-                    if (inputStr[0].equals(Task.TaskIcon.TODO.getSymbol())) {
-                        newTask = new Todo(inputStr[2]);
-                        tasks.add(newTask);
-                    } else if (inputStr[0].equals(Task.TaskIcon.DEADLINE.getSymbol())) {
+                    String taskIconString = inputStr[0];
+                    String description = inputStr[2];
+                    Task.TaskIcon taskIconEnumValue = Task.TaskIcon.valueOfIconString(taskIconString);
+                    if (taskIconEnumValue == null) {
+                        continue;
+                    }
+                    switch (taskIconEnumValue) {
+                    case TODO:
+                        newTask = inputStr.length >= 4
+                                ? new Todo(description, inputStr[3])
+                                : new Todo(description);
+                        break;
+                    case DEADLINE:
                         if (inputStr.length < 4) {
                             continue;
                         }
-                        newTask = new Deadline(inputStr[2], inputStr[3]);
-                        tasks.add(newTask);
-                    } else if (inputStr[0].equals(Task.TaskIcon.EVENT.getSymbol())) {
+                        newTask = inputStr.length >= 5
+                                ? new Deadline(description, inputStr[3], inputStr[4])
+                                : new Deadline(description, inputStr[3]);
+                        break;
+                    case EVENT:
                         if (inputStr.length < 5) {
                             continue;
                         }
-                        newTask = new Event(inputStr[2], inputStr[3], inputStr[4]);
-                        tasks.add(newTask);
+                        newTask = inputStr.length >= 6
+                            ? new Event(inputStr[2], inputStr[3], inputStr[4], inputStr[5])
+                            : new Event(inputStr[2], inputStr[3], inputStr[4]);
+                        break;
+                    default:
+                        continue;
                     }
-                    if (newTask != null) {
-                        if (Integer.parseInt(inputStr[1]) == 1) {
-                            newTask.markAsDone();
-                        }
+                    tasks.add(newTask);
+                    if (Integer.parseInt(inputStr[1]) == 1) {
+                        newTask.markAsDone();
                     }
                 } catch (DukeException e) {
                     throw new DukeException(String.format(
@@ -107,7 +121,7 @@ public class Storage {
                     throw new DukeException(SAVE_ERROR_PREFIX_STRING + "Unable to access task");
                 }
                 ArrayList<String> params = new ArrayList<>();
-                params.add(task.getTaskIcon().getSymbol());
+                params.add(task.getTaskIcon().getIconString());
                 params.add(task.isDone() ? "1" : "0");
                 params.add(task.getDescription());
                 if (task instanceof Event) {
@@ -117,6 +131,9 @@ public class Storage {
                 } else if (task instanceof Deadline) {
                     Deadline castedTask = (Deadline) task;
                     params.add(castedTask.getByDate());
+                }
+                if (task.hasTags()) {
+                    params.add(task.getTags());
                 }
                 String outputStr = String.join(" | ", params);
                 fw.write(outputStr + System.lineSeparator());

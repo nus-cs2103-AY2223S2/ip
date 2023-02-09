@@ -1,28 +1,40 @@
 package duke.task;
 
-import duke.Duke;
 import duke.DukeException;
+
+import java.util.HashMap;
 
 public abstract class Task {
     public enum TaskIcon {
         TODO ("T"),
         EVENT ("E"),
         DEADLINE ("D");
-        private final String symbol;
-        TaskIcon(String symbol) {
-            this.symbol = symbol;
+        private final String iconString;
+        private static final HashMap<String, TaskIcon> STRING_TO_ENUM_MAP = new HashMap<>();
+
+        static {
+            for (TaskIcon taskIcon: values()) {
+                STRING_TO_ENUM_MAP.put(taskIcon.getIconString(), taskIcon);
+            }
+        }
+
+        public static TaskIcon valueOfIconString(String iconString) {
+            return STRING_TO_ENUM_MAP.get(iconString);
+        }
+        TaskIcon(String iconString) {
+            this.iconString = iconString;
         }
 
         /**
          * Getter function for the symbol of the enum
          * @return Symbol string
          */
-        public String getSymbol() {
-            return symbol;
+        public String getIconString() {
+            return iconString;
         }
     };
     protected String description;
-    protected String tags;
+    protected String tags = null;
     protected boolean isDone;
     protected TaskIcon taskIcon;
 
@@ -41,7 +53,10 @@ public abstract class Task {
 
     protected Task (String description, TaskIcon taskIcon, String tags) throws DukeException {
         this(description, taskIcon);
-        this.tags = tags;
+        this.tags = tags.trim();
+        if (this.tags.equals("")) {
+            throw new DukeException("The tags of a Task cannot be empty.");
+        }
     }
 
     public String getStatusIcon() {
@@ -50,6 +65,14 @@ public abstract class Task {
 
     public String getDescription() {
         return description;
+    }
+
+    public String getTags() {
+        return tags;
+    }
+
+    public boolean hasTags() {
+        return tags != null;
     }
 
     public void markAsDone() {
@@ -70,7 +93,16 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        return String.format("[%s][%s] %s", this.taskIcon.getSymbol(), getStatusIcon(), getDescription());
+        String baseString = String.format(
+                "[%s][%s] %s",
+                this.taskIcon.getIconString(),
+                getStatusIcon(),
+                getDescription()
+        );
+        if (hasTags()) {
+            return String.format("%s [%s]", baseString, getTags());
+        }
+        return baseString;
     }
 
 }
