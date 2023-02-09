@@ -1,14 +1,13 @@
 package roody;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
+
 import roody.commands.Command;
-import roody.commands.MakeTodoCommand;
 import roody.exceptions.RoodyException;
 import roody.tasks.Task;
-
-import java.util.ArrayList;
 
 public class ParserTest {
     @Test
