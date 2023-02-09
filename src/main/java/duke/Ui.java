@@ -7,13 +7,23 @@ import java.util.List;
  */
 public class Ui {
 
-    private String logo() {
+    public String logo() {
         return " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
     }
+
+    public String logo2() {
+        return " __            \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | |  | | | |/ / _ \\\n"
+                + "| |_| |  |_| |   <  __/\n"
+                + "|__/ \\_,_|_|\\_\\___|\n";
+    }
+
+
 
     /**
      * Print introduction.

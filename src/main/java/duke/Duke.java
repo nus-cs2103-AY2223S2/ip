@@ -19,7 +19,7 @@ public class Duke {
     /** List to store all task */
     private TaskList taskList;
 
-    private Duke(String filePath) {
+    Duke(String filePath) {
         this.getInput = new Scanner(System.in);
         this.ui = new Ui();
         this.storage = new Storage(filePath);
@@ -93,4 +93,7 @@ public class Duke {
         new Duke("data/duke.txt").run();
     }
 
+    public String getResponse(String input) {
+        return "Duke heard: " + input;
+    }
 }
