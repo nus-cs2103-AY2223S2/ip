@@ -1,8 +1,9 @@
 package parser;
 
+import dukeexeption.MissingArgumentException;
+
 import command.Command;
 import command.TodoCommand;
-import dukeexeption.MissingArgumentException;
 
 /**
  * Parser that handles command that starts with todo keyword.

@@ -1,9 +1,10 @@
 package parser;
 
-import command.Command;
-import command.DeleteCommand;
 import dukeexeption.InvalidArgumentException;
 import dukeexeption.MissingArgumentException;
+
+import command.Command;
+import command.DeleteCommand;
 
 /**
  * Parser that handles command that starts with delete keyword.

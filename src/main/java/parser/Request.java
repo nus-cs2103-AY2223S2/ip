@@ -1,9 +1,10 @@
 package parser;
 
-import command.Command;
 import dukeexeption.InvalidArgumentException;
 import dukeexeption.MissingArgumentException;
 import dukeexeption.UnknownCommandException;
+
+import command.Command;
 
 /**
  * The entry point of user input commands.

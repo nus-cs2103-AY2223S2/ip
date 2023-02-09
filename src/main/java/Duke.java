@@ -1,9 +1,13 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-import command.Command;
+import java.util.function.Function;
+
 import dukeexeption.DukeException;
+
 import javafx.application.Application;
 import javafx.stage.Stage;
+
+import command.Command;
 import parser.Request;
 import storage.LocalStorage;
 import storage.TaskList;
@@ -68,8 +72,29 @@ public class Duke extends Application {
         this.textUi.printExitingMessage();
     }
 
+    /**
+     * Begins the execution of the Duke program in JavaFX.
+     *
+     * @param stage the stage to display the JavaFX elements
+     */
     public void runWithGui(Stage stage) {
-        new Gui((String input) -> this.parseAndRespond(input)).start(stage);
+        Function<String, String> parseAndRespond = (String request) -> {
+            try {
+                if ("BYE".equalsIgnoreCase(request)) {
+                    if (this.localTaskList != null) {
+                        this.localTaskList.writeFromProgramTaskList(this.tasks);
+                    }
+                    System.exit(0);
+                }
+                Command command = new Request(request).parse();
+                String reply = command.run(this.tasks);
+                return "Duke shouts:\n" + reply;
+            } catch (DukeException error) {
+                return "Duke shouts:\n" + error;
+            }
+        };
+
+        new Gui(parseAndRespond).start(stage);
     }
 
     @Override
@@ -77,21 +102,5 @@ public class Duke extends Application {
         String filepath = getParameters().getUnnamed().get(0);
 
         new Duke(filepath).runWithGui(stage);
-    }
-
-    private String parseAndRespond(String input) {
-        try {
-            if ("BYE".equalsIgnoreCase(input)) {
-                if (this.localTaskList != null) {
-                    this.localTaskList.writeFromProgramTaskList(this.tasks);
-                }
-                System.exit(0);
-            }
-            Command command = new Request(input).parse();
-            String reply = command.run(this.tasks);
-            return "Duke shouts:\n" + reply;
-        } catch (DukeException error) {
-            return "Duke shouts:\n" + error;
-        }
     }
 }

@@ -2,10 +2,12 @@ package parser;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import command.Command;
-import command.OnCommand;
+
 import dukeexeption.InvalidArgumentException;
 import dukeexeption.MissingArgumentException;
+
+import command.Command;
+import command.OnCommand;
 
 /**
  * Parser that handles command that starts with on keyword.
