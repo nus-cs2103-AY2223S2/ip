@@ -12,7 +12,7 @@ import duke.ui.Ui;
  * @version 0.2
  * @since 0.1
  */
-public class TagCommand extends Command{
+public class TagCommand extends Command {
 
     /**
      * Constructor of TagCommand
@@ -37,7 +37,7 @@ public class TagCommand extends Command{
             int index = Integer.parseInt(command[1]);
             String[] tag = new String[command.length - 2];
             for (int i = 0; i < tag.length; i++) {
-                tag[i] = command[i+2];
+                tag[i] = command[i + 2];
             }
             tasks.updateTag(index - 1, tag);
             storage.saveToDisk(tasks);
