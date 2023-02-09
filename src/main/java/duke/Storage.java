@@ -1,5 +1,4 @@
 package duke;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -10,6 +9,7 @@ import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import Task.Task;
 /**
  * Object Class for Storage
  * Creates folder and file if it's first time running on the device.
@@ -20,7 +20,7 @@ public class Storage {
     protected Path path;
     protected File file;
 
-    Storage() {
+    public Storage() {
         path = Paths.get(home, "data", "duke.txt");
         try {
             file = new File(path.toString());
@@ -47,7 +47,8 @@ public class Storage {
         if (t.getIsDone()) {
             isDone = 1;
         }
-        String description = t.type + " | " + isDone + " | " + t.getDescriptionAndTime() + System.lineSeparator();
+        String type = t.getType();
+        String description = type + " | " + isDone + " | " + t.getDescriptionAndTime() + System.lineSeparator();
         try {
             Files.writeString(path, description, StandardCharsets.UTF_8, StandardOpenOption.APPEND);
         } catch (IOException e) {
@@ -76,7 +77,8 @@ public class Storage {
             if (t.getIsDone()) {
                 isDone = 1;
             }
-            String description = t.type + " | " + isDone + " | " + t.getDescriptionAndTime() + System.lineSeparator();
+            String type = t.getType();
+            String description = type + " | " + isDone + " | " + t.getDescriptionAndTime() + System.lineSeparator();
             try {
                 Files.writeString(path, description, StandardCharsets.UTF_8, StandardOpenOption.APPEND);
             } catch (IOException e) {

@@ -1,11 +1,14 @@
-package duke;
+package Command;
+
+import Task.Task;
+import Task.TaskList;
 
 /**
  * Command class for event
  */
 public class EventCommand implements Command {
     private Task newEvent;
-    EventCommand(Task t) {
+    public EventCommand(Task t) {
         newEvent = t;
     }
     @Override

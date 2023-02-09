@@ -1,4 +1,4 @@
-package duke;
+package DukeException;
 
 /**
  * Exception class

@@ -1,4 +1,7 @@
-package duke;
+package Command;
+
+import DukeException.DukeException;
+import Task.TaskList;
 
 /**
  * Command Interface

@@ -1,4 +1,7 @@
-package duke;
+package Command;
+
+import Task.TaskList;
+import Task.Task;
 
 /**
  * Command class for Deadline object
@@ -6,9 +9,10 @@ package duke;
 public class DeadlineCommand implements Command {
     private Task newDeadline;
 
-    DeadlineCommand(Task t) {
+    public DeadlineCommand(Task t) {
         newDeadline = t;
     }
+
     @Override
     public String execute(TaskList taskList) {
         return taskList.add(newDeadline);

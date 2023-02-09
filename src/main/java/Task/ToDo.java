@@ -1,4 +1,4 @@
-package duke;
+package Task;
 
 /**
  * Object class of ToDo
@@ -17,8 +17,7 @@ public class ToDo extends Task {
      */
     public static ToDo createToDo(String input) {
         String description = input.substring(5);
-        ToDo temp = new ToDo((description));
-        return temp;
+        return new ToDo((description));
     }
 
     @Override

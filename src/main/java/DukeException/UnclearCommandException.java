@@ -1,7 +1,7 @@
-package duke;
+package DukeException;
 
 public class UnclearCommandException extends DukeException {
-    UnclearCommandException() {}
+    public UnclearCommandException() {}
 
     @Override
     public String toString() {

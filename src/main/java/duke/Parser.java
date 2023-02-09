@@ -1,15 +1,37 @@
 package duke;
 
+import Command.ByeCommand;
+import Command.Command;
+import Command.DeadlineCommand;
+import Command.DeleteCommand;
+import Command.EventCommand;
+import Command.FindCommand;
+import Command.ListCommand;
+import Command.MarkCommand;
+import Command.ToDoCommand;
+import Command.UnMarkCommand;
+import DukeException.DescriptionEmptyException;
+import DukeException.DukeException;
+import DukeException.NoNumberException;
+import DukeException.UnclearCommandException;
+import Task.Deadline;
+import Task.Event;
+import Task.Task;
+import Task.ToDo;
+
 /**
  * Object class for Parser
  * Parser acts like a compiler which translates user input into command
  */
 public class Parser {
     private static final int TODO_LENGTH = 4;
-    Parser() {}
+
+    Parser() {
+    }
 
     /**
      * Parse the input into commands which system understand
+     *
      * @param input -> Raw input from user
      * @return command object
      * @throws DukeException -> Input doesn't match with any known commands.

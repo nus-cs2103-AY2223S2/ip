@@ -1,7 +1,8 @@
-package duke;
+package DukeException;
+
 
 public class WrongFormatTimeException extends DukeException {
-    WrongFormatTimeException() {}
+    public WrongFormatTimeException() {}
 
     @Override
     public String toString() {

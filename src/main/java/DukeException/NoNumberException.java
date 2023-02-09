@@ -1,7 +1,7 @@
-package duke;
+package DukeException;
 
 public class NoNumberException extends DukeException {
-    NoNumberException() {}
+    public NoNumberException() {}
 
     @Override
     public String toString() {

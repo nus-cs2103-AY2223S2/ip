@@ -1,11 +1,14 @@
-package duke;
+package Command;
+
+import DukeException.DukeException;
+import Task.TaskList;
 
 /**
  * Command class for unmark
  */
 public class UnMarkCommand implements Command {
     private int unMarkIndex;
-    UnMarkCommand(int i) {
+    public UnMarkCommand(int i) {
         unMarkIndex = i;
     }
 

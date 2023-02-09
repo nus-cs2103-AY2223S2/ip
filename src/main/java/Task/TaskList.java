@@ -1,6 +1,11 @@
-package duke;
+package Task;
 import java.util.ArrayList;
 import java.util.Iterator;
+
+import DukeException.DukeException;
+import DukeException.TaskNotExistException;
+import duke.Storage;
+import duke.Ui;
 
 /**
  * Class which stores a list of tasks
@@ -26,6 +31,7 @@ public class TaskList {
 
     /**
      * Mark ith task as done
+     *
      * @param i
      * @throws DukeException if ith task doesn't exist
      */
@@ -42,6 +48,7 @@ public class TaskList {
 
     /**
      * Unmark ith task as not done
+     *
      * @param i
      */
     public String unmark(int i) {
@@ -61,6 +68,7 @@ public class TaskList {
 
     /**
      * Adds task to list
+     *
      * @param t
      */
     public String add(Task t) {
@@ -71,6 +79,7 @@ public class TaskList {
 
     /**
      * Deletes ith task from list
+     *
      * @param deleteIndex
      * @throws DukeException if ith task doesn't exist
      */
@@ -87,6 +96,7 @@ public class TaskList {
 
     /**
      * List out the tasks which contain keywords
+     *
      * @param keywords
      */
     public String find(String keywords) {

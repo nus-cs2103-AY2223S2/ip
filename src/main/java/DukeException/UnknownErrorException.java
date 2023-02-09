@@ -1,7 +1,7 @@
-package duke;
+package DukeException;
 
 public class UnknownErrorException extends DukeException {
-    UnknownErrorException() {}
+    public UnknownErrorException() {}
 
     @Override
     public String toString() {

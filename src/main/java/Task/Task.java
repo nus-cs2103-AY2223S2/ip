@@ -1,4 +1,4 @@
-package duke;
+package Task;
 
 /**
  * Parent class task.
@@ -43,4 +43,7 @@ public class Task {
         return description;
     }
 
+    public String getType() {
+        return type;
+    }
 }

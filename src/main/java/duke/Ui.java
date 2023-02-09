@@ -1,11 +1,12 @@
 package duke;
 import java.util.ArrayList;
 
+import Task.Task;
 /**
  * Class that display messages (except error messages) to user
  */
 public class Ui {
-    Ui() {}
+    public Ui() {}
 
     /**
      * Output message of marking

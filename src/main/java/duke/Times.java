@@ -1,7 +1,12 @@
 package duke;
+
+import DukeException.DukeException;
+import DukeException.WrongFormatTimeException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
 /**
  * Object class for time
  * Input of time will be formatted to MMM d yyyy hh:mm
@@ -15,7 +20,7 @@ public class Times {
      *
      * @param time (format:yyyy-mm-dd hhmm) (eg. 2019-10-15 1530)
      */
-    Times(String time) throws DukeException {
+    public Times(String time) throws DukeException {
         try {
             d = LocalDateTime.parse(time, FORMATTER);
         } catch (DateTimeParseException E) {

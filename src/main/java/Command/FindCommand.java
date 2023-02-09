@@ -1,11 +1,14 @@
-package duke;
+package Command;
+
+import DukeException.DukeException;
+import Task.TaskList;
 
 /**
  * Command class for find
  */
 public class FindCommand implements Command {
     private String keywords;
-    FindCommand(String s) {
+    public FindCommand(String s) {
         keywords = s;
     }
 

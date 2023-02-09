@@ -1,11 +1,14 @@
-package duke;
+package Command;
+
+import DukeException.DukeException;
+import Task.TaskList;
 
 /**
  * Command class for mark
  */
 public class MarkCommand implements Command {
     private int markIndex;
-    MarkCommand(int i) {
+    public MarkCommand(int i) {
         markIndex = i;
     }
     @Override

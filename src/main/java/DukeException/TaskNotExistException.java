@@ -1,7 +1,7 @@
-package duke;
+package DukeException;
 
-public class TaskNotExistException extends DukeException{
-    TaskNotExistException() {}
+public class TaskNotExistException extends DukeException {
+    public TaskNotExistException() {}
 
     @Override
     public String toString() {

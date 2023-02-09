@@ -1,11 +1,13 @@
-package duke;
+package Command;
+
+import Task.TaskList;
 
 /**
  * Command class for delete
  */
 public class DeleteCommand implements Command {
     private int deleteIndex;
-    DeleteCommand(int i) {
+    public DeleteCommand(int i) {
         deleteIndex = i;
     }
 

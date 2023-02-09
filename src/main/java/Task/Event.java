@@ -1,4 +1,8 @@
-package duke;
+package Task;
+
+import DukeException.DukeException;
+import DukeException.TaskFormatException;
+import duke.Times;
 
 /**
  * Object class of Event

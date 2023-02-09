@@ -1,7 +1,7 @@
-package duke;
+package DukeException;
 
 public class DescriptionEmptyException extends DukeException {
-    DescriptionEmptyException() {}
+    public DescriptionEmptyException() {}
 
     @Override
     public String toString() {

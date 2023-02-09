@@ -1,7 +1,7 @@
-package duke;
+package DukeException;
 
 public class TaskFormatException extends DukeException {
-    TaskFormatException(){}
+    public TaskFormatException(){}
 
     @Override
     public String toString() {
