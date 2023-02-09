@@ -21,7 +21,7 @@
 
 .vbox-dialog {
     -fx-background-color: #e0e9eb;
-    -fx-padding: 10, 0, 10, 10;
+    -fx-padding: 15, 0, 10, 10;
 }
 
 .button {

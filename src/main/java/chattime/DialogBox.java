@@ -13,6 +13,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 
 // @@author Jeffry Lum
 // Adapted from Guides for SE Student Project- Java FX Tutorial part 4
@@ -27,6 +28,10 @@ public class DialogBox extends HBox {
     private Label dialog;
     @FXML
     private ImageView displayPicture;
+    @FXML
+    private Label username;
+    @FXML
+    private VBox userid;
 
     /**
      * Creates dialog box object to show box or user's reply messages.
@@ -34,7 +39,7 @@ public class DialogBox extends HBox {
      * @param text Text output.
      * @param img Profile picture of the content owner.
      */
-    public DialogBox(String text, Image img) {
+    public DialogBox(String text, Image img, String name) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -44,6 +49,9 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
+        username.setText(name);
+        username.getStyleClass().add("user");
+        username.setAlignment(Pos.CENTER);
         dialog.setText(text);
         dialog.setMinHeight(Region.USE_PREF_SIZE);
         displayPicture.setImage(img);
@@ -60,15 +68,16 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        DialogBox userDialogBox = new DialogBox(text, img);
+        DialogBox userDialogBox = new DialogBox(text, img, "User");
         userDialogBox.setAlignment(Pos.CENTER_RIGHT);
         userDialogBox.dialog.getStyleClass().add("user-dialog");
         return userDialogBox;
     }
 
     public static DialogBox getBotDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+        var db = new DialogBox(text, img, "Chattime");
         db.setAlignment(Pos.CENTER_LEFT);
+        db.dialog.getStyleClass().add("bot-dialog");
         db.flip();
         return db;
     }

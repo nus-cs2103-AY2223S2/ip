@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 // @@author Jeffry Lum
@@ -24,6 +25,8 @@ public class MainWindow {
     private TextField userInput;
     @FXML
     private Button sendButton;
+    @FXML
+    private AnchorPane anchorPane;
 
     private Chattime chattime;
 
@@ -38,7 +41,9 @@ public class MainWindow {
     @FXML
     public void initialize() {
         dialogContainer.getStyleClass().add("vbox-dialog");
-        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.prefHeightProperty().bind(scrollPane.heightProperty());
+        dialogContainer.prefWidthProperty().bind(scrollPane.widthProperty());
+        scrollPane.vvalueProperty().bind(anchorPane.heightProperty());
     }
 
     public void setBot(Chattime c) {

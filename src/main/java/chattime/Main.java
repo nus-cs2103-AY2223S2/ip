@@ -1,12 +1,15 @@
 package chattime;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
 // @@author Jeffry Lum
 // Adapted from Guides for SE Student Project- Java FX Tutorial part 4
@@ -16,6 +19,8 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
     private Chattime chattime = new Chattime("");
+    private Image iconImage = new Image(Objects.requireNonNull(
+            this.getClass().getResourceAsStream("/image/chattime.png")));
 
     @Override
     public void start(Stage stage) {
@@ -26,11 +31,13 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setBot(chattime);
-            stage.setResizable(false);
+            stage.setResizable(true);
+            stage.getIcons().add(iconImage);
             stage.setTitle("CHATTIME");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 }

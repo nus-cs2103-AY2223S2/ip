@@ -35,7 +35,7 @@ public class Ui {
             + "unmark <index of task> -- to unmark the specified task\n\n"
             + "delete <index of task> -- to delete the specified task from list\n\n"
             + "bye -- to say goodbye to me and end our chat :(\n\n"
-            + "help -- to review this guide";
+            + "help -- to view this guide";
 
     private boolean isRunning;
 

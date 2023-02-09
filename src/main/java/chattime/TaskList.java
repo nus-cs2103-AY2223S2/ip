@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import chattime.task.Deadline;
 import chattime.task.Task;
-import chattime.task.Todo;
 
 /**
  * Represents a list object to store user's tasks.
