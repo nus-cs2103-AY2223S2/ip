@@ -52,6 +52,8 @@ public class TaskList extends ArrayList<Task> {
                 result.add(this.get(i));
             }
         }
+        assert result.size() < this.size() : "filtered tasks should be less than total tasks";
         return result;
     }
 }
+

@@ -52,7 +52,9 @@ public class Storage {
                 // convert text to duke.data.task.Task
                 String[] input = s.nextLine().split(" \\| ");
                 String type = input[0];
+                assert type == "T" || type == "D" || type == "E" : "Type of task should be T, D or E";
                 String mark = input[1];
+                assert mark == "1" || mark == "0" : "Task mark status should be 1 or 0";
                 Task x = null;
                 if (type.equals("T")) {
                     x = new Todo(input[2]);
