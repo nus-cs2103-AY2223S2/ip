@@ -26,6 +26,9 @@ public class UnmarkQueryHandler extends TaskQueryHandler {
         StringTokenizer st = new StringTokenizer(query);
         st.nextToken();
         Task t = tt.markUnmarkTask(Integer.parseInt(st.nextToken()) - 1, false);
+
+        assert t.getStatusIndicator().equals("[ ]") : "task should be unmarked!";
+
         tt.saveAllTasks();
         return "Task marked as incomplete: " + t;
     }

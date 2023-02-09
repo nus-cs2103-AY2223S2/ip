@@ -26,6 +26,9 @@ public class MarkQueryHandler extends TaskQueryHandler {
         StringTokenizer st = new StringTokenizer(query);
         st.nextToken();
         Task t = tt.markUnmarkTask(Integer.parseInt(st.nextToken()) - 1, true);
+
+        assert t.getStatusIndicator().equals("[X]") : "task should be marked!";
+
         tt.saveAllTasks();
         return "Task marked as complete: " + t;
     }
