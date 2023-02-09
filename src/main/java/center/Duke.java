@@ -1,8 +1,10 @@
 package center;
 
+import UI.GUI;
 import command.Parser;
 import command.Storage;
 import command.Ui;
+import javafx.application.Application;
 import task.TaskList;
 
 import java.io.IOException;
@@ -43,6 +45,7 @@ public class Duke {
 
     public static void main(String[] args) {
         Duke duke = new Duke("/dukeData/duke.txt");
+        Application.launch(GUI.class, args);
         duke.run();
     }
 
