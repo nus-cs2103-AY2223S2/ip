@@ -101,11 +101,13 @@ public class Parser {
         case "mark":
             int indexOfTaskToMarkDone = Integer.parseInt(command.split(" ")[1]) - 1;
             Task markedTask = tasks.markTaskAsDone(indexOfTaskToMarkDone);
+            assert markedTask.getTaskStatus() : "Task is wrongly marked.";
             storage.updateTaskList(tasks);
             return ui.showMarkingTaskDone(markedTask);
         case "unmark":
             int indexOfTaskToMarkUndone = Integer.parseInt(command.split(" ")[1]) - 1;
             Task unmarkedTask = tasks.markTaskAsUndone(indexOfTaskToMarkUndone);
+            assert !unmarkedTask.getTaskStatus() : "Task is wrongly marked.";
             storage.updateTaskList(tasks);
             return ui.showMarkingTaskUndone(unmarkedTask);
         case "todo":

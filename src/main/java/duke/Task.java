@@ -48,6 +48,14 @@ public class Task {
     }
 
     /**
+     * Returns the status of this <code>Task</code>.
+     * @return true if task is done and false if task is not done
+     */
+    public boolean getTaskStatus() {
+        return this.isDone;
+    }
+
+    /**
      * Marks task as undone.
      */
     public void markDone() {
