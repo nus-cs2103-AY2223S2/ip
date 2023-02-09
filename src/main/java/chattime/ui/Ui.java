@@ -6,11 +6,6 @@ import chattime.task.Task;
  * Represents UI for the bot.
  */
 public class Ui {
-
-    private static final String GREET = "Hey! I'm your friend, Chattime!(# v #) /\n"
-            + "How can I help you today *^*\n\nType `help` and I will come to you %v%";
-    private static final String BYE = "Bye bye >^<! Visit me again when you need me ~";
-
     private static final String LOGO = "      ___\n"
                         + "     /*  \\    \\(*.*)/\n"
                         + "    /::\\   \\          __\n"
@@ -37,21 +32,62 @@ public class Ui {
             + "bye -- to say goodbye to me and end our chat :(\n\n"
             + "help -- to view this guide";
 
+    private static final String GREET = "Hey! I'm your friend, Chattime!(# v #) /\n"
+            + "How can I help you today *^*\n\nType `help` and I will come to you %v%";
+
+    private static final String BYE = "Bye bye >^<! Visit me again when you need me ~";
+    private static final String SYSTEM_ERR_MSG = "Sorry I'm currently offline :,: \nI'm sick due to :\n";
+    private static final String STORAGE_ERR_MSG = "My memory messed up @^@ I think I need to leave now #.#";
+
     private boolean isRunning;
+    private boolean isNormalInit;
+    private String errorMsg;
 
     /**
      * Creates UI objects, sets bot running status to true.
      */
     public Ui() {
         isRunning = true;
-        initUi();
+        isNormalInit = true;
     }
 
     /**
      * Returns initial UI message to user.
+     *
+     * @return Greeting message, if storage error, return error alert.
      */
     public String initUi() {
-        return "Welcome to\n" + LOGO + "\n" + GREET;
+        if (isNormalInit) {
+            return "Welcome to\n" + LOGO + "\n" + GREET;
+        } else {
+            return SYSTEM_ERR_MSG + errorMsg;
+        }
+    }
+
+    /**
+     * Reports storage error.
+     */
+    public void reportSystemError(String errorMessage) {
+        isNormalInit = false;
+        errorMsg = errorMessage;
+    }
+
+    /**
+     * Getter for isNormalInit.
+     *
+     * @return Initiation status of storage.
+     */
+    public boolean getInitStatus() {
+        return isNormalInit;
+    }
+
+    /**
+     * Alerts user storage error.
+     *
+     * @return Storage error message.
+     */
+    public String reportStorageError() {
+        return STORAGE_ERR_MSG;
     }
 
     /**
@@ -93,19 +129,17 @@ public class Ui {
     }
 
     /**
-     * Returns bot detected error message to user with specific format.
-     *
-     * @param errMsg Bot error message.
-     */
-    public String printError(String errMsg) {
-        return errMsg;
-    }
-
-    /**
      * Returns error message to user when operation on empty task list is requested.
      */
     public String warnEmptyList() {
         return "Can't find anything in the list @~@";
+    }
+
+    /**
+     * Returns user guide.
+     */
+    public String alertDuplicate() {
+        return "AHH?! Seems that this job is added before ><";
     }
 
     /**
@@ -125,6 +159,15 @@ public class Ui {
     }
 
     /**
+     * Returns bot detected error message to user with specific format.
+     *
+     * @param errMsg Bot error message.
+     */
+    public String printError(String errMsg) {
+        return errMsg;
+    }
+
+    /**
      * Returns exit message to user.
      */
     public String exit() {
@@ -137,12 +180,4 @@ public class Ui {
     public String printGuide() {
         return GUIDE;
     }
-
-    /**
-     * Returns user guide.
-     */
-    public String alertDuplicate() {
-        return "AHH?! Seems that this job is added before ><";
-    }
-
 }

@@ -5,6 +5,8 @@ import chattime.storage.Storage;
 import chattime.task.Task;
 import chattime.ui.Ui;
 
+import java.io.IOException;
+
 /**
  * Represents MarkCommand object that handles main logic of marking a task as done or not done.
  */
@@ -38,14 +40,30 @@ public class MarkCommand extends Command {
         Task target = taskList.getTask(taskIndex);
 
         if (isDone) {
-            target.markAsDone();
-            storage.rewriteFile(taskIndex, taskList.getTask(taskIndex));
-            return ui.replyDoneMessage(target);
+            return markDone(target, ui, taskList, storage);
         } else {
-            target.unmarkDone();
-            storage.rewriteFile(taskIndex, taskList.getTask(taskIndex));
-            return ui.replyNotDoneMessage(target);
+            return unmarkDone(target, ui, taskList, storage);
         }
+    }
+
+    private String markDone(Task target, Ui ui, TaskList taskList, Storage storage) {
+        target.markAsDone();
+        try {
+            storage.rewriteFile(taskIndex, taskList.getTask(taskIndex));
+        } catch (IOException ex) {
+            return ui.printError(ex.getMessage());
+        }
+        return ui.replyDoneMessage(target);
+    }
+
+    private String unmarkDone(Task target, Ui ui, TaskList taskList, Storage storage) {
+        target.unmarkDone();
+        try {
+            storage.rewriteFile(taskIndex, taskList.getTask(taskIndex));
+        } catch (IOException ex) {
+            return ui.printError(ex.getMessage());
+        }
+        return ui.replyNotDoneMessage(target);
     }
 
 }

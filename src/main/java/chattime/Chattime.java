@@ -6,6 +6,8 @@ import chattime.parser.Parser;
 import chattime.storage.Storage;
 import chattime.ui.Ui;
 
+import java.io.IOException;
+
 /**
  * A chatbot that receives user's input on various predetermined command types and performs relevant functions.
  */
@@ -21,25 +23,28 @@ public class Chattime {
      */
     public Chattime(String filePath) {
         ui = new Ui();
-        storage = new Storage(ui, filePath);
-        tasks = new TaskList(storage.loadData());
+        try {
+            storage = new Storage(ui, filePath);
+            tasks = new TaskList(storage.loadData());
+        } catch (IOException | ChattimeException e) {
+            ui.reportSystemError(e.getMessage());
+        }
     }
 
     /**
      * Runs the bot and handles user's input.
      */
     String getResponse(String input) {
-        String response = "";
+        if (!ui.getInitStatus()) {
+            return ui.reportStorageError();
+        }
         try {
             Command cmd = Parser.parse(input);
             assert cmd != null : "Parsing process went wrong unexpectedly!";
-            response = cmd.execute(ui, tasks, storage);
-
+            return cmd.execute(ui, tasks, storage);
         } catch (ChattimeException e) {
             return ui.printError(e.getMessage());
         }
-
-        return response;
     }
 
     /**
@@ -59,4 +64,5 @@ public class Chattime {
     boolean checkRunningStatus() {
         return ui.getExecuteStatus();
     }
+
 }

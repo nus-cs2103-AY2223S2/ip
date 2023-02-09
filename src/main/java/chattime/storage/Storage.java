@@ -3,6 +3,7 @@ package chattime.storage;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -36,7 +37,7 @@ public class Storage {
      * @param passedUi UI object from bot to handle UI command.
      * @param path Storage path specified.
      */
-    public Storage(Ui passedUi, String path) {
+    public Storage(Ui passedUi, String path) throws IOException {
         ui = passedUi;
         filePath = (path.equals("") ? DEFAULT_FILE_PATH : path);
         openFile(filePath);
@@ -48,17 +49,12 @@ public class Storage {
      *
      * @param filePath Specified storage path.
      */
-    public void openFile(String filePath) {
-        try {
-            file = new File(filePath);
+    public void openFile(String filePath) throws IOException {
+        file = new File(filePath);
 
-            if (!file.exists()) {
-                checkAndCreateDirectory(file);
-                checkAndCreateFile(file);
-            }
-
-        } catch (IOException e) {
-            System.err.println(e.getMessage());
+        if (!file.exists()) {
+            checkAndCreateDirectory(file);
+            checkAndCreateFile(file);
         }
     }
 
@@ -91,30 +87,26 @@ public class Storage {
      *
      * @return An arraylist of stored data to be imported into current TaskList object.
      */
-    public ArrayList<Task> loadData() {
-        BufferedReader loader;
+    public ArrayList<Task> loadData() throws IOException, ChattimeException {
+        BufferedReader loader = new BufferedReader(new FileReader(file));
+        String task = loader.readLine();
 
-        try {
-            loader = new BufferedReader(new FileReader(file));
-            String task = loader.readLine();
-
-            while (task != null) {
-                String[] taskSplit = task.split(" @ ", 7);
-                Task inputTask = createTaskFromStorage(taskSplit[0], taskSplit);
-
-                if (taskSplit[1].equals("1")) {
-                    inputTask.markAsDone();
-                }
-
-                initialTasks.add(inputTask);
-                task = loader.readLine();
-            }
-            return initialTasks;
-
-        } catch (IOException | ChattimeException e) {
-            System.err.println(e.getMessage());
+        while (task != null) {
+            importData(task);
+            task = loader.readLine();
         }
         return initialTasks;
+    }
+
+    private void importData(String task) throws ChattimeException {
+        String[] taskSplit = task.split(" @ ", 7);
+        Task inputTask = createTaskFromStorage(taskSplit[0], taskSplit);
+
+        if (taskSplit[1].equals("1")) {
+            inputTask.markAsDone();
+        }
+
+        initialTasks.add(inputTask);
     }
 
     /**
@@ -184,7 +176,7 @@ public class Storage {
      *
      * @param task Task recently added.
      */
-    public void saveToFile(Task task) {
+    public void saveToFile(Task task) throws IOException {
         String writeString = task.toDataString();
 
         writeToFile(writeString + System.lineSeparator(), true);
@@ -196,39 +188,42 @@ public class Storage {
      * @param index Index of the removed or updated task.
      * @param task Updated task, takes no parameter in delete condition.
      */
-    public void rewriteFile(int index, Task... task) {
-        BufferedReader lineSearch;
+    public void rewriteFile(int index, Task... task) throws IOException {
+        StringBuilder updateString = checkWriteContent(index, task);
+        writeToFile(updateString.toString(), false);
+    }
 
-        try {
-            lineSearch = new BufferedReader(new FileReader(file));
-            String content = lineSearch.readLine();
-            int lineCount = 1;
-            StringBuilder updateString = new StringBuilder();
+    private StringBuilder checkWriteContent(int index, Task... task) throws IOException {
+        BufferedReader lineSearch = new BufferedReader(new FileReader(file));
+        String content = lineSearch.readLine();
+        int lineCount = 1;
+        StringBuilder updateString = new StringBuilder();
 
-            while (content != null) {
-                if (lineCount == index) {
-                    try {
-                        content = task[0].toDataString();
-                    } catch (IndexOutOfBoundsException e) {
-                        lineCount++;
-                        content = lineSearch.readLine();
-                        continue;
-                    }
+        while (content != null) {
+            if (lineCount == index) {
+                try {
+                    content = task[0].toDataString();
+                } catch (IndexOutOfBoundsException e) {
+                    lineCount++;
+                    content = lineSearch.readLine();
+                    continue;
                 }
-                updateString.append(content).append(System.lineSeparator());
-                lineCount++;
-                content = lineSearch.readLine();
             }
+            updateString.append(content).append(System.lineSeparator());
+            lineCount++;
+            content = lineSearch.readLine();
+        }
+        checkEmptyTask(lineCount, index);
+        return updateString;
+    }
 
-            if (lineCount < index) {
-                throw new IndexOutOfBoundsException("Task not saved in storage!");
-            } else {
-                writeToFile(updateString.toString(), false);
-            }
-        } catch (IOException | IndexOutOfBoundsException e) {
-            System.err.println(e.getMessage());
+    private void checkEmptyTask(int lineCount, int index) {
+        if (lineCount < index) {
+            throw new IndexOutOfBoundsException("Task not saved in storage!");
         }
     }
+
+
 
     /**
      * Common method to write in the storage file.
@@ -236,16 +231,10 @@ public class Storage {
      * @param content Data to be written in.
      * @param append Flag that determines whether the content should append or replace the entire storage file.
      */
-    private void writeToFile(String content, boolean append) {
-        try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(file, append));
-            assert !content.equals("") : "Storing empty data!";
-            writer.write(content);
-            writer.close();
-
-        } catch (IOException e) {
-            ui.printError(e.getMessage());
-        }
-
+    private void writeToFile(String content, boolean append) throws IOException {
+        BufferedWriter writer = new BufferedWriter(new FileWriter(file, append));
+        assert !content.equals("") : "Storing empty data!";
+        writer.write(content);
+        writer.close();
     }
 }

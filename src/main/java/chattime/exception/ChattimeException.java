@@ -22,6 +22,15 @@ public class ChattimeException extends Exception {
      *
      * @return Error message.
      */
+    public String getMessage() {
+        return toString();
+    }
+
+    /**
+     * Returns the customized error message to be displayed.
+     *
+     * @return Error message.
+     */
     @Override
     public String toString() {
         return "OOPS!!! " + errMsg;

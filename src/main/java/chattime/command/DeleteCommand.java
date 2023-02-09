@@ -5,6 +5,8 @@ import chattime.storage.Storage;
 import chattime.task.Task;
 import chattime.ui.Ui;
 
+import java.io.IOException;
+
 /**
  * Represents DeleteCommand object that handles main logic of deleting task from task list.
  */
@@ -38,7 +40,15 @@ public class DeleteCommand extends Command {
 
         task.removeTask();
         taskList.removeTask(taskIndex);
-        storage.rewriteFile(taskIndex);
+        return replyDeleteProgress(task, ui, storage);
+    }
+
+    private String replyDeleteProgress(Task task, Ui ui, Storage storage) {
+        try {
+            storage.rewriteFile(taskIndex);
+        } catch (IOException e) {
+            return ui.printError(e.getMessage());
+        }
         return ui.replyRemoveTaskMsg(task, Task.printTotalTask());
     }
 

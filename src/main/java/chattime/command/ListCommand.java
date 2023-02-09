@@ -53,16 +53,20 @@ public class ListCommand extends Command {
             return ui.warnEmptyList();
 
         } else {
-            int i = 1;
-            String message = "Task(s) waiting to be completed:";
-
-            for (Task task : taskList.getList()) {
-                message = message.concat(String.format("\n     %d. %s", i, task));
-                i++;
-            }
-
-            return message;
+            return createListReply(taskList);
         }
+    }
+
+    private String createListReply(TaskList taskList) {
+        int i = 1;
+        String message = "Task(s) waiting to be completed:\n";
+
+        for (Task task : taskList.getList()) {
+            message = message.concat(String.format("\n     %d. %s", i, task));
+            i++;
+        }
+
+        return message;
     }
 
     /**
@@ -76,26 +80,31 @@ public class ListCommand extends Command {
             return ui.warnEmptyList();
 
         } else {
-            int i = 1;
-            int total = 0;
-            int pending = 0;
-            String message = "SEE ~ I've found the task(s) that have deadlines / take place on "
-                    + requestedDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy ")) + "for you:";
-
-            for (Task task : taskList.getList()) {
-                if (task.isOnDate(requestedDate)) {
-                    message = message.concat(String.format("\n     %d. %s", i, task));
-                    i++;
-                    total++;
-                    if (!task.getTaskStatus()) {
-                        pending++;
-                    }
-                }
-            }
-
-            message += "\n     You have " + total + " task(s) on this day. With " + pending + " task(s) to go.";
-
-            return message;
+            return createTimeListReply(taskList);
         }
+    }
+
+    private String createTimeListReply(TaskList taskList) {
+        int i = 1;
+        int total = 0;
+        int pending = 0;
+        String requestDate = requestedDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy "));
+        String message = "SEE ~ I've found the task(s) that have deadlines / take place on "
+                + requestDate + "for you:\n";
+
+        for (Task task : taskList.getList()) {
+            if (!task.getTaskStatus() && task.isOnDate(requestedDate)) {
+                pending++;
+            }
+            if (task.isOnDate(requestedDate)) {
+                message = message.concat(String.format("\n     %d. %s", i, task));
+                i++;
+                total++;
+            }
+        }
+
+        message += "\n\nYou have " + total + " task(s) on this day. With " + pending + " task(s) to go.";
+
+        return message;
     }
 }

@@ -5,6 +5,8 @@ import chattime.storage.Storage;
 import chattime.task.Task;
 import chattime.ui.Ui;
 
+import java.io.IOException;
+
 /**
  * Represents AddCommand object that handles main logic of adding task ,including todo, deadline and event tasks.
  */
@@ -37,8 +39,15 @@ public class AddCommand extends Command {
             return ui.alertDuplicate();
         }
         taskList.addTask(task);
-        storage.saveToFile(task);
-        return ui.printAddTask(task, Task.printTotalTask());
+        return replyDeleteProgress(ui, storage);
     }
 
+    private String replyDeleteProgress(Ui ui, Storage storage) {
+        try {
+            storage.saveToFile(task);
+        } catch (IOException e) {
+            return ui.printError(e.getMessage());
+        }
+        return ui.printAddTask(task, Task.printTotalTask());
+    }
 }

@@ -67,6 +67,13 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Create dialog box for user message.
+     *
+     * @param text User's input.
+     * @param img User's profile.
+     * @return A dialog box with user's message and user's profile.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         DialogBox userDialogBox = new DialogBox(text, img, "User");
         userDialogBox.setAlignment(Pos.CENTER_RIGHT);
@@ -74,6 +81,13 @@ public class DialogBox extends HBox {
         return userDialogBox;
     }
 
+    /**
+     * Create dialog box for bot message.
+     *
+     * @param text Bot input.
+     * @param img Bot profile.
+     * @return A dialog box with bot message and bot profile.
+     */
     public static DialogBox getBotDialog(String text, Image img) {
         var db = new DialogBox(text, img, "Chattime");
         db.setAlignment(Pos.CENTER_LEFT);

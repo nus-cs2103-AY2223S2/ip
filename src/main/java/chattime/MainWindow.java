@@ -43,9 +43,12 @@ public class MainWindow {
         dialogContainer.getStyleClass().add("vbox-dialog");
         dialogContainer.prefHeightProperty().bind(scrollPane.heightProperty());
         dialogContainer.prefWidthProperty().bind(scrollPane.widthProperty());
-        scrollPane.vvalueProperty().bind(anchorPane.heightProperty());
+        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Initialize bot first dialog.
+     */
     public void setBot(Chattime c) {
         chattime = c;
         dialogContainer.getChildren().addAll(

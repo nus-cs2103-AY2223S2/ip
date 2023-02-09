@@ -49,26 +49,31 @@ public class ScheduleCommand extends Command {
             Supplier<Stream<Task>> filteredTask = () -> taskList.getList().stream()
                     .filter(task -> task.isOnDate(date) && !task.getTaskStatus());
 
-            LocalTime time = LocalTime.MIN;
-            for (int i = 0; i < 24; i++) {
-                LocalTime currTime = time;
-                time = time.plusHours(1);
-
-                message.append(currTime.format(DateTimeFormatter.ofPattern("\nhh:mm a :")));
-
-                String taskSchedule = filteredTask.get()
-                        .filter(task -> task.isOnTime(date, currTime)).map(Task::taskWithCode)
-                        .reduce("", (prevTask, task) -> prevTask + "\n           " + task);
-
-                message.append(taskSchedule);
-            }
+            message.append(scheduleContent(filteredTask));
 
             int total = (int) filteredTask.get().count();
-            message.append("\nYou have ").append(total).append(" unmarked task(s) on this day :(");
+            message.append("\n\nYou have ").append(total).append(" unmarked task(s) on this day");
 
             return message.toString();
 
         }
+    }
+
+    private StringBuilder scheduleContent(Supplier<Stream<Task>> filteredTask) {
+        LocalTime time = LocalTime.MIN;
+        StringBuilder scheduledTasks = new StringBuilder();
+        for (int i = 0; i < 24; i++) {
+            LocalTime currTime = time;
+            time = time.plusHours(1);
+
+            String taskSchedule = filteredTask.get()
+                    .filter(task -> task.isOnTime(date, currTime)).map(Task::taskWithCode)
+                    .reduce("", (prevTask, task) -> prevTask + "\n           " + task);
+
+            scheduledTasks.append(currTime.format(DateTimeFormatter.ofPattern("\nhh:mm a :")));
+            scheduledTasks.append(taskSchedule);
+        }
+        return scheduledTasks;
     }
 
 }

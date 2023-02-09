@@ -16,7 +16,7 @@ public class HelpCommand extends Command {
      * @param ui UI instance of bot.
      * @param taskList Current task list storing tasks.
      * @param storage Storage file to store current state items of task list.
-     * @return Bot's reply to user's help command.
+     * @return Bot replies user guide.
      */
     @Override
     public String execute(Ui ui, TaskList taskList, Storage storage) {

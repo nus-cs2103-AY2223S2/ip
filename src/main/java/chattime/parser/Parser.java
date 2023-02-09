@@ -1,6 +1,7 @@
 package chattime.parser;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.regex.Pattern;
@@ -34,9 +35,10 @@ public class Parser {
     private static final String UNRECOGNISED_COMMAND = "Sorry... but I don't understand what you said >,<\n\n"
             + "Type `help` if you need me!";
     private static final String CLEAN_COMMAND_ALERT = "@^@ I'm sorry but your message should not contain any \"@\" .";
+    private static final String DEADLINE_FORMAT = "deadline (task) /by (yyyy-mm-dd hh:mm)";
     private static final String EVENT_FORMAT = "event (task) /from (yyyy-mm-dd hh:mm) /to (yyyy-mm-dd hh:mm)";
     private static final String DATETIME_FORMAT = "Please enter both date and time in format yyyy-mm-dd hh:mm"
-            + "or yyyy-mm-dd";
+            + " or yyyy-mm-dd";
 
     private static String userInput;
     private static String[] splitCommand;
@@ -52,36 +54,27 @@ public class Parser {
     public static Command parse(String input) throws ChattimeException {
         parseInput(input);
         checkCleanCommand();
-
         switch (command) {
         case "bye":
             return parseBye();
-
         case "help":
             return parseHelp();
-
         case "list":
             return parseList();
-
         case "listTime":
             return parseTime(false);
-
         case "schedule":
             return parseTime(true);
-
         case "find":
             return parseFind();
-
         case "todo":
         case "deadline":
         case "event":
             return parseAddCommand();
-
         case "mark":
         case "unmark":
         case "delete":
             return parseIndexCommand();
-
         default:
             throw new ChattimeException(UNRECOGNISED_COMMAND);
         }
@@ -93,12 +86,12 @@ public class Parser {
      * @param input Command and description entered by user.
      */
     private static void parseInput(String input) {
-        userInput = input;
+        userInput = input.trim();
         splitCommand = userInput.split(" ", 2);
-        command = splitCommand[0];
+        command = splitCommand[0].trim();
 
         if (splitCommand.length > 1) {
-            description = splitCommand[1];
+            description = splitCommand[1].trim();
         } else {
             description = null;
         }
@@ -240,21 +233,22 @@ public class Parser {
     private static AddCommand parseDeadline() throws ChattimeException {
         String[] splitBy = description.split(" /by ", 2);
 
-        if (splitBy.length < 2 || splitBy[1].equals("")) {
-            throw new ChattimeException(
-                    String.format(MISSED_PARAM, command, "deadline (task) /by (yyyy-mm-dd hh:mm)"));
-        }
+        checkDescriptionFormat(splitBy, DEADLINE_FORMAT);
 
-        String task = splitBy[0];
+        return createAddDeadlineCmd(splitBy);
+    }
+
+    private static AddCommand createAddDeadlineCmd(String[] splitBy) throws ChattimeException {
+        String task = splitBy[0].trim();
         Deadline deadlineTask;
 
         try {
             String[] time = splitBy[1].split(" ", 2);
-            LocalDate byDate = LocalDate.parse(time[0]);
+            LocalDate byDate = LocalDate.parse(time[0].trim());
             if (time.length == 1) {
                 deadlineTask = new Deadline(task, byDate);
             } else {
-                LocalTime byTime = LocalTime.parse(time[1]);
+                LocalTime byTime = LocalTime.parse(time[1].trim());
                 deadlineTask = new Deadline(task, byDate, byTime);
             }
 
@@ -271,42 +265,56 @@ public class Parser {
      * @return EventCommand object.
      * @throws ChattimeException If wrong-formatted input detected, returns error message with instructions to user.
      */
-    @SuppressWarnings("checkstyle:Regexp")
     private static AddCommand parseEvent() throws ChattimeException {
         String[] splitTask = description.split(" /from ", 2);
-        String task = splitTask[0];
+        String task = splitTask[0].trim();
 
-        checkDescriptionFormat(splitTask);
+        checkDescriptionFormat(splitTask, EVENT_FORMAT);
 
         String[] splitFrom = splitTask[1].split(" /to ", 2);
 
-        checkDescriptionFormat(splitFrom);
+        checkDescriptionFormat(splitFrom, EVENT_FORMAT);
 
+        return createAddEventCmd(task, splitFrom);
+    }
+
+    private static AddCommand createAddEventCmd(String task, String[] splitFrom) throws ChattimeException {
         try {
             String[] from = splitFrom[0].split(" ", 2);
             String[] to = splitFrom[1].split(" ", 2);
 
-            LocalDate fromDate = LocalDate.parse(from[0]);
+            LocalDate fromDate = LocalDate.parse(from[0].trim());
             LocalTime fromTime;
             if (from.length == 1) {
                 fromTime = LocalTime.of(0, 0);
             } else {
-                fromTime = LocalTime.parse(from[1]);
+                fromTime = LocalTime.parse(from[1].trim());
             }
 
-            LocalDate toDate = LocalDate.parse(to[0]);
+            LocalDate toDate = LocalDate.parse(to[0].trim());
             LocalTime toTime;
             if (to.length == 1) {
                 toTime = LocalTime.of(23, 59);
             } else {
-                toTime = LocalTime.parse(to[1]);
+                toTime = LocalTime.parse(to[1].trim());
             }
 
+            checkDateValidity(fromDate, fromTime, toDate, toTime);
             Event eventTask = new Event(task, fromDate, fromTime, toDate, toTime);
             return new AddCommand(eventTask);
 
         } catch (DateTimeParseException e) {
             throw new ChattimeException(DATETIME_FORMAT);
+        }
+    }
+
+    private static void checkDateValidity(LocalDate fromDate, LocalTime fromTime, LocalDate toDate, LocalTime toTime)
+            throws ChattimeException {
+        LocalDateTime start = LocalDateTime.of(fromDate, fromTime);
+        LocalDateTime end = LocalDateTime.of(toDate, toTime);
+
+        if (start.isAfter(end)) {
+            throw new ChattimeException("The event can't start after it was ended!");
         }
     }
 
@@ -316,9 +324,9 @@ public class Parser {
      * @param split Processed command.
      * @throws ChattimeException Alert user to input the right command format.
      */
-    private static void checkDescriptionFormat(String[] split) throws ChattimeException {
+    private static void checkDescriptionFormat(String[] split, String format) throws ChattimeException {
         if (split.length < 2 || split[1].equals("")) {
-            throw new ChattimeException(String.format(MISSED_PARAM, command, EVENT_FORMAT));
+            throw new ChattimeException(String.format(MISSED_PARAM, command, format));
         }
     }
 

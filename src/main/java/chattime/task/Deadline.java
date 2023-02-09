@@ -57,15 +57,18 @@ public class Deadline extends Task {
     @Override
     public boolean isDuplicate(Task task) {
         Deadline testTask = (Deadline) task;
-        boolean testTime;
+
+        boolean isSameContent = testTask.getDescription().equals(getDescription());
+        boolean isSameDate = testTask.getByDate().isEqual(byDate);
+        boolean isSameTime;
+
         if (byTime != null && testTask.getByTime() != null) {
-            testTime = testTask.getByTime().equals(byTime);
+            isSameTime = testTask.getByTime().equals(byTime);
         } else {
-            testTime = byTime == null && testTask.getByTime() == null;
+            isSameTime = byTime == null && testTask.getByTime() == null;
         }
-        return testTask.getDescription().equals(getDescription())
-                && testTask.getByDate().isEqual(byDate)
-                && testTime;
+
+        return isSameContent && isSameDate && isSameTime;
     }
 
     /**
@@ -80,8 +83,9 @@ public class Deadline extends Task {
             return true;
         } else {
             LocalDateTime deadline = LocalDateTime.of(byDate, byTime);
-            LocalDateTime test = LocalDateTime.of(date, time);
-            return test.isBefore(deadline);
+            LocalDateTime testTime = LocalDateTime.of(date, time);
+
+            return testTime.isBefore(deadline);
         }
     }
 

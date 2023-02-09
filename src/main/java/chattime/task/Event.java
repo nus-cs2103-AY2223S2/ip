@@ -77,9 +77,12 @@ public class Event extends Task {
     @Override
     public boolean isDuplicate(Task task) {
         Event testTask = (Event) task;
+
         boolean checkFrom = testTask.getFromDate().isEqual(fromDate) && testTask.getFromTime().equals(fromTime);
         boolean checkTo = testTask.getToDate().isEqual(toDate) && testTask.getToTime().equals(toTime);
-        return task.getDescription().equals(getDescription()) && checkFrom && checkTo;
+        boolean isSameContent = task.getDescription().equals(getDescription());
+
+        return isSameContent && checkFrom && checkTo;
     }
 
     /**
@@ -93,8 +96,11 @@ public class Event extends Task {
         LocalDateTime start = LocalDateTime.of(fromDate, fromTime);
         LocalDateTime end = LocalDateTime.of(toDate, toTime);
         LocalDateTime test = LocalDateTime.of(date, time);
+
         boolean isInRange = test.isBefore(end) && test.isAfter(start);
-        return isInRange || test.isEqual(start);
+        boolean isStart = test.isEqual(start);
+
+        return isInRange || isStart;
     }
 
     /**
