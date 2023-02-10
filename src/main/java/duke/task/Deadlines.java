@@ -56,6 +56,12 @@ public class Deadlines extends Task {
      */
     @Override
     public String save() {
+        if (dueDate == null) {
+            return String.format("deadline %s-%s-%s\n",
+                    this.description,
+                    this.isDone,
+                    this.stringDueDate);
+        }
         return String.format("deadline %s-%s-%s\n",
                 this.description,
                 this.isDone,

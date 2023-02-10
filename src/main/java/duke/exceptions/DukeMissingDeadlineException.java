@@ -9,7 +9,6 @@ public class DukeMissingDeadlineException extends DukeException {
      * Constructor for DukeMissingDeadlineException.
      */
     public DukeMissingDeadlineException() {
-        super("\t OOPS!!! The date/time of a deadline cannot be empty.");
-
+        super("OOPS!!! The date/time of a deadline cannot be empty.");
     }
 }

@@ -9,6 +9,6 @@ public class DukeWriteException extends DukeException {
      * Constructor for DukeWriteException.
      */
     public DukeWriteException() {
-        super("\t OOPS!!! Failed to write to save file:\n");
+        super("OOPS!!! Failed to write to save file:\n");
     }
 }

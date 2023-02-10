@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 import duke.exceptions.DukeException;
 import duke.exceptions.DukeUnknownCommandException;
+import duke.storage.Storage;
 import duke.task.TaskType;
 import duke.tasklist.TaskList;
 
@@ -16,13 +17,15 @@ import duke.tasklist.TaskList;
 public class Parser {
     /** Reference to the TaskList it is parsing for */
     private final TaskList tasks;
+    private final Storage storage;
 
     /**
      * Constructor for Parser object.
      * @param tasks The TaskList to be parsed for.
      */
-    public Parser(TaskList tasks) {
+    public Parser(TaskList tasks, Storage storage) {
         this.tasks = tasks;
+        this.storage = storage;
     }
 
     /**
@@ -59,8 +62,10 @@ public class Parser {
             return tasks.add(TaskType.Events, info.strip());
         case "find":
             return tasks.find(info.strip());
-        case "bye":
-            return "\t Bye. Hope to see you again soon!";
+        case "bye": {
+            this.storage.save(this.tasks.getTasks());
+            return "Bye. Hope to see you again soon!";
+        }
         default:
             throw new DukeUnknownCommandException();
         }

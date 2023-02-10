@@ -9,6 +9,6 @@ public class DukeFileCreationException extends DukeException {
      * Constructor for DukeFileCreationException.
      */
     public DukeFileCreationException() {
-        super("\t OOPS!!! Save file cannot be created. Please restart Duke.");
+        super("OOPS!!! Save file cannot be created. Please restart Duke.");
     }
 }

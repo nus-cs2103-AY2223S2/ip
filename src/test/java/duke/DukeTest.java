@@ -19,7 +19,7 @@ public class DukeTest {
 
     @BeforeEach
     public void setUp() {
-        duke = new Duke("data/tasks.txt");
+        duke = new Duke();
     }
 
     @AfterEach
