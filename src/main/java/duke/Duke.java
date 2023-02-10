@@ -1,6 +1,8 @@
 package duke;
 
 import exception.DukeException;
+import expense.Expense;
+import expenselist.ExpenseList;
 import javafx.scene.image.Image;
 import parser.Parser;
 import storage.Storage;
@@ -14,7 +16,9 @@ import ui.Ui;
  */
 public class Duke {
     private Storage storage;
+    private Storage expensesStorage;
     private TaskList tasks;
+    private ExpenseList expenses;
     private Ui ui;
 
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
@@ -30,8 +34,10 @@ public class Duke {
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
+        expensesStorage = new Storage("data/expenses.txt");
         try {
             tasks = new TaskList(storage.load());
+            expenses = new ExpenseList(expensesStorage.expensesLoad());
         } catch (DukeException e) {
             ui.showLoadingError();
         }
@@ -39,7 +45,24 @@ public class Duke {
 
     public String getResponse(String input) {
         // Supposed to change
-        String response = Parser.parseCommands(input, this.tasks, this.ui, this.storage);
+        if (input.startsWith("e ")) {
+            String expenseInput = input.substring(1).trim();
+            String response = Parser.parseExpenseCommands(expenseInput, this.expenses);
+            if (!response.isEmpty()) {
+                return response;
+            }
+            Expense expense;
+            try {
+                expense = Parser.parseExpenseEcho(expenseInput);
+            } catch (DukeException e) {
+                return e.getMessage();
+            }
+            expenses.addExpense(expense);
+            response += Ui.showAddedExpenseMessage(expense);
+            return response;
+        }
+        String response = Parser.parseCommands(input, this.tasks, this.ui, this.storage, this.expenses,
+                this.expensesStorage);
         if (!response.isEmpty()) {
             return response;
         }

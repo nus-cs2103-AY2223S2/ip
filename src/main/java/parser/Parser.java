@@ -4,7 +4,13 @@ import java.util.ArrayList;
 
 import exception.DukeException;
 import exception.InvalidInputException;
+import exception.NoExpenseParameterException;
 import exception.NoTaskDescriptionException;
+import expense.Expense;
+import expense.FoodExpense;
+import expense.MiscExpense;
+import expense.TransportExpense;
+import expenselist.ExpenseList;
 import storage.Storage;
 import task.Deadline;
 import task.Event;
@@ -92,11 +98,13 @@ public class Parser {
      * @param ui Ui Object to call Ui-related methods.
      * @return Boolean if any tasks are recognised and carried out.
      */
-    public static String parseCommands(String echo, TaskList tasks, Ui ui, Storage storage) {
+    public static String parseCommands(String echo, TaskList tasks, Ui ui, Storage storage, ExpenseList expenses,
+                                       Storage expenseStorage) {
         String answer = "";
         if (echo.equals("bye")) {
             answer += ui.showSavingMessage();
             answer += storage.save(tasks.getList());
+            answer += expenseStorage.saveExpense(expenses.getListOfExpenses());
             answer += ui.showSavedMessage();
             answer += ui.showClosingMessage();
         }
@@ -132,9 +140,10 @@ public class Parser {
         if (echo.startsWith("delete") || echo.startsWith("remove")) {
             try {
                 int taskToModify = Integer.parseInt(echo.replaceAll("[^0-9]", ""));
+                Task removed = tasks.get(taskToModify - 1);
                 tasks.removeTask(taskToModify - 1);
                 // Call ui removed
-                answer += Ui.showRemovedMessage(tasks.get(taskToModify - 1));
+                answer += Ui.showRemovedMessage(removed);
                 answer += ui.printListNumber(tasks.getList());
             } catch (Exception e) {
                 // TODO: handle exception
@@ -151,6 +160,60 @@ public class Parser {
             ArrayList<Task> foundList = tasks.findArray(taskToFind);
             answer += "    Here are the matching tasks in your list:\n";
             answer += Ui.printArrayList(foundList);
+        }
+
+        return answer;
+    }
+
+    public static Expense parseExpenseEcho(String echo) {
+        if (echo.startsWith("food")) {
+            String foodArguments = echo.substring(4).trim();
+            if (foodArguments.isEmpty()) {
+                throw(new NoExpenseParameterException("   OOPS!! The parameters of a food expense cannot be empty"));
+            }
+            String[] splitArguments = foodArguments.split("/");
+            double cost = Double.parseDouble(splitArguments[1]);
+            return new FoodExpense(splitArguments[0], cost);
+        } else if (echo.startsWith("transport")) {
+            String transportArguments = echo.substring(9).trim();
+            if (transportArguments.isEmpty()) {
+                throw(new NoExpenseParameterException("    OPPS!! The parameters of a transport "
+                        + "expense cannot be empty"));
+            }
+            String[] splitArguments = transportArguments.split("/");
+            double cost = Double.parseDouble(splitArguments[1]);
+            return new TransportExpense(splitArguments[0], cost);
+
+        } else if (echo.startsWith("misc")) {
+            String miscArguments = echo.substring(4).trim();
+            if (miscArguments.isEmpty()) {
+                throw(new NoExpenseParameterException("    OPPS!! The parameters of a misc expense cannot be empty"));
+            }
+            String[] splitArguments = miscArguments.split("/");
+            double cost = Double.parseDouble(splitArguments[1]);
+            return new MiscExpense(splitArguments[0], cost);
+        } else {
+            throw(new InvalidInputException("      ☹ OOPS!!! I'm sorry, but I don't know what that means :-("));
+        }
+    }
+
+    public static String parseExpenseCommands(String echo, ExpenseList list) {
+        String answer = "";
+        if (echo.equals("list")) {
+            answer += "    OK here's the expenses in your list:\n";
+            answer += Ui.printExpenseArrayList(list.getListOfExpenses());
+        }
+
+        if (echo.startsWith("delete") || echo.startsWith("remove")) {
+            try {
+                int expenseToModify = Integer.parseInt(echo.replaceAll("[^0-9]", ""));
+                Expense removed = list.get(expenseToModify-1);
+                list.removeExpense(expenseToModify - 1);
+                answer += Ui.showRemovedExpenseMessage(removed);
+            } catch (Exception e) {
+                // TODO: handle exception
+                return "";
+            }
         }
 
         return answer;

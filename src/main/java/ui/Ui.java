@@ -1,7 +1,9 @@
 package ui;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+import expense.Expense;
 import task.Task;
 
 /**
@@ -42,9 +44,10 @@ public class Ui {
     }
 
     /**
-     * Outputs AddedMessage to console, given task that was added.
+     * Returns AddedMessage , given task that was added.
      *
      * @param item Task that was added.
+     * @return String to be output as response.
      */
     public static String showAddedMessage(Task item) {
         String answer = "";
@@ -55,6 +58,18 @@ public class Ui {
     }
 
     /**
+     * Returns AddedExpenseMessage, given expense that was added.
+     * @param expense expense that was added.
+     * @return String to be output as response.
+     */
+    public static String showAddedExpenseMessage(Expense expense) {
+        String answer = "";
+        answer += "    Duke says:\n";
+        answer += "    Added\n";
+        answer += "    " + expense.toString() + "\n";
+        return answer;
+    }
+    /**
      * Outputs RemovedMessage to console, given Task that was removed.
      *
      * @param item Task that was removed.
@@ -62,6 +77,18 @@ public class Ui {
     public static String showRemovedMessage(Task item) {
         String answer = "";
         answer += "    Noted. I have removed this task:\n";
+        answer += "    " + item.toString() + "\n";
+        return answer;
+    }
+
+    /**
+     * Outputs RemovedMessage to console, given Expense that was removed.
+     * @param item
+     * @return
+     */
+    public static String showRemovedExpenseMessage(Expense item) {
+        String answer = "";
+        answer += "    Noted. I have removed this expense:\n";
         answer += "    " + item.toString() + "\n";
         return answer;
     }
@@ -130,10 +157,26 @@ public class Ui {
     }
 
     /**
-     * Given an ArrayList, print all tasks in it.
+     * Given an ArrayList, return strings of all tasks in it.
      * @param list ArrayList of which contents to be printed.
+     * @return String of all tasks sequentially.
      */
     public static String printArrayList(ArrayList<Task> list) {
+        assert list != null;
+        String answer = "";
+        for (int i = 0; i < list.size(); i++) {
+            answer += "    " + (i + 1) + ". "
+                    + list.get(i).toString() + "\n";
+        }
+        return answer;
+    }
+
+    /**
+     * Given an ArrayList, return strings of all expenses in it.
+     * @param list
+     * @return String of all tasks sequentially.
+     */
+    public static String printExpenseArrayList(ArrayList<Expense> list) {
         assert list != null;
         String answer = "";
         for (int i = 0; i < list.size(); i++) {
