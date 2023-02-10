@@ -3,7 +3,6 @@ package duke.command;
 import java.io.IOException;
 import java.util.Scanner;
 
-import duke.exception.DukeException;
 import duke.exception.InvalidDeadlineDateException;
 import duke.exception.InvalidEventDateTimeException;
 import duke.exception.InvalidIndexException;

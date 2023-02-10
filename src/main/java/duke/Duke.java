@@ -142,11 +142,11 @@ public class Duke {
                 response = (ui.bye());
                 break;
 
-                case Undo:
+            case Undo:
                 response = ui.undo(listOfAction);
                 break;
 
-                case List:
+            case List:
                 response = (ui.list(listOfAction));
                 break;
 
