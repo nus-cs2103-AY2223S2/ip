@@ -2,8 +2,8 @@ package duke.command;
 
 import java.util.Objects;
 
-import duke.model.TaskList;
 import duke.task.Task;
+import duke.util.container.TaskList;
 
 public class EditCommand extends Command {
 

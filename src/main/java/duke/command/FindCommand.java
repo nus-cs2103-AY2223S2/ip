@@ -2,7 +2,7 @@ package duke.command;
 
 import java.util.Objects;
 
-import duke.model.TaskList;
+import duke.util.container.TaskList;
 
 public class FindCommand extends Command {
 

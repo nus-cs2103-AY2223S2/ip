@@ -1,4 +1,4 @@
-package duke.model;
+package duke.util.container;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -140,9 +140,14 @@ public class TaskList implements Serializable {
      * @return a string showing the descriptions and their counts
      */
     public String listUniqueTaskDescriptionsWithCounts() {
-        return listFromStreamWithIndicies(tasks.stream().collect(Collectors
-                .groupingBy(Task::getDescription, LinkedHashMap::new, Collectors.counting()))
-                .entrySet().stream().map(entry -> {
+        return listFromStreamWithIndicies(tasks.stream()
+                .collect(Collectors.groupingBy(
+                        Task::getDescription,
+                        LinkedHashMap::new,
+                        Collectors.counting()))
+                .entrySet()
+                .stream()
+                .map(entry -> {
                     String description = entry.getKey();
                     long count = entry.getValue();
                     return String.format("%s (appeared %d time%s)", description, count,
@@ -151,9 +156,10 @@ public class TaskList implements Serializable {
     }
 
     public String listSortedDeadlineTasks() {
-        return listFromStreamWithIndicies(
-                tasks.stream().filter(DeadlineTask.class::isInstance).map(DeadlineTask.class::cast)
-                        .sorted(Comparator.comparing(DeadlineTask::getDeadline)));
+        return listFromStreamWithIndicies(tasks.stream()
+                .filter(DeadlineTask.class::isInstance)
+                .map(DeadlineTask.class::cast)
+                .sorted(Comparator.comparing(DeadlineTask::getDeadline)));
     }
 
     @Override

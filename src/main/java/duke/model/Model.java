@@ -2,6 +2,9 @@ package duke.model;
 
 import duke.command.Command;
 import duke.exception.DukeRuntimeException;
+import duke.util.container.ExecutionResult;
+import duke.util.container.TaskList;
+import duke.util.parser.CommandParser;
 
 /**
  * Represents the model that controls the logic of the application.
@@ -31,7 +34,7 @@ public class Model {
      */
     public ExecutionResult execute(String input) {
         try {
-            Command command = Parser.parseCommand(input);
+            Command command = CommandParser.of(input).parse();
             String msg = command.execute(taskList);
             boolean isExit = command.isExit();
             return new ExecutionResult(msg, isExit);

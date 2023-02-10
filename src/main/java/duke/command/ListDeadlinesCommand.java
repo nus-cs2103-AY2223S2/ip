@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.model.TaskList;
+import duke.util.container.TaskList;
 
 public class ListDeadlinesCommand extends Command {
 

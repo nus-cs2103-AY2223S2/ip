@@ -1,4 +1,4 @@
-package duke.model;
+package duke.util.container;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;

@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-import duke.model.ExecutionResult;
 import duke.model.Model;
+import duke.util.container.ExecutionResult;
 
 /**
  * Controller of the cli-based version of the application.
@@ -39,7 +39,8 @@ public class CliController {
      * @param msg the message to be printed to the output
      */
     private static void echo(String msg) {
-        String displayedMsg = Arrays.stream(msg.split("\n")).map(line -> INDENTATION + line)
+        String displayedMsg = Arrays.stream(msg.split("\n"))
+                .map(line -> INDENTATION + line)
                 .collect(Collectors.joining("\n"));
         System.out.println(LINE);
         System.out.println(displayedMsg);

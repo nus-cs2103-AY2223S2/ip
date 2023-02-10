@@ -7,7 +7,6 @@ import java.time.format.DateTimeParseException;
 import java.time.temporal.TemporalAdjusters;
 import java.util.Arrays;
 import java.util.Optional;
-import java.util.OptionalInt;
 
 /**
  * Utilities for the application.
@@ -61,18 +60,18 @@ public class DukeUtils {
     }
 
     /**
-     * Converts an input string to an integer. If the conversion fails, an empty {@code OptionalInt}
-     * is returned.
+     * Converts an input string to an integer. If the conversion fails, an empty {@code Optional} is
+     * returned.
      *
      * @param input the input string
-     * @return an {@code OptionalInt} holding the result of the conversion
+     * @return an {@code Optional} holding the result of the conversion
      */
-    public static OptionalInt parseInt(String input) {
+    public static Optional<Integer> parseInt(String input) {
         assert input != null;
         try {
-            return OptionalInt.of(Integer.parseInt(input));
+            return Optional.of(Integer.parseInt(input));
         } catch (NumberFormatException ex) {
-            return OptionalInt.empty();
+            return Optional.empty();
         }
     }
 

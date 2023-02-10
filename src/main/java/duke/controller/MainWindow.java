@@ -2,8 +2,8 @@ package duke.controller;
 
 import java.io.IOException;
 
-import duke.model.ExecutionResult;
 import duke.model.Model;
+import duke.util.container.ExecutionResult;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

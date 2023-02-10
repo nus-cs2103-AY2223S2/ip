@@ -9,7 +9,7 @@ import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-import duke.model.TaskList;
+import duke.util.container.TaskList;
 
 public class Storage {
 

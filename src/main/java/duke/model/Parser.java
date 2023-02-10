@@ -33,7 +33,7 @@ public class Parser {
         EDIT("edit"), UNKNOWN("");
         // @formatter:on
 
-        private final String keyword;
+        final String keyword;
 
         CommandKeyword(String keyword) {
             this.keyword = keyword;

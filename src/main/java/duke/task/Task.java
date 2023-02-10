@@ -35,6 +35,9 @@ public abstract class Task implements Serializable {
     }
 
     public void setDescription(String description) {
+        if (description.isEmpty()) {
+            throw new DukeIllegalArgumentException("description cannot be empty");
+        }
         this.description = description;
     }
 

@@ -1,4 +1,4 @@
-package duke.model;
+package duke.util.container;
 
 /**
  * Encapsulates result of executing a command.

@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 import duke.DukeUtils;
+import duke.exception.DukeIllegalArgumentException;
 
 public class EventTask extends Task {
 
@@ -14,6 +15,9 @@ public class EventTask extends Task {
 
     public EventTask(String description, LocalDate startTime, LocalDate endTime) {
         super(description);
+        if (startTime.isAfter(endTime)) {
+            throw new DukeIllegalArgumentException("start time cannot be after end time");
+        }
         this.startTime = startTime;
         this.endTime = endTime;
     }

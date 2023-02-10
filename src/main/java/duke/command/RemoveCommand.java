@@ -1,7 +1,7 @@
 package duke.command;
 
-import duke.model.TaskList;
 import duke.task.Task;
+import duke.util.container.TaskList;
 
 public class RemoveCommand extends Command {
 
