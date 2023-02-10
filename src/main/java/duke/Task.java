@@ -27,15 +27,17 @@ public class Task {
     /**
      * Mark this task as done.
      */
-    public void markDone() {
+    public Task markDone() {
         this.isTaskDone = true;
+        return this;
     }
 
     /**
      * Mark this task as not done.
      */
-    public void markUnDone() {
+    public Task markUnDone() {
         this.isTaskDone = false;
+        return this;
     }
 
     /**
@@ -55,5 +57,9 @@ public class Task {
 
     public String getDetails() {
         return this.taskName;
+    }
+
+    public String getTaskDetails() {
+        return this.toString();
     }
 }

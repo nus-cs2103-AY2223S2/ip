@@ -10,8 +10,8 @@ public class Duke {
     /** Scanner object use to receive user inputs */
     private Scanner getInput;
 
-    /** Ui object to handle interactions with user */
-    private Ui ui;
+    /** UiOld object to handle interactions with user */
+    private UiOld uiOld;
 
     /** Storage object to deal with file operations */
     private Storage storage;
@@ -19,14 +19,16 @@ public class Duke {
     /** List to store all task */
     private TaskList taskList;
 
+
+
     Duke(String filePath) {
         this.getInput = new Scanner(System.in);
-        this.ui = new Ui();
+        this.uiOld = new UiOld();
         this.storage = new Storage(filePath);
-        this.taskList = new TaskList(storage.loadFile());
+        taskList = new TaskList(storage.loadFile());
 
-        ui.printIntro();
-        ui.printList(taskList);
+        uiOld.printIntro();
+        uiOld.printList(taskList);
     }
 
     private String askForInput() {
@@ -37,7 +39,7 @@ public class Duke {
     private void run() {
         // Execute inputs
         String userInput;
-        EventType curEvent;
+        DukeKeyword curEvent;
         loop: while (true) {
 
             // Get inputs
@@ -56,7 +58,7 @@ public class Duke {
                 case BYE:
                     break loop;
                 case LIST:
-                    ui.printListWithAttitude(taskList);
+                    uiOld.printListWithAttitude(taskList);
                     break;
                 case MARK:
                     taskList.markEvent(userInput);
@@ -86,14 +88,23 @@ public class Duke {
                     taskList.find(userInput);
             }
         }
-        ui.printOutro();
+        uiOld.printOutro();
     }
 
     public static void main(String[] args) {
         new Duke("data/duke.txt").run();
     }
 
-    public String getResponse(String input) {
-        return "Duke heard: " + input;
+    public String getResponse(String userInput) {
+        return decodeInput(userInput);
+    }
+
+    public String decodeInput(String userInput) {
+        Parser parser = new Parser(this.taskList);
+        try {
+            return parser.decode(userInput).execute();
+        } catch (DukeException e) {
+            return e.toString();
+        }
     }
 }

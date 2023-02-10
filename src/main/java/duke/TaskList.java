@@ -13,7 +13,7 @@ public class TaskList {
     private List<Task> storedInputs;
 
     /** Handles interaction with user */
-    private Ui ui = new Ui();
+    private UiOld uiOld = new UiOld();
 
     /**
      * Creates an instance of TaskList.
@@ -50,11 +50,11 @@ public class TaskList {
         try {
             t = storedInputs.get(num-1);
         } catch (IndexOutOfBoundsException e) {
-            ui.printIndexOutOfBoundMessage();
+            uiOld.printIndexOutOfBoundMessage();
             return;
         }
         t.markDone();
-        ui.printMarkMessage(t);
+        uiOld.printMarkMessage(t);
     }
 
     /**
@@ -70,11 +70,11 @@ public class TaskList {
         try {
             t = storedInputs.get(num-1);
         } catch (IndexOutOfBoundsException e) {
-            ui.printIndexOutOfBoundMessage();
+            uiOld.printIndexOutOfBoundMessage();
             return;
         }
         t.markUnDone();
-        ui.printUnMarkMessage(t);
+        uiOld.printUnMarkMessage(t);
     }
 
     /**
@@ -90,12 +90,12 @@ public class TaskList {
         try {
             t = storedInputs.remove(num-1);
         } catch (IndexOutOfBoundsException e) {
-            ui.printIndexOutOfBoundMessage();
+            uiOld.printIndexOutOfBoundMessage();
             return;
         }
 
-        ui.printDeleteSuccessfulMessage(t);
-        ui.printTotalTask(storedInputs);
+        uiOld.printDeleteSuccessfulMessage(t);
+        uiOld.printTotalTask(storedInputs);
     }
 
     /**
@@ -129,14 +129,14 @@ public class TaskList {
         try {
             userInput = removeKeyword(userInput);
         } catch (DukeException e) {
-            ui.printEmptyDetailsMessage("todo");
+            uiOld.printEmptyDetailsMessage("todo");
             return;
         }
 
         Task newTask = new ToDo(userInput.trim());
         storedInputs.add(newTask);
-        ui.printAddTaskSuccessfulMessage(newTask);
-        ui.printTotalTask(storedInputs);
+        uiOld.printAddTaskSuccessfulMessage(newTask);
+        uiOld.printTotalTask(storedInputs);
     }
 
     /**
@@ -148,7 +148,7 @@ public class TaskList {
         try {
             userInput = removeKeyword(userInput);
         } catch (DukeException e) {
-            ui.printEmptyDetailsMessage("deadline");
+            uiOld.printEmptyDetailsMessage("deadline");
             return;
         }
 
@@ -156,22 +156,22 @@ public class TaskList {
         try {
             String[] info = userInput.split("/by");
             if (info[0].trim().isEmpty()) {
-                ui.printEmptyDetailsMessage("deadline");
+                uiOld.printEmptyDetailsMessage("deadline");
                 return;
             }
             newTask = new Deadline(info[0].trim(), info[1].trim());
             storedInputs.add(newTask);
         } catch (ArrayIndexOutOfBoundsException e) {
-            ui.printDeadlineFormat();
+            uiOld.printDeadlineFormat();
             return;
         }
         catch (DateTimeParseException e) {
-            ui.printDateFormat();
+            uiOld.printDateFormat();
             return;
         }
 
-        ui.printAddTaskSuccessfulMessage(newTask);
-        ui.printTotalTask(storedInputs);
+        uiOld.printAddTaskSuccessfulMessage(newTask);
+        uiOld.printTotalTask(storedInputs);
     }
 
     /**
@@ -182,7 +182,7 @@ public class TaskList {
         try {
             userInput = removeKeyword(userInput);
         } catch (DukeException e) {
-            ui.printEmptyDetailsMessage("event");
+            uiOld.printEmptyDetailsMessage("event");
             return;
         }
 
@@ -191,21 +191,21 @@ public class TaskList {
             String[] infoA = userInput.split("/from");
             String[] infoB = infoA[1].split("/to");
             if (infoA[0].trim().isEmpty()) {
-                ui.printEmptyDetailsMessage("event");
+                uiOld.printEmptyDetailsMessage("event");
                 return;
             }
             newTask = new Event(infoA[0].trim(), infoB[0].trim(), infoB[1].trim());
             storedInputs.add(newTask);
         } catch (ArrayIndexOutOfBoundsException e) {
-            ui.printEventFormat();
+            uiOld.printEventFormat();
             return;
         } catch (DateTimeParseException e) {
-            ui.printDateFormat();
+            uiOld.printDateFormat();
             return;
         }
 
-        ui.printAddTaskSuccessfulMessage(newTask);
-        ui.printTotalTask(storedInputs);
+        uiOld.printAddTaskSuccessfulMessage(newTask);
+        uiOld.printTotalTask(storedInputs);
     }
 
     /**
@@ -220,7 +220,7 @@ public class TaskList {
         try {
             givenPhrase = removeKeyword(givenPhrase);
         } catch (DukeException e) {
-            ui.printEmptyDetailsMessage("event");
+            uiOld.printEmptyDetailsMessage("event");
             return;
         }
 
@@ -235,7 +235,96 @@ public class TaskList {
             }
         }
 
-        ui.printFoundTasks(s.toString());
+        uiOld.printFoundTasks(s.toString());
 
+    }
+
+    public String markTask(String index) throws DukeException {
+        try {
+            //TODO: ignore index 0 of storedInputs
+            return storedInputs.get(Integer.parseInt(index)).markDone().getTaskDetails();
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException(e.toString());
+        }
+    }
+
+    public String unMarkTask(String index) throws DukeException {
+        try {
+            //TODO: ignore index 0 of storedInputs
+            return storedInputs.get(Integer.parseInt(index)).markUnDone().getTaskDetails();
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException(e.toString());
+        }
+    }
+
+    public String deleteTask(String index) throws DukeException {
+        try {
+            return storedInputs.remove(Integer.parseInt(index)).getTaskDetails();
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException(e.toString());
+        }
+    }
+
+    public String addToDoTask(String taskDetails) throws DukeException {
+        if (taskDetails.isBlank()) {
+            throw new DukeException(Ui.emptyDetailsForToDoMessage);
+        }
+
+        Task newTask = new ToDo(taskDetails.trim());
+        storedInputs.add(newTask);
+        return newTask.getTaskDetails();
+    }
+
+    public String addDeadlineTask(String taskDetails) throws DukeException {
+        try {
+            String[] s = taskDetails.split("/by");
+            String taskInfo = s[0].trim();
+            String taskDateLine = s[1].trim();
+
+            Task newTask = new Deadline(taskInfo, taskDateLine);
+            storedInputs.add(newTask);
+            return newTask.getTaskDetails();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException(Ui.emptyDetailsForDeadlineMessage);
+        }
+    }
+
+    public String addEventTask(String taskDetails) throws DukeException {
+
+        if (taskDetails.isBlank()) {
+            throw new DukeException(Ui.emptyDetailsForEventMessage);
+        }
+
+        try {
+            String[] s = taskDetails.split("/from");
+            String[] ss = s[1].split("/to");
+
+            String taskInfo = s[0].trim();
+            String taskStartDate = ss[0].trim();
+            String taskEndDate = ss[1].trim();
+
+            Task newTask = new Event(taskInfo, taskStartDate, taskEndDate);
+            storedInputs.add(newTask);
+            return newTask.getTaskDetails();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException(Ui.eventTaskFormat);
+        } catch (DateTimeParseException e) {
+            throw new DukeException(Ui.supportedDateFormat);
+        }
+    }
+
+    public String findTaskWith(String phrase) {
+
+        int taskIndex = 1;
+        StringBuilder s = new StringBuilder("  ");
+
+        for (Task currentTask : this.storedInputs) {
+            if (currentTask.getDetails().contains(phrase)) {
+                s.append(taskIndex).append(".").append(currentTask).append("\n  ");
+                taskIndex += 1;
+            }
+        }
+
+        return s.toString();
     }
 }
