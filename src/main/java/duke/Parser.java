@@ -22,7 +22,8 @@ public class Parser {
 		ERR
 	}
 
-	public static boolean isReceivedCommand(Tasklist tasklist, String msg, Scanner echoScanner, boolean loop) {
+	public static String isReceivedCommand(Tasklist tasklist, String msg) {
+		String returnedString = "OOPS!!! I'm sorry, but I don't know what that means :-(";
 		String firstWord = "";
 		if (msg.contains(" ")) {
 			firstWord = msg.substring(0, msg.indexOf(" "));
@@ -49,7 +50,7 @@ public class Parser {
 				firstWord = msg.substring(0, msg.indexOf(" "));
 				secondInt = Integer
 						.parseInt(msg.substring(msg.indexOf(" ") + 1, msg.length()));
-				tasklist.mark(secondInt);
+				returnedString = tasklist.mark(secondInt);
 				try {
 					Storage.save(tasklist);
 				} catch (Exception ex) {
@@ -64,7 +65,7 @@ public class Parser {
 				firstWord = msg.substring(0, msg.indexOf(" "));
 				secondInt = Integer
 						.parseInt(msg.substring(msg.indexOf(" ") + 1, msg.length()));
-				tasklist.unmark(secondInt);
+				returnedString = tasklist.unmark(secondInt);
 				try {
 					Storage.save(tasklist);
 				} catch (Exception ex) {
@@ -77,7 +78,7 @@ public class Parser {
 		case DELETE:
 			try {
 				secondInt = Integer.parseInt(msg.substring(msg.indexOf(" ") + 1, msg.length()));
-				tasklist.delete(secondInt);
+				returnedString = tasklist.delete(secondInt);
 				try {
 					Storage.save(tasklist);
 				} catch (Exception ex) {
@@ -89,6 +90,7 @@ public class Parser {
 			break;
 
 		case FIND:
+			// Todo: fix the list to string implementation
 			try {
 				String searchWord = msg.substring(msg.indexOf(" ") + 1, msg.length());
 				Predicate<Task> byMatch = task -> task.description.contains(searchWord);
@@ -96,12 +98,16 @@ public class Parser {
 						.filter(byMatch).collect(Collectors.toList());
 				if (filteredList.isEmpty()) {
 					System.out.println("There were no matching occurences of this task!");
+					returnedString = "There were no matching occurences of this task!";
 				} else {
 					System.out.println("Here are some matching tasks in your list!");
 					for (int i = 0; i < filteredList.size(); i++) {
 						System.out.println(i + 1 + ". " + filteredList.get(i));
 					}
+					returnedString = "Here are some matching tasks in your list!\n"
+							+ filteredList;
 				}
+
 			} catch (Exception ex) {
 				System.err.println("There were no matching occurences of this task!");
 			}
@@ -111,7 +117,7 @@ public class Parser {
 			try {
 				firstWord = msg.substring(msg.indexOf(" ") + 1, msg.length());
 				Task.Todo newTodo = new Task.Todo(firstWord);
-				tasklist.add(newTodo);
+				returnedString = tasklist.add(newTodo);
 				System.out.println("Got it. I've added this task:");
 				System.out.println(newTodo);
 				System.out.println("Now you have " + tasklist.size() + " tasks in the list.");
@@ -136,7 +142,7 @@ public class Parser {
 				LocalDate d1 = LocalDate.parse(byDate);
 				LocalTime t1 = LocalTime.parse(byTime);
 				Task.Deadline newDeadline = new Task.Deadline(firstWord, d1, t1);
-				tasklist.add(newDeadline);
+				returnedString = tasklist.add(newDeadline);
 				System.out.println("Got it. I've added this task:");
 				System.out.println(newDeadline);
 				System.out.println("Now you have " + tasklist.size() + " tasks in the list.");
@@ -156,7 +162,7 @@ public class Parser {
 				fromWhen = msg.substring(msg.indexOf("/from") + 6, msg.indexOf("/to") - 1);
 				toWhen = msg.substring(msg.indexOf("/to") + 4, msg.length());
 				Task.Event newEvent = new Task.Event(firstWord, fromWhen, toWhen);
-				tasklist.add(newEvent);
+				returnedString = tasklist.add(newEvent);
 				System.out.println("Got it. I've added this task:");
 				System.out.println(newEvent);
 				System.out.println("Now you have " + tasklist.size() + " tasks in the list.");
@@ -171,13 +177,15 @@ public class Parser {
 			break;
 		case BYE:
 			Ui.showGoodbyeMessage();
-			echoScanner.close();
-			loop = false;
+			returnedString = "Bye. Hope to see you again soon!";
+//			echoScanner.close();
+//			loop = false;
 			break;
 		case LIST:
 			tasklist.printList();
+			returnedString = tasklist.listOfThings.toString();
 			break;
 		}
-		return loop;
+		return returnedString;
 	}
 }

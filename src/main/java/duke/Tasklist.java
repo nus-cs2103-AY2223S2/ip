@@ -15,8 +15,11 @@ public class Tasklist {
 	 *
 	 * @param task Task to be added to the Tasklist
 	 */
-	public void add(Task task) {
+	public String add(Task task) {
 		listOfThings.add(task);
+		return "Got it. I've added this task:\n"
+				+ task + "\n"
+				+ "Now you have " + listOfThings.size() + " tasks in the list.";
 	}
 
 	/**
@@ -24,12 +27,13 @@ public class Tasklist {
 	 *
 	 * @param i The i-th task to be marked
 	 */
-	public void mark(int i) {
+	public String mark(int i) {
 		Task thisTask = listOfThings.get(i - 1);
 		thisTask.setDone();
 		listOfThings.set(i - 1, thisTask);
 		Ui.showToUser("Nice! I've marked this task as done:");
 		Ui.showToUser(thisTask.toString());
+		return "Nice, I've marked this task as done: " + thisTask.toString();
 	}
 
 	/**
@@ -37,12 +41,13 @@ public class Tasklist {
 	 *
 	 * @param i The i-th task to be marked
 	 */
-	public void unmark(int i) {
+	public String unmark(int i) {
 		Task thisTask = listOfThings.get(i - 1);
 		thisTask.setUndone();
 		listOfThings.set(i - 1, thisTask);
 		Ui.showToUser("Nice! I've marked this task as undone:");
 		Ui.showToUser(thisTask.toString());
+		return "Nice, I've marked this task as undone: " + thisTask.toString();
 	}
 
 	/**
@@ -50,11 +55,15 @@ public class Tasklist {
 	 *
 	 * @param i The i-th task to be deleted
 	 */
-	public void delete(int i) {
+	public String delete(int i) {
+
 		System.out.println("Noted. I've removed this task!");
-		System.out.println(listOfThings.get(i - 1));
+		Task removedTask = listOfThings.get(i - 1);
 		listOfThings.remove(i - 1);
 		System.out.println("Now you have " + listOfThings.size() + " tasks in the list.");
+		return "Noted. I've removed this task!\n"
+				+ removedTask + "\n"
+				+ "Now you have " + listOfThings.size() + " tasks in the list.";
 	}
 
 	public int size() {

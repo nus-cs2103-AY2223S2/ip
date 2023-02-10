@@ -1,42 +1,31 @@
 package duke;
 
-import java.util.Scanner;
-import java.io.File;
 import java.io.IOException;
 
-import static duke.Storage.SAVE_LOCATION;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 /**
- * The Duke program implements a 'to-do' list
- * where users can add, mark and delete tasks
+ * A GUI for Duke using FXML.
  */
+public class Main extends Application {
 
-public class Main {
+    private Duke duke = new Duke();
 
-	public static void main(String[] args) {
-
-		Ui.showWelcomeMessage();
-
-		Tasklist tasklist = new Tasklist();
-		try {
-			File saveFile = new File(SAVE_LOCATION);
-			if (saveFile.createNewFile()) {
-				System.out.println("Save file created: " + saveFile.getName());
-			} else {
-				tasklist = Storage.load();
-			}
-		} catch (IOException e) {
-			System.out.println("An error occurred.");
-			e.printStackTrace();
-		}
-
-
-		boolean loop = true;
-		while (loop) {
-			Scanner echoScanner = new Scanner(System.in);
-			String msg = echoScanner.nextLine();
-
-			loop = Parser.isReceivedCommand(tasklist, msg, echoScanner, loop);
-		}
-	}
+    @Override
+    public void start(Stage stage) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+            AnchorPane ap = fxmlLoader.load();
+            Scene scene = new Scene(ap);
+            stage.setScene(scene);
+            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
