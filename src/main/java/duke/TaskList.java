@@ -125,17 +125,15 @@ public class TaskList {
      * @throws IndexOutOfBoundsException
      */
     public String deleteTask(int index) throws IndexOutOfBoundsException {
-        String message = "";
         try {
             Task task = tasks.get(index - 1);
             tasks.remove(index - 1);
-            message = "Noted. I've removed this task:\n" + task.toString() + "\nNow you have "
+            return "Noted. I've removed this task:\n" + task.toString() + "\nNow you have "
                     + tasks.size() + " tasks in the list.";
 
         } catch (IndexOutOfBoundsException e) {
-            message = "There is no such task in the list!";
+            return "There is no such task in the list!";
         }
-        return message;
     }
 
     /**
@@ -176,7 +174,6 @@ public class TaskList {
             data += task.toStorageData();
             data += "\n";
         }
-
         return data.trim();
     }
 
@@ -197,7 +194,6 @@ public class TaskList {
             taskToText += "\n";
         }
         return taskToText.trim();
-
     }
 
 }
