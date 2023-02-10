@@ -12,6 +12,7 @@ import twofive.exception.TaskUndoneException;
 public abstract class Task {
     private String taskDescription;
     private boolean isDone;
+    private String tag;
 
     /**
      * Represents a constructor for the Task class.
@@ -21,6 +22,19 @@ public abstract class Task {
     public Task(String taskDescription) {
         this.taskDescription = taskDescription;
         this.isDone = false;
+        this.tag = "";
+    }
+
+    /**
+     * Represents a constructor for the Task class.
+     *
+     * @param taskDescription Description of the task.
+     * @param tag Tag of the task.
+     */
+    public Task(String taskDescription, String tag) {
+        this.taskDescription = taskDescription;
+        this.isDone = false;
+        this.tag = tag;
     }
 
     /**
@@ -40,11 +54,10 @@ public abstract class Task {
      */
     public void setDone() throws TaskDoneException {
         // Only mark as done if task is not done
-        if (!this.isDone) {
-            this.isDone = true;
-        } else {
+        if (this.isDone) {
             throw new TaskDoneException();
         }
+        this.isDone = true;
     }
 
     /**
@@ -54,11 +67,10 @@ public abstract class Task {
      */
     public void setUndone() throws TaskUndoneException {
         //Only remark as not done if task is done
-        if (this.isDone) {
-            this.isDone = false;
-        } else {
+        if (!this.isDone) {
             throw new TaskUndoneException();
         }
+        this.isDone = false;
     }
 
     @Override
@@ -74,7 +86,7 @@ public abstract class Task {
      */
     public String getFileWriteString() {
         String isDoneString = this.isDone ? "1" : "0";
-        return " | " + isDoneString + " | " + this.taskDescription;
+        return " | " + isDoneString + " | " + this.taskDescription + " | " + this.tag;
     }
 
     /**
@@ -118,5 +130,30 @@ public abstract class Task {
         return taskDescription;
     }
 
+    public String getTag() {
+        return tag;
+    }
+
     public abstract ArrayList<String> getTaskDetails();
+
+    /**
+     * Adds a given tag to the current task.
+     *
+     * @params tag String representing the tag to be added.
+     */
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
+    /**
+     * Returns whether the current task has the specified tag.
+     *
+     * @param tag Tag
+     * @return Boolean indicating whether the task has the tag added.
+     */
+    public boolean hasTag(String tag) {
+        return this.tag
+                .toLowerCase()
+                .contains(tag.toLowerCase());
+    }
 }

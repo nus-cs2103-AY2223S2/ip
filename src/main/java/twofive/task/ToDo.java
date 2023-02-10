@@ -11,6 +11,10 @@ public class ToDo extends Task {
         super(taskDescription);
     }
 
+    public ToDo(String taskDescription, String tag) {
+        super(taskDescription, tag);
+    }
+
     @Override
     public String toString() {
         return "[T]" + super.toString();
@@ -43,6 +47,7 @@ public class ToDo extends Task {
         taskDetails.add("ToDo");
         taskDetails.add(super.getTaskStatus());
         taskDetails.add(super.getTaskDescription());
+        taskDetails.add(super.getTag());
         return taskDetails;
     }
 }

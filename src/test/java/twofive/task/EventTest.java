@@ -25,7 +25,7 @@ public class EventTest {
         LocalDateTime startTime = LocalDateTime.parse("2023-08-06 14:00", formatter);
         LocalDateTime endTime = LocalDateTime.parse("2023-08-06 16:00", formatter);
         Event event = new Event("return book", startTime, endTime);
-        assertEquals("E | 0 | return book | 2023-08-06 14:00 | 2023-08-06 16:00", event.getFileWriteString());
+        assertEquals("E | 0 | return book |  | 2023-08-06 14:00 | 2023-08-06 16:00", event.getFileWriteString());
     }
 
     @Test

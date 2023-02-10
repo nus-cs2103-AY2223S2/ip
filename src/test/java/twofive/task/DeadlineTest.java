@@ -22,7 +22,7 @@ public class DeadlineTest {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         LocalDateTime deadline = LocalDateTime.parse("2023-06-06 06:06", formatter);
         Deadline deadlineTask = new Deadline("return book", deadline);
-        assertEquals("D | 0 | return book | 2023-06-06 06:06", deadlineTask.getFileWriteString());
+        assertEquals("D | 0 | return book |  | 2023-06-06 06:06", deadlineTask.getFileWriteString());
     }
 
     @Test

@@ -91,28 +91,43 @@ public class FileParser {
             throws InvalidTaskTypeException, EmptyDeadlineException, EmptyStartTimeException, EmptyEndTimeException {
         switch (taskType) {
         case "T":
-            return new ToDo(taskDescription);
+            if (taskSplit.length == 4) {
+                String tag = taskSplit[3].trim();
+                return new ToDo(taskDescription, tag);
+            } else {
+                return new ToDo(taskDescription);
+            }
         case "D":
-            if (taskSplit.length < 4) {
+            if (taskSplit.length < 5) {
                 // Missing deadline for Deadline task
                 throw new EmptyDeadlineException();
             }
-            String deadlineString = taskSplit[3].trim();
+            String deadlineString = taskSplit[4].trim();
             LocalDateTime deadline = LocalDateTime.parse(deadlineString, FORMATTER);
-            return new Deadline(taskDescription, deadline);
+            String tag = taskSplit[3].trim();
+            if (!tag.isEmpty()) {
+                return new Deadline(taskDescription, deadline, tag);
+            } else {
+                return new Deadline(taskDescription, deadline);
+            }
         case "E":
-            if (taskSplit.length == 3) {
+            if (taskSplit.length == 4) {
                 // Missing start time for Event task
                 throw new EmptyStartTimeException();
-            } else if (taskSplit.length == 4) {
+            } else if (taskSplit.length == 5) {
                 // Missing end time for Event task
                 throw new EmptyEndTimeException();
             }
-            String startTimeString = taskSplit[3].trim();
-            String endTimeString = taskSplit[4].trim();
+            String startTimeString = taskSplit[4].trim();
+            String endTimeString = taskSplit[5].trim();
             LocalDateTime startTime = LocalDateTime.parse(startTimeString, FORMATTER);
             LocalDateTime endTime = LocalDateTime.parse(endTimeString, FORMATTER);
-            return new Event(taskDescription, startTime, endTime);
+            tag = taskSplit[3].trim();
+            if (!tag.isEmpty()) {
+                return new Event(taskDescription, startTime, endTime, tag);
+            } else {
+                return new Event(taskDescription, startTime, endTime);
+            }
         default:
             throw new InvalidTaskTypeException();
         }

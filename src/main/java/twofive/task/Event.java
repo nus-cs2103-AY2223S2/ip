@@ -25,6 +25,20 @@ public class Event extends Task {
         this.endTime = endTime;
     }
 
+    /**
+     * Represents a constructor for the Event class.
+     *
+     * @param taskDescription Description of the Event task.
+     * @param startTime Start time of the Event task.
+     * @param endTime End time of the Event task.
+     * @param tag Tag of the Event task.
+     */
+    public Event(String taskDescription, LocalDateTime startTime, LocalDateTime endTime, String tag) {
+        super(taskDescription, tag);
+        this.startTime = startTime;
+        this.endTime = endTime;
+    }
+
     @Override
     public String toString() {
         String eventString = " (from: " + this.startTime.format(DateTimeFormatter.ofPattern("EEE MMM d yyyy hh:mma"))
@@ -69,6 +83,7 @@ public class Event extends Task {
         taskDetails.add("Event");
         taskDetails.add(super.getTaskStatus());
         taskDetails.add(super.getTaskDescription());
+        taskDetails.add(super.getTag());
         taskDetails.add(this.startTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd " + "HH:mm")));
         taskDetails.add(this.endTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
         return taskDetails;

@@ -22,6 +22,18 @@ public class Deadline extends Task {
         this.deadline = deadline;
     }
 
+    /**
+     * Represents a constructor for the Deadline class.
+     *
+     * @param taskDescription Description of the Deadline task.
+     * @param deadline Deadline of the Deadline task.
+     * @param tag Tag of the Deadline task.
+     */
+    public Deadline(String taskDescription, LocalDateTime deadline, String tag) {
+        super(taskDescription, tag);
+        this.deadline = deadline;
+    }
+
     @Override
     public String toString() {
         String deadlineString =
@@ -65,6 +77,7 @@ public class Deadline extends Task {
         taskDetails.add("Deadline");
         taskDetails.add(super.getTaskStatus());
         taskDetails.add(super.getTaskDescription());
+        taskDetails.add(super.getTag());
         taskDetails.add(this.deadline.format(DateTimeFormatter.ofPattern("yyyy-MM-dd " + "HH:mm")));
         return taskDetails;
     }

@@ -9,6 +9,8 @@ import twofive.command.EventCommand;
 import twofive.command.FindCommand;
 import twofive.command.ListCommand;
 import twofive.command.MarkCommand;
+import twofive.command.TagAddCommand;
+import twofive.command.TagListCommand;
 import twofive.command.ToDoCommand;
 import twofive.command.UnmarkCommand;
 import twofive.exception.EmptyDateException;
@@ -17,6 +19,7 @@ import twofive.exception.EmptyDescriptionException;
 import twofive.exception.EmptyEndTimeException;
 import twofive.exception.EmptyKeywordException;
 import twofive.exception.EmptyStartTimeException;
+import twofive.exception.EmptyTagException;
 import twofive.exception.EmptyTasknumException;
 import twofive.exception.InvalidCommandException;
 import twofive.exception.MissingArgumentException;
@@ -78,7 +81,7 @@ public class Parser {
     public static Command parse(String command)
             throws EmptyTasknumException, EmptyDescriptionException,
             MissingArgumentException, EmptyStartTimeException, EmptyEndTimeException, EmptyDeadlineException,
-            EmptyDateException, InvalidCommandException, EmptyKeywordException {
+            EmptyDateException, InvalidCommandException, EmptyKeywordException, EmptyTagException {
         String commandWord = command.split(" ")[0].trim();
 
         switch (commandWord) {
@@ -100,6 +103,10 @@ public class Parser {
             return parseDueDateCommand(command, commandWord);
         case "find":
             return parseFindCommand(command, commandWord);
+        case "addtag":
+            return parseTagAddCommand(command, commandWord);
+        case "listtag":
+            return parseTagListCommand(command, commandWord);
         case "bye":
             return new ByeCommand();
         default:
@@ -168,5 +175,31 @@ public class Parser {
         }
         String keyword = keywordSplit[1].trim();
         return new FindCommand(keyword);
+    }
+
+    private static TagAddCommand parseTagAddCommand(String command, String commandWord)
+            throws EmptyTagException, EmptyTasknumException, MissingArgumentException {
+        int taskNum = validateTaskNum(command);
+        if (!command.contains(("/tag"))) {
+            // If /tag argument not used
+            throw new MissingArgumentException("/tag");
+        }
+        String[] tagSplit = command.split("/tag");
+        if (tagSplit.length <= 1) {
+            // if no keyword provided
+            throw new EmptyTagException();
+        }
+        String tag = tagSplit[1].trim();
+        return new TagAddCommand(taskNum, tag);
+    }
+
+    private static TagListCommand parseTagListCommand(String command, String commandWord) throws EmptyTagException {
+        String[] tagSplit = command.split(commandWord);
+        if (tagSplit.length <= 1 || tagSplit[1].trim().equals("")) {
+            // if no tag provided
+            throw new EmptyTagException();
+        }
+        String tag = tagSplit[1].trim();
+        return new TagListCommand(tag);
     }
 }
