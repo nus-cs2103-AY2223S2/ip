@@ -9,4 +9,12 @@ public class TaskList extends ArrayList<Task> {
     public TaskList() {
         super();
     }
+
+    public String toStorageData() {
+        String data = "";
+        for (Task task : this) {
+            data += task.getFileDescription() + "\n";
+        }
+        return data;
+    }
 }

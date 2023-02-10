@@ -1,8 +1,9 @@
 package duke;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class Duke {
-    private final Storage STORAGE;
+    private Storage storage;
     private final Ui UI;
     private TaskList tasks;
 
@@ -15,9 +16,9 @@ public class Duke {
      */
     public Duke(String filePath) throws DukeException {
         UI = new Ui();
-        STORAGE = new Storage(filePath);
+        storage = new Storage(filePath);
         try {
-            tasks = new TaskList(STORAGE.load());
+            tasks = new TaskList(storage.load());
         } catch (DukeException e) {
             UI.showError();
             tasks = new TaskList();
@@ -29,7 +30,7 @@ public class Duke {
     /**
      * starts up the Duke chatbot.
      */
-    public void run(){
+    public void run() throws DukeException, IOException {
         UI.showWelcome();
         String cmd = UI.readCommand();
         boolean isTerminated = false;
@@ -43,12 +44,14 @@ public class Duke {
                 }
             } else {
                 isTerminated = true;
+                storage = new Storage("data/duke.txt");
+                storage.write("data/duke.txt", tasks);
                 UI.showBye();
             }
         }
     }
 
-    public static void main(String[] args) throws DukeException {
+    public static void main(String[] args) throws DukeException, IOException {
         new Duke("data/duke.txt").run();
     }
 }
