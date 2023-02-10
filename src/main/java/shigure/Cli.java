@@ -58,7 +58,7 @@ public class Cli extends Ui {
 
     @Override
     public void printUser(String s) {
-        //Do nothing
+        // Do nothing
     }
 
     @Override
@@ -75,7 +75,7 @@ public class Cli extends Ui {
 
     @Override
     public void refreshTasks(String[] tasks) {
-        //Do nothing
+        // Do nothing
     }
 
     @Override
@@ -89,20 +89,20 @@ public class Cli extends Ui {
                     + "Hello " + username + " !! Konmiki! ＼(￣▽￣)/");
         } else {
             printMiki("in honour / fuzuki miki / 2020 | 2021\n"
-                    + "01 f3 80 / 27 28"
-                    + "Hello " + username + " !! Konmiki! \\\\(^v^)/");
+                    + "01 f3 80 / 27 28\n"
+                    + "Hello " + username + " !! Konmiki! \\(^v^)/");
         }
         printAutoDiv();
     }
 
     @Override
     public void clearInput() {
-        //Do nothing
+        // Do nothing
     }
 
     @Override
     public void close() {
-
+        // Do nothing
     }
 
 }

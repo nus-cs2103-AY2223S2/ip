@@ -46,13 +46,13 @@ public class DialogBox extends HBox {
     }
 
     private void flip() {
-        ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
-        Collections.reverse(tmp);
-        getChildren().setAll(tmp);
+        ObservableList<Node> items = FXCollections.observableArrayList(getChildren());
+        Collections.reverse(items);
+        getChildren().setAll(items);
         setAlignment(Pos.CENTER_LEFT);
     }
 
-    enum Pov {
+    public enum Pov {
         MIKI,
         USER
     }

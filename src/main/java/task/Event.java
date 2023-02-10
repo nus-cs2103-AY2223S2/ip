@@ -48,6 +48,7 @@ public class Event extends Task {
         if (Collections.frequency(Arrays.asList(args), "/to") > 1) {
             throw new TaskParseException("This event has too many end-times!");
         }
+
         for (int i = 0; i < args.length; i++) {
             if (args[i].equals("/from")) {
                 isInTokenFrom = true;
@@ -76,6 +77,7 @@ public class Event extends Task {
         if (to.isEmpty()) {
             throw new TaskParseException("This event is missing its end-time! Use /to [date]");
         }
+
         LocalDateTime fromDate;
         LocalDateTime toDate;
         try {
@@ -88,6 +90,7 @@ public class Event extends Task {
         } catch (DateTimeParseException ex) {
             throw new TaskParseException(to + " needs to be formatted as " + DATE_IN_FMT_STR + "!");
         }
+
         return new Event(objective, fromDate, toDate);
     }
 
