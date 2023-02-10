@@ -34,7 +34,7 @@
                         <Insets bottom="5.0" right="5.0" />
                      </FlowPane.margin>
                   </Label>
-                  <Label fx:id="taskInfo1" alignment="TOP_LEFT" maxHeight="Infinity" style="-fx-background-radius: 10; -fx-background-color: FFA500;" textAlignment="CENTER" visible="false">
+                  <Label fx:id="taskTag" alignment="TOP_LEFT" maxHeight="Infinity" minWidth="0.0" prefWidth="0.0" style="-fx-background-radius: 10; -fx-background-color: #89CFF0;" textAlignment="CENTER" visible="false">
                      <padding>
                         <Insets bottom="4.0" left="7.5" right="7.5" top="4.0" />
                      </padding>
@@ -42,7 +42,15 @@
                         <Insets bottom="5.0" right="5.0" />
                      </FlowPane.margin>
                   </Label>
-                  <Label fx:id="taskInfo2" alignment="TOP_LEFT" maxHeight="Infinity" style="-fx-background-radius: 10; -fx-background-color: #AB784E;" visible="false">
+                  <Label fx:id="taskInfo1" alignment="TOP_LEFT" maxHeight="Infinity" minWidth="0.0" prefWidth="0.0" style="-fx-background-radius: 10; -fx-background-color: #FFA500;" textAlignment="CENTER" visible="false">
+                     <padding>
+                        <Insets bottom="4.0" left="7.5" right="7.5" top="4.0" />
+                     </padding>
+                     <FlowPane.margin>
+                        <Insets bottom="5.0" right="5.0" />
+                     </FlowPane.margin>
+                  </Label>
+                  <Label fx:id="taskInfo2" alignment="TOP_LEFT" maxHeight="Infinity" minWidth="0.0" prefWidth="0.0" style="-fx-background-radius: 10; -fx-background-color: #AB784E;" textAlignment="CENTER" visible="false">
                      <padding>
                         <Insets bottom="4.0" left="7.5" right="7.5" top="4.0" />
                      </padding>

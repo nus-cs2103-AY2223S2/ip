@@ -18,7 +18,7 @@ public class TodoTest {
     @Test
     public void toDoFileStringTest() {
         ToDo toDo = new ToDo("return book");
-        assertEquals("T | 0 | return book", toDo.getFileWriteString());
+        assertEquals("T | 0 | return book | ", toDo.getFileWriteString());
     }
 
     @Test

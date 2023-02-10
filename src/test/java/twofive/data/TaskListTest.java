@@ -39,7 +39,7 @@ public class TaskListTest {
         Deadline deadlineTask = new Deadline("return book", deadline);
         tasks.addTask(deadlineTask);
 
-        String sampleSaveTasksString = "T | 0 | read book\nD | 0 | return book | 2023-06-06 06:06\n";
+        String sampleSaveTasksString = "T | 0 | read book | \nD | 0 | return book |  | 2023-06-06 06:06\n";
         assertEquals(sampleSaveTasksString, tasks.getSaveTasksString());
     }
 }

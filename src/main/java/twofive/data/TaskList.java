@@ -120,4 +120,32 @@ public class TaskList {
     public ArrayList<Task> getTasks() {
         return tasks;
     }
+
+    /**
+     * Adds a provided tag to the task given its number in the list.
+     *
+     * @param taskNum Number of task in the list.
+     * @param tag String representing tag to be added to the task.
+     * @throws TaskUndoneException If task has not been done.
+     */
+    public Task addTagToTask(int taskNum, String tag) {
+        Task currentTask = tasks.get(taskNum);
+        currentTask.setTag(tag);
+        return currentTask;
+    }
+
+    /**
+     * Returns an ArrayList containing all tasks which have the specified tag,
+     * including their type, whether it is done and the description.
+     * Contains the deadline for Deadline tasks.
+     * Contains the start time and end time for Event tasks.
+     *
+     * @param tag Tag added to tasks.
+     * @return ArrayList containing all added tasks with the tag.
+     */
+    public ArrayList<Task> getTasksByTag(String tag) {
+        return tasks.stream()
+                .filter(task -> task.hasTag(tag))
+                .collect(Collectors.toCollection(ArrayList::new));
+    }
 }

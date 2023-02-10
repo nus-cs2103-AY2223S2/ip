@@ -26,6 +26,8 @@ public class TaskBox extends HBox {
     private Label taskInfo1;
     @FXML
     private Label taskInfo2;
+    @FXML
+    private Label taskTag;
 
     private TaskBox(String ... taskDetails) {
         try {
@@ -37,7 +39,7 @@ public class TaskBox extends HBox {
             e.printStackTrace();
         }
 
-        assert taskDetails.length == 3 : "The task detail array should contain 3 Strings";
+        assert taskDetails.length >= 4 : "The task detail array should contain at least 4 Strings";
 
         String taskNumberString = taskDetails[0];
         String taskTypeString = taskDetails[1];
@@ -48,20 +50,40 @@ public class TaskBox extends HBox {
         taskType.setText(taskTypeString);
         taskStatus.setText(taskStatusString);
         taskDescription.setText(taskDetails[3]);
+        setTagLabel(taskDetails);
 
         if (taskTypeString.equals("Deadline")) {
-            taskInfo1.setText("Deadline: " + taskDetails[4]);
-            taskInfo1.setVisible(true);
+            setDeadlineLabel(taskDetails);
         } else if (taskTypeString.equals("Event")) {
-            taskInfo1.setText("From: " + taskDetails[4]);
-            taskInfo2.setText("To: " + taskDetails[5]);
-            taskInfo1.setVisible(true);
-            taskInfo2.setVisible(true);
+            setEventLabel(taskDetails);
         }
 
         setTaskLabelColor(isCompleted);
-
         setTaskBoxColor(Integer.parseInt(taskNumberString));
+    }
+
+    private void setTagLabel(String[] taskDetails) {
+        String taskTagString = taskDetails[4];
+        if (!taskTagString.trim().isEmpty()) {
+            taskTag.setText(taskTagString);
+            taskTag.setPrefWidth(USE_COMPUTED_SIZE);
+            taskTag.setVisible(true);
+        }
+    }
+
+    private void setDeadlineLabel(String[] taskDetails) {
+        taskInfo1.setText("Deadline: " + taskDetails[5]);
+        taskInfo1.setPrefWidth(USE_COMPUTED_SIZE);
+        taskInfo1.setVisible(true);
+    }
+
+    private void setEventLabel(String[] taskDetails) {
+        taskInfo1.setText("From: " + taskDetails[5]);
+        taskInfo2.setText("To: " + taskDetails[6]);
+        taskInfo1.setPrefWidth(USE_COMPUTED_SIZE);
+        taskInfo2.setPrefWidth(USE_COMPUTED_SIZE);
+        taskInfo1.setVisible(true);
+        taskInfo2.setVisible(true);
     }
 
     /**
