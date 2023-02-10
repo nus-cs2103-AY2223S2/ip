@@ -197,7 +197,7 @@ public class Ui {
      */
     public StringBuilder listTasks(TaskList tasks) throws DukeException {
         StringBuilder sb = new StringBuilder();
-        sb.append("Here are the tasks in your list:");
+        sb.append("Here are the tasks in your list:\n");
         for (int i = 0; i < tasks.getSize(); i++) {
             sb.append(i + 1);
             sb.append(new StringBuilder(". "));

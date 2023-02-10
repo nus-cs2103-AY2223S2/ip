@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import duke.ui.MainWindow;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -155,7 +156,7 @@ public class Duke extends Application {
                     response.append(ui.findAndListTasks(tasks, parser));
                     break;
                 default:
-                    throw new DukeException("I'm sorry, but I don't know what that means :-(");
+                    response.append("I'm sorry, but I don't know what that means.");
                 }
             }
         } catch (DukeException e) {
@@ -178,6 +179,11 @@ public class Duke extends Application {
                 DialogBox.getUserDialog(userText, user),
                 DialogBox.getDukeDialog(dukeText, duke)
         );
+
+        // code to exit on "bye". Not functioning unless within getResponse.
+        if (userText.equals("bye")) {
+            Platform.exit();
+        }
         userInput.clear();
     }
 
@@ -217,11 +223,11 @@ public class Duke extends Application {
         scrollPane.setFitToWidth(true);
 
         // You will need to import `javafx.scene.layout.Region` for this.
-        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
-
-        userInput.setPrefWidth(325.0);
-
-        sendButton.setPrefWidth(55.0);
+//        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+//
+//        userInput.setPrefWidth(325.0);
+//
+//        sendButton.setPrefWidth(55.0);
 
         AnchorPane.setTopAnchor(scrollPane, 1.0);
 
