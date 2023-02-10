@@ -1,6 +1,6 @@
 # User Guide
 
-The Colette chatbot is a chatbot designed to help you manage all the tasks that you need to complete! Ever felt like you couldn't get a handle on *all* the things that you have to do? Not to worry, for Colette is here to help you! (And talk to you about dogs.)
+Ever felt like you couldn't get a handle on *all* the things that you have to do? Not to worry, for Colette is here to help you! (And talk to you about dogs.)
 
 * [Get Started](#get-started)
 * [Features](#features)
@@ -11,7 +11,7 @@ The Colette chatbot is a chatbot designed to help you manage all the tasks that 
 
 ## Get Started
 1. Ensure you have `java 11` installed on your computer.
-2. Download the latest `colette.jar` file from [here](https://github.com).
+2. Download the latest `colette.jar` file from [here](https://github.com/zrei/ip/releases/tag/A-Release).
 3. Copy the jar file to the folder you want to use as the home folder for the application, e.g. `Desktop`. 
 4. Open a command line window, e.g. Terminal for MacOS or Command Prompt for Windows.
 5. `cd` into the folder you placed the jar file in, e.g. `cd ~/Desktop`.
