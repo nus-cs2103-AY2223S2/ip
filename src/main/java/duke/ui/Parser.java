@@ -34,17 +34,18 @@ public class Parser {
     public static Command parse(String input) throws DukeException {
 
         try {
-            if (input.equals("bye")) {
+
+            /** Split string into 2 parts, 1st part is the operation, 2nd part is the description */
+            String[] command = input.split(" ", 2);
+            Operation op = Operation.valueOf(command[0].trim().toUpperCase()); // Throws exception if invalid operation.
+
+            if (op.equals(Operation.BYE)) {
                 return new CommandExit();
             }
 
-            if (input.equals("list")) {
+            if (op.equals(Operation.LIST)) {
                 return new CommandList();
             }
-
-            /* Split string into 2 parts, 1st part is the operation, 2nd part is the description */
-            String[] command = input.split(" ", 2);
-            Operation op = Operation.valueOf(command[0].toUpperCase()); // Throws exception if not a valid operation.
 
             /* The operation is valid but no description was given. */
             if (command.length < 2) {
@@ -66,7 +67,8 @@ public class Parser {
             case FIND:
                 return findTaskParser(description);
             default:
-                throw new DukeException("Cannot reach here"); // cannot reach here, as Operation.valueOf throws IllegalArgumentException
+                // cannot reach here, as Operation.valueOf already throws IllegalArgumentException
+                throw new DukeException("Cannot reach here");
             }
         } catch (NumberFormatException e) {
             throw new DukeException("Task must be referenced by its index.");
