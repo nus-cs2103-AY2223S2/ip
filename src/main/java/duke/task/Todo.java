@@ -13,7 +13,6 @@ public class Todo extends Task {
      */
     public Todo(String description) {
         super(description);
-        assert !description.isEmpty();
     }
     /**
      * Constructs the Todo task with the given description and completion status.
