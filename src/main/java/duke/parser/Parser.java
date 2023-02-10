@@ -5,6 +5,7 @@ import duke.command.Command.Commands;
 import duke.command.DeadlineCommand;
 import duke.command.DeleteCommand;
 import duke.command.DoesNotExistCommand;
+import duke.command.EditDescriptionCommand;
 import duke.command.EventCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
@@ -43,6 +44,8 @@ public abstract class Parser {
             return new EventCommand(input);
         case DELETE:
             return new DeleteCommand(input);
+        case EDIT:
+            return new EditDescriptionCommand(input);
         case EXIT:
             return new ExitCommand();
         default:
