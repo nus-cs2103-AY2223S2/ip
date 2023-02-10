@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import exception.DukeException;
+import expense.Expense;
 import parser.Parser;
 import task.Task;
 
@@ -26,8 +27,6 @@ public class Storage {
         this.filepath = filePath;
 
         // Checks if the file exists, else creates it
-        File createFolder = new File(filePath);
-        createFolder.mkdirs();
 
         try {
             File mySaveFile = new File(filePath);
@@ -74,6 +73,34 @@ public class Storage {
     }
 
     /**
+     * Returns an Arraylist which corresponds to the list of tasks saved in object filepath.
+     *
+     * @return ArrayList object which is a list of Expense saved from previous session.
+     * @throws DukeException If unable to read/parse the file in object filepath.
+     */
+    public ArrayList<Expense> expensesLoad() throws DukeException {
+        ArrayList<Expense> listToStore = new ArrayList<Expense>();
+
+        try {
+            File mySaveFile = new File(this.filepath);
+            Scanner s = new Scanner(mySaveFile);
+            while (s.hasNext()) {
+
+                Expense expense;
+                String nextLine = s.nextLine();
+                expense = Parser.parseExpenseEcho(nextLine);
+                listToStore.add(expense);
+            }
+            s.close();
+        } catch (DukeException e) {
+            throw e;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return listToStore;
+    }
+
+    /**
      * Stores the current Arraylist in current session to hard drive.
      *
      * @param listToStore ArrayList of Tasks to be stored in object filepath.
@@ -89,6 +116,22 @@ public class Storage {
         while (!listToStore.isEmpty()) {
             try {
                 FileWriter fw = new FileWriter("data/duke.txt", true);
+                fw.write(listToStore.get(0).getCommand());
+                listToStore.remove(0);
+                fw.write(System.lineSeparator());
+                fw.close();
+            } catch (Exception e) {
+                // TODO: handle exception
+                return "    An Error has occurred\n";
+            }
+        }
+        return "";
+    }
+
+    public String saveExpense(ArrayList<Expense> listToStore) {
+        while (!listToStore.isEmpty()) {
+            try {
+                FileWriter fw = new FileWriter("data/expenses.txt", true);
                 fw.write(listToStore.get(0).getCommand());
                 listToStore.remove(0);
                 fw.write(System.lineSeparator());
