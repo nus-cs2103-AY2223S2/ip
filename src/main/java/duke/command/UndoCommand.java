@@ -21,6 +21,6 @@ public class UndoCommand extends Command{
         } catch (FileNotFoundException | IncorrectFileFormatException e) {
             errorMsg = "Unable to undo.\n" + ui.showError(e);
         }
-        return fullReplyMsg(errorMsg, undoMsg);
+        return ui.showFullReplyMsg(errorMsg, undoMsg);
     }
 }

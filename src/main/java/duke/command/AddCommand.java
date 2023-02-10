@@ -51,7 +51,7 @@ public class AddCommand extends Command{
             l.add(new Event(desc, isDone, eventFrom, eventTo));
         } //CODE QUALITY
 
-        return fullReplyMsg(errorMsg, ui.showAdded(l));
+        return ui.showFullReplyMsg(errorMsg, ui.showAdded(l));
     }
 
 }

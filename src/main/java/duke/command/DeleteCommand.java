@@ -19,7 +19,7 @@ public class DeleteCommand extends Command {
 
         Task t = l.remove(index);
 
-        return fullReplyMsg(errorMsg, ui.showDelete(t, l));
+        return ui.showFullReplyMsg(errorMsg, ui.showDelete(t, l));
     }
 
 }

@@ -12,7 +12,7 @@ public class ExitCommand extends Command {
     public String execute(TaskList l, Ui ui, Storage s, Command prevCommand, Duke duke) {
         String errorMsg = saveToFile(s, l, ui, prevCommand);
 
-        return fullReplyMsg(errorMsg, ui.showExit());
+        return ui.showFullReplyMsg(errorMsg, ui.showExit());
     }
 
     @Override

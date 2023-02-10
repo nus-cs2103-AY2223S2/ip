@@ -88,4 +88,12 @@ public class Ui {
                 "OK, I've marked this task as not done yet:\n" + t;
     }
 
+    public String showFullReplyMsg(String exceptionMsg, String msg) {
+        if (exceptionMsg.equals("")) {
+            return msg;
+        } else {
+            return exceptionMsg + "\n" + msg;
+        }
+    }
+
 }
