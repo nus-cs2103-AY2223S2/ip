@@ -5,31 +5,31 @@ import util.DukeException;
 import util.DukeUI;
 
 /**
- * Executes delete task command.
+ * Executes mark task as completed in list command.
  */
-public class DeleteCommand extends Command {
+public class MarkCommand extends Command {
     private final int index;
 
     /**
      * Extracts and initialises list index from String input.
      * @param input
      */
-    public DeleteCommand(String input) {
+    public MarkCommand(String input) {
         this.index = super.extractIndex(input) - 1;
     }
 
     /**
-     * Executes deletion of task at index given by user.
+     * Marks task at index given by user as completed.
      * @param taskManager
-     * @return Successful task deletion message.
+     * @return Success message that task has been completed
      * @throws DukeException
      */
     @Override
     public String executeCommand(TaskManager taskManager) throws DukeException {
         try {
             assert taskManager != null;
-            taskManager.deleteTask(this.index);
-            return DukeUI.deleteTaskMessage(taskManager.getTaskArraySize());
+            taskManager.markTask(this.index);
+            return DukeUI.markTaskMessage() + taskManager.printTask(this.index);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException(DukeUI.indexErrorMessage());
         }

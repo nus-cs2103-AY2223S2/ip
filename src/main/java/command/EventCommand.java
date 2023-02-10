@@ -2,23 +2,21 @@ package command;
 
 import task.Event;
 import task.TaskManager;
-
 import util.DukeException;
+import util.DukeUI;
 
 /**
  * Executes add event task command.
  */
 public class EventCommand extends Command {
-    //private final TaskManager taskManager;
     private final String description;
-    public EventCommand(String description) {
-        //this.taskManager = taskManager;
-        this.description = description;
-    }
 
-    @Override
-    public boolean isExit() {
-        return false;
+    /**
+     * Executes command to add an event task to the list.
+     * @param description
+     */
+    public EventCommand(String description) {
+        this.description = description;
     }
 
     /**
@@ -26,8 +24,8 @@ public class EventCommand extends Command {
      * <p>
      * String input is parsed to extract start and end
      * dates and timings of the event.
-     *
-     * @return
+     * @param taskManager
+     * @return Successful add event message
      * @throws DukeException
      */
     @Override
@@ -40,11 +38,9 @@ public class EventCommand extends Command {
             Event event = new Event(arr[0], false, start, end);
             assert taskManager != null;
             taskManager.addTaskToList(event);
-            String str = String.format("I have added: %s !", event);
-            String str2 = "There are currently " + taskManager.getTaskArraySize() + " task(s) in the list!";
-            return str + System.lineSeparator() + str2;
+            return DukeUI.eventTaskMessage(event, taskManager.getTaskArraySize());
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("Please add a description, date and time e.g. party /from 12/2/23 1800 /to 12/2/23 2200");
+            throw new DukeException(DukeUI.eventFormatErrorMessage());
         }
     }
 }

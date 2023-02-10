@@ -1,35 +1,24 @@
 package command;
 
 import task.TaskManager;
-
 import util.DukeException;
 
 /**
  * Executes display task list command.
  */
 public class ListCommand extends Command {
-    //private final TaskManager taskManager;
 
-    public ListCommand() {
-
-        //this.taskManager = taskManager;
-    }
-
-    @Override
-    public boolean isExit() {
-        return false;
-    }
+    public ListCommand() {}
 
     /**
      * Displays the task list when prompted by user.
-     *
-     * @return
+     * @param taskManager
+     * @return String of tasks in list
      * @throws DukeException
      */
     @Override
     public String executeCommand(TaskManager taskManager) throws DukeException {
         assert taskManager != null;
-        taskManager.displayList();
-        return "";
+        return taskManager.displayList();
     }
 }

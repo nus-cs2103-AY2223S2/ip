@@ -1,15 +1,18 @@
 package util;
 
-import task.*;
-
 import java.io.File;
-import java.io.FileWriter;
-import java.io.Serializable;
-import java.io.IOException;
 import java.io.FileNotFoundException;
-
-import java.util.Scanner;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Scanner;
+
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.TaskManager;
+import task.ToDo;
 
 /**
  * Contains method for data related operations i.e.
@@ -26,13 +29,12 @@ public class FileManager implements Serializable {
      *
      * @param taskManager
      */
-    public void saveTasksToFile(TaskManager taskManager) {
+    public void saveTasksToFile(TaskManager taskManager) throws DukeException {
         try {
             assert !FILEPATH.isEmpty();
             File file = new File(FILEPATH);
             if (!file.isFile() && !file.isDirectory()) {
-                System.out.println("File or folder not found!");
-                System.out.println("Please create the file or folder.");
+                throw new DukeException("File or folder not found! Please create the file or folder.");
             }
             FileWriter fw = new FileWriter(file);
             ArrayList<Task> taskArr = taskManager.getTaskArr();
@@ -43,7 +45,7 @@ public class FileManager implements Serializable {
             }
             fw.close();
         } catch (IOException e) {
-            System.out.println("IO Error Occurred");
+            throw new DukeException("IO Error Occurred in File Manager");
         }
     }
 
@@ -53,7 +55,7 @@ public class FileManager implements Serializable {
      *
      * @param taskManager
      * @return a 0 to indicate successful load
-     * and -1 to indicate unsuccessful load.
+     *      and -1 to indicate unsuccessful load.
      */
     public int loadDataToArrayList(TaskManager taskManager) {
         assert !FILEPATH.isEmpty();

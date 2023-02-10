@@ -2,30 +2,27 @@ package command;
 
 import task.TaskManager;
 import task.ToDo;
-
 import util.DukeException;
+import util.DukeUI;
 
 /**
  * Executes add todo task command.
  */
 public class TodoCommand extends Command {
-    //private final TaskManager taskManager;
     private final String description;
 
+    /**
+     * Executes command to add a todo task to the list.
+     * @param description
+     */
     public TodoCommand(String description) {
-        //this.taskManager = taskManager;
         this.description = description;
-    }
-
-    @Override
-    public boolean isExit() {
-        return false;
     }
 
     /**
      * Adds a todo type task to the list.
-     *
-     * @return
+     * @param taskManager
+     * @return Successful add todo message
      * @throws DukeException
      */
     @Override
@@ -33,8 +30,6 @@ public class TodoCommand extends Command {
         ToDo todo = new ToDo(this.description, false);
         assert taskManager != null;
         taskManager.addTaskToList(todo);
-        String str = String.format("I have added: %s !", todo);
-        String str2 = "There are currently " + taskManager.getTaskArraySize() + " task(s) in the list!";
-        return str + System.lineSeparator() + str2;
+        return DukeUI.todoTaskMessage(todo, taskManager.getTaskArraySize());
     }
 }

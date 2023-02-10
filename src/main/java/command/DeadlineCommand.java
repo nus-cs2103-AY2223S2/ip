@@ -2,23 +2,21 @@ package command;
 
 import task.Deadline;
 import task.TaskManager;
-
 import util.DukeException;
+import util.DukeUI;
 
 /**
  * Executes add deadline task command.
  */
 public class DeadlineCommand extends Command {
-    //private final TaskManager taskManager;
     private final String description;
-    public DeadlineCommand(String description) {
-        //this.taskManager = taskManager;
-        this.description = description;
-    }
 
-    @Override
-    public boolean isExit() {
-        return false;
+    /**
+     * Executes command to add a deadline task to the list.
+     * @param description
+     */
+    public DeadlineCommand(String description) {
+        this.description = description;
     }
 
     /**
@@ -26,8 +24,8 @@ public class DeadlineCommand extends Command {
      * <p>
      * String input is parsed to extract date and
      * time the task is due by.
-     *
-     * @return
+     * @param taskManager
+     * @return Successful add deadline message
      * @throws DukeException
      */
     @Override
@@ -37,11 +35,9 @@ public class DeadlineCommand extends Command {
             Deadline deadline = new Deadline(tmp[0], false, tmp[1]);
             assert taskManager != null;
             taskManager.addTaskToList(deadline);
-            String str = String.format("I have added: %s !", deadline);
-            String str2 = "There are currently " + taskManager.getTaskArraySize() + " task(s) in the list!";
-            return str + System.lineSeparator() + str2;
+            return DukeUI.deadlineTaskMessage(deadline, taskManager.getTaskArraySize());
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("Please add a description, date and time e.g. homework /by 12/12/12 2359");
+            throw new DukeException(DukeUI.deadlineFormatErrorMessage());
         }
     }
 }

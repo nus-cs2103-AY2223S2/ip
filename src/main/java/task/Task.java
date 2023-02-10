@@ -1,10 +1,10 @@
 package task;
 
-import util.DukeException;
-
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import util.DukeException;
 
 /**
  * Represents a task that the user wishes to add to
@@ -15,6 +15,11 @@ public class Task {
     private String description;
     private boolean isDone;
 
+    /**
+     * Initialises a task.
+     * @param description
+     * @param status
+     */
     public Task(String description, boolean status) {
         this.description = description;
         this.isDone = status;
@@ -37,7 +42,7 @@ public class Task {
         isDone = true;
     }
 
-    public void markAsUndone(){
+    public void markAsUndone() {
         isDone = false;
     }
 

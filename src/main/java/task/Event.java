@@ -13,6 +13,14 @@ public class Event extends Task {
     private String endFormatted;
     private String end;
 
+    /**
+     * Initialise an event task.
+     * @param description
+     * @param status
+     * @param start
+     * @param end
+     * @throws DukeException
+     */
     public Event(String description, boolean status, String start, String end) throws DukeException {
         super(description, status);
         this.start = start;
@@ -23,11 +31,24 @@ public class Event extends Task {
         this.endFormatted = super.dateFormatter(end);
     }
 
+    /**
+     * {@inheritDoc}
+     * @return Encoded task
+     */
+    @Override
     public String serialise() {
         return String.format("Event,%s,%s,%s,%s", super.getStatus(),
                 super.getDescription(), this.start, this.end);
     }
 
+    /**
+     * Decodes a String representation of a task in the file
+     * back into the Task object.
+     *
+     * @param data
+     * @return Decoded Task object
+     * @throws DukeException
+     */
     public static Task deserialise(String data) throws DukeException {
         String[] arr = data.split(",");
         assert arr.length != 0;
