@@ -7,7 +7,6 @@ import duke.constant.DialogType;
 import duke.constant.Message;
 import duke.database.DukeRepo;
 import duke.task.Task;
-import duke.ui.Ui;
 
 /**
  * DeleteCommand
@@ -23,32 +22,6 @@ public class DeleteCommand extends Command {
      */
     public DeleteCommand(int... taskIds) {
         this.taskIds = taskIds;
-    }
-
-    /**
-     * Delete task from database and print the output.
-     *
-     * {@inheritDoc}
-     */
-    @Override
-    public void execute(DukeRepo db, Ui ui) {
-        try {
-            List<Task> deleted = db.removeTask(taskIds);
-
-            if (deleted.size() > 0) {
-                ui.printConsole(Message.DELETE_TASK + "\n");
-                for (Task task : deleted) {
-                    ui.printConsole("\t" + task + "\n");
-                }
-            }
-
-            if (deleted.size() != taskIds.length) {
-                ui.printConsole(String.format(Message.PARTIAL_DELETE + "\n\n", taskIds.length - deleted.size()));
-            }
-            ui.printConsole(String.format(Message.COUNT_TASK, db.count()) + "\n");
-        } catch (IndexOutOfBoundsException e) {
-            ui.printConsole(Message.EXCEPTION_INVALID_TASK_ID_ACCESS);
-        }
     }
 
     /**

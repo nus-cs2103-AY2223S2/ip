@@ -13,7 +13,6 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
-import duke.ui.Ui;
 
 /**
  * AddCommand
@@ -64,18 +63,6 @@ public class AddCommand extends Command {
         this.isDone = isDone;
         this.startDate = startDate;
         this.endDate = endDate;
-    }
-
-    /**
-     * Add task to database and print the output.
-     *
-     * {@inheritDoc}
-     */
-    @Override
-    public void execute(DukeRepo db, Ui ui) throws InvalidTaskTypeException {
-        ui.printConsole(Message.ADD_TASK);
-        ui.printConsole(db.addTask(getTask()));
-        ui.printConsole(String.format(Message.COUNT_TASK, db.count()));
     }
 
     /**

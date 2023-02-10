@@ -12,7 +12,6 @@ import duke.database.DukeRepo;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
-import duke.ui.Ui;
 
 /**
  * ListCommand
@@ -50,51 +49,6 @@ public class ListCommand extends Command {
     public ListCommand(Optional<LocalDateTime> filterDate, Optional<String> filterString) {
         this.filterDate = filterDate;
         this.filterString = filterString;
-    }
-
-    /**
-     * List all task from database and print the list.
-     *
-     * {@inheritDoc}
-     */
-    @Override
-    public void execute(DukeRepo db, Ui ui) {
-
-        List<Task> filtered;
-        if (filterDate.isEmpty() && filterString.isEmpty()) {
-            filtered = db.getAllTask();
-        } else {
-
-            filtered = db.getAllTask().stream().filter(task -> {
-                return filterDate.map(date -> {
-                    if (task instanceof Deadline) {
-                        Deadline d = (Deadline) task;
-                        return d.getBy().toLocalDate().equals(date.toLocalDate());
-                    }
-                    if (task instanceof Event) {
-                        Event e = (Event) task;
-                        return e.getFrom().toLocalDate().equals(date.toLocalDate());
-                    }
-                    return false;
-                }).orElse(true);
-            }).filter(task -> filterString.map(keyword -> task.toString().contains(keyword)).orElse(true))
-                    .collect(Collectors.toList());
-        }
-
-        if (filtered.size() > 0) {
-            if (!filterDate.isEmpty() || !filterString.isEmpty()) {
-                ui.printConsole(Message.FIND_TASKS);
-            } else {
-                ui.printConsole(Message.LIST_TASKS);
-            }
-
-            for (int i = 0; i < filtered.size(); i++) {
-                ui.printConsole(String.format("%d. %s", i + 1, filtered.get(i)));
-            }
-        } else {
-            ui.printConsole(Message.LIST_EMPTY);
-        }
-
     }
 
     /**

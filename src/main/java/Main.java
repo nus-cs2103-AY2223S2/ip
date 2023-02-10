@@ -1,5 +1,6 @@
 import duke.Duke;
 import duke.constant.Message;
+import duke.ui.MainWindow;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;

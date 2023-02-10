@@ -6,7 +6,6 @@ import duke.constant.Message;
 import duke.database.DukeRepo;
 import duke.exception.DukeException;
 import duke.task.Task;
-import duke.ui.Ui;
 
 /**
  * MarkCommand
@@ -28,29 +27,8 @@ public class MarkCommand extends Command {
     }
 
     /**
-     * Mark or unmark task from database and print the output.
-     *
      * {@inheritDoc}
      */
-    @Override
-    public void execute(DukeRepo db, Ui ui) {
-        try {
-            Task tk = db.getTask(taskId);
-
-            if (markDone) {
-                tk.markAsDone();
-                ui.printConsole(Message.MARK_TASK);
-            } else {
-                tk.unmarkDone();
-                ui.printConsole(Message.UNMARK_TASK);
-            }
-
-            ui.printConsole("\t" + tk);
-        } catch (IndexOutOfBoundsException e) {
-            ui.printConsole(Message.EXCEPTION_INVALID_TASK_ID_ACCESS);
-        }
-    }
-
     @Override
     public void execute(DukeRepo db, BiConsumer<DialogType, String> con) throws DukeException {
         StringBuilder sb = new StringBuilder();

@@ -1,10 +1,10 @@
+package duke.ui;
 import java.io.IOException;
 import java.util.Stack;
 import java.util.function.Consumer;
 
 import duke.Duke;
 import duke.constant.Message;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -14,6 +14,7 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -58,11 +59,6 @@ public class MainWindow extends AnchorPane {
 
         duke = d;
         keyLog = new Stack<>();
-    }
-
-    @FXML
-    public void initialize() {
-        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
     /**
