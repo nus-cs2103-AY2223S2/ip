@@ -105,7 +105,7 @@ public class DateUtils {
         boolean isStartIntersecting = Math.abs(s1.until(s2, ChronoUnit.MINUTES)) <= threshold;
         boolean isEndIntersecting = Math.abs(e1.until(e2, ChronoUnit.MINUTES)) <= threshold;
         boolean isStartEndIntersecting = isStartIntersecting || isEndIntersecting;
-        return !(s1.isAfter(e2) || e1.isBefore(s2)) || isStartEndIntersecting;
+        return !(s1.isEqual(e2) || e1.isEqual(s2) || s1.isAfter(e2) || e1.isBefore(s2)) || isStartEndIntersecting;
     }
 
 
@@ -116,7 +116,7 @@ public class DateUtils {
      * @param time - a time.
      * @return the time that is the start of the week of the given time.
      */
-    public static LocalDateTime getStartOfWeek(LocalDateTime time) {
+    public static LocalDateTime toStartOfWeek(LocalDateTime time) {
         return toStartOfWeek(time, DEFAULT_START_OF_WEEK);
     }
 
