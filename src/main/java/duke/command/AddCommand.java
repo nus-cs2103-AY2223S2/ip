@@ -13,6 +13,7 @@ public class AddCommand extends Command {
 
     @Override
     public String execute(TaskList list, Ui ui) {
+        assert task != null : "task must not null";
         list.add(task);
         return ui.printAddMessage(list.getLast(), list);
     }

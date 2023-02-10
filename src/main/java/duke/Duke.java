@@ -81,6 +81,7 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     String getResponse(String input) {
+
         Command cmd = logic.parse(input);
         assert cmd != null : "command must not be null";
         return cmd.execute(list, ui);
