@@ -42,8 +42,8 @@ public class Gui extends Application {
             stage.setResizable(false);
             fxmlLoader.<MainWindow>getController().setBook(book);
             stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException exception) {
+            exception.printStackTrace();
         }
     }
 }
