@@ -9,6 +9,6 @@ public class DukeTaskNumberOutOfRangeException extends DukeException {
      * Constructor for DukeTaskNumberOutOfRangeException.
      */
     public DukeTaskNumberOutOfRangeException() {
-        super("\t OOPS!!! Task number out of range.");
+        super("OOPS!!! Task number out of range.");
     }
 }

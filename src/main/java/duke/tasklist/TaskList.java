@@ -62,7 +62,7 @@ public class TaskList {
      */
     public String add(TaskType type, String s) throws DukeMissingDescriptionException,
             DukeMissingDeadlineException, DukeMissingEventDateException, DukeUnknownCommandException {
-        String output = "\t Got it. I've added this task:\n";
+        String output = "Got it. I've added this task:\n";
 
         switch (type) { // Interprets input string differently depending on the input type.
         case ToDos:
@@ -75,7 +75,7 @@ public class TaskList {
             tasks.add(todo);
 
             // Add object into the output String.
-            output += "\t   " + todo;
+            output += "  " + todo;
             break;
         case Deadlines: {
             if (s.isBlank()) { // Checks if s is empty.
@@ -111,7 +111,7 @@ public class TaskList {
                 dueDate = new Deadlines(desc, false, by);
             } finally {
                 tasks.add(dueDate);
-                output += "\t   " + dueDate;
+                output += "  " + dueDate;
             }
             break;
         }
@@ -157,14 +157,14 @@ public class TaskList {
                 event = new Events(desc, false, startTime, endTime);
             } finally {
                 tasks.add(event);
-                output += "\t   " + event;
+                output += "  " + event;
             }
             break;
         }
         default:
             throw new DukeUnknownCommandException();
         }
-        return String.format("%s\n\t Now you have %d tasks in the list.", output, tasks.size());
+        return String.format("%s\nNow you have %d tasks in the list.", output, tasks.size());
     }
 
     /**
@@ -214,7 +214,7 @@ public class TaskList {
             throw new DukeTaskNumberOutOfRangeException();
         }
         Task removed = tasks.remove(num - 1);
-        return String.format("%s\t   %s\n\t Now you have %d tasks in the list.", output, removed, tasks.size());
+        return String.format("%s   %s\n Now you have %d tasks in the list.", output, removed, tasks.size());
     }
 
     /**
@@ -223,10 +223,10 @@ public class TaskList {
      */
     public String list() {
         StringBuilder output = new StringBuilder();
-        output.append("\t Here are the tasks in your list:\n");
+        output.append("Here are the tasks in your list:\n");
         int index = 1;
         for (Task task : tasks) {
-            output.append(String.format("\t %d.%s\n", index, task));
+            output.append(String.format("%d.%s\n", index, task));
             index++;
         }
 
@@ -239,14 +239,14 @@ public class TaskList {
      * @return Message to user informing about the tasks that match.
      */
     public String find(String s) {
-        StringBuilder output = new StringBuilder("\t Here are the matching tasks in your list.\n");
+        StringBuilder output = new StringBuilder("Here are the matching tasks in your list.\n");
         if (s.isBlank()) {
             return output.substring(0, output.length() - 1);
         }
         int index = 1;
         for (Task task : tasks) {
             if (task.contain(s)) {
-                output.append(String.format("\t %d.%s\n", index, task));
+                output.append(String.format("%d.%s\n", index, task));
             }
             index++;
         }

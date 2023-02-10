@@ -9,6 +9,6 @@ public class DukeReadException extends DukeException {
      * Constructor for DukeReadException.
      */
     public DukeReadException() {
-        super("\t OOPS!!! Failed to read from save file.");
+        super("OOPS!!! Failed to read from save file.");
     }
 }

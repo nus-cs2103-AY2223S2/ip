@@ -66,6 +66,13 @@ public class Events extends Task {
      */
     @Override
     public String save() {
+        if (startTime == null || endTime == null) {
+            return String.format("event %s-%s-%s-%s\n",
+                    this.description,
+                    this.isDone,
+                    this.stringStartTime,
+                    this.stringEndTime);
+        }
         return String.format("event %s-%s-%s-%s\n",
                 this.description,
                 this.isDone,

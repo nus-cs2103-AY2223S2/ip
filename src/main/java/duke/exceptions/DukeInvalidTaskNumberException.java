@@ -9,6 +9,6 @@ public class DukeInvalidTaskNumberException extends DukeException {
      * Constructor for DukeInvalidTakNumberException.
      */
     public DukeInvalidTaskNumberException() {
-        super("\t OOPS!!! Task number must be a number.");
+        super("OOPS!!! Task number must be a number.");
     }
 }
