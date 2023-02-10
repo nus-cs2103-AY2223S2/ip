@@ -31,7 +31,10 @@ public class AddCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
+        int prevNumTasks = tasks.size();
         Task cur = tasks.add(task);
+        assert(prevNumTasks - 1 == tasks.size()) : "Tasks size should be equal to previous tasks size - 1";
+        assert(tasks.size() > 0) : "Tasks size should be greater than 0 after AddCommand";
         storage.refresh(tasks);
         return ui.show(getReply(cur, tasks));
     }
