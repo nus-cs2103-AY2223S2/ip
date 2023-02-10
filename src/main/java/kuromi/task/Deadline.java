@@ -1,7 +1,10 @@
 package kuromi.task;
 
-import java.time.LocalDate;
+import kuromi.KuromiException;
+
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Deadline task represented by description and deadline. Extends from Task class.
@@ -10,7 +13,7 @@ public class Deadline extends Task {
     /** The deadline date represented as a String **/
     protected String by;
     /** The deadline date represented as a LocalDate **/
-    protected LocalDate date;
+    protected LocalDateTime date;
 
     /**
      * kuromi.MainWindow.kuromi.KuromiException.Main constructor (for invocation by most classes)
@@ -18,13 +21,15 @@ public class Deadline extends Task {
      * @param description Description of a deadline.
      * @param by Deadline date of a deadline.
      */
-    public Deadline(String description, String by) {
+    public Deadline(String description, String by) throws KuromiException {
         super(description);
         this.by = by;
-        LocalDate date = LocalDate.parse(by);
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("MMM dd yyyy");
-        String formattedDate = date.format(format);
-        this.by = formattedDate;
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        try {
+            this.date = LocalDateTime.parse(by, format);
+        } catch (DateTimeParseException e) {
+            throw new KuromiException("☹ OOPS!!! The format of the date must be in yyyy-MM-dd HH:mm");
+        }
     }
 
     /**
@@ -34,11 +39,15 @@ public class Deadline extends Task {
      * @param by Deadline date of a deadline.
      * @param isDone Status of a deadline.
      */
-    public Deadline(String description, String by, boolean isDone) {
+    public Deadline(String description, String by, boolean isDone) throws KuromiException {
         super(description, isDone);
         this.by = by;
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("MMM dd yyyy");
-        LocalDate date = LocalDate.parse(by, format);
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        try {
+            this.date = LocalDateTime.parse(by, format);
+        } catch (DateTimeParseException e) {
+            throw new KuromiException("☹ OOPS!!! The format of the date must be in yyyy-MM-dd HH:mm");
+        }
     }
 
     /**
