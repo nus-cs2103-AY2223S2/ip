@@ -76,8 +76,6 @@ public class Parser {
             taskList.addTask(b);
             break;
         case "event":
-            int index_1 = str.indexOf("/from");
-            int index_2 = str.indexOf("/to");
             Task c = null;
             try {
                 String[] descriptionFromTo = str.replace("event", "").split(" /from ");

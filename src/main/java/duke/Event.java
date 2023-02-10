@@ -7,7 +7,7 @@ public class Event extends Task {
     protected Object from;
     protected Object to;
 
-    public Event(String description, String from, String to) throws DukeException{
+    public Event(String description, String from, String to) throws DukeException {
         super(description);
         this.from = from;
         this.to = to;
@@ -16,18 +16,24 @@ public class Event extends Task {
         }
     }
 
+    //this makes sure that from and to do not have to be dates.
     public void isDate() {
+        boolean c = true;
+        boolean d = true;
+        LocalDate d1, d2;
         try {
-            LocalDate d1 = LocalDate.parse((String) from);
+            d1 = LocalDate.parse((String) from);
             this.from = d1;
             from = ((LocalDate) from).format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         } catch (Exception e) {
+            c = false;
         }
         try {
-            LocalDate d2 = LocalDate.parse((String) to);
+            d2 = LocalDate.parse((String) to);
             this.to = d2;
             to = ((LocalDate) to).format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         } catch (Exception e) {
+            d = false;
         }
     }
 
