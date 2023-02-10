@@ -72,10 +72,12 @@ public class MainWindow {
         );
 
         userInput.clear();
-
+        /*
         if (!chattime.checkRunningStatus()) {
             Platform.exit();
         }
+        */
+
     }
 }
 

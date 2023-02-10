@@ -2,15 +2,9 @@ T @ 0 @ store book
 D @ 0 @ return book @ 2022-06-06 @ 0
 E @ 0 @ project meeting @ 2022-02-02 @ 02:00 @ 2022-08-08 @ 20:00
 T @ 0 @ borrow books
-T @ 0 @ cycling
 D @ 1 @ return book @ 2023-03-23 @ 0
 E @ 0 @ say good morning @ 2021-12-23 @ 00:00 @ 2030-11-01 @ 23:59
 D @ 0 @ boorow book @ 2023-04-03 @ 23:12
 E @ 0 @ gogogo @ 2022-04-03 @ 11:23 @ 2045-12-11 @ 12:34
 T @ 0 @ borrow book
 E @ 0 @ project meeting @ 2022-02-02 @ 00:00 @ 2022-03-03 @ 23:59
-T @ 0 @ jogging
-D @ 0 @ hw1 @ 2023-03-23 @ 0
-D @ 0 @ hw2 @ 2023-03-25 @ 17:00
-E @ 0 @ student life fair @ 2023-08-08 @ 00:00 @ 2023-08-10 @ 23:59
-E @ 0 @ cs2103 lecture @ 2023-02-10 @ 14:00 @ 2023-02-12 @ 16:00
