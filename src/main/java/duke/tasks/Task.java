@@ -12,7 +12,7 @@ public class Task {
      * @param description Description of the task.
      */
     public Task(String description) {
-        this.description = description;
+        this.description = description.strip();
         this.isDone = false;
     }
 
@@ -75,5 +75,8 @@ public class Task {
      */
     public boolean containsKeyword(String keyword) {
         return this.description.contains(keyword);
+    }
+    public boolean isEqual(Task task) {
+        return this.description.equals(task.description);
     }
 }

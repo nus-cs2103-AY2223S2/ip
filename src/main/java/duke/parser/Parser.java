@@ -78,16 +78,16 @@ public class Parser {
                 return new AddCommand(temp);
             } else if (commandType.equals("deadline")) {
                 //separate description and dateTime
-                String[] details = temp.split("/by ");
+                String[] details = temp.split("/by");
                 if (!MyDateTime.isValidDateTime(details[1])) {
                     return new IncorrectCommand("dt format");
                 }
                 return new AddCommand(details[0], details[1]);
             } else if (commandType.equals("event")) {
                 //separate description and event start end
-                String[] details = temp.split("/from ", 2);
+                String[] details = temp.split(" /from ", 2);
                 //separate start and end dateTime
-                String[] time = details[1].split("/to ");
+                String[] time = details[1].split(" /to ");
                 if (!MyDateTime.isValidDateTime(time[0]) || !MyDateTime.isValidDateTime(time[1])) {
                     return new IncorrectCommand("dt format");
                 }

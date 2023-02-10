@@ -17,4 +17,8 @@ public class Todo extends Task {
     public String formatForFile() {
         return String.format("%s|%s", "T", super.formatForFile());
     }
+    @Override
+    public boolean isEqual(Task anotherTodo) {
+        return this.description.equals(anotherTodo.description);
+    }
 }

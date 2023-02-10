@@ -51,4 +51,18 @@ public class Event extends Task {
         return String.format("%s|%s|%s|%s", "E", super.formatForFile(),
                 this.startDateTime.formatDateTimeForFile(), this.endDateTime.formatDateTimeForFile());
     }
+
+    /**
+     * Checks if given event is a duplicate.
+     * @param anotherEvent Another event.
+     * @return True if given event is a duplicate.
+     */
+    @Override
+    public boolean isEqual(Task anotherEvent) {
+        Event other = (Event) anotherEvent;
+        boolean isSameDesc = super.isEqual(other);
+        boolean isSameStartDateTime = this.startDateTime.checkSameDateTime(other.startDateTime);
+        boolean isSameEndDateTime = this.endDateTime.checkSameDateTime(other.endDateTime);
+        return isSameEndDateTime && isSameStartDateTime && isSameDesc;
+    }
 }

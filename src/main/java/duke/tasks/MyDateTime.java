@@ -28,7 +28,7 @@ public class MyDateTime {
      */
     public static boolean isValidDateTime(String dateTime) {
         try {
-            LocalDateTime.parse(dateTime, MyDateTime.saveFormat);
+            LocalDateTime.parse(dateTime.strip(), MyDateTime.saveFormat);
         } catch (DateTimeParseException e) {
             return false;
         }
@@ -45,5 +45,8 @@ public class MyDateTime {
 
     public LocalDate dateOnly() {
         return this.dateTime.toLocalDate();
+    }
+    public boolean checkSameDateTime(MyDateTime anotherMyDateTime) {
+        return this.dateTime.equals(anotherMyDateTime.dateTime);
     }
 }

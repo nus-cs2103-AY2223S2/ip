@@ -36,6 +36,10 @@ public class Tasks {
      * @return Response to user.
      */
     public String addToList(Task task, boolean silent) {
+        //check for duplicates before adding
+        if (checkDuplicate(task)) {
+            return "This is a duplicate man.... WAKE UP";
+        }
         taskList.add(task);
         String output = "";
         if (!silent) {
@@ -43,6 +47,29 @@ public class Tasks {
             output += "Now you've got " + taskList.size() + " task(s) in your bag, CHOP CHOP GET THEM DONE.\n";
         }
         return output;
+    }
+
+    /**
+     * Checks if given task is a duplicate.
+     * @param task The given task.
+     * @return True if task is a duplicate, else false.
+     */
+    public boolean checkDuplicate(Task task) {
+        for (Task currentTask : this.taskList) {
+            if (!sameTaskType(task, currentTask)) {
+                continue;
+            }
+            if (sameTaskContent(task, currentTask)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public boolean sameTaskType(Task task, Task currentTask) {
+        return task.getClass().equals(currentTask.getClass());
+    }
+    public boolean sameTaskContent(Task task, Task currentTask) {
+        return task.isEqual(currentTask);
     }
 
     /**
