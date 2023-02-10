@@ -38,4 +38,11 @@ public abstract class DateTimeParser {
 
         return false;
     }
+
+    /**
+     * Shows the error message of DateTimeParseException.
+     */
+    public static void showDateTimeParseErrorMessage() {
+        System.out.println("Datetime has to be in the following format: yyyy-mm-dd HHmm");
+    }
 }
