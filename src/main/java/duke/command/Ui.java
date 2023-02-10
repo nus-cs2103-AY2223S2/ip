@@ -16,8 +16,7 @@ import duke.task.Todo;
  * Deals with interaction with users
  */
 public class Ui {
-    public Ui() {
-    }
+    public Ui() {}
 
     /**
      * Shows logo and welcome.
@@ -40,6 +39,7 @@ public class Ui {
     public void says(String message) {
         System.out.println(message);
     }
+
     /**
      * Prints out error message.
      * @return error message
@@ -57,7 +57,7 @@ public class Ui {
     }
 
     /**
-     * Prints out unknown error message.
+     * Prints out unknown error message if command is invalid.
      * @return unknown message.
      */
     public String showUnknownError() {
@@ -74,6 +74,26 @@ public class Ui {
     }
 
     /**
+     * Returns what Duke will respond to an Undo command
+     * @param commandType type of command (valid)
+     * @param commandDetail detail of task
+     * @return Duke's response
+     */
+    public String saysUnDo(String commandType, String commandDetail) {
+        return ("WOOF! Got it! I will undo the last command!" + "\n"
+                + "The following task has been un-" + commandType
+                + "ed: " + "\n" + commandDetail);
+    }
+
+    /**
+     * Returns Duke's response to an unable-to-be-undone command
+     * @return Duke's response
+     */
+    public String saysUnableToUndo() {
+        return "WOOF!! The last command cannot be undone!";
+    }
+
+    /**
      * Prints out line for separation.
      */
     public void showLine() {
@@ -83,7 +103,7 @@ public class Ui {
 
     /**
      * Prints out if input array is not empty
-     *
+     * Update the most recent command correspondingly
      * @param arr input array.
      * @print instruction.
      * @return appropriate message
@@ -98,7 +118,7 @@ public class Ui {
                 return ("Sorry boss! No task found!");
             }
         }
-        return (new DukeException("WOOF WOOF! The content can not be left empty!").getMessage());
+        return (new MissingContentException()).getMessage();
     }
 
     /**
@@ -142,6 +162,7 @@ public class Ui {
 
     /**
      * Marks task at given index
+     * Updates the most recent command correspondingly
      * @param listOfAction original tasklist
      * @param commands array of user command line
      * @return new updated task list
@@ -160,8 +181,9 @@ public class Ui {
 
 
     /**
-     * Unmarks task at given index
-     * @param listOfAction original tasklist
+     * Unmark task at given index
+     * Updates the most recent command correspondingly
+     * @param listOfAction original task list
      * @param commands array of user command line
      * @return new updated task list
      */
@@ -179,6 +201,7 @@ public class Ui {
 
     /**
      * Deletes task at specific index
+     * Updates the most recent command correspondingly
      * @param listOfAction original task list
      * @param command user command
      * @return new updated task list
@@ -201,6 +224,7 @@ public class Ui {
 
     /**
      * Adds todo task to task list
+     * Updates the most recent command correspondingly
      * @param listOfAction original task list
      * @param command command from user input
      * @return new updated task list
@@ -222,6 +246,7 @@ public class Ui {
 
     /**
      * Adds new deadline to task list
+     * Updates the most recent command correspondingly
      * @param listOfAction original task list
      * @param command user input
      * @return new updated task list
@@ -239,7 +264,8 @@ public class Ui {
     }
 
     /**
-     * Add new event to tasklist
+     * Adds new event to task list
+     * Updates the most recent command correspondingly
      * @param listOfAction original tasklist
      * @param command from user's input
      * @return Duke's response to user's input

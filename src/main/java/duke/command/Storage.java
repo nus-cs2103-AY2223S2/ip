@@ -1,5 +1,7 @@
 package duke.command;
 
+import duke.exception.FileLoadingException;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -45,31 +47,35 @@ public class Storage {
      * @param tasks new task list to overwrite on the given file.
      * @write on given data file.
      */
-    public void overwrite(TaskList tasks) throws IOException {
+    public void overwrite(TaskList tasks) throws FileLoadingException {
         String[] arr = tasks.readTaskList();
 
         File myFile = new File(this.path);
         myFile.getParentFile().mkdirs();
-        FileWriter myWriter = new FileWriter(myFile);
-        if (myFile.createNewFile()) {
-            for (int i = 0; i < arr.length; i++) {
-                if (arr[i] == null) {
-                    break;
+        try {
+            FileWriter myWriter = new FileWriter(myFile);
+            if (myFile.createNewFile()) {
+                for (int i = 0; i < arr.length; i++) {
+                    if (arr[i] == null) {
+                        break;
+                    }
+                    myWriter.write(arr[i].toString());
+                    myWriter.write("\n");
                 }
-                myWriter.write(arr[i].toString());
-                myWriter.write("\n");
-            }
-            myWriter.close();
-        } else {
-            new FileWriter(this.path, false).close();
-            for (int i = 0; i < arr.length; i++) {
-                if (arr[i] == null) {
-                    break;
+                myWriter.close();
+            } else {
+                new FileWriter(this.path, false).close();
+                for (int i = 0; i < arr.length; i++) {
+                    if (arr[i] == null) {
+                        break;
+                    }
+                    myWriter.write(arr[i].toString());
+                    myWriter.write("\n");
                 }
-                myWriter.write(arr[i].toString());
-                myWriter.write("\n");
+                myWriter.close();
             }
-            myWriter.close();
+        } catch (IOException e) {
+            throw new FileLoadingException(this.path);
         }
     }
 }

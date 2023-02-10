@@ -6,6 +6,7 @@ import java.io.IOException;
 import duke.command.Storage;
 import duke.command.TaskList;
 import duke.command.Ui;
+import duke.exception.FileLoadingException;
 
 enum Action {
     Bye,
@@ -45,12 +46,12 @@ public class Duke {
      */
     public Duke() {
         ui = new Ui();
-        storage = new Storage("data/duke.txt");
+        storage = new Storage("./data/tasks.txt");
         tasks = new TaskList(storage.load());
     }
 
 
-    private void run() throws IOException {
+    private void run() {
         ui.showWelcome();
         TaskList listOfAction = tasks;
         Storage file = storage;
@@ -58,10 +59,8 @@ public class Duke {
 
         String[] arr = ui.getInput();
         s = arr[0];
-        //int len = listOfAction.validLen();
 
         while (!s.equals("bye")) {
-            file.overwrite(listOfAction);
             String remaining = "";
             try {
                 Action myAction = Action.valueOf(String.valueOf(s.charAt(0)).toUpperCase()
@@ -113,62 +112,79 @@ public class Duke {
             } catch (IllegalArgumentException e) {
                 ui.showUnknownError();
             }
-
-            file.overwrite(listOfAction);
-            arr = ui.getInput();
-            s = arr[0];
+            try {
+                file.overwrite(listOfAction);
+                arr = ui.getInput();
+                s = arr[0];
+            } catch (FileLoadingException error) {
+                ui.says(error.getMessage());
+            }
         }
         ui.bye();
     }
 
     public String getResponse(String input) {
-        int i = 1;
         //ui.showWelcome();
         TaskList listOfAction = tasks;
         Storage file = storage;
         String[] arr = ui.getInput(input);
         String s = arr[0];
+        String response = "";
         try {
             Action myAction = Action.valueOf(String.valueOf(s.charAt(0)).toUpperCase()
                     + s.substring(1));
             switch (myAction) {
             case Find:
-                return (ui.findWordIntro(listOfAction, arr, listOfAction.checkWord(arr[1])));
+                response = (ui.findWordIntro(listOfAction, arr, listOfAction.checkWord(arr[1])));
+                break;
 
             case Bye:
-                return (ui.bye());
+                response = (ui.bye());
+                break;
 
-            case Undo:
-                return ui.undo(listOfAction);
+                case Undo:
+                response = ui.undo(listOfAction);
+                break;
 
-            case List:
-                return (ui.list(listOfAction));
+                case List:
+                response = (ui.list(listOfAction));
+                break;
 
             case Mark:
-                return (ui.mark(listOfAction, arr));
+                response = (ui.mark(listOfAction, arr));
+                break;
 
             case Unmark:
-                return (ui.unmark(listOfAction, arr));
+                response = (ui.unmark(listOfAction, arr));
+                break;
 
             case Delete:
-                return (ui.delete(listOfAction, arr));
+                response = (ui.delete(listOfAction, arr));
+                break;
 
             case Todo:
-                return (ui.addToDo(listOfAction, arr));
+                response = (ui.addToDo(listOfAction, arr));
+                break;
 
             case Deadline:
-                return (ui.addDeadline(listOfAction, arr));
+                response = (ui.addDeadline(listOfAction, arr));
+                break;
 
             case Event:
-                return (ui.addEvent(listOfAction, arr));
+                response = (ui.addEvent(listOfAction, arr));
+                break;
 
             default:
-                return (ui.showUnknownError());
+                response = (ui.showUnknownError());
+                break;
             }
+            file.overwrite(listOfAction);
         } catch (IllegalArgumentException e) {
-            ui.showUnknownError();
+            return ui.showUnknownError();
+        } catch (FileLoadingException e) {
+            return (e.getMessage());
         }
-        return ui.showUnknownError();
+        return response;
     }
     public static void main(String[] args) throws IOException {
         new Duke("./data/tasks.txt").run();

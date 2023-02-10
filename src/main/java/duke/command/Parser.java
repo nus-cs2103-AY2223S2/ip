@@ -14,6 +14,7 @@ public class Parser {
     private static String lastCommand = "";
     private static String lastCommandDetail = "";
     private static TaskList lastTaskList = new TaskList();
+    private static Ui ui = new Ui();
 
     /**
      * Update last command
@@ -56,27 +57,22 @@ public class Parser {
     public static String undo(TaskList taskList) {
         if (lastCommand.startsWith("mark ")) {
             taskList.overwrite(lastTaskList);
-            return ("WOOF! Got it! I will undo the last command!" + "\n"
-                    + "The following task has been unmarked: " + "\n"
-                    + lastCommandDetail);
+            return ui.saysUnDo("mark", lastCommandDetail);
         } else if (lastCommand.startsWith("unmark ")) {
             taskList.overwrite(lastTaskList);
-            return ("WOOF! Got it! I will undo the last command!" + "\n"
-                    + "The following task has been un-unmarked: " + "\n"
-                    + lastCommandDetail);
+            return ui.saysUnDo("unmark", lastCommandDetail);
+
         } else if (lastCommand.startsWith("delete ")) {
             taskList.overwrite(lastTaskList);
-            return ("WOOF! Got it! I will undo the last command!" + "\n"
-                    + "The following task has been un-deleted: " + "\n"
-                    + lastCommandDetail);
+            return ui.saysUnDo("mark", lastCommandDetail);
+
         } else if (lastCommand.startsWith("todo ") || lastCommand.startsWith("event ")
                 || lastCommand.startsWith("deadline ")) {
             taskList.overwrite(lastTaskList);
-            return ("WOOF! Got it! I will undo the last command!" + "\n"
-                    + "The following task has been un-added: " + "\n"
-                    + lastCommandDetail);
+            return ui.saysUnDo("mark", lastCommandDetail);
+
         } else {
-            return ("WOOF!! The last command cannot be undone!");
+            return ui.saysUnableToUndo();
         }
     }
 
