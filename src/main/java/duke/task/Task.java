@@ -17,7 +17,7 @@ public abstract class Task {
      * @param type of Task
      * @param done isDone boolean value
      * @param text Description [Date] [Date] as String
-     * @param p Parser required to create task
+     * @param parser Parser required to create task
      * @return Todo, Event or Date
      * @throws InvalidFormatException
      */
