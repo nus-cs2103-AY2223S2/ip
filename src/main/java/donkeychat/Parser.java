@@ -122,7 +122,7 @@ public class Parser {
             storage.updateSave(taskList);
 
         } catch (DukeException e) {
-            System.out.println(e.getMessage());
+            ui.displayText(e.getMessage());
         }
         return true;
     }
