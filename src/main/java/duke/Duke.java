@@ -3,6 +3,7 @@ package duke;
 import java.util.Objects;
 import java.util.Scanner;
 
+import duke.ui.MainWindow;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -118,6 +119,54 @@ public class Duke extends Application {
     }
 
     /**
+     * Returns string response for GUI (same rules as run()).
+     */
+    public String getResponse(String input) {
+        StringBuilder response = new StringBuilder();
+        try {
+            Parser parser = new Parser(input);
+            if (parser.getCommand().equals("list")) {
+                response.append(ui.listTasks(tasks));
+            } else {
+                switch (parser.getCommand()) {
+                case "bye":
+                    storage.store(tasks);
+                    response.append(ui.getSaulBye());
+                    break;
+                case "mark":
+                    response.append(ui.markTask(tasks, parser));
+                    break;
+                case "unmark":
+                    response.append(ui.unmarkTask(tasks, parser));
+                    break;
+                case "todo":
+                    response.append(ui.addToDo(tasks, parser));
+                    break;
+                case "deadline":
+                    response.append(ui.addDeadline(tasks, parser));
+                    break;
+                case "event":
+                    response.append(ui.addEvent(tasks, parser));
+                    break;
+                case "delete":
+                    response.append(ui.deleteTask(tasks, parser));
+                    break;
+                case "find":
+                    response.append(ui.findAndListTasks(tasks, parser));
+                    break;
+                default:
+                    throw new DukeException("I'm sorry, but I don't know what that means :-(");
+                }
+            }
+        } catch (DukeException e) {
+            response.append("☹ OOPS!!! ");
+            response.append(e.getMessage());
+            e.printStackTrace();
+        }
+        return response.toString();
+    }
+
+    /**
      * Iteration 2:
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
@@ -130,14 +179,6 @@ public class Duke extends Application {
                 DialogBox.getDukeDialog(dukeText, duke)
         );
         userInput.clear();
-    }
-
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
-    public String getResponse(String input) {
-        return "Duke heard: " + input;
     }
 
     @Override
@@ -201,20 +242,6 @@ public class Duke extends Application {
 
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-    }
-
-    /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
     }
 
     /**

@@ -8,6 +8,8 @@ import duke.task.Task;
 import duke.task.ToDo;
 import duke.tasklist.TaskList;
 
+import javax.print.DocFlavor;
+
 /**
  * Class to perform UI operations.
  */
@@ -38,6 +40,17 @@ public class Ui {
     }
 
     /**
+     * Returns Saul's greeting message (bounded by lines above and below).
+     */
+    public StringBuilder getSaulGreeting() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Hello I'm Saul!");
+        sb.append("What can I do for you?");
+        return sb;
+    }
+
+
+    /**
      * Prints Duke's farewell message (bounded by lines above and below).
      */
     public void farewell() {
@@ -46,21 +59,30 @@ public class Ui {
         printLine();
     }
 
+    public StringBuilder getSaulBye() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Until next time... Better call Saul!");
+        return sb;
+    }
+
     /**
      * Marks task (selected by position in list).
      *
      * @param tasks List of current tasks.
      * @param parser Parser object to get task number.
      */
-    public void markTask(TaskList tasks, Parser parser) throws DukeException {
+    public StringBuilder markTask(TaskList tasks, Parser parser) throws DukeException {
         int taskNumber;
+        StringBuilder sb = new StringBuilder();
         try {
             taskNumber = parser.getTaskNumber();
             tasks.getTask(taskNumber - 1).markAsDone();
-            System.out.printf("     %s%n", "Nice! I've marked this task as done:");
-            System.out.printf("       %s%n", tasks.getTask(taskNumber - 1).toString());
+            sb.append("Nice! I've marked this task as done:\n");
+            sb.append(tasks.getTask(taskNumber - 1).toString());
+            sb.append("\n");
+            return sb;
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            System.out.printf("     %s%n", "Please input valid task number.");
+            throw new DukeException("Input a valid task number.\n");
         }
     }
 
@@ -70,15 +92,18 @@ public class Ui {
      * @param tasks List of current tasks.
      * @param parser Parser object to get task number.
      */
-    public void unmarkTask(TaskList tasks, Parser parser) throws DukeException {
+    public StringBuilder unmarkTask(TaskList tasks, Parser parser) throws DukeException {
         int taskNumber;
+        StringBuilder sb = new StringBuilder();
         try {
             taskNumber = parser.getTaskNumber();
             tasks.getTask(taskNumber - 1).markAsNotDone();
-            System.out.printf("     %s%n", "OK, I've marked this task as not done yet:");
-            System.out.printf("       %s%n", tasks.getTask(taskNumber - 1).toString());
+            sb.append("OK, I've marked this task as not done yet:\n");
+            sb.append(tasks.getTask(taskNumber - 1).toString());
+            sb.append("\n");
+            return sb;
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            throw new DukeException("Input a valid task number.");
+            throw new DukeException("Input a valid task number.\n");
         }
     }
 
@@ -88,10 +113,12 @@ public class Ui {
      * @param tasks List of current tasks.
      * @param t Task to confirm addition of.
      */
-    private void confirmAddition(TaskList tasks, Task t) {
-        System.out.printf("     %s%n", "Got it. I've added this task:");
-        System.out.printf("       %s%n", t.toString());
-        System.out.printf("     %s%d%s%n", "Now you have ", tasks.getSize(), " tasks in the list.");
+    private StringBuilder confirmAddition(TaskList tasks, Task t) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Got it. I've added this task:\n");
+        sb.append(t.toString());
+        sb.append("\nNow you have ").append(tasks.getSize()).append(" tasks in the list.");
+        return sb;
     }
 
     /**
@@ -101,7 +128,7 @@ public class Ui {
      * @param parser Parser object to get ToDo details from input.
      * @throws DukeException on empty ToDo description.
      */
-    public void addToDo(TaskList tasks, Parser parser) throws DukeException {
+    public StringBuilder addToDo(TaskList tasks, Parser parser) throws DukeException {
         if (!parser.hasDescription()) {
             throw new DukeException("The description of a todo cannot be empty.");
         }
@@ -111,7 +138,7 @@ public class Ui {
         }
         Task t = new ToDo(description);
         tasks.addTask(t);
-        confirmAddition(tasks, t);
+        return confirmAddition(tasks, t);
     }
 
     /**
@@ -120,11 +147,11 @@ public class Ui {
      * @param tasks List of current tasks.
      * @param parser Parser object to get Deadline details from input.
      */
-    public void addDeadline(TaskList tasks, Parser parser) {
+    public StringBuilder addDeadline(TaskList tasks, Parser parser) {
         Task t = new Deadline(parser.parseDeadlineDescription(),
                 parser.parseDeadlineDate());
         tasks.addTask(t);
-        confirmAddition(tasks, t);
+        return confirmAddition(tasks, t);
     }
 
     /**
@@ -133,11 +160,11 @@ public class Ui {
      * @param tasks List of current tasks.
      * @param parser Parser object to get Event details from input.
      */
-    public void addEvent(TaskList tasks, Parser parser) {
+    public StringBuilder addEvent(TaskList tasks, Parser parser) {
         Task t = new Event(parser.parseEventDescription(),
                 parser.parseEventFrom(), parser.parseEventTo());
         tasks.addTask(t);
-        confirmAddition(tasks, t);
+        return confirmAddition(tasks, t);
     }
 
     /**
@@ -147,14 +174,16 @@ public class Ui {
      * @param parser Parser object to get task number.
      * @throws DukeException
      */
-    public void deleteTask(TaskList tasks, Parser parser) throws DukeException {
+    public StringBuilder deleteTask(TaskList tasks, Parser parser) throws DukeException {
         int taskNumber;
+        StringBuilder sb = new StringBuilder();
         try {
             taskNumber = parser.getTaskNumber();
             Task t = tasks.removeTask(taskNumber - 1);
-            System.out.printf("     %s%n", "Noted. I've removed this task:");
-            System.out.printf("       %s%n", t.toString());
-            System.out.printf("     %s%d%s%n", "Now you have ", tasks.getSize(), " tasks in the list.");
+            sb.append("Noted. I've removed this task:\n");
+            sb.append(t.toString()).append("\n");
+            sb.append("Now you have ").append(tasks.getSize()).append(" tasks in the list.\n");
+            return sb;
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
             throw new DukeException("Input a valid task number.");
         }
@@ -166,13 +195,16 @@ public class Ui {
      * @param tasks List of current tasks.
      * @throws DukeException
      */
-    public void listTasks(TaskList tasks) throws DukeException {
-        System.out.printf("     %s%n", "Here are the tasks in your list:");
+    public StringBuilder listTasks(TaskList tasks) throws DukeException {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Here are the tasks in your list:");
         for (int i = 0; i < tasks.getSize(); i++) {
-            System.out.printf("     %d.%s%n",
-                    i + 1,
-                    tasks.getTask(i).toString());
+            sb.append(i + 1);
+            sb.append(new StringBuilder(". "));
+            sb.append(tasks.getTask(i).toString());
+            sb.append("\n");
         }
+        return sb;
     }
 
     /**
@@ -182,7 +214,7 @@ public class Ui {
      * @param parser Parser object to get task number.
      * @throws DukeException
      */
-    public void findAndListTasks(TaskList tasks, Parser parser) throws DukeException {
+    public StringBuilder findAndListTasks(TaskList tasks, Parser parser) throws DukeException {
         if (!parser.hasDescription()) {
             throw new DukeException("Please enter a keyword to search for.");
         }
@@ -190,16 +222,15 @@ public class Ui {
         if (keyword.isBlank()) {
             throw new DukeException("Please enter a valid keyword.");
         }
-        System.out.printf("     %s%n", "Here are the matching tasks in your list:");
+        StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:\n");
         int foundCount = 0;
         for (int i = 0; i < tasks.getSize(); ++i) {
             Task task = tasks.getTask(i);
             if (task.getDescription().contains(keyword)) {
-                System.out.printf("     %d.%s%n",
-                        ++foundCount,
-                        task.toString());
+                sb.append(++foundCount).append(".").append(task.toString());
             }
         }
+        return sb;
     }
 
     /**
