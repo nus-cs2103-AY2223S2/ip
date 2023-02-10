@@ -96,6 +96,8 @@ public class Storage {
                         task.getDescription(),
                         ((Event) task).getFrom(),
                         ((Event) task).getTo());
+            } else {
+                assert false : task;
             }
         }
 
