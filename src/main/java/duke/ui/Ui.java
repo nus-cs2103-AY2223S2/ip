@@ -22,11 +22,11 @@ public class Ui {
      * @param msgs The message(s) to be printed
      */
     public void printMsg(String[] msgs) {
-        printSeparator();
+        System.out.println("____________________________________________________________");
         for (String msg : msgs) {
             System.out.println(msg);
         }
-        printSeparator();
+        System.out.println("____________________________________________________________");
     }
     /**
      * Prints a message, surrounded by separators.
@@ -34,9 +34,9 @@ public class Ui {
      * @param msg The message to be printed
      */
     public void printMsg(String msg) {
-        printSeparator();
+        System.out.println("____________________________________________________________");
         System.out.println(msg);
-        printSeparator();
+        System.out.println("____________________________________________________________");
     }
     /**
      * Prints an array of items as a numbered list, surrounded by separators.
@@ -44,11 +44,11 @@ public class Ui {
      * @param list The array of items to be printed
      */
     public void printList(String[] list) {
-        printSeparator();
+        System.out.println("____________________________________________________________");
         for (int i = 0; i < list.length; i++) {
             System.out.println(String.format("%d. %s", i + 1, list[i]));
         }
-        printSeparator();
+        System.out.println("____________________________________________________________");
     }
 
     /**
@@ -58,12 +58,12 @@ public class Ui {
      * @param list The array of strings to be printed as a list.
      */
     public void printList(String msg, String[] list) {
-        printSeparator();
+        System.out.println("____________________________________________________________");
         System.out.println(msg);
         for (int i = 0; i < list.length; i++) {
             System.out.println(String.format("%d. %s", i + 1, list[i]));
         }
-        printSeparator();
+        System.out.println("____________________________________________________________");
     }
 
     /**
@@ -80,11 +80,5 @@ public class Ui {
      */
     public String readInput() {
         return this.sc.nextLine();
-    }
-    /**
-     * Prints a separator.
-     */
-    private void printSeparator() {
-        System.out.println("____________________________________________________________");
     }
 }

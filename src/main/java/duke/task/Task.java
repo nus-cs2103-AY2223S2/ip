@@ -20,7 +20,6 @@ public abstract class Task implements Serializable {
      * @param description the description of the task
      */
     public Task(String description) {
-        assert !description.isEmpty();
         this.description = description;
         this.isDone = false;
     }
@@ -64,9 +63,7 @@ public abstract class Task implements Serializable {
      *
      * @return true if the task is completed, false otherwise
      */
-    public boolean isDone() {
-        return this.isDone;
-    }
+    public boolean isDone() { return this.isDone; }
 
     /**
      * The contains method checks if the target string is contained in the description field.
