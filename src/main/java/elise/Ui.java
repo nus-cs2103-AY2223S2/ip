@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
  * User interface class to interact with the user.
  */
 public class Ui {
-    private static final String BORDER = "----------------------------------------";
+    private static final String BORDER = "-----------------------------------------------";
     private final String HELP_MESSAGE = new BufferedReader(
             new InputStreamReader(this.getClass().getResourceAsStream("/help.txt")))
             .lines().collect(Collectors.joining("\n"));
