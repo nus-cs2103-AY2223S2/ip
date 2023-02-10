@@ -12,9 +12,8 @@ public class FindCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Response response, Storage storage) {
-        List<Task> taskList = tasks.getTasks();
+        List<Task> filteredList = tasks.filter(keyword);
 
-        return response.showFoundTasks(taskList.stream().filter(task -> task.toString().contains(keyword))
-                .collect(Collectors.toList()));
+        return response.showFoundTasks(filteredList);
     }
 }

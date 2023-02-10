@@ -30,9 +30,9 @@ public class Storage {
 
         if (f.exists()) {
             Scanner s = new Scanner(f);
-            Task task;
 
             while (s.hasNextLine()) {
+                Task task = null;
                 String currTask = s.nextLine();
                 String[] taskSplit = currTask.split(" \\| ");
 
