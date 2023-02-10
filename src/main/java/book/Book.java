@@ -52,6 +52,8 @@ public class Book {
                 Platform.exit();
             }
             return commandOutput;
+        } catch (IndexOutOfBoundsException exception) {
+            return this.ui.showError("Nothing exists at this index in Book.");
         } catch (BookException exception) {
             return this.ui.showError(exception.getMessage());
         }

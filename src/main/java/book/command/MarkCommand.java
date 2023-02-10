@@ -33,7 +33,8 @@ public class MarkCommand extends Command {
      * @throws SaveException if an error occurs with updating the {@code Storage}.
      */
     @Override
-    public String execute(Storage storage, TaskList list, Ui ui) throws SaveException {
+    public String execute(Storage storage, TaskList list, Ui ui)
+            throws SaveException, IndexOutOfBoundsException {
         Task task = list.get(index);
         task.mark();
         storage.save(list);
