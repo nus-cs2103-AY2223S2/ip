@@ -50,7 +50,7 @@ public class Task {
     public boolean containsKeyword(String keyword) {
         String cur = this.description;
         String[] split = cur.split(" ");
-        for(int j = 0; j < split.length; j++) {
+        for (int j = 0; j < split.length; j++) {
             if (split[j].equals(keyword)) {
                 return true;
             }
@@ -61,7 +61,6 @@ public class Task {
     /**
      * Get the status of a task.
      *
-     * @return Status of a task.
      * @return Status of a task.
      */
     public String getStatusIcon() {

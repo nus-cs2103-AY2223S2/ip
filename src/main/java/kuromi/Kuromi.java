@@ -38,7 +38,7 @@ public class Kuromi {
             Command c = Parser.parse(inp, ui, tasks);
             return c.execute(tasks, ui, storage);
         } catch (KuromiException e) {
-           return e.getMessage();
+            return e.getMessage();
         }
     }
 
