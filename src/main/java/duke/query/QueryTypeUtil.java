@@ -14,7 +14,11 @@ public class QueryTypeUtil {
     private static final String EVENT_QUERY_TYPE = "event";
     private static final String FIND_QUERY_TYPE = "find";
 
-    public static QueryType GetQueryTypeFromString(String queryTypeStr) {
+    /**
+     * @param queryTypeStr string that represents a query type
+     * @return QueryType enum that matches that string
+     */
+    public static QueryType getQueryTypeFromString(String queryTypeStr) {
         switch (queryTypeStr) {
         case TODO_QUERY_TYPE:
             return QueryType.TODO;

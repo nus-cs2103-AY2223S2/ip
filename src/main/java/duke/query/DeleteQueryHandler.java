@@ -4,8 +4,6 @@ import duke.DukeException;
 import duke.task.Task;
 import duke.task.TaskTracker;
 
-import java.util.StringTokenizer;
-
 /**
  * The DeleteQueryHandler class handles user queries for deleting tasks.
  */
@@ -22,10 +20,8 @@ public class DeleteQueryHandler extends TaskQueryHandler {
      * @throws DukeException
      */
     @Override
-    public String processQuery(String query) throws DukeException {
-        StringTokenizer st = new StringTokenizer(query);
-        st.nextToken();
-        Task t = tt.deleteTask(Integer.parseInt(st.nextToken()) - 1);
+    public String processQuery(Query query) throws DukeException {
+        Task t = tt.deleteTask(Integer.parseInt(query.getParam()) - 1);
         tt.saveAllTasks();
         return "Task deleted: " + t;
     }

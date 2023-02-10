@@ -10,5 +10,5 @@ public interface IQueryHandler {
      * @return a response string
      * @throws DukeException
      */
-    String processQuery(String query) throws DukeException;
+    String processQuery(Query query) throws DukeException;
 }

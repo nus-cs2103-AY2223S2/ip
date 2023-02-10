@@ -1,7 +1,5 @@
 package duke.task;
 
-import duke.DukeException;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -10,6 +8,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.DukeException;
 
 /**
  * TaskStorage is a class that handles the saving/loading of tasks to storage.

@@ -1,8 +1,10 @@
 package duke.task;
 
-import duke.DukeException;
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
+import duke.DukeException;
 
 public class TaskTrackerTest {
     @Test
@@ -23,7 +25,7 @@ public class TaskTrackerTest {
     public void testMarkTest() {
         TaskTracker tt = new TaskTracker();
         String taskDesc = "hello, I am a task!";
-        Task newTask = tt.addTodo(taskDesc);
+        tt.addTodo(taskDesc);
         Task t;
         try {
             tt.markTask(0);

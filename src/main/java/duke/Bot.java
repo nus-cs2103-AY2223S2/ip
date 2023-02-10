@@ -1,14 +1,14 @@
 package duke;
 
-import java.util.StringTokenizer;
-
 import duke.query.DeadlineQueryHandler;
 import duke.query.DeleteQueryHandler;
 import duke.query.EventQueryHandler;
+import duke.query.FindTaskQueryHandler;
 import duke.query.IQueryHandler;
 import duke.query.ListQueryHandler;
-import duke.query.FindTaskQueryHandler;
 import duke.query.MarkQueryHandler;
+import duke.query.Query;
+import duke.query.QueryParser;
 import duke.query.QueryType;
 import duke.query.QueryTypeUtil;
 import duke.query.SimpleResponseQueryHandler;
@@ -48,26 +48,27 @@ public class Bot {
     public BotResult process(String input) {
         IFormatter formatter = new ResponseFormatter();
         BotResult.BotStatus status = BotResult.BotStatus.Successful;
-        String response;
-        StringTokenizer query = new StringTokenizer(input);
+        Query query = QueryParser.parseQuery(input);
+
         QueryType queryType = QueryType.UNKNOWN;
-
-        if (query.hasMoreTokens()) {
-            queryType = QueryTypeUtil.GetQueryTypeFromString(query.nextToken());
-        }
-
+        queryType = QueryTypeUtil.getQueryTypeFromString(query.getCommand());
         if (queryType == QueryType.EXIT) {
             status = BotResult.BotStatus.Exit;
         }
 
+        String response = formatter.format(processQuery(query, queryType));
+        return new BotResult(status, response);
+    }
+
+    private String processQuery(Query query, QueryType queryType) {
+        String response;
         try {
             IQueryHandler queryHandler = getQueryHandler(queryType);
-            response = queryHandler.processQuery(input);
+            response = queryHandler.processQuery(query);
         } catch (DukeException e) {
             response = "I have failed you my liege! " + e.getMessage();
         }
-
-        return new BotResult(status, response);
+        return response;
     }
 
     private IQueryHandler getQueryHandler(QueryType queryType) throws UnknownCommandException {

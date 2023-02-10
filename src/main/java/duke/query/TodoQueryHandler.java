@@ -20,12 +20,12 @@ public class TodoQueryHandler extends TaskQueryHandler {
      * @throws DukeException
      */
     @Override
-    public String processQuery(String query) throws DukeException {
-        String[] parsed = QueryParser.parseQuery(query, new String[]{});
-        if (parsed[1] == null || parsed[1].isBlank()) {
+    public String processQuery(Query query) throws DukeException {
+        String desc = query.getParam();
+        if (desc == null || desc.isBlank()) {
             throw new InvalidCommandParamException("Please provide a description for your todo!");
         }
-        Task newTask = tt.addTodo(parsed[1]);
+        Task newTask = tt.addTodo(desc);
         tt.saveAllTasks();
         return "Added task " + newTask;
     }
