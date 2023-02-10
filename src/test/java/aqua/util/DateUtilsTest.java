@@ -3,6 +3,7 @@ package aqua.util;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
@@ -185,7 +186,7 @@ public class DateUtilsTest {
 
 
     @Test
-    void isIntersectingThreshold_backToBackThreshold_true() {
+    public void isIntersectingThreshold_backToBackThreshold_true() {
         double threshold = 30;
         LocalDateTime s1 = LocalDateTime.of(2023, 3, 5, 4, 55);
         LocalDateTime e1 = s1.plus(1, ChronoUnit.HOURS);
@@ -196,7 +197,7 @@ public class DateUtilsTest {
 
 
     @Test
-    void isIntersectingThreshold_separate_false() {
+    public void isIntersectingThreshold_separate_false() {
         double threshold = 30;
         LocalDateTime s1 = LocalDateTime.of(2023, 3, 5, 4, 55);
         LocalDateTime e1 = s1.plus(1, ChronoUnit.HOURS);
@@ -207,12 +208,32 @@ public class DateUtilsTest {
 
 
     @Test
-    void isIntersectingThreshold_backToBack_false() {
+    public void isIntersectingThreshold_backToBack_false() {
         double threshold = 30;
         LocalDateTime s1 = LocalDateTime.of(2023, 3, 5, 4, 55);
         LocalDateTime e1 = s1.plus(1, ChronoUnit.HOURS);
         LocalDateTime s2 = e1;
         LocalDateTime e2 = e1.plus(120, ChronoUnit.MINUTES);
         assertEquals(false, DateUtils.isIntersecting(s1, e1, s2, e2, threshold));
+    }
+
+
+    @Test
+    public void toStartOfWeek_startOfWeek_startOfWeek() {
+        LocalDateTime expected = LocalDateTime.of(2023, 2, 6, 0, 0);
+        LocalDateTime given = expected;
+        DayOfWeek weekStart = DayOfWeek.MONDAY;
+        LocalDateTime actual = DateUtils.toStartOfWeek(given, weekStart);
+        assertEquals(expected, actual);
+    }
+
+
+    @Test
+    public void toStartOfWeek_midWeek_startOfWeek() {
+        LocalDateTime expected = LocalDateTime.of(2023, 2, 6, 0, 0);
+        LocalDateTime given = expected.plus(3, ChronoUnit.DAYS);
+        DayOfWeek weekStart = DayOfWeek.MONDAY;
+        LocalDateTime actual = DateUtils.toStartOfWeek(given, weekStart);
+        assertEquals(expected, actual);
     }
 }
