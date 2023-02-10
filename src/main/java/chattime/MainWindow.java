@@ -76,7 +76,6 @@ public class MainWindow {
         if (!chattime.checkRunningStatus()) {
             Platform.exit();
         }
-        
 
     }
 }
