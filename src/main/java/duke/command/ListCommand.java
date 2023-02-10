@@ -1,7 +1,7 @@
 package duke.command;
 
 import duke.Storage;
-import duke.TaskList;
+import duke.task.TaskList;
 import duke.gui.Ui;
 
 /**
@@ -10,7 +10,7 @@ import duke.gui.Ui;
 public class ListCommand extends Command {
 
     /**
-     * Public constructor
+     * Constructor
      */
     public ListCommand() {
 
@@ -18,6 +18,7 @@ public class ListCommand extends Command {
 
     /**
      * Prints out all the tasks.
+     * @return the list of tasks
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {

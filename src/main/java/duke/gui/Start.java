@@ -1,7 +1,7 @@
 package duke.gui;
 import duke.Parser;
 import duke.Storage;
-import duke.TaskList;
+import duke.task.TaskList;
 import duke.command.Command;
 
 import javafx.application.Application;

@@ -1,24 +1,26 @@
 package duke.command;
 
 import duke.Storage;
-import duke.TaskList;
+import duke.task.TaskList;
 import duke.gui.Ui;
 
 /**
- * CommandNotFound - when user enters a Command and Duke
+ * UnknownCommand - when user enters a Command and Duke
  *         does not understand the command.
  */
-public class CommandNotFound extends Command {
+public class UnknownCommand extends Command {
 
     /**
-     * Public constructor
+     * Constructor
      */
-    public CommandNotFound() {
+    public UnknownCommand() {
 
     }
 
     /**
      * Display the UI
+     * @return a message that tells the user that Duke does not understand
+     *         the given command.
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {

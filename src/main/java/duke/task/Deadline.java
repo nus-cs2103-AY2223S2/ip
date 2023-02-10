@@ -1,16 +1,18 @@
-package duke;
+package duke.task;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
- * Contains the Deadline Task object with variable by
+ * Contains the Deadline Task object
  */
 public class Deadline extends Task {
 
-    protected LocalDateTime by;
+    private LocalDateTime by;
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy:HHmm");
 
     /**
-     * Public constructor
+     * Constructor
      *
      * @param value = the name of the task
      * @param by = the dateTime of the task to complete by
@@ -22,7 +24,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * @return = returns a string that represents the deadline object
+     * @return returns a string that represents the deadline object
      *         that is stored in a file
      */
     public String toFile() {
@@ -31,7 +33,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.by + ")";
+        return "[D]" + super.toString() + " (by: " + by.format(formatter) + ")";
     }
 
 
