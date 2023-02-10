@@ -5,6 +5,9 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.PriorityBlockingQueue;
+import java.util.stream.IntStream;
+
+import javafx.animation.Timeline;
 
 /**
  * The Parser class stores all responses that Duke will display on the
@@ -162,6 +165,22 @@ class Parser {
         int taskPosition = sc.nextInt() - DECREMENT;
         System.out.println(DELETE_COMMAND + tasks.get(taskPosition));
         return tasks.removeTask(taskPosition);
+    }
+
+    static TaskList<Task> recur(Scanner sc, TaskList<Task> tasks, List<Timeline> recurResponse) {
+
+        boolean delete = sc.next().equals("delete");
+        if (delete) {
+            int pos = IntStream.range(0, tasks.numberOfTasks()).filter(x -> tasks.get(x).getDescription()
+                            .contains("recur")).limit(Integer.parseInt(sc.next())).reduce((a, b) -> b)
+                            .orElse(-1);
+            tasks.removeTask(pos);
+            Timeline removeRecur = recurResponse.remove(pos);
+            removeRecur.stop();
+        } else {
+            return tasks.add(new Task("recur " + sc.nextLine()));
+        }
+        return tasks;
     }
 
     /*

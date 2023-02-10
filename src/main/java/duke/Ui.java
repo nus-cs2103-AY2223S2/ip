@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.Comparator;
+import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.PriorityBlockingQueue;
 
@@ -59,7 +60,7 @@ class Ui {
      * by Parser
      * @return TaskList
      */
-    TaskList<Task> execute(TaskList<Task> tasks) {
+    TaskList<Task> execute(TaskList<Task> tasks, List<Timeline> recurResponse) {
         if (description.equals(Parser.SHOW_TASKS)) {
             this.tasks = tasks.listAllTasks();
         } else if (description.equals(Parser.TERMINATE)) {
@@ -78,10 +79,9 @@ class Ui {
             this.tasks = Parser.delete(scanner, tasks);
         } else if (description.equals(Parser.FIND)) {
             this.tasks = Parser.find(scanner, tasks);
-        } /*else if (description.equals(Parser.RECUR)) {
-            //System.out.println("recur");
-            //this.tasks = Parser.addRecur(scanner, recurList, tasks);
-        } */else {
+        } else if (description.equals(Parser.RECUR)) {
+            this.tasks = Parser.recur(scanner, tasks, recurResponse);
+        } else {
             dukeExceptionWarning(description, tasks);
         }
         return this.tasks;
@@ -126,18 +126,18 @@ class Ui {
      *
      *
      */
-    TaskList<Task> dukeExceptionWarning(String description, TaskList<Task> tasks) {
+    void dukeExceptionWarning(String description, TaskList<Task> tasks) {
         try {
             if (Parser.INVALID_COMMANDS.contains(description)) {
                 throw new DukeUnknownException("Illegal command");
             } else {
                 Task newTask = new Task(description + scanner.nextLine());
                 this.tasks = tasks.add(newTask);
-                return this.tasks;
+                //return this.tasks;
             }
         } catch (DukeUnknownException e) {
             System.out.println(Parser.ILLEGAL_COMMAND);
         }
-        return tasks;
+        //return tasks;
     }
 }

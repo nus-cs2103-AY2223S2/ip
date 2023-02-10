@@ -53,7 +53,7 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     public void initialize() {
-        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        //scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         ByteArrayOutputStream storeString = new ByteArrayOutputStream();
         PrintStream printStream = new PrintStream(storeString);
         PrintStream oldPrintStream = System.out;
@@ -62,8 +62,8 @@ public class MainWindow extends AnchorPane {
         ui.showWelcome();
         System.out.flush();
         System.setOut(oldPrintStream);
-        Label greeting = new Label(storeString.toString());
-        dialogContainer.getChildren().addAll(greeting);
+        String greeting = storeString.toString();
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(greeting, dukeImage));
         duke = new Duke();
     }
 
@@ -79,7 +79,7 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
 
         String input = userInput.getText();
-        String response = duke.getResponse(input);
+        String response = duke.getResponse(input, recurResponse);
 
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
@@ -88,11 +88,7 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
 
-        TaskScheduler taskScheduler = new TaskScheduler(recurResponse, dialogContainer, dukeImage);
-        if (input.contains("recur")) {
-            System.out.println("recur found");
-            taskScheduler.recurDialogContainer(input);
-        }
+        new TaskScheduler(recurResponse, dialogContainer, dukeImage, input);
 
         dialogContainer.setBackground(background);
 

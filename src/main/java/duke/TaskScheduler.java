@@ -44,17 +44,22 @@ public class TaskScheduler extends TaskList<Recur> {
     }
     */
 
-    TaskScheduler(List<Timeline> recurResponse,VBox dialogContainer, Image dukeImage) {
+    TaskScheduler(List<Timeline> recurResponse,VBox dialogContainer, Image dukeImage, String input) {
         this.recurResponse = recurResponse;
         this.dialogContainer = dialogContainer;
         this.dukeImage = dukeImage;
+        if (input.contains("recur")) {
+            recurDialogContainer(input);
+        }
     }
 
     void recurDialogContainer(String input) {
         if (input.contains("delete")) {
+            /*
             int recurPos = Integer.parseInt(input.substring(input.length() - 1));
             Timeline removeRecur = recurResponse.remove(recurPos - 1);
             removeRecur.stop();
+             */
         } else {
             String[] splitInput = input.split(" ");
             int delay = Integer.parseInt(splitInput[splitInput.length - 1]);
@@ -77,20 +82,16 @@ public class TaskScheduler extends TaskList<Recur> {
     */
 
     //Change to accept Recur event later
+    /*
     void addRecurringEvent(Recur recurEvent) {
         for (int i=0; i<10;i++) {
             priorityQueue.add(recurEvent);
         }
+     */
         /*
         priorityQueue.add(new Recur("First zoom meeting","Monday","Monday",1000));
         priorityQueue.add(new Recur("Second zoom meeting","Tuesday","Tuesday",2000));
         priorityQueue.add(new Recur("Third zoom meeting","Wednesday","Wednesday",3000));
         priorityQueue.add(new Recur("Fourth zoom meeting","Thursday","Thursday",4000));
         */
-    }
-
-
-
-
-
 }

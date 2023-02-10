@@ -3,9 +3,11 @@ package duke;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.PriorityBlockingQueue;
 
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 
 /**
@@ -89,7 +91,7 @@ public class Duke {
 
 
     @FXML
-    protected String getResponse(String input) {
+    protected String getResponse(String input, List<Timeline> recurResponse) {
 
         storage = new Storage();
         storage.readFromFile();
@@ -109,7 +111,7 @@ public class Duke {
         System.setOut(printStream);
 
         ui = new Ui(input);
-        taskList = ui.execute(taskList);
+        taskList = ui.execute(taskList, recurResponse);
 
         System.out.flush();
         System.setOut(oldPrintStream);
