@@ -43,7 +43,9 @@ public class Storage {
         try {
             Scanner scanner = new Scanner(filePath.toFile());
             ArrayList<Task> tasks = new ArrayList<Task>();
+            int i = 0;
             while (scanner.hasNextLine()) {
+                i++;
                 String cur = scanner.nextLine();
                 String[] temp = cur.split(" \\| ");
                 if (temp[0].equals("T")) {
@@ -54,6 +56,7 @@ public class Storage {
                     tasks.add(new Event(temp[2], temp[4], temp[3], parseBoolean(temp[1])));
                 }
             }
+            assert(tasks.size() == i) : "Tasks size must equal to the number of tasks stored in kuromi.txt";
             return tasks;
         } catch (FileNotFoundException e) {
             throw new KuromiException("Loading Error\n");
