@@ -73,6 +73,7 @@ public class Storage {
                 String status = lineArr[1].trim();
                 String content = lineArr[2].trim();
                 Task task;
+                assert type.equals("");
 
                 // Create task according to the type of task
                 switch (type) {
@@ -119,6 +120,7 @@ public class Storage {
                 if (status.equals("1")) {
                     task.markAsDone();
                 }
+                assert task != null;
                 res.createToDo(task);
             });
         }
