@@ -35,6 +35,8 @@ public class Duke {
         if (input.equalsIgnoreCase("bye")) {
             return ui.getExtStr();
         }
+        System.out.println(input);
+        assert input.equals("");
         // Parse the user input
         Parser parser = new Parser(input);
         String out;
