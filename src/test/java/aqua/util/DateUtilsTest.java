@@ -236,4 +236,22 @@ public class DateUtilsTest {
         LocalDateTime actual = DateUtils.toStartOfWeek(given, weekStart);
         assertEquals(expected, actual);
     }
+
+
+    @Test
+    public void toStartOfDay_startOfDay_startOfDay() {
+        LocalDateTime expected = LocalDateTime.of(2023, 2, 6, 0, 0);
+        LocalDateTime given = expected;
+        LocalDateTime actual = DateUtils.toStartOfDay(given);
+        assertEquals(expected, actual);
+    }
+
+
+    @Test
+    public void toStartOfDay_midDay_startOfDay() {
+        LocalDateTime expected = LocalDateTime.of(2023, 2, 6, 0, 0);
+        LocalDateTime given = expected.plus(12, ChronoUnit.HOURS);
+        LocalDateTime actual = DateUtils.toStartOfDay(given);
+        assertEquals(expected, actual);
+    }
 }
