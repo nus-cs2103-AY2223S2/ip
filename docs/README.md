@@ -21,8 +21,8 @@
     * [Unmark Task](#unmark-task)
     * [Delete Task](#delete-task) 
     * [Find Task](#find-tasks)
-    * [Undo command](#undo-command)
-    * [Checkout version](#checkout-version)
+    * [Undo command](#undo)
+    * [Checkout version](#checkout)
     * [Bye](#bye)
 - [Useful Resources](#useful-resources)
 
@@ -193,6 +193,29 @@ Here are the tasks matching "homework":
 [T][ ] homework 
 [T][ ] Do homework for math class
 ```
+
+### Undo
+The "undo" action refers to the ability to reverse or cancel the previous action taken by the user. 
+For example, if the user accidentally adds a task, they can use the undo action to remove it from the task list. 
+The undo action can also be used to revert any changes made to an existing task, such as editing its description or 
+marking it as complete. Essentially, the undo action allows the user to correct mistakes or change their mind without having to start over from scratch.
+
+Example: `undo`
+
+Expected Outcome: 
+```
+State has successfully reverted to the last changes.
+```
+
+### Checkout
+The application records each change made to the state of the application and provides an overview of the complete history of the project.
+This makes it possible to revert to a previous version of the project if necessary, or to compare different versions to see how the project has evolved.
+
+Example: `checkout`
+
+### Saving the data
+
+Duke's data is saved in a local file automatically after any command that changes the data. There is no need to save manually.
 
 ### Bye
 Terminates the application.
