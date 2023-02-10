@@ -44,4 +44,8 @@ public class Ui {
     public String printByeMessage() {
         return ("Bye. Hope to see you again soon!");
     }
+
+    public String printDuplicateTaskMessage() {
+        return ("Oops, this task already exist!");
+    }
 }

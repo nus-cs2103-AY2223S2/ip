@@ -42,7 +42,7 @@ public class Task {
      * @return Description.
      */
     public String getDescription() {
-        return description;
+        return description.trim();
     }
 
     /**
@@ -60,7 +60,11 @@ public class Task {
      * @return Remarks.
      */
     public String getRemarks() {
-        return remarks;
+        return remarks.trim();
+    }
+
+    public boolean equals(Task task) {
+        return (task.getDescription().equals(this.getDescription()) && task.getRemarks().equals(this.getRemarks()));
     }
     @Override
     public String toString() {
