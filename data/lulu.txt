@@ -1,0 +1,14 @@
+T`1`run
+T`1`run
+T`0`run2
+T`1`run
+T`0`run3
+T`1`run
+D`0`run ` tomorrow
+T`1`run
+T`0`run
+T`0`study
+D`0`study ` tomorrow
+T`0`take mrt
+T`0`run
+T`0`run
