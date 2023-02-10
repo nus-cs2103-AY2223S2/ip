@@ -3,6 +3,7 @@ package core;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 
+import task.Deadline;
 import task.Task;
 
 /**
@@ -185,6 +186,48 @@ public class TaskMaster {
             }
         } else {
             ret.append("Oh my, the list is empty!\n");
+        }
+
+        return ret.toString();
+    }
+
+    /**
+     * Return a string containing tasks with the latest deadline.
+     * @return string to be print.
+     */
+    public String getReminder() {
+
+        System.out.println("Printing reminders");
+
+        StringBuilder ret = new StringBuilder();
+
+        if (tasks.size() > 0) {
+            LinkedList<Deadline> latestDeadline = new LinkedList<>();
+
+            for (Task task: tasks) {
+                if (task instanceof Deadline) {
+                    if (latestDeadline.size() == 0) {
+                        latestDeadline.add((Deadline) task);
+                    } else {
+                        Deadline f = latestDeadline.peek();
+                        int comparison = f.getBy().compareTo(((Deadline) task).getBy());
+                        if (comparison == 0) {
+                            latestDeadline.add((Deadline) task);
+                        } else if (comparison < 0) {
+                            latestDeadline = new LinkedList<>();
+                            latestDeadline.add((Deadline) task);
+                        }
+                    }
+                }
+            }
+            ret.append("The following tasks are up coming!\n");
+
+            for (Deadline dl : latestDeadline) {
+                ret.append(dl);
+                ret.append("\n");
+            }
+        } else {
+            ret.append("You have nothing upcoming within this week!\n");
         }
 
         return ret.toString();

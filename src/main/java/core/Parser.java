@@ -23,6 +23,9 @@ public class Parser {
      */
     public Parser(String userInput) {
 
+        // When execution comes to this point, user input can't be empty!
+        assert(userInput.isEmpty() != true);
+
         this.userInput = userInput.trim();
         String[] split = this.userInput.split(" ", 2);
         if (split.length > 1) {

@@ -42,4 +42,14 @@ public class DateHandler {
     public static String unconvert(LocalDateTime userin) {
         return userin.format(DateTimeFormatter.ofPattern(dtfPattern));
     }
+
+    /**
+     * Return time now according to dateTimeFormat format.
+     * @return the time now.
+     */
+    public static LocalDateTime timeNow() {
+        LocalDateTime ret = LocalDateTime.now();
+        ret.format(dateTimeFormat);
+        return ret;
+    }
 }
