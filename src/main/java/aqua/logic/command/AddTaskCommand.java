@@ -1,5 +1,6 @@
 package aqua.logic.command;
 
+import aqua.exception.ProcedureException;
 import aqua.exception.SyntaxException;
 import aqua.logic.ArgumentMap;
 import aqua.logic.ExecutionDisplayerTask;
@@ -20,7 +21,7 @@ public abstract class AddTaskCommand extends CommandController {
      * @return the task created from the given arguments.
      * @throws SyntaxException if the arguments are of invalid syntax.
      */
-    protected abstract UserTask createTask(ArgumentMap args) throws SyntaxException;
+    protected abstract UserTask createTask(ArgumentMap args) throws SyntaxException, ProcedureException;
 
 
     @Override
@@ -36,7 +37,7 @@ public abstract class AddTaskCommand extends CommandController {
     }
 
 
-    private UserTask addProcess(ArgumentMap args, LogicManager manager) throws SyntaxException {
+    private UserTask addProcess(ArgumentMap args, LogicManager manager) throws SyntaxException, ProcedureException {
         UserTask task = createTask(args);
         manager.getTaskManager().add(task);
         return task;
@@ -53,7 +54,7 @@ public abstract class AddTaskCommand extends CommandController {
 
 
         @Override
-        public UserTask process(ArgumentMap args, LogicManager manager) throws SyntaxException {
+        public UserTask process(ArgumentMap args, LogicManager manager) throws SyntaxException, ProcedureException {
             return addProcess(args, manager);
         }
     }
@@ -69,7 +70,7 @@ public abstract class AddTaskCommand extends CommandController {
 
 
         @Override
-        public UserTask process(ArgumentMap args, LogicManager manager) throws SyntaxException {
+        public UserTask process(ArgumentMap args, LogicManager manager) throws SyntaxException, ProcedureException {
             return addProcess(args, manager);
         }
 
