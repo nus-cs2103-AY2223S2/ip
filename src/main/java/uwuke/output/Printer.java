@@ -61,7 +61,7 @@ public class Printer {
         "      __\\///\\\\\\\\\\\\\\\\\\/________\\//\\\\\\__\\//\\\\\\________\\///\\\\\\\\\\\\\\\\\\/___ \n"+
         "       ____\\/////////___________\\///____\\///___________\\/////////_____\n";
        
-        Printer.printWithDecorations(uwu);
+        printWithDecorations(uwu);
     }
 
     /**
@@ -113,7 +113,7 @@ public class Printer {
      * Prints out a warning message when list has reach it's capacity
      */
     public static void printNotEnoughSpace() {
-        Printer.printWithDecorations("You have added too many tasks!");
+        printWithDecorations("You have added too many tasks!");
     }
 
     /**

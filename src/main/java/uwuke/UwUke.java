@@ -50,6 +50,8 @@ public class UwUke extends Application {
         userInput = new TextField();
         sendButton = new Button("Send");
 
+        
+
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
         mainLayout.setPrefSize(400.0, 600.0);
@@ -68,6 +70,7 @@ public class UwUke extends Application {
         Printer.setDialogContainer(dialogContainer);
         DialogBox.setDukeImage(duke);
         DialogBox.setUserImage(user);
+        inititialise();
 
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
@@ -198,11 +201,5 @@ public class UwUke extends Application {
         } catch (Exception e) {
             Printer.printError("Unknown error ocurred");
         }
-    }
-
-    public static void main(String[] args) {
-        inititialise();
-        sc.close();
-        Printer.printBye();
     }
 }
