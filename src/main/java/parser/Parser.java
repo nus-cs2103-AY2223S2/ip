@@ -27,6 +27,7 @@ public class Parser {
      * @throws InvalidInputException If string does not start with recognised command.
      */
     public static Task parseEcho(String echo) throws DukeException {
+        assert echo != null;
         if (echo.startsWith("todo")) {
             if (echo.substring(4).trim().isEmpty()) {
                 throw(new NoTaskDescriptionException("     ☹ OOPS!!! The description of a todo cannot be empty."));
@@ -52,7 +53,6 @@ public class Parser {
                     splitArguments[2].substring(2).trim());
 
         } else {
-            // System.out.println("Placeholder");
             throw(new InvalidInputException("      ☹ OOPS!!! I'm sorry, but I don't know what that means :-("));
         }
     }
