@@ -12,6 +12,8 @@ import javafx.scene.layout.HBox;
  * type, completion status and other details.
  */
 public class TaskBox extends HBox {
+    private static final String TASK_COMPLETED_STYLE = "-fx-background-color: #90EE90; -fx-background-radius: 10";
+    private static final String TASK_UNCOMPLETED_STYLE = "-fx-background-color: #E55451; -fx-background-radius: 10";
     @FXML
     private Label taskNumber;
     @FXML
@@ -77,10 +79,8 @@ public class TaskBox extends HBox {
      */
     private void setTaskLabelColor(boolean isTaskCompleted) {
         if (isTaskCompleted) {
-            String TASK_COMPLETED_STYLE = "-fx-background-color: #90EE90; -fx-background-radius: 10";
             this.taskStatus.setStyle(TASK_COMPLETED_STYLE);
         } else {
-            String TASK_UNCOMPLETED_STYLE = "-fx-background-color: #E55451; -fx-background-radius: 10";
             this.taskStatus.setStyle(TASK_UNCOMPLETED_STYLE);
         }
     }

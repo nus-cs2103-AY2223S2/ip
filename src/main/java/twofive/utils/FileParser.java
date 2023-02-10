@@ -77,7 +77,7 @@ public class FileParser {
     private String parseTaskTypeFull(String taskType) throws InvalidTaskTypeException {
         switch (taskType) {
         case "T":
-            return  "todo";
+            return "todo";
         case "D":
             return "deadline";
         case "E":
