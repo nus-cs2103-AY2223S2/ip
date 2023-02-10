@@ -17,12 +17,12 @@ public class ToDoCommand extends AddTaskCommand {
 
     @Override
     public String getCommandRegexPattern() {
-        return "^todo (.*)$";
+        return "^todo (.*) \\/place (.*)$";
     }
 
     @Override
     public String getCommandPattern() {
-        return "todo <description>";
+        return "todo <description> /place <location>";
     }
 
     /**
@@ -31,16 +31,17 @@ public class ToDoCommand extends AddTaskCommand {
      * @param ui       User interface.
      * @param taskList Task list.
      * @param storage  Storage.
-     * @param args     Argument list in order: description.
+     * @param args     Argument list in order: description, place.
      * @throws DukeException If failed to save new task list to storage.
      */
     @Override
     public void run(Ui ui, TaskList taskList, Storage storage, String... args) throws DukeException {
-        // Assert arguments has only 1 item: description.
-        assert args.length == 1;
+        // Assert arguments has only 2 items: description, place.
+        assert args.length == 2;
 
         String description = args[0];
+        String place = args[1];
 
-        addTask(new ToDo(description), ui, taskList, storage);
+        addTask(new ToDo(description, place), ui, taskList, storage);
     }
 }

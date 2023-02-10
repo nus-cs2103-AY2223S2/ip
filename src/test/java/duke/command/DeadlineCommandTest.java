@@ -17,8 +17,9 @@ public class DeadlineCommandTest {
     @Test
     public void run_emptyTaskList_addDeadlineToTaskList() {
         String description = "deadline description";
+        String place = "deadline place";
         String by = "13/10/1999 13:00";
-        String[] args = { description, by };
+        String[] args = { description, place, by };
 
         Ui ui = new StubUi();
         TaskList taskList = new TaskList(new ArrayList<>());

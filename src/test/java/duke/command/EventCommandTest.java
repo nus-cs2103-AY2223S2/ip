@@ -17,9 +17,10 @@ public class EventCommandTest {
     @Test
     public void run_emptyTaskList_addEventToTaskList() {
         String description = "event description";
+        String place = "event place";
         String from = "13/10/1999 13:00";
         String until = "13/10/1999 13:00";
-        String[] args = { description, from, until };
+        String[] args = { description, place, from, until };
 
         Ui ui = new StubUi();
         TaskList taskList = new TaskList(new ArrayList<>());
