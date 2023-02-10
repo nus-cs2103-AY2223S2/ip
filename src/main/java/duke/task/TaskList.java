@@ -73,7 +73,7 @@ public class TaskList {
     }
 
     private void checkIndexOutOfBounds(int idx) throws DukeException {
-        if (idx < 0 || idx >= indexToTask.size()) {
+        if (!indexToTask.containsKey(idx)) {
             throw new DukeException("Task index out of bounds.");
         }
     }
