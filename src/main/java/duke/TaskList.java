@@ -1,6 +1,7 @@
 package duke;
 
 import duke.exception.InvalidFormatException;
+import duke.exception.LogFileLoadException;
 import duke.task.Task;
 
 import java.io.FileNotFoundException;
@@ -26,15 +27,27 @@ public class TaskList {
 
     /**
      * Adds tasks from the storage
+     *
+     * @throws FileNotFoundException log file cannot found
+     * @throws InvalidFormatException log file cannot be understood
      */
-    public void loadFromStorage() throws FileNotFoundException, InvalidFormatException {
-        for (String row : storage.retrieveContents()) {
-            tasks.add(Task.factoryMethod(
+    public void loadFromStorage() throws FileNotFoundException, LogFileLoadException {
+        storage.retrieveContents()
+                .stream()
+                .map(x -> createTask(x))
+                .forEach(x -> tasks.add(x));
+    }
+
+    public Task createTask(String row) throws LogFileLoadException {
+        try {
+            Task output =  Task.factoryMethod(
                     row.charAt(1),
                     row.charAt(4),
                     row.substring(7),
-                    parser
-            ));
+                    parser);
+            return output;
+        } catch (InvalidFormatException exception) {
+            throw new LogFileLoadException("error");
         }
     }
 

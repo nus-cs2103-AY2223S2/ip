@@ -1,6 +1,7 @@
 package duke;
 
 import duke.exception.InvalidFormatException;
+import duke.exception.LogFileLoadException;
 import duke.exception.UnrecognisedCommandException;
 import duke.gui.Gui;
 import duke.gui.Main;
@@ -16,7 +17,7 @@ public class Duke {
     private final Parser parser;
     private final TaskList tasks;
 
-    public Duke() throws IOException, InvalidFormatException {
+    public Duke() throws IOException, LogFileLoadException {
         parser = new Parser("yyyy-MM-dd", "dd-MMM-yyyy (EEE)");
         tasks = new TaskList(
                 parser,
@@ -105,7 +106,7 @@ public class Duke {
     public static void main(String[] args) {
         try {
             new Duke().run(args);
-        } catch (IOException | InvalidFormatException exception) {
+        } catch (IOException | LogFileLoadException exception) {
             System.out.println(exception.getMessage());
         }
     }
