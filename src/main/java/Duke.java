@@ -1,14 +1,9 @@
-import java.io.FileNotFoundException;
-import java.util.Scanner;
-import java.util.Arrays;
-import java.io.File;
-import java.io.FileWriter;
+
 import java.io.IOException;
 
 import DukeHelpfulCode.Exceptions.*;
 import DukeHelpfulCode.Utilities.*;
 import DukeHelpfulCode.Commands.*;
-import DukeHelpfulCode.Tasks.*;
 
 
 
@@ -55,7 +50,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+        new Duke("./src/main/resources/data/tasks.txt").run();
     }
 
 

@@ -25,14 +25,24 @@ test {
         showStackTraces true
         showStandardStreams = false
     }
-    run()
 }
 
 application {
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "Duke"
+}
+
+sourceSets {
+    main {
+        resources {
+            srcDir 'src/main/resources'
+        }
+    }
 }
 
 shadowJar {
+    from("src/main/resources"){
+        into 'META-INF/resources'
+    }
     archiveBaseName = "duke"
     archiveClassifier = null
 }
