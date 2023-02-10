@@ -17,21 +17,33 @@ public class Parser {
 
     /**
      * Update last command
-     * @param newCommand
+     * @param newCommand type of last command
      */
     public static void updateLastCommand(String newCommand) {
         lastCommand = newCommand;
     }
 
+    /**
+     * Update last command detail
+     * @param newDetail detail of last command in String
+     */
     public static void updateLastCommandDetail(String newDetail) {
         lastCommandDetail = newDetail;
     }
 
+    /**
+     * Update last task list (update to before most recent command is applied on Duke)
+     * @param newTaskList what the task list was before most recent command is applied
+     */
     public static void updateLastTaskList(TaskList newTaskList) {
         lastTaskList = newTaskList;
     }
 
-    public static TaskList getLastTaskList() {
+    /**
+     * Return the last task list - the task list before last command is applied
+     * @return last task list
+     */
+    private static TaskList getLastTaskList() {
         return lastTaskList;
     }
 
