@@ -37,6 +37,8 @@ public class TaskBox extends HBox {
             e.printStackTrace();
         }
 
+        assert taskDetails.length == 3 : "The task detail array should contain 3 Strings";
+
         String taskNumberString = taskDetails[0];
         String taskTypeString = taskDetails[1];
         String taskStatusString = taskDetails[2];

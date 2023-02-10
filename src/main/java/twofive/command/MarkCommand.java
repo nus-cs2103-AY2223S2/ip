@@ -23,7 +23,7 @@ public class MarkCommand extends Command {
     /**
      * Marks a task as done from the given list of tasks using the provided task number.
      *
-     * @param tasks List of tasks containing the task to be marked as done.
+     * @param tasks   List of tasks containing the task to be marked as done.
      * @param storage Storage for saving or loading tasks.
      * @throws InvalidTaskException if task number is invalid
      */
@@ -33,6 +33,8 @@ public class MarkCommand extends Command {
         if (this.taskNum < 0 || this.taskNum >= tasks.getTasksNum()) {
             throw new InvalidTaskException();
         }
+        assert taskNum >= 0 & taskNum < tasks.getTasksNum() : "Task number should be at least 0 or 1 less than "
+                + "the number of tasks";
         Task currentTask = tasks.setTaskAsDone(taskNum);
         try {
             storage.save(tasks);

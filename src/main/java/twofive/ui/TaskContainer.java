@@ -30,6 +30,7 @@ public class TaskContainer extends VBox {
      */
     public void showTasks() {
         this.getChildren().clear();
+        assert this.getChildren().size() == 0 : "All tasks shown should have been cleared";
         for (int i = 0; i < tasks.size(); i++) {
             ArrayList<String> taskDetails = tasks.get(i).getTaskDetails();
             taskDetails.add(0, Integer.toString(i + 1));
