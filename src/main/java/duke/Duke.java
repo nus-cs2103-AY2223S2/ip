@@ -110,6 +110,7 @@ public class Duke {
             return ui.printByeMessage();
 
         }
+        assert cmd != null : "command must not be null";
         return cmd.execute(list, ui);
     }
 

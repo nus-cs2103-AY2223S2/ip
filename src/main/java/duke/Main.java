@@ -23,6 +23,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
+            assert duke != null: "duke must not be null";
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

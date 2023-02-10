@@ -2,4 +2,4 @@ D | X | return book | 12/06/2023
 E | X | project meeting | 12/06/2023 1400 | 12/06/2024 1600
 T | X | join sports club
 D | X | code | 12/12/2012 1700
-T |   | code
+T | X | code
