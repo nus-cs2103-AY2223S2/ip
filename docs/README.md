@@ -1,4 +1,4 @@
-# Book User Guide
+# Book
 
 Welcome to
 ```
