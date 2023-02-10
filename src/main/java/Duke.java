@@ -37,11 +37,13 @@ public class Duke {
             response = ui.getWelcomeMessage();
             isStart = false;
         } else {
+            assert isStart == false : "isStart should be false";
             Command c = Parser.parse(input);
             if (c instanceof ExitCommand) {
                 response = ui.getGoodbyeMessage();
                 this.storage.save(this.tasks);
             } else {
+                assert !(c instanceof ExitCommand) : "c should not be a exit command";
                 response = c.execute(this.tasks, this.ui, this.storage);
             }
         }
