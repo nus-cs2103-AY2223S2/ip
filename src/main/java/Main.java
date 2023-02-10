@@ -34,7 +34,7 @@ public class Main extends Application {
     }
 
     @Override
-    public void stop(){
+    public void stop() {
         duke.goodbye();
         System.out.println("Stage is closing");
     }
