@@ -116,6 +116,7 @@ public class Ui {
      * @param list ArrayList of Tasks to be printed.
      */
     public String printListNumber(ArrayList<Task> list) {
+        assert list != null;
         return "    Now you have " + list.size() + " task(s) in the list.\n";
     }
 
@@ -133,6 +134,7 @@ public class Ui {
      * @param list ArrayList of which contents to be printed.
      */
     public static String printArrayList(ArrayList<Task> list) {
+        assert list != null;
         String answer = "";
         for (int i = 0; i < list.size(); i++) {
             answer += "    " + (i + 1) + ". "

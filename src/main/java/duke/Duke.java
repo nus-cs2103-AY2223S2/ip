@@ -48,7 +48,6 @@ public class Duke {
         }
     }
 
-
     public String getResponse(String input) {
         // Supposed to change
         String response = Parser.parseCommands(input, this.tasks, this.ui, this.storage);
@@ -62,7 +61,7 @@ public class Duke {
             // TODO: handle exception
             return e.getMessage();
         }
-
+        assert item != null;
         tasks.addTask(item);
         response += ui.showAddedMessage(item);
         response += ui.printListNumber(tasks.getList());
