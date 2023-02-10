@@ -4,8 +4,6 @@ import duke.DukeException;
 import duke.task.Task;
 import duke.task.TaskTracker;
 
-import java.util.StringTokenizer;
-
 /**
  * The UnmarkQueryHandler class handles user queries for unmarking tasks.
  */
@@ -22,10 +20,8 @@ public class UnmarkQueryHandler extends TaskQueryHandler {
      * @throws DukeException
      */
     @Override
-    public String processQuery(String query) throws DukeException {
-        StringTokenizer st = new StringTokenizer(query);
-        st.nextToken();
-        Task t = tt.markUnmarkTask(Integer.parseInt(st.nextToken()) - 1, false);
+    public String processQuery(Query query) throws DukeException {
+        Task t = tt.markUnmarkTask(Integer.parseInt(query.getParam()) - 1, false);
         tt.saveAllTasks();
         return "Task marked as incomplete: " + t;
     }

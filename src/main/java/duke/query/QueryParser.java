@@ -3,34 +3,34 @@ package duke.query;
 import java.util.StringTokenizer;
 
 /**
- * The QueryParser class is a utility class that parses query strings.
+ * The QueryParser class is a utility class that parses raw query strings into Query objects.
  */
 public class QueryParser {
     /**
      * Parses a query into an array of Strings.
      *
-     * @param query    query to the bot
-     * @param commands command keywords (e.g. /by, /from) to detect in query
+     * @param rawQuery a raw query string from user input
      * @return a string array with query type, description and command parameters
      */
-    public static String[] parseQuery(String query, String[] commands) {
-        String[] result = new String[commands.length + 2];
-        StringTokenizer st = new StringTokenizer(query);
-        result[0] = st.nextToken();
+    public static Query parseQuery(String rawQuery) {
+        StringTokenizer st = new StringTokenizer(rawQuery);
+        String command = st.nextToken();
+        Query query = new Query(command);
 
         try {
-            result[1] = st.nextToken("/").stripTrailing().stripLeading();
-            for (int i = 0; i < commands.length; i++) {
-                String command = st.nextToken(" ");
-                if (!command.equals(commands[i])) {
-                    result[i + 2] = "";
-                } else {
-                    result[i + 2] = st.nextToken(i == commands.length - 1 ? "\n" : "/")
-                            .stripLeading().stripTrailing();
+            String param = st.nextToken("/").strip();
+            query.setParam(param);
+
+            while (st.hasMoreTokens()) {
+                String key = st.nextToken(" ").strip();
+                String arg = st.nextToken("/").strip();
+                if (!key.isBlank()) {
+                    query.setArgument(key, arg);
                 }
             }
         } catch (Exception e) {
+            // Ignore exceptions from string tokenizer.
         }
-        return result;
+        return query;
     }
 }

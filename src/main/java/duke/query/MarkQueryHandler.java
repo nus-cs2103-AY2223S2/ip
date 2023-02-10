@@ -4,8 +4,6 @@ import duke.DukeException;
 import duke.task.Task;
 import duke.task.TaskTracker;
 
-import java.util.StringTokenizer;
-
 /**
  * The MarkQueryHandler class handles user queries for marking tasks.
  */
@@ -22,10 +20,8 @@ public class MarkQueryHandler extends TaskQueryHandler {
      * @throws DukeException
      */
     @Override
-    public String processQuery(String query) throws DukeException {
-        StringTokenizer st = new StringTokenizer(query);
-        st.nextToken();
-        Task t = tt.markUnmarkTask(Integer.parseInt(st.nextToken()) - 1, true);
+    public String processQuery(Query query) throws DukeException {
+        Task t = tt.markUnmarkTask(Integer.parseInt(query.getParam()) - 1, true);
         tt.saveAllTasks();
         return "Task marked as complete: " + t;
     }

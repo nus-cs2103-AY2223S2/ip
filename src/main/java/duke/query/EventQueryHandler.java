@@ -1,12 +1,12 @@
 package duke.query;
 
-import duke.DukeException;
-import duke.task.Task;
-import duke.task.TaskTracker;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.DukeException;
+import duke.task.Task;
+import duke.task.TaskTracker;
 
 /**
  * The EventQueryHandler class handles user queries for adding new events.
@@ -19,44 +19,51 @@ public class EventQueryHandler extends DeadlineQueryHandler {
     /**
      * Processes a query for adding an event.
      *
-     * @param query a user input string
+     * @param query user query
      * @return response from adding an event
      * @throws DukeException
      */
     @Override
-    public String processQuery(String query) throws DukeException {
-        String[] parsed = QueryParser.parseQuery(query, new String[]{"/from", "/to"});
-        String desc = parsed[1];
+    public String processQuery(Query query) throws DukeException {
+        String desc = query.getParam();
         if (desc == null || desc.isBlank()) {
-            throw new InvalidCommandParamException("Please provide a description for your event!");
+            throw new InvalidCommandParamException(getInvalidCommandResponse("a description"));
         }
 
-        String startDateStr = parsed[2];
+        String startDateStr = query.getArgument("/from");
         if (startDateStr == null || startDateStr.isBlank()) {
-            throw new InvalidCommandParamException("Please provide a start date for the event!");
+            throw new InvalidCommandParamException(getInvalidCommandResponse("a start date"));
         }
 
         LocalDateTime startDate;
         try {
             startDate = LocalDateTime.parse(startDateStr, DateTimeFormatter.ofPattern(DATETIME_PATTERN));
         } catch (DateTimeParseException e) {
-            throw new InvalidCommandParamException(String.format("Please provide a valid start date for your event! (%s)", DATETIME_PATTERN));
+            throw new InvalidCommandParamException(getInvalidCommandResponse("a valid start date", DATETIME_PATTERN));
         }
 
-        String endDateStr = parsed[3];
+        String endDateStr = query.getArgument("/to");
         if (endDateStr == null || endDateStr.isBlank()) {
-            throw new InvalidCommandParamException("Please provide an end date for the event!");
+            throw new InvalidCommandParamException(getInvalidCommandResponse("an end date"));
         }
 
         LocalDateTime endDate;
         try {
             endDate = LocalDateTime.parse(endDateStr, DateTimeFormatter.ofPattern(DATETIME_PATTERN));
         } catch (DateTimeParseException e) {
-            throw new InvalidCommandParamException(String.format("Please provide a valid end date for your event! (%s)", DATETIME_PATTERN));
+            throw new InvalidCommandParamException(getInvalidCommandResponse("a valid end date", DATETIME_PATTERN));
         }
 
         Task newTask = tt.addEvent(desc, startDate, endDate);
         tt.saveAllTasks();
         return "Added task " + newTask;
+    }
+
+    private static String getInvalidCommandResponse(String expectedParam) {
+        return getInvalidCommandResponse(expectedParam, "");
+    }
+
+    private static String getInvalidCommandResponse(String expectedParam, String correctFormat) {
+        return String.format("Please provide %s for your event! %s", expectedParam, correctFormat);
     }
 }

@@ -1,11 +1,11 @@
 package duke.task;
 
-import duke.DukeException;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import duke.DukeException;
 
 /**
  * The TaskTracker class tracks a collection of tasks

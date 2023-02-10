@@ -6,7 +6,7 @@ import duke.DukeException;
  * The SimpleResponseQueryHandler class handles simple responses to user queries.
  */
 public class SimpleResponseQueryHandler implements IQueryHandler {
-    String response;
+    private final String response;
 
     public SimpleResponseQueryHandler(String response) {
         this.response = response;
@@ -20,7 +20,7 @@ public class SimpleResponseQueryHandler implements IQueryHandler {
      * @throws DukeException
      */
     @Override
-    public String processQuery(String query) throws DukeException {
+    public String processQuery(Query query) throws DukeException {
         return response;
     }
 }

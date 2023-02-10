@@ -13,12 +13,12 @@ public class FindTaskQueryHandler extends TaskQueryHandler {
     }
 
     @Override
-    public String processQuery(String query) throws DukeException {
-        String[] parsed = QueryParser.parseQuery(query, new String[]{});
-        if (parsed[1] == null || parsed[1].isBlank()) {
+    public String processQuery(Query query) throws DukeException {
+        String keyword = query.getParam();
+        if (keyword == null || keyword.isBlank()) {
             throw new InvalidCommandParamException("Please provide a keyword!");
         }
-        String matchStr = tt.listTasksByKeyword(parsed[1]);
-        return matchStr.isBlank() ? "No matches found for " + parsed[1] : matchStr;
+        String matchStr = tt.listTasksByKeyword(keyword);
+        return matchStr.isBlank() ? "No matches found for " + keyword : matchStr;
     }
 }
