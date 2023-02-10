@@ -24,7 +24,7 @@ public class Parser {
     public Parser(String userInput) {
 
         this.userInput = userInput.trim();
-        String[] split = userInput.split(" ", 2);
+        String[] split = this.userInput.split(" ", 2);
         if (split.length > 1) {
             this.userInput = split[1];
         } else {

@@ -134,10 +134,10 @@ public class DukeIO extends PrintWriter {
      * @param tm the runtime TaskMaster object
      */
     public static void writeSave(TaskMaster tm) {
-        System.out.println(LOCAL_SAVE);
+//        System.out.println(LOCAL_SAVE);
         BufferedWriter file = writeFileBW();
         try {
-            System.out.println(tm.exportToCsv());
+//            System.out.println(tm.exportToCsv());
             file.write(tm.exportToCsv());
             file.close();
         } catch (IOException | NullPointerException e) {
