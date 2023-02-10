@@ -2,6 +2,7 @@ package twofive.data;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import twofive.exception.TaskDoneException;
 import twofive.exception.TaskUndoneException;
@@ -85,13 +86,9 @@ public class TaskList {
      * @return ArrayList containing all added tasks with a deadline on the given date.
      */
     public ArrayList<Task> getTasksOnDate(LocalDate date) {
-        ArrayList<Task> todayTasks = new ArrayList<>();
-        for (Task task : tasks) {
-            if (task.isToday(date)) {
-                todayTasks.add(task);
-            }
-        }
-        return todayTasks;
+        return tasks.stream()
+                .filter(task -> task.isToday(date))
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
     /**
@@ -101,9 +98,7 @@ public class TaskList {
      */
     public String getSaveTasksString() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (Task task : tasks) {
-            stringBuilder.append(task.getFileWriteString() + "\n");
-        }
+        tasks.forEach(task -> stringBuilder.append(task.getFileWriteString() + "\n"));
         return stringBuilder.toString();
     }
 
@@ -117,13 +112,9 @@ public class TaskList {
      * @return ArrayList containing all added tasks with the keyword in their description
      */
     public ArrayList<Task> getTasksByKeyword(String keyword) {
-        ArrayList<Task> tasksWithKeyword = new ArrayList<>();
-        for (Task task : tasks) {
-            if (task.hasKeyword(keyword)) {
-                tasksWithKeyword.add(task);
-            }
-        }
-        return tasksWithKeyword;
+        return tasks.stream()
+                .filter(task -> task.hasKeyword(keyword))
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
     public ArrayList<Task> getTasks() {
