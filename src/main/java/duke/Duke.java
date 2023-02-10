@@ -1,6 +1,7 @@
 package duke;
 
 import duke.command.Command;
+import duke.command.RemindCommand;
 import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
@@ -75,6 +76,14 @@ public class Duke {
         ui.makeSeperation();
     }
 
+    /**
+     * Finds and returns string representation of tasks needing reminders.
+     * @return String representation of tasks needing reminders.
+     */
+    public String getInitReminders() {
+        RemindCommand reminders = new RemindCommand(null);
+        return reminders.execute(tasks, ui, storage);
+    }
     /**
      * Returns a string of the response for the Duke GUI.
      * @param input User's input

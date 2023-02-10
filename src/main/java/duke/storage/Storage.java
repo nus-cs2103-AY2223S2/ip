@@ -19,6 +19,10 @@ import duke.task.Task;
  */
 public class Storage {
     /**
+     * Symbol to split fields of task in txt file.
+     */
+    public static final String SPLITTER = "@";
+    /**
      * The file path of duke.txt.
      */
     private String taskFilePath;

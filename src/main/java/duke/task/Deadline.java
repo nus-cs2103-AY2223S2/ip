@@ -4,6 +4,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
 import duke.exception.DukeBadInstructionFormatException;
+import duke.reminder.Reminder;
+import duke.storage.Storage;
+import duke.time.Time;
 
 /**
  * Subclass of <code>Task</code> class used by <code>Duke</code> to keep track of user's
@@ -17,10 +20,6 @@ public class Deadline extends Task {
      * A <code>LocalDateTime</code> representing the deadline of the <code>Deadline</code> instance.
      */
     private LocalDateTime by;
-    /**
-     * A <code>String</code> representing the deadline of the <code>Deadline</code> instance.
-     */
-    private String byString;
 
     /**
      * Constructor for a <code>Deadline</code> instance.
@@ -33,11 +32,12 @@ public class Deadline extends Task {
         super(description);
 
         try {
-            this.byString = by;
-            this.by = Task.getLocalDateTime(by);
+            this.by = Time.getLocalDateTime(by);
+            LocalDateTime remindDate = Time.getRemindDefaultLocalDateTime(by);
+            this.reminder = new Reminder(remindDate, this);
         } catch (DateTimeParseException e) {
             throw new DukeBadInstructionFormatException("Use date/time format: "
-                    + Task.STORE_DATE_TIME_FORMAT);
+                    + Time.STORE_DATE_TIME_FORMAT);
         }
     }
     /**
@@ -47,12 +47,17 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + Task.getDateTimeString(this.by) + ")";
+        return "[D]" + super.toString() + " (by: " + Time.getDisplayFormatDateTimeString(this.by) + ")";
     }
 
     @Override
     public String getFileFormatString() {
         //to be split using "@"
-        return "D" + "@" + this.isDone + "@" + this.description + "@" + this.byString;
+        String s = Storage.SPLITTER;
+        LocalDateTime remindDate = this.reminder.getLocalDateTime();
+        String remindString = Time.getFileFormatDateTimeString(remindDate);
+        String byString = Time.getFileFormatDateTimeString(this.by);
+        return Task.DEADLINE_FILE_FORMAT + s + this.isDone + s + this.description
+                + s + byString + s + remindString;
     }
 }
