@@ -1,16 +1,17 @@
 package Week2.src.main;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 /**
-<<<<<<< HEAD
  * A subclass of Task
  * It contains the task content and deadline of each task
-=======
  * A subclass that extends Task.
  * Deadline contains a deadline which is written following "/by".
->>>>>>> branch-A-JavaDoc
  */
 public class Deadline extends Task {
-    String date;
+    private String date;
+    private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    private LocalDateTime ldt;
 
     /**
      * Deadline constructor.

@@ -1,5 +1,5 @@
 package Week2.src.main;
-
+import java.util.logging.Logger;
 /**
  * Deals with interactions with the user
  */
@@ -23,7 +23,8 @@ public class Ui {
      * First interaction with user
      */
     public String hello() {
-        return "Hello! I'm Bada\nWhat can I do for you?";
+        String msg = "Hello! I'm Bada\nWhat can I do for you?";
+        return msg;
     }
 
     /**
