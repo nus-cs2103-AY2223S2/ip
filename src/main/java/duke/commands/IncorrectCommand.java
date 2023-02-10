@@ -43,6 +43,7 @@ public class IncorrectCommand extends Command {
         case "dt format":
             return WRONG_DATE_FORMAT_ERROR;
         default:
+            assert false : errorType;
             return "";
         }
     }
