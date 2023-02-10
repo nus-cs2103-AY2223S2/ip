@@ -6,6 +6,7 @@ import java.util.function.BiConsumer;
 import duke.constant.DialogType;
 import duke.constant.Message;
 import duke.database.DukeRepo;
+import duke.exception.DatabaseCloseException;
 import duke.task.Task;
 
 /**
@@ -46,6 +47,12 @@ public class DeleteCommand extends Command {
             sb.append(String.format(Message.COUNT_TASK, db.count()) + "\n");
         } catch (IndexOutOfBoundsException e) {
             sb.append(Message.EXCEPTION_INVALID_TASK_ID_ACCESS);
+            con.accept(DialogType.ERROR, sb.toString());
+            return;
+        } catch (DatabaseCloseException e) {
+            sb.append(e.getMessage());
+            con.accept(DialogType.ERROR, sb.toString());
+            return;
         }
         con.accept(DialogType.NORMAL, sb.toString());
     }

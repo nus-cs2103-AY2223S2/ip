@@ -11,6 +11,7 @@ import java.util.Scanner;
 
 import duke.command.AddCommand;
 import duke.constant.Message;
+import duke.exception.DatabaseCloseException;
 import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.task.Task;
@@ -23,6 +24,7 @@ class DukeLocalDatabase {
     private static final String DATA_FILE_DIR = "data";
     private static final String DATA_FILE_PATH = "duke.txt";
     private List<Task> tasks;
+    private boolean isClosed;
 
     /**
      * Default constructor
@@ -36,8 +38,11 @@ class DukeLocalDatabase {
      */
     public DukeLocalDatabase(boolean isTestMode) {
         tasks = new ArrayList<Task>();
+        isClosed = true;
         if (!isTestMode) {
             open();
+        } else {
+            isClosed = false;
         }
     }
 
@@ -46,7 +51,11 @@ class DukeLocalDatabase {
      *
      * @return {@link Task} List
      */
-    public List<Task> getAllTask() {
+    public List<Task> getAllTask() throws DatabaseCloseException {
+        if (isClosed) {
+            throw new DatabaseCloseException(Message.EXCEPTION_DB_CLOSED);
+        }
+
         return tasks;
     }
 
@@ -56,7 +65,11 @@ class DukeLocalDatabase {
      * @param taskId int
      * @return {@link Task} object
      */
-    public Task getTask(int taskId) {
+    public Task getTask(int taskId) throws DatabaseCloseException {
+        if (isClosed) {
+            throw new DatabaseCloseException(Message.EXCEPTION_DB_CLOSED);
+        }
+
         assert taskId > 0;
         return tasks.get(taskId - 1);
     }
@@ -67,7 +80,11 @@ class DukeLocalDatabase {
      * @param task {@link Task} object
      * @return {@link Task} object
      */
-    public Task addTask(Task task) {
+    public Task addTask(Task task) throws DatabaseCloseException {
+        if (isClosed) {
+            throw new DatabaseCloseException(Message.EXCEPTION_DB_CLOSED);
+        }
+
         tasks.add(task);
         return task;
     }
@@ -78,7 +95,11 @@ class DukeLocalDatabase {
      * @param taskId int
      * @return {@link Task} object
      */
-    public Task updateTask(int taskId, Task task) {
+    public Task updateTask(int taskId, Task task) throws DatabaseCloseException {
+        if (isClosed) {
+            throw new DatabaseCloseException(Message.EXCEPTION_DB_CLOSED);
+        }
+
         assert taskId > 0;
         return tasks.set(taskId - 1, task);
     }
@@ -89,7 +110,11 @@ class DukeLocalDatabase {
      * @param taskId
      * @return {@link Task} object
      */
-    public List<Task> removeTask(int... taskIds) throws IndexOutOfBoundsException {
+    public List<Task> removeTask(int... taskIds) throws IndexOutOfBoundsException, DatabaseCloseException {
+        if (isClosed) {
+            throw new DatabaseCloseException(Message.EXCEPTION_DB_CLOSED);
+        }
+
         List<Task> res = new ArrayList<Task>();
         for (int i = taskIds.length - 1; i >= 0; i--) {
             try {
@@ -106,6 +131,8 @@ class DukeLocalDatabase {
      */
     void open() {
         try {
+            isClosed = false;
+
             File dataFile = new File(DATA_FILE_DIR + "/" + DATA_FILE_PATH);
             Scanner sc = new Scanner(dataFile);
             while (sc.hasNextLine()) {
@@ -128,6 +155,8 @@ class DukeLocalDatabase {
      */
     public void close() {
         try {
+            isClosed = true;
+            
             File dataDir = new File(DATA_FILE_DIR);
             if (!dataDir.exists()) {
                 dataDir.mkdirs();

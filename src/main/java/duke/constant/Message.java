@@ -21,6 +21,8 @@ public class Message {
     public static final String EXCEPTION_INVALID_TASK_TYPE = "Invalid task type, please verify data file.";
     public static final String EXCEPTION_INVALID_DATE_FORMAT = "Invalid date argument format.";
 
+    public static final String EXCEPTION_DB_CLOSED = "Database closed.";
+
     /* Normal messages */
     public static final String WELCOME = "Hello from Agent™\n"
                                         + " ____       _\n"

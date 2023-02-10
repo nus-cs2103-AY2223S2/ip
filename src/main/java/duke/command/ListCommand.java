@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import duke.constant.DialogType;
 import duke.constant.Message;
 import duke.database.DukeRepo;
+import duke.exception.DatabaseCloseException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -59,23 +60,29 @@ public class ListCommand extends Command {
         List<Task> filtered;
         StringBuilder sb = new StringBuilder();
 
-        if (!filterDate.isEmpty()) {
-            sb.append(Message.FIND_TASKS + "\n");
-            filtered = filter(db, filterDate.get());
-        } else if (!filterString.isEmpty()) {
-            sb.append(Message.FIND_TASKS + "\n");
-            filtered = filter(db, filterString.get());
-        } else {
-            
-            filtered = db.getAllTask();
-
-            if (filtered.isEmpty()) {
-                sb.append(Message.LIST_EMPTY + "\n");
-                con.accept(DialogType.WARNING, sb.toString());
-                return;
+        try {
+            if (!filterDate.isEmpty()) {
+                sb.append(Message.FIND_TASKS + "\n");
+                filtered = filter(db, filterDate.get());
+            } else if (!filterString.isEmpty()) {
+                sb.append(Message.FIND_TASKS + "\n");
+                filtered = filter(db, filterString.get());
             } else {
-                sb.append(Message.LIST_TASKS + "\n");
+                
+                filtered = db.getAllTask();
+    
+                if (filtered.isEmpty()) {
+                    sb.append(Message.LIST_EMPTY + "\n");
+                    con.accept(DialogType.WARNING, sb.toString());
+                    return;
+                } else {
+                    sb.append(Message.LIST_TASKS + "\n");
+                }
             }
+        } catch (DatabaseCloseException e) {
+            sb.append(e.getMessage());
+            con.accept(DialogType.ERROR, sb.toString());
+            return;
         }
 
         for (int i = 0; i < filtered.size(); i++) {
@@ -91,8 +98,9 @@ public class ListCommand extends Command {
      * @param db
      * @param date
      * @return
+     * @throws DatabaseCloseException
      */
-    private List<Task> filter(DukeRepo db, LocalDateTime date) {
+    private List<Task> filter(DukeRepo db, LocalDateTime date) throws DatabaseCloseException {
         return db.getAllTask().stream().filter(task -> {
             if (task instanceof Deadline) {
                 Deadline d = (Deadline) task;
@@ -112,8 +120,9 @@ public class ListCommand extends Command {
      * @param db
      * @param keyword
      * @return
+     * @throws DatabaseCloseException
      */
-    private List<Task> filter(DukeRepo db, String keyword) {
+    private List<Task> filter(DukeRepo db, String keyword) throws DatabaseCloseException {
         return db.getAllTask().stream()
             .filter(task -> task.toString().contains(keyword))
             .collect(Collectors.toList());
