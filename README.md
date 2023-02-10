@@ -1,4 +1,4 @@
-# Book project
+# Book
 
 Welcome to
 ```
