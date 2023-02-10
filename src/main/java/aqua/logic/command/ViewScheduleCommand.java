@@ -66,7 +66,7 @@ public class ViewScheduleCommand extends CommandController {
         final LocalDateTime startTime;
 
 
-        public DisplayData(TaskFilterReport report, LocalDateTime startTime) {
+        DisplayData(TaskFilterReport report, LocalDateTime startTime) {
             this.report = report;
             this.startTime = startTime;
         }

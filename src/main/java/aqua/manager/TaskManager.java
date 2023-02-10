@@ -25,9 +25,11 @@ public class TaskManager implements Reloadable {
      * Adds the specified task.
      *
      * @param task - the task to add.
+     * @return the task change report.
      */
-    public void add(UserTask task) {
+    public TaskChangeReport add(UserTask task) {
         tasks.add(task);
+        return new TaskChangeReport(task, tasks.size());
     }
 
 
@@ -50,11 +52,12 @@ public class TaskManager implements Reloadable {
      * Deletes the task at the given index.
      *
      * @param taskNum - the index of the task to delete.
-     * @return the deleted task.
+     * @return the task change report.
      * @throws IndexOutOfBoundsException if taskNum is out of range.
      */
-    public UserTask delete(int taskNum) throws IndexOutOfBoundsException {
-        return tasks.remove(taskNum);
+    public TaskChangeReport delete(int taskNum) throws IndexOutOfBoundsException {
+        UserTask task = tasks.remove(taskNum);
+        return new TaskChangeReport(task, tasks.size());
     }
 
 

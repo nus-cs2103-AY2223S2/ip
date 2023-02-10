@@ -16,42 +16,65 @@ import aqua.util.Kaomoji;
 public class WriteTaskCommand extends CommandController {
     @Override
     public ExecutionService getService(ArgumentMap args, LogicManager manager) {
-        return ExecutionService.of(new ExecutionTask<Void>(args, manager) {
-            @Override
-            public Void process(ArgumentMap args, LogicManager manager) throws ProcedureException {
-                try {
-                    manager.getTaskManager().saveToFile();
-                } catch (IOException ioEx) {
-                    throw new ProcedureException("Failed to save data", ioEx);
-                }
-                return null;
-            }
-        });
+        return ExecutionService.of(new WriteTask(args, manager));
     }
 
 
     @Override
     public ExecutionService getService(ArgumentMap args, LogicManager logicManager, IoManager ioManager) {
-        return ExecutionService.of(new ExecutionDisplayerTask<String>(args, logicManager, ioManager) {
-            @Override
-            public String process(ArgumentMap args, LogicManager manager) {
-                try {
-                    manager.getTaskManager().saveToFile();
-                } catch (IOException ioEx) {
-                    return String.format(String.join("\n",
-                                    "I could not put your tasks into the special place to remember things!",
-                                    "Please help me with this:",
-                                    "  %s",
-                                    "If you leave me I might forget everything!!"),
-                            ioEx.getMessage());
-                }
-                return "Safely stored hehe " + Kaomoji.SMUG;
-            }
+        return ExecutionService.of(new WriteDisplayerTask(args, logicManager, ioManager));
+    }
 
-            @Override
-            protected void display(String message, IoManager manager) {
-                manager.reply(message);
+
+
+
+
+    private class WriteTask extends ExecutionTask<Void> {
+        WriteTask(ArgumentMap args, LogicManager manager) {
+            super(args, manager);
+        }
+
+
+        @Override
+        protected Void process(ArgumentMap args, LogicManager manager) throws ProcedureException {
+            try {
+                manager.getTaskManager().saveToFile();
+            } catch (IOException ioEx) {
+                throw new ProcedureException("Failed to save data", ioEx);
             }
-        });
+            return null;
+        }
+    }
+
+
+
+
+
+    private class WriteDisplayerTask extends ExecutionDisplayerTask<String> {
+        WriteDisplayerTask(ArgumentMap args, LogicManager logicManager, IoManager ioManager) {
+            super(args, logicManager, ioManager);
+        }
+
+
+        @Override
+        protected String process(ArgumentMap args, LogicManager manager) {
+            try {
+                manager.getTaskManager().saveToFile();
+            } catch (IOException ioEx) {
+                return String.format(String.join("\n",
+                                "I could not put your tasks into the special place to remember things!",
+                                "Please help me with this:",
+                                "  %s",
+                                "If you leave me I might forget everything!!"),
+                        ioEx.getMessage());
+            }
+            return "Safely stored hehe " + Kaomoji.SMUG;
+        }
+
+
+        @Override
+        protected void display(String message, IoManager manager) {
+            manager.reply(message);
+        }
     }
 }

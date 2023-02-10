@@ -27,7 +27,7 @@ public class ListCommand extends CommandController {
     public ExecutionService getService(ArgumentMap args, LogicManager logicManager, IoManager ioManager) {
         return ExecutionService.of(new ExecutionDisplayerTask<TaskManager>(args, logicManager, ioManager) {
             @Override
-            public TaskManager process(ArgumentMap args, LogicManager manager) {
+            protected TaskManager process(ArgumentMap args, LogicManager manager) {
                 return manager.getTaskManager();
             }
 
@@ -47,11 +47,5 @@ public class ListCommand extends CommandController {
             return manager.toString();
         }
         return "Nothing!! " + Kaomoji.BLUSH;
-    }
-
-
-    @Override
-    public String getDescription() {
-        return "Displayes a view of your task list";
     }
 }
