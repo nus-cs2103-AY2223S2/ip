@@ -11,13 +11,14 @@ import java.io.FileNotFoundException;
 public class UndoCommand extends Command{
 
     public String execute(TaskList l, Ui ui, Storage s, Command prevCommand, Duke duke) {
-        TaskList tl;
+        TaskList oldTaskList;
+        String errorMsg = "";
         try {
-            tl = s.load();
-            duke.setTaskList(tl);
+            oldTaskList = s.load();
+            duke.setTaskList(oldTaskList);
+            return ui.showList(oldTaskList);
         } catch (FileNotFoundException | IncorrectFileFormatException e) {
-            return ui.showError(e);
+            return "Unable to undo. " + ui.showError(e);
         }
-        return ui.showList(tl);
     }
 }

@@ -12,7 +12,6 @@ public class Duke { // a guy who receives user input, and gives duke reply
     private TaskList tasks;
     private Ui ui;
     private String welcomeMsg;
-
     private Command prevCommand;
 
     /**

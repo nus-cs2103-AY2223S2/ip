@@ -15,16 +15,17 @@ public abstract class Command {
 
     public abstract String execute(TaskList l, Ui ui, Storage s, Command prevCommand, Duke duke) throws Exception;
 
-    protected void saveToFile(Storage s, TaskList l, Ui ui, Command prevCommand) { //NEED UI???
-        if (prevCommand instanceof ExitCommand || prevCommand instanceof FindCommand ||
+    protected String saveToFile(Storage s, TaskList l, Ui ui, Command prevCommand) { //NEED UI???
+        if (prevCommand instanceof FindCommand ||
                 prevCommand instanceof ListCommand) {
-            return;
+            return "";
         }
 
         try {
             s.save(l);
         } catch (IOException e) {
-            System.out.println(ui.showError(e));
+            return ui.showError(e);
         }
+        return "";
     }
 }

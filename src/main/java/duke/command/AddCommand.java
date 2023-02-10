@@ -39,7 +39,9 @@ public class AddCommand extends Command{
     }
 
     public String execute(TaskList l, Ui ui, Storage s, Command prevCommand, Duke duke) {
-        saveToFile(s, l, ui, prevCommand);
+        String errorMsg = saveToFile(s, l, ui, prevCommand);
+
+        assert(t == TaskType.ToDo || t == TaskType.Deadline || t == TaskType.Event);
 
         if (t == TaskType.ToDo) {
             l.add(new ToDo(desc, isDone));
@@ -49,7 +51,7 @@ public class AddCommand extends Command{
             l.add(new Event(desc, isDone, eventFrom, eventTo));
         } //CODE QUALITY
 
-        return ui.showAdded(l);
+        return errorMsg + "\n" + ui.showAdded(l);
     }
 
 }

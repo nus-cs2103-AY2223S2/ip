@@ -17,16 +17,18 @@ public class MarkCommand extends Command {
     }
 
     public String execute(TaskList l, Ui ui, Storage s, Command prevCommand, Duke duke) throws InvalidArgumentException {
-        saveToFile(s, l, ui, prevCommand);
+        String errorMsg = saveToFile(s, l, ui, prevCommand);
+        String markMsg = "";
         if (mark == 1) {
             l.get(index).markAsDone();
-            return ui.showMark(1, l.get(index));
+            markMsg = ui.showMark(1, l.get(index));
         } else if (mark == 0) {
             l.get(index).unmark();
-            return ui.showMark(0, l.get(index));
+            markMsg = ui.showMark(0, l.get(index));
         } else {
             throw new InvalidArgumentException(); //find a btr name
         }
+        return markMsg + errorMsg;
     }
 
     @Override

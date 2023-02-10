@@ -15,10 +15,11 @@ public class DeleteCommand extends Command {
     }
 
     public String execute(TaskList l, Ui ui, Storage s, Command prevCommand, Duke duke) {
-        saveToFile(s, l, ui, prevCommand);
+        String errorMsg = saveToFile(s, l, ui, prevCommand);
 
         Task t = l.remove(index);
-        return ui.showDelete(t, l);
+        String fullMsg= errorMsg + "\n" +ui.showDelete(t, l);
+        return fullMsg;
     }
 
 }

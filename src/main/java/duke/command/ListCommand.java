@@ -8,7 +8,8 @@ import duke.Ui;
 public class ListCommand extends Command {
 
     public String execute(TaskList l, Ui ui, Storage s, Command prevCommand, Duke duke) {
-        saveToFile(s, l, ui, prevCommand);
-        return ui.showList(l);
+        String errorMsg = saveToFile(s, l, ui, prevCommand);
+        String fullMsg = errorMsg + "\n" + ui.showList(l);
+        return fullMsg;
     }
 }
