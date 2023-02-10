@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import uwuke.gui.DialogBox;
 import uwuke.task.Task;
 
 /**
@@ -26,7 +27,7 @@ public class Printer {
         StringBuilder sb = new StringBuilder("OwO OwO OwO OwO OwO OwO");
         sb.append(input);
         sb.append("\nOwO OwO OwO OwO OwO OwO");
-        dialogContainer.getChildren().add(new Label(sb.toString()));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialogBox(new Label(sb.toString())));
     }
 
     /**

@@ -65,6 +65,7 @@ public class UwUke extends Application {
         stage.setScene(scene);
         stage.show();
 
+        Printer.setDialogContainer(dialogContainer);
         DialogBox.setDukeImage(duke);
         DialogBox.setUserImage(user);
 
