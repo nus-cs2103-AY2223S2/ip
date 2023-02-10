@@ -30,8 +30,12 @@ public class FindCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         TaskList filtered = tasks.find(this.keyword);
+        return ui.show(getReply(filtered));
+    }
+
+    private String getReply(TaskList filtered) {
         String msg = "Here are the matching tasks in your list:\n";
         msg += filtered.toString();
-        return ui.show(msg);
+        return msg;
     }
 }

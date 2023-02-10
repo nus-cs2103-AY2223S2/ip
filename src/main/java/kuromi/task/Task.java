@@ -48,7 +48,14 @@ public class Task {
      * @return Boolean value of whether the description contains the keyword.
      */
     public boolean containsKeyword(String keyword) {
-        return this.description.contains(keyword);
+        String cur = this.description;
+        String[] split = cur.split(" ");
+        for(int j = 0; j < split.length; j++) {
+            if (split[j].equals(keyword)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

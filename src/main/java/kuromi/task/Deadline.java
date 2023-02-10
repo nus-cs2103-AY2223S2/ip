@@ -39,7 +39,6 @@ public class Deadline extends Task {
         this.by = by;
         DateTimeFormatter format = DateTimeFormatter.ofPattern("MMM dd yyyy");
         LocalDate date = LocalDate.parse(by, format);
-        String formattedDate = date.format(format);
     }
 
     /**
@@ -51,16 +50,6 @@ public class Deadline extends Task {
     @Override
     public String getDetailedDescription() {
         return super.description + " | " + this.by;
-    }
-
-    /**
-     * Get the symbol of a deadline.
-     *
-     * @return The symbol of a deadline.
-     */
-    @Override
-    public boolean containsKeyword(String keyword) {
-        return this.description.contains(keyword);
     }
 
     @Override

@@ -49,9 +49,4 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
     }
-
-    @FXML
-    public void exit() {
-        Platform.exit();
-    }
 }

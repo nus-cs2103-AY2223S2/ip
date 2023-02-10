@@ -16,9 +16,13 @@ public class ListCommand extends Command {
      * @param storage Storage to update when there is an update with the task list.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.show(getReply(tasks));
+    }
+
+    private String getReply(TaskList tasks) {
         String msg = "Got it. I've added this task:\n";
         msg += tasks.toString() + "\n";
         msg += "Now you have " + tasks.size() + " tasks in the list.";
-        return ui.show(msg);
+        return msg;
     }
 }

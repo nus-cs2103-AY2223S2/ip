@@ -34,9 +34,13 @@ public class DeleteCommand extends Command {
         int prevNumTasks = tasks.size();
         Task cur = tasks.delete(this.idx - 1);
         assert (tasks.size() == prevNumTasks - 1) : "Tasks size should be equal to previous tasks size - 1";
+        return ui.show(getReply(cur, tasks));
+    }
+
+    private String getReply(Task cur, TaskList tasks) {
         String msg = "Noted. I've removed this task:\n";
         msg += cur + "\n";
         msg += "Now you have " + tasks.size() + " tasks in the list.";
-        return ui.show(msg);
+        return msg;
     }
 }
