@@ -18,8 +18,8 @@ public class Event extends Task {
      * @param from The start datetime of the Event, as a String.
      * @param to The end datetime of the Event, as a String.
      */
-    public Event(String content, String from, String to, boolean isHigh) {
-        super(content, isHigh);
+    public Event(String content, String from, String to) {
+        super(content);
         this.from = DateParser.parse(from);
         this.to = DateParser.parse(to);
     }
@@ -29,7 +29,7 @@ public class Event extends Task {
      * @param content The content of the event.
      * @return A new Event object.
      */
-    public static Event create(String content, boolean isHigh) {
+    public static Event create(String content) {
         String source = "Task.Event Creation";
 
         String[] contentAndFrom = Parser.handleMissingField(content, "/from", "from", source);
@@ -43,7 +43,7 @@ public class Event extends Task {
         Parser.handleEmptyField(from, "from", source);
         Parser.handleEmptyField(to, "to", source);
 
-        return new Event(parsedContent, from, to, isHigh);
+        return new Event(parsedContent, from, to);
     }
 
     @Override

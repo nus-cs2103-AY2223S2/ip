@@ -7,8 +7,8 @@ import parser.Parser;
  */
 public class Todo extends Task {
 
-    public Todo(String content, boolean isHigh) {
-        super(content, isHigh);
+    public Todo(String content) {
+        super(content);
     }
 
     /**
@@ -16,9 +16,9 @@ public class Todo extends Task {
      * @param content The content of the todo.
      * @return A new Todo object.
      */
-    public static Todo create(String content, boolean isHigh) {
+    public static Todo create(String content) {
         Parser.handleEmptyField(content, "content", "Task.Todo Creation");
-        return new Todo(content, isHigh);
+        return new Todo(content);
     }
 
     @Override

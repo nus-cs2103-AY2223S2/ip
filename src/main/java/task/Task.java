@@ -1,21 +1,26 @@
 package task;
 
+import java.util.ArrayList;
+import java.util.stream.Collectors;
+
 /**
  * Task object encapsulating Todo, Deadline, and Event tasks.
  */
 public abstract class Task {
     private boolean marked;
     private final String content;
-    private final boolean isHigh;
+    private boolean isHigh;
+    private final ArrayList<String> tags;
 
     /**
      * Constructor for Task object.
      * @param content Content to be placed in the task.
      */
-    public Task(String content, boolean isHigh) {
+    public Task(String content) {
         this.marked = false;
+        this.isHigh = false;
+        this.tags = new ArrayList<>();
         this.content = content;
-        this.isHigh = isHigh;
     }
 
     /**
@@ -28,16 +33,22 @@ public abstract class Task {
     public static Task create(char taskType, String content) {
         boolean isHigh = content.contains("high");
         content = content.replace(" high", "");
+        Task task;
         switch (taskType) {
         case 'T':
-            return Todo.create(content, isHigh);
+            task = Todo.create(content);
+            break;
         case 'D':
-            return Deadline.create(content, isHigh);
+            task = Deadline.create(content);
+            break;
         case 'E':
-            return Event.create(content, isHigh);
+            task = Event.create(content);
+            break;
         default:
             return null;
         }
+        task.setPriorityLevel(isHigh);
+        return task;
     }
 
     /**
@@ -72,11 +83,28 @@ public abstract class Task {
         return false;
     }
 
+    /**
+     * Sets the priority level.
+     * @param isHigh Whether to set to high priority.
+     */
+    private void setPriorityLevel(boolean isHigh) {
+        this.isHigh = isHigh;
+    }
+
+    /**
+     * Sets the tag for the task.
+     * @param tag Name of the tag.
+     */
+    private void addTag(String tag) {
+        this.tags.add(tag);
+    }
+
     @Override
     public String toString() {
         String markedStatus = this.isMarked() ? "X" : " ";
         String priorityStatus = this.isHigh ? "!!" : "";
-        return String.format("[%s] %s%s", markedStatus, this.getContent(), priorityStatus);
+        String tagsAsString = this.tags.stream().map(tag -> "#" + tag).collect(Collectors.joining(" "));
+        return String.format("[%s] %s%s %s", markedStatus, this.getContent(), priorityStatus, tagsAsString);
     }
 
     /**

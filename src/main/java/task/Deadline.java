@@ -16,8 +16,8 @@ public class Deadline extends Task {
      * @param content Content to be put in the object.
      * @param by The deadline of the task as a String.
      */
-    public Deadline(String content, String by, boolean isHigh) {
-        super(content, isHigh);
+    public Deadline(String content, String by) {
+        super(content);
         this.by = DateParser.parse(by);
     }
 
@@ -26,7 +26,7 @@ public class Deadline extends Task {
      * @param content The content of the object.
      * @return A new deadline object.
      */
-    public static Deadline create(String content, boolean isHigh) {
+    public static Deadline create(String content) {
         String source = "Task.Deadline Creation";
         String[] contentAndBy = Parser.handleMissingField(content, "/by", "by", source);
 
@@ -36,7 +36,7 @@ public class Deadline extends Task {
         Parser.handleEmptyField(parsedContent, "content", source);
         Parser.handleEmptyField(by, "by", source);
 
-        return new Deadline(parsedContent, by, isHigh);
+        return new Deadline(parsedContent, by);
     }
 
     @Override
