@@ -11,7 +11,7 @@ import aqua.util.DateUtils;
 /** An {@code AddTaskCommand} to add {@code UserEvent}. */
 public class AddEventCommand extends AddTaskCommand {
     @Override
-    public UserEvent createTask(ArgumentMap args) throws SyntaxException {
+    protected UserEvent createTask(ArgumentMap args) throws SyntaxException {
         // get name
         String name = args.getMainInput().filter(n -> !n.isBlank())
                 .orElseThrow(() -> new SyntaxException("Name disappeared!"));

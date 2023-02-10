@@ -18,7 +18,7 @@ public class WriteTaskCommand extends CommandController {
     public ExecutionService getService(ArgumentMap args, LogicManager manager) {
         return ExecutionService.of(new ExecutionTask<Void>(args, manager) {
             @Override
-            public Void process(ArgumentMap args, LogicManager manager) throws ProcedureException {
+            protected Void process(ArgumentMap args, LogicManager manager) throws ProcedureException {
                 try {
                     manager.getTaskManager().saveToFile();
                 } catch (IOException ioEx) {
@@ -34,7 +34,7 @@ public class WriteTaskCommand extends CommandController {
     public ExecutionService getService(ArgumentMap args, LogicManager logicManager, IoManager ioManager) {
         return ExecutionService.of(new ExecutionDisplayerTask<String>(args, logicManager, ioManager) {
             @Override
-            public String process(ArgumentMap args, LogicManager manager) {
+            protected String process(ArgumentMap args, LogicManager manager) {
                 try {
                     manager.getTaskManager().saveToFile();
                 } catch (IOException ioEx) {

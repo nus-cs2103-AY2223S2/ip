@@ -54,7 +54,7 @@ public class DeleteCommand extends CommandController {
 
 
         @Override
-        public UserTask process(ArgumentMap args, LogicManager manager)
+        protected UserTask process(ArgumentMap args, LogicManager manager)
                     throws SyntaxException, ProcedureException {
             return deleteTask(args, manager);
         }

@@ -8,7 +8,7 @@ import aqua.usertask.UserTodo;
 /** An {@code AddTaskCommand} to add {@code UserTodo}. */
 public class AddTodoCommand extends AddTaskCommand {
     @Override
-    public UserTodo createTask(ArgumentMap args) throws SyntaxException {
+    protected UserTodo createTask(ArgumentMap args) throws SyntaxException {
         // get name
         String name = args.getMainInput()
                 .filter(n -> !n.isBlank())

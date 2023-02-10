@@ -53,7 +53,7 @@ public abstract class AddTaskCommand extends CommandController {
 
 
         @Override
-        public UserTask process(ArgumentMap args, LogicManager manager) throws SyntaxException {
+        protected UserTask process(ArgumentMap args, LogicManager manager) throws SyntaxException {
             return addProcess(args, manager);
         }
     }
@@ -69,7 +69,7 @@ public abstract class AddTaskCommand extends CommandController {
 
 
         @Override
-        public UserTask process(ArgumentMap args, LogicManager manager) throws SyntaxException {
+        protected UserTask process(ArgumentMap args, LogicManager manager) throws SyntaxException {
             return addProcess(args, manager);
         }
 

@@ -27,7 +27,7 @@ public class ListCommand extends CommandController {
     public ExecutionService getService(ArgumentMap args, LogicManager logicManager, IoManager ioManager) {
         return ExecutionService.of(new ExecutionDisplayerTask<TaskManager>(args, logicManager, ioManager) {
             @Override
-            public TaskManager process(ArgumentMap args, LogicManager manager) {
+            protected TaskManager process(ArgumentMap args, LogicManager manager) {
                 return manager.getTaskManager();
             }
 

@@ -29,12 +29,12 @@ public class FilterCommand extends CommandController {
         return ExecutionService.of(
                 new ExecutionDisplayerTask<LinkedHashMap<Integer, UserTask>>(args, logicManager, ioManager) {
                     @Override
-                    public LinkedHashMap<Integer, UserTask> process(ArgumentMap args, LogicManager manager) {
+                    protected LinkedHashMap<Integer, UserTask> process(ArgumentMap args, LogicManager manager) {
                         return manager.getTaskManager().filter(args.getMainInput().orElse(""));
                     }
 
                     @Override
-                    public void display(LinkedHashMap<Integer, UserTask> map, IoManager manager) {
+                    protected void display(LinkedHashMap<Integer, UserTask> map, IoManager manager) {
                         manager.reply(String.format("Here are your matching tasks:\n%s",
                                 formatMap(map)));
                     }
