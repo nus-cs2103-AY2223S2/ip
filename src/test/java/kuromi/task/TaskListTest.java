@@ -6,9 +6,11 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
+import kuromi.KuromiException;
+
 public class TaskListTest {
     @Test
-    public void taskAdd() {
+    public void taskAdd() throws KuromiException {
         Deadline d = new Deadline("return book", "2019-10-15");
         ArrayList<Task> inp = new ArrayList<Task>();
         inp.add(new Todo("borrow book"));
@@ -18,7 +20,7 @@ public class TaskListTest {
         assertEquals(cur, d);
     }
     @Test
-    public void taskDel() {
+    public void taskDel() throws KuromiException {
         Deadline d = new Deadline("return book", "2019-10-15");
         ArrayList<Task> inp = new ArrayList<Task>();
         inp.add(new Todo("borrow book"));
