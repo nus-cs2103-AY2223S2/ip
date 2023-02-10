@@ -96,7 +96,7 @@ public class Parser {
         } catch (DukeExceptions e) {
             System.out.println(e.getMessage());
         }
-        String desc = deadlineDate(input);
+        String desc = deadlineDesc(input);
         String deadline = deadlineDate(input);
         LocalDate date = LocalDate.parse(deadline);
         return new Deadline(desc, date);

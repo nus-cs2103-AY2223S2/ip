@@ -25,13 +25,17 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
     private TaskList tasks;
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Orbital Logo.jpg"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/LicensePhoto.jpg"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duke.png"));
     /** To initalise the main stage of JavaFX*/
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         this.tasks = loadTextFile();
+        String intro = "Hurr..... I'm Duke....." ;
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(intro, dukeImage)
+        );
     }
 
     public void setDuke(Duke d) {

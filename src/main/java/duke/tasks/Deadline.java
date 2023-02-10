@@ -30,6 +30,6 @@ public class Deadline extends Task {
     public String toString() {
         String statusIcon = this.getStatusIcon();
         String parsedDeadline = deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        return "[D][" + statusIcon + "] " + this.desc + "(" + parsedDeadline + ")";
+        return "[D][" + statusIcon + "] " + this.desc + "(By: " + parsedDeadline + ")";
     }
 }

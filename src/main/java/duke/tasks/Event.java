@@ -32,9 +32,9 @@ public class Event extends Task {
     @Override
     public String toString() {
         String statusIcon = this.getStatusIcon();
-        DateTimeFormatter customFormat = DateTimeFormatter.ofPattern("eeee MMMM d HH:mm");
+        DateTimeFormatter customFormat = DateTimeFormatter.ofPattern("eeee MMMM d u HH:mm");
         String startDnT = start.format(customFormat);
         String endDnT = end.format(customFormat);
-        return "[E][" + statusIcon + "] " + this.desc + "(from: " + startDnT + " to: " + endDnT + ")";
+        return "[E][" + statusIcon + "] " + this.desc + "(From: " + startDnT + " By: " + endDnT + ")";
     }
 }

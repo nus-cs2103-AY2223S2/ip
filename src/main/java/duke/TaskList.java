@@ -159,6 +159,6 @@ public class TaskList {
         if (input.startsWith("find ")) {
             return handleFind(input);
         }
-        return "No such command!";
+        return "Duke does not understand....";
     }
 }
