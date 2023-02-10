@@ -1,13 +1,6 @@
 package duke;
 
-import duke.exception.InvalidFormatException;
-import duke.exception.UnrecognisedCommandException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Todo;
-
 import java.time.format.DateTimeFormatter;
-import java.util.regex.Matcher;
 import java.time.LocalDate;
 
 public class Parser {
@@ -15,7 +8,7 @@ public class Parser {
     protected final DateTimeFormatter outputFormat;
 
     /**
-     * Constructs a parsers that can decipher Strings for Duke
+     * Constructs a parser that can decipher Strings for Duke
      *
      * @param inputFormat a DateTimeFormatter pattern to process inputs
      * @param outputFormat a DateTimeFormatter pattern to format date outputs to users
@@ -25,12 +18,24 @@ public class Parser {
         this.outputFormat = DateTimeFormatter.ofPattern(outputFormat);
     }
 
+    /**
+     * Parses a string into a date that has the output format
+     *
+     * @param text text to parse
+     * @return LocalDate in the output format
+     */
     public LocalDate parseDate(String text) {
-        LocalDate a = LocalDate.parse(text, inputFormat);   // read input as LocalDate using input format
-        String b = a.format(outputFormat);                  // Convert LocalDate to String to change the format
-        return LocalDate.parse(b, outputFormat);            // Recreate LocalDate with output format
+        LocalDate dateInInputFormat = LocalDate.parse(text, inputFormat);
+        String dateInOutputFormat = dateInInputFormat.format(outputFormat);
+        return LocalDate.parse(dateInOutputFormat, outputFormat);
     }
 
+    /**
+     * Converts a date into a string of the input format
+     *
+     * @param date to be converted
+     * @return string in input format
+     */
     public String dateToLogFormat(LocalDate date) {
         return date.format(inputFormat);
     }
