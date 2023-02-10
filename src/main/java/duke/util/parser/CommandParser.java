@@ -90,6 +90,7 @@ public class CommandParser {
     private static final ApplicativeParser<Task> DEADLINE_TASK_PARSER =
             ApplicativeParser
                     .parseUntil("--by")
+                    .map(String::strip)
                     .throwIfFail("expect '--by <deadline>' as argument")
                     .flatMap(description -> DATE_OR_DAY_PARSER
                             .flatMap(deadline -> ApplicativeParser
@@ -98,6 +99,7 @@ public class CommandParser {
     private static final ApplicativeParser<Task> EVENT_TASK_PARSER =
             ApplicativeParser
                     .parseUntil("--from")
+                    .map(String::strip)
                     .throwIfFail("expect '--from <date or day>' as argument")
                     .flatMap(description -> DATE_OR_DAY_PARSER
                             .flatMap(startTime -> ApplicativeParser

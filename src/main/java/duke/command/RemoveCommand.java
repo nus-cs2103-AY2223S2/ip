@@ -15,7 +15,8 @@ public class RemoveCommand extends Command {
     public String execute(TaskList list) {
         Task task = list.remove(index);
         return String.format(
-                "Noted. I've removed this task:\n" + "  %s\n" + "Now you have %s in the list", task,
+                "Noted. I've removed this task:\n" + "  %s\n" + "Now you have %s in the list",
+                task,
                 list.countTaskAsString());
     }
 

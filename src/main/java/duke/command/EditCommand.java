@@ -20,7 +20,9 @@ public class EditCommand extends Command {
         Task task = list.get(index);
         String oldDescription = task.getDescription();
         task.setDescription(newDescription);
-        return String.format("OK, I have edited this task's description: %s -> %s", oldDescription,
+        return String.format(
+                "OK, I have edited your task's description: %s -> %s",
+                oldDescription,
                 newDescription);
     }
 

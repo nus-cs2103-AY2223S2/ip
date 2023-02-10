@@ -24,8 +24,11 @@ public class EventTask extends Task {
 
     @Override
     public String toString() {
-        return String.format("[E]%s (from: %s to: %s)", super.toString(),
-                DukeUtils.showDate(startTime), DukeUtils.showDate(endTime));
+        return String.format(
+                "[E]%s (from: %s to: %s)",
+                super.toString(),
+                DukeUtils.showDate(startTime),
+                DukeUtils.showDate(endTime));
     }
 
     @Override
@@ -34,7 +37,8 @@ public class EventTask extends Task {
             return false;
         }
         EventTask task = (EventTask) obj;
-        return super.equals(obj) && Objects.equals(startTime, task.startTime)
+        return super.equals(obj)
+                && Objects.equals(startTime, task.startTime)
                 && Objects.equals(endTime, task.endTime);
     }
 }
