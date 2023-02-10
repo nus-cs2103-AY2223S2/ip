@@ -65,6 +65,12 @@ public class Storage {
         return og;
     }
 
+    /**
+     * Separate the string by |
+     *
+     * @param str The string given
+     * @return An array of strings separated by |
+     */
     private String[] splitString(String str) {
         return str.split(" \\| ");
     }
