@@ -68,6 +68,7 @@ public class TaskList implements Serializable {
      * @return an array of string representation of the tasks that contain the query
      */
     public String[] find(String query) {
+        assert !query.isEmpty();
         List<Task> res = new ArrayList<>();
         for (Task t : this.tasks) {
             if (t.contains(query)) {

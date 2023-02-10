@@ -23,7 +23,11 @@ public class Event extends Task {
         super(description);
         this.from = from;
         this.to = to;
+        assert !description.isEmpty();
+        assert from != null;
+        assert to != null;
     }
+
     /**
      * Overrides the `toString` method to return the Event task in the form:
      * "[E][taskStatus] taskDescription (from: startTime to: endTime)".
