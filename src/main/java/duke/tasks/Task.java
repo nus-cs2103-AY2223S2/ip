@@ -50,6 +50,10 @@ public class Task implements Serializable {
         }
     }
 
+    public void update(String newDescription) {
+        this.description = newDescription;
+    }
+
     /**
      * @inheritDoc
      */

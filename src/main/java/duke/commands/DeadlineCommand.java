@@ -24,33 +24,40 @@ public class DeadlineCommand extends Command {
     }
 
     /**
+     * Checks if the format of the input is valid.
+     *
+     * @param indexBy index of the /by in the input.
+     * @return a boolean
+     */
+    private boolean checkFormat(int indexBy) {
+        return indexBy < 0
+                || indexBy - 1 < 9
+                || indexBy + 4 > input.length()
+                || !input.substring(indexBy, indexBy + 4).equals("/by ");
+    }
+    /**
      * @inheritDoc
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         try {
             int indexBy = input.indexOf("/");
             String[] words = this.input.split(" ");
             if (words.length <= 1) {
-                throw new DukeException(ui.emptyDescriptionError());
+                throw new DukeException(Ui.emptyDescriptionError());
             }
-            if (indexBy + 4 > input.length()) {
-                throw new DukeException(ui.wrongDeadlineDateFormat());
-            }
-            if (!input.substring(indexBy, indexBy + 4).equals("/by ")) {
-                throw new DukeException(ui.wrongDeadlineCommandFormat());
+            if (checkFormat(indexBy)) {
+                throw new DukeException(Ui.wrongDeadlineCommandFormat());
             }
             Deadline d = new Deadline(input.substring(9, indexBy - 1),
                     input.substring(indexBy + 4, input.length()));
 
             tasks.add(d);
             storage.saveTaskList(tasks);
-            return ui.confirmationMessage("added", tasks, d);
-        } catch (AssertionError ae) {
-            return ae.getMessage();
-        } catch (DukeException de) {
-            return de.getMessage();
-        } catch (DateTimeParseException date_time_e) {
-            return ui.wrongDeadlineDateFormat();
+            return Ui.confirmationMessage("added", tasks, d);
+        } catch (DukeException e) {
+            return e.getMessage();
+        } catch (DateTimeParseException e) {
+            return Ui.wrongDeadlineDateFormat();
         }
     }
 }

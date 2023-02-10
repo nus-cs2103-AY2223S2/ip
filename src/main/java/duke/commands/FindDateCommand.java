@@ -24,13 +24,13 @@ public class FindDateCommand extends Command {
     /**
      * @inheritDoc
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         try {
             String keyword = this.input.substring(9, input.length());
             ArrayList<Task> filtered = tasks.filterDate(keyword);
-            assert filtered.size() > 0 : ui.noTasksMessage();
+            assert filtered.size() > 0 : Ui.noTasksMessage();
 
-            return ui.printTasks(filtered);
+            return Ui.printTasks(filtered);
         } catch (AssertionError ae) {
             return ae.getMessage();
         }

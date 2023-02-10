@@ -4,36 +4,37 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import duke.DukeException;
+import duke.Ui;
+
+
+
 /**
  * The Deadline class that extends Task.
  */
 public class Deadline extends Task {
     private String by;
-
     /**
      * Constructor for a Deadline object.
      *
      * @param description The Event description.
      * @param date The date of the Deadline.
      */
-    public Deadline(String description, String date) {
+    public Deadline(String description, String date) throws DukeException {
         super(description);
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        DateTimeFormatter newDateTime = DateTimeFormatter.ofPattern("MMM dd yyyy hh:mm a");
-        DateTimeFormatter newDate = DateTimeFormatter.ofPattern("MMM dd yyyy");
         LocalDateTime byDateTime;
 
         try {
-            byDateTime = LocalDateTime.parse(date, dateTimeFormatter);
-            this.by = byDateTime.format(newDateTime);
+            byDateTime = LocalDateTime.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+            this.by = byDateTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy hh:mm a"));
         } catch (DateTimeParseException e) {
-            LocalDate byDate = LocalDate.parse(date, dateFormatter);
-            this.by = byDate.format(newDate);
+            LocalDate byDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            this.by = byDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
             byDateTime = byDate.atTime(23, 59);
         }
-        assert byDateTime.isAfter(LocalDateTime.now()) : "Date has passed";
-
+        if (!byDateTime.isAfter(LocalDateTime.now())) {
+            throw new DukeException(Ui.datePassed());
+        }
     }
 
     /**
@@ -47,6 +48,28 @@ public class Deadline extends Task {
             return this.by.toLowerCase().contains(keyword.toLowerCase());
         } else {
             return false;
+        }
+    }
+
+    /**
+     * Updates the deadline attribute of the object.
+     *
+     * @param date String input of the new date.
+     * @throws DukeException
+     */
+    public void updateDeadline(String date) throws DukeException {
+        LocalDateTime newByDateTime;
+
+        try {
+            newByDateTime = LocalDateTime.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+            this.by = newByDateTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy hh:mm a"));
+        } catch (DateTimeParseException e) {
+            LocalDate byDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            this.by = byDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+            newByDateTime = byDate.atTime(23, 59);
+        }
+        if (!newByDateTime.isAfter(LocalDateTime.now())) {
+            throw new DukeException(Ui.datePassed());
         }
     }
 

@@ -23,22 +23,22 @@ public class UnmarkCommand extends Command {
     /**
      * @inheritDoc
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         try {
             if (input.length() <= 7) {
                 throw new DukeException("OOPS!!! You are missing the number of the task to be unmarked.");
             }
             int index = Integer.parseInt(input.substring(7));
-            assert index <= tasks.size() : ui.insufficientTasksMessage();
+            if (index > tasks.size() || index <= 0) {
+                throw new DukeException(Ui.insufficientTasksMessage());
+            }
             Task task = tasks.get(index - 1);
             task.unmark();
             storage.saveTaskList(tasks);
             return "OK, I've marked this task as not done yet:\n  " + task;
-        } catch (AssertionError ae) {
-            return ae.getMessage();
-        } catch (DukeException de) {
-            return de.getMessage();
-        } catch (NumberFormatException nfe) {
+        } catch (DukeException e) {
+            return e.getMessage();
+        } catch (NumberFormatException e) {
             return "OOPS!!! Unmark has to be followed by an int.";
         }
     }

@@ -10,6 +10,7 @@ import duke.commands.ListCommand;
 import duke.commands.MarkCommand;
 import duke.commands.TodoCommand;
 import duke.commands.UnmarkCommand;
+import duke.commands.UpdateCommand;
 
 
 /**
@@ -18,7 +19,7 @@ import duke.commands.UnmarkCommand;
 public class Parser {
 
     private enum Type {
-        BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, FIND, FINDDATE
+        BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, FIND, FINDDATE, UPDATE
     }
 
     /**
@@ -27,7 +28,7 @@ public class Parser {
      * @param input The user's input.
      * @throws IllegalArgumentException  If user's input does not correspond to any of the cases.
      */
-    public static Command parse(String input) throws IllegalArgumentException {
+    public static Command parse(String input) throws IllegalArgumentException, DukeException {
         String[] words = input.split(" ");
         Type t = Type.valueOf(words[0].toUpperCase());
         switch(t) {
@@ -57,6 +58,9 @@ public class Parser {
 
         case FINDDATE:
             return new FindDateCommand(input);
+
+        case UPDATE:
+            return new UpdateCommand(input);
 
         case BYE:
             return new ByeCommand(input);
