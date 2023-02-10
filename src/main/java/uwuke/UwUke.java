@@ -1,7 +1,6 @@
 package uwuke;
 
 import java.util.NoSuchElementException;
-import java.util.Scanner;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -10,7 +9,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -31,7 +29,6 @@ public class UwUke extends Application {
 
     private final static int CAPACITY = 100;
     private static TaskList tasks;
-    private static Scanner sc = new Scanner(System.in);
 
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -44,43 +41,33 @@ public class UwUke extends Application {
 
     @Override
     public void start(Stage stage) {
+        // Initialise GUI elements
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
         userInput = new TextField();
         sendButton = new Button("Send");
-
-        
-
         AnchorPane mainLayout = new AnchorPane();
+        scene = new Scene(mainLayout);
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
         mainLayout.setPrefSize(400.0, 600.0);
-
-        scene = new Scene(mainLayout);
-        setStage(stage);
-        setScrollPane();
         
-        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
-        userInput.setPrefWidth(325.0);
-        sendButton.setPrefWidth(55.0);
-        setAnchorPane();
-        stage.setScene(scene);
-        stage.show();
-
+        // Configure GUI elements
+        configureStage(stage);
+        configureScrollPane();
+        configureAnchorPane();
+        configureDialogContainer();
+        configureUserInputTextField();
+        configureSendButton();
+        
+        // Initialise Helper classes
         Printer.setDialogContainer(dialogContainer);
         DialogBox.setDukeImage(duke);
         DialogBox.setUserImage(user);
-        inititialise();
+        inititialiseModels();
 
-        sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
-        });
-    
-        userInput.setOnAction((event) -> {
-            handleUserInput();
-        });
-
-        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+        stage.setScene(scene);
+        stage.show();
     }
 
     private void handleUserInput() {
@@ -96,14 +83,33 @@ public class UwUke extends Application {
         run(input);
     }
 
-    private static void setStage(Stage stage) {
+    private void configureSendButton() {
+        sendButton.setPrefWidth(55.0);
+        sendButton.setOnMouseClicked((event) -> {
+            handleUserInput();
+        });
+    }
+
+    private void configureUserInputTextField() {
+        userInput.setPrefWidth(325.0);
+        userInput.setOnAction((event) -> {
+            handleUserInput();
+        });
+    }
+
+    private void configureDialogContainer() {
+        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+    }
+
+    private static void configureStage(Stage stage) {
         stage.setTitle("Duke");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
     }
 
-    private void setScrollPane() {
+    private void configureScrollPane() {
         scrollPane.setPrefSize(385, 535);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
@@ -111,7 +117,7 @@ public class UwUke extends Application {
         scrollPane.setFitToWidth(true);
     }
 
-    private void setAnchorPane() {
+    private void configureAnchorPane() {
         AnchorPane.setTopAnchor(scrollPane, 1.0);
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
@@ -119,7 +125,7 @@ public class UwUke extends Application {
         AnchorPane.setBottomAnchor(userInput, 1.0);
     }
 
-    private static void inititialise() {
+    private static void inititialiseModels() {
         Printer.uwu();
         tasks = new TaskList(CAPACITY);
         try {
@@ -128,7 +134,6 @@ public class UwUke extends Application {
             Printer.printError("Could not load save file, creating new task list");
             tasks = new TaskList();
         }
-        sc = new Scanner(System.in);
     }
 
     /**
