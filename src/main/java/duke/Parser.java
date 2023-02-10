@@ -1,4 +1,5 @@
 package duke;
+import java.util.ArrayList;
 public class Parser {
     private static final Ui ui = new Ui();
     public static void parse(String cmd, TaskList list) throws DukeException {
@@ -48,6 +49,16 @@ public class Parser {
             Task removedTask = list.get(index);
             list.remove(index);
             ui.showDelete(removedTask);
+        } else if (cmd.startsWith("find")) {
+            String keyword = cmd.split(" ", 2)[1];
+            ArrayList<Task> matchingTaskList = new ArrayList<>();
+            for (Task task : list) {
+                if (task.toString().contains(keyword)) {
+                    matchingTaskList.add(task);
+                }
+            }
+            TaskList matches = new TaskList(matchingTaskList);
+            System.out.println("Here are the matching tasks in your list:\n" + matches);
         } else {
             throw new UnknownCommandException();
         }
