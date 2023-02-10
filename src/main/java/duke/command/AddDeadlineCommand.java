@@ -48,7 +48,7 @@ public class AddDeadlineCommand extends Command {
      */
     @Override
     public ReturnCode execute(Duke duke) throws DukeException {
-        duke.addNewTask(new Deadline(taskDescription, duke.parser.parseDateTime(dueByStr)));
+        duke.addNewTask(new Deadline(taskDescription, duke.dateTimeParser.parseDateTime(dueByStr)));
         return ReturnCode.SUCCESS;
     }
 }

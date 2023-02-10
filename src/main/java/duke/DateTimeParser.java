@@ -8,12 +8,12 @@ import java.util.stream.Stream;
 /**
  * Represents a Parser to parse date and time.
  */
-public class Parser {
+public class DateTimeParser {
 
     /**
      * Constructs an instance of Parser.
      */
-    public Parser() {
+    public DateTimeParser() {
         // Empty
     }
 

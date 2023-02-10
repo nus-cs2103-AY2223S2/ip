@@ -9,11 +9,11 @@ import java.time.LocalTime;
 import org.junit.jupiter.api.Test;
 
 /**
- * Contains test for Parser class
+ * Contains test for DateTimeParser class.
  */
-class ParserTest {
+class DateTimeParserTest {
 
-    private Parser parser = new Parser();
+    private DateTimeParser parser = new DateTimeParser();
 
     @Test
     void parseDateTime_spaceSeperator_success() {

@@ -7,7 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 
-import duke.Parser;
+import duke.DateTimeParser;
 import duke.Ui;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -52,7 +52,7 @@ public class Storage {
     public void loadDataFromFile() {
         assert tasklist != null : "Storage has no reference to taskList instance";
 
-        Parser parser = new Parser();
+        DateTimeParser parser = new DateTimeParser();
         Path f = Paths.get(DEFAULT_SAVE_PATH);
 
         // No saved data file -> do nothing

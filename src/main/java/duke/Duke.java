@@ -30,7 +30,7 @@ public class Duke extends Application {
 
     public final TaskList taskList;
     public final Storage storage;
-    public final Parser parser;
+    public final DateTimeParser dateTimeParser;
 
     /**
      * Constructs an instance of Duke.
@@ -38,7 +38,7 @@ public class Duke extends Application {
     public Duke() {
         taskList = new TaskList();
         storage = new Storage(taskList);
-        parser = new Parser();
+        dateTimeParser = new DateTimeParser();
         ui = new Ui();
 
         assert Duke.flags != null : "Duke flags is null";

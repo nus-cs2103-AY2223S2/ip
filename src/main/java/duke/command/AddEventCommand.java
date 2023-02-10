@@ -66,8 +66,8 @@ public class AddEventCommand extends Command {
     public ReturnCode execute(Duke duke) {
         duke.addNewTask(new Event(
                 taskDescription,
-                duke.parser.parseDateTime(fromStr),
-                duke.parser.parseDateTime(toStr)
+                duke.dateTimeParser.parseDateTime(fromStr),
+                duke.dateTimeParser.parseDateTime(toStr)
         ));
         return ReturnCode.SUCCESS;
     }
