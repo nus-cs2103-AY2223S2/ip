@@ -60,6 +60,15 @@ public class Ui {
         return listTasks(arr);
     }
 
+    public String listNotesCommand() {
+        ArrayList<Note> arr = NoteList.getList();
+        if (arr.size() == 0) {
+            System.out.println("Duke sees no notes in your list");
+            return "Duke sees no notes in your list";
+        }
+        return listNotes(arr);
+    }
+
      static String todoCommand(String str, Storage storage) throws IOException {
         Task toDo;
         try {
@@ -70,7 +79,7 @@ public class Ui {
         }
 
         TaskList.addTask(toDo);
-        storage.load();
+        storage.loadTasks();
         lineUI();
         String res = "Got it. I've added this task:\n" + toDo
                         + "\n" + "Now you have " + TaskList.getList().size() + " tasks in the list.";
@@ -92,7 +101,7 @@ public class Ui {
             String[] bar = Parser.getDuration(foo[1]);
             Task toAdd = new Event(foo[0], bar[0], bar[1]);
             TaskList.addTask(toAdd);
-            storage.load();
+            storage.loadTasks();
             lineUI();
             String res = "Got it. I've added this task:\n" + toAdd + "\n"
                         + "Now you have " + TaskList.getList().size() + " tasks in the list.";
@@ -117,7 +126,7 @@ public class Ui {
 
             Task toAdd = new Deadline(foo[0], Parser.getDeadline(foo[1]));
             TaskList.addTask(toAdd);
-            storage.load();
+            storage.loadTasks();
             lineUI();
             String res = "Got it. I've added this task:\n" + toAdd + "\n"
                         + "Now you have " + TaskList.getList().size() + " tasks in the list.";
@@ -141,7 +150,7 @@ public class Ui {
         }
 
         Task removed = TaskList.remove(num - 1);
-        storage.load();
+        storage.loadTasks();
         lineUI();
         String res = "Noted. I've removed this task:\n" + removed + "\n"
                     + "Now you have " + TaskList.getList().size() + " tasks in the list.";
@@ -161,7 +170,7 @@ public class Ui {
         }
 
         String name = TaskList.markDone(index);
-        storage.load();
+        storage.loadTasks();
         lineUI();
         String res = "Nice! duke.Duke has marked this task as done:\n" + "[X] " + name;
         System.out.println(res);
@@ -179,7 +188,7 @@ public class Ui {
         }
 
         String name = TaskList.markUndone(index);
-        storage.load();
+        storage.loadTasks();
         lineUI();
         String res = "OK, duke.Duke has marked this task as not done yet:\n" +  "[O] " + name;
         System.out.println(res);
@@ -208,6 +217,43 @@ public class Ui {
             return res;
         }
     }
+
+    String noteCommand(String str, Storage storage) throws IOException{
+        String note;
+        try {
+            note = Parser.getName(str, 5);
+        } catch (MissingNameException | MissingArgumentsException err) {
+            System.out.println(err.getMessage());
+            return err.getMessage();
+        }
+
+        Note toAdd = new Note(note);
+        NoteList.addNote(toAdd);
+        storage.loadNotes();
+        lineUI();
+        String res = "Got it. I've added this note:\n" + toAdd
+                + "\n" + "Now you have " + NoteList.getList().size() + " tasks in the list.";
+        System.out.println(res);
+        lineUI();
+        return res;
+
+
+
+    }
+
+    String listNotes(ArrayList<Note> arr) {
+        String res = "";
+        int cnt = 1;
+        while (cnt <= arr.size()) {
+            Note item = arr.get(cnt - 1);
+            res += cnt + "." + item.toString() + "\n";
+            System.out.println(cnt + "." + item.toString());
+            cnt++;
+        }
+        return res;
+    }
+
+
 
     String listTasks(ArrayList<Task> arr) {
         String res = "";

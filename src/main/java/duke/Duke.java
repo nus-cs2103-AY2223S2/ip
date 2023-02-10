@@ -15,21 +15,26 @@ public class Duke {
     /** TaskList that keeps track of all the tasks added */
     private TaskList tasks;
 
+    private NoteList notes;
+
+
     /** Ui that handles user interface jobs */
     private Ui ui;
 
     /**
      * Initializes an Duke object with the given values.
      *
-     * @param filePath The name of the file where you keep list of tasks
+     * @param taskFilePath The name of the file where you keep list of tasks
+     * @param noteFilePath The name of the file where you keep list of tasks
      * @return A Duke instance
      * @throws FileNotFoundException
      */
-    public Duke(String filePath) {
+    public Duke(String taskFilePath, String noteFilePath) {
         try {
             ui = new Ui();
-            storage = new Storage(filePath);
-            tasks = new TaskList(storage.initialize());
+            storage = new Storage(taskFilePath, noteFilePath);
+            tasks = new TaskList(storage.initializeTasks());
+            notes = new NoteList(storage.initializeNotes());
         } catch (FileNotFoundException err) {
             System.out.println(err.getMessage());
         }
@@ -39,8 +44,10 @@ public class Duke {
     public Duke() {
         try {
             ui = new Ui();
-            storage = new Storage("data/duke.txt");
-            tasks = new TaskList(storage.initialize());
+            storage = new Storage("data/duke.txt", "data/note.txt");
+            tasks = new TaskList(storage.initializeTasks());
+            notes = new NoteList(storage.initializeNotes());
+
         } catch (FileNotFoundException err) {
             System.out.println(err.getMessage());
         }
@@ -78,6 +85,10 @@ public class Duke {
                 ui.deleteCommand(str, storage);
             } else if (str.length() >= 5 && str.toLowerCase().startsWith("find ")) {
                 ui.findCommand(str);
+            }  else if (str.length() >= 5 && str.toLowerCase().startsWith("note ")) {
+                ui.noteCommand(str, storage);
+            }  else if (str.equalsIgnoreCase("notes")) {
+                ui.listNotesCommand();
             } else {
                 System.out.println(new InvalidCommandException().getMessage());
             }
@@ -92,6 +103,8 @@ public class Duke {
         }
         if (command.equalsIgnoreCase("list")) {
             return ui.listCommand();
+        } else if (command.equalsIgnoreCase("notes")) {
+            return ui.listNotesCommand();
         } else if (command.length() >= 5 && command.toLowerCase().startsWith("mark ")) {
             return ui.markCommand(command, storage);
         } else if (command.length() >= 6 && command.toLowerCase().startsWith("unmark ")) {
@@ -106,6 +119,8 @@ public class Duke {
             return ui.deleteCommand(command, storage);
         } else if (command.length() >= 5 && command.toLowerCase().startsWith("find ")) {
             return ui.findCommand(command);
+        } else if (command.length() >= 5 && command.toLowerCase().startsWith("note ")) {
+            return ui.noteCommand(command, storage);
         } else {
             System.out.println(new InvalidCommandException().getMessage());
             return new InvalidCommandException().getMessage();
@@ -114,6 +129,6 @@ public class Duke {
 
 
     public static void main(String[] args) throws IOException {
-        new Duke("data/duke.txt").run();
+        new Duke("data/duke.txt", "data/note.txt").run();
     }
 }

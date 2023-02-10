@@ -12,16 +12,20 @@ import java.util.Scanner;
 /** A class Storage that deals with loading tasks from the file and saving tasks in the file */
 public class Storage {
     /** The file path */
-    private String path;
+    private String taskListPath;
+    private String noteListPath;
 
     /**
      * Initializes an Storage object with the given path.
      *
-     * @param relativePath The relative path
+     * @param taskListPath The relative path of tasklist
+     * @param noteListPath The relative path of noteList
      * @return A Storage instance
      */
-    public Storage(String relativePath) {
-        path = relativePath;
+    public Storage(String taskListPath, String noteListPath) {
+
+        this.taskListPath = taskListPath;
+        this.noteListPath = noteListPath;
     }
 
     /**
@@ -30,8 +34,8 @@ public class Storage {
      * @throws FileNotFoundException If file is not found
      * @return A list of tasks saved in file
      */
-    public ArrayList<Task> initialize() throws FileNotFoundException {
-        File f = new File(path);
+    public ArrayList<Task> initializeTasks() throws FileNotFoundException {
+        File f = new File(taskListPath);
         ArrayList<Task> og = new ArrayList<>();
         if (!f.exists()) {
             return og;
@@ -85,8 +89,8 @@ public class Storage {
      *
      * @throws IOException If there is a problem with the writer class
      */
-    public void load() throws IOException {
-        File f = new File(path);
+    public void loadTasks() throws IOException {
+        File f = new File(taskListPath);
         if (f.exists()) {
             f.delete();
         }
@@ -95,8 +99,58 @@ public class Storage {
         f.createNewFile();
 
 
-        FileWriter fw = new FileWriter(path);
+        FileWriter fw = new FileWriter(taskListPath);
         ArrayList<Task> changed = TaskList.getList();
+        for (int i = 0; i < changed.size(); i++) {
+            fw.write(changed.get(i).toString());
+            fw.write("\n");
+        }
+        fw.close();
+    }
+
+    /**
+     * Initializes and loads tasks from file indicated when Duke is started.
+     *
+     * @throws FileNotFoundException If file is not found
+     * @return A list of tasks saved in file
+     */
+    public ArrayList<Note> initializeNotes() throws FileNotFoundException {
+        File f = new File(noteListPath);
+        ArrayList<Note> og = new ArrayList<>();
+        if (!f.exists()) {
+            return og;
+        }
+
+        Scanner sc = new Scanner(f);
+        while (sc.hasNext()) {
+            String str = sc.nextLine().trim();
+            Note toInsert = new Note(str);
+            og.add(toInsert);
+        }
+        sc.close();
+
+        return og;
+    }
+
+
+
+    /**
+     * Load tasks from another place into the file
+     *
+     * @throws IOException If there is a problem with the writer class
+     */
+    public void loadNotes() throws IOException {
+        File f = new File(noteListPath);
+        if (f.exists()) {
+            f.delete();
+        }
+
+        f.getParentFile().mkdirs();
+        f.createNewFile();
+
+
+        FileWriter fw = new FileWriter(noteListPath);
+        ArrayList<Note> changed = NoteList.getList();
         for (int i = 0; i < changed.size(); i++) {
             fw.write(changed.get(i).toString());
             fw.write("\n");
