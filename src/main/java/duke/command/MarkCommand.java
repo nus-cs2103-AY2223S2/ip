@@ -1,7 +1,7 @@
 package duke.command;
 
 import duke.Storage;
-import duke.TaskList;
+import duke.task.TaskList;
 import duke.gui.Ui;
 
 /**
@@ -12,7 +12,7 @@ public class MarkCommand extends Command {
     private int index;
 
     /**
-     * Public constructor for MarkCommand
+     * Constructor for MarkCommand
      * @param index receive index from user to know which to mark.
      *         - 1 because our list is 0-index basing.
      */
@@ -22,10 +22,13 @@ public class MarkCommand extends Command {
 
     /**
      * Mark the given task in the list and storage
+     * @return a success message that shows the task being marked
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.mark(index);
+        storage.empty();
+        storage.writeFromList(tasks);
         return ui.showMarkSucess(tasks.get(index));
     }
 }

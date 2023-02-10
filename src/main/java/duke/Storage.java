@@ -1,5 +1,7 @@
 package duke;
 
+import duke.task.*;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.FileReader;
@@ -29,13 +31,14 @@ public class Storage {
      * @throws IOException
      */
     public ArrayList<Task> load() throws IOException {
-
         ArrayList<Task> list = new ArrayList <Task>();
-        File directory = new File("data");
+
         //Create directory "data", if exist do nothing
+        File directory = new File("data");
         directory.mkdir();
-        File file = new File(this.filepath);
+
         //Create file if does not exist, if exist read the file
+        File file = new File(this.filepath);
         if (!file.createNewFile()) {
             BufferedReader br = new BufferedReader(new FileReader(file));
             String st;
@@ -45,12 +48,12 @@ public class Storage {
                 if( tokens[0].equals("todo"))
                     t = new Todo( tokens[2] , Boolean.parseBoolean(tokens[1]));
                 else if ( tokens[0].equals("deadline"))
-                    t = new Deadline( tokens[2], LocalDateTime.parse(tokens[3]),Boolean.parseBoolean(tokens[1]));
+                    t = new Deadline( tokens[2], LocalDateTime.parse(tokens[3]),
+                            Boolean.parseBoolean(tokens[1]));
                 else if ( tokens[0].equals("event"))
-                    t = new Event( tokens[2],LocalDateTime.parse(tokens[3]),LocalDateTime.parse(tokens[4]),Boolean.parseBoolean(tokens[1]));
-
+                    t = new Event( tokens[2],LocalDateTime.parse(tokens[3]),
+                            LocalDateTime.parse(tokens[4]),Boolean.parseBoolean(tokens[1]));
                 list.add(t);
-
             }
             br.close();
         }
@@ -64,7 +67,7 @@ public class Storage {
      */
     public void write(Task t){
         try {
-            FileWriter fw = new FileWriter("data/duke.txt", true);
+            FileWriter fw = new FileWriter(filepath, true);
             fw.write(t.toFile() + "\n");
             fw.close();
         } catch (IOException e) {
@@ -72,5 +75,29 @@ public class Storage {
         }
     }
 
+    /**
+     * Remove all text from the file
+     */
+    public void empty() {
+        try {
+            new FileWriter(filepath, false).close();
+        } catch (IOException e) {
+            throw new RuntimeException();
+        }
+    }
 
+    /**
+     * Write from TaskList to the file
+     */
+    public void writeFromList(TaskList tasks) {
+        try {
+            FileWriter fw = new FileWriter(filepath);
+            for (int i = 0; i < tasks.size(); i++) {
+                fw.write(tasks.get(i).toFile() + System.lineSeparator());
+            }
+            fw.close();
+        } catch (IOException e) {
+            throw new RuntimeException();
+        }
+    }
 }

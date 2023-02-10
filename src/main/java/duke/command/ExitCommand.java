@@ -1,7 +1,7 @@
 package duke.command;
 
 import duke.Storage;
-import duke.TaskList;
+import duke.task.TaskList;
 import duke.gui.Ui;
 
 /**
@@ -12,7 +12,7 @@ public class ExitCommand extends Command {
     boolean exit;
 
     /**
-     * Public constructor
+     * Constructor
      * Initialize exit to be true.
      */
     public ExitCommand() {

@@ -1,6 +1,7 @@
-package duke;
+package duke.task;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Contains the Event task object with variables from and to
@@ -10,9 +11,11 @@ public class Event extends Task {
     private LocalDateTime from;
     private LocalDateTime to;
 
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy:HHmm");
+
 
     /**
-     * Public constructor
+     * Constructor
      *
      * @param value = name of the ask
      * @param from = datetime of the task beginning
@@ -35,6 +38,7 @@ public class Event extends Task {
     }
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(from: " + from + " to: " + to + ")";
+        return "[E]" + super.toString() + "(from: " + from.format(formatter) +
+                " to: " + to.format(formatter) + ")";
     }
 }

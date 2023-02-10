@@ -1,9 +1,9 @@
 package duke.command;
 
 import duke.Storage;
-import duke.TaskList;
+import duke.task.TaskList;
 import duke.gui.Ui;
-import duke.Task;
+import duke.task.Task;
 
 /**
  * AddCommand - If User enters the todo , deadline or the event command.
@@ -13,14 +13,15 @@ public class AddCommand extends Command {
     private Task task;
 
     /**
-     * public constructor for AddCommand
+     * Constructor
      */
     public AddCommand(Task t) {
         this.task = t;
     }
 
     /**
-     * Adds ToDo,Deadline or Event tasks to the tasklist and storage.
+     * Adds ToDo,Deadline or Event tasks to the Tasklist and storage
+     * @return a success message that shows the task added and the total number of tasks
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {

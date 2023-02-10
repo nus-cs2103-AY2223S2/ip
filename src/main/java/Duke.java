@@ -1,6 +1,6 @@
 import duke.Storage;
 import duke.gui.Ui;
-import duke.TaskList;
+import duke.task.TaskList;
 import duke.Parser;
 import duke.gui.Start;
 

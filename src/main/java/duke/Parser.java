@@ -1,10 +1,23 @@
 package duke;
 
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.ErrorCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
+import duke.command.UnknownCommand;
 import duke.gui.Ui;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.NoSuchElementException;
 import java.util.StringTokenizer;
 
@@ -16,10 +29,10 @@ public class Parser {
     private Ui ui;
     private StringTokenizer tk;
     private String fullCommand;
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyyHHmm");
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy:HHmm");
 
     /**
-     * Public constructor
+     * Constructor
      */
     public Parser() {
 
@@ -66,9 +79,11 @@ public class Parser {
         }
         case "todo": {
             String value = getToDo();
-            if (value != null) {
+            if (value != null && !value.isEmpty())  {
                 t = new Todo(value, false);
                 c = new AddCommand(t);
+            } else {
+                c = new ErrorCommand(ErrorCommand.types.emptyDesc,"todo");
             }
             break;
         }
@@ -76,17 +91,29 @@ public class Parser {
             String input;
             String value = "";
             String date ;
+            boolean isBy = false; // Check whether the user has typed /by in his command
+
             while ((input = nextString()) != null) {
                 if (input.equals("/by")) {
-                    date = nextString() + nextString();
-                    LocalDateTime dateTime = LocalDateTime.parse(date, formatter);
-                    t = new Deadline(value, dateTime, false);
-                    c = new AddCommand(t);
+                    date = nextString();
+                    isBy = true;
+                    LocalDateTime dateTime = stringToDateTime(date);
+                    if(dateTime != null) {
+                        t = new Deadline(value, dateTime, false);
+                        c = new AddCommand(t);
+                    } else {
+                        c = new ErrorCommand(ErrorCommand.types.dateTime,"deadline");
+                    }
                     break;
                 } else
                     value = value + input;
             }
 
+            if(value == "") {
+                c = new ErrorCommand(ErrorCommand.types.emptyDesc,"deadline");
+            } else if (isBy == false) {
+                c = new ErrorCommand(ErrorCommand.types.missingBy,"deadline");
+            }
             break;
         }
         case "event": {
@@ -94,23 +121,46 @@ public class Parser {
             String value = "";
             String from;
             String to ;
+            boolean isFrom = false;
+
             while ((input = nextString()) != null) {
                 if (input.equals("/from")) {
-                    from = nextString() + nextString();
-                    nextString();
-                    to = nextString() + nextString();
-                    LocalDateTime dateTime = LocalDateTime.parse(from, formatter);
-                    LocalDateTime dateTime2 = LocalDateTime.parse(to, formatter);
+                    from = nextString();
+                    LocalDateTime dateTime;
+                    isFrom = true;
+                    dateTime = stringToDateTime(from);
+                    if(dateTime == null) {
+                        c = new ErrorCommand(ErrorCommand.types.dateTime,"event from");
+                        break;
+                    }
+                    String isTo = nextString();
+                    if(!(isTo != null && isTo.equals("/to"))) {
+                        c = new ErrorCommand(ErrorCommand.types.missingTo,"event to");
+                        break;
+                    }
+                    to = nextString();
+                    LocalDateTime dateTime2;
+                    dateTime2 = stringToDateTime(to);
+                    if(dateTime2 == null) {
+                        c = new ErrorCommand(ErrorCommand.types.dateTime,"event to");
+                        break;
+                    }
                     t = new Event(value, dateTime, dateTime2, false);
                     c = new AddCommand(t);
                     break;
                 } else
                     value = value + input;
             }
+
+            if(value == "") {
+                c = new ErrorCommand(ErrorCommand.types.emptyDesc,"event");
+            } else if (isFrom == false) {
+                c = new ErrorCommand(ErrorCommand.types.missingFrom,"event");
+            }
             break;
         }
         default:
-            c = new CommandNotFound();
+            c = new UnknownCommand();
             break;
         }
 
@@ -130,15 +180,14 @@ public class Parser {
         return null;
     }
 
-    //Custom method for ToDo action
+    //Custom method for ToDo command
     public String getToDo() {
         String[] arr = fullCommand.split(" ", 2);
         try {
-            return arr[1];
+            return arr[1].trim();
         } catch(ArrayIndexOutOfBoundsException e)  {
-
+            return null;
         }
-        return null;
     }
 
     //try and catch for tk.nextToken() for string
@@ -149,6 +198,17 @@ public class Parser {
             ui.showError(1);
         }
         return null;
+    }
+
+    //Convert String to datetime format
+    public LocalDateTime stringToDateTime(String x) {
+        LocalDateTime dt;
+        try {
+            dt = LocalDateTime.parse(x, formatter);
+        } catch (DateTimeParseException | NullPointerException e) {
+            return null;
+        }
+        return dt;
     }
 
 }
