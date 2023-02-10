@@ -50,7 +50,7 @@ test {
 }
 
 application {
-    mainClassName = "Init"
+    mainClassName = "core.Init"
 }
 
 checkstyle {
