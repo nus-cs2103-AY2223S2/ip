@@ -23,6 +23,7 @@ public class Storage {
 
     /**
      * Loads and parses saved content into a TaskList.
+     *
      * @return TaskList of user.
      */
     public TaskList readSavedFile() {
@@ -55,6 +56,7 @@ public class Storage {
 
     /**
      * Takes in a String and returns a Task.
+     *
      * @param string List of tasks in use by the app.
      * @return Task.
      */
@@ -80,6 +82,7 @@ public class Storage {
     }
     /**
      * Takes in a String and returns an Arraylist of tags.
+     *
      * @param string tags in string form.
      * @return ArrayList
      */
@@ -96,6 +99,7 @@ public class Storage {
     }
     /**
      * Saves taskList to file.
+     *
      * @param taskList Lists of tasks in use by the app.
      *
      */

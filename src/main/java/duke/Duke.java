@@ -112,8 +112,8 @@ public class Duke extends Application {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Generates a response to user input.
+     * @return Response string.
      */
     private static String getResponse(String input) {
         if (!input.equals("bye")) {
