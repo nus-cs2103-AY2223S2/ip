@@ -24,4 +24,6 @@ public abstract class Command {
      * @param toDoList The task list to be edited.
      */
     public abstract void execute(TaskList toDoList);
+
+    public abstract String getResponseOutput();
 }

@@ -13,12 +13,33 @@ import duke.dukeexception.DukeException;
  * @author Shi Jia Ao
  */
 public class Duke {
+    private final Ui ui;
+    private final Storage storage;
+    private TaskList toDoList;
+
+    public Duke() {
+        this.ui = new Ui();
+        this.storage = new Storage("data");
+        this.toDoList = this.storage.initialise();
+    }
+
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
     protected String getResponse(String input) {
-        return "Duke heard: " + input;
+        Parser parser = new Parser(input);
+        try {
+            Command currCommand = parser.process();
+            executeUserInput(currCommand);
+            return ui.getCommandMessage(currCommand);
+        } catch (DukeException ex) {
+            return ui.getExceptionMessage(ex);
+        }
+    }
+
+    private void executeUserInput(Command command) {
+        command.execute(toDoList);
     }
 
     public static void main(String[] args) {
@@ -26,12 +47,7 @@ public class Duke {
         ui.printWelcome();
         Storage storage = new Storage("data");
         TaskList toDoList;
-        try {
-            toDoList = storage.initialise();
-        } catch (DukeException ex) {
-            System.out.println(ex.getMessage());
-            return;
-        }
+        toDoList = storage.initialise();
         Scanner sc = new Scanner(System.in);
         while (true) {
             String command = sc.nextLine();

@@ -12,10 +12,6 @@ public class Ui {
     private static final int START = 0;
     private static final int INCREMENT = 1;
 
-    public Ui() {
-        // empty
-    }
-
     /**
      * Prints the current list of tasks
      *
@@ -51,7 +47,15 @@ public class Ui {
         System.out.println(command);
     }
 
+    public String getCommandMessage(Command command) {
+        return command.getResponseOutput();
+    }
+
     public void printExceptionMessage(DukeException e) {
         System.out.println(e.getMessage());
+    }
+
+    public String getExceptionMessage(DukeException e) {
+        return e.getMessage();
     }
 }

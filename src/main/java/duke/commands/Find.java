@@ -6,14 +6,17 @@ import duke.TaskList;
 import duke.commands.tasks.Task;
 
 /**
- * This class handles searching for tasks using keywords
+ * This class handles searching for tasks using keywords.
  */
 public class Find extends Command {
+    private final static String RESPONSE_HEADER = "Got it! Here are your search results:\n";
     private String keyword;
+    private String searchResults;
 
     public Find(String message, String keyword) {
         super(message);
         this.keyword = keyword;
+        this.searchResults = RESPONSE_HEADER;
     }
 
     private boolean hasMatch(String taskDescription) {
@@ -35,15 +38,13 @@ public class Find extends Command {
                 matches.add(currTask);
             }
         }
-
-        System.out.println("Got it! Here is your search result:");
         for (Task i : matches) {
-            System.out.println(i);
+            this.searchResults += (i.toString() + '\n');
         }
     }
 
     @Override
-    public String toString() {
-        return String.format("");
+    public String getResponseOutput() {
+        return this.searchResults;
     }
 }
