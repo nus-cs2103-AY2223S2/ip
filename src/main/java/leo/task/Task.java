@@ -27,7 +27,7 @@ public class Task implements Serializable {
             .asList("todo", "deadline", "event", "mark", "unmark", "delete", "find");
 
     final static List<String> commands = Arrays
-            .asList("list", "bye", "todo", "deadline", "event", "mark", "unmark", "delete", "find");
+            .asList("list", "bye", "help", "todo", "deadline", "event", "mark", "unmark", "delete", "find");
 
     private Task(String taskDesc, String cmd) {
         this.taskDesc = taskDesc;

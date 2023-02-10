@@ -10,6 +10,7 @@ import javafx.stage.Stage;
  * A GUI for Leo using FXML.
  */
 public class Main extends Application {
+    //Solution adapted from https://se-education.org/guides/tutorials/javaFxPart4.html
 
     private Leo leo = new Leo();
 

@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
+
 /**
  * Encapsulates the parsing functions of user input.
  */
@@ -23,6 +24,7 @@ public class Parser {
      */
     public String[] parseRequest() {
         String request = io.nextLine();
+        assert request != null : "Request should not be null";
         return request.split(" ", 2);
     }
 
@@ -34,6 +36,7 @@ public class Parser {
     public String[] parseRequest(String request) {
         return request.split(" ", 2);
     }
+
 
     /**
      * Parses the task ID from the user input.

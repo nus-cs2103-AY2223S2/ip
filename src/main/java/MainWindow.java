@@ -12,6 +12,7 @@ import leo.ui.Ui;
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+    //Solution adapted from https://se-education.org/guides/tutorials/javaFxPart4.html
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -30,7 +31,7 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(
-                DialogBox.getLeoDialog(Ui.greetUserGUI(), leoImage)
+                DialogBox.getLeoDialog(Ui.greetUserGUI() + Ui.getHelp(), leoImage)
         );
     }
 

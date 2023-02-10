@@ -22,7 +22,7 @@ class EmptyFieldException extends LeoTaskException {
 
 class InvalidCommandException extends LeoTaskException {
     InvalidCommandException() {
-        super("I'm sorry, I don't know what you want. ¿Que miras bobo?");
+        super("I'm sorry, I don't know what you want. ¿Que miras bobo?\n Use 'help' to see the list of commands.");
     }
 }
 

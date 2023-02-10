@@ -92,6 +92,9 @@ public class TaskList implements Serializable {
             }
 
             switch (parsedRequest[0]) {
+            case "help":
+                Ui.printHelp();
+                break;
             case "list":
                 Ui.printResponse("Here are your tasks, you legend!:");
                 for (int i = 0; i < tasks.size(); i++) {
@@ -136,11 +139,13 @@ public class TaskList implements Serializable {
             if (!Task.commands.contains(parsedRequest[0])) {
                 throw new InvalidCommandException();
             }
-
             else if (Task.descCommands.contains(parsedRequest[0]) && parsedRequest.length <= 1) {
                 throw new EmptyFieldException();
             }
             switch (parsedRequest[0]) {
+                case "help":
+                    response = Ui.getHelp();
+                    break;
                 case "bye":
                     response = "It was nice talking, see you soon!\n";
                     break;
