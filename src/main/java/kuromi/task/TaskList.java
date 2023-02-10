@@ -1,8 +1,8 @@
 package kuromi.task;
 
-import java.util.ArrayList;
-
 import static java.util.stream.Collectors.toCollection;
+
+import java.util.ArrayList;
 
 /**
  * List of tasks represented by an ArrayList of Tasks.

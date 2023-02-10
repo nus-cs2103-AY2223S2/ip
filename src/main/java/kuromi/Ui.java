@@ -1,10 +1,10 @@
 package kuromi;
 
+import java.util.Scanner;
+
 import javafx.animation.PauseTransition;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
-import java.util.Scanner;
 
 /**
  * Deals with interactions with the user (e.g. reading inputs, showing outputs).
@@ -71,6 +71,11 @@ public class Ui {
         return (msg);
     }
 
+    /**
+     * Show bye message to the user.
+     * @param msg Message to be shown.
+     * @return Message
+     */
     public String showBye(String msg) {
         PauseTransition delay = new PauseTransition(Duration.seconds(1.5));
         delay.setOnFinished(event -> stage.close());

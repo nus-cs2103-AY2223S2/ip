@@ -1,19 +1,19 @@
 package kuromi;
 
+import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-
 /**
  * A GUI for Duke using FXML.
  */
 public class Main extends Application {
-    String home = System.getProperty("user.home");
-    java.nio.file.Path path = java.nio.file.Paths.get(home, "Documents", "kuromi.txt");
+    private String home = System.getProperty("user.home");
+    private java.nio.file.Path path = java.nio.file.Paths.get(home, "Documents", "kuromi.txt");
     private Kuromi kuromi;
 
     @Override
