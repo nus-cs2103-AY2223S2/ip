@@ -11,4 +11,8 @@ public class Command extends exceptions.DukeException {
     public Command() {
         super(String.format("%s I'm sorry, but I don't know what you just said means :-(", OOPS));
     }
+
+    public Command(String str) {
+        super(String.format("Internal error: Issue with understanding command", str));
+    }
 }

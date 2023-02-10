@@ -43,4 +43,12 @@ public class Deadline extends Task {
         return String.format("D,%s,%s,%s", this.getTaskDescription(),
                 this.getComplete(), DateHandler.unconvert(this.by));
     }
+
+    /**
+     * Return the LocalDateTime of when this task must be completed by.
+     * @return time
+     */
+    public LocalDateTime getBy(){
+        return this.by;
+    }
 }

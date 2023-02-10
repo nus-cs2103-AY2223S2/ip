@@ -22,9 +22,9 @@ public class Duke {
         boolean shouldQuit = false;
         String userInput;
 
-        greetCli();
-        initialize();
+//        greetCli();
         ioHandler.println(greet());
+        initialize();
         ioHandler.flush();
 
         while (!shouldQuit) {
@@ -49,16 +49,18 @@ public class Duke {
     /**
      * Initialize core.Duke by initializing needed classes.
      */
-    public static void initialize() {
+    public static String initialize() {
         ioHandler = new DukeIO();
         taskMaster = new TaskMaster();
         try {
             ioHandler.readSave(taskMaster);
+            return taskMaster.getReminder();
         } catch (exceptions.invalid.File e) {
             taskMaster = new TaskMaster();
         } catch (DukeException e) {
             throw new RuntimeException(e); //Figure out who throws tis
         }
+        return "";
     }
 
     /**
