@@ -1,11 +1,10 @@
 package duke.task;
 
 public class Todo extends Task {
-    protected String taskType;
+    static final String TODO_SYMBOL = "T";
 
     public Todo(String description) {
         super(description);
-        this.taskType = "T";
     }
 
     /**
@@ -18,6 +17,6 @@ public class Todo extends Task {
      * @return String in the format: [taskType][status] description
      */
     public String toString() {
-        return "[" + this.taskType + "][" + super.status + "] " + super.description;
+        return "[" + TODO_SYMBOL + "][" + super.status + "] " + super.description;
     }
 }
