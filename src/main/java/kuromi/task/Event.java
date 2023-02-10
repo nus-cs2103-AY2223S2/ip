@@ -1,5 +1,11 @@
 package kuromi.task;
 
+import kuromi.KuromiException;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 /**
  * Event task represented by description, start date, and end date. Extends from Task class.
  */
@@ -9,16 +15,31 @@ public class Event extends Task {
     /** The end date represented as a String **/
     protected String from;
 
+    protected LocalDateTime dateFrom;
+
+    protected LocalDateTime dateBy;
+
     /**
      * kuromi.MainWindow.kuromi.KuromiException.Main constructor (for invocation by most classes)
      * @param description The description of an event.
      * @param by The end date of an event.
      * @param from The start date of an event.
      */
-    public Event(String description, String by, String from) {
+    public Event(String description, String by, String from) throws KuromiException {
         super(description);
         this.by = by;
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        try {
+            this.dateBy = LocalDateTime.parse(by, format);
+        } catch (DateTimeParseException e) {
+            throw new KuromiException("☹ OOPS!!! The format of the start date must be in yyyy-MM-dd HH:mm");
+        }
         this.from = from;
+        try {
+            this.dateFrom = LocalDateTime.parse(from, format);
+        } catch (DateTimeParseException e) {
+            throw new KuromiException("☹ OOPS!!! The format of the end date must be in yyyy-MM-dd HH:mm");
+        }
     }
 
     /**
@@ -29,10 +50,21 @@ public class Event extends Task {
      * @param from The start date of an event.
      * @param isDone The status of an event.
      */
-    public Event(String description, String by, String from, boolean isDone) {
+    public Event(String description, String by, String from, boolean isDone) throws KuromiException {
         super(description, isDone);
         this.by = by;
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        try {
+            this.dateBy = LocalDateTime.parse(by, format);
+        } catch (DateTimeParseException e) {
+            throw new KuromiException("☹ OOPS!!! The format of the start date must be in yyyy-MM-dd HH:mm");
+        }
         this.from = from;
+        try {
+            this.dateFrom = LocalDateTime.parse(from, format);
+        } catch (DateTimeParseException e) {
+            throw new KuromiException("☹ OOPS!!! The format of the end date must be in yyyy-MM-dd HH:mm");
+        }
     }
 
     /**

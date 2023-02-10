@@ -154,7 +154,7 @@ public class Parser {
                 desc2 += " ";
             }
         }
-        if (desc2.equals("")) {
+        if (desc2.equals("") || desc2.contains("/by")) {
             throw new KuromiException("☹ OOPS!!! The description of a deadline cannot be empty.");
         }
         String by = "";
