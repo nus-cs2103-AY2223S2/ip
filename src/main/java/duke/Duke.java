@@ -1,7 +1,7 @@
 package duke;
 
 import command.Command;
-import exception.*;
+
 import gui.Gui;
 
 import java.util.ArrayList;
@@ -33,7 +33,7 @@ public class Duke {
             }
             return ui.getStatements();
         } catch (Exception e) {
-            ui.addStatement(e.toString());
+            ui.addStatement(e.getMessage());
         }
         return ui.getStatements();
     }
