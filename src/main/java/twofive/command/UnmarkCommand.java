@@ -32,22 +32,9 @@ public class UnmarkCommand extends Command {
         String commandResult = "";
         if (this.taskNum < 0 || this.taskNum >= tasks.getTasksNum()) {
             throw new InvalidTaskException();
-<<<<<<< HEAD
-=======
-        } else {
-            assert taskNum >= 0 & taskNum < tasks.getTasksNum() : "Task number should be at least 0 or 1 less than "
-                    + "the number of tasks";
-            Task currentTask = tasks.setTaskAsUndone(taskNum);
-            try {
-                storage.save(tasks);
-                TaskContainer.setTasks(tasks.getTasks());
-                commandResult = "OK, I've marked this task as not done yet:\n " + currentTask;
-            } catch (IOException e) {
-                commandResult = e.getMessage();
-            }
-            return commandResult;
->>>>>>> master
         }
+        assert taskNum >= 0 & taskNum < tasks.getTasksNum() : "Task number should be at least 0 or 1 less than "
+                + "the number of tasks";
         Task currentTask = tasks.setTaskAsUndone(taskNum);
         try {
             storage.save(tasks);
