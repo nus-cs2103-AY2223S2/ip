@@ -1,5 +1,6 @@
 package aqua.manager;
 
+import java.util.HashMap;
 import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
@@ -52,6 +53,8 @@ public class IoManager {
 
     private final Supplier<String> inputSupplier;
     private final Consumer<String> outputConsumer;
+
+    private final HashMap<String, Stage> stageMap = new HashMap<>();
 
 
     /**
@@ -137,16 +140,31 @@ public class IoManager {
      *
      * @param root - the root node to show.
      */
-    public void popup(Parent root) {
-        Platform.runLater(() -> showPopup(root));
+    public void popup(Parent root, String stageId) {
+        Platform.runLater(() -> showPopup(root, stageId));
     }
 
 
-    private void showPopup(Parent root) {
+    private void showPopup(Parent root, String stageId) {
+        closeStage(stageId);
+        createStage(root, stageId).show();
+    }
+
+
+    private void closeStage(String stageId) {
+        if (stageMap.containsKey(stageId)) {
+            stageMap.remove(stageId).close();
+        }
+    }
+
+
+    private Stage createStage(Parent root, String stageId) {
         Stage stage = new Stage();
         Scene scene = new Scene(root);
         scene.getStylesheets().add(this.getClass().getResource(PATH_CSS).toString());
         stage.setScene(scene);
-        stage.show();
+        stage.setTitle(stageId);
+        stageMap.put(stageId, stage);
+        return stage;
     }
 }

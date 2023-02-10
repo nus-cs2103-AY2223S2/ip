@@ -12,10 +12,12 @@ import aqua.manager.IoManager;
 import aqua.manager.LogicManager;
 import aqua.manager.TaskFilterReport;
 import aqua.util.DateUtils;
+import javafx.scene.Parent;
 
 
 /** A {@code CommandController} to view schedule. */
 public class ViewScheduleCommand extends CommandController {
+    private static final String POPUP_TITLE = "Task Schedule";
     private static final int DAYS_IN_WEEK = 7;
 
 
@@ -40,7 +42,8 @@ public class ViewScheduleCommand extends CommandController {
 
             @Override
             protected void display(DisplayData data, IoManager manager) {
-                manager.popup(new TaskView(data.startTime, data.report).getRoot());
+                Parent root = new TaskView(data.startTime, data.report).getRoot();
+                manager.popup(root, POPUP_TITLE);
             }
         });
     }
