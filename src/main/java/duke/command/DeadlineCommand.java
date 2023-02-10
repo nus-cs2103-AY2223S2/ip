@@ -1,5 +1,6 @@
 package duke.command;
 
+import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 
 import duke.dukeexception.CommandException;
@@ -88,11 +89,15 @@ public class DeadlineCommand extends Command {
         // Throws RequestExecution if there are any issues with the request
         checkCommandRequirement();
 
-        int byIndex = Arrays.asList(values).indexOf("/by");
-        String description = String.join(" ", Arrays.copyOfRange(values, 1, byIndex));
-        String by = String.join(" ", Arrays.copyOfRange(values, byIndex + 1, values.length));
-        by = DateTimeParser.parse(by);
+        try {
+            int byIndex = Arrays.asList(values).indexOf("/by");
+            String description = String.join(" ", Arrays.copyOfRange(values, 1, byIndex));
+            String by = String.join(" ", Arrays.copyOfRange(values, byIndex + 1, values.length));
+            by = DateTimeParser.parse(by);
 
-        return new String[] { description, by };
+            return new String[] { description, by };
+        } catch (DateTimeParseException e) {
+            throw new CommandException("Datetime has to be in the following format: yyyy-mm-dd HHmm");
+        }
     }
 }

@@ -40,7 +40,7 @@ public abstract class DateTimeParser {
     }
 
     /**
-     * Shows the error message of DateTimeParseException.
+     * Displays error message of DateTimeParseException on UI.
      */
     public static void showDateTimeParseErrorMessage() {
         System.out.println("Datetime has to be in the following format: yyyy-mm-dd HHmm");
