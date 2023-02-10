@@ -33,8 +33,8 @@ public class UnmarkCommand extends Command {
         if (this.taskNum < 0 || this.taskNum >= tasks.getTasksNum()) {
             throw new InvalidTaskException();
         } else {
-            assert taskNum >= 0 & taskNum < tasks.getTasksNum() : "Task number should be at least 0 or 1 less than " +
-                    "the number of tasks";
+            assert taskNum >= 0 & taskNum < tasks.getTasksNum() : "Task number should be at least 0 or 1 less than "
+                    + "the number of tasks";
             Task currentTask = tasks.setTaskAsUndone(taskNum);
             try {
                 storage.save(tasks);
