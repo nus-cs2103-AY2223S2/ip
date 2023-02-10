@@ -19,8 +19,8 @@ import duke.tasks.ToDo;
  */
 public class Storage {
 
-    private static String strDir = "../../../data";
-    private static String fileName = "../../../data/duke.txt";
+    private static String strDir = "./data";
+    private static String fileName = "./data/duke.txt";
 
     /**
      * Saves a task list to a file.
