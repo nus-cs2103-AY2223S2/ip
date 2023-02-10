@@ -12,7 +12,7 @@
     * [Create a Task](#create-a-task)
       * [Add Todo task](#add-todo-task)
       * [Add Deadline task](#add-deadline-task)
-      * [Add Event task](#add-event-tasks)
+      * [Add Event task](#add-event-task)
     * [List All Tasks](#list-all-tasks)
       * [List All Events](#list-all-events) 
       * [List All Todos](#list-all-todos)
@@ -23,8 +23,8 @@
     * [Find Task](#find-tasks)
     * [Undo command](#undo)
     * [Checkout version](#checkout)
+    * [Saving data](#saving-the-data)
     * [Bye](#bye)
-- [Useful Resources](#useful-resources)
 
 ## Introduction
 Hello! I am a chatbot designed to help you keep track of your tasks and manage your projects. 
@@ -229,10 +229,3 @@ Expected outcome:
 ```
 Bye. Hope to see you again soon!
 ```
-
-## Useful Resources
-1. [CheckStyle Tutorial](https://se-education.org/guides/tutorials/checkstyle.html)
-2. [Text UI Testing Tutorial](https://se-education.org/guides/tutorials/textUiTesting.html)
-3. [Working with Jar files Tutorial](https://se-education.org/guides/tutorials/jar.html)
-4. [Gradle Tutorial](https://se-education.org/guides/tutorials/gradle.html)
-5. [JavaFX Tutorial](https://se-education.org/guides/tutorials/javaFx.html)
