@@ -7,11 +7,12 @@ public class Todo extends Task {
 
     /**
      * the constructor
-     * @param description
-     * @param isInFile
+     * @param description task name
+     * @param isInFile check whether is in the saving file
      */
     public Todo(String description, boolean isInFile) {
         super(description);
+
         if (!isInFile) {
             System.out.println(" " + "____________________________________________________________");
             System.out.println(" Got it. I've added this task:");

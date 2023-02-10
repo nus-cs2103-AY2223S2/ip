@@ -8,9 +8,9 @@ public class Deadline extends Task {
 
     /**
      * Deadline constructor
-     * @param description
-     * @param by
-     * @param isInFile
+     * @param description task name
+     * @param by deadline for the task
+     * @param isInFile check whether is in saving file
      */
     public Deadline(String description, String by, boolean isInFile) {
         super(description);

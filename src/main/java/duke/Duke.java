@@ -1,7 +1,5 @@
 package duke;
 
-import duke.tasks.Task;
-
 import java.io.IOException;
 
 /**
@@ -9,16 +7,14 @@ import java.io.IOException;
  */
 public class Duke {
 
-    private Storage storage;
+    private final Storage storage;
     private TaskList tasks;
-    private Ui ui;
-    private boolean isActive;
 
     /**
      * The construction of duke
      */
     public Duke(String filePath) {
-        ui = new Ui();
+        Ui ui = new Ui();
         storage = new Storage(filePath);
         tasks = new TaskList();
 
@@ -31,36 +27,12 @@ public class Duke {
     }
 
     /**
-     * The method of run
-     * Runs the whole program until exit
+     * Gets a response to the user command
+     * @param input user command
+     * @return response to the user command
      */
-    public void run() throws IOException {
-        Ui.showLogo();
-        Ui.showWelcome();
-
-        String fullCommand;
-
-        do {
-            fullCommand = ui.readCommand();
-            Parser.parse(fullCommand, tasks);
-        } while(!fullCommand.equals("bye"));
-
-        storage.updateFile(tasks);
-        Ui.exit();
-    }
-
-    /**
-     * The method of main
-     * @param  args
-     */
-    public static void main(String[] args) throws IOException {
-        //new Duke("data/tasks.txt").run();
-    }
-
-
-    public String getResponse(String input) throws IOException {
+    public String getResponse(String input) {
         String temp = "";
-
 
         try {
             if (input.equals("bye")) {
@@ -69,11 +41,9 @@ public class Duke {
                 temp = Parser.parse(input, tasks);
                 storage.updateFile(tasks);
             }
-
             return temp;
-        } catch (Exception e) {
-            return "Error";
+        } catch (IOException e) {
+            return "Error occurs!";
         }
-        //return Parser.parse(input, tasks);
     }
 }

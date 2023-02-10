@@ -11,7 +11,7 @@ public class Task {
 
     /**
      * Task constructor
-     * @param description
+     * @param description task name
      */
     public Task(String description) {
         this.description = description;

@@ -19,7 +19,7 @@ public class Storage {
 
     /**
      * Storage constructor
-     * @param filePath
+     * @param filePath file path for saving file
      */
     public Storage(String filePath) {
         assert filePath == null : "Invalid filePatn";
@@ -29,7 +29,7 @@ public class Storage {
     /**
      * method for reading data from saving file
      * @return tasks list from saving file
-     * @throws IOException
+     * @throws IOException exception
      */
     public TaskList load() throws IOException {
         TaskList tasks = new TaskList();
@@ -67,8 +67,8 @@ public class Storage {
 
     /**
      * method for updating date in saving file
-     * @param t
-     * @throws IOException
+     * @param t task
+     * @throws IOException exception
      */
     public void updateFile(TaskList t) throws IOException {
         FileWriter fw = new FileWriter(filePath);
@@ -83,8 +83,8 @@ public class Storage {
 
     /**
      * method for appending to file
-     * @param info
-     * @throws IOException
+     * @param info information needs to be appended to file
+     * @throws IOException exception
      */
     private void appendToFile(String info) throws IOException {
         //Constructs a FileWriter object given a file name
