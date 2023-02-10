@@ -31,7 +31,7 @@ public class DeleteCommand extends Command {
         assert tasks != null;
         assert ui != null;
         assert storage != null;
-        
+
         try {
             String[] values = this.unwrap();
             int index = Integer.parseInt(values[0]) - 1;

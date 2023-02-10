@@ -35,7 +35,7 @@ public class FindCommand extends Command {
         assert tasks != null;
         assert ui != null;
         assert storage != null;
-        
+
         try {
             String description = this.unwrap()[0];
 
