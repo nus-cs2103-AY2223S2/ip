@@ -18,9 +18,10 @@ public class Ui {
     private Storage savedList;
 
     /**
-     * Initialises the user interface.
-     * 
-     * @throws IOException when file path is invalid.
+     * Initialise parameters.
+     *
+     * @return String on whether previously saved list is available.
+     * @throws IOException when file path is invalid
      */
     public String initialise() throws IOException {
         Storage saved = new Storage("./dukeSaved.txt");
@@ -57,7 +58,10 @@ public class Ui {
     }
 
     /**
-     * Prints goodbye messgae.
+     * Signify end of session
+     *
+     * @return goodbye message.
+     * @throws IOException when file path invalid.
      */
     public String end() throws IOException {
         save();
@@ -65,13 +69,19 @@ public class Ui {
         return outro;
     }
 
+    /**
+     * Obtain list of tasks.
+     *
+     * @return the list of tasks.
+     */
     public ArrayList<Task> getList() {
         return this.tList.getList();
     }
 
     /**
      * Adds a task to the current list of tasks.
-     * 
+     *
+     * @return Message of succesful addition of specified task to list.
      * @param t Task to be added.
      */
     public String addToList(Task t) {
@@ -81,6 +91,8 @@ public class Ui {
 
     /**
      * Handles the exception when access or manipulation of an empty is attempted.
+     *
+     * @return Empty list error message.
      */
     public String emptyErr() {
         return "Error!! List empty! Try again.";
@@ -88,6 +100,8 @@ public class Ui {
 
     /**
      * Prints out all tasks created so far.
+     *
+     * @return String format of list of tasks currently stored.
      */
     public String viewList() {
         if (this.getList().isEmpty()) {
@@ -105,7 +119,8 @@ public class Ui {
 
     /**
      * Marks specified task as done and informs user.
-     * 
+     *
+     * @return Message of successful marking of task.
      * @param num Index no. of task in the list to be marked as done
      */
     public String markTask(int num) {
@@ -122,7 +137,8 @@ public class Ui {
 
     /**
      * Unmarks specified task as undone and informs user.
-     * 
+     *
+     * @return Message upon successful unmarking of task.
      * @param num Index no. of task in the list to be marked as undone.
      */
     public String unmarkTask(int num) {
@@ -141,7 +157,7 @@ public class Ui {
      * Creates a ToDo object.
      * 
      * @param task String array containing descriptions of the task.
-     * @return ToDo object.
+     * @return String format of ToDo object.
      */
     public String makeToDo(String[] task) {
         StringBuilder sb = new StringBuilder();
@@ -155,7 +171,7 @@ public class Ui {
      * Creates Event object.
      * 
      * @param task String array containing descriptions of the event.
-     * @return Event object.
+     * @return String format of Event object.
      * @throws DateTimeParseException if user inputs date and time in the wrong format.
      */
     public Event createEvent(String[] task) throws DateTimeParseException {
@@ -203,7 +219,7 @@ public class Ui {
      * Creates a task with given deadline.
      * 
      * @param task String array containing descriptions of the event.
-     * @return Deadline object.
+     * @return String format of Deadline object.
      * @throws DateTimeParseException if user inputs date and time in the wrong format.
      */
     public Deadline createDeadline(String[] task) throws DateTimeParseException {
@@ -239,7 +255,8 @@ public class Ui {
 
     /**
      * Deletes a specified task.
-     * 
+     *
+     * @return Message upon successful deletion of task.
      * @param num Index no. of task in the list to be deleted.
      */
     public String delete(int num) {
@@ -257,7 +274,8 @@ public class Ui {
 
     /**
      * Prints list of tasks containing specified keyword.
-     * 
+     *
+     * @return String format list of tasks containing the keyword.
      * @param keyword keyword to search with.
      */
     public String find(String keyword) {
