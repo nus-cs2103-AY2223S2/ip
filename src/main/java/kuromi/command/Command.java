@@ -22,15 +22,6 @@ public abstract class Command {
      */
     public abstract String execute(TaskList tasks, Ui ui, Storage storage);
 
-    /**
-     * Determines whether the program should be terminated.
-     *
-     * @return Boolean value if true then exit, if false then not exit.
-     */
-    public boolean isExit() {
-        return this.isExit;
-    }
-
     public void setExit() {
         this.isExit = true;
     }

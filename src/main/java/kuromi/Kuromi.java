@@ -16,8 +16,6 @@ public class Kuromi {
     /** UI of the application **/
     private Ui ui;
 
-    private Stage stage;
-
     /**
      * kuromi.MainWindow.kuromi.KuromiException.Main constructor (for invocation by main method).
      * Get stored data from previous session.
@@ -32,27 +30,6 @@ public class Kuromi {
         } catch (KuromiException e) {
             ui.showLoadingError();
             tasks = new TaskList();
-        }
-    }
-
-    /**
-     * Runs Kuromi application to interact with the user.
-     */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
-                Command c = Parser.parse(fullCommand, ui, tasks);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (KuromiException e) {
-                ui.showError(e.getMessage());
-            }
-            ui.showLine();
-            ui.showEnter();
         }
     }
 

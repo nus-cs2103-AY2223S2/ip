@@ -36,9 +36,13 @@ public class AddCommand extends Command {
         assert(prevNumTasks - 1 == tasks.size()) : "Tasks size should be equal to previous tasks size - 1";
         assert(tasks.size() > 0) : "Tasks size should be greater than 0 after AddCommand";
         storage.refresh(tasks);
+        return ui.show(getReply(cur, tasks));
+    }
+
+    private String getReply(Task cur, TaskList tasks) {
         String msg = "Got it. I've added this task:\n";
         msg += cur + "\n";
         msg += "Now you have " + tasks.size() + " tasks in the list.\n";
-        return ui.show(msg);
+        return msg;
     }
 }

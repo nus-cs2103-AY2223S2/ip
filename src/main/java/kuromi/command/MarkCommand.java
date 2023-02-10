@@ -32,8 +32,12 @@ public class MarkCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task cur = tasks.mark(this.idx - 1);
+        return ui.show(getReply(cur));
+    }
+
+    private String getReply(Task cur) {
         String msg = "Nice! I've marked this task as done:\n";
         msg += cur;
-        return ui.show(msg);
+        return msg;
     }
 }
