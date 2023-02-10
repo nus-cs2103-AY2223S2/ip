@@ -50,20 +50,6 @@ public class Alfred {
      */
     public String runIntro() {
         return ui.getOpening();
-        /*
-        ui.displayOpening();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.getCommand();
-                Command c = parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (AlfredException e) {
-                ui.displayError(e);
-            }
-        }
-         */
     }
 
 

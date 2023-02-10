@@ -38,7 +38,7 @@ public class TaskTest {
         Task testTask = new Task("This is a test task");
         String test = " | 0 | This is a test task"
                 + "\n";
-        assertEquals(test, testTask.addToFile());
+        assertEquals(test, testTask.getFileFormat());
     }
 
     @Test

@@ -29,8 +29,7 @@ public class DeleteCommand extends Command {
         try {
             Task task = tasks.getTask(taskIndex);
             tasks.removeTask(taskIndex);
-            String output = "Noted. I've removed this task. Remember to clear your "
-                    + "remaining tasks!\n";
+            String output = "Noted. I've removed this task. Remember to clear your remaining tasks!\n";
             output += String.format("      %s\n", task);
             return ui.getCommandMessage(output);
         } catch (NumberFormatException e) {

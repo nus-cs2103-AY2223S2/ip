@@ -57,12 +57,7 @@ public class Ui {
      * @param e The AlfredException that was thrown in the program.
      */
     public String getErrorMessage(AlfredException e) {
-        StringBuilder message = new StringBuilder();
-        message.append(getLines());
-        String output = "     " + e.getMessage();
-        message.append(output);
-        message.append(getLines());
-        return message.toString();
+        return getCommandMessage(e.getMessage());
     }
 
     /**
@@ -92,8 +87,7 @@ public class Ui {
     public String getIntro() {
         StringBuilder intro = new StringBuilder();
         intro.append(getLines());
-        intro.append("Hello! I'm Alfred :>\n"
-                + "How can I help you today?\n");
+        intro.append("Hello! I'm Alfred :>\n How can I help you today?\n");
         intro.append(getLines());
         return intro.toString();
     }
