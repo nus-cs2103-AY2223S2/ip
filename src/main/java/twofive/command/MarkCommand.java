@@ -33,6 +33,8 @@ public class MarkCommand extends Command {
         if (this.taskNum < 0 || this.taskNum >= tasks.getTasksNum()) {
             throw new InvalidTaskException();
         } else {
+            assert taskNum >= 0 & taskNum < tasks.getTasksNum() : "Task number should be at least 0 or 1 less than " +
+                    "the number of tasks";
             Task currentTask = tasks.setTaskAsDone(taskNum);
             try {
                 storage.save(tasks);
