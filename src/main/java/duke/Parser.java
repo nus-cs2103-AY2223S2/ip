@@ -61,7 +61,8 @@ public class Parser {
      * @throws CheckNotFindException Cannot check for the user input.
      */
     public static String parseInput(TaskList list, String userInput)
-            throws TaskNotExistException, MissingNumberException, MissingDescriptionException, CheckNotFindException {
+            throws TaskNotExistException, MissingNumberException, MissingDescriptionException, CheckNotFindException,
+            NoSortTypeException {
         switch (userInput.split("\\s+")[0]) {
         case "bye":
             Platform.exit();
@@ -84,6 +85,8 @@ public class Parser {
             return list.find(userInput);
         case "check":
             return list.check(userInput);
+        case "sort":
+            return list.sort(userInput);
         default:
             assert false : "User input unknown case";
         }
