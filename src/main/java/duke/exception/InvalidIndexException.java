@@ -8,3 +8,4 @@ public class InvalidIndexException extends DukeException {
         super("WOOF! The indexing is not valid!");
     }
 }
+

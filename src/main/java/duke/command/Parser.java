@@ -8,12 +8,12 @@ import duke.exception.MissingContentException;
  * Makes sense of what users say
  */
 public class Parser {
-    static final String inSecond = "00";
-    static final int secondToEndIndex = 2;
-    static final int minSize = 0;
-    static String lastCommand = "";
-    static String lastCommandDetail = "";
-    static TaskList lastTaskList = new TaskList();
+    private static final String inSecond = "00";
+    private static final int secondToEndIndex = 2;
+    private static final int minSize = 0;
+    private static String lastCommand = "";
+    private static String lastCommandDetail = "";
+    private static TaskList lastTaskList = new TaskList();
 
     /**
      * Update last command
@@ -47,6 +47,12 @@ public class Parser {
         return lastTaskList;
     }
 
+    /**
+     * Undo response to user input
+     * And update task list correspondingly
+     * @param taskList original task list (after the most recent command is done)
+     * @return Duke's response
+     */
     public static String undo(TaskList taskList) {
         if (lastCommand.startsWith("mark ")) {
             taskList.overwrite(lastTaskList);
@@ -63,8 +69,8 @@ public class Parser {
             return ("WOOF! Got it! I will undo the last command!" + "\n"
                     + "The following task has been un-deleted: " + "\n"
                     + lastCommandDetail);
-        } else if (lastCommand.startsWith("todo ") || lastCommand.startsWith("event ") ||
-                lastCommand.startsWith("deadline ")) {
+        } else if (lastCommand.startsWith("todo ") || lastCommand.startsWith("event ")
+                || lastCommand.startsWith("deadline ")) {
             taskList.overwrite(lastTaskList);
             return ("WOOF! Got it! I will undo the last command!" + "\n"
                     + "The following task has been un-added: " + "\n"
