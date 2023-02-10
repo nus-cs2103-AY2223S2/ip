@@ -15,8 +15,8 @@ public class ToDo extends Task {
     }
 
     public static Task deserialise(String data) {
-        String arr[] = data.split(",");
-
+        String[] arr = data.split(",");
+        assert arr.length != 0;
         boolean isDone = Boolean.parseBoolean(arr[1]);
         String description = arr[2];
 

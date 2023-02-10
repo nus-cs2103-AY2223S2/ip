@@ -31,6 +31,7 @@ public class TodoCommand extends Command {
     @Override
     public String executeCommand(TaskManager taskManager) throws DukeException {
         ToDo todo = new ToDo(this.description, false);
+        assert taskManager != null;
         taskManager.addTaskToList(todo);
         String str = String.format("I have added: %s !", todo);
         String str2 = "There are currently " + taskManager.getTaskArraySize() + " task(s) in the list!";

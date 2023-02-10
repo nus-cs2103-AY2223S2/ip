@@ -56,6 +56,7 @@ public class Parser {
             case "list":
                 return new ListCommand();
             case "bye":
+                assert fileManager != null;
                 return new ByeCommand(fileManager);
             case "find":
                 return new FindCommand(inputArr[1]);
@@ -101,6 +102,7 @@ public class Parser {
 
         try {
             intValue = Integer.parseInt(string);
+            assert (Integer) intValue != null;
             return true;
         } catch (NumberFormatException e) {
             System.out.println("Illegal string input!");

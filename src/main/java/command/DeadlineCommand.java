@@ -35,6 +35,7 @@ public class DeadlineCommand extends Command {
         try {
             String[] tmp = this.description.split(" /by ");
             Deadline deadline = new Deadline(tmp[0], false, tmp[1]);
+            assert taskManager != null;
             taskManager.addTaskToList(deadline);
             String str = String.format("I have added: %s !", deadline);
             String str2 = "There are currently " + taskManager.getTaskArraySize() + " task(s) in the list!";

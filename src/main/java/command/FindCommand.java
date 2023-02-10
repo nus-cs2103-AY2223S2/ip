@@ -24,6 +24,7 @@ public class FindCommand extends Command {
     public String executeCommand(TaskManager taskManager) throws DukeException {
         try {
             System.out.println("Here are matching tasks in your list:\n");
+            assert taskManager != null;
             ArrayList<Task> arr = taskManager.getTaskArr();
             for (Task task : arr) {
                 if (task.getDescription().contains(this.word)) {

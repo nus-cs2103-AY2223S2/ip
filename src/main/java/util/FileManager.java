@@ -28,6 +28,7 @@ public class FileManager implements Serializable {
      */
     public void saveTasksToFile(TaskManager taskManager) {
         try {
+            assert !FILEPATH.isEmpty();
             File file = new File(FILEPATH);
             if (!file.isFile() && !file.isDirectory()) {
                 System.out.println("File or folder not found!");
@@ -55,6 +56,7 @@ public class FileManager implements Serializable {
      * and -1 to indicate unsuccessful load.
      */
     public int loadDataToArrayList(TaskManager taskManager) {
+        assert !FILEPATH.isEmpty();
         File file = new File(FILEPATH);
         if (!file.isFile()) {
             return -1;
@@ -81,7 +83,7 @@ public class FileManager implements Serializable {
                     task = Task.deserialise(data);
                     break;
                 }
-
+                assert taskManager != null;
                 taskManager.addTaskToList(task);
             }
         } catch (FileNotFoundException e) {
