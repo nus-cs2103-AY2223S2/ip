@@ -22,6 +22,7 @@ public class Storage {
      * @param filePath
      */
     public Storage(String filePath) {
+        assert filePath == null : "Invalid filePatn";
         this.filePath = filePath;
     }
 
