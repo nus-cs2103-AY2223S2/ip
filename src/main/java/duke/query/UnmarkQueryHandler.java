@@ -22,6 +22,8 @@ public class UnmarkQueryHandler extends TaskQueryHandler {
     @Override
     public String processQuery(Query query) throws DukeException {
         Task t = tt.markUnmarkTask(Integer.parseInt(query.getParam()) - 1, false);
+        assert t.getStatusIndicator().equals("[ ]") : "task should be unmarked!";
+
         tt.saveAllTasks();
         return "Task marked as incomplete: " + t;
     }
