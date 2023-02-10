@@ -34,11 +34,16 @@ public class DialogBox extends HBox {
                     new Circle(displayPicture.getX() + displayPicture.getFitWidth() / 2,
                             displayPicture.getY() + displayPicture.getFitHeight() / 2,
                             20));
-            if (pov == Pov.MIKI) {
+            switch (pov) {
+            case MIKI:
                 displayPicture.setImage(mikiImage);
                 flip();
-            } else if (pov == Pov.USER) {
+                break;
+            case USER:
                 displayPicture.setImage(userImage);
+                break;
+            default:
+                assert false : "Invalid DialogBox dialogue perspective";
             }
         } catch (IOException e) {
             e.printStackTrace();

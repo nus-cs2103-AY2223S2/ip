@@ -7,6 +7,7 @@ import task.Parser;
 
 public class Init {
     public static void main(String[] args) {
+        assert args != null : "Program arguments should be non-null";
         boolean hasAsciiOnly = false;
         boolean hasNoAutoload = false;
         boolean hasCli = false;

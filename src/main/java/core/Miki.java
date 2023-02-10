@@ -50,6 +50,7 @@ public class Miki {
         if (Parser.isListCommand(cmdLine)) {
             listFilter = cmd;
         } else {
+            assert listFilter != null : "Task filter should be non-null";
             listFilter.run(tasks, ui, storage);
         }
 

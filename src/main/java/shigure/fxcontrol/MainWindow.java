@@ -50,17 +50,21 @@ public class MainWindow extends AnchorPane {
 
     public void addDialog(String text, DialogBox.Pov pov) {
         dialogContainer.getChildren().add(new DialogBox(text, pov));
+        assert !dialogContainer.getChildren().isEmpty() : "Dialog Container should be non-empty after adding element";
     }
 
     public void addTask(String text) {
         taskContainer.getChildren().add(new TaskBox(text));
+        assert !taskContainer.getChildren().isEmpty() : "Task Container should be non-empty after adding element";
     }
 
     public void clearInput() {
         userInput.clear();
+        assert userInput.getText().isEmpty() : "User Input field should be blank after clearing";
     }
 
     public void clearTasks() {
         taskContainer.getChildren().clear();
+        assert taskContainer.getChildren().size() == 0 : "Task Container should be empty after clearing";
     }
 }
