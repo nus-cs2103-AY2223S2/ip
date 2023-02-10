@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
 /**
  * The Storage class is to handle loading/saving tasks from/in the file.
  */
@@ -22,13 +21,8 @@ public class Storage {
      */
     public Storage(String filePath) throws IOException {
         this.file = new File(filePath);
-        if (!file.exists()) {
-            if (file.getParentFile().mkdirs()) {
-                if (!file.createNewFile()) {
-                    throw new IOException();
-                }
-            }
-        }
+        file.getParentFile().mkdirs();
+        file.createNewFile();
     }
 
     /**
@@ -40,9 +34,11 @@ public class Storage {
     public ArrayList<String> loadRecord() throws IOException {
         Scanner sc = new Scanner(this.file);
         ArrayList<String> records = new ArrayList<>();
+
         while (sc.hasNext()) {
             records.add(sc.nextLine());
         }
+
         sc.close();
         return records;
     }
@@ -55,9 +51,11 @@ public class Storage {
      */
     public void writeToFile(TaskList tasks) throws IOException {
         FileWriter fw = new FileWriter(this.file);
+
         for (int i = 0; i < tasks.size(); i++) {
             fw.write(tasks.get(i).toString() + "\n");
         }
+
         fw.close();
     }
 }

@@ -19,14 +19,16 @@ import javafx.scene.layout.HBox;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+    //The dialog is being used to set text.
     @FXML
     private Label dialog;
+    //The displayPicture is being used to set image.
     @FXML
     private ImageView displayPicture;
 
     private DialogBox(String text, Image img) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();

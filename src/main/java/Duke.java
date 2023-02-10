@@ -26,7 +26,6 @@ public class Duke {
             tasks = new TaskList(storage.loadRecord());
             tasks.printList();
         } catch (IOException e) {
-            System.out.println("Error occurs when try to load.");
             tasks = new TaskList();
         }
     }
@@ -40,7 +39,7 @@ public class Duke {
      */
 
     public String getResponse(String userInput) {
-        String temp = "";
+        String temp;
 
         try {
             temp = Parser.parseInput(tasks, userInput);
@@ -49,12 +48,24 @@ public class Duke {
         } catch (DukeException e) {
             return e.getMessage();
         } catch (NumberFormatException e) {
-            return "The operation must follow by a integer";
+            return numberFormatExceptionMessage();
         } catch (IOException e) {
-            return "Error occurs when try to access your file";
+            return ioExceptionMessage();
         } catch (DateTimeException e) {
-            return "Invalid date time format, please try again!";
+            return dateTimeExceptionMessage();
         }
+    }
+
+    public String numberFormatExceptionMessage() {
+        return "The operation must follow by a integer!";
+    }
+
+    public String ioExceptionMessage() {
+        return "Error occurs when try to access your file";
+    }
+
+    public String dateTimeExceptionMessage() {
+        return "Invalid date time format, please try again!";
     }
 }
 

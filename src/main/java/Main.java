@@ -26,6 +26,7 @@ public class Main extends Application {
             VBox ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+
             fxmlLoader.<MainWindow>getController().welcome();
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();

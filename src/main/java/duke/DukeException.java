@@ -27,12 +27,6 @@ public class DukeException extends Exception {
     }
 }
 
-/*class UnknownInputException extends DukeException {
-    public UnknownInputException() {
-        super("Oh no, I am not sure what that means, could you try again?");
-    }
-}*/
-
 class MissingDescriptionException extends DukeException {
     public MissingDescriptionException(String taskType) {
         super("Oh no, the description of a " + taskType + " cannot be empty! Please try again.");
