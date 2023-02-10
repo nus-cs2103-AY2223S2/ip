@@ -36,6 +36,7 @@ public class Gui extends Application {
 
     @Override
     public void start(Stage stage) {
+        assert duke != null : "initialize duke with setDuke() first";
         //Step 1. Setting up required components
 
         //The container for the content of the chat to scroll.

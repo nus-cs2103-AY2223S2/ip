@@ -30,6 +30,7 @@ public class Duke {
     }
 
     public String getResponse(String userInput) {
+        assert userInput != null : "userInput cannot be null";
         String[] inputFragments = userInput.split(" ", 2);
         try {
             switch (inputFragments[0]) {
