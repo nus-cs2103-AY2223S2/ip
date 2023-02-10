@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-public class UITest {
+public class UiTest {
     private static final String DATE_FORMAT = "YYYY-MM-DD";
     private static final String INDENT_SPACES = "    ";
 

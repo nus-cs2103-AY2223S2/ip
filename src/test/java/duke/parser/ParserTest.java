@@ -23,35 +23,35 @@ class ParserTest {
     }
 
     @Test
-    public void parseInput_IsBye_returnsGoodByeCommand() {
+    public void parseInput_isBye_returnsGoodByeCommand() {
         String input = "bye";
         Command command = Parser.parse(input);
         assertTrue(command instanceof GoodbyeCommand);
     }
 
     @Test
-    public void parseInput_IsList_returnsListCommand() {
+    public void parseInputisList_returnsListCommand() {
         String input = "list";
         Command command = Parser.parse(input);
         assertTrue(command instanceof ListCommand);
     }
 
     @Test
-    public void parseInput_IsUndo_returnsUndoCommand() {
+    public void parseInput_isUndo_returnsUndoCommand() {
         String input = "undo";
         Command command = Parser.parse(input);
         assertTrue(command instanceof UndoCommand);
     }
 
     @Test
-    public void parseInput_IsCheckout_returnsCheckoutCommand() {
+    public void parseInput_isCheckout_returnsCheckoutCommand() {
         String input = "checkout";
         Command command = Parser.parse(input);
         assertTrue(command instanceof CheckoutCommand);
     }
 
     @Test
-    public void parseInput_IsUnknownCommand_throwsDukeException() {
+    public void parseInput_isUnknownCommand_throwsDukeException() {
         String input = "hello world";
         Command command = Parser.parse(input);
         try {
