@@ -60,17 +60,6 @@ public class TaskScheduler extends TaskList<Recur> {
                 )));
         timeline.setCycleCount(Animation.INDEFINITE); // loop forever
         timeline.play();
-
-        /*
-        if (input.contains("recur")) {
-            Timeline timeline =
-                    new Timeline(new KeyFrame(Duration.millis(500), e -> dialogContainer.getChildren().addAll(
-                            DialogBox.getDukeDialog("recur reminder!", dukeImage)
-                    )));
-            timeline.setCycleCount(Animation.INDEFINITE); // loop forever
-            timeline.play();
-        }
-        */
     }
 
 
