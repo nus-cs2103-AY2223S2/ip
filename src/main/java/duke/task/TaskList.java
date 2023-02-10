@@ -30,21 +30,25 @@ public class TaskList {
     }
 
     /**
-     * Add a given task to the list.
+     * Adds a given task to the list.
      * @param task The task to be added.
      */
     public void addTask(Task task) {
         taskList.add(task);
     }
 
-
+    /**
+     * Returns the size of the list of task.
+     *
+     * @return Integer representing the size of the list.
+     */
     public int getSize() {
         return this.taskList.size();
     }
 
     /**
-     * Lists out all the tasks in the list in chronological order.
-     * Map the task index to each task.
+     * Lists all the tasks in the list in chronological order.
+     * Also maps the task index to each task.
      *
      * @return The string representation of the list.
      * @throws DukeException If there is no task available.
@@ -60,17 +64,15 @@ public class TaskList {
         for (int i = 0; i < taskList.size(); i++) {
             Task task = taskList.get(i);
             stringList.append((i + 1) + ". " + task);
-            indexToTask.put(i, task);
-
-            if (i < taskList.size() - 1) {
-                stringList.append(System.lineSeparator());
-            }
+            indexToTask.put(i, task); // update hashmap
+            stringList.append(System.lineSeparator());
         }
 
+        stringList.deleteCharAt(stringList.length() - 1); // Deletes the last lineSeparator.
         return stringList.toString();
     }
 
-    private void checkIndex(int idx) throws DukeException {
+    private void checkIndexOutOfBounds(int idx) throws DukeException {
         if (idx < 0 || idx >= indexToTask.size()) {
             throw new DukeException("Task index out of bounds.");
         }
@@ -85,7 +87,7 @@ public class TaskList {
      * @throws DukeException If index is out of bounds.
      */
     public void markTask(int idx, boolean isDone) throws DukeException {
-        checkIndex(idx);
+        checkIndexOutOfBounds(idx); // Does this violate SLAP?
         Task t = indexToTask.get(idx);
         t.markStatus(isDone);
     }
@@ -98,7 +100,7 @@ public class TaskList {
      * @throws DukeException If index is out of bounds.
      */
     public Task deleteTask(int idx) throws DukeException {
-        checkIndex(idx);
+        checkIndexOutOfBounds(idx); // Does this violate SLAP?
         Task t = indexToTask.get(idx);
         taskList.remove(t);
         indexToTask.remove(idx);
@@ -144,12 +146,11 @@ public class TaskList {
     * @return String representation of all the matching tasks.
     */
     public String findTasks(String... keywords) throws DukeException {
-        // Reset Hashmap
-        indexToTask.clear();
-        StringBuilder foundTasks = new StringBuilder();
+        indexToTask.clear(); // Reset Hashmap
 
-        // Dynamically generated index
+        /* Forms a string to represent list of matching tasks */
         int idx = 0;
+        StringBuilder foundTasks = new StringBuilder();
         for (Task t : this.taskList) {
             String description = t.getDescription();
 
@@ -158,7 +159,7 @@ public class TaskList {
                     foundTasks.append((idx + 1) + ". " + t + System.lineSeparator());
                     indexToTask.put(idx, t);
                     idx++;
-                    break; // Break out of for loop
+                    break; // Break out of inner for loop
                 }
             }
 

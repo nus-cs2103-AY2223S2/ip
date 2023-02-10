@@ -42,11 +42,11 @@ public class Parser {
                 return new CommandList();
             }
 
-            // Split string into 2 parts, 1st part is the operation, 2nd part is the description
+            /* Split string into 2 parts, 1st part is the operation, 2nd part is the description */
             String[] command = input.split(" ", 2);
             Operation op = Operation.valueOf(command[0].toUpperCase()); // Throws exception if not a valid operation.
 
-            // The operation is valid but no description was given.
+            /* The operation is valid but no description was given. */
             if (command.length < 2) {
                 throw new DukeException("No command description given.");
             }
@@ -66,7 +66,7 @@ public class Parser {
             case FIND:
                 return findTaskParser(description);
             default:
-                return null; // cannot reach here, as Operation.valueOf throws IllegalArgumentException
+                throw new DukeException("Cannot reach here"); // cannot reach here, as Operation.valueOf throws IllegalArgumentException
             }
         } catch (NumberFormatException e) {
             throw new DukeException("Task must be referenced by its index.");
@@ -78,7 +78,7 @@ public class Parser {
     }
 
     /**
-     * Parses the mark command input.
+     * Parses the command to mark/unmark a task.
      *
      * @param op Operation (MARK/UNMARK) input by user.
      * @param index The string representing the index of the task to be marked.
@@ -98,8 +98,10 @@ public class Parser {
      * @param description String representing the task description.
      * @return A Command instance representing the type of task to add.
      * @throws DateTimeParseException If the date format is invalid.
+     * @throws DukeException If the command is invalid.
      */
-    public static Command addTaskParser(Operation op, String description) throws DateTimeParseException {
+    public static Command addTaskParser(Operation op, String description) throws
+            DateTimeParseException, DukeException {
         switch (op) {
         case TODO:
             return new CommandAddTodo(description);
@@ -113,14 +115,14 @@ public class Parser {
             String[] eventString = description.split("/from", 2);
             String eventDescription = eventString[0].trim();
 
-            // Parse the string to get to and from dates of the event
+            /* Parse the string to get to and from dates of the event */
             String[] fromAndTo = eventString[1].split("/to", 2);
             LocalDate from = LocalDate.parse(fromAndTo[0].trim());
             LocalDate to = LocalDate.parse(fromAndTo[1].trim());
 
             return new CommandAddEvent(eventDescription, from, to);
         default:
-            return null;
+            throw new DukeException("Cannot reach here");
         }
     }
 

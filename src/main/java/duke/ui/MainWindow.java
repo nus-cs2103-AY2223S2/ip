@@ -50,13 +50,20 @@ public class MainWindow extends AnchorPane {
         }
 
         this.duke = duke;
-        this.showWelcomeMessage();
         this.stage = stage;
+        showWelcomeMessage();
     }
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+    }
+
+    private void showWelcomeMessage() {
+        String welcomeMessage = duke.createWelcomeMessage();
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(welcomeMessage, dukeImage)
+        );
     }
 
     /**
@@ -83,12 +90,5 @@ public class MainWindow extends AnchorPane {
                 stage,
                 WindowEvent.WINDOW_CLOSE_REQUEST
         ));
-    }
-
-    private void showWelcomeMessage() {
-        String welcomeMessage = duke.createWelcomeMessage();
-        dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(welcomeMessage, dukeImage)
-        );
     }
 }

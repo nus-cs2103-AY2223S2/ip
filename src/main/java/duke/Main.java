@@ -31,7 +31,7 @@ public class Main extends Application {
         stage.setTitle(duke.getName());
         stage.setOnCloseRequest(event -> {
             event.consume();
-            closeProgramConfirm(stage);
+            confirmClose(stage);
         });
 
         stage.show();
@@ -41,17 +41,19 @@ public class Main extends Application {
      * Creates a confirmation popup to ask whether user wants to exit.
      * @param stage The stage operating.
      */
-    private void closeProgramConfirm(Stage stage) {
+    private void confirmClose(Stage stage) {
+        /* Create a confirmation alert*/
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmation");
         alert.setHeaderText("Are you sure you want to LeExit?");
 
+        /* Create buttons */
         ButtonType buttonYes = new ButtonType("Yes");
         ButtonType buttonNo = new ButtonType("No");
         alert.getButtonTypes().setAll(buttonYes, buttonNo);
 
+        /* Check user's answer */
         Optional<ButtonType> answer = alert.showAndWait();
-
         if (answer.get() == buttonYes) {
             stage.close();
         }

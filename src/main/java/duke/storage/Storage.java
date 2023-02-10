@@ -78,19 +78,19 @@ public class Storage {
      * @param filename  Name of the file
      * @return The file
      */
-    private File fileWithAssurance(String directory, String filename) {
-        // Load parent directories
+    private File getFileWithAssurance(String directory, String filename) {
+        /** Load parent directories */
         File dir = new File(directory);
 
-        // Create parent directories if necessary
+        /** Creates parent directories if necessary */
         if (!dir.exists()) {
             dir.mkdirs();
         }
 
-        // Load file
+        /** Load file */
         File file = new File(directory + "/" + filename);
 
-        // Create file if necessary
+        /** Creates file if necessary */
         try {
             if (file.createNewFile()) {
                 ui.print("No save file found. Creating new save...");
@@ -112,7 +112,7 @@ public class Storage {
      */
     public List<Task> load() {
         ui.printLoadingFile();
-        File file = fileWithAssurance(this.fileDirectory, this.fileName);
+        File file = getFileWithAssurance(this.fileDirectory, this.fileName);
 
         try {
             Scanner sc = new Scanner(file);
@@ -123,9 +123,9 @@ public class Storage {
             sc.close();
         } catch (FileNotFoundException e) {
             ui.print("File not found");
-        } finally {
-            return this.taskList;
         }
+
+        return this.taskList;
     }
 
     /**
@@ -135,8 +135,7 @@ public class Storage {
         try {
             FileWriter fw = new FileWriter(this.fileDirectory + "/" + this.fileName);
 
-            for (int i = 0; i < tasks.size(); i++) {
-                Task t = tasks.get(i);
+            for (Task t : tasks) {
                 fw.write(t.toSavedString() + System.lineSeparator());
             }
 
