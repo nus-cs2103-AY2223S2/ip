@@ -26,6 +26,10 @@ public class Duke {
         }
     }
 
+    public String getGreetingMessage() {
+        return response.showGreeting();
+    }
+
     /**
      * Returns Duke's response to user input.
      *
@@ -35,6 +39,7 @@ public class Duke {
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
+            assert c != null : "command c should not be null";
             return c.execute(tasks, response, storage);
         } catch (DukeException e) {
             return response.showError(e.getMessage());
