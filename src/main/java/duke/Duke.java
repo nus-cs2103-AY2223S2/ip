@@ -1,5 +1,6 @@
 package duke; // Tan Matthew Simon Castaneda
 
+import duke.contact.ContactList;
 import duke.helper.Parser;
 import duke.storage.Storage;
 import duke.tasks.TaskList;
@@ -13,9 +14,13 @@ import javafx.application.Application;
  */
 public class Duke {
 
-    private String filepath;
-    private Storage storage;
+    private String taskFilepath;
+    private String contactsFilepath;
+    private Storage taskStorage;
+    private Storage contactStorage;
     public TaskList taskList;
+
+    public ContactList contactList;
 
 
     private Ui ui;
@@ -26,14 +31,19 @@ public class Duke {
     /**
      * Helper function to initialize ChadGPT's context.
      *
-     * @param filepath Relative filepath of ChadGPT's storage.
+     * @param filepath1 Relative filepath of ChadGPT's task storage.
+     * @param filepath2 Relative filepath of ChadGPT's contacts storage.
+     *
      */
-    public Duke(String filepath) {
-        this.filepath = filepath;
+    public Duke(String filepath1, String filepath2) {
+        this.taskFilepath = filepath1;
+        this.contactsFilepath = filepath2;
         this.ui = new Ui();
-        this.storage = new Storage(filepath);
+        this.taskStorage = new Storage(filepath1);
+        this.contactStorage = new Storage(filepath2);
         try {
-            this.taskList = storage.loadTask();
+            this.taskList = taskStorage.loadTask();
+            this.contactList = contactStorage.loadContacts();
         } catch (Exception e) {
             System.out.println("honggan");
             System.out.println(e.getMessage());
@@ -48,9 +58,10 @@ public class Duke {
         String[] command = input.split(" ");
 
         if (input.equals("bye")) {
-            this.storage.saveTask(this.taskList);
+            this.taskStorage.saveTask(this.taskList);
+            this.contactStorage.saveContacts(this.contactList);
         } else {
-            return Parser.run(input, command, this.taskList);
+            return Parser.run(input, command, this.taskList, this.contactList);
         }
 
         return "we out bois";
@@ -62,10 +73,11 @@ public class Duke {
      */
     public String getResponse(String input) {
         if (input.equals("bye")) {
-            this.storage.saveTask(this.taskList);
+            this.taskStorage.saveTask(this.taskList);
+            this.contactStorage.saveContacts(this.contactList);
             return "g bro bye";
         }
-        return Parser.run(input, input.split(" "), this.taskList);
+        return Parser.run(input, input.split(" "), this.taskList, this.contactList);
     }
 
 

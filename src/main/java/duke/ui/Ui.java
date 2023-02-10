@@ -31,6 +31,9 @@ public class Ui {
         str += "eg1 : todo stuff\n";
         str += "eg2 : deadline <name>/<time in YYYY-MM-DD\n";
         str +="eg3 : event <name>/<starttime>/<endtime>\n";
+        str += "you can add a friend like this friend_name_number\n";
+        str += "unfriend to delete your friend\n";
+        str += "listfriends to get a list of your homies\n";
         return str;
     }
 

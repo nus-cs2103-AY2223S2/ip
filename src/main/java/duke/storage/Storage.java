@@ -7,6 +7,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Scanner;
 
+import duke.contact.Contact;
+import duke.contact.ContactList;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.TaskList;
@@ -32,6 +34,23 @@ public class Storage {
         this.path = path;
     }
 
+
+    public void saveContacts(ContactList contactList) {
+        try {
+            FileWriter fileWriter = new FileWriter(this.path);
+
+            for (int j = 0; j < contactList.getCurrSize(); j ++) {
+                Contact curr = contactList.getContacts().get(j);
+                fileWriter.write("C/" + curr.getName() + "/" + curr.getPhoneNumber());
+                if (j < contactList.getCurrSize() - 1) {
+                    fileWriter.write("\n");
+                }
+            }
+            fileWriter.close();
+        } catch (IOException exception) {
+            System.out.println("jialat got problem bro\n" + exception.getMessage());
+        }
+    }
     /**
      * Saves user's existing tasks into a .txt file.
      *
@@ -64,6 +83,7 @@ public class Storage {
                     fileWriter.write("\n");
                 }
             }
+
             fileWriter.close();
         } catch (IOException exception) {
             System.out.println("jialat got problem bro\n" + exception.getMessage());
@@ -116,4 +136,28 @@ public class Storage {
         }
         return tasklist;
     }
+
+    public ContactList loadContacts() {
+        ContactList contactList = new ContactList(100);
+        try {
+            File file = new File(this.path);
+            if (!file.exists()) {
+                Files.createFile(Path.of("./dukeContacts.txt"));
+            }
+            Scanner sc = new Scanner(file);
+            while (sc.hasNextLine()) {
+                String temp1 = sc.nextLine();
+                String[] input = temp1.split("/");
+                if (input[0].equals("C")) {
+                    contactList.addContact(input[1], input[2]);
+                }
+            }
+        } catch (IOException exception) {
+            System.out.println("bro where tf is ur file");
+            System.out.println(exception.getMessage());
+        }
+        return contactList;
+    }
+
+
 }

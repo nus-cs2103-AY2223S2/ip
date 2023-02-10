@@ -2,6 +2,7 @@ package duke.helper;
 
 import duke.exceptions.InvalidTaskDescriptionException;
 import duke.tasks.TaskList;
+import duke.contact.ContactList;
 
 
 
@@ -23,7 +24,7 @@ public class Parser {
      * @param tasks The list of tasks from the user.
      * @return String that denotes message to be displayed by ChadGPT
      */
-    public static String run(String input, String[] command, TaskList tasks) {
+    public static String run(String input, String[] command, TaskList tasks, ContactList contacts) {
         try {
             if (command[0].equals("list")) {
                 return tasks.listTasks();
@@ -41,6 +42,12 @@ public class Parser {
                 return tasks.deleteTask(command);
             } else if (command[0].equals("find")) {
                 return tasks.findTask(command[1]);
+            } else if (command[0].equals("friend")) {
+                return contacts.addContact(command[1], command[2]);
+            } else if (command[0].equals("unfriend")) {
+                return contacts.deleteContact(command);
+            } else if (command[0].equals("listfriends")) {
+                return contacts.listContacts();
             } else {
                 return "Invalid command wake up brother";
             }
