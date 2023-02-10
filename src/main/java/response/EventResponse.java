@@ -33,26 +33,10 @@ public class EventResponse extends Response {
      */
     @Override
     public String exec(TaskList taskList) throws MissingArgumentException, InvalidArgumentException {
-        String[] splitFrom = event.split("/from", 2);
-        String des = splitFrom[0].trim();
-        if (des.equals("")) {
-            throw new MissingArgumentException("The description of an event cannot be empty.");
-        } else if (splitFrom.length != 2) {
-            throw new MissingArgumentException("The start date cannot be empty."
-                    + " Date has to be in the format of YYYY-MM-DD (e.g. 2007-12-03)");
-        }
-
-        String[] splitTo = splitFrom[1].split("/to", 2);
-        String from = splitTo[0].trim();
-        if (from.equals("")) {
-            throw new MissingArgumentException("The start date cannot be empty."
-                    + " Date has to be in the format of YYYY-MM-DD (e.g. 2007-12-03)");
-        } else if (splitTo.length != 2
-                || splitTo[1].trim().equals("")) {
-            throw new MissingArgumentException("The end date cannot be empty."
-                    + " Date has to be in the format of YYYY-MM-DD (e.g. 2007-12-03)");
-        }
-        String to = splitTo[1].trim();
+        String[] parsed = parseArguments();
+        String des = parsed[0];
+        String from = parsed[1];
+        String to = parsed[2];
 
         // Try to create LocalDate objects from String
         LocalDate fromDate;
@@ -74,6 +58,34 @@ public class EventResponse extends Response {
                     + "\nNow you have %d task(s) in the list.",
                 newEvent,
                 taskList.count());
+    }
+
+    /**
+     * Function to parse the arguments and check for errors before creating a new event
+     * @return a String[] of the parsed arguments
+     */
+    public String[] parseArguments() {
+        String[] splitFrom = event.split("/from", 2);
+        String des = splitFrom[0].trim();
+        if (des.equals("")) {
+            throw new MissingArgumentException("The description of an event cannot be empty.");
+        } else if (splitFrom.length != 2) {
+            throw new MissingArgumentException("The start date cannot be empty."
+                    + " Date has to be in the format of YYYY-MM-DD (e.g. 2007-12-03)");
+        }
+
+        String[] splitTo = splitFrom[1].split("/to", 2);
+        String from = splitTo[0].trim();
+        if (from.equals("")) {
+            throw new MissingArgumentException("The start date cannot be empty."
+                    + " Date has to be in the format of YYYY-MM-DD (e.g. 2007-12-03)");
+        } else if (splitTo.length != 2
+                || splitTo[1].trim().equals("")) {
+            throw new MissingArgumentException("The end date cannot be empty."
+                    + " Date has to be in the format of YYYY-MM-DD (e.g. 2007-12-03)");
+        }
+        String to = splitTo[1].trim();
+        return new String[] {des, from, to};
     }
 
     /**
