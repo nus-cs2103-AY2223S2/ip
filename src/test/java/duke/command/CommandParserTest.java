@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class CommandParserTest {
     @Test
     public void parseInputAndExecuteCommand_todoCommandCorrectInput_addTodoToTaskList() {
-        String input = "todo description";
+        String input = "todo description /place location";
 
         Ui ui = new StubUi();
         TaskList taskList = new TaskList(new ArrayList<>());
@@ -44,7 +44,7 @@ public class CommandParserTest {
 
     @Test
     public void parseInputAndExecuteCommand_deadlineCommandCorrectInput_addDeadlineToTaskList() {
-        String input = "deadline description /by 13/10/1999 13:00";
+        String input = "deadline description /place location /by 13/10/1999 13:00";
 
         Ui ui = new StubUi();
         TaskList taskList = new TaskList(new ArrayList<>());
@@ -80,7 +80,7 @@ public class CommandParserTest {
 
     @Test
     public void parseInputAndExecuteCommand_todoCommandIncorrectDateTime_dukeException() {
-        String input = "deadline description /by 21/31/2023 13:00";
+        String input = "deadline description /place location /by 21/31/2023 13:00";
 
         Ui ui = new StubUi();
         TaskList taskList = new TaskList(new ArrayList<>());
@@ -93,7 +93,7 @@ public class CommandParserTest {
 
     @Test
     public void parseInputAndExecuteCommand_eventCommandCorrectInput_addEventToTaskList() {
-        String input = "event description /from 13/10/1999 13:00 /to 13/10/1999 13:00";
+        String input = "event description /place location /from 13/10/1999 13:00 /to 13/10/1999 13:00";
 
         Ui ui = new StubUi();
         TaskList taskList = new TaskList(new ArrayList<>());
@@ -136,7 +136,7 @@ public class CommandParserTest {
 
     @Test
     public void parseInputAndExecuteCommand_eventCommandIncorrectDateTime_dukeException() {
-        String input = "event description /from 21/31/2023 13:00 /to 21/31/2023 13:00";
+        String input = "event description /place location /from 21/31/2023 13:00 /to 21/31/2023 13:00";
 
         Ui ui = new StubUi();
         TaskList taskList = new TaskList(new ArrayList<>());
@@ -153,7 +153,7 @@ public class CommandParserTest {
 
         Ui ui = new StubUi();
         ArrayList<Task> tasks = new ArrayList<>();
-        tasks.add(new ToDo("task 1"));
+        tasks.add(new ToDo("task 1", "place 1"));
         TaskList taskList = new TaskList(tasks);
         Storage storage = new StubStorage(new ArrayList<>());
         CommandParser commandParser = new CommandParser();
@@ -184,7 +184,7 @@ public class CommandParserTest {
 
         Ui ui = new StubUi();
         ArrayList<Task> tasks = new ArrayList<>();
-        tasks.add(new ToDo("task 1"));
+        tasks.add(new ToDo("task 1", "place 1"));
         TaskList taskList = new TaskList(tasks);
         Storage storage = new StubStorage(new ArrayList<>());
         CommandParser commandParser = new CommandParser();
@@ -215,7 +215,7 @@ public class CommandParserTest {
 
         Ui ui = new StubUi();
         ArrayList<Task> tasks = new ArrayList<>();
-        tasks.add(new ToDo("task 1"));
+        tasks.add(new ToDo("task 1", "place 1"));
         TaskList taskList = new TaskList(tasks);
         Storage storage = new StubStorage(new ArrayList<>());
         CommandParser commandParser = new CommandParser();

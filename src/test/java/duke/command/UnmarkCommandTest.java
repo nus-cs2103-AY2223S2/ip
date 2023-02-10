@@ -16,9 +16,9 @@ public class UnmarkCommandTest {
     @Test
     public void run_threeItemTaskListMarkFirst_firstTaskUnmarkDone() {
         ArrayList<Task> tasks = new ArrayList<>();
-        tasks.add(new ToDo("task 1"));
-        tasks.add(new ToDo("task 2"));
-        tasks.add(new ToDo("task 3"));
+        tasks.add(new ToDo("task 1", "place 1"));
+        tasks.add(new ToDo("task 2", "place 2"));
+        tasks.add(new ToDo("task 3", "place 3"));
         for (Task task : tasks) {
             task.setIsDone(true);
         }
@@ -38,9 +38,9 @@ public class UnmarkCommandTest {
     @Test
     public void run_threeItemTaskListMarkMiddle_middleTaskUnmarkDone() {
         ArrayList<Task> tasks = new ArrayList<>();
-        tasks.add(new ToDo("task 1"));
-        tasks.add(new ToDo("task 2"));
-        tasks.add(new ToDo("task 3"));
+        tasks.add(new ToDo("task 1", "place 1"));
+        tasks.add(new ToDo("task 2", "place 2"));
+        tasks.add(new ToDo("task 3", "place 3"));
         for (Task task : tasks) {
             task.setIsDone(true);
         }
@@ -60,9 +60,9 @@ public class UnmarkCommandTest {
     @Test
     public void run_threeItemTaskListMarkLast_lastTaskUnmarkDone() {
         ArrayList<Task> tasks = new ArrayList<>();
-        tasks.add(new ToDo("task 1"));
-        tasks.add(new ToDo("task 2"));
-        tasks.add(new ToDo("task 3"));
+        tasks.add(new ToDo("task 1", "place 1"));
+        tasks.add(new ToDo("task 2", "place 2"));
+        tasks.add(new ToDo("task 3", "place 3"));
         for (Task task : tasks) {
             task.setIsDone(true);
         }

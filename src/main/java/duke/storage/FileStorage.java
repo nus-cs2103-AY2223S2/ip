@@ -37,8 +37,9 @@ public class FileStorage implements Storage {
     private ToDo getToDoFromLineTokens(String[] lineTokens) {
         boolean isDone = Integer.parseInt(lineTokens[1]) == 1;
         String description = lineTokens[2];
+        String place = lineTokens[3];
 
-        ToDo todo = new ToDo(description);
+        ToDo todo = new ToDo(description, place);
         todo.setIsDone(isDone);
 
         return todo;
@@ -47,11 +48,12 @@ public class FileStorage implements Storage {
     private Deadline getDeadlineFromLineTokens(String[] lineTokens) {
         boolean isDone = Integer.parseInt(lineTokens[1]) == 1;
         String description = lineTokens[2];
-        String by = lineTokens[3];
+        String place = lineTokens[3];
+        String by = lineTokens[4];
 
         LocalDateTime byDateTime = LocalDateTime.parse(by, DateTimeUtils.DATE_TIME_FORMAT_INPUT);
 
-        Deadline deadline = new Deadline(description, byDateTime);
+        Deadline deadline = new Deadline(description, place, byDateTime);
         deadline.setIsDone(isDone);
 
         return deadline;
@@ -60,13 +62,14 @@ public class FileStorage implements Storage {
     private Event getEventFromLineTokens(String[] lineTokens) {
         boolean isDone = Integer.parseInt(lineTokens[1]) == 1;
         String description = lineTokens[2];
-        String from = lineTokens[3];
-        String to = lineTokens[4];
+        String place = lineTokens[3];
+        String from = lineTokens[4];
+        String to = lineTokens[5];
 
         LocalDateTime fromDateTime = LocalDateTime.parse(from, DateTimeUtils.DATE_TIME_FORMAT_INPUT);
         LocalDateTime toDateTime = LocalDateTime.parse(to, DateTimeUtils.DATE_TIME_FORMAT_INPUT);
 
-        Event event = new Event(description, fromDateTime, toDateTime);
+        Event event = new Event(description, place, fromDateTime, toDateTime);
         event.setIsDone(isDone);
 
         return event;
@@ -109,16 +112,19 @@ public class FileStorage implements Storage {
     }
 
     private void writeToDoToFile(ToDo todo, FileWriter fileWriter) throws IOException {
-        fileWriter.write(String.format("T;%d;%s\n", todo.isDone() ? 1 : 0, todo.getDescription()));
+        fileWriter.write(String.format("T;%d;%s;%s\n", todo.isDone() ? 1 : 0,
+                todo.getDescription(), todo.getPlace()));
     }
 
     private void writeDeadlineToFile(Deadline deadline, FileWriter fileWriter) throws IOException {
-        fileWriter.write(String.format("D;%d;%s;%s\n", deadline.isDone() ? 1 : 0, deadline.getDescription(),
+        fileWriter.write(String.format("D;%d;%s;%s;%s\n", deadline.isDone() ? 1 : 0, deadline.getDescription(),
+                deadline.getPlace(),
                 deadline.getBy().format(DateTimeUtils.DATE_TIME_FORMAT_INPUT)));
     }
 
     private void writeEventToFile(Event event, FileWriter fileWriter) throws IOException {
-        fileWriter.write(String.format("E;%d;%s;%s;%s\n", event.isDone() ? 1 : 0, event.getDescription(),
+        fileWriter.write(String.format("E;%d;%s;%s;%s;%s\n", event.isDone() ? 1 : 0, event.getDescription(),
+                event.getPlace(),
                 event.getFrom().format(DateTimeUtils.DATE_TIME_FORMAT_INPUT),
                 event.getTo().format(DateTimeUtils.DATE_TIME_FORMAT_INPUT)));
     }

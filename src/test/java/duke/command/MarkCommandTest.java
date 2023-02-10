@@ -14,9 +14,9 @@ public class MarkCommandTest {
     @Test
     public void run_threeItemTaskListMarkFirst_firstTaskMarkDone() {
         ArrayList<Task> tasks = new ArrayList<>();
-        tasks.add(new ToDo("task 1"));
-        tasks.add(new ToDo("task 2"));
-        tasks.add(new ToDo("task 3"));
+        tasks.add(new ToDo("task 1", "place 1"));
+        tasks.add(new ToDo("task 2", "place 2"));
+        tasks.add(new ToDo("task 3", "place 3"));
 
         Ui ui = new StubUi();
         TaskList taskList = new TaskList(tasks);
@@ -33,9 +33,9 @@ public class MarkCommandTest {
     @Test
     public void run_threeItemTaskListMarkMiddle_middleTaskMarkDone() {
         ArrayList<Task> tasks = new ArrayList<>();
-        tasks.add(new ToDo("task 1"));
-        tasks.add(new ToDo("task 2"));
-        tasks.add(new ToDo("task 3"));
+        tasks.add(new ToDo("task 1", "place 1"));
+        tasks.add(new ToDo("task 2", "place 2"));
+        tasks.add(new ToDo("task 3", "place 3"));
 
         Ui ui = new StubUi();
         TaskList taskList = new TaskList(tasks);
@@ -52,9 +52,9 @@ public class MarkCommandTest {
     @Test
     public void run_threeItemTaskListMarkLast_lastTaskMarkDone() {
         ArrayList<Task> tasks = new ArrayList<>();
-        tasks.add(new ToDo("task 1"));
-        tasks.add(new ToDo("task 2"));
-        tasks.add(new ToDo("task 3"));
+        tasks.add(new ToDo("task 1", "place 1"));
+        tasks.add(new ToDo("task 2", "place 2"));
+        tasks.add(new ToDo("task 3", "place 3"));
 
         Ui ui = new StubUi();
         TaskList taskList = new TaskList(tasks);

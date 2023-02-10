@@ -21,12 +21,12 @@ public class EventCommand extends AddTaskCommand {
 
     @Override
     public String getCommandRegexPattern() {
-        return "^event (.*) \\/from (.*) \\/to (.*)$";
+        return "^event (.*) \\/place (.*) \\/from (.*) \\/to (.*)$";
     }
 
     @Override
     public String getCommandPattern() {
-        return "event <description> /from <from> /to <to>";
+        return "event <description> /place <location> /from <from> /to <to>";
     }
 
     /**
@@ -35,24 +35,25 @@ public class EventCommand extends AddTaskCommand {
      * @param ui       User interface.
      * @param taskList Task list.
      * @param storage  Storage.
-     * @param args     Argument list in order: description, from, to.
+     * @param args     Argument list in order: place, description, from, to.
      * @throws DukeException If failed to save new task list to storage or invalid date time
      *                       format.
      */
     @Override
     public void run(Ui ui, TaskList taskList, Storage storage, String... args) throws DukeException {
-        // Assert arguments has only 3 items: description, from, to.
-        assert args.length == 3;
+        // Assert arguments has only 4 items: description, place, from, to.
+        assert args.length == 4;
 
         String description = args[0];
-        String from = args[1];
-        String to = args[2];
+        String place = args[1];
+        String from = args[2];
+        String to = args[3];
 
         try {
             LocalDateTime fromDateTime = LocalDateTime.parse(from, DateTimeUtils.DATE_TIME_FORMAT_INPUT);
             LocalDateTime toDateTime = LocalDateTime.parse(to, DateTimeUtils.DATE_TIME_FORMAT_INPUT);
 
-            addTask(new Event(description, fromDateTime, toDateTime), ui, taskList, storage);
+            addTask(new Event(description, place, fromDateTime, toDateTime), ui, taskList, storage);
         } catch (DateTimeParseException exception) {
             throw new DukeException("Please enter date and time in this format: dd/MM/yyyy HH:mm");
         }

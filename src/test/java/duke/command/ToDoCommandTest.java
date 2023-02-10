@@ -15,7 +15,8 @@ public class ToDoCommandTest {
     @Test
     public void run_emptyTaskList_addTodoToTaskList() {
         String description = "todo description";
-        String[] args = { description };
+        String place = "todo place";
+        String[] args = { description, place };
 
         Ui ui = new StubUi();
         TaskList taskList = new TaskList(new ArrayList<>());
