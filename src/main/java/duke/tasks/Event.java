@@ -2,20 +2,22 @@ package duke.tasks;
 
 /**
  * Represents an event.
- * 
+ *
  * @author Samarth Verma
  */
 public class Event extends Task {
+
     private String desc;
     private String from;
     private String to;
 
     /**
      * Creates a new Event.
-     * @param id The id of the event.
+     *
+     * @param id          The id of the event.
      * @param description The description of the event.
-     * @param from The start time of the event.
-     * @param to The end time of the event.
+     * @param from        The start time of the event.
+     * @param to          The end time of the event.
      */
     public Event(int id, String description, String from, String to) {
         super(id);
@@ -32,7 +34,7 @@ public class Event extends Task {
     @Override
     public String toString() {
         String isDone = isCompleted() ? "X" : " ";
-        return String.format("[E][%s] %s (from: %s to %s)", isDone,description(),  from, to);
+        return String.format("[E][%s] %s (from: %s to %s)", isDone, description(), from, to);
     }
 
     @Override
@@ -41,9 +43,9 @@ public class Event extends Task {
         return String.format("E|%s|%s|%s|%s|%s", id(), isDone, description(), from, to);
     }
 
-    
     /**
      * Deserializes an event from a string.
+     *
      * @param s The string to deserialize from.
      * @return The deserialized event.
      */

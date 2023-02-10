@@ -4,26 +4,27 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
-
-import duke.exceptions.IOException;
 import java.nio.file.Path;
 
+import duke.exceptions.IOException;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 
+
 /**
  * Represents a storage that stores the tasks in a file.
- * 
+ *
  * @author Samarth Verma
  */
 public class Storage {
+
     private Path path;
     private File f;
     private boolean isInitialized = false;
 
     /**
      * Creates a new Storage object.
-     * 
+     *
      * @param path The path of the file.
      */
     public Storage(String path) {
@@ -31,9 +32,7 @@ public class Storage {
         this.f = this.path.toFile();
     }
 
-    /**
-     * Returns the path of the file.
-     */
+    /** Returns the path of the file. */
     public String getPath() {
         return path.toString();
     }
@@ -50,7 +49,7 @@ public class Storage {
 
     /**
      * Creates a new file.
-     * 
+     *
      * @throws IOException If the file cannot be created.
      */
     private void createFile() throws IOException {
@@ -64,7 +63,7 @@ public class Storage {
 
     /**
      * Saves the tasks in the list to the file.
-     * 
+     *
      * @param list The list of tasks.
      * @throws IOException If the file cannot be written to.
      */
@@ -83,12 +82,11 @@ public class Storage {
         } catch (Exception e) {
             throw new IOException("Unable to write to file");
         }
-
     }
 
     /**
      * Reads the tasks from the file.
-     * 
+     *
      * @return The list of tasks.
      * @throws IOException If the file cannot be read from.
      */
@@ -108,6 +106,5 @@ public class Storage {
             throw new IOException("Unable to read from file");
         }
         return list;
-
     }
 }

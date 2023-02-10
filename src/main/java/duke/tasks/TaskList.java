@@ -5,22 +5,17 @@ import java.util.stream.Stream;
 
 /**
  * Represents a list of tasks.
- * 
+ *
  * @author Samarth Verma
  */
 public class TaskList implements Iterable<Task> {
-    /**
-     * The list of tasks.
-     */
+
+    /** The list of tasks. */
     private ArrayList<Task> tasks;
-    /**
-     * The next id to be assigned to a task.
-     */
+    /** The next id to be assigned to a task. */
     private int nextId;
 
-    /**
-     * Creates a new TaskList.
-     */
+    /** Creates a new TaskList. */
     public TaskList() {
         tasks = new ArrayList<>();
         nextId = 1;
@@ -28,7 +23,7 @@ public class TaskList implements Iterable<Task> {
 
     /**
      * Returns the number of tasks in the list.
-     * 
+     *
      * @return the number of tasks in the list.
      */
     public int size() {
@@ -37,7 +32,7 @@ public class TaskList implements Iterable<Task> {
 
     /**
      * Adds a task to the list.
-     * 
+     *
      * @param t The task to be added.
      */
     public void add(Task t) {
@@ -46,7 +41,7 @@ public class TaskList implements Iterable<Task> {
 
     /**
      * Removes a task from the list.
-     * 
+     *
      * @param t The task to be removed.
      */
     public void remove(Task t) {
@@ -55,7 +50,7 @@ public class TaskList implements Iterable<Task> {
 
     /**
      * Returns the task at the specified index.
-     * 
+     *
      * @param i The index of the task to be returned.
      * @return The task at the specified index.
      */
@@ -65,7 +60,7 @@ public class TaskList implements Iterable<Task> {
 
     /**
      * Returns the next id to be assigned to a task.
-     * 
+     *
      * @return the next id to be assigned to a task.
      */
     public int nextId() {
@@ -74,7 +69,7 @@ public class TaskList implements Iterable<Task> {
 
     /**
      * Returns a sequential Stream with this collection as its source.
-     * 
+     *
      * @return a sequential Stream with this collection as its source.
      */
     public Stream<Task> stream() {
@@ -83,7 +78,7 @@ public class TaskList implements Iterable<Task> {
 
     /**
      * Returns an iterator over elements of type {@code Task}.
-     * 
+     *
      * @return an Iterator.
      */
     @Override

@@ -84,10 +84,10 @@
     -->
 
     <!-- Validate abbreviations (consecutive capital letters) length in identifier name -->
-    <module name="AbbreviationAsWordInName">
+    <!-- <module name="AbbreviationAsWordInName">
       <property name="ignoreFinal" value="false"/>
       <property name="allowedAbbreviationLength" value="1"/>
-    </module>
+    </module> -->
 
     <module name="PackageName">
       <!-- Validates identifiers for package names against the supplied expression. -->

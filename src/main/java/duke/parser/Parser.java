@@ -17,6 +17,7 @@ import duke.exceptions.DukeException;
  * @author Samarth Verma
  */
 public class Parser {
+
     /**
      * Parses the user input and returns the corresponding command.
      *
@@ -29,24 +30,24 @@ public class Parser {
         String command = tokens[0];
         String args = input.substring(command.length()).trim();
         switch (command) {
-            case "bye":
-                return new Exit();
-            case "todo":
-                return prepareCreateTodo(args);
-            case "deadline":
-                return prepareCreateDeadline(args);
-            case "event":
-                return prepareCreateEvent(args);
-            case "list":
-                return new ListTasks();
-            case "mark":
-                return prepareMarkTask(args);
-            case "unmark":
-                return prepareUnmarkTask(args);
-            case "delete":
-                return prepareDeleteTask(args);
-            default:
-                throw new DukeException("I'm sorry, but I don't know what that means :-(");
+        case "bye":
+            return new Exit();
+        case "todo":
+            return prepareCreateTodo(args);
+        case "deadline":
+            return prepareCreateDeadline(args);
+        case "event":
+            return prepareCreateEvent(args);
+        case "list":
+            return new ListTasks();
+        case "mark":
+            return prepareMarkTask(args);
+        case "unmark":
+            return prepareUnmarkTask(args);
+        case "delete":
+            return prepareDeleteTask(args);
+        default:
+            throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
     }
 
@@ -58,32 +59,35 @@ public class Parser {
     }
 
     private Command prepareCreateDeadline(String input) throws DukeException {
-        if (input.isEmpty())
+        if (input.isEmpty()) {
             throw new DukeException("The description cannot be empty.");
+        }
         String[] tokens = input.split("/by");
-        if (tokens.length != 2)
+        if (tokens.length != 2) {
             throw new DukeException("The deadline must be specified.");
+        }
         String description = tokens[0].trim();
         String deadline = tokens[1].trim();
         return new CreateDeadline(description, deadline);
     }
 
     private Command prepareCreateEvent(String input) throws DukeException {
-        if (input.isEmpty())
+        if (input.isEmpty()) {
             throw new DukeException("The description cannot be empty.");
+        }
         String[] tokens = input.split("/from");
-        if (tokens.length != 2)
+        if (tokens.length != 2) {
             throw new DukeException("The event must be specified.");
+        }
         String description = tokens[0].trim();
         String[] tokens2 = tokens[1].split("/to");
-        if (tokens2.length != 2)
+        if (tokens2.length != 2) {
             throw new DukeException("The event must be specified.");
+        }
         String from = tokens2[0].trim();
         String to = tokens2[1].trim();
         return new CreateEvent(description, from, to);
     }
-
-
 
     private Command prepareMarkTask(String input) throws DukeException {
         try {

@@ -7,17 +7,19 @@ import duke.ui.UserInterface;
 
 /**
  * Command to create a new Todo.
- * 
+ *
  * @author Samarth Verma
  */
 public class CreateTodo extends Command {
+
     private String description;
 
     /**
      * Creates a new CreateTodo command.
+     *
      * @param description
      */
-    public CreateTodo( String description) {
+    public CreateTodo(String description) {
         this.description = description;
     }
 

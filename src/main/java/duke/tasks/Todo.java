@@ -2,15 +2,17 @@ package duke.tasks;
 
 /**
  * Represents a todo task.
- * 
+ *
  * @author Samarth Verma
  */
 public class Todo extends Task {
+
     private String desc;
 
     /**
      * Creates a new Todo.
-     * @param id The id of the todo.
+     *
+     * @param id          The id of the todo.
      * @param description The description of the todo.
      */
     public Todo(int id, String description) {
@@ -20,6 +22,7 @@ public class Todo extends Task {
 
     /**
      * Returns the description of the todo.
+     *
      * @return the description of the todo.
      */
     public String description() {
@@ -40,6 +43,7 @@ public class Todo extends Task {
 
     /**
      * Deserializes a todo from a string.
+     *
      * @param s The string to deserialize from.
      * @return The deserialized todo.
      */

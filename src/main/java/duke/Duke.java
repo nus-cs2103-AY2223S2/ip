@@ -8,24 +8,24 @@ import duke.storage.Storage;
 import duke.tasks.TaskList;
 import duke.ui.UserInterface;
 
+
 /**
  * Represents the Duke task manager.
- * 
+ *
  * @author Samarth Verma
  */
 public class Duke {
+
     private UserInterface ui;
     private TaskList list;
     private Parser parser;
     private Storage storage;
 
-    /**
-     * Creates a new Duke object.
-     */
+    /** Creates a new Duke object. */
     public Duke() {
         ui = new UserInterface();
         parser = new Parser();
-        
+
         list = new TaskList();
         Path filePath = Paths.get(".", "data", "duke.txt");
         storage = new Storage(filePath.toString());
@@ -37,9 +37,7 @@ public class Duke {
         }
     }
 
-    /**
-     * Runs the Duke task manager.
-     */
+    /** Runs the Duke task manager. */
     public void run() {
         ui.showGreeting();
         while (true) {
@@ -50,6 +48,5 @@ public class Duke {
                 ui.showMessage(e.getMessage());
             }
         }
-
     }
 }

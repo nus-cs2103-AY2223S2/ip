@@ -6,8 +6,10 @@ import duke.Duke;
  * @author Samarth Verma
  */
 public class Main {
+
     /**
      * The entry point of the application.
+     *
      * @param args The command line arguments
      */
     public static void main(String[] args) {
