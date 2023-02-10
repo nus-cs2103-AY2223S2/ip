@@ -2,6 +2,7 @@ package duke;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TaskList {
     protected List<Task> tasks;
@@ -30,5 +31,10 @@ public class TaskList {
      */
     public void add(Task task) {
         tasks.add(task);
+    }
+
+    public List<Task> filter(String keyword) {
+        return getTasks().stream().filter(task -> task.toString().contains(keyword))
+                .collect(Collectors.toList());
     }
 }

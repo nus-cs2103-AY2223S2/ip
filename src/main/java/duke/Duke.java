@@ -5,8 +5,6 @@ import java.io.IOException;
 
 import java.time.format.DateTimeParseException;
 
-import java.util.Scanner;
-
 public class Duke {
     private Storage storage;
     private TaskList tasks;
