@@ -9,10 +9,22 @@ import java.util.HashMap;
 import java.util.List;
 
 public class TaskModel implements Model {
-    private static final String taskStorePath = "./src/main/data/tasks.ser";
+    private static final String taskStorePath = "./data/tasks.ser";
+    private final String dataDirPath = "./data";
     private final ArrayList<Task> tasks;
+    private final File dataDir;
     private final File tasksFile;
+
     public TaskModel() {
+        this.dataDir = new File(dataDirPath);
+        if (!dataDir.exists()) {
+            try {
+                dataDir.mkdir();
+            } catch (SecurityException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
         this.tasksFile = new File(taskStorePath);
         if (tasksFile.exists() && tasksFile.length() > 0) {
             try {
