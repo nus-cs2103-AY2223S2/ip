@@ -1,12 +1,13 @@
 package task;
 
+import exception.InvalidCommandInputException;
 import exception.InvalidDateFormatException;
 import exception.InvalidTaskStringException;
 
 /**
  * Represents a task to be done by the user.
  */
-public class Task {
+public abstract class Task {
 
     private String content;
     private boolean done;
@@ -112,6 +113,15 @@ public class Task {
     }
 
     /**
+     * Updates content in task.
+     *
+     * @param content The new content to override
+     */
+    public void updateContent(String content) {
+        this.content = content;
+    }
+
+    /**
      * Marks a task as done.
      */
     public void mark() {
@@ -129,11 +139,17 @@ public class Task {
      * Checks if task contains a word.
      *
      * @param word The word to check
-     * @return Whether task contains the word;
+     * @return Whether task contains the word
      */
     public boolean containsWord(String word) {
         return content.contains(word);
     }
+
+    /**
+     * Receives string input, children method decides how to update depending on task type.
+     * @param input The input to parse
+     */
+    public abstract void update(String input) throws InvalidCommandInputException;
 
     @Override
     public String toString() {

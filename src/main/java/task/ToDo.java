@@ -1,5 +1,7 @@
 package task;
 
+import exception.InvalidCommandInputException;
+
 /**
  * Represents a task that is to be done.
  */
@@ -20,6 +22,17 @@ public class ToDo extends Task {
     ToDo(String content, boolean done) {
         super(content, done);
     }
+
+    @Override
+    public void update(String input) throws InvalidCommandInputException {
+
+        if (input.length() == 0) {
+            throw new InvalidCommandInputException("Empty argument", "todo");
+        }
+
+        updateContent(input);
+    }
+
 
     @Override
     public String toString() {

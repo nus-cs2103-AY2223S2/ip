@@ -1,5 +1,6 @@
 package task;
 
+import exception.InvalidCommandInputException;
 import exception.InvalidDateFormatException;
 
 import helper.DateTimeHelper;
@@ -50,6 +51,34 @@ public class Event extends Task {
         return datetime.equals(start)
                 || (datetime.isAfter(start) && datetime.isBefore(end))
                 || datetime.equals(end);
+    }
+
+    @Override
+    public void update(String input) throws InvalidCommandInputException {
+        System.out.println(input);
+
+        if (!input.matches(".* /from .* /to .*")) {
+            throw new InvalidCommandInputException("'/from' or '/to' delimiter does not exist.", input);
+        }
+
+        String[] arr = input.split(" /from ");
+        String[] startEnd = arr[1].split(" /to ");
+
+        String content = arr[0];
+        String start = startEnd[0];
+        String end = startEnd[1];
+
+        if (content.length() == 0 || start.length() == 0 || end.length() == 0) {
+            throw new InvalidCommandInputException("Empty argument", "event");
+        }
+
+        try {
+            this.start = DateTimeHelper.parse(start);
+            this.end = DateTimeHelper.parse(end);
+            updateContent(content);
+        } catch (InvalidDateFormatException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override

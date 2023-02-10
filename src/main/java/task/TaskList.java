@@ -37,40 +37,11 @@ public class TaskList {
         if (input != null && (input.equals("todo") || input.equals("deadline") || input.equals("event"))) {
             throw new InvalidCommandInputException("Empty argument", input);
         } else if (input.matches("deadline .* /by .*")) {
-            // Parse content from input.
-            String[] arr = input.split(" /by ");
-            String content = arr[0].substring(9, arr[0].length());
-
-            if (content.length() == 0 || arr[1].length() == 0) {
-                throw new InvalidCommandInputException("Empty argument", "deadline");
-            }
-
-            try {
-                tasks.add(new Deadline(content, arr[1]));
-            } catch (InvalidDateFormatException e) {
-                System.out.println(e.getMessage());
-            }
+            addDeadline(input);
         } else if (input.matches("event .* /from .* /to .*")) {
-            // Parse content from input.
-            String[] arr = input.split(" /from ");
-            String content = arr[0].substring(6, arr[0].length());
-            String[] startEnd = arr[1].split(" /to ");
-
-            if (content.length() == 0 || startEnd[0].length() == 0 || startEnd[1].length() == 0) {
-                throw new InvalidCommandInputException("Empty argument", "event");
-            }
-
-            try {
-                tasks.add(new Event(content, startEnd[0], startEnd[1]));
-            } catch (InvalidDateFormatException e) {
-                System.out.println(e.getMessage());
-            }
+            addEvent(input);
         } else if (input.matches("todo .*")) {
-            if (input.length() == 5) {
-                throw new InvalidCommandInputException("Empty argument", "todo");
-            }
-
-            tasks.add(new ToDo(input.substring(5, input.length())));
+            addTodo(input);
         } else {
             throw new CommandNotFoundException("Duke command is invalid.", input);
         }
@@ -88,6 +59,77 @@ public class TaskList {
         for (Task task: t) {
             tasks.add(task);
         }
+    }
+
+    /**
+     * Adds a deadline task to the list.
+     *
+     * @param input The string to be parsed.
+     */
+    public void addDeadline(String input) throws InvalidCommandInputException {
+
+        String[] arr = input.split(" /by ");
+        String content = arr[0].substring(9);
+
+        if (content.length() == 0 || arr[1].length() == 0) {
+            throw new InvalidCommandInputException("Empty argument", "deadline");
+        }
+
+        try {
+            tasks.add(new Deadline(content, arr[1]));
+        } catch (InvalidDateFormatException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    /**
+     * Adds a todo task to the list.
+     *
+     * @param input The string to be parsed.
+     */
+    public void addTodo(String input) throws InvalidCommandInputException {
+        if (input.length() == 5) {
+            throw new InvalidCommandInputException("Empty argument", "todo");
+        }
+
+        tasks.add(new ToDo(input.substring(5)));
+    }
+
+    /**
+     * Adds an event task to the list.
+     *
+     * @param input The string to be parsed.
+     */
+    public void addEvent(String input) throws InvalidCommandInputException {
+
+        String[] arr = input.split(" /from ");
+        String content = arr[0].substring(6, arr[0].length());
+        String[] startEnd = arr[1].split(" /to ");
+
+        if (content.length() == 0 || startEnd[0].length() == 0 || startEnd[1].length() == 0) {
+            throw new InvalidCommandInputException("Empty argument", "event");
+        }
+
+        try {
+            tasks.add(new Event(content, startEnd[0], startEnd[1]));
+        } catch (InvalidDateFormatException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    /**
+     * Updates a task in the list.
+     *
+     * @param i Index to update.
+     * @param input Content to update.
+     * @return The newly updated task.
+     * @throws InvalidCommandInputException
+     */
+    public Task updateTask(int i, String input) throws InvalidCommandInputException {
+        Task res = getTask(i);
+        res.update(input);
+
+        return res;
     }
 
     /**

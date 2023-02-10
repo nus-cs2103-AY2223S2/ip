@@ -1,5 +1,7 @@
 package task;
 
+import exception.CommandNotFoundException;
+import exception.InvalidCommandInputException;
 import exception.InvalidDateFormatException;
 
 import helper.DateTimeHelper;
@@ -44,6 +46,30 @@ public class Deadline extends Task {
      */
     public boolean occursOn(LocalDateTime dt) {
         return dt.equals(deadline);
+    }
+
+    @Override
+    public void update(String input) throws InvalidCommandInputException {
+
+        if (!input.matches(".* /by .*")) {
+            throw new InvalidCommandInputException("'/by' delimiter does not exist.", input);
+        }
+
+        String[] arr = input.split(" /by ");
+
+        String content = arr[0];
+        String deadline = arr[1];
+
+        if (content.length() == 0 || deadline.length() == 0) {
+            throw new InvalidCommandInputException("Empty argument", "deadline");
+        }
+
+        try {
+            this.deadline = DateTimeHelper.parse(deadline);
+            updateContent(content);
+        } catch (InvalidDateFormatException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override
