@@ -3,7 +3,6 @@ package tasklist;
 import java.util.ArrayList;
 
 import task.Task;
-import ui.Ui;
 
 /**
  * Class to encapsulate the list of tasks and its corresponding methods.
@@ -64,8 +63,6 @@ public class TaskList {
      */
     public void addTask(Task task) {
         this.taskList.add(task);
-        // Call ui added.
-        Ui.showAddedMessage(task);
     }
 
     /**

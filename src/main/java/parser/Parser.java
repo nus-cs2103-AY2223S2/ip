@@ -96,30 +96,25 @@ public class Parser {
         String answer = "";
         if (echo.equals("bye")) {
             answer += ui.showSavingMessage();
-            storage.save(tasks.getList());
+            answer += storage.save(tasks.getList());
             answer += ui.showSavedMessage();
             answer += ui.showClosingMessage();
-            return answer;
         }
 
         if (echo.equals("list")) {
             answer += "    OK, Here are the items in your list: \n";
             answer += Ui.printArrayList(tasks.getList());
-            // put in loop to read the list
-            return answer;
         }
 
         if (echo.startsWith("mark")) {
             try {
                 int taskToModify = Integer.parseInt(echo.replaceAll("[^0-9]", ""));
                 tasks.markDone(taskToModify - 1);
-                // Call ui marked
                 answer += Ui.showMarkedMessage(tasks.get(taskToModify - 1));
             } catch (Exception e) {
                 // TODO: handle exception
                 return "";
             }
-            return answer;
         }
 
         if (echo.startsWith("unmark")) {
@@ -132,7 +127,6 @@ public class Parser {
                 // TODO: handle exception
                 return "";
             }
-            return answer;
         }
 
         if (echo.startsWith("delete") || echo.startsWith("remove")) {
@@ -146,7 +140,6 @@ public class Parser {
                 // TODO: handle exception
                 return "";
             }
-            return answer;
         }
 
         if (echo.startsWith("find")) {
@@ -158,7 +151,6 @@ public class Parser {
             ArrayList<Task> foundList = tasks.findArray(taskToFind);
             answer += "    Here are the matching tasks in your list:\n";
             answer += Ui.printArrayList(foundList);
-            return answer;
         }
 
         return answer;

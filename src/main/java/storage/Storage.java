@@ -31,13 +31,11 @@ public class Storage {
 
         try {
             File mySaveFile = new File(filePath);
-            //../../../
             if (!mySaveFile.exists()) {
                 mySaveFile.createNewFile();
             }
         } catch (Exception e) {
             // TODO: handle exception
-            System.out.println("Error has occurred");
             e.printStackTrace();
         }
     }
@@ -80,7 +78,7 @@ public class Storage {
      *
      * @param listToStore ArrayList of Tasks to be stored in object filepath.
      */
-    public void save(ArrayList<Task> listToStore) {
+    public String save(ArrayList<Task> listToStore) {
         try {
             FileWriter fw = new FileWriter("data/duke.txt");
             fw.close();
@@ -90,7 +88,6 @@ public class Storage {
 
         while (!listToStore.isEmpty()) {
             try {
-
                 FileWriter fw = new FileWriter("data/duke.txt", true);
                 fw.write(listToStore.get(0).getCommand());
                 listToStore.remove(0);
@@ -98,9 +95,9 @@ public class Storage {
                 fw.close();
             } catch (Exception e) {
                 // TODO: handle exception
-                System.out.println("    An Error has occurred");
-                break;
+                return "    An Error has occurred\n";
             }
         }
+        return "";
     }
 }
