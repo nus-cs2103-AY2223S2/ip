@@ -33,6 +33,7 @@ A broad overview of what Colette can do for you:
   * [Marking a task as not done](#marking-a-task-as-not-done)
 * [Deleting a task](#deleting-a-task)
 * [Finding tasks](#finding-tasks)
+* [Exiting the app](#exiting-the-app)
 
 ### **Viewing help**
 Brings up a list of all the commands that Colette knows.
@@ -81,7 +82,10 @@ Format: ```find [keyword1] [keyword2]``` where you can provide any number of key
 
 Example: ```find pet dogs``` will find all tasks with either `pet` or `dogs` in the name/description.
 
-### Remembering your tasks between sessions
+### **Exiting the app**
+Format: ```bye```
+
+### **Remembering your tasks between sessions**
 Colette can remember the state of your task list between sessions!
 Simply ensure that if you move the `colette.jar` file, the `data` folder remains in the same directory
 as the jar file.
