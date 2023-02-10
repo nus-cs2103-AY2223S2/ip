@@ -32,19 +32,15 @@ public class Duke {
      * @return Duke's response.
      */
     public String getResponse(String input) {
-        String response;
-        if (isStart) {
-            response = ui.getWelcomeMessage();
-            isStart = false;
-        } else {
-            Command c = Parser.parse(input);
-            if (c instanceof ExitCommand) {
-                response = ui.getGoodbyeMessage();
-                this.storage.save(this.tasks);
-            } else {
-                response = c.execute(this.tasks, this.ui, this.storage);
-            }
+        if (this.isStart) {
+            this.isStart = false;
+            return ui.getWelcomeMessage();
         }
-        return response;
+        Command c = Parser.parse(input);
+        if (c instanceof ExitCommand) {
+            this.storage.save(this.tasks);
+            return ui.getGoodbyeMessage();
+        }
+        return c.execute(this.tasks, this.ui, this.storage);
     }
 }
