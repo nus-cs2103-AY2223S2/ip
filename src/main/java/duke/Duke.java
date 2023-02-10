@@ -2,12 +2,11 @@ package duke;
 import java.io.FileNotFoundException;
 
 public class Duke {
-    private final Storage storage;
-    private final Ui ui;
+    private Storage storage;
+    private static final Ui ui = new Ui();
     private TaskList tasks;
 
     public Duke(String filePath) throws DukeException {
-        ui = new Ui();
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
