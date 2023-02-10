@@ -1,5 +1,7 @@
 package duke;
 
+import javafx.application.Platform;
+
 /**
  * The Parser class is to make sense of (interpret) the user commend.
  * Executes different functions based on the user commend/input.
@@ -37,6 +39,8 @@ public class Parser {
                     new TimeConvertor(toDate, "MMM dd yyyy hh:mma"));
             break;
         default:
+            assert false : "This type of record cannot be parsed";
+
         }
         if (recordStatus.equals("[X]") && item != null) {
             item.setIsDone();
@@ -54,24 +58,30 @@ public class Parser {
      * @throws TaskNotExistException The task does not exist in the list.
      * @throws MissingNumberException Not indication of task index number.
      * @throws MissingDescriptionException No task description.
+     * @throws CheckNotFindException Cannot check for the user input.
      */
     public static String parseInput(TaskList list, String userInput)
-            throws TaskNotExistException, MissingNumberException, MissingDescriptionException, UnknownInputException {
+            throws TaskNotExistException, MissingNumberException, MissingDescriptionException, CheckNotFindException {
         int chosenTask;
 
         switch (userInput.split("\\s+")[0]) {
+        case "bye":
+            Platform.exit();
+            break;
         case "list":
             return list.printList();
         case "mark":
             if (!userInput.contains(" ")) {
                 throw new MissingNumberException("mark");
             }
+            assert userInput.split("\\s+")[1].chars().allMatch(Character::isDigit) : "Input value is not a integer.";
             chosenTask = Integer.parseInt(userInput.split("\\s+")[1]);
             return list.mark(chosenTask);
         case "unmark":
             if (!userInput.contains(" ")) {
                 throw new MissingNumberException("unmark");
             }
+            assert userInput.split("\\s+")[1].chars().allMatch(Character::isDigit) : "Input value is not a integer.";
             chosenTask = Integer.parseInt(userInput.split("\\s+")[1]);
             return list.unmark(chosenTask);
         case "todo":
@@ -110,6 +120,7 @@ public class Parser {
             if (!userInput.contains(" ")) {
                 throw new MissingNumberException("delete");
             }
+            assert userInput.split("\\s+")[1].chars().allMatch(Character::isDigit) : "Input value is not a integer.";
             chosenTask = Integer.parseInt(userInput.split("\\s+")[1]);
             return list.delete(chosenTask);
         case "find":
@@ -119,13 +130,14 @@ public class Parser {
             return list.find(userInput.substring(userInput.indexOf(" ") + 1));
         case "check":
             if (!userInput.contains("/")) {
-                throw new MissingNumberException("check");
+                throw new CheckNotFindException();
             }
             String checkDeadline = userInput.split("/")[1];
             return list.check(checkDeadline);
         default:
-            return "Oh no, I am not sure what that means, could you try again?";
+            assert false : "User input unknown case";
         }
+        return "Oh no, I am not sure what that means, could you try again?";
     }
 }
 
