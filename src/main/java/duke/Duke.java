@@ -1,17 +1,16 @@
 package duke;
 
 import java.util.Scanner;
-import java.lang.String;
 
-import duke.commands.Parser;
 import duke.commands.Command;
 import duke.commands.Exit;
+import duke.commands.Parser;
 import duke.dukeexception.DukeException;
 
 /**
- * @author Shi Jiaao
+ * This is the main class of the program.
  *
- * Welcome to Duke.
+ * @author Shi Jia Ao
  */
 public class Duke {
     public static void main(String[] args) {

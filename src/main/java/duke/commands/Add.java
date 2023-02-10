@@ -1,6 +1,7 @@
 package duke.commands;
-import duke.commands.tasks.Task;
+
 import duke.TaskList;
+import duke.commands.tasks.Task;
 
 /**
  * This class handles addition commands

@@ -4,8 +4,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
+    protected static final String DATE_FORMAT = "MMM dd yyyy";
     protected LocalDate deadline;
-    protected static String DATE_FORMAT = "MMM dd yyyy";
 
     public Deadline(String description, String deadline) {
         this(description, false, deadline);

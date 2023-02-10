@@ -30,9 +30,9 @@ public class Parser {
     private String getTaskName() {
         String[] commandArr = this.command.split(" ");
         String taskName = "";
-        for (int i = 1; i < commandArr.length &&
-                !commandArr[i].equals("/by") &&
-                !commandArr[i].equals("/from"); i++) {
+        for (int i = 1; i < commandArr.length
+                && !commandArr[i].equals("/by")
+                && !commandArr[i].equals("/from"); i++) {
             taskName += commandArr[i] + " ";
         }
         return taskName;
@@ -85,8 +85,7 @@ public class Parser {
      */
     public Command process() throws DukeException {
         String[] commandArr = this.command.split(" ");
-        int editIndex = Character.getNumericValue
-                (command.charAt(command.length() - 1)) - 1;
+        int editIndex = Character.getNumericValue(command.charAt(command.length() - 1)) - 1;
         String description = this.getTaskName();
         switch (commandArr[0]) {
         case "find":

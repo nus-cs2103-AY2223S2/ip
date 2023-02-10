@@ -1,16 +1,16 @@
 package duke;
 
-import duke.commands.tasks.Deadline;
-import duke.commands.tasks.Task;
-import duke.commands.tasks.ToDo;
-import duke.commands.tasks.Event;
-import duke.dukeexception.DukeException;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+
+import duke.commands.tasks.Deadline;
+import duke.commands.tasks.Event;
+import duke.commands.tasks.Task;
+import duke.commands.tasks.ToDo;
+import duke.dukeexception.DukeException;
 
 /**
  * This class handles updating Duke's task list into a local file
@@ -44,7 +44,7 @@ public class Storage {
         BufferedReader br = new BufferedReader(new FileReader(file));
         String str = br.readLine();
         TaskList toDoList = new TaskList();
-        while (str != null){
+        while (str != null) {
             toDoList.add(getTask(str));
             str = br.readLine();
         }
@@ -63,9 +63,10 @@ public class Storage {
             return new ToDo(taskDescription[2], getCompletionStatus(taskDescription[1]));
         case "D":
             return new Deadline(taskDescription[2], getCompletionStatus(taskDescription[1]), taskDescription[3]);
+        default:
+            return new Event(taskDescription[2], getCompletionStatus(taskDescription[1]),
+                    taskDescription[3], taskDescription[4]);
         }
-        return new Event(taskDescription[2], getCompletionStatus(taskDescription[1]),
-                taskDescription[3], taskDescription[4]);
     }
 
     private boolean getCompletionStatus(String status) {

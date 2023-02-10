@@ -1,7 +1,8 @@
 package duke;
 
-import duke.commands.tasks.Task;
 import java.util.ArrayList;
+
+import duke.commands.tasks.Task;
 
 /**
  * This class serves to represent a to-do list

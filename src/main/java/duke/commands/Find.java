@@ -1,15 +1,15 @@
 package duke.commands;
 
-import duke.commands.tasks.Task;
-import duke.TaskList;
-
 import java.util.ArrayList;
+
+import duke.TaskList;
+import duke.commands.tasks.Task;
 
 /**
  * This class handles searching for tasks using keywords
  */
 public class Find extends Command {
-    String keyword;
+    private String keyword;
 
     public Find(String message, String keyword) {
         super(message);

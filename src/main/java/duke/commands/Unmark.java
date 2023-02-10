@@ -21,7 +21,8 @@ public class Unmark extends Command {
     @Override
     public void execute(TaskList toDoList) {
         toDoList.get(this.index).markUndone();
-        System.out.println("OK, I've marked this task as not done yet:\n" + "    " +
-                toDoList.get(this.index));
+        System.out.println("OK, I've marked this task as not done yet:\n"
+                + "    "
+                + toDoList.get(this.index));
     }
 }

@@ -21,7 +21,8 @@ public class Mark extends Command {
     @Override
     public void execute(TaskList toDoList) {
         toDoList.get(this.index).markDone();
-        System.out.println("Nice! I've marked this task as done:\n" + "    " +
-                toDoList.get(this.index));
+        System.out.println("Nice! I've marked this task as done:\n"
+                + "    "
+                + toDoList.get(this.index));
     }
 }

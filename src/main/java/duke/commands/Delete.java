@@ -1,7 +1,7 @@
 package duke.commands;
 
-import duke.commands.tasks.Task;
 import duke.TaskList;
+import duke.commands.tasks.Task;
 
 /**
  * This class handles deletion commands
@@ -32,8 +32,8 @@ public class Delete extends Command {
 
     @Override
     public String toString() {
-        return String.format("Noted. I've removed this task:\n" +
-                "    %s\n" + "Now you have %d tasks in the list.",
+        return String.format("Noted. I've removed this task:\n"
+                        + "    %s\n" + "Now you have %d tasks in the list.",
                 this.removed, this.newSize);
     }
 }
