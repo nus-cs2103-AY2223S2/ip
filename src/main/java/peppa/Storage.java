@@ -4,46 +4,68 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
  * Represents a file for storing tasks and handles all file I/O-related logic.
  */
 public class Storage {
-    private String filepath;
+    private String dirPath;
+    private Peppa p;
     private File f;
+    private ArrayList<File> dataSources = new ArrayList<>();
 
     /**
      * Constructs a storage object with the specified file path.
      *
-     * @param filepath The path of the file containing pre-existing tasks, if any.
+     * @param dirPath The path of the directory containing pre-existing task files, if any.
      */
-    public Storage(String filepath) {
+    public Storage(Peppa p, String dirPath) {
+        this.p = p;
+        this.dirPath = dirPath;
+        setDataSources();
+        initialiseStorage();
+    }
+
+    public File getFile() {
+        return this.f;
+    }
+
+    public ArrayList<File> getDataSources() {
+        return this.dataSources;
+    }
+
+    public void initialiseStorage() {
         try {
-            this.filepath = filepath;
-            File f = new File(filepath);
-            f.getParentFile().mkdirs();
-            f.createNewFile();
-            this.f = f;
-        } catch (IOException e) {
+            int fileCount = dataSources.size();
+            if (fileCount > 1) {
+                return;
+            } else if (fileCount == 0) {
+                File file = new File(dirPath + "/todo.txt");
+                file.createNewFile();
+                this.f = file;
+            } else if (fileCount == 1) {
+                this.f = dataSources.get(0);
+            }
+            loadData(new TaskList());
+        } catch (IOException | SecurityException e) {
             Ui.displayMessage("Boink! There seems to be an I/O error. Please try again.");
         }
     }
 
     /**
      * Loads existing task data from local file.
-     *
-     * @param taskList List of tasks.
-     * @param screen User interface.
      */
-    public void loadData(TaskList taskList, Ui screen) {
-        Ui.displayMessage("Initialising data (if any)...... ");
+    public void loadData(TaskList taskList) {
         try {
             Scanner sc = new Scanner(this.f);
             while (sc.hasNext()) {
                 String line = sc.nextLine();
                 Parser.parseFileEntry(line, taskList);
             }
+            p.setTasks(taskList);
             Ui.displayMessage("Done!");
         } catch (FileNotFoundException e) {
             Ui.displayMessage("Boink! Peppa could not locate the file. Please try again.");
@@ -67,5 +89,22 @@ public class Storage {
         } catch (IOException e) {
             Ui.displayMessage("Boink! Peppa could not save changes to the task list. Please try again.");
         }
+    }
+
+    public void setDataSources() {
+        File dir = new File(dirPath);
+        dir.mkdir();
+        assert (dir.exists());
+
+        File[] children = dir.listFiles();
+        for (File child : children) {
+            if (child.isFile()) {
+                dataSources.add(child);
+            }
+        }
+    }
+
+    public void setFile(File f) {
+        this.f = f;
     }
 }

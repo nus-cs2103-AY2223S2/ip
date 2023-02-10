@@ -12,9 +12,7 @@ import javafx.stage.Stage;
  * A GUI for Duke using FXML.
  */
 public class Main extends Application {
-    public static final String FILE_PATH = "data/todo.txt";
-
-    private Peppa peppa = new Peppa(FILE_PATH);
+    private Peppa peppa = new Peppa();
 
     @Override
     public void start(Stage stage) {
