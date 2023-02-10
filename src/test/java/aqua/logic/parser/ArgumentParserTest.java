@@ -12,7 +12,7 @@ import aqua.exception.SyntaxException;
 import aqua.logic.ArgumentMap;
 
 public class ArgumentParserTest {
-    public static ArgumentMap expected;
+    private static ArgumentMap expected;
 
 
     @BeforeAll
