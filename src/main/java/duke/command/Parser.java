@@ -79,7 +79,7 @@ public class Parser {
      * @param arr array of original array
      * @return full string command for users
      */
-    public static String toDo(String[] arr) throws MissingContentException {
+    public static String parseToDo(String[] arr) throws MissingContentException {
         String remaining = "";
         try {
             remaining = arr[1];
@@ -127,7 +127,7 @@ public class Parser {
      * @return the String detail.
      * @throws MissingContentException if arr is empty.
      */
-    public String deadlineDetail(String[] arr) throws MissingContentException {
+    public String getDeadlineDetail(String[] arr) throws MissingContentException {
         String detail = "";
         if (arr.length <= 1) {
             throw new MissingContentException();
@@ -150,7 +150,7 @@ public class Parser {
      * @return the index of deadline time.
      * @throws MissingContentException if arr is empty.
      */
-    public int deadlineTimeIndex(String[] arr) throws MissingContentException {
+    private int getDeadlineTimeIndex(String[] arr) throws MissingContentException {
         if (arr.length <= 1) {
             throw new MissingContentException();
         }
@@ -175,8 +175,8 @@ public class Parser {
     public String getDeadlineFull(String[] command) {
         String remaining = "";
         try {
-            String detail = this.deadlineDetail(command);
-            int pointer = this.deadlineTimeIndex(command);
+            String detail = this.getDeadlineDetail(command);
+            int pointer = this.getDeadlineTimeIndex(command);
             for (int j = pointer; j < command.length; j++) {
                 if (String.valueOf(command[j]).equals("/")) {
                     remaining += "-";

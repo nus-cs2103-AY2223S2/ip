@@ -117,20 +117,20 @@ public class TaskList {
      * Returns new task list.
      * Unmarks task at given index as done.
      *
-     * @param num1 index at which task need to be marked as undone.
+     * @param num index at which task need to be marked as undone.
      * @return new task list with task unmarked.
      * @throw InvalidIndexException if array at specific index is null
      */
-    public String unmark(int num1) throws IOException {
+    public String unmark(int num) throws IOException {
         try {
             try {
-                String original = arr[num1];
+                String original = arr[num];
                 Parser.updateLastTaskList(new TaskList(Arrays.copyOf(arr, 100)));
                 Task newTask = new Task(String.valueOf(original.charAt(1)),
                         original.substring(7), false);
-                arr[num1] = newTask.toString();
-                Parser.updateLastCommandDetail(arr[num1]);
-                return ("OK, I've marked this task as not done yet:" + "\n" + arr[num1]);
+                arr[num] = newTask.toString();
+                Parser.updateLastCommandDetail(arr[num]);
+                return ("OK, I've marked this task as not done yet:" + "\n" + arr[num]);
             } catch (IndexOutOfBoundsException e) {
                 throw new InvalidIndexException();
             }

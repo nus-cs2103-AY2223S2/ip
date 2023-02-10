@@ -208,7 +208,7 @@ public class Ui {
     public String addToDo(TaskList listOfAction, String[] command) {
         String remaining = "";
         try {
-            remaining = Parser.toDo(command);
+            remaining = Parser.parseToDo(command);
         } catch (MissingContentException e) {
             return e.getMessage();
         }
@@ -228,7 +228,7 @@ public class Ui {
      */
     public String addDeadline(TaskList listOfAction, String[] command) {
         try {
-            String detail = new Parser().deadlineDetail(command);
+            String detail = new Parser().getDeadlineDetail(command);
             String remaining = new Parser().getDeadlineFull(command);
             Parser.updateLastCommand("deadline");
             Deadline newTaskDeadline = new Deadline(command[0], detail, remaining);
