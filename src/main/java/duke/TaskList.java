@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.PriorityQueue;
 
 /**
  * The TaskList class contains the task list.
@@ -281,6 +282,31 @@ public class TaskList {
         }
 
         return allCheck;
+    }
+
+    public String sort(String userInput) throws NoSortTypeException {
+        if (!userInput.contains(" ")) {
+            throw new NoSortTypeException();
+        }
+
+        String type = userInput.split(" ")[1].trim();
+
+        String result = "";
+
+        PriorityQueue<Task> pqTasks = new PriorityQueue<>();
+        for(Task items: lists) {
+            if (type.equals("deadline") && items instanceof Deadline) {
+                pqTasks.add(items);
+            } else if (type.equals("event") && items instanceof Event) {
+                pqTasks.add(items);
+            }
+        }
+
+        while(!pqTasks.isEmpty()) {
+            result += "• " + pqTasks.poll() + "\n";
+        }
+
+        return result.length() != 0 ? result : "No result return";
     }
 }
 

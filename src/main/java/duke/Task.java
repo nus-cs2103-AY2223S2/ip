@@ -69,7 +69,7 @@ class Todo extends Task {
         return "[T]" + super.toString();
     }
 }
-class Deadline extends Task {
+class Deadline extends Task implements Comparable<Deadline>{
     private final TimeConvertor by;
 
     public Deadline(String description, TimeConvertor by) {
@@ -85,9 +85,14 @@ class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString() + "(by: " + by + ")";
     }
+
+    @Override
+    public int compareTo(Deadline o) {
+        return by.compareTo(o.by);
+    }
 }
 
-class Event extends Task {
+class Event extends Task implements Comparable<Event>{
     private final TimeConvertor from;
     private final TimeConvertor to;
 
@@ -100,5 +105,10 @@ class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString() + "(from: " + from + " to: " + to + ")";
+    }
+
+    @Override
+    public int compareTo(Event o) {
+        return from.compareTo(o.from);
     }
 }

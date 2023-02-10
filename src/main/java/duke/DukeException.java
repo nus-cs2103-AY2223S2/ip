@@ -50,3 +50,9 @@ class CheckNotFindException extends DukeException {
         super("Oh no, you can only check a deadline here. Please try again!");
     }
 }
+
+class NoSortTypeException extends DukeException {
+    public NoSortTypeException() {
+        super("You must specific what you want to sort, deadline or event. Please try again!");
+    }
+}
