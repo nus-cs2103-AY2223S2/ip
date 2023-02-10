@@ -17,12 +17,14 @@ public class DeleteTaskCommand implements Command {
     }
     @Override
     public void execute() throws CommandExecutionError {
-        int numTasks = taskModel.getNumberOfTasks();
-        if (indexToDelete >= numTasks || indexToDelete < 0) {
-            throw new CommandExecutionError(String.format("You have only %d tasks", numTasks));
+        int numTasks = taskView.getNumDisplayedTasks();
+        if (indexToDelete >= numTasks) {
+            throw new CommandExecutionError(String.format("Only %d tasks displayed", numTasks));
+        } else if (indexToDelete < 0) {
+            throw new CommandExecutionError("Task index cannot be negative");
         }
-        Task taskToDelete = taskModel.getTask(indexToDelete);
-        taskModel.deleteTask(indexToDelete);
+        Task taskToDelete = taskView.getDisplayedTask(indexToDelete);
+        taskModel.deleteTask(taskToDelete);
         taskView.showMessage("Noted, I've removed this task:\n  " + taskToDelete.toString()
         + String.format("\n Now you have %d tasks in the list.", taskModel.getNumberOfTasks()));
     }

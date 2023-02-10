@@ -7,10 +7,16 @@ import java.util.Scanner;
 
 public class TaskView implements View {
     private final Scanner sc;
+    private List<Task> displayedTaskList;
     public TaskView() {
         this.sc = new Scanner(System.in);
     }
 
+    public Task getDisplayedTask(int index) {
+        return displayedTaskList.get(index);
+    }
+
+    public int getNumDisplayedTasks() { return displayedTaskList.size(); };
     @Override
     public void showMessage(String string) {
         System.out.println("____________________________________________________________");
@@ -20,7 +26,6 @@ public class TaskView implements View {
 
     @Override
     public void showError(String string) {
-
         System.err.println(string);
     }
 
@@ -31,6 +36,7 @@ public class TaskView implements View {
 
     @Override
     public void renderTasks(List<Task> tasks) {
+        this.displayedTaskList = tasks;
         System.out.println("____________________________________________________________");
         System.out.println("Here are the tasks in your list:");
         int index = 1;

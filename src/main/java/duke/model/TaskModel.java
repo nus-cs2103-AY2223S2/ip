@@ -5,6 +5,7 @@ import duke.interfaces.Model;
 import java.io.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class TaskModel implements Model {
@@ -84,17 +85,20 @@ public class TaskModel implements Model {
         return this.tasks.size();
     }
 
-    public void deleteTask(int indexToRemove) {
-        this.tasks.remove(indexToRemove); // handle out of bounds error
+    public void deleteTask(Task task) {
+        int indexToRemove = tasks.indexOf(task);
+        this.tasks.remove(indexToRemove);
         writeToFile();
     }
 
-    public void markTaskDone(int taskIndex) {
+    public void markTaskDone(Task task) {
+        int taskIndex = tasks.indexOf(task);
         tasks.get(taskIndex).markTaskDone(); // handle out of bounds exception
         writeToFile();
     }
 
-    public void markTaskUndone(int taskIndex) {
+    public void markTaskUndone(Task task) {
+        int taskIndex = tasks.indexOf(task);
         tasks.get(taskIndex).markTaskUndone(); // handle out of bounds exception
         writeToFile();
     }
