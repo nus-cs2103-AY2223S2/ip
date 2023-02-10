@@ -287,6 +287,7 @@ class Parser {
          return tasks;
     }
 
+    /*
     static TaskList<Task> addRecur(Scanner sc, TaskScheduler recurList, TaskList<Task> tasks) {
         String description = sc.nextLine();
         if (description.trim().length() == 0) {
@@ -309,6 +310,7 @@ class Parser {
         return tasks.add(new Events(actualDescription, startTime, endTime));
         //return recurList;
     }
+    */
 
     /*
     static TaskList<Task> recurringTask(Scanner sc, TaskList<Task> tasks) {

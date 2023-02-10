@@ -35,11 +35,12 @@ public class MainWindow extends AnchorPane {
     @FXML
     private TextField userInput;
     @FXML
-
     private Duke duke;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Khabib.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Ronaldo.png"));
+
+    List<Timeline> recurResponse = new ArrayList<>();
 
     Image image = new Image(this.getClass().getResourceAsStream("/images/Wallpaper.png"));
     BackgroundSize backgroundSize = new BackgroundSize(1, 1, false, false, false, false);
@@ -80,8 +81,6 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response = duke.getResponse(input);
 
-        List<Timeline> recurResponse = new ArrayList<>();
-
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
         dialogContainer.getChildren().addAll(
@@ -91,6 +90,7 @@ public class MainWindow extends AnchorPane {
 
         TaskScheduler taskScheduler = new TaskScheduler(recurResponse, dialogContainer, dukeImage);
         if (input.contains("recur")) {
+            System.out.println("recur found");
             taskScheduler.recurDialogContainer(input);
         }
 

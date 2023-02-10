@@ -37,7 +37,7 @@ public class Duke {
     private Ui ui;
 
 
-
+    /*
     void moreOop() {
         ByteArrayOutputStream storeSavedString = new ByteArrayOutputStream();
         PrintStream printStreamSaved = new PrintStream(storeSavedString);
@@ -85,6 +85,8 @@ public class Duke {
             storage.writeToFile(taskList.toString());
         }
     }
+    */
+
 
     @FXML
     protected String getResponse(String input) {
@@ -119,8 +121,8 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.moreOop();
+        //Duke duke = new Duke();
+        //duke.moreOop();
     }
 
 }

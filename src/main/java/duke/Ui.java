@@ -22,7 +22,7 @@ class Ui {
     private Scanner scanner;
     private String description;
     private TaskList<Task> tasks;
-    private final TaskScheduler recurList = new TaskScheduler(1, new PriorityBlockingQueue<>(100, Comparator.comparing(Recur::getMockRemainingTime)));;
+    //private final TaskScheduler recurList = new TaskScheduler(1, new PriorityBlockingQueue<>(100, Comparator.comparing(Recur::getMockRemainingTime)));;
     /**
      * Default constructor instantiates the scanner to read from the user
      * machine's keyboard
@@ -78,10 +78,10 @@ class Ui {
             this.tasks = Parser.delete(scanner, tasks);
         } else if (description.equals(Parser.FIND)) {
             this.tasks = Parser.find(scanner, tasks);
-        } else if (description.equals(Parser.RECUR)) {
+        } /*else if (description.equals(Parser.RECUR)) {
             //System.out.println("recur");
-            this.tasks = Parser.addRecur(scanner, recurList, tasks);
-        } else {
+            //this.tasks = Parser.addRecur(scanner, recurList, tasks);
+        } */else {
             dukeExceptionWarning(description, tasks);
         }
         return this.tasks;
