@@ -43,7 +43,7 @@ public class Duke extends Application {
         } catch (DukeException e) {
             taskList = new TaskList();
         }
-        this.parser = new Parser(taskList);
+        this.parser = new Parser(taskList, storage);
     }
 
     @Override

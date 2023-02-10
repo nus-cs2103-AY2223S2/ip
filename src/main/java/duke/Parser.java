@@ -17,7 +17,7 @@ public class Parser {
      * Creates a new Parser object.
      * @param taskList The TaskList object containing the ArrayList of Tasks.
      */
-    Parser(TaskList taskList) {
+    Parser(TaskList taskList, Storage storage) {
         this.taskList = taskList;
         this.ui = new Ui();
         this.storage = storage;

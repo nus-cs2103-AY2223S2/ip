@@ -67,7 +67,7 @@ public class Storage {
                         tasks.add(task);
                         break;
                     case "D":
-                        LocalDate temp = LocalDate.parse(curr[3], DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                        LocalDate temp = LocalDate.parse(curr[3], DateTimeFormatter.ofPattern("MMM dd yyyy"));
                         task = new Deadline(curr[2], temp);
                         if (Integer.parseInt(curr[1]) == 1) {
                             task.markAsDone();

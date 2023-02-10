@@ -84,8 +84,8 @@ public class Ui {
     public String addedTaskMessage(Task t, int size) {
 //        printLongLine();
         String s1 = ("\tGot it. I've added this task:");
-        String s2 = ("\t" + t);
-        String s3 = ("\tNow you have " + size + " tasks in the list.");
+        String s2 = ("\n\t" + t);
+        String s3 = ("\n\tNow you have " + size + " tasks in the list.");
 //        printLongLine();
         return s1 + s2 + s3;
     }
@@ -98,8 +98,8 @@ public class Ui {
     public String deletedTaskMessage(Task t, int size) {
 //        printLongLine();
         String s1 = ("\tNoted. I've removed this task:");
-        String s2 = ("\t" + t);
-        String s3 = ("\tNow you have " + size + " tasks in the list");
+        String s2 = ("\n\t" + t);
+        String s3 = ("\n\tNow you have " + size + " tasks in the list");
 //        printLongLine();
         return s1 + s2 + s3;
     }
