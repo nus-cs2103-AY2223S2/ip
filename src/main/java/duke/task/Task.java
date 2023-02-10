@@ -78,7 +78,7 @@ public class Task {
      * @param dateTime Date time of the task.
      * @return Warning message to be printed to user.
      */
-    public String urgentMessage(LocalDateTime dateTime) {
+    public String getUrgentMessage(LocalDateTime dateTime) {
         LocalDateTime currentDateTime = LocalDateTime.now();
         int diff = currentDateTime.compareTo(dateTime);
         boolean isTaskExpired = (diff > 0);

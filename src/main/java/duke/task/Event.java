@@ -53,7 +53,7 @@ public class Event extends Task {
     public String toString() {
         return String.format("[E][%c] %s (from: %s to: %s) %s", getStatusIcon(), description,
                 Ui.getStringDateTime(startDateTime), Ui.getStringDateTime(endDateTime),
-                super.urgentMessage(startDateTime));
+                super.getUrgentMessage(startDateTime));
     }
 
     private void setEventDateTimes(String description) throws DukeException {

@@ -1,15 +1,16 @@
 package duke.parser;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import java.time.LocalDateTime;
 import java.time.Month;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
-public class ParserTest {
+public class DateTimeParserTest {
     @Test
-    public void parseDateTime_validTestInput_success() {
+    public void parse_validTestInput_success() {
         assertEquals(LocalDateTime.of(2023, Month.JANUARY, 31, 12, 22, 0),
                 DateTimeParser.parse("2023-01-31 12:22"));
         assertEquals(LocalDateTime.of(2024, Month.JANUARY, 31, 12, 23, 0),
@@ -17,7 +18,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parseDateTime_invalidTestInput_failure() {
+    public void parse_invalidTestInput_failure() {
         assertNotEquals(LocalDateTime.of(2023, Month.JANUARY, 31, 12, 22, 30),
                 DateTimeParser.parse("2023-01-31 12:22"));
         assertNotEquals(LocalDateTime.of(2023, Month.MARCH, 31, 12, 22, 30),

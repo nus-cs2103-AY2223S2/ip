@@ -51,7 +51,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return String.format("[D][%c] %s (by: %s) %s", getStatusIcon(), description,
-                Ui.getStringDateTime(deadline), super.urgentMessage(deadline));
+                Ui.getStringDateTime(deadline), super.getUrgentMessage(deadline));
     }
 
     private void setDeadline(String description) throws DukeException {
