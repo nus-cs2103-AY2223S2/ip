@@ -36,5 +36,4 @@ public class MarkCommand extends Command {
             return ui.displayMsg("Invalid taskID entered!");
         }
     }
-
 }

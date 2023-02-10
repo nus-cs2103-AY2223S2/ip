@@ -35,5 +35,4 @@ public class UnmarkCommand extends Command {
             return ui.displayMsg("Invalid taskID entered!");
         }
     }
-
 }

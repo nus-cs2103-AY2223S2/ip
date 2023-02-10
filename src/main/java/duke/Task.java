@@ -39,7 +39,7 @@ public abstract class Task {
 
     /**
      * Prints out the description of the task
-     * @return
+     * @return formatted description of the task
      */
     @Override
     public String toString() {

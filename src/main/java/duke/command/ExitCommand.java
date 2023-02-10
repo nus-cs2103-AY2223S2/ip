@@ -18,5 +18,4 @@ public class ExitCommand extends Command {
         storage.saveData(tasks);
         return ui.displayGoodbyeMessage();
     }
-
 }

@@ -38,6 +38,4 @@ public class DeleteCommand extends Command {
             return ui.displayMsg("Invalid taskID entered!");
         }
     }
-
-
 }

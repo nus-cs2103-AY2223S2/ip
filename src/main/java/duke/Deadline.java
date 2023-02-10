@@ -14,11 +14,17 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.by.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm")) + ")";
+        String formattedByDate = this.by.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm"));
+        return "[D]" + super.toString() + " (by: " + formattedByDate + ")";
     }
 
     @Override
     public String formatForFile() {
-        return "D | " + (this.isDone ? 1 : 0) + " | " + description + " | " + this.by.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm")) + "\n";
+        String formattedByDate = this.by.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm"));
+        if (this.isDone) {
+            return "D | " + 1 + " | " + description + " | " + formattedByDate + "\n";
+        } else {
+            return "D | " + 0 + " | " + description + " | " + formattedByDate + "\n";
+        }
     }
 }

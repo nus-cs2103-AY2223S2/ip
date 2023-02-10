@@ -10,15 +10,6 @@ public abstract class Command {
      */
 
     /**
-     * Checks if status of Duke is to be terminated.
-     * @return true if an exit command is passed, false otherwise.
-     */
-
-    /**
-     * Sets Duke's termination status to true.
-     */
-
-    /**
      *
      * @param tasks a list of tasks.
      * @param ui Ui class to handle display messages.
@@ -27,5 +18,3 @@ public abstract class Command {
      */
     public abstract String initCommand(TaskList tasks, Ui ui, Storage storage);
 }
-
-

@@ -9,18 +9,6 @@ public class Ui {
      */
 
     /**
-     * Duke's own display logo.
-     */
-    public String displayLogo() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        return ("Hello from\n" + logo);
-    }
-
-    /**
      * Prints out all of Duke's tasks.
      * @param tasks list of tasks.
      */
@@ -86,7 +74,6 @@ public class Ui {
      */
     public String displayGoodbyeMessage() {
         return "Bye. Hope to see you again soon!";
-
     }
 
     /**

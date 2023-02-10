@@ -53,7 +53,6 @@ public class Storage {
     public void saveData(TaskList taskList) {
         try {
             FileWriter fileWriter = new FileWriter(filePath);
-
             for (int i = 0; i < taskList.size(); i++) {
                 Task t = taskList.getTask(i + 1);
                 fileWriter.write(t.formatForFile());
@@ -88,16 +87,13 @@ public class Storage {
                         task = new Event(data[2], data[3], data[4]);
                         break;
                 }
-
                 if (data[1].equals("1")) {
                     task.marked();
                 }
-
                 taskList.add(task);
             }
             sc.close();
         }
-
         return taskList;
     }
 }
