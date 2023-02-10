@@ -1,4 +1,4 @@
-package cbot.io;
+package cbot.command;
 
 /**
  * Signals that the user input was improper.

@@ -3,9 +3,9 @@ package cbot;
 import java.io.FileNotFoundException;
 import java.time.format.DateTimeParseException;
 
-import cbot.io.BadInputException;
+import cbot.command.BadInputException;
+import cbot.command.PoorInputException;
 import cbot.io.Parser;
-import cbot.io.PoorInputException;
 import cbot.io.Talker;
 import cbot.task.TaskList;
 import cbot.util.FileStuff;

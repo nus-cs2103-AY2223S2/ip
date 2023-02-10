@@ -2,6 +2,9 @@ package cbot.io;
 
 import java.time.format.DateTimeParseException;
 
+import cbot.command.BadInputException;
+import cbot.command.Command;
+import cbot.command.PoorInputException;
 import cbot.task.Task;
 import cbot.task.TaskList;
 

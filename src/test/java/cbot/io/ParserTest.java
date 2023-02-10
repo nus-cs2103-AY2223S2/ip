@@ -3,6 +3,7 @@ package cbot.io;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import cbot.command.PoorInputException;
 import org.junit.jupiter.api.Test;
 
 public class ParserTest {

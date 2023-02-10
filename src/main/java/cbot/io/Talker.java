@@ -3,6 +3,9 @@ package cbot.io;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
+import cbot.command.BadInputException;
+import cbot.command.PoorInputException;
+
 /**
  * Manages printing to and receiving from the user, mainly via the Command Line Interface.
  */
@@ -81,7 +84,7 @@ public class Talker {
      * @param str The String to print.
      * @return The indented input.
      */
-    static String say(String str) {
+    public static String say(String str) {
         return INDENT + str;
     }
 
@@ -91,7 +94,7 @@ public class Talker {
      * @param arr The list of strings to print.
      * @return An indented String list.
      */
-    static String printMany(ArrayList<String> arr) {
+    public static String printMany(ArrayList<String> arr) {
         return arr.stream()
                 .map(s -> BLANK + s)
                 .collect(Collectors.joining("\n"));
