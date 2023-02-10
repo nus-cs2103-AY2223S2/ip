@@ -2,6 +2,7 @@ package panav;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Objects;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -32,7 +33,7 @@ import panav.ui.Ui;
 /**
  * The class where Panav starts. It contains the main() and all functionality starts here.
  */
-public class Panav extends Application {
+public class Panav {
 
     private String filePath = "C:\\Users\\panav\\OneDrive\\Desktop\\CS2103T\\ip\\src\\main\\java\\data\\panav.txt";
     private Storage storage;
@@ -44,8 +45,7 @@ public class Panav extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/stick.png"));
-    private Image panav = new Image(this.getClass().getResourceAsStream("/images/panav.jpeg"));
+
     /**
      * Constructor to initialise the various classes in program.
      * @param filePath the path of the file to be read from.
@@ -65,6 +65,7 @@ public class Panav extends Application {
 
     public Panav() {}
 
+    /*
     @Override
     public void start(Stage stage) {
         //Requirements for Panav
@@ -140,7 +141,7 @@ public class Panav extends Application {
         if (isExit) {
             Platform.exit();
         }
-    }
+    } */
 
     /**
      * Iteration 1:
@@ -160,6 +161,7 @@ public class Panav extends Application {
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
+    /*
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
         Label panavText = new Label(getResponse(userInput.getText()));
@@ -168,16 +170,17 @@ public class Panav extends Application {
                 DialogBox.getPanavDialog(panavText, new ImageView(panav))
         );
         userInput.clear();
-    }
+    } */
 
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    private String getResponse(String input) {
-        //return "Duke heard: " + input;
+    public String getResponse(String input) {
         try {
+            //System.out.println(input);
             Command c = Parser.parse(input);
+
             String res = c.execute(tasks, ui, storage);
             if (c.toString().compareTo(ListCommand.COMMAND_WORD) != 0
                     || c.toString().compareTo(ExitCommand.COMMAND_WORD) != 0) {
@@ -189,8 +192,10 @@ public class Panav extends Application {
             return res;
         } catch (DukeException e) {
             return e.getMessage();
-        } catch (IOException | NullPointerException e) {
-            throw new RuntimeException();
+        } catch (IOException e) {
+            return "IO";
+        } catch (NullPointerException e) {
+            return "null";
         }
     }
 
