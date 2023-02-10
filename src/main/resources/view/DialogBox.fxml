@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: rgb(101, 137, 216); -fx-border-width: 0.5;" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+    <children>
+        <ImageView fx:id="image" fitHeight="24.0" fitWidth="105.0" pickOnBounds="true" preserveRatio="true" />
+        <Label fx:id="text" minHeight="24.0" minWidth="328.0" style="-fx-border-color: red; -fx-border-width: 0.5; -fx-border-style: hidden hidden hidden solid;" text="Label" wrapText="true">
+         <font>
+            <Font name="Consolas Bold" size="12.0" />
+         </font>
+         <HBox.margin>
+            <Insets />
+         </HBox.margin></Label>
+    </children>
+</fx:root>
