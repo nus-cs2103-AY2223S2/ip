@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 import org.junit.jupiter.api.Test;
 
@@ -65,5 +66,153 @@ public class DateUtilsTest {
         } catch (SyntaxException syntaxEx) {
             assertEquals("I do not understand when this is [0000-00-00 0000]", syntaxEx.getMessage());
         }
+    }
+
+
+    @Test
+    public void isIntersectingNormal_sameTime_true() {
+        LocalDateTime s1 = LocalDateTime.of(2023, 3, 5, 4, 55);
+        LocalDateTime e1 = s1.plus(1, ChronoUnit.HOURS);
+        LocalDateTime s2 = s1;
+        LocalDateTime e2 = e1;
+        assertEquals(true, DateUtils.isIntersecting(s1, e1, s2, e2));
+    }
+
+
+    @Test
+    public void isIntersectingNormal_portionBack_true() {
+        LocalDateTime s1 = LocalDateTime.of(2023, 3, 5, 4, 55);
+        LocalDateTime e1 = s1.plus(1, ChronoUnit.HOURS);
+        LocalDateTime s2 = s1.plus(30, ChronoUnit.MINUTES);
+        LocalDateTime e2 = e1.plus(30, ChronoUnit.MINUTES);
+        assertEquals(true, DateUtils.isIntersecting(s1, e1, s2, e2));
+    }
+
+
+    @Test
+    public void isIntersectingNormal_portionFront_true() {
+        LocalDateTime s1 = LocalDateTime.of(2023, 3, 5, 4, 55);
+        LocalDateTime e1 = s1.plus(1, ChronoUnit.HOURS);
+        LocalDateTime s2 = s1.minus(30, ChronoUnit.MINUTES);
+        LocalDateTime e2 = e1.minus(30, ChronoUnit.MINUTES);
+        assertEquals(true, DateUtils.isIntersecting(s1, e1, s2, e2));
+    }
+
+
+    @Test
+    public void isIntersectingNormal_cover_true() {
+        LocalDateTime s1 = LocalDateTime.of(2023, 3, 5, 4, 55);
+        LocalDateTime e1 = s1.plus(1, ChronoUnit.HOURS);
+        LocalDateTime s2 = s1.minus(30, ChronoUnit.MINUTES);
+        LocalDateTime e2 = e1.plus(30, ChronoUnit.MINUTES);
+        assertEquals(true, DateUtils.isIntersecting(s1, e1, s2, e2));
+    }
+
+
+    @Test
+    void isIntersectingNormal_separate_false() {
+        LocalDateTime s1 = LocalDateTime.of(2023, 3, 5, 4, 55);
+        LocalDateTime e1 = s1.plus(1, ChronoUnit.HOURS);
+        LocalDateTime s2 = s1.plus(120, ChronoUnit.MINUTES);
+        LocalDateTime e2 = e1.plus(120, ChronoUnit.MINUTES);
+        assertEquals(false, DateUtils.isIntersecting(s1, e1, s2, e2));
+    }
+
+
+    @Test
+    void isIntersectingNormal_backToBack_false() {
+        LocalDateTime s1 = LocalDateTime.of(2023, 3, 5, 4, 55);
+        LocalDateTime e1 = s1.plus(1, ChronoUnit.HOURS);
+        LocalDateTime s2 = e1;
+        LocalDateTime e2 = e1.plus(120, ChronoUnit.MINUTES);
+        assertEquals(false, DateUtils.isIntersecting(s1, e1, s2, e2));
+    }
+
+
+    @Test
+    public void isIntersectingThreshold_sameTime_true() {
+        double threshold = 30;
+        LocalDateTime s1 = LocalDateTime.of(2023, 3, 5, 4, 55);
+        LocalDateTime e1 = s1.plus(1, ChronoUnit.HOURS);
+        LocalDateTime s2 = s1;
+        LocalDateTime e2 = e1;
+        assertEquals(true, DateUtils.isIntersecting(s1, e1, s2, e2, threshold));
+    }
+
+
+    @Test
+    public void isIntersectingThreshold_portionBack_true() {
+        double threshold = 30;
+        LocalDateTime s1 = LocalDateTime.of(2023, 3, 5, 4, 55);
+        LocalDateTime e1 = s1.plus(1, ChronoUnit.HOURS);
+        LocalDateTime s2 = s1.plus(30, ChronoUnit.MINUTES);
+        LocalDateTime e2 = e1.plus(30, ChronoUnit.MINUTES);
+        assertEquals(true, DateUtils.isIntersecting(s1, e1, s2, e2, threshold));
+    }
+
+
+    @Test
+    public void isIntersectingThreshold_portionFront_true() {
+        double threshold = 30;
+        LocalDateTime s1 = LocalDateTime.of(2023, 3, 5, 4, 55);
+        LocalDateTime e1 = s1.plus(1, ChronoUnit.HOURS);
+        LocalDateTime s2 = s1.minus(30, ChronoUnit.MINUTES);
+        LocalDateTime e2 = e1.minus(30, ChronoUnit.MINUTES);
+        assertEquals(true, DateUtils.isIntersecting(s1, e1, s2, e2, threshold));
+    }
+
+
+    @Test
+    public void isIntersectingThreshold_cover_true() {
+        double threshold = 30;
+        LocalDateTime s1 = LocalDateTime.of(2023, 3, 5, 4, 55);
+        LocalDateTime e1 = s1.plus(1, ChronoUnit.HOURS);
+        LocalDateTime s2 = s1.minus(30, ChronoUnit.MINUTES);
+        LocalDateTime e2 = e1.plus(30, ChronoUnit.MINUTES);
+        assertEquals(true, DateUtils.isIntersecting(s1, e1, s2, e2, threshold));
+    }
+
+
+    @Test
+    public void isIntersectingThreshold_separateThreshold_true() {
+        double threshold = 30;
+        LocalDateTime s1 = LocalDateTime.of(2023, 3, 5, 4, 55);
+        LocalDateTime e1 = s1.plus(1, ChronoUnit.HOURS);
+        LocalDateTime s2 = e1.plus(5, ChronoUnit.MINUTES);
+        LocalDateTime e2 = e1.plus(10, ChronoUnit.MINUTES);
+        assertEquals(true, DateUtils.isIntersecting(s1, e1, s2, e2, threshold));
+    }
+
+
+    @Test
+    void isIntersectingThreshold_backToBackThreshold_true() {
+        double threshold = 30;
+        LocalDateTime s1 = LocalDateTime.of(2023, 3, 5, 4, 55);
+        LocalDateTime e1 = s1.plus(1, ChronoUnit.HOURS);
+        LocalDateTime s2 = e1;
+        LocalDateTime e2 = e1.plus(10, ChronoUnit.MINUTES);
+        assertEquals(true, DateUtils.isIntersecting(s1, e1, s2, e2, threshold));
+    }
+
+
+    @Test
+    void isIntersectingThreshold_separate_false() {
+        double threshold = 30;
+        LocalDateTime s1 = LocalDateTime.of(2023, 3, 5, 4, 55);
+        LocalDateTime e1 = s1.plus(1, ChronoUnit.HOURS);
+        LocalDateTime s2 = s1.plus(120, ChronoUnit.MINUTES);
+        LocalDateTime e2 = e1.plus(120, ChronoUnit.MINUTES);
+        assertEquals(false, DateUtils.isIntersecting(s1, e1, s2, e2, threshold));
+    }
+
+
+    @Test
+    void isIntersectingThreshold_backToBack_false() {
+        double threshold = 30;
+        LocalDateTime s1 = LocalDateTime.of(2023, 3, 5, 4, 55);
+        LocalDateTime e1 = s1.plus(1, ChronoUnit.HOURS);
+        LocalDateTime s2 = e1;
+        LocalDateTime e2 = e1.plus(120, ChronoUnit.MINUTES);
+        assertEquals(false, DateUtils.isIntersecting(s1, e1, s2, e2, threshold));
     }
 }
