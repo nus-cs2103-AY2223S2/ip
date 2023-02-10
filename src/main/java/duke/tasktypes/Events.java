@@ -11,6 +11,7 @@ public class Events extends Task {
 
     /**
      * Constructor to initialize an event task.
+     *
      * @param taskName String containing the task's name and due date.
      * @throws DukeExceptions if there is no start & end period being input.
      */
@@ -27,6 +28,7 @@ public class Events extends Task {
 
     /**
      * Function to print String representation of Event task.
+     *
      * @return String representation of Event task.
      */
     @Override

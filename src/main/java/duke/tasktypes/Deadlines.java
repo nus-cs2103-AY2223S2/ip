@@ -18,7 +18,8 @@ public class Deadlines extends Task {
 
 
     /**
-     * Constructor to initialize a Deadlines task/
+     * Constructor to initialize a Deadlines task
+     *
      * @param taskName String containing the task's name and due date.
      * @throws DukeExceptions if the task name is empty.
      * @throws DateTimeParseException if the due date is an invalid format.
@@ -45,6 +46,7 @@ public class Deadlines extends Task {
 
     /**
      * Function to format the time of the due date if it is a valid time but not in correct format.
+     *
      * @param toFormat String representation of the time to be formatted.
      */
     public void formatTimeIfValid(String toFormat) {
@@ -85,6 +87,7 @@ public class Deadlines extends Task {
 
     /**
      * Function to check the validity of the due date when first input by the user.
+     *
      * @param toCheck String representation of the date input by the user.
      * @return boolean indicating if the date input by the user is valid.
      * @throws DateTimeParseException if the date input is invalid.
@@ -101,6 +104,7 @@ public class Deadlines extends Task {
 
     /**
      * Function to check the validity of the due date when reading from the stored list.
+     *
      * @param toCheck String representation of the date when read from stored list.
      * @return boolean indicating if the date read from the stored list is valid.
      * @throws DateTimeParseException if the date read is invalid.
@@ -118,6 +122,7 @@ public class Deadlines extends Task {
 
     /**
      * Function to check if the time input by the user is valid
+     *
      * @param toCheck String representation of the time.
      * @return boolean indicating if the time is valid.
      * @throws DateTimeParseException if the time is invalid.
@@ -134,6 +139,7 @@ public class Deadlines extends Task {
 
     /**
      * Function to format the deadline task's due date if it is a valid input.
+     *
      * @return String representation of the due date if valid, else string representation of prompting valid input
      *      is returned.
      */
@@ -155,6 +161,7 @@ public class Deadlines extends Task {
 
     /**
      * Function to check, and accordingly print String representation of deadline.
+     *
      * @return String representation of deadline task.
      */
     @Override

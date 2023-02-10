@@ -8,6 +8,7 @@ public class DukeExceptions extends Exception {
 
     /**
      * Constructor to initialize an instance of DukeException
+     *
      * @param commandType String which indicates type of DukeException
      */
     public DukeExceptions(String commandType) {
@@ -16,6 +17,7 @@ public class DukeExceptions extends Exception {
 
     /**
      * Function to return String representation based on stored String.
+     *
      * @return String representation, which changes depending on the stored String for the object.
      */
     @Override

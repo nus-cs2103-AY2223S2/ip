@@ -9,6 +9,7 @@ public class Task {
 
     /**
      * Constructor to initialize a Task.
+     *
      * @param taskName String which will be the name of the task.
      */
     Task(String taskName) {
