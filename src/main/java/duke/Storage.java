@@ -33,37 +33,42 @@ public class Storage {
     public ArrayList<Task> initialize() throws FileNotFoundException {
         File f = new File(path);
         ArrayList<Task> og = new ArrayList<>();
-        if (f.exists()) {
-            Scanner sc = new Scanner(f);
-            while (sc.hasNext()) {
-                String str = sc.nextLine();
-                String[] keywords = splitString(str);
-                String type = keywords[0];
-                String doneStatus = keywords[1];
-                boolean isDone = doneStatus == "X" ? true : false;
-                Task toInsert = null;
-                switch (type) {
-                case "T":
-                    toInsert = new ToDo(keywords[2], isDone);
-                    break;
-                case "D":
-                    try {
-                        toInsert = new Deadline(keywords[2], Parser.getDateMMM(keywords[3].trim()), isDone);
-                    } catch (InvalidDateFormatException err) {
-                        System.out.println(err.getMessage());
-                    }
-                    break;
-                case "E":
-                    String[] duration = keywords[3].split(" - ");
-                    toInsert = new Event(keywords[2], duration[0], duration[1], isDone);
-                    break;
-                }
-                og.add(toInsert);
-            }
-            sc.close();
+        if (!f.exists()) {
+            return og;
         }
+
+        Scanner sc = new Scanner(f);
+        while (sc.hasNext()) {
+            String str = sc.nextLine();
+            String[] keywords = splitString(str);
+            String type = keywords[0];
+            String doneStatus = keywords[1];
+            boolean isDone = doneStatus == "X" ? true : false;
+            Task toInsert = null;
+            switch (type) {
+            case "T":
+                toInsert = new ToDo(keywords[2], isDone);
+                break;
+            case "D":
+                try {
+                    toInsert = new Deadline(keywords[2], Parser.getDateMMM(keywords[3].trim()), isDone);
+                } catch (InvalidDateFormatException err) {
+                    System.out.println(err.getMessage());
+                }
+                break;
+            case "E":
+                String[] duration = keywords[3].split(" - ");
+                toInsert = new Event(keywords[2], duration[0], duration[1], isDone);
+                break;
+            }
+            og.add(toInsert);
+        }
+        sc.close();
+
         return og;
     }
+
+
 
     /**
      * Separate the string by |

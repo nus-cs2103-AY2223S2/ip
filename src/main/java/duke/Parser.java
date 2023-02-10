@@ -106,10 +106,11 @@ public class Parser {
             if (!arr[0].startsWith("from ")) {
                 throw new InvalidSyntaxException();
             }
-            arr[0] = arr[0].substring(5);
             if (!arr[1].startsWith("to ")) {
                 throw new InvalidSyntaxException();
             }
+
+            arr[0] = arr[0].substring(5);
             arr[1] = arr[1].substring(3);
             if (arr[0].isBlank() || arr[1].isBlank()) {
                 throw new MissingTimeException();
