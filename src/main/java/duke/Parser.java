@@ -1,5 +1,4 @@
 package duke;
-import java.util.ArrayList;
 
 public class Parser {
     private static final Ui ui = new Ui();

@@ -12,7 +12,7 @@ public class Storage {
     /**
      * construct a Storage object that stores data into a file.
      * @param filePath file path leading to data directory.
-     * @throws DukeException
+     * @throws DukeException if file not found.
      */
     public Storage(String filePath) throws DukeException{
         f = new File(filePath);
@@ -27,8 +27,8 @@ public class Storage {
      * loads the tasks from the file into the CLI.
      *
      * @return ArrayList of tasks that was stored in the data directory.
-     * @throws DukeException
-     * @throws FileNotFoundException
+     * @throws DukeException if task description is not found.
+     * @throws FileNotFoundException if file is not found.
      */
     public static ArrayList<Task> load() throws DukeException, FileNotFoundException {
         Scanner sc = new Scanner(f);
@@ -38,12 +38,16 @@ public class Storage {
             String type = input[0];
             String mark = input[1];
             Task x = null;
-            if (type.equals("T")) {
-                x = new ToDo(input[2]);
-            } else if (type.equals("D")) {
-                x = new Deadline(input[2], input[3]);
-            } else if (type.equals("E")) {
-                x = new Event(input[2], input[3], input[4]);
+            switch (type) {
+                case "T":
+                    x = new ToDo(input[2]);
+                    break;
+                case "D":
+                    x = new Deadline(input[2], input[3]);
+                    break;
+                case "E":
+                    x = new Event(input[2], input[3], input[4]);
+                    break;
             }
             if (mark.equals("X")) {
                 x.markAsDone();

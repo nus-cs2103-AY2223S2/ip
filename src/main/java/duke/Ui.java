@@ -5,15 +5,14 @@ public class Ui {
     private static final String WELCOME_MESSAGE = "Hello Boss.\n" + "How may i help you?\n";
     private static final String LINE = "__________________________________________\n";
 
-    private Scanner sc;
+    private final Scanner SCANNER;
 
     public Ui() {
-        this.sc = new Scanner(System.in);
+        this.SCANNER = new Scanner(System.in);
     }
 
     public String readCommand() {
-        String input = sc.nextLine();
-        return input;
+        return SCANNER.nextLine();
     }
 
     public void showWelcome() {
