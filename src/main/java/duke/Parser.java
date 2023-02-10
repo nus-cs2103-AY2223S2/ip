@@ -15,8 +15,9 @@ import duke.commands.UnmarkCommand;
  */
 public class Parser {
     public static final String INVALID_COMMAND_EXCEPTION_MESSAGE = "Invalid Command received.";
-    static final String EXIT_COMMAND = "bye";
 
+    public static final Command EXIT_COMMAND = null;
+    static final String EXIT_COMMAND_WORD = "bye";
     private String getCommandWord(String input) {
         int firstWhitespaceIndex = input.indexOf(" ");
         if (firstWhitespaceIndex == -1) {
@@ -49,7 +50,7 @@ public class Parser {
         case MarkCommand.COMMAND_WORD:
             command = new MarkCommand(input);
             break;
-        case UnmarkCommand.COMMAND_FORMAT:
+        case UnmarkCommand.COMMAND_WORD:
             command = new UnmarkCommand(input);
             break;
         case DeleteCommand.COMMAND_WORD:
@@ -61,8 +62,8 @@ public class Parser {
         case SearchCommand.COMMAND_WORD:
             command = new SearchCommand(input);
             break;
-        case EXIT_COMMAND:
-            command = null;
+        case EXIT_COMMAND_WORD:
+            command = EXIT_COMMAND;
             break;
         default:
             throw new DukeException(INVALID_COMMAND_EXCEPTION_MESSAGE);

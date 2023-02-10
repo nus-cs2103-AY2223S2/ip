@@ -28,6 +28,10 @@ public class EventTask extends Task {
      */
     EventTask(String name, LocalDate startDate, LocalDate endDate) throws DukeException {
         super(name);
+
+        assert startDate != null;
+        assert endDate != null;
+
         this.startDate = startDate;
         this.endDate = endDate;
     }

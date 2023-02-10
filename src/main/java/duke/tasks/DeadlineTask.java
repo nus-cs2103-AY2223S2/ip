@@ -14,6 +14,7 @@ public class DeadlineTask extends Task {
     private static final String INDICATOR = "[Deadline]";
     private static final String INVALID_DATE_EXCEPTION = "Incompatible date format given for Deadline";
 
+    private static final String MONTH_DATE_YEAR_FORMAT = "MMM dd yyyy";
     private final LocalDate deadline;
 
     /**
@@ -24,6 +25,7 @@ public class DeadlineTask extends Task {
      */
     DeadlineTask(String name, LocalDate deadline) throws DukeException {
         super(name);
+        assert deadline != null;
         this.deadline = deadline;
     }
 
@@ -51,7 +53,7 @@ public class DeadlineTask extends Task {
      * @return Formatted deadline date string
      */
     private static String formattedDeadline(LocalDate deadline) {
-        String formattedDate = deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        String formattedDate = deadline.format(DateTimeFormatter.ofPattern(MONTH_DATE_YEAR_FORMAT));
         return String.format(Task.EXTRAS_FORMAT_TEMPLATE, DEADLINE_PREFIX_REPLACEMENT + formattedDate);
     }
 
