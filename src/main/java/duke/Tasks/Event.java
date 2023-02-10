@@ -10,10 +10,10 @@ public class Event extends Task {
 
     /**
      * Event constructor
-     * @param description
-     * @param from
-     * @param to
-     * @param isInFile
+     * @param description task name
+     * @param from starting time for the task
+     * @param to deadline for the task
+     * @param isInFile check whether is in the saving file
      */
     public Event(String description, String from, String to, boolean isInFile) {
         super(description);

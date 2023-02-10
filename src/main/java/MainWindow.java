@@ -1,14 +1,12 @@
 import duke.Duke;
 import duke.Ui;
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 
-import java.awt.Color;
 import java.io.IOException;
 
 /**
@@ -32,17 +30,13 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        dialogContainer.setPadding(new Insets(30, 10, 0,10));
-        dialogContainer.setSpacing(10.0);
-        scrollPane.setFitToWidth(true);
-
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(Ui.showWelcome() + Ui.showUserGuide(), dukeImage)
+        );
     }
 
     public void setDuke(Duke d) throws IOException {
         duke = d;
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(Ui.showWelcome() + Ui.showLogo(), userImage)
-        );
     }
 
     /**
