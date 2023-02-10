@@ -10,15 +10,6 @@ import twofive.storage.Storage;
  */
 public abstract class Command {
     /**
-     * Returns boolean stating whether the command is a ByeCommand.
-     *
-     * @return true if command is a ByeCommand.
-     */
-    public boolean isExit() {
-        return false;
-    }
-
-    /**
      * Executes actions given a list of tasks, a UI object and a Storage object.
      *
      * @param tasks List of all current tasks.

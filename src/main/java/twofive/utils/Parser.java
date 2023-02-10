@@ -93,72 +93,80 @@ public class Parser {
         case "todo":
             return new ToDoCommand(validateDescription(command, commandWord));
         case "deadline":
-            String descriptionSplit = validateDescription(command, commandWord);
-            if (!descriptionSplit.contains(("/by"))) {
-                // If /by argument not used
-                throw new MissingArgumentException("/by");
-            } else {
-                String[] deadlineSplit = descriptionSplit.split("/by");
-                if (deadlineSplit.length <= 1 || deadlineSplit[1].trim().equals("")) {
-                    // If deadline is not given
-                    throw new EmptyDeadlineException();
-                } else {
-                    String taskDescription = deadlineSplit[0].trim();
-                    String deadlineString = deadlineSplit[1].trim();
-                    return new DeadlineCommand(taskDescription, deadlineString);
-                }
-            }
+            return parseDeadlineCommand(validateDescription(command, commandWord));
         case "event":
-            descriptionSplit = validateDescription(command, commandWord);
-            if (!descriptionSplit.contains(("/from"))) {
-                // If /from argument not used
-                throw new MissingArgumentException("/from");
-            } else if (!descriptionSplit.contains(("/to"))) {
-                // If /to argument not used
-                throw new MissingArgumentException("/to");
-            } else {
-                String[] startTimeSplit = descriptionSplit.split("/from");
-                if (startTimeSplit.length <= 1 || startTimeSplit[1].trim().equals("")) {
-                    // If start time is not given
-                    throw new EmptyStartTimeException();
-                } else {
-                    String[] endTimeSplit = startTimeSplit[1].split("/to");
-                    if (endTimeSplit[0].trim().equals("")) {
-                        throw new EmptyStartTimeException();
-                    } else if (endTimeSplit.length <= 1 || endTimeSplit[1].trim().equals("")) {
-                        // If end time is not given
-                        throw new EmptyEndTimeException();
-                    } else {
-                        String taskDescription = startTimeSplit[0].trim();
-                        String startTimeString = endTimeSplit[0].trim();
-                        String endTimeString = endTimeSplit[1].trim();
-
-                        return new EventCommand(taskDescription, startTimeString, endTimeString);
-                    }
-                }
-            }
+            return parseEventCommand(validateDescription(command, commandWord));
         case "due":
-            String[] dueSplit = command.split(commandWord);
-            if (dueSplit.length <= 1 || dueSplit[1].trim().equals("")) {
-                // If task description is empty
-                throw new EmptyDateException();
-            } else {
-                String dueDateString = dueSplit[1].trim();
-                return new DueDateCommand(dueDateString);
-            }
+            return parseDueDateCommand(command, commandWord);
         case "find":
-            String[] keywordSplit = command.split(commandWord);
-            if (keywordSplit.length <= 1 || keywordSplit[1].trim().equals("")) {
-                // if no keyword provided
-                throw new EmptyKeywordException();
-            } else {
-                String keyword = keywordSplit[1].trim();
-                return new FindCommand(keyword);
-            }
+            return parseFindCommand(command, commandWord);
         case "bye":
             return new ByeCommand();
         default:
             throw new InvalidCommandException();
         }
+    }
+
+    private static DeadlineCommand parseDeadlineCommand(String descriptionSplit)
+            throws MissingArgumentException, EmptyDeadlineException {
+        if (!descriptionSplit.contains(("/by"))) {
+            // If /by argument not used
+            throw new MissingArgumentException("/by");
+        }
+        String[] deadlineSplit = descriptionSplit.split("/by");
+        if (deadlineSplit.length <= 1 || deadlineSplit[1].trim().equals("")) {
+            // If deadline is not given
+            throw new EmptyDeadlineException();
+        }
+        String taskDescription = deadlineSplit[0].trim();
+        String deadlineString = deadlineSplit[1].trim();
+        return new DeadlineCommand(taskDescription, deadlineString);
+    }
+
+    private static EventCommand parseEventCommand(String descriptionSplit)
+            throws MissingArgumentException, EmptyStartTimeException, EmptyEndTimeException {
+        if (!descriptionSplit.contains(("/from"))) {
+            // If /from argument not used
+            throw new MissingArgumentException("/from");
+        } else if (!descriptionSplit.contains(("/to"))) {
+            // If /to argument not used
+            throw new MissingArgumentException("/to");
+        }
+        String[] startTimeSplit = descriptionSplit.split("/from");
+        if (startTimeSplit.length <= 1 || startTimeSplit[1].trim().equals("")) {
+            // If start time is not given
+            throw new EmptyStartTimeException();
+        }
+        String[] endTimeSplit = startTimeSplit[1].split("/to");
+        if (endTimeSplit[0].trim().equals("")) {
+            throw new EmptyStartTimeException();
+        } else if (endTimeSplit.length <= 1 || endTimeSplit[1].trim().equals("")) {
+            // If end time is not given
+            throw new EmptyEndTimeException();
+        }
+        String taskDescription = startTimeSplit[0].trim();
+        String startTimeString = endTimeSplit[0].trim();
+        String endTimeString = endTimeSplit[1].trim();
+        return new EventCommand(taskDescription, startTimeString, endTimeString);
+    }
+
+    private static DueDateCommand parseDueDateCommand(String command, String commandWord) throws EmptyDateException {
+        String[] dueSplit = command.split(commandWord);
+        if (dueSplit.length <= 1 || dueSplit[1].trim().equals("")) {
+            // If task description is empty
+            throw new EmptyDateException();
+        }
+        String dueDateString = dueSplit[1].trim();
+        return new DueDateCommand(dueDateString);
+    }
+
+    private static FindCommand parseFindCommand(String command, String commandWord) throws EmptyKeywordException {
+        String[] keywordSplit = command.split(commandWord);
+        if (keywordSplit.length <= 1 || keywordSplit[1].trim().equals("")) {
+            // if no keyword provided
+            throw new EmptyKeywordException();
+        }
+        String keyword = keywordSplit[1].trim();
+        return new FindCommand(keyword);
     }
 }

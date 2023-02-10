@@ -29,9 +29,4 @@ public class ByeCommand extends Command {
         }
         return commandResult;
     }
-
-    @Override
-    public boolean isExit() {
-        return true;
-    }
 }

@@ -32,16 +32,15 @@ public class MarkCommand extends Command {
         String commandResult = "";
         if (this.taskNum < 0 || this.taskNum >= tasks.getTasksNum()) {
             throw new InvalidTaskException();
-        } else {
-            Task currentTask = tasks.setTaskAsDone(taskNum);
-            try {
-                storage.save(tasks);
-                TaskContainer.setTasks(tasks.getTasks());
-                commandResult = "Nice! Congrats for completing this task:\n " + currentTask;
-            } catch (IOException e) {
-                commandResult = e.getMessage();
-            }
-            return commandResult;
         }
+        Task currentTask = tasks.setTaskAsDone(taskNum);
+        try {
+            storage.save(tasks);
+            TaskContainer.setTasks(tasks.getTasks());
+            commandResult = "Nice! Congrats for completing this task:\n " + currentTask;
+        } catch (IOException e) {
+            commandResult = e.getMessage();
+        }
+        return commandResult;
     }
 }

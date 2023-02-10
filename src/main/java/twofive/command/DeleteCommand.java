@@ -30,16 +30,15 @@ public class DeleteCommand extends Command {
         String commandResult = "";
         if (taskNum < 0 || taskNum >= tasks.getTasksNum()) {
             throw new InvalidTaskException();
-        } else {
-            Task currentTask = tasks.deleteTask(taskNum);
-            try {
-                storage.save(tasks);
-                TaskContainer.setTasks(tasks.getTasks());
-                commandResult = "Noted. I've removed this task:\n " + currentTask + "\n"
-                        + "Now you have " + tasks.getTasksNum() + " tasks in the list";
-            } catch (IOException e) {
-                commandResult = e.getMessage();
-            }
+        }
+        Task currentTask = tasks.deleteTask(taskNum);
+        try {
+            storage.save(tasks);
+            TaskContainer.setTasks(tasks.getTasks());
+            commandResult = "Noted. I've removed this task:\n " + currentTask + "\n"
+                    + "Now you have " + tasks.getTasksNum() + " tasks in the list";
+        } catch (IOException e) {
+            commandResult = e.getMessage();
         }
         return commandResult;
     }
