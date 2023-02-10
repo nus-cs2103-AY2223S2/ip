@@ -16,6 +16,7 @@ enum Action {
     List,
     Mark,
     Todo,
+    Undo,
     Unmark,
 }
 
@@ -72,6 +73,10 @@ public class Duke {
 
                 case Bye:
                     ui.says(ui.bye());
+                    break;
+
+                case Undo:
+                    ui.says(ui.undo(listOfAction));
                     break;
 
                 case List:
@@ -132,6 +137,9 @@ public class Duke {
 
             case Bye:
                 return (ui.bye());
+
+            case Undo:
+                return ui.undo(listOfAction);
 
             case List:
                 return (ui.list(listOfAction));

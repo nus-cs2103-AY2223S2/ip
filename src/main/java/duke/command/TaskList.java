@@ -1,6 +1,7 @@
 package duke.command;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 import duke.exception.InvalidIndexException;
 import duke.exception.MissingContentException;
@@ -29,7 +30,7 @@ public class TaskList {
      * @return the tasklist in array
      * @throws IOException if array does not exist
      */
-    public String[] readTaskList() throws IOException {
+    public String[] readTaskList() {
         try {
             try {
                 return this.arr;
@@ -40,6 +41,10 @@ public class TaskList {
             System.out.println(e.getMessage());
         }
         return this.arr;
+    }
+
+    public void overwrite(TaskList newTaskList) {
+        this.arr = newTaskList.readTaskList();
     }
 
     /**
@@ -92,9 +97,11 @@ public class TaskList {
         try {
             try {
                 if (arr[num] != null) {
+                    Parser.updateLastTaskList(new TaskList(Arrays.copyOf(arr, 100)));
                     String original = arr[num];
                     arr[num] = new Task(String.valueOf(original.charAt(1)),
                             original.substring(7), true).toString();
+                    Parser.updateLastCommandDetail(arr[num]);
                     return ("OK, I've marked this task as done:" + "\n" + arr[num]);
                 }
             } catch (IndexOutOfBoundsException e) {
@@ -118,9 +125,11 @@ public class TaskList {
         try {
             try {
                 String original = arr[num1];
+                Parser.updateLastTaskList(new TaskList(Arrays.copyOf(arr, 100)));
                 Task newTask = new Task(String.valueOf(original.charAt(1)),
                         original.substring(7), false);
                 arr[num1] = newTask.toString();
+                Parser.updateLastCommandDetail(arr[num1]);
                 return ("OK, I've marked this task as not done yet:" + "\n" + arr[num1]);
             } catch (IndexOutOfBoundsException e) {
                 throw new InvalidIndexException();
@@ -159,7 +168,8 @@ public class TaskList {
                     for (int k = 0; k < 100; k++) {
                         originalList[k] = arr[k];
                     }
-
+                    Parser.updateLastTaskList(new TaskList(originalList));
+                    Parser.updateLastCommandDetail(original);
                     arr[trace] = arr[trace + 1];
                     trace++;
 
@@ -167,6 +177,7 @@ public class TaskList {
                         arr[trace] = originalList[trace + 1];
                         trace++;
                     }
+
                     return ("Noted. I've removed this task:" + "\n" + original + "\n"
                             + String.format("Now you have %d "
                             + "tasks in the list", this.getValidLen()));
@@ -190,7 +201,9 @@ public class TaskList {
      */
     public String add(Task task) {
         int len = this.getValidLen();
+        Parser.updateLastTaskList(new TaskList(Arrays.copyOf(arr, 100)));
         arr[len] = task.toString();
+        Parser.updateLastCommandDetail(task.toString());
         return ("Got it. I've added this task:" + "\n" + task.toString()
                 + "\n"
                 + String.format("Now you have %d "

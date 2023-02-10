@@ -92,6 +92,7 @@ public class Ui {
     public String findWordIntro(TaskList taskList, String[] arr, boolean containsKeyword) {
         if (arr.length >= 1) {
             if (containsKeyword) {
+                Parser.updateLastCommand("find");
                 return (taskList.findWord(arr[1]));
             } else {
                 return ("Sorry boss! No task found!");
@@ -109,7 +110,12 @@ public class Ui {
         if (taskList.isEmpty()) {
             return ("WOOF! You do not have any tasks in your task list!");
         }
+        Parser.updateLastCommand("list");
         return (taskList.list());
+    }
+
+    public String undo(TaskList tasklist) {
+        return Parser.undo(tasklist);
     }
 
     /**
@@ -141,9 +147,12 @@ public class Ui {
      * @return new updated task list
      */
     public String mark(TaskList listOfAction, String[] commands) {
+        String reply = "";
         try {
             int index = Parser.getTaskIndex(listOfAction, commands);
-            return (listOfAction.mark(index - 1));
+            reply = (listOfAction.mark(index - 1));
+            Parser.updateLastCommand(String.format("mark %d", index - 1));
+            return reply;
         } catch (MissingContentException | InvalidIndexException | IOException e) {
             return (e.getMessage());
         }
@@ -157,9 +166,12 @@ public class Ui {
      * @return new updated task list
      */
     public String unmark(TaskList listOfAction, String[] commands) {
+        String reply = "";
         try {
             int index = Parser.getTaskIndex(listOfAction, commands) - 1;
-            return (listOfAction.unmark(index));
+            reply = (listOfAction.unmark(index));
+            Parser.updateLastCommand(String.format("unmark %d", index - 1));
+            return reply;
         } catch (MissingContentException | InvalidIndexException | IOException e) {
             return (e.getMessage());
         }
@@ -172,10 +184,13 @@ public class Ui {
      * @return new updated task list
      */
     public String delete(TaskList listOfAction, String[] command) {
+        String reply = "";
         try {
             int index = Parser.getTaskIndex(listOfAction, command) - 1;
             try {
-                return (listOfAction.delete(index));
+                reply = (listOfAction.delete(index));
+                Parser.updateLastCommand(String.format("delete %d", index - 1));
+                return reply;
             } catch (IOException e) {
                 return (new InvalidIndexException().getMessage());
             }
@@ -201,6 +216,7 @@ public class Ui {
             return (new MissingContentException().getMessage());
         }
         Todo newTask = new Todo(command[0], remaining, false);
+        Parser.updateLastCommand("todo");
         return (listOfAction.add(newTask));
     }
 
@@ -214,6 +230,7 @@ public class Ui {
         try {
             String detail = new Parser().deadlineDetail(command);
             String remaining = new Parser().getDeadlineFull(command);
+            Parser.updateLastCommand("deadline");
             Deadline newTaskDeadline = new Deadline(command[0], detail, remaining);
             return (listOfAction.add(newTaskDeadline));
         } catch (MissingContentException | InvalidDeadlineDateException e) {
@@ -240,6 +257,7 @@ public class Ui {
                         .getEventTime(command, startIndex, endIndex))[0];
                 String end = (new Parser()
                         .getEventTime(command, startIndex, endIndex))[1];
+                Parser.updateLastCommand("event");
                 System.out.println("Got it. I've added this task:");
                 return (listOfAction.add(new Event("event",
                         detail, start, end)));

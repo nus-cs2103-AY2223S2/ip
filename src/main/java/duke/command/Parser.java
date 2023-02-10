@@ -11,6 +11,56 @@ public class Parser {
     static final String inSecond = "00";
     static final int secondToEndIndex = 2;
     static final int minSize = 0;
+    static String lastCommand = "";
+    static String lastCommandDetail = "";
+    static TaskList lastTaskList = new TaskList();
+
+    /**
+     * Update last command
+     * @param newCommand
+     */
+    public static void updateLastCommand(String newCommand) {
+        lastCommand = newCommand;
+    }
+
+    public static void updateLastCommandDetail(String newDetail) {
+        lastCommandDetail = newDetail;
+    }
+
+    public static void updateLastTaskList(TaskList newTaskList) {
+        lastTaskList = newTaskList;
+    }
+
+    public static TaskList getLastTaskList() {
+        return lastTaskList;
+    }
+
+    public static String undo(TaskList taskList) {
+        if (lastCommand.startsWith("mark ")) {
+            taskList.overwrite(lastTaskList);
+            return ("WOOF! Got it! I will undo the last command!" + "\n"
+                    + "The following task has been unmarked: " + "\n"
+                    + lastCommandDetail);
+        } else if (lastCommand.startsWith("unmark ")) {
+            taskList.overwrite(lastTaskList);
+            return ("WOOF! Got it! I will undo the last command!" + "\n"
+                    + "The following task has been un-unmarked: " + "\n"
+                    + lastCommandDetail);
+        } else if (lastCommand.startsWith("delete ")) {
+            taskList.overwrite(lastTaskList);
+            return ("WOOF! Got it! I will undo the last command!" + "\n"
+                    + "The following task has been un-deleted: " + "\n"
+                    + lastCommandDetail);
+        } else if (lastCommand.startsWith("todo ") || lastCommand.startsWith("event ") ||
+                lastCommand.startsWith("deadline ")) {
+            taskList.overwrite(lastTaskList);
+            return ("WOOF! Got it! I will undo the last command!" + "\n"
+                    + "The following task has been un-added: " + "\n"
+                    + lastCommandDetail);
+        } else {
+            return ("WOOF!! The last command cannot be undone!");
+        }
+    }
 
     /**
      * Makes sense of adding to do command from users
