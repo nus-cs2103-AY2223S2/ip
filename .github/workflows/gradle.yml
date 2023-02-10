@@ -34,4 +34,4 @@ jobs:
         run: ./gradlew check
 
       - name: Run JUnit tests using Gradle
-        run: ./gradle test
+        run: ./gradlew test
