@@ -11,7 +11,7 @@ import kuromi.KuromiException;
 public class TaskListTest {
     @Test
     public void taskAdd() throws KuromiException {
-        Deadline d = new Deadline("return book", "2019-10-15");
+        Deadline d = new Deadline("return book", "2019-10-15 15:30");
         ArrayList<Task> inp = new ArrayList<Task>();
         inp.add(new Todo("borrow book"));
         TaskList tasks = new TaskList(inp);
@@ -21,7 +21,7 @@ public class TaskListTest {
     }
     @Test
     public void taskDel() throws KuromiException {
-        Deadline d = new Deadline("return book", "2019-10-15");
+        Deadline d = new Deadline("return book", "2019-10-15 15:30");
         ArrayList<Task> inp = new ArrayList<Task>();
         inp.add(new Todo("borrow book"));
         TaskList tasks = new TaskList(inp);
