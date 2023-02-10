@@ -19,9 +19,9 @@ public class EventCommand extends Command {
     /**
      * Constructor to initialise attributes.
      *
-     * @param eventMessage
-     * @param from
-     * @param to
+     * @param eventMessage event description.
+     * @param from start time.
+     * @param to end time.
      */
     public EventCommand(String eventMessage, String from, String to) {
         this.eventMessage = eventMessage;

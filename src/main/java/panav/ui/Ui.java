@@ -5,18 +5,12 @@ import java.util.Scanner;
 import panav.task.Task;
 import panav.task.TaskList;
 
-
-
 /**
  * Class to represent all the UI tasks to interact with the user.
  */
 public class Ui {
 
-    private static final String LINE_DIVIDER = "____________________________________________________________";
-
     private Scanner sc = new Scanner(System.in);
-
-
 
     /**
      * Method to print the error while loading tasks from saved file.
@@ -38,27 +32,11 @@ public class Ui {
     }
 
     /**
-     * Method to print the line divider.
-     */
-    public String showLine() {
-        return LINE_DIVIDER;
-    }
-
-    /**
-     * Method to read user's command.
-     * @return the String representation of the command.
-     */
-    public String readCommand() {
-        return sc.nextLine();
-    }
-
-    /**
      * Method to print the message once a task is added to the list.
      * @param tasks the list of tasks.
      * @param task The task which is added.
      */
     public String showAddTaskMessage(TaskList tasks, Task task) {
-        //showLine();
         String text = "";
         text += "Got it. I've added this task:\n";
 
@@ -66,6 +44,5 @@ public class Ui {
 
         text += "Now you have " + tasks.getLength() + " tasks in the list.\n";
         return text;
-        //showLine();
     }
 }

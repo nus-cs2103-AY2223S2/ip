@@ -71,11 +71,9 @@ public class TaskList {
      */
     public String markTask(int index) {
         String text = "Nice! I've marked this task as done:\n";
-        //System.out.println("Nice! I've marked this task as done:");
         Task task = tasks.get(index);
         task.markAsDone();
-        //System.out.println(task);
-        text += task.toString() + "\n";
+        text += task + "\n";
         return text;
     }
 
@@ -85,11 +83,9 @@ public class TaskList {
      */
     public String unmarkTask(int index) {
         String text = "Nice! I've marked this task as not done yet:\n";
-        //System.out.println("OK, I've marked this task as not done yet:");
         Task task = tasks.get(index);
         task.markAsNotDone();
-        //System.out.println(task);
-        text += task.toString() + "\n";
+        text += task + "\n";
         return text;
     }
 
@@ -112,7 +108,6 @@ public class TaskList {
         for (Task task : this.tasks) {
             if (task.toString().matches("(.*)" + keyWord + "(.*)")) {
                 counter++;
-                //System.out.println(counter + "." + task);
                 text += counter + "." + task + "\n";
             }
         }

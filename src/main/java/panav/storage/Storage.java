@@ -22,7 +22,7 @@ import panav.task.ToDo;
  */
 public class Storage {
 
-    private String filePath;
+    private final String filePath;
 
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -45,19 +45,16 @@ public class Storage {
             Task curr;
             if (arr[0].compareTo("T") == 0) {
                 curr = new ToDo(arr[2]);
-                if (arr[1].compareTo("1") == 0) {
-                    curr.markAsDone();
-                }
+
             } else if (arr[0].compareTo("D") == 0) {
                 curr = new Deadline(arr[2], arr[3]);
-                if (arr[1].compareTo("1") == 0) {
-                    curr.markAsDone();
-                }
+
             } else {
                 curr = new Event(arr[2], arr[3], arr[4]);
-                if (arr[1].compareTo("1") == 0) {
-                    curr.markAsDone();
-                }
+
+            }
+            if (arr[1].compareTo("1") == 0) {
+                curr.markAsDone();
             }
             list.add(curr);
 
@@ -82,6 +79,7 @@ public class Storage {
             int indexTo = str.indexOf("to:");
             int check = task.isDone() ? 1 : 0;
             int length = str.length();
+
             if (indexBy != -1) {
                 textToAdd += String.format("%c ~ %d ~ %s ~ %s %n", str.charAt(1), check,
                         str.substring(7, indexBy - 2), str.substring(indexBy + 4, length - 1));
@@ -97,4 +95,5 @@ public class Storage {
         fw.write(textToAdd);
         fw.close();
     }
+
 }

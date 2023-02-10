@@ -9,8 +9,8 @@ public class Deadline extends Task {
 
     /**
      * Constructor to initialise attributes.
-     * @param description
-     * @param by
+     * @param description description of deadline.
+     * @param by deadline timeframe.
      */
     public Deadline(String description, String by) {
         super(description);

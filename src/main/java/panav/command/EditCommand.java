@@ -38,7 +38,6 @@ public class EditCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         String text = "";
-        //ui.showLine();
         try {
             int num = readNumber(fullCommand, tasks.getLength());
             if (isMark) {
@@ -50,7 +49,6 @@ public class EditCommand extends Command {
             System.out.println(e.getMessage());
         }
         return text;
-        //ui.showLine();
 
     }
 
@@ -58,13 +56,16 @@ public class EditCommand extends Command {
      * Returns the index number for commands which manipulate the list.
      *
      * @param command The command which is manipulating list.
-     * @param len The number of elements in the list.
+     * @param taskListLength The number of elements in the list.
      * @return Index number in command.
      * @throws InvalidNumberException If the index doesn't exist.
      */
-    public static int readNumber(String command, int len) throws InvalidNumberException {
-        int number = Integer.parseInt(String.valueOf(command.charAt(command.length() - 1)));
-        if (number > len || number < 1) {
+    public static int readNumber(String command, int taskListLength) throws InvalidNumberException {
+        int len = command.length();
+        char charNum = command.charAt(len - 1);
+        String stringNum = String.valueOf(charNum);
+        int number = Integer.parseInt(stringNum);
+        if (number > taskListLength || number < 1) {
             throw new InvalidNumberException("Oops!! There is no such index number in your list");
         } else {
             return number;
