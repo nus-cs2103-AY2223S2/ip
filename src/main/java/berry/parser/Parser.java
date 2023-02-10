@@ -13,9 +13,14 @@ import berry.exception.EmptyClauseException;
 import berry.exception.EmptyDescriptionException;
 import berry.exception.MissingClauseException;
 import berry.exception.UnknownCommandException;
+import berry.tag.TagList;
 import berry.task.Deadline;
 import berry.task.Event;
 import berry.task.Todo;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * Parses user input into {@code Commands}.
@@ -39,12 +44,12 @@ public class Parser {
         assert userInput != null : "Input cannot be null";
         assert userInput.length() > 0 : "Input must contain at least one element";
 
-        String[] splitDescriptionAndDetails = userInput.split(" ", 2);
-        String[] splitDetails;
+        ArrayList<String> listOfDescriptionAndDetails = splitDescriptionAndDetails(userInput);
         CommandType commandType;
+        TagList listOfTags = new TagList();
 
         try {
-            commandType = CommandType.valueOf(splitDescriptionAndDetails[0].toUpperCase());
+            commandType = CommandType.valueOf(listOfDescriptionAndDetails.get(0).toUpperCase());
         } catch (IllegalArgumentException e) {
             throw new UnknownCommandException();
         }
@@ -53,34 +58,54 @@ public class Parser {
 
         switch (commandType) {
         case BYE:
-
             return new ExitCommand();
         case LIST:
             return new ListCommand();
         case MARK:
-            return new MarkCommand(Integer.parseInt(splitDescriptionAndDetails[1]));
+            return new MarkCommand(Integer.parseInt(listOfDescriptionAndDetails.get(1)));
         case UNMARK:
-            return new UnmarkCommand(Integer.parseInt(splitDescriptionAndDetails[1]));
+            return new UnmarkCommand(Integer.parseInt(listOfDescriptionAndDetails.get(1)));
         case TODO:
-            return new AddTaskCommand(new Todo(splitDescriptionAndDetails[1]));
+            return new AddTaskCommand(new Todo(listOfDescriptionAndDetails.get(1)));
         case DEADLINE:
-            splitDetails = splitDescriptionAndDetails[1].split(" /by ");
-            return new AddTaskCommand(new Deadline(splitDetails[0], splitDetails[1]));
+            ArrayList<String> listOfDescriptionAndByDate = splitDescriptionAndByDate(listOfDescriptionAndDetails.get(1));
+            return new AddTaskCommand(new Deadline(listOfDescriptionAndByDate.get(0),
+                    listOfDescriptionAndByDate.get(1)));
         case EVENT:
-            splitDetails = splitDescriptionAndDetails[1].split(" /from ");
-            String[] splitFurtherDetails = splitDetails[1].split(" /to ");
-            return new AddTaskCommand(new Event(splitDetails[0], splitFurtherDetails[0], splitFurtherDetails[1]));
+            ArrayList<String> listOfDescriptionAndFromToDate = splitDescriptionAndFromToDate(
+                    listOfDescriptionAndDetails.get(1));
+            return new AddTaskCommand(new Event(
+                    listOfDescriptionAndFromToDate.get(0),
+                    listOfDescriptionAndFromToDate.get(1),
+                    listOfDescriptionAndFromToDate.get(2)));
         case DELETE:
-            return new DeleteCommand(Integer.parseInt(splitDescriptionAndDetails[1]));
+            return new DeleteCommand(Integer.parseInt(listOfDescriptionAndDetails.get(1)));
         case FIND:
-            if (splitDescriptionAndDetails[1].trim().equals("")) {
-                throw new BerryException("Please key in a keyword for me to find :<");
-            }
-            return new FindCommand(splitDescriptionAndDetails[1].split(" "));
+            return new FindCommand(listOfDescriptionAndDetails.get(1).split(" "));
         default:
             throw new UnknownCommandException();
         }
 
+    }
+
+    private static ArrayList<String> splitDescriptionAndDetails(String userInput) {
+        return new ArrayList<String>(List.of(userInput.split(" ", 2)));
+    }
+
+    private static ArrayList<String> splitDescriptionAndByDate(String input) {
+        return new ArrayList<String>(List.of(input.split(" /by ")));
+    }
+
+    private static ArrayList<String> splitDescriptionAndFromToDate(String input) {
+        String[] listOfDescriptionAndDetails = input.split(" /from ");
+        String[] listOfFromToDate = listOfDescriptionAndDetails[1].split(" /to ");
+
+        ArrayList<String> result = new ArrayList<String>();
+        result.add(listOfDescriptionAndDetails[0]);
+        result.add(listOfFromToDate[0]);
+        result.add(listOfFromToDate[1]);
+
+        return result;
     }
 
     /**
@@ -95,36 +120,40 @@ public class Parser {
 
         if (!(commandType == CommandType.TODO
                 || commandType == CommandType.DEADLINE
-                || commandType == CommandType.EVENT)) {
+                || commandType == CommandType.EVENT
+                || commandType == CommandType.FIND)) {
             return;
         }
 
         switch(commandType) {
         case TODO:
-            if (input.substring(4).isBlank()) {
+            if (input.split("todo")[1].isBlank()) {
                 throw new EmptyDescriptionException(command);
             }
             break;
         case DEADLINE:
-            if (!input.contains("/by ") || !input.contains("/by")) {
+            if (!input.contains("/by")) {
                 throw new MissingClauseException("by");
-            } else if (input.split("/by")[0].substring(8).isBlank()) {
-                throw new EmptyDescriptionException(command);
             } else if (input.endsWith("/by") || input.split("/by")[1].isBlank()) {
                 throw new EmptyClauseException("by");
             }
             break;
         case EVENT:
-            if (!input.contains("/from ") || !input.contains("/from")) {
+            if (!input.contains("/from")) {
                 throw new MissingClauseException("from");
-            } else if (input.split("/from")[0].substring(5).isBlank()) {
-                throw new EmptyDescriptionException(command);
-            } else if (!input.contains("/to ") || !input.contains("/to")) {
+            } else if (!input.contains("/to")) {
                 throw new MissingClauseException("to");
+            } else if ((input.split("/from")[0].split("event")[1]).isBlank()) {
+                throw new EmptyDescriptionException(command);
             } else if (input.endsWith("/to") || input.split("/to")[1].isBlank()) {
                 throw new EmptyClauseException("to");
             } else if (input.endsWith("/from") || input.split("/to")[0].split("/from")[1].isBlank()) {
                 throw new EmptyClauseException("from");
+            }
+            break;
+        case FIND:
+            if (input.endsWith("find") || input.split("find")[1].trim().equals("")) {
+                throw new BerryException("Please key in a keyword for me to find :<");
             }
             break;
         default:
