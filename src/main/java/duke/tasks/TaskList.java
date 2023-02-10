@@ -65,6 +65,7 @@ public class TaskList {
         msg += String.format("I've added\n" + tasks.get(this.getCurrentSize() - 1).toString()
                 + "\nto all the shit u need to do\n");
         msg += String.format("shag bro now u got %d tasks\n", this.getCurrentSize());
+        assert this.tasks.size() > 0: "wait jialat i think the task never got added";
         return msg;
     }
 
@@ -87,6 +88,7 @@ public class TaskList {
         msg += String.format("I've added\n" + tasks.get(this.getCurrentSize() - 1).toString()
                 + "\nto all the shit u need to do\n");
         msg += String.format("shag bro now u got %d tasks\n", this.getCurrentSize());
+        assert this.tasks.size() > 0: "wait jialat i think the task never got added";
         return msg;
     }
 
@@ -109,6 +111,7 @@ public class TaskList {
         msg += String.format("I've added\n" + tasks.get(this.getCurrentSize() - 1).toString()
                 + "\nto all the shit u need to do\n");
         msg += String.format("shag bro now u got %d tasks\n", this.getCurrentSize());
+        assert this.tasks.size() > 0: "wait jialat i think the task never got added";
         return msg;
     }
     
