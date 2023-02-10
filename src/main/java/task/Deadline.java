@@ -48,7 +48,7 @@ public class Deadline extends Task {
      * Return the LocalDateTime of when this task must be completed by.
      * @return time
      */
-    public LocalDateTime getBy(){
+    public LocalDateTime getBy() {
         return this.by;
     }
 }

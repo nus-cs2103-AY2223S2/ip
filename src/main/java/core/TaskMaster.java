@@ -211,7 +211,7 @@ public class TaskMaster {
                     } else {
                         Deadline f = latestDeadline.peek();
                         int comparison = f.getBy().compareTo(((Deadline) task).getBy());
-                        if (comparison == 0){
+                        if (comparison == 0) {
                             latestDeadline.add((Deadline) task);
                         } else if (comparison < 0) {
                             latestDeadline = new LinkedList<>();

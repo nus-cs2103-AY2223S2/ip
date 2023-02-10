@@ -22,7 +22,7 @@ public class Duke {
         boolean shouldQuit = false;
         String userInput;
 
-//        greetCli();
+        // greetCli();
         ioHandler.println(greet());
         initialize();
         ioHandler.flush();
