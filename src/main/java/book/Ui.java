@@ -14,22 +14,12 @@ public class Ui {
     private static final Scanner input = new Scanner(System.in);
 
     /**
-     * Returns the {@code String} welcome message for {@code Book}.
-     *
-     * @return {@code String} welcome message for {@code Book}.
-     */
-    public static String showWelcome() {
-        return "Good day, this is Book!\nWhat may I help you with?";
-    }
-
-    /**
      * Returns the {@code String} exit message for {@code Book}.
      *
      * @return {@code String} exit message for {@code Book}
      */
     public String showExit() {
-        return "Bye! Pick up Book again soon!";
-
+        return "Farewell! Do pick up Book again soon!";
     }
 
     /**
@@ -39,7 +29,7 @@ public class Ui {
      * @return {@code String} message for adding a {@code Task} to {@code Book}.
      */
     public String showAdd(Task task) {
-        return "Understood, adding\n" + INDENT + task + "\nto Book.";
+        return "Understood, writing\n" + INDENT + task + "\ninto Book.";
     }
 
     /**
@@ -49,7 +39,7 @@ public class Ui {
      * @return {@code String} message for deleting a {@code Task} from {@code Book}.
      */
     public String showDelete(Task task) {
-        return "Acknowledged, striking the following task off of Book's pages:\n" + INDENT + task;
+        return "Understood, striking the following task off of Book's pages:\n" + INDENT + task;
     }
 
     /**
@@ -91,7 +81,7 @@ public class Ui {
      * @return {@code String} message for showing the {@code TaskList} in {@code Book}.
      */
     public String showList(TaskList list) {
-        return "Here are the tasks stored in Book:\n" + list;
+        return "Here are the tasks written in Book:\n" + list;
     }
 
     /**

@@ -15,6 +15,9 @@
          </font>
          <HBox.margin>
             <Insets />
-         </HBox.margin></Label>
+         </HBox.margin>
+         <padding>
+            <Insets left="5.0" />
+         </padding></Label>
     </children>
 </fx:root>
