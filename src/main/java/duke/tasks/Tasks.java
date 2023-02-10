@@ -20,15 +20,14 @@ public class Tasks {
     public String printList() {
         if (taskList.size() == 0) {
             return "NOTHIN; EMPTYYY?";
-        } else {
-            String output = "";
-            int count = 1;
-            for (Task task : taskList) {
-                output += count + ". " + task.printTask() + "\n";
-                count++;
-            }
-            return output;
         }
+        String output = "";
+        int count = 1;
+        for (Task task : taskList) {
+            output += count + ". " + task.printTask() + "\n";
+            count++;
+        }
+        return output;
     }
     /**
      * Adds a task to the task list.
@@ -53,13 +52,10 @@ public class Tasks {
      * @return Response to user.
      */
     public String markTaskDone(int num, boolean silent) {
-        String output = "";
         if (withinRange(num)) {
-            output += this.taskList.get(num).markTaskDone(silent);
-        } else {
-            output += "Hey HEY HEY, that's not within range";
+            return this.taskList.get(num).markTaskDone(silent);
         }
-        return output;
+        return "Hey HEY HEY, that's not within range";
     }
 
     /**
@@ -68,13 +64,10 @@ public class Tasks {
      * @return Response to user.
      */
     public String markTaskUndone(int num) {
-        String output = "";
         if (withinRange(num)) {
-            output += this.taskList.get(num).markTaskUndone();
-        } else {
-            output += "Hey HEY HEY, that's not within range";
+            return this.taskList.get(num).markTaskUndone();
         }
-        return output;
+        return "Hey HEY HEY, that's not within range";
     }
 
     /**
@@ -83,15 +76,13 @@ public class Tasks {
      * @return Response to user.
      */
     public String deleteTask(int num) {
-        String output;
         if (withinRange(num)) {
-            output = "Into the bin it goes! This is now deleted!\n" + this.taskList.get(num).printTask();
+            String output = "Into the bin it goes! This is now deleted!\n" + this.taskList.get(num).printTask();
             this.taskList.remove(num);
             output += "\n" + this.taskList.size() + " task(s) left to go\n";
-        } else {
-            output = "Hey HEY HEY, that's not within range";
+            return output;
         }
-        return output;
+        return "Hey HEY HEY, that's not within range";
     }
 
     public boolean withinRange(int num) {
@@ -105,13 +96,12 @@ public class Tasks {
     public String formatForFile() {
         if (taskList.size() == 0) {
             return "";
-        } else {
-            StringBuilder output = new StringBuilder();
-            for (Task task : taskList) {
-                output.append(task.formatForFile()).append("\n");
-            }
-            return output.toString();
         }
+        StringBuilder output = new StringBuilder();
+        for (Task task : taskList) {
+            output.append(task.formatForFile()).append("\n");
+        }
+        return output.toString();
     }
 
     /**
@@ -124,28 +114,41 @@ public class Tasks {
             return "Nothing~";
         } else if (!MyDate.isValidDate(dateOnly)) {
             return "That's NOT a date";
-        } else {
-            String output = "";
-            int count = 1;
-            MyDate date = new MyDate(dateOnly);
-            output += "Deadlines due or events ongoing on " + date.printDateTime() + "\n";
-            for (Task task : taskList) {
-                if (task instanceof Deadline) {
-                    Deadline d = (Deadline) task;
-                    if (d.isDeadLine(date)) {
-                        output += count + ". " + task.printTask() + "\n";
-                        count++;
-                    }
-                } else if (task instanceof Event) {
-                    Event e = (Event) task;
-                    if (e.liesBetween(date)) {
-                        output += count + ". " + task.printTask() + "\n";
-                        count++;
-                    }
-                }
-            }
-            return output;
         }
+        String output = "";
+        int count = 1;
+        MyDate date = new MyDate(dateOnly);
+        output += "Deadlines due or events ongoing on " + date.printDateTime() + "\n";
+        for (Task task : taskList) {
+            String result = printFilteredTask(task, date);
+            if (!result.equals("")) {
+                output += count + result;
+                count++;
+            }
+        }
+        return output;
+    }
+
+    /**
+     * Checks if task is deadline or event that falls on given date.
+     * @param task A task  in the task list.
+     * @param date The date given by the user.
+     * @return Empty string is task is not deadline or event, else prints the task.
+     */
+    public String printFilteredTask(Task task, MyDate date) {
+        if (task instanceof Deadline) {
+            Deadline d = (Deadline) task;
+            if (d.isDeadLine(date)) {
+                return ". " + task.printTask() + "\n";
+            }
+        }
+        if (task instanceof Event) {
+            Event e = (Event) task;
+            if (e.liesBetween(date)) {
+                return ". " + task.printTask() + "\n";
+            }
+        }
+        return "";
     }
 
     /**
@@ -156,16 +159,15 @@ public class Tasks {
     public String filterByKeyword(String keyword) {
         if (taskList.size() == 0) {
             return "Nothing~";
-        } else {
-            String output = "Tasks that have " + keyword + "\n";
-            int count = 1;
-            for (Task task : taskList) {
-                if (task.containsKeyword(keyword)) {
-                    output += count + ". " + task.printTask() + "\n";
-                    count++;
-                }
-            }
-            return output;
         }
+        String output = "Tasks that have " + keyword + "\n";
+        int count = 1;
+        for (Task task : taskList) {
+            if (task.containsKeyword(keyword)) {
+                output += count + ". " + task.printTask() + "\n";
+                count++;
+            }
+        }
+        return output;
     }
 }

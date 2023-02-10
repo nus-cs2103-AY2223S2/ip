@@ -43,51 +43,45 @@ public class Storage {
             //create file if file does not exist
             if (data.createNewFile()) {
                 System.out.println("Hey hey~ Welcome new user~ :)");
-            } else {
-                Scanner s = new Scanner(data);
-                while (s.hasNext()) {
-                    //format of a line: Type|status|description ...
-                    String currLine = s.nextLine();
-                    String[] details = currLine.split("\\|");
-                    String type = details[0];
-                    String status = details[1];
-                    String desc = details[2];
-
-                    switch (type) {
-                    case "T":
-                        Todo t = new Todo(desc);
-                        //task is done
-                        if (status.equalsIgnoreCase("X")) {
-                            t.markTaskDone(true);
-                        }
-                        tasks.addToList(t, true);
-                        break;
-
-                    case "D":
-                        String by = details[3];
-                        Deadline d = new Deadline(desc, by);
-                        if (status.equalsIgnoreCase("X")) {
-                            d.markTaskDone(true);
-                        }
-                        tasks.addToList(d, true);
-                        break;
-
-                    case "E":
-                        String from = details[3];
-                        String to = details[4];
-                        Event e = new Event(desc, from, to);
-                        if (status.equalsIgnoreCase("X")) {
-                            e.markTaskDone(true);
-                        }
-                        tasks.addToList(e, true);
-                        break;
-
-                    default:
-                        throw new IllegalStateException("Unexpected value: " + type);
-                    }
-                }
-                s.close();
+                return;
             }
+            Scanner s = new Scanner(data);
+            while (s.hasNext()) {
+                String currLine = s.nextLine();
+                String[] details = currLine.split("\\|");
+                String type = details[0];
+                String status = details[1];
+                String desc = details[2];
+                switch (type) {
+                case "T":
+                    Todo t = new Todo(desc);
+                    if (status.equalsIgnoreCase("X")) {
+                        t.markTaskDone(true);
+                    }
+                    tasks.addToList(t, true);
+                    break;
+                case "D":
+                    String by = details[3];
+                    Deadline d = new Deadline(desc, by);
+                    if (status.equalsIgnoreCase("X")) {
+                        d.markTaskDone(true);
+                    }
+                    tasks.addToList(d, true);
+                    break;
+                case "E":
+                    String from = details[3];
+                    String to = details[4];
+                    Event e = new Event(desc, from, to);
+                    if (status.equalsIgnoreCase("X")) {
+                        e.markTaskDone(true);
+                    }
+                    tasks.addToList(e, true);
+                    break;
+                default:
+                    throw new IllegalStateException("Unexpected value: " + type);
+                }
+            }
+            s.close();
         } catch (IOException e) {
             System.out.println("Data file error.");
         }

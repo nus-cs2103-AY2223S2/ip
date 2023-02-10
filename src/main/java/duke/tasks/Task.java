@@ -30,19 +30,18 @@ public class Task {
      * @return Response to user.
      */
     public String markTaskDone(boolean silent) {
-        String output = "";
         //task already marked done
         if (this.isDone) {
-            output += "Move on already, you've marked this.";
-        } else {
-            this.isDone = true;
-            if (!silent) {
-                output += "WOW you got something done! A miracle!! "
-                         + "I've marked this task as done now, ur wlcm :)\n";
-                output += printTask();
-            }
+            return "Move on already, you've marked this.";
         }
-        return output;
+        this.isDone = true;
+        if (!silent) {
+            String output = "WOW you got something done! A miracle!! "
+                    + "I've marked this task as done now, ur wlcm :)\n";
+            output += printTask();
+            return output;
+        }
+        return "";
     }
 
     /**
@@ -50,14 +49,12 @@ public class Task {
      * @return Response to user.
      */
     public String markTaskUndone() {
-        String output = "";
         if (!this.isDone) {
-            output += "You didn't even do it in the first place >:/";
-        } else {
-            this.isDone = false;
-            output += "Ugh fine, this task is now marked undone. >:/\n";
-            output += printTask();
+            return "You didn't even do it in the first place >:/";
         }
+        this.isDone = false;
+        String output = "Ugh fine, this task is now marked undone. >:/\n";
+        output += printTask();
         return output;
     }
 
