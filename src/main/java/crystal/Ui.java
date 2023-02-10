@@ -69,7 +69,6 @@ public class Ui {
             temp.append(i + 1 + ". " + task.get(i) + "\n");
         }
         temp.append(line + "\n");
-
         return temp.toString();
 
     }
@@ -220,4 +219,24 @@ public class Ui {
         temp.append(line + "\n");
         return temp.toString();
     }
+
+    /**
+     *  Returns the priority message.
+     * @param task Tasklist
+     * @param itemNum item to be prioritize.
+     * @param lvlNum priority level.
+     * @return the priority message.
+     */
+    public String printPriority(TaskList task, int itemNum, int lvlNum) {
+        Task markTask = task.get(itemNum - 1);
+        markTask.setIsPriority(true);
+        markTask.setPriorityNum(lvlNum);
+        StringBuilder temp = new StringBuilder();
+        temp.append(line + "\n");
+        temp.append("Alright, I've marked this task as priority level " + lvlNum + ":" + "\n");
+        temp.append(markTask.toString() + "\n");
+        temp.append(line + "\n");
+        return temp.toString();
+    }
+
 }
