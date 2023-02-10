@@ -16,16 +16,23 @@ public class Find extends Command {
         this.keyword = keyword;
     }
 
+    private boolean hasMatch(String taskDescription) {
+        for (String word : taskDescription.split(" ")) {
+            if (word.equals(this.keyword)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public void execute(TaskList toDoList) {
         ArrayList<Task> matches = new ArrayList<>();
         for (int i = 0; i < toDoList.size(); i++) {
-            Task curTask = toDoList.get(i);
-            String curDescription = curTask.getDescription();
-            for (String word : curDescription.split(" ")) {
-                if (word.equals(this.keyword)) {
-                    matches.add(curTask);
-                }
+            Task currTask = toDoList.get(i);
+            String currDescription = currTask.getDescription();
+            if (hasMatch(currDescription)) {
+                matches.add(currTask);
             }
         }
 
