@@ -18,15 +18,9 @@ public abstract class DateTimeParser {
      * @param datetimeString the datetime string from the user.
      * @return the string of the formatted datetime
      */
-    public static String parse(String datetimeString) {
-        try {
-            LocalDateTime date = LocalDateTime.parse(datetimeString, formatFrom);
-            return date.format(DateTimeParser.formatTo);
-        } catch (DateTimeParseException e) {
-            System.out.println("Datetime has to be in the following format: yyyy-mm-dd HHmm");
-        }
-
-        return "";
+    public static String parse(String datetimeString) throws DateTimeParseException {
+        LocalDateTime date = LocalDateTime.parse(datetimeString, formatFrom);
+        return date.format(DateTimeParser.formatTo);
     }
 
     /**
