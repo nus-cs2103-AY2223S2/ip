@@ -12,6 +12,8 @@ import javafx.scene.layout.HBox;
  * type, completion status and other details.
  */
 public class TaskBox extends HBox {
+    private static final String TASK_COMPLETED_STYLE = "-fx-background-color: #90EE90; -fx-background-radius: 10";
+    private static final String TASK_UNCOMPLETED_STYLE = "-fx-background-color: #E55451; -fx-background-radius: 10";
     @FXML
     private Label taskNumber;
     @FXML
@@ -35,9 +37,12 @@ public class TaskBox extends HBox {
             e.printStackTrace();
         }
 
+        assert taskDetails.length == 3 : "The task detail array should contain 3 Strings";
+
         String taskNumberString = taskDetails[0];
         String taskTypeString = taskDetails[1];
         String taskStatusString = taskDetails[2];
+        boolean isCompleted = parseTaskStatus(taskStatusString);
 
         taskNumber.setText(taskNumberString + ".");
         taskType.setText(taskTypeString);
@@ -54,13 +59,41 @@ public class TaskBox extends HBox {
             taskInfo2.setVisible(true);
         }
 
-        if (taskStatusString.equals("Completed")) {
-            taskStatus.setStyle("-fx-background-color: #90EE90; -fx-background-radius: 10");
-        } else {
-            taskStatus.setStyle("-fx-background-color: #E55451; -fx-background-radius: 10");
-        }
+        setTaskLabelColor(isCompleted);
 
-        if (Integer.parseInt(taskNumberString) % 2 == 0) {
+        setTaskBoxColor(Integer.parseInt(taskNumberString));
+    }
+
+    /**
+     * Returns the boolean representing the completion status of the task given a String.
+     *
+     * @param taskStatusString String representing the completion status of the task.
+     * @return A boolean representing the completion status of the task.
+     */
+    private boolean parseTaskStatus(String taskStatusString) {
+        return taskStatusString.equals("Completed");
+    }
+
+    /**
+     * Sets the color of a task label in the list according to its completion status.
+     *
+     * @param isTaskCompleted Boolean representing the completion status of the task.
+     */
+    private void setTaskLabelColor(boolean isTaskCompleted) {
+        if (isTaskCompleted) {
+            this.taskStatus.setStyle(TASK_COMPLETED_STYLE);
+        } else {
+            this.taskStatus.setStyle(TASK_UNCOMPLETED_STYLE);
+        }
+    }
+
+    /**
+     * Sets the color of a task box according to its index.
+     *
+     * @param taskNum The index of the task.
+     */
+    private void setTaskBoxColor(int taskNum) {
+        if (taskNum % 2 == 0) {
             this.setStyle("-fx-background-color: #EBF4FA;");
         }
     }
