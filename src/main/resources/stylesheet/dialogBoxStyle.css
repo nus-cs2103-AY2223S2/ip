@@ -1,0 +1,6 @@
+.label {
+    -fx-background-color: #c6e2ff;
+    -fx-background-radius: 10;
+    -fx-padding: 10, 10, 15, 15;
+    -fx-font-family: Trebuchet MS;
+}
