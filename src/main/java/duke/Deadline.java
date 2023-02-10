@@ -1,10 +1,8 @@
 package duke;
 
-import duke.exception.DukeException;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
-import java.util.Scanner;
 
 /**
  * Represents a task with a deadline date. Inherits from the Task class.

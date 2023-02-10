@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.Deadline;
 import duke.DukeResponse;
+import duke.MessageGenerator;
 import duke.TaskList;
 
 import java.time.LocalDateTime;
@@ -24,6 +25,6 @@ public class DeadlineCommand extends Command{
     public DukeResponse execute() {
         Deadline deadline = new Deadline(taskDesc, by, hasTime);
         taskList.add(deadline);
-        return new DukeResponse("added deadline");
+        return new DukeResponse(MessageGenerator.genAddedTaskMsg("deadline"));
     }
 }

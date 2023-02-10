@@ -46,7 +46,7 @@ public class Parser {
         case "find":
             return handleFind(commandStream, taskList);
         default:
-            return new ErrorCommand("unknown command");
+            return new ErrorCommand(MessageGenerator.genUnknownCommandMsg());
         }
     }
 
@@ -57,61 +57,63 @@ public class Parser {
 
     private static Command handleMark(Scanner commandStream, TaskList taskList) {
         if (!commandStream.hasNext()) {
-            return new ErrorCommand("no task number");
+            return new ErrorCommand(MessageGenerator.genMissingFieldMsg("task number"));
         }
 
         try {
             int taskIdx = Integer.parseInt(commandStream.next()) - 1;
 
             if (!taskList.hasTask(taskIdx)) {
-                return new ErrorCommand("task index out of range");
+                return new ErrorCommand(MessageGenerator.genTaskDoesNotExistMsg(String.valueOf(taskIdx + 1)));
             }
 
-            Boolean isMark = true;
+            boolean isMark = true;
             return new MarkOrUnmarkCommand(taskIdx, taskList, isMark);
 
         } catch (NumberFormatException e) {
-            return new ErrorCommand("not a valid task number");
+            return new ErrorCommand(MessageGenerator.genNotANumberMsg());
         }
+
     }
 
     private static Command handleUnmark(Scanner commandStream, TaskList taskList) {
         if (!commandStream.hasNext()) {
-            return new ErrorCommand("no task number");
+            return new ErrorCommand(MessageGenerator.genMissingFieldMsg("task number"));
         }
 
         try {
             int taskIdx = Integer.parseInt(commandStream.next()) - 1;
 
             if (!taskList.hasTask(taskIdx)) {
-                return new ErrorCommand("task index out of range");
+                return new ErrorCommand(MessageGenerator.genTaskDoesNotExistMsg(String.valueOf(taskIdx + 1)));
             }
 
-            Boolean isMark = false;
+            boolean isMark = false;
             return new MarkOrUnmarkCommand(taskIdx, taskList, isMark);
 
         } catch (NumberFormatException e) {
-            return new ErrorCommand("not a valid task number");
+            return new ErrorCommand(MessageGenerator.genNotANumberMsg());
         }
+
     }
 
 
     private static Command handleDelete(Scanner commandStream, TaskList taskList) {
         if (!commandStream.hasNext()) {
-            return new ErrorCommand("no task number");
+            return new ErrorCommand(MessageGenerator.genMissingFieldMsg("task number"));
         }
 
         try {
             int taskIdx = Integer.parseInt(commandStream.next()) - 1;
 
             if (!taskList.hasTask(taskIdx)) {
-                return new ErrorCommand("task index out of range");
+                return new ErrorCommand(MessageGenerator.genTaskDoesNotExistMsg(String.valueOf(taskIdx + 1)));
             }
 
             return new DeleteCommand(taskIdx, taskList);
 
         } catch (NumberFormatException e) {
-            return new ErrorCommand("not a valid task number");
+            return new ErrorCommand(MessageGenerator.genNotANumberMsg());
         }
     }
 
@@ -135,11 +137,11 @@ public class Parser {
         }
 
         if (taskDesc.isEmpty()) {
-            return new ErrorCommand("task description is empty");
+            return new ErrorCommand(MessageGenerator.genMissingTaskDescMsg("deadline"));
         }
 
         if (!foundBy || byString.isEmpty()) {
-            return new ErrorCommand("by field is empty");
+            return new ErrorCommand(MessageGenerator.genMissingFieldMsg("/by"));
         }
 
         byString = byString.trim();
@@ -152,7 +154,7 @@ public class Parser {
             return new DeadlineCommand(taskDesc, by, hasTime, taskList);
 
         } catch (DateTimeParseException e) {
-            return new ErrorCommand("could not parse datetime");
+            return new ErrorCommand(MessageGenerator.genDateTimeParseErrorMsg());
         }
 
     }
@@ -186,11 +188,11 @@ public class Parser {
         }
 
         if (taskDesc.isEmpty()) {
-            return new ErrorCommand("task desc is empty");
+            return new ErrorCommand(MessageGenerator.genMissingTaskDescMsg("event"));
         }
 
         if (!foundFrom || !foundTo || fromString.isEmpty() || toString.isEmpty()) {
-            return new ErrorCommand("from or to fields are empty");
+            return new ErrorCommand(MessageGenerator.genMissingFieldMsg("/from or /to"));
         }
 
         fromString = fromString.trim();
@@ -210,7 +212,7 @@ public class Parser {
             return new EventCommand(taskDesc, from, fromHasTime, to, toHasTime, taskList);
 
         } catch (DateTimeParseException e) {
-            return new ErrorCommand("could not parse datetime");
+            return new ErrorCommand(MessageGenerator.genDateTimeParseErrorMsg());
         }
     }
 
@@ -233,7 +235,7 @@ public class Parser {
 
     private static Command handleFind(Scanner stringStream, TaskList taskList) {
         if (!stringStream.hasNext()) {
-            return new ErrorCommand("missing find keyword");
+            return new ErrorCommand(MessageGenerator.genMissingFieldMsg("keyword"));
         }
 
         String keyword = stringStream.next();

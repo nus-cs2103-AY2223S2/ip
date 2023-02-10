@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.DukeResponse;
+import duke.MessageGenerator;
 import duke.TaskList;
 
 public class ListCommand extends Command{
@@ -14,6 +15,6 @@ public class ListCommand extends Command{
 
     @Override
     public DukeResponse execute() {
-        return new DukeResponse(taskList.toString());
+        return new DukeResponse(MessageGenerator.genShowTasksMsg(taskList.toString()));
     }
 }

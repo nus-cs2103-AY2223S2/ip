@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.DukeResponse;
+import duke.MessageGenerator;
 import duke.Task;
 import duke.TaskList;
 import duke.exception.DukeException;
@@ -24,10 +25,10 @@ public class MarkOrUnmarkCommand extends Command {
 
         if (isMark) {
             task.mark();
-            return new DukeResponse("marked task");
+            return new DukeResponse(MessageGenerator.genMarkorUnmarkTaskMsg(task.toString(), true));
         } else {
             task.unmark();
-            return new DukeResponse("unmarked task");
+            return new DukeResponse(MessageGenerator.genMarkorUnmarkTaskMsg(task.toString(), false));
         }
     }
 

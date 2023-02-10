@@ -14,7 +14,7 @@ public class Duke {
     public Storage storage;
 
     public String getStartUpMsg() {
-        return Ui.genWelcomeMsg();
+        return MessageGenerator.genWelcomeMsg();
     }
 
     public void loadTaskList(String path) {

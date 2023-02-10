@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.DukeResponse;
+import duke.MessageGenerator;
 import duke.Task;
 import duke.TaskList;
 
@@ -26,7 +27,6 @@ public class FindCommand extends Command {
             }
         }
 
-        ListCommand listCommand = new ListCommand(tasksOfInterest);
-        return new DukeResponse("Here are your results\n" + tasksOfInterest.toString());
+        return new DukeResponse(MessageGenerator.genFindTasksMsg(tasksOfInterest.toString()));
     }
 }

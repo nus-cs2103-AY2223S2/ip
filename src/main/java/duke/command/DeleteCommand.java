@@ -1,6 +1,8 @@
 package duke.command;
 
 import duke.DukeResponse;
+import duke.MessageGenerator;
+import duke.Task;
 import duke.TaskList;
 
 public class DeleteCommand extends Command {
@@ -15,7 +17,7 @@ public class DeleteCommand extends Command {
 
     @Override
     public DukeResponse execute() {
-        taskList.remove(taskIdx);
-        return new DukeResponse("deleted task");
+        Task task = taskList.remove(taskIdx);
+        return new DukeResponse(MessageGenerator.genDeleteTaskMsg(task.toString()));
     }
 }
