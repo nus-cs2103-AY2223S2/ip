@@ -28,6 +28,7 @@ public abstract class Task {
      * @param objective description of this task's objective.
      */
     public Task(String objective) {
+        assert objective != null : "Task objective should be non-null";
         this.objective = objective;
         this.isDone = false;
     }

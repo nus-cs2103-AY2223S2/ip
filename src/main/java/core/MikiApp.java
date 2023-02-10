@@ -14,6 +14,7 @@ import shigure.fxcontrol.MainWindow;
 public class MikiApp extends Application {
     @Override
     public void start(Stage stage) {
+        assert stage != null : "Application stage should be non-null";
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Init.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();

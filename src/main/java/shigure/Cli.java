@@ -102,7 +102,7 @@ public class Cli extends Ui {
 
     @Override
     public void close() {
-
+        //Do nothing
     }
 
 }
