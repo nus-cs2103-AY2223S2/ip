@@ -1,3 +1,4 @@
+import java.io.FileNotFoundException;
 public class DukeException extends Exception {
 
     public DukeException() {
@@ -14,6 +15,9 @@ public class DukeException extends Exception {
 
     public DukeException(IllegalArgumentException i) {
         System.out.println("did you forget a keyword? ie /by /to /from");
+    }
+    public DukeException(FileNotFoundException i) {
+        System.out.println("File not found");
     }
 
     public DukeException(IndexOutOfBoundsException i) {
