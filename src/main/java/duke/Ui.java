@@ -109,6 +109,7 @@ public class Ui {
      * @param num Index no. of task in the list to be marked as done
      */
     public String markTask(int num) {
+        assert num > 0: "Wrong num!!";
         if (this.getList().isEmpty()) {
             return emptyErr();
         }
@@ -126,6 +127,7 @@ public class Ui {
      * @param num Index no. of task in the list to be marked as undone.
      */
     public String unmarkTask(int num) {
+        assert num > 0: "Wrong num!!";
         if (this.getList().isEmpty()) {
             return emptyErr();
         }
@@ -144,6 +146,7 @@ public class Ui {
      * @return ToDo object.
      */
     public String makeToDo(String[] task) {
+        assert task[0].equalsIgnoreCase("todo") && task.length > 1: "Wrong format!!";
         StringBuilder sb = new StringBuilder();
         for (int i = 1; i < task.length; i++) {
             sb.append(task[i] + " ");
@@ -191,6 +194,7 @@ public class Ui {
     }
 
     public String makeEvent(String[] task) throws DateTimeParseException {
+        assert task[0].equalsIgnoreCase("event") && task.length > 1: "Wrong format!!";
         try {
             Event temp = createEvent(task);
             return addToList(temp);
@@ -229,6 +233,7 @@ public class Ui {
     }
 
     public String makeDeadline(String[] task) throws  DateTimeParseException {
+        assert task[0].equalsIgnoreCase("deadline") && task.length > 1: "Wrong format!!";
         try {
             Deadline temp = createDeadline(task);
             return addToList(temp);
@@ -243,6 +248,7 @@ public class Ui {
      * @param num Index no. of task in the list to be deleted.
      */
     public String delete(int num) {
+        assert num > 0: "Wrong num!!";
         if (this.getList().isEmpty()) {
             return emptyErr();
         }
