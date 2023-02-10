@@ -7,8 +7,6 @@ import duke.commands.Exit;
 import duke.commands.Parser;
 import duke.dukeexception.DukeException;
 
-
-
 /**
  * This is the main class of the program.
  *
@@ -38,16 +36,16 @@ public class Duke {
         while (true) {
             String command = sc.nextLine();
             Parser parser = new Parser(command);
-            Command curCommand;
+            Command currCommand;
             try {
-                curCommand = parser.process();
-                curCommand.execute(toDoList);
-                ui.printCommandMessage(curCommand);
+                currCommand = parser.process();
+                currCommand.execute(toDoList);
+                ui.printCommandMessage(currCommand);
             } catch (DukeException ex) {
-                System.out.println(ex.getMessage());
+                ui.printExceptionMessage(ex);
                 continue;
             }
-            if (curCommand instanceof Exit) {
+            if (currCommand instanceof Exit) {
                 ui.printGoodbye();
                 storage.update(toDoList);
                 break;

@@ -6,7 +6,7 @@ import duke.commands.tasks.ToDo;
 import duke.dukeexception.DukeException;
 
 /**
- * This class interprets the user command
+ * This class interprets a user command
  */
 public class Parser {
     private final String command;

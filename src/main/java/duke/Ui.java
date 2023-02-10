@@ -1,14 +1,16 @@
 package duke;
 
 import duke.commands.Command;
+import duke.dukeexception.DukeException;
 
 /**
  * This class handles user interactions/messages
  */
 public class Ui {
     private static final String WELCOME = "Hello! Welcome to Duke. Let's start task tracking!";
-
     private static final String GOODBYE = "Auf Wiedersehen!";
+    private static final int START = 0;
+    private static final int INCREMENT = 1;
 
     public Ui() {
         // empty
@@ -21,8 +23,8 @@ public class Ui {
      */
     public void printList(TaskList tasks) {
         String res = "";
-        for (int i = 0; i < tasks.size(); i++) {
-            res += String.format("%d.%s\n", i + 1, tasks.get(i));
+        for (int i = Ui.START; i < tasks.size(); i++) {
+            res += String.format("%d.%s\n", i + Ui.INCREMENT, tasks.get(i));
         }
         System.out.println(res);
     }
@@ -47,5 +49,9 @@ public class Ui {
      */
     public void printCommandMessage(Command command) {
         System.out.println(command);
+    }
+
+    public void printExceptionMessage(DukeException e) {
+        System.out.println(e.getMessage());
     }
 }
