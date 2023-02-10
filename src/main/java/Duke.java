@@ -5,15 +5,12 @@ import duke.DukeException;
 import duke.Parser;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
-import javafx.application.Platform;
 
 /**
  * Main application class.
  */
 
 public class Duke {
-    private final Ui ui;
     private Storage storage;
     private TaskList tasks;
 
@@ -22,16 +19,13 @@ public class Duke {
      *
      * @param filePath To specific a file path to save the previous records.
      */
-    public Duke(String filePath) {
-        ui = new Ui();
 
+    public Duke(String filePath) {
         try {
             storage = new Storage(filePath);
             tasks = new TaskList(storage.loadRecord());
             tasks.printList();
-            ui.printDashes();
         } catch (IOException e) {
-            System.out.println("Error occurs when try to load.");
             tasks = new TaskList();
         }
     }
@@ -43,12 +37,9 @@ public class Duke {
      * @param userInput User input.
      * @return Duke response to the user input respectively.
      */
-    public String getResponse(String userInput) {
-        String temp = "";
 
-        if (userInput.equals("bye")) {
-            Platform.exit();
-        }
+    public String getResponse(String userInput) {
+        String temp;
 
         try {
             temp = Parser.parseInput(tasks, userInput);
@@ -57,11 +48,23 @@ public class Duke {
         } catch (DukeException e) {
             return e.getMessage();
         } catch (NumberFormatException e) {
-            return "The operation must follow by a integer";
+            return numberFormatExceptionMessage();
         } catch (IOException e) {
-            return "Error occurs when try to access your file";
+            return ioExceptionMessage();
         } catch (DateTimeException e) {
-            return "Invalid date time format, please try again!";
+            return dateTimeExceptionMessage();
         }
+    }
+
+    public String numberFormatExceptionMessage() {
+        return "The operation must follow by a integer!";
+    }
+
+    public String ioExceptionMessage() {
+        return "Error occurs when try to access your file";
+    }
+
+    public String dateTimeExceptionMessage() {
+        return "Invalid date time format, please try again!";
     }
 }

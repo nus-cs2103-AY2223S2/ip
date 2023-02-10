@@ -1,5 +1,7 @@
 package duke;
 
+import javafx.application.Platform;
+
 /**
  * The Parser class is to make sense of (interpret) the user commend.
  * Executes different functions based on the user commend/input.
@@ -57,72 +59,28 @@ public class Parser {
      */
     public static String parseInput(TaskList list, String userInput)
             throws TaskNotExistException, MissingNumberException, MissingDescriptionException, UnknownInputException {
-        int chosenTask;
-
         switch (userInput.split("\\s+")[0]) {
+        case "bye":
+            Platform.exit();
+            return "";
         case "list":
             return list.printList();
         case "mark":
-            if (!userInput.contains(" ")) {
-                throw new MissingNumberException("mark");
-            }
-            chosenTask = Integer.parseInt(userInput.split("\\s+")[1]);
-            return list.mark(chosenTask);
+            return list.mark(userInput);
         case "unmark":
-            if (!userInput.contains(" ")) {
-                throw new MissingNumberException("unmark");
-            }
-            chosenTask = Integer.parseInt(userInput.split("\\s+")[1]);
-            return list.unmark(chosenTask);
+            return list.unmark(userInput);
         case "todo":
-            if (!userInput.contains(" ")) {
-                throw new MissingDescriptionException("todo");
-            }
-            String todoDescription = userInput.substring(userInput.indexOf(" ")).trim();
-            return list.todo(todoDescription);
+            return list.todo(userInput);
         case "deadline":
-            if (!userInput.contains(" ")) {
-                throw new MissingDescriptionException("deadline");
-            }
-            if (!userInput.contains("/")) {
-                throw new MissingDescriptionException("deadline");
-            }
-            String ddFull = userInput.substring(userInput.indexOf(" ")).trim();
-            String ddDescription = ddFull.split("/")[0];
-            String ddDate = ddFull.split("/")[1].substring(ddFull.split("/")[1]
-                    .indexOf(" ")).trim();
-            return list.deadline(ddDescription, new TimeConvertor(ddDate));
+            return list.deadline(userInput);
         case "event":
-            if (!userInput.contains(" ")) {
-                throw new MissingDescriptionException("event");
-            }
-            if (!userInput.contains("/")) {
-                throw new MissingDescriptionException("event");
-            }
-            String eventFull = userInput.substring(userInput.indexOf(" ")).trim();
-            String eventDescription = eventFull.split("/")[0];
-            String eventFrom = eventFull.split("/")[1]
-                    .substring(eventFull.split("/")[1].indexOf(" ")).trim();
-            String eventTo = eventFull.split("/")[2].substring(eventFull
-                    .split("/")[2].indexOf(" ")).trim();
-            return list.event(eventDescription, new TimeConvertor(eventFrom), new TimeConvertor(eventTo));
+            return list.event(userInput);
         case "delete":
-            if (!userInput.contains(" ")) {
-                throw new MissingNumberException("delete");
-            }
-            chosenTask = Integer.parseInt(userInput.split("\\s+")[1]);
-            return list.delete(chosenTask);
+            return list.delete(userInput);
         case "find":
-            if (!userInput.contains(" ")) {
-                throw new MissingNumberException("find");
-            }
-            return list.find(userInput.substring(userInput.indexOf(" ") + 1));
+            return list.find(userInput);
         case "check":
-            if (!userInput.contains("/")) {
-                throw new MissingNumberException("check");
-            }
-            String checkDeadline = userInput.split("/")[1];
-            return list.check(checkDeadline);
+            return list.check(userInput);
         default:
             return "Oh no, I am not sure what that means, could you try again?";
         }
