@@ -145,7 +145,6 @@ public class Storage {
                 throw new DukeException("Oh no! Something happened while loading the to do list");
             }
         }
-
         return lines;
     }
 }
