@@ -1,5 +1,6 @@
 package duke.commands;
 
+import duke.storage.Storage;
 import duke.tasks.TaskList;
 import duke.tasks.Todo;
 import duke.ui.UserInterface;
@@ -12,9 +13,11 @@ public class CreateTodo extends Command {
     }
 
     @Override
-    public void execute(TaskList list, UserInterface ui) {
+    public void execute(TaskList list, UserInterface ui, Storage storage) throws Exception {
         Todo todo = new Todo(list.nextId(), description);
         list.add(todo);
         ui.showMessage("Got it. I've added this task: " + todo);
+
+        storage.save(list);
     }
 }

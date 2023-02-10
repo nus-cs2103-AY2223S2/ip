@@ -1,6 +1,7 @@
 package duke.commands;
 
 import duke.exceptions.DukeException;
+import duke.storage.Storage;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.ui.UserInterface;
@@ -13,7 +14,7 @@ public class DeleteTask extends Command {
     }
 
     @Override
-    public void execute(TaskList list, UserInterface ui) throws DukeException {
+    public void execute(TaskList list, UserInterface ui, Storage storage) throws DukeException {
         try {
             Task task = list.stream().filter(t -> t.id() == index).findFirst().get();
             list.remove(task);

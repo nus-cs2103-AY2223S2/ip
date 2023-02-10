@@ -1,5 +1,7 @@
 package duke.commands;
 
+import duke.exceptions.IOException;
+import duke.storage.Storage;
 import duke.tasks.Deadline;
 import duke.tasks.TaskList;
 import duke.ui.UserInterface;
@@ -14,10 +16,12 @@ public class CreateDeadline extends Command {
     }
 
     @Override
-    public void execute(TaskList list, UserInterface ui) {
+    public void execute(TaskList list, UserInterface ui, Storage storage) throws IOException {
         Deadline deadline = new Deadline(list.nextId(), description, by);
         list.add(deadline);
         ui.showMessage("Got it. I've added this task: " + deadline);
+
+        storage.save(list);
     }
 
 }

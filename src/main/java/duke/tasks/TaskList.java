@@ -2,7 +2,7 @@ package duke.tasks;
 import java.util.ArrayList;
 import java.util.stream.Stream;
 
-public class TaskList {
+public class TaskList implements Iterable<Task> {
     private ArrayList<Task> tasks;
     private int nextId;
 
@@ -34,5 +34,9 @@ public class TaskList {
 
     public Stream<Task> stream() {
         return tasks.stream();
+    }
+
+    @Override public java.util.Iterator<Task> iterator() {
+        return tasks.iterator();
     }
 }

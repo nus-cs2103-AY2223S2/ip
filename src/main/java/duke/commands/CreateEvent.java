@@ -1,6 +1,7 @@
 package duke.commands;
 
 import duke.exceptions.DukeException;
+import duke.storage.Storage;
 import duke.tasks.Event;
 import duke.tasks.TaskList;
 import duke.ui.UserInterface;
@@ -17,7 +18,7 @@ public class CreateEvent extends Command {
     }
 
     @Override
-    public void execute(TaskList list, UserInterface ui) throws DukeException {
+    public void execute(TaskList list, UserInterface ui, Storage storage) throws DukeException {
         Event event = new Event(list.nextId(), description, from, to);
         list.add(event);
         ui.showMessage("Got it. I've added this task: " + event);

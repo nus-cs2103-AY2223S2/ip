@@ -25,5 +25,20 @@ public abstract class Task {
         return this.id;
     }
 
-    abstract String description();
+    public abstract String description();
+
+    public abstract String serialize();
+
+    public static Task deserialize(String s) {
+        switch (s.charAt(0)) {
+            case 'T':
+                return Todo.deserialize(s);
+            case 'D':
+                return Deadline.deserialize(s);
+            case 'E':
+                return Event.deserialize(s);
+            default:
+                return null;
+        }
+    }
 }
