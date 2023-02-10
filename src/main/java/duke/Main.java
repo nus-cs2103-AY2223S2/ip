@@ -32,7 +32,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             stage.getIcons().add(iconImage);
-            stage.setTitle("Duke Bot");
+            stage.setTitle("The Task Mechanic");
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             fxmlLoader.<MainWindow>getController().sendStart();
             stage.show();

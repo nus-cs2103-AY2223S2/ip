@@ -11,6 +11,7 @@ import duke.command.MarkCommand;
 import duke.command.TagCommand;
 import duke.command.TodoCommand;
 import duke.command.UnmarkCommand;
+import duke.enums.CommandType;
 import duke.exception.DukeException;
 
 /**
@@ -18,18 +19,6 @@ import duke.exception.DukeException;
  * and its operations can be carried out.
  */
 public class Parser {
-    private enum CommandType {
-        todo,
-        deadline,
-        mark,
-        unmark,
-        list,
-        bye,
-        delete,
-        find,
-        event,
-        tag;
-    }
 
     /**
      * This method parses the string input and breaks it down to its respective inputs, messages, dates.

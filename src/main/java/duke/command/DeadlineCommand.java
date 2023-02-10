@@ -1,5 +1,6 @@
 package duke.command;
 
+import java.lang.reflect.InvocationTargetException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -7,6 +8,7 @@ import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import duke.Duke;
 import duke.exception.DukeException;
 import duke.storage.StorageList;
 import duke.task.Deadline;
@@ -102,7 +104,7 @@ public class DeadlineCommand extends Command {
         if (isFormatCorrect() && !isDeadlineOver()) {
             tasks.addToList(deadlineTask);
             return "Got it, I've added this task:\n" + deadlineTask + tasks.getLengthMessage();
-        } else if (isDeadlineOver()) {
+        } else if (isFormatCorrect() && isDeadlineOver()) {
             return "Deadline is over, please insert another deadline.";
 
         } else {

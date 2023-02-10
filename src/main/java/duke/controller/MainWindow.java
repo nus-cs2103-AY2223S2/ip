@@ -14,7 +14,7 @@ import javafx.scene.layout.VBox;
  */
 public class MainWindow extends AnchorPane {
 
-    public static final String START = "I am DUKE!\n"
+    public static final String START = "I am The Task Mechanic!\n"
             + "How can I help you today?\n";
     @FXML
     private ScrollPane scrollPane;

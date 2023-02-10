@@ -56,8 +56,7 @@ public class TaskList {
         for (int x = 0; x < list.size(); x++) {
             output += String.valueOf(x + 1) + "." + list.get(x) + "\n";
         }
-        return "Here are the tasks in your list:\n" + output
-                + "\n" + getLengthMessage();
+        return "Here are the tasks in your list:\n" + output + getLengthMessage();
     }
 
     /**
@@ -96,7 +95,7 @@ public class TaskList {
      * Output the statement for the number of tasks in the list.
      */
     public String getLengthMessage() {
-        return "\nNow you have " + this.getLengthOfList() + " tasks in your list.\n";
+        return "\nNow you have " + this.getLengthOfList() + " tasks in your list." + "\n\n";
     }
 
     /**

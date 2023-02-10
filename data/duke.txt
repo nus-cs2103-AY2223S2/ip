@@ -2,3 +2,8 @@
 [D][ ] to hw #hi
 [E][ ] finish hw #ok
 [T][X] finish code #can
+[T][ ] dance                              
+[T][ ] bye                     
+[E][ ] do hw   (from: sunday to:monday)     
+[T][ ] drink coffee   
+[D][X] finish code   (by: Dec 1 2023 09:00 PM)  
