@@ -84,12 +84,13 @@ public class UwUke extends Application {
     }
 
     private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
-        dialogContainer.getChildren().addAll(
-                new DialogBox(userText, new ImageView(user)),
-                new DialogBox(dukeText, new ImageView(duke))
-        );
+        String inputString = userInput.getText();
+        Label userText = new Label(inputString);
+        DialogBox userBox = DialogBox.getUserDialogBox(userText, new ImageView(user));
+        Label dukeText = new Label(getResponse(inputString));
+        DialogBox dukeBox = DialogBox.getDukeDialogBox(dukeText, new ImageView(duke));
+
+        dialogContainer.getChildren().addAll(userBox, dukeBox);
         userInput.clear();
     }
 
