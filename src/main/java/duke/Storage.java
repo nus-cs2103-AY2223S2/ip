@@ -1,12 +1,16 @@
 package duke;
 
-import duke.Commands.Tasks.Deadline;
-import duke.Commands.Tasks.Task;
-import duke.Commands.Tasks.ToDo;
-import duke.Commands.Tasks.Event;
-import duke.DukeException.DukeException;
+import duke.commands.tasks.Deadline;
+import duke.commands.tasks.Task;
+import duke.commands.tasks.ToDo;
+import duke.commands.tasks.Event;
+import duke.dukeexception.DukeException;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
 /**
  * This class handles updating Duke's task list into a local file

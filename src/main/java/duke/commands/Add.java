@@ -1,5 +1,5 @@
-package duke.Commands;
-import duke.Commands.Tasks.Task;
+package duke.commands;
+import duke.commands.tasks.Task;
 import duke.TaskList;
 
 /**

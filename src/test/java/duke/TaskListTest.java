@@ -1,7 +1,7 @@
 package duke;
 
-import duke.Commands.Tasks.Task;
-import duke.Commands.Tasks.ToDo;
+import duke.commands.tasks.Task;
+import duke.commands.tasks.ToDo;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

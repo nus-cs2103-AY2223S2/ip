@@ -3,15 +3,15 @@ package duke;
 import java.util.Scanner;
 import java.lang.String;
 
-import duke.Commands.Parser;
-import duke.Commands.Command;
-import duke.Commands.Exit;
-import duke.DukeException.DukeException;
+import duke.commands.Parser;
+import duke.commands.Command;
+import duke.commands.Exit;
+import duke.dukeexception.DukeException;
 
 /**
  * @author Shi Jiaao
  *
- * Welcome to Duke
+ * Welcome to Duke.
  */
 public class Duke {
     public static void main(String[] args) {

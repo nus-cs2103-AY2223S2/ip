@@ -1,6 +1,6 @@
 package duke;
 
-import duke.Commands.Command;
+import duke.commands.Command;
 
 /**
  * This class handles user interactions/messages

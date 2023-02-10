@@ -1,4 +1,4 @@
-package duke.DukeException;
+package duke.dukeexception;
 
 /**
  * This class handles exceptions pertaining to Duke
