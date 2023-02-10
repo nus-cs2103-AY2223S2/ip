@@ -9,7 +9,7 @@ import duke.commands.tasks.Task;
  * This class handles searching for tasks using keywords.
  */
 public class Find extends Command {
-    private final static String RESPONSE_HEADER = "Got it! Here are your search results:\n";
+    private static final String RESPONSE_HEADER = "Got it! Here are your search results:\n";
     private String keyword;
     private String searchResults;
 

@@ -13,13 +13,14 @@ import duke.dukeexception.DukeException;
  * @author Shi Jia Ao
  */
 public class Duke {
+    private static final String FILEPATH = "data";
     private final Ui ui;
     private final Storage storage;
     private TaskList toDoList;
 
     public Duke() {
         this.ui = new Ui();
-        this.storage = new Storage("data");
+        this.storage = new Storage(Duke.FILEPATH);
         this.toDoList = this.storage.initialise();
     }
 
@@ -39,7 +40,7 @@ public class Duke {
     }
 
     private void executeUserInput(Command command) {
-        command.execute(toDoList);
+        command.execute(this.toDoList);
     }
 
     public static void main(String[] args) {

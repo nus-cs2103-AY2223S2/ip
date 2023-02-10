@@ -6,7 +6,7 @@ import duke.TaskList;
  * This class represents the command to list all current tasks.
  */
 public class ListTasks extends Command {
-    private static String RESPONSE_HEADER = "Printing tasks:\n";
+    private static final String RESPONSE_HEADER = "Printing tasks:\n";
     private String response;
 
     public ListTasks(String message) {
