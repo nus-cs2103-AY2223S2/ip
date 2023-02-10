@@ -9,6 +9,10 @@ import duke.exceptions.EventFromToNotSpecified;
 import duke.exceptions.FindKeywordMissing;
 import duke.exceptions.ListIndexMissing;
 import duke.exceptions.TaskNameNotSpecified;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.ToDo;
 
 /**
  * Helper class to parse user inputs into usable information.
@@ -145,6 +149,33 @@ public class Parser {
         String timeInput = commandInput.split(" ")[1];
         timeInput = timeInput.replaceAll("/", "-");
         return LocalDate.parse(timeInput);
+    }
+
+    public static Task parseLoadedTask(String strTask) {
+        char taskType;
+        String taskName;
+        boolean isDone;
+
+        String[] info1 = strTask.split("\\[");
+        taskType = info1[1].charAt(0);
+        isDone = info1[2].charAt(0) == 'x';
+        String[] info2 = info1[2].split(" \\(");
+        taskName = info2[0].substring(3);
+
+        switch (taskType) {
+        case('T'):
+            return new ToDo(taskName, isDone);
+        case('D'):
+            String dueDate = info2[1].substring(4, info2[1].indexOf(")"));
+            return new Deadline(taskName, dueDate, isDone);
+        case('E'):
+            String[] info3 = info2[1].split(" to: ");
+            String fromDate = info3[0].substring(6);
+            String toDate = info3[1].substring(0, info3[1].indexOf(")"));
+            return new Event(taskName, fromDate, toDate, isDone);
+        default:
+            return null;
+        }
     }
 
 }

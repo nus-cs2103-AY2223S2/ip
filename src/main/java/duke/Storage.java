@@ -7,12 +7,9 @@ import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import duke.parsing.ParsedTask;
-import duke.tasks.Deadline;
-import duke.tasks.Event;
+import duke.parsing.Parser;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
-import duke.tasks.ToDo;
 
 /**
  * Functions related to saving/loading data to/from files.
@@ -55,29 +52,12 @@ public class Storage {
                 if (strTask.length() == 1) {
                     return; // for handling empty file, it still contains "\n"
                 }
-                ParsedTask parsedTaskInfo = ParsedTask.parseLoadTask(strTask);
-                Task task;
-
-                switch (parsedTaskInfo.getTaskType()) {
-                case ('T'):
-                    task = new ToDo(parsedTaskInfo.getTaskName(), parsedTaskInfo.getIsDone());
-                    tasks.add(task);
-                    break;
-                case ('D'):
-                    task = new Deadline(parsedTaskInfo.getTaskName(),
-                            parsedTaskInfo.getDueDate(), parsedTaskInfo.getIsDone());
-                    tasks.add(task);
-                    break;
-                case ('E'):
-                    task = new Event(parsedTaskInfo.getTaskName(), parsedTaskInfo.getFromDate(),
-                            parsedTaskInfo.getToDate(), parsedTaskInfo.getIsDone());
-                    tasks.add(task);
-                    break;
-                default:
-                }
+                Task loadedTask = Parser.parseLoadedTask(strTask);
+                tasks.add(loadedTask);
             }
         } catch (NoSuchFileException e) {
             // do nothing if no file exists (nothing to execute)
         }
     }
+
 }
