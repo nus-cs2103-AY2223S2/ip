@@ -116,7 +116,7 @@ public class DateUtils {
      * @param time - a time.
      * @return the time that is the start of the week of the given time.
      */
-    public static LocalDateTime getStartOfWeek(LocalDateTime time) {
+    public static LocalDateTime toStartOfWeek(LocalDateTime time) {
         return toStartOfWeek(time, DEFAULT_START_OF_WEEK);
     }
 

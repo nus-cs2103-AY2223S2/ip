@@ -47,10 +47,10 @@ public class ViewScheduleCommand extends CommandController {
 
 
     private DisplayData filterTasks(ArgumentMap args, LogicManager manager) throws SyntaxException {
-        LocalDateTime start = DateUtils.getStartOfWeek(LocalDateTime.now());
+        LocalDateTime start = DateUtils.toStartOfWeek(LocalDateTime.now());
         if (args.getMainInput().isPresent()) {
             LocalDateTime time = DateUtils.parse(args.getMainInput().get());
-            start = DateUtils.getStartOfWeek(time);
+            start = DateUtils.toStartOfWeek(time);
         }
         LocalDateTime end = start.plusDays(DAYS_IN_WEEK);
         TaskFilterReport report = manager.getTaskManager().filterWithin(start, end);
