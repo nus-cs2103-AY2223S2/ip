@@ -40,6 +40,7 @@ public class Deadline extends Task {
         if (Collections.frequency(Arrays.asList(args), "/by") > 1) {
             throw new TaskParseException("This deadline has too many timings!");
         }
+
         for (int i = 0; i < args.length; i++) {
             if (args[i].equals("/by")) {
                 isInTokenBy = true;
@@ -57,6 +58,7 @@ public class Deadline extends Task {
         if (by.isEmpty()) {
             throw new TaskParseException("This deadline is missing its deadline! Use /by [date]");
         }
+
         try {
             return new Deadline(objective, LocalDateTime.parse(by, DATE_IN_FMT));
         } catch (DateTimeParseException ex) {

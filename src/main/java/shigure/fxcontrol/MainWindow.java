@@ -48,12 +48,8 @@ public class MainWindow extends AnchorPane {
         bgImageView.fitHeightProperty().bind(stage.heightProperty());
     }
 
-    public void addDialog(String text, boolean isMiki) {
-        if (isMiki) {
-            dialogContainer.getChildren().add(new DialogBox(text, DialogBox.Pov.MIKI));
-        } else {
-            dialogContainer.getChildren().add(new DialogBox(text, DialogBox.Pov.USER));
-        }
+    public void addDialog(String text, DialogBox.Pov pov) {
+        dialogContainer.getChildren().add(new DialogBox(text, pov));
         assert !dialogContainer.getChildren().isEmpty() : "Dialog Container should be non-empty after adding element";
     }
 

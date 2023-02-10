@@ -50,8 +50,21 @@ public class Storage {
     private void createSaveDir() {
         File dir = new File(dataPath);
         if (!dir.mkdirs()) {
-            //no perms/dir locked? consider warning user
+            // Do nothing - Could not create save directory, ignore here and allow other methods to alert user
         }
+    }
+
+    private String[] makeSaveData(TaskList tasks) {
+        String saveData = "";
+        saveData += tasks.size();
+        for (int i = 0; i < tasks.size(); i++) {
+            String[] repres = tasks.get(i).save();
+            saveData += "\n" + repres.length;
+            for (int j = 0; j < repres.length; j++) {
+                saveData += "\n" + repres[j];
+            }
+        }
+        return saveData.split("\n");
     }
 
     /**
@@ -88,15 +101,10 @@ public class Storage {
         Path path = FileSystems.getDefault().getPath(dataPath).resolve(pathString);
         BufferedWriter bw = Files.newBufferedWriter(path, StandardCharsets.UTF_8);
         try {
-            bw.write(Integer.toString(tasks.size()));
-            for (int i = 0; i < tasks.size(); i++) {
-                String[] repres = tasks.get(i).save();
+            String[] saveData = makeSaveData(tasks);
+            for (int i = 0; i < saveData.length; i++) {
+                bw.write(saveData[i]);
                 bw.newLine();
-                bw.write(Integer.toString(repres.length));
-                for (int j = 0; j < repres.length; j++) {
-                    bw.newLine();
-                    bw.write(repres[j]);
-                }
             }
         } finally {
             bw.close();
@@ -135,7 +143,7 @@ public class Storage {
                     tasks.add(Event.parseLoad(repres));
                     break;
                 default:
-                    //back-compat? try to handle
+                    // Invalid task type, possibly from a different version - skip and continue if no other problems
                 }
             }
         } catch (NumberFormatException | TaskParseException ex) {

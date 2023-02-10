@@ -4,13 +4,13 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import shigure.fxcontrol.DialogBox;
 import shigure.fxcontrol.MainWindow;
 
 public class Gui extends Ui {
     private final MainWindow mainWindow;
     private final Stage stage;
     private final boolean isAsciiOnly;
-    private final boolean isAutoDiv = true;
 
     public Gui(MainWindow mainWindow, Stage stage, boolean isAsciiOnly) {
         this.mainWindow = mainWindow;
@@ -20,22 +20,22 @@ public class Gui extends Ui {
 
     @Override
     public void printDiv() {
-        //Do nothing
+        // Do nothing
     }
 
     @Override
     public void printAutoDiv() {
-        //Do nothing
+        // Do nothing
     }
 
     @Override
     public void printUser(String s) {
-        mainWindow.addDialog(s, false);
+        mainWindow.addDialog(s, DialogBox.Pov.USER);
     }
 
     @Override
     public void printMiki(String s) {
-        mainWindow.addDialog(s, true);
+        mainWindow.addDialog(s, DialogBox.Pov.MIKI);
     }
 
     @Override
@@ -57,7 +57,7 @@ public class Gui extends Ui {
         if (!isAsciiOnly) {
             printMiki("Hello " + username + " !! Konmiki! \uFF3C(\uFFE3\u25BD\uFFE3)/");
         } else {
-            printMiki("Hello " + username + " !! Konmiki! \\\\(^v^)/");
+            printMiki("Hello " + username + " !! Konmiki! \\(^v^)/");
         }
     }
 

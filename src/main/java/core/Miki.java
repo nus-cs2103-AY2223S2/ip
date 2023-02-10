@@ -30,7 +30,7 @@ public class Miki {
             try {
                 storage.load("autosave.txt", tasks);
             } catch (IOException ex) {
-                // Do nothing
+                // Do nothing - assume this is the first run, and the autosave has simply not been created
             } catch (Storage.MikiLoadException ex) {
                 ui.printMiki("the autosave is corrupted... not using that!");
                 ui.printDiv();
