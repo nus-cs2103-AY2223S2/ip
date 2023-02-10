@@ -9,15 +9,17 @@
 - [Quick Start](#quick-start)
 - [Command Summary](#command-summary)
 - [Features](#features)
-    * [Add Todo Tasks](#adds-todo-tasks)
-    * [Add Deadline Tasks](#adds-deadline-tasks)
-    * [Add Event Tasks](#adds-event-tasks)
-    * [List All Tasks](#lists-all-tasks)
-    * [List All Events](#lists-all-tasks)
-    * [List All Todos](#lists-all-tasks)
-    * [Mark Task](#mark-tasks-as-done)
-    * [Unmark Task](#unmark-tasks)
-    * [Delete Task](#delete-tasks) 
+    * [Create a Task](#create-a-task)
+      * [Add Todo task](#add-todo-task)
+      * [Add Deadline task](#add-deadline-task)
+      * [Add Event task](#add-event-tasks)
+    * [List All Tasks](#list-all-tasks)
+      * [List All Events](#list-all-events) 
+      * [List All Todos](#list-all-todos)
+      * [List All Deadlines](#list-all-deadlines)
+    * [Mark Task](#mark-task) 
+    * [Unmark Task](#unmark-task)
+    * [Delete Task](#delete-task) 
     * [Find Task](#find-tasks)
     * [Undo command](#undo-command)
     * [Checkout version](#checkout-version)
@@ -44,184 +46,166 @@ I am here to make task management simple and efficient. Let's get started!
 ## Command Summary
 
 | Index |   Command to Use    |                   Format                    |                        examples                         |
-| :---: |:-------------------:|:-------------------------------------------:|:-------------------------------------------------------:|
-| 1 | Add a Deadline task |   `deadline <description> /by <deadline>`   |         `deadline homework due /by 2023-02-02`          |
-| 2 |  Add an Event task  | `event <description> /from <from> /to <to>` | `event project meeting /from 2023-02-02 /to 2023-12-01` |
-| 4 |   Add a Todo task   |            `todo <description>`             |                   `todo borrow book`                    |
-| 5 |    Delete a task    |               `delete <task>`               |                       `delete 1`                        |
-| 6 |    Find task(s)     |            `find <description>`             |                     `find homework`                     |
-| 8 |   List all tasks    |                   `list`                    |                         `list`                          |
-| 8 |   List all events   |                `list event`                 |                      `list event`                       |
-| 8 |   List all todos    |                 `list todo`                 |                       `list todo`                       |
-| 8 | List all deadlines  |               `list deadline`               |                     `list deadline`                     |
-| 9 |     Mark a task     |                `mark <task>`                |                        `mark 1`                         |
-| 13 |    Unmark a task    |            `unmark <TaskIndex>`             |                       `unmark 1`                        |
-| 16 |  Terminate session  |                    `bye`                    |                          `bye`                          |
+|:-----:|:-------------------:|:-------------------------------------------:|:-------------------------------------------------------:|
+|   1   | Add a Deadline task |   `deadline <description> /by <deadline>`   |         `deadline homework due /by 2023-02-02`          |
+|   2   |  Add an Event task  | `event <description> /from <from> /to <to>` | `event project meeting /from 2023-02-02 /to 2023-12-01` |
+|   3   |   Add a Todo task   |            `todo <description>`             |                   `todo borrow book`                    |
+|   4   |    Delete a task    |               `delete <task>`               |                       `delete 1`                        |
+|   5   |    Find task(s)     |            `find <description>`             |                     `find homework`                     |
+|   6   |   List all tasks    |        `list <event/deadline/todo>?`        |                         `list`                          |
+|  10   |     Mark a task     |                `mark <task>`                |                        `mark 1`                         |
+|  11   |    Unmark a task    |               `unmark <task>`               |                       `unmark 1`                        |
+|  12   |     Undo action     |                   `undo`                    |                       `unmark 1`                        |
+|  13   |  Checkout version   |            `checkout <version>?`            |                       `unmark 1`                        |
+|  14   |  Terminate session  |                    `bye`                    |                          `bye`                          |
 
 
 ## Features
 
-### Add Todo Tasks
-The `todo <description>` command allows you to easily add a Todo task to your task list. It takes in a single argument, which is the description of the task.
+**Notes about the command format**
 
-For example, running the command, `todo homework`,  would add a Todo task with the description "homework" to your task list and return the following output:
+- Words enclosed in diamond brackets `<>` are the parameters to be supplied by the user.
+- `?` after `<>` indicates that the argument is optional, and the user may choose not to specify it.
+- Parameters must respect the order of the command format
+- Extra parameters for commands that do not take in parameters will be ignored.
 
->Got it. I've added this task:
->
->\[T][ ] homework
->
->Now you have 5 tasks in the list.
+In Duke, there are 3 types of tasks:
+- **Deadline `D`**: Used when there are deadlines to meet, and you need to keep track of what to do
+- **Event `E`**: Used when there is an event that you need to attend, and you need to keep track of it
+- **ToDo `T`**: The most fundamental type of tasks that denote an item that you intend to accomplish
 
-### Add Deadline Tasks
-The `deadline <description> /by <DateTime>` command allows you to add a Deadline task to your task list. It takes in two arguments, the first is the description of the task and the second is the deadline of the task in the format of `/by <DateTime>`.
+All tasks come with the ability to be described, and support marking or unmarking tasks as completed.
 
-For example, running the command, `deadline homework /by 16/01/2023 1500`, would add the task "homework" to your task list with a deadline of January 16th, 2023 at 3:00pm and return the following output:
+### Create a task
 
->Got it. I've added this task:
->
->\[D][ ] homework ( by: Jan 16 2023 15:00 )
->
->Now you have 5 tasks in the list.
+Tasks are created and stored locally in a `.txt` file under the `data` folder.
 
-### Add Event Tasks
+#### Add Todo Task
+The `todo <description>` command adds a Todo task to your task list. It takes in a single argument, which is the description of the task.
+
+Example:  `todo homework`
+
+Expected Outcome: 
+```
+Got it! I've added this task:
+    [T] [ ] homework
+Now you have 1 task(s) in the list.
+```
+
+#### Add Deadline Task
+The `deadline <description> /by <deadline>` command adds a Deadline task to your task list. It takes in two arguments, the first is the description of the task and the second is the deadline of the task in the format of `/by <DateTime>`.
+
+Example: `deadline return book /by 2023-02-13`
+
+Expected Outcome:
+```
+Got it! I've added this task:
+    [D] [ ] return book (by: monday, Feb 13 2023)
+Now you have 1 task(s) in the list.
+```
+
+#### Add Event Task
 The `event <description> /from <DateTime> /to <DateTime>` command allows you to add an Event task to your task list. It takes in three arguments, the first is the description of the task, the second is the start time of the event in the format of `/from <DateTime>`, and the third is the end time of the event in the format of `/to <DateTime>`.
 
-For example, running`event homework /from 16/01/2023 1500 /to 16/01/2023 1900`, would add the task "homework" as an event to your task list with a start time of January 16th, 2023 at 3:00pm and end time of January 16th, 2023 at 7:00pm and return the following output
+Example: `event homework /from 2023-02-13 /to 2023-03-11`
 
-> Got it. I've added this task:
->
-> \[E][ ] homework ( from: Jan 16 2023 15:00 to: Jan 16 2023 19:00 )
->
-> Now you have 7 tasks in the list.
+Expected Outcome:
+```
+Got it! I've added this task:
+    [E] [ ] project meeting (from: Feb 13 2023 to Mar 11 2023)
+Now you have 1 task(s) in the list.
+```
+### List All Tasks
+In Duke, you can easily view the list of tasks. The `list` command allows you to view all tasks in your task list. 
+It takes in 3 optional arguments and will show the description, deadline (if any), and start and end time (if any) for each task in the list.
 
+#### List All Events
 
-### Add Fixed Duration Tasks
-The `fixed <description> /within <Duration>` command allows you to add a task with fixed duration to your task list. It takes in two arguments, the first is the description of the task and the second is the duration of the task in the format of `/within <Duration>`.
+Example: `list event`
 
-For example, running the command, `fixed homework /within 2`, would add the task "homework" to your task list with a duration of 2 hours and return the following output:
+Expected Outcome: 
+```
+1.  [E] [ ] project meeting (from: Feb 13 2023 to Mar 11 2023)
+```
 
-> Got it. I've added this task:
->
-> \[F][ ] homework ( duration: 2h )
->
-> Now you have 5 tasks in the list.
+#### List All Todos
 
-### Updates Tasks
-The `update <TaskIndex> <description>` command allows you to update the description of a task in your task list. It takes in two arguments, the first is the index of the task you want to update, and the second is the new description.
+Example: `list todo`
 
-For example, running the command, `update 1 Do Assignment 1`, would update the task with index 1 to be "Do Assignment 1" and return the following output:
+Expected Outcome:
+```
+1.  [T] [ ] project meeting 
+```
 
-> Nice! I've updated the description of this task:
->
-> \[D][ ] Do Assignment 1 ( by: Jan 15 2021 03: 00 )
+#### List All Deadlines
 
-### Lists All Tasks
-The `list` command allows you to view all tasks in your task list. It takes in no arguments and will show the description, deadline (if any), and start and end time (if any) for each task in the list.
+Example: `list deadline`
 
-For example, running the command `list` will show the content of the list return the following output:
-
-> 1. \[D][ ] homework ( by: 16/01/2023 1500 )
-> 2. \[E][ ] meeting ( from: 16/01/2023 1500 to: 16/01/2023 1700 )
-> 3. \[T][X] grocery shopping
-
-### Mark Tasks as Done
-The `mark <TaskIndex>` command allows you to mark a task as done in your task list. It takes in one argument, the index of the task you want to mark as done.
-
-For example, running the command, `mark 1`,  would mark the task "homework" as done and return the following output:
-
-> Nice! I've marked this task as done:
->
-> \[D][X] Do Assignment 1 ( by: Jan 15 2021 03: 00 )
+Expected Outcome:
+```
+1.  [D] [ ] return book (by: monday, Feb 13 2023)
+```
 
 
-### Unmark Tasks
-The `unmark <TaskIndex>` command allows you to unmark a task that you previously marked as done. It takes in a single argument which is the index of the task you want to unmark.
+### Mark Task
+The `mark <task>` command allows you to mark a task as done in your task list. It takes in one argument, the index of the task you want to mark as done.
 
-For example: running the command, `unmark 1`,  would unmark the task previously marked as done at index 1 and return the following output:
+Example: `mark 1`
 
-> Ok, I've marked this task as not done yet:
->
-> \[D][ ] Do Assignment 1 ( by: Jan 15 2021 03: 00 )
+Expected Outcome: 
+```
+Nice! I've marked this task as done:
+    [X] Do Assignment 1 
+```
 
-### Delete Tasks
-The `delete <TaskIndex>` command allows you to delete a task from your task list. It takes in a single argument which is the index of the task you want to delete.
+### Unmark Task
+The `unmark <task>` command allows you to unmark a task that you previously marked as done. It takes in a single argument which is the index of the task you want to unmark.
 
-For example: running the command, `delete 1`, would unmark the task previously marked as done at index 1 and return the following output:
+Example: `unmark 1`
 
-> Ok, I've removed this task:
->
-> \[D][X] Do Assignment 1 ( by: Jan 15 2021 03: 00 )
->
-> Now you have 8 tasks in the list.
+Expected Outcome:
+```
+Ok, I've marked this task as not done yet:
+    [ ] Do Assignment 1
+```
+
+### Delete Task
+The `delete <task>` command allows you to delete a task from your task list. It takes in a single argument which is the index of the task you want to delete.
+
+Example: `delete 1`
+
+Expected Outcome:
+```
+Noted. I've removed this task:
+    [T][X] Do Assignment 1 
+Now you have 1 task in the list.
+```
 
 ### Find Tasks
-The `find <description...>` command allows you to find tasks in your task list based on their descriptions. It takes in one or more arguments which are the keywords you want to search for,
+The `find <description...>` command allows you to find tasks in your task list based on their descriptions. 
+It takes in one or more arguments which are the keywords you want to search for,
 
-For example, running the command `find homework`, will find all the task with description that matches or partially matches the word homework and return the following output:
-> Here are the tasks matching "homework":
->
-> 1. \[D][ ] homework ( by: 16/01/2023 1500 )
-> 2. \[T][ ] Do homework for math class
-> 3. \[T][ ] Read chapter 2 and do the homework exercises
+Example: `find homework`
 
-running the command `find homework eat meeting`, will find all the tasks with description that matches or partially matches each input description and return the following output:
-> Here are the tasks matching "homework":
->
-> 1. \[D][ ] homework ( by: 16/01/2023 1500 )
-> 2. \[T][ ] Do homework for math class
-> 3. \[T][ ] Read chapter 2 and do the homework exercises
-     >
-     >   Here are the tasks matching "eat":
->
-> 1. \[D][ ] eat breakfast ( by: 16/01/2023 0900 )
-> 2. \[T][ ] eat chicken breast
-     >
-     >   Here are the tasks matching "meeting":
->
-> 1. \[E][ ] project team meeting ( from: 17/01/2023 1500 to 17/01/2023 1700 )
-
-### Find Next Free Day
-It takes in no arguments, and will return the next available day in the next month with no tasks or events scheduled on it.
-
-For example, running the command `free` will return the following output:
-> Next free day: 02/15/2023
-
-### Mass Delete Done Tasks
-The `massDelete` command allows you to delete all the done tasks in your task list.
-
-For example, running the command `free` will return the following output:
-> I have deleted all the tasks that have been marked as done.
-
-### Sort Tasks by Category
-The `sort` command allows you to sort all the events in your task list by categories.
-
-For example, running the command, `sort`, will return the following output:
-> Here are all your Deadline Task:
-> 1. \[D][ ] grade all students' homework ( by: Jan 16 2023 15:00 )
-> 2. \[D][ ] do Assignment 1 ( by: Jan 19 2023 23:59 )
->
-> Here are all your Event Task:
-> 1. \[E][ ] project team meeting ( from: Jan 17 2023 15:00 to Jan 17 2023 17:00 )
->
-> Here are all your Fixed Duration Task:
-> 1. \[F][X] exercise ( duration: 1h )
-> 2. \[F][ ] Coding Time Practice ( duration: 2h )
->
-> Here are all your Todo Task:
-> 1. \[T][ ] manage hoemework files
-> 2. \[T][ ] buy milk
-> 3. \[T][ ] mop the floor
-
-### View Tasks on a Given Date
-The `view <Date>` command allows you to view all the tasks on a given date. It takes in a single argument which is the date in the format of DD/MM/YYYY.
-
-For example, runing the command, `view 16/01/2023` would display all tasks on January 16th, 2023 and return the following output:
-> Here are the tasks on the specified date:
-> 1. \[D][ ] grade homework of students ( by: Jan 16 2023 15:00 )
-> 2. \[E][ ] do Statistic Assignment ( from: Jan 16 2023 16:00 to: Jan 16 2023 19:00 )
+Expected Outcome:
+```
+Here are the tasks matching "homework":
+[T][ ] homework 
+[T][ ] Do homework for math class
+```
 
 ### Bye
-The `bye` command allows you to exit the task list application.
+Terminates the application.
+
+Example of usage:
+
+`bye`
+
+Expected outcome:
+
+```
+Bye. Hope to see you again soon!
+```
 
 ## Useful Resources
 1. [CheckStyle Tutorial](https://se-education.org/guides/tutorials/checkstyle.html)
