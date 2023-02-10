@@ -28,7 +28,7 @@ public class MarkCommand extends Command {
         } else {
             throw new InvalidArgumentException(); //find a btr name
         }
-        return markMsg + errorMsg;
+        return fullReplyMsg(errorMsg, markMsg);
     }
 
     @Override

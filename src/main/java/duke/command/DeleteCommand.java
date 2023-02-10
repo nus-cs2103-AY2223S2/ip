@@ -18,8 +18,8 @@ public class DeleteCommand extends Command {
         String errorMsg = saveToFile(s, l, ui, prevCommand);
 
         Task t = l.remove(index);
-        String fullMsg= errorMsg + "\n" +ui.showDelete(t, l);
-        return fullMsg;
+
+        return fullReplyMsg(errorMsg, ui.showDelete(t, l));
     }
 
 }

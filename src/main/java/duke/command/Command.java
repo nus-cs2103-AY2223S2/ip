@@ -28,4 +28,12 @@ public abstract class Command {
         }
         return "";
     }
+
+    protected String fullReplyMsg(String exceptionMsg, String msg) {
+        if (exceptionMsg.equals("")) {
+            return msg;
+        } else {
+            return exceptionMsg + "\n" + msg;
+        }
+    }
 }

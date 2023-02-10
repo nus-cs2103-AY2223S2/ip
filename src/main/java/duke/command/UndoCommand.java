@@ -13,12 +13,14 @@ public class UndoCommand extends Command{
     public String execute(TaskList l, Ui ui, Storage s, Command prevCommand, Duke duke) {
         TaskList oldTaskList;
         String errorMsg = "";
+        String undoMsg = "";
         try {
             oldTaskList = s.load();
             duke.setTaskList(oldTaskList);
-            return ui.showList(oldTaskList);
+            undoMsg = ui.showList(oldTaskList);
         } catch (FileNotFoundException | IncorrectFileFormatException e) {
-            return "Unable to undo. " + ui.showError(e);
+            errorMsg = "Unable to undo.\n" + ui.showError(e);
         }
+        return fullReplyMsg(errorMsg, undoMsg);
     }
 }
