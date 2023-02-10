@@ -1,0 +1,16 @@
+list
+todo borrow book
+deadline return book /by Sunday
+event project meeting /from Mon 2pm /to 4pm
+event /from Mon 2pm /to 4pm
+event project /since Mon 2pm /to 9pm
+deadline return book /by
+todo
+mark 1
+mark 2
+unmark 1
+list
+todo run
+delete 3
+delete 5
+list
