@@ -23,18 +23,18 @@ public class TodoCommand extends Command {
     /**
      * @inheritDoc
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         try {
             String[] words = this.input.split(" ");
             if (words.length <= 1) {
-                throw new DukeException(ui.emptyDescriptionError());
+                throw new DukeException(Ui.emptyDescriptionError());
             }
             Todo td = new Todo(input.substring(5, input.length()));
             tasks.add(td);
             storage.saveTaskList(tasks);
-            return ui.confirmationMessage("added", tasks, td);
-        } catch (DukeException de) {
-            return de.getMessage();
+            return Ui.confirmationMessage("added", tasks, td);
+        } catch (DukeException e) {
+            return e.getMessage();
         }
     }
 }

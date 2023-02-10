@@ -1,5 +1,16 @@
 package duke;
-import duke.commands.*;
+import duke.commands.ByeCommand;
+import duke.commands.Command;
+import duke.commands.DeadlineCommand;
+import duke.commands.DeleteCommand;
+import duke.commands.EventCommand;
+import duke.commands.FindCommand;
+import duke.commands.FindDateCommand;
+import duke.commands.ListCommand;
+import duke.commands.MarkCommand;
+import duke.commands.TodoCommand;
+import duke.commands.UnmarkCommand;
+import duke.commands.UpdateCommand;
 
 
 /**
@@ -17,7 +28,7 @@ public class Parser {
      * @param input The user's input.
      * @throws IllegalArgumentException  If user's input does not correspond to any of the cases.
      */
-    public static Command parse(String input) throws IllegalArgumentException {
+    public static Command parse(String input) throws IllegalArgumentException, DukeException {
         String[] words = input.split(" ");
         Type t = Type.valueOf(words[0].toUpperCase());
         switch(t) {

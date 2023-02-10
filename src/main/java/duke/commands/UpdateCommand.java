@@ -4,8 +4,8 @@ import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.tasks.Deadline;
 import duke.tasks.Task;
-import duke.tasks.Todo;
 
 /**
  * The class for the Update command which extends Command class.
@@ -25,21 +25,29 @@ public class UpdateCommand extends Command {
     /**
      * @inheritDoc
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         try {
             String[] words = this.input.split(" ");
-            if (words.length <= 1) {
-                throw new DukeException(ui.emptyDescriptionError());
-            }
             int index = Integer.parseInt(words[1]);
-            Task t = tasks.get(index-1);
-            t.update(this.input.split("/description")[1]);
+            if (index > tasks.size() || index <= 0) {
+                throw new DukeException(Ui.insufficientTasksMessage());
+            }
+            Task t = tasks.get(index - 1);
+
+            if (words[2].equals("/description")) {
+                t.update(this.input.split("/description")[1].trim());
+            } else if (words[2].equals("/deadline") && (t instanceof Deadline)) {
+                Deadline d = (Deadline) t;
+                d.updateDeadline(this.input.split("/deadline")[1].trim());
+            } else {
+                throw new DukeException(Ui.updateWrongFormat());
+            }
             storage.saveTaskList(tasks);
-            return ui.confirmationMessage("updated", tasks, t);
-        } catch (DukeException de) {
-            return de.getMessage();
-        } catch (NumberFormatException nfe) {
-            return ui.taskNumberNotSpecified();
+            return Ui.confirmationMessage("updated", tasks, t);
+        } catch (DukeException e) {
+            return e.getMessage();
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+            return Ui.updateWrongFormat();
         }
     }
 }

@@ -21,9 +21,9 @@ public class ByeCommand extends Command {
     /**
      * @inheritDoc
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         storage.saveTaskList(tasks);
-        return ui.showByeMessage();
+        return Ui.showByeMessage();
     }
 
     /**

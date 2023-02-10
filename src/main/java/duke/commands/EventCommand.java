@@ -23,8 +23,17 @@ public class EventCommand extends Command {
         this.input = input;
     }
 
+    /**
+     * Checks if the format of the input is valid.
+     *
+     * @param indexFrom the index of the /from.
+     * @param indexTo the index of the /to.
+     * @return a boolean
+     */
     private boolean checkFormat(int indexFrom, int indexTo) {
-        return (indexFrom + 6 > indexTo - 1)
+        return indexFrom < -1
+                || indexFrom - 1 < 6
+                || (indexFrom + 6 > indexTo - 1)
                 || (indexTo + 4 > this.input.length())
                 || (!(this.input.substring(indexFrom, indexFrom + 6).equals("/from ")
                 && this.input.substring(indexTo, indexTo + 4).equals("/to ")));
@@ -33,16 +42,16 @@ public class EventCommand extends Command {
     /**
      * @inheritDoc
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         try {
             int indexFrom = input.indexOf("/");
             int indexTo = input.lastIndexOf("/");
             String[] words = this.input.split(" ");
             if (words.length <= 1) {
-                throw new DukeException(ui.emptyDescriptionError());
+                throw new DukeException(Ui.emptyDescriptionError());
             }
             if (checkFormat(indexFrom, indexTo)) {
-                throw new DukeException(ui.wrongEventCommandFormat());
+                throw new DukeException(Ui.wrongEventCommandFormat());
             }
 
             Event e = new Event(input.substring(6, indexFrom - 1),
@@ -50,13 +59,11 @@ public class EventCommand extends Command {
                     input.substring(indexTo + 4, input.length()));
             tasks.add(e);
             storage.saveTaskList(tasks);
-            return ui.confirmationMessage("added", tasks, e);
-        } catch (AssertionError ae) {
-            return ae.getMessage();
-        } catch (DukeException de) {
-            return de.getMessage();
-        } catch (DateTimeParseException date_time_e) {
-            return ui.wrongEventDateFormat();
+            return Ui.confirmationMessage("added", tasks, e);
+        } catch (DukeException e) {
+            return e.getMessage();
+        } catch (DateTimeParseException e) {
+            return Ui.wrongEventDateFormat();
         }
     }
 }

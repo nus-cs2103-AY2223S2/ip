@@ -1,7 +1,6 @@
 package duke.commands;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
 
 /**
  * The abstract class for command.
@@ -13,11 +12,10 @@ public abstract class Command {
      * Prints appropriate error messages.
      *
      * @param tasks TaskList
-     * @param ui The Ui object
      * @param storage The Storage object used to save the edited TaskList.
      * @return True if the execution is successful, false if it's not.
      */
-    public abstract String execute(TaskList tasks, Ui ui, Storage storage);
+    public abstract String execute(TaskList tasks, Storage storage);
 
     /**
      * Overridden by ByeCommand only.
