@@ -29,18 +29,19 @@ public class Ui {
     /**
      * Method to print the welcome message when Panav is loaded up.
      */
-    public void showWelcome() {
-        showLine();
-        System.out.println("Hello hello! I'm Panav");
-        System.out.println("What's up bro");
-        showLine();
+    public String showWelcome() {
+        String text = "";
+
+        text += "Hello hello! I'm Panav \n";
+        text += "What's up bro";
+        return text;
     }
 
     /**
      * Method to print the line divider.
      */
-    public void showLine() {
-        System.out.println(LINE_DIVIDER);
+    public String showLine() {
+        return LINE_DIVIDER;
     }
 
     /**
@@ -56,11 +57,15 @@ public class Ui {
      * @param tasks the list of tasks.
      * @param task The task which is added.
      */
-    public void showAddTaskMessage(TaskList tasks, Task task) {
-        showLine();
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task);
-        System.out.println("Now you have " + tasks.getLength() + " tasks in the list.");
-        showLine();
+    public String showAddTaskMessage(TaskList tasks, Task task) {
+        //showLine();
+        String text = "";
+        text += "Got it. I've added this task:\n";
+
+        text += task.toString() + "\n";
+
+        text += "Now you have " + tasks.getLength() + " tasks in the list.\n";
+        return text;
+        //showLine();
     }
 }

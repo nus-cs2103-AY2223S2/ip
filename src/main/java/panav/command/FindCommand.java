@@ -13,7 +13,7 @@ public class FindCommand extends Command {
 
     private String keyword;
 
-    public FindCommand(String keyWord) {
+    public FindCommand(String keyword) {
         this.keyword = keyword;
     }
 
@@ -24,11 +24,13 @@ public class FindCommand extends Command {
      * @param storage storage to read/write from files.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showLine();
-        System.out.println("Here are the matching tasks in your list:");
-        tasks.printTasksContainingKeyword(this.keyword);
-        ui.showLine();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        //ui.showLine();
+        //System.out.println("Here are the matching tasks in your list:");
+        String text = "Here are the matching tasks in your list:\n";
+        text += tasks.printTasksContainingKeyword(this.keyword);
+        return text;
+        //ui.showLine();
     }
 
 }

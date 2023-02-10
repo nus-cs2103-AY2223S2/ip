@@ -27,13 +27,13 @@ public class TodoCommand extends Command {
      * @param storage storage to read/write text in file.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             Task curr = new ToDo(this.todoMessage);
             tasks.addTask(curr);
-            ui.showAddTaskMessage(tasks, curr);
+            return ui.showAddTaskMessage(tasks, curr);
         } catch (ToDoDescriptionException e) {
-            System.out.println(e.getMessage());
+            return e.getMessage();
         }
 
     }

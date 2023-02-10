@@ -39,12 +39,12 @@ public class DeadlineCommand extends Command {
      * @param storage storage to read/write text in file.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
 
         deadline = formatDate(deadline);
         Task curr = new Deadline(deadlineMessage, deadline);
         tasks.addTask(curr);
-        ui.showAddTaskMessage(tasks, curr);
+        return ui.showAddTaskMessage(tasks, curr);
 
     }
 

@@ -27,17 +27,21 @@ public class DeleteCommand extends Command {
      * @param storage storage to read/write text in file.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             int deleteIndex = readNumber(fullCommand, tasks.getLength());
             Task removed = tasks.removeTask(deleteIndex - 1);
-            ui.showLine();
-            System.out.println("Noted. I've removed this task:");
-            System.out.println(removed);
-            System.out.println("Now you have " + tasks.getLength() + " tasks in the list.");
-            ui.showLine();
+//            ui.showLine();
+//            System.out.println("Noted. I've removed this task:");
+//            System.out.println(removed);
+//            System.out.println("Now you have " + tasks.getLength() + " tasks in the list.");
+//            ui.showLine();
+            String text = "Noted. I've removed this task:\n";
+            text += removed.toString() + "\n";
+            text += "Now you have " + tasks.getLength() + " tasks in the list.\n";
+            return text;
         } catch (DukeException e) {
-            System.out.println(e.getMessage());
+            return e.getMessage();
         }
 
     }
