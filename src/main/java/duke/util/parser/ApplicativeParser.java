@@ -68,9 +68,8 @@ public class ApplicativeParser<T> {
         return fromRunner(input -> Optional.of(Pair.of(input, value)));
     }
 
-    @SuppressWarnings("unchecked")
     public static <T> ApplicativeParser<T> fail() {
-        return (ApplicativeParser<T>) ALWAYS_FAILED_PARSER;
+        return ALWAYS_FAILED_PARSER.cast();
     }
 
     public static <T, U, V> ApplicativeParser<V> lift(
@@ -133,6 +132,11 @@ public class ApplicativeParser<T> {
         return result;
     }
 
+    @SuppressWarnings("unchecked")
+    private <U> ApplicativeParser<U> cast() {
+        return (ApplicativeParser<U>) this;
+    }
+
     public <U> ApplicativeParser<T> dropNext(ApplicativeParser<U> that) {
         return lift((left, right) -> left, this, that);
     }
@@ -149,18 +153,21 @@ public class ApplicativeParser<T> {
         })));
     }
 
-    public <U> ApplicativeParser<U> flatMap(Function<? super T, ApplicativeParser<U>> flatMapper) {
+    public <U> ApplicativeParser<U> flatMap(
+            Function<? super T, ? extends ApplicativeParser<? extends U>> flatMapper) {
         return fromRunner(input -> run(input).flatMap(pair -> {
             StringView oldInput = pair.getFirst();
             T oldValue = pair.getSecond();
-            return flatMapper.apply(oldValue).run(oldInput);
+            ApplicativeParser<? extends U> that = flatMapper.apply(oldValue);
+            return that.<U>cast().run(oldInput);
         }));
     }
 
-    public <U> ApplicativeParser<U> optionalMap(Function<? super T, Optional<U>> optionalMapper) {
+    public <U> ApplicativeParser<U> optionalMap(
+            Function<? super T, ? extends Optional<? extends U>> optionalMapper) {
         return flatMap(optionalMapper.andThen(opt -> opt
                 .map(ApplicativeParser::of)
-                .orElseGet(ApplicativeParser::fail)));
+                .orElseGet(ApplicativeParser::fail))).cast();
     }
 
     public ApplicativeParser<T> filter(Predicate<? super T> predicate) {
