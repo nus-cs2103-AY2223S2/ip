@@ -1,10 +1,10 @@
 package kuromi.task;
 
-import kuromi.KuromiException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import kuromi.KuromiException;
 
 /**
  * Deadline task represented by description and deadline. Extends from Task class.

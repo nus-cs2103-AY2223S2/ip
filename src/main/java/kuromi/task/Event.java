@@ -1,10 +1,10 @@
 package kuromi.task;
 
-import kuromi.KuromiException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import kuromi.KuromiException;
 
 /**
  * Event task represented by description, start date, and end date. Extends from Task class.
