@@ -11,33 +11,28 @@ import duke.entities.managers.CacheManager;
 import duke.exceptions.DukeException;
 import duke.storage.Storage;
 import duke.stubs.TestStorageStub;
-import duke.views.UI;
 
 public class ListCommandTest {
+    private final Storage storage = new TestStorageStub("test.txt");
     @Test
     public void listTest_emptyList_emptyTaskStringReturned() {
         try {
-            Storage storage = new TestStorageStub("test.txt");
             CacheManager cacheManager = new CacheManager(storage);
             assertEquals("There are no outstanding tasks!", cacheManager.listTasks(task -> true, true));
-
         } catch (DukeException e) {
             fail();
         }
     }
 
     @Test
-    public void listTest_addTask_successReturned() {
+    public void listTest_addMultipleTasks_successReturned() {
         try {
-            Storage storage = new TestStorageStub("test.txt");
             CacheManager cacheManager = new CacheManager(storage);
-            Task task = new Todo("Task 1");
-            String success = cacheManager.addTask(task);
-            assertEquals("Got it. I've added this task:"
-                    + UI.indentMessage(String.valueOf(task))
-                    + UI.newLine() + "Now you have " + cacheManager.getTaskList().size() + " tasks in the list." ,
-                    success);
-
+            for (int i = 0; i < 10; i++) {
+                Task task = new Todo("Task " + (i + 1));
+                cacheManager.addTask(task);
+            }
+            assertEquals(10, cacheManager.getTaskList().size());
         } catch (DukeException e) {
             fail();
         }
