@@ -36,7 +36,7 @@ I am here to make task management simple and efficient. Let's get started!
 2. You can check whether Java 11 is installed by opening your terminal window and running the command `java -version`
 3. If Java 11 is not installed, please download Java 11 from [Oracle](https://www.oracle.com/java/technologies/downloads/#java11).
 4. For Mac users, you may use the [Azul build of OpenJDK 11 (JDK FX) version](https://www.azul.com/downloads/?version=java-11-lts&os=macos&architecture=arm-64-bit&package=jdk-fx).
-5. Download the latest duke.jar from [the application's release page](https://github.com/EmilyOng/ip/releases/tag/v0.2).
+5. Download the latest duke.jar from [the application's release page](https://github.com/Zxun2/ip/releases/tag/v0.2).
 6. Copy the file to the folder you want to use as the home folder for your Duke.
 7. Double-click the file to start the app.
 8. When the application is running, click on the "help" icon on the top right to view a list of available commands.
