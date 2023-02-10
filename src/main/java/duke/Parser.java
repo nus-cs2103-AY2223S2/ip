@@ -104,7 +104,7 @@ public class Parser {
             returnString[1] = from;
             returnString[2] = to;
         } else {
-            throw new DukeException(Views.END_STRING.eng());
+            throw new DukeException(Views.UNKNOWN_CMD_ERR_STRING.eng());
         }
         returnString[0] = title;
         return returnString;

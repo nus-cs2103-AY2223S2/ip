@@ -1,7 +1,5 @@
 package duke.task;
 
-import duke.DukeException;
-
 /**
  * Todo, default and most generic of a Task item
  */
@@ -10,9 +8,8 @@ public class Todo extends Task {
      * Creates a Todo
      *
      * @param title of the Task that that is being created
-     * @throws DukeException
      */
-    public Todo(String title) throws DukeException {
+    public Todo(String title) {
         this(title, false);
     }
 
@@ -21,9 +18,8 @@ public class Todo extends Task {
      *
      * @param title  of the Task that that is being created
      * @param isDone status of the Task
-     * @throws DukeException
      */
-    public Todo(String title, boolean isDone) throws DukeException {
+    public Todo(String title, boolean isDone) {
         super(title, isDone);
     }
 

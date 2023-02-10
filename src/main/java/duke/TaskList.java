@@ -113,7 +113,7 @@ public class TaskList {
      * @param input String[] that may or may not have empty Strings
      * @return new String[] without empty Strings
      */
-    public static String[] removeEmptyStrings(String[] input) {
+    public static String[] removeEmptyStrings(String... input) {
         // Solution below adapted from https://stackoverflow.com/q/40605998
         // Removes empty string from query
         List<String> filteredList = Arrays.stream(input)
