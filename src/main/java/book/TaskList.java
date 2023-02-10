@@ -44,7 +44,7 @@ public class TaskList {
      * @param index {@code int} index of {@code Task} to retrieve.
      * @return The {@code Task} at the given {@code int} index.
      */
-    public Task get(int index) {
+    public Task get(int index) throws IndexOutOfBoundsException {
         return this.list.get(index);
     }
 

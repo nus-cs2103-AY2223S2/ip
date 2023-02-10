@@ -73,6 +73,8 @@ public final class Parser {
             throw new IncompleteInputException("This command is missing details");
         } catch (DateTimeParseException exception) {
             throw new InvalidFormatException("Please use the format dd/MM/yy-HHmm");
+        } catch (NumberFormatException exception) {
+            throw new InvalidFormatException("Please use a valid index.");
         }
     }
 

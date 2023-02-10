@@ -33,7 +33,8 @@ public class DeleteCommand extends Command {
      * @throws SaveException if an error occurs with updating the {@code Storage}.
      */
     @Override
-    public String execute(Storage storage, TaskList list, Ui ui) throws SaveException {
+    public String execute(Storage storage, TaskList list, Ui ui)
+            throws SaveException, IndexOutOfBoundsException {
         Task task = list.deleteTask(this.index);
         storage.save(list);
         return ui.showDelete(task) + "\n" + ui.showTaskListSize(list);
