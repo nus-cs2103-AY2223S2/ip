@@ -1,24 +1,49 @@
-# Duke project template
+# KiraBot
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+_Manage your tasks in a better way!_
 
-## Setting up in Intellij
+**KiraBot lets you record down tasks and have several features to make your life so much better!**
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+### Why KiraBot
+- text-based
+- easy to use
+- ~~FAST~~ LIGHTNING MCQUEEN
+- FREE. No hidden charges!
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+### HOW DO I GET IT
+
+_5 Simple Steps_
+1. Find it from [here](https://github.com/Dangabit/ip/releases).
+2. Download the lastest jar release.
+3. Double-click it.
+4. Add your tasks.
+5. Let it manage your tasks for you 😉
+
+### Features
+
+- [x] Manages Tasks as ToDo, Deadlines, Events!
+- [x] Tells you what you have on TODAY!
+- [x] Now with a GUI!
+- [ ] Reminders (coming soon)
+
+### I love coding
+Sure you do. If you Java programmer, you can use it to practice Java too. Here's the `main` method:
+
+```
+public class KiraBot { // For CLI
+    public static void main(String[] args) {
+        KiraBot bot = new KiraBot();
+        bot.run();
+    }
+}
+```
+```
+public class KiraLauncher { // For GUI
+    public static void main(String[] args) {
+        Application.launch(KiraApp.class, args);
+    }
+}
+```
+
+> Best task management CLI ever ~NotDangabit
+> Best task management GUI ever ~AlsoNotDangabit
