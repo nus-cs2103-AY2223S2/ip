@@ -11,7 +11,7 @@ public class Task {
 
     private static String type;
     private String name;
-    private boolean completionStatus;
+    private boolean isDone;
 
 
 
@@ -22,16 +22,15 @@ public class Task {
      */
     public Task(String name) {
         this.name = name;
-        this.completionStatus = false;
+        this.isDone = false;
     }
 
     //getter for completion status
 
     public boolean getCompletionStatus() {
-        return this.completionStatus;
+        return this.isDone;
     }
 
-    //getter for the name of the duke.tasks
 
     public String getName() {
         return this.name;
@@ -42,9 +41,7 @@ public class Task {
      *
      */
     public void markAsDone() {
-        this.completionStatus = true;
-        //System.out.println("Congrats bro you've done something with your life");
-        //System.out.println(this.toString());
+        this.isDone = true;
         return;
     }
 
@@ -53,9 +50,7 @@ public class Task {
      *
      */
     public void undoTask() {
-        this.completionStatus = false;
-        //System.out.println("Stop being useless why u ask me to unmark");
-        //System.out.println(this.toString());
+        this.isDone = false;
         return;
     }
 
@@ -76,7 +71,7 @@ public class Task {
      */
     @Override
     public String toString() {
-        if (completionStatus == true) {
+        if (isDone == true) {
             return "[X] " + this.name;
         } else {
             return "[ ] " + this.name;

@@ -18,8 +18,6 @@ public class Event extends Task {
     protected LocalDate endTime;
 
 
-    //getter for type
-
     /**
      * Constructor to create event object associated with user's event.
      *
@@ -37,12 +35,12 @@ public class Event extends Task {
         return type;
     }
 
-    //getter for starttime
+
     public LocalDate getStartTime() {
         return this.startTime;
     }
 
-    //getter for endtime
+
     public LocalDate getEndTime() {
         return this.endTime;
     }
