@@ -18,7 +18,8 @@ public class Ui {
     public Ui() {}
 
     /**
-     * Prints greeting for user.
+     * Returns greeting for user.
+     * @return The geeting
      */
     public String greet() {
         return "Hello! I'm Duke\nWhat can I do for you?";
@@ -27,6 +28,7 @@ public class Ui {
     /**
      * Prints the message String that was provided.
      * @param s The message String.
+     * @return The response
      */
     public String printResponse(String s) {
         return printText(s);
@@ -35,6 +37,7 @@ public class Ui {
     /**
      * Prints the message in the DukeException that was provided.
      * @param e The DukeException.
+     * @return The exception message.
      */
     public String printException(DukeException e) {
         return printText(e.getMessage());

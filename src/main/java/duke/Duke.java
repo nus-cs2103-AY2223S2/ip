@@ -11,6 +11,8 @@ import duke.ui.Ui;
  * @author pzhengze
  */
 public class Duke {
+    /** Relative path to the save file. */
+    private static final String PATH = "data/tasks.txt";
     /** Reference for the Storage object used for i/o to save file. */
     private final Storage storage;
     /** Reference for the TaskList object used for storing Task objects. */
@@ -19,8 +21,6 @@ public class Duke {
     private final Ui ui;
     /** Reference for the Parser object used for parsing user input. */
     private final Parser parser;
-    /** Relative path to the save file. */
-    private static final String PATH = "data/tasks.txt";
 
     /**
      * Constructor for Duke object.
@@ -53,6 +53,7 @@ public class Duke {
 
     /**
      * Greets user.
+     * @return The greeting.
      */
     public String greet() {
         return this.ui.greet();

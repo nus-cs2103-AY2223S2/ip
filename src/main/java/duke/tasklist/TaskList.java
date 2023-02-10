@@ -59,6 +59,7 @@ public class TaskList {
      * @throws DukeMissingDescriptionException If s does not contain a description for Task.
      * @throws DukeMissingDeadlineException If s does not contain /by which signifies the due date.
      * @throws DukeMissingEventDateException If s does not contain /from or /to which signifies the duration.
+     * @throws DukeUnknownCommandException If s does not fit any of the 3 tasks.
      */
     public String add(TaskType type, String s) throws DukeMissingDescriptionException,
             DukeMissingDeadlineException, DukeMissingEventDateException, DukeUnknownCommandException {
@@ -209,8 +210,8 @@ public class TaskList {
     public String delete(String s) throws DukeInvalidTaskNumberException, DukeTaskNumberOutOfRangeException {
         int num = TaskList.stringToInt(s);
 
-        String output = "\t Noted. I've removed this task:\n";
-        if (num < -1 || num >= tasks.size()) {
+        String output = "Noted. I've removed this task:\n";
+        if (num < -1 || num > tasks.size()) {
             throw new DukeTaskNumberOutOfRangeException();
         }
         Task removed = tasks.remove(num - 1);

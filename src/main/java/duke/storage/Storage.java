@@ -80,6 +80,7 @@ public class Storage {
      * @return The list of Tasks.
      * @throws DukeFileCreationException if it fails to create a save file.
      * @throws DukeReadException if it fails to read the save file.
+     * @throws DukeUnknownCommandException if it fails to understand the save file.
      */
     public ArrayList<Task> loadSaveFile() throws DukeFileCreationException,
             DukeReadException, DukeUnknownCommandException {

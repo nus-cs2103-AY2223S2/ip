@@ -22,6 +22,7 @@ public class Parser {
     /**
      * Constructor for Parser object.
      * @param tasks The TaskList to be parsed for.
+     * @param storage The Storage to be written to.
      */
     public Parser(TaskList tasks, Storage storage) {
         this.tasks = tasks;
