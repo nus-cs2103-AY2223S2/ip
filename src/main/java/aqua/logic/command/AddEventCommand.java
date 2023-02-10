@@ -33,16 +33,4 @@ public class AddEventCommand extends AddTaskCommand {
 
         return new UserEvent(name, isCompleted, startTime, endTime);
     }
-
-
-    @Override
-    public String getSyntax() {
-        return "<literal:name> /from <date:from> /to <date:to>";
-    }
-
-
-    @Override
-    public String getDescription() {
-        return "Adds an EVENT";
-    }
 }

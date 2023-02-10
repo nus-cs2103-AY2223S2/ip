@@ -29,16 +29,4 @@ public class AddDeadlineCommand extends AddTaskCommand {
 
         return new UserDeadline(name, isCompleted, dueTime);
     }
-
-
-    @Override
-    public String getSyntax() {
-        return "<literal:name> /by <date:by>";
-    }
-
-
-    @Override
-    public String getDescription() {
-        return "Adds a DEADLINE";
-    }
 }

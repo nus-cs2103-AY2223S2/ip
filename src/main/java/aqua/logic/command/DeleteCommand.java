@@ -26,18 +26,6 @@ public class DeleteCommand extends CommandController {
     }
 
 
-    @Override
-    public String getSyntax() {
-        return "<integer:taskNum>";
-    }
-
-
-    @Override
-    public String getDescription() {
-        return "Deletes a task";
-    }
-
-
     private UserTask deleteTask(ArgumentMap args, LogicManager manager)
                 throws SyntaxException, ProcedureException {
         try {

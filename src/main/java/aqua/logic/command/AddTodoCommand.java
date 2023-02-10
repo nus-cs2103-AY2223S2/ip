@@ -21,16 +21,4 @@ public class AddTodoCommand extends AddTaskCommand {
 
         return new UserTodo(name, isComplete);
     }
-
-
-    @Override
-    public String getSyntax() {
-        return "<literal:name>";
-    }
-
-
-    @Override
-    public String getDescription() {
-        return "Adds a TODO";
-    }
 }

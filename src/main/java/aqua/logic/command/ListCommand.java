@@ -48,10 +48,4 @@ public class ListCommand extends CommandController {
         }
         return "Nothing!! " + Kaomoji.BLUSH;
     }
-
-
-    @Override
-    public String getDescription() {
-        return "Displayes a view of your task list";
-    }
 }
