@@ -51,7 +51,7 @@ public class Task {
         String cur = this.description;
         String[] split = cur.split(" ");
         for (int j = 0; j < split.length; j++) {
-            if (split[j].equals(keyword)) {
+            if (split[j].contains(keyword)) {
                 return true;
             }
         }
