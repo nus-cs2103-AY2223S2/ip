@@ -6,6 +6,10 @@ import duke.tasklist.TaskList;
 import duke.tasks.Task;
 import duke.ui.Ui;
 
+/**
+ * EditDescriptionCommand class extends Command class.
+ * This class represenst commands that edits task description
+ */
 public class EditDescriptionCommand extends Command {
     /**
      * Constructor.
@@ -60,9 +64,9 @@ public class EditDescriptionCommand extends Command {
         }
 
         String indexString = values[1];
-        try { 
-            Integer.parseInt(indexString); 
-        } catch(NumberFormatException e) { 
+        try {
+            Integer.parseInt(indexString);
+        } catch (NumberFormatException e) {
             throw new CommandException("Index has to be a number");
         }
     }
@@ -88,7 +92,10 @@ public class EditDescriptionCommand extends Command {
         String index = values[1];
         String description = values[2];
 
+        for (int i = 3; i < values.length; i++) {
+            description += " " + values[i];
+        }
+
         return new String[] { index, description };
     }
-    
 }
