@@ -39,7 +39,7 @@ public class Duke {
         try {
             return cmd.execute(() -> cacheManager);
         } catch (DukeException e) {
-            return e.getMessage();
+            return "[ERROR]: " + e.getMessage();
         }
     }
 }

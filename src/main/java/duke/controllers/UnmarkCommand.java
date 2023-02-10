@@ -36,6 +36,6 @@ public class UnmarkCommand extends Command {
             Integer key = Integer.parseInt(m.group());
             return store.getTaskAndToggle(key, false);
         }
-        throw new DukeException(INVALID_FORMAT_ERROR + " " + "Please ensure that you specify the task number.");
+        throw new DukeException(INVALID_FORMAT_ERROR + " " + "Please ensure you follow: unmark [task]");
     }
 }

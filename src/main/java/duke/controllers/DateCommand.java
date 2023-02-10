@@ -41,7 +41,7 @@ public class DateCommand extends Command {
             return store.filter(task -> task.isActiveOn(LocalDate.parse(args.split(" ")[1])),
                     "There are no active tasks on this date!");
         } else {
-            String dateFormatError = INVALID_FORMAT_ERROR + " " + "Please follow: date [yyyy-mm-dd].";
+            String dateFormatError = INVALID_FORMAT_ERROR + " " + "Please ensure you follow: date [yyyy-mm-dd]";
             throw new DukeException(dateFormatError);
         }
     }

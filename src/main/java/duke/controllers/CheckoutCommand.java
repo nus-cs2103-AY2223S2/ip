@@ -10,7 +10,7 @@ import duke.exceptions.DukeException;
 
 /**
  * Represents the Checkout Command.
- * It allows the user to checkout to a specified version of their program.
+ * It allows the user to check out to a specified version of their program.
  */
 public class CheckoutCommand extends Command {
     private static final Pattern VALID_CMD = Pattern.compile("^(checkout)(?<version> ([1-9]|10))?$");

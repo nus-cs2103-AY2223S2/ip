@@ -63,6 +63,7 @@ public class SerializableTask implements ISerializable<String, Task> {
             task = new Event(description, flags.split(" to "));
             break;
         default:
+            assert false;
             throw new DukeException("It seems like an empty task has made it into your hard disk");
         }
         if (isDone) {
