@@ -16,7 +16,6 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     private Duke duke = new Duke(new UI(), new Parser());
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("../images/DaDuke.png"));
     MainWindow mainWindow = new MainWindow();
 
     @Override
