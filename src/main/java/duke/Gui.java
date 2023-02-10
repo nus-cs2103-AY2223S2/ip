@@ -1,6 +1,8 @@
 package duke;
 
 import duke.exceptions.EmptyCommandException;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -9,10 +11,13 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+
+import java.awt.*;
+import java.util.concurrent.TimeUnit;
 
 public class Gui extends Application {
 
@@ -27,6 +32,8 @@ public class Gui extends Application {
 
     private Duke duke;
 
+    private static final Color SIDECOLOR = Color.GRAY;
+
     @Override
     public void start(Stage stage) {
         //Step 1. Setting up required components
@@ -39,6 +46,7 @@ public class Gui extends Application {
         sendButton = new Button("Send");
 
         AnchorPane mainLayout = new AnchorPane();
+        mainLayout.setBackground(new Background(new BackgroundFill(SIDECOLOR, null, null)));
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
         scene = new Scene(mainLayout);
@@ -97,14 +105,23 @@ public class Gui extends Application {
                     DialogBox.getDukeDialog(dukeText, new ImageView(dukeImage))
             );
         } catch (EmptyCommandException e) {
-            System.out.println("h");
             return;
         }
+        boolean isBye = userInput.getText().equals("bye");
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1500), event -> closeStageIfBye(isBye)));
+        timeline.play();
         userInput.clear();
     }
 
     private String getResponse(String input) throws EmptyCommandException {
         return duke.process(input);
+    }
+
+    private void closeStageIfBye(Boolean isBye) {
+        if (isBye) {
+            Stage stage = (Stage) scene.getWindow();
+            stage.close();
+        }
     }
 
 }

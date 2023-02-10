@@ -6,23 +6,39 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 
 public class DialogBox extends HBox {
 
     private Label text;
     private ImageView displayPicture;
 
-    public DialogBox(Label l, ImageView iv) {
+    private static final Color USERCOLOR = Color.ALICEBLUE;
+    private static final Color DUKECOLOR = Color.BEIGE;
+
+    public DialogBox(Label l, ImageView iv, Color color) {
         text = l;
         displayPicture = iv;
 
         text.setWrapText(true);
-        displayPicture.setFitWidth(100.0);
-        displayPicture.setFitHeight(100.0);
+        displayPicture.setFitWidth(80.0);
+        displayPicture.setFitHeight(80.0);
+        cropToCircle(displayPicture);
 
         this.setAlignment(Pos.TOP_RIGHT);
         this.getChildren().addAll(text, displayPicture);
+
+        this.setBackground(new Background(new BackgroundFill(color, null, null)));
+    }
+
+    private void cropToCircle(ImageView picture) {
+        Circle circle = new Circle(40,40,40);
+        circle.setFill(Color.WHITE);
+        picture.setClip(circle);
     }
 
     /**
@@ -36,11 +52,11 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(Label l, ImageView iv) {
-        return new DialogBox(l, iv);
+        return new DialogBox(l, iv, USERCOLOR);
     }
 
     public static DialogBox getDukeDialog(Label l, ImageView iv) {
-        var db = new DialogBox(l, iv);
+        var db = new DialogBox(l, iv, DUKECOLOR);
         db.flip();
         return db;
     }
