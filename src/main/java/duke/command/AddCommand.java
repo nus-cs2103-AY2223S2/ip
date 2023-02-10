@@ -5,15 +5,15 @@ import duke.storage.TaskList;
 import duke.ui.Ui;
 public class AddCommand extends Command {
 
-    private Task task;
+    private String task;
 
-    public AddCommand(Task task) {
+    public AddCommand(String task) {
         this.task = task;
     }
 
     @Override
     public String execute(TaskList list, Ui ui) {
         list.add(task);
-        return ui.printAddMessage(task, list);
+        return ui.printAddMessage(list.getLast(), list);
     }
 }

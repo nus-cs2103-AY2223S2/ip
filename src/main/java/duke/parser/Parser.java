@@ -1,5 +1,7 @@
 package duke.parser;
 
+import duke.command.*;
+
 import java.util.Arrays;
 public class Parser {
     private final static String[] VALID_COMMANDS = {"mark", "unmark", "list", "delete", "bye", "todo", "event", "deadline"};
@@ -17,16 +19,6 @@ public class Parser {
     public boolean checkFind(String input) {
         return input.split(" ")[0].equals("find");
     }
-    public boolean checkTodo(String input) {
-        return input.split(" ")[0].equals("todo");
-    }
-    public boolean checkEvent(String input) {
-        return input.split(" ")[0].equals("event");
-    }
-    public boolean checkDeadline(String input) {
-        return input.split(" ")[0].equals("deadline");
-    }
-
     public boolean checkTask(String input) {
         String cmd = input.split(" ")[0];
         return cmd.equals("deadline") || cmd.equals("todo") || cmd.equals("event");
@@ -47,4 +39,29 @@ public class Parser {
         return input.split(" ")[0].equals("delete");
     }
 
+    public Command parse(String input) {
+        Command cmd;
+        if (checkList(input)) {
+            cmd = new ListCommand();
+        } else if (checkFind(input)) {
+            String word = input.split(" ")[1];
+            cmd = new FindCommand(word);
+        } else if (checkMark(input)) {
+            int num = Integer.parseInt(input.split(" ")[1]);
+            cmd = new MarkCommand(num);
+        } else if (checkUnmark(input)) {
+            int num = Integer.parseInt(input.split(" ")[1]);
+            cmd = new UnmarkCommand(num);
+        } else if (checkDelete(input)) {
+            int num = Integer.parseInt(input.split(" ")[1]);
+            cmd = new DeleteCommand(num);
+        } else if (checkTask(input)) {
+            cmd = new AddCommand(input);
+        } else if (!isValidCommand(input)) {
+            cmd = new InvalidCommand();
+        } else {
+            cmd = new ByeCommand();
+        }
+        return cmd;
+    }
 }
