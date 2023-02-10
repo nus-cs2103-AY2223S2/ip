@@ -2,7 +2,6 @@ package duke.client.components;
 
 import duke.Duke;
 import duke.DukeException;
-import duke.client.components.DialogBox;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -10,6 +9,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
+import java.io.InputStream;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -26,8 +27,13 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/doomer.jpg"));
-    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/chad.jpg"));
+    private static final String USER_IMAGE_PATH = "/images/doomer.jpg";
+    private static final String DUKE_IMAGE_PATH = "/images/chad.jpg";
+
+    private InputStream userImageResource = this.getClass().getResourceAsStream(USER_IMAGE_PATH);
+    private InputStream dukeImageResource = this.getClass().getResourceAsStream(DUKE_IMAGE_PATH);
+    private final Image userImage = new Image(userImageResource);
+    private final Image dukeImage = new Image(dukeImageResource);
 
     @FXML
     public void initialize() {
@@ -51,8 +57,8 @@ public class MainWindow extends AnchorPane {
         String response;
         try {
             response = duke.executeCommand(input);
-        } catch (DukeException e) {
-            response = e.getMessage();
+        } catch (DukeException exception) {
+            response = exception.getMessage();
         }
         if (response.equals(Duke.TERMINATION_INDICATION)) {
             showExitMessage();
