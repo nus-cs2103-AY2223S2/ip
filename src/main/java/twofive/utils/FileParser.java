@@ -57,67 +57,64 @@ public class FileParser {
             String nextLine = s.nextLine();
             String[] taskSplit = nextLine.split("\\|");
             String taskType = taskSplit[0].trim();
-            String taskTypeFull = "";
-            switch (taskType) {
-            case "T":
-                taskTypeFull = "todo";
-                break;
-            case "D":
-                taskTypeFull = "deadline";
-                break;
-            case "E":
-                taskTypeFull = "event";
-                break;
-            default:
-                throw new InvalidTaskTypeException();
-            }
-            if (taskSplit.length >= 3) {
-                boolean isTaskDone = taskSplit[1].trim().equals("1");
-                String taskDescription = taskSplit[2].trim();
-                Task currentTask = null;
-                switch (taskType) {
-                case "T":
-                    currentTask = new ToDo(taskDescription);
-                    break;
-                case "D":
-                    if (taskSplit.length == 4) {
-                        String deadlineString = taskSplit[3].trim();
-                        LocalDateTime deadline = LocalDateTime.parse(deadlineString, FORMATTER);
-                        currentTask = new Deadline(taskDescription, deadline);
-                    } else {
-                        // Missing deadline for Deadline task
-                        throw new EmptyDeadlineException();
-                    }
-                    break;
-                case "E":
-                    if (taskSplit.length == 5) {
-                        String startTimeString = taskSplit[3].trim();
-                        String endTimeString = taskSplit[4].trim();
-                        LocalDateTime startTime = LocalDateTime.parse(startTimeString, FORMATTER);
-                        LocalDateTime endTime = LocalDateTime.parse(endTimeString, FORMATTER);
-                        currentTask = new Event(taskDescription, startTime, endTime);
-                    } else {
-                        if (taskSplit.length == 4) {
-                            // Missing end time for Event task
-                            throw new EmptyEndTimeException();
-                        } else if (taskSplit.length == 3) {
-                            // Missing start time for Event task
-                            throw new EmptyStartTimeException();
-                        }
-                    }
-                    break;
-                default:
-                    throw new InvalidTaskTypeException();
-                }
-                if (isTaskDone) {
-                    currentTask.setDone();
-                }
-                tasks.add(currentTask);
-            } else {
-                // Missing description for task
+            String taskTypeFull = parseTaskTypeFull(taskType);
+
+            if (taskSplit.length < 3) {
                 throw new EmptyDescriptionException(taskTypeFull);
             }
+
+            boolean isTaskDone = taskSplit[1].trim().equals("1");
+            String taskDescription = taskSplit[2].trim();
+            Task currentTask = parseTask(taskType, taskDescription, taskSplit);
+            if (isTaskDone) {
+                currentTask.setDone();
+            }
+            tasks.add(currentTask);
         }
         return tasks;
+    }
+
+    private String parseTaskTypeFull(String taskType) throws InvalidTaskTypeException {
+        switch (taskType) {
+        case "T":
+            return "todo";
+        case "D":
+            return "deadline";
+        case "E":
+            return "event";
+        default:
+            throw new InvalidTaskTypeException();
+        }
+    }
+
+    private Task parseTask(String taskType, String taskDescription, String[] taskSplit)
+            throws InvalidTaskTypeException, EmptyDeadlineException, EmptyStartTimeException, EmptyEndTimeException {
+        switch (taskType) {
+        case "T":
+            return new ToDo(taskDescription);
+        case "D":
+            if (taskSplit.length < 4) {
+                // Missing deadline for Deadline task
+                throw new EmptyDeadlineException();
+            }
+            String deadlineString = taskSplit[3].trim();
+            LocalDateTime deadline = LocalDateTime.parse(deadlineString, FORMATTER);
+            return new Deadline(taskDescription, deadline);
+        case "E":
+            if (taskSplit.length == 3) {
+                // Missing start time for Event task
+                throw new EmptyStartTimeException();
+            } else if (taskSplit.length == 4) {
+                // Missing end time for Event task
+                throw new EmptyEndTimeException();
+            }
+            String startTimeString = taskSplit[3].trim();
+            String endTimeString = taskSplit[4].trim();
+            LocalDateTime startTime = LocalDateTime.parse(startTimeString, FORMATTER);
+            LocalDateTime endTime = LocalDateTime.parse(endTimeString, FORMATTER);
+            return new Event(taskDescription, startTime, endTime);
+        default:
+            throw new InvalidTaskTypeException();
+        }
     }
 }

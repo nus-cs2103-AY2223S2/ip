@@ -23,7 +23,7 @@ public class MarkCommand extends Command {
     /**
      * Marks a task as done from the given list of tasks using the provided task number.
      *
-     * @param tasks List of tasks containing the task to be marked as done.
+     * @param tasks   List of tasks containing the task to be marked as done.
      * @param storage Storage for saving or loading tasks.
      * @throws InvalidTaskException if task number is invalid
      */
@@ -32,18 +32,17 @@ public class MarkCommand extends Command {
         String commandResult = "";
         if (this.taskNum < 0 || this.taskNum >= tasks.getTasksNum()) {
             throw new InvalidTaskException();
-        } else {
-            assert taskNum >= 0 & taskNum < tasks.getTasksNum() : "Task number should be at least 0 or 1 less than "
-                    + "the number of tasks";
-            Task currentTask = tasks.setTaskAsDone(taskNum);
-            try {
-                storage.save(tasks);
-                TaskContainer.setTasks(tasks.getTasks());
-                commandResult = "Nice! Congrats for completing this task:\n " + currentTask;
-            } catch (IOException e) {
-                commandResult = e.getMessage();
-            }
-            return commandResult;
         }
+        assert taskNum >= 0 & taskNum < tasks.getTasksNum() : "Task number should be at least 0 or 1 less than "
+                + "the number of tasks";
+        Task currentTask = tasks.setTaskAsDone(taskNum);
+        try {
+            storage.save(tasks);
+            TaskContainer.setTasks(tasks.getTasks());
+            commandResult = "Nice! Congrats for completing this task:\n " + currentTask;
+        } catch (IOException e) {
+            commandResult = e.getMessage();
+        }
+        return commandResult;
     }
 }
