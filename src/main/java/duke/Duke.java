@@ -30,7 +30,6 @@ public class Duke {
             System.out.println(DE.toString());
         }
     }
-
     /**
      * Runs the Duke chatbot program.
      * @param tool Instance of MainWindow is taken in to get user input and send output.
