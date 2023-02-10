@@ -2,28 +2,28 @@
 
 ## Features 
 
-### Feature-ABC
+### Feature - Add task
 
-Description of the feature.
+Add different type of tasks (eg. to dos, deadlines, events)
 
-### Feature-XYZ
+### Feature - Sort by most urgent
 
-Description of the feature.
+Sort by upcoming deadlines or events to know what is most urgent!
 
 ## Usage
 
-### `Keyword` - Describe action
+### `To do, Deadline, Event`
 
-Describe the action and its outcome.
+Select a type of task to add to your schedule. Then, fill in the details of that task and corresponding timings.
 
 Example of usage: 
 
-`keyword (optional arguments)`
+![image](https://user-images.githubusercontent.com/30628325/218102338-e2769dbd-98c7-48a4-932c-98c96607676b.png)
 
-Expected outcome:
+### `Sort`
 
-Description of the outcome.
+Expected usage:
 
-```
-expected output
-```
+Select list and press sort by 'Deadline/End time'
+
+![image](https://user-images.githubusercontent.com/30628325/218102607-6bbaf7b2-5ec4-46cc-a7ec-a4e5f49a5c13.png)
