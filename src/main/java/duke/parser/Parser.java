@@ -12,7 +12,6 @@ import duke.command.ListCommand;
 import duke.command.MarkCommand;
 import duke.command.UnmarkCommand;
 import duke.exceptions.DukeException;
-import duke.tasklist.TaskList;
 import duke.tasktypes.Deadline;
 import duke.tasktypes.Event;
 import duke.tasktypes.Task;
@@ -28,81 +27,101 @@ public class Parser {
     private static final String[] VALUE_COMMANDS = {"unmark ", "mark ", "delete ", "find "};
     private static final String[] TASK_COMMANDS = {"deadline ", "todo ", "event "};
 
-    public Parser() {
-    }
 
     /**
      * Returns a Command object after parsing User input.
      *
      * @param fullCommand String representation of User input.
-     * @param tasks TaskList instance containing existing tasks.
      * @return Command object that determines follow-up action.
      * @throws DukeException If there are discrepancies in User input.
      */
-    public static Command parse(String fullCommand, TaskList tasks) throws DukeException {
-        if (fullCommand.equals("bye")) {
-            return new ExitCommand();
-        } else if (fullCommand.equals("list")) {
-            return new ListCommand();
+    public static Command parse(String fullCommand) throws DukeException {
+        Command singleCommand = getSingleCommand(fullCommand);
+        if (singleCommand != null) {
+            return singleCommand;
         }
+        Command valueCommand = getValueCommand(fullCommand);
+        if (valueCommand != null) {
+            return valueCommand;
+        }
+        validateTaskCommand(fullCommand, TASK_COMMANDS);
+        return getTaskCommand(fullCommand);
+    }
+    public static Command getSingleCommand(String fullCommand) {
+        Command command;
+        switch (fullCommand) {
+        case "bye":
+            command = new ExitCommand();
+            break;
+        case "list":
+            command = new ListCommand(false);
+            break;
+        case "orderedlist":
+            command = new ListCommand(true);
+            break;
+        default:
+            command = null;
+        }
+        return command;
+    }
 
+    public static Command getTaskCommand(String fullCommand) throws DukeException {
+        try {
+            String[] inputArr = fullCommand.split(" ", 2);
+            String taskType = inputArr[0];
+
+            Task task = null;
+            String[] newInputArr;
+            switch (taskType) {
+            case "todo":
+                task = new ToDo(inputArr[1]);
+                break;
+            case "deadline":
+                newInputArr = inputArr[1].split(" /by ", 2);
+                task = new Deadline(newInputArr[0], newInputArr[1]);
+                break;
+            case "event":
+                newInputArr = inputArr[1].split(" /from ", 2);
+                String[] newerInputArr = newInputArr[1].split(" /to ", 2);
+                task = new Event(newInputArr[0], newerInputArr[0], newerInputArr[1]);
+                break;
+            default:
+                break;
+            }
+            return new AddCommand(task);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("Error encountered when creating task! Please ensure input is valid.");
+        }
+    }
+    public static Command getValueCommand(String fullCommand) {
         String command = Parser.returnCommand(fullCommand, VALUE_COMMANDS);
         String[] inputArr;
+        Command valueCommand;
         switch (command) {
         case "unmark ":
             inputArr = fullCommand.split(" ");
             int toUnmark = Integer.parseInt(inputArr[1]);
-            if (toUnmark > tasks.getNumTasks()) {
-                throw new DukeException("Task does not exist! Please enter valid input!");
-            }
-            return new UnmarkCommand(toUnmark);
+            valueCommand = new UnmarkCommand(toUnmark);
+            break;
         case "mark ":
             inputArr = fullCommand.split(" ");
             int toMark = Integer.parseInt(inputArr[1]);
-            if (toMark > tasks.getNumTasks()) {
-                throw new DukeException("Task does not exist! Please enter valid input!");
-            }
-            return new MarkCommand(toMark);
+            valueCommand = new MarkCommand(toMark);
+            break;
         case "delete ":
             inputArr = fullCommand.split(" ");
             int toDelete = Integer.parseInt(inputArr[1]);
-            if (toDelete > tasks.getNumTasks()) {
-                throw new DukeException("Task does not exist! Please enter valid input!");
-            }
-            return new DeleteCommand(toDelete);
+            valueCommand = new DeleteCommand(toDelete);
+            break;
         case "find ":
             inputArr = fullCommand.split(" ", 2);
             String[] toFind = inputArr[1].split(" ");
-            return new FindCommand(toFind);
-        default:
-            break;
-        }
-
-        validateTaskCommand(fullCommand, TASK_COMMANDS);
-
-        inputArr = fullCommand.split(" ", 2);
-        String taskType = inputArr[0];
-
-        Task task = null;
-        String[] newInputArr;
-        switch (taskType) {
-        case "todo":
-            task = new ToDo(inputArr[1]);
-            break;
-        case "deadline":
-            newInputArr = inputArr[1].split(" /by ", 2);
-            task = new Deadline(newInputArr[0], newInputArr[1]);
-            break;
-        case "event":
-            newInputArr = inputArr[1].split(" /from ", 2);
-            String[] newerInputArr = newInputArr[1].split(" /to ", 2);
-            task = new Event(newInputArr[0], newerInputArr[0], newerInputArr[1]);
+            valueCommand = new FindCommand(toFind);
             break;
         default:
-            break;
+            return null;
         }
-
-        return new AddCommand(task);
+        return valueCommand;
     }
 
     /**
@@ -113,10 +132,12 @@ public class Parser {
      * @return String representation of just the command.
      */
     public static String returnCommand(String input, String[] commands) {
+        assert commands.length > 0 : "There are no commands available.";
+        boolean gotMatch;
         for (String s : commands) {
             Pattern word = Pattern.compile(s);
             Matcher match = word.matcher(input);
-            boolean gotMatch = match.find();
+            gotMatch = match.find();
 
             if (gotMatch && match.start() == 0) {
                 return s;
@@ -133,6 +154,7 @@ public class Parser {
      * @throws DukeException If User input is invalid. (e.g. Add deadline task without supplying end time.)
      */
     public static void validateTaskCommand(String input, String[] commands) throws DukeException {
+        assert commands.length > 0 : "There are no commands available.";
         input = input.trim();
         for (String s : commands) {
             if (s.equals(input + " ")) {
@@ -141,11 +163,15 @@ public class Parser {
         }
 
         boolean isCorrect = false;
+        boolean gotMatch;
         for (String s : commands) {
             Pattern word = Pattern.compile(s);
             Matcher match = word.matcher(input);
-            boolean gotMatch = match.find() && (match.start() == 0);
-            isCorrect = isCorrect || gotMatch;
+            gotMatch = match.find() && (match.start() == 0);
+            isCorrect = gotMatch;
+            if (isCorrect) {
+                break;
+            }
         }
 
         if (!isCorrect) {

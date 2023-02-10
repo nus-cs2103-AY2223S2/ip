@@ -33,12 +33,9 @@ public class Ui {
 
     /**
      * Returns Duke's greeting message.
-     *
-     * @return Duke's greeting message.
      */
     public String greet() {
-        String greeting = "What's up! XyDuke here!\nHow can I be of assistance?\n";
-        return greeting;
+        return "What's up! XyDuke here!\nHow can I be of assistance?\n";
     }
 
     /**
@@ -47,8 +44,7 @@ public class Ui {
      * @return Duke's goodbye message.
      */
     public String goodbye() {
-        String goodbye = "Bye. Hope to see you again soon!\n";
-        return goodbye;
+        return "Bye. Hope to see you again soon!\n";
     }
 
     /**
@@ -173,6 +169,17 @@ public class Ui {
      */
     public String printTasks(TaskList tasks) {
         return tasks.printTasks();
+    }
+
+    /**
+     * Returns existing tasks in given TaskList instance.
+     * Tasks are ordered by deadline.
+     *
+     * @param tasks TaskList object whose tasks will be printed.
+     * @return String representation of existing tasks in TaskList instance.
+     */
+    public String printTasksOrdered(TaskList tasks) {
+        return tasks.printTasksInOrder();
     }
 
 }

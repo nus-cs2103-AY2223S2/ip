@@ -1,14 +1,22 @@
 package duke.tasktypes;
 
+import java.time.LocalDateTime;
+
 /**
  * Abstract representation of a Task object.
  */
 public abstract class Task {
 
+    /** ID Counter to assign unique IDs to tasks */
+    protected static int taskIdCounter = 0;
     /** Description of a task */
     protected String description;
     /** Indicated whether a task is completed */
     protected boolean isDone;
+    /** Assigned ID for task */
+    protected int taskID;
+    /** Deadline of a task */
+    protected LocalDateTime when;
 
     /**
      * Constructor to initialize a Task.
@@ -19,6 +27,7 @@ public abstract class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        this.taskID = taskIdCounter++;
     }
 
     /**
@@ -49,7 +58,7 @@ public abstract class Task {
         } else {
             status = "[ ]";
         }
-        return status + " " + this.description;
+        return status + " " + this.description + " #" + this.taskID;
     }
 
     /**
@@ -74,6 +83,17 @@ public abstract class Task {
             }
         }
         return isContained;
+    }
+
+    public int getTaskID() {
+        return this.taskID;
+    }
+
+    public LocalDateTime getDeadline() {
+        return this.when;
+    }
+    public static void resetCounter() {
+        Task.taskIdCounter = 0;
     }
 }
 

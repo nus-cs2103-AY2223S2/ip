@@ -7,10 +7,11 @@ import org.junit.jupiter.api.Test;
 public class ToDoTest {
     @Test
     public void testStringConversion_todoTaskDone_success() {
+        Task.resetCounter();
         ToDo task = new ToDo("This is a test ToDo task.");
         task.setDone();
         String actualOutput = task.toString();
-        assertEquals("[T][X] This is a test ToDo task.", actualOutput);
+        assertEquals("[T][X] This is a test ToDo task. #0", actualOutput);
     }
 
     @Test

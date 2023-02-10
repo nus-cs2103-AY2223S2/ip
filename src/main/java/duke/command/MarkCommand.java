@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.exceptions.DukeException;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
@@ -35,7 +36,7 @@ public class MarkCommand extends Command {
      * @return Task marked complete message.
      */
     @Override
-    public String execute(TaskList tasks, Storage storage, Ui ui) {
+    public String execute(TaskList tasks, Storage storage, Ui ui) throws DukeException {
         return tasks.markTask(toMark);
     }
 }

@@ -1,7 +1,11 @@
 package duke.tasklist;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
+import duke.exceptions.DukeException;
 import duke.tasktypes.Task;
 import duke.ui.Ui;
 
@@ -36,7 +40,9 @@ public class TaskList {
      */
     public void loadTask(Task task) {
         this.taskStorage.add(task);
+        int originalNumTasks = this.numTasks;
         numTasks++;
+        assert (originalNumTasks + 1) == this.numTasks : "Number of tasks mismatch!";
     }
 
     /**
@@ -49,7 +55,9 @@ public class TaskList {
      */
     public String addTask(Task task) {
         this.taskStorage.add(task);
+        int originalNumTasks = this.numTasks;
         numTasks++;
+        assert (originalNumTasks + 1) == this.numTasks : "Number of tasks mismatch!";
         return ui.taskAdd(task, numTasks);
     }
 
@@ -58,13 +66,26 @@ public class TaskList {
      * Deletes task from collection.
      * Informs User upon successful task deletion.
      *
-     * @param toDelete Integer index of task to be deleted.
+     * @param toDelete Task ID of task to be deleted.
      * @return Task has been deleted message.
      */
-    public String deleteTask(int toDelete) {
-        Task deleted = taskStorage.remove(toDelete - 1);
-        numTasks--;
-        return ui.taskDelete(deleted, numTasks);
+    public String deleteTask(int toDelete) throws DukeException {
+        Task deleteTask = null;
+        for (Task task : taskStorage) {
+            if (task.getTaskID() == toDelete) {
+                deleteTask = task;
+                break;
+            }
+        }
+        if (deleteTask == null) {
+            throw new DukeException("Task does not exist! Please enter valid Task ID!");
+        } else {
+            taskStorage.remove(deleteTask);
+            int originalNumTasks = this.numTasks;
+            numTasks--;
+            assert (originalNumTasks - 1) == this.numTasks : "Number of tasks mismatch!";
+            return ui.taskDelete(deleteTask, numTasks);
+        }
     }
 
     /**
@@ -72,13 +93,23 @@ public class TaskList {
      * Marks specified task in collection as complete.
      * Informs User upon successful operation.
      *
-     * @param mark Integer index of task to be mark complete.
+     * @param mark Task ID of task to be mark complete.
      * @return Task has been marked done message.
      */
-    public String markTask(int mark) {
-        Task marked = taskStorage.get(mark - 1);
-        marked.setDone();
-        return ui.markTaskDone(marked);
+    public String markTask(int mark) throws DukeException {
+        Task markTask = null;
+        for (Task task : taskStorage) {
+            if (task.getTaskID() == mark) {
+                markTask = task;
+                break;
+            }
+        }
+        if (markTask == null) {
+            throw new DukeException("Task does not exist! Please enter valid Task ID!");
+        } else {
+            markTask.setDone();
+            return ui.markTaskDone(markTask);
+        }
     }
 
     /**
@@ -86,28 +117,64 @@ public class TaskList {
      * Unmarks specified task in collection as incomplete.
      * Informs User upon successful operation.
      *
-     * @param unmark Integer index of task to be mark incomplete.
+     * @param unmark Task ID of task to be mark incomplete.
      * @return Task has been unmarked message.
      */
-    public String unmarkTask(int unmark) {
-        Task unmarked = taskStorage.get(unmark - 1);
-        unmarked.setUndone();
-        return ui.markTaskUndone(unmarked);
+    public String unmarkTask(int unmark) throws DukeException {
+        Task unmarkTask = null;
+        for (Task task : taskStorage) {
+            if (task.getTaskID() == unmark) {
+                unmarkTask = task;
+                break;
+            }
+        }
+        if (unmarkTask == null) {
+            throw new DukeException("Task does not exist! Please enter valid Task ID!");
+        } else {
+            unmarkTask.setUndone();
+            return ui.markTaskUndone(unmarkTask);
+        }
     }
 
     /**
      * Returns String representation of tasks in Task collection.
      * Prints all current tasks in collection to standard output.
      *
-     * @return String representaton of tasks in Task collection.
+     * @return String representation of tasks in Task collection.
      */
     public String printTasks() {
+        if (this.numTasks == 0) {
+            return "There are no available tasks at the moment!\n";
+        }
         int count = 1;
         String output = "";
         output += "Here are the tasks in your list:\n";
         for (Task task : taskStorage) {
             output += String.format("%d.%s", count++, task.toString()) + "\n";
         }
+        assert count == this.numTasks : "Number of tasks printed mismatch.";
+        return output;
+    }
+
+    /**
+     * Returns String representation of tasks in Task collection.
+     * Prints all current tasks in collection ordered by deadline.
+     *
+     * @return String representation of tasks in Task collection.
+     */
+    public String printTasksInOrder() {
+        if (this.numTasks == 0) {
+            return "There are no available tasks at the moment!\n";
+        }
+        int count = 1;
+        String output = "";
+        output += "Here are the tasks in your list:\n";
+        List<Task> tasksSorted = taskStorage.stream()
+                .sorted(Comparator.comparing(Task :: getDeadline)).collect(Collectors.toList());
+        for (Task task : tasksSorted) {
+            output += String.format("%d.%s", count++, task.toString()) + "\n";
+        }
+        assert count == this.numTasks : "Number of tasks printed mismatch.";
         return output;
     }
 
@@ -124,6 +191,8 @@ public class TaskList {
                 matchTasks.loadTask(task);
             }
         }
+        assert matchTasks.numTasks <= this.numTasks
+                : "Number of matching tasks cannot exceed number of existing tasks";
         return matchTasks;
     }
 

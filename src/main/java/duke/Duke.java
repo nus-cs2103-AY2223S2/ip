@@ -44,7 +44,7 @@ public class Duke {
             try {
                 String fullCommand = ui.nextInput();
                 ui.showLine();
-                Command c = Parser.parse(fullCommand, tasks);
+                Command c = Parser.parse(fullCommand);
                 c.execute(tasks, storage, ui);
                 isExit = c.isGoodbye();
             } catch (DukeException e) {
@@ -57,9 +57,8 @@ public class Duke {
 
     String getResponse(String input) {
         try {
-            Command c = Parser.parse(input, tasks);
-            String output = c.execute(tasks, storage, ui);
-            return output;
+            Command c = Parser.parse(input);
+            return c.execute(tasks, storage, ui);
         } catch (DukeException de) {
             return ui.showError(de);
         } catch (Exception e) {
