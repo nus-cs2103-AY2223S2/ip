@@ -29,7 +29,9 @@ public class TaskList {
     public void removeTask(int id) {
         this.tasks.remove(id);
     }
-    private void handleList() {
+
+    public String handleList() {
+        String output = "";
         try { //check if list is empty
             if (tasks.isEmpty()) {
                 throw new DukeExceptions("List is empty!");
@@ -38,57 +40,59 @@ public class TaskList {
             System.out.println("List is empty!");
         }
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println(i + 1 + ". " + tasks.get(i).toString());
+            output += i + 1 + ". " + tasks.get(i).toString() + "\n";
         }
+        return output;
     }
 
-    private void handleBye() {
-        System.out.println("See you again, thanks for visiting!");
+    private String handleBye() {
         Storage.upload(this.tasks);
+        return "See you again, thanks for visiting!";
     }
 
-    private void handleMark(String input) {
-        if (input.startsWith("mark ")) {
+    private String handleMark(String input) {
             String[] inp = input.split(" ");
             int id = Integer.parseInt(inp[1]);
             try {
                 Task marked = tasks.get(id - 1);
                 marked.setIsDone(true);
-                System.out.println("Good job! This task is now marked done!\n" + marked);
+                return "Good job! This task is now marked done!\n" + marked;
             } catch (Exception e) {
-                System.out.println("No such task found!");
+                return "No such task found!";
             }
-        }
     }
 
-    private void handleUnmark(String input) {
+    private String handleUnmark(String input) {
         String[] inp = input.split(" ");
         int id = Integer.parseInt(inp[1]);
         try {
             Task unmarked = tasks.get(id - 1);
             unmarked.setIsDone(false);
-            System.out.println("What a bummer! This task is now unmarked\n" + unmarked);
+            return "What a bummer! This task is now unmarked\n" + unmarked;
         } catch (Exception e) {
-            System.out.println("No such task found!");
+            return "No such task found!";
         }
     }
 
-    private void handleToDo(String input) {
+    private String handleToDo(String input) {
         ToDo processed = Parser.parseToDo(input);
         addTask(processed);
+        return "ToDo added! " + processed;
     }
 
-    private void handleDeadline(String input) {
+    private String handleDeadline(String input) {
         Deadline dl = Parser.parseDeadline(input);
         addTask(dl);
+        return "Deadline added! " + dl;
     }
 
-    private void handleEvent(String input) {
+    private String handleEvent(String input) {
         Event ev = Parser.parseEvent(input);
         addTask(ev);
+        return "Event added! " + ev;
     }
 
-    private void handleDelete(String input) {
+    private String handleDelete(String input) {
         String[] inp = input.split(" ");
         int id = Integer.parseInt(inp[1]);
         try {
@@ -96,13 +100,15 @@ public class TaskList {
         } catch (Exception e) {
             System.out.println("No such task found!");
         }
+        return "Task deleted!";
     }
 
     /**
      * Finds tasks in the list that matches keyword
      * @param input is user's input
      */
-    private void handleFind(String input) {
+    private String handleFind(String input) {
+        String output = "";
         String keyword = input.substring(5);
         ArrayList<Task> tasksFound = new ArrayList<>();
         for (int i = 0; i < tasks.size(); i++) {
@@ -113,41 +119,43 @@ public class TaskList {
             }
         }
         for (int i = 0; i < tasksFound.size(); i++) {
-            System.out.println(i + 1 + ". " + tasksFound.get(i));
+            output += i + 1 + ". " + tasksFound.get(i) + "\n";
         }
+        return output;
     }
 
     /**
      * Processes all input commands
      * @param input is user's input
      */
-    public void handleInput(String input) {
+    public String handleInput(String input) {
         if (input.equals("list")) {
-            handleList();
+            return handleList();
         }
         if (input.equals("bye")) {
-            handleBye();
+            return handleBye();
         }
         if (input.startsWith("mark ")) {
-            handleMark(input);
+            return handleMark(input);
         }
         if (input.startsWith("unmark ")) {
-            handleUnmark(input);
+            return handleUnmark(input);
         }
         if (input.startsWith("todo ")) {
-            handleToDo(input);
+            return handleToDo(input);
         }
         if (input.startsWith("deadline ")) {
-            handleDeadline(input);
+            return handleDeadline(input);
         }
         if (input.startsWith("event ")) {
-            handleEvent(input);
+            return handleEvent(input);
         }
         if (input.startsWith("delete ")) {
-            handleDelete(input);
+            return handleDelete(input);
         }
         if (input.startsWith("find ")) {
-            handleFind(input);
+            return handleFind(input);
         }
+        return "No such command!";
     }
 }

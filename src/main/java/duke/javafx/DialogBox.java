@@ -1,6 +1,6 @@
 package duke.javafx;
 
-import java.io.IOException;
+import  java.io.IOException;
 import java.util.Collections;
 
 import javafx.collections.FXCollections;
@@ -13,6 +13,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 
 /**
  * An example of a custom control using FXML.
@@ -34,8 +36,9 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         dialog.setText(text);
+        dialog.setTextFill(Color.web("#DC6627"));
+        dialog.setFont(Font.font("Times New Roman", 14));
         displayPicture.setImage(img);
     }
 

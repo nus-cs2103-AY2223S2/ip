@@ -1,5 +1,7 @@
 package duke.javafx;
 
+import duke.Storage;
+import duke.TaskList;
 import duke.Duke;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -22,31 +24,35 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Duke duke;
-
+    private TaskList tasks;
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Orbital Logo.jpg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/LicensePhoto.jpg"));
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        this.tasks = loadTextFile();
     }
 
     public void setDuke(Duke d) {
         duke = d;
     }
 
-    private String getResponse(String input) {
-        return "Got ya! " + input;
+    private TaskList loadTextFile() {
+        Storage.createDataDir();
+        TaskList tasks = new TaskList(Storage.load());
+        return tasks;
     }
 
+
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Creates two dialog boxes, one taking user's command and the other
+     * returning Duke's reply to the command. Clears the user input after processing.
      */
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = getResponse(input);
+        String response = tasks.handleInput(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)

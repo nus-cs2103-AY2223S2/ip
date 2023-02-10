@@ -34,7 +34,6 @@ public class Parser {
      * @return a Deadline object
      */
     public static Deadline parseDeadline(String input) {
-        System.out.println("Handling deadline");
         try { //catching no desc and no deadline
             if (input.substring(9).equals("")) {
                 throw new DukeExceptions("Input cannot be empty!");

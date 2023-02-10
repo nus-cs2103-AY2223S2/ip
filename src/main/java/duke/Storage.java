@@ -91,6 +91,7 @@ public class Storage {
      * @param allData is an ArrayList containing all Tasks
      */
     public static void upload(ArrayList<Task> allData) {
+        assert !allData.isEmpty();
         ArrayList<String> writing = new ArrayList<>();
         for (Task x : allData) {
             writing.add(x.toFile());

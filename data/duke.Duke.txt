@@ -1,4 +1,5 @@
 TD|false|run
 D|false|run home |2023-01-29
 D|false|run |2023-01-02
-E|false|league |2023-01-01T12:00|2023-01-01T12:30
+TD|false|lecture
+TD|false|ip
