@@ -37,7 +37,8 @@ public class Ui {
     }
 
     public void showUnmarked(Task task) {
-        System.out.println("OK, I've marked this task as not done yet:\n");
+        System.out.println("OK, I've marked this task as not done yet:\n"
+        + task.toString() + "\n");
     }
 
     public void showTaskList(TaskList list) {
