@@ -160,6 +160,118 @@ public class Deadlines extends Task {
     }
 
     /**
+     * Function to check if the date of deadline object is truly null
+     */
+    private void checkDateForNull() {
+        if (this.dueDateBy == null) {
+            String[] stringToCheckForNullArr = this.endsBy.split(" ");
+            if (stringToCheckForNullArr.length >= 3) {
+                String checkingInStringForm = stringToCheckForNullArr[0] + "/" + stringToCheckForNullArr[1]
+                        + "/" + stringToCheckForNullArr[2];
+                checkStringForValidDate(checkingInStringForm, stringToCheckForNullArr);
+            }
+        }
+    }
+
+    /**
+     * Function to check if a string is valid format for a date.
+     * @param toCheck String to be checked for valid date.
+     * @param originalStringInArr Array of strings which contains time in String form if applicable.
+     */
+    private void checkStringForValidDate(String toCheck, String[] originalStringInArr) {
+        if (checkValidityOfDateFromList(toCheck)) {
+            reformat();
+            if (originalStringInArr.length == 4) {
+                formatTimeIfValid(originalStringInArr[3]);
+            }
+        } else {
+            System.out.println("The date is invalid!");
+        }
+    }
+
+    /**
+     * Function to handle dates when added directly by user or after reformatting
+     * when reading from list
+     *
+     * @param newFormat Date-time format required to convert to date.
+     * @return String representation of task after being formatted.
+     */
+    private String handleNormalDates(DateTimeFormatter newFormat) {
+        if (this.dueDateBy != null) {
+            String newFormatOfDate = this.dueDateBy.format(newFormat).replace("/", " ");
+            return checkConditions(newFormatOfDate);
+        } else {
+            return formatIfNoDueDate();
+        }
+    }
+
+    /**
+     * Function to format string of task to be printed if no valid date is provided.
+     *
+     * @return String representation of deadline task without date.
+     */
+    private String formatIfNoDueDate() {
+        String toReturn = "";
+        if (this.isDone) {
+            toReturn = "[D][X]" + this.getName() + "(by: " + this.endsBy + ")";
+        } else {
+            toReturn = "[D][ ]" + this.getName() + "(by: " + this.endsBy + ")";
+        }
+        return toReturn;
+    }
+
+    /**
+     * Function to output string representation of task based on whether it is completed.
+     *
+     * @param formattedDate String representation of date of the task.
+     * @return String representation of the task.
+     */
+    private String checkConditions(String formattedDate) {
+        String toBeReturned = "";
+        if (this.isDone) {
+            toBeReturned = formatDone(formattedDate);
+        } else {
+            toBeReturned = formatUndone(formattedDate);
+        }
+        return toBeReturned;
+    }
+
+    /**
+     * Function to help format string representation of a task if it is done.
+     *
+     * @param formattedDate String representation of date of the task.
+     * @return String representation of the task.
+     */
+    private String formatDone(String formattedDate) {
+        String toPrintEventually = "";
+        if (this.validTime) {
+            toPrintEventually = "[D][X]" + this.getName() + "(by: "
+                    + formattedDate + " " + this.dueTime.toString() + ")";
+        } else {
+            toPrintEventually = "[D][X]" + this.getName() + "(by: "
+                    + formattedDate + ")";
+        }
+        return toPrintEventually;
+    }
+
+    /**
+     * Function to output string representation of task if it is not completed.
+     *
+     * @param formattedDate String representation of the date of the task.
+     * @return String representation of the task.
+     */
+    private String formatUndone(String formattedDate) {
+        String toPrintEventually = "";
+        if (this.validTime) {
+            toPrintEventually = "[D][ ]" + this.getName() + "(by: "
+                    + formattedDate + " " + this.dueTime.toString() + ")";
+        } else {
+            toPrintEventually = "[D][ ]" + this.getName() + "(by: " + formattedDate + ")";
+        }
+        return toPrintEventually;
+    }
+
+    /**
      * Function to check, and accordingly print String representation of deadline.
      *
      * @return String representation of deadline task.
@@ -168,45 +280,8 @@ public class Deadlines extends Task {
     public String toString() {
         String toReturn = "";
         DateTimeFormatter newFormat = DateTimeFormatter.ofPattern("MMM/d/uuuu");
-        if (this.dueDateBy == null) {
-            String[] checkIfTrulyNull = this.endsBy.split(" ");
-            if (checkIfTrulyNull.length >= 3) {
-                String checkingInString = checkIfTrulyNull[0] + "/" + checkIfTrulyNull[1] + "/" + checkIfTrulyNull[2];
-                if (checkValidityOfDateFromList(checkingInString)) {
-                    reformat();
-                    if (checkIfTrulyNull.length == 4) {
-                        formatTimeIfValid(checkIfTrulyNull[3]);
-                    }
-                } else {
-                    System.out.println("The date is invalid!");
-                }
-            }
-        }
-        if (this.dueDateBy != null) {
-            String newFormatOfDate = this.dueDateBy.format(newFormat).replace("/", " ");
-            if (this.done) {
-                if (validTime) {
-                    toReturn = "[D][X]" + this.getName() + "(by: "
-                            + newFormatOfDate + " " + this.dueTime.toString() + ")";
-                } else {
-                    toReturn = "[D][X]" + this.getName() + "(by: "
-                            + newFormatOfDate + ")";
-                }
-            } else {
-                if (validTime) {
-                    toReturn = "[D][ ]" + this.getName() + "(by: "
-                            + newFormatOfDate + " " + this.dueTime.toString() + ")";
-                } else {
-                    toReturn = "[D][ ]" + this.getName() + "(by: " + newFormatOfDate + ")";
-                }
-            }
-        } else {
-            if (this.done) {
-                toReturn = "[D][X]" + this.getName() + "(by: " + this.endsBy + ")";
-            } else {
-                toReturn = "[D][ ]" + this.getName() + "(by: " + this.endsBy + ")";
-            }
-        }
+        checkDateForNull();
+        toReturn = handleNormalDates(newFormat);
         return toReturn;
     }
 }

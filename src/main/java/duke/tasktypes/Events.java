@@ -34,7 +34,7 @@ public class Events extends Task {
     @Override
     public String toString() {
         String toReturn = "";
-        if (this.done) {
+        if (this.isDone) {
             toReturn = "[E][X]" + this.getName() + "(from: " + this.fromDetails + "to: " + this.toDetails + ")";
         } else {
             toReturn = "[E][ ]" + this.getName() + "(from: " + this.fromDetails + "to: " + this.toDetails + ")";

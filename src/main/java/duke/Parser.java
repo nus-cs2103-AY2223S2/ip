@@ -104,8 +104,8 @@ public class Parser {
      */
     public void handleToDoTask(String input, TaskList listOfTasks) throws DukeExceptions {
         try {
-            String useForInit = input.substring(4);
-            Task toAdd = new ToDo(useForInit);
+            String todoDescription = input.substring(4);
+            Task toAdd = new ToDo(todoDescription);
             this.outputToReturn = listOfTasks.addTask(toAdd);
         } catch (DukeExceptions DE) {
             this.outputToReturn = DE.toString();
@@ -121,8 +121,8 @@ public class Parser {
      */
     public void handleDeadlineTask(String input, TaskList listOfTasks) throws DukeExceptions {
         try {
-            String useForInit = input.substring(8);
-            Task toAdd = new Deadlines(useForInit);
+            String deadlineDescription = input.substring(8);
+            Task toAdd = new Deadlines(deadlineDescription);
             this.outputToReturn = listOfTasks.addTask(toAdd);
         } catch (DukeExceptions DE) {
             this.outputToReturn = DE.toString();
@@ -138,8 +138,8 @@ public class Parser {
      */
     public void handleEventTask(String input, TaskList listOfTasks) throws DukeExceptions {
         try {
-            String useForInit = input.substring(5);
-            Task toAdd = new Events(useForInit);
+            String eventDescription = input.substring(5);
+            Task toAdd = new Events(eventDescription);
             this.outputToReturn = listOfTasks.addTask(toAdd);
         } catch (DukeExceptions DE) {
             this.outputToReturn = DE.toString();
