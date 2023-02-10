@@ -16,7 +16,7 @@ public class EventTest {
                 DateTimeFormatter.ofPattern("dd/MM/yy-HHmm")),
                 LocalDateTime.parse("01/01/00-1400",
                 DateTimeFormatter.ofPattern("dd/MM/yy-HHmm")));
-        assertEquals("[E][ ] test\n(from: 01 Jan (Sat) - 12:00PM to: 01 Jan (Sat) - 02:00PM)",
+        assertEquals("[E][ ] test\n(from: 01 Jan (Sat) - 12:00PM\n to:   01 Jan (Sat) - 02:00PM)",
                 event.toString());
     }
     @Test
@@ -34,7 +34,7 @@ public class EventTest {
                 LocalDateTime.parse("01/01/00-1400",
                 DateTimeFormatter.ofPattern("dd/MM/yy-HHmm")));
         event.mark();
-        assertEquals("[E][X] test\n(from: 01 Jan (Sat) - 12:00PM to: 01 Jan (Sat) - 02:00PM)",
+        assertEquals("[E][X] test\n(from: 01 Jan (Sat) - 12:00PM\n to:   01 Jan (Sat) - 02:00PM)",
                 event.toString());
     }
     @Test
@@ -45,7 +45,7 @@ public class EventTest {
                         DateTimeFormatter.ofPattern("dd/MM/yy-HHmm")));
         event.mark();
         event.unmark();
-        assertEquals("[E][ ] test\n(from: 01 Jan (Sat) - 12:00PM to: 01 Jan (Sat) - 02:00PM)",
+        assertEquals("[E][ ] test\n(from: 01 Jan (Sat) - 12:00PM\n to:   01 Jan (Sat) - 02:00PM)",
                 event.toString());
     }
 }
