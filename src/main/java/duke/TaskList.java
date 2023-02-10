@@ -36,6 +36,7 @@ public class TaskList {
      */
     public static String markDone(int index) {
         tasks.get(index).markDone();
+        assert tasks.get(index).getStatus().equals("X"): "Task should be marked done";
         return tasks.get(index).getTaskName();
     }
 
@@ -47,6 +48,7 @@ public class TaskList {
      */
     public static String markUndone(int index) {
         tasks.get(index).markUndone();
+        assert tasks.get(index).getStatus().equals("O"): "Task should be marked undone";
         return tasks.get(index).getTaskName();
     }
 

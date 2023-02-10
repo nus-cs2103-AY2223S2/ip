@@ -58,6 +58,7 @@ public class Parser {
             if (!line.startsWith("by ")) {
                 throw new InvalidSyntaxException();
             }
+
             return toReturn;
         } catch (IndexOutOfBoundsException err) {
             throw new MissingTimeException();
@@ -86,6 +87,9 @@ public class Parser {
         if (numOfTask <= 0 || numOfTask > TaskList.getList().size()) {
             throw new InvalidTaskNumberException();
         }
+
+        assert numOfTask > 0 && numOfTask <= TaskList.getList().size(): "Task number should be positive";
+
         return numOfTask;
     }
 
