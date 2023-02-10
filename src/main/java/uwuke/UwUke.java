@@ -1,5 +1,6 @@
 package uwuke;
 
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import javafx.application.Application;
@@ -125,65 +126,85 @@ public class UwUke extends Application {
         try {
             tasks = Storage.readSavedTasks();
         } catch (Exception e) {
-            Printer.printError("Could not load save file");
+            Printer.printError("Could not load save file, creating new task list");
             tasks = new TaskList();
         }
         sc = new Scanner(System.in);
     }
 
-    private static void run() {
-        String input = sc.nextLine();
-
-        while (!input.equals("bye")) {
-            try {
-                if (input.contains(",")) { // Can potentially cause fatal errors when trying to read files if commas were allowed.
-                    throw new DukeException("Please do not use reserved character \',\'.");
-                }
-                switch (Command.matchCommand(input)) {
-                case LIST:
-                    Printer.printTasks(tasks.getList());
-                    break;
-                case DEADLINE:
-                    tasks.addDeadline(input);
-                    break;
-                case EVENT:
-                    tasks.addEvent(input);
-                    break;
-                case TODO:
-                    tasks.addTodo(input);
-                    break;
-                case MARK:
-                    tasks.markTask(input);
-                    break;
-                case UNMARK:
-                    tasks.unmarkTask(input);
-                    break;
-                case DELETE:
-                    tasks.deleteTask(input);
-                    break;
-                case FIND:
-                    tasks.findTask(input);
-                    break;
-                default:
-                    Printer.printWithDecorations(Advisor.advise(input));
-                }
-            } catch (Exception e) {
-                Printer.printError(e.getMessage());
-            } 
-
-            try {
-                input = sc.nextLine();
-            } catch (Exception e) {
-                Printer.printError("Error occurred when trying to read next line, try again.");
-                input = "";
+    /**
+     * Main handler to perform all commands other than the bye command
+     * @param input command string
+     */
+    private static void performCommand(String input) throws DukeException {
+        switch (Command.matchCommand(input)) {
+            case LIST:
+                Printer.printTasks(tasks.getList());
+                break;
+            case DEADLINE:
+                tasks.addDeadline(input);
+                break;
+            case EVENT:
+                tasks.addEvent(input);
+                break;
+            case TODO:
+                tasks.addTodo(input);
+                break;
+            case MARK:
+                tasks.markTask(input);
+                break;
+            case UNMARK:
+                tasks.unmarkTask(input);
+                break;
+            case DELETE:
+                tasks.deleteTask(input);
+                break;
+            case FIND:
+                tasks.findTask(input);
+                break;
+            default:
+                Printer.printWithDecorations(Advisor.advise(input));
             }
-        }
+    }
 
+    /**
+     * Handles error if input contains a comma character, which will interfere with save file loading.
+     * Can potentially cause fatal errors when trying to read files if commas were allowed.
+     */
+    private static void handleIllegalCharacter(String input) throws DukeException {
+        if (input.contains(",")) { 
+            throw new DukeException("Please do not use reserved character \',\'.");
+        }
+    }
+
+    /**
+     * Handles saving tasks and any potential errors
+     */
+    private static void saveTask() {
         try {
             Storage.saveTasks(tasks.getList());
         } catch (Exception e) {
             Printer.printWithDecorations("Error occured when trying to save tasks");
         }
+    }
+
+    private static void run() {
+        String input = sc.nextLine();
+        while (!input.equals("bye")) {
+            try {
+                handleIllegalCharacter(input);
+                performCommand(input);
+                input = sc.nextLine();
+            } catch (DukeException e) {
+                Printer.printError(e.getMessage());
+            } catch (NoSuchElementException e) {
+                Printer.printError("Error occurred when trying to read next line, try again.");
+                input = "";
+            } catch (Exception e) {
+                Printer.printError("Unknown Error Ocurred");
+            }
+        }
+        saveTask();
     }
 
     public static void main(String[] args) {
