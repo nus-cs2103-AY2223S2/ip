@@ -11,8 +11,9 @@ import java.util.ArrayList;
  * @author Bryan Tan
  */
 public class Ui {
-    private final String intro = "Hi! I'm Duke! :)\nHow may I help?";
-    private final String outro = "Goodbye!";
+    private static final String errMsg = "Sorry I don't recognise that command :( Please try again.";
+    private static final String intro = "Hi! I'm Duke! :)\nHow may I help?";
+    private static final String outro = "Goodbye!";
     private TaskList tList;
     private Storage savedList;
 
@@ -21,11 +22,7 @@ public class Ui {
      * 
      * @throws IOException when file path is invalid.
      */
-    public void initialise() throws IOException {
-        System.out.println();
-        System.out.println();
-        System.out.println(this.intro);
-        System.out.println();
+    public String initialise() throws IOException {
         Storage saved = new Storage("./dukeSaved.txt");
         this.savedList = saved;
         this.tList = new TaskList();
@@ -33,12 +30,12 @@ public class Ui {
         if (saved.isSaved()) {
             this.tList.setList(saved.load());
             if (this.tList.size() > 0) {
-                System.out.println("Duke: Previously saved list available!");
+                return (this.intro + "\n" + "Previously saved list available!");
             } else {
-                System.out.println("Duke: No previously saved list found.");
+                return (this.intro + "\n" + "No previously saved list found.");
             }
         } else {
-            System.out.println("Duke: No previously saved list found.");
+            return (this.intro + "\n" + "No previously saved list found.");
         }
     }
 
@@ -51,20 +48,21 @@ public class Ui {
         savedList.save(this.tList.getList());
     }
 
-    public String getIntro() {
-        return this.intro;
+    public static String getIntro() {
+        return intro;
     }
 
-    public String getOutro() {
-        return this.outro;
+    public static String getOutro() {
+        return outro;
     }
 
     /**
      * Prints goodbye messgae.
      */
-    public void end() {
-        System.out.print("Duke: ");
-        System.out.println(this.outro);
+    public String end() throws IOException {
+        save();
+
+        return outro;
     }
 
     public ArrayList<Task> getList() {
@@ -72,44 +70,37 @@ public class Ui {
     }
 
     /**
-     * Resets the interface to a state ready for user input.
-     */
-    public void reset() {
-        System.out.println();
-        System.out.print("User: ");
-    }
-    
-    /**
      * Adds a task to the current list of tasks.
      * 
      * @param t Task to be added.
      */
-    public void addToList(Task t) {
+    public String addToList(Task t) {
         this.tList.add(t);
-        System.out.print("Duke: ");
-        System.out.println("added " + t.getTask() + "!");
-        System.out.println("Now you have " + tList.size() + " tasks in the list.");
-        reset();
+        return "Added " + t.getTask() + "!" + "\n" + "Now you have " + tList.size() + " tasks in the list.";
     }
 
     /**
      * Handles the exception when access or manipulation of an empty is attempted.
      */
-    public void emptyErr() {
-        System.out.println("Duke: Error!! List empty! Try again.");
-        reset();
+    public String emptyErr() {
+        return "Error!! List empty! Try again.";
     }
 
     /**
      * Prints out all tasks created so far.
      */
-    public void viewList() {
-        System.out.println("Here's your list of tasks:");
-        System.out.println();
-        for(int i  = 0; i < this.tList.size(); i++) {
-        System.out.println(i+1 + ". " + this.tList.get(i));
+    public String viewList() {
+        if (this.getList().isEmpty()) {
+            return emptyErr();
         }
-        reset();
+        StringBuilder sb = new StringBuilder();
+//        System.out.println("Here's your list of tasks:");
+//        System.out.println();
+        sb.append("Heres your list of tasks: " + "\n");
+        for (int i  = 0; i < this.tList.size(); i++) {
+        sb.append(i + 1 + ". " + this.tList.get(i) + "\n");
+        }
+        return sb.toString();
     }
 
     /**
@@ -117,15 +108,16 @@ public class Ui {
      * 
      * @param num Index no. of task in the list to be marked as done
      */
-    public void markTask(int num) {
+    public String markTask(int num) {
+        if (this.getList().isEmpty()) {
+            return emptyErr();
+        }
         if (num >= this.tList.size()) {
-            System.out.println("Duke: Task no." + (num+1) + " not found. Try again.");
+           return ("Task no." + (num + 1) + " not found. Try again.");
         } else {
             this.tList.get(num).mark();
-            System.out.println("Duke: Nice It's marked!");
-            System.out.println(this.tList.get(num));
+            return "Nice It's marked!" + "\n" + this.tList.get(num);
         }
-        reset();
     }
 
     /**
@@ -133,15 +125,16 @@ public class Ui {
      * 
      * @param num Index no. of task in the list to be marked as undone.
      */
-    public void unmarkTask(int num) {
+    public String unmarkTask(int num) {
+        if (this.getList().isEmpty()) {
+            return emptyErr();
+        }
         if (num >= this.tList.size()) {
-            System.out.println("Duke: Task no." + (num+1) + " not found. Try again.");
+            return "Task no." + (num + 1) + " not found. Try again.";
         } else {
             this.tList.get(num).unmark();
-            System.out.println("Duke: Ok! It's unmarked!");
-            System.out.println(this.tList.get(num));
+            return "Ok! It's unmarked!" + "\n" + this.tList.get(num);
         }
-        reset();
     }
 
     /**
@@ -150,12 +143,12 @@ public class Ui {
      * @param task String array containing descriptions of the task.
      * @return ToDo object.
      */
-    public ToDo makeToDo(String[] task) {
+    public String makeToDo(String[] task) {
         StringBuilder sb = new StringBuilder();
         for (int i = 1; i < task.length; i++) {
             sb.append(task[i] + " ");
         }
-        return new ToDo(sb.toString());
+        return addToList(new ToDo(sb.toString()));
     }
 
     /**
@@ -165,7 +158,7 @@ public class Ui {
      * @return Event object.
      * @throws DateTimeParseException if user inputs date and time in the wrong format.
      */
-    public Event makeEvent(String[] task) throws DateTimeParseException {
+    public Event createEvent(String[] task) throws DateTimeParseException {
         StringBuilder start = new StringBuilder();
         StringBuilder end = new StringBuilder();
         StringBuilder desc = new StringBuilder();
@@ -197,6 +190,15 @@ public class Ui {
         return new Event(desc.toString(), start.toString(), end.toString());
     }
 
+    public String makeEvent(String[] task) throws DateTimeParseException {
+        try {
+            Event temp = createEvent(task);
+            return addToList(temp);
+        } catch (DateTimeParseException e) {
+            return "Wrong date/time format!" + "\n" + "Please enter correct format (yyyy/MM/dd HHmm)!";
+        }
+    }
+
     /**
      * Creates a task with given deadline.
      * 
@@ -204,7 +206,7 @@ public class Ui {
      * @return Deadline object.
      * @throws DateTimeParseException if user inputs date and time in the wrong format.
      */
-    public Deadline makeDeadline(String[] task) throws DateTimeParseException {
+    public Deadline createDeadline(String[] task) throws DateTimeParseException {
         StringBuilder desc = new StringBuilder();
         StringBuilder by = new StringBuilder();
         boolean isDesc = true;
@@ -226,20 +228,31 @@ public class Ui {
         return new Deadline(desc.toString(), by.toString());
     }
 
+    public String makeDeadline(String[] task) throws  DateTimeParseException {
+        try {
+            Deadline temp = createDeadline(task);
+            return addToList(temp);
+        } catch (DateTimeParseException e) {
+            return "Wrong date/time format!" + "\n" + "Please enter correct format (yyyy/MM/dd HHmm)!";
+        }
+    }
+
     /**
      * Deletes a specified task.
      * 
      * @param num Index no. of task in the list to be deleted.
      */
-    public void delete(int num) {
-        if (num >= this.tList.size()) {
-            System.out.println("Duke: Task no." + (num+1) + " not found. Try again.");
-        } else {
-            System.out.println("Duke: Ok! Following task is removed: ");
-            System.out.println(this.tList.get(num));
-            this.tList.remove(num);
+    public String delete(int num) {
+        if (this.getList().isEmpty()) {
+            return emptyErr();
         }
-        reset();
+        if (num >= this.tList.size()) {
+            return "Task no." + (num + 1) + " not found. Try again.";
+        } else {
+            Task temp = this.tList.get(num);
+            this.tList.remove(num);
+            return "Ok! Following task is removed: " + "\n" + temp;
+        }
     }
 
     /**
@@ -247,40 +260,41 @@ public class Ui {
      * 
      * @param keyword keyword to search with.
      */
-    public void find(String keyword) {
+    public String find(String keyword) {
+        if (this.getList().isEmpty()) {
+            return emptyErr();
+        }
+        StringBuilder sb = new StringBuilder();
+        sb.append("Here's your list of tasks relating to " + "\"" + keyword + "\"" + ":" + "\n");
         int counter = 1;
-        boolean printedHeader = false;
         boolean hasMatch = false;
 
         for (int i = 0; i < this.tList.size(); i++) {
             Task curr = this.tList.get(i);
             if (curr.getTask().contains(keyword)) {
                 hasMatch = true;
-
-                if (!printedHeader) {
-                    System.out.println();
-                    System.out.println("Duke: Here's your list of tasks relating to " + "\"" + keyword + "\"" + ":");
-                    printedHeader = true;
-                }
-                System.out.println(counter + ") " + curr.toString());
+                sb.append(counter + ") " + curr.toString() + "\n");
                 counter++;
             }
         }
 
         if (!hasMatch) {
-            System.out.println("Duke: Sorry! No matching tasks found. Please try again.");
+            return "Sorry! No matching tasks found. Please try again.";
+        } else {
+            return sb.toString();
         }
-
-        reset();
     }
 
     /**
      * Deletes all task from the tasklist.
      */
-    public void clearList() {
+    public String clearList() {
         ArrayList<Task> newEmptyList = new ArrayList<>();
         this.tList.setList(newEmptyList);
-        System.out.println("Duke: Ok! All tasks deleted.");
-        reset();
+        return "Ok! All tasks deleted.";
+    }
+
+    public String wrongInput() {
+        return errMsg;
     }
 }
