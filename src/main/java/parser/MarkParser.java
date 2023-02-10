@@ -1,9 +1,10 @@
 package parser;
 
-import command.Command;
-import command.MarkCommand;
 import dukeexeption.InvalidArgumentException;
 import dukeexeption.MissingArgumentException;
+
+import command.Command;
+import command.MarkCommand;
 
 /**
  * Parser that handles command that starts with mark keyword.

@@ -2,10 +2,12 @@ package parser;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import command.Command;
-import command.EventCommand;
+
 import dukeexeption.InvalidArgumentException;
 import dukeexeption.MissingArgumentException;
+
+import command.Command;
+import command.EventCommand;
 
 /**
  * Parser that handles command that starts with event keyword.

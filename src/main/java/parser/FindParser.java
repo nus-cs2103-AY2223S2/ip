@@ -1,8 +1,9 @@
 package parser;
 
+import dukeexeption.MissingArgumentException;
+
 import command.Command;
 import command.FindCommand;
-import dukeexeption.MissingArgumentException;
 
 public class FindParser implements Parser {
     @Override

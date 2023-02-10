@@ -2,6 +2,9 @@ package ui;
 
 import dukeexeption.DukeException;
 
+/**
+ * Text ui to return formatted text for Duke.
+ */
 public class TextUi {
     private final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
