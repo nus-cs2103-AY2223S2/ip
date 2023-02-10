@@ -2,6 +2,8 @@ package kuromi.task;
 
 import java.util.ArrayList;
 
+import static java.util.stream.Collectors.toCollection;
+
 /**
  * List of tasks represented by an ArrayList of Tasks.
  */
@@ -96,14 +98,11 @@ public class TaskList {
      * @return TaskList of current tasks filtered by the keyword.
      */
     public TaskList find(String keyword) {
-        TaskList res = new TaskList();
-        for (int i = 0; i < this.tasks.size(); i++) {
-            Task cur = this.tasks.get(i);
-            if(cur.containsKeyword(keyword)) {
-                res.add(cur);
-            }
-        }
-        return res;
+        ArrayList<Task> newTaskList = this.tasks
+                .stream()
+                .filter((s) -> s.containsKeyword(keyword))
+                .collect(toCollection(ArrayList::new));
+        return new TaskList(newTaskList);
     }
 
     @Override
