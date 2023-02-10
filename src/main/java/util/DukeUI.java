@@ -23,6 +23,15 @@ public class DukeUI {
     }
 
     /**
+     * UI for tasks that match keyword provided by user.
+     * @return message
+     */
+    public static String foundTaskMessage() {
+        String str = "Here are matching tasks in your list: ";
+        return str + System.lineSeparator();
+    }
+
+    /**
      * UI for completed tasks.
      * @return message
      */

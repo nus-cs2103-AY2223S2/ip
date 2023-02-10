@@ -19,7 +19,6 @@ public class Duke {
     public Duke() {
         this.taskManager = new TaskManager();
         this.fileManager = new FileManager();
-        this.fileManager.loadDataToArrayList(this.taskManager);
         assert this.fileManager.loadDataToArrayList(this.taskManager) != -1;
         this.parser = new Parser(fileManager);
     }

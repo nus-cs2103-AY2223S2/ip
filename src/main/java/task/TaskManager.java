@@ -2,6 +2,9 @@ package task;
 
 import java.util.ArrayList;
 
+import util.DukeException;
+import util.DukeUI;
+
 /**
  * Manages all Task related operations such as updating
  * the completion status of a task, inserting and deleting
@@ -65,15 +68,40 @@ public class TaskManager {
      * Iterates through task list to display its elements.
      * @return String of tasks in the list
      */
-    public String displayList() {
+    public String displayList() throws DukeException {
         if (taskArr.isEmpty()) {
-            return "Your list is empty, please add a task!";
+            throw new DukeException("Your list is empty, please add a task!");
         }
+
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < taskArr.size(); i++) {
-            Task tsk = taskArr.get(i);
-            return String.format("%d. %s", i + 1, tsk);
+            Task task = taskArr.get(i);
+            sb.append(i + 1 + ". " + task);
+            sb.append(System.lineSeparator());
         }
-        return "";
+        return sb.toString();
+    }
+
+    /**
+     * Finds tasks in the list which match a given keyword.
+     * @param word
+     * @return all matching tasks
+     */
+    public String findTasks(String word) throws DukeException {
+        StringBuilder sb = new StringBuilder();
+        int count = 0;
+        for (Task task : taskArr) {
+            if (!task.getDescription().contains(word)) {
+                continue;
+            }
+            sb.append(++count + ". " + task);
+            sb.append(System.lineSeparator());
+        }
+
+        if(sb.length() == 0) {
+            throw new DukeException(DukeUI.missingTaskErrorMessage());
+        }
+        return sb.toString();
     }
 
     public int getTaskArraySize() {

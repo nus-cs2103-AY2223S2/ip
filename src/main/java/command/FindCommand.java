@@ -18,8 +18,8 @@ public class FindCommand extends Command {
      * given an input keyword.
      * @param input
      */
-    public FindCommand(String input) {
-        this.word = input;
+    public FindCommand(String word) {
+        this.word = word;
     }
 
     /**
@@ -30,18 +30,7 @@ public class FindCommand extends Command {
      */
     @Override
     public String executeCommand(TaskManager taskManager) throws DukeException {
-        try {
-            System.out.println("Here are matching tasks in your list:\n");
-            assert taskManager != null;
-            ArrayList<Task> arr = taskManager.getTaskArr();
-            for (Task task : arr) {
-                if (task.getDescription().contains(this.word)) {
-                    return task.toString();
-                }
-            }
-            return "";
-        } catch (IndexOutOfBoundsException e) {
-            throw new DukeException(DukeUI.missingTaskErrorMessage());
-        }
+        assert taskManager != null;
+        return DukeUI.foundTaskMessage() + taskManager.findTasks(this.word);
     }
 }
