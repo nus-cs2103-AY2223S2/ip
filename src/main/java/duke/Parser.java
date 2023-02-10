@@ -39,6 +39,8 @@ public class Parser {
                     new TimeConvertor(toDate, "MMM dd yyyy hh:mma"));
             break;
         default:
+            assert false : "This type of record cannot be parsed";
+
         }
         if (recordStatus.equals("[X]") && item != null) {
             item.setIsDone();
@@ -56,9 +58,10 @@ public class Parser {
      * @throws TaskNotExistException The task does not exist in the list.
      * @throws MissingNumberException Not indication of task index number.
      * @throws MissingDescriptionException No task description.
+     * @throws CheckNotFindException Cannot check for the user input.
      */
     public static String parseInput(TaskList list, String userInput)
-            throws TaskNotExistException, MissingNumberException, MissingDescriptionException, UnknownInputException {
+            throws TaskNotExistException, MissingNumberException, MissingDescriptionException, CheckNotFindException {
         switch (userInput.split("\\s+")[0]) {
         case "bye":
             Platform.exit();
@@ -82,8 +85,9 @@ public class Parser {
         case "check":
             return list.check(userInput);
         default:
-            return "Oh no, I am not sure what that means, could you try again?";
+            assert false : "User input unknown case";
         }
+        return "Oh no, I am not sure what that means, could you try again?";
     }
 }
 

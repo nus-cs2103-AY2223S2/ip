@@ -93,7 +93,11 @@ public class TaskList {
      */
     public String mark(String userInput) throws TaskNotExistException, MissingNumberException {
         int index = checkIndex(userInput, "mark");
-
+        assert index >= 1 : "User input index smaller than 1";
+        assert index <= lists.size() : "User input index larger than the current list size";
+        if (index > lists.size() || index < 1) {
+            throw new TaskNotExistException();
+        }
         lists.get(index - 1).setIsDone();
         return "Nice! I've marked this task as done: \n" + lists.get(index - 1);
     }
@@ -108,7 +112,11 @@ public class TaskList {
      */
     public String unmark(String userInput) throws TaskNotExistException, MissingNumberException {
         int index = checkIndex(userInput, "unmark");
-
+        assert index >= 1 : "User input index smaller than 1";
+        assert index <= lists.size() : "User input index larger than the current list size";
+        if (index > lists.size() || index < 1) {
+            throw new TaskNotExistException();
+        }
         lists.get(index - 1).revertIsDone();
         return "Ok! I've marked this task as not done: \n" + lists.get(index - 1);
     }
@@ -195,7 +203,11 @@ public class TaskList {
      */
     public String delete(String userInput) throws TaskNotExistException, MissingNumberException {
         int index = checkIndex(userInput, "delete");
-
+        assert index >= 1 : "User input index smaller than 1";
+        assert index <= lists.size() : "User input index larger than the current list size";
+        if (index > lists.size() || index < 1) {
+            throw new TaskNotExistException();
+        }
         return "Got it. I've remove this task:\n" + lists.remove(index - 1)
                 + "\n" + "Now you have " + lists.size() + " tasks in the list.";
     }
@@ -241,9 +253,9 @@ public class TaskList {
      * @return Return the items that fulfill the check condition.
      * @throws MissingDescriptionException User not specific which task to check.
      */
-    public String check(String userInput) throws MissingDescriptionException {
+    public String check(String userInput) throws CheckNotFindException {
         if (!userInput.contains("/")) {
-            throw new MissingDescriptionException("check");
+            throw new CheckNotFindException();
         }
         String checkDeadline = userInput.split("/")[1];
 
