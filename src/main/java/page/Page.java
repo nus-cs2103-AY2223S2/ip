@@ -46,6 +46,23 @@ public class Page {
         }
     }
 
+    /*
+    public String getResponse(String input) {
+        boolean isBye = false;
+
+        // ui.printGreeting();
+        while (!isBye) {
+            try {
+                // String input = ui.readInput();
+                isBye = parser.parseExecute(input, ui, storage, questLog);
+            } catch (PageException e) {
+                ui.printErrorMessage(e);
+            }
+
+        }
+    }
+    */
+
     /**
      * Starts the Page chatbot.
      *

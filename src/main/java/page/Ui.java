@@ -1,7 +1,5 @@
 package page;
 
-import page.quest.Quest;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -93,6 +91,11 @@ public class Ui {
         System.out.println("Quest Deleted... lost to the ages...\n" + q.toString());
     }
 
+    /**
+     * Prints the list of quests in the Quest Log matching a keyword.
+     *
+     * @param arr The list of quests.
+     */
     public void printFilteredQuestLog(ArrayList<Quest> arr) {
         System.out.println("Greetings sire, here are the matching quests in the Quest Log:");
         for (Quest q : arr) {
