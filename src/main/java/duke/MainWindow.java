@@ -2,7 +2,12 @@ package duke;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.List;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -16,6 +21,7 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -77,13 +83,38 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response = duke.getResponse(input);
 
+        List<Timeline> recurResponse = new ArrayList<>();
+
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
+
+        //Check if response is delete recur. If recur is deleted, then stop looping through that recur. If not,
+        //keep adding new timeline for each recur
+
+        TaskScheduler taskScheduler = new TaskScheduler(recurResponse, dialogContainer, dukeImage);
+        if (input.contains("recur")) {
+            taskScheduler.recurDialogContainer(input);
+        }
+
+        /*
+        if (input.contains("recur")) {
+            Timeline timeline =
+                    new Timeline(new KeyFrame(Duration.millis(500), e -> dialogContainer.getChildren().addAll(
+                            DialogBox.getDukeDialog("recur reminder!", dukeImage)
+                    )));
+            timeline.setCycleCount(Animation.INDEFINITE); // loop forever
+            timeline.play();
+        }
+        */
+
+        System.out.println("response: " + response);
+
         dialogContainer.setBackground(background);
+
         userInput.clear();
     }
 }

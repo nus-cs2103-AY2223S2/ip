@@ -4,6 +4,11 @@ import java.util.Comparator;
 import java.util.Scanner;
 import java.util.concurrent.PriorityBlockingQueue;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.util.Duration;
+
 /**
  * Ui is a class to handle the intial greetings, final greetings, and all
  * the deciphering of the user's input. Ui invokes the appropriate classes
