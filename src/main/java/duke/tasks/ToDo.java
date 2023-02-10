@@ -1,5 +1,7 @@
 package duke.tasks;
 
+import java.time.LocalDate;
+
 import duke.exceptions.TaskNameNotSpecified;
 import duke.parsing.Parser;
 
@@ -38,5 +40,10 @@ public class ToDo extends Task {
     @Override
     public String stringFields() {
         return "";
+    }
+
+    @Override
+    public LocalDate getEndDate() {
+        return null;
     }
 }

@@ -140,4 +140,11 @@ public class Parser {
             throw new FindKeywordMissing();
         }
     }
+
+    public static LocalDate parseViewScheduleDate(String commandInput) throws DateTimeParseException {
+        String timeInput = commandInput.split(" ")[1];
+        timeInput = timeInput.replaceAll("/", "-");
+        return LocalDate.parse(timeInput);
+    }
+
 }

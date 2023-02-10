@@ -1,5 +1,7 @@
 package duke.tasks;
 
+import java.time.LocalDate;
+
 /**
  * Encapsulation of user tasks
  */
@@ -15,6 +17,7 @@ public abstract class Task {
     }
 
     protected abstract String stringFields();
+    public abstract LocalDate getEndDate();
 
     /**
      * Marks this task as completed.
@@ -47,4 +50,5 @@ public abstract class Task {
     public String toString() {
         return String.format("[%s][%s] %s", this.type, this.isDone ? "x" : " ", this.taskName + this.stringFields());
     }
+
 }

@@ -1,5 +1,6 @@
 package duke.tasks;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 
@@ -79,4 +80,14 @@ public class TaskList {
         return result;
     }
 
+    public TaskList viewSched(LocalDate date) {
+        TaskList result = new TaskList();
+        this.tasks.stream().forEach(task -> {
+            LocalDate endDate = task.getEndDate();
+            if (endDate != null && (date.equals(endDate) || date.isAfter(endDate))) {
+                result.add(task);
+            }
+        });
+        return result;
+    }
 }

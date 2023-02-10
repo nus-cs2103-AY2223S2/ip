@@ -19,6 +19,7 @@ public enum CommandInput {
     LIST("list"),
     BYE("bye"),
     FIND("find"),
+    VIEWSCHED("view"),
     UNRECOGNIZED_CMD("");
 
     private String commandString;
@@ -60,6 +61,8 @@ public enum CommandInput {
             return new ByeCmd(tasks, commandLine);
         case FIND:
             return new FindCmd(tasks, commandLine);
+        case VIEWSCHED:
+            return new ViewSchedCmd(tasks, commandLine);
         default:
             return new UnrecognizedCmd(tasks, commandLine);
         }

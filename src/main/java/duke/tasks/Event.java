@@ -60,4 +60,9 @@ public class Event extends Task {
                 .format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         return String.format(" (from: %s to: %s)", fromDateString, toDateString);
     }
+
+    @Override
+    public LocalDate getEndDate() {
+        return this.chronoToDate.get();
+    }
 }

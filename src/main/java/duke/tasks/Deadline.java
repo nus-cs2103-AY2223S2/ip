@@ -50,4 +50,9 @@ public class Deadline extends Task {
                 : chornoDueDate.get().format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         return String.format(" (by: %s)", dateString);
     }
+
+    @Override
+    public LocalDate getEndDate() {
+        return this.chornoDueDate.get();
+    }
 }
