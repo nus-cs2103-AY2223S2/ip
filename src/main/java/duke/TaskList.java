@@ -51,7 +51,7 @@ public class TaskList {
 
     private String handleBye() {
         Storage.upload(this.tasks);
-        return "See you again, thanks for visiting!";
+        return "Bye!!!!";
     }
 
     private String handleMark(String input) {
@@ -60,9 +60,9 @@ public class TaskList {
         try {
             Task marked = tasks.get(id - 1);
             marked.setIsDone(true);
-            return "Good job! This task is now marked done!\n" + marked;
+            return "Duke wants to be productive too...\n" + marked;
         } catch (Exception e) {
-            return "No such task found!";
+            return "Uhhhhh Duke cant find it...";
         }
     }
 
@@ -72,39 +72,40 @@ public class TaskList {
         try {
             Task unmarked = tasks.get(id - 1);
             unmarked.setIsDone(false);
-            return "What a bummer! This task is now unmarked\n" + unmarked;
+            return "Duke says come back to it later....\n" + unmarked;
         } catch (Exception e) {
-            return "No such task found!";
+            return "Uhhhhh Duke cant find it...";
         }
     }
 
     private String handleToDo(String input) {
         ToDo processed = Parser.parseToDo(input);
         addTask(processed);
-        return "ToDo added! " + processed;
+        return "Duke done adding todo...\n" + processed;
     }
 
     private String handleDeadline(String input) {
         Deadline dl = Parser.parseDeadline(input);
         addTask(dl);
-        return "Deadline added! " + dl;
+        return "Duke done adding deadline...\n" + dl;
     }
 
     private String handleEvent(String input) {
         Event ev = Parser.parseEvent(input);
         addTask(ev);
-        return "Event added! " + ev;
+        return "Duke done adding event...\n" + ev;
     }
 
     private String handleDelete(String input) {
         String[] inp = input.split(" ");
         int id = Integer.parseInt(inp[1]);
+        Task item = tasks.get(id - 1);
         try {
             removeTask(id - 1);
         } catch (Exception e) {
-            System.out.println("No such task found!");
+            System.out.println("Uhhhhh Duke cant find it...");
         }
-        return "Task deleted!";
+        return "Farewell...\n" + item;
     }
 
     /**
@@ -113,16 +114,19 @@ public class TaskList {
      */
     private String handleFind(String input) {
         String output = "";
-        String keyword = input.substring(5);
+        String keyword = input.substring(5).toLowerCase();
         ArrayList<Task> tasksFound = new ArrayList<>();
         for (Task tsk : tasks) {
-            String desc = tsk.getDesc();
+            String desc = tsk.getDesc().toLowerCase();
             if (desc.contains(keyword)) {
                 tasksFound.add(tsk);
             }
         }
         for (int i = 0; i < tasksFound.size(); i++) {
             output += i + 1 + ". " + tasksFound.get(i) + "\n";
+        }
+        if (output.equals("")) {
+            return "Uhhhhh Duke cant find any...";
         }
         return output;
     }

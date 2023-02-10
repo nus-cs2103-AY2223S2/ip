@@ -32,7 +32,7 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         this.tasks = loadTextFile();
-        String intro = "Hurr..... I'm Duke....." ;
+        String intro = "Hurr..... I'm Duke.....";
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(intro, dukeImage)
         );
