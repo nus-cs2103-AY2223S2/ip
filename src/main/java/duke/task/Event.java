@@ -24,6 +24,7 @@ public class Event extends Task {
         this.from = from;
         this.to = to;
     }
+
     /**
      * Overrides the `toString` method to return the Event task in the form:
      * "[E][taskStatus] taskDescription (from: startTime to: endTime)".
