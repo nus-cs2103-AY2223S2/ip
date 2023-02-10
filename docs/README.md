@@ -6,7 +6,9 @@ The Colette chatbot is a chatbot designed to help you manage all the tasks that 
 * [Features](#features)
 * [FAQ](#faq)
 * [Planned features](#planned-features)
+
 ---
+
 ## Get Started
 1. Ensure you have `java 11` installed on your computer.
 2. Download the latest `colette.jar` file from [here](https://github.com).
@@ -14,7 +16,9 @@ The Colette chatbot is a chatbot designed to help you manage all the tasks that 
 4. Open a command line window, e.g. Terminal for MacOS or Command Prompt for Windows.
 5. `cd` into the folder you placed the jar file in, e.g. `cd ~/Desktop`.
 6. Start the application with the command `java -jar colette.jar`.
+
 ---
+
 ## Features
 
 A broad overview of what Colette can do for you:
@@ -43,7 +47,7 @@ Format: ```list```
 ### **Adding a task**
 You can add three types of tasks: [todos](#adding-a-todo), [deadlines](#adding-a-deadline), and [events](#adding-an-event).
 
-#### Adding todos
+#### Adding a todo
 Todos are tasks with a name/description. 
 
 Format: ```todo [name/description]```
@@ -79,7 +83,7 @@ Example: ```find pet dogs``` will find all tasks with either `pet` or `dogs` in 
 
 ### Remembering your tasks between sessions
 Colette can remember the state of your task list between sessions!
-Simply ensure that if you move the `colette.jar` file, you ensure the `data` folder remains in the same directory
+Simply ensure that if you move the `colette.jar` file, the `data` folder remains in the same directory
 as the jar file.
 
 ---
@@ -96,6 +100,6 @@ the tasks in your list with the [list command](#listing-all-tasks).
 ---
 
 ## Planned Features
-- [ ] Ability to undo the previous feature
-- [ ] Read times
-- [ ] Read dates in different format
+- [ ]  Ability to undo the previous feature
+- [ ]  Read times
+- [ ]  Read dates in different format
