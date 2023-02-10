@@ -6,11 +6,20 @@ import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.ui.UserInterface;
 
+/**
+ * Command to delete a task.
+ * 
+ * @author Samarth Verma
+ */
 public class DeleteTask extends Command {
     private int index;
 
-    public DeleteTask(int index) {
-        this.index = index;
+    /**
+     * Creates a new DeleteTask command.
+     * @param id The id of the task to be deleted.
+     */
+    public DeleteTask(int id) {
+        this.index = id;
     }
 
     @Override

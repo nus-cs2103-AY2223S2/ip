@@ -6,9 +6,18 @@ import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.ui.UserInterface;
 
+/**
+ * Command to unmark a task as completed.
+ * 
+ * @author Samarth Verma
+ */
 public class UnmarkTask extends Command {
     private int index;
 
+    /**
+     * Creates a new UnmarkTask command.
+     * @param index The index of the task to be unmarked as completed.
+     */
     public UnmarkTask(int index) {
         this.index = index;
     }

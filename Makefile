@@ -8,3 +8,6 @@ compile:
 
 test: 
 	cd text-ui-test; bash runtest.sh
+
+checkstyle:
+	./gradlew checkstyleMain checkstyleTest

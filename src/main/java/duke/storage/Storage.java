@@ -31,6 +31,9 @@ public class Storage {
         this.f = this.path.toFile();
     }
 
+    /**
+     * Returns the path of the file.
+     */
     public String getPath() {
         return path.toString();
     }
@@ -48,7 +51,7 @@ public class Storage {
     /**
      * Creates a new file.
      * 
-     * @throws IOException
+     * @throws IOException If the file cannot be created.
      */
     private void createFile() throws IOException {
         try {
@@ -59,6 +62,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the tasks in the list to the file.
+     * 
+     * @param list The list of tasks.
+     * @throws IOException If the file cannot be written to.
+     */
     public void save(TaskList list) throws IOException {
         this.initialize();
         StringBuilder sb = new StringBuilder();
@@ -77,6 +86,12 @@ public class Storage {
 
     }
 
+    /**
+     * Reads the tasks from the file.
+     * 
+     * @return The list of tasks.
+     * @throws IOException If the file cannot be read from.
+     */
     public TaskList read() throws IOException {
         this.initialize();
         TaskList list = new TaskList();

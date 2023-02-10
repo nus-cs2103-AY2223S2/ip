@@ -6,6 +6,11 @@ import duke.storage.Storage;
 import duke.tasks.TaskList;
 import duke.ui.UserInterface;
 
+/**
+ * Command to list all tasks.
+ * 
+ * @author Samarth Verma
+ */
 public class ListTasks extends Command {
 
     @Override

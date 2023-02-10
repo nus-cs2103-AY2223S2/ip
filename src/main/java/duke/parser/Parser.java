@@ -11,23 +11,34 @@ import duke.commands.MarkTask;
 import duke.commands.UnmarkTask;
 import duke.exceptions.DukeException;
 
-
+/**
+ * Parses user input.
+ *
+ * @author Samarth Verma
+ */
 public class Parser {
+    /**
+     * Parses the user input and returns the corresponding command.
+     *
+     * @param input The user input.
+     * @return The corresponding command.
+     * @throws DukeException If the user input is invalid.
+     */
     public Command parse(String input) throws DukeException {
         String[] tokens = input.split(" ");
         String command = tokens[0];
         String args = input.substring(command.length()).trim();
         switch (command) {
             case "bye":
-                return new Exit();    
+                return new Exit();
             case "todo":
-                return prepareCreateTodo(args);  
+                return prepareCreateTodo(args);
             case "deadline":
                 return prepareCreateDeadline(args);
             case "event":
                 return prepareCreateEvent(args);
             case "list":
-                return new ListTasks(); 
+                return new ListTasks();
             case "mark":
                 return prepareMarkTask(args);
             case "unmark":
