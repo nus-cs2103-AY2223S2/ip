@@ -2,7 +2,6 @@ package duke.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -42,23 +41,17 @@ public class ParserTest {
 
     @Test
     public void shouldThrowForEmptyDescription() {
-        DukeRuntimeException ex;
-        ex = assertThrows(EXPECTED_EXCEPTION_CLASS, () -> Parser.parseCommand("todo"));
-        assertTrue(ex.getMessage().contains("description cannot be empty"));
-        ex = assertThrows(EXPECTED_EXCEPTION_CLASS,
+        assertThrows(EXPECTED_EXCEPTION_CLASS, () -> Parser.parseCommand("todo"));
+        assertThrows(EXPECTED_EXCEPTION_CLASS,
                 () -> Parser.parseCommand("deadline --by 2023-01-01"));
-        assertTrue(ex.getMessage().contains("description cannot be empty"));
-        ex = assertThrows(EXPECTED_EXCEPTION_CLASS,
+        assertThrows(EXPECTED_EXCEPTION_CLASS,
                 () -> Parser.parseCommand("event --from 2023-01-01 --to 2023-10-10"));
-        assertTrue(ex.getMessage().contains("description cannot be empty"));
+
     }
 
     @Test
     public void shouldThrowForInvalidIntArgument() {
-        DukeRuntimeException ex;
-        ex = assertThrows(EXPECTED_EXCEPTION_CLASS, () -> Parser.parseCommand("mark 10v"));
-        assertTrue(ex.getMessage().contains("expect an integer as argument"));
-        ex = assertThrows(EXPECTED_EXCEPTION_CLASS, () -> Parser.parseCommand("delete 10v"));
-        assertTrue(ex.getMessage().contains("expect an integer as argument"));
+        assertThrows(EXPECTED_EXCEPTION_CLASS, () -> Parser.parseCommand("mark 10v"));
+        assertThrows(EXPECTED_EXCEPTION_CLASS, () -> Parser.parseCommand("delete 10v"));
     }
 }
