@@ -1,5 +1,6 @@
 package duke.command;
 
+import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 
 import duke.dukeexception.CommandException;
@@ -101,14 +102,18 @@ public class EventCommand extends Command {
         // Throws RequestExecution if there are any issues with the request
         checkCommandRequirement();
 
-        int fromIndex = Arrays.asList(values).indexOf("/from");
-        int toIndex = Arrays.asList(values).indexOf("/to");
-        String description = String.join(" ", Arrays.copyOfRange(values, 1, fromIndex));
-        String from = String.join(" ", Arrays.copyOfRange(values, fromIndex + 1, toIndex));
-        from = DateTimeParser.parse(from);
-        String to = String.join(" ", Arrays.copyOfRange(values, toIndex + 1, values.length));
-        to = DateTimeParser.parse(to);
+        try {
+            int fromIndex = Arrays.asList(values).indexOf("/from");
+            int toIndex = Arrays.asList(values).indexOf("/to");
+            String description = String.join(" ", Arrays.copyOfRange(values, 1, fromIndex));
+            String from = String.join(" ", Arrays.copyOfRange(values, fromIndex + 1, toIndex));
+            from = DateTimeParser.parse(from);
+            String to = String.join(" ", Arrays.copyOfRange(values, toIndex + 1, values.length));
+            to = DateTimeParser.parse(to);
 
-        return new String[] { description, from, to };
+            return new String[] { description, from, to };
+        } catch (DateTimeParseException e) {
+            throw new CommandException("Datetime has to be in the following format: yyyy-mm-dd HHmm");
+        }
     }
 }

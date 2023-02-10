@@ -19,7 +19,7 @@ public abstract class Command {
      * The Command types supported by Duke.
      */
     public enum Commands {
-        LIST, FIND, UNMARK, MARK, TODO, DEADLINE, EVENT, DELETE, EXIT, DOES_NOT_EXIST
+        LIST, FIND, UNMARK, MARK, TODO, DEADLINE, EVENT, DELETE, EXIT, EDIT, DOES_NOT_EXIST
     };
 
     /**
@@ -132,6 +132,8 @@ public abstract class Command {
             return Commands.DELETE;
         case "bye":
             return Commands.EXIT;
+        case "edit":
+            return Commands.EDIT;
         default:
             return Commands.DOES_NOT_EXIST;
         }

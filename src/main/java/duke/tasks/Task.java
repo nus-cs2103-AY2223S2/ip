@@ -63,4 +63,15 @@ public abstract class Task {
     public String toString() {
         return String.format("[%s] %s", getStatusIcon(), this.description);
     }
+
+    /**
+     * Updates task description and returns the task instance.
+     * @param description
+     * @return Task the instance
+     */
+    public Task updateDescription(String description) {
+        this.description = description;
+
+        return this;
+    }
 }
