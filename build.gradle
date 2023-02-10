@@ -44,11 +44,19 @@ test {
 }
 
 application {
-    mainClassName = "duke.Duke"
+    mainClassName = "gui.Launcher"
 }
 
 checkstyle {
     toolVersion = '10.2'
+}
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'gui.Launcher'
+        )
+    }
 }
 
 shadowJar {
