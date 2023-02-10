@@ -23,6 +23,9 @@ public class Event extends Task {
         super(description);
         this.from = from;
         this.to = to;
+        assert !description.isEmpty();
+        assert from != null;
+        assert to != null;
     }
 
     /**
