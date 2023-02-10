@@ -20,8 +20,11 @@ public class Duke {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Creates a response message after parsing the input given.
+     * 
+     * @param input the user's input
+     * @return a String that contains a response message corresponding to the user's input.
+     * @throws DukeException if the command format is invalid.
      */
     public String getResponse(String input) {
         String output = "";
