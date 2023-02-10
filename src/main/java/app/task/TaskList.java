@@ -16,6 +16,10 @@ import java.util.Map;
  * TaskList.
  */
 public class TaskList implements Iterable<Task> {
+    private static final String INVALID_TASKTYPE_ERROR = "Task not recognised.";
+    private static final String MISSING_TASK_FIELD_ERROR = "This task doesn't contain the fields you've chosen";
+    private static final String LIST_EMPTY_ON_DELETE_ERROR = "Hello hello there is no task to delete!!";
+    private static final String TASK_NOT_IN_LIST_ERROR = "This task doesn't exist in your list.";
     private final List<Task> tasks;
 
     /**
@@ -88,7 +92,7 @@ public class TaskList implements Iterable<Task> {
             newTask = new Event(desc, from, to);
             break;
         default:
-            throw new InvalidInputException("Task not recognised");
+            throw new InvalidInputException(INVALID_TASKTYPE_ERROR);
         }
         return newTask;
     }
@@ -121,7 +125,7 @@ public class TaskList implements Iterable<Task> {
             throws InvalidDateTimeException, InvalidInputException {
         Task newTask = addTask(type, args); // add to end of list
         newTask.markAsDone();
-        assert newTask.equals(this.tasks.get(this.tasks.size()-1));
+        assert newTask.equals(this.tasks.get(this.tasks.size() - 1));
         return newTask;
     }
 
@@ -151,7 +155,7 @@ public class TaskList implements Iterable<Task> {
             */
             for (String key : args.keySet()) {
                 if (!toBeEdited.containsField(key)) {
-                    throw new InvalidInputException("This task doesn't contain the fields you've chosen");
+                    throw new InvalidInputException(MISSING_TASK_FIELD_ERROR);
                 } else {
                     editedMappings.put(key, args.get(key));
                 }
@@ -189,7 +193,7 @@ public class TaskList implements Iterable<Task> {
      */
     public Task deleteTask(int index) throws InvalidInputException {
         if (this.tasks.isEmpty()) {
-            throw new InvalidInputException("Hello hello there is no task to delete!!");
+            throw new InvalidInputException(LIST_EMPTY_ON_DELETE_ERROR);
         }
 
         try {
@@ -198,7 +202,7 @@ public class TaskList implements Iterable<Task> {
             return deletedTask;
 
         } catch (IndexOutOfBoundsException e) {
-            throw new InvalidInputException("This task doesn't exist in your list.");
+            throw new InvalidInputException(TASK_NOT_IN_LIST_ERROR);
         }
     }
 

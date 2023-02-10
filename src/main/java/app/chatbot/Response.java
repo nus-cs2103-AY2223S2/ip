@@ -4,15 +4,18 @@ package app.chatbot;
  * Helper class for formatting GUI responses.
  */
 public class Response {
+    private final boolean isSuccess;
     private StringBuilder sb;
 
-    public Response() {
+    public Response(boolean isSuccess) {
         this.sb = new StringBuilder();
+        this.isSuccess = isSuccess;
     }
 
-    public Response(String s) {
+    public Response(String s, boolean isSuccess) {
         this.sb = new StringBuilder(s);
         sb.append(System.lineSeparator());
+        this.isSuccess = isSuccess;
     }
 
     /**
@@ -30,6 +33,11 @@ public class Response {
         this.sb.append(System.lineSeparator());
         return this;
     }
+
+    public boolean isSuccess() {
+        return this.isSuccess;
+    }
+
     @Override
     public String toString() {
         return this.sb.toString();

@@ -9,7 +9,7 @@ import app.chatbot.Ui;
 import app.task.TaskList;
 
 public class LoadCommand extends Command {
-
+    private static final String IO_ERROR = "IO Error - I dunno what went wrong :(";
     public LoadCommand() {
         this.isExit = false;
         this.isSave = false;
@@ -24,13 +24,17 @@ public class LoadCommand extends Command {
      * @throws IOException propagated from FileWriter
      */
     @Override
-    public String execute(TaskList tl, Ui ui, Storage storage)
-            throws IOException {
-        Map<String, Integer> successRates = storage.loadIntoTaskList(tl);
+    public Response execute(TaskList tl, Ui ui, Storage storage) {
+        Map<String, Integer> successRates;
+        try {
+            successRates = storage.loadIntoTaskList(tl);
+        } catch (IOException e) {
+            return new Response(IO_ERROR, false);
+        }
         int numSuccess = successRates.get("Successes");
         int numTotalRows = successRates.get("Total");
         return new Response("Successfully loaded "
                 + numSuccess + " of " + numTotalRows
-                +" task(s) from storage.").toString();
+                +" task(s) from storage.", true);
     }
 }

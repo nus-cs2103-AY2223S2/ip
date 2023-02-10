@@ -9,7 +9,8 @@ import app.task.Task;
 import app.task.TaskList;
 
 public class ListCommand extends Command {
-
+    private static final String NOTHING_TO_LIST_MESSAGE = "You don't have anything listed right now.";
+    private static final String LIST_INTRO_MESSAGE = "Eh this is what you've written down so far:\n";
     public ListCommand() {
         this.isExit = false;
         this.isSave = false;
@@ -26,21 +27,23 @@ public class ListCommand extends Command {
      * @param storage
      */
     @Override
-    public String execute(TaskList tl, Ui ui, Storage storage) {
+    public Response execute(TaskList tl, Ui ui, Storage storage) {
         List<Task> listTasks = tl.getAllTasks();
+        Response response = new Response(true);
         if (listTasks.isEmpty()) {
-            return new Response("You don't have anything listed right now.").toString();
+            response.addLine(NOTHING_TO_LIST_MESSAGE);
+            return response;
         } else {
-            StringBuilder output = new StringBuilder("Eh this is what you've written down so far:\n");
+            StringBuilder output = new StringBuilder(LIST_INTRO_MESSAGE);
             for (int i = 0; i < listTasks.size(); i++) {
                 output.append(i + 1)
                         .append(": ")
                         .append(listTasks.get(i))
                         .append('\n');
             }
-            Response r = new Response(output.toString());
-            r.addLine("You have " + listTasks.size() + " tasks listed.");
-            return r.toString();
+            response.addLine(output.toString());
+            response.addLine("You have " + listTasks.size() + " tasks listed.");
+            return response;
         }
     }
 }

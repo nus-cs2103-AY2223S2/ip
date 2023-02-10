@@ -24,6 +24,11 @@ import app.chatbot.Storage;
  * (use the TaskList to modify a Task).
  */
 public abstract class Task {
+    protected static final String DESC_MISSING_ERROR = "Plz provide d description.";
+    protected static final String INVALID_DATETIME_FORMAT_ERROR =
+            "Try reformatting your date/time to the supported formats:\n"
+            + "yyyy-MM-dd HHmm or yyyy/MM/dd HHmm\n"
+            + "Make sure that the date/time is valid!";
     protected static final List<DateTimeFormatter> SUPPORTED_DATE_TIME_INPUT = new ArrayList<>();
     protected static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("EEE, dd MMM yy hh:mma");
     protected String description;
@@ -43,7 +48,7 @@ public abstract class Task {
      */
     public Task(String description) throws InvalidInputException {
         if (isArgEmpty(description)) {
-            throw new InvalidInputException("plz provide the description!");
+            throw new InvalidInputException(DESC_MISSING_ERROR);
         }
         this.description = description;
         this.isDone = false;
@@ -76,9 +81,7 @@ public abstract class Task {
             }
         }
         if (Objects.isNull(date)) {
-            throw new InvalidDateTimeException("Try reformatting your date/time to the supported formats:\n"
-                    + "yyyy-MM-dd HHmm or yyyy/MM/dd HHmm\n"
-                    + "Make sure that the date/time is valid!");
+            throw new InvalidDateTimeException(INVALID_DATETIME_FORMAT_ERROR);
         } else {
             return date;
         }

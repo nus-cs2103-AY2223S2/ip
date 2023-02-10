@@ -4,6 +4,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
+    private static final String MISSING_FROM_OR_TO_ERROR =
+            "Plz provide BOTH the 'from' and 'to' in "
+            + "yyyy-MM-dd HHmm or yyyy/MM/dd HHmm format.";
     private final LocalDateTime from;
     private final LocalDateTime to;
 
@@ -21,8 +24,7 @@ public class Event extends Task {
         this.symbol = "E";
 
         if (isArgEmpty(from) || isArgEmpty(to)) {
-            throw new InvalidInputException("plz provide BOTH the 'from' and 'to' in "
-                    + "yyyy-MM-dd HHmm or yyyy/MM/dd HHmm format");
+            throw new InvalidInputException(MISSING_FROM_OR_TO_ERROR);
         }
         this.from = parseDate(from);
         this.to = parseDate(to);

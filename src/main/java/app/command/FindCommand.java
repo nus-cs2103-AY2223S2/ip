@@ -1,5 +1,6 @@
 package app.command;
 
+import app.chatbot.Response;
 import app.chatbot.Storage;
 import app.chatbot.Ui;
 import app.task.Task;
@@ -15,26 +16,29 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tl, Ui ui, Storage storage) {
-        StringBuilder resultDisplay = new StringBuilder();
+    public Response execute(TaskList tl, Ui ui, Storage storage) {
+        Response response = new Response(true);
+        StringBuilder searchHitsDisplay = new StringBuilder();
         boolean isSearchSuccessful = false;
         for (int i = 0; i < tl.size(); i++) {
             Task t = tl.getTask(i);
             String desc = t.getDesc();
             if (desc.toLowerCase().contains(this.searchContent)) {
-                resultDisplay.append(i + 1)
+                searchHitsDisplay.append(i + 1)
                         .append(": ")
                         .append(t)
                         .append("\n");
                 isSearchSuccessful = true;
             }
         }
+        String responseString;
         if (!isSearchSuccessful) {
-            assert resultDisplay.toString().equals("");
-            return ("Ah I didn't find any tasks matching '" + this.searchContent + "'." + "\n");
+            assert searchHitsDisplay.toString().equals("");
+            responseString = "Ah I didn't find any tasks matching '" + this.searchContent + "'." + "\n";
         } else {
-            return ("Here's the tasks matching '" + this.searchContent + "':\n"
-                    + resultDisplay + "\n");
+            responseString = "Here's the tasks matching '" + this.searchContent + "':\n"
+                    + searchHitsDisplay + "\n";
         }
+        return response.addLine(responseString);
     }
 }

@@ -68,12 +68,20 @@ public class Duke {
     }
 
 
+    /**
+     * Gets the chatbot to process a String input into a Command and
+     * executes it, returning a response string suitable for the chatbot
+     * to reply with.
+     * @param fullCommand
+     * @return
+     */
     public String getResponse(String fullCommand) {
         StringBuilder response = new StringBuilder();
         try {
             Command c = Parser.parse(fullCommand);
-            response.append(c.execute(taskList, ui, storage));
-            if (c.isSave()) {
+            Response cmdResponse = c.execute(taskList, ui, storage);
+            response.append(cmdResponse.toString());
+            if (c.isSave() && cmdResponse.isSuccess()) {
                 Command save = new SaveCommand();
                 response.append(save.execute(taskList, ui, storage));
             }
@@ -91,7 +99,7 @@ public class Duke {
         Command loadCommand = new LoadCommand();
         try {
             System.out.println("Loading storage data...");
-            return loadCommand.execute(taskList, ui, storage);
+            return loadCommand.execute(taskList, ui, storage).toString();
         } catch (Exception e) {
             return (e.getMessage());
         }

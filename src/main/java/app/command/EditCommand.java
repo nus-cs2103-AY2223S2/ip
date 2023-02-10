@@ -5,6 +5,8 @@ import java.util.Map;
 import app.chatbot.Response;
 import app.chatbot.Storage;
 import app.chatbot.Ui;
+import app.task.InvalidDateTimeException;
+import app.task.InvalidInputException;
 import app.task.Task;
 import app.task.TaskFieldNotFoundException;
 import app.task.TaskList;
@@ -12,6 +14,8 @@ import app.task.TaskList;
 
 
 public class EditCommand extends Command {
+    private static final String NO_FIELDS_INDICATED_ERROR =
+            "Please specify a field to change using '/<field> <value>' :)";
     private final String editAtIndex;
     private final Map<String, String> args;
     public EditCommand(String editAtIndex, Map<String, String> args) {
@@ -24,17 +28,21 @@ public class EditCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tl, Ui ui, Storage storage) throws Exception {
+    public Response execute(TaskList tl, Ui ui, Storage storage) {
         if (this.args.isEmpty()) {
-            return new Response("Please specify a field to change using '/<field> <value> :)").toString();
+            return new Response(NO_FIELDS_INDICATED_ERROR, false);
         }
-        Response r = new Response("Edited task at index " + this.editAtIndex + "!");
+        Response r = new Response("Edited task at index " + this.editAtIndex + "!", true);
         r.addLine("Old:")
                 .addLine(tl.getTask(editAtIndex).toString())
                 .addBlankLine()
                 .addLine("New: ");
-        Task editedTask = tl.editTask(editAtIndex, this.args);
-        r.addLine(editedTask.toString());
-        return r.toString();
+        try {
+            Task editedTask = tl.editTask(editAtIndex, this.args);
+            r.addLine(editedTask.toString());
+            return r;
+        } catch (InvalidInputException | InvalidDateTimeException e){
+            return new Response(e.getMessage(), false);
+        }
     }
 }

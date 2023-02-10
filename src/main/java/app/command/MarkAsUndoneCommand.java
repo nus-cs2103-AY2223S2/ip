@@ -6,6 +6,8 @@ import app.chatbot.Ui;
 import app.task.TaskList;
 
 public class MarkAsUndoneCommand extends Command {
+    private static final String NUM_FORMAT_ERROR = "Please specify the task by its index number.";
+    private static final String MISSING_TASK_ERROR = "Seems like this task doesn't exist.";
     private final String unmarkAtIndex;
 
     public MarkAsUndoneCommand(String index) {
@@ -21,22 +23,23 @@ public class MarkAsUndoneCommand extends Command {
      * @param tl
      * @param ui
      * @param storage
-     * @throws Exception
      */
     @Override
-    public String execute(TaskList tl, Ui ui, Storage storage) throws Exception {
+    public Response execute(TaskList tl, Ui ui, Storage storage) {
         boolean alreadyMarked;
         try {
             alreadyMarked = tl.unmarkDone(unmarkAtIndex);
+            String responseString;
             if (alreadyMarked) {
-                return new Response(tl.getTask(unmarkAtIndex).getDesc() + " is already undone!").toString();
+                responseString = tl.getTask(unmarkAtIndex).getDesc() + " is already undone!";
             } else {
-                return new Response("Unmarked " + tl.getTask(unmarkAtIndex).getDesc() + ".").toString();
+                responseString = "Unmarked " + tl.getTask(unmarkAtIndex).getDesc() + ".";
             }
+            return new Response(responseString, true);
         } catch (NumberFormatException e) {
-            throw new Exception("Please specify the task by its index number.");
+            return new Response(NUM_FORMAT_ERROR, false);
         } catch (IndexOutOfBoundsException e) {
-            throw new Exception("Seems like this task doesn't exist.");
+            return new Response(MISSING_TASK_ERROR, false);
         }
     }
 }

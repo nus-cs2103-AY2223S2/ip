@@ -1,5 +1,6 @@
 package app.command;
 
+import app.chatbot.Response;
 import app.chatbot.Storage;
 import app.chatbot.Ui;
 import app.task.TaskList;
@@ -32,7 +33,7 @@ public abstract class Command {
      * @return String response
      * @throws Exception
      */
-    public abstract String execute(TaskList tl, Ui ui, Storage storage) throws Exception;
+    public abstract Response execute(TaskList tl, Ui ui, Storage storage);
 
     public boolean isExit() {
         return this.isExit;
@@ -42,8 +43,4 @@ public abstract class Command {
         return this.isSave;
     }
 
-    protected int parseIndex(String s) throws NumberFormatException {
-        int i = Integer.parseInt(s) - 1;
-        return i;
-    }
 }

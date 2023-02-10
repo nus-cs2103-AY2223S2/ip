@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
+    private static final String MISSING_BY_ERROR = "Plz provide the deadline in "
+            + "yyyy-MM-dd HHmm or yyyy/MM/dd HHmm format.";
     private final LocalDateTime deadline;
 
     /**
@@ -19,8 +21,7 @@ public class Deadline extends Task {
         this.symbol = "D";
 
         if (isArgEmpty(deadline)) {
-            throw new InvalidInputException("plz provide the deadline in "
-                    + "yyyy-MM-dd HHmm or yyyy/MM/dd HHmm format");
+            throw new InvalidInputException(MISSING_BY_ERROR);
         }
         this.deadline = parseDate(deadline);
         this.fieldToValueMap.put("by", this.deadline.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));

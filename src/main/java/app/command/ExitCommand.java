@@ -23,7 +23,7 @@ public class ExitCommand extends Command {
      * @param storage
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
-        return new Response("Alright, goodbye to you too!").toString();
+    public Response execute(TaskList tasks, Ui ui, Storage storage) {
+        return new Response("Alright, goodbye to you too!", true);
     }
 }

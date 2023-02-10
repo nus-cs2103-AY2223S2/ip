@@ -5,12 +5,16 @@ import app.chatbot.Storage;
 import app.chatbot.Ui;
 import app.task.TaskList;
 
+import java.io.IOException;
+
 /**
  * Command to save the current TaskList state to storage.
  * Serves to interact with the Storage - this command is not available
  * to the user.
  */
 public class SaveCommand extends Command {
+    private static final String SAVE_SUCCESSFUL_MSG = "Changes are saved to storage.";
+    private static final String IO_ERROR = "Something prevented the changes from being saved :(";
     public SaveCommand() {
         this.isExit = false;
         this.isSave = false; // no data is changed in this command that warrants saving
@@ -26,8 +30,12 @@ public class SaveCommand extends Command {
      * @throws Exception
      */
     @Override
-    public String execute(TaskList tl, Ui ui, Storage storage) throws Exception {
-        storage.saveToStorage(tl);
-        return new Response("Changes are saved to storage.").toString();
+    public Response execute(TaskList tl, Ui ui, Storage storage) {
+        try {
+            storage.saveToStorage(tl);
+        } catch (IOException e) {
+            return new Response(IO_ERROR, false);
+        }
+        return new Response(SAVE_SUCCESSFUL_MSG, true);
     }
 }

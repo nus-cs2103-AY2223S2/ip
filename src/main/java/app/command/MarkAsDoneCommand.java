@@ -6,7 +6,9 @@ import app.chatbot.Ui;
 import app.task.TaskList;
 
 public class MarkAsDoneCommand extends Command {
-    private String markAtIndex;
+    private static final String NUM_FORMAT_ERROR = "Please specify the task by its index number.";
+    private static final String MISSING_TASK_ERROR = "Seems like this task doesn't exist.";
+    private final String markAtIndex;
 
     public MarkAsDoneCommand(String index) {
         this.isExit = false;
@@ -21,22 +23,21 @@ public class MarkAsDoneCommand extends Command {
      * @param tl
      * @param ui
      * @param storage
-     * @throws Exception
      */
     @Override
-    public String execute(TaskList tl, Ui ui, Storage storage) throws Exception {
+    public Response execute(TaskList tl, Ui ui, Storage storage)  {
         boolean alreadyMarked;
         try {
             alreadyMarked = tl.markAsDone(markAtIndex);
             if (alreadyMarked) {
-                return new Response(tl.getTask(markAtIndex).getDesc() + " already marked as done!").toString();
+                return new Response(tl.getTask(markAtIndex).getDesc() + " already marked as done!", true);
             } else {
-                return new Response("Marked " + tl.getTask(markAtIndex).getDesc() + " as done!").toString();
+                return new Response("Marked " + tl.getTask(markAtIndex).getDesc() + " as done!", true);
             }
         } catch (NumberFormatException e) {
-            throw new Exception("Please specify the task by its index number.");
+            return new Response(NUM_FORMAT_ERROR, false);
         } catch (IndexOutOfBoundsException e) {
-            throw new Exception("Seems like this task doesn't exist.");
+            return new Response(MISSING_TASK_ERROR, false);
         }
     }
 }
