@@ -17,11 +17,13 @@ public class Duke {
     private final Ui ui;
     private final Storage storage;
     private TaskList toDoList;
+    private boolean isTerminated;
 
     public Duke() {
         this.ui = new Ui();
         this.storage = new Storage(Duke.FILEPATH);
         this.toDoList = this.storage.initialise();
+        this.isTerminated = false;
     }
 
     /**
@@ -33,14 +35,21 @@ public class Duke {
         try {
             Command currCommand = parser.process();
             executeUserInput(currCommand);
-            return ui.getCommandMessage(currCommand);
+            String response = ui.getCommandMessage(currCommand);
+            this.isTerminated = response.startsWith("Done") ? true : false;
+            return response;
         } catch (DukeException ex) {
             return ui.getExceptionMessage(ex);
         }
     }
 
+    public boolean hasTerminated() {
+        return this.isTerminated;
+    }
+
     private void executeUserInput(Command command) {
         command.execute(this.toDoList);
+        this.storage.update(this.toDoList);
     }
 
     public static void main(String[] args) {

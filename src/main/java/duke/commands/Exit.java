@@ -22,6 +22,6 @@ public class Exit extends Command {
 
     @Override
     public String getResponseOutput() {
-        return "Exiting. Get to work!";
+        return "Done already? Press the enter key or enter any input to exit. Get to work!";
     }
 }
