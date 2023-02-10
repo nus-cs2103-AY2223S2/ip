@@ -3,17 +3,12 @@ package duke;
 import java.util.Scanner;
 import java.io.IOException;
 
+import duke.command.*;
 import duke.storage.TaskList;
 import duke.ui.Ui;
 import duke.storage.Storage;
 import duke.parser.Parser;
 import duke.exception.DukeException;
-import duke.command.ListCommand;
-import duke.command.FindCommand;
-import duke.command.DeleteCommand;
-import duke.command.UnmarkCommand;
-import duke.command.Command;
-import duke.command.MarkCommand;
 
 public class Duke {
     static TaskList list;
@@ -86,30 +81,8 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     String getResponse(String input) {
-        Command cmd;
-        if (logic.checkList(input)) {
-            cmd = new ListCommand();
-        } else if (logic.checkFind(input)) {
-            String word = input.split(" ")[1];
-            cmd = new FindCommand(word);
-        } else if (logic.checkMark(input)) {
-            int num = Integer.parseInt(input.split(" ")[1]);
-            cmd = new MarkCommand(num);
-        } else if (logic.checkUnmark(input)) {
-            int num = Integer.parseInt(input.split(" ")[1]);
-            cmd = new UnmarkCommand(num);
-        } else if (logic.checkDelete(input)) {
-            int num = Integer.parseInt(input.split(" ")[1]);
-            cmd = new DeleteCommand(num);
-        } else if (logic.checkTask(input)) {
-            list.add(input);
-            return ui.printAddMessage(list.getLast(), list);
-        } else if (!logic.isValidCommand(input)) {
-            return ui.printInvalidCommandMessage();
-        } else {
-            return ui.printByeMessage();
-
-        }
+        Command cmd = logic.parse(input);
+        assert cmd != null : "command must not be null";
         return cmd.execute(list, ui);
     }
 
