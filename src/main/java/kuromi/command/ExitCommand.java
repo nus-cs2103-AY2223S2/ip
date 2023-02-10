@@ -27,8 +27,12 @@ public class ExitCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        String msg = "Bye. Hope to see you again soon!\n";
         super.setExit();
-        return ui.showBye(msg);
+        return ui.showBye(getReply());
+    }
+
+    private String getReply() {
+        String msg = "Bye. Hope to see you again soon!\n";
+        return msg;
     }
 }

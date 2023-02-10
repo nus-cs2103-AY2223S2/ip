@@ -98,9 +98,9 @@ public class TaskList {
     public TaskList find(String keyword) {
         TaskList res = new TaskList();
         for (int i = 0; i < this.tasks.size(); i++) {
-            String cur = this.tasks.get(i).getDetailedDescription();
-            if (cur.contains(keyword)) {
-                res.add(this.tasks.get(i));
+            Task cur = this.tasks.get(i);
+            if(cur.containsKeyword(keyword)) {
+                res.add(cur);
             }
         }
         return res;

@@ -33,9 +33,13 @@ public class AddCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task cur = tasks.add(task);
         storage.refresh(tasks);
+        return ui.show(getReply(cur, tasks));
+    }
+
+    private String getReply(Task cur, TaskList tasks) {
         String msg = "Got it. I've added this task:\n";
         msg += cur + "\n";
         msg += "Now you have " + tasks.size() + " tasks in the list.\n";
-        return ui.show(msg);
+        return msg;
     }
 }
