@@ -1,15 +1,5 @@
 package duke;
-import duke.commands.ByeCommand;
-import duke.commands.Command;
-import duke.commands.DeadlineCommand;
-import duke.commands.DeleteCommand;
-import duke.commands.EventCommand;
-import duke.commands.FindCommand;
-import duke.commands.FindDateCommand;
-import duke.commands.ListCommand;
-import duke.commands.MarkCommand;
-import duke.commands.TodoCommand;
-import duke.commands.UnmarkCommand;
+import duke.commands.*;
 
 
 /**
@@ -18,7 +8,7 @@ import duke.commands.UnmarkCommand;
 public class Parser {
 
     private enum Type {
-        BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, FIND, FINDDATE
+        BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, FIND, FINDDATE, UPDATE
     }
 
     /**
@@ -57,6 +47,9 @@ public class Parser {
 
         case FINDDATE:
             return new FindDateCommand(input);
+
+        case UPDATE:
+            return new UpdateCommand(input);
 
         case BYE:
             return new ByeCommand(input);

@@ -137,4 +137,8 @@ public class Ui {
         }
         return result;
     }
+
+    public String taskNumberNotSpecified() {
+        return "Task number not specified";
+    }
 }
