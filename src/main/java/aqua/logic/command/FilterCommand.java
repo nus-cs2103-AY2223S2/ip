@@ -15,30 +15,13 @@ import aqua.usertask.UserTask;
 public class FilterCommand extends CommandController {
     @Override
     public ExecutionService getService(ArgumentMap args, LogicManager manager) {
-        return ExecutionService.of(new ExecutionTask<LinkedHashMap<Integer, UserTask>>(args, manager) {
-            @Override
-            public LinkedHashMap<Integer, UserTask> process(ArgumentMap args, LogicManager manager) {
-                return manager.getTaskManager().filter(args.getMainInput().orElse(""));
-            }
-        });
+        return ExecutionService.of(new FilterTask(args, manager));
     }
 
 
     @Override
     public ExecutionService getService(ArgumentMap args, LogicManager logicManager, IoManager ioManager) {
-        return ExecutionService.of(
-                new ExecutionDisplayerTask<LinkedHashMap<Integer, UserTask>>(args, logicManager, ioManager) {
-                    @Override
-                    protected LinkedHashMap<Integer, UserTask> process(ArgumentMap args, LogicManager manager) {
-                        return manager.getTaskManager().filter(args.getMainInput().orElse(""));
-                    }
-
-                    @Override
-                    protected void display(LinkedHashMap<Integer, UserTask> map, IoManager manager) {
-                        manager.reply(String.format("Here are your matching tasks:\n%s",
-                                formatMap(map)));
-                    }
-                });
+        return ExecutionService.of(new FilterDisplayerTask(args, logicManager, ioManager));
     }
 
 
@@ -51,5 +34,44 @@ public class FilterCommand extends CommandController {
             builder.append(String.format("%d. %s\n", entry.getKey(), entry.getValue()));
         }
         return builder.toString().strip();
+    }
+
+
+
+
+
+    private class FilterTask extends ExecutionTask<LinkedHashMap<Integer, UserTask>> {
+        FilterTask(ArgumentMap args, LogicManager manager) {
+            super(args, manager);
+        }
+
+
+        @Override
+        public LinkedHashMap<Integer, UserTask> process(ArgumentMap args, LogicManager manager) {
+            return manager.getTaskManager().filter(args.getMainInput().orElse(""));
+        }
+    }
+
+
+
+
+
+    private class FilterDisplayerTask extends ExecutionDisplayerTask<LinkedHashMap<Integer, UserTask>> {
+        FilterDisplayerTask(ArgumentMap args, LogicManager logicManager, IoManager ioManager) {
+            super(args, logicManager, ioManager);
+        }
+
+
+        @Override
+        protected LinkedHashMap<Integer, UserTask> process(ArgumentMap args, LogicManager manager) {
+            return manager.getTaskManager().filter(args.getMainInput().orElse(""));
+        }
+
+
+        @Override
+        protected void display(LinkedHashMap<Integer, UserTask> map, IoManager manager) {
+            manager.reply(String.format("Here are your matching tasks:\n%s",
+                    formatMap(map)));
+        }
     }
 }
