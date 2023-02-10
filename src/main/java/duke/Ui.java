@@ -37,20 +37,21 @@ public class Ui {
         str.append(Indentation + "Hello! I'm Duke");
         str.append(System.getProperty("line.separator"));
         str.append(Indentation + "What can I do for you?");
-        str.append(System.getProperty("line.separator"));
+        //str.append(System.getProperty("line.separator"));
         return str.toString();
     }
 
     /**
      * shows loading error
      */
-    public void showLoadingError() {
+    public String showLoadingError() {
         StringBuilder str = new StringBuilder();
         System.out.println(Indentation + Horizontal);
         System.out.println(Indentation + "Loading error! please try again");
         System.out.println(Indentation + Horizontal);
 
         str.append(Indentation + "Loading error! please try again");
+        return str.toString();
     }
 
     /**
@@ -71,6 +72,7 @@ public class Ui {
      * @param task
      */
     public static String showList(TaskList task) {
+        assert task == null : "Invalid task";
         StringBuilder str = new StringBuilder();
         System.out.println(Indentation + Horizontal);
         System.out.println(Indentation + "Here are the tasks in your list:");
@@ -80,12 +82,11 @@ public class Ui {
 
 
         for (int i = 0; i < task.size(); i++) {
-            System.out.println(Indentation + (i + 1) + "." + task.get(i).toString());
-            str.append(Indentation + (i + 1) + "." + task.get(i).toString());
+            System.out.println(Indentation + (i + 1) + ". " + task.get(i).toString());
+            str.append(Indentation + (i + 1) + ". " + task.get(i).toString());
             str.append(System.getProperty("line.separator"));
         }
 
-        //str.append(Indentation + Horizontal);
         System.out.println(Indentation + Horizontal);
         return str.toString();
     }
@@ -105,6 +106,9 @@ public class Ui {
      * @param tasks
      */
     public static String done(String num, TaskList tasks) {
+        assert num == null : "Invalid num";
+        assert tasks == null : "Invalid tasks";
+
         StringBuilder str = new StringBuilder();
         int number = Integer.parseInt(num) - 1;
         //tasks.get(number).isDone = true;
@@ -118,7 +122,7 @@ public class Ui {
         str.append("Nice! I've marked this task as done:");
         str.append(System.getProperty("line.separator"));
         str.append(Indentation + tasks.get(number).toString());
-        str.append(System.getProperty("line.separator"));
+        //str.append(System.getProperty("line.separator"));
 
         return str.toString();
     }
@@ -129,6 +133,9 @@ public class Ui {
      * @param tasks
      */
     public static String undone(String num, TaskList tasks) {
+        assert num == null : "Invalid num";
+        assert tasks == null : "Invalid tasks";
+
         StringBuilder str = new StringBuilder();
         int number = Integer.parseInt(num) - 1;
         tasks.get(number).isDone = false;
@@ -141,7 +148,7 @@ public class Ui {
         str.append("Nice! I've marked this task as done:");
         str.append(System.getProperty("line.separator"));
         str.append(Indentation + tasks.get(number).toString());
-        str.append(System.getProperty("line.separator"));
+        //str.append(System.getProperty("line.separator"));
         return str.toString();
     }
 
@@ -151,8 +158,12 @@ public class Ui {
      * @param tasks
      */
     public static String delete(String num, TaskList tasks) {
+        assert num == null : "Invalid num";
+        assert tasks == null : "Invalid tasks";
+
         StringBuilder str = new StringBuilder();
         int index = Integer.parseInt(num) - 1;
+        int originalSize = tasks.size();
         try {
             if (!(tasks.get(index)).equals(null)) {
                 System.out.println(Indentation + Horizontal);
@@ -166,6 +177,7 @@ public class Ui {
 
                 tasks.remove(index);
                 Task.taskNum--;
+                assert tasks.size() == originalSize - 1;
 
                 System.out.println(" Now you have " + Task.taskNum + " tasks in the list.");
                 System.out.println(Indentation + Horizontal);

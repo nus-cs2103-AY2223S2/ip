@@ -32,9 +32,12 @@ public class Parser {
      * @return command
      */
     public static String parse(String cmd, TaskList tasks) {
+        assert cmd == null : "Invalid cmd";
+        assert tasks == null : "Invalid tasks";
+
         String command = cmd.trim();
         String[] words = command.split(" ");
-        Task task = null;
+        Task task;
         String info;
         String str = "";
 

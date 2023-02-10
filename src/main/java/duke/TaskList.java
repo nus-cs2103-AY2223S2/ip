@@ -24,6 +24,7 @@ public class TaskList {
      * @param t
      */
     public void add(Task t) {
+        assert t == null : "Invalid task";
         task.add(t);
         taskCounter++;
     }
@@ -33,6 +34,7 @@ public class TaskList {
      * @param index
      */
     public void remove(int index) {
+        assert index >= 0 : "Invalid index";
         task.remove(index);
         taskCounter--;
     }
@@ -43,6 +45,7 @@ public class TaskList {
      * @return the element at the specified position in this list
      */
     public Task get(int index) {
+        assert index >= 0 : "Invalid index";
         return task.get(index);
     }
 
